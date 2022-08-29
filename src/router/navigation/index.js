@@ -1,4 +1,4 @@
-import {jsx,jsxFrag,getVariable,getStorage,setAction,setVariable} from '@betarost/cemjs'
+import {jsx,jsxFrag,getVariable,getStorage,setAction,setVariable,makeDOM} from '@betarost/cemjs'
 import {init as mainHeader} from '@navigation/header/index.js'
 
 
@@ -1321,7 +1321,9 @@ setVariable({footer:true});
 const befor = function(dataUrl){
    mainHeader(dataUrl);
 }
-const start = function(dataUrl){}
+const start = function(dataUrl){
+    makeDOM(mainBlock(),ID)
+}
 const after = function(dataUrl){}
 
 setAction(ID,"befor",befor)
