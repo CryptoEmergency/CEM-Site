@@ -49,6 +49,8 @@ import cryptomania_partner from '@assets/image/partners/cryptomania.png'
 import tech_week_partner from '@assets/image/partners/tech_week.png'
 
 
+
+
 const mainBlock = function(){  
   const lang = getVariable("languages")[getStorage("lang")]
   return(
