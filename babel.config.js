@@ -15,7 +15,7 @@ export default {
             "@src": "./src",
             "@assets": "./src/assets",
             "@component": "./src/component",
-            "@navigation": "./src/router/navigation"
+            "@navigation": "./src/navigation"
             }
         }
         ]

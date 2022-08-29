@@ -1,39 +1,16 @@
-import {getVariable,setVariable,setValue,setAction,initStorage,addListen,parsingUrl} from '@betarost/cemjs'
-import "@src/css/index.js"
-import "@src/js/index.js"
-import {default as languages} from '@src/language/index.js'
-import {init as startMake} from '@src/router/index.js'
+import { setAction} from '@betarost/cemjs'
+import { init as startMake } from '@src/router.js'
 
 const ID = "App";
 
-const clickHide = function(e,target){
-    setValue("mainHeader","langListShow",false)
-}
-
-const befor = function(){
-    if(!getVariable("languages")){
-        setVariable({languages:languages});
-    }
-    initStorage();
-    addListen()
-}
-
-const start = function(){   
+const start = async function () {
     startMake()
 }
 
-const after = function(){}
+setAction(ID, "start", start)
 
-setVariable({clickHide: clickHide})
-
-setAction(ID,"befor",befor)
-setAction(ID,"start",start)
-setAction(ID,"after",after)
-
-const init = function(){    
-    befor()
+const init = function () {
     start()
-    after()
 }
 
-export {init}
+export { init }

@@ -7,7 +7,7 @@ import twitter from '@assets/icon/twitter-icon.svg'
 import discord from '@assets/icon/discord-icon.svg'
 import github from '@assets/icon/github-icon2.svg'
 import tiktok from '@assets/icon/tiktok-icon.svg'
-import {siteLink} from '@src/router/index.js'
+import {siteLink} from '@src/router.js'
 
 const mainFooter = function(){  
     const lang = getVariable("languages")[getStorage("lang")]

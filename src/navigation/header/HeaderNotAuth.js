@@ -1,6 +1,6 @@
 import {jsx,jsxFrag,getVariable,setValue,getValue} from '@betarost/cemjs'
 import logo from '@assets/image/logo.svg'
-import {siteLink} from '@src/router/index.js'
+import {siteLink} from '@src/router.js'
 
 const ID = "mainHeader"
 
