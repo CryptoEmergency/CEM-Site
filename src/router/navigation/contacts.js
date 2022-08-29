@@ -8,6 +8,7 @@ import {
   getStorage,
 } from "@betarost/cemjs";
 import { init as mainHeader } from "@navigation/header/index.js";
+import {init as mainFooter} from '@navigation/footer/index.js';
 import contacts_vector from "@assets/image/background/contacts_vector.svg";
 
 const ID = "mainBlock";
@@ -84,6 +85,7 @@ const contactsView = function () {
 
 const befor = function (dataUrl) {
   mainHeader(dataUrl);
+  mainFooter(dataUrl);
 };
 
 const start = function (dataUrl) {

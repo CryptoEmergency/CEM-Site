@@ -8,6 +8,8 @@ import {
     getStorage,
   } from "@betarost/cemjs";
   import { init as mainHeader } from "@navigation/header/index.js";
+  import {init as mainFooter} from '@navigation/footer/index.js';
+
   import about_us_vector1 from "@assets/image/background/about_us_vector-1.svg";
   import about_us_vector2 from "@assets/image/background/about_us_vector-2.svg";
 
@@ -23,6 +25,8 @@ import {
   import about_us_banner7 from "@assets/image/about_us_banner7.png";
   import about_us_banner8 from "@assets/image/about_us_banner8.png";
 
+  
+
   const ID = "mainBlock";
   setVariable({ header: true });
   setVariable({ footer: true });
@@ -30,7 +34,7 @@ import {
 
   const aboutUsView = function () {
     const lang = getVariable("languages")[getStorage("lang")];
-  
+   
     return (
       
         <div class="about_us_container">
@@ -167,6 +171,7 @@ import {
 
   const befor = function (dataUrl) {
     mainHeader(dataUrl);
+    mainFooter(dataUrl);
   };
   
   const start = function (dataUrl) {
