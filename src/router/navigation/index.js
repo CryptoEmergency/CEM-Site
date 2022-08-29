@@ -1346,7 +1346,7 @@ const befor = function(dataUrl){
    mainHeader(dataUrl);
 }
 const start = function(dataUrl){
-    makeDOM(mainBlock(), ID)
+makeDOM(mainBlock(),ID)
 }
 const after = function(dataUrl){}
 
