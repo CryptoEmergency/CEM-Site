@@ -1,5 +1,6 @@
 import {jsx,jsxFrag,getVariable,getStorage,setAction,setVariable, makeDOM} from '@betarost/cemjs'
 import {init as mainHeader} from '@navigation/header/index.js'
+import {init as mainFooter} from '@navigation/footer/index.js'
 import lines from '@assets/image/background/lines-preview-min.png'
 import cem from '@assets/image/background/cem.png'
 import bitcoin_icon from '@assets/icon/Bitcoin.svg'
@@ -7,8 +8,6 @@ import bnb_icon from '@assets/icon/bnb.svg'
 import eth_icon from '@assets/icon/eth.svg'
 import cem_icon from '@assets/icon/cem.jpg'
 import up_arrow from '@assets/icon/up_arrow.svg'
-
-
 import shuffle from '@assets/icon/shuffle 1.svg'
 import mortarboard from '@assets/icon/mortarboard 1.svg'
 import graph from '@assets/icon/graph 1.svg'
@@ -20,33 +19,34 @@ import world from '@assets/icon/world-news 1.svg'
 import user from '@assets/icon/user 1.svg'
 import nft_icon from '@assets/icon/nft_icon.svg'
 import careers_icon from '@assets/icon/careers_icon.svg'
-
 import swiper_arrow_left from '@assets/icon/swiper_arrow_left.svg'
 import swiper_arrow_right from '@assets/icon/swiper_arrow_right.svg'
-
 import search_icon from '@assets/icon/search_icon.svg'
-
 import filter from '@assets/icon/filter.svg'
-
 import frame_default from '@assets/profile/frame/default.svg'
-
-
 import question_audio from '@assets/icon/question_audio.svg'
 import question_video from '@assets/icon/question_video.svg'
 import question_photo from '@assets/icon/question_photo.svg'
-
 import levelGray from '@assets/profile/levelGray.svg'
-
 import question_answers from '@assets/icon/question_answers.svg'
 import question_views from '@assets/icon/question_views.svg'
 import question_time from '@assets/icon/question_time.svg'
-
 import lbf_banner from '@assets/image/banners/lbf_banner.jpg'
 import blockchain24 from '@assets/image/banners/blockchain24.png'
 import crypto_summit from '@assets/image/banners/crypto_summit.jpg'
 import plus_forum from '@assets/image/banners/1200х580-(fb).png'
 import blockchain_life from '@assets/image/banners/blockchain_life.jpg'
 import crypto_future_banner from '@assets/image/banners/crypto_future_banner.png'
+import sber_unity_partner from '@assets/image/partners/sber_unity.png'
+import skolkovo_partner from '@assets/image/partners/skolkovo.png'
+import crypto_summit_partner from '@assets/image/partners/crypto_summit.png'
+import plus_forum_partner from '@assets/image/partners/plus_forum.png'
+import blockchain_life_partner from '@assets/image/partners/blockchain_life.png'
+import b4_week_partner from '@assets/image/partners/b4_week.png'
+import be_in_crypto_partner from '@assets/image/partners/be_in_crypto.png'
+import crypto_mining_partner from '@assets/image/partners/crypto_mining.png'
+import cryptomania_partner from '@assets/image/partners/cryptomania.png'
+import tech_week_partner from '@assets/image/partners/tech_week.png'
 
 
 const mainBlock = function(){  
@@ -1278,8 +1278,8 @@ const mainBlock = function(){
                                         <img style="width: 100px; margin-bottom: 20px" class="load" src="/assets/upload/news/{{image}}"/>
                                         <p style="width: 60%; margin-bottom: 20px" class="blog_new_title load"></p>
                                         <div style="display: flex!important;" class="blog_post_stat">
-                                            <span><img src="/assets/icon/question_views.svg"/> <span class="load">1</span></span>
-                                            <span><img src="/assets/icon/question_answers.svg"/> <span class="load">1</span></span>
+                                            <span><img src={question_views}/> <span class="load">1</span></span>
+                                            <span><img src={question_answers}/> <span class="load">1</span></span>
                                             <span class="load"></span>
                                         </div>
                                     </a>
@@ -1287,8 +1287,8 @@ const mainBlock = function(){
                                         <img style="width: 100px; margin-bottom: 20px" class="load" src="/assets/upload/news/{{image}}"/>
                                         <p style="width: 60%; margin-bottom: 20px" class="blog_new_title load"></p>
                                         <div style="display: flex!important;" class="blog_post_stat">
-                                            <span><img src="/assets/icon/question_views.svg"/> <span class="load">1</span></span>
-                                            <span><img src="/assets/icon/question_answers.svg"/> <span class="load">1</span></span>
+                                            <span><img src={question_views}/> <span class="load">1</span></span>
+                                            <span><img src={question_answers}/> <span class="load">1</span></span>
                                             <span class="load"></span>
                                         </div>
                                     </a>
@@ -1306,34 +1306,34 @@ const mainBlock = function(){
                             <h2>{lang.h.partners}</h2>
                             <div data-mainpage="true" class="partners_container"> 
                                 <a target="_blank" rel="nofollow nooopener" href="https://sberunity.ru/main/startups/879d88aa-4729-4788-a541-20cc8cc3cb14" class="partner_item">
-                                    <img src="/assets/image/partners/sber_unity.png"/>
+                                    <img src={sber_unity_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://sk.ru" class="partner_item">
-                                    <img src="/assets/image/partners/skolkovo.png"/>
+                                    <img src={skolkovo_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://cryptosummit.ru" class="partner_item">
-                                    <img src="/assets/image/partners/crypto_summit.png"/>
+                                    <img src={crypto_summit_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://plus-forum.com" class="partner_item">
-                                    <img src="/assets/image/partners/plus_forum.png"/>
+                                    <img src={plus_forum_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://blockchain-life.com/europe/ru/" class="partner_item">
-                                    <img src="/assets/image/partners/blockchain_life.png"/>
+                                    <img src={blockchain_life_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://rbw.moscow/?utm_source=infopartner&utm_medium=cryptoemergency&utm_campaign=pressreliz" class="partner_item">
-                                    <img src="/assets/image/partners/b4_week.png"/>
+                                    <img src={b4_week_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://ru.beincrypto.com" class="partner_item">
-                                    <img src="/assets/image/partners/be_in_crypto.png"/>
+                                    <img src={be_in_crypto_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://mining-cryptocurrency.ru" class="partner_item">
-                                    <img src="/assets/image/partners/crypto_mining.png"/>
+                                    <img src={crypto_mining_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://cryptomania.moscow" class="partner_item">
-                                    <img src="/assets/image/partners/cryptomania.png"/>
+                                    <img src={cryptomania_partner}/>
                                 </a>
                                 <a target="_blank" rel="nofollow nooopener" href="https://techweek.moscow" class="partner_item">
-                                    <img src="/assets/image/partners/tech_week.png"/>
+                                    <img src={tech_week_partner}/>
                                 </a>
                             </div>  
                             <a href="{{lang.url}}partners/" class="btn-view-all-a" data-action="link">
@@ -1367,6 +1367,7 @@ setVariable({footer:true});
 
 const befor = function(dataUrl){
    mainHeader(dataUrl);
+   mainFooter(dataUrl);
 }
 const start = function(dataUrl){
 makeDOM(mainBlock(),ID)
