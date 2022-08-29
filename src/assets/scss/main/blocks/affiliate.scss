@@ -1,0 +1,720 @@
+/* Affiliate program styles */
+.affiliate {
+
+    &_program {
+
+        &_block {
+            padding-top: 25px;
+            max-width: 1240px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .answer_button_container {
+                max-width: 250px;
+                margin-top: 50px;
+                font-weight: 600;
+            }
+
+            h3 {
+                font-weight: bold;
+                font-size: 50px;
+                margin-bottom: 25px;
+                text-align: center;
+            }
+        }
+
+        &_preview {
+            text-align: center;
+
+            p {
+                font-weight: 500;
+                font-size: 20px;
+                color: #DBEAFF;
+            }
+
+            b {
+                font-weight: 600;
+                font-size: 36px;
+                width: 100%;
+                text-align: left;
+                margin-bottom: 10px;
+            }
+
+            span {
+                font-weight: 500;
+                font-size: 16px;
+                max-width: 217px;
+                text-align: left;
+            }
+
+            &_baner-1 {
+                display: inline-block;
+                width: 395px;
+                height: 202px;
+                border-radius: 20px;
+                background: linear-gradient(73.76deg, #65A5FF -4.7%, #A87FFF 69.96%);
+                margin-right: 50px;
+
+                div {
+                    background: url(../image/background/affiliate-1.png);
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 20px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: center;
+                    padding: 35px;
+                }
+            }
+
+            &_baner-2 {
+                display: inline-block;
+                width: 395px;
+                height: 202px;
+                border-radius: 20px;
+                background: linear-gradient(163.62deg, #C343FF -20.88%, #4368ED 91.29%);
+
+                div {
+                    background: url(../image/background/affiliate-2.png);
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 20px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: center;
+                    padding: 35px;
+                }
+            }
+        }
+
+        &_condition {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+                font-weight: 600;
+                font-size: 18px;
+                max-width: 260px;
+                text-align: center;
+
+                &:last-child {
+                    color: #C5D1F7;
+                    font-weight: 500;
+                    font-size: 15px;
+                    max-width: 272px;
+                }
+            }
+
+            &s {
+                margin-top: 60px;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 120px;
+            }
+
+            &_icon {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                position: relative;
+                background: #343949;
+                margin-bottom: 15px;
+
+                &::after {
+                    content: '';
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+                    position: absolute;
+                    top: 5px;
+                    left: 5px;
+                }
+
+                img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                }
+            }
+        }
+
+        &_link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &_block {
+                width: 90%;
+                margin: 0 auto;
+                background: url(../image/background/affiliate_bottom.png);
+                background-position: -50px -30px;
+                mix-blend-mode: lighten;
+                text-align: center;
+                padding-top: 80px;
+                padding-bottom: 80px;
+
+                h4 {
+                    font-weight: bold;
+                    font-size: 32px;
+                    margin-bottom: 12px;
+                }
+
+                p {
+                    font-weight: normal;
+                    font-size: 16px;
+                    max-width: 898px;
+                    margin: 0 auto;
+                }
+
+                b {
+                    font-weight: 600;
+                    font-size: 13px;
+                    color: #C2C2C2;
+                }
+
+                span {
+                    background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+            }
+
+            input {
+                font-weight: 500;
+                font-size: 24px;
+                text-decoration-line: underline;
+                color: #FFFFFF;
+                outline: none;
+                border: 0;
+                background: none;
+                width: 60%;
+
+                &::selection {
+                    background: transparent;
+                }
+
+                &::-moz-selection {
+                    background: transparent;
+                }
+            }
+        }
+    }
+}
+
+.my_partners {
+
+    &_block {
+        width: 100%;
+        background: #2B3041;
+        border: 1px solid #3C435B;
+        padding: 25px;
+        border-radius: 20px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 44px #1E222F;
+        position: relative;
+
+        p {
+            font-weight: 500;
+            font-size: 24px;
+        }
+    }
+
+    &_empty_list {
+        position: relative;
+        left: 50%;
+        top: 65%;
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        margin-top: 150px;
+
+        p {
+            color: #BDC6E7;
+            font-weight: normal;
+            font-size: 18px;
+            margin-top: 25px;
+        }
+    }
+}
+
+.copy_link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+
+        img {
+            top: 47%;
+            left: 57%;
+        }
+    }
+
+    &_block {
+        height: 34px;
+        width: 34px;
+        background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+        border-radius: 5px;
+        position: relative;
+        display: inline-block;
+        margin-left: 14px;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            transition: 0.4s;
+        }
+    }
+}
+
+.partner_link {
+    margin: 62px auto;
+    text-align: left;
+    width: 80%;
+    max-width: 775px;
+    padding-bottom: 20px;
+    border: 0;
+    border-bottom: 1px solid #484C59;
+}
+
+/* affiliate programm banners */
+.affiliate {
+
+    &_banner {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        grid-gap: 30px;
+
+        &_link {
+            display: flex;
+            grid-gap: 25px;
+
+            &_block {
+                background: #303748;
+                border: 1px solid #565E74;
+                border-radius: 6px;
+                color: #8894B8;
+                padding: 10px 15px;
+                font-weight: 600;
+                font-size: 14px;
+                height: 48px;
+                line-height: 29px;
+                width: 100%;
+            }
+        }
+
+        &_copy {
+            background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px;
+            height: 48px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            position: relative;
+
+            img {
+                margin-right: 5px;
+            }
+        }
+
+        &_code {
+            display: flex;
+            grid-gap: 25px;
+
+            &_block {
+                background: #303748;
+                border: 1px solid #565E74;
+                border-radius: 6px;
+                color: #8894B8;
+                padding: 15px 15px;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 15px;
+                width: 100%;
+                height: 120px;
+                word-break: break-all;
+            }
+        }
+
+        &_preview {
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        &s {
+            display: flex;
+            justify-content: space-between;
+            grid-gap: 30px;
+
+            h4 {
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+
+            &_size {
+
+                &_list {
+                    display: grid;
+                    grid-template-columns: calc(33.3% - 6.6px) calc(33.3% - 6.6px) calc(33.3% - 6.6px);
+                    grid-gap: 10px;
+                    position: relative;
+                    z-index: 999;
+                }
+
+                &_item {
+                    background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+                    border-radius: 6px;
+                    border: 1px solid #575F76;
+                    height: 48px;
+                    font-weight: 600;
+                    font-size: 15px;
+                    color: #D0DBFF;
+                    box-sizing: border-box;
+                    cursor: pointer;
+
+                    &:hover {
+                        border-color: transparent;
+
+                        .affiliate_banners_size_item_inner {
+                            background: none;
+                        }
+                    }
+
+                    &_inner {
+                        width: 100%;
+                        height: 100%;
+                        background: #303748;
+                        border-radius: 5px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: 1s;
+                        padding: 0 10px;
+                    }
+
+                    &_active {
+                        border: none;
+                        color: #FFFFFF;
+
+                        .affiliate_banners_size_item_inner {
+                            background: none;
+                        }
+                    }
+                }
+
+                &_select {
+                    display: none;
+
+                    .justselect {
+
+                        &-title {
+                            background-color: #313643;
+                            color: #FFFFFF;
+                            padding-top: 15px;
+                            height: 45px;
+                            border: 1px solid #424755;
+                        }
+
+                        &-list {
+                            top: 42.5px;
+                            border: 1px solid #424755;
+
+                            li {
+                                background-color: #313643;
+                                color: #FFFFFF;
+                                line-height: 50px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.user_affiliate {
+    width: calc(100% - 224px);
+}
+
+.affiliate_partner {
+
+    &_item {
+        display: grid;
+        grid-template-columns: 35% 35% 15% 15%;
+        align-items: center;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    &_avatar {
+        display: flex;
+        align-items: center;
+
+        .comment_avatar {
+            width: 70px;
+        }
+
+        .micro_user_avatar {
+            width: 62px;
+            margin-left: 0;
+        }
+    }
+}
+
+@media(max-width: 1199px) {
+    .user_affiliate {
+        width: calc(100% - 24px);
+    }
+
+    .affiliate {
+
+        &_banner {
+            grid-gap: 15px;
+
+            &s {
+                flex-wrap: wrap;
+                grid-gap: 15px;
+
+                &_size {
+                    width: 100%;
+
+                    &_list {
+                        grid-template-columns: calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px);
+                    }
+                }
+
+                h4 {
+                    margin-bottom: 10px;
+                }
+            }
+
+            &_copy {
+                padding: 0 18px;
+
+                img {
+                    margin-right: 0;
+                }
+
+                span {
+                    display: none;
+                }
+            }
+
+            &_link {
+                grid-gap: 10px;
+
+                &_block {
+                    height: auto;
+                    line-height: inherit;
+                    padding: 13px 15px;
+                    word-break: break-all;
+                }
+            }
+
+            &_code {
+                grid-gap: 10px;
+            }
+        }
+    }
+}
+
+@media(max-width: 1024px) {
+    .affiliate {
+
+        &_program {
+
+            &_preview_baner {
+
+                &-1{
+                    margin: 30px calc(calc((100% - 395px) / 2));
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 970px) {
+    .affiliate {
+
+        &_program {
+
+            &_link{
+                flex-wrap: wrap;
+
+                input {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                &_block {
+                    height: auto;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    border-radius: 25px;
+                    padding: 80px 40px;
+                }
+            }
+        }
+    }
+
+    .copy_link {
+        width: 100%;    
+        justify-content: center;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width: 767px) {
+    .affiliate {
+
+        &_banners {
+
+            &_size {
+
+                &_list {
+                    display: none;
+                }
+
+                &_select {
+                    display: block;
+
+                    .justselect {
+
+                        &-wrapper {
+                            width: 100%;
+                        }
+
+                        &-title {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        &_program {
+
+            &_condition {
+                margin-bottom: 30px;
+
+                &s {
+                    flex-wrap: wrap;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 680px) {
+    .affiliate {
+
+        &_partner {
+
+            &_item {
+                grid-template-columns: 160px 150px 100px 80px;
+                font-size: 12px;
+                text-align: center;
+            }
+
+            &_list {
+                overflow-x: auto;
+                height: 100%;
+            }
+        }
+
+        &_program {
+
+            &_condition {
+
+                &s {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 522px){
+    .affiliate {
+
+        &_program {
+
+            &_block {
+                width: 100%;
+                z-index: auto;
+            }
+
+            &_link {
+
+                &_block {
+                    width: 100%;
+                    background: url(../image/background/affiliate_bottom.png) -70px -30px;
+                    background-repeat: no-repeat;
+                    padding-bottom: 0;
+                }
+            }
+
+            &_blur {
+                display: none;
+            }
+        }
+    }
+}
+
+@media(max-width: 464px) {
+    .affiliate {
+
+        &_program {
+
+            &_preview {
+
+                &_baner {
+
+                    &-1,
+                    &-2 {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 353px) {
+    .affiliate {
+
+        &_program {
+
+            &_link {
+
+                &_block {
+                    padding: 0;
+                    padding-top: 80px;
+                    background-position: -61px -33px;
+                }
+            }
+        }
+    }
+}

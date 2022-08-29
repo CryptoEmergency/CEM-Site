@@ -1,0 +1,16 @@
+/* User page styles */
+.user_page_notify {
+    
+    .user_notifications_block {
+        right: auto;
+        left: 90px;
+
+        @media(max-width: 1199px) {
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 70px;
+            top: auto;
+        }
+    }
+}

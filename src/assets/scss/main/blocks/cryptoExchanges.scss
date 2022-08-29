@@ -1,0 +1,540 @@
+/* Crypto exchanges styles */
+.statistics-preview {
+    background: $supernatural;
+    box-shadow: 15px 15px 25px $infinity2;
+    border-radius: 4px;
+    padding: 30px 40px 0;
+    margin-top: 10px;
+
+    .button-container-preview {
+        margin-top: 0;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .btn-news-preview {
+            width: 100%;
+        }
+    }
+}
+
+.crypto_exchanges-row {
+    display: grid;
+    grid-template-columns: 327px 224px 259px 210px 140px;
+    height: 82px;
+    border-bottom: 1px solid $tried_true_blue;
+    align-content: center;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        color: inherit;
+    }
+
+    &:first-child {
+        height: 36px !important;
+        align-content: baseline;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 16px;
+        color: $non_skid_grey; 
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+}
+
+.crypto_exchanges {
+    max-width: 1240px;
+    margin: 60px auto;
+
+    h4 {
+        margin-top: 5px;
+    }
+}
+
+.crypto_exchanges_full_page {
+    margin: 60px auto;
+}
+
+.crypto_exchanges_rate {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(107deg) brightness(105%) contrast(101%);
+    height: 24px;
+    transform: translateY(-8%);
+    position: relative;
+    left: 10px;
+}
+
+#crypto_exchanges .list_trade_page .crypto_exchanges-cell:nth-child(2) span{
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    width: 100px;
+    align-items: center;
+    line-height: 105%;
+}
+
+.list_trade_page {
+
+    .crypto_exchanges-row {
+        grid-template-columns: 40px 297px 237px 237px 242px 110px;
+    }
+
+    .crypto_exchanges-cell {
+        &:first-child {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+
+        &:nth-child(5) {
+            img {
+                transform: translateX(-30%);
+                filter: hue-rotate(226deg) saturate(210%) brightness(0.7) contrast(170%);
+            }
+        }
+
+        &:nth-child(4) {
+            span{
+                color: $white;
+            }
+        }
+    }
+
+    .list_exanges_image_container {
+        width: 64px;
+    }
+}
+
+.crypto_exchanges-cell div{
+    line-height: 53px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 20px;
+    height: 100%;
+    align-items: center;
+}
+
+.crypto_coin_icon {
+    position: relative;
+    top: -2px;
+    margin-right: 10px;
+    max-height: 40px;
+}
+
+.crypto_exchanges_percent_green {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: $algal_fuel;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.crypto_exchanges_percent_red {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: $tomato_frog;
+    padding-left: 8px;
+}
+
+.crypto_exchanges_percent_green_mobile{
+    display: none;
+
+    img{
+        height: 20px;
+        filter: invert(61%) sepia(60%) saturate(485%) hue-rotate(94deg) brightness(94%) contrast(96%);
+    }
+}
+
+.btn-news-preview {
+    border-radius: 3px;
+    display: block;
+    height: 55px;
+    width: 220px;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    letter-spacing: 1px;
+    color: $white;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    text-shadow: none;
+    z-index: 1;
+
+    &::after {
+        position: absolute;
+        content: "";
+        display: inline-block;
+        background: $summer_sky;
+        background: linear-gradient(
+        45deg,
+        $summer_sky 0%,
+        $blue_oyster_cult 25%,
+        $akebi_purple 51%,
+        $lilac_lotion 100%
+        );
+        height: 55px;
+        width: 440px;
+        z-index: -1;
+        -webkit-transform: translateX(-330px);
+        transform: translateX(-330px);
+        transition: -webkit-transform 400ms ease-in;
+        transition: transform 400ms ease-in;
+        transition: transform 400ms ease-in, -webkit-transform 400ms ease-in;
+        top: 0;
+    }
+
+    &:hover {
+        &::after {
+            -webkit-transform: translateX(-236px);
+            transform: translateX(-236px);
+        }
+    }
+
+    span {
+        color: $white;
+        position: relative;
+        display: inline-block;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        font-size: 14px;
+    }
+}
+
+.list_exanges_image_container {
+    display: inline-block;
+    width: 115px;
+}
+
+@media(max-width: 1240px) {
+    .crypto_exchanges-row{
+        grid-template-columns: 30% 20% 20% 15% 15%;
+    }
+
+    .subscribe_section .crypto_exchanges-row{
+        grid-template-columns: 45% 15% 30% 15%
+    }
+
+    .crypto_exchanges_percent_green{
+        font-size: 14px;
+    }
+    
+    .crypto_exchanges-row .crypto_exchanges-cell:nth-child(5){
+       display: none;
+    }
+    .list_trade_page .crypto_exchanges-row{
+        grid-template-columns: 4.3% 32.2% 25.7% 25.7% 11.9%;
+    }
+    
+    .crypto_exchanges{
+        max-width: calc(100% - 60px);
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .button-container-preview {
+        justify-content: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        display: flex;
+    }
+}
+
+@media(max-width: 1199px) {
+    .list_trade_page .crypto_exchanges-cell:nth-child(4) .crypto_exchanges_percent_green{
+        font-size: 10px;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(4) img{
+        height: 16px;
+    }
+
+    .statistics-preview{
+        padding: 0px 30px;
+    }
+
+    .crypto_exchanges-row {
+        &:first-child {
+            align-content: center;
+        }
+    }
+}
+
+@media(max-width: 1010px) {
+    .button-container-preview {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media(max-width: 970px) {
+    .crypto_exchanges-row:first-child{
+        display: none;
+    }
+
+    #crypto_exchange .crypto_exchanges-row:first-child{
+        display: none;
+    }
+    
+    #crypto_exchange .btn-news-preview{
+        height: 42px;
+        border-radius: 8px;
+    }
+    
+    #crypto_exchange .btn-news-preview::after{
+        width: 508px;
+    }
+    
+    #crypto_exchange .crypto_exchanges-row{
+        padding: 50px 0;
+        grid-template-columns: 25% 45% 15% 15%;
+        padding-right: 0 !important;
+    }
+    
+    #crypto_exchange .crypto_exchanges-cell:nth-child(1){
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    
+    #crypto_exchange .crypto_exchanges-cell:nth-child(1) a{
+        max-width: 20%;
+    }
+    
+    #crypto_exchange .crypto_exchanges-cell:nth-child(2){
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+    
+    #crypto_exchange .crypto_exchanges-cell:nth-child(2) div{
+        justify-content: flex-end;
+        align-content: center;
+        height: 100%;
+    }
+    
+    #crypto_exchange .crypto_exchanges-cell:nth-child(1){
+        margin-top: 0 !important;
+    }
+    
+    #crypto_exchange .crypto_exchanges-cell:nth-child(3){
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+    
+    #crypto_exchange div:nth-child(5){
+        grid-column-start: 2;
+        grid-column-end: 3;
+        display: none;
+    }
+
+    .crypto_exchanges_rate{
+        transform: translateY(-13%);
+    }
+    
+    .crypto_exchanges-cell div{
+        line-height: 13px;
+    } 
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(1){
+        grid-row-start: 1 !important;
+        grid-row-end: 2 !important;
+        grid-column-start: 1 !important;
+        grid-column-end: 1 !important;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(2){
+        grid-row-start: 1 !important;
+        grid-row-end: 2 !important;
+        grid-column-start: 2 !important;
+        grid-column-end: 6 !important;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(2) div{
+        justify-content: start !important;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .list_trade_page .crypto_exchanges_percent_green{
+        font-size: 14px;
+        margin-top: 7px;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(3){
+        grid-row-start: 2 !important;
+        grid-row-end: 3 !important;
+        grid-column-start: 1 !important;
+        grid-column-end: 6 !important;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(4){
+        grid-row-start: 3 !important;
+        grid-row-end: 4 !important;
+        grid-column-start: 1 !important;
+        grid-column-end: 6 !important;
+    }
+      
+    .list_trade_page .crypto_exchanges-cell:nth-child(5){
+        grid-row-start: 1 !important;
+        grid-row-end: 5 !important;
+        grid-column-start: 4 !important;
+        grid-column-end: 6 !important;
+        display: block !important;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(5) img{
+        transform: translateX(0%);
+        margin-top: 25px;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(4) img{
+        filter: invert(92%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(107%) contrast(101%);
+    }
+    
+    .list_trade_page .crypto_exchanges-row{
+        padding: 57px 0 !important;
+    }
+      .list_trade_page .crypto_exchanges_cell_button{
+        grid-row-start: 4;
+        grid-row-end: 5;
+        grid-column-start: 4;
+        grid-column-end: 6;
+        margin-top: 20px;
+        display: none;
+      }
+      .list_trade_page .crypto_exchanges_cell_button .btn-news-preview::after{
+        left: 0;
+        width: 900px !important;
+      }
+      .list_trade_page .crypto_exchanges-row{
+        grid-template-columns: 4.3% 47.2% 10.7% 25.7% 11.9% !important;
+      }
+      .crypto_exchanges_percent_green_mobile{
+        display: inline;
+        padding-right: 10px;
+      }
+}
+
+@media(max-width: 750px) {
+    .crypto_exchanges-row{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .crypto_exchanges-cell:nth-child(1){
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    
+    .crypto_exchanges-cell:nth-child(2){
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+    
+    .crypto_exchanges-cell:nth-child(3){
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+    
+    .crypto_exchanges-row:nth-child(1){
+        display: none;
+    }
+    
+    .crypto_exchanges-row{
+        padding: 64px 0;
+    }
+
+    .statistics-preview {
+        padding-top: 0;
+    }
+}
+
+@media(max-width: 680px) {
+    .crypto_exchanges-cell div{
+        display: inline-flex;
+    }
+      
+    #crypto_exchange .crypto_exchanges-cell div{
+        display: flex;
+    }
+    
+    .crypto_exchanges {
+        max-width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media(max-width: 522px){
+    #crypto_exchange .crypto_exchanges-cell:nth-child(2){
+        padding-left: 10px;
+    }
+
+    .list_trade_page .crypto_exchanges-cell:nth-child(5) img{
+        width: 100%;
+    }
+
+    .button-container-preview {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media(max-width: 479px) {
+    .crypto_exchanges_percent_green{
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 464px) {
+    .statistics-preview {
+        padding: 0px 15px 0;
+    }
+}
+
+@media(max-width: 375px) {
+    .crypto_exchanges-cell div{
+        padding-right: 3px;
+    }
+}
+
+@media(max-width: 353px) {
+    .list_trade_page .crypto_exchanges-cell:nth-child(4){
+        padding: 0 !important;
+    }
+    
+    .list_trade_page .crypto_exchanges-cell:nth-child(4){
+        grid-row-start: 3 !important;
+        grid-row-end: 4 !important;
+        grid-column-start: 1 !important;
+        grid-column-end: 3 !important;
+        padding: 0 !important;
+    }
+}

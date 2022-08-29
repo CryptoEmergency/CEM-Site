@@ -1,0 +1,184 @@
+/* User notifications styles */
+.user_notifications_block {
+    width: 357px;
+    background: $infinity;
+    position: fixed;
+    top: 90px;
+    right: 90px;
+    border-radius: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 0;
+    z-index: 101;
+    padding-bottom: 1px;
+
+    @media(max-width: 680px) {
+        width: 90%;
+        right: 5%;
+    }
+}
+
+.notifications {
+    &_title {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+        color: $white;
+        padding: 25px;
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        background: $anchors_aweigh;
+        padding-bottom: 0px;
+    }
+
+    &_list {
+        height: 483px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar{
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-button {
+            background-repeat: no-repeat;
+            width: 5px;
+            height: 0px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: $spaceman;
+            width: 8px;
+            border: 3px solid $biro_blue;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: $biro_blue;
+            border-bottom-right-radius: 50px;
+        }
+
+        &_inner{
+            display: flex;
+            flex-direction: column-reverse;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+
+        &_item{
+            padding: 20px 25px 20px 25px;
+            transition: 0.5s;
+            cursor: pointer;
+
+            &:hover{
+                background: $marshal_blue;
+            }
+
+            p {
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 125%;
+                color: $crystal_bell;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+
+            span{
+                display: block;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 125%;
+                color: $mistral;
+
+                &:last-child{
+                    color: $nocturnal;
+                    margin-top: 15px;
+                }
+            }
+
+            a {
+                span {
+                    &:last-child {
+                        color: $mistral;
+                        margin-top: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.part {
+    &_questions,
+    &_awards,
+    &_system {
+        img{
+            height: 25px;
+            margin-right: 10px;
+        }
+    }
+}
+
+.unread_notification{
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(56.57deg, $hailey_blue 0%, $thick_purple 51.56%, $spicy_pink 105.28%);
+    box-shadow: 0px 0px 6px $c64_purple;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    position: relative;
+    top: -3px;
+}
+
+.notifyNickname{
+    color: $mistral;
+    margin-top: 0px;
+    display: inline-block;
+
+    a {
+        font-size: 14px;
+        color: $mistral;
+        margin-top: 0px;
+        background: linear-gradient(45deg,$summer_sky 0,$blue_oyster_cult 45%,$akebi_purple 57%,$lilac_lotion 70%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+    }
+}
+
+@media(max-width: 479px) {
+    .notifications {
+        &_title {
+            font-size: 12px;
+        }
+
+        &_toggle {
+
+            &_item {
+                padding-bottom: 5px;
+                line-height: 12px;
+
+                &_active {
+                    padding-bottom: 5px;
+                    line-height: 12px;
+                }
+            }
+        }
+
+        &_list {
+            &_item {
+                padding: 20px 25px 10px 25px;
+
+                p,
+                span {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}

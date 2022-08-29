@@ -1,0 +1,228 @@
+/* Lenta styles */
+.user {
+
+    &_news {
+
+        &_top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            align-self: flex-start;
+
+            .button-container-comm {
+                left: 0;
+                -webkit-transform: translate(0);
+                transform: translate(0);
+            }
+        }
+
+        &_title {
+            display: flex;
+
+            img {
+                filter: invert(89%) sepia(2%) saturate(2555%) hue-rotate(194deg) brightness(103%) contrast(102%);
+                position: relative;
+                bottom: 5px;
+                margin-left: 15px;
+                cursor: pointer;
+            }
+        }
+
+        &_filter {
+            margin-top: 15px;
+
+            &_summoner {
+                cursor: pointer;
+                font-weight: 500;
+
+                img {
+                    height: 12px;
+                    position: relative;
+                    bottom: 2px;
+                }
+            }
+
+            &_checkbox {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                width: 30%;
+                min-width: 150px;
+                justify-content: center;
+
+                &es {
+                    display: flex;
+                }
+
+                p {
+                    margin-right: 15px;
+                    margin-bottom: 0;
+                    width: 40px;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+            }
+
+            .questions_filter_language {
+                margin-left: 0;
+                margin-top: 0;
+                width: auto;
+                height: 65px;
+            }
+        }
+    }
+
+    &s {
+        &_news {
+            max-width: 1240px;
+            margin: 0 auto;
+            margin-top: 40px;
+
+            .tox {
+                margin-bottom: 0 !important;
+            }
+
+            .create_post {
+                display: none;
+            }
+
+            .user_news {
+
+                &_item {
+                    max-width: 100%;
+                }
+            }
+
+            &_left {
+                max-width: 60%;
+                margin: 0 auto;
+                overflow: hidden;
+
+                .users_news {
+
+                    &_category {
+                        padding: 0;
+                    }
+               }
+            }
+
+            iframe {
+                width: 100%;
+                height: 250px;
+            }
+        }
+    }
+}
+
+.userNewsBlock {
+
+    .bl_one {
+        /* width: calc(100% - 24px);
+        min-width: calc(100% - 24px);
+        margin: 0 12px; */
+        width: 100%;
+        min-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.bl_one {
+
+    .comment {
+        &_avatar {
+            padding-left: 20px;
+        }
+    }
+}
+
+@media(max-width: 1199px) {
+    .user {
+
+        &s {
+
+            &_news {
+
+                &_left {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 1024px) {
+    .user {
+
+        &_news {
+
+            h4 {
+                margin-left: 20px;
+            }
+
+            &_top,
+            &_filter {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            &_item {
+                border-left-width: 0;
+                border-right-width: 0;
+                border-bottom-width: 0;
+                margin-bottom: 0;
+                padding-bottom: 1px;
+            }
+        }
+
+        &s {
+
+            &_news {
+
+                &_categories {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+
+    .bl_one {
+
+        .user {
+
+            &_news {
+
+                &_block {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+        }
+
+        // .comment {
+        //     &_avatar {
+        //         padding-left: 20px;
+        //     }
+        // }
+    }
+}
+
+@media(max-width: 610px) {
+    .user {
+        &_news {
+            &_filter {
+                &_checkbox {
+                    &es {
+                        flex-wrap: wrap;
+                        justify-content: center;
+
+                        .user_news_filter_checkbox {
+                            width: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
