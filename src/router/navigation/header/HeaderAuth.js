@@ -1,5 +1,3 @@
-/** @jsx jsx */
-/** @jsxFrag jsxFrag */
 import {jsx,jsxFrag,getVariable,setValue,getValue} from '@betarost/cemjs'
 import logo from '@assets/image/logo.svg'
 import {siteLink} from '@src/router/index.js'

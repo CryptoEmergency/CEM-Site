@@ -1,5 +1,3 @@
-/** @jsx jsx */
-/** @jsxFrag jsxFrag */
 import {jsx,jsxFrag} from '@betarost/cemjs'
 
 const forExport = function(){
