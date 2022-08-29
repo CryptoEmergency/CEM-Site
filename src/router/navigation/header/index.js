@@ -253,7 +253,6 @@ const befor = function(){
     setValue(ID,"langListShow",false)
 }
 const start = function(){
-    console.log("start header",getVariable("header"),getStorage("auth"));
     if(!getVariable("header")){
         makeDOM(<HeaderEmpty/>,ID)
         return;

@@ -7,7 +7,6 @@ import {init as startMake} from '@src/router/index.js'
 const ID = "App";
 
 const clickHide = function(e,target){
-    console.log("clickHide");
     setValue("mainHeader","langListShow",false)
 }
 
@@ -24,7 +23,6 @@ const start = function(){
 }
 
 const after = function(){}
-
 
 setVariable({clickHide: clickHide})
 

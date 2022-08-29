@@ -1,4 +1,4 @@
-import {getVariable,setVariable,parsingUrl} from '@betarost/cemjs'
+import {getVariable,setVariable,parsingUrl,delDOM} from '@betarost/cemjs'
 import list from './list.js'
 import swiperload from "@assets/js/swiper.js"
 
@@ -7,9 +7,11 @@ const siteLink = function(e){
     e.preventDefault()
     let link = this.href
     history.pushState(null, null, link)
-    init()
+    delDOM("mainBlock");
+    document.getElementById("mainBlock").innerHTML='';
+    init()    
 }
-
+ 
 const befor = function(dataUrl){}
 
 const start = function(dataUrl){

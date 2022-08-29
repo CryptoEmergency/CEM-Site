@@ -24,14 +24,11 @@ const LanguagesList = function(){
 
 const forExport = function({lang}){
     const langListShow = getValue(ID,"langListShow")
-    console.log("langListShow",langListShow,!getValue(ID,"langListShow"));
     return(
         <div style={styles.test} class="header-container">
             <div class="header_inner">
                 <div class="auth_header_part">
                     <div class="language" onclick={(e) => {
-                        console.log("onclick");
-                       // console.log( document.getElementById('mainHeader'));
                         e.stopPropagation()
                         setValue(ID,"langListShow",!getValue(ID,"langListShow"))
                          
@@ -44,7 +41,6 @@ const forExport = function({lang}){
                         class={`change_language_block ${langListShow ? '' : 'dn'}`} 
                         id="listLanguage"
                         onclick={(e) => {
-                            console.log("onclick2");
                             e.stopPropagation()
                             }}>
                         <div class="change_language_title">
