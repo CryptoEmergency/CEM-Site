@@ -18,6 +18,7 @@ const start = function(dataUrl){
         list.index(dataUrl);
         return;
     }    
+    
     if(!list[dataUrl.adress]){
         //404
         return;
