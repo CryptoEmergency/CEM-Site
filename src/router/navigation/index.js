@@ -24,6 +24,29 @@ import careers_icon from '@assets/icon/careers_icon.svg'
 import swiper_arrow_left from '@assets/icon/swiper_arrow_left.svg'
 import swiper_arrow_right from '@assets/icon/swiper_arrow_right.svg'
 
+import search_icon from '@assets/icon/search_icon.svg'
+
+import filter from '@assets/icon/filter.svg'
+
+import frame_default from '@assets/profile/frame/default.svg'
+
+
+import question_audio from '@assets/icon/question_audio.svg'
+import question_video from '@assets/icon/question_video.svg'
+import question_photo from '@assets/icon/question_photo.svg'
+
+import levelGray from '@assets/profile/levelGray.svg'
+
+import question_answers from '@assets/icon/question_answers.svg'
+import question_views from '@assets/icon/question_views.svg'
+import question_time from '@assets/icon/question_time.svg'
+
+import lbf_banner from '@assets/image/banners/lbf_banner.jpg'
+import blockchain24 from '@assets/image/banners/blockchain24.png'
+import crypto_summit from '@assets/image/banners/crypto_summit.jpg'
+import plus_forum from '@assets/image/banners/1200х580-(fb).png'
+import blockchain_life from '@assets/image/banners/blockchain_life.jpg'
+import crypto_future_banner from '@assets/image/banners/crypto_future_banner.png'
 
 
 const mainBlock = function(){  
@@ -442,9 +465,9 @@ const mainBlock = function(){
                     <div class="input-question-container" data-needauth="true">
                         <div class="question_search_container">
                             <div class="mobile-question-container">
-                                <img src="/assets/icon/search_icon.svg"/>
+                                <img src={search_icon}/>
                                 <input class="input-question" type="text" data-keyup="questionTypeHelper" placeholder="{{lang.placeholder.question}}" autocomplete="disabled"/>
-                                <img data-action="questionFilterShow" class="mobile_question_filter_icon" src="/assets/icon/filter.svg"/>
+                                <img data-action="questionFilterShow" class="mobile_question_filter_icon" src={filter}/>
                             </div>
                             <div style="display: none;" class="questions_search">
                                 <div class="question_search_half_empty">
@@ -492,9 +515,9 @@ const mainBlock = function(){
                                 <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
                                     <div class="micro_user_avatar">
                                         <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src="/assets/profile/frame/default.svg"/>
+                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
                                         <div class="user_avatar_level">
-                                            <img src="/assets/profile/levelGray.svg"/>
+                                            <img src={levelGray}/>
                                             <span>9</span>
                                         </div>
                                         <div style="display: none;" class="avatar_user_online"></div>
@@ -508,9 +531,9 @@ const mainBlock = function(){
                                 </a>
                                 <div class="question_icons">
                                     <div>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_audio.svg"/>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_video.svg"/>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_photo.svg"/>
+                                        <img class="unstable_question_icons" src={question_audio}/>
+                                        <img class="unstable_question_icons" src={question_video}/>
+                                        <img class="unstable_question_icons" src={question_photo}/>
                                     </div>
                                     <div class="language_container load"> 
                                         <div class="language-question"></div>
@@ -529,13 +552,13 @@ const mainBlock = function(){
                         </a>
                         <div class="answers-questions">
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_answers.svg"/> 1
+                                <img src={question_answers}/> 1
                             </div>
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_views.svg"/> 1
+                                <img src={question_views}/> 1
                             </div>
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_time.svg"/> 01.01.2000
+                                <img src={question_time}/> 01.01.2000
                             </div>
                         </div>
                         <a href="/question/show/{{_id}}" data-action="link">
@@ -552,9 +575,9 @@ const mainBlock = function(){
                                 <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
                                     <div class="micro_user_avatar">
                                         <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src="/assets/profile/frame/default.svg"/>
+                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
                                         <div class="user_avatar_level">
-                                            <img src="/assets/profile/levelGray.svg"/>
+                                            <img src={levelGray}/>
                                             <span>9</span>
                                         </div>
                                         <div style="display: none;" class="avatar_user_online"></div>
@@ -568,9 +591,9 @@ const mainBlock = function(){
                                 </a>
                                 <div class="question_icons">
                                     <div>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_audio.svg"/>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_video.svg"/>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_photo.svg"/>
+                                        <img class="unstable_question_icons" src={question_audio}/>
+                                        <img class="unstable_question_icons" src={question_video}/>
+                                        <img class="unstable_question_icons" src={question_photo}/>
                                     </div>
                                     <div class="language_container load"> 
                                         <div class="language-question"></div>
@@ -589,13 +612,13 @@ const mainBlock = function(){
                         </a>
                         <div class="answers-questions">
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_answers.svg"/> 1
+                                <img src={question_answers}/> 1
                             </div>
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_views.svg"/> 1
+                                <img src={question_views}/> 1
                             </div>
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_time.svg"/> 01.01.2000
+                                <img src={question_time}/> 01.01.2000
                             </div>
                         </div>
                         <a href="/question/show/{{_id}}" data-action="link">
@@ -612,9 +635,9 @@ const mainBlock = function(){
                                 <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
                                     <div class="micro_user_avatar">
                                         <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src="/assets/profile/frame/default.svg"/>
+                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
                                         <div class="user_avatar_level">
-                                            <img src="/assets/profile/levelGray.svg"/>
+                                            <img src={levelGray}/>
                                             <span>9</span>
                                         </div>
                                         <div style="display: none;" class="avatar_user_online"></div>
@@ -628,9 +651,9 @@ const mainBlock = function(){
                                 </a>
                                 <div class="question_icons">
                                     <div>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_audio.svg"/>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_video.svg"/>
-                                        <img class="unstable_question_icons" src="/assets/icon/question_photo.svg"/>
+                                        <img class="unstable_question_icons" src={question_audio}/>
+                                        <img class="unstable_question_icons" src={question_video}/>
+                                        <img class="unstable_question_icons" src={question_photo}/>
                                     </div>
                                     <div class="language_container load"> 
                                         <div class="language-question"></div>
@@ -649,13 +672,13 @@ const mainBlock = function(){
                         </a>
                         <div class="answers-questions">
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_answers.svg"/> 1
+                                <img src={question_answers}/> 1
                             </div>
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_views.svg"/> 1
+                                <img src={question_views}/> 1
                             </div>
                             <div class="question_card_stats load">
-                                <img src="/assets/icon/question_time.svg"/> 01.01.2000
+                                <img src={question_time}/> 01.01.2000
                             </div>
                         </div>
                         <a href="/question/show/{{_id}}" data-action="link">
@@ -677,18 +700,18 @@ const mainBlock = function(){
                         <div class="swiper-container">
                             <div class="swiper swiper-startups" id="swiper-startups">
                                 <div class="swiper-wrapper">
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62dd2ca100978d192547427c" class=""><img src="/assets/image/banners/lbf_banner.jpg"/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62bab2ac962df43c3fd94755" class=""><img src="/assets/image/banners/blockchain24.png"/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62f0da1ef2b8fa66345ef411" class=""><img src="/assets/image/banners/crypto_summit.jpg"/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="630382384dab714d6e986cd6" class=""><img src="/assets/image/banners/1200х580-(fb).png"/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62fb66bd4dab714d6e955d80" class=""><img src="/assets/image/banners/blockchain_life.jpg"/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62d134221de982539a72345e" class=""><img src="/assets/image/banners/crypto_future_banner.png"/></div></a>
+                                        <a class="swiper-slide"><div data-action="getNews" data-id="62dd2ca100978d192547427c" class=""><img src={lbf_banner}/></div></a>
+                                        <a class="swiper-slide"><div data-action="getNews" data-id="62bab2ac962df43c3fd94755" class=""><img src={blockchain24}/></div></a>
+                                        <a class="swiper-slide"><div data-action="getNews" data-id="62f0da1ef2b8fa66345ef411" class=""><img src={crypto_summit}/></div></a>
+                                        <a class="swiper-slide"><div data-action="getNews" data-id="630382384dab714d6e986cd6" class=""><img src={plus_forum}/></div></a>
+                                        <a class="swiper-slide"><div data-action="getNews" data-id="62fb66bd4dab714d6e955d80" class=""><img src={blockchain_life}/></div></a>
+                                        <a class="swiper-slide"><div data-action="getNews" data-id="62d134221de982539a72345e" class=""><img src={crypto_future_banner}/></div></a>
                                 </div>
                                 <div class="swiper-pagination" id="swiper-pagination-startup"></div>
                                 <div class="swiper-scrollbar-startup"></div>
                             </div>
-                            <div class="swiper-button-prev" id="prev-startup"><img src="/assets/icon/swiper_arrow_left.svg" style="height: 40%;"/></div>
-                            <div class="swiper-button-next" id="next-startup"><img src="/assets/icon/swiper_arrow_right.svg" style="height: 40%;"/></div>
+                            <div class="swiper-button-prev" id="prev-startup"><img src={swiper_arrow_left} style="height: 40%;"/></div>
+                            <div class="swiper-button-next" id="next-startup"><img src={swiper_arrow_right} style="height: 40%;"/></div>
                         </div>
                     </div>
                     <div id="crypto_exchanges" class="crypto_exchanges">
@@ -1033,7 +1056,7 @@ const mainBlock = function(){
                                     <div class="friends_search_top">
                                         <input autocomplete="off" type="text" data-keyup="friendsSearchType" placeholder="{{lang.placeholder.findFriends}}"/>
                                         <div class="filter_summoner" data-action="filterSummoner">
-                                            <img src="/assets/icon/filter.svg"/>
+                                            <img src={filter}/>
                                             <span>{lang.span.filter}</span>
                                         </div>
                                     </div>
@@ -1077,9 +1100,9 @@ const mainBlock = function(){
                                                 <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
                                                     <div class="micro_user_avatar">
                                                         <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src="/assets/profile/frame/default.svg"/>
+                                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
                                                         <div class="user_avatar_level">
-                                                            <img src="/assets/profile/levelGray.svg"/>
+                                                            <img src={levelGray}/>
                                                             <span>9</span>
                                                         </div>
                                                         <div style="display: none;" class="avatar_user_online"></div>
@@ -1132,9 +1155,9 @@ const mainBlock = function(){
                                                 <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
                                                     <div class="micro_user_avatar">
                                                         <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src="/assets/profile/frame/default.svg"/>
+                                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
                                                         <div class="user_avatar_level">
-                                                            <img src="/assets/profile/levelGray.svg"/>
+                                                            <img src={levelGray}/>
                                                             <span>9</span>
                                                         </div>
                                                         <div style="display: none;" class="avatar_user_online"></div>
@@ -1187,9 +1210,9 @@ const mainBlock = function(){
                                                 <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
                                                     <div class="micro_user_avatar">
                                                         <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src="/assets/profile/frame/default.svg"/>
+                                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
                                                         <div class="user_avatar_level">
-                                                            <img src="/assets/profile/levelGray.svg"/>
+                                                            <img src={levelGray}/>
                                                             <span>9</span>
                                                         </div>
                                                         <div style="display: none;" class="avatar_user_online"></div>
