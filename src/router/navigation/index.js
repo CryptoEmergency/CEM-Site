@@ -1,5 +1,29 @@
-import {jsx,jsxFrag,getVariable,getStorage,setAction,setVariable,makeDOM} from '@betarost/cemjs'
+import {jsx,jsxFrag,getVariable,getStorage,setAction,setVariable, makeDOM} from '@betarost/cemjs'
 import {init as mainHeader} from '@navigation/header/index.js'
+import lines from '@assets/image/background/lines-preview-min.png'
+import cem from '@assets/image/background/cem.png'
+import bitcoin_icon from '@assets/icon/Bitcoin.svg'
+import bnb_icon from '@assets/icon/bnb.svg'
+import eth_icon from '@assets/icon/eth.svg'
+import cem_icon from '@assets/icon/cem.jpg'
+import up_arrow from '@assets/icon/up_arrow.svg'
+
+
+import shuffle from '@assets/icon/shuffle 1.svg'
+import mortarboard from '@assets/icon/mortarboard 1.svg'
+import graph from '@assets/icon/graph 1.svg'
+import startup from '@assets/icon/startup 1.svg'
+import meta_universes from '@assets/icon/meta_universes.svg'
+import star from '@assets/icon/star 1.svg'
+import stock from '@assets/icon/stock-market 1.svg'
+import world from '@assets/icon/world-news 1.svg'
+import user from '@assets/icon/user 1.svg'
+import nft_icon from '@assets/icon/nft_icon.svg'
+import careers_icon from '@assets/icon/careers_icon.svg'
+
+import swiper_arrow_left from '@assets/icon/swiper_arrow_left.svg'
+import swiper_arrow_right from '@assets/icon/swiper_arrow_right.svg'
+
 
 
 const mainBlock = function(){  
@@ -7,9 +31,9 @@ const mainBlock = function(){
   return(
     <div>
         <div class="preview">
-            <img class="lines" src="/assets/image/background/lines-preview-min.png"/>
+            <img class="lines" src={lines}/>
             <div class="title-preview">
-                <img class="cem-img" src="/assets/image/background/cem.png"/>
+                <img class="cem-img" src={cem}/>
                     <div class="title-text-preview">
                         {lang.homePreview.platformFuture}<br/>
                         {lang.homePreview.unitePeople}
@@ -34,7 +58,7 @@ const mainBlock = function(){
                     <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                         <div class="icon-currency">
                         <div class="icon-color-btc">
-                            <img src="/assets/icon/Bitcoin.svg"/>
+                            <img src={bitcoin_icon}/>
                         </div>
                         </div>
                         <div class="info-currency ">
@@ -43,7 +67,7 @@ const mainBlock = function(){
                             <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
                         </div>
                         <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="btcusdt_change">-0.48</span></div>
+                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="btcusdt_change">-0.48</span></div>
                             <div class="last-update">1h.</div>
                         </div>
                         </div>
@@ -51,7 +75,7 @@ const mainBlock = function(){
                     <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                         <div class="icon-currency">
                         <div class="icon-color-bnb">
-                            <img src="/assets/icon/bnb.svg"/>
+                            <img src={bnb_icon}/>
                         </div>
                         </div>
                         <div class="info-currency ">
@@ -60,7 +84,7 @@ const mainBlock = function(){
                             <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
                         </div>
                         <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="bnbusdt_change">-0.03</span></div>
+                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="bnbusdt_change">-0.03</span></div>
                             <div class="last-update">1h.</div>
                         </div>
                         </div>
@@ -68,7 +92,7 @@ const mainBlock = function(){
                     <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                         <div class="icon-currency">
                         <div class="icon-color-eth">
-                            <img src="/assets/icon/eth.svg"/>
+                            <img src={eth_icon}/>
                         </div>
                         </div>
                         <div class="info-currency ">
@@ -77,7 +101,7 @@ const mainBlock = function(){
                             <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
                         </div>
                         <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="ethusdt_change">-0.24</span></div>
+                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="ethusdt_change">-0.24</span></div>
                             <div class="last-update">1h.</div>
                         </div>
                         </div>
@@ -85,7 +109,7 @@ const mainBlock = function(){
                     <a href="/buy-cem/" data-action="link" data-updating="true" class="item-currency swiper-slide">
                         <div class="icon-currency">
                         <div class="icon-color-cem">
-                            <img src="/assets/icon/cem.jpg"/>
+                            <img src={cem_icon}/>
                         </div>
                         </div>
                         <div class="info-currency ">
@@ -94,7 +118,7 @@ const mainBlock = function(){
                             <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
                         </div>
                         <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="cemusdt_change">0.00</span></div>
+                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="cemusdt_change">0.00</span></div>
                             <div class="last-update">24h.</div>
                         </div>
                         </div>
@@ -106,7 +130,7 @@ const mainBlock = function(){
                 <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                     <div class="icon-currency">
                     <div class="icon-color-btc">
-                        <img src="/assets/icon/Bitcoin.svg"/>
+                        <img src={bitcoin_icon}/>
                     </div>
                     </div>
                     <div class="info-currency ">
@@ -115,7 +139,7 @@ const mainBlock = function(){
                         <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
                     </div>
                     <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="btcusdt_change">-0.48 </span></div>
+                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="btcusdt_change">-0.48 </span></div>
                         <div class="last-update">1h.</div>
                     </div>
                     </div>
@@ -123,7 +147,7 @@ const mainBlock = function(){
                 <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                     <div class="icon-currency">
                     <div class="icon-color-bnb">
-                        <img src="/assets/icon/bnb.svg"/>
+                        <img src={bnb_icon}/>
                     </div>
                     </div>
                     <div class="info-currency ">
@@ -132,7 +156,7 @@ const mainBlock = function(){
                         <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
                     </div>
                     <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="bnbusdt_change">-0.03</span></div>
+                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="bnbusdt_change">-0.03</span></div>
                             <div class="last-update">1h.</div>
                     </div>
                     </div>
@@ -140,7 +164,7 @@ const mainBlock = function(){
                 <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                     <div class="icon-currency">
                     <div class="icon-color-eth">
-                        <img src="/assets/icon/eth.svg"/>
+                        <img src={eth_icon}/>
                     </div>
                     </div>
                     <div class="info-currency ">
@@ -149,7 +173,7 @@ const mainBlock = function(){
                         <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
                     </div>
                     <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="ethusdt_change">-0.24</span></div>
+                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="ethusdt_change">-0.24</span></div>
                             <div class="last-update">1h.</div>
                     </div>
                     </div>
@@ -157,7 +181,7 @@ const mainBlock = function(){
                 <a href="/buy-cem/" data-action="link" data-updating="true" class="item-currency swiper-slide">
                     <div class="icon-currency">
                     <div class="icon-color-cem">
-                        <img src="/assets/icon/cem.jpg"/>
+                        <img src={cem_icon}/>
                     </div>
                     </div>
                     <div class="info-currency ">
@@ -166,7 +190,7 @@ const mainBlock = function(){
                         <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
                     </div>
                     <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src="/assets/icon/up_arrow.svg"/><span class="cemusdt_change">0.00</span></div>
+                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="cemusdt_change">0.00</span></div>
                         <div class="last-update">24h.</div>
                     </div>
                     </div>
@@ -181,7 +205,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}list-exchange/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/shuffle 1.svg" alt=""/>
+                                        <img src={shuffle} alt=""/>
                                     </div>
                                     <p>{lang.a.exchange}</p>
                                 </div>
@@ -191,7 +215,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}library/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/mortarboard 1.svg" alt=""/>
+                                        <img src={mortarboard} alt=""/>
                                     </div>
                                     <p>{lang.a.university}</p>
                                 </div>
@@ -201,7 +225,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}content-creator/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/graph 1.svg" alt=""/>
+                                        <img src={graph} alt=""/>
                                     </div>
                                     <p>{lang.a.contentCreater}</p>
                                 </div>
@@ -211,7 +235,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}startups/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/startup 1.svg" alt=""/>
+                                        <img src={startup} alt=""/>
                                     </div>
                                     <p>{lang.a.starups}</p>
                                 </div>
@@ -221,7 +245,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}university/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/meta_universes.svg" alt=""/>
+                                        <img src={meta_universes} alt=""/>
                                     </div>
                                     <p>{lang.a.universes}</p>
                                 </div>
@@ -231,7 +255,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}ico-rating/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/star 1.svg" alt=""/>
+                                        <img src={star} alt=""/>
                                     </div>
                                     <p>{lang.a.icoRating}</p>
                                 </div>
@@ -241,7 +265,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}list-trade/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/stock-market 1.svg" alt=""/>
+                                        <img src={stock} alt=""/>
                                     </div>
                                     <p>{lang.a.trade}</p>
                                 </div>
@@ -251,7 +275,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}news/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/world-news 1.svg" alt=""/>
+                                        <img src={world} alt=""/>
                                     </div>
                                     <p>{lang.a.news}</p>
                                 </div>
@@ -261,7 +285,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}experts/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/user 1.svg" alt=""/>
+                                        <img src={user} alt=""/>
                                     </div>
                                     <p>{lang.a.experts}</p>
                                 </div>
@@ -271,7 +295,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}nft-market/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/nft_icon.svg" alt=""/>
+                                        <img src={nft_icon} alt=""/>
                                     </div>
                                     <p>{lang.a.nft}</p>
                                 </div>
@@ -281,7 +305,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}experts/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/careers_icon.svg" alt=""/>
+                                        <img src={careers_icon} alt=""/>
                                     </div>
                                     <p>{lang.a.career}</p>
                                 </div>
@@ -290,8 +314,8 @@ const mainBlock = function(){
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-button-prev" id="prev-desktop-icons"><img src="/assets/icon/swiper_arrow_left.svg" style="height: 40%;"/></div>
-                <div class="swiper-button-next" id="next-desktop-icons"><img src="/assets/icon/swiper_arrow_right.svg" style="height: 40%;"/></div>
+                <div class="swiper-button-prev" id="prev-desktop-icons"><img src={swiper_arrow_left} style="height: 40%;"/></div>
+                <div class="swiper-button-next" id="next-desktop-icons"><img src={swiper_arrow_right} style="height: 40%;"/></div>
             </div>    
             <div class="swiper-container">
                 <div class="swiper swiper-icons" id="swiper-one">
@@ -300,7 +324,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}list-exchange/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/shuffle 1.svg" alt=""/>
+                                        <img src={shuffle} alt=""/>
                                     </div>
                                     <p>{lang.a.exchange}</p>
                                 </div>
@@ -308,7 +332,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}library/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/mortarboard 1.svg" alt=""/>
+                                        <img src={mortarboard} alt=""/>
                                     </div>
                                     <p>{lang.a.university}</p>
                                 </div>
@@ -319,7 +343,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}content-creator/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/graph 1.svg" alt=""/>
+                                        <img src={graph} alt=""/>
                                     </div>
                                     <p>{lang.a.contentCreater}</p>
                                 </div>
@@ -327,7 +351,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}startups/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/startup 1.svg" alt=""/>
+                                        <img src={startup} alt=""/>
                                     </div>
                                     <p>{lang.a.starups}</p>
                                 </div>
@@ -338,7 +362,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}university/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/meta_universes.svg" alt=""/>
+                                        <img src={meta_universes} alt=""/>
                                     </div>
                                     <p>{lang.a.universes}</p>
                                 </div>
@@ -346,7 +370,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}ico-rating/" data-action="link" data-updating="true">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/star 1.svg" alt=""/>
+                                        <img src={star} alt=""/>
                                     </div>
                                     <p>{lang.a.icoRating}</p>
                                 </div>
@@ -357,7 +381,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}list-trade/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/stock-market 1.svg" alt=""/>
+                                        <img src={stock} alt=""/>
                                     </div>
                                     <p>{lang.a.trade}</p>
                                 </div>
@@ -365,7 +389,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}news/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/world-news 1.svg" alt=""/>
+                                        <img src={world} alt=""/>
                                     </div>
                                     <p>{lang.a.news}</p>
                                 </div>
@@ -376,7 +400,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}experts/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/user 1.svg" alt=""/>
+                                        <img src={user} alt=""/>
                                     </div>
                                     <p>{lang.a.experts}</p>
                                 </div>
@@ -384,7 +408,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}nft-market/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/nft_icon.svg" alt=""/>
+                                        <img src={nft_icon} alt=""/>
                                     </div>
                                     <p>{lang.a.nft}</p>
                                 </div>
@@ -394,7 +418,7 @@ const mainBlock = function(){
                             <a href="{{lang.url}}experts/" data-action="link">
                                 <div class="projects_icons_text">
                                     <div class="nav-more_item">
-                                        <img src="/assets/icon/careers_icon.svg" alt=""/>
+                                        <img src={careers_icon} alt=""/>
                                     </div>
                                     <p>{lang.a.career}</p>
                                 </div>
@@ -403,8 +427,8 @@ const mainBlock = function(){
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-button-prev" id="prev-icons"><img src="/assets/icon/swiper_arrow_left.svg" style="height: 40%;"/></div>
-                <div class="swiper-button-next" id="next-icons"><img src="/assets/icon/swiper_arrow_right.svg" style="height: 40%;"/></div>
+                <div class="swiper-button-prev" id="prev-icons"><img src={swiper_arrow_left} style="height: 40%;"/></div>
+                <div class="swiper-button-next" id="next-icons"><img src={swiper_arrow_right} style="height: 40%;"/></div>
 
             </div>
             <div class="main_page_show_more" data-action="mainPageShowAllIcons">
@@ -1322,7 +1346,7 @@ const befor = function(dataUrl){
    mainHeader(dataUrl);
 }
 const start = function(dataUrl){
-    makeDOM(mainBlock(),ID)
+makeDOM(mainBlock(),ID)
 }
 const after = function(dataUrl){}
 
