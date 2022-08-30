@@ -15,6 +15,7 @@ setVariable({ clickHide: clickHide })
 if (!getVariable("languages")) {
     setVariable({ languages: languages });
 }
+
 initStorage();
 addListen()
 init()
