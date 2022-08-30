@@ -1,5 +1,5 @@
 const req = import.meta.webpackContext('.', {
-    recursive: false,
+    recursive: true,
     regExp: /\.(png|jpg|jpeg|gif)$/
 });
 

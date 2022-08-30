@@ -1,6 +1,6 @@
 const req = import.meta.webpackContext('.', {
     recursive: true,
-    regExp: /\.svg$/
+    regExp: /\.(svg)$/
 });
 
 const forExport = req.keys().reduce((acc, next) => {
@@ -8,4 +8,5 @@ const forExport = req.keys().reduce((acc, next) => {
     return acc
 }, {});
 
+console.log(req.keys());
 export default forExport
