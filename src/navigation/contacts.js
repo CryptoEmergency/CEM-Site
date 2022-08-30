@@ -9,7 +9,8 @@ import {
 } from "@betarost/cemjs";
 import { init as mainHeader } from "@navigation/header/index.js";
 import {init as mainFooter} from '@navigation/footer/index.js';
-import contacts_vector from "@assets/image/background/contacts_vector.svg";
+import svg from "@assets/svg/index.js";
+
 
 const ID = "mainBlock";
 setVariable({ header: true });
@@ -20,7 +21,7 @@ const contactsView = function () {
 
   return (
     <div class="contacts_container">
-      <img class="background_vector" src={contacts_vector} />
+      <img class="background_vector" src={svg["background/contacts_vector.svg"]} />
       <div class="contacts_content">
         <div class="contacts_form_block">
           <div class="contacts_form">
