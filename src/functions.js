@@ -1,5 +1,13 @@
 import { setValue,sendApi } from '@betarost/cemjs'
 
+const clickCancel = function (e) {
+    e.stopPropagation()
+}
+
+const clickHide = function (e) {
+    setValue("mainHeader", "langListShow", false)
+}
+
 const timerTik = function () {
     //console.log("timerTik", "tt")
 }
@@ -13,4 +21,4 @@ const init = function () {
 
 }
 
-export { init, timerTik, timerCourse }
+export { init, timerTik, timerCourse,clickHide,clickCancel }

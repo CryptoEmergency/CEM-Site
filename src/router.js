@@ -8,7 +8,8 @@ const siteLink = function (e) {
     let link = this.href
     history.pushState(null, null, link) 
     timersClear();   
-    delDOM("mainBlock");    
+    delDOM("mainBlock");  
+    //delDOM("mainHeader");   
     document.getElementById("mainBlock").innerHTML = '';
     window.scrollTo({
         top: 0,

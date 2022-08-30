@@ -1,8 +1,14 @@
 import { jsx, jsxFrag, getVariable, setValue, getValue } from '@betarost/cemjs'
 import logo from '@assets/image/logo.svg'
-import { siteLink,changeLang } from '@src/router.js'
+import { siteLink, changeLang } from '@src/router.js'
+import { clickCancel } from '@src/functions.js'
 
 const ID = "mainHeader"
+
+const showListLang = function (e) {
+    e.stopPropagation()
+    setValue(ID, "langListShow", !getValue(ID, "langListShow"))
+}
 
 const LanguagesList = function () {
     const languages = getVariable("languages");
@@ -25,15 +31,13 @@ const LanguagesList = function () {
 
 const forExport = function ({ lang }) {
     const langListShow = getValue(ID, "langListShow")
+    const languages = getVariable("languages");
+    const dataUrl = getVariable("dataUrl");
     return (
         <div style={styles.test} class="header-container">
             <div class="header_inner">
                 <div class="auth_header_part">
-                    <div class="language" onclick={(e) => {
-                        e.stopPropagation()
-                        setValue(ID, "langListShow", !getValue(ID, "langListShow"))
-
-                    }}>
+                    <div class="language" onclick={showListLang}>
                         <div class="selectlink">
                             <div class="selectlink-control">{lang.lang_orig}</div>
                         </div>
@@ -41,9 +45,7 @@ const forExport = function ({ lang }) {
                     <div
                         class={`change_language_block ${langListShow ? '' : 'dn'}`}
                         id="listLanguage"
-                        onclick={(e) => {
-                            e.stopPropagation()
-                        }}>
+                        onclick={clickCancel}>
                         <div class="change_language_title">
                             <h4>{lang.h.modal_listLanguage}</h4>
                         </div>

@@ -6,10 +6,7 @@ import "@assets/js/index.js"
 import svg from "@assets/svg/index.js"
 import images from "@assets/images/index.js"
 import { default as languages } from '@src/languages/index.js'
-
-const clickHide = function (e, target) {
-    setValue("mainHeader", "langListShow", false)
-}
+import { clickHide } from '@src/functions.js'
 
 setVariable({ clickHide: clickHide })
 
@@ -20,5 +17,4 @@ if (!getVariable("languages")) {
 initStorage();
 addListen()
 init()
-
 test();
