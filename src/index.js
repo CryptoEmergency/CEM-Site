@@ -1,5 +1,6 @@
 import { setVariable, setValue, getVariable, initStorage, addListen } from '@betarost/cemjs'
 import { init } from '@src/init.js'
+import { test } from '@src/test.js'
 import "@assets/css/index.js"
 import "@assets/js/index.js"
 import svg from "@assets/svg/index.js"
@@ -19,3 +20,5 @@ if (!getVariable("languages")) {
 initStorage();
 addListen()
 init()
+
+test();

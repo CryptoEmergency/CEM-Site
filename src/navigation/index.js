@@ -1,4 +1,5 @@
-import { jsx, jsxFrag, getVariable, getStorage, setAction, setVariable, makeDOM } from '@betarost/cemjs'
+import { jsx, jsxFrag, getVariable, getStorage, setAction, setVariable, makeDOM, timersStart,setValue, getValue,sendApi } from '@betarost/cemjs'
+import {timerCourse} from '@src/functions.js'
 import { init as mainHeader } from '@navigation/header/index.js'
 import { init as mainFooter } from '@navigation/footer/index.js'
 import lines from '@assets/image/background/lines-preview-min.png'
@@ -53,6 +54,7 @@ import tech_week_partner from '@assets/image/partners/tech_week.png'
 
 const mainBlock = function () {
     const lang = getVariable("languages")[getStorage("lang")]
+    const course = getValue(ID,"mainCourse");
     return (
         <div>
             <div class="preview">
@@ -89,10 +91,10 @@ const mainBlock = function () {
                             <div class="info-currency ">
                                 <div class="info_left-currency">
                                     <div class="name-currency">BTC/USDT</div>
-                                    <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
+                                    <div class="price-currency"><span class="btcusdt_price">{course.btc.usdt}</span></div>
                                 </div>
                                 <div class="info_rigth-currency">
-                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="btcusdt_change">-0.48</span></div>
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="btcusdt_change">{course.btc.change}</span></div>
                                     <div class="last-update">1h.</div>
                                 </div>
                             </div>
@@ -106,10 +108,10 @@ const mainBlock = function () {
                             <div class="info-currency ">
                                 <div class="info_left-currency">
                                     <div class="name-currency">BNB/USDT</div>
-                                    <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
+                                    <div class="price-currency"><span class="bnbusdt_price">{course.bnb.usdt}</span></div>
                                 </div>
                                 <div class="info_rigth-currency">
-                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="bnbusdt_change">-0.03</span></div>
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="bnbusdt_change">{course.bnb.change}</span></div>
                                     <div class="last-update">1h.</div>
                                 </div>
                             </div>
@@ -123,10 +125,10 @@ const mainBlock = function () {
                             <div class="info-currency ">
                                 <div class="info_left-currency">
                                     <div class="name-currency">ETH/USDT</div>
-                                    <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
+                                    <div class="price-currency"><span class="ethusdt_price">{course.eth.usdt}</span></div>
                                 </div>
                                 <div class="info_rigth-currency">
-                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="ethusdt_change">-0.24</span></div>
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="ethusdt_change">{course.eth.change}</span></div>
                                     <div class="last-update">1h.</div>
                                 </div>
                             </div>
@@ -140,10 +142,10 @@ const mainBlock = function () {
                             <div class="info-currency ">
                                 <div class="info_left-currency">
                                     <div class="name-currency">CEM/USDT</div>
-                                    <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
+                                    <div class="price-currency"><span class="cemusdt_price">{course.cem.usdt}</span></div>
                                 </div>
                                 <div class="info_rigth-currency">
-                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="cemusdt_change">0.00</span></div>
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="cemusdt_change">{course.cem.change}</span></div>
                                     <div class="last-update">24h.</div>
                                 </div>
                             </div>
@@ -161,10 +163,10 @@ const mainBlock = function () {
                         <div class="info-currency ">
                             <div class="info_left-currency">
                                 <div class="name-currency">BTC/USDT</div>
-                                <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
+                                <div class="price-currency"><span class="btcusdt_price">{course.btc.usdt}</span></div>
                             </div>
                             <div class="info_rigth-currency">
-                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="btcusdt_change">-0.48 </span></div>
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="btcusdt_change">{course.btc.change} </span></div>
                                 <div class="last-update">1h.</div>
                             </div>
                         </div>
@@ -178,10 +180,10 @@ const mainBlock = function () {
                         <div class="info-currency ">
                             <div class="info_left-currency">
                                 <div class="name-currency">BNB/USDT</div>
-                                <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
+                                <div class="price-currency"><span class="bnbusdt_price">{course.bnb.usdt}</span></div>
                             </div>
                             <div class="info_rigth-currency">
-                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="bnbusdt_change">-0.03</span></div>
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="bnbusdt_change">{course.bnb.change}</span></div>
                                 <div class="last-update">1h.</div>
                             </div>
                         </div>
@@ -195,10 +197,10 @@ const mainBlock = function () {
                         <div class="info-currency ">
                             <div class="info_left-currency">
                                 <div class="name-currency">ETH/USDT</div>
-                                <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
+                                <div class="price-currency"><span class="ethusdt_price">{course.eth.usdt}</span></div>
                             </div>
                             <div class="info_rigth-currency">
-                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="ethusdt_change">-0.24</span></div>
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="ethusdt_change">{course.eth.change}</span></div>
                                 <div class="last-update">1h.</div>
                             </div>
                         </div>
@@ -212,10 +214,10 @@ const mainBlock = function () {
                         <div class="info-currency ">
                             <div class="info_left-currency">
                                 <div class="name-currency">CEM/USDT</div>
-                                <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
+                                <div class="price-currency"><span class="cemusdt_price">{course.cem.usdt}</span></div>
                             </div>
                             <div class="info_rigth-currency">
-                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="cemusdt_change">0.00</span></div>
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="cemusdt_change">{course.cem.change}</span></div>
                                 <div class="last-update">24h.</div>
                             </div>
                         </div>
@@ -1367,23 +1369,31 @@ const ID = "mainBlock"
 setVariable({ header: true });
 setVariable({ footer: true });
 
-const befor = function (dataUrl) {
+const befor = async function (dataUrl) {
     mainHeader(dataUrl);
-    mainFooter(dataUrl);
+    
+    if (!getValue(ID,"mainCourse")) {
+        const course = await sendApi.getCourse()
+        setValue(ID,"mainCourse",course.result.list_records[0])
+    }
+
+    timersStart("Course",timerCourse,10000)
 }
-const start = function (dataUrl) {
+const start = function () {
     makeDOM(mainBlock(), ID)
 }
-const after = function (dataUrl) { }
+const after = function (dataUrl) {    
+    mainFooter(dataUrl);
+ }
 
 setAction(ID, "befor", befor)
 setAction(ID, "start", start)
 setAction(ID, "after", after)
 
-const init = function (dataUrl) {
-    befor(dataUrl)
-    start(dataUrl)
-    after(dataUrl)
+const init = async function (dataUrl) {
+    await befor(dataUrl)
+    await start(dataUrl)
+    await after(dataUrl)
 }
 
 export default init

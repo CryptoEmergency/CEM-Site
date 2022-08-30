@@ -1,13 +1,19 @@
-import { getVariable, setVariable, parsingUrl, delDOM } from '@betarost/cemjs'
+import { getVariable, setVariable, parsingUrl, delDOM,timersClear,timersStart } from '@betarost/cemjs'
 import list from '@src/routerList.js'
 import swiperload from "@assets/js/swiper.js"
+import {timerTik} from '@src/functions.js'
 
 const siteLink = function (e) {
     e.preventDefault()
     let link = this.href
-    history.pushState(null, null, link)    
-    delDOM("mainBlock");
+    history.pushState(null, null, link) 
+    timersClear();   
+    delDOM("mainBlock");    
     document.getElementById("mainBlock").innerHTML = '';
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
     init()
 }
 
@@ -15,7 +21,12 @@ const changeLang = function (e) {
     e.preventDefault()
     let link = this.href
     history.pushState(null, null, link)
+    timersClear();
     init()
+}
+
+const befor = function (dataUrl) {
+    timersStart("TikTok",timerTik,1500)
 }
 
 const start = function (dataUrl) {
@@ -47,6 +58,7 @@ const after = function (dataUrl) {
 
 const init = function () {
     const dataUrl = parsingUrl()
+    befor(dataUrl);
     start(dataUrl)
     after(dataUrl)
 }
