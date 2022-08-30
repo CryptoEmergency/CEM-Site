@@ -222,7 +222,7 @@ const mainBlock = function(){
                 </a>    
             </div>  
         </div>
-        <div class="index-content">
+        {/* <div class="index-content">
             <div class="swiper-container">
                 <div class="swiper swiper-icons" id="swiper-desktop">
                     <div class="swiper-wrapper">
@@ -1347,7 +1347,7 @@ const mainBlock = function(){
                     </div> 
                 </div>
             </div>
-        </div>
+        </div> */}
         </div>
   )
 
