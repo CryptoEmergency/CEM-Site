@@ -28,7 +28,8 @@ const mainFooter = function(){
                             <a onclick={siteLink} href="/blog/"><span>{lang.a.blog}</span></a>
                             <a onclick={siteLink} href="/career-whith-us/"><span>{lang.a.career}</span></a>
                             <a onclick={siteLink} href="/media/"><span>{lang.h.mediaUs}</span></a>
-                        
+
+                            <a onclick={siteLink} href="/university/"><span>Крипто университет</span></a>
                             <a href="/assets/docs/whitePaperEN.pdf">
                                 <span>{lang.span.whitePaper}</span>
                             </a>
