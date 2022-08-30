@@ -1,7 +1,7 @@
 import {jsx,jsxFrag,getVariable,setValue,getValue} from '@betarost/cemjs'
 import logo from '@assets/image/logo.svg'
-import {siteLink} from '@src/router/index.js'
-
+import { clickCancel,siteLink, changeLang } from '@src/functions.js'
+import burger_menu from '@assets/icon/burger_menu.svg'
 const ID = "mainHeader"
 
 const LanguagesList = function(){
@@ -22,8 +22,12 @@ const LanguagesList = function(){
 
 }
 
-const forExport = function({lang}){
-    const langListShow = getValue(ID,"langListShow")
+const forExport = function(){
+    
+    const langListShow = getValue(ID, "langListShow")
+    const languages = getVariable("languages");
+    const dataUrl = getVariable("dataUrl");
+    const lang = languages[getStorage("lang")]
     return(
         <div class="header-container">
             <div class="header_inner">

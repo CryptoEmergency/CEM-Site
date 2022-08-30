@@ -1,17 +1,20 @@
-import { jsx, jsxFrag, getVariable, setValue, getValue } from '@betarost/cemjs'
-import logo from '@assets/image/logo.svg'
-import { siteLink, changeLang } from '@src/router.js'
-import { clickCancel } from '@src/functions.js'
+import {
+    jsx,
+    jsxFrag,
+    getVariable,
+    setValue,
+    getValue
+} from '@betarost/cemjs'
+import svg from "@assets/svg/index.js"
+import { clickCancel, siteLink, changeLang } from '@src/functions.js'
 
 const ID = "mainHeader"
-
 const showListLang = function (e) {
     e.stopPropagation()
     setValue(ID, "langListShow", !getValue(ID, "langListShow"))
 }
 
-const LanguagesList = function () {
-    const languages = getVariable("languages");
+const LanguagesList = function (languages) {
     const dataUrl = getVariable("dataUrl");
     const listLang = Object.keys(languages).map(function (key) {
         return (
@@ -29,10 +32,10 @@ const LanguagesList = function () {
 
 }
 
-const forExport = function ({ lang }) {
+const forExport = function () {
     const langListShow = getValue(ID, "langListShow")
     const languages = getVariable("languages");
-    const dataUrl = getVariable("dataUrl");
+    const lang = languages[getStorage("lang")]
     return (
         <div style={styles.test} class="header-container">
             <div class="header_inner">
@@ -49,7 +52,7 @@ const forExport = function ({ lang }) {
                         <div class="change_language_title">
                             <h4>{lang.h.modal_listLanguage}</h4>
                         </div>
-                        {LanguagesList()}
+                        {LanguagesList(languages)}
                     </div>
                     <a class="log-in link" data-action="loginModal">{lang.button.login}</a>
                     <button type="button" class="button-container sign-up btn" id="registration" data-action="registrationModal">
@@ -59,7 +62,7 @@ const forExport = function ({ lang }) {
                     </button>
                 </div>
                 <div class="header_list">
-                    <a href="/" onclick={siteLink}> <img class="logo" src={logo} /></a>
+                    <a href="/" onclick={siteLink}> <img class="logo" src={svg.logo} /></a>
                     <a class="link" href="/contacts/" onclick={siteLink}>{lang.a.contacts}</a>
                     <a class="link" href="/about/" onclick={siteLink}>{lang.a.about}</a>
                     <a class="link" href="/blog/" onclick={siteLink}>{lang.a.blog}</a>
@@ -70,15 +73,3 @@ const forExport = function ({ lang }) {
 }
 
 export default forExport
-
-
-const styles = {
-    header: {
-        background: 'red',
-        whidth: '100%',
-        height: '30px'
-    },
-    test: {
-
-    }
-}

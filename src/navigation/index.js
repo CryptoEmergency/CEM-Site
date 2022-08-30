@@ -1355,20 +1355,12 @@ const mainBlock = function () {
 
 }
 
-const forExport = function (dataUrl) {
-    console.log(dataUrl);
-    mainHeader(dataUrl);
-    mainBlock();
-    cemJS.makeDOM(mainBlock(), ID)
-}
 
 
 
 
 const ID = "mainBlock"
-setVariable({ header: true });
-setVariable({ footer: true });
-
+console.log("index",ID)
 const befor = async function (dataUrl) {
     mainHeader(dataUrl);
     
@@ -1386,11 +1378,13 @@ const after = function (dataUrl) {
     mainFooter(dataUrl);
  }
 
-setAction(ID, "befor", befor)
-setAction(ID, "start", start)
-setAction(ID, "after", after)
+// setAction(ID, "befor", befor)
+// setAction(ID, "start", start)
+// setAction(ID, "after", after)
 
 const init = async function (dataUrl) {
+    setValue("mainHeader", "show", true);
+    setValue("mainFooter", "show", true);
     await befor(dataUrl)
     await start(dataUrl)
     await after(dataUrl)

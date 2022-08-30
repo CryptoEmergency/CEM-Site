@@ -1,4 +1,21 @@
-import { setValue,sendApi } from '@betarost/cemjs'
+import { setValue,getAction, sendApi, delDOM, timersClear,parsingUrl } from '@betarost/cemjs'
+import list from '@src/routerList.js'
+
+const start = function (dataUrl) {
+    if (!dataUrl) { dataUrl = parsingUrl() }
+    if (!dataUrl.adress || dataUrl.adress == "") {
+        list.index(dataUrl);
+        return;
+    }
+
+    if (!list[dataUrl.adress]) {
+        //404
+        return;
+    }
+
+    list[dataUrl.adress](dataUrl);
+    return;
+}
 
 const clickCancel = function (e) {
     e.stopPropagation()
@@ -9,16 +26,32 @@ const clickHide = function (e) {
 }
 
 const timerTik = function () {
-    //console.log("timerTik", "tt")
+    console.log("timerTik", "tt")
 }
 
 const timerCourse = async function () {
     var course = await sendApi.getCourse()
-    setValue("mainBlock","mainCourse",course.result.list_records[0]);
+    setValue("mainBlock", "mainCourse", course.result.list_records[0]);
 }
 
-const init = function () {
-
+const siteLink = function (e) {
+    e.preventDefault()
+    let link = this.href
+    history.pushState(null, null, link)
+    timersClear();
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+    getAction("App", "start")()
 }
 
-export { init, timerTik, timerCourse,clickHide,clickCancel }
+const changeLang = function (e) {
+    e.preventDefault()
+    let link = this.href
+    history.pushState(null, null, link)
+    timersClear();
+    getAction("App", "start")()
+}
+
+export { siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel,start }

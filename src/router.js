@@ -1,67 +1,35 @@
-import { getVariable, setVariable, parsingUrl, delDOM,timersClear,timersStart } from '@betarost/cemjs'
-import list from '@src/routerList.js'
+import {
+    getVariable,
+    setVariable,
+    setValue,
+    setAction,
+    timersStart,
+    parsingUrl,
+} from '@betarost/cemjs'
+import { init as mainHeader } from "@navigation/header/index.js";
+import { init as mainFooter } from '@navigation/footer/index.js';
+import { timerTik,start } from '@src/functions.js'
 import swiperload from "@assets/js/swiper.js"
-import {timerTik} from '@src/functions.js'
 
-const siteLink = function (e) {
-    e.preventDefault()
-    let link = this.href
-    history.pushState(null, null, link) 
-    timersClear();   
-    delDOM("mainBlock");  
-    //delDOM("mainHeader");   
-    document.getElementById("mainBlock").innerHTML = '';
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-    init()
-}
+setValue("mainHeader", "show", false);
+setValue("mainFooter", "show", false);
+setAction("mainFooter", "start", mainFooter)
+setAction("mainHeader", "start", mainHeader)
+setAction("mainBlock", "start", start)
 
-const changeLang = function (e) {
-    e.preventDefault()
-    let link = this.href
-    history.pushState(null, null, link)
-    timersClear();
-    init()
-}
-
-const befor = function (dataUrl) {
-    timersStart("TikTok",timerTik,1500)
-}
-
-const start = function (dataUrl) {
-    if (!dataUrl) { dataUrl = parsingUrl() }
-    if (!dataUrl.adress || dataUrl.adress == "") {
-        list.index(dataUrl);
-        return;
-    }
-
-    if (!list[dataUrl.adress]) {
-        //404
-        return;
-    }
-
-    list[dataUrl.adress](dataUrl);
-    return;
-}
-
-const after = function (dataUrl) {
+const init = async function () {
+    const dataUrl = parsingUrl()
+    timersStart("TikTok", timerTik, 1500)
+    mainHeader()
+    start(dataUrl)
+    mainFooter()
     if (!getVariable("load")) {
         setVariable({ load: true });
         setTimeout(() => {
             document.getElementById("page_loader").remove();
-        }, 200);
-
+        }, 1000);
     }
     swiperload();
 }
 
-const init = function () {
-    const dataUrl = parsingUrl()
-    befor(dataUrl);
-    start(dataUrl)
-    after(dataUrl)
-}
-
-export { init, siteLink,changeLang }
+export { init }

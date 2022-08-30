@@ -4,7 +4,7 @@ const req = import.meta.webpackContext('.', {
 });
 
 const forExport = req.keys().reduce((acc, next) => {
-    acc[next.replace("./", "")] = req(next)
+    acc[next.replace("./", "").split(".")[0]] = req(next)
     return acc
 }, {});
 

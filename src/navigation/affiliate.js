@@ -249,8 +249,8 @@ const affiliateView = function () {
 };
 
 const befor = function (dataUrl) {
-  mainHeader(dataUrl);
-  mainFooter(dataUrl);
+  // mainHeader(dataUrl);
+  // mainFooter(dataUrl);
 };
 
 const start = function (dataUrl) {

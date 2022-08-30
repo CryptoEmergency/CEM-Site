@@ -1,11 +1,5 @@
 import { setAction } from '@betarost/cemjs'
 import { init as startMake } from '@src/router.js'
-const ID = "App";
-const start = async function () {
-    startMake()
-}
-setAction(ID, "start", start)
-const init = function () {
-    start()
-}
+setAction("App", "start", startMake)
+const init = function () { startMake() }
 export { init }

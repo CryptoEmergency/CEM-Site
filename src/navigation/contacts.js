@@ -6,6 +6,7 @@ import {
   setAction,
   makeDOM,
   getStorage,
+  setValue,
 } from "@betarost/cemjs";
 import { init as mainHeader } from "@navigation/header/index.js";
 import {init as mainFooter} from '@navigation/footer/index.js';
@@ -13,8 +14,7 @@ import svg from "@assets/svg/index.js";
 
 
 const ID = "mainBlock";
-setVariable({ header: true });
-setVariable({ footer: true });
+
 
 const contactsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
@@ -85,8 +85,8 @@ const contactsView = function () {
 };
 
 const befor = function (dataUrl) {
-  mainHeader(dataUrl);
-  mainFooter(dataUrl);
+  // mainHeader(dataUrl);
+  // mainFooter(dataUrl);
 };
 
 const start = function (dataUrl) {
@@ -96,11 +96,13 @@ const start = function (dataUrl) {
 
 const after = function (dataUrl) {};
 
-setAction(ID, "befor", befor);
-setAction(ID, "start", start);
-setAction(ID, "after", after);
+// setAction(ID, "befor", befor);
+// setAction(ID, "start", start);
+// setAction(ID, "after", after);
 
 const init = function (dataUrl) {
+  setValue("mainHeader", "show", true);
+  setValue("mainFooter", "show", true);
   befor(dataUrl);
   start(dataUrl);
   after(dataUrl);

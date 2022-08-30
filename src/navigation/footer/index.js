@@ -1,4 +1,4 @@
-import {jsx,jsxFrag,setAction,setValue,makeDOM,getVariable,getStorage} from '@betarost/cemjs'
+import {jsx,jsxFrag,setAction,setValue,makeDOM,getVariable,getStorage,getValue} from '@betarost/cemjs'
 import appstore from '@assets/image/appstore.svg'
 import googleplay from '@assets/image/googleplay.svg'
 import telegram from '@assets/icon/telegram-icon.svg'
@@ -7,7 +7,7 @@ import twitter from '@assets/icon/twitter-icon.svg'
 import discord from '@assets/icon/discord-icon.svg'
 import github from '@assets/icon/github-icon2.svg'
 import tiktok from '@assets/icon/tiktok-icon.svg'
-import {siteLink} from '@src/router.js'
+import { clickCancel,siteLink, changeLang } from '@src/functions.js'
 
 const mainFooter = function(){  
     const lang = getVariable("languages")[getStorage("lang")]
@@ -137,9 +137,9 @@ const start = function(){
 }
 const after = function(){}
 
-setAction(ID,"befor",befor)
-setAction(ID,"start",start)
-setAction(ID,"after",after)
+// setAction(ID,"befor",befor)
+// setAction(ID,"start",start)
+// setAction(ID,"after",after)
 
 const init = function(){
     befor()
