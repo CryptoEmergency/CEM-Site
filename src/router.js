@@ -2,14 +2,19 @@ import { getVariable, setVariable, parsingUrl, delDOM } from '@betarost/cemjs'
 import list from '@src/routerList.js'
 import swiperload from "@assets/js/swiper.js"
 
-const siteLink = function (e,noClear) {
+const siteLink = function (e) {
+    e.preventDefault()
+    let link = this.href
+    history.pushState(null, null, link)    
+    delDOM("mainBlock");
+    document.getElementById("mainBlock").innerHTML = '';
+    init()
+}
+
+const changeLang = function (e) {
     e.preventDefault()
     let link = this.href
     history.pushState(null, null, link)
-    if(noClear){
-    delDOM("mainBlock");
-    document.getElementById("mainBlock").innerHTML = '';
-    }
     init()
 }
 
@@ -46,4 +51,4 @@ const init = function () {
     after(dataUrl)
 }
 
-export { init, siteLink }
+export { init, siteLink,changeLang }
