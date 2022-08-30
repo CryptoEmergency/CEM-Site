@@ -1,12 +1,12 @@
-import index from '@navigation/index.js'
-import contacts from '@navigation/contacts.js'
-import about from '@navigation/about.js'
-import affiliate from '@navigation/affiliate.js'
+const req = import.meta.webpackContext('./navigation', {
+    recursive: true,
+    regExp: /\.js$/,
+    exclude: /(header|footer)/
+});
 
-const forExport = {}
-forExport.index = index
-forExport.contacts = contacts
-forExport.about = about
-forExport.affiliate = affiliate
+const forExport = req.keys().reduce((acc, next) => {
+    acc[next.replace("./", "").split(".js")[0]] = req(next).default
+    return acc
+}, {});
 
 export default forExport
