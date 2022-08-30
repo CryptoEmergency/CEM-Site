@@ -60,7 +60,7 @@ const forExport = function ({ lang }) {
                     <a href="/" onclick={siteLink}> <img class="logo" src={logo} /></a>
                     <a class="link" href="/contacts/" onclick={siteLink}>{lang.a.contacts}</a>
                     <a class="link" href="/about/" onclick={siteLink}>{lang.a.about}</a>
-                    <a class="link" href="/blog/" onclick={siteLink}>{lang.a.blog}5</a>
+                    <a class="link" href="/blog/" onclick={siteLink}>{lang.a.blog}=test=</a>
                 </div>
             </div>
         </div>

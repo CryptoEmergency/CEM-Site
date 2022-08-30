@@ -1,6 +1,6 @@
-import {jsx,jsxFrag,getVariable,getStorage,setAction,setVariable, makeDOM} from '@betarost/cemjs'
-import {init as mainHeader} from '@navigation/header/index.js'
-import {init as mainFooter} from '@navigation/footer/index.js'
+import { jsx, jsxFrag, getVariable, getStorage, setAction, setVariable, makeDOM } from '@betarost/cemjs'
+import { init as mainHeader } from '@navigation/header/index.js'
+import { init as mainFooter } from '@navigation/footer/index.js'
 import lines from '@assets/image/background/lines-preview-min.png'
 import cem from '@assets/image/background/cem.png'
 import bitcoin_icon from '@assets/icon/Bitcoin.svg'
@@ -51,178 +51,178 @@ import tech_week_partner from '@assets/image/partners/tech_week.png'
 
 
 
-const mainBlock = function(){  
-  const lang = getVariable("languages")[getStorage("lang")]
-  return(
-    <div>
-        <div class="preview">
-            <img class="lines" src={lines}/>
-            <div class="title-preview">
-                <img class="cem-img" src={cem}/>
+const mainBlock = function () {
+    const lang = getVariable("languages")[getStorage("lang")]
+    return (
+        <div>
+            <div class="preview">
+                <img class="lines" src={lines} />
+                <div class="title-preview">
+                    <img class="cem-img" src={cem} />
                     <div class="title-text-preview">
-                        {lang.homePreview.platformFuture}<br/>
+                        {lang.homePreview.platformFuture}<br />
                         {lang.homePreview.unitePeople}
                     </div>
-            </div>
-            <div class="main_site_parts">
-                <a href="/lenta-users/" class="main_site_part" data-action="link"> 
-                    <span>{lang.span.userNews}</span>
-                </a>
-                <a href="/chats/" class="main_site_part" data-action="link" data-updating="true"> 
-                    <span>{lang.span.chats}</span>
-                </a>
-                <a href="/question/" class="main_site_part" data-action="link"> 
-                    <span>{lang.span.QA}</span>
-                </a>
-                <a href="/news/" class="main_site_part" data-action="link">
-                    <span>{lang.span.news}</span>
-                </a>
-            </div>
-            <div class="items-currencies swiper">
-                <div class="swiper-wrapper" data-reload="true" data-interval="10" data-action="GetCursUpdate">
+                </div>
+                <div class="main_site_parts">
+                    <a href="/lenta-users/" class="main_site_part" data-action="link">
+                        <span>{lang.span.userNews}</span>
+                    </a>
+                    <a href="/chats/" class="main_site_part" data-action="link" data-updating="true">
+                        <span>{lang.span.chats}</span>
+                    </a>
+                    <a href="/question/" class="main_site_part" data-action="link">
+                        <span>{lang.span.QA}</span>
+                    </a>
+                    <a href="/news/" class="main_site_part" data-action="link">
+                        <span>{lang.span.news}</span>
+                    </a>
+                </div>
+                <div class="items-currencies swiper">
+                    <div class="swiper-wrapper" data-reload="true" data-interval="10" data-action="GetCursUpdate">
+                        <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
+                            <div class="icon-currency">
+                                <div class="icon-color-btc">
+                                    <img src={bitcoin_icon} />
+                                </div>
+                            </div>
+                            <div class="info-currency ">
+                                <div class="info_left-currency">
+                                    <div class="name-currency">BTC/USDT</div>
+                                    <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
+                                </div>
+                                <div class="info_rigth-currency">
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="btcusdt_change">-0.48</span></div>
+                                    <div class="last-update">1h.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
+                            <div class="icon-currency">
+                                <div class="icon-color-bnb">
+                                    <img src={bnb_icon} />
+                                </div>
+                            </div>
+                            <div class="info-currency ">
+                                <div class="info_left-currency">
+                                    <div class="name-currency">BNB/USDT</div>
+                                    <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
+                                </div>
+                                <div class="info_rigth-currency">
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="bnbusdt_change">-0.03</span></div>
+                                    <div class="last-update">1h.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
+                            <div class="icon-currency">
+                                <div class="icon-color-eth">
+                                    <img src={eth_icon} />
+                                </div>
+                            </div>
+                            <div class="info-currency ">
+                                <div class="info_left-currency">
+                                    <div class="name-currency">ETH/USDT</div>
+                                    <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
+                                </div>
+                                <div class="info_rigth-currency">
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="ethusdt_change">-0.24</span></div>
+                                    <div class="last-update">1h.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="/buy-cem/" data-action="link" data-updating="true" class="item-currency swiper-slide">
+                            <div class="icon-currency">
+                                <div class="icon-color-cem">
+                                    <img src={cem_icon} />
+                                </div>
+                            </div>
+                            <div class="info-currency ">
+                                <div class="info_left-currency">
+                                    <div class="name-currency">CEM/USDT</div>
+                                    <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
+                                </div>
+                                <div class="info_rigth-currency">
+                                    <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="cemusdt_change">0.00</span></div>
+                                    <div class="last-update">24h.</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-pagination" id="swiper-pagination-currencies"></div>
+                </div>
+                <div class="static-crypto">
                     <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                         <div class="icon-currency">
-                        <div class="icon-color-btc">
-                            <img src={bitcoin_icon}/>
-                        </div>
+                            <div class="icon-color-btc">
+                                <img src={bitcoin_icon} />
+                            </div>
                         </div>
                         <div class="info-currency ">
-                        <div class="info_left-currency">
-                            <div class="name-currency">BTC/USDT</div>
-                            <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
+                            <div class="info_left-currency">
+                                <div class="name-currency">BTC/USDT</div>
+                                <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
+                            </div>
+                            <div class="info_rigth-currency">
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="btcusdt_change">-0.48 </span></div>
+                                <div class="last-update">1h.</div>
+                            </div>
                         </div>
-                        <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="btcusdt_change">-0.48</span></div>
-                            <div class="last-update">1h.</div>
-                        </div>
-                        </div>
-                    </a>     
+                    </a>
                     <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                         <div class="icon-currency">
-                        <div class="icon-color-bnb">
-                            <img src={bnb_icon}/>
-                        </div>
+                            <div class="icon-color-bnb">
+                                <img src={bnb_icon} />
+                            </div>
                         </div>
                         <div class="info-currency ">
-                        <div class="info_left-currency">
-                            <div class="name-currency">BNB/USDT</div>
-                            <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
+                            <div class="info_left-currency">
+                                <div class="name-currency">BNB/USDT</div>
+                                <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
+                            </div>
+                            <div class="info_rigth-currency">
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="bnbusdt_change">-0.03</span></div>
+                                <div class="last-update">1h.</div>
+                            </div>
                         </div>
-                        <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="bnbusdt_change">-0.03</span></div>
-                            <div class="last-update">1h.</div>
-                        </div>
-                        </div>
-                    </a>                         
+                    </a>
                     <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
                         <div class="icon-currency">
-                        <div class="icon-color-eth">
-                            <img src={eth_icon}/>
-                        </div>
+                            <div class="icon-color-eth">
+                                <img src={eth_icon} />
+                            </div>
                         </div>
                         <div class="info-currency ">
-                        <div class="info_left-currency">
-                            <div class="name-currency">ETH/USDT</div>
-                            <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
+                            <div class="info_left-currency">
+                                <div class="name-currency">ETH/USDT</div>
+                                <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
+                            </div>
+                            <div class="info_rigth-currency">
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="ethusdt_change">-0.24</span></div>
+                                <div class="last-update">1h.</div>
+                            </div>
                         </div>
-                        <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="ethusdt_change">-0.24</span></div>
-                            <div class="last-update">1h.</div>
-                        </div>
-                        </div>
-                    </a>                        
+                    </a>
                     <a href="/buy-cem/" data-action="link" data-updating="true" class="item-currency swiper-slide">
                         <div class="icon-currency">
-                        <div class="icon-color-cem">
-                            <img src={cem_icon}/>
-                        </div>
+                            <div class="icon-color-cem">
+                                <img src={cem_icon} />
+                            </div>
                         </div>
                         <div class="info-currency ">
-                        <div class="info_left-currency">
-                            <div class="name-currency">CEM/USDT</div>
-                            <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
+                            <div class="info_left-currency">
+                                <div class="name-currency">CEM/USDT</div>
+                                <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
+                            </div>
+                            <div class="info_rigth-currency">
+                                <div class="percent-currency percent-currency_green"><img src={up_arrow} /><span class="cemusdt_change">0.00</span></div>
+                                <div class="last-update">24h.</div>
+                            </div>
                         </div>
-                        <div class="info_rigth-currency">
-                            <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="cemusdt_change">0.00</span></div>
-                            <div class="last-update">24h.</div>
-                        </div>
-                        </div>
-                    </a>    
+                    </a>
                 </div>
-                <div class="swiper-pagination" id="swiper-pagination-currencies"></div>
-            </div>  
-            <div class="static-crypto">
-                <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
-                    <div class="icon-currency">
-                    <div class="icon-color-btc">
-                        <img src={bitcoin_icon}/>
-                    </div>
-                    </div>
-                    <div class="info-currency ">
-                    <div class="info_left-currency">
-                        <div class="name-currency">BTC/USDT</div>
-                        <div class="price-currency"><span class="btcusdt_price">30 127.22</span></div>
-                    </div>
-                    <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="btcusdt_change">-0.48 </span></div>
-                        <div class="last-update">1h.</div>
-                    </div>
-                    </div>
-                </a>     
-                <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
-                    <div class="icon-currency">
-                    <div class="icon-color-bnb">
-                        <img src={bnb_icon}/>
-                    </div>
-                    </div>
-                    <div class="info-currency ">
-                    <div class="info_left-currency">
-                        <div class="name-currency">BNB/USDT</div>
-                        <div class="price-currency"><span class="bnbusdt_price">290.20</span></div>
-                    </div>
-                    <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="bnbusdt_change">-0.03</span></div>
-                            <div class="last-update">1h.</div>
-                    </div>
-                    </div>
-                </a>                         
-                <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
-                    <div class="icon-currency">
-                    <div class="icon-color-eth">
-                        <img src={eth_icon}/>
-                    </div>
-                    </div>
-                    <div class="info-currency ">
-                    <div class="info_left-currency">
-                        <div class="name-currency">ETH/USDT</div>
-                        <div class="price-currency"><span class="ethusdt_price">1 797.16</span></div>
-                    </div>
-                    <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="ethusdt_change">-0.24</span></div>
-                            <div class="last-update">1h.</div>
-                    </div>
-                    </div>
-                </a>                        
-                <a href="/buy-cem/" data-action="link" data-updating="true" class="item-currency swiper-slide">
-                    <div class="icon-currency">
-                    <div class="icon-color-cem">
-                        <img src={cem_icon}/>
-                    </div>
-                    </div>
-                    <div class="info-currency ">
-                    <div class="info_left-currency">
-                        <div class="name-currency">CEM/USDT</div>
-                        <div class="price-currency"><span class="cemusdt_price">0.1826</span></div>
-                    </div>
-                    <div class="info_rigth-currency">
-                        <div class="percent-currency percent-currency_green"><img src={up_arrow}/><span class="cemusdt_change">0.00</span></div>
-                        <div class="last-update">24h.</div>
-                    </div>
-                    </div>
-                </a>    
-            </div>  
-        </div>
-        {/* <div class="index-content">
+            </div>
+            {/* <div class="index-content">
             <div class="swiper-container">
                 <div class="swiper swiper-icons" id="swiper-desktop">
                     <div class="swiper-wrapper">
@@ -1300,7 +1300,7 @@ const mainBlock = function(){
                                 <a class="btn-news-preview" href="{{lang.url}}news/" data-action="link">
                                     <span>
                                     {lang.button.allNews}
-                                    </span>
+                                            </span>
                                 </a>
                             </div>
                         </div>
@@ -1349,38 +1349,38 @@ const mainBlock = function(){
             </div>
         </div> */}
         </div>
-  )
+    )
 
 }
 
-const forExport = function(dataUrl){
+const forExport = function (dataUrl) {
     console.log(dataUrl);
     mainHeader(dataUrl);
     mainBlock();
-    cemJS.makeDOM(mainBlock(),ID)
+    cemJS.makeDOM(mainBlock(), ID)
 }
 
 
 
 
 const ID = "mainBlock"
-setVariable({header:true});
-setVariable({footer:true});
+setVariable({ header: true });
+setVariable({ footer: true });
 
-const befor = function(dataUrl){
-   mainHeader(dataUrl);
-   mainFooter(dataUrl);
+const befor = function (dataUrl) {
+    mainHeader(dataUrl);
+    mainFooter(dataUrl);
 }
-const start = function(dataUrl){
-makeDOM(mainBlock(),ID)
+const start = function (dataUrl) {
+    makeDOM(mainBlock(), ID)
 }
-const after = function(dataUrl){}
+const after = function (dataUrl) { }
 
-setAction(ID,"befor",befor)
-setAction(ID,"start",start)
-setAction(ID,"after",after)
+setAction(ID, "befor", befor)
+setAction(ID, "start", start)
+setAction(ID, "after", after)
 
-const init = function(dataUrl){
+const init = function (dataUrl) {
     befor(dataUrl)
     start(dataUrl)
     after(dataUrl)
