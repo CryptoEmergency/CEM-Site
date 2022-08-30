@@ -8,5 +8,4 @@ const forExport = req.keys().reduce((acc, next) => {
     return acc
 }, {});
 
-console.log(req.keys());
 export default forExport
