@@ -66,7 +66,7 @@ const mainView = function () {
     const lang = getVariable("languages")[getStorage("lang")]
     const course = getValue(ID, "mainCourse");
     const show = getValue("mainHeader", "show");
-    
+
     return (
         <div class={show && "c-main__body" || "c-main__body--noheader"}>
             <div class="preview">
@@ -1375,13 +1375,15 @@ const mainView = function () {
 const ID = "mainBlock"
 
 const init = async function (reload) {
+    if (!reload) {
+        if (!getValue(ID, "mainCourse")) {
+            const course = await sendApi.getCourse()
+            setValue(ID, "mainCourse", course.result.list_records[0])
+        }
+    }
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
-    if (!getValue(ID, "mainCourse")) {
-        const course = await sendApi.getCourse()
-        //console.log(checkAnswerApi(course));
-        setValue(ID, "mainCourse", course.result.list_records[0])
-    }
+
     timersStart("Course", timerCourse, 10000)
     makeDOM(mainView(), ID);
 }
