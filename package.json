@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@betarost/cem": "^1.0.0",
-    "@betarost/cemjs": "^1.0.17",
+    "@betarost/cemjs": "^1.0.23",
     "path": "^0.12.7",
     "validator": "^13.7.0"
   }

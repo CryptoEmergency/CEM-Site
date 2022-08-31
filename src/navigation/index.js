@@ -12,52 +12,52 @@ import {
 import { timerCourse, checkAnswerApi } from '@src/functions.js'
 import { init as mainHeader } from '@navigation/header/index.js'
 import { init as mainFooter } from '@navigation/footer/index.js'
-import lines from '@assets/image/background/lines-preview-min.png'
-import cem from '@assets/image/background/cem.png'
-import bitcoin_icon from '@assets/icon/Bitcoin.svg'
-import bnb_icon from '@assets/icon/bnb.svg'
-import eth_icon from '@assets/icon/eth.svg'
-import cem_icon from '@assets/icon/cem.jpg'
-import up_arrow from '@assets/icon/up_arrow.svg'
-import shuffle from '@assets/icon/shuffle 1.svg'
-import mortarboard from '@assets/icon/mortarboard 1.svg'
-import graph from '@assets/icon/graph 1.svg'
-import startup from '@assets/icon/startup 1.svg'
-import meta_universes from '@assets/icon/meta_universes.svg'
-import star from '@assets/icon/star 1.svg'
-import stock from '@assets/icon/stock-market 1.svg'
-import world from '@assets/icon/world-news 1.svg'
-import user from '@assets/icon/user 1.svg'
-import nft_icon from '@assets/icon/nft_icon.svg'
-import careers_icon from '@assets/icon/careers_icon.svg'
-import swiper_arrow_left from '@assets/icon/swiper_arrow_left.svg'
-import swiper_arrow_right from '@assets/icon/swiper_arrow_right.svg'
-import search_icon from '@assets/icon/search_icon.svg'
-import filter from '@assets/icon/filter.svg'
+import lines from '@assets/images/background/lines-preview-min.png'
+import cem from '@assets/images/background/cem.png'
+import bitcoin_icon from '@assets/svg/Bitcoin.svg'
+import bnb_icon from '@assets/svg/bnb.svg'
+import eth_icon from '@assets/svg/eth.svg'
+import cem_icon from '@assets/images/cem.jpg'
+import up_arrow from '@assets/svg/up_arrow.svg'
+import shuffle from '@assets/svg/shuffle 1.svg'
+import mortarboard from '@assets/svg/mortarboard 1.svg'
+import graph from '@assets/svg/graph 1.svg'
+import startup from '@assets/svg/startup 1.svg'
+import meta_universes from '@assets/svg/meta_universes.svg'
+import star from '@assets/svg/star 1.svg'
+import stock from '@assets/svg/stock-market 1.svg'
+import world from '@assets/svg/world-news 1.svg'
+import user from '@assets/svg/user 1.svg'
+import nft_icon from '@assets/svg/nft_icon.svg'
+import careers_icon from '@assets/svg/careers_icon.svg'
+import swiper_arrow_left from '@assets/svg/swiper_arrow_left.svg'
+import swiper_arrow_right from '@assets/svg/swiper_arrow_right.svg'
+import search_icon from '@assets/svg/search_icon.svg'
+import filter from '@assets/svg/filter.svg'
 import frame_default from '@assets/profile/frame/default.svg'
-import question_audio from '@assets/icon/question_audio.svg'
-import question_video from '@assets/icon/question_video.svg'
-import question_photo from '@assets/icon/question_photo.svg'
+import question_audio from '@assets/svg/question_audio.svg'
+import question_video from '@assets/svg/question_video.svg'
+import question_photo from '@assets/svg/question_photo.svg'
 import levelGray from '@assets/profile/levelGray.svg'
-import question_answers from '@assets/icon/question_answers.svg'
-import question_views from '@assets/icon/question_views.svg'
-import question_time from '@assets/icon/question_time.svg'
-import lbf_banner from '@assets/image/banners/lbf_banner.jpg'
-import blockchain24 from '@assets/image/banners/blockchain24.png'
-import crypto_summit from '@assets/image/banners/crypto_summit.jpg'
-import plus_forum from '@assets/image/banners/1200х580-(fb).png'
-import blockchain_life from '@assets/image/banners/blockchain_life.jpg'
-import crypto_future_banner from '@assets/image/banners/crypto_future_banner.png'
-import sber_unity_partner from '@assets/image/partners/sber_unity.png'
-import skolkovo_partner from '@assets/image/partners/skolkovo.png'
-import crypto_summit_partner from '@assets/image/partners/crypto_summit.png'
-import plus_forum_partner from '@assets/image/partners/plus_forum.png'
-import blockchain_life_partner from '@assets/image/partners/blockchain_life.png'
-import b4_week_partner from '@assets/image/partners/b4_week.png'
-import be_in_crypto_partner from '@assets/image/partners/be_in_crypto.png'
-import crypto_mining_partner from '@assets/image/partners/crypto_mining.png'
-import cryptomania_partner from '@assets/image/partners/cryptomania.png'
-import tech_week_partner from '@assets/image/partners/tech_week.png'
+import question_answers from '@assets/svg/question_answers.svg'
+import question_views from '@assets/svg/question_views.svg'
+import question_time from '@assets/svg/question_time.svg'
+import lbf_banner from '@assets/images/banners/lbf_banner.jpg'
+import blockchain24 from '@assets/images/banners/blockchain24.png'
+import crypto_summit from '@assets/images/banners/crypto_summit.jpg'
+import plus_forum from '@assets/images/banners/1200х580-(fb).png'
+import blockchain_life from '@assets/images/banners/blockchain_life.jpg'
+import crypto_future_banner from '@assets/images/banners/crypto_future_banner.png'
+import sber_unity_partner from '@assets/images/partners/sber_unity.png'
+import skolkovo_partner from '@assets/images/partners/skolkovo.png'
+import crypto_summit_partner from '@assets/images/partners/crypto_summit.png'
+import plus_forum_partner from '@assets/images/partners/plus_forum.png'
+import blockchain_life_partner from '@assets/images/partners/blockchain_life.png'
+import b4_week_partner from '@assets/images/partners/b4_week.png'
+import be_in_crypto_partner from '@assets/images/partners/be_in_crypto.png'
+import crypto_mining_partner from '@assets/images/partners/crypto_mining.png'
+import cryptomania_partner from '@assets/images/partners/cryptomania.png'
+import tech_week_partner from '@assets/images/partners/tech_week.png'
 
 
 
@@ -516,7 +516,7 @@ const mainView = function () {
                                 <option value="views">{lang.select.byViews}</option>
                                 <option value="answers">{lang.select.byAnswers}</option>
                             </select>
-                            <img data-sort="DESC" class="filter_sort_toggler" data-action="toggleFilterSort" src="/assets/icon/filter_arrow_bottom.svg"/>
+                            <img data-sort="DESC" class="filter_sort_toggler" data-action="toggleFilterSort" src="/assets/svg/filter_arrow_bottom.svg"/>
                         </div>
                         <div data-language="{{lang.lang}}" data-language_code="{{lang.code}}" class="questions_filter_language" data-action="questionsFilterLanguage">
                             {lang.lang}
@@ -771,7 +771,7 @@ const mainView = function () {
                                     <div>
                                         <span class="crypto_exchanges_percent_green load" style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
-                                                <img src="/assets/icon/exange_money.svg"/>
+                                                <img src="/assets/svg/exange_money.svg"/>
                                             </span> 
                                             1
                                         </span>
@@ -781,7 +781,7 @@ const mainView = function () {
                                     <div>
                                         <span class="crypto_exchanges_percent_green load" style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
-                                                <img src="/assets/icon/exange_visitors.svg"/>
+                                                <img src="/assets/svg/exange_visitors.svg"/>
                                             </span> 
                                             1
                                         </span>
@@ -820,7 +820,7 @@ const mainView = function () {
                                     <div>
                                         <span class="crypto_exchanges_percent_green load" style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
-                                                <img src="/assets/icon/exange_money.svg"/>
+                                                <img src="/assets/svg/exange_money.svg"/>
                                             </span> 
                                             1
                                         </span>
@@ -830,7 +830,7 @@ const mainView = function () {
                                     <div>
                                         <span class="crypto_exchanges_percent_green load" style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
-                                                <img src="/assets/icon/exange_visitors.svg"/>
+                                                <img src="/assets/svg/exange_visitors.svg"/>
                                             </span> 
                                             1
                                         </span>
@@ -869,7 +869,7 @@ const mainView = function () {
                                     <div>
                                         <span class="crypto_exchanges_percent_green load" style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
-                                                <img src="/assets/icon/exange_money.svg"/>
+                                                <img src="/assets/svg/exange_money.svg"/>
                                             </span> 
                                             1
                                         </span>
@@ -879,7 +879,7 @@ const mainView = function () {
                                     <div>
                                         <span class="crypto_exchanges_percent_green load" style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
-                                                <img src="/assets/icon/exange_visitors.svg"/>
+                                                <img src="/assets/svg/exange_visitors.svg"/>
                                             </span> 
                                             1
                                         </span>
@@ -942,14 +942,14 @@ const mainView = function () {
                                         <div>
                                             <div style="height: auto;" class="load">
                                                 1
-                                                <img class="crypto_exchanges_rate" src="/assets/icon/rate_icon.svg"/>
+                                                <img class="crypto_exchanges_rate" src="/assets/svg/rate_icon.svg"/>
                                             </div>
                                         </div> 
                                     </div> 
                                     <div class="crypto_exchanges-cell">
                                         <div>
                                             <div class="crypto_coin_container load">
-                                                <img  class="crypto_coin_icons" src="/assets/icon/coins/{{ icon }}.svg"/>        
+                                                <img  class="crypto_coin_icons" src="/assets/svg/coins/{{ icon }}.svg"/>        
                                                 <div class="crypto_coin_description">
                                                     1
                                                 </div>  
@@ -985,14 +985,14 @@ const mainView = function () {
                                         <div>
                                             <div style="height: auto;" class="load">
                                                 4
-                                                <img class="crypto_exchanges_rate" src="/assets/icon/rate_icon.svg"/>
+                                                <img class="crypto_exchanges_rate" src="/assets/svg/rate_icon.svg"/>
                                             </div>
                                         </div> 
                                     </div> 
                                     <div class="crypto_exchanges-cell">
                                         <div>
                                             <div class="crypto_coin_container load">
-                                                <img  class="crypto_coin_icons" src="/assets/icon/coins/{{ icon }}.svg"/>        
+                                                <img  class="crypto_coin_icons" src="/assets/svg/coins/{{ icon }}.svg"/>        
                                                 <div class="crypto_coin_description">
                                                     1
                                                 </div>  
@@ -1028,14 +1028,14 @@ const mainView = function () {
                                         <div>
                                             <div style="height: auto;" class="load">
                                                 1
-                                                <img class="crypto_exchanges_rate" src="/assets/icon/rate_icon.svg"/>
+                                                <img class="crypto_exchanges_rate" src="/assets/svg/rate_icon.svg"/>
                                             </div>
                                         </div> 
                                     </div> 
                                     <div class="crypto_exchanges-cell">
                                         <div>
                                             <div class="crypto_coin_container load">
-                                                <img  class="crypto_coin_icons" src="/assets/icon/coins/{{ icon }}.svg"/>        
+                                                <img  class="crypto_coin_icons" src="/assets/svg/coins/{{ icon }}.svg"/>        
                                                 <div class="crypto_coin_description">
                                                     1
                                                 </div>  
@@ -1081,13 +1081,13 @@ const mainView = function () {
                                             <div data-language="all" data-language_code="all" class="friends_filter_language" data-action="friendsLanguageFilter" data-name="{{lang.text.language}}">
                                                 {lang.text.language}
                                             </div>
-                                            <img style="display: none;" class="refresh_language" data-action="refreshLanguage" src="/assets/icon/refresh_filter.svg"/>
+                                            <img style="display: none;" class="refresh_language" data-action="refreshLanguage" src="/assets/svg/refresh_filter.svg"/>
                                         </div>
                                         <div class="filter_block_container">
                                             <div data-country="all" data-country_code="all" class="friends_filter_country" data-action="friendsCountryFilter" data-name="{{lang.text.country}}">
                                                 {lang.text.country}
                                             </div>
-                                            <img style="display: none;" class="refresh_country" data-action="refreshCountry" src="/assets/icon/refresh_filter.svg"/>
+                                            <img style="display: none;" class="refresh_country" data-action="refreshCountry" src="/assets/svg/refresh_filter.svg"/>
                                         </div>   
                                         <div class="friends_filter_checkboxs">
                                             <div class="checkbox" data-action="friendsFilterCheckbox">

@@ -1,9 +1,9 @@
 import {jsx,jsxFrag,getVariable,setValue,getValue, getStorage} from '@betarost/cemjs'
-import logo from '@assets/image/logo.svg'
+import logo from '@assets/svg/logo.svg'
 import { clickCancel,siteLink, changeLang } from '@src/functions.js'
 import svg from '@assets/svg/index.js'
 import images from '@assets/images/index.js'
-import burger_menu from '@assets/icon/burger_menu.svg'
+import burger_menu from '@assets/svg/burger_menu.svg'
 const ID = "mainHeader"
 
 const showListLang = function (e) {
@@ -92,7 +92,7 @@ const forExport = function(){
                         <i class="c-header__burger"></i>
                     </div>
                     <div style="display: none;" class="user_notifications_block auth_notifications" id="notifications_block">
-                        <img data-action="notifyAction" class="notify_close" src="/assets/icon/close.svg"/>
+                        <img data-action="notifyAction" class="notify_close" src="/assets/svg/close.svg"/>
                         <div class="notifications_title">
                             <div class="notifications_titles_line">
                                 Ваши уведомления
@@ -109,7 +109,7 @@ const forExport = function(){
                                 <div class="notifications_list_part part_questions">
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62e7e57bf2a5481eab157ed0">
-                                            <img class="notifications_open_questions" src="/assets/icon/like.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/like.svg"/>
                                             <p>Новый лайк!</p>
                                             <span>Вам поставили лайк. Рейтинг увеличен</span>
                                         </a>
@@ -118,7 +118,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62e7e61df2a5481eab157f71">
-                                            <img class="notifications_open_questions" src="/assets/icon/like.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/like.svg"/>
                                             <p>Новый лайк!</p>
                                             <span>Вам поставили лайк. Рейтинг увеличен</span>
                                         </a>
@@ -127,7 +127,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62ea42ce54e68a2402cb9274">
-                                            <img class="notifications_open_questions" src="/assets/icon/like.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/like.svg"/>
                                             <p>Новый лайк!</p>
                                             <span>Вам поставили лайк. Рейтинг увеличен</span>
                                         </a>
@@ -136,7 +136,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62ea42ce54e68a2402cb9274">
-                                            <img class="notifications_open_questions" src="/assets/icon/like.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/like.svg"/>
                                             <p>Новый лайк!</p>
                                             <span>Вам поставили лайк. Рейтинг увеличен</span>
                                         </a>
@@ -144,7 +144,7 @@ const forExport = function(){
                                         <span>2022-08-04 14:45</span>
                                     </div>
                                     <div class="notifications_list_item">
-                                        <img class="notifications_open_questions" src="/assets/icon/follower_notify.svg"/>
+                                        <img class="notifications_open_questions" src="/assets/svg/follower_notify.svg"/>
                                         <p>Новый подписчик!</p>
                                         <span>На вас подписались</span>
                                         <span class="notifyNickname">Пользователь: <a data-action="link" href="/user/Yan_Krivonosov">Yan_Krivonosov</a></span>
@@ -152,7 +152,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62ea45fa54e68a2402cb9a45">
-                                            <img class="notifications_open_questions" src="/assets/icon/like.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/like.svg"/>
                                             <p>Новый лайк!</p>
                                             <span>Вам поставили лайк. Рейтинг увеличен</span>
                                         </a>
@@ -161,7 +161,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62de8e4812016af6d718b854">
-                                            <img class="notifications_open_questions" src="/assets/icon/comment_notify.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/comment_notify.svg"/>
                                             <p>Новый комментарий!</p>
                                             <span>Получен комментарий на Ваш пост</span>
                                         </a>
@@ -169,7 +169,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62ea45fa54e68a2402cb9a45">
-                                            <img class="notifications_open_questions" src="/assets/icon/like.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/like.svg"/>
                                             <p>Новый лайк!</p>
                                             <span>Вам поставили лайк. Рейтинг увеличен</span>
                                         </a>
@@ -177,7 +177,7 @@ const forExport = function(){
                                         <span>2022-08-04 9:25</span>
                                     </div>
                                     <div class="notifications_list_item">
-                                        <img class="notifications_open_questions" src="/assets/icon/follower_notify.svg"/>
+                                        <img class="notifications_open_questions" src="/assets/svg/follower_notify.svg"/>
                                         <p>Новый подписчик!</p>
                                         <span>На вас подписались</span>
                                         <span class="notifyNickname">Пользователь: <a data-action="link" href="/user/Viktoriya">Viktoriya</a></span>
@@ -185,7 +185,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/lenta-users/show/62cbd265459b45cad0ff4994">
-                                            <img class="notifications_open_questions" src="/assets/icon/comment_notify.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/comment_notify.svg"/>
                                             <p>Новый комментарий!</p>
                                             <span>Получен комментарий на Ваш пост</span>
                                         </a>
@@ -195,7 +195,7 @@ const forExport = function(){
                                 <div class="notifications_list_part part_awards dn">
                                     <a data-action="link" href="/user/awards/">
                                         <div class="notifications_list_item">
-                                            <img class="notifications_open_questions" src="/assets/icon/badge/badge4.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/badge/badge4.svg"/>
                                             <p>Получена награда!</p>
                                             <span>За первого подписчика</span>
                                             <span>2022-06-28 11:23</span>
@@ -205,7 +205,7 @@ const forExport = function(){
                                 <div class="notifications_list_part part_system dn">
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/user/affiliate/">
-                                            <img class="notifications_open_questions" src="/assets/icon/referal_icon.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/referal_icon.svg"/>
                                             <p>Зарегистрирован реферал!</p>
                                             <span>По Вашей партнерской ссылке зарегистрованы новые пользователи:</span>
                                         </a>
@@ -214,7 +214,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/user/affiliate/">
-                                            <img class="notifications_open_questions" src="/assets/icon/referal_icon.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/referal_icon.svg"/>
                                             <p>Зарегистрирован реферал!</p>
                                             <span>По Вашей партнерской ссылке зарегистрованы новые пользователи:</span>
                                         </a>
@@ -223,7 +223,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/user/affiliate/">
-                                            <img class="notifications_open_questions" src="/assets/icon/referal_icon.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/referal_icon.svg"/>
                                             <p>Получен бонус!</p>
                                             <span>Ваш реферал достиг 3 уровня.</span>
                                         </a>
@@ -232,7 +232,7 @@ const forExport = function(){
                                     </div>
                                     <div class="notifications_list_item">
                                         <a data-action="link" href="/user/affiliate/">
-                                            <img class="notifications_open_questions" src="/assets/icon/referal_icon.svg"/>
+                                            <img class="notifications_open_questions" src="/assets/svg/referal_icon.svg"/>
                                             <p>Зарегистрирован реферал!</p>
                                             <span>По Вашей партнерской ссылке зарегистрованы новые пользователи:</span>
                                         </a>

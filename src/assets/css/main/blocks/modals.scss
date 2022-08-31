@@ -72,7 +72,7 @@
 		right: 30px;
 		top: 25px;
 		color: $black_orchid;
-		background: transparent url(../icon/close3.svg) center/1em auto no-repeat;
+		background: transparent url(../svg/close3.svg) center/1em auto no-repeat;
 		z-index: 100;
 
 		img {
@@ -99,7 +99,7 @@
 		right: 30px;
 		top: 25px;
 		color: $black_orchid;
-		background: transparent url(../icon/close_full.svg) center/1.5em auto no-repeat;
+		background: transparent url(../svg/close_full.svg) center/1.5em auto no-repeat;
 		z-index: 100;
 	}
 }
@@ -1917,7 +1917,7 @@
 
 	&::before{
 		content: '';
-		background: url('../icon/choosen.png');
+		background: url('../images/choosen.png');
 		height: 18.1px;
 		width: 25px;
 		z-index: 100;
@@ -2379,7 +2379,7 @@
 
 		&::before{
 			content: ' ';
-			background: url(../icon/reset_password_email.svg);
+			background: url(../svg/reset_password_email.svg);
 			background-repeat: no-repeat;
 			height: 25px;
 			width: 25px;

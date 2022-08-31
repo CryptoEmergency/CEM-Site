@@ -253,7 +253,7 @@ textarea{
         background: white;
         text-align: left;
         outline: none;
-        background-image: url(../icon/select_arrow.svg);
+        background-image: url(../svg/select_arrow.svg);
         background-repeat: no-repeat;
         background-position: bottom calc(50% - 4px) right 25px;
         cursor: pointer;
@@ -405,7 +405,7 @@ textarea{
             width: 24px;
             height: 24px;
           
-            background: url("../icon/check.svg") no-repeat;
+            background: url("../svg/check.svg") no-repeat;
             background-size: 18px 16px;
             opacity: 0;
           
@@ -457,7 +457,7 @@ textarea{
 
 .user_rating {
     display: inline-block;
-    background: url('../icon/rating_heart.svg');
+    background: url('../svg/rating_heart.svg');
     background-size: cover;
     background-repeat: no-repeat;
     width: 33px;

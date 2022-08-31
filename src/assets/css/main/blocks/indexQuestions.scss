@@ -1,7 +1,7 @@
 /* Index questions styles */
 .index-questions {
     padding-top: 20px;
-    background: url(../icon/lines-two.svg) no-repeat;
+    background: url(../svg/lines-two.svg) no-repeat;
     background-position: top -145px left 0px;
 
     @media(max-width: 1199px) {
@@ -165,7 +165,7 @@
 
 .questions_filter_language {
     background-color: $prestige_blue;
-    background-image: url('../icon/select_arrow.svg');
+    background-image: url('../svg/select_arrow.svg');
     background-repeat: no-repeat;
     background-position: bottom calc(50% - 4px) right 15px;
     color: $white;

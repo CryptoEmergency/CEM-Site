@@ -340,7 +340,7 @@
             }
 
             button {
-                background-image: url(../icon/dislike.svg);
+                background-image: url(../svg/dislike.svg);
                 background-size: 100%;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -357,11 +357,11 @@
                 transform: translateY(-50%) translateX(-50%);
 
                 &.minus {
-                    background-image: url(../icon/dislike.svg);
+                    background-image: url(../svg/dislike.svg);
                 }
 
                 &.plus {
-                    background-image: url(../icon/like.svg);
+                    background-image: url(../svg/like.svg);
                 }
             }
 
@@ -759,7 +759,7 @@
 
 .user_post_text_background {
     background-color: #1D2029;
-    background-image: url('../icon/user_background_image.jpg');
+    background-image: url('../images/user_background_image.jpg');
     background-size: contain;
     background-repeat: no-repeat;
     height: 330px;
