@@ -23,9 +23,7 @@ const init = function () {
         makeDOM(<HeaderNotAuth />, ID)
         return;
     }
-    if (!getStorage("auth")) {
-        makeDOM(<HeaderNotAuth />, ID)
-        return;
-    }
+    makeDOM(<HeaderAuth />, ID)
+    return;
 }
 export { init }

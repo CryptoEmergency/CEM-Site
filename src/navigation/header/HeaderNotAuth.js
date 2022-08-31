@@ -3,7 +3,8 @@ import {
     jsxFrag,
     getVariable,
     setValue,
-    getValue
+    getValue,
+    getStorage,
 } from '@betarost/cemjs'
 import svg from "@assets/svg/index.js"
 import { clickCancel, siteLink, changeLang } from '@src/functions.js'
@@ -37,9 +38,9 @@ const forExport = function () {
     const languages = getVariable("languages");
     const lang = languages[getStorage("lang")]
     return (
-        <div style={styles.test} class="header-container">
-            <div class="header_inner">
-                <div class="auth_header_part">
+        <div class="c-header__container c-container">
+            <div class="c-header__inner">
+                <div class="c-header__auth auth_header_part">
                     <div class="language" onclick={showListLang}>
                         <div class="selectlink">
                             <div class="selectlink-control">{lang.lang_orig}</div>
@@ -55,18 +56,18 @@ const forExport = function () {
                         {LanguagesList(languages)}
                     </div>
                     <a class="log-in link" data-action="loginModal">{lang.button.login}</a>
-                    <button type="button" class="button-container sign-up btn" id="registration" data-action="registrationModal">
-                        <a href="#" class="btn-gr">
-                            <span>{lang.button.registration}</span>
-                        </a>
+                    <button class="c-button c-button--gradient" type="button" id="registration" data-action="registrationModal">
+                        <span class="c-button__text">{lang.button.registration}</span>
                     </button>
                 </div>
-                <div class="header_list">
-                    <a href="/" onclick={siteLink}> <img class="logo" src={svg.logo} /></a>
-                    <a class="link" href="/contacts/" onclick={siteLink}>{lang.a.contacts}</a>
-                    <a class="link" href="/about/" onclick={siteLink}>{lang.a.about}</a>
-                    <a class="link" href="/blog/" onclick={siteLink}>{lang.a.blog}</a>
-                </div>
+                <nav class="c-header__menu c-menu">
+                    <a class="c-logo c-menu__link" href="/" onclick={siteLink}>
+                        <img class="c-logo__image" src={svg.logo} />
+                    </a>
+                    <a class="c-menu__link" href="/contacts/" onclick={siteLink}>{lang.a.contacts}</a>
+                    <a class="c-menu__link" href="/about/" onclick={siteLink}>{lang.a.about}</a>
+                    <a class="c-menu__link" href="/blog/" onclick={siteLink}>{lang.a.blog}</a>
+                </nav>
             </div>
         </div>
     )
