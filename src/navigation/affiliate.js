@@ -1,30 +1,14 @@
 import {
   jsx,
   jsxFrag,
-  setVariable,
   getVariable,
-  setAction,
   makeDOM,
   getStorage,
 } from "@betarost/cemjs";
-import { init as mainHeader } from "@navigation/header/index.js";
-import { init as mainFooter } from "@navigation/footer/index.js";
-
-// import affiliate_blur1 from "@assets/icon/affiliate_blur-1.svg";
-// import affiliate_blur4 from "@assets/icon/affiliate_blur-4.svg";
-// import affiliate_conditions_icon1 from "@assets/icon/affiliate_conditions_icon-1.svg";
-// import affiliate_conditions_icon2 from "@assets/icon/affiliate_conditions_icon-2.svg";
-// import affiliate_conditions_icon3 from "@assets/icon/affiliate_conditions_icon-3.svg";
-// import affiliate_conditions_icon4 from "@assets/icon/affiliate_conditions_icon-4.svg";
-// import copy from "@assets/icon/copy.svg";
-// import x200x100 from "@assets/image/affiliate_banners/200x100.jpg";
-
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const ID = "mainBlock";
-setVariable({ header: true });
-setVariable({ footer: true });
 
 const affiliateView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
@@ -232,7 +216,7 @@ const affiliateView = function () {
               </div>
             </div>
             <div class="affiliate_banner_preview">
-              <img src={images["affiliate_banners/200x100.jpg"] } />
+              <img src={images["affiliate_banners/200x100.jpg"]} />
             </div>
           </div>
         </div>
@@ -248,26 +232,10 @@ const affiliateView = function () {
   );
 };
 
-const befor = function (dataUrl) {
-  // mainHeader(dataUrl);
-  // mainFooter(dataUrl);
-};
-
-const start = function (dataUrl) {
-  console.log("start contact");
-  makeDOM(affiliateView(), ID);
-};
-
-const after = function (dataUrl) {};
-
-setAction(ID, "befor", befor);
-setAction(ID, "start", start);
-setAction(ID, "after", after);
-
 const init = function (dataUrl) {
-  befor(dataUrl);
-  start(dataUrl);
-  after(dataUrl);
+  setValue("mainHeader", "show", true);
+  setValue("mainFooter", "show", true);
+  makeDOM(affiliateView(dataUrl), ID);
 };
 
 export default init;

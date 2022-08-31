@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,39 +12,44 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QHYGL3W2Y"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-4QHYGL3W2Y');
   </script>
- 
-  <script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
     ym(88768376, "init", {
-      clickmap:true,
-      trackLinks:true,
-      accurateTrackBounce:true,
-      webvisor:true
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: true
     });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/88768376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/88768376" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript>
 </head>
 
 <body>
   <div id="app">
-    <div id="mainHeader"></div>
-    <div id="mainBlock"></div>
-    <div id="mainFooter"></div>
+    <header class="c-header" id="mainHeader"></header>
+    <main id="mainBlock"></main>
+    <footer class="c-footer" id="mainFooter"></footer>
   </div>
-  <div id="modals"></div>  
+  <div id="modals"></div>
   <div id="page_loader" class="page_loader">
     <div class="page_loader_inner">
       <img src="/assets/image/loading.gif">
       <p>Loading...</p>
     </div>
-  </div>   
+  </div>
   <script src="/main.js"></script>
   <div data-action="toTop" id="toTop"><img src="/assets/icon/arrowTop.svg"></div>
 </body>
+
 </html>

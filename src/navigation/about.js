@@ -1,21 +1,14 @@
 import {
   jsx,
   jsxFrag,
-  setVariable,
   getVariable,
-  setAction,
   makeDOM,
   getStorage,
 } from "@betarost/cemjs";
-import { init as mainHeader } from "@navigation/header/index.js";
-import { init as mainFooter } from "@navigation/footer/index.js";
-
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const ID = "mainBlock";
-setVariable({ header: true });
-setVariable({ footer: true });
 
 const aboutUsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
@@ -100,7 +93,7 @@ const aboutUsView = function () {
                 <span>{lang.span.mapDescFour}</span>
               </div>
             </div>
-            <img src={images["road_map.png"]}/>
+            <img src={images["road_map.png"]} />
             <div class="road_map_bottom_dates">
               <div class="road_map_date-4">
                 <p>{lang.p.mapDateFour}</p>
@@ -124,7 +117,7 @@ const aboutUsView = function () {
           <h2>{lang.h.our_projects}</h2>
           <div class="projects_block">
             <div class="projects_item">
-              <img src={images["about_us_banner5.png"]}/>
+              <img src={images["about_us_banner5.png"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameOne}
               </span>
@@ -135,21 +128,21 @@ const aboutUsView = function () {
               href="https://www.crypto-vpn.online"
               class="projects_item"
             >
-              <img src={images["about_us_banner7.png"]}/>
+              <img src={images["about_us_banner7.png"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameThree}
               </span>
               <p>{lang.p.aboutProjectDateThree}</p>
             </a>
             <div class="projects_item">
-              <img src={images["about_us_banner6.png"]}/>
+              <img src={images["about_us_banner6.png"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameTwo}
               </span>
               <p>{lang.p.aboutProjectDateTwo}</p>
             </div>
             <div class="projects_item">
-              <img src={images["about_us_banner8.png"]}/>
+              <img src={images["about_us_banner8.png"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameThree}
               </span>
@@ -162,26 +155,10 @@ const aboutUsView = function () {
   );
 };
 
-const befor = function (dataUrl) {
-  mainHeader(dataUrl);
-  mainFooter(dataUrl);
-};
-
-const start = function (dataUrl) {
-  console.log("start aboutUs");
-  makeDOM(aboutUsView(), ID);
-};
-
-const after = function (dataUrl) {};
-
-setAction(ID, "befor", befor);
-setAction(ID, "start", start);
-setAction(ID, "after", after);
-
 const init = function (dataUrl) {
-  befor(dataUrl);
-  start(dataUrl);
-  after(dataUrl);
+  setValue("mainHeader", "show", true);
+  setValue("mainFooter", "show", true);
+  makeDOM(aboutUsView(dataUrl), ID);
 };
 
 export default init;
