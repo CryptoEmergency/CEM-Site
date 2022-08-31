@@ -7,7 +7,29 @@ import {
   setValue,
 } from "@betarost/cemjs";
 
+import validator from 'validator';
+
 import svg from "@assets/svg/index.js";
+
+
+let valid = {
+  name:"",
+  email: "",
+  description: "",
+}
+
+let error = {
+  name : true,
+  email : true,
+  description : true
+}
+
+let changeInput = (e,type) => {
+  valid[type] = e.target.value.trim();
+  type === "email" ? error.email = validator.isEmail(valid.email) : error[type] = validator.isLength(valid[type],{min:2, max: undefined})
+  console.log(valid);
+  console.log(error)
+}
 
 const contactsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
@@ -33,6 +55,8 @@ const contactsView = function () {
                     placeholder={lang.placeholder.name}
                     class="contacts_form_name"
                     type="text"
+                    value = {valid.name}
+                    oninput = {(e) => changeInput(e,"name")}
                   />
                 </div>
               </div>
@@ -45,6 +69,8 @@ const contactsView = function () {
                     placeholder={lang.placeholder.email}
                     class="contacts_form_email"
                     type="text"
+                    value = {valid.email}
+                    oninput = {(e) => changeInput(e,"email")}
                   />
                 </div>
               </div>
@@ -55,6 +81,8 @@ const contactsView = function () {
                   <textarea
                     id="contacts_text"
                     placeholder={lang.placeholder.message}
+                    value = {valid.description}
+                    oninput = {(e) => changeInput(e,"description")}
                   ></textarea>
                 </div>
                 <div id="sendContacts" data-action="sendContacts">
