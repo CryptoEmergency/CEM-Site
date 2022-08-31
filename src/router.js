@@ -17,11 +17,11 @@ setAction("mainFooter", "start", mainFooter)
 setAction("mainHeader", "start", mainHeader)
 setAction("mainBlock", "start", start)
 
-const init = async function () {
+const init = async function (reload) {
     const dataUrl = parsingUrl()
     timersStart("TikTok", timerTik, 1500)
     mainHeader()
-    start(dataUrl)
+    start(reload)
     mainFooter()
     if (!getVariable("load")) {
         setVariable({ load: true });
