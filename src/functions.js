@@ -1,10 +1,10 @@
-import { setValue,getAction, sendApi, delDOM, timersClear,parsingUrl } from '@betarost/cemjs'
+import { setValue,getAction,getVariable, sendApi, delDOM, timersClear,parsingUrl } from '@betarost/cemjs'
 import list from '@src/routerList.js'
 
-const start = function (dataUrl) {
-    if (!dataUrl) { dataUrl = parsingUrl() }
+const start = function (reload) {
+    const dataUrl = getVariable("dataUrl")
     if (!dataUrl.adress || dataUrl.adress == "") {
-        list.index(dataUrl);
+        list.index(reload);
         return;
     }
 
@@ -13,7 +13,7 @@ const start = function (dataUrl) {
         return;
     }
 
-    list[dataUrl.adress](dataUrl);
+    list[dataUrl.adress](reload);
     return;
 }
 
