@@ -1374,7 +1374,7 @@ const mainView = function () {
 
 const ID = "mainBlock"
 
-const init = async function (dataUrl) {
+const init = async function (reload) {
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
     if (!getValue(ID, "mainCourse")) {
@@ -1383,7 +1383,7 @@ const init = async function (dataUrl) {
         setValue(ID, "mainCourse", course.result.list_records[0])
     }
     timersStart("Course", timerCourse, 10000)
-    makeDOM(mainView(dataUrl), ID);
+    makeDOM(mainView(), ID);
 }
 
 export default init

@@ -104,10 +104,10 @@ filterArrLogo = arrLogo.filter((item) =>
 
 const ID = "mainBlock";
 
-const init = function (dataUrl) {
+const init = function (reload) {
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
-  makeDOM(universityView(dataUrl), ID);
+  makeDOM(universityView(), ID);
 };
 
 export default init;

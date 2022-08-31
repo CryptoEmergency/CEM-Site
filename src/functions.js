@@ -26,7 +26,7 @@ const clickHide = function (e) {
 }
 
 const timerTik = function () {
-    console.log("timerTik", "tt")
+    //console.log("timerTik", "tt")
 }
 
 const timerCourse = async function () {

@@ -9,7 +9,6 @@ import github from '@assets/svg/github-icon2.svg'
 import tiktok from '@assets/svg/tiktok-icon.svg'
 import { clickCancel,siteLink, changeLang } from '@src/functions.js'
 
-console.log("footer");
 
 const mainFooter = function(){  
     const lang = getVariable("languages")[getStorage("lang")]
@@ -133,8 +132,7 @@ const ID = "mainFooter";
 const befor = function(){}
 const start = function(){
 
-    console.log("footer2",getValue(ID,"show"));
-
+  
     if(!getValue(ID,"show")){
         return;
     }
@@ -146,7 +144,7 @@ const after = function(){}
 // setAction(ID,"start",start)
 // setAction(ID,"after",after)
 
-const init = function(){
+const init = function(reload){
     befor()
     start()
     after()

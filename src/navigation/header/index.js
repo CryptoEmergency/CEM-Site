@@ -12,9 +12,12 @@ import HeaderNotAuth from './HeaderNotAuth.js'
 import HeaderAuth from './HeaderAuth.js'
 
 const ID = "mainHeader";
-setValue(ID, "langListShow", false)
 
-const init = function () {
+const init = function (reload) {
+    if (!reload) {
+        setValue(ID, "langListShow", false)
+    }
+
     if (!getValue(ID, "show")) {
         makeDOM(<HeaderEmpty />, ID)
         return;

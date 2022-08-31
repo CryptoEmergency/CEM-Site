@@ -160,7 +160,7 @@ const contactsView = function (reload) {
 
 const ID = "mainBlock";
 
-const init = function (reload = false) {
+const init = function (reload) {
  
   if(!reload){
    setValue(ID, "isValid", false)

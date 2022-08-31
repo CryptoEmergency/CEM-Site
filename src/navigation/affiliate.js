@@ -19,12 +19,12 @@ const affiliateView = function () {
       <img
         class="affiliate_program_blur"
         style="position: absolute; right: 0;"
-        src={svg["icon/affiliate_blur-1.svg"]}
+        src={svg["icon/affiliate_blur-1"]}
       />
       <img
         class="affiliate_program_blur"
         style="position: absolute; left: 0;"
-        src={svg["icon/affiliate_blur-4.svg"]}
+        src={svg["icon/affiliate_blur-4"]}
       />
       <div class="affiliate_program_block">
         <div class="affiliate_program_preview">
@@ -35,28 +35,28 @@ const affiliateView = function () {
           <div class="affiliate_program_conditions">
             <div class="affiliate_program_condition">
               <div class="affiliate_program_condition_icon">
-                <img src={svg["icon/affiliate_conditions_icon-1.svg"]} />
+                <img src={svg["icon/affiliate_conditions_icon-1"]} />
               </div>
               <p>{lang.p.affiliateCondition1}</p>
               <p>{lang.p.affiliateConditionDescription1}</p>
             </div>
             <div class="affiliate_program_condition">
               <div class="affiliate_program_condition_icon">
-                <img src={svg["icon/affiliate_conditions_icon-2.svg"]} />
+                <img src={svg["icon/affiliate_conditions_icon-2"]} />
               </div>
               <p>{lang.p.affiliateCondition2}</p>
               <p>{lang.p.affiliateConditionDescription2}</p>
             </div>
             <div class="affiliate_program_condition">
               <div class="affiliate_program_condition_icon">
-                <img src={svg["icon/affiliate_conditions_icon-3.svg"]} />
+                <img src={svg["icon/affiliate_conditions_icon-3"]} />
               </div>
               <p>{lang.p.affiliateCondition3}</p>
               <p>{lang.p.affiliateConditionDescription3}</p>
             </div>
             <div class="affiliate_program_condition">
               <div class="affiliate_program_condition_icon">
-                <img src={svg["icon/affiliate_conditions_icon-4.svg"]} />
+                <img src={svg["icon/affiliate_conditions_icon-4"]} />
               </div>
               <p>{lang.p.affiliateCondition4}</p>
               <p>{lang.p.affiliateConditionDescription4}</p>
@@ -195,7 +195,7 @@ const affiliateView = function () {
                   data-action="affiliateBannerCopy"
                   class="affiliate_banner_copy"
                 >
-                  <img src={svg["icon/copy.svg"]} /> <span>{lang.p.copy}</span>
+                  <img src={svg["icon/copy"]} /> <span>{lang.p.copy}</span>
                   <div class="success_copy">{lang.text.coppied}</div>
                 </div>
               </div>
@@ -211,7 +211,7 @@ const affiliateView = function () {
                   data-action="affiliateBannerCopy"
                   class="affiliate_banner_copy"
                 >
-                  <img src={svg["icon/copy.svg"]} /> <span>{lang.p.copy}</span>
+                  <img src={svg["icon/copy"]} /> <span>{lang.p.copy}</span>
                   <div class="success_copy">{lang.text.coppied}</div>
                 </div>
               </div>
@@ -235,10 +235,10 @@ const affiliateView = function () {
 
 const ID = "mainBlock";
 
-const init = function (dataUrl) {
+const init = function (reload) {
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
-  makeDOM(affiliateView(dataUrl), ID);
+  makeDOM(affiliateView(), ID);
 };
 
 export default init;

@@ -31,10 +31,10 @@ import {
   
   const ID = "mainBlock";
   
-  const init = function (dataUrl) {
+  const init = function (reload) {
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
-    makeDOM(alert(dataUrl), ID);
+    makeDOM(alert(), ID);
   };
   
   export default init;

@@ -9,8 +9,6 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-
-
 const aboutUsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
 
@@ -21,7 +19,7 @@ const aboutUsView = function () {
           <h2>{lang.h.who_are_we}</h2>
           <img
             class="about_us_vector-1"
-            src={svg["background/about_us_vector-1.svg"]}
+            src={svg["background/about_us_vector-1"]}
           />
           {/* <p>{lang.p.preview}</p> */}
         </div>
@@ -33,7 +31,7 @@ const aboutUsView = function () {
           <div class="our_goal_block">
             <div class="our_goal_item">
               <div class="our_goal_icon_block">
-                <img src={svg["icon/about_us_portfolio.svg"]} />
+                <img src={svg["icon/about_us_portfolio"]} />
               </div>
               <div>
                 <p>{lang.p.goalOne}</p>
@@ -42,7 +40,7 @@ const aboutUsView = function () {
             </div>
             <div class="our_goal_item">
               <div class="our_goal_icon_block">
-                <img src={svg["icon/about_us_protection.svg"]} />
+                <img src={svg["icon/about_us_protection"]} />
               </div>
               <div>
                 <p>{lang.p.goalTwo}</p>
@@ -51,7 +49,7 @@ const aboutUsView = function () {
             </div>
             <div class="our_goal_item">
               <div class="our_goal_icon_block">
-                <img src={svg["icon/about_us_cryptocurrencies.svg"]} />
+                <img src={svg["icon/about_us_cryptocurrencies"]} />
               </div>
               <div>
                 <p>{lang.p.goalThree}</p>
@@ -60,7 +58,7 @@ const aboutUsView = function () {
             </div>
             <div class="our_goal_item">
               <div class="our_goal_icon_block">
-                <img src={svg["icon/about_us_quality.svg"]} />
+                <img src={svg["icon/about_us_quality"]} />
               </div>
               <div>
                 <p>{lang.p.goalFour}</p>
@@ -70,7 +68,7 @@ const aboutUsView = function () {
           </div>
           <img
             class="about_us_vector-2"
-            src={svg["background/about_us_vector-2.svg"]}
+            src={svg["background/about_us_vector-2"]}
           />
         </div>
         <div class="road_map">
@@ -94,7 +92,7 @@ const aboutUsView = function () {
                 <span>{lang.span.mapDescFour}</span>
               </div>
             </div>
-            <img src={images["road_map.png"]} />
+            <img src={images["road_map"]} />
             <div class="road_map_bottom_dates">
               <div class="road_map_date-4">
                 <p>{lang.p.mapDateFour}</p>
@@ -118,7 +116,7 @@ const aboutUsView = function () {
           <h2>{lang.h.our_projects}</h2>
           <div class="projects_block">
             <div class="projects_item">
-              <img src={images["about_us_banner5.png"]} />
+              <img src={images["about_us_banner5"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameOne}
               </span>
@@ -129,21 +127,21 @@ const aboutUsView = function () {
               href="https://www.crypto-vpn.online"
               class="projects_item"
             >
-              <img src={images["about_us_banner7.png"]} />
+              <img src={images["about_us_banner7"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameThree}
               </span>
               <p>{lang.p.aboutProjectDateThree}</p>
             </a>
             <div class="projects_item">
-              <img src={images["about_us_banner6.png"]} />
+              <img src={images["about_us_banner6"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameTwo}
               </span>
               <p>{lang.p.aboutProjectDateTwo}</p>
             </div>
             <div class="projects_item">
-              <img src={images["about_us_banner8.png"]} />
+              <img src={images["about_us_banner8"]} />
               <span class="project_gradient">
                 {lang.span.aboutProjectNameThree}
               </span>
@@ -158,10 +156,10 @@ const aboutUsView = function () {
 
 const ID = "mainBlock";
 
-const init = function (dataUrl) {
+const init = function (reload) {
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
-  makeDOM(aboutUsView(dataUrl), ID);
+  makeDOM(aboutUsView(), ID);
 };
 
 export default init;
