@@ -19,16 +19,16 @@ const LanguagesList = function (languages) {
     const dataUrl = getVariable("dataUrl");
     const listLang = Object.keys(languages).map(function (key) {
         return (
-            <div>
-                <a class="change_language_link" href={"/" + key + "/" + dataUrl.adress} onclick={changeLang}><span>{languages[key].lang_orig}</span></a>
-            </div>
+            <li class="c-changelanguage__item">
+                <a class="c-changelanguage__link" href={"/" + key + "/" + dataUrl.adress} onclick={changeLang}><span class="c-changelanguage__text">{languages[key].lang_orig}</span></a>
+            </li>
         )
     })
 
     return (
-        <div class="change_language_list">
+        <ul class="c-changelanguage__list">
             {listLang}
-        </div>
+        </ul>
     )
 
 }
@@ -40,22 +40,22 @@ const forExport = function () {
     return (
         <div class="c-header__container c-container">
             <div class="c-header__inner">
-                <div class="c-header__auth auth_header_part">
+                <div class="c-header__auth">
                     <div class="language" onclick={showListLang}>
                         <div class="selectlink">
-                            <div class="selectlink-control">{lang.lang_orig}</div>
+                            <div class="selectlink-control"><span>{lang.lang_orig}</span></div>
                         </div>
                     </div>
                     <div
-                        class={`change_language_block ${langListShow ? '' : 'dn'}`}
+                        class={`c-changelanguage ${langListShow ? '' : 'dn'}`}
                         id="listLanguage"
                         onclick={clickCancel}>
-                        <div class="change_language_title">
-                            <h4>{lang.h.modal_listLanguage}</h4>
+                        <div class="c-changelanguage__header">
+                            <h4 class="c-changelanguage__title">{lang.h.modal_listLanguage}</h4>
                         </div>
                         {LanguagesList(languages)}
                     </div>
-                    <a class="log-in link" data-action="loginModal">{lang.button.login}</a>
+                    <a class="log-in">{lang.button.login}</a>
                     <button class="c-button c-button--gradient" type="button" id="registration" data-action="registrationModal">
                         <span class="c-button__text">{lang.button.registration}</span>
                     </button>
