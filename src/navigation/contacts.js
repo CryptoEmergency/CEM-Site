@@ -6,14 +6,17 @@ import {
   getStorage,
   setValue,
 } from "@betarost/cemjs";
+
 import svg from "@assets/svg/index.js";
 
 const contactsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
-
   return (
     <div class="contacts_container">
-      <img class="background_vector" src={svg["background/contacts_vector.svg"]} />
+      <img
+        class="background_vector"
+        src={svg["background/contacts_vector.svg"]}
+      />
       <div class="contacts_content">
         <div class="contacts_form_block">
           <div class="contacts_form">
@@ -69,7 +72,11 @@ const contactsView = function () {
           <span class="contact_info_label">{lang.span.branch}:</span>
           <span class="contact_info_text">{lang.span.branchAdress}</span>
           <span class="contact_info_label">E-mail:</span>
-          <a href="contact_us:info@crypto-emergency.com"><span class="contact_info_text">contact_us@crypto-emergency.com</span></a>
+          <a href="contact_us:info@crypto-emergency.com">
+            <span class="contact_info_text">
+              contact_us@crypto-emergency.com
+            </span>
+          </a>
         </div>
       </div>
     </div>
