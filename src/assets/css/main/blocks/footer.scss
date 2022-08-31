@@ -1,4 +1,13 @@
 /* Footer styles */
+.c-footer {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 67px;
+    height: 450px;
+    font-family: "Roboto", sans-serif;
+    background: $noble_black;
+}
+
 .footer {
     margin: 0 auto;
     height: 450px;
