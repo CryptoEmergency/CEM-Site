@@ -54,4 +54,12 @@ const changeLang = function (e) {
     getAction("App", "start")()
 }
 
-export { siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel,start }
+const checkAnswerApi = function (data) {
+    if(!data || !data.result){
+        console.error("Wrong answer from Api")
+        return {list_records:[],totalFound:0}
+    }
+    return data.result
+}
+
+export { siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel,start,checkAnswerApi }

@@ -8,7 +8,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-const ID = "mainBlock";
+
 
 const aboutUsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
@@ -154,6 +154,8 @@ const aboutUsView = function () {
     </div>
   );
 };
+
+const ID = "mainBlock";
 
 const init = function (dataUrl) {
   setValue("mainHeader", "show", true);

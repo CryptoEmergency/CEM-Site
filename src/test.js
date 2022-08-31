@@ -1,5 +1,5 @@
 import { getStorage, timersStart } from '@betarost/cemjs'
-
+import { timerCourse, checkAnswerApi } from '@src/functions.js'
 
 
 const test = function () {
@@ -10,7 +10,8 @@ const test = function () {
         console.log("myInfo not have");
     }
 
-    
+    const course = await sendApi.getCourse()
+    console.log(checkAnswerApi(course));
 
 }
 

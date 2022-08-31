@@ -1,20 +1,12 @@
 import {
   jsx,
   jsxFrag,
-  setVariable,
   getVariable,
-  setAction,
   makeDOM,
   getStorage,
   setValue,
 } from "@betarost/cemjs";
-import { init as mainHeader } from "@navigation/header/index.js";
-import {init as mainFooter} from '@navigation/footer/index.js';
 import svg from "@assets/svg/index.js";
-
-
-const ID = "mainBlock";
-
 
 const contactsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
@@ -72,40 +64,24 @@ const contactsView = function () {
           </div>
         </div>
         <div class="contacts_info">
-            <span class="contact_info_label">{lang.span.adress}:</span>
-            <span class="contact_info_text">{lang.span.addressFull}</span>
-            <span class="contact_info_label">{lang.span.branch}:</span>
-            <span class="contact_info_text">{lang.span.branchAdress}</span>
-            <span class="contact_info_label">E-mail:</span>
-            <a href="contact_us:info@crypto-emergency.com"><span class="contact_info_text">contact_us@crypto-emergency.com</span></a>
+          <span class="contact_info_label">{lang.span.adress}:</span>
+          <span class="contact_info_text">{lang.span.addressFull}</span>
+          <span class="contact_info_label">{lang.span.branch}:</span>
+          <span class="contact_info_text">{lang.span.branchAdress}</span>
+          <span class="contact_info_label">E-mail:</span>
+          <a href="contact_us:info@crypto-emergency.com"><span class="contact_info_text">contact_us@crypto-emergency.com</span></a>
         </div>
       </div>
     </div>
   );
 };
 
-const befor = function (dataUrl) {
-  // mainHeader(dataUrl);
-  // mainFooter(dataUrl);
-};
-
-const start = function (dataUrl) {
-  console.log("start contact");
-  makeDOM(contactsView(), ID);
-};
-
-const after = function (dataUrl) {};
-
-// setAction(ID, "befor", befor);
-// setAction(ID, "start", start);
-// setAction(ID, "after", after);
+const ID = "mainBlock";
 
 const init = function (dataUrl) {
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
-  befor(dataUrl);
-  start(dataUrl);
-  after(dataUrl);
+  makeDOM(contactsView(dataUrl), ID);
 };
 
 export default init;

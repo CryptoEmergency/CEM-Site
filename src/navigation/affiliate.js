@@ -8,7 +8,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-const ID = "mainBlock";
+
 
 const affiliateView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
@@ -231,6 +231,8 @@ const affiliateView = function () {
     </div>
   );
 };
+
+const ID = "mainBlock";
 
 const init = function (dataUrl) {
   setValue("mainHeader", "show", true);

@@ -1,5 +1,15 @@
-import { jsx, jsxFrag, getVariable, getStorage, setAction, setVariable, makeDOM, timersStart,setValue, getValue,sendApi } from '@betarost/cemjs'
-import {timerCourse} from '@src/functions.js'
+import {
+    jsx,
+    jsxFrag,
+    getVariable,
+    getStorage,
+    makeDOM,
+    timersStart,
+    setValue,
+    getValue,
+    sendApi
+} from '@betarost/cemjs'
+import { timerCourse, checkAnswerApi } from '@src/functions.js'
 import { init as mainHeader } from '@navigation/header/index.js'
 import { init as mainFooter } from '@navigation/footer/index.js'
 import lines from '@assets/image/background/lines-preview-min.png'
@@ -52,9 +62,9 @@ import tech_week_partner from '@assets/image/partners/tech_week.png'
 
 
 
-const mainBlock = function () {
+const mainView = function () {
     const lang = getVariable("languages")[getStorage("lang")]
-    const course = getValue(ID,"mainCourse");
+    const course = getValue(ID, "mainCourse");
     return (
         <div>
             <div class="preview">
@@ -1359,35 +1369,19 @@ const mainBlock = function () {
 
 
 
+
 const ID = "mainBlock"
-console.log("index",ID)
-const befor = async function (dataUrl) {
-    mainHeader(dataUrl);
-    
-    if (!getValue(ID,"mainCourse")) {
-        const course = await sendApi.getCourse()
-        setValue(ID,"mainCourse",course.result.list_records[0])
-    }
-
-    timersStart("Course",timerCourse,10000)
-}
-const start = function () {
-    makeDOM(mainBlock(), ID)
-}
-const after = function (dataUrl) {    
-    mainFooter(dataUrl);
- }
-
-// setAction(ID, "befor", befor)
-// setAction(ID, "start", start)
-// setAction(ID, "after", after)
 
 const init = async function (dataUrl) {
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
-    await befor(dataUrl)
-    await start(dataUrl)
-    await after(dataUrl)
+    if (!getValue(ID, "mainCourse")) {
+        const course = await sendApi.getCourse()
+        //console.log(checkAnswerApi(course));
+        setValue(ID, "mainCourse", course.result.list_records[0])
+    }
+    timersStart("Course", timerCourse, 10000)
+    makeDOM(mainView(dataUrl), ID);
 }
 
 export default init
