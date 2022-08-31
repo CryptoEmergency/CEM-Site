@@ -1,71 +1,95 @@
-import {jsx,jsxFrag,getVariable,setValue,getValue} from '@betarost/cemjs'
+import {jsx,jsxFrag,getVariable,setValue,getValue, getStorage} from '@betarost/cemjs'
 import logo from '@assets/image/logo.svg'
 import { clickCancel,siteLink, changeLang } from '@src/functions.js'
+import svg from '@assets/svg/index.js'
+import images from '@assets/images/index.js'
 import burger_menu from '@assets/icon/burger_menu.svg'
 const ID = "mainHeader"
+
+const showListLang = function (e) {
+    e.stopPropagation()
+    setValue(ID, "langListShow", !getValue(ID, "langListShow"))
+}
 
 const LanguagesList = function(){
     const languages = getVariable("languages");    
     const listLang = Object.keys(languages).map(function (key){
        return (
-        <div>
-            <a class="change_language_link" href={"/"+key+"/"} onclick={siteLink}><span>{languages[key].lang_orig}</span></a>
-        </div>
+            <li class="c-changelanguage__item">
+                <a class="c-changelanguage__link" href={"/"+key+"/"} onclick={siteLink}><span class="c-changelanguage__text">{languages[key].lang_orig}</span></a>
+            </li>
         )
     })   
    
     return (
-        <div class="change_language_list">
+        <ul class="c-changelanguage__list">
             {listLang}
-        </div>   
+        </ul>   
     )
 
 }
 
 const forExport = function(){
-    
+    const frame = "rainbow"
     const langListShow = getValue(ID, "langListShow")
     const languages = getVariable("languages");
     const dataUrl = getVariable("dataUrl");
     const lang = languages[getStorage("lang")]
     return(
-        <div class="header-container">
-            <div class="header_inner">
-                <div class="auth_header_part">
-                    <HeaderLang 
-                        lang = {lang}
-                    />
+        <div class="c-header__container c-container">
+            <div class="c-header__inner">
+                <div class="c-header__auth">
+                    <div class="language" onclick={showListLang}>
+                        <div class="selectlink">
+                            <div class="selectlink-control"><span>{lang.lang_orig}</span></div>
+                        </div>
+                    </div>
+                    <div
+                        class={`c-changelanguage ${langListShow ? '' : 'dn'}`}
+                        id="listLanguage"
+                        onclick={clickCancel}>
+                        <div class="c-changelanguage__header">
+                            <h4 class="c-changelanguage__title">{lang.h.modal_listLanguage}</h4>
+                        </div>
+                        {LanguagesList(languages)}
+                    </div>
                     <div class="header_avatar_container">
-                        <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
-                            <div class="micro_user_avatar">
-                                <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src="/assets/profile/frame/default.svg"/>
-                                <div class="user_avatar_level">
-                                    <img src="/assets/profile/levelGray.svg"/>
-                                    <span>9</span>
-                                </div>
-                                <div style="display: none;" class="avatar_user_online"></div>
-                                <div style="display: none;" class="avatar_user_offline"></div>
+                        <a href="/user/Viktoriya" class="c-avataruser">
+                            <img
+                                class="c-avataruser__photo"
+                                src="/assets/upload/avatar/tory.png"
+                            />
+                            <img
+                                class="c-avataruser__frame"
+                                src={images[`frame/${frame}`]}
+                            />
+                            <div class="c-avataruser__level">
+                                <i class="c-avataruser__levelicon"></i>
+                                <span>9</span>
                             </div>
+                            <div
+                                style="display: none;"
+                                class="c-avataruser__user--online"
+                            ></div>
+                            <div
+                                style="display: none;"
+                                class="c-avataruser__user--offline"
+                            ></div>
                         </a>
                     </div>
                     <div class="auth_user_header">
-                        <div class="user_notifications">
-                            <div class="user_notifications_image">
-                                <a class="active_notification" data-action="notifyAction" data-nofollow="true">
-                                    <img src="/assets/icon/notifications_icon.svg"/>
-                                </a>
-                                <div class="active_notifications"></div>
-                            </div>
+                        <div class="c-header__notifications c-notification c-notification--active">
+                            <a href="" class="c-notification__link"></a>
+                            <div class="c-notification__new"></div>
                         </div>
-                        <div class="user_messages">
-                            <div class="user_messages">
-                                <a href="/user/chats/" class="message_notification" data-action="link">
-                                    <img src="/assets/icon/message_notifications.svg"/>
-                                    <div style="display: none;" class="messages_notifications_counter"></div>
-                                </a>
-                            <div class="message_notifications"></div>
+                        <div class="c-header__messages c-messages">
+                            <a href="/user/chats/" class="c-messages__link" data-action="link">
+                                <i class="c-messages__icon"></i> 
+                                <div style="display: none;" class="c-messages__counter"></div>
+                            </a>
+                            <div class="c-messages__new"></div>
                         </div>
+                        <i class="c-header__burger"></i>
                     </div>
                     <div style="display: none;" class="user_notifications_block auth_notifications" id="notifications_block">
                         <img data-action="notifyAction" class="notify_close" src="/assets/icon/close.svg"/>
@@ -219,16 +243,17 @@ const forExport = function(){
                             </div>
                         </div>
                     </div>
-                    <div class="burger_menu_icon" data-action="mainBurgerMeny">
-                        <img src="/assets/icon/burger_menu.svg"/>
-                    </div>
                 </div>
+                <nav class="c-header__menu c-menu">
+                    <a class="c-logo c-menu__link" href="/" onclick={siteLink}>
+                        <img class="c-logo__image" src={svg.logo} />
+                    </a>
+                    <a class="c-menu__link" href="/contacts/" onclick={siteLink}>{lang.a.contacts}</a>
+                    <a class="c-menu__link" href="/about/" onclick={siteLink}>{lang.a.about}</a>
+                    <a class="c-menu__link" href="/blog/" onclick={siteLink}>{lang.a.blog}</a>
+                </nav>
             </div>
-            <HeaderList 
-                lang = {lang}
-            />
         </div>
-    </div>
     )
 }
 

@@ -46,7 +46,7 @@ body {
     background-color: $noble_black;
     color: $white;
     width: 100%;
-    padding-top: 80px;
+    // padding-top: 80px;
     overflow: hidden;
     min-height: 100vh;
 
@@ -594,6 +594,7 @@ textarea{
 
 .c-container {
     width: 100%;
+    padding: 0 10px;
 }
 
 .c-hidden {
@@ -788,6 +789,20 @@ textarea{
                 transform: translateX(-130px);
             }
         }
+
+        .c-button {
+
+            &__text {
+                font-size: 13px;
+                color: $white;
+                position: relative;
+            }
+        }
+
+        @media(max-width: 464px) {
+            height: 34px;
+            width: 95px;
+        }
     }
 }
 
@@ -906,6 +921,17 @@ textarea{
             border-width: 1px;
 		}
 	}
+}
+
+.c-main {
+
+    &__body {
+        margin-top: 70px;
+
+        &--noheader {
+            margin-top: 0;
+        }
+    }
 }
 
 @media(max-width: 1240px) {

@@ -65,8 +65,10 @@ import tech_week_partner from '@assets/image/partners/tech_week.png'
 const mainView = function () {
     const lang = getVariable("languages")[getStorage("lang")]
     const course = getValue(ID, "mainCourse");
+    const show = getValue("mainHeader", "show");
+    
     return (
-        <div>
+        <div class={show && "c-main__body" || "c-main__body--noheader"}>
             <div class="preview">
                 <img class="lines" src={lines} />
                 <div class="title-preview">
