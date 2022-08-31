@@ -1,4 +1,4 @@
-import { getStorage, timersStart } from '@betarost/cemjs'
+import { getStorage, timersStart,sendApi } from '@betarost/cemjs'
 import { timerCourse, checkAnswerApi } from '@src/functions.js'
 
 
