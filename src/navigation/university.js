@@ -4,6 +4,7 @@ import {
   getVariable,
   makeDOM,
   getStorage,
+  setStorage,
   setValue
 } from "@betarost/cemjs";
 
@@ -35,8 +36,33 @@ const arrLogo = [
   },
 ];
 
+
+
+
+if( !getStorage('FILTER_UNIVERSITY')){
+  setStorage('FILTER_UNIVERSITY', 'all');
+}
+
+const clickButton = (type) => {
+  setStorage('FILTER_UNIVERSITY', type);
+
+ init()
+  
+}
+
+
+
+
 const universityView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
+
+let filterArrLogo ;
+const type = getStorage('FILTER_UNIVERSITY');
+{type === "all" ? filterArrLogo = arrLogo : 
+filterArrLogo = arrLogo.filter((item) => 
+ item.type === type
+) }
+
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Крипто университет</h1>
@@ -49,12 +75,12 @@ const universityView = function () {
         distinctio!
       </h3>
       <div style={styles.buttonContainer}>
-        <button style={styles.filterButton}>Всё</button>
-        <button style={styles.filterButton}>Профессии</button>
-        <button style={styles.filterButton}>Иностранные языки</button>
+        <button style={[styles.filterButton,type === "all" && styles.blue]}    onclick = {() => clickButton("all") }>Всё</button>
+        <button style={ [styles.filterButton,type === "profession" && styles.blue]}  onclick = {() => clickButton("profession")} >Профессии</button>
+        <button style={[styles.filterButton,type === "language" && styles.blue]}  onclick = {() => clickButton("language") }>Иностранные языки</button>
       </div>
       <div style={styles.itemContainer}>
-        {arrLogo.map((item, i) => {
+        {filterArrLogo.map((item, i) => {
           return (
             <div key = {i} style={styles.item}>
               <div style={styles.logoContainer}>
@@ -109,6 +135,7 @@ const styles = {
     width: "150px",
     padding: "10px",
     "border-radius": "10px",
+    // "color":`${getStorage('FILTER_UNIVERSITY') === "all" && "red"}`
   },
   buttonContainer: {
     display: "flex",
@@ -150,4 +177,8 @@ const styles = {
     "font-size": "30px",
     margin: "10px 0",
   },
+  blue:{
+    "background-color":"blue"
+  },
+  
 };
