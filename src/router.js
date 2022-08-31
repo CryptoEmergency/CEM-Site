@@ -11,8 +11,8 @@ import { init as mainFooter } from '@navigation/footer/index.js';
 import { timerTik,start } from '@src/functions.js'
 import swiperload from "@assets/js/swiper.js"
 
-setValue("mainHeader", "show", false);
-setValue("mainFooter", "show", false);
+setValue("mainHeader", "show", true);
+setValue("mainFooter", "show", true);
 setAction("mainFooter", "start", mainFooter)
 setAction("mainHeader", "start", mainHeader)
 setAction("mainBlock", "start", start)

@@ -9,6 +9,8 @@ import github from '@assets/icon/github-icon2.svg'
 import tiktok from '@assets/icon/tiktok-icon.svg'
 import { clickCancel,siteLink, changeLang } from '@src/functions.js'
 
+console.log("footer");
+
 const mainFooter = function(){  
     const lang = getVariable("languages")[getStorage("lang")]
     return(
@@ -130,7 +132,10 @@ const mainFooter = function(){
 const ID = "mainFooter";
 const befor = function(){}
 const start = function(){
-    if(!getVariable("footer")){
+
+    console.log("footer2",getValue(ID,"show"));
+
+    if(!getValue(ID,"show")){
         return;
     }
     makeDOM(mainFooter(),ID)
