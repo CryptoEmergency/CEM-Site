@@ -10,7 +10,7 @@ import {
   import svg from "@assets/svg/index.js";
 
   
-  const alert = function () {
+  const view404 = function () {
     const lang = getVariable("languages")[getStorage("lang")];
   
     return (
@@ -34,7 +34,7 @@ import {
   const init = function (reload) {
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
-    makeDOM(alert(), ID);
+    makeDOM(view404(), ID);
   };
   
   export default init;

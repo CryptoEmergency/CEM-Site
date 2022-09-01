@@ -1,5 +1,6 @@
 import { setValue,getAction,getVariable, sendApi, delDOM, timersClear,parsingUrl } from '@betarost/cemjs'
-import list from '@src/routerList.js'
+import list from '@src/routerList.js';
+import validator from 'validator';
 
 const start = function (reload) {
     const dataUrl = getVariable("dataUrl")
@@ -9,7 +10,7 @@ const start = function (reload) {
     }
 
     if (!list[dataUrl.adress]) {
-        //404
+        list.error404(reload)
         return;
     }
 
@@ -62,4 +63,20 @@ const checkAnswerApi = function (data) {
     return data.result
 }
 
-export { siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel,start,checkAnswerApi }
+const allValidation = (str, type, condition) => {
+    console.log(validator)
+    if(type == "email") {
+        return validator.isEmail(str);
+    }
+    if(condition) {
+        return validator.matches(str,condition)
+    }
+
+
+
+
+}
+
+
+
+export { siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }
