@@ -31,8 +31,8 @@ const timerTik = function () {
 }
 
 const timerCourse = async function () {
-    var course = await sendApi.getCourse()
-    setValue("mainBlock", "mainCourse", course.result.list_records[0]);
+    var course = checkAnswerApi(await sendApi.getCourse())
+    setValue("mainBlock", "mainCourse", course.list_records[0]);
 }
 
 const siteLink = function (e) {
@@ -58,7 +58,7 @@ const changeLang = function (e) {
 const checkAnswerApi = function (data) {
     if(!data || !data.result){
         console.error("Wrong answer from Api")
-        return {list_records:[],totalFound:0}
+        return {list_records:[{}],totalFound:0}
     }
     return data.result
 }

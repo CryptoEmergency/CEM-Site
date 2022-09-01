@@ -1213,8 +1213,10 @@ const ID = "mainBlock"
 const init = async function (reload) {
     if (!reload) {
         if (!getValue(ID, "mainCourse")) {
-            const course = await sendApi.getCourse()
-            setValue(ID, "mainCourse", course.result.list_records[0])
+            console.log(await sendApi.getCourse());
+            const course = checkAnswerApi(await sendApi.getCourse())
+            console.log(course);
+            setValue(ID, "mainCourse", course.list_records[0])
         }
         timersStart("Course", timerCourse, 10000)
     }
