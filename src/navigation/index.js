@@ -1380,11 +1380,12 @@ const init = async function (reload) {
             const course = await sendApi.getCourse()
             setValue(ID, "mainCourse", course.result.list_records[0])
         }
+        timersStart("Course", timerCourse, 10000)
     }
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
 
-    timersStart("Course", timerCourse, 10000)
+    
     makeDOM(mainView(), ID);
 }
 

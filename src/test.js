@@ -10,7 +10,12 @@ const test = async function () {
      //   console.log("myInfo not have");
     }
 
+    //const course = await sendApi.getCourse()
+
     const course = await sendApi.getCourse()
+
+    //const data = await sendApi.create("supportMessage",{value:{email:"test@test2.ru",name:"Igor",text:"test one"}});
+
    // console.log(checkAnswerApi(course));
 
 }
