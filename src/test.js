@@ -21,3 +21,6 @@ const test = async function () {
 }
 
 export { test }
+
+
+// const data = await sendApi.create("supportMessage",{value:{email:"test@test2.ru",name:"Igor",text:"test one"}});
