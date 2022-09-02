@@ -142,10 +142,6 @@ const mainView = function () {
 }
 
 
-
-
-
-
 const ID = "mainBlock"
 
 const init = async function (reload) {
