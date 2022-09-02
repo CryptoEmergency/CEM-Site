@@ -37,6 +37,10 @@ const getNewsItem = async function (type) {
         getLang = "ru"
     }
 
+    if(type === "media"){
+        getLang = getStorage("lang");
+    }
+
     let data = {
         "filter": {
             "type": type,

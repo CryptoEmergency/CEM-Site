@@ -8,7 +8,6 @@ import {
   sendApi,
   getValue,
 } from "@betarost/cemjs";
-import svg from "@assets/svg/index.js";
 
 import {
   getNewsItem,
@@ -17,10 +16,13 @@ import {
   getDateFormat,
 } from "@src/functions.js";
 
+import { siteLink } from "@src/functions.js";
+import svg from "@assets/svg/index.js";
+
 const changeCategory = async (e) => {
   let typeCategory = e.currentTarget.dataset.name;
-  if (typeCategory === "All") {
-    setValue(ID, "blogItem", await getNewsItem("news"));
+  if (typeCategory === "ru") {
+    setValue(ID, "mediaItem", await getNewsItem("media"));
   } else {
     let getLang = "en";
     if (getStorage("lang") == "ru") {
@@ -28,7 +30,7 @@ const changeCategory = async (e) => {
     }
     let data = {
       filter: {
-        type: "blog",
+        type: "news",
         "languages.code": getLang,
         "category.name": typeCategory,
       },
@@ -46,30 +48,30 @@ const changeCategory = async (e) => {
       limit: 6,
     };
     var response = checkAnswerApi(await sendApi.create("getNews", data));
-    console.log(response);
-    setValue(ID, "blogItem", response);
+    setValue(ID, "newsItem", response);
   }
   init(true);
 };
 
-const blogView = function () {
+const mediaView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
-  const blogCategory = getValue(ID, "blogCategory");
-  const blogItem = getValue(ID, "blogItem");
+  const en = getVariable("languages")["en"];
+  const mediaItem = getValue(ID, "mediaItem");
+  console.log(mediaItem);
 
   return (
     <div class="blog_page_container">
       <div class="blog_page">
         <div class="blog_filter">
-          <h2>{lang.h.blog}</h2>
+          <h2>{lang.h.mediaUs}</h2>
 
           {/* <div class="profit_calculator_inputs_container">
                 <input type="text" id="datepicker"></p>
-            </div>
-             */}
+            </div> */}
+
           <input
             data-keyup="newsSearchEnter"
-            data-type="blog"
+            data-type="media_about_us"
             class="news_search_input"
             type="text"
           />
@@ -81,35 +83,46 @@ const blogView = function () {
           <div
             class="tag_button tag_button_active"
             data-action="changeTagButton"
-            data-type="blog"
-            data-name="All"
-            data-total="{{totalFound}}"
+            data-type="media"
+            data-name={en.code}
+            data-total=""
             onclick={changeCategory}
           >
-            <span>{lang.categoryName.all}</span>
+            <span>{en.lang_orig}</span>
           </div>
 
-          {blogCategory.list_records.map((item) => {
-            return (
-              <div
-                class="tag_button tag_button_active"
-                data-action="changeTagButton"
-                data-type="blog"
-                data-name={item.name}
-                data-total=""
-                onclick={changeCategory}
-              >
-                <span>{lang.categoryName[item.name]}</span>
-              </div>
-            );
-          })}
+          {lang.lang_orig !== "English" && (
+            <div
+              class="tag_button tag_button_active"
+              data-action="changeTagButton"
+              data-type="media"
+              data-name={lang.code}
+              data-total=""
+              onclick={changeCategory}
+            >
+              <span>{lang.lang_orig}</span>
+            </div>
+          )}
 
           {/* {{#arrayWhile list_category}}
-                <div class="tag_button" data-action="changeTagButton" data-type="blog" data-name="{{name}}">
-                    <span>{getLangName "categoryName" name}</span>
+                <div class="tag_button{{#if isLast}} tag_button_active" data-total="{{data.totalFound}}{{/if}}" data-action="changeTagButton" data-type="media" data-name="{{code}}">
+                    <span>{{orig_name}}</span>
                 </div>
             {{/arrayWhile}} */}
         </div>
+        {/* <div class="userNewsBlock">
+            {{#arrayWhile list_category}}
+                {{#if isLast}}
+                    <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one bl_active">
+                        <div class="blog_news">
+                            {{>newsBlock list_records=data.list_records}}
+                        </div>
+                    </div>
+                {{else}}
+                <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one"></div>
+                {{/if}}
+            {{/arrayWhile}}
+        </div> */}
         <div class="userNewsBlock">
           <div
             data-touchmove="userBlogSlide"
@@ -118,7 +131,7 @@ const blogView = function () {
             class="bl_one bl_active"
           >
             <div class="blog_news">
-              {blogItem.list_records.map((item) => {
+            {mediaItem.list_records.map((item) => {
                 return (
                   <a class="blog_news_item">
                     <img src={"/assets/upload/news/" + item.image} />
@@ -151,11 +164,10 @@ const blogView = function () {
                   </a>
                 );
               })}
+
+
             </div>
           </div>
-          {/* {{#arrayWhile list_category}}
-                <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one"></div>
-            {{/arrayWhile}} */}
         </div>
       </div>
     </div>
@@ -166,21 +178,18 @@ const ID = "mainBlock";
 
 const init = async function (reload) {
   if (!reload) {
-    if (!getValue(ID, "blogCategory")) {
-      setValue(ID, "blogCategory", await getNewsCategory("blog"));
-    }
-    if (!getValue(ID, "blogItem")) {
-      setValue(ID, "blogItem", await getNewsItem("blog"));
+    if (!getValue(ID, "mediaItem")) {
+      setValue(ID, "mediaItem", await getNewsItem("media"));
     } else {
       setTimeout(async () => {
-        setValue(ID, "blogItem", await getNewsItem("blog"));
+        setValue(ID, "mediaItem", await getNewsItem("media"));
       }, 500);
     }
   }
 
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
-  makeDOM(blogView(), ID);
+  makeDOM(mediaView(), ID);
 };
 
 export default init;
