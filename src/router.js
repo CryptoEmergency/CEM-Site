@@ -9,7 +9,7 @@ import {
 import { init as mainHeader } from "@navigation/header/index.js";
 import { init as mainFooter } from '@navigation/footer/index.js';
 import { timerTik,start } from '@src/functions.js'
-import swiperload from "@assets/js/swiper.js"
+
 
 setValue("mainHeader", "show", true);
 setValue("mainFooter", "show", true);
@@ -29,7 +29,7 @@ const init = async function () {
             document.getElementById("page_loader").remove();
         }, 1000);
     }
-    swiperload();
+    
 }
 
 export { init }

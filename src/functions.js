@@ -2,21 +2,30 @@ import { getStorage,setValue,getAction,getVariable, sendApi, delDOM, timersClear
 import list from '@src/routerList.js';
 import validator from 'validator';
 import moment from 'moment';
+import swiperload from "@assets/js/swiper.js"
 
-const start = function (reload) {
+
+const start = async function (reload) {
     const dataUrl = getVariable("dataUrl")
     if (!dataUrl.adress || dataUrl.adress == "") {
-        list.index(reload);
+        await list.index(reload);
+        after()
         return;
     }
 
     if (!list[dataUrl.adress]) {
-        list.error404(reload)
+        await list.error404(reload)
+        after()
         return;
     }
 
-    list[dataUrl.adress](reload);
+    await list[dataUrl.adress](reload);
+    after()
     return;
+}
+
+const after = function () {
+    swiperload();
 }
 
 const clickCancel = function (e) {
