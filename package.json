@@ -9,7 +9,6 @@
   "dependencies": {
     "@betarost/cem": "^1.0.2",
     "@betarost/cemjs": "^1.0.24",
-    "just-a-select": "^0.1.1",
     "moment": "^2.29.4",
     "path": "^0.12.7",
     "validator": "^13.7.0"

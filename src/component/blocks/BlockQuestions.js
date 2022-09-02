@@ -9,7 +9,6 @@ import {
     getValue
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import Select from 'just-a-select';
 import { QuestionItem } from '@component/element/QuestionItem.js';
 
 
