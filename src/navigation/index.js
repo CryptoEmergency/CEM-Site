@@ -19,26 +19,26 @@ import bnb_icon from '@assets/svg/bnb.svg'
 import eth_icon from '@assets/svg/eth.svg'
 import cem_icon from '@assets/images/cem.jpg'
 import up_arrow from '@assets/svg/up_arrow.svg'
-import shuffle from '@assets/svg/shuffle 1.svg'
-import mortarboard from '@assets/svg/mortarboard 1.svg'
-import graph from '@assets/svg/graph 1.svg'
-import startup from '@assets/svg/startup 1.svg'
-import meta_universes from '@assets/svg/meta_universes.svg'
-import star from '@assets/svg/star 1.svg'
-import stock from '@assets/svg/stock-market 1.svg'
-import world from '@assets/svg/world-news 1.svg'
-import user from '@assets/svg/user 1.svg'
+// import shuffle from '@assets/svg/shuffle 1.svg'
+// import mortarboard from '@assets/svg/mortarboard.svg'
+// import graph from '@assets/svg/graph 1.svg'
+// import startup from '@assets/svg/startup 1.svg'
+// import meta_universes from '@assets/svg/meta_universes.svg'
+// import star from '@assets/svg/star 1.svg'
+// import stock from '@assets/svg/stock-market 1.svg'
+// import world from '@assets/svg/world-news 1.svg'
+// import user from '@assets/svg/user 1.svg'
 import nft_icon from '@assets/svg/nft_icon.svg'
 import careers_icon from '@assets/svg/careers_icon.svg'
 import swiper_arrow_left from '@assets/svg/swiper_arrow_left.svg'
 import swiper_arrow_right from '@assets/svg/swiper_arrow_right.svg'
 import search_icon from '@assets/svg/search_icon.svg'
 import filter from '@assets/svg/filter.svg'
-import frame_default from '@assets/profile/frame/default.svg'
+// import frame_default from '@assets/profile/frame/default.svg'
 import question_audio from '@assets/svg/question_audio.svg'
 import question_video from '@assets/svg/question_video.svg'
 import question_photo from '@assets/svg/question_photo.svg'
-import levelGray from '@assets/profile/levelGray.svg'
+// import levelGray from '@assets/profile/levelGray.svg'
 import question_answers from '@assets/svg/question_answers.svg'
 import question_views from '@assets/svg/question_views.svg'
 import question_time from '@assets/svg/question_time.svg'
@@ -60,512 +60,119 @@ import cryptomania_partner from '@assets/images/partners/cryptomania.png'
 import tech_week_partner from '@assets/images/partners/tech_week.png'
 
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
-import swiperload from "@assets/js/swiper.js"
+import { BlockProjects } from '@component/blocks/BlockProjects.js';
+import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
+import { BlockBanners } from '@component/blocks/BlockBanners.js';
+
+import swiperload from '@assets/js/swiper.js';
+// import  justselect from '@assets/js/justselect.min.js';
 
 
 const mainView = function () {
     const lang = getVariable("languages")[getStorage("lang")]
     const course = getValue(ID, "mainCourse");
     const show = getValue("mainHeader", "show");
+    const projects = [
+        {
+            "title": lang.a.exchange,
+            "icon": "shuffle",
+            "link": "list-exchange"
+        },
+        {
+            "title": lang.a.university,
+            "icon": "mortarboard",
+            "link": "library"
+        },
+        {
+            "title": lang.a.contentCreater,
+            "icon": "graph",
+            "link": "content-creator"
+        },
+        {
+            "title": lang.a.starups,
+            "icon": "startup",
+            "link": "startups"
+        },
+        {
+            "title": lang.a.universes,
+            "icon": "meta_universes",
+            "link": "university"
+        },
+        {
+            "title": lang.a.icoRating,
+            "icon": "star1",
+            "link": "ico-rating"
+        },
+        {
+            "title": lang.a.trade,
+            "icon": "stock-market",
+            "link": "list-trade"
+        },
+        {
+            "title": lang.a.news,
+            "icon": "world-news",
+            "link": "news"
+        },
+        {
+            "title": lang.a.experts,
+            "icon": "user",
+            "link": "experts"
+        },
+        {
+            "title": lang.a.nft,
+            "icon": "nft_icon",
+            "link": "nft-market"
+        },
+        {
+            "title": lang.a.career,
+            "icon": "careers_icon",
+            "link": "experts"
+        },
+    ];
+    const questions = getValue(ID, "mainQuestions");
+    const banners = [
+        {
+            "id": "62dd2ca100978d192547427c",
+            "image": "lbf_banner"
+        },
+        {
+            "id": "62bab2ac962df43c3fd94755",
+            "image": "blockchain24"
+        },
+        {
+            "id": "62f0da1ef2b8fa66345ef411",
+            "image": "crypto_summit"
+        },
+        {
+            "id": "630382384dab714d6e986cd6",
+            "image": "plus_forum"
+        },
+        {
+            "id": "62fb66bd4dab714d6e955d80",
+            "image": "blockchain_life"
+        },
+        {
+            "id": "62d134221de982539a72345e",
+            "image": "crypto_future_banner"
+        }
+    ];
 
     return (
         <div class={show && "c-main__body" || "c-main__body--noheader"}>
             <BlockPreview lang={lang} course={course} />
-            
-            {/* <div class="index-content">
-            <div class="swiper-container">
-                <div class="swiper swiper-icons" id="swiper-desktop">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}list-exchange/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={shuffle} alt=""/>
-                                    </div>
-                                    <p>{lang.a.exchange}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}library/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={mortarboard} alt=""/>
-                                    </div>
-                                    <p>{lang.a.university}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}content-creator/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={graph} alt=""/>
-                                    </div>
-                                    <p>{lang.a.contentCreater}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}startups/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={startup} alt=""/>
-                                    </div>
-                                    <p>{lang.a.starups}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}university/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={meta_universes} alt=""/>
-                                    </div>
-                                    <p>{lang.a.universes}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}ico-rating/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={star} alt=""/>
-                                    </div>
-                                    <p>{lang.a.icoRating}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}list-trade/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={stock} alt=""/>
-                                    </div>
-                                    <p>{lang.a.trade}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}news/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={world} alt=""/>
-                                    </div>
-                                    <p>{lang.a.news}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}experts/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={user} alt=""/>
-                                    </div>
-                                    <p>{lang.a.experts}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}nft-market/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={nft_icon} alt=""/>
-                                    </div>
-                                    <p>{lang.a.nft}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}experts/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={careers_icon} alt=""/>
-                                    </div>
-                                    <p>{lang.a.career}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-                <div class="swiper-button-prev" id="prev-desktop-icons"><img src={swiper_arrow_left} style="height: 40%;"/></div>
-                <div class="swiper-button-next" id="next-desktop-icons"><img src={swiper_arrow_right} style="height: 40%;"/></div>
-            </div>    
-            <div class="swiper-container">
-                <div class="swiper swiper-icons" id="swiper-one">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}list-exchange/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={shuffle} alt=""/>
-                                    </div>
-                                    <p>{lang.a.exchange}</p>
-                                </div>
-                            </a>
-                            <a href="{{lang.url}}library/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={mortarboard} alt=""/>
-                                    </div>
-                                    <p>{lang.a.university}</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}content-creator/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={graph} alt=""/>
-                                    </div>
-                                    <p>{lang.a.contentCreater}</p>
-                                </div>
-                            </a>
-                            <a href="{{lang.url}}startups/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={startup} alt=""/>
-                                    </div>
-                                    <p>{lang.a.starups}</p>
-                                </div>
-                            </a>     
-                        </div>
-
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}university/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={meta_universes} alt=""/>
-                                    </div>
-                                    <p>{lang.a.universes}</p>
-                                </div>
-                            </a>
-                            <a href="{{lang.url}}ico-rating/" data-action="link" data-updating="true">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={star} alt=""/>
-                                    </div>
-                                    <p>{lang.a.icoRating}</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}list-trade/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={stock} alt=""/>
-                                    </div>
-                                    <p>{lang.a.trade}</p>
-                                </div>
-                            </a>
-                            <a href="{{lang.url}}news/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={world} alt=""/>
-                                    </div>
-                                    <p>{lang.a.news}</p>
-                                </div>
-                            </a>      
-                        </div>
-
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}experts/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={user} alt=""/>
-                                    </div>
-                                    <p>{lang.a.experts}</p>
-                                </div>
-                            </a>   
-                            <a href="{{lang.url}}nft-market/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={nft_icon} alt=""/>
-                                    </div>
-                                    <p>{lang.a.nft}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide slide-item">
-                            <a href="{{lang.url}}experts/" data-action="link">
-                                <div class="projects_icons_text">
-                                    <div class="nav-more_item">
-                                        <img src={careers_icon} alt=""/>
-                                    </div>
-                                    <p>{lang.a.career}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-                <div class="swiper-button-prev" id="prev-icons"><img src={swiper_arrow_left} style="height: 40%;"/></div>
-                <div class="swiper-button-next" id="next-icons"><img src={swiper_arrow_right} style="height: 40%;"/></div>
-
+            <BlockProjects lang={lang} projects={projects} />
+            <div class="index-questions_wrapper">
+                <BlockQuestions lang={lang} questions={questions} />
             </div>
-            <div class="main_page_show_more" data-action="mainPageShowAllIcons">
-            {lang.button.see_all}
+            <div class="sturtups-wrapper">
+                <BlockBanners banners={banners} />
             </div>
-        </div>
-        <div class="index-questions_wrapper">  
+            {/*  
             <div class="index-questions">
-                <div class="title-questions">
-                    <p class="info-text-questions">{lang.h.lastQuestions}</p>  
-                    <div class="input-question-container" data-needauth="true">
-                        <div class="question_search_container">
-                            <div class="mobile-question-container">
-                                <img src={search_icon}/>
-                                <input class="input-question" type="text" data-keyup="questionTypeHelper" placeholder="{{lang.placeholder.question}}" autocomplete="disabled"/>
-                                <img data-action="questionFilterShow" class="mobile_question_filter_icon" src={filter}/>
-                            </div>
-                            <div style="display: none;" class="questions_search">
-                                <div class="question_search_half_empty">
-                                    {lang.text.contInput}
-                                </div>
-                                <div style="display: none;" class="question_search_help">
-                                </div>
-                            </div>
-                        </div>
-                        <div data-needauth="true" data-action="askQuestionModal" class="mobile_search_container">
-                            <div class="search-button" style="width:238px;">
-                                {lang.button.giveQuestion}
-                            </div>
-                        </div>
-                    </div>        
-                    <div class="questions_filter">
-                        <div class="profit_calculator_inputs_container">
-                            <span>{lang.span.sort}</span>
-                            <select class="justselect" id="statusQuestions">
-                                <option selected="selected" value="all">{lang.select.showAllQuestions}</option>
-                                <option value="open">{lang.select.openQuestions}</option>
-                                <option value="closed">{lang.select.closeQuestions}</option>
-                                <option value="best">{lang.select.bestQuestions}</option>
-                            </select>
-                        </div>
-                        <div class="profit_calculator_inputs_container">
-                            <span>{lang.span.sort}</span>
-                            <select class="justselect" id="sortQuestions">
-                                <option selected="selected" value="date">{lang.select.byDate}</option>
-                                <option value="views">{lang.select.byViews}</option>
-                                <option value="answers">{lang.select.byAnswers}</option>
-                            </select>
-                            <img data-sort="DESC" class="filter_sort_toggler" data-action="toggleFilterSort" src="/assets/svg/filter_arrow_bottom.svg"/>
-                        </div>
-                        <div data-language="{{lang.lang}}" data-language_code="{{lang.code}}" class="questions_filter_language" data-action="questionsFilterLanguage">
-                            {lang.lang}
-                        </div>
-                    </div>
-                    <h4>{lang.h.lastQuestions}</h4>
-                </div>     
-                <div class="questions-blocks">
-                    <div data-id="{{_id}}" class="question-block questionLoad">
-                        <div class="question_header">
-                            <div class="question_card_avatar">
-                                <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
-                                    <div class="micro_user_avatar">
-                                        <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
-                                        <div class="user_avatar_level">
-                                            <img src={levelGray}/>
-                                            <span>9</span>
-                                        </div>
-                                        <div style="display: none;" class="avatar_user_online"></div>
-                                        <div style="display: none;" class="avatar_user_offline"></div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="question_card_name">
-                                <a style="display: block; left: 5px;bottom:5px" href="/user/id{{author._id}}" class="comment_avatar load" data-action="link" data-needauth="true">
-                                    nickName
-                                </a>
-                                <div class="question_icons">
-                                    <div>
-                                        <img class="unstable_question_icons" src={question_audio}/>
-                                        <img class="unstable_question_icons" src={question_video}/>
-                                        <img class="unstable_question_icons" src={question_photo}/>
-                                    </div>
-                                    <div class="language_container load"> 
-                                        <div class="language-question"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        <a style="display: block; margin-top: 10px;margin-bottom: 0;" href="/question/show/{{_id}}" data-action="link" class="load">
-                            <div class="preview-question">
-                                <div>
-                                    <span class="cut_question_text">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="answers-questions">
-                            <div class="question_card_stats load">
-                                <img src={question_answers}/> 1
-                            </div>
-                            <div class="question_card_stats load">
-                                <img src={question_views}/> 1
-                            </div>
-                            <div class="question_card_stats load">
-                                <img src={question_time}/> 01.01.2000
-                            </div>
-                        </div>
-                        <a href="/question/show/{{_id}}" data-action="link">
-                            <div class="answer_button_container load">
-                                <div class="answer_button">
-                                    {lang.button.giveAnswer}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-id="{{_id}}" class="question-block questionLoad">
-                        <div class="question_header">
-                            <div class="question_card_avatar">
-                                <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
-                                    <div class="micro_user_avatar">
-                                        <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
-                                        <div class="user_avatar_level">
-                                            <img src={levelGray}/>
-                                            <span>9</span>
-                                        </div>
-                                        <div style="display: none;" class="avatar_user_online"></div>
-                                        <div style="display: none;" class="avatar_user_offline"></div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="question_card_name">
-                                <a style="display: block; left: 5px;bottom:5px" href="/user/id{{author._id}}" class="comment_avatar load" data-action="link" data-needauth="true">
-                                    nickName
-                                </a>
-                                <div class="question_icons">
-                                    <div>
-                                        <img class="unstable_question_icons" src={question_audio}/>
-                                        <img class="unstable_question_icons" src={question_video}/>
-                                        <img class="unstable_question_icons" src={question_photo}/>
-                                    </div>
-                                    <div class="language_container load"> 
-                                        <div class="language-question"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        <a style="display: block; margin-top: 10px;margin-bottom: 0;" href="/question/show/{{_id}}" data-action="link" class="load">
-                            <div class="preview-question">
-                                <div>
-                                    <span class="cut_question_text">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="answers-questions">
-                            <div class="question_card_stats load">
-                                <img src={question_answers}/> 1
-                            </div>
-                            <div class="question_card_stats load">
-                                <img src={question_views}/> 1
-                            </div>
-                            <div class="question_card_stats load">
-                                <img src={question_time}/> 01.01.2000
-                            </div>
-                        </div>
-                        <a href="/question/show/{{_id}}" data-action="link">
-                            <div class="answer_button_container load">
-                                <div class="answer_button">
-                                    {lang.button.giveAnswer}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div data-id="{{_id}}" class="question-block questionLoad">
-                        <div class="question_header">
-                            <div class="question_card_avatar">
-                                <a href="/user/nekotwo⚧" class="comment_avatar" data-action="link" data-needauth="true">
-                                    <div class="micro_user_avatar">
-                                        <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/upload/avatar/37a4e7ead2a6e496775f8995a4d391c4.png"/>
-                                        <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: " src={frame_default}/>
-                                        <div class="user_avatar_level">
-                                            <img src={levelGray}/>
-                                            <span>9</span>
-                                        </div>
-                                        <div style="display: none;" class="avatar_user_online"></div>
-                                        <div style="display: none;" class="avatar_user_offline"></div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="question_card_name">
-                                <a style="display: block; left: 5px;bottom:5px" href="/user/id{{author._id}}" class="comment_avatar load" data-action="link" data-needauth="true">
-                                    nickName
-                                </a>
-                                <div class="question_icons">
-                                    <div>
-                                        <img class="unstable_question_icons" src={question_audio}/>
-                                        <img class="unstable_question_icons" src={question_video}/>
-                                        <img class="unstable_question_icons" src={question_photo}/>
-                                    </div>
-                                    <div class="language_container load"> 
-                                        <div class="language-question"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        <a style="display: block; margin-top: 10px;margin-bottom: 0;" href="/question/show/{{_id}}" data-action="link" class="load">
-                            <div class="preview-question">
-                                <div>
-                                    <span class="cut_question_text">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="answers-questions">
-                            <div class="question_card_stats load">
-                                <img src={question_answers}/> 1
-                            </div>
-                            <div class="question_card_stats load">
-                                <img src={question_views}/> 1
-                            </div>
-                            <div class="question_card_stats load">
-                                <img src={question_time}/> 01.01.2000
-                            </div>
-                        </div>
-                        <a href="/question/show/{{_id}}" data-action="link">
-                            <div class="answer_button_container load">
-                                <div class="answer_button">
-                                    {lang.button.giveAnswer}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <a href="{{lang.url}}question/" class="btn-view-all-a" data-action="link">
-                    <div class="btn-view-all">
-                        <div>{lang.button.allQuestions}</div>
-                    </div>
-                </a>
+                
                 <div class="sturtups-wrapper">  
-                    <div class="startaps-other">
-                        <div class="swiper-container">
-                            <div class="swiper swiper-startups" id="swiper-startups">
-                                <div class="swiper-wrapper">
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62dd2ca100978d192547427c" class=""><img src={lbf_banner}/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62bab2ac962df43c3fd94755" class=""><img src={blockchain24}/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62f0da1ef2b8fa66345ef411" class=""><img src={crypto_summit}/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="630382384dab714d6e986cd6" class=""><img src={plus_forum}/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62fb66bd4dab714d6e955d80" class=""><img src={blockchain_life}/></div></a>
-                                        <a class="swiper-slide"><div data-action="getNews" data-id="62d134221de982539a72345e" class=""><img src={crypto_future_banner}/></div></a>
-                                </div>
-                                <div class="swiper-pagination" id="swiper-pagination-startup"></div>
-                                <div class="swiper-scrollbar-startup"></div>
-                            </div>
-                            <div class="swiper-button-prev" id="prev-startup"><img src={swiper_arrow_left} style="height: 40%;"/></div>
-                            <div class="swiper-button-next" id="next-startup"><img src={swiper_arrow_right} style="height: 40%;"/></div>
-                        </div>
-                    </div>
+                    
+
                     <div id="crypto_exchanges" class="crypto_exchanges">
                         <h4>{lang.h.trade}</h4>
                         <div class="statistics-preview list_trade_page">
@@ -759,7 +366,8 @@ const mainView = function () {
                                     </div>
                                     <div class="crypto_exchanges-cell">
                                         {lang.tableTitle.startDate}
-                                    </div>
+
+                                            </div>
                                     <div>
 
                                     </div>
@@ -1213,19 +821,45 @@ const ID = "mainBlock"
 const init = async function (reload) {
     if (!reload) {
         if (!getValue(ID, "mainCourse")) {
-            console.log(await sendApi.getCourse());
             const course = checkAnswerApi(await sendApi.getCourse())
-            console.log(course);
             setValue(ID, "mainCourse", course.list_records[0])
         }
+
+        if (!getValue(ID, "mainQuestions")) {
+
+            let data = {
+                "filter": {
+                    "languages.code": getStorage("lang")
+                },
+                "select": {
+                    "title": 1,
+                    "showDate": 1,
+                    "statistic": 1,
+                    "languages": 1,
+                    "close": 1,
+                    "bestId": 1,
+                    "media": 1,
+                    "author": 1
+                },
+                "sort": {
+                    "showDate": -1
+                },
+                "limit": 6
+            }
+            // console.log( checkAnswerApi(await sendApi.create("getQuestions",data)));
+            setValue(ID, "mainQuestions", checkAnswerApi(await sendApi.create("getQuestions",data)).list_records)
+        }
+
+
         timersStart("Course", timerCourse, 10000)
     }
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
 
     
-    makeDOM(mainView(), ID);
+    await makeDOM(mainView(), ID);
     swiperload();
+    // justselect();
 }
 
 export default init

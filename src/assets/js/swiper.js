@@ -147,33 +147,33 @@ breakpoints: {
 },
 });
 
-var swiperCurrencies = new Swiper(".items-currencies", {
-direction: 'horizontal',
-scrollbar: {
-  el: '.swiper-scrollbar-currencies',
-},
-breakpoints: {
-  320: {
-    slidesPerView: 2,
-    spaceBetween: 24,
-    pagination: {
-      el: '#swiper-pagination-currencies',
-    },
-  },
-  768: {
-    slidesPerView: 2,
-    spaceBetween: 55,
-  },
-  1024: {
-    slidesPerView: 3,
-    spaceBetween: 55,
-  },
-  1240: {
-    slidesPerView: 4,
-    spaceBetween: 55,
-  },
-},
-});
+// var swiperCurrencies = new Swiper(".items-currencies", {
+// direction: 'horizontal',
+// scrollbar: {
+//   el: '.swiper-scrollbar-currencies',
+// },
+// breakpoints: {
+//   320: {
+//     slidesPerView: 2,
+//     spaceBetween: 24,
+//     pagination: {
+//       el: '#swiper-pagination-currencies',
+//     },
+//   },
+//   768: {
+//     slidesPerView: 2,
+//     spaceBetween: 55,
+//   },
+//   1024: {
+//     slidesPerView: 3,
+//     spaceBetween: 55,
+//   },
+//   1240: {
+//     slidesPerView: 4,
+//     spaceBetween: 55,
+//   },
+// },
+// });
 
 var questSwiper = new Swiper(".questsSwiper", {
 loop: true,
