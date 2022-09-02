@@ -18,43 +18,30 @@ const numberFixWithSpaces = function (num,fix) {
     return parts.join(".");
 }
 
-const currencyTemplate = function({ lang, course }) {
-    return Object.keys(course).map(function (key) {
-        if (typeof course[key] == "object") {
-            return (
-                <a href="/list-trade/" data-action="link" class="item-currency swiper-slide">
-                    <div class="icon-currency">
-                        <div class="icon-color-btc">
-                            <img src={svg["coins/"+key]} />
-                        </div>
-                    </div>
-                    <div class="info-currency ">
-                        <div class="info_left-currency">
-                            <div class="name-currency">{key.toLocaleUpperCase() + "/USDT"}</div>
-                            <div class="price-currency"><span class="btcusdt_price">{course[key].usdt}</span></div>
-                        </div>
-                        <div class="info_rigth-currency">
-                            <div class={`percent-currency ${course[key].change >= 0 ? " percent-currency_green": "percent-currency_red"}`}>
-                                <img src={course[key].change >= 0 ? svg.up_arrow : svg.down_arrow} />
-                                <span class="btcusdt_change">{numberFixWithSpaces(course[key].change, 2)}</span>
-                            </div>
-                            <div class="last-update">1h.</div>
-                        </div>
-                    </div>
-                </a>
-            )
-        }
-        
-    })
-};
-
-const CourseCurrency = function ({ lang, course }) {
-    console.log("CourseCurrency", lang, course);
+const CourseCurrency = function ({ lang, course, key }) {
+    // console.log("CourseCurrency", lang, course,key);
 
     return (
-        <div class="swiper-wrapper" data-reload="true" data-interval="10">
-            {currencyTemplate({ lang, course })}
-        </div>
+        <a href="/list-trade/" class="item-currency">
+            <div class="icon-currency">
+                <div class={`${key == "bnb" ? " icon-color-bnb" : key == "btc" ? " icon-color-btc" : key == "eth" ? " icon-color-eth" : key == "cem" ? " icon-color-cem" : ""}`}>
+                    <img src={svg["coins/"+key]} />
+                </div>
+            </div>
+            <div class="info-currency ">
+                <div class="info_left-currency">
+                    <div class="name-currency">{key.toLocaleUpperCase() + "/USDT"}</div>
+                    <div class="price-currency"><span class="btcusdt_price">{course.usdt}</span></div>
+                </div>
+                <div class="info_rigth-currency">
+                    <div class={`percent-currency ${course.change >= 0 ? " percent-currency_green": "percent-currency_red"}`}>
+                        <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow} />
+                        <span class="btcusdt_change">{numberFixWithSpaces(course.change, 2)}</span>
+                    </div>
+                    <div class="last-update">1h.</div>
+                </div>
+            </div>
+        </a>
     )
 }
 

@@ -287,6 +287,15 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    transition-property: transform;
+
+    @media(min-width: 992px) {
+        flex-wrap: nowrap;
+        width: calc(25% - 8px) !important;
+        max-width: 270px !important;
+    }
 }
 
 .icon-currency {
@@ -391,20 +400,36 @@
 }
 
 .static-crypto {
-    padding: 0 30px;
-    display: none;
+    padding: 0 20px;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     position: relative;
     z-index: 100;
     margin-top: 20px;
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
 
     @media(max-width: 768px) {
         padding: 0 20px;
+    }    
+
+    @media(min-width: 768px) {
+        justify-content: space-evenly;
     }
 
     @media(max-width: 767px) {
-        display: flex;
+        // display: flex;
+    }
+
+    @media(min-width: 1024px) {
+        justify-content: space-between;
+    }
+
+    @media(min-width: 1241px) {
+        padding-left: 0;
+        padding-right: 0;
     }
 
     a {

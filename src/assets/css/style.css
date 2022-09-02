@@ -15441,9 +15441,9 @@ input[type=date]::-webkit-calendar-picker-indicator{
 }
 
 @media(max-width: 1240px) {
-  .questionLoad:nth-child(3){
+  /* .questionLoad:nth-child(3){
     display: none;
-  }
+  } */
   .userLoad:nth-child(3){
     display: none;
   }
