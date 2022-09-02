@@ -858,7 +858,9 @@ const init = async function (reload) {
 
     
     await makeDOM(mainView(), ID);
-    swiperload();
+    if (!reload) {
+        swiperload();
+    }
     // justselect();
 }
 
