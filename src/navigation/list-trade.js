@@ -8,11 +8,11 @@ import {
   getValue,
   sendApi,
 } from "@betarost/cemjs";
-import { checkAnswerApi } from "@src/functions.js";
+import { checkAnswerApi, getExchangeOrTradeList } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 
 let count = 0;
-const getListTrade = async (firstLoad) => {
+const getTradeList = async (firstLoad) => {
   let data = {};
   if (firstLoad) {
     data = {
@@ -22,7 +22,6 @@ const getListTrade = async (firstLoad) => {
       },
     };
   } else {
-    count = count + 1;
     data = {
       limit: 50,
       offset: 20 + 50 * (count - 1),
@@ -32,21 +31,21 @@ const getListTrade = async (firstLoad) => {
   if (firstLoad) {
     return response;
   } else {
-    let prevList = getValue(ID, "listTrade");
+    let prevList = getValue(ID, "tradeList");
     response.list_records = [
       ...prevList.list_records,
       ...response.list_records,
     ];
-    setValue(ID, "listTrade", response);
+    setValue(ID, "tradeList", response);
     init(true);
   }
   
 };
 
-const listTradeView = function () {
+const tradeListView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
-  const listTrade = getValue(ID, "listTrade");
-  console.log("listTrade", listTrade.list_records);
+  const tradeList = getValue(ID, "tradeList");
+  console.log("tradeList", tradeList.list_records);
 
   return (
     <div class="page-content">
@@ -70,7 +69,7 @@ const listTradeView = function () {
           </div>
           {
           
-          listTrade.list_records.map((item, i) => {
+          tradeList.list_records.map((item, i) => {
            
             return (
               <a
@@ -128,12 +127,23 @@ const listTradeView = function () {
             );
           })}
         </div>
-        <a class="btn-view-all-a" onclick={() => getListTrade(false)}>
+        <a class="btn-view-all-a" 
+        // data-type = "trade"
+        // data-apitype = "getTrade"
+        // data-firstlimit = "20"
+        // data-secondlimit = "50"
+        // onclick={(e) =>{ count = count + 1;
+        //   return getExchangeOrTradeList(e,false,count,init)}
+        //  }
+        onclick={() =>{ count = count + 1;
+          return getTradeList(false)}
+         }
+         >
           <div
             class="btn-view-all"
             data-action="viewAllButton"
             style={
-              listTrade.list_records.length === listTrade.totalFound
+              tradeList.list_records.length === tradeList.totalFound
                 ? "display: none"
                 : "display: flex"
             }
@@ -152,14 +162,14 @@ const ID = "mainBlock";
 
 const init = async function (reload) {
   if (!reload) {
-    if (!getValue(ID, "listTrade")) {
-      setValue(ID, "listTrade", await getListTrade(true));
+    if (!getValue(ID, "tradeList")) {
+      setValue(ID, "tradeList", await getTradeList(true));
     }
   }
 
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
-  makeDOM(listTradeView(), ID);
+  makeDOM(tradeListView(), ID);
 };
 
 export default init;
