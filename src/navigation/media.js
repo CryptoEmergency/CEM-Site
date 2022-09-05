@@ -12,7 +12,6 @@ import {
 import {
   getNewsItem,
   checkAnswerApi,
-  getNewsCategory,
   getDateFormat,
 } from "@src/functions.js";
 
@@ -21,18 +20,14 @@ import svg from "@assets/svg/index.js";
 
 const changeCategory = async (e) => {
   let typeCategory = e.currentTarget.dataset.name;
-  if (typeCategory === "ru") {
+  if (typeCategory !== "en") {
     setValue(ID, "mediaItem", await getNewsItem("media"));
   } else {
-    let getLang = "en";
-    if (getStorage("lang") == "ru") {
-      getLang = "ru";
-    }
     let data = {
       filter: {
         type: "news",
-        "languages.code": getLang,
-        "category.name": typeCategory,
+        "languages.code": "en",
+        "type": "media",
       },
       select: {
         title: 1,
@@ -48,7 +43,7 @@ const changeCategory = async (e) => {
       limit: 6,
     };
     var response = checkAnswerApi(await sendApi.create("getNews", data));
-    setValue(ID, "newsItem", response);
+    setValue(ID, "mediaItem", response);
   }
   init(true);
 };
@@ -57,8 +52,6 @@ const mediaView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
   const en = getVariable("languages")["en"];
   const mediaItem = getValue(ID, "mediaItem");
-  console.log(mediaItem);
-
   return (
     <div class="blog_page_container">
       <div class="blog_page">
@@ -131,41 +124,44 @@ const mediaView = function () {
             class="bl_one bl_active"
           >
             <div class="blog_news">
-            {mediaItem.list_records.map((item) => {
-                return (
-                  <a class="blog_news_item">
-                    <img src={"/assets/upload/news/" + item.image} />
-                    <p class="blog_new_title">{item.title}</p>
-                    <span class="blog_new_text">{item.preview}</span>
-                    <div
-                      style="display: flex!important;"
-                      class="blog_post_stat"
-                    >
-                      <span>
-                        <img src={svg["question_views"]} />{" "}
-                        {item.statistic.view}
-                      </span>
-                      <span>
-                        <img src={svg["question_answers"]} />{" "}
-                        {item.statistic.comments}
-                      </span>
-                      <span>{getDateFormat(item.showDate)}</span>
-                    </div>
-
-                    {item.source !== undefined && (
-                      <p class="full_news_disclaimer mr20">
-                        {lang.p.source}{" "}
-                        <a href="{{source}}" rel="nofollow" target="_blank">
-                          {item.source}
-                        </a>
-                      </p>
-                    )}
-                    {/* {{#if source}}{{#if suoureShow}}<p class="full_news_disclaimer mr20">{{lang.p.source}} <a href="{{source}}" rel="nofollow" target="_blank">{{source}}</a></p>{{/if}}{{/if}} */}
-                  </a>
-                );
-              })}
-
-
+            {mediaItem.totalFound === 0 ?
+            <div class = "nothing_found">
+              <img  src = {svg["partner-list_icon"]} />
+              <p>{lang.p.notFound} </p>
+            </div> 
+            :
+             mediaItem.list_records.map((item) => {
+              return (
+                <a class="blog_news_item">
+                  <img src={"/assets/upload/news/" + item.image} />
+                  <p class="blog_new_title">{item.title}</p>
+                  <span class="blog_new_text">{item.preview}</span>
+                  <div
+                    style="display: flex!important;"
+                    class="blog_post_stat"
+                  >
+                    <span>
+                      <img src={svg["question_views"]} />{" "}
+                      {item.statistic.view}
+                    </span>
+                    <span>
+                      <img src={svg["question_answers"]} />{" "}
+                      {item.statistic.comments}
+                    </span>
+                    <span>{getDateFormat(item.showDate)}</span>
+                  </div>
+                  {item.source !== undefined && (
+                    <p class="full_news_disclaimer mr20">
+                      {lang.p.source}{" "}
+                      <a href="{{source}}" rel="nofollow" target="_blank">
+                        {item.source}
+                      </a>
+                    </p>
+                  )}
+                  {/* {{#if source}}{{#if suoureShow}}<p class="full_news_disclaimer mr20">{{lang.p.source}} <a href="{{source}}" rel="nofollow" target="_blank">{{source}}</a></p>{{/if}}{{/if}} */}
+                </a>
+              );
+            })}
             </div>
           </div>
         </div>
