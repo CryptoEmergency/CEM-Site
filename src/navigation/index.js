@@ -99,7 +99,7 @@ const mainView = function () {
         },
         {
             "id": "630382384dab714d6e986cd6",
-            "image": "plus_forum"
+            "image": "1200х580-(fb)"
         },
         {
             "id": "62fb66bd4dab714d6e955d80",
@@ -108,6 +108,52 @@ const mainView = function () {
         {
             "id": "62d134221de982539a72345e",
             "image": "crypto_future_banner"
+        }
+    ];
+    const trades = getValue(ID, "mainTrades");
+    const exchanges = getValue(ID, "mainExchanges");
+    const users = getValue(ID, "mainUsers");
+    const news = getValue(ID, "mainNews");
+    const partners = [
+        {
+            "link": "https://sberunity.ru/main/startups/879d88aa-4729-4788-a541-20cc8cc3cb14",
+            "image": "sber_unity"
+        },
+        {
+            "link": "https://sk.ru",
+            "image": "skolkovo"
+        },
+        {
+            "link": "https://cryptosummit.ru",
+            "image": "crypto_summit"
+        },
+        {
+            "link": "https://plus-forum.co",
+            "image": "plus_forum"
+        },
+        {
+            "link": "https://blockchain-life.com/europe/ru/",
+            "image": "blockchain_life"
+        },
+        {
+            "link": "https://rbw.moscow/?utm_source=infopartner&utm_medium=cryptoemergency&utm_campaign=pressreliz",
+            "image": "b4_week"
+        },
+        {
+            "link": "https://ru.beincrypto.com",
+            "image": "be_in_crypto"
+        },
+        {
+            "link": "https://mining-cryptocurrency.ru",
+            "image": "crypto_mining"
+        },
+        {
+            "link": "https://cryptomania.moscow",
+            "image": "cryptomania"
+        },
+        {
+            "link": "https://techweek.moscow",
+            "image": "tech_week"
         }
     ];
 
@@ -120,21 +166,13 @@ const mainView = function () {
             </div>
             <div class="sturtups-wrapper">
                 <BlockBanners banners={banners} />
-            </div>
-            <div class="sturtups-wrapper">
-                <BlockTrade lang={lang} />
-            </div>
-            <div class="sturtups-wrapper">
-                <BlockExchange lang={lang} />
+                <BlockTrade lang={lang} trades={trades} />
             </div>
             <div class="top_professionals_container">
-                <BlockUsers lang={lang} />
-            </div>
-            <div class="news_block_container">
-                <BlockMainNews lang={lang} />
-            </div>
-            <div class="top_professionals_container">
-                <BlockInfoPartners lang={lang} />
+                <BlockExchange lang={lang} exchanges={exchanges} />
+                <BlockUsers lang={lang} users={users} />
+                <BlockMainNews lang={lang} news={news} />
+                <BlockInfoPartners lang={lang} partners={partners} />
             </div>
         </div>
     )
@@ -176,6 +214,72 @@ const init = async function (reload) {
             setValue(ID, "mainQuestions", checkAnswerApi(await sendApi.create("getQuestions", data)).list_records)
         }
 
+        if (!getValue(ID, "mainTrades")) {
+
+            let data = {
+                "sort": {
+                    "score": -1
+                },
+                "limit": 6
+            }
+            setValue(ID, "mainTrades", checkAnswerApi(await sendApi.create("getTrade", data)).list_records)
+        }
+
+        if (!getValue(ID, "mainExchanges")) {
+            let data = {
+                "sort": {
+                    "score": -1
+                },
+                "limit": 6
+            }
+            setValue(ID, "mainExchanges", checkAnswerApi(await sendApi.create("getExchange", data)).list_records)
+        }
+
+        if (!getValue(ID, "mainUsers")) {
+            let data = {
+                "filter": {
+                    "confirm.registrasion": true
+                },
+                "select": {
+                    "rank": 1,
+                    "social": 1,
+                    "subscribe": 1,
+                    "nickname": 1,
+                    "fullname": 1,
+                    "information.speciality": 1,
+                    "avatar.name": 1,
+                    "frame.name": 1,
+                    "statistic": 1,
+                    "online": 1,
+                    "awards": 1,
+                    "status": 1
+                },
+                "limit": 6
+            }
+            setValue(ID, "mainUsers", checkAnswerApi(await sendApi.create("getUsers", data)).list_records)
+        }
+
+        if (!getValue(ID, "mainNews")) {
+            let data = {
+                "filter": {
+                    "type": "news",
+                    "languages.code": "ru"
+                },
+                "select": {
+                    "title": 1,
+                    "preview": 1,
+                    "image": 1,
+                    "showDate": 1,
+                    "statistic.view": 1,
+                    "statistic.comments": 1
+                },
+                "sort": {
+                    "showDate": -1
+                },
+                "limit": 6
+            }
+            setValue(ID, "mainNews", checkAnswerApi(await sendApi.create("getNews", data)).list_records)
+        }
 
         timersStart("Course", timerCourse, 10000)
     }

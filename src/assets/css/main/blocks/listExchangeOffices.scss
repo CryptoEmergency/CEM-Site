@@ -30,7 +30,7 @@
         background: $infinity1;
         border: 1px solid $tried_true_blue;
         border-radius: 5px;
-        top: calc(-100%);
+        bottom: calc(100%);
         left: 50%;
         transform: translateX(-50%);
         display: none !important;
