@@ -5,12 +5,13 @@
 	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
 	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
 	// Placeholders with the same ids are connected.
+	// "${1|one,two,three|}"
 	// Example:
-	"тест": {
+	"Страница сайта": {
 		"scope": "javascript,typescript",
-		"prefix": "start",
+		"prefix": "_newPage",
 		"body": [
-			"console.log('${1:тест}');",
+			"import {jsx,jsxFrag,getVariable,getStorage,makeDOM,timersStart,setValue,getValue,sendApi} from '@betarost/cemjs'",
 			"$2"
 		],
 		"description": "ппппп"
