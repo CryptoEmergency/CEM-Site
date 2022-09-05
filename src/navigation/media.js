@@ -13,9 +13,9 @@ import {
   getNewsItem,
   checkAnswerApi,
   getDateFormat,
+  changeNewsCategory
 } from "@src/functions.js";
 
-import { siteLink } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 
 const changeCategory = async (e) => {
@@ -25,7 +25,7 @@ const changeCategory = async (e) => {
   } else {
     let data = {
       filter: {
-        type: "news",
+        
         "languages.code": "en",
         "type": "media",
       },
@@ -79,7 +79,9 @@ const mediaView = function () {
             data-type="media"
             data-name={en.code}
             data-total=""
-            onclick={changeCategory}
+            onclick={(e) => {
+              changeNewsCategory(e,"media",init)
+            }}
           >
             <span>{en.lang_orig}</span>
           </div>
@@ -91,7 +93,9 @@ const mediaView = function () {
               data-type="media"
               data-name={lang.code}
               data-total=""
-              onclick={changeCategory}
+              onclick={(e) => {
+                changeNewsCategory(e,"media",init)
+              }}
             >
               <span>{lang.lang_orig}</span>
             </div>

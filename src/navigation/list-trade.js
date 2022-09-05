@@ -127,60 +127,6 @@ const listTradeView = function () {
               </a>
             );
           })}
-
-          {/* {{#arrayWhile list_records}}     
-    <a href="{{url}}" class="crypto_exchanges-row" target="_blank" rel="nofollow noopener" data-type="trade" data-count="{{marketId}}">
-        <div class="crypto_exchanges-cell">
-            {{NumberPlus index data.nowShow}}.
-        </div>
-        <div class="crypto_exchanges-cell">
-            <div>
-                <span>
-                    <span class="list_exanges_image_container">
-                        <img  class="crypto_coin_icon" src="{{logo}}">
-                    </span> 
-                    {{name}}
-                </span>
-            </div>
-        </div>
-        <div class="crypto_exchanges-cell">
-            <div>
-                <span class="crypto_exchanges_percent_green">
-                    <span class="crypto_exchanges_percent_green_mobile">
-                        <img src="/assets/icon/exange_money.svg">
-                    </span> 
-                    ${{NumFormat spotVolumeUsd }} 
-                </span>
-            </div>
-        </div>
-        <div class="crypto_exchanges-cell">
-            <div>
-                <span class="crypto_exchanges_percent_green">
-                    <span class="crypto_exchanges_percent_green_mobile">
-                        <img src="/assets/icon/exange_visitors.svg">
-                    </span> 
-                    {{NumFormat weeklyVisits }}
-                </span>
-            </div>
-        </div>
-        <div class="crypto_exchanges-cell">
-            <img src="https://s3.coinmarketcap.com/generated/sparklines/exchanges/web/7d/usd/{{marketId}}.svg"> 
-        </div>
-        <div class="crypto_exchanges_cell_button">
-            <div class="button-container-preview">
-                <span class="btn-news-preview">
-                    <span>
-                        {{lang.button.trade}}
-                    </span>
-                </span>
-            </div>
-        </div>
-    </a>
-     {{else}}
-
-    {{>notFound}}
-
-{{/arrayWhile}} */}
         </div>
         <a class="btn-view-all-a" onclick={() => getListTrade(false)}>
           <div

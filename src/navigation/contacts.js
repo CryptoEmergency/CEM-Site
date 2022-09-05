@@ -32,7 +32,7 @@ import svg from "@assets/svg/index.js";
 let messageSent = false
 
 const changeInput = (e) => {
-
+  const ID = "mainBlock";
   let inputValue = e.target.value.trim();
   let inputType = e.currentTarget.dataset.type;
   formInputs[inputType].value = inputValue;
