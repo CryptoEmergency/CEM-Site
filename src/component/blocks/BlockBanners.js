@@ -13,7 +13,7 @@ import images from "@assets/images/index.js";
 // import { CourseCurrency } from '@component/element/CourseCurrency.js';
 
 const BlockBanners = function ({ banners }) {
-    console.log("BlockBanners", banners);
+    // console.log("BlockBanners", banners);
 
     return (
         <div class="startaps-other">

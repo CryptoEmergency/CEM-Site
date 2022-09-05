@@ -27,7 +27,7 @@ const BlockProjects = function ({lang, projects}) {
     // console.log("BlockProjects", projects);
 
     return (
-        <div class="index-content">
+        <div class="c-projects index-content">
             <div class="swiper-container">
                 <div class="swiper swiper-icons" id="swiper-desktop">
                     <div class="swiper-wrapper">
@@ -67,7 +67,7 @@ const BlockProjects = function ({lang, projects}) {
                 <div class="swiper-button-next" id="next-icons"><img src={svg.swiper_arrow_right} style="height: 40%;"/></div>
 
             </div>
-            <div class="main_page_show_more">
+            <div class="c-projects__more main_page_show_more">
                 {lang.button.see_all}
             </div>
         </div>
