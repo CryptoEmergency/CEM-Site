@@ -31,13 +31,15 @@
     }
 
     &:first-child {
-        height: 36px !important;
-        align-content: baseline;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 16px;
-        color: $non_skid_grey; 
+        &:not(a) {
+            height: 36px !important;
+            align-content: baseline;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 16px;
+            color: $non_skid_grey; 
+        }
     }
 
     &:last-child {
@@ -119,7 +121,7 @@
     display: flex;
     flex-wrap: wrap;
     padding-right: 20px;
-    height: 100%;
+    min-height: 100%;
     align-items: center;
 }
 
@@ -270,7 +272,9 @@
 
     .crypto_exchanges-row {
         &:first-child {
-            align-content: center;
+            &:not(a) {
+                align-content: center;
+            }
         }
     }
 }
@@ -284,11 +288,11 @@
 }
 
 @media(max-width: 970px) {
-    .crypto_exchanges-row:first-child{
+    .crypto_exchanges-row:first-child:not(a){
         display: none;
     }
 
-    #crypto_exchange .crypto_exchanges-row:first-child{
+    #crypto_exchange .crypto_exchanges-row:first-child:not(a){
         display: none;
     }
     

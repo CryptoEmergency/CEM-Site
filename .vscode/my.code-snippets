@@ -24,5 +24,13 @@
 			"${1|one,two,three|}"
 		],
 		"description": "ппппп"
+	},
+	"svg иконка": {
+		"scope": "javascript,typescript",
+		"prefix": "_svg",
+		"body": [
+			"import svg from '@assets/svg/index.js';"
+		],
+		"description": ""
 	}
 }

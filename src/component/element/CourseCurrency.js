@@ -22,23 +22,23 @@ const CourseCurrency = function ({ lang, course, key }) {
     // console.log("CourseCurrency", lang, course,key);
 
     return (
-        <a href="/list-trade/" class="item-currency">
-            <div class="icon-currency">
+        <a href="/list-trade/" class="c-currency">
+            <div class="c-currency__icon">
                 <div class={`${key == "bnb" ? " icon-color-bnb" : key == "btc" ? " icon-color-btc" : key == "eth" ? " icon-color-eth" : key == "cem" ? " icon-color-cem" : ""}`}>
-                    <img src={svg["coins/"+key]} />
+                    <img src={svg["coins/"+key+"2"]} />
                 </div>
             </div>
-            <div class="info-currency ">
-                <div class="info_left-currency">
-                    <div class="name-currency">{key.toLocaleUpperCase() + "/USDT"}</div>
-                    <div class="price-currency"><span class="btcusdt_price">{course.usdt}</span></div>
+            <div class="c-currency__info">
+                <div class="c-currency__left">
+                    <div class="c-currency__name">{key.toLocaleUpperCase() + "/USDT"}</div>
+                    <div class="c-currency__price"><span class="btcusdt_price">{course.usdt}</span></div>
                 </div>
-                <div class="info_rigth-currency">
-                    <div class={`percent-currency ${course.change >= 0 ? " percent-currency_green": "percent-currency_red"}`}>
+                <div class="c-currency__right">
+                    <div class={`c-currency__percent ${course.change >= 0 ? " c-currency__percent--up": " c-currency__percent--down"}`}>
                         <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow} />
                         <span class="btcusdt_change">{numberFixWithSpaces(course.change, 2)}</span>
                     </div>
-                    <div class="last-update">1h.</div>
+                    <div class="c-currency__update">1h.</div>
                 </div>
             </div>
         </a>
