@@ -144,5 +144,57 @@ const allValidation = (str, type, condition) => {
 }
 
 
+const changeNewsCategory = async (e,type,init) => {
+    const ID = "mainBlock";
+    let typeCategory = e.currentTarget.dataset.name;
+    let data = {
+        select: {
+            title: 1,
+            preview: 1,
+            image: 1,
+            showDate: 1,
+            "statistic.view": 1,
+            "statistic.comments": 1,
+          },
+         sort: {
+            showDate: -1,
+          },
+          limit: 6,     
+    }
+    let response;
+    if (type === "media"){
+        if (typeCategory !== "en") {
+                 setValue(ID, `${type}Item`, await getNewsItem(type));
+               } else {
+                data.filter= 
+                     {
+                       "languages.code": "en",
+                       "type": type,
+                    };  
+               response = checkAnswerApi(await sendApi.create("getNews", data));
+                   setValue(ID, `${type}Item`, response);
+                 }
+               }
+               else{
+                if(typeCategory === "All") {
+                    setValue(ID, `${type}Item`, await getNewsItem("news"));
+                  } else {
+                    let getLang = "en";
+                    if (getStorage("lang") == "ru") {
+                      getLang = "ru";
+                    }
+                     data.filter = 
+                      {
+                        type,
+                        "languages.code": getLang,
+                        "category.name": typeCategory,
+                      };
+                    
+                    response = checkAnswerApi(await sendApi.create("getNews", data));
+                    setValue(ID, `${type}Item`, response);
+                  }
+               }
+               init(true);
+    }
 
-export { getDateFormat, getNewsItem, getNewsCategory,siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }
+export {changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory,siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }

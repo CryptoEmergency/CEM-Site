@@ -15,6 +15,7 @@ import {
   checkAnswerApi,
   getNewsCategory,
   getDateFormat,
+  changeNewsCategory
 } from "@src/functions.js";
 
 const changeCategory = async (e) => {
@@ -84,7 +85,9 @@ const blogView = function () {
             data-type="blog"
             data-name="All"
             data-total="{{totalFound}}"
-            onclick={changeCategory}
+            onclick={(e) => {
+              changeNewsCategory(e,"blog",init)
+            }}
           >
             <span>{lang.categoryName.all}</span>
           </div>
@@ -97,7 +100,9 @@ const blogView = function () {
                 data-type="blog"
                 data-name={item.name}
                 data-total=""
-                onclick={changeCategory}
+                onclick={(e) => {
+                  changeNewsCategory(e,"blog",init)
+                }}
               >
                 <span>{lang.categoryName[item.name]}</span>
               </div>

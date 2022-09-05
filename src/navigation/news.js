@@ -15,6 +15,7 @@ import {
   checkAnswerApi,
   getNewsCategory,
   getDateFormat,
+  changeNewsCategory
 } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 
@@ -77,7 +78,9 @@ const newsView = function () {
             data-type="news"
             data-name="All"
             data-total=""
-            onclick={changeCategory}
+            onclick={(e) => {
+              changeNewsCategory(e,"news",init)
+            }}
           >
             <span>{lang.categoryName.all}</span>
           </div>
@@ -89,7 +92,9 @@ const newsView = function () {
                 data-type="news"
                 data-name={item.name}
                 data-total=""
-                onclick={changeCategory}
+                onclick={(e) => {
+                  changeNewsCategory(e,"news",init)
+                }}
               >
                 <span>{lang.categoryName[item.name]}</span>
               </div>
