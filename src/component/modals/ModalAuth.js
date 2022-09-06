@@ -11,7 +11,7 @@ import {
 import svg from "@assets/svg/index.js";
 
 const showModalAuth = function (e) {
-    console.log('dfffffff');
+    //console.log('dfffffff');
     e.stopPropagation()
     setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
 }

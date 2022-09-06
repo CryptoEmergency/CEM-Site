@@ -19,7 +19,9 @@ const showListLang = function (e) {
 
 const showModalAuth = function (e) {
     e.stopPropagation()
+    //console.log(e,getValue("modals", "authModalShow"))
     setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
+    //console.log(getValue("modals", "authModalShow"));
 }
 
 const LanguagesList = function (languages) {

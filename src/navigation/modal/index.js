@@ -7,7 +7,7 @@ import {
     getVariable,
     getStorage,
 } from '@betarost/cemjs'
-import { BlockModal } from '@component/blocks/BlockModal.js';
+import { ModalAuth } from '@component/modals/ModalAuth.js';
 // import HeaderEmpty from './HeaderEmpty.js'
 // import HeaderNotAuth from './HeaderNotAuth.js'
 // import HeaderAuth from './HeaderAuth.js'
@@ -24,7 +24,7 @@ const start = function(){
     return (
         <div>
         {showAuth ?
-           <BlockModal 
+           <ModalAuth 
            lang={lang}
            /> :
            <></>
@@ -36,6 +36,7 @@ const start = function(){
 }
 
 const init = function (reload) {
+    console.log("modals init",reload);
     // if (!reload) {
         
     // }
