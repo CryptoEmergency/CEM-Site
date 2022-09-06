@@ -16,6 +16,7 @@ const ID = "mainHeader";
 const init = function (reload) {
     if (!reload) {
         setValue(ID, "langListShow", false)
+        setValue("modals", "authModalShow", false)
     }
 
     if (!getValue(ID, "show")) {

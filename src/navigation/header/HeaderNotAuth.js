@@ -8,11 +8,20 @@ import {
 } from '@betarost/cemjs'
 import svg from "@assets/svg/index.js"
 import { clickCancel, siteLink, changeLang } from '@src/functions.js'
+import { BlockModal } from '@component/blocks/BlockModal.js';
 
 const ID = "mainHeader"
 const showListLang = function (e) {
     e.stopPropagation()
     setValue(ID, "langListShow", !getValue(ID, "langListShow"))
+}
+
+
+const showModalAuth = function (e) {
+    e.stopPropagation()
+    //console.log(e,getValue("modals", "authModalShow"))
+    setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
+    //console.log(getValue("modals", "authModalShow"));
 }
 
 const LanguagesList = function (languages) {
@@ -35,6 +44,8 @@ const LanguagesList = function (languages) {
 
 const forExport = function () {
     const langListShow = getValue(ID, "langListShow")
+    const authModalShow = getValue(ID, "authModalShow")
+
     const languages = getVariable("languages");
     const lang = languages[getStorage("lang")]
     return (
@@ -55,7 +66,7 @@ const forExport = function () {
                         </div>
                         {LanguagesList(languages)}
                     </div>
-                    <a class="log-in">{lang.button.login}</a>
+                    <a class="log-in" onclick={showModalAuth}>{lang.button.login}</a>
                     <button class="c-button c-button--gradient" type="button" id="registration" data-action="registrationModal">
                         <span class="c-button__text">{lang.button.registration}</span>
                     </button>

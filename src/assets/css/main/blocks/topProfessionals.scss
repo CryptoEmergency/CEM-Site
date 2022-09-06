@@ -16,8 +16,8 @@
         grid-gap: 12px;
         position: relative;
         min-height: 200px;
-    
-        .nothing_found{
+
+        .nothing_found {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -72,7 +72,7 @@
                 height: 57px;
                 width: 90%;
                 background: $atlantic_charter;
-                border-radius: 5px; 
+                border-radius: 5px;
                 border: 1px solid $dark_spell;
                 padding-left: 69px;
                 box-sizing: border-box;
@@ -83,11 +83,14 @@
 
                 &::placeholder {
                     color: $crystal_falls;
-                    opacity: 1; /* Firefox */
+                    opacity: 1;
+                    /* Firefox */
                 }
+
                 &:-ms-input-placeholder {
                     color: $crystal_falls;
                 }
+
                 &::-ms-input-placeholder {
                     color: $crystal_falls;
                 }
@@ -124,7 +127,7 @@
             cursor: pointer;
             font-weight: 600;
         }
-        
+
         &_country {
             background-color: $prestige_blue;
             background-image: url('../svg/select_arrow.svg');
@@ -146,7 +149,7 @@
             display: flex;
             align-items: center;
 
-            .checkbox{
+            .checkbox {
                 margin-bottom: 0;
                 margin-left: 30px;
             }
@@ -218,6 +221,13 @@
                 right: 6%;
                 bottom: 24%;
             }
+
+            @media(max-width: 970px) {
+                position: absolute;
+                left: 0%;
+                transform: translateX(0%) translateY(-50%);
+                top: 50%;
+            }
         }
 
         &_main {
@@ -252,7 +262,7 @@
         justify-content: center;
     }
 
-    &_statistic{
+    &_statistic {
         display: flex;
         justify-content: center;
     }
@@ -336,7 +346,7 @@
 
                 &:last-child {
 
-                    &::after{
+                    &::after {
                         width: 770px;
                     }
                 }
@@ -374,7 +384,7 @@
         background: $prestige_blue;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 100; 
+        z-index: 100;
         border: 2px solid $infinity1;
         border-radius: 7px;
         box-shadow: -1px 1px 5px $black;
@@ -427,7 +437,7 @@
         margin-right: 30px;
         margin-bottom: 20px;
 
-        &_card{
+        &_card {
             width: 49%;
         }
     }
@@ -496,12 +506,12 @@
                     }
 
                     &_avatar {
-                        position: relative; 
+                        position: relative;
                     }
                 }
 
                 &_spec {
-                    display:  none;
+                    display: none;
                 }
             }
 
@@ -522,6 +532,37 @@
         &_card {
             height: auto;
         }
+    }
+
+    .new_professional {
+        &_card {
+            &_avatar {
+                .user_avatar_level {
+                    height: 25px !important;
+                }
+
+                .user_avatar_level span {
+                    font-size: 8px !important;
+                }
+
+                .avatar_user_online {
+                    right: 8%;
+                    bottom: 25%;
+                    border: 2px solid #fff;
+                    width: 11px;
+                    height: 11px;
+                }
+
+                .avatar_user_offline {
+                    right: 8%;
+                    bottom: 25%;
+                    border: 2px solid #fff;
+                    width: 11px;
+                    height: 11px;
+                }
+            }
+        }
+
     }
 }
 
@@ -546,7 +587,7 @@
 
             &_checkboxs {
                 flex-wrap: wrap;
-                
+
                 .checkbox {
                     width: 100%;
                     margin-left: 0;
@@ -624,7 +665,7 @@
 
         .input-search-container {
 
-            .search-button{
+            .search-button {
                 margin-top: 20px;
             }
         }

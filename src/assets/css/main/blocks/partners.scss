@@ -1,0 +1,36 @@
+.c-infopartners {
+
+    &__title {
+
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+
+        @media(min-width: 480px) {
+            grid-template-columns: calc(50% - 7.5px) calc(50% - 7.5px);
+        }
+
+        @media(min-width: 768px) {
+            grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
+        }
+
+        @media(min-width: 993px) {
+            grid-template-columns: calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px);
+        }
+    }
+
+    &__item {
+        width: 100%;
+        text-align: center;
+        border: 2px solid white;
+        border-radius: 10px;
+    }
+
+    &__more {
+        display: none;
+        margin-bottom: 20px;
+    }
+}
