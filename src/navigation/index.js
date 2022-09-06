@@ -290,4 +290,4 @@ const init = async function (reload) {
     await makeDOM(mainView(), ID);
 }
 
-export default init
+export default init;

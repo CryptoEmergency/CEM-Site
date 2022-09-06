@@ -10,6 +10,13 @@ import {
 } from "@betarost/cemjs";
 import { allValidation } from '@src/functions.js'
 import svg from "@assets/svg/index.js";
+import { Select } from "../component/element/Select.js";
+
+let options = [
+  {value:"test1"},
+  {value:"test2"},
+  {value:"test3"},
+]
 
  let formInputs = {
   name:{  
@@ -22,6 +29,7 @@ import svg from "@assets/svg/index.js";
     valid: false,
     error: ""
   },
+  selectContact: options[0].value,
   text:{
     value: "",
     valid: false,
@@ -29,9 +37,21 @@ import svg from "@assets/svg/index.js";
   },
  }
 
-let messageSent = false
+
+let messageSent = false;
+
+const changeSelect = (e,type, value,) => {
+  e.stopPropagation()
+  let show = getValue(ID, "showObject")[type]
+  if(e.target.localName === "li"){
+    let tmp = { ...formInputs, [type]: value };
+  formInputs = {...tmp};
+  }
+  setValue(ID, "showObject", {[type]: !show});
+}
 
 const changeInput = (e) => {
+  setValue(ID, "isValid", true);
   const ID = "mainBlock";
   let inputValue = e.target.value.trim();
   let inputType = e.currentTarget.dataset.type;
@@ -47,15 +67,11 @@ const changeInput = (e) => {
   }else{
     formInputs[inputType].error = "";
   }
-
   let isCheckAll = Object.keys(formInputs).filter((key) => {
-    if(!formInputs[key].valid){
+    if(key !== "selectContact" && !formInputs[key].valid){
       return true
     }
-
   });
-  console.log(isCheckAll);
-
   if (isCheckAll.length === 0) {
     setValue(ID, "isValid", true);
     return
@@ -71,23 +87,20 @@ const sendMessage = async () => {
     const name = formInputs.name.value;
     const email = formInputs.email.value;
     const text = formInputs.text.value;
-   const data = await sendApi.create("supportMessage",{value:{email,name,text}});
+    const select = formInputs.selectContact;
+   const data = await sendApi.create("supportMessage",{value:{email,name,text,select}});
+   console.log(data)
    if(data.status === 'ok'){
       messageSent = true
    }
    init(true);
-  console.log(messageSent)
+
 }
 
 
 
 
 const contactsView = function (reload) {
-
-  // if(!reload){
-  //   var tmp = false;
-  // }
-
   const lang = getVariable("languages")[getStorage("lang")];
   return (
     <div class="contacts_container">
@@ -143,6 +156,7 @@ const contactsView = function (reload) {
                 />
               </div>
             </div>
+            <Select options = {options}  changeSelect = {changeSelect} type = "selectContact" selectObject = {formInputs}  ID = {ID} selectTitle = "Выберите"/>
             <div>
               <label for="">{lang.label.message}</label>
               <div class="error-div" style={formInputs.text.error ? "display : block" : "display : none"}>{lang.error_div.not_empty_input}</div>
@@ -186,6 +200,8 @@ const ID = "mainBlock";
 const init = function (reload) {
   if(!reload){
     const lang = getVariable("languages")[getStorage("lang")];
+    setValue(ID, "showObject", {selectContact: false});
+ 
    setValue(ID, "isValid", false);
    formInputs = {
     name:{  
@@ -198,6 +214,7 @@ const init = function (reload) {
       valid: false,
       error: ""
     },
+    selectContact: options[0].value,
     text:{
       value: "",
       valid: false,
