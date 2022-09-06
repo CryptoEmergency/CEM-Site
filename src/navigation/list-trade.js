@@ -128,16 +128,16 @@ const tradeListView = function () {
           })}
         </div>
         <a class="btn-view-all-a" 
-        // data-type = "trade"
-        // data-apitype = "getTrade"
-        // data-firstlimit = "20"
-        // data-secondlimit = "50"
-        // onclick={(e) =>{ count = count + 1;
-        //   return getExchangeOrTradeList(e,false,count,init)}
-        //  }
-        onclick={() =>{ count = count + 1;
-          return getTradeList(false)}
+        data-type = "trade"
+        data-apitype = "getTrade"
+        data-firstlimit = "20"
+        data-secondlimit = "50"
+        onclick={(e) =>{ count = count + 1;
+          return getExchangeOrTradeList(e,false,count)}
          }
+        // onclick={() =>{ count = count + 1;
+        //   return getTradeList(false)}
+        //  }
          >
           <div
             class="btn-view-all"

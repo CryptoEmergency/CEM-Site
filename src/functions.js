@@ -33,7 +33,14 @@ const clickCancel = function (e) {
 }
  
 const clickHide = function (e) {
-    setValue("mainHeader", "langListShow", false)
+    setValue("mainHeader", "langListShow", false);
+
+    let obj = getValue("mainBlock","showObject");
+    for ( let key in obj) {
+      obj[key] = false
+    }
+    setValue("mainBlock", "showObject",obj);
+
 }
 
 const timerTik = function () {
@@ -197,7 +204,7 @@ const changeNewsCategory = async (e,type,init) => {
                init(true);
     }
 
-const getExchangeOrTradeList = async (e,firstLoad,count = 0, init) => {
+const getExchangeOrTradeList = async (e,firstLoad,count) => {
    
     const ID = "mainBlock";
     let apiType = e.currentTarget.dataset.apitype;
@@ -207,19 +214,23 @@ const getExchangeOrTradeList = async (e,firstLoad,count = 0, init) => {
     let data = {};
     if (firstLoad) {
       data = {
-        limit: firstLimit,
+        limit: +firstLimit,
         sort: {
           score: -1,
         },
       };
     } else {
+      console.log(count)
       data = {
-        limit: secondLimit, 
-        offset: firstLimit + secondLimit * (count - 1), 
+        limit: +secondLimit, 
+        offset: +firstLimit + secondLimit * (count - 1), 
       };
+      console.log(data)
     }
+    console.log(apiType)
     let response 
-    = checkAnswerApi(await sendApi.create({apiType}, data));
+    = checkAnswerApi(await sendApi.create(`${apiType}`, data));
+    console.log(response)
     if (firstLoad) {
       return response;
     } else {
@@ -228,8 +239,9 @@ const getExchangeOrTradeList = async (e,firstLoad,count = 0, init) => {
         ...prevList.list_records,
         ...response.list_records,
       ];
+      console.log(response)
       setValue(ID, `${type}List`, response);
-      init(true);
+      
     }
 }
 
