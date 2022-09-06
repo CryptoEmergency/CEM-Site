@@ -31,9 +31,8 @@ const after = function () {
 const clickCancel = function (e) {
     e.stopPropagation()
 }
-
+ 
 const clickHide = function (e) {
-    console.log(e.target)
     setValue("mainHeader", "langListShow", false)
 }
 

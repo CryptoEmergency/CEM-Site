@@ -23,11 +23,10 @@ const start = function(){
 
     return (
         <div>
-        {showAuth ?
+        {showAuth &&
            <ModalAuth 
            lang={lang}
-           /> :
-           <></>
+           />
         }
         </div>
     )
