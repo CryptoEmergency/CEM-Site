@@ -1,4 +1,4 @@
-import { getStorage,setValue,getAction,getVariable, sendApi, delDOM, timersClear,parsingUrl } from '@betarost/cemjs'
+import { getStorage,setValue, getValue, getAction,getVariable, sendApi, delDOM, timersClear,parsingUrl } from '@betarost/cemjs'
 import list from '@src/routerList.js';
 import validator from 'validator';
 import moment from 'moment';
@@ -197,4 +197,46 @@ const changeNewsCategory = async (e,type,init) => {
                init(true);
     }
 
-export {changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory,siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }
+const getExchangeOrTradeList = async (e,firstLoad,count = 0, init) => {
+   
+    const ID = "mainBlock";
+    let apiType = e.currentTarget.dataset.apitype;
+    let firstLimit = e.currentTarget.dataset.firstlimit;
+    let secondLimit = e.currentTarget.dataset.secondlimit;
+    let type = e.currentTarget.dataset.type;
+    let data = {};
+    if (firstLoad) {
+      data = {
+        limit: firstLimit,
+        sort: {
+          score: -1,
+        },
+      };
+    } else {
+      data = {
+        limit: secondLimit, 
+        offset: firstLimit + secondLimit * (count - 1), 
+      };
+    }
+    let response 
+    = checkAnswerApi(await sendApi.create({apiType}, data));
+    if (firstLoad) {
+      return response;
+    } else {
+      let prevList = getValue(ID, `${type}List`);
+      response.list_records = [
+        ...prevList.list_records,
+        ...response.list_records,
+      ];
+      setValue(ID, `${type}List`, response);
+      init(true);
+    }
+}
+
+
+
+
+
+
+
+export {getExchangeOrTradeList, changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory,siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }

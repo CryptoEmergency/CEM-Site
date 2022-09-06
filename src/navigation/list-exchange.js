@@ -12,7 +12,7 @@ import { checkAnswerApi,getDateFormat, } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 
   let count = 0;
-  const getListExchange = async (firstLoad) => {
+  const getExchangeList = async (firstLoad) => {
     let data = {};
     if (firstLoad) {
       data = {
@@ -22,7 +22,6 @@ import svg from "@assets/svg/index.js";
         },
       };
     } else {
-      count = count + 1;
       data = {
         limit: 10, //limit12
         offset: 10 + 10 * (count - 1), 
@@ -32,20 +31,20 @@ import svg from "@assets/svg/index.js";
     if (firstLoad) {
       return response;
     } else {
-      let prevList = getValue(ID, "listExchange");
+      let prevList = getValue(ID, "exchangeList");
       response.list_records = [
         ...prevList.list_records,
         ...response.list_records,
       ];
-      setValue(ID, "listExchange", response);
+      setValue(ID, "exchangeList", response);
       init(true);
     }
   };
 
-const listExchangeView = function () {
+const exchangeListView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
-  const listExchange = getValue(ID, "listExchange");
-  console.log("listExchange", listExchange.list_records);
+  const exchangeList = getValue(ID, "exchangeList");
+  console.log("exchangeList", exchangeList.list_records);
 
   return (
     <div class="page-content">
@@ -74,7 +73,7 @@ const listExchangeView = function () {
             <div></div>
           </div>
           {
-            listExchange.list_records.map((item) => {
+            exchangeList.list_records.map((item) => {
                 return (
                     <a href={item .url} class="crypto_exchanges-row" target="_blank" rel="nofollow noopener" data-type="exchange" data-count={item._id}>
         <div class="crypto_exchanges-cell">
@@ -96,7 +95,6 @@ const listExchangeView = function () {
         <div class="crypto_exchanges-cell">
             <div>
                 {item.list_coins.map((coin) => {
-                    console.log(coin)
                     return(
                         <div class="crypto_coin_container">
                         <img  class="crypto_coin_icons"src={svg[`coins/${coin.icon}`]}/>        
@@ -128,9 +126,11 @@ const listExchangeView = function () {
             })
           }
         </div>
-        <a class="btn-view-all-a"  onclick={() => getListExchange(false)}>
+        <a class="btn-view-all-a"  onclick={() =>{ count = count + 1;
+            return getExchangeList(false)}
+           }>
                 <div class="btn-view-all" data-action="viewAllButton" style={
-              listExchange.list_records.length === listExchange.totalFound
+              exchangeList.list_records.length === exchangeList.totalFound
                 ? "display: none"
                 : "display: flex"
             } data-type="exchange_category" data-total="{{totalFound}}">
@@ -146,14 +146,14 @@ const ID = "mainBlock";
 
 const init = async function (reload) {
   if (!reload) {
-    if (!getValue(ID, "listExchange")) {
-      setValue(ID, "listExchange", await getListExchange(true));
+    if (!getValue(ID, "exchangeList")) {
+      setValue(ID, "exchangeList", await getExchangeList(true));
     }
   }
 
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
-  makeDOM(listExchangeView(), ID);
+  makeDOM(exchangeListView(), ID);
 };
 
 export default init;
