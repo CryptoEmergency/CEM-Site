@@ -16,7 +16,7 @@ const PartnerItem = function ({ lang, partner}) {
             target="_blank"
             rel="nofollow nooopener"
             href={partner.link}
-            class="partner_item"
+            class="c-infopartners__item"
         >
             <img src={images["partners/"+partner.image]} />
         </a>

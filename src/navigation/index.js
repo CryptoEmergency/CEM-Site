@@ -161,18 +161,19 @@ const mainView = function () {
         <div class={show && "c-main__body" || "c-main__body--noheader"}>
             <BlockPreview lang={lang} course={course} />
             <BlockProjects lang={lang} projects={projects} />
-            <div class="index-questions_wrapper">
+            <div class="c-main__wrapperbg">
                 <BlockQuestions lang={lang} questions={questions} />
-            </div>
-            <div class="sturtups-wrapper">
-                <BlockBanners banners={banners} />
-                <BlockTrade lang={lang} trades={trades} />
-            </div>
-            <div class="top_professionals_container">
-                <BlockExchange lang={lang} exchanges={exchanges} />
-                <BlockUsers lang={lang} users={users} />
-                <BlockMainNews lang={lang} news={news} />
-                <BlockInfoPartners lang={lang} partners={partners} />
+
+                <div class="sturtups-wrapper">
+                    <BlockBanners banners={banners} />
+                    <BlockTrade lang={lang} trades={trades} />
+                    <div class="top_professionals_container">
+                        <BlockExchange lang={lang} exchanges={exchanges} />
+                        <BlockUsers lang={lang} users={users} />
+                        <BlockMainNews lang={lang} news={news} />
+                        <BlockInfoPartners lang={lang} partners={partners} />
+                    </div>
+                </div>
             </div>
         </div>
     )

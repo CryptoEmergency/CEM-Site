@@ -33,6 +33,7 @@ const clickCancel = function (e) {
 }
 
 const clickHide = function (e) {
+    console.log(e.target)
     setValue("mainHeader", "langListShow", false)
 }
 
