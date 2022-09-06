@@ -15,7 +15,7 @@ const ProjectItem = function ({ lang, project }) {
     // console.log("ProjectItem", project, svg[project.icon]);
 
     return (
-        <div class="swiper-slide slide-item">
+        <div class="c-partners__item swiper-slide slide-item">
             <a href={`/${project.link}/`}>
                 <div class="projects_icons_text">
                     <div class="nav-more_item">

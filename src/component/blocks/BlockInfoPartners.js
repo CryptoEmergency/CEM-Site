@@ -15,9 +15,9 @@ import { PartnerItem } from '@component/element/PartnerItem.js';
 const BlockInfoPartners = function ({ lang, partners }) {
 
     return (
-        <div class="top_professionals">
-            <h2>{lang.h.partners}</h2>
-            <div data-mainpage="true" class="partners_container">
+        <div class="top_professionals c-infopartners">
+            <h2 class="c-infopartners__title">{lang.h.partners}</h2>
+            <div data-mainpage="true" class="c-infopartners__list partners_container">
                 {
                     partners.map(function (partner) {
                         return (
@@ -26,7 +26,7 @@ const BlockInfoPartners = function ({ lang, partners }) {
                     })
                 }
             </div>
-            <a href="partners/" class="btn-view-all-a" data-action="link">
+            <a href="partners/" class="c-infopartners__more btn-view-all-a" data-action="link">
                 <div class="btn-view-all more_partners">
                     <div>{lang.button.allPartners}</div>
                 </div>
