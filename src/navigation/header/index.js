@@ -4,7 +4,6 @@ import {
     getValue,
     setValue,
     makeDOM,
-    getVariable,
     getStorage,
 } from '@betarost/cemjs'
 import HeaderEmpty from './HeaderEmpty.js'

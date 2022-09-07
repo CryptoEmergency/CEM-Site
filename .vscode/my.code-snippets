@@ -32,5 +32,13 @@
 			"import svg from '@assets/svg/index.js';"
 		],
 		"description": ""
+	},
+	"images картинки": {
+		"scope": "javascript,typescript",
+		"prefix": "_img",
+		"body": [
+			"import images from '@assets/images/index.js';"
+		],
+		"description": ""
 	}
 }

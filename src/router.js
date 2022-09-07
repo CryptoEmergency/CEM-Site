@@ -9,7 +9,7 @@ import {
 import { init as mainHeader } from "@navigation/header/index.js";
 import { init as mainFooter } from '@navigation/footer/index.js';
 import { init as mainModal } from '@navigation/modal/index.js';
-import { timerTik,start } from '@src/functions.js'
+import { timerTik, start } from '@src/functions.js'
 
 
 setValue("mainHeader", "show", true);
@@ -32,7 +32,7 @@ const init = async function () {
             document.getElementById("page_loader").remove();
         }, 1000);
     }
-    
+
 }
 
 export { init }
