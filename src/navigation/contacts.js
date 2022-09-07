@@ -13,34 +13,14 @@ import svg from "@assets/svg/index.js";
 import { Select } from "../component/element/Select.js";
 
 let options = [
-  {value:"test1"},
-  {value:"test2"},
-  {value:"test3"},
 ]
 
  let formInputs = {
-  name:{  
-    value: "",
-    valid: false,
-    error: ""
-  },
-  email:{
-    value: "",
-    valid: false,
-    error: ""
-  },
-  selectContact: options[0].value,
-  text:{
-    value: "",
-    valid: false,
-    error: ""
-  },
  }
 
 
 let messageSent = false;
-
-const changeSelect = (e,type, value,) => {
+const changeSelect = (e, type, ID, value) => {
   e.stopPropagation()
   let show = getValue(ID, "showObject")[type]
   if(e.target.localName === "li"){
@@ -106,7 +86,7 @@ const contactsView = function (reload) {
     <div class="contacts_container">
       <img
         class="background_vector"
-        src={svg["background/contacts_vector.svg"]}
+        src={svg["background/contacts_vector"]}
       />
       <div class="contacts_content">
         <div class="contacts_form_block">
@@ -203,6 +183,11 @@ const init = function (reload) {
     setValue(ID, "showObject", {selectContact: false});
  
    setValue(ID, "isValid", false);
+   options = [
+    {value:"test1"},
+    {value:"test2"},
+    {value:"test3"},
+  ],
    formInputs = {
     name:{  
       value: "",

@@ -204,46 +204,46 @@ const changeNewsCategory = async (e,type,init) => {
                init(true);
     }
 
-const getExchangeOrTradeList = async (e,firstLoad,count) => {
+// const getExchangeOrTradeList = async (e,firstLoad,count) => {
    
-    const ID = "mainBlock";
-    let apiType = e.currentTarget.dataset.apitype;
-    let firstLimit = e.currentTarget.dataset.firstlimit;
-    let secondLimit = e.currentTarget.dataset.secondlimit;
-    let type = e.currentTarget.dataset.type;
-    let data = {};
-    if (firstLoad) {
-      data = {
-        limit: +firstLimit,
-        sort: {
-          score: -1,
-        },
-      };
-    } else {
-      console.log(count)
-      data = {
-        limit: +secondLimit, 
-        offset: +firstLimit + secondLimit * (count - 1), 
-      };
-      console.log(data)
-    }
-    console.log(apiType)
-    let response 
-    = checkAnswerApi(await sendApi.create(`${apiType}`, data));
-    console.log(response)
-    if (firstLoad) {
-      return response;
-    } else {
-      let prevList = getValue(ID, `${type}List`);
-      response.list_records = [
-        ...prevList.list_records,
-        ...response.list_records,
-      ];
-      console.log(response)
-      setValue(ID, `${type}List`, response);
+//     const ID = "mainBlock";
+//     let apiType = e.currentTarget.dataset.apitype;
+//     let firstLimit = e.currentTarget.dataset.firstlimit;
+//     let secondLimit = e.currentTarget.dataset.secondlimit;
+//     let type = e.currentTarget.dataset.type;
+//     let data = {};
+//     if (firstLoad) {
+//       data = {
+//         limit: +firstLimit,
+//         sort: {
+//           score: -1,
+//         },
+//       };
+//     } else {
+//       console.log(count)
+//       data = {
+//         limit: +secondLimit, 
+//         offset: +firstLimit + secondLimit * (count - 1), 
+//       };
+//       console.log(data)
+//     }
+//     console.log(apiType)
+//     let response 
+//     = checkAnswerApi(await sendApi.create(`${apiType}`, data));
+//     console.log(response)
+//     if (firstLoad) {
+//       return response;
+//     } else {
+//       let prevList = getValue(ID, `${type}List`);
+//       response.list_records = [
+//         ...prevList.list_records,
+//         ...response.list_records,
+//       ];
+//       console.log(response)
+//       setValue(ID, `${type}List`, response);
       
-    }
-}
+//     }
+// }
 
 
 
@@ -251,4 +251,4 @@ const getExchangeOrTradeList = async (e,firstLoad,count) => {
 
 
 
-export {getExchangeOrTradeList, changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory,siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }
+export { changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory,siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }

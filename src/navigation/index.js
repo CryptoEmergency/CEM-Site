@@ -21,9 +21,35 @@ import { BlockUsers } from '@component/blocks/BlockUsers.js';
 import { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
 
+//console.log("getVariable", getVariable("languages"))
+
+
+
+let options ={}
+let sortSelects = {}
+
 
 const mainView = function () {
-    const lang = getVariable("languages")[getStorage("lang")]
+ const lang = getVariable("languages")[getStorage("lang")]
+ console.log("getVariable", getVariable("languages"))
+
+    
+    
+    
+    const changeSelect = (e, type, ID , value) => {
+        e.stopPropagation();
+        let show = getValue(ID, "showObject")[type]
+        if (e.target.localName === "li") {
+            let tmp = { ...sortSelects, [type]: value };
+            sortSelects = { ...tmp };
+            console.log("sortSelects",sortSelects)
+        }
+        setValue(ID, "showObject", { [type]: !show });
+        init(true)
+    }
+
+
+   
     const course = getValue(ID, "mainCourse");
     const show = getValue("mainHeader", "show");
     const projects = [
@@ -162,7 +188,8 @@ const mainView = function () {
             <BlockPreview lang={lang} course={course} />
             <BlockProjects lang={lang} projects={projects} />
             <div class="c-main__wrapperbg">
-                <BlockQuestions lang={lang} questions={questions} />
+                <BlockQuestions lang={lang} questions={questions} options = {options} 
+                changeSelect={changeSelect} sortSelects = {sortSelects} />
 
                 <div class="sturtups-wrapper">
                     <BlockBanners banners={banners} />
@@ -185,6 +212,7 @@ const ID = "mainBlock"
 
 const init = async function (reload) {
     if (!reload) {
+        
         if (!getValue(ID, "mainCourse")) {
             const course = checkAnswerApi(await sendApi.getCourse())
             setValue(ID, "mainCourse", course.list_records[0])
@@ -282,12 +310,37 @@ const init = async function (reload) {
             setValue(ID, "mainNews", checkAnswerApi(await sendApi.create("getNews", data)).list_records)
         }
 
-        timersStart("Course", timerCourse, 10000)
+        timersStart("Course", timerCourse, 10000);
+        setValue(ID, "showObject", { selectBlockQuestions1: false });
+        setValue(ID, "showObject", { selectBlockQuestions2: false });
+
+        const lang = getVariable("languages")[getStorage("lang")]
+        options = {
+            questions: [
+                { value: lang.select.showAllQuestions },
+                { value: lang.select.openQuestions },
+                { value: lang.select.closeQuestions },
+                { value: lang.select.bestQuestions }
+            ],
+            date: [
+                { value: lang.select.byDate },
+                { value: lang.select.byViews },
+                { value: lang.select.byAnswers },
+            ]
+        }
+
+        sortSelects = {
+            selectBlockQuestions1: options.questions[0].value,
+            selectBlockQuestions2: options.date[0].value,
+        }
+        // let sortSelects = {
+        //     selectBlockQuestions1: options.questions[0].value,
+        //     selectBlockQuestions2: options.date[0].value,
+        // }
     }
+
     setValue("mainHeader", "show", true);
     setValue("mainFooter", "show", true);
-
-
     await makeDOM(mainView(), ID);
 }
 

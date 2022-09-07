@@ -18,40 +18,9 @@ import { Select } from '../element/Select.js';
 
 
 
-const BlockQuestions = function ({lang, questions}) {
-    // console.log("BlockQuestions", questions);
-
-    let options = {
-        questions: [
-            { value: lang.select.showAllQuestions },
-            { value: lang.select.openQuestions },
-            { value: lang.select.closeQuestions },
-            { value: lang.select.bestQuestions }
-        ],
-        date: [
-            { value: lang.select.byDate },
-            { value: lang.select.byViews },
-            { value: lang.select.byAnswers },
-        ]
-    }
-    let sortSelects = {
-        selectBlockQuestions1: options.questions[0].value,
-        selectBlockQuestions2: options.date[0].value,
-    }
-
-
-    const changeSelect = (e, type, value,) => {
-        e.stopPropagation()
-        let show = getValue(ID, "showObject")[type]
-        if (e.target.localName === "li") {
-            let tmp = { ...sortSelects, [type]: value };
-            sortSelects = { ...tmp };
-        }
-        setValue(ID, "showObject", { [type]: !show });
-    }
-
+const BlockQuestions = function ({lang, questions, options, changeSelect, sortSelects}) {
+    // console.log("BlockQuestions", questions); 
     const ID = "mainBlock";
-
     return (
 
         <div class="c-questions">
@@ -84,8 +53,8 @@ const BlockQuestions = function ({lang, questions}) {
                 </div>
                 <div class="c-questions__filter questions_filter">
 
-                    {/* <Select options={options.questions} changeSelect={changeSelect} type = "selectBlockQuestions1" selectObject = {sortSelects}  ID = {ID} selectTitle = "Сортировать" />
-                    <Select options={options.date} changeSelect={changeSelect} type = "selectBlockQuestions2"  selectObject = {sortSelects}  ID = {ID} selectTitle = "Сортировать" /> */}
+                    <Select options={options.questions} changeSelect={changeSelect} type = "selectBlockQuestions1" selectObject = {sortSelects}  ID = {ID} selectTitle = "Сортировать" />
+                    <Select options={options.date} changeSelect={changeSelect} type = "selectBlockQuestions2"  selectObject = {sortSelects}  ID = {ID} selectTitle = "Сортировать" />
                     {/* <div class="profit_calculator_inputs_container">
                         <span>{lang.span.sort}</span>
                         <select class="justselect" id="statusQuestions">

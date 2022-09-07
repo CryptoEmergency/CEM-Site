@@ -8,11 +8,12 @@ import {
 } from "@betarost/cemjs";
 
 const Select = function ({options, changeSelect, type, selectObject, ID, selectTitle}) {
+  console.log("options",options)
   return (
     <div class="profit_calculator_inputs_container">
       <span>{selectTitle}</span>
       <div class="justselect-wrapper">
-        <div class="justselect-title" onClick={(e) =>{changeSelect(e,type)}}>
+        <div class="justselect-title" onClick={(e) =>{changeSelect(e,type, ID)}}>
           {selectObject[type]}
         </div>
         <ul
@@ -21,7 +22,7 @@ const Select = function ({options, changeSelect, type, selectObject, ID, selectT
         >
           {options.map((item) => {
             return (
-              <li onClick={(e) => changeSelect(e, type, item.value)}>
+              <li onClick={(e) => changeSelect(e, type, ID, item.value)}>
                 {item.value}
               </li>
             );

@@ -8,7 +8,7 @@ import {
   getValue,
   sendApi,
 } from "@betarost/cemjs";
-import { checkAnswerApi, getExchangeOrTradeList } from "@src/functions.js";
+import { checkAnswerApi } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 
 let count = 0;
@@ -133,11 +133,10 @@ const tradeListView = function () {
         data-firstlimit = "20"
         data-secondlimit = "50"
         onclick={(e) =>{ count = count + 1;
-          return getExchangeOrTradeList(e,false,count)}
+          // return getExchangeOrTradeList(e,false,count)
+          return getTradeList(false)
+        }
          }
-        // onclick={() =>{ count = count + 1;
-        //   return getTradeList(false)}
-        //  }
          >
           <div
             class="btn-view-all"
