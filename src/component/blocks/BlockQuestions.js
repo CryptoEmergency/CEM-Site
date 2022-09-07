@@ -53,15 +53,18 @@ const BlockQuestions = function ({lang, questions}) {
     const ID = "mainBlock";
 
     return (
-        <div class="index-questions">
-            <div class="title-questions">
-                <p class="info-text-questions">{lang.h.lastQuestions}</p>  
-                <div class="input-question-container" data-needauth="true">
-                    <div class="question_search_container">
-                        <div class="mobile-question-container">
-                            <img src={svg.search_icon}/>
-                            <input class="input-question" type="text" data-keyup="questionTypeHelper" placeholder={`${lang.placeholder.question}`} autocomplete="disabled"/>
-                            <img data-action="questionFilterShow" class="mobile_question_filter_icon" src={svg.filter}/>
+
+        <div class="c-questions">
+            <div class="c-questions__header">
+                {/* <p class="c-questions__title info-text-questions"></p> */}
+                <div></div>
+                <div class="c-questions__searchblock c-search">
+                    <div class="c-search__container">
+                        <div class="c-search__wrapper">
+                            <img class="c-search__icon" src={svg.search_icon} />
+                            <input class="c-search__input" type="text" placeholder={`${lang.placeholder.question}`} autocomplete="disabled" />
+                            <img class="c-search__icon c-search__icon--filter" src={svg.filter} />
+
                         </div>
                         <div style="display: none;" class="questions_search">
                             <div class="question_search_half_empty">
