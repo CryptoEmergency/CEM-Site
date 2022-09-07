@@ -44,10 +44,11 @@ import svg from "@assets/svg/index.js";
 const exchangeListView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
   const exchangeList = getValue(ID, "exchangeList");
+  const show = getValue("mainHeader", "show");
   console.log("exchangeList", exchangeList.list_records);
 
   return (
-    <div class="page-content">
+    <div class={`${show ? "c-main__body" : "c-main__body--noheader"} page-content`}>
 
 
         

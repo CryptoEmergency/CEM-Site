@@ -8,14 +8,14 @@ import {
     getStorage,
 } from '@betarost/cemjs'
 import { ModalAuth } from '@component/modals/ModalAuth.js';
-// import HeaderEmpty from './HeaderEmpty.js'
-// import HeaderNotAuth from './HeaderNotAuth.js'
-// import HeaderAuth from './HeaderAuth.js'
+import { ModalComingSoon } from '@component/modals/ModalComingSoon.js';
+
 
 const ID = "modals";
 
 const start = function(){
     const showAuth = getValue("modals", "authModalShow")
+    const commingSoonModalShow = getValue("modals", "commingSoonModalShow")
     const languages = getVariable("languages");
     const lang = languages[getStorage("lang")]
 
@@ -25,6 +25,11 @@ const start = function(){
         <div>
         {showAuth &&
            <ModalAuth 
+           lang={lang}
+           />
+        }
+        {commingSoonModalShow &&
+           <ModalComingSoon 
            lang={lang}
            />
         }

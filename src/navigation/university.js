@@ -1,6 +1,7 @@
 import {
   jsx,
   jsxFrag,
+  getValue,
   getVariable,
   makeDOM,
   getStorage,
@@ -39,15 +40,15 @@ const arrLogo = [
 
 
 
-if( !getStorage('FILTER_UNIVERSITY')){
+if (!getStorage('FILTER_UNIVERSITY')) {
   setStorage('FILTER_UNIVERSITY', 'all');
 }
 
 const clickButton = (type) => {
   setStorage('FILTER_UNIVERSITY', type);
 
- init()
-  
+  init()
+
 }
 
 
@@ -55,47 +56,67 @@ const clickButton = (type) => {
 
 const universityView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
+  const show = getValue("mainHeader", "show");
 
-let filterArrLogo ;
-const type = getStorage('FILTER_UNIVERSITY');
-{type === "all" ? filterArrLogo = arrLogo : 
-filterArrLogo = arrLogo.filter((item) => 
- item.type === type
-) }
+  let filterArrLogo;
+  const type = getStorage('FILTER_UNIVERSITY');
+  {
+    type === "all" ? filterArrLogo = arrLogo :
+    filterArrLogo = arrLogo.filter((item) =>
+      item.type === type
+    )
+  }
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Крипто университет</h1>
-      <h3 style={styles.description}>
-        At vero eos et accusamus et iusto odio dignissimos ducimus, qui
-        blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores
-        et quas molestias excepturi sint, obcaecati cupiditate non provident,
-        similique sunt in culpa, qui officia deserunt mollitia animi, id est
-        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-        distinctio!
-      </h3>
-      <div style={styles.buttonContainer}>
-        <button style={[styles.filterButton,type === "all" && styles.blue]}    onclick = {() => clickButton("all") }>Всё</button>
-        <button style={ [styles.filterButton,type === "profession" && styles.blue]}  onclick = {() => clickButton("profession")} >Профессии</button>
-        <button style={[styles.filterButton,type === "language" && styles.blue]}  onclick = {() => clickButton("language") }>Иностранные языки</button>
-      </div>
-      <div style={styles.itemContainer}>
-        {filterArrLogo.map((item, i) => {
-          return (
-            <div key = {i} style={styles.item}>
-              <div style={styles.logoContainer}>
-                <img style={styles.logo} src={item.img}></img>
-              </div>
-              <div style={styles.info}>
-                <p style={styles.itemTitle}>{item.title}</p>
-                <p style={styles.itemDescription}>
-                  {item.description}
-                </p>
-                <button style={styles.itemButton}>Подробнее</button>
-              </div>
-            </div>
-          );
-        })}
+    <div class={`${show ? "c-main__body" : "c-main__body--noheader"} c-university`}>
+      <div class="c-university__container c-container">
+        <h1 class="c-university__title">Крипто университет</h1>
+        <h3 class="c-university__promo">
+          At vero eos et accusamus et iusto odio dignissimos ducimus, qui
+          blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores
+          et quas molestias excepturi sint, obcaecati cupiditate non provident,
+          similique sunt in culpa, qui officia deserunt mollitia animi, id est
+          laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+          distinctio!
+        </h3>
+        <div class="c-university__toggles customscroll--gorizontal">
+          <button
+            class={`c-university__btn ${type === "all" ? " c-university__btn--active" : ""}`}
+            onclick={() => clickButton("all")}
+          >
+            Всё
+          </button>
+          <button
+            class={`c-university__btn ${type === "profession" ? " c-university__btn--active" : ""}`}
+            onclick={() => clickButton("profession")}
+          >
+            Профессии
+          </button>
+          <button
+            class={`c-university__btn ${type === "language" ? " c-university__btn--active" : ""}`}
+            onclick={() => clickButton("language")}
+          >
+            Иностранные языки
+          </button>
+        </div>
+        <ul class="c-university__list">
+          {filterArrLogo.map((item, i) => {
+            return (
+              <li class="c-university__item c-universitycard" key={i}>
+                <div class="c-universitycard__wrapper">
+                  <img class="c-universitycard__img" src={item.img}></img>
+                </div>
+                <div class="c-universitycard__info">
+                  <h5 class="c-universitycard__title">{item.title}</h5>
+                  <p class="c-universitycard__text">
+                    {item.description}
+                  </p>
+                  <button class="c-universitycard__btn">Подробнее</button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
@@ -111,74 +132,3 @@ const init = function (reload) {
 };
 
 export default init;
-
-
-
-
-
-
-
-
-const styles = {
-  container: {
-    margin: "0 auto",
-    width: "1240px",
-  },
-  title: {
-    width: "600px",
-    margin: "50px auto",
-    "font-size": "40px",
-    "text-align": "center",
-  },
-  description: {},
-  filterButton: {
-    width: "150px",
-    padding: "10px",
-    "border-radius": "10px",
-    // "color":`${getStorage('FILTER_UNIVERSITY') === "all" && "red"}`
-  },
-  buttonContainer: {
-    display: "flex",
-    "justify-content": "space-around",
-    margin: "30px 0",
-  },
-  itemContainer: {
-    display: "flex",
-    "flex-direction": "column",
-  },
-
-  item: {
-    "border-radius": "30px",
-    display: "flex",
-    padding: "20px",
-  },
-  logoContainer: {
-    height: "250px",
-  },
-  logo: {
-    height: "100%",
-    width:"100%"
-  },
-  info: {
-    "flex-basis": "70%",
-    display: "flex",
-    "margin-left": "20px",
-    "flex-direction": "column",
-    "align-items": "center",
-    "justify-content":"space-between",
-  },
-  itemButton: {
-    width: "150px",
-    padding: "10px",
-    "border-radius": "10px",
-  },
-  itemDescription: {},
-  itemTitle: {
-    "font-size": "30px",
-    margin: "10px 0",
-  },
-  blue:{
-    "background-color":"blue"
-  },
-  
-};
