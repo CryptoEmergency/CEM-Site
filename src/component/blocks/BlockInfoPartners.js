@@ -26,11 +26,11 @@ const BlockInfoPartners = function ({ lang, partners }) {
                     })
                 }
             </div>
-            <a href="partners/" class="c-infopartners__more btn-view-all-a" data-action="link">
-                <div class="btn-view-all more_partners">
-                    <div>{lang.button.allPartners}</div>
-                </div>
-            </a>
+            <div class="c-infopartners__more">
+                <a class="c-button c-button--gray" href="partners/">
+                    <span class="c-button__wrapper">{lang.button.allPartners}</span>
+                </a>
+            </div>
         </div>
     )
 }

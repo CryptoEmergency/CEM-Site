@@ -11,11 +11,11 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-const NumFormat = function(value, options) {
-	if(value === null || value === undefined){
-		return 0;
-	}
-	return value.toLocaleString('en-US')
+const NumFormat = function (value, options) {
+    if (value === null || value === undefined) {
+        return 0;
+    }
+    return value.toLocaleString('en-US')
 };
 
 const BlockTrade = function ({ lang, trades }) {
@@ -45,7 +45,7 @@ const BlockTrade = function ({ lang, trades }) {
                     </div>
                 </div>
                 {
-                    trades.map(function (trade,i) {
+                    trades.map(function (trade, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row tradeListLoad"
@@ -54,7 +54,7 @@ const BlockTrade = function ({ lang, trades }) {
                                 data-count={trade.marketId}
                             >
                                 <div class="crypto_exchanges-cell">
-                                    {i+1}.
+                                    {i + 1}.
                                 </div>
                                 <div class="crypto_exchanges-cell">
                                     <div>
@@ -109,11 +109,16 @@ const BlockTrade = function ({ lang, trades }) {
                     })
                 }
             </div>
-            <a href="{{lang.url}}list-trade/" class="btn-view-all-a" data-action="link">
+            <div class="crypto_exchanges_footer">
+                <a class="c-button c-button--gray" href="list-trade/">
+                    <span class="c-button__wrapper">{lang.button.show_all}</span>
+                </a>
+            </div>
+            {/* <a href="{{lang.url}}list-trade/" class="btn-view-all-a" data-action="link">
                 <div class="btn-view-all">
                     <div>{lang.button.show_all}</div>
                 </div>
-            </a>
+            </a> */}
         </div>
     )
 }

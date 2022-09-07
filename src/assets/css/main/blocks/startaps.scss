@@ -1,5 +1,5 @@
 /* Startaps styles */
-.startaps-other {
+.c-startaps {
     max-width: 1240px;
     margin: 20px auto;
 
@@ -53,20 +53,20 @@
     }
 }
 
-.sturtups-wrapper {
-    padding-top: 60px;
-    background: url("../svg/lines-three.svg") no-repeat;
-    background-position: top 165px right 20px;
-    margin-bottom: 20px;
+// .sturtups-wrapper {
+//     padding-top: 60px;
+//     background: url("../svg/lines-three.svg") no-repeat;
+//     background-position: top 165px right 20px;
+//     margin-bottom: 20px;
 
-    @media(max-width: 1240px) {
-        padding-top: 0;
-    }
+//     @media(max-width: 1240px) {
+//         padding-top: 0;
+//     }
 
-    @media(max-width: 1024px) {
-        padding-top: 0;
-    }
-}
+//     @media(max-width: 1024px) {
+//         padding-top: 0;
+//     }
+// }
 
 .swiper-startups {
     width: 1240px;

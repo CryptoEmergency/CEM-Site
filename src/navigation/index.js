@@ -164,7 +164,7 @@ const mainView = function () {
             <div class="c-main__wrapperbg">
                 <BlockQuestions lang={lang} questions={questions} />
 
-                <div class="sturtups-wrapper">
+                <div class="c-main__wrapperbg2">
                     <BlockBanners banners={banners} />
                     <BlockTrade lang={lang} trades={trades} />
                     <div class="top_professionals_container">

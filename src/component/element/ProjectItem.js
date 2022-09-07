@@ -12,10 +12,10 @@ import {
 import svg from "@assets/svg/index.js";
 
 const ProjectItem = function ({ lang, project }) {
-    console.log("ProjectItem", project);
+    // console.log("ProjectItem", project);
 
     return (
-        <div class="c-partners__item swiper-slide slide-item">
+        <div class="c-projects__item swiper-slide slide-item">
             <a href={`/${project.link}/`}>
                 <div class="projects_icons_text">
                     <div class="nav-more_item">

@@ -16,7 +16,7 @@ const BlockBanners = function ({ banners }) {
     // console.log("BlockBanners", banners);
 
     return (
-        <div class="startaps-other">
+        <div class="c-startaps">
             <div class="swiper-container">
                 <div class="swiper swiper-startups" id="swiper-startups">
                     <div class="swiper-wrapper">

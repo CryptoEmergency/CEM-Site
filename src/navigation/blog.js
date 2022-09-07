@@ -69,7 +69,7 @@ const blogView = function () {
                 <input type="text" id="datepicker"></p>
             </div>
              */}
-          <input
+          {/* <input
             data-keyup="newsSearchEnter"
             data-type="blog"
             class="news_search_input"
@@ -77,7 +77,7 @@ const blogView = function () {
           />
           <div data-action="searchNewsInputSummon" class="news_search_button">
             <img src={svg["search_button"]} />
-          </div>
+          </div> */}
         </div>
         <div class="tags">
           <div
@@ -96,7 +96,7 @@ const blogView = function () {
           {blogCategory.list_records.map((item) => {
             return (
               <div
-                class="tag_button tag_button_active"
+                class="tag_button "
                 data-action="changeTagButton"
                 data-type="blog"
                 data-name={item.name}

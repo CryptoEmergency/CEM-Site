@@ -15,7 +15,7 @@ const ProjectDoubleItem = function ({ lang, projects }) {
     // console.log("ProjectDoubleItem", projects);
 
     return (
-        <div class="swiper-slide slide-item">
+        <div class="c-projects__item c-projects__item--double swiper-slide slide-item">
             <a href={`/${projects[0].link}/`}>
                 <div class="projects_icons_text">
                     <div class="nav-more_item">

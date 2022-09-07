@@ -159,6 +159,14 @@
     }
 }
 
+.crypto_exchanges_footer {
+    padding-top: 60px;
+
+    @media (max-width: 1024px) {
+        padding-top: 20px;
+    }
+}
+
 .btn-news-preview {
     border-radius: 3px;
     display: block;
