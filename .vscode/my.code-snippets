@@ -26,7 +26,7 @@
 			"",
 			"const ID = '${1:mainBlock}'",
 			"",
-			"const defaultInit = function () {",
+			"const defaultInit = async function () {",
 			"setValue('mainHeader', 'show', ${2:true});",
 			"setValue('mainFooter', 'show', ${3:true});",
 			"$4",

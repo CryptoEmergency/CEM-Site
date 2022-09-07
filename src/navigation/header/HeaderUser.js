@@ -2,7 +2,7 @@ import { jsx, jsxFrag, getVariable, getStorage, makeDOM, timersStart, setValue, 
 import { checkAnswerApi } from '@src/functions.js';
 import svg from '@assets/svg/index.js';
 
-console.log('=f11fee=', svg)
+
 const startView = function () {
     const lang = getVariable('languages')[getStorage('lang')];
     const show = getValue('mainHeader', 'show');
