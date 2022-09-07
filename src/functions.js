@@ -153,6 +153,10 @@ const allValidation = (str, type, condition) => {
 
 const changeNewsCategory = async (e,type,init) => {
     const ID = "mainBlock";
+    e.target.closest('.tags').childNodes.forEach(function(child) {
+      child.classList.remove('tag_button_active');
+    });
+    e.currentTarget.classList.add('tag_button_active');
     let typeCategory = e.currentTarget.dataset.name;
     let data = {
         select: {

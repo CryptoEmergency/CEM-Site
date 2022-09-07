@@ -42,19 +42,30 @@
     &__list {
         display: flex;
         flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
     }
 
-    &__item {
-        border-radius: 30px;
-        display: flex;
-        padding: 20px;
-    }
+    &__item {}
 }
 
 .c-universitycard {
+    display: block;
+    padding: 20px 0;
+    border-radius: 30px;
+
+    @media(min-width: 768px) {
+        display: flex;
+        padding: 20px;
+    }
 
     &__wrapper {
-        height: 250px;
+        // height: 250px;
+
+        @media(min-width: 768px) {
+            height: 250px;
+        }
     }
 
     &__img {
@@ -76,9 +87,7 @@
         margin: 10px 0;
     }
 
-    &__text {
-
-    }
+    &__text {}
 
     &__btn {
         width: 150px;

@@ -145,6 +145,10 @@
         display: flex;
         justify-content: center;
         padding-top: 60px;
+
+        @media (max-width: 1024px) {
+            padding-top: 20px;
+        }
     }
 }
 
@@ -603,6 +607,26 @@
                     display: none;
                 }
             }
+        }
+    }
+}
+
+.question-block {
+
+    &:nth-child(5),
+    &:nth-child(6) {
+        @media(max-width: 1024px) {
+            display: none;
+        }
+    }
+}
+
+.new_professional_card {
+
+    &:nth-child(5),
+    &:nth-child(6) {
+        @media(max-width: 1024px) {
+            display: none;
         }
     }
 }

@@ -120,11 +120,11 @@ const BlockQuestions = function ({lang, questions}) {
                     })
                 }
             </div>
-            <a href="{{lang.url}}question/" class="btn-view-all-a" data-action="link">
-                <div class="btn-view-all">
-                    <div>{lang.button.allQuestions}</div>
-                </div>
-            </a>
+            <div class="c-questions__footer">
+                <a class="c-button c-button--gray" href="question/">
+                    <span class="c-button__wrapper">{lang.button.allQuestions}</span>
+                </a>
+            </div>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 /* Projects styles */
-.index-content {
+.c-projects {
     background-color: $infinity1;
     padding-top: 1px;
     position: relative;
@@ -14,14 +14,14 @@
 
     .swiper-container {
 
-        &:nth-child(1){
+        &:nth-child(1) {
 
             @media(max-width: 1199px) {
                 display: none;
             }
         }
 
-        &:nth-child(2){
+        &:nth-child(2) {
             display: none;
 
             @media(max-width: 1199px) {
@@ -33,13 +33,68 @@
     .swiper-button-prev {
         top: 36% !important;
     }
-    
+
     .swiper-button-next {
         top: 36% !important;
     }
+
+    &__more {
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
+        font-weight: 600;
+        font-size: 20px;
+        margin-top: -20px;
+        cursor: pointer;
+        z-index: 10;
+
+        @media(max-width: 1199px) {
+            margin-top: -50px;
+        }
+    }
 }
 
-#swiper-one{
+// .index-content {
+//     background-color: $infinity1;
+//     padding-top: 1px;
+//     position: relative;
+
+//     @media(max-width: 1240px) {
+//         padding-top: 10px;
+//     }
+
+//     a {
+//         color: inherit;
+//     }
+
+//     .swiper-container {
+
+//         &:nth-child(1){
+
+//             @media(max-width: 1199px) {
+//                 display: none;
+//             }
+//         }
+
+//         &:nth-child(2){
+//             display: none;
+
+//             @media(max-width: 1199px) {
+//                 display: block;
+//             }
+//         }
+//     }
+
+//     .swiper-button-prev {
+//         top: 36% !important;
+//     }
+
+//     .swiper-button-next {
+//         top: 36% !important;
+//     }
+// }
+
+#swiper-one {
     display: none;
 
     @media(max-width: 1199px) {
@@ -100,12 +155,10 @@
             top: 0;
             width: 140px;
             height: 140px;
-            background: linear-gradient(
-              56.57deg,
-              $hailey_blue 0%,
-              $thick_purple 45.56%,
-              $spicy_pink 65.28%
-            );
+            background: linear-gradient(56.57deg,
+                    $hailey_blue 0%,
+                    $thick_purple 45.56%,
+                    $spicy_pink 65.28%);
             z-index: -1;
             border-radius: 3px;
             transition: 1s;
@@ -142,17 +195,17 @@
     }
 }
 
-.main_page_show_more {
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
-    font-weight: 600;
-    font-size: 20px;
-    margin-top: -20px;
-    cursor: pointer;
-    z-index: 10;
+// .main_page_show_more {
+//     position: absolute;
+//     right: 50%;
+//     transform: translateX(50%);
+//     font-weight: 600;
+//     font-size: 20px;
+//     margin-top: -20px;
+//     cursor: pointer;
+//     z-index: 10;
 
-    @media(max-width: 1199px) {
-        margin-top: -50px;
-    }
-}
+//     @media(max-width: 1199px) {
+//         margin-top: -50px;
+//     }
+// }

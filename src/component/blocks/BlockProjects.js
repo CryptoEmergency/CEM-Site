@@ -24,10 +24,10 @@ const doubleProject = function(projects) {
 };
 
 const BlockProjects = function ({lang, projects}) {
-    console.log("BlockProjects", projects);
+    // console.log("BlockProjects", projects);
 
     return (
-        <div class="c-projects index-content">
+        <div class="c-projects">
             <div class="swiper-container">
                 <div class="swiper swiper-icons" id="swiper-desktop">
                     <div class="swiper-wrapper">
