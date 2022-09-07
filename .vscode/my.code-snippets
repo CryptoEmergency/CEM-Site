@@ -11,17 +11,45 @@
 		"scope": "javascript,typescript",
 		"prefix": "_newPage",
 		"body": [
-			"import {jsx,jsxFrag,getVariable,getStorage,makeDOM,timersStart,setValue,getValue,sendApi} from '@betarost/cemjs'",
-			"$2"
+			"import {jsx,jsxFrag,getVariable,getStorage,makeDOM,timersStart,setValue,getValue,sendApi} from '@betarost/cemjs';",
+			"import {checkAnswerApi} from '@src/functions.js';",
+			"",
+			"const startView = function () {",
+			"const lang = getVariable('languages')[getStorage('lang')];",
+			"const show = getValue('mainHeader', 'show');",
+			"",
+			"return (",
+			"<div class={show && 'c-main__body' || 'c-main__body--noheader'}>",
+			"</div>",
+			")",
+			"}",
+			"",
+			"const ID = '${1:mainBlock}'",
+			"",
+			"const defaultInit = function () {",
+			"setValue('mainHeader', 'show', ${2:true});",
+			"setValue('mainFooter', 'show', ${3:true});",
+			"$4",
+			"}",
+			"",
+			"const afterInit = function () {",
+			"}",
+			"",
+			"const init = async function (reload) {",
+			"if (!reload){defaultInit();}",
+			"await makeDOM(startView(), ID);",
+			"if (!reload){afterInit();}",
+			"}",
+			"",
+			"export default init;"
 		],
-		"description": "ппппп"
+		"description": ""
 	},
 	"Получение актуального языка": {
 		"scope": "javascript,typescript",
-		"prefix": "_language",
+		"prefix": "_getLang",
 		"body": [
 			"const lang = getVariable('languages')[getStorage('lang')];",
-			"${1|one,two,three|}"
 		],
 		"description": "ппппп"
 	},
@@ -38,6 +66,46 @@
 		"prefix": "_img",
 		"body": [
 			"import images from '@assets/images/index.js';"
+		],
+		"description": ""
+	},
+	"Имопрт страницы сайта": {
+		"scope": "javascript,typescript",
+		"prefix": "_iPage",
+		"body": [
+			"import ${1:Name} from '@src/navigation/${2:Name}.js';"
+		],
+		"description": ""
+	},
+	"Имопрт вспомогательного компонента": {
+		"scope": "javascript,typescript",
+		"prefix": "_iElement",
+		"body": [
+			"import {${1:Name}} from '@src/navigation/${2:Name}.js';"
+		],
+		"description": ""
+	},
+	"Получить значение": {
+		"scope": "javascript,typescript",
+		"prefix": "_getValue",
+		"body": [
+			"getValue(ID, '${1:Переменная}')"
+		],
+		"description": ""
+	},
+	"Назначить значение": {
+		"scope": "javascript,typescript",
+		"prefix": "_setValue",
+		"body": [
+			"setValue(ID, '${1:Переменная}', ${2:Значение})"
+		],
+		"description": ""
+	},
+	"Консоль лог": {
+		"scope": "javascript,typescript",
+		"prefix": "_log",
+		"body": [
+			"console.log('=$RANDOM_HEX=',${1:Переменная})"
 		],
 		"description": ""
 	}

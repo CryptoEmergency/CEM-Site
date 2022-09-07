@@ -7,19 +7,27 @@ import swiperload from "@assets/js/swiper.js"
 
 const start = async function (reload) {
     const dataUrl = getVariable("dataUrl")
+    let page = dataUrl.adress
     if (!dataUrl.adress || dataUrl.adress == "") {
         await list.index(reload);
         after()
         return;
     }
 
-    if (!list[dataUrl.adress]) {
+    if (dataUrl.category) {
+      page += "/"+dataUrl.category
+    }else if(dataUrl.adress == "user"){
+      page = "user/index"
+    }
+   
+    if (!list[page]) {
         await list.error404(reload)
         after()
         return;
     }
 
-    await list[dataUrl.adress](reload);
+
+    await list[page](reload);
     after()
     return;
 }

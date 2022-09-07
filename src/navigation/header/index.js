@@ -9,16 +9,23 @@ import {
 import HeaderEmpty from './HeaderEmpty.js'
 import HeaderNotAuth from './HeaderNotAuth.js'
 import HeaderAuth from './HeaderAuth.js'
+import HeaderUser from './HeaderUser.js';
 
 const ID = "mainHeader";
 
 const init = function (reload) {
     if (!reload) {
         setValue(ID, "langListShow", false)
+        setValue('mainHeader', 'showUserMenu', true);
         setValue("modals", "authModalShow", false)
+
     }
 
     if (!getValue(ID, "show")) {
+        if (getValue(ID, "showUserMenu")) {
+            HeaderUser();
+            return;
+        }
         makeDOM(<HeaderEmpty />, ID)
         return;
     }
