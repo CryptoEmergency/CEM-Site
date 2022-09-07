@@ -28,7 +28,7 @@ const BlockUserNewsItem = function () {
             <div class="comment_body">
 
 
-                {item.media.length > 0 
+                {item.media.length > 0 &&
                     <div class="swiper-container">  
                     <div class="swiper swiper-post_media">
                         <div class="swiper-wrapper">
@@ -68,12 +68,38 @@ const BlockUserNewsItem = function () {
                                     </a>
                             }  
                         </div>
+
                         <div class="swiper-pagination swiper-pagination-post_media"></div>
                         <div class="swiper-scrollbar-post_media"></div>
                     </div> 
                 </div>
                 
             }
+            <div class="post_audio_container">
+                        {{#is (audioCountCheck media) true}}
+                            {{#if text}}
+                                {{#arrayWhile media}}
+                                    {{#is type "audio"}}
+                                        {{>audioPlayer src=name path="/assets/upload/posts/"}}
+                                    {{/is}}
+                                {{/arrayWhile}}
+                            {{else}}
+                                <div class="user_post_text_background">
+                                    {{#arrayWhile media}}
+                                        {{#is type "audio"}}
+                                            {{>audioPlayer src=name path="/assets/upload/posts/"}}
+                                        {{/is}}
+                                    {{/arrayWhile}}
+                                </div>
+                            {{/if}}
+                        {{else}}
+                        {{#arrayWhile media}}
+                            {{#is type "audio"}}
+                                {{>audioPlayer src=name path="/assets/upload/posts/"}}
+                            {{/is}}
+                        {{/arrayWhile}}
+                        {{/is}}
+            </div>
 
 
 
