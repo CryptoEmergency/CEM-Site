@@ -35,7 +35,7 @@ const mainView = function () {
         {
             "title": lang.a.university,
             "icon": "mortarboard",
-            "link": "library"
+            "link": "university"
         },
         {
             "title": lang.a.contentCreater,

@@ -57,9 +57,10 @@ const blogView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
   const blogCategory = getValue(ID, "blogCategory");
   const blogItem = getValue(ID, "blogItem");
+  const show = getValue("mainHeader", "show");
 
   return (
-    <div class="blog_page_container">
+    <div class={`${show ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
       <div class="blog_page">
         <div class="blog_filter">
           <h2>{lang.h.blog}</h2>
@@ -86,7 +87,7 @@ const blogView = function () {
             data-name="All"
             data-total="{{totalFound}}"
             onclick={(e) => {
-              changeNewsCategory(e,"blog",init)
+              changeNewsCategory(e, "blog", init)
             }}
           >
             <span>{lang.categoryName.all}</span>
@@ -101,7 +102,7 @@ const blogView = function () {
                 data-name={item.name}
                 data-total=""
                 onclick={(e) => {
-                  changeNewsCategory(e,"blog",init)
+                  changeNewsCategory(e, "blog", init)
                 }}
               >
                 <span>{lang.categoryName[item.name]}</span>

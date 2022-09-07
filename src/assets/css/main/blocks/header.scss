@@ -336,6 +336,26 @@
             background-color: transparent;
         }
     }
+
+    &--gorizontal {
+        
+        &::-webkit-scrollbar{
+            height: 6px;
+        }
+    
+        &::-webkit-scrollbar-button {
+            background-repeat: no-repeat;
+            width: 6px;
+            height: 0px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background: linear-gradient(45deg,$summer_sky 0,$blue_oyster_cult 45%,$akebi_purple 57%,$lilac_lotion 70%);
+        }
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    }
 }
 
 .avatar_user_online {
