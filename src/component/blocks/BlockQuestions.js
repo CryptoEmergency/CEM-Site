@@ -56,7 +56,7 @@ const BlockQuestions = function ({ lang, questions }) {
         <div class="c-questions">
             <div class="c-questions__header">
                 {/* <p class="c-questions__title info-text-questions"></p> */}
-                {/*777*/}
+                <div></div>
                 <div class="c-questions__searchblock c-search">
                     <div class="c-search__container">
                         <div class="c-search__wrapper">
