@@ -110,7 +110,7 @@ const BlockQuestions = function ({lang, questions}) {
                 </div>
                 <h4>{lang.h.lastQuestions}</h4>
             </div>     
-            <div class="questions-blocks">
+            <div class="c-questions__list questions-blocks">
                 {
                     questions.map((question) =>{
                         // console.log("item=",question);
