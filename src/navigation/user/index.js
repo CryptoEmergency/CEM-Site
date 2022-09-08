@@ -8,7 +8,7 @@ const startView = function () {
     const show = getValue('mainHeader', 'show');
     const myInfo = getStorage('myInfo');
     const userInfo = getValue(ID, 'userInfoProfile');
-    console.log('=fd786a=', myInfo, userInfo)
+
     //const userInfo = getValue('ID', 'userInfoProfile');
     return (
         <div class={show && 'c-main__body' || 'c-main__body--noheader'}>
@@ -29,7 +29,7 @@ const defaultInit = async function () {
     setValue('mainFooter', 'show', true);
     const dataUrl = getVariable('dataUrl')
     const myInfo = getStorage('myInfo');
-    console.log('=53784c myInfo=', myInfo)
+
     if (!dataUrl.params || myInfo.nickname == dataUrl.params) {
         setValue(ID, 'userInfoProfile', myInfo);
     } else {
