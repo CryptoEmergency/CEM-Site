@@ -59,6 +59,7 @@ const blogView = function () {
   const blogItem = getValue(ID, "blogItem");
   const show = getValue("mainHeader", "show");
   const activeCategory = getValue(ID, 'activeCategory')
+  console.log('=a9c77f=',activeCategory)
   
   return (
     <div class={`${show ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
