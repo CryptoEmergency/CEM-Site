@@ -7,6 +7,27 @@
 	// Placeholders with the same ids are connected.
 	// "${1|one,two,three|}"
 	// Example:
+	"Создание нового блока": {
+		"scope": "javascript,typescript",
+		"prefix": "_newBlock",
+		"body": [
+			"import {jsx,jsxFrag,getVariable,getStorage,makeDOM,timersStart,setValue,getValue,sendApi} from '@betarost/cemjs';",
+			"import svg from '@assets/svg/index.js';",
+			"import images from '@assets/images/index.js';",
+			"",
+			"const $TM_FILENAME_BASE = function ({ lang }) {",
+			"",
+			"return (",
+			"<div>",
+			"$1",
+			"</div>",
+			")",
+			"}",
+			"",
+			"export { $TM_FILENAME_BASE };"
+		],
+		"description": ""
+	},
 	"Страница сайта": {
 		"scope": "javascript,typescript",
 		"prefix": "_newPage",
