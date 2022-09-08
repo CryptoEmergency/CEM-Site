@@ -58,7 +58,6 @@ const newsView = function () {
   const newsCategory = getValue(ID, "newsCategory");
   const newsItem = getValue(ID, "newsItem");
   const activeCategory = getValue(ID, 'activeCategory')
-  console.log('=8a7041=',activeCategory)
 
   return (
     <div class="blog_page_container">
@@ -82,7 +81,7 @@ const newsView = function () {
             data-name="All"
             data-total=""
             onclick={(e) => {
-              changeNewsCategory(e,"news",init)
+              changeNewsCategory(e, "news", init)
             }}
           >
             <span>{lang.categoryName.all}</span>
@@ -96,7 +95,7 @@ const newsView = function () {
                 data-name={item.name}
                 data-total=""
                 onclick={(e) => {
-                  changeNewsCategory(e,"news",init)
+                  changeNewsCategory(e, "news", init)
                 }}
               >
                 <span>{lang.categoryName[item.name]}</span>
@@ -165,10 +164,13 @@ const newsView = function () {
 const ID = "mainBlock";
 
 const init = async function (reload) {
-  
-  setValue(ID, 'activeCategory', "All")
+
+
 
   if (!reload) {
+
+    setValue(ID, 'activeCategory', "All")
+
     if (!getValue(ID, "newsCategory")) {
       setValue(ID, "newsCategory", await getNewsCategory("news"));
     }

@@ -18,7 +18,7 @@ import { Select } from '../element/Select.js';
 
 
 
-const BlockQuestions = function ({lang, questions}) {
+const BlockQuestions = function ({ lang, questions }) {
     // console.log("BlockQuestions", questions);
 
     let options = {
@@ -109,10 +109,10 @@ const BlockQuestions = function ({lang, questions}) {
                     </div>
                 </div>
                 <h4>{lang.h.lastQuestions}</h4>
-            </div>     
+            </div>
             <div class="c-questions__list questions-blocks">
                 {
-                    questions.map((question) =>{
+                    questions.map((question) => {
                         // console.log("item=",question);
                         return (
                             <QuestionItem lang={lang} question={question} />

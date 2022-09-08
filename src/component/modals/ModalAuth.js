@@ -9,19 +9,31 @@ import {
     getValue
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
+import { PhoneCode } from '@component/element/PhoneCode.js';
 
 const showModalAuth = function (e) {
-    //console.log('dfffffff');
     e.stopPropagation()
     setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
 }
 
-const ModalAuth = function ({ lang }) {
+// const changeCode = (e, code) => {
+//     e.stopPropagation()
+//     const ID = "mainBlock";
+//     let show = getValue(ID, "showPhoneSelect")
+//     if (e.target.localName === "li") {
+//         //   let tmp = { ...formInputs, [type]: value };
+//         //   formInputs = { ...tmp };
+//         console.log(code);
+//     }
+//     setValue(ID, "showPhoneSelect", { [type]: !show });
+// }
+
+const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle }) {
     // console.log("ModalAuth");
     const authModalShow = getValue("modals", "authModalShow")
 
     return (
-        <div class="c-modal c-modal--open">
+        <div class="c-modal c-modal--open" id="ModalLogin">
             <section class="c-modal__dialog">
                 <header class="c-modal__header">
                     <h2 class="c-modal__title">{lang.h.modal_login}</h2>
@@ -36,22 +48,22 @@ const ModalAuth = function ({ lang }) {
                         <button
                             data-form_type="login"
                             id="loginByEmail"
-                            class="reset_password_button active"
+                            class="reset_password_button"
                         >
-                            { lang.button.email }
+                            {lang.button.email}
                         </button>
                         <button
                             data-form_type="login"
                             id="loginByMobile"
-                            class="reset_password_button"
+                            class="reset_password_button active"
                         >
-                            { lang.button.phone }
+                            {lang.button.phone}
                         </button>
                     </div>
                     <form id="loginForm">
                         <input style="display: none;" type="submit" />
                         <div class="reset_password_input_block">
-                            <div class="reset_by_email_block">
+                            <div class="reset_by_email_block dn">
                                 <label for="resetByEmailInput">{lang.label.email}</label>
                                 <div class="error-div">{lang.error_div.wrong_email}</div>
                                 <div class="reset_by_email_block_container">
@@ -67,10 +79,14 @@ const ModalAuth = function ({ lang }) {
                                     />
                                 </div>
                             </div>
-                            <div class="reset_by_mobile_block dn">
+                            <div class="reset_by_mobile_block">
                                 <label for="resetByEmailInput">{lang.label.phone}</label>
                                 <div class="error-div">{lang.error_div.wrong_phone}</div>
-                                <div class="reset_by_mobile_block_container">
+                                <div class="reset_by_mobile_block_container c-phonecode">
+                                    {/* <input type="text" class="c-form__field c-phonecode__field" id="phonecode" value="+7" /> */}
+
+                                    <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
+
                                     <input
                                         class="phoneNubmerInput2"
                                         data-form_type="login"
@@ -83,8 +99,10 @@ const ModalAuth = function ({ lang }) {
                                         name="phone"
                                         autofocus="true"
                                         placeholder="9990000000"
-                                        data-co="ru"
+                                        data-co={abbr}
                                     />
+
+                                    <input id="phone_prefix2" type="hidden" name="__phone_prefix" value={codeTitle} />
                                 </div>
                             </div>
                         </div>
@@ -99,7 +117,7 @@ const ModalAuth = function ({ lang }) {
                                 <div class="error-div-variant">{lang.error_div.password5}</div>
                             </div>
                             <div class="input-div">
-                                <img src={svg["icon/lock"]} class="icon-input" />
+                                <img src={svg["lock"]} class="icon-input" />
                                 <input
                                     data-keyup="keyupValidate"
                                     data-form_type="login"
@@ -110,7 +128,7 @@ const ModalAuth = function ({ lang }) {
                                     id="auth_pass"
                                     type="password"
                                 />
-                                <img src={svg["icon/eye"]} class="password_eye"  />
+                                <img src={svg["eye"]} class="password_eye" />
                             </div>
                         </div>
                     </form>
@@ -129,11 +147,11 @@ const ModalAuth = function ({ lang }) {
                 </div>
 
                 <footer class="c-modal__footer">
-                    <button class="c-button c-button--primary"
-                        onclick={() => { alert(7) }}
-                    >
-                        <span>Кнопка</span>
-                    </button>
+                    {/* <a class="c-button c-button--outline2 " href="">
+                        <div class="c-button__wrapper">
+                            {lang.button.giveAnswer}
+                        </div>
+                    </a> */}
                     <div class="btn-modal-log_in inactive_form_button" data-active="0" data-form_type="login" id="auth_system">
                         <a class="btn-gr-log-in"><span>{lang.button.login}</span></a>
                     </div>
@@ -147,4 +165,4 @@ const ModalAuth = function ({ lang }) {
 };
 
 
-export { ModalAuth }
+export { ModalAuth };

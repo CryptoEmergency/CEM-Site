@@ -3,6 +3,3 @@ import { init as startMake } from '@src/router.js'
 setAction("App", "start", startMake)
 const init = function () { startMake() }
 export { init }
-console.log("werty")
-console.log('=695ed7=',"Виктория")
-
