@@ -57,6 +57,9 @@ const newsView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
   const newsCategory = getValue(ID, "newsCategory");
   const newsItem = getValue(ID, "newsItem");
+  const activeCategory = getValue(ID, 'activeCategory')
+  console.log('=8a7041=',activeCategory)
+
   return (
     <div class="blog_page_container">
       <div class="blog_page">
@@ -73,7 +76,7 @@ const newsView = function () {
         </div>
         <div class="tags">
           <div
-            class="tag_button tag_button_active"
+            class={`tag_button ${activeCategory == "All" && "tag_button_active"}`}
             data-action="changeTagButton"
             data-type="news"
             data-name="All"
@@ -87,7 +90,7 @@ const newsView = function () {
           {newsCategory.list_records.map((item) => {
             return (
               <div
-                class="tag_button tag_button_active"
+                class={`tag_button ${activeCategory == item.name && "tag_button_active"}`}
                 data-action="changeTagButton"
                 data-type="news"
                 data-name={item.name}
@@ -162,6 +165,9 @@ const newsView = function () {
 const ID = "mainBlock";
 
 const init = async function (reload) {
+  
+  setValue(ID, 'activeCategory', "All")
+
   if (!reload) {
     if (!getValue(ID, "newsCategory")) {
       setValue(ID, "newsCategory", await getNewsCategory("news"));

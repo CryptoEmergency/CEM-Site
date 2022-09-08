@@ -23,16 +23,17 @@ const start = function(){
 
     return (
         <div>
-        {showAuth &&
-           <ModalAuth 
-           lang={lang}
-           />
-        }
-        {commingSoonModalShow &&
-           <ModalComingSoon 
-           lang={lang}
-           />
-        }
+            <div class={`c-backdrop ${showAuth || commingSoonModalShow ? "c-backdrop--show" : ""}`}></div>
+            {showAuth &&
+            <ModalAuth 
+            lang={lang}
+            />
+            }
+            {commingSoonModalShow &&
+            <ModalComingSoon 
+            lang={lang}
+            />
+            }
         </div>
     )
 

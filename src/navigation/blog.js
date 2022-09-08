@@ -58,7 +58,8 @@ const blogView = function () {
   const blogCategory = getValue(ID, "blogCategory");
   const blogItem = getValue(ID, "blogItem");
   const show = getValue("mainHeader", "show");
-
+  const activeCategory = getValue(ID, 'activeCategory')
+  
   return (
     <div class={`${show ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
       <div class="blog_page">
@@ -81,7 +82,7 @@ const blogView = function () {
         </div>
         <div class="tags">
           <div
-            class="tag_button tag_button_active"
+            class={`tag_button ${activeCategory == "All" && "tag_button_active"}`}
             data-action="changeTagButton"
             data-type="blog"
             data-name="All"
@@ -96,7 +97,7 @@ const blogView = function () {
           {blogCategory.list_records.map((item) => {
             return (
               <div
-                class="tag_button "
+                class={`tag_button ${activeCategory == item.name && "tag_button_active"}`}
                 data-action="changeTagButton"
                 data-type="blog"
                 data-name={item.name}
@@ -172,6 +173,10 @@ const ID = "mainBlock";
 
 const init = async function (reload) {
   if (!reload) {
+
+    setValue(ID, 'activeCategory', "All")
+
+
     if (!getValue(ID, "blogCategory")) {
       setValue(ID, "blogCategory", await getNewsCategory("blog"));
     }
