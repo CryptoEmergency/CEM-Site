@@ -102,18 +102,7 @@ const test = async function () {
 
 
     //test
-    //Hello World
-
-    //Hello World
-    //Hello World
-    //test
-    //Hello World
-
-    //Hello World
-    //Hello World
-
-
-    //comment from Beta
+  console.log("Hello World")
 
 }
 
