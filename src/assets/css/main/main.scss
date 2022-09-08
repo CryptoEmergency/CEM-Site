@@ -335,13 +335,16 @@ textarea {
 
     &-wrapper {
         position: relative;
-        width: 300px;
+        width: 100%; //300px;
     }
 
     &-title {
-        width: 300px;
+        width: 100%; //300px;
         height: 55px;
-        background: white;
+        // background: white;
+        background-color: #313643;
+        color: $white;
+        border: 1px solid #474c5a;
         text-align: left;
         outline: none;
         background-image: url(../svg/select_arrow.svg);
@@ -353,11 +356,11 @@ textarea {
         padding-left: 25px;
         padding-top: 27px;
         padding-bottom: 10px;
-        border: none;
+        // border: none;
         font-size: 16px;
         line-height: 20px;
         font-weight: 600;
-        color: $black;
+        // color: $black;
     }
 
     &-list {
@@ -386,8 +389,10 @@ textarea {
             cursor: pointer;
             text-align: left;
             padding: 0 15px;
-            background: $white;
-            color: $black;
+            // background: $white;
+            // color: $black;
+            background-color: #313643;
+            color: $white;
             font-weight: 600;
             border-bottom: 1px solid $black_flame;
 

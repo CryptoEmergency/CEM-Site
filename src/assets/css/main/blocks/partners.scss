@@ -1,9 +1,7 @@
 .c-infopartners {
     padding-bottom: 20px;
 
-    &__title {
-
-    }
+    &__title {}
 
     &__list {
         display: grid;
@@ -28,6 +26,20 @@
         text-align: center;
         border: 2px solid white;
         border-radius: 10px;
+
+        @media(max-width: 1024px) {
+            display: none;
+        }
+
+        &:first-child,
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4) {
+
+            @media(max-width: 1024px) {
+                display: block;
+            }
+        }
     }
 
     &__more {
