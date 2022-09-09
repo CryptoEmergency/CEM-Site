@@ -8,7 +8,7 @@ import {
   getValue,
   sendApi,
 } from "@betarost/cemjs";
-import { checkAnswerApi,getDateFormat, getExchangeOrTradeList } from "@src/functions.js";
+import { checkAnswerApi,getDateFormat } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 
   let count = 0;
@@ -128,12 +128,8 @@ const exchangeListView = function () {
           }
         </div>
         <a class="btn-view-all-a" 
-          data-type = "exchange"
-          data-apitype = "getExchange"
-          data-firstlimit = "10"
-          data-secondlimit = "10"
          onclick={(e) =>{ count = count + 1;
-            return getExchangeOrTradeList(e, false, count)}
+            return getExchangeList(false)}
            }>
                 <div class="btn-view-all" data-action="viewAllButton" style={
               exchangeList.list_records.length === exchangeList.totalFound

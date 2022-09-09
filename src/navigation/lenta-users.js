@@ -101,32 +101,7 @@ const getLentaUsersList = async (firstLoad, type) => {
 const lentaUsersView = function () {
   const lang = getVariable("languages")[getStorage("lang")];
   let posts = getValue(ID, "lentaUsers").list_records;
-  console.log("=posts=", posts);
 
-  //убираем знаки тега
-  // let str = posts[0].text.replace(/"/, "")
-  // let str = {};
-  // str.str = posts[0].text.replace('"', "").replace('"', "");
- 
-
-
-  const parser = new DOMParser();
-  // let jsx1 = {};
-  let jsx1 = parser.parseFromString(posts[1].text, "text/html");
-  console.log("HTML", jsx1);
-  // const nodes = [...jsx1.body.childNodes]
-  // .map(node => node.nodeType === Node.TEXT_NODE ? node.nodeValue : node.outerHTML);
-  // console.log('=nodes=',nodes)
-  
-  // let tmp = [...jsx1.body.childNodes];
-  // console.log('=childNodes=',tmp)
-  // console.log("=...childNodes=", ...jsx1.body.childNodes);
-  // console.log("=childNodes[1]=", tmp[1]);
-  // console.log("=nodeType=", tmp[1].nodeType);
-  // console.log("=Node.TEXT_NODE=", Node.TEXT_NODE);
-  // console.log("=nodeValue=", tmp[1].nodeValue);
-  // console.log("=outerHTML=", tmp[1].outerHTML);
-  
   return (
     <div class="page-content page-content--full">
       <div class="users_news">
@@ -321,9 +296,6 @@ const lentaUsersView = function () {
               class="bl_one bl_active"
             >
               <div class="user_news_block">
-                {/* {tmp[0]} */}
-
-                {/* {{>userPost}} */}
                 {posts.map((item) => {
                   return <BlockLentaUsers item={item} />;
                 })}
@@ -366,7 +338,7 @@ const init = async function (reload) {
   if (!reload) {
     if (!reload) {
       if (!getValue(ID, "lentaUsers")) {
-        setValue(ID, "lentaUsers", await getLentaUsersList(true, "text"));
+        setValue(ID, "lentaUsers", await getLentaUsersList(true, "audio"));
       }
     }
   }

@@ -10,63 +10,95 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { getDateFormat } from "@src/functions.js";
-
-const test = function(text){
-//    const parser = new DOMParser();
-//     let jsx1 = parser.parseFromString(posts[1].text, "text/html");
-//     console.log("HTML", jsx1);
-//     let tmp = [...jsx1.body.childNodes];
-//     console.log('=childNodes=',tmp)
-//     console.log("=...childNodes=", ...jsx1.body.childNodes);
-//     console.log("=childNodes[1]=", tmp[1]);
-//     console.log("=nodeType=", tmp[1].nodeType);
-//     console.log("=Node.TEXT_NODE=", Node.TEXT_NODE);
-//     console.log("=nodeValue=", tmp[1].nodeValue);
-//     console.log("=outerHTML=", tmp[1].outerHTML);
-
-    const parser = new DOMParser();
-    let jsx1 = parser.parseFromString(text, "text/html");
-
-    // let tmp = [...jsx1.body.childNodes];
-    // console.log("tmp", tmp);
-    // console.log("tmp1", );
-    // // for(let i = 0; i < tmp.length; i++){
-    // //     return <{tmp[i].localName}></localName>
-    // // }
-    // tmp.map((item) => {
-    //     console.log("item",item)
-    //     return 
-    // })
-
-    return jsx1.body ;  
-}
+import { getDateFormat, parseTextforJsx } from "@src/functions.js";
 
 const BlockLentaUsers = function ({ item }) {
-  // console.log('=5aef08=',item)
-  const parser = new DOMParser();
-  let jsx1 = parser.parseFromString(item.text, "text/html");
-  let tmp = [...jsx1.body.childNodes];
-  console.log("tmp", tmp);
-  //const tpm = "j"
-//   test(item.text)
-
+    const lang = getVariable('languages')[getStorage('lang')];
+//   const parser = new DOMParser();
+//   let jsx1 = parser.parseFromString(item.text, "text/html");
+//   //   let tmp = [...jsx1.body.childNodes];
   return (
     <div class="user_news_item" data-author={item.author._id}>
       <div class="main_comment" data-link={item._id} data-action="getPost">
         {/* {{>avatar author}}                     */}
         <div class="comment_body">
+
+
+        <div class="post_audio_container">
+
+        {
+           ( item.media.find(i => 
+                i.type === "audio"
+            ) !== undefined && item.media.length > 0)
+            ?
+(item.text 
+            ?
+            <div>text</div>
+            // {{>audioPlayer src=name path="/assets/upload/posts/"}}
+            :
+            (item.media.length == 1) 
+                ?
+                <p>audio1</p>
+                // <div class="user_post_text_background">
+                //                     {{#arrayWhile media}}
+                //                         {{#is type "audio"}}
+                //                             {{>audioPlayer src=name path="/assets/upload/posts/"}}
+                //                         {{/is}}
+                //                     {{/arrayWhile}}
+                //                 </div>
+                :
+                <h1>mul Audio</h1>
+                // {{>audioPlayer src=name path="/assets/upload/posts/"}}
+
+  )
+  :
+            
+""
+           }
+
+                    {/* {{#is (audioCountCheck media) true}}
+                        {{#if text}}
+                                {{#arrayWhile media}}
+                                    {{#is type "audio"}}
+                                        {{>audioPlayer src=name path="/assets/upload/posts/"}}
+                                    {{/is}}
+                                {{/arrayWhile}}
+                        {{else}}
+                                <div class="user_post_text_background">
+                                    {{#arrayWhile media}}
+                                        {{#is type "audio"}}
+                                            {{>audioPlayer src=name path="/assets/upload/posts/"}}
+                                        {{/is}}
+                                    {{/arrayWhile}}
+                                </div>
+                        {{/if}}
+                            {{else}}
+                            {{#arrayWhile media}}
+                                {{#is type "audio"}}
+                                    {{>audioPlayer src=name path="/assets/upload/posts/"}}
+                                {{/is}}
+                            {{/arrayWhile}}
+                    {{/is}}  */}
+            </div>
+
+
           {item.media.length > 0 ? (
             <span data-text={item.text} class="comment_text">
-              {item.text}
+              {parseTextforJsx(item.text).map((item)=>{
+                return item
+              })}
             </span>
           ) : item.text.length < 100 ? (
             <div class="user_post_text_background">
-              <span class="comment_text">{item.text}</span>
+              <span class="comment_text">{parseTextforJsx(item.text).map((item)=>{
+                return item
+              })}</span>
             </div>
           ) : (
             <span data-text={item.text} class="comment_text">
-               {test(item.text)}
+              {parseTextforJsx(item.text).map((item)=>{
+                return item
+              })}
             </span>
           )}
 
@@ -296,10 +328,10 @@ const BlockLentaUsers = function ({ item }) {
             </div> */}
       </div>
 
-      {/* <div data-action="userNewsShowFullPost" class="show_all_post_container" style="display: none;"> 
+      <div data-action="userNewsShowFullPost" class="show_all_post_container" style="display: none;"> 
             <div class="show_all_post_block">  </div>
-            <span class="show_all_post_text">{{lang.button.see_all}}</span>
-        </div>  */}
+            <span class="show_all_post_text">{lang.button.see_all}</span>
+        </div> 
     </div>
   );
 };
