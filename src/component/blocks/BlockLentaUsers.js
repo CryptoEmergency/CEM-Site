@@ -13,32 +13,33 @@ import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
 
 const test = function(text){
-   // const parser = new DOMParser();
-    // let jsx1 = parser.parseFromString(posts[1].text, "text/html");
-    // console.log("HTML", jsx1);
-    // let tmp = [...jsx1.body.childNodes];
-    // console.log('=childNodes=',tmp)
-    // console.log("=...childNodes=", ...jsx1.body.childNodes);
-    // console.log("=childNodes[1]=", tmp[1]);
-    // console.log("=nodeType=", tmp[1].nodeType);
-    // console.log("=Node.TEXT_NODE=", Node.TEXT_NODE);
-    // console.log("=nodeValue=", tmp[1].nodeValue);
-    // console.log("=outerHTML=", tmp[1].outerHTML);
+//    const parser = new DOMParser();
+//     let jsx1 = parser.parseFromString(posts[1].text, "text/html");
+//     console.log("HTML", jsx1);
+//     let tmp = [...jsx1.body.childNodes];
+//     console.log('=childNodes=',tmp)
+//     console.log("=...childNodes=", ...jsx1.body.childNodes);
+//     console.log("=childNodes[1]=", tmp[1]);
+//     console.log("=nodeType=", tmp[1].nodeType);
+//     console.log("=Node.TEXT_NODE=", Node.TEXT_NODE);
+//     console.log("=nodeValue=", tmp[1].nodeValue);
+//     console.log("=outerHTML=", tmp[1].outerHTML);
 
-    // const parser = new DOMParser();
-    // let jsx1 = parser.parseFromString(text, "text/html");
+    const parser = new DOMParser();
+    let jsx1 = parser.parseFromString(text, "text/html");
+
     // let tmp = [...jsx1.body.childNodes];
     // console.log("tmp", tmp);
     // console.log("tmp1", );
     // // for(let i = 0; i < tmp.length; i++){
     // //     return <{tmp[i].localName}></localName>
     // // }
-    tmp.map((item) => {
-        console.log("item",item)
-        return item
-    })
+    // tmp.map((item) => {
+    //     console.log("item",item)
+    //     return 
+    // })
 
-    // return ;  
+    return jsx1.body ;  
 }
 
 const BlockLentaUsers = function ({ item }) {
@@ -65,10 +66,7 @@ const BlockLentaUsers = function ({ item }) {
             </div>
           ) : (
             <span data-text={item.text} class="comment_text">
-              <pre childNodes = {item.text}> {tmp.map((item) => {
-        console.log("item",item)
-        return item
-    })}</pre>
+               {test(item.text)}
             </span>
           )}
 
