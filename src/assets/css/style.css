@@ -8212,7 +8212,7 @@ span#procent::after {
   cursor: pointer;
 }
 
-.reset_timer_success {
+/* .reset_timer_success {
   margin-top: 10px;
   display: flex;
   width: 100%;
@@ -8224,9 +8224,9 @@ span#procent::after {
   font-weight: 700;
   font-size: 14px;
   margin-bottom: 20px;
-}
+} */
 
-.reset_timer_block {
+/* .reset_timer_block {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -8234,18 +8234,18 @@ span#procent::after {
   margin-bottom: 15px;
   font-weight: 500;
   font-size: 14px;
-}
+} */
 
-#resetPassword1 {
+/* #resetPassword1 {
   margin-bottom: 20px;
-}
+} */
 
-.reset_timer {
+/* .reset_timer {
   margin-left: 10px;
   letter-spacing: 2px;
-}
+} */
 
-.reset_timer_success {
+/* .reset_timer_success {
   margin-top: 10px;
   display: flex;
   width: 100%;
@@ -8256,7 +8256,7 @@ span#procent::after {
   -webkit-text-fill-color: transparent;
   font-weight: 700;
   font-size: 14px;
-}
+} */
 
 /* ERROR PAGES STYLES*/
 .error_page {

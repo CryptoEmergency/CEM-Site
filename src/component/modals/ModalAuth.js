@@ -14,23 +14,26 @@ import { PhoneCode } from '@component/element/PhoneCode.js';
 const showModalAuth = function (e) {
     e.stopPropagation()
     setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
-}
+};
 
-// const changeCode = (e, code) => {
-//     e.stopPropagation()
-//     const ID = "mainBlock";
-//     let show = getValue(ID, "showPhoneSelect")
-//     if (e.target.localName === "li") {
-//         //   let tmp = { ...formInputs, [type]: value };
-//         //   formInputs = { ...tmp };
-//         console.log(code);
-//     }
-//     setValue(ID, "showPhoneSelect", { [type]: !show });
-// }
+const showModalReset = function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    setValue("modals", "authModalShow", !getValue("modals", "authModalShow"));
+    setValue("modals", "resetModalShow", !getValue("modals", "resetModalShow"));
+};
 
-const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle }) {
+const showModalRegistartion = function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    setValue("modals", "authModalShow", !getValue("modals", "authModalShow"));
+    setValue("modals", "registrationModalShow", !getValue("modals", "registrationModalShow"));
+};
+
+const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle, wayAuth, changeWayAuth }) {
     // console.log("ModalAuth");
-    const authModalShow = getValue("modals", "authModalShow")
+    // const authModalShow = getValue("modals", "authModalShow")
+    const resetModalShow = getValue(ID, "resetModalShow");
 
     return (
         <div class="c-modal c-modal--open" id="ModalLogin">
@@ -44,18 +47,20 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle }) {
                     ></button>
                 </header>
                 <div class="c-modal__body">
-                    <div class="mobile_or_email_toggle">
+                    <div class={`mobile_or_email_toggle`}>
                         <button
                             data-form_type="login"
                             id="loginByEmail"
-                            class="reset_password_button"
+                            class={`reset_password_button ${wayAuth == "email" && "active"}`}
+                            onClick={(e) => { changeWayAuth(e) }}
                         >
                             {lang.button.email}
                         </button>
                         <button
                             data-form_type="login"
                             id="loginByMobile"
-                            class="reset_password_button active"
+                            class={`reset_password_button ${wayAuth == "phone" && "active"}`}
+                            onClick={(e) => { changeWayAuth(e) }}
                         >
                             {lang.button.phone}
                         </button>
@@ -63,7 +68,7 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle }) {
                     <form id="loginForm">
                         <input style="display: none;" type="submit" />
                         <div class="reset_password_input_block">
-                            <div class="reset_by_email_block dn">
+                            <div class={`reset_by_email_block ${wayAuth == "phone" && "dn"}`}>
                                 <label for="resetByEmailInput">{lang.label.email}</label>
                                 <div class="error-div">{lang.error_div.wrong_email}</div>
                                 <div class="reset_by_email_block_container">
@@ -79,11 +84,10 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle }) {
                                     />
                                 </div>
                             </div>
-                            <div class="reset_by_mobile_block">
+                            <div class={`reset_by_mobile_block ${wayAuth == "email" && "dn"}`}>
                                 <label for="resetByEmailInput">{lang.label.phone}</label>
                                 <div class="error-div">{lang.error_div.wrong_phone}</div>
                                 <div class="reset_by_mobile_block_container c-phonecode">
-                                    {/* <input type="text" class="c-form__field c-phonecode__field" id="phonecode" value="+7" /> */}
 
                                     <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
 
@@ -138,7 +142,13 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle }) {
                             <label class="checkbox__label-2" for="auth_remember">{lang.placeholder.rememberMe}</label>
                         </div>
                         <span class="cont_a-link-2" >
-                            <a class="a-link" id="forgot_password">{lang.a.forgot_pass}</a>
+                            <a
+                                class="a-link"
+                                id="forgot_password"
+                                onclick={showModalReset}
+                            >
+                                {lang.a.forgot_pass}
+                            </a>
                         </span>
                     </div>
                     <div class="authAgree">
@@ -147,17 +157,20 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle }) {
                 </div>
 
                 <footer class="c-modal__footer">
-                    {/* <a class="c-button c-button--outline2 " href="">
+                    <button class="c-button c-button--gradient2 c-button--inactive" type="button">
+                        <span class="c-button__text">
+                            {lang.button.login}
+                        </span>
+                    </button>
+                    <a
+                        class="c-button c-button--registration"
+                        href=""
+                        onclick={showModalRegistartion}
+                    >
                         <div class="c-button__wrapper">
-                            {lang.button.giveAnswer}
+                            {lang.button.registration}
                         </div>
-                    </a> */}
-                    <div class="btn-modal-log_in inactive_form_button" data-active="0" data-form_type="login" id="auth_system">
-                        <a class="btn-gr-log-in"><span>{lang.button.login}</span></a>
-                    </div>
-                    <div id="log-in_btn-regShow" class="btn-reg-show">
-                        <a class="btn-gr-reg-show"><span>{lang.button.registration}</span></a>
-                    </div>
+                    </a>
                 </footer>
             </section >
         </div >

@@ -19,10 +19,14 @@ const showListLang = function (e) {
 
 const showModalAuth = function (e) {
     e.stopPropagation()
-    //console.log(e,getValue("modals", "authModalShow"))
     setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
-    //console.log(getValue("modals", "authModalShow"));
 }
+
+const showModalRegistr = function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    setValue("modals", "registrationModalShow", !getValue("modals", "registrationModalShow"));
+};
 
 const LanguagesList = function (languages) {
     const dataUrl = getVariable("dataUrl");
@@ -66,8 +70,18 @@ const forExport = function () {
                         </div>
                         {LanguagesList(languages)}
                     </div>
-                    <a class="log-in" onclick={showModalAuth}>{lang.button.login}</a>
-                    <button class="c-button c-button--gradient" type="button" id="registration" data-action="registrationModal">
+                    <a
+                        class="log-in"
+                        onclick={showModalAuth}
+                    >
+                        {lang.button.login}
+                    </a>
+                    <button
+                        class="c-button c-button--gradient"
+                        type="button"
+                        id="registration"
+                        onclick={showModalRegistr}
+                    >
                         <span class="c-button__text">{lang.button.registration}</span>
                     </button>
                 </div>
