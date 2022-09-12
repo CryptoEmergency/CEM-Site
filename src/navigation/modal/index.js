@@ -130,7 +130,7 @@ const start = function () {
 
     return (
         <div>
-            <div class={`c-backdrop ${(showAuth || commingSoonModalShow) && "c-backdrop--show"}`}></div>
+            <div class={`c-backdrop ${(showAuth || commingSoonModalShow || showReset || showRegistration) && "c-backdrop--show"}`}></div>
             {showAuth &&
                 <ModalAuth
                     lang={lang}
