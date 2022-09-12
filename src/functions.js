@@ -1,10 +1,15 @@
-import {jsx, jsxFrag, getStorage, setValue, getValue, getAction, getVariable, sendApi, delDOM, timersClear, parsingUrl } from '@betarost/cemjs'
+import { jsx, jsxFrag, getStorage, setValue, getValue, getAction, getVariable, sendApi, delDOM, timersClear, parsingUrl } from '@betarost/cemjs'
 import list from '@src/routerList.js';
 import validator from 'validator';
 import moment from 'moment';
 import swiperload from "@assets/js/swiper.js"
 
-
+const numberFixWithSpaces = function (num, fix) {
+  let x = parseFloat(num).toFixed(fix)
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return parts.join(".");
+}
 
 const start = async function (reload) {
   const dataUrl = getVariable("dataUrl")
@@ -222,27 +227,27 @@ const changeNewsCategory = async (e, type, init) => {
 
 const createParagraf = function (arr) {
   let result = []
-    for (let i of arr) {
-      switch(i.nodeName){
-          case "A":
-              let a = <a target="_blank" rel="nofollow noopener" href={i.innerText}>
-              {i.innerText}
-            </a>
-            result.push(a);
-            break;
-          case "SPAN":
-              let span = <span>
-              {i.innerText}
-            </span>
-            result.push(span);
-            break;
-          default:
-              let text = i.nodeValue;
-          result.push(text);
-      }
+  for (let i of arr) {
+    switch (i.nodeName) {
+      case "A":
+        let a = <a target="_blank" rel="nofollow noopener" href={i.innerText}>
+          {i.innerText}
+        </a>
+        result.push(a);
+        break;
+      case "SPAN":
+        let span = <span>
+          {i.innerText}
+        </span>
+        result.push(span);
+        break;
+      default:
+        let text = i.nodeValue;
+        result.push(text);
     }
-    return result
-  };
+  }
+  return result
+};
 
 const parseTextforJsx = function (text) {
   const parser = new DOMParser();
@@ -251,9 +256,9 @@ const parseTextforJsx = function (text) {
   let result = [];
   for (let i of htmlDoc) {
     let arr = i.childNodes;
-    let tegP = <p>{createParagraf(arr).map((i)=>{
-        return i
-    })}</p>;   
+    let tegP = <p>{createParagraf(arr).map((i) => {
+      return i
+    })}</p>;
     result.push(tegP)
   }
   return result
@@ -308,4 +313,4 @@ const parseTextforJsx = function (text) {
 
 
 
-export { parseTextforJsx, changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory, siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation }
+export { parseTextforJsx, changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory, siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation, numberFixWithSpaces }
