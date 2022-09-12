@@ -38,17 +38,17 @@ const ModalReset = function ({ lang, changeCode, ID, abbr, codeTitle, wayReset, 
                 <div class="c-modal__body">
                     <div class="reset_password">
                         <div class={`reset_password_step1 ${showStepReset == "2" && "dn"}`}>
-                            <div class="mobile_or_email_toggle">
+                            <div class="c-mobileoremail">
                                 <button
                                     id="resetByEmail"
-                                    class={`reset_password_button ${wayReset == "email" && "active"}`}
+                                    class={`c-button c-button--toggler ${wayReset == "email" && "c-button--active"}`}
                                     onClick={(e) => { changeWayReset(e) }}
                                 >
                                     {lang.button.email}
                                 </button>
                                 <button
                                     id="resetByMobile"
-                                    class={`reset_password_button ${wayReset == "phone" && "active"}`}
+                                    class={`c-button c-button--toggler ${wayReset == "phone" && "c-button--active"}`}
                                     onClick={(e) => { changeWayReset(e) }}
                                 >
                                     {lang.button.phone}

@@ -2,21 +2,35 @@ import { jsx, jsxFrag, getVariable, getStorage, makeDOM, timersStart, setValue, 
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { numberFixWithSpaces } from '@src/functions.js';
-const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
+import { Avatar } from '@component/element/Avatar.js';
 
+const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
+    console.log('=e523ad=', userInfo);
 
     return (
-        <div class="user_main">
-            <div class="user_background">
-                <div class="big_user_avatar" data-action="fullSizeAvatar">
-                    <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src={userInfo.avatar ?
-                        `/assets/upload/avatar/${userInfo.avatar.name}` :
-                        images["profile/avatar/default"]} />
-                    <img style="position: absolute; top: 0;left: 0;z-index: 2; height: 100%;width: "
+        <div class="user_main c-userpreview">
+            <div class="user_background c-userpreview__header">
+                {/* <div class="big_user_avatar c-userpreview__avatar">
+                    <img
+                        style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);"
+                        src={userInfo.avatar ?
+                            `/assets/upload/avatar/${userInfo.avatar.name}` :
+                            images["profile/avatar/default"]}
+                    />
+                    <img
+                        style="position: absolute; top: 0;left: 0;z-index: 2; height: 100%;width: "
                         src={userInfo.frame ? images[`profile/frame/${userInfo.frame.name.split(".")[0]}`] : svg["profile/frame/default"]}
                     />
+                </div> */}
+
+                <div class="big_user_avatar c-userpreview__avatar">
+                    <Avatar lang={lang} author={userInfo} parent={'big_user_avatar'} />
                 </div>
-                <img id="currentUserBackground" src={userInfo.background ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]} />
+                <img
+                    id="currentUserBackground"
+                    class="c-userpreview__bg"
+                    src={userInfo.background ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
+                />
 
                 <div class="new_professional_buttons">
                     <div class="button-container-preview">

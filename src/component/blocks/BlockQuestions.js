@@ -12,12 +12,6 @@ import svg from "@assets/svg/index.js";
 import { QuestionItem } from '@component/element/QuestionItem.js';
 import { Select } from '../element/Select.js';
 
-
-
-
-
-
-
 const BlockQuestions = function ({ lang, questions }) {
     // console.log("BlockQuestions", questions);
 
@@ -84,8 +78,22 @@ const BlockQuestions = function ({ lang, questions }) {
                 </div>
                 <div class="c-questions__filter questions_filter">
 
-                    {/* <Select options={options.questions} changeSelect={changeSelect} type = "selectBlockQuestions1" selectObject = {sortSelects}  ID = {ID} selectTitle = "Сортировать" />
-                    <Select options={options.date} changeSelect={changeSelect} type = "selectBlockQuestions2"  selectObject = {sortSelects}  ID = {ID} selectTitle = "Сортировать" /> */}
+                    {/* <Select
+                        options={options.questions}
+                        changeSelect={changeSelect}
+                        type="selectBlockQuestions1"
+                        selectObject={sortSelects}
+                        ID={ID}
+                        selectTitle="Сортировать"
+                    /> */}
+                    {/* <Select
+                        options={options.date}
+                        changeSelect={changeSelect}
+                        type="selectBlockQuestions2"
+                        selectObject={sortSelects}
+                        ID={ID}
+                        selectTitle="Сортировать"
+                    /> */}
                     {/* <div class="profit_calculator_inputs_container">
                         <span>{lang.span.sort}</span>
                         <select class="justselect" id="statusQuestions">

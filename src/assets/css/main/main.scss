@@ -1203,6 +1203,54 @@ textarea {
             }
         }
     }
+
+    &--toggler {
+        background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+        width: 130px;
+        height: 54px;
+        margin-right: 10px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        border: 0;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 115%;
+        color: #9A93BC;
+        position: relative;
+        background-color: transparent;
+        z-index: 2;
+        color: #FFFFFF;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &::before {
+            content: ' ';
+            height: 54px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            border-radius: 10px;
+            background: linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%);
+            transition: 1s;
+        }
+
+        &.c-button--active {
+
+            &::before {
+                background: none !important;
+            }
+
+            &::after {
+                background: none !important;
+                content: ' '
+            }
+        }
+    }
 }
 
 .c-link {

@@ -6,12 +6,13 @@ import {
     makeDOM,
     getVariable,
     getStorage,
-} from '@betarost/cemjs'
+} from '@betarost/cemjs';
+import { allValidation } from '@src/functions.js';
 import { ModalAuth } from '@component/modals/ModalAuth.js';
 import { ModalComingSoon } from '@component/modals/ModalComingSoon.js';
 import { ModalReset } from '@component/modals/ModalReset.js';
 import { ModalReg } from '@component/modals/ModalReg.js';
-
+let formInputsReg, formInputsRegEmail, formInputsRegPhone = {};
 
 const ID = "modals";
 
@@ -48,10 +49,19 @@ const changeWayReset = (e) => {
 const changeWayReg = (e) => {
     e.stopPropagation()
     let way = getValue(ID, "toggleWayReg");
-    if (e.target.id == "regByEmail" && way == "email") {
-        setValue(ID, 'toggleWayReg', "phone");
-    } else if (e.target.id == "regByMobile" && way == "phone") {
+    // setValue(ID, "isValidReg", false);
+    if (e.target.id == "regByEmail" && way == "phone") {
         setValue(ID, 'toggleWayReg', "email");
+        formInputsReg = Object.assign({}, formInputsRegEmail);
+        delete formInputsReg.email;
+        formInputsReg.phone = formInputsRegPhone.phone;
+        // console.log('=cea51a=', formInputsReg)
+    } else if (e.target.id == "regByMobile" && way == "email") {
+        setValue(ID, 'toggleWayReg', "phone");
+        formInputsReg = Object.assign({}, formInputsRegPhone);
+        delete formInputsReg.phone;
+        formInputsReg.email = formInputsRegPhone.email;
+        // console.log('=cea52a=', formInputsReg)
     }
 };
 
@@ -60,6 +70,49 @@ const changeStepReset = (e) => {
     let step = getValue(ID, "toggleStepReset");
     step == "1" ? setValue(ID, 'toggleStepReset', "2") : setValue(ID, 'toggleStepReset', "1");
 };
+
+const toggleViewPassword = (e) => {
+    e.stopPropagation();
+    setValue(ID, "viewPassword", !getValue(ID, "viewPassword"));
+};
+
+const changeInputReg = (e) => {
+    setValue(ID, "isValidReg", true);
+    let inputValue;
+    let inputType = e.currentTarget.dataset.type;
+    inputValue = e.currentTarget.dataset.type == "agreement" ? !formInputsReg[inputType].value : e.target.value.trim();
+    formInputsReg[inputType].value = inputValue;
+    console.log('=57dc77=', `inputValue = ${inputValue}, inputType = ${inputType}`)
+
+    formInputsReg[inputType].valid = allValidation(inputValue, inputType);
+    if (!formInputsReg[inputType].valid) {
+
+        formInputsReg[inputType].error = "Заполните поле " + inputType;
+        setValue(ID, "isValidReg", false);
+        init(true);
+        return
+    } else {
+        formInputsReg[inputType].error = "";
+    }
+    let isCheckAll = Object.keys(formInputsReg).filter((key) => {
+        if (!formInputsReg[key].valid) {
+            return true
+        }
+    });
+    console.log('=287e24=', isCheckAll)
+    if (isCheckAll.length === 0) {
+        setValue(ID, "isValidReg", true);
+        console.log('=287e25=', getValue(ID, "isValidReg"))
+        return
+    } else {
+        setValue(ID, "isValidReg", false);
+        console.log('=287e26=', getValue(ID, "isValidReg"))
+        init(true);
+        return
+    }
+
+}
+
 
 const start = function () {
     const showAuth = getValue("modals", "authModalShow");
@@ -73,10 +126,11 @@ const start = function () {
     const wayAuth = getValue(ID, "toggleWayAuth");
     const wayReset = getValue(ID, "toggleWayReset");
     const wayReg = getValue(ID, "toggleWayReg");
+    formInputsReg = wayReg == "email" ? formInputsRegEmail : formInputsRegPhone;
 
     return (
         <div>
-            <div class={`c-backdrop ${(showAuth || commingSoonModalShow) && "c-backdrop--show"}`}></div>
+            <div class={`c-backdrop ${(showAuth || commingSoonModalShow || showReset || showRegistration) && "c-backdrop--show"}`}></div>
             {showAuth &&
                 <ModalAuth
                     lang={lang}
@@ -86,6 +140,7 @@ const start = function () {
                     ID={ID}
                     wayAuth={wayAuth}
                     changeWayAuth={changeWayAuth}
+                    toggleViewPassword={toggleViewPassword}
                 />
             }
             {commingSoonModalShow &&
@@ -114,6 +169,9 @@ const start = function () {
                     ID={ID}
                     wayReg={wayReg}
                     changeWayReg={changeWayReg}
+                    toggleViewPassword={toggleViewPassword}
+                    changeInput={changeInputReg}
+                    formInputs={formInputsReg}
                 />
             }
         </div>
@@ -134,6 +192,43 @@ const init = function (reload) {
         setValue(ID, "toggleWayReset", "email");
         setValue(ID, "toggleStepReset", "1");
         setValue(ID, "toggleWayReg", "email");
+        setValue(ID, "viewPassword", false);
+
+        setValue(ID, "isValidReg", false);
+        formInputsRegEmail = {
+            email: {
+                value: "",
+                valid: false,
+                error: ""
+            },
+            pass: {
+                value: "",
+                valid: false,
+                error: ""
+            },
+            agreement: {
+                value: false,
+                valid: false,
+                error: ""
+            }
+        }
+        formInputsRegPhone = {
+            phone: {
+                value: "",
+                valid: false,
+                error: ""
+            },
+            pass: {
+                value: "",
+                valid: false,
+                error: ""
+            },
+            agreement: {
+                value: false,
+                valid: false,
+                error: ""
+            }
+        }
     }
 
     makeDOM(start(), ID)

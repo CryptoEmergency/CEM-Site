@@ -3064,12 +3064,12 @@
 	}
 }
 
-.mobile_or_email_toggle {
+.c-mobileoremail {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 
-	.reset_password_button {
+	.c-button--toggler {
 		flex-grow: 1;
 	}
 }
@@ -3125,7 +3125,7 @@
 }
 
 /* modal #modalReg (Регистрация пользователя) */
-#modalReg {
+#ModalReg {
 	.country-phone {
 		gap: 20px;
 		display: grid;
@@ -3240,41 +3240,53 @@
 		}
 	}
 
-	&_button {
-		background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
-		width: 130px;
-		height: 54px;
-		margin-right: 10px;
-		margin-bottom: 15px;
-		margin-top: 15px;
-		border: 0;
-		border-radius: 12px;
-		font-weight: 600;
-		font-size: 18px;
-		line-height: 115%;
-		color: #9A93BC;
-		position: relative;
-		background-color: transparent;
-		z-index: 2;
-		color: #FFFFFF;
+	// &_button {
+	// 	background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+	// 	width: 130px;
+	// 	height: 54px;
+	// 	margin-right: 10px;
+	// 	margin-bottom: 15px;
+	// 	margin-top: 15px;
+	// 	border: 0;
+	// 	border-radius: 12px;
+	// 	font-weight: 600;
+	// 	font-size: 18px;
+	// 	line-height: 115%;
+	// 	color: #9A93BC;
+	// 	position: relative;
+	// 	background-color: transparent;
+	// 	z-index: 2;
+	// 	color: #FFFFFF;
 
-		&:last-child {
-			margin-right: 0;
-		}
+	// 	&:last-child {
+	// 		margin-right: 0;
+	// 	}
 
-		&::before {
-			content: ' ';
-			height: 54px;
-			width: 100%;
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 1;
-			border-radius: 10px;
-			background: linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%);
-			transition: 1s;
-		}
-	}
+	// 	&::before {
+	// 		content: ' ';
+	// 		height: 54px;
+	// 		width: 100%;
+	// 		position: absolute;
+	// 		top: 0;
+	// 		left: 0;
+	// 		z-index: 1;
+	// 		border-radius: 10px;
+	// 		background: linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%);
+	// 		transition: 1s;
+	// 	}
+
+	// 	&.active {
+
+	// 		&::before {
+	// 			background: none !important;
+	// 		}
+
+	// 		&::after {
+	// 			background: none !important;
+	// 			content: ' '
+	// 		}
+	// 	}
+	// }
 }
 
 #resetByEmail {
@@ -3555,6 +3567,46 @@
 .reset_timer {
 	margin-left: 10px;
 	letter-spacing: 2px;
+}
+
+#body_reg-fast {
+
+	input {
+		height: 65px;
+		margin-bottom: 15px;
+	}
+
+	.container-input {
+
+		input {
+			margin-bottom: 0;
+		}
+	}
+
+	i {
+		line-height: 65px;
+	}
+
+	button {
+		margin-top: 0;
+	}
+}
+
+.container-checkbox {
+	font-size: 14px;
+	line-height: 130%;
+	margin: 0 auto;
+	display: flex;
+}
+
+.checkbox_error {
+	color: #FD374E;
+	width: 100%;
+	position: relative;
+	top: -20px;
+	margin-bottom: -18px;
+	margin-top: 0;
+	display: none;
 }
 
 /* modal #modalConfirmation (Подтверждение email/phone) */
