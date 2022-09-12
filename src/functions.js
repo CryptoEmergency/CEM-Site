@@ -164,14 +164,18 @@ const allValidation = (str, type, condition) => {
   }
 
   if (type == "pass") {
-    return validator.isStrongPasswor(str, {
+    return validator.isStrongPassword(str, {
       minLength: 8,
-      maxLength: 20,
       minLowercase: 1,
       minUppercase: 1,
-      minSymbols: 1,
-      pointsForContainingSymbol: 1
+      minNumbers: 1,
+      minSymbols: 1
     });
+  }
+
+  if (type == "agreement") {
+    return str;
+    // return str = !str;
   }
 }
 

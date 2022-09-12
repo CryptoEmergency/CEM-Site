@@ -71,7 +71,7 @@ const ModalReg = function ({
                                         class={`reset_by_email_block ${wayReg == "phone" && "dn"}`}
                                     >
                                         <label for="registerByEmailInput">{lang.label.email}</label>
-                                        <div class="error-div">{lang.error_div.wrong_email}</div>
+                                        <div class="error-div" style={`${formInputs.email.error && "display: block"}`}>{lang.error_div.wrong_email}</div>
                                         <div class="reset_by_email_block_container">
                                             <input
                                                 data-form_type="registration"
@@ -94,7 +94,7 @@ const ModalReg = function ({
                                 {wayReg == "phone" &&
                                     <div class={`reset_by_mobile_block ${wayReg == "email" && "dn"}`}>
                                         <label for="registerByMobileInput">{lang.label.phone}</label>
-                                        <div class="error-div">{lang.error_div.wrong_phone}</div>
+                                        <div class="error-div" style={`${formInputs.phone.error && "display: block"}`}>{lang.error_div.wrong_phone}</div>
                                         <div class="reset_by_mobile_block_container c-phonecode">
 
                                             <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
@@ -125,7 +125,8 @@ const ModalReg = function ({
                         </div>
                         <div class="container-input">
                             <label for="password_reg">{lang.label.password}</label>
-                            <div class="error-div">
+                            <div class="error-div" style={`${formInputs.pass.error && "display: block"}`}>
+                                <div class="error-div-variant" style={`${formInputs.pass.error && "display: block"}`}>{formInputs.pass.error}</div>
                                 <div class="error-div-variant">{lang.error_div.not_empty_input}</div>
                                 <div class="error-div-variant">{lang.error_div.password}</div>
                                 <div class="error-div-variant">{lang.error_div.password2}</div>
@@ -152,7 +153,7 @@ const ModalReg = function ({
                         <div class="container-checkbox">
                             <div class="error-div-agree" id="fast_agree-error"></div>
                             <div class="checkbox">
-                                <p class="checkbox_error">{lang.error_div.needAgree}</p>
+                                <p class="checkbox_error" style={`${formInputs.agreement.error && "display: block"}`}>{lang.error_div.needAgree}</p>
                                 <input
                                     data-form_type="registration"
                                     class="checkbox__input"
@@ -160,6 +161,9 @@ const ModalReg = function ({
                                     id="fast_agree"
                                     data-action="clearCheckboxError"
                                     required="required"
+                                    data-type="agreement"
+                                    value={formInputs.agreement.value}
+                                    onchange={changeInput}
                                 />
                                 <label class="checkbox__label" for="fast_agree">
                                     {lang.text.agree}

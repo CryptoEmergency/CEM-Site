@@ -48,12 +48,20 @@ const changeWayReset = (e) => {
 
 const changeWayReg = (e) => {
     e.stopPropagation()
-    debugger;
     let way = getValue(ID, "toggleWayReg");
+    // setValue(ID, "isValidReg", false);
     if (e.target.id == "regByEmail" && way == "phone") {
         setValue(ID, 'toggleWayReg', "email");
+        formInputsReg = Object.assign({}, formInputsRegEmail);
+        delete formInputsReg.email;
+        formInputsReg.phone = formInputsRegPhone.phone;
+        // console.log('=cea51a=', formInputsReg)
     } else if (e.target.id == "regByMobile" && way == "email") {
         setValue(ID, 'toggleWayReg', "phone");
+        formInputsReg = Object.assign({}, formInputsRegPhone);
+        delete formInputsReg.phone;
+        formInputsReg.email = formInputsRegPhone.email;
+        // console.log('=cea52a=', formInputsReg)
     }
 };
 
@@ -69,14 +77,14 @@ const toggleViewPassword = (e) => {
 };
 
 const changeInputReg = (e) => {
-    // setValue(ID, "isValidReg", true);
-    let inputValue = e.target.value.trim();
+    setValue(ID, "isValidReg", true);
+    let inputValue;
     let inputType = e.currentTarget.dataset.type;
-    console.log('=d19e6b=', inputValue, inputType)
-    debugger;
+    inputValue = e.currentTarget.dataset.type == "agreement" ? !formInputsReg[inputType].value : e.target.value.trim();
     formInputsReg[inputType].value = inputValue;
-    formInputsReg[inputType].valid = allValidation(inputValue, inputType, /[a-zA-Zа-яА-Яё\d]{2,500}/i
-    );
+    console.log('=57dc77=', `inputValue = ${inputValue}, inputType = ${inputType}`)
+
+    formInputsReg[inputType].valid = allValidation(inputValue, inputType);
     if (!formInputsReg[inputType].valid) {
 
         formInputsReg[inputType].error = "Заполните поле " + inputType;
@@ -87,16 +95,18 @@ const changeInputReg = (e) => {
         formInputsReg[inputType].error = "";
     }
     let isCheckAll = Object.keys(formInputsReg).filter((key) => {
-        if (formInputsReg[key].valid) {
+        if (!formInputsReg[key].valid) {
             return true
         }
     });
-    console.log('=287e24=', formInputsReg)
+    console.log('=287e24=', isCheckAll)
     if (isCheckAll.length === 0) {
         setValue(ID, "isValidReg", true);
+        console.log('=287e25=', getValue(ID, "isValidReg"))
         return
     } else {
         setValue(ID, "isValidReg", false);
+        console.log('=287e26=', getValue(ID, "isValidReg"))
         init(true);
         return
     }
@@ -116,7 +126,7 @@ const start = function () {
     const wayAuth = getValue(ID, "toggleWayAuth");
     const wayReset = getValue(ID, "toggleWayReset");
     const wayReg = getValue(ID, "toggleWayReg");
-    let formInputsReg = wayReg == "email" ? formInputsRegEmail : formInputsRegPhone;
+    formInputsReg = wayReg == "email" ? formInputsRegEmail : formInputsRegPhone;
 
     return (
         <div>
@@ -197,7 +207,7 @@ const init = function (reload) {
                 error: ""
             },
             agreement: {
-                value: "",
+                value: false,
                 valid: false,
                 error: ""
             }
@@ -214,7 +224,7 @@ const init = function (reload) {
                 error: ""
             },
             agreement: {
-                value: "",
+                value: false,
                 valid: false,
                 error: ""
             }
