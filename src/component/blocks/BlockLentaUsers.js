@@ -7,16 +7,21 @@ import {
   getVariable,
   getStorage,
   getValue,
+  stringToHtml
 } from "@betarost/cemjs";
+
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat, parseTextforJsx } from "@src/functions.js";
+import { AudioPlayer } from "../element/audioPlayer.js";
 
 const BlockLentaUsers = function ({ item }) {
     const lang = getVariable('languages')[getStorage('lang')];
+    // console.log('=item=',item)
 //   const parser = new DOMParser();
 //   let jsx1 = parser.parseFromString(item.text, "text/html");
 //   //   let tmp = [...jsx1.body.childNodes];
+console.log('=item.text=',item.text)
   return (
     <div class="user_news_item" data-author={item.author._id}>
       <div class="main_comment" data-link={item._id} data-action="getPost">
@@ -38,14 +43,13 @@ const BlockLentaUsers = function ({ item }) {
             :
             (item.media.length == 1) 
                 ?
-                <p>audio1</p>
-                // <div class="user_post_text_background">
-                //                     {{#arrayWhile media}}
-                //                         {{#is type "audio"}}
-                //                             {{>audioPlayer src=name path="/assets/upload/posts/"}}
-                //                         {{/is}}
-                //                     {{/arrayWhile}}
-                //                 </div>
+                <div class="user_post_text_background">
+                        {/* <AudioPlayer item = {item} /> */}
+                        {
+                            item.media.filter(item => item.type === "audio").map ((item) => {return <AudioPlayer item = {item} />
+                            })
+                        }
+                </div>
                 :
                 <h1>mul Audio</h1>
                 // {{>audioPlayer src=name path="/assets/upload/posts/"}}
@@ -84,21 +88,27 @@ const BlockLentaUsers = function ({ item }) {
 
           {item.media.length > 0 ? (
             <span data-text={item.text} class="comment_text">
-              {parseTextforJsx(item.text).map((item)=>{
+              {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
-              })}
+              })} */}
+               {stringToHtml(item.text)}
             </span>
           ) : item.text.length < 100 ? (
             <div class="user_post_text_background">
-              <span class="comment_text">{parseTextforJsx(item.text).map((item)=>{
+              <span class="comment_text">
+                {stringToHtml(item.text)}
+                {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
-              })}</span>
+              })} */}
+              </span>
             </div>
           ) : (
             <span data-text={item.text} class="comment_text">
-              {parseTextforJsx(item.text).map((item)=>{
+              {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
-              })}
+              })} */}
+
+               {stringToHtml(item.text)}
             </span>
           )}
 

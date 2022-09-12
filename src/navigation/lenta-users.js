@@ -338,7 +338,7 @@ const init = async function (reload) {
   if (!reload) {
     if (!reload) {
       if (!getValue(ID, "lentaUsers")) {
-        setValue(ID, "lentaUsers", await getLentaUsersList(true, "audio"));
+        setValue(ID, "lentaUsers", await getLentaUsersList(true, "text"));
       }
     }
   }
