@@ -159,9 +159,20 @@ const allValidation = (str, type, condition) => {
     return validator.matches(str, condition)
   }
 
+  if (type == "phone") {
+    return validator.matches(str, /[0-9]{10}/i);
+  }
 
-
-
+  if (type == "pass") {
+    return validator.isStrongPasswor(str, {
+      minLength: 8,
+      maxLength: 20,
+      minLowercase: 1,
+      minUppercase: 1,
+      minSymbols: 1,
+      pointsForContainingSymbol: 1
+    });
+  }
 }
 
 
