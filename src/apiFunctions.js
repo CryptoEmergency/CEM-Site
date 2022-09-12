@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, getStorage, setValue, getValue, getAction, getVariable, sendApi, delDOM, timersClear, parsingUrl } from '@betarost/cemjs'
 import { checkAnswerApi } from '@src/functions.js';
 
-const getuserInfoProfile = async function (nickname) {
+const getUserInfoProfile = async function (nickname) {
 
     const userInfo = checkAnswerApi(await sendApi.create("getUsers", {
         "filter": {
@@ -35,4 +35,26 @@ const getuserInfoProfile = async function (nickname) {
     }
 }
 
-export { getuserInfoProfile }
+const getUserAboutProfile = async function (nickname) {
+
+    const userInfo = checkAnswerApi(await sendApi.create("getUsers", {
+        "filter": {
+            "nickname": nickname
+        },
+        "select": {
+            "information": 1,
+            "work": 1,
+            "interest": 1,
+            "country": 1,
+            "fullname": 1
+        }
+    }))
+
+    if (userInfo && userInfo.list_records && userInfo.list_records[0]) {
+        return userInfo.list_records[0]
+    } else {
+        return {}
+    }
+}
+
+export { getUserInfoProfile, getUserAboutProfile }
