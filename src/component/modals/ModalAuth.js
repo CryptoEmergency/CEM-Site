@@ -30,10 +30,11 @@ const showModalRegistartion = function (e) {
     setValue("modals", "registrationModalShow", !getValue("modals", "registrationModalShow"));
 };
 
-const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle, wayAuth, changeWayAuth }) {
+const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle, wayAuth, changeWayAuth, toggleViewPassword }) {
     // console.log("ModalAuth");
     // const authModalShow = getValue("modals", "authModalShow")
     const resetModalShow = getValue(ID, "resetModalShow");
+    const viewPassword = getValue(ID, "viewPassword");
 
     return (
         <div class="c-modal c-modal--open" id="ModalLogin">
@@ -47,11 +48,11 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle, wayAuth, ch
                     ></button>
                 </header>
                 <div class="c-modal__body">
-                    <div class={`mobile_or_email_toggle`}>
+                    <div class={`c-mobileoremail`}>
                         <button
                             data-form_type="login"
                             id="loginByEmail"
-                            class={`reset_password_button ${wayAuth == "email" && "active"}`}
+                            class={`c-button c-button--toggler ${wayAuth == "email" && "c-button--active"}`}
                             onClick={(e) => { changeWayAuth(e) }}
                         >
                             {lang.button.email}
@@ -59,7 +60,7 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle, wayAuth, ch
                         <button
                             data-form_type="login"
                             id="loginByMobile"
-                            class={`reset_password_button ${wayAuth == "phone" && "active"}`}
+                            class={`c-button c-button--toggler ${wayAuth == "phone" && "c-button--active"}`}
                             onClick={(e) => { changeWayAuth(e) }}
                         >
                             {lang.button.phone}
@@ -130,9 +131,9 @@ const ModalAuth = function ({ lang, changeCode, ID, abbr, codeTitle, wayAuth, ch
                                     data-validate_type="password"
                                     placeholder={lang.placeholder.password}
                                     id="auth_pass"
-                                    type="password"
+                                    type={`${viewPassword ? 'text' : 'password'}`}
                                 />
-                                <img src={svg["eye"]} class="password_eye" />
+                                <img src={svg[`eye${viewPassword ? '-slash' : ''}`]} class="password_eye" onClick={toggleViewPassword} />
                             </div>
                         </div>
                     </form>

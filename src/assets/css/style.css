@@ -43,16 +43,16 @@
   padding: 0;
 }
 
-#body_reg-fast .active::before {
+/* #body_reg-fast .active::before {
   background: none !important;
 }
 
 #body_reg-fast .active::after {
   background: none !important;
   content: ' '
-}
+} */
 
-#body_reg-fast input {
+/* #body_reg-fast input {
   height: 65px;
   margin-bottom: 15px;
 }
@@ -64,7 +64,7 @@
 /* #loginForm .container-input input{
   margin-bottom: 0;
 } */
-#body_reg-fast i {
+/*#body_reg-fast i {
   line-height: 65px;
 }
 
@@ -79,7 +79,7 @@
   top: -20px;
   margin-bottom: -18px;
   display: none;
-}
+} */
 
 /* .a-link {
   background: linear-gradient(96.72deg,
@@ -103,12 +103,12 @@
   text-decoration: none;
 }
 
-.container-checkbox {
+/* .container-checkbox {
   font-size: 14px;
   line-height: 130%;
   margin: 0 auto;
   display: flex;
-}
+} */
 
 /* .container-input {
   padding-bottom: 25px;

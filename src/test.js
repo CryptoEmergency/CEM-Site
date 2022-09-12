@@ -1,7 +1,15 @@
 import { getStorage, timersStart, sendApi } from '@betarost/cemjs'
 import { timerCourse, checkAnswerApi } from '@src/functions.js'
+import validator from 'validator';
+
+// const tmp = validator.isStrongPassword("7ы", {
+//   minLength: 8, minLowercase: 1,
+//   minUppercase: 1, minNumbers: 1, minSymbols: 1
+// })
 
 
+
+// console.log("isStrongPassword=", tmp);
 
 const test = async function () {
   // const myInfo = getStorage("myInfo")

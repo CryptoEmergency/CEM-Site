@@ -16,8 +16,21 @@ const showModalReg = function (e) {
     setValue("modals", "registrationModalShow", !getValue("modals", "registrationModalShow"))
 };
 
-const ModalReg = function ({ lang, changeCode, ID, abbr, codeTitle, wayReg, changeWayReg }) {
-    // console.log("ModalReg");
+const ModalReg = function ({
+    lang,
+    changeCode,
+    ID,
+    abbr,
+    codeTitle,
+    wayReg,
+    changeWayReg,
+    toggleViewPassword,
+
+    formInputs,
+    changeInput,
+}) {
+    console.log("ModalReg", formInputs);
+    const viewPassword = getValue(ID, "viewPassword");
 
     return (
         <div class="c-modal c-modal--open" id="ModalReg">
@@ -30,12 +43,12 @@ const ModalReg = function ({ lang, changeCode, ID, abbr, codeTitle, wayReg, chan
                         onclick={showModalReg}
                     ></button>
                 </header>
-                <div class="c-modal__body">
-                    <div class="mobile_or_email_toggle">
+                <div id="body_reg-fast" class="c-modal__body">
+                    <div class="c-mobileoremail">
                         <button
                             data-form_type="registration"
                             id="regByEmail"
-                            class={`reset_password_button ${wayReg == "email" && "active"}`}
+                            class={`c-button c-button--toggler ${wayReg == "email" && "c-button--active"}`}
                             onClick={(e) => { changeWayReg(e) }}
                         >
                             {lang.button.email}
@@ -43,7 +56,7 @@ const ModalReg = function ({ lang, changeCode, ID, abbr, codeTitle, wayReg, chan
                         <button
                             data-form_type="registration"
                             id="regByMobile"
-                            class={`reset_password_button ${wayReg == "phone" && "active"}`}
+                            class={`c-button c-button--toggler ${wayReg == "phone" && "c-button--active"}`}
                             onClick={(e) => { changeWayReg(e) }}
                         >
                             {lang.button.phone}
@@ -52,26 +65,68 @@ const ModalReg = function ({ lang, changeCode, ID, abbr, codeTitle, wayReg, chan
                     <form id="registrationForm" data-button_id="fast_reg">
                         <input style="display: none;" type="submit" />
                         <div class="reset_password_input_block">
-                            <div
-                                class={`reset_by_email_block ${wayReg == "phone" && "dn"}`}
-                            >
-                                <label for="registerByEmailInput">{lang.label.email}</label>
-                                <div class="error-div">{lang.error_div.wrong_email}</div>
-                                <div class="reset_by_email_block_container">
-                                    <input data-form_type="registration" data-dirty="false" data-focusout="focusout" data-keyup="keyupValidate" data-validate_type="email" placeholder={lang.placeholder.email} id="registerByEmailInput" type="text" />
-                                </div>
+                            <div>
+                                {wayReg == "email" &&
+                                    <div
+                                        class={`reset_by_email_block ${wayReg == "phone" && "dn"}`}
+                                    >
+                                        <label for="registerByEmailInput">{lang.label.email}</label>
+                                        <div class="error-div" style={`${formInputs.email.error && "display: block"}`}>{lang.error_div.wrong_email}</div>
+                                        <div class="reset_by_email_block_container">
+                                            <input
+                                                data-form_type="registration"
+                                                data-dirty="false"
+                                                data-focusout="focusout"
+                                                data-keyup="keyupValidate"
+                                                data-validate_type="email"
+                                                placeholder={lang.placeholder.email}
+                                                id="registerByEmailInput"
+                                                type="text"
+                                                data-type="email"
+                                                value={formInputs.email.value}
+                                                oninput={changeInput}
+                                            />
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                            <div class={`reset_by_mobile_block ${wayReg == "email" && "dn"}`}>
-                                <label for="registerByMobileInput">{lang.label.phone}</label>
-                                <div class="error-div">{lang.error_div.wrong_phone}</div>
-                                <div class="reset_by_mobile_block_container">
-                                    <input data-form_type="registration" data-dirty="false" data-focusout="focusout" data-keyup="keyupValidate" data-validate_type="phone" class="phoneNubmerInput" type="text" id="phone" name="phone" autofocus="true" placeholder="9990000000" data-co="ru" />
-                                </div>
+                            <div>
+                                {wayReg == "phone" &&
+                                    <div class={`reset_by_mobile_block ${wayReg == "email" && "dn"}`}>
+                                        <label for="registerByMobileInput">{lang.label.phone}</label>
+                                        <div class="error-div" style={`${formInputs.phone.error && "display: block"}`}>{lang.error_div.wrong_phone}</div>
+                                        <div class="reset_by_mobile_block_container c-phonecode">
+
+                                            <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
+
+                                            <input
+                                                data-form_type="registration"
+                                                data-dirty="false"
+                                                data-focusout="focusout"
+                                                data-keyup="keyupValidate"
+                                                data-validate_type="phone"
+                                                class="phoneNubmerInput"
+                                                type="text"
+                                                id="phone"
+                                                name="phone"
+                                                autofocus="true"
+                                                placeholder="9990000000"
+                                                data-co={abbr}
+                                                data-type="phone"
+                                                value={formInputs.phone.value}
+                                                oninput={changeInput}
+                                            />
+
+                                            <input id="phone_prefix" type="hidden" name="__phone_prefix" value={codeTitle} />
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div class="container-input">
                             <label for="password_reg">{lang.label.password}</label>
-                            <div class="error-div">
+                            <div class="error-div" style={`${formInputs.pass.error && "display: block"}`}>
+                                <div class="error-div-variant" style={`${formInputs.pass.error && "display: block"}`}>{formInputs.pass.error}</div>
                                 <div class="error-div-variant">{lang.error_div.not_empty_input}</div>
                                 <div class="error-div-variant">{lang.error_div.password}</div>
                                 <div class="error-div-variant">{lang.error_div.password2}</div>
@@ -87,15 +142,18 @@ const ModalReg = function ({ lang, changeCode, ID, abbr, codeTitle, wayReg, chan
                                     required="required"
                                     id="fast_pass"
                                     placeholder={lang.placeholder.password}
-                                    type="password"
+                                    type={`${viewPassword ? 'text' : 'password'}`}
+                                    data-type="pass"
+                                    value={formInputs.pass.value}
+                                    oninput={changeInput}
                                 />
-                                <img src={svg.eye} class="password_eye" />
+                                <img src={svg[`eye${viewPassword ? '-slash' : ''}`]} class="password_eye" onClick={toggleViewPassword} />
                             </div>
                         </div>
                         <div class="container-checkbox">
                             <div class="error-div-agree" id="fast_agree-error"></div>
                             <div class="checkbox">
-                                <p class="checkbox_error">{lang.error_div.needAgree}</p>
+                                <p class="checkbox_error" style={`${formInputs.agreement.error && "display: block"}`}>{lang.error_div.needAgree}</p>
                                 <input
                                     data-form_type="registration"
                                     class="checkbox__input"
@@ -103,6 +161,9 @@ const ModalReg = function ({ lang, changeCode, ID, abbr, codeTitle, wayReg, chan
                                     id="fast_agree"
                                     data-action="clearCheckboxError"
                                     required="required"
+                                    data-type="agreement"
+                                    value={formInputs.agreement.value}
+                                    onchange={changeInput}
                                 />
                                 <label class="checkbox__label" for="fast_agree">
                                     {lang.text.agree}
@@ -115,7 +176,7 @@ const ModalReg = function ({ lang, changeCode, ID, abbr, codeTitle, wayReg, chan
                     </form>
                 </div>
                 <footer class="c-modal__footer">
-                    <button class="c-button c-button--primary2 c-button--inactive" type="button" id="fast_reg">
+                    <button class={`c-button c-button--primary2 ${getValue(ID, "isValidReg") ? "" : "c-button--inactive"}`} type="button" id="fast_reg">
                         <span class="c-button__wrapper">
                             {lang.button.registration}
                         </span>

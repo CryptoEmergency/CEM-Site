@@ -1,4 +1,47 @@
 /* User main styles */
+.c-userpreview {
+    width: calc(100% - 224px);
+    margin: 5px auto;
+    background-color: #2B3040;
+    position: relative;
+    border-radius: 15px;
+    right: 7.5px;
+    overflow: hidden;
+
+    &__header {
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        .new_professional_buttons {
+            position: absolute;
+            right: 10px;
+            transform: translateY(-50%);
+            z-index: 99;
+
+            .button-container-preview {
+                margin-top: 0;
+                margin-bottom: 0 !important;
+            }
+
+            .btn-news-preview {
+                width: 120px;
+                border: 2px solid #AEAFBF;
+            }
+        }
+    }
+
+    &__avatar {
+
+        .c-avataricon {
+            height: 100%;
+        }
+    }
+
+    &__bg {}
+}
+
 .user {
 
     &_main {
@@ -16,7 +59,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
-    
+
         .new_professional_buttons {
             position: absolute;
             right: 10px;
@@ -25,7 +68,7 @@
 
             .button-container-preview {
                 margin-top: 0;
-                margin-bottom: 0!important;
+                margin-bottom: 0 !important;
             }
 
             .btn-news-preview {
@@ -35,10 +78,10 @@
         }
 
         img {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px 15px 0 0;
-            max-height: 400px;
+            // width: 100%;
+            // height: 100%;
+            // border-radius: 15px 15px 0 0;
+            // max-height: 400px;
         }
     }
 }
@@ -56,7 +99,7 @@
 
     &:hover {
         .edit_avatar {
-            opacity: 1; 
+            opacity: 1;
         }
     }
 
@@ -119,7 +162,7 @@
             text-decoration: none;
         }
     }
-    
+
     &_item {
         margin-bottom: 3px;
         font-weight: 600;
@@ -223,7 +266,7 @@
 
             &:nth-child(2) {
 
-                .editblockinfo{
+                .editblockinfo {
                     display: inline-block;
                 }
             }
@@ -269,7 +312,7 @@
     background: linear-gradient(45deg, rgb(59, 173, 227) 0px, rgb(87, 111, 230) 45%, rgb(152, 68, 183) 57%, rgb(255, 53, 127) 70%);
     border-radius: 50%;
     padding: 2px;
-    
+
     img {
         position: relative;
         left: 0px;
@@ -297,7 +340,7 @@
     border-radius: 5px;
     outline: none;
 
-    &:hover{
+    &:hover {
         background: #3d4252;
     }
 }
@@ -318,7 +361,7 @@
         left: 0;
         background: #C126CE;
     }
-    
+
     &_num {
         position: absolute;
         top: 0;
@@ -354,7 +397,7 @@
 
             .acp {
 
-                &_block{
+                &_block {
                     right: 30px;
                 }
             }
@@ -387,6 +430,11 @@
 }
 
 @media(max-width: 1199px) {
+    .c-userpreview {
+        right: auto;
+        width: calc(100% - 24px);
+    }
+
     .user {
 
         &_main {
