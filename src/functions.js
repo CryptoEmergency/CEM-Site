@@ -1,70 +1,80 @@
-import { jsx, jsxFrag, getStorage, setValue, getValue, getAction, getVariable, sendApi, delDOM, timersClear, parsingUrl } from '@betarost/cemjs'
-import list from '@src/routerList.js';
-import validator from 'validator';
-import moment from 'moment';
-import swiperload from "@assets/js/swiper.js"
+import {
+  jsx,
+  jsxFrag,
+  getStorage,
+  setValue,
+  getValue,
+  getAction,
+  getVariable,
+  sendApi,
+  delDOM,
+  timersClear,
+  parsingUrl,
+} from "@betarost/cemjs";
+import list from "@src/routerList.js";
+import validator from "validator";
+import moment from "moment";
+import swiperload from "@assets/js/swiper.js";
 
 const numberFixWithSpaces = function (num, fix) {
-  let x = parseFloat(num).toFixed(fix)
+  let x = parseFloat(num).toFixed(fix);
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   return parts.join(".");
-}
+};
 
 const start = async function (reload) {
-  const dataUrl = getVariable("dataUrl")
-  let page = dataUrl.adress
+  const dataUrl = getVariable("dataUrl");
+  let page = dataUrl.adress;
   if (!dataUrl.adress || dataUrl.adress == "") {
     await list.index(reload);
-    after()
+    after();
     return;
   }
 
   if (dataUrl.category) {
-    page += "/" + dataUrl.category
+    page += "/" + dataUrl.category;
   } else if (dataUrl.adress == "user") {
-    page = "user/index"
+    page = "user/index";
   }
 
   if (!list[page]) {
-    await list.error404(reload)
-    after()
+    await list.error404(reload);
+    after();
     return;
   }
 
-
   await list[page](reload);
-  after()
+  after();
   return;
-}
+};
 
 const after = function () {
   swiperload();
-}
+};
 
 const clickCancel = function (e) {
-  e.stopPropagation()
-}
+  e.stopPropagation();
+};
 
 const clickHide = function (e) {
   setValue("mainHeader", "langListShow", false);
 
   let obj = getValue("mainBlock", "showObject");
   for (let key in obj) {
-    obj[key] = false
+    obj[key] = false;
   }
   setValue("mainBlock", "showObject", obj);
-
-}
+};
 
 const timerTik = function () {
   //console.log("timerTik", "tt")
-}
+};
 
 const getNewsItem = async function (type) {
-  let getLang = "en"
+  let getLang = "en";
   if (getStorage("lang") == "ru") {
-    getLang = "ru"
+    getLang = "ru";
   }
 
   if (type === "media") {
@@ -72,91 +82,106 @@ const getNewsItem = async function (type) {
   }
 
   let data = {
-    "filter": {
-      "type": type,
-      "languages.code": getLang
+    filter: {
+      type: type,
+      "languages.code": getLang,
     },
-    "select": {
-      "title": 1,
-      "preview": 1,
-      "image": 1,
-      "showDate": 1,
+    select: {
+      title: 1,
+      preview: 1,
+      image: 1,
+      showDate: 1,
       "statistic.view": 1,
-      "statistic.comments": 1
+      "statistic.comments": 1,
     },
-    "sort": {
-      "showDate": -1
+    sort: {
+      showDate: -1,
     },
-    "limit": 6
+    limit: 6,
+  };
+
+  var response = checkAnswerApi(await sendApi.create("getNews", data));
+  return response;
+};
+
+const getDateFormat = function (data, type) {
+  const lang = getVariable("languages")[getStorage("lang")];
+  moment.locale(lang.code);
+  console.log("=b12dd9=", moment.locale());
+  switch (type) {
+    case "lenta":
+      let secondsBefor = Math.round(
+        (moment().format("x") - moment(data).format("x")) / 1000
+      );
+      if (secondsBefor < 86400) {
+        return moment(data).fromNow();
+      } else { 
+        // return moment(data).format("LL")
+        return moment(data).format("DD MMMM YYYY");
+      }
+    default:
+      return moment(data).format("YYYY-MM-DD");
   }
-
-  var response = checkAnswerApi(await sendApi.create("getNews", data))
-  return response
-
-}
-
-const getDateFormat = function (data) {
-  return moment(data).format("YYYY-MM-DD");
-}
+};
 
 const getNewsCategory = async function (type) {
-  let getLang = "en"
+  let getLang = "en";
   if (getStorage("lang") == "ru") {
-    getLang = "ru"
+    getLang = "ru";
   }
   let data = {
     filter: {
       type,
-    }
-  }
-  data.filter["count." + getLang] = { $gt: 0 }
+    },
+  };
+  data.filter["count." + getLang] = { $gt: 0 };
 
-  var response = checkAnswerApi(await sendApi.create("getCategories", data))
-  return response
-  setValue("mainBlock", "newsCategory", course.list_records[0])
-}
+  var response = checkAnswerApi(await sendApi.create("getCategories", data));
+  return response;
+  setValue("mainBlock", "newsCategory", course.list_records[0]);
+};
 
 const timerCourse = async function () {
-  var course = checkAnswerApi(await sendApi.getCourse())
+  var course = checkAnswerApi(await sendApi.getCourse());
   setValue("mainBlock", "mainCourse", course.list_records[0]);
-}
+};
 
 const siteLink = function (e) {
-  e.preventDefault()
-  let link = this.href
-  history.pushState(null, null, link)
+  e.preventDefault();
+  let link = this.href;
+  history.pushState(null, null, link);
   timersClear();
   window.scrollTo({
     top: 0,
-    behavior: "smooth"
+    behavior: "smooth",
   });
-  getAction("App", "start")()
-}
+  getAction("App", "start")();
+};
 
 const changeLang = function (e) {
-  e.preventDefault()
-  let link = this.href
-  history.pushState(null, null, link)
+  e.preventDefault();
+  let link = this.href;
+  history.pushState(null, null, link);
   timersClear();
-  getAction("App", "start")()
-}
+  getAction("App", "start")();
+};
 
 const checkAnswerApi = function (data) {
   // console.log(data);
   if (!data || !data.result) {
-    console.error("Wrong answer from Api")
-    return { list_records: [{}], totalFound: 0 }
+    console.error("Wrong answer from Api");
+    return { list_records: [{}], totalFound: 0 };
   }
-  return data.result
-}
+  return data.result;
+};
 
 const allValidation = (str, type, condition) => {
-  console.log(validator)
+  console.log(validator);
   if (type == "email") {
     return validator.isEmail(str);
   }
   if (condition) {
-    return validator.matches(str, condition)
+    return validator.matches(str, condition);
   }
 
   if (type == "phone") {
@@ -169,7 +194,7 @@ const allValidation = (str, type, condition) => {
       minLowercase: 1,
       minUppercase: 1,
       minNumbers: 1,
-      minSymbols: 1
+      minSymbols: 1,
     });
   }
 
@@ -177,18 +202,16 @@ const allValidation = (str, type, condition) => {
     return str;
     // return str = !str;
   }
-}
-
+};
 
 const changeNewsCategory = async (e, type, init) => {
-
   const ID = "mainBlock";
   // e.target.closest('.tags').childNodes.forEach(function(child) {
   //   child.classList.remove('tag_button_active');
   // });
   // e.currentTarget.classList.add('tag_button_active');
   let typeCategory = e.currentTarget.dataset.name;
-  setValue(ID, 'activeCategory', typeCategory)
+  setValue(ID, "activeCategory", typeCategory);
   let data = {
     select: {
       title: 1,
@@ -202,22 +225,20 @@ const changeNewsCategory = async (e, type, init) => {
       showDate: -1,
     },
     limit: 6,
-  }
+  };
   let response;
   if (type === "media") {
     if (typeCategory !== "en") {
       setValue(ID, `${type}Item`, await getNewsItem(type));
     } else {
-      data.filter =
-      {
+      data.filter = {
         "languages.code": "en",
-        "type": type,
+        type: type,
       };
       response = checkAnswerApi(await sendApi.create("getNews", data));
       setValue(ID, `${type}Item`, response);
     }
-  }
-  else {
+  } else {
     if (typeCategory === "All") {
       setValue(ID, `${type}Item`, await getNewsItem("news"));
     } else {
@@ -225,8 +246,7 @@ const changeNewsCategory = async (e, type, init) => {
       if (getStorage("lang") == "ru") {
         getLang = "ru";
       }
-      data.filter =
-      {
+      data.filter = {
         type,
         "languages.code": getLang,
         "category.name": typeCategory,
@@ -237,23 +257,22 @@ const changeNewsCategory = async (e, type, init) => {
     }
   }
   init(true);
-}
-
+};
 
 const createParagraf = function (arr) {
-  let result = []
+  let result = [];
   for (let i of arr) {
     switch (i.nodeName) {
       case "A":
-        let a = <a target="_blank" rel="nofollow noopener" href={i.innerText}>
-          {i.innerText}
-        </a>
+        let a = (
+          <a target="_blank" rel="nofollow noopener" href={i.innerText}>
+            {i.innerText}
+          </a>
+        );
         result.push(a);
         break;
       case "SPAN":
-        let span = <span>
-          {i.innerText}
-        </span>
+        let span = <span>{i.innerText}</span>;
         result.push(span);
         break;
       default:
@@ -261,7 +280,7 @@ const createParagraf = function (arr) {
         result.push(text);
     }
   }
-  return result
+  return result;
 };
 
 const parseTextforJsx = function (text) {
@@ -271,15 +290,17 @@ const parseTextforJsx = function (text) {
   let result = [];
   for (let i of htmlDoc) {
     let arr = i.childNodes;
-    let tegP = <p>{createParagraf(arr).map((i) => {
-      return i
-    })}</p>;
-    result.push(tegP)
+    let tegP = (
+      <p>
+        {createParagraf(arr).map((i) => {
+          return i;
+        })}
+      </p>
+    );
+    result.push(tegP);
   }
-  return result
+  return result;
 };
-
-
 
 // const getExchangeOrTradeList = async (e, firstLoad, count) => {
 
@@ -322,10 +343,20 @@ const parseTextforJsx = function (text) {
 //   }
 // }
 
-
-
-
-
-
-
-export { parseTextforJsx, changeNewsCategory, getDateFormat, getNewsItem, getNewsCategory, siteLink, changeLang, timerTik, timerCourse, clickHide, clickCancel, start, checkAnswerApi, allValidation, numberFixWithSpaces }
+export {
+  parseTextforJsx,
+  changeNewsCategory,
+  getDateFormat,
+  getNewsItem,
+  getNewsCategory,
+  siteLink,
+  changeLang,
+  timerTik,
+  timerCourse,
+  clickHide,
+  clickCancel,
+  start,
+  checkAnswerApi,
+  allValidation,
+  numberFixWithSpaces,
+};

@@ -338,7 +338,7 @@ const init = async function (reload) {
   if (!reload) {
     if (!reload) {
       if (!getValue(ID, "lentaUsers")) {
-        setValue(ID, "lentaUsers", await getLentaUsersList(true, "text"));
+        setValue(ID, "lentaUsers", await getLentaUsersList(true, "image"));
       }
     }
   }
