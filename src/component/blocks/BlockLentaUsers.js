@@ -69,7 +69,9 @@ const returnImgOrVideo = (item) => {
 
 const BlockLentaUsers = function ({ item }) {
   const lang = getVariable("languages")[getStorage("lang")];
+  const isAuth = getStorage("auth");
   console.log("=item=", item);
+  console.log("=isAuth=", isAuth);
   //   const parser = new DOMParser();
   //   let jsx1 = parser.parseFromString(item.text, "text/html");
   //   //   let tmp = [...jsx1.body.childNodes];
@@ -160,13 +162,13 @@ const BlockLentaUsers = function ({ item }) {
         </div>
 
         <div class="comment_icons">
-                {/* <div 
-                class = {`comment_icon_type-1 answer_additionally_toggle ${!item.data.auth && "comment_inactive"}`}
+                <div 
+                class = {`comment_icon_type-1 answer_additionally_toggle ${!isAuth && "comment_inactive"}`}
                  data-needauth="true" data-action="answerAdditionallyToggle">
                     <img class="answer_additionally_toggle_img"  src={svg["points"]}/>
                     <div class="answer_additionally_container">
                         <div class="answer_additionally">
-                            {{#is author._id data.myInfo._id}}
+                            {/* {{#is author._id data.myInfo._id}}
                                 <div data-needauth="true" class="answer_additionally_item share" data-action="answerAdditionallyItem" data-answer-id={{ _id }} data-type="post">{lang.select.share}</div>
                                 <div data-needauth="true" class="answer_additionally_item edit" data-action="answerAdditionallyItem" data-answer-id="{{_id}}" data-type="post">{lang.button.edit}</div>
                                 <div data-needauth="true" class="answer_additionally_item delete" data-action="answerAdditionallyItem" data-answer-id="{{_id}}" data-type="post">{lang.select.delete}</div>
@@ -186,10 +188,10 @@ const BlockLentaUsers = function ({ item }) {
                             {{/is}}
                             {{#if data.myInfo.status.role}}
                                 <div style="color: #32DE80" data-needauth="true" class="answer_additionally_item delete" data-action="doRoleModal" data-answer-id="{{_id}}" data-type="post">{{lang.select.delete}}</div>
-                            {{/if}}
+                            {{/if}} */}
                       </div>
                     </div>
-                </div> */}
+                </div>
                  {/* {{#is myInfo.role 1}}    
                     {{#is myInfo.role_settings.del_answer 1}} 
                         <div class="acp_block">
