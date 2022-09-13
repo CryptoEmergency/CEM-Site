@@ -13,10 +13,21 @@ const BlockUserProfileTabs = function ({ lang, myInfo, userInfo }) {
 
         <div class="userMainBlock">
 
-            <div data-touchmove="userProfileSlide" data-touchstart="userProfileSlideStart" data-touchend="userProfileSlideEnd" class="bl_one bl_active" id="UserInfoLentaFriends">
+            <div
+                data-touchmove="userProfileSlide"
+                data-touchstart="userProfileSlideStart"
+                data-touchend="userProfileSlideEnd"
+                class="bl_one bl_active"
+                id="UserInfoLentaFriends"
+            >
 
-
-                <div data-touchmove="userProfileSlide" data-touchstart="userProfileSlideStart" data-touchend="userProfileSlideEnd" class="bl_one bl_active" id="UserInfoLentaFriends">
+                <div
+                    data-touchmove="userProfileSlide"
+                    data-touchstart="userProfileSlideStart"
+                    data-touchend="userProfileSlideEnd"
+                    class="bl_one bl_active"
+                    id="UserInfoLentaFriends"
+                >
                     <div class="user_main_block">
                         <div class="user_news">
                             <div class="user_news_block">

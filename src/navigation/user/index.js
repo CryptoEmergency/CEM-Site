@@ -28,7 +28,7 @@ const startView = async function () {
 
     const dataShow = await tabs(tabType, lang, myInfo, userInfo)
 
-    console.log('=537f26=', tabType, dataShow)
+    // console.log('=537f26=', tabType, dataShow)
 
     return (
         <div class={show && 'c-main__body' || 'c-main__body--noheader'}>
