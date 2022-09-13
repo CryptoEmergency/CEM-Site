@@ -6,10 +6,12 @@ import {
     makeDOM,
     getVariable,
     getStorage,
-    getValue
+    getValue,
+    sendApi
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import { PhoneCode } from '@component/element/PhoneCode.js';
+import { If } from '@component/helpers/All.js';
 
 const showModalReg = function (e) {
     e.stopPropagation()
@@ -28,8 +30,11 @@ const ModalReg = function ({
 
     formInputs,
     changeInput,
+    regFormSent,
+
+    sendRegistration
 }) {
-    console.log("ModalReg", formInputs);
+    // console.log("ModalReg", formInputs);
     const viewPassword = getValue(ID, "viewPassword");
 
     return (
@@ -71,7 +76,16 @@ const ModalReg = function ({
                                         class={`reset_by_email_block ${wayReg == "phone" && "dn"}`}
                                     >
                                         <label for="registerByEmailInput">{lang.label.email}</label>
-                                        <div class="error-div" style={`${formInputs.email.error && "display: block"}`}>{lang.error_div.wrong_email}</div>
+
+                                        <If
+                                            data={formInputs.email.error != ""}
+                                            dataIf={
+                                                <div class="error-div" style="display: block">
+                                                    <div class="error-div-variant">{formInputs.email.error}</div>
+                                                </div>
+                                            }
+                                        />
+
                                         <div class="reset_by_email_block_container">
                                             <input
                                                 data-form_type="registration"
@@ -94,7 +108,16 @@ const ModalReg = function ({
                                 {wayReg == "phone" &&
                                     <div class={`reset_by_mobile_block ${wayReg == "email" && "dn"}`}>
                                         <label for="registerByMobileInput">{lang.label.phone}</label>
-                                        <div class="error-div" style={`${formInputs.phone.error && "display: block"}`}>{lang.error_div.wrong_phone}</div>
+
+                                        <If
+                                            data={formInputs.phone.error != ""}
+                                            dataIf={
+                                                <div class="error-div" style="display: block">
+                                                    <div class="error-div-variant">{formInputs.phone.error}</div>
+                                                </div>
+                                            }
+                                        />
+
                                         <div class="reset_by_mobile_block_container c-phonecode">
 
                                             <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
@@ -125,15 +148,16 @@ const ModalReg = function ({
                         </div>
                         <div class="container-input">
                             <label for="password_reg">{lang.label.password}</label>
-                            <div class="error-div" style={`${formInputs.pass.error && "display: block"}`}>
-                                <div class="error-div-variant" style={`${formInputs.pass.error && "display: block"}`}>{formInputs.pass.error}</div>
-                                <div class="error-div-variant">{lang.error_div.not_empty_input}</div>
-                                <div class="error-div-variant">{lang.error_div.password}</div>
-                                <div class="error-div-variant">{lang.error_div.password2}</div>
-                                <div class="error-div-variant">{lang.error_div.password3}</div>
-                                <div class="error-div-variant">{lang.error_div.password4}</div>
-                                <div class="error-div-variant">{lang.error_div.password5}</div>
-                            </div>
+
+                            <If
+                                data={formInputs.pass.error != ""}
+                                dataIf={
+                                    <div class="error-div" style="display: block">
+                                        <div class="error-div-variant">{formInputs.pass.error}</div>
+                                    </div>
+                                }
+                            />
+
                             <div class="input-div">
                                 <img src={svg.lock} class="icon-input" />
                                 <input
@@ -153,7 +177,14 @@ const ModalReg = function ({
                         <div class="container-checkbox">
                             <div class="error-div-agree" id="fast_agree-error"></div>
                             <div class="checkbox">
-                                <p class="checkbox_error" style={`${formInputs.agreement.error && "display: block"}`}>{lang.error_div.needAgree}</p>
+
+                                <If
+                                    data={formInputs.agreement.error != ""}
+                                    dataIf={
+                                        <p class="checkbox_error" style="display: block">{lang.error_div.needAgree}</p>
+                                    }
+                                />
+
                                 <input
                                     data-form_type="registration"
                                     class="checkbox__input"
@@ -176,7 +207,12 @@ const ModalReg = function ({
                     </form>
                 </div>
                 <footer class="c-modal__footer">
-                    <button class={`c-button c-button--primary2 ${getValue(ID, "isValidReg") ? "" : "c-button--inactive"}`} type="button" id="fast_reg">
+                    <button
+                        class={`c-button c-button--primary2 ${getValue(ID, "isValidReg") ? "" : "c-button--inactive"}`}
+                        type="button"
+                        id="fast_reg"
+                        onClick={() => { sendRegistration() }}
+                    >
                         <span class="c-button__wrapper">
                             {lang.button.registration}
                         </span>

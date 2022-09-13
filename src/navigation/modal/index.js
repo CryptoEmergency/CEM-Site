@@ -6,15 +6,18 @@ import {
     makeDOM,
     getVariable,
     getStorage,
+    sendApi
 } from '@betarost/cemjs';
 import { allValidation } from '@src/functions.js';
 import { ModalAuth } from '@component/modals/ModalAuth.js';
 import { ModalComingSoon } from '@component/modals/ModalComingSoon.js';
 import { ModalReset } from '@component/modals/ModalReset.js';
 import { ModalReg } from '@component/modals/ModalReg.js';
+import { ModalConfirmation } from '@component/modals/ModalConfirmation.js';
 let formInputsReg, formInputsRegEmail, formInputsRegPhone = {};
 
 const ID = "modals";
+let regFormSent = false;
 
 const changeCode = (e, country) => {
     e.stopPropagation()
@@ -52,16 +55,8 @@ const changeWayReg = (e) => {
     // setValue(ID, "isValidReg", false);
     if (e.target.id == "regByEmail" && way == "phone") {
         setValue(ID, 'toggleWayReg', "email");
-        formInputsReg = Object.assign({}, formInputsRegEmail);
-        delete formInputsReg.email;
-        formInputsReg.phone = formInputsRegPhone.phone;
-        // console.log('=cea51a=', formInputsReg)
     } else if (e.target.id == "regByMobile" && way == "email") {
         setValue(ID, 'toggleWayReg', "phone");
-        formInputsReg = Object.assign({}, formInputsRegPhone);
-        delete formInputsReg.phone;
-        formInputsReg.email = formInputsRegPhone.email;
-        // console.log('=cea52a=', formInputsReg)
     }
 };
 
@@ -76,13 +71,42 @@ const toggleViewPassword = (e) => {
     setValue(ID, "viewPassword", !getValue(ID, "viewPassword"));
 };
 
+const sendRegistration = async function () {
+    let formInputs = formInputsReg
+    let value = {};
+    if (formInputs.email) {
+        const email = formInputs.email.value;
+        value = {
+            email
+        }
+    } else if (formInputs.phone) {
+        const phone = formInputs.phone.value;
+        value = {
+            phone
+        }
+    }
+    const password = formInputs.pass.value;
+    const agree = formInputs.agreement.value;
+    value.password = password;
+    value.agree = agree;
+    console.log('=5493bc=', value)
+    const data = await sendApi.create("registration", { value: value });
+    console.log(data)
+    if (data.status === 'ok') {
+        regFormSent = true;
+        // setValue("modals", "registrationModalShow", !getValue("modals", "registrationModalShow"))
+        setValue("modals", "confirmationModalShow", !getValue("modals", "confirmationModalShow"));
+    }
+    init(true);
+
+};
+
 const changeInputReg = (e) => {
     setValue(ID, "isValidReg", true);
     let inputValue;
     let inputType = e.currentTarget.dataset.type;
     inputValue = e.currentTarget.dataset.type == "agreement" ? !formInputsReg[inputType].value : e.target.value.trim();
     formInputsReg[inputType].value = inputValue;
-    console.log('=57dc77=', `inputValue = ${inputValue}, inputType = ${inputType}`)
 
     formInputsReg[inputType].valid = allValidation(inputValue, inputType);
     if (!formInputsReg[inputType].valid) {
@@ -99,26 +123,23 @@ const changeInputReg = (e) => {
             return true
         }
     });
-    console.log('=287e24=', isCheckAll)
     if (isCheckAll.length === 0) {
         setValue(ID, "isValidReg", true);
-        console.log('=287e25=', getValue(ID, "isValidReg"))
         return
     } else {
         setValue(ID, "isValidReg", false);
-        console.log('=287e26=', getValue(ID, "isValidReg"))
         init(true);
         return
     }
 
 }
 
-
 const start = function () {
     const showAuth = getValue("modals", "authModalShow");
     const commingSoonModalShow = getValue("modals", "commingSoonModalShow");
     const showReset = getValue("modals", "resetModalShow");
     const showRegistration = getValue("modals", "registrationModalShow");
+    const showConfirmation = getValue("modals", "confirmationModalShow");
     const languages = getVariable("languages");
     const lang = languages[getStorage("lang")];
     const defAbbr = getValue(ID, "defaultAbbrPhone");
@@ -172,6 +193,13 @@ const start = function () {
                     toggleViewPassword={toggleViewPassword}
                     changeInput={changeInputReg}
                     formInputs={formInputsReg}
+                    regFormSent={regFormSent}
+                    sendRegistration={sendRegistration}
+                />
+            }
+            {showConfirmation &&
+                <ModalConfirmation
+                    lang={lang}
                 />
             }
         </div>
@@ -186,6 +214,7 @@ const init = function (reload) {
         setValue(ID, "showPhoneSelect", false);
         setValue(ID, "resetModalShow", false);
         setValue(ID, "registrationModalShow", false);
+        setValue(ID, "confirmationModalShow", false);
         setValue(ID, "defaultAbbrPhone", "ru");
         setValue(ID, "defaultTitlePhone", "7");
         setValue(ID, "toggleWayAuth", "email");
@@ -211,7 +240,7 @@ const init = function (reload) {
                 valid: false,
                 error: ""
             }
-        }
+        };
         formInputsRegPhone = {
             phone: {
                 value: "",
@@ -228,7 +257,8 @@ const init = function (reload) {
                 valid: false,
                 error: ""
             }
-        }
+        };
+        regFormSent = false
     }
 
     makeDOM(start(), ID)

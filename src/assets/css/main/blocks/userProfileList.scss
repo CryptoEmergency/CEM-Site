@@ -40,7 +40,6 @@
         top: 2px;
         padding: 0 15px 9px 15px;
         cursor: pointer;
-
     }
 
     &__img {
@@ -61,46 +60,46 @@
 
 .users_news {
 
-    // &_categories {
-    //     display: flex;
-    //     justify-content: space-between;
-    //     /* border-bottom: 2px solid #353C50;*/
-    //     margin-top: 10px;
-    //     overflow-y: hidden;
-    //     overflow-x: auto;
+    &_categories {
+        display: flex;
+        justify-content: space-between;
+        /* border-bottom: 2px solid #353C50;*/
+        margin-top: 10px;
+        overflow-y: hidden;
+        overflow-x: auto;
 
-    //     &::-webkit-scrollbar {
-    //         width: 0px;
-    //         height: 0px;
-    //     }
+        &::-webkit-scrollbar {
+            width: 0px;
+            height: 0px;
+        }
 
-    //     &::-webkit-scrollbar-button {
-    //         /*background-image: url(App.css);*/
-    //         background-repeat: no-repeat;
-    //         width: 0px;
-    //         height: 0px;
-    //     }
+        &::-webkit-scrollbar-button {
+            /*background-image: url(App.css);*/
+            background-repeat: no-repeat;
+            width: 0px;
+            height: 0px;
+        }
 
-    //     &::-webkit-scrollbar-thumb {
-    //         border-radius: 5px;
-    //         background-color: #2F3645;
-    //     }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: #2F3645;
+        }
 
-    //     &::-webkit-scrollbar-track {
-    //         background-color: transparent;
-    //     }
-    // }
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    }
 
-    // &_category {
-    //     position: relative;
-    //     top: 2px;
-    //     padding: 0 15px 9px 15px;
-    //     cursor: pointer;
+    &_category {
+        position: relative;
+        top: 2px;
+        padding: 0 15px 9px 15px;
+        cursor: pointer;
 
-    //     img {
-    //         height: 65px;
-    //     }
-    // }
+        img {
+            height: 65px;
+        }
+    }
 }
 
 .user_news {
