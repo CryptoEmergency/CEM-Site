@@ -336,11 +336,17 @@ const ID = "mainBlock";
 
 const init = async function (reload) {
   if (!reload) {
-    if (!reload) {
+    
       if (!getValue(ID, "lentaUsers")) {
         setValue(ID, "lentaUsers", await getLentaUsersList(true, "image"));
-      }
-    }
+      };
+      if (!getValue(ID, "teststyles")) {
+        setValue(ID, "teststyles", {
+          transition: "transform .5s",
+          transform: `translate3d(0px, 0px, 0px)`,
+        });}
+      
+    
   }
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);

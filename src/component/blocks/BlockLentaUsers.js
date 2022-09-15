@@ -14,6 +14,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat, parseTextforJsx } from "@src/functions.js";
 import { AudioPlayer } from "../element/audioPlayer.js";
+import { Slider } from "../element/slider.js";
 
 const returnImgOrVideo = (item) => {
   if (
@@ -48,6 +49,7 @@ const returnImgOrVideo = (item) => {
           <div class="swiper-scrollbar-post_media"></div>
         </div>
       </div>
+      // <Slider arr {item}/>
     );
   } else if (item.media.find((i) => i.type === "audio") == undefined) {
     return (
