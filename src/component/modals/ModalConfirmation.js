@@ -15,15 +15,14 @@ const showModalConfirmation = function (e) {
     setValue("modals", "confirmationModalShow", !getValue("modals", "confirmationModalShow"))
 }
 
-const ModalConfirmation = function ({ lang }) {
-    console.log("ModalConfirmation");
-    const confirmationModalShow = getValue("modals", "confirmationModalShow")
+const ModalConfirmation = function ({ lang, wayReg, confirmationTimer, confirmAccount }) {
+    // console.log("ModalConfirmation");
 
     return (
         <div class="c-modal c-modal--open">
             <section class="c-modal__dialog">
                 <header class="c-modal__header">
-                    <h2 class="c-modal__title"></h2>
+                    <h2 class="c-modal__title">{lang.h.modal_resetСonfirm}</h2>
                     <button
                         type="button"
                         class="c-modal__close"
@@ -33,19 +32,17 @@ const ModalConfirmation = function ({ lang }) {
                 <div class="c-modal__body">
                     <div class="reset_password">
                         <div class="reset_password_step1">
-                            <h4>{lang.h.modal_resetConfirm}</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             <p></p>
                             <div class="reset_password_input_block">
-                                <form id="confirmationForm" onsubmit="sendFormWithoutReload(this, event)" data-button_id="confirmAccount">
+                                <form id="confirmationForm" data-button_id="confirmAccount">
                                     <input style="display: none;" type="submit" />
-                                    <div class="reset_by_email_block">
+                                    <div class={`reset_by_email_block ${wayReg != 'email' && "dn "}`}>
                                         <label for="resetByEmailInput">{lang.text.confirmEmail}</label>
                                         <div class="reset_by_email_block_container">
-                                            <input id="confirmationByEmailInput" type="text" />
+                                            <input id="confirmationByEmailInput" type="number" />
                                         </div>
                                     </div>
-                                    <div class="reset_by_mobile_block dn">
+                                    <div class={`reset_by_mobile_block ${wayReg != 'phone' && "dn "}`}>
                                         <label for="resetByEmailInput">{lang.text.confirmPhone}</label>
                                         <div class="reset_by_mobile_block_container">
                                             <input id="confirmationByMobileInput" type="text" />
@@ -59,20 +56,19 @@ const ModalConfirmation = function ({ lang }) {
                                     1:00
                                 </div>
                             </div>
-                            <a style="display: none;" class="confirmation_timer_success" data-action="confirmationTimer">
+                            <a style="display: none;" class="confirmation_timer_success" onClick={confirmationTimer}>
                                 {lang.a.newCodeConfirm}
                             </a>
-                            <div id="confirmAccount" data-action="confirmAccount" type="button" class="reset-btn">
-                                <a class="btn-reset"><span>{lang.button.send}</span></a>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <footer class="c-modal__footer">
-                    <button class="c-button c-button--primary"
-                        onclick={showModalConfirmation}
+                    <button
+                        class="c-button c-button--primary"
+                        id="confirmAccount"
+                        onclick={confirmAccount}
                     >
-                        <span>Закрыть</span>
+                        <span>{lang.button.send}</span>
                     </button>
                 </footer>
             </section>
