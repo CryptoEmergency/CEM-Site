@@ -145,6 +145,7 @@ const getNewsCategory = async function (type) {
   data.filter["count." + getLang] = { $gt: 0 };
 
   var response = checkAnswerApi(await sendApi.create("getCategories", data));
+  console.log('=response=',response)
   return response;
 };
 
