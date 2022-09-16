@@ -22,34 +22,35 @@ const returnImgOrVideo = (item) => {
     item.media.find((i) => i.type === "audio") == undefined
   ) {
     return (
-      <div class="swiper-container">
-        <div class="swiper swiper-post_media">
-          <div class="swiper-wrapper">
-            {item.media.map((mediaItem) => {
-              return (
-                <a class="swiper-slide">
-                  {item.media.find((i) => i.type === "image") !== undefined && (
-                    <div class="swiper-post_media_image_container">
-                      <img
-                        data-action=""
-                        src={`/assets/upload/posts/${mediaItem.name}`}
-                      />
-                      {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}"> --}} */}
-                    </div>
-                  )}
-                  {item.media.find((i) => i.type === "video") !== undefined && (
-                    //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
-                    <p>video more</p>
-                  )}
-                </a>
-              );
-            })}
-          </div>
-          <div class="swiper-pagination swiper-pagination-post_media"></div>
-          <div class="swiper-scrollbar-post_media"></div>
-        </div>
-      </div>
-      // <Slider arr {item}/>
+      
+      // <div class="swiper-container">
+      //   <div class="swiper swiper-post_media">
+      //     <div class="swiper-wrapper">
+      //       {item.media.map((mediaItem) => {
+      //         return (
+      //           <a class="swiper-slide">
+      //             {item.media.find((i) => i.type === "image") !== undefined && (
+      //               <div class="swiper-post_media_image_container">
+      //                 <img
+      //                   data-action=""
+      //                   src={`/assets/upload/posts/${mediaItem.name}`}
+      //                 />
+      //                 {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}"> --}} */}
+      //               </div>
+      //             )}
+      //             {item.media.find((i) => i.type === "video") !== undefined && (
+      //               //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
+      //               <p>video more</p>
+      //             )}
+      //           </a>
+      //         );
+      //       })}
+      //     </div>
+      //     <div class="swiper-pagination swiper-pagination-post_media"></div>
+      //     <div class="swiper-scrollbar-post_media"></div>
+      //   </div>
+      // </div>
+      <Slider item = {item}  />
     );
   } else if (item.media.find((i) => i.type === "audio") == undefined) {
     return (
@@ -69,11 +70,9 @@ const returnImgOrVideo = (item) => {
   }
 };
 
-const BlockLentaUsers = function ({ item }) {
+const BlockLentaUsers = function ({ item, i, init }) {
   const lang = getVariable("languages")[getStorage("lang")];
   const isAuth = getStorage("auth");
-  console.log("=item=", item);
-  console.log("=isAuth=", isAuth);
   //   const parser = new DOMParser();
   //   let jsx1 = parser.parseFromString(item.text, "text/html");
   //   //   let tmp = [...jsx1.body.childNodes];

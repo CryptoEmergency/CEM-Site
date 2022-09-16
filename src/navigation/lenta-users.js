@@ -13,7 +13,9 @@ import svg from "@assets/svg/index.js";
 import { BlockLentaUsers } from "@component/blocks/BlockLentaUsers.js";
 
 let count = 0;
+let prevType = "";
 const getLentaUsersList = async (firstLoad, type) => {
+  console.log('=269dc6=',type)
   let data = {
     select: {
       author: 1,
@@ -33,10 +35,18 @@ const getLentaUsersList = async (firstLoad, type) => {
   };
 
   switch (type) {
+
     case "text":
-      data.filter["media.type"] = { $nin: ["video", "audio", "image"] };
-      data.limit = 6;
-      data.offset = 6 + 6 * (count - 1);
+      console.log('=text=',prevType)
+       data.filter["media.type"] = { $nin: ["video", "audio", "image"] };
+      if(prevType === type){
+          data.limit = 6;
+          data.offset = 6 + 6 * (count - 1);
+      }else{
+        data.limit = 6;
+        data.offset = 0
+      }
+     
       break;
 
     case "audio":
@@ -86,7 +96,7 @@ const getLentaUsersList = async (firstLoad, type) => {
   console.log(response);
   if (firstLoad) {
     return response;
-  } else {
+  } else if (prevType === type) {
     let prevList = getValue(ID, "lentaUsers");
     response.list_records = [
       ...prevList.list_records,
@@ -95,7 +105,10 @@ const getLentaUsersList = async (firstLoad, type) => {
     console.log("=baedb3=", response);
     setValue(ID, "lentaUsers", response);
     // init(true);
+  } else {
+    setValue(ID, "lentaUsers", response);
   }
+  prevType = type;
 };
 
 const lentaUsersView = function () {
@@ -256,6 +269,9 @@ const lentaUsersView = function () {
               data-type="all"
               data-action="user_news_category_toggle"
               class="users_news_category users_news_category_active"
+              onClick={() => {
+                getLentaUsersList(false, "all");
+              }}
             >
               <img src={svg["sections/news_all"]} />
             </div>
@@ -263,6 +279,9 @@ const lentaUsersView = function () {
               data-type="photo"
               data-action="user_news_category_toggle"
               class="users_news_category"
+              onClick={() => {
+                getLentaUsersList(false, "photo");
+              }}
             >
               <img src={svg["sections/news_photo_inactive"]} />
             </div>
@@ -270,6 +289,9 @@ const lentaUsersView = function () {
               data-type="video"
               data-action="user_news_category_toggle"
               class="users_news_category"
+              onClick={() => {
+                getLentaUsersList(false, "video");
+              }}
             >
               <img src={svg["sections/news_video_inactive"]} />
             </div>
@@ -277,6 +299,9 @@ const lentaUsersView = function () {
               data-type="audio"
               data-action="user_news_category_toggle"
               class="users_news_category"
+              onClick={() => {
+                getLentaUsersList(false, "audio");
+              }}
             >
               <img src={svg["sections/news_audio_inactive"]} />
             </div>
@@ -284,6 +309,9 @@ const lentaUsersView = function () {
               data-type="text"
               data-action="user_news_category_toggle"
               class="users_news_category"
+              onClick={() => {
+                getLentaUsersList(false, "text");
+              }}
             >
               <img src={svg["sections/news_text_inactive"]} />
             </div>
@@ -296,7 +324,7 @@ const lentaUsersView = function () {
               class="bl_one bl_active"
             >
               <div class="user_news_block">
-                {posts.map((item) => {
+                {posts.map((item, i) => {
                   return <BlockLentaUsers item={item} />;
                 })}
               </div>
@@ -336,17 +364,15 @@ const ID = "mainBlock";
 
 const init = async function (reload) {
   if (!reload) {
-    
-      if (!getValue(ID, "lentaUsers")) {
-        setValue(ID, "lentaUsers", await getLentaUsersList(true, "image"));
-      };
-      if (!getValue(ID, "teststyles")) {
-        setValue(ID, "teststyles", {
-          transition: "transform .5s",
-          transform: `translate3d(0px, 0px, 0px)`,
-        });}
-      
-    
+    if (!getValue(ID, "lentaUsers")) {
+      setValue(ID, "lentaUsers", await getLentaUsersList(true, "all"));
+    }
+    if (!getValue(ID, "teststyles")) {
+      setValue(ID, "teststyles", {
+        transition: "transform .5s",
+        transform: `translate3d(0px, 0px, 0px)`,
+      });
+    }
   }
   setValue("mainHeader", "show", true);
   setValue("mainFooter", "show", true);
