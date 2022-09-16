@@ -266,13 +266,13 @@ const start = function () {
 
 
             return (
-                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
+                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     <BlockPreview />
                     <BlockProjects projects={projects} />
-                    {/* <div class="c-main__wrapperbg">
+                    <div class="c-main__wrapperbg">
                         <BlockQuestions lang={Variable.lang} questions={questions} />
 
-                        <div class="c-main__wrapperbg2">
+                        {/* <div class="c-main__wrapperbg2">
                             <BlockBanners banners={banners} />
                             <BlockTrade lang={Variable.lang} trades={trades} />
                             <div class="top_professionals_container">
@@ -281,8 +281,8 @@ const start = function () {
                                 <BlockMainNews lang={Variable.lang} news={news} />
                                 <BlockInfoPartners lang={Variable.lang} partners={partners} />
                             </div>
-                        </div>
-                    </div> */}
+                        </div> */}
+                    </div>
                 </div>
             )
         })

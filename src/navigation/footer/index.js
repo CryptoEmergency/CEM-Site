@@ -1,4 +1,10 @@
-import { jsx, jsxFrag, setAction, setValue, makeDOM, getVariable, getStorage, getValue, init, initGo, Variable } from '@betarost/cemjs'
+import {
+    jsx,
+    jsxFrag,
+    init,
+    initGo,
+    Variable
+} from '@betarost/cemjs'
 import appstore from '@assets/svg/appstore.svg'
 import googleplay from '@assets/svg/googleplay.svg'
 import telegram from '@assets/svg/telegram-icon.svg'

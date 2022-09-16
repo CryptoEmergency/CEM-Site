@@ -7,11 +7,9 @@ init({
         public: path.resolve('public'),
         fileName: "main.js"
     },
-
     port: 80,
     mode: "production",
     api: ""
-
 });
 
 build({}).then((result) => { if (result) start(result) });

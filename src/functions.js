@@ -159,7 +159,7 @@ const siteLink = function (e) {
   e.preventDefault();
   let link = this.href;
   history.pushState(null, null, link);
-  timersClear();
+  // timersClear();
   window.scrollTo({
     top: 0,
     behavior: "smooth",
@@ -172,7 +172,7 @@ const changeLang = function (e) {
   e.preventDefault();
   let link = this.href;
   history.pushState(null, null, link);
-  timersClear();
+  // timersClear();
   parsingUrl()
   //initGo()
   //getAction("App", "start")();

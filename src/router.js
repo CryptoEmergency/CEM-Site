@@ -1,24 +1,18 @@
 import {
-    getVariable,
-    setVariable,
-    setValue,
-    setAction,
-    timersStart,
-    parsingUrl,
     Variable,
-    init
+    init,
+    timersStart,
+    timersClear
 } from '@betarost/cemjs'
-
-//import { init as mainModal } from '@navigation/modal/index.js';
-import { timerTik, start } from '@src/functions.js'
+import { timerTik } from '@src/functions.js'
 import list from "@src/routerList.js";
 
 const mainBlock = async function () {
 
-    //mainModal()
     init(
         () => {
-
+            timersClear();
+            timersStart("TikTok", timerTik, 1500)
         },
         () => {
 
@@ -43,7 +37,6 @@ const mainBlock = async function () {
             return;
 
         }, "newPage")
-
 }
 
 export { mainBlock }
