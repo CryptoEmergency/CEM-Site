@@ -6,14 +6,17 @@ import {
     makeDOM,
     getVariable,
     getStorage,
-    getValue
+    getValue,
+    Variable
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { CourseCurrency } from '@component/element/CourseCurrency.js';
-const auth = getStorage("auth");
 
-const BlockPreview = function ({ lang, course }) {
+
+const BlockPreview = function () {
+
+    const auth = getStorage("auth");
 
     return (
         <div class="с-preview">
@@ -22,39 +25,39 @@ const BlockPreview = function ({ lang, course }) {
                 <img class="с-preview__bg" src={images["background/cem"]} />
                 {!auth ?
                     <div class="с-preview__text с-preview__text--auth">
-                        <span>{lang.homePreview.ask}</span>
+                        <span>{Variable.lang.homePreview.ask}</span>
                         <div class="с-preview__imgblock">
                             <img class="с-preview__img" src={svg.two} />
                             <img class="с-preview__img" src={svg.two5} />
-                            {lang.homePreview.earn}
+                            {Variable.lang.homePreview.earn}
                         </div>
                     </div>
                     :
                     <div class="с-preview__text">
-                        {lang.homePreview.platformFuture}<br />
-                        {lang.homePreview.unitePeople}
+                        {Variable.lang.homePreview.platformFuture}<br />
+                        {Variable.lang.homePreview.unitePeople}
                     </div>
                 }
             </div>
             <div class="с-preview__parts">
                 <a href="/lenta-users/" class="с-preview__part">
-                    <span>{lang.span.userNews}</span>
+                    <span>{Variable.lang.span.userNews}</span>
                 </a>
                 <a href="/chats/" class="с-preview__part" data-updating="true">
-                    <span>{lang.span.chats}</span>
+                    <span>{Variable.lang.span.chats}</span>
                 </a>
                 <a href="/question/" class="с-preview__part">
-                    <span>{lang.span.QA}</span>
+                    <span>{Variable.lang.span.QA}</span>
                 </a>
                 <a href="/news/" class="с-preview__part">
-                    <span>{lang.span.news}</span>
+                    <span>{Variable.lang.span.news}</span>
                 </a>
             </div>
             <div class="с-preview__crypto">
                 {
-                    Object.keys(course).filter((item) => typeof course[item] == 'object').map(function (key) {
+                    Object.keys(Variable.course).filter((item) => typeof Variable.course[item] == 'object').map(function (key) {
                         return (
-                            <CourseCurrency lang={lang} course={course[key]} key={key} />
+                            <CourseCurrency course={Variable.course[key]} key={key} />
                         )
                     })
                 }

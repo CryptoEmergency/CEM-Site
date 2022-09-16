@@ -1,4 +1,8 @@
-import { jsx, jsxFrag, getVariable, getStorage, makeDOM, timersStart, setValue, getValue, sendApi } from '@betarost/cemjs';
+import {
+    jsx,
+    jsxFrag,
+    Variable
+} from '@betarost/cemjs';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { numberFixWithSpaces } from '@src/functions.js';

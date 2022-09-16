@@ -1,12 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
-    getValue
+    Variable
 } from '@betarost/cemjs';
 
 import images from "@assets/images/index.js";

@@ -1,9 +1,7 @@
 import {
   jsx,
   jsxFrag,
-  getStorage,
-  sendApi,
-  getVariable,
+  Variable,
   getValue,
 } from "@betarost/cemjs";
 

@@ -3,9 +3,7 @@ import {
     jsxFrag,
     setAction,
     setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
+    Variable,
     getValue
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
@@ -29,14 +27,14 @@ const ModalComingSoon = function ({ lang }) {
                         class="c-modal__close"
                         onclick={showModalCommingSoon}
                     ></button>
-                </header>  
+                </header>
                 <div class="c-modal__body">
                     <p>Section under development</p>
                     <p>Coming soon</p>
                 </div>
                 <footer class="c-modal__footer">
                     <button class="c-button c-button--primary"
-                    onclick={showModalCommingSoon}
+                        onclick={showModalCommingSoon}
                     >
                         <span>Закрыть</span>
                     </button>

@@ -1,14 +1,12 @@
 import {
     jsx,
     jsxFrag,
-    getStorage,
-    sendApi,
-    getVariable,
+    Variable
 } from "@betarost/cemjs";
 import images from "@assets/images/index.js";
 // import svg from "@assets/svg/index.js";
 
-const PartnerItem = function ({ lang, partner}) {
+const PartnerItem = function ({ lang, partner }) {
     // console.log("PartnerItem", partner)
 
     return (
@@ -18,7 +16,7 @@ const PartnerItem = function ({ lang, partner}) {
             href={partner.link}
             class="c-infopartners__item"
         >
-            <img src={images["partners/"+partner.image]} />
+            <img src={images["partners/" + partner.image]} />
         </a>
     )
 }

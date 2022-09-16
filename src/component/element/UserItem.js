@@ -1,12 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
-    getValue
+    Variable
 } from '@betarost/cemjs';
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
@@ -40,7 +35,7 @@ const UserItem = function ({ lang, user }) {
                 </p>
                 <div class="new_professional_badges">
                     {
-                        user.awards.slice(0,5).map(function (badge) {
+                        user.awards.slice(0, 5).map(function (badge) {
                             return (
                                 <UserBadge lang={lang} badge={badge} />
                             )

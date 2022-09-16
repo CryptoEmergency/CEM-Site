@@ -59,6 +59,31 @@ const getExchangeList = async (count) => {
 };
 
 
+const mainQuestions = async () => {
+    let data = {
+        "filter": {
+            "languages.code": getStorage("lang")
+        },
+        "select": {
+            "title": 1,
+            "showDate": 1,
+            "statistic": 1,
+            "languages": 1,
+            "close": 1,
+            "bestId": 1,
+            "media": 1,
+            "author": 1
+        },
+        "sort": {
+            "showDate": -1
+        },
+        "limit": 6
+    }
+
+    let response = checkAnswerApi(await sendApi.create("getQuestions", data)).list_records;
+    return response
+};
+
 const getUserAboutProfile = async function (nickname) {
 
     const userInfo = checkAnswerApi(await sendApi.create("getUsers", {
@@ -81,4 +106,4 @@ const getUserAboutProfile = async function (nickname) {
     }
 }
 
-export { getUserInfoProfile, getUserAboutProfile, getExchangeList }
+export { getUserInfoProfile, getUserAboutProfile, getExchangeList, mainQuestions }

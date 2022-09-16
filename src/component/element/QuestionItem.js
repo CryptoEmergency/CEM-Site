@@ -1,10 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
-    makeDOM,
-    getVariable,
+    Variable,
     getStorage,
     getValue
 } from '@betarost/cemjs';

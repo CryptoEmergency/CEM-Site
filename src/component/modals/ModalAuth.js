@@ -3,9 +3,7 @@ import {
     jsxFrag,
     setAction,
     setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
+    Variable,
     getValue
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";

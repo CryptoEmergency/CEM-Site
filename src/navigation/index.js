@@ -7,9 +7,12 @@ import {
     timersStart,
     setValue,
     getValue,
-    sendApi
+    sendApi,
+    init,
+    Variable
 } from '@betarost/cemjs'
 import { timerCourse, checkAnswerApi } from '@src/functions.js'
+import { mainQuestions } from "@src/apiFunctions.js";
 
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
@@ -22,198 +25,12 @@ import { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
 
 
-const mainView = function () {
-    const lang = getVariable("languages")[getStorage("lang")]
-    const course = getValue(ID, "mainCourse");
-    const show = getValue("mainHeader", "show");
-    const projects = [
-        {
-            "title": lang.a.exchange,
-            "icon": "shuffle",
-            "link": "list-exchange"
-        },
-        {
-            "title": lang.a.university,
-            "icon": "mortarboard",
-            "link": "university"
-        },
-        {
-            "title": lang.a.contentCreater,
-            "icon": "graph",
-            "link": "content-creator"
-        },
-        {
-            "title": lang.a.starups,
-            "icon": "startup",
-            "link": "startups"
-        },
-        {
-            "title": lang.a.universes,
-            "icon": "meta_universes",
-            "link": "university"
-        },
-        {
-            "title": lang.a.icoRating,
-            "icon": "star1",
-            "link": "ico-rating"
-        },
-        {
-            "title": lang.a.trade,
-            "icon": "stock-market",
-            "link": "list-trade"
-        },
-        {
-            "title": lang.a.news,
-            "icon": "world-news",
-            "link": "news"
-        },
-        {
-            "title": lang.a.experts,
-            "icon": "user",
-            "link": "experts"
-        },
-        {
-            "title": lang.a.nft,
-            "icon": "nft_icon",
-            "link": "nft-market"
-        },
-        {
-            "title": lang.a.career,
-            "icon": "careers_icon",
-            "link": "experts"
-        },
-    ];
-    const questions = getValue(ID, "mainQuestions");
-    const banners = [
-        {
-            "id": "62dd2ca100978d192547427c",
-            "image": "lbf_banner"
-        },
-        {
-            "id": "62bab2ac962df43c3fd94755",
-            "image": "blockchain24"
-        },
-        {
-            "id": "62f0da1ef2b8fa66345ef411",
-            "image": "crypto_summit"
-        },
-        {
-            "id": "630382384dab714d6e986cd6",
-            "image": "1200х580-(fb)"
-        },
-        {
-            "id": "62fb66bd4dab714d6e955d80",
-            "image": "blockchain_life"
-        },
-        {
-            "id": "62d134221de982539a72345e",
-            "image": "crypto_future_banner"
-        }
-    ];
-    const trades = getValue(ID, "mainTrades");
-    const exchanges = getValue(ID, "mainExchanges");
-    const users = getValue(ID, "mainUsers");
-    const news = getValue(ID, "mainNews");
-    const partners = [
-        {
-            "link": "https://sberunity.ru/main/startups/879d88aa-4729-4788-a541-20cc8cc3cb14",
-            "image": "sber_unity"
-        },
-        {
-            "link": "https://sk.ru",
-            "image": "skolkovo"
-        },
-        {
-            "link": "https://cryptosummit.ru",
-            "image": "crypto_summit"
-        },
-        {
-            "link": "https://plus-forum.co",
-            "image": "plus_forum"
-        },
-        {
-            "link": "https://blockchain-life.com/europe/ru/",
-            "image": "blockchain_life"
-        },
-        {
-            "link": "https://rbw.moscow/?utm_source=infopartner&utm_medium=cryptoemergency&utm_campaign=pressreliz",
-            "image": "b4_week"
-        },
-        {
-            "link": "https://ru.beincrypto.com",
-            "image": "be_in_crypto"
-        },
-        {
-            "link": "https://mining-cryptocurrency.ru",
-            "image": "crypto_mining"
-        },
-        {
-            "link": "https://cryptomania.moscow",
-            "image": "cryptomania"
-        },
-        {
-            "link": "https://techweek.moscow",
-            "image": "tech_week"
-        }
-    ];
-
-    return (
-        <div class={show && "c-main__body" || "c-main__body--noheader"}>
-            <BlockPreview lang={lang} course={course} />
-            <BlockProjects lang={lang} projects={projects} />
-            <div class="c-main__wrapperbg">
-                <BlockQuestions lang={lang} questions={questions} />
-
-                <div class="c-main__wrapperbg2">
-                    <BlockBanners banners={banners} />
-                    <BlockTrade lang={lang} trades={trades} />
-                    <div class="top_professionals_container">
-                        <BlockExchange lang={lang} exchanges={exchanges} />
-                        <BlockUsers lang={lang} users={users} />
-                        <BlockMainNews lang={lang} news={news} />
-                        <BlockInfoPartners lang={lang} partners={partners} />
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-
-}
 
 
-const ID = "mainBlock"
-
-const init = async function (reload) {
+const init22 = async function (reload) {
     if (!reload) {
-        if (!getValue(ID, "mainCourse")) {
-            const course = checkAnswerApi(await sendApi.getCourse())
-            setValue(ID, "mainCourse", course.list_records[0])
-        }
 
-        if (!getValue(ID, "mainQuestions")) {
 
-            let data = {
-                "filter": {
-                    "languages.code": getStorage("lang")
-                },
-                "select": {
-                    "title": 1,
-                    "showDate": 1,
-                    "statistic": 1,
-                    "languages": 1,
-                    "close": 1,
-                    "bestId": 1,
-                    "media": 1,
-                    "author": 1
-                },
-                "sort": {
-                    "showDate": -1
-                },
-                "limit": 6
-            }
-            // console.log( checkAnswerApi(await sendApi.create("getQuestions",data)));
-            setValue(ID, "mainQuestions", checkAnswerApi(await sendApi.create("getQuestions", data)).list_records)
-        }
 
         if (!getValue(ID, "mainTrades")) {
 
@@ -282,13 +99,193 @@ const init = async function (reload) {
             setValue(ID, "mainNews", checkAnswerApi(await sendApi.create("getNews", data)).list_records)
         }
 
-        timersStart("Course", timerCourse, 10000)
     }
-    setValue("mainHeader", "show", true);
-    setValue("mainFooter", "show", true);
 
-
-    await makeDOM(mainView(), ID);
 }
 
-export default init;
+
+
+const start = function () {
+
+    let projects,
+        banners,
+        partners,
+        questions
+
+    Variable.HeaderShow = true
+    Variable.FooterShow = true
+
+    // const trades = getValue(ID, "mainTrades");
+    // const exchanges = getValue(ID, "mainExchanges");
+    // const users = getValue(ID, "mainUsers");
+    // const news = getValue(ID, "mainNews");
+
+
+    init(
+        async () => {
+
+            if (!Variable.course) {
+                let tpm = checkAnswerApi(await sendApi.getCourse())
+                Variable.course = tpm.list_records[0]
+            }
+            timersStart("Course", timerCourse, 10000)
+
+            questions = await mainQuestions()
+
+            projects = [
+                {
+                    "title": Variable.lang.a.exchange,
+                    "icon": "shuffle",
+                    "link": "list-exchange"
+                },
+                {
+                    "title": Variable.lang.a.university,
+                    "icon": "mortarboard",
+                    "link": "university"
+                },
+                {
+                    "title": Variable.lang.a.contentCreater,
+                    "icon": "graph",
+                    "link": "content-creator"
+                },
+                {
+                    "title": Variable.lang.a.starups,
+                    "icon": "startup",
+                    "link": "startups"
+                },
+                {
+                    "title": Variable.lang.a.universes,
+                    "icon": "meta_universes",
+                    "link": "university"
+                },
+                {
+                    "title": Variable.lang.a.icoRating,
+                    "icon": "star1",
+                    "link": "ico-rating"
+                },
+                {
+                    "title": Variable.lang.a.trade,
+                    "icon": "stock-market",
+                    "link": "list-trade"
+                },
+                {
+                    "title": Variable.lang.a.news,
+                    "icon": "world-news",
+                    "link": "news"
+                },
+                {
+                    "title": Variable.lang.a.experts,
+                    "icon": "user",
+                    "link": "experts"
+                },
+                {
+                    "title": Variable.lang.a.nft,
+                    "icon": "nft_icon",
+                    "link": "nft-market"
+                },
+                {
+                    "title": Variable.lang.a.career,
+                    "icon": "careers_icon",
+                    "link": "experts"
+                },
+            ];
+
+            banners = [
+                {
+                    "id": "62dd2ca100978d192547427c",
+                    "image": "lbf_banner"
+                },
+                {
+                    "id": "62bab2ac962df43c3fd94755",
+                    "image": "blockchain24"
+                },
+                {
+                    "id": "62f0da1ef2b8fa66345ef411",
+                    "image": "crypto_summit"
+                },
+                {
+                    "id": "630382384dab714d6e986cd6",
+                    "image": "1200х580-(fb)"
+                },
+                {
+                    "id": "62fb66bd4dab714d6e955d80",
+                    "image": "blockchain_life"
+                },
+                {
+                    "id": "62d134221de982539a72345e",
+                    "image": "crypto_future_banner"
+                }
+            ];
+
+            partners = [
+                {
+                    "link": "https://sberunity.ru/main/startups/879d88aa-4729-4788-a541-20cc8cc3cb14",
+                    "image": "sber_unity"
+                },
+                {
+                    "link": "https://sk.ru",
+                    "image": "skolkovo"
+                },
+                {
+                    "link": "https://cryptosummit.ru",
+                    "image": "crypto_summit"
+                },
+                {
+                    "link": "https://plus-forum.co",
+                    "image": "plus_forum"
+                },
+                {
+                    "link": "https://blockchain-life.com/europe/ru/",
+                    "image": "blockchain_life"
+                },
+                {
+                    "link": "https://rbw.moscow/?utm_source=infopartner&utm_medium=cryptoemergency&utm_campaign=pressreliz",
+                    "image": "b4_week"
+                },
+                {
+                    "link": "https://ru.beincrypto.com",
+                    "image": "be_in_crypto"
+                },
+                {
+                    "link": "https://mining-cryptocurrency.ru",
+                    "image": "crypto_mining"
+                },
+                {
+                    "link": "https://cryptomania.moscow",
+                    "image": "cryptomania"
+                },
+                {
+                    "link": "https://techweek.moscow",
+                    "image": "tech_week"
+                }
+            ];
+
+        },
+        () => {
+
+
+
+            return (
+                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
+                    <BlockPreview />
+                    <BlockProjects projects={projects} />
+                    {/* <div class="c-main__wrapperbg">
+                        <BlockQuestions lang={Variable.lang} questions={questions} />
+
+                        <div class="c-main__wrapperbg2">
+                            <BlockBanners banners={banners} />
+                            <BlockTrade lang={Variable.lang} trades={trades} />
+                            <div class="top_professionals_container">
+                                <BlockExchange lang={Variable.lang} exchanges={exchanges} />
+                                <BlockUsers lang={Variable.lang} users={users} />
+                                <BlockMainNews lang={Variable.lang} news={news} />
+                                <BlockInfoPartners lang={Variable.lang} partners={partners} />
+                            </div>
+                        </div>
+                    </div> */}
+                </div>
+            )
+        })
+};
+
+export default start;

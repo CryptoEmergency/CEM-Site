@@ -1,9 +1,7 @@
 import {
   jsx,
   jsxFrag,
-  setAction,
-  setValue,
-  makeDOM,
+  Variable,
   getVariable,
   getStorage,
   getValue,
@@ -22,7 +20,7 @@ const returnImgOrVideo = (item) => {
     item.media.find((i) => i.type === "audio") == undefined
   ) {
     return (
-      
+
       // <div class="swiper-container">
       //   <div class="swiper swiper-post_media">
       //     <div class="swiper-wrapper">
@@ -50,22 +48,22 @@ const returnImgOrVideo = (item) => {
       //     <div class="swiper-scrollbar-post_media"></div>
       //   </div>
       // </div>
-      <Slider item = {item}  />
+      <Slider item={item} />
     );
   } else if (item.media.find((i) => i.type === "audio") == undefined) {
     return (
-        item.media.find((i) => i.type === "image") !== undefined
+      item.media.find((i) => i.type === "image") !== undefined
         ?
         <div class="swiper-post_media_image_container">
-            <img
-              data-action=""
-              src={`/assets/upload/posts/${item.media[0].name}`}
-            />
-            {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}">   --}} */}
-          </div>
-          :
-          //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
-          <p>video </p>
+          <img
+            data-action=""
+            src={`/assets/upload/posts/${item.media[0].name}`}
+          />
+          {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}">   --}} */}
+        </div>
+        :
+        //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
+        <p>video </p>
     );
   }
 };
@@ -132,44 +130,44 @@ const BlockLentaUsers = function ({ item, i, init }) {
               })} */}
               {stringToHtml(item.text)}
             </span>
-          )}     
+          )}
         </div>
-        
+
         <div class="user_post_statistic">
           <span class="c-date">{item.updateTime ? `${lang.text.update} ${getDateFormat(item.updateTime, "lenta")}` : getDateFormat(item.showDate, "lenta")}</span>
-                    <div class="user_post_statistic_item">
-                        <div class="user_post_statistic_image">
-                            <img src={svg["question_answers"]}/> <span>{item.statistic.comments} </span>
-                        </div>
-                        <div class="user_post_statistic_image">
-                            <img src={svg["question_views"]}/> {item.statistic.view}
-                        </div>
-                    </div>
-                    <div class="user_post_statistic_item">
-                        <div class="comment_icon_type-2">
-          {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/dislike.svg" class="comment_icon_type-2-1 minus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
-          <button type="button" data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src={svg["dislike"]}  class="comment_icon_type-2-1 minus comment_inactive" data-answer-id={ item._id } data-needauth="true" data-type="post" data-action="answerEvaluation"></button>
+          <div class="user_post_statistic_item">
+            <div class="user_post_statistic_image">
+              <img src={svg["question_answers"]} /> <span>{item.statistic.comments} </span>
+            </div>
+            <div class="user_post_statistic_image">
+              <img src={svg["question_views"]} /> {item.statistic.view}
+            </div>
           </div>
-                        <div class="comment_likes" id={`likes_${item._id}`}>
-                           { item.statistic.rating}
-                        </div>
-                        <div class="comment_icon_type-2">
-          {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/like.svg" class="comment_icon_type-2-1 plus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
-          <button data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" 
-          src={svg["like"]} class="comment_icon_type-2-1 plus comment_inactive" data-answer-id={ item._id } data-needauth="true" data-type="post" 
-          data-action="answerEvaluation"></button>
-                        </div>
-                    </div>  
+          <div class="user_post_statistic_item">
+            <div class="comment_icon_type-2">
+              {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/dislike.svg" class="comment_icon_type-2-1 minus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
+              <button type="button" data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src={svg["dislike"]} class="comment_icon_type-2-1 minus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post" data-action="answerEvaluation"></button>
+            </div>
+            <div class="comment_likes" id={`likes_${item._id}`}>
+              {item.statistic.rating}
+            </div>
+            <div class="comment_icon_type-2">
+              {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/like.svg" class="comment_icon_type-2-1 plus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
+              <button data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd"
+                src={svg["like"]} class="comment_icon_type-2-1 plus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post"
+                data-action="answerEvaluation"></button>
+            </div>
+          </div>
         </div>
 
         <div class="comment_icons">
-                <div 
-                class = {`comment_icon_type-1 answer_additionally_toggle ${!isAuth && "comment_inactive"}`}
-                 data-needauth="true" data-action="answerAdditionallyToggle">
-                    <img class="answer_additionally_toggle_img"  src={svg["points"]}/>
-                    <div class="answer_additionally_container">
-                        <div class="answer_additionally">
-                            {/* {{#is author._id data.myInfo._id}}
+          <div
+            class={`comment_icon_type-1 answer_additionally_toggle ${!isAuth && "comment_inactive"}`}
+            data-needauth="true" data-action="answerAdditionallyToggle">
+            <img class="answer_additionally_toggle_img" src={svg["points"]} />
+            <div class="answer_additionally_container">
+              <div class="answer_additionally">
+                {/* {{#is author._id data.myInfo._id}}
                                 <div data-needauth="true" class="answer_additionally_item share" data-action="answerAdditionallyItem" data-answer-id={{ _id }} data-type="post">{lang.select.share}</div>
                                 <div data-needauth="true" class="answer_additionally_item edit" data-action="answerAdditionallyItem" data-answer-id="{{_id}}" data-type="post">{lang.button.edit}</div>
                                 <div data-needauth="true" class="answer_additionally_item delete" data-action="answerAdditionallyItem" data-answer-id="{{_id}}" data-type="post">{lang.select.delete}</div>
@@ -190,10 +188,10 @@ const BlockLentaUsers = function ({ item, i, init }) {
                             {{#if data.myInfo.status.role}}
                                 <div style="color: #32DE80" data-needauth="true" class="answer_additionally_item delete" data-action="doRoleModal" data-answer-id="{{_id}}" data-type="post">{{lang.select.delete}}</div>
                             {{/if}} */}
-                      </div>
-                    </div>
-                </div>
-                 {/* {{#is myInfo.role 1}}    
+              </div>
+            </div>
+          </div>
+          {/* {{#is myInfo.role 1}}    
                     {{#is myInfo.role_settings.del_answer 1}} 
                         <div class="acp_block">
                             <img data-action="acpSiteShow" class="acp_image" src={svg["points_green"]}>

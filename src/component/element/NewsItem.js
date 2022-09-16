@@ -1,9 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    getStorage,
-    sendApi,
-    getVariable,
+    Variable
 } from "@betarost/cemjs";
 import { getDateFormat } from "@src/functions.js";
 import images from "@assets/images/index.js";
@@ -25,11 +23,11 @@ const NewsItem = function ({ lang, newsItem }) {
             >{newsItem.title}</p> {/* load */}
             <div style="display: flex!important;" class="blog_post_stat">
                 <span>
-                    <img src={svg.question_views} /> 
+                    <img src={svg.question_views} />
                     <span class="">{newsItem.statistic.view}</span> {/* load */}
                 </span>
                 <span>
-                    <img src={svg.question_answers} /> 
+                    <img src={svg.question_answers} />
                     <span class="">{newsItem.statistic.comments}</span> {/* load */}
                 </span>
                 <span class="">{getDateFormat(newsItem.showDate)}</span> {/* load */}

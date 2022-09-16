@@ -145,13 +145,14 @@ const getNewsCategory = async function (type) {
   data.filter["count." + getLang] = { $gt: 0 };
 
   var response = checkAnswerApi(await sendApi.create("getCategories", data));
-  console.log('=response=',response)
+  console.log('=response=', response)
   return response;
 };
 
 const timerCourse = async function () {
-  var course = checkAnswerApi(await sendApi.getCourse());
-  setValue("mainBlock", "mainCourse", course.list_records[0]);
+  console.log("timerCourse")
+  let tmp = checkAnswerApi(await sendApi.getCourse());
+  Variable.course = tmp.list_records[0]
 };
 
 const siteLink = function (e) {
