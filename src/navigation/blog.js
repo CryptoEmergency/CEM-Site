@@ -1,198 +1,122 @@
 import {
   jsx,
   jsxFrag,
-  getVariable,
-  makeDOM,
-  getStorage,
-  setValue,
-  sendApi,
-  getValue,
+  Variable,
+  init,
+  initGo
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
 import {
   getNewsItem,
-  checkAnswerApi,
   getNewsCategory,
-  getDateFormat,
-  changeNewsCategory
+  getDateFormat
 } from "@src/functions.js";
 
-const changeCategory = async (e) => {
-  let typeCategory = e.currentTarget.dataset.name;
-  if (typeCategory === "All") {
-    setValue(ID, "blogItem", await getNewsItem("news"));
-  } else {
-    let getLang = "en";
-    if (getStorage("lang") == "ru") {
-      getLang = "ru";
-    }
-    let data = {
-      filter: {
-        type: "blog",
-        "languages.code": getLang,
-        "category.name": typeCategory,
-      },
-      select: {
-        title: 1,
-        preview: 1,
-        image: 1,
-        showDate: 1,
-        "statistic.view": 1,
-        "statistic.comments": 1,
-      },
-      sort: {
-        showDate: -1,
-      },
-      limit: 6,
-    };
-    var response = checkAnswerApi(await sendApi.create("getNews", data));
-    console.log(response);
-    setValue(ID, "blogItem", response);
+
+const start = function () {
+  let activeCategory, blogCategory, blogItem
+
+  Variable.HeaderShow = true
+  Variable.FooterShow = true
+
+  const changeNewsCategory = async function (e) {
+    activeCategory = e.currentTarget.dataset.name;
+    blogItem = await getNewsItem("blog", activeCategory);
+    initGo(null, true);
   }
-  init(true);
-};
 
-const blogView = function () {
-  const lang = getVariable("languages")[getStorage("lang")];
-  const blogCategory = getValue(ID, "blogCategory");
-  const blogItem = getValue(ID, "blogItem");
-  const show = getValue("mainHeader", "show");
-  const activeCategory = getValue(ID, 'activeCategory')
-  console.log('=a9c77f=',activeCategory)
-  
-  return (
-    <div class={`${show ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
-      <div class="blog_page">
-        <div class="blog_filter">
-          <h2>{lang.h.blog}</h2>
 
-          {/* <div class="profit_calculator_inputs_container">
-                <input type="text" id="datepicker"></p>
+  init(
+    async () => {
+      activeCategory = "All"
+      blogCategory = await getNewsCategory("blog")
+      blogItem = await getNewsItem("blog", activeCategory)
+    },
+    () => {
+
+      return (
+        <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
+          <div class="blog_page">
+            <div class="blog_filter">
+              <h2>{Variable.lang.h.blog}</h2>
             </div>
-             */}
-          {/* <input
-            data-keyup="newsSearchEnter"
-            data-type="blog"
-            class="news_search_input"
-            type="text"
-          />
-          <div data-action="searchNewsInputSummon" class="news_search_button">
-            <img src={svg["search_button"]} />
-          </div> */}
-        </div>
-        <div class="tags">
-          <div
-            class={`tag_button ${activeCategory == "All" && "tag_button_active"}`}
-            data-action="changeTagButton"
-            data-type="blog"
-            data-name="All"
-            data-total="{{totalFound}}"
-            onclick={(e) => {
-              changeNewsCategory(e, "blog", init)
-            }}
-          >
-            <span>{lang.categoryName.all}</span>
-          </div>
 
-          {blogCategory.list_records.map((item) => {
-            return (
+            <div class="tags">
               <div
-                class={`tag_button ${activeCategory == item.name && "tag_button_active"}`}
-                data-action="changeTagButton"
-                data-type="blog"
-                data-name={item.name}
-                data-total=""
-                onclick={(e) => {
-                  changeNewsCategory(e, "blog", init)
-                }}
+                class={`tag_button ${activeCategory == "All" && "tag_button_active"}`}
+                data-name="All"
+                onclick={changeNewsCategory}
               >
-                <span>{lang.categoryName[item.name]}</span>
+                <span>{Variable.lang.categoryName.all}</span>
               </div>
-            );
-          })}
 
-          {/* {{#arrayWhile list_category}}
-                <div class="tag_button" data-action="changeTagButton" data-type="blog" data-name="{{name}}">
-                    <span>{getLangName "categoryName" name}</span>
-                </div>
-            {{/arrayWhile}} */}
-        </div>
-        <div class="userNewsBlock">
-          <div
-            data-touchmove="userBlogSlide"
-            data-touchstart="userBlogSlideStart"
-            data-touchend="userBlogSlideEnd"
-            class="bl_one bl_active"
-          >
-            <div class="blog_news">
-              {blogItem.list_records.map((item) => {
+              {blogCategory.list_records.map((item) => {
                 return (
-                  <a class="blog_news_item">
-                    <img src={"/assets/upload/news/" + item.image} />
-                    <p class="blog_new_title">{item.title}</p>
-                    <span class="blog_new_text">{item.preview}</span>
-                    <div
-                      style="display: flex!important;"
-                      class="blog_post_stat"
-                    >
-                      <span>
-                        <img src={svg["question_views"]} />{" "}
-                        {item.statistic.view}
-                      </span>
-                      <span>
-                        <img src={svg["question_answers"]} />{" "}
-                        {item.statistic.comments}
-                      </span>
-                      <span>{getDateFormat(item.showDate)}</span>
-                    </div>
-
-                    {item.source !== undefined && (
-                      <p class="full_news_disclaimer mr20">
-                        {lang.p.source}{" "}
-                        <a href="{{source}}" rel="nofollow" target="_blank">
-                          {item.source}
-                        </a>
-                      </p>
-                    )}
-                    {/* {{#if source}}{{#if suoureShow}}<p class="full_news_disclaimer mr20">{{lang.p.source}} <a href="{{source}}" rel="nofollow" target="_blank">{{source}}</a></p>{{/if}}{{/if}} */}
-                  </a>
+                  <div
+                    class={`tag_button ${activeCategory == item.name && "tag_button_active"}`}
+                    data-name={item.name}
+                    onclick={changeNewsCategory}
+                  >
+                    <span>{Variable.lang.categoryName[item.name]}</span>
+                  </div>
                 );
               })}
+
+            </div>
+
+            <div class="userNewsBlock">
+              <div
+                data-touchmove="userBlogSlide"
+                data-touchstart="userBlogSlideStart"
+                data-touchend="userBlogSlideEnd"
+                class="bl_one bl_active"
+              >
+                <div class="blog_news">
+                  {blogItem.list_records.map((item) => {
+                    return (
+                      <a class="blog_news_item">
+                        <img src={"/assets/upload/news/" + item.image} />
+                        <p class="blog_new_title">{item.title}</p>
+                        <span class="blog_new_text">{item.preview}</span>
+                        <div
+                          style="display: flex!important;"
+                          class="blog_post_stat"
+                        >
+                          <span>
+                            <img src={svg["question_views"]} />{" "}
+                            {item.statistic.view}
+                          </span>
+                          <span>
+                            <img src={svg["question_answers"]} />{" "}
+                            {item.statistic.comments}
+                          </span>
+                          <span>{getDateFormat(item.showDate)}</span>
+                        </div>
+
+                        {item.source !== undefined && (
+                          <p class="full_news_disclaimer mr20">
+                            {Variable.lang.p.source}{" "}
+                            <a href="{{source}}" rel="nofollow" target="_blank">
+                              {item.source}
+                            </a>
+                          </p>
+                        )}
+
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
             </div>
           </div>
-          {/* {{#arrayWhile list_category}}
-                <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one"></div>
-            {{/arrayWhile}} */}
         </div>
-      </div>
-    </div>
-  );
-};
-
-const ID = "mainBlock";
-
-const init = async function (reload) {
-  if (!reload) {
-
-    setValue(ID, 'activeCategory', "All")
-
-
-    if (!getValue(ID, "blogCategory")) {
-      setValue(ID, "blogCategory", await getNewsCategory("blog"));
+      )
     }
-    if (!getValue(ID, "blogItem")) {
-      setValue(ID, "blogItem", await getNewsItem("blog"));
-    } else {
-      setTimeout(async () => {
-        setValue(ID, "blogItem", await getNewsItem("blog"));
-      }, 500);
-    }
-  }
+  )
 
-  setValue("mainHeader", "show", true);
-  setValue("mainFooter", "show", true);
-  makeDOM(blogView(), ID);
-};
 
-export default init;
+}
+
+export default start;

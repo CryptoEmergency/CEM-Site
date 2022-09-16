@@ -1,6 +1,7 @@
 import {
   jsx,
   jsxFrag,
+  Variable,
   getStorage,
   setValue,
   getValue,
@@ -10,6 +11,7 @@ import {
   delDOM,
   timersClear,
   parsingUrl,
+  initGo
 } from "@betarost/cemjs";
 import list from "@src/routerList.js";
 import validator from "validator";
@@ -58,7 +60,9 @@ const clickCancel = function (e) {
 };
 
 const clickHide = function (e) {
-  setValue("mainHeader", "langListShow", false);
+  //console.log("clickHide", e.target)
+  Variable.langListShow = false
+  //setValue("mainHeader", "langListShow", false);
 
   let obj = getValue("mainBlock", "showObject");
   for (let key in obj) {
@@ -71,7 +75,7 @@ const timerTik = function () {
   //console.log("timerTik", "tt")
 };
 
-const getNewsItem = async function (type) {
+const getNewsItem = async function (type, category) {
   let getLang = "en";
   if (getStorage("lang") == "ru") {
     getLang = "ru";
@@ -100,6 +104,10 @@ const getNewsItem = async function (type) {
     limit: 6,
   };
 
+  if (category && category != "All") {
+    data.filter["category.name"] = category
+  }
+
   var response = checkAnswerApi(await sendApi.create("getNews", data));
   return response;
 };
@@ -107,7 +115,7 @@ const getNewsItem = async function (type) {
 const getDateFormat = function (data, type) {
   const lang = getVariable("languages")[getStorage("lang")];
   moment.locale(lang.code);
-  console.log("=b12dd9=", moment.locale());
+  //console.log("=b12dd9=", moment.locale());
   switch (type) {
     case "lenta":
       let secondsBefor = Math.round(
@@ -115,7 +123,7 @@ const getDateFormat = function (data, type) {
       );
       if (secondsBefor < 86400) {
         return moment(data).fromNow();
-      } else { 
+      } else {
         // return moment(data).format("LL")
         return moment(data).format("DD MMMM YYYY");
       }
@@ -138,7 +146,6 @@ const getNewsCategory = async function (type) {
 
   var response = checkAnswerApi(await sendApi.create("getCategories", data));
   return response;
-  setValue("mainBlock", "newsCategory", course.list_records[0]);
 };
 
 const timerCourse = async function () {
@@ -155,7 +162,8 @@ const siteLink = function (e) {
     top: 0,
     behavior: "smooth",
   });
-  getAction("App", "start")();
+  parsingUrl()
+  //getAction("App", "start")();
 };
 
 const changeLang = function (e) {
@@ -163,7 +171,9 @@ const changeLang = function (e) {
   let link = this.href;
   history.pushState(null, null, link);
   timersClear();
-  getAction("App", "start")();
+  parsingUrl()
+  //initGo()
+  //getAction("App", "start")();
 };
 
 const checkAnswerApi = function (data) {
@@ -256,7 +266,7 @@ const changeNewsCategory = async (e, type, init) => {
       setValue(ID, `${type}Item`, response);
     }
   }
-  init(true);
+  //init(true);
 };
 
 const createParagraf = function (arr) {

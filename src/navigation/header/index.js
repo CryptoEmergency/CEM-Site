@@ -1,39 +1,128 @@
 import {
     jsx,
     jsxFrag,
+    init,
     getValue,
     setValue,
     makeDOM,
     getStorage,
+    setVal,
+    Variable
 } from '@betarost/cemjs'
-import HeaderEmpty from './HeaderEmpty.js'
-import HeaderNotAuth from './HeaderNotAuth.js'
+import svg from "@assets/svg/index.js"
+//import HeaderEmpty from './HeaderEmpty.js'
+//import HeaderNotAuth from './HeaderNotAuth.js'
 import HeaderAuth from './HeaderAuth.js'
 import HeaderUser from './HeaderUser.js';
+import { If } from '@component/helpers/All.js'
+import { clickCancel, siteLink, changeLang } from '@src/functions.js'
 
-const ID = "mainHeader";
-
-const init = function (reload) {
-    if (!reload) {
-        setValue(ID, "langListShow", false)
-        setValue('mainHeader', 'showUserMenu', true);
-        setValue("modals", "authModalShow", false)
-
-    }
-
-    if (!getValue(ID, "show")) {
-        if (getValue(ID, "showUserMenu")) {
-            HeaderUser();
-            return;
-        }
-        makeDOM(<HeaderEmpty />, ID)
-        return;
-    }
-    if (!getStorage("auth")) {
-        makeDOM(<HeaderNotAuth />, ID)
-        return;
-    }
-    makeDOM(<HeaderAuth />, ID)
-    return;
+const showListLang = function (e) {
+    Variable.langListShow = !Variable.langListShow
+    e.stopPropagation()
 }
-export { init }
+
+const showModalAuth = function (e) {
+    e.stopPropagation()
+    setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
+}
+
+const showModalRegistr = function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    setValue("modals", "registrationModalShow", !getValue("modals", "registrationModalShow"));
+};
+
+const LanguagesList = function (languages) {
+    const listLang = Object.keys(languages).map(function (key) {
+        return (
+            <li class="c-changelanguage__item">
+                <a class="c-changelanguage__link" href={"/" + key + "/" + Variable.dataUrl.adress} onclick={changeLang}><span class="c-changelanguage__text">{languages[key].lang_orig}</span></a>
+            </li>
+        )
+    })
+
+    return (
+        <ul class="c-changelanguage__list">
+            {listLang}
+        </ul>
+    )
+
+}
+
+const HeaderNotAuth = () => (
+    <div class="c-header__container c-container">
+        <div class="c-header__inner">
+            <div class="c-header__auth">
+                <div
+                    class="language"
+                    onclick={showListLang}
+                >
+                    <div class="selectlink">
+                        <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
+                    </div>
+                </div>
+                <div
+                    class={`c-changelanguage ${Variable.langListShow ? '' : 'dn'}`}
+                    id="listLanguage"
+                    onclick={clickCancel}>
+                    <div class="c-changelanguage__header">
+                        <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
+                    </div>
+                    {LanguagesList(Variable.languages)}
+                </div>
+                <a
+                    class="log-in"
+                // onclick={showModalAuth}
+                >
+                    {Variable.lang.button.login}
+                </a>
+                <button
+                    class="c-button c-button--gradient"
+                    type="button"
+                    id="registration"
+                // onclick={showModalRegistr}
+                >
+                    <span class="c-button__text">{Variable.lang.button.registration}</span>
+                </button>
+            </div>
+            <nav class="c-header__menu c-menu">
+                <a class="c-logo c-menu__link" href="/" onclick={siteLink}>
+                    <img class="c-logo__image" src={svg.logo} />
+                </a>
+                <a class="c-menu__link" href="/contacts/" onclick={siteLink}>{Variable.lang.a.contacts}</a>
+                <a class="c-menu__link" href="/about/" onclick={siteLink}>{Variable.lang.a.about}</a>
+                <a class="c-menu__link" href="/blog/" onclick={siteLink}>{Variable.lang.a.blog}</a>
+            </nav>
+        </div>
+    </div>
+)
+
+
+const mainHeader = function () {
+    init(
+        () => {
+            Variable.langListShow = false
+        },
+        () => {
+
+            if (Variable.HeaderShow) {
+                return (
+                    <If
+                        data={getStorage("auth")}
+                        dataIf={<HeaderAuth />}
+                        dataElse={<HeaderNotAuth />}
+                    />
+                )
+            } else if (Variable.showUserMenu) {
+                return (
+                    <HeaderUser />
+                )
+            } else {
+                return (
+                    <></>
+                )
+            }
+        }, "mainHeader")
+}
+export { mainHeader }

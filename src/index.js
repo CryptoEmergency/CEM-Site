@@ -1,20 +1,23 @@
 import {
     setVariable,
-    getVariable,
     initStorage,
-    addListen
+    addListen,
+    parsingUrl,
+    Variable,
+    getStorage
 } from '@betarost/cemjs'
 import "@assets/css/index.js"
 import "@assets/js/index.js"
-import { init } from '@src/init.js'
-import { test } from '@src/test.js'
+import { initApp } from '@src/init.js'
 import { default as languages } from '@src/languages/index.js'
 import { clickHide } from '@src/functions.js'
-setVariable({ clickHide: clickHide })
-if (!getVariable("languages")) {
-    setVariable({ languages: languages });
-}
+import { test } from '@src/test.js'
+Variable.languages = languages
+Variable.clickHide = clickHide
+setVariable({ languages: languages });
 initStorage();
-addListen()
-init()
+addListen();
+parsingUrl();
+Variable.lang = Variable.languages[getStorage("lang")]
+initApp();
 test();

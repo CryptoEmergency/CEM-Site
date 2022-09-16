@@ -450,7 +450,7 @@ const start = function () {
 
 }
 
-const init = function (reload) {
+const mainModal = function (reload) {
     // console.log("modals init", reload);
     if (!reload) {
         setValue(ID, "showPhoneSelect", false);
@@ -532,4 +532,4 @@ const init = function (reload) {
     makeDOM(start(), ID)
     return;
 }
-export { init }
+export { mainModal }

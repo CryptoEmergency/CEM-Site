@@ -1,1 +1,1 @@
-import "@assets/js/swiper.min.js"
+//import "@assets/js/swiper.min.js"
