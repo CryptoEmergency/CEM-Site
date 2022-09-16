@@ -35,6 +35,30 @@ const getUserInfoProfile = async function (nickname) {
     }
 }
 
+
+const getExchangeList = async (count) => {
+    let data = {};
+    if (!count) {
+        data = {
+            limit: 10,
+            sort: {
+                score: -1,
+            },
+        };
+    } else {
+        data = {
+            limit: 10, //limit12
+            offset: 10 + 10 * (count - 1),
+            sort: {
+                score: -1,
+            },
+        };
+    }
+    let response = checkAnswerApi(await sendApi.create("getExchange", data));
+    return response
+};
+
+
 const getUserAboutProfile = async function (nickname) {
 
     const userInfo = checkAnswerApi(await sendApi.create("getUsers", {
@@ -57,4 +81,4 @@ const getUserAboutProfile = async function (nickname) {
     }
 }
 
-export { getUserInfoProfile, getUserAboutProfile }
+export { getUserInfoProfile, getUserAboutProfile, getExchangeList }

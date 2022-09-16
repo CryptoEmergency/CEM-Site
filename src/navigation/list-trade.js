@@ -39,7 +39,7 @@ const getTradeList = async (firstLoad) => {
     setValue(ID, "tradeList", response);
     init(true);
   }
-  
+
 };
 
 const tradeListView = function () {
@@ -68,73 +68,75 @@ const tradeListView = function () {
             <div></div>
           </div>
           {
-          
-          tradeList.list_records.map((item, i) => {
-           
-            return (
-              <a
-                href={item.url}
-                class="crypto_exchanges-row"
-                target="_blank"
-                rel="nofollow noopener"
-                data-type="trade"
-                data-count={item.marketId}
-              >
-                <div class="crypto_exchanges-cell">{i + 1}.</div>
-                <div class="crypto_exchanges-cell">
-                  <div>
-                    <span>
-                      <span class="list_exanges_image_container">
-                        <img class="crypto_coin_icon" src={item.logo} />
+
+            tradeList.list_records.map((item, i) => {
+
+              return (
+                <a
+                  href={item.url}
+                  class="crypto_exchanges-row"
+                  target="_blank"
+                  rel="nofollow noopener"
+                  data-type="trade"
+                  data-count={item.marketId}
+                >
+                  <div class="crypto_exchanges-cell">{i + 1}.</div>
+                  <div class="crypto_exchanges-cell">
+                    <div>
+                      <span>
+                        <span class="list_exanges_image_container">
+                          <img class="crypto_coin_icon" src={item.logo} />
+                        </span>
+                        {item.name}
                       </span>
-                      {item.name}
-                    </span>
+                    </div>
                   </div>
-                </div>
-                <div class="crypto_exchanges-cell">
-                  <div>
-                    <span class="crypto_exchanges_percent_green">
-                      <span class="crypto_exchanges_percent_green_mobile">
-                        <img src={svg["exange_money"]} />
+                  <div class="crypto_exchanges-cell">
+                    <div>
+                      <span class="crypto_exchanges_percent_green">
+                        <span class="crypto_exchanges_percent_green_mobile">
+                          <img src={svg["exange_money"]} />
+                        </span>
+                        ${item.spotVolumeUsd}
                       </span>
-                      ${item.spotVolumeUsd}
-                    </span>
+                    </div>
                   </div>
-                </div>
-                <div class="crypto_exchanges-cell">
-            <div>
-                <span class="crypto_exchanges_percent_green">
-                    <span class="crypto_exchanges_percent_green_mobile">
-                        <img src={svg["exange_visitors"]} />
-                    </span> 
-                    {item.weeklyVisits }
-                </span>
-            </div>
+                  <div class="crypto_exchanges-cell">
+                    <div>
+                      <span class="crypto_exchanges_percent_green">
+                        <span class="crypto_exchanges_percent_green_mobile">
+                          <img src={svg["exange_visitors"]} />
+                        </span>
+                        {item.weeklyVisits}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="crypto_exchanges-cell">
+                    <img src={`https://s3.coinmarketcap.com/generated/sparklines/exchanges/web/7d/usd/${item.marketId}.svg`} />
+                  </div>
+                  <div class="crypto_exchanges_cell_button">
+                    <div class="button-container-preview">
+                      <span class="btn-news-preview">
+                        <span>
+                          {lang.button.trade}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
         </div>
-        <div class="crypto_exchanges-cell">
-            <img src={`https://s3.coinmarketcap.com/generated/sparklines/exchanges/web/7d/usd/${item.marketId}.svg`} /> 
-        </div>
-        <div class="crypto_exchanges_cell_button">
-            <div class="button-container-preview">
-                <span class="btn-news-preview">
-                    <span>
-                        {lang.button.trade}
-                    </span>
-                </span>
-            </div>
-        </div>
-              </a>
-            );
-          })}
-        </div>
-        <a class="btn-view-all-a" 
-        onclick={(e) =>{ count = count + 1;
-          return getTradeList(false)}
-         }
+        <a class="btn-view-all-a"
+          onclick={(e) => {
+            count = count + 1;
+            return getTradeList(false)
+          }
+          }
         // onclick={() =>{ count = count + 1;
         //   return getTradeList(false)}
         //  }
-         >
+        >
           <div
             class="btn-view-all"
             data-action="viewAllButton"
