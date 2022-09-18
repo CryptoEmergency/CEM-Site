@@ -14,6 +14,7 @@ import { clickHide } from '@src/functions.js'
 import { test } from '@src/test.js'
 Variable.languages = languages
 Variable.clickHide = clickHide
+Variable.outHideWindows = []
 setVariable({ languages: languages });
 initStorage();
 Variable.auth = getStorage("auth")

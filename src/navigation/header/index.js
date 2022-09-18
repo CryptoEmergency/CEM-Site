@@ -34,6 +34,12 @@ const showModalRegistr = function (e) {
 };
 
 const LanguagesList = function (languages) {
+
+    const outClick = function () {
+        console.log("outClick")
+        Variable.langListShow = false
+    }
+
     const listLang = Object.keys(languages).map(function (key) {
         return (
             <li class="c-changelanguage__item">
@@ -43,14 +49,17 @@ const LanguagesList = function (languages) {
     })
 
     return (
-        <ul class="c-changelanguage__list">
+        <ul
+            class="c-changelanguage__list"
+            outClick={outClick}
+        >
             {listLang}
         </ul>
     )
 
 }
 
-const HeaderNotAuth = ({ ref, ref2 }) => (
+const HeaderNotAuth = ({ ref }) => (
     <div class="c-header__container c-container">
         <div class="c-header__inner">
             <div class="c-header__auth">
@@ -82,7 +91,6 @@ const HeaderNotAuth = ({ ref, ref2 }) => (
                     class="c-button c-button--gradient"
                     type="button"
                     id="registration"
-                    ref={ref2}
                 // onclick={showModalRegistr}
                 >
                     <span class="c-button__text">{Variable.lang.button.registration}</span>
@@ -102,19 +110,13 @@ const HeaderNotAuth = ({ ref, ref2 }) => (
 
 
 const mainHeader = function () {
-    let test, test2
+    let test
     test = Variable.setRef()
-    test2 = Variable.setRef()
     init(
         () => {
             Variable.langListShow = false
         },
         () => {
-
-            if (test()) {
-                console.log("test", test().current)
-                console.log("test2", test2().current)
-            }
 
             if (Variable.HeaderShow) {
                 return (
@@ -123,7 +125,6 @@ const mainHeader = function () {
                         dataIf={<HeaderAuth />}
                         dataElse={<HeaderNotAuth
                             ref={test}
-                            ref2={test2}
                         />}
                     />
                 )
