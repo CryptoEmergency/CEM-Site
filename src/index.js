@@ -16,6 +16,8 @@ Variable.languages = languages
 Variable.clickHide = clickHide
 setVariable({ languages: languages });
 initStorage();
+Variable.auth = getStorage("auth")
+Variable.myInfo = getStorage("myInfo")
 addListen();
 parsingUrl();
 Variable.lang = Variable.languages[getStorage("lang")]

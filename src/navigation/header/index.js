@@ -50,13 +50,14 @@ const LanguagesList = function (languages) {
 
 }
 
-const HeaderNotAuth = () => (
+const HeaderNotAuth = ({ ref, ref2 }) => (
     <div class="c-header__container c-container">
         <div class="c-header__inner">
             <div class="c-header__auth">
                 <div
                     class="language"
                     onclick={showListLang}
+                    ref={ref}
                 >
                     <div class="selectlink">
                         <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
@@ -81,6 +82,7 @@ const HeaderNotAuth = () => (
                     class="c-button c-button--gradient"
                     type="button"
                     id="registration"
+                    ref={ref2}
                 // onclick={showModalRegistr}
                 >
                     <span class="c-button__text">{Variable.lang.button.registration}</span>
@@ -100,18 +102,29 @@ const HeaderNotAuth = () => (
 
 
 const mainHeader = function () {
+    let test, test2
+    test = Variable.setRef()
+    test2 = Variable.setRef()
     init(
         () => {
             Variable.langListShow = false
         },
         () => {
 
+            if (test()) {
+                console.log("test", test().current)
+                console.log("test2", test2().current)
+            }
+
             if (Variable.HeaderShow) {
                 return (
                     <If
                         data={getStorage("auth")}
                         dataIf={<HeaderAuth />}
-                        dataElse={<HeaderNotAuth />}
+                        dataElse={<HeaderNotAuth
+                            ref={test}
+                            ref2={test2}
+                        />}
                     />
                 )
             } else if (Variable.showUserMenu) {
