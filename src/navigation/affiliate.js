@@ -15,7 +15,8 @@ import images from "@assets/images/index.js";
 const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
-  let lang;
+
+  let lang
   let activeBanner;
   let activeCategory;
   let userLang;
@@ -24,6 +25,10 @@ const start = function () {
   let bannersLang;
   let isAuth;
   let bannerCode;
+
+  // let successImg = Variable.setRef()
+  // let successCode = Variable.setRef()
+
   let banners = {
     en: [
       {
@@ -93,7 +98,13 @@ const start = function () {
   const copyLink = (e,code) => {
     navigator.clipboard.writeText(code);
       let element = e.target; 
-      console.log('=element=',e)
+    
+
+      // successImg().style.visibility= "visible"
+      // successImg().style.opacity= "1"
+
+      // successCode().style.visibility= "visible"
+      // successCode().style.opacity= "1"
       if(element.className !=="affiliate_banner_copy"){
         element =element.parentElement
       }
@@ -103,6 +114,7 @@ const start = function () {
         element.childNodes[3].style.visibility= "hidden";
       element.childNodes[3].style.opacity= "0";
       },1000)
+      
   };
   init(
     () => {
@@ -113,7 +125,7 @@ const start = function () {
       userLang = lang === "ru" ? "ru" : "en";
       activeCategory = userLang === "ru" ? "Russian" : "English";
       activeBanner = userLang === "ru" ? "120x600" : "200x100";
-
+      console.log("banners",banners);
       
     },
     () => {console.log('=userLang=',userLang)
@@ -194,7 +206,7 @@ const start = function () {
                     </div>
                     <div
                       onclick={() => {
-                        activeCategory = "Russian";
+                       activeCategory = "Russian";
                         activeBanner = "120x600";
                         userLang = "ru";
                         initGo(null, true);
@@ -263,7 +275,10 @@ const start = function () {
                     >
                       <img src={svg["icon/copy"]} />{" "}
                       <span>{Variable.lang.p.copy}</span>
-                      <div class="success_copy">
+                      <div 
+                      class="success_copy"
+                      ref={successImg}
+                      >
                         {Variable.lang.text.coppied}
                       </div>
                     </div>
@@ -280,7 +295,10 @@ const start = function () {
                     >
                       <img src={svg["icon/copy"]} />{" "}
                       <span>{Variable.lang.p.copy}</span>
-                      <div class="success_copy">
+                      <div 
+                      class="success_copy"
+                      ref={successCode}
+                      >
                         {Variable.lang.text.coppied}
                       </div>
                     </div>
