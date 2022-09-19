@@ -3,7 +3,8 @@ import {
   jsxFrag,
   init,
   Variable,
-  initGo
+  initGo,
+  initReload
 } from "@betarost/cemjs";
 import { getDateFormat } from "@src/functions.js";
 import { getExchangeList } from "@src/apiFunctions.js";
@@ -19,14 +20,13 @@ const start = function () {
     count++
     let tmp = await getExchangeList(count)
     listExchange.list_records.push(...tmp.list_records)
-    initGo(null, true);
+    initReload();
   }
 
   init(
     async () => {
       count = 0
       listExchange = await getExchangeList()
-      console.log("listExchange", listExchange);
     },
     () => {
 

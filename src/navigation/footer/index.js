@@ -49,7 +49,7 @@ const mainFooter = function () {
         },
         () => {
 
-            console.log(socialIcon, collapseBodyShow);
+
             const lang = Variable.lang
 
             if (Variable.FooterShow) {

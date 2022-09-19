@@ -35,9 +35,11 @@ const showModalRegistr = function (e) {
 
 const LanguagesList = function (languages) {
 
-    const outClick = function () {
+    const outClick = function (e) {
         console.log("outClick")
+        e.stopPropagation();
         Variable.langListShow = false
+
     }
 
     const listLang = Object.keys(languages).map(function (key) {

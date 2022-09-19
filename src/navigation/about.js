@@ -15,7 +15,6 @@ const start = function () {
   init(
     null,
     () => {
-
       return (
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
           <div class="c-aboutus__whowe c-whowe who_we_are">

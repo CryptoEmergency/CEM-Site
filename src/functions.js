@@ -61,16 +61,17 @@ const clickCancel = function (e) {
 
 const clickHide = function (e) {
 
-  console.log("clickHide", Variable.outHideWindows);
+  // console.log("clickHide", Variable.outHideWindows);
 
   if (Variable.outHideWindows.length != 0) {
     Variable.outHideWindows.map((item, index) => {
-      console.log("Variable.outHideWindows", item, index, item.elem.contains(e.target), item.elem === e.target);
+      //  console.log("Variable.outHideWindows", item, index, item.elem.contains(e.target), item.elem === e.target);
       if (item.elem === e.target || item.elem.contains(e.target)) {
         return;
       } else {
         item.func(e);
         Variable.outHideWindows.slice(index, 1)
+        e.stopPropagation();
       }
     })
 
@@ -160,7 +161,7 @@ const getNewsCategory = async function (type) {
   data.filter["count." + getLang] = { $gt: 0 };
 
   var response = checkAnswerApi(await sendApi.create("getCategories", data));
-  console.log('=response=', response)
+  //console.log('=response=', response)
   return response;
 };
 

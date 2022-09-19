@@ -3,7 +3,8 @@ import {
   jsxFrag,
   Variable,
   init,
-  initGo
+  initGo,
+  initReload
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
@@ -15,20 +16,25 @@ import {
 
 
 const start = function () {
+  // let activeCategory, blogCategory, blogItem
   let activeCategory, blogCategory, blogItem
-
   Variable.HeaderShow = true
   Variable.FooterShow = true
 
   const changeNewsCategory = async function (e) {
     activeCategory = e.currentTarget.dataset.name;
     blogItem = await getNewsItem("blog", activeCategory);
-    initGo(null, true);
+    initReload();
   }
 
+  // const loadMore = async function (e) {
+  //   console.log("loadMore", e.target, e.target.dataset(index))
+
+  // }
 
   init(
     async () => {
+
       activeCategory = "All"
       blogCategory = await getNewsCategory("blog")
       blogItem = await getNewsItem("blog", activeCategory)
@@ -73,9 +79,13 @@ const start = function () {
                 class="bl_one bl_active"
               >
                 <div class="blog_news">
-                  {blogItem.list_records.map((item) => {
+                  {blogItem.list_records.map((item, index) => {
                     return (
-                      <a class="blog_news_item">
+                      <a
+                        class="blog_news_item"
+                        data-index={index}
+
+                      >
                         <img src={"/assets/upload/news/" + item.image} />
                         <p class="blog_new_title">{item.title}</p>
                         <span class="blog_new_text">{item.preview}</span>
