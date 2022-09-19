@@ -6,23 +6,127 @@ import {
   getStorage,
   setValue,
   init,
-  Variable
+  Variable,
+  initGo,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-
 const start = function () {
-
-  Variable.HeaderShow = true
-  Variable.FooterShow = true
-
+  Variable.HeaderShow = true;
+  Variable.FooterShow = true;
+  let lang;
+  let activeBanner;
+  let activeCategory;
+  let userLang;
+  let banner;
+  let userAuth;
+  let bannersLang;
+  let isAuth;
+  let bannerCode;
+  let banners = {
+    en: [
+      {
+        url: images["affiliate_banners/200x100"],
+        type: "200x100",
+      },
+      {
+        url: images["affiliate_banners/200x200"],
+        type: "200x200",
+      },
+      {
+        url: images["affiliate_banners/120x600"],
+        type: "120x600",
+      },
+      {
+        url: images["affiliate_banners/300x600"],
+        type: "300x600",
+      },
+    ],
+    ru: [
+      {
+        url: images["affiliate_banners/120x600ru"],
+        type: "120x600",
+      },
+      {
+        url: images["affiliate_banners/140x600ru"],
+        type: "140x600",
+      },
+      {
+        url: images["affiliate_banners/160x600ru"],
+        type: "160x600",
+      },
+      {
+        url: images["affiliate_banners/200x200ru"],
+        type: "200x200",
+      },
+      {
+        url: images["affiliate_banners/200x250ru"],
+        type: "200x250",
+      },
+      {
+        url: images["affiliate_banners/240x400ru"],
+        type: "240x400",
+      },
+      {
+        url: images["affiliate_banners/240x600ru"],
+        type: "240x600",
+      },
+      {
+        url: images["affiliate_banners/300x600ru"],
+        type: "300x600",
+      },
+      {
+        url: images["affiliate_banners/120x800ru"],
+        type: "120x800",
+      },
+      {
+        url: images["affiliate_banners/250x250ru"],
+        type: "250x250",
+      },
+      {
+        url: images["affiliate_banners/100x100ru"],
+        type: "100x100",
+      },
+    ],
+  };
+  const copyLink = (e,code) => {
+    navigator.clipboard.writeText(code);
+      let element = e.target; 
+      console.log('=element=',e)
+      if(element.className !=="affiliate_banner_copy"){
+        element =element.parentElement
+      }
+      element.childNodes[3].style.visibility= "visible";
+      element.childNodes[3].style.opacity= "1";
+      setTimeout(() =>{
+        element.childNodes[3].style.visibility= "hidden";
+      element.childNodes[3].style.opacity= "0";
+      },1000)
+  };
   init(
-    null,
     () => {
+     
+      lang =Variable.lang.code 
+      console.log('=298de8=',Variable.lang.code)
+      isAuth = getStorage("auth");
+      userLang = lang === "ru" ? "ru" : "en";
+      activeCategory = userLang === "ru" ? "Russian" : "English";
+      activeBanner = userLang === "ru" ? "120x600" : "200x100";
 
+      
+    },
+    () => {console.log('=userLang=',userLang)
+      console.log('=activeCategory=',activeCategory)
+      console.log('=activeBanner=',activeBanner)
+      banner = banners[userLang].filter((item) => item.type === activeBanner);
+      let bannerCode = `<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`;
       return (
-        <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
+        <div
+          class={`${
+            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+          } c-aboutus about_us_container`}
+        >
           <img
             class="affiliate_program_blur"
             style="position: absolute; right: 0;"
@@ -74,171 +178,124 @@ const start = function () {
               <div class="affiliate_banners_size">
                 <div>
                   <h4>{Variable.lang.h.bannerSize}</h4>
-                  <div class="affiliate_banners_size_list">
+                  <div>
                     <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item affiliate_banners_size_item_active"
+                      onclick={() => {
+                        activeCategory = "English";
+                        userLang = "en";
+                        activeBanner = "200x100";
+                        initGo(null, true);
+                      }}
+                      class={`tag_button ${
+                        activeCategory == "English" && "tag_button_active"
+                      }`}
                     >
-                      <div class="affiliate_banners_size_item_inner">200x100</div>
+                      <span>English</span>
                     </div>
                     <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
+                      onclick={() => {
+                        activeCategory = "Russian";
+                        activeBanner = "120x600";
+                        userLang = "ru";
+                        initGo(null, true);
+                      }}
+                      class={`tag_button ${
+                        activeCategory == "Russian" && "tag_button_active"
+                      }`}
                     >
-                      <div class="affiliate_banners_size_item_inner">200x200</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">120x600</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">300x600</div>
-                    </div>
-
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">120x600ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">140x600ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">160x600ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">200x200ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">200x250ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">240x400ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">240x600ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">300x600ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">120x800ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">250x250ru</div>
-                    </div>
-                    <div
-                      data-action="changeAffiliateBanner"
-                      class="affiliate_banners_size_item"
-                    >
-                      <div class="affiliate_banners_size_item_inner">100x100ru</div>
+                      <span>Русский</span>
                     </div>
                   </div>
-                  <div class="affiliate_banners_size_select">
-                    <select class="justselect" id="changeAffiliateBannerSelect">
-                      <option selected="selected" value="200x100">
-                        200x100
-                      </option>
-                      <option value="200x200">200x200</option>
-                      <option value="120x600">120x600</option>
-                      <option value="300x600">300x600</option>
-
-                      <option value="120x600ru">120x600ru</option>
-                      <option value="140x600ru">140x600ru</option>
-                      <option value="160x600ru">160x600ru</option>
-                      <option value="200x200ru">200x200ru</option>
-                      <option value="200x250ru">200x250ru</option>
-                      <option value="240x400ru">240x400ru</option>
-                      <option value="240x600ru">240x600ru</option>
-                      <option value="300x600ru">300x600ru</option>
-                      <option value="120x800ru">120x800ru</option>
-                      <option value="250x250ru">250x250ru</option>
-                      <option value="100x100ru">100x100ru</option>
-                    </select>
+                  <div class="affiliate_banners_size_list">
+                    {activeCategory === "Russian"
+                      ? banners.ru.map((item) => {
+                          return (
+                            <div
+                              onclick={() => {
+                                activeBanner = item.type;
+                                initGo(null, true);
+                              }}
+                              data-action="changeAffiliateBanner"
+                              class={`affiliate_banners_size_item ${
+                                activeBanner == item.type &&
+                                "affiliate_banners_size_item_active"
+                              }`}
+                            >
+                              <div class="affiliate_banners_size_item_inner">
+                                {item.type}
+                              </div>
+                            </div>
+                          );
+                        })
+                      : banners.en.map((item) => {
+                          return (
+                            <div
+                              onclick={() => {
+                                activeBanner = item.type;
+                                initGo(null, true);
+                              }}
+                              data-action="changeAffiliateBanner"
+                              class={`affiliate_banners_size_item ${
+                                activeBanner == item.type &&
+                                "affiliate_banners_size_item_active"
+                              }`}
+                            >
+                              <div class="affiliate_banners_size_item_inner">
+                                {item.type}
+                              </div>
+                            </div>
+                          );
+                        })}
                   </div>
                 </div>
               </div>
               <div class="affiliate_banner">
-                <div style="display: none;">
+                <div style="display: block;">
                   <h4>{Variable.lang.h.addMaterials}</h4>
                   <div class="affiliate_banner_link">
                     <div class="affiliate_banner_link_block">
-                      https://crypto-emergency.com/assets/image/affiliate_banners/417x417.jpg
+                      {banner[0].url}
                     </div>
                     <div
                       data-action="affiliateBannerCopy"
                       class="affiliate_banner_copy"
+                      onclick={(e) => copyLink(e, banner[0].url)}
                     >
-                      <img src={svg["icon/copy"]} /> <span>{Variable.lang.p.copy}</span>
-                      <div class="success_copy">{Variable.lang.text.coppied}</div>
+                      <img src={svg["icon/copy"]} />{" "}
+                      <span>{Variable.lang.p.copy}</span>
+                      <div class="success_copy">
+                        {Variable.lang.text.coppied}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div style="display: none;">
+                <div style="display: block;">
                   <h4>{Variable.lang.h.codeToPlace}</h4>
                   <div class="affiliate_banner_code">
-                    <div class="affiliate_banner_code_block">
-                      &lt;img
-                      src="https://crypto-emergency.com/assets/image/affiliate_banners/417x417.jpg"&gt;
-                    </div>
+                    <div class="affiliate_banner_code_block">{bannerCode}</div>
                     <div
                       data-action="affiliateBannerCopy"
                       class="affiliate_banner_copy"
+                      onclick={(e) => copyLink(e,bannerCode)}
                     >
-                      <img src={svg["icon/copy"]} /> <span>{Variable.lang.p.copy}</span>
-                      <div class="success_copy">{Variable.lang.text.coppied}</div>
+                      <img src={svg["icon/copy"]} />{" "}
+                      <span>{Variable.lang.p.copy}</span>
+                      <div class="success_copy">
+                        {Variable.lang.text.coppied}
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="affiliate_banner_preview">
-                  <img src={images["affiliate_banners/200x100.jpg"]} />
+                  <img src={banner[0].url} />
                 </div>
               </div>
             </div>
-            {/* <a {{#is auth "true"}} href="/user/affiliate/" {{else}} data-action="registrationModal" {{/is}}>
-            <div class="answer_button_container">
-                <div class="answer_button">
-                    {{Variable.lang.button.join}}
-                </div>
-            </div>
-        </a> */}
           </div>
         </div>
-      )
-    })
+      );
+    }
+  );
 };
 
 export default start;

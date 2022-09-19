@@ -23,6 +23,3 @@ const start = function () {
             )
         })
 };
-
-
-export default start;
