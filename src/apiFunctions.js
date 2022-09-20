@@ -84,6 +84,80 @@ const mainQuestions = async () => {
     return response
 };
 
+const mainTrades = async () => {
+    let data = {
+        "sort": {
+            "score": -1
+        },
+        "limit": 6
+    }
+
+    let response = checkAnswerApi(await sendApi.create("getTrade", data)).list_records;
+    return response
+};
+
+const mainExchanges = async () => {
+    let data = {
+        "sort": {
+            "score": -1
+        },
+        "limit": 6
+    }
+
+    let response = checkAnswerApi(await sendApi.create("getExchange", data)).list_records;
+    return response
+};
+
+const mainUsers = async () => {
+    let data = {
+        "filter": {
+            "confirm.registrasion": true
+        },
+        "select": {
+            "rank": 1,
+            "social": 1,
+            "subscribe": 1,
+            "nickname": 1,
+            "fullname": 1,
+            "information.speciality": 1,
+            "avatar.name": 1,
+            "frame.name": 1,
+            "statistic": 1,
+            "online": 1,
+            "awards": 1,
+            "status": 1
+        },
+        "limit": 6
+    }
+
+    let response = checkAnswerApi(await sendApi.create("getUsers", data)).list_records;
+    return response
+};
+
+const mainNews = async () => {
+    let data = {
+        "filter": {
+            "type": "news",
+            "languages.code": "ru"
+        },
+        "select": {
+            "title": 1,
+            "preview": 1,
+            "image": 1,
+            "showDate": 1,
+            "statistic.view": 1,
+            "statistic.comments": 1
+        },
+        "sort": {
+            "showDate": -1
+        },
+        "limit": 6
+    }
+
+    let response = checkAnswerApi(await sendApi.create("getNews", data)).list_records;
+    return response
+};
+
 const getUserAboutProfile = async function (nickname) {
 
     const userInfo = checkAnswerApi(await sendApi.create("getUsers", {
@@ -106,4 +180,13 @@ const getUserAboutProfile = async function (nickname) {
     }
 }
 
-export { getUserInfoProfile, getUserAboutProfile, getExchangeList, mainQuestions }
+export {
+    getUserInfoProfile,
+    getUserAboutProfile,
+    getExchangeList,
+    mainQuestions,
+    mainTrades,
+    mainExchanges,
+    mainUsers,
+    mainNews,
+}

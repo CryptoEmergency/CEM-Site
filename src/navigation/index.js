@@ -12,7 +12,7 @@ import {
     Variable
 } from '@betarost/cemjs'
 import { timerCourse, checkAnswerApi } from '@src/functions.js'
-import { mainQuestions } from "@src/apiFunctions.js";
+import { mainQuestions, mainTrades, mainExchanges, mainUsers, mainNews } from "@src/apiFunctions.js";
 
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
@@ -24,101 +24,19 @@ import { BlockUsers } from '@component/blocks/BlockUsers.js';
 import { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
 
-
-
-
-const init22 = async function (reload) {
-    if (!reload) {
-
-
-
-        if (!getValue(ID, "mainTrades")) {
-
-            let data = {
-                "sort": {
-                    "score": -1
-                },
-                "limit": 6
-            }
-            setValue(ID, "mainTrades", checkAnswerApi(await sendApi.create("getTrade", data)).list_records)
-        }
-
-        if (!getValue(ID, "mainExchanges")) {
-            let data = {
-                "sort": {
-                    "score": -1
-                },
-                "limit": 6
-            }
-            setValue(ID, "mainExchanges", checkAnswerApi(await sendApi.create("getExchange", data)).list_records)
-        }
-
-        if (!getValue(ID, "mainUsers")) {
-            let data = {
-                "filter": {
-                    "confirm.registrasion": true
-                },
-                "select": {
-                    "rank": 1,
-                    "social": 1,
-                    "subscribe": 1,
-                    "nickname": 1,
-                    "fullname": 1,
-                    "information.speciality": 1,
-                    "avatar.name": 1,
-                    "frame.name": 1,
-                    "statistic": 1,
-                    "online": 1,
-                    "awards": 1,
-                    "status": 1
-                },
-                "limit": 6
-            }
-            setValue(ID, "mainUsers", checkAnswerApi(await sendApi.create("getUsers", data)).list_records)
-        }
-
-        if (!getValue(ID, "mainNews")) {
-            let data = {
-                "filter": {
-                    "type": "news",
-                    "languages.code": "ru"
-                },
-                "select": {
-                    "title": 1,
-                    "preview": 1,
-                    "image": 1,
-                    "showDate": 1,
-                    "statistic.view": 1,
-                    "statistic.comments": 1
-                },
-                "sort": {
-                    "showDate": -1
-                },
-                "limit": 6
-            }
-            setValue(ID, "mainNews", checkAnswerApi(await sendApi.create("getNews", data)).list_records)
-        }
-
-    }
-
-}
-
-
-
 const start = function () {
 
     let projects,
         banners,
         partners,
-        questions
+        questions,
+        trades,
+        exchanges,
+        users,
+        news;
 
     Variable.HeaderShow = true
     Variable.FooterShow = true
-
-    // const trades = getValue(ID, "mainTrades");
-    // const exchanges = getValue(ID, "mainExchanges");
-    // const users = getValue(ID, "mainUsers");
-    // const news = getValue(ID, "mainNews");
 
 
     init(
@@ -260,6 +178,14 @@ const start = function () {
                 }
             ];
 
+            trades = await mainTrades();
+
+            exchanges = await mainExchanges();
+
+            users = await mainUsers();
+
+            news = await mainNews();
+
         },
         () => {
 
@@ -272,7 +198,7 @@ const start = function () {
                     <div class="c-main__wrapperbg">
                         <BlockQuestions lang={Variable.lang} questions={questions} />
 
-                        {/* <div class="c-main__wrapperbg2">
+                        <div class="c-main__wrapperbg2">
                             <BlockBanners banners={banners} />
                             <BlockTrade lang={Variable.lang} trades={trades} />
                             <div class="top_professionals_container">
@@ -281,7 +207,7 @@ const start = function () {
                                 <BlockMainNews lang={Variable.lang} news={news} />
                                 <BlockInfoPartners lang={Variable.lang} partners={partners} />
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             )
