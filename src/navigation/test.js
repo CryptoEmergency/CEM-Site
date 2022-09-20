@@ -2,8 +2,8 @@ import {
     jsx,
     jsxFrag,
     init,
-    Variable,
     initReload,
+    Variable
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
@@ -24,6 +24,5 @@ const start = function () {
             )
         })
 };
-
 
 export default start;

@@ -23,8 +23,9 @@ const showListLang = function (e) {
 }
 
 const showModalAuth = function (e) {
-    e.stopPropagation()
-    setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
+    Variable.authModalShow = !Variable.authModalShow;
+    e.stopPropagation();
+    // setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
 }
 
 const showModalRegistr = function (e) {
@@ -85,7 +86,7 @@ const HeaderNotAuth = ({ ref }) => (
                 </div>
                 <a
                     class="log-in"
-                // onclick={showModalAuth}
+                    onclick={showModalAuth}
                 >
                     {Variable.lang.button.login}
                 </a>
@@ -116,7 +117,8 @@ const mainHeader = function () {
     test = Variable.setRef()
     init(
         () => {
-            Variable.langListShow = false
+            Variable.langListShow = false;
+            Variable.authModalShow = false;
         },
         () => {
 

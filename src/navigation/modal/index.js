@@ -6,7 +6,8 @@ import {
     makeDOM,
     getVariable,
     getStorage,
-    sendApi
+    sendApi,
+    Variable
 } from '@betarost/cemjs';
 import { allValidation } from '@src/functions.js';
 import { ModalAuth } from '@component/modals/ModalAuth.js';
@@ -361,7 +362,7 @@ const changeInputAuth = (e) => {
 };
 
 const start = function () {
-    const showAuth = getValue("modals", "authModalShow");
+    const showAuth = Variable.authModalShow;//getValue("modals", "authModalShow");
     const commingSoonModalShow = getValue("modals", "commingSoonModalShow");
     const showReset = getValue("modals", "resetModalShow");
     const showRegistration = getValue("modals", "registrationModalShow");
@@ -451,6 +452,26 @@ const start = function () {
 }
 
 const mainModal = function (reload) {
+    // init(
+    //     () => {
+    //         Variable.authModalShow = false;
+    //     },
+    //     () => {
+
+    //         if (Variable.authModalShow) {
+    //             return (
+    //                 // <If
+    //                 //     data={getStorage("auth")}
+    //                 //     dataIf={<HeaderAuth />}
+    //                 // />
+    //                 <ModalAuth />
+    //             )
+    //         } else {
+    //             return (
+    //                 <></>
+    //             )
+    //         }
+    //     }, "modals")
     // console.log("modals init", reload);
     if (!reload) {
         setValue(ID, "showPhoneSelect", false);

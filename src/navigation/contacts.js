@@ -8,69 +8,69 @@ import {
   getStorage,
   setValue,
   Variable,
-  init
+  init,
+  initReload
 } from "@betarost/cemjs";
 import { allValidation } from '@src/functions.js'
 import svg from "@assets/svg/index.js";
 import { Select } from "../component/element/Select.js";
 
-const changeSelect = (e, type, value,) => {
-  e.stopPropagation()
-  let show = getValue(ID, "showObject")[type]
-  if (e.target.localName === "li") {
-    let tmp = { ...formInputs, [type]: value };
-    formInputs = { ...tmp };
-  }
-  setValue(ID, "showObject", { [type]: !show });
-}
+// const changeSelect = (e, type, value,) => {
+//   e.stopPropagation()
+//   let show = getValue(ID, "showObject")[type]
+//   if (e.target.localName === "li") {
+//     let tmp = { ...formInputs, [type]: value };
+//     formInputs = { ...tmp };
+//   }
+//   setValue(ID, "showObject", { [type]: !show });
+// }
 
-const changeInput = (e) => {
-  setValue(ID, "isValid", true);
-  const ID = "mainBlock";
-  let inputValue = e.target.value.trim();
-  let inputType = e.currentTarget.dataset.type;
-  formInputs[inputType].value = inputValue;
-  formInputs[inputType].valid = allValidation(inputValue, inputType, /[a-zA-Zа-яА-Яё\d]{2,500}/i
-  );
-  if (!formInputs[inputType].valid) {
+// const changeInput = (e) => {
+//   setValue(ID, "isValid", true);
+//   const ID = "mainBlock";
+//   let inputValue = e.target.value.trim();
+//   let inputType = e.currentTarget.dataset.type;
+//   formInputs[inputType].value = inputValue;
+//   formInputs[inputType].valid = allValidation(inputValue, inputType, /[a-zA-Zа-яА-Яё\d]{2,500}/i
+//   );
+//   if (!formInputs[inputType].valid) {
 
-    formInputs[inputType].error = "Zapolnite pole " + inputType;
-    setValue(ID, "isValid", false);
-    init(true);
-    return
-  } else {
-    formInputs[inputType].error = "";
-  }
-  let isCheckAll = Object.keys(formInputs).filter((key) => {
-    if (key !== "selectContact" && !formInputs[key].valid) {
-      return true
-    }
-  });
-  if (isCheckAll.length === 0) {
-    setValue(ID, "isValid", true);
-    return
-  } else {
-    setValue(ID, "isValid", false);
-    init(true);
-    return
-  }
+//     formInputs[inputType].error = "Zapolnite pole " + inputType;
+//     setValue(ID, "isValid", false);
+//     init(true);
+//     return
+//   } else {
+//     formInputs[inputType].error = "";
+//   }
+//   let isCheckAll = Object.keys(formInputs).filter((key) => {
+//     if (key !== "selectContact" && !formInputs[key].valid) {
+//       return true
+//     }
+//   });
+//   if (isCheckAll.length === 0) {
+//     setValue(ID, "isValid", true);
+//     return
+//   } else {
+//     setValue(ID, "isValid", false);
+//     init(true);
+//     return
+//   }
 
-}
+// }
 
-const sendMessage = async () => {
-  const name = formInputs.name.value;
-  const email = formInputs.email.value;
-  const text = formInputs.text.value;
-  const select = formInputs.selectContact;
-  const data = await sendApi.create("supportMessage", { value: { email, name, text, select } });
-  console.log(data)
-  if (data.status === 'ok') {
-    messageSent = true
-  }
-  init(true);
+// const sendMessage = async () => {
+//   const name = formInputs.name.value;
+//   const email = formInputs.email.value;
+//   const text = formInputs.text.value;
+//   const select = formInputs.selectContact;
+//   const data = await sendApi.create("supportMessage", { value: { email, name, text, select } });
+//   console.log(data)
+//   if (data.status === 'ok') {
+//     messageSent = true
+//   }
+//   // init(true);
 
-}
-
+// }
 
 
 
@@ -79,9 +79,66 @@ const sendMessage = async () => {
 const start = function () {
 
   let isValid, formInputs, messageSent, options
-
   Variable.HeaderShow = true
   Variable.FooterShow = true
+
+  const changeSelect = (e, type, value,) => {
+    e.stopPropagation()
+    let show = getValue(ID, "showObject")[type]
+    if (e.target.localName === "li") {
+      let tmp = { ...formInputs, [type]: value };
+      formInputs = { ...tmp };
+    }
+    setValue(ID, "showObject", { [type]: !show });
+  }
+  
+  const changeInput = (e) => {
+    setValue(ID, "isValid", true);
+    const ID = "mainBlock";
+    let inputValue = e.target.value.trim();
+    let inputType = e.currentTarget.dataset.type;
+    formInputs[inputType].value = inputValue;
+    formInputs[inputType].valid = allValidation(inputValue, inputType, /[a-zA-Zа-яА-Яё\d]{2,500}/i
+    );
+    if (!formInputs[inputType].valid) {
+  
+      formInputs[inputType].error = "Zapolnite pole " + inputType;
+      // setValue(ID, "isValid", false);
+      isValid = false;
+      initReload()
+      
+      return
+    } else {
+      formInputs[inputType].error = "";
+    }
+    let isCheckAll = Object.keys(formInputs).filter((key) => {
+      if (key !== "selectContact" && !formInputs[key].valid) {
+        return true
+      }
+    });
+    if (isCheckAll.length === 0) {
+      isValid =true;
+      return
+    } else {
+      isValid = false ;
+      initReload()
+      return
+    }
+  
+  }
+
+  const sendMessage = async () => {
+    const name = formInputs.name.value;
+    const email = formInputs.email.value;
+    const text = formInputs.text.value;
+    const select = formInputs.selectContact;
+    const data = await sendApi.create("supportMessage", { value: { email, name, text, select } });
+    console.log(data)
+    if (data.status === 'ok') {
+      messageSent = true
+    }
+    // init(true);
+  }
 
   init(
     () => {

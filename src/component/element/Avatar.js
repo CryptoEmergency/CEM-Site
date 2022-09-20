@@ -6,7 +6,7 @@ import {
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 
-const Avatar = function ({ lang, author, parent = null }) {
+const Avatar = function ({ author, parent = null }) {
     //console.log("Avatar = ", lang, author);
 
     return (
@@ -20,7 +20,7 @@ const Avatar = function ({ lang, author, parent = null }) {
                 <img
                     class="c-avataricon__frame"
                     // style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: "
-                    src={author.frame && author.frame.name ? images[`profile/frame/${author.frame.name.split(".")[0]}`] : svg["profile/frame/default"]}
+                    src={author.frame && author.frame.name ? (images[`profile/frame/${author.frame.name.split(".")[0]}`] || images[`profile/frame/${author.frame.name.split("\n.")[0]}`] || svg["profile/frame/default"]) : svg["profile/frame/default"]}
                 />
                 <div class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"}`}>
                     <img src={svg.levelGray} />
