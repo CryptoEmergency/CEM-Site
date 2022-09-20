@@ -59,6 +59,21 @@ const getExchangeList = async (count) => {
 };
 
 
+const getWorldPress = async (count, sortBy='score', sortType='-1') => {
+    let data = {
+        limit: 10,
+        sort: {
+        }
+    };
+    if (count) {
+        data.offset = 10 * count
+    }
+    data.sort[sortBy] = Number(sortType)
+    let response = checkAnswerApi(await sendApi.create("getPress", data));
+    return response
+};
+
+
 const mainQuestions = async () => {
     let data = {
         "filter": {
@@ -84,6 +99,7 @@ const mainQuestions = async () => {
     return response
 };
 
+
 const getUserAboutProfile = async function (nickname) {
 
     const userInfo = checkAnswerApi(await sendApi.create("getUsers", {
@@ -106,4 +122,4 @@ const getUserAboutProfile = async function (nickname) {
     }
 }
 
-export { getUserInfoProfile, getUserAboutProfile, getExchangeList, mainQuestions }
+export { getUserInfoProfile, getUserAboutProfile, getExchangeList, mainQuestions, getWorldPress}

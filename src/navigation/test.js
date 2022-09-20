@@ -2,7 +2,8 @@ import {
     jsx,
     jsxFrag,
     init,
-    Variable
+    Variable,
+    initReload,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
@@ -17,7 +18,7 @@ const start = function () {
         () => {
 
             return (
-                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
+                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     test page
                 </div>
             )
