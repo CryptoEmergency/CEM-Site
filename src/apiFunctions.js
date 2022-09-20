@@ -90,8 +90,21 @@ const getTradeOrExchangeList = async (type, count) => {
     }
     let response = checkAnswerApi(await sendApi.create(type, data));
     return response;
-    }
+}
 
+const getWorldPress = async (count, sortBy='score', sortType='-1') => {
+    let data = {
+        limit: 10,
+        sort: {
+        }
+    };
+    if (count) {
+        data.offset = 10 * count
+    }
+    data.sort[sortBy] = Number(sortType)
+    let response = checkAnswerApi(await sendApi.create("getPress", data));
+    return response
+};
 
 const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
 
@@ -214,6 +227,7 @@ const mainNews = async () => {
     return response
 };
 
+
 const getUserAboutProfile = async function (nickname) {
 
     const userInfo = checkAnswerApi(await sendApi.create("getUsers", {
@@ -236,4 +250,5 @@ const getUserAboutProfile = async function (nickname) {
     }
 }
 
-export { mainTrades, mainExchanges, mainUsers , mainNews , getTradeOrExchangeList, getUserInfoProfile, getUserAboutProfile, mainQuestions }
+
+export { mainTrades, mainExchanges, mainUsers , mainNews , getTradeOrExchangeList, getUserInfoProfile, getUserAboutProfile, mainQuestions, getWorldPress }
