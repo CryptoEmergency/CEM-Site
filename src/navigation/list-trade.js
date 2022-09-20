@@ -55,7 +55,6 @@ const start = function () {
                 <div></div>
               </div>
               {tradeList.list_records.map((item, i) => {
-                console.log('=item=',item)
                 return (
                   <a
                     href={item.url}

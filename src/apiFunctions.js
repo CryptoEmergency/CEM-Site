@@ -71,6 +71,7 @@ const getTradeOrExchangeList = async (type, count) => {
 
     let data = {};
     if (!count) {
+        console.log('=first=')
       data = {
         limit: a,
         sort: {
@@ -78,12 +79,13 @@ const getTradeOrExchangeList = async (type, count) => {
         },
       };
     } else {
+        console.log('=more=')
       data = {
         limit: b,
         offset: a + b * (count - 1),
-        sort: {
-            score: -1,
-        },
+        // sort: {
+        //     score: -1,
+        // },
       };
     }
     let response = checkAnswerApi(await sendApi.create(type, data));
@@ -234,4 +236,4 @@ const getUserAboutProfile = async function (nickname) {
     }
 }
 
-export { getTradeOrExchangeList, getUserInfoProfile, getUserAboutProfile, mainQuestions }
+export { mainTrades, mainExchanges, mainUsers , mainNews , getTradeOrExchangeList, getUserInfoProfile, getUserAboutProfile, mainQuestions }

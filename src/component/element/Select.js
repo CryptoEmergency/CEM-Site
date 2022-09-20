@@ -5,6 +5,7 @@ import {
   getValue,
   initReload
 } from "@betarost/cemjs";
+import { If } from '@component/helpers/All.js';
 // changeSelect, type, selectObject, ID, selectTitle
 
 
@@ -43,7 +44,11 @@ const Select = function ({ options, callback }) {
 
   return (
     <div class="profit_calculator_inputs_container">
-      <span>{options.title}</span>
+      <If
+      data={options.title}
+      dataIf={ <span>{options.title}</span>}
+      />
+     
       <div class="justselect-wrapper">
         <div
           class="justselect-title"
