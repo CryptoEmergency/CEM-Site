@@ -59,11 +59,32 @@ const getExchangeList = async (count) => {
 };
 
 
-const mainQuestions = async () => {
+const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
+
+    let filter = {
+        "languages.code": getStorage("lang")
+    }
+
+    if (optionsSelect) {
+        if (optionsSelect.active == "all") {
+            console.log("active all");
+        } else if (optionsSelect.active == "open") {
+            filter.close = false
+        } else if (optionsSelect.active == "closed") {
+            filter.close = true
+            // filter.bestId = {}
+            // filter.bestId["$exist"] = false
+
+        } else if (optionsSelect.active == "best") {
+            filter.close = true
+            filter.bestId = {}
+            filter.bestId["$exist"] = true
+        }
+    }
+
+
     let data = {
-        "filter": {
-            "languages.code": getStorage("lang")
-        },
+        "filter": filter,
         "select": {
             "title": 1,
             "showDate": 1,
@@ -77,10 +98,11 @@ const mainQuestions = async () => {
         "sort": {
             "showDate": -1
         },
-        "limit": 6
+        "limit": limit,
+        "offset": offset
     }
-
-    let response = checkAnswerApi(await sendApi.create("getQuestions", data)).list_records;
+    console.log(" data filter", data)
+    let response = checkAnswerApi(await sendApi.create("getQuestions", data));
     return response
 };
 

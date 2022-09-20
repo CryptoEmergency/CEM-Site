@@ -32,14 +32,14 @@ const sliceString = function (str) {
     return sliceStr;
 };
 
-const QuestionItem = function ({ lang, question }) {
+const QuestionItem = function ({ question }) {
     // console.log("QuestionItem", lang, question);
 
     return (
         <div data-id="{{_id}}" class="c-questions__item c-question question-block questionLoad">
             <div class="c-question__header">
                 <div class="c-question__avatar">
-                    <Avatar lang={lang} author={question.author} />
+                    <Avatar author={question.author} />
                 </div>
                 <div class="c-question__name">
                     <a
@@ -56,14 +56,14 @@ const QuestionItem = function ({ lang, question }) {
                             <img class="c-question__icon" src={svg.question_photo} />
                         </div>
                         <div class="c-question__langcontainer language_container "> {/* load */}
-                            <div class="c-question__lang language-question">{lang.lang_orig}</div>
+                            <div class="c-question__lang language-question">{Variable.lang.lang_orig}</div>
                         </div>
                     </div>
                 </div>
             </div>
             <a
                 style=""
-                href={`/question/show/${question.author_id}}`}
+                href={`/question/show/${question._id}`}
                 class="c-question__body"
             > {/* load */}
                 <div class="c-question__preview">
@@ -87,9 +87,9 @@ const QuestionItem = function ({ lang, question }) {
                 </div>
             </div>
             <div class="c-question__footer">
-                <a class="c-button c-button--outline2 " href={`/question/show/${question.author_id}}`}> {/* load */}
+                <a class="c-button c-button--outline2 " href={`/question/show/${question._id}`}> {/* load */}
                     <div class="c-button__wrapper">
-                        {lang.button.giveAnswer}
+                        {Variable.lang.button.giveAnswer}
                     </div>
                 </a>
             </div>

@@ -198,6 +198,13 @@ const start = function () {
                     <div class="c-main__wrapperbg">
                         <BlockQuestions lang={Variable.lang} questions={questions} />
 
+                        {/* <div class="c-questions__footer">
+                <a class="c-button c-button--gray" href="question/">
+                    <span class="c-button__wrapper">{Variable.lang.button.allQuestions}</span>
+                </a>
+            </div> */}
+
+
                         <div class="c-main__wrapperbg2">
                             <BlockBanners banners={banners} />
                             <BlockTrade lang={Variable.lang} trades={trades} />
