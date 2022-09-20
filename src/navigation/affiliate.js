@@ -16,18 +16,11 @@ const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
 
-  let lang
-  let activeBanner;
-  let activeCategory;
-  let userLang;
-  let banner;
-  let userAuth;
-  let bannersLang;
-  let isAuth;
-  let bannerCode;
+  let lang, activeBanner, activeCategory, userLang,
+   banner, userAuth, bannersLang, isAuth, bannerCode
 
-  // let successImg = Variable.setRef()
-  // let successCode = Variable.setRef()
+  let successImg = Variable.setRef()
+  let successCode = Variable.setRef()
 
   let banners = {
     en: [
@@ -118,7 +111,7 @@ const start = function () {
   };
   init(
     () => {
-     
+     console.log("AllLoad")
       lang =Variable.lang.code 
       console.log('=298de8=',Variable.lang.code)
       isAuth = getStorage("auth");
@@ -129,6 +122,7 @@ const start = function () {
       
     },
     () => {console.log('=userLang=',userLang)
+    console.log('=load=',)
       console.log('=activeCategory=',activeCategory)
       console.log('=activeBanner=',activeBanner)
       banner = banners[userLang].filter((item) => item.type === activeBanner);
@@ -194,7 +188,8 @@ const start = function () {
                     <div
                       onclick={() => {
                         activeCategory = "English";
-                        userLang = "en";
+                        
+                        userLang = "en";console.log('=userLang=',userLang)
                         activeBanner = "200x100";
                         initGo(null, true);
                       }}
@@ -206,9 +201,11 @@ const start = function () {
                     </div>
                     <div
                       onclick={() => {
+                        
                        activeCategory = "Russian";
+                      
                         activeBanner = "120x600";
-                        userLang = "ru";
+                        userLang = "ru"; console.log('=userLang=',userLang)
                         initGo(null, true);
                       }}
                       class={`tag_button ${
@@ -224,6 +221,7 @@ const start = function () {
                           return (
                             <div
                               onclick={() => {
+                                console.log('=item=',item)
                                 activeBanner = item.type;
                                 initGo(null, true);
                               }}
@@ -240,10 +238,13 @@ const start = function () {
                           );
                         })
                       : banners.en.map((item) => {
+                        console.log('=item=',item)
                           return (
                             <div
                               onclick={() => {
+                                console.log('=item.type=',item.type)
                                 activeBanner = item.type;
+                                console.log('=12324455678=',activeBanner)
                                 initGo(null, true);
                               }}
                               data-action="changeAffiliateBanner"

@@ -138,3 +138,4 @@ const Slider = function ({item}) {
 };
 
 export { Slider };
+

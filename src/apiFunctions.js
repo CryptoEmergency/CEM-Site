@@ -36,27 +36,59 @@ const getUserInfoProfile = async function (nickname) {
 }
 
 
-const getExchangeList = async (count) => {
+// const getExchangeList = async (count) => {
+//     let data = {};
+//     if (!count) {
+//         data = {
+//             limit: 10,
+//             sort: {
+//                 score: -1,
+//             },
+//         };
+//     } else {
+//         data = {
+//             limit: 10, //limit12
+//             offset: 10 + 10 * (count - 1),
+//             sort: {
+//                 score: -1,
+//             },
+//         };
+//     }
+//     let response = checkAnswerApi(await sendApi.create("getExchange", data));
+//     return response
+// };
+
+const getTradeOrExchangeList = async (type, count) => {
+    let a;
+    let b;
+    if(type === "getTrade"){
+        a = 20;
+        b = 50
+    }else{
+        a = 10;
+        b = 10;
+    }
+
     let data = {};
     if (!count) {
-        data = {
-            limit: 10,
-            sort: {
-                score: -1,
-            },
-        };
+      data = {
+        limit: a,
+        sort: {
+          score: -1,
+        },
+      };
     } else {
-        data = {
-            limit: 10, //limit12
-            offset: 10 + 10 * (count - 1),
-            sort: {
-                score: -1,
-            },
-        };
+      data = {
+        limit: b,
+        offset: a + b * (count - 1),
+        sort: {
+            score: -1,
+        },
+      };
     }
-    let response = checkAnswerApi(await sendApi.create("getExchange", data));
-    return response
-};
+    let response = checkAnswerApi(await sendApi.create(type, data));
+    return response;
+    }
 
 
 const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
@@ -202,13 +234,4 @@ const getUserAboutProfile = async function (nickname) {
     }
 }
 
-export {
-    getUserInfoProfile,
-    getUserAboutProfile,
-    getExchangeList,
-    mainQuestions,
-    mainTrades,
-    mainExchanges,
-    mainUsers,
-    mainNews,
-}
+export { getTradeOrExchangeList, getUserInfoProfile, getUserAboutProfile, mainQuestions }

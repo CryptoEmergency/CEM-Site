@@ -91,14 +91,14 @@ const timerTik = function () {
   //console.log("timerTik", "tt")
 };
 
-const getNewsItem = async function (type, category) {
+const getNewsItem = async function (type, category, mediaActveCategory) {
   let getLang = "en";
   if (getStorage("lang") == "ru") {
     getLang = "ru";
   }
 
   if (type === "media") {
-    getLang = getStorage("lang");
+    getLang = mediaActveCategory || getStorage("lang");
   }
 
   let data = {
