@@ -8,8 +8,6 @@ import {
     getStorage,
     sendApi,
     Variable,
-    init,
-    initReload,
 } from '@betarost/cemjs';
 import { allValidation } from '@src/functions.js';
 import { ModalAuth } from '@component/modals/ModalAuth.js';
@@ -363,7 +361,7 @@ const changeInputAuth = (e) => {
 
 };
 
-const start_old = function () {
+const start = function () {
     const showAuth = Variable.authModalShow;//getValue("modals", "authModalShow");
     const commingSoonModalShow = getValue("modals", "commingSoonModalShow");
     const showReset = getValue("modals", "resetModalShow");
@@ -555,29 +553,4 @@ const mainModal = function (reload) {
     makeDOM(start(), ID)
     return;
 }
-
-
-const start = function () {
-
-
-
-    init(
-        null,
-        () => {
-            if (Variable.Modals && Variable.Modals.length != 0) {
-                return (
-                    <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
-                        test page
-                    </div>
-                )
-            } else {
-                return (
-                    <></>
-                )
-            }
-
-        },
-        "modals")
-};
-
-export default start;
+export { mainModal }
