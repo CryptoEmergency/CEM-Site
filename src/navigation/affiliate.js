@@ -1,23 +1,22 @@
 import {
   jsx,
   jsxFrag,
-  getVariable,
-  makeDOM,
   getStorage,
-  setValue,
   init,
   Variable,
   initGo,
+  initReload
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function () {
+
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
 
-  let lang, activeBanner, activeCategory, userLang,
-   banner, userAuth, bannersLang, isAuth, bannerCode
+  let activeBanner, userLang,
+    banner, userAuth, bannersLang, isAuth, bannerCode
 
   let successImg = Variable.setRef()
   let successCode = Variable.setRef()
@@ -88,50 +87,47 @@ const start = function () {
       },
     ],
   };
-  const copyLink = (e,code) => {
+
+  const copyLink = (e, code) => {
     navigator.clipboard.writeText(code);
-      let element = e.target; 
-    
+    let element = e.target;
 
-      // successImg().style.visibility= "visible"
-      // successImg().style.opacity= "1"
 
-      // successCode().style.visibility= "visible"
-      // successCode().style.opacity= "1"
-      if(element.className !=="affiliate_banner_copy"){
-        element =element.parentElement
-      }
-      element.childNodes[3].style.visibility= "visible";
-      element.childNodes[3].style.opacity= "1";
-      setTimeout(() =>{
-        element.childNodes[3].style.visibility= "hidden";
-      element.childNodes[3].style.opacity= "0";
-      },1000)
-      
+    // successImg().style.visibility= "visible"
+    // successImg().style.opacity= "1"
+
+    // successCode().style.visibility= "visible"
+    // successCode().style.opacity= "1"
+    if (element.className !== "affiliate_banner_copy") {
+      element = element.parentElement
+    }
+    element.childNodes[3].style.visibility = "visible";
+    element.childNodes[3].style.opacity = "1";
+    setTimeout(() => {
+      element.childNodes[3].style.visibility = "hidden";
+      element.childNodes[3].style.opacity = "0";
+    }, 1000)
+
   };
+
+
   init(
     () => {
-     console.log("AllLoad")
-      lang =Variable.lang.code 
-      console.log('=298de8=',Variable.lang.code)
-      isAuth = getStorage("auth");
-      userLang = lang === "ru" ? "ru" : "en";
-      activeCategory = userLang === "ru" ? "Russian" : "English";
-      activeBanner = userLang === "ru" ? "120x600" : "200x100";
-      console.log("banners",banners);
-      
+      userLang = Variable.lang.code === "ru" ? "ru" : "en";
+      activeBanner = banners[userLang][0].type;
+      //isAuth = getStorage("auth");
     },
-    () => {console.log('=userLang=',userLang)
-    console.log('=load=',)
-      console.log('=activeCategory=',activeCategory)
-      console.log('=activeBanner=',activeBanner)
+    () => {
+
+      console.log("activeBanner", activeBanner, userLang);
       banner = banners[userLang].filter((item) => item.type === activeBanner);
+      console.log("banner", banner);
       let bannerCode = `<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`;
+
       return (
         <div
-          class={`${
-            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-          } c-aboutus about_us_container`}
+          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+            } c-aboutus about_us_container`}
         >
           <img
             class="affiliate_program_blur"
@@ -187,78 +183,47 @@ const start = function () {
                   <div>
                     <div
                       onclick={() => {
-                        activeCategory = "English";
-                        
-                        userLang = "en";console.log('=userLang=',userLang)
-                        activeBanner = "200x100";
-                        initGo(null, true);
+                        userLang = "en";
+                        activeBanner = banners[userLang][0].type;
+                        initReload()
                       }}
-                      class={`tag_button ${
-                        activeCategory == "English" && "tag_button_active"
-                      }`}
+                      class={`tag_button ${userLang == "en" && "tag_button_active"
+                        }`}
                     >
                       <span>English</span>
                     </div>
                     <div
                       onclick={() => {
-                        
-                       activeCategory = "Russian";
-                      
-                        activeBanner = "120x600";
-                        userLang = "ru"; console.log('=userLang=',userLang)
-                        initGo(null, true);
+                        userLang = "ru";
+                        activeBanner = banners[userLang][0].type;
+                        initReload()
                       }}
-                      class={`tag_button ${
-                        activeCategory == "Russian" && "tag_button_active"
-                      }`}
+                      class={`tag_button ${userLang == "ru" && "tag_button_active"
+                        }`}
                     >
                       <span>Русский</span>
                     </div>
                   </div>
                   <div class="affiliate_banners_size_list">
-                    {activeCategory === "Russian"
-                      ? banners.ru.map((item) => {
-                          return (
-                            <div
-                              onclick={() => {
-                                console.log('=item=',item)
-                                activeBanner = item.type;
-                                initGo(null, true);
-                              }}
-                              data-action="changeAffiliateBanner"
-                              class={`affiliate_banners_size_item ${
-                                activeBanner == item.type &&
-                                "affiliate_banners_size_item_active"
-                              }`}
-                            >
-                              <div class="affiliate_banners_size_item_inner">
-                                {item.type}
-                              </div>
-                            </div>
-                          );
-                        })
-                      : banners.en.map((item) => {
-                        console.log('=item=',item)
-                          return (
-                            <div
-                              onclick={() => {
-                                console.log('=item.type=',item.type)
-                                activeBanner = item.type;
-                                console.log('=12324455678=',activeBanner)
-                                initGo(null, true);
-                              }}
-                              data-action="changeAffiliateBanner"
-                              class={`affiliate_banners_size_item ${
-                                activeBanner == item.type &&
-                                "affiliate_banners_size_item_active"
-                              }`}
-                            >
-                              <div class="affiliate_banners_size_item_inner">
-                                {item.type}
-                              </div>
-                            </div>
-                          );
-                        })}
+                    {banners[userLang].map((item) => {
+                      return (
+                        <div
+                          onclick={() => {
+                            console.log("change bannders", item.type);
+                            activeBanner = item.type;
+                            initReload()
+                          }}
+                          data-action="changeAffiliateBanner"
+                          class={`affiliate_banners_size_item ${activeBanner == item.type &&
+                            "affiliate_banners_size_item_active"
+                            }`}
+                        >
+                          <div class="affiliate_banners_size_item_inner">
+                            {item.type}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -276,9 +241,9 @@ const start = function () {
                     >
                       <img src={svg["icon/copy"]} />{" "}
                       <span>{Variable.lang.p.copy}</span>
-                      <div 
-                      class="success_copy"
-                      ref={successImg}
+                      <div
+                        class="success_copy"
+                        ref={successImg}
                       >
                         {Variable.lang.text.coppied}
                       </div>
@@ -292,13 +257,13 @@ const start = function () {
                     <div
                       data-action="affiliateBannerCopy"
                       class="affiliate_banner_copy"
-                      onclick={(e) => copyLink(e,bannerCode)}
+                      onclick={(e) => copyLink(e, bannerCode)}
                     >
                       <img src={svg["icon/copy"]} />{" "}
                       <span>{Variable.lang.p.copy}</span>
-                      <div 
-                      class="success_copy"
-                      ref={successCode}
+                      <div
+                        class="success_copy"
+                        ref={successCode}
                       >
                         {Variable.lang.text.coppied}
                       </div>
