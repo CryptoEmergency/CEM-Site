@@ -371,6 +371,17 @@ const parseTextforJsx = function (text) {
 //   }
 // }
 
+const ifHaveMedia = function (mediaArr, type, whatReturn) {
+  if (mediaArr === null) {
+    return "";
+  }
+  var media = mediaArr.filter(tmp => tmp.type == type)
+  if (media.length == 0) {
+    return "";
+  }
+  return whatReturn;
+};
+
 export {
   parseTextforJsx,
   changeNewsCategory,
@@ -387,4 +398,5 @@ export {
   checkAnswerApi,
   allValidation,
   numberFixWithSpaces,
+  ifHaveMedia,
 };

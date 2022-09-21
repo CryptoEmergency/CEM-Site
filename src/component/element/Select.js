@@ -5,12 +5,13 @@ import {
   getValue,
   initReload
 } from "@betarost/cemjs";
+import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
 // changeSelect, type, selectObject, ID, selectTitle
 
 
 
-const Select = function ({ options, callback }) {
+const Select = function ({ options, callback, toggler = null }) {
   let optionsActive
 
   const changeSelect = (e, selectIndex) => {
@@ -45,10 +46,10 @@ const Select = function ({ options, callback }) {
   return (
     <div class="profit_calculator_inputs_container">
       <If
-      data={options.title}
-      dataIf={ <span>{options.title}</span>}
+        data={options.title}
+        dataIf={<span>{options.title}</span>}
       />
-     
+
       <div class="justselect-wrapper">
         <div
           class="justselect-title"
@@ -66,6 +67,10 @@ const Select = function ({ options, callback }) {
           {optionsElem}
         </ul>
       </div>
+      <If
+        data={toggler}
+        dataIf={<img data-sort="DESC" class="filter_sort_toggler" data-action="toggleFilterSort" src={svg.filter_arrow_bottom} />}
+      />
     </div>
   );
 };

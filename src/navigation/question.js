@@ -49,12 +49,9 @@ const start = function () {
         }
     }
 
-
-
     init(
         async () => {
             console.log("First Init")
-
 
             optionsSelect = {
                 questions: {
@@ -93,10 +90,10 @@ const start = function () {
             console.log("Second Init ", questions)
             return (
                 <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
-
                     <div class="c-questions">
                         <div class="c-questions__header">
-                            <p class="c-questions__title info-text-questions"></p>
+                            <h4>{Variable.lang.h.lastQuestions}</h4>
+                            <p class="c-questions__title info-text-questions">{Variable.lang.p.addQuestionsSlog}</p>
                             <div class="c-questions__searchblock c-search">
                                 <div class="c-search__container">
                                     <div class="c-search__wrapper">
@@ -118,8 +115,6 @@ const start = function () {
                                         {Variable.lang.button.giveQuestion}
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <div class="c-questions__filter questions_filter">
@@ -127,45 +122,19 @@ const start = function () {
                                 <Select
                                     options={optionsSelect.questions}
                                     callback={selectCallBack}
-                                // changeSelect={changeSelect}
-                                // type="selectBlockQuestions1"
-                                // selectObject={sortSelects}
-                                // ID={ID}
-
                                 />
                                 <Select
                                     options={optionsSelect.date}
                                     callback={selectCallBack}
-                                // changeSelect={changeSelect}
-                                // type="selectBlockQuestions2"
-                                // selectObject={sortSelects}
-                                // ID={ID}
-                                // selectTitle="Сортировать"
+                                    toggler={true}
                                 />
-                                {/* <div class="profit_calculator_inputs_container">
-                        <span>{Variable.lang.span.sort}</span>
-                        <select class="justselect" id="statusQuestions">
-                            <option selected="selected" value="all">{Variable.lang.select.showAllQuestions}</option>
-                            <option value="open">{Variable.lang.select.openQuestions}</option>
-                            <option value="closed">{Variable.lang.select.closeQuestions}</option>
-                            <option value="best">{Variable.lang.select.bestQuestions}</option>
-                        </select>
-                    </div>
-                    <div class="profit_calculator_inputs_container">
-                        <span>{Variable.lang.span.sort}</span>
-                        <select class="justselect" id="sortQuestions">
-                            <option selected="selected" value="date">{Variable.lang.select.byDate}</option>
-                            <option value="views">{Variable.lang.select.byViews}</option>
-                            <option value="answers">{Variable.lang.select.byAnswers}</option>
-                        </select>
-                        <img data-sort="DESC" class="filter_sort_toggler" data-action="toggleFilterSort" src={svg.filter_arrow_bottom}/>
-                    </div> */}
-                                {/* <div class="questions_filter_language">
+
+                                <div class="c-questions__lang">
                                     {Variable.lang.lang}
-                                </div> */}
+                                </div>
                             </div>
 
-                            <h4>{Variable.lang.h.lastQuestions}</h4>
+                            {/* <h4>{Variable.lang.h.lastQuestions}</h4> */}
 
 
                         </div>
@@ -192,12 +161,7 @@ const start = function () {
                                 </a>
                             </div>}
                         />
-
-
-
                     </div>
-
-
                 </div>
             )
         }

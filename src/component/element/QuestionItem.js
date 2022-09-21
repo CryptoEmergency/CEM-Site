@@ -10,6 +10,8 @@ import svg from "@assets/svg/index.js";
 import moment from 'moment';
 
 import { Avatar } from '@component/element/Avatar.js';
+import { If } from '@component/helpers/All.js';
+import { ifHaveMedia } from '@src/functions.js';
 
 const getDateMoment = function (str, options) {
     if (str) {
@@ -33,10 +35,11 @@ const sliceString = function (str) {
 };
 
 const QuestionItem = function ({ question }) {
-    // console.log("QuestionItem", lang, question);
+    // console.log("QuestionItem", question.bestId != "undefined" && question.close, question.bestId != "undefined" && question.close && !question.bestId, !question.close);
+    // console.log("QuestionItem", question.close, typeof question.bestId);
 
     return (
-        <div data-id="{{_id}}" class="c-questions__item c-question question-block questionLoad">
+        <div data-id={question._id} class="c-questions__item c-question question-block questionLoad">
             <div class="c-question__header">
                 <div class="c-question__avatar">
                     <Avatar author={question.author} />
@@ -51,9 +54,17 @@ const QuestionItem = function ({ question }) {
                     </a>
                     <div class="c-question__info">
                         <div class="c-question__icons">
-                            <img class="c-question__icon" src={svg.question_audio} /> {/* c-question__icon--active */}
-                            <img class="c-question__icon" src={svg.question_video} />
-                            <img class="c-question__icon" src={svg.question_photo} />
+                            <If
+                                data={question.close}
+                                dataIf={<img
+                                    class="c-question__icon c-question__icon--status"
+                                    src={svg[`${(typeof question.bestId == "string") ? "best_answer" : "closed_question"}`]}
+                                />}
+                                dataElse={<img class="c-question__icon c-question__icon--status" src={svg.open_question} />}
+                            />
+                            <img class={`c-question__icon ${ifHaveMedia(question.media, "audio", "c-question__icon--active")}`} src={svg.question_audio} /> {/* c-question__icon--active */}
+                            <img class={`c-question__icon ${ifHaveMedia(question.media, "video", "c-question__icon--active")}`} src={svg.question_video} />
+                            <img class={`c-question__icon ${ifHaveMedia(question.media, "image", "c-question__icon--active")}`} src={svg.question_photo} />
                         </div>
                         <div class="c-question__langcontainer language_container "> {/* load */}
                             <div class="c-question__lang language-question">{Variable.lang.lang_orig}</div>
