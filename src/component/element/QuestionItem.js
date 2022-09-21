@@ -75,11 +75,11 @@ const QuestionItem = function ({ question }) {
             <div class="c-question__statistic">
                 <div class="c-question__stats "> {/* load */}
                     <img src={svg.question_answers} />
-                    {question.author.statistic.answer}
+                    {question.statistic.answer}
                 </div>
                 <div class="c-question__stats "> {/* load */}
                     <img src={svg.question_views} />
-                    {question.author.statistic.view}
+                    {question.statistic.view}
                 </div>
                 <div class="c-question__stats "> {/* load */}
                     <img src={svg.question_time} />

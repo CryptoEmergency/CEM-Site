@@ -23,7 +23,7 @@ const start = function () {
 
     const showMore = async function (e) {
         e.preventDefault();
-        const tmp = await mainQuestions(optionsSelect.questions, 12, nowShow);
+        const tmp = await mainQuestions(optionsSelect, 12, nowShow);
         nowShow += tmp.list_records.length
         questions.push(...tmp.list_records)
         initReload()
@@ -34,14 +34,14 @@ const start = function () {
         console.log("selectCallBack", value, nameOptions);
         if (nameOptions == "questions") {
             nowShow = 0
-            const tmp = await mainQuestions(optionsSelect.questions, 12, nowShow);
+            const tmp = await mainQuestions(optionsSelect, 12, nowShow);
             nowShow += tmp.list_records.length
             totalRecords = tmp.totalFound
             questions = tmp.list_records
             initReload()
         } else if (nameOptions == "date") {
             nowShow = 0
-            const tmp = await mainQuestions(optionsSelect.date, 12, nowShow);
+            const tmp = await mainQuestions(optionsSelect, 12, nowShow);
             nowShow += tmp.list_records.length
             totalRecords = tmp.totalFound
             questions = tmp.list_records
@@ -83,7 +83,7 @@ const start = function () {
 
             }
 
-            const tmp = await mainQuestions([optionsSelect.questions, optionsSelect.date], 12);
+            const tmp = await mainQuestions(optionsSelect, 12);
             nowShow = 12
             totalRecords = tmp.totalFound
             questions = tmp.list_records;
