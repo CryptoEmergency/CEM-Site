@@ -161,4 +161,4 @@ const ModalReset = function ({ lang, changeCode, ID, abbr, codeTitle, wayReset, 
 };
 
 
-export { ModalReset };
+export default ModalReset;

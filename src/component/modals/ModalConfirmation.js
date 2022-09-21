@@ -75,4 +75,4 @@ const ModalConfirmation = function ({ lang, wayReg, confirmationTimer, confirmAc
 };
 
 
-export { ModalConfirmation }
+export default ModalConfirmation

@@ -8,7 +8,7 @@ const initApp = async function () {
     await mainBlock();
     await mainHeader();
     await mainFooter();
-    //await mainModal(); //"modals"
+    await mainModal();
     initGo("newPage")
     setTimeout(() => {
         document.getElementById("page_loader").remove();

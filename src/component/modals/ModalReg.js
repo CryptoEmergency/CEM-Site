@@ -222,4 +222,4 @@ const ModalReg = function ({
 };
 
 
-export { ModalReg };
+export default ModalReg;
