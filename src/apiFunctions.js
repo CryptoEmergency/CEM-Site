@@ -116,58 +116,6 @@ const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
         "showDate": -1
     };
 
-    // optionsSelect.map((item) => {
-    //     if (item) {
-    //         if (item.active == "all") {
-    //             console.log("active all");
-    //         } else if (item.active == "open") {
-    //             filter.close = false
-    //         } else if (item.active == "closed") {
-    //             filter.close = true
-    //             // filter.bestId = {}
-    //             // filter.bestId["$exist"] = false
-    //         } else if (item.active == "best") {
-    //             filter.close = true
-    //             filter.bestId = {}
-    //             filter.bestId["$exist"] = true
-    //         } else if (item.active == "date") {
-    //             console.log('=9988ee=', "date")
-    //             sort.showDate = -1;
-    //         } else if (item.active == "views") {
-    //             console.log('=19f369=', "views")
-    //             sort["statistic.view"] = -1
-    //         } else if (item.active == "answers") {
-    //             console.log('=952e23=', "answers")
-    //             sort["statistic.answer"] = -1
-    //         }
-    //     }
-
-    // })
-    // if (optionsSelect) {
-    //     if (optionsSelect.active == "all") {
-    //         console.log("active all");
-    //     } else if (optionsSelect.active == "open") {
-    //         filter.close = false
-    //     } else if (optionsSelect.active == "closed") {
-    //         filter.close = true
-    //         // filter.bestId = {}
-    //         // filter.bestId["$exist"] = false
-    //     } else if (optionsSelect.active == "best") {
-    //         filter.close = true
-    //         filter.bestId = {}
-    //         filter.bestId["$exist"] = true
-    //     } else if (optionsSelect.active == "date") {
-    //         console.log('=9988ee=', "date")
-    //         sort.showDate = -1;
-    //     } else if (optionsSelect.active == "views") {
-    //         console.log('=19f369=', "views")
-    //         sort["statistic.view"] = -1
-    //     } else if (optionsSelect.active == "answers") {
-    //         console.log('=952e23=', "answers")
-    //         sort["statistic.answer"] = -1
-    //     }
-    // }
-
     if (optionsSelect) {
         const question = optionsSelect.questions
         const date = optionsSelect.date
@@ -245,7 +193,7 @@ const mainExchanges = async () => {
     return response
 };
 
-const mainUsers = async () => {
+const mainUsers = async (limit = 6, offset = 0) => {
     let data = {
         "filter": {
             "confirm.registrasion": true
@@ -264,10 +212,11 @@ const mainUsers = async () => {
             "awards": 1,
             "status": 1
         },
-        "limit": 6
+        "limit": limit,
+        "offset": offset
     }
 
-    let response = checkAnswerApi(await sendApi.create("getUsers", data)).list_records;
+    let response = checkAnswerApi(await sendApi.create("getUsers", data));
     return response
 };
 

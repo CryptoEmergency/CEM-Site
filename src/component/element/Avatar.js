@@ -7,7 +7,7 @@ import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 
 const Avatar = function ({ author, parent = null }) {
-    //console.log("Avatar = ", lang, author);
+    // console.log("Avatar = ", typeof author.avatar != "undefined" && author.avatar.name);
 
     return (
         <a href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ''}`} class={`${parent == "big_user_avatar" ? "" : "comment_avatar"}`}>
@@ -15,7 +15,7 @@ const Avatar = function ({ author, parent = null }) {
                 <img
                     class="c-avataricon__photo"
                     // style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);"
-                    src={author.avatar.name ? `/assets/upload/avatar/${author.avatar.name}` : images["profile/avatar/default"]}
+                    src={(typeof author.avatar != "undefined" && author.avatar.name) ? `/assets/upload/avatar/${author.avatar.name}` : images["profile/avatar/default"]}
                 />
                 <img
                     class="c-avataricon__frame"

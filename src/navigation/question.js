@@ -154,7 +154,6 @@ const start = function () {
                             dataIf={<div class="c-questions__footer">
                                 <a
                                     class="c-button c-button--gray"
-                                    href="question/"
                                     onclick={showMore}
                                 >
                                     <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
