@@ -18,9 +18,9 @@ import { ModalReset } from '@component/modals/ModalReset.js';
 import { ModalReg } from '@component/modals/ModalReg.js';
 import { ModalConfirmation } from '@component/modals/ModalConfirmation.js';
 import { ModalAlarm } from '@component/modals/ModalAlarm.js';
-import list from "@src/modalsList.js";
+// import list from "@src/modalsList.js";
 
-console.log(list, "list")
+// console.log(list, "list")
 let formInputsReg, formInputsRegEmail, formInputsRegPhone = {};
 let formInputsAuth, formInputsAuthEmail, formInputsAuthPhone = {};
 

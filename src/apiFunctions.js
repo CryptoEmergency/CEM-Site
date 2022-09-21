@@ -61,10 +61,10 @@ const getUserInfoProfile = async function (nickname) {
 const getTradeOrExchangeList = async (type, count) => {
     let a;
     let b;
-    if(type === "getTrade"){
+    if (type === "getTrade") {
         a = 20;
         b = 50
-    }else{
+    } else {
         a = 10;
         b = 10;
     }
@@ -72,27 +72,27 @@ const getTradeOrExchangeList = async (type, count) => {
     let data = {};
     if (!count) {
         console.log('=first=')
-      data = {
-        limit: a,
-        sort: {
-          score: -1,
-        },
-      };
+        data = {
+            limit: a,
+            sort: {
+                score: -1,
+            },
+        };
     } else {
         console.log('=more=')
-      data = {
-        limit: b,
-        offset: a + b * (count - 1),
-        // sort: {
-        //     score: -1,
-        // },
-      };
+        data = {
+            limit: b,
+            offset: a + b * (count - 1),
+            // sort: {
+            //     score: -1,
+            // },
+        };
     }
     let response = checkAnswerApi(await sendApi.create(type, data));
     return response;
 }
 
-const getWorldPress = async (count, sortBy='score', sortType='-1') => {
+const getWorldPress = async (count, sortBy = 'score', sortType = '-1') => {
     let data = {
         limit: 10,
         sort: {
@@ -112,6 +112,37 @@ const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
         "languages.code": getStorage("lang")
     }
 
+    let sort = {
+        "showDate": -1
+    };
+
+    // optionsSelect.map((item) => {
+    //     if (item) {
+    //         if (item.active == "all") {
+    //             console.log("active all");
+    //         } else if (item.active == "open") {
+    //             filter.close = false
+    //         } else if (item.active == "closed") {
+    //             filter.close = true
+    //             // filter.bestId = {}
+    //             // filter.bestId["$exist"] = false
+    //         } else if (item.active == "best") {
+    //             filter.close = true
+    //             filter.bestId = {}
+    //             filter.bestId["$exist"] = true
+    //         } else if (item.active == "date") {
+    //             console.log('=9988ee=', "date")
+    //             sort.showDate = -1;
+    //         } else if (item.active == "views") {
+    //             console.log('=19f369=', "views")
+    //             sort["statistic.view"] = -1
+    //         } else if (item.active == "answers") {
+    //             console.log('=952e23=', "answers")
+    //             sort["statistic.answer"] = -1
+    //         }
+    //     }
+
+    // })
     if (optionsSelect) {
         if (optionsSelect.active == "all") {
             console.log("active all");
@@ -121,11 +152,19 @@ const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
             filter.close = true
             // filter.bestId = {}
             // filter.bestId["$exist"] = false
-
         } else if (optionsSelect.active == "best") {
             filter.close = true
             filter.bestId = {}
             filter.bestId["$exist"] = true
+        } else if (optionsSelect.active == "date") {
+            console.log('=9988ee=', "date")
+            sort.showDate = -1;
+        } else if (optionsSelect.active == "views") {
+            console.log('=19f369=', "views")
+            sort["statistic.view"] = -1
+        } else if (optionsSelect.active == "answers") {
+            console.log('=952e23=', "answers")
+            sort["statistic.answer"] = -1
         }
     }
 
@@ -142,9 +181,7 @@ const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
             "media": 1,
             "author": 1
         },
-        "sort": {
-            "showDate": -1
-        },
+        "sort": sort,
         "limit": limit,
         "offset": offset
     }
@@ -251,4 +288,4 @@ const getUserAboutProfile = async function (nickname) {
 }
 
 
-export { mainTrades, mainExchanges, mainUsers , mainNews , getTradeOrExchangeList, getUserInfoProfile, getUserAboutProfile, mainQuestions, getWorldPress }
+export { mainTrades, mainExchanges, mainUsers, mainNews, getTradeOrExchangeList, getUserInfoProfile, getUserAboutProfile, mainQuestions, getWorldPress }

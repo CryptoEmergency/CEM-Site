@@ -95,14 +95,21 @@
             }
         }
 
-        .justselect-title {
-            background-color: $prestige_blue;
-            color: $white;
-            border: 1px solid $black_flame;
-        }
+        .justselect {
 
-        .justselect-list {
-            border: 1px solid $black_flame;
+            &-wrapper {
+                width: 300px;
+            }
+
+            &-title {
+                background-color: $prestige_blue;
+                color: $white;
+                border: 1px solid $black_flame;
+            }
+
+            &-list {
+                border: 1px solid $black_flame;
+            }
         }
 
         li {
@@ -772,9 +779,3 @@
         }
     }
 }
-
-// @media(max-width: 479px) {
-//     .input-question {
-//         padding-left: 60px;
-//     }
-// }

@@ -30,6 +30,17 @@
     &__content {
         margin-bottom: 1.3rem;
 
+        a {
+            display: inline-block;
+            color: blue;
+            @extend .c-link;
+
+            span {
+                display: inline-block;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+            }
+        }
+
         p {
             margin: 0 0 0.8rem;
             text-align: justify;

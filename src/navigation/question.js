@@ -39,6 +39,13 @@ const start = function () {
             totalRecords = tmp.totalFound
             questions = tmp.list_records
             initReload()
+        } else if (nameOptions == "date") {
+            nowShow = 0
+            const tmp = await mainQuestions(optionsSelect.date, 12, nowShow);
+            nowShow += tmp.list_records.length
+            totalRecords = tmp.totalFound
+            questions = tmp.list_records
+            initReload()
         }
     }
 
@@ -63,17 +70,20 @@ const start = function () {
                     active: "all"
                 },
                 date: {
+                    nameOptions: "date",
                     title: Variable.lang.span.sort,
                     items: [
-                        { value: Variable.lang.select.byDate },
-                        { value: Variable.lang.select.byViews },
-                        { value: Variable.lang.select.byAnswers },
-                    ]
+                        { text: Variable.lang.select.byDate, value: "date", active: true },
+                        { text: Variable.lang.select.byViews, value: "views" },
+                        { text: Variable.lang.select.byAnswers, value: "answers" },
+                    ],
+                    open: false,
+                    active: "date"
                 }
 
             }
 
-            const tmp = await mainQuestions(optionsSelect.questions, 12);
+            const tmp = await mainQuestions([optionsSelect.questions, optionsSelect.date], 12);
             nowShow = 12
             totalRecords = tmp.totalFound
             questions = tmp.list_records;
@@ -123,14 +133,15 @@ const start = function () {
                                 // ID={ID}
 
                                 />
-                                {/* <Select
-                        options={options.date}
-                        changeSelect={changeSelect}
-                        type="selectBlockQuestions2"
-                        selectObject={sortSelects}
-                        ID={ID}
-                        selectTitle="Сортировать"
-                    /> */}
+                                <Select
+                                    options={optionsSelect.date}
+                                    callback={selectCallBack}
+                                // changeSelect={changeSelect}
+                                // type="selectBlockQuestions2"
+                                // selectObject={sortSelects}
+                                // ID={ID}
+                                // selectTitle="Сортировать"
+                                />
                                 {/* <div class="profit_calculator_inputs_container">
                         <span>{Variable.lang.span.sort}</span>
                         <select class="justselect" id="statusQuestions">

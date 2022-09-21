@@ -196,7 +196,7 @@ const start = function () {
                     <BlockPreview />
                     <BlockProjects projects={projects} />
                     <div class="c-main__wrapperbg">
-                        <BlockQuestions lang={Variable.lang} questions={questions} />
+                        <BlockQuestions lang={Variable.lang} questions={questions.list_records} />
 
                         {/* <div class="c-questions__footer">
                 <a class="c-button c-button--gray" href="question/">
