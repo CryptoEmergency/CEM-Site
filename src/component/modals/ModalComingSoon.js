@@ -45,4 +45,4 @@ const ModalComingSoon = function ({ lang }) {
 };
 
 
-export { ModalComingSoon }
+export default ModalComingSoon

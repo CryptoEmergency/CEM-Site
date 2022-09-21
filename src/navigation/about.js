@@ -15,6 +15,7 @@ const start = function () {
   init(
     null,
     () => {
+      Variable.Modals.push({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div.existing_email } })
       return (
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
           <div class="c-aboutus__whowe c-whowe who_we_are">

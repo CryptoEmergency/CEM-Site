@@ -262,4 +262,4 @@ const ModalAuth = function ({
 };
 
 
-export { ModalAuth };
+export default ModalAuth;
