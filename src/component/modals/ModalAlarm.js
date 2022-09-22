@@ -6,7 +6,7 @@ import {
 import svg from "@assets/svg/index.js";
 
 //"alarm_icon" : "confirm_icon"
-const ModalAlarm = function ({ icon, text }) {
+const ModalAlarm = function ({ icon, text, reload }) {
     //const ModalAlarm = function () {
 
     setTimeout(() => {
