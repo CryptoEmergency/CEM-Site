@@ -7,6 +7,7 @@ import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { Avatar } from '@component/element/Avatar.js';
 import { UserBadge } from '@component/element/UserBadge.js';
+import { If } from '@component/helpers/All.js';
 
 const UserItem = function ({ lang, user }) {
     // console.log("UserItem", user);
@@ -17,6 +18,12 @@ const UserItem = function ({ lang, user }) {
                 <div class="new_professional_card_avatar">
                     <Avatar lang={lang} author={user} />
                 </div>
+                <If
+                    data={user.rank.creator}
+                    dataIf={<div class="user_rank_badge">
+                        <img src={images.content_creator} />
+                    </div>}
+                />
             </div>
             <div class="new_professional_card_main">
                 <a href={`/user/${user.nickname}`}>

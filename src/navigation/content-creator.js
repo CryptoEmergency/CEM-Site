@@ -48,6 +48,7 @@ const start = function () {
             let field = {
                 id,
                 active,
+                group: "creator"
             }
             checks.push(field)
         })
@@ -63,12 +64,18 @@ const start = function () {
     init(
         async () => {
             console.log("First Init")
-
-            let tmp = await mainUsers(21);
+            let checks = [];
+            const field = {
+                id: "online",
+                active: false,
+                group: "creator"
+            }
+            checks.push(field)
+            let tmp = await mainUsers(21, 0, checks);
             users = tmp.list_records;
             nowShow = 21;
             totalRecords = tmp.totalFound;
-            console.log("users = ", users);
+            // console.log("users = ", users);
         },
         () => {
             console.log("Second Init")
@@ -128,39 +135,6 @@ const start = function () {
                                             />
                                         </div>
                                         <div class="c-friends__checkboxes">
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input
-                                                    checked="false"
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="common"
-                                                    required="required"
-                                                    onChange={changeFilterUsers}
-                                                />
-                                                <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
-                                            </div>
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input
-                                                    checked="true"
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="content-makers"
-                                                    required="required"
-                                                    onChange={changeFilterUsers}
-                                                />
-                                                <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
-                                            </div>
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input
-                                                    checked="true"
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="specialists"
-                                                    required="required"
-                                                    onChange={changeFilterUsers}
-                                                />
-                                                <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
-                                            </div>
                                             <div class="checkbox" data-action="friendsFilterCheckbox">
                                                 <input
                                                     class="checkbox__input"
