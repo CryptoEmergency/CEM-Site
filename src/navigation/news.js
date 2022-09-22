@@ -13,13 +13,13 @@ import {
   getNewsItem,
   getNewsCategory,
   getDateFormat,
+  changeLang
 } from "@src/functions.js";
 
 
 
 const start = function () {
-  let activeCategory, newsCategory, newsItem
-
+  let activeCategory, newsCategory, newsItem, prevAdress
   Variable.HeaderShow = true
   Variable.FooterShow = true
 
@@ -28,16 +28,15 @@ const start = function () {
     newsItem = await getNewsItem("news", activeCategory);
     initGo(null, true);
   }
-
-
   init(
     async () => {
       activeCategory = "All"
       newsCategory = await getNewsCategory("news")
-      newsItem = await getNewsItem("news", activeCategory)
+      newsItem = await getNewsItem("news", activeCategory);
+      prevAdress = Variable.dataUrl.adress;
     },
     () => {
-
+      
       return (
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
           <div class="blog_page">
@@ -78,7 +77,10 @@ const start = function () {
                 <div class="blog_news">
                   {newsItem.list_records.map((item) => {
                     return (
-                      <a class="blog_news_item">
+                      <a class="blog_news_item"
+                      href={`/${prevAdress}/show/${item._id}`}
+                        onclick ={changeLang}
+                      >
                         <img src={"/assets/upload/news/" + item.image} />
                         <p class="blog_new_title">{item.title}</p>
                         <span class="blog_new_text">{item.preview}</span>

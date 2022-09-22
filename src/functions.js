@@ -142,7 +142,9 @@ const getDateFormat = function (data, type) {
       } else {
         // return moment(data).format("LL")
         return moment(data).format("DD MMMM YYYY");
-      }
+      };
+    case "userComment":
+      return moment(data).format('YYYY-MM-DD hh:mm')
     default:
       return moment(data).format("YYYY-MM-DD");
   }

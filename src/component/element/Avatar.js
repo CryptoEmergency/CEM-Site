@@ -7,8 +7,6 @@ import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 
 const Avatar = function ({ author, parent = null }) {
-    // console.log("Avatar = ", typeof author.avatar != "undefined" && author.avatar.name);
-
     return (
         <a href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ''}`} class={`${parent == "big_user_avatar" ? "" : "comment_avatar"}`}>
             <div class={`c-avataricon ${parent == "big_user_avatar" ? "" : "c-avataricon--micro micro_user_avatar"}`}>
