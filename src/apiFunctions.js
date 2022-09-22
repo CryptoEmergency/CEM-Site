@@ -48,8 +48,18 @@ const getUserInfoProfile = async function (nickname) {
   }
 };
 
+const sendNewCommentApi = async function (news, comment) {
+  let data = {
+    value: {
+comments : {text:comment},
+    },
+    _id : news._id
+  };
+  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  return response
+}
+
 const getNewsItemInShow = async function (id) {
-  console.log('=8e0182=', id)
   let data = {
     filter: {
       _id: id,
@@ -393,6 +403,7 @@ const getUserAboutProfile = async function (nickname) {
 };
 
 export {
+  sendNewCommentApi,
   mainTrades,
   mainExchanges,
   mainUsers,

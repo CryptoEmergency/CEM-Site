@@ -16,7 +16,7 @@ const BlockUserComment = function ({comments}) {
         comments.map((item) => {
             return <div data-comment_comment={item._id} class="main_comment userComment">
                 {/* {{>avatar author showDate=(getTimeFormat showDate)}}                     */}
-                <Avatar author={item.author} />
+                <Avatar author={item.author} nickNameAndDate = {true} />
                     {/* <a
                         style="display: block; left: 5px;bottom:5px"
                         href={`/user/${item.author.nickname}`}
@@ -26,10 +26,10 @@ const BlockUserComment = function ({comments}) {
                         {/* {item.author.nickname}
                     </a> */}
 
-<div class="">
+{/* <div class="">
         <span>{item.author.nickname}</span><br/>
         <span>{getDateFormat(item.author.showDate,"userComment")}</span>
-    </div>
+    </div> */}
             <div class="comment_body" >
                 <span class="comment_text">{stringToHtml (item.text) }  </span>
             </div>
