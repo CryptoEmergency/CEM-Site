@@ -339,6 +339,16 @@
         height: 100%;
     }
 
+    &__team {
+        position: absolute;
+        bottom: 7px;
+        right: 7px;
+        z-index: 2;
+        background: #ffffff;
+        border-radius: 50%;
+        padding: 3px;
+    }
+
     &__level {
         position: absolute;
         right: 5px;

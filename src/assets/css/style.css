@@ -8259,7 +8259,7 @@ span#procent::after {
 } */
 
 /* ERROR PAGES STYLES*/
-.error_page {
+/* .error_page {
   max-width: 1240px;
   margin: 0 auto;
   padding: 120px 200px;
@@ -8310,7 +8310,7 @@ span#procent::after {
 
 .go_home_button_container:hover .go_home_button {
   background: none;
-}
+} */
 
 .modal_success {
   padding: 20px;

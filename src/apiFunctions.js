@@ -48,8 +48,18 @@ const getUserInfoProfile = async function (nickname) {
   }
 };
 
+const sendNewCommentApi = async function (news, comment) {
+  let data = {
+    value: {
+comments : {text:comment},
+    },
+    _id : news._id
+  };
+  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  return response
+}
+
 const getNewsItemInShow = async function (id) {
-  console.log('=8e0182=', id)
   let data = {
     filter: {
       _id: id,
@@ -67,6 +77,32 @@ const getNewsItemInShow = async function (id) {
     limit: 4,
   };
   let response = checkAnswerApi(await sendApi.create("getNews", data));
+  return response;
+};
+
+const getQuestionItemInShow = async function (id) {
+  console.log("getQuestionItemInShow id=", id)
+
+  let data = {
+    filter: {
+      questionId: id
+    },
+    sort: {
+      showDate: -1
+    },
+    select: {
+      best: 1,
+      author: 1,
+      statistic: 1,
+      showDate: 1,
+      media: 1,
+      text: 1,
+      comments: 1
+    },
+    limit: 12
+  }
+
+  let response = checkAnswerApi(await sendApi.create("getQuestions", data));
   return response;
 };
 
@@ -148,58 +184,6 @@ const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
     showDate: -1,
   };
 
-  // optionsSelect.map((item) => {
-  //     if (item) {
-  //         if (item.active == "all") {
-  //             console.log("active all");
-  //         } else if (item.active == "open") {
-  //             filter.close = false
-  //         } else if (item.active == "closed") {
-  //             filter.close = true
-  //             // filter.bestId = {}
-  //             // filter.bestId["$exist"] = false
-  //         } else if (item.active == "best") {
-  //             filter.close = true
-  //             filter.bestId = {}
-  //             filter.bestId["$exist"] = true
-  //         } else if (item.active == "date") {
-  //             console.log('=9988ee=', "date")
-  //             sort.showDate = -1;
-  //         } else if (item.active == "views") {
-  //             console.log('=19f369=', "views")
-  //             sort["statistic.view"] = -1
-  //         } else if (item.active == "answers") {
-  //             console.log('=952e23=', "answers")
-  //             sort["statistic.answer"] = -1
-  //         }
-  //     }
-
-  // })
-  // if (optionsSelect) {
-  //     if (optionsSelect.active == "all") {
-  //         console.log("active all");
-  //     } else if (optionsSelect.active == "open") {
-  //         filter.close = false
-  //     } else if (optionsSelect.active == "closed") {
-  //         filter.close = true
-  //         // filter.bestId = {}
-  //         // filter.bestId["$exist"] = false
-  //     } else if (optionsSelect.active == "best") {
-  //         filter.close = true
-  //         filter.bestId = {}
-  //         filter.bestId["$exist"] = true
-  //     } else if (optionsSelect.active == "date") {
-  //         console.log('=9988ee=', "date")
-  //         sort.showDate = -1;
-  //     } else if (optionsSelect.active == "views") {
-  //         console.log('=19f369=', "views")
-  //         sort["statistic.view"] = -1
-  //     } else if (optionsSelect.active == "answers") {
-  //         console.log('=952e23=', "answers")
-  //         sort["statistic.answer"] = -1
-  //     }
-  // }
-
   if (optionsSelect) {
     const question = optionsSelect.questions;
     const date = optionsSelect.date;
@@ -278,80 +262,95 @@ const mainExchanges = async () => {
   return response;
 };
 
-const mainUsers = async (additional = NULL, limit = 6, offset = 0) => {
+const mainUsers = async (limit = 6, offset = 0, additional = null) => {
   let filter = {
     "confirm.registrasion": true
   };
 
-  if (additional) {
-    filter["$or"] = [
-      {
-        "rank.basic": true,
-        "rank.creator": false,
-        "rank.expert": false
-      },
-      {
-        "rank.basic": false,
-        "rank.creator": true,
-        "rank.expert": false
-      },
-      {
-        "rank.basic": false,
-        "rank.creator": false,
-        "rank.expert": true
-      }
-    ];
-    switch (additional.id) {
-      case "common":
-        if (additional.active) {
+  console.log('=c14ba1=', limit, offset, additional)
+
+  filter["$or"] = [
+    {
+      "rank.basic": true,
+      "rank.expert": false,
+      "rank.creator": false
+    },
+    {
+      "rank.basic": false,
+      "rank.expert": true,
+      "rank.creator": false
+    },
+    {
+      "rank.basic": false,
+      "rank.expert": false,
+      "rank.creator": true
+    }
+  ];
+
+  if (additional != null) {
+    // console.log('=efba5f=', additional[0].group)
+    if (additional[0].group == "experts") {
+      filter["rank.expert"] = true;
+      delete filter.$or;
+    } else if (additional[0].group == "creator") {
+      filter["rank.creator"] = true;
+      delete filter.$or;
+    }
+    additional.forEach((check) => {
+      if (check.id == "common") {
+        if (check.active) {
           filter["$or"][0]["rank.basic"] = true;
         } else {
           filter["$or"][0]["rank.basic"] = false;
         }
-      case "content-makers":
-        if (additional.active) {
-          filter["$or"][2]["rank.expert"] = true;
+      }
+      if (check.id == "content-makers") {
+        if (check.active) {
+          filter["$or"][2]["rank.creator"] = true;
         } else {
-          filter["$or"][2]["rank.expert"] = false;
+          filter["$or"][2]["rank.creator"] = false;
         }
-      case "specialists":
-        if (additional.active) {
-          filter["$or"][1]["rank.creator"] = true;
+      }
+      if (check.id == "specialists") {
+        if (check.active) {
+          filter["$or"][1]["rank.expert"] = true;
         } else {
-          filter["$or"][1]["rank.creator"] = false;
+          filter["$or"][1]["rank.expert"] = false;
         }
-      case "online":
-        if (additional.active) {
+      }
+      if (check.id == "online") {
+        if (check.active) {
           filter["online"] = true;
         } else {
           delete filter.online;
         }
-    }
-
-    let data = {
-      "filter": filter,
-      "select": {
-        "rank": 1,
-        "social": 1,
-        "subscribe": 1,
-        "nickname": 1,
-        "fullname": 1,
-        "information.speciality": 1,
-        "avatar.name": 1,
-        "frame.name": 1,
-        "statistic": 1,
-        "online": 1,
-        "awards": 1,
-        "status": 1
-      },
-      "limit": limit,
-      "offset": offset
-    }
-
-    console.log("! data filter", data)
-    let response = checkAnswerApi(await sendApi.create("getUsers", data));
-    return response
+      }
+    })
   }
+
+  let data = {
+    "filter": filter,
+    "select": {
+      "rank": 1,
+      "social": 1,
+      "subscribe": 1,
+      "nickname": 1,
+      "fullname": 1,
+      "information.speciality": 1,
+      "avatar.name": 1,
+      "frame.name": 1,
+      "statistic": 1,
+      "online": 1,
+      "awards": 1,
+      "status": 1
+    },
+    "limit": limit,
+    "offset": offset
+  }
+
+  // console.log("! data filter", data)
+  let response = checkAnswerApi(await sendApi.create("getUsers", data));
+  return response
 };
 
 const mainNews = async () => {
@@ -404,11 +403,13 @@ const getUserAboutProfile = async function (nickname) {
 };
 
 export {
+  sendNewCommentApi,
   mainTrades,
   mainExchanges,
   mainUsers,
   mainNews,
   getNewsItemInShow,
+  getQuestionItemInShow,
   getTradeOrExchangeList,
   getUserInfoProfile,
   getUserAboutProfile,

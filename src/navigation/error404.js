@@ -19,16 +19,12 @@ const start = function () {
     () => {
 
       return (
-        <div class="error_page">
-          <h1>{Variable.lang.h.notFound}</h1>
-          <img src={svg["icon/error_404.svg"]} />
-          <p>{Variable.lang.p.returnToMainPage}</p>
-          <a data-action="link" href="/" onclick={siteLink}>
-            <div class="go_home_button_container">
-              <div class="go_home_button">
-                {Variable.lang.button.main_page}
-              </div>
-            </div>
+        <div class="c-error">
+          <h1 class="c-error__title">{Variable.lang.h.notFound}</h1>
+          <img class="c-error__bg" src={svg["icon/error_404"]} />
+          <p class="c-error__text">{Variable.lang.p.returnToMainPage}</p>
+          <a href="/" class="c-button c-button--outline" onclick={siteLink}>
+            <span class="c-button__wrapper">{Variable.lang.button.main_page}</span>
           </a>
         </div>
       )
