@@ -559,7 +559,7 @@ import list from "@src/modalsList.js";
 //     return;
 // }
 
-const mainModal = function () {
+const mainModal = function (reload) {
 
 
 
@@ -571,7 +571,7 @@ const mainModal = function () {
             if (Variable.Modals && Variable.Modals.length != 0) {
                 const modals = Variable.Modals.map((item) => {
                     return (
-                        list[item.name](item.data)
+                        list[item.name](item.data, reload)
                     )
                 })
 

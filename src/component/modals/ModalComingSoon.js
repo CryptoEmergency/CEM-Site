@@ -13,7 +13,7 @@ const showModalCommingSoon = function (e) {
     setValue("modals", "commingSoonModalShow", !getValue("modals", "commingSoonModalShow"))
 }
 
-const ModalComingSoon = function ({ lang }) {
+const ModalComingSoon = function ({ }, reload) {
     // console.log("ModalComingSoon");
     const commingSoonModalShow = getValue("modals", "commingSoonModalShow")
 

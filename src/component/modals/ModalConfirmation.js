@@ -13,7 +13,8 @@ const showModalConfirmation = function (e) {
     setValue("modals", "confirmationModalShow", !getValue("modals", "confirmationModalShow"))
 }
 
-const ModalConfirmation = function ({ lang, wayReg, confirmationTimer, confirmAccount }) {
+//const ModalConfirmation = function ({ lang, wayReg, confirmationTimer, confirmAccount }) {
+const ModalConfirmation = function ({ }, reload) {
     // console.log("ModalConfirmation");
 
     return (

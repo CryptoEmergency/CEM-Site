@@ -11,7 +11,7 @@ import svg from "@assets/svg/index.js";
 import { PhoneCode } from '@component/element/PhoneCode.js';
 import { If } from '@component/helpers/All.js';
 
-const ModalAuth = function ({ reload }) {
+const ModalAuth = function ({ }, reload) {
     console.log("ModalAuth reload", reload);
 
 
