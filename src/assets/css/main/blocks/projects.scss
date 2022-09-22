@@ -32,10 +32,20 @@
 
     .swiper-button-prev {
         top: 36% !important;
+        display: flex;
+
+        img {
+            margin: auto;
+        }
     }
 
     .swiper-button-next {
         top: 36% !important;
+        display: flex;
+
+        img {
+            margin: auto;
+        }
     }
 
     &__more {

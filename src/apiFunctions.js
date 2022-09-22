@@ -49,7 +49,7 @@ const getUserInfoProfile = async function (nickname) {
 };
 
 const getNewsItemInShow = async function (id) {
-    console.log('=8e0182=',id)
+  console.log('=8e0182=', id)
   let data = {
     filter: {
       _id: id,
@@ -66,8 +66,8 @@ const getNewsItemInShow = async function (id) {
     },
     limit: 4,
   };
-    let response = checkAnswerApi(await sendApi.create("getNews", data));
-    return response;
+  let response = checkAnswerApi(await sendApi.create("getNews", data));
+  return response;
 };
 
 // const getExchangeList = async (count) => {
@@ -278,31 +278,80 @@ const mainExchanges = async () => {
   return response;
 };
 
-const mainUsers = async (limit = 6, offset = 0) => {
-    let data = {
-        "filter": {
-            "confirm.registrasion": true
-        },
-        "select": {
-            "rank": 1,
-            "social": 1,
-            "subscribe": 1,
-            "nickname": 1,
-            "fullname": 1,
-            "information.speciality": 1,
-            "avatar.name": 1,
-            "frame.name": 1,
-            "statistic": 1,
-            "online": 1,
-            "awards": 1,
-            "status": 1
-        },
-        "limit": limit,
-        "offset": offset
+const mainUsers = async (additional = NULL, limit = 6, offset = 0) => {
+  let filter = {
+    "confirm.registrasion": true
+  };
+
+  if (additional) {
+    filter["$or"] = [
+      {
+        "rank.basic": true,
+        "rank.creator": false,
+        "rank.expert": false
+      },
+      {
+        "rank.basic": false,
+        "rank.creator": true,
+        "rank.expert": false
+      },
+      {
+        "rank.basic": false,
+        "rank.creator": false,
+        "rank.expert": true
+      }
+    ];
+    switch (additional.id) {
+      case "common":
+        if (additional.active) {
+          filter["$or"][0]["rank.basic"] = true;
+        } else {
+          filter["$or"][0]["rank.basic"] = false;
+        }
+      case "content-makers":
+        if (additional.active) {
+          filter["$or"][2]["rank.expert"] = true;
+        } else {
+          filter["$or"][2]["rank.expert"] = false;
+        }
+      case "specialists":
+        if (additional.active) {
+          filter["$or"][1]["rank.creator"] = true;
+        } else {
+          filter["$or"][1]["rank.creator"] = false;
+        }
+      case "online":
+        if (additional.active) {
+          filter["online"] = true;
+        } else {
+          delete filter.online;
+        }
     }
 
+    let data = {
+      "filter": filter,
+      "select": {
+        "rank": 1,
+        "social": 1,
+        "subscribe": 1,
+        "nickname": 1,
+        "fullname": 1,
+        "information.speciality": 1,
+        "avatar.name": 1,
+        "frame.name": 1,
+        "statistic": 1,
+        "online": 1,
+        "awards": 1,
+        "status": 1
+      },
+      "limit": limit,
+      "offset": offset
+    }
+
+    console.log("! data filter", data)
     let response = checkAnswerApi(await sendApi.create("getUsers", data));
     return response
+  }
 };
 
 const mainNews = async () => {

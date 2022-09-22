@@ -239,7 +239,9 @@ const start = function () {
 
             exchanges = await mainExchanges();
 
-            users = await mainUsers();
+            const data_users = await mainUsers(6);
+
+            users = data_users.list_records;
 
             news = await mainNews();
 

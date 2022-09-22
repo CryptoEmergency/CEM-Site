@@ -34,9 +34,26 @@ const start = function () {
     const toggleFilterUser = function () {
         const filter = document.querySelector('.c-friends__additional');
         const h = filter.offsetHeight;
-        console.log('=edd207=', h)
+        // console.log('=edd207=', h)
         Variable.visibleFilterUser == true ? filter.style = `height: ${h}px;` : filter.style = "height: 0px";
         Variable.visibleFilterUser = !Variable.visibleFilterUser;
+    }
+
+    const changeFilterUsers = async function (e) {
+        const id = e.currentTarget.id;
+        const active = e.currentTarget.checked;
+        console.log("changeFilterUsers", id, active)
+        let field = {
+            id,
+            active,
+        }
+        nowShow = 0
+        const tmp = await mainUsers(field, 21, nowShow);
+        nowShow += tmp.list_records.length
+        totalRecords = tmp.totalFound
+        users = tmp.list_records
+        console.log('=6c032b=', users,)
+        initReload()
     }
 
     init(
@@ -108,19 +125,46 @@ const start = function () {
                                         </div>
                                         <div class="c-friends__checkboxes">
                                             <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input checked="false" class="checkbox__input" type="checkbox" id="common" required="required" />
+                                                <input
+                                                    checked="false"
+                                                    class="checkbox__input"
+                                                    type="checkbox"
+                                                    id="common"
+                                                    required="required"
+                                                    onChange={changeFilterUsers}
+                                                />
                                                 <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
                                             </div>
                                             <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input checked="true" class="checkbox__input" type="checkbox" id="content-makers" required="required" />
+                                                <input
+                                                    checked="true"
+                                                    class="checkbox__input"
+                                                    type="checkbox"
+                                                    id="content-makers"
+                                                    required="required"
+                                                    onChange={changeFilterUsers}
+                                                />
                                                 <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
                                             </div>
                                             <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input checked="true" class="checkbox__input" type="checkbox" id="specialists" required="required" />
+                                                <input
+                                                    checked="true"
+                                                    class="checkbox__input"
+                                                    type="checkbox"
+                                                    id="specialists"
+                                                    required="required"
+                                                    onChange={changeFilterUsers}
+                                                />
                                                 <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
                                             </div>
                                             <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input class="checkbox__input" type="checkbox" id="online" required="required" />
+                                                <input
+                                                    class="checkbox__input"
+                                                    type="checkbox"
+                                                    id="online"
+                                                    required="required"
+                                                    onChange={changeFilterUsers}
+                                                />
                                                 <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
                                             </div>
                                         </div>
