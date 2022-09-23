@@ -12,12 +12,15 @@ import { getNewsItemInShow, sendNewCommentApi } from "@src/apiFunctions.js";
 import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
 import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
+import { CommentInput } from "@src/component/element/CommentInput.js";
 
 const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
   let news, count, scrollHeight;
   let commentText = Variable.setRef();
+  let showInputs = [];
+  
 
   const changeTextarea = (e) => {
     let element = e.target;
@@ -34,17 +37,16 @@ const start = function () {
       scrollHeight = element.scrollHeight;
       count--;
     }
-
-    // if(e.target.scrollHeight <=140){
-    //   e.target.style.cssText = "height:auto;";
-    //     e.target.style.cssText = "height:" + e.target.scrollHeight + "px";
-    //    console.log('=changeTextarea=',e)
-    // console.log('=db5a27=',e.target.scrollHeight)
-
-    // console.log('=db5a27=',e.target.style.cssText)
-    // console.log('=86d61f=',e)
-    // }
   };
+
+  const showInputsClick = (index) => {
+    for (let i =0; i <showInputs.length; i++) {
+      showInputs[i] = false 
+    }
+    showInputs[index] = true;
+    console.log('=showInputs=',showInputs)
+    initGo()
+  }
 
   const sendNewComment = async () => {
     let text = commentText().value.trim();
@@ -63,6 +65,9 @@ const start = function () {
       news = await getNewsItemInShow(Variable.dataUrl.params);
       news = news.list_records[0];
       console.log("=news=", news);
+      for (let i =0; i <news.comments.length; i++) {
+        showInputs[i] = false 
+      }
     },
     () => {
       return (
@@ -143,7 +148,7 @@ const start = function () {
 
             <div class="news_page_comments">
               <h2>{Variable.lang.h.modal_comment}</h2>
-              <div data-type="news_comment" class="create_post_coments">
+              {/* <div data-type="news_comment" class="create_post_coments">
                 <div data-type="news_comment" class="create_post_container1">
                   <textarea
                     wrap="soft"
@@ -153,7 +158,6 @@ const start = function () {
                     ref={commentText}
                     oninput={changeTextarea}
                   ></textarea>
-                  {/* <div data-onpaste="editorPaste" data-keyup="blogPostKeyUp" data-type="news_comment" contenteditable="true" class="create_post_chapter create_post_main_text"></div> */}
                 </div>
 
                 <div
@@ -168,49 +172,18 @@ const start = function () {
                 >
                   <img src={svg["send_message"]} />
                 </div>
-              </div>
+              </div> */}
+              <CommentInput main = {true}  />
               <div data-type="news_comment" class="post_comments">
                 <div
                   style={!news.comments && "display: none;"}
                   class="user_news_item"
                 >
                   {/* {{>userComment list_records=news.comments}}  */}
-                  <BlockUserComment comments={news.comments} />
+                  <BlockUserComment comments={news.comments}  newsId = {news._id} showInputs ={showInputs} showInputsClick ={showInputsClick}/>
                 </div>
               </div>
             </div>
-
-            {/* <div class="news_page_comments">
-            <h2>{Variable.lang.h.modal_comment}</h2>
-            <div data-type="news_show_comment" class="create_post_coments">
-              <div data-type="news_show_comment" class="create_post_container">
-                <div
-                  data-onpaste="editorPaste"
-                  data-keyup="blogPostKeyUp"
-                  data-type="news_show_comment"
-                  contenteditable="true"
-                  class="create_post_chapter create_post_main_text"
-                ></div>
-              </div>
-              <div
-                style="display: none;"
-                data-quote=""
-                data-type="news_show_comment"
-                id="newsCommentSend"
-                data-action="newsCommentSend"
-                data-post_id="{{news._id}}"
-                class="button-container-preview comments_send"
-              >
-                <img  src={svg["send_message"]}/>
-              </div>
-            </div>
-            <div data-type="news_show_comment" class="post_comments"> */}
-            {/* <div {{#if news.comments}}{{else}}style="display: none;"{{/if}}  class="user_news_item">
-                    {{>userComment list_records=news.comments}} 
-                </div> */}
-            {/* </div> */}
-            {/* </div> */}
-            {/* {{/if}} */}
           </div>
         </div>
       );

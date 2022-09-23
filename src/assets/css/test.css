@@ -126,18 +126,18 @@ line-height:1.5rem
 
 .text1{ background: #313543;
 resize: none;
-min-height: 46px;
-padding: 10px 40px 10px 25px;
+max-height: 100%;
+padding: 8px 15px;
 border-radius: 10px;
 border: 1px solid #44495c;
 font-weight: 500;
 color: #fff;
 outline: none;
-display: flex;
 box-sizing: border-box;
 font-size: 16px;
 width: 100%;
 line-height: 1.5rem;
+min-height: 33px;
 }
 .create_post_container1 {
   width: calc(100% - 56px);
