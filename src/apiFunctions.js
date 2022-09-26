@@ -48,16 +48,88 @@ const getUserInfoProfile = async function (nickname) {
   }
 };
 
-const sendNewCommentApi = async function (news, comment) {
-  let data = {
-    value: {
-comments : {text:comment},
+const changeStatistic = async function (e, newsId, commentId, subcommentId) {
+let data;
+console.log('=e=',e)
+console.log('=e.target.dataset.name=',e.target.dataset.name)
+
+data = {
+  value: {
+    comments: {
+      _id: commentId,
     },
-    _id : news._id
-  };
+  },
+  _id: newsId,
+};
+
+
+if(subcommentId){
+  data.value.comments.comments = {
+    evaluation: e.target.dataset.name,
+    _id: subcommentId,
+  }}else{
+    data.value.comments.evaluation = e.target.dataset.name
+  }
+
   let response = checkAnswerApi(await sendApi.create("setNews", data));
-  return response
-}
+  return response;
+
+
+//   data = {
+//     value: {
+//       comments: {
+//         comments: {
+//           evaluation: e.target.dataset.name,
+//           _id: subcommentId,
+//         },
+//         _id: commentId,
+//       },
+//     },
+//     _id: newsId,
+//   };
+// }
+
+  // data = {
+  //   value: {
+  //     comments: {
+  //       comments: {
+  //         quote: item._id,
+  //         text: comment,
+  //       },
+  //       _id: commentId,
+  //     },
+  //   },
+  //   _id: newsId,
+  // };
+};
+
+const sendNewCommentApi = async function (item, comment, newsId, commentId) {
+  let data;
+  if (item.image) {
+    data = {
+      value: {
+        comments: { text: comment },
+      },
+      _id: newsId,
+    };
+  } else {
+    data = {
+      value: {
+        comments: {
+          comments: {
+            quote: item._id,
+            text: comment,
+          },
+          _id: commentId,
+        },
+      },
+      _id: newsId,
+    };
+  }
+  console.log("=data=", data);
+  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  return response;
+};
 
 const getNewsItemInShow = async function (id) {
   let data = {
@@ -81,14 +153,14 @@ const getNewsItemInShow = async function (id) {
 };
 
 const getQuestionItemInShow = async function (id) {
-  console.log("getQuestionItemInShow id=", id)
+  console.log("getQuestionItemInShow id=", id);
 
   let data = {
     filter: {
-      questionId: id
+      questionId: id,
     },
     sort: {
-      showDate: -1
+      showDate: -1,
     },
     select: {
       best: 1,
@@ -97,10 +169,10 @@ const getQuestionItemInShow = async function (id) {
       showDate: 1,
       media: 1,
       text: 1,
-      comments: 1
+      comments: 1,
     },
-    limit: 12
-  }
+    limit: 12,
+  };
 
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
   return response;
@@ -264,27 +336,27 @@ const mainExchanges = async () => {
 
 const mainUsers = async (limit = 6, offset = 0, additional = null) => {
   let filter = {
-    "confirm.registrasion": true
+    "confirm.registrasion": true,
   };
 
-  console.log('=c14ba1=', limit, offset, additional)
+  console.log("=c14ba1=", limit, offset, additional);
 
   filter["$or"] = [
     {
       "rank.basic": true,
       "rank.expert": false,
-      "rank.creator": false
+      "rank.creator": false,
     },
     {
       "rank.basic": false,
       "rank.expert": true,
-      "rank.creator": false
+      "rank.creator": false,
     },
     {
       "rank.basic": false,
       "rank.expert": false,
-      "rank.creator": true
-    }
+      "rank.creator": true,
+    },
   ];
 
   if (additional != null) {
@@ -325,32 +397,32 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
           delete filter.online;
         }
       }
-    })
+    });
   }
 
   let data = {
-    "filter": filter,
-    "select": {
-      "rank": 1,
-      "social": 1,
-      "subscribe": 1,
-      "nickname": 1,
-      "fullname": 1,
+    filter: filter,
+    select: {
+      rank: 1,
+      social: 1,
+      subscribe: 1,
+      nickname: 1,
+      fullname: 1,
       "information.speciality": 1,
       "avatar.name": 1,
       "frame.name": 1,
-      "statistic": 1,
-      "online": 1,
-      "awards": 1,
-      "status": 1
+      statistic: 1,
+      online: 1,
+      awards: 1,
+      status: 1,
     },
-    "limit": limit,
-    "offset": offset
-  }
+    limit: limit,
+    offset: offset,
+  };
 
   // console.log("! data filter", data)
   let response = checkAnswerApi(await sendApi.create("getUsers", data));
-  return response
+  return response;
 };
 
 const mainNews = async () => {
@@ -403,6 +475,7 @@ const getUserAboutProfile = async function (nickname) {
 };
 
 export {
+  changeStatistic,
   sendNewCommentApi,
   mainTrades,
   mainExchanges,

@@ -4,24 +4,24 @@ import {
   Variable,
   stringToHtml,
   getStorage,
-  initGo,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import { If } from "@component/helpers/All.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
 import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCommentComment.js";
+import { changeStatistic } from "@src/apiFunctions.js";
 
-const BlockUserComment = function ({ comments,showInputs,showInputsClick}) {
+const BlockUserComment = function ({
+  comments,
+  activeCommentsInput,
+  changeActiveCommentsInput,
+  newsId,
+}) {
   let myInfo = getStorage("myInfo");
   let auth = getStorage("auth");
- 
-
-
-
-
+  console.log("=comments=", comments);
   return comments.map((item, i) => {
- console.log('=showInputs=',showInputs)
     return (
       <div data-comment_comment={item._id} class="main_comment userComment">
         <Avatar author={item.author} nickNameAndDate={true} />
@@ -35,52 +35,29 @@ const BlockUserComment = function ({ comments,showInputs,showInputsClick}) {
           >
             <div class="comment_icon_type-2">
               <img
-                data-mousedown="evaTouchStart"
-                data-mouseup="evaTouchEnd"
-                data-touchstart="evaTouchStart"
-                data-touchend="evaTouchEnd"
-                data-set="{{data.type}}"
                 src={svg["dislike"]}
+                data-name="minus"
+                onclick={(e) =>changeStatistic(e,newsId,item._id)}
                 class={`comment_icon_type-2-1 minus  ${
                   !auth && "comment_inactive"
                 } `}
-                data-answer-id={item._id}
-                data-answerID="{{data.post_id}}"
-                data-needauth="true"
-                data-type="comment"
-                data-action="answerEvaluation"
               />
             </div>
-            <div class="comment_likes" id="likes_{{_id}}">
-              {item.statistic.rating}
-            </div>
+            <div class="comment_likes">{item.statistic.rating}</div>
             <div class="comment_icon_type-2">
               <img
-                data-mousedown="evaTouchStart"
-                data-mouseup="evaTouchEnd"
-                data-touchstart="evaTouchStart"
-                data-touchend="evaTouchEnd"
-                data-set="{{data.type}}"
                 src={svg["like"]}
+                data-name="plus"
+                onclick={(e) =>changeStatistic(e,newsId,item._id)}
                 class={`comment_icon_type-2-1 plus  ${
                   !auth && "comment_inactive"
                 } `}
-                data-answer-id={item._id}
-                data-answerID="{{data.post_id}}"
-                data-needauth="true"
-                data-type="comment"
-                data-action="answerEvaluation"
               />
             </div>
             <span
-              data-type="{{data.type}}"
-              data-main="{{ _id }}"
-              data-id="{{ _id }}"
-              data-answer_id="{{data.post_id}}"
-              data-action="commentComment"
               class="comment_comment"
-              onclick = {()=> {
-                showInputsClick(i);
+              onclick={() => {
+                changeActiveCommentsInput(item._id);
               }}
             >
               {Variable.lang.button.giveAnswer}
@@ -98,58 +75,23 @@ const BlockUserComment = function ({ comments,showInputs,showInputsClick}) {
                     data={item.author._id === myInfo._id}
                     dataIf={
                       <div>
-                        <div
-                          data-set="{{data.type}}"
-                          class="answer_additionally_item delete"
-                          data-action="answerAdditionallyItem"
-                          data-answer-id={item.author._id}
-                          data-answerID="{{data.post_id}}"
-                          data-type="comment"
-                        >
+                        <div class="answer_additionally_item delete">
                           {Variable.lang.select.delete}
                         </div>
-                        <div
-                          data-set="{{data.type}}"
-                          class="answer_additionally_item edit"
-                          data-action="answerAdditionallyItem"
-                          data-answer-id={item.author._id}
-                          data-answerID="{{data.post_id}}"
-                          data-type="comment"
-                        >
+                        <div class="answer_additionally_item edit">
                           {Variable.lang.button.edit}
                         </div>
                       </div>
                     }
                     dataElse={
                       <div>
-                        <div
-                          data-set="{{data.type}}"
-                          class="answer_additionally_item complain c-text--error"
-                          data-action="answerAdditionallyItem"
-                          data-answer-id={item._id}
-                          data-answerID="{{data.post_id}}"
-                          data-type="comment"
-                        >
+                        <div class="answer_additionally_item complain c-text--error">
                           {Variable.lang.select.complainComment}
                         </div>
-                        <div
-                          data-set="{{data.type}}"
-                          class="answer_additionally_item complain c-text--error"
-                          data-action="answerAdditionallyItem"
-                          data-answer-id={item.author._id}
-                          data-answerID="{{data.post_id}}"
-                          data-type="user"
-                        >
+                        <div class="answer_additionally_item complain c-text--error">
                           {Variable.lang.select.complainUser}
                         </div>
-                        <div
-                          data-set="{{data.type}}"
-                          class="answer_additionally_item block c-text--error"
-                          data-action="answerAdditionallyItem"
-                          data-answer-id={item.author._id}
-                          data-answerID="{{data.post_id}}"
-                          data-type="user"
-                        >
+                        <div class="answer_additionally_item block c-text--error">
                           {Variable.lang.select.blackList}
                         </div>
                       </div>
@@ -160,12 +102,7 @@ const BlockUserComment = function ({ comments,showInputs,showInputsClick}) {
                     dataIf={
                       <div
                         style="color: #32DE80"
-                        data-set="{{data.type}}"
                         class="answer_additionally_item delete"
-                        data-action="doRoleModal"
-                        // data-answer-id={ _id }
-                        data-answerID="{{data.post_id}}"
-                        data-type="comment"
                       >
                         {Variable.lang.select.delete}
                       </div>
@@ -188,11 +125,26 @@ const BlockUserComment = function ({ comments,showInputs,showInputsClick}) {
                     {{/is}}
                 {{/is}} */}
         </div>
-            <div class="user_comment_comment">
-              <BlockUserCommentComment comments={item.comments} />  
-            </div>
-        {showInputs[i] &&  <CommentInput /> }
-        
+        <div class="user_comment_comment">
+          <BlockUserCommentComment
+            comments={item.comments}
+            activeCommentsInput={activeCommentsInput}
+            changeActiveCommentsInput={changeActiveCommentsInput}
+            newsId={newsId}
+            commentId={item._id}
+          />
+        </div>
+        <If
+          data={activeCommentsInput === item._id}
+          dataIf={
+            <CommentInput
+              nickname={item.author.nickname}
+              item={item}
+              newsId={newsId}
+              commentId={item._id}
+            />
+          }
+        />
       </div>
     );
   });

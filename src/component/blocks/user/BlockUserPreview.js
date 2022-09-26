@@ -10,8 +10,6 @@ import { Avatar } from '@component/element/Avatar.js';
 import { percent } from '@component/helpers/All.js';
 
 const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
-    // console.log('=e523ad=', userInfo);
-
     return (
         <div class="c-userpreview">
             <div class="c-userpreview__header">
