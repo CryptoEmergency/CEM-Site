@@ -142,3 +142,8 @@ min-height: 33px;
 .create_post_container1 {
   width: calc(100% - 56px);
 }
+
+
+.modal_1{
+  color:aqua
+}

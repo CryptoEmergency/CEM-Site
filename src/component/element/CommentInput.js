@@ -42,6 +42,7 @@ const CommentInput = function ({ nickname, item, newsId, commentId }) {
         newsId,
         commentId
       );
+      console.log('=responce=',responce)
       commentText().value = "";
       initGo();
     }

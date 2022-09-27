@@ -10,6 +10,8 @@ import {
   delDOM,
   timersClear,
   parsingUrl,
+  initReload,
+  initGo
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 
@@ -62,7 +64,6 @@ data = {
   _id: newsId,
 };
 
-
 if(subcommentId){
   data.value.comments.comments = {
     evaluation: e.target.dataset.name,
@@ -72,36 +73,26 @@ if(subcommentId){
   }
 
   let response = checkAnswerApi(await sendApi.create("setNews", data));
-  return response;
+  console.log('=response=',response)
+ initGo()
 
-
-//   data = {
-//     value: {
-//       comments: {
-//         comments: {
-//           evaluation: e.target.dataset.name,
-//           _id: subcommentId,
-//         },
-//         _id: commentId,
-//       },
-//     },
-//     _id: newsId,
-//   };
-// }
-
-  // data = {
-  //   value: {
-  //     comments: {
-  //       comments: {
-  //         quote: item._id,
-  //         text: comment,
-  //       },
-  //       _id: commentId,
-  //     },
-  //   },
-  //   _id: newsId,
-  // };
 };
+
+const showVotersApi = async (e,id) => {
+  console.log('=id=',id)
+  let data = {
+    filter: {
+      _id:id
+  },
+  select:{
+      evaluation:1
+    }
+};
+
+let response = checkAnswerApi(await sendApi.create("getComments", data));
+console.log('=0d250!!!!!!!!!!!a=',response)
+ return response
+}
 
 const sendNewCommentApi = async function (item, comment, newsId, commentId) {
   let data;
@@ -475,6 +466,7 @@ const getUserAboutProfile = async function (nickname) {
 };
 
 export {
+  showVotersApi,
   changeStatistic,
   sendNewCommentApi,
   mainTrades,

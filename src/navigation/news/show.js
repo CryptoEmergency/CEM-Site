@@ -32,7 +32,6 @@ const start = function () {
       news = news.list_records[0];
     },
     () => {
-      console.log("=9d1651=", news);
       return (
         <div
           class={`${
@@ -40,6 +39,37 @@ const start = function () {
           }`}
         >
           <div class="full_news_container">
+            <If
+              data={true}
+              dataIf={
+                <div
+                  class="modal fade modal_1"
+                  id="xEvaModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="eva_block">
+                        <h3>{Variable.lang.text.evaluated}</h3>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                        <div class="eva_list">
+                          {/* //avatar
+                          +++++<div class = "comment_name show_name_avatar" ></div>
+                          */}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            />
             <div class="full_news_block">
               {/* {{#is myInfo.role 1}}     */}
               {/* {{#is myInfo.role_settings.add_news 1}}  */}
@@ -104,24 +134,23 @@ const start = function () {
               <h2>{Variable.lang.h.modal_comment}</h2>
               {showMainInput && <CommentInput item={news} newsId={news._id} />}
               <If
-              data={news.comments.length >0}
-              dataIf={
-                <div data-type="news_comment" class="post_comments">
-                <div
-                  style={!news.comments && "display: none;"}
-                  class="user_news_item"
-                >
-                  <BlockUserComment
-                    comments={news.comments}
-                    newsId={news._id}
-                    activeCommentsInput={activeCommentsInput}
-                    changeActiveCommentsInput={changeActiveCommentsInput}
-                  />
-                </div>
-              </div>
-              }
-            />
-             
+                data={news.comments.length > 0}
+                dataIf={
+                  <div data-type="news_comment" class="post_comments">
+                    <div
+                      style={!news.comments && "display: none;"}
+                      class="user_news_item"
+                    >
+                      <BlockUserComment
+                        comments={news.comments}
+                        newsId={news._id}
+                        activeCommentsInput={activeCommentsInput}
+                        changeActiveCommentsInput={changeActiveCommentsInput}
+                      />
+                    </div>
+                  </div>
+                }
+              />
             </div>
           </div>
         </div>

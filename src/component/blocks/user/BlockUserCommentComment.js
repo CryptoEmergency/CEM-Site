@@ -9,7 +9,7 @@ import {
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import { If } from "@component/helpers/All.js";
-import { changeStatistic } from "@src/apiFunctions.js";
+import { changeStatistic,showVotersApi } from "@src/apiFunctions.js";
 
 import { CommentInput } from "@src/component/element/CommentInput.js";
 
@@ -20,6 +20,42 @@ const BlockUserCommentComment = function ({
   newsId,
   commentId,
 }) {
+
+
+  let sec = 0;
+  let interval;
+
+  const showVotersAndchangeStatistic = async (e, newsId,commentId, id) => {
+    let response;
+
+    if(e.type === "mousedown"){
+      interval =  setInterval(async() => {
+        sec = sec + 100;
+        console.log('=c68dae=',sec)
+        if (sec === 1500) {
+          clearInterval(interval);
+          response = await showVotersApi(e,id);
+          console.log('=1500=',response)
+        }
+      }, 100);
+      
+    }else{
+      if (0 < sec && sec < 1000) {
+        changeStatistic(e, newsId,commentId,id)
+      } else if (1000 <= sec && sec < 1500) {
+        changeStatistic(e, newsId,commentId,id)
+        response = await showVotersApi(e,id);
+        console.log('=1000-1500=',response)
+      } else if (sec === 0) {
+        changeStatistic(e, newsId,commentId,id)
+      }
+      sec = 0;
+      clearInterval(interval);
+    } 
+    console.log('=end=')
+  };
+
+
   let myInfo = getStorage("myInfo");
   let auth = getStorage("auth");
   const replyToComment = () => {};
@@ -39,7 +75,13 @@ const BlockUserCommentComment = function ({
               <img
                 src={svg["dislike"]}
                 data-name="minus"
-                onclick={(e) =>changeStatistic(e,newsId,commentId,item._id)}
+                onmousedown={(e) =>
+                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                }
+                onmouseup={(e) =>
+                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                }
+                // onclick={(e) =>changeStatistic(e,newsId,commentId,item._id)}
                 class={`comment_icon_type-2-1 minus  ${
                   !auth && "comment_inactive"
                 } `}
@@ -50,7 +92,12 @@ const BlockUserCommentComment = function ({
               <img
                 src={svg["like"]}
                 data-name="plus"
-                onclick={(e) =>changeStatistic(e,newsId,commentId,item._id)}
+                onmousedown={(e) =>
+                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                }
+                onmouseup={(e) =>
+                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                }
                 class={`comment_icon_type-2-1 plus  ${
                   !auth && "comment_inactive"
                 } `}
