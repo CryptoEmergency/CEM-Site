@@ -66,7 +66,6 @@ const start = function () {
 
     init(
         async () => {
-
             if (!Variable.course) {
                 let tpm = checkAnswerApi(await sendApi.getCourse())
                 Variable.course = tpm.list_records[0]

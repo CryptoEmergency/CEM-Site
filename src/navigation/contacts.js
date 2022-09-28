@@ -5,6 +5,7 @@ import {
   Variable,
   init,
   initReload,
+  Static
 } from "@betarost/cemjs";
 import { allValidation } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
@@ -70,6 +71,9 @@ const start = function () {
 
   init(
     () => {
+
+      console.log('=110655=',Static)
+      Static.test = 15
       isValid = false;
       console.log("=8c2675=", Variable.lang.span);
       optionsSelect = {

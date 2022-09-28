@@ -11,12 +11,14 @@ import {
   delDOM,
   timersClear,
   parsingUrl,
-  initGo
+  initGo,
+  initReload
 } from "@betarost/cemjs";
 import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
 import swiperload from "@assets/js/swiper.js";
+import { changeStatistic,showVotersApi } from "@src/apiFunctions.js";
 
 const numberFixWithSpaces = function (num, fix) {
   let x = parseFloat(num).toFixed(fix);
@@ -140,7 +142,6 @@ const getDateFormat = function (data, type) {
       if (secondsBefor < 86400) {
         return moment(data).fromNow();
       } else {
-        // return moment(data).format("LL")
         return moment(data).format("DD MMMM YYYY");
       };
     case "userComment":
@@ -232,6 +233,53 @@ const allValidation = (str, type, condition) => {
     // return str = !str;
   }
 };
+
+const changeActiveCommentsInput = (id) => {
+  Variable.Static.activeCommentsInput = id;
+  Variable.Static.showMainInput = false;
+  initReload();
+};
+
+const showVoter = (type) => {
+  Variable.Static.resultShowVoter = Variable.Static.resultShowVoter.list_records[0].evaluation.filter((item)=>
+    item.type === type);
+  initReload();
+}
+
+let sec = 0;
+let interval;
+const showVotersAndchangeStatistic = async (e,id,commentId, ) => {
+  e.preventDefault()
+  let type = e.target.dataset.name
+  if (e.type === "mousedown" || e.type === "touchstart") {
+    interval = setInterval(async () => {
+      sec = sec + 100;
+      console.log('=3ca4b3=',sec)
+      if (sec === 1500) {
+        clearInterval(interval);
+        Variable.Static.resultShowVoter = await showVotersApi(commentId || id);
+        if (Variable.Static.resultShowVoter !== undefined) {
+          showVoter(type);
+        }
+      }
+    }, 100);
+  } else {
+    clearInterval(interval);
+    sec < 1500 && changeStatistic(e,id,commentId );
+    if (1000 <= sec && sec < 1500) {
+      Variable.Static.resultShowVoter = await showVotersApi( commentId ||  id);
+      showVoter(type);
+    }
+    sec = 0;
+  }
+};
+
+function isEmpty(obj) {
+  for (let key in obj) {
+    return false;
+  }
+  return true;
+}
 
 const changeNewsCategory = async (e, type, init) => {
   const ID = "mainBlock";
@@ -384,6 +432,10 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
 };
 
 export {
+  isEmpty,
+  showVotersAndchangeStatistic,
+  showVoter,
+  changeActiveCommentsInput,
   parseTextforJsx,
   changeNewsCategory,
   getDateFormat,

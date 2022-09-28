@@ -115,9 +115,9 @@ const slider = function () {
     <div
       class="slider"
       onTouchStart={swipeStart}
+       onTouchEnd={swipeEnd}
       onMouseDown={swipeStart}
       onTouchMove={swipeAction}
-      onTouchEnd={swipeEnd}
       onMouseUp={swipeEnd}
     >
       <div class="slider-list">

@@ -6267,7 +6267,7 @@ span#procent::after {
   width: 236px;
 }
 
-/* .answer_additionally_container{
+.answer_additionally_container{
   position: absolute;
   width: 220px;
   left: 100%;
@@ -6278,10 +6278,10 @@ span#procent::after {
   border-radius: 10px;
   border: 1px solid #52586B;
   transition: 0.6s;
-  display: none;
+  /* display: none; */
   cursor: default;
 }
-.answer_additionally{
+ .answer_additionally{
   padding: 10px;
   height: 100%;
   width: 100%;
@@ -6297,7 +6297,7 @@ span#procent::after {
   background: linear-gradient( 45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100% );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-} */
+} 
 /* .comment_likes{
   margin-left: 10px;
   min-width: 25px;

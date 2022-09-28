@@ -4,64 +4,32 @@ import {
   Variable,
   stringToHtml,
   getStorage,
+  initReload
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import { If } from "@component/helpers/All.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
 import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCommentComment.js";
-import { changeStatistic, showVotersApi  } from "@src/apiFunctions.js";
-
-const BlockUserComment = function ({
-  comments,
-  activeCommentsInput,
+import {
   changeActiveCommentsInput,
-  newsId,
-}) {
-  let sec = 0;
-  let interval; let response;
-  // const tmp = async (e,id) =>{
-  //   clearInterval(interval);
-  //   response = await showVotersApi(e,id);
-  // }
-  const showVotersAndchangeStatistic = async (e, newsId, id) => {
-   
+  showVotersAndchangeStatistic,
+  isEmpty
+} from "@src/functions.js";
 
-    if(e.type === "mousedown"){
-      console.log('=e1a27d=',response)
-      interval = setInterval(async() => {
-        sec = sec + 100;
-        console.log('=c68dae=',sec)
-        if (sec === 1500) {
-          clearInterval(interval);
-          response = await showVotersApi(e,id);
-          // tmp(e,id)
-          if(response !== undefined ){
-            console.log('=end=',response)
-       }
-        }
-
-      }, 100);
-      console.log('=e1a27d=',response)
-    }else{
-      if (0 < sec && sec < 1000) {
-        changeStatistic(e, newsId,id)
-      } else if (1000 <= sec && sec < 1500) {
-        changeStatistic(e, newsId,id)
-        response = await showVotersApi(e,id);
-        console.log('=1000-1500=',response)
-      } else if (sec === 0) {
-        changeStatistic(e, newsId,id)
-      }
-      sec = 0;
-      clearInterval(interval);
-    } 
-
-  };
-
+const BlockUserComment = function ({ comments }) {
   let myInfo = getStorage("myInfo");
   let auth = getStorage("auth");
-  console.log("=comments=", comments);
+let answerAdditionallyContainer = Variable.setRef();
+  const showAnswerAdditionallyContainer = () => {
+    answerAdditionallyContainer().style.display = "block"
+initReload()
+     console.log('=9cdanswerAdditionallyContainer031=',answerAdditionallyContainer().style)
+  }
+
+ 
+
+
   return comments.map((item, i) => {
     return (
       <div data-comment_comment={item._id} class="main_comment userComment">
@@ -78,12 +46,10 @@ const BlockUserComment = function ({
               <img
                 src={svg["dislike"]}
                 data-name="minus"
-                onmousedown={(e) =>
-                  showVotersAndchangeStatistic(e, newsId, item._id)
-                }
-                onmouseup={(e) =>
-                  showVotersAndchangeStatistic(e, newsId, item._id)
-                }
+                onTouchStart={(e) => showVotersAndchangeStatistic(e, item._id)}
+                onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
+                onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
+                onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
                 class={`comment_icon_type-2-1 minus  ${
                   !auth && "comment_inactive"
                 } `}
@@ -94,13 +60,11 @@ const BlockUserComment = function ({
               <img
                 src={svg["like"]}
                 data-name="plus"
-                onmousedown={(e) =>
-                  showVotersAndchangeStatistic(e, newsId, item._id)
-                }
-                onmouseup={(e) =>
-                  showVotersAndchangeStatistic(e, newsId, item._id)
-                }
-                // onclick={(e) =>changeStatistic(e,newsId,item._id)}
+                onTouchStart={(e) => showVotersAndchangeStatistic(e, item._id)}
+                onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
+                onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
+                onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
+
                 class={`comment_icon_type-2-1 plus  ${
                   !auth && "comment_inactive"
                 } `}
@@ -120,8 +84,12 @@ const BlockUserComment = function ({
               } `}
               data-action="answerAdditionallyToggle"
             >
-              <img class="answer_additionally_toggle_img" src={svg["points"]} />
-              <div class="answer_additionally_container">
+              <img class="answer_additionally_toggle_img" src={svg["points"]} 
+              onclick = {showAnswerAdditionallyContainer}
+              />
+              <div class="answer_additionally_container"
+              ref={answerAdditionallyContainer}
+              >
                 <div class="answer_additionally">
                   <If
                     data={item.author._id === myInfo._id}
@@ -149,17 +117,19 @@ const BlockUserComment = function ({
                       </div>
                     }
                   />
-                  <If
-                    data={myInfo.status.role}
-                    dataIf={
-                      <div
-                        style="color: #32DE80"
-                        class="answer_additionally_item delete"
-                      >
-                        {Variable.lang.select.delete}
-                      </div>
-                    }
-                  />
+                  {!isEmpty(myInfo)  && (
+                    <If
+                      data={myInfo.status.role}
+                      dataIf={
+                        <div
+                          style="color: #32DE80"
+                          class="answer_additionally_item delete"
+                        >
+                          {Variable.lang.select.delete}
+                        </div>
+                      }
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -180,19 +150,15 @@ const BlockUserComment = function ({
         <div class="user_comment_comment">
           <BlockUserCommentComment
             comments={item.comments}
-            activeCommentsInput={activeCommentsInput}
-            changeActiveCommentsInput={changeActiveCommentsInput}
-            newsId={newsId}
             commentId={item._id}
           />
         </div>
         <If
-          data={activeCommentsInput === item._id}
+          data={Variable.Static.activeCommentsInput === item._id}
           dataIf={
             <CommentInput
               nickname={item.author.nickname}
               item={item}
-              newsId={newsId}
               commentId={item._id}
             />
           }
