@@ -9,56 +9,16 @@ import {
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import { If } from "@component/helpers/All.js";
-import { changeStatistic,showVotersApi } from "@src/apiFunctions.js";
+import { changeActiveCommentsInput, isEmpty, showVotersAndchangeStatistic } from "@src/functions.js";
 
 import { CommentInput } from "@src/component/element/CommentInput.js";
 
 const BlockUserCommentComment = function ({
   comments,
-  activeCommentsInput,
-  changeActiveCommentsInput,
-  newsId,
   commentId,
 }) {
-
-
-  let sec = 0;
-  let interval;
-
-  const showVotersAndchangeStatistic = async (e, newsId,commentId, id) => {
-    let response;
-
-    if(e.type === "mousedown"){
-      interval =  setInterval(async() => {
-        sec = sec + 100;
-        console.log('=c68dae=',sec)
-        if (sec === 1500) {
-          clearInterval(interval);
-          response = await showVotersApi(e,id);
-          console.log('=1500=',response)
-        }
-      }, 100);
-      
-    }else{
-      if (0 < sec && sec < 1000) {
-        changeStatistic(e, newsId,commentId,id)
-      } else if (1000 <= sec && sec < 1500) {
-        changeStatistic(e, newsId,commentId,id)
-        response = await showVotersApi(e,id);
-        console.log('=1000-1500=',response)
-      } else if (sec === 0) {
-        changeStatistic(e, newsId,commentId,id)
-      }
-      sec = 0;
-      clearInterval(interval);
-    } 
-    console.log('=end=')
-  };
-
-
   let myInfo = getStorage("myInfo");
   let auth = getStorage("auth");
-  const replyToComment = () => {};
   return comments.map((item, i) => {
     return (
       <div data-comment_comment={item._id} class="main_comment userComment">
@@ -73,15 +33,19 @@ const BlockUserCommentComment = function ({
           >
             <div class="comment_icon_type-2">
               <img
+            
                 src={svg["dislike"]}
                 data-name="minus"
+                onTouchStart={(e) =>
+                  showVotersAndchangeStatistic(e,commentId, item._id)}
+                onTouchEnd={(e) =>
+                  showVotersAndchangeStatistic(e,commentId, item._id)}
                 onmousedown={(e) =>
-                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                  showVotersAndchangeStatistic(e,commentId, item._id)
                 }
                 onmouseup={(e) =>
-                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                  showVotersAndchangeStatistic(e,commentId, item._id)
                 }
-                // onclick={(e) =>changeStatistic(e,newsId,commentId,item._id)}
                 class={`comment_icon_type-2-1 minus  ${
                   !auth && "comment_inactive"
                 } `}
@@ -90,14 +54,20 @@ const BlockUserCommentComment = function ({
             <div class="comment_likes">{item.statistic.rating}</div>
             <div class="comment_icon_type-2">
               <img
+              
                 src={svg["like"]}
                 data-name="plus"
+                onTouchStart={(e) =>
+                  showVotersAndchangeStatistic(e,commentId, item._id)}
+                onTouchEnd={(e) =>
+                  showVotersAndchangeStatistic(e,commentId, item._id)}
                 onmousedown={(e) =>
-                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                  showVotersAndchangeStatistic(e,commentId, item._id)
                 }
                 onmouseup={(e) =>
-                  showVotersAndchangeStatistic(e, newsId,commentId, item._id)
+                  showVotersAndchangeStatistic(e,commentId, item._id)
                 }
+
                 class={`comment_icon_type-2-1 plus  ${
                   !auth && "comment_inactive"
                 } `}
@@ -146,17 +116,19 @@ const BlockUserCommentComment = function ({
                       </div>
                     }
                   />
-                  <If
-                    data={myInfo.status.role}
-                    dataIf={
-                      <div
-                        style="color: #32DE80"
-                        class="answer_additionally_item delete"
-                      >
-                        {Variable.lang.select.delete}
-                      </div>
-                    }
-                  />
+                  {!isEmpty(myInfo) && (
+                    <If
+                      data={myInfo.status.role}
+                      dataIf={
+                        <div
+                          style="color: #32DE80"
+                          class="answer_additionally_item delete"
+                        >
+                          {Variable.lang.select.delete}
+                        </div>
+                      }
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -175,12 +147,11 @@ const BlockUserCommentComment = function ({
                   {{/is}} */}
         </div>
         <If
-          data={activeCommentsInput === item._id}
+          data={Variable.Static.activeCommentsInput === item._id}
           dataIf={
             <CommentInput
               nickname={item.author.nickname}
               item={item}
-              newsId={newsId}
               commentId={commentId}
             />
           }

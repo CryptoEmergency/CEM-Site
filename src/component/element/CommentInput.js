@@ -10,7 +10,7 @@ import {
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
 
-const CommentInput = function ({ nickname, item, newsId, commentId }) {
+const CommentInput = function ({ nickname, item,commentId }) {
   let count = 1;
   let scrollHeight = 0;
   let commentText = Variable.setRef();
@@ -32,17 +32,14 @@ const CommentInput = function ({ nickname, item, newsId, commentId }) {
   };
 
   const sendNewComment = async () => {
-    console.log('=b1b4f7=',commentText())
     let text = commentText().value.trim();
     let response;
     if (text.length > 0) {
       let responce = await sendNewCommentApi(
         item,
         commentText().value,
-        newsId,
         commentId
       );
-      console.log('=responce=',responce)
       commentText().value = "";
       initGo();
     }

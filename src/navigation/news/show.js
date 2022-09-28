@@ -12,24 +12,22 @@ import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
 import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
+import { Avatar } from "@component/element/Avatar.js";
 
 const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
-  let news, count, showMainInput, activeCommentsInput;
+  let news;
 
-  const changeActiveCommentsInput = (id) => {
-    activeCommentsInput = id;
-    showMainInput = false;
-    initReload();
-  };
   init(
     async () => {
-      activeCommentsInput = "";
-      count = 1;
-      showMainInput = true;
+      Variable.Static.ShowVoterInteval ={ timer:0};
+      Variable.Static.resultShowVoter = undefined;
+      Variable.Static.activeCommentsInput = "";
+      Variable.Static.showMainInput = true
       news = await getNewsItemInShow(Variable.dataUrl.params);
       news = news.list_records[0];
+      Variable.Static.showNewsId = news._id
     },
     () => {
       return (
@@ -63,6 +61,18 @@ const start = function () {
                           {/* //avatar
                           +++++<div class = "comment_name show_name_avatar" ></div>
                           */}
+                          {
+                            Variable.Static.resultShowVoter !== undefined 
+                            &&
+                           ( Variable.Static.resultShowVoter.length  > 0
+                            ?
+                            Variable.Static.resultShowVoter.map((item) => {
+                                return <Avatar author={item.author}/>
+                            })
+                            :
+                              <p>Оценок ещё нет</p>
+                            )
+                          }
                         </div>
                       </div>
                     </div>
@@ -132,7 +142,7 @@ const start = function () {
             </div>
             <div class="news_page_comments">
               <h2>{Variable.lang.h.modal_comment}</h2>
-              {showMainInput && <CommentInput item={news} newsId={news._id} />}
+              {Variable.Static.showMainInput && <CommentInput item={news}/>}
               <If
                 data={news.comments.length > 0}
                 dataIf={
@@ -143,9 +153,6 @@ const start = function () {
                     >
                       <BlockUserComment
                         comments={news.comments}
-                        newsId={news._id}
-                        activeCommentsInput={activeCommentsInput}
-                        changeActiveCommentsInput={changeActiveCommentsInput}
                       />
                     </div>
                   </div>

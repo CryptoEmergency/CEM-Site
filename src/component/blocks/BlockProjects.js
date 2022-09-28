@@ -26,7 +26,6 @@ const doubleProject = function (projects) {
 
 const BlockProjects = function ({ projects }) {
     // console.log("BlockProjects", projects);
-
     return (
         <div class="c-projects">
             <div class="swiper-container">

@@ -11,7 +11,8 @@ import {
   timersClear,
   parsingUrl,
   initReload,
-  initGo
+  initGo,
+  Variable
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 
@@ -50,18 +51,15 @@ const getUserInfoProfile = async function (nickname) {
   }
 };
 
-const changeStatistic = async function (e, newsId, commentId, subcommentId) {
+const changeStatistic = async function (e,commentId, subcommentId) {
 let data;
-console.log('=e=',e)
-console.log('=e.target.dataset.name=',e.target.dataset.name)
-
 data = {
   value: {
     comments: {
       _id: commentId,
     },
   },
-  _id: newsId,
+  _id: Variable.Static.showNewsId,
 };
 
 if(subcommentId){
@@ -73,13 +71,11 @@ if(subcommentId){
   }
 
   let response = checkAnswerApi(await sendApi.create("setNews", data));
-  console.log('=response=',response)
  initGo()
 
 };
 
-const showVotersApi = async (e,id) => {
-  console.log('=id=',id)
+const showVotersApi = async (id) => {
   let data = {
     filter: {
       _id:id
@@ -88,20 +84,18 @@ const showVotersApi = async (e,id) => {
       evaluation:1
     }
 };
-
 let response = checkAnswerApi(await sendApi.create("getComments", data));
-console.log('=0d250!!!!!!!!!!!a=',response)
  return response
 }
 
-const sendNewCommentApi = async function (item, comment, newsId, commentId) {
+const sendNewCommentApi = async function (item, comment, commentId) {
   let data;
   if (item.image) {
     data = {
       value: {
         comments: { text: comment },
       },
-      _id: newsId,
+      _id: Variable.Static.showNewsId,
     };
   } else {
     data = {
@@ -114,10 +108,9 @@ const sendNewCommentApi = async function (item, comment, newsId, commentId) {
           _id: commentId,
         },
       },
-      _id: newsId,
+      _id: Variable.Static.showNewsId,
     };
   }
-  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create("setNews", data));
   return response;
 };
