@@ -87,9 +87,10 @@ const HeaderNotAuth = ({ ref }) => (
                 <a
                     class="log-in"
                     onclick={() => {
-                        console.log("log-in");
-                        Variable.Modals.push({ name: "ModalAuth", data: {} })
-                        console.log(Variable.Modals)
+                        Variable.SetModals({ name: "ModalAuth", data: {} })
+                        //Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div.existing_email } })
+
+                        //console.log("=2=", Variable.Modals)
                     }}
                 >
                     {Variable.lang.button.login}

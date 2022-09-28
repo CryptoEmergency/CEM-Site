@@ -1,7 +1,8 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    initReload
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 
@@ -10,7 +11,8 @@ const ModalAlarm = function ({ icon, text }, reload) {
     //const ModalAlarm = function () {
 
     setTimeout(() => {
-        Variable.Modals = []
+        let tmp = Variable.Modals.pop()
+        initReload("modals")
     }, 4000);
 
     return (

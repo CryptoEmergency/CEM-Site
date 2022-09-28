@@ -206,7 +206,6 @@ const checkAnswerApi = function (data) {
 };
 
 const allValidation = (str, type, condition) => {
-  // console.log(validator);
   if (type == "email") {
     return validator.isEmail(str);
   }

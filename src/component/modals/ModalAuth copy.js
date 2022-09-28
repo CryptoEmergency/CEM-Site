@@ -33,11 +33,11 @@ const ModalAuth = function ({
         <div class="c-modal c-modal--open" id="ModalLogin">
             <section class="c-modal__dialog">
                 <header class="c-modal__header">
-                    <h2 class="c-modal__title">{lang.h.modal_login}</h2>
+                    <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2>
                     <button
                         type="button"
                         class="c-modal__close"
-                        onclick={showModalAuth}
+                        onclick={(showModalAuth)}
                     ></button>
                 </header>
                 <div class="c-modal__body">
@@ -48,7 +48,7 @@ const ModalAuth = function ({
                             class={`c-button c-button--toggler ${wayAuth == "email" && "c-button--active"}`}
                             onClick={(e) => { changeWayAuth(e) }}
                         >
-                            {lang.button.email}
+                            {Variable.lang.button.email}
                         </button>
                         <button
                             data-form_type="login"
@@ -56,7 +56,7 @@ const ModalAuth = function ({
                             class={`c-button c-button--toggler ${wayAuth == "phone" && "c-button--active"}`}
                             onClick={(e) => { changeWayAuth(e) }}
                         >
-                            {lang.button.phone}
+                            {Variable.lang.button.phone}
                         </button>
                     </div>
                     <form id="loginForm">
@@ -65,7 +65,7 @@ const ModalAuth = function ({
                             <div>
                                 {wayAuth == "email" &&
                                     <div class={`reset_by_email_block ${wayAuth == "phone" && "dn"}`}>
-                                        <label for="resetByEmailInput">{lang.label.email}</label>
+                                        <label for="resetByEmailInput">{Variable.lang.label.email}</label>
 
                                         <If
                                             data={formInputs.email.error != ""}
@@ -75,7 +75,7 @@ const ModalAuth = function ({
                                                 </div>
                                             }
                                         />
-                                        {/* <div class="error-div">{lang.error_div.wrong_email}</div> */}
+                                        {/* <div class="error-div">{Variable.lang.error_div.wrong_email}</div> */}
                                         <div class="reset_by_email_block_container">
                                             <input
                                                 data-form_type="login"
@@ -83,7 +83,7 @@ const ModalAuth = function ({
                                                 data-focusout="focusout"
                                                 data-keyup="keyupValidate"
                                                 data-validate_type="email"
-                                                placeholder={lang.placeholder.email}
+                                                placeholder={Variable.lang.placeholder.email}
                                                 id="loginByEmailInput"
                                                 type="text"
                                                 data-type="email"
@@ -97,7 +97,7 @@ const ModalAuth = function ({
                             <div>
                                 {wayAuth == "phone" &&
                                     <div class={`reset_by_mobile_block ${wayAuth == "email" && "dn"}`}>
-                                        <label for="resetByEmailInput">{lang.label.phone}</label>
+                                        <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
 
                                         <If
                                             data={formInputs.phone.error != ""}
@@ -108,7 +108,7 @@ const ModalAuth = function ({
                                             }
                                         />
 
-                                        {/* <div class="error-div">{lang.error_div.wrong_phone}</div> */}
+                                        {/* <div class="error-div">{Variable.lang.error_div.wrong_phone}</div> */}
                                         <div class="reset_by_mobile_block_container c-phonecode">
 
                                             <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
@@ -138,14 +138,14 @@ const ModalAuth = function ({
                             </div>
                         </div>
                         <div class="container-input">
-                            <label for="password">{lang.label.password}</label>
+                            <label for="password">{Variable.lang.label.password}</label>
                             {/* <div class="error-div">
-                                <div class="error-div-variant">{lang.error_div.not_empty_input}</div>
-                                <div class="error-div-variant">{lang.error_div.password}</div>
-                                <div class="error-div-variant">{lang.error_div.password2}</div>
-                                <div class="error-div-variant">{lang.error_div.password3}</div>
-                                <div class="error-div-variant">{lang.error_div.password4}</div>
-                                <div class="error-div-variant">{lang.error_div.password5}</div>
+                                <div class="error-div-variant">{Variable.lang.error_div.not_empty_input}</div>
+                                <div class="error-div-variant">{Variable.lang.error_div.password}</div>
+                                <div class="error-div-variant">{Variable.lang.error_div.password2}</div>
+                                <div class="error-div-variant">{Variable.lang.error_div.password3}</div>
+                                <div class="error-div-variant">{Variable.lang.error_div.password4}</div>
+                                <div class="error-div-variant">{Variable.lang.error_div.password5}</div>
                             </div> */}
 
                             <If
@@ -165,7 +165,7 @@ const ModalAuth = function ({
                                     data-dirty="false"
                                     data-focusout="focusout"
                                     data-validate_type="password"
-                                    placeholder={lang.placeholder.password}
+                                    placeholder={Variable.lang.placeholder.password}
                                     id="auth_pass"
                                     type={`${viewPassword ? 'text' : 'password'}`}
                                     data-type="pass"
@@ -185,7 +185,7 @@ const ModalAuth = function ({
                                 id="auth_remember"
                             />
 
-                            <label class="checkbox__label-2" for="auth_remember">{lang.placeholder.rememberMe}</label>
+                            <label class="checkbox__label-2" for="auth_remember">{Variable.lang.placeholder.rememberMe}</label>
                         </div>
                         <span class="cont_a-link-2" >
                             <a
@@ -193,12 +193,12 @@ const ModalAuth = function ({
                                 id="forgot_password"
                                 onclick={showModalReset}
                             >
-                                {lang.a.forgot_pass}
+                                {Variable.lang.a.forgot_pass}
                             </a>
                         </span>
                     </div>
                     <div class="authAgree">
-                        <span>{lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{lang.a.agree}</a></span>
+                        <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
                     </div>
                 </div>
 
@@ -212,7 +212,7 @@ const ModalAuth = function ({
                             data-active="1"
                         >
                             <span class="c-button__text">
-                                {lang.button.login}
+                                {Variable.lang.button.login}
                             </span>
                         </button>
                         :
@@ -223,7 +223,7 @@ const ModalAuth = function ({
                             data-active="1"
                         >
                             <span class="c-button__text">
-                                {lang.button.login}
+                                {Variable.lang.button.login}
                             </span>
                         </button>
                     }
@@ -233,7 +233,7 @@ const ModalAuth = function ({
                         onclick={showModalRegistartion}
                     >
                         <div class="c-button__wrapper">
-                            {lang.button.registration}
+                            {Variable.lang.button.registration}
                         </div>
                     </a>
                 </footer>
