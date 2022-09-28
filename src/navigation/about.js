@@ -15,9 +15,6 @@ const start = function () {
   init(
     null,
     () => {
-      Variable.Static.go ="go"
-
-      console.log('=480bbd2=',Variable.Static)
       //Variable.Modals.push({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div.existing_email } })
       return (
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>

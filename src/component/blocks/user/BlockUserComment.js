@@ -16,20 +16,13 @@ import {
   showVotersAndchangeStatistic,
   isEmpty
 } from "@src/functions.js";
+import {
+  showAnswerAdditionallyContainer
+} from "@src/functionsE.js";
 
 const BlockUserComment = function ({ comments }) {
   let myInfo = getStorage("myInfo");
   let auth = getStorage("auth");
-let answerAdditionallyContainer = Variable.setRef();
-  const showAnswerAdditionallyContainer = () => {
-    answerAdditionallyContainer().style.display = "block"
-initReload()
-     console.log('=9cdanswerAdditionallyContainer031=',answerAdditionallyContainer().style)
-  }
-
- 
-
-
   return comments.map((item, i) => {
     return (
       <div data-comment_comment={item._id} class="main_comment userComment">
@@ -83,12 +76,12 @@ initReload()
                 !auth && "comment_inactive"
               } `}
               data-action="answerAdditionallyToggle"
+              onclick = {() =>auth && showAnswerAdditionallyContainer(item._id)}
             >
-              <img class="answer_additionally_toggle_img" src={svg["points"]} 
-              onclick = {showAnswerAdditionallyContainer}
-              />
+              <img class="answer_additionally_toggle_img" src={svg["points"]}  />
               <div class="answer_additionally_container"
-              ref={answerAdditionallyContainer}
+              style = {Variable.Static.answerAdditionallyShow === item._id ?
+                "display : block" : "display : none"}
               >
                 <div class="answer_additionally">
                   <If

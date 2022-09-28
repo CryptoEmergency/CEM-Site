@@ -6278,7 +6278,7 @@ span#procent::after {
   border-radius: 10px;
   border: 1px solid #52586B;
   transition: 0.6s;
-  /* display: none; */
+  display: none;
   cursor: default;
 }
  .answer_additionally{

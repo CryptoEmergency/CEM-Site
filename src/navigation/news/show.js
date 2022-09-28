@@ -24,6 +24,7 @@ const start = function () {
       Variable.Static.ShowVoterInteval ={ timer:0};
       Variable.Static.resultShowVoter = undefined;
       Variable.Static.activeCommentsInput = "";
+      Variable.Static.answerAdditionallyShow = "";
       Variable.Static.showMainInput = true
       news = await getNewsItemInShow(Variable.dataUrl.params);
       news = news.list_records[0];

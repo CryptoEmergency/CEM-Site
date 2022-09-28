@@ -11,7 +11,8 @@ import {
   delDOM,
   timersClear,
   parsingUrl,
-  initGo
+  initGo,
+  initReload,
 } from "@betarost/cemjs";
 import list from "@src/routerList.js";
 import validator from "validator";
@@ -29,6 +30,12 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
   return whatReturn;
 };
 
+const showAnswerAdditionallyContainer = (id) => {
+  Variable.Static.answerAdditionallyShow = id;
+initReload()
+}
+
 export {
   ifHaveMedia,
+  showAnswerAdditionallyContainer,
 };

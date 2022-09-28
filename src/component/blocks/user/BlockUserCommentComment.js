@@ -10,7 +10,9 @@ import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import { If } from "@component/helpers/All.js";
 import { changeActiveCommentsInput, isEmpty, showVotersAndchangeStatistic } from "@src/functions.js";
-
+import {
+  showAnswerAdditionallyContainer
+} from "@src/functionsE.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
 
 const BlockUserCommentComment = function ({
@@ -86,9 +88,12 @@ const BlockUserCommentComment = function ({
                 !auth && "comment_inactive"
               } `}
               data-action="answerAdditionallyToggle"
+              onclick = {() =>auth && showAnswerAdditionallyContainer(item._id)}
             >
-              <img class="answer_additionally_toggle_img" src={svg["points"]} />
-              <div class="answer_additionally_container">
+              <img class="answer_additionally_toggle_img" src={svg["points"]}/>
+              <div class="answer_additionally_container"
+              style = {Variable.Static.answerAdditionallyShow === item._id ?
+                "display : block" : "display : none"}>
                 <div class="answer_additionally">
                   <If
                     data={item.author._id === myInfo._id}
