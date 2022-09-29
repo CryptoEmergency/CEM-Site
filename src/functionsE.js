@@ -30,12 +30,20 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
   return whatReturn;
 };
 
+
 const showAnswerAdditionallyContainer = (id) => {
   Variable.Static.answerAdditionallyShow = id;
 initReload()
 }
 
+const closeAnswerAdditionally = (e) => {
+  e.stopPropagation()
+  Variable.Static.answerAdditionallyShow = "";
+}
+
+
 export {
   ifHaveMedia,
   showAnswerAdditionallyContainer,
+  closeAnswerAdditionally,
 };

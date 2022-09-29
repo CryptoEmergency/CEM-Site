@@ -17,8 +17,10 @@ import {
   isEmpty
 } from "@src/functions.js";
 import {
-  showAnswerAdditionallyContainer
+  showAnswerAdditionallyContainer,
+  closeAnswerAdditionally
 } from "@src/functionsE.js";
+
 
 const BlockUserComment = function ({ comments }) {
   let myInfo = getStorage("myInfo");
@@ -88,7 +90,12 @@ const BlockUserComment = function ({ comments }) {
                     data={item.author._id === myInfo._id}
                     dataIf={
                       <div>
-                        <div class="answer_additionally_item delete">
+                        <div class="answer_additionally_item delete"
+                        onclick = {(e) => {
+                          closeAnswerAdditionally(e)
+                          Variable.SetModals({ name: "ModalDelComment", data: {id : item._id, mainCom:true} })
+                        }}
+                        >
                           {Variable.lang.select.delete}
                         </div>
                         <div class="answer_additionally_item edit">
@@ -98,13 +105,23 @@ const BlockUserComment = function ({ comments }) {
                     }
                     dataElse={
                       <div>
-                        <div class="answer_additionally_item complain c-text--error">
+                        <div class="answer_additionally_item complain c-text--error"
+                         onclick = {(e) => {
+                          closeAnswerAdditionally(e)
+                          Variable.SetModals({ name: "ModalComplainComment", data: {id : item._id} })
+                        }}
+                        >
                           {Variable.lang.select.complainComment}
                         </div>
                         <div class="answer_additionally_item complain c-text--error">
                           {Variable.lang.select.complainUser}
                         </div>
-                        <div class="answer_additionally_item block c-text--error">
+                        <div class="answer_additionally_item block c-text--error"
+                          onclick = {(e) => {
+                            closeAnswerAdditionally(e)
+                            Variable.SetModals({ name: "ModalBlackList", data: {id : item.author._id} })
+                          }}
+                        >
                           {Variable.lang.select.blackList}
                         </div>
                       </div>

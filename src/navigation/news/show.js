@@ -12,7 +12,6 @@ import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
 import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
-import { Avatar } from "@component/element/Avatar.js";
 
 const start = function () {
   Variable.HeaderShow = true;
@@ -29,6 +28,7 @@ const start = function () {
       news = await getNewsItemInShow(Variable.dataUrl.params);
       news = news.list_records[0];
       Variable.Static.showNewsId = news._id
+      console.log('=news=',news)
     },
     () => {
       return (
@@ -38,49 +38,6 @@ const start = function () {
           }`}
         >
           <div class="full_news_container">
-            <If
-              data={true}
-              dataIf={
-                <div
-                  class="modal fade modal_1"
-                  id="xEvaModal"
-                  tabindex="-1"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="eva_block">
-                        <h3>{Variable.lang.text.evaluated}</h3>
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                        <div class="eva_list">
-                          {/* //avatar
-                          +++++<div class = "comment_name show_name_avatar" ></div>
-                          */}
-                          {
-                            Variable.Static.resultShowVoter !== undefined 
-                            &&
-                           ( Variable.Static.resultShowVoter.length  > 0
-                            ?
-                            Variable.Static.resultShowVoter.map((item) => {
-                                return <Avatar author={item.author}/>
-                            })
-                            :
-                              <p>Оценок ещё нет</p>
-                            )
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              }
-            />
             <div class="full_news_block">
               {/* {{#is myInfo.role 1}}     */}
               {/* {{#is myInfo.role_settings.add_news 1}}  */}

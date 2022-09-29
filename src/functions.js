@@ -239,13 +239,6 @@ const changeActiveCommentsInput = (id) => {
   Variable.Static.showMainInput = false;
   initReload();
 };
-
-const showVoter = (type) => {
-  Variable.Static.resultShowVoter = Variable.Static.resultShowVoter.list_records[0].evaluation.filter((item)=>
-    item.type === type);
-  initReload();
-}
-
 let sec = 0;
 let interval;
 const showVotersAndchangeStatistic = async (e,id,commentId, ) => {
@@ -257,9 +250,12 @@ const showVotersAndchangeStatistic = async (e,id,commentId, ) => {
       console.log('=3ca4b3=',sec)
       if (sec === 1500) {
         clearInterval(interval);
-        Variable.Static.resultShowVoter = await showVotersApi(commentId || id);
-        if (Variable.Static.resultShowVoter !== undefined) {
-          showVoter(type);
+        sec = 0;
+        let response = await showVotersApi(commentId || id);
+        if (response !== undefined) {
+          response = response.list_records[0].evaluation.filter((item)=>
+    item.type === type);
+    Variable.SetModals({ name: "ModalWhoLike", data: {response} })
         }
       }
     }, 100);
@@ -267,8 +263,10 @@ const showVotersAndchangeStatistic = async (e,id,commentId, ) => {
     clearInterval(interval);
     sec < 1500 && changeStatistic(e,id,commentId );
     if (1000 <= sec && sec < 1500) {
-      Variable.Static.resultShowVoter = await showVotersApi( commentId ||  id);
-      showVoter(type);
+      let response = await showVotersApi( commentId ||  id);
+      response = response.list_records[0].evaluation.filter((item)=>
+      item.type === type);
+      Variable.SetModals({ name: "ModalWhoLike", data: {response} })
     }
     sec = 0;
   }
@@ -434,7 +432,6 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
 export {
   isEmpty,
   showVotersAndchangeStatistic,
-  showVoter,
   changeActiveCommentsInput,
   parseTextforJsx,
   changeNewsCategory,
