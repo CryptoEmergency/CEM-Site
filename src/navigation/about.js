@@ -12,6 +12,8 @@ const start = function () {
   Variable.HeaderShow = true
   Variable.FooterShow = true
 
+
+
   init(
     null,
     () => {
@@ -20,7 +22,14 @@ const start = function () {
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
           <div class="c-aboutus__whowe c-whowe who_we_are">
             <div class="c-whowe__inner who_we_are_inner">
-              <h2 class="c-whowe__title">{Variable.lang.h.who_are_we}</h2>
+              <h2
+                class="c-whowe__title"
+                onClick={() => {
+                  Variable.SetModals({ name: "ModalWhoLike", data: {} })
+                }}
+              >{Variable.lang.h.who_are_we}
+
+              </h2>
               <img
                 class="c-whowe__img about_us_vector-1"
                 src={svg["background/about_us_vector-1"]}

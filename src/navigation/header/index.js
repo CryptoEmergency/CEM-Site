@@ -130,7 +130,7 @@ const mainHeader = function () {
             if (Variable.HeaderShow) {
                 return (
                     <If
-                        data={getStorage("auth")}
+                        data={Variable.auth}
                         dataIf={<HeaderAuth />}
                         dataElse={<HeaderNotAuth
                             ref={test}

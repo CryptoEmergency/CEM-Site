@@ -72,7 +72,9 @@ const start = function () {
   init(
     () => {
 
-      console.log('=110655=',Static)
+
+
+      console.log('=110655=', Static)
       Static.test = 15
       isValid = false;
       console.log("=8c2675=", Variable.lang.span);
@@ -111,9 +113,8 @@ const start = function () {
     () => {
       return (
         <div
-          class={`${
-            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-          } contacts_container`}
+          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+            } contacts_container`}
         >
           <div class="c-container">
             <div class="contacts_content">
@@ -182,7 +183,7 @@ const start = function () {
                           />
                         </div>
                       </div>
-                      <Select options = {optionsSelect.contactsSelectorTitles} callback={selectCallBack} />
+                      <Select options={optionsSelect.contactsSelectorTitles} callback={selectCallBack} />
                       <div>
                         <label for="">{Variable.lang.label.message}</label>
                         <div
