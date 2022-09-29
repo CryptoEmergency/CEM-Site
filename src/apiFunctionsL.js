@@ -3,7 +3,8 @@ import {
   jsxFrag,
   getStorage,
   sendApi,
-  initGo
+  initGo,
+  Variable
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 
@@ -21,7 +22,22 @@ const mainTrades = async () => {
   return response;
 };
 
+const getUserTransactions = async () => {
+  let data = {
+    sort: {
+      showDate: -1
+    },
+    limit: 15, 
+    filter: {
+      'amount.cemd': {$gt: 0},
+      userTo: Variable.myInfo._id
+    }
+  }
+  let response = checkAnswerApi(await sendApi.create("getTransactions", data));
+  return response
+};
+
 
 export {
-  mainTrades,
+  mainTrades, getUserTransactions,
 };

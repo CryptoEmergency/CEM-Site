@@ -6,13 +6,14 @@ import {
     sendApi
 } from "@betarost/cemjs";
 import { siteLink, checkAnswerApi } from '@src/functions.js'
+import { getUserTransactions } from '@src/apiFunctionsL.js'
 import svg from "@assets/svg/index.js";
 import { WalletCard } from '@component/element/user/WalletCard.js';
 
 
 const start = function () {
 
-    let course
+    let course, transactions
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
@@ -20,6 +21,8 @@ const start = function () {
     init(
         async () => {
             course = checkAnswerApi(await sendApi.getCourse()).list_records[0];
+            transactions = await getUserTransactions()
+            console.log(transactions)
         },
         () => {
             console.log("myInfo", Variable.myInfo);
@@ -42,10 +45,7 @@ const start = function () {
                                 />
                             </div>
                         </div>
-
-
-
-
+                        
                     </div>
                 </div>
             )

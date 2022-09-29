@@ -222,8 +222,8 @@ const allValidation = (str, type, condition) => {
     return validator.isStrongPassword(str, {
       minLength: 8,
       minLowercase: 1,
-     minUppercase: 0,
-      minNumbers: 1,
+      minUppercase: 0,
+      minNumbers: 0,
       minSymbols: 1,
     });
   }
