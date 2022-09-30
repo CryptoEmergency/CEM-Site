@@ -64,7 +64,7 @@ const LanguagesList = function (languages) {
 
 }
 
-const HeaderAuth = (data) => (
+const HeaderAuth = () => (
     <div class="c-header__container c-container">
         <div class="c-header__inner">
             <div class="c-header__auth">
@@ -86,7 +86,9 @@ const HeaderAuth = (data) => (
                     {LanguagesList(Variable.languages)}
                 </div>
                 <div class="header_avatar_container">
-                    <Avatar author={Variable.myInfo} />
+
+
+                    {/* <Avatar author={Variable.myInfo} /> */}
                 </div>
                 <div class="auth_user_header">
                     <div class="c-header__notifications c-notification c-notification--active">
@@ -184,8 +186,9 @@ const mainHeader = function () {
             Variable.authModalShow = false;
         },
         () => {
-
+            console.log('=fbfaee=', Variable.auth, Variable.HeaderShow)
             if (Variable.HeaderShow) {
+                console.log('=d84c65=', "g")
                 return (
                     <If
                         data={Variable.auth}
