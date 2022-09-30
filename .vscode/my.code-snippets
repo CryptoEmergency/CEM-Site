@@ -11,11 +11,11 @@
 		"scope": "javascript,typescript",
 		"prefix": "_newBlock",
 		"body": [
-			"import {jsx,jsxFrag,getVariable,getStorage,makeDOM,timersStart,setValue,getValue,sendApi} from '@betarost/cemjs';",
+			"import {jsx,jsxFrag,Variable} from '@betarost/cemjs';",
 			"import svg from '@assets/svg/index.js';",
 			"import images from '@assets/images/index.js';",
 			"",
-			"const $TM_FILENAME_BASE = function ({ lang }) {",
+			"const $TM_FILENAME_BASE = function (data) {",
 			"",
 			"return (",
 			"<div>",
@@ -26,53 +26,38 @@
 			"",
 			"export { $TM_FILENAME_BASE };"
 		],
-		"description": ""
+		"description": "Новый элемент/блок"
 	},
 	"Страница сайта": {
 		"scope": "javascript,typescript",
 		"prefix": "_newPage",
 		"body": [
-			"import {jsx,jsxFrag,getVariable,getStorage,makeDOM,timersStart,setValue,getValue,sendApi} from '@betarost/cemjs';",
-			"import {checkAnswerApi} from '@src/functions.js';",
+			"import {jsx,jsxFrag,init,initReload,Variable,sendApi} from '@betarost/cemjs';",
+			"import svg from '@assets/svg/index.js';",
+			"import images from '@assets/images/index.js';",
 			"",
-			"const startView = function () {",
-			"const lang = getVariable('languages')[getStorage('lang')];",
-			"const show = getValue('mainHeader', 'show');",
+			"const start = function () {",
 			"",
+			"Variable.HeaderShow = false",
+			"Variable.FooterShow = false",
+			"",
+			"init(",
+			"",
+			"async () => {",
+			"",
+			"},",
+			"",
+			"() => {",
 			"return (",
-			"<div class={show && 'c-main__body' || 'c-main__body--noheader'}>",
-			"</div>",
+			" <></>",
 			")",
-			"}",
+			" }",
+			" )",
+			"};",
 			"",
-			"const ID = '${1:mainBlock}'",
-			"",
-			"const defaultInit = async function () {",
-			"setValue('mainHeader', 'show', ${2:true});",
-			"setValue('mainFooter', 'show', ${3:true});",
-			"$4",
-			"}",
-			"",
-			"const afterInit = async function () {",
-			"}",
-			"",
-			"const init = async function (reload) {",
-			"if (!reload){await defaultInit();}",
-			"await makeDOM(await startView(), ID);",
-			"if (!reload){await afterInit();}",
-			"}",
-			"",
-			"export default init;"
+			"export default start;"
 		],
-		"description": ""
-	},
-	"Получение актуального языка": {
-		"scope": "javascript,typescript",
-		"prefix": "_getLang",
-		"body": [
-			"const lang = getVariable('languages')[getStorage('lang')];",
-		],
-		"description": "ппппп"
+		"description": "Страница сайта"
 	},
 	"svg иконка": {
 		"scope": "javascript,typescript",
@@ -90,6 +75,14 @@
 		],
 		"description": ""
 	},
+	"All helpers": {
+		"scope": "javascript,typescript",
+		"prefix": "_helpers",
+		"body": [
+			"import { If } from '@component/helpers/All.js';"
+		],
+		"description": ""
+	},
 	"Имопрт страницы сайта": {
 		"scope": "javascript,typescript",
 		"prefix": "_iPage",
@@ -98,27 +91,19 @@
 		],
 		"description": ""
 	},
-	"Имопрт вспомогательного компонента": {
+	"Имопрт вспомогательного Элемента": {
 		"scope": "javascript,typescript",
-		"prefix": "_iElement",
+		"prefix": "_iElem",
 		"body": [
-			"import {${1:Name}} from '@src/navigation/${2:Name}.js';"
+			"import {${1:Name}} from '@component/element/${2:Name}.js';"
 		],
-		"description": ""
+		"description": "Имопрт вспомогательного Элемента"
 	},
-	"Получить значение": {
+	"Имопрт вспомогательного блока": {
 		"scope": "javascript,typescript",
-		"prefix": "_getValue",
+		"prefix": "_iBlock",
 		"body": [
-			"getValue(ID, '${1:Переменная}')"
-		],
-		"description": ""
-	},
-	"Назначить значение": {
-		"scope": "javascript,typescript",
-		"prefix": "_setValue",
-		"body": [
-			"setValue(ID, '${1:Переменная}', ${2:Значение})"
+			"import {${1:Name}} from '@component/blocks/${2:Name}.js';"
 		],
 		"description": ""
 	},
@@ -127,6 +112,18 @@
 		"prefix": "_log",
 		"body": [
 			"console.log('=$RANDOM_HEX=',${1:Переменная})"
+		],
+		"description": ""
+	},
+	"Перебор массива": {
+		"scope": "javascript,typescript",
+		"prefix": "_map",
+		"body": [
+			"{${1:Переменная}.map((item,index) => {",
+			"return (",
+			"<></>",
+			")",
+			"})}"
 		],
 		"description": ""
 	}

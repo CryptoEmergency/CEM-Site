@@ -178,7 +178,6 @@ const ModalAuth = function ({ }, reload) {
                             class={`c-button c-button--toggler ${wayAuth == "phone" && "c-button--active"}`}
                             onClick={() => {
                                 wayAuth = "phone"
-                                console.log("g")
                                 initReload("modals")
                             }}
                         >

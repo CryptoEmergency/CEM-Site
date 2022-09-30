@@ -9,7 +9,6 @@ import svg from "@assets/svg/index.js";
 
 const If = function ({ data, dataIf, dataElse }) {
 
-    console.log('=232b25=', data)
 
     if (!data || typeof data == "undefined") {
 

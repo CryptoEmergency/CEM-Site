@@ -159,7 +159,9 @@ const HeaderNotAuth = ({ ref }) => (
                     class="c-button c-button--gradient"
                     type="button"
                     id="registration"
-                // onclick={showModalRegistr}
+                    onclick={() => {
+                        Variable.SetModals({ name: "ModalReg", data: {} })
+                    }}
                 >
                     <span class="c-button__text">{Variable.lang.button.registration}</span>
                 </button>
