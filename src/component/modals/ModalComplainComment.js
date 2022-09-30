@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload ,initGo } from "@betarost/cemjs";
 import { sendComplaintApi } from "@src/apifunctionsE.js";
 
 let isChecked, complaint, input, inputValue;
@@ -17,7 +17,6 @@ const changeComplaint = function (e) {
     isCheck
       ? complaint.push(type)
       : (complaint = complaint.filter((item) => item !== type));
-    console.log("=complaint=", complaint);
   }
   initReload("modals");
   return;
@@ -29,44 +28,22 @@ const sendComplaint = (data) => {
     (complaint.length > 0 || input().innerText.trim().length > 2)
   ) {
     if (complaint.length > 0) {
-        Variable.Modals = [];
+       
       sendComplaintApi({ data, complaint });
+       Variable.Modals = [];
+       Variable.Static.answerAdditionally =false
     } else {
         complaint= [`<p>${input().innerText.trim()}</p>`];
-        Variable.Modals = [];
+        
       sendComplaintApi({ data, complaint });
+      Variable.Modals = [];
+      Variable.Static.answerAdditionally =false
     }
+    initReload()
   }
+  
 };
-
-// const changeComplaint2 = (e) => {
-
-//     console.log('=7c2be3=',this)
-
-//     e.preventDefault()
-//      let res;
-//      let isCheck = e.target.checked;
-//     let type = e.target.dataset.complain
-//     isChecked.type = isCheck
-//     console.log('=1051e4=',isChecked.type,e)
-//     initReload("modals")
-
-//     // console.log('=eeeeee=',e.target.dataset.complain,e);
-//     // switch(type) {
-//     //     case "other":
-//     //         console.log('=other=');
-//     //         break;
-//     //     default:
-//     //          isCheck ?
-//     //         complaint.push(type)
-//     //         :
-//     //         complaint = complaint.filter((item)=> item !== type )
-//     //         console.log('=complaint=',complaint)
-//     // }
-// }
-
 const ModalComplainComment = function (data, reload) {
-  console.log("=data=", data);
   if (!reload) {
     isChecked = {
       abusive: Variable.setRef(),

@@ -24,11 +24,13 @@ const start = function () {
       Variable.Static.resultShowVoter = undefined;
       Variable.Static.activeCommentsInput = "";
       Variable.Static.answerAdditionallyShow = "";
-      Variable.Static.showMainInput = true
+      Variable.Static.showMainInput = true;
+      Variable.Static.activeEditInputs = [];
+      Variable.Static.answerAdditionally = false  ;     
       news = await getNewsItemInShow(Variable.dataUrl.params);
       news = news.list_records[0];
       Variable.Static.showNewsId = news._id
-      console.log('=news=',news)
+
     },
     () => {
       return (

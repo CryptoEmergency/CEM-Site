@@ -10,10 +10,11 @@ import {
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
 
-const CommentInput = function ({ nickname, item,commentId }) {
+const CommentInput = function ({ nickname, item,commentId, edit }) {
   let count = 1;
   let scrollHeight = 0;
   let commentText = Variable.setRef();
+  console.log('=commentText=',commentText())
   const changeTextarea = (e) => {
     let element = e.target;
     if (element.textLength === 1 && count == 1) {
@@ -32,13 +33,16 @@ const CommentInput = function ({ nickname, item,commentId }) {
   };
 
   const sendNewComment = async () => {
+    console.log('=text=',commentText())
     let text = commentText().value.trim();
+    
     let response;
     if (text.length > 0) {
       let responce = await sendNewCommentApi(
         item,
-        commentText().value,
-        commentId
+        text,
+        commentId,
+        edit
       );
       commentText().value = "";
       initGo();
@@ -63,6 +67,8 @@ const CommentInput = function ({ nickname, item,commentId }) {
           }`}
         >
           {nickname !== undefined && nickname + ","}
+          {edit !== undefined && item.text}
+
         </textarea>
       </div>
 

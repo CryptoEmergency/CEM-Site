@@ -228,6 +228,10 @@ const allValidation = (str, type, condition) => {
     });
   }
 
+  if(type == "passwordResetPass"){
+    return validator.matches(str, /[0-9]{6}/i);
+  }
+
   if (type == "agreement") {
     return str;
     // return str = !str;

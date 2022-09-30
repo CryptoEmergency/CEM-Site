@@ -33,11 +33,13 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
 
 const showAnswerAdditionallyContainer = (id) => {
   Variable.Static.answerAdditionallyShow = id;
+  console.log('=Variable.Static.answerAdditionally2=',Variable.Static.answerAdditionally)
 initReload()
 }
 
 const closeAnswerAdditionally = (e) => {
   e.stopPropagation()
+  Variable.Static.answerAdditionally =true;
   Variable.Static.answerAdditionallyShow = "";
 }
 

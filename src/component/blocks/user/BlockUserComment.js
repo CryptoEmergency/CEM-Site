@@ -4,7 +4,8 @@ import {
   Variable,
   stringToHtml,
   getStorage,
-  initReload
+  initReload,
+  initGo,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
@@ -14,24 +15,34 @@ import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCom
 import {
   changeActiveCommentsInput,
   showVotersAndchangeStatistic,
-  isEmpty
+  isEmpty,
 } from "@src/functions.js";
 import {
   showAnswerAdditionallyContainer,
-  closeAnswerAdditionally
+  closeAnswerAdditionally,
 } from "@src/functionsE.js";
-
 
 const BlockUserComment = function ({ comments }) {
   let myInfo = getStorage("myInfo");
   let auth = getStorage("auth");
+  console.log('=d0Variable.Static.answerAdditionallyeece1=',Variable.Static.answerAdditionally)
   return comments.map((item, i) => {
     return (
       <div data-comment_comment={item._id} class="main_comment userComment">
         <Avatar author={item.author} nickNameAndDate={true} />
-        <div class="comment_body">
-          <span class="comment_text">{stringToHtml(item.text)} </span>
-        </div>
+        {Variable.Static.activeEditInputs.findIndex((it) => it === item._id) <
+        0 ? (
+          <div class="comment_body">
+            <span class="comment_text">{stringToHtml(item.text)} </span>
+          </div>
+        ) : (
+          <CommentInput
+            item={item}
+            commentId={item._id}
+            edit={{ mainCom: true }}
+          />
+        )}
+
         <div class="comment_icons">
           <div
             style="justify-content: flex-end;"
@@ -59,7 +70,6 @@ const BlockUserComment = function ({ comments }) {
                 onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
                 onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
                 onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
-
                 class={`comment_icon_type-2-1 plus  ${
                   !auth && "comment_inactive"
                 } `}
@@ -75,51 +85,85 @@ const BlockUserComment = function ({ comments }) {
             </span>
             <div
               class={`comment_icon_type-1 answer_additionally_toggle  ${
-                !auth && "comment_inactive"
+                (!auth || Variable.Static.answerAdditionally) && "comment_inactive"
               } `}
               data-action="answerAdditionallyToggle"
-              onclick = {() =>auth && showAnswerAdditionallyContainer(item._id)}
+              onclick={() => (auth &&  !Variable.Static.answerAdditionally ) && showAnswerAdditionallyContainer(item._id)}
             >
-              <img class="answer_additionally_toggle_img" src={svg["points"]}  />
-              <div class="answer_additionally_container"
-              style = {Variable.Static.answerAdditionallyShow === item._id ?
-                "display : block" : "display : none"}
+              <img class="answer_additionally_toggle_img" src={svg["points"]} />
+              <div
+                class="answer_additionally_container"
+                style={
+                  (Variable.Static.answerAdditionallyShow === item._id && !Variable.Static.answerAdditionally )
+                    ? "display : block"
+                    : "display : none"
+                }
               >
                 <div class="answer_additionally">
                   <If
                     data={item.author._id === myInfo._id}
                     dataIf={
                       <div>
-                        <div class="answer_additionally_item delete"
-                        onclick = {(e) => {
-                          closeAnswerAdditionally(e)
-                          Variable.SetModals({ name: "ModalDelComment", data: {id : item._id, mainCom:true} })
-                        }}
+                        <div
+                          class="answer_additionally_item delete"
+                          onclick={(e) => {
+                            closeAnswerAdditionally(e); 
+                            e.target.parentElement.parentElement.parentElement.style="display : none"
+                            Variable.SetModals({
+                              name: "ModalDelComment",
+                              data: { id: item._id, mainCom: true },
+                            });
+                          
+                          }}
                         >
                           {Variable.lang.select.delete}
                         </div>
-                        <div class="answer_additionally_item edit">
+                        <div
+                          class="answer_additionally_item edit"
+                          onclick={(e) => {
+                            closeAnswerAdditionally(e);
+                            if(Variable.Static.activeEditInputs.findIndex(
+                                (it) => it === item._id
+                              ) < 0){
+                                Variable.Static.activeEditInputs.push(item._id);
+                            
+                              }initReload();
+                          }}
+                        >
                           {Variable.lang.button.edit}
                         </div>
                       </div>
                     }
                     dataElse={
                       <div>
-                        <div class="answer_additionally_item complain c-text--error"
-                         onclick = {(e) => {
-                          closeAnswerAdditionally(e)
-                          Variable.SetModals({ name: "ModalComplainComment", data: {id : item._id} })
-                        }}
+                        <div
+                          class="answer_additionally_item complain c-text--error"
+                          onclick={(e) => {
+                            closeAnswerAdditionally(e);
+                            e.target.parentElement.parentElement.parentElement.style="display : none"
+                            Variable.SetModals({
+                              name: "ModalComplainComment",
+                              data: { id: item._id, mainCom: true },
+                            });
+                          }}
                         >
                           {Variable.lang.select.complainComment}
                         </div>
                         <div class="answer_additionally_item complain c-text--error">
                           {Variable.lang.select.complainUser}
                         </div>
-                        <div class="answer_additionally_item block c-text--error"
-                          onclick = {(e) => {
-                            closeAnswerAdditionally(e)
-                            Variable.SetModals({ name: "ModalBlackList", data: {id : item.author._id} })
+                        <div
+                          class="answer_additionally_item block c-text--error"
+                          onclick={(e) => {
+            
+                            closeAnswerAdditionally(e);
+                            e.target.parentElement.parentElement.parentElement.style="display : none"
+                           
+                           
+                            Variable.SetModals({
+                              name: "ModalBlackList",
+                              data: { id: item.author._id },
+                            });
                           }}
                         >
                           {Variable.lang.select.blackList}
@@ -127,7 +171,7 @@ const BlockUserComment = function ({ comments }) {
                       </div>
                     }
                   />
-                  {!isEmpty(myInfo)  && (
+                  {!isEmpty(myInfo) && (
                     <If
                       data={myInfo.status.role}
                       dataIf={

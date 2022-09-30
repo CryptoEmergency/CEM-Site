@@ -5,6 +5,7 @@ import {
   stringToHtml,
   getStorage,
   initGo,
+  initReload
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
@@ -26,9 +27,18 @@ const BlockUserCommentComment = function ({
     return (
       <div data-comment_comment={item._id} class="main_comment userComment">
         <Avatar author={item.author} nickNameAndDate={true} />
-        <div class="comment_body">
+        {Variable.Static.activeEditInputs.findIndex((it)=> 
+          it === item._id
+        ) < 0 ?  <div class="comment_body">
           <span class="comment_text">{stringToHtml(item.text)} </span>
-        </div>
+        </div> 
+        :
+        <CommentInput
+        item={item}
+        commentId={item._id}
+        edit={{mainCom:false}}
+      />
+      }
         <div class="comment_icons">
           <div
             style="justify-content: flex-end;"
@@ -86,14 +96,14 @@ const BlockUserCommentComment = function ({
             </span>
             <div
               class={`comment_icon_type-1 answer_additionally_toggle  ${
-                !auth && "comment_inactive"
+                (!auth || Variable.Static.answerAdditionally) && "comment_inactive"
               } `}
               data-action="answerAdditionallyToggle"
-              onclick = {() =>auth && showAnswerAdditionallyContainer(item._id)}
+              onclick = {() =>(auth &&  !Variable.Static.answerAdditionally ) && showAnswerAdditionallyContainer(item._id)}
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]}/>
               <div class="answer_additionally_container"
-              style = {Variable.Static.answerAdditionallyShow === item._id ?
+              style = { (Variable.Static.answerAdditionallyShow === item._id && !Variable.Static.answerAdditionally ) ?
                 "display : block" : "display : none"}>
                 <div class="answer_additionally">
                   <If
@@ -103,19 +113,35 @@ const BlockUserCommentComment = function ({
                         <div class="answer_additionally_item delete"
                             onclick = {(e) => {
                               closeAnswerAdditionally(e)
+                              e.target.parentElement.parentElement.parentElement.style="display : none"
                               Variable.SetModals({ name: "ModalDelComment", data: {id:  item._id, mainCom:false} })
                             }}
                         >
                           {Variable.lang.select.delete}
                         </div>
-                        <div class="answer_additionally_item edit">
+                        <div class="answer_additionally_item edit"
+                            onclick = {(e) => {
+                              closeAnswerAdditionally(e);
+                              if(Variable.Static.activeEditInputs.findIndex(
+                                (it) => it === item._id
+                              ) < 0){
+                                Variable.Static.activeEditInputs.push(item._id);
+                            
+                              }initReload();
+                            }}>
                           {Variable.lang.button.edit}
                         </div>
                       </div>
                     }
                     dataElse={
                       <div>
-                        <div class="answer_additionally_item complain c-text--error">
+                        <div class="answer_additionally_item complain c-text--error"
+                         onclick = {(e) => {
+                          closeAnswerAdditionally(e)
+                          e.target.parentElement.parentElement.parentElement.style="display : none"
+                          Variable.SetModals({ name: "ModalComplainComment", data: {id : item._id,mainCom:false} })
+                        }}
+                        >
                           {Variable.lang.select.complainComment}
                         </div>
                         <div class="answer_additionally_item complain c-text--error">
@@ -124,6 +150,7 @@ const BlockUserCommentComment = function ({
                         <div class="answer_additionally_item block c-text--error"
                            onclick = {(e) => {
                             closeAnswerAdditionally(e)
+                            e.target.parentElement.parentElement.parentElement.style="display : none"
                             Variable.SetModals({ name: "ModalBlackList", data: {id : item.author._id} })
                           }}
                         >

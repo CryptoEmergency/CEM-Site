@@ -88,29 +88,55 @@ let response = checkAnswerApi(await sendApi.create("getComments", data));
  return response
 }
 
-const sendNewCommentApi = async function (item, comment, commentId) {
-  let data;
+const sendNewCommentApi = async function (item, comment, commentId,edit) {
+  console.log('=096bf2=',item, comment, commentId,edit)
+
+let  data = {
+  value: {
+    comments: {},
+  },
+  _id: Variable.Static.showNewsId,
+};
+
+
+
+  
   if (item.image) {
-    data = {
-      value: {
-        comments: { text: comment },
+    data.value.comments = { text: comment }
+  }else if(edit !== undefined && edit.mainCom){
+    data.value.comments = {
+       text: comment,
+       _id: commentId
+      }
+  }else if(edit !== undefined && !edit.mainCom){
+    data.value.comments = {
+      comments: {
+        text: comment,
+        _id: commentId,
+      }
+      
+  }} else {
+    data.value.comments = {
+      comments: {
+        quote: item._id,
+        text: comment,
       },
-      _id: Variable.Static.showNewsId,
-    };
-  } else {
-    data = {
-      value: {
-        comments: {
-          comments: {
-            quote: item._id,
-            text: comment,
-          },
-          _id: commentId,
-        },
-      },
-      _id: Variable.Static.showNewsId,
-    };
-  }
+      _id: commentId,
+    }
+
+    // data = {
+    //   value: {
+    //     comments: {
+    //       comments: {
+    //         quote: item._id,
+    //         text: comment,
+    //       },
+    //       _id: commentId,
+    //     },
+    //   },
+    //   _id: Variable.Static.showNewsId,
+    // };
+  }console.log('=   Variable.Static.activeEditInputs=',   Variable.Static.activeEditInputs)
   let response = checkAnswerApi(await sendApi.create("setNews", data));
   return response;
 };
@@ -404,7 +430,6 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
     offset: offset,
   };
 
-  // console.log("! data filter", data)
   let response = checkAnswerApi(await sendApi.create("getUsers", data));
   return response;
 };

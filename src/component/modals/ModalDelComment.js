@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload,initGo} from "@betarost/cemjs";
 import { delCom } from "@src/apifunctionsE.js";
 
 const ModalDelComment = function (data, reload) {
@@ -12,9 +12,10 @@ const ModalDelComment = function (data, reload) {
         </header>
         <div class="c-modal__body">
           <div
-            onclick={() => {
-              delCom(data);
-              Variable.Modals = [];
+            onclick={async() => { await delCom(data);
+               Variable.Modals = [];
+               Variable.Static.answerAdditionally =false
+               initGo()
             }}
           >
             {Variable.lang.select.delete}

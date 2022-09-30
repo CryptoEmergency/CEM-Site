@@ -13,6 +13,7 @@ const ModalBlackList = function (data, reload) {
           <div
             onclick={() => {
               sendInBlackList(data);
+              Variable.Static.answerAdditionally =false
               Variable.Modals = [];
             }}
           >

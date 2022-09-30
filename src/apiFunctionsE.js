@@ -31,6 +31,7 @@ const delCom = async (info) => {
       comments: {},
     },
     _id: Variable.Static.showNewsId,
+   
   };
 
   info.mainCom
@@ -44,7 +45,6 @@ const delCom = async (info) => {
           _id: info.id,
         },
       });
-
       let response = checkAnswerApi(await sendApi.create("setNews", data));
 };
 
@@ -53,12 +53,25 @@ const sendComplaintApi = async (info) =>{
   let data = {
     value: {
       comments: {
-        complain:info.complaint,
-        _id:info.data.id
+       
       },
     },
     _id: Variable.Static.showNewsId,
   };
+
+
+  info.data.mainCom
+    ? (data.value.comments = {
+      complain:info.complaint,
+      _id:info.data.id
+      })
+    : (data.value.comments = {
+        comments: {
+          complain:info.complaint,
+        _id:info.data.id
+        },
+      });
+
   console.log('=data=',data)
   let response = checkAnswerApi(await sendApi.create("setNews", data));
 }

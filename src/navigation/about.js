@@ -25,7 +25,7 @@ const start = function () {
               <h2
                 class="c-whowe__title"
                 onClick={() => {
-                  Variable.SetModals({ name: "ModalWhoLike", data: {} })
+                  Variable.SetModals({ name: "ModalReset copy", data: {} })
                 }}
               >{Variable.lang.h.who_are_we}
 
