@@ -148,3 +148,16 @@ min-height: 33px;
  position:fixed;
 
 } */
+
+ .c-modal__dialog .c-modal__body  .reset_password 
+ .reset_password_step2 .reset_password_input_block #resetPassword2 .test12345{
+  font-size: 20px;
+  text-overflow: clip;
+  white-space: nowrap;
+  padding: 15px;
+height:50px;
+width: 50px;
+  background-color: rgb(255, 255, 255);
+color:black;
+text-align: center;
+}
