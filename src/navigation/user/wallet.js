@@ -3,25 +3,120 @@ import {
     jsxFrag,
     init,
     Variable,
+    initReload,
     sendApi
 } from "@betarost/cemjs";
-import { siteLink, checkAnswerApi } from '@src/functions.js'
+import { siteLink, checkAnswerApi, getDateFormat } from '@src/functions.js'
+import { transactionType } from '@src/functionsL.js'
 import { getUserTransactions } from '@src/apiFunctionsL.js'
 import svg from "@assets/svg/index.js";
+import images from "@assets/images/index.js";
 import { WalletCard } from '@component/element/user/WalletCard.js';
+import { If } from '@component/helpers/All.js';
 
 
 const start = function () {
 
-    let course, transactions
+    let course, transactions, count
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
+
+    const showMoreTransactions = async function(){
+        count++;
+        let tmp = await getUserTransactions(count);
+        transactions.list_records.push(...tmp.list_records);
+        initReload();
+    }
+
+    const TransactionsList = function () {
+        const listTransactions = Object.keys(transactions.list_records).map(function (key) {
+            return (
+                <div>
+                    <div class="wallet_transactions_list_item">
+                        <div>
+                            <If
+                                data={transactions.list_records[key].comment == "Registration"}
+                                dataIf={<img src={svg['badge/badge2']} class="transactions_small_badge"/>}
+                            />
+                            <span class="transaction_type">{Variable.lang.p[transactionType(transactions.list_records[key].type)]}</span> 
+                        </div>
+                        <div>
+                            {getDateFormat(transactions.list_records[key].dateCreate)}
+                        </div>
+                        <div>
+                            {transactions.list_records[key].kind}
+                        </div>
+                        <div>
+                            {transactions.list_records[key].amount.cemd}
+                        </div>
+                        <div>
+                            <If
+                                data={transactions.list_records[key].status == 0}
+                                dataIf={<img src={svg['transaction_canceled']}/>}
+                            />
+                            <If
+                                data={transactions.list_records[key].status == 1}
+                                dataIf={<img src={svg['transaction_new']}/>}
+                            />
+                            <If
+                                data={transactions.list_records[key].status == 2}
+                                dataIf={<img src={svg['transaction_in_time']}/>}
+                            />
+                            <If
+                                data={transactions.list_records[key].status == 3}
+                                dataIf={<img src={svg['transaction_success']}/>}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+    
+        return (
+            <div class="wallet_operations_list">
+                <div>
+                    <div class="wallet_transactions_list_item wallet_transactions_list_label">
+                        <div>
+                            {Variable.lang.p.type}
+                        </div>
+                        <div>
+                            {Variable.lang.p.date}
+                        </div>
+                        <div>
+                            {Variable.lang.p.operation}
+                        </div>
+                        <div>
+                            {Variable.lang.p.amount}
+                        </div>
+                        <div>
+                            {Variable.lang.p.status}
+                        </div>
+                    </div>
+                </div>
+                {listTransactions}
+                <a class="btn-view-all-a" onclick={showMoreTransactions}>
+                    <div
+                        class="btn-view-all"
+                        style={
+                            transactions.list_records.length === transactions.totalFound
+                            ? "display: none"
+                            : "display: flex"
+                        }
+                    >
+                        <div>{Variable.lang.button.showMore}</div>
+                    </div>
+                </a>
+            </div>
+        )
+    
+    }
 
     init(
         async () => {
             course = checkAnswerApi(await sendApi.getCourse()).list_records[0];
             transactions = await getUserTransactions()
+            count = 0;
             console.log(transactions)
         },
         () => {
@@ -45,7 +140,7 @@ const start = function () {
                                 />
                             </div>
                         </div>
-                        
+                        {TransactionsList()}
                     </div>
                 </div>
             )

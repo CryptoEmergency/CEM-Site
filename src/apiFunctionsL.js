@@ -22,12 +22,13 @@ const mainTrades = async () => {
   return response;
 };
 
-const getUserTransactions = async () => {
+const getUserTransactions = async (count = 0) => {
   let data = {
     sort: {
       showDate: -1
     },
-    limit: 15, 
+    limit: 5,
+    offset: 5 * count,
     filter: {
       'amount.cemd': {$gt: 0},
       userTo: Variable.myInfo._id
@@ -37,7 +38,22 @@ const getUserTransactions = async () => {
   return response
 };
 
+const getUserBlackList = async (count = 0) => {
+  let data = {
+    select: {
+      blackList: 1
+    },
+    limit: 5,
+    offset: 5 * count,
+    filter: {
+      _id: Variable.myInfo._id
+    }
+  }
+  let response = checkAnswerApi(await sendApi.create("getUsers", data));
+  return response
+}
+
 
 export {
-  mainTrades, getUserTransactions,
+  mainTrades, getUserTransactions, getUserBlackList,
 };
