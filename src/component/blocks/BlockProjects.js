@@ -9,11 +9,15 @@ import {
     getValue,
     Variable
 } from '@betarost/cemjs';
-// import images from "@assets/images/index.js";
-import svg from "@assets/svg/index.js";
 
+import Swiper from 'swiper';
+//import 'swiper/css';
+
+import svg from "@assets/svg/index.js";
 import { ProjectItem } from '@component/element/ProjectItem.js';
 import { ProjectDoubleItem } from '@component/element/ProjectDoubleItem.js';
+
+
 
 const doubleProject = function (projects) {
     let size = 2;
@@ -24,8 +28,69 @@ const doubleProject = function (projects) {
     return doubleProject;
 };
 
-const BlockProjects = function ({ projects }) {
-    // console.log("BlockProjects", projects);
+const BlockProjects = function () {
+
+
+    const projects = [
+        {
+            "title": Variable.lang.a.exchange,
+            "icon": "shuffle",
+            "link": "list-exchange"
+        },
+        {
+            "title": Variable.lang.a.university,
+            "icon": "mortarboard",
+            "link": "university"
+        },
+        {
+            "title": Variable.lang.a.contentCreater,
+            "icon": "graph",
+            "link": "content-creator"
+        },
+        {
+            "title": Variable.lang.a.starups,
+            "icon": "startup",
+            "link": "startups"
+        },
+        {
+            "title": Variable.lang.a.universes,
+            "icon": "meta_universes",
+            "link": "university"
+        },
+        {
+            "title": Variable.lang.a.icoRating,
+            "icon": "star1",
+            "link": "ico-rating"
+        },
+        {
+            "title": Variable.lang.a.trade,
+            "icon": "stock-market",
+            "link": "list-trade"
+        },
+        {
+            "title": Variable.lang.a.news,
+            "icon": "world-news",
+            "link": "news"
+        },
+        {
+            "title": Variable.lang.a.experts,
+            "icon": "user",
+            "link": "experts"
+        },
+        {
+            "title": Variable.lang.a.nft,
+            "icon": "nft_icon",
+            "link": "nft-market"
+        },
+        {
+            "title": Variable.lang.a.career,
+            "icon": "careers_icon",
+            "link": "experts"
+        },
+    ];
+
+
+
     return (
         <div class="c-projects">
             <div class="swiper-container">
@@ -34,7 +99,7 @@ const BlockProjects = function ({ projects }) {
                         {
                             projects.map(function (item) {
                                 return (
-                                    <ProjectItem lang={Variable.lang} project={item} />
+                                    <ProjectItem project={item} />
                                 )
                             })
                         }
@@ -51,11 +116,11 @@ const BlockProjects = function ({ projects }) {
                             doubleProject(projects).map(function (item) {
                                 if (item.length == 2) {
                                     return (
-                                        <ProjectDoubleItem lang={Variable.lang} projects={item} />
+                                        <ProjectDoubleItem projects={item} />
                                     )
                                 } else {
                                     return (
-                                        <ProjectItem lang={Variable.lang} project={item} />
+                                        <ProjectItem project={item[0]} />
                                     )
                                 }
                             })
@@ -70,7 +135,10 @@ const BlockProjects = function ({ projects }) {
             <div class="c-projects__more main_page_show_more">
                 {Variable.lang.button.see_all}
             </div>
+
         </div>
+
+
     )
 }
 

@@ -559,18 +559,16 @@ import list from "@src/modalsList.js";
 //     return;
 // }
 
-const mainModal = function () {
-
-
+const mainModal = async function () {
 
 
     init(
         () => {
-            console.log("modals", Variable.Modals)
+            // console.log("modals", Variable.Modals)
             //Variable.Modals = []
         },
         (reload) => {
-            console.log("modals reload", Variable.Modals, reload)
+
 
             if (Variable.Modals && Variable.Modals.length != 0) {
                 const modals = Variable.Modals.map((item) => {
@@ -592,6 +590,7 @@ const mainModal = function () {
 
         },
         "modals")
+    return
 };
 
 export { mainModal };

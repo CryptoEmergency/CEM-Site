@@ -179,7 +179,7 @@ const HeaderNotAuth = ({ ref }) => (
 )
 
 
-const mainHeader = function () {
+const mainHeader = async function () {
     let test
     test = Variable.setRef()
     init(
@@ -188,9 +188,9 @@ const mainHeader = function () {
             Variable.authModalShow = false;
         },
         () => {
-            console.log('=fbfaee=', Variable.auth, Variable.HeaderShow)
+
             if (Variable.HeaderShow) {
-                console.log('=d84c65=', "g")
+
                 return (
                     <If
                         data={Variable.auth}
@@ -210,5 +210,6 @@ const mainHeader = function () {
                 )
             }
         }, "mainHeader")
+    return
 }
 export { mainHeader }

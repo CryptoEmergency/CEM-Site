@@ -293,7 +293,7 @@ const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
     limit: limit,
     offset: offset,
   };
-  console.log(" data filter", data);
+
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
   return response;
 };
@@ -331,7 +331,7 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
     "confirm.registrasion": true,
   };
 
-  console.log("=c14ba1=", limit, offset, additional);
+
 
   filter["$or"] = [
     {

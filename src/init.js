@@ -9,10 +9,7 @@ const initApp = async function () {
     await mainHeader();
     await mainFooter();
     await mainModal();
-    initGo("newPage")
-    setTimeout(() => {
-        document.getElementById("page_loader").remove();
-    }, 500);
+    await initGo("newPage")
 }
 
 export { initApp }

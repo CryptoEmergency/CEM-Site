@@ -27,6 +27,10 @@ import { BlockUsers } from '@component/blocks/BlockUsers.js';
 import { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
 
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
+
+
 const start = function () {
 
     let projects,
@@ -40,6 +44,8 @@ const start = function () {
         // totalRecords,
         // nowShow,
         optionsSelect;
+
+    let swiperitem = {}
 
     const selectCallBack = async function (value, nameOptions) {
         console.log("selectCallBack", value, nameOptions);
@@ -63,13 +69,97 @@ const start = function () {
     Variable.HeaderShow = true
     Variable.FooterShow = true
 
+    const swiperLoad = function () {
+        //console.log('=66d8ba= swiperLoad', swiperitem)
+        // if (!swiperitem.one) {
+        swiperitem.one = new Swiper('#swiper-one', {
+            direction: 'horizontal',
+            navigation: {
+                nextEl: '#next-icons',
+                prevEl: '#prev-icons',
+            },
+            breakpoints: {
+                20: {
+                    slidesPerView: 2,
+                    spaceBetween: 15
+                },
+                320: {
+                    slidesPerView: 3,
+                    spaceBetween: 15
+                },
+                425: {
+                    slidesPerView: 3,
+                    spaceBetween: 25
+                },
+                480: {
+                    slidesPerView: 3,
+                    spaceBetween: 65
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 88
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 158
+                },
+                1240: {
+                    slidesPerView: 9,
+                    spaceBetween: 66,
+                },
+            },
+        });
+        // }
+
+        // if (!swiperitem.desktop) {
+
+        swiperitem.desktop = new Swiper('#swiper-desktop', {
+            direction: 'horizontal',
+            navigation: {
+                nextEl: '#next-desktop-icons',
+                prevEl: '#prev-desktop-icons',
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 2,
+                    spaceBetween: 85
+                },
+                375: {
+                    slidesPerView: 2,
+                    spaceBetween: 125
+                },
+                425: {
+                    slidesPerView: 3,
+                    spaceBetween: 35
+                },
+                480: {
+                    slidesPerView: 3,
+                    spaceBetween: 65
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 88
+                },
+                1024: {
+                    slidesPerView: 6,
+                    spaceBetween: 40
+                },
+                1240: {
+                    slidesPerView: 9,
+                    spaceBetween: 30,
+                },
+            },
+        });
+        // }
+        return
+
+    }
 
     init(
         async () => {
-            if (!Variable.course) {
-                let tpm = checkAnswerApi(await sendApi.getCourse())
-                Variable.course = tpm.list_records[0]
-            }
+            Variable.SwiperLoad.push(swiperLoad)
+            //let tpm = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse }))
+            Variable.course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
             timersStart("Course", timerCourse, 10000)
 
             optionsSelect = {
@@ -106,63 +196,7 @@ const start = function () {
 
             // questions = await mainQuestions()
 
-            projects = [
-                {
-                    "title": Variable.lang.a.exchange,
-                    "icon": "shuffle",
-                    "link": "list-exchange"
-                },
-                {
-                    "title": Variable.lang.a.university,
-                    "icon": "mortarboard",
-                    "link": "university"
-                },
-                {
-                    "title": Variable.lang.a.contentCreater,
-                    "icon": "graph",
-                    "link": "content-creator"
-                },
-                {
-                    "title": Variable.lang.a.starups,
-                    "icon": "startup",
-                    "link": "startups"
-                },
-                {
-                    "title": Variable.lang.a.universes,
-                    "icon": "meta_universes",
-                    "link": "university"
-                },
-                {
-                    "title": Variable.lang.a.icoRating,
-                    "icon": "star1",
-                    "link": "ico-rating"
-                },
-                {
-                    "title": Variable.lang.a.trade,
-                    "icon": "stock-market",
-                    "link": "list-trade"
-                },
-                {
-                    "title": Variable.lang.a.news,
-                    "icon": "world-news",
-                    "link": "news"
-                },
-                {
-                    "title": Variable.lang.a.experts,
-                    "icon": "user",
-                    "link": "experts"
-                },
-                {
-                    "title": Variable.lang.a.nft,
-                    "icon": "nft_icon",
-                    "link": "nft-market"
-                },
-                {
-                    "title": Variable.lang.a.career,
-                    "icon": "careers_icon",
-                    "link": "experts"
-                },
-            ];
+
 
             banners = [
                 {
@@ -247,17 +281,16 @@ const start = function () {
         },
         () => {
 
-
-
             return (
                 <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     <BlockPreview />
-                    <BlockProjects projects={projects} />
+                    <BlockProjects />
+
                     <div class="c-main__wrapperbg">
                         {/* <BlockQuestions /> */}
                         <div class="c-questions">
                             <div class="c-questions__header">
-                                <div class="c-questions__searchblock c-search">
+                                {/* <div class="c-questions__searchblock c-search">
                                     <div class="c-search__container">
                                         <div class="c-search__wrapper">
                                             <img class="c-search__icon" src={svg.search_icon} />
@@ -280,9 +313,9 @@ const start = function () {
                                     </div>
 
 
-                                </div>
+                                </div> */}
 
-                                <div class="c-questions__filter questions_filter">
+                                {/* <div class="c-questions__filter questions_filter">
                                     <Select
                                         options={optionsSelect.questions}
                                         callback={selectCallBack}
@@ -296,14 +329,14 @@ const start = function () {
                                     <div class="c-questions__lang">
                                         {Variable.lang.lang}
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <h4>{Variable.lang.h.lastQuestions}</h4>
 
 
                             </div>
 
-                            <div class="c-questions__list questions-blocks">
+                            {/* <div class="c-questions__list questions-blocks">
                                 {
                                     questions.map((item) => {
                                         console.log("item=", item);
@@ -321,11 +354,11 @@ const start = function () {
                                 >
                                     <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
                                 </a>
-                            </div>
+                            </div> */}
                         </div>
 
 
-                        <div class="c-main__wrapperbg2">
+                        {/* <div class="c-main__wrapperbg2">
                             <BlockBanners banners={banners} />
                             <BlockTrade lang={Variable.lang} trades={trades} />
                             <div class="top_professionals_container">
@@ -334,8 +367,9 @@ const start = function () {
                                 <BlockMainNews lang={Variable.lang} news={news} />
                                 <BlockInfoPartners lang={Variable.lang} partners={partners} />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
+
                 </div>
             )
         })

@@ -6,8 +6,7 @@ import {
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 
-const ProjectDoubleItem = function ({ lang, projects }) {
-    // console.log("ProjectDoubleItem", projects);
+const ProjectDoubleItem = function ({ projects }) {
 
     return (
         <div class="c-projects__item c-projects__item--double swiper-slide slide-item">

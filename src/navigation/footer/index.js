@@ -16,8 +16,7 @@ import tiktok from '@assets/svg/tiktok-icon.svg'
 import { clickCancel, siteLink, changeLang } from '@src/functions.js'
 
 
-const mainFooter = function () {
-
+const mainFooter = async function () {
     let socialIcon, collapseBodyShow
 
     const showSocial = function (e) {
@@ -278,5 +277,6 @@ const mainFooter = function () {
                 )
             }
         }, "mainFooter")
+    return
 }
 export { mainFooter }

@@ -51,71 +51,73 @@ const getUserInfoProfile = async function (nickname) {
   }
 };
 
-const changeStatistic = async function (e,commentId, subcommentId) {
-let data;
-data = {
-  value: {
-    comments: {
-      _id: commentId,
+const changeStatistic = async function (e, commentId, subcommentId) {
+  let data;
+  data = {
+    value: {
+      comments: {
+        _id: commentId,
+      },
     },
-  },
-  _id: Variable.Static.showNewsId,
-};
+    _id: Variable.Static.showNewsId,
+  };
 
-if(subcommentId){
-  data.value.comments.comments = {
-    evaluation: e.target.dataset.name,
-    _id: subcommentId,
-  }}else{
+  if (subcommentId) {
+    data.value.comments.comments = {
+      evaluation: e.target.dataset.name,
+      _id: subcommentId,
+    }
+  } else {
     data.value.comments.evaluation = e.target.dataset.name
   }
 
   let response = checkAnswerApi(await sendApi.create("setNews", data));
- initGo()
+  initGo()
 
 };
 
 const showVotersApi = async (id) => {
   let data = {
     filter: {
-      _id:id
-  },
-  select:{
-      evaluation:1
+      _id: id
+    },
+    select: {
+      evaluation: 1
     }
-};
-let response = checkAnswerApi(await sendApi.create("getComments", data));
- return response
+  };
+  let response = checkAnswerApi(await sendApi.create("getComments", data));
+  return response
 }
 
-const sendNewCommentApi = async function (item, comment, commentId,edit) {
-  console.log('=096bf2=',item, comment, commentId,edit)
+const sendNewCommentApi = async function (item, comment, commentId, edit) {
+  console.log('=096bf2=', item, comment, commentId, edit)
 
-let  data = {
-  value: {
-    comments: {},
-  },
-  _id: Variable.Static.showNewsId,
-};
+  let data = {
+    value: {
+      comments: {},
+    },
+    _id: Variable.Static.showNewsId,
+  };
 
 
 
-  
+
   if (item.image) {
     data.value.comments = { text: comment }
-  }else if(edit !== undefined && edit.mainCom){
+  } else if (edit !== undefined && edit.mainCom) {
     data.value.comments = {
-       text: comment,
-       _id: commentId
-      }
-  }else if(edit !== undefined && !edit.mainCom){
+      text: comment,
+      _id: commentId
+    }
+  } else if (edit !== undefined && !edit.mainCom) {
     data.value.comments = {
       comments: {
         text: comment,
         _id: commentId,
       }
-      
-  }} else {
+
+    }
+  } else {
     data.value.comments = {
       comments: {
         quote: item._id,
@@ -136,7 +138,7 @@ let  data = {
     //   },
     //   _id: Variable.Static.showNewsId,
     // };
-  }console.log('=   Variable.Static.activeEditInputs=',   Variable.Static.activeEditInputs)
+  } console.log('=   Variable.Static.activeEditInputs=', Variable.Static.activeEditInputs)
   let response = checkAnswerApi(await sendApi.create("setNews", data));
   return response;
 };
@@ -311,7 +313,7 @@ const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
     limit: limit,
     offset: offset,
   };
-  console.log(" data filter", data);
+
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
   return response;
 };
@@ -349,7 +351,7 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
     "confirm.registrasion": true,
   };
 
-  console.log("=c14ba1=", limit, offset, additional);
+
 
   filter["$or"] = [
     {

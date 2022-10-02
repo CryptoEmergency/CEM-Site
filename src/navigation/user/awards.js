@@ -1,6 +1,5 @@
 import { jsx, jsxFrag, init, initReload, Variable, sendApi } from '@betarost/cemjs';
 //import { Swiper, EffectCards } from "swiper";
-//import { Swiper } from "swiper/react";
 //import Swiper, { EffectCards, SwiperSlide } from 'swiper';
 // import 'swiper/css';
 // import "swiper/css/effect-cards";

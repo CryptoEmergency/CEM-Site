@@ -8,17 +8,16 @@ import { timerTik } from '@src/functions.js'
 import list from "@src/routerList.js";
 
 const mainBlock = async function () {
-
     init(
         () => {
             timersClear();
             timersStart("TikTok", timerTik, 1500)
         },
-        () => {
+        async () => {
 
             let page = Variable.dataUrl.adress;
             if (!page || page == "") {
-                list.index();
+                await list.index();
                 return;
             }
 
@@ -29,14 +28,15 @@ const mainBlock = async function () {
             }
 
             if (!list[page]) {
-                list.error404();
+                await list.error404();
                 return;
             }
 
-            list[page]();
+            await list[page]();
             return;
 
         }, "newPage")
+    return
 }
 
 export { mainBlock }

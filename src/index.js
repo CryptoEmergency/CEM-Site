@@ -1,10 +1,9 @@
 import {
-    setVariable,
     initStorage,
+    initCache,
     addListen,
     parsingUrl,
-    Variable,
-    getStorage
+    Variable
 } from '@betarost/cemjs'
 import "@assets/css/index.js"
 import "@assets/js/index.js"
@@ -13,15 +12,17 @@ import { default as languages } from '@src/languages/index.js'
 import { clickHide } from '@src/functions.js'
 import { test } from '@src/test.js'
 Variable.languages = languages
+Variable.load = false
 Variable.clickHide = clickHide
-Variable.outHideWindows = []
-//Variable.Modals = []
-setVariable({ languages: languages });
-initStorage();
-Variable.auth = getStorage("auth")
-Variable.myInfo = getStorage("myInfo")
-addListen();
-parsingUrl();
-Variable.lang = Variable.languages[getStorage("lang")]
-initApp();
-test();
+//Variable.outHideWindows = []
+
+const start = async function () {
+    await initCache();
+    await initStorage();
+    await addListen();
+    await parsingUrl();
+    await initApp();
+    await test();
+}
+
+start();
