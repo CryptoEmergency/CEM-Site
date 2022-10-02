@@ -13,7 +13,7 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import { Select } from '@component/element/Select.js';
-import { timerCourse, checkAnswerApi } from '@src/functions.js'
+import { timerCourse, checkAnswerApi, siteLink } from '@src/functions.js'
 import { mainQuestions, mainTrades, mainExchanges, mainUsers, mainNews } from "@src/apiFunctions.js";
 
 import { QuestionItem } from '@component/element/QuestionItem.js';
@@ -26,6 +26,7 @@ import { BlockExchange } from '@component/blocks/BlockExchange.js';
 import { BlockUsers } from '@component/blocks/BlockUsers.js';
 import { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
+
 
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
@@ -41,6 +42,7 @@ const start = function () {
         exchanges,
         users,
         news,
+        filters,
         // totalRecords,
         // nowShow,
         optionsSelect;
@@ -159,40 +161,52 @@ const start = function () {
         async () => {
             Variable.SwiperLoad.push(swiperLoad)
             //let tpm = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse }))
-            Variable.course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
+            Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
             timersStart("Course", timerCourse, 10000)
+
+            Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
+                {
+                    setIntervalFunc: async () => {
+                        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions())
+                    }
+                }
+            )
+            )
+
+            console.log('=9b0245=', Variable.MainQuestions)
+            filters = getStorage("filters")
 
             optionsSelect = {
                 questions: {
                     nameOptions: "questions",
                     title: Variable.lang.span.sort,
                     items: [
-                        { text: Variable.lang.select.showAllQuestions, value: "all", active: true },
+                        { text: Variable.lang.select.showAllQuestions, value: "all" },
                         { text: Variable.lang.select.openQuestions, value: "open" },
                         { text: Variable.lang.select.closeQuestions, value: "closed" },
                         { text: Variable.lang.select.bestQuestions, value: "best" }
                     ],
                     open: false,
-                    active: "all"
+                    active: filters.MainQuestions.questions
                 },
                 date: {
                     nameOptions: "date",
                     title: Variable.lang.span.sort,
                     items: [
-                        { text: Variable.lang.select.byDate, value: "date", active: true },
+                        { text: Variable.lang.select.byDate, value: "date" },
                         { text: Variable.lang.select.byViews, value: "views" },
                         { text: Variable.lang.select.byAnswers, value: "answers" },
                     ],
                     open: false,
-                    active: "date"
+                    active: filters.MainQuestions.date
                 }
 
             }
 
-            const tmp = await mainQuestions(optionsSelect, 6);
+            //   const tmp = await mainQuestions(optionsSelect, 6);
             // nowShow = 12
             // totalRecords = tmp.totalFound
-            questions = tmp.list_records;
+            // questions = tmp.list_records;
 
             // questions = await mainQuestions()
 
@@ -290,11 +304,11 @@ const start = function () {
                         {/* <BlockQuestions /> */}
                         <div class="c-questions">
                             <div class="c-questions__header">
-                                {/* <div class="c-questions__searchblock c-search">
+                                <div class="c-questions__searchblock c-search">
                                     <div class="c-search__container">
                                         <div class="c-search__wrapper">
                                             <img class="c-search__icon" src={svg.search_icon} />
-                                            <input class="c-search__input" type="text" placeholder={`${Variable.lang.placeholder.question}`} autocomplete="disabled" />
+                                            <input class="c-search__input" type="text" placeholder={Variable.lang.placeholder.question} autocomplete="disabled" />
                                             <img class="c-search__icon c-search__icon--filter" src={svg.filter} />
 
                                         </div>
@@ -311,11 +325,9 @@ const start = function () {
                                             {Variable.lang.button.giveQuestion}
                                         </div>
                                     </div>
+                                </div>
 
-
-                                </div> */}
-
-                                {/* <div class="c-questions__filter questions_filter">
+                                <div class="c-questions__filter questions_filter">
                                     <Select
                                         options={optionsSelect.questions}
                                         callback={selectCallBack}
@@ -327,18 +339,18 @@ const start = function () {
                                     />
 
                                     <div class="c-questions__lang">
-                                        {Variable.lang.lang}
+                                        {Variable.languages[filters.MainQuestions.lang].lang_orig}
                                     </div>
-                                </div> */}
+                                </div>
 
                                 <h4>{Variable.lang.h.lastQuestions}</h4>
 
 
                             </div>
 
-                            {/* <div class="c-questions__list questions-blocks">
+                            <div class="c-questions__list questions-blocks">
                                 {
-                                    questions.map((item) => {
+                                    Variable.MainQuestions.list_records.map((item) => {
                                         console.log("item=", item);
                                         return (
                                             <QuestionItem question={item} />
@@ -350,11 +362,12 @@ const start = function () {
                             <div class="c-questions__footer">
                                 <a
                                     class="c-button c-button--gray"
-                                    href="question/"
+                                    href="/question/"
+                                    onclick={siteLink}
                                 >
                                     <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
                                 </a>
-                            </div> */}
+                            </div>
                         </div>
 
 
@@ -369,7 +382,6 @@ const start = function () {
                             </div>
                         </div> */}
                     </div>
-
                 </div>
             )
         })

@@ -55,9 +55,9 @@ const BlockPreview = function () {
             </div>
             <div class="с-preview__crypto">
                 {
-                    Object.keys(Variable.course).filter((item) => typeof Variable.course[item] == 'object').map(function (key) {
+                    Object.keys(Variable.Course).filter((item) => typeof Variable.Course[item] == 'object').map(function (key) {
                         return (
-                            <CourseCurrency course={Variable.course[key]} key={key} />
+                            <CourseCurrency course={Variable.Course[key]} key={key} />
                         )
                     })
                 }

@@ -31,7 +31,7 @@ const Select = function ({ options, callback, toggler = null }) {
   }
 
   const optionsElem = options.items.map((item, index) => {
-    if (item.active) {
+    if (options.active == item.value) {
       optionsActive = item.text
     }
     return (
