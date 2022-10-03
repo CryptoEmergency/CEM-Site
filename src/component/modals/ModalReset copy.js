@@ -10,8 +10,10 @@ import {
 import svg from "@assets/svg/index.js";
 import { PhoneCode } from "@component/element/PhoneCode.js";
 import { allValidation } from "@src/functions.js";
+import { sendResetMessage, giveNewCodeForReset } from "@src/apifunctionsE.js";
 
 let pass = new Array(6).fill("");
+let time = 0;
 
 const showModalReset = function (e) {
   e.stopPropagation();
@@ -40,14 +42,21 @@ const handleKeyUp = (e, index) => {
   }
 };
 
-const change = (e, index) => {
-  let tmp = true;
+const resetTimer = () => {
+  time = 5
+  let data = {email:"maior0077777@mail.ru"}
+  giveNewCodeForReset(data)
+  timerFunc();
+}
+const change = async(e, index) => {
+  let tmp = false;
   console.log("=a2d228=", e);
+   let arrEvent = e.target.parentElement.children;
   if (e.inputType === "insertFromPaste" &&
   allValidation(e.target.value, "inputNumberPaste")) {
     // let isNumber = allValidation(e.target.value, "inputNumberPaste");
     let strArr = e.target.value.split("");
-    let arrEvent = e.target.parentElement.children;
+   
     console.log("=strArr=", strArr);
     // pass = [...strArr]
     // console.log('=pass=',pass)
@@ -113,13 +122,38 @@ const change = (e, index) => {
           break;
         }
       }
-      if (tmp) {
-        let strPass = pass.join("");
-        console.log("=strPass=", strPass);
-      }
+      
     }
   }
+  let strPass = pass.join("").trim()
+  if (strPass.length === 6) {
+      let data = {email:"maior0077777@mail.ru",code:strPass}
+      let  response = await sendResetMessage(data);
+      console.log('=8fa90a=',response)
+      if (response === "no"){
+        for (let i = 0; i <  pass.length; i++) {
+           arrEvent[i].value = "";
+           pass[i] = "";
+      }
+      arrEvent[0].focus()
+      }else{
+        Variable.Modals = [];
+      }
+      }
 };
+const timerFunc = ()=>{
+  const timer = setInterval(async () => {
+  time = time -1
+  initReload()
+  console.log('=3ca4b3=', time)
+  if (time === 0) {
+    clearInterval(timer);
+    time = 5;
+  }
+}, 1000);
+}
+
+
 
 const ModalReset = function ({
   changeCode,
@@ -129,10 +163,10 @@ const ModalReset = function ({
   wayReset,
   changeWayReset,
   changeStepReset,
+  reload
 }) {
   // console.log("ModalReset", { lang, changeCode, ID, abbr, codeTitle, wayReset, changeWayReset });
   const showStepReset = getValue(ID, "toggleStepReset");
-
   return (
     <div class="c-modal c-modal--open" id="ModalReset">
       <section class="c-modal__dialog">
@@ -156,75 +190,34 @@ const ModalReset = function ({
               {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
               <div class="reset_password_input_block">
                 <form id="resetPassword2" data-button_id="reset_next_step-2">
-                  {/* <input style="display: none;" type="submit" /> */}
-                  {/* <div class="reset_by_email_block">
-                                        <label for="resetByEmailInputCode">{Variable.lang.label.codeConfirm}</label>
-                                        <div class="error-div"></div>
-                                        <div class="reset_by_email_block_container">
-                                            <input id="resetByEmailInputCode" type="number" />
-                                        </div>
-                                    </div>
-                                    <div class="reset_by_mobile_block dn">
-                                        <label for="resetByMobileInputCode">{Variable.lang.label.codeConfirm}</label>
-                                        <div class="error-div"></div>
-                                        <div class="reset_by_mobile_block_container">
-                                            <input id="resetByMobileInputCode" type="number" />
-                                        </div>
-                                    </div> */}
                   {pass.map((item, i) => {
                     return (
                       <input
                         class="test12345"
                         type="text"
                         onKeyUp={(e) => handleKeyUp(e, i)}
-                        // value = {pass[i]}
-                        // maxlength="1"
-                        // onpaste = {Ste}
                         oninput={(e) => change(e, i)}
                       ></input>
                     );
                   })}
-                  {/* <input
-                    class="test12345"
-                    type="text"
-
-                    maxlength="1"
-                    oninput={change}
-                  ></input>
-                  -<input   class="test12345"
-                    type="text"
- 
-                    maxlength="1"
-                    oninput={change}></input>-
-                  <input   class="test12345"
-                   type="text"
-
-                   maxlength="1"
-                    oninput={change}></input>-
-                  <input   class="test12345"
-                    type="text"
-
-                    maxlength="1"
-                    oninput={change}></input>-
-                  <input   class="test12345"
-                    type="text"
-
-                    maxlength="1"
-                    oninput={change}></input>-
-                  <input   class="test12345"
-                  type="text"
-
-                  maxlength="1"
-                    oninput={change}></input> */}
                 </form>
               </div>
-              <div class="reset_timer_block">
+              {
+                time > 0 
+                ?<div class="reset_timer_block">
                 {Variable.lang.text.timeCode}
-                <div class="reset_timer">1:00</div>
+                <div class="reset_timer">{time < 10 ? `00.0${time}`:`00.${time}`}</div>
               </div>
-              <a style="display: none;" class="reset_timer_success">
+              :
+              <a  class="reset_timer_success"
+              onclick = {resetTimer}
+              >
                 {Variable.lang.a.newCodeConfirm}
               </a>
+                
+              }
+              
+              
               <div type="button" class="reset-btn" id="reset_next_step-2">
                 <a class="btn-reset">
                   <span>{Variable.lang.button.next}</span>
