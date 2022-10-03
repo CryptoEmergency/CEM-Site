@@ -4,6 +4,12 @@ import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
 
 const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
+
+  if (!author.nickname) {
+    return (
+      <></>
+    )
+  }
   return (
     <a
       href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}

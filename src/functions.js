@@ -74,7 +74,6 @@ const checkHide = function (e) {
 };
 
 const clickHide = function (e) {
-  console.log('=01cef2 clickHide=', Variable.OutHideWindows)
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
       if (item[0]() === e.target || item[0]().contains(e.target)) {
@@ -166,7 +165,6 @@ const getNewsCategory = async function (type) {
 };
 
 const timerCourse = async function () {
-  console.log("timerCourse")
   let tmp = checkAnswerApi(await sendApi.getCourse());
   Variable.course = tmp.list_records[0]
 };

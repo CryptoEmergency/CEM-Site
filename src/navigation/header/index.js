@@ -203,26 +203,74 @@ const mainHeader = async function () {
                                     <div class="c-changelanguage__header">
                                         <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
                                     </div>
-                                    {LanguagesList(Variable.languages)}
+                                    <ul class="c-changelanguage__list" >
+                                        {Object.keys(Variable.languages).map(function (key) {
+                                            return (
+                                                <li class="c-changelanguage__item">
+                                                    <a
+                                                        class="c-changelanguage__link"
+                                                        href={"/" + key + "/" + Variable.dataUrl.adress}
+                                                        onclick={function (e) {
+                                                            e.preventDefault();
+                                                            elem().hidden = true
+                                                            history.pushState(null, null, this.href);
+                                                            parsingUrl()
+                                                        }}
+                                                    >
+                                                        <span class="c-changelanguage__text">{Variable.languages[key].lang_orig}</span></a>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
                                 </div>
-                                <a
-                                    class="log-in"
-                                    onclick={() => {
-                                        Variable.SetModals({ name: "ModalAuth", data: {} })
-                                    }}
-                                >
-                                    {Variable.lang.button.login}
-                                </a>
-                                <button
-                                    class="c-button c-button--gradient"
-                                    type="button"
-                                    id="registration"
-                                    onclick={() => {
-                                        Variable.SetModals({ name: "ModalReg", data: {} })
-                                    }}
-                                >
-                                    <span class="c-button__text">{Variable.lang.button.registration}</span>
-                                </button>
+                                <If
+                                    data={Variable.auth}
+                                    dataIf={
+                                        <div>
+                                            <div class="header_avatar_container">
+                                                <Avatar author={Variable.myInfo} />
+                                            </div>
+                                            <div class="auth_user_header">
+                                                <div class="c-header__notifications c-notification c-notification--active">
+                                                    <a class="c-notification__link"></a>
+                                                    <div class="c-notification__new"></div>
+                                                </div>
+                                                <div class="c-header__messages c-messages">
+                                                    <a href="/user/chats/" class="c-messages__link" onclick={siteLink}>
+                                                        <i class="c-messages__icon"></i>
+                                                        <div style="display: none;" class="c-messages__counter"></div>
+                                                    </a>
+                                                    <div class="c-messages__new"></div>
+                                                </div>
+                                                <i class="c-header__burger"></i>
+                                            </div>
+                                            <div style="display: none;" class="user_notifications_block auth_notifications" id="notifications_block">
+
+                                            </div>
+                                        </div>
+                                    }
+                                    dataElse={
+                                        <div>
+                                            <a
+                                                class="log-in"
+                                                onclick={() => {
+                                                    Variable.SetModals({ name: "ModalAuth", data: {} })
+                                                }}
+                                            >
+                                                {Variable.lang.button.login}
+                                            </a>
+                                            <button
+                                                class="c-button c-button--gradient"
+                                                type="button"
+                                                onclick={() => {
+                                                    Variable.SetModals({ name: "ModalReg", data: {} })
+                                                }}
+                                            >
+                                                <span class="c-button__text">{Variable.lang.button.registration}</span>
+                                            </button>
+                                        </div>
+                                    }
+                                />
                             </div>
                             <nav class="c-header__menu c-menu">
                                 <a class="c-logo c-menu__link" href="/" onclick={siteLink}>
