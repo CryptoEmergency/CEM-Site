@@ -13,7 +13,7 @@ const NumFormat = function (value, options) {
     return value.toLocaleString('en-US')
 };
 
-const BlockTrade = function ({ lang, trades }) {
+const BlockTrade = function () {
 
     return (
         <div id="crypto_exchanges" class="crypto_exchanges">
@@ -40,7 +40,7 @@ const BlockTrade = function ({ lang, trades }) {
                     </div>
                 </div>
                 {
-                    trades.map(function (trade, i) {
+                    Variable.MainTrades.list_records.map(function (trade, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row tradeListLoad"

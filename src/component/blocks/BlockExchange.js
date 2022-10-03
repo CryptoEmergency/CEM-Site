@@ -7,32 +7,32 @@ import svg from "@assets/svg/index.js";
 // import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
 
-const BlockExchange = function ({ lang, exchanges }) {
+const BlockExchange = function () {
     // console.log("BlockExchange", exchanges);
 
     return (
         <div class="crypto_exchanges" id="crypto_exchange">
-            <h4>{lang.h.exchange}</h4>
+            <h4>{Variable.lang.h.exchange}</h4>
             <div class="statistics-preview list_exchange_page">
                 <div class="crypto_exchanges-row">
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.appellation}
+                        {Variable.lang.tableTitle.appellation}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.rank}
+                        {Variable.lang.tableTitle.rank}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.coins}
+                        {Variable.lang.tableTitle.coins}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.startDate}
+                        {Variable.lang.tableTitle.startDate}
                     </div>
                     <div>
 
                     </div>
                 </div>
                 {
-                    exchanges.map(function (exchange, i) {
+                    Variable.MainExchanges.list_records.map(function (exchange, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row exchangeListLoad"
@@ -92,7 +92,7 @@ const BlockExchange = function ({ lang, exchanges }) {
                                     <div class="button-container-preview">
                                         <span class="btn-news-preview">
                                             <span>
-                                                {lang.button.exchange}
+                                                {Variable.lang.button.exchange}
                                             </span>
                                         </span>
                                     </div>

@@ -7,7 +7,7 @@ import { getDateFormat } from "@src/functions.js";
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 
-const NewsItem = function ({ lang, newsItem }) {
+const NewsItem = function ({ newsItem }) {
     // console.log("NewsItem", newsItem)
 
     return (
