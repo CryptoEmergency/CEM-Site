@@ -218,7 +218,14 @@ const allValidation = (str, type, condition) => {
     });
   }
 
-  if (type == "passwordResetPass") {
+  if(type == "inputNumberPaste"){
+    return validator.matches(str,/^\d{1,}$/);
+  }
+  if(type == "inputNumber"){
+    return validator.matches(str, /[0-9]{1}/i);
+  }
+
+  if(type == "passwordResetPass"){
     return validator.matches(str, /[0-9]{6}/i);
   }
 

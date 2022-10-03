@@ -5,9 +5,13 @@ import {
   setValue,
   Variable,
   getValue,
+  initReload,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { PhoneCode } from "@component/element/PhoneCode.js";
+import { allValidation } from "@src/functions.js";
+
+let pass = new Array(6).fill("");
 
 const showModalReset = function (e) {
   e.stopPropagation();
@@ -18,20 +22,101 @@ const showModalReset = function (e) {
   setValue("modals", "resetModalShow", !getValue("modals", "resetModalShow"));
 };
 
-const change = (e) => {
-  console.log("=be051b=", e.target.parentElement.children);
-  let arr = e.target.parentElement.children;
-  console.log("=2bdc86=", arr);
-  for (let i = 0; i < arr.length; i++) {
-    console.log("=&&&&=", +arr[i].value);
-    // if (arr[i].value !== "" && typeof (+arr[i].value === "number")) {
-    //   console.log("=number=");
-    // } else {
-    //   console.log("=notNum=");
-    // }
-    if(arr[i].value ===""){
-        arr[i].focus()
+const handleKeyUp = (e, index) => {
+  let arrElements =e.target.parentElement.children;
+  if (e.key === "Backspace" && pass[index] !==""  ) {
+    pass[index] = "";
+    arrElements[index].focus();
+  }else if(e.key === "Backspace" &&   pass[index]==""  && index !== 0){
+    pass[index-1] = "";
+    arrElements[index - 1].value =""
+    arrElements[index - 1].focus();
+  }
+  if (e.key === "ArrowLeft" && index > 0) {
+    arrElements[index - 1].focus();
+  }
+  if (e.key === "ArrowRight" && index < arrElements.length - 1) {
+    arrElements[index + 1].focus();
+  }
+};
+
+const change = (e, index) => {
+  let tmp = true;
+  console.log("=a2d228=", e);
+  if (e.inputType === "insertFromPaste" &&
+  allValidation(e.target.value, "inputNumberPaste")) {
+    // let isNumber = allValidation(e.target.value, "inputNumberPaste");
+    let strArr = e.target.value.split("");
+    let arrEvent = e.target.parentElement.children;
+    console.log("=strArr=", strArr);
+    // pass = [...strArr]
+    // console.log('=pass=',pass)
+    if (pass[index] === "") {
+      for (let i = index; i < index + strArr.length; i++) {
+        if (pass[i] === "") {
+          (arrEvent[i].value = strArr[i - index]),
+            (pass[i] = strArr[i - index]);
+        } else {
+          break;
+        }
+      }
+    } else {
+      e.target.value = pass[index];
+    }
+    for (let i = 0; i < index; i++) {
+      if ( arrEvent[i].value === "") {
+        tmp = false;
+        arrEvent[i].focus();
         break;
+      }
+    }
+    for (let i = index; i <  arrEvent.length; i++) {
+      if ( arrEvent[i].value === "") {
+        tmp = false;
+        arrEvent[i].focus();
+        break;
+      }
+    }
+
+    // initReload()
+    // let arr = e.target.parentElement.children;
+    // arr = arr.splice
+
+    console.log("= arrEvent=", arrEvent);
+    console.log("=passPaste=", pass);
+  }else if(e.inputType !== "deleteContentBackward") {
+    e.target.value = e.target.value[0];
+    let isNumber = allValidation(e.target.value, "inputNumber");
+    console.log("=8722cf=", isNumber);
+    if (!isNumber) {
+      e.target.value = "";
+      pass[index] = "";
+      e.target.focus();
+      console.log("=04cc13=", pass);
+    } else {
+      pass[index] = e.target.value;
+      console.log("=04cc13=", pass);
+      let arr = e.target.parentElement.children;
+      
+
+      for (let i = 0; i < index; i++) {
+        if (arr[i].value === "") {
+          tmp = false;
+          arr[i].focus();
+          break;
+        }
+      }
+      for (let i = index; i < arr.length; i++) {
+        if (arr[i].value === "") {
+          tmp = false;
+          arr[i].focus();
+          break;
+        }
+      }
+      if (tmp) {
+        let strPass = pass.join("");
+        console.log("=strPass=", strPass);
+      }
     }
   }
 };
@@ -86,17 +171,51 @@ const ModalReset = function ({
                                             <input id="resetByMobileInputCode" type="number" />
                                         </div>
                                     </div> */}
-                  <input
+                  {pass.map((item, i) => {
+                    return (
+                      <input
+                        class="test12345"
+                        type="text"
+                        onKeyUp={(e) => handleKeyUp(e, i)}
+                        // value = {pass[i]}
+                        // maxlength="1"
+                        // onpaste = {Ste}
+                        oninput={(e) => change(e, i)}
+                      ></input>
+                    );
+                  })}
+                  {/* <input
                     class="test12345"
-                    type="number"
+                    type="text"
+
                     maxlength="1"
                     oninput={change}
                   ></input>
-                  -<input maxlength="1" class="test12345"></input>-
-                  <input maxlength="1" class="test12345"></input>-
-                  <input maxlength="1" class="test12345"></input>-
-                  <input maxlength="1" class="test12345"></input>-
-                  <input type="number" maxlength="1" class="test12345"></input>
+                  -<input   class="test12345"
+                    type="text"
+ 
+                    maxlength="1"
+                    oninput={change}></input>-
+                  <input   class="test12345"
+                   type="text"
+
+                   maxlength="1"
+                    oninput={change}></input>-
+                  <input   class="test12345"
+                    type="text"
+
+                    maxlength="1"
+                    oninput={change}></input>-
+                  <input   class="test12345"
+                    type="text"
+
+                    maxlength="1"
+                    oninput={change}></input>-
+                  <input   class="test12345"
+                  type="text"
+
+                  maxlength="1"
+                    oninput={change}></input> */}
                 </form>
               </div>
               <div class="reset_timer_block">
