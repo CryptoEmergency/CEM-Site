@@ -120,7 +120,7 @@ const start = function () {
             console.log("myInfo", Variable.myInfo);
             return (
                 <div class="page-content">
-                    <div class="c-wallet wallet_page_container">
+                    <div class="c-wallet">
                         <div class="c-wallet__container">
                             <div class="c-wallet__left">
                                 <WalletCard

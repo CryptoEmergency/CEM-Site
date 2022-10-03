@@ -18,6 +18,7 @@ const findUnread = function (arr) {
 };
 
 const startView = function () {
+    console.log('=543a06=', Variable.dataUrl)
 
     return (
         <div class="c-header__userpanel">
@@ -34,7 +35,7 @@ const startView = function () {
                     <a
                         data-needauth="true"
                         data-action="link"
-                        class={`c-userpanel__icon c-userpanel__icon--only_mobile_visible ${Variable.dataUrl.adress == "user" ? "c-userpanel__icon--active" : ""}`}
+                        class={`c-userpanel__icon c-userpanel__icon--only_mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
                         href="/user/"
                     >
                         <img src={svg["profile_icon-1"]} />
@@ -59,7 +60,7 @@ const startView = function () {
                     <a
                         data-needauth="true"
                         data-action="link"
-                        class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "user/chats" ? "c-userpanel__icon--active" : ""}`}
+                        class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : ""}`}
                         href="/user/chats/"
                     >
                         <img src={svg["profile_icon-2"]} />
@@ -69,7 +70,7 @@ const startView = function () {
                     <a
                         data-needauth="true"
                         data-action="link"
-                        class={`c-userpanel__icon ${Variable.dataUrl.adress == "user/awards" ? "c-userpanel__icon--active" : ""}`}
+                        class={`c-userpanel__icon ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "awards") ? "c-userpanel__icon--active" : ""}`}
                         href="/user/awards/"
                     >
                         <img src={svg["profile_icon-4"]} />
@@ -79,7 +80,7 @@ const startView = function () {
                         data-needauth="true"
                         data-updating="true"
                         data-action="link"
-                        class={`c-userpanel__icon  ${Variable.dataUrl.adress == "user/quests" ? "c-userpanel__icon--active" : ""}`}
+                        class={`c-userpanel__icon  ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "quests") ? "c-userpanel__icon--active" : ""}`}
                         href="/user/quests/"
                     >
                         <img src={svg["profile_icon-10"]} />
@@ -98,7 +99,7 @@ const startView = function () {
                     <a
                         data-needauth="true"
                         data-action="link"
-                        class={`c-userpanel__icon  ${Variable.dataUrl.adress == "user/wallet" ? "c-userpanel__icon--active" : ""}`}
+                        class={`c-userpanel__icon  ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "wallet") ? "c-userpanel__icon--active" : ""}`}
                         href="/user/wallet/"
                     >
                         <img src={svg.absolutely_new_wallet} />
@@ -107,7 +108,7 @@ const startView = function () {
                     <a
                         data-needauth="true"
                         data-action="link"
-                        class={`c-userpanel__icon  ${Variable.dataUrl.adress == "user/affiliate" ? "c-userpanel__icon--active" : ""}`}
+                        class={`c-userpanel__icon  ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "affiliate") ? "c-userpanel__icon--active" : ""}`}
                         href="/user/affiliate/"
                     >
                         <img src={svg["profile_icon-3"]} />
