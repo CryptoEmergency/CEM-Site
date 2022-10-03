@@ -6,16 +6,54 @@ import { NotifyItem } from '@component/element/NotifyItem.js';
 
 const start = function () {
 
-    let notify
+    let notify, currentNotify
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
+
+    const changeCategory = async function(){
+        if(currentNotify[this.dataset.type]){
+            return
+        }
+        switch(this.dataset.type){
+            case 'question':
+                currentNotify = {
+                question: true,
+                awards: false,
+                system: false
+            }
+            notify = Variable.myInfo.notifyQuestions
+                break;
+            case 'awards':
+                currentNotify = {
+                question: false,
+                awards: true,
+                system: false
+            }
+            notify = Variable.myInfo.notifyAwards
+                break;
+            case 'system':
+                currentNotify = {
+                question: false,
+                awards: false,
+                system: true
+            }
+            notify = Variable.myInfo.notifySystem
+                break;
+        }
+        initReload()
+    }
 
     init(
         async () => {
             notify = Variable.myInfo.notifyQuestions
             //notify = Variable.myInfo.notifyAwards
             //notify = Variable.myInfo.notifySystem
+            currentNotify = {
+                question: true,
+                awards: false,
+                system: false
+            }
         },
 
         () => {
@@ -24,13 +62,13 @@ const start = function () {
                     <div class="notifications_title">
                         {Variable.lang.text.yourNotification}
                         <div class="notifications_toggle_block">
-                            <div class="notifications_toggle_item notifications_toggle_item_active">
+                            <div data-type='question' onclick={changeCategory} class={currentNotify.question ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
                                 {Variable.lang.text.questions}
                             </div>
-                            <div class="notifications_toggle_item">
+                            <div data-type='awards' onclick={changeCategory} class={currentNotify.awards ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
                                 {Variable.lang.text.awards}
                             </div>
-                            <div class="notifications_toggle_item">
+                            <div data-type='system' onclick={changeCategory} class={currentNotify.system ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
                                 {Variable.lang.text.system}
                             </div>
                         </div>

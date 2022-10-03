@@ -68,7 +68,7 @@ const dateDelete = function(str){
 		curr_month="0"+curr_month
 	}
 	var curr_year = date.getFullYear();
-	result = curr_year + "-"+ curr_month + "-" + curr_date;
+	let result = curr_year + "-"+ curr_month + "-" + curr_date;
 	return result;
 }
 
