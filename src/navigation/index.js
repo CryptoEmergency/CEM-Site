@@ -157,52 +157,52 @@ const start = function () {
             Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
             timersStart("Course", timerCourse, 10000)
 
-            Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
-                    }
-                }
-            )
-            )
+            // Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
+            //     {
+            //         setIntervalFunc: async () => {
+            //             Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
+            //         }
+            //     }
+            // )
+            // )
 
-            Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades({ name: "getMainTrades" }))
-                    }
-                }
-            )
-            )
+            // Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades(
+            //     {
+            //         setIntervalFunc: async () => {
+            //             Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades({ name: "getMainTrades" }))
+            //         }
+            //     }
+            // )
+            // )
 
-            Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges({ name: "getMainExchanges" }))
-                    }
-                }
-            )
-            )
+            // Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges(
+            //     {
+            //         setIntervalFunc: async () => {
+            //             Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges({ name: "getMainExchanges" }))
+            //         }
+            //     }
+            // )
+            // )
 
-            Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers({ name: "getMainUsers" }))
-                    }
-                }
-            )
-            )
+            // Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers(
+            //     {
+            //         setIntervalFunc: async () => {
+            //             Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers({ name: "getMainUsers" }))
+            //         }
+            //     }
+            // )
+            // )
 
-            Variable.MainNews = checkAnswerApi(await sendApi.getMainNews(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainNews = checkAnswerApi(await sendApi.getMainNews({ name: "getMainNews" }))
-                    }
-                }
-            )
-            )
+            // Variable.MainNews = checkAnswerApi(await sendApi.getMainNews(
+            //     {
+            //         setIntervalFunc: async () => {
+            //             Variable.MainNews = checkAnswerApi(await sendApi.getMainNews({ name: "getMainNews" }))
+            //         }
+            //     }
+            // )
+            // )
 
-            Variable.SwiperLoad.push(swiperLoad)
+            // Variable.SwiperLoad.push(swiperLoad)
         },
         () => {
 

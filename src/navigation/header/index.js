@@ -135,9 +135,6 @@ const HeaderNotAuth = () => (
                     class="log-in"
                     onclick={() => {
                         Variable.SetModals({ name: "ModalAuth", data: {} })
-                        //Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div.existing_email } })
-
-                        //console.log("=2=", Variable.Modals)
                     }}
                 >
                     {Variable.lang.button.login}
@@ -183,57 +180,64 @@ const mainHeader = async function () {
                 return (
                     <div class="c-header__container c-container">
                         <div class="c-header__inner">
-                            <div
-                                class="language"
-                                onclick={(e) => {
-                                    elem().hidden = !elem().hidden
-                                    if (!elem().hidden) {
-                                        Variable.OutHideWindows.push([elem, elem])
-                                    }
-                                    e.stopPropagation();
-                                }}
-                            >
-                                <div class="selectlink">
-                                    <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
+                            <div class="c-header__auth">
+                                <div
+                                    class="language"
+                                    onclick={(e) => {
+                                        elem().hidden = !elem().hidden
+                                        if (!elem().hidden) {
+                                            Variable.OutHideWindows.push([elem, elem])
+                                        }
+                                        e.stopPropagation();
+                                    }}
+                                >
+                                    <div class="selectlink">
+                                        <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div
-                                class="c-changelanguage"
-                                ref={elem}
-                                hidden
-                            >
-                                <div class="c-changelanguage__header">
-                                    <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
+                                <div
+                                    class="c-changelanguage"
+                                    ref={elem}
+                                    hidden={true}
+                                >
+                                    <div class="c-changelanguage__header">
+                                        <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
+                                    </div>
+                                    {LanguagesList(Variable.languages)}
                                 </div>
-                                <ul class="c-changelanguage__list" >
-                                    {Object.keys(Variable.languages).map(function (key) {
-                                        return (
-                                            <li class="c-changelanguage__item">
-                                                <a
-                                                    class="c-changelanguage__link"
-                                                    href={"/" + key + "/" + Variable.dataUrl.adress}
-                                                    onclick={function (e) {
-                                                        e.preventDefault();
-                                                        elem().hidden = true
-                                                        history.pushState(null, null, this.href);
-                                                        parsingUrl()
-                                                    }}
-                                                >
-                                                    <span class="c-changelanguage__text">{Variable.languages[key].lang_orig}</span></a>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
+                                <a
+                                    class="log-in"
+                                    onclick={() => {
+                                        Variable.SetModals({ name: "ModalAuth", data: {} })
+                                    }}
+                                >
+                                    {Variable.lang.button.login}
+                                </a>
+                                <button
+                                    class="c-button c-button--gradient"
+                                    type="button"
+                                    id="registration"
+                                    onclick={() => {
+                                        Variable.SetModals({ name: "ModalReg", data: {} })
+                                    }}
+                                >
+                                    <span class="c-button__text">{Variable.lang.button.registration}</span>
+                                </button>
                             </div>
+                            <nav class="c-header__menu c-menu">
+                                <a class="c-logo c-menu__link" href="/" onclick={siteLink}>
+                                    <img class="c-logo__image" src={svg.logo} />
+                                </a>
+                                <a class="c-menu__link" href="/contacts/" onclick={siteLink}>{Variable.lang.a.contacts}</a>
+                                <a class="c-menu__link" href="/about/" onclick={siteLink}>{Variable.lang.a.about}</a>
+                                <a class="c-menu__link" href="/blog/" onclick={siteLink}>{Variable.lang.a.blog}</a>
+                            </nav>
                         </div>
                     </div>
 
-                    // <If
-                    //     data={Variable.auth}
-                    //     dataIf={<HeaderAuth />}
-                    //     dataElse={<HeaderNotAuth />}
-                    // />
+
                 )
+
             } else if (Variable.showUserMenu) {
                 return (
                     <HeaderUser />
