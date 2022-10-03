@@ -56,7 +56,7 @@ const LanguagesList = function (languages) {
     return (
         <ul
             class="c-changelanguage__list"
-            outClick={outClick}
+        // outClick={outClick}
         >
             {listLang}
         </ul>

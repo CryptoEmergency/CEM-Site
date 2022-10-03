@@ -62,31 +62,16 @@ const clickCancel = function (e) {
 };
 
 const clickHide = function (e) {
-
-  // console.log("clickHide", Variable.outHideWindows);
-
-  if (Variable.outHideWindows.length != 0) {
-    Variable.outHideWindows.map((item, index) => {
-      //  console.log("Variable.outHideWindows", item, index, item.elem.contains(e.target), item.elem === e.target);
-      if (item.elem === e.target || item.elem.contains(e.target)) {
+  if (Variable.OutHideWindows.length != 0) {
+    Variable.OutHideWindows.map((item, index) => {
+      if (item() === e.target || item().contains(e.target)) {
         return;
       } else {
-        item.func(e);
-        Variable.outHideWindows.slice(index, 1)
-        e.stopPropagation();
+        item().hidden = true
+        Variable.OutHideWindows.splice(index, 1)
       }
     })
-
   }
-  //console.log("clickHide", e.target)
-  //Variable.langListShow = false
-  //setValue("mainHeader", "langListShow", false);
-
-  // let obj = getValue("mainBlock", "showObject");
-  // for (let key in obj) {
-  //   obj[key] = false;
-  // }
-  // setValue("mainBlock", "showObject", obj);
 };
 
 const timerTik = function () {
