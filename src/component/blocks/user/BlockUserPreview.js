@@ -9,13 +9,13 @@ import { numberFixWithSpaces } from '@src/functions.js';
 import { Avatar } from '@component/element/Avatar.js';
 import { percent } from '@component/helpers/All.js';
 
-const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
+const BlockUserPreview = function ({ userInfo }) {
     return (
         <div class="c-userpreview">
             <div class="c-userpreview__header">
 
                 <div class="c-userpreview__avatar">
-                    <Avatar lang={lang} author={userInfo} parent={'big_user_avatar'} />
+                    <Avatar author={userInfo} parent={'big_user_avatar'} />
                 </div>
                 <img
                     id="currentUserBackground"
@@ -27,12 +27,12 @@ const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
                     <div class="c-userpreview__container">
                         <a class="c-userpreview__btn">
                             <span>
-                                {lang.button.write}
+                                {Variable.lang.button.write}
                             </span>
                         </a>
                         <a class="c-userpreview__btn">
                             <span class="subscribe_status">
-                                {lang.button.subscribe}
+                                {Variable.lang.button.subscribe}
                             </span>
                         </a>
                     </div>
@@ -48,18 +48,18 @@ const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
                         class="c-userpreview__menu"
                     >
                         {/* IF (userInfo._id=myInfo._id) */}
-                        <p data-action="changeAvatarModal" class="c-userpreview__action">{lang.text.changeAvatar}</p>
-                        <p data-action="showBackgroundsModal" class="c-userpreview__action">{lang.text.changeBackground}</p>
-                        <p data-action="showFramesModal" class="c-userpreview__action">{lang.text.changeFrame}</p>
+                        <p data-action="changeAvatarModal" class="c-userpreview__action">{Variable.lang.text.changeAvatar}</p>
+                        <p data-action="showBackgroundsModal" class="c-userpreview__action">{Variable.lang.text.changeBackground}</p>
+                        <p data-action="showFramesModal" class="c-userpreview__action">{Variable.lang.text.changeFrame}</p>
                         <p
                             class="c-userpreview__action share"
                             data-answer-id={userInfo.nickname}
                             data-type="user"
                         >
-                            {lang.select.share}
+                            {Variable.lang.select.share}
                         </p>
                         <p data-action="showFramesModal" class="c-userpreview__action">
-                            <a data-action="link" href="/user/settings/">{lang.text.settings}</a>
+                            <a data-action="link" href="/user/settings/">{Variable.lang.text.settings}</a>
                         </p>
                         {/* ELSE */}
 
@@ -68,21 +68,21 @@ const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
                             data-answer-id={userInfo.nickname}
                             data-type="user"
                         >
-                            {lang.select.share}
+                            {Variable.lang.select.share}
                         </p>
                         <p
                             class="c-userpreview__action complain"
                             data-answer-id={userInfo._id}
                             data-type="user"
                         >
-                            {lang.select.complainUser}
+                            {Variable.lang.select.complainUser}
                         </p>
                         <p
                             class="c-userpreview__action block"
                             data-answer-id={userInfo._id}
                             data-type="user"
                         >
-                            {lang.select.blackList}
+                            {Variable.lang.select.blackList}
                         </p>
 
                         <p
@@ -114,7 +114,7 @@ const BlockUserPreview = function ({ lang, myInfo, userInfo }) {
                     </a>
                     <p></p>
                     <div class="c-usershortinfo__status" id="userstatus">
-                        {userInfo.information && userInfo.information.status ? userInfo.information.status : lang.span.status}
+                        {userInfo.information && userInfo.information.status ? userInfo.information.status : Variable.lang.span.status}
                     </div>
                 </div>
 

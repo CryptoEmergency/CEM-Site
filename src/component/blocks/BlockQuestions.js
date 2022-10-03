@@ -16,12 +16,13 @@ let optionsSelect, filters
 
 const BlockQuestions = function ({ button }) {
 
-    const selectCallBack = async function (value, nameOptions) {
+    const selectCallBack = async function () {
         filters = getStorage("filters")
         filters.MainQuestions.questions = optionsSelect.questions.active
         filters.MainQuestions.date = optionsSelect.date.active
         setStorage("filters", filters)
-        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions())
+        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
+        console.log('=6761df=', filters, Variable.MainQuestions)
         initReload();
     }
 

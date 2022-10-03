@@ -8,7 +8,7 @@ import {
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 
-const ProfileTabsMenu = function ({ lang, myInfo, userInfo, tabType }) {
+const ProfileTabsMenu = function ({ userInfo, tabType }) {
 
 
     return (

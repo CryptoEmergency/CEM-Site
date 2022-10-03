@@ -9,7 +9,7 @@ init({
     },
     port: 80,
     mode: "production",
-    api: ""
+    api: "office"
     // api: "office"
 });
 

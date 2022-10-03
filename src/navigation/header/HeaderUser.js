@@ -18,7 +18,6 @@ const findUnread = function (arr) {
 };
 
 const startView = function () {
-    console.log('=543a06=', Variable.dataUrl)
 
     return (
         <div class="c-header__userpanel">

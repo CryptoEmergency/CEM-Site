@@ -4,9 +4,6 @@ import {
     init,
     getValue,
     setValue,
-    makeDOM,
-    getStorage,
-    setVal,
     Variable
 } from '@betarost/cemjs'
 import svg from "@assets/svg/index.js"
