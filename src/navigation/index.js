@@ -161,7 +161,7 @@ const start = function () {
             Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
                 {
                     setIntervalFunc: async () => {
-                        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions())
+                        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
                     }
                 }
             )
@@ -170,7 +170,7 @@ const start = function () {
             Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades(
                 {
                     setIntervalFunc: async () => {
-                        Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades())
+                        Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades({ name: "getMainTrades" }))
                     }
                 }
             )
@@ -179,7 +179,7 @@ const start = function () {
             Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges(
                 {
                     setIntervalFunc: async () => {
-                        Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges())
+                        Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges({ name: "getMainExchanges" }))
                     }
                 }
             )
@@ -188,7 +188,7 @@ const start = function () {
             Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers(
                 {
                     setIntervalFunc: async () => {
-                        Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers())
+                        Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers({ name: "getMainUsers" }))
                     }
                 }
             )
@@ -197,7 +197,7 @@ const start = function () {
             Variable.MainNews = checkAnswerApi(await sendApi.getMainNews(
                 {
                     setIntervalFunc: async () => {
-                        Variable.MainNews = checkAnswerApi(await sendApi.getMainNews())
+                        Variable.MainNews = checkAnswerApi(await sendApi.getMainNews({ name: "getMainNews" }))
                     }
                 }
             )

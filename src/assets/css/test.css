@@ -152,7 +152,7 @@ min-height: 33px;
  .c-modal__dialog .c-modal__body  .reset_password 
  .reset_password_step2 .reset_password_input_block #resetPassword2 .test12345{
   font-size: 20px;
-  text-overflow: clip;
+  /* text-overflow: clip; */
   white-space: nowrap;
   padding: 15px;
 height:50px;
