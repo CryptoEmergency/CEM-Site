@@ -6267,12 +6267,12 @@ span#procent::after {
   width: 236px;
 }
 
-.answer_additionally_container{
+.answer_additionally_container {
   position: absolute;
   width: 220px;
   left: 100%;
   top: calc(100% + 10px);
-  transform: translateX(-100%); 
+  transform: translateX(-100%);
   z-index: 100;
   background: #2B3040;
   border-radius: 10px;
@@ -6281,23 +6281,27 @@ span#procent::after {
   display: none;
   cursor: default;
 }
- .answer_additionally{
+
+.answer_additionally {
   padding: 10px;
   height: 100%;
   width: 100%;
   background: linear-gradient(129.93deg, rgba(173, 182, 206, 0.12) 12.75%, rgba(173, 182, 206, 0.02) 106.18%);
   border-radius: 10px;
 }
-.answer_additionally_item{
+
+.answer_additionally_item {
   margin: 7px 5px;
   font-weight: 600;
   cursor: pointer;
 }
-.answer_additionally_item:hover{
-  background: linear-gradient( 45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100% );
+
+.answer_additionally_item:hover {
+  background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-} 
+}
+
 /* .comment_likes{
   margin-left: 10px;
   min-width: 25px;
@@ -12025,7 +12029,7 @@ span#procent::after {
 
 
 /* WALLET STYLES */
-.wallets_connect {
+/* .wallets_connect {
   width: 100%;
   max-width: 500px;
 }
@@ -12089,7 +12093,7 @@ span#procent::after {
   font-size: 20px;
   line-height: 100%;
   margin-bottom: 0;
-}
+} */
 
 .take_of_button {
   padding: 7px 11px;
@@ -12321,7 +12325,7 @@ span#procent::after {
   height: 100%;
 }
 
-.wallet_page_container .button-container-preview {
+/* .wallet_page_container .button-container-preview {
   display: flex;
   justify-content: center;
 
@@ -12335,7 +12339,7 @@ span#procent::after {
 
 .wallet_page_container .button-container-preview a:after {
   width: 545px;
-}
+} */
 
 
 
@@ -14832,7 +14836,7 @@ span#procent::after {
   margin-top: 60px;
 } */
 
-.wallet_crypto_logo {
+/* .wallet_crypto_logo {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -14840,7 +14844,7 @@ span#procent::after {
 
 .wallet_crypto_logo img {
   width: 130px;
-}
+} */
 
 
 /* .userComment{
@@ -14938,7 +14942,7 @@ span#procent::after {
 .userComment .btn-news-preview::after{
   height: 25px;
 } */
-.wallet_transactions_list_item {
+/* .wallet_transactions_list_item {
   display: grid;
   grid-template-columns: 30% 35% 10% 15% 10%;
   align-items: center;
@@ -14956,7 +14960,7 @@ span#procent::after {
   font-size: 12px;
   color: #8991a8;
   padding-bottom: 2px;
-}
+} */
 
 .transactions_small_badge {
   height: 37px;
@@ -15182,7 +15186,7 @@ span#procent::after {
   justify-content: space-between;
 }
 
-.wallet_left_part {}
+/* .wallet_left_part {}
 
 .wallet_line_block {
   display: flex;
@@ -15256,7 +15260,7 @@ span#procent::after {
 
 .wallet_arrow {
   width: 35px;
-}
+} */
 
 .deposit_icons {
   display: flex;
@@ -15270,7 +15274,7 @@ span#procent::after {
   cursor: pointer;
 }
 
-.wallet_operation_modal {}
+/* .wallet_operation_modal {}
 
 .wallet_operation_modal .top_up_balance_input_container {
   width: 100%;
@@ -15279,7 +15283,7 @@ span#procent::after {
 .wallet_operation_modal .button-container-preview {
   display: flex;
   justify-content: center !important;
-}
+} */
 
 
 .user_gallery {
@@ -17752,9 +17756,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 
 @media(max-width: 1199px) {
-  .wallet_line_block .button-container-preview {
+  /* .wallet_line_block .button-container-preview {
     display: none;
-  }
+  } */
 
   /* .user_page_notify .user_notifications_block{
     right: auto;
@@ -17906,9 +17910,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
     height: 16px;
   }
 
-  .wallet_page_container {
+  /* .wallet_page_container {
     width: 100%;
-  }
+  } */
 
   .user_gallery {
     grid-template-columns: calc(25% - 4.5px) calc(25% - 4.5px) calc(25% - 4.5px) calc(25% - 4.5px);
@@ -17920,11 +17924,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
     min-width: calc(100% - 24px);
     margin: 0 12px;
   } */
-  .wallet_transactions_list_item {
+  /* .wallet_transactions_list_item {
     grid-template-columns: 38% 20% 17% 15% 10%;
     font-size: 10px;
     font-weight: 500;
-  }
+  } */
 
   .transactions_small_badge {
     margin-right: 5px;
@@ -18593,12 +18597,12 @@ input[type=date]::-webkit-calendar-picker-indicator {
     margin-top: 40px;
   }
 
-  .wallet_container {
+  /* .wallet_container {
     flex-wrap: wrap;
     justify-content: center;
   }
 
-  .wallet_block {}
+  .wallet_block {} */
 
   .top_up_balance_input_container {
     width: 100%;
@@ -19292,7 +19296,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
     display: inline;
     padding-right: 10px;
   } */
-  .wallet_transactions_list_item {
+  /* .wallet_transactions_list_item {
     grid-template-columns: 150px 100px 100px 130px 60px;
     border-bottom: 0;
   }
@@ -19319,7 +19323,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
   .wallet_operations_list::-webkit-scrollbar-track {
     background-color: transparent;
-  }
+  } */
 
 }
 
@@ -21116,9 +21120,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 @media(max-width: 464px) {
-  .wallet_left_part {
+  /* .wallet_left_part {
     width: 100%;
-  }
+  } */
 
   .non_auth_burger_menu {
     margin-left: 10px;
@@ -21351,7 +21355,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
     top: 1240px;
   }
 
-  .wallet_block {
+  /* .wallet_block {
     min-width: 100%;
     padding: 30px 25px;
   }
@@ -21362,7 +21366,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
   .wallet_block_top_line p:last-child {
     font-size: 24px;
-  }
+  } */
 
   .road_map span {
     font-size: 16px;
@@ -21370,7 +21374,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 @media(max-width: 425px) {
-  .wallet_line_block {
+  /* .wallet_line_block {
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -21379,7 +21383,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 100%;
     justify-content: center;
     margin-top: 20px;
-  }
+  } */
 
   /* .top_professionals_block .new_professional_info_block p:last-child{
     font-size: 10px;

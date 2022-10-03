@@ -13,13 +13,13 @@ import { If } from '@component/helpers/All.js'
 const WalletCard = function (data) {
 
     return (
-        <div class="wallet_block" style={data.style}>
-            <div class="wallet_block_top_line">
+        <div class="c-wallet__card" style={data.style}>
+            <div class="c-wallet__topline">
                 <p>{Variable.lang.p.myBalance}</p>
-                <p>{numberFixWithSpaces(data.balance, 8)} {data.coin}</p>
+                <p>{numberFixWithSpaces(data.balance, 0)} {data.coin}</p>
             </div>
 
-            <div class="wallet_block_bottom_line">
+            <div class="c-wallet__bottomline">
                 <div>
                     <p>{Variable.lang.p.inUSD}</p>
                     <p>{numberFixWithSpaces(data.course * data.balance, 4)}</p>
@@ -33,7 +33,7 @@ const WalletCard = function (data) {
             <If
                 data={data.logo}
                 dataIf={
-                    <div class="wallet_crypto_logo">
+                    <div class="c-wallet__cryptologo">
                         <img src={svg.logo} />
                     </div>
                 }

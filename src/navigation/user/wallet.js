@@ -33,66 +33,62 @@ const start = function () {
     const TransactionsList = function () {
         const listTransactions = Object.keys(transactions.list_records).map(function (key) {
             return (
-                <div>
-                    <div class="wallet_transactions_list_item">
-                        <div>
-                            <If
-                                data={transactions.list_records[key].comment == "Registration"}
-                                dataIf={<img src={svg['badge/badge2']} class="transactions_small_badge" />}
-                            />
-                            <span class="transaction_type">{Variable.lang.p[transactionType(transactions.list_records[key].type)]}</span>
-                        </div>
-                        <div>
-                            {getDateFormat(transactions.list_records[key].dateCreate)}
-                        </div>
-                        <div>
-                            {transactions.list_records[key].kind}
-                        </div>
-                        <div>
-                            {transactions.list_records[key].amount.cemd}
-                        </div>
-                        <div>
-                            <If
-                                data={transactions.list_records[key].status == 0}
-                                dataIf={<img src={svg['transaction_canceled']} />}
-                            />
-                            <If
-                                data={transactions.list_records[key].status == 1}
-                                dataIf={<img src={svg['transaction_new']} />}
-                            />
-                            <If
-                                data={transactions.list_records[key].status == 2}
-                                dataIf={<img src={svg['transaction_in_time']} />}
-                            />
-                            <If
-                                data={transactions.list_records[key].status == 3}
-                                dataIf={<img src={svg['transaction_success']} />}
-                            />
-                        </div>
+                <div class="c-wallet__transaction">
+                    <div>
+                        <If
+                            data={transactions.list_records[key].comment == "Registration"}
+                            dataIf={<img src={svg['badge/badge2']} class="transactions_small_badge" />}
+                        />
+                        <span class="transaction_type">{Variable.lang.p[transactionType(transactions.list_records[key].type)]}</span>
+                    </div>
+                    <div>
+                        {getDateFormat(transactions.list_records[key].dateCreate)}
+                    </div>
+                    <div>
+                        {transactions.list_records[key].kind}
+                    </div>
+                    <div>
+                        {transactions.list_records[key].amount.cemd}
+                    </div>
+                    <div>
+                        <If
+                            data={transactions.list_records[key].status == 0}
+                            dataIf={<img src={svg['transaction_canceled']} />}
+                        />
+                        <If
+                            data={transactions.list_records[key].status == 1}
+                            dataIf={<img src={svg['transaction_new']} />}
+                        />
+                        <If
+                            data={transactions.list_records[key].status == 2}
+                            dataIf={<img src={svg['transaction_in_time']} />}
+                        />
+                        <If
+                            data={transactions.list_records[key].status == 3}
+                            dataIf={<img src={svg['transaction_success']} />}
+                        />
                     </div>
                 </div>
             )
         })
 
         return (
-            <div class="wallet_operations_list">
-                <div>
-                    <div class="wallet_transactions_list_item wallet_transactions_list_label">
-                        <div>
-                            {Variable.lang.p.type}
-                        </div>
-                        <div>
-                            {Variable.lang.p.date}
-                        </div>
-                        <div>
-                            {Variable.lang.p.operation}
-                        </div>
-                        <div>
-                            {Variable.lang.p.amount}
-                        </div>
-                        <div>
-                            {Variable.lang.p.status}
-                        </div>
+            <div class="c-wallet__operations">
+                <div class="c-wallet__transaction c-wallet__transaction--label">
+                    <div>
+                        {Variable.lang.p.type}
+                    </div>
+                    <div>
+                        {Variable.lang.p.date}
+                    </div>
+                    <div>
+                        {Variable.lang.p.operation}
+                    </div>
+                    <div>
+                        {Variable.lang.p.amount}
+                    </div>
+                    <div>
+                        {Variable.lang.p.status}
                     </div>
                 </div>
                 {listTransactions}
@@ -124,9 +120,9 @@ const start = function () {
             console.log("myInfo", Variable.myInfo);
             return (
                 <div class="page-content">
-                    <div class="wallet_page_container">
-                        <div class="wallet_container">
-                            <div class="wallet_left_part">
+                    <div class="c-wallet wallet_page_container">
+                        <div class="c-wallet__container">
+                            <div class="c-wallet__left">
                                 <WalletCard
                                     logo={true}
                                     balance={Variable.myInfo.balance.cemd}
