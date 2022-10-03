@@ -186,6 +186,9 @@ const mainHeader = async function () {
         () => {
             Variable.langListShow = false;
             Variable.authModalShow = false;
+            if (Variable.showUserMenu) {
+                document.getElementById("mainHeader").classList.add("c-header--notransform");
+            }
         },
         () => {
 

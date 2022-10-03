@@ -13,7 +13,7 @@ const start = function () {
     let question;
 
     const getDateMoment = function (str) {
-        const lang = getVariable("languages")[getStorage("lang")];
+        const lang = Variable.lang.code;
         if (str) {
             var new_str = str.replace(' ', 'T')
         }

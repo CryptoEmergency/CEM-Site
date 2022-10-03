@@ -7,13 +7,13 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
   return (
     <a
       href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
-      class={`${parent == "big_user_avatar" ? "" : "comment_avatar"}`}
+      class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : "comment_avatar"}`}
       onclick={siteLink}
     >
       <div
         class={`c-avataricon ${parent == "big_user_avatar"
-            ? ""
-            : "c-avataricon--micro micro_user_avatar"
+          ? ""
+          : "c-avataricon--micro micro_user_avatar"
           }`}
       >
         <img

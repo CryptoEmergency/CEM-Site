@@ -159,6 +159,7 @@
         grid-gap: 20px;
         justify-content: center;
         align-items: center;
+        max-width: 1240px;
 
         @media(max-width: 1240px) {
             margin-top: 15px;

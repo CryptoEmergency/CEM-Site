@@ -131,8 +131,8 @@ const getNewsItem = async function (type, category, mediaActveCategory) {
 };
 
 const getDateFormat = function (data, type) {
-  const lang = getVariable("languages")[getStorage("lang")];
-  moment.locale(lang.code);
+  // const lang = getVariable("languages")[getStorage("lang")];
+  moment.locale(Variable.lang.code);
   //console.log("=b12dd9=", moment.locale());
   switch (type) {
     case "lenta":
