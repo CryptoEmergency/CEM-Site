@@ -53,7 +53,49 @@ const getUserBlackList = async (count = 0) => {
   return response
 }
 
+const changePassword = async (oldPassword, newPassword) => {
+  let data = {
+    value: {
+      oldPassword: oldPassword,
+      newPassword: newPassword 
+    }
+  }
+  let response = checkAnswerApi(await sendApi.create("changePassword", data));
+  return response
+}
+
+const deleteUser = async () => {
+  let data = {
+    value: {
+      'status.delete': true,
+      startDelete: new Date().toISOString()
+    }
+  }
+  let response = checkAnswerApi(await sendApi.create("setUsers", data));
+  return response
+}
+
+const restoreUser = async () => {
+  let data = {
+    value: {
+      'status.delete': false,
+      startDelete: ''
+    }
+  }
+  let response = checkAnswerApi(await sendApi.create("setUsers", data));
+  return response
+}
+
+const deleteUserFromBlacklist = async (user) => {
+  let data = {
+    value: {
+      blackList: user
+    }
+  }
+  let response = checkAnswerApi(await sendApi.create("setUsers", data));
+  return response
+}
 
 export {
-  mainTrades, getUserTransactions, getUserBlackList,
+  mainTrades, getUserTransactions, getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist
 };
