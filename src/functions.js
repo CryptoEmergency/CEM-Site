@@ -18,7 +18,7 @@ import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
 import swiperload from "@assets/js/swiper.js";
-import { changeStatistic,showVotersApi } from "@src/apiFunctions.js";
+import { changeStatistic, showVotersApi } from "@src/apiFunctions.js";
 
 const numberFixWithSpaces = function (num, fix) {
   let x = parseFloat(num).toFixed(fix);
@@ -201,8 +201,12 @@ const checkAnswerApi = function (data) {
   // console.log(data);
   if (!data || !data.result) {
     console.error("Wrong answer from Api");
+
     return { list_records: [{}], totalFound: 0 };
   }
+
+
+
   return data.result;
 };
 
@@ -228,7 +232,7 @@ const allValidation = (str, type, condition) => {
     });
   }
 
-  if(type == "passwordResetPass"){
+  if (type == "passwordResetPass") {
     return validator.matches(str, /[0-9]{6}/i);
   }
 
@@ -245,32 +249,32 @@ const changeActiveCommentsInput = (id) => {
 };
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e,id,commentId, ) => {
+const showVotersAndchangeStatistic = async (e, id, commentId,) => {
   e.preventDefault()
   let type = e.target.dataset.name
   if (e.type === "mousedown" || e.type === "touchstart") {
     interval = setInterval(async () => {
       sec = sec + 100;
-      console.log('=3ca4b3=',sec)
+      console.log('=3ca4b3=', sec)
       if (sec === 1500) {
         clearInterval(interval);
         sec = 0;
         let response = await showVotersApi(commentId || id);
         if (response !== undefined) {
-          response = response.list_records[0].evaluation.filter((item)=>
-    item.type === type);
-    Variable.SetModals({ name: "ModalWhoLike", data: {response} })
+          response = response.list_records[0].evaluation.filter((item) =>
+            item.type === type);
+          Variable.SetModals({ name: "ModalWhoLike", data: { response } })
         }
       }
     }, 100);
   } else {
     clearInterval(interval);
-    sec < 1500 && changeStatistic(e,id,commentId );
+    sec < 1500 && changeStatistic(e, id, commentId);
     if (1000 <= sec && sec < 1500) {
-      let response = await showVotersApi( commentId ||  id);
-      response = response.list_records[0].evaluation.filter((item)=>
-      item.type === type);
-      Variable.SetModals({ name: "ModalWhoLike", data: {response} })
+      let response = await showVotersApi(commentId || id);
+      response = response.list_records[0].evaluation.filter((item) =>
+        item.type === type);
+      Variable.SetModals({ name: "ModalWhoLike", data: { response } })
     }
     sec = 0;
   }

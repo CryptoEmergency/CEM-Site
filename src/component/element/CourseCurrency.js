@@ -21,7 +21,12 @@ const numberFixWithSpaces = function (num, fix) {
 const CourseCurrency = function ({ course, key }) {
 
     return (
-        <a href="/list-trade/" class="c-currency">
+        <a
+            href={key == "cem" ? "https://www.bitmart.com/trade/en?layout=basic&symbol=CEM_USDT" : "/list-trade/"}
+            rel="nofollow noopener"
+            target={key == "cem" ? "_blank" : "_self"}
+            class="c-currency"
+        >
             <div class="c-currency__icon">
                 <div class={`${key == "bnb" ? " icon-color-bnb" : key == "btc" ? " icon-color-btc" : key == "eth" ? " icon-color-eth" : key == "cem" ? " icon-color-cem" : ""}`}>
                     <img src={svg["coins/" + key + "2"]} />

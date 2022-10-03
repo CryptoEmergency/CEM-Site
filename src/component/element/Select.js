@@ -3,7 +3,8 @@ import {
   jsxFrag,
   Variable,
   getValue,
-  initReload
+  initReload,
+  initOne
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
@@ -14,21 +15,31 @@ import { If } from '@component/helpers/All.js';
 const Select = function ({ options, callback, toggler = null }) {
   let optionsActive
 
-  const changeSelect = (e, selectIndex) => {
+  initOne(
+    () => {
+      options.elem = Variable.setRef()
+      options.elemActive = Variable.setRef()
+    }
+  )
 
-    e.stopPropagation()
+  const changeSelect = function (selectIndex) {
+
     options.open = false
     options.items.map((item, index) => {
       if (selectIndex == index) {
         options.active = item.value
-        item.active = true
+        optionsActive = item.text
+        // item.active = true
       } else {
-        item.active = false
+        //item.active = false
       }
     })
+    options.elemActive().innerHTML = optionsActive
+    options.elem().hidden = true
     callback(options.active, options.nameOptions)
-    //initReload();
   }
+
+
 
   const optionsElem = options.items.map((item, index) => {
     if (options.active == item.value) {
@@ -36,7 +47,7 @@ const Select = function ({ options, callback, toggler = null }) {
     }
     return (
       <li
-        onClick={(e) => changeSelect(e, index)}
+        onClick={() => { changeSelect(index) }}
       >
         {item.text}
       </li>
@@ -53,16 +64,20 @@ const Select = function ({ options, callback, toggler = null }) {
       <div class="justselect-wrapper">
         <div
           class="justselect-title"
+          ref={options.elemActive}
           onClick={() => {
             options.open = !options.open
-            initReload();
+            // elem().style = "display:block"
+            options.elem().hidden = false
           }}
         >
           {optionsActive}
         </div>
         <ul
+          ref={options.elem}
           class="justselect-list"
-          style={options.open ? "display:block" : "display : none"}
+          hidden
+        // style={options.open ? "display:none" : "display : none"}
         >
           {optionsElem}
         </ul>

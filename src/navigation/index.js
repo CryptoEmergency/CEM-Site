@@ -19,7 +19,7 @@ import { mainQuestions, mainTrades, mainExchanges, mainUsers, mainNews } from "@
 import { QuestionItem } from '@component/element/QuestionItem.js';
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
-// import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
+import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
 import { BlockBanners } from '@component/blocks/BlockBanners.js';
 import { BlockTrade } from '@component/blocks/BlockTrade.js';
 import { BlockExchange } from '@component/blocks/BlockExchange.js';
@@ -152,18 +152,65 @@ const start = function () {
                 },
             },
         });
+
+
         // }
+
+        swiperitem.startup = new Swiper('#swiper-startups', {
+            direction: 'horizontal',
+            loop: true,
+            autoplay: {
+                delay: 2000,
+            },
+            pagination: {
+                el: '#swiper-pagination-startup',
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar-startup',
+            },
+            breakpoints: {
+                100: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                },
+                620: {  //600
+                    slidesPerView: 2,
+                    spaceBetween: 10
+                },
+                // 768: {
+                //   slidesPerView: 2,
+                //   spaceBetween: 50
+                // },
+                910: {  //800
+                    slidesPerView: 3,
+                    spaceBetween: 46,
+                },
+                1240: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                    navigation: {
+                        nextEl: '#next-startup',
+                        prevEl: '#prev-startup',
+                    },
+                },
+            },
+        });
+
         return
 
     }
 
+
+
+
+
+
     init(
         async () => {
             Variable.SwiperLoad.push(swiperLoad)
-            //let tpm = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse }))
+
             Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
             timersStart("Course", timerCourse, 10000)
-
             Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
                 {
                     setIntervalFunc: async () => {
@@ -173,71 +220,9 @@ const start = function () {
             )
             )
 
-            console.log('=9b0245=', Variable.MainQuestions)
-            filters = getStorage("filters")
-
-            optionsSelect = {
-                questions: {
-                    nameOptions: "questions",
-                    title: Variable.lang.span.sort,
-                    items: [
-                        { text: Variable.lang.select.showAllQuestions, value: "all" },
-                        { text: Variable.lang.select.openQuestions, value: "open" },
-                        { text: Variable.lang.select.closeQuestions, value: "closed" },
-                        { text: Variable.lang.select.bestQuestions, value: "best" }
-                    ],
-                    open: false,
-                    active: filters.MainQuestions.questions
-                },
-                date: {
-                    nameOptions: "date",
-                    title: Variable.lang.span.sort,
-                    items: [
-                        { text: Variable.lang.select.byDate, value: "date" },
-                        { text: Variable.lang.select.byViews, value: "views" },
-                        { text: Variable.lang.select.byAnswers, value: "answers" },
-                    ],
-                    open: false,
-                    active: filters.MainQuestions.date
-                }
-
-            }
-
-            //   const tmp = await mainQuestions(optionsSelect, 6);
-            // nowShow = 12
-            // totalRecords = tmp.totalFound
-            // questions = tmp.list_records;
-
-            // questions = await mainQuestions()
 
 
 
-            banners = [
-                {
-                    "id": "62dd2ca100978d192547427c",
-                    "image": "lbf_banner"
-                },
-                {
-                    "id": "62bab2ac962df43c3fd94755",
-                    "image": "blockchain24"
-                },
-                {
-                    "id": "62f0da1ef2b8fa66345ef411",
-                    "image": "crypto_summit"
-                },
-                {
-                    "id": "630382384dab714d6e986cd6",
-                    "image": "1200х580-(fb)"
-                },
-                {
-                    "id": "62fb66bd4dab714d6e955d80",
-                    "image": "blockchain_life"
-                },
-                {
-                    "id": "62d134221de982539a72345e",
-                    "image": "crypto_future_banner"
-                }
-            ];
 
             partners = [
                 {
@@ -301,65 +286,8 @@ const start = function () {
                     <BlockProjects />
 
                     <div class="c-main__wrapperbg">
-                        {/* <BlockQuestions /> */}
-                        <div class="c-questions">
-                            <div class="c-questions__header">
-                                <div class="c-questions__searchblock c-search">
-                                    <div class="c-search__container">
-                                        <div class="c-search__wrapper">
-                                            <img class="c-search__icon" src={svg.search_icon} />
-                                            <input class="c-search__input" type="text" placeholder={Variable.lang.placeholder.question} autocomplete="disabled" />
-                                            <img class="c-search__icon c-search__icon--filter" src={svg.filter} />
-
-                                        </div>
-                                        <div style="display: none;" class="questions_search">
-                                            <div class="question_search_half_empty">
-                                                {Variable.lang.text.contInput}
-                                            </div>
-                                            <div style="display: none;" class="question_search_help">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div data-needauth="true" data-action="askQuestionModal" class="mobile_search_container">
-                                        <div class="search-button" style="width:238px;">
-                                            {Variable.lang.button.giveQuestion}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="c-questions__filter questions_filter">
-                                    <Select
-                                        options={optionsSelect.questions}
-                                        callback={selectCallBack}
-                                    />
-                                    <Select
-                                        options={optionsSelect.date}
-                                        callback={selectCallBack}
-                                        toggler={true}
-                                    />
-
-                                    <div class="c-questions__lang">
-                                        {Variable.languages[filters.MainQuestions.lang].lang_orig}
-                                    </div>
-                                </div>
-
-                                <h4>{Variable.lang.h.lastQuestions}</h4>
-
-
-                            </div>
-
-                            <div class="c-questions__list questions-blocks">
-                                {
-                                    Variable.MainQuestions.list_records.map((item) => {
-                                        console.log("item=", item);
-                                        return (
-                                            <QuestionItem question={item} />
-                                        )
-                                    })
-                                }
-                            </div>
-
-                            <div class="c-questions__footer">
+                        <BlockQuestions
+                            button={<div class="c-questions__footer">
                                 <a
                                     class="c-button c-button--gray"
                                     href="/question/"
@@ -367,20 +295,19 @@ const start = function () {
                                 >
                                     <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
                                 </a>
-                            </div>
-                        </div>
+                            </div>}
+                        />
 
-
-                        {/* <div class="c-main__wrapperbg2">
-                            <BlockBanners banners={banners} />
+                        <div class="c-main__wrapperbg2">
+                            <BlockBanners />
                             <BlockTrade lang={Variable.lang} trades={trades} />
-                            <div class="top_professionals_container">
+                            {/* <div class="top_professionals_container">
                                 <BlockExchange lang={Variable.lang} exchanges={exchanges} />
                                 <BlockUsers lang={Variable.lang} users={users} />
                                 <BlockMainNews lang={Variable.lang} news={news} />
                                 <BlockInfoPartners lang={Variable.lang} partners={partners} />
-                            </div>
-                        </div> */}
+                            </div> */}
+                        </div>
                     </div>
                 </div>
             )

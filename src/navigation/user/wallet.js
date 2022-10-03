@@ -21,8 +21,9 @@ const start = function () {
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
+    Variable.showUserMenu = true
 
-    const showMoreTransactions = async function(){
+    const showMoreTransactions = async function () {
         count++;
         let tmp = await getUserTransactions(count);
         transactions.list_records.push(...tmp.list_records);
@@ -37,9 +38,9 @@ const start = function () {
                         <div>
                             <If
                                 data={transactions.list_records[key].comment == "Registration"}
-                                dataIf={<img src={svg['badge/badge2']} class="transactions_small_badge"/>}
+                                dataIf={<img src={svg['badge/badge2']} class="transactions_small_badge" />}
                             />
-                            <span class="transaction_type">{Variable.lang.p[transactionType(transactions.list_records[key].type)]}</span> 
+                            <span class="transaction_type">{Variable.lang.p[transactionType(transactions.list_records[key].type)]}</span>
                         </div>
                         <div>
                             {getDateFormat(transactions.list_records[key].dateCreate)}
@@ -53,26 +54,26 @@ const start = function () {
                         <div>
                             <If
                                 data={transactions.list_records[key].status == 0}
-                                dataIf={<img src={svg['transaction_canceled']}/>}
+                                dataIf={<img src={svg['transaction_canceled']} />}
                             />
                             <If
                                 data={transactions.list_records[key].status == 1}
-                                dataIf={<img src={svg['transaction_new']}/>}
+                                dataIf={<img src={svg['transaction_new']} />}
                             />
                             <If
                                 data={transactions.list_records[key].status == 2}
-                                dataIf={<img src={svg['transaction_in_time']}/>}
+                                dataIf={<img src={svg['transaction_in_time']} />}
                             />
                             <If
                                 data={transactions.list_records[key].status == 3}
-                                dataIf={<img src={svg['transaction_success']}/>}
+                                dataIf={<img src={svg['transaction_success']} />}
                             />
                         </div>
                     </div>
                 </div>
             )
         })
-    
+
         return (
             <div class="wallet_operations_list">
                 <div>
@@ -100,8 +101,8 @@ const start = function () {
                         class="btn-view-all"
                         style={
                             transactions.list_records.length === transactions.totalFound
-                            ? "display: none"
-                            : "display: flex"
+                                ? "display: none"
+                                : "display: flex"
                         }
                     >
                         <div>{Variable.lang.button.showMore}</div>
@@ -109,7 +110,7 @@ const start = function () {
                 </a>
             </div>
         )
-    
+
     }
 
     init(

@@ -1,29 +1,39 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
+    timersStart,
     setValue,
-    makeDOM,
+    sendApi,
     getVariable,
     getStorage,
     getValue,
+    initOne,
     Variable
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { CourseCurrency } from '@component/element/CourseCurrency.js';
-
+import { timerCourse, checkAnswerApi } from '@src/functions.js'
 
 const BlockPreview = function () {
 
-    const auth = getStorage("auth");
+
+
+    // initOne(
+    //     async () => {
+    //         console.log("BlockPreview initOne")
+    //         Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
+    //         console.log("BlockPreview initOne 2 ", Variable.Course)
+    //         timersStart("Course", timerCourse, 10000)
+    //     }
+    // ).then(console.log("fdfdfdf"))
 
     return (
         <div class="с-preview">
             <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
             <div class="с-preview__title">
                 <img class="с-preview__bg" src={images["background/cem"]} />
-                {!auth ?
+                {!Variable.auth ?
                     <div class="с-preview__text с-preview__text--auth">
                         <span>{Variable.lang.homePreview.ask}</span>
                         <div class="с-preview__imgblock">
