@@ -64,14 +64,15 @@ const clickCancel = function (e) {
 const clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
-      if (item() === e.target || item().contains(e.target)) {
+      if (item[0]() === e.target || item[0]().contains(e.target)) {
         return;
       } else {
-        item().hidden = true
+        item[1]().hidden = true
         Variable.OutHideWindows.splice(index, 1)
       }
     })
   }
+  return;
 };
 
 const timerTik = function () {

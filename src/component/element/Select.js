@@ -67,9 +67,12 @@ const Select = function ({ options, callback, toggler = null }) {
           ref={options.elemActive}
           onClick={() => {
             options.open = !options.open
-            // elem().style = "display:block"
-            Variable.OutHideWindows.push(options.elem)
-            options.elem().hidden = !options.elem().hidden
+            if (options.elem().hidden === true) {
+              options.elem().hidden = false
+              Variable.OutHideWindows.push([options.elemActive, options.elem])
+            } else {
+              options.elem().hidden = true
+            }
           }}
         >
           {optionsActive}
