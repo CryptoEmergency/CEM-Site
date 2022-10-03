@@ -2,15 +2,7 @@ import {
   jsx,
   jsxFrag,
   getStorage,
-  setValue,
-  getValue,
-  getAction,
-  getVariable,
   sendApi,
-  delDOM,
-  timersClear,
-  parsingUrl,
-  initReload,
   initGo,
   Variable
 } from "@betarost/cemjs";
@@ -189,28 +181,6 @@ const getQuestionItemInShow = async function (id) {
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
   return response;
 };
-
-// const getExchangeList = async (count) => {
-//     let data = {};
-//     if (!count) {
-//         data = {
-//             limit: 10,
-//             sort: {
-//                 score: -1,
-//             },
-//         };
-//     } else {
-//         data = {
-//             limit: 10, //limit12
-//             offset: 10 + 10 * (count - 1),
-//             sort: {
-//                 score: -1,
-//             },
-//         };
-//     }
-//     let response = checkAnswerApi(await sendApi.create("getExchange", data));
-//     return response
-// };
 
 const getTradeOrExchangeList = async (type, count) => {
   let a;

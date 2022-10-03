@@ -4,7 +4,8 @@ import {
     init,
     getValue,
     setValue,
-    Variable
+    Variable,
+    parsingUrl
 } from '@betarost/cemjs'
 import svg from "@assets/svg/index.js"
 import images from '@assets/images/index.js';
@@ -35,13 +36,6 @@ const showModalRegistr = function (e) {
 
 const LanguagesList = function (languages) {
 
-    const outClick = function (e) {
-        console.log("outClick")
-        e.stopPropagation();
-        Variable.langListShow = false
-
-    }
-
     const listLang = Object.keys(languages).map(function (key) {
         return (
             <li class="c-changelanguage__item">
@@ -51,10 +45,7 @@ const LanguagesList = function (languages) {
     })
 
     return (
-        <ul
-            class="c-changelanguage__list"
-        // outClick={outClick}
-        >
+        <ul class="c-changelanguage__list" >
             {listLang}
         </ul>
     )
@@ -119,14 +110,13 @@ const HeaderAuth = () => (
 
 
 
-const HeaderNotAuth = ({ ref }) => (
+const HeaderNotAuth = () => (
     <div class="c-header__container c-container">
         <div class="c-header__inner">
             <div class="c-header__auth">
                 <div
                     class="language"
                     onclick={showListLang}
-                    ref={ref}
                 >
                     <div class="selectlink">
                         <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
@@ -177,12 +167,12 @@ const HeaderNotAuth = ({ ref }) => (
 
 
 const mainHeader = async function () {
-    let test
-    test = Variable.setRef()
+
+    let elem = Variable.setRef()
+
     init(
         () => {
             Variable.langListShow = false;
-            Variable.authModalShow = false;
             if (Variable.showUserMenu) {
                 document.getElementById("mainHeader").classList.add("c-header--notransform");
             }
@@ -190,15 +180,59 @@ const mainHeader = async function () {
         () => {
 
             if (Variable.HeaderShow) {
-
                 return (
-                    <If
-                        data={Variable.auth}
-                        dataIf={<HeaderAuth />}
-                        dataElse={<HeaderNotAuth
-                            ref={test}
-                        />}
-                    />
+                    <div class="c-header__container c-container">
+                        <div class="c-header__inner">
+                            <div
+                                class="language"
+                                onclick={(e) => {
+                                    elem().hidden = !elem().hidden
+                                    if (!elem().hidden) {
+                                        Variable.OutHideWindows.push([elem, elem])
+                                    }
+                                    e.stopPropagation();
+                                }}
+                            >
+                                <div class="selectlink">
+                                    <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
+                                </div>
+                            </div>
+                            <div
+                                class="c-changelanguage"
+                                ref={elem}
+                                hidden
+                            >
+                                <div class="c-changelanguage__header">
+                                    <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
+                                </div>
+                                <ul class="c-changelanguage__list" >
+                                    {Object.keys(Variable.languages).map(function (key) {
+                                        return (
+                                            <li class="c-changelanguage__item">
+                                                <a
+                                                    class="c-changelanguage__link"
+                                                    href={"/" + key + "/" + Variable.dataUrl.adress}
+                                                    onclick={function (e) {
+                                                        e.preventDefault();
+                                                        elem().hidden = true
+                                                        history.pushState(null, null, this.href);
+                                                        parsingUrl()
+                                                    }}
+                                                >
+                                                    <span class="c-changelanguage__text">{Variable.languages[key].lang_orig}</span></a>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    // <If
+                    //     data={Variable.auth}
+                    //     dataIf={<HeaderAuth />}
+                    //     dataElse={<HeaderNotAuth />}
+                    // />
                 )
             } else if (Variable.showUserMenu) {
                 return (

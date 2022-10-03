@@ -23,7 +23,6 @@ const Select = function ({ options, callback, toggler = null }) {
   )
 
   const changeSelect = function (selectIndex) {
-    console.log('=1f8239 changeSelect=', selectIndex)
     options.open = false
     options.items.map((item, index) => {
       if (selectIndex == index) {
@@ -48,7 +47,6 @@ const Select = function ({ options, callback, toggler = null }) {
     return (
       <li
         onClick={() => {
-          console.log("ghdfhdfh=");
           changeSelect(index)
         }}
       >

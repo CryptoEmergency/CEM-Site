@@ -7,8 +7,7 @@ import {
     Variable
 } from '@betarost/cemjs';
 
-import { timerCourse, checkAnswerApi, siteLink } from '@src/functions.js'
-import { mainQuestions, mainTrades, mainExchanges, mainUsers, mainNews } from "@src/apiFunctions.js";
+import { timerCourse, checkAnswerApi } from '@src/functions.js'
 
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
@@ -204,16 +203,13 @@ const start = function () {
             )
 
             Variable.SwiperLoad.push(swiperLoad)
-
-            const data_users = await mainUsers(6);
-            // users = data_users.list_records;
         },
         () => {
 
             return (
                 <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     <BlockPreview />
-                    <BlockProjects />
+                    {/* <BlockProjects />
                     <div class="c-main__wrapperbg">
                         <BlockQuestions
                             button={
@@ -238,7 +234,7 @@ const start = function () {
                                 <BlockInfoPartners />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             )
         })
