@@ -231,8 +231,9 @@ const start = function () {
                                 </div>
                             }
                         />
-                        {/* <div class="c-main__wrapperbg2">
+                        <div class="c-main__wrapperbg2">
                             <BlockBanners />
+                            {/*
                             <BlockTrade />
                             <div class="top_professionals_container">
                                 <BlockExchange />
@@ -240,7 +241,8 @@ const start = function () {
                                 <BlockMainNews />
                                 <BlockInfoPartners />
                             </div>
-                        </div> */}
+                        */}
+                        </div>
                     </div>
                 </div>
             )
