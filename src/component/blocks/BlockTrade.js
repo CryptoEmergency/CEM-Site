@@ -6,6 +6,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { NumFormat } from '@src/functionsE.js'
+import { siteLink } from '@src/functions.js'
 
 // const NumFormat = function (value, options) {
 //     if (value === null || value === undefined) {
@@ -106,7 +107,7 @@ const BlockTrade = function () {
                 }
             </div>
             <div class="crypto_exchanges_footer">
-                <a class="c-button c-button--gray" href="list-trade/">
+                <a class="c-button c-button--gray" href="/list-trade/" onclick={siteLink}>
                     <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
                 </a>
             </div>
