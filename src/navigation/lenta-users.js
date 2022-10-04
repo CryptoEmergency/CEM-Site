@@ -7,6 +7,7 @@ import {
   setValue,
   getValue,
   sendApi,
+  Variable,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
@@ -15,7 +16,7 @@ import { BlockLentaUsers } from "@component/blocks/BlockLentaUsers.js";
 let count = 0;
 let prevType = "";
 const getLentaUsersList = async (firstLoad, type) => {
-  console.log('=269dc6=',type)
+  console.log('=269dc6=', type)
   let data = {
     select: {
       author: 1,
@@ -37,16 +38,16 @@ const getLentaUsersList = async (firstLoad, type) => {
   switch (type) {
 
     case "text":
-      console.log('=text=',prevType)
-       data.filter["media.type"] = { $nin: ["video", "audio", "image"] };
-      if(prevType === type){
-          data.limit = 6;
-          data.offset = 6 + 6 * (count - 1);
-      }else{
+      console.log('=text=', prevType)
+      data.filter["media.type"] = { $nin: ["video", "audio", "image"] };
+      if (prevType === type) {
+        data.limit = 6;
+        data.offset = 6 + 6 * (count - 1);
+      } else {
         data.limit = 6;
         data.offset = 0
       }
-     
+
       break;
 
     case "audio":
@@ -112,7 +113,7 @@ const getLentaUsersList = async (firstLoad, type) => {
 };
 
 const lentaUsersView = function () {
-  const lang = getVariable("languages")[getStorage("lang")];
+  // const lang = getVariable("languages")[getStorage("lang")];
   let posts = getValue(ID, "lentaUsers").list_records;
 
   return (
@@ -121,7 +122,7 @@ const lentaUsersView = function () {
         <div class="users_news_left">
           <div class="user_news_top">
             <div class="user_news_title">
-              <h4>{lang.span.userNews}</h4>
+              <h4>{Variable.lang.span.userNews}</h4>
             </div>
             <div style="display: flex; grid-gap: 20px">
               <div
@@ -131,12 +132,12 @@ const lentaUsersView = function () {
                 <img src={svg["filter"]} />
               </div>
               <div
-                data-language="{{lang.lang}}"
-                data-language_code="{{lang.code}}"
+                data-language={Variable.lang.lang}
+                data-language_code={Variable.lang.code}
                 class="alt_language_change"
                 data-action="userNewsFilterLanguage"
               >
-                {lang.lang_orig}
+                {Variable.lang.lang_orig}
               </div>
             </div>
           </div>

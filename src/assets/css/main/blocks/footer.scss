@@ -79,6 +79,10 @@
         display: flex;
         gap: 15px;
     }
+
+    .c-userpanel {
+        display: none;
+    }
 }
 
 .c-accordion {
@@ -533,6 +537,13 @@
 }
 
 @media(max-width: 1199px) {
+    .c-footer {
+
+        .c-userpanel {
+            display: block;
+        }
+    }
+
     .c-socialicon {
 
         &__tooltip {

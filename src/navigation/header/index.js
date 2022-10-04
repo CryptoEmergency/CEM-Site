@@ -129,6 +129,7 @@ const mainHeader = async function () {
                                             >
                                                 <span class="c-button__text">{Variable.lang.button.registration}</span>
                                             </button>
+                                            <i class="c-header__burger c-header__burger--noauth"></i>
                                         </div>
                                     }
                                 />

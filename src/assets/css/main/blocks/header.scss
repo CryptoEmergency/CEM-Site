@@ -33,6 +33,14 @@
         display: flex;
         order: 2;
         align-items: center;
+
+        .c-avataricon {
+            margin-left: 0;
+        }
+
+        .auth_user_header {
+            margin-left: 18px;
+        }
     }
 
     &__menu {
@@ -58,6 +66,14 @@
         background: url('../svg/icon/burger_menu.svg') no-repeat center/contain;
         filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(331deg) brightness(101%) contrast(104%);
         cursor: pointer;
+
+        &--noauth {
+            margin-left: 30px;
+
+            @media (max-width: 464px) {
+                margin-left: 10px;
+            }
+        }
     }
 
     &__notifications {
