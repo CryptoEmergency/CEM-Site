@@ -68,9 +68,10 @@ const returnImgOrVideo = (item) => {
   }
 };
 
-const BlockLentaUsers = function ({ item, i, init }) {
+const BlockLentaUsers = function ({ item }) {
+
   // const lang = getVariable("languages")[getStorage("lang")];
-  const isAuth = getStorage("auth");
+  const isAuth = Variable.auth;
   //   const parser = new DOMParser();
   //   let jsx1 = parser.parseFromString(item.text, "text/html");
   //   //   let tmp = [...jsx1.body.childNodes];

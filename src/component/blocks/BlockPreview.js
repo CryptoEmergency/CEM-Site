@@ -44,7 +44,7 @@ const BlockPreview = function () {
                 </div>
             </div>
             <div class="с-preview__parts">
-                <a href="/lenta-users/" class="с-preview__part">
+                <a href="/lenta-users/" class="с-preview__part" onclick={siteLink}>
                     <span>{Variable.lang.span.userNews}</span>
                 </a>
                 <If
