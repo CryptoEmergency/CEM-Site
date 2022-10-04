@@ -115,6 +115,7 @@ const start = function () {
                         <img
                           class="modal_success_icon"
                           src={svg["modal_success"]}
+                          width="40"
                         />
                       </div>
                     </div>
@@ -144,8 +145,8 @@ const start = function () {
                               data-type="name"
                               value={formInputs.name.value}
                               oninput={changeInput}
-                              // disabled = {Variable.myInfo.nickname !==  undefined  ? true : false }
-                              // style ={Variable.myInfo.nickname !==  undefined ? "border-color: rgb(37, 249, 48);" : "border-color: rgb(37, 249, 48)"} 
+                            // disabled = {Variable.myInfo.nickname !==  undefined  ? true : false }
+                            // style ={Variable.myInfo.nickname !==  undefined ? "border-color: rgb(37, 249, 48);" : "border-color: rgb(37, 249, 48)"} 
                             />
                           </div>
                         </div>
@@ -167,8 +168,8 @@ const start = function () {
                               data-type="email"
                               value={formInputs.email.value}
                               oninput={changeInput}
-                              // disabled = {Variable.myInfo.email !==  undefined  ? true : false }
-                              // style ={Variable.myInfo.email !==  undefined && "border-color: rgb(37, 249, 48);"} 
+                            // disabled = {Variable.myInfo.email !==  undefined  ? true : false }
+                            // style ={Variable.myInfo.email !==  undefined && "border-color: rgb(37, 249, 48);"} 
                             />
                           </div>
                         </div>
@@ -193,7 +194,7 @@ const start = function () {
                             ></textarea>
                           </div>
                           <div
-                            style={formInputs.isValid ? "display:block" : "display:none"}
+                            style={formInputs.isValid ? "display:block; margin-top: 20px;" : "display:none"}
                           >
                             <a class="btn-contacts" onclick={sendMessage}>
                               <span>{Variable.lang.button.send}</span>
@@ -205,7 +206,7 @@ const start = function () {
                   }
                 />
               </div>
-              <div class="contacts_info">
+              <div class="contacts_info" style={`${formInputs.messageSent != "" ? "margin-top: 20px" : ""}`}>
                 <span class="contact_info_label">
                   {Variable.lang.span.adress}:
                 </span>
