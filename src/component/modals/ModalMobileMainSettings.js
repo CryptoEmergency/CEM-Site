@@ -13,10 +13,29 @@ import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
 import { siteLink } from '@src/functions.js'
 
+// const showAllLangMedia = function (e, target) {
+//     e.preventDefault()
+//     if (target.parentNode.children[0].style == "display: none;") {
+//         target.parentNode.children[0].style = "";
+//     } else {
+//         target.parentNode.children[0].style = "display: none;";
+//     }
+// }
+
 const ModalMobileMainSettings = function ({ }, reload) {
+    let socialIcon
+
+    const showSocial = function (e) {
+        socialIcon[e.currentTarget.dataset.type] = !socialIcon[e.currentTarget.dataset.type];
+        // initGo("mainFooter", true);
+    }
 
     if (!reload) {
-        //vars
+        socialIcon = {
+            telegram: false,
+            youtube: false,
+            tiktok: false
+        }
     }
 
     return (
@@ -43,43 +62,46 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             {Variable.lang.text.menu}
                         </div>
                     </div>
-                    {/* {{#is auth "true"}} */}
-                    <div class="user_mobile_menu_content user_mobile_menu_main_content">
-                        <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href={`/user/${Variable.myInfo.nickname}`}>
-                            <img src={svg["profile_icon-1"]} />
-                            <span class="mobile_user_menu_link">{Variable.lang.a.profile}</span>
-                        </a>
-                        <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/chats/">
-                            <img src={svg["profile_icon-2"]} />
-                            <span class="mobile_user_menu_link">{Variable.lang.a.chats}</span>
-                        </a>
-                        <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
-                            <img src={svg["profile_icon-5"]} />
-                            <span class="mobile_user_menu_link">{Variable.lang.h.createPost}</span>
-                        </a>
-                        <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/awards/">
-                            <img src={svg["profile_icon-4"]} />
-                            <span class="mobile_user_menu_link">{Variable.lang.a.awards}</span>
-                        </a>
-                        <a data-updating="true" onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/quests/">
-                            <img src={svg["profile_icon-10"]} />
-                            <span class="mobile_user_menu_link">{Variable.lang.a.tasks}</span>
-                        </a>
-                        <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/wallet/">
-                            <img src={svg.absolutely_new_wallet} />
-                            <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
-                        </a>
-                        <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
-                            <img src={svg["profile_icon-3"]} />
-                            <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
-                        </a>
-                    </div>
-                    <div class="user_mobile_menu_part">
-                        <div class="user_mobile_menu_content">
-                            {Variable.lang.text.sections}
-                        </div>
-                    </div>
-                    {/* {{/is}} */}
+                    <If
+                        data={Variable.auth}
+                        dataIf={<div>
+                            <div class="user_mobile_menu_content user_mobile_menu_main_content">
+                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href={`/user/${Variable.myInfo.nickname}`}>
+                                    <img src={svg["profile_icon-1"]} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.profile}</span>
+                                </a>
+                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/chats/">
+                                    <img src={svg["profile_icon-2"]} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.chats}</span>
+                                </a>
+                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
+                                    <img src={svg["profile_icon-5"]} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.h.createPost}</span>
+                                </a>
+                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/awards/">
+                                    <img src={svg["profile_icon-4"]} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.awards}</span>
+                                </a>
+                                <a data-updating="true" onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/quests/">
+                                    <img src={svg["profile_icon-10"]} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.tasks}</span>
+                                </a>
+                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/wallet/">
+                                    <img src={svg.absolutely_new_wallet} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
+                                </a>
+                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                    <img src={svg["profile_icon-3"]} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
+                                </a>
+                            </div>
+                            <div class="user_mobile_menu_part">
+                                <div class="user_mobile_menu_content">
+                                    {Variable.lang.text.sections}
+                                </div>
+                            </div>
+                        </div>}
+                    />
                     <div class="user_mobile_menu_content user_mobile_menu_main_content">
                         <a
                             onclick={siteLink}
@@ -167,7 +189,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                         <div class="mobile_header_socials desktop_dn">
                             <div class="social-icons">
                                 <div class="footer-icon-block">
-                                    <div style="display:none;" class="footer-media-full">
+                                    <div style={socialIcon.telegram ? 'display:block;' : 'display:none;'} class="footer-media-full">
                                         <div>
                                             <a
                                                 target="_blank"
@@ -191,7 +213,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                             </a>
                                         </div>
                                     </div>
-                                    <a id="header_telegram_icon" data-action="showAllLangMedia" class="icon">
+                                    <a id="header_telegram_icon" onclick={showSocial} class="icon" data-type="telegram">
                                         <img src={svg["telegram-icon"]} />
                                     </a>
                                 </div>
@@ -249,26 +271,25 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             </div>
                         </div>
                     </div>
-                    {/* {{#is auth "true"}} */}
-                    <div class="user_mobile_menu_part">
-                        <div class="user_mobile_menu_content">
-                            {Variable.lang.text.control}
-                        </div>
-                    </div>
-                    <div class="user_mobile_menu_bottom">
-                        <div class="user_mobile_menu_content">
-                            <a class="user_icon_mobile_visible user_icon" href="/logout/" onclick={siteLink}>
-                                <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
-                            </a>
-                        </div>
-                    </div>
-                    {/* {{/is}} */}
+                    <If
+                        data={Variable.auth}
+                        dataIf={<div>
+                            <div class="user_mobile_menu_part">
+                                <div class="user_mobile_menu_content">
+                                    {Variable.lang.text.control}
+                                </div>
+                            </div>
+                            <div class="user_mobile_menu_bottom">
+                                <div class="user_mobile_menu_content">
+                                    <a class="user_icon_mobile_visible user_icon" href="/logout/" onclick={siteLink}>
+                                        <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>}
+                    />
                 </div>
-                <footer class="c-modal__footer">
-
-                </footer>
             </section>
-
         </div>
     )
 };
