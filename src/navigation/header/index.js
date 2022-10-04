@@ -33,6 +33,8 @@ const mainHeader = async function () {
             Variable.langListShow = false;
             if (Variable.showUserMenu) {
                 document.getElementById("mainHeader").classList.add("c-header--notransform");
+            } else {
+                document.getElementById("mainHeader").classList.remove("c-header--notransform");
             }
         },
         () => {
@@ -103,7 +105,12 @@ const mainHeader = async function () {
                                                     </a>
                                                     <div class="c-messages__new"></div>
                                                 </div>
-                                                <i class="c-header__burger"></i>
+                                                <i
+                                                    class="c-header__burger c-header__burger--noauth"
+                                                    onclick={() => {
+                                                        Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
+                                                    }}
+                                                ></i>
                                             </div>
                                             <div style="display: none;" class="user_notifications_block auth_notifications" id="notifications_block">
 
@@ -131,7 +138,12 @@ const mainHeader = async function () {
                                             >
                                                 <span class="c-button__text">{Variable.lang.button.registration}</span>
                                             </button>
-                                            <i class="c-header__burger c-header__burger--noauth"></i>
+                                            <i
+                                                class="c-header__burger c-header__burger--noauth"
+                                                onclick={() => {
+                                                    Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
+                                                }}
+                                            ></i>
                                         </div>
                                     }
                                 />

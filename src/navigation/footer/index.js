@@ -68,7 +68,7 @@ const mainFooter = async function () {
 
             if (Variable.FooterShow) {
                 return (
-                    <div class="c-footer__container c-container">
+                    <div class={`c-footer__container c-container ${Variable.auth ? "c-footer__container--panel" : ""}`}>
                         <div class="c-footer__nav" id="accordionFooter">
                             <div class="c-footer__accordion c-accordion">
                                 <span class="c-accordion__header" id="headingOne">

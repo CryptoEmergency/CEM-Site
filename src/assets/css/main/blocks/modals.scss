@@ -34,6 +34,19 @@
 		display: block;
 	}
 
+	&--fullscreen {
+
+		.c-modal {
+			&__dialog {
+				max-width: 100%;
+				margin: 0;
+				border-radius: 0;
+				border: none;
+				min-height: 100vh;
+			}
+		}
+	}
+
 	&__dialog {
 		position: relative;
 		width: auto;
@@ -4007,6 +4020,20 @@ s
 	}
 }
 
+/* modal #ModalMobileMainSettings (модалка меню) */
+#ModalMobileMainSettings {
+	.c-modal {
+		&__header {
+			padding: 1rem 1rem 10px;
+		}
+
+		&__body {
+			width: 100%;
+			padding: 0;
+		}
+	}
+}
+
 @media(max-width: 1240px) {
 	.go_back_icon {
 		width: 7px !important;
@@ -4074,6 +4101,7 @@ s
 	#ModalMobileSettings .modal-body {
 		width: 100%;
 	}
+
 
 	#ModalMobileMainSettings .modal-dialog {
 		max-width: 100%;
