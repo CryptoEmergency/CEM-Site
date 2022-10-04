@@ -3,13 +3,15 @@ import {
     jsxFrag,
     init,
     Variable,
-    parsingUrl
+    parsingUrl,
+    initReload,
 } from '@betarost/cemjs'
 import svg from "@assets/svg/index.js"
 
 import { If } from '@component/helpers/All.js'
 import { siteLink } from '@src/functions.js'
 import { Avatar } from '@component/element/Avatar.js';
+import { NotifyItem } from '@component/element/NotifyItem.js';
 
 const findUnread = function (arr) {
     let unread = false
@@ -27,10 +29,57 @@ const findUnread = function (arr) {
 const mainHeader = async function () {
 
     let elem = Variable.setRef()
+    let notify, currentNotify
+
+    const changeCategory = async function () {
+        if (currentNotify[this.dataset.type]) {
+            return
+        }
+        switch (this.dataset.type) {
+            case 'question':
+                currentNotify = {
+                    question: true,
+                    awards: false,
+                    system: false
+                }
+                notify = Variable.myInfo.notifyQuestions
+                break;
+            case 'awards':
+                currentNotify = {
+                    question: false,
+                    awards: true,
+                    system: false
+                }
+                notify = Variable.myInfo.notifyAwards
+                break;
+            case 'system':
+                currentNotify = {
+                    question: false,
+                    awards: false,
+                    system: true
+                }
+                notify = Variable.myInfo.notifySystem
+                break;
+        }
+        initReload()
+    }
+
+    const toggleVisibleNotify = function () {
+        Variable.notifyWindowShow = !Variable.notifyWindowShow;
+    }
 
     init(
-        () => {
+        async () => {
+            notify = Variable.myInfo.notifyQuestions
+            //notify = Variable.myInfo.notifyAwards
+            //notify = Variable.myInfo.notifySystem
+            currentNotify = {
+                question: true,
+                awards: false,
+                system: false
+            }
             Variable.langListShow = false;
+            Variable.notifyWindowShow = false;
             if (Variable.showUserMenu) {
                 document.getElementById("mainHeader").classList.add("c-header--notransform");
             } else {
@@ -94,8 +143,8 @@ const mainHeader = async function () {
                                                 <Avatar author={Variable.myInfo} />
                                             </div>
                                             <div class="auth_user_header">
-                                                <div class="c-header__notifications c-notification c-notification--active">
-                                                    <a class="c-notification__link"></a>
+                                                <div class={`c-header__notifications c-notification ${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "c-notification--active" : ""}`}>
+                                                    <a class="c-notification__link" onClick={toggleVisibleNotify}></a>
                                                     <div class="c-notification__new"></div>
                                                 </div>
                                                 <div class="c-header__messages c-messages">
@@ -112,9 +161,42 @@ const mainHeader = async function () {
                                                     }}
                                                 ></i>
                                             </div>
-                                            <div style="display: none;" class="user_notifications_block auth_notifications" id="notifications_block">
-                                                <img data-action="notifyAction" class="notify_close" src="/assets/icon/close.svg" />
+                                            <div style={`${Variable.notifyWindowShow ? "" : "display: none;"}`} class="user_notifications_block auth_notifications" id="notifications_block">
+                                                <img class="notify_close" src={svg.close} onClick={toggleVisibleNotify} />
                                                 <div class="notifications_title">
+                                                    <div class="notifications_titles_line">
+                                                        {Variable.lang.text.yourNotification}
+                                                        <a data-action="link" href="/user/notify/">{Variable.lang.button.show_all}</a>
+                                                    </div>
+                                                    <div class="notifications_toggle_block">
+                                                        <div data-type='question' onclick={changeCategory} class={currentNotify.question ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
+                                                            {Variable.lang.text.questions}
+                                                        </div>
+                                                        <div data-type='awards' onclick={changeCategory} class={currentNotify.awards ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
+                                                            {Variable.lang.text.awards}
+                                                        </div>
+                                                        <div data-type='system' onclick={changeCategory} class={currentNotify.system ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
+                                                            {Variable.lang.text.system}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="notifications_list">
+                                                    <div class="notifications_list_inner">
+                                                        <div class="notifications_list_part part_questions">
+
+
+                                                            <NotifyItem
+                                                                data={notify}
+                                                            />
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {/* <div class="notifications_title">
                                                     <div class="notifications_titles_line">
                                                         {Variable.lang.text.yourNotification}
                                                         <a data-action="link" href="/user/notify/">{Variable.lang.button.show_all}</a>
@@ -143,7 +225,7 @@ const mainHeader = async function () {
                                                             notifySystem
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     }

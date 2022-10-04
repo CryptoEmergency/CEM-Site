@@ -2,12 +2,13 @@ import { jsx, jsxFrag, Variable } from '@betarost/cemjs';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
+import { getDateFormat } from "@src/functions.js";
 
 const NotifyItem = function ({ data, type }) {
     return (
         <div>
             {data.map((item, index) => {
-                console.log('=38e227=', item, index)
+                // console.log('=38e227=', item, index)
                 let iconName
                 if (item.notify.name == "reciveAwards") {
                     iconName = svg["badge/" + item.notify.icon.split(".")[0]]
@@ -15,7 +16,7 @@ const NotifyItem = function ({ data, type }) {
                 } else {
                     iconName = svg[item.notify.icon.split(".")[0]]
                 }
-                console.log('=38e227=', item, index, iconName)
+                // console.log('=38e227=', item, index, iconName)
                 return (
                     <div class="notifications_list_item">
                         <img class="notifications_open_questions" src={iconName} />
@@ -30,7 +31,8 @@ const NotifyItem = function ({ data, type }) {
                             data={item.nickName}
                             dataIf={<span class="notifyNickname">{Variable.lang.text.user}: <a data-action="link" href={`/user/${item.nickName}`}>{item.nickName}</a></span>}
                         />
-                        <span>{item.dateCreate}</span>
+                        <span>{getDateFormat(item.dateCreate, "lenta")}</span>
+                        {/* <span>{item.updateTime ? `${Variable.lang.text.update} ${getDateFormat(item.updateTime, "lenta")}` : getDateFormat(item.showDate, "lenta")}</span> */}
                     </div>
                 )
             })}

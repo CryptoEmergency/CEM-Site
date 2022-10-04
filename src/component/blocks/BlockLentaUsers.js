@@ -69,7 +69,7 @@ const returnImgOrVideo = (item) => {
 };
 
 const BlockLentaUsers = function ({ item, i, init }) {
-  const lang = getVariable("languages")[getStorage("lang")];
+  // const lang = getVariable("languages")[getStorage("lang")];
   const isAuth = getStorage("auth");
   //   const parser = new DOMParser();
   //   let jsx1 = parser.parseFromString(item.text, "text/html");
@@ -134,7 +134,7 @@ const BlockLentaUsers = function ({ item, i, init }) {
         </div>
 
         <div class="user_post_statistic">
-          <span class="c-date">{item.updateTime ? `${lang.text.update} ${getDateFormat(item.updateTime, "lenta")}` : getDateFormat(item.showDate, "lenta")}</span>
+          <span class="c-date">{item.updateTime ? `${Variable.lang.text.update} ${getDateFormat(item.updateTime, "lenta")}` : getDateFormat(item.showDate, "lenta")}</span>
           <div class="user_post_statistic_item">
             <div class="user_post_statistic_image">
               <img src={svg["question_answers"]} /> <span>{item.statistic.comments} </span>
@@ -215,7 +215,7 @@ const BlockLentaUsers = function ({ item, i, init }) {
         style="display: none;"
       >
         <div class="show_all_post_block"> </div>
-        <span class="show_all_post_text">{lang.button.see_all}</span>
+        <span class="show_all_post_text">{Variable.lang.button.see_all}</span>
       </div>
     </div>
   );

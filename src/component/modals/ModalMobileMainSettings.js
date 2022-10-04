@@ -24,6 +24,7 @@ import youtube from '@assets/svg/youtube_icon.svg'
 let elem = {}
 
 const ModalMobileMainSettings = function ({ }, reload) {
+    console.log('=dd1846=', svg)
     let socialIcon
 
     const showSocial = function (e) {
@@ -105,6 +106,10 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                 <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
                                     <img src={svg["profile_icon-3"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
+                                </a>
+                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                    <img src={svg["settings_icon"]} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
                                 </a>
                             </div>
                             <div class="user_mobile_menu_part">
