@@ -231,16 +231,16 @@ const start = function () {
                                 </div>
                             }
                         />
-                        {/* <div class="c-main__wrapperbg2">
+                        <div class="c-main__wrapperbg2">
                             <BlockBanners />
                             <BlockTrade />
-                            <div class="top_professionals_container">
+                            {/* <div class="top_professionals_container">
                                 <BlockExchange />
                                 <BlockUsers />
                                 <BlockMainNews />
                                 <BlockInfoPartners />
-                            </div>
-                        </div> */}
+                            </div> */}
+                        </div>
                     </div>
                 </div>
             )
