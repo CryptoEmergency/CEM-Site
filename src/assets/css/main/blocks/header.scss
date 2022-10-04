@@ -1300,6 +1300,10 @@
         height: 80px;
         border-bottom: 1px solid $china_aster;
         padding: 0 50px;
+
+        @media(max-width: 319px) {
+            padding: 0 30px;
+        }
     }
 
     &__title {
@@ -1352,7 +1356,7 @@
     @media(max-width: 1199px) {
         width: 80%;
         height: 654px;
-        top: 50px;
+        // top: 50px;
         box-shadow: 0px 0px 15px $german_liquorice;
     }
 }

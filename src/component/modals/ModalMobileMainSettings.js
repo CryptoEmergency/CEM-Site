@@ -31,6 +31,12 @@ const ModalMobileMainSettings = function ({ }, reload) {
         // initGo("mainFooter", true);
     }
 
+    socialIcon = {
+        telegram: false,
+        // youtube: false,
+        tiktok: false
+    }
+
     if (!reload) {
 
         elem.telegram = Variable.setRef()
@@ -233,19 +239,6 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                         <img src={svg["telegram-icon"]} />
                                     </a>
                                 </div>
-                                {/* <!--
-                                <div class="footer-icon-block">
-                                    <div style="display:none;" class="footer-media-full">
-                                        <div><a target="_blank" href="https://www.instagram.com/cryptoemergency/"><img src="/assets/icon/instagram-icon.svg"/> Русский </a></div>
-                                        <div><a target="_blank" href="https://www.instagram.com/cryptoemergencyrussia/"><img src="/assets/icon/instagram-icon.svg"/> English </a></div>
-                                    </div>
-                                    <a id="header_instagram_icon" class="icon"><img src="/assets/icon/instagram-icon.svg" /></a>
-                                </div>
-                                --> */}
-
-
-
-
                                 <div class="footer-icon-block">
                                     <div
                                         // style={socialIcon.youtube ? '' : 'display:none;'}
@@ -284,11 +277,6 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                         <img src={svg["youtube-icon"]} />
                                     </a>
                                 </div>
-                                {/* <!--
-                                <div class="footer-icon-block">
-                                    <a href="https://www.facebook.com/groups/cryptoemergency/" class="icon"><img src="/assets/icon/facebook-icon.svg" /></a>
-                                </div>
-                                --> */}
                                 <div class="footer-icon-block">
                                     <a href="https://twitter.com/cryptoemergency" target="_blank" class="icon" rel="nofollow noopener" data-type="social" data-count="twitter">
                                         <img src={svg["twitter-icon"]} />

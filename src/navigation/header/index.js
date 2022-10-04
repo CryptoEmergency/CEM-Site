@@ -113,7 +113,37 @@ const mainHeader = async function () {
                                                 ></i>
                                             </div>
                                             <div style="display: none;" class="user_notifications_block auth_notifications" id="notifications_block">
-
+                                                <img data-action="notifyAction" class="notify_close" src="/assets/icon/close.svg" />
+                                                <div class="notifications_title">
+                                                    <div class="notifications_titles_line">
+                                                        {Variable.lang.text.yourNotification}
+                                                        <a data-action="link" href="/user/notify/">{Variable.lang.button.show_all}</a>
+                                                    </div>
+                                                    <div class="notifications_toggle_block">
+                                                        <div style={`${findUnread(Variable.myInfo.notifyQuestions) ? "color: #2ECB74" : ""}`} data-type="part_questions" class="notifications_toggle_item notifications_toggle_item_active">
+                                                            {Variable.lang.text.questions}
+                                                        </div>
+                                                        <div style={`${findUnread(Variable.myInfo.notifyAwards) ? "color: #2ECB74" : ""}`} data-type="part_awards" class="notifications_toggle_item">
+                                                            {Variable.lang.text.awards}
+                                                        </div>
+                                                        <div style={`${findUnread(Variable.myInfo.notifySystem) ? "color: #2ECB74" : ""}`} data-type="part_system" class="notifications_toggle_item">
+                                                            {Variable.lang.text.system}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="notifications_list">
+                                                    <div class="notifications_list_inner">
+                                                        <div class="notifications_list_part part_questions">
+                                                            notifyQuestions
+                                                        </div>
+                                                        <div class="notifications_list_part part_awards dn">
+                                                            notifyAwards
+                                                        </div>
+                                                        <div class="notifications_list_part part_system dn">
+                                                            notifySystem
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     }
