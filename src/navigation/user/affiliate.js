@@ -3,6 +3,7 @@ import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
 import { getDateFormat } from "@src/functions.js";
+import { BlockAffiliateBanners } from "@src/component/blocks/BlockAffiliateBanners.js";
 
 const start = function () {
 
@@ -163,9 +164,7 @@ const start = function () {
                             </div>
                         </div>
 
-                        <div class="affiliate_banners">
-
-                        </div>
+                        <BlockAffiliateBanners/>
                     </div>
 
 
