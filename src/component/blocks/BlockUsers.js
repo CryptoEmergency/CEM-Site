@@ -5,7 +5,7 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-
+import { siteLink } from '@src/functions.js'
 import { UserItem } from '@component/element/UserItem.js';
 
 const BlockUsers = function () {
@@ -71,7 +71,7 @@ const BlockUsers = function () {
                     }
                 </div>
             </div>
-            <a href="users/" class="btn-view-all-a">
+            <a href="users/" class="btn-view-all-a" onclick={siteLink}>
                 <div class="btn-view-all">
                     <div>{Variable.lang.button.allUsers}</div>
                 </div>

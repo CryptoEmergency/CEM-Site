@@ -234,12 +234,22 @@ const start = function () {
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
                             <BlockTrade />
-                            {/* <div class="top_professionals_container">
+                            <div class="top_professionals_container">
                                 <BlockExchange />
+                                <div class="crypto_exchanges_footer">
+                                    <a class="c-button c-button--gray" href="/list-exchange/" onclick={siteLink}>
+                                        <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
+                                    </a>
+                                </div>
                                 <BlockUsers />
                                 <BlockMainNews />
                                 <BlockInfoPartners />
-                            </div> */}
+                                <div class="crypto_exchanges_footer">
+                                    <a class="c-button c-button--gray" href="/partners/" onclick={siteLink}>
+                                        <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
