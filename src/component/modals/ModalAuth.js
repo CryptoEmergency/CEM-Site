@@ -20,10 +20,6 @@ let wayAuth,
     formInputs,
     viewPassword
 
-
-let elem = Variable.setRef()
-
-
 const changeInput = function () {
     formInputs[this.dataset.type].value = this.value.trim()
     formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
@@ -130,7 +126,6 @@ const sendAuthorization = async function (e) {
 const ModalAuth = function ({ }, reload) {
 
     if (!reload) {
-        Variable.OutHideWindows.push([elem])
         wayAuth = "email"
         viewPassword = false
         formInputs = {
@@ -154,7 +149,7 @@ const ModalAuth = function ({ }, reload) {
     }
 
     return (
-        <div class="c-modal c-modal--open" id="ModalLogin" ref={elem} >
+        <div class="c-modal c-modal--open" id="ModalLogin">
             <section class="c-modal__dialog">
                 <header class="c-modal__header">
                     <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2>

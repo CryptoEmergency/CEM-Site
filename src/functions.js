@@ -98,8 +98,10 @@ const timerTik = function () {
   //console.log("timerTik", "tt")
 };
 
-const getNewsItem = async function (type, category, mediaActveCategory) {
+const getNewsItem = async function (type, count , category, mediaActveCategory) {
   let getLang = "en";
+  let a = 6;
+   let b =12;
   if (getStorage("lang") == "ru") {
     getLang = "ru";
   }
@@ -126,6 +128,11 @@ const getNewsItem = async function (type, category, mediaActveCategory) {
     },
     limit: 6,
   };
+
+  if (count > 0){
+   data.limit = b;
+    data.offset = a + (count-1)*b;
+  }
 
   if (category && category != "All") {
     data.filter["category.name"] = category
