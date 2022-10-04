@@ -31,7 +31,7 @@ const start = function () {
                 class="c-whowe__img about_us_vector-1"
                 src={svg["background/about_us_vector-1"]}
               />
-              {/* <p>{Variable.lang.p.preview}</p> */}
+              <p>{Variable.lang.p.aboutPreview}</p>
             </div>
             <div class="c-whowe__bg about_us_background_fade"></div>
           </div>
@@ -99,7 +99,7 @@ const start = function () {
                     <p>{Variable.lang.p.mapDateThree}</p>
 
                     <div></div>
-                    <span>{Variable.lang.span.mapDescFour}</span>
+                    <span>{Variable.lang.span.mapDescFive}</span>
                   </div>
                 </div>
                 <img src={images["road_map"]} />
@@ -110,9 +110,9 @@ const start = function () {
                     <span>{Variable.lang.span.mapDescThree}</span>
                   </div>
                   <div class="road_map_date-5">
-                    <p>{Variable.lang.p.mapDateFive}</p>
+                    <p>{Variable.lang.p.October2022}</p>
                     <div></div>
-                    <span>{Variable.lang.span.mapDescFive}</span>
+                    <span>{Variable.lang.span.mapDescFour}</span>
                   </div>
                   <div class="road_map_date-6">
                     <p>{Variable.lang.p.mapDateSix}</p>
@@ -132,16 +132,25 @@ const start = function () {
                   </span>
                   <p>{Variable.lang.p.aboutProjectDateOne}</p>
                 </div>
-                <a
+                <a class="projects_item"
                   target="_blank"
-                  href="https://www.crypto-vpn.online"
-                  class="projects_item"
+                  href="https://cemblockchain.com/"
                 >
-                  <img src={images["about_us_banner7"]} />
+                  <img src={images["about_us_banner8"]} />
                   <span class="project_gradient">
-                    {Variable.lang.span.aboutProjectNameThree}
+                  Cemblockchain
                   </span>
-                  <p>{Variable.lang.p.aboutProjectDateThree}</p>
+                  <p>{Variable.lang.p.aboutProjectDate19May2022}</p>
+                </a>
+                <a class="projects_item"
+                  target="_blank"
+                  href="https://cemwallet.com/"
+                >
+                  <img src={images["about_us_banner8"]} />
+                  <span class="project_gradient">
+                  CEM Wallet
+                  </span>
+                  <p>{Variable.lang.p.aboutProjectDateAugust2022}</p>
                 </a>
                 <div class="projects_item">
                   <img src={images["about_us_banner6"]} />
@@ -150,13 +159,19 @@ const start = function () {
                   </span>
                   <p>{Variable.lang.p.aboutProjectDateTwo}</p>
                 </div>
-                <div class="projects_item">
-                  <img src={images["about_us_banner8"]} />
+                <div
+                  // target="_blank"
+                  // href="https://www.crypto-vpn.online"
+                  class="projects_item"
+                >
+                  <img src={images["about_us_banner7"]} />
                   <span class="project_gradient">
-                    {Variable.lang.span.aboutProjectNameThree}
+                    crypto vpn
                   </span>
-                  <p>{Variable.lang.p.aboutProjectDateThree}</p>
+                  <p>{Variable.lang.p.aboutProjectDateTwo}</p>
                 </div>
+               
+               
               </div>
             </div>
           </div>
