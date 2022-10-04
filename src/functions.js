@@ -210,15 +210,11 @@ const changeLang = function (e) {
 };
 
 const checkAnswerApi = function (data) {
-  // console.log(data);
+  // console.log("checkAnswerApi", data);
   if (!data || !data.result) {
     console.error("Wrong answer from Api");
-
-    return { list_records: [{}], totalFound: 0 };
+    return { list_records: [], totalFound: 0 };
   }
-
-
-
   return data.result;
 };
 

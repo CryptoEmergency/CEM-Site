@@ -157,60 +157,67 @@ const start = function () {
             Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
             timersStart("Course", timerCourse, 10000)
 
-            // Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
-            //     {
-            //         setIntervalFunc: async () => {
-            //             Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
-            //         }
-            //     }
-            // )
-            // )
+            Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
+                {
+                    setIntervalFunc: async () => {
+                        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
+                    },
+                    name: "getMainQuestions"
+                }
+            )
+            )
 
-            // Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades(
-            //     {
-            //         setIntervalFunc: async () => {
-            //             Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades({ name: "getMainTrades" }))
-            //         }
-            //     }
-            // )
-            // )
+            Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades(
+                {
+                    setIntervalFunc: async () => {
+                        Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades({ name: "getMainTrades" }))
+                    },
+                    name: "getMainTrades"
 
-            // Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges(
-            //     {
-            //         setIntervalFunc: async () => {
-            //             Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges({ name: "getMainExchanges" }))
-            //         }
-            //     }
-            // )
-            // )
+                }
+            )
+            )
 
-            // Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers(
-            //     {
-            //         setIntervalFunc: async () => {
-            //             Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers({ name: "getMainUsers" }))
-            //         }
-            //     }
-            // )
-            // )
+            Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges(
+                {
+                    setIntervalFunc: async () => {
+                        Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges({ name: "getMainExchanges" }))
+                    },
+                    name: "getMainExchanges"
+                }
+            )
+            )
 
-            // Variable.MainNews = checkAnswerApi(await sendApi.getMainNews(
-            //     {
-            //         setIntervalFunc: async () => {
-            //             Variable.MainNews = checkAnswerApi(await sendApi.getMainNews({ name: "getMainNews" }))
-            //         }
-            //     }
-            // )
-            // )
+            Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers(
+                {
+                    setIntervalFunc: async () => {
+                        Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers({ name: "getMainUsers" }))
+                    },
+                    name: "getMainUsers"
+                }
+            )
+            )
 
-            // Variable.SwiperLoad.push(swiperLoad)
+            Variable.MainNews = checkAnswerApi(await sendApi.getMainNews(
+                {
+                    setIntervalFunc: async () => {
+                        Variable.MainNews = checkAnswerApi(await sendApi.getMainNews({ name: "getMainNews" }))
+                    },
+                    name: "getMainNews"
+                }
+            )
+            )
+
+            Variable.SwiperLoad.push(swiperLoad)
+
         },
         () => {
 
             return (
                 <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     <BlockPreview />
-                    {/* <BlockProjects />
-                    <div class="c-main__wrapperbg">
+                    <BlockProjects />
+                    {/* <div class="c-main__wrapperbg">
                         <BlockQuestions
                             button={
                                 <div class="c-questions__footer">

@@ -37,31 +37,31 @@ const BlockProjects = function () {
             "icon": "shuffle",
             "link": "list-exchange"
         },
-        {
-            "title": Variable.lang.a.university,
-            "icon": "mortarboard",
-            "link": "university"
-        },
+        // {
+        //     "title": Variable.lang.a.university,
+        //     "icon": "mortarboard",
+        //     "link": "university"
+        // },
         {
             "title": Variable.lang.a.contentCreater,
             "icon": "graph",
             "link": "content-creator"
         },
-        {
-            "title": Variable.lang.a.starups,
-            "icon": "startup",
-            "link": "startups"
-        },
-        {
-            "title": Variable.lang.a.universes,
-            "icon": "meta_universes",
-            "link": "university"
-        },
-        {
-            "title": Variable.lang.a.icoRating,
-            "icon": "star1",
-            "link": "ico-rating"
-        },
+        // {
+        //     "title": Variable.lang.a.starups,
+        //     "icon": "startup",
+        //     "link": "startups"
+        // },
+        // {
+        //     "title": Variable.lang.a.universes,
+        //     "icon": "meta_universes",
+        //     "link": "university"
+        // },
+        // {
+        //     "title": Variable.lang.a.icoRating,
+        //     "icon": "star1",
+        //     "link": "ico-rating"
+        // },
         {
             "title": Variable.lang.a.trade,
             "icon": "stock-market",
@@ -77,15 +77,15 @@ const BlockProjects = function () {
             "icon": "user",
             "link": "experts"
         },
-        {
-            "title": Variable.lang.a.nft,
-            "icon": "nft_icon",
-            "link": "nft-market"
-        },
+        // {
+        //     "title": Variable.lang.a.nft,
+        //     "icon": "nft_icon",
+        //     "link": "nft-market"
+        // },
         {
             "title": Variable.lang.a.career,
             "icon": "careers_icon",
-            "link": "experts"
+            "link": "career-whith-us"
         },
     ];
 
@@ -132,9 +132,9 @@ const BlockProjects = function () {
                 <div class="swiper-button-next" id="next-icons"><img src={svg.swiper_arrow_right} style="height: 40%;" /></div>
 
             </div>
-            <div class="c-projects__more main_page_show_more">
+            {/* <div class="c-projects__more main_page_show_more">
                 {Variable.lang.button.see_all}
-            </div>
+            </div> */}
 
         </div>
 
