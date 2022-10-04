@@ -1,0 +1,50 @@
+import {
+    jsx,
+    jsxFrag,
+    Variable,
+    initReload,
+    parsingUrl,
+    initOne
+} from '@betarost/cemjs';
+import svg from "@assets/svg/index.js";
+
+
+const ModalLangChange = function ({ }, reload) {
+
+    initOne(
+        () => {
+
+        }
+    )
+
+    return (
+        <div
+            class="c-changelanguage"
+        >
+            <div class="c-changelanguage__header">
+                <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
+            </div>
+            <ul class="c-changelanguage__list" >
+                {Object.keys(Variable.languages).map(function (key) {
+                    return (
+                        <li class="c-changelanguage__item">
+                            <a
+                                class="c-changelanguage__link"
+                                href={"/" + key + "/" + Variable.dataUrl.adress}
+                                onclick={function (e) {
+                                    e.preventDefault();
+                                    Variable.Modals.pop()
+                                    history.pushState(null, null, this.href);
+                                    parsingUrl()
+                                }}
+                            >
+                                <span class="c-changelanguage__text">{Variable.languages[key].lang_orig}</span></a>
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+};
+
+export default ModalLangChange;

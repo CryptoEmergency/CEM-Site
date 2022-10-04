@@ -56,7 +56,13 @@ const ModalMobileMainSettings = function ({ }, reload) {
             <section class="c-modal__dialog">
                 <header class="c-modal__header">
                     {/* <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2> */}
-                    <div class="language language_visible" data-action="siteLanguageChangeModal">
+                    <div
+                        class="language language_visible"
+                        onclick={(e) => {
+                            Variable.SetModals({ name: "ModalLangChange", data: {} }, true)
+                            e.stopPropagation();
+                        }}
+                    >
                         <div class="selectlink">
                             <div class="selectlink-control">
                                 <img class="language_change_world" src={svg.language_change_world} /> {Variable.lang.lang_orig}

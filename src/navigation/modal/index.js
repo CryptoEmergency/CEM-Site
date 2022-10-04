@@ -23,6 +23,7 @@ const mainModal = async function () {
                         list[item.name](item.data, reload)
                     )
                 })
+
                 return (
                     <div>
                         {modals}
