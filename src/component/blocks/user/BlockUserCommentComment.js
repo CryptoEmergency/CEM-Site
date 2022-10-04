@@ -114,7 +114,7 @@ const BlockUserCommentComment = function ({
                             onclick = {(e) => {
                               closeAnswerAdditionally(e)
                               e.target.parentElement.parentElement.parentElement.style="display : none"
-                              Variable.SetModals({ name: "ModalDelComment", data: {id:  item._id, mainCom:false} })
+                              Variable.SetModals({ name: "ModalDelComment", data: {id:  item._id, mainCom:false} },true)
                             }}
                         >
                           {Variable.lang.select.delete}

@@ -13,7 +13,8 @@ const ModalWhoLike = function (data, reload) {
             type="button"
             class="c-modal__close"
             onclick={() => {
-              Variable.Modals = [];
+              Variable.Modals.pop();
+              initReload("modals")
             }}
           ></button>
         </header>

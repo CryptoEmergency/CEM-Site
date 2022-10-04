@@ -112,7 +112,7 @@ const BlockUserComment = function ({ comments }) {
                             Variable.SetModals({
                               name: "ModalDelComment",
                               data: { id: item._id, mainCom: true },
-                            });
+                            },true);
                           
                           }}
                         >
