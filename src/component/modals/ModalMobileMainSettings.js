@@ -76,10 +76,10 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                     <img src={svg["profile_icon-1"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.profile}</span>
                                 </a>
-                                <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/chats/">
+                                {/* <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/chats/">
                                     <img src={svg["profile_icon-2"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.chats}</span>
-                                </a>
+                                </a> */}
                                 <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
                                     <img src={svg["profile_icon-5"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.h.createPost}</span>
@@ -88,10 +88,10 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                     <img src={svg["profile_icon-4"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.awards}</span>
                                 </a>
-                                <a data-updating="true" onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/quests/">
+                                {/* <a data-updating="true" onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/quests/">
                                     <img src={svg["profile_icon-10"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.tasks}</span>
-                                </a>
+                                </a> */}
                                 <a onclick={siteLink} class="user_icon_mobile_visible user_icon" href="/user/wallet/">
                                     <img src={svg.absolutely_new_wallet} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
@@ -133,7 +133,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <img src={svg.user_mobile_answers_and_questions} />
                             <span class="mobile_user_menu_link">{Variable.lang.a.questionsAnswers}</span>
                         </a>
-                        <a
+                        {/* <a
                             data-updating="true"
                             onclick={siteLink}
                             class="user_icon_mobile_visible user_icon"
@@ -141,7 +141,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                         >
                             <img src={svg.community_chat_menu_icon} />
                             <span class="mobile_user_menu_link">{Variable.lang.a.chatsPublic}</span>
-                        </a>
+                        </a> */}
                         <a
                             onclick={siteLink}
                             class="user_icon_mobile_visible user_icon"
@@ -158,7 +158,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <img src={svg.blog_menu_icon1} />
                             <span class="mobile_user_menu_link">{Variable.lang.a.blog}</span>
                         </a>
-                        <a
+                        {/* <a
                             data-updating="true"
                             onclick={siteLink}
                             class="user_icon_mobile_visible user_icon"
@@ -166,7 +166,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                         >
                             <img src={svg.startup_menu_icon} />
                             <span class="mobile_user_menu_link">{Variable.lang.a.starups}</span>
-                        </a>
+                        </a> */}
                         <a
                             onclick={siteLink}
                             class="user_icon_mobile_visible user_icon"
@@ -183,7 +183,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <img src={svg.exchanger_menu_icon} />
                             <span class="mobile_user_menu_link">{Variable.lang.a.exchange}</span>
                         </a>
-                        <a
+                        {/* <a
                             data-updating="true"
                             onclick={siteLink}
                             class="user_icon_mobile_visible user_icon"
@@ -191,7 +191,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                         >
                             <img src={svg.ico_rating} />
                             <span class="mobile_user_menu_link">{Variable.lang.a.icoRating}</span>
-                        </a>
+                        </a> */}
                         <div class="mobile_header_socials desktop_dn">
                             <div class="social-icons">
                                 <div class="footer-icon-block">
