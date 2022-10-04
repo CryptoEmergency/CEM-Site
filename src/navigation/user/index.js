@@ -20,6 +20,75 @@ import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
 const start = function () {
 
+    const currentCategory = async function(){
+        switch(tabType){
+            case 'lentaFriends':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'lentaUser':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'aboutUser':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'questions':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'answers':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'subscribers':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'friends':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'awards':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'social':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'galary':
+                return(
+                    <div></div>
+                )
+                break;
+            case 'donation':
+                return(
+                    <div></div>
+                )
+                break;
+        }
+    }
+
+    const changeType = async function(){
+        if(this.dataset.tabtype == tabType){
+            return
+        }
+        tabType = this.dataset.tabtype
+        
+        initReload()
+    }
+
     let userInfo,
         tabType
 
@@ -49,9 +118,14 @@ const start = function () {
                     <ProfileTabsMenu
                         userInfo={userInfo}
                         tabType={tabType}
+                        changeType={changeType}
                     />
                     <div class="userMainBlock">
-                        {/* {dataShow} */}
+                        <BlockUserProfileAbout
+                            lang={Variable.lang}
+                            myInfo={Variable.myInfo}
+                            userInfo={userInfo}
+                        />
                     </div>
                 </div>
             )
