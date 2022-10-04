@@ -18,7 +18,7 @@ import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
 // import swiperload from "@assets/js/swiper.js";
-import { changeStatistic, showVotersApi } from "@src/apiFunctions.js";
+import { changeStatistic, showVotersApi,getNewsItemInShow } from "@src/apiFunctions.js";
 
 const numberFixWithSpaces = function (num, fix) {
   let x = parseFloat(num).toFixed(fix);
@@ -293,10 +293,27 @@ const showVotersAndchangeStatistic = async (e, id, commentId,) => {
   } else {
     clearInterval(interval);
     sec < 1500 && changeStatistic(e, id, commentId);
+    // console.log('=3c6=yrtryryryr1c=',sec)
+    // sec < 1500 && async function() {
+    //   changeStatistic(e, id, commentId);
+    //   console.log('=3c6tttttttttttef1c=')
+    //    if(Variable.dataUrl.params === undefined){
+    //      Variable.Modals.pop();
+    //     let news = await getNewsItemInShow(
+    //       Variable.Static.showNewsId
+    //     );
+    //     news = news.list_records[0];
+    //     Variable.SetModals({
+    //       name: "ModalFullNews",
+    //       data: { item: news },
+    //     });
+    //    } 
+    // }() ;
     if (1000 <= sec && sec < 1500) {
       let response = await showVotersApi(commentId || id);
       response = response.list_records[0].evaluation.filter((item) =>
         item.type === type);
+        
       Variable.SetModals({ name: "ModalWhoLike", data: { response } },true)
     }
     sec = 0;

@@ -64,7 +64,10 @@ const changeStatistic = async function (e, commentId, subcommentId) {
   }
 
   let response = checkAnswerApi(await sendApi.create("setNews", data));
-  initGo()
+  if(Variable.dataUrl.params !== undefined){
+     initGo()
+  }
+ 
 
 };
 
