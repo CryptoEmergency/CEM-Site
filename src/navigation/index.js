@@ -7,7 +7,7 @@ import {
     Variable
 } from '@betarost/cemjs';
 
-import { timerCourse, checkAnswerApi } from '@src/functions.js'
+import { timerCourse, checkAnswerApi, siteLink } from '@src/functions.js'
 
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
@@ -217,7 +217,7 @@ const start = function () {
                 <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     <BlockPreview />
                     <BlockProjects />
-                    {/* <div class="c-main__wrapperbg">
+                    <div class="c-main__wrapperbg">
                         <BlockQuestions
                             button={
                                 <div class="c-questions__footer">
@@ -231,7 +231,7 @@ const start = function () {
                                 </div>
                             }
                         />
-                        <div class="c-main__wrapperbg2">
+                        {/* <div class="c-main__wrapperbg2">
                             <BlockBanners />
                             <BlockTrade />
                             <div class="top_professionals_container">
@@ -240,8 +240,8 @@ const start = function () {
                                 <BlockMainNews />
                                 <BlockInfoPartners />
                             </div>
-                        </div>
-                    </div> */}
+                        </div> */}
+                    </div>
                 </div>
             )
         })

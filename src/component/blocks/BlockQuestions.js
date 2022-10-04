@@ -70,7 +70,7 @@ const BlockQuestions = function ({ button }) {
                     <div class="c-search__container">
                         <div class="c-search__wrapper">
                             <img class="c-search__icon" src={svg.search_icon} />
-                            <input class="c-search__input" type="text" placeholder={Variable.lang.placeholder.question} autocomplete="disabled" />
+                            <input class="c-search__input" type="text" placeholder={Variable.lang.placeholder.question} autocomplete="disabled" readonly />
                             <img class="c-search__icon c-search__icon--filter" src={svg.filter} />
 
                         </div>
