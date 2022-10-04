@@ -4,41 +4,52 @@ import {
   Variable,
   init,
   initGo,
+  initReload,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
-
-
 
 import {
   getNewsItem,
   getNewsCategory,
   getDateFormat,
-  changeLang
+  changeLang,
 } from "@src/functions.js";
 
-
-
 const start = function () {
-  let activeCategory, newsCategory, newsItem, prevAdress
-  Variable.HeaderShow = true
-  Variable.FooterShow = true
+  let activeCategory, newsCategory, newsItem, prevAdress, count;
+  Variable.HeaderShow = true;
+  Variable.FooterShow = true;
 
   const changeNewsCategory = async function (e) {
+    count = 0;
     activeCategory = e.currentTarget.dataset.name;
-    newsItem = await getNewsItem("news", activeCategory);
-    initGo(null, true);
-  }
+    newsItem = await getNewsItem("news", count, activeCategory);
+    // initGo(null, true);
+    initReload();
+  };
+
+  const showMore = async () => {
+    count++;
+    let tmp = await getNewsItem("news", count, activeCategory);
+    newsItem.list_records.push(...tmp.list_records);
+    initReload();
+  };
+
   init(
     async () => {
-      activeCategory = "All"
-      newsCategory = await getNewsCategory("news")
-      newsItem = await getNewsItem("news", activeCategory);
+      activeCategory = "All";
+      newsCategory = await getNewsCategory("news");
+      newsItem = await getNewsItem("news", count, activeCategory);
       prevAdress = Variable.dataUrl.adress;
+      count = 0;
     },
     () => {
-      
       return (
-        <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
+        <div
+          class={`${
+            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+          } blog_page_container`}
+        >
           <div class="blog_page">
             <div class="blog_filter">
               <h2>{Variable.lang.h.news}</h2>
@@ -46,17 +57,22 @@ const start = function () {
 
             <div class="tags">
               <div
-                class={`tag_button ${activeCategory == "All" && "tag_button_active"}`}
+                class={`tag_button ${
+                  activeCategory == "All" && "tag_button_active"
+                }`}
                 data-name="All"
                 onclick={changeNewsCategory}
               >
                 <span>{Variable.lang.categoryName.all}</span>
               </div>
 
-              {newsCategory.list_records.map((item) => {
+              {newsCategory.list_records.filter((item2) => item2.name !== null).map((item) => {
+                console.log('=c16335=',item)
                 return (
                   <div
-                    class={`tag_button ${activeCategory == item.name && "tag_button_active"}`}
+                    class={`tag_button ${
+                      activeCategory == item.name && "tag_button_active"
+                    }`}
                     data-name={item.name}
                     onclick={changeNewsCategory}
                   >
@@ -64,7 +80,6 @@ const start = function () {
                   </div>
                 );
               })}
-
             </div>
 
             <div class="userNewsBlock">
@@ -77,9 +92,10 @@ const start = function () {
                 <div class="blog_news">
                   {newsItem.list_records.map((item) => {
                     return (
-                      <a class="blog_news_item"
-                      href={`/${prevAdress}/show/${item._id}`}
-                        onclick ={changeLang}
+                      <a
+                        class="blog_news_item"
+                        href={`/${prevAdress}/show/${item._id}`}
+                        onclick={changeLang}
                       >
                         <img src={"/assets/upload/news/" + item.image} />
                         <p class="blog_new_title">{item.title}</p>
@@ -107,21 +123,30 @@ const start = function () {
                             </a>
                           </p>
                         )}
-
                       </a>
                     );
                   })}
                 </div>
+                <a class="btn-view-all-a" onclick={showMore}>
+                  <div
+                    class="btn-view-all"
+                    data-action="viewAllButton"
+                    style={
+                      newsItem.list_records.length === newsItem.totalFound
+                        ? "display: none"
+                        : "display: flex"
+                    }
+                  >
+                    <div>{Variable.lang.button.showMore}</div>
+                  </div>
+                </a>
               </div>
-
             </div>
           </div>
         </div>
-      )
+      );
     }
-  )
-
-
-}
+  );
+};
 
 export default start;

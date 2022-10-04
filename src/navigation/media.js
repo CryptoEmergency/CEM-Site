@@ -4,6 +4,7 @@ import {
   Variable,
   init,
   initGo,
+  initReload,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
@@ -18,21 +19,29 @@ import {
 
 
 const start = function () {
-  let activeCategory,mediaItem
+  let activeCategory,mediaItem,count
 
   Variable.HeaderShow = true
   Variable.FooterShow = true
 
   const changeNewsCategory = async function (e) {
+    count = 0;
     activeCategory = e.currentTarget.dataset.name;
     console.log('=dasdasdsad=',activeCategory)
-    mediaItem = await getNewsItem("media",false,activeCategory);
-    initGo(null, true);
+    mediaItem = await getNewsItem("media",count,false,activeCategory);
+    initReload();
   }
+  const showMore = async () => {
+    count++;
+    let tmp = await getNewsItem("media", count,false, activeCategory);
+    mediaItem.list_records.push(...tmp.list_records);
+    initReload();
+  };
   init(
     async () => {
-      activeCategory = Variable.lang.code 
-      mediaItem = await getNewsItem("media")
+      activeCategory = Variable.lang.code ;
+      mediaItem = await getNewsItem("media",count);
+      count = 0;
     },
     () => {
   const lang = Variable.lang
@@ -148,6 +157,19 @@ const start = function () {
               );
             })}
             </div>
+            <a class="btn-view-all-a" onclick={showMore}>
+                  <div
+                    class="btn-view-all"
+                    data-action="viewAllButton"
+                    style={
+                      mediaItem.list_records.length === mediaItem.totalFound
+                        ? "display: none"
+                        : "display: flex"
+                    }
+                  >
+                    <div>{Variable.lang.button.showMore}</div>
+                  </div>
+                </a>
           </div>
         </div>
       </div>
