@@ -22011,6 +22011,28 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding: 0;
 }
 
+.changeLanguageContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.changeLanguageContainer::-webkit-scrollbar-button {
+  background-repeat: no-repeat;
+  width: 6px;
+  height: 0px;
+}
+
+.changeLanguageContainer::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background:linear-gradient(45deg, #3bade3 0, #576fe6 45%, #9844b7 57%, #ff357f 70%);;
+}
+
+.changeLanguageContainer::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.changeLanguageContainer{
+  margin-bottom: 20px;
+}
+
 /* .changeLanguageContainer{
   padding-top: 15px;
   max-height: 500px;
