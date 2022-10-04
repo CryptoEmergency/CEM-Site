@@ -218,6 +218,14 @@ const allValidation = (str, type, condition) => {
     return validator.matches(str, /[0-9]{10}/i);
   }
 
+  if (type == "name") {
+    return validator.matches(str, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+  }
+
+  if (type == "text") {
+    return validator.matches(str, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+  }
+
   if (type == "pass") {
     return validator.isStrongPassword(str, {
       minLength: 8,
