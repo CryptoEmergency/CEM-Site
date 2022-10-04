@@ -124,6 +124,7 @@ const start = function () {
       console.log("banner", banner);
       let bannerCode = `<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`;
 
+      console.log('=da4e8f=', svg)
       return (
         <div
           class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
@@ -132,12 +133,12 @@ const start = function () {
           <img
             class="affiliate_program_blur"
             style="position: absolute; right: 0;"
-            src={svg["icon/affiliate_blur-1"]}
+            src={svg["affiliate_blur-1"]}
           />
           <img
             class="affiliate_program_blur"
             style="position: absolute; left: 0;"
-            src={svg["icon/affiliate_blur-4"]}
+            src={svg["affiliate_blur-4"]}
           />
           <div class="affiliate_program_block">
             <div class="affiliate_program_preview">
