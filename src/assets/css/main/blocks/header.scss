@@ -716,7 +716,9 @@
                 }
 
                 &--active {
-                    filter: invert(39%) sepia(18%) saturate(4538%) hue-rotate(228deg) brightness(93%) contrast(90%);
+                    img {
+                        filter: invert(39%) sepia(18%) saturate(4538%) hue-rotate(228deg) brightness(93%) contrast(90%) !important;
+                    }
                 }
 
                 &--burger {

@@ -16,7 +16,7 @@ import {
 import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
-import swiperload from "@assets/js/swiper.js";
+// import swiperload from "@assets/js/swiper.js";
 
 const ifHaveMedia = function (mediaArr, type, whatReturn) {
   if (mediaArr === null) {

@@ -6,6 +6,7 @@ const start = function () {
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
+    Variable.showUserMenu = true
 
     init(
 

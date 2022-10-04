@@ -114,6 +114,12 @@
         }
     }
 
+    &__wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
     .button-container-preview {
         display: flex;
         justify-content: center;

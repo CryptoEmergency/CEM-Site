@@ -17,7 +17,7 @@ import {
 import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
-import swiperload from "@assets/js/swiper.js";
+// import swiperload from "@assets/js/swiper.js";
 import { changeStatistic, showVotersApi } from "@src/apiFunctions.js";
 
 const numberFixWithSpaces = function (num, fix) {

@@ -87,7 +87,7 @@ const mainHeader = async function () {
                                 <If
                                     data={Variable.auth}
                                     dataIf={
-                                        <div>
+                                        <div style="display: flex; align-items: center">
                                             <div class="header_avatar_container">
                                                 <Avatar author={Variable.myInfo} />
                                             </div>
@@ -111,7 +111,7 @@ const mainHeader = async function () {
                                         </div>
                                     }
                                     dataElse={
-                                        <div>
+                                        <div style="display: flex; align-items: center">
                                             <a
                                                 class="log-in"
                                                 onclick={() => {
@@ -214,6 +214,7 @@ const mainHeader = async function () {
                                     style="margin-bottom: 15px;"
                                     class="c-userpanel__icon c-userpanel__icon--notification c-userpanel__icon--mobile_visible user_panel_notify"
                                     onclick={siteLink}
+                                // style="filter: invert(61%) sepia(60%) saturate(485%) hue-rotate(94deg) brightness(94%) contrast(96%);"
                                 >
                                     <img
                                         style={`${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "filter: invert(61%) sepia(60%) saturate(485%) hue-rotate(94deg) brightness(94%) contrast(96%)" : ""}`}
