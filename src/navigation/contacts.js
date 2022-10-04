@@ -98,8 +98,6 @@ const start = function () {
     },
 
     () => {
-
-
       return (
         <div
           class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
@@ -146,6 +144,8 @@ const start = function () {
                               data-type="name"
                               value={formInputs.name.value}
                               oninput={changeInput}
+                              // disabled = {Variable.myInfo.nickname !==  undefined  ? true : false }
+                              // style ={Variable.myInfo.nickname !==  undefined ? "border-color: rgb(37, 249, 48);" : "border-color: rgb(37, 249, 48)"} 
                             />
                           </div>
                         </div>
@@ -167,6 +167,8 @@ const start = function () {
                               data-type="email"
                               value={formInputs.email.value}
                               oninput={changeInput}
+                              // disabled = {Variable.myInfo.email !==  undefined  ? true : false }
+                              // style ={Variable.myInfo.email !==  undefined && "border-color: rgb(37, 249, 48);"} 
                             />
                           </div>
                         </div>
