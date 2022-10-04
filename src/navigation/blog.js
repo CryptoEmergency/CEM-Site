@@ -45,7 +45,7 @@ const start = function () {
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
           <div class="blog_page">
             <div class="blog_filter">
-              <h2>{Variable.lang.h.blog}</h2>
+              <h2 class="h">{Variable.lang.h.blog}</h2>
             </div>
 
             <div class="tags">

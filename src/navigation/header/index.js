@@ -114,8 +114,9 @@ const mainHeader = async function () {
                                         <div style="display: flex; align-items: center">
                                             <a
                                                 class="log-in"
-                                                onclick={() => {
+                                                onclick={(e) => {
                                                     Variable.SetModals({ name: "ModalAuth", data: {} })
+                                                    e.stopPropagation();
                                                 }}
                                             >
                                                 {Variable.lang.button.login}
@@ -123,8 +124,9 @@ const mainHeader = async function () {
                                             <button
                                                 class="c-button c-button--gradient"
                                                 type="button"
-                                                onclick={() => {
+                                                onclick={(e) => {
                                                     Variable.SetModals({ name: "ModalReg", data: {} })
+                                                    e.stopPropagation();
                                                 }}
                                             >
                                                 <span class="c-button__text">{Variable.lang.button.registration}</span>

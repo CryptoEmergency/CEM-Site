@@ -76,9 +76,18 @@ const checkHide = function (e) {
 const clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
+      if (!document.body.contains(item[0]())) {
+        Variable.OutHideWindows.splice(index, 1)
+        return;
+      }
       if (item[0]() === e.target || item[0]().contains(e.target)) {
       } else {
-        item[1]().hidden = true
+        if (item[1]) {
+          item[1]().hidden = true
+        } else {
+          Variable.Modals = []
+        }
+
         Variable.OutHideWindows.splice(index, 1)
       }
     })
