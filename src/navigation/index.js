@@ -233,7 +233,6 @@ const start = function () {
                         />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
-                            {/*
                             <BlockTrade />
                             {/* <div class="top_professionals_container">
                                 <BlockExchange />
