@@ -349,7 +349,11 @@
 		"transactionReferralRegistration": "За реферала",
 		"transactionOther": "Другое",
 		"transactionAwards": "За полученное достижение",
-		"transactionLevel": "За полученный уровень"
+		"transactionLevel": "За полученный уровень",
+
+		"October2022": "Октябрь 2022г",
+		"aboutProjectDate19May2022": "Релиз 19 Мая 2022г",
+		"aboutProjectDateAugust2022": "Релиз Август 2022г"
 	},
 	"text": {
 		"starups": "Стартапы",

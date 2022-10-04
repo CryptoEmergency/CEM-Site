@@ -16,7 +16,7 @@ const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
 
-  const clickButton = async () => {
+  const showMore = async () => {
     count++;
     let tmp = await getTradeOrExchangeList("getExchange", count);
     listExchange.list_records.push(...tmp.list_records);
@@ -127,7 +127,7 @@ const start = function () {
                 );
               })}
             </div>
-            <a class="btn-view-all-a" onclick={clickButton}>
+            <a class="btn-view-all-a" onclick={showMore}>
               <div
                 class="btn-view-all"
                 data-action="viewAllButton"

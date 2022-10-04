@@ -11,6 +11,7 @@ import {
     getUserAboutProfile
 } from '@src/apiFunctions.js';
 import images from '@assets/images/index.js';
+import svg from '@assets/svg/index.js';
 import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
 import {
     BlockUserProfileAbout
@@ -109,6 +110,7 @@ const start = function () {
 
         },
         () => {
+            console.log('=d4a15a=', svg)
 
             return (
                 <div class={Variable.HeaderShow && 'c-main__body' || 'c-main__body--noheader'}>

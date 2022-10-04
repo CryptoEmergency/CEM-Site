@@ -34,10 +34,10 @@ const start = function () {
         const listTransactions = Object.keys(transactions.list_records).map(function (key) {
             return (
                 <div class="c-wallet__transaction">
-                    <div>
+                    <div class="c-wallet__wrap">
                         <If
                             data={transactions.list_records[key].comment == "Registration"}
-                            dataIf={<img src={svg['badge/badge2']} class="transactions_small_badge" />}
+                            dataIf={<img src={svg['badge/badge2']} width="32" height="36" class="transactions_small_badge" />}
                         />
                         <span class="transaction_type">{Variable.lang.p[transactionType(transactions.list_records[key].type)]}</span>
                     </div>

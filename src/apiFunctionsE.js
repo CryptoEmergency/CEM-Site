@@ -15,6 +15,52 @@ const mainTrades = async () => {
   return response;
 };
 
+
+const giveNewCodeForReset = async (info) => {
+  let data = {
+    value:{},
+  }
+  let response
+  if(info.email) {
+   data.value.email=info.email;
+  //  data.value.newCode=true;
+  //  data.value.reset=true;
+    response = checkAnswerApi(await sendApi.create("resetPassword", data));
+  }else{
+    data.value.phone=info.phone;
+    data.value.co=Variable.lang.code;
+     response = checkAnswerApi(await sendApi.create("resetPassword", data));
+  } 
+}
+
+
+const sendResetMessage = async (info) => {
+  let data = {
+    value:{code:info.code ,reset: true,},
+  }
+  if(info.email) {
+   data.value.email=info.email
+  }else{
+    data.value.phone=info.phone;
+    data.value.co=Variable.lang.code;
+  } 
+
+  let response = checkAnswerApiE(await sendApi.create("confirm", data));
+  console.log('=2342424=',response)
+ return response
+}
+
+const checkAnswerApiE = function (data) {
+  if (!data || !data.result) {
+    console.error("Wrong answer from Api!!!!");
+
+    return { list_records: [{}], totalFound: 0 };
+  }
+  // console.log('=21f14e=',data)
+  return data;
+};
+
+
 const sendInBlackList = async (info) => {
   let data = {
     value: {
@@ -77,8 +123,10 @@ const sendComplaintApi = async (info) =>{
 }
 
 export {
+  giveNewCodeForReset,
+  sendResetMessage,
   delCom,
   mainTrades,
   sendInBlackList,
   sendComplaintApi
-};
+}

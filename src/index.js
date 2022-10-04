@@ -10,12 +10,13 @@ import "@assets/js/index.js"
 import { initApp } from '@src/init.js'
 import { default as languages } from '@src/languages/index.js'
 import { clickHide } from '@src/functions.js'
+import listsLang from  '@src/lists/languages.json'
 import { test } from '@src/test.js'
 Variable.languages = languages
+Variable.listsLang = listsLang
 Variable.load = false
 Variable.clickHide = clickHide
 //Variable.outHideWindows = []
-
 const start = async function () {
     await initCache();
     await initStorage();

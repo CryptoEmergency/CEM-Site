@@ -17,7 +17,7 @@ import {
 import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
-import swiperload from "@assets/js/swiper.js";
+// import swiperload from "@assets/js/swiper.js";
 
 const ifHaveMedia = function (mediaArr, type, whatReturn) {
   if (mediaArr === null) {
@@ -33,18 +33,26 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
 
 const showAnswerAdditionallyContainer = (id) => {
   Variable.Static.answerAdditionallyShow = id;
-  console.log('=Variable.Static.answerAdditionally2=',Variable.Static.answerAdditionally)
-initReload()
+  console.log('=Variable.Static.answerAdditionally2=', Variable.Static.answerAdditionally)
+  initReload()
 }
 
 const closeAnswerAdditionally = (e) => {
   e.stopPropagation()
-  Variable.Static.answerAdditionally =true;
+  Variable.Static.answerAdditionally = true;
   Variable.Static.answerAdditionallyShow = "";
 }
 
+const NumFormat = function (value, options) {
+  if (value === null || value === undefined) {
+      return 0;
+  }
+  return value.toLocaleString('en-US')
+};
+
 
 export {
+  NumFormat,
   ifHaveMedia,
   showAnswerAdditionallyContainer,
   closeAnswerAdditionally,

@@ -14,10 +14,30 @@ import discord from '@assets/svg/discord-icon.svg'
 import github from '@assets/svg/github-icon2.svg'
 import tiktok from '@assets/svg/tiktok-icon.svg'
 import { clickCancel, siteLink, changeLang } from '@src/functions.js'
+import svg from "@assets/svg/index.js"
+import { If } from '@component/helpers/All.js'
+import { Avatar } from '@component/element/Avatar.js';
+
+const findUnread = function (arr) {
+    let unread = false
+    if (arr == undefined) {
+        return
+    }
+    arr.forEach(element => {
+        if (!element.read) {
+            unread = true
+        }
+    })
+    return unread
+};
 
 
 const mainFooter = async function () {
     let socialIcon, collapseBodyShow
+    let elem = {}
+    elem.telegram = Variable.setRef()
+    elem.tiktok = Variable.setRef()
+    elem.youtube = Variable.setRef()
 
     const showSocial = function (e) {
         socialIcon[e.currentTarget.dataset.type] = !socialIcon[e.currentTarget.dataset.type];
@@ -53,7 +73,7 @@ const mainFooter = async function () {
 
             if (Variable.FooterShow) {
                 return (
-                    <div class="c-footer__container c-container">
+                    <div class={`c-footer__container c-container ${Variable.auth ? "c-footer__container--panel" : ""}`}>
                         <div class="c-footer__nav" id="accordionFooter">
                             <div class="c-footer__accordion c-accordion">
                                 <span class="c-accordion__header" id="headingOne">
@@ -169,7 +189,12 @@ const mainFooter = async function () {
                             </div>
                             <div class="c-footer__socials">
                                 <div class="footer-icon-block c-socialicon">
-                                    <div style={socialIcon.telegram ? 'display:block;' : 'display:none;'} class="c-socialicon__tooltip">
+                                    <div
+                                        // style={socialIcon.telegram ? 'display:block;' : 'display:none;'}
+                                        hidden={true}
+                                        class="c-socialicon__tooltip"
+                                        ref={elem.telegram}
+                                    >
                                         <div>
                                             <a
                                                 target="_blank"
@@ -192,14 +217,32 @@ const mainFooter = async function () {
                                     <a
                                         id="footer_telegram_icon"
                                         class="c-socialicon__link"
-                                        onclick={showSocial}
+                                        // onclick={showSocial}
+
+                                        onclick={(e) => {
+
+                                            if (elem.telegram().hidden === true) {
+                                                elem.telegram().hidden = false
+                                                Variable.OutHideWindows.push([elem.telegram, elem.telegram])
+                                            } else {
+                                                elem.telegram().hidden = true
+                                            }
+                                            elem.youtube().hidden = true
+                                            elem.tiktok().hidden = true
+                                            e.stopPropagation();
+                                        }}
                                         data-type="telegram"
                                     >
                                         <img class="c-socialicon__icon" src={telegram} />
                                     </a>
                                 </div>
                                 <div class="c-socialicon">
-                                    <div style={socialIcon.youtube ? '' : 'display:none;'} class="c-socialicon__tooltip">
+                                    <div
+                                        // style={socialIcon.youtube ? '' : 'display:none;'}
+                                        hidden={true}
+                                        class="c-socialicon__tooltip"
+                                        ref={elem.youtube}
+                                    >
                                         <div>
                                             <a
                                                 target="_blank"
@@ -220,7 +263,17 @@ const mainFooter = async function () {
                                     <a
                                         id="footer_youtube_icon"
                                         class="c-socialicon__link"
-                                        onclick={showSocial}
+                                        onclick={(e) => {
+                                            if (elem.youtube().hidden === true) {
+                                                elem.youtube().hidden = false
+                                                Variable.OutHideWindows.push([elem.youtube, elem.youtube])
+                                            } else {
+                                                elem.youtube().hidden = true
+                                            }
+                                            elem.telegram().hidden = true
+                                            elem.tiktok().hidden = true
+                                            e.stopPropagation();
+                                        }}
                                         data-type="youtube"
                                     >
                                         <img class="c-socialicon__icon" src={youtube} />
@@ -254,14 +307,29 @@ const mainFooter = async function () {
                                     </a>
                                 </div>
                                 <div class="c-socialicon">
-                                    <div style={socialIcon.tiktok ? '' : 'display:none;'} class="c-socialicon__tooltip c-socialicon__tooltip--right">
+                                    <div
+                                        // style={socialIcon.tiktok ? '' : 'display:none;'}
+                                        hidden={true}
+                                        class="c-socialicon__tooltip c-socialicon__tooltip--right"
+                                        ref={elem.tiktok}
+                                    >
                                         <div><a target="_blank" href="https://vm.tiktok.com/ZSefEMs2c/" rel="nofollow noopener" data-type="social" data-count="tiktokRu"><img src={tiktok} /> Русский </a></div>
                                         <div><a target="_blank" href="https://vm.tiktok.com/ZSefExJrr/" rel="nofollow noopener" data-type="social" data-count="tiktokEn"><img src={tiktok} /> English </a></div>
                                     </div>
                                     <a
                                         id="footer_tiktok_icon"
                                         class="c-socialicon__link"
-                                        onclick={showSocial}
+                                        onclick={(e) => {
+                                            if (elem.tiktok().hidden === true) {
+                                                elem.tiktok().hidden = false
+                                                Variable.OutHideWindows.push([elem.tiktok, elem.tiktok])
+                                            } else {
+                                                elem.tiktok().hidden = true
+                                            }
+                                            elem.youtube().hidden = true
+                                            elem.telegram().hidden = true
+                                            e.stopPropagation();
+                                        }}
                                         data-type="tiktok"
                                     >
                                         <img class="c-socialicon__icon" src={tiktok} />
@@ -269,6 +337,74 @@ const mainFooter = async function () {
                                 </div>
                             </div>
                         </div>
+                        <If
+                            data={Variable.auth}
+                            dataIf={
+                                <div class="c-userpanel c-userpanel--left">
+                                    <div class="c-userpanel__icons">
+                                        <a
+                                            class="c-userpanel__icon c-userpanel__icon--logo"
+                                            href="/"
+                                            onclick={siteLink}>
+                                            <img width="45" height="39" src={svg["mini_logo"]} />
+                                        </a>
+                                        <a
+                                            class={`c-userpanel__icon c-userpanel__icon--only_mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
+                                            href="/user/"
+                                            onclick={siteLink}
+                                        >
+                                            <img src={svg["profile_icon-1"]} />
+                                        </a>
+                                        <a
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
+                                            href="/lenta-users/"
+                                            onclick={siteLink}
+                                        >
+                                            <img src={svg.user_news_page} />
+                                        </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class="c-userpanel__icon c-userpanel__icon--mobile_visible"
+                                        >
+                                            <img src={svg.plus_in_circle} />
+                                        </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/news/"
+                                        >
+                                            <img src={svg.news_menu_icon1} />
+                                        </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "question") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/question/"
+                                        >
+                                            <img src={svg.user_mobile_answers_and_questions} />
+                                        </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "wallet") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/user/wallet/"
+                                        >
+                                            <img src={svg.absolutely_new_wallet} />
+                                        </a>
+                                    </div>
+                                    <div class="c-userpanel__addmodal">
+                                        <div class="c-userpanel__inner">
+                                            <p>{Variable.lang.button.create}</p>
+                                            <a class="c-userpanel__link" onclick={siteLink} href="/user/posts/">
+                                                <img src={svg["profile_icon-5"]} />
+                                                {Variable.lang.h.createPost}
+                                            </a>
+                                        </div>
+                                        <div data-action="user_cabinet_add_close" class="c-userpanel__close">
+                                            <img src={svg.close} />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        />
                     </div>
                 )
             } else {

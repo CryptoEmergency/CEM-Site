@@ -17,7 +17,7 @@ import {
 import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
-import swiperload from "@assets/js/swiper.js";
+// import swiperload from "@assets/js/swiper.js";
 import { changeStatistic, showVotersApi } from "@src/apiFunctions.js";
 
 const numberFixWithSpaces = function (num, fix) {
@@ -74,12 +74,20 @@ const checkHide = function (e) {
 };
 
 const clickHide = function (e) {
-  console.log('=f8f135=', "clickHide", e)
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
+      if (!document.body.contains(item[0]())) {
+        Variable.OutHideWindows.splice(index, 1)
+        return;
+      }
       if (item[0]() === e.target || item[0]().contains(e.target)) {
       } else {
-        item[1]().hidden = true
+        if (item[1]) {
+          item[1]().hidden = true
+        } else {
+          Variable.Modals = []
+        }
+
         Variable.OutHideWindows.splice(index, 1)
       }
     })
@@ -90,8 +98,10 @@ const timerTik = function () {
   //console.log("timerTik", "tt")
 };
 
-const getNewsItem = async function (type, category, mediaActveCategory) {
+const getNewsItem = async function (type, count, category, mediaActveCategory) {
   let getLang = "en";
+  let a = 6;
+  let b = 12;
   if (getStorage("lang") == "ru") {
     getLang = "ru";
   }
@@ -118,6 +128,11 @@ const getNewsItem = async function (type, category, mediaActveCategory) {
     },
     limit: 6,
   };
+
+  if (count > 0) {
+    data.limit = b;
+    data.offset = a + (count - 1) * b;
+  }
 
   if (category && category != "All") {
     data.filter["category.name"] = category
@@ -166,7 +181,6 @@ const getNewsCategory = async function (type) {
 };
 
 const timerCourse = async function () {
-  console.log("timerCourse")
   let tmp = checkAnswerApi(await sendApi.getCourse());
   Variable.course = tmp.list_records[0]
 };
@@ -186,6 +200,7 @@ const siteLink = function (e) {
 
 const changeLang = function (e) {
   e.preventDefault();
+  //let link = e.target.href;
   let link = this.href;
   history.pushState(null, null, link);
   // timersClear();
@@ -195,15 +210,11 @@ const changeLang = function (e) {
 };
 
 const checkAnswerApi = function (data) {
-  // console.log(data);
+  // console.log("checkAnswerApi", data);
   if (!data || !data.result) {
     console.error("Wrong answer from Api");
-
-    return { list_records: [{}], totalFound: 0 };
+    return { list_records: [], totalFound: 0 };
   }
-
-
-
   return data.result;
 };
 
@@ -217,6 +228,14 @@ const allValidation = (str, type, condition) => {
 
   if (type == "phone") {
     return validator.matches(str, /[0-9]{10}/i);
+  }
+
+  if (type == "name") {
+    return validator.matches(str, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+  }
+
+  if (type == "text") {
+    return validator.matches(str, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
   }
 
   if (type == "pass") {

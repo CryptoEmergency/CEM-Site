@@ -7,8 +7,7 @@ import {
     Variable
 } from '@betarost/cemjs';
 
-import { timerCourse, checkAnswerApi, siteLink } from '@src/functions.js'
-import { mainQuestions, mainTrades, mainExchanges, mainUsers, mainNews } from "@src/apiFunctions.js";
+import { timerCourse, checkAnswerApi } from '@src/functions.js'
 
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
@@ -162,7 +161,8 @@ const start = function () {
                 {
                     setIntervalFunc: async () => {
                         Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
-                    }
+                    },
+                    name: "getMainQuestions"
                 }
             )
             )
@@ -171,7 +171,9 @@ const start = function () {
                 {
                     setIntervalFunc: async () => {
                         Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades({ name: "getMainTrades" }))
-                    }
+                    },
+                    name: "getMainTrades"
+
                 }
             )
             )
@@ -180,7 +182,8 @@ const start = function () {
                 {
                     setIntervalFunc: async () => {
                         Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges({ name: "getMainExchanges" }))
-                    }
+                    },
+                    name: "getMainExchanges"
                 }
             )
             )
@@ -189,7 +192,8 @@ const start = function () {
                 {
                     setIntervalFunc: async () => {
                         Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers({ name: "getMainUsers" }))
-                    }
+                    },
+                    name: "getMainUsers"
                 }
             )
             )
@@ -198,15 +202,14 @@ const start = function () {
                 {
                     setIntervalFunc: async () => {
                         Variable.MainNews = checkAnswerApi(await sendApi.getMainNews({ name: "getMainNews" }))
-                    }
+                    },
+                    name: "getMainNews"
                 }
             )
             )
 
             Variable.SwiperLoad.push(swiperLoad)
 
-            const data_users = await mainUsers(6);
-            // users = data_users.list_records;
         },
         () => {
 
@@ -214,7 +217,7 @@ const start = function () {
                 <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     <BlockPreview />
                     <BlockProjects />
-                    <div class="c-main__wrapperbg">
+                    {/* <div class="c-main__wrapperbg">
                         <BlockQuestions
                             button={
                                 <div class="c-questions__footer">
@@ -238,7 +241,7 @@ const start = function () {
                                 <BlockInfoPartners />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             )
         })
