@@ -5,13 +5,14 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
+import { NumFormat } from '@src/functionsE.js'
 
-const NumFormat = function (value, options) {
-    if (value === null || value === undefined) {
-        return 0;
-    }
-    return value.toLocaleString('en-US')
-};
+// const NumFormat = function (value, options) {
+//     if (value === null || value === undefined) {
+//         return 0;
+//     }
+//     return value.toLocaleString('en-US')
+// };
 
 const BlockTrade = function () {
 

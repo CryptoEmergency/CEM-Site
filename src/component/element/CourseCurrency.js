@@ -19,7 +19,7 @@ const numberFixWithSpaces = function (num, fix) {
 }
 
 const CourseCurrency = function ({ course, key }) {
-
+ console.log('=f699f5=',course,key)
     return (
         <a
             href={key == "cem" ? "https://www.bitmart.com/trade/en?layout=basic&symbol=CEM_USDT" : "/list-trade/"}
@@ -36,7 +36,7 @@ const CourseCurrency = function ({ course, key }) {
             <div class="c-currency__info">
                 <div class="c-currency__left">
                     <div class="c-currency__name">{key.toLocaleUpperCase() + "/USDT"}</div>
-                    <div class="c-currency__price"><span class="btcusdt_price">{course.usdt}</span></div>
+                    <div class="c-currency__price"><span class="btcusdt_price">{numberFixWithSpaces(course.usdt,key === "cem" ? 4 :2)}</span></div>
                 </div>
                 <div class="c-currency__right">
                     <div class={`c-currency__percent ${course.change >= 0 ? " c-currency__percent--up" : " c-currency__percent--down"}`}>

@@ -8,6 +8,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { checkAnswerApi } from '@src/functions.js'
+import { NumFormat } from '@src/functionsE.js'
 
 const start = function () {
 
@@ -87,7 +88,7 @@ const start = function () {
                           <span class="crypto_exchanges_percent_green_mobile">
                             <img src={svg["exange_money"]} />
                           </span>
-                          ${item.spotVolumeUsd}
+                          ${NumFormat(item.spotVolumeUsd)}
                         </span>
                       </div>
                     </div>
@@ -97,7 +98,7 @@ const start = function () {
                           <span class="crypto_exchanges_percent_green_mobile">
                             <img src={svg["exange_visitors"]} />
                           </span>
-                          {item.weeklyVisits}
+                          {NumFormat(item.weeklyVisits)}
                         </span>
                       </div>
                     </div>

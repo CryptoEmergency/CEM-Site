@@ -43,8 +43,16 @@ const closeAnswerAdditionally = (e) => {
   Variable.Static.answerAdditionallyShow = "";
 }
 
+const NumFormat = function (value, options) {
+  if (value === null || value === undefined) {
+      return 0;
+  }
+  return value.toLocaleString('en-US')
+};
+
 
 export {
+  NumFormat,
   ifHaveMedia,
   showAnswerAdditionallyContainer,
   closeAnswerAdditionally,

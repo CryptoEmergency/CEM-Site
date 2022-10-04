@@ -7,6 +7,9 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
+import { BlockModal } from "@src/component/blocks/BlockModal.js";
+
+
 const start = function () {
 
   Variable.HeaderShow = true
@@ -21,12 +24,14 @@ const start = function () {
             <div class="c-whowe__inner who_we_are_inner">
               <h2
                 class="c-whowe__title"
-                onClick={() => {
-                  Variable.SetModals({ name: "ModalChangeLanguage", data: {} })
-                }}
+                // onClick={() => {
+                //   Variable.SetModals({ name: "ModalChangeLanguage", data: {} })
+                // }}
               >{Variable.lang.h.who_are_we}
 
               </h2>
+        <BlockModal />
+
               <img
                 class="c-whowe__img about_us_vector-1"
                 src={svg["background/about_us_vector-1"]}
