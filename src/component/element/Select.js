@@ -66,7 +66,7 @@ const Select = function ({ options, callback, toggler = null }) {
         <div
           class="justselect-title"
           ref={options.elemActive}
-          onClick={() => {
+          onClick={(e) => {
             options.open = !options.open
             if (options.elem().hidden === true) {
               options.elem().hidden = false
@@ -74,6 +74,7 @@ const Select = function ({ options, callback, toggler = null }) {
             } else {
               options.elem().hidden = true
             }
+            // e.stopPropagation();
           }}
         >
           {optionsActive}

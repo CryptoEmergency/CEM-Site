@@ -12,7 +12,7 @@ import {
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
 import { siteLink } from '@src/functions.js'
-
+import youtube from '@assets/svg/youtube_icon.svg'
 // const showAllLangMedia = function (e, target) {
 //     e.preventDefault()
 //     if (target.parentNode.children[0].style == "display: none;") {
@@ -21,6 +21,7 @@ import { siteLink } from '@src/functions.js'
 //         target.parentNode.children[0].style = "display: none;";
 //     }
 // }
+let elem = {}
 
 const ModalMobileMainSettings = function ({ }, reload) {
     let socialIcon
@@ -31,6 +32,11 @@ const ModalMobileMainSettings = function ({ }, reload) {
     }
 
     if (!reload) {
+
+        elem.telegram = Variable.setRef()
+        elem.tiktok = Variable.setRef()
+        elem.youtube = Variable.setRef()
+
         socialIcon = {
             telegram: false,
             youtube: false,
@@ -189,7 +195,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                         <div class="mobile_header_socials desktop_dn">
                             <div class="social-icons">
                                 <div class="footer-icon-block">
-                                    <div style={socialIcon.telegram ? 'display:block;' : 'display:none;'} class="footer-media-full">
+                                    <div ref={elem.telegram} hidden={true} class="footer-media-full">
                                         <div>
                                             <a
                                                 target="_blank"
@@ -213,7 +219,17 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                             </a>
                                         </div>
                                     </div>
-                                    <a id="header_telegram_icon" onclick={showSocial} class="icon" data-type="telegram">
+                                    <a id="header_telegram_icon" onclick={(e) => {
+                                        if (elem.telegram().hidden === true) {
+                                            elem.telegram().hidden = false
+                                            Variable.OutHideWindows.push([elem.telegram, elem.telegram])
+                                        } else {
+                                            elem.telegram().hidden = true
+                                        }
+                                        elem.tiktok().hidden = true
+                                        elem.youtube().hidden = true
+                                        e.stopPropagation();
+                                    }} class="icon" data-type="telegram">
                                         <img src={svg["telegram-icon"]} />
                                     </a>
                                 </div>
@@ -226,8 +242,45 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                     <a id="header_instagram_icon" class="icon"><img src="/assets/icon/instagram-icon.svg" /></a>
                                 </div>
                                 --> */}
+
+
+
+
                                 <div class="footer-icon-block">
-                                    <a href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg/" target="_blank" class="icon" rel="nofollow noopener" data-type="social" data-count="youtube">
+                                    <div
+                                        // style={socialIcon.youtube ? '' : 'display:none;'}
+                                        hidden={true}
+                                        class="c-socialicon__tooltip"
+                                        ref={elem.youtube}
+                                    >
+                                        <div>
+                                            <a
+                                                target="_blank"
+                                                href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg/"
+                                            >
+                                                <img src={youtube} /> Русский
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a
+                                                target="_blank"
+                                                href="https://www.youtube.com/channel/UCdDWOveIuvqkyusDK1gv4ig/"
+                                            >
+                                                <img src={youtube} /> English
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <a class="icon" onclick={(e) => {
+                                        if (elem.youtube().hidden === true) {
+                                            elem.youtube().hidden = false
+                                            Variable.OutHideWindows.push([elem.youtube, elem.youtube])
+                                        } else {
+                                            elem.youtube().hidden = true
+                                        }
+                                        elem.tiktok().hidden = true
+                                        elem.telegram().hidden = true
+                                        e.stopPropagation();
+                                    }} data-type="social" data-count="youtube">
                                         <img src={svg["youtube-icon"]} />
                                     </a>
                                 </div>
@@ -252,7 +305,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                     </a>
                                 </div>
                                 <div class="footer-icon-block">
-                                    <div style="display:none;" class="footer-media-full footer-media-full-right">
+                                    <div ref={elem.tiktok} hidden={true} class="footer-media-full footer-media-full-right">
                                         <div>
                                             <a target="_blank" href="https://vm.tiktok.com/ZSefEMs2c/" rel="nofollow noopener" data-type="social" data-count="tiktokRu">
                                                 <img src={svg["tiktok-icon"]} /> Русский
@@ -264,7 +317,17 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                             </a>
                                         </div>
                                     </div>
-                                    <a id="header_tiktok_icon" data-action="showAllLangMedia" class="icon">
+                                    <a id="header_tiktok_icon" onclick={(e) => {
+                                        if (elem.tiktok().hidden === true) {
+                                            elem.tiktok().hidden = false
+                                            Variable.OutHideWindows.push([elem.tiktok, elem.tiktok])
+                                        } else {
+                                            elem.tiktok().hidden = true
+                                        }
+                                        elem.youtube().hidden = true
+                                        elem.telegram().hidden = true
+                                        e.stopPropagation();
+                                    }} class="icon">
                                         <img src={svg["tiktok-icon"]} />
                                     </a>
                                 </div>

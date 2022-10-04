@@ -31,8 +31,13 @@ const findUnread = function (arr) {
     return unread
 };
 
+
 const mainFooter = async function () {
     let socialIcon, collapseBodyShow
+    let elem = {}
+    elem.telegram = Variable.setRef()
+    elem.tiktok = Variable.setRef()
+    elem.youtube = Variable.setRef()
 
     const showSocial = function (e) {
         socialIcon[e.currentTarget.dataset.type] = !socialIcon[e.currentTarget.dataset.type];
@@ -184,7 +189,12 @@ const mainFooter = async function () {
                             </div>
                             <div class="c-footer__socials">
                                 <div class="footer-icon-block c-socialicon">
-                                    <div style={socialIcon.telegram ? 'display:block;' : 'display:none;'} class="c-socialicon__tooltip">
+                                    <div
+                                        // style={socialIcon.telegram ? 'display:block;' : 'display:none;'}
+                                        hidden={true}
+                                        class="c-socialicon__tooltip"
+                                        ref={elem.telegram}
+                                    >
                                         <div>
                                             <a
                                                 target="_blank"
@@ -207,14 +217,32 @@ const mainFooter = async function () {
                                     <a
                                         id="footer_telegram_icon"
                                         class="c-socialicon__link"
-                                        onclick={showSocial}
+                                        // onclick={showSocial}
+
+                                        onclick={(e) => {
+
+                                            if (elem.telegram().hidden === true) {
+                                                elem.telegram().hidden = false
+                                                Variable.OutHideWindows.push([elem.telegram, elem.telegram])
+                                            } else {
+                                                elem.telegram().hidden = true
+                                            }
+                                            elem.youtube().hidden = true
+                                            elem.tiktok().hidden = true
+                                            e.stopPropagation();
+                                        }}
                                         data-type="telegram"
                                     >
                                         <img class="c-socialicon__icon" src={telegram} />
                                     </a>
                                 </div>
                                 <div class="c-socialicon">
-                                    <div style={socialIcon.youtube ? '' : 'display:none;'} class="c-socialicon__tooltip">
+                                    <div
+                                        // style={socialIcon.youtube ? '' : 'display:none;'}
+                                        hidden={true}
+                                        class="c-socialicon__tooltip"
+                                        ref={elem.youtube}
+                                    >
                                         <div>
                                             <a
                                                 target="_blank"
@@ -235,7 +263,17 @@ const mainFooter = async function () {
                                     <a
                                         id="footer_youtube_icon"
                                         class="c-socialicon__link"
-                                        onclick={showSocial}
+                                        onclick={(e) => {
+                                            if (elem.youtube().hidden === true) {
+                                                elem.youtube().hidden = false
+                                                Variable.OutHideWindows.push([elem.youtube, elem.youtube])
+                                            } else {
+                                                elem.youtube().hidden = true
+                                            }
+                                            elem.telegram().hidden = true
+                                            elem.tiktok().hidden = true
+                                            e.stopPropagation();
+                                        }}
                                         data-type="youtube"
                                     >
                                         <img class="c-socialicon__icon" src={youtube} />
@@ -269,14 +307,29 @@ const mainFooter = async function () {
                                     </a>
                                 </div>
                                 <div class="c-socialicon">
-                                    <div style={socialIcon.tiktok ? '' : 'display:none;'} class="c-socialicon__tooltip c-socialicon__tooltip--right">
+                                    <div
+                                        // style={socialIcon.tiktok ? '' : 'display:none;'}
+                                        hidden={true}
+                                        class="c-socialicon__tooltip c-socialicon__tooltip--right"
+                                        ref={elem.tiktok}
+                                    >
                                         <div><a target="_blank" href="https://vm.tiktok.com/ZSefEMs2c/" rel="nofollow noopener" data-type="social" data-count="tiktokRu"><img src={tiktok} /> Русский </a></div>
                                         <div><a target="_blank" href="https://vm.tiktok.com/ZSefExJrr/" rel="nofollow noopener" data-type="social" data-count="tiktokEn"><img src={tiktok} /> English </a></div>
                                     </div>
                                     <a
                                         id="footer_tiktok_icon"
                                         class="c-socialicon__link"
-                                        onclick={showSocial}
+                                        onclick={(e) => {
+                                            if (elem.tiktok().hidden === true) {
+                                                elem.tiktok().hidden = false
+                                                Variable.OutHideWindows.push([elem.tiktok, elem.tiktok])
+                                            } else {
+                                                elem.tiktok().hidden = true
+                                            }
+                                            elem.youtube().hidden = true
+                                            elem.telegram().hidden = true
+                                            e.stopPropagation();
+                                        }}
                                         data-type="tiktok"
                                     >
                                         <img class="c-socialicon__icon" src={tiktok} />
