@@ -24,7 +24,6 @@ import youtube from '@assets/svg/youtube_icon.svg'
 let elem = {}
 
 const ModalMobileMainSettings = function ({ }, reload) {
-    console.log('=dd1846=', svg)
     let socialIcon
 
     const showSocial = function (e) {

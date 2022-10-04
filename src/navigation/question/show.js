@@ -4,6 +4,7 @@ import { getQuestionItemInShow } from "@src/apiFunctions.js";
 import { If } from '@component/helpers/All.js';
 import { getDateFormat } from "@src/functions.js";
 import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
+import { Avatar } from "@component/element/Avatar.js";
 import moment from 'moment';
 
 const start = function () {
@@ -40,30 +41,39 @@ const start = function () {
                     <div class="answer_container">
                         <div class="answer_block">
                             <div class="answer_content">
-                                {/* <!-- <a class="mrb20" href="{{Variable.lang.url}}{{data.pageUrlBefor}}/" data-action="link"><img class="go_back_icon" src="/assets/icon/go_back_icon.svg"><span class="full_news_go_back">{{ Variable.lang.span.back }}</span></a> --> */}
                                 <div class="question_author_block">
-                                    {/* {{> avatar question.author}} */}
+                                    <Avatar author={question.author} nickNameAndDate={true} />
                                     <a href={`/user/${question.author.nickname}`} data-action="link" data-needauth="true">
                                         <div class="question_author_name">
                                             {question.author.nickname}
                                         </div>
                                     </a>
-                                    {/* {{ #if question.close }} */}
-                                    {/* {{ #notis question.author._id myInfo._id }} */}
-                                    <div class="comment_icons">
-                                        <div class="comment_icon_type-1 answer_additionally_toggle {{#if myInfo._id}}{{else}}comment_inactive{{/if}}" data-action="answerAdditionallyToggle">
-                                            <img class="answer_additionally_toggle_img" src={svg.points} />
-                                            <div class="answer_additionally_container">
-                                                <div class="answer_additionally">
-                                                    <div class="answer_additionally_item complain" data-action="answerAdditionallyItem" data-answer-id={question._id} data-type="question">{Variable.lang.select.complain}</div>
-                                                    {/* {{ #if data.myInfo.status.role }} */}
-                                                    <div style="color: #32DE80" class="answer_additionally_item delete" data-action="doRoleModal" data-answer-id={question._id} data-type="question">{Variable.lang.select.delete}</div>
-                                                    {/* {{/if}} */}
-                                                </div>
+                                    <If
+                                        data={question.close}
+                                        dataIf={
+                                            <div>
+                                                {question.author._id != myInfo._id ?
+                                                    <div class="comment_icons">
+                                                        <div class="comment_icon_type-1 answer_additionally_toggle {{#if myInfo._id}}{{else}}comment_inactive{{/if}}" data-action="answerAdditionallyToggle">
+                                                            <img class="answer_additionally_toggle_img" src={svg.points} />
+                                                            <div class="answer_additionally_container">
+                                                                <div class="answer_additionally">
+                                                                    <div class="answer_additionally_item complain" data-action="answerAdditionallyItem" data-answer-id={question._id} data-type="question">{Variable.lang.select.complain}</div>
+                                                                    {/* {{ #if data.myInfo.status.role }} */}
+                                                                    <div style="color: #32DE80" class="answer_additionally_item delete" data-action="doRoleModal" data-answer-id={question._id} data-type="question">{Variable.lang.select.delete}</div>
+                                                                    {/* {{/if}} */}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    :
+                                                    <></>
+                                                }
                                             </div>
-                                        </div>
-                                    </div>
-                                    {/* {{/ notis}} */}
+                                        }
+                                    />
+                                    {/* {{ #if question.close }} */}
+
                                     {/* {{ else}} */}
                                     <div class="comment_icons">
                                         <div class="comment_icon_type-1 answer_additionally_toggle {{#if myInfo._id}}{{else}}comment_inactive{{/if}}" data-action="answerAdditionallyToggle">
@@ -171,7 +181,7 @@ const start = function () {
                                     {/* {{ else}} */}
                                     {/* {{ #notif question.close }} */}
                                     <div data-action="answerModal" class="btn-answer" data-needauth="true">
-                                        <a class="btn-gr-answer"><span>{lang.button.giveAnswer}</span></a>
+                                        <a class="btn-gr-answer"><span>{Variable.lang.button.giveAnswer}</span></a>
                                     </div>
                                     {/* {{/ notif}} */}
                                     {/* {{/ is}} */}

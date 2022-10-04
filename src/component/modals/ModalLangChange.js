@@ -23,6 +23,7 @@ const ModalLangChange = function ({ }, reload) {
         >
             <div class="c-changelanguage__header">
                 <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
+                <button type="button" class="c-modal__close" onClick={function (e) { Variable.Modals.pop(); initReload("modals") }}></button>
             </div>
             <ul class="c-changelanguage__list" >
                 {Object.keys(Variable.languages).map(function (key) {
