@@ -66,20 +66,22 @@ const start = function () {
                 <span>{Variable.lang.categoryName.all}</span>
               </div>
 
-              {newsCategory.list_records.filter((item2) => item2.name !== null).map((item) => {
-                console.log('=c16335=',item)
-                return (
-                  <div
-                    class={`tag_button ${
-                      activeCategory == item.name && "tag_button_active"
-                    }`}
-                    data-name={item.name}
-                    onclick={changeNewsCategory}
-                  >
-                    <span>{Variable.lang.categoryName[item.name]}</span>
-                  </div>
-                );
-              })}
+              {newsCategory.list_records
+                .filter((item2) => item2.name !== null)
+                .map((item) => {
+                  // console.log("=c16335=", item);
+                  return (
+                    <div
+                      class={`tag_button ${
+                        activeCategory == item.name && "tag_button_active"
+                      }`}
+                      data-name={item.name}
+                      onclick={changeNewsCategory}
+                    >
+                      <span>{Variable.lang.categoryName[item.name]}</span>
+                    </div>
+                  );
+                })}
             </div>
 
             <div class="userNewsBlock">
@@ -92,10 +94,15 @@ const start = function () {
                 <div class="blog_news">
                   {newsItem.list_records.map((item) => {
                     return (
-                      <a
+                      <div
                         class="blog_news_item"
-                        href={`/${prevAdress}/show/${item._id}`}
-                        onclick={changeLang}
+                        // href={`/${prevAdress}/show/${item._id}`}
+                        onClick={() => {
+                          Variable.SetModals({
+                            name: "ModalFullNews",
+                            data: {item},
+                          });
+                        }}
                       >
                         <img src={"/assets/upload/news/" + item.image} />
                         <p class="blog_new_title">{item.title}</p>
@@ -123,7 +130,7 @@ const start = function () {
                             </a>
                           </p>
                         )}
-                      </a>
+                      </div>
                     );
                   })}
                 </div>

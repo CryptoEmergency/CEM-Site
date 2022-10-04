@@ -1,41 +1,58 @@
 import {
-  jsx,
-  jsxFrag,
-  init,
-  initReload,
-  Variable,
-  stringToHtml,
-} from "@betarost/cemjs";
+    jsx,
+    jsxFrag,
+    setAction,
+    setValue,
+    Variable,
+    getValue,
+    initReload,
+    sendApi,
+    initGo,
+    initOne,
+    stringToHtml,
+} from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { getNewsItemInShow } from "@src/apiFunctions.js";
-import { If } from "@component/helpers/All.js";
+import { If } from '@component/helpers/All.js';
 import { getDateFormat } from "@src/functions.js";
 import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
+import { getNewsItemInShow } from "@src/apiFunctions.js";
+let news;
 
-const start = function () {
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-  let news;
+const ModalFullNews =  function ({item}, reload) {
+    console.log('=84781a=',item)
 
-  init(
-    async () => {
-      Variable.Static.ShowVoterInteval ={ timer:0};
-      Variable.Static.resultShowVoter = undefined;
-      Variable.Static.activeCommentsInput = "";
-      Variable.Static.answerAdditionallyShow = "";
-      Variable.Static.showMainInput = true;
-      Variable.Static.activeEditInputs = [];
-      Variable.Static.answerAdditionally = false  ;   
-      console.log('=1663e5=',Variable.dataUrl.params)  
-      news = await getNewsItemInShow(Variable.dataUrl.params);
-      news = news.list_records[0];
-      Variable.Static.showNewsId = news._id
-
-    },
-    () => {
-      return (
-        <div
+    initOne(
+       async () =>  {
+            console.log('InitModal',item)
+            Variable.Static.ShowVoterInteval ={ timer:0};
+            Variable.Static.resultShowVoter = undefined;
+            Variable.Static.activeCommentsInput = "";
+            Variable.Static.answerAdditionallyShow = "";
+            Variable.Static.showMainInput = true;
+            Variable.Static.activeEditInputs = [];
+            Variable.Static.answerAdditionally = false  ;    
+            news = item
+            Variable.Static.showNewsId = news._id
+        }
+    )
+    // news =  getNewsItemInShow(item._id);
+    // console.log('=c0791d=',news)
+    // news = news.list_records[0]; 
+//  news = item
+ console.log('ReloadModal',news)
+    return (
+        <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalFullNews">
+            <section class="c-modal__dialog">
+                <header class="c-modal__header">
+                    <button
+                        type="button"
+                        class="c-modal__close"
+                        onclick={() => { Variable.Modals = [] }}
+                    ></button>
+                </header>
+                <div class="c-modal__body">
+                <div
           class={`${
             Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
           }`}
@@ -122,9 +139,11 @@ const start = function () {
             </div>
           </div>
         </div>
-      );
-    }
-  );
+                </div>
+            </section>
+        </div>
+    )
 };
 
-export default start;
+
+export default ModalFullNews;

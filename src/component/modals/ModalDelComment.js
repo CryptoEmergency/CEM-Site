@@ -1,8 +1,12 @@
 import { jsx, jsxFrag, Variable, initReload,initGo} from "@betarost/cemjs";
 import { delCom } from "@src/apifunctionsE.js";
-
-const ModalDelComment = function (data, reload) {
+import { getNewsItemInShow } from "@src/apiFunctions.js";
+const ModalDelComment =  function (data, reload) {
   console.log("=e896fe=", data);
+
+  
+  console.log('=1663e5=',Variable.dataUrl.params)  
+
   return (
     <div class="c-modal c-modal--open" id="ModalDelComment">
       <section class="c-modal__dialog">
@@ -13,9 +17,20 @@ const ModalDelComment = function (data, reload) {
         <div class="c-modal__body">
           <div
             onclick={async() => { await delCom(data);
-               Variable.Modals = [];
+               Variable.Modals.pop();
+               Variable.Modals.pop();
+               let news = await getNewsItemInShow(Variable.Static.showNewsId);
+               
+
+  news =news.list_records[0]
+ 
+  Variable.SetModals({
+    name: "ModalFullNews",
+    data: {item:news},
+  });
                Variable.Static.answerAdditionally =false
-               initGo()
+             //  initGo()
+             //  initReload("modals")
             }}
           >
             {Variable.lang.select.delete}

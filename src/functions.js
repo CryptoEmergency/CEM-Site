@@ -286,7 +286,7 @@ const showVotersAndchangeStatistic = async (e, id, commentId,) => {
         if (response !== undefined) {
           response = response.list_records[0].evaluation.filter((item) =>
             item.type === type);
-          Variable.SetModals({ name: "ModalWhoLike", data: { response } })
+          Variable.SetModals({ name: "ModalWhoLike", data: { response } },true)
         }
       }
     }, 100);
@@ -297,7 +297,7 @@ const showVotersAndchangeStatistic = async (e, id, commentId,) => {
       let response = await showVotersApi(commentId || id);
       response = response.list_records[0].evaluation.filter((item) =>
         item.type === type);
-      Variable.SetModals({ name: "ModalWhoLike", data: { response } })
+      Variable.SetModals({ name: "ModalWhoLike", data: { response } },true)
     }
     sec = 0;
   }
