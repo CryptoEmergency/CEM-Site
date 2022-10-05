@@ -11,8 +11,8 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat, parseTextforJsx } from "@src/functions.js";
-import { AudioPlayer } from "@component/element/audioPlayer.js";
-import { Slider } from "@component/element/slider.js";
+import { AudioPlayer } from "@component/element/AudioPlayer.js";
+import { Slider } from "@component/element/Slider.js";
 
 const returnImgOrVideo = (item) => {
   if (
