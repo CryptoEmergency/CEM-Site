@@ -64,7 +64,7 @@ const WayAuthForm = function () {
                     <If
                         data={formInputs.email.error}
                         dataIf={
-                            <div class="error-div" style="display: block">
+                            <div class="error-div">
                                 <div class="error-div-variant">{formInputs.email.errorText}</div>
                             </div>
                         }
