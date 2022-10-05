@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initGo } from "@betarost/cemjs";
-import { sendComplaintApi } from "@src/apiFunctionsE.js";
+import { sendComplaintApi, renderModalFullNews } from "@src/apiFunctionsE.js";
 
 let isChecked, complaint, input, inputValue;
 
@@ -22,26 +22,31 @@ const changeComplaint = function (e) {
   return;
 };
 
-const sendComplaint = (data) => {
+const sendComplaint = async (data) => {
   if (
     isChecked.other() !== undefined &&
     (complaint.length > 0 || input().innerText.trim().length > 2)
   ) {
     if (complaint.length > 0) {
+      await sendComplaintApi({ data, complaint });
 
-      sendComplaintApi({ data, complaint });
-      Variable.Modals = [];
-      Variable.Static.answerAdditionally = false
+      // Variable.Static.answerAdditionally = false
     } else {
       complaint = [`<p>${input().innerText.trim()}</p>`];
 
-      sendComplaintApi({ data, complaint });
-      Variable.Modals = [];
-      Variable.Static.answerAdditionally = false
-    }
-    initReload()
-  }
+      await sendComplaintApi({ data, complaint });
 
+      // Variable.Static.answerAdditionally = false
+    }
+    Variable.Static.answerAdditionally = false;
+    if (Variable.dataUrl.params === undefined) {
+      Variable.Modals.pop();
+      await renderModalFullNews();
+    } else {
+      Variable.Modals = [];
+      initReload();
+    }
+  }
 };
 const ModalComplainComment = function (data, reload) {
   if (!reload) {
@@ -143,7 +148,7 @@ const ModalComplainComment = function (data, reload) {
             <div
               style={
                 isChecked.other() !== undefined &&
-                  isChecked.other().checked === true
+                isChecked.other().checked === true
                   ? "display: block"
                   : "display: none"
               }

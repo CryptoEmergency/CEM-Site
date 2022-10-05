@@ -99,12 +99,12 @@ const start = function () {
                         class="blog_news_item"
                         // href={`/${prevAdress}/show/${item._id}`}
                         onClick={async () => {
-                          let item;
-                          item = await getNewsItemInShow(item._id);
-                          item = news.list_records[0];
+                          let news;
+                          news = await getNewsItemInShow(item._id);
+                          news = news.list_records[0];
                           Variable.SetModals({
                             name: "ModalFullNews",
-                            data: {item},
+                            data: {news},
                           });
                         }}
                       >

@@ -19,7 +19,7 @@ import validator from "validator";
 import moment from "moment";
 // import swiperload from "@assets/js/swiper.js";
 import { changeStatistic, showVotersApi,getNewsItemInShow } from "@src/apiFunctions.js";
-
+import {renderModalFullNews } from "@src/apiFunctionsE.js";
 const numberFixWithSpaces = function (num, fix) {
   let x = parseFloat(num).toFixed(fix);
   var parts = x.toString().split(".");
@@ -270,6 +270,8 @@ const changeActiveCommentsInput = (id) => {
   Variable.Static.showMainInput = false;
   initReload();
 };
+
+
 let sec = 0;
 let interval;
 const showVotersAndchangeStatistic = async (e, id, commentId,) => {
@@ -292,23 +294,13 @@ const showVotersAndchangeStatistic = async (e, id, commentId,) => {
     }, 100);
   } else {
     clearInterval(interval);
-    sec < 1500 && changeStatistic(e, id, commentId);
-    // console.log('=3c6=yrtryryryr1c=',sec)
-    // sec < 1500 && async function() {
-    //   changeStatistic(e, id, commentId);
-    //   console.log('=3c6tttttttttttef1c=')
-    //    if(Variable.dataUrl.params === undefined){
-    //      Variable.Modals.pop();
-    //     let news = await getNewsItemInShow(
-    //       Variable.Static.showNewsId
-    //     );
-    //     news = news.list_records[0];
-    //     Variable.SetModals({
-    //       name: "ModalFullNews",
-    //       data: { item: news },
-    //     });
-    //    } 
-    // }() ;
+    // sec < 1500 && changeStatistic(e, id, commentId);
+    if(sec < 1500){
+      await changeStatistic(e, id, commentId);
+         if(Variable.dataUrl.params === undefined){
+          await renderModalFullNews()
+         } 
+    }
     if (1000 <= sec && sec < 1500) {
       let response = await showVotersApi(commentId || id);
       response = response.list_records[0].evaluation.filter((item) =>

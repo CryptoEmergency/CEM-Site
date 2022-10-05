@@ -1,5 +1,13 @@
-import { jsx, jsxFrag, getStorage, sendApi, Variable, initGo } from "@betarost/cemjs";
+import {
+  jsx,
+  jsxFrag,
+  getStorage,
+  sendApi,
+  Variable,
+  initGo,
+} from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
+import {getNewsItemInShow } from "@src/apiFunctions.js";
 
 const mainTrades = async () => {
   let data = {
@@ -15,40 +23,38 @@ const mainTrades = async () => {
   return response;
 };
 
-
 const giveNewCodeForReset = async (info) => {
   let data = {
-    value:{},
-  }
-  let response
-  if(info.email) {
-   data.value.email=info.email;
-  //  data.value.newCode=true;
-  //  data.value.reset=true;
+    value: {},
+  };
+  let response;
+  if (info.email) {
+    data.value.email = info.email;
+    //  data.value.newCode=true;
+    //  data.value.reset=true;
     response = checkAnswerApi(await sendApi.create("resetPassword", data));
-  }else{
-    data.value.phone=info.phone;
-    data.value.co=Variable.lang.code;
-     response = checkAnswerApi(await sendApi.create("resetPassword", data));
-  } 
-}
-
+  } else {
+    data.value.phone = info.phone;
+    data.value.co = Variable.lang.code;
+    response = checkAnswerApi(await sendApi.create("resetPassword", data));
+  }
+};
 
 const sendResetMessage = async (info) => {
   let data = {
-    value:{code:info.code ,reset: true,},
+    value: { code: info.code, reset: true },
+  };
+  if (info.email) {
+    data.value.email = info.email;
+  } else {
+    data.value.phone = info.phone;
+    data.value.co = Variable.lang.code;
   }
-  if(info.email) {
-   data.value.email=info.email
-  }else{
-    data.value.phone=info.phone;
-    data.value.co=Variable.lang.code;
-  } 
 
   let response = checkAnswerApiE(await sendApi.create("confirm", data));
-  console.log('=2342424=',response)
- return response
-}
+  console.log("=2342424=", response);
+  return response;
+};
 
 const checkAnswerApiE = function (data) {
   if (!data || !data.result) {
@@ -60,15 +66,18 @@ const checkAnswerApiE = function (data) {
   return data;
 };
 
-
 const sendInBlackList = async (info) => {
   let data = {
     value: {
       blackList: info.id,
     },
   };
+
+  
   let response = checkAnswerApi(await sendApi.create("setUsers", data));
-}
+
+
+};
 
 const delCom = async (info) => {
   console.log("=info=", info);
@@ -77,7 +86,6 @@ const delCom = async (info) => {
       comments: {},
     },
     _id: Variable.Static.showNewsId,
-   
   };
 
   info.mainCom
@@ -91,42 +99,50 @@ const delCom = async (info) => {
           _id: info.id,
         },
       });
-      let response = checkAnswerApi(await sendApi.create("setNews", data));
+  let response = checkAnswerApi(await sendApi.create("setNews", data));
 };
 
-const sendComplaintApi = async (info) =>{
-  console.log('=info=',info)
+const sendComplaintApi = async (info) => {
+  console.log("=info=", info);
   let data = {
     value: {
-      comments: {
-       
-      },
+      comments: {},
     },
     _id: Variable.Static.showNewsId,
   };
 
-
   info.data.mainCom
     ? (data.value.comments = {
-      complain:info.complaint,
-      _id:info.data.id
+        complain: info.complaint,
+        _id: info.data.id,
       })
     : (data.value.comments = {
         comments: {
-          complain:info.complaint,
-        _id:info.data.id
+          complain: info.complaint,
+          _id: info.data.id,
         },
       });
 
-  console.log('=data=',data)
+  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create("setNews", data));
-}
+};
+
+const renderModalFullNews = async () => {
+  Variable.Modals.pop();
+  let news = await getNewsItemInShow(Variable.Static.showNewsId);
+  news = news.list_records[0];
+  Variable.SetModals({
+    name: "ModalFullNews",
+    data: { news: news },
+  });
+};
 
 export {
+  renderModalFullNews,
   giveNewCodeForReset,
   sendResetMessage,
   delCom,
   mainTrades,
   sendInBlackList,
-  sendComplaintApi
-}
+  sendComplaintApi,
+};
