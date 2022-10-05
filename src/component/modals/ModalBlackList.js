@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
-import { sendInBlackList } from "@src/apifunctionsE.js";
+import { sendInBlackList } from "@src/apiFunctionsE.js";
 
 const ModalBlackList = function (data, reload) {
   console.log("=e896fe=", data);
@@ -13,7 +13,7 @@ const ModalBlackList = function (data, reload) {
           <div
             onclick={() => {
               sendInBlackList(data);
-              Variable.Static.answerAdditionally =false
+              Variable.Static.answerAdditionally = false
               Variable.Modals = [];
             }}
           >

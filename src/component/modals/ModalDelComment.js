@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initGo } from "@betarost/cemjs";
-import { delCom } from "@src/apifunctionsE.js";
+import { delCom } from "@src/apiFunctionsE.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 const ModalDelComment = function (data, reload) {
   console.log("=e896fe=", data);
@@ -18,27 +18,27 @@ const ModalDelComment = function (data, reload) {
             onclick={
               Variable.dataUrl.params === undefined
                 ? async () => {
-                    console.log("Moadal");
-                    await delCom(data);
-                    Variable.Modals.pop();
-                    Variable.Modals.pop();
-                    let news = await getNewsItemInShow(
-                      Variable.Static.showNewsId
-                    );
-                    news = news.list_records[0];
-                    Variable.SetModals({
-                      name: "ModalFullNews",
-                      data: { item: news },
-                    });
-                    Variable.Static.answerAdditionally = false;
-                  }
+                  console.log("Moadal");
+                  await delCom(data);
+                  Variable.Modals.pop();
+                  Variable.Modals.pop();
+                  let news = await getNewsItemInShow(
+                    Variable.Static.showNewsId
+                  );
+                  news = news.list_records[0];
+                  Variable.SetModals({
+                    name: "ModalFullNews",
+                    data: { item: news },
+                  });
+                  Variable.Static.answerAdditionally = false;
+                }
                 : async () => {
-                    console.log("notMoadal");
-                    await delCom(data);
-                    Variable.Modals = [];
-                    Variable.Static.answerAdditionally = false;
-                    initGo();
-                  }
+                  console.log("notMoadal");
+                  await delCom(data);
+                  Variable.Modals = [];
+                  Variable.Static.answerAdditionally = false;
+                  initGo();
+                }
             }
           >
             {Variable.lang.select.delete}

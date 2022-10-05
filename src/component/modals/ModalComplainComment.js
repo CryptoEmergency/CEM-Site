@@ -1,5 +1,5 @@
-import { jsx, jsxFrag, Variable, initReload ,initGo } from "@betarost/cemjs";
-import { sendComplaintApi } from "@src/apifunctionsE.js";
+import { jsx, jsxFrag, Variable, initReload, initGo } from "@betarost/cemjs";
+import { sendComplaintApi } from "@src/apiFunctionsE.js";
 
 let isChecked, complaint, input, inputValue;
 
@@ -28,20 +28,20 @@ const sendComplaint = (data) => {
     (complaint.length > 0 || input().innerText.trim().length > 2)
   ) {
     if (complaint.length > 0) {
-       
-      sendComplaintApi({ data, complaint });
-       Variable.Modals = [];
-       Variable.Static.answerAdditionally =false
-    } else {
-        complaint= [`<p>${input().innerText.trim()}</p>`];
-        
+
       sendComplaintApi({ data, complaint });
       Variable.Modals = [];
-      Variable.Static.answerAdditionally =false
+      Variable.Static.answerAdditionally = false
+    } else {
+      complaint = [`<p>${input().innerText.trim()}</p>`];
+
+      sendComplaintApi({ data, complaint });
+      Variable.Modals = [];
+      Variable.Static.answerAdditionally = false
     }
     initReload()
   }
-  
+
 };
 const ModalComplainComment = function (data, reload) {
   if (!reload) {
@@ -143,7 +143,7 @@ const ModalComplainComment = function (data, reload) {
             <div
               style={
                 isChecked.other() !== undefined &&
-                isChecked.other().checked === true
+                  isChecked.other().checked === true
                   ? "display: block"
                   : "display: none"
               }
@@ -160,7 +160,7 @@ const ModalComplainComment = function (data, reload) {
               data-active="0"
               data-action="answerComplain"
             >
-              <a class="btn-gr-reg" onclick={() =>sendComplaint(data)}>
+              <a class="btn-gr-reg" onclick={() => sendComplaint(data)}>
                 <span>{Variable.lang.button.send}</span>
               </a>
             </div>
