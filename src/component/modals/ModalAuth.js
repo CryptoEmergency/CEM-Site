@@ -7,7 +7,7 @@ import {
     sendApi
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { PhoneCode } from '@component/element/PhoneCode.js';
+import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
 import { allValidation } from '@src/functions.js';
 
@@ -17,6 +17,7 @@ let wayAuth,
 
 let elem = Variable.setRef()
 let elemButton = Variable.setRef()
+let elemCountry = Variable.setRef()
 
 const changeInput = function () {
     formInputs[this.dataset.type].value = this.value.trim()
@@ -71,13 +72,7 @@ const WayAuthForm = function () {
                     />
                     <div class="reset_by_email_block_container">
                         <input
-                            data-form_type="login"
-                            data-dirty="false"
-                            data-focusout="focusout"
-                            data-keyup="keyupValidate"
-                            data-validate_type="email"
                             placeholder={Variable.lang.placeholder.email}
-                            id="loginByEmailInput"
                             type="text"
                             data-type="email"
                             value={formInputs.email.value}
@@ -90,7 +85,77 @@ const WayAuthForm = function () {
     } else {
         return (
             <div>
-                phone
+                <div class='reset_by_mobile_block'>
+                    <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
+                    <If
+                        data={formInputs.phone.error}
+                        dataIf={
+                            <div class="error-div">
+                                <div class="error-div-variant">{formInputs.phone.errorText}</div>
+                            </div>
+                        }
+                    />
+                    <div class="reset_by_mobile_block_container c-phonecode">
+
+                        <div class="country-phone2">
+                            <div class="country-phone-selector2">
+                                <div
+                                    class="country-phone-selected2"
+                                    onClick={() => {
+                                        elemCountry().hidden = !elemCountry().hidden
+                                    }}
+                                >
+                                    <span>
+                                        +{formInputs.phone.code}
+                                        <img src={images.blank} class={`flag flag-${formInputs.phone.abbr}`} />
+                                    </span>
+                                </div>
+                                <div
+                                    class="country-phone-options2"
+                                    hidden={true}
+                                    ref={elemCountry}
+                                >
+                                    <input type="text" class="country-phone-search2" value="" />
+                                    <label class="country-phone-search-label2">{Variable.lang.h.modal_changeCountry}</label>
+                                    <ul>
+                                        {
+                                            Variable.phoneCodes.map(function (item) {
+                                                return (
+                                                    <li
+                                                        data-phone={item.code}
+                                                        data-co={item.abbr}
+                                                        class="country-phone-option2"
+                                                        onClick={() => {
+                                                            formInputs.phone.code = item.code
+                                                            formInputs.phone.abbr = item.abbr
+                                                            elemCountry().hidden = true
+                                                            initReload("modals")
+                                                        }}>
+                                                        <span>
+                                                            +{item.code}
+                                                            <img src="/assets/image/blank.gif" class={`flag flag-${item.abbr}`} />
+                                                        </span>
+                                                        {item.text}
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input
+                            class="phoneNubmerInput2"
+                            type="text"
+                            autofocus="true"
+                            placeholder="9990000000"
+                            data-type="phone"
+                            value={formInputs.phone.value}
+                            oninput={changeInput}
+                        />
+                    </div>
+                </div>
             </div>
         )
 
@@ -109,8 +174,10 @@ const sendAuthorization = async function (e) {
     if (wayAuth == "email") {
         data.email = formInputs['email'].value
     } else {
-        data.phone = formInputs['phone'].value
+        data.phone = `+${formInputs['phone'].code}${formInputs['phone'].value}`
+        data.co = formInputs['phone'].abbr
     }
+
     let tmpRes = await sendApi.create("userAuth", data);
     if (tmpRes.status === 'ok') {
         Variable.DelModals("ModalAuth")
@@ -125,7 +192,6 @@ const ModalAuth = function () {
 
     initOne(
         () => {
-            console.log('=bb9c5e=', "ONE")
             Variable.OutHideWindows.push([elem, "ModalAuth"])
             wayAuth = "email"
             viewPassword = false
@@ -144,6 +210,8 @@ const ModalAuth = function () {
                 },
                 phone: {
                     value: "",
+                    code: 7,
+                    abbr: "ru",
                     valid: false,
                     error: false,
                     errorText: Variable.lang.error_div.wrong_phone
@@ -197,7 +265,7 @@ const ModalAuth = function () {
                             <If
                                 data={formInputs.pass.error != ""}
                                 dataIf={
-                                    <div class="error-div" style="display: block">
+                                    <div class="error-div">
                                         <div class="error-div-variant">{formInputs.pass.errorText}</div>
                                     </div>
                                 }
