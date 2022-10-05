@@ -150,7 +150,8 @@
         "changePassword": "שנה סיסמה",
         "modal_pageDeleted": "הדף נמחק",
         "chats": "צ'אטים",
-        "partners": "שותפי מידע"
+        "partners": "שותפי מידע",
+        "modal_cropImage": "הוספת תמונה"
     },
     "a":{
         "about": "אודותינו",
@@ -234,7 +235,8 @@
         "news": "חדשות קריפטו",
         "youAgree": " על ידי שימוש בפלטפורמה, אתה מסכים עפ" ,
         "clientCount": "מספר משתמשים שהופנו",
-        "clientMoney": "תשלומים עבור משתמשים נמשכים"
+        "clientMoney": "תשלומים עבור משתמשים נמשכים",
+        "forFriends": "לחברים בלבד"
     },
     "p": {
         "answers": "תשובות",
@@ -340,7 +342,15 @@
         "socialLink": "פרסם את הקישור ברשתות חברתיות, שתף עם חברים והרוויח אסימוני CEM מכל משתמש רשום. כמו כן, עבור המשתתפים הפעילים ביותר, אנו מכינים תוכנית מוניטיזציה מורחבת ליוצרי תוכן.",
         "referal": "קישור הפניה",
         "copy": "עתק",
-        "pageDeleted": "דף המשתמש נמחק, מפנה מחדש לדף הבית"
+        "pageDeleted": "דף המשתמש נמחק, מפנה מחדש לדף הבית",
+        "transactionRegistration": "לרישום",
+		"transactionReferralRegistration": "עבור הפניה",
+		"transactionOther": "אחר",
+		"transactionAwards": "על ההישג שהושג",
+		"transactionLevel": "עבור הרמה שהושגה",
+		"October2022": "אוקטובר 2022",
+		"aboutProjectDate19May2022": "שחרור 19 במאי 2022",
+		"aboutProjectDateAugust2022": "שחרור אוגוסט 2022"
     },
     "text": {
         "starups": "סטארט-אפים",
@@ -406,7 +416,8 @@
         "blackList": "רשימה שחורה",
         "deleteFromBlacklist": "מחק מהרשימה",
         "confirmBlockUser": "האם אתה בטוח שברצונך לחסום את המשתמש?",
-        "update": "השתנה"
+        "update": "השתנה",
+        "deletePageComment": "האם אתה בטוח שברצונך להסיר?"
     },
     "label": {
         "name": "שם",

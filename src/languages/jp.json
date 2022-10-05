@@ -150,7 +150,8 @@
         "changePassword": "パスワードの変更",
 		"modal_pageDeleted": "ページ削除",
         "chats": "チャット",
-        "partners": "インフォメーションパートナーズ"
+        "partners": "インフォメーションパートナーズ",
+        "modal_cropImage": "写真を追加する"
     },
     "a": {
         "about": "会社概要",
@@ -234,7 +235,8 @@
 		"news": "クリプトニュース",
         "youAgree": "プラットフォームを使用することにより,お客様は同意するものとします",
         "clientCount": "引き寄せられた顧客の数",
-		"clientMoney": "魅力的な顧客への支払い"
+		"clientMoney": "魅力的な顧客への支払い",
+        "forFriends": "友人のためだけに"
     },
     "p": {
         "answers": "答え",
@@ -340,7 +342,15 @@
 		"socialLink": "ソーシャルメディアにリンクを投稿し,友人と共有し,各登録ユーザーからCEMトークンを獲得する. また,最もアクティブな参加者のために,コンテンツ作成者のための拡張マネタイズ・プログラムを準備する必要があります.",
 		"referal": "紹介リンク",
 		"copy": "コピーするには",
-        "pageDeleted": "ユーザーのページが削除されました, メインページへのリダイレクト"
+        "pageDeleted": "ユーザーのページが削除されました, メインページへのリダイレクト",
+        "transactionRegistration": "登録のため",
+		"transactionReferralRegistration": "紹介のために",
+		"transactionOther": "その他",
+		"transactionAwards": "受け取った成果のために",
+		"transactionLevel": "受信したレベルの場合",
+		"October2022": "2022年10月",
+		"aboutProjectDate19May2022": "2022年5月19日発売",
+		"aboutProjectDateAugust2022": "リリース2022年8月"
     },
     "text": {
         "starups": "スタートアップ",
@@ -406,7 +416,8 @@
         "blackList": "ブラックリスト",
 		"deleteFromBlacklist": "リストから削除する",
 		"confirmBlockUser": "ブラックリストにユーザーを追加してもよろしいですか？ (ユーザーのブラックリストは、設定で使用できます)",
-        "update": "変更された"
+        "update": "変更された",
+        "deletePageComment": "本当に削除しますか？"
     },
     "label": {
         "name": "名前",

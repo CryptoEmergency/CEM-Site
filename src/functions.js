@@ -18,8 +18,8 @@ import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
 // import swiperload from "@assets/js/swiper.js";
-import { changeStatistic, showVotersApi,getNewsItemInShow } from "@src/apiFunctions.js";
-import {renderModalFullNews } from "@src/apiFunctionsE.js";
+import { changeStatistic, showVotersApi, getNewsItemInShow } from "@src/apiFunctions.js";
+import { renderModalFullNews } from "@src/apiFunctionsE.js";
 const numberFixWithSpaces = function (num, fix) {
   let x = parseFloat(num).toFixed(fix);
   var parts = x.toString().split(".");
@@ -82,12 +82,11 @@ const clickHide = function (e) {
       }
       if (item[0]() === e.target || item[0]().contains(e.target)) {
       } else {
-        if (item[1]) {
+        if (item[1] && typeof item[1] == "function") {
           item[1]().hidden = true
-        } else {
-          Variable.Modals = []
+        } else if (typeof item[1] == "string") {
+          Variable.DelModals(item[1])
         }
-
         Variable.OutHideWindows.splice(index, 1)
       }
     })
@@ -181,8 +180,8 @@ const getNewsCategory = async function (type) {
 };
 
 const timerCourse = async function () {
-  let tmp = checkAnswerApi(await sendApi.getCourse());
-  Variable.course = tmp.list_records[0]
+  Variable.course = checkAnswerApi(await sendApi.getCourse());
+  //Variable.course = tmp.list_records[0]
 };
 
 const siteLink = function (e) {
@@ -288,25 +287,25 @@ const showVotersAndchangeStatistic = async (e, id, commentId,) => {
         if (response !== undefined) {
           response = response.list_records[0].evaluation.filter((item) =>
             item.type === type);
-          Variable.SetModals({ name: "ModalWhoLike", data: { response } },true)
+          Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true)
         }
       }
     }, 100);
   } else {
     clearInterval(interval);
     // sec < 1500 && changeStatistic(e, id, commentId);
-    if(sec < 1500){
+    if (sec < 1500) {
       await changeStatistic(e, id, commentId);
-         if(Variable.dataUrl.params === undefined){
-          await renderModalFullNews()
-         } 
+      if (Variable.dataUrl.params === undefined) {
+        await renderModalFullNews()
+      }
     }
     if (1000 <= sec && sec < 1500) {
       let response = await showVotersApi(commentId || id);
       response = response.list_records[0].evaluation.filter((item) =>
         item.type === type);
-        
-      Variable.SetModals({ name: "ModalWhoLike", data: { response } },true)
+
+      Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true)
     }
     sec = 0;
   }

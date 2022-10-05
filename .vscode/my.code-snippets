@@ -84,6 +84,14 @@
 		],
 		"description": ""
 	},
+	"Import функция": {
+		"scope": "javascript,typescript",
+		"prefix": "_func",
+		"body": [
+			"import { checkAnswerApi, siteLink } from '@src/functions.js;"
+		],
+		"description": ""
+	},
 	"Имопрт страницы сайта": {
 		"scope": "javascript,typescript",
 		"prefix": "_iPage",

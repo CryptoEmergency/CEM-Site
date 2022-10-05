@@ -150,7 +150,8 @@
         "changePassword": "Cambiar contraseña",
 		"modal_pageDeleted": "Página eliminada",
         "chats": "Salas de chat",
-        "partners": "Socios de información"
+        "partners": "Socios de información",
+        "modal_cropImage": "Añadir una foto"
     },
     "a": {
         "about": "Sobre nosotros",
@@ -234,7 +235,8 @@
 		"news": "Crypto Noticias",
         "youAgree": "Al utilizar la Plataforma, Usted consiente con",
         "clientCount": "Número de clientes atraídos",
-		"clientMoney": "Pagos para clientes atraídos"
+		"clientMoney": "Pagos para clientes atraídos",
+        "forFriends": "Sólo para amigos"
     },
     "p": {
         "answers": "Respuestas ",
@@ -340,7 +342,15 @@
 		"socialLink": "Publicar un enlace en redes sociales, compartir con amigos y obtener fichas CEM de cada usuario registrado. Además, para los participantes más activos, tenemos que preparar un programa de monetización ampliado para los autores de contenido.",
 		"referal": "Enlace de referencia",
 		"copy": "Copiar",
-        "pageDeleted": "Página de usuario eliminada, redireccionamiento a la página principal"
+        "pageDeleted": "Página de usuario eliminada, redireccionamiento a la página principal",
+        "transactionRegistration": "Por registro",
+		"transactionReferralRegistration": "Por referencia",
+		"transactionOther": "Lo otro",
+		"transactionAwards": "Por el logro obtenido",
+		"transactionLevel": "За полученный уровень",
+		"October2022": "Octubre de 2022",
+		"aboutProjectDate19May2022": "Lanzamiento 19 de mayo de 2022",
+		"aboutProjectDateAugust2022": "Lanzamiento agosto 2022"
     },
     "text": {
         "starups": "Inauguración",
@@ -406,7 +416,8 @@
         "blackList": "Lista negra",
 		"deleteFromBlacklist": "Eliminar de la lista",
 		"confirmBlockUser": "¿Estás seguro de que quieres agregar un usuario a la lista negra? (La lista negra de usuarios está disponible en la configuración)",
-        "update": "Cambiado"
+        "update": "Cambiado",
+        "deletePageComment": "¿Estás seguro de que quieres eliminar?"
     },
     "label": {
         "name": "Nombre",

@@ -5,7 +5,7 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-
+import { timerCourse, checkAnswerApi, siteLink } from '@src/functions.js'
 import { NewsItem } from '@component/element/NewsItem.js';
 
 const BlockMainNews = function () {
@@ -15,7 +15,7 @@ const BlockMainNews = function () {
         <div class="news_block_container">
             <div class="news_block">
                 <div class="home_page_news">
-                    <a class="crypto_news_link" data-action="link" href="{{Variable.lang.url}}news/">Crypto News</a>
+                    <a class="crypto_news_link" data-action="link" href="/news/">Crypto News</a>
                     <div class="gradient_line"></div>
                 </div>
                 <div class="main_page_news_block">
@@ -38,7 +38,7 @@ const BlockMainNews = function () {
                 </div>
             </div>
             <div class="button-container-preview">
-                <a class="btn-news-preview" href="{{Variable.lang.url}}news/" data-action="link">
+                <a class="btn-news-preview" href="/news/" onclick={siteLink}>
                     <span>
                         {Variable.lang.button.allNews}
                     </span>

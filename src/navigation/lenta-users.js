@@ -8,7 +8,8 @@ import {
   getValue,
   sendApi,
   Variable,
-  init
+  init,
+  initReload,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
@@ -16,7 +17,10 @@ import { BlockLentaUsers } from "@component/blocks/BlockLentaUsers.js";
 
 let count = 0;
 let prevType = "";
-const getLentaUsersList = async (firstLoad, type) => {
+let posts;
+// let activeCategory = "text";
+
+const getLentaUsersList = async (firstLoad, type, reload) => {
   console.log('=269dc6=', type)
   let data = {
     select: {
@@ -33,13 +37,16 @@ const getLentaUsersList = async (firstLoad, type) => {
     sort: {
       showDate: -1,
     },
-    filter: { "languages.code": "ru" },
+    filter: {
+      "languages.code": "ru"
+    },
   };
 
+  Variable.activeCategory = type;
+  console.log('=269dc6=', "activeCategory = ", Variable.activeCategory)
   switch (type) {
 
     case "text":
-      console.log('=text=', prevType)
       data.filter["media.type"] = { $nin: ["video", "audio", "image"] };
       if (prevType === type) {
         data.limit = 6;
@@ -48,7 +55,6 @@ const getLentaUsersList = async (firstLoad, type) => {
         data.limit = 6;
         data.offset = 0
       }
-
       break;
 
     case "audio":
@@ -69,7 +75,7 @@ const getLentaUsersList = async (firstLoad, type) => {
       data.offset = 6 + 6 * (count - 1);
       break;
 
-    case "image":
+    case "photo":
       data.filter.$and = [
         { "media.type": "image" },
         { "media.type": { $nin: ["audio", "video"] } },
@@ -95,28 +101,27 @@ const getLentaUsersList = async (firstLoad, type) => {
   //   data.offset = 12 + 6 * (count - 1);
   // }
   let response = checkAnswerApi(await sendApi.create("getPost", data));
-  console.log(response);
+
   if (firstLoad) {
+    posts = response
+    if (reload) {
+      initReload()
+    }
     return response;
   } else if (prevType === type) {
-    let prevList = getValue(ID, "lentaUsers");
-    response.list_records = [
-      ...prevList.list_records,
-      ...response.list_records,
-    ];
-    console.log("=baedb3=", response);
-    // setValue(ID, "lentaUsers", response);
-    // init(true);
+    posts.list_records.push(...response.list_records)
+    initReload()
   } else {
-    // setValue(ID, "lentaUsers", response);
+    posts = response
+    initReload()
   }
   prevType = type;
 };
 
 const start = function () {
-  let posts
   Variable.HeaderShow = true
   Variable.FooterShow = true
+  Variable.activeCategory = "all"
 
   init(
     async () => {
@@ -124,7 +129,6 @@ const start = function () {
     },
 
     () => {
-
 
       return (
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
@@ -280,53 +284,48 @@ const start = function () {
                 <div class="users_news_categories">
                   <div
                     data-type="all"
-                    data-action="user_news_category_toggle"
-                    class="users_news_category users_news_category_active"
-                  // onClick={() => {
-                  //   getLentaUsersList(false, "all");
-                  // }}
+                    class={`users_news_category ${Variable.activeCategory == "all" ? "users_news_category_active" : ""}`}
+                    onClick={() => {
+                      getLentaUsersList(true, "all", true);
+                    }}
                   >
-                    <img src={svg["sections/news_all"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "all" ? "news_all" : "news_all_inactive"}`]} />
                   </div>
                   <div
                     data-type="photo"
-                    data-action="user_news_category_toggle"
-                    class="users_news_category"
-                  //onClick={() => {
-                  //  getLentaUsersList(false, "photo");
-                  //}}
+                    class={`users_news_category ${Variable.activeCategory == "photo" ? "users_news_category_active" : ""}`}
+                    onClick={() => {
+                      getLentaUsersList(true, "photo", true);
+                    }}
                   >
-                    <img src={svg["sections/news_photo_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "photo" ? "news_photo" : "news_photo_inactive"}`]} />
                   </div>
                   <div
                     data-type="video"
-                    data-action="user_news_category_toggle"
-                    class="users_news_category"
-                  // onClick={() => {
-                  //   getLentaUsersList(false, "video");
-                  // }}
+                    class={`users_news_category ${Variable.activeCategory == "video" ? "users_news_category_active" : ""}`}
+                    onClick={() => {
+                      getLentaUsersList(true, "video", true);
+                    }}
                   >
-                    <img src={svg["sections/news_video_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "video" ? "news_video" : "news_video_inactive"}`]} />
                   </div>
                   <div
                     data-type="audio"
-                    data-action="user_news_category_toggle"
-                    class="users_news_category"
-                  // onClick={() => {
-                  //   getLentaUsersList(false, "audio");
-                  // }}
+                    class={`users_news_category ${Variable.activeCategory == "audio" ? "users_news_category_active" : ""}`}
+                    onClick={() => {
+                      getLentaUsersList(false, "audio", true);
+                    }}
                   >
-                    <img src={svg["sections/news_audio_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "audio" ? "news_audio" : "news_audio_inactive"}`]} />
                   </div>
                   <div
                     data-type="text"
-                    data-action="user_news_category_toggle"
-                    class="users_news_category"
-                  // onClick={() => {
-                  //   getLentaUsersList(false, "text");
-                  // }}
+                    class={`users_news_category ${Variable.activeCategory == "text" ? "users_news_category_active" : ""}`}
+                    onClick={() => {
+                      getLentaUsersList(false, "text", true);
+                    }}
                   >
-                    <img src={svg["sections/news_text_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "text" ? "news_text" : "news_text_inactive"}`]} />
                   </div>
                 </div>
 

@@ -11,8 +11,9 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat, parseTextforJsx } from "@src/functions.js";
-import { AudioPlayer } from "@component/element/AudioPlayer.js";
-import { Slider } from "@component/element/Slider.js";
+import { AudioPlayer } from "../element/audioPlayer.js";
+import { Slider } from "../element/slider.js";
+import { Avatar } from '@component/element/Avatar.js';
 
 const returnImgOrVideo = (item) => {
   if (
@@ -69,16 +70,17 @@ const returnImgOrVideo = (item) => {
 };
 
 const BlockLentaUsers = function ({ item }) {
-
-  // const lang = getVariable("languages")[getStorage("lang")];
+  // console.log('=4d0c8d=', item)
   const isAuth = Variable.auth;
   //   const parser = new DOMParser();
   //   let jsx1 = parser.parseFromString(item.text, "text/html");
   //   //   let tmp = [...jsx1.body.childNodes];
+
   return (
     <div class="user_news_item" data-author={item.author._id}>
       <div class="main_comment" data-link={item._id} data-action="getPost">
         {/* {{>avatar author}}                     */}
+        <Avatar author={item.author} />
         <div class="comment_body">
           {item.media.length > 0 && returnImgOrVideo(item)}
 
@@ -113,12 +115,14 @@ const BlockLentaUsers = function ({ item }) {
               {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
               })} */}
-              {stringToHtml(item.text)}
+              {item.text}
+              {/* {stringToHtml(item.text)} */}
             </span>
           ) : item.text.length < 100 ? (
             <div class="user_post_text_background">
               <span class="comment_text">
-                {stringToHtml(item.text)}
+                {item.text}
+                {/* {stringToHtml(item.text)} */}
                 {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
               })} */}
@@ -126,10 +130,11 @@ const BlockLentaUsers = function ({ item }) {
             </div>
           ) : (
             <span data-text={item.text} class="comment_text">
+              {item.text}
               {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
               })} */}
-              {stringToHtml(item.text)}
+              {/* {stringToHtml(item.text)} */}
             </span>
           )}
         </div>
