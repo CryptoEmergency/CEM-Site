@@ -14,7 +14,6 @@ const CommentInput = function ({ nickname, item,commentId, edit }) {
   let count = 1;
   let scrollHeight = 0;
   let commentText = Variable.setRef();
-  console.log('=commentText=',commentText())
   const changeTextarea = (e) => {
     let element = e.target;
     if (element.textLength === 1 && count == 1) {
@@ -33,7 +32,6 @@ const CommentInput = function ({ nickname, item,commentId, edit }) {
   };
 
   const sendNewComment = async () => {
-    console.log('=text=',commentText())
     let text = commentText().value.trim();
     
     let response;

@@ -116,6 +116,10 @@
 
             &-wrapper {
                 width: 300px;
+
+                @media(max-width: 1199px) {
+                    width: 100%;
+                }
             }
 
             &-title {
@@ -129,9 +133,37 @@
             }
         }
 
+        .profit_calculator_inputs_container {
+            display: block;
+
+            &:nth-of-type(2) {
+                display: flex;
+            }
+
+            @media(max-width: 1199px) {
+                margin-top: 8px;
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        .c-questions {
+            &__lang {
+                @media(max-width: 1199px) {
+                    margin-top: 8px;
+                }
+            }
+        }
+
         li {
             background-color: $prestige_blue;
             color: $white;
+        }
+
+        &--openmobile {
+            @media(max-width: 1199px) {
+                display: block;
+            }
         }
     }
 
