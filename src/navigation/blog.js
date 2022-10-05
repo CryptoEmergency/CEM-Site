@@ -9,6 +9,7 @@ import {
 import svg from "@assets/svg/index.js";
 
 import { getNewsItem, getNewsCategory, getDateFormat } from "@src/functions.js";
+import { getNewsItemInShow } from "@src/apiFunctions.js";
 
 const start = function () {
   // let activeCategory, blogCategory, blogItem
@@ -40,6 +41,7 @@ const start = function () {
       blogCategory = await getNewsCategory("blog");
       blogItem = await getNewsItem("blog",count, activeCategory);
       count = 0;
+      console.log('=blogItem=',blogItem)
     },
     () => {
       return (
@@ -89,7 +91,17 @@ const start = function () {
                 <div class="blog_news">
                   {blogItem.list_records.map((item, index) => {
                     return (
-                      <a class="blog_news_item" data-index={index}>
+                      <div class="blog_news_item" data-index={index}
+                      onClick={async () => {
+                        let news;
+                        news = await getNewsItemInShow(item._id);
+                        news = news.list_records[0];
+                        Variable.SetModals({
+                          name: "ModalFullBlog",
+                          data: {news},
+                        });
+                      }}
+                      >
                         <img src={"/assets/upload/news/" + item.image} />
                         <p class="blog_new_title">{item.title}</p>
                         <span class="blog_new_text">{item.preview}</span>
@@ -116,7 +128,7 @@ const start = function () {
                             </a>
                           </p>
                         )}
-                      </a>
+                      </div>
                     );
                   })}
                 </div>
