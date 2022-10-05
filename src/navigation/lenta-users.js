@@ -121,16 +121,15 @@ const getLentaUsersList = async (firstLoad, type, reload) => {
 const start = function () {
   Variable.HeaderShow = true
   Variable.FooterShow = true
-  Variable.activeCategory = "text"
+  Variable.activeCategory = "all"
 
   init(
     async () => {
-      posts = await getLentaUsersList(true, "text")
+      posts = await getLentaUsersList(true, "all")
     },
 
     () => {
 
-      console.log('=043adf=', posts)
       return (
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
           <div class="page-content page-content--full">
@@ -290,7 +289,7 @@ const start = function () {
                       getLentaUsersList(true, "all", true);
                     }}
                   >
-                    <img src={svg["sections/news_all"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "all" ? "news_all" : "news_all_inactive"}`]} />
                   </div>
                   <div
                     data-type="photo"
@@ -299,7 +298,7 @@ const start = function () {
                       getLentaUsersList(true, "photo", true);
                     }}
                   >
-                    <img src={svg["sections/news_photo_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "photo" ? "news_photo" : "news_photo_inactive"}`]} />
                   </div>
                   <div
                     data-type="video"
@@ -308,7 +307,7 @@ const start = function () {
                       getLentaUsersList(true, "video", true);
                     }}
                   >
-                    <img src={svg["sections/news_video_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "video" ? "news_video" : "news_video_inactive"}`]} />
                   </div>
                   <div
                     data-type="audio"
@@ -317,7 +316,7 @@ const start = function () {
                       getLentaUsersList(false, "audio", true);
                     }}
                   >
-                    <img src={svg["sections/news_audio_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "audio" ? "news_audio" : "news_audio_inactive"}`]} />
                   </div>
                   <div
                     data-type="text"
@@ -326,7 +325,7 @@ const start = function () {
                       getLentaUsersList(false, "text", true);
                     }}
                   >
-                    <img src={svg["sections/news_text_inactive"]} />
+                    <img src={svg[`sections/${Variable.activeCategory == "text" ? "news_text" : "news_text_inactive"}`]} />
                   </div>
                 </div>
 
