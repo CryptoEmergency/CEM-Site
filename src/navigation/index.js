@@ -151,6 +151,7 @@ const start = function () {
 
     Variable.HeaderShow = true
     Variable.FooterShow = true
+    Variable.visibleFilterUser = false
 
     init(
         async () => {
