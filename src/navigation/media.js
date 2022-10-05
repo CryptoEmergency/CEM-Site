@@ -7,6 +7,7 @@ import {
   initReload,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
+import { getNewsItemInShow } from "@src/apiFunctions.js";
 
 
 
@@ -125,8 +126,19 @@ const start = function () {
             </div> 
             :
              mediaItem.list_records.map((item) => {
+              console.log('=0cce9d=',item)
               return (
-                <a class="blog_news_item">
+                <div class="blog_news_item"
+                onClick={async () => {
+                  let news;
+                  news = await getNewsItemInShow(item._id);
+                  news = news.list_records[0];
+                  Variable.SetModals({
+                    name: "ModalFullMedia",
+                    data: {news},
+                  });
+                }}
+                >
                   <img src={"/assets/upload/news/" + item.image} />
                   <p class="blog_new_title">{item.title}</p>
                   <span class="blog_new_text">{item.preview}</span>
@@ -153,7 +165,7 @@ const start = function () {
                     </p>
                   )}
                   {/* {{#if source}}{{#if suoureShow}}<p class="full_news_disclaimer mr20">{{Variable.lang.p.source}} <a href="{{source}}" rel="nofollow" target="_blank">{{source}}</a></p>{{/if}}{{/if}} */}
-                </a>
+                </div>
               );
             })}
             </div>

@@ -2,10 +2,10 @@ import {
   jsx,
   jsxFrag,
   init,
-  initReload,
   Variable,
   stringToHtml,
   initGo,
+  initReload,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
@@ -15,6 +15,7 @@ const CommentInput = function ({ nickname, item,commentId, edit }) {
   let scrollHeight = 0;
   let commentText = Variable.setRef();
   const changeTextarea = (e) => {
+    console.log('=d5a687=',commentText().value)
     let element = e.target;
     if (element.textLength === 1 && count == 1) {
       scrollHeight = element.scrollHeight;
@@ -42,6 +43,7 @@ const CommentInput = function ({ nickname, item,commentId, edit }) {
         commentId,
         edit
       );
+      console.log('=commentText().value=',text)
       commentText().value = "";
       initGo();
     }

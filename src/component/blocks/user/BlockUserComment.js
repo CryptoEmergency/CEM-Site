@@ -81,7 +81,6 @@ const BlockUserComment = function ({ comments }) {
                 Variable.Static.answerAdditionally = true;
                 Variable.Static.answerAdditionallyShow = "";
                 changeActiveCommentsInput(item._id);
-                
               }}
             >
               {Variable.lang.button.giveAnswer}
@@ -111,6 +110,7 @@ const BlockUserComment = function ({ comments }) {
                           class="answer_additionally_item delete"
                           onclick={(e) => {
                             closeAnswerAdditionally(e); 
+                           
                             e.target.parentElement.parentElement.parentElement.style="display : none"
                             Variable.SetModals({
                               name: "ModalDelComment",
