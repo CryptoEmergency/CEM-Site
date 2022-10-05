@@ -180,8 +180,8 @@ const getNewsCategory = async function (type) {
 };
 
 const timerCourse = async function () {
-  let tmp = checkAnswerApi(await sendApi.getCourse());
-  Variable.course = tmp.list_records[0]
+  Variable.course = checkAnswerApi(await sendApi.getCourse());
+  //Variable.course = tmp.list_records[0]
 };
 
 const siteLink = function (e) {

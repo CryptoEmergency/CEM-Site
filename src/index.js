@@ -18,14 +18,13 @@ Variable.listsLang = listsLang
 Variable.phoneCodes = phoneCodes
 Variable.load = false
 Variable.clickHide = clickHide
-//Variable.outHideWindows = []
 const start = async function () {
     await initCache();
     await initStorage();
     await addListen();
     await parsingUrl();
     await initApp();
-    await test();
+    //await test();
 }
 
 start();

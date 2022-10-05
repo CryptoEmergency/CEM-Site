@@ -156,7 +156,7 @@ const start = function () {
     init(
         async () => {
 
-            Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse })).list_records[0]
+            Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse }))
             timersStart("Course", timerCourse, 10000)
 
             Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
@@ -246,11 +246,11 @@ const start = function () {
                                 <BlockUsers />
                                 <BlockMainNews />
                                 <BlockInfoPartners />
-                                <div class="crypto_exchanges_footer">
+                                {/* <div class="crypto_exchanges_footer">
                                     <a class="c-button c-button--gray" href="/partners/" onclick={siteLink}>
                                         <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
                                     </a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

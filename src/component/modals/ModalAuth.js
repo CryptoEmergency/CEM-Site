@@ -13,24 +13,31 @@ import { allValidation } from '@src/functions.js';
 
 let wayAuth,
     formInputs,
-    viewPassword
+    viewPassword,
+    listCodes
 
 let elem = Variable.setRef()
 let elemButton = Variable.setRef()
 let elemCountry = Variable.setRef()
+
+const changeSearch = (e) => {
+    let inputValue = e.target.value.toLowerCase();
+    listCodes = Variable.phoneCodes.filter((item) => item.text.toLowerCase().includes(inputValue) || `+${item.code}`.toLowerCase().includes(inputValue))
+    initReload("modals");
+}
 
 const changeInput = function () {
     formInputs[this.dataset.type].value = this.value.trim()
     formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
 
     if (!formInputs[this.dataset.type].valid) {
-        formInputs[this.dataset.type].error = "Заполните поле " + this.dataset.type;
+        formInputs[this.dataset.type].error = true;
         this.style = "border-color: rgb(200, 23, 38);";
         formInputs.isValid = false
         initReload("modals")
         return
     } else {
-        formInputs[this.dataset.type].error = "";
+        formInputs[this.dataset.type].error = false;
         this.style = "border-color: rgb(37, 249, 48);"
     }
 
@@ -103,6 +110,7 @@ const WayAuthForm = function () {
                                     class="country-phone-selected2"
                                     onClick={() => {
                                         elemCountry().hidden = !elemCountry().hidden
+                                        listCodes = Variable.phoneCodes
                                     }}
                                 >
                                     <span>
@@ -115,11 +123,16 @@ const WayAuthForm = function () {
                                     hidden={true}
                                     ref={elemCountry}
                                 >
-                                    <input type="text" class="country-phone-search2" value="" />
+                                    <input
+                                        type="text"
+                                        class="country-phone-search2"
+                                        value=""
+                                        oninput={changeSearch}
+                                    />
                                     <label class="country-phone-search-label2">{Variable.lang.h.modal_changeCountry}</label>
                                     <ul>
                                         {
-                                            Variable.phoneCodes.map(function (item) {
+                                            listCodes.map(function (item) {
                                                 return (
                                                     <li
                                                         data-phone={item.code}
@@ -194,6 +207,7 @@ const ModalAuth = function () {
         () => {
             Variable.OutHideWindows.push([elem, "ModalAuth"])
             wayAuth = "email"
+            listCodes = Variable.phoneCodes
             viewPassword = false
             formInputs = {
                 email: {

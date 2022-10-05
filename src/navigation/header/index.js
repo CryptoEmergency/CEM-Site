@@ -70,6 +70,7 @@ const mainHeader = async function () {
 
     init(
         async () => {
+
             notify = Variable.myInfo.notifyQuestions
             //notify = Variable.myInfo.notifyAwards
             //notify = Variable.myInfo.notifySystem
@@ -80,10 +81,12 @@ const mainHeader = async function () {
             }
             Variable.langListShow = false;
             Variable.notifyWindowShow = false;
+            if (Variable.HeaderShow) {
+                Variable.showUserMenu = false
+                document.getElementById("mainHeader").classList.remove("c-header--notransform");
+            }
             if (Variable.showUserMenu) {
                 document.getElementById("mainHeader").classList.add("c-header--notransform");
-            } else {
-                document.getElementById("mainHeader").classList.remove("c-header--notransform");
             }
         },
         () => {
