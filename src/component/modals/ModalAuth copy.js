@@ -50,14 +50,14 @@ const ModalAuth = function ({
                         >
                             {Variable.lang.button.email}
                         </button>
-                        <button
+                        {/* <button
                             data-form_type="login"
                             id="loginByMobile"
                             class={`c-button c-button--toggler ${wayAuth == "phone" && "c-button--active"}`}
                             onClick={(e) => { changeWayAuth(e) }}
                         >
                             {Variable.lang.button.phone}
-                        </button>
+                        </button> */}
                     </div>
                     <form id="loginForm">
                         <input style="display: none;" type="submit" />

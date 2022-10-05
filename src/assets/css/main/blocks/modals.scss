@@ -3341,6 +3341,17 @@
 	}
 }
 
+#ModalReset {
+	#resetPassword2 {
+		display: flex;
+		align-items: stretch;
+		justify-content: space-between;
+		gap: 10%;
+	}
+
+	.test12345 {}
+}
+
 .reset_password {
 
 	h4 {

@@ -74,12 +74,10 @@ const start = function () {
                     <div class="crypto_exchanges-cell">{i + 1}.</div>
                     <div class="crypto_exchanges-cell">
                       <div>
-                        <span>
-                          <span class="list_exanges_image_container">
-                            <img class="crypto_coin_icon" src={item.logo} />
-                          </span>
-                          {item.name}
+                        <span class="list_exanges_image_container">
+                          <img class="crypto_coin_icon" src={item.logo} />
                         </span>
+                        {item.name}
                       </div>
                     </div>
                     <div class="crypto_exchanges-cell">

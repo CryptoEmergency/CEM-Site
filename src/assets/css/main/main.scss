@@ -222,10 +222,12 @@ textarea {
     margin-top: 10px;
     width: 100%;
     max-width: 1240px;
-    height: 145px;
+    // height: 145px;
+    height: 100px;
 
     @media(max-width: 1199px) {
-        height: 280px;
+        // height: 280px;
+        height: 230px;
     }
 }
 

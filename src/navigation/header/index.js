@@ -147,13 +147,13 @@ const mainHeader = async function () {
                                                     <a class="c-notification__link" onClick={toggleVisibleNotify}></a>
                                                     <div class="c-notification__new"></div>
                                                 </div>
-                                                <div class="c-header__messages c-messages">
+                                                {/* <div class="c-header__messages c-messages">
                                                     <a href="/user/chats/" class="c-messages__link" onclick={siteLink}>
                                                         <i class="c-messages__icon"></i>
                                                         <div style="display: none;" class="c-messages__counter"></div>
                                                     </a>
                                                     <div class="c-messages__new"></div>
-                                                </div>
+                                                </div> */}
                                                 <i
                                                     class="c-header__burger c-header__burger--noauth"
                                                     onclick={() => {

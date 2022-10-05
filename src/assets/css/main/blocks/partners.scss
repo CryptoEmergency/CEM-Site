@@ -51,4 +51,8 @@
             padding-top: 20px;
         }
     }
+
+    &+.crypto_exchanges_footer {
+        padding: 0 0 20px;
+    }
 }
