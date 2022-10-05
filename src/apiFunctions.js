@@ -161,8 +161,10 @@ const getNewsItemInShow = async function (id) {
   return response;
 };
 
+
+
 const getQuestionItemInShow = async function (id) {
-  console.log("getQuestionItemInShow id=", id);
+
 
   let data = {
     filter: {
@@ -184,6 +186,7 @@ const getQuestionItemInShow = async function (id) {
   };
 
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
+  console.log('=df5226=',response)
   return response;
 };
 

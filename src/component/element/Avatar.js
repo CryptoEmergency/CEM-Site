@@ -3,7 +3,7 @@ import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
 
-const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
+const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
 
   if (!author.nickname) {
     return (
