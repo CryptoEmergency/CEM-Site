@@ -11,22 +11,22 @@ const BlockBanners = function () {
     console.log("BlockBanners", banners);
 
     const banners = [
-        {
-            "id": "62dd2ca100978d192547427c",
-            "image": "lbf_banner"
-        },
+        // {
+        //     "id": "62dd2ca100978d192547427c",
+        //     "image": "lbf_banner"
+        // },
         {
             "id": "62bab2ac962df43c3fd94755",
             "image": "blockchain24"
         },
-        {
-            "id": "62f0da1ef2b8fa66345ef411",
-            "image": "crypto_summit"
-        },
-        {
-            "id": "630382384dab714d6e986cd6",
-            "image": "1200х580-(fb)"
-        },
+        // {
+        //     "id": "62f0da1ef2b8fa66345ef411",
+        //     "image": "crypto_summit"
+        // },
+        // {
+        //     "id": "630382384dab714d6e986cd6",
+        //     "image": "1200х580-(fb)"
+        // },
         {
             "id": "62fb66bd4dab714d6e955d80",
             "image": "blockchain_life"
@@ -43,22 +43,14 @@ const BlockBanners = function () {
             "id": "6335a4b54b35372a229983f6",
             "image": "chiframed290x140"
         },
-        // {
-        //     "id": "",
-        //     "image": ""
-        // },
-        // {
-        //     "id": "",
-        //     "image": ""
-        // },
-        // {
-        //     "id": "",
-        //     "image": ""
-        // },
-        // {
-        //     "id": "",
-        //     "image": ""
-        // }
+        {
+            "id": "633abcdcaaa547a6fbb7ae22",
+            "image": "cryptofut"
+        },
+        {
+            "id": "631eed7583bf605a831e4a42",
+            "image": "banner2022-09-09"
+        },
     ];
 
     return (
