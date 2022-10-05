@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
-import { sendInBlackList } from "@src/apiFunctionsE.js";
+import { sendInBlackList,renderModalFullNews } from "@src/apiFunctionsE.js";
 
 const ModalBlackList = function (data, reload) {
   console.log("=e896fe=", data);
@@ -11,10 +11,24 @@ const ModalBlackList = function (data, reload) {
         </header>
         <div class="c-modal__body">
           <div
-            onclick={() => {
-              sendInBlackList(data);
-              Variable.Static.answerAdditionally = false
-              Variable.Modals = [];
+            onclick={async() => {
+
+              await sendInBlackList(data);
+              Variable.Static.answerAdditionally = false;
+              if (Variable.dataUrl.params === undefined) {
+                Variable.Modals.pop();
+                await renderModalFullNews();
+              } else {
+                Variable.Modals = [];
+                initGo();
+              }
+
+
+
+
+              // sendInBlackList(data);
+              // Variable.Static.answerAdditionally = false
+              // Variable.Modals = [];
             }}
           >
             {Variable.lang.select.blackList}

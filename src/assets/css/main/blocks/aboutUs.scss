@@ -18,10 +18,10 @@
         z-index: 1;
 
         @media(max-width: 768px) {
-            font-size: 60px;
+            font-size: 45px;
         }
 
-        @media(max-width: 374px) {
+        @media(max-width: 399px) {
             font-size: 40px;
         }
     }
@@ -29,12 +29,17 @@
 
 .c-whowe {
     position: relative;
-    padding-top: 235px;
-    padding-bottom: 345px;
+    padding-top: 150px; //235px;
+    padding-bottom: 180px; //345px;
     text-align: center;
     background-image: url(../images/background/about_us_preview.png);
     background-repeat: no-repeat;
     background-size: cover;
+
+    @media(max-width: 599px) {
+        padding-top: 50px;
+        padding-bottom: 60px;
+    }
 
     &__inner {
         max-width: 1240px;
@@ -84,6 +89,15 @@
         margin: 0 auto;
         position: relative;
         z-index: 1;
+
+        @media(max-width: 768px) {
+            font-size: 15px;
+            line-height: 2;
+        }
+
+        @media(max-width: 374px) {
+            font-size: 12px;
+        }
     }
 }
 

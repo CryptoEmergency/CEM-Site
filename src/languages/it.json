@@ -150,7 +150,8 @@
         "changePassword": "Cambia password",
 		"modal_pageDeleted": "Pagina rimossa",
         "chats": "Chat",
-        "partners": "Partner di informazione"
+        "partners": "Partner di informazione",
+        "modal_cropImage": "Aggiunta di foto"
     },
     "a": {
         "about": "Chi siamo",
@@ -234,7 +235,8 @@
 		"news": "Crypto Notizia",
         "youAgree": "Utilizzando la Piattaforma, acconsentite con",
         "clientCount": "Numero di clienti attratti",
-		"clientMoney": "Pagamenti per clienti attratti"
+		"clientMoney": "Pagamenti per clienti attratti",
+        "forFriends": "Solo per gli amici"
     },
     "p": {
         "answers": "Risposte ",
@@ -340,7 +342,15 @@
 		"socialLink": "Pubblicate un link sui social media, condividete con gli amici e guadagnate gettoni CEM da ogni utente registrato. Inoltre, per i partecipanti più attivi, dobbiamo preparare un programma di monetizzazione espanso per gli autori di contenuti.",
 		"referal": "Collegamento di riferimento",
 		"copy": "Copiare",
-        "pageDeleted": "Pagina utente rimossa, reindirizzamento alla home page"
+        "pageDeleted": "Pagina utente rimossa, reindirizzamento alla home page",
+        "transactionRegistration": "Per la registrazione",
+		"transactionReferralRegistration": "Per Referral",
+		"transactionOther": "Altro",
+		"transactionAwards": "Per il risultato ottenuto",
+		"transactionLevel": "Per il livello ricevuto",
+		"October2022": "Ottobre 2022",
+		"aboutProjectDate19May2022": "Rilasciato il 19 maggio 2022",
+		"aboutProjectDateAugust2022": "Rilasciato agosto 2022"
     },
     "text": {
         "starups": "Startup",
@@ -406,7 +416,8 @@
         "blackList": "Lista nera",
 		"deleteFromBlacklist": "Rimuovi dall'elenco",
 		"confirmBlockUser": "Sei sicuro di voler aggiungere un utente alla lista nera? (La lista nera degli utenti è disponibile nelle impostazioni)",
-        "update": "Alterato"
+        "update": "Alterato",
+        "deletePageComment": "Sei sicuro di voler eliminare?"
     },
     "label": {
         "name": "Nome",

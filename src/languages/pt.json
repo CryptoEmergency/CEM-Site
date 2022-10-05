@@ -150,7 +150,8 @@
         "changePassword": "Alterar senha",
 		"modal_pageDeleted": "Página removidaа",
         "chats": "Papo on-line",
-        "partners": "Parceiros de informação"
+        "partners": "Parceiros de informação",
+        "modal_cropImage": "Adicionar uma foto"
     },
     "a": {
         "about": "Sobre nós",
@@ -234,7 +235,8 @@
 		"news": "Notícias de criptografia",
         "youAgree": "Ao usar a Plataforma, Você concorda com",
         "clientCount": "Número de clientes atraídos",
-		"clientMoney": "Pagamentos para clientes atraídos"
+		"clientMoney": "Pagamentos para clientes atraídos",
+        "forFriends": "Apenas para amigos"
     },
     "p": {
         "answers": "respostas ",
@@ -340,7 +342,15 @@
 		"socialLink": "Poste um link nas redes sociais, compartilhe com os amigos e ganhe tokens CEM de cada usuário registrado. Além disso, para os participantes mais ativos, temos que preparar um programa de monetização expandido para os autores de conteúdo.",
 		"referal": "Link de indicação",
 		"copy": "Copiar",
-        "pageDeleted": "Página do Usuário excluída, redirecionando para a página inicial"
+        "pageDeleted": "Página do Usuário excluída, redirecionando para a página inicial",
+        "transactionRegistration": "E-Mail-Adresse",
+		"transactionReferralRegistration": "Para referências",
+		"transactionOther": "Outro",
+		"transactionAwards": "Pela conquista obtida",
+		"transactionLevel": "Pelo nível obtido",
+		"October2022": "Outubro 2022",
+		"aboutProjectDate19May2022": "Lançamento 19 de Maio de 2022",
+		"aboutProjectDateAugust2022": "Lançamento Agosto 2022"
     },
     "text": {
         "starups": "Iniciantes",
@@ -406,7 +416,8 @@
         "blackList": "Lista negra",
 		"deleteFromBlacklist": "Remover da lista",
 		"confirmBlockUser": "Tem certeza de que deseja adicionar um usuário à lista negra? (A lista negra de Usuários está disponível nas Configurações)",
-        "update": "Modificado"
+        "update": "Modificado",
+        "deletePageComment": "Tem a certeza que quer apagar?"
     },
     "label": {
         "name": "Nome",

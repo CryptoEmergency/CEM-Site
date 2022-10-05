@@ -150,7 +150,8 @@
         "changePassword": "Changer le mot de passe",
 		"modal_pageDeleted": "Page supprimée",
         "chats": "Chats",
-        "partners": "Partenaires d & apos; information"
+        "partners": "Partenaires d & apos; information",
+        "modal_cropImage": "Ajouter une photo"
     },
     "a": {
         "about": "À propos de nous",
@@ -234,7 +235,8 @@
 		"news": "Nouvelles cryptographiques",
         "youAgree": "En utilisant la Plateforme, Vous consentez avec",
         "clientCount": "Nombre de clients attirés",
-		"clientMoney": "Paiements pour les clients attirés"
+		"clientMoney": "Paiements pour les clients attirés",
+        "forFriends": "Seulement pour les amis"
     },
     "p": {
         "answers": "réponses",
@@ -340,7 +342,15 @@
 		"socialLink": "Poster un lien sur les médias sociaux, partager avec des amis et gagner des jetons CEM de chaque utilisateur enregistré. Aussi, pour les participants les plus actifs, nous devons préparer un programme élargi de monétisation pour les auteurs de contenu.",
 		"referal": "Lien de renvoi",
 		"copy": "Copier",
-        "pageDeleted": "Page utilisateur supprimée, redirection vers la page d'accueil"
+        "pageDeleted": "Page utilisateur supprimée, redirection vers la page d'accueil",
+        "transactionRegistration": "Pour l'enregistrement",
+		"transactionReferralRegistration": "Pour référence",
+		"transactionOther": "Autre chose",
+		"transactionAwards": "Pour la réalisation obtenue",
+		"transactionLevel": "Pour le niveau obtenu",
+		"October2022": "Octobre 2022",
+		"aboutProjectDate19May2022": "Sortie le 19 mai 2022",
+		"aboutProjectDateAugust2022": "Libération août 2022"
     },
     "text": {
         "starups": "Entreprises de démarrage ",
@@ -406,7 +416,8 @@
         "blackList": "Liste noire",
 		"deleteFromBlacklist": "Supprimer de la liste",
 		"confirmBlockUser": "Êtes-vous sûr de vouloir ajouter un utilisateur à la liste noire? (La liste noire des utilisateurs est disponible dans les paramètres)",
-        "update": "Modifié"
+        "update": "Modifié",
+        "deletePageComment": "Êtes-vous sûr de vouloir supprimer?"
     },
     "label": {
         "name": "Nom",

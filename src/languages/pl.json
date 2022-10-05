@@ -150,7 +150,8 @@
         "changePassword": "Zmień hasło",
 		"modal_pageDeleted": "Strona usunięta",
         "chats": "Czat",
-        "partners": "Partnerzy informatyczni"
+        "partners": "Partnerzy informatyczni",
+        "modal_cropImage": "Dodawanie zdjęć"
     },
     "a":{
         "about": "O nas",
@@ -234,7 +235,8 @@
         "news": "Krypto nowości",
         "youAgree": "Twoja zgoda",
         "clientCount": "Liczba przyłączonych klientów",
-        "clientMoney": "Wypłaty za przyłączonych klientów"
+        "clientMoney": "Wypłaty za przyłączonych klientów",
+        "forFriends": "Tylko dla przyjaciół"
     },
     "p": {
         "answers": "odpowiedzi",
@@ -340,7 +342,15 @@
         "socialLink": "link społecznościowy” - Opublikuj link w mediach społecznościowych, udostępnij go znajomym i zarabiaj tokeny CEM za każdego zarejestrowanego użytkownika. Ponadto, dla najbardziej aktywnych uczestników, przygotowujemy rozszerzony program monetyzacji dla autorów treści w potoku informacyjnym.",
         "referal": "Link polecający",
         "copy": "Kopiuj",
-        "pageDeleted": "Strona użytkownika usunięta, przekierowanie na stronę główną"
+        "pageDeleted": "Strona użytkownika usunięta, przekierowanie na stronę główną",
+        "transactionRegistration": "Za rejestrację",
+		"transactionReferralRegistration": "Za polecenie",
+		"transactionOther": "Inny",
+		"transactionAwards": "Za otrzymane osiągnięcie",
+		"transactionLevel": "Za uzyskany poziom",
+		"October2022": "Październik 2022",
+		"aboutProjectDate19May2022": "Wydany 19 maja 2022 r",
+		"aboutProjectDateAugust2022": "Wydanie sierpień 2022"
     },
     "text": {
         "starups": "Startupy",
@@ -406,7 +416,8 @@
         "blackList": "Czarna lista",
 		"deleteFromBlacklist": "Usuń z listy",
 		"confirmBlockUser": "Czy na pewno chcesz dodać użytkownika do czarnej listy? (Czarna lista użytkowników jest dostępna w Ustawieniach)",
-        "update": "Zmieniono"
+        "update": "Zmieniono",
+        "deletePageComment": "Czy na pewno chcesz usunąć?"
     },
     "label": {
         "name": "Imię",

@@ -6,7 +6,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { PartnerItem } from '@component/element/PartnerItem.js';
-
+import { siteLink } from '@src/functions.js'
 const BlockInfoPartners = function () {
 
     const partners = [
@@ -65,7 +65,7 @@ const BlockInfoPartners = function () {
                 }
             </div>
             <div class="c-infopartners__more">
-                <a class="c-button c-button--gray" href="partners/">
+                <a class="c-button c-button--gray" href="partners/" onclick={siteLink} >
                     <span class="c-button__wrapper">{Variable.lang.button.allPartners}</span>
                 </a>
             </div>

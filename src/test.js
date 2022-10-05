@@ -4,8 +4,7 @@ import {
   getTimerInit
 } from '@betarost/cemjs'
 
-const test = async function (data) {
-
+const test = async function () {
   setInterval(async () => {
     console.log("=======================")
     console.log("Дебаг каждые 60 секунд:")
@@ -15,8 +14,5 @@ const test = async function (data) {
     console.log("=======================")
   }, 60000);
 }
-
-
-
 
 export { test }

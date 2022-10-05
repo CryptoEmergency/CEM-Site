@@ -78,6 +78,8 @@ const BlockUserComment = function ({ comments }) {
             <span
               class="comment_comment"
               onclick={() => {
+                Variable.Static.answerAdditionally = true;
+                Variable.Static.answerAdditionallyShow = "";
                 changeActiveCommentsInput(item._id);
               }}
             >
@@ -108,6 +110,7 @@ const BlockUserComment = function ({ comments }) {
                           class="answer_additionally_item delete"
                           onclick={(e) => {
                             closeAnswerAdditionally(e); 
+                           
                             e.target.parentElement.parentElement.parentElement.style="display : none"
                             Variable.SetModals({
                               name: "ModalDelComment",
@@ -144,7 +147,7 @@ const BlockUserComment = function ({ comments }) {
                             Variable.SetModals({
                               name: "ModalComplainComment",
                               data: { id: item._id, mainCom: true },
-                            });
+                            },true);
                           }}
                         >
                           {Variable.lang.select.complainComment}
@@ -163,7 +166,7 @@ const BlockUserComment = function ({ comments }) {
                             Variable.SetModals({
                               name: "ModalBlackList",
                               data: { id: item.author._id },
-                            });
+                            },true);
                           }}
                         >
                           {Variable.lang.select.blackList}

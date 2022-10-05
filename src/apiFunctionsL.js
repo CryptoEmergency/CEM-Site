@@ -96,6 +96,42 @@ const deleteUserFromBlacklist = async (user) => {
   return response
 }
 
+const getUserQuestions = async (ID) => {
+  let data = {
+    filter:{
+      author: ID,
+    },
+    select:{title:1,text:1,showDate:1,statistic:1,languages:1,close:1,bestId:1,media:1,author:1},
+    sort:{showDate: -1},
+    limit: 50
+  }
+  let response = checkAnswerApi(await sendApi.create("getQuestions", data));
+  return response
+}
+
+const getUserAnswers = async (ID) => {
+  let data = {
+    filter:{
+      author:ID,
+    },
+    select:{best:1,active:1,author:1,statistic:1,showDate:1,media:1,text:1,comments:1, questionId: 1},
+    limit:12
+  }
+  let response = checkAnswerApi(await sendApi.create("getAnswers", data));
+  return response
+}
+
+const getUserFollowers = async (ID) => {
+  let data = {
+    filter:{
+      subscribed: ID
+    },
+    limit:12
+  }
+  let response = checkAnswerApi(await sendApi.create("getUsers", data));
+  return response
+}
+
 export {
-  mainTrades, getUserTransactions, getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist
+  mainTrades, getUserTransactions, getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist, getUserQuestions, getUserAnswers, getUserFollowers
 };

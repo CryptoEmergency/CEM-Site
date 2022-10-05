@@ -1,62 +1,38 @@
 import {
-  jsx,
-  jsxFrag,
-  setAction,
-  setValue,
-  Variable,
-  getValue,
-  initReload,
-  sendApi,
-  initGo,
-  initOne,
-  stringToHtml,
-} from "@betarost/cemjs";
-import svg from "@assets/svg/index.js";
-import { If } from "@component/helpers/All.js";
-import { getDateFormat } from "@src/functions.js";
-import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
-import { CommentInput } from "@src/component/element/CommentInput.js";
-import { getNewsItemInShow } from "@src/apiFunctions.js";
-let news;
-
-const ModalFullNews = function ({ news }, reload) {
-  console.log("=84781a=", news);
-
-  initOne(async () => {
-    Variable.Static.ShowVoterInteval = { timer: 0 };
-    Variable.Static.resultShowVoter = undefined;
-    Variable.Static.activeCommentsInput = "";
-    Variable.Static.answerAdditionallyShow = "";
-    Variable.Static.showMainInput = true;
-    Variable.Static.activeEditInputs = [];
-    Variable.Static.answerAdditionally = false;
-    Variable.Static.showNewsId = news._id;
-  });
-  // news =  getNewsItemInShow(item._id);
-  // console.log('=c0791d=',news)
-  // news = news.list_records[0];
-  //  news = item
-  console.log("ReloadModal", news);
-  return (
-    <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalFullNews">
-      <section class="c-modal__dialog">
-        <header
-          class="c-modal__header"
-          // class="user_post_header"
-        >
-          {/* <button
-                        type="button"
-                        class="c-modal__close"
-                        onclick={() => { Variable.Modals = [] }}
-                    ></button> */}
-          <a
-            onclick={() => { Variable.Modals = [] }}
-          >
-            <img class="go_back_icon" src={svg["go_back_icon"]} />
-            <span class="full_news_go_back">{Variable.lang.span.back}</span>
-          </a>
-        </header>
-        <div class="c-modal__body">
+    jsx,
+    jsxFrag,
+    init,
+    initReload,
+    Variable,
+    stringToHtml,
+  } from "@betarost/cemjs";
+  import svg from "@assets/svg/index.js";
+  import { getNewsItemInShow } from "@src/apiFunctions.js";
+  import { If } from "@component/helpers/All.js";
+  import { getDateFormat } from "@src/functions.js";
+  import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
+  import { CommentInput } from "@src/component/element/CommentInput.js";
+  
+  const start = function () {
+    Variable.HeaderShow = true;
+    Variable.FooterShow = true;
+    let news;
+  
+    init(
+      async () => {
+        Variable.Static.ShowVoterInteval ={ timer:0};
+        Variable.Static.resultShowVoter = undefined;
+        Variable.Static.activeCommentsInput = "";
+        Variable.Static.answerAdditionallyShow = "";
+        Variable.Static.showMainInput = true;
+        Variable.Static.activeEditInputs = [];
+        Variable.Static.answerAdditionally = false  ;   
+        news = await getNewsItemInShow(Variable.dataUrl.params);
+        news = news.list_records[0];
+        Variable.Static.showNewsId = news._id
+      },
+      () => {
+        return (
           <div
             class={`${
               Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
@@ -67,20 +43,20 @@ const ModalFullNews = function ({ news }, reload) {
                 {/* {{#is myInfo.role 1}}     */}
                 {/* {{#is myInfo.role_settings.add_news 1}}  */}
                 {/* <div class="acp_block">
-                <img
-                  class="acp_image"
-                  src={svg["points_green"]}
-                />
-                <div style="display: none;" class="acp_inner">
-                  <div
-                    class="acp_inner_item"
-                  >
-                    Удалить Новость
+                  <img
+                    class="acp_image"
+                    src={svg["points_green"]}
+                  />
+                  <div style="display: none;" class="acp_inner">
+                    <div
+                      class="acp_inner_item"
+                    >
+                      Удалить Новость
+                    </div>
+                    <div></div>
                   </div>
                   <div></div>
-                </div>
-                <div></div>
-              </div> */}
+                </div> */}
                 {/* {{/is}} */}
                 {/* {{/is}} */}
                 <div class="full_news_content">
@@ -94,7 +70,7 @@ const ModalFullNews = function ({ news }, reload) {
                       />
                     }
                   />
-
+  
                   <p class="full_news_text mrb30">{news.preview}</p>
                   <p class="full_news_text mr20">{stringToHtml(news.text)}</p>
                   <If
@@ -109,8 +85,8 @@ const ModalFullNews = function ({ news }, reload) {
                     }
                   />
                   {/* {{#if news.source}}<p class="full_news_disclaimer mr20">{{lang.p.source}} 
-              <a href="{{news.source}}" rel="nofollow" target="_blank">{{news.source}}</a>
-              </p>{{/if}} */}
+                <a href="{{news.source}}" rel="nofollow" target="_blank">{{news.source}}</a>
+                </p>{{/if}} */}
                   <div style="display: flex" class="blog_post_stat">
                     <p class="full_news_date">
                       <img src={svg["question_views"]} /> {news.statistic.view}
@@ -125,7 +101,7 @@ const ModalFullNews = function ({ news }, reload) {
               </div>
               <div class="news_page_comments">
                 <h2>{Variable.lang.h.modal_comment}</h2>
-                {Variable.Static.showMainInput && <CommentInput item={news} />}
+                {Variable.Static.showMainInput && <CommentInput item={news}/>}
                 <If
                   data={news.comments.length > 0}
                   dataIf={
@@ -134,7 +110,9 @@ const ModalFullNews = function ({ news }, reload) {
                         style={!news.comments && "display: none;"}
                         class="user_news_item"
                       >
-                        <BlockUserComment comments={news.comments} />
+                        <BlockUserComment
+                          comments={news.comments}
+                        />
                       </div>
                     </div>
                   }
@@ -142,10 +120,10 @@ const ModalFullNews = function ({ news }, reload) {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-export default ModalFullNews;
+        );
+      }
+    );
+  };
+  
+  export default start;
+  

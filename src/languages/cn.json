@@ -150,7 +150,8 @@
         "changePassword": "更改密码",
 		"modal_pageDeleted": "删除页面",
         "chats": "聊天记录",
-        "partners": "信息合作伙伴"
+        "partners": "信息合作伙伴",
+        "modal_cropImage": "添加照片"
     },
     "a": {
         "about": "关于我们",
@@ -234,7 +235,8 @@
 		"news": "加密新闻",
         "youAgree": "通过使用平台,您同意",
         "clientCount": "吸引客户的数量",
-		"clientMoney": "为吸引客户付款"
+		"clientMoney": "为吸引客户付款",
+        "forFriends": "只为朋友"
     },
     "p": {
         "answers": "答案 ",
@@ -340,7 +342,15 @@
 		"socialLink": "在社交媒体上发布链接,与朋友分享,并从每个注册用户获得CEM令牌. 此外,对于最活跃的参与者,我们必须为内容作者准备一个扩展的货币化计划.",
 		"referal": "推荐链接",
 		"copy": "要复制",
-        "pageDeleted": "用户的页面已被删除, 重定向到主页"
+        "pageDeleted": "用户的页面已被删除, 重定向到主页",
+        "transactionRegistration": "登记用",
+		"transactionReferralRegistration": "转介服务",
+		"transactionOther": "其他",
+		"transactionAwards": "对于收到的成就",
+		"transactionLevel": "对于接收到的水平",
+		"October2022": "2022年10月",
+		"aboutProjectDate19May2022": "2022年5月19日发布",
+		"aboutProjectDateAugust2022": "2022年8月发布"
     },
     "text": {
         "starups": "初创公司",
@@ -406,7 +416,8 @@
         "blackList": "黑名单",
 		"deleteFromBlacklist": "从列表中删除",
 		"confirmBlockUser": "您确定要将用户添加到黑名单吗？ (用户黑名单在设置中可用)",
-        "update": "改变了"
+        "update": "改变了",
+        "deletePageComment": "你确定要删除吗?"
     },
     "label": {
         "name": "名字",

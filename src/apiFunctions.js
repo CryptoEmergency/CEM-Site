@@ -7,6 +7,7 @@ import {
   Variable
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
+import {renderModalFullNews } from "@src/apiFunctionsE.js";
 
 const getUserInfoProfile = async function (nickname) {
   const userInfo = checkAnswerApi(
@@ -62,7 +63,7 @@ const changeStatistic = async function (e, commentId, subcommentId) {
   } else {
     data.value.comments.evaluation = e.target.dataset.name
   }
-
+  console.log('=changeStatistic=',changeStatistic)
   let response = checkAnswerApi(await sendApi.create("setNews", data));
   if(Variable.dataUrl.params !== undefined){
      initGo()
@@ -93,10 +94,6 @@ const sendNewCommentApi = async function (item, comment, commentId, edit) {
     },
     _id: Variable.Static.showNewsId,
   };
-
-
-
-
   if (item.image) {
     data.value.comments = { text: comment }
   } else if (edit !== undefined && edit.mainCom) {
@@ -133,8 +130,13 @@ const sendNewCommentApi = async function (item, comment, commentId, edit) {
     //   },
     //   _id: Variable.Static.showNewsId,
     // };
-  } console.log('=   Variable.Static.activeEditInputs=', Variable.Static.activeEditInputs)
+  } 
   let response = checkAnswerApi(await sendApi.create("setNews", data));
+
+
+    if(Variable.dataUrl.params === undefined){
+          await renderModalFullNews()
+         } 
   return response;
 };
 
@@ -159,8 +161,10 @@ const getNewsItemInShow = async function (id) {
   return response;
 };
 
+
+
 const getQuestionItemInShow = async function (id) {
-  console.log("getQuestionItemInShow id=", id);
+
 
   let data = {
     filter: {
@@ -182,6 +186,7 @@ const getQuestionItemInShow = async function (id) {
   };
 
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
+  console.log('=df5226=',response)
   return response;
 };
 

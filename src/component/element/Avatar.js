@@ -2,8 +2,9 @@ import { jsx, jsxFrag, Variable } from "@betarost/cemjs";
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
+import { If } from "@component/helpers/All.js";
 
-const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
+const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
 
   if (!author.nickname) {
     return (
@@ -42,21 +43,27 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
               : svg["profile/frame/default"]
           }
         />
-        <div
-          class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
-            }`}
-        >
-          <img src={svg.levelGray} />
-          <span>{author.statistic.level}</span>
-        </div>
-        <div
-          style="display: none;"
-          class="c-avataricon__status c-avataricon__status--online avatar_user_online"
-        ></div>
-        <div
-          style="display: none;"
-          class="c-avataricon__status c-avataricon__status--offline avatar_user_offline"
-        ></div>
+        <If
+          data={author.status.team}
+          dataIf={<img src={svg.mini_logo} width="25" height="25" style="position: absolute; bottom: 7px; right: 7px; z-index: 2; background: #ffffff; border-radius: 50%; padding: 3px" />}
+          dataElse={<div>
+            <div
+              class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
+                }`}
+            >
+              <img src={svg.levelGray} />
+              <span>{author.statistic.level}</span>
+            </div>
+            <div
+              style={`${author.online ? "" : "display: none;"}`}
+              class="c-avataricon__status c-avataricon__status--online avatar_user_online"
+            ></div>
+            <div
+              style={`${author.online ? "display: none;" : ""}`}
+              class="c-avataricon__status c-avataricon__status--offline avatar_user_offline"
+            ></div>
+          </div>}
+        />
       </div>
       {nickNameAndDate && (
         <div class="comment_name nickNameAndDate">

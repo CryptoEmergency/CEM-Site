@@ -8,6 +8,14 @@ import images from "@assets/images/index.js";
 import { siteLink } from '@src/functions.js'
 import { UserItem } from '@component/element/UserItem.js';
 
+// const toggleFilterUser = function () {
+//     const filter = document.querySelector('.c-friends__additional');
+//     const h = filter.offsetHeight;
+//     // console.log('=edd207=', h)
+//     Variable.visibleFilterUser == true ? filter.style = `height: ${h}px;` : filter.style = "height: 0px";
+//     Variable.visibleFilterUser = !Variable.visibleFilterUser;
+// }
+
 const BlockUsers = function () {
     // console.log("BlockUsers", users);
 
@@ -23,7 +31,7 @@ const BlockUsers = function () {
                             data-keyup="friendsSearchType"
                             placeholder={Variable.lang.placeholder.findFriends}
                         />
-                        <div class="filter_summoner" data-action="filterSummoner">
+                        <div class="filter_summoner" > {/* onClick={toggleFilterUser} */}
                             <img src={svg.filter} />
                             <span>{Variable.lang.span.filter}</span>
                         </div>
