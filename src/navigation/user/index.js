@@ -13,15 +13,25 @@ import {
 import images from '@assets/images/index.js';
 import svg from '@assets/svg/index.js';
 import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
+import { getUserQuestions, getUserAnswers, getUserFollowers } from '@src/apiFunctionsL.js'
 import {
     BlockUserProfileAbout
-
 } from '@component/blocks/user/BlockUserProfileAbout.js';
+import {
+    BlockUserProfileQuestions
+} from '@component/blocks/user/BlockUserProfileQuestions.js';
+import {
+    BlockUserProfileAnswers
+} from '@component/blocks/user/BlockUserProfileAnswers.js';
+import {
+    BlockUserProfileFollowers
+} from '@component/blocks/user/BlockUserProfileFollowers.js';
 import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
 const start = function () {
 
-    const currentCategory = async function(){
+    const currentCategory = function(){
+        console.log(tabType)
         switch(tabType){
             case 'lentaFriends':
                 return(
@@ -35,22 +45,42 @@ const start = function () {
                 break;
             case 'aboutUser':
                 return(
-                    <div></div>
+                    <BlockUserProfileAbout
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                    />
                 )
                 break;
             case 'questions':
                 return(
-                    <div></div>
+                    <BlockUserProfileQuestions
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        questions={questions}
+                    />
                 )
                 break;
             case 'answers':
                 return(
-                    <div></div>
+                    <BlockUserProfileAnswers
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        answers={answers}
+                    />
                 )
                 break;
             case 'subscribers':
                 return(
-                    <div></div>
+                    <BlockUserProfileFollowers
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        followers={followers}
+                        haveFilter={true}
+                    />
                 )
                 break;
             case 'friends':
@@ -91,7 +121,10 @@ const start = function () {
     }
 
     let userInfo,
-        tabType
+        tabType,
+        questions,
+        answers,
+        followers
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
@@ -102,6 +135,10 @@ const start = function () {
 
             if (!Variable.dataUrl.params || Variable.myInfo.nickname == Variable.dataUrl.params) {
                 userInfo = Variable.myInfo
+                questions = await getUserQuestions(userInfo._id)
+                answers = await getUserAnswers(userInfo._id)
+                followers = await getUserFollowers(userInfo._id)
+                console.log(followers)
                 tabType = 'lentaFriends'
             } else {
                 // setValue(ID, 'userInfoProfile', await getUserInfoProfile(dataUrl.params));
@@ -123,11 +160,7 @@ const start = function () {
                         changeType={changeType}
                     />
                     <div class="userMainBlock">
-                        <BlockUserProfileAbout
-                            lang={Variable.lang}
-                            myInfo={Variable.myInfo}
-                            userInfo={userInfo}
-                        />
+                        {currentCategory()}
                     </div>
                 </div>
             )
