@@ -1,191 +1,159 @@
 import {
   jsx,
   jsxFrag,
-  getVariable,
-  makeDOM,
-  getStorage,
-  setValue,
-  sendApi,
-  getValue,
+  Variable,
+  init,
+  initGo,
+  initReload,
 } from "@betarost/cemjs";
-
-// import {NewsCategory} from "@component/element/NewsCategory.js";
-import {
-  getNewsItem,
-  checkAnswerApi,
-  getNewsCategory,
-  getDateFormat,
-  changeNewsCategory
-} from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 
-const changeCategory = async (e) => {
-  let typeCategory = e.currentTarget.dataset.name;
-  if (typeCategory === "All") {
-    setValue(ID, "newsItem", await getNewsItem("news"));
-  } else {
-    let getLang = "en";
-    if (getStorage("lang") == "ru") {
-      getLang = "ru";
-    }
-    let data = {
-      filter: {
-        type: "news",
-        "languages.code": getLang,
-        "category.name": typeCategory,
-      },
-      select: {
-        title: 1,
-        preview: 1,
-        image: 1,
-        showDate: 1,
-        "statistic.view": 1,
-        "statistic.comments": 1,
-      },
-      sort: {
-        showDate: -1,
-      },
-      limit: 6,
-    };
-    var response = checkAnswerApi(await sendApi.create("getNews", data));
-    setValue(ID, "newsItem", response);
-  }
-  init(true);
-};
+import {
+  getNewsItem,
+  getNewsCategory,
+  getDateFormat,
+  changeLang,
+} from "@src/functions.js";
 
-const newsView = function () {
-  const lang = getVariable("languages")[getStorage("lang")];
-  const newsCategory = getValue(ID, "newsCategory");
-  const newsItem = getValue(ID, "newsItem");
-  const activeCategory = getValue(ID, 'activeCategory')
-  console.log('=8a7041=',activeCategory)
+const start = function () {
+  let activeCategory, newsCategory, newsItem, prevAdress, count;
+  Variable.HeaderShow = true;
+  Variable.FooterShow = true;
 
-  return (
-    <div class="blog_page_container">
-      <div class="blog_page">
-        <div class="blog_filter">
-          <h2>{lang.h.news}</h2>
-          {/* <div class="profit_calculator_inputs_container">
-                    <input type="text" id="datepicker"></p>
-                </div>
-                
-                <input data-keyup="newsSearchEnter" data-type="news" class="news_search_input" type="text" />
-                <div data-action="searchNewsInputSummon" class="news_search_button">
-                    <img src="/assets/icon/search_button.svg" />
-                </div> */}
-        </div>
-        <div class="tags">
-          <div
-            class={`tag_button ${activeCategory == "All" && "tag_button_active"}`}
-            data-action="changeTagButton"
-            data-type="news"
-            data-name="All"
-            data-total=""
-            onclick={(e) => {
-              changeNewsCategory(e,"news",init)
-            }}
-          >
-            <span>{lang.categoryName.all}</span>
-          </div>
-          {newsCategory.list_records.map((item) => {
-            return (
+  const changeNewsCategory = async function (e) {
+    count = 0;
+    activeCategory = e.currentTarget.dataset.name;
+    newsItem = await getNewsItem("news", count, activeCategory);
+    // initGo(null, true);
+    initReload();
+  };
+
+  const showMore = async () => {
+    count++;
+    let tmp = await getNewsItem("news", count, activeCategory);
+    newsItem.list_records.push(...tmp.list_records);
+    initReload();
+  };
+
+  init(
+    async () => {
+      activeCategory = "All";
+      newsCategory = await getNewsCategory("news");
+      newsItem = await getNewsItem("news", count, activeCategory);
+      prevAdress = Variable.dataUrl.adress;
+      count = 0;
+    },
+    () => {
+      return (
+        <div
+          class={`${
+            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+          } blog_page_container`}
+        >
+          <div class="blog_page">
+            <div class="blog_filter">
+              <h2>{Variable.lang.h.news}</h2>
+            </div>
+
+            <div class="tags">
               <div
-                class={`tag_button ${activeCategory == item.name && "tag_button_active"}`}
-                data-action="changeTagButton"
-                data-type="news"
-                data-name={item.name}
-                data-total=""
-                onclick={(e) => {
-                  changeNewsCategory(e,"news",init)
-                }}
+                class={`tag_button ${
+                  activeCategory == "All" && "tag_button_active"
+                }`}
+                data-name="All"
+                onclick={changeNewsCategory}
               >
-                <span>{lang.categoryName[item.name]}</span>
+                <span>{Variable.lang.categoryName.all}</span>
               </div>
-            );
-          })}
 
-          {/* <NewsCategory /> */}
-
-          {/* {{#arrayWhile list_category}}
-                    <div class="tag_button" data-action="changeTagButton" data-type="news" data-name="{{name}}">
-                        <span>{getLangName "categoryName" name}</span>
-                    </div>
-                {{/arrayWhile}} */}
-        </div>
-
-        <div class="userNewsBlock">
-          <div
-            data-touchmove="userBlogSlide"
-            data-touchstart="userBlogSlideStart"
-            data-touchend="userBlogSlideEnd"
-            class="bl_one bl_active"
-          >
-            <div class="blog_news">
-              {newsItem.list_records.map((item) => {
-                return (
-                  <a class="blog_news_item">
-                    <img src={"/assets/upload/news/" + item.image} />
-                    <p class="blog_new_title">{item.title}</p>
-                    <span class="blog_new_text">{item.preview}</span>
+              {newsCategory.list_records
+                .filter((item2) => item2.name !== null)
+                .map((item) => {
+                  // console.log("=c16335=", item);
+                  return (
                     <div
-                      style="display: flex!important;"
-                      class="blog_post_stat"
+                      class={`tag_button ${
+                        activeCategory == item.name && "tag_button_active"
+                      }`}
+                      data-name={item.name}
+                      onclick={changeNewsCategory}
                     >
-                      <span>
-                        <img src={svg["question_views"]} />{" "}
-                        {item.statistic.view}
-                      </span>
-                      <span>
-                        <img src={svg["question_answers"]} />{" "}
-                        {item.statistic.comments}
-                      </span>
-                      <span>{getDateFormat(item.showDate)}</span>
+                      <span>{Variable.lang.categoryName[item.name]}</span>
                     </div>
+                  );
+                })}
+            </div>
 
-                    {item.source !== undefined && (
-                      <p class="full_news_disclaimer mr20">
-                        {lang.p.source}{" "}
-                        <a href="{{source}}" rel="nofollow" target="_blank">
-                          {item.source}
-                        </a>
-                      </p>
-                    )}
-                    {/* {{#if source}}{{#if suoureShow}}<p class="full_news_disclaimer mr20">{{lang.p.source}} <a href="{{source}}" rel="nofollow" target="_blank">{{source}}</a></p>{{/if}}{{/if}} */}
-                  </a>
-                );
-              })}
+            <div class="userNewsBlock">
+              <div
+                data-touchmove="userBlogSlide"
+                data-touchstart="userBlogSlideStart"
+                data-touchend="userBlogSlideEnd"
+                class="bl_one bl_active"
+              >
+                <div class="blog_news">
+                  {newsItem.list_records.map((item) => {
+                    return (
+                      <div
+                        class="blog_news_item"
+                        // href={`/${prevAdress}/show/${item._id}`}
+                        onClick={() => {
+                          Variable.SetModals({
+                            name: "ModalFullNews",
+                            data: {item},
+                          });
+                        }}
+                      >
+                        <img src={"/assets/upload/news/" + item.image} />
+                        <p class="blog_new_title">{item.title}</p>
+                        <span class="blog_new_text">{item.preview}</span>
+                        <div
+                          style="display: flex!important;"
+                          class="blog_post_stat"
+                        >
+                          <span>
+                            <img src={svg["question_views"]} />{" "}
+                            {item.statistic.view}
+                          </span>
+                          <span>
+                            <img src={svg["question_answers"]} />{" "}
+                            {item.statistic.comments}
+                          </span>
+                          <span>{getDateFormat(item.showDate)}</span>
+                        </div>
+
+                        {item.source !== undefined && (
+                          <p class="full_news_disclaimer mr20">
+                            {Variable.lang.p.source}{" "}
+                            <a href="{{source}}" rel="nofollow" target="_blank">
+                              {item.source}
+                            </a>
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+                <a class="btn-view-all-a" onclick={showMore}>
+                  <div
+                    class="btn-view-all"
+                    data-action="viewAllButton"
+                    style={
+                      newsItem.list_records.length === newsItem.totalFound
+                        ? "display: none"
+                        : "display: flex"
+                    }
+                  >
+                    <div>{Variable.lang.button.showMore}</div>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      );
+    }
   );
 };
 
-const ID = "mainBlock";
-
-const init = async function (reload) {
-  
-  setValue(ID, 'activeCategory', "All")
-
-  if (!reload) {
-    if (!getValue(ID, "newsCategory")) {
-      setValue(ID, "newsCategory", await getNewsCategory("news"));
-    }
-
-    if (!getValue(ID, "newsItem")) {
-      setValue(ID, "newsItem", await getNewsItem("news"));
-    } else {
-      setTimeout(async () => {
-        setValue(ID, "newsItem", await getNewsItem("news"));
-      }, 500);
-    }
-    // timersStart("Course", timerCourse, 10000)
-  }
-
-  setValue("mainHeader", "show", true);
-  setValue("mainFooter", "show", true);
-  makeDOM(newsView(), ID);
-};
-
-export default init;
+export default start;

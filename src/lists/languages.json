@@ -1,0 +1,297 @@
+ [
+    {
+        "code" : "ru",
+        "eng_name" : "Russian",
+        "orig_name" : "Русский"
+    },
+    {
+        "code" : "en",
+        "eng_name" : "English",
+        "orig_name" : "English"
+    },
+    {
+        "code" : "cn",
+        "eng_name" : "China",
+        "orig_name" : "中文, 汉语)"
+    },
+    {
+        "code" : "ar",
+        "eng_name" : "Arab",
+        "orig_name" : "العربية"
+    },
+    {
+        "code" : "hi",
+        "eng_name" : "Hindi",
+        "orig_name" : "हिन्दी"
+    },
+    {
+        "code" : "es",
+        "eng_name" : "Spanish",
+        "orig_name" : "Español"
+    },
+    {
+        "code" : "bn",
+        "eng_name" : "Bengal",
+        "orig_name" : "বাংলা"
+    },
+    {
+        "code" : "pt",
+        "eng_name" : "Portuguese",
+        "orig_name" : "Português"
+    },
+    {
+        "code" : "ja",
+        "eng_name" : "Japanese",
+        "orig_name" : "日本語"
+    },
+    {
+        "code" : "de",
+        "eng_name" : "Deutsch",
+        "orig_name" : "Deutsch"
+    },
+    {
+        "code" : "ko",
+        "eng_name" : "Korean",
+        "orig_name" : "한국어"
+    },
+    {
+        "code" : "fr",
+        "eng_name" : "French",
+        "orig_name" : "Français"
+    },
+    {
+        "code" : "eo",
+        "eng_name" : "Esperanto",
+        "orig_name" : "Esperanto"
+    },
+    {
+        "code" : "jv",
+        "eng_name" : "Javanese",
+        "orig_name" : "Basa Jawa"
+    },
+    {
+        "code" : "te",
+        "eng_name" : "Telugu",
+        "orig_name" : "తెలుగు"
+    },
+    {
+        "code" : "mr",
+        "eng_name" : "Marathi",
+        "orig_name" : "मराठी"
+    },
+    {
+        "code" : "vi",
+        "eng_name" : "Vietnamese",
+        "orig_name" : "Tiếng Việt"
+    },
+    {
+        "code" : "ta",
+        "eng_name" : "Tamil",
+        "orig_name" : "தமிழ்"
+    },
+    {
+        "code" : "it",
+        "eng_name" : "Italian",
+        "orig_name" : "Italiano"
+    },
+    {
+        "code" : "tr",
+        "eng_name" : "Turkish",
+        "orig_name" : "Türkçe"
+    },
+    {
+        "code" : "ur",
+        "eng_name" : "Urdu",
+        "orig_name" : "اردو"
+    },
+    {
+        "code" : "pa",
+        "eng_name" : "Punjabi",
+        "orig_name" : "ਪੰਜਾਬੀ"
+    },
+    {
+        "code" : "uk",
+        "eng_name" : "Ukrainian",
+        "orig_name" : "Українська мова"
+    },
+    {
+        "code" : "gu",
+        "eng_name" : "Gujarati",
+        "orig_name" : "ગુજરાતી"
+    },
+    {
+        "code" : "th",
+        "eng_name" : "Thai",
+        "orig_name" : "ภาษาไทย"
+    },
+    {
+        "code" : "pl",
+        "eng_name" : "Polish",
+        "orig_name" : "Polszczyzna"
+    },
+    {
+        "code" : "ml",
+        "eng_name" : "Malayalam",
+        "orig_name" : "മലയാളം"
+    },
+    {
+        "code" : "kn",
+        "eng_name" : "Kannada",
+        "orig_name" : "ಕನ್ನಡ"
+    },
+    {
+        "code" : "or",
+        "eng_name" : "Oriya",
+        "orig_name" : "ଓଡ଼ିଆ"
+    },
+    {
+        "code" : "my",
+        "eng_name" : "Burmese",
+        "orig_name" : "ဗမာစာ"
+    },
+    {
+        "code" : "az",
+        "eng_name" : "Azerbaijani",
+        "orig_name" : "Azərbaycan dili"
+    },
+    {
+        "code" : "su",
+        "eng_name" : "Sundanese",
+        "orig_name" : "Basa Sunda"
+    },
+    {
+        "code" : "ro",
+        "eng_name" : "Romanian",
+        "orig_name" : "Limba română"
+    },
+    {
+        "code" : "bh ",
+        "eng_name" : "Maithili",
+        "orig_name" : "मैथिली"
+    },
+    {
+        "code" : "ml",
+        "eng_name" : "Malay",
+        "orig_name" : "Bahasa Melayu"
+    },
+    {
+        "code" : "sr",
+        "eng_name" : "Serbian",
+        "orig_name" : "Srpskohrvatski jezik"
+    },
+    {
+        "code" : "yo",
+        "eng_name" : "Yoruba",
+        "orig_name" : "Yorùbá"
+    },
+    {
+        "code" : "nl",
+        "eng_name" : "Dutch",
+        "orig_name" : "Nederlands"
+    },
+    {
+        "code" : "id",
+        "eng_name" : "Indonesian",
+        "orig_name" : "Bahasa Indonesia"
+    },
+    {
+        "code" : "tl",
+        "eng_name" : "Tagalog",
+        "orig_name" : "Tagalog"
+    },
+    {
+        "code" : "ne",
+        "eng_name" : "Nepali",
+        "orig_name" : "नेपाली"
+    },
+    {
+        "code" : "as",
+        "eng_name" : "Assamese",
+        "orig_name" : "অসমিয়া"
+    },
+    {
+        "code" : "hu",
+        "eng_name" : "Hungarian",
+        "orig_name" : "Magyar nyelv"
+    },
+    {
+        "code" : "za",
+        "eng_name" : "Zhuang",
+        "orig_name" : "Sawcuengh"
+    },
+    {
+        "code" : "sn",
+        "eng_name" : "Shona",
+        "orig_name" : "Shona"
+    },
+    {
+        "code" : "si",
+        "eng_name" : "Sinhalese",
+        "orig_name" : "සිංහල"
+    },
+    {
+        "code" : "el",
+        "eng_name" : "Greek",
+        "orig_name" : "Ελληνικά"
+    },
+    {
+        "code" : "cs",
+        "eng_name" : "Czech",
+        "orig_name" : "Čeština"
+    },
+    {
+        "code" : "mg",
+        "eng_name" : "Malagasy",
+        "orig_name" : "Malagasy"
+    },
+    {
+        "code" : "be",
+        "eng_name" : "Belarusian",
+        "orig_name" : "Беларуская мова"
+    },
+    {
+        "code" : "la",
+        "eng_name" : "Latin",
+        "orig_name" : "lingua latina"
+    },
+    {
+        "code" : "sd",
+        "eng_name" : "Sindhi",
+        "orig_name" : "सिन्धी"
+    },
+    {
+        "code" : "ig",
+        "eng_name" : "Igbo",
+        "orig_name" : "Igbo"
+    },
+    {
+        "code" : "am",
+        "eng_name" : "Amharic",
+        "orig_name" : "አማርኛ"
+    },
+    {
+        "code" : "om",
+        "eng_name" : "Oromo",
+        "orig_name" : "Afaan Oromoo"
+    },
+    {
+        "code" : "uz",
+        "eng_name" : "Uzbek",
+        "orig_name" : "ئۇزبېك تیلى"
+    },
+    {
+        "code" : "ha",
+        "eng_name" : "Hausa",
+        "orig_name" : "هَوْسَ"
+    },
+    {
+        "code" : "ps",
+        "eng_name" : "Pashto",
+        "orig_name" : "پښتو"
+    },
+    {
+        "code" : "fa",
+        "eng_name" : "Persian",
+        "orig_name" : "فارسی"
+    }
+]

@@ -7,51 +7,58 @@
 	// Placeholders with the same ids are connected.
 	// "${1|one,two,three|}"
 	// Example:
-	"Страница сайта": {
+	"Создание нового блока": {
 		"scope": "javascript,typescript",
-		"prefix": "_newPage",
+		"prefix": "_newBlock",
 		"body": [
-			"import {jsx,jsxFrag,getVariable,getStorage,makeDOM,timersStart,setValue,getValue,sendApi} from '@betarost/cemjs';",
-			"import {checkAnswerApi} from '@src/functions.js';",
+			"import {jsx,jsxFrag,Variable} from '@betarost/cemjs';",
+			"import svg from '@assets/svg/index.js';",
+			"import images from '@assets/images/index.js';",
 			"",
-			"const startView = function () {",
-			"const lang = getVariable('languages')[getStorage('lang')];",
-			"const show = getValue('mainHeader', 'show');",
+			"const $TM_FILENAME_BASE = function (data) {",
 			"",
 			"return (",
-			"<div class={show && 'c-main__body' || 'c-main__body--noheader'}>",
+			"<div>",
+			"$1",
 			"</div>",
 			")",
 			"}",
 			"",
-			"const ID = '${1:mainBlock}'",
-			"",
-			"const defaultInit = async function () {",
-			"setValue('mainHeader', 'show', ${2:true});",
-			"setValue('mainFooter', 'show', ${3:true});",
-			"$4",
-			"}",
-			"",
-			"const afterInit = function () {",
-			"}",
-			"",
-			"const init = async function (reload) {",
-			"if (!reload){defaultInit();}",
-			"await makeDOM(startView(), ID);",
-			"if (!reload){afterInit();}",
-			"}",
-			"",
-			"export default init;"
+			"export { $TM_FILENAME_BASE };"
 		],
-		"description": ""
+		"description": "Новый элемент/блок"
 	},
-	"Получение актуального языка": {
+	"Страница сайта": {
 		"scope": "javascript,typescript",
-		"prefix": "_getLang",
+		"prefix": "_newPage",
 		"body": [
-			"const lang = getVariable('languages')[getStorage('lang')];",
+			"import {jsx,jsxFrag,init,initReload,Variable,sendApi} from '@betarost/cemjs';",
+			"import svg from '@assets/svg/index.js';",
+			"import images from '@assets/images/index.js';",
+			"",
+			"const start = function () {",
+			"",
+			"Variable.HeaderShow = false",
+			"Variable.FooterShow = false",
+			"",
+			"init(",
+			"",
+			"async () => {",
+			"",
+			"},",
+			"",
+			"() => {",
+			"return (",
+			" <></>",
+			")",
+			" }",
+			" )",
+			"return",
+			"};",
+			"",
+			"export default start;"
 		],
-		"description": "ппппп"
+		"description": "Страница сайта"
 	},
 	"svg иконка": {
 		"scope": "javascript,typescript",
@@ -69,6 +76,14 @@
 		],
 		"description": ""
 	},
+	"All helpers": {
+		"scope": "javascript,typescript",
+		"prefix": "_helpers",
+		"body": [
+			"import { If } from '@component/helpers/All.js';"
+		],
+		"description": ""
+	},
 	"Имопрт страницы сайта": {
 		"scope": "javascript,typescript",
 		"prefix": "_iPage",
@@ -77,27 +92,19 @@
 		],
 		"description": ""
 	},
-	"Имопрт вспомогательного компонента": {
+	"Имопрт вспомогательного Элемента": {
 		"scope": "javascript,typescript",
-		"prefix": "_iElement",
+		"prefix": "_iElem",
 		"body": [
-			"import {${1:Name}} from '@src/navigation/${2:Name}.js';"
+			"import {${1:Name}} from '@component/element/${2:Name}.js';"
 		],
-		"description": ""
+		"description": "Имопрт вспомогательного Элемента"
 	},
-	"Получить значение": {
+	"Имопрт вспомогательного блока": {
 		"scope": "javascript,typescript",
-		"prefix": "_getValue",
+		"prefix": "_iBlock",
 		"body": [
-			"getValue(ID, '${1:Переменная}')"
-		],
-		"description": ""
-	},
-	"Назначить значение": {
-		"scope": "javascript,typescript",
-		"prefix": "_setValue",
-		"body": [
-			"setValue(ID, '${1:Переменная}', ${2:Значение})"
+			"import {${1:Name}} from '@component/blocks/${2:Name}.js';"
 		],
 		"description": ""
 	},
@@ -106,6 +113,18 @@
 		"prefix": "_log",
 		"body": [
 			"console.log('=$RANDOM_HEX=',${1:Переменная})"
+		],
+		"description": ""
+	},
+	"Перебор массива": {
+		"scope": "javascript,typescript",
+		"prefix": "_map",
+		"body": [
+			"{${1:Переменная}.map((item,index) => {",
+			"return (",
+			"<></>",
+			")",
+			"})}"
 		],
 		"description": ""
 	}

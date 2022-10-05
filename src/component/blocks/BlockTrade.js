@@ -1,51 +1,48 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
-    getValue
+    Variable
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
+import { NumFormat } from '@src/functionsE.js'
+import { siteLink } from '@src/functions.js'
 
-const NumFormat = function (value, options) {
-    if (value === null || value === undefined) {
-        return 0;
-    }
-    return value.toLocaleString('en-US')
-};
+// const NumFormat = function (value, options) {
+//     if (value === null || value === undefined) {
+//         return 0;
+//     }
+//     return value.toLocaleString('en-US')
+// };
 
-const BlockTrade = function ({ lang, trades }) {
+const BlockTrade = function () {
 
     return (
         <div id="crypto_exchanges" class="crypto_exchanges">
-            <h4>{lang.h.trade}</h4>
+            <h4>{Variable.lang.h.trade}</h4>
             <div class="statistics-preview list_trade_page">
                 <div class="crypto_exchanges-row">
                     <div class="crypto_exchanges-cell">
                         #
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.appellation}
+                        {Variable.lang.tableTitle.appellation}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.volume}
+                        {Variable.lang.tableTitle.volume}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.countVisitors}
+                        {Variable.lang.tableTitle.countVisitors}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {lang.tableTitle.chart}
+                        {Variable.lang.tableTitle.chart}
                     </div>
                     <div>
 
                     </div>
                 </div>
                 {
-                    trades.map(function (trade, i) {
+                    Variable.MainTrades.list_records.map(function (trade, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row tradeListLoad"
@@ -99,7 +96,7 @@ const BlockTrade = function ({ lang, trades }) {
                                     <div class="button-container-preview">
                                         <span class="btn-news-preview">
                                             <span>
-                                                {lang.button.trade}
+                                                {Variable.lang.button.trade}
                                             </span>
                                         </span>
                                     </div>
@@ -110,13 +107,13 @@ const BlockTrade = function ({ lang, trades }) {
                 }
             </div>
             <div class="crypto_exchanges_footer">
-                <a class="c-button c-button--gray" href="list-trade/">
-                    <span class="c-button__wrapper">{lang.button.show_all}</span>
+                <a class="c-button c-button--gray" href="/list-trade/" onclick={siteLink}>
+                    <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
                 </a>
             </div>
-            {/* <a href="{{lang.url}}list-trade/" class="btn-view-all-a" data-action="link">
+            {/* <a href="{{Variable.lang.url}}list-trade/" class="btn-view-all-a" data-action="link">
                 <div class="btn-view-all">
-                    <div>{lang.button.show_all}</div>
+                    <div>{Variable.lang.button.show_all}</div>
                 </div>
             </a> */}
         </div>

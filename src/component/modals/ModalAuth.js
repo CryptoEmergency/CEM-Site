@@ -3,148 +3,303 @@ import {
     jsxFrag,
     setAction,
     setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
-    getValue
+    Variable,
+    getValue,
+    initReload,
+    sendApi,
+    initGo
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
+import { PhoneCode } from '@component/element/PhoneCode.js';
+import { If } from '@component/helpers/All.js';
+import { allValidation } from '@src/functions.js';
 
-const showModalAuth = function (e) {
-    //console.log('dfffffff');
-    e.stopPropagation()
-    setValue("modals", "authModalShow", !getValue("modals", "authModalShow"))
+
+
+let wayAuth,
+    formInputs,
+    viewPassword
+
+let elem = Variable.setRef()
+
+const changeInput = function () {
+    formInputs[this.dataset.type].value = this.value.trim()
+    formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
+
+    if (!formInputs[this.dataset.type].valid) {
+        formInputs[this.dataset.type].error = "Заполните поле " + this.dataset.type;
+        this.style = "border-color: rgb(200, 23, 38);";
+        formInputs.isValid = false
+        initReload("modals")
+        return
+    } else {
+        formInputs[this.dataset.type].error = "";
+        this.style = "border-color: rgb(37, 249, 48);"
+    }
+
+    let isCheckAll = false
+
+    if (wayAuth == "email") {
+        if (formInputs.email.valid === true && formInputs.pass.valid === true) {
+            isCheckAll = true
+        }
+    } else {
+        if (formInputs.phone.valid === true && formInputs.pass.valid === true) {
+            isCheckAll = true
+        }
+    }
+
+    if (isCheckAll) {
+        formInputs.isValid = true
+    } else {
+        formInputs.isValid = false
+    }
+
+    initReload("modals")
+    return;
 }
 
-const ModalAuth = function ({ lang }) {
-    // console.log("ModalAuth");
-    const authModalShow = getValue("modals", "authModalShow")
+const wayAuthForm = function () {
+    if (wayAuth == "email") {
+        return (
+            <div>
+                <div class='reset_by_email_block'>
+                    <label for="resetByEmailInput">{Variable.lang.label.email}</label>
+                    <If
+                        data={formInputs.email.error != ""}
+                        dataIf={
+                            <div class="error-div" style="display: block">
+                                <div class="error-div-variant">{formInputs.email.error}</div>
+                            </div>
+                        }
+                    />
+                    <div class="reset_by_email_block_container">
+                        <input
+                            data-form_type="login"
+                            data-dirty="false"
+                            data-focusout="focusout"
+                            data-keyup="keyupValidate"
+                            data-validate_type="email"
+                            placeholder={Variable.lang.placeholder.email}
+                            id="loginByEmailInput"
+                            type="text"
+                            data-type="email"
+                            value={formInputs.email.value}
+                            oninput={changeInput}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                phone
+            </div>
+        )
+
+    }
+}
+
+const sendAuthorization = async function (e) {
+
+    this.classList.add('c-button--animated');
+    let data = {
+        pass: formInputs['pass'].value,
+    };
+    if (wayAuth == "email") {
+        data.email = formInputs['email'].value
+    } else {
+        data.phone = formInputs['phone'].value
+    }
+
+
+    let tmpRes = await sendApi.create("userAuth", data);
+
+    if (tmpRes.status === 'ok') {
+        Variable.Modals = []
+        initGo()
+    } else {
+        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
+    }
+    return
+}
+
+
+const ModalAuth = function ({ }, reload) {
+
+    if (!reload) {
+        Variable.OutHideWindows.push([elem])
+        wayAuth = "email"
+        viewPassword = false
+        formInputs = {
+            email: {
+                value: "",
+                valid: false,
+                error: ""
+            },
+            pass: {
+                value: "",
+                valid: false,
+                error: ""
+            },
+            phone: {
+                value: "",
+                valid: false,
+                error: ""
+            },
+            isValid: false
+        }
+    }
 
     return (
-        <div class="c-modal c-modal--open">
-            <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="ModalLogin">
+            <section class="c-modal__dialog" ref={elem}>
                 <header class="c-modal__header">
-                    <h2 class="c-modal__title">{lang.h.modal_login}</h2>
+                    <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2>
                     <button
                         type="button"
                         class="c-modal__close"
-                        onclick={showModalAuth}
+                        onclick={() => { Variable.Modals = [] }}
                     ></button>
                 </header>
                 <div class="c-modal__body">
-                    <div class="mobile_or_email_toggle">
+                    <div class={`c-mobileoremail`}>
                         <button
                             data-form_type="login"
                             id="loginByEmail"
-                            class="reset_password_button active"
+                            class={`c-button c-button--toggler ${wayAuth == "email" && "c-button--active"}`}
+                            onClick={() => {
+                                wayAuth = "email"
+                                initReload("modals")
+                            }}
                         >
-                            { lang.button.email }
+                            {Variable.lang.button.email}
                         </button>
-                        <button
+                        {/* <button
                             data-form_type="login"
                             id="loginByMobile"
-                            class="reset_password_button"
+                            class={`c-button c-button--toggler ${wayAuth == "phone" && "c-button--active"}`}
+                            onClick={() => {
+                                wayAuth = "phone"
+                                initReload("modals")
+                            }}
                         >
-                            { lang.button.phone }
-                        </button>
+                            {Variable.lang.button.phone}
+                        </button> */}
                     </div>
+
                     <form id="loginForm">
                         <input style="display: none;" type="submit" />
                         <div class="reset_password_input_block">
-                            <div class="reset_by_email_block">
-                                <label for="resetByEmailInput">{lang.label.email}</label>
-                                <div class="error-div">{lang.error_div.wrong_email}</div>
-                                <div class="reset_by_email_block_container">
-                                    <input
-                                        data-form_type="login"
-                                        data-dirty="false"
-                                        data-focusout="focusout"
-                                        data-keyup="keyupValidate"
-                                        data-validate_type="email"
-                                        placeholder={lang.placeholder.email}
-                                        id="loginByEmailInput"
-                                        type="text"
-                                    />
-                                </div>
-                            </div>
-                            <div class="reset_by_mobile_block dn">
-                                <label for="resetByEmailInput">{lang.label.phone}</label>
-                                <div class="error-div">{lang.error_div.wrong_phone}</div>
-                                <div class="reset_by_mobile_block_container">
-                                    <input
-                                        class="phoneNubmerInput2"
-                                        data-form_type="login"
-                                        data-dirty="false"
-                                        data-focusout="focusout"
-                                        data-keyup="keyupValidate"
-                                        data-validate_type="phone"
-                                        type="text"
-                                        id="phone2"
-                                        name="phone"
-                                        autofocus="true"
-                                        placeholder="9990000000"
-                                        data-co="ru"
-                                    />
-                                </div>
-                            </div>
+                            {wayAuthForm()}
                         </div>
+
                         <div class="container-input">
-                            <label for="password">{lang.label.password}</label>
-                            <div class="error-div">
-                                <div class="error-div-variant">{lang.error_div.not_empty_input}</div>
-                                <div class="error-div-variant">{lang.error_div.password}</div>
-                                <div class="error-div-variant">{lang.error_div.password2}</div>
-                                <div class="error-div-variant">{lang.error_div.password3}</div>
-                                <div class="error-div-variant">{lang.error_div.password4}</div>
-                                <div class="error-div-variant">{lang.error_div.password5}</div>
-                            </div>
+                            <label for="password">{Variable.lang.label.password}</label>
+
+
+                            <If
+                                data={formInputs.pass.error != ""}
+                                dataIf={
+                                    <div class="error-div" style="display: block">
+                                        <div class="error-div-variant">{formInputs.pass.error}</div>
+                                    </div>
+                                }
+                            />
+
                             <div class="input-div">
-                                <img src={svg["icon/lock"]} class="icon-input" />
+                                <img src={svg["lock"]} class="icon-input" />
                                 <input
                                     data-keyup="keyupValidate"
                                     data-form_type="login"
                                     data-dirty="false"
                                     data-focusout="focusout"
                                     data-validate_type="password"
-                                    placeholder={lang.placeholder.password}
+                                    placeholder={Variable.lang.placeholder.password}
                                     id="auth_pass"
-                                    type="password"
+                                    type={`${viewPassword ? 'text' : 'password'}`}
+                                    data-type="pass"
+                                    value={formInputs.pass.value}
+                                    oninput={changeInput}
                                 />
-                                <img src={svg["icon/eye"]} class="password_eye"  />
+                                <img
+                                    src={svg[`eye${viewPassword ? '-slash' : ''}`]}
+                                    class="password_eye"
+                                    onClick={() => {
+                                        viewPassword = !viewPassword
+                                        initReload("modals")
+                                    }}
+                                />
                             </div>
                         </div>
                     </form>
                     <div class="bottom_log-in">
                         <div class="checkbox">
-                            <input checked="checked" class="checkbox__input-2" type="checkbox" id="auth_remember" />
-                            <label class="checkbox__label-2" for="auth_remember">{lang.placeholder.rememberMe}</label>
+                            <input
+                                checked="checked"
+                                class="checkbox__input-2"
+                                type="checkbox"
+                                id="auth_remember"
+                            />
+
+                            <label class="checkbox__label-2" for="auth_remember">{Variable.lang.placeholder.rememberMe}</label>
                         </div>
-                        <span class="cont_a-link-2" >
-                            <a class="a-link" id="forgot_password">{lang.a.forgot_pass}</a>
-                        </span>
+                        {/* <span class="cont_a-link-2" >
+                            <a
+                                class="a-link"
+                                id="forgot_password"
+                                onclick={() => { Variable.Modals = [] }}
+                            >
+                                {Variable.lang.a.forgot_pass}
+                            </a>
+                        </span> */}
                     </div>
                     <div class="authAgree">
-                        <span>{lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{lang.a.agree}</a></span>
+                        <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
                     </div>
-                </div>
 
+                </div>
                 <footer class="c-modal__footer">
-                    <button class="c-button c-button--primary"
-                        onclick={() => { alert(7) }}
+
+                    {formInputs.isValid ?
+                        <button
+                            class='c-button c-button--gradient2'
+                            type="button"
+                            onClick={sendAuthorization}
+                            data-active="1"
+                        >
+                            <span class="c-button__text">
+                                {Variable.lang.button.login}
+                            </span>
+                        </button>
+                        :
+                        <button
+                            class='c-button c-button--gradient2 c-button--inactive'
+                            type="button"
+                            // onClick={(e) => sendAuthorization(e)}
+                            data-active="1"
+                        >
+                            <span class="c-button__text">
+                                {Variable.lang.button.login}
+                            </span>
+                        </button>
+                    }
+                    {/* <a
+                        class="c-button c-button--registration"
+                        href=""
+                        onclick={() => { Variable.Modals = [] }}
                     >
-                        <span>Кнопка</span>
-                    </button>
-                    <div class="btn-modal-log_in inactive_form_button" data-active="0" data-form_type="login" id="auth_system">
-                        <a class="btn-gr-log-in"><span>{lang.button.login}</span></a>
-                    </div>
-                    <div id="log-in_btn-regShow" class="btn-reg-show">
-                        <a class="btn-gr-reg-show"><span>{lang.button.registration}</span></a>
-                    </div>
+                        <div class="c-button__wrapper">
+                            {Variable.lang.button.registration}
+                        </div>
+                    </a> */}
                 </footer>
-            </section >
-        </div >
+            </section>
+
+        </div>
     )
 };
 
 
-export { ModalAuth }
+export default ModalAuth;

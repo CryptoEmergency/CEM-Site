@@ -1,0 +1,94 @@
+/* Terms of service styles */
+.c-terms {
+    padding-top: 60px;
+
+    &__container {}
+
+    &__title {
+        font-size: 2rem;
+        text-align: center;
+        margin: 0 auto 1rem;
+    }
+
+    &__date {
+        margin: 0 auto 1rem;
+        font-style: italic;
+        text-align: center;
+        font-weight: 300;
+    }
+
+    &__preview {
+        text-indent: 3rem;
+        margin: 0 0 3rem;
+    }
+
+    &__subtitle {
+        font-size: 1.5rem;
+        margin: 0 0 0.8rem;
+    }
+
+    &__content {
+        margin-bottom: 1.3rem;
+
+        a {
+            display: inline-block;
+            color: blue;
+            @extend .c-link;
+
+            span {
+                display: inline-block;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+            }
+        }
+
+        p {
+            margin: 0 0 0.8rem;
+            text-align: justify;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            @media(max-width: 767px) {
+                text-align: left;
+            }
+        }
+
+        h3 {
+            font-size: 1.3rem;
+        }
+    }
+
+    &__text {
+        margin: 0 0 1.3rem;
+        text-align: justify;
+
+        a {
+            display: inline-block;
+            color: blue;
+            @extend .c-link;
+
+            span {
+                display: inline-block;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+            }
+        }
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .c-button {
+            &--gradient {
+
+                .c-button {
+                    &__text {
+                        line-height: 48px;
+                    }
+                }
+            }
+        }
+    }
+}

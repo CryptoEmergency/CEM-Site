@@ -1,33 +1,97 @@
 import {
   jsx,
   jsxFrag,
-  getStorage,
-  sendApi,
-  getVariable,
+  Variable,
   getValue,
+  initReload,
+  initOne
 } from "@betarost/cemjs";
+import svg from "@assets/svg/index.js";
+import { If } from '@component/helpers/All.js';
+// changeSelect, type, selectObject, ID, selectTitle
 
-const Select = function ({options, changeSelect, type, selectObject, ID, selectTitle}) {
+
+
+const Select = function ({ options, callback, toggler = null }) {
+  let optionsActive
+
+  initOne(
+    () => {
+      options.elem = Variable.setRef()
+      options.elemActive = Variable.setRef()
+    }
+  )
+
+  const changeSelect = function (selectIndex) {
+    options.open = false
+    options.items.map((item, index) => {
+      if (selectIndex == index) {
+        options.active = item.value
+        optionsActive = item.text
+        // item.active = true
+      } else {
+        //item.active = false
+      }
+    })
+    options.elemActive().innerHTML = optionsActive
+    options.elem().hidden = true
+    callback(options.active, options.nameOptions)
+  }
+
+
+
+  const optionsElem = options.items.map((item, index) => {
+    if (options.active == item.value) {
+      optionsActive = item.text
+    }
+    return (
+      <li
+        onClick={() => {
+          changeSelect(index)
+        }}
+      >
+        {item.text}
+      </li>
+    );
+  })
+
   return (
     <div class="profit_calculator_inputs_container">
-      <span>{selectTitle}</span>
+      <If
+        data={options.title}
+        dataIf={<span>{options.title}</span>}
+      />
+
       <div class="justselect-wrapper">
-        <div class="justselect-title" onClick={(e) =>{changeSelect(e,type)}}>
-          {selectObject[type]}
+        <div
+          class="justselect-title"
+          ref={options.elemActive}
+          onClick={(e) => {
+            options.open = !options.open
+            if (options.elem().hidden === true) {
+              options.elem().hidden = false
+              Variable.OutHideWindows.push([options.elemActive, options.elem])
+            } else {
+              options.elem().hidden = true
+            }
+            // e.stopPropagation();
+          }}
+        >
+          {optionsActive}
         </div>
         <ul
+          ref={options.elem}
           class="justselect-list"
-          style={getValue(ID, "showObject")[type] ? "display:block" : "display : none"}
+          hidden
+        // style={options.open ? "display:none" : "display : none"}
         >
-          {options.map((item) => {
-            return (
-              <li onClick={(e) => changeSelect(e, type, item.value)}>
-                {item.value}
-              </li>
-            );
-          })}
+          {optionsElem}
         </ul>
       </div>
+      <If
+        data={toggler}
+        dataIf={<img data-sort="DESC" class="filter_sort_toggler" data-action="toggleFilterSort" src={svg.filter_arrow_bottom} />}
+      />
     </div>
   );
 };

@@ -1,33 +1,28 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
-    getValue
+    Variable
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 import { NewsItem } from '@component/element/NewsItem.js';
 
-const BlockMainNews = function ({ lang, news }) {
+const BlockMainNews = function () {
     // console.log("BlockMainNews", news);
 
     return (
         <div class="news_block_container">
             <div class="news_block">
                 <div class="home_page_news">
-                    <a class="crypto_news_link" data-action="link" href="{{lang.url}}news/">Crypto News</a>
+                    <a class="crypto_news_link" data-action="link" href="{{Variable.lang.url}}news/">Crypto News</a>
                     <div class="gradient_line"></div>
                 </div>
                 <div class="main_page_news_block">
                     {
-                        news.map(function (newsItem) {
+                        Variable.MainNews.list_records.map(function (newsItem) {
                             return (
-                                <NewsItem lang={lang} newsItem={newsItem} />
+                                <NewsItem newsItem={newsItem} />
                             )
                         })
                     }
@@ -43,9 +38,9 @@ const BlockMainNews = function ({ lang, news }) {
                 </div>
             </div>
             <div class="button-container-preview">
-                <a class="btn-news-preview" href="{{lang.url}}news/" data-action="link">
+                <a class="btn-news-preview" href="{{Variable.lang.url}}news/" data-action="link">
                     <span>
-                        {lang.button.allNews}
+                        {Variable.lang.button.allNews}
                     </span>
                 </a>
             </div>

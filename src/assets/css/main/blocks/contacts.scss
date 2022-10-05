@@ -1,9 +1,29 @@
 /* CONTACTS STYLE */
+.modal_success {
+    padding: 20px;
+    text-align: center;
+
+    h4 {
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 115%;
+        color: #FFFFFF;
+        margin-bottom: 35px;
+        margin-top: 30px;
+    }
+
+    &_icon {
+        height: 150px;
+        width: 150px;
+        margin-bottom: 30px;
+    }
+}
 
 .contacts_container {
     background: url(../images/background/contacts.png),
-                url(../svg/background/contacts_vector.svg) top 70px left 0 no-repeat;
+        url(../svg/background/contacts_vector.svg) top 70px left 0 no-repeat;
     padding: 50px 0;
+    border-bottom: 1px solid #232733;
 
     @media(min-width: 993px) {
         padding: 125px 0;
@@ -90,6 +110,7 @@
     display: block;
     height: 67px;
     width: 218px;
+    margin: 0 auto;
     position: relative;
     overflow: hidden;
     text-decoration: none;

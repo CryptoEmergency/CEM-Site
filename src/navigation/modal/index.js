@@ -1,52 +1,42 @@
 import {
     jsx,
     jsxFrag,
-    getValue,
-    setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
-} from '@betarost/cemjs'
-import { ModalAuth } from '@component/modals/ModalAuth.js';
-import { ModalComingSoon } from '@component/modals/ModalComingSoon.js';
+    Variable,
+    init,
+} from '@betarost/cemjs';
 
+import list from "@src/modalsList.js";
 
-const ID = "modals";
+const mainModal = async function () {
 
-const start = function(){
-    const showAuth = getValue("modals", "authModalShow")
-    const commingSoonModalShow = getValue("modals", "commingSoonModalShow")
-    const languages = getVariable("languages");
-    const lang = languages[getStorage("lang")]
+    init(
+        () => {
+            // console.log("modals", Variable.Modals)
+            //Variable.OutHideWindows = []
+        },
 
-    console.log("showAuth",showAuth);
+        (reload) => {
 
-    return (
-        <div>
-            <div class={`c-backdrop ${showAuth || commingSoonModalShow ? "c-backdrop--show" : ""}`}></div>
-            {showAuth &&
-            <ModalAuth 
-            lang={lang}
-            />
+            if (Variable.Modals && Variable.Modals.length != 0) {
+                const modals = Variable.Modals.map((item) => {
+                    return (
+                        list[item.name](item.data, reload)
+                    )
+                })
+
+                return (
+                    <div>
+                        {modals}
+                    </div>
+                )
+            } else {
+                return (
+                    <></>
+                )
             }
-            {commingSoonModalShow &&
-            <ModalComingSoon 
-            lang={lang}
-            />
-            }
-        </div>
-    )
+        },
+        "modals")
+    return
+};
 
-
-}
-
-const init = function (reload) {
-    console.log("modals init",reload);
-    // if (!reload) {
-        
-    // }
-
-    makeDOM(start(), ID)
-    return;
-}
-export { init }
+export { mainModal };

@@ -1,15 +1,16 @@
-import {init,build,start} from '@betarost/cem'
+import { init, build, start } from '@betarost/cem'
 import path from 'path'
 
 init({
-    path:{
-        src:path.resolve('src/index.js'),
-        public:path.resolve('public'),
-        fileName:"main.js"
+    path: {
+        src: path.resolve('src/index.js'),
+        public: path.resolve('public'),
+        fileName: "main.js"
     },
-    port:80,
-    mode:"production",
-    api:""
+    port: 80,
+    mode: "production",
+    api: ""
+    // api: "office"
 });
 
-build({}).then((result) => {if(result) start(result)});
+build({}).then((result) => { if (result) start(result) });

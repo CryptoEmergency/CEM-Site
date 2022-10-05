@@ -12,9 +12,9 @@
             grid-template-columns: calc(50% - 7.5px) calc(50% - 7.5px);
         }
 
-        @media(min-width: 768px) {
-            grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
-        }
+        // @media(min-width: 768px) {
+        //     grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
+        // }
 
         @media(min-width: 993px) {
             grid-template-columns: calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px);
@@ -45,5 +45,14 @@
     &__more {
         display: none;
         padding-top: 60px;
+
+        @media (max-width: 1024px) {
+            display: block;
+            padding-top: 20px;
+        }
+    }
+
+    &+.crypto_exchanges_footer {
+        padding: 0 0 20px;
     }
 }
