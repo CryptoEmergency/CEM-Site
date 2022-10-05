@@ -8,7 +8,7 @@ import images from "@assets/images/index.js";
 // import { CourseCurrency } from '@component/element/CourseCurrency.js';
 
 const BlockBanners = function () {
-    // console.log("BlockBanners", banners);
+    console.log("BlockBanners", banners);
 
     const banners = [
         {
@@ -34,7 +34,31 @@ const BlockBanners = function () {
         {
             "id": "62d134221de982539a72345e",
             "image": "crypto_future_banner"
-        }
+        },
+        {
+            "id": "632c4007b7cd91af0a32611c",
+            "image": "techweek290х140"
+        },
+        {
+            "id": "6335a4b54b35372a229983f6",
+            "image": "chiframed290x140"
+        },
+        // {
+        //     "id": "",
+        //     "image": ""
+        // },
+        // {
+        //     "id": "",
+        //     "image": ""
+        // },
+        // {
+        //     "id": "",
+        //     "image": ""
+        // },
+        // {
+        //     "id": "",
+        //     "image": ""
+        // }
     ];
 
     return (

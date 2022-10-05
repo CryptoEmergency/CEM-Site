@@ -19,7 +19,8 @@ const start = function () {
     let questions,
         totalRecords,
         nowShow,
-        optionsSelect
+        optionsSelect,
+        showFilter
 
     const showMore = async function (e) {
         e.preventDefault();
@@ -85,9 +86,10 @@ const start = function () {
             totalRecords = tmp.totalFound
             questions = tmp.list_records;
             //console.log("questions", questions);
+            showFilter = false;
         },
         () => {
-            console.log("Second Init ", questions)
+            // console.log("Second Init ", questions)
             return (
                 <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
                     <div class="c-questions">
@@ -99,8 +101,7 @@ const start = function () {
                                     <div class="c-search__wrapper">
                                         <img class="c-search__icon" src={svg.search_icon} />
                                         <input class="c-search__input" type="text" placeholder={`${Variable.lang.placeholder.question}`} autocomplete="disabled" />
-                                        <img class="c-search__icon c-search__icon--filter" src={svg.filter} />
-
+                                        <img class="c-search__icon c-search__icon--filter" src={svg.filter} onClick={() => { showFilter = !showFilter; initReload() }} />
                                     </div>
                                     <div style="display: none;" class="questions_search">
                                         <div class="question_search_half_empty">
@@ -117,7 +118,7 @@ const start = function () {
                                 </div>
                             </div>
 
-                            <div class="c-questions__filter questions_filter">
+                            <div class={`c-questions__filter questions_filter ${showFilter ? "c-questions__filter--openmobile" : ""}`}>
 
                                 <Select
                                     options={optionsSelect.questions}
