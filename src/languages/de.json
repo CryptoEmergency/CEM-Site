@@ -150,7 +150,8 @@
         "changePassword": "Passwort ändern",
 		"modal_pageDeleted": "Seite gelöscht",
         "chats": "Chats",
-        "partners": "Informationspartner"
+        "partners": "Informationspartner",
+        "modal_cropImage": "Hinzufügen eines Fotos"
     },
     "a": {
         "about": "Über uns",
@@ -234,7 +235,8 @@
 		"news": "Сrypto-News",
         "youAgree": "Durch die Nutzung der Plattform, Sie stimmen mit",
         "clientCount": "Anzahl der angezogenen Kunden",
-		"clientMoney": "Zahlungen für angezogene Kunden"
+		"clientMoney": "Zahlungen für angezogene Kunden",
+        "forFriends": "Nur für Freunde"
     },
     "p": {
         "answers": "Antworten",
@@ -340,7 +342,15 @@
 		"socialLink": "Posten Sie einen Link auf Social Media, teilen Sie mit Freunden und verdienen Sie CEM-Token von jedem registrierten Benutzer. Auch für die aktivsten Teilnehmer müssen wir ein erweitertes Monetarisierungsprogramm für Inhaltsautoren vorbereiten.",
 		"referal": "Verweisungslink",
 		"copy": "Zu kopieren",
-        "pageDeleted": "Benutzerseite wurde gelöscht, weiterleitung zur Startseite"
+        "pageDeleted": "Benutzerseite wurde gelöscht, weiterleitung zur Startseite",
+        "transactionRegistration": "Für die Registrierung",
+		"transactionReferralRegistration": "Pro Empfehlung",
+		"transactionOther": "Andere",
+		"transactionAwards": "Für die erzielte Leistung",
+		"transactionLevel": "Für das erhaltene Level",
+		"October2022": "Oktober 2022",
+		"aboutProjectDate19May2022": "Veröffentlichung am 19. Mai 2022",
+		"aboutProjectDateAugust2022": "Veröffentlichung August 2022"
     },
     "text": {
         "starups": "Startups",
@@ -406,7 +416,8 @@
         "blackList": "Black list",
 		"deleteFromBlacklist": "Aus der Liste entfernen",
 		"confirmBlockUser": "Sind Sie sicher, dass Sie einen Benutzer zur schwarzen Liste hinzufügen möchten? (Die schwarze Liste der Benutzer ist in den Einstellungen verfügbar)",
-        "update": "Verändert"
+        "update": "Verändert",
+        "deletePageComment": "Sind Sie sicher, dass Sie es löschen möchten?"
     },
     "label": {
         "name": "Name",

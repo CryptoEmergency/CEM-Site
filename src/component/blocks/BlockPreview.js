@@ -73,10 +73,10 @@ const BlockPreview = function () {
                 {/* <a href="/chats/" class="с-preview__part" data-updating="true">
                     <span>{Variable.lang.span.chats}</span>
                 </a> */}
-                <a href="/question/" class="с-preview__part">
+                <a href="/question/" class="с-preview__part" onclick={siteLink}>
                     <span>{Variable.lang.span.QA}</span>
                 </a>
-                <a href="/news/" class="с-preview__part">
+                <a href="/news/" class="с-preview__part" onclick={siteLink}>
                     <span>{Variable.lang.span.news}</span>
                 </a>
             </div>

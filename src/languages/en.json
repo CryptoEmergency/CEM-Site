@@ -150,7 +150,8 @@
         "changePassword": "Change Password",
 		"modal_pageDeleted": "Page deleted",
         "chats": "Chats",
-        "partners": "Information partners"
+        "partners": "Information partners",
+        "modal_cropImage": "Adding a photo"
     },
     "a": {
         "about": "About Us",
@@ -234,7 +235,8 @@
 		"news": "Crypto News",
         "youAgree": "By using the Platform, You consent with",
         "clientCount": "Number of attracted customers",
-		"clientMoney": "Payments for attracted customers"
+		"clientMoney": "Payments for attracted customers",
+        "forFriends": "Only for friends"
     },
     "p": {
         "answers": "answers ",
@@ -340,7 +342,15 @@
 		"socialLink": "Post a link on social media, share with friends and earn CEM tokens from each registered user. Also, for the most active participants, we have to prepare an expanded monetization program for content authors.",
 		"referal": "Referral link",
 		"copy": "To copy",
-        "pageDeleted": "The user's page has been deleted, redirecting to the main page"
+        "pageDeleted": "The user's page has been deleted, redirecting to the main page",
+        "transactionRegistration": "For registration",
+		"transactionReferralRegistration": "For the referral",
+		"transactionOther": "Other",
+		"transactionAwards": "For the achievement received",
+		"transactionLevel": "For the received level",
+		"October2022": "October 2022",
+		"aboutProjectDate19May2022": "Released May 19, 2022",
+		"aboutProjectDateAugust2022": "Release August 2022"
     },
     "text": {
         "starups": "Startups",
@@ -406,7 +416,8 @@
         "blackList": "Blacklist",
 		"deleteFromBlacklist": "Remove from the list",
 		"confirmBlockUser": "Are you sure you want to add a user to the blacklist? (The blacklist of users is available in the settings)",
-        "update": "Changed"
+        "update": "Changed",
+        "deletePageComment": "Are you sure you want to delete?"
     },
     "label": {
         "name": "Name",

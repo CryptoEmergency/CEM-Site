@@ -150,7 +150,8 @@
 		"changePassword": "Ubah Kata Sandi",
 		"modal_pageDeleted": "Halaman dihapus",
 		"chats": "Obrolan",
-		"partners": "Mitra informasi"
+		"partners": "Mitra informasi",
+		"modal_cropImage": "Menambahkan foto"
 	},
 	"a":{
 		"about": "Tentang kami",
@@ -234,7 +235,8 @@
 		"news": "Berita Crypto",
 		"youAgree": "Dengan menggunakan platform ini Anda menyetujui dengan",
 		"clientCount": "Jumlah klien terdaftar",
-		"clientMoney": "Pembayaran untuk klien terdaftar"
+		"clientMoney": "Pembayaran untuk klien terdaftar",
+		"forFriends": "Hanya untuk teman"
 	},
 	"p": {
 		"answers": "Jawaban",
@@ -340,7 +342,15 @@
 		"socialLink": "Pasangkan tautan referral di sosial media, bagikannya dengan teman-teman dan dapatkan token CEM dari setiap pengguna baru yang terdaftar. Selain itu bagi pengikut aktif kami siapkan program yang lebih luas untuk menguangkan konten penciptanya.",
 		"referal": "Tautan",
 		"copy": "Salin",
-		"pageDeleted": "Halaman pengguna telah dihapus, mengarahkan ke halaman utama"
+		"pageDeleted": "Halaman pengguna telah dihapus, mengarahkan ke halaman utama",
+		"transactionRegistration": "Untuk pendaftaran",
+		"transactionReferralRegistration": "Untuk referral",
+		"transactionOther": "Lainnya",
+		"transactionAwards": "Untuk pencapaian yang diterima",
+		"transactionLevel": "Untuk tingkat yang diterima",
+		"October2022": "Oktober 2022",
+		"aboutProjectDate19May2022": "Dirilis 19 Mei 2022",
+		"aboutProjectDateAugust2022": "Rilis Agustus 2022"
 	},
 	"text": {
 		"starups": "Perusahaan rintisan ",
@@ -406,7 +416,8 @@
 		"blackList": "Blacklist",
 		"deleteFromBlacklist": "Hapus dari daftar",
 		"confirmBlockUser": "Apakah Anda yakin ingin menambahkan pengguna ke daftar hitam? (Daftar hitam Pengguna tersedia di Pengaturan)",
-		"update": "Berubah"
+		"update": "Berubah",
+		"deletePageComment": "Apakah Anda yakin ingin menghapus?"
 	},
 	"label": {
 		"name": "Nama",
