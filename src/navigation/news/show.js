@@ -27,11 +27,9 @@ const start = function () {
       Variable.Static.showMainInput = true;
       Variable.Static.activeEditInputs = [];
       Variable.Static.answerAdditionally = false  ;   
-      console.log('=1663e5=',Variable.dataUrl.params)  
       news = await getNewsItemInShow(Variable.dataUrl.params);
       news = news.list_records[0];
       Variable.Static.showNewsId = news._id
-
     },
     () => {
       return (

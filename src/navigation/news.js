@@ -7,6 +7,7 @@ import {
   initReload,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
+import { getNewsItemInShow } from "@src/apiFunctions.js";
 
 import {
   getNewsItem,
@@ -69,7 +70,7 @@ const start = function () {
               {newsCategory.list_records
                 .filter((item2) => item2.name !== null)
                 .map((item) => {
-                  // console.log("=c16335=", item);
+                  
                   return (
                     <div
                       class={`tag_button ${
@@ -97,7 +98,10 @@ const start = function () {
                       <div
                         class="blog_news_item"
                         // href={`/${prevAdress}/show/${item._id}`}
-                        onClick={() => {
+                        onClick={async () => {
+                          let item;
+                          item = await getNewsItemInShow(item._id);
+                          item = news.list_records[0];
                           Variable.SetModals({
                             name: "ModalFullNews",
                             data: {item},

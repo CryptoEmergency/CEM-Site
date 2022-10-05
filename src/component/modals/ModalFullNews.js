@@ -24,16 +24,16 @@ const ModalFullNews =  function ({item}, reload) {
 
     initOne(
        async () =>  {
-            console.log('InitModal',item)
             Variable.Static.ShowVoterInteval ={ timer:0};
             Variable.Static.resultShowVoter = undefined;
             Variable.Static.activeCommentsInput = "";
             Variable.Static.answerAdditionallyShow = "";
             Variable.Static.showMainInput = true;
             Variable.Static.activeEditInputs = [];
-            Variable.Static.answerAdditionally = false  ;    
+            Variable.Static.answerAdditionally = false  ; 
             news = item
-            Variable.Static.showNewsId = news._id
+            Variable.Static.showNewsId = news._id;
+            console.log('news.text',news.text);
         }
     )
     // news =  getNewsItemInShow(item._id);
