@@ -176,7 +176,7 @@ const ModalAuth = function ({ }, reload) {
                         >
                             {Variable.lang.button.email}
                         </button>
-                        <button
+                        {/* <button
                             data-form_type="login"
                             id="loginByMobile"
                             class={`c-button c-button--toggler ${wayAuth == "phone" && "c-button--active"}`}
@@ -186,7 +186,7 @@ const ModalAuth = function ({ }, reload) {
                             }}
                         >
                             {Variable.lang.button.phone}
-                        </button>
+                        </button> */}
                     </div>
 
                     <form id="loginForm">
@@ -245,7 +245,7 @@ const ModalAuth = function ({ }, reload) {
 
                             <label class="checkbox__label-2" for="auth_remember">{Variable.lang.placeholder.rememberMe}</label>
                         </div>
-                        <span class="cont_a-link-2" >
+                        {/* <span class="cont_a-link-2" >
                             <a
                                 class="a-link"
                                 id="forgot_password"
@@ -253,7 +253,7 @@ const ModalAuth = function ({ }, reload) {
                             >
                                 {Variable.lang.a.forgot_pass}
                             </a>
-                        </span>
+                        </span> */}
                     </div>
                     <div class="authAgree">
                         <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
@@ -285,7 +285,7 @@ const ModalAuth = function ({ }, reload) {
                             </span>
                         </button>
                     }
-                    <a
+                    {/* <a
                         class="c-button c-button--registration"
                         href=""
                         onclick={() => { Variable.Modals = [] }}
@@ -293,7 +293,7 @@ const ModalAuth = function ({ }, reload) {
                         <div class="c-button__wrapper">
                             {Variable.lang.button.registration}
                         </div>
-                    </a>
+                    </a> */}
                 </footer>
             </section>
 

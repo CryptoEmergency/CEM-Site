@@ -194,7 +194,7 @@ const ModalReg = function (data, reload) {
                         >
                             {Variable.lang.button.email}
                         </button>
-                        <button
+                        {/* <button
                             data-form_type="registration"
                             id="regByMobile"
                             class={`c-button c-button--toggler ${wayReg == "phone" && "c-button--active"}`}
@@ -204,7 +204,7 @@ const ModalReg = function (data, reload) {
                             }}
                         >
                             {Variable.lang.button.phone}
-                        </button>
+                        </button> */}
                     </div>
                     <form id="registrationForm" data-button_id="fast_reg">
                         <input style="display: none;" type="submit" />
@@ -281,7 +281,7 @@ const ModalReg = function (data, reload) {
                         </div>
 
                         <footer class="c-modal__footer">
-                            <button
+                            {/* <button
                                 class={`c-button c-button--primary2 ${formInputs.isValid ? "" : "c-button--inactive"}`}
                                 type="button"
                                 id="fast_reg"
@@ -289,6 +289,16 @@ const ModalReg = function (data, reload) {
                             >
                                 <span class="c-button__wrapper">
                                     {Variable.lang.button.registration}
+                                </span>
+                            </button> */}
+                            <button
+                                class={`c-button c-button--primary2 ${formInputs.isValid ? "" : "c-button--inactive"}`}
+                                type="button"
+                                id="fast_reg"
+                                style="cursor: not-allowed"
+                            >
+                                <span class="c-button__wrapper">
+                                    Registration is temporarily unavailable. Updating now...
                                 </span>
                             </button>
                         </footer>

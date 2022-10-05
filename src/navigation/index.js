@@ -108,9 +108,10 @@ const swiperLoad = function () {
         autoplay: {
             delay: 2000,
         },
-        pagination: {
-            el: '#swiper-pagination-startup',
-        },
+        pagination: false,
+        // pagination: {
+        //     el: '#swiper-pagination-startup',
+        // },
         scrollbar: {
             el: '.swiper-scrollbar-startup',
         },

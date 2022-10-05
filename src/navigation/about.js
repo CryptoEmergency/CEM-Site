@@ -24,13 +24,12 @@ const start = function () {
             <div class="c-whowe__inner who_we_are_inner">
               <h2
                 class="c-whowe__title"
-                // onClick={() => {
-                //   Variable.SetModals({ name: "ModalChangeLanguage", data: {} })
-                // }}
+                onClick={() => {
+                  Variable.SetModals({ name: "ModalReset copy", data: {} })
+                }}
               >{Variable.lang.h.who_are_we}
 
               </h2>
-        <BlockModal />
 
               <img
                 class="c-whowe__img about_us_vector-1"
@@ -143,7 +142,7 @@ const start = function () {
                 >
                   <img src={images["about_us_banner8"]} />
                   <span class="project_gradient">
-                  Cemblockchain
+                    Cemblockchain
                   </span>
                   <p>{Variable.lang.p.aboutProjectDate19May2022}</p>
                 </a>
@@ -153,7 +152,7 @@ const start = function () {
                 >
                   <img src={images["about_us_banner8"]} />
                   <span class="project_gradient">
-                  CEM Wallet
+                    CEM Wallet
                   </span>
                   <p>{Variable.lang.p.aboutProjectDateAugust2022}</p>
                 </a>
@@ -175,8 +174,8 @@ const start = function () {
                   </span>
                   <p>{Variable.lang.p.aboutProjectDateTwo}</p>
                 </div>
-               
-               
+
+
               </div>
             </div>
           </div>
