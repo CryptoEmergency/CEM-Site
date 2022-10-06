@@ -7,7 +7,7 @@ import {
   Variable
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
-import {renderModalFullNews } from "@src/apiFunctionsE.js";
+import { renderModalFullNews } from "@src/apiFunctionsE.js";
 
 const getUserInfoProfile = async function (nickname) {
   const userInfo = checkAnswerApi(
@@ -63,12 +63,12 @@ const changeStatistic = async function (e, commentId, subcommentId) {
   } else {
     data.value.comments.evaluation = e.target.dataset.name
   }
-  console.log('=changeStatistic=',changeStatistic)
+  console.log('=changeStatistic=', changeStatistic)
   let response = checkAnswerApi(await sendApi.create("setNews", data));
-  if(Variable.dataUrl.params !== undefined){
-     initGo()
+  if (Variable.dataUrl.params !== undefined) {
+    initGo()
   }
- 
+
 
 };
 
@@ -130,13 +130,13 @@ const sendNewCommentApi = async function (item, comment, commentId, edit) {
     //   },
     //   _id: Variable.Static.showNewsId,
     // };
-  } 
+  }
   let response = checkAnswerApi(await sendApi.create("setNews", data));
 
 
-    if(Variable.dataUrl.params === undefined){
-          await renderModalFullNews()
-         } 
+  if (Variable.dataUrl.params === undefined) {
+    await renderModalFullNews()
+  }
   return response;
 };
 
@@ -158,6 +158,28 @@ const getNewsItemInShow = async function (id) {
     limit: 4,
   };
   let response = checkAnswerApi(await sendApi.create("getNews", data));
+  return response;
+};
+
+const getPostsItemInShow = async function (id) {
+  let data = {
+    filter: {
+      _id: id,
+    },
+    // select: {
+    //   author: 1,
+    //   forFriends: 1,
+    //   languages: 1,
+    //   media: 1,
+    //   showDate: 1,
+    //   statistic: 1,
+    //   text: 1,
+    //   title: 1,
+    //   updateTime: 1
+    // },
+    // limit: 12,
+  };
+  let response = checkAnswerApi(await sendApi.create("getPost", data));
   return response;
 };
 
@@ -186,7 +208,7 @@ const getQuestionItemInShow = async function (id) {
   };
 
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
-  console.log('=df5226=',response)
+  console.log('=df5226=', response)
   return response;
 };
 
@@ -472,6 +494,7 @@ export {
   mainUsers,
   mainNews,
   getNewsItemInShow,
+  getPostsItemInShow,
   getQuestionItemInShow,
   getTradeOrExchangeList,
   getUserInfoProfile,

@@ -23,17 +23,18 @@ import {
 } from "@src/functionsE.js";
 
 const BlockUserComment = function ({ comments }) {
-  let myInfo = getStorage("myInfo");
-  let auth = getStorage("auth");
-  console.log('=d0Variable.Static.answerAdditionallyeece1=',Variable.Static.answerAdditionally)
+  let myInfo = Variable.myInfo;
+  let auth = Variable.auth;
+  console.log('=bc42e2=', comments, Variable)
+  // console.log('=d0Variable.Static.answerAdditionallyeece1=',Variable.Static.answerAdditionally)
   return comments.map((item, i) => {
     return (
-      <div data-comment_comment={item._id} class="main_comment userComment">
-        <Avatar author={item.author} nickNameAndDate={true} />
+      <div data-comment_comment={item._id} class="c-comments__usercomment">{/* main_comment userComment */}
+        <Avatar author={item.author} parent={"c-comments__avacomment"} nickNameAndDate={item.showDate} />
         {Variable.Static.activeEditInputs.findIndex((it) => it === item._id) <
-        0 ? (
-          <div class="comment_body">
-            <span class="comment_text">{stringToHtml(item.text)} </span>
+          0 ? (
+          <div class="c-comments__bodycomment">{/* comment_body */}
+            <span class="c-comments__textcomment">{stringToHtml(item.text)} </span>{/* comment_text */}
           </div>
         ) : (
           <CommentInput
@@ -56,9 +57,8 @@ const BlockUserComment = function ({ comments }) {
                 onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
                 onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
                 onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
-                class={`comment_icon_type-2-1 minus  ${
-                  !auth && "comment_inactive"
-                } `}
+                class={`comment_icon_type-2-1 minus  ${!auth && "comment_inactive"
+                  } `}
               />
             </div>
             <div class="comment_likes">{item.statistic.rating}</div>
@@ -70,9 +70,8 @@ const BlockUserComment = function ({ comments }) {
                 onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
                 onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
                 onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
-                class={`comment_icon_type-2-1 plus  ${
-                  !auth && "comment_inactive"
-                } `}
+                class={`comment_icon_type-2-1 plus  ${!auth && "comment_inactive"
+                  } `}
               />
             </div>
             <span
@@ -86,17 +85,16 @@ const BlockUserComment = function ({ comments }) {
               {Variable.lang.button.giveAnswer}
             </span>
             <div
-              class={`comment_icon_type-1 answer_additionally_toggle  ${
-                (!auth || Variable.Static.answerAdditionally) && "comment_inactive"
-              } `}
+              class={`comment_icon_type-1 answer_additionally_toggle  ${(!auth || Variable.Static.answerAdditionally) && "comment_inactive"
+                } `}
               data-action="answerAdditionallyToggle"
-              onclick={() => (auth &&  !Variable.Static.answerAdditionally ) && showAnswerAdditionallyContainer(item._id)}
+              onclick={() => (auth && !Variable.Static.answerAdditionally) && showAnswerAdditionallyContainer(item._id)}
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]} />
               <div
                 class="answer_additionally_container"
                 style={
-                  (Variable.Static.answerAdditionallyShow === item._id && !Variable.Static.answerAdditionally )
+                  (Variable.Static.answerAdditionallyShow === item._id && !Variable.Static.answerAdditionally)
                     ? "display : block"
                     : "display : none"
                 }
@@ -109,14 +107,14 @@ const BlockUserComment = function ({ comments }) {
                         <div
                           class="answer_additionally_item delete"
                           onclick={(e) => {
-                            closeAnswerAdditionally(e); 
-                           
-                            e.target.parentElement.parentElement.parentElement.style="display : none"
+                            closeAnswerAdditionally(e);
+
+                            e.target.parentElement.parentElement.parentElement.style = "display : none"
                             Variable.SetModals({
                               name: "ModalDelComment",
                               data: { id: item._id, mainCom: true },
-                            },true);
-                          
+                            }, true);
+
                           }}
                         >
                           {Variable.lang.select.delete}
@@ -125,12 +123,12 @@ const BlockUserComment = function ({ comments }) {
                           class="answer_additionally_item edit"
                           onclick={(e) => {
                             closeAnswerAdditionally(e);
-                            if(Variable.Static.activeEditInputs.findIndex(
-                                (it) => it === item._id
-                              ) < 0){
-                                Variable.Static.activeEditInputs.push(item._id);
-                            
-                              }initReload();
+                            if (Variable.Static.activeEditInputs.findIndex(
+                              (it) => it === item._id
+                            ) < 0) {
+                              Variable.Static.activeEditInputs.push(item._id);
+
+                            } initReload();
                           }}
                         >
                           {Variable.lang.button.edit}
@@ -143,11 +141,11 @@ const BlockUserComment = function ({ comments }) {
                           class="answer_additionally_item complain c-text--error"
                           onclick={(e) => {
                             closeAnswerAdditionally(e);
-                            e.target.parentElement.parentElement.parentElement.style="display : none"
+                            e.target.parentElement.parentElement.parentElement.style = "display : none"
                             Variable.SetModals({
                               name: "ModalComplainComment",
                               data: { id: item._id, mainCom: true },
-                            },true);
+                            }, true);
                           }}
                         >
                           {Variable.lang.select.complainComment}
@@ -158,15 +156,15 @@ const BlockUserComment = function ({ comments }) {
                         <div
                           class="answer_additionally_item block c-text--error"
                           onclick={(e) => {
-            
+
                             closeAnswerAdditionally(e);
-                            e.target.parentElement.parentElement.parentElement.style="display : none"
-                           
-                           
+                            e.target.parentElement.parentElement.parentElement.style = "display : none"
+
+
                             Variable.SetModals({
                               name: "ModalBlackList",
                               data: { id: item.author._id },
-                            },true);
+                            }, true);
                           }}
                         >
                           {Variable.lang.select.blackList}

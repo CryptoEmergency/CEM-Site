@@ -10,35 +10,36 @@ const start = function () {
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
+    Variable.showUserMenu = true
 
-    const changeCategory = async function(){
-        if(currentNotify[this.dataset.type]){
+    const changeCategory = async function () {
+        if (currentNotify[this.dataset.type]) {
             return
         }
-        switch(this.dataset.type){
+        switch (this.dataset.type) {
             case 'question':
                 currentNotify = {
-                question: true,
-                awards: false,
-                system: false
-            }
-            notify = Variable.myInfo.notifyQuestions
+                    question: true,
+                    awards: false,
+                    system: false
+                }
+                notify = Variable.myInfo.notifyQuestions
                 break;
             case 'awards':
                 currentNotify = {
-                question: false,
-                awards: true,
-                system: false
-            }
-            notify = Variable.myInfo.notifyAwards
+                    question: false,
+                    awards: true,
+                    system: false
+                }
+                notify = Variable.myInfo.notifyAwards
                 break;
             case 'system':
                 currentNotify = {
-                question: false,
-                awards: false,
-                system: true
-            }
-            notify = Variable.myInfo.notifySystem
+                    question: false,
+                    awards: false,
+                    system: true
+                }
+                notify = Variable.myInfo.notifySystem
                 break;
         }
         initReload()

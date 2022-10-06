@@ -24,7 +24,7 @@ const start = async function () {
     await addListen();
     await parsingUrl();
     await initApp();
-    //await test();
+    await test();
 }
 
 start();

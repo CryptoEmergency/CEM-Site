@@ -115,7 +115,7 @@ const getUserAnswers = async (ID) => {
       author:ID,
     },
     select:{best:1,active:1,author:1,statistic:1,showDate:1,media:1,text:1,comments:1, questionId: 1},
-    limit:12
+    limit: 50
   }
   let response = checkAnswerApi(await sendApi.create("getAnswers", data));
   return response
@@ -126,12 +126,28 @@ const getUserFollowers = async (ID) => {
     filter:{
       subscribed: ID
     },
-    limit:12
+    limit: 50
+  }
+  let response = checkAnswerApi(await sendApi.create("getUsers", data));
+  return response
+}
+
+const getUserSubscribes = async (ID) => {
+  let data = {
+    filter:{
+      _id: ID
+    },
+    select:{
+      _id:1,
+      subscribed:1,
+      status: 1
+    },  
+    limit: 50
   }
   let response = checkAnswerApi(await sendApi.create("getUsers", data));
   return response
 }
 
 export {
-  mainTrades, getUserTransactions, getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist, getUserQuestions, getUserAnswers, getUserFollowers
+  mainTrades, getUserTransactions, getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist, getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes
 };

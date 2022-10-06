@@ -1,11 +1,11 @@
 import {
     jsx,
     jsxFrag,
+    Helpers,
     Variable
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-// import images from "@assets/images/index.js";
-import { getDateFormat } from "@src/functions.js";
+
 
 const BlockExchange = function () {
     // console.log("BlockExchange", exchanges);
@@ -85,7 +85,7 @@ const BlockExchange = function () {
                                 </div>
                                 <div class="crypto_exchanges-cell exanges_date_create">
                                     <span class=""> {/* load */}
-                                        {getDateFormat(exchange.startDate)}
+                                        {Helpers.getDateFormat(exchange.startDate)}
                                     </span>
                                 </div>
                                 <div>

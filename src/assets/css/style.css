@@ -15715,8 +15715,8 @@ span#procent::after {
   font-weight: 500;
   font-size: 12px;
   transition: 0.3s;
-  opacity: 0;
-  visibility: hidden;
+  /* opacity: 0; */
+  /* visibility: hidden; */
 }
 
 .success_copy::before {
@@ -22023,13 +22023,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .changeLanguageContainer::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background:linear-gradient(45deg, #3bade3 0, #576fe6 45%, #9844b7 57%, #ff357f 70%);;
+  background: linear-gradient(45deg, #3bade3 0, #576fe6 45%, #9844b7 57%, #ff357f 70%);
+  ;
 }
 
 .changeLanguageContainer::-webkit-scrollbar-track {
   background-color: transparent;
 }
-.changeLanguageContainer{
+
+.changeLanguageContainer {
   margin-bottom: 20px;
 }
 

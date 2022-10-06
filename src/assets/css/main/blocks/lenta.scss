@@ -104,7 +104,7 @@
                     &_category {
                         padding: 0;
                     }
-               }
+                }
             }
 
             iframe {
@@ -124,6 +124,25 @@
         width: 100%;
         min-width: 100%;
         margin: 0 auto;
+    }
+
+    .c-avataricon {
+        &__name {
+            &--show {
+                display: block;
+                margin-bottom: 0;
+                margin-top: 7px;
+                margin-left: 10px;
+
+                span {
+
+                    &:nth-child(2),
+                    &:nth-child(3) {
+                        display: none;
+                    }
+                }
+            }
+        }
     }
 }
 

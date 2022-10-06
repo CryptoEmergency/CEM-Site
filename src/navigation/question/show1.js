@@ -42,7 +42,7 @@ const start = function () {
                         <div class="answer_block">
                             <div class="answer_content">
                                 <div class="question_author_block">
-                                    <Avatar author={question.author} nickNameAndDate={true} />
+                                    <Avatar author={question.author} nickNameAndDate={question.showDate} />
                                     <a href={`/user/${question.author.nickname}`} data-action="link" data-needauth="true">
                                         <div class="question_author_name">
                                             {question.author.nickname}

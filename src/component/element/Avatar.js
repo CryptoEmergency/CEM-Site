@@ -4,7 +4,7 @@ import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
-const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
+const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
 
   if (!author.nickname) {
     return (
@@ -13,8 +13,8 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
   }
   return (
     <a
-      href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
-      class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : "comment_avatar"}`}
+      href={`${parent != "big_user_avatar" && Variable.myInfo.nickname && author.nickname == Variable.myInfo.nickname ? `/user/${author.nickname}` : ""}`}
+      class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : parent == "c-comments__avacomment" ? "c-comments__avacomment" : "comment_avatar"}`}
       onclick={siteLink}
     >
       <div
@@ -44,7 +44,7 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
           }
         />
         <If
-          data={author.status.team}
+          data={author.status && author.status.team}
           dataIf={<img src={svg.mini_logo} width="25" height="25" style="position: absolute; bottom: 7px; right: 7px; z-index: 2; background: #ffffff; border-radius: 50%; padding: 3px" />}
           dataElse={<div>
             <div
@@ -66,10 +66,10 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
         />
       </div>
       {nickNameAndDate && (
-        <div class="comment_name nickNameAndDate">
+        <div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
           <span>{author.nickname}</span>
           <br />
-          <span>{getDateFormat(author.showDate, "userComment")}</span>
+          <span>{getDateFormat(nickNameAndDate, "userComment")}</span>
         </div>
       )}
     </a>

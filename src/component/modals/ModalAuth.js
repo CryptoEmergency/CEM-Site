@@ -194,6 +194,7 @@ const sendAuthorization = async function (e) {
     let tmpRes = await sendApi.create("userAuth", data);
     if (tmpRes.status === 'ok') {
         Variable.DelModals("ModalAuth")
+        initReload()
     } else {
         Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
         elemButton().classList.remove('c-button--animated');

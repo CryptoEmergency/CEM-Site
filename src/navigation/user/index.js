@@ -13,7 +13,7 @@ import {
 import images from '@assets/images/index.js';
 import svg from '@assets/svg/index.js';
 import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
-import { getUserQuestions, getUserAnswers, getUserFollowers } from '@src/apiFunctionsL.js'
+import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes } from '@src/apiFunctionsL.js'
 import {
     BlockUserProfileAbout
 } from '@component/blocks/user/BlockUserProfileAbout.js';
@@ -26,25 +26,29 @@ import {
 import {
     BlockUserProfileFollowers
 } from '@component/blocks/user/BlockUserProfileFollowers.js';
+import {
+    BlockUserProfileSubscribes
+} from '@component/blocks/user/BlockUserProfileSubscribes.js';
+
 import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
 const start = function () {
 
-    const currentCategory = function(){
+    const currentCategory = function () {
         console.log(tabType)
-        switch(tabType){
+        switch (tabType) {
             case 'lentaFriends':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'lentaUser':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'aboutUser':
-                return(
+                return (
                     <BlockUserProfileAbout
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -53,7 +57,7 @@ const start = function () {
                 )
                 break;
             case 'questions':
-                return(
+                return (
                     <BlockUserProfileQuestions
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -63,7 +67,7 @@ const start = function () {
                 )
                 break;
             case 'answers':
-                return(
+                return (
                     <BlockUserProfileAnswers
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -73,7 +77,7 @@ const start = function () {
                 )
                 break;
             case 'subscribers':
-                return(
+                return (
                     <BlockUserProfileFollowers
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -84,39 +88,45 @@ const start = function () {
                 )
                 break;
             case 'friends':
-                return(
-                    <div></div>
+                return (
+                    <BlockUserProfileSubscribes
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        haveFilter={true}
+                        subscribes={subscribes.list_records[0].subscribed}
+                    />
                 )
                 break;
             case 'awards':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'social':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'galary':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'donation':
-                return(
+                return (
                     <div></div>
                 )
                 break;
         }
     }
 
-    const changeType = async function(){
-        if(this.dataset.tabtype == tabType){
+    const changeType = async function () {
+        if (this.dataset.tabtype == tabType) {
             return
         }
         tabType = this.dataset.tabtype
-        
+
         initReload()
     }
 
@@ -124,7 +134,8 @@ const start = function () {
         tabType,
         questions,
         answers,
-        followers
+        followers,
+        subscribes
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
@@ -138,8 +149,9 @@ const start = function () {
                 questions = await getUserQuestions(userInfo._id)
                 answers = await getUserAnswers(userInfo._id)
                 followers = await getUserFollowers(userInfo._id)
-                console.log(followers)
-                tabType = 'lentaFriends'
+                subscribes = await getUserSubscribes(userInfo._id)
+                console.log(subscribes.list_records[0].subscribed)
+                tabType = 'aboutUser'
             } else {
                 // setValue(ID, 'userInfoProfile', await getUserInfoProfile(dataUrl.params));
                 tabType = 'aboutUser'

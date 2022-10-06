@@ -18,6 +18,7 @@ const mainModal = async function () {
         (reload) => {
 
             if (Variable.Modals && Variable.Modals.length != 0) {
+                document.getElementById('backdrop').classList.add("c-backdrop--show");
                 const modals = Variable.Modals.map((item) => {
                     return (
                         list[item.name](item.data, reload)
@@ -30,6 +31,7 @@ const mainModal = async function () {
                     </div>
                 )
             } else {
+                document.getElementById('backdrop').classList.remove("c-backdrop--show");
                 return (
                     <></>
                 )

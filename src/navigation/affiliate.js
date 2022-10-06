@@ -275,7 +275,7 @@ const start = function () {
                 </div>
               </div>
             </div> */}
-            <BlockAffiliateBanners/>
+            <BlockAffiliateBanners />
           </div>
         </div>
       );
