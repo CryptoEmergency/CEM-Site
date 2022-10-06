@@ -12,9 +12,11 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat, parseTextforJsx } from "@src/functions.js";
+import { getPostsItemInShow } from "@src/apiFunctions.js";
 import { AudioPlayer } from "@component/element/AudioPlayer.js";
 import { Slider } from "@component/element/Slider.js";
 import { Avatar } from '@component/element/Avatar.js';
+import { If } from "@component/helpers/All.js";
 
 const returnImgOrVideo = (item) => {
   if (
@@ -77,7 +79,7 @@ const returnImgOrVideo = (item) => {
 };
 
 const BlockLentaUsers = function ({ item }) {
-  // console.log('=4d0c8d=', item)
+  // console.log('=4d0c8d=', item.author._id, Variable.myInfo._id, Variable, item)
   const isAuth = Variable.auth;
   //   const parser = new DOMParser();
   //   let jsx1 = parser.parseFromString(item.text, "text/html");
@@ -86,7 +88,19 @@ const BlockLentaUsers = function ({ item }) {
 
   // console.log('=50da23=', item, returnImgOrVideo(item))
   return (
-    <div class="user_news_item" data-author={item.author._id}>
+    <div
+      class="user_news_item"
+      data-author={item.author._id}
+      onClick={async () => {
+        let post;
+        post = await getPostsItemInShow(item._id);
+        post = post.list_records[0];
+        Variable.SetModals({
+          name: "ModalFullPost",
+          data: { post },
+        });
+      }}
+    >
       <div class="main_comment" data-link={item._id} data-action="getPost">
         {/* {{>avatar author}}                     */}
         <Avatar author={item.author} nickNameAndDate={item.showDate} />
@@ -175,38 +189,44 @@ const BlockLentaUsers = function ({ item }) {
           </div>
         </div>
 
-        <div class="comment_icons">
+        {/* <div class="comment_icons">
           <div
             class={`comment_icon_type-1 answer_additionally_toggle ${!isAuth && "comment_inactive"}`}
             data-needauth="true" data-action="answerAdditionallyToggle">
             <img class="answer_additionally_toggle_img" src={svg["points"]} />
             <div class="answer_additionally_container">
               <div class="answer_additionally">
-                {/* {{#is author._id data.myInfo._id}}
-                                <div data-needauth="true" class="answer_additionally_item share" data-action="answerAdditionallyItem" data-answer-id={{ _id }} data-type="post">{lang.select.share}</div>
-                                <div data-needauth="true" class="answer_additionally_item edit" data-action="answerAdditionallyItem" data-answer-id="{{_id}}" data-type="post">{lang.button.edit}</div>
-                                <div data-needauth="true" class="answer_additionally_item delete" data-action="answerAdditionallyItem" data-answer-id="{{_id}}" data-type="post">{lang.select.delete}</div>
-                            {{else}}    
-                                <div data-needauth="true" class="answer_additionally_item subscribe" data-action="answerAdditionallyItem" data-answer-id={{ author._id }} data-type="post">
-                                    <span {{#if subscribe}}style="display: none;"{{/if}}>
-                                        {{lang.button.subscribe}}
-                                    </span>
-                                    <span {{#notif subscribe}}style="display: none;"{{/notif}}>
-                                        {{lang.button.unsubscribe}}
-                                    </span>
-                                </div>
-                                <div data-needauth="true" class="answer_additionally_item share" data-action="answerAdditionallyItem" data-answer-id={{ _id }} data-type="post">{lang.select.share}</div>
-                                <div data-needauth="true" class="answer_additionally_item complain c-text--error" data-action="answerAdditionallyItem" data-answer-id={{ _id }} data-type="post">{lang.select.complainPost}</div>
-                                <div data-needauth="true" class="answer_additionally_item complain c-text--error" data-action="answerAdditionallyItem" data-answer-id={{ author._id }} data-type="user">{lang.select.complainUser}</div>
-                                <div data-needauth="true" class="answer_additionally_item block c-text--error" data-action="answerAdditionallyItem" data-answer-id={{ author._id }} data-type="user">{lang.select.blackList}</div>
-                            {{/is}}
-                            {{#if data.myInfo.status.role}}
-                                <div style="color: #32DE80" data-needauth="true" class="answer_additionally_item delete" data-action="doRoleModal" data-answer-id="{{_id}}" data-type="post">{{lang.select.delete}}</div>
-                            {{/if}} */}
+                <If
+                  data={item.author._id == Variable.myInfo._id}
+                  dataIf={<div>
+                    <div class="answer_additionally_item share" data-answer-id={item._id} data-type="post">{Variable.lang.select.share}</div>
+                    <div class="answer_additionally_item edit" data-answer-id={item._id} data-type="post">{Variable.lang.button.edit}</div>
+                    <div class="answer_additionally_item delete" data-answer-id={item._id} data-type="post">{Variable.lang.select.delete}</div>
+                  </div>}
+                  dataElse={<div>
+                    <div class="answer_additionally_item subscribe" data-answer-id={item.author._id} data-type="post">
+                      <span style={[item.subscribe ? "display: none;" : null]}>
+                        {Variable.lang.button.subscribe}
+                      </span>
+                      <span style={[!item.subscribe ? "display: none;" : null]}>
+                        {Variable.lang.button.unsubscribe}
+                      </span>
+                    </div>
+                    <div class="answer_additionally_item share" data-answer-id={item._id} data-type="post">{Variable.lang.select.share}</div>
+                    <div class="answer_additionally_item complain c-text--error" data-answer-id={item._id} data-type="post">{Variable.lang.select.complainPost}</div>
+                    <div class="answer_additionally_item complain c-text--error" data-answer-id={item.author._id} data-type="user">{Variable.lang.select.complainUser}</div>
+                    <div class="answer_additionally_item block c-text--error" data-answer-id={item.author._id} data-type="user">{Variable.lang.select.blackList}</div>
+                  </div>}
+                />
+                <If
+                  data={Variable.myInfo.status.role}
+                  dataIf={<div style="color: #32DE80" class="answer_additionally_item delete" data-answer-id={item._id} data-type="post">{Variable.lang.select.delete}</div>
+                  }
+                />
               </div>
             </div>
           </div>
-          {/* {{#is myInfo.role 1}}    
+           {{#is myInfo.role 1}}    
                     {{#is myInfo.role_settings.del_answer 1}} 
                         <div class="acp_block">
                             <img data-action="acpSiteShow" class="acp_image" src={svg["points_green"]}>
@@ -220,9 +240,9 @@ const BlockLentaUsers = function ({ item }) {
                             </div>
                         </div>
                     {{/is}}
-                {{/is}} */}
-        </div>
-      </div>
+                {{/is}} 
+        </div> */}
+      </div >
 
       <div
         data-action="userNewsShowFullPost"
@@ -232,7 +252,7 @@ const BlockLentaUsers = function ({ item }) {
         <div class="show_all_post_block"> </div>
         <span class="show_all_post_text">{Variable.lang.button.see_all}</span>
       </div>
-    </div>
+    </div >
   );
 };
 

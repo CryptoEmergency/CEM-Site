@@ -21,7 +21,7 @@ let posts;
 // let activeCategory = "text";
 
 const getLentaUsersList = async (firstLoad, type, reload) => {
-  console.log('=269dc6=', type)
+  // console.log('=269dc6=', type)
   let data = {
     select: {
       author: 1,
@@ -43,7 +43,7 @@ const getLentaUsersList = async (firstLoad, type, reload) => {
   };
 
   Variable.activeCategory = type;
-  console.log('=269dc6=', "activeCategory = ", Variable.activeCategory)
+  // console.log('=269dc6=', "activeCategory = ", Variable.activeCategory)
   switch (type) {
 
     case "text":

@@ -3873,6 +3873,21 @@ s
 	}
 }
 
+#ModalFullPost {
+	background: #202432;
+
+	.c-modal {
+		&__body {
+			padding: 0;
+		}
+	}
+
+	.user_news_block {
+		// margin-top: 60px;
+		padding-top: 60px;
+	}
+}
+
 /* modal #xmodalDoRole (Подтверждение удаления поста) */
 .modal_doRole {
 	padding: 30px;
