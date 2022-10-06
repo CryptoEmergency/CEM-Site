@@ -5,13 +5,12 @@ import {
     Variable
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
+import { If } from '@component/helpers/All.js';
 
-
-const BlockExchange = function () {
-    // console.log("BlockExchange", exchanges);
+const BlockExchange = function (data) {
 
     return (
-        <div class="crypto_exchanges" id="crypto_exchange">
+        <div class="crypto_exchanges">
             <h4>{Variable.lang.h.exchange}</h4>
             <div class="statistics-preview list_exchange_page">
                 <div class="crypto_exchanges-row">
@@ -27,9 +26,6 @@ const BlockExchange = function () {
                     <div class="crypto_exchanges-cell">
                         {Variable.lang.tableTitle.startDate}
                     </div>
-                    <div>
-
-                    </div>
                 </div>
                 {
                     Variable.MainExchanges.list_records.map(function (exchange, i) {
@@ -38,8 +34,6 @@ const BlockExchange = function () {
                                 class="crypto_exchanges-row exchangeListLoad"
                                 target="_blank"
                                 rel="nofollow noopener"
-                                data-type="exchange"
-                                data-count={exchange._id}
                             >
                                 <div class="crypto_exchanges-cell">
                                     <div>
@@ -55,7 +49,7 @@ const BlockExchange = function () {
                                 </div>
                                 <div class="crypto_exchanges-cell">
                                     <div>
-                                        <div style="height: auto;" class=""> {/* load */}
+                                        <div style="height: auto;" class="">
                                             {exchange.score}
                                             <img
                                                 class="crypto_exchanges_rate"
@@ -69,10 +63,10 @@ const BlockExchange = function () {
                                         {
                                             exchange.list_coins.map(function (coin, i) {
                                                 return (
-                                                    <div class="crypto_coin_container "> {/* load */}
+                                                    <div class="crypto_coin_container ">
                                                         <img
                                                             class="crypto_coin_icons"
-                                                            src={svg[`coins/${coin.icon}`]}
+                                                            src={`/assets/icons/coins/${coin.icon}.svg`}
                                                         />
                                                         <div class="crypto_coin_description">
                                                             {coin.name}
@@ -84,7 +78,7 @@ const BlockExchange = function () {
                                     </div>
                                 </div>
                                 <div class="crypto_exchanges-cell exanges_date_create">
-                                    <span class=""> {/* load */}
+                                    <span class="">
                                         {Helpers.getDateFormat(exchange.startDate)}
                                     </span>
                                 </div>
@@ -102,8 +96,12 @@ const BlockExchange = function () {
                     })
                 }
             </div>
+            <If
+                data={data && data.button}
+                dataIf={data.button}
+            />
         </div>
     )
 }
-
+//I check
 export { BlockExchange }
