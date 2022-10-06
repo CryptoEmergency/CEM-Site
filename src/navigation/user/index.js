@@ -13,7 +13,7 @@ import {
 import images from '@assets/images/index.js';
 import svg from '@assets/svg/index.js';
 import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
-import { getUserQuestions, getUserAnswers, getUserFollowers } from '@src/apiFunctionsL.js'
+import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes } from '@src/apiFunctionsL.js'
 import {
     BlockUserProfileAbout
 } from '@component/blocks/user/BlockUserProfileAbout.js';
@@ -94,6 +94,7 @@ const start = function () {
                         myInfo={Variable.myInfo}
                         userInfo={userInfo}
                         haveFilter={true}
+                        subscribes={subscribes.list_records[0].subscribed}
                     />
                 )
                 break;
@@ -133,7 +134,8 @@ const start = function () {
         tabType,
         questions,
         answers,
-        followers
+        followers,
+        subscribes
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
@@ -147,7 +149,8 @@ const start = function () {
                 questions = await getUserQuestions(userInfo._id)
                 answers = await getUserAnswers(userInfo._id)
                 followers = await getUserFollowers(userInfo._id)
-                console.log(followers)
+                subscribes = await getUserSubscribes(userInfo._id)
+                console.log(subscribes.list_records[0].subscribed)
                 tabType = 'aboutUser'
             } else {
                 // setValue(ID, 'userInfoProfile', await getUserInfoProfile(dataUrl.params));

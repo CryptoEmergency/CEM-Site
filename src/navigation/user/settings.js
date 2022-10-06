@@ -118,14 +118,14 @@ const start = function () {
                                             <h3>{Variable.lang.h.changePassword}</h3>
                                             <div class="container-input">
                                                 <label for="password_reg">{Variable.lang.label.oldPassword}</label>
-                                                <div class="error-div">
+                                                {/* <div class="error-div">
                                                     <div class="error-div-variant">{Variable.lang.error_div.not_empty_input}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password2}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password3}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password4}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password5}</div>
-                                                </div>
+                                                </div> */}
                                                 <div class="input-div">
                                                     <img src={svg['lock']} class="icon-input" />
                                                     <input data-keyup="keyupValidate" data-form_type="changePassword" data-dirty="false" data-focusout="focusout" data-validate_type="password" required="required" id="oldPassword" placeholder={Variable.lang.placeholder.oldPassword} type={inputType.oldPassword ? 'password' : 'text'} />
@@ -134,14 +134,14 @@ const start = function () {
                                             </div>
                                             <div class="container-input">
                                                 <label for="password_reg">{Variable.lang.label.newPassword}</label>
-                                                <div class="error-div">
+                                                {/* <div class="error-div">
                                                     <div class="error-div-variant">{Variable.lang.error_div.not_empty_input}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password2}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password3}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password4}</div>
                                                     <div class="error-div-variant">{Variable.lang.error_div.password5}</div>
-                                                </div>
+                                                </div> */}
                                                 <div class="input-div">
                                                     <img src={svg['lock']} class="icon-input" />
                                                     <input data-keyup="keyupValidate" data-form_type="changePassword" data-dirty="false" data-focusout="focusout" data-validate_type="password" required="required" id="newPassword" placeholder={Variable.lang.placeholder.newPassword} type={inputType.newPassword ? 'password' : 'text'} />

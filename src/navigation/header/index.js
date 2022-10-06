@@ -336,6 +336,13 @@ const mainHeader = async function () {
                                     <img src={svg["profile_icon-3"]} />
                                     <div class="c-userpanel__description">{Variable.lang.a.affiliate}</div>
                                 </a>
+                                <a
+                                    onclick={siteLink}
+                                    class={`c-userpanel__icon  ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "settings") ? "c-userpanel__icon--active" : ""}`}
+                                    href="/user/settings/"
+                                >
+                                    <img src={svg["settings_black"]} />
+                                </a>
                                 {/* <If
                                     data={Variable.auth}
                                     dataIf={<a class="c-userpanel__icon" href="/logout/" onclick={siteLink}>

@@ -12,15 +12,14 @@ import { getDateFormat } from '@src/functions.js'
 import { Avatar } from '@component/element/Avatar.js';
 import { If } from '@component/helpers/All.js'
 
-const BlockUserProfileSubscribes = function ({ lang, myInfo, userInfo, data, haveFilter=false }) {
-    console.log(userInfo.subscribed)
-    const ListSubscribes = Object.keys(userInfo.subscribed).map(function (key) {
+const BlockUserProfileSubscribes = function ({ lang, myInfo, userInfo, data, haveFilter=false, subscribes }) {
+    const ListSubscribes = Object.keys(subscribes).map(function (key) {
         return (
-            <div class="friend" data-action="link" data-href={'/user/' + userInfo.subscribed[key].nickname}>
-                <Avatar author={userInfo.subscribed[key]} />                  
+            <div class="friend" data-action="link" data-href={'/user/' + subscribes[key].nickname}>
+                <Avatar author={subscribes[key]} />                  
                 <div class="friend_info">
-                    <p>{userInfo.subscribed[key].nickname}</p>
-                    <p>{userInfo.subscribed[key].fullname ? userInfo.subscribed[key].fullname : ''}</p>  
+                    <p>{subscribes[key].nickname}</p>
+                    <p>{subscribes[key].fullname ? subscribes[key].fullname : ''}</p>  
                 </div>
             </div>
         )
@@ -33,7 +32,7 @@ const BlockUserProfileSubscribes = function ({ lang, myInfo, userInfo, data, hav
                 dataIf={
                     <div class="friends friends_block_container" data-type="{{typeSearch}}">
                         <h2></h2>
-                        <div class="friends_search">
+                        {/* <div class="friends_search">
                             <div class="friends_search_top">
                                 <input autocomplete="off" type="text" data-keyup="friendsSearchType" data-type="followers" placeholder="{{findPreholder}}"/>
                                 <div class="filter_summoner" data-action="filterSummoner">
@@ -73,7 +72,7 @@ const BlockUserProfileSubscribes = function ({ lang, myInfo, userInfo, data, hav
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div class="friends_block">
                             {ListSubscribes}
                         </div>
