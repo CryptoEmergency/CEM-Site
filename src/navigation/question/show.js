@@ -5,6 +5,7 @@ import {
   init,
   initGo,
   initReload,
+  getStorage,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
@@ -21,7 +22,7 @@ import {
 const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
-  let question, answers;
+  let question, answers,myInfo;
   init(
     async () => {
       question = await getQuestionsItemInShow(
@@ -35,6 +36,8 @@ const start = function () {
       );
       console.log("=050206=", question);
       console.log("=endInit=", answers);
+      myInfo = getStorage("myInfo");
+      console.log('=myInfo=',myInfo)
     },
     () => {
       return (
@@ -178,6 +181,13 @@ const start = function () {
                 <p> <img src={svg["question_answers"]}  /> <b>{question.statistic.answer}</b></p>
                         <p> <img src={svg["question_views"]} /> <b>{question.statistic.view}</b></p>
                         <p> <img src={svg["question_time"]} /> <b>{getDateFormat (question.showDate,"lenta")}</b> </p>
+             {
+                myInfo._id !== question.author._id
+                &&
+                <div data-action="answerModal" class="btn-answer" data-needauth="true">
+                <a class="btn-gr-answer"><span>{Variable.lang.button.giveAnswer}</span></a>
+            </div>
+             }
                 {/* {{#if myInfo._id}}
                             {{#is question.author._id myInfo._id}}
         

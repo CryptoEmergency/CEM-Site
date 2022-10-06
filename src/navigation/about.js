@@ -150,7 +150,7 @@ const start = function () {
                   target="_blank"
                   href="https://cemwallet.com/"
                 >
-                  <img src={images["about_us_banner8"]} />
+                  <img src={images["CemWallet"]} />
                   <span class="project_gradient">
                     CEM Wallet
                   </span>

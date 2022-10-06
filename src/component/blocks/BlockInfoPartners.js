@@ -49,6 +49,10 @@ const BlockInfoPartners = function () {
         {
             "link": "https://techweek.moscow",
             "image": "tech_week"
+        },
+        {
+            "link": "https://digitalitmed.ru/",
+            "image": "cifromed"
         }
     ];
 
