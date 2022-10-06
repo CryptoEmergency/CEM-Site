@@ -6,6 +6,7 @@ import {
   getStorage,
   getValue,
   stringToHtml,
+  Helpers
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
@@ -115,13 +116,13 @@ const BlockLentaUsers = function ({ item }) {
               {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
               })} */}
-              {item.text}
+              {stringToHtml(Helpers.sanitizeHtml(item.text))}
               {/* {stringToHtml(item.text)} */}
             </span>
           ) : item.text.length < 100 ? (
             <div class="user_post_text_background">
               <span class="comment_text">
-                {item.text}
+                {stringToHtml(Helpers.sanitizeHtml(item.text))}
                 {/* {stringToHtml(item.text)} */}
                 {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
@@ -130,7 +131,7 @@ const BlockLentaUsers = function ({ item }) {
             </div>
           ) : (
             <span data-text={item.text} class="comment_text">
-              {item.text}
+              {stringToHtml(Helpers.sanitizeHtml(item.text))}
               {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
               })} */}
