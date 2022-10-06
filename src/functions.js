@@ -240,7 +240,7 @@ const allValidation = (str, type, condition) => {
   if (type == "pass") {
     return validator.isStrongPassword(str, {
       minLength: 8,
-      minLowercase: 1,
+      minLowercase: 0,
       minUppercase: 0,
       minNumbers: 0,
       minSymbols: 1,
