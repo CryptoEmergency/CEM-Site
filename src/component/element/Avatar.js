@@ -4,7 +4,7 @@ import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
-const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
+const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
 
   if (!author.nickname) {
     return (
@@ -44,7 +44,7 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false}) {
           }
         />
         <If
-          data={author.status.team}
+          data={author.status && author.status.team}
           dataIf={<img src={svg.mini_logo} width="25" height="25" style="position: absolute; bottom: 7px; right: 7px; z-index: 2; background: #ffffff; border-radius: 50%; padding: 3px" />}
           dataElse={<div>
             <div

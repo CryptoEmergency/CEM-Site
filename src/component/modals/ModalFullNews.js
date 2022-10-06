@@ -40,33 +40,12 @@ const ModalFullNews = function ({ news }, reload) {
   return (
     <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalFullNews">
       <section class="c-modal__dialog">
-        <header
-          class="c-modal__header"
-          // class="user_post_header"
-        >
-          {/* <button
-                        type="button"
-                        class="c-modal__close"
-                        onclick={() => { Variable.Modals = [] }}
-                    ></button> */}
-          <a
-            onclick={() => { Variable.Modals = [] }}
-          >
-            <img class="go_back_icon" src={svg["go_back_icon"]} />
-            <span class="full_news_go_back">{Variable.lang.span.back}</span>
-          </a>
-        </header>
         <div class="c-modal__body">
-          <div
-            class={`${
-              Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-            }`}
-          >
-            <div class="full_news_container">
-              <div class="full_news_block">
-                {/* {{#is myInfo.role 1}}     */}
-                {/* {{#is myInfo.role_settings.add_news 1}}  */}
-                {/* <div class="acp_block">
+          <div class="c-fullnews">{/*  full_news_container */}
+            <div class="c-fullnews__block">{/*  full_news_block */}
+              {/* {{#is myInfo.role 1}}     */}
+              {/* {{#is myInfo.role_settings.add_news 1}}  */}
+              {/* <div class="acp_block">
                 <img
                   class="acp_image"
                   src={svg["points_green"]}
@@ -81,65 +60,73 @@ const ModalFullNews = function ({ news }, reload) {
                 </div>
                 <div></div>
               </div> */}
-                {/* {{/is}} */}
-                {/* {{/is}} */}
-                <div class="full_news_content">
-                  <h1 class="full_news_name">{news.title}</h1>
-                  <If
-                    data={news.image}
-                    dataIf={
-                      <img
-                        class="full_news_image"
-                        src={`/assets/upload/news/${news.image}`}
-                      />
-                    }
-                  />
-
-                  <p class="full_news_text mrb30">{news.preview}</p>
-                  <p class="full_news_text mr20">{stringToHtml(news.text)}</p>
-                  <If
-                    data={news.source}
-                    dataIf={
-                      <p class="full_news_disclaimer mr20">
-                        {Variable.lang.p.source}
-                        <a href={news.source} rel="nofollow" target="_blank">
-                          {news.source}
-                        </a>
-                      </p>
-                    }
-                  />
-                  {/* {{#if news.source}}<p class="full_news_disclaimer mr20">{{lang.p.source}} 
-              <a href="{{news.source}}" rel="nofollow" target="_blank">{{news.source}}</a>
-              </p>{{/if}} */}
-                  <div style="display: flex" class="blog_post_stat">
-                    <p class="full_news_date">
-                      <img src={svg["question_views"]} /> {news.statistic.view}
-                    </p>
-                    <p class="full_news_date">
-                      <img src={svg["question_answers"]} />{" "}
-                      {news.statistic.comments}
-                    </p>
-                    <p class="full_news_date">{getDateFormat(news.showDate)}</p>
-                  </div>
+              {/* {{/is}} */}
+              {/* {{/is}} */}
+              <div class="c-fullnews__content">{/*  full_news_content */}
+                <div class="c-fullnews__header">{/*  user_post_header */}
+                  <a
+                    class="c-goback"
+                    onclick={() => { Variable.Modals = [] }}
+                  >
+                    <img class="c-goback__arrow" src={svg["go_back_icon"]} />
+                    <span class="c-goback__text">{Variable.lang.span.back}</span>
+                  </a>
                 </div>
-              </div>
-              <div class="news_page_comments">
-                <h2>{Variable.lang.h.modal_comment}</h2>
-                {Variable.Static.showMainInput && <CommentInput item={news} />}
+                <h1 class="c-fullnews__name">{news.title}</h1>{/*  full_news_name */}
                 <If
-                  data={news.comments.length > 0}
+                  data={news.image}
                   dataIf={
-                    <div data-type="news_comment" class="post_comments">
-                      <div
-                        style={!news.comments && "display: none;"}
-                        class="user_news_item"
-                      >
-                        <BlockUserComment comments={news.comments} />
-                      </div>
-                    </div>
+                    <img
+                      class="c-fullnews__image"
+                      src={`/assets/upload/news/${news.image}`}
+                    />
+                  }
+                />{/*  full_news_image */}
+
+                <p class="c-fullnews__preview">{news.preview}</p>{/*  full_news_text mrb30 */}
+                <p class="c-fullnews__text">{stringToHtml(news.text)}</p>{/*  full_news_text mr20 */}
+                <If
+                  data={news.source}
+                  dataIf={
+                    <p class="c-fullnews__disclaimer">{/*  full_news_disclaimer mr20 */}
+                      {Variable.lang.p.source}
+                      <a href={news.source} rel="nofollow" target="_blank">
+                        {news.source}
+                      </a>
+                    </p>
                   }
                 />
+                {/* {{#if news.source}}<p class="full_news_disclaimer mr20">{{lang.p.source}} 
+              <a href="{{news.source}}" rel="nofollow" target="_blank">{{news.source}}</a>
+              </p>{{/if}} */}
+                <div style="display: flex" class="c-fullnews__statistic">{/*  blog_post_stat */}
+                  <p class="c-fullnews__statitem c-fullnews__views">{/*  full_news_date */}
+                    <img class="c-fullnews__icon" src={svg["question_views"]} /> {news.statistic.view}
+                  </p>
+                  <p class="c-fullnews__statitem c-fullnews__answers">{/*  full_news_date */}
+                    <img class="c-fullnews__icon" src={svg["question_answers"]} />{" "}
+                    {news.statistic.comments}
+                  </p>
+                  <p class="c-fullnews__statitem c-fullnews__date">{getDateFormat(news.showDate)}</p>{/*  full_news_date */}
+                </div>
               </div>
+            </div>
+            <div class="c-fullnews__comments c-comments news_page_comments">{/*  */}
+              <h2 class="c-comments__title">{Variable.lang.h.modal_comment}</h2>
+              {Variable.Static.showMainInput && <CommentInput item={news} />}
+              <If
+                data={news.comments.length > 0}
+                dataIf={
+                  <div data-type="news_comment" class="c-comments__posts post_comments">
+                    <div
+                      style={!news.comments && "display: none;"}
+                      class="c-comments__wrapper user_news_item"
+                    >
+                      <BlockUserComment comments={news.comments} />
+                    </div>
+                  </div>
+                }
+              />
             </div>
           </div>
         </div>

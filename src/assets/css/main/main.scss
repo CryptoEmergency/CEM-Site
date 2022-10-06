@@ -1421,6 +1421,28 @@ textarea {
     }
 }
 
+.c-goback {
+    z-index: 11111;
+    text-decoration: none;
+    cursor: pointer;
+
+    &__arrow {
+
+        @media (max-width: 1240px) {
+            width: 7px !important;
+            height: 13px;
+        }
+    }
+
+    &__text {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 17px;
+        color: #8A93AE;
+        margin-left: 10px;
+    }
+}
+
 /* !!! Запрет выделения */
 // body { -webkit-touch-callout: none !important; }
 // a { -webkit-user-select: none !important; }
