@@ -7,8 +7,6 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-import { BlockModal } from "@src/component/blocks/BlockModal.js";
-
 
 const start = function () {
 

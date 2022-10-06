@@ -24,8 +24,7 @@ const BlockMainNews = function () {
                                 <a
                                     class="blog_news_item"
                                     onClick={async () => {
-                                        let news;
-                                        news = await getNewsItemInShow(newsItem._id);
+                                        let news = await getNewsItemInShow(newsItem._id);
                                         news = news.list_records[0];
                                         Variable.SetModals({
                                             name: "ModalFullNews",
@@ -33,7 +32,10 @@ const BlockMainNews = function () {
                                         });
                                     }}
                                 >
-                                    <img style="width: 100px; margin-bottom: 20px" />
+                                    <img
+                                        style="width: 100px; margin-bottom: 20px"
+                                        src={`/assets/upload/news/${newsItem.image}`}
+                                    />
                                     <p style="width: 60%; margin-bottom: 20px" class="blog_new_title ">
                                         {newsItem.title}
                                     </p>
@@ -62,8 +64,7 @@ const BlockMainNews = function () {
                 </a>
             </div>
         </div>
-
     )
 }
-//I check
+
 export { BlockMainNews }
