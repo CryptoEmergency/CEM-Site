@@ -66,7 +66,7 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
         />
       </div>
       {nickNameAndDate && (
-        <div class="comment_name nickNameAndDate">
+        <div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
           <span>{author.nickname}</span>
           <br />
           <span>{getDateFormat(nickNameAndDate, "userComment")}</span>

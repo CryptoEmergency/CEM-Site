@@ -111,17 +111,17 @@ const ModalFullNews = function ({ news }, reload) {
                 </div>
               </div>
             </div>
-            <div class="c-fullnews__comments c-comments news_page_comments">{/*  */}
+            <div class="c-fullnews__comments c-comments">{/*  news_page_comments */}
               <h2 class="c-comments__title">{Variable.lang.h.modal_comment}</h2>
               {Variable.Static.showMainInput && <CommentInput item={news} />}
               <If
                 data={news.comments.length > 0}
                 dataIf={
-                  <div data-type="news_comment" class="c-comments__posts post_comments">
+                  <div data-type="news_comment" class="c-comments__posts">{/* post_comments */}
                     <div
                       style={!news.comments && "display: none;"}
-                      class="c-comments__wrapper user_news_item"
-                    >
+                      class="c-comments__wrapper"
+                    >{/* user_news_item */}
                       <BlockUserComment comments={news.comments} />
                     </div>
                   </div>

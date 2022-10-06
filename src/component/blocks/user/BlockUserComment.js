@@ -29,12 +29,12 @@ const BlockUserComment = function ({ comments }) {
   // console.log('=d0Variable.Static.answerAdditionallyeece1=',Variable.Static.answerAdditionally)
   return comments.map((item, i) => {
     return (
-      <div data-comment_comment={item._id} class="c-comments__usercomment main_comment userComment">
+      <div data-comment_comment={item._id} class="c-comments__usercomment">{/* main_comment userComment */}
         <Avatar author={item.author} parent={"c-comments__avacomment"} nickNameAndDate={item.showDate} />
         {Variable.Static.activeEditInputs.findIndex((it) => it === item._id) <
           0 ? (
-          <div class="c-comments__bodycomment comment_body">
-            <span class="c-comments__textcomment comment_text">{stringToHtml(item.text)} </span>
+          <div class="c-comments__bodycomment">{/* comment_body */}
+            <span class="c-comments__textcomment">{stringToHtml(item.text)} </span>{/* comment_text */}
           </div>
         ) : (
           <CommentInput

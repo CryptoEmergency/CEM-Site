@@ -4245,6 +4245,47 @@ s
 		padding: 0 10px;
 
 		.c-avataricon {
+
+			&__name {
+				top: 10px;
+				left: 53px;
+
+				&--show {
+					display: block;
+				}
+
+				span {
+
+					&:first-child {
+						font-size: 10px;
+						line-height: 6px;
+					}
+
+					&:nth-child(3) {
+						font-weight: 500;
+						font-size: 13px;
+						line-height: 22px;
+						color: #B0B7CD;
+						display: inline-block;
+						width: 300px;
+						display: inline;
+						position: relative;
+						top: -7px;
+					}
+				}
+			}
+
+			&__status {
+
+				&--online,
+				&--offline {
+					right: 17%;
+					bottom: 11%;
+					width: 10px;
+					height: 10px;
+				}
+			}
+
 			&--micro {
 				width: 36px;
 				height: 42px;
@@ -4259,11 +4300,23 @@ s
 		display: block;
 		width: 80px;
 		left: -15px;
+
+		.c-avataricon {
+
+			&__level {
+				display: none;
+			}
+		}
 	}
 
 	&__bodycomment {}
 
-	&__textcomment {}
+	&__textcomment {
+
+		p {
+			margin-top: 0;
+		}
+	}
 }
 
 /* modal #addBackground (Изменение фона) */

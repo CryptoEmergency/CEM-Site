@@ -21,6 +21,7 @@ const returnImgOrVideo = (item) => {
     item.media.length > 1 &&
     item.media.find((i) => i.type === "audio") == undefined
   ) {
+    // console.log('=1e395c=', 2)
     return (
 
       // <div class="swiper-container">
@@ -53,6 +54,7 @@ const returnImgOrVideo = (item) => {
       <Slider item={item} />
     );
   } else if (item.media.find((i) => i.type === "audio") == undefined) {
+    // console.log('=1e395c=', 1)
     return (
       item.media.find((i) => i.type === "image") !== undefined
         ?
@@ -67,6 +69,10 @@ const returnImgOrVideo = (item) => {
         //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
         <p>video </p>
     );
+  } else {
+    return (
+      <></>
+    )
   }
 };
 
@@ -77,11 +83,13 @@ const BlockLentaUsers = function ({ item }) {
   //   let jsx1 = parser.parseFromString(item.text, "text/html");
   //   //   let tmp = [...jsx1.body.childNodes];
 
+
+  // console.log('=50da23=', item, returnImgOrVideo(item))
   return (
     <div class="user_news_item" data-author={item.author._id}>
       <div class="main_comment" data-link={item._id} data-action="getPost">
         {/* {{>avatar author}}                     */}
-        <Avatar author={item.author} />
+        <Avatar author={item.author} nickNameAndDate={item.showDate} />
         <div class="comment_body">
           {item.media.length > 0 && returnImgOrVideo(item)}
 
@@ -112,7 +120,7 @@ const BlockLentaUsers = function ({ item }) {
           </div>
 
           {item.media.length > 0 ? (
-            <span data-text={item.text} class="comment_text">
+            <span class="comment_text">
               {/* {parseTextforJsx(item.text).map((item)=>{
                 return item
               })} */}
@@ -130,7 +138,7 @@ const BlockLentaUsers = function ({ item }) {
               </span>
             </div>
           ) : (
-            <span data-text={item.text} class="comment_text">
+            <span class="comment_text">
               {stringToHtml(Helpers.sanitizeHtml(item.text))}
               {/* {parseTextforJsx(item.text).map((item)=>{
                 return item

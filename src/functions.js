@@ -143,7 +143,6 @@ const getNewsItem = async function (type, count, category, mediaActveCategory) {
 
 const getDateFormat = function (data, type) {
   // const lang = getVariable("languages")[getStorage("lang")];
-  console.log('=942fc6=', Variable.lang.code)
   moment.locale(Variable.lang.code);
   //console.log("=b12dd9=", moment.locale());
   switch (type) {

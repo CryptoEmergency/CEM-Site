@@ -5,7 +5,7 @@ import {
     Variable
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { getDateFormat } from "@src/functions.js";
+
 
 const BlockExchange = function () {
     // console.log("BlockExchange", exchanges);

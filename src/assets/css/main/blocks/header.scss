@@ -420,6 +420,37 @@
         }
     }
 
+    &__name {
+        margin-bottom: 8px;
+        position: absolute !important;
+        top: 18px;
+        left: 85px;
+        display: block;
+        display: none;
+
+        span {
+            &:first-child {
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 22px;
+                color: #ffffff;
+                display: inline;
+            }
+
+            &:nth-child(3) {
+                font-weight: 500;
+                font-size: 13px;
+                line-height: 22px;
+                color: #B0B7CD;
+                display: inline-block;
+                width: 300px;
+                display: inline;
+                position: relative;
+                top: -7px;
+            }
+        }
+    }
+
     &--micro {
         width: 67px;
         height: 72px;
