@@ -38,7 +38,6 @@ const start = function () {
 
   init(
     async () => {
-      console.log('=d0ea68=',Variable.dataUrl)
       activeCategory = "All";
       newsCategory = await getNewsCategory("news");
       newsItem = await getNewsItem("news", count, activeCategory);
