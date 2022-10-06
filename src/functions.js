@@ -191,7 +191,8 @@ const siteLink = function (e) {
   // timersClear();
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
+    // behavior: "smooth",
+    behavior: "instant",
   });
   parsingUrl()
   //getAction("App", "start")();
