@@ -14,7 +14,7 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
   return (
     <a
       href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
-      class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : "comment_avatar"}`}
+      class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : parent == "c-comments__avacomment" ? "c-comments__avacomment" : "comment_avatar"}`}
       onclick={siteLink}
     >
       <div
@@ -69,7 +69,7 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
         <div class="comment_name nickNameAndDate">
           <span>{author.nickname}</span>
           <br />
-          <span>{getDateFormat(author.showDate, "userComment")}</span>
+          <span>{getDateFormat(nickNameAndDate, "userComment")}</span>
         </div>
       )}
     </a>
