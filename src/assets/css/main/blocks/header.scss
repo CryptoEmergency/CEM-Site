@@ -119,6 +119,11 @@
 
 .selectlink-control {
 
+    @media (max-width: 1199px) {
+        padding: 0;
+        background: inherit;
+    }
+
     span {
         margin-right: 28px;
         max-width: 100%;
@@ -955,24 +960,24 @@
 
     .selectlink {
 
-        // @media(max-width: 1199px) {
-        //     width: 100%;
-        // }
+        @media(max-width: 1199px) {
+            width: 100%;
+        }
     }
 
     .selectlink-control {
 
-        // @media(max-width: 1199px) {
-        //     width: 90%;
-        //     display: flex;
-        //     justify-content: space-between;
-        // }
+        @media(max-width: 1199px) {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+        }
 
         &::after {
 
-            // @media(max-width: 1199px) {
-            //     right: -15px;
-            // }
+            @media(max-width: 1199px) {
+                right: -15px;
+            }
         }
     }
 }
@@ -1005,9 +1010,9 @@
     text-align: left;
     margin: 10px;
 
-    // @media (max-width: 1199px) {
-    //     margin: 0;
-    // }
+    @media (max-width: 1199px) {
+        margin: 0;
+    }
 
     &-control {
         position: relative;
@@ -1017,10 +1022,10 @@
         cursor: pointer;
         align-items: center;
 
-        // @media (max-width: 1199px) {
-        //     padding: 0;
-        //     background: inherit;
-        // }
+        @media (max-width: 1199px) {
+            padding: 0;
+            background: inherit;
+        }
 
         &::after {
             content: "";

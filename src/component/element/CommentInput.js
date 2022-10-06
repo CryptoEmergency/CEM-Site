@@ -10,12 +10,12 @@ import {
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
 
-const CommentInput = function ({ nickname, item,commentId, edit }) {
+const CommentInput = function ({ nickname, item, commentId, edit }) {
   let count = 1;
   let scrollHeight = 0;
   let commentText = Variable.setRef();
   const changeTextarea = (e) => {
-    console.log('=d5a687=',commentText().value)
+    console.log('=d5a687=', commentText().value)
     let element = e.target;
     if (element.textLength === 1 && count == 1) {
       scrollHeight = element.scrollHeight;
@@ -34,7 +34,7 @@ const CommentInput = function ({ nickname, item,commentId, edit }) {
 
   const sendNewComment = async () => {
     let text = commentText().value.trim();
-    
+
     let response;
     if (text.length > 0) {
       let responce = await sendNewCommentApi(
@@ -43,28 +43,27 @@ const CommentInput = function ({ nickname, item,commentId, edit }) {
         commentId,
         edit
       );
-      console.log('=commentText().value=',text)
+      console.log('=commentText().value=', text)
       commentText().value = "";
       initGo();
     }
   };
   return (
-    <div class="create_post_coments">
+    <div class="c-comments__form create_post_coments">
       <div
-        class="create_post_container1"
-        //  style = {`${main ? " max-height:46px;" : " max-height:33px;"}`}
+        class="c-comments__field create_post_container1"
+      //  style = {`${main ? " max-height:46px;" : " max-height:33px;"}`}
       >
         <textarea
           wrap="soft"
           rows="1"
           cols="30"
-          class=" text1"
+          class=" text1 create_post_chapter"
           ref={commentText}
           oninput={changeTextarea}
-          style={`${
-            nickname !== undefined &&
+          style={`${nickname !== undefined &&
             "padding: 10px 40px 10px 25px;font-size: 10px;min-height: 46px;"
-          }`}
+            }`}
         >
           {nickname !== undefined && nickname + ","}
           {edit !== undefined && item.text}
@@ -75,9 +74,9 @@ const CommentInput = function ({ nickname, item,commentId, edit }) {
       <div
         onclick={sendNewComment}
         style=""
-        class="button-container-preview comments_send"
+        class="c-comments__send button-container-preview comments_send"
       >
-        <img src={svg["send_message"]} />
+        <img class="c-comments__icon" src={svg["send_message"]} />
       </div>
     </div>
   );
