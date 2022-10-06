@@ -29,6 +29,12 @@ import {
 import {
     BlockUserProfileSubscribes
 } from '@component/blocks/user/BlockUserProfileSubscribes.js';
+import {
+    BlockUserProfileAwards
+} from '@component/blocks/user/BlockUserProfileAwards.js';
+import {
+    BlockUserProfileSocials
+} from '@component/blocks/user/BlockUserProfileSocials.js';
 
 import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
@@ -100,12 +106,22 @@ const start = function () {
                 break;
             case 'awards':
                 return (
-                    <div></div>
+                    <BlockUserProfileAwards
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        haveFilter={true}
+                    />
                 )
                 break;
             case 'social':
                 return (
-                    <div></div>
+                    <BlockUserProfileSocials
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        haveFilter={true}
+                    />
                 )
                 break;
             case 'galary':
