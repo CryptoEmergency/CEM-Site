@@ -4243,7 +4243,27 @@ s
 	&__usercomment {
 		position: relative;
 		padding: 0 10px;
+
+		.c-avataricon {
+			&--micro {
+				width: 36px;
+				height: 42px;
+				top: 10px;
+				left: -4px;
+				margin-left: 0;
+			}
+		}
 	}
+
+	&__avacomment {
+		display: block;
+		width: 80px;
+		left: -15px;
+	}
+
+	&__bodycomment {}
+
+	&__textcomment {}
 }
 
 /* modal #addBackground (Изменение фона) */
