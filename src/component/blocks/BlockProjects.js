@@ -1,17 +1,13 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
-    makeDOM,
-    getVariable,
-    getStorage,
-    getValue,
-    Variable
+    Variable,
+    initOne,
+    initAfter
 } from '@betarost/cemjs';
 
-import Swiper from 'swiper';
-//import 'swiper/css';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 
 import svg from "@assets/svg/index.js";
 import { ProjectItem } from '@component/element/ProjectItem.js';
@@ -27,6 +23,10 @@ const doubleProject = function (projects) {
     }
     return doubleProject;
 };
+
+
+
+let swiperitem = {}
 
 const BlockProjects = function () {
 
@@ -89,7 +89,95 @@ const BlockProjects = function () {
         },
     ];
 
+    initOne(
+        () => {
+            swiperitem = {}
+        }
+    )
 
+    initAfter(
+        () => {
+            if (!swiperitem.one) {
+                swiperitem.one = new Swiper('#swiper-one', {
+                    direction: 'horizontal',
+                    navigation: {
+                        nextEl: '#next-icons',
+                        prevEl: '#prev-icons',
+                    },
+                    breakpoints: {
+                        20: {
+                            slidesPerView: 2,
+                            spaceBetween: 15
+                        },
+                        320: {
+                            slidesPerView: 3,
+                            spaceBetween: 15
+                        },
+                        425: {
+                            slidesPerView: 3,
+                            spaceBetween: 25
+                        },
+                        480: {
+                            slidesPerView: 3,
+                            spaceBetween: 65
+                        },
+                        768: {
+                            slidesPerView: 4,
+                            spaceBetween: 88
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: 158
+                        },
+                        1240: {
+                            slidesPerView: 9,
+                            spaceBetween: 66,
+                        },
+                    },
+                });
+            }
+
+            if (!swiperitem.desktop) {
+                swiperitem.desktop = new Swiper('#swiper-desktop', {
+                    direction: 'horizontal',
+                    navigation: {
+                        nextEl: '#next-desktop-icons',
+                        prevEl: '#prev-desktop-icons',
+                    },
+                    breakpoints: {
+                        320: {
+                            slidesPerView: 2,
+                            spaceBetween: 85
+                        },
+                        375: {
+                            slidesPerView: 2,
+                            spaceBetween: 125
+                        },
+                        425: {
+                            slidesPerView: 3,
+                            spaceBetween: 35
+                        },
+                        480: {
+                            slidesPerView: 3,
+                            spaceBetween: 65
+                        },
+                        768: {
+                            slidesPerView: 4,
+                            spaceBetween: 88
+                        },
+                        1024: {
+                            slidesPerView: 6,
+                            spaceBetween: 40
+                        },
+                        1240: {
+                            slidesPerView: 9,
+                            spaceBetween: 30,
+                        },
+                    },
+                });
+            }
+        }
+    )
 
     return (
         <div class="c-projects">
