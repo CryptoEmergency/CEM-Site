@@ -26,6 +26,10 @@ import {
 import {
     BlockUserProfileFollowers
 } from '@component/blocks/user/BlockUserProfileFollowers.js';
+import {
+    BlockUserProfileSubscribes
+} from '@component/blocks/user/BlockUserProfileSubscribes.js';
+
 import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
 const start = function () {
@@ -85,7 +89,12 @@ const start = function () {
                 break;
             case 'friends':
                 return(
-                    <div></div>
+                    <BlockUserProfileSubscribes
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        haveFilter={true}
+                    />
                 )
                 break;
             case 'awards':

@@ -12,14 +12,15 @@ import { getDateFormat } from '@src/functions.js'
 import { Avatar } from '@component/element/Avatar.js';
 import { If } from '@component/helpers/All.js'
 
-const BlockUserProfileFollowers = function ({ lang, myInfo, userInfo, data, followers, haveFilter=false }) {
-    const ListFollowers = Object.keys(followers.list_records).map(function (key) {
+const BlockUserProfileSubscribes = function ({ lang, myInfo, userInfo, data, haveFilter=false }) {
+    console.log(userInfo.subscribed)
+    const ListSubscribes = Object.keys(userInfo.subscribed).map(function (key) {
         return (
-            <div class="friend" data-action="link" data-href={'/user/' + followers.list_records[key].nickname}>
-                <Avatar author={followers.list_records[key]} />                  
+            <div class="friend" data-action="link" data-href={'/user/' + userInfo.subscribed[key].nickname}>
+                <Avatar author={userInfo.subscribed[key]} />                  
                 <div class="friend_info">
-                    <p>{followers.list_records[key].nickname}</p>
-                    <p>{followers.list_records[key].fullname ? followers.list_records[key].fullname : ''}</p>  
+                    <p>{userInfo.subscribed[key].nickname}</p>
+                    <p>{userInfo.subscribed[key].fullname ? userInfo.subscribed[key].fullname : ''}</p>  
                 </div>
             </div>
         )
@@ -74,12 +75,12 @@ const BlockUserProfileFollowers = function ({ lang, myInfo, userInfo, data, foll
                             </div>
                         </div>
                         <div class="friends_block">
-                            {ListFollowers}
+                            {ListSubscribes}
                         </div>
                     </div>
                 }
                 dataElse={
-                    {ListFollowers}
+                    {ListSubscribes}
                 }
             />
         </div>
@@ -87,4 +88,4 @@ const BlockUserProfileFollowers = function ({ lang, myInfo, userInfo, data, foll
     )
 }
 
-export { BlockUserProfileFollowers };
+export { BlockUserProfileSubscribes };
