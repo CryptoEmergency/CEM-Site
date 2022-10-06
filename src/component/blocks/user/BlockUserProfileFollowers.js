@@ -12,14 +12,14 @@ import { getDateFormat } from '@src/functions.js'
 import { Avatar } from '@component/element/Avatar.js';
 import { If } from '@component/helpers/All.js'
 
-const BlockUserProfileFollowers = function ({ lang, myInfo, userInfo, data, followers, haveFilter=false }) {
+const BlockUserProfileFollowers = function ({ lang, myInfo, userInfo, data, followers, haveFilter = false }) {
     const ListFollowers = Object.keys(followers.list_records).map(function (key) {
         return (
             <div class="friend" data-action="link" data-href={'/user/' + followers.list_records[key].nickname}>
-                <Avatar author={followers.list_records[key]} />                  
+                <Avatar author={followers.list_records[key]} />
                 <div class="friend_info">
                     <p>{followers.list_records[key].nickname}</p>
-                    <p>{followers.list_records[key].fullname ? followers.list_records[key].fullname : ''}</p>  
+                    <p>{followers.list_records[key].fullname ? followers.list_records[key].fullname : ''}</p>
                 </div>
             </div>
         )
@@ -32,7 +32,7 @@ const BlockUserProfileFollowers = function ({ lang, myInfo, userInfo, data, foll
                 dataIf={
                     <div class="friends friends_block_container" data-type="{{typeSearch}}">
                         <h2></h2>
-                        <div class="friends_search">
+                        {/* <div class="friends_search">
                             <div class="friends_search_top">
                                 <input autocomplete="off" type="text" data-keyup="friendsSearchType" data-type="followers" placeholder="{{findPreholder}}"/>
                                 <div class="filter_summoner" data-action="filterSummoner">
@@ -72,14 +72,14 @@ const BlockUserProfileFollowers = function ({ lang, myInfo, userInfo, data, foll
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div class="friends_block">
                             {ListFollowers}
                         </div>
                     </div>
                 }
                 dataElse={
-                    {ListFollowers}
+                    { ListFollowers }
                 }
             />
         </div>

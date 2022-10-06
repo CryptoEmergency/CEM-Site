@@ -29,6 +29,7 @@ const start = function () {
 
     Variable.HeaderShow = false
     Variable.FooterShow = false
+    Variable.showUserMenu = true
 
     const userBlackList = function () {
         const BlackListBlock = Object.keys(blackList.list_records[0].blackList).map(function (key) {
@@ -42,20 +43,20 @@ const start = function () {
                 </li>
             )
         })
-    
+
         return (
             <ul class="settings_blacklist">
-                {BlackListBlock}                     
+                {BlackListBlock}
             </ul>
         )
     }
 
-    const changePasswordForm = async function(e){
+    const changePasswordForm = async function (e) {
         e.preventDefault()
         await changePassword(this.oldPassword.value, this.newPassword.value)
     }
 
-    const showPassword = async function() {
+    const showPassword = async function () {
         console.log(this.src)
         if (inputType[this.dataset.type]) {
             inputType[this.dataset.type] = false
@@ -67,12 +68,12 @@ const start = function () {
         initReload()
     }
 
-    const changeCategory = async function(){
+    const changeCategory = async function () {
         currentCategory = this.dataset.type
         initReload()
     }
 
-    const deleteFromBlacklist = async function(){
+    const deleteFromBlacklist = async function () {
         await deleteUserFromBlacklist(this.dataset.id)
         blackList = await getUserBlackList()
         initReload()
@@ -126,9 +127,9 @@ const start = function () {
                                                     <div class="error-div-variant">{Variable.lang.error_div.password5}</div>
                                                 </div>
                                                 <div class="input-div">
-                                                    <img src={svg['lock']} class="icon-input"/>
-                                                    <input data-keyup="keyupValidate" data-form_type="changePassword" data-dirty="false" data-focusout="focusout" data-validate_type="password" required="required" id="oldPassword" placeholder={Variable.lang.placeholder.oldPassword} type={inputType.oldPassword ? 'password' : 'text'}/>
-                                                    <img src={svg['eye']} data-type="oldPassword" class="password_eye" onclick={showPassword}/>
+                                                    <img src={svg['lock']} class="icon-input" />
+                                                    <input data-keyup="keyupValidate" data-form_type="changePassword" data-dirty="false" data-focusout="focusout" data-validate_type="password" required="required" id="oldPassword" placeholder={Variable.lang.placeholder.oldPassword} type={inputType.oldPassword ? 'password' : 'text'} />
+                                                    <img src={svg['eye']} data-type="oldPassword" class="password_eye" onclick={showPassword} />
                                                 </div>
                                             </div>
                                             <div class="container-input">
@@ -142,15 +143,15 @@ const start = function () {
                                                     <div class="error-div-variant">{Variable.lang.error_div.password5}</div>
                                                 </div>
                                                 <div class="input-div">
-                                                    <img src={svg['lock']} class="icon-input"/>
-                                                    <input data-keyup="keyupValidate" data-form_type="changePassword" data-dirty="false" data-focusout="focusout" data-validate_type="password" required="required" id="newPassword" placeholder={Variable.lang.placeholder.newPassword} type={inputType.newPassword ? 'password' : 'text'}/>
-                                                    <img src={svg['eye']} data-type="newPassword" class="password_eye" onclick={showPassword}/>
+                                                    <img src={svg['lock']} class="icon-input" />
+                                                    <input data-keyup="keyupValidate" data-form_type="changePassword" data-dirty="false" data-focusout="focusout" data-validate_type="password" required="required" id="newPassword" placeholder={Variable.lang.placeholder.newPassword} type={inputType.newPassword ? 'password' : 'text'} />
+                                                    <img src={svg['eye']} data-type="newPassword" class="password_eye" onclick={showPassword} />
                                                 </div>
                                             </div>
                                             <button style={style.formButton}>
-                                            <div type="button" class="reset-btn" data-form_type="changePassword" id="changePassword" data-action="changePassword">
-                                                <a class="btn-reset"><span>{Variable.lang.button.save}</span></a>
-                                            </div>
+                                                <div type="button" class="reset-btn" data-form_type="changePassword" id="changePassword" data-action="changePassword">
+                                                    <a class="btn-reset"><span>{Variable.lang.button.save}</span></a>
+                                                </div>
                                             </button>
                                         </div>
                                     </form>
@@ -190,7 +191,7 @@ const start = function () {
                                 </div>
                             </div>
 
-                            <div style={currentCategory == 'blackList' ? '' : 'display: none;'}  data-type="blackList" class="settings_body_item">
+                            <div style={currentCategory == 'blackList' ? '' : 'display: none;'} data-type="blackList" class="settings_body_item">
                                 <div class="setting_body_item_chapter">
                                     {userBlackList()}
                                 </div>

@@ -34,21 +34,21 @@ import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
 const start = function () {
 
-    const currentCategory = function(){
+    const currentCategory = function () {
         console.log(tabType)
-        switch(tabType){
+        switch (tabType) {
             case 'lentaFriends':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'lentaUser':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'aboutUser':
-                return(
+                return (
                     <BlockUserProfileAbout
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -57,7 +57,7 @@ const start = function () {
                 )
                 break;
             case 'questions':
-                return(
+                return (
                     <BlockUserProfileQuestions
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -67,7 +67,7 @@ const start = function () {
                 )
                 break;
             case 'answers':
-                return(
+                return (
                     <BlockUserProfileAnswers
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -77,7 +77,7 @@ const start = function () {
                 )
                 break;
             case 'subscribers':
-                return(
+                return (
                     <BlockUserProfileFollowers
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -88,7 +88,7 @@ const start = function () {
                 )
                 break;
             case 'friends':
-                return(
+                return (
                     <BlockUserProfileSubscribes
                         lang={Variable.lang}
                         myInfo={Variable.myInfo}
@@ -98,34 +98,34 @@ const start = function () {
                 )
                 break;
             case 'awards':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'social':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'galary':
-                return(
+                return (
                     <div></div>
                 )
                 break;
             case 'donation':
-                return(
+                return (
                     <div></div>
                 )
                 break;
         }
     }
 
-    const changeType = async function(){
-        if(this.dataset.tabtype == tabType){
+    const changeType = async function () {
+        if (this.dataset.tabtype == tabType) {
             return
         }
         tabType = this.dataset.tabtype
-        
+
         initReload()
     }
 
@@ -148,7 +148,7 @@ const start = function () {
                 answers = await getUserAnswers(userInfo._id)
                 followers = await getUserFollowers(userInfo._id)
                 console.log(followers)
-                tabType = 'lentaFriends'
+                tabType = 'aboutUser'
             } else {
                 // setValue(ID, 'userInfoProfile', await getUserInfoProfile(dataUrl.params));
                 tabType = 'aboutUser'

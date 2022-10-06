@@ -84,7 +84,7 @@ const BlockQuestions = function ({ button }) {
                         </div>
                     </div>
                     <div data-needauth="true" data-action="askQuestionModal" class="mobile_search_container">
-                        <div class="search-button" style="width:238px;">
+                        <div class="search-button c-button--inactive" style="width:238px;">
                             {Variable.lang.button.giveQuestion}
                         </div>
                     </div>
@@ -101,9 +101,9 @@ const BlockQuestions = function ({ button }) {
                         toggler={true}
                     />
 
-                    <div class="c-questions__lang">
+                    {/* <div class="c-questions__lang">
                         {Variable.languages[filters.MainQuestions.lang].lang_orig}
-                    </div>
+                    </div> */}
                 </div>
 
                 <h4>{Variable.lang.h.lastQuestions}</h4>

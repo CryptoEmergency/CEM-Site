@@ -277,13 +277,13 @@ const mainHeader = async function () {
                                     <img src={svg.user_news_page} />
                                     <div class="c-userpanel__description">{Variable.lang.span.userNews}</div>
                                 </a>
-                                <a
+                                {/* <a
                                     onclick={siteLink}
                                     class="c-userpanel__icon c-userpanel__icon--mobile_visible"
                                 >
                                     <img src={svg.plus_in_circle} />
-                                </a>
-                                <a
+                                </a> */}
+                                {/* <a
                                     onclick={siteLink}
                                     class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : ""}`}
                                     href="/user/chats/"
@@ -291,24 +291,25 @@ const mainHeader = async function () {
                                     <img src={svg["profile_icon-2"]} />
                                     <div class="c-userpanel__description">{Variable.lang.a.chats}</div>
                                     <div style="display: none;" class="c-userpanel__counter"></div>
-                                </a>
-                                <a
+                                </a> */}
+                                {/* <a
                                     onclick={siteLink}
                                     class={`c-userpanel__icon ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "awards") ? "c-userpanel__icon--active" : ""}`}
                                     href="/user/awards/"
                                 >
                                     <img src={svg["profile_icon-4"]} />
                                     <div class="c-userpanel__description">{Variable.lang.a.awards}</div>
-                                </a>
-                                <a
+                                </a> */}
+                                {/* <a
                                     onclick={siteLink}
                                     class={`c-userpanel__icon  ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "quests") ? "c-userpanel__icon--active" : ""}`}
                                     href="/user/quests/"
                                 >
                                     <img src={svg["profile_icon-10"]} />
                                     <div class="c-userpanel__description">{Variable.lang.a.tasks}</div>
-                                </a>
+                                </a> */}
                                 <a
+                                    href="/user/notify/"
                                     style="margin-bottom: 15px;"
                                     class="c-userpanel__icon c-userpanel__icon--notification c-userpanel__icon--mobile_visible user_panel_notify"
                                     onclick={siteLink}
@@ -335,13 +336,13 @@ const mainHeader = async function () {
                                     <img src={svg["profile_icon-3"]} />
                                     <div class="c-userpanel__description">{Variable.lang.a.affiliate}</div>
                                 </a>
-                                <If
+                                {/* <If
                                     data={Variable.auth}
                                     dataIf={<a class="c-userpanel__icon" href="/logout/" onclick={siteLink}>
                                         <img src={svg["exit-icon"]} />
                                         <div class="c-userpanel__description">{Variable.lang.a.exit}</div>
                                     </a>}
-                                />
+                                /> */}
                                 <a
                                     id="mobileUserMenuShow"
                                     class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"

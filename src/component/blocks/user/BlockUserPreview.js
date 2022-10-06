@@ -23,7 +23,7 @@ const BlockUserPreview = function ({ userInfo }) {
                     src={userInfo.background ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
                 />
 
-                <div class="c-userpreview__buttons">
+                {/* <div class="c-userpreview__buttons">
                     <div class="c-userpreview__container">
                         <a class="c-userpreview__btn">
                             <span>
@@ -36,13 +36,13 @@ const BlockUserPreview = function ({ userInfo }) {
                             </span>
                         </a>
                     </div>
-                </div>
+                </div> */}
 
                 <div class="c-userpreview__settings">
-                    <img
+                    {/* <img
                         class="c-userpreview__toggler"
                         src={svg.user_custimize_settings}
-                    />
+                    /> */}
                     <div
                         style="display: none;"
                         class="c-userpreview__menu"
@@ -100,7 +100,8 @@ const BlockUserPreview = function ({ userInfo }) {
                 <div class="c-usershortinfo__main">
                     <a class="c-usershortinfo__"></a>
                     <a class="c-usershortinfo__flag">
-                        <img src={userInfo.country.code ? svg["flagsnew/" + userInfo.country.code] : svg["flagsnew/olympics"]} />
+                        {/* <img src={userInfo.country.code ? svg["flagsnew/" + userInfo.country.code] : svg["flagsnew/olympics"]} /> */}
+                        <img src={userInfo.country.code ? `/assets/icons/flagsnew/${userInfo.country.code}.svg` : "/assets/icons/flagsnew/olympics.svg"} />
                     </a>
                     <img class="c-usershortinfo__edit" src={svg.pencil} />
                     <input
