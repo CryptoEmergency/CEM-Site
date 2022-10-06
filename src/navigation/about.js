@@ -7,7 +7,6 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-
 const start = function () {
 
   Variable.HeaderShow = true
@@ -20,15 +19,9 @@ const start = function () {
         <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
           <div class="c-aboutus__whowe c-whowe who_we_are">
             <div class="c-whowe__inner who_we_are_inner">
-              <h2
-                class="c-whowe__title"
-              // onClick={() => {
-              //   Variable.SetModals({ name: "ModalReset copy", data: {} })
-              // }}
-              >{Variable.lang.h.who_are_we}
-
+              <h2 class="c-whowe__title">
+                {Variable.lang.h.who_are_we}
               </h2>
-
               <img
                 class="c-whowe__img about_us_vector-1"
                 src={svg["background/about_us_vector-1"]}
@@ -162,8 +155,6 @@ const start = function () {
                   <p>{Variable.lang.p.aboutProjectDateTwo}</p>
                 </div>
                 <div
-                  // target="_blank"
-                  // href="https://www.crypto-vpn.online"
                   class="projects_item"
                 >
                   <img src={images["about_us_banner7"]} />
@@ -181,5 +172,5 @@ const start = function () {
       )
     })
 };
-
+//I check
 export default start;
