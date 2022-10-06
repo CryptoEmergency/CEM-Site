@@ -24,9 +24,9 @@ const start = function () {
             <div class="c-whowe__inner who_we_are_inner">
               <h2
                 class="c-whowe__title"
-                onClick={() => {
-                  Variable.SetModals({ name: "ModalReset copy", data: {} })
-                }}
+              // onClick={() => {
+              //   Variable.SetModals({ name: "ModalReset copy", data: {} })
+              // }}
               >{Variable.lang.h.who_are_we}
 
               </h2>

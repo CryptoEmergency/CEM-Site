@@ -210,7 +210,7 @@ const start = function () {
             )
             )
 
-            Variable.SwiperLoad.push(swiperLoad)
+            //Variable.SwiperLoad.push(swiperLoad)
 
         },
         () => {
