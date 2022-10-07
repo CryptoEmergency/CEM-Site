@@ -3,7 +3,10 @@ import {
     jsxFrag,
     timersStart,
     sendApi,
+    getStorage,
+    setStorage,
     init,
+    initReload,
     Variable,
     Helpers
 } from '@betarost/cemjs';
@@ -40,7 +43,7 @@ const start = function () {
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockPreview />
                     <BlockProjects />
-                    {/* <div class="c-main__wrapperbg">
+                    <div class="c-main__wrapperbg">
                         <BlockQuestions
                             button={
                                 <div class="c-questions__footer">
@@ -53,6 +56,16 @@ const start = function () {
                                     </a>
                                 </div>
                             }
+                            callBack={
+                                async function (active, nameOptions) {
+                                    let filters = getStorage("filters")
+                                    filters.MainQuestions[nameOptions] = active
+                                    setStorage("filters", filters)
+                                    Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, name: "MainQuestions" });
+                                    initReload();
+                                }
+                            }
+                            items={Variable.MainQuestions}
                         />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
@@ -74,7 +87,7 @@ const start = function () {
                                 />
                             </div>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             )
         })

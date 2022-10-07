@@ -2,15 +2,11 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  getValue,
-  initReload,
   initOne
 } from "@betarost/cemjs";
+
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
-// changeSelect, type, selectObject, ID, selectTitle
-
-
 
 const Select = function ({ options, callback, toggler = null }) {
   let optionsActive
@@ -28,9 +24,6 @@ const Select = function ({ options, callback, toggler = null }) {
       if (selectIndex == index) {
         options.active = item.value
         optionsActive = item.text
-        // item.active = true
-      } else {
-        //item.active = false
       }
     })
     options.elemActive().innerHTML = optionsActive
@@ -38,18 +31,12 @@ const Select = function ({ options, callback, toggler = null }) {
     callback(options.active, options.nameOptions)
   }
 
-
-
   const optionsElem = options.items.map((item, index) => {
     if (options.active == item.value) {
       optionsActive = item.text
     }
     return (
-      <li
-        onClick={() => {
-          changeSelect(index)
-        }}
-      >
+      <li onClick={() => { changeSelect(index) }}>
         {item.text}
       </li>
     );
@@ -82,18 +69,17 @@ const Select = function ({ options, callback, toggler = null }) {
         <ul
           ref={options.elem}
           class="justselect-list"
-          hidden
-        // style={options.open ? "display:none" : "display : none"}
+          hidden={true}
         >
           {optionsElem}
         </ul>
       </div>
       <If
         data={toggler}
-        dataIf={<img data-sort="DESC" class="filter_sort_toggler" data-action="toggleFilterSort" src={svg.filter_arrow_bottom} />}
+        dataIf={<img data-sort="DESC" class="filter_sort_toggler" src={svg.filter_arrow_bottom} />}
       />
     </div>
   );
 };
-
+//I check (Туглер сортировку сделать)
 export { Select };
