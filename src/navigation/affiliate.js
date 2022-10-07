@@ -16,10 +16,7 @@ const start = function () {
     null,
     () => {
       return (
-        <div
-          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-            } c-aboutus about_us_container`}
-        >
+        <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <img
             class="affiliate_program_blur"
             style="position: absolute; right: 0;"

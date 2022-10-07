@@ -16,7 +16,7 @@ const start = function () {
     null,
     () => {
       return (
-        <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} c-aboutus about_us_container`}>
+        <div class={['c-aboutus about_us_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <div class="c-aboutus__whowe c-whowe who_we_are">
             <div class="c-whowe__inner who_we_are_inner">
               <h2 class="c-whowe__title">
@@ -163,8 +163,6 @@ const start = function () {
                   </span>
                   <p>{Variable.lang.p.aboutProjectDateTwo}</p>
                 </div>
-
-
               </div>
             </div>
           </div>

@@ -27,6 +27,8 @@ const start = function () {
 
     init(
         async () => {
+            // let tmp = await sendApi.send({ action: "getCourse", short: true, cache: true });
+            // console.log("tmp", tmp)
 
             Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse }))
             timersStart("Course", timerCourse, 10000)

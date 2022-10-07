@@ -135,5 +135,13 @@
 			"})}"
 		],
 		"description": ""
+	},
+	"Задаём class с условием": {
+		"scope": "javascript,typescript",
+		"prefix": "_class",
+		"body": [
+			"class={['${1:По умолчанию}',${2:Условие} ? ${3:Если} : ${4:null}]}"
+		],
+		"description": ""
 	}
 }
