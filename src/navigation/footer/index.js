@@ -346,7 +346,7 @@ const mainFooter = async function () {
                                             class="c-userpanel__icon c-userpanel__icon--logo"
                                             href="/"
                                             onclick={siteLink}>
-                                            <img width="45" height="39" src={svg["mini_logo"]} />
+                                            <img src={svg["mini_logo"]} />
                                         </a>
                                         <a
                                             class={`c-userpanel__icon c-userpanel__icon--only_mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
