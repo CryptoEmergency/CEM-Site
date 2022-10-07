@@ -264,6 +264,7 @@ const allValidation = (str, type, condition) => {
     // return str = !str;
   }
   if (type = "nickName"){
+    return validator.matches(str,  /^[a-zA-Z0-9_-]{3,16}$/);
     
   }
 };

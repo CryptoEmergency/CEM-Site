@@ -43,6 +43,8 @@ const closeAnswerAdditionally = (e) => {
   Variable.Static.answerAdditionallyShow = "";
 }
 
+
+
 const NumFormat = function (value, options) {
   if (value === null || value === undefined) {
       return 0;
