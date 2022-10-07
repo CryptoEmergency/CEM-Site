@@ -21973,6 +21973,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
   display: flex
 }
 
+.my_answers_title_block .comment_avatar {
+  padding-left: 0;
+}
+
 .my_answers_title_block .normal_user_avatar {
   margin-right: 15px;
 }

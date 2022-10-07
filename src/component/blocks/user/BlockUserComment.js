@@ -91,93 +91,91 @@ const BlockUserComment = function ({ comments }) {
                   : "display : none"
               }
             >
-              <div>
+              <If
+                data={item.author._id === myInfo._id}
+                dataIf={
+                  <ul class="c-actioncomment__list answer_additionally">
+                    <li
+                      class="c-actioncomment__item answer_additionally_item delete"
+                      onclick={(e) => {
+                        closeAnswerAdditionally(e);
+
+                        e.target.parentElement.parentElement.parentElement.style = "display : none"
+                        Variable.SetModals({
+                          name: "ModalDelComment",
+                          data: { id: item._id, mainCom: true },
+                        }, true);
+
+                      }}
+                    >
+                      {Variable.lang.select.delete}
+                    </li>
+                    <li
+                      class="c-actioncomment__item answer_additionally_item edit"
+                      onclick={(e) => {
+                        closeAnswerAdditionally(e);
+                        if (Variable.Static.activeEditInputs.findIndex(
+                          (it) => it === item._id
+                        ) < 0) {
+                          Variable.Static.activeEditInputs.push(item._id);
+
+                        } initReload();
+                      }}
+                    >
+                      {Variable.lang.button.edit}
+                    </li>
+                  </ul>
+                }
+                dataElse={
+                  <ul class="c-actioncomment__list answer_additionally">
+                    <li
+                      class="c-actioncomment__item answer_additionally_item complain c-text--error"
+                      onclick={(e) => {
+                        closeAnswerAdditionally(e);
+                        e.target.parentElement.parentElement.parentElement.style = "display : none"
+                        Variable.SetModals({
+                          name: "ModalComplainComment",
+                          data: { id: item._id, mainCom: true },
+                        }, true);
+                      }}
+                    >
+                      {Variable.lang.select.complainComment}
+                    </li>
+                    <li class="c-actioncomment__item answer_additionally_item complain c-text--error">
+                      {Variable.lang.select.complainUser}
+                    </li>
+                    <li
+                      class="c-actioncomment__item answer_additionally_item block c-text--error"
+                      onclick={(e) => {
+
+                        closeAnswerAdditionally(e);
+                        e.target.parentElement.parentElement.parentElement.style = "display : none"
+
+
+                        Variable.SetModals({
+                          name: "ModalBlackList",
+                          data: { id: item.author._id },
+                        }, true);
+                      }}
+                    >
+                      {Variable.lang.select.blackList}
+                    </li>
+                  </ul>
+                }
+              />
+              {!isEmpty(myInfo) && (
                 <If
-                  data={item.author._id === myInfo._id}
+                  data={myInfo.status.role}
                   dataIf={
-                    <ul class="c-actioncomment__list answer_additionally">
-                      <li
-                        class="c-actioncomment__item answer_additionally_item delete"
-                        onclick={(e) => {
-                          closeAnswerAdditionally(e);
-
-                          e.target.parentElement.parentElement.parentElement.style = "display : none"
-                          Variable.SetModals({
-                            name: "ModalDelComment",
-                            data: { id: item._id, mainCom: true },
-                          }, true);
-
-                        }}
-                      >
-                        {Variable.lang.select.delete}
-                      </li>
-                      <li
-                        class="c-actioncomment__item answer_additionally_item edit"
-                        onclick={(e) => {
-                          closeAnswerAdditionally(e);
-                          if (Variable.Static.activeEditInputs.findIndex(
-                            (it) => it === item._id
-                          ) < 0) {
-                            Variable.Static.activeEditInputs.push(item._id);
-
-                          } initReload();
-                        }}
-                      >
-                        {Variable.lang.button.edit}
-                      </li>
-                    </ul>
-                  }
-                  dataElse={
-                    <ul class="c-actioncomment__list answer_additionally">
-                      <li
-                        class="c-actioncomment__item answer_additionally_item complain c-text--error"
-                        onclick={(e) => {
-                          closeAnswerAdditionally(e);
-                          e.target.parentElement.parentElement.parentElement.style = "display : none"
-                          Variable.SetModals({
-                            name: "ModalComplainComment",
-                            data: { id: item._id, mainCom: true },
-                          }, true);
-                        }}
-                      >
-                        {Variable.lang.select.complainComment}
-                      </li>
-                      <li class="c-actioncomment__item answer_additionally_item complain c-text--error">
-                        {Variable.lang.select.complainUser}
-                      </li>
-                      <li
-                        class="c-actioncomment__item answer_additionally_item block c-text--error"
-                        onclick={(e) => {
-
-                          closeAnswerAdditionally(e);
-                          e.target.parentElement.parentElement.parentElement.style = "display : none"
-
-
-                          Variable.SetModals({
-                            name: "ModalBlackList",
-                            data: { id: item.author._id },
-                          }, true);
-                        }}
-                      >
-                        {Variable.lang.select.blackList}
-                      </li>
-                    </ul>
+                    <div
+                      style="color: #32DE80"
+                      class="c-actioncomment__item answer_additionally_item delete"
+                    >
+                      {Variable.lang.select.delete}
+                    </div>
                   }
                 />
-                {!isEmpty(myInfo) && (
-                  <If
-                    data={myInfo.status.role}
-                    dataIf={
-                      <div
-                        style="color: #32DE80"
-                        class="c-actioncomment__item answer_additionally_item delete"
-                      >
-                        {Variable.lang.select.delete}
-                      </div>
-                    }
-                  />
-                )}
-              </div>
+              )}
             </div>
           </div>
           {/* {{#is myInfo.role 1}}    

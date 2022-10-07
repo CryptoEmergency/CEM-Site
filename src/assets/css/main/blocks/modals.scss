@@ -4497,12 +4497,20 @@ s
 		cursor: default;
 
 		ul {
-			list-style-type: none;
-			padding: 0;
+			padding: 10px;
+			height: 100%;
+			width: 100%;
 			margin: 0;
+			background: linear-gradient(129.93deg, rgba(173, 182, 206, 0.12) 12.75%, rgba(173, 182, 206, 0.02) 106.18%);
+			border-radius: 10px;
+			list-style-type: none;
 		}
 
-		li {}
+		li {
+			margin: 7px 5px;
+			font-weight: 600;
+			cursor: pointer;
+		}
 	}
 
 	&>* {
