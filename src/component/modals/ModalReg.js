@@ -210,7 +210,7 @@ const sendRegistration = async function (e) {
 
     if (tmpRes.status === 'ok') {
         Variable.DelModals("ModalReg")
-        Variable.SetModals({ name: "ModalConfirmCode", data: { wayReg } })
+        Variable.SetModals({ name: "ModalConfirmCode", data: { way: wayReg } })
         initReload()
     } else {
         Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
