@@ -148,6 +148,17 @@ const getUserSubscribes = async (ID) => {
   return response
 }
 
+const getUserByNickname = async (nickname) => {
+  let data = {
+    filter:{
+      nickname: nickname
+    },
+    limit: 1
+  }
+  let response = checkAnswerApi(await sendApi.create("getUsers", data));
+  return response
+}
+
 export {
-  mainTrades, getUserTransactions, getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist, getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes
+  mainTrades, getUserTransactions, getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist, getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes, getUserByNickname
 };
