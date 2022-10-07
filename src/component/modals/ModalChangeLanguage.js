@@ -22,7 +22,6 @@ const ModalChangeLanguage = function (data, reload) {
     inputValue = "" 
     allLang =Variable.listsLang;
   }
-console.log('=71cc1a=',data)
   return (
     <div class="c-modal c-modal--open" id="ModalWhoLike">
       <section class="c-modal__dialog">
@@ -31,7 +30,8 @@ console.log('=71cc1a=',data)
           <button
             class="c-modal__close"
             onclick={() => {
-              Variable.Modals = [];
+              Variable.DelModals("ModalChangeLanguage");
+              initReload("modals");
             }}
           ></button>
         </header>
@@ -44,7 +44,7 @@ console.log('=71cc1a=',data)
           <div class="changeLanguageContainer">
             {allLang.map((item) => {
               let str = `${item.eng_name} (${item.orig_name})`
-              console.log('=ccf1ca=',str)
+
                return <div class = "changeLanguageItem" onclick = {() => {data.changeLanguage(str)}}>{str}</div>
             })}
           </div>

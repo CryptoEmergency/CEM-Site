@@ -17,7 +17,6 @@ const changeInput = async (e) => {
       formInputs[type].error = Variable.lang.error_div.nicknameErr4;
     } else {
       response = await checkNickName(value);
-      console.log('=935297=',response)
       if (response > 0) {
         formInputs[type].error = Variable.lang.error_div.nicknameErr11;
       }
@@ -30,7 +29,6 @@ const changeInput = async (e) => {
     formInputs[type].error = Variable.lang.error_div.nicknameErr;
   }
 
-  console.log("=formInputs[type].error=", formInputs[type].error);
   if (formInputs[type].error === "") {
     formInputs[type].valid = true;
   } else {
@@ -40,11 +38,20 @@ const changeInput = async (e) => {
 };
 
 const changeLanguage = (data) => {
-    Variable.Modals.pop();
     console.log('=622cd3=',data)
     formInputs.language.value = data;
     formInputs.language.valid = true;
+    Variable.DelModals("ModalChangeLanguage")
+    initReload("modals")
+}
 
+const changeCountry = (data) =>{
+    
+    console.log('=622cd3=',data)
+    formInputs.country.value = data;
+    formInputs.country.valid = true;
+    Variable.DelModals("ModalSelectCountry")
+    initReload("modals")
 }
 
 const ModalAfterRegisterForm = function (data, reload) {
@@ -71,7 +78,6 @@ const ModalAfterRegisterForm = function (data, reload) {
     <div class="c-modal c-modal--open" id="ModalAfterRegisterForm">
       <section class="c-modal__dialog">
         <header class="c-modal__header">
-          <h2 class="c-modal__title">{Variable.lang.text.evaluated}</h2>
           <button
             type="button"
             class="c-modal__close"
@@ -171,7 +177,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                         placeholder={Variable.lang.error_div.selectFromList}
                         value={formInputs.language.value}
                         onclick = {() => {
-                            Variable.SetModals({ name: "ModalChangeLanguage", data: {changeLanguage} })
+                            Variable.SetModals({ name: "ModalChangeLanguage", data: {changeLanguage} },true);
                         }}
                       />
                       <div
@@ -197,6 +203,10 @@ const ModalAfterRegisterForm = function (data, reload) {
                       type="text"
                       autocomplete="off"
                       readonly
+                      value={formInputs.country.value}
+                      onclick = {() => {
+                          Variable.SetModals({ name: "ModalSelectCountry", data: {changeCountry} },true);
+                      }}
                       placeholder={Variable.lang.error_div.selectFromList}
                     />
                     <div
