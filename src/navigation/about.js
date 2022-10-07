@@ -19,7 +19,11 @@ const start = function () {
         <div class={['c-aboutus about_us_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <div class="c-aboutus__whowe c-whowe who_we_are">
             <div class="c-whowe__inner who_we_are_inner">
-              <h2 class="c-whowe__title">
+              <h2 class="c-whowe__title"
+                onclick={() => {
+                  Variable.SetModals({ name: "ModalConfirmCode", data: {} })
+                }}
+              >
                 {Variable.lang.h.who_are_we}
               </h2>
               <img

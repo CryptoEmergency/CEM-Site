@@ -278,7 +278,7 @@ const ModalAuth = function () {
                         <div class="container-input">
                             <label for="password">{Variable.lang.label.password}</label>
                             <If
-                                data={formInputs.pass.error != ""}
+                                data={formInputs.pass.error}
                                 dataIf={
                                     <div class="error-div">
                                         <div class="error-div-variant">{formInputs.pass.errorText}</div>
@@ -288,6 +288,7 @@ const ModalAuth = function () {
                             <div class="input-div">
                                 <img src={svg["lock"]} class="icon-input" />
                                 <input
+                                    id="fast_pass"
                                     placeholder={Variable.lang.placeholder.password}
                                     type={`${viewPassword ? 'text' : 'password'}`}
                                     data-type="pass"
