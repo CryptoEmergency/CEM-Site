@@ -20,9 +20,9 @@ const start = function () {
           <div class="c-aboutus__whowe c-whowe who_we_are">
             <div class="c-whowe__inner who_we_are_inner">
               <h2 class="c-whowe__title"
-              // onclick={() => {
-              //   Variable.SetModals({ name: "ModalConfirmCode", data: { wayReg: "email" } })
-              // }}
+              onclick={() => {
+                Variable.SetModals({ name: "ModalAfterRegisterForm", data: {way: "email"} })
+              }}
               >
                 {Variable.lang.h.who_are_we}
               </h2>

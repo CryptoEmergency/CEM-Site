@@ -18,7 +18,6 @@ let items, swiperitem;
 
   
   const ViewImagesOrVideos = function ({item}) {
-    console.log('=item=',item)
     initOne(
         () => {
             items =item;
@@ -95,12 +94,12 @@ let items, swiperitem;
     //   </div>
         <div class="c-images">
         <div class="swiper-container">
-            <div class="swiper swiper-startups" id="swiper-viewImg">
+            <div class="swiper swiper-viewImg" id="swiper-viewImg">
                 <div class="swiper-wrapper">
                     {
                         items.map(function (media) {
                             return (
-                                <div class="swiper-slider">
+                                <div class="swiper-slide">
                                     <div data-id={media._id}>
                                         <img src={`/assets/upload/question/${media.name}`}/>
                                     </div>
@@ -112,10 +111,10 @@ let items, swiperitem;
                 <div class="swiper-pagination" id="swiper-pagination-startup"></div>
                 <div class="swiper-scrollbar-startup"></div>
             </div>
-            <div class="swiper-button-prev" id="prev-startup">
+            <div class="swiper-button-prev" id="prev-icons">
                 <img src={svg.swiper_arrow_left} style="height: 40%;" />
             </div>
-            <div class="swiper-button-next" id="next-startup">
+            <div class="swiper-button-next" id="next-icons">
                 <img src={svg.swiper_arrow_right} style="height: 40%;" />
             </div>
         </div>

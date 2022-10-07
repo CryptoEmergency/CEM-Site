@@ -161,3 +161,66 @@ width: 50px;
 color:black;
 text-align: center;
 }
+
+
+
+
+
+
+/* Startaps styles */
+.c-images {
+  /* max-width: 1240px; */
+  margin: 20px auto;
+
+  
+/* 
+  .swiper {
+
+      &-slide {
+          img {
+              // width: 100%;
+              object-fit: cover;
+              width: 100% !important;
+              height: 100% !important;
+              cursor: pointer;
+          }
+      }
+
+      &-pagination {
+
+          @media(max-width: 1240px) {
+              bottom: 0 !important;
+          }
+      }
+  }
+
+  h4 {
+      margin-bottom: 40px;
+  } */
+
+}
+
+.c-images .swiper-slide{
+  width: 100%;
+  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: pointer;
+} 
+.c-images .swiper-slide img{
+  pointer-events: none;
+  width: 742px;
+  height: 100%;
+}
+.c-images .swiper-viewImg {
+  width: 1240px;
+  height: auto;
+}
+.c-images .swiper-viewImg .swiper-slide {
+  height: 1px
+}
+
+.c-images  .swiper-viewImg .swiper-slide-active {
+  height: auto
+}
+

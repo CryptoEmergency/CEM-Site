@@ -6,10 +6,13 @@ import {
   initGo,
   initReload,
   getStorage,
+  stringToHtml,
+  Helpers
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
 import { Avatar } from "@component/element/Avatar.js";
+import { AudioPlayer } from "@component/element/AudioPlayer.js";
 import { ViewImagesOrVideos } from "@component/element/ViewImagesOrVideos.js";
 import { ViewImageOrVideo } from "@component/element/ViewImageOrVideo.js";
 import { If } from "@component/helpers/All.js";
@@ -25,7 +28,7 @@ import {
 const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
-  let question, answers, myInfo, mediaWithOutAudio;
+  let question, answers, myInfo, mediaWithOutAudio,mediaOnlyAudio;
   init(
     async () => {
       question = await getQuestionsItemInShow(
@@ -34,6 +37,7 @@ const start = function () {
       );
       question = question.list_records[0];
       mediaWithOutAudio = question.media.filter((i) => i.type !== "audio");
+      mediaOnlyAudio = question.media.filter((i) => i.type === "audio");
       answers = await getQuestionsItemInShow(
         Variable.dataUrl.params,
         "getAnswers"
@@ -122,15 +126,14 @@ const start = function () {
                         {{/is}} */}
               </div>
               <p class="question_title">{question.title}</p>
-              <div class="question_text">{question.text}</div>
+              <div class="question_text"> {stringToHtml(Helpers.sanitizeHtml(question.text))}</div>
               <If
                 data={mediaWithOutAudio.length > 0}
                 dataIf={
                   mediaWithOutAudio.length > 1 ? (
-                    // <ViewImagesOrVideos
-                    //   item={mediaWithOutAudio}
-                    // />
-                    <p>Slider</p>
+                    <ViewImagesOrVideos
+                      item={mediaWithOutAudio}
+                    />
                   ) : (
                     <ViewImageOrVideo item={mediaWithOutAudio} />
                   )
@@ -185,6 +188,17 @@ const start = function () {
                         } */}
 
               <div class="post_audio_container">
+
+              <If
+                data={mediaOnlyAudio.length > 0}
+                dataIf={
+                 <AudioPlayer item = {mediaOnlyAudio} type = {"question"}/>
+                }
+              />    
+
+
+
+
                 {/* {{#arrayWhile question.media}}  
                                 {{#is type "audio"}}
                                      {{>audioPlayer src=name path="/assets/upload/question/"}}

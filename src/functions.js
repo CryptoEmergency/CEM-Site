@@ -263,6 +263,9 @@ const allValidation = (str, type, condition) => {
     return str;
     // return str = !str;
   }
+  if (type = "nickName"){
+    
+  }
 };
 
 const changeActiveCommentsInput = (id) => {
