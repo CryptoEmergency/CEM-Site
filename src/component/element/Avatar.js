@@ -45,7 +45,7 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
         />
         <If
           data={author.status && author.status.team}
-          dataIf={<img src={svg.mini_logo} width="25" height="25" style="position: absolute; bottom: 7px; right: 7px; z-index: 2; background: #ffffff; border-radius: 50%; padding: 3px" />}
+          dataIf={<img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />}
           dataElse={<div>
             <div
               class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"

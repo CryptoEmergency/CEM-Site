@@ -28,6 +28,19 @@
 
         .c-avataricon {
             height: 100%;
+
+            &__team {
+                width: 30px;
+                height: 30px;
+                bottom: 15px;
+
+                @media(min-width: 1241px) {
+                    right: 30px;
+                    bottom: 30px;
+                    width: 35px;
+                    height: 35px;
+                }
+            }
         }
     }
 
@@ -252,6 +265,12 @@
         text-align: center;
         margin-left: -15px;
 
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
         p {
             margin-top: 0;
             margin-bottom: -3px;
@@ -390,6 +409,8 @@
         align-items: center;
         border-radius: 5px;
         outline: none;
+
+        flex-basis: 100%;
 
         &:hover {
             background: #3d4252;

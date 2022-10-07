@@ -10,7 +10,7 @@ import { If } from '@component/helpers/All.js';
 const BlockExchange = function (data) {
 
     return (
-        <div class="crypto_exchanges">
+        <div id="crypto_exchange" class="crypto_exchanges">
             <h4>{Variable.lang.h.exchange}</h4>
             <div class="statistics-preview list_exchange_page">
                 <div class="crypto_exchanges-row">
@@ -49,13 +49,11 @@ const BlockExchange = function (data) {
                                 </div>
                                 <div class="crypto_exchanges-cell">
                                     <div>
-                                        <div style="height: auto;" class="">
-                                            {exchange.score}
-                                            <img
-                                                class="crypto_exchanges_rate"
-                                                src={svg.rate_icon}
-                                            />
-                                        </div>
+                                        {exchange.score}
+                                        <img
+                                            class="crypto_exchanges_rate"
+                                            src={svg.rate_icon}
+                                        />
                                     </div>
                                 </div>
                                 <div class="crypto_exchanges-cell">

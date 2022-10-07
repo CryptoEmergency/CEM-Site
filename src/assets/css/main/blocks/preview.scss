@@ -56,6 +56,19 @@
                 margin-bottom: 5px !important;
             }
         }
+
+        @media(max-width: 768px) {
+            font-size: 40px;
+            width: 450px;
+        }
+
+        @media(max-width: 750px) {
+            width: auto;
+            text-align: center;
+            display: inline-block;
+            margin: 0;
+            top: -42px;
+        }
     }
 
     &__imgblock {
@@ -538,6 +551,11 @@
 
         &__title {
             padding-left: 20px;
+        }
+
+        &__bg {
+            right: -60%;
+            top: -115px;
         }
     }
 

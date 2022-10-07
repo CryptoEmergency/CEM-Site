@@ -366,8 +366,10 @@
 
         &>img {
             &:first-child {
-                flex-basis: 72px;
-                flex-shrink: 0;
+                // flex-basis: 72px;
+                // flex-shrink: 0;
+                object-fit: cover;
+                width: 72px;
             }
         }
     }
