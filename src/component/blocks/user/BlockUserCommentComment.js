@@ -26,7 +26,7 @@ const BlockUserCommentComment = function ({
   return comments.map((item, i) => {
     return (
       <div data-comment_comment={item._id} class="main_comment userComment">
-        <Avatar author={item.author} nickNameAndDate={item.showDate} />
+        <Avatar author={item.author} nickName={item.author.nickname} dateShow={item.showDate} />
         {Variable.Static.activeEditInputs.findIndex((it) =>
           it === item._id
         ) < 0 ? <div class="comment_body">

@@ -30,7 +30,7 @@ const BlockUserComment = function ({ comments }) {
   return comments.map((item, i) => {
     return (
       <div data-comment_comment={item._id} class="c-comments__usercomment">{/* main_comment userComment */}
-        <Avatar author={item.author} parent={"c-comments__avacomment"} nickNameAndDate={item.showDate} />
+        <Avatar author={item.author} parent={"c-comments__avacomment"} nickName={item.author.nickname} dateShow={item.showDate} />
         {Variable.Static.activeEditInputs.findIndex((it) => it === item._id) <
           0 ? (
           <div class="c-comments__bodycomment">{/* comment_body */}
@@ -44,145 +44,139 @@ const BlockUserComment = function ({ comments }) {
           />
         )}
 
-        <div class="comment_icons">
-          <div class="user_post_statistic_item">
-            <div class="comment_icon_type-2">
-              <img
-                src={svg["dislike"]}
-                data-name="minus"
-                onTouchStart={(e) => showVotersAndchangeStatistic(e, item._id)}
-                onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
-                onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
-                onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
-                class={`comment_icon_type-2-1 minus  ${!auth && "comment_inactive"
-                  } `}
-              />
-            </div>
-            <div class="comment_likes">{item.statistic.rating}</div>
-            <div class="comment_icon_type-2">
-              <img
-                src={svg["like"]}
-                data-name="plus"
-                onTouchStart={(e) => showVotersAndchangeStatistic(e, item._id)}
-                onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
-                onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
-                onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
-                class={`comment_icon_type-2-1 plus  ${!auth && "comment_inactive"
-                  } `}
-              />
-            </div>
-            <span
-              class="comment_comment"
-              onclick={() => {
-                Variable.Static.answerAdditionally = true;
-                Variable.Static.answerAdditionallyShow = "";
-                changeActiveCommentsInput(item._id);
-              }}
-            >
-              {Variable.lang.button.giveAnswer}
-            </span>
+        <div class="c-comments__icons c-actioncomment">
+          <div class="c-actioncomment__btn c-actioncomment__btn--dislike">
+            <img
+              src={svg["dislike"]}
+              data-name="minus"
+              onTouchStart={(e) => showVotersAndchangeStatistic(e, item._id)}
+              onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
+              onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
+              onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
+              class={[!auth ? "comment_inactive" : null]}
+            />
+          </div>
+          <div class="c-actioncomment__counter">{item.statistic.rating}</div>
+          <div class="c-actioncomment__btn c-actioncomment__btn--like">
+            <img
+              src={svg["like"]}
+              data-name="plus"
+              onTouchStart={(e) => showVotersAndchangeStatistic(e, item._id)}
+              onTouchEnd={(e) => showVotersAndchangeStatistic(e, item._id)}
+              onmousedown={(e) => showVotersAndchangeStatistic(e, item._id)}
+              onmouseup={(e) => showVotersAndchangeStatistic(e, item._id)}
+              class={[!auth ? "comment_inactive" : null]}
+            />
+          </div>
+          <span
+            class="c-actioncomment__answer"
+            onclick={() => {
+              Variable.Static.answerAdditionally = true;
+              Variable.Static.answerAdditionallyShow = "";
+              changeActiveCommentsInput(item._id);
+            }}
+          >
+            {Variable.lang.button.giveAnswer}
+          </span>
+          <div
+            class={["c-actioncomment__toggler", (!auth || Variable.Static.answerAdditionally) ? "comment_inactive" : null]}
+            onclick={() => (auth && !Variable.Static.answerAdditionally) && showAnswerAdditionallyContainer(item._id)}
+          >
+            <img src={svg["points"]} />
             <div
-              class={`comment_icon_type-1 answer_additionally_toggle  ${(!auth || Variable.Static.answerAdditionally) && "comment_inactive"
-                } `}
-              data-action="answerAdditionallyToggle"
-              onclick={() => (auth && !Variable.Static.answerAdditionally) && showAnswerAdditionallyContainer(item._id)}
+              class="c-actioncomment__menu answer_additionally_container"
+              style={
+                (Variable.Static.answerAdditionallyShow === item._id && !Variable.Static.answerAdditionally)
+                  ? "display : block"
+                  : "display : none"
+              }
             >
-              <img class="answer_additionally_toggle_img" src={svg["points"]} />
-              <div
-                class="answer_additionally_container"
-                style={
-                  (Variable.Static.answerAdditionallyShow === item._id && !Variable.Static.answerAdditionally)
-                    ? "display : block"
-                    : "display : none"
-                }
-              >
-                <div class="answer_additionally">
+              <div>
+                <If
+                  data={item.author._id === myInfo._id}
+                  dataIf={
+                    <ul class="c-actioncomment__list answer_additionally">
+                      <li
+                        class="c-actioncomment__item answer_additionally_item delete"
+                        onclick={(e) => {
+                          closeAnswerAdditionally(e);
+
+                          e.target.parentElement.parentElement.parentElement.style = "display : none"
+                          Variable.SetModals({
+                            name: "ModalDelComment",
+                            data: { id: item._id, mainCom: true },
+                          }, true);
+
+                        }}
+                      >
+                        {Variable.lang.select.delete}
+                      </li>
+                      <li
+                        class="c-actioncomment__item answer_additionally_item edit"
+                        onclick={(e) => {
+                          closeAnswerAdditionally(e);
+                          if (Variable.Static.activeEditInputs.findIndex(
+                            (it) => it === item._id
+                          ) < 0) {
+                            Variable.Static.activeEditInputs.push(item._id);
+
+                          } initReload();
+                        }}
+                      >
+                        {Variable.lang.button.edit}
+                      </li>
+                    </ul>
+                  }
+                  dataElse={
+                    <ul class="c-actioncomment__list answer_additionally">
+                      <li
+                        class="c-actioncomment__item answer_additionally_item complain c-text--error"
+                        onclick={(e) => {
+                          closeAnswerAdditionally(e);
+                          e.target.parentElement.parentElement.parentElement.style = "display : none"
+                          Variable.SetModals({
+                            name: "ModalComplainComment",
+                            data: { id: item._id, mainCom: true },
+                          }, true);
+                        }}
+                      >
+                        {Variable.lang.select.complainComment}
+                      </li>
+                      <li class="c-actioncomment__item answer_additionally_item complain c-text--error">
+                        {Variable.lang.select.complainUser}
+                      </li>
+                      <li
+                        class="c-actioncomment__item answer_additionally_item block c-text--error"
+                        onclick={(e) => {
+
+                          closeAnswerAdditionally(e);
+                          e.target.parentElement.parentElement.parentElement.style = "display : none"
+
+
+                          Variable.SetModals({
+                            name: "ModalBlackList",
+                            data: { id: item.author._id },
+                          }, true);
+                        }}
+                      >
+                        {Variable.lang.select.blackList}
+                      </li>
+                    </ul>
+                  }
+                />
+                {!isEmpty(myInfo) && (
                   <If
-                    data={item.author._id === myInfo._id}
+                    data={myInfo.status.role}
                     dataIf={
-                      <div>
-                        <div
-                          class="answer_additionally_item delete"
-                          onclick={(e) => {
-                            closeAnswerAdditionally(e);
-
-                            e.target.parentElement.parentElement.parentElement.style = "display : none"
-                            Variable.SetModals({
-                              name: "ModalDelComment",
-                              data: { id: item._id, mainCom: true },
-                            }, true);
-
-                          }}
-                        >
-                          {Variable.lang.select.delete}
-                        </div>
-                        <div
-                          class="answer_additionally_item edit"
-                          onclick={(e) => {
-                            closeAnswerAdditionally(e);
-                            if (Variable.Static.activeEditInputs.findIndex(
-                              (it) => it === item._id
-                            ) < 0) {
-                              Variable.Static.activeEditInputs.push(item._id);
-
-                            } initReload();
-                          }}
-                        >
-                          {Variable.lang.button.edit}
-                        </div>
-                      </div>
-                    }
-                    dataElse={
-                      <div>
-                        <div
-                          class="answer_additionally_item complain c-text--error"
-                          onclick={(e) => {
-                            closeAnswerAdditionally(e);
-                            e.target.parentElement.parentElement.parentElement.style = "display : none"
-                            Variable.SetModals({
-                              name: "ModalComplainComment",
-                              data: { id: item._id, mainCom: true },
-                            }, true);
-                          }}
-                        >
-                          {Variable.lang.select.complainComment}
-                        </div>
-                        <div class="answer_additionally_item complain c-text--error">
-                          {Variable.lang.select.complainUser}
-                        </div>
-                        <div
-                          class="answer_additionally_item block c-text--error"
-                          onclick={(e) => {
-
-                            closeAnswerAdditionally(e);
-                            e.target.parentElement.parentElement.parentElement.style = "display : none"
-
-
-                            Variable.SetModals({
-                              name: "ModalBlackList",
-                              data: { id: item.author._id },
-                            }, true);
-                          }}
-                        >
-                          {Variable.lang.select.blackList}
-                        </div>
+                      <div
+                        style="color: #32DE80"
+                        class="c-actioncomment__item answer_additionally_item delete"
+                      >
+                        {Variable.lang.select.delete}
                       </div>
                     }
                   />
-                  {!isEmpty(myInfo) && (
-                    <If
-                      data={myInfo.status.role}
-                      dataIf={
-                        <div
-                          style="color: #32DE80"
-                          class="answer_additionally_item delete"
-                        >
-                          {Variable.lang.select.delete}
-                        </div>
-                      }
-                    />
-                  )}
-                </div>
+                )}
               </div>
             </div>
           </div>

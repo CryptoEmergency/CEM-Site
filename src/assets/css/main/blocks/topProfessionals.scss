@@ -22,6 +22,20 @@
             left: 50%;
             transform: translateX(-50%);
         }
+
+        .c-avataricon {
+            &__name {
+                display: none;
+
+                @media(max-width: 970px) {
+                    display: block;
+                }
+
+                @media(min-width: 768px) and(max-width: 970px) {
+                    left: 95px;
+                }
+            }
+        }
     }
 
     &_card {
@@ -225,7 +239,7 @@
             .c-avataricon {
                 &__name {
                     &--show {
-                        display: block;
+                        // display: block;
 
                         // span {
 

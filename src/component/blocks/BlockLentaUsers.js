@@ -103,7 +103,7 @@ const BlockLentaUsers = function ({ item }) {
     >
       <div class="main_comment" data-link={item._id} data-action="getPost">
         {/* {{>avatar author}}                     */}
-        <Avatar author={item.author} nickNameAndDate={item.showDate} />
+        <Avatar author={item.author} nickName={item.author.nickname} dateShow={item.showDate} />
         <div class="comment_body">
           {item.media.length > 0 && returnImgOrVideo(item)}
 
