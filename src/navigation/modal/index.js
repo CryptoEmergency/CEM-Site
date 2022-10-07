@@ -19,7 +19,11 @@ const mainModal = async function () {
 
             if (Variable.Modals && Variable.Modals.length != 0) {
                 document.getElementById('backdrop').classList.add("c-backdrop--show");
-                const modals = Variable.Modals.map((item) => {
+                const modals = Variable.Modals.map((item, index) => {
+                    let rel = reload
+                    if (index < (Variable.Modals.length - 1)) {
+                        rel = true
+                    }
                     return (
                         list[item.name](item.data, reload)
                     )

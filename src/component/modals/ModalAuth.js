@@ -339,15 +339,18 @@ const ModalAuth = function () {
                             {Variable.lang.button.login}
                         </span>
                     </button>
-                    {/* <a
+                    <a
                         class="c-button c-button--registration"
                         href=""
-                        onclick={() => { Variable.Modals = [] }}
+                        onclick={() => {
+                            Variable.DelModals("ModalAuth")
+                            Variable.SetModals({ name: "ModalReg", data: {} })
+                        }}
                     >
                         <div class="c-button__wrapper">
                             {Variable.lang.button.registration}
                         </div>
-                    </a> */}
+                    </a>
                 </footer>
             </section>
         </div>

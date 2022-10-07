@@ -13,8 +13,6 @@ import svg from "@assets/svg/index.js";
 import { ProjectItem } from '@component/element/ProjectItem.js';
 import { ProjectDoubleItem } from '@component/element/ProjectDoubleItem.js';
 
-
-
 const doubleProject = function (projects) {
     let size = 2;
     let doubleProject = [];
@@ -24,12 +22,9 @@ const doubleProject = function (projects) {
     return doubleProject;
 };
 
-
-
 let swiperitem = {}
 
 const BlockProjects = function () {
-
 
     const projects = [
         {
@@ -218,16 +213,12 @@ const BlockProjects = function () {
                 </div>
                 <div class="swiper-button-prev" id="prev-icons"><img src={svg.swiper_arrow_left} style="height: 40%;" /></div>
                 <div class="swiper-button-next" id="next-icons"><img src={svg.swiper_arrow_right} style="height: 40%;" /></div>
-
             </div>
             {/* <div class="c-projects__more main_page_show_more">
                 {Variable.lang.button.see_all}
             </div> */}
-
         </div>
-
-
     )
 }
-
+//I check
 export { BlockProjects }
