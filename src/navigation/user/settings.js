@@ -37,7 +37,8 @@ const start = function () {
                 <li style="justify-content: space-between" data-id="{{_id}}" class="settings_blackuser friend" data-action="link" data-href="">
                     <Avatar
                         author={blackList.list_records[0].blackList[key]}
-                        nickNameAndDate={true}
+                    // nickName={item.author.nickname} 
+                    // dateShow={true}
                     />
                     <div onclick={deleteFromBlacklist} data-id={blackList.list_records[0].blackList[key]._id} class="settings_deleteuser">{Variable.lang.text.deleteFromBlacklist}</div>
                 </li>

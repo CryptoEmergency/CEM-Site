@@ -13,7 +13,7 @@ import {
 import images from '@assets/images/index.js';
 import svg from '@assets/svg/index.js';
 import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
-import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes } from '@src/apiFunctionsL.js'
+import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes, getUserByNickname } from '@src/apiFunctionsL.js'
 import {
     BlockUserProfileAbout
 } from '@component/blocks/user/BlockUserProfileAbout.js';
@@ -29,6 +29,12 @@ import {
 import {
     BlockUserProfileSubscribes
 } from '@component/blocks/user/BlockUserProfileSubscribes.js';
+import {
+    BlockUserProfileAwards
+} from '@component/blocks/user/BlockUserProfileAwards.js';
+import {
+    BlockUserProfileSocials
+} from '@component/blocks/user/BlockUserProfileSocials.js';
 
 import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
@@ -100,12 +106,22 @@ const start = function () {
                 break;
             case 'awards':
                 return (
-                    <div></div>
+                    <BlockUserProfileAwards
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        haveFilter={true}
+                    />
                 )
                 break;
             case 'social':
                 return (
-                    <div></div>
+                    <BlockUserProfileSocials
+                        lang={Variable.lang}
+                        myInfo={Variable.myInfo}
+                        userInfo={userInfo}
+                        haveFilter={true}
+                    />
                 )
                 break;
             case 'galary':
@@ -143,19 +159,19 @@ const start = function () {
 
     init(
         async () => {
-
-            if (!Variable.dataUrl.params || Variable.myInfo.nickname == Variable.dataUrl.params) {
+            if (!Variable.dataUrl.params || Variable.myInfo.nickname == decodeURI(Variable.dataUrl.params)) {
                 userInfo = Variable.myInfo
-                questions = await getUserQuestions(userInfo._id)
-                answers = await getUserAnswers(userInfo._id)
-                followers = await getUserFollowers(userInfo._id)
-                subscribes = await getUserSubscribes(userInfo._id)
-                console.log(subscribes.list_records[0].subscribed)
                 tabType = 'aboutUser'
             } else {
-                // setValue(ID, 'userInfoProfile', await getUserInfoProfile(dataUrl.params));
+                userInfo = (await getUserByNickname(decodeURI(Variable.dataUrl.params))).list_records[0]
                 tabType = 'aboutUser'
             }
+            questions = await getUserQuestions(userInfo._id)
+            answers = await getUserAnswers(userInfo._id)
+            followers = await getUserFollowers(userInfo._id)
+            subscribes = await getUserSubscribes(userInfo._id)
+
+            console.log(Variable.auth)
 
         },
         () => {

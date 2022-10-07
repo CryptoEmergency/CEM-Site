@@ -3,11 +3,13 @@ import {
     jsxFrag,
     timersStart,
     sendApi,
+    getStorage,
+    setStorage,
     init,
-    Variable
+    initReload,
+    Variable,
+    Helpers
 } from '@betarost/cemjs';
-
-import { timerCourse, checkAnswerApi, siteLink } from '@src/functions.js'
 
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
@@ -27,67 +29,18 @@ const start = function () {
 
     init(
         async () => {
-
-            Variable.Course = checkAnswerApi(await sendApi.getCourse({ setIntervalFunc: timerCourse }))
-            timersStart("Course", timerCourse, 10000)
-
-            Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
-                    },
-                    name: "getMainQuestions"
-                }
-            )
-            )
-
-            Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainTrades = checkAnswerApi(await sendApi.getMainTrades({ name: "getMainTrades" }))
-                    },
-                    name: "getMainTrades"
-
-                }
-            )
-            )
-
-            Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainExchanges = checkAnswerApi(await sendApi.getMainExchanges({ name: "getMainExchanges" }))
-                    },
-                    name: "getMainExchanges"
-                }
-            )
-            )
-
-            Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainUsers = checkAnswerApi(await sendApi.getMainUsers({ name: "getMainUsers" }))
-                    },
-                    name: "getMainUsers"
-                }
-            )
-            )
-
-            Variable.MainNews = checkAnswerApi(await sendApi.getMainNews(
-                {
-                    setIntervalFunc: async () => {
-                        Variable.MainNews = checkAnswerApi(await sendApi.getMainNews({ name: "getMainNews" }))
-                    },
-                    name: "getMainNews"
-                }
-            )
-            )
-
-
+            Variable.Course = await sendApi.send({ action: "getCourse", short: true, cache: true, name: "Course" });
+            Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions" });
+            Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
+            Variable.MainExchanges = await sendApi.send({ action: "getExchange", short: true, cache: true, name: "MainExchanges" });
+            Variable.MainUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "MainUsers" });
+            Variable.MainNews = await sendApi.send({ action: "getNews", short: true, cache: true, name: "MainNews" });
+            timersStart("Course", async () => { Variable.Course = await sendApi.send({ action: "getCourse", short: true }) }, 10000)
         },
         () => {
 
             return (
-                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
+                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockPreview />
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
@@ -97,31 +50,41 @@ const start = function () {
                                     <a
                                         class="c-button c-button--gray"
                                         href="/question/"
-                                        onclick={siteLink}
+                                        onclick={Helpers.siteLink}
                                     >
                                         <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
                                     </a>
                                 </div>
                             }
+                            callBack={
+                                async function (active, nameOptions) {
+                                    let filters = getStorage("filters")
+                                    filters.MainQuestions[nameOptions] = active
+                                    setStorage("filters", filters)
+                                    Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, name: "MainQuestions" });
+                                    initReload();
+                                }
+                            }
+                            items={Variable.MainQuestions}
                         />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
                             <BlockTrade />
                             <div class="top_professionals_container">
-                                <BlockExchange />
-                                <div class="crypto_exchanges_footer">
-                                    <a class="c-button c-button--gray" href="/list-exchange/" onclick={siteLink}>
-                                        <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                    </a>
-                                </div>
+                                <BlockExchange
+                                    button={
+                                        <div class="crypto_exchanges_footer">
+                                            <a class="c-button c-button--gray" href="/list-exchange/" onclick={Helpers.siteLink}>
+                                                <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
+                                            </a>
+                                        </div>
+                                    }
+                                />
                                 <BlockUsers />
                                 <BlockMainNews />
-                                <BlockInfoPartners />
-                                {/* <div class="crypto_exchanges_footer">
-                                    <a class="c-button c-button--gray" href="/partners/" onclick={siteLink}>
-                                        <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                    </a>
-                                </div> */}
+                                <BlockInfoPartners
+                                    limit={4}
+                                />
                             </div>
                         </div>
                     </div>

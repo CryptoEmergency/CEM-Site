@@ -3,35 +3,21 @@ import {
     jsxFrag,
     Variable,
     getStorage,
-    setStorage,
     initReload,
     initOne,
-    sendApi
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import { QuestionItem } from '@component/element/QuestionItem.js';
 import { Select } from '../element/Select.js';
-import { timerCourse, checkAnswerApi, siteLink } from '@src/functions.js'
-let optionsSelect, filters, showFilter
 
-const BlockQuestions = function ({ button }) {
+let optionsSelect, showFilter
 
-    const selectCallBack = async function () {
-        filters = getStorage("filters")
-        filters.MainQuestions.questions = optionsSelect.questions.active
-        filters.MainQuestions.date = optionsSelect.date.active
-        setStorage("filters", filters)
-        Variable.MainQuestions = checkAnswerApi(await sendApi.getMainQuestions({ name: "getMainQuestions" }))
-        console.log('=6761df=', filters, Variable.MainQuestions)
-        initReload();
-    }
-
-    //console.log("BlockQuestions", questions);
+const BlockQuestions = function ({ button, items, callBack }) {
 
     initOne(
         async () => {
-            filters = getStorage("filters")
-
+            let filters = getStorage("filters")
+            showFilter = false;
             optionsSelect = {
                 questions: {
                     nameOptions: "questions",
@@ -56,12 +42,9 @@ const BlockQuestions = function ({ button }) {
                     open: false,
                     active: filters.MainQuestions.date
                 }
-
             }
-            showFilter = false;
         }
     )
-
 
     return (
 
@@ -73,7 +56,6 @@ const BlockQuestions = function ({ button }) {
                             <img class="c-search__icon" src={svg.search_icon} />
                             <input class="c-search__input" type="text" placeholder={Variable.lang.placeholder.question} autocomplete="disabled" readonly />
                             <img class="c-search__icon c-search__icon--filter" src={svg.filter} onClick={() => { showFilter = !showFilter; initReload() }} />
-
                         </div>
                         <div style="display: none;" class="questions_search">
                             <div class="question_search_half_empty">
@@ -89,42 +71,34 @@ const BlockQuestions = function ({ button }) {
                         </div>
                     </div>
                 </div>
-
-                <div class={`c-questions__filter questions_filter ${showFilter ? "c-questions__filter--openmobile" : ""}`}>
+                <div class={['c-questions__filter', 'questions_filter', showFilter ? 'c-questions__filter--openmobile' : null]} >
                     <Select
                         options={optionsSelect.questions}
-                        callback={selectCallBack}
+                        callback={callBack}
                     />
                     <Select
                         options={optionsSelect.date}
-                        callback={selectCallBack}
+                        callback={callBack}
                         toggler={true}
                     />
-
                     {/* <div class="c-questions__lang">
                         {Variable.languages[filters.MainQuestions.lang].lang_orig}
                     </div> */}
                 </div>
-
                 <h4>{Variable.lang.h.lastQuestions}</h4>
-
-
             </div>
-
             <div class="c-questions__list questions-blocks">
                 {
-                    Variable.MainQuestions.list_records.map((item) => {
+                    items.list_records.map((item) => {
                         return (
                             <QuestionItem question={item} />
                         )
                     })
                 }
             </div>
-
             {button}
-
         </div>
     )
 }
-
+// I check
 export { BlockQuestions }

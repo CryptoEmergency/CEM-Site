@@ -191,7 +191,8 @@ const siteLink = function (e) {
   // timersClear();
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
+    // behavior: "smooth",
+    behavior: "instant",
   });
   parsingUrl()
   //getAction("App", "start")();
@@ -261,6 +262,10 @@ const allValidation = (str, type, condition) => {
   if (type == "agreement") {
     return str;
     // return str = !str;
+  }
+  if (type = "nickName"){
+    return validator.matches(str,  /^[a-zA-Z0-9_-]{3,16}$/);
+    
   }
 };
 

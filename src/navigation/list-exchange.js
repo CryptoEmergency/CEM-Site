@@ -31,9 +31,8 @@ const start = function () {
     () => {
       return (
         <div
-          class={`${
-            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-          } c-aboutus about_us_container`}
+          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+            } c-aboutus about_us_container`}
         >
           <div
             class="crypto_exchanges crypto_exchanges_full_page"
@@ -103,7 +102,7 @@ const start = function () {
                             <div class="crypto_coin_container">
                               <img
                                 class="crypto_coin_icons"
-                                src={svg[`coins/${coin.icon}`]}
+                                src={`/assets/icons/coins/${coin.icon}.svg`}
                               />
                               <div class="crypto_coin_description">
                                 {coin.name}

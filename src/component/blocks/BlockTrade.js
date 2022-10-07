@@ -56,7 +56,7 @@ const BlockTrade = function () {
                                 <div class="crypto_exchanges-cell">
                                     <div>
                                         <span>
-                                            <span class="list_exanges_image_container " style="margin-right: 50px;display: block;"> {/* load */}
+                                            <span class="list_exanges_image_container "> {/* load  style="margin-right: 50px;display: block;" */}
                                                 <img class="crypto_coin_icon" src={trade.logo} />
                                             </span>
                                             {trade.name}
@@ -83,14 +83,11 @@ const BlockTrade = function () {
                                         </span>
                                     </div>
                                 </div>
-                                <div class="crypto_exchanges-cell">
-                                    <div style="display: flex;align-items: center;">
-                                        <img
-                                            class=""
-                                            style="margin-right: 50px;filter: none"
-                                            src={`https://s3.coinmarketcap.com/generated/sparklines/exchanges/web/7d/usd/${trade.marketId}.svg`}
-                                        /> {/* load */}
-                                    </div>
+                                <div class="crypto_exchanges-cell">{/* div style="display: flex;align-items: center;" */}
+                                    <img
+                                        class=""
+                                        src={`https://s3.coinmarketcap.com/generated/sparklines/exchanges/web/7d/usd/${trade.marketId}.svg`}
+                                    /> {/* load style="margin-right: 50px;filter: none" */}
                                 </div>
                                 <div class="crypto_exchanges_cell_button">
                                     <div class="button-container-preview">

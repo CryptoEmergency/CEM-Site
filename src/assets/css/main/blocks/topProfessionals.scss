@@ -22,6 +22,20 @@
             left: 50%;
             transform: translateX(-50%);
         }
+
+        .c-avataricon {
+            &__name {
+                display: none;
+
+                @media(max-width: 970px) {
+                    display: block;
+                }
+
+                @media(min-width: 768px) and(max-width: 970px) {
+                    left: 95px;
+                }
+            }
+        }
     }
 
     &_card {
@@ -220,6 +234,22 @@
             .avatar_user_offline {
                 right: 6%;
                 bottom: 24%;
+            }
+
+            .c-avataricon {
+                &__name {
+                    &--show {
+                        // display: block;
+
+                        // span {
+
+                        //     &:nth-child(2),
+                        //     &:nth-child(3) {
+                        //         display: none;
+                        //     }
+                        // }
+                    }
+                }
             }
 
             @media(max-width: 970px) {

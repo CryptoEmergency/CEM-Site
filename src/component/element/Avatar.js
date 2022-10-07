@@ -4,7 +4,7 @@ import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
-const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
+const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false }) {
 
   if (!author.nickname) {
     return (
@@ -45,7 +45,7 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
         />
         <If
           data={author.status && author.status.team}
-          dataIf={<img src={svg.mini_logo} width="25" height="25" style="position: absolute; bottom: 7px; right: 7px; z-index: 2; background: #ffffff; border-radius: 50%; padding: 3px" />}
+          dataIf={<img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />}
           dataElse={<div>
             <div
               class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
@@ -65,13 +65,22 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
           </div>}
         />
       </div>
-      {nickNameAndDate && (
-        <div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
-          <span>{author.nickname}</span>
-          <br />
-          <span>{getDateFormat(nickNameAndDate, "userComment")}</span>
-        </div>
-      )}
+      <If
+        data={nickName || speciality || dateShow}
+        dataIf={<div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
+          {nickName && (<div>
+            <span>{author.nickname}</span>
+            <br />
+          </div>
+          )}
+          {speciality && (
+            <span class="c-avataricon__speciality">{speciality}</span>
+          )}
+          {dateShow && (
+            <span>{getDateFormat(dateShow, "userComment")}</span>
+          )}
+        </div>}
+      />
     </a>
   );
 };

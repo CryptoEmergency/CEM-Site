@@ -17096,8 +17096,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: calc(50% - 16px);
   }
 
-  .about_user_section-1 {}
-
   .about_user_section-2 {
     order: 3;
   }
@@ -18472,7 +18470,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
   /* .about_user{
     width: calc(100% - 24px); ;
   } */
-  .about_user_section-1 {}
 
   .about_user_section-2 {
     order: 3;
@@ -21974,6 +21971,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
 } */
 .my_answers_title_block {
   display: flex
+}
+
+.my_answers_title_block .comment_avatar {
+  padding-left: 0;
 }
 
 .my_answers_title_block .normal_user_avatar {

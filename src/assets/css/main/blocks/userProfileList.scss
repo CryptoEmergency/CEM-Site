@@ -14,6 +14,15 @@
     overflow-y: hidden;
     overflow-x: auto;
 
+    @media(max-width: 1199px) {
+        width: 100%;
+    }
+
+    @media(max-width: 1024px) {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
     &::-webkit-scrollbar {
         width: 0px;
         height: 0px;
@@ -44,6 +53,10 @@
 
     &__img {
         height: 65px;
+
+        @media (max-width: 464px) {
+            height: 42px;
+        }
     }
 }
 

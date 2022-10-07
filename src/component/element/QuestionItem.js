@@ -2,28 +2,16 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    getStorage,
-    getValue
+    Helpers
 } from '@betarost/cemjs';
-// import images from "@assets/images/index.js";
+
 import svg from "@assets/svg/index.js";
-import moment from 'moment';
 
 import { Avatar } from '@component/element/Avatar.js';
 import { If } from '@component/helpers/All.js';
 import { ifHaveMedia } from '@src/functions.js';
 
-const getDateMoment = function (str, options) {
-    if (str) {
-        var new_str = str.replace(' ', 'T')
-    }
-    var secondsBefor = Math.round((moment().format('x') - moment(new_str).format('x')) / 1000);
-    if (secondsBefor < 86400) {
-        return moment(new_str).lang(getStorage("lang")).fromNow()
-    } else {
-        return moment(new_str).lang(getStorage("lang")).format('DD MMMM YYYY')
-    }
-};
+
 const sliceString = function (str) {
     let sliceStr = '';
     if (str.length >= 66) {
@@ -35,11 +23,9 @@ const sliceString = function (str) {
 };
 
 const QuestionItem = function ({ question }) {
-    // console.log("QuestionItem", question.bestId != "undefined" && question.close, question.bestId != "undefined" && question.close && !question.bestId, !question.close);
-    // console.log("QuestionItem", question.close, typeof question.bestId);
 
     return (
-        <div data-id={question._id} class="c-questions__item c-question question-block questionLoad">
+        <div class="c-questions__item c-question question-block questionLoad">
             <div class="c-question__header">
                 <div class="c-question__avatar">
                     <Avatar author={question.author} />
@@ -94,7 +80,7 @@ const QuestionItem = function ({ question }) {
                 </div>
                 <div class="c-question__stats "> {/* load */}
                     <img src={svg.question_time} />
-                    {getDateMoment(question.showDate)}
+                    {Helpers.getDateFormat(question.showDate, "now")}
                 </div>
             </div>
             <div class="c-question__footer">

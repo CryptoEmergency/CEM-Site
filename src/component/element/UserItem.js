@@ -10,13 +10,13 @@ import { UserBadge } from '@component/element/UserBadge.js';
 import { If } from '@component/helpers/All.js';
 
 const UserItem = function ({ user }) {
-    // console.log("UserItem", user);
+    console.log("UserItem", user);
 
     return (
         <div class="new_professional_card userLoad" data-id={user._id}>
             <div class="new_professional_card_top">
                 <div class="new_professional_card_avatar">
-                    <Avatar author={user} />
+                    <Avatar author={user} nickName={true} speciality={[user.information && user.information.speciality ? user.information.speciality : false]} />
                 </div>
                 <If
                     data={user.rank.creator}

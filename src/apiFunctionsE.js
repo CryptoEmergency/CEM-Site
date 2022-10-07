@@ -40,6 +40,16 @@ const giveNewCodeForReset = async (info) => {
   }
 };
 
+const checkNickName =  async (nickName) => {
+  let data = {
+    filter:{
+      nickname:nickName
+    }
+  }
+  let response = checkAnswerApi(await sendApi.create("getUsers", data));
+  return response.totalFound
+}
+
 const sendResetMessage = async (info) => {
   let data = {
     value: { code: info.code, reset: true },
@@ -164,6 +174,7 @@ const renderModalFullNews = async () => {
 };
 
 export {
+  checkNickName,
   getQuestionsItemInShow,
   renderModalFullNews,
   giveNewCodeForReset,

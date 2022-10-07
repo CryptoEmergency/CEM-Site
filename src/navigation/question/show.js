@@ -6,11 +6,16 @@ import {
   initGo,
   initReload,
   getStorage,
+  stringToHtml,
+  Helpers
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
 import { Avatar } from "@component/element/Avatar.js";
-
+import { AudioPlayer } from "@component/element/AudioPlayer.js";
+import { ViewImagesOrVideos } from "@component/element/ViewImagesOrVideos.js";
+import { ViewImageOrVideo } from "@component/element/ViewImageOrVideo.js";
+import { If } from "@component/helpers/All.js";
 
 import {
   getNewsItem,
@@ -19,10 +24,11 @@ import {
   changeLang,
 } from "@src/functions.js";
 
+
 const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
-  let question, answers,myInfo;
+  let question, answers, myInfo, mediaWithOutAudio,mediaOnlyAudio;
   init(
     async () => {
       question = await getQuestionsItemInShow(
@@ -30,6 +36,8 @@ const start = function () {
         "getQuestions"
       );
       question = question.list_records[0];
+      mediaWithOutAudio = question.media.filter((i) => i.type !== "audio");
+      mediaOnlyAudio = question.media.filter((i) => i.type === "audio");
       answers = await getQuestionsItemInShow(
         Variable.dataUrl.params,
         "getAnswers"
@@ -37,7 +45,7 @@ const start = function () {
       console.log("=050206=", question);
       console.log("=endInit=", answers);
       myInfo = getStorage("myInfo");
-      console.log('=myInfo=',myInfo)
+      console.log("=myInfo=", myInfo);
     },
     () => {
       return (
@@ -51,7 +59,7 @@ const start = function () {
             <div class="answer_content">
               {/* <a class="mrb20" href="{{lang.url}}{{data.pageUrlBefor}}/" data-action="link"><img class="go_back_icon" src="/assets/icon/go_back_icon.svg"><span class="full_news_go_back">{{lang.span.back}}</span></a> */}
               <div class="question_author_block">
-                <Avatar author={question.author}/>
+                <Avatar author={question.author} />
                 <a
                   href={`/user/${question.author.nickname}`}
                   data-action="link"
@@ -118,9 +126,21 @@ const start = function () {
                         {{/is}} */}
               </div>
               <p class="question_title">{question.title}</p>
-              <div class="question_text">{question.text}</div>
+              <div class="question_text"> {stringToHtml(Helpers.sanitizeHtml(question.text))}</div>
+              <If
+                data={mediaWithOutAudio.length > 0}
+                dataIf={
+                  mediaWithOutAudio.length > 1 ? (
+                    <ViewImagesOrVideos
+                      item={mediaWithOutAudio}
+                    />
+                  ) : (
+                    <ViewImageOrVideo item={mediaWithOutAudio} />
+                  )
+                }
+              />
 
-                        {/* {
+              {/* {
                             question.media.length > 0 
                             && 
                               {{#if question.media}}
@@ -166,9 +186,19 @@ const start = function () {
                             {{/arrayWhile}} 
                         {{/if}}
                         } */}
-             
 
               <div class="post_audio_container">
+
+              <If
+                data={mediaOnlyAudio.length > 0}
+                dataIf={
+                 <AudioPlayer item = {mediaOnlyAudio} type = {"question"}/>
+                }
+              />    
+
+
+
+
                 {/* {{#arrayWhile question.media}}  
                                 {{#is type "audio"}}
                                      {{>audioPlayer src=name path="/assets/upload/question/"}}
@@ -178,16 +208,32 @@ const start = function () {
               {/* {{/if}} */}
 
               <div class="answers_block">
-                <p> <img src={svg["question_answers"]}  /> <b>{question.statistic.answer}</b></p>
-                        <p> <img src={svg["question_views"]} /> <b>{question.statistic.view}</b></p>
-                        <p> <img src={svg["question_time"]} /> <b>{getDateFormat (question.showDate,"lenta")}</b> </p>
-             {
-                myInfo._id !== question.author._id
-                &&
-                <div data-action="answerModal" class="btn-answer" data-needauth="true">
-                <a class="btn-gr-answer"><span>{Variable.lang.button.giveAnswer}</span></a>
-            </div>
-             }
+                <p>
+                  {" "}
+                  <img src={svg["question_answers"]} />{" "}
+                  <b>{question.statistic.answer}</b>
+                </p>
+                <p>
+                  {" "}
+                  <img src={svg["question_views"]} />{" "}
+                  <b>{question.statistic.view}</b>
+                </p>
+                <p>
+                  {" "}
+                  <img src={svg["question_time"]} />{" "}
+                  <b>{getDateFormat(question.showDate, "lenta")}</b>{" "}
+                </p>
+                {myInfo._id !== question.author._id && (
+                  <div
+                    data-action="answerModal"
+                    class="btn-answer"
+                    data-needauth="true"
+                  >
+                    <a class="btn-gr-answer">
+                      <span>{Variable.lang.button.giveAnswer}</span>
+                    </a>
+                  </div>
+                )}
                 {/* {{#if myInfo._id}}
                             {{#is question.author._id myInfo._id}}
         

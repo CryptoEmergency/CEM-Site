@@ -85,22 +85,22 @@ const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
                     </div>
                 </div>
             </div>
-            {/* <div data-type="awards" class="c-usercategories__item">
+            <div data-type="awards" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
                     src={svg[`sections/awards${tabType != 'awards' ? '_inactive' : ''}`]}
                     data-tabType="awards"
                     onclick={changeType}
                 />
-            </div> */}
-            {/* <div data-type="social" class="c-usercategories__item">
+            </div>
+            <div data-type="social" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
                     src={svg[`sections/social${tabType != 'social' ? '_inactive' : ''}`]}
                     data-tabType="social"
                     onclick={changeType}
                 />
-            </div> */}
+            </div>
             {/* <div data-type="galary" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"

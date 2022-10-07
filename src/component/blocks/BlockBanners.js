@@ -74,9 +74,6 @@ const BlockBanners = function () {
                         delay: 2000,
                     },
                     pagination: false,
-                    // pagination: {
-                    //     el: '#swiper-pagination-startup',
-                    // },
                     scrollbar: {
                         el: '.swiper-scrollbar-startup',
                     },
