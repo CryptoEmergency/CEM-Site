@@ -45,10 +45,7 @@ const BlockUserComment = function ({ comments }) {
         )}
 
         <div class="comment_icons">
-          <div
-            style="justify-content: flex-end;"
-            class="user_post_statistic_item"
-          >
+          <div class="user_post_statistic_item">
             <div class="comment_icon_type-2">
               <img
                 src={svg["dislike"]}

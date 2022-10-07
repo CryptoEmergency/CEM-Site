@@ -33,7 +33,7 @@ const BlockMainNews = function () {
                                     }}
                                 >
                                     <img
-                                        style="width: 100px; margin-bottom: 20px"
+                                        style="margin-bottom: 20px"
                                         src={`/assets/upload/news/${newsItem.image}`}
                                     />
                                     <p style="width: 60%; margin-bottom: 20px" class="blog_new_title ">

@@ -4,7 +4,7 @@ import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
-const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
+const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false }) {
 
   if (!author.nickname) {
     return (
@@ -65,13 +65,29 @@ const Avatar = function ({ author, parent = null, nickNameAndDate = false }) {
           </div>}
         />
       </div>
-      {nickNameAndDate && (
+      <If
+        data={nickName || speciality || dateShow}
+        dataIf={<div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
+          {nickName && (<div>
+            <span>{author.nickname}</span>
+            <br />
+          </div>
+          )}
+          {speciality && (
+            <span class="c-avataricon__speciality">{speciality}</span>
+          )}
+          {dateShow && (
+            <span>{getDateFormat(nickNameAndDate, "userComment")}</span>
+          )}
+        </div>}
+      />
+      {/* {nickNameAndDate && (
         <div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
           <span>{author.nickname}</span>
           <br />
           <span>{getDateFormat(nickNameAndDate, "userComment")}</span>
         </div>
-      )}
+      )} */}
     </a>
   );
 };

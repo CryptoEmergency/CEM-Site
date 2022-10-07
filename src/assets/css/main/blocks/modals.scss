@@ -4226,7 +4226,9 @@ s
 		cursor: pointer;
 	}
 
-	&__icon {}
+	&__icon {
+		width: 100%;
+	}
 
 	&__posts {
 		width: 100%;

@@ -222,6 +222,22 @@
                 bottom: 24%;
             }
 
+            .c-avataricon {
+                &__name {
+                    &--show {
+                        display: block;
+
+                        // span {
+
+                        //     &:nth-child(2),
+                        //     &:nth-child(3) {
+                        //         display: none;
+                        //     }
+                        // }
+                    }
+                }
+            }
+
             @media(max-width: 970px) {
                 position: absolute;
                 left: 0%;
