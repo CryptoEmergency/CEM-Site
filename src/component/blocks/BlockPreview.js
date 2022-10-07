@@ -1,14 +1,14 @@
 import {
     jsx,
     jsxFrag,
-    initOne,
-    Variable
+    Variable,
+    Helpers
 } from '@betarost/cemjs';
+
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { CourseCurrency } from '@component/element/CourseCurrency.js';
-import { siteLink } from '@src/functions.js'
 import { If } from '@component/helpers/All.js';
+import { CourseCurrency } from '@component/element/CourseCurrency.js';
 
 const BlockPreview = function () {
 
@@ -27,7 +27,7 @@ const BlockPreview = function () {
                 </div>
             </div>
             <div class="с-preview__parts">
-                <a href="/lenta-users/" class="с-preview__part" onclick={siteLink}>
+                <a href="/lenta-users/" class="с-preview__part" onclick={Helpers.siteLink}>
                     <span>{Variable.lang.span.userNews}</span>
                 </a>
                 <If
@@ -36,7 +36,7 @@ const BlockPreview = function () {
                         <a
                             href="/user/"
                             class="с-preview__part"
-                            onclick={siteLink}
+                            onclick={Helpers.siteLink}
                         >
                             <span>{Variable.lang.a.profile}</span>
                         </a>
@@ -56,15 +56,14 @@ const BlockPreview = function () {
                 {/* <a href="/chats/" class="с-preview__part" data-updating="true">
                     <span>{Variable.lang.span.chats}</span>
                 </a> */}
-                <a href="/question/" class="с-preview__part" onclick={siteLink}>
+                <a href="/question/" class="с-preview__part" onclick={Helpers.siteLink}>
                     <span>{Variable.lang.span.QA}</span>
                 </a>
-                <a href="/news/" class="с-preview__part" onclick={siteLink}>
+                <a href="/news/" class="с-preview__part" onclick={Helpers.siteLink}>
                     <span>{Variable.lang.span.news}</span>
                 </a>
             </div>
             <div class="с-preview__crypto">
-
                 {Variable.Course.list_records.length != 0 ?
                     Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
                         return (
@@ -78,5 +77,5 @@ const BlockPreview = function () {
         </div>
     )
 }
-
+//I check
 export { BlockPreview }
