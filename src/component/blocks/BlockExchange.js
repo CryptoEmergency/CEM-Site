@@ -4,6 +4,7 @@ import {
     Helpers,
     Variable
 } from '@betarost/cemjs';
+
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
 

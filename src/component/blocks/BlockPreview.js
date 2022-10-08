@@ -11,7 +11,6 @@ import { If } from '@component/helpers/All.js';
 import { CourseCurrency } from '@component/element/CourseCurrency.js';
 
 const BlockPreview = function () {
-
     return (
         <div class="с-preview">
             <img class="с-preview__lines" src={images["background/lines-preview-min"]} />

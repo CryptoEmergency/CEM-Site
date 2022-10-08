@@ -8,6 +8,7 @@ import {
 } from "@betarost/cemjs";
 
 import { If } from '@component/helpers/All.js';
+import { ButtonShowMore } from '@component/element/ButtonShowMore.js';
 import { NewsCategory } from '@component/element/NewsCategory.js';
 import { NewsItem } from '@component/element/NewsItem.js';
 
@@ -60,7 +61,7 @@ const start = function () {
                 <If
                   data={Variable.PageBlog.list_records.length < Variable.PageBlog.totalFound}
                   dataIf={
-                    <a class="btn-view-all-a"
+                    <ButtonShowMore
                       onclick={async () => {
                         let filter = { type: "blog" }
                         if (activeCategory != "All") {
@@ -69,13 +70,8 @@ const start = function () {
                         let tmp = await sendApi.send({ action: "getNews", short: true, filter: filter, offset: Variable.PageBlog.list_records.length })
                         Variable.PageBlog.list_records.push(...tmp.list_records)
                         initReload()
-                      }
-                      }
-                    >
-                      <div class="btn-view-all" >
-                        <div>{Variable.lang.button.showMore}</div>
-                      </div>
-                    </a>
+                      }}
+                    />
                   }
                 />
               </div>
