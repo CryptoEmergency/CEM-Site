@@ -4,6 +4,7 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
+
 import svg from "@assets/svg/index.js";
 import { BlockAffiliateBanners } from "@src/component/blocks/BlockAffiliateBanners.js";
 

@@ -6,17 +6,15 @@ import {
 } from "@betarost/cemjs";
 
 const start = function () {
-
     Variable.HeaderShow = true
     Variable.FooterShow = true
 
     init(
         null,
         () => {
-
             if (Variable.lang.lang === "Russian") {
                 return (
-                    <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
+                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                         <div class="c-terms">
                             <div class="c-terms__container c-container">
                                 <h1 class="c-terms__title">Добро пожаловать в Crypto Emergency!</h1>
@@ -217,9 +215,7 @@ const start = function () {
                     </div>
                 );
             }
-
-
         })
 };
-
+//I check
 export default start;

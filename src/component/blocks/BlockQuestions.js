@@ -6,13 +6,15 @@ import {
     initReload,
     initOne,
 } from '@betarost/cemjs';
+
 import svg from "@assets/svg/index.js";
 import { QuestionItem } from '@component/element/QuestionItem.js';
 import { Select } from '../element/Select.js';
+import { If } from '@component/helpers/All.js';
 
 let optionsSelect, showFilter
 
-const BlockQuestions = function ({ button, items, callBack }) {
+const BlockQuestions = function (data) {
 
     initOne(
         async () => {
@@ -47,7 +49,6 @@ const BlockQuestions = function ({ button, items, callBack }) {
     )
 
     return (
-
         <div class="c-questions">
             <div class="c-questions__header">
                 <div class="c-questions__searchblock c-search">
@@ -74,11 +75,11 @@ const BlockQuestions = function ({ button, items, callBack }) {
                 <div class={['c-questions__filter', 'questions_filter', showFilter ? 'c-questions__filter--openmobile' : null]} >
                     <Select
                         options={optionsSelect.questions}
-                        callback={callBack}
+                        callback={data.callBack}
                     />
                     <Select
                         options={optionsSelect.date}
-                        callback={callBack}
+                        callback={data.callBack}
                         toggler={true}
                     />
                     {/* <div class="c-questions__lang">
@@ -89,14 +90,17 @@ const BlockQuestions = function ({ button, items, callBack }) {
             </div>
             <div class="c-questions__list questions-blocks">
                 {
-                    items.list_records.map((item) => {
+                    data.items.list_records.map((item) => {
                         return (
                             <QuestionItem question={item} />
                         )
                     })
                 }
             </div>
-            {button}
+            <If
+                data={data.button}
+                dataIf={data.button}
+            />
         </div>
     )
 }

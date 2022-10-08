@@ -3,19 +3,16 @@ import {
     jsxFrag,
     Variable
 } from '@betarost/cemjs';
+
 import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+import { If } from '@component/helpers/All.js';
+
+
 import { NumFormat } from '@src/functionsE.js'
-import { siteLink } from '@src/functions.js'
 
-// const NumFormat = function (value, options) {
-//     if (value === null || value === undefined) {
-//         return 0;
-//     }
-//     return value.toLocaleString('en-US')
-// };
 
-const BlockTrade = function () {
+
+const BlockTrade = function (data) {
 
     return (
         <div id="crypto_exchanges" class="crypto_exchanges">
@@ -42,7 +39,7 @@ const BlockTrade = function () {
                     </div>
                 </div>
                 {
-                    Variable.MainTrades.list_records.map(function (trade, i) {
+                    data.items.list_records.map(function (trade, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row tradeListLoad"
@@ -56,7 +53,7 @@ const BlockTrade = function () {
                                 <div class="crypto_exchanges-cell">
                                     <div>
                                         <span>
-                                            <span class="list_exanges_image_container "> {/* load  style="margin-right: 50px;display: block;" */}
+                                            <span class="list_exanges_image_container ">
                                                 <img class="crypto_coin_icon" src={trade.logo} />
                                             </span>
                                             {trade.name}
@@ -65,7 +62,7 @@ const BlockTrade = function () {
                                 </div>
                                 <div class="crypto_exchanges-cell">
                                     <div>
-                                        <span class="crypto_exchanges_percent_green " style="margin-right: 50px;"> {/* load */}
+                                        <span class="crypto_exchanges_percent_green " style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
                                                 <img src={svg.exange_money} />
                                             </span>
@@ -75,7 +72,7 @@ const BlockTrade = function () {
                                 </div>
                                 <div class="crypto_exchanges-cell">
                                     <div>
-                                        <span class="crypto_exchanges_percent_green " style="margin-right: 50px;"> {/* load */}
+                                        <span class="crypto_exchanges_percent_green " style="margin-right: 50px;">
                                             <span class="crypto_exchanges_percent_green_mobile">
                                                 <img src={svg.exange_visitors} />
                                             </span>
@@ -83,11 +80,11 @@ const BlockTrade = function () {
                                         </span>
                                     </div>
                                 </div>
-                                <div class="crypto_exchanges-cell">{/* div style="display: flex;align-items: center;" */}
+                                <div class="crypto_exchanges-cell">
                                     <img
                                         class=""
                                         src={`https://s3.coinmarketcap.com/generated/sparklines/exchanges/web/7d/usd/${trade.marketId}.svg`}
-                                    /> {/* load style="margin-right: 50px;filter: none" */}
+                                    />
                                 </div>
                                 <div class="crypto_exchanges_cell_button">
                                     <div class="button-container-preview">
@@ -103,16 +100,10 @@ const BlockTrade = function () {
                     })
                 }
             </div>
-            <div class="crypto_exchanges_footer">
-                <a class="c-button c-button--gray" href="/list-trade/" onclick={siteLink}>
-                    <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                </a>
-            </div>
-            {/* <a href="{{Variable.lang.url}}list-trade/" class="btn-view-all-a" data-action="link">
-                <div class="btn-view-all">
-                    <div>{Variable.lang.button.show_all}</div>
-                </div>
-            </a> */}
+            <If
+                data={data.button}
+                dataIf={data.button}
+            />
         </div>
     )
 }

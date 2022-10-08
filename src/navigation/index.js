@@ -22,7 +22,6 @@ import { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
 
 const start = function () {
-
     Variable.HeaderShow = true
     Variable.FooterShow = true
     Variable.visibleFilterUser = false
@@ -69,9 +68,19 @@ const start = function () {
                         />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
-                            <BlockTrade />
+                            <BlockTrade
+                                items={Variable.MainTrades}
+                                button={
+                                    <div class="crypto_exchanges_footer">
+                                        <a class="c-button c-button--gray" href="/list-trade/" onclick={Helpers.siteLink}>
+                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
+                                        </a>
+                                    </div>
+                                }
+                            />
                             <div class="top_professionals_container">
                                 <BlockExchange
+                                    items={Variable.MainExchanges}
                                     button={
                                         <div class="crypto_exchanges_footer">
                                             <a class="c-button c-button--gray" href="/list-exchange/" onclick={Helpers.siteLink}>

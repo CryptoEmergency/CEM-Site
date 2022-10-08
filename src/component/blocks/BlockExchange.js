@@ -28,7 +28,7 @@ const BlockExchange = function (data) {
                     </div>
                 </div>
                 {
-                    Variable.MainExchanges.list_records.map(function (exchange, i) {
+                    data.items.list_records.map(function (exchange, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row exchangeListLoad"
@@ -95,7 +95,7 @@ const BlockExchange = function (data) {
                 }
             </div>
             <If
-                data={data && data.button}
+                data={data.button}
                 dataIf={data.button}
             />
         </div>

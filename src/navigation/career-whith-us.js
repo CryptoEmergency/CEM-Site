@@ -15,7 +15,7 @@ const start = function () {
         null,
         () => {
             return (
-                <div class="jobs_container">
+                <div class={['jobs_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <div class="jobs_page">
                         <div class="jobs_preview">
                             <div class="blue_blur"></div>
@@ -156,14 +156,9 @@ const start = function () {
                         </div>
                     </div>
                 </div>
-                //  )
-
             )
         }
     )
-
 };
-
-
-
+//I check
 export default start;
