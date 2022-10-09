@@ -14,14 +14,5 @@ const test = async function () {
     console.log("=======================")
   }, 60000);
 }
-
-const snippets = async function () {
-  Helpers.getDateFormat(question.showDate, "now")
-
-  Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions" });
-  Variable.PageBlog = await sendApi.send({ action: "getNews", short: true, cache: true, name: "PageBlog" });
-  // <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-  // class={['blog_page_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}
-}
 //I check
 export { test }

@@ -8,6 +8,7 @@ import {
 
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
+import { If, Map } from '@component/helpers/All.js';
 
 let activeBanner, userLang, banner
 let successImg = Variable.setRef()
@@ -80,23 +81,6 @@ let banners = {
   ],
 };
 
-const copyLink = function () {
-  let elem, code
-  if (this.dataset.type == "url") {
-    elem = successImg
-    code = banner[0].url
-  } else {
-    elem = successCode
-    code = `<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`
-  }
-  navigator.clipboard.writeText(code);
-  elem().hidden = false
-  setTimeout(() => {
-    elem().hidden = true
-  }, 1000)
-  return
-};
-
 const BlockAffiliateBanners = function () {
 
   initOne(
@@ -136,21 +120,24 @@ const BlockAffiliateBanners = function () {
             </div>
           </div>
           <div class="affiliate_banners_size_list">
-            {banners[userLang].map((item) => {
-              return (
-                <div
-                  onclick={() => {
-                    activeBanner = item.type;
-                    initReload()
-                  }}
-                  class={["affiliate_banners_size_item", activeBanner == item.type ? "affiliate_banners_size_item_active" : null]}
-                >
-                  <div class="affiliate_banners_size_item_inner">
-                    {item.type}
+            <Map
+              data={banners[userLang]}
+              dataIf={(item, index) => {
+                return (
+                  <div
+                    onclick={() => {
+                      activeBanner = item.type;
+                      initReload()
+                    }}
+                    class={["affiliate_banners_size_item", activeBanner == item.type ? "affiliate_banners_size_item_active" : null]}
+                  >
+                    <div class="affiliate_banners_size_item_inner">
+                      {item.type}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              }}
+            />
           </div>
         </div>
       </div>
@@ -163,8 +150,14 @@ const BlockAffiliateBanners = function () {
             </div>
             <div
               class="affiliate_banner_copy"
-              data-type="url"
-              onclick={copyLink}
+              onclick={() => {
+                navigator.clipboard.writeText(banner[0].url);
+                successImg().hidden = false
+                setTimeout(() => {
+                  successImg().hidden = true
+                }, 1000)
+                return
+              }}
             >
               <img src={svg.copy} />
               <span>{Variable.lang.p.copy}</span>
@@ -185,7 +178,14 @@ const BlockAffiliateBanners = function () {
             <div
               class="affiliate_banner_copy"
               data-type="code"
-              onclick={copyLink}
+              onclick={() => {
+                navigator.clipboard.writeText(`<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`);
+                successCode().hidden = false
+                setTimeout(() => {
+                  successCode().hidden = true
+                }, 1000)
+                return
+              }}
             >
               <img src={svg.copy} />
               <span>{Variable.lang.p.copy}</span>

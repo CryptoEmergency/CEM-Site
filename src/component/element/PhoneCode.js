@@ -9,7 +9,7 @@ import {
 import images from '@assets/images/index.js';
 
 
-let abbr = "ru"
+let abbr = "ru" //j
 let codeTitle = "7"
 let showPhoneSelect = false
 const PhoneCode = function () {

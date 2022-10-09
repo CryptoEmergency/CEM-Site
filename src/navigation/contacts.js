@@ -48,6 +48,10 @@ const start = function () {
   };
 
   const sendMessage = async () => {
+    e.preventDefault();
+    if (!formInputs.isValid) {
+      return false
+    }
     const name = formInputs.name.value;
     const email = formInputs.email.value;
     const text = formInputs.text.value;
@@ -99,10 +103,7 @@ const start = function () {
 
     () => {
       return (
-        <div
-          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-            } contacts_container`}
-        >
+        <div class={['contacts_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <div class="c-container">
             <div class="contacts_content">
               <div class="contacts_form_block">
@@ -124,7 +125,7 @@ const start = function () {
                     <div class="contacts_form">
                       <h4>{Variable.lang.h.contact}</h4>
                       <p>{Variable.lang.p.writeUs}</p>
-                      <form id="contactsForm" data-button_id="sendContacts">
+                      <form id="contactsForm" onsubmit={sendMessage}>
                         <input style="display: none;" type="submit" />
                         <div>
                           <label for="">{Variable.lang.label.name}</label>
@@ -136,7 +137,6 @@ const start = function () {
                               </div>
                             }
                           />
-
                           <div class="contacts_form_name_icon">
                             <input
                               placeholder={Variable.lang.placeholder.name}
@@ -145,8 +145,6 @@ const start = function () {
                               data-type="name"
                               value={formInputs.name.value}
                               oninput={changeInput}
-                            // disabled = {Variable.myInfo.nickname !==  undefined  ? true : false }
-                            // style ={Variable.myInfo.nickname !==  undefined ? "border-color: rgb(37, 249, 48);" : "border-color: rgb(37, 249, 48)"} 
                             />
                           </div>
                         </div>
@@ -168,12 +166,9 @@ const start = function () {
                               data-type="email"
                               value={formInputs.email.value}
                               oninput={changeInput}
-                            // disabled = {Variable.myInfo.email !==  undefined  ? true : false }
-                            // style ={Variable.myInfo.email !==  undefined && "border-color: rgb(37, 249, 48);"} 
                             />
                           </div>
                         </div>
-                        {/* <Select options={optionsSelect.contactsSelectorTitles} callback={selectCallBack} /> */}
                         <div>
                           <label for="">{Variable.lang.label.message}</label>
                           <If
@@ -205,7 +200,7 @@ const start = function () {
                   }
                 />
               </div>
-              <div class="contacts_info" style={`${formInputs.messageSent != "" ? "margin-top: 20px" : ""}`}>
+              <div class="contacts_info" style={[formInputs.messageSent ? "margin-top: 20px" : null]}>
                 <span class="contact_info_label">
                   {Variable.lang.span.adress}:
                 </span>
@@ -232,5 +227,5 @@ const start = function () {
     }
   );
 };
-
+//I check
 export default start;

@@ -3,7 +3,9 @@ import {
     jsxFrag,
     init,
     initReload,
-    Variable
+    Variable,
+    Helpers,
+    sendApi
 } from "@betarost/cemjs";
 import { mainUsers } from "@src/apiFunctions.js";
 import svg from "@assets/svg/index.js";
@@ -11,8 +13,9 @@ import images from "@assets/images/index.js";
 import { UserItem } from '@component/element/UserItem.js';
 import { If } from '@component/helpers/All.js';
 import { Select } from '@component/element/Select.js';
-
+import { BlockUsers } from '@component/blocks/index.js';
 const start = function () {
+    let filters
     Variable.HeaderShow = true
     Variable.FooterShow = true
     Variable.visibleFilterUser = false
@@ -22,22 +25,6 @@ const start = function () {
         nowShow,
         totalRecords;
 
-    const showMore = async function (e) {
-        e.preventDefault();
-        const tmp = await mainUsers(18, nowShow);
-        nowShow += tmp.list_records.length
-        users.push(...tmp.list_records)
-        // console.log('=758ae5=', users)
-        initReload()
-    }
-
-    const toggleFilterUser = function () {
-        const filter = document.querySelector('.c-friends__additional');
-        const h = filter.offsetHeight;
-        // console.log('=edd207=', h)
-        Variable.visibleFilterUser == true ? filter.style = `height: ${h}px;` : filter.style = "height: 0px";
-        Variable.visibleFilterUser = !Variable.visibleFilterUser;
-    }
 
     const changeFilterUsers = async function (e) {
         const checkboxes = e.currentTarget.closest(".c-friends__checkboxes").querySelectorAll(".checkbox__input");
@@ -69,12 +56,39 @@ const start = function () {
             nowShow = 21;
             totalRecords = tmp.totalFound;
             console.log("users = ", users);
+
+            filters = {
+                lang: {
+                    code: "",
+                    name: "all"
+                },
+                country: {
+                    code: "",
+                    name: "all"
+                },
+                group: {
+                    common: true,
+                    content: true,
+                    expert: true
+                },
+                online: false
+            }
+            Variable.PageUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageUsers", limit: 21, filter: Helpers.getFilterUsers(filters) });
+
+            console.log('=a2ef89=', Variable.PageUsers, Helpers.getFilterUsers({}))
+
         },
         () => {
             console.log("Second Init")
             return (
-                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
-                    <div class="c-friends">
+                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                    <BlockUsers
+                        title={Variable.lang.h.top_users}
+                        filters={filters}
+                        items={Variable.PageUsers}
+                    />
+
+                    {/* <div class="c-friends">
                         <div class="c-friends__container c-container">
                             <h2>{Variable.lang.h.top_users}</h2>
                             <div data-type="main_page_users" class="c-friends__block">
@@ -193,7 +207,7 @@ const start = function () {
                                 </a>}
                             />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             )
         }

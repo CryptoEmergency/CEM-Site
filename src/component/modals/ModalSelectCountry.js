@@ -13,7 +13,7 @@ let inputValue, allCountries;
 
 const changeInput = (e) => {
   inputValue = e.target.value.toLowerCase();
-  allCountries = Variable.allCountries.filter((item)=>  item.na.toLowerCase().includes( inputValue) == true )
+  allCountries = Variable.allCountries.filter((item) => item.na.toLowerCase().includes(inputValue) == true)
   initReload("modals");
 }
 
@@ -22,8 +22,8 @@ const ModalSelectCountry = function (data, reload) {
 
 
   if (!reload) {
-    inputValue = "" 
-    allCountries =Variable.allCountries;
+    inputValue = ""
+    allCountries = Variable.allCountries;
   }
   return (
     <div class="c-modal c-modal--open" id="ModalSelectCountry">
@@ -45,13 +45,14 @@ const ModalSelectCountry = function (data, reload) {
             data-language=""
             id="changeCityInput"
             type="text"
-            oninput = {changeInput}
+            oninput={changeInput}
           />
           <div class="changeCityContainer">
-          {allCountries.map((item) => {
-               return<div class = "changeCityItem"
-                onclick = {() => {data.changeCountry(item.na)}}
-                ><img src={images.blank} class={`flag flag-${item.co}`}/>{item.na}</div>
+            {allCountries.map((item) => {
+              return <div class="changeCityItem"
+                onclick={() => { data.onclick(item.co, item.na); Variable.DelModals("ModalSelectCountry"); }}
+              // onclick = {() => {data.changeCountry(item.na)}}
+              ><img src={images.blank} class={`flag flag-${item.co}`} />{item.na}</div>
             })}
           </div>
           <div style="display: none;" class="changeCityEmpty">

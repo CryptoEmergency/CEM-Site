@@ -5,7 +5,6 @@ import {
 } from "@betarost/cemjs";
 
 const ButtonShowMore = function ({ onclick }) {
-
     return (
         <div class="c-questions__footer">
             <a class="c-button c-button--gray" onclick={onclick}>

@@ -10,7 +10,6 @@ import { siteLink, checkAnswerApi } from '@src/functions.js'
 import svg from "@assets/svg/index.js";
 import { dateDelete } from '@src/functionsL.js'
 import { getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist } from '@src/apiFunctionsL.js'
-import { WalletCard } from '@component/element/user/WalletCard.js';
 import { Avatar } from '@component/element/Avatar.js';
 import { If } from '@component/helpers/All.js';
 

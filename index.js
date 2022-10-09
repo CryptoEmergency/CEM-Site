@@ -8,8 +8,10 @@ init({
         fileName: "main.js"
     },
     port: 80,
-    mode: "production",
-    api: ""
+    // mode: "production",
+    mode: "development",
+    api: "",
+    // api: "office"
 });
 //I check
 build({}).then((result) => { if (result) start(result) });

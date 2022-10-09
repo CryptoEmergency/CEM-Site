@@ -10,7 +10,7 @@ let inputValue, allLang;
 
 const changeInput = (e) => {
   inputValue = e.target.value.toLowerCase();
- allLang = Variable.listsLang.filter((item)=>  `${item.eng_name} (${item.orig_name})`.toLowerCase().includes( inputValue) == true )
+  allLang = Variable.listsLang.filter((item) => `${item.eng_name} (${item.orig_name})`.toLowerCase().includes(inputValue) == true)
   initReload("modals");
 }
 
@@ -19,8 +19,8 @@ const changeInput = (e) => {
 
 const ModalChangeLanguage = function (data, reload) {
   if (!reload) {
-    inputValue = "" 
-    allLang =Variable.listsLang;
+    inputValue = ""
+    allLang = Variable.listsLang;
   }
   return (
     <div class="c-modal c-modal--open" id="ModalWhoLike">
@@ -36,16 +36,16 @@ const ModalChangeLanguage = function (data, reload) {
           ></button>
         </header>
         <div class="c-modal__body">
-          <input  data-language=""
+          <input data-language=""
             id="changeLanguageInput"
             type="text"
-            oninput = {changeInput}
+            oninput={changeInput}
           />
           <div class="changeLanguageContainer">
             {allLang.map((item) => {
               let str = `${item.eng_name} (${item.orig_name})`
 
-               return <div class = "changeLanguageItem" onclick = {() => {data.changeLanguage(str)}}>{str}</div>
+              return <div class="changeLanguageItem" onclick={() => { data.onclick(item.code, item.eng_name); Variable.DelModals("ModalChangeLanguage"); }}>{str}</div>
             })}
           </div>
           <div class="changeLanguageEmpty">

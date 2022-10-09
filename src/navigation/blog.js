@@ -7,10 +7,12 @@ import {
   initReload
 } from "@betarost/cemjs";
 
-import { If } from '@component/helpers/All.js';
-import { ButtonShowMore } from '@component/element/ButtonShowMore.js';
-import { NewsCategory } from '@component/element/NewsCategory.js';
-import { NewsItem } from '@component/element/NewsItem.js';
+import { If, Map } from '@component/helpers/All.js';
+import {
+  ButtonShowMore,
+  NewsCategory,
+  NewsItem
+} from '@component/element/index.js';
 
 const start = function () {
   let activeCategory
@@ -24,7 +26,6 @@ const start = function () {
       Variable.PageBlog = await sendApi.send({ action: "getNews", short: true, cache: true, name: "PageBlog", filter: { type: "blog" } });
     },
     () => {
-
       return (
         <div class={['blog_page_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <div class="blog_page">
@@ -34,7 +35,7 @@ const start = function () {
             <NewsCategory
               activeCategory={activeCategory}
               items={Variable.PageBlogCategory}
-              callBack={async function () {
+              onclick={async function () {
                 if (activeCategory == this.dataset.name) {
                   return
                 }
@@ -49,14 +50,17 @@ const start = function () {
             <div class="userNewsBlock">
               <div class="bl_one bl_active">
                 <div class="blog_news">
-                  {Variable.PageBlog.list_records.map((item, index) => {
-                    return (
-                      <NewsItem
-                        item={item}
-                        index={index}
-                      />
-                    );
-                  })}
+                  <Map
+                    data={Variable.PageBlog.list_records}
+                    dataIf={(item, index) => {
+                      return (
+                        <NewsItem
+                          item={item}
+                          index={index}
+                        />
+                      );
+                    }}
+                  />
                 </div>
                 <If
                   data={Variable.PageBlog.list_records.length < Variable.PageBlog.totalFound}

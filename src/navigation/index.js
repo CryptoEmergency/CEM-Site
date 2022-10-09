@@ -89,7 +89,7 @@ const start = function () {
                                         </div>
                                     }
                                 />
-                                <BlockUsers />
+                                {/* <BlockUsers /> */}
                                 <BlockMainNews />
                                 <BlockInfoPartners
                                     limit={4}
