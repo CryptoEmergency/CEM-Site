@@ -30,7 +30,7 @@ const getUserTransactions = async (count = 0) => {
     limit: 5,
     offset: 5 * count,
     filter: {
-      'amount.cemd': {$gt: 0},
+      'amount.cemd': { $gt: 0 },
       userTo: Variable.myInfo._id
     }
   }
@@ -57,7 +57,7 @@ const changePassword = async (oldPassword, newPassword) => {
   let data = {
     value: {
       oldPassword: oldPassword,
-      newPassword: newPassword 
+      newPassword: newPassword
     }
   }
   let response = checkAnswerApi(await sendApi.create("changePassword", data));
@@ -98,11 +98,11 @@ const deleteUserFromBlacklist = async (user) => {
 
 const getUserQuestions = async (ID) => {
   let data = {
-    filter:{
+    filter: {
       author: ID,
     },
-    select:{title:1,text:1,showDate:1,statistic:1,languages:1,close:1,bestId:1,media:1,author:1},
-    sort:{showDate: -1},
+    select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
+    sort: { showDate: -1 },
     limit: 50
   }
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
@@ -111,10 +111,10 @@ const getUserQuestions = async (ID) => {
 
 const getUserAnswers = async (ID) => {
   let data = {
-    filter:{
-      author:ID,
+    filter: {
+      author: ID,
     },
-    select:{best:1,active:1,author:1,statistic:1,showDate:1,media:1,text:1,comments:1, questionId: 1},
+    select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
     limit: 50
   }
   let response = checkAnswerApi(await sendApi.create("getAnswers", data));
@@ -123,7 +123,7 @@ const getUserAnswers = async (ID) => {
 
 const getUserFollowers = async (ID) => {
   let data = {
-    filter:{
+    filter: {
       subscribed: ID
     },
     limit: 50
@@ -134,14 +134,14 @@ const getUserFollowers = async (ID) => {
 
 const getUserSubscribes = async (ID) => {
   let data = {
-    filter:{
+    filter: {
       _id: ID
     },
-    select:{
-      _id:1,
-      subscribed:1,
+    select: {
+      _id: 1,
+      subscribed: 1,
       status: 1
-    },  
+    },
     limit: 50
   }
   let response = checkAnswerApi(await sendApi.create("getUsers", data));
@@ -150,7 +150,7 @@ const getUserSubscribes = async (ID) => {
 
 const getUserByNickname = async (nickname) => {
   let data = {
-    filter:{
+    filter: {
       nickname: nickname
     },
     limit: 1

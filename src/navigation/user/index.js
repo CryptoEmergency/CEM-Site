@@ -25,24 +25,8 @@ import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes, 
 import {
     BlockUserProfileAbout
 } from '@component/blocks/user/BlockUserProfileAbout.js';
-// import {
-//     BlockUserProfileQuestions
-// } from '@component/blocks/user/BlockUserProfileQuestions.js';
-import {
-    BlockUserProfileAnswers
-} from '@component/blocks/user/BlockUserProfileAnswers.js';
-import {
-    BlockUserProfileFollowers
-} from '@component/blocks/user/BlockUserProfileFollowers.js';
-import {
-    BlockUserProfileSubscribes
-} from '@component/blocks/user/BlockUserProfileSubscribes.js';
-import {
-    BlockUserProfileAwards
-} from '@component/blocks/user/BlockUserProfileAwards.js';
-import {
-    BlockUserProfileSocials
-} from '@component/blocks/user/BlockUserProfileSocials.js';
+
+
 
 import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
@@ -78,64 +62,31 @@ const start = function () {
             case 'questions':
                 return (
                     <></>
-                    // <BlockUserProfileQuestions
-                    //     lang={Variable.lang}
-                    //     myInfo={Variable.myInfo}
-                    //     userInfo={userInfo}
-                    //     questions={questions}
-                    // />
                 )
                 break;
             case 'answers':
                 return (
-                    <BlockUserProfileAnswers
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                        answers={answers}
-                    />
+                    <></>
                 )
                 break;
             case 'subscribers':
                 return (
-                    <BlockUserProfileFollowers
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                        followers={followers}
-                        haveFilter={true}
-                    />
+                    <></>
                 )
                 break;
             case 'friends':
                 return (
-                    <BlockUserProfileSubscribes
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                        haveFilter={true}
-                        subscribes={subscribes.list_records[0].subscribed}
-                    />
+                    <></>
                 )
                 break;
             case 'awards':
                 return (
-                    <BlockUserProfileAwards
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                        haveFilter={true}
-                    />
+                    <></>
                 )
                 break;
             case 'social':
                 return (
-                    <BlockUserProfileSocials
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                        haveFilter={true}
-                    />
+                    <></>
                 )
                 break;
             case 'galary':
@@ -176,37 +127,56 @@ const start = function () {
 
             if (!Variable.dataUrl.params || Variable.myInfo.nickname == decodeURI(Variable.dataUrl.params)) {
                 userInfo = Variable.myInfo
-                tabType = 'questions'
+                tabType = 'aboutUser'
             } else {
                 userInfo = (await getUserByNickname(decodeURI(Variable.dataUrl.params))).list_records[0]
-                tabType = 'questions'
+                tabType = 'aboutUser'
             }
-            questions = await getUserQuestions(userInfo._id)
-            answers = await getUserAnswers(userInfo._id)
-            followers = await getUserFollowers(userInfo._id)
-            subscribes = await getUserSubscribes(userInfo._id)
-
-            console.log(Variable.auth)
-
 
 
             //Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
-            profilePage = "questions"
+            profilePage = "aboutUser"
+
             Variable.PageUserProfileQuestions = await sendApi.send({
-                action: "getQuestions", short: true, cache: true, name: "MainTrades", filter: {
+                action: "getQuestions", short: true, cache: true, name: "PageUserProfileQuestions", filter: {
                     author: userInfo._id,
                 },
-                select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }
+                select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
+                limit: 10
             });
 
+            Variable.PageUserProfileAnswers = await sendApi.send({
+                action: "getAnswers", short: true, cache: true, name: "PageUserProfileAnswers", filter: {
+                    author: userInfo._id,
+                },
+                select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
+                limit: 10
+            });
 
+            Variable.PageUserProfileFriends = await sendApi.send({
+                action: "getUsers", short: true, cache: true, name: "PageUserProfileFriends", filter: {
+                    _id: userInfo._id,
+                },
+                select: {
+                    _id: 1,
+                    subscribed: 1,
+                    status: 1
+                },
+                limit: 20
+            });
+
+            Variable.PageUserProfileSubscribers = await sendApi.send({
+                action: "getUsers", short: true, cache: true, name: "PageUserProfileSubscribers", filter: {
+                    subscribed: userInfo._id,
+                },
+                limit: 20
+            });
 
         },
         () => {
-            console.log('=d4a15a=', svg)
 
             return (
-                <div class={Variable.HeaderShow && 'c-main__body' || 'c-main__body--noheader'}>
+                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockUserPreview
                         userInfo={userInfo}
                     />
@@ -219,6 +189,34 @@ const start = function () {
                         <BlockUserProfilePage.questions
                             profilePage={profilePage}
                             items={Variable.PageUserProfileQuestions}
+                            userInfo={userInfo}
+                        />
+                        <BlockUserProfilePage.answers
+                            profilePage={profilePage}
+                            items={Variable.PageUserProfileAnswers}
+                            userInfo={userInfo}
+                        />
+
+                        <BlockUserProfilePage.friends
+                            profilePage={profilePage}
+                            items={Variable.PageUserProfileFriends}
+                            userInfo={userInfo}
+                        />
+
+                        <BlockUserProfilePage.subscribers
+                            profilePage={profilePage}
+                            items={Variable.PageUserProfileSubscribers}
+                            userInfo={userInfo}
+                        />
+
+                        <BlockUserProfilePage.awards
+                            profilePage={profilePage}
+                            userInfo={userInfo}
+                        />
+
+                        <BlockUserProfilePage.aboutUser
+                            profilePage={profilePage}
+                            userInfo={userInfo}
                         />
                         {/* {currentCategory()} */}
                     </div>
