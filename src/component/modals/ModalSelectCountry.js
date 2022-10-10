@@ -19,8 +19,6 @@ const changeInput = (e) => {
 
 
 const ModalSelectCountry = function (data, reload) {
-
-
   if (!reload) {
     inputValue = ""
     allCountries = Variable.allCountries;

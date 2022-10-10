@@ -132,6 +132,25 @@ BlockUserProfilePage.questions = function (data) {
                     }}
                 />
             </div>
+            <If
+                data={data.items.list_records.length <data.items.list_records.totalFound}
+                dataIf={
+                  <div class="crypto_exchanges_footer">
+                    <a class="btn-view-all-a"
+                      onclick={async () => {
+                        let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 12, offset: data.items.list_records.length })
+                        Variable.PageExchange.list_records.push(...tmp.list_records)
+                        initReload()
+                      }
+                      }
+                    >
+                      <div class="btn-view-all" >
+                        <div>{Variable.lang.button.showMore}</div>
+                      </div>
+                    </a>
+                  </div>
+                }
+              />
         </div>
     )
 };
