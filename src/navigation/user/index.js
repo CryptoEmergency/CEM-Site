@@ -6,20 +6,28 @@ import {
     initReload,
     sendApi
 } from "@betarost/cemjs";
+
+import svg from '@assets/svg/index.js';
+import { BlockUserProfilePage } from '@component/blocks/index.js';
+
+
+
+
+
 import {
     getUserInfoProfile,
     getUserAboutProfile
 } from '@src/apiFunctions.js';
-import images from '@assets/images/index.js';
-import svg from '@assets/svg/index.js';
+
+
 import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
 import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes, getUserByNickname } from '@src/apiFunctionsL.js'
 import {
     BlockUserProfileAbout
 } from '@component/blocks/user/BlockUserProfileAbout.js';
-import {
-    BlockUserProfileQuestions
-} from '@component/blocks/user/BlockUserProfileQuestions.js';
+// import {
+//     BlockUserProfileQuestions
+// } from '@component/blocks/user/BlockUserProfileQuestions.js';
 import {
     BlockUserProfileAnswers
 } from '@component/blocks/user/BlockUserProfileAnswers.js';
@@ -39,6 +47,11 @@ import {
 import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
 
 const start = function () {
+    let profilePage
+    Variable.HeaderShow = false
+    Variable.FooterShow = false
+    Variable.showUserMenu = true
+
 
     const currentCategory = function () {
         console.log(tabType)
@@ -64,12 +77,13 @@ const start = function () {
                 break;
             case 'questions':
                 return (
-                    <BlockUserProfileQuestions
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                        questions={questions}
-                    />
+                    <></>
+                    // <BlockUserProfileQuestions
+                    //     lang={Variable.lang}
+                    //     myInfo={Variable.myInfo}
+                    //     userInfo={userInfo}
+                    //     questions={questions}
+                    // />
                 )
                 break;
             case 'answers':
@@ -153,18 +167,19 @@ const start = function () {
         followers,
         subscribes
 
-    Variable.HeaderShow = false
-    Variable.FooterShow = false
-    Variable.showUserMenu = true
+
 
     init(
         async () => {
+
+
+
             if (!Variable.dataUrl.params || Variable.myInfo.nickname == decodeURI(Variable.dataUrl.params)) {
                 userInfo = Variable.myInfo
-                tabType = 'aboutUser'
+                tabType = 'questions'
             } else {
                 userInfo = (await getUserByNickname(decodeURI(Variable.dataUrl.params))).list_records[0]
-                tabType = 'aboutUser'
+                tabType = 'questions'
             }
             questions = await getUserQuestions(userInfo._id)
             answers = await getUserAnswers(userInfo._id)
@@ -172,6 +187,19 @@ const start = function () {
             subscribes = await getUserSubscribes(userInfo._id)
 
             console.log(Variable.auth)
+
+
+
+            //Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
+            profilePage = "questions"
+            Variable.PageUserProfileQuestions = await sendApi.send({
+                action: "getQuestions", short: true, cache: true, name: "MainTrades", filter: {
+                    author: userInfo._id,
+                },
+                select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }
+            });
+
+
 
         },
         () => {
@@ -188,7 +216,11 @@ const start = function () {
                         changeType={changeType}
                     />
                     <div class="userMainBlock">
-                        {currentCategory()}
+                        <BlockUserProfilePage.questions
+                            profilePage={profilePage}
+                            items={Variable.PageUserProfileQuestions}
+                        />
+                        {/* {currentCategory()} */}
                     </div>
                 </div>
             )
