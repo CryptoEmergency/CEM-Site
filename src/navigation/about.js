@@ -17,8 +17,8 @@ const start = function () {
     () => {
       return (
         <div class={['c-aboutus about_us_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-          <div class="c-aboutus__whowe c-whowe who_we_are">
-            <div class="c-whowe__inner who_we_are_inner">
+          <div class="c-aboutus__whowe c-whowe">
+            <div class="c-whowe__inner">
               <h2 class="c-whowe__title"
                 onclick={() => {
                   Variable.SetModals({ name: "ModalAfterRegisterForm", data: { way: "email" } })
@@ -27,14 +27,14 @@ const start = function () {
                 {Variable.lang.h.who_are_we}
               </h2>
               <img
-                class="c-whowe__img about_us_vector-1"
+                class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}
               />
               <p>{Variable.lang.p.aboutPreview}</p>
             </div>
-            <div class="c-whowe__bg about_us_background_fade"></div>
+            <div class="c-whowe__bg"></div>
           </div>
-          <div class="c-aboutus__content c-container about_us_content">
+          <div class="c-aboutus__content c-container">
             <div class="c-aboutus__goals c-goals">
               <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
               <div class="c-goals__list">
@@ -76,44 +76,40 @@ const start = function () {
                 </div>
               </div>
               <img
-                class="about_us_vector-2"
+                class="c-whowe__img c-whowe__img--right"
                 src={svg["background/about_us_vector-2"]}
               />
             </div>
-            <div class="road_map">
+            <div class="c-aboutus__roadmap road_map">
               <h2>{Variable.lang.h.road_map}</h2>
-              <div class="road_map_container">
-                <div class="road_map_top_dates">
-                  <div class="road_map_date-1">
+              <div class="c-aboutus__wrapper road_map_container">
+                <div class="c-aboutus__toppart road_map_top_dates">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--1">
                     <p>{Variable.lang.p.mapDateOne}</p>
-                    <div></div>
                     <span>{Variable.lang.span.mapDescOne}</span>
                   </div>
-                  <div class="road_map_date-2">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--2">
                     <p>{Variable.lang.p.mapDateTwo}</p>
-                    <div></div>
                     <span>{Variable.lang.span.mapDescTwo}</span>
                   </div>
-                  <div class="road_map_date-3">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--3">
                     <p>{Variable.lang.p.mapDateThree}</p>
-
-                    <div></div>
                     <span>{Variable.lang.span.mapDescFive}</span>
                   </div>
                 </div>
-                <img src={images["road_map"]} />
-                <div class="road_map_bottom_dates">
-                  <div class="road_map_date-4">
+                <img class="c-aboutus__axis" src={images["road_map"]} />
+                <div class="c-aboutus__bottompart road_map_bottom_dates">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--4">
                     <p>{Variable.lang.p.mapDateFour}</p>
                     <div></div>
                     <span>{Variable.lang.span.mapDescThree}</span>
                   </div>
-                  <div class="road_map_date-5">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--5">
                     <p>{Variable.lang.p.October2022}</p>
                     <div></div>
                     <span>{Variable.lang.span.mapDescFour}</span>
                   </div>
-                  <div class="road_map_date-6">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--6">
                     <p>{Variable.lang.p.mapDateSix}</p>
                     <div></div>
                     <span>{Variable.lang.span.mapDescSix}</span>
