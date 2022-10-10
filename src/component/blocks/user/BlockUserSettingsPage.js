@@ -9,9 +9,31 @@ import {
 
 import svg from '@assets/svg/index.js';
 import { If, Map } from '@component/helpers/All.js';
-import { dateDelete } from '@src/functionsL.js'
 import { getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist } from '@src/apiFunctionsL.js'
 import { allValidation } from '@src/functions.js';
+
+
+
+const dateDelete = function (str) {
+    if (str == null) {
+        return
+    }
+    var b = str.split(/\D+/);
+    var date = new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+    date.setDate(date.getDate() + 14)
+    var curr_date = date.getDate();
+    var curr_month = date.getMonth();
+    curr_month++;
+    if (curr_date <= 9) {
+        curr_date = "0" + curr_date
+    }
+    if (curr_month <= 9) {
+        curr_month = "0" + curr_month
+    }
+    var curr_year = date.getFullYear();
+    let result = curr_year + "-" + curr_month + "-" + curr_date;
+    return result;
+}
 
 const BlockUserSettingsPage = {}
 

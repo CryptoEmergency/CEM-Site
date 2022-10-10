@@ -7,171 +7,121 @@ import {
     sendApi
 } from "@betarost/cemjs";
 
-import svg from '@assets/svg/index.js';
-import { BlockUserProfilePage } from '@component/blocks/index.js';
-
-
-
-
-
 import {
-    getUserInfoProfile,
-    getUserAboutProfile
-} from '@src/apiFunctions.js';
+    BlockUserProfilePage,
+    BlockUserPreview
+} from '@component/blocks/index.js';
+import { ProfileTabsMenu } from '@component/element/index.js';
 
-
-import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
-import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes, getUserByNickname } from '@src/apiFunctionsL.js'
-import {
-    BlockUserProfileAbout
-} from '@component/blocks/user/BlockUserProfileAbout.js';
-
-
-
-import { ProfileTabsMenu } from '@component/element/user/ProfileTabsMenu.js';
-
-const start = function () {
-    let profilePage
+const start = function (userInfo) {
+    let profilePage,
+        activeItems
     Variable.HeaderShow = false
     Variable.FooterShow = false
     Variable.showUserMenu = true
 
-
-    const currentCategory = function () {
-        console.log(tabType)
-        switch (tabType) {
-            case 'lentaFriends':
-                return (
-                    <div></div>
-                )
-                break;
-            case 'lentaUser':
-                return (
-                    <div></div>
-                )
-                break;
-            case 'aboutUser':
-                return (
-                    <BlockUserProfileAbout
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                    />
-                )
-                break;
-            case 'questions':
-                return (
-                    <></>
-                )
-                break;
-            case 'answers':
-                return (
-                    <></>
-                )
-                break;
-            case 'subscribers':
-                return (
-                    <></>
-                )
-                break;
-            case 'friends':
-                return (
-                    <></>
-                )
-                break;
-            case 'awards':
-                return (
-                    <></>
-                )
-                break;
-            case 'social':
-                return (
-                    <></>
-                )
-                break;
-            case 'galary':
-                return (
-                    <div></div>
-                )
-                break;
-            case 'donation':
-                return (
-                    <div></div>
-                )
-                break;
-        }
-    }
-
     const changeType = async function () {
-        if (this.dataset.tabtype == tabType) {
+        if (this.dataset.profilePage == profilePage) {
             return
         }
-        tabType = this.dataset.tabtype
+        profilePage = this.dataset.profilepage
+        if (profilePage == "questions") {
+            if (userInfo._id == Variable.myInfo._id) {
+                activeItems = Variable.PageUserProfileQuestions
+            } else {
+                activeItems = await sendApi.send({
+                    action: "getQuestions", short: true,
+                    filter: {
+                        author: userInfo._id,
+                    },
+                    select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
+                    limit: 10
+                });
+            }
 
+        } else if (profilePage == "answers") {
+            if (userInfo._id == Variable.myInfo._id) {
+                activeItems = Variable.PageUserProfileAnswers
+            } else {
+                activeItems = await sendApi.send({
+                    action: "getAnswers", short: true, filter: {
+                        author: userInfo._id,
+                    },
+                    select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
+                    limit: 10
+                });
+            }
+        } else if (profilePage == "subscribers") {
+            if (userInfo._id == Variable.myInfo._id) {
+                activeItems = Variable.PageUserProfileSubscribers
+            } else {
+                activeItems = await sendApi.send({
+                    action: "getUsers", short: true, filter: {
+                        subscribed: userInfo._id,
+                    },
+                    limit: 20
+                });
+            }
+        } else if (profilePage == "friends") {
+            if (userInfo._id == Variable.myInfo._id) {
+                activeItems = Variable.PageUserProfileFriends
+            } else {
+                activeItems = await sendApi.send({
+                    action: "getUsers", short: true, filter: {
+                        _id: userInfo._id,
+                    },
+                    select: {
+                        _id: 1,
+                        subscribed: 1,
+                        status: 1
+                    },
+                    limit: 20
+                });
+            }
+        }
         initReload()
     }
 
-    let userInfo,
-        tabType,
-        questions,
-        answers,
-        followers,
-        subscribes
-
-
-
     init(
         async () => {
-
-
-
-            if (!Variable.dataUrl.params || Variable.myInfo.nickname == decodeURI(Variable.dataUrl.params)) {
-                userInfo = Variable.myInfo
-                tabType = 'aboutUser'
-            } else {
-                userInfo = (await getUserByNickname(decodeURI(Variable.dataUrl.params))).list_records[0]
-                tabType = 'aboutUser'
-            }
-
-
-            //Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
             profilePage = "aboutUser"
 
-            Variable.PageUserProfileQuestions = await sendApi.send({
-                action: "getQuestions", short: true, cache: true, name: "PageUserProfileQuestions", filter: {
-                    author: userInfo._id,
-                },
-                select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
-                limit: 10
-            });
+            if (userInfo._id == Variable.myInfo._id) {
+                Variable.PageUserProfileQuestions = await sendApi.send({
+                    action: "getQuestions", short: true, cache: true, name: "PageUserProfileQuestions", filter: {
+                        author: userInfo._id,
+                    },
+                    select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
+                    limit: 10
+                });
 
-            Variable.PageUserProfileAnswers = await sendApi.send({
-                action: "getAnswers", short: true, cache: true, name: "PageUserProfileAnswers", filter: {
-                    author: userInfo._id,
-                },
-                select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
-                limit: 10
-            });
+                Variable.PageUserProfileAnswers = await sendApi.send({
+                    action: "getAnswers", short: true, cache: true, name: "PageUserProfileAnswers", filter: {
+                        author: userInfo._id,
+                    },
+                    select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
+                    limit: 10
+                });
 
-            Variable.PageUserProfileFriends = await sendApi.send({
-                action: "getUsers", short: true, cache: true, name: "PageUserProfileFriends", filter: {
-                    _id: userInfo._id,
-                },
-                select: {
-                    _id: 1,
-                    subscribed: 1,
-                    status: 1
-                },
-                limit: 20
-            });
+                Variable.PageUserProfileFriends = await sendApi.send({
+                    action: "getUsers", short: true, cache: true, name: "PageUserProfileFriends", filter: {
+                        _id: userInfo._id,
+                    },
+                    select: {
+                        _id: 1,
+                        subscribed: 1,
+                        status: 1
+                    },
+                    limit: 20
+                });
 
-            Variable.PageUserProfileSubscribers = await sendApi.send({
-                action: "getUsers", short: true, cache: true, name: "PageUserProfileSubscribers", filter: {
-                    subscribed: userInfo._id,
-                },
-                limit: 20
-            });
-
+                Variable.PageUserProfileSubscribers = await sendApi.send({
+                    action: "getUsers", short: true, cache: true, name: "PageUserProfileSubscribers", filter: {
+                        subscribed: userInfo._id,
+                    },
+                    limit: 20
+                });
+            }
         },
         () => {
 
@@ -182,30 +132,30 @@ const start = function () {
                     />
                     <ProfileTabsMenu
                         userInfo={userInfo}
-                        tabType={tabType}
+                        profilePage={profilePage}
                         changeType={changeType}
                     />
                     <div class="userMainBlock">
                         <BlockUserProfilePage.questions
                             profilePage={profilePage}
-                            items={Variable.PageUserProfileQuestions}
+                            items={activeItems}
                             userInfo={userInfo}
                         />
                         <BlockUserProfilePage.answers
                             profilePage={profilePage}
-                            items={Variable.PageUserProfileAnswers}
+                            items={activeItems}
                             userInfo={userInfo}
                         />
 
                         <BlockUserProfilePage.friends
                             profilePage={profilePage}
-                            items={Variable.PageUserProfileFriends}
+                            items={activeItems}
                             userInfo={userInfo}
                         />
 
                         <BlockUserProfilePage.subscribers
                             profilePage={profilePage}
-                            items={Variable.PageUserProfileSubscribers}
+                            items={activeItems}
                             userInfo={userInfo}
                         />
 
@@ -218,12 +168,10 @@ const start = function () {
                             profilePage={profilePage}
                             userInfo={userInfo}
                         />
-                        {/* {currentCategory()} */}
                     </div>
                 </div>
             )
         })
 };
-
 
 export default start;

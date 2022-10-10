@@ -1,10 +1,19 @@
-import { jsx, jsxFrag, Variable, initReload, initOne } from "@betarost/cemjs";
+import {
+  jsx,
+  jsxFrag,
+  Variable,
+  initReload,
+  initOne,
+  sendApi
+} from "@betarost/cemjs";
+
 import svg from "@assets/svg/index.js";
-import { Avatar } from "@component/element/Avatar.js";
 import { allValidation } from "@src/functions.js";
 import { checkNickName } from "@src/apiFunctionsE.js";
 
 let formInputs;
+
+
 const changeInput = async (e) => {
   let response;
   let type = e.target.dataset.validate_type;
@@ -34,59 +43,76 @@ const changeInput = async (e) => {
   } else {
     formInputs[type].valid = false;
   }
+
+  if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
+    formInputs.isValid = true
+  } else {
+    formInputs.isValid = false;
+  }
   initReload("modals")
 };
 
-const changeLanguage = (data) => {
-    console.log('=622cd3=',data)
-    formInputs.language.value = data;
-    formInputs.language.valid = true;
-    Variable.DelModals("ModalChangeLanguage")
-    initReload("modals")
-}
-
-const changeCountry = (data) =>{
-    
-    console.log('=622cd3=',data)
-    formInputs.country.value = data;
-    formInputs.country.valid = true;
-    Variable.DelModals("ModalSelectCountry")
-    initReload("modals")
-}
-
 const ModalAfterRegisterForm = function (data, reload) {
-  initOne(() => {
+
+  // initOne(() => {
+  if (!reload) {
     formInputs = {
       nickName: {
         value: "",
         valid: false,
-        error: "",
+        error: false,
+        errorText: Variable.lang.error_div.nicknameErr
       },
       language: {
         value: "",
+        code: "",
         valid: false,
+        error: false,
+        errorText: Variable.lang.error_div.selectFromList
       },
       country: {
         value: "",
+        code: "",
         valid: false,
+        error: false,
+        errorText: Variable.lang.error_div.selectFromList
       },
-      isValid: false,
-      messageSent: false,
-    };
-  });
+      isValid: false
+    }
+  }
+  // });
+
+  const sendRegistrationForm = async function (e) {
+    e.preventDefault();
+    if (!formInputs.isValid) {
+      return false
+    }
+    let data = {
+      value: {
+        nickname: formInputs.nickName.value,
+        mainLanguage: formInputs.language.code,
+        country: formInputs.country.code
+      }
+    }
+
+    let tmpRes = await sendApi.create("setUsers", data);
+
+
+    if (tmpRes.status === 'ok') {
+      Variable.DelModals("ModalAfterRegisterForm")
+      initReload()
+    } else {
+      Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true);
+
+    }
+    return
+
+  }
+
+
   return (
     <div class="c-modal c-modal--open" id="ModalAfterRegisterForm">
       <section class="c-modal__dialog">
-        <header class="c-modal__header">
-          <button
-            type="button"
-            class="c-modal__close"
-            onclick={() => {
-              Variable.Modals.pop();
-              initReload("modals");
-            }}
-          ></button>
-        </header>
         <div class="c-modal__body">
           <div
             class="modal fade"
@@ -100,7 +126,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                 <h4>{Variable.lang.h.modal_afterReg}</h4>
                 <form
                   id="afterRegisterForm"
-                  data-button_id="afterRegisterFormSend"
+                  onsubmit={sendRegistrationForm}
                 >
                   <input style="display: none;" type="submit" />
                   <div>
@@ -164,20 +190,30 @@ const ModalAfterRegisterForm = function (data, reload) {
                     <div style="display: none;" class="error-div">
                       {Variable.lang.error_div.selectFromList}
                     </div>
+
+
                     <div class="language_select_wrapper">
                       <input
                         readonly
-                        data-language=""
                         id="language_after_register"
-                        data-action="changeLanguageAfterRegister"
-                        data-form_type="afterReg"
-                        data-validate_type="lang"
                         type="text"
                         autocomplete="off"
                         placeholder={Variable.lang.error_div.selectFromList}
                         value={formInputs.language.value}
-                        onclick = {() => {
-                            Variable.SetModals({ name: "ModalChangeLanguage", data: {changeLanguage} },true);
+                        onclick={() => {
+                          Variable.SetModals({
+                            name: "ModalChangeLanguage", data: {
+                              onclick: (code, name, orig) => {
+                                formInputs.language.value = name + ` (${orig})`
+                                formInputs.language.code = code
+                                formInputs.language.valid = true
+                                if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
+                                  formInputs.isValid = true
+                                }
+                                // initReload("modals")
+                              }
+                            }
+                          }, true);
                         }}
                       />
                       <div
@@ -188,6 +224,8 @@ const ModalAfterRegisterForm = function (data, reload) {
                         <div class="language_help_error"></div>
                       </div>
                     </div>
+
+
                   </div>
                   <label>{Variable.lang.label.country}</label>
                   <div style="display: none;" class="error-div">
@@ -204,8 +242,20 @@ const ModalAfterRegisterForm = function (data, reload) {
                       autocomplete="off"
                       readonly
                       value={formInputs.country.value}
-                      onclick = {() => {
-                          Variable.SetModals({ name: "ModalSelectCountry", data: {changeCountry} },true);
+                      onclick={() => {
+                        Variable.SetModals({
+                          name: "ModalSelectCountry", data: {
+                            onclick: (code, name) => {
+                              formInputs.country.value = name
+                              formInputs.country.code = code
+                              formInputs.country.valid = true
+                              if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
+                                formInputs.isValid = true
+                              }
+                              //  initReload("modals")
+                            }
+                          }
+                        }, true);
                       }}
                       placeholder={Variable.lang.error_div.selectFromList}
                     />
@@ -219,7 +269,17 @@ const ModalAfterRegisterForm = function (data, reload) {
                     <img src={svg["country_icon"]} />
                   </div>
                 </form>
-                <div
+                <button
+                  class={`c-button c-button--gradient2 ${!formInputs.isValid && "c-button--inactive"}`}
+                  type="button"
+                  // ref={elemButton}
+                  onClick={sendRegistrationForm}
+                >
+                  <span class="c-button__text">
+                    {Variable.lang.button.send}
+                  </span>
+                </button>
+                {/* <div
                   type="button"
                   class="ask-btn inactive_form_button"
                   data-active="0"
@@ -229,7 +289,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                   <a id="afterRegisterFormSend" class="btn-ask">
                     <span>{Variable.lang.button.send}</span>
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
