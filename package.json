@@ -7,8 +7,8 @@
     "start": "node build"
   },
   "dependencies": {
-    "@betarost/cem": "^1.0.5",
-    "@betarost/cemjs": "^1.0.85",
+    "@betarost/cem": "^1.0.3",
+    "@betarost/cemjs": "^1.0.83",
     "cropperjs": "^1.5.12",
     "moment": "^2.29.4",
     "path": "^0.12.7",

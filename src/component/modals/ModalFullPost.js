@@ -37,9 +37,9 @@ const ModalFullPost = function ({ post }, reload) {
         <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalFullPost">
             <section class="c-modal__dialog">
                 <div class="c-modal__body">
-                    <div class="user_post_container">
-                        <div class="user_news_block">
-                            <div class="user_post_header">
+                    <div class="c-fullpost user_post_container">
+                        <div class="c-fullpost__block user_news_block">
+                            <div class="c-fullpost__header user_post_header">
                                 <a
                                     class="c-goback"
                                     onclick={() => { Variable.Modals = [] }}

@@ -365,7 +365,7 @@
     }
 
     .blog_news_item {
-        img {
+        &>img {
             width: 72px; //auto;
             height: 72px;
             margin-bottom: 0;
