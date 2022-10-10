@@ -13,7 +13,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
   }
   return (
     <a
-      href={`${parent != "big_user_avatar" && Variable.myInfo.nickname && author.nickname == Variable.myInfo.nickname ? `/user/${author.nickname}` : ""}`}
+      href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
       class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : parent == "c-comments__avacomment" ? "c-comments__avacomment" : "comment_avatar"}`}
       onclick={siteLink}
     >
