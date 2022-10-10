@@ -110,7 +110,7 @@ const change = async (e, index) => {
             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
 
         } else {
-            Variable.DelModals("ModalConfirmCode")
+            Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
         }
 
     }

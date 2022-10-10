@@ -16,6 +16,9 @@ const mainBlock = async function () {
         },
         async () => {
             let page = Variable.dataUrl.adress;
+            if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+                Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+            }
             if (!page || page == "") {
                 await list.index();
                 return;
