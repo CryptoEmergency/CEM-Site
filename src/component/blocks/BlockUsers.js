@@ -28,16 +28,14 @@ import {
 
 let elem = Variable.setRef()
 
-
-const BlockUsers = function (data) {
-    console.log('=666f29= BlockUsers', data)
+const BlockUsers = function ({ title, filters, items, type, name }) {
     return (
         <div class="c-friends">
             <div class="c-friends__container c-container">
                 <h2>
                     <If
-                        data={data.title}
-                        dataIf={data.title}
+                        data={title}
+                        dataIf={title}
                         dataElse={Variable.lang.h.top_users}
                     />
                 </h2>
@@ -79,25 +77,24 @@ const BlockUsers = function (data) {
                                         Variable.SetModals({
                                             name: "ModalChangeLanguage", data: {
                                                 onclick: async (langCode, langName) => {
-                                                    data.filters.lang.name = langName;
-                                                    data.filters.lang.code = langCode;
-                                                    console.log('=a2ef89= 2', Variable.PageUsers, Helpers.getFilterUsers(data))
-                                                    Variable.PageUsers = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(data) });
+                                                    filters.lang.name = langName;
+                                                    filters.lang.code = langCode;
+                                                    Variable[name] = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+                                                    // initReload()
                                                 }
                                             }
                                         })
                                     }}
                                 >
                                     <If
-                                        data={data.filters.lang.name == "all"}
+                                        data={filters.lang.name == "all"}
                                         dataIf={Variable.lang.text.language}
-                                        dataElse={data.filters.lang.name}
+                                        dataElse={filters.lang.name}
                                     />
                                 </div>
                                 <img
                                     style="display: none;"
                                     class="refresh_language"
-                                    data-action="refreshLanguage"
                                     src={svg.refresh_filter}
                                 />
                             </div>
@@ -105,13 +102,22 @@ const BlockUsers = function (data) {
                                 <div
                                     class="c-friends__country"
                                     onclick={() => {
-                                        Variable.SetModals({ name: "ModalSelectCountry", data: { onclick: (countryCode, countryName) => { data.filters.country.name = countryName; data.filters.country.code = countryCode; initReload(); } } })
+                                        Variable.SetModals({
+                                            name: "ModalSelectCountry", data: {
+                                                onclick: async (countryCode, countryName) => {
+                                                    filters.country.name = countryName;
+                                                    filters.country.code = countryCode;
+                                                    Variable[name] = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+                                                    // initReload();
+                                                }
+                                            }
+                                        })
                                     }}
                                 >
                                     <If
-                                        data={data.filters.country.name == "all"}
+                                        data={filters.country.name == "all"}
                                         dataIf={Variable.lang.text.country}
-                                        dataElse={data.filters.country.name}
+                                        dataElse={filters.country.name}
                                     />
 
                                 </div>
@@ -125,45 +131,57 @@ const BlockUsers = function (data) {
                             <div class="c-friends__checkboxes">
                                 <div class="checkbox" data-action="friendsFilterCheckbox">
                                     <input
-                                        checked={data.filters.group.common ? true : false}
+                                        checked={filters.group.common ? true : false}
                                         class="checkbox__input"
                                         type="checkbox"
                                         id="common"
                                         required="required"
-                                    // onChange={changeFilterUsers}
+                                        onChange={async () => {
+                                            filters.group.common = !filters.group.common
+                                            Variable[name] = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+                                        }}
                                     />
                                     <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
                                 </div>
                                 <div class="checkbox" data-action="friendsFilterCheckbox">
                                     <input
-                                        checked={data.filters.group.content ? true : false}
+                                        checked={filters.group.content ? true : false}
                                         class="checkbox__input"
                                         type="checkbox"
                                         id="content-makers"
                                         required="required"
-                                    // onChange={changeFilterUsers}
+                                        onChange={async () => {
+                                            filters.group.content = !filters.group.content
+                                            Variable[name] = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+                                        }}
                                     />
                                     <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
                                 </div>
                                 <div class="checkbox" data-action="friendsFilterCheckbox">
                                     <input
-                                        checked={data.filters.group.expert ? true : false}
+                                        checked={filters.group.expert ? true : false}
                                         class="checkbox__input"
                                         type="checkbox"
                                         id="specialists"
                                         required="required"
-                                    // onChange={changeFilterUsers}
+                                        onChange={async () => {
+                                            filters.group.expert = !filters.group.expert
+                                            Variable[name] = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+                                        }}
                                     />
                                     <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
                                 </div>
                                 <div class="checkbox" data-action="friendsFilterCheckbox">
                                     <input
-                                        checked={data.filters.online ? true : false}
+                                        checked={filters.online ? true : false}
                                         class="checkbox__input"
                                         type="checkbox"
                                         id="online"
                                         required="required"
-                                    // onChange={changeFilterUsers}
+                                        onChange={async () => {
+                                            filters.online = !filters.online
+                                            Variable[name] = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+                                        }}
                                     />
                                     <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
                                 </div>
@@ -173,7 +191,7 @@ const BlockUsers = function (data) {
 
                     <div class="c-friends__list top_professionals_block">
                         <Map
-                            data={data.items.list_records}
+                            data={items.list_records}
                             dataIf={(item, index) => {
                                 return (
                                     <UserItem user={item} />
@@ -183,22 +201,18 @@ const BlockUsers = function (data) {
 
                     </div>
                 </div>
-                {/* <If
-                    data={Variable.PageBlog.list_records.length < Variable.PageBlog.totalFound}
+                <If
+                    data={items.list_records.length < items.totalFound}
                     dataIf={
                         <ButtonShowMore
                             onclick={async () => {
-                                let filter = { type: "blog" }
-                                if (activeCategory != "All") {
-                                    filter["category.name"] = activeCategory
-                                }
-                                let tmp = await sendApi.send({ action: "getNews", short: true, filter: filter, offset: Variable.PageBlog.list_records.length })
-                                Variable.PageBlog.list_records.push(...tmp.list_records)
+                                let tmp = await sendApi.send({ action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type), offset: Variable[name].list_records.length });
+                                Variable[name].list_records.push(...tmp.list_records)
                                 initReload()
                             }}
                         />
                     }
-                /> */}
+                />
             </div>
         </div>
     )
