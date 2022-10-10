@@ -18,17 +18,14 @@ import { ViewImageOrVideo } from "@component/element/ViewImageOrVideo.js";
 import { If } from "@component/helpers/All.js";
 
 import {
-  getNewsItem,
-  getNewsCategory,
   getDateFormat,
-  changeLang,
 } from "@src/functions.js";
 
 
 const start = function () {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
-  let question, answers, myInfo, mediaWithOutAudio,mediaOnlyAudio;
+  let question, answers, myInfo, mediaWithOutAudio, mediaOnlyAudio;
   init(
     async () => {
       question = await getQuestionsItemInShow(
@@ -51,9 +48,8 @@ const start = function () {
       return (
         <div
           // class="answer_container"
-          class={`${
-            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-          } answer_container`}
+          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+            } answer_container`}
         >
           <div class="answer_block">
             <div class="answer_content">
@@ -189,12 +185,12 @@ const start = function () {
 
               <div class="post_audio_container">
 
-              <If
-                data={mediaOnlyAudio.length > 0}
-                dataIf={
-                 <AudioPlayer item = {mediaOnlyAudio} type = {"question"}/>
-                }
-              />    
+                <If
+                  data={mediaOnlyAudio.length > 0}
+                  dataIf={
+                    <AudioPlayer item={mediaOnlyAudio} type={"question"} />
+                  }
+                />
 
 
 

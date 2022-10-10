@@ -53,6 +53,7 @@ const start = function () {
                       <NewsItem
                         item={item}
                         index={index}
+                        type={"news"}
                       />
                     );
                   })}

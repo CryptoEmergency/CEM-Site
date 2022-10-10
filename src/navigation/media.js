@@ -13,7 +13,6 @@ import { getNewsItemInShow } from "@src/apiFunctions.js";
 
 import {
   getNewsItem,
-  getNewsCategory,
   getDateFormat,
 } from "@src/functions.js";
 

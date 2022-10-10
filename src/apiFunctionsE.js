@@ -7,21 +7,8 @@ import {
   initGo,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
-import {getNewsItemInShow } from "@src/apiFunctions.js";
+import { getNewsItemInShow } from "@src/apiFunctions.js";
 
-const mainTrades = async () => {
-  let data = {
-    sort: {
-      score: -1,
-    },
-    limit: 6,
-  };
-
-  let response = checkAnswerApi(
-    await sendApi.create("getTrade", data)
-  ).list_records;
-  return response;
-};
 
 const giveNewCodeForReset = async (info) => {
   let data = {
@@ -40,10 +27,10 @@ const giveNewCodeForReset = async (info) => {
   }
 };
 
-const checkNickName =  async (nickName) => {
+const checkNickName = async (nickName) => {
   let data = {
-    filter:{
-      nickname:nickName
+    filter: {
+      nickname: nickName
     }
   }
   let response = checkAnswerApi(await sendApi.create("getUsers", data));
@@ -88,7 +75,7 @@ const sendInBlackList = async (info) => {
 
 
 };
-const getQuestionsItemInShow = async function (id,type) {
+const getQuestionsItemInShow = async function (id, type) {
   let data = {
     filter: {},
     select: {
@@ -99,16 +86,16 @@ const getQuestionsItemInShow = async function (id,type) {
       showDate: 1,
       statistic: 1,
       text: 1,
-      title:1,
-      close:1,
+      title: 1,
+      close: 1,
     },
     sort: { showDate: -1 },
     limit: 12,
   };
 
-  if(type === "getQuestions"){
+  if (type === "getQuestions") {
     data.filter._id = id
-  }else{
+  } else {
     data.filter.questionId = id
   }
   let response = checkAnswerApi(await sendApi.create(type, data));
@@ -126,15 +113,15 @@ const delCom = async (info) => {
 
   info.mainCom
     ? (data.value.comments = {
+      active: false,
+      _id: info.id,
+    })
+    : (data.value.comments = {
+      comments: {
         active: false,
         _id: info.id,
-      })
-    : (data.value.comments = {
-        comments: {
-          active: false,
-          _id: info.id,
-        },
-      });
+      },
+    });
   let response = checkAnswerApi(await sendApi.create("setNews", data));
 };
 
@@ -149,15 +136,15 @@ const sendComplaintApi = async (info) => {
 
   info.data.mainCom
     ? (data.value.comments = {
+      complain: info.complaint,
+      _id: info.data.id,
+    })
+    : (data.value.comments = {
+      comments: {
         complain: info.complaint,
         _id: info.data.id,
-      })
-    : (data.value.comments = {
-        comments: {
-          complain: info.complaint,
-          _id: info.data.id,
-        },
-      });
+      },
+    });
 
   console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create("setNews", data));
@@ -180,7 +167,6 @@ export {
   giveNewCodeForReset,
   sendResetMessage,
   delCom,
-  mainTrades,
   sendInBlackList,
   sendComplaintApi,
 };

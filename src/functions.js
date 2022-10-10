@@ -17,61 +17,11 @@ import {
 import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
-// import swiperload from "@assets/js/swiper.js";
+
 import { changeStatistic, showVotersApi, getNewsItemInShow } from "@src/apiFunctions.js";
 import { renderModalFullNews } from "@src/apiFunctionsE.js";
-const numberFixWithSpaces = function (num, fix) {
-  let x = parseFloat(num).toFixed(fix);
-  var parts = x.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return parts.join(".");
-};
 
-const start = async function (reload) {
-  const dataUrl = getVariable("dataUrl");
-  let page = dataUrl.adress;
-  if (!dataUrl.adress || dataUrl.adress == "") {
-    await list.index(reload);
-    after();
-    return;
-  }
 
-  if (dataUrl.category) {
-    page += "/" + dataUrl.category;
-  } else if (dataUrl.adress == "user") {
-    page = "user/index";
-  }
-
-  if (!list[page]) {
-    await list.error404(reload);
-    after();
-    return;
-  }
-
-  await list[page](reload);
-  after();
-  return;
-};
-
-const after = function () {
-  swiperload();
-};
-
-const clickCancel = function (e) {
-  e.stopPropagation();
-};
-
-const checkHide = function (e) {
-  if (Variable.OutHideWindows.length != 0) {
-    Variable.OutHideWindows.map((item, index) => {
-      if (item[0]() === e.target || item[0]().contains(e.target)) {
-      } else {
-        item[1]().hidden = true
-        Variable.OutHideWindows.splice(index, 1)
-      }
-    })
-  }
-};
 
 const clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
@@ -162,27 +112,6 @@ const getDateFormat = function (data, type) {
   }
 };
 
-const getNewsCategory = async function (type) {
-  let getLang = "en";
-  if (getStorage("lang") == "ru") {
-    getLang = "ru";
-  }
-  let data = {
-    filter: {
-      type,
-    },
-  };
-  data.filter["count." + getLang] = { $gt: 0 };
-
-  var response = checkAnswerApi(await sendApi.create("getCategories", data));
-  //console.log('=response=', response)
-  return response;
-};
-
-const timerCourse = async function () {
-  Variable.course = checkAnswerApi(await sendApi.getCourse());
-  //Variable.course = tmp.list_records[0]
-};
 
 const siteLink = function (e) {
   e.preventDefault();
@@ -198,16 +127,6 @@ const siteLink = function (e) {
   //getAction("App", "start")();
 };
 
-const changeLang = function (e) {
-  e.preventDefault();
-  //let link = e.target.href;
-  let link = this.href;
-  history.pushState(null, null, link);
-  // timersClear();
-  parsingUrl()
-  //initGo()
-  //getAction("App", "start")();
-};
 
 const checkAnswerApi = function (data) {
   // console.log("checkAnswerApi", data);
@@ -263,9 +182,9 @@ const allValidation = (str, type, condition) => {
     return str;
     // return str = !str;
   }
-  if (type = "nickName"){
-    return validator.matches(str,  /^[a-zA-Z0-9_-]{3,16}$/);
-    
+  if (type = "nickName") {
+    return validator.matches(str, /^[a-zA-Z0-9_-]{3,16}$/);
+
   }
 };
 
@@ -378,89 +297,6 @@ const changeNewsCategory = async (e, type, init) => {
   //init(true);
 };
 
-const createParagraf = function (arr) {
-  let result = [];
-  for (let i of arr) {
-    switch (i.nodeName) {
-      case "A":
-        let a = (
-          <a target="_blank" rel="nofollow noopener" href={i.innerText}>
-            {i.innerText}
-          </a>
-        );
-        result.push(a);
-        break;
-      case "SPAN":
-        let span = <span>{i.innerText}</span>;
-        result.push(span);
-        break;
-      default:
-        let text = i.nodeValue;
-        result.push(text);
-    }
-  }
-  return result;
-};
-
-const parseTextforJsx = function (text) {
-  const parser = new DOMParser();
-  let responseText = parser.parseFromString(text, "text/html");
-  let htmlDoc = [...responseText.body.childNodes];
-  let result = [];
-  for (let i of htmlDoc) {
-    let arr = i.childNodes;
-    let tegP = (
-      <p>
-        {createParagraf(arr).map((i) => {
-          return i;
-        })}
-      </p>
-    );
-    result.push(tegP);
-  }
-  return result;
-};
-
-// const getExchangeOrTradeList = async (e, firstLoad, count) => {
-
-//   const ID = "mainBlock";
-//   let apiType = e.currentTarget.dataset.apitype;
-//   let firstLimit = e.currentTarget.dataset.firstlimit;
-//   let secondLimit = e.currentTarget.dataset.secondlimit;
-//   let type = e.currentTarget.dataset.type;
-//   let data = {};
-//   if (firstLoad) {
-//     data = {
-//       limit: +firstLimit,
-//       sort: {
-//         score: -1,
-//       },
-//     };
-//   } else {
-//     console.log(count)
-//     data = {
-//       limit: +secondLimit,
-//       offset: +firstLimit + secondLimit * (count - 1),
-//     };
-//     console.log(data)
-//   }
-//   console.log(apiType)
-//   let response
-//     = checkAnswerApi(await sendApi.create(`${apiType}`, data));
-//   console.log(response)
-//   if (firstLoad) {
-//     return response;
-//   } else {
-//     let prevList = getValue(ID, `${type}List`);
-//     response.list_records = [
-//       ...prevList.list_records,
-//       ...response.list_records,
-//     ];
-//     console.log(response)
-//     setValue(ID, `${type}List`, response);
-
-//   }
-// }
 
 const ifHaveMedia = function (mediaArr, type, whatReturn) {
   if (mediaArr === null) {
@@ -477,20 +313,13 @@ export {
   isEmpty,
   showVotersAndchangeStatistic,
   changeActiveCommentsInput,
-  parseTextforJsx,
   changeNewsCategory,
   getDateFormat,
   getNewsItem,
-  getNewsCategory,
   siteLink,
-  changeLang,
   timerTik,
-  timerCourse,
   clickHide,
-  clickCancel,
-  start,
   checkAnswerApi,
   allValidation,
-  numberFixWithSpaces,
   ifHaveMedia,
 };

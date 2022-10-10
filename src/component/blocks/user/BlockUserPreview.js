@@ -1,11 +1,11 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    Helpers
 } from '@betarost/cemjs';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
-import { numberFixWithSpaces } from '@src/functions.js';
 import { Avatar } from '@component/element/Avatar.js';
 import { percent } from '@component/helpers/All.js';
 
@@ -111,7 +111,7 @@ const BlockUserPreview = function ({ userInfo }) {
                         value={userInfo.nickname ? userInfo.nickname : userInfo._id}
                     />
                     <a href="#" class="c-usershortinfo__rating">
-                        {numberFixWithSpaces(userInfo.statistic.rating, 2)}
+                        {Helpers.numberFixWithSpaces(userInfo.statistic.rating, 2)}
                     </a>
                     <p></p>
                     <div class="c-usershortinfo__status" id="userstatus">

@@ -31,7 +31,7 @@ const closeAnswerAdditionally = (e) => {
   Variable.Static.answerAdditionallyShow = "";
 }
 
-const BlockUserComment = function ({ comments }) {
+const BlockComments = function ({ comments }) {
   let myInfo = Variable.myInfo;
   let auth = Variable.auth;
   console.log('=bc42e2=', comments, Variable)
@@ -221,4 +221,4 @@ const BlockUserComment = function ({ comments }) {
   });
 };
 
-export { BlockUserComment };
+export { BlockComments };

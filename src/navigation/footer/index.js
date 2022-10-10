@@ -13,7 +13,7 @@ import twitter from '@assets/svg/twitter-icon.svg'
 import discord from '@assets/svg/discord-icon.svg'
 import github from '@assets/svg/github-icon2.svg'
 import tiktok from '@assets/svg/tiktok-icon.svg'
-import { clickCancel, siteLink, changeLang } from '@src/functions.js'
+import { siteLink } from '@src/functions.js'
 import svg from "@assets/svg/index.js"
 import { If } from '@component/helpers/All.js'
 import { Avatar } from '@component/element/Avatar.js';
