@@ -6,36 +6,34 @@ import {
   init,
   initReload
 } from "@betarost/cemjs";
+
 import { allValidation } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
 
-let formInputs
+
 
 const start = function () {
-
+  let formInputs
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
 
-  const changeInput = function (e) {
+  const changeInput = function () {
     formInputs[this.dataset.type].value = this.value.trim()
     formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
 
     if (!formInputs[this.dataset.type].valid) {
-      formInputs[this.dataset.type].error = "Заполните поле " + this.dataset.type;
+      formInputs[this.dataset.type].error = true;
       this.style = "border-color: rgb(200, 23, 38);";
       formInputs.isValid = false
       initReload()
       return
     } else {
-      formInputs[this.dataset.type].error = "";
+      formInputs[this.dataset.type].error = false;
       this.style = "border-color: rgb(37, 249, 48);"
     }
 
-
     let isCheckAll = false
-
-
     if (formInputs.name.valid === true && formInputs.email.valid === true && formInputs.text.valid === true) {
       isCheckAll = true
     }
@@ -47,10 +45,13 @@ const start = function () {
     }
     initReload()
     return;
-
-
   };
+
   const sendMessage = async () => {
+    e.preventDefault();
+    if (!formInputs.isValid) {
+      return false
+    }
     const name = formInputs.name.value;
     const email = formInputs.email.value;
     const text = formInputs.text.value;
@@ -70,17 +71,20 @@ const start = function () {
         name: {
           value: "",
           valid: false,
-          error: "",
+          error: false,
+          errorText: Variable.lang.error_div.not_empty_input
         },
         email: {
           value: "",
           valid: false,
-          error: "",
+          error: false,
+          errorText: Variable.lang.error_div.wrong_email
         },
         text: {
           value: "",
           valid: false,
-          error: "",
+          error: false,
+          errorText: Variable.lang.error_div.not_empty_input
         },
         isValid: false,
         messageSent: false
@@ -99,10 +103,7 @@ const start = function () {
 
     () => {
       return (
-        <div
-          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-            } contacts_container`}
-        >
+        <div class={['contacts_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <div class="c-container">
             <div class="contacts_content">
               <div class="contacts_form_block">
@@ -124,19 +125,18 @@ const start = function () {
                     <div class="contacts_form">
                       <h4>{Variable.lang.h.contact}</h4>
                       <p>{Variable.lang.p.writeUs}</p>
-                      <form id="contactsForm" data-button_id="sendContacts">
+                      <form id="contactsForm" onsubmit={sendMessage}>
                         <input style="display: none;" type="submit" />
                         <div>
                           <label for="">{Variable.lang.label.name}</label>
                           <If
-                            data={formInputs.name.error != ""}
+                            data={formInputs.name.error}
                             dataIf={
-                              <div class="error-div" style="display: block">
-                                <div class="error-div-variant">{Variable.lang.error_div.not_empty_input}</div>
+                              <div class="error-div">
+                                <div class="error-div-variant">{formInputs.name.errorText}</div>
                               </div>
                             }
                           />
-
                           <div class="contacts_form_name_icon">
                             <input
                               placeholder={Variable.lang.placeholder.name}
@@ -145,18 +145,16 @@ const start = function () {
                               data-type="name"
                               value={formInputs.name.value}
                               oninput={changeInput}
-                            // disabled = {Variable.myInfo.nickname !==  undefined  ? true : false }
-                            // style ={Variable.myInfo.nickname !==  undefined ? "border-color: rgb(37, 249, 48);" : "border-color: rgb(37, 249, 48)"} 
                             />
                           </div>
                         </div>
                         <div>
                           <label for="">{Variable.lang.label.email}</label>
                           <If
-                            data={formInputs.email.error != ""}
+                            data={formInputs.email.error}
                             dataIf={
-                              <div class="error-div" style="display: block">
-                                <div class="error-div-variant">{Variable.lang.error_div.wrong_email}</div>
+                              <div class="error-div">
+                                <div class="error-div-variant">{formInputs.email.errorText}</div>
                               </div>
                             }
                           />
@@ -168,23 +166,19 @@ const start = function () {
                               data-type="email"
                               value={formInputs.email.value}
                               oninput={changeInput}
-                            // disabled = {Variable.myInfo.email !==  undefined  ? true : false }
-                            // style ={Variable.myInfo.email !==  undefined && "border-color: rgb(37, 249, 48);"} 
                             />
                           </div>
                         </div>
-                        {/* <Select options={optionsSelect.contactsSelectorTitles} callback={selectCallBack} /> */}
                         <div>
                           <label for="">{Variable.lang.label.message}</label>
                           <If
                             data={formInputs.text.error != ""}
                             dataIf={
-                              <div class="error-div" style="display: block">
-                                <div class="error-div-variant">{Variable.lang.error_div.not_empty_input}</div>
+                              <div class="error-div">
+                                <div class="error-div-variant">{formInputs.text.errorText}</div>
                               </div>
                             }
                           />
-
                           <div>
                             <textarea
                               placeholder={Variable.lang.placeholder.message}
@@ -206,7 +200,7 @@ const start = function () {
                   }
                 />
               </div>
-              <div class="contacts_info" style={`${formInputs.messageSent != "" ? "margin-top: 20px" : ""}`}>
+              <div class="contacts_info" style={[formInputs.messageSent ? "margin-top: 20px" : null]}>
                 <span class="contact_info_label">
                   {Variable.lang.span.adress}:
                 </span>
@@ -233,5 +227,5 @@ const start = function () {
     }
   );
 };
-
+//I check
 export default start;

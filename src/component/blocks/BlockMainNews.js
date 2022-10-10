@@ -2,11 +2,11 @@ import {
     jsx,
     jsxFrag,
     Helpers,
-    Variable
+    Variable,
+    sendApi
 } from '@betarost/cemjs';
-import { siteLink } from '@src/functions.js'
+
 import svg from '@assets/svg/index.js';
-import { getNewsItemInShow } from "@src/apiFunctions.js";
 
 const BlockMainNews = function () {
 
@@ -14,7 +14,7 @@ const BlockMainNews = function () {
         <div class="news_block_container">
             <div class="news_block">
                 <div class="home_page_news">
-                    <a class="crypto_news_link" href="/news/" onclick={siteLink}>Crypto News</a>
+                    <a class="crypto_news_link" href="/news/" onclick={Helpers.siteLink}>Crypto News</a>
                     <div class="gradient_line"></div>
                 </div>
                 <div class="main_page_news_block">
@@ -24,12 +24,14 @@ const BlockMainNews = function () {
                                 <a
                                     class="blog_news_item"
                                     onClick={async () => {
-                                        let news = await getNewsItemInShow(newsItem._id);
-                                        news = news.list_records[0];
-                                        Variable.SetModals({
-                                            name: "ModalFullNews",
-                                            data: { news },
-                                        });
+                                        let news = await sendApi.send({ action: "getNews", short: true, filter: { _id: newsItem._id } });
+                                        console.log('=661f0d=', news)
+                                        // let news = await getNewsItemInShow(newsItem._id);
+                                        // news = news.list_records[0];
+                                        // Variable.SetModals({
+                                        //     name: "ModalFullNews",
+                                        //     data: { news },
+                                        // });
                                     }}
                                 >
                                     <img
@@ -57,7 +59,7 @@ const BlockMainNews = function () {
                 </div>
             </div>
             <div class="button-container-preview">
-                <a class="btn-news-preview" href="/news/" onclick={siteLink}>
+                <a class="btn-news-preview" href="/news/" onclick={Helpers.siteLink}>
                     <span>
                         {Variable.lang.button.allNews}
                     </span>
@@ -66,5 +68,5 @@ const BlockMainNews = function () {
         </div>
     )
 }
-
+//I check
 export { BlockMainNews }

@@ -1,38 +1,56 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    Helpers
 } from "@betarost/cemjs";
-import { getDateFormat } from "@src/functions.js";
-import images from "@assets/images/index.js";
-import svg from "@assets/svg/index.js";
 
-const NewsItem = function ({ newsItem }) {
-    // console.log("NewsItem", newsItem)
+import svg from "@assets/svg/index.js";
+import { If } from '@component/helpers/All.js';
+
+const NewsItem = function ({ item, index }) {
 
     return (
-        <a data-id={newsItem._id} class="blog_news_item">
-            <img
-                style="width: 100px; margin-bottom: 20px"
-                class=""
-                src={`/assets/upload/news/${newsItem.image}`}
-            /> {/* load */}
-            <p
-                style="width: 60%; margin-bottom: 20px"
-                class="blog_new_title "
-            >{newsItem.title}</p> {/* load */}
-            <div style="display: flex!important;" class="blog_post_stat">
+        <div class="blog_news_item"
+        // onClick={async () => {
+        //     let news;
+        //     news = await getNewsItemInShow(item._id);
+        //     news = news.list_records[0];
+        //     Variable.SetModals({
+        //         name: "ModalFullBlog",
+        //         data: { news },
+        //     });
+        // }}
+        >
+            <img src={"/assets/upload/news/" + item.image} />
+            <p class="blog_new_title">{item.title}</p>
+            <span class="blog_new_text">{item.preview}</span>
+            <div
+                style="display: flex!important;"
+                class="blog_post_stat"
+            >
                 <span>
-                    <img src={svg.question_views} />
-                    <span class="">{newsItem.statistic.view}</span> {/* load */}
+                    <img src={svg["question_views"]} />
+                    {item.statistic.view}
                 </span>
                 <span>
-                    <img src={svg.question_answers} />
-                    <span class="">{newsItem.statistic.comments}</span> {/* load */}
+                    <img src={svg["question_answers"]} />
+                    {item.statistic.comments}
                 </span>
-                <span class="">{getDateFormat(newsItem.showDate)}</span> {/* load */}
+                <span>{Helpers.getDateFormat(item.showDate)}</span>
             </div>
-        </a>
+            <If
+                data={typeof item.source != "undefined"}
+                dataIf={
+                    <p class="full_news_disclaimer mr20">
+                        {Variable.lang.p.source}
+                        <a href={item.source} rel="nofollow" target="_blank">
+                            {item.source}
+                        </a>
+                    </p>
+                }
+            />
+        </div>
     )
 }
 

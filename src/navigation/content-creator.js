@@ -3,7 +3,9 @@ import {
     jsxFrag,
     init,
     initReload,
-    Variable
+    Variable,
+    sendApi,
+    Helpers
 } from "@betarost/cemjs";
 import { mainUsers } from "@src/apiFunctions.js";
 import svg from "@assets/svg/index.js";
@@ -76,6 +78,11 @@ const start = function () {
             nowShow = 21;
             totalRecords = tmp.totalFound;
             // console.log("users = ", users);
+
+            Variable.PageContentCreator = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageContentCreator" });
+
+            console.log('=a2ef89=', Variable.PageContentCreator)
+
         },
         () => {
             console.log("Second Init")

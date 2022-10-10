@@ -16,11 +16,80 @@ const start = function () {
     Variable.HeaderShow = true
     Variable.FooterShow = true
 
-    let ticketNumber
+    let ticketNumber, formValid
+
+    const SendLotteryForm = async function(event){
+        event.preventDefault()
+        var data = getSendData("setLottery")
+        data.data.value = {
+          nickname: this.elements.nickname.value,
+          telegram: this.elements.telegram.value,
+          twitter: this.elements.twitter.value,
+          instagram: this.elements.instagram.value,
+          email: this.elements.email.value
+        }
+        let tmpRes = await SendData(data)
+        let res = await makeData({res:tmpRes, one: true})
+        let htmlData = getFirstData()
+        htmlData.ticketNumber = res.ticketNumber
+        $('.lottery_data').html(await partialsHtml('ticket', htmlData))
+    }
+
+    const lotteryValidCheckPaste = function(){
+
+        formValid[this.name] = true
+      
+        let FullFilledForm = true
+        $('.lottery_form').find('input').each(function(){
+          if(this.value.trim().length == 0 && this != target){
+            FullFilledForm = false
+          }
+        })
+        if($('.valid_quiz_answer').length == 0){
+          FullFilledForm = false
+        }
+        if(FullFilledForm){
+          $('.lottery_form').find('.lottery_form_button').removeClass('lottery_form_button_inactive')
+          $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
+        }
+      }
+
+      const lotteryValidCheckKeyup = function(){
+        if(target.value.trim().length != 0){
+          formValid[this.name] = true
+        } else {
+          formValid[this.name] = false
+        }
+      
+        let FullFilledForm = true
+        $('.lottery_form').find('input').each(function(){
+          if(this.value.trim().length == 0){
+            FullFilledForm = false
+          }
+        })
+        if($('.valid_quiz_answer').length == 0){
+          FullFilledForm = false
+        }
+        if(FullFilledForm){
+          $('.lottery_form').find('.lottery_form_button').removeClass('lottery_form_button_inactive')
+          $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
+        }else{
+          $('.lottery_form').find('.lottery_form_button').addClass('lottery_form_button_inactive')
+          $('.lottery_form').find('.lottery_form_button').find('button').attr('disabled', 'disabled')
+        }
+      }
+
     
     init(
         async () => {
             ticketNumber = false
+            formValid = {
+                email: false,
+                telegram: false,
+                twitter: false,
+                instagram: false,
+                quiz: false
+            }
         },
         () => {
             // console.log("Second Init ", questions)

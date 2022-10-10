@@ -50,141 +50,139 @@ const start = function () {
   console.log('=mediaItem=',mediaItem)
 
       return (
-        <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"} blog_page_container`}>
-         <div class="blog_page">
-       <div class="blog_filter">
-           <h2>{lang.h.mediaUs}</h2>
+        <div class="blog_page">
+          <div class="blog_filter">
+            <h2>{lang.h.mediaUs}</h2>
 
            {/* <div class="profit_calculator_inputs_container">
                 <input type="text" id="datepicker"></p>
              </div> */}
 
-           <input
-            data-keyup="newsSearchEnter"
-            data-type="media_about_us"
-            class="news_search_input"
-             type="text"
-           />
-           <div data-action="searchNewsInputSummon" class="news_search_button">
-             <img src={svg["search_button"]} />
-           </div>
-         </div>
-         <div class="tags">
-           <div
-             class={`tag_button ${activeCategory == "en" && "tag_button_active"} `}
-            data-name={en.code}
-            onclick={(e) => {
-              changeNewsCategory(e,"media")
-            }}
-          >
-            <span>{en.lang_orig}</span>
+            <input
+              data-keyup="newsSearchEnter"
+              data-type="media_about_us"
+              class="news_search_input"
+              type="text"
+            />
+            <div data-action="searchNewsInputSummon" class="news_search_button">
+              <img src={svg["search_button"]} />
+            </div>
           </div>
-
-          {lang.lang_orig !== "English" && (
+          <div class="tags">
             <div
-              class={`tag_button ${activeCategory !== "en" && "tag_button_active"} `}
-              data-name={lang.code}
+              class={`tag_button ${activeCategory == "en" && "tag_button_active"} `}
+              data-name={en.code}
               onclick={(e) => {
                 changeNewsCategory(e,"media")
               }}
             >
-              <span>{lang.lang_orig}</span>
+              <span>{en.lang_orig}</span>
             </div>
-          )}
 
-          {/* {{#arrayWhile list_category}}
-                <div class="tag_button{{#if isLast}} tag_button_active" data-total="{{data.totalFound}}{{/if}}" data-action="changeTagButton" data-type="media" data-name="{{code}}">
-                    <span>{{orig_name}}</span>
-                </div>
-            {{/arrayWhile}} */}
-        </div>
-        {/* <div class="userNewsBlock">
-            {{#arrayWhile list_category}}
-                {{#if isLast}}
-                    <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one bl_active">
-                        <div class="blog_news">
-                            {{>newsBlock list_records=data.list_records}}
-                        </div>
-                    </div>
-                {{else}}
-                <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one"></div>
-                {{/if}}
-            {{/arrayWhile}}
-        </div> */}
-        <div class="userNewsBlock">
-          <div
-            data-touchmove="userBlogSlide"
-            data-touchstart="userBlogSlideStart"
-            data-touchend="userBlogSlideEnd"
-            class="bl_one bl_active"
-          >
-            <div class="blog_news">
-            {mediaItem.totalFound === 0 ?
-            <div class = "nothing_found">
-              <img  src = {svg["partner-list_icon"]} />
-              <p>{lang.p.notFound} </p>
-            </div> 
-            :
-             mediaItem.list_records.map((item) => {
-              console.log('=0cce9d=',item)
-              return (
-                <div class="blog_news_item"
-                onClick={async () => {
-                  let news;
-                  news = await getNewsItemInShow(item._id);
-                  news = news.list_records[0];
-                  Variable.SetModals({
-                    name: "ModalFullMedia",
-                    data: {news},
-                  });
+            {lang.lang_orig !== "English" && (
+              <div
+                class={`tag_button ${activeCategory !== "en" && "tag_button_active"} `}
+                data-name={lang.code}
+                onclick={(e) => {
+                  changeNewsCategory(e,"media")
                 }}
-                >
-                  <img src={"/assets/upload/news/" + item.image} />
-                  <p class="blog_new_title">{item.title}</p>
-                  <span class="blog_new_text">{item.preview}</span>
-                  <div
-                    style="display: flex!important;"
-                    class="blog_post_stat"
-                  >
-                    <span>
-                      <img src={svg["question_views"]} />{" "}
-                      {item.statistic.view}
-                    </span>
-                    <span>
-                      <img src={svg["question_answers"]} />{" "}
-                      {item.statistic.comments}
-                    </span>
-                    <span>{getDateFormat(item.showDate)}</span>
+              >
+                <span>{lang.lang_orig}</span>
+              </div>
+            )}
+
+            {/* {{#arrayWhile list_category}}
+                  <div class="tag_button{{#if isLast}} tag_button_active" data-total="{{data.totalFound}}{{/if}}" data-action="changeTagButton" data-type="media" data-name="{{code}}">
+                      <span>{{orig_name}}</span>
                   </div>
-                  {item.source !== undefined && (
-                    <p class="full_news_disclaimer mr20">
-                      {lang.p.source}{" "}
-                      <a href="{{source}}" rel="nofollow" target="_blank">
-                        {item.source}
-                      </a>
-                    </p>
-                  )}
-                  {/* {{#if source}}{{#if suoureShow}}<p class="full_news_disclaimer mr20">{{Variable.lang.p.source}} <a href="{{source}}" rel="nofollow" target="_blank">{{source}}</a></p>{{/if}}{{/if}} */}
-                </div>
-              );
-            })}
-            </div>
-            <a class="btn-view-all-a" onclick={showMore}>
-                  <div
-                    class="btn-view-all"
-                    data-action="viewAllButton"
-                    style={
-                      mediaItem.list_records.length === mediaItem.totalFound
-                        ? "display: none"
-                        : "display: flex"
-                    }
-                  >
-                    <div>{Variable.lang.button.showMore}</div>
-                  </div>
-                </a>
+              {{/arrayWhile}} */}
           </div>
-        </div>
-      </div>
+          {/* <div class="userNewsBlock">
+              {{#arrayWhile list_category}}
+                  {{#if isLast}}
+                      <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one bl_active">
+                          <div class="blog_news">
+                              {{>newsBlock list_records=data.list_records}}
+                          </div>
+                      </div>
+                  {{else}}
+                  <div data-touchmove="userBlogSlide" data-touchstart="userBlogSlideStart" data-touchend="userBlogSlideEnd" class="bl_one"></div>
+                  {{/if}}
+              {{/arrayWhile}}
+          </div> */}
+          <div class="userNewsBlock">
+            <div
+              data-touchmove="userBlogSlide"
+              data-touchstart="userBlogSlideStart"
+              data-touchend="userBlogSlideEnd"
+              class="bl_one bl_active"
+            >
+              <div class="blog_news">
+              {mediaItem.totalFound === 0 ?
+              <div class = "nothing_found">
+                <img  src = {svg["partner-list_icon"]} />
+                <p>{lang.p.notFound} </p>
+              </div> 
+              :
+              mediaItem.list_records.map((item) => {
+                console.log('=0cce9d=',item)
+                return (
+                  <div class="blog_news_item"
+                  onClick={async () => {
+                    let news;
+                    news = await getNewsItemInShow(item._id);
+                    news = news.list_records[0];
+                    Variable.SetModals({
+                      name: "ModalFullMedia",
+                      data: {news},
+                    });
+                  }}
+                  >
+                    <img src={"/assets/upload/news/" + item.image} />
+                    <p class="blog_new_title">{item.title}</p>
+                    <span class="blog_new_text">{item.preview}</span>
+                    <div
+                      style="display: flex!important;"
+                      class="blog_post_stat"
+                    >
+                      <span>
+                        <img src={svg["question_views"]} />{" "}
+                        {item.statistic.view}
+                      </span>
+                      <span>
+                        <img src={svg["question_answers"]} />{" "}
+                        {item.statistic.comments}
+                      </span>
+                      <span>{getDateFormat(item.showDate)}</span>
+                    </div>
+                    {item.source !== undefined && (
+                      <p class="full_news_disclaimer mr20">
+                        {lang.p.source}{" "}
+                        <a href="{{source}}" rel="nofollow" target="_blank">
+                          {item.source}
+                        </a>
+                      </p>
+                    )}
+                    {/* {{#if source}}{{#if suoureShow}}<p class="full_news_disclaimer mr20">{{Variable.lang.p.source}} <a href="{{source}}" rel="nofollow" target="_blank">{{source}}</a></p>{{/if}}{{/if}} */}
+                  </div>
+                );
+              })}
+              </div>
+              <a class="btn-view-all-a" onclick={showMore}>
+                    <div
+                      class="btn-view-all"
+                      data-action="viewAllButton"
+                      style={
+                        mediaItem.list_records.length === mediaItem.totalFound
+                          ? "display: none"
+                          : "display: flex"
+                      }
+                    >
+                      <div>{Variable.lang.button.showMore}</div>
+                    </div>
+                  </a>
+            </div>
+          </div>
         </div>
       )
     }

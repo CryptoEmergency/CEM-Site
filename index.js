@@ -8,7 +8,9 @@ init({
         fileName: "main.js"
     },
     port: 80,
-    mode: "production",
+    // mode: "production",
+    mode: "development",
+    // api: "",
     api: "office"
 });
 //I check

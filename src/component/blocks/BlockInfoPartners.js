@@ -1,10 +1,11 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    Helpers
 } from '@betarost/cemjs';
+
 import images from "@assets/images/index.js";
-import { siteLink } from '@src/functions.js'
 import { If } from '@component/helpers/All.js';
 
 const partners = [
@@ -84,7 +85,7 @@ const BlockInfoPartners = function (data) {
                 data={data && data.limit}
                 dataIf={
                     <div class="crypto_exchanges_footer">
-                        <a class="c-button c-button--gray" href="/partners/" onclick={siteLink}>
+                        <a class="c-button c-button--gray" href="/partners/" onclick={Helpers.siteLink}>
                             <span class="c-button__wrapper">{Variable.lang.button.allPartners}</span>
                         </a>
                     </div>

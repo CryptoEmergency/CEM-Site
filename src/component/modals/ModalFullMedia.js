@@ -57,11 +57,11 @@ import {
             </a>
           </header>
           <div class="c-modal__body">
-            <div
+            {/* <div
               class={`${
                 Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
               }`}
-            >
+            > */}
               <div class="full_news_container">
                 <div class="full_news_block">
                   {/* {{#is myInfo.role 1}}     */}
@@ -141,7 +141,7 @@ import {
                   />
                 </div>
               </div>
-            </div>
+            {/* </div> */}
           </div>
         </section>
       </div>

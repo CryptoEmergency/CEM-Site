@@ -4,11 +4,11 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
+
 import svg from "@assets/svg/index.js";
-import { BlockAffiliateBanners } from "@src/component/blocks/BlockAffiliateBanners.js";
+import { BlockAffiliateBanners } from '@component/blocks/index.js';
 
 const start = function () {
-
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
 

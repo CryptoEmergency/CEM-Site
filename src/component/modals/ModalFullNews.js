@@ -37,6 +37,7 @@ const ModalFullNews = function ({ news }, reload) {
   // news = news.list_records[0];
   //  news = item
   console.log("ReloadModal", news);
+  console.log('=2b5cae=',Variable)
   return (
     <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalFullNews">
       <section class="c-modal__dialog">

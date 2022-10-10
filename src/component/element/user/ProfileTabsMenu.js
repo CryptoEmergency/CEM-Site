@@ -8,7 +8,7 @@ import {
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 
-const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
+const ProfileTabsMenu = function ({ userInfo, profilePage, changeType }) {
 
 
     return (
@@ -18,8 +18,8 @@ const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
             {/* <div class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/user_feeds${tabType != 'lentaFriends' ? '_inactive' : ''}`]}
-                    data-tabType = "lentaFriends"
+                    src={svg[`sections/user_feeds${profilePage != 'lentaFriends' ? '_inactive' : ''}`]}
+                    data-profilePage = "lentaFriends"
                     onclick={changeType}
                 />
             </div> */}
@@ -28,16 +28,16 @@ const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
             <div class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/information${tabType != 'aboutUser' ? '_inactive' : ''}`]}
-                    data-tabType="aboutUser"
+                    src={svg[`sections/information${profilePage != 'aboutUser' ? '_inactive' : ''}`]}
+                    data-profilePage="aboutUser"
                     onclick={changeType}
                 />
             </div>
             <div data-type="questions" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/questions${tabType != 'questions' ? '_inactive' : ''}`]}
-                    data-tabType="questions"
+                    src={svg[`sections/questions${profilePage != 'questions' ? '_inactive' : ''}`]}
+                    data-profilePage="questions"
                     onclick={changeType}
                 />
                 <div class="user_category_gradient_frame">
@@ -49,8 +49,8 @@ const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
             <div data-type="answers" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/answers${tabType != 'answers' ? '_inactive' : ''}`]}
-                    data-tabType="answers"
+                    src={svg[`sections/answers${profilePage != 'answers' ? '_inactive' : ''}`]}
+                    data-profilePage="answers"
                     onclick={changeType}
                 />
                 <div class="user_category_gradient_frame">
@@ -62,8 +62,8 @@ const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
             <div data-type="subscribers" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/followers${tabType != 'subscribers' ? '_inactive' : ''}`]}
-                    data-tabType="subscribers"
+                    src={svg[`sections/followers${profilePage != 'subscribers' ? '_inactive' : ''}`]}
+                    data-profilePage="subscribers"
                     onclick={changeType}
                 />
                 <div class="user_category_gradient_frame">
@@ -75,8 +75,8 @@ const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
             <div data-type="friends" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/friends${tabType != 'friends' ? '_inactive' : ''}`]}
-                    data-tabType="friends"
+                    src={svg[`sections/friends${profilePage != 'friends' ? '_inactive' : ''}`]}
+                    data-profilePage="friends"
                     onclick={changeType}
                 />
                 <div class="user_category_gradient_frame">
@@ -88,32 +88,32 @@ const ProfileTabsMenu = function ({ userInfo, tabType, changeType }) {
             <div data-type="awards" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/awards${tabType != 'awards' ? '_inactive' : ''}`]}
-                    data-tabType="awards"
+                    src={svg[`sections/awards${profilePage != 'awards' ? '_inactive' : ''}`]}
+                    data-profilePage="awards"
                     onclick={changeType}
                 />
             </div>
-            <div data-type="social" class="c-usercategories__item">
+            {/* <div data-type="social" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/social${tabType != 'social' ? '_inactive' : ''}`]}
-                    data-tabType="social"
+                    src={svg[`sections/social${profilePage != 'social' ? '_inactive' : ''}`]}
+                    data-profilePage="social"
                     onclick={changeType}
                 />
-            </div>
+            </div> */}
             {/* <div data-type="galary" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/galary${tabType != 'galary' ? '_inactive' : ''}`]}
-                    data-tabType="galary"
+                    src={svg[`sections/galary${profilePage != 'galary' ? '_inactive' : ''}`]}
+                    data-profilePage="galary"
                     onclick={changeType}
                 />
             </div> */}
             {/* <div data-updating="true" data-type="donation" data-action="link" class="c-usercategories__item">
                 <img
                     class="c-usercategories__img"
-                    src={svg[`sections/donation${tabType != 'donation' ? '_inactive' : ''}`]}
-                    data-tabType="donation"
+                    src={svg[`sections/donation${profilePage != 'donation' ? '_inactive' : ''}`]}
+                    data-profilePage="donation"
                     onclick={changeType}
                 />
             </div> */}

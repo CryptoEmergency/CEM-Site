@@ -3,57 +3,37 @@ import {
   jsxFrag,
   Variable
 } from "@betarost/cemjs";
-import { checkAnswerApi } from "@src/functions.js";
 
-// const categoryTemplate = function() {
+import { Map } from '@component/helpers/All.js';
+const NewsCategory = function ({ activeCategory, items, onclick }) {
 
-// }
-
-const NewsCategory = function () {
-  console.log("test")
-  // const lang = getVariable("languages")[getStorage("lang")];
-  // console.log(lang);
-  // const response = checkAnswerApi(
-  //   await sendApi.create("getCategories", {
-  //     filter: {
-  //       type: "news",
-  //       "count.ru": {
-  //         $gt: 0,
-  //       },
-  //     },
-  //   })
-  // );
-  // console.log("category", response);
   return (
-    <div></div>
+    <div class="tags">
+      <div
+        class={['tag_button', activeCategory == "All" ? 'tag_button_active' : null]}
+        data-name="All"
+        onclick={onclick}
+      >
+        <span>{Variable.lang.categoryName.all}</span>
+      </div>
+      <Map
+        data={items.list_records.filter((item) => item.name !== null)}
+        dataIf={
+          (item) => {
+            return (
+              <div
+                class={['tag_button', activeCategory == item.name ? 'tag_button_active' : null]}
+                data-name={item.name}
+                onclick={onclick}
+              >
+                <span>{Variable.lang.categoryName[item.name]}</span>
+              </div>
+            );
+          }
+        }
+      />
+    </div>
   )
 }
-
+//I check
 export { NewsCategory }
-
-
-
-
-
-
-
-
-
-// export default async function NewsCategory() {
-//   const lang = getVariable("languages")[getStorage("lang")];
-//   console.log(lang);
-//   const response = checkAnswerApi(
-//     await sendApi.create("getCategories", {
-//       filter: {
-//         type: "news",
-//         "count.ru": {
-//           $gt: 0,
-//         },
-//       },
-//     })
-//   );
-//   console.log("category", response);
-//   return (<div>Category</div>)
-// }
-
-

@@ -6,6 +6,304 @@
 
     &__content {}
 
+    &__roadmap {
+        margin-top: 120px;
+
+        @media(max-width: 1199px) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media(max-width: 1024px) {
+            margin-top: 60px
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        @media (max-width: 1199px) {
+            justify-content: space-around;
+        }
+    }
+
+    &__toppart {
+        display: flex;
+
+        @media (max-width: 1199px) {
+            order: 3;
+            flex-direction: column;
+            margin-left: 80px;
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            margin-left: 125px;
+        }
+
+        @media (max-width: 680px) {
+            margin-left: 20px;
+        }
+    }
+
+    &__axis {
+
+        @media (max-width: 1199px) {
+            transform: rotate(90deg) translateX(50%);
+        }
+    }
+
+    &__bottompart {
+        display: flex;
+        margin-top: 20px;
+
+        @media (max-width: 1199px) {
+            order: 1;
+            flex-direction: column;
+            margin-right: 100px;
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            margin-right: 75px;
+        }
+
+        @media (max-width: 464px) {
+            margin-right: 40px;
+        }
+
+        p {
+
+            @media (max-width: 1199px) {
+                text-align: right;
+            }
+        }
+    }
+
+    &__dateitem {
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: 1199px) {
+            position: absolute;
+        }
+
+        p {
+            position: relative;
+            width: 200px;
+            margin-bottom: 21px;
+            font-weight: bold;
+            font-size: 36px;
+            line-height: 115%;
+
+            @media(max-width: 768px) {
+                font-size: 20px;
+            }
+
+            @media (max-width: 680px) {
+                width: 104px;
+            }
+
+            &::after {
+                position: absolute;
+                bottom: -7px;
+                left: 0;
+                content: '';
+                width: 24px;
+                height: 3px;
+            }
+
+        }
+
+        &--1 {
+            margin-left: 30%;
+
+            p {
+                color: #00F2C6;
+
+                @media (max-width: 680px) {
+                    width: 104px;
+                }
+
+                &::after {
+                    background: #00F2C6;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                top: 290px;
+            }
+
+            @media (max-width: 464px) {
+                top: 330px;
+            }
+        }
+
+        &--2 {
+            margin-left: 15%;
+
+            p {
+                color: #A43CF9;
+
+                @media (max-width: 680px) {
+                    width: 104px;
+                }
+
+                &::after {
+                    background: #A43CF9;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                top: 550px;
+            }
+
+            @media (max-width: 464px) {
+                top: 590px;
+            }
+        }
+
+        &--3 {
+            margin-left: 40%;
+
+            p {
+                color: #1D7AF8;
+
+                @media (max-width: 680px) {
+                    width: 104px;
+                }
+
+                &::after {
+                    background: #1D7AF8;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                top: 985px;
+            }
+
+            @media (max-width: 464px) {
+                top: 1020px;
+            }
+        }
+
+        &--1,
+        &--2,
+        &--3 {
+
+            @media (max-width: 1199px) {
+                left: 60%;
+                margin-left: 0;
+            }
+
+            @media (max-width: 799px) {
+                left: 65%;
+            }
+
+            @media (max-width: 680px) {
+                left: 70%;
+            }
+
+            @media (max-width: 464px) {
+                left: 60%;
+            }
+        }
+
+        &--4 {
+            margin-left: 45%;
+
+            p {
+                color: #00A5F7;
+
+                @media (max-width: 680px) {
+                    width: 104px;
+                }
+
+                &::after {
+                    background: #00A5F7;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                top: 330px;
+            }
+
+            @media (max-width: 464px) {
+                top: 380px;
+            }
+        }
+
+        &--5 {
+            margin-left: 40%;
+
+            p {
+                color: #FF6E6C;
+
+                @media (max-width: 680px) {
+                    width: 104px;
+                }
+
+                &::after {
+                    background: #A43CF9;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                top: 760px;
+            }
+
+            @media (max-width: 464px) {
+                top: 810px;
+            }
+        }
+
+        &--6 {
+            margin-left: 35%;
+
+            p {
+                color: #FF9B00;
+
+                @media (max-width: 680px) {
+                    width: 104px;
+                }
+
+                &::after {
+                    background: #FF9B00;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                top: 1190px;
+            }
+
+            @media (max-width: 464px) {
+                top: 1240px;
+            }
+        }
+
+        &--4,
+        &--5,
+        &--6 {
+
+            p {
+
+                &::after {
+                    left: auto;
+                    right: 0;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                right: 60%;
+                margin-left: 0;
+            }
+        }
+    }
+
     h2 {
         position: relative;
         width: 100%;
@@ -70,6 +368,11 @@
         position: absolute;
         left: 0;
         z-index: 1;
+
+        &--right {
+            left: auto;
+            right: 0;
+        }
     }
 
     &__bg {

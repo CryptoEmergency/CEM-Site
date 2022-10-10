@@ -17,6 +17,11 @@
     padding-top: 50px;
     padding-bottom: 120px;
     overflow: hidden;
+
+    @media (max-width: 750px) {
+        padding-top: 30px;
+        padding-bottom: 0;
+    }
 }
 
 .blog_page h2 {
