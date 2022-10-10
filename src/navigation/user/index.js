@@ -22,9 +22,6 @@ import {
 
 import { BlockUserPreview } from '@component/blocks/user/BlockUserPreview.js';
 import { getUserQuestions, getUserAnswers, getUserFollowers, getUserSubscribes, getUserByNickname } from '@src/apiFunctionsL.js'
-import {
-    BlockUserProfileAbout
-} from '@component/blocks/user/BlockUserProfileAbout.js';
 
 
 
@@ -35,72 +32,6 @@ const start = function () {
     Variable.HeaderShow = false
     Variable.FooterShow = false
     Variable.showUserMenu = true
-
-
-    const currentCategory = function () {
-        console.log(tabType)
-        switch (tabType) {
-            case 'lentaFriends':
-                return (
-                    <div></div>
-                )
-                break;
-            case 'lentaUser':
-                return (
-                    <div></div>
-                )
-                break;
-            case 'aboutUser':
-                return (
-                    <BlockUserProfileAbout
-                        lang={Variable.lang}
-                        myInfo={Variable.myInfo}
-                        userInfo={userInfo}
-                    />
-                )
-                break;
-            case 'questions':
-                return (
-                    <></>
-                )
-                break;
-            case 'answers':
-                return (
-                    <></>
-                )
-                break;
-            case 'subscribers':
-                return (
-                    <></>
-                )
-                break;
-            case 'friends':
-                return (
-                    <></>
-                )
-                break;
-            case 'awards':
-                return (
-                    <></>
-                )
-                break;
-            case 'social':
-                return (
-                    <></>
-                )
-                break;
-            case 'galary':
-                return (
-                    <div></div>
-                )
-                break;
-            case 'donation':
-                return (
-                    <div></div>
-                )
-                break;
-        }
-    }
 
     const changeType = async function () {
         if (this.dataset.tabtype == tabType) {

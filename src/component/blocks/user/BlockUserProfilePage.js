@@ -174,8 +174,17 @@ BlockUserProfilePage.aboutUser = function (data) {
                                     }
                                 />
 
-
-                                {/* {ListInterests} */}
+                                <Map
+                                    data={data.userInfo.interest}
+                                    dataIf={(item, index) => {
+                                        return (
+                                            <div>
+                                                <b>{item.title}<img class="editbigblockinfo" style="display: none;" src={svg['pencil']} /></b>
+                                                <span>{item.description}</span>
+                                            </div>
+                                        )
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -185,24 +194,35 @@ BlockUserProfilePage.aboutUser = function (data) {
                                 <p>{Variable.lang.p.work}</p>
                                 <div class="work_and_education">
                                 </div>
-                                {/* <If
-                                    data={myInfo._id == userInfo._id}
+                                <If
+                                    data={Variable.myInfo._id == data.userInfo._id}
                                     dataIf={
                                         <div class="about_user_section_points_container">
-                                            <img class="about_user_section_points" data-action="aboutUserEditMenu" src={svg['points']} />
+                                            <img class="about_user_section_points" src={svg['points']} />
                                             <div class="about_user_section_points_menu">
-                                                <div id="addNewWork" data-action="newWorkShow" class="about_user_section_points_menu_item about_user_add_handler">{Variable.lang.button.add}</div>
+                                                <div id="addNewWork" class="about_user_section_points_menu_item about_user_add_handler">{Variable.lang.button.add}</div>
                                                 <If
-                                                    data={userInfo.work.length != 0}
+                                                    data={data.userInfo.work.length != 0}
                                                     dataIf={
-                                                        <div class="about_user_section_points_menu_item about_user_edit_handler" data-action="aboutMeEditShow">{Variable.lang.button.edit}</div>
+                                                        <div class="about_user_section_points_menu_item about_user_edit_handler">{Variable.lang.button.edit}</div>
                                                     }
                                                 />
                                             </div>
                                         </div>
                                     }
-                                /> */}
-                                {/* {ListWorks} */}
+                                />
+                                <Map
+                                    data={data.userInfo.work}
+                                    dataIf={(item, index) => {
+                                        return (
+                                            <div id={item._id} class="work_and_education_block">
+                                                <span>{item.title} <img class="editworkinfo" style="display: none;" src={svg['pencil']} /></span>
+                                                <span>{item.period}</span>
+                                                <span>{item.description}</span>
+                                            </div>
+                                        )
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -211,6 +231,7 @@ BlockUserProfilePage.aboutUser = function (data) {
         </div>
     )
 }
+
 BlockUserProfilePage.awards = function (data) {
     if (!data || data.profilePage != "awards") {
         return (<></>)
