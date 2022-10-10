@@ -32,7 +32,7 @@ BlockUserProfilePage.aboutUser = function (data) {
                                     <div class="about_user_section_inner">
                                         <p>{Variable.lang.p.aboutMe}</p>
                                         <span class="about_me_block">
-                                            {data.userInfo.information.about ? data.userInfo.information.about : ''}
+                                            {data.userInfo.information.about ? Helpers.clearText(data.userInfo.information.about) : ''}
                                         </span>
                                         <img class="edit_about_me" src={svg['pencil']} />
                                         <div class="user_grid_info-1">
@@ -83,67 +83,67 @@ BlockUserProfilePage.aboutUser = function (data) {
                                 dataElse={
                                     <div class="about_user_section_inner">
                                         <p>{Variable.lang.p.aboutMe}</p>
-                                        {/* <If
-                                                data={userInfo.information.about}
+                                        <If
+                                            data={data.userInfo.information.about}
+                                            dataIf={
+                                                <span class="about_me_block">{Helpers.clearText(data.userInfo.information.about)}</span>
+                                            }
+                                        />
+                                        <div class="user_grid_info-1">
+                                            <If
+                                                data={data.userInfo.fullname}
                                                 dataIf={
-                                                    <span class="about_me_block">{userInfo.information.about}</span>
+                                                    <div class="user_short_info_row">
+                                                        <span>{Variable.lang.label.name}</span>
+                                                        <div><input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
+                                                    </div>
+                                                }
+                                            />
+                                            <If
+                                                data={data.userInfo.information.speciality}
+                                                dataIf={
+                                                    <div class="user_short_info_row">
+                                                        <span>{Variable.lang.label.speciality}</span>
+                                                        <div><input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /></div>
+                                                    </div>
+                                                }
+                                            />
+                                            <If
+                                                data={data.userInfo.country.eng_name}
+                                                dataIf={
+                                                    <div class="user_short_info_row">
+                                                        <span>{Variable.lang.label.country}</span>
+                                                        <div><input id="country" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.country.eng_name} /></div>
+                                                    </div>
+                                                }
+                                            />
+                                            <If
+                                                data={data.userInfo.information.city}
+                                                dataIf={
+                                                    <div class="user_short_info_row">
+                                                        <span>{Variable.lang.label.city}</span>
+                                                        <div><input id="city" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.information.city} /></div>
+                                                    </div>
+                                                }
+                                            />
+                                            {/* <If
+                                                data={data.userInfo.information.birthday}
+                                                dataIf={
+                                                    <div class="user_short_info_row">
+                                                        <span>{Variable.lang.label.birthDate}</span>
+                                                        <div><input type="date" id="birthDate" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.birthday)} /></div>
+                                                    </div>
                                                 }
                                             /> */}
-                                        <div class="user_grid_info-1">
-                                            {/* <If
-                                                    data={userInfo.fullname}
-                                                    dataIf={
-                                                        <div class="user_short_info_row">
-                                                            <span>{Variable.lang.label.name}</span>
-                                                            <div><input id="fullname" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={userInfo.fullname}/></div>
-                                                        </div>
-                                                    }
-                                                />
-                                                <If
-                                                    data={userInfo.information.speciality}
-                                                    dataIf={
-                                                        <div class="user_short_info_row">
-                                                            <span>{Variable.lang.label.speciality}</span>
-                                                            <div><input id="speciality" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={userInfo.information.speciality}/></div>
-                                                        </div>
-                                                    }
-                                                />
-                                                <If
-                                                    data={userInfo.country.eng_name}
-                                                    dataIf={
-                                                        <div class="user_short_info_row">
-                                                            <span>{Variable.lang.label.country}</span>
-                                                            <div><input id="country" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={userInfo.country.eng_name}/></div>
-                                                        </div>
-                                                    }
-                                                />
-                                                <If
-                                                    data={userInfo.information.city}
-                                                    dataIf={
-                                                        <div class="user_short_info_row">
-                                                            <span>{Variable.lang.label.city}</span>
-                                                            <div><input id="city" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={userInfo.information.city}/></div>
-                                                        </div>
-                                                    }
-                                                />
-                                                <If
-                                                    data={userInfo.information.birthday}
-                                                    dataIf={
-                                                        <div class="user_short_info_row">
-                                                            <span>{Variable.lang.label.birthDate}</span>
-                                                            <div><input type="date" id="birthDate" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={getDateFormat(userInfo.information.birthday)}/></div>
-                                                        </div>
-                                                    }
-                                                />
-                                                <If
-                                                    data={userInfo.information.dateCreate}
-                                                    dataIf={
-                                                        <div class="user_short_info_row">
-                                                            <span>{Variable.lang.span.regDate}</span>
-                                                            <div><input type="date" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={getDateFormat(userInfo.information.dateCreate)} /></div>
-                                                        </div>
-                                                    }
-                                                /> */}
+                                            <If
+                                                data={data.userInfo.information.dateCreate}
+                                                dataIf={
+                                                    <div class="user_short_info_row">
+                                                        <span>{Variable.lang.span.regDate}</span>
+                                                        <div><input type="date" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
+                                                    </div>
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 }
@@ -447,6 +447,8 @@ BlockUserProfilePage.answers = function (data) {
     if (!data || data.profilePage != "answers") {
         return (<></>)
     }
+
+
     return (
         <div class="bl_one" id="UserInfoAnswers">
             <h2>{Variable.lang.h.sendAnswers}</h2>
@@ -574,7 +576,6 @@ BlockUserProfilePage.questions = function (data) {
                 <Map
                     data={data.items.list_records}
                     dataIf={(item, index) => {
-                        console.log('=ff32ae=', item)
                         return (
                             <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
                                 <div class="your_answers_main">
