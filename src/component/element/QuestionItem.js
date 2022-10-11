@@ -34,6 +34,7 @@ const QuestionItem = function ({ question }) {
                     <a
                         style="display: block; left: 5px;bottom:5px"
                         href={`/user/${question.author.nickname}`}
+                        onclick={Helpers.siteLink}
                         class="c-question__nickname"
                     > {/* load */}
                         {question.author.nickname}
@@ -62,6 +63,7 @@ const QuestionItem = function ({ question }) {
                 style=""
                 href={`/question/show/${question._id}`}
                 class="c-question__body"
+                onclick={Helpers.siteLink}
             > {/* load */}
                 <div class="c-question__preview">
                     <span class="">
@@ -84,7 +86,7 @@ const QuestionItem = function ({ question }) {
                 </div>
             </div>
             <div class="c-question__footer">
-                <a class="c-button c-button--outline2 " href={`/question/show/${question._id}`}> {/* load */}
+                <a class="c-button c-button--outline2 " href={`/question/show/${question._id}`} onclick={Helpers.siteLink}> {/* load */}
                     <div class="c-button__wrapper">
                         {Variable.lang.button.giveAnswer}
                     </div>

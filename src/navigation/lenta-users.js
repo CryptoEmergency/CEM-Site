@@ -13,14 +13,17 @@ import { If, Map } from '@component/helpers/All.js';
 import { BlockLentaUsers } from "@component/blocks/BlockLentaUsers.js";
 
 
+
 const start = function () {
   let lentaPage
+  let elem = []
   Variable.HeaderShow = true
   Variable.FooterShow = true
 
   init(
     async () => {
-      lentaPage = "video"
+      elem = []
+      lentaPage = "photo"
       Variable.PageLentaall = await sendApi.send({
         action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 10,
         filter: Helpers.getFilterLenta({}, "all")
@@ -36,10 +39,10 @@ const start = function () {
         filter: Helpers.getFilterLenta({}, "video")
       });
 
-      Variable.PageLentaaudio = await sendApi.send({
-        action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 10,
-        filter: Helpers.getFilterLenta({}, "audio")
-      });
+      // Variable.PageLentaaudio = await sendApi.send({
+      //   action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 10,
+      //   filter: Helpers.getFilterLenta({}, "audio")
+      // });
 
       Variable.PageLentatext = await sendApi.send({
         action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 10,
@@ -290,7 +293,8 @@ const start = function () {
                         data={Variable[`PageLenta${lentaPage}`].list_records}
                         dataIf={
                           (item, index) => {
-                            return <BlockLentaUsers item={item} />
+                            elem[index] = []
+                            return <BlockLentaUsers item={item} numIndex={index} elem={elem} />
                           }
                         }
                       />

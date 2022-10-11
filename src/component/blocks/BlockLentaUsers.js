@@ -81,7 +81,7 @@ const returnImgOrVideo = (item) => {
   }
 };
 
-const BlockLentaUsers = function ({ item }) {
+const BlockLentaUsers = function ({ item, numIndex, elem }) {
 
   return (
     <div
@@ -101,6 +101,8 @@ const BlockLentaUsers = function ({ item }) {
         <div class="comment_body">
           <LentaMedia
             items={item.media}
+            numIndex={numIndex}
+            elem={elem}
           />
           {/* {item.media.length > 0 && returnImgOrVideo(item)} */}
 

@@ -3,7 +3,8 @@ import {
     jsxFrag,
     Helpers,
     initOne,
-    initAfter
+    initAfter,
+    Variable
 } from '@betarost/cemjs';
 
 import svg from "@assets/svg/index.js";
@@ -15,8 +16,7 @@ import 'swiper/css/bundle';
 
 let swiperitem
 
-const LentaMedia = function ({ items }) {
-    console.log('=103167=', items)
+const LentaMedia = function ({ items, numIndex, elem, path }) {
     if (items.length == 0) {
         return (
             <></>
@@ -24,7 +24,7 @@ const LentaMedia = function ({ items }) {
     }
     swiperitem = null
     // items.push(...items)
-
+    // items.push(...items)
     // initOne(
     //     () => {
     //         swiperitem = null
@@ -34,26 +34,26 @@ const LentaMedia = function ({ items }) {
     initAfter(
         () => {
             if (!swiperitem) {
-                // swiperitem = new Swiper(".swiper-post_media", {
-                //     effect: "cube",
-                //     grabCursor: true,
-                //     cubeEffect: {
-                //         shadow: true,
-                //         slideShadows: true,
-                //         shadowOffset: 20,
-                //         shadowScale: 0.94,
-                //     },
-                //     loop: false,
-                //     autoHeight: true,
-                //     pagination: {
-                //         el: '.swiper-pagination-post_media',
-                //     },
-                //     scrollbar: {
-                //         el: '.swiper-scrollbar-post_media',
-                //     },
-                //     slidesPerView: 1,
-                //     spaceBetween: 20
-                // });
+                swiperitem = new Swiper(".swiper-post_media", {
+                    effect: "cube",
+                    grabCursor: true,
+                    cubeEffect: {
+                        shadow: true,
+                        slideShadows: true,
+                        shadowOffset: 20,
+                        shadowScale: 0.94,
+                    },
+                    loop: false,
+                    autoHeight: true,
+                    pagination: {
+                        el: '.swiper-pagination-post_media',
+                    },
+                    scrollbar: {
+                        el: '.swiper-scrollbar-post_media',
+                    },
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                });
 
                 // swiperitem = new Swiper(".swiper-post_media", {
                 //     loop: false,
@@ -79,12 +79,21 @@ const LentaMedia = function ({ items }) {
                         dataIf={
                             (item, index) => {
                                 if (item.type == "video") {
+                                    elem[numIndex][index] = Variable.setRef()
                                     return (
-                                        <VideoPlayer
-                                            item={item}
-                                            index={index}
-                                            path={"/assets/upload/posts/"}
-                                        />
+                                        <div class="swiper-slide" onclick={() => {
+                                            console.log('=d86247=', elem[numIndex][index])
+                                            elem[numIndex][index]().play()
+                                        }}>
+                                            <VideoPlayer
+                                                item={item}
+                                                index={index}
+                                                numIndex={numIndex}
+                                                elem={elem}
+                                                path={path}
+                                            //  path={"/assets/upload/posts/"}
+                                            />
+                                        </div>
                                     )
                                 }
 
@@ -92,7 +101,7 @@ const LentaMedia = function ({ items }) {
                                     return (
                                         <a class="swiper-slide">
                                             <div class="swiper-post_media_image_container">
-                                                <img src={`/assets/upload/posts/${item.name}`} />
+                                                <img src={path + item.name} />
                                             </div>
                                         </a>
 

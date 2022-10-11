@@ -8,26 +8,28 @@ import { checkAnswerApi } from "@src/functions.js";
 
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-let elem = []
-const VideoPlayer = function ({ item, index, path }) {
-
+// let video
+const VideoPlayer = function ({ item, numIndex, index, path, elem }) {
+    console.log('=7c211e=', numIndex, index)
     initOne(
         () => {
-            elem[index] = Variable.setRef()
+            // video = Variable.setRef()
         }
     )
+
     return (
 
         <div class="video_container">
             {/* <video playsinline poster={images["video_background"]} preload="metadata" onended="playerEnded(event, this)" onplay="playerPlay(event, this)" onpause="playerPause(event, this)" oncanplay="playerCanplay(event, this)" ontimeupdate="playerTimeupdate(event, this)" onclick="controlPlayerClick(event, this)" ondblclick="openFullscreenThis(event, this)" src={path + item.name}></video> */}
-            <video playsinline poster={images["video_background"]} preload="metadata" src={path + item.name} ref={elem[index]}></video>
+            <video playsinline poster={images["video_background"]} preload="metadata" src={path + item.name} ref={elem[numIndex][index]}></video>
 
             <div class="controls">
                 <img src={svg["player_play"]} class="playpause paused"
                     onclick={() => {
-                        console.log('=920446=', elem[index]())
-                        console.log('=24e535=', elem[index]().paused)
-                        elem[index]().play()
+                        console.log('=437f84=', elem, numIndex, index)
+                        console.log('=920446=', elem[numIndex][index], elem[numIndex][index]())
+                        // console.log('=24e535=', elem[numIndex][index]().paused)
+                        elem[numIndex][index]().play()
                     }}
                 //  onclick="controlPlaypause(event, this)"
                 />

@@ -3,7 +3,7 @@ import {
   jsxFrag,
   Variable,
   init,
-  initGo,
+  sendApi,
   initReload,
   getStorage,
   stringToHtml,
@@ -17,15 +17,21 @@ import { ViewImagesOrVideos } from "@component/element/ViewImagesOrVideos.js";
 import { ViewImageOrVideo } from "@component/element/ViewImageOrVideo.js";
 import { If } from "@component/helpers/All.js";
 
+
+import { BlockQuestionsShow } from '@component/blocks/index.js';
+
 import {
   getDateFormat,
 } from "@src/functions.js";
 
 
 const start = function () {
+  let items
+
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
   let question, answers, myInfo, mediaWithOutAudio, mediaOnlyAudio;
+
   init(
     async () => {
       question = await getQuestionsItemInShow(
@@ -43,84 +49,31 @@ const start = function () {
       console.log("=endInit=", answers);
       myInfo = getStorage("myInfo");
       console.log("=myInfo=", myInfo);
+
+      items = await sendApi.send({ action: "getQuestions", short: true, filter: { _id: Variable.dataUrl.params } });
     },
     () => {
+
       return (
-        <div
-          // class="answer_container"
-          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-            } answer_container`}
-        >
+        <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+          <div class="full_news_container">
+            <div class="answer_block">
+              <BlockQuestionsShow
+                item={items.list_records[0]}
+              />
+            </div>
+          </div>
+        </div>
+
+      )
+
+
+      return (
+        <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <div class="answer_block">
             <div class="answer_content">
               {/* <a class="mrb20" href="{{lang.url}}{{data.pageUrlBefor}}/" data-action="link"><img class="go_back_icon" src="/assets/icon/go_back_icon.svg"><span class="full_news_go_back">{{lang.span.back}}</span></a> */}
-              <div class="question_author_block">
-                <Avatar author={question.author} />
-                <a
-                  href={`/user/${question.author.nickname}`}
-                  data-action="link"
-                  data-needauth="true"
-                >
-                  <div class="question_author_name">
-                    {question.author.nickname}
-                  </div>
-                </a>
-                {/* {{#if question.close}}
-                            {{#notis question.author._id myInfo._id}}                    
-                                <div class="comment_icons">
-                                    <div class="comment_icon_type-1 answer_additionally_toggle {{#if myInfo._id}}{{else}}comment_inactive{{/if}}" data-action="answerAdditionallyToggle">
-                                        <img class="answer_additionally_toggle_img" src="/assets/icon/points.svg">
-                                        <div class="answer_additionally_container">
-                                            <div class="answer_additionally">
-                                                <div class="answer_additionally_item complain" data-action="answerAdditionallyItem" data-answer-id="{{question._id}}" data-type="question">{{lang.select.complain}}</div>
-                                                {{#if data.myInfo.status.role}}
-                                                    <div style="color: #32DE80" class="answer_additionally_item delete" data-action="doRoleModal" data-answer-id="{{question._id}}" data-type="question">{{lang.select.delete}}</div>
-                                                {{/if}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {{/notis}}   
-                        {{else}}
-                                <div class="comment_icons">
-                                <div class="comment_icon_type-1 answer_additionally_toggle {{#if myInfo._id}}{{else}}comment_inactive{{/if}}" data-action="answerAdditionallyToggle">
-                                    <img class="answer_additionally_toggle_img" src="/assets/icon/points.svg">
-                                    <div class="answer_additionally_container">
-                                        <div class="answer_additionally">
-                                            {{#is question.author._id myInfo._id}}
-                                                <div class="answer_additionally_item close" data-action="answerAdditionallyItem" data-answer-id="{{question._id}}" data-type="question">{{lang.select.closeQuestion}}</div>
-                                                {{#if question.statistic.answer}}
-                                                {{else}}
-                                                    <div class="answer_additionally_item edit" data-action="answerAdditionallyItem" data-answer-id="{{question._id}}" data-type="question">{{lang.button.edit}}</div>
-                                                    <div class="answer_additionally_item delete" data-action="answerAdditionallyItem" data-answer-id="{{question._id}}" data-type="question">{{lang.select.delete}}</div>
-                                                {{/if}}
-                                            {{else}}
-                                                <div class="answer_additionally_item complain" data-action="answerAdditionallyItem" data-answer-id="{{question._id}}" data-type="question">{{lang.select.complainQuestion}}</div>
-                                                <div class="answer_additionally_item complain" data-action="answerAdditionallyItem" data-answer-id="{{question.author._id}}" data-type="user">{{lang.select.complainUser}}</div>
-                                                <div class="answer_additionally_item block" data-action="answerAdditionallyItem" data-answer-id="{{question.author._id}}" data-type="user">{{lang.select.blackList}}</div>
-                                            {{/is}}
-                                            {{#if data.myInfo.status.role}}
-                                                <div style="color: #32DE80" class="answer_additionally_item delete" data-action="doRoleModal" data-answer-id="{{question._id}}" data-type="question">{{lang.select.delete}}</div>
-                                            {{/if}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>   
-                        {{/if}} */}
 
-                {/* {{#is myInfo.role 1}}    
-                            {{#is myInfo.role_settings.del_question 1}} 
-                            <div class="acp_block">
-                                <img data-action="acpSiteShow" class="acp_image" src="/assets/icon/points_green.svg">
-                                <div style="display: none;" class="acp_inner">
-                                    <div class="acp_inner_item" data-type="dlt_question" data-id="{{question._id}}" data-action="acpAction">
-                                        Удалить вопрос
-                                    </div>
-                                </div>
-                            </div>
-                            {{/is}}
-                        {{/is}} */}
-              </div>
               <p class="question_title">{question.title}</p>
               <div class="question_text"> {stringToHtml(Helpers.sanitizeHtml(question.text))}</div>
               <If
