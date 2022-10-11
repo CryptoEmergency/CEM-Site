@@ -30,6 +30,47 @@ const BlockQuestionsShow = function ({ item }) {
                 elem={elem}
                 path={"/assets/upload/question/"}
             />
+            <div class="answers_block">
+                <p>
+                    {" "}
+                    <img src={svg["question_answers"]} />{" "}
+                    <b>{item.statistic.answer}</b>
+                </p>
+                <p>
+                    {" "}
+                    <img src={svg["question_views"]} />{" "}
+                    <b>{item.statistic.view}</b>
+                </p>
+                <p>
+                    {" "}
+                    <img src={svg["question_time"]} />{" "}
+                    <b>{Helpers.getDateFormat(item.showDate, "lenta")}</b>{" "}
+                </p>
+                {/* {myInfo._id !== item.author._id && (
+                  <div
+                    data-action="answerModal"
+                    class="btn-answer"
+                    data-needauth="true"
+                  >
+                    <a class="btn-gr-answer">
+                      <span>{Variable.lang.button.giveAnswer}</span>
+                    </a>
+                  </div>
+                )} */}
+                {/* {{#if myInfo._id}}
+                            {{#is question.author._id myInfo._id}}
+        
+                            {{else}}
+                                {{#notif question.close}}
+                                    <div data-action="answerModal" class="btn-answer" data-needauth="true">
+                                        <a class="btn-gr-answer"><span>{{lang.button.giveAnswer}}</span></a>
+                                    </div>
+                                {{/notif}}
+                            {{/is}}
+                        {{/if}} */}
+            </div>
+
+            <div class="user_news_block">{/* {{>answers}} */}</div>
         </div>
     )
 }

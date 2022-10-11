@@ -61,9 +61,15 @@ const QuestionItem = function ({ question }) {
             </div>
             <a
                 style=""
-                href={`/question/show/${question._id}`}
+                // href={`/question/show/${question._id}`}
                 class="c-question__body"
-                onclick={Helpers.siteLink}
+                // onclick={Helpers.siteLink}
+                onClick={async () => {
+                    Variable.SetModals({
+                        name: "ModalFullSize",
+                        data: { item: question, type: "questions" },
+                    });
+                }}
             > {/* load */}
                 <div class="c-question__preview">
                     <span class="">

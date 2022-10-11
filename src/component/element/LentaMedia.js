@@ -82,8 +82,13 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
                                     elem[numIndex][index] = Variable.setRef()
                                     return (
                                         <div class="swiper-slide" onclick={() => {
-                                            console.log('=d86247=', elem[numIndex][index])
-                                            elem[numIndex][index]().play()
+                                            console.log('=52cb0d=', elem[numIndex][index]().paused)
+                                            if (elem[numIndex][index]().paused) {
+                                                elem[numIndex][index]().play()
+                                            } else {
+                                                elem[numIndex][index]().pause()
+                                            }
+
                                         }}>
                                             <VideoPlayer
                                                 item={item}
