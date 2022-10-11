@@ -270,7 +270,10 @@ const ModalAfterRegisterForm = function (data, reload) {
                   </div>
                 </form>
                 <button
-                  class={`c-button c-button--gradient2 ${!formInputs.isValid && "c-button--inactive"}`}
+                 class={[
+                  "c-button c-button--gradient2",
+                  !formInputs.isValid ? "c-button--inactive" : "",
+                ]}
                   type="button"
                   // ref={elemButton}
                   onClick={sendRegistrationForm}

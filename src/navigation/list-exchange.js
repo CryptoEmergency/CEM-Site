@@ -7,7 +7,7 @@ import {
   initReload,
 } from "@betarost/cemjs";
 
-import { BlockExchange } from '@component/blocks/BlockExchange.js';
+import {BlockExchange} from '@component/blocks/index.js';
 import { If } from '@component/helpers/All.js';
 import { ButtonShowMore } from "@component/element/index.js";
 

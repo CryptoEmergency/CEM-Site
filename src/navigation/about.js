@@ -21,7 +21,7 @@ const start = function () {
             <div class="c-whowe__inner">
               <h2 class="c-whowe__title"
                 onclick={() => {
-                  Variable.SetModals({ name: "ModalAfterRegisterForm", data: { way: "email" } })
+                  Variable.SetModals({ name: "ModalAskQuestion", data: { way: "email" } })
                 }}
               >
                 {Variable.lang.h.who_are_we}

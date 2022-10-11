@@ -8,3 +8,5 @@ export { BlockUserPreview } from './user/BlockUserPreview.js';
 export { BlockComments } from "./BlockComments.js";
 export { BlockQuestions } from '@component/blocks/BlockQuestions.js';
 export { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
+export { BlockTrade } from "@component/blocks/BlockTrade.js";
+export { BlockExchange } from '@component/blocks/BlockExchange.js';

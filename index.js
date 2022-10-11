@@ -11,7 +11,11 @@ init({
     // mode: "production",
     mode: "development",
     // api: "",
+<<<<<<< Updated upstream
     api: ""
+=======
+    api: "office"
+>>>>>>> Stashed changes
 });
 //I check
 build({}).then((result) => { if (result) start(result) });
