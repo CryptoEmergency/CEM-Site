@@ -7,8 +7,10 @@ import {
     initReload,
 } from "@betarost/cemjs";
 
-import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
+
 import { If } from '@component/helpers/All.js';
+import {BlockQuestions} from '@component/blocks/index.js';
+import {ButtonShowMore} from '@component/element/index.js';
 
 const start = function () {
     Variable.HeaderShow = true
@@ -19,7 +21,6 @@ const start = function () {
             Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "PageQuestions" });
         },
         () => {
-            // console.log("Second Init ", questions)
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockQuestions
@@ -28,18 +29,12 @@ const start = function () {
                             <If
                                 data={Variable.PageQuestions.list_records.length < Variable.PageQuestions.totalFound}
                                 dataIf={
-                                    <div class="c-questions__footer">
-                                        <a class="c-button c-button--gray"
-                                            onclick={async () => {
-                                                let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 20, offset: Variable.PageQuestions.list_records.length })
-                                                Variable.PageQuestions.list_records.push(...tmp.list_records)
-                                                initReload()
-                                            }
-                                            }
-                                        >
-                                            <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
-                                        </a>
-                                    </div>
+                                    <ButtonShowMore
+                                    onclick={async () => {
+                                        let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 20, offset: Variable.PageQuestions.list_records.length })
+                                        Variable.PageQuestions.list_records.push(...tmp.list_records)
+                                        initReload()}}
+                                    />
                                 }
                             />
                         }
@@ -48,8 +43,6 @@ const start = function () {
             )
         }
     )
-
-
 }
 
 export default start;
