@@ -1,150 +1,65 @@
 import {
   jsx,
   jsxFrag,
-  getVariable,
-  makeDOM,
-  getStorage,
-  setValue,
-  getValue,
   sendApi,
   Variable,
   init,
   initReload,
+  Helpers
 } from "@betarost/cemjs";
-import { checkAnswerApi } from "@src/functions.js";
+
 import svg from "@assets/svg/index.js";
+import { If, Map } from '@component/helpers/All.js';
 import { BlockLentaUsers } from "@component/blocks/BlockLentaUsers.js";
 
-let count = 0;
-let prevType = "";
-let posts;
-// let activeCategory = "text";
-
-const getLentaUsersList = async (firstLoad, type, reload) => {
-  // console.log('=269dc6=', type)
-  let data = {
-    select: {
-      author: 1,
-      forFriends: 1,
-      languages: 1,
-      media: 1,
-      showDate: 1,
-      statistic: 1,
-      text: 1,
-      title: 1,
-      updateTime: 1,
-    },
-    sort: {
-      showDate: -1,
-    },
-    filter: {
-      "languages.code": "ru"
-    },
-  };
-
-  Variable.activeCategory = type;
-  // console.log('=269dc6=', "activeCategory = ", Variable.activeCategory)
-  switch (type) {
-
-    case "text":
-      data.filter["media.type"] = { $nin: ["video", "audio", "image"] };
-      if (prevType === type) {
-        data.limit = 6;
-        data.offset = 6 + 6 * (count - 1);
-      } else {
-        data.limit = 6;
-        data.offset = 0
-      }
-      break;
-
-    case "audio":
-      data.filter.$and = [
-        { "media.type": "audio" },
-        { "media.type": { $nin: ["video", "image"] } },
-      ];
-      data.limit = 6;
-      data.offset = 6 + 6 * (count - 1);
-      break;
-
-    case "video":
-      data.filter.$and = [
-        { "media.type": "video" },
-        { "media.type": { $nin: ["audio", "image"] } },
-      ];
-      data.limit = 6;
-      data.offset = 6 + 6 * (count - 1);
-      break;
-
-    case "photo":
-      data.filter.$and = [
-        { "media.type": "image" },
-        { "media.type": { $nin: ["audio", "video"] } },
-      ];
-      data.limit = 6;
-      data.offset = 6 + 6 * (count - 1);
-      break;
-
-    default:
-      if (firstLoad) {
-        data.limit = 12;
-      } else {
-        data.limit = 6;
-        data.offset = 12 + 6 * (count - 1);
-      }
-      break;
-  }
-
-  // if (firstLoad) {
-  //   data.limit = 12;
-  // } else {
-  //   data.limit = 6;
-  //   data.offset = 12 + 6 * (count - 1);
-  // }
-  let response = checkAnswerApi(await sendApi.create("getPost", data));
-
-  if (firstLoad) {
-    posts = response
-    if (reload) {
-      initReload()
-    }
-    return response;
-  } else if (prevType === type) {
-    posts.list_records.push(...response.list_records)
-    initReload()
-  } else {
-    posts = response
-    initReload()
-  }
-  prevType = type;
-};
 
 const start = function () {
+  let lentaPage
   Variable.HeaderShow = true
   Variable.FooterShow = true
-  Variable.activeCategory = "all"
 
   init(
     async () => {
-      posts = await getLentaUsersList(true, "all")
+      lentaPage = "video"
+      Variable.PageLentaall = await sendApi.send({
+        action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 10,
+        filter: Helpers.getFilterLenta({}, "all")
+      });
+
+      Variable.PageLentaphoto = await sendApi.send({
+        action: "getPost", short: true, cache: true, name: "PageLentaphoto", limit: 10,
+        filter: Helpers.getFilterLenta({}, "photo")
+      });
+
+      Variable.PageLentavideo = await sendApi.send({
+        action: "getPost", short: true, cache: true, name: "PageLentavideo", limit: 10,
+        filter: Helpers.getFilterLenta({}, "video")
+      });
+
+      Variable.PageLentaaudio = await sendApi.send({
+        action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 10,
+        filter: Helpers.getFilterLenta({}, "audio")
+      });
+
+      Variable.PageLentatext = await sendApi.send({
+        action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 10,
+        filter: Helpers.getFilterLenta({}, "text")
+      });
     },
 
     () => {
 
       return (
-        <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
+        <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           <div class="page-content page-content--full">
             <div class="users_news">
               <div class="users_news_left">
                 <div class="user_news_top">
-
                   <div class="user_news_title">
                     <h4>{Variable.lang.span.userNews}</h4>
                   </div>
                   <div style="display: flex; grid-gap: 20px">
-                    <div
-                      class="news_category_filter"
-                      data-action="SSSrankFilterSummon"
-                    >
+                    <div class="news_category_filter" >
                       <img src={svg["filter"]} />
                     </div>
                     <div class="alt_language_change" >
@@ -152,9 +67,7 @@ const start = function () {
                     </div>
                   </div>
                 </div>
-
-
-                <div class="user_news_filter">
+                {/* <div class="user_news_filter">
                   <div style="display: none;" class="user_news_filter_checkboxes">
                     <div
                       class="user_news_filter_checkbox"
@@ -277,55 +190,91 @@ const start = function () {
                       </div>
                     </div>
                   </div>
-                </div>
-
-
-
+                </div> */}
                 <div class="users_news_categories">
                   <div
                     data-type="all"
-                    class={`users_news_category ${Variable.activeCategory == "all" ? "users_news_category_active" : ""}`}
-                    onClick={() => {
-                      getLentaUsersList(true, "all", true);
+                    class={['users_news_category', lentaPage == "all" ? 'users_news_category_active' : null]}
+                    onClick={async () => {
+                      if (lentaPage == "all") {
+                        return
+                      }
+                      lentaPage = "all"
+                      Variable.PageLentaall = await sendApi.send({
+                        action: "getPost", short: true, name: "PageLentaall", limit: 10, filter: Helpers.getFilterLenta({}, "all")
+                      });
+                      initReload()
                     }}
                   >
-                    <img src={svg[`sections/${Variable.activeCategory == "all" ? "news_all" : "news_all_inactive"}`]} />
+                    <img src={svg[`sections/${lentaPage == "all" ? "news_all" : "news_all_inactive"}`]} />
                   </div>
                   <div
                     data-type="photo"
-                    class={`users_news_category ${Variable.activeCategory == "photo" ? "users_news_category_active" : ""}`}
-                    onClick={() => {
-                      getLentaUsersList(true, "photo", true);
+                    class={['users_news_category', lentaPage == "photo" ? 'users_news_category_active' : null]}
+                    onClick={async () => {
+                      if (lentaPage == "photo") {
+                        return
+                      }
+                      lentaPage = "photo"
+                      Variable.PageLentaphoto = await sendApi.send({
+                        action: "getPost", short: true, name: "PageLentaphoto", limit: 10,
+                        filter: Helpers.getFilterLenta({}, "photo")
+                      });
+                      initReload()
                     }}
                   >
-                    <img src={svg[`sections/${Variable.activeCategory == "photo" ? "news_photo" : "news_photo_inactive"}`]} />
+                    <img src={svg[`sections/${lentaPage == "photo" ? "news_photo" : "news_photo_inactive"}`]} />
                   </div>
                   <div
                     data-type="video"
-                    class={`users_news_category ${Variable.activeCategory == "video" ? "users_news_category_active" : ""}`}
-                    onClick={() => {
-                      getLentaUsersList(true, "video", true);
+                    class={['users_news_category', lentaPage == "video" ? 'users_news_category_active' : null]}
+                    onClick={async () => {
+                      if (lentaPage == "video") {
+                        return
+                      }
+                      lentaPage = "video"
+                      Variable.PageLentavideo = await sendApi.send({
+                        action: "getPost", short: true, name: "PageLentavideo", limit: 10,
+                        filter: Helpers.getFilterLenta({}, "video")
+                      });
+                      initReload()
                     }}
                   >
-                    <img src={svg[`sections/${Variable.activeCategory == "video" ? "news_video" : "news_video_inactive"}`]} />
+                    <img src={svg[`sections/${lentaPage == "video" ? "news_video" : "news_video_inactive"}`]} />
                   </div>
                   <div
                     data-type="audio"
-                    class={`users_news_category ${Variable.activeCategory == "audio" ? "users_news_category_active" : ""}`}
-                    onClick={() => {
-                      getLentaUsersList(false, "audio", true);
+                    class={['users_news_category', lentaPage == "audio" ? 'users_news_category_active' : null]}
+                    onClick={async () => {
+                      if (lentaPage == "audio") {
+                        return
+                      }
+                      lentaPage = "audio"
+                      Variable.PageLentaaudio = await sendApi.send({
+                        action: "getPost", short: true, name: "PageLentaaudio", limit: 10,
+                        filter: Helpers.getFilterLenta({}, "audio")
+                      });
+                      initReload()
                     }}
                   >
-                    <img src={svg[`sections/${Variable.activeCategory == "audio" ? "news_audio" : "news_audio_inactive"}`]} />
+                    <img src={svg[`sections/${lentaPage == "audio" ? "news_audio" : "news_audio_inactive"}`]} />
                   </div>
                   <div
                     data-type="text"
-                    class={`users_news_category ${Variable.activeCategory == "text" ? "users_news_category_active" : ""}`}
-                    onClick={() => {
-                      getLentaUsersList(false, "text", true);
+                    class={['users_news_category', lentaPage == "text" ? 'users_news_category_active' : null]}
+                    onClick={async () => {
+                      if (lentaPage == "text") {
+                        return
+                      }
+                      lentaPage = "text"
+                      Variable.PageLentatext = await sendApi.send({
+                        action: "getPost", short: true, name: "PageLentatext", limit: 10,
+                        filter: Helpers.getFilterLenta({}, "text")
+                      });
+                      initReload()
                     }}
                   >
-                    <img src={svg[`sections/${Variable.activeCategory == "text" ? "news_text" : "news_text_inactive"}`]} />
+                    <img src={svg[`sections/${lentaPage == "text" ? "news_text" : "news_text_inactive"}`]} />
                   </div>
                 </div>
 
@@ -337,9 +286,14 @@ const start = function () {
                     class="bl_one bl_active"
                   >
                     <div class="user_news_block">
-                      {posts.list_records.map((item, i) => {
-                        return <BlockLentaUsers item={item} />;
-                      })}
+                      <Map
+                        data={Variable[`PageLenta${lentaPage}`].list_records}
+                        dataIf={
+                          (item, index) => {
+                            return <BlockLentaUsers item={item} />
+                          }
+                        }
+                      />
                     </div>
                   </div>
                   <div
@@ -367,7 +321,6 @@ const start = function () {
                     class="bl_one overflowNo"
                   ></div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -375,26 +328,6 @@ const start = function () {
       )
     }
   )
-
-
-  return
 };
-
-// const init2 = async function (reload) {
-//   if (!reload) {
-//     if (!getValue(ID, "lentaUsers")) {
-//       setValue(ID, "lentaUsers", await getLentaUsersList(true, "all"));
-//     }
-//     if (!getValue(ID, "teststyles")) {
-//       setValue(ID, "teststyles", {
-//         transition: "transform .5s",
-//         transform: `translate3d(0px, 0px, 0px)`,
-//       });
-//     }
-//   }
-//   setValue("mainHeader", "show", true);
-//   setValue("mainFooter", "show", true);
-//   makeDOM(lentaUsersView(), ID);
-// };
 
 export default start;
