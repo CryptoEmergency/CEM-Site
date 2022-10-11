@@ -5,3 +5,5 @@ export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
 export { BlockUserProfilePage } from "./user/BlockUserProfilePage.js"
 export { BlockUserPreview } from './user/BlockUserPreview.js';
 export { BlockComments } from "./BlockComments.js";
+export { BlockQuestions } from '@component/blocks/BlockQuestions.js';
+export { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';

@@ -5,7 +5,7 @@ import {
   init
 } from "@betarost/cemjs";
 
-import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
+import {BlockInfoPartners} from '@component/blocks/index.js';
 
 const start = function () {
   Variable.HeaderShow = true
