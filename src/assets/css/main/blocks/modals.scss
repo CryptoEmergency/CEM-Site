@@ -4648,7 +4648,13 @@ s
 
 /* modal #ModalMobileMainSettings (модалка меню) */
 #ModalMobileMainSettings {
+
 	.c-modal {
+
+		&__dialog {
+			overflow-y: auto;
+		}
+
 		&__header {
 			display: flex;
 			flex-shrink: 0;
@@ -4666,6 +4672,12 @@ s
 		&__body {
 			width: 100%;
 			padding: 0;
+
+			&>* {
+				height: auto;
+				overflow: initial;
+				overflow-x: hidden;
+			}
 		}
 	}
 }
