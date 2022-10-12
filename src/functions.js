@@ -19,44 +19,42 @@ import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
 
-import { changeStatistic, showVotersApi, getNewsItemInShow } from "@src/apiFunctions.js";
+import {
+  changeStatistic,
+  showVotersApi,
+  getNewsItemInShow,
+} from "@src/apiFunctions.js";
 import { renderModalFullNews } from "@src/apiFunctionsE.js";
 
-
-
 const wrapTextWithATag = (text) => {
- let textTag = text;
- textTag = Helpers.sanitizeHtml(textTag);
- textTag = textTag.split("\n");
-//  let res = "<p>"+textTag.join("</p><p>") + "</p>";
-let res= ""
-console.log('=textTag=',textTag,text)
-   for (let item of textTag){
-    
-    res += "<p>"+item + "</p>"
+  let textTag = text;
+  textTag = Helpers.sanitizeHtml(textTag);
+  textTag = textTag.replace("\n\n", "\n").split("\n");
+  //  let res = "<p>"+textTag.join("</p><p>") + "</p>";
+  let res = "";
+  for (let item of textTag) {
+    res += "<p>" + item + "</p>";
   }
- return res;
-}
-
-
+  return res;
+};
 
 const clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
       if (!document.body.contains(item[0]())) {
-        Variable.OutHideWindows.splice(index, 1)
+        Variable.OutHideWindows.splice(index, 1);
         return;
       }
       if (item[0]() === e.target || item[0]().contains(e.target)) {
       } else {
         if (item[1] && typeof item[1] == "function") {
-          item[1]().hidden = true
+          item[1]().hidden = true;
         } else if (typeof item[1] == "string") {
-          Variable.DelModals(item[1])
+          Variable.DelModals(item[1]);
         }
-        Variable.OutHideWindows.splice(index, 1)
+        Variable.OutHideWindows.splice(index, 1);
       }
-    })
+    });
   }
 };
 
@@ -101,7 +99,7 @@ const getNewsItem = async function (type, count, category, mediaActveCategory) {
   }
 
   if (category && category != "All") {
-    data.filter["category.name"] = category
+    data.filter["category.name"] = category;
   }
 
   var response = checkAnswerApi(await sendApi.create("getNews", data));
@@ -121,14 +119,13 @@ const getDateFormat = function (data, type) {
         return moment(data).fromNow();
       } else {
         return moment(data).format("DD MMMM YYYY");
-      };
+      }
     case "userComment":
-      return moment(data).format('YYYY-MM-DD hh:mm')
+      return moment(data).format("YYYY-MM-DD hh:mm");
     default:
       return moment(data).format("YYYY-MM-DD");
   }
 };
-
 
 const siteLink = function (e) {
   e.preventDefault();
@@ -140,10 +137,9 @@ const siteLink = function (e) {
     // behavior: "smooth",
     behavior: "instant",
   });
-  parsingUrl()
+  parsingUrl();
   //getAction("App", "start")();
 };
-
 
 const checkAnswerApi = function (data) {
   // console.log("checkAnswerApi", data);
@@ -199,9 +195,8 @@ const allValidation = (str, type, condition) => {
     return str;
     // return str = !str;
   }
-  if (type = "nickName") {
+  if ((type = "nickName")) {
     return validator.matches(str, /^[a-zA-Z0-9_-]{3,16}$/);
-
   }
 };
 
@@ -211,24 +206,27 @@ const changeActiveCommentsInput = (id) => {
   initReload();
 };
 
-
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id, commentId,) => {
-  e.preventDefault()
-  let type = e.target.dataset.name
+const showVotersAndchangeStatistic = async (e, id, commentId) => {
+  e.preventDefault();
+  let type = e.target.dataset.name;
   if (e.type === "mousedown" || e.type === "touchstart") {
     interval = setInterval(async () => {
       sec = sec + 100;
-      console.log('=3ca4b3=', sec)
+      console.log("=3ca4b3=", sec);
       if (sec === 1500) {
         clearInterval(interval);
         sec = 0;
         let response = await showVotersApi(commentId || id);
         if (response !== undefined) {
-          response = response.list_records[0].evaluation.filter((item) =>
-            item.type === type);
-          Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true)
+          response = response.list_records[0].evaluation.filter(
+            (item) => item.type === type
+          );
+          Variable.SetModals(
+            { name: "ModalWhoLike", data: { response } },
+            true
+          );
         }
       }
     }, 100);
@@ -238,15 +236,16 @@ const showVotersAndchangeStatistic = async (e, id, commentId,) => {
     if (sec < 1500) {
       await changeStatistic(e, id, commentId);
       if (Variable.dataUrl.params === undefined) {
-        await renderModalFullNews()
+        await renderModalFullNews();
       }
     }
     if (1000 <= sec && sec < 1500) {
       let response = await showVotersApi(commentId || id);
-      response = response.list_records[0].evaluation.filter((item) =>
-        item.type === type);
+      response = response.list_records[0].evaluation.filter(
+        (item) => item.type === type
+      );
 
-      Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true)
+      Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true);
     }
     sec = 0;
   }
@@ -314,12 +313,11 @@ const changeNewsCategory = async (e, type, init) => {
   //init(true);
 };
 
-
 const ifHaveMedia = function (mediaArr, type, whatReturn) {
   if (mediaArr === null) {
     return "";
   }
-  var media = mediaArr.filter(tmp => tmp.type == type)
+  var media = mediaArr.filter((tmp) => tmp.type == type);
   if (media.length == 0) {
     return "";
   }

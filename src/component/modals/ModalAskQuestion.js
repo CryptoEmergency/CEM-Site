@@ -49,7 +49,6 @@ const sendQuestion = async function (e) {
       title: formInputs.question.value,
     },
   };
-  console.log("=09df9f=", data);
   let tmpRes = await sendApi.create("setQuestion", data);
 
   if (tmpRes.status === "ok") {
