@@ -58,45 +58,45 @@ const banners = [
 let swiperitem
 
 const swiperGo = function () {
-    if (!swiperitem) {
-        swiperitem = new Swiper('#swiper-startups', {
-            direction: 'horizontal',
-            loop: true,
-            autoplay: {
-                delay: 2000,
+    // if (!swiperitem) {
+    swiperitem = new Swiper('#swiper-startups', {
+        direction: 'horizontal',
+        loop: true,
+        autoplay: {
+            delay: 2000,
+        },
+        pagination: false,
+        scrollbar: {
+            el: '.swiper-scrollbar-startup',
+        },
+        breakpoints: {
+            100: {
+                slidesPerView: 1,
+                spaceBetween: 20
             },
-            pagination: false,
-            scrollbar: {
-                el: '.swiper-scrollbar-startup',
+            620: {  //600
+                slidesPerView: 2,
+                spaceBetween: 10
             },
-            breakpoints: {
-                100: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                },
-                620: {  //600
-                    slidesPerView: 2,
-                    spaceBetween: 10
-                },
-                // 768: {
-                //   slidesPerView: 2,
-                //   spaceBetween: 50
-                // },
-                910: {  //800
-                    slidesPerView: 3,
-                    spaceBetween: 46,
-                },
-                1240: {
-                    slidesPerView: 4,
-                    spaceBetween: 30,
-                    navigation: {
-                        nextEl: '#next-startup',
-                        prevEl: '#prev-startup',
-                    },
+            // 768: {
+            //   slidesPerView: 2,
+            //   spaceBetween: 50
+            // },
+            910: {  //800
+                slidesPerView: 3,
+                spaceBetween: 46,
+            },
+            1240: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+                navigation: {
+                    nextEl: '#next-startup',
+                    prevEl: '#prev-startup',
                 },
             },
-        });
-    }
+        },
+    });
+    // }
 }
 
 const BlockBanners = function () {
