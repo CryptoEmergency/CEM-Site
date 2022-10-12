@@ -10,12 +10,61 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { NotifyItem } from "@component/element/NotifyItem.js";
 
-import { uploadMedia } from "@src/functions.js";
+import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
 import { MediaButton } from "@component/element/index.js";
 
 import { If, Map } from "@component/helpers/All.js";
 
 let formInputs;
+
+const changeTextPost = (e) => {
+  // let text = wrapTextWithATag(e.target.innerText.trim());
+  let text = e.target.innerText.trim();
+  formInputs.textInputs.value = wrapTextWithATag(text);
+  if (text || formInputs.mediaInputs.lenght > 0) {
+    formInputs.isValid = true;
+  } else {
+    formInputs.isValid = false;
+  }
+  initReload();
+};
+
+const sendPost = async (e) => {
+  e.preventDefault();
+  if (!formInputs.isValid) {
+    return false;
+  }
+  // console.log('=formInputs=',formInputs.mediaInputs.value)
+
+  let data = {
+    value: {
+      forFriends: formInputs.forFriends,
+      languages: Variable.myInfo.mainLanguage.code,
+      media: formInputs.mediaInputs.value,
+      text: formInputs.textInputs.value,
+    },
+  };
+  console.log("=data=", data);
+
+  let tmpRes = await sendApi.create("setPosts", data);
+  console.log("=66d247=", tmpRes);
+
+  if (tmpRes.status === "ok") {
+    initReload();
+  } else {
+    Variable.SetModals(
+      {
+        name: "ModalAlarm",
+        data: {
+          icon: "alarm_icon",
+          text: Variable.lang.error_div[tmpRes.error],
+        },
+      },
+      true
+    );
+  }
+  return;
+};
 
 const start = function () {
   Variable.HeaderShow = false;
@@ -40,11 +89,13 @@ const start = function () {
           value: [],
           show: false,
         },
+        forFriends: false,
         isValid: false,
       };
     },
 
     () => {
+      console.log("=83a186=", Variable.myInfo);
       return (
         <div class="create_post">
           <h3>{Variable.lang.h.createPost}</h3>
@@ -61,7 +112,7 @@ const start = function () {
                   <div
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
-                    // oninput={changeTextQuestion}
+                    oninput={changeTextPost}
                   ></div>
                 }
               />
@@ -108,11 +159,11 @@ const start = function () {
                   this.files[0],
                   "posts",
                   async function () {
-                    console.log("=3c5fa7=", JSON.parse(this.response));
                     formInputs.mediaInputs.show = true;
-                    formInputs.mediaInputs.value.push(
-                      JSON.parse(this.response)
-                    );
+                    let tmp = JSON.parse(this.response);
+                    let type = tmp.mimetype.split("/")[0];
+                    let obj = { aspect: "1", type, name: tmp.name };
+                    formInputs.mediaInputs.value.push(obj);
                     initReload();
                   },
                   async function (e) {
@@ -136,6 +187,7 @@ const start = function () {
                     );
                   }
                 );
+                formInputs.isValid = true;
               }}
               onclickVideo={function () {
                 if (this.files.lenght == 0) {
@@ -145,11 +197,12 @@ const start = function () {
                   this.files[0],
                   "posts",
                   async function () {
-                    console.log("=3c5fa7=", JSON.parse(this.response));
                     formInputs.mediaInputs.show = true;
-                    formInputs.mediaInputs.value.push(
-                      JSON.parse(this.response)
-                    );
+                    let tmp = JSON.parse(this.response);
+                    let type = tmp.mimetype.split("/")[0];
+                    let obj = { aspect: undefined, type, name: tmp.name };
+
+                    formInputs.mediaInputs.value.push(obj);
                     initReload();
                   },
                   async function (e) {
@@ -173,6 +226,7 @@ const start = function () {
                     );
                   }
                 );
+                formInputs.isValid = true;
               }}
               // onclickAudio={
               //     () => {
@@ -185,30 +239,50 @@ const start = function () {
               //     }
               // }
             />
-            <div style = {"display:flex, width: 600px, margin: 0 auto"}>
-                <button
-              class={[
-                // "c-button c-button--gradient2",
-                !formInputs.isValid ? "c-button--inactive" : "",
-              ]}
-              type="button"
-            //   onClick={sendQuestion}
-            >
-              <span class="c-button__text">{Variable.lang.button.pre_view}</span>
-            </button>
-            <button
-              class={[
-                // "c-button c-button--gradient2",
-                !formInputs.isValid ? "c-button--inactive" : "",
-              ]}
-              type="button"
-            //   onClick={sendQuestion}
-            >
-              <span class="c-button__text">{Variable.lang.button.create}</span>
-            </button>
+            <div class="container-checkbox">
+              <div class="checkbox">
+                <input
+                  data-complain="abusive"
+                  class="checkbox__input complain_checkbox"
+                  onchange={(e) => {
+                    formInputs.forFriends = e.target.checked;
+                  }}
+                  type="checkbox"
+                />
+                <label class="checkbox__label">
+                  {Variable.lang.span.forFriends}
+                  <span class="cont_a-link"></span>
+                </label>
+              </div>
             </div>
-          
-          </form>  
+            <div style={"display:flex; width: 500px; margin: 20px auto"}>
+              <button
+                class={[
+                  "c-button c-button--gradient2",
+                  !formInputs.isValid ? "c-button--inactive" : "",
+                ]}
+                style="margin-right: 30px"
+                type="button"
+                //   onClick={sendQuestion}
+              >
+                <span class="c-button__text">
+                  {Variable.lang.button.pre_view}
+                </span>
+              </button>
+              <button
+                class={[
+                  "c-button c-button--gradient2",
+                  !formInputs.isValid ? "c-button--inactive" : "",
+                ]}
+                type="button"
+                onClick={sendPost}
+              >
+                <span class="c-button__text">
+                  {Variable.lang.button.create}
+                </span>
+              </button>
+            </div>
+          </form>
         </div>
       );
     }
