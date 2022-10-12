@@ -80,10 +80,10 @@ const start = function () {
                 src={svg["background/about_us_vector-2"]}
               />
             </div>
-            <div class="c-aboutus__roadmap road_map">
+            <div class="c-aboutus__roadmap">
               <h2>{Variable.lang.h.road_map}</h2>
-              <div class="c-aboutus__wrapper road_map_container">
-                <div class="c-aboutus__toppart road_map_top_dates">
+              <div class="c-aboutus__wrapper">
+                <div class="c-aboutus__toppart">
                   <div class="c-aboutus__dateitem c-aboutus__dateitem--1">
                     <p>{Variable.lang.p.mapDateOne}</p>
                     <span>{Variable.lang.span.mapDescOne}</span>
@@ -98,70 +98,65 @@ const start = function () {
                   </div>
                 </div>
                 <img class="c-aboutus__axis" src={images["road_map"]} />
-                <div class="c-aboutus__bottompart road_map_bottom_dates">
+                <div class="c-aboutus__bottompart">
                   <div class="c-aboutus__dateitem c-aboutus__dateitem--4">
                     <p>{Variable.lang.p.mapDateFour}</p>
-                    <div></div>
                     <span>{Variable.lang.span.mapDescThree}</span>
                   </div>
                   <div class="c-aboutus__dateitem c-aboutus__dateitem--5">
                     <p>{Variable.lang.p.October2022}</p>
-                    <div></div>
                     <span>{Variable.lang.span.mapDescFour}</span>
                   </div>
                   <div class="c-aboutus__dateitem c-aboutus__dateitem--6">
                     <p>{Variable.lang.p.mapDateSix}</p>
-                    <div></div>
                     <span>{Variable.lang.span.mapDescSix}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="projects">
+            <div class="c-aboutus__projects">
               <h2>{Variable.lang.h.our_projects}</h2>
-              <div class="projects_block">
-                <div class="projects_item">
-                  <img src={images["about_us_banner5"]} />
-                  <span class="project_gradient">
+              <div class="c-aboutus__list">
+                <div class="c-aboutus__project">
+                  <img class="c-aboutus__banner" src={images["about_us_banner5"]} />
+                  <span class="c-aboutus__projectcompany">
                     {Variable.lang.span.aboutProjectNameOne}
                   </span>
-                  <p>{Variable.lang.p.aboutProjectDateOne}</p>
+                  <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateOne}</p>
                 </div>
-                <a class="projects_item"
+                <a class="c-aboutus__project"
                   target="_blank"
                   href="https://cemblockchain.com/"
                 >
-                  <img src={images["about_us_banner8"]} />
-                  <span class="project_gradient">
+                  <img class="c-aboutus__banner" src={images["about_us_banner8"]} />
+                  <span class="c-aboutus__projectcompany">
                     Cemblockchain
                   </span>
-                  <p>{Variable.lang.p.aboutProjectDate19May2022}</p>
+                  <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDate19May2022}</p>
                 </a>
-                <a class="projects_item"
+                <a class="c-aboutus__project"
                   target="_blank"
                   href="https://cemwallet.com/"
                 >
-                  <img src={images["CemWallet"]} />
-                  <span class="project_gradient">
+                  <img class="c-aboutus__banner" src={images["CemWallet"]} />
+                  <span class="c-aboutus__projectcompany">
                     CEM Wallet
                   </span>
-                  <p>{Variable.lang.p.aboutProjectDateAugust2022}</p>
+                  <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateAugust2022}</p>
                 </a>
-                <div class="projects_item">
-                  <img src={images["about_us_banner6"]} />
-                  <span class="project_gradient">
+                <div class="c-aboutus__project">
+                  <img class="c-aboutus__banner" src={images["about_us_banner6"]} />
+                  <span class="c-aboutus__projectcompany">
                     {Variable.lang.span.aboutProjectNameTwo}
                   </span>
-                  <p>{Variable.lang.p.aboutProjectDateTwo}</p>
+                  <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateTwo}</p>
                 </div>
-                <div
-                  class="projects_item"
-                >
-                  <img src={images["about_us_banner7"]} />
-                  <span class="project_gradient">
+                <div class="c-aboutus__project">
+                  <img class="c-aboutus__banner" src={images["about_us_banner7"]} />
+                  <span class="c-aboutus__projectcompany">
                     crypto vpn
                   </span>
-                  <p>{Variable.lang.p.aboutProjectDateTwo}</p>
+                  <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateTwo}</p>
                 </div>
               </div>
             </div>
