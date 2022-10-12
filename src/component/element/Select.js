@@ -74,10 +74,10 @@ const Select = function ({ options, callback, toggler = null }) {
           {optionsElem}
         </ul>
       </div>
-      <If
+      {/* <If
         data={toggler}
-        dataIf={<img data-sort="DESC" class="filter_sort_toggler" src={svg.filter_arrow_bottom} />}
-      />
+        dataIf={<img class="filter_sort_toggler" src={svg.filter_arrow_bottom} />}
+      /> */}
     </div>
   );
 };

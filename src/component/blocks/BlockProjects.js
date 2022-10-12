@@ -24,6 +24,86 @@ const doubleProject = function (projects) {
 
 let swiperitem = {}
 
+const swiperGo = function () {
+    // if (!swiperitem) {
+    swiperitem.desktop = new Swiper('#swiper-desktop', {
+        direction: 'horizontal',
+        navigation: {
+            nextEl: '#next-desktop-icons',
+            prevEl: '#prev-desktop-icons',
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 2,
+                spaceBetween: 85
+            },
+            375: {
+                slidesPerView: 2,
+                spaceBetween: 125
+            },
+            425: {
+                slidesPerView: 3,
+                spaceBetween: 35
+            },
+            480: {
+                slidesPerView: 3,
+                spaceBetween: 65
+            },
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 88
+            },
+            1024: {
+                slidesPerView: 6,
+                spaceBetween: 40
+            },
+            1240: {
+                slidesPerView: 9,
+                spaceBetween: 30,
+            },
+        },
+    });
+
+    swiperitem.one = new Swiper('#swiper-one', {
+        direction: 'horizontal',
+        navigation: {
+            nextEl: '#next-icons',
+            prevEl: '#prev-icons',
+        },
+        breakpoints: {
+            20: {
+                slidesPerView: 2,
+                spaceBetween: 15
+            },
+            320: {
+                slidesPerView: 3,
+                spaceBetween: 15
+            },
+            425: {
+                slidesPerView: 3,
+                spaceBetween: 25
+            },
+            480: {
+                slidesPerView: 3,
+                spaceBetween: 65
+            },
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 88
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 158
+            },
+            1240: {
+                slidesPerView: 9,
+                spaceBetween: 66,
+            },
+        },
+    });
+    // }
+}
+
 const BlockProjects = function () {
 
     const projects = [
@@ -93,83 +173,11 @@ const BlockProjects = function () {
     initAfter(
         () => {
             if (!swiperitem.one) {
-                swiperitem.one = new Swiper('#swiper-one', {
-                    direction: 'horizontal',
-                    navigation: {
-                        nextEl: '#next-icons',
-                        prevEl: '#prev-icons',
-                    },
-                    breakpoints: {
-                        20: {
-                            slidesPerView: 2,
-                            spaceBetween: 15
-                        },
-                        320: {
-                            slidesPerView: 3,
-                            spaceBetween: 15
-                        },
-                        425: {
-                            slidesPerView: 3,
-                            spaceBetween: 25
-                        },
-                        480: {
-                            slidesPerView: 3,
-                            spaceBetween: 65
-                        },
-                        768: {
-                            slidesPerView: 4,
-                            spaceBetween: 88
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                            spaceBetween: 158
-                        },
-                        1240: {
-                            slidesPerView: 9,
-                            spaceBetween: 66,
-                        },
-                    },
-                });
+
             }
 
             if (!swiperitem.desktop) {
-                swiperitem.desktop = new Swiper('#swiper-desktop', {
-                    direction: 'horizontal',
-                    navigation: {
-                        nextEl: '#next-desktop-icons',
-                        prevEl: '#prev-desktop-icons',
-                    },
-                    breakpoints: {
-                        320: {
-                            slidesPerView: 2,
-                            spaceBetween: 85
-                        },
-                        375: {
-                            slidesPerView: 2,
-                            spaceBetween: 125
-                        },
-                        425: {
-                            slidesPerView: 3,
-                            spaceBetween: 35
-                        },
-                        480: {
-                            slidesPerView: 3,
-                            spaceBetween: 65
-                        },
-                        768: {
-                            slidesPerView: 4,
-                            spaceBetween: 88
-                        },
-                        1024: {
-                            slidesPerView: 6,
-                            spaceBetween: 40
-                        },
-                        1240: {
-                            slidesPerView: 9,
-                            spaceBetween: 30,
-                        },
-                    },
-                });
+
             }
         }
     )
@@ -193,7 +201,7 @@ const BlockProjects = function () {
                 <div class="swiper-button-next" id="next-desktop-icons"><img src={svg.swiper_arrow_right} style="height: 40%;" /></div>
             </div>
             <div class="swiper-container">
-                <div class="swiper swiper-icons" id="swiper-one">
+                <div class="swiper swiper-icons" id="swiper-one" After={swiperGo}>
                     <div class="swiper-wrapper">
                         {
                             doubleProject(projects).map(function (item) {

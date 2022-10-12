@@ -14,11 +14,11 @@ import { If } from '@component/helpers/All.js';
 
 let optionsSelect, showFilter
 
-const BlockQuestions = function (data) {
+const BlockQuestions = function ({ callBack, button, filters, items }) {
 
     initOne(
         async () => {
-            let filters = getStorage("filters")
+
             showFilter = false;
             optionsSelect = {
                 questions: {
@@ -31,7 +31,7 @@ const BlockQuestions = function (data) {
                         { text: Variable.lang.select.bestQuestions, value: "best" }
                     ],
                     open: false,
-                    active: filters.MainQuestions.questions
+                    active: filters.questions.value
                 },
                 date: {
                     nameOptions: "date",
@@ -42,7 +42,7 @@ const BlockQuestions = function (data) {
                         { text: Variable.lang.select.byAnswers, value: "answers" },
                     ],
                     open: false,
-                    active: filters.MainQuestions.date
+                    active: filters.date.value
                 }
             }
         }
@@ -80,11 +80,11 @@ const BlockQuestions = function (data) {
                 <div class={['c-questions__filter', 'questions_filter', showFilter ? 'c-questions__filter--openmobile' : null]} >
                     <Select
                         options={optionsSelect.questions}
-                        callback={data.callBack}
+                        callback={callBack}
                     />
                     <Select
                         options={optionsSelect.date}
-                        callback={data.callBack}
+                        callback={callBack}
                         toggler={true}
                     />
                     {/* <div class="c-questions__lang">
@@ -95,7 +95,7 @@ const BlockQuestions = function (data) {
             </div>
             <div class="c-questions__list questions-blocks">
                 {
-                    data.items.list_records.map((item) => {
+                    items.list_records.map((item) => {
                         return (
                             <QuestionItem question={item} />
                         )
@@ -103,8 +103,8 @@ const BlockQuestions = function (data) {
                 }
             </div>
             <If
-                data={data.button}
-                dataIf={data.button}
+                data={button}
+                dataIf={button}
             />
         </div>
     )
