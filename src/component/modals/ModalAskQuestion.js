@@ -9,6 +9,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { wrapTextWithATag } from "@src/functions.js";
+import { If } from "@component/helpers/All.js";
 
 let formInputs, inputImg, inputVideo, inputAudio;
 
@@ -118,7 +119,7 @@ const ModalAskQuestion = function (data, reload) {
   };
 
   const test = (e) => {
-    console.log('=5ce284=',e)
+    console.log('=5ce284=', e)
   }
 
   return (
@@ -126,6 +127,7 @@ const ModalAskQuestion = function (data, reload) {
       <section class="c-modal__dialog">
         <header class="c-modal__header">
           {/* <h2 class="c-modal__title">{Variable.lang.h.modal_question}</h2> */}
+          <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>
           <button
             type="button"
             class="c-modal__close"
@@ -136,152 +138,156 @@ const ModalAskQuestion = function (data, reload) {
           ></button>
         </header>
         <div class="c-modal__body">
-          <div class="modal fade" id="Ask">
-            <div class="modal-content">
-              <div class="ask_question">
-                <h4>{Variable.lang.h.modal_question}</h4>
-                <form id="askQuestion" onsubmit={sendQuestion}>
-                  <input style="display: none;" type="submit" />
-                  <div class="ask_question_tags">
-                    <label for="addTagInput">{Variable.lang.label.lang}</label>
-                    <div style="display: none;" class="error-div">
-                      {Variable.lang.error_div.selectFromList}
-                    </div>
-                    <div class="language_select_wrapper">
-                      <input
-                        readonly
-                        id="language_search"
-                        type="text"
-                        autocomplete="off"
-                        value={formInputs.language.value}
-                        placeholder={Variable.lang.error_div.selectFromList}
-                        onclick={() => {
-                          Variable.SetModals(
-                            {
-                              name: "ModalChangeLanguage",
-                              data: {
-                                onclick: (code, name, orig) => {
-                                  formInputs.language.value =
-                                    name + ` (${orig})`;
-                                  formInputs.language.code = code;
-                                },
-                              },
+          <div class="c-askquestion ask_question">
+            <form id="askQuestion" onsubmit={sendQuestion}>
+              <input style="display: none;" type="submit" />
+              <div class="c-askquestion__lang c-form__block ask_question_tags">
+                <label class="c-form__label" for="addTagInput">{Variable.lang.label.lang}</label>
+                <div style="display: none;" class="c-form__errormsg error-div">
+                  {Variable.lang.error_div.selectFromList}
+                </div>
+                <div class="c-form__wrapfield language_select_wrapper">
+                  <input
+                    readonly
+                    class="c-form__field"
+                    id="language_search"
+                    type="text"
+                    autocomplete="off"
+                    value={formInputs.language.value}
+                    placeholder={Variable.lang.error_div.selectFromList}
+                    onclick={() => {
+                      Variable.SetModals(
+                        {
+                          name: "ModalChangeLanguage",
+                          data: {
+                            onclick: (code, name, orig) => {
+                              formInputs.language.value =
+                                name + ` (${orig})`;
+                              formInputs.language.code = code;
                             },
-                            true
-                          );
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label for="questionText">
-                      {Variable.lang.label.question}
-                    </label>
-                    <div class="error-div">
-                      <div class="error-div-variant">
-                        {formInputs.question.error}
-                      </div>
-                    </div>
-                    <div class="create_post_container" data-type="question">
-                      <input
-                        type="text"
-                        data-type="question"
-                        oninput={changeInput}
-                        class="create_post_chapter create_post_title"
-                        placeholder={Variable.lang.placeholder.titleAsk}
-                        value={formInputs.question.value}
-                      />
-                      <div
-                        style={`display: ${
-                          formInputs.textQuestion.show ? "block" : "none"
-                        }`}
-                        contenteditable="true"
-                        oninput={changeTextQuestion}
-                        class="create_post_chapter create_post_main_text"
-                      ></div>
-                    </div>
-
-                    <div class="create_post_control_block">
-                      <div
-                        data-page_type="question"
-                        data-type="text"
-                        data-action="createPostAddMediaBlock"
-                        class="create_post_control_item"
-                        onclick={() => {
-                          if (formInputs.textQuestion.show === true) {
-                            return;
-                          } else {
-                            formInputs.textQuestion.show = true;
-                            initReload("modals");
-                          }
-                        }}
-                      >
-                        <img src={svg["post_text"]} />
-                      </div>
-                      <div
-                        data-page_type="question"
-                        data-type="image"
-                        data-action="createPostAddMediaBlock"
-                        class="createPostImageCreator create_post_control_item"
-                        onclick={downloadFile}
-                      >
-                        <img src={svg["post_photo"]} />
-                      </div>
-                      <div
-                        data-page_type="question"
-                        data-type="video"
-                        data-action="createPostAddMediaBlock"
-                        class="createPostVideoCreator create_post_control_item"
-                        onclick={downloadFile}
-                      >
-                        <img src={svg["post_video"]} />
-                      </div>
-                      <div
-                        data-page_type="question"
-                        data-type="audio"
-                        data-action="createPostAddMediaBlock"
-                        class="createPostAudioCreator create_post_control_item"
-                        onclick={downloadFile}
-                      >
-                        <img src={svg["post_audio"]} />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <input
-                      data-type="question"
-                      style="display: none;"
-                      class="createPostImageInput"
-                      onchange={test}
-                      type="file"
-                      accept=".jpg,.jpeg,.png,.gif"
-                      ref={inputImg}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      data-type="question"
-                      style="display: none;"
-                      class="createPostVideoInput"
-                      // onchange="createPostUploadVideo(this)"
-                      type="file"
-                      accept=".mp4,.avi,.mov,.mkv,.avi,.flv"
-                      ref={inputVideo}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      data-type="question"
-                      style="display: none;"
-                      class="createPostAudioInput"
-                      // onchange="createPostUploadAudio(this)"
-                      type="file"
-                      accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
-                      ref={inputAudio}
-                    />
-                  </div>
-
+                          },
+                        },
+                        true
+                      );
+                    }}
+                  />
+                </div>
+              </div>
+              <div class="c-askquestion__textblock c-form__block">
+                <label class="c-form__label" for="questionText">
+                  {Variable.lang.label.question}
+                </label>
+                <div class="c-form__errormsg error-div">
+                  {formInputs.question.error}
+                </div>
+                <div class="c-form__wrapfield create_post_container" data-type="question">
+                  <input
+                    type="text"
+                    data-type="question"
+                    oninput={changeInput}
+                    class="c-form__field create_post_chapter create_post_title"
+                    placeholder={Variable.lang.placeholder.titleAsk}
+                    value={formInputs.question.value}
+                  />
+                  {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
+                  <If
+                    data={formInputs.textQuestion.show}
+                    dataIf={<div
+                      contenteditable="true"
+                      oninput={changeTextQuestion}
+                      class="c-form__field create_post_chapter create_post_main_text"
+                    ></div>}
+                    dataElse={<></>}
+                  />
                   {/* <div
+                    style={`display: ${formInputs.textQuestion.show ? "block" : "none"
+                      }`}
+                    contenteditable="true"
+                    oninput={changeTextQuestion}
+                    class="create_post_chapter create_post_main_text"
+                  ></div> */}
+                </div>
+              </div>
+              <div class="c-askquestion__controls create_post_control_block">
+                <div
+                  data-page_type="question"
+                  data-type="text"
+                  data-action="createPostAddMediaBlock"
+                  class="c-askquestion__attachment"
+                  onclick={() => {
+                    if (formInputs.textQuestion.show === true) {
+                      return;
+                    } else {
+                      formInputs.textQuestion.show = true;
+                      initReload("modals");
+                    }
+                  }}
+                >
+                  <img src={svg["post_text"]} />
+                </div>
+                <div
+                  data-page_type="question"
+                  data-type="image"
+                  data-action="createPostAddMediaBlock"
+                  class="c-askquestion__attachment createPostImageCreator"
+                  onclick={downloadFile}
+                >
+                  <img src={svg["post_photo"]} />
+                </div>
+                <div
+                  data-page_type="question"
+                  data-type="video"
+                  data-action="createPostAddMediaBlock"
+                  class="c-askquestion__attachment createPostVideoCreator"
+                  onclick={downloadFile}
+                >
+                  <img src={svg["post_video"]} />
+                </div>
+                <div
+                  data-page_type="question"
+                  data-type="audio"
+                  data-action="createPostAddMediaBlock"
+                  class="c-askquestion__attachment createPostAudioCreator"
+                  onclick={downloadFile}
+                >
+                  <img src={svg["post_audio"]} />
+                </div>
+              </div>
+              <div>
+                <input
+                  data-type="question"
+                  style="display: none;"
+                  class="createPostImageInput"
+                  onchange={test}
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.gif"
+                  ref={inputImg}
+                />
+              </div>
+              <div>
+                <input
+                  data-type="question"
+                  style="display: none;"
+                  class="createPostVideoInput"
+                  // onchange="createPostUploadVideo(this)"
+                  type="file"
+                  accept=".mp4,.avi,.mov,.mkv,.avi,.flv"
+                  ref={inputVideo}
+                />
+              </div>
+              <div>
+                <input
+                  data-type="question"
+                  style="display: none;"
+                  class="createPostAudioInput"
+                  // onchange="createPostUploadAudio(this)"
+                  type="file"
+                  accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
+                  ref={inputAudio}
+                />
+              </div>
+
+              {/* <div
                     class="button-container-preview inactive_form_button"
                     data-active="0"
                     data-action="askQuestionSend"
@@ -292,23 +298,23 @@ const ModalAskQuestion = function (data, reload) {
                       <span>{Variable.lang.button.send}</span>
                     </a>
                   </div> */}
-                </form>
-                <button
-                  class={[
-                    "c-button c-button--gradient2",
-                    !formInputs.isValid ? "c-button--inactive" : "",
-                  ]}
-                  type="button"
-                  // ref={elemButton}
-                  onClick={sendQuestion}
-                >
-                  <span class="c-button__text">
-                    {Variable.lang.button.send}
-                  </span>
-                </button>
-              </div>
-            </div>
+            </form>
           </div>
+        </div>
+        <div class="c-modal__footer">
+          <button
+            class={[
+              "c-button c-button--gradient2",
+              !formInputs.isValid ? "c-button--inactive" : "",
+            ]}
+            type="button"
+            // ref={elemButton}
+            onClick={sendQuestion}
+          >
+            <span class="c-button__text">
+              {Variable.lang.button.send}
+            </span>
+          </button>
         </div>
       </section>
     </div>
