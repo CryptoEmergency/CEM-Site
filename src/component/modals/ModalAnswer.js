@@ -3,12 +3,13 @@ import svg from "@assets/svg/index.js";
 import { wrapTextWithATag } from "@src/functions.js";
 
 let formInputs;
+let elem = Variable.setRef()
 
 const changeTextAnswer = (e) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
   let text = e.target.innerText.trim();
   formInputs.textAnswer.error = "";
- 
+
 
   if (text.length === 0) {
     formInputs.textAnswer.error = Variable.lang.error_div.not_empty_input;
@@ -17,7 +18,7 @@ const changeTextAnswer = (e) => {
   } else if (text.length > 200) {
     formInputs.textAnswer.error = Variable.lang.error_div.maxSymbol;
   }
-   formInputs.textAnswer.value = wrapTextWithATag(text) ;
+  formInputs.textAnswer.value = wrapTextWithATag(text);
   if (formInputs.textAnswer.error === "") {
     formInputs.isValid = true;
   } else {
@@ -26,42 +27,45 @@ const changeTextAnswer = (e) => {
   initReload("modals");
 };
 
-const sendAnswer =async  function (e,item) {
-    e.preventDefault();
-    if (!formInputs.isValid) {
-        return false;
-      }
+const sendAnswer = async function (e, item, onClose) {
+  e.preventDefault();
+  if (!formInputs.isValid) {
+    return false;
+  }
 
-    let mediaArr = [];
-    let data = {
-        value: {
-            media: mediaArr,
-            questionId: item.item._id,
+  let mediaArr = [];
+  let data = {
+    value: {
+      media: mediaArr,
+      questionId: item.item._id,
       text: formInputs.textAnswer.value,
-        }
     }
-    let tmpRes = await sendApi.create("setAnswer", data);
-    if (tmpRes.status === "ok") {
-        Variable.DelModals("ModalAnswer");
-        initReload();
-      } else {
-        Variable.SetModals(
-          {
-            name: "ModalAlarm",
-            data: {
-              icon: "alarm_icon",
-              text: Variable.lang.error_div[tmpRes.error],
-            },
-          },
-          true
-        );
-      }
-      return;
+  }
+  let tmpRes = await sendApi.create("setAnswer", data);
+  if (tmpRes.status === "ok") {
+    // item.onClose()
+    Variable.DelModals("ModalAnswer");
+
+    initReload();
+  } else {
+    Variable.SetModals(
+      {
+        name: "ModalAlarm",
+        data: {
+          icon: "alarm_icon",
+          text: Variable.lang.error_div[tmpRes.error],
+        },
+      },
+      true
+    );
+  }
+  return;
 };
 
 const ModalAnswer = function (data, reload) {
-    console.log('=data=',data)
+  console.log('=data=', data)
   if (!reload) {
+    Variable.OutHideWindows.push([elem, "ModalAnswer"])
     formInputs = {
       textAnswer: {
         value: "",
@@ -85,7 +89,7 @@ const ModalAnswer = function (data, reload) {
           ></button>
         </header>
         <div class="c-modal__body">
-          <form id="createPostForm" onsubmit={(e) =>sendAnswer(e,data)} >
+          <form id="createPostForm" onsubmit={(e) => sendAnswer(e, data)} >
             <input style="display: none;" type="submit" />
             <div class="error-div">
               <div class="error-div-variant">{formInputs.textAnswer.error}</div>
@@ -104,7 +108,7 @@ const ModalAnswer = function (data, reload) {
               ]}
               type="button"
               // ref={elemButton}
-              onClick={(e) =>sendAnswer(e,data)}
+              onClick={(e) => sendAnswer(e, data)}
             >
               <span class="c-button__text">{Variable.lang.button.send}</span>
             </button>

@@ -1,11 +1,11 @@
-import { jsx, jsxFrag, Helpers, Variable, sendApi } from "@betarost/cemjs";
+import { jsx, jsxFrag, Helpers, Variable, sendApi, initReload } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
 import { Avatar, LentaMedia } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
 
 let elem = [];
-const BlockQuestionsShow = function ({ item }) {
+const BlockQuestionsShow = function ({ item, itemsAnswers }) {
   console.log("=2d92a9=", item);
   elem = [];
   elem[0] = [];
@@ -54,7 +54,15 @@ const BlockQuestionsShow = function ({ item }) {
             <div
               class="btn-answer"
               onclick={() => {
-                Variable.SetModals({ name: "ModalAnswer", data: { item } })
+                Variable.SetModals({
+                  name: "ModalAnswer", data: {
+                    item,
+                    onClose: async () => {
+                      itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
+                      initReload()
+                    }
+                  }
+                })
               }}
             >
               <a class="btn-gr-answer">

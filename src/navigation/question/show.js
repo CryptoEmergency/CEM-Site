@@ -52,15 +52,16 @@ const start = function () {
       console.log("=myInfo=", myInfo);
 
       items = await sendApi.send({ action: "getQuestions", short: true, filter: { _id: Variable.dataUrl.params } });
-      itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
+      // itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
     },
-    () => {
-
+    async () => {
+      itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
       return (
         <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           {/* <div class="full_news_container"> */}
           <div class="answer_block">
             <BlockQuestionsShow
+              itemsAnswers={itemsAnswers}
               item={items.list_records[0]}
             />
             <div class="user_news_block">
