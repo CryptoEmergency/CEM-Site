@@ -324,6 +324,18 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
   return whatReturn;
 };
 
+
+const uploadMedia = function (file, type, onload, onprogress, xhr) {
+  const formData = new FormData()
+  formData.append('media', file);
+  xhr = new XMLHttpRequest()
+  xhr.open('POST', `/upload/${type}/`)
+  xhr.onload = onload
+  xhr.upload.onprogress = onprogress
+  xhr.send(formData)
+}
+
+
 export {
   wrapTextWithATag,
   isEmpty,
@@ -338,4 +350,5 @@ export {
   checkAnswerApi,
   allValidation,
   ifHaveMedia,
+  uploadMedia
 };

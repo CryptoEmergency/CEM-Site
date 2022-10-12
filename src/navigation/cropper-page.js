@@ -13,6 +13,9 @@ import Cropper from 'cropperjs';
 let cropperList = {}
 
 const cropperLoad = function () {
+
+
+
     cropperList.avatar = new Cropper(document.getElementById('cropImage'), {
         aspectRatio: 1 / 1,
         viewMode: 2,

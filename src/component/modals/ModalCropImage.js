@@ -1,32 +1,97 @@
-import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
+import {
+    jsx, jsxFrag, Variable,
+    initReload,
+    initAfter
+} from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
+import Cropper from 'cropperjs';
+
+let elem = Variable.setRef()
+const URL = window.URL || window.webkitURL;
+
+const ModalCropImage = function ({ file }, reload) {
+
+    console.log('=70c86c=', file)
+    // setTimeout(() => {
+    //     const test = new Cropper(elem(), {
+    //         aspectRatio: 1 / 1,
+    //         viewMode: 2,
+    //         cropBoxResizable: true,
+    //         autoCropArea: 1,
+    //         strict: false,
+    //         guides: false,
+    //         highlight: true,
+    //         dragCrop: false,
+    //     });
+    // }, 2000);
+    if (!reload) {
+        console.log('=594449=', "initAfter")
+        setTimeout(() => {
+            const test = new Cropper(elem(), {
+                aspectRatio: 1 / 1,
+                viewMode: 2,
+                cropBoxResizable: true,
+                autoCropArea: 1,
+                strict: false,
+                guides: false,
+                highlight: true,
+                dragCrop: false,
+                crop: function (e) {
+                    var data = e.detail;
+                }
+            });
+        }, 500);
+
+        // const test = new Cropper(elem(), {
+        //     aspectRatio: 1 / 1,
+        //     viewMode: 2,
+        //     cropBoxResizable: true,
+        //     autoCropArea: 1,
+        //     strict: false,
+        //     guides: false,
+        //     highlight: true,
+        //     dragCrop: false,
+        //     crop: function (e) {
+        //         var data = e.detail;
+        //     }
+        // });
+    }
+    initAfter(
+        () => {
+
+        }
+    )
+
+    return (
+        <div class="c-modal c-modal--open" id="addCropImage">
+            <section class="c-modal__dialog modal-dialog modal-lg">
+                <header class="c-modal__header">
+                    <h2 class="c-modal__title">{Variable.lang.h.modal_cropImage}</h2>
+                    <button
+                        type="button"
+                        class="c-modal__close"
+                        onclick={() => {
+                            Variable.DelModals("ModalCropImage");
+                        }}
+                    ></button>
+                </header>
+                <div class="c-modal__body modal-body">
+                    <div class="container crop-container" style="addCropImage">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="img-container">
+                                    <img ref={elem} width="300" height="300" class="cropImage" id="cropImage" src={URL.createObjectURL(file)} />
+                                </div>
+                            </div>
+                        </div>
 
 
-
-
-const ModalCropImage = function (data, reload) {
-  return (
-    <div class="c-modal c-modal--open" id="ModalCropImage">
-      <section class="c-modal__dialog">
-        <header class="c-modal__header">
-          <h2 class="c-modal__title">{Variable.lang.h.modal_cropImage}</h2>
-          <button
-            type="button"
-            class="c-modal__close"
-            onclick={() => {
-                Variable.DelModals("ModalCropImage");
-                initReload("modals");
-              }}
-          ></button>
-        </header>
-        <div class="c-modal__body">
-         123455
-        
+                    </div>
+                </div>
+            </section>
         </div>
-      </section>
-    </div>
-  );
+    );
 };
 
 export default ModalCropImage;

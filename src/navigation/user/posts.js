@@ -3,6 +3,7 @@ import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { NotifyItem } from '@component/element/NotifyItem.js';
 
+import { uploadMedia } from "@src/functions.js";
 import { MediaButton } from '@component/element/index.js';
 
 import { If, Map } from '@component/helpers/All.js';
@@ -75,19 +76,12 @@ const start = function () {
                                             data={formInputs.mediaInputs.value}
                                             dataIf={
                                                 (item, index) => {
-                                                    console.log('=9fe729=', item)
-                                                    var reader = new FileReader();
-                                                    reader.addEventListener('load', (e) => {
-                                                        console.log('=a41a0e=', e.target.result)
-                                                    });
-                                                    reader.readAsText(item);
-
                                                     return (
                                                         <div class="create_post_photo_preview">
-                                                            <img class="fullsize media" src="" data-type={item.type} />
-                                                            <div class="delete_post_media" style="display: block;">
+                                                            <img class="fullsize media" src={`/assets/upload/posts/${item.name}`} />
+                                                            {/* <div class="delete_post_media" style="display: block;">
                                                                 <img src={svg["delete_icon"]} />
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                     )
                                                 }
@@ -112,26 +106,62 @@ const start = function () {
                                         return;
                                     }
 
-                                    formInputs.mediaInputs.show = true
-                                    formInputs.mediaInputs.value.push(...this.files)
-                                    initReload()
+                                    Variable.SetModals({ name: "ModalCropImage", data: { file: this.files[0] } })
+
+                                    uploadMedia(this.files[0], "posts",
+                                        async function () {
+                                            console.log('=3c5fa7=', JSON.parse(this.response))
+                                            formInputs.mediaInputs.show = true
+                                            formInputs.mediaInputs.value.push(JSON.parse(this.response))
+                                            initReload()
+
+                                        },
+                                        async function (e) {
+                                            let contentLength;
+                                            if (e.lengthComputable) {
+                                                contentLength = e.total
+                                            } else {
+                                                contentLength = parseInt(e.target.getResponseHeader('x-decompressed-content-length'), 10)
+                                            }
+                                            console.log('=3c5fa7= ', "Загружено", e.loaded, "из", contentLength)
+                                        }
+                                    )
                                 }
                             }
                             onclickVideo={
-                                () => {
-                                    console.log('=937776=', "onclickVideo")
+                                function () {
+                                    if (this.files.lenght == 0) {
+                                        return;
+                                    }
+                                    uploadMedia(this.files[0], "posts",
+                                        async function () {
+                                            console.log('=3c5fa7=', JSON.parse(this.response))
+                                            formInputs.mediaInputs.show = true
+                                            formInputs.mediaInputs.value.push(JSON.parse(this.response))
+                                            initReload()
+                                        },
+                                        async function (e) {
+                                            let contentLength;
+                                            if (e.lengthComputable) {
+                                                contentLength = e.total
+                                            } else {
+                                                contentLength = parseInt(e.target.getResponseHeader('x-decompressed-content-length'), 10)
+                                            }
+                                            console.log('=3c5fa7= ', "Загружено", e.loaded, "из", contentLength)
+                                        }
+                                    )
                                 }
                             }
-                            onclickAudio={
-                                () => {
-                                    console.log('=937776=', "onclickAudio")
-                                }
-                            }
-                            onclickMic={
-                                () => {
-                                    console.log('=937776=', "onclickMic")
-                                }
-                            }
+                        // onclickAudio={
+                        //     () => {
+                        //         console.log('=937776=', "onclickAudio")
+                        //     }
+                        // }
+                        // onclickMic={
+                        //     () => {
+                        //         console.log('=937776=', "onclickMic")
+                        //     }
+                        // }
                         />
 
                     </form>
