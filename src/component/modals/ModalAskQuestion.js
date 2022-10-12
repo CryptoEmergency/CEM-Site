@@ -10,7 +10,7 @@ import {
 import svg from "@assets/svg/index.js";
 import { wrapTextWithATag } from "@src/functions.js";
 
-let formInputs;
+let formInputs, inputImg, inputVideo, inputAudio;
 
 const changeInput = function (e) {
   let type = e.target.dataset.type;
@@ -49,7 +49,7 @@ const sendQuestion = async function (e) {
       title: formInputs.question.value,
     },
   };
-  console.log('=09df9f=', data)
+  console.log("=09df9f=", data);
   let tmpRes = await sendApi.create("setQuestion", data);
 
   if (tmpRes.status === "ok") {
@@ -95,6 +95,31 @@ const ModalAskQuestion = function (data, reload) {
       },
       isValid: false,
     };
+
+    inputImg = Variable.setRef();
+    inputVideo = Variable.setRef();
+    inputAudio = Variable.setRef();
+  }
+
+  const downloadFile = (e) => {
+    let type;
+    if (e.target.localName === "div") {
+      type = e.target.dataset.type;
+    } else {
+      type = e.target.parentElement.dataset.type;
+    }
+    if (type === "image") {
+      console.log("=6c4af5=", inputImg());
+      inputImg().click();
+    } else if (type === "video") {
+      inputVideo().click();
+    } else {
+      inputAudio().click();
+    }
+  };
+
+  const test = (e) => {
+    console.log('=5ce284=',e)
   }
 
   return (
@@ -168,8 +193,9 @@ const ModalAskQuestion = function (data, reload) {
                         value={formInputs.question.value}
                       />
                       <div
-                        style={`display: ${formInputs.textQuestion.show ? "block" : "none"
-                          }`}
+                        style={`display: ${
+                          formInputs.textQuestion.show ? "block" : "none"
+                        }`}
                         contenteditable="true"
                         oninput={changeTextQuestion}
                         class="create_post_chapter create_post_main_text"
@@ -198,6 +224,7 @@ const ModalAskQuestion = function (data, reload) {
                         data-type="image"
                         data-action="createPostAddMediaBlock"
                         class="createPostImageCreator create_post_control_item"
+                        onclick={downloadFile}
                       >
                         <img src={svg["post_photo"]} />
                       </div>
@@ -206,6 +233,7 @@ const ModalAskQuestion = function (data, reload) {
                         data-type="video"
                         data-action="createPostAddMediaBlock"
                         class="createPostVideoCreator create_post_control_item"
+                        onclick={downloadFile}
                       >
                         <img src={svg["post_video"]} />
                       </div>
@@ -214,19 +242,21 @@ const ModalAskQuestion = function (data, reload) {
                         data-type="audio"
                         data-action="createPostAddMediaBlock"
                         class="createPostAudioCreator create_post_control_item"
+                        onclick={downloadFile}
                       >
                         <img src={svg["post_audio"]} />
                       </div>
                     </div>
                   </div>
-                  {/* <div>
+                  <div>
                     <input
                       data-type="question"
                       style="display: none;"
                       class="createPostImageInput"
-                      onchange="createPostUploadImage(this)"
+                      onchange={test}
                       type="file"
                       accept=".jpg,.jpeg,.png,.gif"
+                      ref={inputImg}
                     />
                   </div>
                   <div>
@@ -234,9 +264,10 @@ const ModalAskQuestion = function (data, reload) {
                       data-type="question"
                       style="display: none;"
                       class="createPostVideoInput"
-                      onchange="createPostUploadVideo(this)"
+                      // onchange="createPostUploadVideo(this)"
                       type="file"
                       accept=".mp4,.avi,.mov,.mkv,.avi,.flv"
+                      ref={inputVideo}
                     />
                   </div>
                   <div>
@@ -244,11 +275,12 @@ const ModalAskQuestion = function (data, reload) {
                       data-type="question"
                       style="display: none;"
                       class="createPostAudioInput"
-                      onchange="createPostUploadAudio(this)"
+                      // onchange="createPostUploadAudio(this)"
                       type="file"
                       accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
+                      ref={inputAudio}
                     />
-                  </div> */}
+                  </div>
 
                   {/* <div
                     class="button-container-preview inactive_form_button"
