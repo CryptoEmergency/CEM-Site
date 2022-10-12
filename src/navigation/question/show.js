@@ -19,14 +19,15 @@ import { If } from "@component/helpers/All.js";
 
 
 import { BlockQuestionsShow } from '@component/blocks/index.js';
-
+import { QuestionAnswers } from '@component/element/index.js';
 import {
   getDateFormat,
 } from "@src/functions.js";
 
 
 const start = function () {
-  let items
+  let items,
+    itemsAnswers
 
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
@@ -51,18 +52,24 @@ const start = function () {
       console.log("=myInfo=", myInfo);
 
       items = await sendApi.send({ action: "getQuestions", short: true, filter: { _id: Variable.dataUrl.params } });
+      itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
     },
     () => {
 
       return (
         <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-          <div class="full_news_container">
-            <div class="answer_block">
-              <BlockQuestionsShow
-                item={items.list_records[0]}
+          {/* <div class="full_news_container"> */}
+          <div class="answer_block">
+            <BlockQuestionsShow
+              item={items.list_records[0]}
+            />
+            <div class="user_news_block">
+              <QuestionAnswers
+                items={itemsAnswers.list_records}
               />
             </div>
           </div>
+          {/* </div> */}
         </div>
 
       )

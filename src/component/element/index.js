@@ -7,3 +7,4 @@ export { ProfileTabsMenu } from './user/ProfileTabsMenu.js';
 export { CommentInput } from "./CommentInput.js";
 export { LentaMedia } from "./LentaMedia.js"
 export { VideoPlayer } from "./VideoPlayer.js"
+export { QuestionAnswers } from "./QuestionAnswers.js"

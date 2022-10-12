@@ -30,6 +30,7 @@ const BlockQuestionsShow = function ({ item }) {
                 elem={elem}
                 path={"/assets/upload/question/"}
             />
+            <div class="post_audio_container"></div>
             <div class="answers_block">
                 <p>
                     {" "}
@@ -69,8 +70,6 @@ const BlockQuestionsShow = function ({ item }) {
                             {{/is}}
                         {{/if}} */}
             </div>
-
-            <div class="user_news_block">{/* {{>answers}} */}</div>
         </div>
     )
 }
