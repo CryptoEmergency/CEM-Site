@@ -5,8 +5,10 @@ import {
   initReload,
   initOne,
   sendApi,
+  Helpers,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
+import { wrapTextWithATag } from "@src/functions.js";
 
 let formInputs;
 
@@ -37,18 +39,16 @@ const sendQuestion = async function (e) {
   if (!formInputs.isValid) {
     return false;
   }
+  
   let mediaArr = [];
   let data = {
     value: {
       languages: formInputs.language.code,
       media: mediaArr,
-      text: "", //Ispravitb
+      text: formInputs.textQuestion.value,
       title: formInputs.question.value,
     },
   };
-  if(formInputs.textQuestion.value !== ""){
-    console.log('=f95e32=',Переменная)
-  }
   let tmpRes = await sendApi.create("setQuestion", data);
 
   if (tmpRes.status === "ok") {
@@ -70,15 +70,10 @@ const sendQuestion = async function (e) {
 };
 
 const changeTextQuestion = (e) => {
-  formInputs.textQuestion.value = e.target.innerText.trim();
-  console.log('=formInputs.textQuestion.value=',formInputs.textQuestion.value)
+  let text = wrapTextWithATag(e.target.innerText.trim());
+  console.log("=69011b=", text);
+  formInputs.textQuestion.value = text;
 };
-
-
-
-
-
-
 
 const ModalAskQuestion = function (data, reload) {
   if (!reload) {
@@ -95,7 +90,7 @@ const ModalAskQuestion = function (data, reload) {
       },
       textQuestion: {
         value: "",
-        show:false
+        show: false,
       },
       isValid: false,
     };
@@ -172,7 +167,9 @@ const ModalAskQuestion = function (data, reload) {
                         value={formInputs.question.value}
                       />
                       <div
-                        style = {`display: ${formInputs.textQuestion.show ? "block" : "none"}`}
+                        style={`display: ${
+                          formInputs.textQuestion.show ? "block" : "none"
+                        }`}
                         contenteditable="true"
                         oninput={changeTextQuestion}
                         class="create_post_chapter create_post_main_text"
@@ -185,11 +182,13 @@ const ModalAskQuestion = function (data, reload) {
                         data-type="text"
                         data-action="createPostAddMediaBlock"
                         class="create_post_control_item"
-                        onclick = {() => {
-                            if(formInputs.textQuestion.show === true){return}else{
-                                formInputs.textQuestion.show = true;
-                                initReload("modals")
-                            }
+                        onclick={() => {
+                          if (formInputs.textQuestion.show === true) {
+                            return;
+                          } else {
+                            formInputs.textQuestion.show = true;
+                            initReload("modals");
+                          }
                         }}
                       >
                         <img src={svg["post_text"]} />

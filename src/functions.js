@@ -12,7 +12,8 @@ import {
   timersClear,
   parsingUrl,
   initGo,
-  initReload
+  initReload,
+  Helpers,
 } from "@betarost/cemjs";
 import list from "@src/routerList.js";
 import validator from "validator";
@@ -20,6 +21,22 @@ import moment from "moment";
 
 import { changeStatistic, showVotersApi, getNewsItemInShow } from "@src/apiFunctions.js";
 import { renderModalFullNews } from "@src/apiFunctionsE.js";
+
+
+
+const wrapTextWithATag = (text) => {
+ let textTag = text;
+ textTag = Helpers.sanitizeHtml(textTag);
+ textTag = textTag.split("\n");
+//  let res = "<p>"+textTag.join("</p><p>") + "</p>";
+let res= ""
+console.log('=textTag=',textTag,text)
+   for (let item of textTag){
+    
+    res += "<p>"+item + "</p>"
+  }
+ return res;
+}
 
 
 
@@ -310,6 +327,7 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
 };
 
 export {
+  wrapTextWithATag,
   isEmpty,
   showVotersAndchangeStatistic,
   changeActiveCommentsInput,
