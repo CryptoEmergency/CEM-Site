@@ -8,3 +8,4 @@ export { CommentInput } from "./CommentInput.js";
 export { LentaMedia } from "./LentaMedia.js"
 export { VideoPlayer } from "./VideoPlayer.js"
 export { QuestionAnswers } from "./QuestionAnswers.js"
+export { MediaButton } from "./MediaButton.js"

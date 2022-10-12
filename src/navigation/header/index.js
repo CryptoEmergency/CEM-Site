@@ -277,12 +277,13 @@ const mainHeader = async function () {
                                     <img src={svg.user_news_page} />
                                     <div class="c-userpanel__description">{Variable.lang.span.userNews}</div>
                                 </a>
-                                {/* <a
+                                <a
+                                    href="/user/posts/"
                                     onclick={siteLink}
                                     class="c-userpanel__icon c-userpanel__icon--mobile_visible"
                                 >
                                     <img src={svg.plus_in_circle} />
-                                </a> */}
+                                </a>
                                 {/* <a
                                     onclick={siteLink}
                                     class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : ""}`}
