@@ -66,8 +66,13 @@ const BlockQuestions = function (data) {
                             </div>
                         </div>
                     </div>
-                    <div data-needauth="true" data-action="askQuestionModal" class="mobile_search_container">
-                        <div class="search-button c-button--inactive" style="width:238px;">
+                    <div
+                        class="mobile_search_container"
+                        onclick={() => {
+                            Variable.SetModals({ name: "ModalAskQuestion", data: {} })
+                        }}
+                    >
+                        <div class="search-button" style="width:238px;">
                             {Variable.lang.button.giveQuestion}
                         </div>
                     </div>

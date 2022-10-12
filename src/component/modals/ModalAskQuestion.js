@@ -39,7 +39,7 @@ const sendQuestion = async function (e) {
   if (!formInputs.isValid) {
     return false;
   }
-  
+
   let mediaArr = [];
   let data = {
     value: {
@@ -49,6 +49,7 @@ const sendQuestion = async function (e) {
       title: formInputs.question.value,
     },
   };
+  console.log('=09df9f=', data)
   let tmpRes = await sendApi.create("setQuestion", data);
 
   if (tmpRes.status === "ok") {
@@ -80,9 +81,9 @@ const ModalAskQuestion = function (data, reload) {
     formInputs = {
       language: {
         value:
-          Variable.myInfo.country.eng_name +
+          Variable.myInfo.mainLanguage.eng_name +
           ` (${Variable.myInfo.country.orig_name})`,
-        code: "",
+        code: Variable.myInfo.mainLanguage.code,
       },
       question: {
         value: "",
@@ -167,9 +168,8 @@ const ModalAskQuestion = function (data, reload) {
                         value={formInputs.question.value}
                       />
                       <div
-                        style={`display: ${
-                          formInputs.textQuestion.show ? "block" : "none"
-                        }`}
+                        style={`display: ${formInputs.textQuestion.show ? "block" : "none"
+                          }`}
                         contenteditable="true"
                         oninput={changeTextQuestion}
                         class="create_post_chapter create_post_main_text"
