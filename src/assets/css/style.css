@@ -899,6 +899,7 @@ textarea::-ms-input-placeholder {
   height: 22px;
   filter: invert(36%) sepia(9%) saturate(1018%) hue-rotate(173deg) brightness(96%) contrast(88%);
   margin-right: 10px;
+  vertical-align: middle;
 }
 
 .answers_block p:nth-child(2) img {
@@ -5988,6 +5989,7 @@ span#procent::after {
 .answer_content {
   width: 100%;
   max-width: 852px;
+  margin: 0 auto;
 }
 
 .answer_content .input-question-container {
@@ -6154,7 +6156,17 @@ span#procent::after {
   padding-right: 0;
 }
 
-.answer_content .user_news_block .comment_icons {
+.answer_block .user_news_block {
+  margin-top: 20px;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  max-width: 852px;
+}
+
+.answer_content .user_news_block .comment_icons,
+.answer_block .user_news_block .comment_icons {
+  padding: 0 !important;
   right: 5px;
   top: 7px;
 }

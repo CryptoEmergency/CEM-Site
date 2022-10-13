@@ -56,13 +56,15 @@ const start = function () {
     },
     async () => {
       itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
+      console.log('=52a3df=',itemsAnswers)
       return (
         <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           {/* <div class="full_news_container"> */}
-          <div class="answer_block">
+          <div class="answer_block" style="flex-direction: column;">
             <BlockQuestionsShow
               itemsAnswers={itemsAnswers}
               item={items.list_records[0]}
+              type={"question"}
             />
             <div class="user_news_block">
               <QuestionAnswers

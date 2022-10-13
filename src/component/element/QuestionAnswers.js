@@ -25,6 +25,7 @@ const QuestionAnswers = function ({ items }) {
                             <Avatar
                                 author={item.author}
                                 nickName={item.author.nickname}
+                                dateShow={item.showDate}
                             />
                             <div class="comment_body">
                                 <span class="comment_text">{Helpers.clearText(item.text)}</span>
