@@ -239,9 +239,10 @@ const start = function () {
               //     }
               // }
             />
-            <div class="container-checkbox">
+            <div class="for_friends_checkbox_container">
               <div class="checkbox">
                 <input
+                  id="forfrends"
                   data-complain="abusive"
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
@@ -249,7 +250,7 @@ const start = function () {
                   }}
                   type="checkbox"
                 />
-                <label class="checkbox__label">
+                <label class="checkbox__label" for="forfrends">
                   {Variable.lang.span.forFriends}
                   <span class="cont_a-link"></span>
                 </label>
