@@ -46,6 +46,7 @@ const start = function () {
         Variable.dataUrl.params,
         "getAnswers"
       );
+      Variable.Static.mainIdforLikes =question._id;
       console.log("=050206=", question);
       console.log("=endInit=", answers);
       myInfo = getStorage("myInfo");
@@ -64,7 +65,7 @@ const start = function () {
             <BlockQuestionsShow
               itemsAnswers={itemsAnswers}
               item={items.list_records[0]}
-              type={"question"}
+              type = {"question"}
             />
             <div class="user_news_block">
               <QuestionAnswers

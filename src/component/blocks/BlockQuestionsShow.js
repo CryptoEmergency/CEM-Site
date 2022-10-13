@@ -56,7 +56,7 @@ const BlockQuestionsShow = function ({ item, itemsAnswers, type }) {
                   </div>
                 )} */}
         <If
-          data={!item.close && item.author._id !== Variable.myInfo._id}
+          data={!item.close && item.author._id !== Variable.myInfo._id && Variable.auth}
           dataIf={
             <div
               class="btn-answer"

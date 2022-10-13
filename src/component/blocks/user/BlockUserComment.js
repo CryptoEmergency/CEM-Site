@@ -5,7 +5,6 @@ import {
   stringToHtml,
   getStorage,
   initReload,
-  initGo,
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";

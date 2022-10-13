@@ -4,56 +4,88 @@ import {
   getStorage,
   sendApi,
   initGo,
-  Variable
+  Variable,
+  initReload,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 import { renderModalFullNews } from "@src/apiFunctionsE.js";
 
-
-
-const changeStatistic = async function (e, commentId, subcommentId) {
+const changeStatistic = async function (
+  e,
+  commentId,
+  type,
+  mainId,
+  subcommentId
+) {
   let data;
-  data = {
-    value: {
-      comments: {
-        _id: commentId,
+  if (type === "setAnswer" && !mainId) {
+    data = data = {
+      value: {
+        evaluation: e.target.dataset.name,
       },
-    },
-    _id: Variable.Static.showNewsId,
-  };
+      _id: commentId,
+    };
+  } else if(!subcommentId){
 
-  if (subcommentId) {
-    data.value.comments.comments = {
-      evaluation: e.target.dataset.name,
-      _id: subcommentId,
+    data = {
+      value: {
+        comments: {
+          _id: commentId,
+          evaluation: e.target.dataset.name
+        },
+      },
+      _id: mainId,
     }
-  } else {
-    data.value.comments.evaluation = e.target.dataset.name
+  }else{
+      data = {
+        value: {
+          comments: {
+            _id: subcommentId,
+            comments: {
+              evaluation: e.target.dataset.name,
+        _id:commentId ,
+            }
+          },
+        },
+        _id: mainId,
+    }
+  //   if (subcommentId) {
+  //     data.value.comments.comments = {
+  //       evaluation: e.target.dataset.name,
+  //       _id: subcommentId,
+  //     };
+  //   } else {
+  //     data.value.comments.evaluation = e.target.dataset.name;
+  //   }
   }
-  console.log('=changeStatistic=', changeStatistic)
-  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  let response = checkAnswerApi(await sendApi.create(type, data));
   if (Variable.dataUrl.params !== undefined) {
-    initGo()
+    initReload();
   }
-
-
 };
 
-const showVotersApi = async (id) => {
+const showVotersApi = async (id, type) => {
+  console.log("=id=", id);
   let data = {
     filter: {
-      _id: id
+      _id: id,
     },
     select: {
-      evaluation: 1
-    }
+      evaluation: 1,
+    },
   };
-  let response = checkAnswerApi(await sendApi.create("getComments", data));
-  return response
-}
+  let response = checkAnswerApi(await sendApi.create(type, data));
+  // let response = await sendApi.send({ action: type, filter:{
+  //   _id: id
+  // }, select: {
+  //   evaluation: 1
+  // } });
+  // return response.result
+  return response;
+};
 
 const sendNewCommentApi = async function (item, comment, commentId, edit) {
-  console.log('=096bf2=', item, comment, commentId, edit)
+  console.log("=096bf2=", item, comment, commentId, edit);
 
   let data = {
     value: {
@@ -62,20 +94,19 @@ const sendNewCommentApi = async function (item, comment, commentId, edit) {
     _id: Variable.Static.showNewsId,
   };
   if (item.image) {
-    data.value.comments = { text: comment }
+    data.value.comments = { text: comment };
   } else if (edit !== undefined && edit.mainCom) {
     data.value.comments = {
       text: comment,
-      _id: commentId
-    }
+      _id: commentId,
+    };
   } else if (edit !== undefined && !edit.mainCom) {
     data.value.comments = {
       comments: {
         text: comment,
         _id: commentId,
-      }
-
-    }
+      },
+    };
   } else {
     data.value.comments = {
       comments: {
@@ -83,7 +114,7 @@ const sendNewCommentApi = async function (item, comment, commentId, edit) {
         text: comment,
       },
       _id: commentId,
-    }
+    };
 
     // data = {
     //   value: {
@@ -100,9 +131,8 @@ const sendNewCommentApi = async function (item, comment, commentId, edit) {
   }
   let response = checkAnswerApi(await sendApi.create("setNews", data));
 
-
   if (Variable.dataUrl.params === undefined) {
-    await renderModalFullNews()
+    await renderModalFullNews();
   }
   return response;
 };
@@ -150,11 +180,7 @@ const getPostsItemInShow = async function (id) {
   return response;
 };
 
-
-
 const getQuestionItemInShow = async function (id) {
-
-
   let data = {
     filter: {
       questionId: id,
@@ -175,7 +201,7 @@ const getQuestionItemInShow = async function (id) {
   };
 
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
-  console.log('=df5226=', response)
+  console.log("=df5226=", response);
   return response;
 };
 
@@ -192,13 +218,10 @@ const getWorldPress = async (count, sortBy = "score", sortType = "-1") => {
   return response;
 };
 
-
 const mainUsers = async (limit = 6, offset = 0, additional = null) => {
   let filter = {
     "confirm.registrasion": true,
   };
-
-
 
   filter["$or"] = [
     {
@@ -282,7 +305,6 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
   let response = checkAnswerApi(await sendApi.create("getUsers", data));
   return response;
 };
-
 
 export {
   showVotersApi,

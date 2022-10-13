@@ -208,17 +208,16 @@ const changeActiveCommentsInput = (id) => {
 
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id, commentId) => {
+const showVotersAndchangeStatistic = async (e, id , typeGet, typeSet, mainId ,  commentId,) => {
   e.preventDefault();
   let type = e.target.dataset.name;
   if (e.type === "mousedown" || e.type === "touchstart") {
     interval = setInterval(async () => {
       sec = sec + 100;
-      console.log("=3ca4b3=", sec);
       if (sec === 1500) {
         clearInterval(interval);
         sec = 0;
-        let response = await showVotersApi(commentId || id);
+        let response = await showVotersApi( id,typeGet);
         if (response !== undefined) {
           response = response.list_records[0].evaluation.filter(
             (item) => item.type === type
@@ -232,15 +231,14 @@ const showVotersAndchangeStatistic = async (e, id, commentId) => {
     }, 100);
   } else {
     clearInterval(interval);
-    // sec < 1500 && changeStatistic(e, id, commentId);
     if (sec < 1500) {
-      await changeStatistic(e, id, commentId);
-      if (Variable.dataUrl.params === undefined) {
-        await renderModalFullNews();
-      }
+      await changeStatistic(e, id,typeSet, mainId, commentId );
+      // if (Variable.dataUrl.params === undefined) {
+      //   await renderModalFullNews();
+      // }
     }
     if (1000 <= sec && sec < 1500) {
-      let response = await showVotersApi(commentId || id);
+      let response = await showVotersApi( id,typeGet);
       response = response.list_records[0].evaluation.filter(
         (item) => item.type === type
       );
