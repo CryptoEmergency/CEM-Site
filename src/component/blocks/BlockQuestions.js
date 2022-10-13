@@ -69,7 +69,13 @@ const BlockQuestions = function ({ callBack, button, filters, items }) {
                     <div
                         class="mobile_search_container"
                         onclick={() => {
-                            Variable.SetModals({ name: "ModalAskQuestion", data: {} })
+                            if(Variable.auth){
+                                Variable.SetModals({ name: "ModalAskQuestion", data: {} })
+                            }
+                            else{
+                                Variable.SetModals({ name: "ModalNeedAuth", data: {} })
+                            }
+                            
                         }}
                     >
                         <div class="search-button" style="width:238px;">
