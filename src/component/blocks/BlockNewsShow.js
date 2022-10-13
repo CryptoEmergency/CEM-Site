@@ -12,7 +12,7 @@ import { CommentInput } from '@component/element/index.js';
 import { BlockComments } from '@component/blocks/index.js';
 
 const BlockNewsShow = function ({ item, type }) {
-    if (type != "blog" && type != "news" && type != "media") {
+    if (!type || type != "blog" && type != "news" && type != "media") {
         return (
             <></>
         )

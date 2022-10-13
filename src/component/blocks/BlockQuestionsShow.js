@@ -5,7 +5,14 @@ import { Avatar, LentaMedia } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
 
 let elem = [];
-const BlockQuestionsShow = function ({ item, itemsAnswers }) {
+const BlockQuestionsShow = function ({ item, itemsAnswers, type }) {
+
+  if (!type || type != "question") {
+    return (
+      <></>
+    )
+  }
+
   console.log("=2d92a9=", item);
   elem = [];
   elem[0] = [];

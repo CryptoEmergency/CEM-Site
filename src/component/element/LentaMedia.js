@@ -14,15 +14,39 @@ import { VideoPlayer } from '@component/element/index.js';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 
-let swiperitem
+let swiperitem = []
 
+const swiperGo = function (numIndex) {
+    // if (!swiperitem) {
+    swiperitem[numIndex] = new Swiper(".swiper-post_media", {
+        effect: "cube",
+        grabCursor: true,
+        cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+        },
+        loop: false,
+        autoHeight: true,
+        pagination: {
+            el: '.swiper-pagination-post_media',
+        },
+        scrollbar: {
+            el: '.swiper-scrollbar-post_media',
+        },
+        slidesPerView: 1,
+        spaceBetween: 20
+    });
+    // }
+}
 const LentaMedia = function ({ items, numIndex, elem, path }) {
     if (items.length == 0) {
         return (
             <></>
         )
     }
-    swiperitem = null
+    // swiperitem = null
     // items.push(...items)
     // items.push(...items)
     // initOne(
@@ -31,29 +55,38 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
     //     }
     // )
 
+
+
     initAfter(
         () => {
+            console.log('=c40387=', swiperitem[numIndex])
+            if (typeof swiperitem[numIndex] != "undefined") {
+                swiperitem[numIndex].destroy()
+                swiperitem[numIndex].init()
+                // swiperitem[numIndex].update()
+                // swiperitem[numIndex].update()
+            }
             if (!swiperitem) {
-                swiperitem = new Swiper(".swiper-post_media", {
-                    effect: "cube",
-                    grabCursor: true,
-                    cubeEffect: {
-                        shadow: true,
-                        slideShadows: true,
-                        shadowOffset: 20,
-                        shadowScale: 0.94,
-                    },
-                    loop: false,
-                    autoHeight: true,
-                    pagination: {
-                        el: '.swiper-pagination-post_media',
-                    },
-                    scrollbar: {
-                        el: '.swiper-scrollbar-post_media',
-                    },
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                });
+                // swiperitem = new Swiper(".swiper-post_media", {
+                //     effect: "cube",
+                //     grabCursor: true,
+                //     cubeEffect: {
+                //         shadow: true,
+                //         slideShadows: true,
+                //         shadowOffset: 20,
+                //         shadowScale: 0.94,
+                //     },
+                //     loop: false,
+                //     autoHeight: true,
+                //     pagination: {
+                //         el: '.swiper-pagination-post_media',
+                //     },
+                //     scrollbar: {
+                //         el: '.swiper-scrollbar-post_media',
+                //     },
+                //     slidesPerView: 1,
+                //     spaceBetween: 20
+                // });
 
                 // swiperitem = new Swiper(".swiper-post_media", {
                 //     loop: false,
@@ -72,7 +105,7 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
     )
     return (
         <div class="swiper-container">
-            <div class="swiper swiper-post_media">
+            <div class="swiper swiper-post_media" data-tt={JSON.stringify(items)} After={() => swiperGo(numIndex)}>
                 <div class="swiper-wrapper">
                     <Map
                         data={items}

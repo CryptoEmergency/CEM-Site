@@ -25,27 +25,27 @@ const start = function () {
       elem = []
       lentaPage = "photo"
       Variable.PageLentaall = await sendApi.send({
-        action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 10,
+        action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 1,
         filter: Helpers.getFilterLenta({}, "all")
       });
 
       Variable.PageLentaphoto = await sendApi.send({
-        action: "getPost", short: true, cache: true, name: "PageLentaphoto", limit: 10,
+        action: "getPost", short: true, cache: true, name: "PageLentaphoto", limit: 1,
         filter: Helpers.getFilterLenta({}, "photo")
       });
 
       Variable.PageLentavideo = await sendApi.send({
-        action: "getPost", short: true, cache: true, name: "PageLentavideo", limit: 10,
+        action: "getPost", short: true, cache: true, name: "PageLentavideo", limit: 1,
         filter: Helpers.getFilterLenta({}, "video")
       });
 
       // Variable.PageLentaaudio = await sendApi.send({
-      //   action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 10,
+      //   action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 1,
       //   filter: Helpers.getFilterLenta({}, "audio")
       // });
 
       Variable.PageLentatext = await sendApi.send({
-        action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 10,
+        action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 1,
         filter: Helpers.getFilterLenta({}, "text")
       });
     },
@@ -204,7 +204,7 @@ const start = function () {
                       }
                       lentaPage = "all"
                       Variable.PageLentaall = await sendApi.send({
-                        action: "getPost", short: true, name: "PageLentaall", limit: 10, filter: Helpers.getFilterLenta({}, "all")
+                        action: "getPost", short: true, name: "PageLentaall", limit: 1, filter: Helpers.getFilterLenta({}, "all")
                       });
                       initReload()
                     }}
@@ -220,7 +220,7 @@ const start = function () {
                       }
                       lentaPage = "photo"
                       Variable.PageLentaphoto = await sendApi.send({
-                        action: "getPost", short: true, name: "PageLentaphoto", limit: 10,
+                        action: "getPost", short: true, name: "PageLentaphoto", limit: 1,
                         filter: Helpers.getFilterLenta({}, "photo")
                       });
                       initReload()
@@ -237,7 +237,7 @@ const start = function () {
                       }
                       lentaPage = "video"
                       Variable.PageLentavideo = await sendApi.send({
-                        action: "getPost", short: true, name: "PageLentavideo", limit: 10,
+                        action: "getPost", short: true, name: "PageLentavideo", limit: 1,
                         filter: Helpers.getFilterLenta({}, "video")
                       });
                       initReload()
@@ -254,7 +254,7 @@ const start = function () {
                       }
                       lentaPage = "audio"
                       Variable.PageLentaaudio = await sendApi.send({
-                        action: "getPost", short: true, name: "PageLentaaudio", limit: 10,
+                        action: "getPost", short: true, name: "PageLentaaudio", limit: 1,
                         filter: Helpers.getFilterLenta({}, "audio")
                       });
                       initReload()
@@ -271,7 +271,7 @@ const start = function () {
                       }
                       lentaPage = "text"
                       Variable.PageLentatext = await sendApi.send({
-                        action: "getPost", short: true, name: "PageLentatext", limit: 10,
+                        action: "getPost", short: true, name: "PageLentatext", limit: 1,
                         filter: Helpers.getFilterLenta({}, "text")
                       });
                       initReload()

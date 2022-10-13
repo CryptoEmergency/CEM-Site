@@ -103,6 +103,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
             items={item.media}
             numIndex={numIndex}
             elem={elem}
+            path={"/assets/upload/posts/"}
           />
           {/* {item.media.length > 0 && returnImgOrVideo(item)} */}
 
