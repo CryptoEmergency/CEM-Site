@@ -1,6 +1,7 @@
 import { jsx, jsxFrag, Variable, initReload, sendApi } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
-import { wrapTextWithATag } from "@src/functions.js";
+import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
+import { MediaButton } from "@component/element/index.js";
 
 let formInputs;
 let elem = Variable.setRef()
@@ -96,23 +97,124 @@ const ModalAnswer = function (data, reload) {
             </div>
             <div data-type="answers" class="create_post_container">
               <div
-                class="create_post_chapter create_post_main_text"
+                class="c-chapter create_post_chapter create_post_main_text"
                 contenteditable="true"
                 oninput={changeTextAnswer}
               ></div>
             </div>
-            <button
-              class={[
-                "c-button c-button--gradient2",
-                !formInputs.isValid ? "c-button--inactive" : "",
-              ]}
-              type="button"
-              // ref={elemButton}
-              onClick={(e) => sendAnswer(e, data)}
-            >
-              <span class="c-button__text">{Variable.lang.button.send}</span>
-            </button>
+            <MediaButton
+              onclickPhoto={function () {
+                if (this.files.lenght == 0) {
+                  return;
+                }
+
+                Variable.SetModals({
+                  name: "ModalCropImage",
+                  data: { file: this.files[0] },
+                });
+
+                uploadMedia(
+                  this.files[0],
+                  "posts",
+                  async function () {
+                    formInputs.mediaInputs.show = true;
+                    let tmp = JSON.parse(this.response);
+                    let type = tmp.mimetype.split("/")[0];
+                    let obj = { aspect: "1", type, name: tmp.name };
+                    formInputs.mediaInputs.value.push(obj);
+                    initReload();
+                  },
+                  async function (e) {
+                    let contentLength;
+                    if (e.lengthComputable) {
+                      contentLength = e.total;
+                    } else {
+                      contentLength = parseInt(
+                        e.target.getResponseHeader(
+                          "x-decompressed-content-length"
+                        ),
+                        10
+                      );
+                    }
+                    console.log(
+                      "=3c5fa7= ",
+                      "Загружено",
+                      e.loaded,
+                      "из",
+                      contentLength
+                    );
+                  }
+                );
+                formInputs.isValid = true;
+              }}
+              onclickVideo={function () {
+                if (this.files.lenght == 0) {
+                  return;
+                }
+                uploadMedia(
+                  this.files[0],
+                  "posts",
+                  async function () {
+                    formInputs.mediaInputs.show = true;
+                    let tmp = JSON.parse(this.response);
+                    let type = tmp.mimetype.split("/")[0];
+                    let obj = { aspect: undefined, type, name: tmp.name };
+
+                    formInputs.mediaInputs.value.push(obj);
+                    initReload();
+                  },
+                  async function (e) {
+                    let contentLength;
+                    if (e.lengthComputable) {
+                      contentLength = e.total;
+                    } else {
+                      contentLength = parseInt(
+                        e.target.getResponseHeader(
+                          "x-decompressed-content-length"
+                        ),
+                        10
+                      );
+                    }
+                    console.log(
+                      "=105aa8= ",
+                      "Загружено",
+                      e.loaded,
+                      "из",
+                      contentLength
+                    );
+                  }
+                );
+                formInputs.isValid = true;
+              }}
+              onclickAudio={
+                () => {
+                  console.log('=44992a=', "onclickAudio")
+                }
+              }
+            />
+            <div>
+              <input data-type="answers" hidden class="createPostImageInput" type="file" accept=".jpg,.jpeg,.png,.gif" />
+            </div>
+            <div>
+              <input data-type="answers" hidden class="createPostVideoInput" type="file" accept=".mp4,.avi,.mov,.mkv,.avi,.flv" />
+            </div>
+            <div>
+              <input data-type="answers" hidden class="createPostAudioInput" type="file" accept=".mp3,.wav,.aiff,.aac,.ogg,.wma" />
+            </div>
           </form>
+        </div>
+        <div class="c-modal__footer">
+          <button
+            class={[
+              "c-button c-button--gradient2",
+              !formInputs.isValid ? "c-button--inactive" : "",
+            ]}
+            type="button"
+            // ref={elemButton}
+            onClick={(e) => sendAnswer(e, data)}
+          >
+            <span class="c-button__text">{Variable.lang.button.send}</span>
+          </button>
         </div>
       </section>
     </div>
