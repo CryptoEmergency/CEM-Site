@@ -16646,7 +16646,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .lds-spinner {
   color: official;
-  display: inline-block;
+  /* display: inline-block; */
   position: fixed;
   left: 50%;
   top: 50%;
