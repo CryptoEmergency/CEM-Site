@@ -14,8 +14,8 @@ import { If } from '@component/helpers/All.js';
 
 let optionsSelect, showFilter
 
-const BlockQuestions = function ({ callBack, button, filters, items }) {
-
+const BlockQuestions = function ({ version, callBack, button, filters, items }) {
+    
     initOne(
         async () => {
 
@@ -51,6 +51,15 @@ const BlockQuestions = function ({ callBack, button, filters, items }) {
     return (
         <div class="c-questions">
             <div class="c-questions__header">
+                <If
+                    data={version != undefined && version.adress == "question"}
+                    dataIf={
+                        <div>
+                            <h4>{Variable.lang.h.lastQuestions}</h4>
+                            <p class="info-text-questions">{Variable.lang.p.addQuestionsSlog}</p>
+                        </div>
+                    }
+                />
                 <div class="c-questions__searchblock c-search">
                     <div class="c-search__container">
                         <div class="c-search__wrapper">
@@ -97,7 +106,12 @@ const BlockQuestions = function ({ callBack, button, filters, items }) {
                         {Variable.languages[filters.MainQuestions.lang].lang_orig}
                     </div> */}
                 </div>
-                <h4>{Variable.lang.h.lastQuestions}</h4>
+                <If
+                    data={version == undefined}
+                    dataIf={
+                        <h4>{Variable.lang.h.lastQuestions}</h4>
+                    }
+                />
             </div>
             <div class="c-questions__list questions-blocks">
                 {

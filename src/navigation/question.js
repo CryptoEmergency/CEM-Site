@@ -38,6 +38,7 @@ const start = function () {
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockQuestions
+                        version={Variable.dataUrl}
                         filters={filtersQuestions}
                         items={Variable.PageQuestions}
                         button={
