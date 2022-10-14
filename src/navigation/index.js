@@ -89,7 +89,7 @@ const start = function () {
                                         href="/question/"
                                         onclick={Helpers.siteLink}
                                     >
-                                        <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
+                                        <span class="c-button__wrapper">{Variable.lang.button.allQuestions}</span>
                                     </a>
                                 </div>
                             }
