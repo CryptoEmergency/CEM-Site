@@ -1,16 +1,12 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    Helpers
 } from '@betarost/cemjs';
 
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
-
-
-import { NumFormat } from '@src/functionsE.js'
-
-
 
 const BlockTrade = function (data) {
 
@@ -66,7 +62,7 @@ const BlockTrade = function (data) {
                                             <span class="crypto_exchanges_percent_green_mobile">
                                                 <img src={svg.exange_money} />
                                             </span>
-                                            ${NumFormat(trade.spotVolumeUsd)}
+                                            {Helpers.NumFormat(trade.spotVolumeUsd)}
                                         </span>
                                     </div>
                                 </div>
@@ -76,7 +72,7 @@ const BlockTrade = function (data) {
                                             <span class="crypto_exchanges_percent_green_mobile">
                                                 <img src={svg.exange_visitors} />
                                             </span>
-                                            {NumFormat(trade.weeklyVisits)}
+                                            {Helpers.NumFormat(trade.weeklyVisits)}
                                         </span>
                                     </div>
                                 </div>

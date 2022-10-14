@@ -11,11 +11,21 @@ import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import { If } from "@component/helpers/All.js";
 import { changeActiveCommentsInput, isEmpty, showVotersAndchangeStatistic } from "@src/functions.js";
-import {
-  showAnswerAdditionallyContainer,
-  closeAnswerAdditionally
-} from "@src/functionsE.js";
+
 import { CommentInput } from "@src/component/element/CommentInput.js";
+
+
+const showAnswerAdditionallyContainer = (id) => {
+  Variable.Static.answerAdditionallyShow = id;
+  console.log('=Variable.Static.answerAdditionally2=', Variable.Static.answerAdditionally)
+  initReload()
+}
+
+const closeAnswerAdditionally = (e) => {
+  e.stopPropagation()
+  Variable.Static.answerAdditionally = true;
+  Variable.Static.answerAdditionallyShow = "";
+}
 
 const BlockUserCommentComment = function ({
   comments,

@@ -10,13 +10,16 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
+import { LentaMedia } from '@component/element/index.js';
+
+
 import images from "@assets/images/index.js";
-import { getDateFormat, parseTextforJsx } from "@src/functions.js";
+import { getDateFormat } from "@src/functions.js";
 import { getPostsItemInShow } from "@src/apiFunctions.js";
 import { AudioPlayer } from "@component/element/AudioPlayer.js";
 import { Slider } from "@component/element/Slider.js";
 import { Avatar } from '@component/element/Avatar.js';
-import { If } from "@component/helpers/All.js";
+import { If, Map } from '@component/helpers/All.js';
 
 const returnImgOrVideo = (item) => {
   if (
@@ -78,34 +81,31 @@ const returnImgOrVideo = (item) => {
   }
 };
 
-const BlockLentaUsers = function ({ item }) {
-  // console.log('=4d0c8d=', item.author._id, Variable.myInfo._id, Variable, item)
-  const isAuth = Variable.auth;
-  //   const parser = new DOMParser();
-  //   let jsx1 = parser.parseFromString(item.text, "text/html");
-  //   //   let tmp = [...jsx1.body.childNodes];
+const BlockLentaUsers = function ({ item, numIndex, elem }) {
 
-
-  // console.log('=50da23=', item, returnImgOrVideo(item))
   return (
     <div
       class="user_news_item"
-      data-author={item.author._id}
       onClick={async () => {
-        let post;
-        post = await getPostsItemInShow(item._id);
-        post = post.list_records[0];
-        Variable.SetModals({
-          name: "ModalFullPost",
-          data: { post },
-        });
+        // let post;
+        // post = await getPostsItemInShow(item._id);
+        // post = post.list_records[0];
+        // Variable.SetModals({
+        //   name: "ModalFullPost",
+        //   data: { post },
+        // });
       }}
     >
-      <div class="main_comment" data-link={item._id} data-action="getPost">
-        {/* {{>avatar author}}                     */}
-        <Avatar author={item.author} nickName={item.author.nickname} dateShow={item.showDate} />
+      <div class="main_comment">
+        <Avatar author={item.author} nickName={item.author.nickname} />
         <div class="comment_body">
-          {item.media.length > 0 && returnImgOrVideo(item)}
+          <LentaMedia
+            items={item.media}
+            numIndex={numIndex}
+            elem={elem}
+            path={"/assets/upload/posts/"}
+          />
+          {/* {item.media.length > 0 && returnImgOrVideo(item)} */}
 
           <div class="post_audio_container">
             {/* {item.media.find((i) => i.type === "audio") !== undefined &&

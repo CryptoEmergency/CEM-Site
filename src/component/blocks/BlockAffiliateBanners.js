@@ -8,7 +8,7 @@ import {
 
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { If, Map } from '@component/helpers/All.js';
+import { Map } from '@component/helpers/All.js';
 
 let activeBanner, userLang, banner
 let successImg = Variable.setRef()
@@ -207,5 +207,4 @@ const BlockAffiliateBanners = function () {
   )
 };
 //I check
-
 export { BlockAffiliateBanners }

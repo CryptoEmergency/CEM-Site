@@ -10,7 +10,6 @@ import { UserBadge } from '@component/element/UserBadge.js';
 import { If } from '@component/helpers/All.js';
 
 const UserItem = function ({ user }) {
-    console.log("UserItem", user);
 
     return (
         <div class="new_professional_card userLoad" data-id={user._id}>

@@ -12,84 +12,49 @@ import {
   timersClear,
   parsingUrl,
   initGo,
-  initReload
+  initReload,
+  Helpers,
 } from "@betarost/cemjs";
 import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
-// import swiperload from "@assets/js/swiper.js";
-import { changeStatistic, showVotersApi, getNewsItemInShow } from "@src/apiFunctions.js";
+
+import {
+  changeStatistic,
+  showVotersApi,
+  getNewsItemInShow,
+} from "@src/apiFunctions.js";
 import { renderModalFullNews } from "@src/apiFunctionsE.js";
-const numberFixWithSpaces = function (num, fix) {
-  let x = parseFloat(num).toFixed(fix);
-  var parts = x.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return parts.join(".");
-};
 
-const start = async function (reload) {
-  const dataUrl = getVariable("dataUrl");
-  let page = dataUrl.adress;
-  if (!dataUrl.adress || dataUrl.adress == "") {
-    await list.index(reload);
-    after();
-    return;
+const wrapTextWithATag = (text) => {
+  let textTag = text;
+  textTag = Helpers.sanitizeHtml(textTag);
+  textTag = textTag.replace("\n\n", "\n").split("\n");
+  //  let res = "<p>"+textTag.join("</p><p>") + "</p>";
+  let res = "";
+  for (let item of textTag) {
+    res += "<p>" + item + "</p>";
   }
-
-  if (dataUrl.category) {
-    page += "/" + dataUrl.category;
-  } else if (dataUrl.adress == "user") {
-    page = "user/index";
-  }
-
-  if (!list[page]) {
-    await list.error404(reload);
-    after();
-    return;
-  }
-
-  await list[page](reload);
-  after();
-  return;
-};
-
-const after = function () {
-  swiperload();
-};
-
-const clickCancel = function (e) {
-  e.stopPropagation();
-};
-
-const checkHide = function (e) {
-  if (Variable.OutHideWindows.length != 0) {
-    Variable.OutHideWindows.map((item, index) => {
-      if (item[0]() === e.target || item[0]().contains(e.target)) {
-      } else {
-        item[1]().hidden = true
-        Variable.OutHideWindows.splice(index, 1)
-      }
-    })
-  }
+  return res;
 };
 
 const clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
       if (!document.body.contains(item[0]())) {
-        Variable.OutHideWindows.splice(index, 1)
+        Variable.OutHideWindows.splice(index, 1);
         return;
       }
       if (item[0]() === e.target || item[0]().contains(e.target)) {
       } else {
         if (item[1] && typeof item[1] == "function") {
-          item[1]().hidden = true
+          item[1]().hidden = true;
         } else if (typeof item[1] == "string") {
-          Variable.DelModals(item[1])
+          Variable.DelModals(item[1]);
         }
-        Variable.OutHideWindows.splice(index, 1)
+        Variable.OutHideWindows.splice(index, 1);
       }
-    })
+    });
   }
 };
 
@@ -134,7 +99,7 @@ const getNewsItem = async function (type, count, category, mediaActveCategory) {
   }
 
   if (category && category != "All") {
-    data.filter["category.name"] = category
+    data.filter["category.name"] = category;
   }
 
   var response = checkAnswerApi(await sendApi.create("getNews", data));
@@ -154,34 +119,12 @@ const getDateFormat = function (data, type) {
         return moment(data).fromNow();
       } else {
         return moment(data).format("DD MMMM YYYY");
-      };
+      }
     case "userComment":
-      return moment(data).format('YYYY-MM-DD hh:mm')
+      return moment(data).format("YYYY-MM-DD hh:mm");
     default:
       return moment(data).format("YYYY-MM-DD");
   }
-};
-
-const getNewsCategory = async function (type) {
-  let getLang = "en";
-  if (getStorage("lang") == "ru") {
-    getLang = "ru";
-  }
-  let data = {
-    filter: {
-      type,
-    },
-  };
-  data.filter["count." + getLang] = { $gt: 0 };
-
-  var response = checkAnswerApi(await sendApi.create("getCategories", data));
-  //console.log('=response=', response)
-  return response;
-};
-
-const timerCourse = async function () {
-  Variable.course = checkAnswerApi(await sendApi.getCourse());
-  //Variable.course = tmp.list_records[0]
 };
 
 const siteLink = function (e) {
@@ -194,18 +137,7 @@ const siteLink = function (e) {
     // behavior: "smooth",
     behavior: "instant",
   });
-  parsingUrl()
-  //getAction("App", "start")();
-};
-
-const changeLang = function (e) {
-  e.preventDefault();
-  //let link = e.target.href;
-  let link = this.href;
-  history.pushState(null, null, link);
-  // timersClear();
-  parsingUrl()
-  //initGo()
+  parsingUrl();
   //getAction("App", "start")();
 };
 
@@ -263,9 +195,8 @@ const allValidation = (str, type, condition) => {
     return str;
     // return str = !str;
   }
-  if (type = "nickName"){
-    return validator.matches(str,  /^[a-zA-Z0-9_-]{3,16}$/);
-    
+  if ((type = "nickName")) {
+    return validator.matches(str, /^[a-zA-Z0-9_-]{3,16}$/);
   }
 };
 
@@ -275,42 +206,44 @@ const changeActiveCommentsInput = (id) => {
   initReload();
 };
 
-
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id, commentId,) => {
-  e.preventDefault()
-  let type = e.target.dataset.name
+const showVotersAndchangeStatistic = async (e, id , typeGet, typeSet, mainId ,  commentId,) => {
+  e.preventDefault();
+  let type = e.target.dataset.name;
   if (e.type === "mousedown" || e.type === "touchstart") {
     interval = setInterval(async () => {
       sec = sec + 100;
-      console.log('=3ca4b3=', sec)
       if (sec === 1500) {
         clearInterval(interval);
         sec = 0;
-        let response = await showVotersApi(commentId || id);
+        let response = await showVotersApi( id,typeGet);
         if (response !== undefined) {
-          response = response.list_records[0].evaluation.filter((item) =>
-            item.type === type);
-          Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true)
+          response = response.list_records[0].evaluation.filter(
+            (item) => item.type === type
+          );
+          Variable.SetModals(
+            { name: "ModalWhoLike", data: { response } },
+            true
+          );
         }
       }
     }, 100);
   } else {
     clearInterval(interval);
-    // sec < 1500 && changeStatistic(e, id, commentId);
     if (sec < 1500) {
-      await changeStatistic(e, id, commentId);
-      if (Variable.dataUrl.params === undefined) {
-        await renderModalFullNews()
-      }
+      await changeStatistic(e, id,typeSet, mainId, commentId );
+      // if (Variable.dataUrl.params === undefined) {
+      //   await renderModalFullNews();
+      // }
     }
     if (1000 <= sec && sec < 1500) {
-      let response = await showVotersApi(commentId || id);
-      response = response.list_records[0].evaluation.filter((item) =>
-        item.type === type);
+      let response = await showVotersApi( id,typeGet);
+      response = response.list_records[0].evaluation.filter(
+        (item) => item.type === type
+      );
 
-      Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true)
+      Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true);
     }
     sec = 0;
   }
@@ -378,119 +311,42 @@ const changeNewsCategory = async (e, type, init) => {
   //init(true);
 };
 
-const createParagraf = function (arr) {
-  let result = [];
-  for (let i of arr) {
-    switch (i.nodeName) {
-      case "A":
-        let a = (
-          <a target="_blank" rel="nofollow noopener" href={i.innerText}>
-            {i.innerText}
-          </a>
-        );
-        result.push(a);
-        break;
-      case "SPAN":
-        let span = <span>{i.innerText}</span>;
-        result.push(span);
-        break;
-      default:
-        let text = i.nodeValue;
-        result.push(text);
-    }
-  }
-  return result;
-};
-
-const parseTextforJsx = function (text) {
-  const parser = new DOMParser();
-  let responseText = parser.parseFromString(text, "text/html");
-  let htmlDoc = [...responseText.body.childNodes];
-  let result = [];
-  for (let i of htmlDoc) {
-    let arr = i.childNodes;
-    let tegP = (
-      <p>
-        {createParagraf(arr).map((i) => {
-          return i;
-        })}
-      </p>
-    );
-    result.push(tegP);
-  }
-  return result;
-};
-
-// const getExchangeOrTradeList = async (e, firstLoad, count) => {
-
-//   const ID = "mainBlock";
-//   let apiType = e.currentTarget.dataset.apitype;
-//   let firstLimit = e.currentTarget.dataset.firstlimit;
-//   let secondLimit = e.currentTarget.dataset.secondlimit;
-//   let type = e.currentTarget.dataset.type;
-//   let data = {};
-//   if (firstLoad) {
-//     data = {
-//       limit: +firstLimit,
-//       sort: {
-//         score: -1,
-//       },
-//     };
-//   } else {
-//     console.log(count)
-//     data = {
-//       limit: +secondLimit,
-//       offset: +firstLimit + secondLimit * (count - 1),
-//     };
-//     console.log(data)
-//   }
-//   console.log(apiType)
-//   let response
-//     = checkAnswerApi(await sendApi.create(`${apiType}`, data));
-//   console.log(response)
-//   if (firstLoad) {
-//     return response;
-//   } else {
-//     let prevList = getValue(ID, `${type}List`);
-//     response.list_records = [
-//       ...prevList.list_records,
-//       ...response.list_records,
-//     ];
-//     console.log(response)
-//     setValue(ID, `${type}List`, response);
-
-//   }
-// }
-
 const ifHaveMedia = function (mediaArr, type, whatReturn) {
   if (mediaArr === null) {
     return "";
   }
-  var media = mediaArr.filter(tmp => tmp.type == type)
+  var media = mediaArr.filter((tmp) => tmp.type == type);
   if (media.length == 0) {
     return "";
   }
   return whatReturn;
 };
 
+
+const uploadMedia = function (file, type, onload, onprogress, xhr) {
+  const formData = new FormData()
+  formData.append('media', file);
+  xhr = new XMLHttpRequest()
+  xhr.open('POST', `/upload/${type}/`)
+  xhr.onload = onload
+  xhr.upload.onprogress = onprogress
+  xhr.send(formData)
+}
+
+
 export {
+  wrapTextWithATag,
   isEmpty,
   showVotersAndchangeStatistic,
   changeActiveCommentsInput,
-  parseTextforJsx,
   changeNewsCategory,
   getDateFormat,
   getNewsItem,
-  getNewsCategory,
   siteLink,
-  changeLang,
   timerTik,
-  timerCourse,
   clickHide,
-  clickCancel,
-  start,
   checkAnswerApi,
   allValidation,
-  numberFixWithSpaces,
   ifHaveMedia,
+  uploadMedia
 };

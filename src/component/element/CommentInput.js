@@ -10,7 +10,7 @@ import {
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
 
-const CommentInput = function ({ nickname, item, commentId, edit }) {
+const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   edit }) {
   let count = 1;
   let scrollHeight = 0;
   let commentText = Variable.setRef();
@@ -40,10 +40,13 @@ const CommentInput = function ({ nickname, item, commentId, edit }) {
       let responce = await sendNewCommentApi(
         item,
         text,
+         typeSet,
+         mainId, 
         commentId,
         edit
       );
       console.log('=commentText().value=', text)
+      Variable.Static.activeInputId = "";
       commentText().value = "";
       initGo();
     }

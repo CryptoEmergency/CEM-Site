@@ -8,19 +8,15 @@ import {
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
 
-const NewsItem = function ({ item, index }) {
-
+const NewsItem = function ({ item, type }) {
     return (
         <div class="blog_news_item"
-        // onClick={async () => {
-        //     let news;
-        //     news = await getNewsItemInShow(item._id);
-        //     news = news.list_records[0];
-        //     Variable.SetModals({
-        //         name: "ModalFullBlog",
-        //         data: { news },
-        //     });
-        // }}
+            onClick={async () => {
+                Variable.SetModals({
+                    name: "ModalFullSize",
+                    data: { item: item, type: type },
+                });
+            }}
         >
             <img src={"/assets/upload/news/" + item.image} />
             <p class="blog_new_title">{item.title}</p>

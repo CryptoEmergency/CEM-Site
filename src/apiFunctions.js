@@ -4,120 +4,139 @@ import {
   getStorage,
   sendApi,
   initGo,
-  Variable
+  Variable,
+  initReload,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 import { renderModalFullNews } from "@src/apiFunctionsE.js";
 
-const getUserInfoProfile = async function (nickname) {
-  const userInfo = checkAnswerApi(
-    await sendApi.create("getUsers", {
-      filter: {
-        nickname: nickname,
-      },
-      select: {
-        _id: 1,
-        subscribe: 1,
-        fullname: 1,
-        nickname: 1,
-        information: 1,
-        "avatar.name": 1,
-        "frame.name": 1,
-        "background.name": 1,
-        statistic: 1,
-        online: 1,
-        awards: 1,
-        email: 1,
-        country: 1,
-        rank: 1,
-        status: 1,
-        startDelete: 1,
-      },
-      limit: 1,
-    })
-  );
-
-  if (userInfo && userInfo.list_records && userInfo.list_records[0]) {
-    return userInfo.list_records[0];
-  } else {
-    return {};
-  }
-};
-
-const changeStatistic = async function (e, commentId, subcommentId) {
+const changeStatistic = async function (
+  e,
+  commentId,
+  type,
+  mainId,
+  subcommentId
+) {
   let data;
-  data = {
-    value: {
-      comments: {
-        _id: commentId,
+  if (type === "setAnswer" && !mainId) {
+    data = data = {
+      value: {
+        evaluation: e.target.dataset.name,
       },
-    },
-    _id: Variable.Static.showNewsId,
-  };
+      _id: commentId,
+    };
+  } else if(!subcommentId){
 
-  if (subcommentId) {
-    data.value.comments.comments = {
-      evaluation: e.target.dataset.name,
-      _id: subcommentId,
+    data = {
+      value: {
+        comments: {
+          _id: commentId,
+          evaluation: e.target.dataset.name
+        },
+      },
+      _id: mainId,
     }
-  } else {
-    data.value.comments.evaluation = e.target.dataset.name
+  }else{
+      data = {
+        value: {
+          comments: {
+            _id: subcommentId,
+            comments: {
+              evaluation: e.target.dataset.name,
+        _id:commentId ,
+            }
+          },
+        },
+        _id: mainId,
+    }
+  //   if (subcommentId) {
+  //     data.value.comments.comments = {
+  //       evaluation: e.target.dataset.name,
+  //       _id: subcommentId,
+  //     };
+  //   } else {
+  //     data.value.comments.evaluation = e.target.dataset.name;
+  //   }
   }
-  console.log('=changeStatistic=', changeStatistic)
-  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  let response = checkAnswerApi(await sendApi.create(type, data));
   if (Variable.dataUrl.params !== undefined) {
-    initGo()
+    initReload();
   }
-
-
 };
 
-const showVotersApi = async (id) => {
+const showVotersApi = async (id, type) => {
+  console.log("=id=", id);
   let data = {
     filter: {
-      _id: id
+      _id: id,
     },
     select: {
-      evaluation: 1
-    }
+      evaluation: 1,
+    },
   };
-  let response = checkAnswerApi(await sendApi.create("getComments", data));
-  return response
-}
+  let response = checkAnswerApi(await sendApi.create(type, data));
+  // let response = await sendApi.send({ action: type, filter:{
+  //   _id: id
+  // }, select: {
+  //   evaluation: 1
+  // } });
+  // return response.result
+  return response;
+};
 
-const sendNewCommentApi = async function (item, comment, commentId, edit) {
-  console.log('=096bf2=', item, comment, commentId, edit)
+const sendNewCommentApi = async function (item, comment,typeSet, mainId, commentId,  edit) {
+  console.log("=096bf2=", item, comment, commentId, edit);
 
   let data = {
     value: {
       comments: {},
     },
-    _id: Variable.Static.showNewsId,
+    _id: mainId,
   };
-  if (item.image) {
-    data.value.comments = { text: comment }
-  } else if (edit !== undefined && edit.mainCom) {
+  if(!commentId && typeSet == "setAnswer"&& mainId === item._id){
+    data.value.comments = { text: comment };
+  }else if(!commentId){
     data.value.comments = {
-      text: comment,
-      _id: commentId
-    }
-  } else if (edit !== undefined && !edit.mainCom) {
-    data.value.comments = {
-      comments: {
-        text: comment,
-        _id: commentId,
-      }
-
-    }
-  } else {
+          comments: {
+            quote: item._id,
+            text: comment,
+          },
+          _id:  item._id,
+        };
+  }else{
     data.value.comments = {
       comments: {
         quote: item._id,
         text: comment,
       },
       _id: commentId,
-    }
+    };
+  }
 
+  // if (item.image || typeSet == "setAnswer") {
+  //   data.value.comments = { text: comment };
+  // } else if (edit !== undefined && edit.mainCom) {
+  //   data.value.comments = {
+  //     text: comment,
+  //     _id: commentId,
+  //   };
+  // } else if (edit !== undefined && !edit.mainCom) {
+  //   data.value.comments = {
+  //     comments: {
+  //       text: comment,
+  //       _id: commentId,
+  //     },
+  //   };
+  // } else {
+  //   data.value.comments = {
+  //     comments: {
+  //       quote: item._id,
+  //       text: comment,
+  //     },
+  //     _id: commentId,
+  //   };
+
+    
     // data = {
     //   value: {
     //     comments: {
@@ -130,12 +149,12 @@ const sendNewCommentApi = async function (item, comment, commentId, edit) {
     //   },
     //   _id: Variable.Static.showNewsId,
     // };
-  }
-  let response = checkAnswerApi(await sendApi.create("setNews", data));
-
+  // }
+  console.log('=data=',data)
+  let response = checkAnswerApi(await sendApi.create(typeSet, data));
 
   if (Variable.dataUrl.params === undefined) {
-    await renderModalFullNews()
+    await renderModalFullNews();
   }
   return response;
 };
@@ -183,11 +202,7 @@ const getPostsItemInShow = async function (id) {
   return response;
 };
 
-
-
 const getQuestionItemInShow = async function (id) {
-
-
   let data = {
     filter: {
       questionId: id,
@@ -208,41 +223,7 @@ const getQuestionItemInShow = async function (id) {
   };
 
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
-  console.log('=df5226=', response)
-  return response;
-};
-
-const getTradeOrExchangeList = async (type, count) => {
-  let a;
-  let b;
-  if (type === "getTrade") {
-    a = 20;
-    b = 50;
-  } else {
-    a = 10;
-    b = 10;
-  }
-
-  let data = {};
-  if (!count) {
-    console.log("=first=");
-    data = {
-      limit: a,
-      sort: {
-        score: -1,
-      },
-    };
-  } else {
-    console.log("=more=");
-    data = {
-      limit: b,
-      offset: a + b * (count - 1),
-      sort: {
-        score: -1,
-      },
-    };
-  }
-  let response = checkAnswerApi(await sendApi.create(type, data));
+  console.log("=df5226=", response);
   return response;
 };
 
@@ -259,99 +240,10 @@ const getWorldPress = async (count, sortBy = "score", sortType = "-1") => {
   return response;
 };
 
-const mainQuestions = async (optionsSelect, limit = 6, offset = 0) => {
-  let filter = {
-    "languages.code": getStorage("lang"),
-  };
-
-  let sort = {
-    showDate: -1,
-  };
-
-  if (optionsSelect) {
-    const question = optionsSelect.questions;
-    const date = optionsSelect.date;
-
-    if (question.active == "open") {
-      filter.close = false;
-    } else if (question.active == "closed") {
-      filter.close = true;
-      // filter.bestId = {}
-      // filter.bestId["$exist"] = false
-    } else if (question.active == "best") {
-      filter.close = true;
-      filter.bestId = {};
-      filter.bestId["$exist"] = true;
-    }
-
-    if (date.active == "views") {
-      console.log("=19f369=", "views");
-      sort = {
-        "statistic.view": -1,
-      };
-    } else if (date.active == "answers") {
-      console.log("=952e23=", "answers");
-      sort = {
-        "statistic.answer": -1,
-      };
-    }
-  }
-
-  let data = {
-    filter: filter,
-    select: {
-      title: 1,
-      showDate: 1,
-      statistic: 1,
-      languages: 1,
-      close: 1,
-      bestId: 1,
-      media: 1,
-      author: 1,
-    },
-    sort: sort,
-    limit: limit,
-    offset: offset,
-  };
-
-  let response = checkAnswerApi(await sendApi.create("getQuestions", data));
-  return response;
-};
-
-const mainTrades = async () => {
-  let data = {
-    sort: {
-      score: -1,
-    },
-    limit: 6,
-  };
-
-  let response = checkAnswerApi(
-    await sendApi.create("getTrade", data)
-  ).list_records;
-  return response;
-};
-
-const mainExchanges = async () => {
-  let data = {
-    sort: {
-      score: -1,
-    },
-    limit: 6,
-  };
-
-  let response = checkAnswerApi(
-    await sendApi.create("getExchange", data)
-  ).list_records;
-  return response;
-};
-
 const mainUsers = async (limit = 6, offset = 0, additional = null) => {
   let filter = {
     "confirm.registrasion": true,
   };
-
-
 
   filter["$or"] = [
     {
@@ -436,69 +328,13 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
   return response;
 };
 
-const mainNews = async () => {
-  let data = {
-    filter: {
-      type: "news",
-      "languages.code": "ru",
-    },
-    select: {
-      title: 1,
-      preview: 1,
-      image: 1,
-      showDate: 1,
-      "statistic.view": 1,
-      "statistic.comments": 1,
-    },
-    sort: {
-      showDate: -1,
-    },
-    limit: 6,
-  };
-
-  let response = checkAnswerApi(
-    await sendApi.create("getNews", data)
-  ).list_records;
-  return response;
-};
-
-const getUserAboutProfile = async function (nickname) {
-  const userInfo = checkAnswerApi(
-    await sendApi.create("getUsers", {
-      filter: {
-        nickname: nickname,
-      },
-      select: {
-        information: 1,
-        work: 1,
-        interest: 1,
-        country: 1,
-        fullname: 1,
-      },
-    })
-  );
-
-  if (userInfo && userInfo.list_records && userInfo.list_records[0]) {
-    return userInfo.list_records[0];
-  } else {
-    return {};
-  }
-};
-
 export {
   showVotersApi,
   changeStatistic,
   sendNewCommentApi,
-  mainTrades,
-  mainExchanges,
   mainUsers,
-  mainNews,
   getNewsItemInShow,
   getPostsItemInShow,
   getQuestionItemInShow,
-  getTradeOrExchangeList,
-  getUserInfoProfile,
-  getUserAboutProfile,
-  mainQuestions,
   getWorldPress,
 };

@@ -16,9 +16,32 @@ import { BlockUserSettingsPage } from '@component/blocks/index.js';
 
 import { Avatar } from '@component/element/Avatar.js';
 
-import { getUserBlackList, changePassword, deleteUser, restoreUser, deleteUserFromBlacklist } from '@src/apiFunctionsL.js'
 
 
+const deleteUserFromBlacklist = async (user) => {
+    let data = {
+        value: {
+            blackList: user
+        }
+    }
+    let response = checkAnswerApi(await sendApi.create("setUsers", data));
+    return response
+}
+
+const getUserBlackList = async (count = 0) => {
+    let data = {
+        select: {
+            blackList: 1
+        },
+        limit: 5,
+        offset: 5 * count,
+        filter: {
+            _id: Variable.myInfo._id
+        }
+    }
+    let response = checkAnswerApi(await sendApi.create("getUsers", data));
+    return response
+}
 
 const start = function () {
     let settingsPage

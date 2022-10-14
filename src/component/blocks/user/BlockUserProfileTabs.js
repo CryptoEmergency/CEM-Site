@@ -5,7 +5,6 @@ import {
 } from '@betarost/cemjs';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
-import { numberFixWithSpaces } from '@src/functions.js';
 
 
 const BlockUserProfileTabs = function ({ lang, myInfo, userInfo }) {

@@ -7,8 +7,9 @@ import {
   initReload,
 } from "@betarost/cemjs";
 
-import { BlockExchange } from '@component/blocks/BlockExchange.js';
+import {BlockExchange} from '@component/blocks/index.js';
 import { If } from '@component/helpers/All.js';
+import { ButtonShowMore } from "@component/element/index.js";
 
 const start = function () {
   Variable.HeaderShow = true;
@@ -27,20 +28,14 @@ const start = function () {
               <If
                 data={Variable.PageExchange.list_records.length < Variable.PageExchange.totalFound}
                 dataIf={
-                  <div class="crypto_exchanges_footer">
-                    <a class="btn-view-all-a"
-                      onclick={async () => {
-                        let tmp = await sendApi.send({ action: "getExchange", short: true, limit: 20, offset: Variable.PageExchange.list_records.length })
-                        Variable.PageExchange.list_records.push(...tmp.list_records)
-                        initReload()
-                      }
-                      }
-                    >
-                      <div class="btn-view-all" >
-                        <div>{Variable.lang.button.showMore}</div>
-                      </div>
-                    </a>
-                  </div>
+                  <ButtonShowMore
+                  onclick = {async () => {
+                          let tmp = await sendApi.send({ action: "getExchange", short: true, limit: 20, offset: Variable.PageExchange.list_records.length })
+                          Variable.PageExchange.list_records.push(...tmp.list_records)
+                          initReload()
+                        }
+                        }
+                  />
                 }
               />
             }

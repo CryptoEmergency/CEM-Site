@@ -82,6 +82,15 @@
                 text-align: right;
             }
         }
+
+        .c-aboutus {
+            &__dateitem {
+
+                @media(max-width: 1199px) {
+                    align-items: flex-end;
+                }
+            }
+        }
     }
 
     &__dateitem {
@@ -117,6 +126,24 @@
                 height: 3px;
             }
 
+        }
+
+        span {
+            display: inline-block;
+            font-weight: normal;
+            font-size: 19px;
+            line-height: 110%;
+            color: #FBFCFF;
+            margin-bottom: 12px;
+            width: 127px;
+
+            @media(max-width: 680px) {
+                width: 100px;
+            }
+
+            @media (max-width: 464px) {
+                font-size: 16px;
+            }
         }
 
         &--1 {
@@ -248,7 +275,7 @@
                 }
 
                 &::after {
-                    background: #A43CF9;
+                    background: #FF6E6C;
                 }
             }
 
@@ -292,8 +319,11 @@
             p {
 
                 &::after {
-                    left: auto;
-                    right: 0;
+
+                    @media(max-width: 1199px) {
+                        left: auto;
+                        right: 0;
+                    }
                 }
             }
 
@@ -301,7 +331,82 @@
                 right: 60%;
                 margin-left: 0;
             }
+
+            @media (max-width: 799px) {
+                right: 65%;
+            }
+
+            @media (max-width: 680px) {
+                right: 70%;
+            }
         }
+    }
+
+    &__projects {
+        position: relative;
+        z-index: 2;
+        padding-bottom: 160px;
+        margin-top: 100px;
+
+        @media(max-width: 1199px) {
+            margin-top: 1250px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 35px;
+        margin-top: 80px;
+
+        @media(max-width: 1370px) {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 0 20px;
+        }
+    }
+
+    &__project {
+        padding-bottom: 10px;
+        margin-bottom: 50px;
+        border-bottom: 1px solid #343949;
+    }
+
+    &__banner {
+        max-width: 100%;
+
+        @media(max-width: 1370px) {
+            max-width: 100%;
+            width: 800px;
+        }
+    }
+
+    &__projectcompany {
+        display: block;
+        margin-top: 20px;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 18px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+        -webkit-background-clip: text;
+    }
+
+    &__projecttitle {
+        margin-top: 15px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 24px;
+        color: #FFFFFF;
     }
 
     h2 {
@@ -342,6 +447,10 @@
     &__inner {
         max-width: 1240px;
         margin: 0 auto;
+
+        @media(max-width: 1199px) {
+            padding: 0 30px;
+        }
     }
 
     &__title {
@@ -497,6 +606,8 @@
     }
 }
 
+
+
 .about_us-btn {
     left: 50%;
     margin-bottom: 10px;
@@ -583,168 +694,6 @@
     margin-top: -250px;
 }
 
-.road_map {
-    margin-top: 120px;
-}
-
-.road_map_container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    position: relative;
-}
-
-.road_map span {
-    display: inline-block;
-    font-weight: normal;
-    font-size: 19px;
-    line-height: 110%;
-    color: #FBFCFF;
-    margin-bottom: 12px;
-    width: 100px;
-}
-
-.road_map_date-1 {
-    display: flex;
-    flex-direction: column;
-    margin-left: 30%;
-}
-
-.road_map_date-1 div {
-    width: 24px;
-    height: 3px;
-    background: #00F2C6;
-    margin-bottom: 14px;
-}
-
-.road_map_date-1 p {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 115%;
-    color: #00F2C6;
-    margin-bottom: 4px;
-    width: 200px;
-}
-
-.road_map_date-2 {
-    display: flex;
-    flex-direction: column;
-    margin-left: 15%;
-}
-
-.road_map_date-2 div {
-    width: 24px;
-    height: 3px;
-    background: #A43CF9;
-    margin-bottom: 14px;
-}
-
-.road_map_date-2 p {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 115%;
-    color: #A43CF9;
-    margin-bottom: 4px;
-    width: 200px;
-}
-
-.road_map_date-3 {
-    display: flex;
-    flex-direction: column;
-    margin-left: 40%;
-}
-
-.road_map_date-3 div {
-    width: 24px;
-    height: 3px;
-    background: #1D7AF8;
-    margin-bottom: 14px;
-}
-
-.road_map_date-3 p {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 115%;
-    color: #1D7AF8;
-    margin-bottom: 4px;
-    width: 200px;
-}
-
-.road_map_date-4 {
-    display: flex;
-    flex-direction: column;
-    margin-left: 45%;
-}
-
-.road_map_date-4 div {
-    width: 24px;
-    height: 3px;
-    background: #00A5F7;
-    margin-bottom: 14px;
-}
-
-.road_map_date-4 p {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 115%;
-    color: #00A5F7;
-    margin-bottom: 4px;
-    width: 200px;
-}
-
-.road_map_date-5 {
-    display: flex;
-    flex-direction: column;
-    margin-left: 40%;
-}
-
-.road_map_date-5 div {
-    width: 24px;
-    height: 3px;
-    background: #FF6E6C;
-    margin-bottom: 14px;
-}
-
-.road_map_date-5 p {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 115%;
-    color: #FF6E6C;
-    margin-bottom: 4px;
-    width: 200px;
-}
-
-.road_map_date-6 {
-    display: flex;
-    flex-direction: column;
-    margin-left: 35%;
-}
-
-.road_map_date-6 div {
-    width: 24px;
-    height: 3px;
-    background: #FF9B00;
-    margin-bottom: 14px;
-}
-
-.road_map_date-6 p {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 115%;
-    color: #FF9B00;
-    margin-bottom: 4px;
-    width: 200px;
-}
-
-.road_map_top_dates {
-    display: flex;
-}
-
-.road_map_bottom_dates {
-    display: flex;
-    margin-top: 20px;
-}
-
 .our_team {
     margin-top: 180px;
 }
@@ -782,53 +731,6 @@
     font-size: 15px;
     line-height: 150%;
     color: #CAD4F3;
-}
-
-.projects {
-    position: relative;
-    z-index: 2;
-    padding-bottom: 160px;
-    margin-top: 100px;
-}
-
-.projects a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.projects_block {
-    margin-top: 80px;
-    display: grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
-    gap: 35px;
-}
-
-.projects_item {
-    border-bottom: 1px solid #343949;
-    padding-bottom: 10px;
-    margin-bottom: 50px;
-}
-
-.project_gradient {
-    display: block;
-    margin-top: 20px;
-    background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    font-size: 13px;
-    line-height: 18px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.projects_item p {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 24px;
-    color: #FFFFFF;
-    margin-top: 15px;
 }
 
 .project-btn {
@@ -929,109 +831,7 @@
     -webkit-text-fill-color: transparent;
 }
 
-.projects_item img {
-    max-width: 100%;
-}
-
-@media(max-width: 1370px) {
-    .projects_block {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding: 0 20px;
-    }
-
-    .projects_item img {
-        max-width: 100%;
-    }
-}
-
 @media(max-width: 1199px) {
-    .road_map {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .road_map_top_dates {
-        order: 3;
-        flex-direction: column;
-        margin-left: 80px;
-        margin-top: 0;
-    }
-
-    .road_map_bottom_dates {
-        order: 1;
-        flex-direction: column;
-        margin-right: 100px;
-        margin-top: 0;
-    }
-
-    .road_map_bottom_dates p {
-        text-align: right;
-    }
-
-    .road_map_bottom_dates span {
-        text-align: right;
-    }
-
-    .road_map_date-1 {
-        margin-left: 0;
-        position: absolute;
-        left: 60%;
-        top: 290px;
-    }
-
-    .road_map_date-2 {
-        margin-left: 0;
-        position: absolute;
-        left: 60%;
-        top: 550px;
-    }
-
-    .road_map_date-3 {
-        margin-left: 0;
-        position: absolute;
-        left: 60%;
-        top: 985px;
-    }
-
-    .road_map_date-4 {
-        margin-left: 0;
-        align-items: end;
-        position: absolute;
-        right: 60%;
-        top: 330px;
-    }
-
-    .road_map_date-5 {
-        margin-left: 0;
-        align-items: end;
-        position: absolute;
-        right: 60%;
-        top: 760px;
-    }
-
-    .road_map_date-6 {
-        margin-left: 0;
-        align-items: end;
-        position: absolute;
-        right: 60%;
-        top: 1190px;
-    }
-
-    .projects {
-        margin-top: 1250px;
-    }
-
-    .road_map img {
-        transform: rotate(90deg) translateX(50%);
-    }
-
-    .who_we_are_inner {
-        padding: 0 30px;
-    }
-
     .our_team {
         margin-top: 180px;
     }
@@ -1054,102 +854,14 @@
         padding: 0 30px;
     }
 
-    .who_we_are_inner {
-        padding: 0 30px;
-    }
-
     .road_map_container {
         justify-content: space-around;
     }
-}
-
-@media(max-width: 768px) {
-    .road_map_top_dates {
-        margin-left: 125px;
-    }
-
-    .road_map_bottom_dates {
-        margin-right: 75px;
-    }
-
-    .road_map p {
-        font-size: 20px;
-    }
-
-    .road_map span {
-        font-size: 19px;
-    }
-
-    .road_map_date-1 {}
-
-    .road_map_date-2 {}
-
-    .road_map_date-3 {}
-
-    .road_map_date-4 {}
-
-    .road_map_date-5 {}
-
-    .road_map_date-6 {}
 }
 
 @media(max-width: 767px) {
 
     .our_team_block {
         grid-template-columns: 100%
-    }
-}
-
-@media(max-width: 680px) {
-    .road_map_date-1 {
-        left: 70%;
-    }
-
-    .road_map_date-2 {
-        left: 70%;
-    }
-
-    .road_map_date-3 {
-        left: 70%;
-    }
-
-    .road_map_date-4 {
-        right: 70%;
-    }
-
-    .road_map_date-5 {
-        right: 70%;
-    }
-
-    .road_map_date-6 {
-        right: 70%;
-    }
-
-    .road_map_top_dates {
-        margin-left: 20px;
-    }
-
-    .road_map_date-1 p {
-        width: 104px;
-    }
-
-    .road_map_date-2 p {
-        width: 104px;
-    }
-
-    .road_map_date-3 p {
-        width: 104px;
-    }
-
-    .road_map_date-4 p {
-        width: 104px;
-    }
-
-    .road_map_date-5 p {
-        width: 104px;
-    }
-
-    .road_map_date-6 p {
-        width: 104px;
     }
 }
