@@ -104,50 +104,74 @@ const getQuestionsItemInShow = async function (id, type) {
 
 const delCom = async (info) => {
   console.log("=info=", info);
-  let data = {
-    value: {
-      comments: {},
-    },
-    _id: Variable.Static.showNewsId,
-  };
+  let data = {}
+  if(info.typeSet ==="setAnswer" ){
+    data._id = info.id;
+    data.value = {
+      active:false
+    }
+  }else if(info.typeSet ==="doRole"){
+    data._id = info.id;
+    data.value = {
+      active:false
+    };
+    data.roleAction = info.roleAction
+  }
+  // let data = {
+  //   value: {
+  //     comments: {},
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
 
-  info.mainCom
-    ? (data.value.comments = {
-      active: false,
-      _id: info.id,
-    })
-    : (data.value.comments = {
-      comments: {
-        active: false,
-        _id: info.id,
-      },
-    });
-  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  // info.mainCom
+  //   ? (data.value.comments = {
+  //     active: false,
+  //     _id: info.id,
+  //   })
+  //   : (data.value.comments = {
+  //     comments: {
+  //       active: false,
+  //       _id: info.id,
+  //     },
+  //   });
+  let response = checkAnswerApi(await sendApi.create(info.typeSet, data));
 };
 
 const sendComplaintApi = async (info) => {
   console.log("=info=", info);
-  let data = {
-    value: {
-      comments: {},
-    },
-    _id: Variable.Static.showNewsId,
-  };
+  let data ={}
+  // let data = {
+  //   value: {
+  //     comments: {},
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
 
-  info.data.mainCom
-    ? (data.value.comments = {
-      complain: info.complaint,
-      _id: info.data.id,
-    })
-    : (data.value.comments = {
-      comments: {
-        complain: info.complaint,
+  // info.data.mainCom
+  //   ? (data.value.comments = {
+  //     complain: info.complaint,
+  //     _id: info.data.id,
+  //   })
+  //   : (data.value.comments = {
+  //     comments: {
+  //       complain: info.complaint,
+  //       _id: info.data.id,
+  //     },
+  //   });
+  if(info.typeSet ==="setAnswer"){
+   data ={
+
+        value: {
+          complain: info.complaint,
+        },
         _id: info.data.id,
-      },
-    });
+
+   }
+  }
 
   console.log("=data=", data);
-  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  let response = checkAnswerApi(await sendApi.create(info.data.typeSet, data));
 };
 
 const renderModalFullNews = async () => {

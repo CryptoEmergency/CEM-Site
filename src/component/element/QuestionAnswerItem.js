@@ -13,6 +13,7 @@ import {
 } from "@component/element/index.js";
 
 Variable.Static.activeInputId = "";
+Variable.Static.answerAdditionally ="";
 const QuestionAnswerItem = function ({ item, index }) {
   let mainId = item._id;
   return (
@@ -37,6 +38,7 @@ const QuestionAnswerItem = function ({ item, index }) {
                 class="answer_comment_button"
                 onclick={() => {
                   Variable.Static.activeInputId = item._id;
+                  Variable.Static.answerAdditionally ="";
                   initReload();
                 }}
               >
@@ -53,7 +55,7 @@ const QuestionAnswerItem = function ({ item, index }) {
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]} />
             </div> */}
-            <AnswerAdditionallyToggle item = {item} type = {
+            <AnswerAdditionallyToggle item = {item} typeApi = {"setAnswer"} type = {
               {delete: true,
                 complainAnswer: true,
                 complainUser: true,
