@@ -8,10 +8,11 @@ import {
   Avatar,
   Likes,
   QuestionAnswerItemComment,
+  CommentInput,
+  AnswerAdditionallyToggle,
 } from "@component/element/index.js";
 
-let showComments = false;
-
+Variable.Static.activeInputId = "";
 const QuestionAnswerItem = function ({ item, index }) {
   let mainId = item._id;
   return (
@@ -28,10 +29,17 @@ const QuestionAnswerItem = function ({ item, index }) {
         <div class="comment_body">
           <span class="comment_text">{Helpers.clearText(item.text)}</span>
           {/* Media element */}
+
           <If
-            data={Variable.auth}
+            data={Variable.auth && Variable.Static.activeInputId !== item._id}
             dataIf={
-              <span class="answer_comment_button">
+              <span
+                class="answer_comment_button"
+                onclick={() => {
+                  Variable.Static.activeInputId = item._id;
+                  initReload();
+                }}
+              >
                 {Variable.lang.button.giveAnswer}
               </span>
             }
@@ -39,12 +47,19 @@ const QuestionAnswerItem = function ({ item, index }) {
 
           <div class="comment_icons">
             <Likes item={item} typeGet="getAnswers" typeSet="setAnswer" />
-            <div
+            {/* <div
               class="comment_icon_type-1 answer_additionally_toggle {{#if data.userInfo.auth}}{{else}}comment_inactive{{/if}}"
               data-action="answerAdditionallyToggle"
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]} />
-            </div>
+            </div> */}
+            <AnswerAdditionallyToggle item = {item} type = {
+              {delete: true,
+                complainAnswer: true,
+                complainUser: true,
+                blackList:true,
+              }} />
+
           </div>
 
           <If
@@ -58,12 +73,20 @@ const QuestionAnswerItem = function ({ item, index }) {
                   <a
                     class="btn-comm "
                     onclick={() => {
-                      showComments = !showComments;
+                      if (Variable.Static.openComent[index]) {
+                        Variable.Static.openComent[index] =
+                          !Variable.Static.openComent[index];
+                      } else {
+                        Variable.Static.openComent[index] = true;
+                      }
                       initReload();
                     }}
                   >
                     <If
-                      data={showComments}
+                      data={
+                        Variable.Static.openComent[index] !== undefined &&
+                        Variable.Static.openComent[index]
+                      }
                       dataIf={
                         <span>
                           {Variable.lang.span.showComments} (
@@ -89,7 +112,22 @@ const QuestionAnswerItem = function ({ item, index }) {
             }
           />
           <If
-            data={showComments}
+            data={Variable.Static.activeInputId === item._id}
+            dataIf={
+              <CommentInput
+                nickname={item.author.nickname}
+                item={item} 
+                typeSet="setAnswer"
+                mainId = {mainId}
+                // commentId={item._id}
+              />
+            }
+          />
+          <If
+            data={
+              Variable.Static.openComent[index] !== undefined &&
+              Variable.Static.openComent[index]
+            }
             dataIf={
               <div class="comment_answer">
                 <Map
