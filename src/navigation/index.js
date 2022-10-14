@@ -80,6 +80,7 @@ const start = function () {
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
                         <BlockQuestions
+                            version={Variable.dataUrl}
                             filters={filtersQuestions}
                             button={
                                 <div class="c-questions__footer">

@@ -187,9 +187,34 @@
         }
     }
 
+    &_chapter {
+        background: #313543;
+        border: 1px solid #44495c;
+        border-bottom: 0;
+        min-height: 50px;
+        outline: none;
+        box-sizing: border-box;
+        padding: 10px 25px;
+        font-weight: 500;
+        color: #fff;
+        position: relative;
+        display: flex;
+
+        &:first-child {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-bottom: 1px solid #44495c;
+        }
+    }
+
     &_main_text {
         display: block;
-        min-height: 90px;
+        min-height: 90px !important;
         padding-right: 40px;
 
         p {

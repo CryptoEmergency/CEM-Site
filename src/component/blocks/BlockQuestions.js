@@ -107,7 +107,7 @@ const BlockQuestions = function ({ version, callBack, button, filters, items }) 
                     </div> */}
                 </div>
                 <If
-                    data={version == undefined}
+                    data={version == undefined || version.adress == ''}
                     dataIf={
                         <h4>{Variable.lang.h.lastQuestions}</h4>
                     }

@@ -171,7 +171,7 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
                                     />
                                     <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
                                 </div>
-                                <div class="checkbox" data-action="friendsFilterCheckbox">
+                                {/* <div class="checkbox" data-action="friendsFilterCheckbox">
                                     <input
                                         checked={filters.online ? true : false}
                                         class="checkbox__input"
@@ -184,7 +184,7 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
                                         }}
                                     />
                                     <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
