@@ -40,11 +40,12 @@ const wrapTextWithATag = (text) => {
 
 const wrapTagToText = (text) => {
   let textTag = Helpers.sanitizeHtml(text, { allowedTags: ['p'] });
-  console.log('=e8599e=1', textTag)
+ 
   textTag = textTag.replace(new RegExp("</p><p>", 'gi'), "\n")
-  console.log('=e8599e=2', textTag)
+
   textTag = textTag.replace(new RegExp("<p>", 'gi'), "").replace(new RegExp("</p>", 'gi'), "")
   console.log('=e8599e=3', textTag)
+
 
   return textTag;
 };

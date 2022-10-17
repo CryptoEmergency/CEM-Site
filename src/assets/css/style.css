@@ -2979,10 +2979,11 @@ span#procent::after {
 .comment_text a{
   color: #20e0f6;
   text-decoration: none;
-}
-.comment_text p{
-  margin-bottom: 0px;
 } */
+.comment_text p{
+  /* margin-bottom: 0px; */
+  height: 22px;
+}
 .comment_image {
   display: grid;
   grid-template-columns: calc(25% - 6px) calc(25% - 6px) calc(25% - 6px) calc(25% - 6px);
@@ -6098,6 +6099,9 @@ span#procent::after {
   line-height: 24px;
   color: #FFFFFF;
   max-width: 78%;
+}
+.question_text p{
+height: 24px;
 }
 
 .answer_tags {

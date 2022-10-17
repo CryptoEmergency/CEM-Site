@@ -17,10 +17,40 @@ import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit }) {
   let count = 1;
   let scrollHeight = 0;
+//   if(Variable.Static.EditInput.length > 0){
+// let regexp = /<p>/g;
+// let matchAll =  item.text.matchAll(regexp);
+//     matchAll = Array.from(matchAll)
+//     let input = Variable.setRef()
+//     switch (matchAll.length){
+//       case 1:
+
+//         break;
+//       case 2:
+
+//         break;
+//       case 3:
+
+//         break;
+//       case 4:
+
+//         break;
+//       case 5:
+//       default: 
+
+        
+//     }
+
+//   }
   let commentText = Variable.setRef();
-  const changeTextarea = (e) => {
+  
+  const changeTextarea = (e) => {let element = e.target;
     console.log('=d5a687=', commentText().value)
-    let element = e.target;
+    console.log('=38eb56=',count)
+    console.log('=38eb56=',scrollHeight)
+    console.log('=38eb56=',element.scrollHeight)
+
+    
     if (element.textLength === 1 && count == 1) {
       scrollHeight = element.scrollHeight;
     } else if (count !== 5 && scrollHeight < element.scrollHeight) {
@@ -35,10 +65,8 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
       count--;
     }
   };
-
   const sendNewComment = async () => {
     let text = wrapTextWithATag(commentText().value.trim());
-
     let response;
     if (text.length > 0) {
       let responce = await sendNewCommentApi(
