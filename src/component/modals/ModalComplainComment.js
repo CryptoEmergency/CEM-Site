@@ -156,11 +156,22 @@ const ModalComplainComment = function (data, reload) {
               class="complain_other"
               data-keyup="complainKeyup"
               data-onpaste="editorPaste"
+              oninput = {()=> {
+                initReload("modals");
+              }}
               ref={input}
             ></div>
 
             <div
-              class="registration-btn inactive_form_button"
+              // class="registration-btn inactive_form_button"
+              class={[
+                "registration-btn" ,
+                isChecked.other() !== undefined &&
+                (complaint.length > 0 || input().innerText.trim().length > 2)
+                  ? 
+                   null
+                  :  "inactive_form_button",
+              ]}
               id="answerComplain"
               data-active="0"
               data-action="answerComplain"

@@ -13,9 +13,12 @@ import {
 } from "@component/element/index.js";
 
 Variable.Static.activeInputId = "";
+// Variable.Static.activeEditInputId = "";
 Variable.Static.answerAdditionally ="";
+Variable.Static.EditInput = "";
 const QuestionAnswerItem = function ({ item, index }) {
   let mainId = item._id;
+
   return (
     <div
       style={[item.best ? "order: -1; border-color: #00E741" : null]}
@@ -60,7 +63,7 @@ const QuestionAnswerItem = function ({ item, index }) {
                 complainAnswer: true,
                 complainUser: true,
                 blackList:true,
-              }} />
+              }} mainId = {mainId} />
 
           </div>
 

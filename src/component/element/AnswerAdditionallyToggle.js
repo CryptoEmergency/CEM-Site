@@ -3,8 +3,7 @@ import { jsx, jsxFrag, Helpers, Variable,initReload } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { If } from "@component/helpers/All.js";
 
-const AnswerAdditionallyToggle = function ({ item,typeApi, type }) {
-  console.log("=11b7e9=", type);
+const AnswerAdditionallyToggle = function ({ item,typeApi, type, commentId, mainId }) {
   return (
     <div
       //    class="comment_icon_type-1 answer_additionally_toggle {{#if data.userInfo.auth}}{{else}}comment_inactive {{/if}}" data-action="answerAdditionallyToggle"
@@ -27,6 +26,7 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type }) {
             console.log('=open=')
           Variable.Static.answerAdditionally = item._id;
           Variable.Static.activeInputId = "";
+          Variable.Static.EditInput = "";
           initReload();
         }
       }}
@@ -44,7 +44,18 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type }) {
                     <If
                       data={type.edit}
                       dataIf={
-                        <div class="answer_additionally_item edit">
+                        <div class="answer_additionally_item edit"
+                        onclick = {
+                          (e) => {
+                            e.stopPropagation()
+                            Variable.Static.EditInput = item._id;
+                            Variable.Static.answerAdditionally = "";
+                            Variable.Static.activeInputId = "";
+                            
+                            initReload();
+                          }
+                        }
+                        >
                           {Variable.lang.button.edit}
                         </div>
                       }
@@ -57,7 +68,8 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type }) {
                             Variable.SetModals({
                                 name: "ModalDelComment",
                                 data: { id: item._id,typeSet: typeApi ,
-                                    //  mainCom: true 
+                                  mainId: mainId,
+                                  mainCom: !commentId? true : false,  
                                     },
                               }, true);
                         }}
@@ -78,8 +90,9 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type }) {
                            
                             Variable.SetModals({
                                 name: "ModalComplainComment",
-                                data: { id: item._id,typeSet: typeApi
-                                    //  mainCom: true
+                                data: { id: item._id,typeSet: typeApi,
+                                  mainId: mainId,
+                                     mainCom: !commentId? true : false
                                      },
                               }, true);
                         }}
@@ -125,7 +138,8 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type }) {
                         Variable.SetModals({
                             name: "ModalDelComment",
                             data: { id: item._id,typeSet: "doRole" , 
-                            // mainCom: true, 
+                            mainId: mainId,
+                            mainCom: !commentId? true : false, 
                             roleAction:typeApi },
                           }, true);
                     }}

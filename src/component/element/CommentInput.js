@@ -6,6 +6,7 @@ import {
   stringToHtml,
   initGo,
   initReload,
+  Helpers
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
@@ -47,10 +48,13 @@ const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   e
       );
       console.log('=commentText().value=', text)
       Variable.Static.activeInputId = "";
+      Variable.Static.EditInput = "";
       commentText().value = "";
       initGo();
     }
   };
+  console.log('=item.text=', item.text)
+  console.log('= Helpers.clearText(item.text)=', Helpers.clearText(item.text))
   return (
     <div class="c-comments__form create_post_coments">
       <div
@@ -68,8 +72,8 @@ const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   e
             "padding: 10px 40px 10px 25px;font-size: 10px;min-height: 46px;"
             }`}
         >
-          {nickname !== undefined && nickname + ","}
-          {edit !== undefined && item.text}
+          {(nickname !== undefined && Variable.Static.EditInput.length === 0) && nickname + ","}
+          {Variable.Static.EditInput.length > 0  &&  item.text}
 
         </textarea>
       </div>
