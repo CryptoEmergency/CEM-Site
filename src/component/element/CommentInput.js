@@ -10,6 +10,9 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
+import { wrapTextWithATag } from "@src/functions.js";
+
+
 
 const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   edit }) {
   let count = 1;
@@ -34,7 +37,7 @@ const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   e
   };
 
   const sendNewComment = async () => {
-    let text = commentText().value.trim();
+    let text =wrapTextWithATag (commentText().value.trim());
 
     let response;
     if (text.length > 0) {
