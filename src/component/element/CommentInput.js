@@ -10,11 +10,11 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
-import { wrapTextWithATag } from "@src/functions.js";
+import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 
 
 
-const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   edit }) {
+const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit }) {
   let count = 1;
   let scrollHeight = 0;
   let commentText = Variable.setRef();
@@ -37,27 +37,27 @@ const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   e
   };
 
   const sendNewComment = async () => {
-    let text =wrapTextWithATag (commentText().value.trim());
+    let text = wrapTextWithATag(commentText().value.trim());
 
     let response;
     if (text.length > 0) {
       let responce = await sendNewCommentApi(
         item,
         text,
-         typeSet,
-         mainId, 
+        typeSet,
+        mainId,
         commentId,
         edit
       );
-      console.log('=commentText().value=', text)
+      // console.log('=commentText().value=', text)
       Variable.Static.activeInputId = "";
       Variable.Static.EditInput = "";
       commentText().value = "";
       initGo();
     }
   };
-  console.log('=item.text=', item.text)
-  console.log('= Helpers.clearText(item.text)=', Helpers.clearText(item.text))
+  // console.log('=item.text=', item.text)
+  // console.log('= Helpers.clearText(item.text)=', Helpers.clearText(item.text))
   return (
     <div class="c-comments__form create_post_coments">
       <div
@@ -76,7 +76,7 @@ const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   e
             }`}
         >
           {(nickname !== undefined && Variable.Static.EditInput.length === 0) && nickname + ","}
-          {Variable.Static.EditInput.length > 0  &&  item.text}
+          {Variable.Static.EditInput.length > 0 && wrapTagToText(item.text)}
 
         </textarea>
       </div>

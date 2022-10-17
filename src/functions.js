@@ -29,13 +29,24 @@ import { renderModalFullNews } from "@src/apiFunctionsE.js";
 const wrapTextWithATag = (text) => {
   let textTag = text;
   textTag = Helpers.sanitizeHtml(textTag);
-  textTag = textTag.replace("\n\n", "\n").split("\n");
+  textTag = textTag.replace(new RegExp("\n\n", 'g'), "\n").split("\n");
   //  let res = "<p>"+textTag.join("</p><p>") + "</p>";
   let res = "";
   for (let item of textTag) {
     res += "<p>" + item + "</p>";
   }
   return res;
+};
+
+const wrapTagToText = (text) => {
+  let textTag = Helpers.sanitizeHtml(text, { allowedTags: ['p'] });
+  console.log('=e8599e=1', textTag)
+  textTag = textTag.replace(new RegExp("</p><p>", 'gi'), "\n")
+  console.log('=e8599e=2', textTag)
+  textTag = textTag.replace(new RegExp("<p>", 'gi'), "").replace(new RegExp("</p>", 'gi'), "")
+  console.log('=e8599e=3', textTag)
+
+  return textTag;
 };
 
 const clickHide = function (e) {
@@ -208,7 +219,7 @@ const changeActiveCommentsInput = (id) => {
 
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id , typeGet, typeSet, mainId ,  commentId,) => {
+const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, commentId,) => {
   e.preventDefault();
   let type = e.target.dataset.name;
   if (e.type === "mousedown" || e.type === "touchstart") {
@@ -217,7 +228,7 @@ const showVotersAndchangeStatistic = async (e, id , typeGet, typeSet, mainId ,  
       if (sec === 1500) {
         clearInterval(interval);
         sec = 0;
-        let response = await showVotersApi( id,typeGet);
+        let response = await showVotersApi(id, typeGet);
         if (response !== undefined) {
           response = response.list_records[0].evaluation.filter(
             (item) => item.type === type
@@ -232,13 +243,13 @@ const showVotersAndchangeStatistic = async (e, id , typeGet, typeSet, mainId ,  
   } else {
     clearInterval(interval);
     if (sec < 1500) {
-      await changeStatistic(e, id,typeSet, mainId, commentId );
+      await changeStatistic(e, id, typeSet, mainId, commentId);
       // if (Variable.dataUrl.params === undefined) {
       //   await renderModalFullNews();
       // }
     }
     if (1000 <= sec && sec < 1500) {
-      let response = await showVotersApi( id,typeGet);
+      let response = await showVotersApi(id, typeGet);
       response = response.list_records[0].evaluation.filter(
         (item) => item.type === type
       );
@@ -348,5 +359,6 @@ export {
   checkAnswerApi,
   allValidation,
   ifHaveMedia,
-  uploadMedia
+  uploadMedia,
+  wrapTagToText
 };
