@@ -6,6 +6,7 @@ import {
 import svg from "@assets/svg/index.js";
 
 import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
 
 let elem = Variable.setRef()
 const URL = window.URL || window.webkitURL;

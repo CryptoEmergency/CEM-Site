@@ -84,8 +84,8 @@ const showVotersApi = async (id, type) => {
   return response;
 };
 
-const sendNewCommentApi = async function (item, comment,typeSet, mainId, commentId,  edit) {
-  console.log("=096bf2=", item, comment, commentId, edit);
+const sendNewCommentApi = async function (item, comment,typeSet, mainId, commentId) {
+  console.log("=096bf2=", item, comment, typeSet, mainId, commentId);
 
   let data = {
     value: {
@@ -93,7 +93,26 @@ const sendNewCommentApi = async function (item, comment,typeSet, mainId, comment
     },
     _id: mainId,
   };
-  if(!commentId && typeSet == "setAnswer"&& mainId === item._id){
+
+if(typeSet == "setAnswer" && Variable.Static.EditInput.length > 0 ){
+  if (!commentId){
+    data.value = {
+      comments: {
+         text: comment,
+        _id: item._id,
+      }
+    };
+  }else{
+    data.value.comments = {
+      comments: {
+        text: comment,
+        _id: item._id, 
+      }
+    };
+  }
+}
+
+ else if(!commentId && typeSet == "setAnswer"&& mainId === item._id){
     data.value.comments = { text: comment };
   }else if(!commentId){
     data.value.comments = {
@@ -156,7 +175,7 @@ const sendNewCommentApi = async function (item, comment,typeSet, mainId, comment
   if (Variable.dataUrl.params === undefined) {
     await renderModalFullNews();
   }
-  return response;
+  // return response;
 };
 
 const getNewsItemInShow = async function (id) {

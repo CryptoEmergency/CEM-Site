@@ -6,17 +6,51 @@ import {
   stringToHtml,
   initGo,
   initReload,
+  Helpers
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
+import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 
-const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   edit }) {
+
+
+const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit }) {
   let count = 1;
   let scrollHeight = 0;
+//   if(Variable.Static.EditInput.length > 0){
+// let regexp = /<p>/g;
+// let matchAll =  item.text.matchAll(regexp);
+//     matchAll = Array.from(matchAll)
+//     let input = Variable.setRef()
+//     switch (matchAll.length){
+//       case 1:
+
+//         break;
+//       case 2:
+
+//         break;
+//       case 3:
+
+//         break;
+//       case 4:
+
+//         break;
+//       case 5:
+//       default: 
+
+        
+//     }
+
+//   }
   let commentText = Variable.setRef();
-  const changeTextarea = (e) => {
+  
+  const changeTextarea = (e) => {let element = e.target;
     console.log('=d5a687=', commentText().value)
-    let element = e.target;
+    console.log('=38eb56=',count)
+    console.log('=38eb56=',scrollHeight)
+    console.log('=38eb56=',element.scrollHeight)
+
+    
     if (element.textLength === 1 && count == 1) {
       scrollHeight = element.scrollHeight;
     } else if (count !== 5 && scrollHeight < element.scrollHeight) {
@@ -31,26 +65,27 @@ const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   e
       count--;
     }
   };
-
   const sendNewComment = async () => {
-    let text = commentText().value.trim();
-
+    let text = wrapTextWithATag(commentText().value.trim());
     let response;
     if (text.length > 0) {
       let responce = await sendNewCommentApi(
         item,
         text,
-         typeSet,
-         mainId, 
+        typeSet,
+        mainId,
         commentId,
         edit
       );
-      console.log('=commentText().value=', text)
+      // console.log('=commentText().value=', text)
       Variable.Static.activeInputId = "";
+      Variable.Static.EditInput = "";
       commentText().value = "";
       initGo();
     }
   };
+  // console.log('=item.text=', item.text)
+  // console.log('= Helpers.clearText(item.text)=', Helpers.clearText(item.text))
   return (
     <div class="c-comments__form create_post_coments">
       <div
@@ -68,8 +103,8 @@ const CommentInput = function ({ nickname, item,typeSet, mainId , commentId,   e
             "padding: 10px 40px 10px 25px;font-size: 10px;min-height: 46px;"
             }`}
         >
-          {nickname !== undefined && nickname + ","}
-          {edit !== undefined && item.text}
+          {(nickname !== undefined && Variable.Static.EditInput.length === 0) && nickname + ","}
+          {Variable.Static.EditInput.length > 0 && wrapTagToText(item.text)}
 
         </textarea>
       </div>

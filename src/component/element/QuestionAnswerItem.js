@@ -13,8 +13,12 @@ import {
 } from "@component/element/index.js";
 
 Variable.Static.activeInputId = "";
+// Variable.Static.activeEditInputId = "";
+Variable.Static.answerAdditionally ="";
+Variable.Static.EditInput = "";
 const QuestionAnswerItem = function ({ item, index }) {
   let mainId = item._id;
+
   return (
     <div
       style={[item.best ? "order: -1; border-color: #00E741" : null]}
@@ -37,6 +41,7 @@ const QuestionAnswerItem = function ({ item, index }) {
                 class="answer_comment_button"
                 onclick={() => {
                   Variable.Static.activeInputId = item._id;
+                  Variable.Static.answerAdditionally ="";
                   initReload();
                 }}
               >
@@ -53,12 +58,12 @@ const QuestionAnswerItem = function ({ item, index }) {
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]} />
             </div> */}
-            <AnswerAdditionallyToggle item = {item} type = {
+            <AnswerAdditionallyToggle item = {item} typeApi = {"setAnswer"} type = {
               {delete: true,
                 complainAnswer: true,
                 complainUser: true,
                 blackList:true,
-              }} />
+              }} mainId = {mainId} />
 
           </div>
 

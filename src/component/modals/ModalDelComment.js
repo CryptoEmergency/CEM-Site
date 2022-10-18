@@ -18,13 +18,13 @@ const ModalDelComment = function (data, reload) {
             onclick={
               async () => {
                 await delCom(data);
-                Variable.Static.answerAdditionally = false;
+                Variable.Static.answerAdditionally = "";
                 if (Variable.dataUrl.params === undefined) {
                   Variable.Modals.pop();
                   await renderModalFullNews();
                 } else {
                   Variable.Modals = [];
-                  initGo();
+                  initReload();
                 }
               }
             }

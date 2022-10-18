@@ -104,50 +104,143 @@ const getQuestionsItemInShow = async function (id, type) {
 
 const delCom = async (info) => {
   console.log("=info=", info);
+  
   let data = {
-    value: {
-      comments: {},
-    },
-    _id: Variable.Static.showNewsId,
-  };
+    value:{},
+    _id: info.mainId,
+  }
+  if(info.typeSet ==="setAnswer" ){
+    if( info.id === info.mainId){
+      data.value = {active:false};
 
-  info.mainCom
-    ? (data.value.comments = {
-      active: false,
-      _id: info.id,
-    })
-    : (data.value.comments = {
-      comments: {
-        active: false,
-        _id: info.id,
-      },
-    });
-  let response = checkAnswerApi(await sendApi.create("setNews", data));
+    }
+    else if( info.mainCom === true){
+      data.value.comments = {
+        active:false,
+        _id : info.id,
+      }
+
+    }
+    else if( info.mainCom === false){
+      data.value.comments = {
+        comments :{
+          active:false,
+        _id : info.id,
+      }
+      }
+
+    }
+
+  }else if(info.typeSet ==="doRole"){
+
+    if( info.id === info.mainId){
+      data.value = {active:false};
+      data.roleAction = info.roleAction
+    }
+    // else if( info.mainCom === true){
+    //   data.value.comments = {
+    //     active:false,
+    //     _id : info.id,
+    //   }
+    //   data.roleAction = info.roleAction
+    // }
+    // else if( info.mainCom === false){
+    //   data.value.comments = {
+    //     comments :{
+    //       active:false,
+    //     _id : info.id,
+    //   }
+    //   }
+    //   data.roleAction = info.roleAction
+    // }
+
+    // data._id = info.id;
+    // data.value = {
+    //   active:false
+    // };
+    // data.roleAction = info.roleAction
+  }
+  // let data = {
+  //   value: {
+  //     comments: {},
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
+
+  // info.mainCom
+  //   ? (data.value.comments = {
+  //     active: false,
+  //     _id: info.id,
+  //   })
+  //   : (data.value.comments = {
+  //     comments: {
+  //       active: false,
+  //       _id: info.id,
+  //     },
+  //   });
+  console.log('=data=',data)
+  let response = checkAnswerApi(await sendApi.create(info.typeSet, data));
+  console.log('=3c68aa=',response)
 };
 
 const sendComplaintApi = async (info) => {
   console.log("=info=", info);
-  let data = {
-    value: {
-      comments: {},
-    },
-    _id: Variable.Static.showNewsId,
-  };
 
-  info.data.mainCom
-    ? (data.value.comments = {
-      complain: info.complaint,
-      _id: info.data.id,
-    })
-    : (data.value.comments = {
-      comments: {
-        complain: info.complaint,
-        _id: info.data.id,
-      },
-    });
+  let data ={
+    value:{},
+    _id: info.data.mainId,
+  }
+
+  if(info.data.typeSet ==="setAnswer" && info.data.id === info.data.mainId){
+    data.value.complain = info.complaint;
+  }
+  else if(info.data.typeSet ==="setAnswer" && info.data.mainCom === true){
+    data.value.comments = {
+      complain : info.complaint,
+      _id : info.data.id,
+    }
+  }
+  else if(info.data.typeSet ==="setAnswer" && info.data.mainCom === false){
+    data.value.comments = {
+      comments :{
+      complain : info.complaint,
+      _id : info.data.id,
+    }
+    }
+  }
+
+  // let data = {
+  //   value: {
+  //     comments: {},
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
+
+  // info.data.mainCom
+  //   ? (data.value.comments = {
+  //     complain: info.complaint,
+  //     _id: info.data.id,
+  //   })
+  //   : (data.value.comments = {
+  //     comments: {
+  //       complain: info.complaint,
+  //       _id: info.data.id,
+  //     },
+  //   });
+
+  // if(info.data.typeSet ==="setAnswer"){
+  //  data ={
+
+  //       value: {
+  //         complain: info.complaint,
+  //       },
+  //       _id: info.data.id,
+
+  //  }
+  // }
 
   console.log("=data=", data);
-  let response = checkAnswerApi(await sendApi.create("setNews", data));
+  let response = checkAnswerApi(await sendApi.create(info.data.typeSet, data));
 };
 
 const renderModalFullNews = async () => {

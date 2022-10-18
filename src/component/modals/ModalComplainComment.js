@@ -38,7 +38,7 @@ const sendComplaint = async (data) => {
 
       // Variable.Static.answerAdditionally = false
     }
-    Variable.Static.answerAdditionally = false;
+    Variable.Static.answerAdditionally = "";
     if (Variable.dataUrl.params === undefined) {
       Variable.Modals.pop();
       await renderModalFullNews();
@@ -78,7 +78,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.abusive}
                 />
-                <label data-complain_id="1" class="checkbox__label">
+                <label  class="checkbox__label">
                   {Variable.lang.select.complainOne}
                   <span class="cont_a-link"></span>
                 </label>
@@ -93,7 +93,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.poison}
                 />
-                <label data-complain_id="2" class="checkbox__label">
+                <label  class="checkbox__label">
                   {Variable.lang.select.complainTwo}
                   <span class="cont_a-link"></span>
                 </label>
@@ -108,7 +108,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.obscene}
                 />
-                <label data-complain_id="3" class="checkbox__label">
+                <label  class="checkbox__label">
                   {Variable.lang.select.complainThree}
                   <span class="cont_a-link"></span>
                 </label>
@@ -123,7 +123,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.malicious}
                 />
-                <label data-complain_id="4" class="checkbox__label">
+                <label  class="checkbox__label">
                   {Variable.lang.select.complainFour}
                   <span class="cont_a-link"></span>
                 </label>
@@ -156,11 +156,22 @@ const ModalComplainComment = function (data, reload) {
               class="complain_other"
               data-keyup="complainKeyup"
               data-onpaste="editorPaste"
+              oninput = {()=> {
+                initReload("modals");
+              }}
               ref={input}
             ></div>
 
             <div
-              class="registration-btn inactive_form_button"
+              // class="registration-btn inactive_form_button"
+              class={[
+                "registration-btn" ,
+                isChecked.other() !== undefined &&
+                (complaint.length > 0 || input().innerText.trim().length > 2)
+                  ? 
+                   null
+                  :  "inactive_form_button",
+              ]}
               id="answerComplain"
               data-active="0"
               data-action="answerComplain"
