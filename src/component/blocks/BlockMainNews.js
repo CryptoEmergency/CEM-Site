@@ -20,18 +20,24 @@ const BlockMainNews = function () {
                 <div class="main_page_news_block">
                     {
                         Variable.MainNews.list_records.map(function (newsItem) {
+                            console.log('=0a449e=',newsItem)
                             return (
                                 <a
                                     class="blog_news_item"
-                                    onClick={async () => {
-                                        let news = await sendApi.send({ action: "getNews", short: true, filter: { _id: newsItem._id } });
-                                        console.log('=661f0d=', news)
+                                    onClick={() => {
+                                        // let news = await sendApi.send({ action: "getNews", short: true, filter: { _id: newsItem._id } });
                                         // let news = await getNewsItemInShow(newsItem._id);
                                         // news = news.list_records[0];
                                         // Variable.SetModals({
                                         //     name: "ModalFullNews",
                                         //     data: { news },
                                         // });
+                                        // let item = news.list_records[0];
+                                            Variable.SetModals({
+                                                 name: "ModalFullSize",
+                                                 data: { item: newsItem, type: "news" },
+                                             });
+                                       
                                     }}
                                 >
                                     <img

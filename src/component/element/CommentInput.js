@@ -17,6 +17,8 @@ import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit }) {
   let count = 1;
   let scrollHeight = 0;
+  let commentText = Variable.setRef();
+  
 //   if(Variable.Static.EditInput.length > 0){
 // let regexp = /<p>/g;
 // let matchAll =  item.text.matchAll(regexp);
@@ -24,32 +26,34 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
 //     let input = Variable.setRef()
 //     switch (matchAll.length){
 //       case 1:
-
+//         count = 1
 //         break;
 //       case 2:
-
+//         count = 2
+//         scrollHeight = 68
+//         commentText().style.cssText = "height:" + scrollHeight + "px";
 //         break;
 //       case 3:
-
+//         count = 3
+//         scrollHeight = 92
+//         commentText().style.cssText = "height:" + scrollHeight + "px";
 //         break;
 //       case 4:
-
+//         count = 4
+//         scrollHeight = 116
+//         commentText().style.cssText = "height:" + scrollHeight + "px";
 //         break;
 //       case 5:
 //       default: 
-
-        
+//       count = 5
+//       scrollHeight = 116
+//       commentText().style.cssText = "height:" + scrollHeight + "px"; 
 //     }
 
 //   }
-  let commentText = Variable.setRef();
+ 
   
   const changeTextarea = (e) => {let element = e.target;
-    console.log('=d5a687=', commentText().value)
-    console.log('=38eb56=',count)
-    console.log('=38eb56=',scrollHeight)
-    console.log('=38eb56=',element.scrollHeight)
-
     
     if (element.textLength === 1 && count == 1) {
       scrollHeight = element.scrollHeight;
@@ -84,8 +88,7 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
       initGo();
     }
   };
-  // console.log('=item.text=', item.text)
-  // console.log('= Helpers.clearText(item.text)=', Helpers.clearText(item.text))
+
   return (
     <div class="c-comments__form create_post_coments">
       <div
