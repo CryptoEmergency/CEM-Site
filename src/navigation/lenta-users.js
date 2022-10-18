@@ -40,10 +40,10 @@ const start = function () {
         filter: Helpers.getFilterLenta({}, "video")
       });
 
-      // Variable.PageLentaaudio = await sendApi.send({
-      //   action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 15,
-      //   filter: Helpers.getFilterLenta({}, "audio")
-      // });
+      Variable.PageLentaaudio = await sendApi.send({
+        action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 15,
+        filter: Helpers.getFilterLenta({}, "audio")
+      });
 
       Variable.PageLentatext = await sendApi.send({
         action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 15,
