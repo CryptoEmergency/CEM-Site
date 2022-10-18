@@ -83,7 +83,7 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type, commentId, main
                 dataElse={
                   <div>
                     <If
-                      data={type.complainAnswer}
+                      data={type.complainAnswer || type.complainPost}
                       dataIf={
                         <div class="answer_additionally_item complain c-text--error"
                         onclick = {()=> {
@@ -97,7 +97,8 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type, commentId, main
                               }, true);
                         }}
                         >
-                          {Variable.lang.select.complainAnswer}
+                          {type.complainPost && Variable.lang.select.complainPost}
+                          {type.complainAnswer && Variable.lang.select.complainAnswer}
                         </div>
                       }
                     />

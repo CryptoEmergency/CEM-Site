@@ -99,19 +99,21 @@ let controlTotalClick = function (e, target) {
   // $(target).parent().parent().prev()[0].currentTime = x * $(target).parent().parent().prev()[0].duration
   // $(target).parent().parent().find('.currenttime').text(formatTime($(target).parent().parent().prev()[0].currentTime))
 }
-const AudioPlayer = function ({item, type = "posts"} ) {
-//временно проверить посты
-let audioObj
-console.log('=item=',item)
-console.log('=type=',type)
-if (type !== "posts"){
-   audioObj = item[0];
-}else{
-   audioObj = item.item;
-}
- 
+const AudioPlayer = function ({ item, type = "posts" }) {
+  // console.log('=b89282=', item, type)
+  //временно проверить посты
+  let audioObj
+  // console.log('=item=', item)
+  // console.log('=type=', type)
+  audioObj = item;
+  // if (type !== "posts") {
+  //   audioObj = item[0];
+  // } else {
+  //   audioObj = item.item;
+  // }
+
   return (
-    
+
     <div data-type={audioObj.type} data-name={audioObj.name} id={audioObj._id} data-id={audioObj._id} class="audio_container">
       {/* <audio preload="none" onended="playerEnded(event, this)" onplay="playerPlay(event, this)" onpause="playerPause(event, this)" oncanplay="playerCanplay(event, this)" ontimeupdate="playerTimeupdate(event, this)" src="{{path}}{{src}}"></audio> */}
       <audio preload="none" onended={(e) => playerEnded(e)} onplay={(e) => playerPlay(e)} onpause={(e) => playerPause(e)}

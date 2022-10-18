@@ -11,7 +11,7 @@ init({
     // mode: "production",
     mode: "development",
     // api: "",
-    api: ""
+    api: "office"
 });
 //I check
 build({}).then((result) => { if (result) start(result) });
