@@ -28,7 +28,7 @@ const swiperGo = function (numIndex) {
             shadowScale: 0.94,
         },
         loop: false,
-        autoHeight: true,
+        // autoHeight: true,
         pagination: {
             el: '.swiper-pagination-post_media',
         },
@@ -57,55 +57,57 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
 
 
 
-    initAfter(
-        () => {
-            console.log('=c40387=', swiperitem[numIndex])
-            if (typeof swiperitem[numIndex] != "undefined") {
-                swiperitem[numIndex].destroy()
-                swiperitem[numIndex].init()
-                // swiperitem[numIndex].update()
-                // swiperitem[numIndex].update()
-            }
-            if (!swiperitem) {
-                // swiperitem = new Swiper(".swiper-post_media", {
-                //     effect: "cube",
-                //     grabCursor: true,
-                //     cubeEffect: {
-                //         shadow: true,
-                //         slideShadows: true,
-                //         shadowOffset: 20,
-                //         shadowScale: 0.94,
-                //     },
-                //     loop: false,
-                //     autoHeight: true,
-                //     pagination: {
-                //         el: '.swiper-pagination-post_media',
-                //     },
-                //     scrollbar: {
-                //         el: '.swiper-scrollbar-post_media',
-                //     },
-                //     slidesPerView: 1,
-                //     spaceBetween: 20
-                // });
+    // initAfter(
+    //     () => {
 
-                // swiperitem = new Swiper(".swiper-post_media", {
-                //     loop: false,
-                //     autoHeight: true,
-                //     pagination: {
-                //         el: '.swiper-pagination-post_media',
-                //     },
-                //     scrollbar: {
-                //         el: '.swiper-scrollbar-post_media',
-                //     },
-                //     slidesPerView: 1,
-                //     spaceBetween: 20
-                // });
-            }
-        }
-    )
+    //         if (typeof swiperitem[numIndex] != "undefined") {
+    //             swiperitem[numIndex].destroy()
+    //             swiperitem[numIndex].init()
+    //             // swiperitem[numIndex].update()
+    //             // swiperitem[numIndex].update()
+    //         }
+    //         if (!swiperitem) {
+    //             // swiperitem = new Swiper(".swiper-post_media", {
+    //             //     effect: "cube",
+    //             //     grabCursor: true,
+    //             //     cubeEffect: {
+    //             //         shadow: true,
+    //             //         slideShadows: true,
+    //             //         shadowOffset: 20,
+    //             //         shadowScale: 0.94,
+    //             //     },
+    //             //     loop: false,
+    //             //     autoHeight: true,
+    //             //     pagination: {
+    //             //         el: '.swiper-pagination-post_media',
+    //             //     },
+    //             //     scrollbar: {
+    //             //         el: '.swiper-scrollbar-post_media',
+    //             //     },
+    //             //     slidesPerView: 1,
+    //             //     spaceBetween: 20
+    //             // });
+
+    //             // swiperitem = new Swiper(".swiper-post_media", {
+    //             //     loop: false,
+    //             //     autoHeight: true,
+    //             //     pagination: {
+    //             //         el: '.swiper-pagination-post_media',
+    //             //     },
+    //             //     scrollbar: {
+    //             //         el: '.swiper-scrollbar-post_media',
+    //             //     },
+    //             //     slidesPerView: 1,
+    //             //     spaceBetween: 20
+    //             // });
+    //         }
+    //     }
+    // )
     return (
         <div class="swiper-container">
-            <div class="swiper swiper-post_media" data-tt={JSON.stringify(items)} After={() => swiperGo(numIndex)}>
+            <div class="swiper swiper-post_media" After={() => {
+                swiperGo(numIndex)
+            }}>
                 <div class="swiper-wrapper">
                     <Map
                         data={items}
