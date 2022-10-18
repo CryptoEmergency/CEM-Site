@@ -7,14 +7,13 @@ import {
   initReload,
   Helpers,
 } from "@betarost/cemjs";
-import svg from "@assets/svg/index.js";
 import {
   Avatar,
   Likes,
   CommentInput,
   AnswerAdditionallyToggle,
 } from "@component/element/index.js";
-import { If } from "@component/helpers/All.js";
+import { If, Map } from "@component/helpers/All.js";
 // import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCommentComment.js";
 import {
   changeActiveCommentsInput,
@@ -36,29 +35,26 @@ import {
 
 const BlockComment = function ({ item, index, mainId, commentId }) {
   let comId = item._id;
-
+ let typeSet = "setNews"
   return (
     <div class="c-comments__usercomment">
       <Avatar
         author={item.author}
-        //  parent={"c-comments__avacomment"}
+         parent={"c-comments__avacomment"}
         nickName={item.author.nickname}
         dateShow={item.showDate}
       />
-
-      {/* {Variable.Static.activeEditInputs.findIndex((it) => it === item._id) <
-          0 ? (
+      <If
+        data={Variable.Static.EditInput !== item._id}
+        dataIf={
           <div class="c-comments__bodycomment">
-            <span class="c-comments__textcomment">{stringToHtml(item.text)} </span>
-          </div>
-        ) : (
-          <CommentInput
-            item={item}
-            commentId={item._id}
-            edit={{ mainCom: true }}
-          />
-        )} */}
-
+          <span class="c-comments__textcomment">
+            {stringToHtml(item.text)} 
+            </span>
+        </div>
+     
+        }
+      />
       <div class="c-comments__icons c-actioncomment">
         <If
           data={commentId}
@@ -124,7 +120,7 @@ const BlockComment = function ({ item, index, mainId, commentId }) {
           <CommentInput
             nickname={item.author.nickname}
             item={item}
-            typeSet="setAnswer"
+            typeSet="setNews"
             mainId={mainId}
             commentId={commentId}
           />

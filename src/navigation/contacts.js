@@ -10,7 +10,7 @@ import {
 import { allValidation } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
 import { If } from '@component/helpers/All.js';
-
+import { Jivo } from '@component/element/index.js';
 
 
 const start = function () {
@@ -222,6 +222,7 @@ const start = function () {
               </div>
             </div>
           </div>
+          <Jivo />
         </div>
       );
     }

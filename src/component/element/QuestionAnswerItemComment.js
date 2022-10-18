@@ -1,10 +1,22 @@
-import { jsx, jsxFrag, Variable, Helpers, initReload,stringToHtml } from "@betarost/cemjs";
+import {
+  jsx,
+  jsxFrag,
+  Variable,
+  Helpers,
+  initReload,
+  stringToHtml,
+} from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
 
 import { If, Map } from "@component/helpers/All.js";
 
-import { Avatar, Likes, CommentInput, AnswerAdditionallyToggle } from "@component/element/index.js";
+import {
+  Avatar,
+  Likes,
+  CommentInput,
+  AnswerAdditionallyToggle,
+} from "@component/element/index.js";
 import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 const QuestionAnswerItemComment = function ({
   item,
@@ -22,18 +34,23 @@ const QuestionAnswerItemComment = function ({
           dateShow={item.showDate}
         />
         <div class="comment_body">
-          <span class="comment_text">
-            <If
-            
-            />
-            {Helpers.clearText(item.text)}
-            {/* {wrapTagToText(item.text)} */}
-            {/* {stringToHtml(Helpers.sanitizeHtml(item.text))} */}
-            {/* {item.text} */}
-            </span>
           <If
-            data={Variable.auth && Variable.Static.activeInputId !== item._id 
-              && Variable.Static.EditInput !==item._id 
+            data={Variable.Static.EditInput !== item._id}
+            dataIf={
+              <span class="comment_text">
+                {Helpers.clearText(item.text)}
+                {/* {wrapTagToText(item.text)} */}
+                {/* {stringToHtml(Helpers.sanitizeHtml(item.text))} */}
+                {/* {item.text} */}
+              </span>
+            }
+          />
+
+          <If
+            data={
+              Variable.auth &&
+              Variable.Static.activeInputId !== item._id &&
+              Variable.Static.EditInput !== item._id
               // && Variable.Static.activeEditInputId !== item.id
             }
             dataIf={
@@ -79,17 +96,25 @@ const QuestionAnswerItemComment = function ({
           >
             <img class="answer_additionally_toggle_img" src={svg["points"]} />
           </div> */}
-           <AnswerAdditionallyToggle item = {item} typeApi = {"setAnswer"} type = {
-              {delete: true,
-                edit:true,
-                complainAnswer: true,
-                complainUser: true,
-                blackList:true,
-              }} commentId={commentId} mainId = {mainId} />
-
+          <AnswerAdditionallyToggle
+            item={item}
+            typeApi={"setAnswer"}
+            type={{
+              delete: true,
+              edit: true,
+              complainAnswer: true,
+              complainUser: true,
+              blackList: true,
+            }}
+            commentId={commentId}
+            mainId={mainId}
+          />
         </div>
         <If
-          data={Variable.Static.activeInputId === item._id ||  Variable.Static.EditInput === item._id}
+          data={
+            Variable.Static.activeInputId === item._id ||
+            Variable.Static.EditInput === item._id
+          }
           dataIf={
             <CommentInput
               nickname={item.author.nickname}
@@ -113,8 +138,6 @@ const QuestionAnswerItemComment = function ({
             />
           }
         /> */}
-
-
       </div>
 
       <If
