@@ -6,7 +6,7 @@ import {
   CommentInput,
   QuestionAnswerItemComment,
 } from "@component/element/index.js";
-import { BlockComments } from "@component/blocks/index.js";
+import { BlockComment } from "@component/blocks/index.js";
 
 const BlockNewsShow = function ({ item, type }) {
   if (!type || (type != "blog" && type != "news" && type != "media")) {
@@ -69,7 +69,7 @@ const BlockNewsShow = function ({ item, type }) {
                   data={item.comments}
                   dataIf={(item, index) => {
                     return (
-                      <QuestionAnswerItemComment
+                      <BlockComment
                         item={item}
                         index={index}
                         mainId={mainId}

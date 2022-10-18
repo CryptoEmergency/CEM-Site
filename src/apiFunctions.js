@@ -25,38 +25,37 @@ const changeStatistic = async function (
       },
       _id: commentId,
     };
-  } else if(!subcommentId){
-
+  } else if (!subcommentId) {
     data = {
       value: {
         comments: {
           _id: commentId,
-          evaluation: e.target.dataset.name
+          evaluation: e.target.dataset.name,
         },
       },
       _id: mainId,
-    }
-  }else{
-      data = {
-        value: {
+    };
+  } else {
+    data = {
+      value: {
+        comments: {
+          _id: subcommentId,
           comments: {
-            _id: subcommentId,
-            comments: {
-              evaluation: e.target.dataset.name,
-        _id:commentId ,
-            }
+            evaluation: e.target.dataset.name,
+            _id: commentId,
           },
         },
-        _id: mainId,
-    }
-  //   if (subcommentId) {
-  //     data.value.comments.comments = {
-  //       evaluation: e.target.dataset.name,
-  //       _id: subcommentId,
-  //     };
-  //   } else {
-  //     data.value.comments.evaluation = e.target.dataset.name;
-  //   }
+      },
+      _id: mainId,
+    };
+    //   if (subcommentId) {
+    //     data.value.comments.comments = {
+    //       evaluation: e.target.dataset.name,
+    //       _id: subcommentId,
+    //     };
+    //   } else {
+    //     data.value.comments.evaluation = e.target.dataset.name;
+    //   }
   }
   let response = checkAnswerApi(await sendApi.create(type, data));
   if (Variable.dataUrl.params !== undefined) {
@@ -84,7 +83,13 @@ const showVotersApi = async (id, type) => {
   return response;
 };
 
-const sendNewCommentApi = async function (item, comment,typeSet, mainId, commentId) {
+const sendNewCommentApi = async function (
+  item,
+  comment,
+  typeSet,
+  mainId,
+  commentId
+) {
   console.log("=096bf2=", item, comment, typeSet, mainId, commentId);
 
   let data = {
@@ -94,35 +99,33 @@ const sendNewCommentApi = async function (item, comment,typeSet, mainId, comment
     _id: mainId,
   };
 
-if(typeSet == "setAnswer" && Variable.Static.EditInput.length > 0 ){
-  if (!commentId){
-    data.value = {
-      comments: {
-         text: comment,
-        _id: item._id,
-      }
-    };
-  }else{
-    data.value.comments = {
-      comments: {
-        text: comment,
-        _id: item._id, 
-      }
-    };
-  }
-}
-
- else if(!commentId && typeSet == "setAnswer"&& mainId === item._id){
+  if (typeSet == "setAnswer" && Variable.Static.EditInput.length > 0) {
+    if (!commentId) {
+      data.value = {
+        comments: {
+          text: comment,
+          _id: item._id,
+        },
+      };
+    } else {
+      data.value.comments = {
+        comments: {
+          text: comment,
+          _id: item._id,
+        },
+      };
+    }
+  } else if (!commentId && typeSet == "setAnswer" && mainId === item._id) {
     data.value.comments = { text: comment };
-  }else if(!commentId){
+  } else if (!commentId) {
     data.value.comments = {
-          comments: {
-            quote: item._id,
-            text: comment,
-          },
-          _id:  item._id,
-        };
-  }else{
+      comments: {
+        quote: item._id,
+        text: comment,
+      },
+      _id: item._id,
+    };
+  } else {
     data.value.comments = {
       comments: {
         quote: item._id,
@@ -155,26 +158,25 @@ if(typeSet == "setAnswer" && Variable.Static.EditInput.length > 0 ){
   //     _id: commentId,
   //   };
 
-    
-    // data = {
-    //   value: {
-    //     comments: {
-    //       comments: {
-    //         quote: item._id,
-    //         text: comment,
-    //       },
-    //       _id: commentId,
-    //     },
-    //   },
-    //   _id: Variable.Static.showNewsId,
-    // };
+  // data = {
+  //   value: {
+  //     comments: {
+  //       comments: {
+  //         quote: item._id,
+  //         text: comment,
+  //       },
+  //       _id: commentId,
+  //     },
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
   // }
-  console.log('=data=',data)
+  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create(typeSet, data));
 
-  if (Variable.dataUrl.params === undefined) {
-    await renderModalFullNews();
-  }
+  // if (Variable.dataUrl.params === undefined) {
+  //   await renderModalFullNews();
+  // }
   // return response;
 };
 
