@@ -352,6 +352,12 @@ const mainHeader = async function () {
                                     </a>}
                                 /> */}
                                 <a
+                                    onClick={
+                                        (e) => {
+                                            Variable.SetModals({ name: "ModalMobileSettings", data: {}})
+                                            e.stopPropagation();
+                                        }
+                                    }
                                     id="mobileUserMenuShow"
                                     class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
                                 >

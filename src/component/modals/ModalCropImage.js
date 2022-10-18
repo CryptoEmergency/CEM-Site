@@ -5,6 +5,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { If } from "@component/helpers/All.js";
+import { uploadMedia } from "@src/functions.js";
 
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
@@ -36,6 +37,37 @@ const uploadCropImage = async function (e) {
             var formData = new FormData();
             formData.append('media', blob, 'post.jpg');
             formData.append('media_id', uniqueID);
+
+            uploadMedia(
+                formData,
+                "posts",
+                async function () {
+                //   let tmp = JSON.parse(this.response);
+                //   let type = tmp.mimetype.split("/")[0];
+                //   let obj = { aspect: "1", type, name: tmp.name };
+                //   initReload();
+                },
+                async function (e) {
+                  let contentLength;
+                  if (e.lengthComputable) {
+                    contentLength = e.total;
+                  } else {
+                    contentLength = parseInt(
+                      e.target.getResponseHeader(
+                        "x-decompressed-content-length"
+                      ),
+                      10
+                    );
+                  }
+                  console.log(
+                    "=3c5fa7= ",
+                    "Загружено",
+                    e.loaded,
+                    "из",
+                    contentLength
+                  );
+                }
+              );
 
             let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
             let btns = document.querySelectorAll('#addCropImage .c-cropper__toggles input[hidden]');

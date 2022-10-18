@@ -221,38 +221,38 @@ const start = function () {
                   data: { file: this.files[0], typeUpload: 'post' },
                 });
 
-                uploadMedia(
-                  this.files[0],
-                  "posts",
-                  async function () {
-                    formInputs.mediaInputs.show = true;
-                    let tmp = JSON.parse(this.response);
-                    let type = tmp.mimetype.split("/")[0];
-                    let obj = { aspect: "1", type, name: tmp.name };
-                    formInputs.mediaInputs.value.push(obj);
-                    initReload();
-                  },
-                  async function (e) {
-                    let contentLength;
-                    if (e.lengthComputable) {
-                      contentLength = e.total;
-                    } else {
-                      contentLength = parseInt(
-                        e.target.getResponseHeader(
-                          "x-decompressed-content-length"
-                        ),
-                        10
-                      );
-                    }
-                    console.log(
-                      "=3c5fa7= ",
-                      "Загружено",
-                      e.loaded,
-                      "из",
-                      contentLength
-                    );
-                  }
-                );
+                // uploadMedia(
+                //   this.files[0],
+                //   "posts",
+                //   async function () {
+                //     formInputs.mediaInputs.show = true;
+                //     let tmp = JSON.parse(this.response);
+                //     let type = tmp.mimetype.split("/")[0];
+                //     let obj = { aspect: "1", type, name: tmp.name };
+                //     formInputs.mediaInputs.value.push(obj);
+                //     initReload();
+                //   },
+                //   async function (e) {
+                //     let contentLength;
+                //     if (e.lengthComputable) {
+                //       contentLength = e.total;
+                //     } else {
+                //       contentLength = parseInt(
+                //         e.target.getResponseHeader(
+                //           "x-decompressed-content-length"
+                //         ),
+                //         10
+                //       );
+                //     }
+                //     console.log(
+                //       "=3c5fa7= ",
+                //       "Загружено",
+                //       e.loaded,
+                //       "из",
+                //       contentLength
+                //     );
+                //   }
+                // );
                 formInputs.isValid = true;
               }}
               onclickVideo={function () {
