@@ -23,6 +23,9 @@ const QuestionAnswerItemComment = function ({
         />
         <div class="comment_body">
           <span class="comment_text">
+            <If
+            
+            />
             {Helpers.clearText(item.text)}
             {/* {wrapTagToText(item.text)} */}
             {/* {stringToHtml(Helpers.sanitizeHtml(item.text))} */}
