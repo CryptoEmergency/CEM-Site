@@ -35,7 +35,7 @@ const NewsItem = function ({ item, type }) {
                 </span>
                 <span>{Helpers.getDateFormat(item.showDate)}</span>
             </div>
-            <If
+            {/* <If
                 data={typeof item.source != "undefined"}
                 dataIf={
                     <p class="full_news_disclaimer mr20">
@@ -45,7 +45,7 @@ const NewsItem = function ({ item, type }) {
                         </a>
                     </p>
                 }
-            />
+            /> */}
         </div>
     )
 }

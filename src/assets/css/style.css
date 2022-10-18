@@ -2982,7 +2982,6 @@ span#procent::after {
 } */
 .comment_text p{
   /* margin-bottom: 0px; */
-  height: 22px;
 }
 .comment_image {
   display: grid;
@@ -3117,6 +3116,10 @@ span#procent::after {
 
 .user_comment_branch_item {
   position: relative;
+}
+
+.user_comment_branch_item .comment_text p {
+  height: 22px;
 }
 
 .your_answers {

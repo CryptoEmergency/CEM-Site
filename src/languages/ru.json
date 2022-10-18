@@ -72,7 +72,9 @@
 		"withdrawal": "Вывести",
 		"join": "Присоединиться",
 		"pre_view": "Предпросмотр",
-		"allPartners": "Все партнеры"
+		"allPartners": "Все партнеры",
+		
+		"resetCrop": "Отменить"
 	},	
 	"h":{
 		"success": "Успешно!",

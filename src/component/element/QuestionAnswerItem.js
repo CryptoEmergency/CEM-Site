@@ -94,7 +94,7 @@ const QuestionAnswerItem = function ({ item, index }) {
                       }
                       dataIf={
                         <span>
-                          {Variable.lang.span.showComments} (
+                          {Variable.lang.span.hideComments} (
                           <span class="comment_count">
                             {item.statistic.comments}
                           </span>
@@ -103,7 +103,7 @@ const QuestionAnswerItem = function ({ item, index }) {
                       }
                       dataElse={
                         <span>
-                          {Variable.lang.span.hideComments} (
+                          {Variable.lang.span.showComments} (
                           <span class="comment_count">
                             {item.statistic.comments}
                           </span>
