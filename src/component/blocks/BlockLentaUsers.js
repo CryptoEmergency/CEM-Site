@@ -54,6 +54,8 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
               complainPost: true,
               complainUser: true,
               blackList: true,
+              subscription: true,
+              share:true,
             }}
             mainId = {mainId}
           /></div>

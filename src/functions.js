@@ -236,7 +236,7 @@ const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, com
   if (e.type === "mousedown" || e.type === "touchstart") {
     interval = setInterval(async () => {
       sec = sec + 100;
-      if (sec === 1500) {
+      if (sec === 1000) {
         clearInterval(interval);
         sec = 0;
         let response = await showVotersApi(id, typeGet);
@@ -253,13 +253,13 @@ const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, com
     }, 100);
   } else {
     clearInterval(interval);
-    if (sec < 1500) {
+    if (sec < 1000) {
       await changeStatistic(e, id, typeSet, mainId, commentId);
       // if (Variable.dataUrl.params === undefined) {
       //   await renderModalFullNews();
       // }
     }
-    if (1000 <= sec && sec < 1500) {
+    if (700 <= sec && sec < 1000) {
       let response = await showVotersApi(id, typeGet);
       response = response.list_records[0].evaluation.filter(
         (item) => item.type === type

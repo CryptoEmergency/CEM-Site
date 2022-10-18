@@ -6,6 +6,7 @@ import {
   Variable,
   sendApi,
   Helpers,
+  initGo
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
@@ -45,11 +46,12 @@ const sendPost = async (e) => {
   };
   console.log("=data=", data);
 
-  let tmpRes = await sendApi.create("setPosts", data);
+  let tmpRes = await sendApi.create("setPost", data);
   console.log("=66d247=", tmpRes);
 
   if (tmpRes.status === "ok") {
-    initReload();
+    console.log('=reload=')
+    initGo();
   } else {
     Variable.SetModals(
       {

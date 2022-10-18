@@ -77,6 +77,20 @@ const changeStatistic = async function (
   }
 };
 
+const changeSubscription = async (id,type) => {
+  let data = {
+    value: {
+      subscribed: id
+    }
+  };
+  let response = checkAnswerApi(await sendApi.create(type, data));
+ Variable.Static.answerAdditionally = "";
+    Variable[`PageLenta${ Variable.Static.lentaPage}`] = await sendApi.send({
+      action: "getPost", short: true, cache: true, name: `PageLenta${ Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
+    });
+  
+}
+
 const showVotersApi = async (id, type) => {
   console.log("=id=", id);
   let data = {
@@ -366,6 +380,7 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
 };
 
 export {
+  changeSubscription,
   showVotersApi,
   changeStatistic,
   sendNewCommentApi,
