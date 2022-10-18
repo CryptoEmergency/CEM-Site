@@ -191,6 +191,11 @@ const sendComplaintApi = async (info) => {
     _id: info.data.mainId,
   }
 
+  if(info.data.typeSet ==="setAnswer"){
+    data.value.complain = info.complaint;
+    
+  }
+
   if(info.data.typeSet ==="setAnswer" && info.data.id === info.data.mainId){
     data.value.complain = info.complaint;
   }

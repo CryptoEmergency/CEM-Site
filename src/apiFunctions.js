@@ -6,6 +6,7 @@ import {
   initGo,
   Variable,
   initReload,
+  Helpers,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 import { renderModalFullNews } from "@src/apiFunctionsE.js";
@@ -64,10 +65,16 @@ const changeStatistic = async function (
   }
   console.log('=datadatadatadata=',data)
   let response = checkAnswerApi(await sendApi.create(type, data));
-  initReload();
-  // if (Variable.dataUrl.params !== undefined) {
-  //   initReload();
-  // }
+  // initReload();
+  if (Variable.dataUrl.params !== undefined) {
+    initReload();
+  }
+
+  if(type === "setPost"){
+    Variable[`PageLenta${ Variable.Static.lentaPage}`] = await sendApi.send({
+      action: "getPost", short: true, cache: true, name: `PageLenta${ Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
+    });
+  }
 };
 
 const showVotersApi = async (id, type) => {
