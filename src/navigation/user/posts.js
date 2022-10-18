@@ -365,7 +365,6 @@ const start = function () {
                 {/* {{> userPost}} */}
                 {
                   authorPosts.list_records.map(function (post, i) {
-                    console.log('=091cd9=', post)
                     return (
                       <div class="user_news_item" data-author={post.author._id}>
                         <div class="main_comment" data-link={post._id}>

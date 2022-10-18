@@ -16,7 +16,7 @@ const changeTextAnswer = (e) => {
     formInputs.textAnswer.error = Variable.lang.error_div.not_empty_input;
   } else if (text.length < 5) {
     formInputs.textAnswer.error = Variable.lang.error_div.minSymbol;
-  } else if (text.length > 200) {
+  } else if (text.length > 2000) {
     formInputs.textAnswer.error = Variable.lang.error_div.maxSymbol;
   }
   formInputs.textAnswer.value = wrapTextWithATag(text);

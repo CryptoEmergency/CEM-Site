@@ -21,8 +21,8 @@ const VideoPlayer = function ({ item, numIndex, index, path, elem }) {
         <div class="video_container">
             {/* <video playsinline poster={images["video_background"]} preload="metadata" onended="playerEnded(event, this)" onplay="playerPlay(event, this)" onpause="playerPause(event, this)" oncanplay="playerCanplay(event, this)" ontimeupdate="playerTimeupdate(event, this)" onclick="controlPlayerClick(event, this)" ondblclick="openFullscreenThis(event, this)" src={path + item.name}></video> */}
             <video
-                // playsinline
-                // poster={images["video_background"]} 
+                playsinline
+                poster={images["video_background"]}
                 preload="metadata"
                 src={path + item.name} ref={elem[numIndex][index]}
             >
