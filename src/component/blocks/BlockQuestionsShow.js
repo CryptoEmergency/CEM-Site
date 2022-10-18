@@ -13,7 +13,6 @@ const BlockQuestionsShow = function ({ item, itemsAnswers, type }) {
     )
   }
 
-  console.log("=2d92a9=", item);
   elem = [];
   elem[0] = [];
   return (

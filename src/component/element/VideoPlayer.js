@@ -10,7 +10,6 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 // let video
 const VideoPlayer = function ({ item, numIndex, index, path, elem }) {
-    console.log('=7c211e=', numIndex, index)
     initOne(
         () => {
             // video = Variable.setRef()

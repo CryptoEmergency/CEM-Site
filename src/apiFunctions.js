@@ -17,15 +17,20 @@ const changeStatistic = async function (
   mainId,
   subcommentId
 ) {
+
+  console.log('=7d2ace=',commentId,
+  type,mainId)
   let data;
-  if (type === "setAnswer" && !mainId) {
-    data = data = {
+  if ((type === "setAnswer" || type === "setPost" ) && !mainId) {
+    console.log('=1=')
+     data = {
       value: {
         evaluation: e.target.dataset.name,
       },
       _id: commentId,
     };
   } else if (!subcommentId) {
+    console.log('=2=')
     data = {
       value: {
         comments: {
@@ -57,10 +62,12 @@ const changeStatistic = async function (
     //     data.value.comments.evaluation = e.target.dataset.name;
     //   }
   }
+  console.log('=datadatadatadata=',data)
   let response = checkAnswerApi(await sendApi.create(type, data));
-  if (Variable.dataUrl.params !== undefined) {
-    initReload();
-  }
+  initReload();
+  // if (Variable.dataUrl.params !== undefined) {
+  //   initReload();
+  // }
 };
 
 const showVotersApi = async (id, type) => {
@@ -73,6 +80,7 @@ const showVotersApi = async (id, type) => {
       evaluation: 1,
     },
   };
+  console.log('=272b14=',data)
   let response = checkAnswerApi(await sendApi.create(type, data));
   // let response = await sendApi.send({ action: type, filter:{
   //   _id: id
@@ -80,6 +88,7 @@ const showVotersApi = async (id, type) => {
   //   evaluation: 1
   // } });
   // return response.result
+  console.log('=272b14=',response)
   return response;
 };
 

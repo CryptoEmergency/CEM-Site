@@ -20,7 +20,6 @@ const BlockMainNews = function () {
                 <div class="main_page_news_block">
                     {
                         Variable.MainNews.list_records.map(function (newsItem) {
-                            console.log('=0a449e=',newsItem)
                             return (
                                 <a
                                     class="blog_news_item"

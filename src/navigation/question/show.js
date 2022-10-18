@@ -47,17 +47,13 @@ const start = function () {
         "getAnswers"
       );
       Variable.Static.mainIdforLikes =question._id;
-      console.log("=050206=", question);
-      console.log("=endInit=", answers);
       myInfo = getStorage("myInfo");
-      console.log("=myInfo=", myInfo);
-
       items = await sendApi.send({ action: "getQuestions", short: true, filter: { _id: Variable.dataUrl.params } });
       // itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
     },
     async () => {
       itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
-      console.log('=52a3df=',itemsAnswers)
+
       return (
         <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
           {/* <div class="full_news_container"> */}
