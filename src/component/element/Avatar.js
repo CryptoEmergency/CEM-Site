@@ -77,7 +77,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
             <span class="c-avataricon__speciality">{speciality}</span>
           )}
           {dateShow && (
-            <span>{getDateFormat(dateShow, "userComment")}</span>
+            <span class="text--gray">{getDateFormat(dateShow, "userComment")}</span>
           )}
         </div>}
       />
