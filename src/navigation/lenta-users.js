@@ -24,7 +24,7 @@ const start = function () {
     async () => {
 
       elem = []
-      lentaPage = "photo"
+      lentaPage = "all"
       Variable.PageLentaall = await sendApi.send({
         action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 15,
         filter: Helpers.getFilterLenta({}, "all")
