@@ -365,6 +365,7 @@ const start = function () {
                 {/* {{> userPost}} */}
                 {
                   authorPosts.list_records.map(function (post, i) {
+                    console.log('=091cd9=', post)
                     return (
                       <div class="user_news_item" data-author={post.author._id}>
                         <div class="main_comment" data-link={post._id}>
@@ -478,7 +479,7 @@ const start = function () {
                                 :
                                 textLengthCheck(post.text) == true ?
                                   <div class="user_post_text_background">
-                                    <span class="comment_text">{Helpers.clearText(text)}</span>
+                                    <span class="comment_text">{Helpers.clearText(post.text)}</span>
                                   </div>
                                   :
                                   <span class="comment_text">{Helpers.clearText(post.text)}</span>

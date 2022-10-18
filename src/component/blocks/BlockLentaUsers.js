@@ -25,65 +25,7 @@ import {
 } from "@component/element/index.js";
 import { If, Map } from '@component/helpers/All.js';
 
-const returnImgOrVideo = (item) => {
-  if (
-    item.media.length > 1 &&
-    item.media.find((i) => i.type === "audio") == undefined
-  ) {
-    // console.log('=1e395c=', 2)
-    return (
 
-      // <div class="swiper-container">
-      //   <div class="swiper swiper-post_media">
-      //     <div class="swiper-wrapper">
-      //       {item.media.map((mediaItem) => {
-      //         return (
-      //           <a class="swiper-slide">
-      //             {item.media.find((i) => i.type === "image") !== undefined && (
-      //               <div class="swiper-post_media_image_container">
-      //                 <img
-      //                   data-action=""
-      //                   src={`/assets/upload/posts/${mediaItem.name}`}
-      //                 />
-      //                 {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}"> --}} */}
-      //               </div>
-      //             )}
-      //             {item.media.find((i) => i.type === "video") !== undefined && (
-      //               //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
-      //               <p>video more</p>
-      //             )}
-      //           </a>
-      //         );
-      //       })}
-      //     </div>
-      //     <div class="swiper-pagination swiper-pagination-post_media"></div>
-      //     <div class="swiper-scrollbar-post_media"></div>
-      //   </div>
-      // </div>
-      <Slider item={item} />
-    );
-  } else if (item.media.find((i) => i.type === "audio") == undefined) {
-    // console.log('=1e395c=', 1)
-    return (
-      item.media.find((i) => i.type === "image") !== undefined
-        ?
-        <div class="swiper-post_media_image_container">
-          <img
-            data-action=""
-            src={`/assets/upload/posts/${item.media[0].name}`}
-          />
-          {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}">   --}} */}
-        </div>
-        :
-        //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
-        <p>video </p>
-    );
-  } else {
-    return (
-      <></>
-    )
-  }
-};
 
 const BlockLentaUsers = function ({ item, numIndex, elem }) {
   return (
@@ -102,7 +44,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
       <div class="main_comment">
         <Avatar author={item.author} nickName={item.author.nickname} />
         <div class="comment_icons">
-        <AnswerAdditionallyToggle
+          <AnswerAdditionallyToggle
             item={item}
             typeApi={"setPost"}
             type={{
@@ -112,7 +54,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
               complainUser: true,
               blackList: true,
             }}
-          
+
           /></div>
         <div class="comment_body">
           <LentaMedia
@@ -190,22 +132,22 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
           </div>
           <div class="user_post_statistic_item">
 
-          <Likes
+            <Likes
               item={item}
               typeGet="getPost"
               typeSet="setPost"
             />
 
             {/* <div class="comment_icon_type-2"> */}
-              {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/dislike.svg" class="comment_icon_type-2-1 minus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
-              {/* <button type="button" data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src={svg["dislike"]} class="comment_icon_type-2-1 minus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post" data-action="answerEvaluation"></button>
+            {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/dislike.svg" class="comment_icon_type-2-1 minus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
+            {/* <button type="button" data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src={svg["dislike"]} class="comment_icon_type-2-1 minus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post" data-action="answerEvaluation"></button>
             </div>
             <div class="comment_likes" id={`likes_${item._id}`}>
               {item.statistic.rating}
             </div>
             <div class="comment_icon_type-2"> */}
-              {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/like.svg" class="comment_icon_type-2-1 plus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
-              {/* <button data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd"
+            {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/like.svg" class="comment_icon_type-2-1 plus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
+            {/* <button data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd"
                 src={svg["like"]} class="comment_icon_type-2-1 plus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post"
                 data-action="answerEvaluation"></button>
             </div> */}

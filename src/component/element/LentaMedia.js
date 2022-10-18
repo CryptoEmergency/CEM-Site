@@ -105,9 +105,7 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
     // )
     return (
         <div class="swiper-container">
-            <div class="swiper swiper-post_media" After={() => {
-                // swiperGo(numIndex)
-            }}>
+            <div class="swiper swiper-post_media">
                 <div class="swiper-wrapper">
                     <Map
                         data={items}
