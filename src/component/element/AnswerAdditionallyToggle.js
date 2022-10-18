@@ -23,7 +23,6 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type, commentId, main
         ) {
           return;
         } else {
-            console.log('=open=')
           Variable.Static.answerAdditionally = item._id;
           Variable.Static.activeInputId = "";
           Variable.Static.EditInput = "";
@@ -117,7 +116,7 @@ const AnswerAdditionallyToggle = function ({ item,typeApi, type, commentId, main
                         onclick={(e) => {
                             Variable.SetModals({
                               name: "ModalBlackList",
-                              data: { id: item.author._id },
+                              data: { id: item.author._id, type : typeApi },
                             }, true);
                           }}
                         >

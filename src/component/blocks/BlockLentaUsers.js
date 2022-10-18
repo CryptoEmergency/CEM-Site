@@ -28,6 +28,7 @@ import { If, Map } from '@component/helpers/All.js';
 
 
 const BlockLentaUsers = function ({ item, numIndex, elem }) {
+  let mainId = item._id
   return (
     <div
       class="user_news_item"
@@ -54,7 +55,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
               complainUser: true,
               blackList: true,
             }}
-
+            mainId = {mainId}
           /></div>
         <div class="comment_body">
           <LentaMedia

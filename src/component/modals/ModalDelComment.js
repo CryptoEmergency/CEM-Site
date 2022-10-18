@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initGo, sendApi,Helpers } from "@betarost/cemjs";
 import { delCom, renderModalFullNews } from "@src/apiFunctionsE.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 const ModalDelComment = function (data, reload) {
@@ -15,19 +15,33 @@ const ModalDelComment = function (data, reload) {
         </header>
         <div class="c-modal__body">
           <div
-            onclick={
-              async () => {
-                await delCom(data);
-                Variable.Static.answerAdditionally = "";
-                if (Variable.dataUrl.params === undefined) {
-                  Variable.Modals.pop();
-                  await renderModalFullNews();
-                } else {
-                  Variable.Modals = [];
-                  initReload();
-                }
+            onclick={async () => {
+              await delCom(data);
+              Variable.Static.answerAdditionally = "";
+              if (Variable.dataUrl.params === undefined) {
+                Variable.DelModals("ModalDelComment");
+                // await renderModalFullNews();
+              } else {
+                Variable.Modals = [];
               }
-            }
+
+              if (data.typeSet ===  "setPost" ||  data.roleAction === "setPost" ) {
+                Variable[`PageLenta${Variable.Static.lentaPage}`] =
+                  await sendApi.send({
+                    action: "getPost",
+                    short: true,
+                    cache: true,
+                    name: `PageLenta${Variable.Static.lentaPage}`,
+                    limit: 15,
+                    filter: Helpers.getFilterLenta(
+                      {},
+                      Variable.Static.lentaPage
+                    ),
+                  });
+              } else {
+                initReload();
+              }
+            }}
           >
             {Variable.lang.select.delete}
           </div>

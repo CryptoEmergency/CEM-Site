@@ -109,6 +109,10 @@ const delCom = async (info) => {
     value:{},
     _id: info.mainId,
   }
+  if(info.typeSet ==="setPost"){
+    data.value = {active:false};
+
+  }
   if(info.typeSet ==="setAnswer" ){
     if( info.id === info.mainId){
       data.value = {active:false};
@@ -184,16 +188,15 @@ const delCom = async (info) => {
 };
 
 const sendComplaintApi = async (info) => {
-  console.log("=info=", info);
 
   let data ={
     value:{},
     _id: info.data.mainId,
   }
 
-  if(info.data.typeSet ==="setAnswer"){
+  if(info.data.typeSet ==="setPost"){
     data.value.complain = info.complaint;
-    
+    data._id = info.data.id
   }
 
   if(info.data.typeSet ==="setAnswer" && info.data.id === info.data.mainId){
@@ -243,8 +246,6 @@ const sendComplaintApi = async (info) => {
 
   //  }
   // }
-
-  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create(info.data.typeSet, data));
 };
 
