@@ -1,0 +1,26 @@
+/* Cropper styles */
+.c-cropper {
+
+    &__cropimage {
+        width: 100%;
+        height: auto;
+    }
+
+    &__toggles {
+        margin-bottom: 12px;
+    }
+
+    &__footer {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 10px;
+        padding-bottom: 12px;
+
+        .c-button {
+            height: auto !important;
+            text-transform: none;
+            font-weight: 400;
+            letter-spacing: inherit;
+        }
+    }
+}

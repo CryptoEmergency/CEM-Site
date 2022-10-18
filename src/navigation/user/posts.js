@@ -218,7 +218,7 @@ const start = function () {
 
                 Variable.SetModals({
                   name: "ModalCropImage",
-                  data: { file: this.files[0] },
+                  data: { file: this.files[0], typeUpload: 'post' },
                 });
 
                 uploadMedia(
@@ -305,6 +305,15 @@ const start = function () {
             //     }
             // }
             />
+            <div>
+              <input data-type="posts" hidden class="createPostImageInput" type="file" accept=".jpg,.jpeg,.png,.gif" />
+            </div>
+            <div>
+              <input data-type="posts" hidden class="createPostVideoInput" type="file" accept=".mp4,.avi,.mov,.mkv,.avi,.flv" />
+            </div>
+            <div>
+              <input data-type="posts" hidden class="createPostAudioInput" type="file" accept=".mp3,.wav,.aiff,.aac,.ogg,.wma" />
+            </div>
             <div class="for_friends_checkbox_container">
               <div class="checkbox">
                 <input

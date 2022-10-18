@@ -1368,6 +1368,67 @@ textarea {
     }
 }
 
+.c-groupbtn {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+
+    input {
+
+        &[hidden] {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            pointer-events: none;
+
+            &:checked {
+                &+.c-button--outline {
+                    color: #fff;
+                    background: #0d6efd;
+                    border-color: #0d6efd;
+                }
+            }
+        }
+
+        &[disabled] {
+            &+.c-button {
+                pointer-events: none;
+                filter: none;
+                opacity: .65;
+            }
+        }
+    }
+
+    .c-button {
+
+        &:not(:last-child) {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+
+        &:not(:nth-of-type(1)) {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+
+        &--outline {
+            color: #0d6efd;
+            border: 1px solid #0d6efd;
+            background: transparent;
+            text-align: center;
+            line-height: 1.5;
+        }
+    }
+
+    &--lg {
+
+        .c-button {
+            padding: 0.5rem 1rem;
+            font-size: 1.25rem;
+            border-radius: 0.3rem;
+        }
+    }
+}
+
 .c-link {
     display: block;
     text-decoration: none;
@@ -1656,3 +1717,5 @@ textarea {
 @import 'blocks/error404.scss';
 /* Wallet */
 @import 'blocks/wallet.scss';
+/* Cropper Image */
+@import 'blocks/cropper.scss';
