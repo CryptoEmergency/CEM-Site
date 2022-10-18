@@ -196,9 +196,11 @@ const start = function () {
                   </div>
                 </div> */}
                 <div class="users_news_categories">
+
                   <div
                     data-type="all"
-                    class={['users_news_category', lentaPage == "all" ? 'users_news_category_active' : null]}
+                    class={['users_news_category']}
+                    hidden={lentaPage == "all"}
                     onClick={async () => {
                       if (lentaPage == "all") {
                         return
@@ -210,11 +212,21 @@ const start = function () {
                       initReload()
                     }}
                   >
-                    <img src={svg[`sections/${lentaPage == "all" ? "news_all" : "news_all_inactive"}`]} />
+                    <img src={svg['sections/news_all_inactive']} />
                   </div>
+
+                  <div
+                    class={['users_news_category', 'users_news_category_active']}
+                    hidden={lentaPage != "all"}
+                  >
+                    <img src={svg['sections/news_all']} />
+                  </div>
+
+
                   <div
                     data-type="photo"
-                    class={['users_news_category', lentaPage == "photo" ? 'users_news_category_active' : null]}
+                    class={['users_news_category']}
+                    hidden={lentaPage == "photo"}
                     onClick={async () => {
                       if (lentaPage == "photo") {
                         return
@@ -227,11 +239,22 @@ const start = function () {
                       initReload()
                     }}
                   >
-                    <img src={svg[`sections/${lentaPage == "photo" ? "news_photo" : "news_photo_inactive"}`]} />
+                    <img src={svg['sections/news_photo_inactive']} />
                   </div>
+
+                  <div
+                    class={['users_news_category', 'users_news_category_active']}
+                    hidden={lentaPage != "photo"}
+                  >
+                    <img src={svg['sections/news_photo']} />
+                  </div>
+
+
+
                   <div
                     data-type="video"
-                    class={['users_news_category', lentaPage == "video" ? 'users_news_category_active' : null]}
+                    class={['users_news_category']}
+                    hidden={lentaPage == "video"}
                     onClick={async () => {
                       if (lentaPage == "video") {
                         return
@@ -244,11 +267,21 @@ const start = function () {
                       initReload()
                     }}
                   >
-                    <img src={svg[`sections/${lentaPage == "video" ? "news_video" : "news_video_inactive"}`]} />
+                    <img src={svg['sections/news_video_inactive']} />
                   </div>
+
+                  <div
+                    class={['users_news_category', 'users_news_category_active']}
+                    hidden={lentaPage != "video"}
+                  >
+                    <img src={svg['sections/news_video']} />
+                  </div>
+
+
                   <div
                     data-type="audio"
-                    class={['users_news_category', lentaPage == "audio" ? 'users_news_category_active' : null]}
+                    class={['users_news_category']}
+                    hidden={lentaPage == "audio"}
                     onClick={async () => {
                       if (lentaPage == "audio") {
                         return
@@ -261,11 +294,21 @@ const start = function () {
                       initReload()
                     }}
                   >
-                    <img src={svg[`sections/${lentaPage == "audio" ? "news_audio" : "news_audio_inactive"}`]} />
+                    <img src={svg['sections/news_audio_inactive']} />
                   </div>
+
+                  <div
+                    class={['users_news_category', 'users_news_category_active']}
+                    hidden={lentaPage != "audio"}
+                  >
+                    <img src={svg['sections/news_audio']} />
+                  </div>
+
+
                   <div
                     data-type="text"
-                    class={['users_news_category', lentaPage == "text" ? 'users_news_category_active' : null]}
+                    class={['users_news_category']}
+                    hidden={lentaPage == "text"}
                     onClick={async () => {
                       if (lentaPage == "text") {
                         return
@@ -278,8 +321,18 @@ const start = function () {
                       initReload()
                     }}
                   >
-                    <img src={svg[`sections/${lentaPage == "text" ? "news_text" : "news_text_inactive"}`]} />
+                    <img src={svg['sections/news_text_inactive']} />
                   </div>
+
+                  <div
+                    class={['users_news_category', 'users_news_category_active']}
+                    hidden={lentaPage != "text"}
+                  >
+                    <img src={svg['sections/news_text']} />
+                  </div>
+
+
+
                 </div>
 
                 <div class="userNewsBlock">
