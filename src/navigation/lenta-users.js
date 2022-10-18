@@ -24,7 +24,9 @@ const swiperGo = function () {
     console.log('=db86dd=', "ffff")
     return
   }
-  swiperitem[0] = new Swiper(".swiper-post_media", {
+  let elem = document.getElementsByClassName("swiper-post_media")
+  console.log('=af673a elem =', elem)
+  swiperitem[0] = new Swiper(elem[3], {
     effect: "cube",
     grabCursor: true,
     cubeEffect: {
@@ -375,7 +377,7 @@ const start = function () {
                     class="bl_one bl_active"
                   >
                     <div class="user_news_block" After={() => {
-                      // swiperGo()
+                      swiperGo()
                     }}>
                       <Map
                         data={Variable[`PageLenta${Variable.Static.lentaPage}`].list_records}

@@ -12,6 +12,7 @@ export { QuestionAnswers } from "./QuestionAnswers.js"
 export { MediaButton } from "./MediaButton.js"
 export { Likes } from "./Likes.js"
 export { Jivo } from "./Jivo.js"
+export { Swiper } from "./Swiper.js";
 export { QuestionAnswerItem } from "./QuestionAnswerItem.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
