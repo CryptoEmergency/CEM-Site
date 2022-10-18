@@ -9,18 +9,18 @@ import svg from "@assets/svg/index.js";
 
 import { Avatar } from '@component/element/Avatar.js';
 import { If } from '@component/helpers/All.js';
-import { ifHaveMedia } from '@src/functions.js';
+import { ifHaveMedia,sliceString } from '@src/functions.js';
 
 
-const sliceString = function (str) {
-    let sliceStr = '';
-    if (str.length >= 66) {
-        sliceStr = `${str.slice(0, 66)} ...`;
-    } else {
-        sliceStr = str;
-    }
-    return sliceStr;
-};
+// const sliceString = function (str) {
+//     let sliceStr = '';
+//     if (str.length >= 66) {
+//         sliceStr = `${str.slice(0, 66)} ...`;
+//     } else {
+//         sliceStr = str;
+//     }
+//     return sliceStr;
+// };
 
 const QuestionItem = function ({ question }) {
 

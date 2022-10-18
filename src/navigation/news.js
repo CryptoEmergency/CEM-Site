@@ -52,7 +52,7 @@ const start = function () {
             <NewsCategory
               activeCategory={activeCategory}
               items={Variable.PageNewsCategory}
-              callBack={async function () {
+              onclick={async function () {
                 if (activeCategory == this.dataset.name) {
                   return;
                 }

@@ -38,6 +38,16 @@ const wrapTextWithATag = (text) => {
   return res;
 };
 
+const sliceString = function (str,number = 66) {
+  let sliceStr = '';
+  if (str.length >= number) {
+      sliceStr = `${str.slice(0, number)} ...`;
+  } else {
+      sliceStr = str;
+  }
+  return sliceStr;
+};
+
 const wrapTagToText = (text) => {
   let textTag = Helpers.sanitizeHtml(text, { allowedTags: ['p'] });
  
@@ -347,6 +357,7 @@ const uploadMedia = function (file, type, onload, onprogress, xhr) {
 
 
 export {
+  sliceString,
   wrapTextWithATag,
   isEmpty,
   showVotersAndchangeStatistic,

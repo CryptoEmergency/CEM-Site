@@ -65,7 +65,7 @@ const BlockNewsShow = function ({ item, type }) {
                                     comments={item.comments}
                                 /> */}
                 {/* <QuestionAnswerItemComment item = {item}  mainId={mainId} /> */}
-                <Map
+                {/* <Map
                   data={item.comments}
                   dataIf={(item, index) => {
                     return (
@@ -76,7 +76,7 @@ const BlockNewsShow = function ({ item, type }) {
                       />
                     );
                   }}
-                />
+                /> */}
               </div>
             </div>
           }
