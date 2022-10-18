@@ -22,6 +22,8 @@ const start = function () {
 
   init(
     async () => {
+
+      console.log('=00ba4c=', "s")
       elem = []
       lentaPage = "photo"
       Variable.PageLentaall = await sendApi.send({
@@ -48,6 +50,8 @@ const start = function () {
         action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 15,
         filter: Helpers.getFilterLenta({}, "text")
       });
+
+      console.log('=00ba4c2=', "f")
     },
 
     () => {

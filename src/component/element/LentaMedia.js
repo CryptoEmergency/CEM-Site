@@ -106,7 +106,7 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
     return (
         <div class="swiper-container">
             <div class="swiper swiper-post_media" After={() => {
-                swiperGo(numIndex)
+                // swiperGo(numIndex)
             }}>
                 <div class="swiper-wrapper">
                     <Map
@@ -117,7 +117,7 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
                                     elem[numIndex][index] = Variable.setRef()
                                     return (
                                         <div class="swiper-slide" onclick={() => {
-                                            console.log('=52cb0d=', elem[numIndex][index]().paused)
+                                            // console.log('=52cb0d=', elem[numIndex][index]().paused)
                                             if (elem[numIndex][index]().paused) {
                                                 elem[numIndex][index]().play()
                                             } else {
