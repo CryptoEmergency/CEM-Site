@@ -18,7 +18,10 @@ import { getDateFormat } from "@src/functions.js";
 import { getPostsItemInShow } from "@src/apiFunctions.js";
 import { AudioPlayer } from "@component/element/AudioPlayer.js";
 import { Slider } from "@component/element/Slider.js";
-import { Avatar } from '@component/element/Avatar.js';
+import {
+  Avatar,
+  Likes,
+} from "@component/element/index.js";
 import { If, Map } from '@component/helpers/All.js';
 
 const returnImgOrVideo = (item) => {
@@ -82,7 +85,7 @@ const returnImgOrVideo = (item) => {
 };
 
 const BlockLentaUsers = function ({ item, numIndex, elem }) {
-
+  let mainId = item._id;
   return (
     <div
       class="user_news_item"
@@ -173,6 +176,14 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
             </div>
           </div>
           <div class="user_post_statistic_item">
+
+          <Likes
+              item={item}
+              typeGet="getComments"
+              typeSet="setAnswer"
+              mainId={mainId}
+            />
+
             <div class="comment_icon_type-2">
               {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/dislike.svg" class="comment_icon_type-2-1 minus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
               <button type="button" data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src={svg["dislike"]} class="comment_icon_type-2-1 minus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post" data-action="answerEvaluation"></button>
