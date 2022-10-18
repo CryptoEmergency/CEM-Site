@@ -9,7 +9,7 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { If, Map } from '@component/helpers/All.js';
-import { VideoPlayer } from '@component/element/index.js';
+import { VideoPlayer, AudioPlayer } from '@component/element/index.js';
 
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
@@ -144,6 +144,23 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
                                                 <img src={path + item.name} />
                                             </div>
                                         </a>
+
+                                    )
+                                }
+
+                                if (item.type == "audio") {
+                                    return (
+                                        <div class="swiper-slide">
+                                            <AudioPlayer
+                                                item={item}
+                                                index={index}
+                                                numIndex={numIndex}
+                                                elem={elem}
+                                                path={path}
+                                                type="posts"
+                                            //  path={"/assets/upload/posts/"}
+                                            />
+                                        </div>
 
                                     )
                                 }
