@@ -1,8 +1,10 @@
-import { jsx, jsxFrag, Helpers, Variable, initReload } from "@betarost/cemjs";
+import { jsx, jsxFrag, Helpers, Variable, initReload, initOne } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
 import { If } from "@component/helpers/All.js";
 import { changeSubscription } from "@src/apiFunctions.js";
+
+let elemActive
 
 const AnswerAdditionallyToggle = function ({
   item,
@@ -11,6 +13,13 @@ const AnswerAdditionallyToggle = function ({
   commentId,
   mainId,
 }) {
+
+  initOne(
+    () => {
+      elemActive = Variable.setRef()
+    }
+  )
+
   return (
     <div
       //    class="comment_icon_type-1 answer_additionally_toggle {{#if data.userInfo.auth}}{{else}}comment_inactive {{/if}}" data-action="answerAdditionallyToggle"
@@ -19,7 +28,7 @@ const AnswerAdditionallyToggle = function ({
         "comment_icon_type-1",
         !Variable.auth
           ? //  || Variable.Static.answerAdditionally
-            "comment_inactive"
+          "comment_inactive"
           : null,
       ]}
       onclick={(e) => {
@@ -31,8 +40,14 @@ const AnswerAdditionallyToggle = function ({
           return;
         } else {
           Variable.Static.answerAdditionally = item._id;
+          Variable.OutHideWindows.push([elemActive, () => {
+            Variable.Static.answerAdditionally = null
+            initReload();
+            return true
+          }])
           Variable.Static.activeInputId = "";
           Variable.Static.EditInput = "";
+          e.stopPropagation();
           initReload();
         }
       }}
@@ -41,7 +56,7 @@ const AnswerAdditionallyToggle = function ({
       <If
         data={Variable.Static.answerAdditionally === item._id}
         dataIf={
-          <div class=" answer_additionally_container">
+          <div class=" answer_additionally_container" ref={elemActive}>
             <div class="answer_additionally">
               <If
                 data={item.author._id === Variable.myInfo._id}

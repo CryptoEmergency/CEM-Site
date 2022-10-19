@@ -70,7 +70,9 @@ const clickHide = function (e) {
       if (item[0]() === e.target || item[0]().contains(e.target)) {
       } else {
         if (item[1] && typeof item[1] == "function") {
-          item[1]().hidden = true;
+          if (typeof item[1]() != "boolean") {
+            item[1]().hidden = true;
+          }
         } else if (typeof item[1] == "string") {
           Variable.DelModals(item[1]);
         }
