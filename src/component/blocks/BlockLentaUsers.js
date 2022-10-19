@@ -34,7 +34,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
   return (
     <div
       class="user_news_item"
-      ElemVisible={total < totalFound && numIndex == (total - 2) ?
+      ElemVisible={total < totalFound && numIndex == (total - 5) ?
         async () => {
           console.log('=0c6881=', "Load more")
           let tmp = await sendApi.send({
