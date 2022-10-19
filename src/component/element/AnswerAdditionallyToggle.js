@@ -12,6 +12,7 @@ const AnswerAdditionallyToggle = function ({
   type,
   commentId,
   mainId,
+  callBack
 }) {
 
   initOne(
@@ -122,6 +123,7 @@ const AnswerAdditionallyToggle = function ({
                                   typeSet: typeApi,
                                   mainId: mainId,
                                   mainCom: !commentId ? true : false,
+                                  callBack :callBack
                                 },
                               },
                               true
@@ -254,6 +256,7 @@ const AnswerAdditionallyToggle = function ({
                             mainId: mainId,
                             mainCom: !commentId ? true : false,
                             roleAction: typeApi,
+                            callBack :callBack
                           },
                         },
                         true

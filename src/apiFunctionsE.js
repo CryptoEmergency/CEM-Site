@@ -113,7 +113,7 @@ const delCom = async (info) => {
     data.value = {active:false};
 
   }
-  if(info.typeSet ==="setAnswer" ){
+  if(info.typeSet ==="setAnswer" || info.typeSet ==="setNews" ){
     if( info.id === info.mainId){
       data.value = {active:false};
 
@@ -140,7 +140,23 @@ const delCom = async (info) => {
     if( info.id === info.mainId){
       data.value = {active:false};
       data.roleAction = info.roleAction
+    }else if( info.mainCom === true){
+      data.value.comments = {
+        active:false,
+        _id : info.id,
+      }
+      data.roleAction = info.roleAction
     }
+    else if( info.mainCom === false){
+      data.value.comments = {
+        comments :{
+          active:false,
+        _id : info.id,
+      }
+      }
+      data.roleAction = info.roleAction
+    }
+
     // else if( info.mainCom === true){
     //   data.value.comments = {
     //     active:false,
@@ -199,16 +215,16 @@ const sendComplaintApi = async (info) => {
     data._id = info.data.id
   }
 
-  if(info.data.typeSet ==="setAnswer" && info.data.id === info.data.mainId){
+  if((info.data.typeSet ==="setAnswer" || info.data.typeSet ==="setNews")  && info.data.id === info.data.mainId){
     data.value.complain = info.complaint;
   }
-  else if(info.data.typeSet ==="setAnswer" && info.data.mainCom === true){
+  else if((info.data.typeSet ==="setAnswer"|| info.data.typeSet ==="setNews") && info.data.mainCom === true){
     data.value.comments = {
       complain : info.complaint,
       _id : info.data.id,
     }
   }
-  else if(info.data.typeSet ==="setAnswer" && info.data.mainCom === false){
+  else if((info.data.typeSet ==="setAnswer" || info.data.typeSet ==="setNews") && info.data.mainCom === false){
     data.value.comments = {
       comments :{
       complain : info.complaint,

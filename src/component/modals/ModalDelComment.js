@@ -38,7 +38,9 @@ const ModalDelComment = function (data, reload) {
                       Variable.Static.lentaPage
                     ),
                   });
-              } else {
+              } else if(typeof data.callBack == "function"){
+                  data.callBack();
+              }else{
                 initReload();
               }
             }}
