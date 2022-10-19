@@ -16,7 +16,7 @@ const changeTextAnswer = (e) => {
     formInputs.textAnswer.error = Variable.lang.error_div.not_empty_input;
   } else if (text.length < 5) {
     formInputs.textAnswer.error = Variable.lang.error_div.minSymbol;
-  } else if (text.length > 200) {
+  } else if (text.length > 2000) {
     formInputs.textAnswer.error = Variable.lang.error_div.maxSymbol;
   }
   formInputs.textAnswer.value = wrapTextWithATag(text);
@@ -104,7 +104,7 @@ const ModalAnswer = function (data, reload) {
             </div>
             <MediaButton
               onclickPhoto={function () {
-                if (this.files.lenght == 0) {
+                if (this.files.length == 0) {
                   return;
                 }
 
@@ -148,7 +148,7 @@ const ModalAnswer = function (data, reload) {
                 formInputs.isValid = true;
               }}
               onclickVideo={function () {
-                if (this.files.lenght == 0) {
+                if (this.files.length == 0) {
                   return;
                 }
                 uploadMedia(

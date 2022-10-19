@@ -9,8 +9,10 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+import { Swiper } from '@component/element/index.js';
+
+// import Swiper from 'swiper/bundle';
+// import 'swiper/css/bundle';
 
 const banners = [
     // {
@@ -57,46 +59,45 @@ const banners = [
 
 let swiperitem
 
-const swiperGo = function () {
-    // if (!swiperitem) {
-    swiperitem = new Swiper('#swiper-startups', {
-        direction: 'horizontal',
-        loop: true,
-        autoplay: {
-            delay: 2000,
+
+
+
+const swiperOptions = {
+    direction: 'horizontal',
+    loop: true,
+    autoplay: {
+        delay: 2000,
+    },
+    pagination: false,
+    scrollbar: {
+        el: '.swiper-scrollbar',
+    },
+    breakpoints: {
+        100: {
+            slidesPerView: 1,
+            spaceBetween: 20
         },
-        pagination: false,
-        scrollbar: {
-            el: '.swiper-scrollbar-startup',
+        620: {  //600
+            slidesPerView: 2,
+            spaceBetween: 10
         },
-        breakpoints: {
-            100: {
-                slidesPerView: 1,
-                spaceBetween: 20
-            },
-            620: {  //600
-                slidesPerView: 2,
-                spaceBetween: 10
-            },
-            // 768: {
-            //   slidesPerView: 2,
-            //   spaceBetween: 50
-            // },
-            910: {  //800
-                slidesPerView: 3,
-                spaceBetween: 46,
-            },
-            1240: {
-                slidesPerView: 4,
-                spaceBetween: 30,
-                navigation: {
-                    nextEl: '#next-startup',
-                    prevEl: '#prev-startup',
-                },
+        // 768: {
+        //   slidesPerView: 2,
+        //   spaceBetween: 50
+        // },
+        910: {  //800
+            slidesPerView: 3,
+            spaceBetween: 46,
+        },
+        1240: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '#next-startup',
+                prevEl: '#prev-startup',
             },
         },
-    });
-    // }
+    },
 }
 
 const BlockBanners = function () {
@@ -107,53 +108,36 @@ const BlockBanners = function () {
         }
     )
 
-    //initAfter(
-    // () => {
-    //     if (!swiperitem) {
-    //         swiperitem = new Swiper('#swiper-startups', {
-    //             direction: 'horizontal',
-    //             loop: true,
-    //             autoplay: {
-    //                 delay: 2000,
-    //             },
-    //             pagination: false,
-    //             scrollbar: {
-    //                 el: '.swiper-scrollbar-startup',
-    //             },
-    //             breakpoints: {
-    //                 100: {
-    //                     slidesPerView: 1,
-    //                     spaceBetween: 20
-    //                 },
-    //                 620: {  //600
-    //                     slidesPerView: 2,
-    //                     spaceBetween: 10
-    //                 },
-    //                 // 768: {
-    //                 //   slidesPerView: 2,
-    //                 //   spaceBetween: 50
-    //                 // },
-    //                 910: {  //800
-    //                     slidesPerView: 3,
-    //                     spaceBetween: 46,
-    //                 },
-    //                 1240: {
-    //                     slidesPerView: 4,
-    //                     spaceBetween: 30,
-    //                     navigation: {
-    //                         nextEl: '#next-startup',
-    //                         prevEl: '#prev-startup',
-    //                     },
-    //                 },
-    //             },
-    //         });
-    //     }
-    // }
-    // )
 
     return (
         <div class="c-startaps">
-            <div class="swiper-container">
+            <Swiper
+                slide={
+                    banners.map(function (banner) {
+                        return (
+                            <a class="swiper-slide">
+                                <div data-id={banner.id}>
+                                    <img src={images[`banners/${banner.image}`]} />
+                                </div>
+                            </a>
+                        )
+                    })
+                }
+                options={swiperOptions}
+                className="swiper-startups"
+                navigation={
+                    <div>
+                        <div class="swiper-button-prev" id="prev-startup">
+                            <img src={svg.swiper_arrow_left} style="height: 40%;" />
+                        </div>
+                        <div class="swiper-button-next" id="next-startup">
+                            <img src={svg.swiper_arrow_right} style="height: 40%;" />
+                        </div>
+                    </div>
+                }
+
+            />
+            {/* <div class="swiper-container">
                 <div class="swiper swiper-startups" id="swiper-startups" After={swiperGo}>
                     <div class="swiper-wrapper">
                         {
@@ -177,7 +161,7 @@ const BlockBanners = function () {
                 <div class="swiper-button-next" id="next-startup">
                     <img src={svg.swiper_arrow_right} style="height: 40%;" />
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

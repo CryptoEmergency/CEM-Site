@@ -6,12 +6,13 @@ import {
   getStorage,
   getValue,
   stringToHtml,
-  Helpers
+  Helpers,
+  sendApi,
+  initReload,
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { LentaMedia } from '@component/element/index.js';
-
+import { LentaMedia } from "@component/element/index.js";
 
 import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
@@ -23,86 +24,56 @@ import {
   Likes,
   AnswerAdditionallyToggle,
 } from "@component/element/index.js";
-import { If, Map } from '@component/helpers/All.js';
+import { If, Map } from "@component/helpers/All.js";
 
-const returnImgOrVideo = (item) => {
-  if (
-    item.media.length > 1 &&
-    item.media.find((i) => i.type === "audio") == undefined
-  ) {
-    // console.log('=1e395c=', 2)
-    return (
-
-      // <div class="swiper-container">
-      //   <div class="swiper swiper-post_media">
-      //     <div class="swiper-wrapper">
-      //       {item.media.map((mediaItem) => {
-      //         return (
-      //           <a class="swiper-slide">
-      //             {item.media.find((i) => i.type === "image") !== undefined && (
-      //               <div class="swiper-post_media_image_container">
-      //                 <img
-      //                   data-action=""
-      //                   src={`/assets/upload/posts/${mediaItem.name}`}
-      //                 />
-      //                 {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}"> --}} */}
-      //               </div>
-      //             )}
-      //             {item.media.find((i) => i.type === "video") !== undefined && (
-      //               //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
-      //               <p>video more</p>
-      //             )}
-      //           </a>
-      //         );
-      //       })}
-      //     </div>
-      //     <div class="swiper-pagination swiper-pagination-post_media"></div>
-      //     <div class="swiper-scrollbar-post_media"></div>
-      //   </div>
-      // </div>
-      <Slider item={item} />
-    );
-  } else if (item.media.find((i) => i.type === "audio") == undefined) {
-    // console.log('=1e395c=', 1)
-    return (
-      item.media.find((i) => i.type === "image") !== undefined
-        ?
-        <div class="swiper-post_media_image_container">
-          <img
-            data-action=""
-            src={`/assets/upload/posts/${item.media[0].name}`}
-          />
-          {/* {{!-- <img {{#if data.fullsize}}data-action="fullSize"{{/if}} src="/assets/upload/posts/{{ name }}">   --}} */}
-        </div>
-        :
-        //  {{>videoPlayer src=name path="/assets/upload/posts/"}}
-        <p>video </p>
-    );
-  } else {
-    return (
-      <></>
-    )
-  }
-};
-
-const BlockLentaUsers = function ({ item, numIndex, elem }) {
+const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
+  let mainId = item._id;
+  console.log('=item=', item)
   return (
     <div
       class="user_news_item"
+      ElemVisible={total < totalFound && numIndex == (total - 3) ?
+        async () => {
+          console.log('=0c6881=', "Load more")
+          let tmp = await sendApi.send({
+            action: "getPost",
+            short: true,
+            limit: 15,
+            offset: total,
+            filter: Helpers.getFilterLenta(
+              {},
+              Variable.Static.lentaPage
+            ),
+          });
+
+          Variable[`PageLenta${Variable.Static.lentaPage}`].list_records.push(...tmp.list_records)
+          initReload()
+        }
+        :
+        false
+      }
       onClick={async () => {
+        // if (true) {
+        //   Variable.SetModals({
+        //     name: "ModalFullSize",
+        //     data: { item: item, type: "post" },
+        //   });
+        // }
+
         // let post;
         // post = await getPostsItemInShow(item._id);
         // post = post.list_records[0];
+        // console.log('=item1111111111111111=',item)
         // Variable.SetModals({
-        //   name: "ModalFullPost",
-        //   data: { post },
+        //   name: "ModalFullSize",
+        //   data: { item, type: "post" },
         // });
       }}
     >
       <div class="main_comment">
         <Avatar author={item.author} nickName={item.author.nickname} />
         <div class="comment_icons">
-        <AnswerAdditionallyToggle
+          <AnswerAdditionallyToggle
             item={item}
             typeApi={"setPost"}
             type={{
@@ -111,9 +82,12 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
               complainPost: true,
               complainUser: true,
               blackList: true,
+              subscription: true,
+              share: true,
             }}
-          
-          /></div>
+            mainId={mainId}
+          />
+        </div>
         <div class="comment_body">
           <LentaMedia
             items={item.media}
@@ -179,93 +153,28 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
         </div>
 
         <div class="user_post_statistic">
-          <span class="c-date">{item.updateTime ? `${Variable.lang.text.update} ${getDateFormat(item.updateTime, "lenta")}` : getDateFormat(item.showDate, "lenta")}</span>
+          <span class="c-date">
+            {item.updateTime
+              ? `${Variable.lang.text.update} ${getDateFormat(
+                item.updateTime,
+                "lenta"
+              )}`
+              : getDateFormat(item.showDate, "lenta")}
+          </span>
           <div class="user_post_statistic_item">
             <div class="user_post_statistic_image">
-              <img src={svg["question_answers"]} /> <span>{item.statistic.comments} </span>
+              <img src={svg["question_answers"]} />{" "}
+              <span>{item.statistic.comments} </span>
             </div>
             <div class="user_post_statistic_image">
               <img src={svg["question_views"]} /> {item.statistic.view}
             </div>
           </div>
           <div class="user_post_statistic_item">
-
-          <Likes
-              item={item}
-              typeGet="getPost"
-              typeSet="setPost"
-            />
-
-            {/* <div class="comment_icon_type-2"> */}
-              {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/dislike.svg" class="comment_icon_type-2-1 minus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
-              {/* <button type="button" data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src={svg["dislike"]} class="comment_icon_type-2-1 minus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post" data-action="answerEvaluation"></button>
-            </div>
-            <div class="comment_likes" id={`likes_${item._id}`}>
-              {item.statistic.rating}
-            </div>
-            <div class="comment_icon_type-2"> */}
-              {/* {{!-- <img data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd" src="/assets/icon/like.svg" class="comment_icon_type-2-1 plus {{#is data.auth "true"}}{{else}}comment_inactive{{/is}}" data-answer-id={{ _id }} data-needauth="true" data-type="post" data-action="answerEvaluation"> --}} */}
-              {/* <button data-mousedown="evaTouchStart" data-mouseup="evaTouchEnd" data-touchstart="evaTouchStart" data-touchend="evaTouchEnd"
-                src={svg["like"]} class="comment_icon_type-2-1 plus comment_inactive" data-answer-id={item._id} data-needauth="true" data-type="post"
-                data-action="answerEvaluation"></button>
-            </div> */}
+            <Likes item={item} typeGet="getPost" typeSet="setPost" />
           </div>
         </div>
-
-        {/* <div class="comment_icons">
-          <div
-            class={`comment_icon_type-1 answer_additionally_toggle ${!isAuth && "comment_inactive"}`}
-            data-needauth="true" data-action="answerAdditionallyToggle">
-            <img class="answer_additionally_toggle_img" src={svg["points"]} />
-            <div class="answer_additionally_container">
-              <div class="answer_additionally">
-                <If
-                  data={item.author._id == Variable.myInfo._id}
-                  dataIf={<div>
-                    <div class="answer_additionally_item share" data-answer-id={item._id} data-type="post">{Variable.lang.select.share}</div>
-                    <div class="answer_additionally_item edit" data-answer-id={item._id} data-type="post">{Variable.lang.button.edit}</div>
-                    <div class="answer_additionally_item delete" data-answer-id={item._id} data-type="post">{Variable.lang.select.delete}</div>
-                  </div>}
-                  dataElse={<div>
-                    <div class="answer_additionally_item subscribe" data-answer-id={item.author._id} data-type="post">
-                      <span style={[item.subscribe ? "display: none;" : null]}>
-                        {Variable.lang.button.subscribe}
-                      </span>
-                      <span style={[!item.subscribe ? "display: none;" : null]}>
-                        {Variable.lang.button.unsubscribe}
-                      </span>
-                    </div>
-                    <div class="answer_additionally_item share" data-answer-id={item._id} data-type="post">{Variable.lang.select.share}</div>
-                    <div class="answer_additionally_item complain c-text--error" data-answer-id={item._id} data-type="post">{Variable.lang.select.complainPost}</div>
-                    <div class="answer_additionally_item complain c-text--error" data-answer-id={item.author._id} data-type="user">{Variable.lang.select.complainUser}</div>
-                    <div class="answer_additionally_item block c-text--error" data-answer-id={item.author._id} data-type="user">{Variable.lang.select.blackList}</div>
-                  </div>}
-                />
-                <If
-                  data={Variable.myInfo.status.role}
-                  dataIf={<div style="color: #32DE80" class="answer_additionally_item delete" data-answer-id={item._id} data-type="post">{Variable.lang.select.delete}</div>
-                  }
-                />
-              </div>
-            </div>
-          </div>
-           {{#is myInfo.role 1}}    
-                    {{#is myInfo.role_settings.del_answer 1}} 
-                        <div class="acp_block">
-                            <img data-action="acpSiteShow" class="acp_image" src={svg["points_green"]}>
-                            <div style="display: none;" class="acp_inner">
-                                <div class="acp_inner_item" data-type="dlt_user_post" data-id="{{_id}}" data-action="acpAction">
-                                    Удалить Пост
-                                </div>
-                                <div class="acp_inner_item" data-type="ban_user" data-id="{{author._id}}" data-action="acpAction">
-                                    Заблокировать пользователя
-                                </div>
-                            </div>
-                        </div>
-                    {{/is}}
-                {{/is}} 
-        </div> */}
-      </div >
+      </div>
 
       <div
         data-action="userNewsShowFullPost"
@@ -275,7 +184,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
         <div class="show_all_post_block"> </div>
         <span class="show_all_post_text">{Variable.lang.button.see_all}</span>
       </div>
-    </div >
+    </div>
   );
 };
 

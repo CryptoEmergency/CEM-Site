@@ -109,7 +109,11 @@ const delCom = async (info) => {
     value:{},
     _id: info.mainId,
   }
-  if(info.typeSet ==="setAnswer" ){
+  if(info.typeSet ==="setPost"){
+    data.value = {active:false};
+
+  }
+  if(info.typeSet ==="setAnswer" || info.typeSet ==="setNews" ){
     if( info.id === info.mainId){
       data.value = {active:false};
 
@@ -136,7 +140,23 @@ const delCom = async (info) => {
     if( info.id === info.mainId){
       data.value = {active:false};
       data.roleAction = info.roleAction
+    }else if( info.mainCom === true){
+      data.value.comments = {
+        active:false,
+        _id : info.id,
+      }
+      data.roleAction = info.roleAction
     }
+    else if( info.mainCom === false){
+      data.value.comments = {
+        comments :{
+          active:false,
+        _id : info.id,
+      }
+      }
+      data.roleAction = info.roleAction
+    }
+
     // else if( info.mainCom === true){
     //   data.value.comments = {
     //     active:false,
@@ -184,28 +204,27 @@ const delCom = async (info) => {
 };
 
 const sendComplaintApi = async (info) => {
-  console.log("=info=", info);
 
   let data ={
     value:{},
     _id: info.data.mainId,
   }
 
-  if(info.data.typeSet ==="setAnswer"){
+  if(info.data.typeSet ==="setPost"){
     data.value.complain = info.complaint;
-    
+    data._id = info.data.id
   }
 
-  if(info.data.typeSet ==="setAnswer" && info.data.id === info.data.mainId){
+  if((info.data.typeSet ==="setAnswer" || info.data.typeSet ==="setNews")  && info.data.id === info.data.mainId){
     data.value.complain = info.complaint;
   }
-  else if(info.data.typeSet ==="setAnswer" && info.data.mainCom === true){
+  else if((info.data.typeSet ==="setAnswer"|| info.data.typeSet ==="setNews") && info.data.mainCom === true){
     data.value.comments = {
       complain : info.complaint,
       _id : info.data.id,
     }
   }
-  else if(info.data.typeSet ==="setAnswer" && info.data.mainCom === false){
+  else if((info.data.typeSet ==="setAnswer" || info.data.typeSet ==="setNews") && info.data.mainCom === false){
     data.value.comments = {
       comments :{
       complain : info.complaint,
@@ -243,8 +262,6 @@ const sendComplaintApi = async (info) => {
 
   //  }
   // }
-
-  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create(info.data.typeSet, data));
 };
 

@@ -18,9 +18,26 @@ const VideoPlayer = function ({ item, numIndex, index, path, elem }) {
 
     return (
 
-        <div class="video_container">
+        <div class="video_container"
+            onclick={() => {
+                // console.log('=52cb0d=', elem[numIndex][index]().paused)
+                if (elem[numIndex][index]().paused) {
+                    elem[numIndex][index]().play()
+                } else {
+                    elem[numIndex][index]().pause()
+                }
+
+            }}
+        >
             {/* <video playsinline poster={images["video_background"]} preload="metadata" onended="playerEnded(event, this)" onplay="playerPlay(event, this)" onpause="playerPause(event, this)" oncanplay="playerCanplay(event, this)" ontimeupdate="playerTimeupdate(event, this)" onclick="controlPlayerClick(event, this)" ondblclick="openFullscreenThis(event, this)" src={path + item.name}></video> */}
-            <video playsinline poster={images["video_background"]} preload="metadata" src={path + item.name} ref={elem[numIndex][index]}></video>
+            <video
+                playsinline
+                poster={images["video_background"]}
+                preload="metadata"
+                src={path + item.name} ref={elem[numIndex][index]}
+            >
+
+            </video>
 
             <div class="controls">
                 <img src={svg["player_play"]} class="playpause paused"

@@ -38,19 +38,19 @@ const wrapTextWithATag = (text) => {
   return res;
 };
 
-const sliceString = function (str,number = 66) {
+const sliceString = function (str, number = 66) {
   let sliceStr = '';
   if (str.length >= number) {
-      sliceStr = `${str.slice(0, number)} ...`;
+    sliceStr = `${str.slice(0, number)} ...`;
   } else {
-      sliceStr = str;
+    sliceStr = str;
   }
   return sliceStr;
 };
 
 const wrapTagToText = (text) => {
   let textTag = Helpers.sanitizeHtml(text, { allowedTags: ['p'] });
- 
+
   textTag = textTag.replace(new RegExp("</p><p>", 'gi'), "\n")
 
   textTag = textTag.replace(new RegExp("<p>", 'gi'), "").replace(new RegExp("</p>", 'gi'), "")
@@ -70,7 +70,9 @@ const clickHide = function (e) {
       if (item[0]() === e.target || item[0]().contains(e.target)) {
       } else {
         if (item[1] && typeof item[1] == "function") {
-          item[1]().hidden = true;
+          if (typeof item[1]() != "boolean") {
+            item[1]().hidden = true;
+          }
         } else if (typeof item[1] == "string") {
           Variable.DelModals(item[1]);
         }
@@ -230,13 +232,13 @@ const changeActiveCommentsInput = (id) => {
 
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, commentId,) => {
+const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, commentId, callBack) => {
   e.preventDefault();
   let type = e.target.dataset.name;
   if (e.type === "mousedown" || e.type === "touchstart") {
     interval = setInterval(async () => {
       sec = sec + 100;
-      if (sec === 1500) {
+      if (sec === 1000) {
         clearInterval(interval);
         sec = 0;
         let response = await showVotersApi(id, typeGet);
@@ -253,13 +255,16 @@ const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, com
     }, 100);
   } else {
     clearInterval(interval);
-    if (sec < 1500) {
+    if (sec < 1000) {
       await changeStatistic(e, id, typeSet, mainId, commentId);
+      if (typeof callBack == "function") {
+        callBack();
+      }
       // if (Variable.dataUrl.params === undefined) {
       //   await renderModalFullNews();
       // }
     }
-    if (1000 <= sec && sec < 1500) {
+    if (700 <= sec && sec < 1000) {
       let response = await showVotersApi(id, typeGet);
       response = response.list_records[0].evaluation.filter(
         (item) => item.type === type
@@ -346,8 +351,13 @@ const ifHaveMedia = function (mediaArr, type, whatReturn) {
 
 
 const uploadMedia = function (file, type, onload, onprogress, xhr) {
+  let nameFile = "file.png"
+  if (file.name) {
+    nameFile = file.name
+  }
   const formData = new FormData()
-  formData.append('media', file);
+  formData.append('media', file, nameFile);
+
   xhr = new XMLHttpRequest()
   xhr.open('POST', `/upload/${type}/`)
   xhr.onload = onload

@@ -3,7 +3,9 @@ import { jsx, jsxFrag, Helpers, Variable } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { showVotersAndchangeStatistic } from "@src/functions.js";
 
-const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
+const Likes = function ({ item, typeGet, typeSet, mainId, commentId, callBack }) {
+
+
   return (
     <div style={"display: flex"}>
       <div class="c-actioncomment__btn c-actioncomment__btn--dislike">
@@ -17,7 +19,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           onTouchEnd={(e) =>
@@ -27,7 +30,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           onmousedown={(e) =>
@@ -37,7 +41,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           onmouseup={(e) =>
@@ -47,7 +52,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           class={[!Variable.auth ? "comment_inactive" : null]}
@@ -65,7 +71,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           onTouchEnd={(e) =>
@@ -75,7 +82,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           onmousedown={(e) =>
@@ -85,7 +93,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           onmouseup={(e) =>
@@ -95,7 +104,8 @@ const Likes = function ({ item, typeGet, typeSet, mainId, commentId }) {
               typeGet,
               typeSet,
               mainId,
-              commentId
+              commentId,
+              callBack
             )
           }
           class={[!Variable.auth ? "comment_inactive" : null]}

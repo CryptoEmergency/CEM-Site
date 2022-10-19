@@ -77,6 +77,20 @@ const changeStatistic = async function (
   }
 };
 
+const changeSubscription = async (id,type) => {
+  let data = {
+    value: {
+      subscribed: id
+    }
+  };
+  let response = checkAnswerApi(await sendApi.create(type, data));
+ Variable.Static.answerAdditionally = "";
+    Variable[`PageLenta${ Variable.Static.lentaPage}`] = await sendApi.send({
+      action: "getPost", short: true, cache: true, name: `PageLenta${ Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
+    });
+  
+}
+
 const showVotersApi = async (id, type) => {
   console.log("=id=", id);
   let data = {
@@ -87,7 +101,6 @@ const showVotersApi = async (id, type) => {
       evaluation: 1,
     },
   };
-  console.log('=272b14=',data)
   let response = checkAnswerApi(await sendApi.create(type, data));
   // let response = await sendApi.send({ action: type, filter:{
   //   _id: id
@@ -95,7 +108,6 @@ const showVotersApi = async (id, type) => {
   //   evaluation: 1
   // } });
   // return response.result
-  console.log('=272b14=',response)
   return response;
 };
 
@@ -106,7 +118,6 @@ const sendNewCommentApi = async function (
   mainId,
   commentId
 ) {
-  console.log("=096bf2=", item, comment, typeSet, mainId, commentId);
 
   let data = {
     value: {
@@ -115,7 +126,11 @@ const sendNewCommentApi = async function (
     _id: mainId,
   };
 
-  if (typeSet == "setAnswer" && Variable.Static.EditInput.length > 0) {
+  if (item.image ) {
+    data.value.comments = { text: comment };
+    data._id = item._id
+  }
+  else if ((typeSet == "setAnswer" || typeSet == "setNews") && Variable.Static.EditInput.length > 0) {
     if (!commentId) {
       data.value = {
         comments: {
@@ -187,7 +202,6 @@ const sendNewCommentApi = async function (
   //   _id: Variable.Static.showNewsId,
   // };
   // }
-  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create(typeSet, data));
 
   // if (Variable.dataUrl.params === undefined) {
@@ -366,6 +380,7 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
 };
 
 export {
+  changeSubscription,
   showVotersApi,
   changeStatistic,
   sendNewCommentApi,

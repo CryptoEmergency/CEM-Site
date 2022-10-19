@@ -29,23 +29,20 @@ const sendComplaint = async (data) => {
   ) {
     if (complaint.length > 0) {
       await sendComplaintApi({ data, complaint });
-
-      // Variable.Static.answerAdditionally = false
     } else {
       complaint = [`<p>${input().innerText.trim()}</p>`];
-
       await sendComplaintApi({ data, complaint });
-
-      // Variable.Static.answerAdditionally = false
     }
     Variable.Static.answerAdditionally = "";
-    if (Variable.dataUrl.params === undefined) {
-      Variable.Modals.pop();
-      await renderModalFullNews();
-    } else {
-      Variable.Modals = [];
-      initReload();
-    }
+    Variable.DelModals("ModalComplainComment");
+    initReload();
+    // if (Variable.dataUrl.params === undefined) {
+    //   Variable.Modals.pop();
+    //   await renderModalFullNews();
+    // } else {
+    //   Variable.Modals = [];
+    //   initReload();
+    // }
   }
 };
 const ModalComplainComment = function (data, reload) {
@@ -78,7 +75,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.abusive}
                 />
-                <label  class="checkbox__label">
+                <label class="checkbox__label">
                   {Variable.lang.select.complainOne}
                   <span class="cont_a-link"></span>
                 </label>
@@ -93,7 +90,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.poison}
                 />
-                <label  class="checkbox__label">
+                <label class="checkbox__label">
                   {Variable.lang.select.complainTwo}
                   <span class="cont_a-link"></span>
                 </label>
@@ -108,7 +105,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.obscene}
                 />
-                <label  class="checkbox__label">
+                <label class="checkbox__label">
                   {Variable.lang.select.complainThree}
                   <span class="cont_a-link"></span>
                 </label>
@@ -123,7 +120,7 @@ const ModalComplainComment = function (data, reload) {
                   type="checkbox"
                   ref={isChecked.malicious}
                 />
-                <label  class="checkbox__label">
+                <label class="checkbox__label">
                   {Variable.lang.select.complainFour}
                   <span class="cont_a-link"></span>
                 </label>
@@ -156,7 +153,7 @@ const ModalComplainComment = function (data, reload) {
               class="complain_other"
               data-keyup="complainKeyup"
               data-onpaste="editorPaste"
-              oninput = {()=> {
+              oninput={() => {
                 initReload("modals");
               }}
               ref={input}
@@ -165,12 +162,11 @@ const ModalComplainComment = function (data, reload) {
             <div
               // class="registration-btn inactive_form_button"
               class={[
-                "registration-btn" ,
+                "registration-btn",
                 isChecked.other() !== undefined &&
                 (complaint.length > 0 || input().innerText.trim().length > 2)
-                  ? 
-                   null
-                  :  "inactive_form_button",
+                  ? null
+                  : "inactive_form_button",
               ]}
               id="answerComplain"
               data-active="0"

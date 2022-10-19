@@ -13,7 +13,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
-import { BlockNewsShow, BlockQuestionsShow } from '@component/blocks/index.js';
+import { BlockNewsShow, BlockQuestionsShow,BlockLentaUsers } from '@component/blocks/index.js';
 
 import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
@@ -65,6 +65,11 @@ const ModalFullSize = function ({ item, type }, reload) {
                   item={item}
                   type={type}
                 />
+                
+                {/* <BlockLentaUsers
+                item ={item}
+                type = {type}
+                /> */}
 
 
               </div>

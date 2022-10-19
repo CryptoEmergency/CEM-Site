@@ -23,7 +23,7 @@ const changeInput = function (e) {
     formInputs[type].error = Variable.lang.error_div.not_empty_input;
   } else if (formInputs[type].value.length < 5) {
     formInputs[type].error = Variable.lang.error_div.minSymbol;
-  } else if (formInputs[type].value.length > 200) {
+  } else if (formInputs[type].value.length > 500) {
     formInputs[type].error = Variable.lang.error_div.maxSymbol;
   }
 

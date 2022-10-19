@@ -1,5 +1,13 @@
-import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
-import { sendInBlackList,renderModalFullNews } from "@src/apiFunctionsE.js";
+import {
+  jsx,
+  jsxFrag,
+  Variable,
+  initReload,
+  initGo,
+  sendApi,
+  Helpers,
+} from "@betarost/cemjs";
+import { sendInBlackList, renderModalFullNews } from "@src/apiFunctionsE.js";
 
 const ModalBlackList = function (data, reload) {
   console.log("=e896fe=", data);
@@ -11,20 +19,31 @@ const ModalBlackList = function (data, reload) {
         </header>
         <div class="c-modal__body">
           <div
-            onclick={async() => {
-
+            onclick={async () => {
               await sendInBlackList(data);
               Variable.Static.answerAdditionally = "";
+
               if (Variable.dataUrl.params === undefined) {
-                Variable.Modals.pop();
-                await renderModalFullNews();
+                Variable.DelModals("ModalBlackList");
               } else {
                 Variable.Modals = [];
-                initReload()
               }
-
-
-
+              if (data.type) {
+                Variable[`PageLenta${Variable.Static.lentaPage}`] =
+                  await sendApi.send({
+                    action: "getPost",
+                    short: true,
+                    cache: true,
+                    name: `PageLenta${Variable.Static.lentaPage}`,
+                    limit: 15,
+                    filter: Helpers.getFilterLenta(
+                      {},
+                      Variable.Static.lentaPage
+                    ),
+                  });
+              } else {
+                initReload();
+              }
 
               // sendInBlackList(data);
               // Variable.Static.answerAdditionally = false
