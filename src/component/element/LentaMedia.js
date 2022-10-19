@@ -9,12 +9,32 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { If, Map } from '@component/helpers/All.js';
-import { VideoPlayer, AudioPlayer } from '@component/element/index.js';
+import { VideoPlayer, AudioPlayer, Swiper } from '@component/element/index.js';
 
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+// import Swiper from 'swiper/bundle';
+// import 'swiper/css/bundle';
 
 let swiperitem = []
+const swiperOptions = {
+    effect: "cube",
+    grabCursor: true,
+    cubeEffect: {
+        shadow: true,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94,
+    },
+    loop: false,
+    // autoHeight: true,
+    pagination: {
+        el: '.swiper-pagination',
+    },
+    scrollbar: {
+        el: '.swiper-scrollbar',
+    },
+    slidesPerView: 1,
+    spaceBetween: 20
+}
 
 const swiperGo = function (numIndex) {
     // if (!swiperitem) {
@@ -30,10 +50,10 @@ const swiperGo = function (numIndex) {
         loop: false,
         // autoHeight: true,
         pagination: {
-            el: '.swiper-pagination-post_media',
+            el: '.swiper-pagination',
         },
         scrollbar: {
-            el: '.swiper-scrollbar-post_media',
+            el: '.swiper-scrollbar',
         },
         slidesPerView: 1,
         spaceBetween: 20
@@ -104,75 +124,74 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
     //     }
     // )
     return (
-        <div class="swiper-container">
-            <div class="swiper swiper-post_media">
-                <div class="swiper-wrapper">
-                    <Map
-                        data={items}
-                        dataIf={
-                            (item, index) => {
-                                if (item.type == "video") {
-                                    elem[numIndex][index] = Variable.setRef()
-                                    return (
-                                        <div class="swiper-slide" onclick={() => {
-                                            // console.log('=52cb0d=', elem[numIndex][index]().paused)
-                                            if (elem[numIndex][index]().paused) {
-                                                elem[numIndex][index]().play()
-                                            } else {
-                                                elem[numIndex][index]().pause()
-                                            }
+        <Swiper
+            slide={
+                <Map
+                    data={items}
+                    dataIf={
+                        (item, index) => {
+                            if (item.type == "video") {
+                                elem[numIndex][index] = Variable.setRef()
+                                return (
 
-                                        }}>
-                                            <VideoPlayer
-                                                item={item}
-                                                index={index}
-                                                numIndex={numIndex}
-                                                elem={elem}
-                                                path={path}
-                                            //  path={"/assets/upload/posts/"}
-                                            />
-                                        </div>
-                                    )
-                                }
+                                    <div class="swiper-slide" onclick={() => {
+                                        // console.log('=52cb0d=', elem[numIndex][index]().paused)
+                                        if (elem[numIndex][index]().paused) {
+                                            elem[numIndex][index]().play()
+                                        } else {
+                                            elem[numIndex][index]().pause()
+                                        }
 
-                                if (item.type == "image") {
-                                    return (
-                                        <a class="swiper-slide">
-                                            <div class="swiper-post_media_image_container">
-                                                <img src={path + item.name} />
-                                            </div>
-                                        </a>
-
-                                    )
-                                }
-
-                                if (item.type == "audio") {
-                                    return (
-                                        <div class="swiper-slide">
-                                            <AudioPlayer
-                                                item={item}
-                                                index={index}
-                                                numIndex={numIndex}
-                                                elem={elem}
-                                                path={path}
-                                                type="posts"
-                                            //  path={"/assets/upload/posts/"}
-                                            />
-                                        </div>
-
-                                    )
-                                }
-
+                                    }}>
+                                        <VideoPlayer
+                                            item={item}
+                                            index={index}
+                                            numIndex={numIndex}
+                                            elem={elem}
+                                            path={path}
+                                        //  path={"/assets/upload/posts/"}
+                                        />
+                                    </div>
+                                )
                             }
+
+                            if (item.type == "image") {
+                                return (
+                                    <a class="swiper-slide">
+                                        <div class="swiper-post_media_image_container">
+                                            <img src={path + item.name} />
+                                        </div>
+                                    </a>
+
+                                )
+                            }
+
+                            if (item.type == "audio") {
+                                return (
+                                    <div class="swiper-slide">
+                                        <AudioPlayer
+                                            item={item}
+                                            index={index}
+                                            numIndex={numIndex}
+                                            elem={elem}
+                                            path={path}
+                                            type="posts"
+                                        //  path={"/assets/upload/posts/"}
+                                        />
+                                    </div>
+
+                                )
+                            }
+
                         }
-                    />
+                    }
+                />
+            }
+            options={swiperOptions}
+            className=""
 
+        />
 
-                </div>
-                <div class="swiper-pagination swiper-pagination-post_media"></div>
-                <div class="swiper-scrollbar-post_media"></div>
-            </div>
-        </div>
     )
 }
 //I check

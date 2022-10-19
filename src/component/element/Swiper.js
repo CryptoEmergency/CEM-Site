@@ -29,7 +29,7 @@ const Swiper = function ({ slide, options, className, navigation, swiperElem }) 
                     {slide}
                 </div>
                 <div class="swiper-pagination"></div>
-                <div class="swiper-scrollbar-startup"></div>
+                <div class="swiper-scrollbar"></div>
             </div>
             {navigation}
         </div>

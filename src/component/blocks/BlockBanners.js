@@ -70,7 +70,7 @@ const swiperOptions = {
     },
     pagination: false,
     scrollbar: {
-        el: '.swiper-scrollbar-startup',
+        el: '.swiper-scrollbar',
     },
     breakpoints: {
         100: {
