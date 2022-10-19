@@ -101,7 +101,6 @@ const showVotersApi = async (id, type) => {
       evaluation: 1,
     },
   };
-  console.log('=272b14=',data)
   let response = checkAnswerApi(await sendApi.create(type, data));
   // let response = await sendApi.send({ action: type, filter:{
   //   _id: id
@@ -109,7 +108,6 @@ const showVotersApi = async (id, type) => {
   //   evaluation: 1
   // } });
   // return response.result
-  console.log('=272b14=',response)
   return response;
 };
 

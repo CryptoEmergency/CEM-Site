@@ -47,13 +47,28 @@ const AnswerAdditionallyToggle = function ({
                 data={item.author._id === Variable.myInfo._id}
                 dataIf={
                   <div>
-                      <If
+                    <If
                       data={type.share}
                       dataIf={
                         <div
                           class="answer_additionally_item share"
-                          onclick={() => {
-                            console.log('=43a5ad=',window.location)
+                          onclick={async () => {
+                            let shareData;
+                            if (typeApi === "setPost") {
+                              shareData = {
+                                url:
+                                  window.location.origin +
+                                  "/lenta-users/show/" +
+                                  item._id,
+                              };
+                            }
+                            try {
+                              if (navigator.share) {
+                                await navigator.share(shareData);
+                              }
+                            } catch (err) {
+                              // alarm(err, 'error')
+                            }
                           }}
                         >
                           {Variable.lang.select.share}
@@ -127,7 +142,24 @@ const AnswerAdditionallyToggle = function ({
                       dataIf={
                         <div
                           class="answer_additionally_item share"
-                          onclick={() => {}}
+                          onclick={async () => {
+                            let shareData;
+                            if (typeApi === "setPost") {
+                              shareData = {
+                                url:
+                                  window.location.origin +
+                                  "/lenta-users/show/" +
+                                  item._id,
+                              };
+                            }
+                            try {
+                              if (navigator.share) {
+                                await navigator.share(shareData);
+                              }
+                            } catch (err) {
+                              // alarm(err, 'error')
+                            }
+                          }}
                         >
                           {Variable.lang.select.share}
                         </div>

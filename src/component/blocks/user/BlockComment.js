@@ -62,7 +62,7 @@ const BlockComment = function ({ item, index, mainId, commentId }) {
             <Likes
               item={item}
               typeGet="getComments"
-              typeSet="setAnswer"
+              typeSet="setNews"
               mainId={mainId}
               commentId={commentId}
             />
@@ -71,7 +71,7 @@ const BlockComment = function ({ item, index, mainId, commentId }) {
             <Likes
               item={item}
               typeGet="getComments"
-              typeSet="setAnswer"
+              typeSet="setNews"
               mainId={mainId}
             />
           }
