@@ -134,15 +134,7 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
                                 elem[numIndex][index] = Variable.setRef()
                                 return (
 
-                                    <div class="swiper-slide" onclick={() => {
-                                        // console.log('=52cb0d=', elem[numIndex][index]().paused)
-                                        if (elem[numIndex][index]().paused) {
-                                            elem[numIndex][index]().play()
-                                        } else {
-                                            elem[numIndex][index]().pause()
-                                        }
-
-                                    }}>
+                                    <div class="swiper-slide">
                                         <VideoPlayer
                                             item={item}
                                             index={index}
@@ -157,11 +149,11 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
 
                             if (item.type == "image") {
                                 return (
-                                    <a class="swiper-slide">
-                                        <div class="swiper-post_media_image_container">
+                                    <div class="swiper-slide">
+                                        < div class="swiper-post_media_image_container" >
                                             <img src={path + item.name} />
-                                        </div>
-                                    </a>
+                                        </div >
+                                    </div >
 
                                 )
                             }

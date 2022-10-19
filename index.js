@@ -10,8 +10,8 @@ init({
     port: 80,
     // mode: "production",
     mode: "development",
-    // api: "",
-    api: "office"
+    api: "",
+    // api: "office"
 });
 //I check
 build({}).then((result) => { if (result) start(result) });

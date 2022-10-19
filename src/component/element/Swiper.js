@@ -19,12 +19,15 @@ const swiperInit = function ($el, options, swiperElem) {
 const Swiper = function ({ slide, options, className, navigation, swiperElem }) {
     // console.log('=42f2e9=', slide)
     return (
-        <div class="swiper-container">
-            <div class={["swiper", className]} After={(el) => {
-                if (slide.length >= 2) {
-                    swiperInit(el, options, swiperElem)
-                }
-            }}>
+        <div class="swiper-container" replace={true}>
+            <div
+                class={["swiper", className]}
+                After={(el) => {
+                    if (slide.length >= 2) {
+                        swiperInit(el, options, swiperElem)
+                    }
+                }}
+            >
                 <div class="swiper-wrapper">
                     {slide}
                 </div>
