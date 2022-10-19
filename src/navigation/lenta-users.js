@@ -13,42 +13,44 @@ import { If, Map } from '@component/helpers/All.js';
 import { SwitchLenta } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
-
-
 const start = function () {
+  Variable.Static.lentaFilters = {
+    lang: Variable.lang.code,
+    langName: Variable.lang.lang_orig
+  }
+
   let elem = []
   Variable.HeaderShow = true
   Variable.FooterShow = true
 
   init(
     async () => {
-
       elem = []
       Variable.Static.lentaPage = "all"
 
       Variable.PageLentaall = await sendApi.send({
         action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 15,
-        filter: Helpers.getFilterLenta({}, "all")
+        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "all")
       });
 
       // Variable.PageLentaphoto = await sendApi.send({
       //   action: "getPost", short: true, cache: true, name: "PageLentaphoto", limit: 15,
-      //   filter: Helpers.getFilterLenta({}, "photo")
+      //   filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "photo")
       // });
 
       // Variable.PageLentavideo = await sendApi.send({
       //   action: "getPost", short: true, cache: true, name: "PageLentavideo", limit: 15,
-      //   filter: Helpers.getFilterLenta({}, "video")
+      //   filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "video")
       // });
 
       // Variable.PageLentaaudio = await sendApi.send({
       //   action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 15,
-      //   filter: Helpers.getFilterLenta({}, "audio")
+      //   filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "audio")
       // });
 
       // Variable.PageLentatext = await sendApi.send({
       //   action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 15,
-      //   filter: Helpers.getFilterLenta({}, "text")
+      //   filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "text")
       // });
 
     },
@@ -68,8 +70,31 @@ const start = function () {
                     <div class="news_category_filter" >
                       <img src={svg["filter"]} />
                     </div>
-                    <div class="alt_language_change" >
-                      {Variable.lang.lang_orig}
+                    <div
+                      class="alt_language_change"
+                      onclick={() => {
+                        Variable.SetModals({
+                          name: "ModalChangeLanguage", data: {
+                            onclick: async (langCode, langName, langOrig) => {
+                              Variable.Static.lentaFilters.langName = langOrig
+                              Variable.Static.lentaFilters.lang = langCode
+
+                              Variable[`PageLenta${Variable.Static.lentaPage}`] = await sendApi.send({
+                                action: "getPost",
+                                short: true,
+                                limit: 15,
+                                filter: Helpers.getFilterLenta(
+                                  Variable.Static.lentaFilters,
+                                  Variable.Static.lentaPage
+                                ),
+                              });
+
+                            }
+                          }
+                        })
+                      }}
+                    >
+                      {Variable.Static.lentaFilters.langName}
                     </div>
                   </div>
                 </div>
