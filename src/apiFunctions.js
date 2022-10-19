@@ -118,7 +118,6 @@ const sendNewCommentApi = async function (
   mainId,
   commentId
 ) {
-  console.log("=096bf2=", item, comment, typeSet, mainId, commentId);
 
   let data = {
     value: {
@@ -203,7 +202,6 @@ const sendNewCommentApi = async function (
   //   _id: Variable.Static.showNewsId,
   // };
   // }
-  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create(typeSet, data));
 
   // if (Variable.dataUrl.params === undefined) {
