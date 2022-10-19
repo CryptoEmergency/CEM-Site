@@ -225,12 +225,67 @@ const start = function () {
                                 </div>
                             </div>
                             <div>
-                                <h3 style="text-align: center">Мега Форум Crypto Emergency</h3>
-                                <h4 style="text-align: center">Время проведения:</h4>
-                                <h4 style="text-align: center">Место проведения:</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <h1 style="text-align: center; font-size: 50px">Форум «CRYPTO ЮГ 2022»</h1>
+                                <h3 style="text-align: center">16 - 17 декабря 2022г</h3>
+                                <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
+                                <h4 style="text-align: center; margin-bottom: 50px">Организатор – CRYPTO EMERGENCY</h4>
+                                <p style="font-size: 18px;">
+                                    Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div style="font-size: 18px;">
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Будут подняты такие темы как:
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Новички в крипто индустрии
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                         <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Достоверность информации
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Блокчейн
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Будущее крипто валюты в России?
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Майнинг
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Как пережить криптозиму?
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Какие тренды на рынке криптовалют?
+                                        </p>
+                                    </div>
+                                    <div style="font-size: 18px;">
+                                        <p>
+                                            На форуме будет представлено:
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 15 + проектов
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 500 + участников
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 10 + спикеров
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Выступление мэра города Кравченко Андрея Васильевича
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Крупные сми
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Фотозона
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Буфет, шампанское и многое другое.
+                                        </p>
+                                    </div>
+                                </div>
                                 <div class="swiper-container">
                                     <div class="swiper swiper-two" After={() => swiperTwo()}>
                                         <div class="swiper-wrapper">
@@ -284,6 +339,23 @@ const start = function () {
                                         <div class="swiper-scrollbar-two"></div>
                                     </div>
                                 </div>
+                                <div style="font-size: 18px; margin-top: 10px">
+                                    <p>
+                                        Отличная локация в центре города:
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 700кв метров;
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> в двух шагах черного моря и прекрасный парк;
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Новая современная набережная с больших количеством кафе, ресторанов и отелей;
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Билет для посетителей включает не только пропуск на форум, но и большой список привилегий в лучших ресторанах и отелях г. Новороссийск.
+                                    </p>
+                                </div>
                                 <a style="margin: 10px auto" class="с-preview__part">
                                     <span>Купить билет</span>
                                 </a>
@@ -293,18 +365,64 @@ const start = function () {
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
+                                <img style="width: 100%;" src={images['forum/forum_plan']} />
                                 <a style="margin: 10px auto" class="с-preview__part">
                                     <span>Стенд</span>
                                 </a>
                             </div>
                             <div>
-                                <h4 style="text-align: center">Спикеры</h4>
+                                <h4 style="text-align: center">Спикеры форума</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    Форум "Crypto ЮГ 2022" -  это отличное место для презентации своей компании и демонстрации своего проекта на берегу черного моря в отличной локации.
                                 </p>
-                                <div style="display: flex">
-                                    <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 3px">
-                                        <img style="height: 170px; width: 170px;border-radius: 50%" src={images['forum/forum_9']} />
+                                <p>
+                                    Воспользуйтесь данной возможностью, привлеките будущих клиентов и партнеров к своему проекту.
+                                </p>
+                                <p>
+                                    Как это сделать? Напишите нам и мы вам поможем!
+                                </p>
+                                <div style="display: flex; justify-content: space-between">
+                                    <div style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_1']} />
+                                        </div>
+                                        <p style="margin-top: 10px; margin-bottom: 5px">Ян Кривоносов</p>
+                                        <p>CEO проекта Crypto Emergency</p>
+                                    </div>
+                                    <div style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_2']} />
+                                        </div>
+                                        <p style="margin-top: 10px; margin-bottom: 5px">Дмитрий Белов</p>
+                                        <p>Управляющий директор  проекта Crypto Emergency</p>
+                                    </div>
+                                    <div style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_3']} />
+                                        </div>
+                                        <p style="margin-top: 10px; margin-bottom: 5px">Валерий Осипов</p>
+                                        <p>Основатель ArtEmotioChain (Проект learn2earn в сфере NFT)</p>
+                                    </div>
+                                    <div style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_4']} />
+                                        </div>
+                                        <p style="margin-top: 10px; margin-bottom: 5px">Ренат Калинченко</p>
+                                        <p>Криптоэнтузиаст, руководитель компании TUROV •INVEST</p>
+                                    </div>
+                                    <div style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_5']} />
+                                        </div>
+                                        <p style="margin-top: 10px; margin-bottom: 5px">Руслан Захаркин</p>
+                                        <p>крипто блогер</p>
+                                    </div>
+                                    <div style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_6']} />
+                                        </div>
+                                        <p style="margin-top: 10px; margin-bottom: 5px">Лев Пониманский</p>
+                                        <p>Профессионал в области криптовалюты и майнинга</p>
                                     </div>
                                 </div>
                                 <a style="margin: 10px auto" class="с-preview__part">
