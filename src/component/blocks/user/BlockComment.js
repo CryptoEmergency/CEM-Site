@@ -33,14 +33,14 @@ import {
 //   Variable.Static.answerAdditionallyShow = "";
 // }
 
-const BlockComment = function ({ item, index, mainId, commentId }) {
+const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
   let comId = item._id;
- let typeSet = "setNews"
+  let typeSet = "setNews"
   return (
     <div class="c-comments__usercomment">
       <Avatar
         author={item.author}
-         parent={"c-comments__avacomment"}
+        parent={"c-comments__avacomment"}
         nickName={item.author.nickname}
         dateShow={item.showDate}
       />
@@ -48,11 +48,11 @@ const BlockComment = function ({ item, index, mainId, commentId }) {
         data={Variable.Static.EditInput !== item._id}
         dataIf={
           <div class="c-comments__bodycomment">
-          <span class="c-comments__textcomment">
-            {stringToHtml(item.text)} 
+            <span class="c-comments__textcomment">
+              {stringToHtml(item.text)}
             </span>
-        </div>
-     
+          </div>
+
         }
       />
       <div class="c-comments__icons c-actioncomment">
@@ -65,6 +65,7 @@ const BlockComment = function ({ item, index, mainId, commentId }) {
               typeSet="setNews"
               mainId={mainId}
               commentId={commentId}
+              callBack={callBack}
             />
           }
           dataElse={
@@ -73,6 +74,7 @@ const BlockComment = function ({ item, index, mainId, commentId }) {
               typeGet="getComments"
               typeSet="setNews"
               mainId={mainId}
+              callBack={callBack}
             />
           }
         />
@@ -140,6 +142,7 @@ const BlockComment = function ({ item, index, mainId, commentId }) {
                     index={index}
                     mainId={mainId}
                     commentId={comId}
+                    callBack={callBack}
                   />
                 );
               }}

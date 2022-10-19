@@ -38,19 +38,19 @@ const wrapTextWithATag = (text) => {
   return res;
 };
 
-const sliceString = function (str,number = 66) {
+const sliceString = function (str, number = 66) {
   let sliceStr = '';
   if (str.length >= number) {
-      sliceStr = `${str.slice(0, number)} ...`;
+    sliceStr = `${str.slice(0, number)} ...`;
   } else {
-      sliceStr = str;
+    sliceStr = str;
   }
   return sliceStr;
 };
 
 const wrapTagToText = (text) => {
   let textTag = Helpers.sanitizeHtml(text, { allowedTags: ['p'] });
- 
+
   textTag = textTag.replace(new RegExp("</p><p>", 'gi'), "\n")
 
   textTag = textTag.replace(new RegExp("<p>", 'gi'), "").replace(new RegExp("</p>", 'gi'), "")
@@ -230,7 +230,7 @@ const changeActiveCommentsInput = (id) => {
 
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, commentId,) => {
+const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, commentId, callBack) => {
   e.preventDefault();
   let type = e.target.dataset.name;
   if (e.type === "mousedown" || e.type === "touchstart") {
@@ -255,6 +255,9 @@ const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, com
     clearInterval(interval);
     if (sec < 1000) {
       await changeStatistic(e, id, typeSet, mainId, commentId);
+      if (typeof callBack == "function") {
+        callBack();
+      }
       // if (Variable.dataUrl.params === undefined) {
       //   await renderModalFullNews();
       // }
