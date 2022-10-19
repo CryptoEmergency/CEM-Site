@@ -127,7 +127,7 @@ const sendNewCommentApi = async function (
     _id: mainId,
   };
 
-  if (typeSet == "setAnswer" && Variable.Static.EditInput.length > 0) {
+  if ((typeSet == "setAnswer" || typeSet == "setNews") && Variable.Static.EditInput.length > 0) {
     if (!commentId) {
       data.value = {
         comments: {

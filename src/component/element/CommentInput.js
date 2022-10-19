@@ -14,7 +14,8 @@ import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 
 
 
-const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit }) {
+const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit, callBack }) {
+ 
   let count = 1;
   let scrollHeight = 0;
   let commentText = Variable.setRef();
@@ -85,7 +86,13 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
       Variable.Static.activeInputId = "";
       Variable.Static.EditInput = "";
       commentText().value = "";
-      initGo();
+      console.log('=3340dd=',callBack,typeof callBack == "function" )
+      if (typeof callBack == "function") {
+        callBack();
+      }else{
+         initGo();
+      }
+     
     }
   };
 

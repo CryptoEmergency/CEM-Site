@@ -15,12 +15,6 @@ import {
 } from "@component/element/index.js";
 import { If, Map } from "@component/helpers/All.js";
 // import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCommentComment.js";
-import {
-  changeActiveCommentsInput,
-  showVotersAndchangeStatistic,
-  isEmpty,
-} from "@src/functions.js";
-
 // const showAnswerAdditionallyContainer = (id) => {
 //   Variable.Static.answerAdditionallyShow = id;
 //   console.log('=Variable.Static.answerAdditionally2=', Variable.Static.answerAdditionally)
@@ -35,7 +29,7 @@ import {
 
 const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
   let comId = item._id;
-  let typeSet = "setNews"
+  // let typeSet = "setNews"
   return (
     <div class="c-comments__usercomment">
       <Avatar
@@ -101,7 +95,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
         />
         <AnswerAdditionallyToggle
           item={item}
-          typeApi={"setAnswer"}
+          typeApi={"setNews"}
           type={{
             delete: true,
             edit: true,
@@ -111,6 +105,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
           }}
           commentId={commentId}
           mainId={mainId}
+          callBack ={callBack}
         />
       </div>
       <If
@@ -125,6 +120,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
             typeSet="setNews"
             mainId={mainId}
             commentId={commentId}
+            callBack ={callBack}
           />
         }
       />
