@@ -232,6 +232,7 @@ const start = function () {
                 <div class="users_news_categories">
 
                   <div
+
                     data-type="all"
                     class={['users_news_category']}
                     hidden={Variable.Static.lentaPage == "all"}
@@ -376,15 +377,17 @@ const start = function () {
                     data-touchend="userNewsSlideEnd"
                     class="bl_one bl_active"
                   >
-                    <div class="user_news_block" After={() => {
-                      swiperGo()
-                    }}>
+                    <div class="user_news_block"
+                    // After={() => {
+                    //   swiperGo()
+                    // }}
+                    >
                       <Map
                         data={Variable[`PageLenta${Variable.Static.lentaPage}`].list_records}
                         dataIf={
                           (item, index) => {
                             elem[index] = []
-                            return <BlockLentaUsers item={item} numIndex={index} elem={elem} />
+                            return <BlockLentaUsers totalFound={Variable[`PageLenta${Variable.Static.lentaPage}`].totalFound} item={item} numIndex={index} elem={elem} total={Variable[`PageLenta${Variable.Static.lentaPage}`].list_records.length} />
                           }
                         }
                       />

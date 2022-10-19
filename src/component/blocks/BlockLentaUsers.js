@@ -6,7 +6,9 @@ import {
   getStorage,
   getValue,
   stringToHtml,
-  Helpers
+  Helpers,
+  sendApi,
+  initReload
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
@@ -27,11 +29,31 @@ import { If, Map } from '@component/helpers/All.js';
 
 
 
-const BlockLentaUsers = function ({ item, numIndex, elem }) {
+const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
   let mainId = item._id
   return (
     <div
       class="user_news_item"
+      ElemVisible={total < totalFound && numIndex == (total - 2) ?
+        async () => {
+          console.log('=0c6881=', "Load more")
+          let tmp = await sendApi.send({
+            action: "getPost",
+            short: true,
+            limit: 15,
+            offset: total,
+            filter: Helpers.getFilterLenta(
+              {},
+              Variable.Static.lentaPage
+            ),
+          });
+
+          Variable[`PageLenta${Variable.Static.lentaPage}`].list_records.push(...tmp.list_records)
+          initReload()
+        }
+        :
+        false
+      }
       onClick={async () => {
         // let post;
         // post = await getPostsItemInShow(item._id);
@@ -55,9 +77,9 @@ const BlockLentaUsers = function ({ item, numIndex, elem }) {
               complainUser: true,
               blackList: true,
               subscription: true,
-              share:true,
+              share: true,
             }}
-            mainId = {mainId}
+            mainId={mainId}
           /></div>
         <div class="comment_body">
           <LentaMedia

@@ -21,7 +21,7 @@ const changeTextPost = (e) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
   let text = e.target.innerText.trim();
   formInputs.textInputs.value = wrapTextWithATag(text);
-  if (text || formInputs.mediaInputs.lenght > 0) {
+  if (text || formInputs.mediaInputs.length > 0) {
     formInputs.isValid = true;
   } else {
     formInputs.isValid = false;
@@ -214,7 +214,7 @@ const start = function () {
                 initReload();
               }}
               onclickPhoto={function () {
-                if (this.files.lenght == 0) {
+                if (this.files.length == 0) {
                   return;
                 }
 
@@ -258,7 +258,7 @@ const start = function () {
                 formInputs.isValid = true;
               }}
               onclickVideo={function () {
-                if (this.files.lenght == 0) {
+                if (this.files.length == 0) {
                   return;
                 }
                 uploadMedia(

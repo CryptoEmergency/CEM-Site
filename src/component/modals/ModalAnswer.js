@@ -104,7 +104,7 @@ const ModalAnswer = function (data, reload) {
             </div>
             <MediaButton
               onclickPhoto={function () {
-                if (this.files.lenght == 0) {
+                if (this.files.length == 0) {
                   return;
                 }
 
@@ -148,7 +148,7 @@ const ModalAnswer = function (data, reload) {
                 formInputs.isValid = true;
               }}
               onclickVideo={function () {
-                if (this.files.lenght == 0) {
+                if (this.files.length == 0) {
                   return;
                 }
                 uploadMedia(
