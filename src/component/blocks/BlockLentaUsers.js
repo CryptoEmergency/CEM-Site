@@ -28,28 +28,29 @@ import { If, Map } from "@component/helpers/All.js";
 
 const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
   let mainId = item._id;
-  console.log('=item=',item)
+  console.log('=item=', item)
   return (
     <div
       class="user_news_item"
-      ElemVisible={
-        total < totalFound && numIndex == total - 5
-          ? async () => {
-              console.log("=0c6881=", "Load more");
-              let tmp = await sendApi.send({
-                action: "getPost",
-                short: true,
-                limit: 15,
-                offset: total,
-                filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage),
-              });
+      ElemVisible={total < totalFound && numIndex == (total - 3) ?
+        async () => {
+          console.log('=0c6881=', "Load more")
+          let tmp = await sendApi.send({
+            action: "getPost",
+            short: true,
+            limit: 15,
+            offset: total,
+            filter: Helpers.getFilterLenta(
+              {},
+              Variable.Static.lentaPage
+            ),
+          });
 
-              Variable[
-                `PageLenta${Variable.Static.lentaPage}`
-              ].list_records.push(...tmp.list_records);
-              initReload();
-            }
-          : false
+          Variable[`PageLenta${Variable.Static.lentaPage}`].list_records.push(...tmp.list_records)
+          initReload()
+        }
+        :
+        false
       }
       onClick={async () => {
         // if (true) {
@@ -155,9 +156,9 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
           <span class="c-date">
             {item.updateTime
               ? `${Variable.lang.text.update} ${getDateFormat(
-                  item.updateTime,
-                  "lenta"
-                )}`
+                item.updateTime,
+                "lenta"
+              )}`
               : getDateFormat(item.showDate, "lenta")}
           </span>
           <div class="user_post_statistic_item">
