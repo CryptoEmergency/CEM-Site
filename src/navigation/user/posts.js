@@ -220,7 +220,172 @@ const start = function () {
 
                 Variable.SetModals({
                   name: "ModalCropImage",
-                  data: { file: this.files[0], typeUpload: 'post' },
+                  data: {
+                    file: this.files[0], typeUpload: 'post', uploadCropImage: async function (e, cropper) {
+                      if (e.currentTarget.disabled === true) {
+                        return false;
+                      }
+                      var canvas;
+
+                      const imageCrop = cropper.element;
+                      const aspectValue = cropper.options.aspectRatio;
+
+                      console.log('=9807cb=', cropper)
+                      console.log('=fd744e=', imageCrop, aspectValue)
+
+                      if (cropper) {
+                        canvas = cropper.getCroppedCanvas({
+                          // width: 166,
+                          // height: 166,
+                        });
+                        var previewSrc = canvas.toDataURL();
+
+                        await canvas.toBlob(function (blob) {
+                          // let uniqueID = Date.now();
+                          // var formData = new FormData();
+                          // formData.append('media', blob);
+                          // formData.append('media_id', uniqueID);
+
+                          // console.log('=ea800b=',formData.media)
+                          // console.log('=135a66=',formData.media_id)
+
+                          uploadMedia(
+                            blob,
+                            "posts",
+                            async function () {
+                              formInputs.mediaInputs.show = true;
+                              let tmp = JSON.parse(this.response);
+                              let type = tmp.mimetype.split("/")[0];
+                              let obj = { aspect: aspectValue, type, name: tmp.name };
+                              console.log('=9aad9a=',obj)
+                              formInputs.mediaInputs.value.push(obj);
+                              initReload();
+                            },
+                            async function (e) {
+                              let contentLength;
+                              if (e.lengthComputable) {
+                                contentLength = e.total;
+                              } else {
+                                contentLength = parseInt(
+                                  e.target.getResponseHeader(
+                                    "x-decompressed-content-length"
+                                  ),
+                                  10
+                                );
+                              }
+                              console.log(
+                                "=3c5fa7= ",
+                                "Загружено",
+                                e.loaded,
+                                "из",
+                                contentLength
+                              );
+                            }
+                          );
+
+                          let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
+                          let btns = document.querySelectorAll('#addCropImage .c-cropper__toggles input[hidden]');
+
+                          btns.forEach((element) => {
+                            element.setAttribute('disabled', 'disabled');
+                          });
+
+                          Variable.DelModals("ModalCropImage");
+
+                          // if (document.querySelector('.createPostImage[data-type=' + type + ']') == null) {
+                          //   const createPostImageEl = document.createElement('div');
+                          //   createPostImageEl.setAttribute("data-type", type);
+                          //   createPostImageEl.classList.add("create_post_chapter")
+                          //   createPostImageEl.classList.add("createPostImage");
+                          //   createPostImageEl.innerHTML = '';
+
+                          //   if (document.querySelector('.create_post_main_text[data-type=posts]') != null) {
+                          //     document.querySelector('.create_post_main_text[data-type=' + type + ']')
+                          //       .after('<div data-type="' + type + '" class="create_post_chapter createPostImage"></div>')
+                          //   } else if (document.querySelector('.create_post_title[data-type=' + type + ']') != null) {
+                          //     document.querySelector('.create_post_title[data-type=' + type + ']')
+                          //       .after('<div data-type="' + type + '" class="create_post_chapter createPostImage"></div>')
+                          //   } else {
+                          //     document.querySelector('.create_post_container[data-type=' + type + ']')
+                          //       .append(createPostImageEl)
+                          //   }
+                          // }
+
+                          // //   xhr.push(new XMLHttpRequest())
+                          // const createPostPhotoPreviewEl = document.createElement('div');
+                          // createPostPhotoPreviewEl.classList.add("create_post_photo_preview")
+                          // createPostPhotoPreviewEl.classList.add("create_post_photo_loading");
+                          // createPostPhotoPreviewEl.innerHTML = `
+                          //                 <img id="${uniqueID}" class="fullsize media" src="${previewSrc}" data-aspect="${aspectValue}" data-type="${blob.type}">
+                          //                 <div class="circle-wrap">
+                          //                     <div class="circle">
+                          //                         <div class="mask full">
+                          //                             <div class="fill"></div>
+                          //                         </div>
+                          //                         <div class="mask half">
+                          //                             <div class="fill"></div>
+                          //                         </div>
+                          //                     </div>
+                          //                 </div>
+                          //                 <div class="stop_loading" data-action="stopLoading" data-type="${type}" data-arraypos=' + xhr.length + ' data-id="${uniqueID}"></div>
+                          //                 <div data-type="${type}" class="delete_post_media" data-action="deletePostMedia" data-id="${uniqueID}">
+                          //                     <img src="${svg['delete_icon']}">
+                          //                 </div>
+                          //         `;
+
+                          // document.querySelector('.createPostImage[data-type=' + type + ']')
+                          //   .append(createPostPhotoPreviewEl)
+                          //   xhr[xhr.length - 1].open('POST', '/upload/' + type + '/')
+                          //   xhr[xhr.length - 1].onload = function () {
+                          // ONLOAD
+
+                          // $('#' + uniqueID).attr('data-type', JSON.parse(this.response).mimetype)
+                          // $('#' + uniqueID).attr('data-name', JSON.parse(this.response).name)
+
+                          // const aspect = $('#addCropImage .crop-container').find('[name="aspectRatio"]:checked').val();
+                          // $('#' + uniqueID).attr('data-aspect', aspect);
+
+                          // $('#' + uniqueID).parent().removeClass('create_post_photo_loading')
+                          // $('#' + uniqueID).parent().find('.circle-wrap').remove()
+                          // $('#' + uniqueID).parent().find('.stop_loading').remove()
+                          // $('#' + uniqueID).parent().find('.delete_post_media').css('display', 'block')
+                          // if (this.responseURL.split('/')[this.responseURL.split('/').length - 2] == 'question') {
+                          //   if ($('.create_post_title[data-type=' + this.responseURL.split('/')[this.responseURL.split('/').length - 2] + ']').text().trim().length != 0) {
+                          //     $('.button-container-preview[data-type=' + this.responseURL.split('/')[this.responseURL.split('/').length - 2] + ']').removeClass('inactive_form_button')
+                          //     $('.button-container-preview[data-type=' + this.responseURL.split('/')[this.responseURL.split('/').length - 2] + ']').attr('data-active', '1')
+                          //   }
+                          // } else {
+                          //   $('.button-container-preview[data-type=' + this.responseURL.split('/')[this.responseURL.split('/').length - 2] + ']').removeClass('inactive_form_button')
+                          //   $('.button-container-preview[data-type=' + this.responseURL.split('/')[this.responseURL.split('/').length - 2] + ']').attr('data-active', '1')
+                          // }
+                          //   }
+                          //   xhr[xhr.length - 1].upload.onprogress = function (event) {
+                          // ONPROGRESS
+
+                          // var contentLength;
+                          // if (event.lengthComputable) {
+                          //   contentLength = event.total
+                          // } else {
+                          //   contentLength = parseInt(event.target.getResponseHeader('x-decompressed-content-length'), 10)
+                          // }
+                          // $('#' + uniqueID).parent().find('.full').css('transform', 'rotate(' + ((360 / 200) * Number(String(((event.loaded / contentLength) * 100)).split('.')[0])) + 'deg)')
+                          // $('#' + uniqueID).parent().find('.fill').css('transform', 'rotate(' + ((360 / 200) * Number(String(((event.loaded / contentLength) * 100)).split('.')[0])) + 'deg)')
+                          //   };
+
+                          /** clear crop */
+                          if (typeof cropper !== "undefined") {
+                            console.log('cropper.destroy');
+                            cropper.destroy();
+                            cropper = null;
+                          }
+
+                          imageCrop.setAttribute('src', '');
+                          //   fileCropBtn.attr('style', 'background: none;');
+                          //   xhr[xhr.length - 1].send(formData)
+                        });
+                      }
+                    }
+                  },
                 });
 
                 // uploadMedia(
@@ -307,7 +472,7 @@ const start = function () {
             //     }
             // }
             />
-            <div>
+            < div >
               <input data-type="posts" hidden class="createPostImageInput" type="file" accept=".jpg,.jpeg,.png,.gif" />
             </div>
             <div>
@@ -538,8 +703,8 @@ const start = function () {
                 }
               </div>
             </div>
-          </form>
-        </div>
+          </form >
+        </div >
       );
     }
   );
