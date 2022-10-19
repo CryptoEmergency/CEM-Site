@@ -16,3 +16,4 @@ export { Swiper } from "./Swiper.js";
 export { QuestionAnswerItem } from "./QuestionAnswerItem.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
+export { SwitchLenta } from "./SwitchLenta.js";
