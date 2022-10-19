@@ -68,7 +68,17 @@ const BlockNewsShow = function ({ item, type }) {
       </div>
       <div class="news_page_comments">
         <h2>{Variable.lang.h.modal_comment}</h2>
-        <CommentInput item={item} />
+
+        <If
+        data={
+          Variable.Static.activeInputId.length === 0 &&
+          Variable.Static.EditInput.length === 0 
+        }
+        dataIf ={
+           <CommentInput item={item} typeSet="setNews" callBack={getItem} />
+        }
+        />
+       
         <If
           data={item.comments.length > 0}
           dataIf={

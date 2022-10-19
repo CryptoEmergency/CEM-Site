@@ -127,7 +127,11 @@ const sendNewCommentApi = async function (
     _id: mainId,
   };
 
-  if ((typeSet == "setAnswer" || typeSet == "setNews") && Variable.Static.EditInput.length > 0) {
+  if (item.image ) {
+    data.value.comments = { text: comment };
+    data._id = item._id
+  }
+  else if ((typeSet == "setAnswer" || typeSet == "setNews") && Variable.Static.EditInput.length > 0) {
     if (!commentId) {
       data.value = {
         comments: {

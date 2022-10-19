@@ -13,9 +13,9 @@ import {
 } from "@component/element/index.js";
 
 Variable.Static.activeInputId = "";
-// Variable.Static.activeEditInputId = "";
 Variable.Static.answerAdditionally ="";
 Variable.Static.EditInput = "";
+
 const QuestionAnswerItem = function ({ item, index }) {
   let mainId = item._id;
 

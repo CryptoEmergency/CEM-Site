@@ -71,6 +71,7 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
     }
   };
   const sendNewComment = async () => {
+    console.log('=234ee6=',commentText())
     let text = wrapTextWithATag(commentText().value.trim());
     let response;
     if (text.length > 0) {
