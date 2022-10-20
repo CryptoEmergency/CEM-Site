@@ -69,7 +69,7 @@ const sendPost = async (e) => {
 
 const deleteMediaFile = function (index) {
   formInputs.mediaInputs.value.splice(index, 1);
-  if(formInputs.mediaInputs.value.length == 0) {
+  if (formInputs.mediaInputs.value.length == 0) {
     selectAspect = null;
   }
 };
@@ -206,7 +206,7 @@ const start = function () {
                               class="fullsize media"
                               src={`/assets/upload/posts/${item.name}`}
                             />
-                            <div class="delete_post_media" style="display: block;" onClick={() => {deleteMediaFile(index); initReload() }}>
+                            <div class="delete_post_media" style="display: block;" onClick={() => { deleteMediaFile(index); initReload() }}>
                               <img src={svg["delete_icon"]} />
                             </div>
                           </div>
@@ -456,120 +456,124 @@ const start = function () {
                         <div class="main_comment" data-link={post._id}>
                           <Avatar author={post.author} nickName={post.author.nickname} />
 
-                          <div class="comment_body">
-                            {
-                              post.media.length > 0 ?
-                                <div>
-                                  <If
-                                    data={arrayLengthOne(post.media)}
-                                    dataIf={
-                                      <div class="swiper-container">
-                                        <div class="swiper swiper-post_media">
-                                          <div class="swiper-wrapper">
-                                            {
-                                              post.media.map(function (mediafile, i) {
+                          {/* <div class="comment_body"> */}
+                          {
+                            post.media.length > 0 ?
+                              <div class="comment_body">
+                                <If
+                                  data={arrayLengthOne(post.media)}
+                                  dataIf={
+                                    <div class="swiper-container">
+                                      <div class="swiper swiper-post_media">
+                                        <div class="swiper-wrapper">
+                                          {
+                                            post.media.map(function (mediafile, i) {
 
-                                                return (
-                                                  <If
-                                                    data={mediafile.type != "audio"}
-                                                    dataIf={
-                                                      <a class="swiper-slide">
-                                                        {
-                                                          mediafile.type == "image" ?
-                                                            <div class="swiper-post_media_image_container">
-                                                              <img src={`/assets/upload/posts/${mediafile.name}`} />
-                                                            </div>
+                                              return (
+                                                <If
+                                                  data={mediafile.type != "audio"}
+                                                  dataIf={
+                                                    <a class="swiper-slide">
+                                                      {
+                                                        mediafile.type == "image" ?
+                                                          <div class="swiper-post_media_image_container">
+                                                            <img src={`/assets/upload/posts/${mediafile.name}`} />
+                                                          </div>
+                                                          :
+                                                          mediafile.type == "video" ?
+                                                            {/* {{>videoPlayer src=name path="/assets/upload/posts/"}} */ }
                                                             :
-                                                            mediafile.type == "video" ?
-                                                              {/* {{>videoPlayer src=name path="/assets/upload/posts/"}} */ }
-                                                              :
-                                                              <></>
-                                                        }
-                                                      </a>
-                                                    }
-                                                  />
-                                                )
-                                              })
-                                            }
+                                                            <></>
+                                                      }
+                                                    </a>
+                                                  }
+                                                />
+                                              )
+                                            })
+                                          }
 
-                                          </div>
-                                          <div class="swiper-pagination swiper-pagination-post_media"></div>
-                                          <div class="swiper-scrollbar-post_media"></div>
                                         </div>
+                                        <div class="swiper-pagination swiper-pagination-post_media"></div>
+                                        <div class="swiper-scrollbar-post_media"></div>
+                                      </div>
+                                    </div>
+                                  }
+                                  dataElse={
+                                    <If
+                                      data={post.media[0].type != "audio"}
+                                      dataIf={
+                                        <a class="swiper-slide">
+                                          {
+                                            post.media[0].type == "image" ?
+                                              <div class="swiper-post_media_image_container">
+                                                <img src={`/assets/upload/posts/${post.media[0].name}`} />
+                                              </div>
+                                              :
+                                              post.media[0].type == "video" ?
+                                                {/* {{>videoPlayer src=name path="/assets/upload/posts/"}} */ }
+                                                :
+                                                <></>
+                                          }
+                                        </a>
+                                      }
+                                    />
+                                  }
+                                />
+                                <div class="post_audio_container">
+                                  <If
+                                    data={audioCountCheck(post.media) == true}
+                                    dataIf={
+                                      <div>
+                                        {
+                                          post.text ?
+                                            post.media.map(function (mediafile, i) {
+
+                                              return (
+                                                <div>
+                                                  {
+                                                    mediafile.type == "audio" ?
+                                                      <div></div>/* audioPlayer src=name path="/assets/upload/posts/" */
+                                                      :
+                                                      <></>
+                                                  }
+                                                </div>
+                                              )
+                                            })
+                                            :
+                                            <div class="user_post_text_background">
+                                              {/* {{#arrayWhile media}} */}
+                                              {/* {{#is type "audio"}} */}
+                                              {/* {{>audioPlayer src=name path="/assets/upload/posts/"}} */}
+                                              {/* {{/is}} */}
+                                              {/* {{/arrayWhile}} */}
+                                            </div>
+                                        }
                                       </div>
                                     }
                                     dataElse={
-                                      <If
-                                        data={post.media[0].type != "audio"}
-                                        dataIf={
-                                          <a class="swiper-slide">
-                                            {
-                                              post.media[0].type == "image" ?
-                                                <div class="swiper-post_media_image_container">
-                                                  <img src={`/assets/upload/posts/${post.media[0].name}`} />
-                                                </div>
-                                                :
-                                                post.media[0].type == "video" ?
-                                                  {/* {{>videoPlayer src=name path="/assets/upload/posts/"}} */ }
-                                                  :
-                                                  <></>
-                                            }
-                                          </a>
-                                        }
-                                      />
+                                      // {{#arrayWhile media}}
+                                      // {{#is type "audio"}}
+                                      {/* {{>audioPlayer src=name path="/assets/upload/posts/"}} */ }
+                                      // {{/is}}
+                                      // {{/arrayWhile}}
                                     }
                                   />
-                                  <div class="post_audio_container">
-                                    <If
-                                      data={audioCountCheck(post.media) == true}
-                                      dataIf={
-                                        <div>
-                                          {
-                                            post.text ?
-                                              post.media.map(function (mediafile, i) {
-
-                                                return (
-                                                  <div>
-                                                    {
-                                                      mediafile.type == "audio" ?
-                                                        <div></div>/* audioPlayer src=name path="/assets/upload/posts/" */
-                                                        :
-                                                        <></>
-                                                    }
-                                                  </div>
-                                                )
-                                              })
-                                              :
-                                              <div class="user_post_text_background">
-                                                {/* {{#arrayWhile media}} */}
-                                                {/* {{#is type "audio"}} */}
-                                                {/* {{>audioPlayer src=name path="/assets/upload/posts/"}} */}
-                                                {/* {{/is}} */}
-                                                {/* {{/arrayWhile}} */}
-                                              </div>
-                                          }
-                                        </div>
-                                      }
-                                      dataElse={
-                                        // {{#arrayWhile media}}
-                                        // {{#is type "audio"}}
-                                        {/* {{>audioPlayer src=name path="/assets/upload/posts/"}} */ }
-                                        // {{/is}}
-                                        // {{/arrayWhile}}
-                                      }
-                                    />
-                                  </div>
-                                  <span class="comment_text">{Helpers.clearText(post.text)}</span>
                                 </div>
-                                :
-                                textLengthCheck(post.text) == true ?
+                                <span class="comment_text">{Helpers.clearText(post.text)}</span>
+                              </div>
+                              :
+                              textLengthCheck(post.text) == true ?
+                                <div class="comment_body">
                                   <div class="user_post_text_background">
                                     <span class="comment_text">{Helpers.clearText(post.text)}</span>
                                   </div>
-                                  :
+                                </div>
+                                :
+                                <div class="comment_body">
                                   <span class="comment_text">{Helpers.clearText(post.text)}</span>
-                            }
-                          </div>
+                                </div>
+                          }
+                          {/* </div> */}
 
                           <div class="comment_icons">
                             {/* <AnswerAdditionallyToggle item={post} typeApi={"setAnswer"} type={
