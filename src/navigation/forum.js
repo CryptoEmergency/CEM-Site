@@ -15,6 +15,7 @@ import images from "@assets/images/index.js";
 import { If, Map } from '@component/helpers/All.js';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import { Jivo } from '@component/element/index.js';
   
   
 const start = function () {
@@ -36,7 +37,7 @@ const start = function () {
                 shadowOffset: 20,
                 shadowScale: 0.94,
             },
-            loop: false,
+            loop: true,
             autoplay: {
                 delay: 3000,
             },
@@ -66,7 +67,7 @@ const start = function () {
                   translate: ["100%", 0, 0],
                 },
             },
-            loop: false,
+            loop: true,
             autoplay: {
                 delay: 3000,
             },
@@ -94,7 +95,7 @@ const start = function () {
                             <div class="swiper-container">
                                 <div class="swiper swiper-post_media" After={() => swiperGo()}>
                                     <div class="swiper-wrapper">
-                                    <a class="swiper-slide">
+                                            <a class="swiper-slide">
                                                 <div class="swiper-post_media_image_container">
                                                     <img style="height: 400px; border-radius: 4px" src={images['forum/forum_1']} />
                                                 </div>
@@ -234,29 +235,29 @@ const start = function () {
                                 </p>
                                 <div style="display: flex; justify-content: space-between;">
                                     <div style="font-size: 18px;">
-                                        <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Будут подняты такие темы как:
+                                        <p style="align-items: center;">
+                                            Будут подняты такие темы как:
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Новички в крипто индустрии
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Новички в крипто индустрии
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                         <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Достоверность информации
+                                         <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Достоверность информации
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Блокчейн
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Блокчейн
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Будущее крипто валюты в России?
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Будущее крипто валюты в России?
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Майнинг
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Майнинг
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Как пережить криптозиму?
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Как пережить криптозиму?
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Какие тренды на рынке криптовалют?
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Какие тренды на рынке криптовалют?
                                         </p>
                                     </div>
                                     <div style="font-size: 18px;">
@@ -264,29 +265,29 @@ const start = function () {
                                             На форуме будет представлено:
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 15 + проектов
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 25+ проектов
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 500 + участников
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 500+ участников
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 10 + спикеров
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 15+ спикеров
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Выступление мэра города Кравченко Андрея Васильевича
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Выступление мэра города Кравченко Андрея Васильевича
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Крупные сми
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Крупные сми
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Фотозона
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Фотозона
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Буфет, шампанское и многое другое.
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Буфет, шампанское и многое другое.
                                         </p>
                                     </div>
                                 </div>
-                                <div class="swiper-container">
+                                <div style="margin: 35px 0" class="swiper-container">
                                     <div class="swiper swiper-two" After={() => swiperTwo()}>
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide">
@@ -344,34 +345,24 @@ const start = function () {
                                         Отличная локация в центре города:
                                     </p>
                                     <p style="display: flex; align-items: center;">
-                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> 700кв метров;
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 800кв метров;
                                     </p>
                                     <p style="display: flex; align-items: center;">
-                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> в двух шагах черного моря и прекрасный парк;
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> в двух шагах черного моря и прекрасный парк;
                                     </p>
                                     <p style="display: flex; align-items: center;">
-                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Новая современная набережная с больших количеством кафе, ресторанов и отелей;
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Новая современная набережная с больших количеством кафе, ресторанов и отелей;
                                     </p>
                                     <p style="display: flex; align-items: center;">
-                                        <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 6px"></span> Билет для посетителей включает не только пропуск на форум, но и большой список привилегий в лучших ресторанах и отелях г. Новороссийск.
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Билет для посетителей включает не только пропуск на форум, но и большой список привилегий в лучших ресторанах и отелях г. Новороссийск.
                                     </p>
                                 </div>
-                                <a style="margin: 10px auto" class="с-preview__part">
+                                <a style="margin: 40px auto" class="с-preview__part">
                                     <span>Купить билет</span>
                                 </a>
                             </div>
                             <div>
-                                <h4 style="text-align: center">Стенды</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </p>
-                                <img style="width: 100%;" src={images['forum/forum_plan']} />
-                                <a style="margin: 10px auto" class="с-preview__part">
-                                    <span>Стенд</span>
-                                </a>
-                            </div>
-                            <div>
-                                <h4 style="text-align: center">Спикеры форума</h4>
+                                <h4 style="text-align: center; margin: 25px 0;">Стенды</h4>
                                 <p>
                                     Форум "Crypto ЮГ 2022" -  это отличное место для презентации своей компании и демонстрации своего проекта на берегу черного моря в отличной локации.
                                 </p>
@@ -381,59 +372,172 @@ const start = function () {
                                 <p>
                                     Как это сделать? Напишите нам и мы вам поможем!
                                 </p>
-                                <div style="display: flex; justify-content: space-between">
-                                    <div style="text-align: center">
+
+                                <img class="forum_plan" src={images['forum/forum_plan']} />
+                                <a
+                                    style="margin: 50px auto" 
+                                    class="с-preview__part"
+                                    onclick={(e) => {
+                                        Variable.SetModals({ name: "ModalForumMessage", data: {} })
+                                        e.stopPropagation();
+                                    }}
+                                 >
+                                    <span>Стенд</span>
+                                </a>
+                            </div>
+                            <div>
+                                <h4 style="text-align: center; margin-bottom: 40px">Спикеры форума</h4>
+                                <div class="speakers_block">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_1']} />
                                         </div>
-                                        <p style="margin-top: 10px; margin-bottom: 5px">Ян Кривоносов</p>
-                                        <p>CEO проекта Crypto Emergency</p>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Ян Кривоносов</p>
+                                            <p>CEO проекта Crypto Emergency</p>
+                                        </div>
                                     </div>
-                                    <div style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_2']} />
                                         </div>
-                                        <p style="margin-top: 10px; margin-bottom: 5px">Дмитрий Белов</p>
-                                        <p>Управляющий директор  проекта Crypto Emergency</p>
-                                    </div>
-                                    <div style="text-align: center">
-                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_3']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Дмитрий Белов</p>
+                                            <p>Управляющий директор  проекта Crypto Emergency</p>
                                         </div>
-                                        <p style="margin-top: 10px; margin-bottom: 5px">Валерий Осипов</p>
-                                        <p>Основатель ArtEmotioChain (Проект learn2earn в сфере NFT)</p>
                                     </div>
-                                    <div style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_4']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_7']} />
                                         </div>
-                                        <p style="margin-top: 10px; margin-bottom: 5px">Ренат Калинченко</p>
-                                        <p>Криптоэнтузиаст, руководитель компании TUROV •INVEST</p>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Алексей Зюзин</p>
+                                            <p>CEO Crypto Holding, IT-эксперт, инвестор</p>
+                                        </div>
                                     </div>
-                                    <div style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_5']} />
                                         </div>
-                                        <p style="margin-top: 10px; margin-bottom: 5px">Руслан Захаркин</p>
-                                        <p>крипто блогер</p>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Руслан Захаркин</p>
+                                            <p>крипто блогер</p>
+                                        </div>
                                     </div>
-                                    <div style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_3']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Валерий Осипов</p>
+                                            <p>Основатель ArtEmotioChain (Проект learn2earn в сфере NFT)</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_4']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Ренат Калинченко</p>
+                                            <p>Криптоэнтузиаст, руководитель компании TUROV •INVEST</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_6']} />
                                         </div>
-                                        <p style="margin-top: 10px; margin-bottom: 5px">Лев Пониманский</p>
-                                        <p>Профессионал в области криптовалюты и майнинга</p>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Лев Пониманский</p>
+                                            <p>Профессионал в области криптовалюты и майнинга</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_8']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Mr. Sailer</p>
+                                            <p>Автор канала Мистер Сайлер</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
                                     </div>
                                 </div>
-                                <a style="margin: 10px auto" class="с-preview__part">
+                                <a
+                                    style="margin: 40px auto" 
+                                    class="с-preview__part"
+                                    onclick={(e) => {
+                                        Variable.SetModals({ name: "ModalForumMessage", data: {} })
+                                        e.stopPropagation();
+                                    }}
+                                >
                                     <span>Стать спикером</span>
                                 </a>
                             </div>
-                            <BlockInfoPartners
-                                limit={8}
-                            />
+                            <div>
+                                <h4 style="text-align: center; margin-bottom: 40px">Партнеры</h4>
+                                <div data-mainpage="true" class="c-infopartners__list partners_container">
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cryptoholding.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_1"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.instagram.com/abrau1870/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_2"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.instagram.com/barycoffee.nvr/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_3"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://hotel-capital.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_4"]} />
+                                    </a>
+                                    <a style="display: block!important"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://seeyour.info/vizhu.more.rest"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_5"]} />
+                                    </a>
+                                    <a style="display: block!important"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://hginov.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_6"]} />
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <Jivo />
                 </div>
             )
         }
