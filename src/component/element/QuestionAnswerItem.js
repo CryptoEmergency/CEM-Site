@@ -10,15 +10,18 @@ import {
   QuestionAnswerItemComment,
   CommentInput,
   AnswerAdditionallyToggle,
+  LentaMedia
 } from "@component/element/index.js";
 
 Variable.Static.activeInputId = "";
 Variable.Static.answerAdditionally ="";
 Variable.Static.EditInput = "";
-
+let elem = [];
 const QuestionAnswerItem = function ({ item, index }) {
+  console.log('=item=',item)
   let mainId = item._id;
-
+  elem = [];
+  elem[0] = [];
   return (
     <div
       style={[item.best ? "order: -1; border-color: #00E741" : null]}
@@ -33,12 +36,18 @@ const QuestionAnswerItem = function ({ item, index }) {
         <div class="comment_body">
           <span class="comment_text">{Helpers.clearText(item.text)}</span>
           {/* Media element */}
-
+          <LentaMedia
+        items={item.media}
+        numIndex={0}
+        elem={elem}
+        path={"/assets/upload/answers/"}
+      />
           <If
             data={Variable.auth && Variable.Static.activeInputId !== item._id}
             dataIf={
               <span
                 class="answer_comment_button"
+                style = {item.media.length >0 && "margin: 40px 0 0 0;"}
                 onclick={() => {
                   Variable.Static.activeInputId = item._id;
                   Variable.Static.answerAdditionally ="";

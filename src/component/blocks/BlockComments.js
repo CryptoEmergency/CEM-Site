@@ -21,7 +21,6 @@ import {
 
 const showAnswerAdditionallyContainer = (id) => {
   Variable.Static.answerAdditionallyShow = id;
-  console.log('=Variable.Static.answerAdditionally2=', Variable.Static.answerAdditionally)
   initReload()
 }
 
@@ -34,8 +33,6 @@ const closeAnswerAdditionally = (e) => {
 const BlockComments = function ({ comments }) {
   let myInfo = Variable.myInfo;
   let auth = Variable.auth;
-  console.log('=bc42e2=', comments, Variable)
-  // console.log('=d0Variable.Static.answerAdditionallyeece1=',Variable.Static.answerAdditionally)
   return comments.map((item, i) => {
     return (
       <div data-comment_comment={item._id} class="c-comments__usercomment">{/* main_comment userComment */}
