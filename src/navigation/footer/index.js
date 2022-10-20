@@ -367,10 +367,8 @@ const mainFooter = async function () {
                                             <img src={svg.user_news_page} />
                                         </a>
                                         <a
-                                            onclick={(e) => {
-                                                Variable.SetModals({ name: "ModalAuth", data: {} })
-                                                e.stopPropagation();
-                                            }}
+                                            href="/user/posts/"
+                                            onclick={siteLink}
                                             class="c-userpanel__icon c-userpanel__icon--mobile_visible"
                                         >
                                             <img src={svg.plus_in_circle} />
