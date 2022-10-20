@@ -39,7 +39,10 @@ const ModalDelComment = function (data, reload) {
               }
                else if(typeof data.callBack == "function"){
                   data.callBack();
-              }}
+              }}else if(typeof data.callBack == "function"){
+            
+                  data.callBack();
+              }
               else{
                 initReload();
               }

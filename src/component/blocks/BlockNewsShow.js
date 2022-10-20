@@ -16,7 +16,7 @@ const BlockNewsShow = function ({ item, type }) {
 
 
   const getItem = async function () {
-    let tmp = await sendApi.send({ action: "getPost", short: true, filter: { _id: item._id }, limit: 1 });
+    let tmp = await sendApi.send({ action: "getNews", short: true, filter: { _id: item._id }, limit: 1 });
     if (tmp.list_records.length) {
       Variable.Modals.map((item, index) => {
         if (item.name == "ModalFullSize") {
