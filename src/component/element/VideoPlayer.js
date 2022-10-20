@@ -19,8 +19,8 @@ const VideoPlayer = function ({ item, numIndex, index, path, elem }) {
     return (
 
         <div class="video_container"
-            onclick={() => {
-                // console.log('=52cb0d=', elem[numIndex][index]().paused)
+            onclick={(e) => {
+                e.stopPropagation();
                 if (elem[numIndex][index]().paused) {
                     elem[numIndex][index]().play()
                 } else {
@@ -41,11 +41,13 @@ const VideoPlayer = function ({ item, numIndex, index, path, elem }) {
 
             <div class="controls">
                 <img src={svg["player_play"]} class="playpause paused"
-                    onclick={() => {
-                        console.log('=437f84=', elem, numIndex, index)
-                        console.log('=920446=', elem[numIndex][index], elem[numIndex][index]())
-                        // console.log('=24e535=', elem[numIndex][index]().paused)
-                        elem[numIndex][index]().play()
+                    onclick={(e) => {
+                        e.stopPropagation();
+                        if (elem[numIndex][index]().paused) {
+                            elem[numIndex][index]().play()
+                        } else {
+                            elem[numIndex][index]().pause()
+                        }
                     }}
                 //  onclick="controlPlaypause(event, this)"
                 />
