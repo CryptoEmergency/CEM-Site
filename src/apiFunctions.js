@@ -19,11 +19,8 @@ const changeStatistic = async function (
   subcommentId
 ) {
 
-  console.log('=7d2ace=',commentId,
-  type,mainId)
   let data;
   if ((type === "setAnswer" || type === "setPost" ) && !mainId) {
-    console.log('=1=')
      data = {
       value: {
         evaluation: e.target.dataset.name,
@@ -31,7 +28,6 @@ const changeStatistic = async function (
       _id: commentId,
     };
   } else if (!subcommentId) {
-    console.log('=2=')
     data = {
       value: {
         comments: {
@@ -63,7 +59,6 @@ const changeStatistic = async function (
     //     data.value.comments.evaluation = e.target.dataset.name;
     //   }
   }
-  console.log('=datadatadatadata=',data)
   let response = checkAnswerApi(await sendApi.create(type, data));
   // initReload();
   if (Variable.dataUrl.params !== undefined) {
@@ -77,7 +72,7 @@ const changeStatistic = async function (
   }
 };
 
-const changeSubscription = async (id,type) => {
+const changeSubscription = async (id,type ,callBack) => {
   let data = {
     value: {
       subscribed: id
@@ -85,14 +80,16 @@ const changeSubscription = async (id,type) => {
   };
   let response = checkAnswerApi(await sendApi.create(type, data));
  Variable.Static.answerAdditionally = "";
+ 
     Variable[`PageLenta${ Variable.Static.lentaPage}`] = await sendApi.send({
       action: "getPost", short: true, cache: true, name: `PageLenta${ Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
     });
-  
+  if (typeof callBack == "function") {
+  callBack();
+}
 }
 
 const showVotersApi = async (id, type) => {
-  console.log("=id=", id);
   let data = {
     filter: {
       _id: id,
@@ -118,7 +115,6 @@ const sendNewCommentApi = async function (
   mainId,
   commentId
 ) {
-
   let data = {
     value: {
       comments: {},
@@ -126,11 +122,12 @@ const sendNewCommentApi = async function (
     _id: mainId,
   };
 
-  if (item.image ) {
+
+  if (item.media) {
     data.value.comments = { text: comment };
     data._id = item._id
   }
-  else if ((typeSet == "setAnswer" || typeSet == "setNews") && Variable.Static.EditInput.length > 0) {
+  else if ( Variable.Static.EditInput.length > 0) {
     if (!commentId) {
       data.value = {
         comments: {
@@ -146,7 +143,7 @@ const sendNewCommentApi = async function (
         },
       };
     }
-  } else if (!commentId && typeSet == "setAnswer" && mainId === item._id) {
+  } else if (!commentId &&( typeSet == "setAnswer" || typeSet == "setNews" ) && mainId === item._id) {
     data.value.comments = { text: comment };
   } else if (!commentId) {
     data.value.comments = {
@@ -274,7 +271,6 @@ const getQuestionItemInShow = async function (id) {
   };
 
   let response = checkAnswerApi(await sendApi.create("getQuestions", data));
-  console.log("=df5226=", response);
   return response;
 };
 

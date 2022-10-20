@@ -15,7 +15,7 @@ import { If } from '@component/helpers/All.js';
 let optionsSelect, showFilter
 
 const BlockQuestions = function ({ version, callBack, button, filters, items }) {
-    
+
     initOne(
         async () => {
 
@@ -78,13 +78,13 @@ const BlockQuestions = function ({ version, callBack, button, filters, items }) 
                     <div
                         class="mobile_search_container"
                         onclick={() => {
-                            if(Variable.auth){
+                            if (Variable.auth) {
                                 Variable.SetModals({ name: "ModalAskQuestion", data: {} })
                             }
-                            else{
+                            else {
                                 Variable.SetModals({ name: "ModalNeedAuth", data: {} })
                             }
-                            
+
                         }}
                     >
                         <div class="search-button" style="width:238px;">

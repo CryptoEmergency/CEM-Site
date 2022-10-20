@@ -74,6 +74,10 @@ const mainFooter = async function () {
             if (Variable.FooterShow) {
                 return (
                     <div class={`c-footer__container c-container ${Variable.auth ? "c-footer__container--panel" : ""}`}>
+
+
+
+
                         <div class="c-footer__nav" id="accordionFooter">
                             <div class="c-footer__accordion c-accordion">
                                 <span class="c-accordion__header" id="headingOne">
@@ -349,7 +353,7 @@ const mainFooter = async function () {
                                             <img src={svg["mini_logo"]} />
                                         </a>
                                         <a
-                                            class={`c-userpanel__icon c-userpanel__icon--only_mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
                                             href="/user/"
                                             onclick={siteLink}
                                         >
@@ -363,6 +367,7 @@ const mainFooter = async function () {
                                             <img src={svg.user_news_page} />
                                         </a>
                                         <a
+                                            href="/user/posts/"
                                             onclick={siteLink}
                                             class="c-userpanel__icon c-userpanel__icon--mobile_visible"
                                         >
@@ -384,11 +389,101 @@ const mainFooter = async function () {
                                         </a>
                                         <a
                                             onclick={siteLink}
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "wallet") ? "c-userpanel__icon--active" : ""}`}
-                                            href="/user/wallet/"
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "list-trade") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/list-trade/"
                                         >
-                                            <img src={svg.absolutely_new_wallet} />
+                                            <img src={svg.exchange_menu_icon} />
                                         </a>
+                                        {/* <a
+                                            onClick={
+                                                (e) => {
+                                                    Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
+                                                    e.stopPropagation();
+                                                }
+                                            }
+                                            class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
+                                        >
+                                            <img src={svg.user_burger_menu} />
+                                        </a> */}
+                                    </div>
+                                    <div class="c-userpanel__addmodal">
+                                        <div class="c-userpanel__inner">
+                                            <p>{Variable.lang.button.create}</p>
+                                            <a class="c-userpanel__link" onclick={siteLink} href="/user/posts/">
+                                                <img src={svg["profile_icon-5"]} />
+                                                {Variable.lang.h.createPost}
+                                            </a>
+                                        </div>
+                                        <div data-action="user_cabinet_add_close" class="c-userpanel__close">
+                                            <img src={svg.close} />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            dataElse={
+                                <div class="c-userpanel c-userpanel--left">
+                                    <div class="c-userpanel__icons">
+                                        <a
+                                            class="c-userpanel__icon c-userpanel__icon--logo"
+                                            href="/"
+                                            onclick={siteLink}>
+                                            <img src={svg["mini_logo"]} />
+                                        </a>
+                                        <a
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "experts" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
+                                            href="/experts/"
+                                            onclick={siteLink}
+                                        >
+                                            <img src={svg["expert_menu_icon"]} />
+                                        </a>
+                                        <a
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
+                                            href="/lenta-users/"
+                                            onclick={siteLink}
+                                        >
+                                            <img src={svg.user_news_page} />
+                                        </a>
+                                        <a
+                                            onclick={(e) => {
+                                                Variable.SetModals({ name: "ModalAuth", data: {} })
+                                                e.stopPropagation();
+                                            }}
+                                            class="c-userpanel__icon c-userpanel__icon--mobile_visible"
+                                        >
+                                            <img src={svg.plus_in_circle} />
+                                        </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/news/"
+                                        >
+                                            <img src={svg.news_menu_icon1} />
+                                        </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "question") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/question/"
+                                        >
+                                            <img src={svg.user_mobile_answers_and_questions} />
+                                        </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "list-trade") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/list-trade/"
+                                        >
+                                            <img src={svg.exchange_menu_icon} />
+                                        </a>
+                                        {/* <a
+                                            onClick={
+                                                (e) => {
+                                                    Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
+                                                    e.stopPropagation();
+                                                }
+                                            }
+                                            class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
+                                        >
+                                            <img src={svg.user_burger_menu} />
+                                        </a> */}
                                     </div>
                                     <div class="c-userpanel__addmodal">
                                         <div class="c-userpanel__inner">

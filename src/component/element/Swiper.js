@@ -19,7 +19,10 @@ const swiperInit = function ($el, options, swiperElem) {
 const Swiper = function ({ slide, options, className, navigation, swiperElem }) {
     // console.log('=42f2e9=', slide)
     return (
-        <div class="swiper-container" replace={true}>
+        <div
+            class="swiper-container"
+            replace={true}
+        >
             <div
                 class={["swiper", className]}
                 After={(el) => {
@@ -32,7 +35,7 @@ const Swiper = function ({ slide, options, className, navigation, swiperElem }) 
                     {slide}
                 </div>
                 <div class="swiper-pagination"></div>
-                <div class="swiper-scrollbar"></div>
+                {/* <div class="swiper-scrollbar"></div> */}
             </div>
             {navigation}
         </div>

@@ -21,7 +21,7 @@ const NewsItem = function ({ item, type }) {
         >
             <img src={"/assets/upload/news/" + item.image} />
             <p class="blog_new_title">{item.title}</p>
-            <span class="blog_new_text">{sliceString(item.preview,215)}</span>
+            <span class="blog_new_text">{sliceString(item.preview, 215)}</span>
             <div
                 style="display: flex!important;"
                 class="blog_post_stat"

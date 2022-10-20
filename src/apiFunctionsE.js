@@ -9,7 +9,6 @@ import {
 import { checkAnswerApi } from "@src/functions.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 
-
 const giveNewCodeForReset = async (info) => {
   let data = {
     value: {},
@@ -30,12 +29,12 @@ const giveNewCodeForReset = async (info) => {
 const checkNickName = async (nickName) => {
   let data = {
     filter: {
-      nickname: nickName
-    }
-  }
+      nickname: nickName,
+    },
+  };
   let response = checkAnswerApi(await sendApi.create("getUsers", data));
-  return response.totalFound
-}
+  return response.totalFound;
+};
 
 const sendResetMessage = async (info) => {
   let data = {
@@ -49,7 +48,7 @@ const sendResetMessage = async (info) => {
   }
 
   let response = checkAnswerApiE(await sendApi.create("confirm", data));
-  console.log("=2342424=", response);
+
   return response;
 };
 
@@ -70,10 +69,7 @@ const sendInBlackList = async (info) => {
     },
   };
 
-
   let response = checkAnswerApi(await sendApi.create("setUsers", data));
-
-
 };
 const getQuestionsItemInShow = async function (id, type) {
   let data = {
@@ -94,91 +90,56 @@ const getQuestionsItemInShow = async function (id, type) {
   };
 
   if (type === "getQuestions") {
-    data.filter._id = id
+    data.filter._id = id;
   } else {
-    data.filter.questionId = id
+    data.filter.questionId = id;
   }
   let response = checkAnswerApi(await sendApi.create(type, data));
   return response;
 };
 
 const delCom = async (info) => {
-  console.log("=info=", info);
-  
+
   let data = {
-    value:{},
+    value: {},
     _id: info.mainId,
-  }
-  if(info.typeSet ==="setPost"){
-    data.value = {active:false};
+  };
 
-  }
-  if(info.typeSet ==="setAnswer" || info.typeSet ==="setNews" ){
-    if( info.id === info.mainId){
-      data.value = {active:false};
-
-    }
-    else if( info.mainCom === true){
+  if (info.typeSet === "doRole") {
+    if (info.id === info.mainId) {
+      data.value = { active: false };
+      data.roleAction = info.roleAction;
+    } else if (info.mainCom === true) {
       data.value.comments = {
-        active:false,
-        _id : info.id,
-      }
-
-    }
-    else if( info.mainCom === false){
+        active: false,
+        _id: info.id,
+      };
+      data.roleAction = info.roleAction;
+    } else if (info.mainCom === false) {
       data.value.comments = {
-        comments :{
-          active:false,
-        _id : info.id,
-      }
-      }
-
+        comments: {
+          active: false,
+          _id: info.id,
+        },
+      };
+      data.roleAction = info.roleAction;
     }
-
-  }else if(info.typeSet ==="doRole"){
-
-    if( info.id === info.mainId){
-      data.value = {active:false};
-      data.roleAction = info.roleAction
-    }else if( info.mainCom === true){
+  } else {
+    if (info.id === info.mainId) {
+      data.value = { active: false };
+    } else if (info.mainCom === true) {
       data.value.comments = {
-        active:false,
-        _id : info.id,
-      }
-      data.roleAction = info.roleAction
-    }
-    else if( info.mainCom === false){
+        active: false,
+        _id: info.id,
+      };
+    } else if (info.mainCom === false) {
       data.value.comments = {
-        comments :{
-          active:false,
-        _id : info.id,
-      }
-      }
-      data.roleAction = info.roleAction
+        comments: {
+          active: false,
+          _id: info.id,
+        },
+      };
     }
-
-    // else if( info.mainCom === true){
-    //   data.value.comments = {
-    //     active:false,
-    //     _id : info.id,
-    //   }
-    //   data.roleAction = info.roleAction
-    // }
-    // else if( info.mainCom === false){
-    //   data.value.comments = {
-    //     comments :{
-    //       active:false,
-    //     _id : info.id,
-    //   }
-    //   }
-    //   data.roleAction = info.roleAction
-    // }
-
-    // data._id = info.id;
-    // data.value = {
-    //   active:false
-    // };
-    // data.roleAction = info.roleAction
   }
   // let data = {
   //   value: {
@@ -198,39 +159,29 @@ const delCom = async (info) => {
   //       _id: info.id,
   //     },
   //   });
-  console.log('=data=',data)
   let response = checkAnswerApi(await sendApi.create(info.typeSet, data));
-  console.log('=3c68aa=',response)
 };
 
 const sendComplaintApi = async (info) => {
-
-  let data ={
-    value:{},
+  let data = {
+    value: {},
     _id: info.data.mainId,
-  }
+  };
 
-  if(info.data.typeSet ==="setPost"){
+  if (info.data.id === info.data.mainId) {
     data.value.complain = info.complaint;
-    data._id = info.data.id
-  }
-
-  if((info.data.typeSet ==="setAnswer" || info.data.typeSet ==="setNews")  && info.data.id === info.data.mainId){
-    data.value.complain = info.complaint;
-  }
-  else if((info.data.typeSet ==="setAnswer"|| info.data.typeSet ==="setNews") && info.data.mainCom === true){
+  } else if (info.data.mainCom === true) {
     data.value.comments = {
-      complain : info.complaint,
-      _id : info.data.id,
-    }
-  }
-  else if((info.data.typeSet ==="setAnswer" || info.data.typeSet ==="setNews") && info.data.mainCom === false){
+      complain: info.complaint,
+      _id: info.data.id,
+    };
+  } else if (info.data.mainCom === false) {
     data.value.comments = {
-      comments :{
-      complain : info.complaint,
-      _id : info.data.id,
-    }
-    }
+      comments: {
+        complain: info.complaint,
+        _id: info.data.id,
+      },
+    };
   }
 
   // let data = {

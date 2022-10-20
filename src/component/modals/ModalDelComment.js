@@ -1,11 +1,7 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, sendApi,Helpers } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initGo, sendApi,Helpers,parsingUrl } from "@betarost/cemjs";
 import { delCom, renderModalFullNews } from "@src/apiFunctionsE.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 const ModalDelComment = function (data, reload) {
-  console.log("=e896fe=", data);
-
-  console.log("=1663e5=", Variable.dataUrl.params);
-
   return (
     <div class="c-modal c-modal--open" id="ModalDelComment">
       <section class="c-modal__dialog">
@@ -20,12 +16,12 @@ const ModalDelComment = function (data, reload) {
               Variable.Static.answerAdditionally = "";
               if (Variable.dataUrl.params === undefined) {
                 Variable.DelModals("ModalDelComment");
-                // await renderModalFullNews();
               } else {
                 Variable.Modals = [];
               }
 
-              if (data.typeSet ===  "setPost" ||  data.roleAction === "setPost" ) {
+              if (data.typeSet ===  "setPost" ||  data.roleAction === "setPost") {
+               
                 Variable[`PageLenta${Variable.Static.lentaPage}`] =
                   await sendApi.send({
                     action: "getPost",
@@ -38,9 +34,16 @@ const ModalDelComment = function (data, reload) {
                       Variable.Static.lentaPage
                     ),
                   });
-              } else if(typeof data.callBack == "function"){
+              if ( data.id === data.mainId ){
+                  Variable.Modals =[]
+              }
+               else if(typeof data.callBack == "function"){
                   data.callBack();
-              }else{
+              }}else if(typeof data.callBack == "function"){
+            
+                  data.callBack();
+              }
+              else{
                 initReload();
               }
             }}
