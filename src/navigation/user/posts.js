@@ -418,7 +418,7 @@ const start = function () {
               </div>
             </div>
             <div style={"display:flex; width: 500px; margin: 20px auto"}>
-              <button
+              {/* <button
                 class={[
                   "c-button c-button--gradient2",
                   !formInputs.isValid ? "c-button--inactive" : "",
@@ -430,7 +430,7 @@ const start = function () {
                 <span class="c-button__text">
                   {Variable.lang.button.pre_view}
                 </span>
-              </button>
+              </button> */}
               <button
                 class={[
                   "c-button c-button--gradient2",
