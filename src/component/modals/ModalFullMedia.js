@@ -20,7 +20,6 @@ import {
   let news;
   
   const ModalFullMedia = function ({ news }, reload) {
-    console.log("=84781a=", news);
   
     initOne(async () => {
       Variable.Static.ShowVoterInteval = { timer: 0 };
@@ -36,7 +35,7 @@ import {
     // console.log('=c0791d=',news)
     // news = news.list_records[0];
     //  news = item
-    console.log("ReloadModal", news);
+
     return (
       <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalFullNews">
         <section class="c-modal__dialog">

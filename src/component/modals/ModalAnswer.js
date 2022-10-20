@@ -151,7 +151,6 @@ const sendVideo = async function (files) {
 
 
 const ModalAnswer = function (data, reload) {
-  console.log('=data=', data)
   if (!reload) {
     Variable.OutHideWindows.push([elem, "ModalAnswer"])
     formInputs = {

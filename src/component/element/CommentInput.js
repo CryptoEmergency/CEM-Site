@@ -83,7 +83,6 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
         commentId,
         edit
       );
-      // console.log('=commentText().value=', text)
       Variable.Static.activeInputId = "";
       Variable.Static.EditInput = "";
       commentText().value = "";

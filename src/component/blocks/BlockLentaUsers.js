@@ -13,7 +13,7 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { LentaMedia } from "@component/element/index.js";
-
+import { BlockComment } from "@component/blocks/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
 import { getPostsItemInShow } from "@src/apiFunctions.js";
@@ -23,14 +23,37 @@ import {
   Avatar,
   Likes,
   AnswerAdditionallyToggle,
+  CommentInput
 } from "@component/element/index.js";
 import { If, Map } from "@component/helpers/All.js";
 
-const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
+const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, type  }) {
   let mainId = item._id;
-  console.log('=item=', item)
+  if(total === undefined && type !== "post" ){
+   return <></>;
+  }
+  let getItem = ""
+
+ if(total === undefined){
+ getItem = async function () {
+    let tmp = await sendApi.send({ action: "getPost", short: true, filter: { _id: item._id }, limit: 1 });
+    if (tmp.list_records.length) {
+      Variable.Modals.map((item, index) => {
+        if (item.name == "ModalFullSize") {
+          item.data.item = tmp.list_records[0]
+        }
+      })
+      initReload("modals")
+    }
+  }
+ }
+
+
+  
   return (
-    <div
+    
+    // <div>
+      <div
       class="user_news_item"
       ElemVisible={total < totalFound && numIndex == (total - 3) ?
         async () => {
@@ -52,7 +75,9 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
         :
         false
       }
-      onClick={async () => {
+      onClick={async (e) => {
+        e.stopPropagation();
+
         // if (true) {
         //   Variable.SetModals({
         //     name: "ModalFullSize",
@@ -64,10 +89,11 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
         // post = await getPostsItemInShow(item._id);
         // post = post.list_records[0];
         // console.log('=item1111111111111111=',item)
-        // Variable.SetModals({
-        //   name: "ModalFullSize",
-        //   data: { item, type: "post" },
-        // });
+        if (total !== undefined &&  e.target.dataset.name === undefined)
+          Variable.SetModals({
+          name: "ModalFullSize",
+          data: { item, type: "post" },
+        });
       }}
     >
       <div class="main_comment">
@@ -86,6 +112,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
               share: true,
             }}
             mainId={mainId}
+            callBack = {getItem}
           />
         </div>
         <div class="comment_body">
@@ -171,7 +198,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
             </div>
           </div>
           <div class="user_post_statistic_item">
-            <Likes item={item} typeGet="getPost" typeSet="setPost" />
+            <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} />
           </div>
         </div>
       </div>
@@ -184,7 +211,60 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound }) {
         <div class="show_all_post_block"> </div>
         <span class="show_all_post_text">{Variable.lang.button.see_all}</span>
       </div>
+     
     </div>
+    // <If 
+    //  data ={total === undefined}
+    //  dataIf ={
+    //   <div class="news_page_comments">
+    //   <h2>{Variable.lang.h.modal_comment}</h2>
+
+    //   <If
+    //   data={
+    //     Variable.Static.activeInputId.length === 0 &&
+    //     Variable.Static.EditInput.length === 0 
+    //   }
+    //   dataIf ={
+    //      <CommentInput item={item} typeSet="setPost" callBack={getItem} />
+    //   }
+    //   />
+     
+    //   <If
+    //     data={item.comments.length > 0}
+    //     dataIf={
+    //       <div data-type="news_comment" class="post_comments">
+    //         <div
+    //           style={!item.comments && "display: none;"}
+    //           class="user_news_item"
+    //         >
+    //           {/* <BlockComments
+    //                               comments={item.comments}
+    //                           /> */}
+    //           {/* <QuestionAnswerItemComment item = {item}  mainId={mainId} /> */}
+    //           <Map
+    //             data={item.comments}
+    //             dataIf={(item, index) => {
+    //               return (
+    //                 <BlockComment
+    //                   item={item}
+    //                   index={index}
+    //                   mainId={mainId}
+    //                   callBack={getItem}
+    //                   typeSet = "setPost"
+    //                 />
+    //               );
+    //             }}
+    //           />
+    //         </div>
+    //       </div>
+    //     }
+    //   />
+    // </div>
+      
+    //  }
+    //  />
+    //  </div>
+
   );
 };
 

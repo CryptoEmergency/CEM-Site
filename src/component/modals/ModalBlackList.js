@@ -10,7 +10,6 @@ import {
 import { sendInBlackList, renderModalFullNews } from "@src/apiFunctionsE.js";
 
 const ModalBlackList = function (data, reload) {
-  console.log("=e896fe=", data);
   return (
     <div class="c-modal c-modal--open" id="ModalBlackList">
       <section class="c-modal__dialog">

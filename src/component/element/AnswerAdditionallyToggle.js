@@ -145,7 +145,7 @@ const AnswerAdditionallyToggle = function ({
                           class="answer_additionally_item "
                           onclick={async () => {
                             Variable.Static.answerAdditionally = "";
-                            changeSubscription(item.author._id, "setUsers");
+                            changeSubscription(item.author._id, "setUsers", callBack);
                           }}
                         >
                           {item.subscribe
@@ -183,7 +183,7 @@ const AnswerAdditionallyToggle = function ({
                       }
                     />
                     <If
-                      data={type.complainAnswer || type.complainPost}
+                      data={type.complainAnswer || type.complainPost || type.complainComment}
                       dataIf={
                         <div
                           class="answer_additionally_item complain c-text--error"
@@ -206,6 +206,8 @@ const AnswerAdditionallyToggle = function ({
                             Variable.lang.select.complainPost}
                           {type.complainAnswer &&
                             Variable.lang.select.complainAnswer}
+                          {type.complainComment &&
+                            Variable.lang.select.complainComment}
                         </div>
                       }
                     />
