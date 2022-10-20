@@ -118,7 +118,6 @@ const sendNewCommentApi = async function (
   mainId,
   commentId
 ) {
-  console.log("=096bf2=", item, comment, typeSet, mainId, commentId);
 
   let data = {
     value: {
@@ -127,7 +126,11 @@ const sendNewCommentApi = async function (
     _id: mainId,
   };
 
-  if ((typeSet == "setAnswer" || typeSet == "setNews") && Variable.Static.EditInput.length > 0) {
+  if (item.image ) {
+    data.value.comments = { text: comment };
+    data._id = item._id
+  }
+  else if ((typeSet == "setAnswer" || typeSet == "setNews") && Variable.Static.EditInput.length > 0) {
     if (!commentId) {
       data.value = {
         comments: {
@@ -199,7 +202,6 @@ const sendNewCommentApi = async function (
   //   _id: Variable.Static.showNewsId,
   // };
   // }
-  console.log("=data=", data);
   let response = checkAnswerApi(await sendApi.create(typeSet, data));
 
   // if (Variable.dataUrl.params === undefined) {

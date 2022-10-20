@@ -12,13 +12,13 @@ import svg from "@assets/svg/index.js";
 import { sendNewCommentApi } from "@src/apiFunctions.js";
 import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 
-
+let commentText = Variable.setRef();
 
 const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit, callBack }) {
  
   let count = 1;
   let scrollHeight = 0;
-  let commentText = Variable.setRef();
+  
   
 //   if(Variable.Static.EditInput.length > 0){
 // let regexp = /<p>/g;
@@ -71,6 +71,7 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
     }
   };
   const sendNewComment = async () => {
+
     let text = wrapTextWithATag(commentText().value.trim());
     let response;
     if (text.length > 0) {
@@ -86,7 +87,6 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
       Variable.Static.activeInputId = "";
       Variable.Static.EditInput = "";
       commentText().value = "";
-      console.log('=3340dd=',callBack,typeof callBack == "function" )
       if (typeof callBack == "function") {
         callBack();
       }else{
