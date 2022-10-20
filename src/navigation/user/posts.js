@@ -285,12 +285,12 @@ const start = function () {
                             }
                           );
 
-                          let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
-                          let btns = document.querySelectorAll('#addCropImage .c-cropper__toggles input[hidden]');
+                          // let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
+                          // let btns = document.querySelectorAll('#addCropImage .c-cropper__toggles input[hidden]');
 
-                          btns.forEach((element) => {
-                            element.setAttribute('disabled', 'disabled');
-                          });
+                          // btns.forEach((element) => {
+                          //   element.setAttribute('disabled', 'disabled');
+                          // });
 
                           Variable.DelModals("ModalCropImage");
 

@@ -7,10 +7,11 @@ import {
   sendApi,
   Helpers,
 } from "@betarost/cemjs";
-import svg from "@assets/svg/index.js";
-import { wrapTextWithATag } from "@src/functions.js";
-import { If } from "@component/helpers/All.js";
-import { MediaButton } from '@component/element/index.js';
+
+import { wrapTextWithATag, uploadMedia } from "@src/functions.js";
+import { If, Map } from "@component/helpers/All.js";
+import { MediaButton, MediaPreview } from '@component/element/index.js';
+import svg from '@assets/svg/index.js';
 let formInputs, inputImg, inputVideo, inputAudio, selectAspect;
 
 const changeInput = function (e) {
@@ -41,11 +42,11 @@ const sendQuestion = async function (e) {
     return false;
   }
 
-  let mediaArr = [];
+
   let data = {
     value: {
       languages: formInputs.language.code,
-      media: mediaArr,
+      media: formInputs.mediaInputs.value,
       text: formInputs.textQuestion.value,
       title: formInputs.question.value,
     },
@@ -76,6 +77,54 @@ const changeTextQuestion = (e) => {
   formInputs.textQuestion.value = text;
 };
 
+const sendPhoto = async function (crooper) {
+  if (!crooper) {
+    return
+  }
+  let canvas;
+  formInputs.mediaInputs.selectAspect = crooper.options.aspectRatio;
+  canvas = crooper.getCroppedCanvas({
+    // width: 166,
+    // height: 166,
+  });
+
+  await canvas.toBlob(function (blob) {
+    uploadMedia(
+      blob,
+      "question",
+      async function () {
+        formInputs.mediaInputs.show = true;
+        if (!this.response) {
+          return
+        }
+        let response = JSON.parse(this.response);
+        formInputs.mediaInputs.value.push({
+          aspect: formInputs.mediaInputs.selectAspect,
+          type: response.mimetype.split("/")[0],
+          name: response.name
+        });
+      },
+      async function (e) {
+        let contentLength;
+        if (e.lengthComputable) {
+          contentLength = e.total;
+        } else {
+          contentLength = parseInt(
+            e.target.getResponseHeader(
+              "x-decompressed-content-length"
+            ),
+            10
+          );
+        }
+        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+      }
+    );
+    initReload("modals");
+    Variable.DelModals("ModalCropImage");
+  });
+  return
+}
+
 const ModalAskQuestion = function (data, reload) {
   if (!reload) {
     formInputs = {
@@ -96,8 +145,8 @@ const ModalAskQuestion = function (data, reload) {
       mediaInputs: {
         value: [],
         show: false,
+        selectAspect: null,
       },
-      selectAspect: null,
       isValid: false,
     };
 
@@ -207,13 +256,26 @@ const ModalAskQuestion = function (data, reload) {
                     ></div>}
                     dataElse={<></>}
                   />
-                  {/* <div
-                    style={`display: ${formInputs.textQuestion.show ? "block" : "none"
-                      }`}
-                    contenteditable="true"
-                    oninput={changeTextQuestion}
-                    class="create_post_chapter create_post_main_text"
-                  ></div> */}
+                  <If
+                    data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
+                    dataIf={
+                      <div class="create_post_chapter createPostImage">
+                        <Map
+                          data={formInputs.mediaInputs.value}
+                          dataIf={(item, index) => {
+                            return (
+                              <MediaPreview
+                                item={item}
+                                index={index}
+                                type="question"
+                                formInputs={formInputs}
+                              />
+                            );
+                          }}
+                        />
+                      </div>
+                    }
+                  />
                 </div>
               </div>
               {/* <div class="c-askquestion__controls create_post_control_block"> */}
@@ -239,170 +301,18 @@ const ModalAskQuestion = function (data, reload) {
                       file: this.files[0],
                       typeUpload: 'question',
                       arrMedia: formInputs.mediaInputs.value,
-                      aspectSelect: formInputs.selectAspect,
+                      aspectSelect: formInputs.mediaInputs.selectAspect,
                       uploadCropImage: async function (cropper) {
-                        var canvas;
-
-                        const imageCrop = cropper.element;
-                        const aspectValue = cropper.options.aspectRatio;
-
-                        if (cropper) {
-                          canvas = cropper.getCroppedCanvas({
-                            // width: 166,
-                            // height: 166,
-                          });
-                          var previewSrc = canvas.toDataURL();
-
-                          await canvas.toBlob(function (blob) {
-                            uploadMedia(
-                              blob,
-                              "posts",
-                              async function () {
-                                formInputs.mediaInputs.show = true;
-                                let tmp = JSON.parse(this.response);
-                                let type = tmp.mimetype.split("/")[0];
-                                let obj = { aspect: aspectValue, type, name: tmp.name };
-                                formInputs.mediaInputs.value.push(obj);
-                                initReload();
-                              },
-                              async function (e) {
-                                let contentLength;
-                                if (e.lengthComputable) {
-                                  contentLength = e.total;
-                                } else {
-                                  contentLength = parseInt(
-                                    e.target.getResponseHeader(
-                                      "x-decompressed-content-length"
-                                    ),
-                                    10
-                                  );
-                                }
-                                console.log(
-                                  "=3c5fa7= ",
-                                  "Загружено",
-                                  e.loaded,
-                                  "из",
-                                  contentLength
-                                );
-                                selectAspect = aspectValue;
-                              }
-                            );
-
-                            let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
-                            let btns = document.querySelectorAll('#addCropImage .c-cropper__toggles input[hidden]');
-
-                            btns.forEach((element) => {
-                              element.setAttribute('disabled', 'disabled');
-                            });
-
-                            Variable.DelModals("ModalCropImage");
-
-                            /** clear crop */
-                            if (typeof cropper !== "undefined") {
-                              cropper.destroy();
-                              cropper = null;
-                            }
-
-                            imageCrop.setAttribute('src', '');
-                          });
-                        }
+                        await sendPhoto(cropper)
+                        return;
                       }
                     },
-                  });
+                  }, true);
                   formInputs.isValid = true;
                   this.value = '';
                 }}
 
               />
-              {/* <div
-                  data-page_type="question"
-                  data-type="text"
-                  data-action="createPostAddMediaBlock"
-                  class="c-askquestion__attachment"
-                  onclick={() => {
-                    if (formInputs.textQuestion.show === true) {
-                      return;
-                    } else {
-                      formInputs.textQuestion.show = true;
-                      initReload("modals");
-                    }
-                  }}
-                >
-                  <img src={svg["post_text"]} />
-                </div> */}
-              {/* <div
-                  data-page_type="question"
-                  data-type="image"
-                  data-action="createPostAddMediaBlock"
-                  class="c-askquestion__attachment createPostImageCreator"
-                  onclick={downloadFile}
-                >
-                  <img src={svg["post_photo"]} />
-                </div> */}
-              {/* <div
-                  data-page_type="question"
-                  data-type="video"
-                  data-action="createPostAddMediaBlock"
-                  class="c-askquestion__attachment createPostVideoCreator"
-                  onclick={downloadFile}
-                >
-                  <img src={svg["post_video"]} />
-                </div> */}
-              {/* <div
-                  data-page_type="question"
-                  data-type="audio"
-                  data-action="createPostAddMediaBlock"
-                  class="c-askquestion__attachment createPostAudioCreator"
-                  onclick={downloadFile}
-                >
-                  <img src={svg["post_audio"]} />
-                </div> */}
-              {/* </div> */}
-              {/* <div>
-                <input
-                  data-type="question"
-                  style="display: none;"
-                  class="createPostImageInput"
-                  onchange={test}
-                  type="file"
-                  accept=".jpg,.jpeg,.png,.gif"
-                  ref={inputImg}
-                />
-              </div>
-              <div>
-                <input
-                  data-type="question"
-                  style="display: none;"
-                  class="createPostVideoInput"
-                  // onchange="createPostUploadVideo(this)"
-                  type="file"
-                  accept=".mp4,.avi,.mov,.mkv,.avi,.flv"
-                  ref={inputVideo}
-                />
-              </div>
-              <div>
-                <input
-                  data-type="question"
-                  style="display: none;"
-                  class="createPostAudioInput"
-                  // onchange="createPostUploadAudio(this)"
-                  type="file"
-                  accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
-                  ref={inputAudio}
-                />
-              </div> */}
-
-              {/* <div
-                    class="button-container-preview inactive_form_button"
-                    data-active="0"
-                    data-action="askQuestionSend"
-                    data-type="question"
-                    type="button"
-                  >
-                    <a id="askQuestionSend" class="btn-ask">
-                      <span>{Variable.lang.button.send}</span>
-                    </a>
-                  </div> */}
             </form>
           </div>
         </div>
