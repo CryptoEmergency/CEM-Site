@@ -234,10 +234,10 @@ const start = function () {
                     typeUpload: 'post',
                     arrMedia: formInputs.mediaInputs.value,
                     aspectSelect: selectAspect,
-                    uploadCropImage: async function (e, cropper) {
-                      if (e.currentTarget.disabled === true) {
-                        return false;
-                      }
+                    uploadCropImage: async function (cropper) {
+                      // if (e.currentTarget.disabled === true) {
+                      //   return false;
+                      // }
                       var canvas;
 
                       const imageCrop = cropper.element;

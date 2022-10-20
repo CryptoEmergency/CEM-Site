@@ -10,8 +10,8 @@ import {
 import svg from "@assets/svg/index.js";
 import { wrapTextWithATag } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
-
-let formInputs, inputImg, inputVideo, inputAudio;
+import { MediaButton } from '@component/element/index.js';
+let formInputs, inputImg, inputVideo, inputAudio, selectAspect;
 
 const changeInput = function (e) {
   let type = e.target.dataset.type;
@@ -93,12 +93,20 @@ const ModalAskQuestion = function (data, reload) {
         value: "",
         show: false,
       },
+      mediaInputs: {
+        value: [],
+        show: false,
+      },
+      selectAspect: null,
       isValid: false,
     };
 
     inputImg = Variable.setRef();
     inputVideo = Variable.setRef();
     inputAudio = Variable.setRef();
+
+    selectAspect = null;
+
   }
 
   const downloadFile = (e) => {
@@ -208,8 +216,105 @@ const ModalAskQuestion = function (data, reload) {
                   ></div> */}
                 </div>
               </div>
-              <div class="c-askquestion__controls create_post_control_block">
-                <div
+              {/* <div class="c-askquestion__controls create_post_control_block"> */}
+              <MediaButton
+
+                onclickText={function () {
+                  if (formInputs.textQuestion.show === true) {
+                    return;
+                  } else {
+                    formInputs.textQuestion.show = true;
+                    initReload("modals");
+                  }
+                }}
+
+                onclickPhoto={function () {
+                  if (this.files.length == 0) {
+                    return;
+                  }
+
+                  Variable.SetModals({
+                    name: "ModalCropImage",
+                    data: {
+                      file: this.files[0],
+                      typeUpload: 'question',
+                      arrMedia: formInputs.mediaInputs.value,
+                      aspectSelect: formInputs.selectAspect,
+                      uploadCropImage: async function (cropper) {
+                        var canvas;
+
+                        const imageCrop = cropper.element;
+                        const aspectValue = cropper.options.aspectRatio;
+
+                        if (cropper) {
+                          canvas = cropper.getCroppedCanvas({
+                            // width: 166,
+                            // height: 166,
+                          });
+                          var previewSrc = canvas.toDataURL();
+
+                          await canvas.toBlob(function (blob) {
+                            uploadMedia(
+                              blob,
+                              "posts",
+                              async function () {
+                                formInputs.mediaInputs.show = true;
+                                let tmp = JSON.parse(this.response);
+                                let type = tmp.mimetype.split("/")[0];
+                                let obj = { aspect: aspectValue, type, name: tmp.name };
+                                formInputs.mediaInputs.value.push(obj);
+                                initReload();
+                              },
+                              async function (e) {
+                                let contentLength;
+                                if (e.lengthComputable) {
+                                  contentLength = e.total;
+                                } else {
+                                  contentLength = parseInt(
+                                    e.target.getResponseHeader(
+                                      "x-decompressed-content-length"
+                                    ),
+                                    10
+                                  );
+                                }
+                                console.log(
+                                  "=3c5fa7= ",
+                                  "Загружено",
+                                  e.loaded,
+                                  "из",
+                                  contentLength
+                                );
+                                selectAspect = aspectValue;
+                              }
+                            );
+
+                            let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
+                            let btns = document.querySelectorAll('#addCropImage .c-cropper__toggles input[hidden]');
+
+                            btns.forEach((element) => {
+                              element.setAttribute('disabled', 'disabled');
+                            });
+
+                            Variable.DelModals("ModalCropImage");
+
+                            /** clear crop */
+                            if (typeof cropper !== "undefined") {
+                              cropper.destroy();
+                              cropper = null;
+                            }
+
+                            imageCrop.setAttribute('src', '');
+                          });
+                        }
+                      }
+                    },
+                  });
+                  formInputs.isValid = true;
+                  this.value = '';
+                }}
+
+              />
+              {/* <div
                   data-page_type="question"
                   data-type="text"
                   data-action="createPostAddMediaBlock"
@@ -224,8 +329,8 @@ const ModalAskQuestion = function (data, reload) {
                   }}
                 >
                   <img src={svg["post_text"]} />
-                </div>
-                <div
+                </div> */}
+              {/* <div
                   data-page_type="question"
                   data-type="image"
                   data-action="createPostAddMediaBlock"
@@ -233,8 +338,8 @@ const ModalAskQuestion = function (data, reload) {
                   onclick={downloadFile}
                 >
                   <img src={svg["post_photo"]} />
-                </div>
-                <div
+                </div> */}
+              {/* <div
                   data-page_type="question"
                   data-type="video"
                   data-action="createPostAddMediaBlock"
@@ -242,8 +347,8 @@ const ModalAskQuestion = function (data, reload) {
                   onclick={downloadFile}
                 >
                   <img src={svg["post_video"]} />
-                </div>
-                <div
+                </div> */}
+              {/* <div
                   data-page_type="question"
                   data-type="audio"
                   data-action="createPostAddMediaBlock"
@@ -251,9 +356,9 @@ const ModalAskQuestion = function (data, reload) {
                   onclick={downloadFile}
                 >
                   <img src={svg["post_audio"]} />
-                </div>
-              </div>
-              <div>
+                </div> */}
+              {/* </div> */}
+              {/* <div>
                 <input
                   data-type="question"
                   style="display: none;"
@@ -285,7 +390,7 @@ const ModalAskQuestion = function (data, reload) {
                   accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
                   ref={inputAudio}
                 />
-              </div>
+              </div> */}
 
               {/* <div
                     class="button-container-preview inactive_form_button"
