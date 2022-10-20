@@ -1,0 +1,55 @@
+.forum_plan{
+    width: 50%; 
+    margin: 30px auto; 
+    display: block;
+}
+
+.speakers_block{
+    display: grid; 
+    grid-template-columns: calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px); 
+    grid-gap: 10px;
+}
+
+
+@media(max-width: 1000px) {
+    .forum_plan{
+        width: 100%; 
+    }
+    .speakers_block{
+        display: grid; grid-template-columns: 100%; 
+        grid-gap: 10px;
+        justify-items: center
+    }
+    .speaker_item{
+        display: grid; 
+        grid-template-columns: 200px 420px; 
+        align-items: center;
+    }
+}
+
+@media(max-width: 800px) {
+    .speaker_item{
+        display: grid; 
+        grid-template-columns: 200px 320px; 
+        align-items: center;
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 600px) {
+    .speaker_item{
+        display: grid; 
+        grid-template-columns: 180px 220px; 
+        align-items: center;
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 400px) {
+    .speaker_item{
+        display: grid; 
+        grid-template-columns: 180px 120px; 
+        align-items: center;
+        font-size: 14px;
+    }
+}
