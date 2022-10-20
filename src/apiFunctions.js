@@ -115,7 +115,6 @@ const sendNewCommentApi = async function (
   mainId,
   commentId
 ) {
-
   let data = {
     value: {
       comments: {},
@@ -144,7 +143,7 @@ const sendNewCommentApi = async function (
         },
       };
     }
-  } else if (!commentId && typeSet == "setAnswer" && mainId === item._id) {
+  } else if (!commentId &&( typeSet == "setAnswer" || typeSet == "setNews" ) && mainId === item._id) {
     data.value.comments = { text: comment };
   } else if (!commentId) {
     data.value.comments = {
