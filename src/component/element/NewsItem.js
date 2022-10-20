@@ -10,6 +10,7 @@ import { If } from '@component/helpers/All.js';
 import { sliceString } from '@src/functions.js';
 
 const NewsItem = function ({ item, type }) {
+    console.log('=421b81=', item)
     return (
         <div class="blog_news_item"
             onClick={async () => {
@@ -21,7 +22,7 @@ const NewsItem = function ({ item, type }) {
         >
             <img src={"/assets/upload/news/" + item.image} />
             <p class="blog_new_title">{item.title}</p>
-            <span class="blog_new_text">{sliceString(item.preview,215)}</span>
+            <span class="blog_new_text">{sliceString(item.preview, 215)}</span>
             <div
                 style="display: flex!important;"
                 class="blog_post_stat"

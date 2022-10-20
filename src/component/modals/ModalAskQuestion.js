@@ -125,6 +125,43 @@ const sendPhoto = async function (crooper) {
   return
 }
 
+const sendVideo = async function (files) {
+  uploadMedia(
+    files[0],
+    "posts",
+    async function () {
+      formInputs.mediaInputs.show = true;
+      let tmp = JSON.parse(this.response);
+      let type = tmp.mimetype.split("/")[0];
+      let obj = { aspect: undefined, type, name: tmp.name };
+
+      formInputs.mediaInputs.value.push(obj);
+      initReload();
+    },
+    async function (e) {
+      let contentLength;
+      if (e.lengthComputable) {
+        contentLength = e.total;
+      } else {
+        contentLength = parseInt(
+          e.target.getResponseHeader(
+            "x-decompressed-content-length"
+          ),
+          10
+        );
+      }
+      console.log(
+        "=3c5fa7= ",
+        "Загружено",
+        e.loaded,
+        "из",
+        contentLength
+      );
+    }
+  );
+  return
+}
+
 const ModalAskQuestion = function (data, reload) {
   if (!reload) {
     formInputs = {
@@ -263,14 +300,38 @@ const ModalAskQuestion = function (data, reload) {
                         <Map
                           data={formInputs.mediaInputs.value}
                           dataIf={(item, index) => {
-                            return (
-                              <MediaPreview
-                                item={item}
-                                index={index}
-                                type="question"
-                                formInputs={formInputs}
-                              />
-                            );
+                            if (item.type != "audio") {
+                              return (
+                                <MediaPreview
+                                  item={item}
+                                  index={index}
+                                  type="question"
+                                  formInputs={formInputs}
+                                />
+                              );
+                            }
+                          }}
+                        />
+                      </div>
+                    }
+                  />
+                  <If
+                    data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length}
+                    dataIf={
+                      <div class="create_post_chapter createPostAudio">
+                        <Map
+                          data={formInputs.mediaInputs.value}
+                          dataIf={(item, index) => {
+                            if (item.type == "audio") {
+                              return (
+                                <MediaPreview
+                                  item={item}
+                                  index={index}
+                                  type="question"
+                                  formInputs={formInputs}
+                                />
+                              );
+                            }
                           }}
                         />
                       </div>
@@ -308,10 +369,18 @@ const ModalAskQuestion = function (data, reload) {
                       }
                     },
                   }, true);
-                  formInputs.isValid = true;
+                  // formInputs.isValid = true;
                   this.value = '';
                 }}
 
+                onclickVideo={function () {
+                  if (this.files.length == 0) {
+                    return;
+                  }
+                  sendVideo(this.files)
+                  this.value = '';
+                  return;
+                }}
               />
             </form>
           </div>
