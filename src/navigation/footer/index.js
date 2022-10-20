@@ -392,7 +392,7 @@ const mainFooter = async function () {
                                         <a
                                             onClick={
                                                 (e) => {
-                                                    Variable.SetModals({ name: "ModalMobileSettings", data: {} })
+                                                    Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
                                                     e.stopPropagation();
                                                 }
                                             }

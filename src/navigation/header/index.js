@@ -157,12 +157,12 @@ const mainHeader = async function () {
                                                     </a>
                                                     <div class="c-messages__new"></div>
                                                 </div> */}
-                                                <i
+                                                {/* <i
                                                     class="c-header__burger c-header__burger--noauth"
                                                     onclick={() => {
                                                         Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
                                                     }}
-                                                ></i>
+                                                ></i> */}
                                             </div>
                                             {Variable.auth ?
                                                 <div style={`${Variable.notifyWindowShow ? "" : "display: none;"}`} class="user_notifications_block auth_notifications" id="notifications_block">
