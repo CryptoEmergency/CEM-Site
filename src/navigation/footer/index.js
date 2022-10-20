@@ -338,7 +338,7 @@ const mainFooter = async function () {
                             </div>
                         </div>
                         <If
-                            data={Variable.auth}
+                            data={true}
                             dataIf={
                                 <div class="c-userpanel c-userpanel--left">
                                     <div class="c-userpanel__icons">
@@ -388,6 +388,17 @@ const mainFooter = async function () {
                                             href="/user/wallet/"
                                         >
                                             <img src={svg.absolutely_new_wallet} />
+                                        </a>
+                                        <a
+                                            onClick={
+                                                (e) => {
+                                                    Variable.SetModals({ name: "ModalMobileSettings", data: {} })
+                                                    e.stopPropagation();
+                                                }
+                                            }
+                                            class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
+                                        >
+                                            <img src={svg.user_burger_menu} />
                                         </a>
                                     </div>
                                     <div class="c-userpanel__addmodal">

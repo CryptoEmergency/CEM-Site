@@ -144,6 +144,12 @@
             }
         }
     }
+
+    .blog_post_stat {
+        div:last-child {
+            position: static;
+        }
+    }
 }
 
 .bl_one {

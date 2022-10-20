@@ -87,7 +87,42 @@
     }
 
     .c-userpanel {
-        display: none;
+        // display: none;
+
+        top: auto;
+        bottom: -1px;
+        height: 52px;
+        width: 100%;
+        transition: 0.7s;
+        z-index: 9999;
+        border-top: 1px solid #363C50;
+        max-width: 1240px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &__icons {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-left: 0;
+            margin-top: 0;
+            padding: 5px 30px;
+        }
+
+        &__icon {
+
+            &--logo {
+                img {
+                    width: 31px;
+                    position: relative;
+                    left: 5px;
+                    bottom: -4px;
+                }
+            }
+
+            &--burger {
+                display: block;
+            }
+        }
     }
 }
 
@@ -546,7 +581,7 @@
     .c-footer {
 
         .c-userpanel {
-            display: block;
+            // display: block;
         }
     }
 
