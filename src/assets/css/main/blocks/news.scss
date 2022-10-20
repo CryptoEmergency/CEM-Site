@@ -437,6 +437,10 @@
                 grid-area: blog_img;
             }
 
+            div:last-child {
+                bottom: -10px;
+            }
+
         }
 
         .blog_new {

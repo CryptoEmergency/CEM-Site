@@ -56,7 +56,10 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
                                         elem().style = "height: 0px"
                                     } else {
                                         elem().dataset.active = true
-                                        elem().style = "height: 80px"
+                                        let additional = document.querySelector('.c-friends__additional');
+                                        additional.style = "";
+                                        let h = additional.offsetHeight;
+                                        elem().style = `height: ${h}px`
                                     }
                                 }}
                             >
