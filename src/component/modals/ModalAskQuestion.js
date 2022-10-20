@@ -73,7 +73,6 @@ const sendQuestion = async function (e) {
 
 const changeTextQuestion = (e) => {
   let text = wrapTextWithATag(e.target.innerText.trim());
-  console.log("=69011b=", text);
   formInputs.textQuestion.value = text;
 };
 
@@ -203,7 +202,6 @@ const ModalAskQuestion = function (data, reload) {
       type = e.target.parentElement.dataset.type;
     }
     if (type === "image") {
-      console.log("=6c4af5=", inputImg());
       inputImg().click();
     } else if (type === "video") {
       inputVideo().click();

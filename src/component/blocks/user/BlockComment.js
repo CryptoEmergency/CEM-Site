@@ -27,7 +27,7 @@ import { If, Map } from "@component/helpers/All.js";
 //   Variable.Static.answerAdditionallyShow = "";
 // }
 
-const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
+const BlockComment = function ({ item, index, mainId, commentId, callBack, typeSet="setNews" }) {
   let comId = item._id;
   // let typeSet = "setNews"
   return (
@@ -56,7 +56,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
             <Likes
               item={item}
               typeGet="getComments"
-              typeSet="setNews"
+              typeSet={typeSet}
               mainId={mainId}
               commentId={commentId}
               callBack={callBack}
@@ -66,7 +66,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
             <Likes
               item={item}
               typeGet="getComments"
-              typeSet="setNews"
+              typeSet={typeSet}
               mainId={mainId}
               callBack={callBack}
             />
@@ -95,11 +95,11 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
         />
         <AnswerAdditionallyToggle
           item={item}
-          typeApi={"setNews"}
+          typeApi={typeSet}
           type={{
             delete: true,
             edit: true,
-            complainAnswer: true,
+            complainComment: true,
             complainUser: true,
             blackList: true,
           }}
@@ -117,7 +117,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
           <CommentInput
             nickname={item.author.nickname}
             item={item}
-            typeSet="setNews"
+            typeSet={typeSet}
             mainId={mainId}
             commentId={commentId}
             callBack ={callBack}
@@ -139,6 +139,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack }) {
                     mainId={mainId}
                     commentId={comId}
                     callBack={callBack}
+                    typeSet = {typeSet}
                   />
                 );
               }}

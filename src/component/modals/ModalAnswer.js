@@ -64,7 +64,6 @@ const sendAnswer = async function (e, item, onClose) {
 };
 
 const ModalAnswer = function (data, reload) {
-  console.log('=data=', data)
   if (!reload) {
     Variable.OutHideWindows.push([elem, "ModalAnswer"])
     formInputs = {

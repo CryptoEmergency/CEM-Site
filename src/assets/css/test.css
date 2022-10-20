@@ -224,3 +224,25 @@ text-align: center;
   height: auto
 }
 
+
+
+
+.c-fullnews__content {
+  width: 882px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1240px) {
+  .c-fullnews__content{
+    width: 100%;
+    padding: 0 30px;
+  }
+    
+  }
+
+  @media (max-width: 768px) {
+    .c-fullnews__content{
+      padding: 0 20px;
+    }
+    
+  }
