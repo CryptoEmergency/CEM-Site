@@ -1200,7 +1200,7 @@
 }
 
 #ModalMobileSettings {
-	display: none;
+	// display: none;
 
 	.comment_avatar {
 		position: relative;
@@ -1214,14 +1214,22 @@
 
 	.c-modal {
 
-		&__content {
-			background: #202432;
+		&__dialog {
+			max-width: 28%;
+			height: calc(100% - 52px);
+			min-height: calc(100% - 52px);
+			border: 0;
+			border-radius: 0;
+			margin: 0;
+			transform: translateX(-100%);
+			left: calc(50% + 620px);
+			background: $german_liquorice3;
 		}
 
-		&__body {
-			&>* {
-				height: auto;
-			}
+		&__content {
+			border: 0;
+			border-radius: 0;
+			background: #202432;
 		}
 
 		&__header {
@@ -1230,14 +1238,34 @@
 			align-items: center;
 			justify-content: space-between;
 			padding: 1rem;
+			padding-top: 0;
 			border-bottom: 1px solid #dee2e6;
 			border-top-left-radius: calc(0.3rem - 1px);
 			border-top-right-radius: calc(0.3rem - 1px);
 		}
 
 		&__title {
+			margin-top: 0;
+			flex-wrap: wrap;
 			display: flex;
 		}
+
+		&__body {
+			width: 100%;
+
+			&>* {
+				height: auto;
+			}
+		}
+	}
+
+	.user_avatar {
+		width: 80px;
+		margin-left: 20px;
+	}
+
+	.user_icon_mobile_visible {
+		display: block !important;
 	}
 }
 
@@ -4384,8 +4412,8 @@ s
 		.c-avataricon {
 
 			&__name {
-				top: 10px;
-				left: 53px;
+				top: 10px !important;
+				left: 53px !important;
 
 				&--show {
 					display: block;
@@ -4416,8 +4444,8 @@ s
 
 				&--online,
 				&--offline {
-					right: 17%;
-					bottom: 11%;
+					right: 17% !important;
+					bottom: 11% !important;
 					width: 10px;
 					height: 10px;
 				}
@@ -4497,7 +4525,7 @@ s
 	&__textcomment {
 		position: relative;
 		display: block;
-		margin-top: 5px;
+		margin-top: 12px;
 		font-weight: 500;
 		font-size: 14px;
 		line-height: 22px;
@@ -4507,6 +4535,8 @@ s
 
 		p {
 			margin-bottom: 0;
+			font-size: 12px;
+			min-height: 22px;
 		}
 	}
 
@@ -4806,17 +4836,17 @@ s
 	}
 
 	#ModalMobileSettings {
-		display: block;
+		// display: block;
 
 		.c-modal {
 
 			&__dialog {
 				max-width: 100%;
-				height: 100%;
-				border: 0;
-				border-radius: 0;
 				margin: 0;
-				background: $german_liquorice3;
+				height: 100%;
+				min-height: 100vh;
+				transform: none;
+				left: auto;
 			}
 
 			&__content {
