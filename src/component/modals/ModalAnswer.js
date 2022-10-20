@@ -1,7 +1,8 @@
 import { jsx, jsxFrag, Variable, initReload, sendApi } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
-import { MediaButton } from "@component/element/index.js";
+import { If, Map } from '@component/helpers/All.js';
+import { MediaButton, MediaPreview } from '@component/element/index.js';
 
 let formInputs;
 let elem = Variable.setRef()
@@ -37,7 +38,7 @@ const sendAnswer = async function (e, item, onClose) {
   let mediaArr = [];
   let data = {
     value: {
-      media: mediaArr,
+      media: formInputs.mediaInputs.value,
       questionId: item.item._id,
       text: formInputs.textAnswer.value,
     }
@@ -63,6 +64,92 @@ const sendAnswer = async function (e, item, onClose) {
   return;
 };
 
+const sendPhoto = async function (crooper) {
+  if (!crooper) {
+    return
+  }
+  let canvas;
+  formInputs.mediaInputs.selectAspect = crooper.options.aspectRatio;
+  canvas = crooper.getCroppedCanvas({
+    // width: 166,
+    // height: 166,
+  });
+
+  await canvas.toBlob(function (blob) {
+    uploadMedia(
+      blob,
+      "answers",
+      async function () {
+        formInputs.mediaInputs.show = true;
+        if (!this.response) {
+          return
+        }
+        let response = JSON.parse(this.response);
+        formInputs.mediaInputs.value.push({
+          aspect: formInputs.mediaInputs.selectAspect,
+          type: response.mimetype.split("/")[0],
+          name: response.name
+        });
+      },
+      async function (e) {
+        let contentLength;
+        if (e.lengthComputable) {
+          contentLength = e.total;
+        } else {
+          contentLength = parseInt(
+            e.target.getResponseHeader(
+              "x-decompressed-content-length"
+            ),
+            10
+          );
+        }
+        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+      }
+    );
+    initReload("modals");
+    Variable.DelModals("ModalCropImage");
+  });
+  return
+}
+
+const sendVideo = async function (files) {
+  uploadMedia(
+    files[0],
+    "answers",
+    async function () {
+      formInputs.mediaInputs.show = true;
+      let tmp = JSON.parse(this.response);
+      let type = tmp.mimetype.split("/")[0];
+      let obj = { aspect: undefined, type, name: tmp.name };
+
+      formInputs.mediaInputs.value.push(obj);
+      initReload();
+    },
+    async function (e) {
+      let contentLength;
+      if (e.lengthComputable) {
+        contentLength = e.total;
+      } else {
+        contentLength = parseInt(
+          e.target.getResponseHeader(
+            "x-decompressed-content-length"
+          ),
+          10
+        );
+      }
+      console.log(
+        "=3c5fa7= ",
+        "Загружено",
+        e.loaded,
+        "из",
+        contentLength
+      );
+    }
+  );
+  return
+}
+
+
 const ModalAnswer = function (data, reload) {
   console.log('=data=', data)
   if (!reload) {
@@ -71,6 +158,12 @@ const ModalAnswer = function (data, reload) {
       textAnswer: {
         value: "",
         error: "",
+        show: false,
+      },
+      mediaInputs: {
+        value: [],
+        show: false,
+        selectAspect: null,
       },
       isValid: false,
     };
@@ -85,7 +178,7 @@ const ModalAnswer = function (data, reload) {
             class="c-modal__close"
             onclick={() => {
               Variable.DelModals("ModalAnswer");
-              initReload("modals");
+              // initReload("modals");
             }}
           ></button>
         </header>
@@ -101,8 +194,63 @@ const ModalAnswer = function (data, reload) {
                 contenteditable="true"
                 oninput={changeTextAnswer}
               ></div>
+              <If
+                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
+                dataIf={
+                  <div class="create_post_chapter createPostImage">
+                    <Map
+                      data={formInputs.mediaInputs.value}
+                      dataIf={(item, index) => {
+                        if (item.type != "audio") {
+                          return (
+                            <MediaPreview
+                              item={item}
+                              index={index}
+                              type="answers"
+                              formInputs={formInputs}
+                            />
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                }
+              />
+              <If
+                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length}
+                dataIf={
+                  <div class="create_post_chapter createPostAudio">
+                    <Map
+                      data={formInputs.mediaInputs.value}
+                      dataIf={(item, index) => {
+                        if (item.type == "audio") {
+                          return (
+                            <MediaPreview
+                              item={item}
+                              index={index}
+                              type="answers"
+                              formInputs={formInputs}
+                            />
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                }
+              />
             </div>
+
             <MediaButton
+
+              onclickText={function () {
+                if (formInputs.textAnswer.show === true) {
+                  return;
+                } else {
+                  formInputs.textAnswer.show = true;
+                  initReload("modals");
+                }
+              }}
+
               onclickPhoto={function () {
                 if (this.files.length == 0) {
                   return;
@@ -110,97 +258,31 @@ const ModalAnswer = function (data, reload) {
 
                 Variable.SetModals({
                   name: "ModalCropImage",
-                  data: { file: this.files[0] },
-                });
-
-                uploadMedia(
-                  this.files[0],
-                  "posts",
-                  async function () {
-                    formInputs.mediaInputs.show = true;
-                    let tmp = JSON.parse(this.response);
-                    let type = tmp.mimetype.split("/")[0];
-                    let obj = { aspect: "1", type, name: tmp.name };
-                    formInputs.mediaInputs.value.push(obj);
-                    initReload();
-                  },
-                  async function (e) {
-                    let contentLength;
-                    if (e.lengthComputable) {
-                      contentLength = e.total;
-                    } else {
-                      contentLength = parseInt(
-                        e.target.getResponseHeader(
-                          "x-decompressed-content-length"
-                        ),
-                        10
-                      );
+                  data: {
+                    file: this.files[0],
+                    typeUpload: 'answers',
+                    arrMedia: formInputs.mediaInputs.value,
+                    aspectSelect: formInputs.mediaInputs.selectAspect,
+                    uploadCropImage: async function (cropper) {
+                      await sendPhoto(cropper)
+                      return;
                     }
-                    console.log(
-                      "=3c5fa7= ",
-                      "Загружено",
-                      e.loaded,
-                      "из",
-                      contentLength
-                    );
-                  }
-                );
-                formInputs.isValid = true;
+                  },
+                }, true);
+                // formInputs.isValid = true;
+                this.value = '';
               }}
+
               onclickVideo={function () {
                 if (this.files.length == 0) {
                   return;
                 }
-                uploadMedia(
-                  this.files[0],
-                  "posts",
-                  async function () {
-                    formInputs.mediaInputs.show = true;
-                    let tmp = JSON.parse(this.response);
-                    let type = tmp.mimetype.split("/")[0];
-                    let obj = { aspect: undefined, type, name: tmp.name };
-
-                    formInputs.mediaInputs.value.push(obj);
-                    initReload();
-                  },
-                  async function (e) {
-                    let contentLength;
-                    if (e.lengthComputable) {
-                      contentLength = e.total;
-                    } else {
-                      contentLength = parseInt(
-                        e.target.getResponseHeader(
-                          "x-decompressed-content-length"
-                        ),
-                        10
-                      );
-                    }
-                    console.log(
-                      "=105aa8= ",
-                      "Загружено",
-                      e.loaded,
-                      "из",
-                      contentLength
-                    );
-                  }
-                );
-                formInputs.isValid = true;
+                sendVideo(this.files)
+                this.value = '';
+                return;
               }}
-              onclickAudio={
-                () => {
-                  console.log('=44992a=', "onclickAudio")
-                }
-              }
             />
-            <div>
-              <input data-type="answers" hidden class="createPostImageInput" type="file" accept=".jpg,.jpeg,.png,.gif" />
-            </div>
-            <div>
-              <input data-type="answers" hidden class="createPostVideoInput" type="file" accept=".mp4,.avi,.mov,.mkv,.avi,.flv" />
-            </div>
-            <div>
-              <input data-type="answers" hidden class="createPostAudioInput" type="file" accept=".mp3,.wav,.aiff,.aac,.ogg,.wma" />
-            </div>
+
           </form>
         </div>
         <div class="c-modal__footer">

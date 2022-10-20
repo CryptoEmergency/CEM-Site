@@ -128,7 +128,7 @@ const sendPhoto = async function (crooper) {
 const sendVideo = async function (files) {
   uploadMedia(
     files[0],
-    "posts",
+    "question",
     async function () {
       formInputs.mediaInputs.show = true;
       let tmp = JSON.parse(this.response);
