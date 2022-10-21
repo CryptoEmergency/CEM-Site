@@ -77,7 +77,7 @@ const BlockNewsShow = function ({ item, type }) {
           Variable.Static.EditInput.length === 0 
         }
         dataIf ={
-           <CommentInput item={item} typeSet="setNews" callBack={getItem} />
+           <CommentInput item={item} typeSet="setNews" callBack={getItem} mainId = {mainId} />
         }
         />
        

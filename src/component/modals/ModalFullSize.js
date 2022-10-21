@@ -23,7 +23,6 @@ import { getNewsItemInShow } from "@src/apiFunctions.js";
 let news;
 
 const ModalFullSize = function ({ item, type }, reload) {
-console.log('=429245=',item, type )
   initOne(async () => {
     // Variable.Static.ShowVoterInteval = { timer: 0 };
     // Variable.Static.resultShowVoter = undefined;
