@@ -53,7 +53,7 @@ const start = function () {
             filtersQuestions = {
                 lang: {
                     code: Variable.lang.code,
-                    name: Variable.lang.lang_orig
+                    name:`${ Variable.lang.lang} (${Variable.lang.lang_orig})`
                 },
                 questions: {
                     value: "all"
@@ -100,6 +100,7 @@ const start = function () {
                                     initReload();
                                 }
                             }
+                            name={"MainQuestions"}
                             items={Variable.MainQuestions}
                         />
                         <div class="c-main__wrapperbg2">

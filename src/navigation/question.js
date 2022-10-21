@@ -5,6 +5,7 @@ import {
     sendApi,
     Variable,
     initReload,
+    Helpers
 } from "@betarost/cemjs";
 
 
@@ -22,7 +23,7 @@ const start = function () {
             filtersQuestions = {
                 lang: {
                     code: Variable.lang.code,
-                    name: Variable.lang.lang_orig
+                    name: `${ Variable.lang.lang} (${Variable.lang.lang_orig})`
                 },
                 questions: {
                     value: "all"
@@ -32,7 +33,7 @@ const start = function () {
                 },
                 desc: -1
             }
-            Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "PageQuestions" });
+            Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "PageQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions)});
         },
         () => {
             return (
@@ -41,6 +42,7 @@ const start = function () {
                         version={Variable.dataUrl}
                         filters={filtersQuestions}
                         items={Variable.PageQuestions}
+                        name={"PageQuestions"}
                         button={
                             <If
                                 data={Variable.PageQuestions.list_records.length < Variable.PageQuestions.totalFound}
@@ -54,6 +56,13 @@ const start = function () {
                                     />
                                 }
                             />
+                        }
+                        callBack={
+                            async function (active, nameOptions) {
+                                filtersQuestions[nameOptions].value = active
+                                Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) });
+                                initReload();
+                            }
                         }
                     />
                 </div>
