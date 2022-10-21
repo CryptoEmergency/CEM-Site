@@ -25,43 +25,6 @@ const BlockPreview = function () {
                     </div>
                 </div>
             </div>
-            <div class="с-preview__parts">
-                <a href="/lenta-users/" class="с-preview__part" onclick={Helpers.siteLink}>
-                    <span>{Variable.lang.span.userNews}</span>
-                </a>
-                <If
-                    data={Variable.auth}
-                    dataIf={
-                        <a
-                            href="/user/"
-                            class="с-preview__part"
-                            onclick={Helpers.siteLink}
-                        >
-                            <span>{Variable.lang.a.profile}</span>
-                        </a>
-                    }
-                    dataElse={
-                        <a
-                            class="с-preview__part"
-                            onclick={(e) => {
-                                Variable.SetModals({ name: "ModalReg", data: {} })
-                                e.stopPropagation();
-                            }}
-                        >
-                            <span>{Variable.lang.button.registration}</span>
-                        </a>
-                    }
-                />
-                {/* <a href="/chats/" class="с-preview__part" data-updating="true">
-                    <span>{Variable.lang.span.chats}</span>
-                </a> */}
-                <a href="/question/" class="с-preview__part" onclick={Helpers.siteLink}>
-                    <span>{Variable.lang.span.QA}</span>
-                </a>
-                <a href="/news/" class="с-preview__part" onclick={Helpers.siteLink}>
-                    <span>{Variable.lang.span.news}</span>
-                </a>
-            </div>
             <div class="с-preview__crypto">
                 {Variable.Course.list_records.length != 0 ?
                     Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {

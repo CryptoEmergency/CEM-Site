@@ -64,7 +64,7 @@ const start = function () {
                 desc: -1
             }
             Variable.Course = await sendApi.send({ action: "getCourse", short: true, cache: true, name: "Course" });
-            Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) });
+            Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
             Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
             Variable.MainExchanges = await sendApi.send({ action: "getExchange", short: true, cache: true, name: "MainExchanges" });
             Variable.MainUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "MainUsers", filter: Helpers.getFilterUsers(filters, type) });
