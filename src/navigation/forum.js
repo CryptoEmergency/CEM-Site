@@ -357,7 +357,7 @@ const start = function () {
                                         <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Билет для посетителей включает не только пропуск на форум, но и большой список привилегий в лучших ресторанах и отелях г. Новороссийск.
                                     </p>
                                 </div>
-                                <a style="margin: 40px auto" class="с-preview__part">
+                                <a style="margin: 40px auto" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
                                     <span>Купить билет</span>
                                 </a>
                             </div>
@@ -537,10 +537,7 @@ const start = function () {
                             </div>
                         </div>
                     </div>
-                    <script
-                        src="https://code.jquery.com/jquery-3.6.1.min.js"
-                        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-                        crossorigin="anonymous"></script>
+                    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
                     <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
                     <Jivo />
                 </div>
