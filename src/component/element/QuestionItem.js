@@ -23,8 +23,6 @@ import { ifHaveMedia,sliceString } from '@src/functions.js';
 // };
 
 const QuestionItem = function ({ question }) {
-console.log('=question=',question)
-console.log('=Variable.lang=',Variable.lang)
     return (
         <div class="c-questions__item c-question question-block questionLoad">
             <div class="c-question__header">
