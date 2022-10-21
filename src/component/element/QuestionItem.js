@@ -23,7 +23,6 @@ import { ifHaveMedia,sliceString } from '@src/functions.js';
 // };
 
 const QuestionItem = function ({ question }) {
-
     return (
         <div class="c-questions__item c-question question-block questionLoad">
             <div class="c-question__header">
@@ -54,7 +53,9 @@ const QuestionItem = function ({ question }) {
                             <img class={`c-question__icon ${ifHaveMedia(question.media, "image", "c-question__icon--active")}`} src={svg.question_photo} />
                         </div>
                         <div class="c-question__langcontainer language_container "> {/* load */}
-                            <div class="c-question__lang language-question">{Variable.lang.lang_orig}</div>
+                            <div class="c-question__lang language-question">
+                                {question.languages.orig_name}
+                                </div>
                         </div>
                     </div>
                 </div>
