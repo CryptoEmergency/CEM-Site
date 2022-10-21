@@ -387,14 +387,8 @@ const mainFooter = async function () {
                                         >
                                             <img src={svg.user_mobile_answers_and_questions} />
                                         </a>
+
                                         <a
-                                            onclick={siteLink}
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "list-trade") ? "c-userpanel__icon--active" : ""}`}
-                                            href="/list-trade/"
-                                        >
-                                            <img src={svg.exchange_menu_icon} />
-                                        </a>
-                                        {/* <a
                                             onClick={
                                                 (e) => {
                                                     Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
@@ -404,7 +398,7 @@ const mainFooter = async function () {
                                             class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
                                         >
                                             <img src={svg.user_burger_menu} />
-                                        </a> */}
+                                        </a>
                                     </div>
                                     <div class="c-userpanel__addmodal">
                                         <div class="c-userpanel__inner">
@@ -430,11 +424,11 @@ const mainFooter = async function () {
                                             <img src={svg["mini_logo"]} />
                                         </a>
                                         <a
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "experts" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
-                                            href="/experts/"
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "blog" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
+                                            href="/blog/"
                                             onclick={siteLink}
                                         >
-                                            <img src={svg["expert_menu_icon"]} />
+                                            <img src={svg["blog_menu_icon1"]} />
                                         </a>
                                         <a
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
@@ -467,13 +461,6 @@ const mainFooter = async function () {
                                             <img src={svg.user_mobile_answers_and_questions} />
                                         </a>
                                         <a
-                                            onclick={siteLink}
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "list-trade") ? "c-userpanel__icon--active" : ""}`}
-                                            href="/list-trade/"
-                                        >
-                                            <img src={svg.exchange_menu_icon} />
-                                        </a>
-                                        {/* <a
                                             onClick={
                                                 (e) => {
                                                     Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
@@ -483,7 +470,7 @@ const mainFooter = async function () {
                                             class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
                                         >
                                             <img src={svg.user_burger_menu} />
-                                        </a> */}
+                                        </a>
                                     </div>
                                     <div class="c-userpanel__addmodal">
                                         <div class="c-userpanel__inner">
