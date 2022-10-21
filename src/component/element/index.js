@@ -12,10 +12,11 @@ export { QuestionAnswers } from "./QuestionAnswers.js"
 export { MediaButton } from "./MediaButton.js"
 export { Likes } from "./Likes.js"
 export { Jivo } from "./Jivo.js"
+export { Ticket } from "./Ticket.js"
+export { Select } from "./Select.js"
 export { Swiper } from "./Swiper.js";
 export { QuestionAnswerItem } from "./QuestionAnswerItem.js"
 export { MediaPreview } from "./MediaPreview.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
 export { SwitchLenta } from "./SwitchLenta.js";
-export { Select } from "./Select.js";

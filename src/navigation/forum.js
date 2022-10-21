@@ -16,15 +16,15 @@ import { If, Map } from '@component/helpers/All.js';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import { Jivo } from '@component/element/index.js';
-  
-  
+
+
 const start = function () {
 
 
 
     Variable.HeaderShow = true
     Variable.FooterShow = true
-  
+
 
     const swiperGo = function (numIndex) {
         // if (!swiperitem) {
@@ -60,11 +60,11 @@ const start = function () {
             grabCursor: true,
             creativeEffect: {
                 prev: {
-                  shadow: true,
-                  translate: [0, 0, -400],
+                    shadow: true,
+                    translate: [0, 0, -400],
                 },
                 next: {
-                  translate: ["100%", 0, 0],
+                    translate: ["100%", 0, 0],
                 },
             },
             loop: true,
@@ -95,131 +95,131 @@ const start = function () {
                             <div class="swiper-container">
                                 <div class="swiper swiper-post_media" After={() => swiperGo()}>
                                     <div class="swiper-wrapper">
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_1']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_2']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_3']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_4']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_5']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_6']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_7']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_8']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_9']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_10']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_11']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_12']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_13']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_14']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_15']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_16']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_17']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_18']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_19']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_20']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_21']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_22']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_23']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_24']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_25']} />
-                                                </div>
-                                            </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_1']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_2']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_3']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_4']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_5']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_6']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_7']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_8']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_9']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_10']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_11']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_12']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_13']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_14']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_15']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_16']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_17']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_18']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_19']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_20']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_21']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_22']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_23']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_24']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_25']} />
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="swiper-pagination swiper-pagination-post_media"></div>
                                     <div class="swiper-scrollbar-post_media"></div>
@@ -242,7 +242,7 @@ const start = function () {
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Новички в крипто индустрии
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                         <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Достоверность информации
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Достоверность информации
                                         </p>
                                         <p style="display: flex; align-items: center;">
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Блокчейн
@@ -375,13 +375,13 @@ const start = function () {
 
                                 <img class="forum_plan" src={images['forum/forum_plan']} />
                                 <a
-                                    style="margin: 50px auto" 
+                                    style="margin: 50px auto"
                                     class="с-preview__part"
                                     onclick={(e) => {
                                         Variable.SetModals({ name: "ModalForumMessage", data: {} })
                                         e.stopPropagation();
                                     }}
-                                 >
+                                >
                                     <span>Стенд</span>
                                 </a>
                             </div>
@@ -472,7 +472,7 @@ const start = function () {
                                     </div>
                                 </div>
                                 <a
-                                    style="margin: 40px auto" 
+                                    style="margin: 40px auto"
                                     class="с-preview__part"
                                     onclick={(e) => {
                                         Variable.SetModals({ name: "ModalForumMessage", data: {} })
@@ -537,12 +537,16 @@ const start = function () {
                             </div>
                         </div>
                     </div>
+                    <script
+                        src="https://code.jquery.com/jquery-3.6.1.min.js"
+                        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+                        crossorigin="anonymous"></script>
+                    <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
                     <Jivo />
                 </div>
             )
         }
     )
 }
-  
+
 export default start;
-  
