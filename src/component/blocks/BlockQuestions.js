@@ -137,7 +137,7 @@ const BlockQuestions = function ({
                     Variable[name] = await sendApi.send({
                       action: "getQuestions",
                       short: true,
-                      limit: 21,
+                      limit: 6,
                       filter: Helpers.getFilterQuestions(filters), 
                       sort: Helpers.getSortQuestions(filters) ,
                     });
