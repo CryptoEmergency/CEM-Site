@@ -269,7 +269,12 @@ const start = function () {
                                 <p class="c-terms__text">Crypto Emergency helps people and organizations protect their intellectual property rights. Crypto Emergency\'s Terms of Use do not permit the publication of content that violates anyone\'s intellectual property rights, including copyrights and trademark rights.</p>
                                 <h2 class="c-terms__subtitle">ANNUAL PRIVACY NOTICES</h2>
                                 <p class="c-terms__text">At least annually, Crypto Emergency sends a privacy notice via email that includes the following: the types of Personal Information collected; the methods and reasons for processing Personal Information; the people who may receive your Personal Information; the countries to which Personal Information may be sent, if applicable; whether reasonable security and privacy measures are used; and an individual\'s rights and preferences with respect to their Personal Information.</p>
-                            </div>
+                                <div class="c-terms__action">
+                                    <a href="/assets/docs/policyEN.pdf" class="c-button c-button--gradient" target="_blank">
+                                        <span class="c-button__text">Download</span>
+                                    </a>
+                                </div>
+                           </div>
                         </div>
                     </div >
                 );
