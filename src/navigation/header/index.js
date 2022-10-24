@@ -221,12 +221,12 @@ const mainHeader = async function () {
                                             >
                                                 <span class="c-button__text">{Variable.lang.button.registration}</span>
                                             </button>
-                                            <i
+                                            {/* <i
                                                 class="c-header__burger c-header__burger--noauth"
                                                 onclick={() => {
                                                     Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
                                                 }}
-                                            ></i>
+                                            ></i> */}
                                         </div>
                                     }
                                 />
@@ -356,7 +356,7 @@ const mainHeader = async function () {
                                 <a
                                     onClick={
                                         (e) => {
-                                            Variable.SetModals({ name: "ModalMobileSettings", data: {}})
+                                            Variable.SetModals({ name: "ModalMobileSettings", data: {} })
                                             e.stopPropagation();
                                         }
                                     }

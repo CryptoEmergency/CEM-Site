@@ -353,19 +353,20 @@ const mainFooter = async function () {
                                             <img src={svg["mini_logo"]} width="31" height="27" />
                                         </a>
                                         <a
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
-                                            href="/user/"
-                                            onclick={siteLink}
-                                        >
-                                            <img src={svg["profile_icon-1"]} width="42" height="42" />
-                                        </a>
-                                        <a
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
                                             href="/lenta-users/"
                                             onclick={siteLink}
                                         >
                                             <img src={svg.user_news_page} width="42" height="37" />
                                         </a>
+                                        <a
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
+                                            href="/user/chats/"
+                                            onclick={siteLink}
+                                        >
+                                            <img src={svg["profile_icon-2"]} width="42" height="42" />
+                                        </a>
+
                                         <a
                                             href="/user/posts/"
                                             onclick={siteLink}
@@ -375,18 +376,19 @@ const mainFooter = async function () {
                                         </a>
                                         <a
                                             onclick={siteLink}
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
-                                            href="/news/"
-                                        >
-                                            <img src={svg.news_menu_icon1} width="42" height="39" />
-                                        </a>
-                                        <a
-                                            onclick={siteLink}
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "question") ? "c-userpanel__icon--active" : ""}`}
                                             href="/question/"
                                         >
                                             <img src={svg.user_mobile_answers_and_questions} width="42" height="39" />
                                         </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/news/"
+                                        >
+                                            <img src={svg.news_menu_icon1} width="42" height="39" />
+                                        </a>
+
 
                                         <a
                                             onClick={
@@ -424,19 +426,20 @@ const mainFooter = async function () {
                                             <img src={svg["mini_logo"]} />
                                         </a>
                                         <a
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "blog" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
-                                            href="/blog/"
-                                            onclick={siteLink}
-                                        >
-                                            <img src={svg["blog_menu_icon1"]} />
-                                        </a>
-                                        <a
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
                                             href="/lenta-users/"
                                             onclick={siteLink}
                                         >
                                             <img src={svg.user_news_page} />
                                         </a>
+                                        <a
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "blog" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
+                                            href="/blog/"
+                                            onclick={siteLink}
+                                        >
+                                            <img src={svg["blog_menu_icon1"]} />
+                                        </a>
+
                                         <a
                                             onclick={(e) => {
                                                 Variable.SetModals({ name: "ModalAuth", data: {} })
@@ -448,18 +451,19 @@ const mainFooter = async function () {
                                         </a>
                                         <a
                                             onclick={siteLink}
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
-                                            href="/news/"
-                                        >
-                                            <img src={svg.news_menu_icon1} />
-                                        </a>
-                                        <a
-                                            onclick={siteLink}
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "question") ? "c-userpanel__icon--active" : ""}`}
                                             href="/question/"
                                         >
                                             <img src={svg.user_mobile_answers_and_questions} />
                                         </a>
+                                        <a
+                                            onclick={siteLink}
+                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
+                                            href="/news/"
+                                        >
+                                            <img src={svg.news_menu_icon1} />
+                                        </a>
+
                                         <a
                                             onClick={
                                                 (e) => {
