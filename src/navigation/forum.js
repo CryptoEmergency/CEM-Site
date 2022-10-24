@@ -230,6 +230,7 @@ const start = function () {
                                 <h3 style="text-align: center">16 - 17 декабря 2022г</h3>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
                                 <h4 style="text-align: center; margin-bottom: 50px">Организатор – CRYPTO EMERGENCY</h4>
+                                <div class="video-container-forum"><iframe src="https://www.youtube.com/embed/e-LBppoZXJs" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
                                 <p style="font-size: 18px;">
                                     Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
