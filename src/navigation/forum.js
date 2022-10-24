@@ -491,7 +491,6 @@ const start = function () {
                                         rel="nofollow nooopener"
                                         href="https://cryptoholding.ru"
                                         class="c-infopartners__item"
-                                        style="background: #383637"
                                     >
                                         <img src={images["forum/partner_1"]} />
                                     </a>
@@ -500,6 +499,7 @@ const start = function () {
                                         rel="nofollow nooopener"
                                         href="https://www.instagram.com/abrau1870/"
                                         class="c-infopartners__item"
+                                        style="background: #383637"
                                     >
                                         <img src={images["forum/partner_2"]} />
                                     </a>
