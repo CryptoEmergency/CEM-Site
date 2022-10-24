@@ -427,7 +427,7 @@
     .blog_news {
 
         &_item {
-            display: grid;
+            display: grid !important;
             grid-template-areas:
                 'blog_img blog_title'
                 'blog_stat blog_stat';
