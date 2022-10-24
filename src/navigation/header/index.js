@@ -319,6 +319,8 @@ const mainHeader = async function () {
                                     <img
                                         style={`${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "filter: invert(61%) sepia(60%) saturate(485%) hue-rotate(94deg) brightness(94%) contrast(96%)" : ""}`}
                                         src={svg.notifications_icon}
+                                        width="27"
+                                        height="36"
                                     />
                                 </a>
                                 <a
@@ -361,7 +363,7 @@ const mainHeader = async function () {
                                     id="mobileUserMenuShow"
                                     class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
                                 >
-                                    <img src={svg.user_burger_menu} />
+                                    <img src={svg.user_burger_menu} width="34" height="23" />
                                 </a>
                             </div>
                             <div class="c-userpanel__addmodal">

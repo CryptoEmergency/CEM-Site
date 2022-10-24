@@ -350,42 +350,42 @@ const mainFooter = async function () {
                                             class="c-userpanel__icon c-userpanel__icon--logo"
                                             href="/"
                                             onclick={siteLink}>
-                                            <img src={svg["mini_logo"]} />
+                                            <img src={svg["mini_logo"]} width="31" height="27" />
                                         </a>
                                         <a
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
                                             href="/user/"
                                             onclick={siteLink}
                                         >
-                                            <img src={svg["profile_icon-1"]} />
+                                            <img src={svg["profile_icon-1"]} width="42" height="42" />
                                         </a>
                                         <a
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
                                             href="/lenta-users/"
                                             onclick={siteLink}
                                         >
-                                            <img src={svg.user_news_page} />
+                                            <img src={svg.user_news_page} width="42" height="37" />
                                         </a>
                                         <a
                                             href="/user/posts/"
                                             onclick={siteLink}
                                             class="c-userpanel__icon c-userpanel__icon--mobile_visible"
                                         >
-                                            <img src={svg.plus_in_circle} />
+                                            <img src={svg.plus_in_circle} width="42" height="42" />
                                         </a>
                                         <a
                                             onclick={siteLink}
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
                                             href="/news/"
                                         >
-                                            <img src={svg.news_menu_icon1} />
+                                            <img src={svg.news_menu_icon1} width="42" height="39" />
                                         </a>
                                         <a
                                             onclick={siteLink}
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "question") ? "c-userpanel__icon--active" : ""}`}
                                             href="/question/"
                                         >
-                                            <img src={svg.user_mobile_answers_and_questions} />
+                                            <img src={svg.user_mobile_answers_and_questions} width="42" height="39" />
                                         </a>
 
                                         <a
@@ -397,7 +397,7 @@ const mainFooter = async function () {
                                             }
                                             class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
                                         >
-                                            <img src={svg.user_burger_menu} />
+                                            <img src={svg.user_burger_menu} width="34" height="23" />
                                         </a>
                                     </div>
                                     <div class="c-userpanel__addmodal">

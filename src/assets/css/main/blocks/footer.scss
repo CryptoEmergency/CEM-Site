@@ -10,8 +10,10 @@
         background: $noble_black;
 
         &--panel {
+            padding-bottom: 65px;
+
             @media(max-width: 1199px) {
-                padding-bottom: 52px;
+                padding-bottom: 65px; //52px;
             }
         }
     }
@@ -64,6 +66,7 @@
         font-size: 14px;
         line-height: 24px;
         color: #D9DBE1;
+        bottom: 65px;
     }
 
     &__link {
@@ -91,7 +94,7 @@
 
         top: auto;
         bottom: -1px;
-        height: 52px;
+        height: 65px; //52px;
         width: 100%;
         transition: 0.7s;
         z-index: 9999;
@@ -111,6 +114,8 @@
         &__icon {
 
             &--logo {
+                margin-bottom: 10px;
+
                 img {
                     width: 31px;
                     position: relative;
@@ -573,6 +578,7 @@
 
         &__bottom {
             position: relative;
+            bottom: auto;
         }
     }
 }
