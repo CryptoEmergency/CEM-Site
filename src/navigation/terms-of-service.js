@@ -16,12 +16,31 @@ const start = function () {
             if (Variable.lang.lang === "Russian") {
                 return (
                     <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-                        <div class="c-terms">
-                            <div class="c-terms__container c-container">
-                                <h1 class="c-terms__title">Добро пожаловать в Crypto Emergency!</h1>
-                                <p class="c-terms__date">Редакция от 2022-02-21</p>
-                                <p class="c-terms__preview">Настоящие Условия использования ("Условия") регулируют использование вами crypto-emergency.com (если прямо не указано, что применяются отдельные условия, а не эти) и содержат информацию о Сервисе Crypto Emergency ("Сервис"), изложенную ниже. Создавая аккаунт Crypto Emergency или используя Crypto Emergency, вы принимаете настоящие условия.</p>
-                                <h2 class="c-terms__subtitle">Сервис Crypto Emergency</h2>
+                        <div
+                        //  class="c-terms"
+                         class="full_news_block"
+                         >
+                            <div
+                            //  class="c-terms__container c-container"
+                             class="full_news_content"
+                             >
+                                <h1
+                                //  class="c-terms__title"
+                                class="full_news_name"
+                                 >Добро пожаловать в Crypto Emergency!</h1>
+
+                                <p
+                                //  class="c-terms__date"
+                                 class="full_news_date"
+                                 >Редакция от 2022-02-21</p>
+                                <p 
+                                // class="c-terms__preview"
+                                class="full_news_text mr20"
+                                >Настоящие Условия использования ("Условия") регулируют использование вами crypto-emergency.com (если прямо не указано, что применяются отдельные условия, а не эти) и содержат информацию о Сервисе Crypto Emergency ("Сервис"), изложенную ниже. Создавая аккаунт Crypto Emergency или используя Crypto Emergency, вы принимаете настоящие условия.</p>
+                                <h2
+                                // class="c-terms__subtitle"
+                                class="full_news_title mr20"
+                                >Сервис Crypto Emergency</h2>
                                 <div class="c-terms__content">
                                     <p>Мы соглашаемся предоставлять вам Сервис Crypto Emergency. Сервис включает в себя все продукты, функции, приложения, сервисы, технологии и программное обеспечение Crypto Emergency, которые мы предоставляем для выполнения миссии Crypto Emergency помогать вам стать ближе к любимым людям и вещам, а так же увеличить багаж заний связанный с крипто индустрией. Сервис включает следующие компоненты:</p>
                                     <p>Предложение персонализированной возможности создавать контент, общаться, узнавать новое и обмениваться опытом и впечатлениями с другими людьми.</p>
@@ -125,17 +144,21 @@ const start = function () {
                 );
             } else {
                 return (
-                    <div class="full_news_container">
+                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                         <div class="full_news_block">
                             <div class="full_news_content">
                                 <h1 class="full_news_name">Welcome to Crypto Emergency!</h1>
                                 <p class="full_news_date">Revision from 2022-02-21</p>
                                 <p class="full_news_text mr20">These Terms and Conditions of Use (the "Terms and Conditions") govern your use of crypto-emergency.com (unless expressly stated that separate terms and conditions apply rather than these) and contain information about the Crypto Emergency Service (the "Service") set forth below. By creating a Crypto Emergency account or using Crypto Emergency, you accept these Terms and Conditions.</p>
                                 <h2 class="full_news_title mr20">Crypto Emergency Service</h2>
-                                <p class="full_news_text mr20">We agree to provide you with the Crypto Emergency Service. The Service includes all Crypto Emergency products, features, applications, services, technologies, and software we provide to fulfill the Crypto Emergency mission of helping you get closer to your loved ones and things, as well as increase your knowledge of the crypto industry. The Service includes the following components:</p>
-                                <p>Offering a personalized opportunity to create content, communicate, learn new things, and share experiences and impressions with others.</p>
+                               
+                               
+                                   <p class="full_news_text mr20">We agree to provide you with the Crypto Emergency Service. The Service includes all Crypto Emergency products, features, applications, services, technologies, and software we provide to fulfill the Crypto Emergency mission of helping you get closer to your loved ones and things, as well as increase your knowledge of the crypto industry. The Service includes the following components:</p>
+                                   <p>Offering a personalized opportunity to create content, communicate, learn new things, and share experiences and impressions with others.</p>
                                 <p>Creating a supportive, open-ended and safe environment.</p>
                                 <p>We develop and use tools and offer resources to our community members to help ensure that Crypto Emergency has positive and open communication for all, including when we think they may need help. We also have teams and systems in place to deal with abuses and violations of our Terms and Conditions and Policies, as well as harmful and misleading behavior. We use all the information we have (including your information) to keep our platform secure. We may also share information about inappropriate use or harmful content with other Crypto Emergency Companies or law-enforcement authorities. For more information, see our Data Use Policy.</p>
+                                
+                               
                                 <h2 class="full_news_title mr20">Developing and using technology to help us serve our growing community.</h2>
                                 <p>Organizing and analyzing information within the growing Crypto Emergency community is very important to our Service. A significant part of it is the creation and use of advanced technologies that help us personalize, protect and improve our Service for the wider global community. Technologies such as artificial intelligence and machine learning enable us to apply complex processes to our Service. Automated technologies also help us ensure the operation and integrity of our Service.</p>
                                 <h2 class="full_news_title mr20">Providing access to our Service.</h2>

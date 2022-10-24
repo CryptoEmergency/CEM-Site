@@ -12,7 +12,7 @@ import {
 } from '@betarost/cemjs';
 import { If } from '@component/helpers/All.js';
 import { BlockUsers } from '@component/blocks/index.js';
-
+import images from "@assets/images/index.js";
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
 import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
@@ -79,6 +79,10 @@ console.log('= Variable.MainQuestions=', Variable.MainQuestions)
                     <BlockPreview />
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
+                        <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
+                            <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
+                        </a>
+                        
                         <BlockQuestions
                             version={Variable.dataUrl}
                             filters={filtersQuestions}

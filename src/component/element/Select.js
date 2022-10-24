@@ -1,76 +1,79 @@
-import {
-  jsx,
-  jsxFrag,
-  Variable,
-  initOne
-} from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initOne } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { If } from '@component/helpers/All.js';
+import { If } from "@component/helpers/All.js";
 
 const Select = function ({ options, callback, toggler = null }) {
-  let optionsActive
+  let optionsActive;
 
-  initOne(
-    () => {
-      options.elem = Variable.setRef()
-      options.elemActive = Variable.setRef()
-    }
-  )
+  initOne(() => {
+    options.elem = Variable.setRef();
+    options.elemActive = Variable.setRef();
+  });
 
   const changeSelect = function (selectIndex) {
-    options.open = false
+    options.open = false;
     options.items.map((item, index) => {
       if (selectIndex == index) {
-        options.active = item.value
-        optionsActive = item.text
+        options.active = item.value;
+        optionsActive = item.text;
       }
-    })
-    options.elemActive().innerHTML = optionsActive
-    options.elem().hidden = true
-    callback(options.active, options.nameOptions)
-  }
+    });
+    options.elemActive().innerHTML = optionsActive;
+    options.elem().hidden = true;
+    callback(options.active, options.nameOptions);
+  };
 
   const optionsElem = options.items.map((item, index) => {
     if (options.active == item.value) {
-      optionsActive = item.text
+      optionsActive = item.text;
     }
     return (
-      <li onClick={() => { changeSelect(index) }}>
+      <li
+        style={
+          item.text === Variable.lang.h.posts_friends &&
+          (!Variable.auth || Variable.myInfo.subscribed.length === 0)
+            ? "color : grey"
+            : "color : white"
+        }
+        onClick={() => {
+          if (
+            item.text === Variable.lang.h.posts_friends &&
+            (!Variable.auth || Variable.myInfo.subscribed.length === 0)
+          ) {
+            return;
+          } else {
+            changeSelect(index);
+          }
+        }}
+      >
         {item.text}
       </li>
     );
-  })
+  });
 
   return (
     <div class="profit_calculator_inputs_container">
-      <If
-        data={options.title}
-        dataIf={<span>{options.title}</span>}
-      />
+      <If data={options.title} dataIf={<span>{options.title}</span>} />
 
       <div class="justselect-wrapper">
         <div
           class="justselect-title"
           ref={options.elemActive}
           onClick={(e) => {
-            options.open = !options.open
+            options.open = !options.open;
             if (options.elem().hidden === true) {
-              options.elem().hidden = false
-              Variable.OutHideWindows.push([options.elemActive, options.elem])
+              options.elem().hidden = false;
+              Variable.OutHideWindows.push([options.elemActive, options.elem]);
             } else {
-              options.elem().hidden = true
+              options.elem().hidden = true;
             }
             // e.stopPropagation();
           }}
         >
           {optionsActive}
         </div>
-        <ul
-          ref={options.elem}
-          class="justselect-list"
-          hidden={true}
-        >
+        <ul ref={options.elem} class="justselect-list" hidden={true}>
           {optionsElem}
         </ul>
       </div>

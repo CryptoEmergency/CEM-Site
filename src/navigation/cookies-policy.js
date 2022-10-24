@@ -166,7 +166,7 @@ const start = function () {
                   device. If you decided to refuse from our cookie files, we can\'t
                   guarantee that your visiting the web-site will be as successful as with
                   receiving cookie files.</p>
-                <div class="btn-download_container">
+                {/* <div class="btn-download_container">
                   <button type="button" class="button-container sign-up btn">
                     <a
                       href="/assets/docs/cookieEN.pdf"
@@ -174,6 +174,15 @@ const start = function () {
                       target="_blank"
                     ><span>Download</span></a>
                   </button>
+                </div> */}
+                <div class="c-terms__action">
+                  <a
+                    href="/assets/docs/cookieEN.pdf"
+                    class="c-button c-button--gradient"
+                    target="_blank"
+                  >
+                    <span class="c-button__text">Download</span>
+                  </a>
                 </div>
               </div>
             </div>

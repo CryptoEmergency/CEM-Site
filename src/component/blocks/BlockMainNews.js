@@ -43,7 +43,7 @@ const BlockMainNews = function () {
                                         style="margin-bottom: 20px"
                                         src={`/assets/upload/news/${newsItem.image}`}
                                     />
-                                    <p style="width: 60%; margin-bottom: 20px" class="blog_new_title ">
+                                    <p style="margin-bottom: 20px" class="blog_new_title ">
                                         {newsItem.title}
                                     </p>
                                     <div style="display: flex!important;" class="blog_post_stat">

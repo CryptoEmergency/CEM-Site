@@ -92,6 +92,7 @@ const start = function () {
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <div class="page-content page-content--full">
                         <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px">
+                            <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
                             <div class="swiper-container">
                                 <div class="swiper swiper-post_media" After={() => swiperGo()}>
                                     <div class="swiper-wrapper">
@@ -226,10 +227,10 @@ const start = function () {
                                 </div>
                             </div>
                             <div>
-                                <h1 style="text-align: center; font-size: 50px">Форум «CRYPTO ЮГ 2022»</h1>
-                                <h3 style="text-align: center">16 - 17 декабря 2022г</h3>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
-                                <h4 style="text-align: center; margin-bottom: 50px">Организатор – CRYPTO EMERGENCY</h4>
+                                <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
+                                <h4 style="text-align: center; margin-bottom: 50px">Соорганизатор – CRYPTO HOLDING</h4>
+                                <div class="video-container-forum"><iframe src="https://www.youtube.com/embed/e-LBppoZXJs" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
                                 <p style="font-size: 18px;">
                                     Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
@@ -357,6 +358,7 @@ const start = function () {
                                         <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Билет для посетителей включает не только пропуск на форум, но и большой список привилегий в лучших ресторанах и отелях г. Новороссийск.
                                     </p>
                                 </div>
+                                <a target="_blank" href="https://t.me/cryptoforumsouth" rel="nofollow nooopener" style="display: flex; align-items: center; color: inherit; text-decoration: none; width: 100%; justify-content: center"><img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединяйтесь в наш телеграм</span></a>
                                 <a style="margin: 40px auto" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
                                     <span>Купить билет</span>
                                 </a>
@@ -496,8 +498,17 @@ const start = function () {
                                     <a
                                         target="_blank"
                                         rel="nofollow nooopener"
+                                        href="http://тц-черноморский.рф"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_7"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
                                         href="https://www.instagram.com/abrau1870/"
                                         class="c-infopartners__item"
+                                        style="background: #383637"
                                     >
                                         <img src={images["forum/partner_2"]} />
                                     </a>
@@ -517,7 +528,7 @@ const start = function () {
                                     >
                                         <img src={images["forum/partner_4"]} />
                                     </a>
-                                    <a style="display: block!important"
+                                    <a style="display: block!important; background: #FFFFFF"
                                         target="_blank"
                                         rel="nofollow nooopener"
                                         href="https://seeyour.info/vizhu.more.rest"
@@ -525,7 +536,7 @@ const start = function () {
                                     >
                                         <img src={images["forum/partner_5"]} />
                                     </a>
-                                    <a style="display: block!important"
+                                    <a style="display: block!important; background: #FFFFFD"
                                         target="_blank"
                                         rel="nofollow nooopener"
                                         href="https://hginov.ru"
