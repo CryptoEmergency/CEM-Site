@@ -92,6 +92,7 @@ const start = function () {
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <div class="page-content page-content--full">
                         <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px">
+                            <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
                             <div class="swiper-container">
                                 <div class="swiper swiper-post_media" After={() => swiperGo()}>
                                     <div class="swiper-wrapper">
@@ -226,11 +227,10 @@ const start = function () {
                                 </div>
                             </div>
                             <div>
-                                <h1 style="text-align: center; font-size: 50px">Форум «CRYPTO ЮГ 2022»</h1>
-                                <h3 style="text-align: center">16 - 17 декабря 2022г</h3>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
-                                <h4 style="text-align: center; margin-bottom: 50px">Организатор – CRYPTO EMERGENCY</h4>
-                                <div class="video-container-forum"><iframe src="https://www.youtube.com/embed/e-LBppoZXJs" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                                <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
+                                <h4 style="text-align: center; margin-bottom: 50px">Соорганизатор – CRYPTO HOLDING</h4>
+                                <div class="video-container-forum"><iframe src="https://www.youtube.com/embed/e-LBppoZXJs" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
                                 <p style="font-size: 18px;">
                                     Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
@@ -494,6 +494,14 @@ const start = function () {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_1"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://тц-черноморский.рф"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_7"]} />
                                     </a>
                                     <a
                                         target="_blank"
