@@ -29,10 +29,26 @@
         font-weight: 500;
     }
 
+    &__wrapper {
+        display: flex;
+        align-items: center;
+
+        @media(max-width: 992px) {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+
     &__auth {
         display: flex;
         order: 2;
         align-items: center;
+
+        @media(max-width: 992px) {
+            flex-grow: 0;
+            justify-content: space-between;
+            width: calc(50% + 30px);
+        }
 
         .c-avataricon {
             margin-left: 0;

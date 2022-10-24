@@ -141,7 +141,7 @@ const mainHeader = async function () {
                                 <If
                                     data={Variable.auth}
                                     dataIf={
-                                        <div style="display: flex; align-items: center">
+                                        <div class="c-header__wrapper" style="">
                                             <div class="header_avatar_container">
                                                 <Avatar author={Variable.myInfo} />
                                             </div>
