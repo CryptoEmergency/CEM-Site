@@ -33,18 +33,30 @@ const swiperGo = function () {
             prevEl: '#prev-desktop-icons',
         },
         breakpoints: {
-            320: {
+            20: {
                 slidesPerView: 2,
-                spaceBetween: 85
+                spaceBetween: 15
             },
-            375: {
-                slidesPerView: 2,
-                spaceBetween: 125
+            320: {
+                slidesPerView: 3,
+                spaceBetween: 15
             },
             425: {
                 slidesPerView: 3,
-                spaceBetween: 35
+                spaceBetween: 25
             },
+            // 320: {
+            //     slidesPerView: 2,
+            //     spaceBetween: 85
+            // },
+            // 375: {
+            //     slidesPerView: 2,
+            //     spaceBetween: 125
+            // },
+            // 425: {
+            //     slidesPerView: 3,
+            //     spaceBetween: 35
+            // },
             480: {
                 slidesPerView: 3,
                 spaceBetween: 65
@@ -200,7 +212,7 @@ const BlockProjects = function () {
                 <div class="swiper-button-prev" id="prev-desktop-icons"><img src={svg.swiper_arrow_left} style="height: 40%;" /></div>
                 <div class="swiper-button-next" id="next-desktop-icons"><img src={svg.swiper_arrow_right} style="height: 40%;" /></div>
             </div>
-            <div class="swiper-container">
+            <div class="swiper-container" style="display: none !important;">
                 <div class="swiper swiper-icons" id="swiper-one" After={swiperGo}>
                     <div class="swiper-wrapper">
                         {

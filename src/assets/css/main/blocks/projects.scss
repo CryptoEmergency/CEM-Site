@@ -17,7 +17,7 @@
         &:nth-child(1) {
 
             @media(max-width: 1199px) {
-                display: none;
+                // display: none;
             }
         }
 
@@ -105,7 +105,8 @@
 // }
 
 #swiper-one {
-    display: none;
+    // display: none;
+    display: block;
 
     @media(max-width: 1199px) {
         display: block;
