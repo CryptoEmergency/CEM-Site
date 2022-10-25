@@ -88,6 +88,17 @@ const mainHeader = async function () {
             if (Variable.showUserMenu) {
                 document.getElementById("mainHeader").classList.add("c-header--notransform");
             }
+
+            if (Variable.dataUrl.adress != "forum") {
+
+                if (document.getElementById("jivo-iframe-container")) {
+                    document.getElementById("jivo-iframe-container").remove()
+                }
+                if (document.querySelectorAll('jdiv') && document.querySelectorAll('jdiv').length) {
+                    document.querySelectorAll('jdiv')[0].remove()
+                }
+
+            }
         },
         () => {
 

@@ -53,7 +53,7 @@ const start = function () {
             filtersQuestions = {
                 lang: {
                     code: Variable.lang.code,
-                    name:`${ Variable.lang.lang} (${Variable.lang.lang_orig})`
+                    name: `${Variable.lang.lang} (${Variable.lang.lang_orig})`
                 },
                 questions: {
                     value: "all"
@@ -73,16 +73,22 @@ const start = function () {
 
         },
         () => {
-console.log('= Variable.MainQuestions=', Variable.MainQuestions)
+            console.log(Variable.lang.code)
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockPreview />
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
-                        <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
-                            <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
-                        </a>
-                        
+                        <If
+                            data={Variable.lang.code == "ru"}
+                            dataIf={
+                                <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
+                                    <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
+                                </a>
+                            }
+                        />
+
+
                         <BlockQuestions
                             version={Variable.dataUrl}
                             filters={filtersQuestions}
@@ -97,19 +103,19 @@ console.log('= Variable.MainQuestions=', Variable.MainQuestions)
                                 //     </a>
                                 // </div>
                                 <If
-                                data={Variable.MainQuestions.list_records.length < Variable.MainQuestions.totalFound}
-                                dataIf={
-                                    <ButtonShowMore
-                                        onclick={async () => {
-                                            let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 6, offset: Variable.MainQuestions.list_records.length, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) })
-                                            Variable.MainQuestions.list_records.push(...tmp.list_records)
-                                            console.log('=Variable.MainQuestions.list_records=',Variable.MainQuestions.list_records)
-                                           console.log('= Variable.MainQuestions.list_records.length.MainQuestions.totalFound=',  Variable.MainQuestions.list_records.length)
-                                            initReload()
-                                        }}
-                                    />
-                                }
-                            />
+                                    data={Variable.MainQuestions.list_records.length < Variable.MainQuestions.totalFound}
+                                    dataIf={
+                                        <ButtonShowMore
+                                            onclick={async () => {
+                                                let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 6, offset: Variable.MainQuestions.list_records.length, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) })
+                                                Variable.MainQuestions.list_records.push(...tmp.list_records)
+                                                console.log('=Variable.MainQuestions.list_records=', Variable.MainQuestions.list_records)
+                                                console.log('= Variable.MainQuestions.list_records.length.MainQuestions.totalFound=', Variable.MainQuestions.list_records.length)
+                                                initReload()
+                                            }}
+                                        />
+                                    }
+                                />
                             }
                             callBack={
                                 async function (active, nameOptions) {

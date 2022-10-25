@@ -20,3 +20,4 @@ export { MediaPreview } from "./MediaPreview.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
 export { SwitchLenta } from "./SwitchLenta.js";
+export { AwardsProgress } from "./AwardsProgress.js";

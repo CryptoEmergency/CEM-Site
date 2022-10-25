@@ -6,7 +6,7 @@ import { If } from "@component/helpers/All.js";
 
 const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false }) {
 
-  if (!author.nickname) {
+  if (!author || !author.nickname) {
     return (
       <></>
     )
