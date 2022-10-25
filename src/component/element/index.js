@@ -8,6 +8,7 @@ export { CommentInput } from "./CommentInput.js";
 export { LentaMedia } from "./LentaMedia.js"
 export { AudioPlayer } from "./AudioPlayer.js"
 export { VideoPlayer } from "./VideoPlayer.js"
+export { VideoPlayerCopy } from "./VideoPlayerCopy.js"
 export { QuestionAnswers } from "./QuestionAnswers.js"
 export { MediaButton } from "./MediaButton.js"
 export { Likes } from "./Likes.js"

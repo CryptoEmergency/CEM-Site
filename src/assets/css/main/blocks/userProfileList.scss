@@ -831,13 +831,14 @@
     background-image: url('../images/user_background_image.jpg');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 330px;
+    height: 330px !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 5px;
+    width: 100%;
 
     .audio_container {
         margin-bottom: 0;

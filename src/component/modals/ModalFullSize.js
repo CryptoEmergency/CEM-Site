@@ -22,7 +22,7 @@ import { CommentInput } from "@src/component/element/CommentInput.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 let news;
 
-const ModalFullSize = function ({ item, type }, reload) {
+const ModalFullSize = function ({ item, type,numIndex,elem}, reload) {
   initOne(async () => {
     // Variable.Static.ShowVoterInteval = { timer: 0 };
     // Variable.Static.resultShowVoter = undefined;
@@ -67,11 +67,9 @@ const ModalFullSize = function ({ item, type }, reload) {
                    <BlockLentaUsers
                 item ={item}
                 type = {type}
+                numIndex ={numIndex}
+                elem ={elem}
                 />
-               
-               
-
-
               </div>
             </div>
           </div>
