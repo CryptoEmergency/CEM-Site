@@ -364,7 +364,7 @@ const mainFooter = async function () {
                                             class="c-userpanel__icon c-userpanel__icon--logo"
                                             href="/"
                                             onclick={siteLink}>
-                                            <img src={svg["mini_logo"]} width="31" height="27" />
+                                            {/* <img src={svg["mini_logo"]} width="31" height="27" /> */}
                                         </a>
                                         <a
                                             class={`c-userpanel__icon c-userpanel__icon--lenta c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
@@ -448,7 +448,7 @@ const mainFooter = async function () {
                                             class="c-userpanel__icon c-userpanel__icon--logo"
                                             href="/"
                                             onclick={siteLink}>
-                                            <img src={svg["mini_logo"]} />
+                                            {/* <img src={svg["mini_logo"]} /> */}
                                         </a>
                                         <a
                                             class={`c-userpanel__icon c-userpanel__icon--lenta c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
