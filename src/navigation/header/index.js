@@ -198,9 +198,9 @@ const mainHeader = async function () {
                                                     <div class="notifications_list">
                                                         <div class="notifications_list_inner">
                                                             <div class="notifications_list_part part_questions">
-                                                                <NotifyItem
+                                                                {/* <NotifyItem
                                                                     data={notify}
-                                                                />
+                                                                /> */}
                                                             </div>
                                                         </div>
                                                     </div>

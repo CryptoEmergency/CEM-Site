@@ -80,7 +80,7 @@ const deleteMediaFile = function (index) {
 };
 
 const start = function () {
-  Variable.HeaderShow = false;
+  Variable.HeaderShow = true;
   Variable.FooterShow = false;
   Variable.showUserMenu = true;
 
@@ -154,6 +154,10 @@ const start = function () {
           value: [],
           show: false,
         },
+        lang: {
+          code: Variable.myInfo.mainLanguage.code,
+          name: Variable.myInfo.mainLanguage.orig_name
+        },
         forFriends: false,
         isValid: false,
       };
@@ -174,11 +178,11 @@ const start = function () {
           showDate: -1,
         },
       });
-      console.log("=84bd27=", authorPosts);
+
     },
 
     () => {
-      // console.log("=83a186=", Variable.myInfo);
+
       return (
         <div class="c-userpostcreate">
           <h3 class="c-userpostcreate__title">{Variable.lang.h.createPost}</h3>
@@ -186,7 +190,21 @@ const start = function () {
             <input class="c-userpostcreate__submit" hidden type="submit" />
             <div class="c-userpostcreate__lang">
               <label for="">{Variable.lang.label.lang}:</label>
-              <div class="blog_filter_language">{Variable.lang.lang}</div>
+              <div
+                class="blog_filter_language"
+                onclick={() => {
+                  Variable.SetModals({
+                    name: "ModalChangeLanguage",
+                    data: {
+                      onclick: async (langCode, langName, langOrig) => {
+                        formInputs.lang.name = langOrig;
+                        formInputs.lang.code = langCode;
+                        initReload()
+                      },
+                    },
+                  });
+                }}
+              >{formInputs.lang.name}</div>
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
               <If
