@@ -35,6 +35,7 @@ const BlockExchange = function (data) {
                                 class="crypto_exchanges-row exchangeListLoad"
                                 target="_blank"
                                 rel="nofollow noopener"
+                                href={exchange.url}
                             >
                                 <div class="crypto_exchanges-cell">
                                     <div>

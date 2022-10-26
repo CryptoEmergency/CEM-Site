@@ -42,6 +42,7 @@ const BlockTrade = function (data) {
                                 target="_blank"
                                 rel="nofollow noopener"
                                 data-count={trade.marketId}
+                                href={trade.url}
                             >
                                 <div class="crypto_exchanges-cell">
                                     {i + 1}.
