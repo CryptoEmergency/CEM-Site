@@ -180,6 +180,23 @@
             margin-left: 0;
         }
     }
+
+    &_top {
+        .c-questions {
+            &__filter {
+                margin-top: 0;
+                margin-right: 10px;
+
+                .profit_calculator_inputs_container {
+                    margin-top: 0;
+                }
+
+                .justselect-title {
+                    padding: 18px 0 18px 25px;
+                }
+            }
+        }
+    }
 }
 
 .userMainBlock {

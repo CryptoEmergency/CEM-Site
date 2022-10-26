@@ -103,7 +103,7 @@ const start = function () {
                                 //     </a>
                                 // </div>
                                 <If
-                                    data={Variable.MainQuestions.list_records.length < Variable.MainQuestions.totalFound}
+                                    data={Variable.dataUrl && Variable.dataUrl.adress == "question" && Variable.MainQuestions.list_records.length < Variable.MainQuestions.totalFound}
                                     dataIf={
                                         <ButtonShowMore
                                             onclick={async () => {
@@ -114,6 +114,11 @@ const start = function () {
                                                 initReload()
                                             }}
                                         />
+                                    }
+                                    dataElse={
+                                        <a class="btn-view-all-a c-button c-button--gray" href="/question/" onclick={Helpers.siteLink}>
+                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
+                                        </a>
                                     }
                                 />
                             }

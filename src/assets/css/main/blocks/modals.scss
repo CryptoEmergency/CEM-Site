@@ -4131,6 +4131,13 @@ s
 			}
 		}
 	}
+
+	.user_news_item {
+		.comment_avatar {
+			display: block;
+			margin-bottom: 5px;
+		}
+	}
 }
 
 .c-fullnews {
@@ -4164,7 +4171,7 @@ s
 		justify-content: space-between;
 		max-width: 1240px;
 		margin: 0 auto;
-		padding-left: 10px;
+		// padding-left: 10px;
 		padding-top: 40px;
 		box-sizing: border-box;
 
@@ -4176,6 +4183,7 @@ s
 
 	&__content {
 		max-width: 882px;
+		width: 100%;
 		margin: 0 auto;
 
 		@media (max-width: 1240px) {
@@ -4184,7 +4192,8 @@ s
 		}
 
 		@media (max-width: 768px) {
-			padding: 0 20px;
+			// padding: 0 20px;
+			padding: 0;
 		}
 	}
 
