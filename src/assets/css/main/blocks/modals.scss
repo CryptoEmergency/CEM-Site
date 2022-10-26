@@ -1216,8 +1216,8 @@
 
 		&__dialog {
 			max-width: 28%;
-			height: calc(100% - 52px);
-			min-height: calc(100% - 52px);
+			height: calc(100% - 64px);
+			min-height: calc(100% - 64px);
 			margin: 0;
 			transform: translateX(-100%);
 			left: calc(50% + 620px);
@@ -4325,6 +4325,13 @@ s
 		line-height: 21px;
 		color: #E8EEFF;
 	}
+
+	&__itemwrapp {
+
+		.news_page_comments {
+			margin-top: 20px;
+		}
+	}
 }
 
 .c-comments {
@@ -4764,8 +4771,8 @@ s
 		&__dialog {
 			overflow-y: auto;
 			max-width: 28%;
-			height: calc(100% - 52px);
-			min-height: calc(100% - 52px);
+			height: calc(100% - 64px);
+			min-height: calc(100% - 64px);
 			margin: 0;
 			transform: translateX(-100%);
 			left: calc(50% + 620px);

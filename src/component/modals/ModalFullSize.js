@@ -13,7 +13,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
-import { BlockNewsShow, BlockQuestionsShow,BlockLentaUsers } from '@component/blocks/index.js';
+import { BlockNewsShow, BlockQuestionsShow, BlockLentaUsers } from '@component/blocks/index.js';
 
 import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
@@ -22,7 +22,7 @@ import { CommentInput } from "@src/component/element/CommentInput.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 let news;
 
-const ModalFullSize = function ({ item, type,numIndex,elem}, reload) {
+const ModalFullSize = function ({ item, type, numIndex, elem }, reload) {
   initOne(async () => {
     // Variable.Static.ShowVoterInteval = { timer: 0 };
     // Variable.Static.resultShowVoter = undefined;
@@ -63,12 +63,12 @@ const ModalFullSize = function ({ item, type,numIndex,elem}, reload) {
                   item={item}
                   type={type}
                 />
-               
-                   <BlockLentaUsers
-                item ={item}
-                type = {type}
-                numIndex ={numIndex}
-                elem ={elem}
+
+                <BlockLentaUsers
+                  item={item}
+                  type={type}
+                  numIndex={numIndex}
+                  elem={elem}
                 />
               </div>
             </div>

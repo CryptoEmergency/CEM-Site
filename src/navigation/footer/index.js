@@ -17,6 +17,7 @@ import { siteLink } from '@src/functions.js'
 import svg from "@assets/svg/index.js"
 import { If } from '@component/helpers/All.js'
 import { Avatar } from '@component/element/Avatar.js';
+import { NotifyItem } from '@component/element/NotifyItem.js';
 
 const findUnread = function (arr) {
     let unread = false
@@ -35,6 +36,7 @@ const findUnread = function (arr) {
 const mainFooter = async function () {
     let socialIcon, collapseBodyShow
     let elem = {}
+    let notify, currentNotify
     elem.telegram = Variable.setRef()
     elem.tiktok = Variable.setRef()
     elem.youtube = Variable.setRef()
@@ -48,6 +50,10 @@ const mainFooter = async function () {
         collapseBodyShow[e.target.dataset.number] = !collapseBodyShow[e.target.dataset.number];
         e.stopPropagation()
         initGo(null, true);
+    }
+
+    const toggleVisibleNotify = function () {
+        Variable.notifyWindowShow = !Variable.notifyWindowShow;
     }
 
     init(
@@ -65,6 +71,14 @@ const mainFooter = async function () {
                 "four": false,
             }
 
+            currentNotify = {
+                question: true,
+                awards: false,
+                system: false
+            }
+
+            notify = Variable.myInfo.notifyQuestions;
+            Variable.notifyWindowShow = false;
         },
         () => {
 
@@ -353,42 +367,63 @@ const mainFooter = async function () {
                                             <img src={svg["mini_logo"]} width="31" height="27" />
                                         </a>
                                         <a
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
+                                            class={`c-userpanel__icon c-userpanel__icon--lenta c-userpanel__icon--mobile_visible ${Variable.dataUrl.adress == "lenta-users" ? "c-userpanel__icon--active" : ""}`}
                                             href="/lenta-users/"
                                             onclick={siteLink}
                                         >
-                                            <img src={svg.user_news_page} width="42" height="37" />
+                                            {/* <img src={svg.user_news_page} width="42" height="37" /> */}
                                         </a>
                                         <a
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
+                                            class={`c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--disabled c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
                                             href="/user/chats/"
                                             onclick={siteLink}
                                         >
-                                            <img src={svg["profile_icon-2"]} width="42" height="42" />
+                                            {/* <img src={svg["profile_icon-2"]} width="42" height="42" /> */}
                                         </a>
 
                                         <a
                                             href="/user/posts/"
                                             onclick={siteLink}
-                                            class="c-userpanel__icon c-userpanel__icon--mobile_visible"
+                                            class="c-userpanel__icon c-userpanel__icon--posts c-userpanel__icon--mobile_visible"
                                         >
-                                            <img src={svg.plus_in_circle} width="42" height="42" />
+                                            {/* <img src={svg.plus_in_circle} width="42" height="42" /> */}
                                         </a>
                                         <a
                                             onclick={siteLink}
-                                            class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "question") ? "c-userpanel__icon--active" : ""}`}
+                                            class={`c-userpanel__icon c-userpanel__icon--questions c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "question") ? "c-userpanel__icon--active" : ""}`}
                                             href="/question/"
                                         >
-                                            <img src={svg.user_mobile_answers_and_questions} width="42" height="39" />
+                                            {/* <img src={svg.user_mobile_answers_and_questions} width="42" height="39" /> */}
                                         </a>
-                                        <a
+                                        {/* <a
                                             onclick={siteLink}
                                             class={`c-userpanel__icon c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "news") ? "c-userpanel__icon--active" : ""}`}
                                             href="/news/"
                                         >
                                             <img src={svg.news_menu_icon1} width="42" height="39" />
-                                        </a>
+                                        </a> */}
 
+                                        {/* <a
+                                            href="/user/notify/"
+                                            style="margin-bottom: 15px;"
+                                            class={`c-userpanel__icon c-userpanel__icon--notification c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "notify") ? "c-userpanel__icon--active" : ""}`}
+                                            onclick={siteLink}
+                                        >
+                                            <img
+                                                style={`${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "filter: invert(61%) sepia(60%) saturate(485%) hue-rotate(94deg) brightness(94%) contrast(96%)" : ""}`}
+                                                src={svg.notifications_icon}
+                                                width="27"
+                                                height="36"
+                                            />
+                                        </a> */}
+
+                                        <div class={`c-notification ${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "c-notification--active" : ""}`}>
+                                            <a
+                                                class="c-userpanel__icon c-userpanel__icon--notify c-userpanel__icon--mobile_visible c-notification__link"
+                                                onClick={toggleVisibleNotify}
+                                            ></a>
+                                            <div class="c-notification__new"></div>
+                                        </div>
 
                                         <a
                                             onClick={
@@ -399,7 +434,7 @@ const mainFooter = async function () {
                                             }
                                             class="c-userpanel__icon c-userpanel__icon--mobile_visible c-userpanel__icon--burger"
                                         >
-                                            <img src={svg.user_burger_menu} width="34" height="23" />
+                                            {/* <img src={svg.user_burger_menu} width="34" height="23" /> */}
                                         </a>
                                     </div>
                                     <div class="c-userpanel__addmodal">
