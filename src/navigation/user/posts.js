@@ -184,11 +184,11 @@ const start = function () {
     () => {
 
       return (
-        <div class={["create_post", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-          <h3>{Variable.lang.h.createPost}</h3>
-          <form id="userPostCreate" onsubmit={sendAuthorization}>
-            <input style="display: none;" type="submit" />
-            <div style="display: flex; justify-content: flex-start;grid-gap: 15px">
+        <div class="c-userpostcreate">
+          <h3 class="c-userpostcreate__title">{Variable.lang.h.createPost}</h3>
+          <form id="userPostCreate" class="c-userpostcreate__form" onsubmit={sendAuthorization}>
+            <input class="c-userpostcreate__submit" hidden type="submit" />
+            <div class="c-userpostcreate__lang">
               <label for="">{Variable.lang.label.lang}:</label>
               <div
                 class="blog_filter_language"
@@ -206,7 +206,7 @@ const start = function () {
                 }}
               >{formInputs.lang.name}</div>
             </div>
-            <div data-type="posts" class="create_post_container">
+            <div data-type="posts" class="c-userpostcreate__container create_post_container">
               <If
                 data={formInputs.textInputs.show}
                 dataIf={
@@ -568,7 +568,7 @@ const start = function () {
                 accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
               />
             </div>
-            <div class="for_friends_checkbox_container">
+            <div class="c-userpostcreate__forfriends">
               <div class="checkbox">
                 <input
                   id="forfrends"
@@ -585,7 +585,7 @@ const start = function () {
                 </label>
               </div>
             </div>
-            <div style={"display:flex; width: 500px; margin: 20px auto"}>
+            <div style={"display:flex; width: 100%; max-width: 500px; margin: 20px auto"}>
               {/* <button
                 class={[
                   "c-button c-button--gradient2",
@@ -613,7 +613,7 @@ const start = function () {
               </button>
             </div>
 
-            <div class="my_posts">
+            <div class="c-userpostcreate__myposts my_posts">
               {Variable.lang.h.posts_my}
               <div class="user_news_block">
                 {/* {{> userPost}} */}

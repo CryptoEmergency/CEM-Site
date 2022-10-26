@@ -34,14 +34,14 @@ const swiperGo = function () {
         },
         breakpoints: {
             20: {
-                slidesPerView: 2,
-                spaceBetween: 15
-            },
-            320: {
                 slidesPerView: 3,
                 spaceBetween: 15
             },
-            425: {
+            390: {
+                slidesPerView: 4,
+                spaceBetween: 10
+            },
+            465: {
                 slidesPerView: 3,
                 spaceBetween: 25
             },

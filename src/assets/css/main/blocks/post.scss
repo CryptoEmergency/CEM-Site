@@ -436,6 +436,101 @@ button[data-type='voiceline'][data-page_type="posts"] {
     }
 }
 
+.c-userpostcreate {
+    max-width: calc(100% - 224px);
+    margin: 0 auto;
+
+    @media (max-width: 1199px) {
+        max-width: calc(100% - 60px);
+        padding-bottom: 40px;
+    }
+
+    @media (max-width: 767px) {
+        max-width: calc(100% - 40px) !important;
+        padding-bottom: 40px;
+    }
+
+    label {
+        font-weight: 500;
+        font-size: 16px;
+        color: #9CA2B5;
+    }
+
+    input {
+
+        &:not([type="radio"]):not(.checkbox__input) {
+            width: 100%;
+            background: #313543;
+            border: 1px solid #44495C;
+            box-sizing: border-box;
+            border-radius: 10px;
+            height: 55px;
+            padding: 23px 25px;
+            outline: none;
+            font-weight: 500;
+            color: white;
+            position: relative;
+            bottom: -1px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    textarea {
+        width: 100%;
+        background: #313543;
+        border: 1px solid #44495C;
+        box-sizing: border-box;
+        border-radius: 10px;
+        outline: none;
+        font-weight: 500;
+        color: white;
+        height: 180px;
+        margin-bottom: 20px;
+    }
+
+    &__title {
+        font-weight: 500;
+        font-size: 26px;
+        color: #FFFFFF;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__submit {}
+
+    &__lang {
+        display: flex;
+        justify-content: flex-start;
+        grid-gap: 15px;
+        order: -2;
+        margin-bottom: 15px;
+    }
+
+    &__container {
+        margin-top: 5px
+    }
+
+    &__forfriends {
+        display: flex;
+        justify-content: flex-start;
+        order: -1;
+    }
+
+    &__myposts {
+
+        .user_news_block {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
 .c-mediabtn {
     display: flex;
     justify-content: center;

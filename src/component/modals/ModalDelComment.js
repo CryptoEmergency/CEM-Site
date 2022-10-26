@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, sendApi,Helpers,parsingUrl } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initGo, sendApi, Helpers, parsingUrl } from "@betarost/cemjs";
 import { delCom, renderModalFullNews } from "@src/apiFunctionsE.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 const ModalDelComment = function (data, reload) {
@@ -8,6 +8,14 @@ const ModalDelComment = function (data, reload) {
         <header class="c-modal__header">
           {/* не нашел  такую фразу */}
           <h2 class="c-modal__title">{Variable.lang.text.deletePageComment}</h2>
+          <button
+            type="button"
+            class="c-modal__close"
+            onclick={() => {
+              Variable.DelModals("ModalDelComment");
+              // initReload("modals");
+            }}
+          ></button>
         </header>
         <div class="c-modal__body">
           <div
@@ -20,8 +28,8 @@ const ModalDelComment = function (data, reload) {
                 Variable.Modals = [];
               }
 
-              if (data.typeSet ===  "setPost" ||  data.roleAction === "setPost") {
-               
+              if (data.typeSet === "setPost" || data.roleAction === "setPost") {
+
                 Variable[`PageLenta${Variable.Static.lentaPage}`] =
                   await sendApi.send({
                     action: "getPost",
@@ -34,16 +42,17 @@ const ModalDelComment = function (data, reload) {
                       Variable.Static.lentaPage
                     ),
                   });
-              if ( data.id === data.mainId ){
-                  Variable.Modals =[]
-              }
-               else if(typeof data.callBack == "function"){
+                if (data.id === data.mainId) {
+                  Variable.Modals = []
+                }
+                else if (typeof data.callBack == "function") {
                   data.callBack();
-              }}else if(typeof data.callBack == "function"){
-            
-                  data.callBack();
+                }
+              } else if (typeof data.callBack == "function") {
+
+                data.callBack();
               }
-              else{
+              else {
                 initReload();
               }
             }}

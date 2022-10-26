@@ -37,6 +37,11 @@
             width: 100%;
             justify-content: space-between;
         }
+
+        @media(max-width: 464px) {
+            width: 100%;
+            justify-content: space-between;
+        }
     }
 
     &__auth {
@@ -56,6 +61,20 @@
 
         .auth_user_header {
             margin-left: 18px;
+        }
+
+        .c-button--gradient .c-button__text {
+            @media(max-width: 464px) {
+                font-size: 11px;
+            }
+        }
+
+        .c-header {
+            &__wrapper {
+                @media(max-width: 479px) {
+                    margin-right: 10px;
+                }
+            }
         }
     }
 
