@@ -46,6 +46,12 @@
             right: -60%;
             top: -115px;
         }
+
+        @media(max-width: 464px) {
+            transform: scale(0.6);
+            right: -90%;
+            top: -174px;
+        }
     }
 
     &__text {
@@ -232,6 +238,10 @@
         margin-top: 20px;
         margin-left: auto;
         margin-right: auto;
+
+        @media(max-width: 464px) {
+            margin-top: 0;
+        }
 
         @media(max-width: 768px) {
             padding: 0 20px;
