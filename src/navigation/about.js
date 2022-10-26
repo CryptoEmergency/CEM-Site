@@ -9,21 +9,15 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function () {
-  Variable.HeaderShow = true
-  Variable.FooterShow = true
 
   init(
     null,
     () => {
       return (
-        <div class={['c-aboutus about_us_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+        <div class="c-aboutus about_us_container main__body">
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
-              <h2 class="c-whowe__title"
-                // onclick={() => {
-                //   Variable.SetModals({ name: "ModalAnswer", data: { way: "email" } })
-                // }}
-              >
+              <h2 class="c-whowe__title">
                 {Variable.lang.h.who_are_we}
               </h2>
               <img

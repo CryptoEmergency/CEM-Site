@@ -5,7 +5,6 @@ import {
     Variable,
     parsingUrl,
     initReload,
-    Helpers
 } from '@betarost/cemjs'
 import svg from "@assets/svg/index.js"
 
@@ -103,7 +102,7 @@ const mainHeader = async function () {
         },
         () => {
 
-            if (Variable.Static.HeaderShow) {
+            if (Variable.HeaderShow) {
                 return (
                     <div class="c-header__container c-container">
                         <div class="c-header__inner">
@@ -244,12 +243,12 @@ const mainHeader = async function () {
                                 />
                             </div>
                             <nav class="c-header__menu c-menu">
-                                <a class="c-logo c-menu__link" href="/" onclick={Helpers.siteLink}>
+                                <a class="c-logo c-menu__link" href="/" onclick={siteLink}>
                                     <img class="c-logo__image" src={svg.logo} />
                                 </a>
-                                <a class="c-menu__link" href="/contacts/" onclick={Helpers.siteLink}>{Variable.lang.a.contacts}</a>
-                                <a class="c-menu__link" href="/about/" onclick={Helpers.siteLinkModal}>{Variable.lang.a.about}</a>
-                                <a class="c-menu__link" href="/blog/" onclick={Helpers.siteLink}>{Variable.lang.a.blog}</a>
+                                <a class="c-menu__link" href="/contacts/" onclick={siteLink}>{Variable.lang.a.contacts}</a>
+                                <a class="c-menu__link" href="/about/" onclick={siteLink}>{Variable.lang.a.about}</a>
+                                <a class="c-menu__link" href="/blog/" onclick={siteLink}>{Variable.lang.a.blog}</a>
                             </nav>
                         </div>
                     </div>

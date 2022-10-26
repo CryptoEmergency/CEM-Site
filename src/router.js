@@ -15,6 +15,10 @@ const mainBlock = async function () {
             timersStart("TikTok", timerTik, 1500)
         },
         async () => {
+            Variable.Static.HeaderShow = true;
+            Variable.Static.FooterShow = true;
+            Variable.Static.FooterMenuShow = true;
+
             let page = Variable.dataUrl.adress;
             if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
                 Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
