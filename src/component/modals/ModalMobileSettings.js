@@ -69,7 +69,7 @@ const ModalMobileSettings = function ({ }, reload) {
                             </a>
                             <a
                                 class={["user_icon_mobile_visible", "user_icon", Variable.pageUrl == "/chats" ? "user_icon_active" : null]}
-                                href="/user/chats/"
+                                href="#"
                             >
                                 <img src={svg["profile_icon-2"]} />
                                 <span class="mobile_user_menu_link">{Variable.lang.a.chats}</span>

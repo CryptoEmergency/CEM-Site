@@ -13,7 +13,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
-import { BlockNewsShow, BlockQuestionsShow, BlockLentaUsers } from '@component/blocks/index.js';
+import { BlockNewsShow, BlockQuestionsShow, BlockLentaUsers, BlockUniversityItem } from '@component/blocks/index.js';
 
 import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
@@ -43,7 +43,7 @@ const ModalFullSize = function ({ item, type, numIndex, elem }, reload) {
         <div class="c-modal__body">
           <div class="c-fullnews">{/*  full_news_container */}
             <div class="c-fullnews__block">{/*  full_news_block */}
-              <div class="c-fullnews__content">{/*  full_news_content */}
+              <div class="c-fullnews__content" style = {type === "university" ? "max-width:1100px" : null}>{/*  full_news_content */}
                 <div class="c-fullnews__header">{/*  user_post_header */}
                   <a
                     class="c-goback"
@@ -70,6 +70,10 @@ const ModalFullSize = function ({ item, type, numIndex, elem }, reload) {
                   numIndex={numIndex}
                   elem={elem}
                 />
+                <BlockUniversityItem
+                item= {item}
+                type = {type}
+                /> 
               </div>
             </div>
           </div>

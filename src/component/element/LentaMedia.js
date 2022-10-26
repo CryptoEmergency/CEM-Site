@@ -11,7 +11,7 @@ import svg from "@assets/svg/index.js";
 import { If, Map } from "@component/helpers/All.js";
 import {
   VideoPlayerCopy,
-  AudioPlayer,
+  AudioPlayerCopy,
   Swiper,
 } from "@component/element/index.js";
 
@@ -183,9 +183,9 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
             }
             dataIf = {
                 (item,index) => {
-                    console.log('=3caacc=',item)
+                  elem[numIndex][index] = Variable.setRef();
                     return(
-                        <AudioPlayer
+                        <AudioPlayerCopy
                 item={item}
                 index={index}
                 numIndex={numIndex}

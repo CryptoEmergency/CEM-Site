@@ -10,7 +10,7 @@ import { UserBadge } from '@component/element/UserBadge.js';
 import { If } from '@component/helpers/All.js';
 
 const UserItem = function ({ user }) {
-
+    console.log('=44e5db=', "UserItem")
     return (
         <div class="new_professional_card userLoad" data-id={user._id}>
             <div class="new_professional_card_top">
@@ -64,7 +64,7 @@ const UserItem = function ({ user }) {
                 </div>
                 <div class="new_professional_buttons">
                     <div class="button-container-preview">
-                        <a class="btn-news-preview" href="/user/chats/id{{_id}}" data-action="link" data-needauth="true">
+                        <a class="btn-news-preview" href="#" data-action="link" data-needauth="true">
                             <span>
                                 {Variable.lang.button.write}
                             </span>

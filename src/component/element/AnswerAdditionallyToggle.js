@@ -42,8 +42,10 @@ const AnswerAdditionallyToggle = function ({
         } else {
           Variable.Static.answerAdditionally = item._id;
           Variable.OutHideWindows.push([elemActive, () => {
+            console.log('=2779e9=', Variable.Static.answerAdditionally)
             Variable.Static.answerAdditionally = null
             initReload();
+            initReload("modals");
             return true
           }])
           Variable.Static.activeInputId = "";
@@ -123,7 +125,7 @@ const AnswerAdditionallyToggle = function ({
                                   typeSet: typeApi,
                                   mainId: mainId,
                                   mainCom: !commentId ? true : false,
-                                  callBack :callBack
+                                  callBack: callBack
                                 },
                               },
                               true
@@ -258,7 +260,7 @@ const AnswerAdditionallyToggle = function ({
                             mainId: mainId,
                             mainCom: !commentId ? true : false,
                             roleAction: typeApi,
-                            callBack :callBack
+                            callBack: callBack
                           },
                         },
                         true
