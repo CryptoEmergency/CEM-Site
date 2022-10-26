@@ -68,6 +68,14 @@
                 font-size: 11px;
             }
         }
+
+        .c-header {
+            &__wrapper {
+                @media(max-width: 479px) {
+                    margin-right: 10px;
+                }
+            }
+        }
     }
 
     &__menu {
