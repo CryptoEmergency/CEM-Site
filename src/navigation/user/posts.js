@@ -16,6 +16,7 @@ import {
   MediaButton,
   Avatar,
   AnswerAdditionallyToggle,
+  MediaPreview
 } from "@component/element/index.js";
 
 import { If, Map } from "@component/helpers/All.js";
@@ -35,6 +36,7 @@ const changeTextPost = (e) => {
 };
 
 const sendPost = async (e) => {
+  console.log('=c4213b=', formInputs)
   e.preventDefault();
   if (!formInputs.isValid) {
     return false;
@@ -44,7 +46,7 @@ const sendPost = async (e) => {
   let data = {
     value: {
       forFriends: formInputs.forFriends,
-      languages: Variable.myInfo.mainLanguage.code,
+      languages: formInputs.lang.code,
       media: formInputs.mediaInputs.value,
       text: formInputs.textInputs.value,
     },
@@ -85,6 +87,136 @@ const start = function () {
   Variable.showUserMenu = true;
 
   let authorPosts;
+
+
+
+  const sendPhoto = async function (crooper) {
+    if (!crooper) {
+      return
+    }
+    let canvas;
+    formInputs.mediaInputs.selectAspect = crooper.options.aspectRatio;
+    canvas = crooper.getCroppedCanvas({
+      // width: 166,
+      // height: 166,
+    });
+    let previewObj = {
+      src: canvas.toDataURL(),
+      type: "image",
+      upload: 0,
+      size: 0
+    };
+    formInputs.mediaInputs.show = true;
+    formInputs.mediaInputs.value.push(previewObj);
+    let numItem = formInputs.mediaInputs.value.length - 1
+    initReload();
+    await canvas.toBlob(function (blob) {
+      uploadMedia(
+        blob,
+        "posts",
+        async function () {
+          formInputs.mediaInputs.show = true;
+          if (!this.response) {
+            return
+          }
+          let response = JSON.parse(this.response);
+          formInputs.mediaInputs.value[numItem] = {
+            aspect: formInputs.mediaInputs.selectAspect,
+            type: response.mimetype.split("/")[0],
+            name: response.name
+          }
+          formInputs.isValid = true;
+          initReload();
+        },
+        async function (e) {
+          let contentLength;
+          if (e.lengthComputable) {
+            contentLength = e.total;
+          } else {
+            contentLength = parseInt(
+              e.target.getResponseHeader(
+                "x-decompressed-content-length"
+              ),
+              10
+            );
+          }
+
+          if (formInputs.mediaInputs.value[numItem].upload === formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !== 0) {
+            console.log('=DANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR=')
+            formInputs.mediaInputs.value.splice(numItem, 1);
+            initReload()
+            return
+          }
+          formInputs.mediaInputs.value[numItem].upload = e.loaded
+          formInputs.mediaInputs.value[numItem].size = contentLength;
+          console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+          initReload();
+        }
+      );
+      initReload();
+      Variable.DelModals("ModalCropImage");
+    });
+    return
+  }
+
+
+  const sendVideo = async function (files) {
+    let blob = new Blob([files], { type: 'video/mp4' });
+    let previewObj = {
+      src: URL.createObjectURL(blob),
+      type: "video",
+      upload: 0,
+      size: 0
+    }
+    formInputs.mediaInputs.show = true;
+    formInputs.mediaInputs.value.push(previewObj);
+    let numItem = formInputs.mediaInputs.value.length - 1
+    initReload();
+
+    uploadMedia(
+      files[0],
+      "posts",
+      async function () {
+        formInputs.mediaInputs.show = true;
+
+
+        // formInputs.mediaInputs.value.push(obj);
+        let response = JSON.parse(this.response);
+        formInputs.mediaInputs.value[numItem] = {
+          aspect: undefined,
+          type: response.mimetype.split("/")[0],
+          name: response.name
+        }
+
+        formInputs.isValid = true;
+        initReload();
+      },
+      async function (e) {
+        let contentLength;
+        if (e.lengthComputable) {
+          contentLength = e.total;
+        } else {
+          contentLength = parseInt(
+            e.target.getResponseHeader(
+              "x-decompressed-content-length"
+            ),
+            10
+          );
+        }
+        formInputs.mediaInputs.value[numItem].upload = e.loaded
+        formInputs.mediaInputs.value[numItem].size = contentLength;
+        console.log(
+          "=3c5fa7= ",
+          "Загружено",
+          e.loaded,
+          "из",
+          contentLength
+        );
+        initReload()
+      }
+    );
+    return
+  }
 
   const toggleAdditionalyMenu = function (e) {
     if (e.currentTarget.children[1].style.display == "none") {
@@ -218,356 +350,74 @@ const start = function () {
                 }
               />
               <If
-                data={
-                  formInputs.mediaInputs.show &&
-                  formInputs.mediaInputs.value.length
-                }
+                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
                 dataIf={
                   <div class="create_post_chapter createPostImage">
                     <Map
                       data={formInputs.mediaInputs.value}
                       dataIf={(item, index) => {
-                        console.log('=item=', item, index)
-                        return (
-                          <div class="create_post_photo_preview">
-                            <If
-                              data={item.type === "image"}
-                              dataIf={
-                                <img
-                                  class="fullsize media"
-                                  src={item.src !== undefined ? item.src :
-                                    `/assets/upload/posts/${item.name}`}
-                                />
-                              }
-                              dataElse={
-                                <If
-                                  data={item.src !== undefined}
-                                  dataIf={
-                                    <img
-                                      class="fullsize media"
-                                      src={images["video_background"]}
-                                    />
-                                  }
-                                  dataElse={
-
-                                    <video
-                                      class="fullsize media"
-                                      src={`/assets/upload/posts/${item.name}`}
-                                    />
-
-                                  }
-                                />
-
-                              }
+                        if (item.type != "audio") {
+                          return (
+                            <MediaPreview
+                              item={item}
+                              index={index}
+                              type="posts"
+                              formInputs={formInputs}
                             />
-
-
-                            <If
-                              data={item.size !== undefined}
-                              dataIf={<div class="circle-wrap">
-                                <div class="circle" >
-                                  <div class="mask full" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}>
-                                    <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
-                                  </div>
-                                  <div class="mask half">
-                                    <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
-                                  </div>
-                                </div>
-                              </div>}
-                            />
-
-                            <If
-                              data={
-                                item.size === undefined
-                              }
-                              dataIf={
-                                <div
-                                  class="delete_post_media"
-                                  style="display: block;"
-                                  onClick={() => {
-                                    deleteMediaFile(index);
-                                    initReload();
-                                  }}
-                                >
-                                  <img src={svg["delete_icon"]} />
-                                </div>
-                              }
-                              dataElse={
-                                <div class="stop_loading"
-                                  onclick={() => {
-                                    console.log('=STOP=')
-                                    formInputs.mediaInputs.value[index].upload = formInputs.mediaInputs.value[index].size
-                                  }}
-                                >
-
-                                </div>
-                              }
-                            />
-
-
-                          </div>
-                        );
+                          );
+                        }
                       }}
                     />
                   </div>
                 }
               />
             </div>
+
             <MediaButton
-              onclickText={() => {
-                formInputs.textInputs.show = true;
-                initReload();
+
+              onclickText={function () {
+                if (formInputs.textInputs.show === true) {
+                  return;
+                } else {
+                  formInputs.textInputs.show = true;
+                  initReload();
+                }
               }}
-              onclickPhoto={function (e) {
+
+              onclickPhoto={function () {
                 if (this.files.length == 0) {
                   return;
                 }
-                let elem = e
+
                 Variable.SetModals({
                   name: "ModalCropImage",
                   data: {
                     file: this.files[0],
-                    typeUpload: "post",
+                    typeUpload: 'posts',
                     arrMedia: formInputs.mediaInputs.value,
-                    aspectSelect: selectAspect,
+                    aspectSelect: formInputs.mediaInputs.selectAspect,
                     uploadCropImage: async function (cropper) {
-                      // if (e.currentTarget.disabled === true) {
-                      //   return false;
-                      // }
-                      var canvas;
-
-                      const imageCrop = cropper.element;
-                      const aspectValue = cropper.options.aspectRatio;
-
-                      if (cropper) {
-                        canvas = cropper.getCroppedCanvas({
-                          // width: 166,
-                          // height: 166,
-                        });
-                        var previewSrc = canvas.toDataURL();
-                        console.log('=ea896f=', cropper)
-                        let previewObj = {
-                          src: previewSrc,
-                          type: "image",
-                          upload: 0,
-                          size: 0
-                        };
-                        console.log('=83eada=', previewObj)
-                        formInputs.mediaInputs.show = true;
-                        formInputs.mediaInputs.value.push(previewObj);
-                        let numItem = formInputs.mediaInputs.value.length - 1
-                        initReload();
-                        await canvas.toBlob(function (blob) {
-                          uploadMedia(
-                            blob,
-                            "posts",
-                            async function () {
-                              formInputs.mediaInputs.show = true;
-                              // if(formInputs.mediaInputs.value[numItem].upload ===  formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !==0){
-                              //   console.log('=!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=')
-                              //   console.log('=4990b4=',formInputs.mediaInputs.value)
-                              //   return
-                              // }
-                              let tmp = JSON.parse(this.response);
-                              console.log("=tmp=", tmp, numItem);
-                              let type = tmp.mimetype.split("/")[0];
-                              let obj = {
-                                aspect: aspectValue,
-                                type,
-                                name: tmp.name,
-                              };
-                              formInputs.mediaInputs.value[numItem] = obj
-                              console.log('=69ce21=', obj)
-                              initReload();
-                            },
-                            async function (e) {
-                              let contentLength;
-                              if (e.lengthComputable) {
-                                contentLength = e.total;
-                              } else {
-                                contentLength = parseInt(
-                                  e.target.getResponseHeader(
-                                    "x-decompressed-content-length"
-                                  ),
-                                  10
-                                );
-                              }
-                              if (formInputs.mediaInputs.value[numItem].upload === formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !== 0) {
-                                console.log('=DANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR=')
-                                formInputs.mediaInputs.value.splice(numItem, 1);
-                                initReload()
-                                return
-                              }
-                              formInputs.mediaInputs.value[numItem].upload = e.loaded
-                              formInputs.mediaInputs.value[numItem].size = contentLength;
-
-                              console.log(
-
-                                "=3c5fa7= ",
-                                "Загружено",
-                                e.loaded,
-                                "из",
-                                contentLength
-                              );
-                              selectAspect = aspectValue;
-                              initReload();
-                            }
-
-                          );
-
-                          // let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
-                          // let btns = document.querySelectorAll('#addCropImage .c-cropper__toggles input[hidden]');
-
-                          // btns.forEach((element) => {
-                          //   element.setAttribute('disabled', 'disabled');
-                          // });
-
-                          Variable.DelModals("ModalCropImage");
-
-                          /** clear crop */
-                          if (typeof cropper !== "undefined") {
-                            cropper.destroy();
-                            cropper = null;
-                          }
-
-                          imageCrop.setAttribute("src", "");
-                        });
-                      }
-                    },
+                      await sendPhoto(cropper)
+                      return;
+                    }
                   },
-                });
-
-                // uploadMedia(
-                //   this.files[0],
-                //   "posts",
-                //   async function () {
-                //     formInputs.mediaInputs.show = true;
-                //     let tmp = JSON.parse(this.response);
-                //     let type = tmp.mimetype.split("/")[0];
-                //     let obj = { aspect: "1", type, name: tmp.name };
-                //     formInputs.mediaInputs.value.push(obj);
-                //     initReload();
-                //   },
-                //   async function (e) {
-                //     let contentLength;
-                //     if (e.lengthComputable) {
-                //       contentLength = e.total;
-                //     } else {
-                //       contentLength = parseInt(
-                //         e.target.getResponseHeader(
-                //           "x-decompressed-content-length"
-                //         ),
-                //         10
-                //       );
-                //     }
-                //     console.log(
-                //       "=3c5fa7= ",
-                //       "Загружено",
-                //       e.loaded,
-                //       "из",
-                //       contentLength
-                //     );
-                //   }
-                // );
-                formInputs.isValid = true;
+                }, true);
+                // formInputs.isValid = true;
+                this.value = '';
               }}
-              onclickVideo={function (e) {
+
+              onclickVideo={function () {
                 if (this.files.length == 0) {
                   return;
                 }
-                console.log('= this.files[0]=', this.files)
-                let blob = new Blob([this.files], { type: 'video/mp4' });
-
-                let url = URL.createObjectURL(blob);
-
-                let previewObj = {
-                  src: url,
-                  type: "video",
-                  upload: 0,
-                  size: 0
-                }
-                console.log('=83eada=', previewObj)
-                formInputs.mediaInputs.show = true;
-                formInputs.mediaInputs.value.push(previewObj);
-                let numItem = formInputs.mediaInputs.value.length - 1
-                initReload();
-                uploadMedia(
-                  this.files[0],
-                  "posts",
-                  async function () {
-                    formInputs.mediaInputs.show = true;
-                    let tmp = JSON.parse(this.response);
-                    let type = tmp.mimetype.split("/")[0];
-                    let obj = { aspect: undefined, type, name: tmp.name };
-                    formInputs.mediaInputs.value[numItem] = obj
-                    initReload();
-                  },
-                  async function (e) {
-                    let contentLength;
-
-                    if (e.lengthComputable) {
-                      contentLength = e.total;
-                    } else {
-                      contentLength = parseInt(
-                        e.target.getResponseHeader(
-                          "x-decompressed-content-length"
-                        ),
-                        10
-                      );
-                    }
-                    console.log('=e.loaded=', e.loaded)
-                    formInputs.mediaInputs.value[numItem].upload = e.loaded
-                    formInputs.mediaInputs.value[numItem].size = contentLength;
-                    console.log(
-                      "=loadVideo= ",
-                      "Загружено",
-                      e.loaded,
-                      "из",
-                      contentLength
-                    );
-                    initReload()
-                  }
-                );
-                formInputs.isValid = true;
+                sendVideo(this.files)
+                this.value = '';
+                return;
               }}
-            // onclickAudio={
-            //     () => {
-            //         console.log('=937776=', "onclickAudio")
-            //     }
-            // }
-            // onclickMic={
-            //     () => {
-            //         console.log('=937776=', "onclickMic")
-            //     }
-            // }
             />
-            <div>
-              <input
-                data-type="posts"
-                hidden
-                class="createPostImageInput"
-                type="file"
-                accept=".jpg,.jpeg,.png,.gif"
-              />
-            </div>
-            <div>
-              <input
-                data-type="posts"
-                hidden
-                class="createPostVideoInput"
-                type="file"
-                accept=".mp4,.avi,.mov,.mkv,.avi,.flv"
-              />
-            </div>
-            <div>
-              <input
-                data-type="posts"
-                hidden
-                class="createPostAudioInput"
-                type="file"
-                accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
-              />
-            </div>
+
+
+
             <div class="c-userpostcreate__forfriends">
               <div class="checkbox">
                 <input

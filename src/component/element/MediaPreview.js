@@ -19,17 +19,54 @@ const MediaPreview = function ({ item, index, type, formInputs }) {
                     <div class="create_post_photo_preview">
                         <img
                             class="fullsize media"
-                            src={`/assets/upload/${type}/${item.name}`}
+                            src={item.src !== undefined ? item.src :
+                                `/assets/upload/${type}/${item.name}`}
                         />
-                        <div class="delete_post_media" style="display: block;" onClick={() => {
-                            formInputs.mediaInputs.value.splice(index, 1);
-                            if (formInputs.mediaInputs.value.length == 0) {
-                                formInputs.mediaInputs.selectAspect = null;
+
+                        <If
+                            data={item.size !== undefined}
+                            dataIf={<div class="circle-wrap">
+                                <div class="circle" >
+                                    <div class="mask full" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}>
+                                        <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
+                                    </div>
+                                </div>
+                            </div>}
+                        />
+
+                        <If
+                            data={
+                                item.size === undefined
                             }
-                            initReload()
-                        }}>
-                            <img src={svg["delete_icon"]} />
-                        </div>
+                            dataIf={
+                                <div class="delete_post_media" style="display: block;" onClick={() => {
+                                    formInputs.mediaInputs.value.splice(index, 1);
+                                    if (formInputs.mediaInputs.value.length == 0) {
+                                        formInputs.mediaInputs.selectAspect = null;
+                                    }
+                                    initReload()
+                                }}>
+                                    <img src={svg["delete_icon"]} />
+                                </div>
+                            }
+                            dataElse={
+                                <div class="stop_loading"
+                                    onclick={() => {
+                                        formInputs.mediaInputs.value[index].upload = formInputs.mediaInputs.value[index].size
+                                        formInputs.mediaInputs.value.splice(index, 1);
+                                        if (formInputs.mediaInputs.value.length == 0) {
+                                            formInputs.mediaInputs.selectAspect = null;
+                                        }
+                                        initReload()
+                                    }}
+                                >
+
+                                </div>
+                            }
+                        />
                     </div>
                 }
             />
@@ -38,11 +75,70 @@ const MediaPreview = function ({ item, index, type, formInputs }) {
                 data={item.type == "video"}
                 dataIf={
                     <div class="create_post_photo_preview">
-                        <img
+                        {/* <img
                             class="fullsize media"
                             src={images["video_background"]}
+                        /> */}
+                        <If
+                            data={item.src !== undefined}
+                            dataIf={
+                                <img
+                                    class="fullsize media"
+                                    src={images["video_background"]}
+                                />
+                            }
+                            dataElse={
+
+                                <video
+                                    class="fullsize media"
+                                    src={`/assets/upload/${type}/${item.name}`}
+                                />
+
+                            }
                         />
-                        <div class="delete_post_media" style="display: block;" onClick={() => {
+
+                        <If
+                            data={item.size !== undefined}
+                            dataIf={<div class="circle-wrap">
+                                <div class="circle" >
+                                    <div class="mask full" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}>
+                                        <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
+                                    </div>
+                                </div>
+                            </div>}
+                        />
+
+                        <If
+                            data={
+                                item.size === undefined
+                            }
+                            dataIf={
+                                <div class="delete_post_media" style="display: block;" onClick={() => {
+                                    formInputs.mediaInputs.value.splice(index, 1);
+
+                                    initReload()
+                                }}>
+                                    <img src={svg["delete_icon"]} />
+                                </div>
+                            }
+                            dataElse={
+                                <div class="stop_loading"
+                                    onclick={() => {
+                                        formInputs.mediaInputs.value[index].upload = formInputs.mediaInputs.value[index].size
+                                        formInputs.mediaInputs.value.splice(index, 1);
+
+                                        initReload()
+                                    }}
+                                >
+
+                                </div>
+                            }
+                        />
+
+                        {/* <div class="delete_post_media" style="display: block;" onClick={() => {
                             formInputs.mediaInputs.value.splice(index, 1);
                             if (formInputs.mediaInputs.value.length == 0) {
                                 formInputs.mediaInputs.selectAspect = null;
@@ -50,7 +146,7 @@ const MediaPreview = function ({ item, index, type, formInputs }) {
                             initReload()
                         }}>
                             <img src={svg["delete_icon"]} />
-                        </div>
+                        </div> */}
                     </div>
                 }
             />
