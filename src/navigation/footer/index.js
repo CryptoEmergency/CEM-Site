@@ -375,8 +375,9 @@ const mainFooter = async function () {
                                         </a>
                                         <a
                                             class={`c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--disabled c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
-                                            href="/user/chats/"
-                                            onclick={siteLink}
+                                            href="#"
+                                        // href="/user/chats/"
+                                        // onclick={siteLink}
                                         >
                                             {/* <img src={svg["profile_icon-2"]} width="42" height="42" /> */}
                                         </a>
