@@ -29,7 +29,7 @@ const CourseCurrency = function ({ course, key }) {
                         <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow} />
                         <span class="btcusdt_change">{Helpers.numberFixWithSpaces(course.change, 2)}</span>
                     </div>
-                    <div class="c-currency__update">24h.</div>
+                    {/* <div class="c-currency__update">24h.</div> */}
                 </div>
             </div>
         </a>

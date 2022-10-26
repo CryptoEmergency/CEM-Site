@@ -4330,6 +4330,18 @@ s
 
 		.news_page_comments {
 			margin-top: 20px;
+
+			@media(max-width: 767px) {
+				padding: 0;
+			}
+
+			h2 {
+				padding: 0 20px;
+			}
+
+			.c-comments__form {
+				padding: 0 20px;
+			}
 		}
 	}
 }
@@ -4495,7 +4507,7 @@ s
 
 				@media(max-width: 767px) {
 					margin-left: 0;
-					min-width: auto;
+					// min-width: auto;
 				}
 			}
 

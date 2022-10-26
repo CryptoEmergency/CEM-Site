@@ -180,15 +180,15 @@ const start = function () {
     () => {
       // console.log("=83a186=", Variable.myInfo);
       return (
-        <div class="create_post">
-          <h3>{Variable.lang.h.createPost}</h3>
-          <form id="userPostCreate" onsubmit={sendAuthorization}>
-            <input style="display: none;" type="submit" />
-            <div style="display: flex; justify-content: flex-start;grid-gap: 15px">
+        <div class="c-userpostcreate">
+          <h3 class="c-userpostcreate__title">{Variable.lang.h.createPost}</h3>
+          <form id="userPostCreate" class="c-userpostcreate__form" onsubmit={sendAuthorization}>
+            <input class="c-userpostcreate__submit" hidden type="submit" />
+            <div class="c-userpostcreate__lang">
               <label for="">{Variable.lang.label.lang}:</label>
               <div class="blog_filter_language">{Variable.lang.lang}</div>
             </div>
-            <div data-type="posts" class="create_post_container">
+            <div data-type="posts" class="c-userpostcreate__container create_post_container">
               <If
                 data={formInputs.textInputs.show}
                 dataIf={
@@ -209,84 +209,84 @@ const start = function () {
                     <Map
                       data={formInputs.mediaInputs.value}
                       dataIf={(item, index) => {
-                        console.log('=item=',item, index)
+                        console.log('=item=', item, index)
                         return (
                           <div class="create_post_photo_preview">
                             <If
-                            data ={item.type === "image"}
-                            dataIf={
-<img
-                              class="fullsize media"
-                              src={item.src !== undefined?item.src:
-                                `/assets/upload/posts/${item.name}`}
-                            />
-                            }
-                            dataElse= {
-                              <If
-                              data ={item.src !== undefined}
-                              dataIf = {
-                              <img 
-                            class="fullsize media"
-                              src={images["video_background"]}
-                            />
+                              data={item.type === "image"}
+                              dataIf={
+                                <img
+                                  class="fullsize media"
+                                  src={item.src !== undefined ? item.src :
+                                    `/assets/upload/posts/${item.name}`}
+                                />
                               }
-                              dataElse ={
+                              dataElse={
+                                <If
+                                  data={item.src !== undefined}
+                                  dataIf={
+                                    <img
+                                      class="fullsize media"
+                                      src={images["video_background"]}
+                                    />
+                                  }
+                                  dataElse={
 
-                                <video 
-                                class="fullsize media"
-                                  src = {`/assets/upload/posts/${item.name}`}
+                                    <video
+                                      class="fullsize media"
+                                      src={`/assets/upload/posts/${item.name}`}
+                                    />
+
+                                  }
                                 />
 
                               }
-                              />
-                               
-                            }
                             />
-                            
-                          
+
+
                             <If
-                            data ={item.size !== undefined}
-                            dataIf ={  <div class = "circle-wrap">
-                                <div class = "circle" >
-                                    <div class = "mask full" style ={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}>
-                                      <div class="fill" style ={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
-                                    </div>
-                                    <div class = "mask half">
-                                    <div class="fill" style ={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
-                                    </div>
+                              data={item.size !== undefined}
+                              dataIf={<div class="circle-wrap">
+                                <div class="circle" >
+                                  <div class="mask full" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}>
+                                    <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
+                                  </div>
+                                  <div class="mask half">
+                                    <div class="fill" style={`transform: rotate( ${((360 / 200) * Math.round((item.upload / item.size) * 100))}deg`}></div>
+                                  </div>
                                 </div>
-                            </div>}
+                              </div>}
                             />
 
                             <If
-                            data ={
-                              item.size === undefined
-                            }
-                            dataIf ={
-<div
-                              class="delete_post_media"
-                              style="display: block;"
-                              onClick={() => {
-                                deleteMediaFile(index);
-                                initReload();
-                              }}
-                            >
-                              <img src={svg["delete_icon"]} />
-                            </div>
-                            }
-                            dataElse = {
-                              <div class = "stop_loading"
-                              onclick = {() => {
-                                console.log('=STOP=')
-                                formInputs.mediaInputs.value[index].upload = formInputs.mediaInputs.value[index].size
-                              }}
-                              >
+                              data={
+                                item.size === undefined
+                              }
+                              dataIf={
+                                <div
+                                  class="delete_post_media"
+                                  style="display: block;"
+                                  onClick={() => {
+                                    deleteMediaFile(index);
+                                    initReload();
+                                  }}
+                                >
+                                  <img src={svg["delete_icon"]} />
+                                </div>
+                              }
+                              dataElse={
+                                <div class="stop_loading"
+                                  onclick={() => {
+                                    console.log('=STOP=')
+                                    formInputs.mediaInputs.value[index].upload = formInputs.mediaInputs.value[index].size
+                                  }}
+                                >
 
-                              </div>
-                            }
+                                </div>
+                              }
                             />
-                          
-                            
+
+
                           </div>
                         );
                       }}
@@ -327,14 +327,14 @@ const start = function () {
                           // height: 166,
                         });
                         var previewSrc = canvas.toDataURL();
-                        console.log('=ea896f=',cropper)
+                        console.log('=ea896f=', cropper)
                         let previewObj = {
                           src: previewSrc,
                           type: "image",
-                          upload:0,
-                          size:0
+                          upload: 0,
+                          size: 0
                         };
-                        console.log('=83eada=',previewObj)
+                        console.log('=83eada=', previewObj)
                         formInputs.mediaInputs.show = true;
                         formInputs.mediaInputs.value.push(previewObj);
                         let numItem = formInputs.mediaInputs.value.length - 1
@@ -357,9 +357,9 @@ const start = function () {
                                 aspect: aspectValue,
                                 type,
                                 name: tmp.name,
-                              }; 
-                              formInputs.mediaInputs.value[numItem]=obj
-                              console.log('=69ce21=',obj)
+                              };
+                              formInputs.mediaInputs.value[numItem] = obj
+                              console.log('=69ce21=', obj)
                               initReload();
                             },
                             async function (e) {
@@ -374,17 +374,17 @@ const start = function () {
                                   10
                                 );
                               }
-                              if(formInputs.mediaInputs.value[numItem].upload ===  formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !==0){
+                              if (formInputs.mediaInputs.value[numItem].upload === formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !== 0) {
                                 console.log('=DANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR=')
-                                formInputs.mediaInputs.value.splice(numItem,1);
+                                formInputs.mediaInputs.value.splice(numItem, 1);
                                 initReload()
                                 return
                               }
                               formInputs.mediaInputs.value[numItem].upload = e.loaded
                               formInputs.mediaInputs.value[numItem].size = contentLength;
-                              
+
                               console.log(
-                                
+
                                 "=3c5fa7= ",
                                 "Загружено",
                                 e.loaded,
@@ -394,7 +394,7 @@ const start = function () {
                               selectAspect = aspectValue;
                               initReload();
                             }
-                            
+
                           );
 
                           // let type = document.querySelector('#addCropImage .c-button[data-type]').dataset.type;
@@ -458,21 +458,21 @@ const start = function () {
                   return;
                 }
                 console.log('= this.files[0]=', this.files)
-                let blob = new Blob([ this.files], {type: 'video/mp4'});
+                let blob = new Blob([this.files], { type: 'video/mp4' });
 
-let url= URL.createObjectURL(blob);
+                let url = URL.createObjectURL(blob);
 
-let previewObj = {
-  src: url,
-  type: "video",
-  upload:0,
-  size:0
-}
-console.log('=83eada=',previewObj)
-formInputs.mediaInputs.show = true;
-formInputs.mediaInputs.value.push(previewObj);
-let numItem = formInputs.mediaInputs.value.length - 1
-initReload();
+                let previewObj = {
+                  src: url,
+                  type: "video",
+                  upload: 0,
+                  size: 0
+                }
+                console.log('=83eada=', previewObj)
+                formInputs.mediaInputs.show = true;
+                formInputs.mediaInputs.value.push(previewObj);
+                let numItem = formInputs.mediaInputs.value.length - 1
+                initReload();
                 uploadMedia(
                   this.files[0],
                   "posts",
@@ -481,7 +481,7 @@ initReload();
                     let tmp = JSON.parse(this.response);
                     let type = tmp.mimetype.split("/")[0];
                     let obj = { aspect: undefined, type, name: tmp.name };
-                    formInputs.mediaInputs.value[numItem]=obj
+                    formInputs.mediaInputs.value[numItem] = obj
                     initReload();
                   },
                   async function (e) {
@@ -497,7 +497,7 @@ initReload();
                         10
                       );
                     }
-                    console.log('=e.loaded=',e.loaded)
+                    console.log('=e.loaded=', e.loaded)
                     formInputs.mediaInputs.value[numItem].upload = e.loaded
                     formInputs.mediaInputs.value[numItem].size = contentLength;
                     console.log(
@@ -512,16 +512,16 @@ initReload();
                 );
                 formInputs.isValid = true;
               }}
-              // onclickAudio={
-              //     () => {
-              //         console.log('=937776=', "onclickAudio")
-              //     }
-              // }
-              // onclickMic={
-              //     () => {
-              //         console.log('=937776=', "onclickMic")
-              //     }
-              // }
+            // onclickAudio={
+            //     () => {
+            //         console.log('=937776=', "onclickAudio")
+            //     }
+            // }
+            // onclickMic={
+            //     () => {
+            //         console.log('=937776=', "onclickMic")
+            //     }
+            // }
             />
             <div>
               <input
@@ -550,7 +550,7 @@ initReload();
                 accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
               />
             </div>
-            <div class="for_friends_checkbox_container">
+            <div class="c-userpostcreate__forfriends">
               <div class="checkbox">
                 <input
                   id="forfrends"
@@ -567,7 +567,7 @@ initReload();
                 </label>
               </div>
             </div>
-            <div style={"display:flex; width: 500px; margin: 20px auto"}>
+            <div style={"display:flex; width: 100%; max-width: 500px; margin: 20px auto"}>
               {/* <button
                 class={[
                   "c-button c-button--gradient2",
@@ -595,7 +595,7 @@ initReload();
               </button>
             </div>
 
-            <div class="my_posts">
+            <div class="c-userpostcreate__myposts my_posts">
               {Variable.lang.h.posts_my}
               <div class="user_news_block">
                 {/* {{> userPost}} */}

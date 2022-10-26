@@ -160,6 +160,11 @@
         text-align: center;
         overflow: hidden;
 
+        @media(max-width: 464px) {
+            width: 47px !important;
+            height: 47px !important;
+        }
+
         &::after {
             content: " ";
             position: absolute;

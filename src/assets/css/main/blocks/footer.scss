@@ -120,7 +120,8 @@
                 filter: invert(70%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%);
 
                 &.c-userpanel__icon--active {
-                    filter: invert(39%) sepia(18%) saturate(4538%) hue-rotate(228deg) brightness(93%) contrast(90%);
+                    // filter: invert(39%) sepia(18%) saturate(4538%) hue-rotate(228deg) brightness(93%) contrast(90%);
+                    filter: invert(35%) sepia(113%) saturate(4472%) hue-rotate(129deg) brightness(93%) contrast(90%) !important
                 }
             }
 
@@ -139,6 +140,10 @@
                 background: no-repeat url("../svg/user_news_page.svg") center / 78%;
             }
 
+            &--blog {
+                background: no-repeat url("../svg/blog_menu_icon1.svg") center / 70%;
+            }
+
             &--chats {
                 background: no-repeat url("../svg/profile_icon-2.svg") center / 75%;
             }
@@ -149,6 +154,10 @@
 
             &--questions {
                 background: no-repeat url("../svg/user_mobile_answers_and_questions.svg") center / 68%;
+            }
+
+            &--news {
+                background: no-repeat url("../svg/news_menu_icon1.svg") center / 70%;
             }
 
             &--notify {

@@ -23,12 +23,29 @@
         margin-left: auto;
         margin-right: auto;
         max-width: 1240px;
+
+        @media(max-width: 1240px) {
+            padding-left: 30px;
+        }
+
+        @media(max-width: 970px) {
+            margin-top: 60px;
+        }
+
+        @media(max-width: 680px) {
+            padding-left: 20px;
+        }
     }
 
     &__bg {
         position: absolute;
         top: -162px;
         right: -12%;
+
+        @media(max-width: 680px) {
+            right: -60%;
+            top: -115px;
+        }
     }
 
     &__text {
@@ -54,6 +71,11 @@
             @media(max-width: 767px) {
                 padding-top: 25px;
                 margin-bottom: 5px !important;
+            }
+
+            @media(max-width: 464px) {
+                top: -62px !important;
+                line-height: 100%;
             }
         }
 
@@ -259,6 +281,16 @@
         max-width: 270px !important;
     }
 
+    @media(max-width: 767px) {
+        width: calc(50% - 6px) !important;
+        padding: 6px 11px;
+        height: 80px !important;
+    }
+
+    @media(min-width: 390px) and (max-width: 767px) {
+        height: 55px !important;
+    }
+
     &__icon {
         display: flex;
         justify-content: center;
@@ -267,22 +299,65 @@
         height: 47px;
         background: linear-gradient(136.55deg, $soulful 4.01%, $german_liquorice1 102.48%);
         border-radius: 4px;
+
+        @media(max-width: 767px) {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 47px;
+            height: 47px;
+            background: linear-gradient(136.55deg, #394256 4.01%, #303749 102.48%);
+            border-radius: 4px;
+        }
     }
 
     &__info {
         display: flex;
+
+        @media(max-width: 767px) {
+            width: 100%;
+            flex-wrap: wrap;
+            display: flex;
+        }
     }
 
     &__name {
         font-weight: 300;
         font-size: 15px;
         line-height: 24px;
+
+        @media(max-width: 767px) {
+            position: absolute;
+            left: 57px;
+            top: 10px;
+            font-size: 13px;
+        }
+
+        @media(min-width: 390px) and (max-width: 767px) {
+            left: 53px
+        }
     }
 
     &__price {
         font-weight: 600;
         font-size: 15px;
         line-height: 24px;
+
+        @media(max-width: 767px) {
+            position: absolute;
+            top: auto;
+            bottom: 4px;
+            left: 6px;
+        }
+
+        @media(min-width: 390px) and (max-width: 767px) {
+            position: static;
+            margin-left: -10px;
+            margin-bottom: -23px;
+        }
     }
 
     &__percent {
@@ -301,11 +376,42 @@
 
     &__left {
         padding-right: 16px;
+
+        @media(max-width: 767px) {
+            padding-left: 53px; //25%;
+            padding-bottom: 8px;
+            padding-top: 5px;
+        }
+
+        @media(max-width: 680px) {
+            padding-left: 53px; //35%
+        }
     }
 
     &__right {
         padding-left: 25px;
         border-left: 1px solid $white02;
+
+        @media(max-width: 767px) {
+            position: absolute;
+            left: 57px;
+            top: 26px;
+            display: flex;
+            justify-content: space-between;
+            width: calc(100% - 62px);
+            padding-left: 0;
+            padding-top: 0;
+            border-top: 0;
+            border-left: 0;
+        }
+
+        @media(min-width: 390px) and (max-width: 767px) {
+            position: absolute;
+            right: 3px;
+            top: 26px; //9px;
+            left: auto;
+            justify-content: flex-end;
+        }
     }
 
     &__update {
@@ -398,20 +504,6 @@
     }
 }
 
-// .items-currencies {
-//     display: flex;
-//     justify-content: space-between;
-//     max-width: 1240px;
-//     margin: 0 auto;
-//     margin-top: 40px;
-//     margin-bottom: 20px;
-
-//     a {
-//         text-decoration: none;
-//         color: inherit;
-//     }
-// }
-
 .icon-color-btc {
     border-radius: 4px;
     width: 37px;
@@ -454,121 +546,5 @@
     img {
         width: 100%;
         border-radius: 4px;
-    }
-}
-
-@media(max-width: 1240px) {
-    .с-preview {
-
-        &__title {
-            padding-left: 30px;
-        }
-    }
-
-    // .items-currencies {
-    //     width: calc(100% - 30px);
-    //     margin-left: 30px !important;
-    //     margin-right: 0 !important;
-    // }
-}
-
-@media(max-width: 970px) {
-    .с-preview {
-
-        &__title {
-            margin-top: 60px;
-        }
-    }
-}
-
-@media(max-width: 767px) {
-    // .items-currencies {
-    //     width: calc(100% - 60px);
-    //     height: 185px;
-    //     display: none;
-    // }
-
-    .c-currency {
-        width: calc(50% - 6px) !important;
-        padding: 6px 11px;
-        height: 80px !important;
-
-        &__icon {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 47px;
-            height: 47px;
-            background: linear-gradient(136.55deg, #394256 4.01%, #303749 102.48%);
-            border-radius: 4px;
-        }
-
-        &__info {
-            width: 100%;
-            flex-wrap: wrap;
-            display: flex;
-        }
-
-        &__left {
-            padding-left: 25%;
-            padding-bottom: 8px;
-            padding-top: 5px;
-        }
-
-        &__right {
-            position: absolute;
-            left: 57px;
-            top: 26px;
-            display: flex;
-            justify-content: space-between;
-            width: calc(100% - 62px);
-            padding-left: 0;
-            padding-top: 0;
-            border-top: 0;
-            border-left: 0;
-        }
-
-        &__name {
-            position: absolute;
-            left: 57px;
-            top: 10px;
-            font-size: 13px;
-        }
-
-        &__price {
-            position: absolute;
-            top: auto;
-            bottom: 4px;
-            left: 6px;
-        }
-    }
-}
-
-@media(max-width: 680px) {
-    .с-preview {
-
-        &__title {
-            padding-left: 20px;
-        }
-
-        &__bg {
-            right: -60%;
-            top: -115px;
-        }
-    }
-
-    // .items-currencies {
-    //     margin-left: 20px !important;
-    //     width: calc(100% - 40px);
-    // }
-
-    .c-currency {
-
-        &__left {
-            padding-left: 35%;
-        }
     }
 }
