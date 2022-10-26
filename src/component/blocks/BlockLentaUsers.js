@@ -92,7 +92,8 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
         if (total !== undefined &&  e.target.dataset.name === undefined)
           Variable.SetModals({
           name: "ModalFullSize",
-          data: { item, type: "post" },
+          data: { item, type: "post", numIndex:numIndex,
+          elem:elem },
         });
       }}
     >

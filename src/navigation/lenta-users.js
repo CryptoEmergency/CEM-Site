@@ -13,7 +13,7 @@ import { If, Map } from "@component/helpers/All.js";
 import { SwitchLenta, Select } from "@component/element/index.js";
 import { BlockLentaUsers } from "@component/blocks/index.js";
 
-let optionsSelect, filters , showFilter;
+let optionsSelect, filters, showFilter;
 
 const start = function () {
   Variable.Static.lentaFilters = {
@@ -84,7 +84,7 @@ const start = function () {
       optionsSelect = {
         posts: {
           nameOptions: "posts",
-         
+
           items: [
             { text: Variable.lang.span.userNews, value: "all" },
             { text: Variable.lang.h.posts_friends, value: "friends" },
@@ -110,8 +110,9 @@ const start = function () {
                   <div
                     class={[
                       "c-questions__filter",
+                      "c-questions__filter--openmobile",
                       "questions_filter",
-                      showFilter ? "c-questions__filter--openmobile" : null,
+                      // showFilter ? "c-questions__filter--openmobile" : null,
                     ]}
                   >
                     <Select
@@ -121,8 +122,8 @@ const start = function () {
                         Variable.Static.lentaFilters.author =
                           filters[nameOptions].value === "friends"
                             ? {
-                                $in: Variable.myInfo.subscribed,
-                              }
+                              $in: Variable.myInfo.subscribed,
+                            }
                             : null;
 
                         Variable[`PageLenta${Variable.Static.lentaPage}`] =
@@ -139,13 +140,13 @@ const start = function () {
                     />
                   </div>
                   <div style="display: flex; grid-gap: 20px">
-                    <div class="news_category_filter">
+                    {/* <div class="news_category_filter">
                       <img src={svg["filter"]}
-                      onClick={() => {
-                        showFilter = !showFilter;
-                        initReload();
-                      }} />
-                    </div>
+                        onClick={() => {
+                          showFilter = !showFilter;
+                          initReload();
+                        }} />
+                    </div> */}
                     <div
                       class="alt_language_change"
                       onclick={() => {
@@ -176,7 +177,7 @@ const start = function () {
                     </div>
                   </div>
                 </div>
-                
+
                 <SwitchLenta switchPage={Variable.Static.lentaPage} />
 
                 <div class="userNewsBlock">
@@ -188,9 +189,9 @@ const start = function () {
                   >
                     <div
                       class="user_news_block"
-                      // After={() => {
-                      //   swiperGo()
-                      // }}
+                    // After={() => {
+                    //   swiperGo()
+                    // }}
                     >
                       <Map
                         data={

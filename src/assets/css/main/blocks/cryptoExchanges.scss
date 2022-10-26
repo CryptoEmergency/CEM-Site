@@ -60,6 +60,13 @@
     h4 {
         margin-top: 5px;
     }
+
+    &+.c-friends {
+        .c-friends__container {
+            padding-top: 0;
+            padding-bottom: 20px;
+        }
+    }
 }
 
 .crypto_exchanges_full_page {

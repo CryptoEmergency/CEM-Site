@@ -180,6 +180,23 @@
             margin-left: 0;
         }
     }
+
+    &_top {
+        .c-questions {
+            &__filter {
+                margin-top: 0;
+                margin-right: 10px;
+
+                .profit_calculator_inputs_container {
+                    margin-top: 0;
+                }
+
+                .justselect-title {
+                    padding: 18px 0 18px 25px;
+                }
+            }
+        }
+    }
 }
 
 .userMainBlock {
@@ -831,13 +848,14 @@
     background-image: url('../images/user_background_image.jpg');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 330px;
+    height: 330px !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 5px;
+    width: 100%;
 
     .audio_container {
         margin-bottom: 0;

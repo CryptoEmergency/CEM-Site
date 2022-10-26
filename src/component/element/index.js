@@ -8,6 +8,7 @@ export { CommentInput } from "./CommentInput.js";
 export { LentaMedia } from "./LentaMedia.js"
 export { AudioPlayer } from "./AudioPlayer.js"
 export { VideoPlayer } from "./VideoPlayer.js"
+export { VideoPlayerCopy } from "./VideoPlayerCopy.js"
 export { QuestionAnswers } from "./QuestionAnswers.js"
 export { MediaButton } from "./MediaButton.js"
 export { Likes } from "./Likes.js"
@@ -20,3 +21,4 @@ export { MediaPreview } from "./MediaPreview.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
 export { SwitchLenta } from "./SwitchLenta.js";
+export { AwardsProgress } from "./AwardsProgress.js";

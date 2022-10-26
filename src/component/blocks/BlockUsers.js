@@ -205,7 +205,7 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
                     </div>
                 </div>
                 <If
-                    data={items.list_records.length < items.totalFound}
+                    data={Variable.dataUrl && Variable.dataUrl.adress == "users" && items.list_records.length < items.totalFound}
                     dataIf={
                         <ButtonShowMore
                             onclick={async () => {
@@ -214,6 +214,14 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
                                 initReload()
                             }}
                         />
+                    }
+                />
+                <If
+                    data={Variable.dataUrl && Variable.dataUrl.adress == ""}
+                    dataIf={
+                        <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={Helpers.siteLink}>
+                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
+                        </a>
                     }
                 />
             </div>
