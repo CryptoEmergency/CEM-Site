@@ -156,25 +156,25 @@ const mainHeader = async function () {
                                             <div class="header_avatar_container">
                                                 <Avatar author={Variable.myInfo} />
                                             </div>
-                                            <div class="auth_user_header">
+                                            {/* <div class="auth_user_header">
                                                 <div class={`c-header__notifications c-notification ${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "c-notification--active" : ""}`}>
                                                     <a class="c-notification__link" onClick={toggleVisibleNotify}></a>
                                                     <div class="c-notification__new"></div>
                                                 </div>
-                                                {/* <div class="c-header__messages c-messages">
+                                                <div class="c-header__messages c-messages">
                                                     <a href="/user/chats/" class="c-messages__link" onclick={siteLink}>
                                                         <i class="c-messages__icon"></i>
                                                         <div style="display: none;" class="c-messages__counter"></div>
                                                     </a>
                                                     <div class="c-messages__new"></div>
-                                                </div> */}
-                                                {/* <i
+                                                </div>
+                                                <i
                                                     class="c-header__burger c-header__burger--noauth"
                                                     onclick={() => {
                                                         Variable.SetModals({ name: "ModalMobileMainSettings", data: {} })
                                                     }}
-                                                ></i> */}
-                                            </div>
+                                                ></i>
+                                            </div> */}
                                             {Variable.auth ?
                                                 <div style={`${Variable.notifyWindowShow ? "" : "display: none;"}`} class="user_notifications_block auth_notifications" id="notifications_block">
                                                     <img class="notify_close" src={svg.close} onClick={toggleVisibleNotify} />
@@ -198,9 +198,9 @@ const mainHeader = async function () {
                                                     <div class="notifications_list">
                                                         <div class="notifications_list_inner">
                                                             <div class="notifications_list_part part_questions">
-                                                                <NotifyItem
+                                                                {/* <NotifyItem
                                                                     data={notify}
-                                                                />
+                                                                /> */}
                                                             </div>
                                                         </div>
                                                     </div>

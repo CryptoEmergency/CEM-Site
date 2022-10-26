@@ -227,34 +227,36 @@ const ModalReg = function () {
             wayReg = "email"
             listCodes = Variable.phoneCodes
             viewPassword = false
-            formInputs = {
-                email: {
-                    value: "",
-                    valid: false,
-                    error: false,
-                    errorText: Variable.lang.error_div.wrong_email
-                },
-                pass: {
-                    value: "",
-                    valid: false,
-                    error: false,
-                    errorText: Variable.lang.error_div.password5
-                },
-                phone: {
-                    value: "",
-                    code: 7,
-                    abbr: "ru",
-                    valid: false,
-                    error: false,
-                    errorText: Variable.lang.error_div.wrong_phone
-                },
-                agreement: {
-                    value: false,
-                    valid: false,
-                    error: false,
-                    errorText: Variable.lang.error_div.needAgree
-                },
-                isValid: false
+            if (!formInputs) {
+                formInputs = {
+                    email: {
+                        value: "",
+                        valid: false,
+                        error: false,
+                        errorText: Variable.lang.error_div.wrong_email
+                    },
+                    pass: {
+                        value: "",
+                        valid: false,
+                        error: false,
+                        errorText: Variable.lang.error_div.password5
+                    },
+                    phone: {
+                        value: "",
+                        code: 7,
+                        abbr: "ru",
+                        valid: false,
+                        error: false,
+                        errorText: Variable.lang.error_div.wrong_phone
+                    },
+                    agreement: {
+                        value: false,
+                        valid: false,
+                        error: false,
+                        errorText: Variable.lang.error_div.needAgree
+                    },
+                    isValid: false
+                }
             }
         }
     )
@@ -344,6 +346,7 @@ const ModalReg = function () {
                                     id="fast_agree"
                                     required="required"
                                     data-type="agreement"
+                                    checked={formInputs.agreement.value}
                                     value={formInputs.agreement.value}
                                     onchange={changeInput}
                                 />
