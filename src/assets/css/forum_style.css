@@ -19,10 +19,31 @@
     height: 700px;
 }
 
+.company_block{
+    display: grid;
+    grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+    grid-gap: 16px;
+    margin-bottom: 30px;
+}
+
+.company_item{
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 10px;
+    color: inherit;
+    text-decoration: none;
+}
 
 @media(max-width: 1000px) {
     .forum_plan{
         width: 100%; 
+    }
+    .company_block{
+        display: grid;
+        grid-template-columns: 100%;
     }
     .speakers_block{
         display: grid; grid-template-columns: 100%; 
@@ -46,6 +67,9 @@
         display: grid; 
         grid-template-columns: 200px 320px; 
         align-items: center;
+        font-size: 14px;
+    }
+    .company_item{
         font-size: 14px;
     }
 }
