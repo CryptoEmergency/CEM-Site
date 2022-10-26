@@ -8,6 +8,7 @@ import {
 const start = function () {
     Variable.HeaderShow = true
     Variable.FooterShow = true
+    let tmp = "<!--Логин в Метрике-->"
     init(
         null,
         () => {
@@ -15,6 +16,7 @@ const start = function () {
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     Version page
+                    {"<!--Логин в Метрике-->"}
                 </div>
             )
         })
