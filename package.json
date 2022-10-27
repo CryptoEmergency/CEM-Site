@@ -7,7 +7,7 @@
     "start": "node start"
   },
   "dependencies": {
-    "@betarost/cem": "^1.0.5",
+    "@betarost/cem": "^1.0.6",
     "@betarost/cemjs": "^1.1.2",
     "cropperjs": "^1.5.12",
     "moment": "^2.29.4",
