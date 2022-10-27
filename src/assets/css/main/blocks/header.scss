@@ -526,6 +526,13 @@
         bottom: 20px;
         right: 20px;
 
+        @media(max-width: 767px) {
+            width: 40px;
+            height: 40px;
+            right: 10px;
+            bottom: 10px;
+        }
+
         img {
             width: 100%;
             height: auto;
@@ -913,6 +920,109 @@
                         position: relative;
                         left: 5px !important;
                     }
+                }
+            }
+        }
+    }
+
+    &--bottom {
+        top: auto;
+        bottom: -1px;
+        height: 65px; //52px;
+        width: 100%;
+        transition: 0.7s;
+        z-index: 9999;
+        border-top: 1px solid #363C50;
+        max-width: 1240px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .c-userpanel {
+
+            &__icons {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-left: 0;
+                margin-top: 0;
+                height: 65px;
+
+                @media(max-width: 1199px) {
+                    padding: 5px 30px;
+                }
+
+                @media (max-width: 522px) {
+                    padding: 5px 20px !important;
+                }
+
+                @media (max-width: 420px) {
+                    padding: 5px 10px !important;
+                }
+            }
+
+            &__icon {
+                &:not(.c-userpanel__icon--logo) {
+                    position: static;
+                    align-self: center;
+                    margin: 0;
+                    filter: invert(70%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%);
+
+                    &.c-userpanel__icon--active {
+                        filter: invert(39%) sepia(18%) saturate(4538%) hue-rotate(228deg) brightness(93%) contrast(90%);
+                        // filter: invert(35%) sepia(113%) saturate(4472%) hue-rotate(129deg) brightness(93%) contrast(90%) !important
+                    }
+                }
+
+                &--logo {
+                    margin-bottom: 10px;
+                    width: 48px;
+                    height: 48px;
+                    margin-bottom: 0;
+                    background: no-repeat url("../svg/mini_logo.svg") center / 70%;
+
+                    img {
+                        width: 31px;
+                        position: relative;
+                        left: 5px;
+                        bottom: -4px;
+                    }
+                }
+
+                &--lenta {
+                    background: no-repeat url("../svg/user_news_page.svg") center / 78%;
+                }
+
+                &--blog {
+                    background: no-repeat url("../svg/blog_menu_icon1.svg") center / 70%;
+                }
+
+                &--chats {
+                    background: no-repeat url("../svg/profile_icon-2.svg") center / 75%;
+                }
+
+                &--posts {
+                    background: no-repeat url("../svg/plus_in_circle.svg") center / 71%;
+                }
+
+                &--questions {
+                    background: no-repeat url("../svg/user_mobile_answers_and_questions.svg") center / 68%;
+                }
+
+                &--news {
+                    background: no-repeat url("../svg/news_menu_icon1.svg") center / 70%;
+                }
+
+                &--notify {
+                    background: no-repeat url("../svg/icon/notifications_icon.svg") center top / 58%;
+                }
+
+                &--burger {
+                    display: block;
+                    background: no-repeat url("../svg/user_burger_menu.svg") center / 68%;
+                }
+
+                &--disabled {
+                    filter: invert(45%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%) !important;
                 }
             }
         }

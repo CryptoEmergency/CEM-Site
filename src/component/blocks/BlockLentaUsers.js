@@ -25,7 +25,7 @@ import {
   AnswerAdditionallyToggle,
   CommentInput
 } from "@component/element/index.js";
-import { If} from "@component/helpers/All.js";
+import { If } from "@component/helpers/All.js";
 
 const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, type }) {
   let mainId = item._id;
@@ -48,7 +48,8 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
     }
   }
 
-
+  console.log('=d747c6=', 'AnswerAdditionallyToggle = ')
+  console.log('=d747c6=', item)
 
   return (
 

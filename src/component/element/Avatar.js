@@ -48,14 +48,14 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           dataIf={
             <div
               class="c-avataricon__settings"
-              onclick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                Variable.SetModals({
-                  name: "ModalContextMenu",
-                  data: {},
-                });
-              }}
+            // onclick={(e) => {
+            //   e.stopPropagation();
+            //   e.preventDefault();
+            //   Variable.SetModals({
+            //     name: "ModalContextMenu",
+            //     data: {},
+            //   });
+            // }}
             >
               <img class="" src={svg.settings_icon} width="20" height="20" />
             </div>

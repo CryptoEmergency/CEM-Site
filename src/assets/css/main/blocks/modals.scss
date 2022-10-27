@@ -83,6 +83,16 @@
 		}
 	}
 
+	&--menu {
+
+		.c-fullnews {
+
+			&__itemwrapp {
+				background: #2B3040;
+			}
+		}
+	}
+
 	&__dialog {
 		position: relative;
 		width: auto;

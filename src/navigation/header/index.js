@@ -121,28 +121,29 @@ const mainHeader = async function () {
                             <div class="c-header__auth">
                                 <div
                                     class="language"
-                                    // onclick={(e) => {
-                                    //     elem().hidden = !elem().hidden
-                                    //     if (!elem().hidden) {
-                                    //         Variable.OutHideWindows.push([elem, elem])
-                                    //     }
-                                    //     e.stopPropagation();
-                                    // }}
-                                    onclick={() => {
-                                        Variable.SetModals({
-                                            name: "ModalChangeLanguage",
-                                            data: {
-                                                onclick: async (langCode, langName, langOrig) => {
-                                                    formInputs.lang.name = langOrig;
-                                                    formInputs.lang.code = langCode;
-                                                    initReload()
-                                                },
-                                            },
-                                        });
+                                    onclick={(e) => {
+                                        elem().hidden = !elem().hidden
+                                        if (!elem().hidden) {
+                                            Variable.OutHideWindows.push([elem, elem])
+                                        }
+                                        e.stopPropagation();
                                     }}
+                                // onclick={() => {
+                                //     Variable.SetModals({
+                                //         name: "ModalChangeLanguage",
+                                //         data: {
+                                //             onclick: async (langCode, langName, langOrig) => {
+                                //                 formInputs.lang.name = langOrig;
+                                //                 formInputs.lang.code = langCode;
+                                //                 initReload()
+                                //             },
+                                //         },
+                                //     });
+                                // }}
                                 >
                                     <div class="selectlink">
-                                        <div class="selectlink-control"><span>{formInputs.lang.name}</span></div>
+                                        <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
+                                        {/* <div class="selectlink-control"><span>{formInputs.lang.name}</span></div> */}
                                     </div>
                                 </div>
                                 <div
