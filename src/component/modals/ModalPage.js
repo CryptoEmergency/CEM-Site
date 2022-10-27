@@ -10,6 +10,7 @@ import {
   initGo,
   initOne,
   stringToHtml,
+  getInitList
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 
@@ -24,8 +25,9 @@ import { BottomMenu } from '@component/element/BottomMenu.js';
 import { AnswerAdditionallyToggle } from '@component/element/index.js'
 let news;
 
-const ModalPage = function ({ item, type }, reload) {
-  let mainId = item._id;
+const ModalPage = async function (ID, reload) {
+  console.log('=c1d88c=2 ModalPage', getInitList())
+  // let mainId = item._id;
 
   initOne(async () => {
     // Variable.Static.ShowVoterInteval = { timer: 0 };
@@ -56,7 +58,7 @@ const ModalPage = function ({ item, type }, reload) {
                     <img class="c-goback__arrow" src={svg["go_back_icon"]} />
                     <span class="c-goback__text">{Variable.lang.span.back}</span>
                   </a>
-                  <AnswerAdditionallyToggle
+                  {/* <AnswerAdditionallyToggle
                     item={item}
                     typeApi={"setPost"}
                     type={{
@@ -70,11 +72,11 @@ const ModalPage = function ({ item, type }, reload) {
                     }}
                     mainId={mainId}
                   // callBack={getItem}
-                  />
+                  /> */}
                 </div>
 
                 <div class="c-fullnews__itemwrapp">
-                  <p>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.</p>
+                  {getInitList()[0].function(reload)}
                 </div>
               </div>
             </div>

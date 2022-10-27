@@ -9,7 +9,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function (data, ID = "mainBlock") {
-
+  console.log('=1f3466=', data, ID)
   init(
     null,
     () => {
@@ -158,7 +158,6 @@ const start = function (data, ID = "mainBlock") {
               >
                 {Variable.lang.h.who_are_we}
               </h2>
-              <div hidden={true}>{"<!--Логин в Метрике-->"}</div>
               <img
                 class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}
