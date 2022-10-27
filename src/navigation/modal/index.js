@@ -16,7 +16,7 @@ const mainModal = async function () {
         },
 
         (reload) => {
-            console.log('=1060e5=', "mainModal", Variable.ModalsPage, Variable.Modals)
+            // console.log('=1060e5=', "mainModal", Variable.ModalsPage, Variable.Modals)
 
             // if (Variable.ModalsPage.length) {
 
