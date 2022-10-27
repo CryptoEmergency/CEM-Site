@@ -79,7 +79,7 @@ const mainHeader = async function () {
                     // code: Variable.myInfo.mainLanguage.code,
                     // name: Variable.myInfo.mainLanguage.orig_name
                     code: Variable.lang.code,
-                    name: Variable.lang.orig_name
+                    name: Variable.lang.lang_orig
                 },
             };
 
