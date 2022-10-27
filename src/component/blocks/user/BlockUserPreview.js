@@ -11,11 +11,11 @@ import { percent } from '@component/helpers/All.js';
 
 const BlockUserPreview = function ({ userInfo }) {
     return (
-        <div class="c-userpreview">
+        <div class="c-userpreview c-container">
             <div class="c-userpreview__header">
 
                 <div class="c-userpreview__avatar">
-                    <Avatar author={userInfo} parent={'big_user_avatar'} />
+                    <Avatar author={userInfo} parent={'big_user_avatar'} settings={true} />
                 </div>
                 <img
                     id="currentUserBackground"

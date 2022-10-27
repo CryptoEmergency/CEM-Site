@@ -11,7 +11,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { siteLink } from '@src/functions.js'
 import { UserItem } from '@component/element/UserItem.js';
-import { If, Map } from '@component/helpers/All.js';
+import { If} from '@component/helpers/All.js';
 
 import {
     ButtonShowMore,
@@ -193,14 +193,13 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
                     </div>
 
                     <div class="c-friends__list top_professionals_block">
-                        <Map
-                            data={items.list_records}
-                            dataIf={(item, index) => {
+                        {
+                            items.list_records.map((item, index) => {
                                 return (
                                     <UserItem user={item} />
                                 )
-                            }}
-                        />
+                            })
+                        }
 
                     </div>
                 </div>

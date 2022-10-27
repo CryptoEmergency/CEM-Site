@@ -64,7 +64,7 @@ const start = function () {
                         <div class="chats_search">
                         </div>
                         <div class="messages_list" data-action="messagesLinkPrevent" data-nofollow="true">
-                            <Map
+                            {/* <Map
                                 data={chatsList.list_records}
                                 dataIf={(item, index) => {
                                     let user
@@ -155,7 +155,7 @@ const start = function () {
                                     )
                                 }
                                 }
-                            />
+                            /> */}
                         </div>
                     </div>
                     <div class="messages_dialog">

@@ -24,7 +24,7 @@ const start = function () {
 
     Variable.HeaderShow = true
     Variable.FooterShow = true
-
+    let showAllCompanies = false
 
     const swiperGo = function (numIndex) {
         // if (!swiperitem) {
@@ -81,6 +81,11 @@ const start = function () {
             spaceBetween: 20
         });
         // }
+    }
+
+    const ShowAllCompany = function(){
+        showAllCompanies = true
+        initReload()
     }
 
     init(
@@ -358,7 +363,13 @@ const start = function () {
                                         <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Билет для посетителей включает не только пропуск на форум, но и большой список привилегий в лучших ресторанах и отелях г. Новороссийск.
                                     </p>
                                 </div>
-                                <a target="_blank" href="https://t.me/cryptoforumsouth" rel="nofollow nooopener" style="display: flex; align-items: center; color: inherit; text-decoration: none; width: 100%; justify-content: center"><img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединяйтесь в наш телеграм</span></a>
+                                <div class="forum_button_container">
+                                    <div class="forum_button">
+                                        <a target="_blank" href="https://t.me/cryptoforumsouth" rel="nofollow nooopener" style="display: flex; align-items: center; color: inherit; text-decoration: none;">
+                                            <img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединяйтесь в наш телеграм</span>
+                                        </a>
+                                    </div>
+                                </div>
                                 <a style="margin: 40px auto" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
                                     <span>Купить билет</span>
                                 </a>
@@ -388,6 +399,55 @@ const start = function () {
                                 </a>
                             </div>
                             <div>
+                                <h4 style="text-align: center; margin-bottom: 40px">Компании</h4>
+                                <div class="company_block">
+                                    <a target="_blank" rel="nofollow nooopener" href="https://metis.io" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_1']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Metis – это Ethereum Layer 2 – платформа, подходящая любому пользователю.</p>
+                                            <p>Самый дешевый и быстрый Layer 2-блокчейн в мире с уникальными продуктами в собственной экосистеме.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cryptoholding.ru" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_2']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Crypto Holding - многопрофильный холдинг, работающий в сфере блокчейн-технологий и криптовалют. Компания создана в 2022 году после объеднения ряда игроков рынка под единым брендом.</p>
+                                            <p>Главная миссия компании - выполнять функции точки входа в крипторынок новых предпринимателей и бизнесменов.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://bonus-group.ru" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_3']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Специалисты Группы компаний «БОНУС» представляют права и защищают интересы клиентов на всей территории Российской Федерации, а в случае необходимости, и за ее пределами.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://ttmboard.com" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_4']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Настольная игра TTM Board Game - это инновационный офлайн-тренажер для того, чтобы развивать навыки в работе с криптовалютой, потренироваться в реализации собственных инвестстратегий и овладеть навыками финансовой грамотности без ненужного риска и финансовых потерь.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://ttm.academy" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_5']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">TTM Academy – одна из крупнейших Edtech-платформ с тренингами и вебинарами по трейдингу и инвестициям, цифровым активам и технологии блокчейн, DeFi и торговым стратегиям.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://crypto.ru" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_6']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Crypto.ru — крупнейший информационный ресурс в Рунете о криптовалютах и блокчейне. Сайт предоставляет актуальный курсы монет, мониторинг обменников, рейтинг бирж и кошельков.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a
+                                    style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
+                                    class="с-preview__part"
+                                    onclick={ShowAllCompany}>
+                                    <span>Показать все</span>
+                                </a>
+                            </div>
+                            <div>
                                 <h4 style="text-align: center; margin-bottom: 40px">Спикеры форума</h4>
                                 <div class="speakers_block">
                                     <div class="speaker_item" style="text-align: center">
@@ -405,7 +465,7 @@ const start = function () {
                                         </div>
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Дмитрий Белов</p>
-                                            <p>Управляющий директор  проекта Crypto Emergency</p>
+                                            <p>Управляющий директор проекта Crypto Emergency</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
@@ -464,10 +524,47 @@ const start = function () {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_9']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Василий Подзоров</p>
+                                            <p>Руководитель TTM Board Game</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_10']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Игорь Ильин</p>
+                                            <p>CEO CryptoMetaDao</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_11']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Вероника Близнец</p>
+                                            <p>Адвокат, юрист-международник</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
@@ -502,6 +599,14 @@ const start = function () {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_7"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://crypto.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_8"]} />
                                     </a>
                                     <a
                                         target="_blank"

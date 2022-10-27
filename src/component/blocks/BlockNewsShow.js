@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Helpers, Variable, sendApi, initReload } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { If, Map } from "@component/helpers/All.js";
+import { If} from "@component/helpers/All.js";
 import {
   CommentInput,
   QuestionAnswerItemComment,
@@ -93,9 +93,8 @@ const BlockNewsShow = function ({ item, type }) {
                                     comments={item.comments}
                                 /> */}
                 {/* <QuestionAnswerItemComment item = {item}  mainId={mainId} /> */}
-                <Map
-                  data={item.comments}
-                  dataIf={(item, index) => {
+                {
+                  item.comments.map((item, index) => {
                     return (
                       <BlockComment
                         item={item}
@@ -104,8 +103,8 @@ const BlockNewsShow = function ({ item, type }) {
                         callBack={getItem}
                       />
                     );
-                  }}
-                />
+                  })
+                }
               </div>
             </div>
           }

@@ -13,7 +13,7 @@ import {
   CommentInput,
   AnswerAdditionallyToggle,
 } from "@component/element/index.js";
-import { If, Map } from "@component/helpers/All.js";
+import { If} from "@component/helpers/All.js";
 // import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCommentComment.js";
 // const showAnswerAdditionallyContainer = (id) => {
 //   Variable.Static.answerAdditionallyShow = id;
@@ -124,14 +124,14 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack, typeS
           />
         }
       />
+      
 
       <If
-        data={!commentId}
+        data={!commentId }
         dataIf={
           <div class="user_comment_comment">
-            <Map
-              data={item.comments}
-              dataIf={(item, index) => {
+            {
+              (item.comments || []).map((item, index) => {
                 return (
                   <BlockComment
                     item={item}
@@ -142,8 +142,8 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack, typeS
                     typeSet = {typeSet}
                   />
                 );
-              }}
-            />
+              })
+            }
           </div>
         }
       />

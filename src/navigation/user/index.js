@@ -16,10 +16,9 @@ import { ProfileTabsMenu } from '@component/element/index.js';
 const start = function (userInfo) {
     let profilePage,
         activeItems
-    Variable.HeaderShow = false
+    Variable.HeaderShow = true
     Variable.FooterShow = false
-    Variable.showUserMenu = true
-
+    Variable.showUserMenu = false
     const changeType = async function () {
         if (this.dataset.profilePage == profilePage) {
             return

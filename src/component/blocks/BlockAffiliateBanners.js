@@ -1,18 +1,11 @@
-import {
-  jsx,
-  jsxFrag,
-  Variable,
-  initReload,
-  initOne,
-} from '@betarost/cemjs';
+import { jsx, jsxFrag, Variable, initReload, initOne } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
-import { Map } from '@component/helpers/All.js';
+import images from "@assets/images/index.js";
 
-let activeBanner, userLang, banner
-let successImg = Variable.setRef()
-let successCode = Variable.setRef()
+let activeBanner, userLang, banner;
+let successImg = Variable.setRef();
+let successCode = Variable.setRef();
 
 let banners = {
   en: [
@@ -82,13 +75,10 @@ let banners = {
 };
 
 const BlockAffiliateBanners = function () {
-
-  initOne(
-    () => {
-      userLang = Variable.lang.code === "ru" ? "ru" : "en";
-      activeBanner = banners[userLang][0].type;
-    }
-  )
+  initOne(() => {
+    userLang = Variable.lang.code === "ru" ? "ru" : "en";
+    activeBanner = banners[userLang][0].type;
+  });
 
   banner = banners[userLang].filter((item) => item.type === activeBanner);
 
@@ -99,31 +89,35 @@ const BlockAffiliateBanners = function () {
           <h4>{Variable.lang.h.bannerSize}</h4>
           <div>
             <div
-              class={["tag_button", userLang == "en" ? "tag_button_active" : null]}
+              class={[
+                "tag_button",
+                userLang == "en" ? "tag_button_active" : null,
+              ]}
               onclick={() => {
                 userLang = "en";
                 activeBanner = banners[userLang][0].type;
-                initReload()
+                initReload();
               }}
             >
               <span>English</span>
             </div>
             <div
-              class={["tag_button", userLang == "ru" ? "tag_button_active" : null]}
+              class={[
+                "tag_button",
+                userLang == "ru" ? "tag_button_active" : null,
+              ]}
               onclick={() => {
                 userLang = "ru";
                 activeBanner = banners[userLang][0].type;
-                initReload()
+                initReload();
               }}
             >
               <span>Русский</span>
             </div>
           </div>
           <div class="affiliate_banners_size_list">
-            <Map
-              data={banners[userLang]}
-              dataIf={(item, index) => {
-                return (
+            {banners[userLang].map((item, index)=>{
+              return(
                   <div
                     onclick={() => {
                       activeBanner = item.type;
@@ -135,9 +129,8 @@ const BlockAffiliateBanners = function () {
                       {item.type}
                     </div>
                   </div>
-                );
-              }}
-            />
+              )
+            })}
           </div>
         </div>
       </div>
@@ -145,27 +138,21 @@ const BlockAffiliateBanners = function () {
         <div>
           <h4>{Variable.lang.h.addMaterials}</h4>
           <div class="affiliate_banner_link">
-            <div class="affiliate_banner_link_block">
-              {banner[0].url}
-            </div>
+            <div class="affiliate_banner_link_block">{banner[0].url}</div>
             <div
               class="affiliate_banner_copy"
               onclick={() => {
                 navigator.clipboard.writeText(banner[0].url);
-                successImg().hidden = false
+                successImg().hidden = false;
                 setTimeout(() => {
-                  successImg().hidden = true
-                }, 1000)
-                return
+                  successImg().hidden = true;
+                }, 1000);
+                return;
               }}
             >
               <img src={svg.copy} />
               <span>{Variable.lang.p.copy}</span>
-              <div
-                class="success_copy"
-                hidden={true}
-                ref={successImg}
-              >
+              <div class="success_copy" hidden={true} ref={successImg}>
                 {Variable.lang.text.coppied}
               </div>
             </div>
@@ -179,21 +166,19 @@ const BlockAffiliateBanners = function () {
               class="affiliate_banner_copy"
               data-type="code"
               onclick={() => {
-                navigator.clipboard.writeText(`<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`);
-                successCode().hidden = false
+                navigator.clipboard.writeText(
+                  `<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`
+                );
+                successCode().hidden = false;
                 setTimeout(() => {
-                  successCode().hidden = true
-                }, 1000)
-                return
+                  successCode().hidden = true;
+                }, 1000);
+                return;
               }}
             >
               <img src={svg.copy} />
               <span>{Variable.lang.p.copy}</span>
-              <div
-                class="success_copy"
-                hidden={true}
-                ref={successCode}
-              >
+              <div class="success_copy" hidden={true} ref={successCode}>
                 {Variable.lang.text.coppied}
               </div>
             </div>
@@ -204,7 +189,7 @@ const BlockAffiliateBanners = function () {
         </div>
       </div>
     </div>
-  )
+  );
 };
 //I check
-export { BlockAffiliateBanners }
+export { BlockAffiliateBanners };

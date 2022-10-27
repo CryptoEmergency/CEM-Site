@@ -353,9 +353,8 @@ const start = function () {
                 data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
                 dataIf={
                   <div class="create_post_chapter createPostImage">
-                    <Map
-                      data={formInputs.mediaInputs.value}
-                      dataIf={(item, index) => {
+                    {
+                      formInputs.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
                           return (
                             <MediaPreview
@@ -366,8 +365,8 @@ const start = function () {
                             />
                           );
                         }
-                      }}
-                    />
+                      })
+                    }
                   </div>
                 }
               />

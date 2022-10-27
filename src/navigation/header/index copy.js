@@ -5,7 +5,6 @@ import {
     Variable,
     parsingUrl,
     initReload,
-    Helpers
 } from '@betarost/cemjs'
 import svg from "@assets/svg/index.js"
 
@@ -26,8 +25,6 @@ const findUnread = function (arr) {
     })
     return unread
 };
-
-let formInputs;
 
 const mainHeader = async function () {
 
@@ -74,15 +71,6 @@ const mainHeader = async function () {
     init(
         async () => {
 
-            formInputs = {
-                lang: {
-                    // code: Variable.myInfo.mainLanguage.code,
-                    // name: Variable.myInfo.mainLanguage.orig_name
-                    code: Variable.lang.code,
-                    name: Variable.lang.lang_orig
-                },
-            };
-
             notify = Variable.myInfo.notifyQuestions
             //notify = Variable.myInfo.notifyAwards
             //notify = Variable.myInfo.notifySystem
@@ -114,7 +102,7 @@ const mainHeader = async function () {
         },
         () => {
 
-            if (Variable.Static.HeaderShow) {
+            if (Variable.HeaderShow) {
                 return (
                     <div class="c-header__container c-container">
                         <div class="c-header__inner">
@@ -128,22 +116,9 @@ const mainHeader = async function () {
                                         }
                                         e.stopPropagation();
                                     }}
-                                // onclick={() => {
-                                //     Variable.SetModals({
-                                //         name: "ModalChangeLanguage",
-                                //         data: {
-                                //             onclick: async (langCode, langName, langOrig) => {
-                                //                 formInputs.lang.name = langOrig;
-                                //                 formInputs.lang.code = langCode;
-                                //                 initReload()
-                                //             },
-                                //         },
-                                //     });
-                                // }}
                                 >
                                     <div class="selectlink">
                                         <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
-                                        {/* <div class="selectlink-control"><span>{formInputs.lang.name}</span></div> */}
                                     </div>
                                 </div>
                                 <div
@@ -179,7 +154,7 @@ const mainHeader = async function () {
                                     dataIf={
                                         <div class="c-header__wrapper" style="">
                                             <div class="header_avatar_container">
-                                                <Avatar author={Variable.myInfo} settings={true} />
+                                                <Avatar author={Variable.myInfo} />
                                             </div>
                                             {/* <div class="auth_user_header">
                                                 <div class={`c-header__notifications c-notification ${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "c-notification--active" : ""}`}>
@@ -268,13 +243,12 @@ const mainHeader = async function () {
                                 />
                             </div>
                             <nav class="c-header__menu c-menu">
-                                <a class="c-logo c-menu__link" href="/" onclick={Helpers.siteLink}>
+                                <a class="c-logo c-menu__link" href="/" onclick={siteLink}>
                                     <img class="c-logo__image" src={svg.logo} />
                                 </a>
-                                <a class="c-menu__link" href="/contacts/" onclick={Helpers.siteLink}>{Variable.lang.a.contacts}</a>
-                                {/* <a class="c-menu__link" href="/about/" onclick={Helpers.siteLinkModal}>{Variable.lang.a.about}</a> */}
-                                <a class="c-menu__link" href="/about/" onclick={Helpers.siteLink}>{Variable.lang.a.about}</a>
-                                <a class="c-menu__link" href="/blog/" onclick={Helpers.siteLink}>{Variable.lang.a.blog}</a>
+                                <a class="c-menu__link" href="/contacts/" onclick={siteLink}>{Variable.lang.a.contacts}</a>
+                                <a class="c-menu__link" href="/about/" onclick={siteLink}>{Variable.lang.a.about}</a>
+                                <a class="c-menu__link" href="/blog/" onclick={siteLink}>{Variable.lang.a.blog}</a>
                             </nav>
                         </div>
                     </div>
