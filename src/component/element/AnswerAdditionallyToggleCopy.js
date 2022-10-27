@@ -6,7 +6,7 @@ import { changeSubscription } from "@src/apiFunctions.js";
 
 let elemActive
 
-const AnswerAdditionallyToggle = function ({
+const AnswerAdditionallyToggleCopy = function ({
   item,
   typeApi,
   type,
@@ -279,4 +279,4 @@ const AnswerAdditionallyToggle = function ({
   );
 };
 
-export { AnswerAdditionallyToggle };
+export { AnswerAdditionallyToggleCopy };

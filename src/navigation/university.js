@@ -112,7 +112,17 @@ const start = function () {
           } c-aboutus about_us_container`}
         >
           <div class="c-university__container c-container">
-            <h1 class="c-university__title" style={"padding-top: 10vw"}>
+            <h1 class="c-university__title" style={"padding-top: 10vw"}
+            onclick ={(e) => {
+              console.log('=b7c203=')
+              e.stopPropagation();
+              e.preventDefault();
+              Variable.SetModals({
+                name: "ModalContextMenuCopy",
+                data: {},
+              });
+            }}
+            >
               Крипто университет
             </h1>
             <h3 class="c-university__promo">
