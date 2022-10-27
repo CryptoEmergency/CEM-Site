@@ -4,11 +4,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node build"
+    "start": "node start"
   },
   "dependencies": {
     "@betarost/cem": "^1.0.5",
-    "@betarost/cemjs": "^1.0.100",
+    "@betarost/cemjs": "^1.1.1",
     "cropperjs": "^1.5.12",
     "moment": "^2.29.4",
     "path": "^0.12.7",
