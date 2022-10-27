@@ -8,8 +8,8 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-const start = function () {
-
+const start = function (data, ID = "mainBlock") {
+  console.log('=6cae07www=', "about")
   init(
     null,
     () => {
@@ -158,7 +158,7 @@ const start = function () {
           </div>
         </div>
       )
-    })
+    }, ID)
 };
 //I check
 export default start;
