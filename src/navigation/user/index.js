@@ -17,7 +17,7 @@ const start = function (userInfo) {
     let profilePage,
         activeItems
     Variable.HeaderShow = true
-    Variable.FooterShow = false
+    Variable.FooterShow = true
     Variable.showUserMenu = false
     const changeType = async function () {
         if (this.dataset.profilePage == profilePage) {

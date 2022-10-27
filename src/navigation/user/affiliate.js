@@ -19,9 +19,9 @@ import { ButtonShowMore } from '@component/element/ButtonShowMore.js';
 const start = function () {
 
     let copyWindow = Variable.setRef()
-    Variable.HeaderShow = false
-    Variable.FooterShow = false
-    Variable.showUserMenu = true
+    Variable.HeaderShow = true
+    Variable.FooterShow = true
+    Variable.showUserMenu = false
 
     init(
         async () => {
