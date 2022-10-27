@@ -4,7 +4,7 @@ import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
-const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false }) {
+const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false }) {
 
   if (!author || !author.nickname) {
     return (
@@ -44,26 +44,47 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           }
         />
         <If
-          data={author.status && author.status.team}
-          dataIf={<img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />}
-          dataElse={<div>
+          data={settings}
+          dataIf={
             <div
-              class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
-                }`}
+              class="c-avataricon__settings"
+              onclick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                Variable.SetModals({
+                  name: "ModalContextMenu",
+                  data: {},
+                });
+              }}
             >
-              <img src={svg.levelGray} />
-              <span>{author.statistic.level}</span>
+              <img class="" src={svg.settings_icon} width="20" height="20" />
             </div>
-            <div
-              style={`${author.online ? "" : "display: none;"}`}
-              class="c-avataricon__status c-avataricon__status--online avatar_user_online"
-            ></div>
-            <div
-              style={`${author.online ? "display: none;" : ""}`}
-              class="c-avataricon__status c-avataricon__status--offline avatar_user_offline"
-            ></div>
-          </div>}
+          }
+          dataElse={
+            <If
+              data={author.status && author.status.team}
+              dataIf={<img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />}
+              dataElse={<div>
+                <div
+                  class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
+                    }`}
+                >
+                  <img src={svg.levelGray} />
+                  <span>{author.statistic.level}</span>
+                </div>
+                <div
+                  style={`${author.online ? "" : "display: none;"}`}
+                  class="c-avataricon__status c-avataricon__status--online avatar_user_online"
+                ></div>
+                <div
+                  style={`${author.online ? "display: none;" : ""}`}
+                  class="c-avataricon__status c-avataricon__status--offline avatar_user_offline"
+                ></div>
+              </div>}
+            />
+          }
         />
+
       </div>
       <If
         data={nickName || speciality || dateShow}

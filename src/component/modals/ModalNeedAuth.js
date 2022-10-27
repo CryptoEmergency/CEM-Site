@@ -1,20 +1,20 @@
-import { jsx, jsxFrag, Variable, initReload,timersStart, timersStop } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, timersStart, timersStop } from "@betarost/cemjs";
 
 const ModalNeedAuth = function (data, reload) {
 
-timersStart("needAuth",() => {
-            Variable.DelModals("ModalNeedAuth");
-            Variable.SetModals({ name: "ModalAuth", data: {} });
-            timersStop("needAuth");
-        },1500,"timeout")
+  timersStart("needAuth", () => {
+    Variable.DelModals("ModalNeedAuth");
+    Variable.SetModals({ name: "ModalAuth", data: {} });
+    timersStop("needAuth");
+  }, 1500, "timeout")
   return (
     <div class="c-modal c-modal--open" id="ModalNeedAuth">
       <section class="c-modal__dialog">
         <header class="c-modal__header">
-           <h4>{Variable.lang.h.modal_needAuth}</h4>
+          <h4>{Variable.lang.h.modal_needAuth}</h4>
         </header>
         <div class="c-modal__body">
-             <p>{Variable.lang.p.needAuth}</p>
+          <p>{Variable.lang.p.needAuth}</p>
         </div>
       </section>
     </div>

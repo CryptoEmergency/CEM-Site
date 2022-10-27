@@ -27,14 +27,16 @@ const SwitchLenta = function () {
                     initReload()
                 }}
             >
-                <img src={svg['sections/news_all_inactive']} />
+                <i class="users_news_category_icon users_news_category_icon--all users_news_category_icon--all_inactive"></i>
+                {/* <img src={svg['sections/news_all_inactive']} /> */}
             </div>
 
             <div
                 class={['users_news_category', 'users_news_category_active']}
                 hidden={Variable.Static.lentaPage != "all"}
             >
-                <img src={svg['sections/news_all']} />
+                <i class="users_news_category_icon users_news_category_icon--all"></i>
+                {/* <img src={svg['sections/news_all']} /> */}
             </div>
 
 
@@ -54,14 +56,16 @@ const SwitchLenta = function () {
                     initReload()
                 }}
             >
-                <img src={svg['sections/news_photo_inactive']} />
+                <i class="users_news_category_icon users_news_category_icon--news_photo users_news_category_icon--news_photo_inactive"></i>
+                {/* <img src={svg['sections/news_photo_inactive']} /> */}
             </div>
 
             <div
                 class={['users_news_category', 'users_news_category_active']}
                 hidden={Variable.Static.lentaPage != "photo"}
             >
-                <img src={svg['sections/news_photo']} />
+                <i class="users_news_category_icon users_news_category_icon--news_photo"></i>
+                {/* <img src={svg['sections/news_photo']} /> */}
             </div>
 
 
@@ -82,14 +86,16 @@ const SwitchLenta = function () {
                     initReload()
                 }}
             >
-                <img src={svg['sections/news_video_inactive']} />
+                <i class="users_news_category_icon users_news_category_icon--news_video users_news_category_icon--news_video_inactive"></i>
+                {/* <img src={svg['sections/news_video_inactive']} /> */}
             </div>
 
             <div
                 class={['users_news_category', 'users_news_category_active']}
                 hidden={Variable.Static.lentaPage != "video"}
             >
-                <img src={svg['sections/news_video']} />
+                <i class="users_news_category_icon users_news_category_icon--news_video"></i>
+                {/* <img src={svg['sections/news_video']} /> */}
             </div>
 
 
@@ -109,14 +115,16 @@ const SwitchLenta = function () {
                     initReload()
                 }}
             >
-                <img src={svg['sections/news_audio_inactive']} />
+                <i class="users_news_category_icon users_news_category_icon--news_audio users_news_category_icon--news_audio_inactive"></i>
+                {/* <img src={svg['sections/news_audio_inactive']} /> */}
             </div>
 
             <div
                 class={['users_news_category', 'users_news_category_active']}
                 hidden={Variable.Static.lentaPage != "audio"}
             >
-                <img src={svg['sections/news_audio']} />
+                <i class="users_news_category_icon users_news_category_icon--news_audio"></i>
+                {/* <img src={svg['sections/news_audio']} /> */}
             </div>
 
 
@@ -136,14 +144,16 @@ const SwitchLenta = function () {
                     initReload()
                 }}
             >
-                <img src={svg['sections/news_text_inactive']} />
+                <i class="users_news_category_icon users_news_category_icon--news_text users_news_category_icon--news_text_inactive"></i>
+                {/* <img src={svg['sections/news_text_inactive']} /> */}
             </div>
 
             <div
                 class={['users_news_category', 'users_news_category_active']}
                 hidden={Variable.Static.lentaPage != "text"}
             >
-                <img src={svg['sections/news_text']} />
+                <i class="users_news_category_icon users_news_category_icon--news_text"></i>
+                {/* <img src={svg['sections/news_text']} /> */}
             </div>
 
 

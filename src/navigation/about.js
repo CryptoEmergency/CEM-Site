@@ -35,7 +35,7 @@ const start = function (data, ID = "mainBlock") {
               <div class="c-goals__list">
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">
-                    <img class="c-goals__icon" src={svg["icon/about_us_portfolio"]} />
+                    <i class="c-goals__icon c-goals__icon--cryptoliteracy"></i>
                   </div>
                   <div>
                     <p class="c-goals__subtitle">{Variable.lang.p.goalOne}</p>
@@ -44,7 +44,7 @@ const start = function (data, ID = "mainBlock") {
                 </div>
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">
-                    <img class="c-goals__icon" src={svg["icon/about_us_protection"]} />
+                    <i class="c-goals__icon c-goals__icon--community"></i>
                   </div>
                   <div>
                     <p class="c-goals__subtitle">{Variable.lang.p.goalTwo}</p>
@@ -53,7 +53,7 @@ const start = function (data, ID = "mainBlock") {
                 </div>
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">
-                    <img class="c-goals__icon" src={svg["icon/about_us_cryptocurrencies"]} />
+                    <i class="c-goals__icon c-goals__icon--freeaccess"></i>
                   </div>
                   <div>
                     <p class="c-goals__subtitle">{Variable.lang.p.goalThree}</p>
@@ -62,7 +62,7 @@ const start = function (data, ID = "mainBlock") {
                 </div>
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">
-                    <img class="c-goals__icon" src={svg["icon/about_us_quality"]} />
+                    <i class="c-goals__icon c-goals__icon--metauniverse"></i>
                   </div>
                   <div>
                     <p class="c-goals__subtitle">{Variable.lang.p.goalFour}</p>

@@ -27,6 +27,8 @@ const findUnread = function (arr) {
     return unread
 };
 
+let formInputs;
+
 const mainHeader = async function () {
 
     let elem = Variable.setRef()
@@ -72,6 +74,13 @@ const mainHeader = async function () {
     init(
         async () => {
 
+            formInputs = {
+                lang: {
+                    code: Variable.myInfo.mainLanguage.code,
+                    name: Variable.myInfo.mainLanguage.orig_name
+                },
+            };
+
             notify = Variable.myInfo.notifyQuestions
             //notify = Variable.myInfo.notifyAwards
             //notify = Variable.myInfo.notifySystem
@@ -110,16 +119,28 @@ const mainHeader = async function () {
                             <div class="c-header__auth">
                                 <div
                                     class="language"
-                                    onclick={(e) => {
-                                        elem().hidden = !elem().hidden
-                                        if (!elem().hidden) {
-                                            Variable.OutHideWindows.push([elem, elem])
-                                        }
-                                        e.stopPropagation();
+                                    // onclick={(e) => {
+                                    //     elem().hidden = !elem().hidden
+                                    //     if (!elem().hidden) {
+                                    //         Variable.OutHideWindows.push([elem, elem])
+                                    //     }
+                                    //     e.stopPropagation();
+                                    // }}
+                                    onclick={() => {
+                                        Variable.SetModals({
+                                            name: "ModalChangeLanguage",
+                                            data: {
+                                                onclick: async (langCode, langName, langOrig) => {
+                                                    formInputs.lang.name = langOrig;
+                                                    formInputs.lang.code = langCode;
+                                                    initReload()
+                                                },
+                                            },
+                                        });
                                     }}
                                 >
                                     <div class="selectlink">
-                                        <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
+                                        <div class="selectlink-control"><span>{formInputs.lang.name}</span></div>
                                     </div>
                                 </div>
                                 <div
@@ -155,7 +176,7 @@ const mainHeader = async function () {
                                     dataIf={
                                         <div class="c-header__wrapper" style="">
                                             <div class="header_avatar_container">
-                                                <Avatar author={Variable.myInfo} />
+                                                <Avatar author={Variable.myInfo} settings={true} />
                                             </div>
                                             {/* <div class="auth_user_header">
                                                 <div class={`c-header__notifications c-notification ${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "c-notification--active" : ""}`}>

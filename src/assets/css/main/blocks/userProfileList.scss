@@ -58,6 +58,89 @@
             height: 42px;
         }
     }
+
+    &__icon {
+        display: block;
+        width: 71px;
+        height: 65px;
+
+        &--information {
+            background: no-repeat url("../svg/sections/information.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/information_inactive.svg") center/100%;
+            }
+        }
+
+        &--questions {
+            background: no-repeat url("../svg/sections/questions.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/questions_inactive.svg") center/100%;
+            }
+        }
+
+        &--answers {
+            background: no-repeat url("../svg/sections/answers.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/answers_inactive.svg") center/100%;
+            }
+        }
+
+        &--followers {
+            background: no-repeat url("../svg/sections/followers.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/followers_inactive.svg") center/100%;
+            }
+        }
+
+        &--friends {
+            background: no-repeat url("../svg/sections/friends.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/friends_inactive.svg") center/100%;
+            }
+        }
+
+        &--awards {
+            background: no-repeat url("../svg/sections/awards.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/awards_inactive.svg") center/100%;
+            }
+        }
+
+        &--social {
+            background: no-repeat url("../svg/sections/social.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/social_inactive.svg") center/100%;
+            }
+        }
+
+        &--galary {
+            background: no-repeat url("../svg/sections/galary.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/galary_inactive.svg") center/100%;
+            }
+        }
+
+        &--donation {
+            background: no-repeat url("../svg/sections/donation.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/donation_inactive.svg") center/100%;
+            }
+        }
+
+        @media (max-width: 464px) {
+            width: 46px;
+            height: 42px;
+        }
+    }
 }
 
 // .user_profile_list {
@@ -112,6 +195,63 @@
         img {
             height: 65px;
         }
+
+        &_icon {
+            display: block;
+            width: 70px;
+            height: 65px;
+
+            @media (max-width: 464px) {
+                width: 45px;
+                height: 42px;
+            }
+
+            &--all {
+                background: no-repeat url("../svg/sections/news_all.svg") center/100%;
+
+
+                &_inactive {
+                    background: no-repeat url("../svg/sections/news_all_inactive.svg") center/100%;
+                }
+            }
+
+            &--news_photo {
+                background: no-repeat url("../svg/sections/news_photo.svg") center/100%;
+
+                &_inactive {
+                    background: no-repeat url("../svg/sections/news_photo_inactive.svg") center/100%;
+                }
+            }
+
+            &--news_video {
+                background: no-repeat url("../svg/sections/news_video.svg") center/100%;
+
+                &_inactive {
+                    background: no-repeat url("../svg/sections/news_video_inactive.svg") center/100%;
+                }
+            }
+
+            &--news_audio {
+                background: no-repeat url("../svg/sections/news_audio.svg") center/100%;
+
+                &_inactive {
+                    background: no-repeat url("../svg/sections/news_audio_inactive.svg") center/100%;
+                }
+            }
+
+            &--news_text {
+                background: no-repeat url("../svg/sections/news_text.svg") center/100%;
+
+                &_inactive {
+                    background: no-repeat url("../svg/sections/news_text_inactive.svg") center/100%;
+                }
+            }
+        }
+    }
+
+    .user_news_top .c-questions__filter .justselect-title {
+        background-color: transparent;
+        border: none;
     }
 }
 

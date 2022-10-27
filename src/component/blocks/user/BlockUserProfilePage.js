@@ -20,7 +20,7 @@ BlockUserProfilePage.aboutUser = function (data) {
     }
 
     return (
-        <div class="bl_one" id="UserInfoAbout">
+        <div class="bl_one c-container" id="UserInfoAbout">
             <h2>{Variable.lang.h.personalInfo}</h2>
             <div class="about_user">
                 <div class="about_user_section-1 about_user_section-row_type-2">
@@ -235,7 +235,7 @@ BlockUserProfilePage.awards = function (data) {
     }
 
     return (
-        <div class="bl_one" id="UserInfoAwards">
+        <div class="bl_one c-container" id="UserInfoAwards">
             <h2>{Variable.lang.h.reciveAwards}</h2>
             <div class="awards_block">
                 <div class="awards_body">
@@ -271,7 +271,7 @@ BlockUserProfilePage.subscribers = function (data) {
     }
 
     return (
-        <div class="bl_one" id="UserInfoFollowers">
+        <div class="bl_one c-container" id="UserInfoFollowers">
             <div class="friends_block">
                 {
                   data.items.list_records.map( (item, index) => {
@@ -353,7 +353,7 @@ BlockUserProfilePage.friends = function (data) {
         return (<></>)
     }
     return (
-        <div class="bl_one" id="UserInfoFollowers">
+        <div class="bl_one c-container" id="UserInfoFollowers">
             <div class="friends_block">
                 {
                     data.items.list_records[0].subscribed.map((item, index) => {
@@ -437,7 +437,7 @@ BlockUserProfilePage.answers = function (data) {
 
 
     return (
-        <div class="bl_one" id="UserInfoAnswers">
+        <div class="bl_one c-container" id="UserInfoAnswers">
             <h2>{Variable.lang.h.sendAnswers}</h2>
             <div class="your_answers_table_labels">
                 <span>{Variable.lang.tableTitle.question}</span>
@@ -547,7 +547,7 @@ BlockUserProfilePage.questions = function (data) {
     )
 
     return (
-        <div class="bl_one" id="UserInfoQuestions">
+        <div class="bl_one c-container" id="UserInfoQuestions">
             <h2>{Variable.lang.h.sendQuestions}</h2>
             <div class="your_answers_table_labels">
                 <span>{Variable.lang.tableTitle.question}</span>

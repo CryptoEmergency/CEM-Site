@@ -77,7 +77,7 @@
         &_news {
             max-width: 1240px;
             margin: 0 auto;
-            margin-top: 40px;
+            // margin-top: 40px;
 
             .tox {
                 margin-bottom: 0 !important;
@@ -158,6 +158,10 @@
         &_avatar {
             padding-left: 20px;
         }
+    }
+
+    &.c-container {
+        min-width: auto;
     }
 }
 

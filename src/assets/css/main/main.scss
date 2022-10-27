@@ -379,6 +379,8 @@ textarea {
         line-height: 20px;
         font-weight: 600;
         // color: $black;
+
+        &--inline {}
     }
 
     &-list {
@@ -820,7 +822,7 @@ textarea {
 
         &.clicked_button-type_1-part_1 {
             width: 100% !important;
-            background: $spaceman  !important;
+            background: $spaceman !important;
             margin-left: auto !important;
             margin-right: auto !important;
         }
@@ -831,7 +833,7 @@ textarea {
             width: 100% !important;
 
             span {
-                color: $white  !important;
+                color: $white !important;
             }
         }
 
@@ -1036,6 +1038,43 @@ textarea {
         }
     }
 
+    &--inverse {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 207px;
+        margin: 0 auto;
+        text-decoration: none;
+        color: $black;
+        background: none;
+
+        .c-button {
+            &__wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 207px;
+                height: 45px;
+                font-weight: 600;
+                background: $white;
+                border: 1px solid lightgray;
+                border-radius: 3px;
+                transition: 0.6s;
+                cursor: pointer;
+            }
+        }
+
+        &:hover {
+
+            .c-button {
+
+                &__wrapper {
+                    background: lightgray;
+                }
+            }
+        }
+    }
+
     &--gradient {
         position: relative;
         display: block;
@@ -1091,7 +1130,7 @@ textarea {
 
         @media(max-width: 464px) {
             height: 34px;
-            width: 95px;
+            // width: 95px;
         }
     }
 
@@ -1656,6 +1695,9 @@ textarea {
 @media(min-width: 1240px) {
     .c-container {
         max-width: 1240px;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     .c-page {

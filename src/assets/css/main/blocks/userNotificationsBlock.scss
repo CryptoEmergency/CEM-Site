@@ -4,7 +4,9 @@
     background: $infinity;
     position: fixed;
     top: 90px;
-    right: 90px;
+    // right: 90px;
+    left: calc(50% + 620px);
+    transform: translateX(-100%);
     border-radius: 20px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -36,7 +38,7 @@
         overflow-y: auto;
         overflow-x: hidden;
 
-        &::-webkit-scrollbar{
+        &::-webkit-scrollbar {
             width: 8px;
         }
 
@@ -58,7 +60,7 @@
             border-bottom-right-radius: 50px;
         }
 
-        &_inner{
+        &_inner {
             display: flex;
             flex-direction: column-reverse;
 
@@ -68,12 +70,12 @@
             }
         }
 
-        &_item{
+        &_item {
             padding: 20px 25px 20px 25px;
             transition: 0.5s;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 background: $marshal_blue;
             }
 
@@ -86,7 +88,7 @@
                 display: inline-block;
             }
 
-            span{
+            span {
                 display: block;
                 font-style: normal;
                 font-weight: 500;
@@ -94,7 +96,7 @@
                 line-height: 125%;
                 color: $mistral;
 
-                &:last-child{
+                &:last-child {
                     color: $nocturnal;
                     margin-top: 15px;
                 }
@@ -113,17 +115,18 @@
 }
 
 .part {
+
     &_questions,
     &_awards,
     &_system {
-        img{
+        img {
             height: 25px;
             margin-right: 10px;
         }
     }
 }
 
-.unread_notification{
+.unread_notification {
     width: 6px;
     height: 6px;
     background: linear-gradient(56.57deg, $hailey_blue 0%, $thick_purple 51.56%, $spicy_pink 105.28%);
@@ -135,7 +138,7 @@
     top: -3px;
 }
 
-.notifyNickname{
+.notifyNickname {
     color: $mistral;
     margin-top: 0px;
     display: inline-block;
@@ -144,7 +147,7 @@
         font-size: 14px;
         color: $mistral;
         margin-top: 0px;
-        background: linear-gradient(45deg,$summer_sky 0,$blue_oyster_cult 45%,$akebi_purple 57%,$lilac_lotion 70%);
+        background: linear-gradient(45deg, $summer_sky 0, $blue_oyster_cult 45%, $akebi_purple 57%, $lilac_lotion 70%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 600;

@@ -435,7 +435,7 @@
     padding-top: 150px; //235px;
     padding-bottom: 180px; //345px;
     text-align: center;
-    background-image: url(../images/background/about_us_preview.png);
+    background-image: url(../images/background/about_us_preview.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -586,6 +586,24 @@
         left: 50%;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
+        width: 36px;
+        height: 36px;
+
+        &--cryptoliteracy {
+            background: no-repeat url("../svg/icon/about_us_portfolio.svg") center/contain;
+        }
+
+        &--community {
+            background: no-repeat url("../svg/icon/about_us_protection.svg") center/contain;
+        }
+
+        &--freeaccess {
+            background: no-repeat url("../svg/icon/about_us_cryptocurrencies.svg") center/contain;
+        }
+
+        &--metauniverse {
+            background: no-repeat url("../svg/icon/about_us_quality.svg") center/contain;
+        }
     }
 
     &__subtitle {
