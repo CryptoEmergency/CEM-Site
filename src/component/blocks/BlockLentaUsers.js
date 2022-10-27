@@ -25,7 +25,7 @@ import {
   AnswerAdditionallyToggle,
   CommentInput
 } from "@component/element/index.js";
-import { If, Map } from "@component/helpers/All.js";
+import { If} from "@component/helpers/All.js";
 
 const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, type }) {
   let mainId = item._id;
@@ -409,9 +409,8 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                                     comments={item.comments}
                                 /> */}
                     {/* <QuestionAnswerItemComment item = {item}  mainId={mainId} /> */}
-                    <Map
-                      data={item.comments}
-                      dataIf={(item, index) => {
+                    {
+                      item.comments.map((item, index) => {
                         return (
                           <BlockComment
                             item={item}
@@ -421,8 +420,9 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                             typeSet="setPost"
                           />
                         );
-                      }}
-                    />
+                      })
+                    }
+
                   </div>
                 </div>
               }
