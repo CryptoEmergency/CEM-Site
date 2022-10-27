@@ -20,6 +20,7 @@ const start = function () {
               <h2 class="c-whowe__title">
                 {Variable.lang.h.who_are_we}
               </h2>
+              <div hidden ={true}>{"<!--Логин в Метрике-->"}</div>
               <img
                 class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}

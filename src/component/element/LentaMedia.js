@@ -8,7 +8,7 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { If, Map } from "@component/helpers/All.js";
+import { If } from "@component/helpers/All.js";
 import {
   VideoPlayerCopy,
   AudioPlayerCopy,
@@ -124,28 +124,28 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
   //     }
   // )
 
-      if(items.find((item) => item.type === "audio")){
+  if (items.find((item) => item.type === "audio")) {
     let ArrWithAudio = items.filter((item) => item.type === "audio");
 
-       items = items.filter((item) => item.type !== "audio");
+    items = items.filter((item) => item.type !== "audio");
 
-  const array_size = 3;
+    const array_size = 3;
 
-  const audioArr = [];
+    const audioArr = [];
 
-  for (let i = 0; i <ArrWithAudio.length; i += array_size) {
+    for (let i = 0; i < ArrWithAudio.length; i += array_size) {
       audioArr.push(ArrWithAudio.slice(i, i + array_size));
+    }
+    items = items.concat(audioArr);
   }
-    items =  items.concat(audioArr)
-
-      }
 
   return (
     <Swiper
       slide={
-        <Map
-          data={items}
-          dataIf={(item, index) => {
+
+
+        items.map(
+          (item, index) => {
             if (item.type == "video" && !Array.isArray(item)) {
               elem[numIndex][index] = Variable.setRef();
               return (
@@ -176,28 +176,22 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
               return (
                 // <div class="user_post_text_background">
                 <div class="swiper-slide user_post_text_background">
-
-<Map
-            data = {
-                item
-            }
-            dataIf = {
-                (item,index) => {
-                  elem[numIndex][index] = Variable.setRef();
-                    return(
+                  {
+                    item.map((item, index) => {
+                      elem[numIndex][index] = Variable.setRef();
+                      return (
                         <AudioPlayerCopy
-                item={item}
-                index={index}
-                numIndex={numIndex}
-                elem={elem}
-                path={path}
-                type="posts"
-            //  path={"/assets/upload/posts/"}
-            />
-                    )
-                }
-            }
-            />
+                          item={item}
+                          index={index}
+                          numIndex={numIndex}
+                          elem={elem}
+                          path={path}
+                          type="posts"
+                          //  path={"/assets/upload/posts/"}
+                        />
+                      );
+                    })
+                  }
                   {/* <AudioPlayer
                     item={item}
                     index={index}
@@ -208,11 +202,11 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
                     //  path={"/assets/upload/posts/"}
                   /> */}
                 </div>
-                // </div>
+              
               );
             }
-          }}
-        />
+          }
+        )
       }
       options={swiperOptions}
       className=""
