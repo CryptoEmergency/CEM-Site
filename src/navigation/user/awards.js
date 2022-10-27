@@ -19,9 +19,9 @@ let swiperOptions = {
 const start = function () {
     let awards
 
-    Variable.HeaderShow = false
-    Variable.FooterShow = false
-    Variable.showUserMenu = true
+    Variable.HeaderShow = true
+    Variable.FooterShow = true
+    Variable.showUserMenu = false
 
 
     init(

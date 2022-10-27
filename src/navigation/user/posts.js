@@ -82,9 +82,9 @@ const deleteMediaFile = function (index) {
 };
 
 const start = function () {
-  Variable.HeaderShow = true;
-  Variable.FooterShow = false;
-  Variable.showUserMenu = true;
+  Variable.HeaderShow = true
+  Variable.FooterShow = true
+  Variable.showUserMenu = false
 
   let authorPosts;
 

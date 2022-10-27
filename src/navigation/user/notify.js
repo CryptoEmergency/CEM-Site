@@ -8,9 +8,9 @@ const start = function () {
 
     let notify, currentNotify
 
-    Variable.HeaderShow = false
-    Variable.FooterShow = false
-    Variable.showUserMenu = true
+    Variable.HeaderShow = true
+    Variable.FooterShow = true
+    Variable.showUserMenu = false
 
     const changeCategory = async function () {
         if (currentNotify[this.dataset.type]) {

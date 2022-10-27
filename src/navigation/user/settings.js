@@ -51,9 +51,9 @@ const start = function () {
 
 
 
-    Variable.HeaderShow = false
-    Variable.FooterShow = false
-    Variable.showUserMenu = true
+    Variable.HeaderShow = true
+    Variable.FooterShow = true
+    Variable.showUserMenu = false
 
     const userBlackList = function () {
         const BlackListBlock = Object.keys(blackList.list_records[0].blackList).map(function (key) {

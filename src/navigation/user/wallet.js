@@ -16,9 +16,9 @@ import {
 } from '@component/element/index.js';
 
 const start = function () {
-    Variable.HeaderShow = false
-    Variable.FooterShow = false
-    Variable.showUserMenu = true
+    Variable.HeaderShow = true
+    Variable.FooterShow = true
+    Variable.showUserMenu = false
 
     init(
         async () => {
@@ -69,7 +69,7 @@ const start = function () {
                                 </div>
                             </div>
                             {
-                              Variable.PageUserWallet.list_records.map((item, index) => {
+                                Variable.PageUserWallet.list_records.map((item, index) => {
                                     return (
                                         <div class="c-wallet__transaction">
                                             <div class="c-wallet__wrap">
@@ -108,7 +108,7 @@ const start = function () {
                                             </div>
                                         </div>
                                     )
-                                })  
+                                })
                             }
                             <If
                                 data={Variable.PageUserWallet.list_records.length < Variable.PageUserWallet.totalFound}
