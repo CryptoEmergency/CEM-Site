@@ -18,14 +18,14 @@ const mainModal = async function () {
         (reload) => {
             console.log('=1060e5=', "mainModal", Variable.ModalsPage, Variable.Modals)
 
-            if (Variable.ModalsPage.length) {
+            // if (Variable.ModalsPage.length) {
 
-                return (
-                    list["ModalPage"]()
-                )
+            //     return (
+            //         list["ModalPage"]()
+            //     )
 
 
-            }
+            // }
 
             if (Variable.Modals && Variable.Modals.length != 0) {
                 document.getElementById('backdrop').classList.add("c-backdrop--show");
