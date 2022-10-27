@@ -8,12 +8,12 @@ import { Avatar, Likes, QuestionAnswerItem } from "@component/element/index.js";
 Variable.Static.openComent =[]
 const QuestionAnswers = function ({ items }) {
   return (
-    <Map
-      data={items}
-      dataIf={(item, index) => {
+
+    
+      items.map((item, index) => {
         return <QuestionAnswerItem item={item} index={index} />;
-      }}
-    />
+      })
+    
   );
 };
 
