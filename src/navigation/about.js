@@ -9,7 +9,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function (data, ID = "mainBlock") {
-  console.log('=6cae07www=', "about")
+
   init(
     null,
     () => {

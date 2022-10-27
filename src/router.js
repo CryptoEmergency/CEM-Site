@@ -17,7 +17,6 @@ const mainBlock = async function () {
             timersStart("TikTok", timerTik, 1500)
         },
         async (reload, ID) => {
-            console.log('=cbcca2=', reload, ID)
             if (!ID && ID != 0) {
                 Variable.Static.HeaderShow = true;
                 Variable.Static.FooterShow = true;
@@ -149,5 +148,4 @@ const mainBlock = async function () {
 
 
 }
-//I check
 export { mainBlock }
