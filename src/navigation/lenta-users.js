@@ -193,12 +193,9 @@ const start = function () {
                     //   swiperGo()
                     // }}
                     >
-                      <Map
-                        data={
-                          Variable[`PageLenta${Variable.Static.lentaPage}`]
-                            .list_records
-                        }
-                        dataIf={(item, index) => {
+                      {
+                         Variable[`PageLenta${Variable.Static.lentaPage}`]
+                         .list_records.map((item, index) => {
                           elem[index] = [];
                           return (
                             <BlockLentaUsers
@@ -217,8 +214,8 @@ const start = function () {
                               }
                             />
                           );
-                        }}
-                      />
+                        })
+                      }
                     </div>
                   </div>
                   <div

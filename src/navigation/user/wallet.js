@@ -68,9 +68,8 @@ const start = function () {
                                     {Variable.lang.p.status}
                                 </div>
                             </div>
-                            <Map
-                                data={Variable.PageUserWallet.list_records}
-                                dataIf={(item, index) => {
+                            {
+                              Variable.PageUserWallet.list_records.map((item, index) => {
                                     return (
                                         <div class="c-wallet__transaction">
                                             <div class="c-wallet__wrap">
@@ -109,10 +108,8 @@ const start = function () {
                                             </div>
                                         </div>
                                     )
-                                }
-
-                                }
-                            />
+                                })  
+                            }
                             <If
                                 data={Variable.PageUserWallet.list_records.length < Variable.PageUserWallet.totalFound}
                                 dataIf={

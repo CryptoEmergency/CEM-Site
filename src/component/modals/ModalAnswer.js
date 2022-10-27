@@ -197,9 +197,8 @@ const ModalAnswer = function (data, reload) {
                 data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
                 dataIf={
                   <div class="create_post_chapter createPostImage">
-                    <Map
-                      data={formInputs.mediaInputs.value}
-                      dataIf={(item, index) => {
+                    {
+                      formInputs.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
                           return (
                             <MediaPreview
@@ -210,8 +209,8 @@ const ModalAnswer = function (data, reload) {
                             />
                           );
                         }
-                      }}
-                    />
+                      })
+                    }
                   </div>
                 }
               />
@@ -219,7 +218,7 @@ const ModalAnswer = function (data, reload) {
                 data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length}
                 dataIf={
                   <div class="create_post_chapter createPostAudio">
-                    <Map
+                    {/* <Map
                       data={formInputs.mediaInputs.value}
                       dataIf={(item, index) => {
                         if (item.type == "audio") {
@@ -233,7 +232,21 @@ const ModalAnswer = function (data, reload) {
                           );
                         }
                       }}
-                    />
+                    /> */}
+                    {
+                      formInputs.mediaInputs.value.map((item, index) => {
+                        if (item.type == "audio") {
+                          return (
+                            <MediaPreview
+                              item={item}
+                              index={index}
+                              type="answers"
+                              formInputs={formInputs}
+                            />
+                          );
+                        }
+                      })
+                    }
                   </div>
                 }
               />

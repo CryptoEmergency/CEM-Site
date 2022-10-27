@@ -99,14 +99,12 @@ const start = function () {
                     </div>
                   }
                   dataElse={
-                    <Map
-                      data={Variable.PageMedia.list_records}
-                      dataIf={(item, index) => {
-                        return (
-                          <NewsItem item={item} index={index} type={"media"} />
-                        );
-                      }}
-                    />
+                      Variable.PageMedia.list_records.map((item, index) => {
+                            return (
+                              <NewsItem item={item} index={index} type={"media"} />
+                            );
+                          })
+                    
                   }
                 />
               </div>
