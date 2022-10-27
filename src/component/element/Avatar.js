@@ -44,7 +44,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           }
         />
         <If
-          data={settings}
+          data={settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar"}
           dataIf={
             <div
               class="c-avataricon__settings"

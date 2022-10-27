@@ -50,18 +50,19 @@ const start = function () {
             <div class="userNewsBlock">
               <div class="bl_one bl_active">
                 <div class="blog_news">
-                  <Map
-                    data={Variable.PageBlog.list_records}
-                    dataIf={(item, index) => {
-                      return (
-                        <NewsItem
-                          item={item}
-                          index={index}
-                          type={"blog"}
-                        />
-                      );
-                    }}
-                  />
+                  {
+                    Variable.PageBlog.list_records.map(
+                      (item, index) => {
+                        return (
+                          <NewsItem
+                            item={item}
+                            index={index}
+                            type={"blog"}
+                          />
+                        );
+                      }
+                    )
+                  }
                 </div>
                 <If
                   data={Variable.PageBlog.list_records.length < Variable.PageBlog.totalFound}

@@ -144,9 +144,8 @@ const QuestionAnswerItem = function ({ item, index }) {
             }
             dataIf={
               <div class="comment_answer">
-                <Map
-                  data={item.comments}
-                  dataIf={(item, index) => {
+                {
+                  item.comments.map((item, index) => {
                     return (
                       <QuestionAnswerItemComment
                         item={item}
@@ -154,8 +153,8 @@ const QuestionAnswerItem = function ({ item, index }) {
                         mainId={mainId}
                       />
                     );
-                  }}
-                />
+                  })
+                }
               </div>
             }
           />

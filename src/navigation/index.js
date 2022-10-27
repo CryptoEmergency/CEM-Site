@@ -73,7 +73,7 @@ const start = function () {
 
         },
         () => {
-            console.log(Variable.lang.code)
+            console.log(Variable)
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockPreview />
