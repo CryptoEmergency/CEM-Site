@@ -239,7 +239,7 @@ const start = function () {
                                 <p style="font-size: 18px;">
                                     Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
-                                <div style="display: flex; justify-content: space-between;">
+                                <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
                                     <div style="font-size: 18px;">
                                         <p style="align-items: center;">
                                             Будут подняты такие темы как:
@@ -366,7 +366,7 @@ const start = function () {
                                 <div class="forum_button_container">
                                     <div class="forum_button">
                                         <a target="_blank" href="https://t.me/cryptoforumsouth" rel="nofollow nooopener" style="display: flex; align-items: center; color: inherit; text-decoration: none;">
-                                            <img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединяйтесь в наш телеграм</span>
+                                            <img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединиться в телеграм форума</span>
                                         </a>
                                     </div>
                                 </div>
