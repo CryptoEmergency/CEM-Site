@@ -76,8 +76,10 @@ const mainHeader = async function () {
 
             formInputs = {
                 lang: {
-                    code: Variable.myInfo.mainLanguage.code,
-                    name: Variable.myInfo.mainLanguage.orig_name
+                    // code: Variable.myInfo.mainLanguage.code,
+                    // name: Variable.myInfo.mainLanguage.orig_name
+                    code: Variable.lang.code,
+                    name: Variable.lang.orig_name
                 },
             };
 
