@@ -51,13 +51,11 @@ const sendPost = async (e) => {
       text: formInputs.textInputs.value,
     },
   };
-  console.log("=data=", data);
 
   let tmpRes = await sendApi.create("setPost", data);
-  console.log("=66d247=", tmpRes);
+
 
   if (tmpRes.status === "ok") {
-    console.log("=reload=");
     initGo();
   } else {
     Variable.SetModals(
@@ -142,7 +140,6 @@ const start = function () {
           }
 
           if (formInputs.mediaInputs.value[numItem].upload === formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !== 0) {
-            console.log('=DANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR=')
             formInputs.mediaInputs.value.splice(numItem, 1);
             initReload()
             return
@@ -205,6 +202,65 @@ const start = function () {
         }
         formInputs.mediaInputs.value[numItem].upload = e.loaded
         formInputs.mediaInputs.value[numItem].size = contentLength;
+        console.log(
+          "=3c5fa7= ",
+          "Загружено",
+          e.loaded,
+          "из",
+          contentLength
+        );
+        initReload()
+      }
+    );
+    return
+  }
+  //Добавил SendAudio
+  const sendAudio = async function (files) {
+    let blob = new Blob([files], { type: 'audio' });
+    let previewObj = {
+      src: URL.createObjectURL(blob),
+      type: "audio",
+      upload: 0,
+      size: 0
+    }
+    formInputs.audioInputs.show = true;
+    formInputs.audioInputs.value.push(previewObj);
+    let numItem = formInputs.audioInputs.value.length - 1
+    console.log('=previewObj.src=',previewObj.src)
+    initReload();
+
+    uploadMedia(
+      files[0],
+      "posts",
+      async function () {
+        formInputs.mediaInputs.show = true;
+
+
+        // formInputs.mediaInputs.value.push(obj);
+        let response = JSON.parse(this.response);
+        formInputs.mediaInputs.value[numItem] = {
+          aspect: undefined,
+          type: response.mimetype.split("/")[0],
+          name: response.name
+        }
+
+        formInputs.isValid = true;
+        initReload();
+      },
+      async function (e) {
+        let contentLength;
+        if (e.lengthComputable) {
+          contentLength = e.total;
+        } else {
+          contentLength = parseInt(
+            e.target.getResponseHeader(
+              "x-decompressed-content-length"
+            ),
+            10
+          );
+        }
+        formInputs.audioInputs.value[numItem].upload = e.loaded
+        formInputs.audioInputs.value[numItem].size = contentLength;
         console.log(
           "=3c5fa7= ",
           "Загружено",
@@ -283,6 +339,10 @@ const start = function () {
           show: false,
         },
         mediaInputs: {
+          value: [],
+          show: false,
+        },
+        audioInputs: {
           value: [],
           show: false,
         },
@@ -370,6 +430,27 @@ const start = function () {
                   </div>
                 }
               />
+              {/* Добавил еще один иф для айдио */}
+              <If
+                data={formInputs.audioInputs.show && formInputs.audioInputs.value.length}
+                dataIf={
+                  <div class="create_post_chapter createPostAudio">
+                    {
+                      formInputs.audioInputs.value.map((item, index) => {
+                      
+                          return (
+                            <MediaPreview
+                              item={item}
+                              index={index}
+                              type="posts"
+                              formInputs={formInputs}
+                            />
+                          );
+                      })
+                    }
+                  </div>
+                }
+              />
             </div>
 
             <MediaButton
@@ -413,6 +494,15 @@ const start = function () {
                 this.value = '';
                 return;
               }}
+              // Добавил функ для Аудио
+              // onclickAudio={function () {
+              //   if (this.files.length == 0) {
+              //     return;
+              //   }
+              //   sendAudio(this.files)
+              //   this.value = '';
+              //   return;
+              // }}
             />
 
 
