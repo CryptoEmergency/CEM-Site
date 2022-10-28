@@ -341,8 +341,8 @@
 
     &__flag {
         display: inline-block;
-        width: 31px;
-        height: 31px;
+        width: 41px;
+        height: 41px;
         background: linear-gradient(45deg, rgb(59, 173, 227) 0px, rgb(87, 111, 230) 45%, rgb(152, 68, 183) 57%, rgb(255, 53, 127) 70%);
         border-radius: 50%;
         padding: 2px;
@@ -351,8 +351,8 @@
             position: relative;
             left: 0px;
             top: 3px;
-            height: 27px;
-            width: auto;
+            height: 100%;
+            width: 100%;
             transform: translateY(-3px);
         }
     }
@@ -385,8 +385,8 @@
         background: url('../svg/rating_heart.svg');
         background-size: cover;
         background-repeat: no-repeat;
-        width: 33px;
-        height: 29px;
+        width: 41px;
+        height: 36px;
         line-height: 28px;
         font-size: 9px;
         font-weight: 600;

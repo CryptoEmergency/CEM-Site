@@ -2980,9 +2980,10 @@ span#procent::after {
   color: #20e0f6;
   text-decoration: none;
 } */
-.comment_text p{
+.comment_text p {
   /* margin-bottom: 0px; */
 }
+
 .comment_image {
   display: grid;
   grid-template-columns: calc(25% - 6px) calc(25% - 6px) calc(25% - 6px) calc(25% - 6px);
@@ -6103,8 +6104,9 @@ span#procent::after {
   color: #FFFFFF;
   max-width: 78%;
 }
-.question_text p{
-height: 24px;
+
+.question_text p {
+  height: 24px;
 }
 
 .answer_tags {
@@ -10255,7 +10257,7 @@ height: 24px;
 
 
 /* JOBS STYLES */
-.jobs_page {
+/* .jobs_page {
   max-width: 1240px;
   margin: 0 auto;
 }
@@ -10632,7 +10634,7 @@ height: 24px;
   font-weight: 700;
   padding-left: 1px;
   margin-right: 20px;
-}
+} */
 
 /* WORLD PUBLICATIONS LIST STYLES */
 

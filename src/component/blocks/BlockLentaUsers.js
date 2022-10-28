@@ -175,7 +175,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                   </span>
                 </div>
               ) : (
-                <span class="comment_text">
+                <span class="comment_text 77">
                   {stringToHtml(Helpers.sanitizeHtml(item.text))}
                   {/* {parseTextforJsx(item.text).map((item)=>{
                     return item
