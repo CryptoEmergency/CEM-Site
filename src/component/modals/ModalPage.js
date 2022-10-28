@@ -60,8 +60,11 @@ const ModalPage = async function (ID, reload) {
                     title={Variable.lang.span.back}
                   >
                     <img class="c-goback__arrow" src={svg["chats_back"]} />
-                    {/* <span class="c-goback__text">{Variable.lang.span.back}</span> */}
+                    <span class="c-goback__text">{Variable.lang.span.back}</span>
                   </a>
+                  <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
+                    <img class="answer_additionally_toggle_img" src={svg["points"]} />
+                  </div>
                   {/* <AnswerAdditionallyToggle
                     item={item}
                     typeApi={"setPost"}
