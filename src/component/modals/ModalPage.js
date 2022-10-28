@@ -58,9 +58,9 @@ const ModalPage = async function (ID, reload) {
                     </a>
 
                     <h5
-                    // onclick={(e) => {
-                    //   Variable.SetModals({ name: "ModalNotify", data: {} })
-                    // }}
+                      onclick={(e) => {
+                        Variable.SetModals({ name: "ModalNotify", data: {} })
+                      }}
                     >{Variable.lang.a.about}</h5>
 
                     <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
