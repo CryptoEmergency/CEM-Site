@@ -53,7 +53,10 @@ const ModalPage = async function (ID, reload) {
                 <div class="c-fullnews__header">{/*  user_post_header */}
                   <a
                     class="c-goback"
-                    onclick={() => { Variable.DelModals("ModalPage") }}
+                    onclick={() => {
+                      Variable.ModalsPage.splice(ID, 1)
+                      initReload("modals")
+                    }}
                     title={Variable.lang.span.back}
                   >
                     <img class="c-goback__arrow" src={svg["chats_back"]} />
