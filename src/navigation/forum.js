@@ -491,6 +491,15 @@ const start = function () {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_12']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Сергей Павлович</p>
+                                            <p>Автор и ведущий канала Люди PRO, владелец бизнесов в IT, e-commerce и медиа, инвестор</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_5']} />
                                         </div>
                                         <div>
@@ -561,15 +570,6 @@ const start = function () {
                                             <p>Адвокат, юрист-международник</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item" style="text-align: center">
-                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_12']} />
-                                        </div>
-                                        <div>
-                                            <p style="margin-top: 10px; margin-bottom: 5px">Сергей Павлович</p>
-                                            <p>Автор и ведущий канала Люди PRO, владелец бизнесов в IT, e-commerce и медиа, инвестор</p>
-                                        </div>
-                                    </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
@@ -624,6 +624,22 @@ const start = function () {
                                     >
                                         <img src={images["forum/partner_8"]} />
                                     </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://carding.pro"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_9"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://blockchain24.pro"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_10"]} />
+                                    </a>
                                     <a
                                         target="_blank"
                                         rel="nofollow nooopener"
@@ -664,22 +680,6 @@ const start = function () {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_6"]} />
-                                    </a>
-                                    <a style="display: block!important;"
-                                        target="_blank"
-                                        rel="nofollow nooopener"
-                                        href="https://carding.pro"
-                                        class="c-infopartners__item"
-                                    >
-                                        <img src={images["forum/partner_9"]} />
-                                    </a>
-                                    <a style="display: block!important;"
-                                        target="_blank"
-                                        rel="nofollow nooopener"
-                                        href="https://blockchain24.pro"
-                                        class="c-infopartners__item"
-                                    >
-                                        <img src={images["forum/partner_10"]} />
                                     </a>
                                 </div>
                             </div>

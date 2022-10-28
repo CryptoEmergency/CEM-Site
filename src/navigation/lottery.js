@@ -82,10 +82,10 @@ const start = function () {
         button
         if (FullFilledForm) {
             buttonContainer().classList.remove('lottery_form_button_inactive')
-            $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
+            button().disabled = false
         } else {
             buttonContainer().classList.add('lottery_form_button_inactive')
-            $('.lottery_form').find('.lottery_form_button').find('button').attr('disabled', 'disabled')
+            button().disabled = true
         }
         /*
         
