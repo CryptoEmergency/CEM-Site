@@ -87,8 +87,34 @@
 
 		.c-fullnews {
 
+			&__block {
+				max-width: 100%;
+			}
+
+			&__content {
+				max-width: 100%;
+			}
+
+			&__header {
+				left: 50%;
+				transform: translateX(-50%);
+
+				.c-goback {
+					height: 20px;
+
+					&__arrow {
+						max-width: 100%;
+						max-height: 100%;
+					}
+				}
+			}
+
 			&__itemwrapp {
 				background: #2B3040;
+
+				&>* {
+					margin-top: 0;
+				}
 			}
 		}
 	}

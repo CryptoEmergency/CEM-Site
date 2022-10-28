@@ -54,9 +54,10 @@ const ModalPage = async function (ID, reload) {
                   <a
                     class="c-goback"
                     onclick={() => { Variable.DelModals("ModalPage") }}
+                    title={Variable.lang.span.back}
                   >
-                    <img class="c-goback__arrow" src={svg["go_back_icon"]} />
-                    <span class="c-goback__text">{Variable.lang.span.back}</span>
+                    <img class="c-goback__arrow" src={svg["chats_back"]} />
+                    {/* <span class="c-goback__text">{Variable.lang.span.back}</span> */}
                   </a>
                   {/* <AnswerAdditionallyToggle
                     item={item}

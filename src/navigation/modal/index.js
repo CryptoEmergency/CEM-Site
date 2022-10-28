@@ -29,6 +29,7 @@ const mainModal = async function () {
 
             if (Variable.Modals && Variable.Modals.length != 0) {
                 document.getElementById('backdrop').classList.add("c-backdrop--show");
+                document.querySelector('body').style = "";
                 const modals = Variable.Modals.map((item, index) => {
 
                     let rel = reload
@@ -48,6 +49,7 @@ const mainModal = async function () {
                 )
             } else {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
+                document.querySelector('body').style = "overflow: hidden";
                 return (
                     <div></div>
                 )
