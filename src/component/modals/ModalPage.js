@@ -29,16 +29,9 @@ const ModalPage = async function (ID, reload) {
   console.log('=c1d88c=2 ModalPage', getInitList())
   // let mainId = item._id;
 
-  initOne(async () => {
-    // Variable.Static.ShowVoterInteval = { timer: 0 };
-    // Variable.Static.resultShowVoter = undefined;
-    // Variable.Static.activeCommentsInput = "";
-    // Variable.Static.answerAdditionallyShow = "";
-    // Variable.Static.showMainInput = true;
-    // Variable.Static.activeEditInputs = [];
-    // Variable.Static.answerAdditionally = false;
-    // Variable.Static.showNewsId = news._id;
-  });
+  if (!reload && getInitList()[ID].firstStart) {
+    await getInitList()[ID].firstStart(reload)
+  }
   // news =  getNewsItemInShow(item._id);
   // console.log('=c0791d=',news)
   // news = news.list_records[0];
@@ -51,24 +44,29 @@ const ModalPage = async function (ID, reload) {
             <div class="c-fullnews__block">{/*  full_news_block */}
               <div class="c-fullnews__content" >{/*  full_news_content. style={type === "university" ? "max-width:1100px" : null} */}
                 <div class="c-fullnews__header">{/*  user_post_header */}
-                  <a
-                    class="c-goback"
-                    onclick={() => {
-                      Variable.ModalsPage.splice(ID, 1)
-                      initReload("modals")
-                    }}
-                    title={Variable.lang.span.back}
-                  >
-                    <img class="c-goback__arrow" src={svg["chats_back"]} />
-                    <span class="c-goback__text">{Variable.lang.span.back}</span>
-                  </a>
+                  <div class="c-container">
+                    <a
+                      class="c-goback"
+                      onclick={() => {
+                        Variable.ModalsPage.splice(ID, 1)
+                        initReload("modals")
+                      }}
+                      title={Variable.lang.span.back}
+                    >
+                      <img class="c-goback__arrow" src={svg["chats_back"]} />
+                      <span class="c-goback__text">{Variable.lang.span.back}</span>
+                    </a>
 
-                  {Variable.lang.a.about}
+                    <h5
+                    // onclick={(e) => {
+                    //   Variable.SetModals({ name: "ModalNotify", data: {} })
+                    // }}
+                    >{Variable.lang.a.about}</h5>
 
-                  <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
-                    <img class="answer_additionally_toggle_img" src={svg["points"]} />
-                  </div>
-                  {/* <AnswerAdditionallyToggle
+                    <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
+                      <img class="answer_additionally_toggle_img" src={svg["points"]} />
+                    </div>
+                    {/* <AnswerAdditionallyToggle
                     item={item}
                     typeApi={"setPost"}
                     type={{
@@ -83,10 +81,11 @@ const ModalPage = async function (ID, reload) {
                     mainId={mainId}
                   // callBack={getItem}
                   /> */}
+                  </div>
                 </div>
 
                 <div class="c-fullnews__itemwrapp">
-                  {getInitList()[0].function(reload)}
+                  {getInitList()[ID].function(reload)}
                 </div>
               </div>
             </div>
