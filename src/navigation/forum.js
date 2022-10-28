@@ -83,7 +83,7 @@ const start = function () {
         // }
     }
 
-    const ShowAllCompany = function(){
+    const ShowAllCompany = function () {
         showAllCompanies = true
         initReload()
     }
@@ -239,7 +239,7 @@ const start = function () {
                                 <p style="font-size: 18px;">
                                     Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
-                                <div style="display: flex; justify-content: space-between;">
+                                <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
                                     <div style="font-size: 18px;">
                                         <p style="align-items: center;">
                                             Будут подняты такие темы как:
@@ -365,8 +365,8 @@ const start = function () {
                                 </div>
                                 <div class="forum_button_container">
                                     <div class="forum_button">
-                                        <a target="_blank" href="https://t.me/cryptoforumsouth" rel="nofollow nooopener" style="display: flex; align-items: center; color: inherit; text-decoration: none;">
-                                            <img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединяйтесь в наш телеграм</span>
+                                        <a target="_blank" href="https://t.me/cryptoemergencychat" rel="nofollow nooopener" style="display: flex; align-items: center; color: inherit; text-decoration: none;">
+                                            <img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединиться в телеграм</span>
                                         </a>
                                     </div>
                                 </div>
@@ -439,6 +439,18 @@ const start = function () {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Crypto.ru — крупнейший информационный ресурс в Рунете о криптовалютах и блокчейне. Сайт предоставляет актуальный курсы монет, мониторинг обменников, рейтинг бирж и кошельков.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://carding.pro" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_7']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Канал «Люди PRO» показывает жизнь и работу людей, являющихся профессионалами в своей сфере. Неважно, кто ты: хакер, маркетолог, писатель, владелец небольшого кафе или нескольких заводов – если вы специалист в своем деле, мы идём к вам! Здесь нет случайных гостей, строгий отбор гарантирует получение качественной и интересной информации.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://blockchain24.pro" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_8']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Blockchain24.pro - Ведущий русскоязычный портал о криптовалютах и технологии blockchain. В основе нашей концепции - информационный портал, плюс тематические сервисы. Мы стремимся предоставить участникам отрасли максимально объективную информацию, проверенную и адаптированную для широкого круга читателей.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -475,6 +487,15 @@ const start = function () {
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Алексей Зюзин</p>
                                             <p>CEO Crypto Holding, IT-эксперт, инвестор</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_12']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Сергей Павлович</p>
+                                            <p>Автор и ведущий канала Люди PRO, владелец бизнесов в IT, e-commerce и медиа, инвестор</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
@@ -564,11 +585,6 @@ const start = function () {
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
-                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
-                                        </div>
-                                    </div>
                                 </div>
                                 <a
                                     style="margin: 40px auto"
@@ -607,6 +623,22 @@ const start = function () {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_8"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://carding.pro"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_9"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://blockchain24.pro"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_10"]} />
                                     </a>
                                     <a
                                         target="_blank"

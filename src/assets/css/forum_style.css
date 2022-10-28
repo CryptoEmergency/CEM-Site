@@ -1,32 +1,32 @@
-.forum_plan{
-    width: 50%; 
-    margin: 30px auto; 
+.forum_plan {
+    width: 50%;
+    margin: 30px auto;
     display: block;
 }
 
-.speakers_block{
-    display: grid; 
-    grid-template-columns: calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px); 
+.speakers_block {
+    display: grid;
+    grid-template-columns: calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px);
     grid-gap: 10px;
 }
 
-.video-container-forum{
+.video-container-forum {
     width: 100%;
 }
 
-.video-container-forum iframe{
+.video-container-forum iframe {
     width: 100%;
     height: 700px;
 }
 
-.company_block{
+.company_block {
     display: grid;
     grid-template-columns: calc(50% - 8px) calc(50% - 8px);
     grid-gap: 16px;
     margin-bottom: 30px;
 }
 
-.company_item{
+.company_item {
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.02);
@@ -37,18 +37,18 @@
     text-decoration: none;
 }
 
-.forum_button_container{
+.forum_button_container {
     display: flex;
     justify-content: center;
 }
 
-.forum_button{
+.forum_button {
     padding: 1px;
     background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
     border-radius: 5px;
 }
 
-.forum_button a{
+.forum_button a {
     background: #313643;
     border-radius: 5px;
     padding: 10px 15px;
@@ -56,74 +56,84 @@
 }
 
 @media(max-width: 1000px) {
-    .forum_plan{
-        width: 100%; 
+    .forum_plan {
+        width: 100%;
     }
-    .company_block{
+
+    .company_block {
         display: grid;
         grid-template-columns: 100%;
     }
-    .speakers_block{
-        display: grid; grid-template-columns: 100%; 
+
+    .speakers_block {
+        display: grid;
+        grid-template-columns: 100%;
         grid-gap: 10px;
         justify-items: center
     }
-    .speaker_item{
-        display: grid; 
-        grid-template-columns: 200px 420px; 
+
+    .speaker_item {
+        display: grid;
+        grid-template-columns: 200px 420px;
         align-items: center;
     }
-    .video-container-forum iframe{
+
+    .video-container-forum iframe {
         width: 100%;
         height: 400px;
     }
-    .speaker_item_example{
+
+    .speaker_item_example {
         display: none !important;
     }
-    .speaker_item_example:last-child{
+
+    .speaker_item_example:last-child {
         display: grid !important;
     }
-    
+
 }
 
 @media(max-width: 800px) {
-    .speaker_item{
-        display: grid; 
-        grid-template-columns: 200px 320px; 
+    .speaker_item {
+        display: grid;
+        grid-template-columns: 200px 320px;
         align-items: center;
         font-size: 14px;
     }
-    .company_item{
+
+    .company_item {
         font-size: 14px;
     }
 }
 
 @media(max-width: 600px) {
-    .speaker_item{
-        display: grid; 
-        grid-template-columns: 180px 220px; 
+    .speaker_item {
+        display: grid;
+        grid-template-columns: 180px 220px;
         align-items: center;
         font-size: 14px;
     }
-    .video-container-forum iframe{
+
+    .video-container-forum iframe {
         height: 300px;
     }
 }
 
 @media(max-width: 450px) {
-    .video-container-forum iframe{
+    .video-container-forum iframe {
         height: 220px;
     }
 }
 
 @media(max-width: 400px) {
-    .speaker_item{
-        display: grid; 
-        grid-template-columns: 180px 120px; 
+    .speaker_item {
+        display: grid;
+        grid-template-columns: 180px 120px;
         align-items: center;
         font-size: 14px;
     }
-    .video-container-forum iframe{
+
+    .video-container-forum iframe {
         height: 200px;
     }
 }
