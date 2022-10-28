@@ -30,7 +30,7 @@ const BottomMenu = function () {
                 <div class="c-userpanel c-userpanel--bottom">
                     <div class="c-userpanel__icons">
                         <a
-                            class="c-userpanel__icon c-userpanel__icon--logo"
+                            class="c-userpanel__icon c-userpanel__icon--logo c-userpanel__icon--mobile_visible"
                             href="/"
                             onclick={siteLink}>
                             {/* <img src={svg["mini_logo"]} width="31" height="27" /> */}
@@ -114,7 +114,7 @@ const BottomMenu = function () {
                 <div class="c-userpanel c-userpanel--bottom">
                     <div class="c-userpanel__icons">
                         <a
-                            class="c-userpanel__icon c-userpanel__icon--logo"
+                            class="c-userpanel__icon c-userpanel__icon--logo c-userpanel__icon--mobile_visible"
                             href="/"
                             onclick={siteLink}>
                             {/* <img src={svg["mini_logo"]} /> */}
