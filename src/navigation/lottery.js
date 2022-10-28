@@ -47,24 +47,7 @@ const start = function () {
         $('.lottery_data').html(await partialsHtml('ticket', htmlData))
     }
 
-    const lotteryValidCheckPaste = function () {
-
-        formValid[this.name] = true
-
-        let FullFilledForm = true
-        $('.lottery_form').find('input').each(function () {
-            if (this.value.trim().length == 0 && this != target) {
-                FullFilledForm = false
-            }
-        })
-        if ($('.valid_quiz_answer').length == 0) {
-            FullFilledForm = false
-        }
-        if (FullFilledForm) {
-            $('.lottery_form').find('.lottery_form_button').removeClass('lottery_form_button_inactive')
-            $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
-        }
-    }
+   
 
     const lotteryValidCheckKeyup = function () {
         if (this.value.trim().length != 0) {
@@ -73,13 +56,11 @@ const start = function () {
             formValid[this.name]().classList.remove('lottery_check_valid')
         }
         let FullFilledForm = true
-        Object.values(formValid).forEach(()=>{
-            if(this().classList[1] != 'lottery_check_valid'){
+        Object.values(formValid).forEach((element)=>{
+            if(element().classList[1] != 'lottery_check_valid'){
                 FullFilledForm = false
             }
         })
-        buttonContainer
-        button
         if (FullFilledForm) {
             buttonContainer().classList.remove('lottery_form_button_inactive')
             button().disabled = false
@@ -87,24 +68,6 @@ const start = function () {
             buttonContainer().classList.add('lottery_form_button_inactive')
             button().disabled = true
         }
-        /*
-        
-        $('.lottery_form').find('input').each(function () {
-            if (this.value.trim().length == 0) {
-                FullFilledForm = false
-            }
-        })
-        if ($('.valid_quiz_answer').length == 0) {
-            FullFilledForm = false
-        }
-        if (FullFilledForm) {
-            $('.lottery_form').find('.lottery_form_button').removeClass('lottery_form_button_inactive')
-            $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
-        } else {
-            $('.lottery_form').find('.lottery_form_button').addClass('lottery_form_button_inactive')
-            $('.lottery_form').find('.lottery_form_button').find('button').attr('disabled', 'disabled')
-        }
-        */
     }
 
     const lotteryQuiz = async function(){
@@ -115,20 +78,20 @@ const start = function () {
         
         if(this.dataset.true == 'true'){
             this.classList.add('valid_quiz_answer')
-          /*
-          let FullFilledForm = true
-          $('.lottery_form').find('input').each(function(){
-            if(this.value.trim().length == 0){
-              FullFilledForm = false
+            quiz().classList.add('lottery_check_valid')
+            let FullFilledForm = true
+            Object.values(formValid).forEach((element)=>{
+                if(element().classList[1] != 'lottery_check_valid'){
+                    FullFilledForm = false
+                }
+            })
+            if (FullFilledForm) {
+                buttonContainer().classList.remove('lottery_form_button_inactive')
+                button().disabled = false
+            } else {
+                buttonContainer().classList.add('lottery_form_button_inactive')
+                button().disabled = true
             }
-          })
-          if(FullFilledForm){
-            $('.lottery_form').find('.lottery_form_button').removeClass('lottery_form_button_inactive')
-            $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
-          }
-          $('.lottery_check[data-name="quiz"]').addClass('lottery_check_valid')
-          */
-          quiz().classList.add('lottery_check_valid')
         } else {
             this.classList.add('invalid_quiz_answer')
         } 
@@ -144,7 +107,8 @@ const start = function () {
                 email: email,
                 telegram: telegram,
                 twitter: twitter,
-                instagram: instagram
+                instagram: instagram,
+                quiz: quiz
             }
         },
         () => {
@@ -203,7 +167,7 @@ const start = function () {
                                                         <p>3. Join our Telegram group and inform us your @nickname below.</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/emergencycrypto">https://t.me/emergencycrypto</a></p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/cryptoemergencychat">https://t.me/cryptoemergencychat</a></p>
-                                                        <input onpaste="lotteryValidCheck(this, event)" onkeyup={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
+                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={twitter} data-name="twitter" class="lottery_check">
