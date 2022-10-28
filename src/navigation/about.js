@@ -3,7 +3,8 @@ import {
   jsxFrag,
   init,
   Variable,
-  initReload
+  initReload,
+  Helpers
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
@@ -37,12 +38,15 @@ const start = function (data, ID = "mainBlock") {
                 class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}
               />
+
               <p>{Variable.lang.p.aboutPreview}</p>
             </div>
+
             <div class="c-whowe__bg"></div>
           </div>
           <div class="c-aboutus__content c-container">
             <div class="c-aboutus__goals c-goals">
+
               <h2 class="c-goals__title"
                 onclick={
                   () => {
@@ -51,6 +55,7 @@ const start = function (data, ID = "mainBlock") {
                   }
                 }
               >{Variable.lang.h.our_goals}</h2>
+              <a class="c-menu__link" href="/about/" onclick={Helpers.siteLinkModal}>{Variable.lang.a.about}</a>
               <div class="c-goals__list">
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">
