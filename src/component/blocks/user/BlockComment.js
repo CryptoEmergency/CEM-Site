@@ -11,7 +11,7 @@ import {
   Avatar,
   Likes,
   CommentInput,
-  AnswerAdditionallyToggle,
+  AnswerAdditionallyToggleNew,
 } from "@component/element/index.js";
 import { If} from "@component/helpers/All.js";
 // import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCommentComment.js";
@@ -93,7 +93,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack, typeS
             </span>
           }
         />
-        <AnswerAdditionallyToggle
+        <AnswerAdditionallyToggleNew
           item={item}
           typeApi={typeSet}
           type={{

@@ -9,7 +9,7 @@ import {
   Likes,
   QuestionAnswerItemComment,
   CommentInput,
-  AnswerAdditionallyToggle,
+  AnswerAdditionallyToggleNew,
   LentaMedia
 } from "@component/element/index.js";
 
@@ -67,7 +67,7 @@ const QuestionAnswerItem = function ({ item, index }) {
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]} />
             </div> */}
-            <AnswerAdditionallyToggle item = {item} typeApi = {"setAnswer"} type = {
+            <AnswerAdditionallyToggleNew item = {item} typeApi = {"setAnswer"} type = {
               {delete: true,
                 complainAnswer: true,
                 complainUser: true,

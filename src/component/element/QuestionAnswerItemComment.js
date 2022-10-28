@@ -15,7 +15,7 @@ import {
   Avatar,
   Likes,
   CommentInput,
-  AnswerAdditionallyToggle,
+  AnswerAdditionallyToggleNew,
 } from "@component/element/index.js";
 import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 const QuestionAnswerItemComment = function ({
@@ -96,12 +96,12 @@ const QuestionAnswerItemComment = function ({
           >
             <img class="answer_additionally_toggle_img" src={svg["points"]} />
           </div> */}
-          <AnswerAdditionallyToggle
+          <AnswerAdditionallyToggleNew
             item={item}
             typeApi={"setAnswer"}
             type={{
-              delete: true,
               edit: true,
+              delete: true,
               complainAnswer: true,
               complainUser: true,
               blackList: true,

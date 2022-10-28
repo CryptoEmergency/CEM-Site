@@ -15,7 +15,7 @@ import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
 import {
   MediaButton,
   Avatar,
-  AnswerAdditionallyToggle,
+  AnswerAdditionallyToggleNew,
   MediaPreview
 } from "@component/element/index.js";
 
@@ -599,7 +599,7 @@ const start = function () {
                         {/* </div> */}
 
                         <div class="comment_icons">
-                          {/* <AnswerAdditionallyToggle item={post} typeApi={"setAnswer"} type={
+                          {/* <AnswerAdditionallyToggleNew item={post} typeApi={"setAnswer"} type={
                               {
                                 delete: true,
                                 complainAnswer: true,

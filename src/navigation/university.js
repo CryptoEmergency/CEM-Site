@@ -118,7 +118,7 @@ const start = function () {
               e.stopPropagation();
               e.preventDefault();
               Variable.SetModals({
-                name: "ModalContextMenuCopy",
+                name: "ModalContextMenu",
                 data: {},
               });
             }}
