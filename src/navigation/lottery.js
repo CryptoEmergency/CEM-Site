@@ -15,7 +15,20 @@ const start = function () {
     Variable.HeaderShow = true
     Variable.FooterShow = true
 
-    let ticketNumber, formValid
+    let ticketNumber
+
+    let buttonContainer = Variable.setRef()
+    let button = Variable.setRef()
+
+    let nickname = Variable.setRef()
+    let email = Variable.setRef()
+    let telegram = Variable.setRef()
+    let twitter = Variable.setRef()
+    let instagram = Variable.setRef()
+    let quiz = Variable.setRef()
+
+    let formValid
+    
 
     const SendLotteryForm = async function (event) {
         event.preventDefault()
@@ -54,13 +67,28 @@ const start = function () {
     }
 
     const lotteryValidCheckKeyup = function () {
-        if (target.value.trim().length != 0) {
-            formValid[this.name] = true
+        if (this.value.trim().length != 0) {
+            formValid[this.name]().classList.add('lottery_check_valid')
         } else {
-            formValid[this.name] = false
+            formValid[this.name]().classList.remove('lottery_check_valid')
         }
-
         let FullFilledForm = true
+        Object.values(formValid).forEach(()=>{
+            if(this().classList[1] != 'lottery_check_valid'){
+                FullFilledForm = false
+            }
+        })
+        buttonContainer
+        button
+        if (FullFilledForm) {
+            buttonContainer().classList.remove('lottery_form_button_inactive')
+            $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
+        } else {
+            buttonContainer().classList.add('lottery_form_button_inactive')
+            $('.lottery_form').find('.lottery_form_button').find('button').attr('disabled', 'disabled')
+        }
+        /*
+        
         $('.lottery_form').find('input').each(function () {
             if (this.value.trim().length == 0) {
                 FullFilledForm = false
@@ -76,14 +104,18 @@ const start = function () {
             $('.lottery_form').find('.lottery_form_button').addClass('lottery_form_button_inactive')
             $('.lottery_form').find('.lottery_form_button').find('button').attr('disabled', 'disabled')
         }
+        */
     }
 
-    const lotteryQuiz = async function(target, e){
-        if($('.valid_quiz_answer').length != 0){
+    const lotteryQuiz = async function(){
+        console.log(quiz)
+        if(quiz().classList[1] == 'lottery_check_valid'){
           return
         }
-        if(target.dataset.true == 'true'){
-          $(target).addClass('valid_quiz_answer')
+        
+        if(this.dataset.true == 'true'){
+            this.classList.add('valid_quiz_answer')
+          /*
           let FullFilledForm = true
           $('.lottery_form').find('input').each(function(){
             if(this.value.trim().length == 0){
@@ -95,9 +127,12 @@ const start = function () {
             $('.lottery_form').find('.lottery_form_button').find('button').removeAttr('disabled')
           }
           $('.lottery_check[data-name="quiz"]').addClass('lottery_check_valid')
+          */
+          quiz().classList.add('lottery_check_valid')
         } else {
-          $(target).addClass('invalid_quiz_answer')
-        }
+            this.classList.add('invalid_quiz_answer')
+        } 
+        
     }
 
 
@@ -105,11 +140,11 @@ const start = function () {
         async () => {
             ticketNumber = false
             formValid = {
-                email: false,
-                telegram: false,
-                twitter: false,
-                instagram: false,
-                quiz: false
+                nickname: nickname,
+                email: email,
+                telegram: telegram,
+                twitter: twitter,
+                instagram: instagram
             }
         },
         () => {
@@ -154,53 +189,53 @@ const start = function () {
                                             <div>
                                                 <form class="lottery_form" >
                                                     <p>To get lottery ticket:</p>
-                                                    <div class={Variable.auth ? 'lottery_check lottery_check_valid' : 'lottery_check'}>
+                                                    <div ref={nickname} class={Variable.auth ? 'lottery_check lottery_check_valid' : 'lottery_check'}>
                                                         <p>1. Register at Crypto-emergency.com.</p>
                                                         <input type="text" name="nickname" placeholder="Nickname" readonly value={Variable.auth ? Variable.myInfo.nickname : ''} />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
-                                                    <div data-name="email" class="lottery_check">
+                                                    <div ref={email} data-name="email" class="lottery_check">
                                                         <p>2. Enter your Email</p>
-                                                        <input data-keyup="lotteryValidCheck" type="text" name="email" placeholder="Email" />
+                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="email" placeholder="Email" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
-                                                    <div data-name="telegram" class="lottery_check">
+                                                    <div ref={telegram} data-name="telegram" class="lottery_check">
                                                         <p>3. Join our Telegram group and inform us your @nickname below.</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/emergencycrypto">https://t.me/emergencycrypto</a></p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/cryptoemergencychat">https://t.me/cryptoemergencychat</a></p>
-                                                        <input onpaste="lotteryValidCheck(this, event)" data-keyup="lotteryValidCheck" type="text" name="telegram" placeholder="Telegram" />
+                                                        <input onpaste="lotteryValidCheck(this, event)" onkeyup={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
-                                                    <div data-name="twitter" class="lottery_check">
+                                                    <div ref={twitter} data-name="twitter" class="lottery_check">
                                                         <p>4. Retweet post and give us a link</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://twitter.com/cryptoemergency">https://twitter.com/cryptoemergency</a></p>
-                                                        <input data-keyup="lotteryValidCheck" type="text" name="twitter" placeholder="Twitter" />
+                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="twitter" placeholder="Twitter" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
-                                                    <div data-name="instagram" class="lottery_check">
+                                                    <div ref={instagram} data-name="instagram" class="lottery_check">
                                                         <p>5. Make an Instagram post and give us a link</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/cryptoemergency/">https://www.instagram.com/cryptoemergency/</a></p>
-                                                        <input data-keyup="lotteryValidCheck" type="text" name="instagram" placeholder="Instagram" />
+                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="instagram" placeholder="Instagram" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
-                                                    <div data-name="quiz" class="lottery_check">
+                                                    <div ref={quiz} data-name="quiz" class="lottery_check">
                                                         <p>6. Answer a shortest quiz.</p>
                                                         <label for="">How many CEMD do everyone get for registration in Crypto Emergency?</label>
                                                         <div class="lottery_quiz_container">
-                                                            <div data-action="lotteryQuiz" class="lottery_quiz_button">
+                                                            <div onclick={lotteryQuiz} class="lottery_quiz_button">
                                                                 5
                                                             </div>
-                                                            <div data-true="true" data-action="lotteryQuiz" class="lottery_quiz_button">
+                                                            <div data-true="true" onclick={lotteryQuiz} class="lottery_quiz_button">
                                                                 0.5
                                                             </div>
-                                                            <div data-action="lotteryQuiz" class="lottery_quiz_button">
+                                                            <div onclick={lotteryQuiz} class="lottery_quiz_button">
                                                                 0.2
                                                             </div>
                                                         </div>
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
-                                                    <div class="lottery_form_button lottery_form_button_inactive">
-                                                        <button>OK</button>
+                                                    <div ref={buttonContainer} class="lottery_form_button lottery_form_button_inactive">
+                                                        <button ref={button}>OK</button>
                                                     </div>
                                                 </form>
                                             </div>

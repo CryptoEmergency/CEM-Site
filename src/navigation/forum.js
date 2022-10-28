@@ -445,6 +445,12 @@ const start = function () {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Канал «Люди PRO» показывает жизнь и работу людей, являющихся профессионалами в своей сфере. Неважно, кто ты: хакер, маркетолог, писатель, владелец небольшого кафе или нескольких заводов – если вы специалист в своем деле, мы идём к вам! Здесь нет случайных гостей, строгий отбор гарантирует получение качественной и интересной информации.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://blockchain24.pro" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_8']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Blockchain24.pro - Ведущий русскоязычный портал о криптовалютах и технологии blockchain. В основе нашей концепции - информационный портал, плюс тематические сервисы. Мы стремимся предоставить участникам отрасли максимально объективную информацию, проверенную и адаптированную для широкого круга читателей.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -666,6 +672,14 @@ const start = function () {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_9"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://blockchain24.pro"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_10"]} />
                                     </a>
                                 </div>
                             </div>
