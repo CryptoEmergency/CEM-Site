@@ -5,18 +5,13 @@ import {
     init
 } from "@betarost/cemjs";
 
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
-
-const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
+const start = function (data, ID = "mainBlock") {
 
     init(
         null,
         () => {
             return (
-                <div class={['c-jobs ', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                <div class="c-jobs c-main__body">
                     <div class="c-jobs__page">
                         <div class="c-jobs__preview">
                             <div class="c-jobs__textpreview">
@@ -135,15 +130,14 @@ const start = function () {
                                 </div>
                             </div>
                         </div>
-
                         <div class="c-job__withus">
                             <h2 class="c-jobs__subtitle">{Variable.lang.p.waitYouTeam}</h2>
                         </div>
                     </div>
                 </div>
             )
-        }
+        }, ID
     )
 };
-//I check
+
 export default start;

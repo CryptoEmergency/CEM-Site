@@ -8,7 +8,7 @@ import {
 import svg from "@assets/svg/index.js";
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
 
@@ -68,7 +68,7 @@ const start = function () {
           </div>
         </div>
       );
-    }
+    }, ID
   );
 };
 //I check
