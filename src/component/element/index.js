@@ -24,3 +24,4 @@ export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
 export { AnswerAdditionallyToggleNew } from "./AnswerAdditionallyToggleNew.js";
 export { SwitchLenta } from "./SwitchLenta.js";
 export { AwardsProgress } from "./AwardsProgress.js";
+export { Test } from "./Test.js";

@@ -50,7 +50,7 @@ const start = function (data, ID = "mainBlock") {
               <h2 class="c-goals__title"
                 onclick={
                   () => {
-                    tmp = 2
+                    tmp++
                     initReload()
                   }
                 }

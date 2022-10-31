@@ -31,7 +31,11 @@ const mainModal = async function () {
 
             if (Variable.Modals.length) {
                 Variable.Modals.map(async (item, index) => {
-                    modals.push({ fn: list[item.name], data: item.data, reload })
+                    let rel = reload
+                    if (index != Variable.Modals.length - 1) {
+                        rel = true
+                    }
+                    modals.push({ fn: list[item.name], data: item.data, reload: rel })
                 });
             }
 

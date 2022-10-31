@@ -116,19 +116,21 @@ const BlockAffiliateBanners = function () {
             </div>
           </div>
           <div class="affiliate_banners_size_list">
-            {banners[userLang].map((item, index)=>{
-              return(
-                  <div
-                    onclick={() => {
-                      activeBanner = item.type;
-                      initReload()
-                    }}
-                    class={["affiliate_banners_size_item", activeBanner == item.type ? "affiliate_banners_size_item_active" : null]}
-                  >
-                    <div class="affiliate_banners_size_item_inner">
-                      {item.type}
-                    </div>
+            {banners[userLang].map((item, index) => {
+              return (
+                <div
+                  onclick={() => {
+
+
+                    activeBanner = item.type;
+                    initReload()
+                  }}
+                  class={["affiliate_banners_size_item", activeBanner == item.type ? "affiliate_banners_size_item_active" : null]}
+                >
+                  <div class="affiliate_banners_size_item_inner">
+                    {item.type}
                   </div>
+                </div>
               )
             })}
           </div>
