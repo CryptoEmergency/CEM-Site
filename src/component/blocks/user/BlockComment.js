@@ -13,7 +13,7 @@ import {
   CommentInput,
   AnswerAdditionallyToggleNew,
 } from "@component/element/index.js";
-import { If} from "@component/helpers/All.js";
+import { If } from "@component/helpers/All.js";
 // import { BlockUserCommentComment } from "@src/component/blocks/user/BlockUserCommentComment.js";
 // const showAnswerAdditionallyContainer = (id) => {
 //   Variable.Static.answerAdditionallyShow = id;
@@ -27,7 +27,7 @@ import { If} from "@component/helpers/All.js";
 //   Variable.Static.answerAdditionallyShow = "";
 // }
 
-const BlockComment = function ({ item, index, mainId, commentId, callBack, typeSet="setNews" }) {
+const BlockComment = function ({ item, index, mainId, commentId, callBack, typeSet = "setNews" }) {
   let comId = item._id;
   // let typeSet = "setNews"
   return (
@@ -105,7 +105,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack, typeS
           }}
           commentId={commentId}
           mainId={mainId}
-          callBack ={callBack}
+          callBack={callBack}
         />
       </div>
       <If
@@ -120,14 +120,14 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack, typeS
             typeSet={typeSet}
             mainId={mainId}
             commentId={commentId}
-            callBack ={callBack}
+            callBack={callBack}
           />
         }
       />
-      
+
 
       <If
-        data={!commentId }
+        data={!commentId}
         dataIf={
           <div class="user_comment_comment">
             {
@@ -139,7 +139,7 @@ const BlockComment = function ({ item, index, mainId, commentId, callBack, typeS
                     mainId={mainId}
                     commentId={comId}
                     callBack={callBack}
-                    typeSet = {typeSet}
+                    typeSet={typeSet}
                   />
                 );
               })
