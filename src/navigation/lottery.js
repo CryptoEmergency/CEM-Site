@@ -3,10 +3,13 @@ import {
     jsxFrag,
     init,
     initReload,
-    Variable
+    Variable,
+    sendApi
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
+
+import { checkAnswerApi } from '@src/functions.js'
 
 import { If } from '@component/helpers/All.js';
 import { Select } from '@component/element/Select.js';
@@ -32,22 +35,23 @@ const start = function () {
 
     const SendLotteryForm = async function (event) {
         event.preventDefault()
-        var data = getSendData("setLottery")
-        data.data.value = {
+        let value = {
             nickname: this.elements.nickname.value,
             telegram: this.elements.telegram.value,
             twitter: this.elements.twitter.value,
             instagram: this.elements.instagram.value,
             email: this.elements.email.value
         }
-        let tmpRes = await SendData(data)
-        let res = await makeData({ res: tmpRes, one: true })
-        let htmlData = getFirstData()
-        htmlData.ticketNumber = res.ticketNumber
-        $('.lottery_data').html(await partialsHtml('ticket', htmlData))
+        // let tmpRes = await SendData(data)
+        // let res = await makeData({ res: tmpRes, one: true })
+        // let htmlData = getFirstData()
+        // htmlData.ticketNumber = res.ticketNumber
+        // $('.lottery_data').html(await partialsHtml('ticket', htmlData))
+        let response = checkAnswerApi(await sendApi.create("setLottery", {value: value}));
+        ticketNumber = response.list_records[0].ticketNumber
+        initReload()
     }
 
-   
 
     const lotteryValidCheckKeyup = function () {
         if (this.value.trim().length != 0) {
@@ -101,7 +105,13 @@ const start = function () {
 
     init(
         async () => {
-            ticketNumber = false
+            let response = checkAnswerApi(await sendApi.create("getLottery", {filter: {nickname: Variable.myInfo.nickname}}));
+            console.log('response', response)
+            if(response.totalFound != 0){
+                ticketNumber = response.list_records[0].ticketNumber
+            } else {
+                ticketNumber = false
+            }
             formValid = {
                 nickname: nickname,
                 email: email,
@@ -151,7 +161,7 @@ const start = function () {
                                         }
                                         dataElse={
                                             <div>
-                                                <form class="lottery_form" >
+                                                <form class="lottery_form" onsubmit={SendLotteryForm} >
                                                     <p>To get lottery ticket:</p>
                                                     <div ref={nickname} class={Variable.auth ? 'lottery_check lottery_check_valid' : 'lottery_check'}>
                                                         <p>1. Register at Crypto-emergency.com.</p>
