@@ -74,9 +74,7 @@ const WayAuthForm = function () {
                         <If
                             data={formInputs.email.error}
                             dataIf={
-
                                 <div class="error-div-variant">{formInputs.email.errorText}</div>
-
                             }
                         />
                     </div>
@@ -98,14 +96,17 @@ const WayAuthForm = function () {
             <div>
                 <div class='reset_by_mobile_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
-                    <If
-                        data={formInputs.phone.error}
-                        dataIf={
-                            <div class="error-div">
+                    <div class="error-div">
+                        <If
+                            data={formInputs.phone.error}
+                            dataIf={
+
                                 <div class="error-div-variant">{formInputs.phone.errorText}</div>
-                            </div>
-                        }
-                    />
+
+                            }
+                        />
+                    </div>
+
                     <div class="reset_by_mobile_block_container c-phonecode">
 
                         <div class="country-phone2">
@@ -281,14 +282,17 @@ const ModalAuth = function () {
                         </div>
                         <div class="container-input">
                             <label for="password">{Variable.lang.label.password}</label>
-                            <If
-                                data={formInputs.pass.error}
-                                dataIf={
-                                    <div class="error-div">
+                            <div class="error-div">
+                                <If
+                                    data={formInputs.pass.error}
+                                    dataIf={
+
                                         <div class="error-div-variant">{formInputs.pass.errorText}</div>
-                                    </div>
-                                }
-                            />
+
+                                    }
+                                />
+                            </div>
+
                             <div class="input-div">
                                 <img src={svg["lock"]} class="icon-input" />
                                 <input

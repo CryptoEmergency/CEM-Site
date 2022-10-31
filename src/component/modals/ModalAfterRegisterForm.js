@@ -53,7 +53,7 @@ const changeInput = async (e) => {
 };
 
 const ModalAfterRegisterForm = function (data, reload) {
-
+  console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
   // initOne(() => {
   if (!reload) {
     formInputs = {
@@ -210,6 +210,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                                 if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
                                   formInputs.isValid = true
                                 }
+                                console.log('=5fb352 formInputs=', formInputs)
                                 // initReload("modals")
                               }
                             }
@@ -270,10 +271,10 @@ const ModalAfterRegisterForm = function (data, reload) {
                   </div>
                 </form>
                 <button
-                 class={[
-                  "c-button c-button--gradient2",
-                  !formInputs.isValid ? "c-button--inactive" : "",
-                ]}
+                  class={[
+                    "c-button c-button--gradient2",
+                    !formInputs.isValid ? "c-button--inactive" : "",
+                  ]}
                   type="button"
                   // ref={elemButton}
                   onClick={sendRegistrationForm}

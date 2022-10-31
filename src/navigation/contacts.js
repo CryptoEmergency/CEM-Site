@@ -47,7 +47,7 @@ const start = function () {
     return;
   };
 
-  const sendMessage = async () => {
+  const sendMessage = async (e) => {
     e.preventDefault();
     if (!formInputs.isValid) {
       return false
@@ -129,14 +129,17 @@ const start = function () {
                         <input style="display: none;" type="submit" />
                         <div>
                           <label for="">{Variable.lang.label.name}</label>
-                          <If
-                            data={formInputs.name.error}
-                            dataIf={
-                              <div class="error-div">
+                          <div class="error-div">
+                            <If
+                              data={formInputs.name.error}
+                              dataIf={
+
                                 <div class="error-div-variant">{formInputs.name.errorText}</div>
-                              </div>
-                            }
-                          />
+
+                              }
+                            />
+                          </div>
+
                           <div class="contacts_form_name_icon">
                             <input
                               placeholder={Variable.lang.placeholder.name}
@@ -150,14 +153,17 @@ const start = function () {
                         </div>
                         <div>
                           <label for="">{Variable.lang.label.email}</label>
-                          <If
-                            data={formInputs.email.error}
-                            dataIf={
-                              <div class="error-div">
+                          <div class="error-div">
+                            <If
+                              data={formInputs.email.error}
+                              dataIf={
+
                                 <div class="error-div-variant">{formInputs.email.errorText}</div>
-                              </div>
-                            }
-                          />
+
+                              }
+                            />
+                          </div>
+
                           <div class="contacts_form_email_icon">
                             <input
                               placeholder={Variable.lang.placeholder.email}
@@ -171,14 +177,17 @@ const start = function () {
                         </div>
                         <div>
                           <label for="">{Variable.lang.label.message}</label>
-                          <If
-                            data={formInputs.text.error != ""}
-                            dataIf={
-                              <div class="error-div">
+                          <div class="error-div">
+                            <If
+                              data={formInputs.text.error != ""}
+                              dataIf={
+
                                 <div class="error-div-variant">{formInputs.text.errorText}</div>
-                              </div>
-                            }
-                          />
+
+                              }
+                            />
+                          </div>
+
                           <div>
                             <textarea
                               placeholder={Variable.lang.placeholder.message}

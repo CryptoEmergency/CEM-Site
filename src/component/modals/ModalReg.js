@@ -81,14 +81,17 @@ const WayRegForm = function () {
             <div>
                 <div class='reset_by_email_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.email}</label>
-                    <If
-                        data={formInputs.email.error != ""}
-                        dataIf={
-                            <div class="error-div" style="display: block">
-                                <div class="error-div-variant">{formInputs.email.error}</div>
-                            </div>
-                        }
-                    />
+                    <div class="error-div">
+                        <If
+                            data={formInputs.email.error != ""}
+                            dataIf={
+
+                                <div class="error-div-variant">{formInputs.email.errorText}</div>
+
+                            }
+                        />
+                    </div>
+
                     <div class="reset_by_email_block_container">
                         <input
                             placeholder={Variable.lang.placeholder.email}
@@ -107,14 +110,17 @@ const WayRegForm = function () {
             <div>
                 <div class='reset_by_mobile_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
-                    <If
-                        data={formInputs.phone.error}
-                        dataIf={
-                            <div class="error-div">
+                    <div class="error-div">
+                        <If
+                            data={formInputs.phone.error}
+                            dataIf={
+
                                 <div class="error-div-variant">{formInputs.phone.errorText}</div>
-                            </div>
-                        }
-                    />
+
+                            }
+                        />
+                    </div>
+
                     <div class="reset_by_mobile_block_container c-phonecode">
 
                         <div class="country-phone2">
@@ -304,14 +310,17 @@ const ModalReg = function () {
                         </div>
                         <div class="container-input">
                             <label for="password_reg">{Variable.lang.label.password}</label>
-                            <If
-                                data={formInputs.pass.error}
-                                dataIf={
-                                    <div class="error-div">
+                            <div class="error-div">
+                                <If
+                                    data={formInputs.pass.error}
+                                    dataIf={
+
                                         <div class="error-div-variant">{formInputs.pass.errorText}</div>
-                                    </div>
-                                }
-                            />
+
+                                    }
+                                />
+                            </div>
+
                             <div class="input-div">
                                 <img src={svg.lock} class="icon-input" />
                                 <input
