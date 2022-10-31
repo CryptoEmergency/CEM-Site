@@ -133,7 +133,7 @@ const getNewsItem = async function (type, count, category, mediaActveCategory) {
 const getDateFormat = function (data, type) {
   // const lang = getVariable("languages")[getStorage("lang")];
   moment.locale(Variable.lang.code);
-  //console.log("=b12dd9=", moment.locale());
+  // console.log("=b12dd9=", moment.locale());
   switch (type) {
     case "lenta":
       let secondsBefor = Math.round(
@@ -145,7 +145,7 @@ const getDateFormat = function (data, type) {
         return moment(data).format("DD MMMM YYYY");
       }
     case "userComment":
-      return moment(data).format("YYYY-MM-DD hh:mm");
+      return moment(data).format("YYYY-MM-DD HH:mm");
     default:
       return moment(data).format("YYYY-MM-DD");
   }
