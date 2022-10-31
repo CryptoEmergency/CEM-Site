@@ -90,7 +90,24 @@ const start = function () {
           <div class="userNewsBlock">
             <div class="bl_one bl_active">
               <div class="blog_news">
-                <If
+
+                {() => {
+                  if (Variable.PageMedia.totalFound === 0) {
+                    return (
+                      <div class="nothing_found">
+                        <img src={svg["partner-list_icon"]} />
+                        <p>{Variable.lang.p.notFound} </p>
+                      </div>
+                    )
+                  }
+
+                  return Variable.PageMedia.list_records.map((item, index) => {
+                    return (
+                      <NewsItem item={item} index={index} type={"media"} />
+                    );
+                  })
+                }}
+                {/* <If
                   data={Variable.PageMedia.totalFound === 0}
                   dataIf={
                     <div class="nothing_found">
@@ -106,7 +123,7 @@ const start = function () {
                           })
                     
                   }
-                />
+                /> */}
               </div>
               <If
                 data={
