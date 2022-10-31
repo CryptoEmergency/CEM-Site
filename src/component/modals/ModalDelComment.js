@@ -17,8 +17,11 @@ const ModalDelComment = function (data, reload) {
             }}
           ></button>
         </header>
-        <div class="c-modal__body">
-          <div
+        <div class="c-modal__body"></div>
+        <footer class="c-modal__footer">
+          <button
+            type="button"
+            class="c-button c-button--primary2"
             onclick={async () => {
               await delCom(data);
               Variable.Static.answerAdditionally = "";
@@ -57,9 +60,9 @@ const ModalDelComment = function (data, reload) {
               }
             }}
           >
-            {Variable.lang.select.delete}
-          </div>
-        </div>
+            <span class="c-button__wrapper">{Variable.lang.select.delete}</span>
+          </button>
+        </footer>
       </section>
     </div>
   );
