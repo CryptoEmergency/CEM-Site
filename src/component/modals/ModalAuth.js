@@ -67,25 +67,29 @@ const WayAuthForm = function () {
     if (wayAuth == "email") {
         return (
             <div>
+
                 <div class='reset_by_email_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.email}</label>
-                    <If
-                        data={formInputs.email.error}
-                        dataIf={
-                            <div class="error-div">
+                    <div class="error-div">
+                        <If
+                            data={formInputs.email.error}
+                            dataIf={
+
                                 <div class="error-div-variant">{formInputs.email.errorText}</div>
-                            </div>
-                        }
-                    />
+
+                            }
+                        />
+                    </div>
                     <div class="reset_by_email_block_container">
                         <input
                             placeholder={Variable.lang.placeholder.email}
                             type="text"
                             data-type="email"
-                            value={formInputs.email.value}
+                            // value={formInputs.email.value}
                             oninput={changeInput}
                         />
                     </div>
+
                 </div>
             </div>
         )

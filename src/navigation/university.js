@@ -113,15 +113,15 @@ const start = function () {
         >
           <div class="c-university__container c-container">
             <h1 class="c-university__title" style={"padding-top: 10vw"}
-            onclick ={(e) => {
-              console.log('=b7c203=')
-              e.stopPropagation();
-              e.preventDefault();
-              Variable.SetModals({
-                name: "ModalContextMenu",
-                data: {},
-              });
-            }}
+            // onclick ={(e) => {
+            //   console.log('=b7c203=')
+            //   e.stopPropagation();
+            //   e.preventDefault();
+            //   Variable.SetModals({
+            //     name: "ModalContextMenu",
+            //     data: {},
+            //   });
+            // }}
             >
               Крипто университет
             </h1>

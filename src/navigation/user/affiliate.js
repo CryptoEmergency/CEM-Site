@@ -13,7 +13,7 @@ import images from '@assets/images/index.js';
 
 import { If } from '@component/helpers/All.js';
 import { Avatar } from '@component/element/Avatar.js';
-import { BlockAffiliateBanners } from "@src/component/blocks/BlockAffiliateBanners.js";
+import { BlockAffiliateBanners } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/ButtonShowMore.js';
 
 const start = function () {

@@ -3,7 +3,9 @@ import {
     jsxFrag,
     init,
     initGo,
-    Variable
+    Variable,
+    Helpers
+
 } from '@betarost/cemjs'
 import appstore from '@assets/svg/appstore.svg'
 import googleplay from '@assets/svg/googleplay.svg'
@@ -117,7 +119,7 @@ const mainFooter = async function () {
                                                 <div class="c-accordion__body">
                                                     <a class="c-footer__link" id="supportSummon" data-action="supportModal" data-nofollow="true" href=""><span>{Variable.lang.a.supportCenter}</span></a>
                                                     <a class="c-footer__link" onclick={siteLink} href="/contacts/"><span>{Variable.lang.a.contacts}</span></a>
-                                                    <a class="c-footer__link" onclick={siteLink} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
+                                                    <a class="c-footer__link" onclick={Helpers.siteLinkModal} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
                                                 </div>
                                             </div>
                                         </div>
