@@ -36,12 +36,10 @@ const changeTextPost = (e) => {
 };
 
 const sendPost = async (e) => {
-  console.log('=c4213b=', formInputs)
   e.preventDefault();
   if (!formInputs.isValid) {
     return false;
   }
-  // console.log('=formInputs=',formInputs.mediaInputs.value)
 
   let data = {
     value: {
@@ -216,7 +214,7 @@ const start = function () {
   }
   //Добавил SendAudio
   const sendAudio = async function (files) {
-    let blob = new Blob([files], { type: 'audio' });
+    let blob = new Blob([files], { type: 'audio/ogg' });
     let previewObj = {
       src: URL.createObjectURL(blob),
       type: "audio",
@@ -226,7 +224,7 @@ const start = function () {
     formInputs.audioInputs.show = true;
     formInputs.audioInputs.value.push(previewObj);
     let numItem = formInputs.audioInputs.value.length - 1
-    console.log('=previewObj.src=',previewObj.src)
+
     initReload();
 
     uploadMedia(
@@ -234,16 +232,15 @@ const start = function () {
       "posts",
       async function () {
         formInputs.mediaInputs.show = true;
-
+       
 
         // formInputs.mediaInputs.value.push(obj);
         let response = JSON.parse(this.response);
-        formInputs.mediaInputs.value[numItem] = {
+        formInputs.audioInputs.value[numItem] = {
           aspect: undefined,
           type: response.mimetype.split("/")[0],
           name: response.name
         }
-
         formInputs.isValid = true;
         initReload();
       },
@@ -495,14 +492,14 @@ const start = function () {
                 return;
               }}
               // Добавил функ для Аудио
-              // onclickAudio={function () {
-              //   if (this.files.length == 0) {
-              //     return;
-              //   }
-              //   sendAudio(this.files)
-              //   this.value = '';
-              //   return;
-              // }}
+              onclickAudio={function () {
+                if (this.files.length == 0) {
+                  return;
+                }
+                sendAudio(this.files)
+                this.value = '';
+                return;
+              }}
             />
 
 
