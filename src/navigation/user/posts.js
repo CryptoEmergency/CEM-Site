@@ -45,7 +45,7 @@ const sendPost = async (e) => {
     value: {
       forFriends: formInputs.forFriends,
       languages: formInputs.lang.code,
-      media: formInputs.mediaInputs.value,
+      media:[ ...formInputs.mediaInputs.value,...formInputs.audioInputs.value],
       text: formInputs.textInputs.value,
     },
   };
@@ -327,7 +327,8 @@ const start = function () {
       return false;
     }
   };
-
+ 
+  let el =[];
   init(
     async () => {
       formInputs = {
@@ -350,6 +351,7 @@ const start = function () {
         forFriends: false,
         isValid: false,
       };
+     
 
       selectAspect = null;
 
@@ -419,6 +421,7 @@ const start = function () {
                               index={index}
                               type="posts"
                               formInputs={formInputs}
+                             
                             />
                           );
                         }
@@ -441,6 +444,7 @@ const start = function () {
                               index={index}
                               type="posts"
                               formInputs={formInputs}
+                              el ={el}
                             />
                           );
                       })

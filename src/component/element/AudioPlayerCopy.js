@@ -86,11 +86,8 @@ let controlTotalClick = function (e, progressLine, currentTime, mainElement) {
   progressLine().style.width = progress * 100 + "%";
   mainElement().currentTime = tmp;
 };
-let el =[];
 
-const AudioPlayerCopy = function ({ item, numIndex, index, path, elem }) {
-  
-  el[index] = Variable.setRef()
+const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
   let mainElement =elem ? elem[numIndex][index] : el[index];
   let fullTime = Variable.setRef();
   let currentTime = Variable.setRef();

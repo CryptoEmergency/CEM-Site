@@ -8,7 +8,10 @@ import {
 } from "@component/element/index.js";
 
 
-const MediaPreview = function ({ item, index, type, formInputs }) {
+const MediaPreview = function ({ item, index, type, formInputs,el }) {
+    if(item.type === "audio"){
+        el[index] = Variable.setRef();
+    }
   return (
     <div>
       <If
@@ -209,6 +212,7 @@ const MediaPreview = function ({ item, index, type, formInputs }) {
                   item={item}
                   index={index}
                   path={`/assets/upload/${type}/`}
+                  el = {el}
                 />
               }
             />
