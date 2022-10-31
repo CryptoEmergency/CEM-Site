@@ -26,7 +26,7 @@ import { AnswerAdditionallyToggleNew } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
-  console.log('=c1d88c=2 ModalPage', getInitList())
+  console.log('=c1d88c=2 ModalPage', getInitList(), Variable.ModalsPage[ID])
   // let mainId = item._id;
 
   if (!reload && getInitList()[ID].firstStart) {

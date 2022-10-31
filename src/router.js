@@ -16,137 +16,68 @@ const mainBlock = async function () {
             timersClear();
             timersStart("TikTok", timerTik, 1500)
         },
-        async (reload, ID) => {
-            console.log('=71adab=', reload, ID, Variable.Static)
-            if (!ID && ID != 0) {
-                Variable.Static.HeaderShow = true;
-                Variable.Static.FooterShow = true;
-                Variable.Static.FooterMenuShow = true;
+        async (reload, ID, url, data) => {
+            let dataUrl = Variable.dataUrl
+            if (url) {
+                dataUrl = url
+            }
+            Variable.Static.HeaderShow = true;
+            Variable.Static.FooterShow = true;
+            Variable.Static.FooterMenuShow = true;
 
-                let page = Variable.dataUrl.adress;
-                if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
-                    Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
-                }
-                if (!page || page == "") {
-                    await list.index();
-                    return;
-                }
-                if (Variable.dataUrl.category) {
-                    page += "/" + Variable.dataUrl.category;
-                } else if (Variable.dataUrl.adress == "user") {
-                    if (!Variable.dataUrl.params && !Variable.auth) {
-                        await list.error404();
-                        return;
-                    }
-
-                    page = "user/index";
-                    if (!Variable.dataUrl.params || Variable.dataUrl.params == Variable.myInfo.nickname) {
-                        await list[page](Variable.myInfo);
-                        return;
-                    }
-
-                    let userInfo = await sendApi.send({
-                        action: "getUsers", short: true,
-                        filter: {
-                            nickname: decodeURI(Variable.dataUrl.params)
-                        },
-                        select: {
-                            information: 1,
-                            work: 1,
-                            interest: 1,
-                            country: 1,
-                            fullname: 1
-                        },
-                        limit: 1
-                    });
-
-                    if (!userInfo || userInfo.totalFound == 0) {
-                        await list.error404();
-                        return;
-                    }
-
-                    await list[page](userInfo.list_records[0]);
-                    return;
-                }
-                if (!list[page]) {
-                    await list.error404();
-                    return;
-                }
-
-                await list[page]();
+            let page = dataUrl.adress;
+            if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+                Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+            }
+            if (!page || page == "") {
+                await list.index(data, ID, url);
                 return;
-            } else {
-
-                let page = Variable.Static.DataUrl.adress;
-
-                console.log('=5031d222=', page)
-
-                if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
-                    Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
-                }
-                if (!page || page == "") {
-                    await list.index(null, ID);
+            }
+            if (dataUrl.category) {
+                page += "/" + dataUrl.category;
+            } else if (dataUrl.adress == "user") {
+                if (!dataUrl.params && !Variable.auth) {
+                    await list.error404(data, ID, url);
                     return;
                 }
-                if (Variable.Static.DataUrl.category) {
-                    page += "/" + Variable.Static.DataUrl.category;
-                } else if (Variable.Static.DataUrl.adress == "user") {
-                    if (!Variable.Static.DataUrl.params && !Variable.auth) {
-                        await list.error404(null, ID);
-                        return;
-                    }
 
-                    page = "user/index";
-                    if (!Variable.Static.DataUrl.params || Variable.Static.DataUrl.params == Variable.myInfo.nickname) {
-                        await list[page](Variable.myInfo, ID);
-                        return;
-                    }
-
-                    let userInfo = await sendApi.send({
-                        action: "getUsers", short: true,
-                        filter: {
-                            nickname: decodeURI(Variable.Static.DataUrl.params)
-                        },
-                        select: {
-                            information: 1,
-                            work: 1,
-                            interest: 1,
-                            country: 1,
-                            fullname: 1
-                        },
-                        limit: 1
-                    });
-
-                    if (!userInfo || userInfo.totalFound == 0) {
-                        await list.error404(null, ID);
-                        return;
-                    }
-
-                    await list[page](userInfo.list_records[0], ID);
+                page = "user/index";
+                if (!dataUrl.params || dataUrl.params == Variable.myInfo.nickname) {
+                    await list[page](Variable.myInfo, ID, url, data);
                     return;
                 }
-                if (!list[page]) {
-                    await list.error404(null, ID);
+
+                let userInfo = await sendApi.send({
+                    action: "getUsers", short: true,
+                    filter: {
+                        nickname: decodeURI(dataUrl.params)
+                    },
+                    select: {
+                        information: 1,
+                        work: 1,
+                        interest: 1,
+                        country: 1,
+                        fullname: 1
+                    },
+                    limit: 1
+                });
+
+                if (!userInfo || userInfo.totalFound == 0) {
+                    await list.error404(data, ID, url);
                     return;
                 }
-                console.log('=5031d2=', page)
-                await list[page](null, ID);
+
+                await list[page](userInfo.list_records[0], ID, url, data);
                 return;
-
-
+            }
+            if (!list[page]) {
+                await list.error404(data, ID, url);
+                return;
             }
 
-
-
+            await list[page](data, ID, url);
+            return;
         }, "newPage")
     return
-    // 
-
-
-
-
-
-
-
 }
 export { mainBlock }
