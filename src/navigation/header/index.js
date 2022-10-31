@@ -36,14 +36,7 @@ const mainHeader = async function () {
                                 <div
                                     class="language"
                                     onclick={() => {
-                                        Variable.SetModals({
-                                            name: "ModalChangeLanguage",
-                                            data: {
-                                                onclick: async (langCode, langName, langOrig) => {
-                                                    initReload()
-                                                },
-                                            },
-                                        });
+                                        Variable.SetModals({ name: "ModalLanguageSite", data: {}, });
                                     }}
                                 >
                                     <div class="selectlink">
@@ -58,7 +51,6 @@ const mainHeader = async function () {
                                                     <div class="header_avatar_container">
                                                         <Avatar
                                                             author={Variable.myInfo}
-                                                        //   settings={true} 
                                                         />
                                                     </div>
                                                 </div>
