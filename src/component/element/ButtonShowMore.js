@@ -13,5 +13,5 @@ const ButtonShowMore = function ({ onclick }) {
         </div>
     )
 }
-//I check
+
 export { ButtonShowMore }
