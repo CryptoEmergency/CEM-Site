@@ -6,13 +6,11 @@ import {
   initReload,
   Helpers
 } from "@betarost/cemjs";
-
+// poydet
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function (data, ID = "mainBlock") {
-  console.log('=1f3466=', data, ID)
-  let tmp = 1
   init(
     null,
     () => {
@@ -20,19 +18,8 @@ const start = function (data, ID = "mainBlock") {
         <div class="c-aboutus about_us_container c-main__body">
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
-              <h2
-                class="c-whowe__title"
-                onclick={(e) => {
-                  console.log('=b7c203=')
-                  e.stopPropagation();
-                  e.preventDefault();
-                  Variable.SetModals({
-                    name: "ModalContextMenuCopy",
-                    data: {},
-                  });
-                }}
-              >
-                {Variable.lang.h.who_are_we} = {tmp}
+              <h2 class="c-whowe__title">
+                {Variable.lang.h.who_are_we}
               </h2>
               <img
                 class="c-whowe__img"
@@ -47,15 +34,7 @@ const start = function (data, ID = "mainBlock") {
           <div class="c-aboutus__content c-container">
             <div class="c-aboutus__goals c-goals">
 
-              <h2 class="c-goals__title"
-                onclick={
-                  () => {
-                    tmp++
-                    initReload()
-                  }
-                }
-              >{Variable.lang.h.our_goals}</h2>
-              <a class="c-menu__link" href="/about/" onclick={Helpers.siteLinkModal}>{Variable.lang.a.about}</a>
+              <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
               <div class="c-goals__list">
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">

@@ -11,7 +11,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
   let filterArrLogo, type, arrLogo;
 
   Variable.HeaderShow = true;
@@ -247,7 +247,7 @@ const start = function () {
           </div>
         </div>
       );
-    }
+    }, ID
   );
 };
 

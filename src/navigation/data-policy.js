@@ -5,7 +5,7 @@ import {
     init
 } from "@betarost/cemjs";
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
     Variable.HeaderShow = true
     Variable.FooterShow = true
 
@@ -279,7 +279,7 @@ const start = function () {
                     </div >
                 );
             }
-        })
+        }, ID)
 };
 //I check
 export default start;
