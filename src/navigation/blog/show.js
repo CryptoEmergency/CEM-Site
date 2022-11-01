@@ -2,10 +2,11 @@ import {
   jsx,
   jsxFrag,
   init,
-  sendApi,
   Variable,
 } from "@betarost/cemjs";
+
 import { BlockNewsShow } from '@component/blocks/index.js';
+import { api } from '@src/apiFunctions.js'
 
 const start = function (data, ID = "mainBlock") {
   let item;
@@ -14,7 +15,7 @@ const start = function (data, ID = "mainBlock") {
       if (data && data.item) {
         item = data.item
       } else {
-        let response = await sendApi.send({ action: "getNews", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } });
+        let response = await api({ type: "get", action: "getNews", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
         item = response.list_records[0]
       }
     },
