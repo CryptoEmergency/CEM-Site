@@ -30,7 +30,7 @@ const NewsCategory = async function ({ type, nameCategory, nameRecords, Static }
         <span>{Variable.lang.categoryName.all}</span>
       </div>
       {() => {
-        return Variable.PageBlogCategory.list_records.filter((item) => item.name !== null).map((item) => {
+        return Variable[nameCategory].list_records.filter((item) => item.name !== null).map((item) => {
           return (
             <div
               class={['tag_button', Static.activeCategory == item.name ? 'tag_button_active' : null]}

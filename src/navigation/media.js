@@ -11,7 +11,7 @@ import svg from "@assets/svg/index.js";
 import { If, Map } from "@component/helpers/All.js";
 import { ButtonShowMore, NewsItem } from "@component/element/index.js";
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
   let activeCategory;
 
   Variable.HeaderShow = true;
@@ -153,7 +153,7 @@ const start = function () {
           </div>
         </div>
       );
-    }
+    }, ID
   );
 };
 
