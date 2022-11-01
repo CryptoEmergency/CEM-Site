@@ -11,7 +11,7 @@ import { sliceString } from '@src/functions.js';
 
 const NewsItem = function ({ item, type }) {
 
-    console.log('=0e2822=', item)
+    // console.log('=0e2822=', item)
     return (
         <div class="blog_news_item"
             onClick={async () => {

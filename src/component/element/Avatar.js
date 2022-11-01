@@ -79,7 +79,7 @@ const sendPhoto = async function (crooper) {
 
 const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false }) {
 
-  console.log('=132e7f=',author)
+  // console.log('=132e7f=',author)
   initOne(() => {
     visibleSettings = false;
 
@@ -129,8 +129,8 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           }
         />
         {() => {
-          if(settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar"){
-            return(
+          if (settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar") {
+            return (
               <div class="user_custimize_settings_container">
                 <div
                   class="c-avataricon__settings"
@@ -144,8 +144,8 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                 >
                   <img class="" src={svg.settings_icon} width="20" height="20" />
                   {() => {
-                    if(author._id == Variable.myInfo._id){
-                      return(
+                    if (author._id == Variable.myInfo._id) {
+                      return (
                         <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
                           <p
                             class="user_custimize_settings_item"
@@ -196,7 +196,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                         </div>
                       )
                     } else {
-                      return(
+                      return (
                         <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
                           <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
                           <p class="user_custimize_settings_item complain" data-answer-id={author._id} data-type="user">{Variable.lang.select.complainUser}</p>
@@ -215,12 +215,12 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               </div>
             )
           } else {
-            if(author.status && author.status.team){
-              return(
+            if (author.status && author.status.team) {
+              return (
                 <img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />
               )
             } else {
-              return(
+              return (
                 <div>
                   <div
                     class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
@@ -244,9 +244,9 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
         }}
 
       </div>
-      {()=>{
-        if(nickName || speciality || dateShow){
-          return(
+      {() => {
+        if (nickName || speciality || dateShow) {
+          return (
             <div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
               {nickName && (<div>
                 <span>{author.nickname}</span>

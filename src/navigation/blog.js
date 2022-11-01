@@ -16,13 +16,11 @@ import {
 
 const start = function (data, ID = "mainBlock") {
   let activeCategory
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
 
   init(
     async () => {
       activeCategory = "All";
-      Variable.PageBlogCategory = await sendApi.send({ action: "getCategories", short: true, cache: true, name: "PageBlogCategory", filter: { type: "blog" } });
+      // Variable.PageBlogCategory = await sendApi.send({ action: "getCategories", short: true, cache: true, name: "PageBlogCategory", filter: { type: "blog" } });
 
       console.log('=2f2c92=', Variable.PageBlogCategory)
       Variable.PageBlog = await sendApi.send({ action: "getNews", short: true, cache: true, name: "PageBlog", filter: { type: "blog" } });
@@ -36,7 +34,7 @@ const start = function (data, ID = "mainBlock") {
             </div>
             <NewsCategory
               activeCategory={activeCategory}
-              items={Variable.PageBlogCategory}
+              // items={Variable.PageBlogCategory}
               onclick={async function () {
                 if (activeCategory == this.dataset.name) {
                   return

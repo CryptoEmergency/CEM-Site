@@ -20,8 +20,8 @@ const changeStatistic = async function (
 ) {
 
   let data;
-  if ((type === "setAnswer" || type === "setPost" ) && !mainId) {
-     data = {
+  if ((type === "setAnswer" || type === "setPost") && !mainId) {
+    data = {
       value: {
         evaluation: e.target.dataset.name,
       },
@@ -65,28 +65,28 @@ const changeStatistic = async function (
     initReload();
   }
 
-  if(type === "setPost"){
-    Variable[`PageLenta${ Variable.Static.lentaPage}`] = await sendApi.send({
-      action: "getPost", short: true, cache: true, name: `PageLenta${ Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
+  if (type === "setPost") {
+    Variable[`PageLenta${Variable.Static.lentaPage}`] = await sendApi.send({
+      action: "getPost", short: true, cache: true, name: `PageLenta${Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
     });
   }
 };
 
-const changeSubscription = async (id,type ,callBack) => {
+const changeSubscription = async (id, type, callBack) => {
   let data = {
     value: {
       subscribed: id
     }
   };
   let response = checkAnswerApi(await sendApi.create(type, data));
- Variable.Static.answerAdditionally = "";
- 
-    Variable[`PageLenta${ Variable.Static.lentaPage}`] = await sendApi.send({
-      action: "getPost", short: true, cache: true, name: `PageLenta${ Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
-    });
+  Variable.Static.answerAdditionally = "";
+
+  Variable[`PageLenta${Variable.Static.lentaPage}`] = await sendApi.send({
+    action: "getPost", short: true, cache: true, name: `PageLenta${Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
+  });
   if (typeof callBack == "function") {
-  callBack();
-}
+    callBack();
+  }
 }
 
 const showVotersApi = async (id, type) => {
@@ -127,7 +127,7 @@ const sendNewCommentApi = async function (
     data.value.comments = { text: comment };
     data._id = item._id
   }
-  else if ( Variable.Static.EditInput.length > 0) {
+  else if (Variable.Static.EditInput.length > 0) {
     if (!commentId) {
       data.value = {
         comments: {
@@ -143,7 +143,7 @@ const sendNewCommentApi = async function (
         },
       };
     }
-  } else if (!commentId &&( typeSet == "setAnswer" || typeSet == "setNews" ) && mainId === item._id) {
+  } else if (!commentId && (typeSet == "setAnswer" || typeSet == "setNews") && mainId === item._id) {
     data.value.comments = { text: comment };
   } else if (!commentId) {
     data.value.comments = {
@@ -375,6 +375,20 @@ const mainUsers = async (limit = 6, offset = 0, additional = null) => {
   return response;
 };
 
+
+const api = async (data) => {
+  let response = {}
+  if (data.type == "get") {
+    response = await sendApi.send(data);
+    if (data.name) {
+      Variable[data.name] = response
+    }
+  }
+
+  return response
+}
+
+
 export {
   changeSubscription,
   showVotersApi,
@@ -385,4 +399,5 @@ export {
   getPostsItemInShow,
   getQuestionItemInShow,
   getWorldPress,
+  api
 };
