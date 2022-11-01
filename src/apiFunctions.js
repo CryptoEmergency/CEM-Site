@@ -383,8 +383,9 @@ const api = async (data) => {
     if (data.name) {
       Variable[data.name] = response
     }
+  } else {
+    response = await sendApi.create(data.action, data.data);
   }
-
   return response
 }
 
