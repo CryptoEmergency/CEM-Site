@@ -5,19 +5,8 @@ import {
     initGo,
     Variable,
     Helpers
-
 } from '@betarost/cemjs'
-import appstore from '@assets/svg/appstore.svg'
-import googleplay from '@assets/svg/googleplay.svg'
-import telegram from '@assets/svg/telegram-icon.svg'
-import youtube from '@assets/svg/youtube_icon.svg'
-import twitter from '@assets/svg/twitter-icon.svg'
-import discord from '@assets/svg/discord-icon.svg'
-import github from '@assets/svg/github-icon2.svg'
-import tiktok from '@assets/svg/tiktok-icon.svg'
-import { siteLink } from '@src/functions.js'
 import svg from "@assets/svg/index.js"
-    ;
 import { BottomMenu } from '@component/element/BottomMenu.js';
 
 const mainFooter = async function () {
@@ -86,14 +75,14 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.one ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" onclick={siteLink} href="/about/">
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.about }) }} href="/about/">
                                                         <span>{Variable.lang.a.about}</span>
                                                     </a>
-                                                    <a class="c-footer__link" onclick={siteLink} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
-                                                    <a class="c-footer__link" onclick={siteLink} href="/career-whith-us/"><span>{Variable.lang.a.career}</span></a>
-                                                    <a class="c-footer__link" onclick={siteLink} href="/media/"><span>{Variable.lang.h.mediaUs}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.blog }) }} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.career }) }} href="/career-whith-us/"><span>{Variable.lang.a.career}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.mediaUs }) }} href="/media/"><span>{Variable.lang.h.mediaUs}</span></a>
 
-                                                    <a class="c-footer__link" onclick={siteLink} href="/university/"><span>Крипто университет</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.whitePaper }) }} href="/university/"><span>Крипто университет</span></a>
                                                     <a class="c-footer__link" href="/assets/docs/whitePaperEN.pdf">
                                                         <span>{Variable.lang.span.whitePaper}</span>
                                                     </a>
@@ -117,9 +106,8 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.two ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" id="supportSummon" data-action="supportModal" data-nofollow="true" href=""><span>{Variable.lang.a.supportCenter}</span></a>
-                                                    <a class="c-footer__link" onclick={siteLink} href="/contacts/"><span>{Variable.lang.a.contacts}</span></a>
-                                                    <a class="c-footer__link" onclick={Helpers.siteLinkModal} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.contacts }) }} href="/contacts/"><span>{Variable.lang.a.contacts}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.affiliate }) }} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,9 +128,9 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.three ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" onclick={siteLink} href="/terms-of-service/"><span>{Variable.lang.a.userTerms}</span></a>
-                                                    <a class="c-footer__link" onclick={siteLink} href="/data-policy/"><span>{Variable.lang.a.dataPolicy}</span></a>
-                                                    <a class="c-footer__link" onclick={siteLink} href="/cookies-policy/"><span>{Variable.lang.a.cookies}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.userTerms }) }} href="/terms-of-service/"><span>{Variable.lang.a.userTerms}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.dataPolicy }) }} href="/data-policy/"><span>{Variable.lang.a.dataPolicy}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.cookies }) }} href="/cookies-policy/"><span>{Variable.lang.a.cookies}</span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,10 +158,10 @@ const mainFooter = async function () {
                                         </div>
                                         <div class="c-footer__accordion c-accordion">
                                             <a href="https://apps.apple.com/ru/app/crypto-emergency/id1635628021" class="c-button__app">
-                                                <img src={appstore} />
+                                                <img src={svg['appstore']} />
                                             </a>
                                             <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" class="c-button__app">
-                                                <img src={googleplay} />
+                                                <img src={svg['googleplay']} />
                                             </a>
                                         </div>
                                     </div>
@@ -194,7 +182,7 @@ const mainFooter = async function () {
                                                             target="_blank"
                                                             href="https://t.me/cryptoemergencychat"
                                                         >
-                                                            <img src={telegram} />
+                                                            <img src={svg['telegram-icon']} />
                                                             Русский
                                                         </a>
                                                     </div>
@@ -203,7 +191,7 @@ const mainFooter = async function () {
                                                             target="_blank"
                                                             href="https://t.me/emergencycrypto"
                                                         >
-                                                            <img src={telegram} />
+                                                            <img src={svg['telegram-icon']} />
                                                             English
                                                         </a>
                                                     </div>
@@ -227,7 +215,7 @@ const mainFooter = async function () {
                                                     }}
                                                     data-type="telegram"
                                                 >
-                                                    <img class="c-socialicon__icon" src={telegram} />
+                                                    <img class="c-socialicon__icon" src={svg['telegram-icon']} />
                                                 </a>
                                             </div>
                                             <div class="c-socialicon">
@@ -242,7 +230,7 @@ const mainFooter = async function () {
                                                             target="_blank"
                                                             href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg/"
                                                         >
-                                                            <img src={youtube} /> Русский
+                                                            <img src={svg['youtube_icon']} /> Русский
                                                         </a>
                                                     </div>
                                                     <div>
@@ -250,7 +238,7 @@ const mainFooter = async function () {
                                                             target="_blank"
                                                             href="https://www.youtube.com/channel/UCdDWOveIuvqkyusDK1gv4ig/"
                                                         >
-                                                            <img src={youtube} /> English
+                                                            <img src={svg['youtube_icon']} /> English
                                                         </a>
                                                     </div>
                                                 </div>
@@ -270,7 +258,7 @@ const mainFooter = async function () {
                                                     }}
                                                     data-type="youtube"
                                                 >
-                                                    <img class="c-socialicon__icon" src={youtube} />
+                                                    <img class="c-socialicon__icon" src={svg['youtube_icon']} />
                                                 </a>
                                             </div>
                                             <div class="c-socialicon">
@@ -279,7 +267,7 @@ const mainFooter = async function () {
                                                     target="_blank"
                                                     class="c-socialicon__link"
                                                 >
-                                                    <img class="c-socialicon__icon" src={twitter} />
+                                                    <img class="c-socialicon__icon" src={svg['twitter-icon']} />
                                                 </a>
                                             </div>
                                             <div class="c-socialicon">
@@ -288,7 +276,7 @@ const mainFooter = async function () {
                                                     target="_blank"
                                                     class="c-socialicon__link"
                                                 >
-                                                    <img class="c-socialicon__icon" src={discord} />
+                                                    <img class="c-socialicon__icon" src={svg['discord-icon']} />
                                                 </a>
                                             </div>
                                             <div class="c-socialicon">
@@ -297,7 +285,7 @@ const mainFooter = async function () {
                                                     target="_blank"
                                                     class="c-socialicon__link"
                                                 >
-                                                    <img class="c-socialicon__icon" src={github} />
+                                                    <img class="c-socialicon__icon" src={svg['github-icon2']} />
                                                 </a>
                                             </div>
                                             <div class="c-socialicon">
@@ -307,8 +295,8 @@ const mainFooter = async function () {
                                                     class="c-socialicon__tooltip c-socialicon__tooltip--right"
                                                     ref={elem.tiktok}
                                                 >
-                                                    <div><a target="_blank" href="https://vm.tiktok.com/ZSefEMs2c/" rel="nofollow noopener" data-type="social" data-count="tiktokRu"><img src={tiktok} /> Русский </a></div>
-                                                    <div><a target="_blank" href="https://vm.tiktok.com/ZSefExJrr/" rel="nofollow noopener" data-type="social" data-count="tiktokEn"><img src={tiktok} /> English </a></div>
+                                                    <div><a target="_blank" href="https://vm.tiktok.com/ZSefEMs2c/" rel="nofollow noopener" data-type="social" data-count="tiktokRu"><img src={svg['tiktok-icon']} /> Русский </a></div>
+                                                    <div><a target="_blank" href="https://vm.tiktok.com/ZSefExJrr/" rel="nofollow noopener" data-type="social" data-count="tiktokEn"><img src={svg['tiktok-icon']} /> English </a></div>
                                                 </div>
                                                 <a
                                                     id="footer_tiktok_icon"
@@ -326,7 +314,7 @@ const mainFooter = async function () {
                                                     }}
                                                     data-type="tiktok"
                                                 >
-                                                    <img class="c-socialicon__icon" src={tiktok} />
+                                                    <img class="c-socialicon__icon" src={svg['tiktok-icon']} />
                                                 </a>
                                             </div>
                                         </div>
