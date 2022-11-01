@@ -128,141 +128,142 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               : svg["profile/frame/default"]
           }
         />
-        <If
-          data={settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar"}
-          dataIf={
-            <div class="user_custimize_settings_container">
-              <div
-                class="c-avataricon__settings"
-                onclick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  visibleSettings = !visibleSettings;
-                  initReload();
-                }
-                }
-              // onclick={(e) => {
-              //   e.stopPropagation();
-              //   e.preventDefault();
-              //   Variable.SetModals({
-              //     name: "ModalContextMenu",
-              //     data: {},
-              //   });
-              // }}
-              >
-                <img class="" src={svg.settings_icon} width="20" height="20" />
-                <If
-                  data={author._id == Variable.myInfo._id}
-                  dataIf={
-                    <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
-                      <p
-                        class="user_custimize_settings_item"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          inputImg().click();
-                        }}
-                      >{Variable.lang.text.changeAvatar}</p>
-                      <p class="user_custimize_settings_item">{Variable.lang.text.changeBackground}</p>
-                      <p class="user_custimize_settings_item">{Variable.lang.text.changeFrame}</p>
-                      <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
-                      <p class="user_custimize_settings_item">
-                        <a data-action="link" href="/user/settings/">{Variable.lang.text.settings}</a>
-                      </p>
-                      <input
-                        style="display: none;"
-                        type="file"
-                        accept=".jpg,.jpeg,.png,.gif"
-                        ref={inputImg}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }
-                        }
-                        onChange={(e) => {
-                          e.stopPropagation();
+        {() => {
+          if(settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar"){
+            return(
+              <div class="user_custimize_settings_container">
+                <div
+                  class="c-avataricon__settings"
+                  onclick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    visibleSettings = !visibleSettings;
+                    initReload();
+                  }
+                  }
+                >
+                  <img class="" src={svg.settings_icon} width="20" height="20" />
+                  {() => {
+                    if(author._id == Variable.myInfo._id){
+                      return(
+                        <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
+                          <p
+                            class="user_custimize_settings_item"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              inputImg().click();
+                            }}
+                          >{Variable.lang.text.changeAvatar}</p>
+                          <p class="user_custimize_settings_item">{Variable.lang.text.changeBackground}</p>
+                          <p class="user_custimize_settings_item">{Variable.lang.text.changeFrame}</p>
+                          <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
+                          <p class="user_custimize_settings_item">
+                            <a data-action="link" href="/user/settings/">{Variable.lang.text.settings}</a>
+                          </p>
+                          <input
+                            style="display: none;"
+                            type="file"
+                            accept=".jpg,.jpeg,.png,.gif"
+                            ref={inputImg}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                            }
+                            }
+                            onChange={(e) => {
+                              e.stopPropagation();
 
-                          if (inputImg().files.length == 0) {
-                            return;
-                          }
-
-                          Variable.SetModals({
-                            name: "ModalCropImage",
-                            data: {
-                              file: inputImg().files[0],
-                              typeUpload: 'avatar',
-                              arrMedia: formInputs.mediaInputs.value,
-                              aspectSelect: 1,
-                              uploadCropImage: async function (cropper) {
-                                await sendPhoto(cropper)
+                              if (inputImg().files.length == 0) {
                                 return;
                               }
-                            },
-                          }, true);
-                        }
-                        }
-                      />
-                    </div>
-                  }
-                  dataElse={
-                    <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
-                      <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
-                      <p class="user_custimize_settings_item complain" data-answer-id={author._id} data-type="user">{Variable.lang.select.complainUser}</p>
-                      <p class="user_custimize_settings_item block" data-answer-id={author._id} data-type="user">{Variable.lang.select.blackList}</p>
-                      {
-                        author.status.role ?
-                          <p style="color: #32DE80;" class="user_custimize_settings_item ban" data-answer-id={author._id} data-type="user">Забанить</p>
-                          :
-                          <></>
-                      }
-                    </div>
-                  }
-                />
-              </div>
-            </div>
-          }
-          dataElse={
-            <If
-              data={author.status && author.status.team}
-              dataIf={<img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />}
-              dataElse={<div>
-                <div
-                  class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
-                    }`}
-                >
-                  <img src={svg.levelGray} />
-                  <span>{author.statistic.level}</span>
+
+                              Variable.SetModals({
+                                name: "ModalCropImage",
+                                data: {
+                                  file: inputImg().files[0],
+                                  typeUpload: 'avatar',
+                                  arrMedia: formInputs.mediaInputs.value,
+                                  aspectSelect: 1,
+                                  uploadCropImage: async function (cropper) {
+                                    await sendPhoto(cropper)
+                                    return;
+                                  }
+                                },
+                              }, true);
+                            }
+                            }
+                          />
+                        </div>
+                      )
+                    } else {
+                      return(
+                        <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
+                          <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
+                          <p class="user_custimize_settings_item complain" data-answer-id={author._id} data-type="user">{Variable.lang.select.complainUser}</p>
+                          <p class="user_custimize_settings_item block" data-answer-id={author._id} data-type="user">{Variable.lang.select.blackList}</p>
+                          {
+                            author.status.role ?
+                              <p style="color: #32DE80;" class="user_custimize_settings_item ban" data-answer-id={author._id} data-type="user">Забанить</p>
+                              :
+                              <></>
+                          }
+                        </div>
+                      )
+                    }
+                  }}
                 </div>
-                <div
-                  style={`${author.online ? "" : "display: none;"}`}
-                  class="c-avataricon__status c-avataricon__status--online avatar_user_online"
-                ></div>
-                <div
-                  style={`${author.online ? "display: none;" : ""}`}
-                  class="c-avataricon__status c-avataricon__status--offline avatar_user_offline"
-                ></div>
-              </div>}
-            />
+              </div>
+            )
+          } else {
+            if(author.status && author.status.team){
+              return(
+                <img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />
+              )
+            } else {
+              return(
+                <div>
+                  <div
+                    class={`c-avataricon__level ${parent == "big_user_avatar" ? "dn" : "user_avatar_level"
+                      }`}
+                  >
+                    <img src={svg.levelGray} />
+                    <span>{author.statistic.level}</span>
+                  </div>
+                  <div
+                    style={`${author.online ? "" : "display: none;"}`}
+                    class="c-avataricon__status c-avataricon__status--online avatar_user_online"
+                  ></div>
+                  <div
+                    style={`${author.online ? "display: none;" : ""}`}
+                    class="c-avataricon__status c-avataricon__status--offline avatar_user_offline"
+                  ></div>
+                </div>
+              )
+            }
           }
-        />
+        }}
 
       </div>
-      <If
-        data={nickName || speciality || dateShow}
-        dataIf={<div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
-          {nickName && (<div>
-            <span>{author.nickname}</span>
-            <br />
-          </div>
-          )}
-          {speciality && (
-            <span class="c-avataricon__speciality">{speciality}</span>
-          )}
-          {dateShow && (
-            <span class="text--gray">{getDateFormat(dateShow, "userComment")}</span>
-          )}
-        </div>}
-      />
-    </a >
+      {()=>{
+        if(nickName || speciality || dateShow){
+          return(
+            <div class="c-avataricon__name c-avataricon__name--show nickNameAndDate">
+              {nickName && (<div>
+                <span>{author.nickname}</span>
+                <br />
+              </div>
+              )}
+              {speciality && (
+                <span class="c-avataricon__speciality">{speciality}</span>
+              )}
+              {dateShow && (
+                <span class="text--gray">{getDateFormat(dateShow, "userComment")}</span>
+              )}
+            </div>
+          )
+        }
+      }}
+    </a>
   );
 };
 
