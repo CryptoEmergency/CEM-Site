@@ -9,7 +9,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation } from '@src/functions.js';
+import { allValidation, validator } from '@src/functions.js';
 
 import { Input } from '@component/element/index.js';
 let wayAuth,
@@ -74,6 +74,12 @@ const WayAuthForm = function () {
                     placeholder={Variable.lang.placeholder.email}
                     type="text"
                     value=""
+                    condition={(value) => {
+                        return validator.isEmail(value);
+                    }}
+                    afterValid={() => {
+                        initReload()
+                    }}
                     Static={Static}
                 />
                 <div class='reset_by_email_block'>

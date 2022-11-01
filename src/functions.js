@@ -382,5 +382,6 @@ export {
   allValidation,
   ifHaveMedia,
   uploadMedia,
-  wrapTagToText
+  wrapTagToText,
+  validator
 };
