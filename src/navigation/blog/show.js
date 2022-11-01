@@ -7,7 +7,7 @@ import {
 } from "@betarost/cemjs";
 import { BlockNewsShow } from '@component/blocks/index.js';
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
   let item;
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
@@ -31,7 +31,7 @@ const start = function () {
           </div>
         </div>
       );
-    }
+    }, ID
   );
 };
 //I check
