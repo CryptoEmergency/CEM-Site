@@ -80,7 +80,7 @@ const WayAuthForm = function () {
                     afterValid={() => {
                         initReload()
                     }}
-                    Static={Static}
+                    Static={Static.email}
                 />
                 <div class='reset_by_email_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.email}</label>
