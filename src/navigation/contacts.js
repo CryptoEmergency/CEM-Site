@@ -9,14 +9,11 @@ import {
 
 import { allValidation } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
-import { If } from '@component/helpers/All.js';
 import { Jivo } from '@component/element/index.js';
 
 
 const start = function (data, ID = "mainBlock") {
   let formInputs
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
 
   const changeInput = function () {
     formInputs[this.dataset.type].value = this.value.trim()
@@ -103,111 +100,110 @@ const start = function (data, ID = "mainBlock") {
 
     () => {
       return (
-        <div class={['contacts_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+        <div class='contacts_container c-main__body'>
           <div class="c-container">
             <div class="contacts_content">
               <div class="contacts_form_block">
-                <If
-                  data={formInputs.messageSent != ""}
-                  dataIf={
-                    <div class="contacts_form">
-                      <div class="modal_success">
-                        <h4>{Variable.lang.h.modal_success}</h4>
-                        <img
-                          class="modal_success_icon"
-                          src={svg["modal_success"]}
-                          width="40"
-                        />
+                {()=>{
+                  if(formInputs.messageSent != ""){
+                    return(
+                      <div class="contacts_form">
+                        <div class="modal_success">
+                          <h4>{Variable.lang.h.modal_success}</h4>
+                          <img
+                            class="modal_success_icon"
+                            src={svg["modal_success"]}
+                            width="40"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  }
-                  dataElse={
-                    <div class="contacts_form">
-                      <h4>{Variable.lang.h.contact}</h4>
-                      <p>{Variable.lang.p.writeUs}</p>
-                      <form id="contactsForm" onsubmit={sendMessage}>
-                        <input style="display: none;" type="submit" />
-                        <div>
-                          <label for="">{Variable.lang.label.name}</label>
-                          <div class="error-div">
-                            <If
-                              data={formInputs.name.error}
-                              dataIf={
-
-                                <div class="error-div-variant">{formInputs.name.errorText}</div>
-
-                              }
-                            />
-                          </div>
-
-                          <div class="contacts_form_name_icon">
-                            <input
-                              placeholder={Variable.lang.placeholder.name}
-                              class="contacts_form_name"
-                              type="text"
-                              data-type="name"
-                              value={formInputs.name.value}
-                              oninput={changeInput}
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label for="">{Variable.lang.label.email}</label>
-                          <div class="error-div">
-                            <If
-                              data={formInputs.email.error}
-                              dataIf={
-
-                                <div class="error-div-variant">{formInputs.email.errorText}</div>
-
-                              }
-                            />
-                          </div>
-
-                          <div class="contacts_form_email_icon">
-                            <input
-                              placeholder={Variable.lang.placeholder.email}
-                              class="contacts_form_email"
-                              type="text"
-                              data-type="email"
-                              value={formInputs.email.value}
-                              oninput={changeInput}
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label for="">{Variable.lang.label.message}</label>
-                          <div class="error-div">
-                            <If
-                              data={formInputs.text.error != ""}
-                              dataIf={
-
-                                <div class="error-div-variant">{formInputs.text.errorText}</div>
-
-                              }
-                            />
-                          </div>
-
+                    )
+                  } else {
+                    return(
+                      <div class="contacts_form">
+                        <h4>{Variable.lang.h.contact}</h4>
+                        <p>{Variable.lang.p.writeUs}</p>
+                        <form id="contactsForm" onsubmit={sendMessage}>
+                          <input style="display: none;" type="submit" />
                           <div>
-                            <textarea
-                              placeholder={Variable.lang.placeholder.message}
-                              value={formInputs.text.value}
-                              data-type="text"
-                              oninput={changeInput}
-                            ></textarea>
+                            <label for="">{Variable.lang.label.name}</label>
+                            <div class="error-div">
+                              {()=>{
+                                if(formInputs.name.error){
+                                  return(
+                                    <div class="error-div-variant">{formInputs.name.errorText}</div>
+                                  )
+                                }
+                              }}
+                            </div>
+
+                            <div class="contacts_form_name_icon">
+                              <input
+                                placeholder={Variable.lang.placeholder.name}
+                                class="contacts_form_name"
+                                type="text"
+                                data-type="name"
+                                value={formInputs.name.value}
+                                oninput={changeInput}
+                              />
+                            </div>
                           </div>
-                          <div
-                            style={formInputs.isValid ? "display:block; margin-top: 20px;" : "display:none"}
-                          >
-                            <a class="btn-contacts" onclick={sendMessage}>
-                              <span>{Variable.lang.button.send}</span>
-                            </a>
+                          <div>
+                            <label for="">{Variable.lang.label.email}</label>
+                            <div class="error-div">
+                              {()=>{
+                                if(formInputs.email.error){
+                                  return(
+                                    <div class="error-div-variant">{formInputs.email.errorText}</div>
+                                  )
+                                }
+                              }}
+                            </div>
+
+                            <div class="contacts_form_email_icon">
+                              <input
+                                placeholder={Variable.lang.placeholder.email}
+                                class="contacts_form_email"
+                                type="text"
+                                data-type="email"
+                                value={formInputs.email.value}
+                                oninput={changeInput}
+                              />
+                            </div>
                           </div>
-                        </div>
-                      </form>
-                    </div>
+                          <div>
+                            <label for="">{Variable.lang.label.message}</label>
+                            <div class="error-div">
+                              {()=>{
+                                if(formInputs.text.error != ""){
+                                  return(
+                                    <div class="error-div-variant">{formInputs.text.errorText}</div>
+                                  )
+                                }
+                              }}
+                            </div>
+
+                            <div>
+                              <textarea
+                                placeholder={Variable.lang.placeholder.message}
+                                value={formInputs.text.value}
+                                data-type="text"
+                                oninput={changeInput}
+                              ></textarea>
+                            </div>
+                            <div
+                              style={formInputs.isValid ? "display:block; margin-top: 20px;" : "display:none"}
+                            >
+                              <a class="btn-contacts" onclick={sendMessage}>
+                                <span>{Variable.lang.button.send}</span>
+                              </a>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    )
                   }
-                />
+                }}
               </div>
               <div class="contacts_info" style={[formInputs.messageSent ? "margin-top: 20px" : null]}>
                 <span class="contact_info_label">
@@ -237,5 +233,4 @@ const start = function (data, ID = "mainBlock") {
     }, ID
   );
 };
-//I check
 export default start;
