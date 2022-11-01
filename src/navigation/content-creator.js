@@ -26,26 +26,19 @@ const start = function () {
                     code: "",
                     name: "all"
                 },
-                group: {
-                    common: false,
-                    content: false,
-                    expert: true
-                },
+                group: false,
                 online: false
             }
-            // Variable.PageCreators = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageCreators", limit: 21, filter: Helpers.getFilterUsers(filters, type) });
         },
         () => {
 
             return (
-                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                <div class='c-main__body'>
                     <BlockUsers
-                        title={Variable.lang.h.top_users}
+                        title={Variable.lang.a.contentCreater}
                         filters={filters}
                         nameRecords="PageCreators"
-                        // items={Variable.PageCreators}
                         type={type}
-                        name={"PageCreators"}
                     />
                 </div>
             )

@@ -155,13 +155,12 @@ const start = function () {
                                         </div>
                                     }
                                 />
-                                {/* <BlockUsers
+                                <BlockUsers
                                     title={Variable.lang.h.top_users}
                                     filters={filters}
-                                    items={Variable.MainUsers}
+                                    nameRecords="PageUsers"
                                     type={type}
-                                    name={"MainUsers"}
-                                /> */}
+                                />
                                 <BlockMainNews />
                                 <BlockInfoPartners
                                     limit={4}
