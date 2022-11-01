@@ -7,12 +7,13 @@ import {
   initReload
 } from "@betarost/cemjs";
 
-import { allValidation } from "@src/functions.js";
+import { allValidation, validator } from "@src/functions.js";
 import svg from "@assets/svg/index.js";
-import { Jivo } from '@component/element/index.js';
-
+import { Jivo, Input, TextArea } from '@component/element/index.js';
 
 const start = function (data, ID = "mainBlock") {
+  let Static = {}
+
   let formInputs
 
   const changeInput = function () {
@@ -64,6 +65,27 @@ const start = function (data, ID = "mainBlock") {
   init(
     () => {
 
+      Static.name = {
+        value: "",
+        valid: false,
+        error: false,
+      }
+
+      Static.email = {
+        value: "",
+        valid: false,
+        error: false,
+      }
+
+      Static.message = {
+        value: "",
+        valid: false,
+        error: false,
+      }
+
+
+
+
       formInputs = {
         name: {
           value: "",
@@ -104,9 +126,9 @@ const start = function (data, ID = "mainBlock") {
           <div class="c-container">
             <div class="contacts_content">
               <div class="contacts_form_block">
-                {()=>{
-                  if(formInputs.messageSent != ""){
-                    return(
+                {() => {
+                  if (formInputs.messageSent != "") {
+                    return (
                       <div class="contacts_form">
                         <div class="modal_success">
                           <h4>{Variable.lang.h.modal_success}</h4>
@@ -119,86 +141,72 @@ const start = function (data, ID = "mainBlock") {
                       </div>
                     )
                   } else {
-                    return(
+                    return (
                       <div class="contacts_form">
                         <h4>{Variable.lang.h.contact}</h4>
                         <p>{Variable.lang.p.writeUs}</p>
                         <form id="contactsForm" onsubmit={sendMessage}>
                           <input style="display: none;" type="submit" />
-                          <div>
-                            <label for="">{Variable.lang.label.name}</label>
-                            <div class="error-div">
-                              {()=>{
-                                if(formInputs.name.error){
-                                  return(
-                                    <div class="error-div-variant">{formInputs.name.errorText}</div>
-                                  )
-                                }
-                              }}
-                            </div>
 
-                            <div class="contacts_form_name_icon">
-                              <input
-                                placeholder={Variable.lang.placeholder.name}
-                                class="contacts_form_name"
-                                type="text"
-                                data-type="name"
-                                value={formInputs.name.value}
-                                oninput={changeInput}
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <label for="">{Variable.lang.label.email}</label>
-                            <div class="error-div">
-                              {()=>{
-                                if(formInputs.email.error){
-                                  return(
-                                    <div class="error-div-variant">{formInputs.email.errorText}</div>
-                                  )
-                                }
-                              }}
-                            </div>
+                          <Input
+                            label={Variable.lang.label.name}
+                            error={Variable.lang.error_div.not_empty_input}
+                            placeholder={Variable.lang.placeholder.name}
+                            type="text"
+                            value=""
+                            className="contacts_form_name_icon"
+                            condition={(value) => {
+                              return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+                            }}
+                            afterValid={() => {
+                              initReload()
+                            }}
+                            Static={Static.name}
+                          />
 
-                            <div class="contacts_form_email_icon">
-                              <input
-                                placeholder={Variable.lang.placeholder.email}
-                                class="contacts_form_email"
-                                type="text"
-                                data-type="email"
-                                value={formInputs.email.value}
-                                oninput={changeInput}
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <label for="">{Variable.lang.label.message}</label>
-                            <div class="error-div">
-                              {()=>{
-                                if(formInputs.text.error != ""){
-                                  return(
-                                    <div class="error-div-variant">{formInputs.text.errorText}</div>
-                                  )
-                                }
-                              }}
-                            </div>
+                          <Input
+                            label={Variable.lang.label.email}
+                            error={Variable.lang.error_div.wrong_email}
+                            placeholder={Variable.lang.placeholder.email}
+                            type="text"
+                            value=""
+                            className="contacts_form_email_icon"
+                            condition={(value) => {
+                              return validator.isEmail(value);
+                            }}
+                            afterValid={() => {
+                              initReload()
+                            }}
+                            Static={Static.email}
+                          />
 
-                            <div>
-                              <textarea
-                                placeholder={Variable.lang.placeholder.message}
-                                value={formInputs.text.value}
-                                data-type="text"
-                                oninput={changeInput}
-                              ></textarea>
-                            </div>
-                            <div
-                              style={formInputs.isValid ? "display:block; margin-top: 20px;" : "display:none"}
-                            >
-                              <a class="btn-contacts" onclick={sendMessage}>
-                                <span>{Variable.lang.button.send}</span>
-                              </a>
-                            </div>
+                          <TextArea
+                            label={Variable.lang.label.message}
+                            error={Variable.lang.error_div.not_empty_input}
+                            placeholder={Variable.lang.placeholder.message}
+                            type="text"
+                            value=""
+                            condition={(value) => {
+                              return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+                            }}
+                            afterValid={() => {
+                              initReload()
+                            }}
+                            Static={Static.message}
+                          />
+
+
+                          <div class="search-button" style="width:238px;">
+                            {Variable.lang.button.giveQuestion}
                           </div>
+                          <div
+                            style={formInputs.isValid ? "display:block; margin-top: 20px;" : "display:none"}
+                          >
+                            <a class="btn-contacts" onclick={sendMessage}>
+                              <span>{Variable.lang.button.send}</span>
+                            </a>
+                          </div>
+
                         </form>
                       </div>
                     )

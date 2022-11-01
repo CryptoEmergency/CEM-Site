@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Helpers, Variable } from "@betarost/cemjs";
 
 
-const Input = function ({ label, error, placeholder, type, value, condition, Static, afterValid, className }) {
+const TextArea = function ({ label, error, placeholder, type, value, condition, Static, afterValid, className }) {
 
     return (
         <div>
@@ -18,7 +18,7 @@ const Input = function ({ label, error, placeholder, type, value, condition, Sta
                 }
             </div>
             <div class={className}>
-                <input
+                <textarea
                     placeholder={placeholder}
                     type={type}
                     value={value}
@@ -44,4 +44,4 @@ const Input = function ({ label, error, placeholder, type, value, condition, Sta
     );
 };
 
-export { Input };
+export { TextArea };
