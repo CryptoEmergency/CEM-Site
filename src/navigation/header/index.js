@@ -91,7 +91,7 @@ const mainHeader = async function () {
                                 <a class="c-menu__link" href="/about/" onclick={(e) => { Helpers.siteLinkModal(e, {}) }}>{Variable.lang.a.about}</a>
                                 {/* <a class="c-menu__link" href="/about/" onclick={Helpers.siteLinkModal}>{Variable.lang.a.about}</a> */}
                                 {/* <a class="c-menu__link" href="/about/" onclick={Helpers.siteLink}>{Variable.lang.a.about}</a> */}
-                                <a class="c-menu__link" href="/blog/" onclick={(e) => { Helpers.siteLinkModal(e, {}) }}>{Variable.lang.a.blog}</a>
+                                <a class="c-menu__link" href="/blog/" onclick={(e) => { Helpers.siteLinkModal(e, { title: "ffff" }) }}>{Variable.lang.a.blog}</a>
                             </nav>
                         </div>
                     </div>

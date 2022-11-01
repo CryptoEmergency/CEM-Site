@@ -26,6 +26,7 @@ import { AnswerAdditionallyToggleNew } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
+  let data = Variable.ModalsPage[ID].data
   console.log('=c1d88c=2 ModalPage', getInitList(), Variable.ModalsPage[ID])
   // let mainId = item._id;
 
@@ -61,7 +62,7 @@ const ModalPage = async function (ID, reload) {
                       onclick={(e) => {
                         Variable.SetModals({ name: "ModalNotify", data: {} })
                       }}
-                    >{Variable.lang.a.about}</h5>
+                    >{data.title}</h5>
 
                     <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
                       <img class="answer_additionally_toggle_img" src={svg["points"]} />
