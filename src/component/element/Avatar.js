@@ -5,9 +5,10 @@ import { getDateFormat, siteLink, uploadMedia } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
 let visibleSettings, formInputs;
-let inputImg = Variable.setRef();
+let inputAvatar = Variable.setRef();
+let inputBg = Variable.setRef();
 
-const sendPhoto = async function (crooper) {
+const sendPhoto = async function (crooper, path) {
   if (!crooper) {
     return
   }
@@ -28,9 +29,17 @@ const sendPhoto = async function (crooper) {
   let numItem = formInputs.mediaInputs.value.length - 1
   initReload();
   await canvas.toBlob(function (blob) {
+    // const formData = new FormData();
+    // if(path == 'avatar') {
+    //   formData.append('media', blob);
+    // } else if(path == 'bg') {
+    //   let uniqueID = Date.now();
+    //   formData.append('media', blob, 'galary.jpg');
+    //   formData.append('media_id', uniqueID);
+    // }
     uploadMedia(
       blob,
-      "avatar",
+      path,
       async function () {
         formInputs.mediaInputs.show = true;
         if (!this.response) {
@@ -44,13 +53,23 @@ const sendPhoto = async function (crooper) {
         }
         formInputs.isValid = true;
         //update data User
-        let data = {
-          value: {
-              "avatar.name": response.name,
-          },
-        };
-        console.log('=c40066=',data)
+        let data;
+        if(path == 'avatar') {
+          data = {
+            value: {
+                "avatar.name": response.name,
+            },
+          };
+        } else if(path == 'bg') {
+          data = {
+            value: {
+                "background.name": response.name,
+            },
+          };
+        }
+        
         let res = await sendApi.create("setUsers", data);
+        res? console.log("Update user data") : console.log('...')
         initReload();
       },
       async function (e) {
@@ -73,7 +92,7 @@ const sendPhoto = async function (crooper) {
         }
         formInputs.mediaInputs.value[numItem].upload = e.loaded
         formInputs.mediaInputs.value[numItem].size = contentLength;
-        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+        // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
         initReload();
       }
     );
@@ -159,10 +178,17 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                             onClick={(e) => {
                               e.stopPropagation();
                               e.preventDefault();
-                              inputImg().click();
+                              inputAvatar().click();
                             }}
                           >{Variable.lang.text.changeAvatar}</p>
-                          <p class="user_custimize_settings_item">{Variable.lang.text.changeBackground}</p>
+                          <p
+                            class="user_custimize_settings_item"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              inputBg().click();
+                            }}
+                          >{Variable.lang.text.changeBackground}</p>
                           <p class="user_custimize_settings_item">{Variable.lang.text.changeFrame}</p>
                           <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
                           <p class="user_custimize_settings_item">
@@ -172,7 +198,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                             style="display: none;"
                             type="file"
                             accept=".jpg,.jpeg,.png,.gif"
-                            ref={inputImg}
+                            ref={inputAvatar}
                             onClick={(e) => {
                               e.stopPropagation();
                             }
@@ -180,19 +206,51 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                             onChange={(e) => {
                               e.stopPropagation();
 
-                              if (inputImg().files.length == 0) {
+                              if (inputAvatar().files.length == 0) {
                                 return;
                               }
 
                               Variable.SetModals({
                                 name: "ModalCropImage",
                                 data: {
-                                  file: inputImg().files[0],
+                                  file: inputAvatar().files[0],
                                   typeUpload: 'avatar',
                                   arrMedia: formInputs.mediaInputs.value,
                                   aspectSelect: 1,
                                   uploadCropImage: async function (cropper) {
-                                    await sendPhoto(cropper)
+                                    await sendPhoto(cropper, 'avatar')
+                                    return;
+                                  }
+                                },
+                              }, true);
+                            }
+                            }
+                          />
+                          <input
+                            style="display: none;"
+                            type="file"
+                            accept=".jpg,.jpeg,.png,.gif"
+                            ref={inputBg}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                            }
+                            }
+                            onChange={(e) => {
+                              e.stopPropagation();
+
+                              if (inputBg().files.length == 0) {
+                                return;
+                              }
+
+                              Variable.SetModals({
+                                name: "ModalCropImage",
+                                data: {
+                                  file: inputBg().files[0],
+                                  typeUpload: 'bg',
+                                  arrMedia: formInputs.mediaInputs.value,
+                                  aspectSelect: 4,
+                                  uploadCropImage: async function (cropper) {
+                                    await sendPhoto(cropper, 'background')
                                     return;
                                   }
                                 },
