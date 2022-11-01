@@ -8,7 +8,7 @@ import {
 } from "@betarost/cemjs";
 
 import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
-
+import { api } from '@src/apiFunctions.js'
 
 import { BlockQuestionsShow } from '@component/blocks/index.js';
 import { QuestionAnswers } from '@component/element/index.js';
