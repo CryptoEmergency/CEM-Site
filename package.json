@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@betarost/cem": "^1.0.6",
-    "@betarost/cemjs": "^1.1.7",
+    "@betarost/cemjs": "^1.1.8",
     "cropperjs": "^1.5.12",
     "moment": "^2.29.4",
     "path": "^0.12.7",
