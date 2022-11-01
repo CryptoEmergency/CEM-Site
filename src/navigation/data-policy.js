@@ -4,7 +4,7 @@ import {
     Variable,
     init
 } from "@betarost/cemjs";
-
+// poydet
 const start = function (data, ID = "mainBlock") {
     init(
         null,
@@ -271,12 +271,12 @@ const start = function (data, ID = "mainBlock") {
                                         <span class="c-button__text">Download</span>
                                     </a>
                                 </div>
-                           </div>
+                            </div>
                         </div>
                     </div >
                 );
             }
         }, ID)
 };
-//I check
+
 export default start;

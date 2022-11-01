@@ -5,18 +5,16 @@ import {
   init,
   initReload,
 } from "@betarost/cemjs";
-
+// poydet
 import {
   ButtonShowMore,
   NewsCategory,
   NewsItem,
 } from "@component/element/index.js";
-
 import { api } from '@src/apiFunctions.js'
 
 const start = function (data, ID = "mainBlock") {
   let Static = {}
-
   init(
     async () => {
       Static.activeCategory = "All"

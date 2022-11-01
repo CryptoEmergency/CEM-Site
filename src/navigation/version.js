@@ -3,7 +3,7 @@ import {
     jsxFrag,
     init
 } from "@betarost/cemjs";
-
+// poydet
 const start = function (data, ID = "mainBlock") {
     init(
         null,

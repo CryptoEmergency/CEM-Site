@@ -2,10 +2,10 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    init,  
+    init,
     Helpers,
 } from "@betarost/cemjs";
-
+// poydet
 const start = function (data, ID = "mainBlock") {
     init(
         null,
@@ -16,17 +16,17 @@ const start = function (data, ID = "mainBlock") {
                         <div class="full_news_block">
                             <div class="full_news_content">
                                 <h1
-                                class="full_news_name"
-                                 >Добро пожаловать в Crypto Emergency!</h1>
+                                    class="full_news_name"
+                                >Добро пожаловать в Crypto Emergency!</h1>
 
                                 <p
-                                 class="full_news_date"
-                                 >Редакция от 2022-02-21</p>
-                                <p 
-                                class="full_news_text mr20"
+                                    class="full_news_date"
+                                >Редакция от 2022-02-21</p>
+                                <p
+                                    class="full_news_text mr20"
                                 >Настоящие Условия использования ("Условия") регулируют использование вами crypto-emergency.com (если прямо не указано, что применяются отдельные условия, а не эти) и содержат информацию о Сервисе Crypto Emergency ("Сервис"), изложенную ниже. Создавая аккаунт Crypto Emergency или используя Crypto Emergency, вы принимаете настоящие условия.</p>
                                 <h2
-                                class="full_news_title mr20"
+                                    class="full_news_title mr20"
                                 >Сервис Crypto Emergency</h2>
                                 <div class="c-terms__content">
                                     <p>Мы соглашаемся предоставлять вам Сервис Crypto Emergency. Сервис включает в себя все продукты, функции, приложения, сервисы, технологии и программное обеспечение Crypto Emergency, которые мы предоставляем для выполнения миссии Crypto Emergency помогать вам стать ближе к любимым людям и вещам, а так же увеличить багаж заний связанный с крипто индустрией. Сервис включает следующие компоненты:</p>
@@ -45,7 +45,7 @@ const start = function (data, ID = "mainBlock") {
                                     <p>Мы также предоставляем рекламодателям отчеты о результативности рекламы, которые помогают им понять, как люди взаимодействуют с их контентом в сети Crypto Emergency и за ее пределами. Так, мы предоставляем рекламодателям общие демографические данные и информацию об интересах, чтобы они получили более четкое представление о своей аудитории. Мы никому не предоставляем информацию, по которой можно установить вашу личность (например, ваше имя и электронный адрес, которые сами по себе могут использоваться для связи с вами или для установления вашей личности), если вы не дадите нам на это специальное разрешение. </p>
                                 </div>
                                 <h2 class="c-terms__subtitle mr30">Политика использования данных</h2>
-                                <p class="c-terms__text">Для предоставления нашего Сервиса нам необходимо собирать и использовать вашу информацию. В <a href="/ru/data-policy/" onclick = {Helpers.siteLink}>Политике использования данных</a> разъясняется, как мы собираем, используем и передаем информацию в различных Продуктах Crypto Emergency. В ней также описано множество имеющихся у вас способов управления вашей информацией, включая Настройки конфиденциальности и безопасности Crypto Emergency. Чтобы использовать Crypto Emergency, вы должны принять Политику использования данных.</p>
+                                <p class="c-terms__text">Для предоставления нашего Сервиса нам необходимо собирать и использовать вашу информацию. В <a href="/ru/data-policy/" onclick={Helpers.siteLink}>Политике использования данных</a> разъясняется, как мы собираем, используем и передаем информацию в различных Продуктах Crypto Emergency. В ней также описано множество имеющихся у вас способов управления вашей информацией, включая Настройки конфиденциальности и безопасности Crypto Emergency. Чтобы использовать Crypto Emergency, вы должны принять Политику использования данных.</p>
                                 <h2 class="c-terms__subtitle mr30">Ваши обязательства</h2>
                                 <div class="c-terms__content">
                                     <p>В обмен на наше обязательство предоставлять Сервис вы должны взять на себя следующие обязательства перед нами.</p>
@@ -138,14 +138,14 @@ const start = function (data, ID = "mainBlock") {
                                 <p class="full_news_date">Revision from 2022-02-21</p>
                                 <p class="full_news_text mr20">These Terms and Conditions of Use (the "Terms and Conditions") govern your use of crypto-emergency.com (unless expressly stated that separate terms and conditions apply rather than these) and contain information about the Crypto Emergency Service (the "Service") set forth below. By creating a Crypto Emergency account or using Crypto Emergency, you accept these Terms and Conditions.</p>
                                 <h2 class="full_news_title mr20">Crypto Emergency Service</h2>
-                               
-                               
-                                   <p class="full_news_text mr20">We agree to provide you with the Crypto Emergency Service. The Service includes all Crypto Emergency products, features, applications, services, technologies, and software we provide to fulfill the Crypto Emergency mission of helping you get closer to your loved ones and things, as well as increase your knowledge of the crypto industry. The Service includes the following components:</p>
-                                   <p>Offering a personalized opportunity to create content, communicate, learn new things, and share experiences and impressions with others.</p>
+
+
+                                <p class="full_news_text mr20">We agree to provide you with the Crypto Emergency Service. The Service includes all Crypto Emergency products, features, applications, services, technologies, and software we provide to fulfill the Crypto Emergency mission of helping you get closer to your loved ones and things, as well as increase your knowledge of the crypto industry. The Service includes the following components:</p>
+                                <p>Offering a personalized opportunity to create content, communicate, learn new things, and share experiences and impressions with others.</p>
                                 <p>Creating a supportive, open-ended and safe environment.</p>
                                 <p>We develop and use tools and offer resources to our community members to help ensure that Crypto Emergency has positive and open communication for all, including when we think they may need help. We also have teams and systems in place to deal with abuses and violations of our Terms and Conditions and Policies, as well as harmful and misleading behavior. We use all the information we have (including your information) to keep our platform secure. We may also share information about inappropriate use or harmful content with other Crypto Emergency Companies or law-enforcement authorities. For more information, see our Data Use Policy.</p>
-                                
-                               
+
+
                                 <h2 class="full_news_title mr20">Developing and using technology to help us serve our growing community.</h2>
                                 <p>Organizing and analyzing information within the growing Crypto Emergency community is very important to our Service. A significant part of it is the creation and use of advanced technologies that help us personalize, protect and improve our Service for the wider global community. Technologies such as artificial intelligence and machine learning enable us to apply complex processes to our Service. Automated technologies also help us ensure the operation and integrity of our Service.</p>
                                 <h2 class="full_news_title mr20">Providing access to our Service.</h2>
@@ -155,7 +155,7 @@ const start = function (data, ID = "mainBlock") {
                                 <p>We provide you with relevant and useful advertising without revealing your identity to advertisers. We do not sell your personal information. We allow advertisers to tell us their business goals and the target audience to whom they want to show their ads. We then show their ads to people who might be interested in them.</p>
                                 <p>We also provide advertisers with ad performance reports that help them understand how people are interacting with their content on and off the Crypto Emergency network. For example, we provide advertisers with general demographics and interest information to give them a clearer picture of their audience. We do not share personally identifiable information (such as your name and email address, which may themselves be used to contact you or to identify you) with anyone unless you give us specific permission to do so. </p>
                                 <h2 class="full_news_title mr30">Data Use Policy</h2>
-                                <p>In order to provide our Service, we need to collect and use your information. The <a href="/data-policy/" onclick = {Helpers.siteLink} >Data Use Policy</a> explains how we collect, use and share information in the various Crypto Emergency Products. It also describes the many ways you can manage your information, including Crypto Emergency\'s Privacy and Security Settings. In order to use Crypto Emergency, you must accept the Data Use Policy.</p>
+                                <p>In order to provide our Service, we need to collect and use your information. The <a href="/data-policy/" onclick={Helpers.siteLink} >Data Use Policy</a> explains how we collect, use and share information in the various Crypto Emergency Products. It also describes the many ways you can manage your information, including Crypto Emergency\'s Privacy and Security Settings. In order to use Crypto Emergency, you must accept the Data Use Policy.</p>
                                 <h2 class="full_news_title mr30">Your obligations</h2>
                                 <p>In exchange for our obligation to provide the Service, you must assume the following obligations to us.</p>
                                 <p>Who can use Crypto Emergency. We want our Service to be as open and accessible to everyone as possible, but at the same time safe, secure and compliant with legal requirements. Therefore, in order to become part of the Crypto Emergency community, you must comply with certain restrictions.</p>
@@ -228,5 +228,5 @@ const start = function (data, ID = "mainBlock") {
             }
         }, ID)
 };
-//I check
+
 export default start;

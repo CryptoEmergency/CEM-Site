@@ -4,7 +4,7 @@ import {
   Variable,
   init
 } from "@betarost/cemjs";
-
+// poydet
 const start = function (data, ID = "mainBlock") {
   init(
     null,
@@ -179,5 +179,5 @@ const start = function (data, ID = "mainBlock") {
       }
     }, ID)
 };
-//I check
+
 export default start;
