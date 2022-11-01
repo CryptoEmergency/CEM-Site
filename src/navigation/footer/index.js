@@ -75,7 +75,7 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.one ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.about }) }} href="/about/">
+                                                    <a class="c-footer__link" href="/about/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.about }) }} >
                                                         <span>{Variable.lang.a.about}</span>
                                                     </a>
                                                     <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.blog }) }} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
