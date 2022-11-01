@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initOne, sendApi } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initOne, sendApi, Helpers } from "@betarost/cemjs";
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink, uploadMedia } from "@src/functions.js";
@@ -54,22 +54,22 @@ const sendPhoto = async function (crooper, path) {
         formInputs.isValid = true;
         //update data User
         let data;
-        if(path == 'avatar') {
+        if (path == 'avatar') {
           data = {
             value: {
-                "avatar.name": response.name,
+              "avatar.name": response.name,
             },
           };
-        } else if(path == 'bg') {
+        } else if (path == 'bg') {
           data = {
             value: {
-                "background.name": response.name,
+              "background.name": response.name,
             },
           };
         }
-        
+
         let res = await sendApi.create("setUsers", data);
-        res? console.log("Update user data") : console.log('...')
+        res ? console.log("Update user data") : console.log('...')
         initReload();
       },
       async function (e) {
@@ -126,7 +126,15 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
     <a
       href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
       class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : parent == "c-comments__avacomment" ? "c-comments__avacomment" : "comment_avatar"}`}
-      onclick={siteLink}
+      // onclick={Helpers.siteLink}
+      onclick={(e) => {
+        if (Variable.myInfo && Variable.myInfo.nickname == author.nickname) {
+          Helpers.siteLink(e)
+        } else {
+          Helpers.siteLinkModal(e, { title: author.nickname })
+        }
+      }
+      }
     >
       <div
         class={`c-avataricon ${parent == "big_user_avatar"
