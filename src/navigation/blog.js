@@ -14,7 +14,7 @@ import {
   NewsItem
 } from '@component/element/index.js';
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
   let activeCategory
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
@@ -87,7 +87,7 @@ const start = function () {
           </div>
         </div>
       );
-    }
+    }, ID
   );
 };
 //I check
