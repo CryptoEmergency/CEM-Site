@@ -6,15 +6,12 @@ import {
 } from "@betarost/cemjs";
 
 const start = function (data, ID = "mainBlock") {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-
     init(
         null,
         () => {
             if (Variable.lang.lang === "Russian") {
                 return (
-                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                    <div class='c-main__body'>
                         <div class="c-terms">
                             <div class="c-terms__container c-container">
                                 <h1 class="c-terms__title">Политика использования данных</h1>
@@ -147,7 +144,7 @@ const start = function (data, ID = "mainBlock") {
                 );
             } else {
                 return (
-                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                    <div class='c-main__body'>
                         <div class="c-terms">
                             <div class="c-terms__container c-container">
                                 <h1 class="c-terms__title">Data Policy</h1>

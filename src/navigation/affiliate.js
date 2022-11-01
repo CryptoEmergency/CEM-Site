@@ -4,19 +4,16 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
-
+// poydet
 import svg from "@assets/svg/index.js";
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
 
 const start = function (data, ID = "mainBlock") {
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-
   init(
     null,
     () => {
       return (
-        <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+        <div class='c-main__body'>
           <img
             class="affiliate_program_blur"
             style="position: absolute; right: 0;"
@@ -71,5 +68,4 @@ const start = function (data, ID = "mainBlock") {
     }, ID
   );
 };
-//I check
 export default start;

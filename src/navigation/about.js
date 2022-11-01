@@ -3,8 +3,6 @@ import {
   jsxFrag,
   init,
   Variable,
-  initReload,
-  Helpers
 } from "@betarost/cemjs";
 // poydet
 import svg from "@assets/svg/index.js";
@@ -163,5 +161,4 @@ const start = function (data, ID = "mainBlock") {
       )
     }, ID)
 };
-//I check
 export default start;

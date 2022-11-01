@@ -7,38 +7,25 @@ import {
 } from "@betarost/cemjs";
 
 const start = function (data, ID = "mainBlock") {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-
     init(
         null,
         () => {
             if (Variable.lang.lang === "Russian") {
                 return (
-                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-                        <div
-                        //  class="c-terms"
-                         class="full_news_block"
-                         >
-                            <div
-                            //  class="c-terms__container c-container"
-                             class="full_news_content"
-                             >
+                    <div class='c-main__body'>
+                        <div class="full_news_block">
+                            <div class="full_news_content">
                                 <h1
-                                //  class="c-terms__title"
                                 class="full_news_name"
                                  >Добро пожаловать в Crypto Emergency!</h1>
 
                                 <p
-                                //  class="c-terms__date"
                                  class="full_news_date"
                                  >Редакция от 2022-02-21</p>
                                 <p 
-                                // class="c-terms__preview"
                                 class="full_news_text mr20"
                                 >Настоящие Условия использования ("Условия") регулируют использование вами crypto-emergency.com (если прямо не указано, что применяются отдельные условия, а не эти) и содержат информацию о Сервисе Crypto Emergency ("Сервис"), изложенную ниже. Создавая аккаунт Crypto Emergency или используя Crypto Emergency, вы принимаете настоящие условия.</p>
                                 <h2
-                                // class="c-terms__subtitle"
                                 class="full_news_title mr20"
                                 >Сервис Crypto Emergency</h2>
                                 <div class="c-terms__content">
@@ -144,7 +131,7 @@ const start = function (data, ID = "mainBlock") {
                 );
             } else {
                 return (
-                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                    <div class='c-main__body'>
                         <div class="full_news_block">
                             <div class="full_news_content">
                                 <h1 class="full_news_name">Welcome to Crypto Emergency!</h1>
