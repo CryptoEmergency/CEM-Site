@@ -88,10 +88,10 @@ const mainHeader = async function () {
                                     <img class="c-logo__image" src={svg.logo} />
                                 </a>
                                 <a class="c-menu__link" href="/contacts/" onclick={Helpers.siteLink}>{Variable.lang.a.contacts}</a>
-                                <a class="c-menu__link" href="/about/" onclick={(e) => { Helpers.siteLinkModal(e, {}) }}>{Variable.lang.a.about}</a>
+                                <a class="c-menu__link" href="/about/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.about }) }}>{Variable.lang.a.about}</a>
                                 {/* <a class="c-menu__link" href="/about/" onclick={Helpers.siteLinkModal}>{Variable.lang.a.about}</a> */}
                                 {/* <a class="c-menu__link" href="/about/" onclick={Helpers.siteLink}>{Variable.lang.a.about}</a> */}
-                                <a class="c-menu__link" href="/blog/" onclick={(e) => { Helpers.siteLinkModal(e, { title: "ffff" }) }}>{Variable.lang.a.blog}</a>
+                                <a class="c-menu__link" href="/blog/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.blog }) }}>{Variable.lang.a.blog}</a>
                             </nav>
                         </div>
                     </div>
