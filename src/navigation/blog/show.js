@@ -4,7 +4,7 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
-
+// poydet
 import { BlockNewsShow } from '@component/blocks/index.js';
 import { api } from '@src/apiFunctions.js'
 

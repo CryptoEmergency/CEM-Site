@@ -16,7 +16,6 @@ const mainModal = async function () {
         },
 
         async (reload) => {
-            console.log('=1060e5=', "mainModal", Variable.ModalsPage, Variable.Modals, reload)
             if (!Variable.ModalsPage.length && !Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
                 document.querySelector('body').style = "";
