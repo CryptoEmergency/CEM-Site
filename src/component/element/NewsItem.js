@@ -8,19 +8,11 @@ import {
 import svg from "@assets/svg/index.js";
 
 const NewsItem = function ({ item, type }) {
-
     return (
-        <div class="blog_news_item"
-        // onClick={async () => {
-        //     Variable.SetModals({
-        //         name: "ModalFullSize",
-        //         data: { item: item, type: type },
-        //     });
-        // }}
-        >
+        <div class="blog_news_item">
             <a
                 href={`/${type}/show/${item._id}`}
-                onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.blog }) }} >
+                onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.blog, item }) }} >
                 <img src={"/assets/upload/news/" + item.image} />
                 <p class="blog_new_title">{item.title}</p>
                 <span class="blog_new_text">{Helpers.sliceString(item.preview, 215)}</span>
