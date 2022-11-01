@@ -11,6 +11,7 @@ import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
 import { allValidation } from '@src/functions.js';
 
+import { Input } from '@component/element/index.js';
 let wayAuth,
     formInputs,
     viewPassword,
@@ -67,7 +68,14 @@ const WayAuthForm = function () {
     if (wayAuth == "email") {
         return (
             <div>
-
+                <Input
+                    label={Variable.lang.label.email}
+                    error={Variable.lang.error_div.wrong_email}
+                    placeholder={Variable.lang.placeholder.email}
+                    type="text"
+                    value=""
+                    Static={Static}
+                />
                 <div class='reset_by_email_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.email}</label>
                     <div class="error-div">
@@ -207,10 +215,18 @@ const sendAuthorization = async function (e) {
     return
 }
 
+let Static = {}
 const ModalAuth = function () {
-
+    console.log('=4ca5e6= Static', Static)
     initOne(
         () => {
+
+            Static.email = {
+                value: "",
+                valid: false,
+                error: false,
+            }
+
             Variable.OutHideWindows.push([elem, "ModalAuth"])
             wayAuth = "email"
             listCodes = Variable.phoneCodes
