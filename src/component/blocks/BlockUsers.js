@@ -11,7 +11,9 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { siteLink } from '@src/functions.js'
 import { UserItem } from '@component/element/UserItem.js';
-import { If} from '@component/helpers/All.js';
+import { If } from '@component/helpers/All.js';
+
+import { api } from '@src/apiFunctions.js'
 
 import {
     ButtonShowMore,
@@ -28,7 +30,13 @@ import {
 
 let elem = Variable.setRef()
 
-const BlockUsers = function ({ title, filters, items, type, name }) {
+const BlockUsers = async function ({ title, filters, items, type, name, nameRecords }) {
+
+    await initOne(
+        async () => {
+            await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+        }
+    )
     return (
         <div class="c-friends">
             <div class="c-friends__container c-container">
@@ -194,7 +202,7 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
 
                     <div class="c-friends__list top_professionals_block">
                         {
-                            items.list_records.map((item, index) => {
+                            Variable[nameRecords].list_records.map((item, index) => {
                                 return (
                                     <UserItem user={item} />
                                 )
@@ -204,7 +212,7 @@ const BlockUsers = function ({ title, filters, items, type, name }) {
                     </div>
                 </div>
                 <If
-                    data={Variable.dataUrl && Variable.dataUrl.adress == "users" && items.list_records.length < items.totalFound}
+                    data={Variable.dataUrl && Variable.dataUrl.adress == "users" && Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound}
                     dataIf={
                         <ButtonShowMore
                             onclick={async () => {

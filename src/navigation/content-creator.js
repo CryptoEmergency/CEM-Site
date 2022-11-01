@@ -13,8 +13,6 @@ import { BlockUsers } from '@component/blocks/index.js';
 const start = function () {
     let filters
     let type = "creator"
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
     Variable.visibleFilterUser = false
 
     init(
@@ -35,7 +33,7 @@ const start = function () {
                 },
                 online: false
             }
-            Variable.PageCreators = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageCreators", limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+            // Variable.PageCreators = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageCreators", limit: 21, filter: Helpers.getFilterUsers(filters, type) });
         },
         () => {
 
@@ -44,7 +42,8 @@ const start = function () {
                     <BlockUsers
                         title={Variable.lang.h.top_users}
                         filters={filters}
-                        items={Variable.PageCreators}
+                        nameRecords="PageCreators"
+                        // items={Variable.PageCreators}
                         type={type}
                         name={"PageCreators"}
                     />

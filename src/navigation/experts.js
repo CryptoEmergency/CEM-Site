@@ -35,7 +35,7 @@ const start = function () {
                 },
                 online: false
             }
-            Variable.PageExperts = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageExperts", limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+            // Variable.PageExperts = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageExperts", limit: 21, filter: Helpers.getFilterUsers(filters, type) });
         },
         () => {
 
@@ -44,7 +44,8 @@ const start = function () {
                     <BlockUsers
                         title={Variable.lang.h.top_users}
                         filters={filters}
-                        items={Variable.PageExperts}
+                        // items={Variable.PageExperts}
+                        nameRecords="PageExperts"
                         type={type}
                         name={"PageExperts"}
                     />

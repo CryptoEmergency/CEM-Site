@@ -35,7 +35,7 @@ const start = function () {
                 },
                 online: false
             }
-            Variable.PageUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageUsers", limit: 21, filter: Helpers.getFilterUsers(filters, type) });
+            // Variable.PageUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageUsers", limit: 21, filter: Helpers.getFilterUsers(filters, type) });
         },
         () => {
 
@@ -44,7 +44,8 @@ const start = function () {
                     <BlockUsers
                         title={Variable.lang.h.top_users}
                         filters={filters}
-                        items={Variable.PageUsers}
+                        nameRecords="PageUsers"
+                        // items={Variable.PageUsers}
                         type={type}
                         name={"PageUsers"}
                     />
