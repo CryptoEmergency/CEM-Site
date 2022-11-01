@@ -2,19 +2,13 @@ import {
     jsx,
     jsxFrag,
     init,
-    initReload,
     Variable,
-    Helpers,
-    sendApi
 } from "@betarost/cemjs";
-
+// poydet
 import { BlockUsers } from '@component/blocks/index.js';
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
     let filters
-    let type = "experts"
-    Variable.visibleFilterUser = false
-
     init(
         async () => {
             filters = {
@@ -31,19 +25,17 @@ const start = function () {
             }
         },
         () => {
-
             return (
                 <div class='c-main__body'>
                     <BlockUsers
                         title={Variable.lang.a.experts}
                         filters={filters}
                         nameRecords="PageExperts"
-                        type={type}
+                        type="experts"
                     />
                 </div>
             )
-        }
+        }, ID
     )
 }
-//I check
 export default start;

@@ -2,19 +2,13 @@ import {
     jsx,
     jsxFrag,
     init,
-    initReload,
     Variable,
-    Helpers,
-    sendApi
 } from "@betarost/cemjs";
 
 import { BlockUsers } from '@component/blocks/index.js';
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
     let filters
-    let type = "creator"
-    Variable.visibleFilterUser = false
-
     init(
         async () => {
             filters = {
@@ -31,19 +25,18 @@ const start = function () {
             }
         },
         () => {
-
             return (
                 <div class='c-main__body'>
                     <BlockUsers
                         title={Variable.lang.a.contentCreater}
                         filters={filters}
                         nameRecords="PageCreators"
-                        type={type}
+                        type="creator"
                     />
                 </div>
             )
-        }
+        }, ID
     )
 }
-//I check
+
 export default start;
