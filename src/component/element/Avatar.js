@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initOne } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initOne, sendApi } from "@betarost/cemjs";
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { getDateFormat, siteLink, uploadMedia } from "@src/functions.js";
@@ -43,7 +43,14 @@ const sendPhoto = async function (crooper) {
           name: response.name
         }
         formInputs.isValid = true;
-        //
+        //update data User
+        let data = {
+          value: {
+              "avatar.name": response.name,
+          },
+        };
+        console.log('=c40066=',data)
+        let res = await sendApi.create("setUsers", data);
         initReload();
       },
       async function (e) {
