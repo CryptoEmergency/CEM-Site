@@ -13,7 +13,7 @@ import { If } from '@component/helpers/All.js';
 import { Jivo } from '@component/element/index.js';
 
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
   let formInputs
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
@@ -234,7 +234,7 @@ const start = function () {
           <Jivo />
         </div>
       );
-    }
+    }, ID
   );
 };
 //I check
