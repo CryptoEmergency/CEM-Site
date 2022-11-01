@@ -193,39 +193,48 @@ const BlockUsers = async function ({ title, filters, type, nameRecords }) {
                                                 />
                                                 <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
                                             </div>
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input
-                                                    checked={filters.online ? true : false}
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="online"
-                                                    required="required"
-                                                    onChange={async () => {
-                                                        filters.online = !filters.online
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
-                                                    }}
-                                                />
-                                                <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
-                                            </div>
+                                            {
+                                                /* 
+                                                    <div class="checkbox" data-action="friendsFilterCheckbox">
+                                                        <input
+                                                            checked={filters.online ? true : false}
+                                                            class="checkbox__input"
+                                                            type="checkbox"
+                                                            id="online"
+                                                            required="required"
+                                                            onChange={async () => {
+                                                                filters.online = !filters.online
+                                                                Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                            }}
+                                                        />
+                                                        <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
+                                                    </div>
+                                                */
+                                            }
+                                            
                                         </div>
                                     )
                                 } else {
                                     return(
                                         <div class="c-friends__checkboxes">
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                <input
-                                                    checked={filters.online ? true : false}
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="online"
-                                                    required="required"
-                                                    onChange={async () => {
-                                                        filters.online = !filters.online
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
-                                                    }}
-                                                />
-                                                <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
-                                            </div>
+                                            {
+                                                /* 
+                                                    <div class="checkbox" data-action="friendsFilterCheckbox">
+                                                        <input
+                                                            checked={filters.online ? true : false}
+                                                            class="checkbox__input"
+                                                            type="checkbox"
+                                                            id="online"
+                                                            required="required"
+                                                            onChange={async () => {
+                                                                filters.online = !filters.online
+                                                                Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                            }}
+                                                        />
+                                                        <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
+                                                    </div>
+                                                */
+                                            }
                                         </div>
                                     )
                                 }
