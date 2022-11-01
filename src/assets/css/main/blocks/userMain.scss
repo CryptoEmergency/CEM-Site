@@ -6,7 +6,7 @@
     position: relative;
     border-radius: 15px;
     right: 7.5px;
-    overflow: hidden;
+    // overflow: hidden;
 
     &__header {
         width: 100%;
@@ -24,7 +24,8 @@
         cursor: pointer;
         bottom: -30px;
         transform: translateX(-50%);
-        overflow: hidden;
+        // overflow: hidden;
+        z-index: 101;
 
         .c-avataricon {
             height: 100%;
@@ -438,19 +439,20 @@
     //     }
     // }
 
-    // &_list {
-    //     margin-top: 5px;
-    //     background: #2b3040;
-    //     border: 1px solid #353c50;
-    //     padding: 10px;
-    //     padding-right: 20px;
-    //     border-radius: 5px;
+    &_list {
+        width: max-content;
+        margin-top: 5px;
+        background: #2b3040;
+        border: 1px solid #353c50;
+        padding: 10px;
+        padding-right: 20px;
+        border-radius: 5px;
 
-    //     a {
-    //         color: inherit;
-    //         text-decoration: none;
-    //     }
-    // }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
 
     &_item {
         margin-bottom: 3px;

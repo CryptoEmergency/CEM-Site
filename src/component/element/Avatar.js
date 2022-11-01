@@ -1,10 +1,95 @@
-import { jsx, jsxFrag, Variable } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initOne } from "@betarost/cemjs";
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
-import { getDateFormat, siteLink } from "@src/functions.js";
+import { getDateFormat, siteLink, uploadMedia } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
+let visibleSettings, formInputs;
+let inputImg = Variable.setRef();
+
+const sendPhoto = async function (crooper) {
+  if (!crooper) {
+    return
+  }
+  let canvas;
+  formInputs.mediaInputs.selectAspect = crooper.options.aspectRatio;
+  canvas = crooper.getCroppedCanvas({
+    // width: 166,
+    // height: 166,
+  });
+  let previewObj = {
+    src: canvas.toDataURL(),
+    type: "image",
+    upload: 0,
+    size: 0
+  };
+  formInputs.mediaInputs.show = true;
+  formInputs.mediaInputs.value.push(previewObj);
+  let numItem = formInputs.mediaInputs.value.length - 1
+  initReload();
+  await canvas.toBlob(function (blob) {
+    uploadMedia(
+      blob,
+      "avatar",
+      async function () {
+        formInputs.mediaInputs.show = true;
+        if (!this.response) {
+          return
+        }
+        let response = JSON.parse(this.response);
+        formInputs.mediaInputs.value[numItem] = {
+          aspect: formInputs.mediaInputs.selectAspect,
+          type: response.mimetype.split("/")[0],
+          name: response.name
+        }
+        formInputs.isValid = true;
+        //
+        initReload();
+      },
+      async function (e) {
+        let contentLength;
+        if (e.lengthComputable) {
+          contentLength = e.total;
+        } else {
+          contentLength = parseInt(
+            e.target.getResponseHeader(
+              "x-decompressed-content-length"
+            ),
+            10
+          );
+        }
+
+        if (formInputs.mediaInputs.value[numItem].upload === formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !== 0) {
+          formInputs.mediaInputs.value.splice(numItem, 1);
+          initReload()
+          return
+        }
+        formInputs.mediaInputs.value[numItem].upload = e.loaded
+        formInputs.mediaInputs.value[numItem].size = contentLength;
+        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+        initReload();
+      }
+    );
+    initReload();
+    visibleSettings = false;
+    Variable.DelModals("ModalCropImage");
+  });
+  return
+}
+
 const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false }) {
+
+  console.log('=132e7f=',author)
+  initOne(() => {
+    visibleSettings = false;
+
+    formInputs = {
+      mediaInputs: {
+        value: [],
+        show: false,
+      },
+    };
+  });
 
   if (!author || !author.nickname) {
     return (
@@ -46,18 +131,93 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
         <If
           data={settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar"}
           dataIf={
-            <div
-              class="c-avataricon__settings"
-            // onclick={(e) => {
-            //   e.stopPropagation();
-            //   e.preventDefault();
-            //   Variable.SetModals({
-            //     name: "ModalContextMenu",
-            //     data: {},
-            //   });
-            // }}
-            >
-              <img class="" src={svg.settings_icon} width="20" height="20" />
+            <div class="user_custimize_settings_container">
+              <div
+                class="c-avataricon__settings"
+                onclick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  visibleSettings = !visibleSettings;
+                  initReload();
+                }
+                }
+              // onclick={(e) => {
+              //   e.stopPropagation();
+              //   e.preventDefault();
+              //   Variable.SetModals({
+              //     name: "ModalContextMenu",
+              //     data: {},
+              //   });
+              // }}
+              >
+                <img class="" src={svg.settings_icon} width="20" height="20" />
+                <If
+                  data={author._id == Variable.myInfo._id}
+                  dataIf={
+                    <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
+                      <p
+                        class="user_custimize_settings_item"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          inputImg().click();
+                        }}
+                      >{Variable.lang.text.changeAvatar}</p>
+                      <p class="user_custimize_settings_item">{Variable.lang.text.changeBackground}</p>
+                      <p class="user_custimize_settings_item">{Variable.lang.text.changeFrame}</p>
+                      <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
+                      <p class="user_custimize_settings_item">
+                        <a data-action="link" href="/user/settings/">{Variable.lang.text.settings}</a>
+                      </p>
+                      <input
+                        style="display: none;"
+                        type="file"
+                        accept=".jpg,.jpeg,.png,.gif"
+                        ref={inputImg}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }
+                        }
+                        onChange={(e) => {
+                          e.stopPropagation();
+
+                          if (inputImg().files.length == 0) {
+                            return;
+                          }
+
+                          Variable.SetModals({
+                            name: "ModalCropImage",
+                            data: {
+                              file: inputImg().files[0],
+                              typeUpload: 'avatar',
+                              arrMedia: formInputs.mediaInputs.value,
+                              aspectSelect: 1,
+                              uploadCropImage: async function (cropper) {
+                                await sendPhoto(cropper)
+                                return;
+                              }
+                            },
+                          }, true);
+                        }
+                        }
+                      />
+                    </div>
+                  }
+                  dataElse={
+                    <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
+                      <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
+                      <p class="user_custimize_settings_item complain" data-answer-id={author._id} data-type="user">{Variable.lang.select.complainUser}</p>
+                      <p class="user_custimize_settings_item block" data-answer-id={author._id} data-type="user">{Variable.lang.select.blackList}</p>
+                      {
+                        author.status.role ?
+                          <p style="color: #32DE80;" class="user_custimize_settings_item ban" data-answer-id={author._id} data-type="user">Забанить</p>
+                          :
+                          <></>
+                      }
+                    </div>
+                  }
+                />
+              </div>
             </div>
           }
           dataElse={
@@ -102,7 +262,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           )}
         </div>}
       />
-    </a>
+    </a >
   );
 };
 
