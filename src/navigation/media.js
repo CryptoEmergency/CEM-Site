@@ -7,47 +7,42 @@ import {
   sendApi,
   initReload,
 } from "@betarost/cemjs";
+
 import svg from "@assets/svg/index.js";
 import { If, Map } from "@component/helpers/All.js";
 import { ButtonShowMore, NewsItem } from "@component/element/index.js";
 
-const start = function (data, ID = "mainBlock") {
-  let activeCategory;
+import { api } from '@src/apiFunctions.js'
 
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
+const start = function (data, ID = "mainBlock") {
+
+  let Static = {}
+
+  let activeCategory;
 
   init(
     async () => {
-      activeCategory = Variable.lang.code;
-      Variable.PageMedia = await sendApi.send({
-        action: "getNews",
-        short: true,
-        cache: true,
-        name: "PageMedia",
-        filter: { type: "media", "languages.code": activeCategory },
-      });
+      Static.activeCategory = Variable.lang.code
+      await api({ type: "get", action: "getNews", short: true, cache: true, name: "PageMedia", filter: { type: "media", "languages.code": activeCategory } })
     },
     () => {
       return (
         <div class="blog_page">
-          <div class="blog_filter">
-            <h2>{Variable.lang.h.mediaUs}</h2>
-          </div>
+
           <div class="tags">
             <div
               class={[
                 "tag_button",
-                activeCategory == "en" ? "tag_button_active" : "",
+                Static.activeCategory == "en" ? "tag_button_active" : "",
               ]}
               onclick={async (e) => {
-                if (activeCategory === "en") {
+                if (Static.activeCategory === "en") {
                   return;
                 }
-                activeCategory = "en";
+                Static.activeCategory = "en";
                 let filter = {
                   type: "media",
-                  "languages.code": activeCategory,
+                  "languages.code": Static.activeCategory,
                 };
                 Variable.PageMedia = await sendApi.send({
                   action: "getNews",
@@ -64,16 +59,16 @@ const start = function (data, ID = "mainBlock") {
                 <div
                   class={[
                     "tag_button",
-                    activeCategory !== "en" ? "tag_button_active" : "",
+                    Static.activeCategory !== "en" ? "tag_button_active" : "",
                   ]}
                   onclick={async (e) => {
-                    if (activeCategory != "en") {
+                    if (Static.activeCategory != "en") {
                       return;
                     }
-                    activeCategory = Variable.lang.code;
+                    Static.activeCategory = Variable.lang.code;
                     let filter = {
                       type: "media",
-                      "languages.code": activeCategory,
+                      "languages.code": Static.activeCategory,
                     };
                     Variable.PageMedia = await sendApi.send({
                       action: "getNews",
@@ -135,7 +130,7 @@ const start = function (data, ID = "mainBlock") {
                     onclick={async () => {
                       let filter = {
                         type: "media",
-                        "languages.code": activeCategory,
+                        "languages.code": Static.activeCategory,
                       };
                       let tmp = await sendApi.send({
                         action: "getNews",
