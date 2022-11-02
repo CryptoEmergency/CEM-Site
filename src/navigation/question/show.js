@@ -30,8 +30,7 @@ const start = function (data, ID = "mainBlock") {
 
 
       }
-      let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-      itemAnswer = answer.list_records
+ 
     },
     async () => {
       return (
@@ -56,11 +55,21 @@ const start = function (data, ID = "mainBlock") {
             <div class="user_news_block">
               {
                 () => {
-                  return itemAnswer.map((item, index) => {
-                    return (
-                      <QuestionAnswerItem item={item} index={index} />
-                    )
-                  })
+                  if(!itemAnswer){
+                    
+                    setTimeout(async function(){
+                      let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                       itemAnswer = answer.list_records
+                       initReload()
+                    },1000)
+                  }else{
+                    return itemAnswer.map((item, index) => {
+                      return (
+                        <QuestionAnswerItem item={item} index={index} />
+                      )
+                    })
+                  }
+                  
                 }
               }
             </div>
