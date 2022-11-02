@@ -690,7 +690,7 @@ const start = function (data, ID = "mainBlock") {
                                     <a style="display: block!important;"
                                         target="_blank"
                                         rel="nofollow nooopener"
-                                        href="https://hginov.ru"
+                                        href="https://ti.turovinvest.ru/"
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_11"]} />
@@ -698,7 +698,7 @@ const start = function (data, ID = "mainBlock") {
                                     <a style="display: block!important;"
                                         target="_blank"
                                         rel="nofollow nooopener"
-                                        href="https://hginov.ru"
+                                        href="https://cryptonews.net/ru/"
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_12"]} />
