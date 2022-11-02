@@ -392,6 +392,14 @@ const start = function (data, ID = "mainBlock") {
                                     <span>Стенд</span>
                                 </a>
                             </div>
+                            <div style="margin-bottom: 40px">
+                                <h4 style="text-align: center; margin-bottom: 40px">Генеральный спонсор</h4>
+                                <a target="_blank" rel="nofollow nooopener"  href="https://blockchain24.pro" style="display: block;width: 40%; margin: 0 auto;background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); padding: 2px; border-radius: 6px">
+                                    <div style="background: #232733; border-radius: 6px; padding: 20px 40px">
+                                        <img style="width: 100%" src={images['forum/blockchain24']} />
+                                    </div>
+                                </a>
+                            </div>
                             <div>
                                 <h4 style="text-align: center; margin-bottom: 40px">Компании</h4>
                                 <div class="company_block">

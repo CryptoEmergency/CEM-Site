@@ -9,6 +9,7 @@ import {
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 
+
 const BlockExchange = async function (data) {
     await initOne(
         async () => {
