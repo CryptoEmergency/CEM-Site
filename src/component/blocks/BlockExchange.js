@@ -10,14 +10,13 @@ import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 
 const BlockExchange = async function (data) {
-
     await initOne(
         async () => {
             let limit = 12
-            if(Variable.dataUrl && Variable.dataUrl.adress == ""){
+            if(data.nameRecords == "MainExchanges"){
                 limit = 6
             }
-            await api({ type: "get", action: "getExchange", short: true, cache: true, name: "PageExchange", limit: limit })
+            await api({ type: "get", action: "getExchange", short: true, cache: true, name: data.nameRecords, limit: limit })
 
         }
     )
@@ -41,7 +40,7 @@ const BlockExchange = async function (data) {
                     </div>
                 </div>
                 {
-                    Variable.PageExchange.list_records.map(function (exchange, i) {
+                    Variable[data.nameRecords].list_records.map(function (exchange, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row exchangeListLoad"

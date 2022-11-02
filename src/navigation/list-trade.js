@@ -19,6 +19,7 @@ const start = function (data, ID = "mainBlock") {
       return (
         <div class="crypto_exchanges_full_page c-main__body">
           <BlockTrade
+            nameRecords="PageTrades"
             button={()=>{
               if(Variable.PageTrades.list_records.length < Variable.PageTrades.totalFound){
                 return(

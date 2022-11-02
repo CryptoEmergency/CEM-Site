@@ -14,10 +14,10 @@ const BlockTrade = async function (data) {
     await initOne(
         async () => {
             let limit = 50
-            if(Variable.dataUrl && Variable.dataUrl.adress == ""){
+            if(data.nameRecords == 'MainTrades'){
                 limit = 6
             }
-            await api({ type: "get", action: "getTrade", short: true, cache: true, name: "PageTrades", limit: limit })
+            await api({ type: "get", action: "getTrade", short: true, cache: true, name: data.nameRecords, limit: limit })
 
         }
     )
@@ -47,7 +47,7 @@ const BlockTrade = async function (data) {
                     </div>
                 </div>
                 {
-                    Variable.PageTrades.list_records.map(function (trade, i) {
+                    Variable[data.nameRecords].list_records.map(function (trade, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row tradeListLoad"
