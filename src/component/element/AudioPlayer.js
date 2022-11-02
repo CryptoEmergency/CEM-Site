@@ -47,7 +47,7 @@ let controlDynamicClick = function (e) {
 }
 
 let playerCanplay = function (e) {
-  console.log('=playerCanplay=', e)
+  // console.log('=playerCanplay=', e)
   // let element = e.target;
   // if (element.duration === Infinity) {
   //     element.currentTime = 1e101;
@@ -86,7 +86,7 @@ Number.prototype.lead0 = function (n) {
 }
 
 let controlTotalClick = function (e, target) {
-  console.log('=controlTotalClick=', e)
+  // console.log('=controlTotalClick=', e)
   let parentsOffset = 0
   let nextParent = e.target.offsetParent
   while (nextParent != null) {
@@ -94,7 +94,7 @@ let controlTotalClick = function (e, target) {
     nextParent = nextParent.offsetParent
   }
   let x = (e.pageX - (e.target.offsetLeft + parentsOffset)) / e.target.offsetWidth
-  console.log("parent66s", e.target.offsetParent.offsetParent.childNodes[0].currentTime)
+  // console.log("parent66s", e.target.offsetParent.offsetParent.childNodes[0].currentTime)
   // e.target.offsetParent.offsetParent.childNodes[0].currentTime = x * 
   // $(target).parent().parent().prev()[0].currentTime = x * $(target).parent().parent().prev()[0].duration
   // $(target).parent().parent().find('.currenttime').text(formatTime($(target).parent().parent().prev()[0].currentTime))

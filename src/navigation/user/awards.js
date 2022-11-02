@@ -31,9 +31,9 @@ const start = function () {
 
         },
         () => {
-            console.log('=76f689=', awards.kindGroup.group, Object.values(awards.kindGroup.group))
+            // console.log('=76f689=', awards.kindGroup.group, Object.values(awards.kindGroup.group))
             let tmp = Object.values(awards.kindGroup.group)
-            console.log('=9dcce1=', tmp)
+            // console.log('=9dcce1=', tmp)
             // awards.kindGroup.one.push(...awards.kindGroup.one)
             return (
                 <div class="uc_container">

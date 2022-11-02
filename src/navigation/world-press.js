@@ -16,18 +16,18 @@ const start = function () {
     Variable.HeaderShow = true
     Variable.FooterShow = true
 
-    const worldPressList = function(){
-        console.log("pressList", pressList)
+    const worldPressList = function () {
+        // console.log("pressList", pressList)
         const pressListItems = pressList.list_records.map(function (key) {
             return (
                 <a href="{{link}}" class="world_publications_list_grid world_publications_list_item">
-                    <div><img src="/assets/upload/worldPress/{{icons}}"/>{key.name}</div>
+                    <div><img src="/assets/upload/worldPress/{{icons}}" />{key.name}</div>
                     <div>{key.readers}</div>
                     <div>{key.score}</div>
-                </a> 
+                </a>
             )
         })
-        return(
+        return (
             <div class="world_publications_list_items">
                 <div>
                     {pressListItems}
@@ -38,18 +38,18 @@ const start = function () {
                     </div>
                 </a>
             </div>
-        ) 
+        )
 
     }
 
-    const loadNewPress = async function(){
+    const loadNewPress = async function () {
         count++
         let tmp = await getWorldPress(count, sortBy, sortType)
         pressList.list_records.push(...tmp.list_records)
         initReload();
     }
 
-    const sortWorldPress = async function(){
+    const sortWorldPress = async function () {
         count = 0
         sortBy = this.dataset.type
         this.dataset.filter = -Number(this.dataset.filter)
@@ -82,9 +82,9 @@ const start = function () {
                             </div>
                             <div data-role="1" class="world_publications_list">
                                 <div class="world_publications_list_grid world_publications_list_title">
-                                    <div><span onclick={sortWorldPress} data-filter="1" data-type="name" class="clacable_stat_toggle">{Variable.lang.text.publication_title} <img src={svg['sort_toggle_arrows']}/></span></div>
-                                    <div style="text-align: center;"><span onclick={sortWorldPress} data-filter="1" data-type="readers" class="clacable_stat_toggle">{Variable.lang.text.viewers} <img src={svg['sort_toggle_arrows']}/></span></div>
-                                    <div style="text-align: center;"><span onclick={sortWorldPress} data-filter="1" data-type="score" class="clacable_stat_toggle">{Variable.lang.tableTitle.rank} <img src={svg['sort_toggle_arrows']}/></span></div>
+                                    <div><span onclick={sortWorldPress} data-filter="1" data-type="name" class="clacable_stat_toggle">{Variable.lang.text.publication_title} <img src={svg['sort_toggle_arrows']} /></span></div>
+                                    <div style="text-align: center;"><span onclick={sortWorldPress} data-filter="1" data-type="readers" class="clacable_stat_toggle">{Variable.lang.text.viewers} <img src={svg['sort_toggle_arrows']} /></span></div>
+                                    <div style="text-align: center;"><span onclick={sortWorldPress} data-filter="1" data-type="score" class="clacable_stat_toggle">{Variable.lang.tableTitle.rank} <img src={svg['sort_toggle_arrows']} /></span></div>
                                 </div>
                                 {worldPressList()}
                             </div>

@@ -58,7 +58,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
           class="c-fullnews__item user_news_item"
           ElemVisible={total < totalFound && numIndex == (total - 3) ?
             async () => {
-              console.log('=0c6881=', "Load more")
+              // console.log('=0c6881=', "Load more")
               let tmp = await sendApi.send({
                 action: "getPost",
                 short: true,
@@ -108,12 +108,12 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                 typeApi={"setPost"}
                 type={{
                   share: true,
-                    edit: true,
-                    delete: true,
-                    subscription: true,
-                    complainPost: true,
-                    complainUser: true,
-                    blackList: true,
+                  edit: true,
+                  delete: true,
+                  subscription: true,
+                  complainPost: true,
+                  complainUser: true,
+                  blackList: true,
                 }}
                 mainId={mainId}
                 callBack={getItem}
@@ -224,7 +224,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
             class="c-fullnews__item user_news_item"
             ElemVisible={total < totalFound && numIndex == (total - 3) ?
               async () => {
-                console.log('=0c6881=', "Load more")
+                // console.log('=0c6881=', "Load more")
                 let tmp = await sendApi.send({
                   action: "getPost",
                   short: true,

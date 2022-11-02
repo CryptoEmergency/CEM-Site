@@ -115,7 +115,7 @@ const sendPhoto = async function (crooper) {
             10
           );
         }
-        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+        // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
       }
     );
     initReload("modals");
@@ -149,13 +149,13 @@ const sendVideo = async function (files) {
           10
         );
       }
-      console.log(
-        "=3c5fa7= ",
-        "Загружено",
-        e.loaded,
-        "из",
-        contentLength
-      );
+      // console.log(
+      //   "=3c5fa7= ",
+      //   "Загружено",
+      //   e.loaded,
+      //   "из",
+      //   contentLength
+      // );
     }
   );
   return
@@ -211,7 +211,7 @@ const ModalAskQuestion = function (data, reload) {
   };
 
   const test = (e) => {
-    console.log('=5ce284=', e)
+    // console.log('=5ce284=', e)
   }
 
   return (

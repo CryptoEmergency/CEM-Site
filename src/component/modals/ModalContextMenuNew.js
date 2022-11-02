@@ -10,7 +10,7 @@ import {
 import { changeSubscription } from "@src/apiFunctions.js";
 
 const ModalContextMenuNew = function (data, reload) {
-  
+
   const clickShare = async () => {
     let shareData;
     Variable.DelModals("ModalContextMenuNew")
@@ -49,7 +49,7 @@ const ModalContextMenuNew = function (data, reload) {
           mainCom: !data.commentId ? true : false,
           callBack: data.callBack,
         },
-      },true
+      }, true
     );
   };
 
@@ -70,7 +70,7 @@ const ModalContextMenuNew = function (data, reload) {
           mainId: data.mainId,
           mainCom: !data.commentId ? true : false,
         },
-      },true
+      }, true
     );
   };
 
@@ -80,7 +80,7 @@ const ModalContextMenuNew = function (data, reload) {
       {
         name: "ModalBlackList",
         data: { id: data.item.author._id, type: data.typeApi },
-      },true
+      }, true
     );
   };
 
@@ -98,7 +98,7 @@ const ModalContextMenuNew = function (data, reload) {
           roleAction: data.typeApi,
           callBack: data.callBack,
         },
-      },true
+      }, true
     );
   };
 
@@ -158,7 +158,7 @@ const ModalContextMenuNew = function (data, reload) {
       },
       complainUser: {
         text: Variable.lang.select.complainUser,
-        onclick: () => { Variable.DelModals("ModalContextMenuNew")},
+        onclick: () => { Variable.DelModals("ModalContextMenuNew") },
       },
       blackList: {
         text: Variable.lang.select.blackList,
@@ -170,7 +170,7 @@ const ModalContextMenuNew = function (data, reload) {
       onclick: clickDeleteWithRole,
     },
   };
-  console.log('=99a31e=',Object.keys(data.type))
+  // console.log('=99a31e=',Object.keys(data.type))
   return (
     <div class="c-modal c-modal--open" id="ModalContextMenu">
       <section class="c-modal__dialog">
@@ -191,7 +191,7 @@ const ModalContextMenuNew = function (data, reload) {
                         class={"c-actions__item"}
                         onclick={typeText.author[key].onclick}
                       >
-                       <span>{typeText.author[key].text}</span> 
+                        <span>{typeText.author[key].text}</span>
                       </li>
                     );
                   }
@@ -204,13 +204,13 @@ const ModalContextMenuNew = function (data, reload) {
                     return (
                       <li
                         class=
-                          "c-actions__item"
+                        "c-actions__item"
                         onclick={typeText.notAuthor[key].onclick}
                       >
                         <span
-                        class={[  key.includes("complain") || key === "blackList"  ? "c-text--error" : null]}
+                          class={[key.includes("complain") || key === "blackList" ? "c-text--error" : null]}
                         >{typeText.notAuthor[key].text}</span>
-                       
+
                       </li>
                     );
                   }
@@ -224,7 +224,7 @@ const ModalContextMenuNew = function (data, reload) {
                     class="c-actions__item"
                     onclick={typeText.role.onclick}
                   >
-                   <span class="c-text--green">{typeText.role.text}</span> 
+                    <span class="c-text--green">{typeText.role.text}</span>
                   </li>
                 );
               }

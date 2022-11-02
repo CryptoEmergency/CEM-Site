@@ -223,7 +223,7 @@ const sendAuthorization = async function (e) {
 
 let Static = {}
 const ModalAuth = function () {
-    console.log('=4ca5e6= Static', Static)
+    // console.log('=4ca5e6= Static', Static)
     initOne(
         () => {
 

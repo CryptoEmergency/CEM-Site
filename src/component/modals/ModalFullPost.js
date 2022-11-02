@@ -20,7 +20,7 @@ import { getPostItemInShow } from "@src/apiFunctions.js";
 import { BlockLentaUsers } from "@component/blocks/BlockLentaUsers.js";
 
 const ModalFullPost = function ({ post }, reload) {
-    console.log('=abe2f1=', post)
+    // console.log('=abe2f1=', post)
 
     initOne(async () => {
         //   Variable.Static.ShowVoterInteval = { timer: 0 };

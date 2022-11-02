@@ -14,11 +14,11 @@ import {
 } from "@component/element/index.js";
 
 Variable.Static.activeInputId = "";
-Variable.Static.answerAdditionally ="";
+Variable.Static.answerAdditionally = "";
 Variable.Static.EditInput = "";
 let elem = [];
 const QuestionAnswerItem = function ({ item, index }) {
-  console.log('=item=',item)
+  // console.log('=item=',item)
   let mainId = item._id;
   elem = [];
   elem[0] = [];
@@ -37,20 +37,20 @@ const QuestionAnswerItem = function ({ item, index }) {
           <span class="comment_text">{Helpers.clearText(item.text)}</span>
           {/* Media element */}
           <LentaMedia
-        items={item.media}
-        numIndex={0}
-        elem={elem}
-        path={"/assets/upload/answers/"}
-      />
+            items={item.media}
+            numIndex={0}
+            elem={elem}
+            path={"/assets/upload/answers/"}
+          />
           <If
             data={Variable.auth && Variable.Static.activeInputId !== item._id}
             dataIf={
               <span
                 class="answer_comment_button"
-                style = {item.media.length >0 && "margin: 40px 0 0 0;"}
+                style={item.media.length > 0 && "margin: 40px 0 0 0;"}
                 onclick={() => {
                   Variable.Static.activeInputId = item._id;
-                  Variable.Static.answerAdditionally ="";
+                  Variable.Static.answerAdditionally = "";
                   initReload();
                 }}
               >
@@ -67,12 +67,13 @@ const QuestionAnswerItem = function ({ item, index }) {
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]} />
             </div> */}
-            <AnswerAdditionallyToggleNew item = {item} typeApi = {"setAnswer"} type = {
-              {delete: true,
+            <AnswerAdditionallyToggleNew item={item} typeApi={"setAnswer"} type={
+              {
+                delete: true,
                 complainAnswer: true,
                 complainUser: true,
-                blackList:true,
-              }} mainId = {mainId} />
+                blackList: true,
+              }} mainId={mainId} />
 
           </div>
 
@@ -130,10 +131,10 @@ const QuestionAnswerItem = function ({ item, index }) {
             dataIf={
               <CommentInput
                 nickname={item.author.nickname}
-                item={item} 
+                item={item}
                 typeSet="setAnswer"
-                mainId = {mainId}
-                // commentId={item._id}
+                mainId={mainId}
+              // commentId={item._id}
               />
             }
           />

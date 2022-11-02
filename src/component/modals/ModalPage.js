@@ -27,7 +27,7 @@ let news;
 
 const ModalPage = async function (ID, reload) {
   let data = Variable.ModalsPage[ID].data
-  console.log('=c1d88c=2 ModalPage', getInitList(), Variable.ModalsPage[ID])
+  // console.log('=c1d88c=2 ModalPage', getInitList(), Variable.ModalsPage[ID])
   // let mainId = item._id;
 
   if (!reload && getInitList()[ID].firstStart) {

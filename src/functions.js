@@ -54,7 +54,7 @@ const wrapTagToText = (text) => {
   textTag = textTag.replace(new RegExp("</p><p>", 'gi'), "\n")
 
   textTag = textTag.replace(new RegExp("<p>", 'gi'), "").replace(new RegExp("</p>", 'gi'), "")
-  console.log('=e8599e=3', textTag)
+  // console.log('=e8599e=3', textTag)
 
 
   return textTag;

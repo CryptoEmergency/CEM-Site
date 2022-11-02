@@ -16,7 +16,7 @@ const PhoneCode = function () {
     // console.log('=bbd92f=', { lang, changeCode, abbr, codeTitle, ID })
 
     const changeCode = function () {
-        console.log('=566a6a=', "changeCode")
+        // console.log('=566a6a=', "changeCode")
         showPhoneSelect = true
         initReload()
     }

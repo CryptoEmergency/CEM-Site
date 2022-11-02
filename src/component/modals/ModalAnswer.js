@@ -103,7 +103,7 @@ const sendPhoto = async function (crooper) {
             10
           );
         }
-        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+        // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
       }
     );
     initReload("modals");
@@ -137,13 +137,13 @@ const sendVideo = async function (files) {
           10
         );
       }
-      console.log(
-        "=3c5fa7= ",
-        "Загружено",
-        e.loaded,
-        "из",
-        contentLength
-      );
+      // console.log(
+      //   "=3c5fa7= ",
+      //   "Загружено",
+      //   e.loaded,
+      //   "из",
+      //   contentLength
+      // );
     }
   );
   return
