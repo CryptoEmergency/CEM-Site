@@ -10,7 +10,7 @@ import {
 
 import { BlockUsers } from '@component/blocks/index.js';
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
     let filters
     let type = "all"
     Variable.visibleFilterUser = false
@@ -46,8 +46,7 @@ const start = function () {
                     />
                 </div>
             )
-        }
+        }, ID
     )
 }
-//I check
 export default start;

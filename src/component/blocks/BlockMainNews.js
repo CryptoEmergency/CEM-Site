@@ -14,7 +14,7 @@ const BlockMainNews = function () {
         <div class="news_block_container">
             <div class="news_block">
                 <div class="home_page_news">
-                    <a class="crypto_news_link" href="/news/" onclick={Helpers.siteLink}>Crypto News</a>
+                    <a class="crypto_news_link" href="/news/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news }) }}>Crypto News</a>
                     <div class="gradient_line"></div>
                 </div>
                 <div class="main_page_news_block">
@@ -23,7 +23,7 @@ const BlockMainNews = function () {
                             return (
                                 <a
                                     class="blog_news_item"
-                                    onclick={Helpers.siteLinkModal}
+                                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news, item: newsItem }) }}
                                     // onclick={Helpers.siteLink}
                                     href={`/news/show/${newsItem._id}`}
                                 // onClick={() => {
@@ -67,7 +67,7 @@ const BlockMainNews = function () {
                 </div>
             </div>
             <div class="button-container-preview">
-                <a class="btn-news-preview" href="/news/" onclick={Helpers.siteLink}>
+                <a class="btn-news-preview" href="/news/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news }) }}>
                     <span>
                         {Variable.lang.button.allNews}
                     </span>
