@@ -95,6 +95,12 @@
                 opacity: 1;
             }
         }
+
+        .refresh_language,
+        .refresh_country {
+            width: 22px;
+            height: 22px;
+        }
     }
 
     &__lang {

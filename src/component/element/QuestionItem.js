@@ -9,7 +9,7 @@ import svg from "@assets/svg/index.js";
 
 import { Avatar } from '@component/element/Avatar.js';
 import { If } from '@component/helpers/All.js';
-import { ifHaveMedia,sliceString } from '@src/functions.js';
+import { ifHaveMedia, sliceString } from '@src/functions.js';
 
 
 // const sliceString = function (str) {
@@ -55,7 +55,7 @@ const QuestionItem = function ({ question }) {
                         <div class="c-question__langcontainer language_container "> {/* load */}
                             <div class="c-question__lang language-question">
                                 {question.languages.orig_name}
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ const QuestionItem = function ({ question }) {
                 style=""
                 href={`/question/show/${question._id}`}
                 class="c-question__body"
-                onclick={Helpers.siteLink}
+                onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question }) }}
             // onClick={async () => {
             //     Variable.SetModals({
             //         name: "ModalFullSize",

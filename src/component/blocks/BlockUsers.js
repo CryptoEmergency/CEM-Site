@@ -64,9 +64,8 @@ const BlockUsers = async function ({ title, filters, type, nameRecords }) {
                                         elem().style = "height: 0px"
                                     } else {
                                         elem().dataset.active = true
-                                        let additional = document.querySelector('.c-friends__additional');
-                                        additional.style = "";
-                                        let h = additional.offsetHeight;
+                                        elem().style = "";
+                                        let h = elem().offsetHeight;
                                         elem().style = `height: ${h}px`
                                     }
                                 }}
@@ -268,7 +267,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords }) {
                 {()=>{
                     if(Variable.dataUrl && Variable.dataUrl.adress == ""){
                         return(
-                            <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={Helpers.siteLink}>
+                            <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>
                                 <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
                             </a>
                         )

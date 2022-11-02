@@ -2,13 +2,25 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    Helpers
+    Helpers,
+    initOne
 } from '@betarost/cemjs';
-
+// poydet
 import svg from "@assets/svg/index.js";
-import { If } from '@component/helpers/All.js';
+import { api } from '@src/apiFunctions.js'
 
-const BlockTrade = function (data) {
+const BlockTrade = async function (data) {
+
+    await initOne(
+        async () => {
+            let limit = 50
+            if(Variable.dataUrl && Variable.dataUrl.adress == ""){
+                limit = 6
+            }
+            await api({ type: "get", action: "getTrade", short: true, cache: true, name: "PageTrades", limit: limit })
+
+        }
+    )
 
     return (
         <div id="crypto_exchanges" class="crypto_exchanges">
@@ -35,7 +47,7 @@ const BlockTrade = function (data) {
                     </div>
                 </div>
                 {
-                    data.items.list_records.map(function (trade, i) {
+                    Variable.PageTrades.list_records.map(function (trade, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row tradeListLoad"
@@ -97,10 +109,11 @@ const BlockTrade = function (data) {
                     })
                 }
             </div>
-            <If
-                data={data.button}
-                dataIf={data.button}
-            />
+            {()=>{
+                if(data.button){
+                    return(data.button)
+                }
+            }}
         </div>
     )
 }

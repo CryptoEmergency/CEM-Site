@@ -6,7 +6,6 @@ import {
 } from '@betarost/cemjs';
 
 import images from "@assets/images/index.js";
-import { If } from '@component/helpers/All.js';
 
 const partners = [
     {
@@ -74,6 +73,7 @@ const BlockInfoPartners = function (data) {
                     arrData.map((partner) => {
                         return (
                             <a
+                                style='display: block !important'
                                 target="_blank"
                                 rel="nofollow nooopener"
                                 href={partner.link}
@@ -86,17 +86,17 @@ const BlockInfoPartners = function (data) {
                 }
             </div>
 
-
-            <If
-                data={data && data.limit}
-                dataIf={
-                    <div class="crypto_exchanges_footer">
-                        <a class="c-button c-button--gray" href="/partners/" onclick={Helpers.siteLink}>
-                            <span class="c-button__wrapper">{Variable.lang.button.allPartners}</span>
-                        </a>
-                    </div>
+            {()=>{
+                if(data && data.limit){
+                    return(
+                        <div class="crypto_exchanges_footer">
+                            <a class="c-button c-button--gray" href="/partners/" onclick={Helpers.siteLink}>
+                                <span class="c-button__wrapper">{Variable.lang.button.allPartners}</span>
+                            </a>
+                        </div>
+                    )
                 }
-            />
+            }}
         </div>
     )
 }

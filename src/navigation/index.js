@@ -135,10 +135,10 @@ const start = function () {
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
                             <BlockTrade
-                                items={Variable.MainTrades}
+                                nameRecords="MainTrades"
                                 button={
                                     <div class="crypto_exchanges_footer">
-                                        <a class="c-button c-button--gray" href="/list-trade/" onclick={Helpers.siteLink}>
+                                        <a class="c-button c-button--gray" href="/list-trade/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.trade }) }}>
                                             <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
                                         </a>
                                     </div>
@@ -146,10 +146,10 @@ const start = function () {
                             />
                             <div class="top_professionals_container">
                                 <BlockExchange
-                                    items={Variable.MainExchanges}
+                                    nameRecords="MainExchanges"
                                     button={
                                         <div class="crypto_exchanges_footer">
-                                            <a class="c-button c-button--gray" href="/list-exchange/" onclick={Helpers.siteLink}>
+                                            <a class="c-button c-button--gray" href="/list-exchange/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.exchange }) }}>
                                                 <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
                                             </a>
                                         </div>
@@ -160,6 +160,11 @@ const start = function () {
                                     filters={filters}
                                     nameRecords="PageUsers"
                                     type={type}
+                                    button={
+                                        <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>
+                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
+                                        </a>
+                                    }
                                 />
                                 <BlockMainNews />
                                 <BlockInfoPartners

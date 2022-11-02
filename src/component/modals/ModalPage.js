@@ -82,7 +82,10 @@ const ModalPage = async function (ID, reload) {
                 </div>
 
                 <div class="c-fullnews__itemwrapp">
-                  {getInitList()[ID].function(reload)}
+                  {async () => {
+                    return await getInitList()[ID].function(reload)
+                  }}
+
                 </div>
               </div>
             </div>
