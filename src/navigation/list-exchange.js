@@ -11,38 +11,36 @@ import {BlockExchange} from '@component/blocks/index.js';
 import { If } from '@component/helpers/All.js';
 import { ButtonShowMore } from "@component/element/index.js";
 
-const start = function () {
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-
+const start = function (data, ID = "mainBlock") {
   init(
     async () => {
       Variable.PageExchange = await sendApi.send({ action: "getExchange", short: true, cache: true, name: "PageExchange", limit: 10, });
     },
     () => {
       return (
-        <div class={["crypto_exchanges_full_page", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']} id="crypto_exchange">
+        <div class="crypto_exchanges_full_page c-main__body" id="crypto_exchange">
           <BlockExchange
             items={Variable.PageExchange}
             button={
-              <If
-                data={Variable.PageExchange.list_records.length < Variable.PageExchange.totalFound}
-                dataIf={
-                  <ButtonShowMore
-                  onclick = {async () => {
+              ()=>{
+                if(Variable.PageExchange.list_records.length < Variable.PageExchange.totalFound){
+                  return(
+                    <ButtonShowMore
+                      onclick = {async () => {
                           let tmp = await sendApi.send({ action: "getExchange", short: true, limit: 20, offset: Variable.PageExchange.list_records.length })
                           Variable.PageExchange.list_records.push(...tmp.list_records)
                           initReload()
                         }
-                        }
-                  />
+                      }
+                    />
+                  )
                 }
-              />
+              }
             }
           />
         </div>
       );
-    }
+    }, ID
   );
 };
 //I check
