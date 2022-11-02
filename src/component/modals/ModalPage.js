@@ -50,7 +50,7 @@ const ModalPage = async function (ID, reload) {
                       class="c-goback"
                       onclick={() => {
                         Variable.ModalsPage.splice(ID, 1)
-                        initReload("modals")
+                        initReload("modalsPage")
                       }}
                       title={Variable.lang.span.back}
                     >

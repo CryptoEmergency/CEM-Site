@@ -67,7 +67,7 @@ const start = function () {
             Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
             Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
             Variable.MainExchanges = await sendApi.send({ action: "getExchange", short: true, cache: true, name: "MainExchanges" });
-            Variable.MainUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "MainUsers", filter: Helpers.getFilterUsers(filters, type) });
+            // Variable.MainUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "MainUsers", filter: Helpers.getFilterUsers(filters, type) });
             Variable.MainNews = await sendApi.send({ action: "getNews", short: true, cache: true, name: "MainNews" });
             timersStart("Course", async () => { Variable.Course = await sendApi.send({ action: "getCourse", short: true }) }, 10000)
 
@@ -160,6 +160,7 @@ const start = function () {
                                     filters={filters}
                                     nameRecords="MainUsers"
                                     type={type}
+                                    limit={6}
                                     button={
                                         <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>
                                             <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>

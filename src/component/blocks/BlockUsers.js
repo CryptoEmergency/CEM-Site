@@ -3,53 +3,32 @@ import {
     jsxFrag,
     Variable,
     initOne,
-    initReload,
     Helpers,
-    sendApi
 } from '@betarost/cemjs';
+// poydet
 import svg from "@assets/svg/index.js";
+import { api } from '@src/apiFunctions.js'
 import { UserItem } from '@component/element/UserItem.js';
 
-import { api } from '@src/apiFunctions.js'
+let elFilters
 
-import {
-    ButtonShowMore,
-    NewsCategory,
-    NewsItem
-} from '@component/element/index.js';
-
-let elem = Variable.setRef()
-
-const BlockUsers = async function ({ title, filters, type, nameRecords, button }) {
-
+const BlockUsers = async function ({ title, filters, type, nameRecords, button, limit = 21 }) {
     await initOne(
         async () => {
-            let limit = 21
-            if(Variable.dataUrl && Variable.dataUrl.adress == ""){
-                limit = 6
-            }
             await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
         }
     )
+
     return (
         <div class="c-friends">
             <div class="c-friends__container c-container">
                 <h2>
-                    {()=>{
-                        if(title){
-                            return(
-                                title
-                            )
-                        } else {
-                            return(
-                                Variable.lang.h.top_users
-                            )
-                        }
-                    }}
+                    {title ? title : Variable.lang.h.top_users}
                 </h2>
                 <div class="c-friends__block">
                     <div class="c-friends__search">
                         <div class="c-friends__filter">
+                            {/* Сделать поиск */}
                             <input
                                 class="c-friends__field"
                                 autocomplete="off"
@@ -58,15 +37,15 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                             />
                             <div
                                 class="c-friends__toggler"
-                                onClick={(e) => {
-                                    if (elem().dataset.active === "true") {
-                                        elem().dataset.active = false
-                                        elem().style = "height: 0px"
+                                onClick={() => {
+                                    if (elFilters.dataset.active === "true") {
+                                        elFilters.dataset.active = false
+                                        elFilters.style = "height: 0px"
                                     } else {
-                                        elem().dataset.active = true
-                                        elem().style = "";
-                                        let h = elem().offsetHeight;
-                                        elem().style = `height: ${h}px`
+                                        elFilters.dataset.active = true
+                                        elFilters.style = "";
+                                        let h = elFilters.offsetHeight;
+                                        elFilters.style = `height: ${h}px`
                                     }
                                 }}
                             >
@@ -78,7 +57,9 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                             class="c-friends__additional"
                             data-active={false}
                             style={"height: 0px"}
-                            ref={elem}
+                            Element={($el) => {
+                                elFilters = $el
+                            }}
                         >
                             <div class="c-friends__wrapper">
                                 <div
@@ -89,23 +70,13 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                                                 onclick: async (langCode, langName) => {
                                                     filters.lang.name = langName;
                                                     filters.lang.code = langCode;
-                                                    Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                    Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
                                                 }
                                             }
                                         })
                                     }}
                                 >
-                                    {()=>{
-                                        if(filters.lang.name == "all"){
-                                            return(
-                                                Variable.lang.text.language
-                                            )
-                                        } else {
-                                            return(
-                                                filters.lang.name
-                                            )
-                                        }
-                                    }}
+                                    {filters.lang.name == "all" ? Variable.lang.text.language : filters.lang.name}
                                 </div>
                                 <img
                                     style="display: none;"
@@ -122,23 +93,13 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                                                 onclick: async (countryCode, countryName) => {
                                                     filters.country.name = countryName;
                                                     filters.country.code = countryCode;
-                                                    Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                    Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
                                                 }
                                             }
                                         })
                                     }}
                                 >
-                                    {()=>{
-                                        if(filters.country.name == "all"){
-                                            return(
-                                                Variable.lang.text.country
-                                            )
-                                        } else {
-                                            return(
-                                                filters.country.name
-                                            )
-                                        }
-                                    }}
+                                    {filters.country.name == "all" ? Variable.lang.text.country : filters.country.name}
                                 </div>
                                 <img
                                     style="display: none;"
@@ -146,9 +107,9 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                                     src={svg.refresh_filter}
                                 />
                             </div>
-                            {()=>{
-                                if(filters.group != false){
-                                    return(
+                            {() => {
+                                if (filters.group != false) {
+                                    return (
                                         <div class="c-friends__checkboxes">
                                             <div class="checkbox" data-action="friendsFilterCheckbox">
                                                 <input
@@ -159,7 +120,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                                                     required="required"
                                                     onChange={async () => {
                                                         filters.group.common = !filters.group.common
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
                                                     }}
                                                 />
                                                 <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
@@ -173,7 +134,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                                                     required="required"
                                                     onChange={async () => {
                                                         filters.group.content = !filters.group.content
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
                                                     }}
                                                 />
                                                 <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
@@ -187,7 +148,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                                                     required="required"
                                                     onChange={async () => {
                                                         filters.group.expert = !filters.group.expert
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
                                                     }}
                                                 />
                                                 <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
@@ -210,11 +171,11 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
                                                     </div>
                                                 */
                                             }
-                                            
+
                                         </div>
                                     )
                                 } else {
-                                    return(
+                                    return (
                                         <div class="c-friends__checkboxes">
                                             {
                                                 /* 
@@ -252,11 +213,12 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button }
 
                     </div>
                 </div>
-                {()=>{
-                    if(button){
-                        return(button)
+                {button ? button : null}
+                {/* {() => {
+                    if (button) {
+                        return (button)
                     }
-                }}
+                }} */}
             </div>
         </div>
     )
