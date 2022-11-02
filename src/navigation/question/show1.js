@@ -30,7 +30,7 @@ const start = function () {
         async () => {
             const tmp = await getQuestionItemInShow(Variable.dataUrl.params)
             question = tmp.list_records[0]
-            console.log('=c8d77c=', question)
+            // console.log('=c8d77c=', question)
         },
         () => {
             return (

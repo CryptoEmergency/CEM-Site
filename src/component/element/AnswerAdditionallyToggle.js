@@ -42,7 +42,7 @@ const AnswerAdditionallyToggle = function ({
         } else {
           Variable.Static.answerAdditionally = item._id;
           Variable.OutHideWindows.push([elemActive, () => {
-            console.log('=2779e9=', Variable.Static.answerAdditionally)
+            // console.log('=2779e9=', Variable.Static.answerAdditionally)
             Variable.Static.answerAdditionally = null
             initReload();
             initReload("modals");

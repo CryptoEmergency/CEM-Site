@@ -45,7 +45,7 @@ const sendPost = async (e) => {
     value: {
       forFriends: formInputs.forFriends,
       languages: formInputs.lang.code,
-      media:[ ...formInputs.mediaInputs.value,...formInputs.audioInputs.value],
+      media: [...formInputs.mediaInputs.value, ...formInputs.audioInputs.value],
       text: formInputs.textInputs.value,
     },
   };
@@ -144,7 +144,7 @@ const start = function () {
           }
           formInputs.mediaInputs.value[numItem].upload = e.loaded
           formInputs.mediaInputs.value[numItem].size = contentLength;
-          console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+          // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
           initReload();
         }
       );
@@ -200,13 +200,13 @@ const start = function () {
         }
         formInputs.mediaInputs.value[numItem].upload = e.loaded
         formInputs.mediaInputs.value[numItem].size = contentLength;
-        console.log(
-          "=3c5fa7= ",
-          "Загружено",
-          e.loaded,
-          "из",
-          contentLength
-        );
+        // console.log(
+        //   "=3c5fa7= ",
+        //   "Загружено",
+        //   e.loaded,
+        //   "из",
+        //   contentLength
+        // );
         initReload()
       }
     );
@@ -232,7 +232,7 @@ const start = function () {
       "posts",
       async function () {
         formInputs.mediaInputs.show = true;
-       
+
 
         // formInputs.mediaInputs.value.push(obj);
         let response = JSON.parse(this.response);
@@ -258,13 +258,13 @@ const start = function () {
         }
         formInputs.audioInputs.value[numItem].upload = e.loaded
         formInputs.audioInputs.value[numItem].size = contentLength;
-        console.log(
-          "=3c5fa7= ",
-          "Загружено",
-          e.loaded,
-          "из",
-          contentLength
-        );
+        // console.log(
+        //   "=3c5fa7= ",
+        //   "Загружено",
+        //   e.loaded,
+        //   "из",
+        //   contentLength
+        // );
         initReload()
       }
     );
@@ -327,8 +327,8 @@ const start = function () {
       return false;
     }
   };
- 
-  let el =[];
+
+  let el = [];
   init(
     async () => {
       formInputs = {
@@ -351,7 +351,7 @@ const start = function () {
         forFriends: false,
         isValid: false,
       };
-     
+
 
       selectAspect = null;
 
@@ -421,7 +421,7 @@ const start = function () {
                               index={index}
                               type="posts"
                               formInputs={formInputs}
-                             
+
                             />
                           );
                         }
@@ -437,16 +437,16 @@ const start = function () {
                   <div class="create_post_chapter createPostAudio">
                     {
                       formInputs.audioInputs.value.map((item, index) => {
-                      
-                          return (
-                            <MediaPreview
-                              item={item}
-                              index={index}
-                              type="posts"
-                              formInputs={formInputs}
-                              el ={el}
-                            />
-                          );
+
+                        return (
+                          <MediaPreview
+                            item={item}
+                            index={index}
+                            type="posts"
+                            formInputs={formInputs}
+                            el={el}
+                          />
+                        );
                       })
                     }
                   </div>

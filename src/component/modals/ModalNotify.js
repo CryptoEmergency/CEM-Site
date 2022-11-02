@@ -46,7 +46,7 @@ const ModalNotify = async function (data, reload) {
 				notify = Variable.myInfo.notifySystem
 				break;
 		}
-		console.log('=d68221=', currentNotify)
+		// console.log('=d68221=', currentNotify)
 		initReload()
 	}
 

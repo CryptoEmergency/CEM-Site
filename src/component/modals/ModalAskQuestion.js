@@ -115,7 +115,7 @@ const sendPhoto = async function (crooper) {
             10
           );
         }
-        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+        // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
       }
     );
     initReload("modals");
@@ -149,13 +149,13 @@ const sendVideo = async function (files) {
           10
         );
       }
-      console.log(
-        "=3c5fa7= ",
-        "Загружено",
-        e.loaded,
-        "из",
-        contentLength
-      );
+      // console.log(
+      //   "=3c5fa7= ",
+      //   "Загружено",
+      //   e.loaded,
+      //   "из",
+      //   contentLength
+      // );
     }
   );
   return
@@ -176,7 +176,7 @@ const ModalAskQuestion = function (data, reload) {
       },
       textQuestion: {
         value: "",
-        show: false,
+        show: true,
       },
       mediaInputs: {
         value: [],
@@ -211,7 +211,7 @@ const ModalAskQuestion = function (data, reload) {
   };
 
   const test = (e) => {
-    console.log('=5ce284=', e)
+    // console.log('=5ce284=', e)
   }
 
   return (
@@ -342,14 +342,14 @@ const ModalAskQuestion = function (data, reload) {
               {/* <div class="c-askquestion__controls create_post_control_block"> */}
               <MediaButton
 
-                onclickText={function () {
-                  if (formInputs.textQuestion.show === true) {
-                    return;
-                  } else {
-                    formInputs.textQuestion.show = true;
-                    initReload("modals");
-                  }
-                }}
+                // onclickText={function () {
+                //   if (formInputs.textQuestion.show === true) {
+                //     return;
+                //   } else {
+                //     formInputs.textQuestion.show = true;
+                //     initReload("modals");
+                //   }
+                // }}
 
                 onclickPhoto={function () {
                   if (this.files.length == 0) {

@@ -53,7 +53,7 @@ const changeInput = async (e) => {
 };
 
 const ModalAfterRegisterForm = function (data, reload) {
-  console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
+  // console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
   // initOne(() => {
   if (!reload) {
     formInputs = {
@@ -210,7 +210,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                                 if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
                                   formInputs.isValid = true
                                 }
-                                console.log('=5fb352 formInputs=', formInputs)
+                                // console.log('=5fb352 formInputs=', formInputs)
                                 // initReload("modals")
                               }
                             }

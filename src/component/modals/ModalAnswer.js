@@ -103,7 +103,7 @@ const sendPhoto = async function (crooper) {
             10
           );
         }
-        console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+        // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
       }
     );
     initReload("modals");
@@ -137,13 +137,13 @@ const sendVideo = async function (files) {
           10
         );
       }
-      console.log(
-        "=3c5fa7= ",
-        "Загружено",
-        e.loaded,
-        "из",
-        contentLength
-      );
+      // console.log(
+      //   "=3c5fa7= ",
+      //   "Загружено",
+      //   e.loaded,
+      //   "из",
+      //   contentLength
+      // );
     }
   );
   return
@@ -157,7 +157,7 @@ const ModalAnswer = function (data, reload) {
       textAnswer: {
         value: "",
         error: "",
-        show: false,
+        show: true,
       },
       mediaInputs: {
         value: [],
@@ -254,14 +254,14 @@ const ModalAnswer = function (data, reload) {
 
             <MediaButton
 
-              onclickText={function () {
-                if (formInputs.textAnswer.show === true) {
-                  return;
-                } else {
-                  formInputs.textAnswer.show = true;
-                  initReload("modals");
-                }
-              }}
+              // onclickText={function () {
+              //   if (formInputs.textAnswer.show === true) {
+              //     return;
+              //   } else {
+              //     formInputs.textAnswer.show = true;
+              //     initReload("modals");
+              //   }
+              // }}
 
               onclickPhoto={function () {
                 if (this.files.length == 0) {

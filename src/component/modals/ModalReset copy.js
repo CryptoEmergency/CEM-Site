@@ -50,14 +50,14 @@ const resetTimer = () => {
 }
 const change = async (e, index) => {
   let tmp = false;
-  console.log("=a2d228=", e);
+  // console.log("=a2d228=", e);
   let arrEvent = e.target.parentElement.children;
   if (e.inputType === "insertFromPaste" &&
     allValidation(e.target.value, "inputNumberPaste")) {
     // let isNumber = allValidation(e.target.value, "inputNumberPaste");
     let strArr = e.target.value.split("");
 
-    console.log("=strArr=", strArr);
+    // console.log("=strArr=", strArr);
     // pass = [...strArr]
     // console.log('=pass=',pass)
     if (pass[index] === "") {
@@ -91,20 +91,20 @@ const change = async (e, index) => {
     // let arr = e.target.parentElement.children;
     // arr = arr.splice
 
-    console.log("= arrEvent=", arrEvent);
-    console.log("=passPaste=", pass);
+    // console.log("= arrEvent=", arrEvent);
+    // console.log("=passPaste=", pass);
   } else if (e.inputType !== "deleteContentBackward") {
     e.target.value = e.target.value[0];
     let isNumber = allValidation(e.target.value, "inputNumber");
-    console.log("=8722cf=", isNumber);
+    // console.log("=8722cf=", isNumber);
     if (!isNumber) {
       e.target.value = "";
       pass[index] = "";
       e.target.focus();
-      console.log("=04cc13=", pass);
+      // console.log("=04cc13=", pass);
     } else {
       pass[index] = e.target.value;
-      console.log("=04cc13=", pass);
+      // console.log("=04cc13=", pass);
       let arr = e.target.parentElement.children;
 
 
@@ -129,7 +129,7 @@ const change = async (e, index) => {
   if (strPass.length === 6) {
     let data = { email: "maior0077777@mail.ru", code: strPass }
     let response = await sendResetMessage(data);
-    console.log('=8fa90a=', response)
+    // console.log('=8fa90a=', response)
     if (response === "no") {
       for (let i = 0; i < pass.length; i++) {
         arrEvent[i].value = "";
@@ -145,7 +145,7 @@ const timerFunc = () => {
   const timer = setInterval(async () => {
     time = time - 1
     initReload()
-    console.log('=3ca4b3=', time)
+    // console.log('=3ca4b3=', time)
     if (time === 0) {
       clearInterval(timer);
       time = 5;
@@ -172,8 +172,8 @@ const ModalReset = function ({
       <section class="c-modal__dialog">
         <header class="c-modal__header">
           <h2 class="c-modal__title">{`${showStepReset == "1"
-              ? Variable.lang.h.modal_reset
-              : Variable.lang.h.modal_resetСonfirm
+            ? Variable.lang.h.modal_reset
+            : Variable.lang.h.modal_resetСonfirm
             }`}</h2>
           <button
             type="button"

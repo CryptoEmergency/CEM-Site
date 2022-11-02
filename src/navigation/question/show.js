@@ -11,7 +11,7 @@ import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
 import { api } from '@src/apiFunctions.js'
 
 import { BlockQuestionsShow } from '@component/blocks/index.js';
-import { QuestionAnswers } from '@component/element/index.js';
+import { QuestionAnswers, QuestionAnswerItem } from '@component/element/index.js';
 
 
 const start = function (data, ID = "mainBlock") {
@@ -53,9 +53,18 @@ const start = function (data, ID = "mainBlock") {
               type={"question"}
             />
             <div class="user_news_block">
-              <QuestionAnswers
+              {
+                () => {
+                  return itemsAnswers.list_records.map((item, index) => {
+                    return (
+                      <QuestionAnswerItem item={item} index={index} />
+                    )
+                  })
+                }
+              }
+              {/* <QuestionAnswers
                 items={itemsAnswers.list_records}
-              />
+              /> */}
             </div>
           </div>
           {/* </div> */}

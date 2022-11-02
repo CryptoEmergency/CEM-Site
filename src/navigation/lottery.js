@@ -31,7 +31,7 @@ const start = function () {
     let quiz = Variable.setRef()
 
     let formValid
-    
+
 
     const SendLotteryForm = async function (event) {
         event.preventDefault()
@@ -47,7 +47,7 @@ const start = function () {
         // let htmlData = getFirstData()
         // htmlData.ticketNumber = res.ticketNumber
         // $('.lottery_data').html(await partialsHtml('ticket', htmlData))
-        let response = checkAnswerApi(await sendApi.create("setLottery", {value: value}));
+        let response = checkAnswerApi(await sendApi.create("setLottery", { value: value }));
         ticketNumber = response.list_records[0].ticketNumber
         initReload()
     }
@@ -60,8 +60,8 @@ const start = function () {
             formValid[this.name]().classList.remove('lottery_check_valid')
         }
         let FullFilledForm = true
-        Object.values(formValid).forEach((element)=>{
-            if(element().classList[1] != 'lottery_check_valid'){
+        Object.values(formValid).forEach((element) => {
+            if (element().classList[1] != 'lottery_check_valid') {
                 FullFilledForm = false
             }
         })
@@ -74,18 +74,18 @@ const start = function () {
         }
     }
 
-    const lotteryQuiz = async function(){
-        console.log(quiz)
-        if(quiz().classList[1] == 'lottery_check_valid'){
-          return
+    const lotteryQuiz = async function () {
+        // console.log(quiz)
+        if (quiz().classList[1] == 'lottery_check_valid') {
+            return
         }
-        
-        if(this.dataset.true == 'true'){
+
+        if (this.dataset.true == 'true') {
             this.classList.add('valid_quiz_answer')
             quiz().classList.add('lottery_check_valid')
             let FullFilledForm = true
-            Object.values(formValid).forEach((element)=>{
-                if(element().classList[1] != 'lottery_check_valid'){
+            Object.values(formValid).forEach((element) => {
+                if (element().classList[1] != 'lottery_check_valid') {
                     FullFilledForm = false
                 }
             })
@@ -98,16 +98,16 @@ const start = function () {
             }
         } else {
             this.classList.add('invalid_quiz_answer')
-        } 
-        
+        }
+
     }
 
 
     init(
         async () => {
-            let response = checkAnswerApi(await sendApi.create("getLottery", {filter: {nickname: Variable.myInfo.nickname}}));
-            console.log('response', response)
-            if(response.totalFound != 0){
+            let response = checkAnswerApi(await sendApi.create("getLottery", { filter: { nickname: Variable.myInfo.nickname } }));
+            // console.log('response', response)
+            if (response.totalFound != 0) {
                 ticketNumber = response.list_records[0].ticketNumber
             } else {
                 ticketNumber = false
@@ -148,7 +148,7 @@ const start = function () {
                             <p>Dates of Lottery:</p>
                             <div class="lottery_main">
                                 <div class="lottery_data">
-                                    {}
+                                    { }
                                     <If
                                         data={ticketNumber}
                                         dataIf={

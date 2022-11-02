@@ -73,7 +73,7 @@ const start = function () {
 
         },
         () => {
-            console.log(Variable)
+            // console.log(Variable)
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <BlockPreview />
@@ -109,8 +109,8 @@ const start = function () {
                                             onclick={async () => {
                                                 let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 6, offset: Variable.MainQuestions.list_records.length, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) })
                                                 Variable.MainQuestions.list_records.push(...tmp.list_records)
-                                                console.log('=Variable.MainQuestions.list_records=', Variable.MainQuestions.list_records)
-                                                console.log('= Variable.MainQuestions.list_records.length.MainQuestions.totalFound=', Variable.MainQuestions.list_records.length)
+                                                // console.log('=Variable.MainQuestions.list_records=', Variable.MainQuestions.list_records)
+                                                // console.log('= Variable.MainQuestions.list_records.length.MainQuestions.totalFound=', Variable.MainQuestions.list_records.length)
                                                 initReload()
                                             }}
                                         />

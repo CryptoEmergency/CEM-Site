@@ -57,7 +57,7 @@ const start = function () {
                 messageUser = messageList.list_records[0].message
             }
 
-            console.log('=633dca=', messageUser, activeUser)
+            // console.log('=633dca=', messageUser, activeUser)
             return (
                 <div class="messages_block">
                     <div class="messages_left_part">
