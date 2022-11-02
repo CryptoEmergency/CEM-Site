@@ -189,6 +189,10 @@
 
 	&__header {
 		padding: 20px;
+
+		&--nopadding {
+			padding: 0;
+		}
 	}
 
 	&__title {

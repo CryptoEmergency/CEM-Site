@@ -1527,13 +1527,13 @@
 
 /* LANGUAGE CHANGE */
 .c-changelanguage {
-    position: fixed;
-    top: 100px;
-    right: 10%;
-    width: 414px;
+    // position: fixed;
+    // top: 100px;
+    // right: 10%;
+    // width: 414px;
     height: 657px;
     color: $white;
-    background: $spinel_stone_black;
+    // background: $spinel_stone_black;
     border-radius: 20px;
     z-index: 1060;
 
@@ -1552,6 +1552,10 @@
         margin: 0;
         font-weight: 600;
         font-size: 18px;
+
+        // height: 80px;
+        border-bottom: 1px solid #444B5F;
+        padding: 0 50px;
     }
 
     &__list {
@@ -1559,7 +1563,7 @@
         flex-direction: column;
         margin: 0;
         padding: 40px 50px;
-        height: calc(100% - 80px);
+        height: calc(100% - 50px);  //calc(100% - 80px);
         list-style-type: none;
         overflow-y: auto;
 

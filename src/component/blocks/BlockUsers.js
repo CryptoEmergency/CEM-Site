@@ -64,9 +64,8 @@ const BlockUsers = async function ({ title, filters, type, nameRecords }) {
                                         elem().style = "height: 0px"
                                     } else {
                                         elem().dataset.active = true
-                                        let additional = document.querySelector('.c-friends__additional');
-                                        additional.style = "";
-                                        let h = additional.offsetHeight;
+                                        elem().style = "";
+                                        let h = elem().offsetHeight;
                                         elem().style = `height: ${h}px`
                                     }
                                 }}
