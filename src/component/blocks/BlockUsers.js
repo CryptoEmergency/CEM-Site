@@ -20,7 +20,7 @@ import {
 
 let elem = Variable.setRef()
 
-const BlockUsers = async function ({ title, filters, type, nameRecords }) {
+const BlockUsers = async function ({ title, filters, type, nameRecords, button }) {
 
     await initOne(
         async () => {
@@ -253,24 +253,8 @@ const BlockUsers = async function ({ title, filters, type, nameRecords }) {
                     </div>
                 </div>
                 {()=>{
-                    if(Variable.dataUrl && Variable.dataUrl.adress == "users" && Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound){
-                        return(
-                            <ButtonShowMore
-                                onclick={async () => {
-                                    let tmp = await api({ type: "get", action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type), offset: Variable[nameRecords].list_records.length})
-                                    Variable[nameRecords].list_records.push(...tmp.list_records)
-                                }}
-                            />
-                        )
-                    }
-                }}
-                {()=>{
-                    if(Variable.dataUrl && Variable.dataUrl.adress == ""){
-                        return(
-                            <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>
-                                <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                            </a>
-                        )
+                    if(button){
+                        return(button)
                     }
                 }}
             </div>

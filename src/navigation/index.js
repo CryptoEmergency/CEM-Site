@@ -158,7 +158,7 @@ const start = function () {
                                 <BlockUsers
                                     title={Variable.lang.h.top_users}
                                     filters={filters}
-                                    nameRecords="PageUsers"
+                                    nameRecords="MainUsers"
                                     type={type}
                                     button={
                                         <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>

@@ -9,6 +9,9 @@ import {
 } from "@betarost/cemjs";
 // poydet
 import { BlockUsers } from '@component/blocks/index.js';
+import { ButtonShowMore } from '@component/element/index.js';
+
+import { api } from '@src/apiFunctions.js'
 
 const start = function (data, ID = "mainBlock") {
     let filters
@@ -49,8 +52,9 @@ const start = function (data, ID = "mainBlock") {
                                 return(
                                   <ButtonShowMore
                                     onclick={async () => {
-                                        let tmp = await api({ type: "get", action: "getUsers", short: true, limit: 21, filter: Helpers.getFilterUsers(filters, type), offset: Variable[nameRecords].list_records.length})
-                                        Variable[nameRecords].list_records.push(...tmp.list_records)
+                                        let tmp = await api({ type: "get", action: "getUsers", short: true, limit: 12, filter: Helpers.getFilterUsers(filters, type), offset: Variable.PageUsers.list_records.length})
+                                        Variable.PageUsers.list_records.push(...tmp.list_records)
+                                        initReload()
                                     }}
                                   />
                                 )

@@ -707,7 +707,6 @@ const start = function (data, ID = "mainBlock") {
                             </div>
                         </div>
                     </div>
-                    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
                     <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
                     <Jivo />
                 </div>
