@@ -11,10 +11,7 @@ import {BlockTrade} from '@component/blocks/index.js';
 import { If } from "@component/helpers/All.js";
 import { ButtonShowMore } from "@component/element/index.js";
 
-const start = function () {
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-
+const start = function (data, ID = "mainBlock") {
   init(
     async () => {
       Variable.PageTrades = await sendApi.send({
@@ -27,12 +24,7 @@ const start = function () {
     },
     () => {
       return (
-        <div
-          class={[
-            "crypto_exchanges_full_page",
-            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
-          ]}
-        >
+        <div class="crypto_exchanges_full_page c-main__body">
           <BlockTrade
             items={Variable.PageTrades}
             button={
@@ -62,8 +54,7 @@ const start = function () {
           />
         </div>
       );
-    }
+    }, ID
   );
 };
-//I check
 export default start;

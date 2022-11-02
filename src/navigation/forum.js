@@ -12,18 +12,12 @@ import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
 
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { If, Map } from '@component/helpers/All.js';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import { Jivo } from '@component/element/index.js';
 
 
-const start = function () {
-
-
-
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
+const start = function (data, ID = "mainBlock") {
     let showAllCompanies = false
 
     const swiperGo = function (numIndex) {
@@ -94,7 +88,7 @@ const start = function () {
         },
         () => {
             return (
-                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                <div class='c-main__body'>
                     <div class="page-content page-content--full">
                         <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px">
                             <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
@@ -649,7 +643,7 @@ const start = function () {
                                     >
                                         <img src={images["forum/partner_2"]} />
                                     </a>
-                                    <a
+                                    <a style="display: block!important;"
                                         target="_blank"
                                         rel="nofollow nooopener"
                                         href="https://www.instagram.com/barycoffee.nvr/"
@@ -657,7 +651,7 @@ const start = function () {
                                     >
                                         <img src={images["forum/partner_3"]} />
                                     </a>
-                                    <a
+                                    <a style="display: block!important;"
                                         target="_blank"
                                         rel="nofollow nooopener"
                                         href="http://hotel-capital.ru"
@@ -690,7 +684,7 @@ const start = function () {
                     <Jivo />
                 </div>
             )
-        }
+        }, ID
     )
 }
 
