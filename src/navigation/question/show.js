@@ -9,7 +9,7 @@ import {
 } from "@betarost/cemjs";
 
 import { api } from '@src/apiFunctions.js'
-
+import svg from '@assets/svg/index.js';
 import { BlockQuestionsShow } from '@component/blocks/index.js';
 import { QuestionAnswerItem } from '@component/element/index.js';
 
@@ -30,7 +30,7 @@ const start = function (data, ID = "mainBlock") {
 
 
       }
- 
+
     },
     async () => {
       return (
@@ -55,21 +55,24 @@ const start = function (data, ID = "mainBlock") {
             <div class="user_news_block">
               {
                 () => {
-                  if(!itemAnswer){
-                    
-                    setTimeout(async function(){
+                  if (!itemAnswer) {
+
+                    setTimeout(async function () {
                       let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-                       itemAnswer = answer.list_records
-                       initReload()
-                    },1000)
-                  }else{
+                      itemAnswer = answer.list_records
+                      initReload()
+                    }, 1000)
+                    return (
+                      <img src={svg['load']} />
+                    )
+                  } else {
                     return itemAnswer.map((item, index) => {
                       return (
                         <QuestionAnswerItem item={item} index={index} />
                       )
                     })
                   }
-                  
+
                 }
               }
             </div>
