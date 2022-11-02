@@ -6,7 +6,7 @@ import { If } from "@component/helpers/All.js";
 
 let elem = [];
 const BlockQuestionsShow = function ({ item, callBackAnswer, type }) {
-  console.log('=c2652b=', item, callBackAnswer, type)
+ 
   if (!type || type != "question") {
     return (
       <></>

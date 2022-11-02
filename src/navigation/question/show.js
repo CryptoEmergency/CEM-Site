@@ -8,7 +8,6 @@ import {
   initReload
 } from "@betarost/cemjs";
 
-import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
 import { api } from '@src/apiFunctions.js'
 
 import { BlockQuestionsShow } from '@component/blocks/index.js';
@@ -41,13 +40,12 @@ const start = function (data, ID = "mainBlock") {
           <div class="answer_block" style="flex-direction: column;">
             <BlockQuestionsShow
               itemsAnswers={itemAnswer}
+
               item={item}
               callBackAnswer={
                 async () => {
                   let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } })
                   itemAnswer = answer.list_records
-                  // itemAnswer = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
-                  console.log(itemAnswer);
                   initReload()
                 }
               }
