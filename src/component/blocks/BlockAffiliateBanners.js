@@ -1,11 +1,18 @@
-import { jsx, jsxFrag, Variable, initReload, initOne } from "@betarost/cemjs";
-
+import {
+  jsx,
+  jsxFrag,
+  Variable,
+  initReload,
+  initOne
+} from "@betarost/cemjs";
+// poydet
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-let activeBanner, userLang, banner;
-let successImg = Variable.setRef();
-let successCode = Variable.setRef();
+let activeBanner,
+  userLang,
+  elSuccessImg,
+  elSuccessCode
 
 let banners = {
   en: [
@@ -77,11 +84,8 @@ let banners = {
 const BlockAffiliateBanners = function () {
   initOne(() => {
     userLang = Variable.lang.code === "ru" ? "ru" : "en";
-    activeBanner = banners[userLang][0].type;
+    activeBanner = banners[userLang][0];
   });
-
-  banner = banners[userLang].filter((item) => item.type === activeBanner);
-
   return (
     <div class="affiliate_banners">
       <div class="affiliate_banners_size">
@@ -95,7 +99,7 @@ const BlockAffiliateBanners = function () {
               ]}
               onclick={() => {
                 userLang = "en";
-                activeBanner = banners[userLang][0].type;
+                activeBanner = banners[userLang][0];
                 initReload();
               }}
             >
@@ -108,7 +112,7 @@ const BlockAffiliateBanners = function () {
               ]}
               onclick={() => {
                 userLang = "ru";
-                activeBanner = banners[userLang][0].type;
+                activeBanner = banners[userLang][0];
                 initReload();
               }}
             >
@@ -120,12 +124,10 @@ const BlockAffiliateBanners = function () {
               return (
                 <div
                   onclick={() => {
-
-
-                    activeBanner = item.type;
+                    activeBanner = item;
                     initReload()
                   }}
-                  class={["affiliate_banners_size_item", activeBanner == item.type ? "affiliate_banners_size_item_active" : null]}
+                  class={["affiliate_banners_size_item", activeBanner.type == item.type ? "affiliate_banners_size_item_active" : null]}
                 >
                   <div class="affiliate_banners_size_item_inner">
                     {item.type}
@@ -140,21 +142,27 @@ const BlockAffiliateBanners = function () {
         <div>
           <h4>{Variable.lang.h.addMaterials}</h4>
           <div class="affiliate_banner_link">
-            <div class="affiliate_banner_link_block">{banner[0].url}</div>
+            <div class="affiliate_banner_link_block">{activeBanner.url}</div>
             <div
               class="affiliate_banner_copy"
               onclick={() => {
-                navigator.clipboard.writeText(banner[0].url);
-                successImg().hidden = false;
+                navigator.clipboard.writeText(activeBanner.url);
+                elSuccessImg.hidden = false;
                 setTimeout(() => {
-                  successImg().hidden = true;
+                  elSuccessImg.hidden = true;
                 }, 1000);
                 return;
               }}
             >
               <img src={svg.copy} />
               <span>{Variable.lang.p.copy}</span>
-              <div class="success_copy" hidden={true} ref={successImg}>
+              <div
+                class="success_copy"
+                hidden={true}
+                Element={($el) => {
+                  elSuccessImg = $el
+                }}
+              >
                 {Variable.lang.text.coppied}
               </div>
             </div>
@@ -163,35 +171,40 @@ const BlockAffiliateBanners = function () {
         <div>
           <h4>{Variable.lang.h.codeToPlace}</h4>
           <div class="affiliate_banner_code">
-            <div class="affiliate_banner_code_block">{`<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`}</div>
+            <div class="affiliate_banner_code_block">{`<a href="https://crypto-emergency.com"><img src=${activeBanner.url}></a>`}</div>
             <div
               class="affiliate_banner_copy"
               data-type="code"
               onclick={() => {
                 navigator.clipboard.writeText(
-                  `<a href="https://crypto-emergency.com"><img src=${banner[0].url}></a>`
+                  `<a href="https://crypto-emergency.com"><img src=${activeBanner.url}></a>`
                 );
-                successCode().hidden = false;
+                elSuccessCode.hidden = false;
                 setTimeout(() => {
-                  successCode().hidden = true;
+                  elSuccessCode.hidden = true;
                 }, 1000);
                 return;
               }}
             >
               <img src={svg.copy} />
               <span>{Variable.lang.p.copy}</span>
-              <div class="success_copy" hidden={true} ref={successCode}>
+              <div
+                class="success_copy"
+                hidden={true}
+                Element={($el) => {
+                  elSuccessCode = $el
+                }}
+              >
                 {Variable.lang.text.coppied}
               </div>
             </div>
           </div>
         </div>
         <div class="affiliate_banner_preview">
-          <img src={banner[0].url} />
+          <img src={activeBanner.url} />
         </div>
       </div>
     </div>
   );
 };
-//I check
 export { BlockAffiliateBanners };

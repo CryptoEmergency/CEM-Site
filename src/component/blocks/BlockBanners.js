@@ -1,18 +1,11 @@
 import {
     jsx,
     jsxFrag,
-    Variable,
-    initAfter,
-    initOne
 } from '@betarost/cemjs';
-
+// poydet
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-
 import { Swiper } from '@component/element/index.js';
-
-// import Swiper from 'swiper/bundle';
-// import 'swiper/css/bundle';
 
 const banners = [
     // {
@@ -77,11 +70,6 @@ const banners = [
     },
 ];
 
-let swiperitem
-
-
-
-
 const swiperOptions = {
     direction: 'horizontal',
     loop: true,
@@ -113,77 +101,42 @@ const swiperOptions = {
             slidesPerView: 4,
             spaceBetween: 30,
             navigation: {
-                nextEl: '#next-startup',
-                prevEl: '#prev-startup',
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
         },
     },
 }
 
-const BlockBanners = function () {
-
-    initOne(
-        () => {
-            swiperitem = null
-        }
+const bannersRecords = banners.map(function (item) {
+    return (
+        <a rel="nofollow noopener" target="_blank" href={item.href} class="swiper-slide">
+            <div>
+                <img src={images[`banners/${item.image}`]} />
+            </div>
+        </a>
     )
+})
 
-
+const BlockBanners = function () {
     return (
         <div class="c-startaps">
             <Swiper
-                slide={
-                    banners.map(function (banner) {
-                        return (
-                            <a rel="nofollow noopener" target="_blank" href={banner.href} class="swiper-slide">
-                                <div>
-                                    <img src={images[`banners/${banner.image}`]} />
-                                </div>
-                            </a>
-                        )
-                    })
-                }
+                slide={bannersRecords}
                 options={swiperOptions}
                 className="swiper-startups"
                 navigation={
                     <div>
-                        <div class="swiper-button-prev" id="prev-startup">
+                        <div class="swiper-button-prev">
                             <img src={svg.swiper_arrow_left} style="height: 40%;" />
                         </div>
-                        <div class="swiper-button-next" id="next-startup">
+                        <div class="swiper-button-next">
                             <img src={svg.swiper_arrow_right} style="height: 40%;" />
                         </div>
                     </div>
                 }
-
             />
-            {/* <div class="swiper-container">
-                <div class="swiper swiper-startups" id="swiper-startups" After={swiperGo}>
-                    <div class="swiper-wrapper">
-                        {
-                            banners.map(function (banner) {
-                                return (
-                                    <a class="swiper-slide">
-                                        <div data-id={banner.id}>
-                                            <img src={images[`banners/${banner.image}`]} />
-                                        </div>
-                                    </a>
-                                )
-                            })
-                        }
-                    </div>
-                    <div class="swiper-pagination" id="swiper-pagination-startup"></div>
-                    <div class="swiper-scrollbar-startup"></div>
-                </div>
-                <div class="swiper-button-prev" id="prev-startup">
-                    <img src={svg.swiper_arrow_left} style="height: 40%;" />
-                </div>
-                <div class="swiper-button-next" id="next-startup">
-                    <img src={svg.swiper_arrow_right} style="height: 40%;" />
-                </div>
-            </div> */}
         </div>
     )
 }
-//I check
 export { BlockBanners }

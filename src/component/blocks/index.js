@@ -1,5 +1,6 @@
 export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js"
 export { BlockNewsShow } from "./BlockNewsShow.js"
+export { BlockBanners } from "./BlockBanners.js"
 export { BlockQuestionsShow } from "./BlockQuestionsShow.js"
 export { BlockUsers } from "./BlockUsers.js"
 export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
@@ -12,5 +13,5 @@ export { BlockTrade } from "@component/blocks/BlockTrade.js";
 export { BlockExchange } from '@component/blocks/BlockExchange.js';
 export { BlockComment } from '@component/blocks/user/BlockComment.js';
 export { BlockLentaUsers } from '@component/blocks/BlockLentaUsers.js';
+export { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 export { BlockUserForLenta } from '@component/blocks/user/BlockUserForLenta.js';
-export { BlockUniversityItem } from '@component/blocks/BlockUniversityItem.js';

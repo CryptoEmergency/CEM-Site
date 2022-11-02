@@ -3,13 +3,18 @@ import {
     jsxFrag,
     Helpers,
     Variable,
-    sendApi
+    initOne
 } from '@betarost/cemjs';
-
+// poydet
+import { api } from '@src/apiFunctions.js'
 import svg from '@assets/svg/index.js';
 
-const BlockMainNews = function () {
-
+const BlockMainNews = async function () {
+    await initOne(
+        async () => {
+            await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
+        }
+    )
     return (
         <div class="news_block_container">
             <div class="news_block">
@@ -19,46 +24,30 @@ const BlockMainNews = function () {
                 </div>
                 <div class="main_page_news_block">
                     {
-                        Variable.MainNews.list_records.map(function (newsItem) {
+                        Variable.MainNews.list_records.map(function (item) {
                             return (
                                 <a
                                     class="blog_news_item"
-                                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news, item: newsItem }) }}
-                                    // onclick={Helpers.siteLink}
-                                    href={`/news/show/${newsItem._id}`}
-                                // onClick={() => {
-                                //     // let news = await sendApi.send({ action: "getNews", short: true, filter: { _id: newsItem._id } });
-                                //     // let news = await getNewsItemInShow(newsItem._id);
-                                //     // news = news.list_records[0];
-                                //     // Variable.SetModals({
-                                //     //     name: "ModalFullNews",
-                                //     //     data: { news },
-                                //     // });
-                                //     // let item = news.list_records[0];
-                                //         Variable.SetModals({
-                                //              name: "ModalFullSize",
-                                //              data: { item: newsItem, type: "news" },
-                                //          });
-
-                                // }}
+                                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news, item: item }) }}
+                                    href={`/news/show/${item._id}`}
                                 >
                                     <img
                                         style="margin-bottom: 20px"
-                                        src={`/assets/upload/news/${newsItem.image}`}
+                                        src={`/assets/upload/news/${item.image}`}
                                     />
                                     <p style="margin-bottom: 20px" class="blog_new_title ">
-                                        {newsItem.title}
+                                        {item.title}
                                     </p>
                                     <div style="display: flex!important;" class="blog_post_stat">
                                         <span>
                                             <img src={svg.question_views} />
-                                            <span class="">{newsItem.statistic.view}</span>
+                                            <span class="">{item.statistic.view}</span>
                                         </span>
                                         <span>
                                             <img src={svg.question_answers} />
-                                            <span class="">{newsItem.statistic.comments}</span>
+                                            <span class="">{item.statistic.comments}</span>
                                         </span>
-                                        <span class="">{Helpers.getDateFormat(newsItem.showDate)}</span>
+                                        <span class="">{Helpers.getDateFormat(item.showDate)}</span>
                                     </div>
                                 </a>
                             )
@@ -76,5 +65,4 @@ const BlockMainNews = function () {
         </div>
     )
 }
-//I check
 export { BlockMainNews }
