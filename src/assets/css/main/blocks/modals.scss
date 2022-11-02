@@ -157,6 +157,10 @@
 				}
 			}
 		}
+
+		.blog_page {
+			padding-bottom: 0;
+		}
 	}
 
 	&__dialog {
@@ -4255,7 +4259,7 @@ s
 		padding-top: 40px;
 		box-sizing: border-box;
 
-		a {
+		a[target="_blank"] {
 			color: #20e0f6;
 			text-decoration: none;
 		}
