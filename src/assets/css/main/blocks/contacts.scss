@@ -23,7 +23,13 @@
     background: url(../images/background/contacts.png),
         url(../svg/background/contacts_vector.svg) top 70px left 0 no-repeat;
     padding: 50px 0;
-    border-bottom: 1px solid #232733;
+    // border-bottom: 1px solid #232733;
+    margin-bottom: -63px;
+    min-height: calc(100vh - 41px);
+
+    @media(max-width: 1024px) {
+        margin-bottom: 0;
+    }
 
     @media(min-width: 993px) {
         padding: 125px 0;

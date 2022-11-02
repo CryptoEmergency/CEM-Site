@@ -5,13 +5,38 @@ import { Avatar, LentaMedia } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
 
 let elem = [];
-const BlockQuestionsShow = function ({ item, itemsAnswers, type }) {
-
+const BlockQuestionsShow = function ({ item, callBackAnswer, type }) {
+ 
   if (!type || type != "question") {
     return (
       <></>
     )
   }
+
+
+  /*
+  проеврка на кнопку ответы
+  */
+  let buttonAnswer;
+  if (!item.close && item.author._id !== Variable.myInfo._id && Variable.auth) {
+    buttonAnswer = <div
+      class="btn-answer"
+      onclick={() => {
+        Variable.SetModals({
+          name: "ModalAnswer", data: {
+            item,
+            onClose: callBackAnswer
+          }
+        })
+      }}
+    >
+      <a class="btn-gr-answer">
+        <span>{Variable.lang.button.giveAnswer}</span>
+      </a>
+    </div>
+  }
+
+
 
   elem = [];
   elem[0] = [];
@@ -43,49 +68,7 @@ const BlockQuestionsShow = function ({ item, itemsAnswers, type }) {
           <img src={svg["question_time"]} />{" "}
           <b>{Helpers.getDateFormat(item.showDate, "lenta")}</b>{" "}
         </p>
-        {/* {myInfo._id !== item.author._id && (
-                  <div
-                    data-action="answerModal"
-                    class="btn-answer"
-                    data-needauth="true"
-                  >
-                    <a class="btn-gr-answer">
-                      <span>{Variable.lang.button.giveAnswer}</span>
-                    </a>
-                  </div>
-                )} */}
-        <If
-          data={!item.close && item.author._id !== Variable.myInfo._id && Variable.auth}
-          dataIf={
-            <div
-              class="btn-answer"
-              onclick={() => {
-                Variable.SetModals({
-                  name: "ModalAnswer", data: {
-                    item,
-                    onClose: async () => {
-                      itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
-                      initReload()
-                    }
-                  }
-                })
-              }}
-            >
-              <a class="btn-gr-answer">
-                <span>{Variable.lang.button.giveAnswer}</span>
-              </a>
-            </div>
-          }
-        />
-        {/* {{#if myInfo._id}}
-                            {{#is question.author._id myInfo._id}}
-        
-                            {{else}}
-                                {{#notif question.close}}
-                                    
-                                {{/notif}}
-                            {{/is}}
-                        {{/if}} */}
+        {buttonAnswer}
       </div>
     </div>
   );

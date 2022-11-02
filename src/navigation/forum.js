@@ -445,6 +445,18 @@ const start = function (data, ID = "mainBlock") {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Blockchain24.pro - Ведущий русскоязычный портал о криптовалютах и технологии blockchain. В основе нашей концепции - информационный портал, плюс тематические сервисы. Мы стремимся предоставить участникам отрасли максимально объективную информацию, проверенную и адаптированную для широкого круга читателей.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://ti.turovinvest.ru/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_9']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">«Туров Инвест» — команда криптоэнтузиастов. Объединив самых успешных участников крипторынка, мы помогаем людям повышать финансовую грамотность в области криптовалюты и инвестиций.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cryptonews.net/ru/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_10']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Crypto News — это сервис для криптоэнтузиастов, сделанный криптоэнтузиастами. Мы постарались сделать максимально полезную цифровую платформу для всех, кто хочет быть в курсе событий на крипторынке и стремится на этом зарабатывать.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -674,6 +686,22 @@ const start = function (data, ID = "mainBlock") {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_6"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://ti.turovinvest.ru/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_11"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cryptonews.net/ru/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_12"]} />
                                     </a>
                                 </div>
                             </div>

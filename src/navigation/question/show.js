@@ -5,75 +5,80 @@ import {
   init,
   sendApi,
   getStorage,
+  initReload
 } from "@betarost/cemjs";
 
-import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
 import { api } from '@src/apiFunctions.js'
-
+import svg from '@assets/svg/index.js';
 import { BlockQuestionsShow } from '@component/blocks/index.js';
-import { QuestionAnswers, QuestionAnswerItem } from '@component/element/index.js';
+import { QuestionAnswerItem } from '@component/element/index.js';
 
 
 const start = function (data, ID = "mainBlock") {
-  let items,
-    itemsAnswers
-
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-  let question, answers, myInfo, mediaWithOutAudio, mediaOnlyAudio;
+  let item, itemAnswer, itemID;
 
   init(
     async () => {
-      question = await getQuestionsItemInShow(
-        Variable.dataUrl.params,
-        "getQuestions"
-      );
-      question = question.list_records[0];
-      mediaWithOutAudio = question.media.filter((i) => i.type !== "audio");
-      mediaOnlyAudio = question.media.filter((i) => i.type === "audio");
-      answers = await getQuestionsItemInShow(
-        Variable.dataUrl.params,
-        "getAnswers"
-      );
-      Variable.Static.mainIdforLikes = question._id;
-      myInfo = getStorage("myInfo");
-      items = await sendApi.send({ action: "getQuestions", short: true, filter: { _id: Variable.dataUrl.params } });
-      // itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
+      if (data && data.item) {
+        item = data.item
+        itemID = data.item._id
+
+      } else {
+        itemID = Variable.dataUrl.params
+        let response = await api({ type: "get", action: "getQuestions", short: true, limit: 1, filter: { _id: itemID } })
+        item = response.list_records[0]
+
+
+      }
+
     },
     async () => {
-      itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
-
       return (
-        <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-          {/* <div class="full_news_container"> */}
+
+        <div class="answer_container c-main__body">
+
           <div class="answer_block" style="flex-direction: column;">
+
             <BlockQuestionsShow
-              itemsAnswers={itemsAnswers}
-              item={items.list_records[0]}
+              itemsAnswers={itemAnswer}
+
+              item={item}
+              callBackAnswer={
+                async () => {
+                  let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                  itemAnswer = answer.list_records
+                  initReload()
+                }
+              }
               type={"question"}
             />
             <div class="user_news_block">
               {
                 () => {
-                  return itemsAnswers.list_records.map((item, index) => {
+                  if (!itemAnswer) {
+
+                    setTimeout(async function () {
+                      let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                      itemAnswer = answer.list_records
+                      initReload()
+                    }, 1000)
                     return (
-                      <QuestionAnswerItem item={item} index={index} />
+                      <img src={svg['load']} />
                     )
-                  })
+                  } else {
+                    return itemAnswer.map((item, index) => {
+                      return (
+                        <QuestionAnswerItem item={item} index={index} />
+                      )
+                    })
+                  }
+
                 }
               }
-              {/* <QuestionAnswers
-                items={itemsAnswers.list_records}
-              /> */}
             </div>
           </div>
-          {/* </div> */}
         </div>
-
       )
-
-
-
     }, ID
   );
 };

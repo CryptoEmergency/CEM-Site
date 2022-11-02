@@ -29,7 +29,7 @@ const changeTextAnswer = (e) => {
   initReload("modals");
 };
 
-const sendAnswer = async function (e, item, onClose) {
+const sendAnswer = async function (e, res) {
   e.preventDefault();
   if (!formInputs.isValid) {
     return false;
@@ -39,16 +39,16 @@ const sendAnswer = async function (e, item, onClose) {
   let data = {
     value: {
       media: formInputs.mediaInputs.value,
-      questionId: item.item._id,
+      questionId: res.item._id,
       text: formInputs.textAnswer.value,
     }
   }
   let tmpRes = await sendApi.create("setAnswer", data);
   if (tmpRes.status === "ok") {
-    // item.onClose()
+    res.onClose()
     Variable.DelModals("ModalAnswer");
 
-    initReload();
+    //initReload();
   } else {
     Variable.SetModals(
       {
@@ -151,6 +151,7 @@ const sendVideo = async function (files) {
 
 
 const ModalAnswer = function (data, reload) {
+
   if (!reload) {
     Variable.OutHideWindows.push([elem, "ModalAnswer"])
     formInputs = {

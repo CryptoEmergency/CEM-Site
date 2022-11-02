@@ -64,6 +64,10 @@ const changeInput = function () {
     return;
 }
 
+
+/**
+ * autorization mpodal
+ */
 const WayAuthForm = function () {
     if (wayAuth == "email") {
         return (
@@ -111,6 +115,7 @@ const WayAuthForm = function () {
                 <div class='reset_by_mobile_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
                     <div class="error-div">
+                        
                         <If
                             data={formInputs.phone.error}
                             dataIf={
