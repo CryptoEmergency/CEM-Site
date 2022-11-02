@@ -176,7 +176,7 @@ const ModalAskQuestion = function (data, reload) {
       },
       textQuestion: {
         value: "",
-        show: false,
+        show: true,
       },
       mediaInputs: {
         value: [],
@@ -342,14 +342,14 @@ const ModalAskQuestion = function (data, reload) {
               {/* <div class="c-askquestion__controls create_post_control_block"> */}
               <MediaButton
 
-                onclickText={function () {
-                  if (formInputs.textQuestion.show === true) {
-                    return;
-                  } else {
-                    formInputs.textQuestion.show = true;
-                    initReload("modals");
-                  }
-                }}
+                // onclickText={function () {
+                //   if (formInputs.textQuestion.show === true) {
+                //     return;
+                //   } else {
+                //     formInputs.textQuestion.show = true;
+                //     initReload("modals");
+                //   }
+                // }}
 
                 onclickPhoto={function () {
                   if (this.files.length == 0) {

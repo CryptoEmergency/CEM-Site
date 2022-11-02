@@ -85,6 +85,8 @@ const BlockInfoPartners = function (data) {
                     })
                 }
             </div>
+
+
             <If
                 data={data && data.limit}
                 dataIf={
