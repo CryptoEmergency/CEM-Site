@@ -5,6 +5,7 @@ import {
   init,
   sendApi,
   getStorage,
+  initReload
 } from "@betarost/cemjs";
 
 import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
@@ -15,7 +16,7 @@ import { QuestionAnswerItem } from '@component/element/index.js';
 
 
 const start = function (data, ID = "mainBlock") {
-  let item,itemAnswer;
+  let item, itemAnswer;
 
 
   init(
@@ -26,13 +27,13 @@ const start = function (data, ID = "mainBlock") {
       } else {
         let response = await api({ type: "get", action: "getQuestions", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
         item = response.list_records[0]
-        let answer = await api({ type: "get", action: "getAnswers", short: true,  filter: { questionId: Variable.dataUrl.params } })
+        let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } })
         itemAnswer = answer.list_records
 
       }
     },
     async () => {
-      
+
       return (
 
         <div class="answer_container c-main__body">
@@ -41,7 +42,15 @@ const start = function (data, ID = "mainBlock") {
             <BlockQuestionsShow
               itemsAnswers={itemAnswer}
               item={item}
-
+              callBackAnswer={
+                async () => {
+                  let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } })
+                  itemAnswer = answer.list_records
+                  // itemAnswer = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
+                  console.log(itemAnswer);
+                  initReload()
+                }
+              }
               type={"question"}
             />
             <div class="user_news_block">
@@ -49,13 +58,7 @@ const start = function (data, ID = "mainBlock") {
                 () => {
                   return itemAnswer.map((item, index) => {
                     return (
-                      <QuestionAnswerItem item={item} callBackAnswer={() =>{
-                        async () => {
-                          itemAnswer = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
-                         // console.log(itemsAnswer);
-                          initReload()
-                        }
-                      }} index={index} />
+                      <QuestionAnswerItem item={item} index={index} />
                     )
                   })
                 }

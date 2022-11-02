@@ -6,7 +6,7 @@ import { If } from "@component/helpers/All.js";
 
 let elem = [];
 const BlockQuestionsShow = function ({ item, callBackAnswer, type }) {
-
+  console.log('=c2652b=', item, callBackAnswer, type)
   if (!type || type != "question") {
     return (
       <></>
@@ -18,23 +18,23 @@ const BlockQuestionsShow = function ({ item, callBackAnswer, type }) {
   проеврка на кнопку ответы
   */
   let buttonAnswer;
- if(!item.close && item.author._id !== Variable.myInfo._id && Variable.auth){
-  buttonAnswer = <div
-  class="btn-answer"
-  onclick={() => {
-    Variable.SetModals({
-      name: "ModalAnswer", data: {
-        item,
-        onClose: callBackAnswer
-      }
-    })
-  }}
->
-  <a class="btn-gr-answer">
-    <span>{Variable.lang.button.giveAnswer}</span>
-  </a>
-</div>
- }
+  if (!item.close && item.author._id !== Variable.myInfo._id && Variable.auth) {
+    buttonAnswer = <div
+      class="btn-answer"
+      onclick={() => {
+        Variable.SetModals({
+          name: "ModalAnswer", data: {
+            item,
+            onClose: callBackAnswer
+          }
+        })
+      }}
+    >
+      <a class="btn-gr-answer">
+        <span>{Variable.lang.button.giveAnswer}</span>
+      </a>
+    </div>
+  }
 
 
 
@@ -68,7 +68,7 @@ const BlockQuestionsShow = function ({ item, callBackAnswer, type }) {
           <img src={svg["question_time"]} />{" "}
           <b>{Helpers.getDateFormat(item.showDate, "lenta")}</b>{" "}
         </p>
-       {buttonAnswer}
+        {buttonAnswer}
       </div>
     </div>
   );

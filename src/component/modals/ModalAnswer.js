@@ -45,9 +45,9 @@ const sendAnswer = async function (e, res) {
   }
   let tmpRes = await sendApi.create("setAnswer", data);
   if (tmpRes.status === "ok") {
-   res.onClose()
+    res.onClose()
     Variable.DelModals("ModalAnswer");
- 
+
     //initReload();
   } else {
     Variable.SetModals(
@@ -151,6 +151,7 @@ const sendVideo = async function (files) {
 
 
 const ModalAnswer = function (data, reload) {
+  console.log('=0e8b13=', data, reload)
   if (!reload) {
     Variable.OutHideWindows.push([elem, "ModalAnswer"])
     formInputs = {
