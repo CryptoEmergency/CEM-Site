@@ -9,8 +9,9 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation } from '@src/functions.js';
+import { allValidation, validator } from '@src/functions.js';
 
+import { Input } from '@component/element/index.js';
 let wayAuth,
     formInputs,
     viewPassword,
@@ -67,25 +68,40 @@ const WayAuthForm = function () {
     if (wayAuth == "email") {
         return (
             <div>
+                <Input
+                    label={Variable.lang.label.email}
+                    error={Variable.lang.error_div.wrong_email}
+                    placeholder={Variable.lang.placeholder.email}
+                    type="text"
+                    value=""
+                    condition={(value) => {
+                        return validator.isEmail(value);
+                    }}
+                    afterValid={() => {
+                        initReload()
+                    }}
+                    Static={Static.email}
+                />
                 <div class='reset_by_email_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.email}</label>
-                    <If
-                        data={formInputs.email.error}
-                        dataIf={
-                            <div class="error-div">
+                    <div class="error-div">
+                        <If
+                            data={formInputs.email.error}
+                            dataIf={
                                 <div class="error-div-variant">{formInputs.email.errorText}</div>
-                            </div>
-                        }
-                    />
+                            }
+                        />
+                    </div>
                     <div class="reset_by_email_block_container">
                         <input
                             placeholder={Variable.lang.placeholder.email}
                             type="text"
                             data-type="email"
-                            value={formInputs.email.value}
+                            // value={formInputs.email.value}
                             oninput={changeInput}
                         />
                     </div>
+
                 </div>
             </div>
         )
@@ -94,14 +110,17 @@ const WayAuthForm = function () {
             <div>
                 <div class='reset_by_mobile_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
-                    <If
-                        data={formInputs.phone.error}
-                        dataIf={
-                            <div class="error-div">
+                    <div class="error-div">
+                        <If
+                            data={formInputs.phone.error}
+                            dataIf={
+
                                 <div class="error-div-variant">{formInputs.phone.errorText}</div>
-                            </div>
-                        }
-                    />
+
+                            }
+                        />
+                    </div>
+
                     <div class="reset_by_mobile_block_container c-phonecode">
 
                         <div class="country-phone2">
@@ -202,10 +221,18 @@ const sendAuthorization = async function (e) {
     return
 }
 
+let Static = {}
 const ModalAuth = function () {
-
+    console.log('=4ca5e6= Static', Static)
     initOne(
         () => {
+
+            Static.email = {
+                value: "",
+                valid: false,
+                error: false,
+            }
+
             Variable.OutHideWindows.push([elem, "ModalAuth"])
             wayAuth = "email"
             listCodes = Variable.phoneCodes
@@ -277,14 +304,17 @@ const ModalAuth = function () {
                         </div>
                         <div class="container-input">
                             <label for="password">{Variable.lang.label.password}</label>
-                            <If
-                                data={formInputs.pass.error}
-                                dataIf={
-                                    <div class="error-div">
+                            <div class="error-div">
+                                <If
+                                    data={formInputs.pass.error}
+                                    dataIf={
+
                                         <div class="error-div-variant">{formInputs.pass.errorText}</div>
-                                    </div>
-                                }
-                            />
+
+                                    }
+                                />
+                            </div>
+
                             <div class="input-div">
                                 <img src={svg["lock"]} class="icon-input" />
                                 <input

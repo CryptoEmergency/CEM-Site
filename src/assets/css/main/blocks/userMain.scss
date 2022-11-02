@@ -6,7 +6,7 @@
     position: relative;
     border-radius: 15px;
     right: 7.5px;
-    overflow: hidden;
+    // overflow: hidden;
 
     &__header {
         width: 100%;
@@ -24,7 +24,8 @@
         cursor: pointer;
         bottom: -30px;
         transform: translateX(-50%);
-        overflow: hidden;
+        // overflow: hidden;
+        z-index: 101;
 
         .c-avataricon {
             height: 100%;
@@ -341,8 +342,8 @@
 
     &__flag {
         display: inline-block;
-        width: 31px;
-        height: 31px;
+        width: 41px;
+        height: 41px;
         background: linear-gradient(45deg, rgb(59, 173, 227) 0px, rgb(87, 111, 230) 45%, rgb(152, 68, 183) 57%, rgb(255, 53, 127) 70%);
         border-radius: 50%;
         padding: 2px;
@@ -351,8 +352,8 @@
             position: relative;
             left: 0px;
             top: 3px;
-            height: 27px;
-            width: auto;
+            height: 100%;
+            width: 100%;
             transform: translateY(-3px);
         }
     }
@@ -385,8 +386,8 @@
         background: url('../svg/rating_heart.svg');
         background-size: cover;
         background-repeat: no-repeat;
-        width: 33px;
-        height: 29px;
+        width: 41px;
+        height: 36px;
         line-height: 28px;
         font-size: 9px;
         font-weight: 600;
@@ -438,19 +439,20 @@
     //     }
     // }
 
-    // &_list {
-    //     margin-top: 5px;
-    //     background: #2b3040;
-    //     border: 1px solid #353c50;
-    //     padding: 10px;
-    //     padding-right: 20px;
-    //     border-radius: 5px;
+    &_list {
+        width: max-content;
+        margin-top: 5px;
+        background: #2b3040;
+        border: 1px solid #353c50;
+        padding: 10px;
+        padding-right: 20px;
+        border-radius: 5px;
 
-    //     a {
-    //         color: inherit;
-    //         text-decoration: none;
-    //     }
-    // }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
 
     &_item {
         margin-bottom: 3px;

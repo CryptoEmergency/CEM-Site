@@ -29,5 +29,5 @@ const start = async function () {
     await initApp();
     await test();
 }
-//I check
+
 start();

@@ -13,7 +13,7 @@ import {
 } from '@component/blocks/index.js';
 import { ProfileTabsMenu } from '@component/element/index.js';
 
-const start = function (userInfo) {
+const start = function (userInfo, ID = "mainBlock") {
     let profilePage,
         activeItems
     Variable.HeaderShow = true
@@ -170,7 +170,7 @@ const start = function (userInfo) {
                     </div>
                 </div>
             )
-        })
+        }, ID)
 };
 
 export default start;

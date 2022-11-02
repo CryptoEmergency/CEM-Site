@@ -19,10 +19,10 @@ const banners = [
     //     "id": "62dd2ca100978d192547427c",
     //     "image": "lbf_banner"
     // },
-    {
-        "id": "62bab2ac962df43c3fd94755",
-        "image": "blockchain24"
-    },
+    // {
+    //     "id": "62bab2ac962df43c3fd94755",
+    //     "image": "blockchain24"
+    // },
     // {
     //     "id": "62f0da1ef2b8fa66345ef411",
     //     "image": "crypto_summit"
@@ -31,29 +31,49 @@ const banners = [
     //     "id": "630382384dab714d6e986cd6",
     //     "image": "1200х580-(fb)"
     // },
+    // {
+    //     "id": "62fb66bd4dab714d6e955d80",
+    //     "image": "blockchain_life"
+    // },
+    // {
+    //     "id": "62d134221de982539a72345e",
+    //     "image": "crypto_future_banner"
+    // },
+    // {
+    //     "id": "632c4007b7cd91af0a32611c",
+    //     "image": "techweek290х140"
+    // },
+    // {
+    //     "id": "6335a4b54b35372a229983f6",
+    //     "image": "chiframed290x140"
+    // },
+    // {
+    //     "id": "633abcdcaaa547a6fbb7ae22",
+    //     "image": "cryptofut"
+    // },
+    // {
+    //     "id": "631eed7583bf605a831e4a42",
+    //     "image": "banner2022-09-09"
+    // },
     {
-        "id": "62fb66bd4dab714d6e955d80",
-        "image": "blockchain_life"
+        "href": "https://metis.io/",
+        "image": "metis_banner"
     },
     {
-        "id": "62d134221de982539a72345e",
-        "image": "crypto_future_banner"
+        "href": "https://crypto-emergency.com/forum/",
+        "image": "forum_banner"
     },
     {
-        "id": "632c4007b7cd91af0a32611c",
-        "image": "techweek290х140"
+        "href": "https://blockchain24.pro/",
+        "image": "blockchain_banner"
     },
     {
-        "id": "6335a4b54b35372a229983f6",
-        "image": "chiframed290x140"
+        "href": "https://crypto.ru/",
+        "image": "crypto_banner"
     },
     {
-        "id": "633abcdcaaa547a6fbb7ae22",
-        "image": "cryptofut"
-    },
-    {
-        "id": "631eed7583bf605a831e4a42",
-        "image": "banner2022-09-09"
+        "href": "https://carding.pro/ru/glavnaya/",
+        "image": "pro_banner"
     },
 ];
 
@@ -115,8 +135,8 @@ const BlockBanners = function () {
                 slide={
                     banners.map(function (banner) {
                         return (
-                            <a class="swiper-slide">
-                                <div data-id={banner.id}>
+                            <a rel="nofollow noopener" target="_blank" href={banner.href} class="swiper-slide">
+                                <div>
                                     <img src={images[`banners/${banner.image}`]} />
                                 </div>
                             </a>

@@ -11,5 +11,5 @@ const initApp = async function () {
     await mainModal();
     await initGo("newPage")
 }
-//I check
+
 export { initApp }

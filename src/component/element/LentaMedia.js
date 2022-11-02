@@ -173,16 +173,17 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
             }
 
             if (Array.isArray(item)) {
+              let i = index;
               return (
                 // <div class="user_post_text_background">
                 <div class="swiper-slide user_post_text_background">
                   {
                     item.map((item, index) => {
-                      elem[numIndex][index] = Variable.setRef();
+                      elem[numIndex][index + i*3] = Variable.setRef();
                       return (
                         <AudioPlayerCopy
                           item={item}
-                          index={index}
+                          index={index + i*3}
                           numIndex={numIndex}
                           elem={elem}
                           path={path}

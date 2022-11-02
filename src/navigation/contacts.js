@@ -1,65 +1,41 @@
 import {
   jsx,
   jsxFrag,
-  sendApi,
   Variable,
   init,
   initReload
 } from "@betarost/cemjs";
-
-import { allValidation } from "@src/functions.js";
+// poydet
+import { validator } from "@src/functions.js";
+import { api } from '@src/apiFunctions.js'
 import svg from "@assets/svg/index.js";
-import { If } from '@component/helpers/All.js';
-import { Jivo } from '@component/element/index.js';
+import { Jivo, Input, TextArea } from '@component/element/index.js';
 
+const start = function (data, ID = "mainBlock") {
+  let Static = {}
 
-const start = function () {
-  let formInputs
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-
-  const changeInput = function () {
-    formInputs[this.dataset.type].value = this.value.trim()
-    formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
-
-    if (!formInputs[this.dataset.type].valid) {
-      formInputs[this.dataset.type].error = true;
-      this.style = "border-color: rgb(200, 23, 38);";
-      formInputs.isValid = false
-      initReload()
-      return
+  const checkValid = function () {
+    if (Static.name.valid === true && Static.email.valid === true && Static.message.valid === true) {
+      Static.isValid = true
     } else {
-      formInputs[this.dataset.type].error = false;
-      this.style = "border-color: rgb(37, 249, 48);"
-    }
-
-    let isCheckAll = false
-    if (formInputs.name.valid === true && formInputs.email.valid === true && formInputs.text.valid === true) {
-      isCheckAll = true
-    }
-
-    if (isCheckAll) {
-      formInputs.isValid = true
-    } else {
-      formInputs.isValid = false
+      Static.isValid = false
     }
     initReload()
     return;
-  };
+  }
 
-  const sendMessage = async () => {
+  const sendMessage = async (e) => {
     e.preventDefault();
-    if (!formInputs.isValid) {
+    if (!Static.isValid) {
       return false
     }
-    const name = formInputs.name.value;
-    const email = formInputs.email.value;
-    const text = formInputs.text.value;
-    const data = await sendApi.create("supportMessage", {
-      value: { email, name, text },
-    });
-    if (data.status === "ok") {
-      formInputs.messageSent = true;
+    const response = await api({
+      type: "set", action: "supportMessage", data: {
+        value: { email: Static.email.value, name: Static.name.value, text: Static.message.value },
+      }
+    })
+    if (response.status === "ok") {
+      Static.messageSent = true;
     }
     initReload()
   };
@@ -67,140 +43,124 @@ const start = function () {
   init(
     () => {
 
-      formInputs = {
-        name: {
-          value: "",
-          valid: false,
-          error: false,
-          errorText: Variable.lang.error_div.not_empty_input
-        },
-        email: {
-          value: "",
-          valid: false,
-          error: false,
-          errorText: Variable.lang.error_div.wrong_email
-        },
-        text: {
-          value: "",
-          valid: false,
-          error: false,
-          errorText: Variable.lang.error_div.not_empty_input
-        },
+      Static = {
         isValid: false,
         messageSent: false
-      };
+      }
+
+      Static.name = {
+        value: "",
+        valid: false,
+        error: false,
+      }
+
+      Static.email = {
+        value: "",
+        valid: false,
+        error: false,
+      }
+
+      Static.message = {
+        value: "",
+        valid: false,
+        error: false,
+      }
 
       if (Variable.myInfo.nickname) {
-        formInputs.name.value = Variable.myInfo.nickname
-        formInputs.name.valid = true
+        Static.name.value = Variable.myInfo.nickname
+        Static.name.valid = true
       }
 
       if (Variable.myInfo.email) {
-        formInputs.email.value = Variable.myInfo.email
-        formInputs.email.valid = true
+        Static.email.value = Variable.myInfo.email
+        Static.email.valid = true
       }
     },
-
     () => {
       return (
-        <div class={['contacts_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+        <div class='contacts_container c-main__body'>
           <div class="c-container">
             <div class="contacts_content">
               <div class="contacts_form_block">
-                <If
-                  data={formInputs.messageSent != ""}
-                  dataIf={
-                    <div class="contacts_form">
-                      <div class="modal_success">
-                        <h4>{Variable.lang.h.modal_success}</h4>
-                        <img
-                          class="modal_success_icon"
-                          src={svg["modal_success"]}
-                          width="40"
-                        />
+                {() => {
+                  if (Static.messageSent != "") {
+                    return (
+                      <div class="contacts_form">
+                        <div class="modal_success">
+                          <h4>{Variable.lang.h.modal_success}</h4>
+                          <img
+                            class="modal_success_icon"
+                            src={svg["modal_success"]}
+                            width="40"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  }
-                  dataElse={
-                    <div class="contacts_form">
-                      <h4>{Variable.lang.h.contact}</h4>
-                      <p>{Variable.lang.p.writeUs}</p>
-                      <form id="contactsForm" onsubmit={sendMessage}>
-                        <input style="display: none;" type="submit" />
-                        <div>
-                          <label for="">{Variable.lang.label.name}</label>
-                          <If
-                            data={formInputs.name.error}
-                            dataIf={
-                              <div class="error-div">
-                                <div class="error-div-variant">{formInputs.name.errorText}</div>
-                              </div>
-                            }
+                    )
+                  } else {
+                    return (
+                      <div class="contacts_form">
+                        <h4>{Variable.lang.h.contact}</h4>
+                        <p>{Variable.lang.p.writeUs}</p>
+                        <form id="contactsForm" onsubmit={sendMessage}>
+                          <input style="display: none;" type="submit" />
+                          <Input
+                            label={Variable.lang.label.name}
+                            error={Variable.lang.error_div.not_empty_input}
+                            placeholder={Variable.lang.placeholder.name}
+                            type="text"
+                            value={Static.name.value}
+                            className="contacts_form_name_icon"
+                            condition={(value) => {
+                              return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+                            }}
+                            afterValid={() => {
+                              checkValid()
+                            }}
+                            Static={Static.name}
                           />
-                          <div class="contacts_form_name_icon">
-                            <input
-                              placeholder={Variable.lang.placeholder.name}
-                              class="contacts_form_name"
-                              type="text"
-                              data-type="name"
-                              value={formInputs.name.value}
-                              oninput={changeInput}
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label for="">{Variable.lang.label.email}</label>
-                          <If
-                            data={formInputs.email.error}
-                            dataIf={
-                              <div class="error-div">
-                                <div class="error-div-variant">{formInputs.email.errorText}</div>
-                              </div>
-                            }
+                          <Input
+                            label={Variable.lang.label.email}
+                            error={Variable.lang.error_div.wrong_email}
+                            placeholder={Variable.lang.placeholder.email}
+                            type="text"
+                            value={Static.email.value}
+                            className="contacts_form_email_icon"
+                            condition={(value) => {
+                              return validator.isEmail(value);
+                            }}
+                            afterValid={() => {
+                              checkValid()
+                            }}
+                            Static={Static.email}
                           />
-                          <div class="contacts_form_email_icon">
-                            <input
-                              placeholder={Variable.lang.placeholder.email}
-                              class="contacts_form_email"
-                              type="text"
-                              data-type="email"
-                              value={formInputs.email.value}
-                              oninput={changeInput}
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label for="">{Variable.lang.label.message}</label>
-                          <If
-                            data={formInputs.text.error != ""}
-                            dataIf={
-                              <div class="error-div">
-                                <div class="error-div-variant">{formInputs.text.errorText}</div>
-                              </div>
-                            }
+                          <TextArea
+                            label={Variable.lang.label.message}
+                            error={Variable.lang.error_div.not_empty_input}
+                            placeholder={Variable.lang.placeholder.message}
+                            type="text"
+                            value={Static.message.value}
+                            condition={(value) => {
+                              return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+                            }}
+                            afterValid={() => {
+                              checkValid()
+                            }}
+                            Static={Static.message}
                           />
-                          <div>
-                            <textarea
-                              placeholder={Variable.lang.placeholder.message}
-                              value={formInputs.text.value}
-                              data-type="text"
-                              oninput={changeInput}
-                            ></textarea>
-                          </div>
                           <div
-                            style={formInputs.isValid ? "display:block; margin-top: 20px;" : "display:none"}
+                            class="search-button"
+                            hidden={!Static.isValid}
+                            onclick={sendMessage}
                           >
-                            <a class="btn-contacts" onclick={sendMessage}>
-                              <span>{Variable.lang.button.send}</span>
-                            </a>
+                            {Variable.lang.button.send}
                           </div>
-                        </div>
-                      </form>
-                    </div>
+                        </form>
+                      </div>
+                    )
                   }
-                />
+                }}
               </div>
-              <div class="contacts_info" style={[formInputs.messageSent ? "margin-top: 20px" : null]}>
+              <div class="contacts_info" style={[Static.messageSent ? "margin-top: 20px" : null]}>
                 <span class="contact_info_label">
                   {Variable.lang.span.adress}:
                 </span>
@@ -225,8 +185,7 @@ const start = function () {
           <Jivo />
         </div>
       );
-    }
+    }, ID
   );
 };
-//I check
 export default start;

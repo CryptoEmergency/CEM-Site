@@ -4,17 +4,14 @@ import {
   Variable,
   init
 } from "@betarost/cemjs";
-
-const start = function () {
-  Variable.HeaderShow = true
-  Variable.FooterShow = true
-
+// poydet
+const start = function (data, ID = "mainBlock") {
   init(
     null,
     () => {
       if (Variable.lang.lang === "Russian") {
         return (
-          <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+          <div class='c-main__body'>
             <div class="c-terms">
               <div class="c-terms__container c-container">
                 <h1 class="c-terms__title">Политика Cookies</h1>
@@ -100,7 +97,7 @@ const start = function () {
         );
       } else {
         return (
-          <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+          <div class='c-main__body'>
             <div class="c-terms">
               <div class="c-terms__container c-container">
 
@@ -166,15 +163,6 @@ const start = function () {
                   device. If you decided to refuse from our cookie files, we can\'t
                   guarantee that your visiting the web-site will be as successful as with
                   receiving cookie files.</p>
-                {/* <div class="btn-download_container">
-                  <button type="button" class="button-container sign-up btn">
-                    <a
-                      href="/assets/docs/cookieEN.pdf"
-                      class="btn-gr"
-                      target="_blank"
-                    ><span>Download</span></a>
-                  </button>
-                </div> */}
                 <div class="c-terms__action">
                   <a
                     href="/assets/docs/cookieEN.pdf"
@@ -189,7 +177,7 @@ const start = function () {
           </div>
         );
       }
-    })
+    }, ID)
 };
-//I check
+
 export default start;

@@ -23,21 +23,24 @@ const BlockMainNews = function () {
                             return (
                                 <a
                                     class="blog_news_item"
-                                    onClick={() => {
-                                        // let news = await sendApi.send({ action: "getNews", short: true, filter: { _id: newsItem._id } });
-                                        // let news = await getNewsItemInShow(newsItem._id);
-                                        // news = news.list_records[0];
-                                        // Variable.SetModals({
-                                        //     name: "ModalFullNews",
-                                        //     data: { news },
-                                        // });
-                                        // let item = news.list_records[0];
-                                            Variable.SetModals({
-                                                 name: "ModalFullSize",
-                                                 data: { item: newsItem, type: "news" },
-                                             });
-                                       
-                                    }}
+                                    onclick={Helpers.siteLinkModal}
+                                    // onclick={Helpers.siteLink}
+                                    href={`/news/show/${newsItem._id}`}
+                                // onClick={() => {
+                                //     // let news = await sendApi.send({ action: "getNews", short: true, filter: { _id: newsItem._id } });
+                                //     // let news = await getNewsItemInShow(newsItem._id);
+                                //     // news = news.list_records[0];
+                                //     // Variable.SetModals({
+                                //     //     name: "ModalFullNews",
+                                //     //     data: { news },
+                                //     // });
+                                //     // let item = news.list_records[0];
+                                //         Variable.SetModals({
+                                //              name: "ModalFullSize",
+                                //              data: { item: newsItem, type: "news" },
+                                //          });
+
+                                // }}
                                 >
                                     <img
                                         style="margin-bottom: 20px"

@@ -4,17 +4,14 @@ import {
     Variable,
     init
 } from "@betarost/cemjs";
-
-const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-
+// poydet
+const start = function (data, ID = "mainBlock") {
     init(
         null,
         () => {
             if (Variable.lang.lang === "Russian") {
                 return (
-                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                    <div class='c-main__body'>
                         <div class="c-terms">
                             <div class="c-terms__container c-container">
                                 <h1 class="c-terms__title">Политика использования данных</h1>
@@ -147,7 +144,7 @@ const start = function () {
                 );
             } else {
                 return (
-                    <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                    <div class='c-main__body'>
                         <div class="c-terms">
                             <div class="c-terms__container c-container">
                                 <h1 class="c-terms__title">Data Policy</h1>
@@ -274,12 +271,12 @@ const start = function () {
                                         <span class="c-button__text">Download</span>
                                     </a>
                                 </div>
-                           </div>
+                            </div>
                         </div>
                     </div >
                 );
             }
-        })
+        }, ID)
 };
-//I check
+
 export default start;

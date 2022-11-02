@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Helpers, Variable, sendApi, initReload } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { If} from "@component/helpers/All.js";
+import { If } from "@component/helpers/All.js";
 import {
   CommentInput,
   QuestionAnswerItemComment,
@@ -27,7 +27,7 @@ const BlockNewsShow = function ({ item, type }) {
     }
   }
 
-  
+
 
 
   let mainId = item._id;
@@ -71,16 +71,18 @@ const BlockNewsShow = function ({ item, type }) {
       <div class="news_page_comments">
         <h2>{Variable.lang.h.modal_comment}</h2>
 
+
+
         <If
-        data={
-          Variable.Static.activeInputId.length === 0 &&
-          Variable.Static.EditInput.length === 0 
-        }
-        dataIf ={
-           <CommentInput item={item} typeSet="setNews" callBack={getItem} mainId = {mainId} />
-        }
+          data={
+            Variable.Static.activeInputId.length === 0 &&
+            Variable.Static.EditInput.length === 0
+          }
+          dataIf={
+            <CommentInput item={item} typeSet="setNews" callBack={getItem} mainId={mainId} />
+          }
         />
-       
+
         <If
           data={item.comments.length > 0}
           dataIf={

@@ -1,25 +1,20 @@
 import {
     jsx,
     jsxFrag,
-    init,
-    Variable
+    init
 } from "@betarost/cemjs";
-
-const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-    let tmp = "<!--Логин в Метрике-->"
+// poydet
+const start = function (data, ID = "mainBlock") {
     init(
         null,
         () => {
-
             return (
-                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                <div class="c-main__body">
+                    {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
                     Version page
-                    {"<!--Логин в Метрике-->"}
                 </div>
             )
-        })
+        }, ID)
 };
-//I check
+
 export default start;

@@ -742,6 +742,14 @@ textarea {
         background-clip: text;
         text-fill-color: transparent;
     }
+
+    &--green {
+        background: #32DE80;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
 }
 
 .c-button {
@@ -1543,6 +1551,7 @@ textarea {
     cursor: pointer;
 
     &__arrow {
+        filter: invert(70%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%);
 
         @media (max-width: 1240px) {
             width: 7px !important;

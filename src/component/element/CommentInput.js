@@ -15,47 +15,48 @@ import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 let commentText = Variable.setRef();
 
 const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edit, callBack }) {
- 
+
   let count = 1;
   let scrollHeight = 0;
-  
-  
-//   if(Variable.Static.EditInput.length > 0){
-// let regexp = /<p>/g;
-// let matchAll =  item.text.matchAll(regexp);
-//     matchAll = Array.from(matchAll)
-//     let input = Variable.setRef()
-//     switch (matchAll.length){
-//       case 1:
-//         count = 1
-//         break;
-//       case 2:
-//         count = 2
-//         scrollHeight = 68
-//         commentText().style.cssText = "height:" + scrollHeight + "px";
-//         break;
-//       case 3:
-//         count = 3
-//         scrollHeight = 92
-//         commentText().style.cssText = "height:" + scrollHeight + "px";
-//         break;
-//       case 4:
-//         count = 4
-//         scrollHeight = 116
-//         commentText().style.cssText = "height:" + scrollHeight + "px";
-//         break;
-//       case 5:
-//       default: 
-//       count = 5
-//       scrollHeight = 116
-//       commentText().style.cssText = "height:" + scrollHeight + "px"; 
-//     }
 
-//   }
- 
-  
-  const changeTextarea = (e) => {let element = e.target;
-    
+
+  //   if(Variable.Static.EditInput.length > 0){
+  // let regexp = /<p>/g;
+  // let matchAll =  item.text.matchAll(regexp);
+  //     matchAll = Array.from(matchAll)
+  //     let input = Variable.setRef()
+  //     switch (matchAll.length){
+  //       case 1:
+  //         count = 1
+  //         break;
+  //       case 2:
+  //         count = 2
+  //         scrollHeight = 68
+  //         commentText().style.cssText = "height:" + scrollHeight + "px";
+  //         break;
+  //       case 3:
+  //         count = 3
+  //         scrollHeight = 92
+  //         commentText().style.cssText = "height:" + scrollHeight + "px";
+  //         break;
+  //       case 4:
+  //         count = 4
+  //         scrollHeight = 116
+  //         commentText().style.cssText = "height:" + scrollHeight + "px";
+  //         break;
+  //       case 5:
+  //       default: 
+  //       count = 5
+  //       scrollHeight = 116
+  //       commentText().style.cssText = "height:" + scrollHeight + "px"; 
+  //     }
+
+  //   }
+
+
+  const changeTextarea = (e) => {
+    let element = e.target;
+
     if (element.textLength === 1 && count == 1) {
       scrollHeight = element.scrollHeight;
     } else if (count !== 5 && scrollHeight < element.scrollHeight) {
@@ -71,27 +72,30 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
     }
   };
   const sendNewComment = async () => {
-
-    let text = wrapTextWithATag(commentText().value.trim());
-    let response;
-    if (text.length > 0) {
-      let responce = await sendNewCommentApi(
-        item,
-        text,
-        typeSet,
-        mainId,
-        commentId,
-        edit
-      );
-      Variable.Static.activeInputId = "";
-      Variable.Static.EditInput = "";
-      commentText().value = "";
-      if (typeof callBack == "function") {
-        callBack();
-      }else{
-         initGo();
+    if (!Variable.auth) {
+      Variable.SetModals({ name: "ModalNeedAuth", data: {} });
+      return
+    } else {
+      let text = wrapTextWithATag(commentText().value.trim());
+      let response;
+      if (text.length > 0) {
+        let responce = await sendNewCommentApi(
+          item,
+          text,
+          typeSet,
+          mainId,
+          commentId,
+          edit
+        );
+        Variable.Static.activeInputId = "";
+        Variable.Static.EditInput = "";
+        commentText().value = "";
+        if (typeof callBack == "function") {
+          callBack();
+        } else {
+          initGo();
+        }
       }
-     
     }
   };
 

@@ -5,13 +5,10 @@ import {
   Variable,
   Helpers
 } from "@betarost/cemjs";
-
+// poydet
 import svg from "@assets/svg/index.js";
 
 const start = function () {
-  Variable.HeaderShow = true
-  Variable.FooterShow = true
-
   init(
     null,
     () => {
@@ -27,5 +24,5 @@ const start = function () {
       )
     })
 };
-//I check
+
 export default start;

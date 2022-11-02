@@ -52,6 +52,10 @@ const partners = [
     {
         "link": "https://digitalitmed.ru/",
         "image": "cifromed"
+    },
+    {
+        "link": "https://crypto.ru/",
+        "image": "cryptoru"
     }
 ];
 

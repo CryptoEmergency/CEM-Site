@@ -62,7 +62,7 @@ const BlockComments = function ({ comments }) {
               class={[!auth ? "comment_inactive" : null]}
             />
           </div>
-          <div class="c-actioncomment__counter">{item.statistic.rating}</div>
+          <div class="c-actioncomment__counter">{ item.statistic.rating ? item.statistic.rating : 0}</div>
           <div class="c-actioncomment__btn c-actioncomment__btn--like">
             <img
               src={svg["like"]}

@@ -122,7 +122,8 @@ const BlockProjects = function () {
         {
             "title": Variable.lang.a.exchange,
             "icon": "shuffle",
-            "link": "list-exchange"
+            "link": "list-exchange",
+            modal: true
         },
         // {
         //     "title": Variable.lang.a.university,
@@ -132,7 +133,8 @@ const BlockProjects = function () {
         {
             "title": Variable.lang.a.contentCreater,
             "icon": "graph",
-            "link": "content-creator"
+            "link": "content-creator",
+            modal: true
         },
         // {
         //     "title": Variable.lang.a.starups,
@@ -152,17 +154,20 @@ const BlockProjects = function () {
         {
             "title": Variable.lang.a.trade,
             "icon": "stock-market",
-            "link": "list-trade"
+            "link": "list-trade",
+            modal: true
         },
         {
             "title": Variable.lang.a.news,
             "icon": "world-news",
-            "link": "news"
+            "link": "news",
+            modal: true
         },
         {
             "title": Variable.lang.a.experts,
             "icon": "user",
-            "link": "experts"
+            "link": "experts",
+            modal: true
         },
         // {
         //     "title": Variable.lang.a.nft,
@@ -172,7 +177,8 @@ const BlockProjects = function () {
         {
             "title": Variable.lang.a.career,
             "icon": "careers_icon",
-            "link": "career-whith-us"
+            "link": "career-whith-us",
+            modal: true
         },
     ];
 

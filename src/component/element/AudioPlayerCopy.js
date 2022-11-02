@@ -87,17 +87,17 @@ let controlTotalClick = function (e, progressLine, currentTime, mainElement) {
   mainElement().currentTime = tmp;
 };
 
-const AudioPlayerCopy = function ({ item, numIndex, index, path, elem }) {
-  let mainElement = elem[numIndex][index];
+const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
+  let mainElement =elem ? elem[numIndex][index] : el[index];
   let fullTime = Variable.setRef();
   let currentTime = Variable.setRef();
   let progressLine = Variable.setRef();
   return (
-    <div id={item._id} class="audio_container">
+    <div id={item._id || ""} class="audio_container">
       {/* <audio preload="none" onended="playerEnded(event, this)" onplay="playerPlay(event, this)" onpause="playerPause(event, this)" oncanplay="playerCanplay(event, this)" ontimeupdate="playerTimeupdate(event, this)" src="{{path}}{{src}}"></audio> */}
       <audio
         preload="metadata"
-        ref={elem[numIndex][index]}
+        ref={elem? elem[numIndex][index] :  el[index]}
         onended={(e) => playerEnded(e)}
         onplay={(e) => playerPlay(e)}
         onpause={(e) => playerPause(e)}

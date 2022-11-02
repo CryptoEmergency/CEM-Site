@@ -4,162 +4,140 @@ import {
     Variable,
     init
 } from "@betarost/cemjs";
-
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
-
-const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
+// poydet
+const start = function (data, ID = "mainBlock") {
 
     init(
         null,
         () => {
             return (
-                <div class={['jobs_container', Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-                    <div class="jobs_page">
-                        <div class="jobs_preview">
-                            <div class="blue_blur"></div>
-                            <div class="jobs_preview_text">
-                                <h3>{Variable.lang.h.career_with_us}</h3>
+                <div class="c-jobs c-main__body">
+                    <div class="c-jobs__page">
+                        <div class="c-jobs__preview">
+                            <div class="c-jobs__textpreview">
+                                <h3 class="c-jobs__title">{Variable.lang.h.career_with_us}</h3>
                                 <p>{Variable.lang.p.connectTeam}</p>
-                                <div class="button-container-preview">
-                                    <a class="btn-news-preview" href="">
-                                        <span>
-                                            {Variable.lang.button.our_vacancies}
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="jobs_preview_image">
-                                <img src={images["background/jobs_preview"]} />
+                                <a href="" class="c-button c-button--primary">
+                                    <span class="c-button__text">{Variable.lang.button.our_vacancies}</span>
+                                </a>
                             </div>
                         </div>
 
-                        <div class="jobs_advantages">
-                            <h2>{Variable.lang.h.advantages}</h2>
-                            <div class="jobs_advantages_list">
-                                <div class="jobs_advantages_item">
-                                    <div class="jobs_advantages_item_img">
-                                        <img src={svg["advantages_icon-1"]} />
-                                    </div>
+                        <div class="c-jobs__advantages">
+                            <h2 class="c-jobs__subtitle">{Variable.lang.h.advantages}</h2>
+                            <div class="c-jobs__listadvantages">
+                                <div class="c-jobs__itemadvantages">
+                                    <div class="c-jobs__iconadvantages c-jobs__iconadvantages--comand"></div>
                                     <h5>{Variable.lang.p.friendlyTeam}</h5>
                                     <p>{Variable.lang.p.friendlyTeamDesc}</p>
                                 </div>
-                                <div class="jobs_advantages_item">
-                                    <div class="jobs_advantages_item_img">
-                                        <img src={svg["advantages_icon-2"]} />
-                                    </div>
+                                <div class="c-jobs__itemadvantages">
+                                    <div class="c-jobs__iconadvantages c-jobs__iconadvantages--company"></div>
                                     <h5>{Variable.lang.p.IntCcompany}</h5>
                                     <p>{Variable.lang.p.IntCcompanyDesc}</p>
                                 </div>
-                                <div class="jobs_advantages_item">
-                                    <div class="jobs_advantages_item_img">
-                                        <img src={svg["advantages_icon-3"]} />
-                                    </div>
+                                <div class="c-jobs__itemadvantages">
+                                    <div class="c-jobs__iconadvantages c-jobs__iconadvantages--comfortable"></div>
                                     <h5>{Variable.lang.p.comfortWorking}</h5>
                                     <p>{Variable.lang.p.comfortWorkingDesc}</p>
                                 </div>
-                                <div class="jobs_advantages_item">
-                                    <div class="jobs_advantages_item_img">
-                                        <img src={svg["advantages_icon-4"]} />
-                                    </div>
+                                <div class="c-jobs__itemadvantages">
+                                    <div class="c-jobs__iconadvantages c-jobs__iconadvantages--contract"></div>
                                     <h5>{Variable.lang.p.employmentStandart}</h5>
                                     <p>{Variable.lang.p.employmentStandartDesc}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="jobs_profession">
-                            <h2>{Variable.lang.h.profession}</h2>
-                            <div class="jobs_profession_list">
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-1"]} /><span>{Variable.lang.p.professionOne}</span>
-                                    </div>
+
+                        <div class="c-jobs__profession">
+                            <h2 class="c-jobs__subtitle">{Variable.lang.h.profession}</h2>
+                            <div class="c-jobs__listprofession">
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--business"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionOne}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-2"]} /><span>{Variable.lang.p.professionTwo}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--marketing"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionTwo}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-3"]} /><span>{Variable.lang.p.professionThree}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--support"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionThree}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-4"]} /><span>{Variable.lang.p.professionFour}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionFour}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-5"]} /><span>{Variable.lang.p.professionFive}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionFive}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-6"]} /><span>{Variable.lang.p.professionSix}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--management"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionSix}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-1"]} /><span>{Variable.lang.p.professionSeven}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--strategic"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionSeven}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-2"]} /><span>{Variable.lang.p.professionEight}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--department"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionEight}</span>
+                                    </span>
                                 </a>
-                                <a href="" class="jobs_profession_item">
-                                    <div class="jobs_profession_item_inner">
-                                        <img src={svg["profession_icon-3"]} /><span>{Variable.lang.p.professionNine}</span>
-                                    </div>
+                                <a href="" class="c-jobs__itemprofession">
+                                    <span class="c-jobs__wrapprofession">
+                                        <i class="c-jobs__iconprofession c-jobs__iconprofession--videoediting"></i>
+                                        <span class="c-jobs__textprofession">{Variable.lang.p.professionNine}</span>
+                                    </span>
                                 </a>
                             </div>
                         </div>
-                        <div class="jobs_how">
-                            <h2>{Variable.lang.h.how_get_job}</h2>
-                            <div class="jobs_how_list">
-                                <div class="jobs_how_item">
-                                    <div class="jobs_gradient_circle_container">
-                                        <div class="jobs_gradient_circle"></div><img src={svg["jobs_points_line"]} />
-                                    </div>
+
+                        <div class="c-jobs__how">
+                            <h2 class="c-jobs__subtitle">{Variable.lang.h.how_get_job}</h2>
+                            <div class="c-jobs__listhow">
+                                <div class="c-jobs__itemhow">
                                     <span>01</span>
                                     <p>{Variable.lang.p.stepGetJobOne}</p>
                                 </div>
-                                <div class="jobs_how_item">
-                                    <div class="jobs_gradient_circle_container">
-                                        <div class="jobs_gradient_circle"></div><img src={svg["jobs_points_line"]} />
-                                    </div>
+                                <div class="c-jobs__itemhow">
                                     <span>02</span>
                                     <p>{Variable.lang.p.stepGetJobTwo}</p>
                                 </div>
-                                <div class="jobs_how_item">
-                                    <div class="jobs_gradient_circle_container">
-                                        <div class="jobs_gradient_circle"></div><img src={svg["jobs_points_line"]} />
-                                    </div>
+                                <div class="c-jobs__itemhow">
                                     <span>03</span>
                                     <p>{Variable.lang.p.stepGetJobThree}</p>
                                 </div>
-                                <div class="jobs_how_item">
-                                    <div class="jobs_gradient_circle_container">
-                                        <div class="jobs_gradient_circle"></div><img src={svg["jobs_points_line"]} />
-                                    </div>
+                                <div class="c-jobs__itemhow">
                                     <span>04</span>
                                     <p>{Variable.lang.p.stepGetJobFour}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="job_work_with_us">
-                            <h2>{Variable.lang.p.waitYouTeam}</h2>
+                        <div class="c-job__withus">
+                            <h2 class="c-jobs__subtitle">{Variable.lang.p.waitYouTeam}</h2>
                         </div>
                     </div>
                 </div>
             )
-        }
+        }, ID
     )
 };
-//I check
+
 export default start;

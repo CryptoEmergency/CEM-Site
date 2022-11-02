@@ -21,5 +21,9 @@ export { QuestionAnswerItem } from "./QuestionAnswerItem.js"
 export { MediaPreview } from "./MediaPreview.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
+export { AnswerAdditionallyToggleNew } from "./AnswerAdditionallyToggleNew.js";
 export { SwitchLenta } from "./SwitchLenta.js";
 export { AwardsProgress } from "./AwardsProgress.js";
+export { Input } from "./Input.js";
+export { TextArea } from "./TextArea.js";
+export { Test } from "./Test.js";

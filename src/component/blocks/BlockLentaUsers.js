@@ -22,7 +22,7 @@ import { Slider } from "@component/element/Slider.js";
 import {
   Avatar,
   Likes,
-  AnswerAdditionallyToggle,
+  AnswerAdditionallyToggleNew,
   CommentInput
 } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
@@ -48,8 +48,6 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
     }
   }
 
-  console.log('=d747c6=', 'AnswerAdditionallyToggle = ')
-  console.log('=d747c6=', item)
 
   return (
 
@@ -105,17 +103,17 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
           <div class="main_comment">
             <Avatar author={item.author} nickName={item.author.nickname} />
             <div class="comment_icons">
-              <AnswerAdditionallyToggle
+              <AnswerAdditionallyToggleNew
                 item={item}
                 typeApi={"setPost"}
                 type={{
-                  delete: true,
-                  edit: true,
-                  complainPost: true,
-                  complainUser: true,
-                  blackList: true,
-                  subscription: true,
                   share: true,
+                    edit: true,
+                    delete: true,
+                    subscription: true,
+                    complainPost: true,
+                    complainUser: true,
+                    blackList: true,
                 }}
                 mainId={mainId}
                 callBack={getItem}
@@ -175,7 +173,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                   </span>
                 </div>
               ) : (
-                <span class="comment_text">
+                <span class="comment_text 77">
                   {stringToHtml(Helpers.sanitizeHtml(item.text))}
                   {/* {parseTextforJsx(item.text).map((item)=>{
                     return item
@@ -257,7 +255,6 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
               // let post;
               // post = await getPostsItemInShow(item._id);
               // post = post.list_records[0];
-              // console.log('=item1111111111111111=',item)
               if (total !== undefined && e.target.dataset.name === undefined)
                 Variable.SetModals({
                   name: "ModalFullSize",
@@ -271,17 +268,17 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
             <div class="main_comment">
               <Avatar author={item.author} nickName={item.author.nickname} />
               <div class="comment_icons">
-                <AnswerAdditionallyToggle
+                <AnswerAdditionallyToggleNew
                   item={item}
                   typeApi={"setPost"}
                   type={{
-                    delete: true,
+                    share: true,
                     edit: true,
+                    delete: true,
+                    subscription: true,
                     complainPost: true,
                     complainUser: true,
                     blackList: true,
-                    subscription: true,
-                    share: true,
                   }}
                   mainId={mainId}
                   callBack={getItem}
