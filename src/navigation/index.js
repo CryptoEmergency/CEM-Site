@@ -75,7 +75,7 @@ const start = function () {
         () => {
             // console.log(Variable)
             return (
-                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                <div class="c-main__body">
                     <BlockPreview />
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
