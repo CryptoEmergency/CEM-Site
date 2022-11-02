@@ -18,7 +18,6 @@ Variable.Static.answerAdditionally = "";
 Variable.Static.EditInput = "";
 let elem = [];
 const QuestionAnswerItem = function ({ item, index }) {
-  // console.log('=item=', item)
   let mainId = item._id;
   elem = [];
   elem[0] = [];
