@@ -13,7 +13,7 @@ const start = function (data, ID = "mainBlock") {
     null,
     () => {
       return (
-        <div class='c-main__body'>
+        <div class='affiliate c-main__body'>
           <img
             class="affiliate_program_blur"
             style="position: absolute; right: 0;"

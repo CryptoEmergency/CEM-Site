@@ -58,7 +58,7 @@ const ModalPage = async function (ID, reload) {
                       {/* <span class="c-goback__text">{Variable.lang.span.back}</span> */}
                     </a>
 
-                    <h5>{data.title}</h5>
+                    <h5 class="c-fullnews__title">{data.title}</h5>
 
                     <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
                       <img class="answer_additionally_toggle_img" src={svg["points"]} />
