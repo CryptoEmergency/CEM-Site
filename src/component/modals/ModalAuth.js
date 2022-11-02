@@ -63,7 +63,10 @@ const changeInput = function () {
     initReload("modals")
     return;
 }
-
+/**
+ * Inputs
+ * 
+ */
 const WayAuthForm = function () {
     if (wayAuth == "email") {
         return (

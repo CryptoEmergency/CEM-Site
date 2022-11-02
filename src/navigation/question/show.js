@@ -11,69 +11,59 @@ import { getQuestionsItemInShow } from "@src/apiFunctionsE.js";
 import { api } from '@src/apiFunctions.js'
 
 import { BlockQuestionsShow } from '@component/blocks/index.js';
-import { QuestionAnswers, QuestionAnswerItem } from '@component/element/index.js';
+import { QuestionAnswerItem } from '@component/element/index.js';
 
 
 const start = function (data, ID = "mainBlock") {
-  let items,
-    itemsAnswers
+  let item,itemAnswer;
 
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-  let question, answers, myInfo, mediaWithOutAudio, mediaOnlyAudio;
 
   init(
     async () => {
-      question = await getQuestionsItemInShow(
-        Variable.dataUrl.params,
-        "getQuestions"
-      );
-      question = question.list_records[0];
-      mediaWithOutAudio = question.media.filter((i) => i.type !== "audio");
-      mediaOnlyAudio = question.media.filter((i) => i.type === "audio");
-      answers = await getQuestionsItemInShow(
-        Variable.dataUrl.params,
-        "getAnswers"
-      );
-      Variable.Static.mainIdforLikes = question._id;
-      myInfo = getStorage("myInfo");
-      items = await sendApi.send({ action: "getQuestions", short: true, filter: { _id: Variable.dataUrl.params } });
-      // itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
+      if (data && data.item) {
+        item = data.item
+
+      } else {
+        let response = await api({ type: "get", action: "getQuestions", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
+        item = response.list_records[0]
+        let answer = await api({ type: "get", action: "getAnswers", short: true,  filter: { questionId: Variable.dataUrl.params } })
+        itemAnswer = answer.list_records
+
+      }
     },
     async () => {
-      itemsAnswers = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
-
+      
       return (
-        <div class={["answer_container", Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
-          {/* <div class="full_news_container"> */}
+
+        <div class="answer_container c-main__body">
+
           <div class="answer_block" style="flex-direction: column;">
             <BlockQuestionsShow
-              itemsAnswers={itemsAnswers}
-              item={items.list_records[0]}
+              itemsAnswers={itemAnswer}
+              item={item}
+
               type={"question"}
             />
             <div class="user_news_block">
               {
                 () => {
-                  return itemsAnswers.list_records.map((item, index) => {
+                  return itemAnswer.map((item, index) => {
                     return (
-                      <QuestionAnswerItem item={item} index={index} />
+                      <QuestionAnswerItem item={item} callBackAnswer={() =>{
+                        async () => {
+                          itemAnswer = await sendApi.send({ action: "getAnswers", short: true, filter: { questionId: Variable.dataUrl.params } });
+                         // console.log(itemsAnswer);
+                          initReload()
+                        }
+                      }} index={index} />
                     )
                   })
                 }
               }
-              {/* <QuestionAnswers
-                items={itemsAnswers.list_records}
-              /> */}
             </div>
           </div>
-          {/* </div> */}
         </div>
-
       )
-
-
-
     }, ID
   );
 };
