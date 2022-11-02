@@ -157,7 +157,7 @@ const ModalAnswer = function (data, reload) {
       textAnswer: {
         value: "",
         error: "",
-        show: false,
+        show: true,
       },
       mediaInputs: {
         value: [],
@@ -254,14 +254,14 @@ const ModalAnswer = function (data, reload) {
 
             <MediaButton
 
-              onclickText={function () {
-                if (formInputs.textAnswer.show === true) {
-                  return;
-                } else {
-                  formInputs.textAnswer.show = true;
-                  initReload("modals");
-                }
-              }}
+              // onclickText={function () {
+              //   if (formInputs.textAnswer.show === true) {
+              //     return;
+              //   } else {
+              //     formInputs.textAnswer.show = true;
+              //     initReload("modals");
+              //   }
+              // }}
 
               onclickPhoto={function () {
                 if (this.files.length == 0) {
