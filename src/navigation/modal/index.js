@@ -20,6 +20,9 @@ const mainModal = async function () {
         async (reload) => {
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
+                if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+                    Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+                }
                 // document.querySelector('body').style = "";
                 return <div></div>
             }
