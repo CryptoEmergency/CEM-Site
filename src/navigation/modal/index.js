@@ -21,7 +21,7 @@ const mainModal = async function () {
         async (reload) => {
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
-                document.querySelector('body').style = "";
+                // document.querySelector('body').style = "";
                 return <div></div>
             }
             let modals = []
@@ -52,7 +52,7 @@ const mainModal = async function () {
 
             if (!modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
-                document.querySelector('body').style = "";
+                // document.querySelector('body').style = "";
                 return <div></div>
             }
 
@@ -69,7 +69,7 @@ const mainModal = async function () {
             //     console.log('=0602d4= modals 3', Variable.Static.reloadModals, item.reload)
             // }
             document.getElementById('backdrop').classList.add("c-backdrop--show");
-            document.querySelector('body').style = "overflow: hidden";
+            // document.querySelector('body').style = "overflow: hidden";
             return (
                 <div>{mm}</div>
             )
