@@ -14,23 +14,17 @@ import {
 
   const start = function (data, ID = "mainBlock") {
     let item;
-  
+
   
     init(
+
+        
       async () => {
         if (data && data.item) {
           item = data.item
-  
         } else {
-
-          //  let response2 = await api({ type: "get", action: "getPost", short: true, limit: 1 })
-        
-
           let response = await api({ type: "get", action: "getPost", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
           item = response.list_records[0]
-        
-           
- 
         }
       },
       async () => {
