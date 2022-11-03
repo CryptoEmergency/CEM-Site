@@ -24,6 +24,11 @@ const mainHeader = async function () {
                     document.querySelectorAll('jdiv')[0].remove()
                 }
             }
+
+            // if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+            //     Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+
+            // }
         },
         () => {
             if (Variable.Static.HeaderShow) {

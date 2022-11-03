@@ -8,7 +8,7 @@ import svg from '@assets/svg/index.js';
 
 const checkInput = function (Static, target) {
 
- 
+
     if (Static.timer) {
         clearTimeout(Static.timer);
     }
@@ -19,7 +19,7 @@ const checkInput = function (Static, target) {
             return
         }
         Static.valid = Static.condition(target.value.trim())
-        console.log(Static)
+
         Static.error = !Static.valid
         if (Static.error) {
             target.style = "border-color: rgb(200, 23, 38);";
@@ -34,16 +34,16 @@ const checkInput = function (Static, target) {
 }
 
 const Input = function ({ Static, classDiv, classInput, befor, after }) {
-
+    console.log('=1c814c=', Static)
     let labelfor;
 
-    if(Static.label!=="phone"){
-        labelfor =  <label>{Static.label}</label>
+    if (Static.label !== "phone") {
+        labelfor = <label>{Static.label}</label>
     }
 
     return (
         <div>
-           {labelfor}
+            {labelfor}
             <div class="error-div">
                 {Static.error ? <div class="error-div-variant">{Static.errorText}</div> : null}
             </div>
