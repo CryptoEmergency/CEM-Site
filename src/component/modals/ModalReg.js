@@ -25,26 +25,6 @@ const changeSearch = (e) => {
     initReload("modals");
 }
 
-/*
-const checkValid = function () {
-    if (wayReg == "email") {
-        if (Static.email.valid && Static.pass.valid && Static.agreement.value) {
-            Static.isValid = true
-        } else {
-            Static.isValid = false
-        }
-    } else {
-        if (Static.phone.valid && Static.pass.valid && Static.agreement.value) {
-            Static.isValid = true
-        } else {
-            Static.isValid = false
-        }
-    }
-    initReload()
-    return;
-}*/
-
-
 
 const sendRegistration = async function (e) {
     e.preventDefault();
@@ -62,10 +42,7 @@ const sendRegistration = async function (e) {
         data.phone = `+${Static['phone'].code}${Static['phone'].value}`
         data.co = Static['phone'].abbr
     }
-
-    console.log('=c439d4=', data)
     let tmpRes = await sendApi.create("registration", { value: data });
-    console.log('=c439d4 tmpRes=', tmpRes)
     if (tmpRes.status === 'ok') {
         Variable.DelModals("ModalReg")
         Variable.SetModals({ name: "ModalConfirmCode", data: { way: wayReg } })
@@ -188,7 +165,10 @@ const ModalReg = function () {
                                     return
                                 }
                                 wayReg = "email"
-                                initReload("modals")
+                                Static.email.value = ""
+                                Static.email.error = false
+                                Static.email.valid = false
+                                checkValid(Static,[wayReg,"pass","agreement"])
                             }}
                         >
                             {Variable.lang.button.email}
@@ -198,10 +178,15 @@ const ModalReg = function () {
                             class={['c-button c-button--toggler', wayReg == "phone" ? 'c-button--active' : null]}
                             onClick={() => {
                                 if (wayReg == "phone") {
+                                 
                                     return
                                 }
                                 wayReg = "phone"
-                                initReload("modals")
+                    
+                                Static.phone.value = ""
+                                Static.phone.error = false
+                                Static.phone.valid = false
+                                checkValid(Static,[wayReg,"pass","agreement"])
                             }}
                         >
                             {Variable.lang.button.phone}

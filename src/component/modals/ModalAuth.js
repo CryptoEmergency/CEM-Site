@@ -158,7 +158,7 @@ const ModalAuth = function () {
         },
         afterValid:() => {
             
-           checkValid(Static,["email","pass"])
+           checkValid(Static,[wayAuth,"pass"])
          
         }
     }
@@ -178,7 +178,7 @@ const ModalAuth = function () {
         },
         afterValid:() => {
             
-            checkValid(Static,["email","pass"])
+            checkValid(Static,[wayAuth,"pass"])
           
          }
     }
@@ -199,7 +199,7 @@ const ModalAuth = function () {
         },
         afterValid:() => {
             
-            checkValid(Static,["phone","pass"])
+            checkValid(Static,[wayAuth,"pass"])
           
          }
     }
@@ -228,7 +228,11 @@ const ModalAuth = function () {
                             class={`c-button c-button--toggler ${wayAuth == "email" && "c-button--active"}`}
                             onClick={() => {
                                 wayAuth = "email"
-                                initReload("modals")
+                                Static.email.value = ""
+                                Static.email.error = false
+                                Static.email.valid = false
+                                checkValid(Static,[wayAuth,"pass"])
+                                   console.log(" email" +Static.isValid)
                             }}>
                             {Variable.lang.button.email}
                         </button>
@@ -236,7 +240,12 @@ const ModalAuth = function () {
                             class={`c-button c-button--toggler ${wayAuth == "phone" && "c-button--active"}`}
                             onClick={() => {
                                 wayAuth = "phone"
-                                initReload("modals")
+                                Static.phone.value = ""
+                                Static.phone.error = false
+                                Static.phone.valid = false
+                                checkValid(Static,[wayAuth,"pass"])
+                             console.log(" phone" +Static.isValid)
+
                             }}>
                             {Variable.lang.button.phone}
                         </button>
