@@ -3,8 +3,6 @@ import {
   jsxFrag,
   Variable,
   init,
-  sendApi,
-  getStorage,
   initReload
 } from "@betarost/cemjs";
 

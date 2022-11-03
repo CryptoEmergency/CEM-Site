@@ -96,18 +96,48 @@ const ModalReg = function () {
                 error: false,
                 code: 7,
                 abbr: "ru",
+                label: Variable.lang.label.phone,
+                placeholder: "9990000000",
+                errorText: Variable.lang.error_div.wrong_phone,
+                type: "text",
+                condition: (value) => {
+                    return validator.matches(value, /[0-9]{9,13}/i);
+                },
+                afterValid: checkValid
             }
 
             Static.email = {
                 value: "",
                 valid: false,
                 error: false,
+                label: Variable.lang.label.email,
+                placeholder: Variable.lang.placeholder.email,
+                errorText: Variable.lang.error_div.wrong_email,
+                type: "text",
+                condition: (value) => {
+                    return validator.isEmail(value);
+                },
+                afterValid: checkValid
             }
 
             Static.pass = {
                 value: "",
                 valid: false,
                 error: false,
+                label: Variable.lang.label.password,
+                placeholder: Variable.lang.placeholder.password,
+                errorText: Variable.lang.error_div.password5,
+                type: "password",
+                condition: (value) => {
+                    return validator.isStrongPassword(value, {
+                        minLength: 8,
+                        minLowercase: 0,
+                        minUppercase: 0,
+                        minNumbers: 0,
+                        minSymbols: 1,
+                    });
+                },
+                afterValid: checkValid
             }
 
             Static.agreement = {
@@ -173,18 +203,7 @@ const ModalReg = function () {
                                     if (wayReg == "email") {
                                         return (
                                             <Input
-                                                label={Variable.lang.label.email}
-                                                error={Variable.lang.error_div.wrong_email}
-                                                placeholder={Variable.lang.placeholder.email}
-                                                type="text"
-                                                value={Static.email.value}
-                                                className="contacts_form_email_icon"
-                                                condition={(value) => {
-                                                    return validator.isEmail(value);
-                                                }}
-                                                afterValid={() => {
-                                                    checkValid()
-                                                }}
+                                                classDiv="contacts_form_email_icon"
                                                 Static={Static.email}
                                             />
                                         )
@@ -196,20 +215,9 @@ const ModalReg = function () {
                                                     <div class="reset_by_mobile_block_container c-phonecode">
 
                                                         <Input
-                                                            label={Variable.lang.label.phone}
-                                                            error={Variable.lang.error_div.wrong_phone}
-                                                            placeholder="9990000000"
-                                                            type="text"
-                                                            value={Static.phone.value}
-                                                            className=""
-                                                            condition={(value) => {
-                                                                return validator.matches(value, /[0-9]{10}/i);
-                                                            }}
-                                                            afterValid={() => {
-                                                                checkValid()
-                                                            }}
+                                                            classInput="phoneNubmerInput2"
                                                             Static={Static.phone}
-                                                            dopBefor={
+                                                            befor={
                                                                 <div class="country-phone2">
                                                                     <div class="country-phone-selector2">
                                                                         <div
@@ -277,24 +285,7 @@ const ModalReg = function () {
 
                         <div class="container-input">
                             <Input
-                                label={Variable.lang.label.password}
-                                error={Variable.lang.error_div.password5}
-                                placeholder={Variable.lang.placeholder.password}
-                                type="password"
-                                value={Static.pass.value}
-                                className="input-div"
-                                condition={(value) => {
-                                    return validator.isStrongPassword(value, {
-                                        minLength: 8,
-                                        minLowercase: 0,
-                                        minUppercase: 0,
-                                        minNumbers: 0,
-                                        minSymbols: 1,
-                                    });
-                                }}
-                                afterValid={() => {
-                                    checkValid()
-                                }}
+                                classDiv="input-div"
                                 Static={Static.pass}
                             />
                         </div>
