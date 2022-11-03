@@ -14,7 +14,7 @@ import { ButtonShowMore } from '@component/element/index.js';
 
 import { api } from '@src/apiFunctions.js'
 
-const start = function () {
+const start = function (data, ID = "mainBlock") {
     let filtersQuestions
 
     init(
@@ -65,7 +65,7 @@ const start = function () {
                     />
                 </div>
             )
-        }
+        }, ID
     )
 }
 

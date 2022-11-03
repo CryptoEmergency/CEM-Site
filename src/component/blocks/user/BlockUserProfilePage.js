@@ -276,7 +276,7 @@ BlockUserProfilePage.subscribers = function (data) {
                 {
                   data.items.list_records.map( (item, index) => {
                     return (
-                        < div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
+                        <div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
                             <Avatar author={item} />
                             <div class="friend_info">
                                 <p>{item.nickname}</p>
@@ -455,7 +455,7 @@ BlockUserProfilePage.answers = function (data) {
                                             author={item.questionId.author}
                                         />
                                         <div>
-                                            <a href={'/question/show/' + item.questionId._id} onclick={Helpers.siteLink}>
+                                            <a href={'/question/show/' + item.questionId._id} onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers }) }}>
                                                 <div class="user_question_title">
                                                     {item.questionId.title}
                                                 </div>
@@ -561,7 +561,7 @@ BlockUserProfilePage.questions = function (data) {
                         return (
                             <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
                                 <div class="your_answers_main">
-                                    <a href={'/question/show/' + item._id} onclick={Helpers.siteLink}>
+                                    <a href={'/question/show/' + item._id} onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers }) }}>
                                         <div class="user_question_title">
                                             {item.title}
                                         </div>
