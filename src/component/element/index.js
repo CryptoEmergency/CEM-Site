@@ -27,4 +27,5 @@ export { AwardsProgress } from "./AwardsProgress.js";
 export { Input } from "./Input.js";
 export { CheckBox } from "./CheckBox.js";
 export { TextArea } from "./TextArea.js";
+export { CourseCurrency } from "./CourseCurrency.js";
 export { Test } from "./Test.js";

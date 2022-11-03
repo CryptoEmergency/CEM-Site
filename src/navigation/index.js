@@ -11,11 +11,11 @@ import {
     Helpers
 } from '@betarost/cemjs';
 import { If } from '@component/helpers/All.js';
-import { BlockUsers, BlockMainNews, BlockBanners, BlockExchange, BlockInfoPartners } from '@component/blocks/index.js';
+import { BlockUsers, BlockMainNews, BlockBanners, BlockExchange, BlockInfoPartners, BlockPreview, BlockProjects } from '@component/blocks/index.js';
+
 
 import images from "@assets/images/index.js";
-import { BlockPreview } from '@component/blocks/BlockPreview.js';
-import { BlockProjects } from '@component/blocks/BlockProjects.js';
+
 import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
 import { BlockTrade } from '@component/blocks/BlockTrade.js';
 
@@ -24,8 +24,6 @@ const start = function () {
     let filters,
         filtersQuestions
     let type = "all"
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
     Variable.visibleFilterUser = false
 
     init(
@@ -60,32 +58,25 @@ const start = function () {
                 },
                 desc: -1
             }
-            Variable.Course = await sendApi.send({ action: "getCourse", short: true, cache: true, name: "Course" });
             Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
             Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
-            // Variable.MainExchanges = await sendApi.send({ action: "getExchange", short: true, cache: true, name: "MainExchanges" });
-            // Variable.MainUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "MainUsers", filter: Helpers.getFilterUsers(filters, type) });
-            // Variable.MainNews = await sendApi.send({ action: "getNews", short: true, cache: true, name: "MainNews" });
             timersStart("Course", async () => { Variable.Course = await sendApi.send({ action: "getCourse", short: true }) }, 10000)
-
         },
         () => {
-            // console.log(Variable)
             return (
                 <div class="c-main__body">
                     <BlockPreview />
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
-                        <If
-                            data={Variable.lang.code == "ru"}
-                            dataIf={
-                                <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
-                                    <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
-                                </a>
+                        {() => {
+                            if (Variable.lang.code == "ru") {
+                                return (
+                                    <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
+                                        <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
+                                    </a>
+                                )
                             }
-                        />
-
-
+                        }}
                         <BlockQuestions
                             version={Variable.dataUrl}
                             filters={filtersQuestions}
