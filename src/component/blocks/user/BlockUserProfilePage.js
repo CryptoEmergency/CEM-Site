@@ -358,7 +358,7 @@ BlockUserProfilePage.friends = function (data) {
                 {
                     data.items.list_records[0].subscribed.map((item, index) => {
                         return (
-                            < div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
+                            <div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
                                 <Avatar author={item} />
                                 <div class="friend_info">
                                     <p>{item.nickname}</p>

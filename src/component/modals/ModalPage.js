@@ -26,6 +26,7 @@ let news;
 
 const ModalPage = async function (ID, reload) {
   let data = Variable.ModalsPage[ID].data
+  console.log('=ba46ca=',data)
   // console.log('=c1d88c=2 ModalPage', getInitList(), Variable.ModalsPage[ID])
   // let mainId = item._id;
 
@@ -80,7 +81,7 @@ const ModalPage = async function (ID, reload) {
                   </div>
                 </div>
 
-                <div class="c-fullnews__itemwrapp">
+                <div class="c-fullnews__itemwrapp" style={data.style ? data.style : ''}>
                   {async () => {
                     return await getInitList()[ID].function(reload)
                   }}
