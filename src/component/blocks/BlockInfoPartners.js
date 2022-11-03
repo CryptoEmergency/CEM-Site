@@ -4,7 +4,7 @@ import {
     Variable,
     Helpers
 } from '@betarost/cemjs';
-
+// poydet
 import images from "@assets/images/index.js";
 
 const partners = [
@@ -86,11 +86,11 @@ const BlockInfoPartners = function (data) {
                 }
             </div>
 
-            {()=>{
-                if(data && data.limit){
-                    return(
+            {() => {
+                if (data && data.limit && partners.length > data.limit) {
+                    return (
                         <div class="crypto_exchanges_footer">
-                            <a class="c-button c-button--gray" href="/partners/" onclick={Helpers.siteLink}>
+                            <a class="c-button c-button--gray" href="/partners/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.button.allPartners }) }}>
                                 <span class="c-button__wrapper">{Variable.lang.button.allPartners}</span>
                             </a>
                         </div>
@@ -100,5 +100,4 @@ const BlockInfoPartners = function (data) {
         </div>
     )
 }
-//I check
 export { BlockInfoPartners }
