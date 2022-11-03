@@ -7,6 +7,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { Swiper } from '@component/element/index.js';
 
+// Сделать запрос через Базу
 const banners = [
     // {
     //     "id": "62dd2ca100978d192547427c",

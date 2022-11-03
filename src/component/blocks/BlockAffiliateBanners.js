@@ -14,6 +14,7 @@ let activeBanner,
   elSuccessImg,
   elSuccessCode
 
+// Сделать запрос через Базу
 let banners = {
   en: [
     {

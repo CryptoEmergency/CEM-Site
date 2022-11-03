@@ -10,7 +10,7 @@ import {
 import { api } from '@src/apiFunctions.js'
 
 import svg from "@assets/svg/index.js";
-
+let tmp = 0
 const start = function (data, ID = "mainBlock") {
 
     Variable.Static.tpm = 5
@@ -23,6 +23,8 @@ const start = function (data, ID = "mainBlock") {
                 <div class="c-main__body">
                     {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
                     Version page {Variable.Static.tpm}
+                    <div>0</div>
+                    <div>{tmp}</div>
                     <img src={svg['load']} />
                 </div>
             )

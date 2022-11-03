@@ -4,7 +4,7 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
-// poydet
+// check
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
@@ -16,27 +16,19 @@ const start = function (data, ID = "mainBlock") {
         <div class="c-aboutus about_us_container c-main__body" id="test2">
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
-              <h2 class="c-whowe__title"
-                onclick={() => {
-                  // Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
-                  Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
-                }}
-              >
+              <h2 class="c-whowe__title">
                 {Variable.lang.h.who_are_we}
               </h2>
               <img
                 class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}
               />
-
               <p>{Variable.lang.p.aboutPreview}</p>
             </div>
-
             <div class="c-whowe__bg"></div>
           </div>
           <div class="c-aboutus__content c-container">
             <div class="c-aboutus__goals c-goals">
-
               <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
               <div class="c-goals__list">
                 <div class="c-goals__item">

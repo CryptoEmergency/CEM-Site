@@ -5,7 +5,7 @@ import {
     Variable,
     initOne
 } from '@betarost/cemjs';
-// poydet
+// check
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 

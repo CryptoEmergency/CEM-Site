@@ -34,7 +34,7 @@ const checkInput = function (Static, target) {
 }
 
 const Input = function ({ Static, classDiv, classInput, befor, after }) {
-    console.log('=1c814c=', Static)
+    // console.log('=1c814c=', Static)
     let labelfor;
 
     if (Static.label !== "phone") {

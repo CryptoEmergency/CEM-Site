@@ -5,7 +5,7 @@ import {
     Variable,
     initOne
 } from '@betarost/cemjs';
-// poydet
+// check
 import { api } from '@src/apiFunctions.js'
 import svg from '@assets/svg/index.js';
 
@@ -42,7 +42,7 @@ const BlockMainNews = async function () {
                                         <div style="display: flex!important;" class="blog_post_stat">
                                             <span>
                                                 <img src={svg.question_views} />
-                                                <span class="">{item.statistic.view}</span>
+                                                <span class="">{item.statistic.view + 1}</span>
                                             </span>
                                             <span>
                                                 <img src={svg.question_answers} />

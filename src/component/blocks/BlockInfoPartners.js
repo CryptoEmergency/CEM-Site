@@ -7,6 +7,7 @@ import {
 // poydet
 import images from "@assets/images/index.js";
 
+// Сделать запрос через Базу
 const partners = [
     {
         "link": "https://sberunity.ru/main/startups/879d88aa-4729-4788-a541-20cc8cc3cb14",

@@ -54,7 +54,7 @@ const changeInput = async (e) => {
 let Static = {}
 
 let test = {}
-console.log('=59c8e8=', 5555, test)
+// console.log('=59c8e8=', 5555, test)
 const ModalAfterRegisterForm = function (data, reload) {
   // console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
   initOne(() => {

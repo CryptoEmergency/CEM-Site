@@ -6,12 +6,36 @@ import { mainModal } from '@navigation/modal/index.js';
 import { mainModalPage } from '@navigation/modal/page.js';
 
 const initApp = async function () {
-    await mainBlock();
-    await mainHeader();
-    await mainFooter();
-    await mainModal();
-    await mainModalPage();
+    try {
+        await mainBlock();
+    } catch (error) {
+        console.error(error, "mainBlock")
+    }
+
+    try {
+        await mainHeader();
+    } catch (error) {
+        console.error(error, "mainHeader")
+    }
+
+    try {
+        await mainFooter();
+    } catch (error) {
+        console.error(error, "mainFooter")
+    }
+
+    try {
+        await mainModal();
+    } catch (error) {
+        console.error(error, "mainModal")
+    }
+
+    try {
+        await mainModalPage();
+    } catch (error) {
+        console.error(error, "mainModalPage")
+    }
+
     await initGo("newPage")
 }
-
 export { initApp }
