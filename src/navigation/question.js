@@ -12,6 +12,8 @@ import {
 import { BlockQuestions } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
 
+import { api } from '@src/apiFunctions.js'
+
 const start = function () {
     let filtersQuestions
 
