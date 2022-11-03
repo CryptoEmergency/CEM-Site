@@ -10,7 +10,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation, validator } from '@src/functions.js';
+import { allValidation, validator,checkValid } from '@src/functions.js';
 import { Input, CheckBox } from '@component/element/index.js';
 
 let listCodes
@@ -25,7 +25,7 @@ const changeSearch = (e) => {
     initReload("modals");
 }
 
-
+/*
 const checkValid = function () {
     if (wayReg == "email") {
         if (Static.email.valid && Static.pass.valid && Static.agreement.value) {
@@ -42,7 +42,7 @@ const checkValid = function () {
     }
     initReload()
     return;
-}
+}*/
 
 
 
@@ -103,7 +103,11 @@ const ModalReg = function () {
                 condition: (value) => {
                     return validator.matches(value, /[0-9]{9,13}/i);
                 },
-                afterValid: checkValid
+                afterValid:() => {
+            
+                    checkValid(Static,["phone","pass","agreement"])
+                  
+                 }
             }
 
             Static.email = {
@@ -117,7 +121,11 @@ const ModalReg = function () {
                 condition: (value) => {
                     return validator.isEmail(value);
                 },
-                afterValid: checkValid
+                afterValid:() => {
+            
+                    checkValid(Static,["email","pass","agreement"])
+                  
+                 }
             }
 
             Static.pass = {
@@ -137,12 +145,16 @@ const ModalReg = function () {
                         minSymbols: 1,
                     });
                 },
-                afterValid: checkValid
+                afterValid:() => {
+            
+                    checkValid(Static,[wayReg,"pass","agreement"])
+                  
+                 }
             }
 
             Static.agreement = {
                 value: true,
-                valid: false,
+                valid: true,
                 error: false,
             }
 
@@ -304,7 +316,7 @@ const ModalReg = function () {
                                     </label>
                                 }
                                 afterValid={() => {
-                                    checkValid()
+                                    checkValid(Static,[wayReg,"pass","agreement"])
                                 }}
                             />
                         </div>

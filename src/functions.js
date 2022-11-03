@@ -365,6 +365,21 @@ const uploadMedia = function (file, type, onload, onprogress, xhr) {
   xhr.send(formData)
 }
 
+const checkValid = function (Static,Array) {
+
+  Static.isValid = true
+
+  Array.forEach(function(elem){
+    if(!Static[elem].valid)
+    {
+      Static.isValid = false
+    }
+  })
+
+  initReload()
+  return;
+}
+
 
 export {
   sliceString,
@@ -383,5 +398,6 @@ export {
   ifHaveMedia,
   uploadMedia,
   wrapTagToText,
-  validator
+  validator,
+  checkValid
 };

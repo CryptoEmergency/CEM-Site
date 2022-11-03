@@ -31,9 +31,16 @@ const checkInput = function (Static, target) {
 }
 
 const Input = function ({ Static, classDiv, classInput, befor, after }) {
+
+    let labelfor;
+
+    if(Static.label!=="phone"){
+        labelfor =  <label>{Static.label}</label>
+    }
+
     return (
         <div>
-            <label>{Static.label}</label>
+           {labelfor}
             <div class="error-div">
                 {Static.error ? <div class="error-div-variant">{Static.errorText}</div> : null}
             </div>
@@ -42,6 +49,7 @@ const Input = function ({ Static, classDiv, classInput, befor, after }) {
                 {Static.type == "password" ? <img src={svg.lock} class="icon-input" /> : null}
                 <input
                     placeholder={Static.placeholder}
+                    readonly={Static.readonly}
                     type={Static.viewPassword ? "text" : Static.type}
                     value={Static.value}
                     class={classInput}

@@ -27,6 +27,7 @@ const CheckBox = function ({ id, label, error, Static, afterValid, className }) 
                         checked={Static.value}
                         onchange={() => {
                             Static.value = !Static.value
+                            Static.valid = Static.value
                             afterValid()
                         }}
                     />

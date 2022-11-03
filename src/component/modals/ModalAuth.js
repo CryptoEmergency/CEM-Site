@@ -9,7 +9,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation, validator } from '@src/functions.js';
+import { allValidation, validator,checkValid } from '@src/functions.js';
 
 import { Input } from '@component/element/index.js';
 let wayAuth,
@@ -27,43 +27,6 @@ const changeSearch = (e) => {
     initReload("modals");
 }
 
-const changeInput = function () {
-    formInputs[this.dataset.type].value = this.value.trim()
-    formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
-
-    if (!formInputs[this.dataset.type].valid) {
-        formInputs[this.dataset.type].error = true;
-        this.style = "border-color: rgb(200, 23, 38);";
-        formInputs.isValid = false
-        initReload("modals")
-        return
-    } else {
-        formInputs[this.dataset.type].error = false;
-        this.style = "border-color: rgb(37, 249, 48);"
-    }
-
-    let isCheckAll = false
-
-    if (wayAuth == "email") {
-        if (formInputs.email.valid === true && formInputs.pass.valid === true) {
-            isCheckAll = true
-        }
-    } else {
-        if (formInputs.phone.valid === true && formInputs.pass.valid === true) {
-            isCheckAll = true
-        }
-    }
-
-    if (isCheckAll) {
-        formInputs.isValid = true
-    } else {
-        formInputs.isValid = false
-    }
-
-    initReload("modals")
-    return;
-}
-
 
 /**
  * autorization mpodal
@@ -72,62 +35,14 @@ const WayAuthForm = function () {
     if (wayAuth == "email") {
         return (
             <div>
-                {/* <Input
-                    label={Variable.lang.label.email}
-                    error={Variable.lang.error_div.wrong_email}
-                    placeholder={Variable.lang.placeholder.email}
-                    type="text"
-                    value=""
-                    condition={(value) => {
-                        return validator.isEmail(value);
-                    }}
-                    afterValid={() => {
-                        initReload()
-                    }}
-                    Static={Static.email}
-                /> */}
-                <div class='reset_by_email_block'>
-                    <label for="resetByEmailInput">{Variable.lang.label.email}</label>
-                    <div class="error-div">
-                        <If
-                            data={formInputs.email.error}
-                            dataIf={
-                                <div class="error-div-variant">{formInputs.email.errorText}</div>
-                            }
-                        />
-                    </div>
-                    <div class="reset_by_email_block_container">
-                        <input
-                            placeholder={Variable.lang.placeholder.email}
-                            type="text"
-                            data-type="email"
-                            // value={formInputs.email.value}
-                            oninput={changeInput}
-                        />
-                    </div>
-
-                </div>
-            </div>
+            <Input classDiv="reset_by_email_block_container" Static={Static.email} />
+            </div>            
         )
     } else {
-        return (
-            <div>
+        return (       
                 <div class='reset_by_mobile_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
-                    <div class="error-div">
-                        
-                        <If
-                            data={formInputs.phone.error}
-                            dataIf={
-
-                                <div class="error-div-variant">{formInputs.phone.errorText}</div>
-
-                            }
-                        />
-                    </div>
-
                     <div class="reset_by_mobile_block_container c-phonecode">
-
                         <div class="country-phone2">
                             <div class="country-phone-selector2">
                                 <div
@@ -138,8 +53,8 @@ const WayAuthForm = function () {
                                     }}
                                 >
                                     <span>
-                                        +{formInputs.phone.code}
-                                        <img src={images.blank} class={`flag flag-${formInputs.phone.abbr}`} />
+                                        +{Static.phone.code}
+                                        <img src={images.blank} class={`flag flag-${Static.phone.abbr}`} />
                                     </span>
                                 </div>
                                 <div
@@ -163,8 +78,8 @@ const WayAuthForm = function () {
                                                         data-co={item.abbr}
                                                         class="country-phone-option2"
                                                         onClick={() => {
-                                                            formInputs.phone.code = item.code
-                                                            formInputs.phone.abbr = item.abbr
+                                                            Static.phone.code = item.code
+                                                            Static.phone.abbr = item.abbr
                                                             elemCountry().hidden = true
                                                             initReload("modals")
                                                         }}>
@@ -181,19 +96,9 @@ const WayAuthForm = function () {
                                 </div>
                             </div>
                         </div>
-
-                        <input
-                            class="phoneNubmerInput2"
-                            type="text"
-                            autofocus="true"
-                            placeholder="9990000000"
-                            data-type="phone"
-                            value={formInputs.phone.value}
-                            oninput={changeInput}
-                        />
+                        <Input classInput="phoneNubmerInput2" Static={Static.phone} />
                     </div>
                 </div>
-            </div>
         )
 
     }
@@ -201,18 +106,18 @@ const WayAuthForm = function () {
 
 const sendAuthorization = async function (e) {
     e.preventDefault();
-    if (!formInputs.isValid) {
+    if (!Static.isValid) {
         return false
     }
     elemButton().classList.add('c-button--animated');
     let data = {
-        pass: formInputs['pass'].value,
+        pass: Static.pass.value,
     };
     if (wayAuth == "email") {
-        data.email = formInputs['email'].value
+        data.email = Static.email.value
     } else {
-        data.phone = `+${formInputs['phone'].code}${formInputs['phone'].value}`
-        data.co = formInputs['phone'].abbr
+        data.phone = `+${Static.phone.code}${Static.phone.value}`
+        data.co = Static.phone.abbr
     }
 
     let tmpRes = await sendApi.create("userAuth", data);
@@ -227,47 +132,82 @@ const sendAuthorization = async function (e) {
 }
 
 let Static = {}
+
+
 const ModalAuth = function () {
-    // console.log('=4ca5e6= Static', Static)
     initOne(
         () => {
 
-            Static.email = {
-                value: "",
-                valid: false,
-                error: false,
-            }
+    Static = {
+        isValid: false
+      }
+ 
 
-            Variable.OutHideWindows.push([elem, "ModalAuth"])
-            wayAuth = "email"
+    Static.email = {
+        value: "",
+        valid: false,
+        error: false,
+        label: Variable.lang.label.email,
+        placeholder: Variable.lang.placeholder.email,
+        errorText: Variable.lang.error_div.wrong_email,
+        type: "text",
+        condition: (value) => {
+            
+            return validator.isEmail(value);
+         
+        },
+        afterValid:() => {
+            
+           checkValid(Static,["email","pass"])
+         
+        }
+    }
+
+
+    Static.pass= {
+        value: "",
+        valid: false,
+        error: false,
+        placeholder:Variable.lang.placeholder.password,
+        type:`${viewPassword ? 'text' : 'password'}`,
+        errorText: Variable.lang.error_div.password5,
+        condition: (value) => {
+            
+            return validator.isStrongPassword(value);
+         
+        },
+        afterValid:() => {
+            
+            checkValid(Static,["email","pass"])
+          
+         }
+    }
+
+    Static.phone= {
+        value: "",
+        code: 7,
+        abbr: "ru",
+        placeholder:"9990000000",
+        valid: false,
+        error: false,
+        label: "phone",
+        errorText: Variable.lang.error_div.wrong_phone,
+        condition: (value) => {
+            
+            return validator.isMobilePhone(value);
+         
+        },
+        afterValid:() => {
+            
+            checkValid(Static,["phone","pass"])
+          
+         }
+    }
+
+              wayAuth = "email"
             listCodes = Variable.phoneCodes
-            viewPassword = false
-            formInputs = {
-                email: {
-                    value: "",
-                    valid: false,
-                    error: false,
-                    errorText: Variable.lang.error_div.wrong_email
-                },
-                pass: {
-                    value: "",
-                    valid: false,
-                    error: false,
-                    errorText: Variable.lang.error_div.password5
-                },
-                phone: {
-                    value: "",
-                    code: 7,
-                    abbr: "ru",
-                    valid: false,
-                    error: false,
-                    errorText: Variable.lang.error_div.wrong_phone
-                },
-                isValid: false
-            }
         }
     )
-
 
     return (
         <div class="c-modal c-modal--open" id="ModalAuth">
@@ -308,37 +248,9 @@ const ModalAuth = function () {
                             <WayAuthForm />
                         </div>
                         <div class="container-input">
-                            <label for="password">{Variable.lang.label.password}</label>
-                            <div class="error-div">
-                                <If
-                                    data={formInputs.pass.error}
-                                    dataIf={
 
-                                        <div class="error-div-variant">{formInputs.pass.errorText}</div>
-
-                                    }
-                                />
-                            </div>
-
-                            <div class="input-div">
-                                <img src={svg["lock"]} class="icon-input" />
-                                <input
-                                    id="fast_pass"
-                                    placeholder={Variable.lang.placeholder.password}
-                                    type={`${viewPassword ? 'text' : 'password'}`}
-                                    data-type="pass"
-                                    value={formInputs.pass.value}
-                                    oninput={changeInput}
-                                />
-                                <img
-                                    src={svg[`eye${viewPassword ? '-slash' : ''}`]}
-                                    class="password_eye"
-                                    onClick={() => {
-                                        viewPassword = !viewPassword
-                                        initReload("modals")
-                                    }}
-                                />
-                            </div>
+                            <Input classDiv="input-div" Static={Static.pass} />
+                            
                         </div>
                     </form>
                     <div class="bottom_log-in">
@@ -350,15 +262,7 @@ const ModalAuth = function () {
                             />
                             <label class="checkbox__label-2" for="auth_remember">{Variable.lang.placeholder.rememberMe}</label>
                         </div>
-                        {/* <span class="cont_a-link-2" >
-                            <a
-                                class="a-link"
-                                id="forgot_password"
-                                onclick={() => { Variable.Modals = [] }}
-                            >
-                                {Variable.lang.a.forgot_pass}
-                            </a>
-                        </span> */}
+                    
                     </div>
                     <div class="authAgree">
                         <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
@@ -366,7 +270,7 @@ const ModalAuth = function () {
                 </div>
                 <footer class="c-modal__footer">
                     <button
-                        class={`c-button c-button--gradient2 ${!formInputs.isValid && "c-button--inactive"}`}
+                        class={`c-button c-button--gradient2 ${!Static.isValid && "c-button--inactive"}`}
                         type="button"
                         ref={elemButton}
                         onClick={sendAuthorization}>
