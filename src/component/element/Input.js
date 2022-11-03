@@ -7,6 +7,8 @@ import {
 import svg from '@assets/svg/index.js';
 
 const checkInput = function (Static, target) {
+
+ 
     if (Static.timer) {
         clearTimeout(Static.timer);
     }
@@ -17,6 +19,7 @@ const checkInput = function (Static, target) {
             return
         }
         Static.valid = Static.condition(target.value.trim())
+        console.log(Static)
         Static.error = !Static.valid
         if (Static.error) {
             target.style = "border-color: rgb(200, 23, 38);";

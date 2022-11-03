@@ -152,7 +152,8 @@ const ModalAuth = function () {
         errorText: Variable.lang.error_div.wrong_email,
         type: "text",
         condition: (value) => {
-            
+      
+   
             return validator.isEmail(value);
          
         },
@@ -173,7 +174,13 @@ const ModalAuth = function () {
         errorText: Variable.lang.error_div.password5,
         condition: (value) => {
             
-            return validator.isStrongPassword(value);
+            return validator.isStrongPassword(value, {
+                minLength: 8,
+                minLowercase: 0,
+                minUppercase: 0,
+                minNumbers: 0,
+                minSymbols: 1,
+            });
          
         },
         afterValid:() => {

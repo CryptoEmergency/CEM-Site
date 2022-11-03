@@ -368,7 +368,6 @@ const uploadMedia = function (file, type, onload, onprogress, xhr) {
 const checkValid = function (Static,Array) {
 
   Static.isValid = true
-
   Array.forEach(function(elem){
     if(!Static[elem].valid)
     {
