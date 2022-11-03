@@ -9,13 +9,10 @@ import {
 } from "@betarost/cemjs";
 
 
-import { If } from '@component/helpers/All.js';
 import { BlockQuestions } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
 
 const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
     let filtersQuestions
 
     init(
@@ -37,25 +34,26 @@ const start = function () {
         },
         () => {
             return (
-                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                <div class='c-main__body'>
                     <BlockQuestions
                         version={Variable.dataUrl}
                         filters={filtersQuestions}
                         items={Variable.PageQuestions}
                         name={"PageQuestions"}
                         button={
-                            <If
-                                data={Variable.PageQuestions.list_records.length < Variable.PageQuestions.totalFound}
-                                dataIf={
-                                    <ButtonShowMore
-                                        onclick={async () => {
-                                            let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 20, offset: Variable.PageQuestions.list_records.length })
-                                            Variable.PageQuestions.list_records.push(...tmp.list_records)
-                                            initReload()
-                                        }}
-                                    />
+                            ()=>{
+                                if(Variable.PageQuestions.list_records.length < Variable.PageQuestions.totalFound){
+                                    return(
+                                        <ButtonShowMore
+                                            onclick={async () => {
+                                                let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 20, offset: Variable.PageQuestions.list_records.length })
+                                                Variable.PageQuestions.list_records.push(...tmp.list_records)
+                                                initReload()
+                                            }}
+                                        />
+                                    )
                                 }
-                            />
+                            }
                         }
                         callBack={
                             async function (active, nameOptions) {

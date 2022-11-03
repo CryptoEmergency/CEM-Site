@@ -1,13 +1,15 @@
 import {
     jsx,
     jsxFrag,
+    initReload,
     Variable
 } from '@betarost/cemjs';
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { Avatar } from '@component/element/Avatar.js';
 import { UserBadge } from '@component/element/UserBadge.js';
-import { If } from '@component/helpers/All.js';
+import { changeSubscription } from "@src/apiFunctions.js";
+import { api } from '@src/apiFunctions.js'
 
 const UserItem = function ({ user }) {
     return (
@@ -16,12 +18,15 @@ const UserItem = function ({ user }) {
                 <div class="new_professional_card_avatar">
                     <Avatar author={user} nickName={true} speciality={[user.information && user.information.speciality ? user.information.speciality : false]} />
                 </div>
-                <If
-                    data={user.rank.creator}
-                    dataIf={<div class="user_rank_badge">
-                        <img src={images.content_creator} />
-                    </div>}
-                />
+                {()=>{
+                    if(user.rank.creator){
+                        return(
+                            <div class="user_rank_badge">
+                                <img src={images.content_creator} />
+                            </div> 
+                        )
+                    }
+                }}
             </div>
             <div class="new_professional_card_main">
                 <a href={`/user/${user.nickname}`}>
@@ -63,14 +68,34 @@ const UserItem = function ({ user }) {
                 </div>
                 <div class="new_professional_buttons">
                     <div class="button-container-preview">
-                        <a class="btn-news-preview" href="#" data-action="link" data-needauth="true">
+                        <a style="opacity: 0.2" class="btn-news-preview " href="#" data-action="link" data-needauth="true">
                             <span>
                                 {Variable.lang.button.write}
                             </span>
                         </a>
-                        <a class="btn-news-preview" data-id="{{_id}}" data-action="userSubscribe" data-needauth="true">
+                        <a 
+                            class="btn-news-preview" 
+                            data-id="{{_id}}" 
+                            data-action="userSubscribe" 
+                            data-needauth="true"
+                            onclick={async()=>{
+                                let tmp = await api({ type: "set", action: "setUsers", short: true, data: {value: {subscribed: user._id}}})
+                                user.subscribe = !user.subscribe
+                            }}
+                        >
                             <span class="subscribe_status">
-                                {Variable.lang.button.subscribe}
+                                {()=>{
+                                    if(user.subscribe){
+                                        return(
+                                            Variable.lang.button.unsubscribe
+                                        )
+                                    } else {
+                                        return(
+                                            Variable.lang.button.subscribe
+                                        )
+                                    }
+                                }}
+                                
                             </span>
                         </a>
                     </div>
