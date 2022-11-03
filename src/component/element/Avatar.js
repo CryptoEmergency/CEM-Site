@@ -131,7 +131,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
         if (Variable.myInfo && Variable.myInfo.nickname == author.nickname) {
           Helpers.siteLink(e)
         } else {
-          Helpers.siteLinkModal(e, { title: author.nickname })
+          Helpers.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;' })
         }
       }
       }
