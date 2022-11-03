@@ -19,10 +19,9 @@ const changeInput = (e) => {
 
 
 const ModalSelectCountry = function (data, reload) {
-  if (!reload) {
-    inputValue = ""
-    allCountries = Variable.allCountries;
-  }
+
+  allCountries = Variable.allCountries;
+
   return (
     <div class="c-modal c-modal--open" id="ModalSelectCountry">
       <section class="c-modal__dialog">

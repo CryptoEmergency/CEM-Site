@@ -3,7 +3,8 @@ import {
     jsxFrag,
     init,
     Variable,
-    Helpers
+    Helpers,
+    initAfter
 } from '@betarost/cemjs'
 // poydet
 import svg from "@assets/svg/index.js"
@@ -24,8 +25,19 @@ const mainHeader = async function () {
                     document.querySelectorAll('jdiv')[0].remove()
                 }
             }
+
+            // if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+            //     Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+
+            // }
         },
         () => {
+            // initAfter(() => {
+            //     // console.log('=18f54f=', "fff")
+            //     // if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+            //     //     Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+            //     // }
+            // })
             if (Variable.Static.HeaderShow) {
                 return (
                     <div class="c-header__container c-container">

@@ -64,7 +64,7 @@ const swiperGo = function (numIndex) {
   });
   // }
 };
-const LentaMedia = function ({ items, numIndex, elem, path }) {
+const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
   if (items.length == 0) {
     return <></>;
   }
@@ -147,6 +147,9 @@ const LentaMedia = function ({ items, numIndex, elem, path }) {
         items.map(
           (item, index) => {
             if (item.type == "video" && !Array.isArray(item)) {
+              if(typeof elem[numIndex] == "undefined"){
+                elem[numIndex] =[]
+              }
               elem[numIndex][index] = Variable.setRef();
               return (
                 <div class="swiper-slide">

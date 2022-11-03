@@ -5,18 +5,16 @@ import {
   getStorage,
   initReload,
   initOne,
-  sendApi,
   Helpers
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
 import { QuestionItem } from "@component/element/QuestionItem.js";
 import { Select } from "../element/Select.js";
-import { If } from "@component/helpers/All.js";
-
+import { api } from '@src/apiFunctions.js'
 let optionsSelect, showFilter;
 
-const BlockQuestions = function ({
+const BlockQuestions = async function ({
   version,
   callBack,
   button,
@@ -24,7 +22,7 @@ const BlockQuestions = function ({
   items,
   name
 }) {
-  initOne(async () => {
+  await initOne(async () => {
     showFilter = false;
     optionsSelect = {
       questions: {
@@ -51,22 +49,24 @@ const BlockQuestions = function ({
         active: filters.date.value,
       },
     };
+    await api({ type: "get", action: "getQuestions", short: true, cache: true, name: name, limit: 6, filter: Helpers.getFilterQuestions(filters), sort: Helpers.getSortQuestions(filters)})
   });
 
   return (
     <div class="c-questions">
       <div class="c-questions__header">
-        <If
-          data={version != undefined && version.adress == "question"}
-          dataIf={
-            <div>
-              <h4>{Variable.lang.h.lastQuestions}</h4>
-              <p class="info-text-questions">
-                {Variable.lang.p.addQuestionsSlog}
-              </p>
-            </div>
+        {()=>{
+          if(version != undefined && version.adress == "question"){
+            return(
+              <div>
+                <h4>{Variable.lang.h.lastQuestions}</h4>
+                <p class="info-text-questions">
+                  {Variable.lang.p.addQuestionsSlog}
+                </p>
+              </div>
+            )
           }
-        />
+        }}
         <div class="c-questions__searchblock c-search">
           <div class="c-search__container">
             <div class="c-search__wrapper">
@@ -134,37 +134,47 @@ const BlockQuestions = function ({
                   onclick: async (langCode, langName, langOrig) => {
                     filters.lang.name = `${ langName} (${langOrig})`;
                     filters.lang.code = langCode;
-                    Variable[name] = await sendApi.send({
-                      action: "getQuestions",
-                      short: true,
-                      limit: 6,
-                      filter: Helpers.getFilterQuestions(filters), 
-                      sort: Helpers.getSortQuestions(filters) ,
-                    });
+                    await api({ type: "get", action: "getQuestions", short: true, name: name, limit: 6, filter: Helpers.getFilterQuestions(filters), sort: Helpers.getSortQuestions(filters)})
+
                     // initReload()
                   },
                 },
               });
             }}
           >
-            <If
-              data={filters.lang.name == "all"}
-              dataIf={Variable.lang.text.language}
-              dataElse={filters.lang.name}
-            />
+            {()=>{
+              if(filters.lang.name == "all"){
+                return(
+                  Variable.lang.text.language
+                )
+              } else {
+                return(
+                  filters.lang.name
+                )
+              }
+            }}
           </div>
         </div>
-        <If
-          data={version == undefined || version.adress == ""}
-          dataIf={<h4>{Variable.lang.h.lastQuestions}</h4>}
-        />
+        {()=>{
+          if(version == undefined || version.adress == ""){
+            return(
+              <h4>{Variable.lang.h.lastQuestions}</h4>
+            )
+          }
+        }}
       </div>
       <div class="c-questions__list questions-blocks">
-        {items.list_records.map((item) => {
+        {Variable[name].list_records.map((item) => {
           return <QuestionItem question={item} />;
         })}
       </div>
-      <If data={button} dataIf={button} />
+      {()=>{
+        if(button){
+          return(
+            button
+          )
+        }
+      }}
     </div>
   );
 };

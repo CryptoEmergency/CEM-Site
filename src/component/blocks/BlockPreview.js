@@ -2,15 +2,20 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    Helpers
+    initOne
 } from '@betarost/cemjs';
-
+// poydet
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { If } from '@component/helpers/All.js';
-import { CourseCurrency } from '@component/element/CourseCurrency.js';
+import { CourseCurrency } from '@component/element/index.js';
+import { api } from '@src/apiFunctions.js'
 
-const BlockPreview = function () {
+const BlockPreview = async function () {
+    await initOne(
+        async () => {
+            await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course", })
+        }
+    )
     return (
         <div class="с-preview">
             <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
@@ -26,18 +31,19 @@ const BlockPreview = function () {
                 </div>
             </div>
             <div class="с-preview__crypto">
-                {Variable.Course.list_records.length != 0 ?
-                    Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
-                        return (
-                            <CourseCurrency course={Variable.Course.list_records[0][key]} key={key} />
-                        )
-                    })
-                    :
-                    <></>
+                {
+                    () => {
+                        if (Variable.Course && Variable.Course.list_records && Variable.Course.list_records.length) {
+                            return (Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
+                                return (
+                                    <CourseCurrency course={Variable.Course.list_records[0][key]} key={key} />
+                                )
+                            }))
+                        }
+                    }
                 }
             </div>
         </div>
     )
 }
-//I check
 export { BlockPreview }

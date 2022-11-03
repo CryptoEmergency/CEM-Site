@@ -33,7 +33,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
     return <></>;
   }
   let getItem = ""
-
+console.log(total)
   if (total === undefined) {
     getItem = async function () {
       let tmp = await sendApi.send({ action: "getPost", short: true, filter: { _id: item._id }, limit: 1 });
@@ -184,7 +184,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
             </div>
 
             <div class="user_post_statistic">
-              <span class="c-date">
+              <span class="c-date" data-id={item._id}>
                 {item.updateTime
                   ? `${Variable.lang.text.update} ${getDateFormat(
                     item.updateTime,
@@ -349,7 +349,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
               </div>
 
               <div class="user_post_statistic">
-                <span class="c-date">
+                <span class="c-date" data-id={item._id}>
                   {item.updateTime
                     ? `${Variable.lang.text.update} ${getDateFormat(
                       item.updateTime,

@@ -18843,11 +18843,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 100%;
   }
 
-  .contacts_info {
+  /* .contacts_info {
     margin: 0;
     margin-bottom: 30px;
     padding: 0 50px;
-  }
+  } */
 
   .background_vector {
     max-width: 100%;

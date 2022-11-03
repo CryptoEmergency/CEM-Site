@@ -1,6 +1,8 @@
 export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js"
 export { BlockNewsShow } from "./BlockNewsShow.js"
 export { BlockBanners } from "./BlockBanners.js"
+export { BlockProjects } from "./BlockProjects.js"
+export { BlockPreview } from "./BlockPreview.js"
 export { BlockQuestionsShow } from "./BlockQuestionsShow.js"
 export { BlockUsers } from "./BlockUsers.js"
 export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"

@@ -210,15 +210,15 @@ BlockUserProfilePage.aboutUser = function (data) {
                                     }
                                 />
                                 {
-                                   data.userInfo.work.map((item, index) => {
-                                    return (
-                                        <div id={item._id} class="work_and_education_block">
-                                            <span>{item.title} <img class="editworkinfo" style="display: none;" src={svg['pencil']} /></span>
-                                            <span>{item.period}</span>
-                                            <span>{item.description}</span>
-                                        </div>
-                                    )
-                                }) 
+                                    data.userInfo.work.map((item, index) => {
+                                        return (
+                                            <div id={item._id} class="work_and_education_block">
+                                                <span>{item.title} <img class="editworkinfo" style="display: none;" src={svg['pencil']} /></span>
+                                                <span>{item.period}</span>
+                                                <span>{item.description}</span>
+                                            </div>
+                                        )
+                                    })
                                 }
                             </div>
                         </div>
@@ -240,21 +240,21 @@ BlockUserProfilePage.awards = function (data) {
             <div class="awards_block">
                 <div class="awards_body">
                     {
-                       data.userInfo.awards.map((item, index) => {
-                        let icon = item.icon.split(".")[0];
-                        return (
-                            <div class="award">
-                                <img src={svg[`badge/${icon}`]} class="awards_small_badge" />
-                                <img src={svg[`badge/${icon}`]} class="awards_badge" />
-                                <div class="award_description">
-                                    <p class="awards_title">{Variable.lang.awards[item.name]}</p>
-                                    <p class="awards_text">{Variable.lang.awards[item.description]}</p>
-                                    <p class="progress_bar_label">{Variable.lang.p.receive}</p>
-                                    <p class="progress_bar_label">{Helpers.getDateFormat(item.dateCreate)}</p>
+                        data.userInfo.awards.map((item, index) => {
+                            let icon = item.icon.split(".")[0];
+                            return (
+                                <div class="award">
+                                    <img src={svg[`badge/${icon}`]} class="awards_small_badge" />
+                                    <img src={svg[`badge/${icon}`]} class="awards_badge" />
+                                    <div class="award_description">
+                                        <p class="awards_title">{Variable.lang.awards[item.name]}</p>
+                                        <p class="awards_text">{Variable.lang.awards[item.description]}</p>
+                                        <p class="progress_bar_label">{Variable.lang.p.receive}</p>
+                                        <p class="progress_bar_label">{Helpers.getDateFormat(item.dateCreate)}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
+                            )
+                        })
                     }
 
 
@@ -274,17 +274,17 @@ BlockUserProfilePage.subscribers = function (data) {
         <div class="bl_one c-container" id="UserInfoFollowers">
             <div class="friends_block">
                 {
-                  data.items.list_records.map( (item, index) => {
-                    return (
-                        < div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
-                            <Avatar author={item} />
-                            <div class="friend_info">
-                                <p>{item.nickname}</p>
-                                <p>{item.fullname ? item.fullname : ''}</p>
+                    data.items.list_records.map((item, index) => {
+                        return (
+                            <div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
+                                <Avatar author={item} />
+                                <div class="friend_info">
+                                    <p>{item.nickname}</p>
+                                    <p>{item.fullname ? item.fullname : ''}</p>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })  
+                        )
+                    })
                 }
             </div>
 
@@ -358,7 +358,7 @@ BlockUserProfilePage.friends = function (data) {
                 {
                     data.items.list_records[0].subscribed.map((item, index) => {
                         return (
-                            < div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
+                            <div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
                                 <Avatar author={item} />
                                 <div class="friend_info">
                                     <p>{item.nickname}</p>
@@ -445,63 +445,63 @@ BlockUserProfilePage.answers = function (data) {
                 <span>{Variable.lang.tableTitle.rank}</span>
                 <span>{Variable.lang.tableTitle.answer}</span>
             </div>
-                {
-                    data.items.list_records.map((item, index) => {
-                        return (
-                            <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
-                                <div class="your_answers_main">
-                                    <div class="my_answers_title_block">
-                                        <Avatar
-                                            author={item.questionId.author}
-                                        />
+            {
+                data.items.list_records.map((item, index) => {
+                    return (
+                        <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
+                            <div class="your_answers_main">
+                                <div class="my_answers_title_block">
+                                    <Avatar
+                                        author={item.questionId.author}
+                                    />
+                                    <div>
+                                        <a href={'/question/show/' + item.questionId._id} onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers, itemID: item.questionId._id }) }}>
+                                            <div class="user_question_title">
+                                                {item.questionId.title}
+                                            </div>
+                                        </a>
                                         <div>
-                                            <a href={'/question/show/' + item.questionId._id} onclick={Helpers.siteLink}>
-                                                <div class="user_question_title">
-                                                    {item.questionId.title}
-                                                </div>
-                                            </a>
-                                            <div>
-                                                <div class="user_answer_created">
-                                                    <span>{Helpers.getDateFormat(item.questionId.showDate, "time")}</span>
-                                                </div>
+                                            <div class="user_answer_created">
+                                                <span>{Helpers.getDateFormat(item.questionId.showDate, "time")}</span>
                                             </div>
-                                            <div>
-    
-                                            </div>
+                                        </div>
+                                        <div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="your_answers_counter">
-                                    <span class="your_answers_counter_desc">{Variable.lang.tableTitle.comments}</span><span class="your_answers_counter_number">{item.statistic.comments}</span>
+                            </div>
+                            <div class="your_answers_counter">
+                                <span class="your_answers_counter_desc">{Variable.lang.tableTitle.comments}</span><span class="your_answers_counter_number">{item.statistic.comments}</span>
+                            </div>
+                            <div class="your_answers_counter">
+                                <span class="your_answers_counter_desc">{Variable.lang.tableTitle.rank}</span><span class="your_answers_counter_number">{item.statistic.rating}</span>
+                            </div>
+                            <div class={item.best ? 'your_answers_avatar your_answer_text_best' : 'your_answers_avatar'}>
+                                <div class="your_answer_text">
+                                    {Helpers.clearText(item.text)}
                                 </div>
-                                <div class="your_answers_counter">
-                                    <span class="your_answers_counter_desc">{Variable.lang.tableTitle.rank}</span><span class="your_answers_counter_number">{item.statistic.rating}</span>
-                                </div>
-                                <div class={item.best ? 'your_answers_avatar your_answer_text_best' : 'your_answers_avatar'}>
-                                    <div class="your_answer_text">
-                                        {Helpers.clearText(item.text)}
-                                    </div>
-                                </div>
-                                <If
-                                    data={item.active}
-                                    dataIf={
-                                        <div data-action="yourAnswersOptional" class="your_answers_optional">
-                                            <img src={svg['points2']} />
-                                            {/* <div class="your_answers_menu dn">
+                            </div>
+                            <If
+                                data={item.active}
+                                dataIf={
+                                    <div data-action="yourAnswersOptional" class="your_answers_optional">
+                                        <img src={svg['points2']} />
+                                        {/* <div class="your_answers_menu dn">
                                         <div class="your_answers_menu_inner">
                                         <div data-action="answerAdditionallyItem" class="answer_additionally_item delete" data-answer-id="{{_id}}" data-type="answer">{Variable.lang.select.delete}</div>
                                         </div>
                                     </div> */}
-                                        </div>
-                                    }
-                                    dataElse={
-                                        <div class="delete_question"></div>
-                                    }
-                                />
-                            </div>
-                        )
-                    })
-                }
+                                    </div>
+                                }
+                                dataElse={
+                                    <div class="delete_question"></div>
+                                }
+                            />
+                        </div>
+                    )
+                })
+            }
             <If
                 data={data.items.list_records.length < data.items.totalFound}
                 dataIf={
@@ -561,7 +561,7 @@ BlockUserProfilePage.questions = function (data) {
                         return (
                             <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
                                 <div class="your_answers_main">
-                                    <a href={'/question/show/' + item._id} onclick={Helpers.siteLink}>
+                                    <a href={'/question/show/' + item._id} onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers, item: item }) }}>
                                         <div class="user_question_title">
                                             {item.title}
                                         </div>

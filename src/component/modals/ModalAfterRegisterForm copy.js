@@ -8,9 +8,9 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { allValidation } from "@src/functions.js";
+import { allValidation, checkValid, validator } from "@src/functions.js";
 import { checkNickName } from "@src/apiFunctionsE.js";
-
+import { Input } from '@component/element/index.js';
 let formInputs;
 
 
@@ -51,36 +51,138 @@ const changeInput = async (e) => {
   }
   initReload("modals")
 };
+let Static = {}
 
+let test = {}
+console.log('=59c8e8=', 5555, test)
 const ModalAfterRegisterForm = function (data, reload) {
-  console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
-  // initOne(() => {
-  if (!reload) {
-    formInputs = {
-      nickName: {
-        value: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.nicknameErr
-      },
-      language: {
-        value: "",
-        code: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.selectFromList
-      },
-      country: {
-        value: "",
-        code: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.selectFromList
-      },
+  // console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
+  initOne(() => {
+    Static = {
       isValid: false
     }
-  }
-  // });
+
+    test.nickName = {
+      value: "",
+      valid: false,
+      error: false,
+      label: Variable.lang.label.nickName,
+      placeholder: Variable.lang.label.nickName,
+      errorText: Variable.lang.error_div.nicknameErr,
+      condition: (value) => {
+        return false
+
+      },
+      afterValid: () => {
+        console.log('=e24362=', "afterValid", Static)
+        checkValid(Static, ["nickName"])
+
+      }
+    }
+
+    Static.nickName = {
+      value: "",
+      valid: false,
+      error: false,
+      label: Variable.lang.label.nickName,
+      placeholder: Variable.lang.label.nickName,
+      errorText: Variable.lang.error_div.nicknameErr,
+      condition: (value) => {
+        let checkErrors = false;
+
+        const beginWithoutDigit = /^\D.*$/ // начало с цифры
+        const chars = /^.{5,30}$/ // от 5 до 30 символов
+        const latinChars = /^[a-zA-Z0-9._]/ // латинские буквы
+        const withoutSpaces = /^\S*$/ // без пробелов
+        const points = /^(?!.*\.\.)(?!\.)(?!.*\.$)/ // 2 точки или точка в начале или точка в конце
+        const underscore = /^(?!.*\_\_)(?!\_)(?!.*\_$)/ // 2 нижних подчеркивания или нижнее подчеркивание в начале или нижнее подчеркивание в конце
+        const dash = /^(?!.*\-\-)(?!\-)(?!.*\-$)/ // 2 тире или тире в начале или тире в конце
+        const number = /^(?!\d+$)/ // состоит из цифр
+        const specialChars = /^(?=.*[!@#$%^&(),+=/\/\]\[{}?><":|])/ // специальные символы
+
+
+
+
+
+
+
+        if (!validator.matches(value, chars)) {
+          Static.nickName.errorText = Variable.lang.error_div.nicknameErr3
+          return false
+        }
+        else if (!validator.matches(value, latinChars)) {
+          Static.nickName.errorText = Variable.lang.error_div.nicknameErr4
+          return false
+        }
+        else if (!validator.matches(value, withoutSpaces)) {
+          Static.nickName.errorText = Variable.lang.error_div.nicknameErr5
+          return false
+        }
+        else if (!validator.matches(value, points)) {
+          Static.nickName.errorText = Variable.lang.error_div.nicknameErr6
+          return false
+        }
+        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
+
+        }
+        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
+
+        }
+        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
+
+        }
+        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
+
+        }
+        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
+
+        }
+        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
+
+        }
+        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
+
+        } else {
+
+        }
+        // console.log(Static.nickName.errorText)
+
+        // return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i);
+
+      },
+      afterValid: () => {
+
+        checkValid(Static, ["nickName"])
+
+      }
+    }
+
+    if (!reload) {
+      formInputs = {
+        /* nickName: {
+           value: "",
+           valid: false,
+           error: false,
+           errorText: Variable.lang.error_div.nicknameErr
+         },*/
+        language: {
+          value: "",
+          code: "",
+          valid: false,
+          error: false,
+          errorText: Variable.lang.error_div.selectFromList
+        },
+        country: {
+          value: "",
+          code: "",
+          valid: false,
+          error: false,
+          errorText: Variable.lang.error_div.selectFromList
+        },
+        //  isValid: false
+      }
+    }
+  });
 
   const sendRegistrationForm = async function (e) {
     e.preventDefault();
@@ -108,8 +210,6 @@ const ModalAfterRegisterForm = function (data, reload) {
     return
 
   }
-
-
   return (
     <div class="c-modal c-modal--open" id="ModalAfterRegisterForm">
       <section class="c-modal__dialog">
@@ -130,11 +230,12 @@ const ModalAfterRegisterForm = function (data, reload) {
                 >
                   <input style="display: none;" type="submit" />
                   <div>
-                    <label for="afterRegisterNickname">
+                    <Input classDiv="" Static={test.nickName} />
+                    {/* <label for="afterRegisterNickname">
                       {Variable.lang.label.nickName}
                     </label>
                     <div class="error-div">
-                      {/* <div class="error-div-variant">
+                       <div class="error-div-variant">
                         {Variable.lang.error_div.nicknameErr}
                       </div>
                       <div class="error-div-variant">
@@ -166,7 +267,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                       </div>
                       <div class="error-div-variant">
                         {Variable.lang.error_div.nicknameErr11}
-                      </div> */}
+                      </div> 
                       <div class="error-div-variant">
                         {formInputs.nickName.error}
                       </div>
@@ -182,9 +283,9 @@ const ModalAfterRegisterForm = function (data, reload) {
                         type="text"
                         oninput={changeInput}
                         value={formInputs.nickName.value}
-                      />
-                    </div>
+                      />*/}
                   </div>
+
                   <div>
                     <label>{Variable.lang.label.lang}</label>
                     <div style="display: none;" class="error-div">
@@ -210,7 +311,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                                 if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
                                   formInputs.isValid = true
                                 }
-                                console.log('=5fb352 formInputs=', formInputs)
+                                // console.log('=5fb352 formInputs=', formInputs)
                                 // initReload("modals")
                               }
                             }

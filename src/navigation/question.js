@@ -9,13 +9,12 @@ import {
 } from "@betarost/cemjs";
 
 
-import { If } from '@component/helpers/All.js';
 import { BlockQuestions } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
 
-const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
+import { api } from '@src/apiFunctions.js'
+
+const start = function (data, ID = "mainBlock") {
     let filtersQuestions
 
     init(
@@ -33,41 +32,40 @@ const start = function () {
                 },
                 desc: -1
             }
-            Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "PageQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions)});
         },
         () => {
             return (
-                <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
+                <div class='c-main__body'>
                     <BlockQuestions
                         version={Variable.dataUrl}
                         filters={filtersQuestions}
-                        items={Variable.PageQuestions}
                         name={"PageQuestions"}
                         button={
-                            <If
-                                data={Variable.PageQuestions.list_records.length < Variable.PageQuestions.totalFound}
-                                dataIf={
-                                    <ButtonShowMore
-                                        onclick={async () => {
-                                            let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 20, offset: Variable.PageQuestions.list_records.length })
-                                            Variable.PageQuestions.list_records.push(...tmp.list_records)
-                                            initReload()
-                                        }}
-                                    />
+                            ()=>{
+                                if(Variable.PageQuestions.list_records.length < Variable.PageQuestions.totalFound){
+                                    return(
+                                        <ButtonShowMore
+                                            onclick={async () => {
+                                                let tmp = await api({ type: "get", action: "getQuestions", short: true, limit: 21, offset: Variable.PageQuestions.list_records.length, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions)})
+                                                Variable.PageQuestions.list_records.push(...tmp.list_records)
+                                                initReload()
+                                            }}
+                                        />
+                                    )
                                 }
-                            />
+                            }
                         }
                         callBack={
                             async function (active, nameOptions) {
                                 filtersQuestions[nameOptions].value = active
-                                Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) });
+                                await api({ type: "get", action: "getQuestions", short: true, name: 'PageQuestions', limit: 6, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions)})
                                 initReload();
                             }
                         }
                     />
                 </div>
             )
-        }
+        }, ID
     )
 }
 

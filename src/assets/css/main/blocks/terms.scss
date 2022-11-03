@@ -1,6 +1,7 @@
 /* Terms of service styles */
 .c-terms {
     padding-top: 60px;
+    padding-bottom: 20px;
 
     &__container {}
 
@@ -86,6 +87,10 @@
                 .c-button {
                     &__text {
                         line-height: 48px;
+
+                        @media(max-width: 464px) {
+                            line-height: 34px;
+                        }
                     }
                 }
             }

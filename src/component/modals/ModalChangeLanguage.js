@@ -18,10 +18,9 @@ const changeInput = (e) => {
 
 
 const ModalChangeLanguage = function (data, reload) {
-  if (!reload) {
-    inputValue = ""
-    allLang = Variable.listsLang;
-  }
+
+  allLang = Variable.listsLang;
+
   return (
     <div class="c-modal c-modal--open" id="changeLanguage">
       <section class="c-modal__dialog">

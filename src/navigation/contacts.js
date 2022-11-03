@@ -6,24 +6,13 @@ import {
   initReload
 } from "@betarost/cemjs";
 // poydet
-import { validator } from "@src/functions.js";
+import { validator,checkValid } from "@src/functions.js";
 import { api } from '@src/apiFunctions.js'
 import svg from "@assets/svg/index.js";
 import { Jivo, Input, TextArea } from '@component/element/index.js';
 
 const start = function (data, ID = "mainBlock") {
   let Static = {}
-
-  const checkValid = function () {
-    if (Static.name.valid === true && Static.email.valid === true && Static.message.valid === true) {
-      Static.isValid = true
-    } else {
-      Static.isValid = false
-    }
-    initReload()
-    return;
-  }
-
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!Static.isValid) {
@@ -52,28 +41,59 @@ const start = function (data, ID = "mainBlock") {
         value: "",
         valid: false,
         error: false,
-      }
+        label: Variable.lang.label.name,
+        placeholder: Variable.lang.placeholder.name,
+        errorText: Variable.lang.error_div.nicknameErr,
+        condition:(value) => {
+          return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+        },
+        afterValid:() => {
+            
+          checkValid(Static,["name","email","message"])
+        
+       }
+        }
+        
+      
 
       Static.email = {
         value: "",
         valid: false,
         error: false,
-      }
+        label: Variable.lang.label.email,
+        placeholder: Variable.lang.placeholder.email,
+        errorText: Variable.lang.error_div.wrong_email,
+        type: "text",
+        condition: (value) => {
+            return validator.isEmail(value);
+        },
+        afterValid:() => {
+            
+          checkValid(Static,["name","email","message"])
+        
+       }
+    }
 
+  
       Static.message = {
         value: "",
         valid: false,
         error: false,
       }
 
+      /**
+       * проверка имени и мыла 
+       */
       if (Variable.myInfo.nickname) {
         Static.name.value = Variable.myInfo.nickname
         Static.name.valid = true
+        Static.name.readonly=true
       }
 
       if (Variable.myInfo.email) {
         Static.email.value = Variable.myInfo.email
         Static.email.valid = true
+        Static.email.readonly=true
       }
     },
     () => {
@@ -102,37 +122,18 @@ const start = function (data, ID = "mainBlock") {
                         <h4>{Variable.lang.h.contact}</h4>
                         <p>{Variable.lang.p.writeUs}</p>
                         <form id="contactsForm" onsubmit={sendMessage}>
-                          <input style="display: none;" type="submit" />
-                          <Input
-                            label={Variable.lang.label.name}
-                            error={Variable.lang.error_div.not_empty_input}
-                            placeholder={Variable.lang.placeholder.name}
-                            type="text"
-                            value={Static.name.value}
-                            className="contacts_form_name_icon"
-                            condition={(value) => {
-                              return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-                            }}
-                            afterValid={() => {
-                              checkValid()
-                            }}
-                            Static={Static.name}
-                          />
-                          <Input
-                            label={Variable.lang.label.email}
-                            error={Variable.lang.error_div.wrong_email}
-                            placeholder={Variable.lang.placeholder.email}
-                            type="text"
-                            value={Static.email.value}
-                            className="contacts_form_email_icon"
-                            condition={(value) => {
-                              return validator.isEmail(value);
-                            }}
-                            afterValid={() => {
-                              checkValid()
-                            }}
-                            Static={Static.email}
-                          />
+                          <input style="display: none;" type="submit" />          
+                            <Input
+                               
+                                classDiv="contacts_form_name_icon"
+                                Static={Static.name}
+                               
+
+                            />
+                              <Input
+                                classDiv="contacts_form_email_icon"
+                                Static={Static.email}
+                            />
                           <TextArea
                             label={Variable.lang.label.message}
                             error={Variable.lang.error_div.not_empty_input}
@@ -143,13 +144,13 @@ const start = function (data, ID = "mainBlock") {
                               return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
                             }}
                             afterValid={() => {
-                              checkValid()
+                              checkValid(Static,["name","email","message"])
                             }}
                             Static={Static.message}
                           />
                           <div
-                            class="search-button"
-                            hidden={!Static.isValid}
+                           
+                            class={['search-button', !Static.isValid ? 'c-button--inactive' : null]}
                             onclick={sendMessage}
                           >
                             {Variable.lang.button.send}

@@ -202,6 +202,16 @@
     @media(min-width: 1200px) {
         margin-left: 90px;
     }
+
+    @media(max-width: 1024px) {
+        margin: 0;
+        margin-bottom: 30px;
+        padding: 0 50px;
+    }
+
+    @media(max-width: 767px) {
+        padding: 0;
+    }
 }
 
 .contacts_info a {

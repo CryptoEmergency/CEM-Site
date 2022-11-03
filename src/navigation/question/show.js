@@ -16,7 +16,6 @@ import { QuestionAnswerItem } from '@component/element/index.js';
 
 const start = function (data, ID = "mainBlock") {
   let item, itemAnswer, itemID;
-
   init(
     async () => {
       if (data && data.item) {
@@ -24,10 +23,13 @@ const start = function (data, ID = "mainBlock") {
         itemID = data.item._id
 
       } else {
-        itemID = Variable.dataUrl.params
+        if (data.itemID) {
+          itemID = data.itemID
+        } else {
+          itemID = Variable.dataUrl.params
+        }
         let response = await api({ type: "get", action: "getQuestions", short: true, limit: 1, filter: { _id: itemID } })
         item = response.list_records[0]
-
 
       }
 

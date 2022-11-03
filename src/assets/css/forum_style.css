@@ -55,6 +55,15 @@
     transition: 0.75;
 }
 
+.general_sponsor_banner{
+    display: block;
+    width: 40%; 
+    margin: 0 auto;
+    background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); 
+    padding: 2px; 
+    border-radius: 6px
+}
+
 @media(max-width: 1000px) {
     .forum_plan {
         width: 100%;
@@ -94,9 +103,14 @@
 }
 
 @media(max-width: 800px) {
-    .speaker_item {
-        display: grid;
-        grid-template-columns: 200px 320px;
+
+    .general_sponsor_banner{
+        width: 90%; 
+    }
+    .speaker_item{
+        display: grid; 
+        grid-template-columns: 200px 320px; 
+
         align-items: center;
         font-size: 14px;
     }
