@@ -82,7 +82,7 @@ const mainFooter = async function () {
                                                     <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.career }) }} href="/career-whith-us/"><span>{Variable.lang.a.career}</span></a>
                                                     <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.mediaUs }) }} href="/media/"><span>{Variable.lang.h.mediaUs}</span></a>
 
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>
+                                                    {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
                                                     <a class="c-footer__link" href="/assets/docs/whitePaperEN.pdf">
                                                         <span>{Variable.lang.span.whitePaper}</span>
                                                     </a>
