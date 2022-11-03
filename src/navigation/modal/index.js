@@ -11,7 +11,6 @@ Variable.Static.countModals = 0
 Variable.Static.countModalsPage = 0
 
 const mainModal = async function () {
-
     init(
         () => {
             // console.log("modals", Variable.Modals)
