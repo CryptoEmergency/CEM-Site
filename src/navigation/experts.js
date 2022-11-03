@@ -7,8 +7,9 @@ import {
 // poydet
 import { BlockUsers } from '@component/blocks/index.js';
 
+let filters
+
 const start = function (data, ID = "mainBlock") {
-    let filters
     init(
         async () => {
             filters = {

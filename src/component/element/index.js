@@ -25,5 +25,6 @@ export { AnswerAdditionallyToggleNew } from "./AnswerAdditionallyToggleNew.js";
 export { SwitchLenta } from "./SwitchLenta.js";
 export { AwardsProgress } from "./AwardsProgress.js";
 export { Input } from "./Input.js";
+export { CheckBox } from "./CheckBox.js";
 export { TextArea } from "./TextArea.js";
 export { Test } from "./Test.js";

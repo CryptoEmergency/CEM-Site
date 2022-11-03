@@ -10,13 +10,10 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation } from '@src/functions.js';
+import { allValidation, validator } from '@src/functions.js';
+import { Input, CheckBox } from '@component/element/index.js';
 
-
-let wayReg,
-    formInputs,
-    viewPassword,
-    listCodes
+let listCodes
 
 let elem = Variable.setRef()
 let elemButton = Variable.setRef()
@@ -28,192 +25,47 @@ const changeSearch = (e) => {
     initReload("modals");
 }
 
-const changeInput = function () {
 
-    if (this.dataset.type == "agreement") {
-        formInputs.agreement.value = Boolean(this.checked)
-        formInputs.agreement.valid = formInputs.agreement.value
-        this.value = formInputs.agreement.value
-    } else {
-        formInputs[this.dataset.type].value = this.value.trim()
-        formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
-    }
-
-
-
-
-    if (!formInputs[this.dataset.type].valid) {
-        formInputs[this.dataset.type].error = true;
-        this.style = "border-color: rgb(200, 23, 38);";
-        formInputs.isValid = false
-        initReload("modals")
-        return
-    } else {
-        formInputs[this.dataset.type].error = false;
-        this.style = "border-color: rgb(37, 249, 48);"
-    }
-
-    let isCheckAll = false
-
+const checkValid = function () {
     if (wayReg == "email") {
-        if (formInputs.email.valid === true && formInputs.pass.valid === true && formInputs.agreement.valid === true) {
-            isCheckAll = true
+        if (Static.email.valid && Static.pass.valid && Static.agreement.value) {
+            Static.isValid = true
+        } else {
+            Static.isValid = false
         }
     } else {
-        if (formInputs.phone.valid === true && formInputs.pass.valid === true && formInputs.agreement.valid === true) {
-            isCheckAll = true
+        if (Static.phone.valid && Static.pass.valid && Static.agreement.value) {
+            Static.isValid = true
+        } else {
+            Static.isValid = false
         }
     }
-
-    if (isCheckAll) {
-        formInputs.isValid = true
-    } else {
-        formInputs.isValid = false
-    }
-
-    initReload("modals")
+    initReload()
     return;
 }
 
-const WayRegForm = function () {
-    if (wayReg == "email") {
-        return (
-            <div>
-                <div class='reset_by_email_block'>
-                    <label for="resetByEmailInput">{Variable.lang.label.email}</label>
-                    <div class="error-div">
-                        <If
-                            data={formInputs.email.error != ""}
-                            dataIf={
 
-                                <div class="error-div-variant">{formInputs.email.errorText}</div>
-
-                            }
-                        />
-                    </div>
-
-                    <div class="reset_by_email_block_container">
-                        <input
-                            placeholder={Variable.lang.placeholder.email}
-                            type="text"
-                            id="registerByEmailInput"
-                            data-type="email"
-                            value={formInputs.email.value}
-                            oninput={changeInput}
-                        />
-                    </div>
-                </div>
-            </div>
-        )
-    } else {
-        return (
-            <div>
-                <div class='reset_by_mobile_block'>
-                    <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
-                    <div class="error-div">
-                        <If
-                            data={formInputs.phone.error}
-                            dataIf={
-
-                                <div class="error-div-variant">{formInputs.phone.errorText}</div>
-
-                            }
-                        />
-                    </div>
-
-                    <div class="reset_by_mobile_block_container c-phonecode">
-
-                        <div class="country-phone2">
-                            <div class="country-phone-selector2">
-                                <div
-                                    class="country-phone-selected2"
-                                    onClick={() => {
-                                        elemCountry().hidden = !elemCountry().hidden
-                                        listCodes = Variable.phoneCodes
-                                    }}
-                                >
-                                    <span>
-                                        +{formInputs.phone.code}
-                                        <img src={images.blank} class={`flag flag-${formInputs.phone.abbr}`} />
-                                    </span>
-                                </div>
-                                <div
-                                    class="country-phone-options2"
-                                    hidden={true}
-                                    ref={elemCountry}
-                                >
-                                    <input
-                                        type="text"
-                                        class="country-phone-search2"
-                                        value=""
-                                        oninput={changeSearch}
-                                    />
-                                    <label class="country-phone-search-label2">{Variable.lang.h.modal_changeCountry}</label>
-                                    <ul>
-                                        {
-                                            listCodes.map(function (item) {
-                                                return (
-                                                    <li
-                                                        data-phone={item.code}
-                                                        data-co={item.abbr}
-                                                        class="country-phone-option2"
-                                                        onClick={() => {
-                                                            formInputs.phone.code = item.code
-                                                            formInputs.phone.abbr = item.abbr
-                                                            elemCountry().hidden = true
-                                                            initReload("modals")
-                                                        }}>
-                                                        <span>
-                                                            +{item.code}
-                                                            <img src="/assets/image/blank.gif" class={`flag flag-${item.abbr}`} />
-                                                        </span>
-                                                        {item.text}
-                                                    </li>
-                                                )
-                                            })
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <input
-                            class="phoneNubmerInput2"
-                            type="text"
-                            autofocus="true"
-                            placeholder="9990000000"
-                            data-type="phone"
-                            value={formInputs.phone.value}
-                            oninput={changeInput}
-                        />
-                    </div>
-                </div>
-            </div>
-        )
-
-    }
-}
 
 const sendRegistration = async function (e) {
     e.preventDefault();
-    if (!formInputs.isValid) {
+    if (!Static.isValid) {
         return false
     }
     elemButton().classList.add('c-button--animated');
     let data = {
-        password: formInputs.pass.value,
-        agree: formInputs.agreement.value
+        password: Static.pass.value,
+        agree: Static.agreement.value
     };
     if (wayReg == "email") {
-        data.email = formInputs.email.value
+        data.email = Static.email.value
     } else {
-        data.phone = `+${formInputs['phone'].code}${formInputs['phone'].value}`
-        data.co = formInputs['phone'].abbr
+        data.phone = `+${Static['phone'].code}${Static['phone'].value}`
+        data.co = Static['phone'].abbr
     }
 
-
+    console.log('=c439d4=', data)
     let tmpRes = await sendApi.create("registration", { value: data });
-
+    console.log('=c439d4 tmpRes=', tmpRes)
     if (tmpRes.status === 'ok') {
         Variable.DelModals("ModalReg")
         Variable.SetModals({ name: "ModalConfirmCode", data: { way: wayReg } })
@@ -225,45 +77,49 @@ const sendRegistration = async function (e) {
     return
 }
 
+
+let wayReg, Static
+
 const ModalReg = function () {
 
     initOne(
         () => {
-            Variable.OutHideWindows.push([elem, "ModalReg"])
             wayReg = "email"
-            listCodes = Variable.phoneCodes
-            viewPassword = false
-            if (!formInputs) {
-                formInputs = {
-                    email: {
-                        value: "",
-                        valid: false,
-                        error: false,
-                        errorText: Variable.lang.error_div.wrong_email
-                    },
-                    pass: {
-                        value: "",
-                        valid: false,
-                        error: false,
-                        errorText: Variable.lang.error_div.password5
-                    },
-                    phone: {
-                        value: "",
-                        code: 7,
-                        abbr: "ru",
-                        valid: false,
-                        error: false,
-                        errorText: Variable.lang.error_div.wrong_phone
-                    },
-                    agreement: {
-                        value: false,
-                        valid: false,
-                        error: false,
-                        errorText: Variable.lang.error_div.needAgree
-                    },
-                    isValid: false
-                }
+
+            Static = {
+                isValid: false
             }
+
+            Static.phone = {
+                value: "",
+                valid: false,
+                error: false,
+                code: 7,
+                abbr: "ru",
+            }
+
+            Static.email = {
+                value: "",
+                valid: false,
+                error: false,
+            }
+
+            Static.pass = {
+                value: "",
+                valid: false,
+                error: false,
+            }
+
+            Static.agreement = {
+                value: true,
+                valid: false,
+                error: false,
+            }
+
+
+            Variable.OutHideWindows.push([elem, "ModalReg"])
+            listCodes = Variable.phoneCodes
+
         }
     )
 
@@ -286,6 +142,9 @@ const ModalReg = function () {
                             id="regByEmail"
                             class={['c-button c-button--toggler', wayReg == "email" ? 'c-button--active' : null]}
                             onClick={() => {
+                                if (wayReg == "email") {
+                                    return
+                                }
                                 wayReg = "email"
                                 initReload("modals")
                             }}
@@ -296,6 +155,9 @@ const ModalReg = function () {
                             id="regByMobile"
                             class={['c-button c-button--toggler', wayReg == "phone" ? 'c-button--active' : null]}
                             onClick={() => {
+                                if (wayReg == "phone") {
+                                    return
+                                }
                                 wayReg = "phone"
                                 initReload("modals")
                             }}
@@ -306,70 +168,158 @@ const ModalReg = function () {
                     <form id="registrationForm" onsubmit={sendRegistration}>
                         <input style="display: none;" type="submit" />
                         <div class="reset_password_input_block">
-                            <WayRegForm />
+                            {
+                                () => {
+                                    if (wayReg == "email") {
+                                        return (
+                                            <Input
+                                                label={Variable.lang.label.email}
+                                                error={Variable.lang.error_div.wrong_email}
+                                                placeholder={Variable.lang.placeholder.email}
+                                                type="text"
+                                                value={Static.email.value}
+                                                className="contacts_form_email_icon"
+                                                condition={(value) => {
+                                                    return validator.isEmail(value);
+                                                }}
+                                                afterValid={() => {
+                                                    checkValid()
+                                                }}
+                                                Static={Static.email}
+                                            />
+                                        )
+                                    } else {
+                                        return (
+                                            <div>
+                                                <div class='reset_by_mobile_block'>
+
+                                                    <div class="reset_by_mobile_block_container c-phonecode">
+
+                                                        <Input
+                                                            label={Variable.lang.label.phone}
+                                                            error={Variable.lang.error_div.wrong_phone}
+                                                            placeholder="9990000000"
+                                                            type="text"
+                                                            value={Static.phone.value}
+                                                            className=""
+                                                            condition={(value) => {
+                                                                return validator.matches(value, /[0-9]{10}/i);
+                                                            }}
+                                                            afterValid={() => {
+                                                                checkValid()
+                                                            }}
+                                                            Static={Static.phone}
+                                                            dopBefor={
+                                                                <div class="country-phone2">
+                                                                    <div class="country-phone-selector2">
+                                                                        <div
+                                                                            class="country-phone-selected2"
+                                                                            onClick={() => {
+                                                                                elemCountry().hidden = !elemCountry().hidden
+                                                                                listCodes = Variable.phoneCodes
+                                                                            }}
+                                                                        >
+                                                                            <span>
+                                                                                +{Static.phone.code}
+                                                                                <img src={images.blank} class={`flag flag-${Static.phone.abbr}`} />
+                                                                            </span>
+                                                                        </div>
+                                                                        <div
+                                                                            class="country-phone-options2"
+                                                                            hidden={true}
+                                                                            ref={elemCountry}
+                                                                        >
+                                                                            <input
+                                                                                type="text"
+                                                                                class="country-phone-search2"
+                                                                                value=""
+                                                                                oninput={changeSearch}
+                                                                            />
+                                                                            <label class="country-phone-search-label2">{Variable.lang.h.modal_changeCountry}</label>
+                                                                            <ul>
+                                                                                {
+                                                                                    listCodes.map(function (item) {
+                                                                                        return (
+                                                                                            <li
+                                                                                                data-phone={item.code}
+                                                                                                data-co={item.abbr}
+                                                                                                class="country-phone-option2"
+                                                                                                onClick={() => {
+                                                                                                    Static.phone.code = item.code
+                                                                                                    Static.phone.abbr = item.abbr
+                                                                                                    elemCountry().hidden = true
+                                                                                                    initReload("modals")
+                                                                                                }}>
+                                                                                                <span>
+                                                                                                    +{item.code}
+                                                                                                    <img src="/assets/image/blank.gif" class={`flag flag-${item.abbr}`} />
+                                                                                                </span>
+                                                                                                {item.text}
+                                                                                            </li>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                }
+                            }
+
                         </div>
+
                         <div class="container-input">
-                            <label for="password_reg">{Variable.lang.label.password}</label>
-                            <div class="error-div">
-                                <If
-                                    data={formInputs.pass.error}
-                                    dataIf={
-
-                                        <div class="error-div-variant">{formInputs.pass.errorText}</div>
-
-                                    }
-                                />
-                            </div>
-
-                            <div class="input-div">
-                                <img src={svg.lock} class="icon-input" />
-                                <input
-                                    id="fast_pass"
-                                    placeholder={Variable.lang.placeholder.password}
-                                    type={`${viewPassword ? 'text' : 'password'}`}
-                                    data-type="pass"
-                                    value={formInputs.pass.value}
-                                    oninput={changeInput}
-                                />
-                                <img
-                                    src={svg[`eye${viewPassword ? '-slash' : ''}`]}
-                                    class="password_eye"
-                                    onClick={() => {
-                                        viewPassword = !viewPassword
-                                        initReload("modals")
-                                    }}
-                                />
-                            </div>
+                            <Input
+                                label={Variable.lang.label.password}
+                                error={Variable.lang.error_div.password5}
+                                placeholder={Variable.lang.placeholder.password}
+                                type="password"
+                                value={Static.pass.value}
+                                className="input-div"
+                                condition={(value) => {
+                                    return validator.isStrongPassword(value, {
+                                        minLength: 8,
+                                        minLowercase: 0,
+                                        minUppercase: 0,
+                                        minNumbers: 0,
+                                        minSymbols: 1,
+                                    });
+                                }}
+                                afterValid={() => {
+                                    checkValid()
+                                }}
+                                Static={Static.pass}
+                            />
                         </div>
+
                         <div class="container-checkbox">
-                            <div class="checkbox">
-                                <If
-                                    data={formInputs.agreement.error}
-                                    dataIf={
-                                        <p class="checkbox_error" style="display: block">{formInputs.agreement.errorText}</p>
-                                    }
-                                />
-                                <input
-                                    class="checkbox__input"
-                                    type="checkbox"
-                                    id="fast_agree"
-                                    required="required"
-                                    data-type="agreement"
-                                    checked={formInputs.agreement.value}
-                                    value={formInputs.agreement.value}
-                                    onchange={changeInput}
-                                />
-                                <label class="checkbox__label" for="fast_agree">
-                                    {Variable.lang.text.agree}
-                                    <span class="cont_a-link">
-                                        <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a>
-                                    </span>
-                                </label>
-                            </div>
+
+                            <CheckBox
+                                Static={Static.agreement}
+                                id="fast_agree"
+                                label={
+                                    <label class="checkbox__label" for="fast_agree">
+                                        {Variable.lang.text.agree}
+                                        <span class="cont_a-link">
+                                            <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a>
+                                        </span>
+                                    </label>
+                                }
+                                afterValid={() => {
+                                    checkValid()
+                                }}
+                            />
                         </div>
                         <footer class="c-modal__footer">
                             <button
-                                class={['c-button c-button--gradient2', !formInputs.isValid ? 'c-button--inactive' : null]}
+                                class={['c-button c-button--gradient2', !Static.isValid ? 'c-button--inactive' : null]}
                                 id="fast_reg"
                                 type="button"
                                 ref={elemButton}

@@ -11,16 +11,15 @@ import {
     Helpers
 } from '@betarost/cemjs';
 import { If } from '@component/helpers/All.js';
-import { BlockUsers } from '@component/blocks/index.js';
+import { BlockUsers, BlockMainNews, BlockBanners } from '@component/blocks/index.js';
+
 import images from "@assets/images/index.js";
 import { BlockPreview } from '@component/blocks/BlockPreview.js';
 import { BlockProjects } from '@component/blocks/BlockProjects.js';
 import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
-import { BlockBanners } from '@component/blocks/BlockBanners.js';
 import { BlockTrade } from '@component/blocks/BlockTrade.js';
 import { BlockExchange } from '@component/blocks/BlockExchange.js';
 
-import { BlockMainNews } from '@component/blocks/BlockMainNews.js';
 import { BlockInfoPartners } from '@component/blocks/BlockInfoPartners.js';
 import { ButtonShowMore } from '@component/element/index.js';
 const start = function () {
@@ -67,8 +66,8 @@ const start = function () {
             Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
             Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
             Variable.MainExchanges = await sendApi.send({ action: "getExchange", short: true, cache: true, name: "MainExchanges" });
-            Variable.MainUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "MainUsers", filter: Helpers.getFilterUsers(filters, type) });
-            Variable.MainNews = await sendApi.send({ action: "getNews", short: true, cache: true, name: "MainNews" });
+            // Variable.MainUsers = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "MainUsers", filter: Helpers.getFilterUsers(filters, type) });
+            // Variable.MainNews = await sendApi.send({ action: "getNews", short: true, cache: true, name: "MainNews" });
             timersStart("Course", async () => { Variable.Course = await sendApi.send({ action: "getCourse", short: true }) }, 10000)
 
         },
@@ -160,6 +159,7 @@ const start = function () {
                                     filters={filters}
                                     nameRecords="MainUsers"
                                     type={type}
+                                    limit={6}
                                     button={
                                         <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>
                                             <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
