@@ -12,6 +12,8 @@ import {
 import { BlockQuestions } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
 
+import { api } from '@src/apiFunctions.js'
+
 const start = function () {
     let filtersQuestions
 
@@ -30,7 +32,6 @@ const start = function () {
                 },
                 desc: -1
             }
-            Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "PageQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions)});
         },
         () => {
             return (
@@ -38,7 +39,6 @@ const start = function () {
                     <BlockQuestions
                         version={Variable.dataUrl}
                         filters={filtersQuestions}
-                        items={Variable.PageQuestions}
                         name={"PageQuestions"}
                         button={
                             ()=>{
@@ -46,7 +46,7 @@ const start = function () {
                                     return(
                                         <ButtonShowMore
                                             onclick={async () => {
-                                                let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 20, offset: Variable.PageQuestions.list_records.length })
+                                                let tmp = await api({ type: "get", action: "getQuestions", short: true, limit: 21, offset: Variable.PageQuestions.list_records.length, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions)})
                                                 Variable.PageQuestions.list_records.push(...tmp.list_records)
                                                 initReload()
                                             }}
@@ -58,7 +58,7 @@ const start = function () {
                         callBack={
                             async function (active, nameOptions) {
                                 filtersQuestions[nameOptions].value = active
-                                Variable.PageQuestions = await sendApi.send({ action: "getQuestions", short: true, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) });
+                                await api({ type: "get", action: "getQuestions", short: true, name: 'PageQuestions', limit: 6, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions)})
                                 initReload();
                             }
                         }

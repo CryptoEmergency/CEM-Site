@@ -9,19 +9,12 @@ import {
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 
-
-const BlockExchange = async function (data) {
+const BlockExchange = async function ({ nameRecords, button, limit = 21 }) {
     await initOne(
         async () => {
-            let limit = 12
-            if(data.nameRecords == "MainExchanges"){
-                limit = 6
-            }
-            await api({ type: "get", action: "getExchange", short: true, cache: true, name: data.nameRecords, limit: limit })
-
+            await api({ type: "get", action: "getExchange", short: true, cache: true, name: nameRecords, limit: limit })
         }
     )
-
     return (
         <div id="crypto_exchange" class="crypto_exchanges">
             <h4>{Variable.lang.h.exchange}</h4>
@@ -41,13 +34,13 @@ const BlockExchange = async function (data) {
                     </div>
                 </div>
                 {
-                    Variable[data.nameRecords].list_records.map(function (exchange, i) {
+                    Variable[nameRecords].list_records.map(function (item, i) {
                         return (
                             <a
                                 class="crypto_exchanges-row exchangeListLoad"
                                 target="_blank"
                                 rel="nofollow noopener"
-                                href={exchange.url}
+                                href={item.url}
                             >
                                 <div class="crypto_exchanges-cell">
                                     <div>
@@ -55,7 +48,7 @@ const BlockExchange = async function (data) {
                                             <span class="list_exanges_image_container">
                                                 <img
                                                     class="crypto_coin_icon load"
-                                                    src={`/assets/upload/exchange/${exchange.logo}`}
+                                                    src={`/assets/upload/exchange/${item.logo}`}
                                                 />
                                             </span>
                                         </span>
@@ -63,7 +56,7 @@ const BlockExchange = async function (data) {
                                 </div>
                                 <div class="crypto_exchanges-cell">
                                     <div>
-                                        {exchange.score}
+                                        {item.score}
                                         <img
                                             class="crypto_exchanges_rate"
                                             src={svg.rate_icon}
@@ -73,7 +66,7 @@ const BlockExchange = async function (data) {
                                 <div class="crypto_exchanges-cell">
                                     <div>
                                         {
-                                            exchange.list_coins.map(function (coin, i) {
+                                            item.list_coins.map(function (coin, i) {
                                                 return (
                                                     <div class="crypto_coin_container ">
                                                         <img
@@ -91,7 +84,7 @@ const BlockExchange = async function (data) {
                                 </div>
                                 <div class="crypto_exchanges-cell exanges_date_create">
                                     <span class="">
-                                        {Helpers.getDateFormat(exchange.startDate)}
+                                        {Helpers.getDateFormat(item.startDate)}
                                     </span>
                                 </div>
                                 <div>
@@ -108,13 +101,8 @@ const BlockExchange = async function (data) {
                     })
                 }
             </div>
-            {() => {
-                if(data.button){
-                    return(data.button)
-                }
-            }}
+            {button}
         </div>
     )
 }
-//I check
 export { BlockExchange }
