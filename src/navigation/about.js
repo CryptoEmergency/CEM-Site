@@ -13,7 +13,7 @@ const start = function (data, ID = "mainBlock") {
     null,
     () => {
       return (
-        <div class="c-aboutus about_us_container c-main__body">
+        <div class="c-aboutus about_us_container c-main__body" id="test2">
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
               <h2 class="c-whowe__title">

@@ -10,6 +10,7 @@ import {
   initGo,
   initOne,
   stringToHtml,
+  initAfter,
   getInitList
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
@@ -26,10 +27,18 @@ let news;
 
 const ModalPage = async function (ID, reload) {
   let data = Variable.ModalsPage[ID].data
-  console.log('=ba46ca=',data)
-  // console.log('=c1d88c=2 ModalPage', getInitList(), Variable.ModalsPage[ID])
+  // console.log('=c1d88c=2 ModalPage', ID, reload)
   // let mainId = item._id;
 
+  initAfter(
+    () => {
+      if (Variable.ModalsPage[ID].el && Variable.ModalsPage[ID].top) {
+        Variable.ModalsPage[ID].el.scrollTop = Variable.ModalsPage[ID].top;
+      }
+    },
+    null,
+    true
+  )
   if (!reload && getInitList()[ID].firstStart) {
     await getInitList()[ID].firstStart(reload)
   }
@@ -38,10 +47,14 @@ const ModalPage = async function (ID, reload) {
   // news = news.list_records[0];
   //  news = item
   return (
-    <div class="c-modal c-modal--open c-modal--fullscreen c-modal--menu" id="ModalFullNews">
+    <div
+      class="c-modal c-modal--open c-modal--fullscreen c-modal--menu"
+      id="ModalFullNews"
+
+    >
       <section class="c-modal__dialog">
-        <div class="c-modal__body">
-          <div class="c-fullnews">{/*  full_news_container */}
+        <div class="c-modal__body" >
+          <div class="c-fullnews" id="test" Element={($el) => { Variable.ModalsPage[ID].el = $el }}>{/*  full_news_container */}
             <div class="c-fullnews__block">{/*  full_news_block */}
               <div class="c-fullnews__content" >{/*  full_news_content. style={type === "university" ? "max-width:1100px" : null} */}
                 <div class="c-fullnews__header">{/*  user_post_header */}
@@ -81,7 +94,7 @@ const ModalPage = async function (ID, reload) {
                   </div>
                 </div>
 
-                <div class="c-fullnews__itemwrapp" style={data.style ? data.style : ''}>
+                <div class="c-fullnews__itemwrapp" style={data.style ? data.style : ''} >
                   {async () => {
                     return await getInitList()[ID].function(reload)
                   }}

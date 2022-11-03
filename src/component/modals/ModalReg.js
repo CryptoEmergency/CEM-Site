@@ -136,7 +136,7 @@ const ModalReg = function () {
             }
 
 
-            Variable.OutHideWindows.push([elem, "ModalReg"])
+            // Variable.OutHideWindows.push([elem, "ModalReg"])
             listCodes = Variable.phoneCodes
 
         }

@@ -19,12 +19,16 @@ const mainModalPage = async function () {
         },
 
         async (reload) => {
+
             if (!Variable.ModalsPage.length) {
                 document.querySelector('body').style = "";
                 return <div></div>
             }
 
             if (Variable.ModalsPage.length) {
+                if (Variable.ModalsPage[Variable.ModalsPage.length - 2] && !Variable.ModalsPage[Variable.ModalsPage.length - 2].top && Variable.ModalsPage[Variable.ModalsPage.length - 2].el) {
+                    Variable.ModalsPage[Variable.ModalsPage.length - 2].top = Variable.ModalsPage[Variable.ModalsPage.length - 2].el.scrollTop
+                }
                 document.querySelector('body').style = "overflow: hidden";
                 return (
                     <div>
