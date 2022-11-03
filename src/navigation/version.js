@@ -5,7 +5,7 @@ import {
     Variable,
     initReload
 } from "@betarost/cemjs";
-// poydet
+// poydet data-action
 
 import { api } from '@src/apiFunctions.js'
 
@@ -23,7 +23,7 @@ const start = function (data, ID = "mainBlock") {
                 <div class="c-main__body">
                     {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
                     Version page {Variable.Static.tpm}
-                    <img src={svg['load']}/>
+                    <img src={svg['load']} />
                 </div>
             )
         }, ID)

@@ -76,10 +76,14 @@ const swiperOptions = {
     autoplay: {
         delay: 2000,
     },
-    pagination: false,
-    scrollbar: {
-        el: '.swiper-scrollbar',
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
     },
+    pagination: false,
+    // scrollbar: {
+    //     el: '.swiper-scrollbar',
+    // },
     breakpoints: {
         100: {
             slidesPerView: 1,
@@ -100,10 +104,10 @@ const swiperOptions = {
         1240: {
             slidesPerView: 4,
             spaceBetween: 30,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            // navigation: {
+            //     nextEl: '.swiper-button-next',
+            //     prevEl: '.swiper-button-prev',
+            // },
         },
     },
 }
