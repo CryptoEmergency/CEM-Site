@@ -210,7 +210,7 @@ const start = function (data, ID = "mainBlock") {
               {filterArrLogo.map((item, i) => {
                 return (
                   <li
-                    class="c-goals__item c-universitycard"
+                    class="c-universitycard"
                     style={"margin-bottom:40px"}
                     key={i}
                   >
@@ -220,11 +220,11 @@ const start = function (data, ID = "mainBlock") {
                     <div class="c-universitycard__info">
                       <h5 class="c-universitycard__title">{item.title}</h5>
                       <p class="c-universitycard__text">{item.description}</p>
-                      {/* <button class="c-universitycard__btn">Подробнее</button>
-                       */}
-                      <div class="c-question__footer"   style={"width:25vw"} >
+                      {/* <button class="c-universitycard__btn">Подробнее</button> */}
+                      
+                      {/* <div class="c-question__footer"   style={"width:25vw"} > */}
                         <a
-                          class="c-button c-button--outline2 "
+                          class="c-universitycard__btn c-button c-button--outline2 "
                           onclick={() => {
                             Variable.SetModals({
                               name: "ModalFullSize",
@@ -238,7 +238,7 @@ const start = function (data, ID = "mainBlock") {
                             Подробнее
                           </div>
                         </a>
-                      </div>
+                      {/* </div> */}
                     </div>
                   </li>
                 );
