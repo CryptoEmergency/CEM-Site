@@ -59,6 +59,12 @@ const Input =  function ({ Static, classDiv, classInput, befor, after }) {
                     value={Static.value}
                     class={classInput}
                     oninput={function () { checkInput(Static, this) }}
+                    onclick = {()=>{
+                        if(typeof Static.onclick == "function")
+                        {
+                              Static.onclick() 
+                        }
+                    }}
                 />
                 {Static.type == "password" ? <img
                     src={svg[`eye${Static.viewPassword ? '-slash' : ''}`]}

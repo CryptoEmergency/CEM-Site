@@ -33,7 +33,7 @@ const ModalAfterRegisterForm = function (data, reload) {
       let underscore = /^(?!.*\_\_)(?!\_)(?!.*\_$)/ // 2 нижних подчеркивания или нижнее подчеркивание в начале или нижнее подчеркивание в конце
       let dash = /^(?!.*\-\-)(?!\-)(?!.*\-$)/ // 2 тире или тире в начале или тире в конце
       let number = /^(?!\d+$)/ // состоит из цифр
-      let specialChars = /^(?!.*[!@#$%^&(),+=/\/\]\[{}?><":!№*|])/ // специальные символы 
+      let specialChars = /^(?!.*[!@#$%^&(),+=/\/\]\[{}?><":;!№*|])/ // специальные символы 
       // обявим объект с регулярками
       let arrayRegular = {3:chars,2:beginWithoutDigit,4:latinChars,5:withoutSpaces,6:points,7:underscore,10:dash,8:number,9:specialChars}
       //если значение инпута пустое убираем массив
@@ -95,45 +95,69 @@ const ModalAfterRegisterForm = function (data, reload) {
       },
       afterValid: () => {
 
-        checkValid(Static, ["nickName"])
+        checkValid(Static, ["nickName","language","country"])
 
       }
     }
-
-
-
-
-  if (!reload) {
-    formInputs = {
-
-      language: {
-        value: "",
-        code: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.selectFromList
+    
+    Static.language = {
+      value:"",
+      type:"text",
+      valid: false,
+      code: "",
+      name: "",
+      autocomplete:"off",
+      placeholder:Variable.lang.error_div.selectFromList,
+      onclick: () => {
+        Variable.SetModals({
+          name: "ModalChangeLanguage", data: {
+            onclick: (code, name, orig) => {
+              Static.language.value = name + ` (${orig})`
+              Static.language.code = code
+              Static.language.valid = true
+              checkValid(Static, ["nickName","language","country"])
+            }
+          }
+        }, true);
       },
-      country: {
-        value: "",
-        code: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.selectFromList
-      },
+  
     }
-  }
+
+
+    Static.country = {
+      value:"",
+      type:"text",
+      valid: false,
+      code: "",
+      name: "",
+      autocomplete:"off",
+      placeholder:Variable.lang.error_div.selectFromList,
+      onclick: () => {
+        Variable.SetModals({
+          name: "ModalSelectCountry", data: {
+            onclick: (code, name) => {
+              Static.country.value = name
+              Static.country.code = code
+              Static.country.valid = true
+              checkValid(Static, ["nickName","language","country"])
+            }
+          }
+        }, true);
+      }
+    }
+
    });
 
   const sendRegistrationForm = async function (e) {
     e.preventDefault();
-    if (!formInputs.isValid) {
+    if (!Static.isValid) {
       return false
     }
     let data = {
       value: {
-        nickname: formInputs.nickName.value,
-        mainLanguage: formInputs.language.code,
-        country: formInputs.country.code
+        nickname: Static.nickName.value,
+        mainLanguage: Static.language.code,
+        country: Static.country.code
       }
     }
 
@@ -173,7 +197,6 @@ const ModalAfterRegisterForm = function (data, reload) {
                 <input style="display: none;" type="submit" />
                 <div>
                   <Input classDiv="" Static={Static.nickName} />
-
                 </div>
 
                 <div>
@@ -184,28 +207,7 @@ const ModalAfterRegisterForm = function (data, reload) {
 
 
                   <div class="language_select_wrapper">
-                    <input
-                      readonly
-                      id="language_after_register"
-                      type="text"
-                      autocomplete="off"
-                      placeholder={Variable.lang.error_div.selectFromList}
-                      value={formInputs.language.value}
-                      onclick={() => {
-                        Variable.SetModals({
-                          name: "ModalChangeLanguage", data: {
-                            onclick: (code, name, orig) => {
-                              formInputs.language.value = name + ` (${orig})`
-                              formInputs.language.code = code
-                              formInputs.language.valid = true
-                              if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
-                                formInputs.isValid = true
-                              }
-                            }
-                          }
-                        }, true);
-                      }}
-                    />
+                  <Input classDiv="" Static={Static.language} />
                     <div
                       id="language_search_help"
                       class="language_help_block"
@@ -222,32 +224,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                   {Variable.lang.error_div.selectFromList}
                 </div>
                 <div class="country_select_wrapper">
-                  <input
-                    data-code=""
-                    id="country_search"
-                    data-action="changeCountryAfterRegister"
-                    data-form_type="afterReg"
-                    data-validate_type="country"
-                    type="text"
-                    autocomplete="off"
-                    readonly
-                    value={formInputs.country.value}
-                    onclick={() => {
-                      Variable.SetModals({
-                        name: "ModalSelectCountry", data: {
-                          onclick: (code, name) => {
-                            formInputs.country.value = name
-                            formInputs.country.code = code
-                            formInputs.country.valid = true
-                            if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
-                              formInputs.isValid = true
-                            }               
-                          }
-                        }
-                      }, true);
-                    }}
-                    placeholder={Variable.lang.error_div.selectFromList}
-                  />
+                <Input classDiv="" Static={Static.country} />
                   <div
                     id="country_search_help"
                     class="country_help_block"
@@ -261,7 +238,7 @@ const ModalAfterRegisterForm = function (data, reload) {
               <button
                 class={[
                   "c-button c-button--gradient2",
-                  !formInputs.isValid ? "c-button--inactive" : "",
+                  !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 type="button"
                 onClick={sendRegistrationForm}
