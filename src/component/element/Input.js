@@ -12,13 +12,13 @@ const checkInput = function (Static, target) {
     if (Static.timer) {
         clearTimeout(Static.timer);
     }
-    Static.timer = setTimeout(() => {
+    Static.timer =  setTimeout(async () => {
         Static.timer = null
         Static.value = target.value.trim()
         if (!Static.condition) {
             return
         }
-        Static.valid = Static.condition(target.value.trim())
+        Static.valid = await Static.condition(target.value.trim())
 
         Static.error = !Static.valid
         if (Static.error) {
@@ -35,7 +35,7 @@ const checkInput = function (Static, target) {
     return
 }
 
-const Input = function ({ Static, classDiv, classInput, befor, after }) {
+const Input =  function ({ Static, classDiv, classInput, befor, after }) {
     // console.log('=1c814c=', Static)
     let labelfor;
 

@@ -8,140 +8,90 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { allValidation,validator,checkValid } from "@src/functions.js";
-import { checkNickName } from "@src/apiFunctionsE.js";
+import { validator,checkValid } from "@src/functions.js";
 import { Input } from '@component/element/index.js';
+import { api } from '@src/apiFunctions.js'
 
 let formInputs;
 let Static = {}
 
-const changeInput = async (e) => {
-  let response;
-  let type = e.target.dataset.validate_type;
-  let value = e.target.value.trim();
-  formInputs[type].error = "";
-  formInputs[type].value = value;
-
-  if (formInputs[type].value.length > 2 && formInputs[type].value.length < 17) {
-    if (!allValidation(value, type)) {
-      formInputs[type].error = Variable.lang.error_div.nicknameErr4;
-    } else {
-      response = await checkNickName(value);
-      if (response > 0) {
-        formInputs[type].error = Variable.lang.error_div.nicknameErr11;
-      }
-    }
-  } else {
-    formInputs[type].error = Variable.lang.error_div.nicknameErr3;
-  }
-
-  if (formInputs[type].value.length === 0) {
-    formInputs[type].error = Variable.lang.error_div.nicknameErr;
-  }
-
-  if (formInputs[type].error === "") {
-    formInputs[type].valid = true;
-  } else {
-    formInputs[type].valid = false;
-  }
-
-  if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
-    formInputs.isValid = true
-  } else {
-    formInputs.isValid = false;
-  }
-  initReload("modals")
-};
-
 const ModalAfterRegisterForm = function (data, reload) {
- // console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
-  // initOne(() => {
+   initOne(() => {
 
     Static = {
       isValid: false
     }     
-    
-        const beginWithoutDigit = /^\D.*$/ // начало с цифры
-        const chars = /^.{5,30}$/ // от 5 до 30 символов
-        const latinChars = /^[a-zA-Z0-9._]/ // латинские буквы
-        const withoutSpaces = /^\S*$/ // без пробелов
-        const points = /^(?!.*\.\.)(?!\.)(?!.*\.$)/ // 2 точки или точка в начале или точка в конце
-        const underscore = /^(?!.*\_\_)(?!\_)(?!.*\_$)/ // 2 нижних подчеркивания или нижнее подчеркивание в начале или нижнее подчеркивание в конце
-        const dash = /^(?!.*\-\-)(?!\-)(?!.*\-$)/ // 2 тире или тире в начале или тире в конце
-        const number = /^(?!\d+$)/ // состоит из цифр
-        const specialChars = /^(?=.*[!@#$%^&(),+=/\/\]\[{}?><":|])/ // специальные символы
 
 
-        let arrayRegular = {1:chars,2:beginWithoutDigit,3:latinChars,4:withoutSpaces,5:points,6:underscore,7:dash,8:number,9:specialChars}
-
-    const checkBefore = function(value){
-      for(let a in arrayRegular){
-        console.log(a)
+    const checkBefore = async function(Static,value){
+      // регулярки для никнеймов
+      let beginWithoutDigit = /^\D.*$/ // начало с цифры
+      let chars = /^.{5,30}$/ // от 5 до 30 символов
+      let latinChars = /^[a-zA-Z0-9._]/ // латинские буквы
+      let withoutSpaces = /^\S*$/ // без пробелов
+      let points = /^(?!.*\.\.)(?!\.)(?!.*\.$)/ // 2 точки или точка в начале или точка в конце
+      let underscore = /^(?!.*\_\_)(?!\_)(?!.*\_$)/ // 2 нижних подчеркивания или нижнее подчеркивание в начале или нижнее подчеркивание в конце
+      let dash = /^(?!.*\-\-)(?!\-)(?!.*\-$)/ // 2 тире или тире в начале или тире в конце
+      let number = /^(?!\d+$)/ // состоит из цифр
+      let specialChars = /^(?!.*[!@#$%^&(),+=/\/\]\[{}?><":!№*|])/ // специальные символы 
+      // обявим объект с регулярками
+      let arrayRegular = {3:chars,2:beginWithoutDigit,4:latinChars,5:withoutSpaces,6:points,7:underscore,10:dash,8:number,9:specialChars}
+      //если значение инпута пустое убираем массив
+      if(value.length == 0)
+      {
+        Static.nickName.errorText = Variable.lang.error_div.nicknameErr
+        return false
       }
+      else{
+      //функция аналог arrayUnique
+      const unique = (value, index, self) => { return self.indexOf(value) === index; }
+      //объявим переменную куда будем писать текст ошибок
+      let errorText = "";
+      //если value не пустое перебериаем регулярки и запихиваем их ключи в массив 
+      for(let a in arrayRegular){
+        if(!validator.matches(value,arrayRegular[a]))
+        {
+          errorText+=Variable.lang.error_div["nicknameErr"+a]+".\r\n" 
+        }
+      }
+   //если ошибок нет проверим на уникальность имени пользователя
+    if(errorText.trim().length == 0)
+    {
+    let response =  await api({ type: "get", action: "getUsers", filter: {nickname: value} })
+    //если ник нейм свободен вернем true
+        if(response.result.totalFound == 0)
+        {
+      return true
+        }
+        else
+        {
+      Static.nickName.errorText = Variable.lang.error_div.nicknameErr11
+      return false
+        }
     }
-  
+    //если есть ошибки возращаем ошибки
+    else
+    {
+      Static.nickName.errorText = errorText
+      return false
+    }
+    }
+    }
 
     Static.nickName = {
       value: "",
       valid: false,
       error: false,
+      type: "text",
       label: Variable.lang.label.nickName,
       placeholder: Variable.lang.label.nickName,
       errorText: Variable.lang.error_div.nicknameErr,
-      condition: (value) => {
-        let checkErrors = false;
-
-
-
-        checkBefore("test")
-
-
-        console.log(Static.nickName.value)
-        console.log(value)
-
-        if (!validator.matches(value, chars)) {
-          Static.nickName.errorText = Variable.lang.error_div.nicknameErr3
-          return false
-        }
-        else if (!validator.matches(value, latinChars)) {
-          Static.nickName.errorText = Variable.lang.error_div.nicknameErr4
-          return false
-        }
-        else if (!validator.matches(value, withoutSpaces)) {
-          Static.nickName.errorText = Variable.lang.error_div.nicknameErr5
-          return false
-        }
-        else if (!validator.matches(value, points)) {
-          Static.nickName.errorText = Variable.lang.error_div.nicknameErr6
-          return false
-        }
-        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
-
-        }
-        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
-
-        }
-        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
-
-        }
-        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
-
-        }
-        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
-
-        }
-        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
-
-        }
-        else if (!validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i)) {
-
-        } else {
-
-        }
-        // console.log(Static.nickName.errorText)
-
-        // return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i);
-
+      condition:async (value) => {
+          if(await checkBefore(Static,value))
+          {
+            return true
+          }
+          
       },
       afterValid: () => {
 
@@ -155,12 +105,7 @@ const ModalAfterRegisterForm = function (data, reload) {
 
   if (!reload) {
     formInputs = {
-     // nickName: {
-    //    value: "",
-     //   valid: false,
-     //   error: false,
-     //   errorText: Variable.lang.error_div.nicknameErr
-    //  },
+
       language: {
         value: "",
         code: "",
@@ -175,10 +120,9 @@ const ModalAfterRegisterForm = function (data, reload) {
         error: false,
         errorText: Variable.lang.error_div.selectFromList
       },
-     // isValid: false
     }
   }
-  // });
+   });
 
   const sendRegistrationForm = async function (e) {
     e.preventDefault();
@@ -229,59 +173,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                 <input style="display: none;" type="submit" />
                 <div>
                   <Input classDiv="" Static={Static.nickName} />
-                  {/* <label for="afterRegisterNickname">
-                    {Variable.lang.label.nickName}
-                  </label>
-                  <div class="error-div">
-                     <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr2}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr3}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr4}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr5}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr6}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr7}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr8}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr9}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr10}
-                    </div>
-                    <div class="error-div-variant">
-                      {Variable.lang.error_div.nicknameErr11}
-                    </div> 
-                    <div class="error-div-variant">
-                      {formInputs.nickName.error}
-                    </div>
-                  </div>
-                  <div>
-                    <input
-                      data-form_type="afterReg"
-                      data-dirty="false"
-                      data-focusout="focusout"
-                      data-keyup="keyupValidate"
-                      data-validate_type="nickName"
-                      id="afterRegisterNickname"
-                      type="text"
-                      oninput={changeInput}
-                      value={formInputs.nickName.value}
-                    />*/}
+
                 </div>
 
                 <div>
@@ -309,8 +201,6 @@ const ModalAfterRegisterForm = function (data, reload) {
                               if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
                                 formInputs.isValid = true
                               }
-                              // console.log('=5fb352 formInputs=', formInputs)
-                              // initReload("modals")
                             }
                           }
                         }, true);
@@ -351,8 +241,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                             formInputs.country.valid = true
                             if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
                               formInputs.isValid = true
-                            }
-                            //  initReload("modals")
+                            }               
                           }
                         }
                       }, true);
@@ -375,24 +264,12 @@ const ModalAfterRegisterForm = function (data, reload) {
                   !formInputs.isValid ? "c-button--inactive" : "",
                 ]}
                 type="button"
-                // ref={elemButton}
                 onClick={sendRegistrationForm}
               >
                 <span class="c-button__text">
                   {Variable.lang.button.send}
                 </span>
-              </button>
-              {/* <div
-                type="button"
-                class="ask-btn inactive_form_button"
-                data-active="0"
-                data-form_type="afterReg"
-                data-action="afterRegisterFormSend"
-              >
-                <a id="afterRegisterFormSend" class="btn-ask">
-                  <span>{Variable.lang.button.send}</span>
-                </a>
-              </div> */}
+              </button>             
             </div>
           </div>
         </div>
