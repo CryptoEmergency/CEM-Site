@@ -81,7 +81,13 @@ const BottomMenu = function () {
                         <div class={`c-notification ${(findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "c-notification--active" : ""}`}>
                             <a
                                 class="c-userpanel__icon c-userpanel__icon--notify c-userpanel__icon--mobile_visible c-notification__link"
-                                onClick={toggleVisibleNotify}
+                                // onClick={toggleVisibleNotify}
+                                onClick={
+                                    (e) => {
+                                        Variable.SetModals({ name: "ModalNotify", data: {} })
+                                        e.stopPropagation();
+                                    }
+                                }
                             ></a>
                             <div class="c-notification__new"></div>
                         </div>

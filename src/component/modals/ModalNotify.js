@@ -54,8 +54,8 @@ const ModalNotify = async function (data, reload) {
 		notify = Variable.myInfo.notifyQuestions;
 
 		currentNotify = {
-			question: false,
-			awards: true,
+			question: true,
+			awards: false,
 			system: false
 		};
 	}

@@ -195,10 +195,10 @@ console.log(total)
               <div class="user_post_statistic_item">
                 <div class="user_post_statistic_image">
                   <img src={svg["question_answers"]} />{" "}
-                  <span>{item.statistic.comments} </span>
+                  <span>{item.statistic.comments ? item.statistic.comments : "0"} </span>
                 </div>
                 <div class="user_post_statistic_image">
-                  <img src={svg["question_views"]} /> {item.statistic.view}
+                  <img src={svg["question_views"]} /> {item.statistic.view ? item.statistic.view : "0"}
                 </div>
               </div>
               <div class="user_post_statistic_item">
