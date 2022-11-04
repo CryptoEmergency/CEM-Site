@@ -9,6 +9,8 @@ import {
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 
+import { NotFound } from "@component/element/index.js";
+
 const BlockTrade = async function ({ nameRecords, button, limit = 55 }) {
     await initOne(
         async () => {
@@ -93,7 +95,7 @@ const BlockTrade = async function ({ nameRecords, button, limit = 55 }) {
                                         <div class="button-container-preview">
                                             <span class="btn-news-preview">
                                                 <span>
-                                                    {Variable.lang.button.item}
+                                                    {Variable.lang.button.trade}
                                                 </span>
                                             </span>
                                         </div>
@@ -102,6 +104,8 @@ const BlockTrade = async function ({ nameRecords, button, limit = 55 }) {
                             )
                         })
                         return arrReturn
+                    } else {
+                        return(NotFound)
                     }
                 }}
             </div>

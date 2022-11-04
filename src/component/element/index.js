@@ -32,3 +32,5 @@ export { Comment } from "./Comment.js";
 export { InputAdaptive } from "./InputAdaptive.js";
 export { CourseCurrency } from "./CourseCurrency.js";
 export { Test } from "./Test.js";
+export { NotFound } from "./NotFound.js"
+
