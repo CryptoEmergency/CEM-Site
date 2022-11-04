@@ -9,13 +9,10 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-
+import { InputAdaptive, Comment } from "@component/element/index.js";
 
 import { If } from "@component/helpers/All.js";
-import {
-  CommentInput,
-  InputAdaptive,
-} from "@component/element/index.js";
+
 import { BlockComment } from "@component/blocks/index.js";
 
 
@@ -83,6 +80,27 @@ const BlockNewsShow = function ({ item }) {
           }}
         />
 
+        {() => {
+          if (item.comments && item.comments.length) {
+            const arrReturn = item.comments.map(function (item, i) {
+              return (
+                <Comment
+                  item={item}
+                />
+              )
+            })
+            return (
+              <div data-type="news_comment" class="post_comments">
+                <div class="user_news_item">
+                  {arrReturn}
+                </div>
+              </div>
+
+            )
+          } else {
+
+          }
+        }}
         <If
           data={item.comments.length > 0}
           dataIf={

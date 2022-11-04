@@ -24,7 +24,7 @@ const start = function (data, ID = "mainBlock") {
                     {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
                     Version page {Variable.Static.tpm}
                     <div>0</div>
-                    <div>{tmp}</div>
+                    <div>={tmp}=</div>
                     <img src={svg['load']} />
                 </div>
             )
