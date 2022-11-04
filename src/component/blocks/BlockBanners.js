@@ -77,10 +77,10 @@ const swiperOptions = {
     autoplay: {
         delay: 2000,
     },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
+    // navigation: {
+    //     nextEl: '.swiper-button-next',
+    //     prevEl: '.swiper-button-prev',
+    // },
     pagination: false,
     // scrollbar: {
     //     el: '.swiper-scrollbar',
@@ -130,16 +130,16 @@ const BlockBanners = function () {
                 slide={bannersRecords}
                 options={swiperOptions}
                 className="swiper-startups"
-                navigation={
-                    <div>
-                        <div class="swiper-button-prev">
-                            <img src={svg.swiper_arrow_left} style="height: 40%;" />
-                        </div>
-                        <div class="swiper-button-next">
-                            <img src={svg.swiper_arrow_right} style="height: 40%;" />
-                        </div>
-                    </div>
-                }
+            // navigation={
+            //     <div>
+            //         <div class="swiper-button-prev">
+            //             <img src={svg.swiper_arrow_left} style="height: 40%;" />
+            //         </div>
+            //         <div class="swiper-button-next">
+            //             <img src={svg.swiper_arrow_right} style="height: 40%;" />
+            //         </div>
+            //     </div>
+            // }
             />
         </div>
     )

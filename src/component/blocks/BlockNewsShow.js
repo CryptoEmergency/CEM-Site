@@ -4,25 +4,20 @@ import {
   Helpers,
   Variable,
   sendApi,
-  initReload,
-  initOne
+  initReload
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-
+import { InputAdaptive, Comment } from "@component/element/index.js";
 
 import { If } from "@component/helpers/All.js";
-import {
-  CommentInput,
-  InputAdaptive,
-} from "@component/element/index.js";
+
 import { BlockComment } from "@component/blocks/index.js";
 
 
 
-const BlockNewsShow = function ({ item, type }) {
-  console.log('=4f6886=', item)
+const BlockNewsShow = function ({ item }) {
 
 
   const getItem = async function () {
@@ -66,9 +61,8 @@ const BlockNewsShow = function ({ item, type }) {
             let response = await api({ type: "set", action: "setNews", data: { _id: item._id, value: { comments: { text: value } } } })
             if (response.status === "ok") {
               if (response.result && response.result.list_records && response.result.list_records[0]) {
-                //d yfxfkj vfccbdf ?
-                item = response.result.list_records[0]
-                console.log('=d804af=', item)
+                let newRes = response.result.list_records[0]
+                item.comments.unshift(newRes)
                 initReload();
               }
             } else {
@@ -86,6 +80,27 @@ const BlockNewsShow = function ({ item, type }) {
           }}
         />
 
+        {() => {
+          if (item.comments && item.comments.length) {
+            const arrReturn = item.comments.map(function (item, i) {
+              return (
+                <Comment
+                  item={item}
+                />
+              )
+            })
+            return (
+              <div data-type="news_comment" class="post_comments">
+                <div class="user_news_item">
+                  {arrReturn}
+                </div>
+              </div>
+
+            )
+          } else {
+
+          }
+        }}
         <If
           data={item.comments.length > 0}
           dataIf={
