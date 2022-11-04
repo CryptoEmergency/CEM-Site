@@ -2,17 +2,21 @@ import {
     jsx,
     jsxFrag,
     Helpers,
-    Variable
+    Variable,
+    initReload
 } from "@betarost/cemjs";
 
 import {
     Avatar,
+    Evaluation,
     Likes,
     CommentInput,
     AnswerAdditionallyToggleNew,
 } from "@component/element/index.js";
 
-const Comment = function ({ item }) {
+import { api } from '@src/apiFunctions.js'
+
+const Comment = function ({ item, include, mainId }) {
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -27,8 +31,24 @@ const Comment = function ({ item }) {
                 </span>
             </div>
             <div class="c-comments__icons c-actioncomment">
-                <Likes
+                <Evaluation
                     rating={item.statistic.rating}
+                    callBackBefore={async (type) => {
+                        let response = await api({ type: "set", action: "setNews", data: { _id: mainId, value: { comments: { evaluation: type, _id: item._id } } } })
+                        if (response.status === 'ok') {
+                            if (type == "plus") {
+                                item.statistic.rating++
+                            } else {
+                                item.statistic.rating--
+                            }
+                            initReload()
+                        } else {
+                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+                        }
+                    }}
+                    callBackAfter={(type) => {
+                        console.log('=6e2c6b= Function', "PressWait callBackAfter2", type)
+                    }}
                 />
                 {() => {
                     if (Variable.auth) {
@@ -66,6 +86,9 @@ const Comment = function ({ item }) {
                         return (
                             <Comment
                                 item={itemIn}
+                                mainId={mainId}
+                                quoteId={item._id}
+                                include={true}
                             />
                         )
                     })

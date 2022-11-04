@@ -9,7 +9,7 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-import { InputAdaptive, Comment } from "@component/element/index.js";
+import { InputAdaptive, Comment, NotFound } from "@component/element/index.js";
 
 import { If } from "@component/helpers/All.js";
 
@@ -79,13 +79,13 @@ const BlockNewsShow = function ({ item }) {
             }
           }}
         />
-
         {() => {
           if (item.comments && item.comments.length) {
-            const arrReturn = item.comments.map(function (item, i) {
+            const arrReturn = item.comments.map(function (itemComments, i) {
               return (
                 <Comment
-                  item={item}
+                  item={itemComments}
+                  mainId={item._id}
                 />
               )
             })
@@ -98,7 +98,9 @@ const BlockNewsShow = function ({ item }) {
 
             )
           } else {
-
+            // return (<NotFound
+            // />
+            // )
           }
         }}
         <If

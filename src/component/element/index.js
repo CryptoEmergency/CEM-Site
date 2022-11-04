@@ -29,6 +29,7 @@ export { CheckBox } from "./CheckBox.js";
 export { TextArea } from "./TextArea.js";
 export { UserItem } from "./UserItem.js";
 export { Comment } from "./Comment.js";
+export { Evaluation } from "./Evaluation.js";
 export { InputAdaptive } from "./InputAdaptive.js";
 export { CourseCurrency } from "./CourseCurrency.js";
 export { Test } from "./Test.js";

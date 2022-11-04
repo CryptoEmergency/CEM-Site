@@ -105,7 +105,10 @@ const BlockTrade = async function ({ nameRecords, button, limit = 55 }) {
                         })
                         return arrReturn
                     } else {
-                        return(NotFound)
+                        return (
+                            <NotFound
+                            />
+                        )
                     }
                 }}
             </div>
