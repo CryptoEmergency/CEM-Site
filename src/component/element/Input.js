@@ -29,7 +29,9 @@ const checkInput = function (Static, target) {
         if (Static.afterValid) {
             Static.afterValid();
         }
-    }, 500);
+    },
+    
+    500);
     return
 }
 
