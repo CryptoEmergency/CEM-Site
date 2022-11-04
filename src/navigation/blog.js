@@ -14,6 +14,8 @@ import {
 
 import { api } from '@src/apiFunctions.js'
 
+import { NotFound } from "@component/element/index.js";
+
 const start = function (data, ID = "mainBlock") {
   let Static = {}
   init(
@@ -36,23 +38,28 @@ const start = function (data, ID = "mainBlock") {
                 <div class="blog_news">
                   {
                     () => {
-                      return Variable.PageBlog.list_records.map(
-                        (item, index) => {
-                          return (
-                            <NewsItem
-                              item={item}
-                              index={index}
-                              type={"blog"}
-                            />
-                          );
-                        }
-                      )
-                    }
+                      if (Variable.PageBlog && Variable.PageBlog.list_records && Variable.PageBlog.list_records.length){
+                        const blogNews = Variable.PageBlog.list_records.map(
+                          (item, index) => {
+                            return (
+                              <NewsItem
+                                item={item}
+                                index={index}
+                                type={"blog"}
+                              />
+                            );
+                          }
+                        )
+                        return blogNews
+                      } else {
+                        return(NotFound)
+                      }
+                    } 
                   }
                 </div>
                 {
                   () => {
-                    if (Variable.PageBlog.list_records.length < Variable.PageBlog.totalFound) {
+                    if (Variable.PageBlog && Variable.PageBlog.list_records.length < Variable.PageBlog.totalFound) {
                       return (
                         <ButtonShowMore
                           onclick={async () => {

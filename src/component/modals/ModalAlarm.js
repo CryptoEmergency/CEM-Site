@@ -11,7 +11,7 @@ const ModalAlarm = function ({ icon, text }) {
 
     setTimeout(() => {
         Variable.DelModals("ModalAlarm")
-    }, 3000);
+    }, 1500);
 
     return (
         <div id="alarm" class="error_alarm_container">

@@ -12,13 +12,13 @@ const checkInput = function (Static, target) {
     if (Static.timer) {
         clearTimeout(Static.timer);
     }
-    Static.timer = setTimeout(() => {
+    Static.timer =  setTimeout(async () => {
         Static.timer = null
         Static.value = target.value.trim()
         if (!Static.condition) {
             return
         }
-        Static.valid = Static.condition(target.value.trim())
+        Static.valid = await Static.condition(target.value.trim())
 
         Static.error = !Static.valid
         if (Static.error) {
@@ -29,12 +29,14 @@ const checkInput = function (Static, target) {
         if (Static.afterValid) {
             Static.afterValid();
         }
-    }, 500);
+    },
+    
+    500);
     return
 }
 
-const Input = function ({ Static, classDiv, classInput, befor, after }) {
-    console.log('=1c814c=', Static)
+const Input =  function ({ Static, classDiv, classInput, befor, after }) {
+    // console.log('=1c814c=', Static)
     let labelfor;
 
     if (Static.label !== "phone") {
@@ -57,6 +59,12 @@ const Input = function ({ Static, classDiv, classInput, befor, after }) {
                     value={Static.value}
                     class={classInput}
                     oninput={function () { checkInput(Static, this) }}
+                    onclick = {()=>{
+                        if(typeof Static.onclick == "function")
+                        {
+                              Static.onclick() 
+                        }
+                    }}
                 />
                 {Static.type == "password" ? <img
                     src={svg[`eye${Static.viewPassword ? '-slash' : ''}`]}

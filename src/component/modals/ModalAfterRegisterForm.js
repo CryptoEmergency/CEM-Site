@@ -8,90 +8,156 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { allValidation } from "@src/functions.js";
-import { checkNickName } from "@src/apiFunctionsE.js";
+import { validator,checkValid } from "@src/functions.js";
+import { Input } from '@component/element/index.js';
+import { api } from '@src/apiFunctions.js'
 
 let formInputs;
-
-
-const changeInput = async (e) => {
-  let response;
-  let type = e.target.dataset.validate_type;
-  let value = e.target.value.trim();
-  formInputs[type].error = "";
-  formInputs[type].value = value;
-
-  if (formInputs[type].value.length > 2 && formInputs[type].value.length < 17) {
-    if (!allValidation(value, type)) {
-      formInputs[type].error = Variable.lang.error_div.nicknameErr4;
-    } else {
-      response = await checkNickName(value);
-      if (response > 0) {
-        formInputs[type].error = Variable.lang.error_div.nicknameErr11;
-      }
-    }
-  } else {
-    formInputs[type].error = Variable.lang.error_div.nicknameErr3;
-  }
-
-  if (formInputs[type].value.length === 0) {
-    formInputs[type].error = Variable.lang.error_div.nicknameErr;
-  }
-
-  if (formInputs[type].error === "") {
-    formInputs[type].valid = true;
-  } else {
-    formInputs[type].valid = false;
-  }
-
-  if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
-    formInputs.isValid = true
-  } else {
-    formInputs.isValid = false;
-  }
-  initReload("modals")
-};
+let Static = {}
 
 const ModalAfterRegisterForm = function (data, reload) {
-  console.log('=ea1488 ModalAfterRegisterForm=', data, reload, formInputs)
-  // initOne(() => {
-  if (!reload) {
-    formInputs = {
-      nickName: {
-        value: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.nicknameErr
-      },
-      language: {
-        value: "",
-        code: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.selectFromList
-      },
-      country: {
-        value: "",
-        code: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.selectFromList
-      },
+   initOne(() => {
+
+    Static = {
       isValid: false
+    }     
+
+
+    const checkBefore = async function(Static,value){
+      // регулярки для никнеймов
+      let beginWithoutDigit = /^\D.*$/ // начало с цифры
+      let chars = /^.{5,30}$/ // от 5 до 30 символов
+      let latinChars = /^[a-zA-Z0-9._]/ // латинские буквы
+      let withoutSpaces = /^\S*$/ // без пробелов
+      let points = /^(?!.*\.\.)(?!\.)(?!.*\.$)/ // 2 точки или точка в начале или точка в конце
+      let underscore = /^(?!.*\_\_)(?!\_)(?!.*\_$)/ // 2 нижних подчеркивания или нижнее подчеркивание в начале или нижнее подчеркивание в конце
+      let dash = /^(?!.*\-\-)(?!\-)(?!.*\-$)/ // 2 тире или тире в начале или тире в конце
+      let number = /^(?!\d+$)/ // состоит из цифр
+      let specialChars = /^(?!.*[!@#$%^&(),+=/\/\]\[{}?><":;!№*|])/ // специальные символы 
+      // обявим объект с регулярками
+      let arrayRegular = {3:chars,2:beginWithoutDigit,4:latinChars,5:withoutSpaces,6:points,7:underscore,10:dash,8:number,9:specialChars}
+      //если значение инпута пустое убираем массив
+      if(value.length == 0)
+      {
+        Static.nickName.errorText = Variable.lang.error_div.nicknameErr
+        return false
+      }
+      else{
+      //функция аналог arrayUnique
+      const unique = (value, index, self) => { return self.indexOf(value) === index; }
+      //объявим переменную куда будем писать текст ошибок
+      let errorText = "";
+      //если value не пустое перебериаем регулярки и запихиваем их ключи в массив 
+      for(let a in arrayRegular){
+        if(!validator.matches(value,arrayRegular[a]))
+        {
+          errorText+=Variable.lang.error_div["nicknameErr"+a]+".\r\n" 
+        }
+      }
+   //если ошибок нет проверим на уникальность имени пользователя
+    if(errorText.trim().length == 0)
+    {
+    let response =  await api({ type: "get", action: "getUsers", filter: {nickname: value} })
+    //если ник нейм свободен вернем true
+        if(response.result.totalFound == 0)
+        {
+      return true
+        }
+        else
+        {
+      Static.nickName.errorText = Variable.lang.error_div.nicknameErr11
+      return false
+        }
     }
-  }
-  // });
+    //если есть ошибки возращаем ошибки
+    else
+    {
+      Static.nickName.errorText = errorText
+      return false
+    }
+    }
+    }
+
+    Static.nickName = {
+      value: "",
+      valid: false,
+      error: false,
+      type: "text",
+      label: Variable.lang.label.nickName,
+      placeholder: Variable.lang.label.nickName,
+      errorText: Variable.lang.error_div.nicknameErr,
+      condition:async (value) => {
+          if(await checkBefore(Static,value))
+          {
+            return true
+          }
+          
+      },
+      afterValid: () => {
+
+        checkValid(Static, ["nickName","language","country"])
+
+      }
+    }
+    
+    Static.language = {
+      value:"",
+      type:"text",
+      valid: false,
+      code: "",
+      name: "",
+      autocomplete:"off",
+      placeholder:Variable.lang.error_div.selectFromList,
+      onclick: () => {
+        Variable.SetModals({
+          name: "ModalChangeLanguage", data: {
+            onclick: (code, name, orig) => {
+              Static.language.value = name + ` (${orig})`
+              Static.language.code = code
+              Static.language.valid = true
+              checkValid(Static, ["nickName","language","country"])
+            }
+          }
+        }, true);
+      },
+  
+    }
+
+
+    Static.country = {
+      value:"",
+      type:"text",
+      valid: false,
+      code: "",
+      name: "",
+      autocomplete:"off",
+      placeholder:Variable.lang.error_div.selectFromList,
+      onclick: () => {
+        Variable.SetModals({
+          name: "ModalSelectCountry", data: {
+            onclick: (code, name) => {
+              Static.country.value = name
+              Static.country.code = code
+              Static.country.valid = true
+              checkValid(Static, ["nickName","language","country"])
+            }
+          }
+        }, true);
+      }
+    }
+
+   });
 
   const sendRegistrationForm = async function (e) {
     e.preventDefault();
-    if (!formInputs.isValid) {
+    if (!Static.isValid) {
       return false
     }
     let data = {
       value: {
-        nickname: formInputs.nickName.value,
-        mainLanguage: formInputs.language.code,
-        country: formInputs.country.code
+        nickname: Static.nickName.value,
+        mainLanguage: Static.language.code,
+        country: Static.country.code
       }
     }
 
@@ -112,194 +178,81 @@ const ModalAfterRegisterForm = function (data, reload) {
 
   return (
     <div class="c-modal c-modal--open" id="ModalAfterRegisterForm">
-      <section class="c-modal__dialog">
-        <div class="c-modal__body">
-          <div
-            class="modal fade"
-            id="AfterRegister"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-content">
-              <div class="after_register_form">
-                <h4>{Variable.lang.h.modal_afterReg}</h4>
-                <form
-                  id="afterRegisterForm"
-                  onsubmit={sendRegistrationForm}
-                >
-                  <input style="display: none;" type="submit" />
-                  <div>
-                    <label for="afterRegisterNickname">
-                      {Variable.lang.label.nickName}
-                    </label>
-                    <div class="error-div">
-                      {/* <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr2}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr3}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr4}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr5}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr6}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr7}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr8}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr9}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr10}
-                      </div>
-                      <div class="error-div-variant">
-                        {Variable.lang.error_div.nicknameErr11}
-                      </div> */}
-                      <div class="error-div-variant">
-                        {formInputs.nickName.error}
-                      </div>
-                    </div>
-                    <div>
-                      <input
-                        data-form_type="afterReg"
-                        data-dirty="false"
-                        data-focusout="focusout"
-                        data-keyup="keyupValidate"
-                        data-validate_type="nickName"
-                        id="afterRegisterNickname"
-                        type="text"
-                        oninput={changeInput}
-                        value={formInputs.nickName.value}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label>{Variable.lang.label.lang}</label>
-                    <div style="display: none;" class="error-div">
-                      {Variable.lang.error_div.selectFromList}
-                    </div>
+    <section class="c-modal__dialog">
+      <div class="c-modal__body">
+        <div
+          class="modal fade"
+          id="AfterRegister"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-content">
+            <div class="after_register_form">
+              <h4>{Variable.lang.h.modal_afterReg}</h4>
+              <form
+                id="afterRegisterForm"
+                onsubmit={sendRegistrationForm}
+              >
+                <input style="display: none;" type="submit" />
+                <div>
+                  <Input classDiv="" Static={Static.nickName} />
+                </div>
 
-
-                    <div class="language_select_wrapper">
-                      <input
-                        readonly
-                        id="language_after_register"
-                        type="text"
-                        autocomplete="off"
-                        placeholder={Variable.lang.error_div.selectFromList}
-                        value={formInputs.language.value}
-                        onclick={() => {
-                          Variable.SetModals({
-                            name: "ModalChangeLanguage", data: {
-                              onclick: (code, name, orig) => {
-                                formInputs.language.value = name + ` (${orig})`
-                                formInputs.language.code = code
-                                formInputs.language.valid = true
-                                if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
-                                  formInputs.isValid = true
-                                }
-                                console.log('=5fb352 formInputs=', formInputs)
-                                // initReload("modals")
-                              }
-                            }
-                          }, true);
-                        }}
-                      />
-                      <div
-                        id="language_search_help"
-                        class="language_help_block"
-                      ></div>
-                      <div class="language_search_help_error dn">
-                        <div class="language_help_error"></div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                  <label>{Variable.lang.label.country}</label>
+                <div>
+                  <label>{Variable.lang.label.lang}</label>
                   <div style="display: none;" class="error-div">
                     {Variable.lang.error_div.selectFromList}
                   </div>
-                  <div class="country_select_wrapper">
-                    <input
-                      data-code=""
-                      id="country_search"
-                      data-action="changeCountryAfterRegister"
-                      data-form_type="afterReg"
-                      data-validate_type="country"
-                      type="text"
-                      autocomplete="off"
-                      readonly
-                      value={formInputs.country.value}
-                      onclick={() => {
-                        Variable.SetModals({
-                          name: "ModalSelectCountry", data: {
-                            onclick: (code, name) => {
-                              formInputs.country.value = name
-                              formInputs.country.code = code
-                              formInputs.country.valid = true
-                              if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
-                                formInputs.isValid = true
-                              }
-                              //  initReload("modals")
-                            }
-                          }
-                        }, true);
-                      }}
-                      placeholder={Variable.lang.error_div.selectFromList}
-                    />
+
+
+                  <div class="language_select_wrapper">
+                  <Input classDiv="" Static={Static.language} />
                     <div
-                      id="country_search_help"
-                      class="country_help_block"
+                      id="language_search_help"
+                      class="language_help_block"
                     ></div>
-                    <div class="country_search_help_error dn">
-                      <div class="country_help_error"></div>
+                    <div class="language_search_help_error dn">
+                      <div class="language_help_error"></div>
                     </div>
-                    <img src={svg["country_icon"]} />
                   </div>
-                </form>
-                <button
-                  class={[
-                    "c-button c-button--gradient2",
-                    !formInputs.isValid ? "c-button--inactive" : "",
-                  ]}
-                  type="button"
-                  // ref={elemButton}
-                  onClick={sendRegistrationForm}
-                >
-                  <span class="c-button__text">
-                    {Variable.lang.button.send}
-                  </span>
-                </button>
-                {/* <div
-                  type="button"
-                  class="ask-btn inactive_form_button"
-                  data-active="0"
-                  data-form_type="afterReg"
-                  data-action="afterRegisterFormSend"
-                >
-                  <a id="afterRegisterFormSend" class="btn-ask">
-                    <span>{Variable.lang.button.send}</span>
-                  </a>
-                </div> */}
-              </div>
+
+
+                </div>
+                <label>{Variable.lang.label.country}</label>
+                <div style="display: none;" class="error-div">
+                  {Variable.lang.error_div.selectFromList}
+                </div>
+                <div class="country_select_wrapper">
+                <Input classDiv="" Static={Static.country} />
+                  <div
+                    id="country_search_help"
+                    class="country_help_block"
+                  ></div>
+                  <div class="country_search_help_error dn">
+                    <div class="country_help_error"></div>
+                  </div>
+                  <img src={svg["country_icon"]} />
+                </div>
+              </form>
+              <button
+                class={[
+                  "c-button c-button--gradient2",
+                  !Static.isValid ? "c-button--inactive" : "",
+                ]}
+                type="button"
+                onClick={sendRegistrationForm}
+              >
+                <span class="c-button__text">
+                  {Variable.lang.button.send}
+                </span>
+              </button>             
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  </div>
   );
 };
 

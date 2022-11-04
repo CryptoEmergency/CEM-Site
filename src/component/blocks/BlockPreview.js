@@ -34,11 +34,12 @@ const BlockPreview = async function () {
                 {
                     () => {
                         if (Variable.Course && Variable.Course.list_records && Variable.Course.list_records.length) {
-                            return (Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
+                            const arrReturn = Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
                                 return (
                                     <CourseCurrency course={Variable.Course.list_records[0][key]} key={key} />
                                 )
-                            }))
+                            })
+                            return arrReturn
                         }
                     }
                 }

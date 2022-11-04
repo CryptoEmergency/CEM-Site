@@ -300,7 +300,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                       }`}
                   >
                     <img src={svg.levelGray} />
-                    <span>{author.statistic.level}</span>
+                    <span>{author.statistic.level ? author.statistic.level : "0"}</span>
                   </div>
                   <div
                     style={`${author.online ? "" : "display: none;"}`}

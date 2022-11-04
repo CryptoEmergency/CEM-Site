@@ -22,12 +22,31 @@ Variable.phoneCodes = phoneCodes
 Variable.load = false
 Variable.clickHide = clickHide
 const start = async function () {
-    await initCache();
-    await initStorage();
-    await addListen();
-    await parsingUrl();
+    try {
+        await initCache();
+    } catch (error) {
+        console.error(error, "initCache")
+    }
+
+    try {
+        await initStorage();
+    } catch (error) {
+        console.error(error, "initStorage")
+    }
+
+    try {
+        await addListen();
+    } catch (error) {
+        console.error(error, "addListen")
+    }
+
+    try {
+        await parsingUrl();
+    } catch (error) {
+        console.error(error, "parsingUrl")
+    }
+
     await initApp();
     await test();
 }
-
 start();

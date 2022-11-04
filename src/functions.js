@@ -15,7 +15,6 @@ import {
   initReload,
   Helpers,
 } from "@betarost/cemjs";
-import list from "@src/routerList.js";
 import validator from "validator";
 import moment from "moment";
 
@@ -24,7 +23,7 @@ import {
   showVotersApi,
   getNewsItemInShow,
 } from "@src/apiFunctions.js";
-import { renderModalFullNews } from "@src/apiFunctionsE.js";
+
 
 const wrapTextWithATag = (text) => {
   let textTag = text;
@@ -365,12 +364,11 @@ const uploadMedia = function (file, type, onload, onprogress, xhr) {
   xhr.send(formData)
 }
 
-const checkValid = function (Static,Array) {
+const checkValid = function (Static, Array) {
 
   Static.isValid = true
-  Array.forEach(function(elem){
-    if(!Static[elem].valid)
-    {
+  Array.forEach(function (elem) {
+    if (!Static[elem].valid) {
       Static.isValid = false
     }
   })

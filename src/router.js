@@ -26,9 +26,6 @@ const mainBlock = async function () {
             Variable.Static.FooterMenuShow = true;
 
             let page = dataUrl.adress;
-            // if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
-            //     Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
-            // }
             if (!page || page == "") {
                 await list.index(data, ID, url);
                 return;

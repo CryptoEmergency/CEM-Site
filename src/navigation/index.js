@@ -58,8 +58,8 @@ const start = function () {
                 },
                 desc: -1
             }
-            Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
-            Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
+            // Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
+            // Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
             timersStart("Course", async () => { Variable.Course = await sendApi.send({ action: "getCourse", short: true }) }, 10000)
         },
         () => {
@@ -124,6 +124,7 @@ const start = function () {
                             <BlockBanners />
                             <BlockTrade
                                 nameRecords="MainTrades"
+                                limit={6}
                                 button={
                                     <div class="crypto_exchanges_footer">
                                         <a class="c-button c-button--gray" href="/list-trade/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.trade }) }}>

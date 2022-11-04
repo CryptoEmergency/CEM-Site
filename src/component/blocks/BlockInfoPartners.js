@@ -7,6 +7,7 @@ import {
 // poydet
 import images from "@assets/images/index.js";
 
+// Сделать запрос через Базу
 const partners = [
     {
         "link": "https://sberunity.ru/main/startups/879d88aa-4729-4788-a541-20cc8cc3cb14",
@@ -69,28 +70,30 @@ const BlockInfoPartners = function (data) {
         <div class="top_professionals c-infopartners">
             <h2 class="c-infopartners__title">{Variable.lang.h.partners}</h2>
             <div data-mainpage="true" class="c-infopartners__list partners_container">
-                {
-                    arrData.map((partner) => {
-                        return (
-                            <a
-                                style='display: block !important'
-                                target="_blank"
-                                rel="nofollow nooopener"
-                                href={partner.link}
-                                class="c-infopartners__item"
-                            >
-                                <img src={images["partners/" + partner.image]} />
-                            </a>
-                        )
-                    })
-                }
+                {() => {
+                    if (arrData && arrData.length) {
+                        const arrReturn = arrData.map(function (item, i) {
+                            return (
+                                <a
+                                    style='display: block !important'
+                                    target="_blank"
+                                    rel="nofollow nooopener"
+                                    href={item.link}
+                                    class="c-infopartners__item"
+                                >
+                                    <img src={images["partners/" + item.image]} />
+                                </a>
+                            )
+                        })
+                        return arrReturn
+                    }
+                }}
             </div>
-
             {() => {
                 if (data && data.limit && partners.length > data.limit) {
                     return (
                         <div class="crypto_exchanges_footer">
-                            <a class="c-button c-button--gray" href="/partners/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.button.allPartners }) }}>
+                            <a class="c-button c-button--gray" href="/partners/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.partners }) }}>
                                 <span class="c-button__wrapper">{Variable.lang.button.allPartners}</span>
                             </a>
                         </div>

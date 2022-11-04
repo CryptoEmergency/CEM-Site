@@ -8,7 +8,7 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-import { UserItem } from '@component/element/UserItem.js';
+import { UserItem } from '@component/element/index.js';
 
 let elFilters
 
@@ -18,7 +18,6 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button, 
             await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
         }
     )
-
     return (
         <div class="c-friends">
             <div class="c-friends__container c-container">
@@ -111,7 +110,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button, 
                                 if (filters.group != false) {
                                     return (
                                         <div class="c-friends__checkboxes">
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
+                                            <div class="checkbox">
                                                 <input
                                                     checked={filters.group.common ? true : false}
                                                     class="checkbox__input"
@@ -125,7 +124,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button, 
                                                 />
                                                 <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
                                             </div>
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
+                                            <div class="checkbox">
                                                 <input
                                                     checked={filters.group.content ? true : false}
                                                     class="checkbox__input"
@@ -139,7 +138,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button, 
                                                 />
                                                 <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
                                             </div>
-                                            <div class="checkbox" data-action="friendsFilterCheckbox">
+                                            <div class="checkbox">
                                                 <input
                                                     checked={filters.group.expert ? true : false}
                                                     class="checkbox__input"
@@ -201,27 +200,22 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button, 
                             }}
                         </div>
                     </div>
-
                     <div class="c-friends__list top_professionals_block">
-                        {
-                            Variable[nameRecords].list_records.map((item, index) => {
-                                return (
-                                    <UserItem user={item} />
-                                )
-                            })
-                        }
-
+                        {() => {
+                            if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].list_records.length) {
+                                const arrReturn = Variable[nameRecords].list_records.map(function (item, i) {
+                                    return (
+                                        <UserItem user={item} />
+                                    )
+                                })
+                                return arrReturn
+                            }
+                        }}
                     </div>
                 </div>
-                {button ? button : null}
-                {/* {() => {
-                    if (button) {
-                        return (button)
-                    }
-                }} */}
+                {button}
             </div>
         </div>
     )
 }
-
 export { BlockUsers }

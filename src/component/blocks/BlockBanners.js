@@ -7,6 +7,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { Swiper } from '@component/element/index.js';
 
+// Сделать запрос через Базу
 const banners = [
     // {
     //     "id": "62dd2ca100978d192547427c",
@@ -76,10 +77,14 @@ const swiperOptions = {
     autoplay: {
         delay: 2000,
     },
+    // navigation: {
+    //     nextEl: '.swiper-button-next',
+    //     prevEl: '.swiper-button-prev',
+    // },
     pagination: false,
-    scrollbar: {
-        el: '.swiper-scrollbar',
-    },
+    // scrollbar: {
+    //     el: '.swiper-scrollbar',
+    // },
     breakpoints: {
         100: {
             slidesPerView: 1,
@@ -100,10 +105,10 @@ const swiperOptions = {
         1240: {
             slidesPerView: 4,
             spaceBetween: 30,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            // navigation: {
+            //     nextEl: '.swiper-button-next',
+            //     prevEl: '.swiper-button-prev',
+            // },
         },
     },
 }
@@ -125,16 +130,16 @@ const BlockBanners = function () {
                 slide={bannersRecords}
                 options={swiperOptions}
                 className="swiper-startups"
-                navigation={
-                    <div>
-                        <div class="swiper-button-prev">
-                            <img src={svg.swiper_arrow_left} style="height: 40%;" />
-                        </div>
-                        <div class="swiper-button-next">
-                            <img src={svg.swiper_arrow_right} style="height: 40%;" />
-                        </div>
-                    </div>
-                }
+            // navigation={
+            //     <div>
+            //         <div class="swiper-button-prev">
+            //             <img src={svg.swiper_arrow_left} style="height: 40%;" />
+            //         </div>
+            //         <div class="swiper-button-next">
+            //             <img src={svg.swiper_arrow_right} style="height: 40%;" />
+            //         </div>
+            //     </div>
+            // }
             />
         </div>
     )

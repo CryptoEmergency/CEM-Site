@@ -5,7 +5,7 @@ import {
     Variable,
     initOne
 } from '@betarost/cemjs';
-// poydet
+// check
 import { api } from '@src/apiFunctions.js'
 import svg from '@assets/svg/index.js';
 
@@ -23,36 +23,39 @@ const BlockMainNews = async function () {
                     <div class="gradient_line"></div>
                 </div>
                 <div class="main_page_news_block">
-                    {
-                        Variable.MainNews.list_records.map(function (item) {
-                            return (
-                                <a
-                                    class="blog_news_item"
-                                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news, item: item }) }}
-                                    href={`/news/show/${item._id}`}
-                                >
-                                    <img
-                                        style="margin-bottom: 20px"
-                                        src={`/assets/upload/news/${item.image}`}
-                                    />
-                                    <p style="margin-bottom: 20px" class="blog_new_title ">
-                                        {item.title}
-                                    </p>
-                                    <div style="display: flex!important;" class="blog_post_stat">
-                                        <span>
-                                            <img src={svg.question_views} />
-                                            <span class="">{item.statistic.view}</span>
-                                        </span>
-                                        <span>
-                                            <img src={svg.question_answers} />
-                                            <span class="">{item.statistic.comments}</span>
-                                        </span>
-                                        <span class="">{Helpers.getDateFormat(item.showDate)}</span>
-                                    </div>
-                                </a>
-                            )
-                        })
-                    }
+                    {() => {
+                        if (Variable.MainNews && Variable.MainNews.list_records && Variable.MainNews.list_records.length) {
+                            const arrReturn = Variable.MainNews.list_records.map(function (item, i) {
+                                return (
+                                    <a
+                                        class="blog_news_item"
+                                        onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news, item: item }) }}
+                                        href={`/news/show/${item._id}`}
+                                    >
+                                        <img
+                                            style="margin-bottom: 20px"
+                                            src={`/assets/upload/news/${item.image}`}
+                                        />
+                                        <p style="margin-bottom: 20px" class="blog_new_title ">
+                                            {item.title}
+                                        </p>
+                                        <div style="display: flex!important;" class="blog_post_stat">
+                                            <span>
+                                                <img src={svg.question_views} />
+                                                <span class="">{item.statistic.view + 1}</span>
+                                            </span>
+                                            <span>
+                                                <img src={svg.question_answers} />
+                                                <span class="">{item.statistic.comments}</span>
+                                            </span>
+                                            <span class="">{Helpers.getDateFormat(item.showDate)}</span>
+                                        </div>
+                                    </a>
+                                )
+                            })
+                            return arrReturn
+                        }
+                    }}
                 </div>
             </div>
             <div class="button-container-preview">
