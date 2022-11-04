@@ -53,6 +53,7 @@ const InputAdaptive = function ({ callBack }) {
                     }
                     callBack(elTextArea.value.trim())
                     elTextArea.value = ""
+                    elTextArea.style.height = (elTextArea.dataset.maxHeight / 4) + 'px';
                 }}
             >
                 <img class="c-comments__icon" src={svg["send_message"]} />

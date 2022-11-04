@@ -33,7 +33,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
     return <></>;
   }
   let getItem = ""
-console.log(total)
+  console.log(total)
   if (total === undefined) {
     getItem = async function () {
       let tmp = await sendApi.send({ action: "getPost", short: true, filter: { _id: item._id }, limit: 1 });
@@ -58,7 +58,7 @@ console.log(total)
           class="c-fullnews__item user_news_item"
           ElemVisible={total < totalFound && numIndex == (total - 3) ?
             async () => {
-              // console.log('=0c6881=', "Load more")
+              console.log('=0c6881=', "Load more")
               let tmp = await sendApi.send({
                 action: "getPost",
                 short: true,
