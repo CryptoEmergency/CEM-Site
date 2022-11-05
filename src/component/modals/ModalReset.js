@@ -8,6 +8,8 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import { PhoneCode } from '@component/element/PhoneCode.js';
+import { validator,checkValid } from "@src/functions.js";
+import { Input } from '@component/element/index.js';
 
 const showModalReset = function (e) {
     e.stopPropagation()
@@ -18,9 +20,31 @@ const showModalReset = function (e) {
     setValue("modals", "resetModalShow", !getValue("modals", "resetModalShow"))
 };
 
+let Static = {}
+
 const ModalReset = function ({ lang, changeCode, ID, abbr, codeTitle, wayReset, changeWayReset, changeStepReset }) {
     // console.log("ModalReset", { lang, changeCode, ID, abbr, codeTitle, wayReset, changeWayReset });
     const showStepReset = getValue(ID, "toggleStepReset");
+
+    Static.phone ={
+        value: "",
+        valid: false,
+        error: false,
+        autofocus:"true",
+        placeholder:"9990000000",
+        type: "text",
+        "data-co":{abbr},
+        condition: (value) => {
+            return validator.matches(value, /[0-9]{9,13}/i);
+      },
+      afterValid: () => {
+  
+        checkValid(Static, ["phone"])
+  
+      }
+    }
+
+
 
     return (
         <div class="c-modal c-modal--open" id="ModalReset">
@@ -72,8 +96,8 @@ const ModalReset = function ({ lang, changeCode, ID, abbr, codeTitle, wayReset, 
                                         <div class="reset_by_mobile_block_container  c-phonecode">
 
                                             <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
-
-                                            <input
+                                            <Input classDiv="" Static={Static.phone} />
+                                            {/*<input
                                                 class="phoneNubmerInput3"
                                                 type="text"
                                                 id="phone3"
@@ -81,7 +105,7 @@ const ModalReset = function ({ lang, changeCode, ID, abbr, codeTitle, wayReset, 
                                                 autofocus="true"
                                                 placeholder="9990000000"
                                                 data-co={abbr}
-                                            />
+                                                />*/}
 
                                             <input id="phone_prefix3" type="hidden" name="__phone_prefix" value={codeTitle} />
                                         </div>

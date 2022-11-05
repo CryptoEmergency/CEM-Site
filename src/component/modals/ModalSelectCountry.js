@@ -2,9 +2,8 @@ import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import images from '@assets/images/index.js';
-
-//"alarm_icon" : "confirm_icon"
-
+import { validator,checkValid } from "@src/functions.js";
+import { Input } from '@component/element/index.js';
 
 
 
@@ -17,10 +16,29 @@ const changeInput = (e) => {
   initReload("modals");
 }
 
-
+let Static = {}
 const ModalSelectCountry = function (data, reload) {
 
   allCountries = Variable.allCountries;
+
+
+  Static.changeCountry ={
+      value: "",
+      valid: false,
+      error: false,
+      type: "text",
+      condition:async (value) => {
+        if(await checkBefore(Static,value))
+        {
+          return true
+        }
+    },
+    afterValid: () => {
+
+      checkValid(Static, ["changeCountry"])
+
+    }
+  }
 
   return (
     <div class="c-modal c-modal--open" id="ModalSelectCountry">
@@ -37,13 +55,7 @@ const ModalSelectCountry = function (data, reload) {
           ></button>
         </header>
         <div class="c-modal__body">
-          <input
-            data-keyup="filterChangeCountryEnter"
-            data-language=""
-            id="changeCityInput"
-            type="text"
-            oninput={changeInput}
-          />
+            <Input classDiv="" Static={Static.changeCountry} />
           <div class="changeCityContainer">
             {allCountries.map((item) => {
               return <div class="changeCityItem"
