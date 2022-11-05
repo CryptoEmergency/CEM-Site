@@ -17,3 +17,7 @@ export { BlockComment } from './user/BlockComment.js';
 export { BlockLentaUsers } from './BlockLentaUsers.js';
 export { BlockMainNews } from './BlockMainNews.js';
 export { BlockUserForLenta } from './user/BlockUserForLenta.js';
+
+export { BlockShowNews } from './BlockShowNews.js';
+
+export { BlockError404 } from './errors/BlockError404.js';

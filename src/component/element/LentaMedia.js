@@ -10,9 +10,9 @@ import {
 import svg from "@assets/svg/index.js";
 import { If } from "@component/helpers/All.js";
 import {
-  VideoPlayerCopy,
   AudioPlayerCopy,
   Swiper,
+  VideoPlayer
 } from "@component/element/index.js";
 
 // import Swiper from 'swiper/bundle';
@@ -147,19 +147,19 @@ const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
         items.map(
           (item, index) => {
             if (item.type == "video" && !Array.isArray(item)) {
-              if(typeof elem[numIndex] == "undefined"){
-                elem[numIndex] =[]
+              if (typeof elem[numIndex] == "undefined") {
+                elem[numIndex] = []
               }
               elem[numIndex][index] = Variable.setRef();
               return (
                 <div class="swiper-slide">
-                  <VideoPlayerCopy
+                  <VideoPlayer
                     item={item}
                     index={index}
                     numIndex={numIndex}
                     elem={elem}
                     path={path}
-                    //  path={"/assets/upload/posts/"}
+                  //  path={"/assets/upload/posts/"}
                   />
                 </div>
               );
@@ -182,16 +182,16 @@ const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
                 <div class="swiper-slide user_post_text_background">
                   {
                     item.map((item, index) => {
-                      elem[numIndex][index + i*3] = Variable.setRef();
+                      elem[numIndex][index + i * 3] = Variable.setRef();
                       return (
                         <AudioPlayerCopy
                           item={item}
-                          index={index + i*3}
+                          index={index + i * 3}
                           numIndex={numIndex}
                           elem={elem}
                           path={path}
                           type="posts"
-                          //  path={"/assets/upload/posts/"}
+                        //  path={"/assets/upload/posts/"}
                         />
                       );
                     })
@@ -206,7 +206,7 @@ const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
                     //  path={"/assets/upload/posts/"}
                   /> */}
                 </div>
-              
+
               );
             }
           }

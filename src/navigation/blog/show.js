@@ -4,9 +4,9 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
-// poydet
-import { BlockNewsShow } from '@component/blocks/index.js';
+// check
 import { api } from '@src/apiFunctions.js'
+import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
 const start = function (data, ID = "mainBlock") {
   let item;
@@ -16,16 +16,26 @@ const start = function (data, ID = "mainBlock") {
         item = data.item
       } else {
         let response = await api({ type: "get", action: "getNews", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
+        if (!response.list_records || !response.list_records[0]) {
+          item = {}
+          return
+        }
         item = response.list_records[0]
       }
+      return
     },
     () => {
+      if (!item._id) {
+        return (
+          <div><BlockError404 /></div>
+        )
+      }
       return (
         <div class="c-main__body">
           <div class="full_news_container">
             <div class="full_news_block">
               <div class="full_news_content">
-                <BlockNewsShow
+                <BlockShowNews
                   item={item}
                   type={"blog"}
                 />
@@ -37,5 +47,4 @@ const start = function (data, ID = "mainBlock") {
     }, ID
   );
 };
-
 export default start;

@@ -375,7 +375,10 @@ const start = function () {
     () => {
 
       return (
-        <div class="c-userpostcreate">
+        <div class={[
+          "c-userpostcreate",
+          Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+        ]}>
           <h3 class="c-userpostcreate__title">{Variable.lang.h.createPost}</h3>
           <form id="userPostCreate" class="c-userpostcreate__form" onsubmit={sendAuthorization}>
             <input class="c-userpostcreate__submit" hidden type="submit" />

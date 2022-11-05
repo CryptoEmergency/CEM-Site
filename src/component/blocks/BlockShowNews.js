@@ -3,15 +3,25 @@ import {
   jsxFrag,
   Helpers,
   Variable,
-  initReload
+  initReload,
+  initOne
 } from "@betarost/cemjs";
-
+//check
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-import { InputAdaptive, Comment, NotFound } from "@component/element/index.js";
+import { InputAdaptive, Comment, TextArea, ButtonSend } from "@component/element/index.js";
 
-const BlockNewsShow = function ({ item }) {
+let Static = {}
 
+const BlockShowNews = function ({ item }) {
+
+
+  initOne(() => {
+    Static.mainComment = {
+      rows: 1,
+      adaptive: 4
+    }
+  })
   return (
     <div>
       <div class="full_news_content">
@@ -33,29 +43,38 @@ const BlockNewsShow = function ({ item }) {
       </div>
       <div class="news_page_comments">
         <h2>{Variable.lang.h.modal_comment}</h2>
-        <InputAdaptive
-          callBack={async (value) => {
-            let response = await api({ type: "set", action: "setNews", data: { _id: item._id, value: { comments: { text: value } } } })
-            if (response.status === "ok") {
-              if (response.result && response.result.list_records && response.result.list_records[0]) {
-                let newRes = response.result.list_records[0]
-                item.comments.unshift(newRes)
-                initReload();
+        <div class="c-comments__form create_post_coments">
+          <div class="c-comments__field create_post_container1">
+            <TextArea
+              Static={Static.mainComment}
+              className="text1 create_post_chapter"
+            />
+          </div>
+          <ButtonSend
+            text={<img class="c-comments__icon" src={svg["send_message"]} />}
+            className="c-comments__send button-container-preview comments_send"
+            onclick={async (el) => {
+              if (!Static.mainComment.el.value.trim().length) {
+                return
               }
-            } else {
-              Variable.SetModals(
-                {
-                  name: "ModalAlarm",
-                  data: {
-                    icon: "alarm_icon",
-                    text: Variable.lang.error_div[response.error],
-                  },
-                },
-                true
-              );
-            }
-          }}
-        />
+              let text = Static.mainComment.el.value.trim()
+              let response = await api({ type: "set", action: "setNews", data: { _id: item._id, value: { comments: { text: text } } } })
+              if (response.status === "ok") {
+                Static.mainComment.el.value = ""
+                if (Static.adaptive) {
+                  Static.mainComment.el.style.height = (Static.mainComment.el.dataset.maxHeight / Static.adaptive) + 'px';
+                }
+                if (response.result && response.result.list_records && response.result.list_records[0]) {
+                  let newRes = response.result.list_records[0]
+                  item.comments.unshift(newRes)
+                  initReload();
+                }
+              } else {
+                Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+              }
+            }}
+          />
+        </div>
         {() => {
           if (item.comments && item.comments.length) {
             const arrReturn = item.comments.map(function (itemComments, i) {
@@ -84,4 +103,4 @@ const BlockNewsShow = function ({ item }) {
     </div>
   );
 };
-export { BlockNewsShow };
+export { BlockShowNews };

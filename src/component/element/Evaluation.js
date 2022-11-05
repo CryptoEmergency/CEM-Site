@@ -14,7 +14,7 @@ const Evaluation = function ({ rating, callBackBefore, callBackAfter }) {
           class={[!Variable.auth ? "comment_inactive" : null]}
           src={svg["dislike"]}
           PressWait={{
-            timeout: 2000,
+            timeout: 1000,
             callBackBefore: () => {
               callBackBefore("minus")
             },
@@ -31,7 +31,7 @@ const Evaluation = function ({ rating, callBackBefore, callBackAfter }) {
           class={[!Variable.auth ? "comment_inactive" : null]}
           src={svg["like"]}
           PressWait={{
-            timeout: 2000,
+            timeout: 1000,
             callBackBefore: () => {
               callBackBefore("plus")
             },

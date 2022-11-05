@@ -8,7 +8,8 @@ import {
 } from "@component/element/index.js";
 
 
-const MediaPreview = function ({ item, index, type, formInputs,el }) {
+const MediaPreview = function ({ item, index, type, formInputs, el }) {
+  console.log('=2f8e9a=', item)
     if(item.type === "audio"){
         el[index] = Variable.setRef();
     }
