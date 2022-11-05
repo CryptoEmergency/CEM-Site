@@ -178,7 +178,37 @@ const start = function () {
                   </div>
                 </div>
 
-                <SwitchLenta switchPage={Variable.Static.lentaPage} />
+                {/* <SwitchLenta switchPage={Variable.Static.lentaPage} /> */}
+
+                <div class="users_news_categories">
+                  <div
+                    class="users_news_category"
+                    hidden={Variable.Static.lentaPage == "all"}
+                    onClick={async () => {
+                      if (Variable.Static.lentaPage == "all") {
+                        return
+                      }
+                      Variable.Static.lentaPage = "all"
+                      Variable.PageLentaall = await sendApi.send({
+                        action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 15, filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "all")
+                      });
+                      initReload()
+                    }}
+                  >
+                    <i class="users_news_category_icon users_news_category_icon--all users_news_category_icon--all_inactive"></i>
+                    {/* <img src={svg['sections/news_all_inactive']} /> */}
+                  </div>
+                  <div
+                    class={['users_news_category', 'users_news_category_active']}
+                    hidden={Variable.Static.lentaPage != "all"}
+                  >
+                    <i class="users_news_category_icon users_news_category_icon--all"></i>
+                    {/* <img src={svg['sections/news_all']} /> */}
+                  </div>
+
+                </div>
+
+
 
                 <div class="userNewsBlock">
                   <div
@@ -194,27 +224,27 @@ const start = function () {
                     // }}
                     >
                       {
-                         Variable[`PageLenta${Variable.Static.lentaPage}`]
-                         .list_records.map((item, index) => {
-                          elem[index] = [];
-                          return (
-                            <BlockLentaUsers
-                              totalFound={
-                                Variable[
-                                  `PageLenta${Variable.Static.lentaPage}`
-                                ].totalFound
-                              }
-                              item={item}
-                              numIndex={index}
-                              elem={elem}
-                              total={
-                                Variable[
-                                  `PageLenta${Variable.Static.lentaPage}`
-                                ].list_records.length
-                              }
-                            />
-                          );
-                        })
+                        Variable[`PageLenta${Variable.Static.lentaPage}`]
+                          .list_records.map((item, index) => {
+                            elem[index] = [];
+                            return (
+                              <BlockLentaUsers
+                                totalFound={
+                                  Variable[
+                                    `PageLenta${Variable.Static.lentaPage}`
+                                  ].totalFound
+                                }
+                                item={item}
+                                numIndex={index}
+                                elem={elem}
+                                total={
+                                  Variable[
+                                    `PageLenta${Variable.Static.lentaPage}`
+                                  ].list_records.length
+                                }
+                              />
+                            );
+                          })
                       }
                     </div>
                   </div>

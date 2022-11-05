@@ -6,7 +6,7 @@ import {
   initReload
 } from "@betarost/cemjs";
 // poydet
-import { validator,checkValid } from "@src/functions.js";
+import { validator, checkValid } from "@src/functions.js";
 import { api } from '@src/apiFunctions.js'
 import svg from "@assets/svg/index.js";
 import { Jivo, Input, TextArea } from '@component/element/index.js';
@@ -44,17 +44,17 @@ const start = function (data, ID = "mainBlock") {
         label: Variable.lang.label.name,
         placeholder: Variable.lang.placeholder.name,
         errorText: Variable.lang.error_div.nicknameErr,
-        condition:(value) => {
+        condition: (value) => {
           return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
         },
-        afterValid:() => {
-            
-          checkValid(Static,["name","email","message"])
-        
-       }
+        afterValid: () => {
+
+          checkValid(Static, ["name", "email", "message"])
+
         }
-        
-      
+      }
+
+
 
       Static.email = {
         value: "",
@@ -65,20 +65,29 @@ const start = function (data, ID = "mainBlock") {
         errorText: Variable.lang.error_div.wrong_email,
         type: "text",
         condition: (value) => {
-            return validator.isEmail(value);
+          return validator.isEmail(value);
         },
-        afterValid:() => {
-            
-          checkValid(Static,["name","email","message"])
-        
-       }
-    }
+        afterValid: () => {
 
-  
+          checkValid(Static, ["name", "email", "message"])
+
+        }
+      }
+
+
       Static.message = {
         value: "",
         valid: false,
         error: false,
+        errorText: Variable.lang.error_div.not_empty_input,
+        label: Variable.lang.label.message,
+        placeholder: Variable.lang.placeholder.message,
+        condition: (value) => {
+          return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+        },
+        afterValid: () => {
+          checkValid(Static, ["name", "email", "message"])
+        }
       }
 
       /**
@@ -87,13 +96,13 @@ const start = function (data, ID = "mainBlock") {
       if (Variable.myInfo.nickname) {
         Static.name.value = Variable.myInfo.nickname
         Static.name.valid = true
-        Static.name.readonly=true
+        Static.name.readonly = true
       }
 
       if (Variable.myInfo.email) {
         Static.email.value = Variable.myInfo.email
         Static.email.valid = true
-        Static.email.readonly=true
+        Static.email.readonly = true
       }
     },
     () => {
@@ -122,34 +131,23 @@ const start = function (data, ID = "mainBlock") {
                         <h4>{Variable.lang.h.contact}</h4>
                         <p>{Variable.lang.p.writeUs}</p>
                         <form id="contactsForm" onsubmit={sendMessage}>
-                          <input style="display: none;" type="submit" />          
-                            <Input
-                               
-                                classDiv="contacts_form_name_icon"
-                                Static={Static.name}
-                               
+                          <input style="display: none;" type="submit" />
+                          <Input
 
-                            />
-                              <Input
-                                classDiv="contacts_form_email_icon"
-                                Static={Static.email}
-                            />
+                            classDiv="contacts_form_name_icon"
+                            Static={Static.name}
+
+
+                          />
+                          <Input
+                            classDiv="contacts_form_email_icon"
+                            Static={Static.email}
+                          />
                           <TextArea
-                            label={Variable.lang.label.message}
-                            error={Variable.lang.error_div.not_empty_input}
-                            placeholder={Variable.lang.placeholder.message}
-                            type="text"
-                            value={Static.message.value}
-                            condition={(value) => {
-                              return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-                            }}
-                            afterValid={() => {
-                              checkValid(Static,["name","email","message"])
-                            }}
                             Static={Static.message}
                           />
                           <div
-                           
+
                             class={['search-button', !Static.isValid ? 'c-button--inactive' : null]}
                             onclick={sendMessage}
                           >

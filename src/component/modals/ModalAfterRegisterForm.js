@@ -12,7 +12,7 @@ import { validator,checkValid } from "@src/functions.js";
 import { Input } from '@component/element/index.js';
 import { api } from '@src/apiFunctions.js'
 
-let formInputs;
+
 let Static = {}
 
 const ModalAfterRegisterForm = function (data, reload) {

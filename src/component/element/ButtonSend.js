@@ -4,12 +4,27 @@ import {
     Variable
 } from "@betarost/cemjs";
 
-const ButtonSend = function ({ onclick }) {
+import svg from '@assets/svg/index.js';
+const ButtonSend = function ({ className, onclick, text, onlyAuth }) {
     return (
-        <div class="c-questions__footer" >
-            <a class="c-button c-button--gray" onclick={onclick}>
-                <span class="c-button__wrapper">{Variable.lang.button.showMore}</span>
-            </a>
+        <div
+            class={className}
+            onclick={function () {
+                if (onlyAuth && !Variable.auth) {
+                    Variable.SetModals({ name: "ModalNeedAuth", data: {} });
+                    return
+                }
+                // if (!elTextArea.value.trim().length) {
+                //     return
+                // }
+                onclick(this)
+                // callBack(elTextArea.value.trim())
+                // elTextArea.value = ""
+                // elTextArea.style.height = (elTextArea.dataset.maxHeight / 4) + 'px';
+            }}
+        >
+            {text}
+            {/* <img class="c-comments__icon" src={svg["send_message"]} /> */}
         </div>
     )
 }

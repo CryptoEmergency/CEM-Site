@@ -3,11 +3,10 @@ import {
     jsxFrag,
     Variable
 } from '@betarost/cemjs';
-import images from "@assets/images/index.js";
+//check
 import svg from "@assets/svg/index.js";
 
 const UserBadge = function ({ badge }) {
-
     return (
         <div class="badge_container">
             <div class="badge_description">
@@ -18,5 +17,4 @@ const UserBadge = function ({ badge }) {
         </div>
     )
 }
-
 export { UserBadge }
