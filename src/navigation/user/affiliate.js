@@ -12,9 +12,8 @@ import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 
 import { If } from '@component/helpers/All.js';
-import { Avatar } from '@component/element/Avatar.js';
+import { Avatar, ButtonShowMore } from '@component/element/index.js';
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
-import { ButtonShowMore } from '@component/blocks/index.js';
 
 const start = function () {
 

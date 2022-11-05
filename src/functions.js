@@ -15,7 +15,9 @@ import {
   initReload,
   Helpers,
 } from "@betarost/cemjs";
-import validator from "validator";
+
+const validator = Helpers.validator
+// import validator from "validator";
 import moment from "moment";
 
 import {

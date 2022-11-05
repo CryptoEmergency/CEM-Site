@@ -1,16 +1,14 @@
 // Свайпер
 export { Swiper } from "./Swiper.js";
-
 // Плееры
 export { VideoPlayer } from "./player/VideoPlayer.js";
-
-// Элементы разные
-
 // Формы ввода: Инпуты, чекбоксы
+export { Input } from "./formsElement/Input.js";
 export { TextArea } from "./formsElement/TextArea.js";
+export { ButtonSubmit } from "./formsElement/ButtonSubmit.js"
 export { ButtonShowMore } from "./formsElement/ButtonShowMore.js"
-//
 
+//
 export { UserWalletCard } from './user/UserWalletCard.js';
 export { Avatar } from './Avatar.js';
 export { ProfileTabsMenu } from './user/ProfileTabsMenu.js';
@@ -30,7 +28,7 @@ export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
 export { AnswerAdditionallyToggleNew } from "./AnswerAdditionallyToggleNew.js";
 export { AwardsProgress } from "./AwardsProgress.js";
-export { Input } from "./Input.js";
+
 export { CheckBox } from "./CheckBox.js";
 
 

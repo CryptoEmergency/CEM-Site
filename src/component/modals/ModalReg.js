@@ -10,7 +10,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation, validator,checkValid } from '@src/functions.js';
+import { allValidation, validator, checkValid } from '@src/functions.js';
 import { Input, CheckBox } from '@component/element/index.js';
 
 let listCodes
@@ -80,11 +80,11 @@ const ModalReg = function () {
                 condition: (value) => {
                     return validator.matches(value, /[0-9]{9,13}/i);
                 },
-                afterValid:() => {
-            
-                    checkValid(Static,["phone","pass","agreement"])
-                  
-                 }
+                afterValid: () => {
+
+                    checkValid(Static, ["phone", "pass", "agreement"])
+
+                }
             }
 
             Static.email = {
@@ -98,11 +98,11 @@ const ModalReg = function () {
                 condition: (value) => {
                     return validator.isEmail(value);
                 },
-                afterValid:() => {
-            
-                    checkValid(Static,["email","pass","agreement"])
-                  
-                 }
+                afterValid: () => {
+
+                    checkValid(Static, ["email", "pass", "agreement"])
+
+                }
             }
 
             Static.pass = {
@@ -122,11 +122,11 @@ const ModalReg = function () {
                         minSymbols: 1,
                     });
                 },
-                afterValid:() => {
-            
-                    checkValid(Static,[wayReg,"pass","agreement"])
-                  
-                 }
+                afterValid: () => {
+
+                    checkValid(Static, [wayReg, "pass", "agreement"])
+
+                }
             }
 
             Static.agreement = {
@@ -168,7 +168,7 @@ const ModalReg = function () {
                                 Static.email.value = ""
                                 Static.email.error = false
                                 Static.email.valid = false
-                                checkValid(Static,[wayReg,"pass","agreement"])
+                                checkValid(Static, [wayReg, "pass", "agreement"])
                             }}
                         >
                             {Variable.lang.button.email}
@@ -178,15 +178,15 @@ const ModalReg = function () {
                             class={['c-button c-button--toggler', wayReg == "phone" ? 'c-button--active' : null]}
                             onClick={() => {
                                 if (wayReg == "phone") {
-                                 
+
                                     return
                                 }
                                 wayReg = "phone"
-                    
+
                                 Static.phone.value = ""
                                 Static.phone.error = false
                                 Static.phone.valid = false
-                                checkValid(Static,[wayReg,"pass","agreement"])
+                                checkValid(Static, [wayReg, "pass", "agreement"])
                             }}
                         >
                             {Variable.lang.button.phone}
@@ -212,9 +212,9 @@ const ModalReg = function () {
                                                     <div class="reset_by_mobile_block_container c-phonecode">
 
                                                         <Input
-                                                            classInput="phoneNubmerInput2"
+                                                            className="phoneNubmerInput2"
                                                             Static={Static.phone}
-                                                            befor={
+                                                            before={
                                                                 <div class="country-phone2">
                                                                     <div class="country-phone-selector2">
                                                                         <div
@@ -301,7 +301,7 @@ const ModalReg = function () {
                                     </label>
                                 }
                                 afterValid={() => {
-                                    checkValid(Static,[wayReg,"pass","agreement"])
+                                    checkValid(Static, [wayReg, "pass", "agreement"])
                                 }}
                             />
                         </div>

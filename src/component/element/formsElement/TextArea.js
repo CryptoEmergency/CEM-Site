@@ -3,7 +3,7 @@ import {
     jsxFrag,
 } from "@betarost/cemjs";
 //check
-const textConstuctor = function (Static, className) {
+const textConstuctor = function (Static, className, classDiv) {
     if (typeof Static.label != "undefined" || typeof Static.error != "undefined") {
         return (
             <div>
@@ -81,7 +81,7 @@ const textElem = function (Static, className) {
     )
 }
 
-const TextArea = function ({ Static, className }) {
-    return (textConstuctor(Static, className))
+const TextArea = function ({ Static, className, classDiv }) {
+    return (textConstuctor(Static, className, classDiv))
 };
 export { TextArea };
