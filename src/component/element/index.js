@@ -35,7 +35,6 @@ export { CheckBox } from "./CheckBox.js";
 export { Comment } from "./Comment.js";
 export { Evaluation } from "./Evaluation.js";
 export { InputAdaptive } from "./InputAdaptive.js";
-export { CourseCurrency } from "./CourseCurrency.js";
 export { NotFound } from "./NotFound.js"
 
 export { ButtonSend } from "./ButtonSend.js";

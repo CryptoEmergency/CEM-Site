@@ -3,15 +3,18 @@ import {
     jsxFrag,
     timersStart,
     sendApi,
-    getStorage,
-    setStorage,
     init,
     initReload,
     Variable,
     Helpers
 } from '@betarost/cemjs';
+
+import svg from '@assets/svg/index.js';
+import { api } from '@src/apiFunctions.js'
+
+
 import { If } from '@component/helpers/All.js';
-import { BlockUsers, BlockMainNews, BlockBanners, BlockExchange, BlockInfoPartners, BlockPreview, BlockProjects } from '@component/blocks/index.js';
+import { BlockUsers, BlockMainNews, BlockBanners, BlockExchange, BlockInfoPartners, BlockProjects } from '@component/blocks/index.js';
 
 
 import images from "@assets/images/index.js";
@@ -20,15 +23,16 @@ import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
 import { BlockTrade } from '@component/blocks/BlockTrade.js';
 
 import { ButtonShowMore } from '@component/element/index.js';
+
 const start = function () {
+    let Static = {}
     let filters,
         filtersQuestions
     let type = "all"
-    Variable.visibleFilterUser = false
 
     init(
         async () => {
-            filters = {
+            Static.filters = {
                 lang: {
                     code: "",
                     name: "all"
@@ -45,7 +49,7 @@ const start = function () {
                 online: false
             }
 
-            filtersQuestions = {
+            Static.filtersQuestions = {
                 lang: {
                     code: Variable.lang.code,
                     name: `${Variable.lang.lang} (${Variable.lang.lang_orig})`
@@ -58,14 +62,65 @@ const start = function () {
                 },
                 desc: -1
             }
-            // Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
-            // Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
-            timersStart("Course", async () => { Variable.Course = await sendApi.send({ action: "getCourse", short: true }) }, 10000)
+            await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
+            timersStart("Course", async () => { Variable.Course = await api({ type: "get", action: "getCourse", short: true, name: "Course" }) }, 10000)
         },
         () => {
             return (
                 <div class="c-main__body">
-                    <BlockPreview />
+                    <div class="с-preview">
+                        <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
+                        <div class="с-preview__title">
+                            <img class="с-preview__bg" src={images["background/cem"]} />
+                            <div class="с-preview__text с-preview__text--auth">
+                                <span>{Variable.lang.homePreview.ask}</span>
+                                <div class="с-preview__imgblock">
+                                    <img class="с-preview__img" src={svg.two} />
+                                    <img class="с-preview__img" src={svg.two5} />
+                                    {Variable.lang.homePreview.earn}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="с-preview__crypto">
+                            {
+                                () => {
+                                    if (Variable.Course && Variable.Course.list_records && Variable.Course.list_records.length) {
+                                        const arrReturn = Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
+                                            let course = Variable.Course.list_records[0][key]
+                                            return (
+                                                <a
+                                                    href={key == "cem" ? "https://www.bitmart.com/trade/en?layout=basic&symbol=CEM_USDT" : "/list-trade/"}
+                                                    rel="nofollow noopener"
+                                                    target={key == "cem" ? "_blank" : "_self"}
+                                                    class="c-currency"
+                                                >
+                                                    <div class="c-currency__icon">
+                                                        <div class={`icon-color-${key}`}>
+                                                            <img src={`/assets/icons/coins/${key}2.svg`} />
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-currency__info">
+                                                        <div class="c-currency__left">
+                                                            <div class="c-currency__name">{key.toLocaleUpperCase() + "/USDT"}</div>
+                                                            <div class="c-currency__price"><span class="btcusdt_price">{Helpers.numberFixWithSpaces(course.usdt, key === "cem" ? 4 : 2)}</span></div>
+                                                        </div>
+                                                        <div class="c-currency__right">
+                                                            <div class={`c-currency__percent ${course.change >= 0 ? " c-currency__percent--up" : " c-currency__percent--down"}`}>
+                                                                <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow} />
+                                                                <span class="btcusdt_change">{Helpers.numberFixWithSpaces(course.change, 2)}</span>
+                                                            </div>
+                                                            {/* <div class="c-currency__update">24h.</div> */}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            )
+                                        })
+                                        return arrReturn
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
                         {() => {
@@ -79,7 +134,7 @@ const start = function () {
                         }}
                         <BlockQuestions
                             version={Variable.dataUrl}
-                            filters={filtersQuestions}
+                            filters={Static.filtersQuestions}
                             button={
                                 // <div class="c-questions__footer">
                                 //     <a
@@ -147,7 +202,7 @@ const start = function () {
                                 />
                                 <BlockUsers
                                     title={Variable.lang.h.top_users}
-                                    filters={filters}
+                                    filters={Static.filters}
                                     nameRecords="MainUsers"
                                     type={type}
                                     limit={6}
