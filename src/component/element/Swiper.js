@@ -4,24 +4,18 @@ import {
     Variable,
     initOne
 } from "@betarost/cemjs";
-
-import svg from "@assets/svg/index.js";
-import { If } from '@component/helpers/All.js';
-
+//check
 import { Swiper as SwiperJs } from 'swiper/bundle';
 import 'swiper/css/bundle';
-
 
 const swiperInit = function ($el, options, swiperElem) {
     swiperElem = new SwiperJs($el, options);
 }
 
 const Swiper = function ({ slide, options, className, navigation, swiperElem }) {
-    // console.log('=42f2e9=', slide)
     return (
-        <div
-            class="swiper-container"
-            replace={true}
+        <div class="swiper-container"
+        // replace={true}
         >
             <div
                 class={["swiper", className]}
@@ -40,7 +34,5 @@ const Swiper = function ({ slide, options, className, navigation, swiperElem }) 
             {navigation}
         </div>
     )
-
 };
-
 export { Swiper };

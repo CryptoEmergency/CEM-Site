@@ -9,7 +9,7 @@ import {
 import { validator, checkValid } from "@src/functions.js";
 import { api } from '@src/apiFunctions.js'
 import svg from "@assets/svg/index.js";
-import { Jivo, Input, TextArea } from '@component/element/index.js';
+import { Input, TextArea } from '@component/element/index.js';
 
 const start = function (data, ID = "mainBlock") {
   let Static = {}
@@ -181,7 +181,6 @@ const start = function (data, ID = "mainBlock") {
               </div>
             </div>
           </div>
-          <Jivo />
         </div>
       );
     }, ID

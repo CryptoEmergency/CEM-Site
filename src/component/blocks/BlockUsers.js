@@ -9,7 +9,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
-import { UserBadge, Avatar } from '@component/element/index.js';
+import { Avatar } from '@component/element/index.js';
 
 let elFilters
 
@@ -240,7 +240,13 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button, 
                                                     {
                                                         user.awards.slice(0, 5).map(function (badge) {
                                                             return (
-                                                                <UserBadge badge={badge} />
+                                                                <div class="badge_container">
+                                                                    <div class="badge_description">
+                                                                        <p>{Variable.lang.awards[badge.name]}</p>
+                                                                        <span>{Variable.lang.awards[badge.description]}</span>
+                                                                    </div>
+                                                                    <img src={svg[`badge/${badge.icon.split(".")[0]}`]} />
+                                                                </div>
                                                             )
                                                         })
                                                     }

@@ -13,7 +13,6 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
-import { Jivo } from '@component/element/index.js';
 
 
 const start = function (data, ID = "mainBlock") {
@@ -715,7 +714,7 @@ const start = function (data, ID = "mainBlock") {
                         </div>
                     </div>
                     <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
-                    <Jivo />
+                    <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script>
                 </div>
             )
         }, ID
