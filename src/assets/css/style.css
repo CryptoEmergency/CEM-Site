@@ -3415,6 +3415,10 @@ span#procent::after {
   width: 80px;
 }
 
+.your_answers_avatar .comment_avatar {
+  padding-left: 0;
+}
+
 .your_answers_avatar .micro_user_avatar {
   min-width: 57px;
   height: 74px;
@@ -3459,7 +3463,8 @@ span#procent::after {
 
 .your_answers_name {
   position: relative;
-  top: -8px;
+  /* top: -8px; */
+  top: -21px;
 }
 
 .your_answers_main {
