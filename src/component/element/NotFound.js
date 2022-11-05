@@ -2,9 +2,8 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    Helpers
 } from "@betarost/cemjs";
-
+// chek
 import svg from "@assets/svg/index.js";
 
 const NotFound = function (data) {
@@ -15,5 +14,4 @@ const NotFound = function (data) {
         </div>
     )
 }
-
 export { NotFound }

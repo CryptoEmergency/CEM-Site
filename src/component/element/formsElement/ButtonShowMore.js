@@ -3,7 +3,7 @@ import {
     jsxFrag,
     Variable
 } from "@betarost/cemjs";
-
+// check
 const ButtonShowMore = function ({ onclick }) {
     return (
         <div class="c-questions__footer" >
@@ -13,5 +13,4 @@ const ButtonShowMore = function ({ onclick }) {
         </div>
     )
 }
-
 export { ButtonShowMore }

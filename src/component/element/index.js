@@ -8,11 +8,9 @@ export { VideoPlayer } from "./player/VideoPlayer.js";
 
 // Формы ввода: Инпуты, чекбоксы
 export { TextArea } from "./formsElement/TextArea.js";
-
+export { ButtonShowMore } from "./formsElement/ButtonShowMore.js"
 //
-export { ButtonShowMore } from "./ButtonShowMore.js"
-export { NewsCategory } from "./NewsCategory.js"
-export { NewsItem } from "./NewsItem.js"
+
 export { UserWalletCard } from './user/UserWalletCard.js';
 export { Avatar } from './Avatar.js';
 export { ProfileTabsMenu } from './user/ProfileTabsMenu.js';
