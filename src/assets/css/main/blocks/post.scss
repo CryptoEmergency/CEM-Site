@@ -438,7 +438,9 @@ button[data-type='voiceline'][data-page_type="posts"] {
 
 .c-userpostcreate {
     max-width: calc(100% - 224px);
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1px;
 
     @media (max-width: 1199px) {
         max-width: calc(100% - 60px);
