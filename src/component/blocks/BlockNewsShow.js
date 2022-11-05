@@ -3,7 +3,6 @@ import {
   jsxFrag,
   Helpers,
   Variable,
-  sendApi,
   initReload
 } from "@betarost/cemjs";
 
@@ -11,29 +10,7 @@ import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { InputAdaptive, Comment, NotFound } from "@component/element/index.js";
 
-import { If } from "@component/helpers/All.js";
-
-import { BlockComment } from "@component/blocks/index.js";
-
-
-
 const BlockNewsShow = function ({ item }) {
-
-
-  const getItem = async function () {
-    let tmp = await sendApi.send({ action: "getNews", short: true, filter: { _id: item._id }, limit: 1 });
-    if (tmp.list_records.length) {
-      Variable.Modals.map((item, index) => {
-        if (item.name == "ModalFullSize") {
-          item.data.item = tmp.list_records[0]
-        }
-      })
-      initReload("modals")
-    }
-  }
-
-  let mainId = item._id;
-
 
   return (
     <div>
@@ -86,6 +63,7 @@ const BlockNewsShow = function ({ item }) {
                 <Comment
                   item={itemComments}
                   mainId={item._id}
+                  action="setNews"
                 />
               )
             })
@@ -95,7 +73,6 @@ const BlockNewsShow = function ({ item }) {
                   {arrReturn}
                 </div>
               </div>
-
             )
           } else {
             // return (<NotFound
@@ -103,37 +80,8 @@ const BlockNewsShow = function ({ item }) {
             // )
           }
         }}
-        <If
-          data={item.comments.length > 0}
-          dataIf={
-            <div data-type="news_comment" class="post_comments">
-              <div
-                style={!item.comments && "display: none;"}
-                class="user_news_item"
-              >
-                {/* <BlockComments
-                                    comments={item.comments}
-                                /> */}
-                {/* <QuestionAnswerItemComment item = {item}  mainId={mainId} /> */}
-                {
-                  item.comments.map((item, index) => {
-                    return (
-                      <BlockComment
-                        item={item}
-                        index={index}
-                        mainId={mainId}
-                        callBack={getItem}
-                      />
-                    );
-                  })
-                }
-              </div>
-            </div>
-          }
-        />
       </div>
     </div>
   );
 };
-
 export { BlockNewsShow };

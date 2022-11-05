@@ -4,6 +4,7 @@ import { Avatar } from "@component/element/Avatar.js";
 
 //"alarm_icon" : "confirm_icon"
 const ModalWhoLike = function (data, reload) {
+
   return (
     <div class="c-modal c-modal--open" id="ModalWhoLike">
       <section class="c-modal__dialog">
@@ -19,11 +20,11 @@ const ModalWhoLike = function (data, reload) {
           ></button>
         </header>
         <div class="c-modal__body">
-          {data.response.length > 0 ? (
-            data.response.map((item) => {
+          {data.whoLike.length > 0 ? (
+            data.whoLike.map((item) => {
               return (
                 <div
-                style = {"display:flex; align-items:center; "}
+                  style={"display:flex; align-items:center; "}
                 >
                   <Avatar author={item.author} />
                   <p>{item.author.nickname}</p>

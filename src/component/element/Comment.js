@@ -16,7 +16,7 @@ import {
 
 import { api } from '@src/apiFunctions.js'
 
-const Comment = function ({ item, include, mainId }) {
+const Comment = function ({ item, include, mainId, action }) {
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -34,7 +34,7 @@ const Comment = function ({ item, include, mainId }) {
                 <Evaluation
                     rating={item.statistic.rating}
                     callBackBefore={async (type) => {
-                        let response = await api({ type: "set", action: "setNews", data: { _id: mainId, value: { comments: { evaluation: type, _id: item._id } } } })
+                        let response = await api({ type: "set", action: action, data: { _id: mainId, value: { comments: { evaluation: type, _id: item._id } } } })
                         if (response.status === 'ok') {
                             if (type == "plus") {
                                 item.statistic.rating++
@@ -46,8 +46,15 @@ const Comment = function ({ item, include, mainId }) {
                             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
                         }
                     }}
-                    callBackAfter={(type) => {
-                        console.log('=6e2c6b= Function', "PressWait callBackAfter2", type)
+                    callBackAfter={async (type) => {
+                        let response = await api({ type: "get", action: "getComments", filter: { _id: item._id, }, select: { evaluation: 1, } })
+                        let whoLike = []
+                        if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
+                            whoLike = response.result.list_records[0].evaluation.filter(
+                                (item) => item.type === type
+                            );
+                        }
+                        Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
                     }}
                 />
                 {() => {
@@ -89,6 +96,7 @@ const Comment = function ({ item, include, mainId }) {
                                 mainId={mainId}
                                 quoteId={item._id}
                                 include={true}
+                                action={action}
                             />
                         )
                     })
