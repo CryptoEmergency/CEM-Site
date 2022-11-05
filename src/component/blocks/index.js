@@ -20,7 +20,6 @@ export { BlockTrade } from "./BlockTrade.js";
 export { BlockExchange } from './BlockExchange.js';
 export { BlockComment } from './user/BlockComment.js';
 export { BlockLentaUsers } from './BlockLentaUsers.js';
-export { BlockMainNews } from './BlockMainNews.js';
 export { BlockUserForLenta } from './user/BlockUserForLenta.js';
 
 export { BlockShowNews } from './BlockShowNews.js';
