@@ -35,3 +35,4 @@ export { CourseCurrency } from "./CourseCurrency.js";
 export { Test } from "./Test.js";
 export { NotFound } from "./NotFound.js"
 
+export { ButtonSend } from "./ButtonSend.js";

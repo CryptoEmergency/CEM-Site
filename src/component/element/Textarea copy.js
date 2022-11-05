@@ -1,40 +1,7 @@
-import {
-    jsx,
-    jsxFrag,
-    Helpers,
-    Variable
-} from "@betarost/cemjs";
+import { jsx, jsxFrag, Helpers, Variable } from "@betarost/cemjs";
 
-const textElem = function (Static, className) {
-    return (
-        <textarea
-            class={className}
-            // wrap="soft"
-            rows={Static.rows}
-            Element={($el) => { Static.el = $el }}
-            oninput={function () {
-                if (Static.adaptive) {
-                    if (!this.dataset.maxHeight) {
-                        this.dataset.maxHeight = this.offsetHeight * Static.adaptive
-                    }
-                    if (this.scrollHeight > this.offsetHeight && this.offsetHeight < this.dataset.maxHeight) {
-                        if (this.scrollHeight <= this.dataset.maxHeight) {
-                            this.style.height = this.scrollHeight + 'px';
-                        } else {
-                            this.style.height = this.dataset.maxHeight + 'px';
-                        }
-                    }
-                }
-            }}
-        >
-        </textarea>
-    )
-}
 
 const TextArea = function ({ label, error, placeholder, type, value, condition, Static, afterValid, className }) {
-
-
-    return (textElem(Static, className))
 
     return (
         <div>
