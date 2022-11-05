@@ -26,8 +26,6 @@ const textConstuctor = function (Static, classDiv, className, before, after) {
                                 Static.elInput.type = "text"
                                 this.src = svg["eye-slash"]
                             }
-                            Static.viewPassword = !Static.viewPassword
-                            initReload()
                         }}
                     /> : null}
                     {after}
