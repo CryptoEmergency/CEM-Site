@@ -95,7 +95,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                                     type="radio"
                                                     hidden={true}
                                                     id="aspectRatio1"
-                                                    checked={aspectActive == 1.7777777777777777}
+                                                    checked={aspectActive == 1.7777777777777777 || aspectActive == undefined}
                                                     disabled={arrMedia.length && aspectSelect != 1.7777777777777777}
                                                     ref={elemRatio1}
                                                 />
