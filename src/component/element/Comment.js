@@ -25,12 +25,18 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
 
     let Static = Variable.State(item._id)
 
-    initOne(() => {
+    if (!Static.secondComment) {
         Static.secondComment = {
             rows: 1,
             adaptive: 4,
         }
-    })
+    }
+    // initOne(() => {
+    //     Static.secondComment = {
+    //         rows: 1,
+    //         adaptive: 4,
+    //     }
+    // })
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -77,7 +83,9 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                             <span
                                 class="c-actioncomment__answer"
                                 onclick={() => {
-                                    Static.secondComment.elShowInput.style = "display:flex;"
+                                    if (Static.secondComment.elShowInput) {
+                                        Static.secondComment.elShowInput.style = "display:flex;"
+                                    }
                                     return
                                 }}
                             >

@@ -130,7 +130,6 @@ const start = function (data, ID) {
                                       <span
                                         class="answer_comment_button"
                                         style={item.media.length > 0 && "margin: 40px 0 0 0;"}
-                                        Element={($el) => { Static[0].secondComment.elShowComment = $el; }}
                                         onclick={function () {
                                           this.dataset.show = true
                                           Static[index].secondComment.elShowInput.dataset.show = true
@@ -286,9 +285,11 @@ const start = function (data, ID) {
                                                   if (this.dataset.show) {
                                                     this.removeAttribute("data-show")
                                                     this.innerHTML = Variable.lang.span.showComments;
+                                                    Static[index].secondComment.elShowComment.hidden = true
                                                   } else {
                                                     this.dataset.show = true
                                                     this.innerHTML = Variable.lang.span.hideComments;
+                                                    Static[index].secondComment.elShowComment.hidden = false
                                                   }
                                                 }}
                                               >
@@ -342,17 +343,16 @@ const start = function (data, ID) {
                                 {() => {
                                   if (item.comments && item.comments.length) {
                                     const arrReturn = item.comments.map(function (itemComments, i) {
-                                      console.log('=49cbc8=', itemComments)
-                                      // return (
-                                      //   <Comment
-                                      //     item={itemComments}
-                                      //     mainId={item._id}
-                                      //     action="setAnswer"
-                                      //   />
-                                      // )
+                                      return (
+                                        <Comment
+                                          item={itemComments}
+                                          mainId={item._id}
+                                          action="setAnswer"
+                                        />
+                                      )
                                     })
                                     return (
-                                      <div class="comment_answer">
+                                      <div class="comment_answer" hidden={true} Element={($el) => { Static[index].secondComment.elShowComment = $el; }}>
                                         {arrReturn}
                                       </div>
                                     )

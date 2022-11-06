@@ -4,7 +4,7 @@ import {
 } from "@betarost/cemjs";
 //check
 const textConstuctor = function (Static, className, classDiv) {
-    if (typeof Static.label != "undefined" || typeof Static.error != "undefined") {
+    if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined")) {
         return (
             <div>
                 {Static.label ? <label>{Static.label}</label> : null}
