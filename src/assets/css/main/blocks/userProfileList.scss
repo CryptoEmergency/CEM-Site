@@ -1208,6 +1208,10 @@
     }
 
     &s {
+        &Swiper {
+            max-width: 220px;
+        }
+
         &_block {
             margin: auto;
             margin-top: 40px;
@@ -1220,7 +1224,7 @@
 
         &_body {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-top: 40px;
         }
@@ -1983,6 +1987,10 @@
         max-width: 100%;
 
         &s {
+            &Swiper {
+                max-width: 100%;
+            }
+
             &_body {
                 grid-template-columns: 100%;
             }

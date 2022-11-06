@@ -36,7 +36,7 @@ const start = function () {
             // console.log('=9dcce1=', tmp)
             // awards.kindGroup.one.push(...awards.kindGroup.one)
             return (
-                <div class="uc_container">
+                <div class="awards c-container">
                     <div class="awards_block">
                         <div class="awards_body">
 
@@ -90,12 +90,6 @@ const start = function () {
                                 })
 
                             } */}
-
-
-
-
-
-                            test
                         </div>
                     </div>
                 </div>

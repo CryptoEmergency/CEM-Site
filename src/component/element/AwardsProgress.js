@@ -54,7 +54,7 @@ const AwardsProgress = function ({ item }) {
                     dataElse={
                         <div>
                             <div class="progress_bar" style={`width: ${(item.have / item.count) * 100}%`}></div>
-                            <p class="progress_bar_label">{item.have}/{item.count}</p>
+                            <p class="progress_bar_label">{(item.have/item.count).toFixed(2)}</p>
                         </div>
                     }
                 />
