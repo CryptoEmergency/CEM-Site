@@ -9,7 +9,7 @@ import {
 //check
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-import { InputAdaptive, Comment, TextArea, ButtonSend } from "@component/element/index.js";
+import { InputAdaptive, Comment, TextArea, ButtonSubmit } from "@component/element/index.js";
 
 let Static = {}
 
@@ -50,10 +50,10 @@ const BlockShowNews = function ({ item }) {
               className="text1 create_post_chapter"
             />
           </div>
-          <ButtonSend
+          <ButtonSubmit
             text={<img class="c-comments__icon" src={svg["send_message"]} />}
             className="c-comments__send button-container-preview comments_send"
-            onclick={async (el) => {
+            onclick={async (tmp, el) => {
               if (!Static.mainComment.el.value.trim().length) {
                 return
               }

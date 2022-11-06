@@ -38,7 +38,4 @@ export { Evaluation } from "./Evaluation.js";
 export { InputAdaptive } from "./InputAdaptive.js";
 export { NotFound } from "./NotFound.js"
 
-export { ButtonSend } from "./ButtonSend.js";
-
-
 

@@ -15,7 +15,7 @@ import {
     CommentInput,
     TextArea,
     AnswerAdditionallyToggleNew,
-    ButtonSend
+    ButtonSubmit
 } from "@component/element/index.js";
 
 import { api } from '@src/apiFunctions.js'
@@ -114,10 +114,10 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         className="text1 create_post_chapter"
                     />
                 </div>
-                <ButtonSend
+                <ButtonSubmit
                     text={<img class="c-comments__icon" src={svg["send_message"]} />}
                     className="c-comments__send button-container-preview comments_send"
-                    onclick={async (el) => {
+                    onclick={async (tmp, el) => {
                         if (!Static.secondComment.el.value.trim().length) {
                             return
                         }
