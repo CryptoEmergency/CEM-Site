@@ -12,6 +12,7 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
+import { api } from '@src/apiFunctions.js'
 import { LentaMedia } from "@component/element/index.js";
 import { BlockComment } from "@component/blocks/index.js";
 import images from "@assets/images/index.js";
@@ -103,14 +104,14 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
           <div class="main_comment">
             <Avatar author={item.author} nickName={item.author.nickname} />
             <div class="comment_icons">
-              {() => {
-                console.log('=9a0159=', item)
-              }}
+
               <ItemsMenu
+                author={item.author}
                 items={
                   [
                     {
                       text: Variable.lang.select.share,
+                      type: "share",
                       onclick: async () => {
                         try {
                           if (navigator.share) {
@@ -125,20 +126,107 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                       }
                     },
                     {
-                      text: Variable.lang.select.share,
+                      text: item.subscribe
+                        ? Variable.lang.button.unsubscribe
+                        : Variable.lang.button.subscribe,
+                      type: "subscription",
+                      onlyAuth: true,
                       onclick: async () => {
-                        try {
-                          if (navigator.share) {
-                            await navigator.share({
-                              url: window.location.origin + "/lenta-users/show/" + item._id,
-                            });
+                        const response = await api({ type: "set", action: "setUsers", data: { value: { subscribed: item.author._id } } })
+                        console.log('=b959ac=', response)
+                        if (response.status === "ok") {
+                          if (response.result) {
+                            item.subscribe = response.result.subscribe
+                            initReload();
                           }
-                        } catch (err) {
-                          // Вывести ошибку
-                          console.error("Share", err)
+                        } else {
+                          Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                         }
                       }
-                    }
+                    },
+                    {
+                      text: Variable.lang.select.complainPost,
+                      type: "complainItem",
+                      onlyAuth: true,
+                      color: "red",
+                      onclick: async () => {
+                        // Переработать модалку
+                        Variable.SetModals(
+                          {
+                            name: "ModalComplainComment",
+                            data: {
+                              id: data.item._id,
+                              typeSet: data.typeApi,
+                              mainId: data.mainId,
+                              mainCom: !data.commentId ? true : false,
+                            },
+                          }, true
+                        );
+                      }
+                    },
+                    {
+                      text: Variable.lang.select.complainUser,
+                      type: "complainUser",
+                      onlyAuth: true,
+                      color: "red",
+                      onclick: async () => {
+                        // Переработать модалку
+                        Variable.SetModals(
+                          {
+                            name: "ModalComplainComment",
+                            data: {
+                              id: data.item._id,
+                              typeSet: data.typeApi,
+                              mainId: data.mainId,
+                              mainCom: !data.commentId ? true : false,
+                            },
+                          }, true
+                        );
+                      }
+                    },
+                    {
+                      text: Variable.lang.select.blackList,
+                      type: "blackList",
+                      onlyAuth: true,
+                      color: "red",
+                      onclick: async () => {
+                        // Переработать модалку
+                        Variable.SetModals(
+                          {
+                            name: "ModalBlackList",
+                            data: { id: item.author._id, type: "перебрать" },
+                          }, true
+                        );
+                      }
+                    },
+                    {
+                      text: Variable.lang.button.edit,
+                      type: "edit",
+                      color: "green",
+                      onclick: async () => {
+                        // Переработать модалку
+                        Variable.SetModals(
+                          {
+                            name: "ModalBlackList",
+                            data: { id: item.author._id, type: "перебрать" },
+                          }, true
+                        );
+                      }
+                    },
+                    {
+                      text: Variable.lang.select.delete,
+                      type: "delete",
+                      color: "red",
+                      onclick: async () => {
+                        // Переработать модалку
+                        Variable.SetModals(
+                          {
+                            name: "ModalBlackList",
+                            data: { id: item.author._id, type: "перебрать" },
+                          }, true
+                        );
+                      }
+                    },
                   ]
                 }
               />

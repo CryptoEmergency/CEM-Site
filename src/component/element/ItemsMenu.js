@@ -7,9 +7,14 @@ import {
 import svg from "@assets/svg/index.js";
 
 const ItemsMenu = function (data) {
-  let items
-  if (data && data.items) {
-    items = data.items
+  let items, author
+  if (data) {
+    if (data.items) {
+      items = data.items
+    }
+    if (data.author) {
+      author = data.author
+    }
   }
   return (
     <div
@@ -18,7 +23,7 @@ const ItemsMenu = function (data) {
         e.stopPropagation();
         e.preventDefault();
         if (items && items.length) {
-          Variable.SetModals({ name: "ModalItemsMenu", data: { items } }, true);
+          Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
         }
       }}>
       <img class="answer_additionally_toggle_img" src={svg["points"]} />

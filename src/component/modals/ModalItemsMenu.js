@@ -4,7 +4,13 @@ import {
 	Variable,
 } from "@betarost/cemjs";
 
-const ModalItemsMenu = function ({ items }) {
+const arrMyAction = ["share", "edit", "delete"]
+const arrVisitorAction = ["share", "subscription", "complainItem", "complainUser", "blackList"]
+const arrRoleAction = [""]
+
+const ModalItemsMenu = function ({ items, author }) {
+	console.log('=4e29e1=', author)
+	console.log('=4e29e1=', Variable.auth && Variable.myInfo && author && Variable.myInfo._id == author._id)
 	return (
 		<div class="c-modal c-modal--open" id="ModalContextMenu">
 			<section class="c-modal__dialog">
@@ -13,29 +19,25 @@ const ModalItemsMenu = function ({ items }) {
 						{() => {
 							if (items && items.length) {
 								const arrReturn = items.map((item) => {
-									if (item.color) {
-										return (
-											<li
-												class="c-actions__item"
-												onclick={function () {
-													Variable.DelModals("ModalItemsMenu");
-													item.onclick()
-												}
-												}>
-												<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
-											</li>
-										)
+									if (Variable.auth && Variable.myInfo && author && Variable.myInfo._id == author._id) {
+
+
 									} else {
-										return (
-											<li
-												class="c-actions__item"
-												onclick={function () {
-													Variable.DelModals("ModalItemsMenu");
-													item.onclick()
-												}}>
-												{item.text}
-											</li>
-										)
+										if (arrVisitorAction.includes(item.type) && (!item.onlyAuth || Variable.auth)) {
+
+											return (
+												<li
+													class="c-actions__item"
+													onclick={function () {
+														Variable.DelModals("ModalItemsMenu");
+														item.onclick()
+													}
+													}>
+													<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
+												</li>
+											)
+
+										}
 									}
 								})
 								return arrReturn
