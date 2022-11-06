@@ -88,14 +88,14 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
             // post = await getPostsItemInShow(item._id);
             // post = post.list_records[0];
             // console.log('=item1111111111111111=',item)
-            if (total !== undefined && e.target.dataset.name === undefined)
-              Variable.SetModals({
-                name: "ModalFullSize",
-                data: {
-                  item, type: "post", numIndex: numIndex,
-                  elem: elem
-                },
-              });
+            // if (total !== undefined && e.target.dataset.name === undefined)
+            //   Variable.SetModals({
+            //     name: "ModalFullSize",
+            //     data: {
+            //       item, type: "post", numIndex: numIndex,
+            //       elem: elem
+            //     },
+            //   });
           }}
         >
           <div class="main_comment">
@@ -389,14 +389,14 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
               // let post;
               // post = await getPostsItemInShow(item._id);
               // post = post.list_records[0];
-              if (total !== undefined && e.target.dataset.name === undefined)
-                Variable.SetModals({
-                  name: "ModalFullSize",
-                  data: {
-                    item, type: "post", numIndex: numIndex,
-                    elem: elem
-                  },
-                });
+              // if (total !== undefined && e.target.dataset.name === undefined)
+              //   Variable.SetModals({
+              //     name: "ModalFullSize",
+              //     data: {
+              //       item, type: "post", numIndex: numIndex,
+              //       elem: elem
+              //     },
+              //   });
             }}
           >
             <div class="main_comment">
