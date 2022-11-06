@@ -134,47 +134,8 @@ const start = function () {
                             }
                         }}
                         <BlockQuestions
-                            version={Variable.dataUrl}
-                            filters={Static.filtersQuestions}
-                            button={
-                                // <div class="c-questions__footer">
-                                //     <a
-                                //         class="c-button c-button--gray"
-                                //         href="/question/"
-                                //         onclick={Helpers.siteLink}
-                                //     >
-                                //         <span class="c-button__wrapper">{Variable.lang.button.allQuestions}</span>
-                                //     </a>
-                                // </div>
-                                <If
-                                    data={Variable.dataUrl && Variable.dataUrl.adress == "question" && Variable.MainQuestions.list_records.length < Variable.MainQuestions.totalFound}
-                                    dataIf={
-                                        <ButtonShowMore
-                                            onclick={async () => {
-                                                let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 6, offset: Variable.MainQuestions.list_records.length, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) })
-                                                Variable.MainQuestions.list_records.push(...tmp.list_records)
-                                                // console.log('=Variable.MainQuestions.list_records=', Variable.MainQuestions.list_records)
-                                                // console.log('= Variable.MainQuestions.list_records.length.MainQuestions.totalFound=', Variable.MainQuestions.list_records.length)
-                                                initReload()
-                                            }}
-                                        />
-                                    }
-                                    dataElse={
-                                        <a class="btn-view-all-a c-button c-button--gray" href="/question/" onclick={Helpers.siteLink}>
-                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                        </a>
-                                    }
-                                />
-                            }
-                            callBack={
-                                async function (active, nameOptions) {
-                                    filtersQuestions[nameOptions].value = active
-                                    Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) });
-                                    initReload();
-                                }
-                            }
-                            name={"MainQuestions"}
-                            items={Variable.MainQuestions}
+                            Static={Static}
+                            nameRecords="MainQuestions"
                         />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />

@@ -12,7 +12,6 @@ import images from "@assets/images/index.js";
 import { checkAnswerApi } from '@src/functions.js'
 
 import { If } from '@component/helpers/All.js';
-import { Select } from '@component/element/Select.js';
 
 const start = function () {
     Variable.HeaderShow = true

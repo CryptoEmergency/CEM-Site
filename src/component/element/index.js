@@ -7,6 +7,7 @@ export { Input } from "./formsElement/Input.js";
 export { TextArea } from "./formsElement/TextArea.js";
 export { ButtonSubmit } from "./formsElement/ButtonSubmit.js"
 export { ButtonShowMore } from "./formsElement/ButtonShowMore.js"
+export { Select } from "./formsElement/Select.js"
 // Меню три точки
 export { ItemsMenu } from './ItemsMenu.js';
 
@@ -21,7 +22,7 @@ export { AudioPlayerCopy } from "./AudioPlayerCopy.js"
 export { MediaButton } from "./MediaButton.js"
 export { Likes } from "./Likes.js"
 
-export { Select } from "./Select.js"
+
 
 export { QuestionAnswerItem } from "./QuestionAnswerItem.js"
 export { MediaPreview } from "./MediaPreview.js"

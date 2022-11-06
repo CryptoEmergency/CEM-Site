@@ -63,18 +63,31 @@ const wrapTagToText = (text) => {
 const clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
-      if (!document.body.contains(item[0]())) {
+      let first, second
+      if (typeof item[0] == "function") {
+        first = item[0]()
+      } else {
+        first = item[0]
+      }
+
+      if (typeof item[1] == "function") {
+        second = item[1]()
+      } else {
+        second = item[1]
+      }
+
+      if (!document.body.contains(first)) {
         Variable.OutHideWindows.splice(index, 1);
         return;
       }
-      if (item[0]() === e.target || item[0]().contains(e.target)) {
+      if (first === e.target || first.contains(e.target)) {
       } else {
         if (item[1] && typeof item[1] == "function") {
           if (typeof item[1]() != "boolean") {
-            item[1]().hidden = true;
+            second.hidden = true;
           }
-        } else if (typeof item[1] == "string") {
-          Variable.DelModals(item[1]);
+        } else if (typeof second == "string") {
+          Variable.DelModals(second);
         }
         Variable.OutHideWindows.splice(index, 1);
       }
