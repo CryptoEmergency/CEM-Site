@@ -202,15 +202,14 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                     {
                       text: Variable.lang.button.edit,
                       type: "edit",
-                      color: "green",
                       onclick: async () => {
                         // Переработать модалку
-                        Variable.SetModals(
-                          {
-                            name: "ModalBlackList",
-                            data: { id: item.author._id, type: "перебрать" },
-                          }, true
-                        );
+                        // Variable.SetModals(
+                        //   {
+                        //     name: "ModalBlackList",
+                        //     data: { id: item.author._id, type: "перебрать" },
+                        //   }, true
+                        // );
                       }
                     },
                     {
@@ -219,12 +218,38 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                       color: "red",
                       onclick: async () => {
                         // Переработать модалку
-                        Variable.SetModals(
-                          {
-                            name: "ModalBlackList",
-                            data: { id: item.author._id, type: "перебрать" },
-                          }, true
-                        );
+                        // Variable.SetModals(
+                        //   {
+                        //     name: "ModalDelComment",
+                        //     data: {
+                        //       id: data.item._id,
+                        //       typeSet: data.typeApi,
+                        //       mainId: data.mainId,
+                        //       mainCom: !data.commentId ? true : false,
+                        //       callBack: data.callBack,
+                        //     },
+                        //   }, true
+                        // );
+                      }
+                    },
+                    {
+                      text: Variable.lang.select.delete,
+                      type: "deleteRole",
+                      color: "red",
+                      onclick: async () => {
+                        // Переработать модалку
+                        // Variable.SetModals(
+                        //   {
+                        //     name: "ModalDelComment",
+                        //     data: {
+                        //       id: data.item._id,
+                        //       typeSet: data.typeApi,
+                        //       mainId: data.mainId,
+                        //       mainCom: !data.commentId ? true : false,
+                        //       callBack: data.callBack,
+                        //     },
+                        //   }, true
+                        // );
                       }
                     },
                   ]
