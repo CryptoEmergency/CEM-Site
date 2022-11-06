@@ -6,24 +6,13 @@ import {
   initOne,
   Helpers
 } from "@betarost/cemjs";
-
+//check
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { Select, ButtonShowMore, NotFound, Avatar } from '@component/element/index.js';
 
-
-import { If } from '@component/helpers/All.js';
-import { ifHaveMedia, sliceString } from '@src/functions.js';
-
-
-let elShowFilter
-
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
-
-
-
   await initOne(async () => {
-
     Static.optionsSelect = {
       questions: {
         nameOptions: "questions",
@@ -70,13 +59,12 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
                 class="c-search__icon c-search__icon--filter"
                 src={svg.filter}
                 onClick={() => {
-                  console.log('=812bee=', elShowFilter.dataset.show)
-                  if (elShowFilter.dataset.show) {
-                    elShowFilter.removeAttribute("data-show")
-                    elShowFilter.classList.remove("c-questions__filter--openmobile")
+                  if (Static.elShowFilter.dataset.show) {
+                    Static.elShowFilter.removeAttribute("data-show")
+                    Static.elShowFilter.classList.remove("c-questions__filter--openmobile")
                   } else {
-                    elShowFilter.dataset.show = true
-                    elShowFilter.classList.add("c-questions__filter--openmobile")
+                    Static.elShowFilter.dataset.show = true
+                    Static.elShowFilter.classList.add("c-questions__filter--openmobile")
                   }
                 }}
               />
@@ -107,7 +95,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
           data-show={false}
           class="c-questions__filter questions_filter"
           Element={($el) => {
-            elShowFilter = $el
+            Static.elShowFilter = $el
           }}
         >
           <Select

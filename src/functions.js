@@ -252,18 +252,6 @@ function isEmpty(obj) {
 }
 
 
-const ifHaveMedia = function (mediaArr, type, whatReturn) {
-  if (mediaArr === null) {
-    return "";
-  }
-  var media = mediaArr.filter((tmp) => tmp.type == type);
-  if (media.length == 0) {
-    return "";
-  }
-  return whatReturn;
-};
-
-
 const uploadMedia = function (file, type, onload, onprogress, xhr) {
   let nameFile = "file.png"
   if (file.name) {
@@ -305,7 +293,6 @@ export {
   clickHide,
   checkAnswerApi,
   allValidation,
-  ifHaveMedia,
   uploadMedia,
   wrapTagToText,
   validator,

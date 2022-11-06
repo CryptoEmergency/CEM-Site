@@ -8,7 +8,7 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { allValidation, checkValid, validator } from "@src/functions.js";
+import { checkValid, validator } from "@src/functions.js";
 
 import { Input } from '@component/element/index.js';
 let formInputs;
