@@ -7,6 +7,8 @@ export { Input } from "./formsElement/Input.js";
 export { TextArea } from "./formsElement/TextArea.js";
 export { ButtonSubmit } from "./formsElement/ButtonSubmit.js"
 export { ButtonShowMore } from "./formsElement/ButtonShowMore.js"
+// Меню три точки
+export { ItemsMenu } from './ItemsMenu.js';
 
 //
 export { UserWalletCard } from './user/UserWalletCard.js';
@@ -25,7 +27,7 @@ export { Select } from "./Select.js"
 export { QuestionAnswerItem } from "./QuestionAnswerItem.js"
 export { MediaPreview } from "./MediaPreview.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
-export { AnswerAdditionallyToggle } from "./AnswerAdditionallyToggle.js";
+
 export { AnswerAdditionallyToggleNew } from "./AnswerAdditionallyToggleNew.js";
 export { AwardsProgress } from "./AwardsProgress.js";
 

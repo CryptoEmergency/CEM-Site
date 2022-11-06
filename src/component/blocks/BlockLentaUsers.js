@@ -22,7 +22,8 @@ import {
   Avatar,
   Likes,
   AnswerAdditionallyToggleNew,
-  CommentInput
+  CommentInput,
+  ItemsMenu
 } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
 
@@ -102,6 +103,45 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
           <div class="main_comment">
             <Avatar author={item.author} nickName={item.author.nickname} />
             <div class="comment_icons">
+              {() => {
+                console.log('=9a0159=', item)
+              }}
+              <ItemsMenu
+                items={
+                  [
+                    {
+                      text: Variable.lang.select.share,
+                      onclick: async () => {
+                        try {
+                          if (navigator.share) {
+                            await navigator.share({
+                              url: window.location.origin + "/lenta-users/show/" + item._id,
+                            });
+                          }
+                        } catch (err) {
+                          // Вывести ошибку
+                          console.error("Share", err)
+                        }
+                      }
+                    },
+                    {
+                      text: Variable.lang.select.share,
+                      onclick: async () => {
+                        try {
+                          if (navigator.share) {
+                            await navigator.share({
+                              url: window.location.origin + "/lenta-users/show/" + item._id,
+                            });
+                          }
+                        } catch (err) {
+                          // Вывести ошибку
+                          console.error("Share", err)
+                        }
+                      }
+                    }
+                  ]
+                }
+              />
               <AnswerAdditionallyToggleNew
                 item={item}
                 typeApi={"setPost"}

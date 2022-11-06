@@ -107,7 +107,6 @@ const BlockUserCommentComment = function ({
             <div
               class={`comment_icon_type-1 answer_additionally_toggle  ${(!auth || Variable.Static.answerAdditionally) && "comment_inactive"
                 } `}
-              data-action="answerAdditionallyToggle"
               onclick={() => (auth && !Variable.Static.answerAdditionally) && showAnswerAdditionallyContainer(item._id)}
             >
               <img class="answer_additionally_toggle_img" src={svg["points"]} />

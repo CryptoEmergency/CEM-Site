@@ -22,12 +22,12 @@ import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js
 import { CommentInput } from "@src/component/element/CommentInput.js";
 
 import { BottomMenu } from '@component/element/BottomMenu.js';
-import { AnswerAdditionallyToggleNew } from '@component/element/index.js'
+import { AnswerAdditionallyToggleNew, ItemsMenu } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
   let data = Variable.ModalsPage[ID].data
-  // console.log('=c1d88c=2 ModalPage', ID, reload)
+  console.log('=c1d88c=2 ModalPage', ID, reload, data)
   // let mainId = item._id;
 
   initAfter(
@@ -70,9 +70,11 @@ const ModalPage = async function (ID, reload) {
 
                     <h5 class="c-fullnews__title">{data.title}</h5>
 
-                    <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
+                    <ItemsMenu
+                    />
+                    {/* <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
                       <img class="answer_additionally_toggle_img" src={svg["points"]} />
-                    </div>
+                    </div> */}
                     {/* <AnswerAdditionallyToggle
                     item={item}
                     typeApi={"setPost"}
