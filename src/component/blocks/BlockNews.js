@@ -153,26 +153,28 @@ const BlockNews = async function ({ nameRecords, type, Static }) {
           </div>
           {
             () => {
-              if (Variable[nameRecords] && Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
-                return (
-                  <ButtonShowMore
-                    onclick={async () => {
-                      let filter = { type: type }
-                      if (type == "media") {
-                        filter["languages.code"] = Static.lang
-                      } else {
-                        if (Static.activeCategory != "All") {
-                          filter["category.name"] = Static.activeCategory
+              if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
+                if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
+                  return (
+                    <ButtonShowMore
+                      onclick={async () => {
+                        let filter = { type: type }
+                        if (type == "media") {
+                          filter["languages.code"] = Static.lang
+                        } else {
+                          if (Static.activeCategory != "All") {
+                            filter["category.name"] = Static.activeCategory
+                          }
                         }
-                      }
-                      let response = await api({ type: "get", action: "getNews", short: true, filter: filter, offset: Variable[nameRecords].list_records.length })
-                      if (response.list_records.length) {
-                        Variable[nameRecords].list_records.push(...response.list_records)
+                        let tmp = await api({ type: "get", action: "getNews", short: true, filter: filter, offset: Variable[nameRecords].list_records.length })
+                        if (tmp && tmp.list_records) {
+                          Variable[nameRecords].list_records.push(...tmp.list_records)
+                        }
                         initReload()
-                      }
-                    }}
-                  />
-                )
+                      }}
+                    />
+                  )
+                }
               }
             }
           }

@@ -4,8 +4,6 @@ export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js"
 export { BlockNews } from "./BlockNews.js"
 
 
-//
-export { BlockNewsShow } from "./BlockNewsShow.js"
 export { BlockBanners } from "./BlockBanners.js"
 export { BlockProjects } from "./BlockProjects.js"
 export { BlockQuestionsShow } from "./BlockQuestionsShow.js"
