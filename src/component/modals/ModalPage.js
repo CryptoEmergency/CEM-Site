@@ -24,7 +24,6 @@ let news;
 
 const ModalPage = async function (ID, reload) {
   let data = Variable.ModalsPage[ID].data
-  console.log('=c1d88c=2 ModalPage', ID, reload, data)
   // let mainId = item._id;
 
   initAfter(

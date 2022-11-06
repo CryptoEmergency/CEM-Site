@@ -23,8 +23,6 @@ export { MediaButton } from "./MediaButton.js"
 export { Likes } from "./Likes.js"
 
 
-
-export { QuestionAnswerItem } from "./QuestionAnswerItem.js"
 export { MediaPreview } from "./MediaPreview.js"
 export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 
