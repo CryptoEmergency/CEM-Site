@@ -4,16 +4,12 @@ import {
   Variable,
   init,
   Helpers,
-  sendApi,
-  getStorage,
   initReload
 } from "@betarost/cemjs";
-
-import { api } from '@src/apiFunctions.js'
+// check
 import svg from '@assets/svg/index.js';
-import { BlockQuestionsShow } from '@component/blocks/index.js';
-import { QuestionAnswerItem } from '@component/element/index.js';
-import { Avatar, LentaMedia } from "@component/element/index.js";
+import { api } from '@src/apiFunctions.js'
+import { Avatar, LentaMedia, QuestionAnswerItem } from "@component/element/index.js";
 
 const start = function (data, ID) {
   let item, itemAnswer, itemID;
@@ -65,53 +61,68 @@ const start = function (data, ID) {
                   <img src={svg["question_time"]} />{" "}
                   <b>{Helpers.getDateFormat(item.showDate, "lenta")}</b>{" "}
                 </p>
-                {/* {buttonAnswer} */}
+                {() => {
+                  if (Variable.auth && Variable.myInfo && Variable.myInfo._id && !item.close && item.author._id !== Variable.myInfo._id) {
+                    return (<div
+                      class="btn-answer"
+                      onclick={() => {
+                        Variable.SetModals({
+                          name: "ModalAnswer", data: {
+                            item,
+                            onClose: async () => {
+                              // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                              // itemAnswer = answer.list_records
+                              // initReload()
+                            }
+                          }
+                        })
+                      }}>
+                      <a class="btn-gr-answer">
+                        <span>{Variable.lang.button.giveAnswer}</span>
+                      </a>
+                    </div>
+                    )
+                  }
+                }}
               </div>
             </div>
-            {/* <BlockQuestionsShow
-              itemsAnswers={itemAnswer}
-
-              item={item}
-              callBackAnswer={
-                async () => {
-                  let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-                  itemAnswer = answer.list_records
-                  initReload()
-                }
-              }
-              type={"question"}
-            /> */}
-
-
-            {/* <div class="user_news_block">
+            <div class="user_news_block">
               {
                 () => {
                   if (!itemAnswer) {
-
                     setTimeout(async function () {
-                      let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-                      itemAnswer = answer.list_records
+                      itemAnswer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
                       initReload()
                     }, 1000)
                     return (
                       <img src={svg['load']} />
                     )
                   } else {
-                    return itemAnswer.map((item, index) => {
-                      return (
-                        <QuestionAnswerItem item={item} index={index} />
-                      )
-                    })
+                    {
+                      () => {
+                        if (itemAnswer && itemAnswer.list_records && itemAnswer.list_records.length) {
+                          const arrReturn = itemAnswer.list_records.map(function (item, i) {
+                            return (
+                              <QuestionAnswerItem item={item} index={index} />
+                            )
+                          })
+                          return arrReturn
+                        } else {
+                          return (
+                            <NotFound
+                            />
+                          )
+                        }
+                      }
+                    }
                   }
-
                 }
               }
-            </div> */}
+            </div>
           </div>
         </div>
       )
     }, ID
   );
 };
-
 export default start;
