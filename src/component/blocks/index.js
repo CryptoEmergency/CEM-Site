@@ -12,13 +12,12 @@ export { BlockQuestionsShow } from "./BlockQuestionsShow.js"
 export { BlockUsers } from "./BlockUsers.js"
 export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
 export { BlockUserProfilePage } from "./user/BlockUserProfilePage.js"
-export { BlockUserPreview } from './user/BlockUserPreview.js';
 export { BlockQuestions } from './BlockQuestions.js';
 export { BlockInfoPartners } from './BlockInfoPartners.js';
 export { BlockTrade } from "./BlockTrade.js";
 export { BlockExchange } from './BlockExchange.js';
 export { BlockLentaUsers } from './BlockLentaUsers.js';
-export { BlockUserForLenta } from './user/BlockUserForLenta.js';
+export { BlockUserForLenta } from './BlockUserForLenta.js';
 
 export { BlockShowNews } from './BlockShowNews.js';
 
