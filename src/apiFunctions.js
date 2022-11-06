@@ -9,7 +9,7 @@ import {
   Helpers,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
-import { renderModalFullNews } from "@src/apiFunctionsE.js";
+
 
 const changeStatistic = async function (
   e,
@@ -201,10 +201,6 @@ const sendNewCommentApi = async function (
   // }
   let response = checkAnswerApi(await sendApi.create(typeSet, data));
 
-  // if (Variable.dataUrl.params === undefined) {
-  //   await renderModalFullNews();
-  // }
-  // return response;
 };
 
 const getNewsItemInShow = async function (id) {

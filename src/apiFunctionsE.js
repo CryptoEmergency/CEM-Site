@@ -26,16 +26,6 @@ const giveNewCodeForReset = async (info) => {
   }
 };
 
-const checkNickName = async (nickName) => {
-  let data = {
-    filter: {
-      nickname: nickName,
-    },
-  };
-  let response = checkAnswerApi(await sendApi.create("getUsers", data));
-  return response.totalFound;
-};
-
 const sendResetMessage = async (info) => {
   let data = {
     value: { code: info.code, reset: true },
@@ -71,32 +61,7 @@ const sendInBlackList = async (info) => {
 
   let response = checkAnswerApi(await sendApi.create("setUsers", data));
 };
-const getQuestionsItemInShow = async function (id, type) {
-  let data = {
-    filter: {},
-    select: {
-      author: 1,
-      best: 1,
-      comments: 1,
-      media: 1,
-      showDate: 1,
-      statistic: 1,
-      text: 1,
-      title: 1,
-      close: 1,
-    },
-    sort: { showDate: -1 },
-    limit: 12,
-  };
 
-  if (type === "getQuestions") {
-    data.filter._id = id;
-  } else {
-    data.filter.questionId = id;
-  }
-  let response = checkAnswerApi(await sendApi.create(type, data));
-  return response;
-};
 
 const delCom = async (info) => {
 
@@ -216,20 +181,8 @@ const sendComplaintApi = async (info) => {
   let response = checkAnswerApi(await sendApi.create(info.data.typeSet, data));
 };
 
-const renderModalFullNews = async () => {
-  Variable.Modals.pop();
-  let news = await getNewsItemInShow(Variable.Static.showNewsId);
-  news = news.list_records[0];
-  Variable.SetModals({
-    name: "ModalFullNews",
-    data: { news: news },
-  });
-};
 
 export {
-  checkNickName,
-  getQuestionsItemInShow,
-  renderModalFullNews,
   giveNewCodeForReset,
   sendResetMessage,
   delCom,

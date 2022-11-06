@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initGo, sendApi, Helpers, parsingUrl } from "@betarost/cemjs";
-import { delCom, renderModalFullNews } from "@src/apiFunctionsE.js";
+import { delCom } from "@src/apiFunctionsE.js";
 import { getNewsItemInShow } from "@src/apiFunctions.js";
 const ModalDelComment = function (data, reload) {
   return (

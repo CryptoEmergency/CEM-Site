@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initGo } from "@betarost/cemjs";
-import { sendComplaintApi, renderModalFullNews } from "@src/apiFunctionsE.js";
+import { sendComplaintApi } from "@src/apiFunctionsE.js";
 
 let isChecked, complaint, input, inputValue;
 
@@ -36,13 +36,7 @@ const sendComplaint = async (data) => {
     Variable.Static.answerAdditionally = "";
     Variable.DelModals("ModalComplainComment");
     initReload();
-    // if (Variable.dataUrl.params === undefined) {
-    //   Variable.Modals.pop();
-    //   await renderModalFullNews();
-    // } else {
-    //   Variable.Modals = [];
-    //   initReload();
-    // }
+
   }
 };
 const ModalComplainComment = function (data, reload) {
@@ -145,7 +139,7 @@ const ModalComplainComment = function (data, reload) {
             <div
               style={
                 isChecked.other() !== undefined &&
-                isChecked.other().checked === true
+                  isChecked.other().checked === true
                   ? "display: block"
                   : "display: none"
               }
@@ -164,7 +158,7 @@ const ModalComplainComment = function (data, reload) {
               class={[
                 "registration-btn",
                 isChecked.other() !== undefined &&
-                (complaint.length > 0 || input().innerText.trim().length > 2)
+                  (complaint.length > 0 || input().innerText.trim().length > 2)
                   ? null
                   : "inactive_form_button",
               ]}

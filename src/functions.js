@@ -87,49 +87,6 @@ const timerTik = function () {
   //console.log("timerTik", "tt")
 };
 
-const getNewsItem = async function (type, count, category, mediaActveCategory) {
-  let getLang = "en";
-  let a = 6;
-  let b = 12;
-  if (getStorage("lang") == "ru") {
-    getLang = "ru";
-  }
-
-  if (type === "media") {
-    getLang = mediaActveCategory || getStorage("lang");
-  }
-
-  let data = {
-    filter: {
-      type: type,
-      "languages.code": getLang,
-    },
-    select: {
-      title: 1,
-      preview: 1,
-      image: 1,
-      showDate: 1,
-      "statistic.view": 1,
-      "statistic.comments": 1,
-    },
-    sort: {
-      showDate: -1,
-    },
-    limit: 6,
-  };
-
-  if (count > 0) {
-    data.limit = b;
-    data.offset = a + (count - 1) * b;
-  }
-
-  if (category && category != "All") {
-    data.filter["category.name"] = category;
-  }
-
-  var response = checkAnswerApi(await sendApi.create("getNews", data));
-  return response;
-};
 
 const getDateFormat = function (data, type) {
   // const lang = getVariable("languages")[getStorage("lang")];
@@ -261,9 +218,7 @@ const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, com
       if (typeof callBack == "function") {
         callBack();
       }
-      // if (Variable.dataUrl.params === undefined) {
-      //   await renderModalFullNews();
-      // }
+
     }
     if (700 <= sec && sec < 1000) {
       let response = await showVotersApi(id, typeGet);
@@ -284,60 +239,6 @@ function isEmpty(obj) {
   return true;
 }
 
-const changeNewsCategory = async (e, type, init) => {
-  const ID = "mainBlock";
-  // e.target.closest('.tags').childNodes.forEach(function(child) {
-  //   child.classList.remove('tag_button_active');
-  // });
-  // e.currentTarget.classList.add('tag_button_active');
-  let typeCategory = e.currentTarget.dataset.name;
-  setValue(ID, "activeCategory", typeCategory);
-  let data = {
-    select: {
-      title: 1,
-      preview: 1,
-      image: 1,
-      showDate: 1,
-      "statistic.view": 1,
-      "statistic.comments": 1,
-    },
-    sort: {
-      showDate: -1,
-    },
-    limit: 6,
-  };
-  let response;
-  if (type === "media") {
-    if (typeCategory !== "en") {
-      setValue(ID, `${type}Item`, await getNewsItem(type));
-    } else {
-      data.filter = {
-        "languages.code": "en",
-        type: type,
-      };
-      response = checkAnswerApi(await sendApi.create("getNews", data));
-      setValue(ID, `${type}Item`, response);
-    }
-  } else {
-    if (typeCategory === "All") {
-      setValue(ID, `${type}Item`, await getNewsItem("news"));
-    } else {
-      let getLang = "en";
-      if (getStorage("lang") == "ru") {
-        getLang = "ru";
-      }
-      data.filter = {
-        type,
-        "languages.code": getLang,
-        "category.name": typeCategory,
-      };
-
-      response = checkAnswerApi(await sendApi.create("getNews", data));
-      setValue(ID, `${type}Item`, response);
-    }
-  }
-  //init(true);
-};
 
 const ifHaveMedia = function (mediaArr, type, whatReturn) {
   if (mediaArr === null) {
@@ -386,9 +287,7 @@ export {
   isEmpty,
   showVotersAndchangeStatistic,
   changeActiveCommentsInput,
-  changeNewsCategory,
   getDateFormat,
-  getNewsItem,
   siteLink,
   timerTik,
   clickHide,
