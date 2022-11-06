@@ -87,7 +87,7 @@ const BlockShowNews = function ({ item }) {
               )
             })
             return (
-              <div data-type="news_comment" class="post_comments">
+              <div class="post_comments">
                 <div class="user_news_item">
                   {arrReturn}
                 </div>

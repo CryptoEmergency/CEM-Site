@@ -31,7 +31,6 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
             adaptive: 4,
         }
     })
-    console.log('=13a692=', item._id, Static.secondComment)
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -62,7 +61,7 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         }
                     }}
                     callBackAfter={async (type) => {
-                        let response = await api({ type: "get", action: "getComments", filter: { _id: item._id, }, select: { evaluation: 1, } })
+                        let response = await api({ type: "get", action: "getComments", filter: { _id: item._id }, select: { evaluation: 1, } })
                         let whoLike = []
                         if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
                             whoLike = response.result.list_records[0].evaluation.filter(
@@ -131,7 +130,6 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         }
 
                         let response = await api({ type: "set", action: action, data: data })
-                        console.log('=abf729=', action, data, response)
                         if (response.status === "ok") {
                             Static.secondComment.el.value = ""
                             if (Static.adaptive) {

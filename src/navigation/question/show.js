@@ -9,10 +9,11 @@ import {
 // check
 import svg from '@assets/svg/index.js';
 import { api } from '@src/apiFunctions.js'
-import { Avatar, LentaMedia } from "@component/element/index.js";
+import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
 
 const start = function (data, ID) {
   let item, itemAnswer, itemID;
+  let Static = []
   init(
     async () => {
       if (data && data.item) {
@@ -100,8 +101,12 @@ const start = function (data, ID) {
                   } else {
                     if (itemAnswer && itemAnswer.list_records && itemAnswer.list_records.length) {
                       const arrReturn = itemAnswer.list_records.map(function (item, index) {
+                        Static[index] = Variable.State(item._id)
+                        Static[index].secondComment = {
+                          rows: 1,
+                          adaptive: 4,
+                        }
                         return (
-
                           <div
                             style={[item.best ? "order: -1; border-color: #00E741" : null]}
                             class="user_news_item"
@@ -114,134 +119,248 @@ const start = function (data, ID) {
                               />
                               <div class="comment_body">
                                 <span class="comment_text">{Helpers.clearText(item.text)}</span>
-                                {/* Media element */}
-                                {/* <LentaMedia
+                                <LentaMedia
                                   items={item.media}
                                   numIndex={0}
-                                  elem={elem}
                                   path={"/assets/upload/answers/"}
-                                /> */}
-                                {/* <If
-                                  data={Variable.auth && Variable.Static.activeInputId !== item._id}
-                                  dataIf={
-                                    <span
-                                      class="answer_comment_button"
-                                      style={item.media.length > 0 && "margin: 40px 0 0 0;"}
-                                      onclick={() => {
-                                        Variable.Static.activeInputId = item._id;
-                                        Variable.Static.answerAdditionally = "";
-                                        initReload();
-                                      }}
-                                    >
-                                      {Variable.lang.button.giveAnswer}
-                                    </span>
+                                />
+                                {() => {
+                                  if (Variable.auth) {
+                                    return (
+                                      <span
+                                        class="answer_comment_button"
+                                        style={item.media.length > 0 && "margin: 40px 0 0 0;"}
+                                        Element={($el) => { Static[0].secondComment.elShowComment = $el; }}
+                                        onclick={function () {
+                                          this.dataset.show = true
+                                          Static[index].secondComment.elShowInput.dataset.show = true
+                                          Static[index].secondComment.elShowInput.style = "display:flex;"
+                                        }}
+                                      >
+                                        {Variable.lang.button.giveAnswer}
+                                      </span>
+                                    )
                                   }
-                                /> */}
-
+                                }}
                                 <div class="comment_icons">
-                                  {/* <Likes item={item} typeGet="getAnswers" typeSet="setAnswer" /> */}
-                                  {/* <div
-              class="comment_icon_type-1 answer_additionally_toggle {{#if data.userInfo.auth}}{{else}}comment_inactive{{/if}}"
-              data-action="answerAdditionallyToggle"
-            >
-              <img class="answer_additionally_toggle_img" src={svg["points"]} />
-            </div> */}
-                                  {/* <AnswerAdditionallyToggleNew item={item} typeApi={"setAnswer"} type={
-              {
-                delete: true,
-                complainAnswer: true,
-                complainUser: true,
-                blackList: true,
-              }} mainId={mainId} /> */}
-
+                                  <Evaluation
+                                    rating={item.statistic.rating}
+                                    callBackBefore={async (type) => {
+                                      let response = await api({ type: "set", action: "setAnswer", data: { _id: item._id, value: { evaluation: type } } })
+                                      if (response.status === 'ok') {
+                                        if (type == "plus") {
+                                          item.statistic.rating++
+                                        } else {
+                                          item.statistic.rating--
+                                        }
+                                        initReload()
+                                      } else {
+                                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+                                      }
+                                    }}
+                                    callBackAfter={async (type) => {
+                                      let response = await api({ type: "get", action: "getAnswers", filter: { _id: item._id }, select: { evaluation: 1, } })
+                                      let whoLike = []
+                                      if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
+                                        whoLike = response.result.list_records[0].evaluation.filter(
+                                          (item) => item.type === type
+                                        );
+                                      }
+                                      Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
+                                    }}
+                                  />
+                                  <ItemsMenu
+                                    author={item.author}
+                                    items={
+                                      [
+                                        {
+                                          text: Variable.lang.select.complainAnswer,
+                                          type: "complainItem",
+                                          onlyAuth: true,
+                                          color: "red",
+                                          onclick: async () => {
+                                            // Переработать модалку
+                                            // Variable.SetModals(
+                                            //   {
+                                            //     name: "ModalComplainComment",
+                                            //     data: {
+                                            //       id: data.item._id,
+                                            //       typeSet: data.typeApi,
+                                            //       mainId: data.mainId,
+                                            //       mainCom: !data.commentId ? true : false,
+                                            //     },
+                                            //   }, true
+                                            // );
+                                          }
+                                        },
+                                        {
+                                          text: Variable.lang.select.complainUser,
+                                          type: "complainUser",
+                                          onlyAuth: true,
+                                          color: "red",
+                                          onclick: async () => {
+                                            // Переработать модалку
+                                            Variable.SetModals(
+                                              {
+                                                name: "ModalComplainComment",
+                                                data: {
+                                                  id: data.item._id,
+                                                  typeSet: data.typeApi,
+                                                  mainId: data.mainId,
+                                                  mainCom: !data.commentId ? true : false,
+                                                },
+                                              }, true
+                                            );
+                                          }
+                                        },
+                                        {
+                                          text: Variable.lang.select.blackList,
+                                          type: "blackList",
+                                          onlyAuth: true,
+                                          color: "red",
+                                          onclick: async () => {
+                                            // Переработать модалку
+                                            Variable.SetModals(
+                                              {
+                                                name: "ModalBlackList",
+                                                data: { id: item.author._id, type: "перебрать" },
+                                              }, true
+                                            );
+                                          }
+                                        },
+                                        {
+                                          text: Variable.lang.select.delete,
+                                          type: "delete",
+                                          color: "red",
+                                          onclick: async () => {
+                                            // Переработать модалку
+                                            // Variable.SetModals(
+                                            //   {
+                                            //     name: "ModalDelComment",
+                                            //     data: {
+                                            //       id: data.item._id,
+                                            //       typeSet: data.typeApi,
+                                            //       mainId: data.mainId,
+                                            //       mainCom: !data.commentId ? true : false,
+                                            //       callBack: data.callBack,
+                                            //     },
+                                            //   }, true
+                                            // );
+                                          }
+                                        },
+                                        {
+                                          text: Variable.lang.select.delete,
+                                          type: "deleteRole",
+                                          color: "red",
+                                          onclick: async () => {
+                                            // Переработать модалку
+                                            // Variable.SetModals(
+                                            //   {
+                                            //     name: "ModalDelComment",
+                                            //     data: {
+                                            //       id: data.item._id,
+                                            //       typeSet: data.typeApi,
+                                            //       mainId: data.mainId,
+                                            //       mainCom: !data.commentId ? true : false,
+                                            //       callBack: data.callBack,
+                                            //     },
+                                            //   }, true
+                                            // );
+                                          }
+                                        },
+                                      ]
+                                    }
+                                  />
                                 </div>
-
-                                {/* <If
-            data={item.comments.length > 0}
-            dataIf={
-              <div class="user_news_top">
-                <div
-                  class="button-container-comm"
-                  data-action="showAnswerComments"
-                >
-                  <a
-                    class="btn-comm "
-                    onclick={() => {
-                      if (Variable.Static.openComent[index]) {
-                        Variable.Static.openComent[index] =
-                          !Variable.Static.openComent[index];
-                      } else {
-                        Variable.Static.openComent[index] = true;
-                      }
-                      initReload();
-                    }}
-                  >
-                    <If
-                      data={
-                        Variable.Static.openComent[index] !== undefined &&
-                        Variable.Static.openComent[index]
-                      }
-                      dataIf={
-                        <span>
-                          {Variable.lang.span.hideComments} (
-                          <span class="comment_count">
-                            {item.statistic.comments}
-                          </span>
-                          )
-                        </span>
-                      }
-                      dataElse={
-                        <span>
-                          {Variable.lang.span.showComments} (
-                          <span class="comment_count">
-                            {item.statistic.comments}
-                          </span>
-                          )
-                        </span>
-                      }
-                    />
-                  </a>
-                </div>
-              </div>
-            }
-          /> */}
-                                {/* <If
-            data={Variable.Static.activeInputId === item._id}
-            dataIf={
-              <CommentInput
-                nickname={item.author.nickname}
-                item={item}
-                typeSet="setAnswer"
-                mainId={mainId}
-              // commentId={item._id}
-              />
-            }
-          /> */}
-                                {/* <If
-            data={
-              Variable.Static.openComent[index] !== undefined &&
-              Variable.Static.openComent[index]
-            }
-            dataIf={
-              <div class="comment_answer">
-                {
-                  item.comments.map((item, index) => {
-                    return (
-                      <QuestionAnswerItemComment
-                        item={item}
-                        index={index}
-                        mainId={mainId}
-                      />
-                    );
-                  })
-                }
-              </div>
-            }
-          /> */}
+                                {() => {
+                                  if (item.comments && item.comments.length) {
+                                    return (
+                                      <div class="user_news_top">
+                                        <div class="button-container-comm">
+                                          <ButtonSubmit
+                                            className="btn-comm"
+                                            data-show={false}
+                                            text={
+                                              <span
+                                                onclick={function () {
+                                                  if (this.dataset.show) {
+                                                    this.removeAttribute("data-show")
+                                                    this.innerHTML = Variable.lang.span.showComments;
+                                                  } else {
+                                                    this.dataset.show = true
+                                                    this.innerHTML = Variable.lang.span.hideComments;
+                                                  }
+                                                }}
+                                              >
+                                                {Variable.lang.span.showComments}
+                                              </span>
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                    )
+                                  }
+                                }}
+                                <div class="c-comments__form create_post_coments"
+                                  style="display:none;"
+                                  Element={($el) => { Static[index].secondComment.elShowInput = $el; }}
+                                >
+                                  <div class="c-comments__field create_post_container1">
+                                    <TextArea
+                                      Static={Static[index].secondComment}
+                                      className="text1 create_post_chapter"
+                                    />
+                                  </div>
+                                  <ButtonSubmit
+                                    text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                                    className="c-comments__send button-container-preview comments_send"
+                                    onclick={async (tmp, el) => {
+                                      if (!Static[index].secondComment.el.value.trim().length) {
+                                        return
+                                      }
+                                      let text = Static[index].secondComment.el.value.trim()
+                                      let data = { _id: item._id, value: { comments: { text } } }
+                                      let response = await api({ type: "set", action: "setAnswer", data: data })
+                                      if (response.status === "ok") {
+                                        Static[index].secondComment.el.value = ""
+                                        if (Static[index].adaptive) {
+                                          Static[index].secondComment.el.style.height = (Static[index].secondComment.el.dataset.maxHeight / Static[index].adaptive) + 'px';
+                                        }
+                                        Static[index].secondComment.elShowInput.style = "display:none;"
+                                        Static[index].secondComment.elShowInput.removeAttribute("data-show")
+                                        if (response.result && response.result.list_records && response.result.list_records[0]) {
+                                          let newRes = response.result.list_records[0]
+                                          item.comments.unshift(newRes)
+                                          initReload();
+                                        }
+                                      } else {
+                                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                                      }
+                                    }}
+                                  />
+                                </div>
+                                {() => {
+                                  if (item.comments && item.comments.length) {
+                                    const arrReturn = item.comments.map(function (itemComments, i) {
+                                      console.log('=49cbc8=', itemComments)
+                                      // return (
+                                      //   <Comment
+                                      //     item={itemComments}
+                                      //     mainId={item._id}
+                                      //     action="setAnswer"
+                                      //   />
+                                      // )
+                                    })
+                                    return (
+                                      <div class="comment_answer">
+                                        {arrReturn}
+                                      </div>
+                                    )
+                                  }
+                                }}
                               </div>
                             </div>
                           </div>
-
                         )
                       })
                       return arrReturn

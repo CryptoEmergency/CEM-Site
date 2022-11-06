@@ -21,7 +21,9 @@ const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
                     Static.submitClick = true
                 }
                 // Эффект ожидания на кнопке
-                onclick(Static, this)
+                if (onclick) {
+                    onclick(Static, this)
+                }
             }}>
             {text}
         </div>
