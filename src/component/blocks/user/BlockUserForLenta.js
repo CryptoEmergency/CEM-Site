@@ -13,7 +13,6 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { LentaMedia } from "@component/element/index.js";
-import { BlockComment } from "@component/blocks/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
 import { getPostsItemInShow } from "@src/apiFunctions.js";

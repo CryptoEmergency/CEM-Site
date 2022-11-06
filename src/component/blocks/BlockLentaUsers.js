@@ -14,7 +14,6 @@ import {
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { LentaMedia } from "@component/element/index.js";
-import { BlockComment } from "@component/blocks/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
 import { getPostsItemInShow } from "@src/apiFunctions.js";
@@ -677,7 +676,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                                     comments={item.comments}
                                 /> */}
                     {/* <QuestionAnswerItemComment item = {item}  mainId={mainId} /> */}
-                    {
+                    {/* {
                       item.comments.map((item, index) => {
                         return (
                           <BlockComment
@@ -689,7 +688,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                           />
                         );
                       })
-                    }
+                    } */}
 
                   </div>
                 </div>

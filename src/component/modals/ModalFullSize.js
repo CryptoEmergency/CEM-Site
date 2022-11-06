@@ -17,7 +17,6 @@ import { BlockNewsShow, BlockQuestionsShow, BlockLentaUsers } from '@component/b
 
 import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
-import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
 
 let news;
