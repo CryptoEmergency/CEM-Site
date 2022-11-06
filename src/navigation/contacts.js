@@ -3,37 +3,38 @@ import {
   jsxFrag,
   Variable,
   init,
-  initReload
+  initReload,
+  Helpers
 } from "@betarost/cemjs";
-// poydet
-import { validator,checkValid } from "@src/functions.js";
-import { api } from '@src/apiFunctions.js'
+// check
 import svg from "@assets/svg/index.js";
-import { Jivo, Input, TextArea } from '@component/element/index.js';
+import { api } from '@src/apiFunctions.js'
+import { Input, TextArea, ButtonSubmit } from '@component/element/index.js';
 
-const start = function (data, ID = "mainBlock") {
-  let Static = {}
-  const sendMessage = async (e) => {
-    e.preventDefault();
-    if (!Static.isValid) {
-      return false
-    }
-    const response = await api({
-      type: "set", action: "supportMessage", data: {
-        value: { email: Static.email.value, name: Static.name.value, text: Static.message.value },
-      }
-    })
-    if (response.status === "ok") {
-      Static.messageSent = true;
-    }
+const sendMessage = async (Static) => {
+  if (!Static.isValid) {
+    return false
+  }
+  const response = await api({
+    type: "set", action: "supportMessage", data: { value: { email: Static.email.value, name: Static.name.value, text: Static.message.value }, }
+  })
+  if (response.status === "ok") {
+    Static.messageSent = true;
+    Static.submitClick = false;
     initReload()
-  };
+  } else {
+    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
+    Static.submitClick = false;
+  }
+};
 
+const start = function (data, ID) {
+  let Static = {}
   init(
     () => {
-
       Static = {
         isValid: false,
+        submitClick: false,
         messageSent: false
       }
 
@@ -44,17 +45,13 @@ const start = function (data, ID = "mainBlock") {
         label: Variable.lang.label.name,
         placeholder: Variable.lang.placeholder.name,
         errorText: Variable.lang.error_div.nicknameErr,
-        condition:(value) => {
-          return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+        condition: (value) => {
+          return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
         },
-        afterValid:() => {
-            
-          checkValid(Static,["name","email","message"])
-        
-       }
+        afterValid: () => {
+          Helpers.checkValid(Static, ["name", "email", "message"])
         }
-        
-      
+      }
 
       Static.email = {
         value: "",
@@ -65,20 +62,26 @@ const start = function (data, ID = "mainBlock") {
         errorText: Variable.lang.error_div.wrong_email,
         type: "text",
         condition: (value) => {
-            return validator.isEmail(value);
+          return Helpers.validator.isEmail(value);
         },
-        afterValid:() => {
-            
-          checkValid(Static,["name","email","message"])
-        
-       }
-    }
+        afterValid: () => {
+          Helpers.checkValid(Static, ["name", "email", "message"])
+        }
+      }
 
-  
       Static.message = {
         value: "",
         valid: false,
         error: false,
+        errorText: Variable.lang.error_div.not_empty_input,
+        label: Variable.lang.label.message,
+        placeholder: Variable.lang.placeholder.message,
+        condition: (value) => {
+          return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+        },
+        afterValid: () => {
+          Helpers.checkValid(Static, ["name", "email", "message"])
+        }
       }
 
       /**
@@ -87,13 +90,13 @@ const start = function (data, ID = "mainBlock") {
       if (Variable.myInfo.nickname) {
         Static.name.value = Variable.myInfo.nickname
         Static.name.valid = true
-        Static.name.readonly=true
+        Static.name.readonly = true
       }
 
       if (Variable.myInfo.email) {
         Static.email.value = Variable.myInfo.email
         Static.email.valid = true
-        Static.email.readonly=true
+        Static.email.readonly = true
       }
     },
     () => {
@@ -121,40 +124,26 @@ const start = function (data, ID = "mainBlock") {
                       <div class="contacts_form">
                         <h4>{Variable.lang.h.contact}</h4>
                         <p>{Variable.lang.p.writeUs}</p>
-                        <form id="contactsForm" onsubmit={sendMessage}>
-                          <input style="display: none;" type="submit" />          
-                            <Input
-                               
-                                classDiv="contacts_form_name_icon"
-                                Static={Static.name}
-                               
-
-                            />
-                              <Input
-                                classDiv="contacts_form_email_icon"
-                                Static={Static.email}
-                            />
+                        <form id="contactsForm" onsubmit={(e) => { sendMessage(Static) }}>
+                          <input style="display: none;" type="submit" />
+                          <Input
+                            classDiv="contacts_form_name_icon"
+                            Static={Static.name}
+                          />
+                          <Input
+                            classDiv="contacts_form_email_icon"
+                            Static={Static.email}
+                          />
                           <TextArea
-                            label={Variable.lang.label.message}
-                            error={Variable.lang.error_div.not_empty_input}
-                            placeholder={Variable.lang.placeholder.message}
-                            type="text"
-                            value={Static.message.value}
-                            condition={(value) => {
-                              return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-                            }}
-                            afterValid={() => {
-                              checkValid(Static,["name","email","message"])
-                            }}
                             Static={Static.message}
                           />
-                          <div
-                           
-                            class={['search-button', !Static.isValid ? 'c-button--inactive' : null]}
-                            onclick={sendMessage}
-                          >
-                            {Variable.lang.button.send}
-                          </div>
+                          <ButtonSubmit
+                            Static={Static}
+                            text={Variable.lang.button.send}
+                            onclick={(Static, el) => {
+                              sendMessage(Static)
+                            }}
+                          />
                         </form>
                       </div>
                     )
@@ -183,7 +172,6 @@ const start = function (data, ID = "mainBlock") {
               </div>
             </div>
           </div>
-          <Jivo />
         </div>
       );
     }, ID

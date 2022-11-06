@@ -5,7 +5,7 @@ import {
   initReload,
   initOne
 } from "@betarost/cemjs";
-// poydet
+// check
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 

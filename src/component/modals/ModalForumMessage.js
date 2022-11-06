@@ -1,127 +1,158 @@
 import {
-    jsx,
-    jsxFrag,
-    Variable,
-    initReload,
-    initOne,
-    sendApi
+  jsx,
+  jsxFrag,
+  Variable,
+  initReload,
+  initOne,
+  sendApi
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation } from "@src/functions.js";
+import { validator, checkValid } from "@src/functions.js";
+import { Input, TextArea } from '@component/element/index.js';
 
 let elem = Variable.setRef()
 let formInputs
-
-
+let Static = {}
 const sendMessage = async function (e) {
-    e.preventDefault();
-    if (!formInputs.isValid) {
-        return false
-      }
-      const name = formInputs.name.value;
-      const email = formInputs.email.value;
-      const text = '*Сообщение со страницы форума: *' + formInputs.text.value;
-      const data = await sendApi.create("supportMessage", {
-        value: { email, name, text },
-      });
-      if (data.status === "ok") {
-        Variable.DelModals("ModalForumMessage")
-      }
-    return
+  e.preventDefault();
+  if (!formInputs.isValid) {
+    return false
+  }
+  const name = formInputs.name.value;
+  const email = formInputs.email.value;
+  const text = '*Сообщение со страницы форума: *' + formInputs.text.value;
+  const data = await sendApi.create("supportMessage", {
+    value: { email, name, text },
+  });
+  if (data.status === "ok") {
+    Variable.DelModals("ModalForumMessage")
+  }
+  return
 }
 
 const changeInput = function () {
-    formInputs[this.dataset.type].value = this.value.trim()
-    formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
+  formInputs[this.dataset.type].value = this.value.trim()
+  formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
 
-    if (!formInputs[this.dataset.type].valid) {
-      formInputs[this.dataset.type].error = true;
-      this.style = "border-color: rgb(200, 23, 38);";
-      formInputs.isValid = false
-      initReload()
-      return
-    } else {
-      formInputs[this.dataset.type].error = false;
-      this.style = "border-color: rgb(37, 249, 48);"
-    }
-
-    let isCheckAll = false
-    if (formInputs.name.valid === true && formInputs.email.valid === true && formInputs.text.valid === true) {
-      isCheckAll = true
-    }
-
-    if (isCheckAll) {
-      formInputs.isValid = true
-    } else {
-      formInputs.isValid = false
-    }
+  if (!formInputs[this.dataset.type].valid) {
+    formInputs[this.dataset.type].error = true;
+    this.style = "border-color: rgb(200, 23, 38);";
+    formInputs.isValid = false
     initReload()
-    return;
-  };
+    return
+  } else {
+    formInputs[this.dataset.type].error = false;
+    this.style = "border-color: rgb(37, 249, 48);"
+  }
+
+  let isCheckAll = false
+  if (formInputs.name.valid === true && formInputs.email.valid === true && formInputs.text.valid === true) {
+    isCheckAll = true
+  }
+
+  if (isCheckAll) {
+    formInputs.isValid = true
+  } else {
+    formInputs.isValid = false
+  }
+  initReload()
+  return;
+};
 
 const ModalForumMessage = function () {
 
-    initOne(
-        () => {
-            Variable.OutHideWindows.push([elem, "ModalForumMessage"])
-            formInputs = {
-                name: {
-                  value: "",
-                  valid: false,
-                  error: false,
-                  errorText: Variable.lang.error_div.not_empty_input
-                },
-                email: {
-                  value: "",
-                  valid: false,
-                  error: false,
-                  errorText: Variable.lang.error_div.wrong_email
-                },
-                text: {
-                  value: "",
-                  valid: false,
-                  error: false,
-                  errorText: Variable.lang.error_div.not_empty_input
-                },
-                isValid: false,
-                messageSent: false
-              };
-        
-              if (Variable.myInfo.nickname) {
-                formInputs.name.value = Variable.myInfo.nickname
-                formInputs.name.valid = true
-              }
-        
-              if (Variable.myInfo.email) {
-                formInputs.email.value = Variable.myInfo.email
-                formInputs.email.valid = true
-              }
+  initOne(
+    () => {
+
+      Static = {
+        isValid: false,
+        messageSent: false
+      }
+
+
+
+      Static.name = {
+        value: "",
+        valid: false,
+        error: false,
+        label: Variable.myInfo.nickname,
+        placeholder: Variable.lang.placeholder.name,
+        errorText: Variable.lang.error_div.nicknameErr,
+        condition: (value) => {
+
+          return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+        },
+        afterValid: () => {
+
+          checkValid(Static, ["name", "email", "text"])
+
         }
-    )
+      }
+
+      Static.email = {
+        value: "",
+        valid: false,
+        error: false,
+        label: Variable.lang.label.email,
+        placeholder: Variable.lang.placeholder.email,
+        errorText: Variable.lang.error_div.wrong_email,
+        type: "text",
+        condition: (value) => {
+
+          return validator.isEmail(value);
+        },
+        afterValid: () => {
+
+          checkValid(Static, ["name", "email", "text"])
+
+        }
+      }
+
+      Static.text = {
+        value: "",
+        valid: false,
+        error: false,
+      }
 
 
-    return (
-        <div class="c-modal c-modal--open" id="ModalForumMessage">
-            <section class="c-modal__dialog" ref={elem}>
-                <header class="c-modal__header">
-                    <h2 class="c-modal__title"></h2>
-                    <button
-                        type="button"
-                        class="c-modal__close"
-                        onclick={() => {
-                            Variable.DelModals("ModalForumMessage")
-                        }}
-                    ></button>
-                </header>
-                <div class="c-modal__body">
-                    <div class="contacts_form" style="border: 0; background: inherit; padding: 0; padding-bottom: 20px">
-                        <h4>{Variable.lang.h.contact}</h4>
-                        <p>{Variable.lang.p.writeUs}</p>
-                        <form onsubmit={sendMessage}>
-                            <input style="display: none;" type="submit" />
-                            <div>
+
+
+      if (Variable.myInfo.nickname) {
+        Static.name.value = Variable.myInfo.nickname
+        Static.name.valid = true
+      }
+
+      if (Variable.myInfo.email) {
+        Static.email.value = Variable.myInfo.email
+        Static.email.valid = true
+      }
+    }
+  )
+
+
+  return (
+    <div class="c-modal c-modal--open" id="ModalForumMessage">
+      <section class="c-modal__dialog" ref={elem}>
+        <header class="c-modal__header">
+          <h2 class="c-modal__title"></h2>
+          <button
+            type="button"
+            class="c-modal__close"
+            onclick={() => {
+              Variable.DelModals("ModalForumMessage")
+            }}
+          ></button>
+        </header>
+        <div class="c-modal__body">
+          <div class="contacts_form" style="border: 0; background: inherit; padding: 0; padding-bottom: 20px">
+            <h4>{Variable.lang.h.contact}</h4>
+            <p>{Variable.lang.p.writeUs}</p>
+            <form onsubmit={sendMessage}>
+              <input style="display: none;" type="submit" />
+              <Input classDiv="contacts_form_name_icon" Static={Static.name} />
+              {/*<div>
                             <label for="">{Variable.lang.label.name}</label>
                             <If
                                 data={formInputs.name.error}
@@ -141,7 +172,7 @@ const ModalForumMessage = function () {
                                 oninput={changeInput}
                                 />
                             </div>
-                            </div>
+                              </div>
                             <div>
                             <label for="">{Variable.lang.label.email}</label>
                             <If
@@ -162,39 +193,40 @@ const ModalForumMessage = function () {
                                 oninput={changeInput}
                                 />
                             </div>
-                            </div>
-                            <div>
-                            <label for="">{Variable.lang.label.message}</label>
-                            <If
-                                data={formInputs.text.error != ""}
-                                dataIf={
-                                <div class="error-div">
-                                    <div class="error-div-variant">{formInputs.text.errorText}</div>
-                                </div>
-                                }
-                            />
-                            <div>
-                                <textarea
-                                placeholder={Variable.lang.placeholder.message}
-                                value={formInputs.text.value}
-                                data-type="text"
-                                oninput={changeInput}
-                                ></textarea>
-                            </div>
-                            <div
-                                style={formInputs.isValid ? "display:block; margin-top: 20px;" : "display:none"}
-                            >
-                                <a class="btn-contacts" onclick={sendMessage}>
-                                <span>{Variable.lang.button.send}</span>
-                                </a>
-                            </div>
-                            </div>
-                        </form>
-                    </div>
+                            </div>*/}
+              <Input
+                classDiv="contacts_form_email_icon"
+                Static={Static.email}
+              />
+              <div>
+                <TextArea
+                  label={Variable.lang.label.text}
+                  error={Variable.lang.error_div.not_empty_input}
+                  placeholder={Variable.lang.placeholder.message}
+                  type="text"
+                  value={Static.text.value}
+                  condition={(value) => {
+                    return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+                  }}
+                  afterValid={() => {
+                    checkValid(Static, ["name", "email", "text"])
+                  }}
+                  Static={Static.text}
+                />
+                <div
+                  style={Static.isValid ? "display:block; margin-top: 20px;" : "display:none"}
+                >
+                  <a class="btn-contacts" onclick={sendMessage}>
+                    <span>{Variable.lang.button.send}</span>
+                  </a>
                 </div>
-            </section>
+              </div>
+            </form>
+          </div>
         </div>
-    )
+      </section>
+    </div>
+  )
 };
 
 export default ModalForumMessage;

@@ -101,8 +101,7 @@ const sendPhoto = async function (crooper) {
           aspect: formInputs.mediaInputs.selectAspect,
           type: response.mimetype.split("/")[0],
           name: response.name
-        });        
-        initReload("modals");
+        });
       },
       async function (e) {
         let contentLength;
@@ -119,8 +118,8 @@ const sendPhoto = async function (crooper) {
         // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
       }
     );
-    Variable.DelModals("ModalCropImage");
     initReload("modals");
+    Variable.DelModals("ModalCropImage");
   });
   return
 }

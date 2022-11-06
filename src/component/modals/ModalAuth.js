@@ -9,7 +9,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { allValidation, validator,checkValid } from '@src/functions.js';
+import { allValidation, validator, checkValid } from '@src/functions.js';
 
 import { Input } from '@component/element/index.js';
 let wayAuth,
@@ -35,70 +35,70 @@ const WayAuthForm = function () {
     if (wayAuth == "email") {
         return (
             <div>
-            <Input classDiv="reset_by_email_block_container" Static={Static.email} />
-            </div>            
+                <Input classDiv="reset_by_email_block_container" Static={Static.email} />
+            </div>
         )
     } else {
-        return (       
-                <div class='reset_by_mobile_block'>
-                    <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
-                    <div class="reset_by_mobile_block_container c-phonecode">
-                        <div class="country-phone2">
-                            <div class="country-phone-selector2">
-                                <div
-                                    class="country-phone-selected2"
-                                    onClick={() => {
-                                        elemCountry().hidden = !elemCountry().hidden
-                                        listCodes = Variable.phoneCodes
-                                    }}
-                                >
-                                    <span>
-                                        +{Static.phone.code}
-                                        <img src={images.blank} class={`flag flag-${Static.phone.abbr}`} />
-                                    </span>
-                                </div>
-                                <div
-                                    class="country-phone-options2"
-                                    hidden={true}
-                                    ref={elemCountry}
-                                >
-                                    <input
-                                        type="text"
-                                        class="country-phone-search2"
-                                        value=""
-                                        oninput={changeSearch}
-                                    />
-                                    <label class="country-phone-search-label2">{Variable.lang.h.modal_changeCountry}</label>
-                                    <ul>
-                                        {
-                                            listCodes.map(function (item) {
-                                                return (
-                                                    <li
-                                                        data-phone={item.code}
-                                                        data-co={item.abbr}
-                                                        class="country-phone-option2"
-                                                        onClick={() => {
-                                                            Static.phone.code = item.code
-                                                            Static.phone.abbr = item.abbr
-                                                            elemCountry().hidden = true
-                                                            initReload("modals")
-                                                        }}>
-                                                        <span>
-                                                            +{item.code}
-                                                            <img src="/assets/image/blank.gif" class={`flag flag-${item.abbr}`} />
-                                                        </span>
-                                                        {item.text}
-                                                    </li>
-                                                )
-                                            })
-                                        }
-                                    </ul>
-                                </div>
+        return (
+            <div class='reset_by_mobile_block'>
+                <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
+                <div class="reset_by_mobile_block_container c-phonecode">
+                    <div class="country-phone2">
+                        <div class="country-phone-selector2">
+                            <div
+                                class="country-phone-selected2"
+                                onClick={() => {
+                                    elemCountry().hidden = !elemCountry().hidden
+                                    listCodes = Variable.phoneCodes
+                                }}
+                            >
+                                <span>
+                                    +{Static.phone.code}
+                                    <img src={images.blank} class={`flag flag-${Static.phone.abbr}`} />
+                                </span>
+                            </div>
+                            <div
+                                class="country-phone-options2"
+                                hidden={true}
+                                ref={elemCountry}
+                            >
+                                <input
+                                    type="text"
+                                    class="country-phone-search2"
+                                    value=""
+                                    oninput={changeSearch}
+                                />
+                                <label class="country-phone-search-label2">{Variable.lang.h.modal_changeCountry}</label>
+                                <ul>
+                                    {
+                                        listCodes.map(function (item) {
+                                            return (
+                                                <li
+                                                    data-phone={item.code}
+                                                    data-co={item.abbr}
+                                                    class="country-phone-option2"
+                                                    onClick={() => {
+                                                        Static.phone.code = item.code
+                                                        Static.phone.abbr = item.abbr
+                                                        elemCountry().hidden = true
+                                                        initReload("modals")
+                                                    }}>
+                                                    <span>
+                                                        +{item.code}
+                                                        <img src="/assets/image/blank.gif" class={`flag flag-${item.abbr}`} />
+                                                    </span>
+                                                    {item.text}
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
                             </div>
                         </div>
-                        <Input classInput="phoneNubmerInput2" Static={Static.phone} />
                     </div>
+                    <Input className="phoneNubmerInput2" Static={Static.phone} />
                 </div>
+            </div>
         )
 
     }
@@ -138,80 +138,80 @@ const ModalAuth = function () {
     initOne(
         () => {
 
-    Static = {
-        isValid: false
-      }
- 
-
-    Static.email = {
-        value: "",
-        valid: false,
-        error: false,
-        label: Variable.lang.label.email,
-        placeholder: Variable.lang.placeholder.email,
-        errorText: Variable.lang.error_div.wrong_email,
-        type: "text",
-        condition: (value) => {
-      
-   
-            return validator.isEmail(value);
-         
-        },
-        afterValid:() => {
-            
-           checkValid(Static,[wayAuth,"pass"])
-         
-        }
-    }
+            Static = {
+                isValid: false
+            }
 
 
-    Static.pass= {
-        value: "",
-        valid: false,
-        error: false,
-        placeholder:Variable.lang.placeholder.password,
-        type:`${viewPassword ? 'text' : 'password'}`,
-        errorText: Variable.lang.error_div.password5,
-        condition: (value) => {
-            
-            return validator.isStrongPassword(value, {
-                minLength: 8,
-                minLowercase: 0,
-                minUppercase: 0,
-                minNumbers: 0,
-                minSymbols: 1,
-            });
-         
-        },
-        afterValid:() => {
-            
-            checkValid(Static,[wayAuth,"pass"])
-          
-         }
-    }
+            Static.email = {
+                value: "",
+                valid: false,
+                error: false,
+                label: Variable.lang.label.email,
+                placeholder: Variable.lang.placeholder.email,
+                errorText: Variable.lang.error_div.wrong_email,
+                type: "text",
+                condition: (value) => {
 
-    Static.phone= {
-        value: "",
-        code: 7,
-        abbr: "ru",
-        placeholder:"9990000000",
-        valid: false,
-        error: false,
-        label: "phone",
-        errorText: Variable.lang.error_div.wrong_phone,
-        condition: (value) => {
-            
-            return validator.isMobilePhone(value);
-         
-        },
-        afterValid:() => {
-            
-            checkValid(Static,[wayAuth,"pass"])
-          
-         }
-    }
 
-              wayAuth = "email"
+                    return validator.isEmail(value);
+
+                },
+                afterValid: () => {
+
+                    checkValid(Static, [wayAuth, "pass"])
+
+                }
+            }
+
+
+            Static.pass = {
+                value: "",
+                valid: false,
+                error: false,
+                placeholder: Variable.lang.placeholder.password,
+                type: `${viewPassword ? 'text' : 'password'}`,
+                errorText: Variable.lang.error_div.password5,
+                condition: (value) => {
+
+                    return validator.isStrongPassword(value, {
+                        minLength: 8,
+                        minLowercase: 0,
+                        minUppercase: 0,
+                        minNumbers: 0,
+                        minSymbols: 1,
+                    });
+
+                },
+                afterValid: () => {
+
+                    checkValid(Static, [wayAuth, "pass"])
+
+                }
+            }
+
+            Static.phone = {
+                value: "",
+                code: 7,
+                abbr: "ru",
+                placeholder: "9990000000",
+                valid: false,
+                error: false,
+                label: "phone",
+                errorText: Variable.lang.error_div.wrong_phone,
+                condition: (value) => {
+
+                    return validator.isMobilePhone(value);
+
+                },
+                afterValid: () => {
+
+                    checkValid(Static, [wayAuth, "pass"])
+
+                }
+            }
+
+            wayAuth = "email"
             listCodes = Variable.phoneCodes
         }
     )
@@ -238,8 +238,8 @@ const ModalAuth = function () {
                                 Static.email.value = ""
                                 Static.email.error = false
                                 Static.email.valid = false
-                                checkValid(Static,[wayAuth,"pass"])
-                                   console.log(" email" +Static.isValid)
+                                checkValid(Static, [wayAuth, "pass"])
+                                console.log(" email" + Static.isValid)
                             }}>
                             {Variable.lang.button.email}
                         </button>
@@ -250,8 +250,8 @@ const ModalAuth = function () {
                                 Static.phone.value = ""
                                 Static.phone.error = false
                                 Static.phone.valid = false
-                                checkValid(Static,[wayAuth,"pass"])
-                             console.log(" phone" +Static.isValid)
+                                checkValid(Static, [wayAuth, "pass"])
+                                console.log(" phone" + Static.isValid)
 
                             }}>
                             {Variable.lang.button.phone}
@@ -266,7 +266,7 @@ const ModalAuth = function () {
                         <div class="container-input">
 
                             <Input classDiv="input-div" Static={Static.pass} />
-                            
+
                         </div>
                     </form>
                     <div class="bottom_log-in">
@@ -278,7 +278,7 @@ const ModalAuth = function () {
                             />
                             <label class="checkbox__label-2" for="auth_remember">{Variable.lang.placeholder.rememberMe}</label>
                         </div>
-                    
+
                     </div>
                     <div class="authAgree">
                         <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>

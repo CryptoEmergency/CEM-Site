@@ -3,20 +3,36 @@ import {
     jsxFrag,
     Helpers,
     Variable,
-    initReload
+    initReload,
+    initOne
 } from "@betarost/cemjs";
 
+import svg from '@assets/svg/index.js';
 import {
     Avatar,
     Evaluation,
     Likes,
     CommentInput,
+    TextArea,
     AnswerAdditionallyToggleNew,
+    ButtonSend
 } from "@component/element/index.js";
 
 import { api } from '@src/apiFunctions.js'
 
-const Comment = function ({ item, include, mainId, action }) {
+
+
+const Comment = function ({ item, include, mainId, action, quoteId }) {
+
+    let Static = Variable.State(item._id)
+
+    initOne(() => {
+        Static.secondComment = {
+            rows: 1,
+            adaptive: 4,
+        }
+    })
+    console.log('=13a692=', item._id, Static.secondComment)
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -62,9 +78,10 @@ const Comment = function ({ item, include, mainId, action }) {
                         return (
                             <span
                                 class="c-actioncomment__answer"
-                            // onclick={() => {                               
-                            //     initReload();
-                            // }}
+                                onclick={() => {
+                                    Static.secondComment.elShowInput.style = "display:flex;"
+                                    return
+                                }}
                             >
                                 {Variable.lang.button.giveAnswer}
                             </span>
@@ -86,6 +103,51 @@ const Comment = function ({ item, include, mainId, action }) {
           mainId={mainId}
           callBack={callBack}
         /> */}
+            </div>
+            <div class="c-comments__form create_post_coments"
+                style="display:none;"
+                Element={($el) => { Static.secondComment.elShowInput = $el; }}
+            >
+                <div class="c-comments__field create_post_container1">
+                    <TextArea
+                        Static={Static.secondComment}
+                        className="text1 create_post_chapter"
+                    />
+                </div>
+                <ButtonSend
+                    text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                    className="c-comments__send button-container-preview comments_send"
+                    onclick={async (el) => {
+                        if (!Static.secondComment.el.value.trim().length) {
+                            return
+                        }
+                        let text = Static.secondComment.el.value.trim()
+                        let data = { _id: mainId, value: { comments: {} } }
+                        if (!quoteId) {
+                            data.value.comments._id = item._id
+                            data.value.comments.comments = { text: text, quote: item._id }
+                        } else {
+                            data.value.comments._id = quoteId
+                            data.value.comments.comments = { text: text, quote: quoteId }
+                        }
+
+                        let response = await api({ type: "set", action: action, data: data })
+                        console.log('=abf729=', action, data, response)
+                        if (response.status === "ok") {
+                            Static.secondComment.el.value = ""
+                            if (Static.adaptive) {
+                                Static.secondComment.el.style.height = (Static.secondComment.el.dataset.maxHeight / Static.adaptive) + 'px';
+                            }
+                            if (response.result && response.result.list_records && response.result.list_records[0]) {
+                                let newRes = response.result.list_records[0]
+                                item.comments.unshift(newRes)
+                                initReload();
+                            }
+                        } else {
+                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                        }
+                    }}
+                />
             </div>
             {() => {
                 if (item.comments && item.comments.length) {

@@ -4,11 +4,11 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
-// poydet
+// check
 import svg from "@assets/svg/index.js";
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
 
-const start = function (data, ID = "mainBlock") {
+const start = function (data, ID) {
   init(
     null,
     () => {

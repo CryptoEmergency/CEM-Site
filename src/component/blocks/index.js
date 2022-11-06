@@ -1,8 +1,13 @@
+// Партнерские баннеры
 export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js"
+//Блок для новостей, блога, медиа о нас
+export { BlockNews } from "./BlockNews.js"
+
+
+//
 export { BlockNewsShow } from "./BlockNewsShow.js"
 export { BlockBanners } from "./BlockBanners.js"
 export { BlockProjects } from "./BlockProjects.js"
-export { BlockPreview } from "./BlockPreview.js"
 export { BlockQuestionsShow } from "./BlockQuestionsShow.js"
 export { BlockUsers } from "./BlockUsers.js"
 export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
@@ -15,7 +20,6 @@ export { BlockTrade } from "./BlockTrade.js";
 export { BlockExchange } from './BlockExchange.js';
 export { BlockComment } from './user/BlockComment.js';
 export { BlockLentaUsers } from './BlockLentaUsers.js';
-export { BlockMainNews } from './BlockMainNews.js';
 export { BlockUserForLenta } from './user/BlockUserForLenta.js';
 
 export { BlockShowNews } from './BlockShowNews.js';
