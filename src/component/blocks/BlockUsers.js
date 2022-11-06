@@ -3,17 +3,17 @@ import {
     jsxFrag,
     Variable,
     initOne,
+    initReload,
     Helpers,
 } from '@betarost/cemjs';
 
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
-import { Avatar } from '@component/element/index.js';
-
+import { Avatar, ButtonShowMore } from '@component/element/index.js';
 let elFilters
 
-const BlockUsers = async function ({ title, filters, type, nameRecords, button, limit = 21 }) {
+const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 21 }) {
     await initOne(
         async () => {
             await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
@@ -308,7 +308,21 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, button, 
                         }}
                     </div>
                 </div>
-                {button}
+                {() => {
+                    if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
+                        if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
+                            return (
+                                <ButtonShowMore
+                                    onclick={async () => {
+                                        let tmp = await api({ type: "get", action: "getUsers", short: true, limit, filter: Helpers.getFilterUsers(filters, type), offset: Variable[nameRecords].list_records.length })
+                                        Variable[nameRecords].list_records.push(...tmp.list_records)
+                                        initReload()
+                                    }}
+                                />
+                            )
+                        }
+                    }
+                }}
             </div>
         </div>
     )

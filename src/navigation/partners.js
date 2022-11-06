@@ -3,10 +3,10 @@ import {
   jsxFrag,
   init
 } from "@betarost/cemjs";
-// poydet
+// check
 import { BlockInfoPartners } from '@component/blocks/index.js';
 
-const start = function (data, ID = "mainBlock") {
+const start = function (data, ID) {
   init(
     null,
     () => {
@@ -18,5 +18,4 @@ const start = function (data, ID = "mainBlock") {
     }, ID
   )
 }
-
 export default start;

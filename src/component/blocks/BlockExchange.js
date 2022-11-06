@@ -3,13 +3,15 @@ import {
     jsxFrag,
     Helpers,
     Variable,
-    initOne
+    initOne,
+    initReload
 } from '@betarost/cemjs';
 // check
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
+import { ButtonShowMore } from "@component/element/index.js";
 
-const BlockExchange = async function ({ nameRecords, button, limit = 21 }) {
+const BlockExchange = async function ({ nameRecords, limit = 21 }) {
     await initOne(
         async () => {
             await api({ type: "get", action: "getExchange", short: true, cache: true, name: nameRecords, limit: limit })
@@ -104,7 +106,26 @@ const BlockExchange = async function ({ nameRecords, button, limit = 21 }) {
                     }
                 }}
             </div>
-            {button}
+            {
+                () => {
+                    if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
+                        if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
+                            return (
+                                <ButtonShowMore
+                                    onclick={async () => {
+                                        let tmp = await api({ type: "get", action: "getExchange", short: true, limit, offset: Variable[nameRecords].list_records.length })
+                                        if (tmp && tmp.list_records) {
+                                            Variable[nameRecords].list_records.push(...tmp.list_records)
+                                        }
+                                        initReload()
+                                    }
+                                    }
+                                />
+                            )
+                        }
+                    }
+                }
+            }
         </div>
     )
 }

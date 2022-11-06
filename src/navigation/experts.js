@@ -36,25 +36,6 @@ const start = function (data, ID) {
                         filters={Static.filters}
                         nameRecords="PageExperts"
                         type="experts"
-                        button={
-                            () => {
-                                if (Variable.PageExperts && Variable.PageExperts.list_records && Variable.PageExperts.totalFound) {
-                                    if (Variable.PageExperts.list_records.length < Variable.PageExperts.totalFound) {
-                                        return (
-                                            <ButtonShowMore
-                                                onclick={async () => {
-                                                    let tmp = await api({
-                                                        type: "get", action: "getUsers", short: true, limit: 12, filter: Helpers.getFilterUsers(Static.filters, type), offset: Variable.PageExperts.list_records.length
-                                                    })
-                                                    Variable.PageExperts.list_records.push(...tmp.list_records)
-                                                    initReload()
-                                                }}
-                                            />
-                                        )
-                                    }
-                                }
-                            }
-                        }
                     />
                 </div>
             )

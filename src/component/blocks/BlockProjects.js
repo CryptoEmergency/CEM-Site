@@ -5,7 +5,7 @@ import {
     initOne,
     Helpers
 } from '@betarost/cemjs';
-// poydet
+// check
 import svg from "@assets/svg/index.js";
 import { Swiper } from '@component/element/index.js';
 

@@ -28,9 +28,7 @@ import { ButtonShowMore } from '@component/element/index.js';
 
 const start = function () {
     let Static = {}
-    let filters,
-        filtersQuestions
-    let type = "all"
+    let filtersQuestions
 
     init(
         async () => {
@@ -183,37 +181,18 @@ const start = function () {
                             <BlockTrade
                                 nameRecords="MainTrades"
                                 limit={6}
-                                button={
-                                    <div class="crypto_exchanges_footer">
-                                        <a class="c-button c-button--gray" href="/list-trade/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.trade }) }}>
-                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                        </a>
-                                    </div>
-                                }
                             />
                             <div class="top_professionals_container">
                                 <BlockExchange
                                     nameRecords="MainExchanges"
                                     limit={6}
-                                    button={
-                                        <div class="crypto_exchanges_footer">
-                                            <a class="c-button c-button--gray" href="/list-exchange/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.exchange }) }}>
-                                                <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                            </a>
-                                        </div>
-                                    }
                                 />
                                 <BlockUsers
                                     title={Variable.lang.h.top_users}
                                     filters={Static.filters}
                                     nameRecords="MainUsers"
-                                    type={type}
+                                    type={"all"}
                                     limit={6}
-                                    button={
-                                        <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>
-                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                        </a>
-                                    }
                                 />
 
                                 <div class="news_block_container">

@@ -3,15 +3,17 @@ import {
     jsxFrag,
     Variable,
     Helpers,
-    initOne
+    initOne,
+    initReload
 } from '@betarost/cemjs';
 // poydet
 import svg from "@assets/svg/index.js";
+import { ButtonShowMore } from "@component/element/index.js";
 import { api } from '@src/apiFunctions.js'
 
 import { NotFound } from "@component/element/index.js";
 
-const BlockTrade = async function ({ nameRecords, button, limit = 55 }) {
+const BlockTrade = async function ({ nameRecords, limit = 55 }) {
     await initOne(
         async () => {
             await api({ type: "get", action: "getTrade", short: true, cache: true, name: nameRecords, limit: limit })
@@ -112,7 +114,23 @@ const BlockTrade = async function ({ nameRecords, button, limit = 55 }) {
                     }
                 }}
             </div>
-            {button}
+            {() => {
+                if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
+                    if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
+                        return (
+                            <ButtonShowMore
+                                onclick={async () => {
+                                    let tmp = await api({ type: "get", action: "getTrade", short: true, limit, offset: Variable[nameRecords].list_records.length })
+                                    if (tmp && tmp.list_records) {
+                                        Variable[nameRecords].list_records.push(...tmp.list_records)
+                                    }
+                                    initReload();
+                                }}
+                            />
+                        )
+                    }
+                }
+            }}
         </div>
     )
 }

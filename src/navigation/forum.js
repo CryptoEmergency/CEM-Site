@@ -15,7 +15,7 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 
 
-const start = function (data, ID = "mainBlock") {
+const start = function (data, ID) {
     let showAllCompanies = false
 
     const swiperGo = function (numIndex) {
