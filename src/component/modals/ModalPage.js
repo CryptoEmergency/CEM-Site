@@ -20,7 +20,7 @@ import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
 import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
-import { getNewsItemInShow } from "@src/apiFunctions.js";
+
 import { BottomMenu } from '@component/element/BottomMenu.js';
 import { AnswerAdditionallyToggleNew } from '@component/element/index.js'
 let news;
@@ -42,10 +42,7 @@ const ModalPage = async function (ID, reload) {
   if (!reload && getInitList()[ID].firstStart) {
     await getInitList()[ID].firstStart(reload)
   }
-  // news =  getNewsItemInShow(item._id);
-  // console.log('=c0791d=',news)
-  // news = news.list_records[0];
-  //  news = item
+
   return (
     <div
       class="c-modal c-modal--open c-modal--fullscreen c-modal--menu"

@@ -203,26 +203,6 @@ const sendNewCommentApi = async function (
 
 };
 
-const getNewsItemInShow = async function (id) {
-  let data = {
-    filter: {
-      _id: id,
-    },
-    select: {
-      image: 1,
-      preview: 1,
-      showDate: 1,
-      source: 1,
-      "statistic.view": 1,
-      "statistic.comments": 1,
-      text: 1,
-      title: 1,
-    },
-    limit: 4,
-  };
-  let response = checkAnswerApi(await sendApi.create("getNews", data));
-  return response;
-};
 
 const getPostsItemInShow = async function (id) {
   let data = {
@@ -246,29 +226,6 @@ const getPostsItemInShow = async function (id) {
   return response;
 };
 
-const getQuestionItemInShow = async function (id) {
-  let data = {
-    filter: {
-      questionId: id,
-    },
-    sort: {
-      showDate: -1,
-    },
-    select: {
-      best: 1,
-      author: 1,
-      statistic: 1,
-      showDate: 1,
-      media: 1,
-      text: 1,
-      comments: 1,
-    },
-    limit: 12,
-  };
-
-  let response = checkAnswerApi(await sendApi.create("getQuestions", data));
-  return response;
-};
 
 const getWorldPress = async (count, sortBy = "score", sortType = "-1") => {
   let data = {
@@ -280,94 +237,6 @@ const getWorldPress = async (count, sortBy = "score", sortType = "-1") => {
   }
   data.sort[sortBy] = Number(sortType);
   let response = checkAnswerApi(await sendApi.create("getPress", data));
-  return response;
-};
-
-const mainUsers = async (limit = 6, offset = 0, additional = null) => {
-  let filter = {
-    "confirm.registrasion": true,
-  };
-
-  filter["$or"] = [
-    {
-      "rank.basic": true,
-      "rank.expert": false,
-      "rank.creator": false,
-    },
-    {
-      "rank.basic": false,
-      "rank.expert": true,
-      "rank.creator": false,
-    },
-    {
-      "rank.basic": false,
-      "rank.expert": false,
-      "rank.creator": true,
-    },
-  ];
-
-  if (additional != null) {
-    // console.log('=efba5f=', additional[0].group)
-    if (additional[0].group == "experts") {
-      filter["rank.expert"] = true;
-      delete filter.$or;
-    } else if (additional[0].group == "creator") {
-      filter["rank.creator"] = true;
-      delete filter.$or;
-    }
-    additional.forEach((check) => {
-      if (check.id == "common") {
-        if (check.active) {
-          filter["$or"][0]["rank.basic"] = true;
-        } else {
-          filter["$or"][0]["rank.basic"] = false;
-        }
-      }
-      if (check.id == "content-makers") {
-        if (check.active) {
-          filter["$or"][2]["rank.creator"] = true;
-        } else {
-          filter["$or"][2]["rank.creator"] = false;
-        }
-      }
-      if (check.id == "specialists") {
-        if (check.active) {
-          filter["$or"][1]["rank.expert"] = true;
-        } else {
-          filter["$or"][1]["rank.expert"] = false;
-        }
-      }
-      if (check.id == "online") {
-        if (check.active) {
-          filter["online"] = true;
-        } else {
-          delete filter.online;
-        }
-      }
-    });
-  }
-
-  let data = {
-    filter: filter,
-    select: {
-      rank: 1,
-      social: 1,
-      subscribe: 1,
-      nickname: 1,
-      fullname: 1,
-      "information.speciality": 1,
-      "avatar.name": 1,
-      "frame.name": 1,
-      statistic: 1,
-      online: 1,
-      awards: 1,
-      status: 1,
-    },
-    limit: limit,
-    offset: offset,
-  };
-
-  let response = checkAnswerApi(await sendApi.create("getUsers", data));
   return response;
 };
 
@@ -391,10 +260,7 @@ export {
   showVotersApi,
   changeStatistic,
   sendNewCommentApi,
-  mainUsers,
-  getNewsItemInShow,
   getPostsItemInShow,
-  getQuestionItemInShow,
   getWorldPress,
   api
 };

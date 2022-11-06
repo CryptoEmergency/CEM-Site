@@ -7,7 +7,7 @@ import {
   initGo,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
-import { getNewsItemInShow } from "@src/apiFunctions.js";
+
 
 const giveNewCodeForReset = async (info) => {
   let data = {

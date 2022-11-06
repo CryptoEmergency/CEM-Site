@@ -19,7 +19,7 @@ import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
 import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
 import { CommentInput } from "@src/component/element/CommentInput.js";
-import { getNewsItemInShow } from "@src/apiFunctions.js";
+
 let news;
 
 const ModalFullSize = function ({ item, type, numIndex, elem }, reload) {
@@ -33,10 +33,7 @@ const ModalFullSize = function ({ item, type, numIndex, elem }, reload) {
     // Variable.Static.answerAdditionally = false;
     // Variable.Static.showNewsId = news._id;
   });
-  // news =  getNewsItemInShow(item._id);
-  // console.log('=c0791d=',news)
-  // news = news.list_records[0];
-  //  news = item
+
   return (
     <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalFullNews">
       <section class="c-modal__dialog">

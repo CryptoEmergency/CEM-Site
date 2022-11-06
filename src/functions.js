@@ -23,7 +23,6 @@ import moment from "moment";
 import {
   changeStatistic,
   showVotersApi,
-  getNewsItemInShow,
 } from "@src/apiFunctions.js";
 
 
