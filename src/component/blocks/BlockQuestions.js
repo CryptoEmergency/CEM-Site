@@ -2,7 +2,6 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  getStorage,
   initReload,
   initOne,
   Helpers
@@ -185,9 +184,9 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
                             :
                             <img class="c-question__icon c-question__icon--status" src={svg.open_question} />
                           }
-                          <img class={`c-question__icon ${ifHaveMedia(question.media, "audio", "c-question__icon--active")}`} src={svg.question_audio} />
-                          <img class={`c-question__icon ${ifHaveMedia(question.media, "video", "c-question__icon--active")}`} src={svg.question_video} />
-                          <img class={`c-question__icon ${ifHaveMedia(question.media, "image", "c-question__icon--active")}`} src={svg.question_photo} />
+                          <img class={["c-question__icon", Helpers.ifHaveMedia(question.media, "audio") ? "c-question__icon--active" : null]} src={svg.question_audio} />
+                          <img class={["c-question__icon", Helpers.ifHaveMedia(question.media, "video") ? "c-question__icon--active" : null]} src={svg.question_video} />
+                          <img class={["c-question__icon", Helpers.ifHaveMedia(question.media, "image") ? "c-question__icon--active" : null]} src={svg.question_photo} />
                         </div>
                         <div class="c-question__langcontainer language_container ">
                           <div class="c-question__lang language-question">
@@ -202,35 +201,33 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
                     href={`/question/show/${question._id}`}
                     class="c-question__body"
                     onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question }) }}
-                  // onClick={async () => {
-                  //     Variable.SetModals({
-                  //         name: "ModalFullSize",
-                  //         data: { item: question, type: "questions" },
-                  //     });
-                  // }}
-                  > {/* load */}
+                  >
                     <div class="c-question__preview">
                       <span class="">
-                        {sliceString(question.title)}
+                        {Helpers.sliceString(question.title, 66)}
                       </span>
                     </div>
                   </a>
                   <div class="c-question__statistic">
-                    <div class="c-question__stats "> {/* load */}
+                    <div class="c-question__stats ">
                       <img src={svg.question_answers} />
                       {question.statistic.answer}
                     </div>
-                    <div class="c-question__stats "> {/* load */}
+                    <div class="c-question__stats ">
                       <img src={svg.question_views} />
                       {question.statistic.view}
                     </div>
-                    <div class="c-question__stats "> {/* load */}
+                    <div class="c-question__stats ">
                       <img src={svg.question_time} />
                       {Helpers.getDateFormat(question.showDate, "now")}
                     </div>
                   </div>
                   <div class="c-question__footer">
-                    <a class="c-button c-button--outline2 " href={`/question/show/${question._id}`} onclick={Helpers.siteLink}> {/* load */}
+                    <a
+                      class="c-button c-button--outline2 "
+                      href={`/question/show/${question._id}`}
+                      onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question }) }}
+                    >
                       <div class="c-button__wrapper">
                         {Variable.lang.button.giveAnswer}
                       </div>
@@ -247,9 +244,6 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
             )
           }
         }}
-
-
-
       </div>
       {() => {
         if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {

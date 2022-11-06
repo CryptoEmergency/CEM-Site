@@ -135,6 +135,7 @@ const start = function () {
                         }}
                         <BlockQuestions
                             Static={Static}
+                            limit={6}
                             nameRecords="MainQuestions"
                         />
                         <div class="c-main__wrapperbg2">
@@ -155,7 +156,6 @@ const start = function () {
                                     type={"all"}
                                     limit={6}
                                 />
-
                                 <div class="news_block_container">
                                     <div class="news_block">
                                         <div class="home_page_news">
