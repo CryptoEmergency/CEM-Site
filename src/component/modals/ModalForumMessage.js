@@ -4,25 +4,24 @@ import {
   Variable,
   initReload,
   initOne,
-  sendApi
+  sendApi,
+  Helpers
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { If } from '@component/helpers/All.js';
 import { validator, checkValid } from "@src/functions.js";
 import { Input, TextArea } from '@component/element/index.js';
 
 let elem = Variable.setRef()
-let formInputs
 let Static = {}
 const sendMessage = async function (e) {
   e.preventDefault();
-  if (!formInputs.isValid) {
+  if (!Static.isValid) {
     return false
   }
-  const name = formInputs.name.value;
-  const email = formInputs.email.value;
-  const text = '*Сообщение со страницы форума: *' + formInputs.text.value;
+  const name = Static.name.value;
+  const email = Static.email.value;
+  const text = '*Сообщение со страницы форума: *' + Static.text.value;
   const data = await sendApi.create("supportMessage", {
     value: { email, name, text },
   });
@@ -31,35 +30,6 @@ const sendMessage = async function (e) {
   }
   return
 }
-
-const changeInput = function () {
-  formInputs[this.dataset.type].value = this.value.trim()
-  formInputs[this.dataset.type].valid = allValidation(this.value.trim(), this.dataset.type);
-
-  if (!formInputs[this.dataset.type].valid) {
-    formInputs[this.dataset.type].error = true;
-    this.style = "border-color: rgb(200, 23, 38);";
-    formInputs.isValid = false
-    initReload()
-    return
-  } else {
-    formInputs[this.dataset.type].error = false;
-    this.style = "border-color: rgb(37, 249, 48);"
-  }
-
-  let isCheckAll = false
-  if (formInputs.name.valid === true && formInputs.email.valid === true && formInputs.text.valid === true) {
-    isCheckAll = true
-  }
-
-  if (isCheckAll) {
-    formInputs.isValid = true
-  } else {
-    formInputs.isValid = false
-  }
-  initReload()
-  return;
-};
 
 const ModalForumMessage = function () {
 
@@ -81,8 +51,9 @@ const ModalForumMessage = function () {
         placeholder: Variable.lang.placeholder.name,
         errorText: Variable.lang.error_div.nicknameErr,
         condition: (value) => {
-
+         
           return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+
         },
         afterValid: () => {
 
@@ -99,9 +70,9 @@ const ModalForumMessage = function () {
         placeholder: Variable.lang.placeholder.email,
         errorText: Variable.lang.error_div.wrong_email,
         type: "text",
-        condition: (value) => {
+        condition:  (value) => {
 
-          return validator.isEmail(value);
+          return  validator.isEmail(value);
         },
         afterValid: () => {
 
@@ -110,10 +81,21 @@ const ModalForumMessage = function () {
         }
       }
 
+      
       Static.text = {
-        value: "",
+        value:"",
         valid: false,
         error: false,
+        label: Variable.lang.label.text,
+        error:Variable.lang.error_div.not_empty_input,
+        placeholder:Variable.lang.placeholder.message,
+        type:"text",
+        condition:(value) => {
+                    return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+                  },
+        afterValid:() => {                    
+          checkValid(Static, ["name", "email", "text"])
+                  }
       }
 
 
@@ -122,11 +104,13 @@ const ModalForumMessage = function () {
       if (Variable.myInfo.nickname) {
         Static.name.value = Variable.myInfo.nickname
         Static.name.valid = true
+        Static.name.readonly = true
       }
 
       if (Variable.myInfo.email) {
         Static.email.value = Variable.myInfo.email
         Static.email.valid = true
+        Static.email.readonly = true
       }
     }
   )
@@ -152,66 +136,17 @@ const ModalForumMessage = function () {
             <form onsubmit={sendMessage}>
               <input style="display: none;" type="submit" />
               <Input classDiv="contacts_form_name_icon" Static={Static.name} />
-              {/*<div>
-                            <label for="">{Variable.lang.label.name}</label>
-                            <If
-                                data={formInputs.name.error}
-                                dataIf={
-                                <div class="error-div">
-                                    <div class="error-div-variant">{formInputs.name.errorText}</div>
-                                </div>
-                                }
-                            />
-                            <div class="contacts_form_name_icon">
-                                <input
-                                placeholder={Variable.lang.placeholder.name}
-                                class="contacts_form_name"
-                                type="text"
-                                data-type="name"
-                                value={formInputs.name.value}
-                                oninput={changeInput}
-                                />
-                            </div>
-                              </div>
-                            <div>
-                            <label for="">{Variable.lang.label.email}</label>
-                            <If
-                                data={formInputs.email.error}
-                                dataIf={
-                                <div class="error-div">
-                                    <div class="error-div-variant">{formInputs.email.errorText}</div>
-                                </div>
-                                }
-                            />
-                            <div class="contacts_form_email_icon">
-                                <input
-                                placeholder={Variable.lang.placeholder.email}
-                                class="contacts_form_email"
-                                type="text"
-                                data-type="email"
-                                value={formInputs.email.value}
-                                oninput={changeInput}
-                                />
-                            </div>
-                            </div>*/}
+          
+                    
               <Input
                 classDiv="contacts_form_email_icon"
                 Static={Static.email}
               />
               <div>
                 <TextArea
-                  label={Variable.lang.label.text}
-                  error={Variable.lang.error_div.not_empty_input}
-                  placeholder={Variable.lang.placeholder.message}
-                  type="text"
-                  value={Static.text.value}
-                  condition={(value) => {
-                    return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-                  }}
-                  afterValid={() => {
-                    checkValid(Static, ["name", "email", "text"])
-                  }}
-                  Static={Static.text}
+                classDiv=""
+                className = ""
+                Static={Static.text}
                 />
                 <div
                   style={Static.isValid ? "display:block; margin-top: 20px;" : "display:none"}
