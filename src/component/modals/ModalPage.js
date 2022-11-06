@@ -22,7 +22,7 @@ import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js
 import { CommentInput } from "@src/component/element/CommentInput.js";
 
 import { BottomMenu } from '@component/element/BottomMenu.js';
-import { AnswerAdditionallyToggleNew, ItemsMenu } from '@component/element/index.js'
+import { ItemsMenu } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
