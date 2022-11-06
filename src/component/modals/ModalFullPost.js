@@ -14,7 +14,6 @@ import {
 import svg from "@assets/svg/index.js";
 import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
-import { CommentInput } from "@src/component/element/CommentInput.js";
 import { getPostItemInShow } from "@src/apiFunctions.js";
 import { BlockLentaUsers } from "@component/blocks/BlockLentaUsers.js";
 

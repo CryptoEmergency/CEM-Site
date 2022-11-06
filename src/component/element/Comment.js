@@ -12,7 +12,6 @@ import {
     Avatar,
     Evaluation,
     Likes,
-    CommentInput,
     TextArea,
     AnswerAdditionallyToggleNew,
     ButtonSubmit

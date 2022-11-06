@@ -20,7 +20,6 @@ import {
   Avatar,
   Likes,
   AnswerAdditionallyToggleNew,
-  CommentInput
 } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
 
