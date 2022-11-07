@@ -11,9 +11,10 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
-import { Input } from '@component/element/index.js';
+import { Input,NotFound } from '@component/element/index.js';
 let elFilters
 let Static = {}
+
 
 const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 21 }) {
     await initOne(
@@ -40,19 +41,11 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
 
 const change = async function (arg){
 let value = arg
-
-
 let filter =  Helpers.getFilterUsers(filters, type) ;
-
 filter.search = value
-filter.limit = limit
-filter.offset = 0
-console.log(filter)
-  //  console.log( await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter:filter}))
-  
-  let response =  await api({ type: "get", action: "getUsers",short: true, filter: {filter} })
+  let response =  await api({ type: "get", action: "getUsers",short: true, filter: filter })
   Variable[nameRecords] = response
-  console.log(response)
+  
 }
 
 
@@ -68,12 +61,6 @@ console.log(filter)
                         <div class="c-friends__filter">
                            
                             <Input className="c-friends__field" Static={Static.Frends}  />
-                            {/* Сделать поиск  <input
-                                class="c-friends__field"
-                                autocomplete="off"
-                                type="text"
-                                placeholder={Variable.lang.placeholder.findFriends}
-                            />*/}
                             <div
                                 class="c-friends__toggler"
                                 onClick={() => {
@@ -343,6 +330,11 @@ console.log(filter)
                                     )
                                 })
                                 return arrReturn
+                            }else {
+                                return (
+                                    <NotFound
+                                    />
+                                )
                             }
                         }}
                     </div>
@@ -353,7 +345,13 @@ console.log(filter)
                             return (
                                 <ButtonShowMore
                                     onclick={async () => {
-                                        let tmp = await api({ type: "get", action: "getUsers", short: true, limit, filter: Helpers.getFilterUsers(filters, type), offset: Variable[nameRecords].list_records.length })
+                                    let new_filter = Helpers.getFilterUsers(filters, type);
+                                        if(Static.Frends.value.length > 0)
+                                        {
+                                           new_filter.search = Static.Frends.value
+                                        }
+
+                                        let tmp = await api({ type: "get", action: "getUsers", short: true, limit, filter: new_filter, offset: Variable[nameRecords].list_records.length })
                                         Variable[nameRecords].list_records.push(...tmp.list_records)
                                         initReload()
                                     }}
