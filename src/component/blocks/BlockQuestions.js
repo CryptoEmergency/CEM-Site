@@ -15,11 +15,9 @@ import { Input } from '@component/element/index.js';
 
 
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filters }) {
-
+  filters = {}
   const change = async function (arg) {
     let value = arg
-    // let filters = Helpers.getFilterQuestions(Static.filtersQuestions) ;
-    let filters = {}
     filters.$text = { $search: value }
     let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
     Variable[nameRecords] = response
@@ -266,7 +264,8 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
                 onclick={async () => {
                   let new_filter = Helpers.getFilterQuestions(Static.filtersQuestions);
                   if (Static.quest.value.length > 0) {
-                    new_filter.search = filters.$text = { $search: Static.quest.value }
+                    new_filter = filters.$text={$search: Static.quest.value }
+                    console.log(new_filter)
                   }
                   let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
                   if (tmp && tmp.list_records) {
