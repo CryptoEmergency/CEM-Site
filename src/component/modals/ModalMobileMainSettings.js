@@ -79,50 +79,53 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             {Variable.lang.text.menu}
                         </div>
                     </div>
-                    <If
-                        data={Variable.auth}
-                        dataIf={<div>
-                            <div class="user_mobile_menu_content user_mobile_menu_main_content">
-                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href={`/user/${Variable.myInfo.nickname}`}>
-                                    <img src={svg["profile_icon-1"]} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.profile}</span>
-                                </a>
-                                {/* <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/chats/">
+                    {() => {
+                        if (Variable.auth) {
+                            return (
+                                <div>
+                                    <div class="user_mobile_menu_content user_mobile_menu_main_content">
+                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href={`/user/${Variable.myInfo.nickname}`}>
+                                            <img src={svg["profile_icon-1"]} />
+                                            <span class="mobile_user_menu_link">{Variable.lang.a.profile}</span>
+                                        </a>
+                                        {/* <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/chats/">
                                     <img src={svg["profile_icon-2"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.chats}</span>
                                 </a> */}
-                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
-                                    <img src={svg["profile_icon-5"]} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.h.createPost}</span>
-                                </a>
-                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/awards/">
-                                    <img src={svg["profile_icon-4"]} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.awards}</span>
-                                </a>
-                                {/* <a data-updating="true" onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/quests/">
+                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
+                                            <img src={svg["profile_icon-5"]} />
+                                            <span class="mobile_user_menu_link">{Variable.lang.h.createPost}</span>
+                                        </a>
+                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/awards/">
+                                            <img src={svg["profile_icon-4"]} />
+                                            <span class="mobile_user_menu_link">{Variable.lang.a.awards}</span>
+                                        </a>
+                                        {/* <a data-updating="true" onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/quests/">
                                     <img src={svg["profile_icon-10"]} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.tasks}</span>
                                 </a> */}
-                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/wallet/">
-                                    <img src={svg.absolutely_new_wallet} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
-                                </a>
-                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
-                                    <img src={svg["profile_icon-3"]} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
-                                </a>
-                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
-                                    <img src={svg["settings_icon"]} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
-                                </a>
-                            </div>
-                            <div class="user_mobile_menu_part">
-                                <div class="user_mobile_menu_content">
-                                    {Variable.lang.text.sections}
+                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/wallet/">
+                                            <img src={svg.absolutely_new_wallet} />
+                                            <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
+                                        </a>
+                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                            <img src={svg["profile_icon-3"]} />
+                                            <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
+                                        </a>
+                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                            <img src={svg["settings_icon"]} />
+                                            <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
+                                        </a>
+                                    </div>
+                                    <div class="user_mobile_menu_part">
+                                        <div class="user_mobile_menu_content">
+                                            {Variable.lang.text.sections}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>}
-                    />
+                            )
+                        }
+                    }}
                     <div class="user_mobile_menu_content user_mobile_menu_main_content">
                         <a
                             onclick={Helpers.siteLink}
@@ -331,23 +334,26 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             </div>
                         </div>
                     </div>
-                    <If
-                        data={Variable.auth}
-                        dataIf={<div>
-                            <div class="user_mobile_menu_part">
-                                <div class="user_mobile_menu_content">
-                                    {Variable.lang.text.control}
+                    {() => {
+                        if (Variable.auth) {
+                            return (
+                                <div>
+                                    <div class="user_mobile_menu_part">
+                                        <div class="user_mobile_menu_content">
+                                            {Variable.lang.text.control}
+                                        </div>
+                                    </div>
+                                    <div class="user_mobile_menu_bottom">
+                                        <div class="user_mobile_menu_content">
+                                            <a class="user_icon_mobile_visible user_icon" href="/logout/" onclick={Helpers.siteLink}>
+                                                <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="user_mobile_menu_bottom">
-                                <div class="user_mobile_menu_content">
-                                    <a class="user_icon_mobile_visible user_icon" href="/logout/" onclick={Helpers.siteLink}>
-                                        <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>}
-                    />
+                            )
+                        }
+                    }}
                 </div>
             </section>
         </div>

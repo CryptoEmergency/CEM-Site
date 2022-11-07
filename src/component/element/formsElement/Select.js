@@ -82,10 +82,7 @@ const Select = function ({ options, callback, toggler = null }) {
           }}
         </ul>
       </div>
-      {/* <If
-        data={toggler}
-        dataIf={<img class="filter_sort_toggler" src={svg.filter_arrow_bottom} />}
-      /> */}
+      {toggler ? <img class="filter_sort_toggler" src={svg.filter_arrow_bottom} /> : null}
     </div>
   );
 };

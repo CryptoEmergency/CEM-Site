@@ -26,19 +26,21 @@ const ModalMobileSettings = function ({ }, reload) {
                         <div class="c-modal__title">
                             {/* {{>avatar myInfo}} */}
                             <Avatar author={Variable.myInfo} />
-                            <If
-                                data={Variable.myInfo.nickname}
-                                dataIf={
-                                    <div class="user_mobile_menu_title">
-                                        {Variable.myInfo.nickname}
-                                    </div>
+                            {() => {
+                                if (Variable.myInfo && Variable.myInfo.nickname) {
+                                    return (
+                                        <div class="user_mobile_menu_title">
+                                            {Variable.myInfo.nickname}
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <div class="user_mobile_menu_title">
+                                            {Variable.myInfo._id}
+                                        </div>
+                                    )
                                 }
-                                dataElse={
-                                    <div class="user_mobile_menu_title">
-                                        {Variable.myInfo._id}
-                                    </div>
-                                }
-                            />
+                            }}
                             <div class="user_mobile_status">
                                 <span>{Variable.lang.span.status}</span>
                                 <div class="user_mobile_status_icon"></div>

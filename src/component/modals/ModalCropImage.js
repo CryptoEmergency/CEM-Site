@@ -67,98 +67,96 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                 <img width="300" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={URL.createObjectURL(file)} After={cropperGo} ref={elemImg} />
                             </div>
                         </div>
-                        <If
-                            data={typeUpload == "bg"}
-                            dataIf={
-                                <div class="c-cropper__toggles col-12 docs-toggles" style="display: none;">
-                                    <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
-                                        <input type="radio" class="" hidden name="aspectRatio" id="aspectRatio1" value="4" />
-                                        <label class="c-button c-button--outline" for="aspectRatio1" title="">4:1</label>
+                        {() => {
+                            if (typeUpload == "bg") {
+                                return (
+                                    <div class="c-cropper__toggles col-12 docs-toggles" style="display: none;">
+                                        <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
+                                            <input type="radio" class="" hidden name="aspectRatio" id="aspectRatio1" value="4" />
+                                            <label class="c-button c-button--outline" for="aspectRatio1" title="">4:1</label>
+                                        </div>
                                     </div>
-                                </div>
-                            }
-                            dataElse={
-                                <If
-                                    data={typeUpload == "avatar"}
-                                    dataIf={
-                                        <div class="c-cropper__toggles col-12 docs-toggles" style="display: none;">
-                                            <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
-                                                <input type="radio" class="" hidden name="aspectRatio" id="aspectRatio1" value="1" />
-                                                <label class="c-button c-button--outline" for="aspectRatio1" title="">1:1</label>
-                                            </div>
+                                )
+                            } else if (typeUpload == "avatar") {
+                                return (
+                                    <div class="c-cropper__toggles col-12 docs-toggles" style="display: none;">
+                                        <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
+                                            <input type="radio" class="" hidden name="aspectRatio" id="aspectRatio1" value="1" />
+                                            <label class="c-button c-button--outline" for="aspectRatio1" title="">1:1</label>
                                         </div>
-                                    }
-                                    dataElse={
-                                        <div class="c-cropper__toggles col-12 docs-toggles">
-                                            <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
-                                                <input
-                                                    type="radio"
-                                                    hidden={true}
-                                                    id="aspectRatio1"
-                                                    checked={aspectActive == 1.7777777777777777}
-                                                    disabled={arrMedia.length && aspectSelect != 1.7777777777777777}
-                                                    ref={elemRatio1}
-                                                />
-                                                <label class="c-button c-button--outline"
-                                                    onclick={function () {
-                                                        if (aspectActive == 1.7777777777777777 || elemRatio1().disabled) {
-                                                            return
-                                                        }
-                                                        aspectActive = 1.7777777777777777
-                                                        elemRatio1().checked = true
-                                                        elemRatio2().checked = false
-                                                        elemRatio3().checked = false
-                                                        cropperGo(elemImg())
-                                                    }}
-                                                >16:9</label>
+                                    </div>
+                                )
+                            } else {
+                                return (
+                                    <div class="c-cropper__toggles col-12 docs-toggles">
+                                        <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
+                                            <input
+                                                type="radio"
+                                                hidden={true}
+                                                id="aspectRatio1"
+                                                checked={aspectActive == 1.7777777777777777}
+                                                disabled={arrMedia.length && aspectSelect != 1.7777777777777777}
+                                                ref={elemRatio1}
+                                            />
+                                            <label class="c-button c-button--outline"
+                                                onclick={function () {
+                                                    if (aspectActive == 1.7777777777777777 || elemRatio1().disabled) {
+                                                        return
+                                                    }
+                                                    aspectActive = 1.7777777777777777
+                                                    elemRatio1().checked = true
+                                                    elemRatio2().checked = false
+                                                    elemRatio3().checked = false
+                                                    cropperGo(elemImg())
+                                                }}
+                                            >16:9</label>
 
-                                                <input
-                                                    type="radio"
-                                                    hidden={true}
-                                                    id="aspectRatio2"
-                                                    checked={aspectActive == 0.8}
-                                                    disabled={arrMedia.length && aspectSelect != 0.8}
-                                                    ref={elemRatio2}
-                                                />
-                                                <label class="c-button c-button--outline"
-                                                    onclick={function () {
-                                                        if (aspectActive == 0.8 || elemRatio2().disabled) {
-                                                            return
-                                                        }
-                                                        aspectActive = 0.8
-                                                        elemRatio1().checked = false
-                                                        elemRatio2().checked = true
-                                                        elemRatio3().checked = false
-                                                        cropperGo(elemImg())
-                                                    }}
-                                                >4:5</label>
+                                            <input
+                                                type="radio"
+                                                hidden={true}
+                                                id="aspectRatio2"
+                                                checked={aspectActive == 0.8}
+                                                disabled={arrMedia.length && aspectSelect != 0.8}
+                                                ref={elemRatio2}
+                                            />
+                                            <label class="c-button c-button--outline"
+                                                onclick={function () {
+                                                    if (aspectActive == 0.8 || elemRatio2().disabled) {
+                                                        return
+                                                    }
+                                                    aspectActive = 0.8
+                                                    elemRatio1().checked = false
+                                                    elemRatio2().checked = true
+                                                    elemRatio3().checked = false
+                                                    cropperGo(elemImg())
+                                                }}
+                                            >4:5</label>
 
-                                                <input
-                                                    type="radio"
-                                                    hidden={true}
-                                                    id="aspectRatio3"
-                                                    checked={aspectActive == 1}
-                                                    disabled={arrMedia.length && aspectSelect != 1}
-                                                    ref={elemRatio3}
-                                                />
-                                                <label class="c-button c-button--outline"
-                                                    onclick={function () {
-                                                        if (aspectActive == 1 || elemRatio3().disabled) {
-                                                            return
-                                                        }
-                                                        aspectActive = 1
-                                                        elemRatio1().checked = false
-                                                        elemRatio2().checked = false
-                                                        elemRatio3().checked = true
-                                                        cropperGo(elemImg())
-                                                    }}
-                                                >1:1</label>
-                                            </div>
+                                            <input
+                                                type="radio"
+                                                hidden={true}
+                                                id="aspectRatio3"
+                                                checked={aspectActive == 1}
+                                                disabled={arrMedia.length && aspectSelect != 1}
+                                                ref={elemRatio3}
+                                            />
+                                            <label class="c-button c-button--outline"
+                                                onclick={function () {
+                                                    if (aspectActive == 1 || elemRatio3().disabled) {
+                                                        return
+                                                    }
+                                                    aspectActive = 1
+                                                    elemRatio1().checked = false
+                                                    elemRatio2().checked = false
+                                                    elemRatio3().checked = true
+                                                    cropperGo(elemImg())
+                                                }}
+                                            >1:1</label>
                                         </div>
-                                    }
-                                />
+                                    </div>
+                                )
                             }
-                        />
+                        }}
                         <div class="c-cropper__footer">
                             <button
                                 type="button"
