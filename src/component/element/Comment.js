@@ -11,7 +11,6 @@ import svg from '@assets/svg/index.js';
 import {
     Avatar,
     Evaluation,
-    Likes,
     TextArea,
     AnswerAdditionallyToggleNew,
     ButtonSubmit

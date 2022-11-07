@@ -16,10 +16,8 @@ import { api } from '@src/apiFunctions.js'
 import { LentaMedia } from "@component/element/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
-import { getPostsItemInShow } from "@src/apiFunctions.js";
 import {
   Avatar,
-  Likes,
   CommentInput,
   ItemsMenu
 } from "@component/element/index.js";
@@ -27,8 +25,8 @@ import { If } from "@component/helpers/All.js";
 
 const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, type }) {
 
-  
-  
+
+
   let mainId = item._id;
   if (total === undefined && type !== "post") {
     return <></>;
@@ -49,7 +47,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
     }
   }
 
-console.log(Variable.Static)
+  console.log(Variable.Static)
   return (
 
     <If
@@ -339,7 +337,7 @@ console.log(Variable.Static)
                 </div>
               </div>
               <div class="user_post_statistic_item">
-                <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} />
+                {/* <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} /> */}
               </div>
             </div>
           </div>
@@ -639,7 +637,7 @@ console.log(Variable.Static)
                   </div>
                 </div>
                 <div class="user_post_statistic_item">
-                  <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} />
+                  {/* <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} /> */}
                 </div>
               </div>
             </div>
@@ -656,11 +654,11 @@ console.log(Variable.Static)
 
           <div class="news_page_comments">
             <h2>{Variable.lang.h.modal_comment}</h2>
-        
-        
-                <CommentInput item={item} typeSet="setPost" callBack={getItem} />
-          
-    
+
+
+            <CommentInput item={item} typeSet="setPost" callBack={getItem} />
+
+
 
             <If
               data={item.comments.length > 0}

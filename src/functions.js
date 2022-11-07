@@ -20,10 +20,7 @@ const validator = Helpers.validator
 // import validator from "validator";
 import moment from "moment";
 
-import {
-  changeStatistic,
-  showVotersApi,
-} from "@src/apiFunctions.js";
+
 
 
 const wrapTextWithATag = (text) => {
@@ -194,55 +191,9 @@ const allValidation = (str, type, condition) => {
   }
 };
 
-const changeActiveCommentsInput = (id) => {
-  Variable.Static.activeCommentsInput = id;
-  Variable.Static.showMainInput = false;
-  initReload();
-};
 
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, commentId, callBack) => {
-  e.preventDefault();
-  let type = e.target.dataset.name;
-  if (e.type === "mousedown" || e.type === "touchstart") {
-    interval = setInterval(async () => {
-      sec = sec + 100;
-      if (sec === 1000) {
-        clearInterval(interval);
-        sec = 0;
-        let response = await showVotersApi(id, typeGet);
-        if (response !== undefined) {
-          response = response.list_records[0].evaluation.filter(
-            (item) => item.type === type
-          );
-          Variable.SetModals(
-            { name: "ModalWhoLike", data: { response } },
-            true
-          );
-        }
-      }
-    }, 100);
-  } else {
-    clearInterval(interval);
-    if (sec < 1000) {
-      await changeStatistic(e, id, typeSet, mainId, commentId);
-      if (typeof callBack == "function") {
-        callBack();
-      }
-
-    }
-    if (700 <= sec && sec < 1000) {
-      let response = await showVotersApi(id, typeGet);
-      response = response.list_records[0].evaluation.filter(
-        (item) => item.type === type
-      );
-
-      Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true);
-    }
-    sec = 0;
-  }
-};
 
 function isEmpty(obj) {
   for (let key in obj) {
@@ -285,8 +236,6 @@ export {
   sliceString,
   wrapTextWithATag,
   isEmpty,
-  showVotersAndchangeStatistic,
-  changeActiveCommentsInput,
   getDateFormat,
   siteLink,
   timerTik,

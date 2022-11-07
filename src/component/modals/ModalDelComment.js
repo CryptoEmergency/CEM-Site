@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initGo, sendApi, Helpers, parsingUrl } from "@betarost/cemjs";
-import { delCom } from "@src/apiFunctionsE.js";
+import { delCom } from "@src/apiFunctions.js";
 
 const ModalDelComment = function (data, reload) {
   return (

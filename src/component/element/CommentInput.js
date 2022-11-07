@@ -9,7 +9,6 @@ import {
   Helpers
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
-import { sendNewCommentApi } from "@src/apiFunctions.js";
 import { wrapTextWithATag, wrapTagToText } from "@src/functions.js";
 
 let commentText = Variable.setRef();
@@ -79,14 +78,14 @@ const CommentInput = function ({ nickname, item, typeSet, mainId, commentId, edi
       let text = wrapTextWithATag(commentText().value.trim());
       let response;
       if (text.length > 0) {
-        let responce = await sendNewCommentApi(
-          item,
-          text,
-          typeSet,
-          mainId,
-          commentId,
-          edit
-        );
+        // let responce = await sendNewCommentApi(
+        //   item,
+        //   text,
+        //   typeSet,
+        //   mainId,
+        //   commentId,
+        //   edit
+        // );
         Variable.Static.activeInputId = "";
         Variable.Static.EditInput = "";
         commentText().value = "";

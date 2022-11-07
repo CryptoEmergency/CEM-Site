@@ -1,245 +1,11 @@
 import {
   jsx,
   jsxFrag,
-  getStorage,
   sendApi,
-  initGo,
   Variable,
-  initReload,
   Helpers,
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
-
-
-const changeStatistic = async function (
-  e,
-  commentId,
-  type,
-  mainId,
-  subcommentId
-) {
-
-  let data;
-  if ((type === "setAnswer" || type === "setPost") && !mainId) {
-    data = {
-      value: {
-        evaluation: e.target.dataset.name,
-      },
-      _id: commentId,
-    };
-  } else if (!subcommentId) {
-    data = {
-      value: {
-        comments: {
-          _id: commentId,
-          evaluation: e.target.dataset.name,
-        },
-      },
-      _id: mainId,
-    };
-  } else {
-    data = {
-      value: {
-        comments: {
-          _id: subcommentId,
-          comments: {
-            evaluation: e.target.dataset.name,
-            _id: commentId,
-          },
-        },
-      },
-      _id: mainId,
-    };
-    //   if (subcommentId) {
-    //     data.value.comments.comments = {
-    //       evaluation: e.target.dataset.name,
-    //       _id: subcommentId,
-    //     };
-    //   } else {
-    //     data.value.comments.evaluation = e.target.dataset.name;
-    //   }
-  }
-  let response = checkAnswerApi(await sendApi.create(type, data));
-  // initReload();
-  if (Variable.dataUrl.params !== undefined) {
-    initReload();
-  }
-
-  if (type === "setPost") {
-    Variable[`PageLenta${Variable.Static.lentaPage}`] = await sendApi.send({
-      action: "getPost", short: true, cache: true, name: `PageLenta${Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
-    });
-  }
-};
-
-const changeSubscription = async (id, type, callBack) => {
-  let data = {
-    value: {
-      subscribed: id
-    }
-  };
-  let response = checkAnswerApi(await sendApi.create(type, data));
-  Variable.Static.answerAdditionally = "";
-
-  Variable[`PageLenta${Variable.Static.lentaPage}`] = await sendApi.send({
-    action: "getPost", short: true, cache: true, name: `PageLenta${Variable.Static.lentaPage}`, limit: 15, filter: Helpers.getFilterLenta({}, Variable.Static.lentaPage)
-  });
-  if (typeof callBack == "function") {
-    callBack();
-  }
-}
-
-const showVotersApi = async (id, type) => {
-  let data = {
-    filter: {
-      _id: id,
-    },
-    select: {
-      evaluation: 1,
-    },
-  };
-  let response = checkAnswerApi(await sendApi.create(type, data));
-  // let response = await sendApi.send({ action: type, filter:{
-  //   _id: id
-  // }, select: {
-  //   evaluation: 1
-  // } });
-  // return response.result
-  return response;
-};
-
-const sendNewCommentApi = async function (
-  item,
-  comment,
-  typeSet,
-  mainId,
-  commentId
-) {
-  let data = {
-    value: {
-      comments: {},
-    },
-    _id: mainId,
-  };
-
-
-  if (item.media) {
-    data.value.comments = { text: comment };
-    data._id = item._id
-  }
-  else if (Variable.Static.EditInput.length > 0) {
-    if (!commentId) {
-      data.value = {
-        comments: {
-          text: comment,
-          _id: item._id,
-        },
-      };
-    } else {
-      data.value.comments = {
-        comments: {
-          text: comment,
-          _id: item._id,
-        },
-      };
-    }
-  } else if (!commentId && (typeSet == "setAnswer" || typeSet == "setNews") && mainId === item._id) {
-    data.value.comments = { text: comment };
-  } else if (!commentId) {
-    data.value.comments = {
-      comments: {
-        quote: item._id,
-        text: comment,
-      },
-      _id: item._id,
-    };
-  } else {
-    data.value.comments = {
-      comments: {
-        quote: item._id,
-        text: comment,
-      },
-      _id: commentId,
-    };
-  }
-
-  // if (item.image || typeSet == "setAnswer") {
-  //   data.value.comments = { text: comment };
-  // } else if (edit !== undefined && edit.mainCom) {
-  //   data.value.comments = {
-  //     text: comment,
-  //     _id: commentId,
-  //   };
-  // } else if (edit !== undefined && !edit.mainCom) {
-  //   data.value.comments = {
-  //     comments: {
-  //       text: comment,
-  //       _id: commentId,
-  //     },
-  //   };
-  // } else {
-  //   data.value.comments = {
-  //     comments: {
-  //       quote: item._id,
-  //       text: comment,
-  //     },
-  //     _id: commentId,
-  //   };
-
-  // data = {
-  //   value: {
-  //     comments: {
-  //       comments: {
-  //         quote: item._id,
-  //         text: comment,
-  //       },
-  //       _id: commentId,
-  //     },
-  //   },
-  //   _id: Variable.Static.showNewsId,
-  // };
-  // }
-  let response = checkAnswerApi(await sendApi.create(typeSet, data));
-
-};
-
-
-const getPostsItemInShow = async function (id) {
-  let data = {
-    filter: {
-      _id: id,
-    },
-    // select: {
-    //   author: 1,
-    //   forFriends: 1,
-    //   languages: 1,
-    //   media: 1,
-    //   showDate: 1,
-    //   statistic: 1,
-    //   text: 1,
-    //   title: 1,
-    //   updateTime: 1
-    // },
-    // limit: 12,
-  };
-  let response = checkAnswerApi(await sendApi.create("getPost", data));
-  return response;
-};
-
-
-const getWorldPress = async (count, sortBy = "score", sortType = "-1") => {
-  let data = {
-    limit: 10,
-    sort: {},
-  };
-  if (count) {
-    data.offset = 10 * count;
-  }
-  data.sort[sortBy] = Number(sortType);
-  let response = checkAnswerApi(await sendApi.create("getPress", data));
-  return response;
-};
-
 
 const api = async (data) => {
   let response = {}
@@ -254,13 +20,200 @@ const api = async (data) => {
   return response
 }
 
+const getWorldPress = async (count, sortBy = "score", sortType = "-1") => {
+  let data = {
+    limit: 10,
+    sort: {},
+  };
+  if (count) {
+    data.offset = 10 * count;
+  }
+  data.sort[sortBy] = Number(sortType);
+  let response = checkAnswerApi(await sendApi.create("getPress", data));
+  return response;
+};
+
+const giveNewCodeForReset = async (info) => {
+  let data = {
+    value: {},
+  };
+  let response;
+  if (info.email) {
+    data.value.email = info.email;
+    //  data.value.newCode=true;
+    //  data.value.reset=true;
+    response = checkAnswerApi(await sendApi.create("resetPassword", data));
+  } else {
+    data.value.phone = info.phone;
+    data.value.co = Variable.lang.code;
+    response = checkAnswerApi(await sendApi.create("resetPassword", data));
+  }
+};
+
+const sendResetMessage = async (info) => {
+  let data = {
+    value: { code: info.code, reset: true },
+  };
+  if (info.email) {
+    data.value.email = info.email;
+  } else {
+    data.value.phone = info.phone;
+    data.value.co = Variable.lang.code;
+  }
+
+  let response = checkAnswerApiE(await sendApi.create("confirm", data));
+
+  return response;
+};
+
+const checkAnswerApiE = function (data) {
+  if (!data || !data.result) {
+    console.error("Wrong answer from Api!!!!");
+
+    return { list_records: [{}], totalFound: 0 };
+  }
+  // console.log('=21f14e=',data)
+  return data;
+};
+
+const sendInBlackList = async (info) => {
+  let data = {
+    value: {
+      blackList: info.id,
+    },
+  };
+
+  let response = checkAnswerApi(await sendApi.create("setUsers", data));
+};
+
+
+const delCom = async (info) => {
+
+  let data = {
+    value: {},
+    _id: info.mainId,
+  };
+
+  if (info.typeSet === "doRole") {
+    if (info.id === info.mainId) {
+      data.value = { active: false };
+      data.roleAction = info.roleAction;
+    } else if (info.mainCom === true) {
+      data.value.comments = {
+        active: false,
+        _id: info.id,
+      };
+      data.roleAction = info.roleAction;
+    } else if (info.mainCom === false) {
+      data.value.comments = {
+        comments: {
+          active: false,
+          _id: info.id,
+        },
+      };
+      data.roleAction = info.roleAction;
+    }
+  } else {
+    if (info.id === info.mainId) {
+      data.value = { active: false };
+    } else if (info.mainCom === true) {
+      data.value.comments = {
+        active: false,
+        _id: info.id,
+      };
+    } else if (info.mainCom === false) {
+      data.value.comments = {
+        comments: {
+          active: false,
+          _id: info.id,
+        },
+      };
+    }
+  }
+  // let data = {
+  //   value: {
+  //     comments: {},
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
+
+  // info.mainCom
+  //   ? (data.value.comments = {
+  //     active: false,
+  //     _id: info.id,
+  //   })
+  //   : (data.value.comments = {
+  //     comments: {
+  //       active: false,
+  //       _id: info.id,
+  //     },
+  //   });
+  let response = checkAnswerApi(await sendApi.create(info.typeSet, data));
+};
+
+const sendComplaintApi = async (info) => {
+  let data = {
+    value: {},
+    _id: info.data.mainId,
+  };
+
+  if (info.data.id === info.data.mainId) {
+    data.value.complain = info.complaint;
+  } else if (info.data.mainCom === true) {
+    data.value.comments = {
+      complain: info.complaint,
+      _id: info.data.id,
+    };
+  } else if (info.data.mainCom === false) {
+    data.value.comments = {
+      comments: {
+        complain: info.complaint,
+        _id: info.data.id,
+      },
+    };
+  }
+
+  // let data = {
+  //   value: {
+  //     comments: {},
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
+
+  // info.data.mainCom
+  //   ? (data.value.comments = {
+  //     complain: info.complaint,
+  //     _id: info.data.id,
+  //   })
+  //   : (data.value.comments = {
+  //     comments: {
+  //       complain: info.complaint,
+  //       _id: info.data.id,
+  //     },
+  //   });
+
+  // if(info.data.typeSet ==="setAnswer"){
+  //  data ={
+
+  //       value: {
+  //         complain: info.complaint,
+  //       },
+  //       _id: info.data.id,
+
+  //  }
+  // }
+  let response = checkAnswerApi(await sendApi.create(info.data.typeSet, data));
+};
+
+
+
 
 export {
-  changeSubscription,
-  showVotersApi,
-  changeStatistic,
-  sendNewCommentApi,
-  getPostsItemInShow,
   getWorldPress,
-  api
+  api,
+  giveNewCodeForReset,
+  sendResetMessage,
+  delCom,
+  sendInBlackList,
+  sendComplaintApi,
 };

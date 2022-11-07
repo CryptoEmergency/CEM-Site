@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initGo } from "@betarost/cemjs";
-import { sendComplaintApi } from "@src/apiFunctionsE.js";
+import { sendComplaintApi } from "@src/apiFunctions.js";
 
 let isChecked, complaint, input, inputValue;
 
