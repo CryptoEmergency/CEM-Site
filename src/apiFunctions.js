@@ -4,6 +4,7 @@ import {
   sendApi,
   Variable,
   Helpers,
+  initReload
 } from "@betarost/cemjs";
 import { checkAnswerApi } from "@src/functions.js";
 
@@ -205,8 +206,28 @@ const sendComplaintApi = async (info) => {
   let response = checkAnswerApi(await sendApi.create(info.data.typeSet, data));
 };
 
+//==========================
+const restApi = {}
 
+restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort }) {
+  console.log('=847793=', "restApi.getPost", cache, name, limit, offset, filter, select, sort)
+  let response = { totalFound: 0, list_records: [] }
+  let data = { type: "get", action: "getPost", short: true, cache, limit, offset, filter, select, sort }
+  let tmp = await sendApi.send(data);
+  if (tmp) {
+    if (typeof tmp.totalFound == "undefined")
+      tmp.totalFound = 0
+  }
+  if (!tmp.list_records) {
+    tmp.list_records = []
+  }
+  response = tmp
+  if (name) {
+    Variable[name] = response
+  }
+  return response
 
+}
 
 export {
   getWorldPress,
@@ -216,4 +237,5 @@ export {
   delCom,
   sendInBlackList,
   sendComplaintApi,
+  restApi
 };
