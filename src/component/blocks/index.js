@@ -41,5 +41,3 @@ export { BlockLentaUsers } from './BlockLentaUsers.js';
 
 // Список пользователей
 export { BlockUsers } from "./BlockUsers.js"
-
-export { BlockError404 } from './errors/BlockError404.js';
