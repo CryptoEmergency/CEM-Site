@@ -18,7 +18,6 @@ import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
 import {
   Avatar,
-  CommentInput,
   ItemsMenu
 } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
@@ -636,7 +635,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
             <h2>{Variable.lang.h.modal_comment}</h2>
 
 
-            <CommentInput item={item} typeSet="setPost" callBack={getItem} />
+            {/* <CommentInput item={item} typeSet="setPost" callBack={getItem} /> */}
 
 
 

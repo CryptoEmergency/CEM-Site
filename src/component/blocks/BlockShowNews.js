@@ -9,7 +9,7 @@ import {
 //check
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-import { InputAdaptive, Comment, TextArea, ButtonSubmit } from "@component/element/index.js";
+import { Comment, TextArea, ButtonSubmit } from "@component/element/index.js";
 
 let Static = {}
 

@@ -15,7 +15,7 @@ export { ItemsMenu } from './ItemsMenu.js';
 export { UserWalletCard } from './user/UserWalletCard.js';
 export { Avatar } from './Avatar.js';
 export { ProfileTabsMenu } from './user/ProfileTabsMenu.js';
-export { CommentInput } from "./CommentInput.js";
+
 export { LentaMedia } from "./LentaMedia.js"
 export { AudioPlayerCopy } from "./AudioPlayerCopy.js"
 
@@ -30,7 +30,6 @@ export { CheckBox } from "./CheckBox.js";
 
 export { Comment } from "./Comment.js";
 export { Evaluation } from "./Evaluation.js";
-export { InputAdaptive } from "./InputAdaptive.js";
 export { NotFound } from "./NotFound.js"
 
 
