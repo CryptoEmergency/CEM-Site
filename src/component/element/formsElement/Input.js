@@ -6,7 +6,7 @@ import {
 // check
 import svg from '@assets/svg/index.js';
 
-const textConstuctor = function (Static, classDiv, className, before, after) {
+const textConstuctor = function (Static, classDiv, className, before, after, callback) {
     if (typeof Static.label != "undefined" || typeof Static.error != "undefined" || typeof classDiv != "undefined" || typeof before != "undefined" || typeof after != "undefined") {
         return (
             <div>
@@ -15,7 +15,7 @@ const textConstuctor = function (Static, classDiv, className, before, after) {
                 <div class={classDiv}>
                     {before ? before : null}
                     {Static.type == "password" ? <img src={svg.lock} class="icon-input" /> : null}
-                    {textElem(Static, className)}
+                    {textElem(Static, className, callback)}
                     {Static.type == "password" ? <img src={svg["eye"]} class="password_eye"
                         onClick={function () {
                             console.log('=b52a91=', Static.elInput.type)
@@ -33,10 +33,10 @@ const textConstuctor = function (Static, classDiv, className, before, after) {
             </div>
         )
     } else {
-        return (textElem(Static, className))
+        return (textElem(Static, className, callback))
     }
 }
-const textElem = function (Static, className) {
+const textElem = function (Static, className, callback) {
     let rows = null
     let adaptive = null
     let placeholder = null
@@ -73,12 +73,23 @@ const textElem = function (Static, className) {
             type={type}
             value={value}
             class={className}
-            oninput={function () { checkInput(Static, this) }}
+            oninput={function () {
+                checkInput(Static, this) 
+                if(callback)
+                {
+                    callback()
+                }
+            }}
+               
             onclick={() => {
                 if (typeof Static.onclick == "function") {
                     Static.onclick()
                 }
+                
             }}
+         
+            
+            
         />
     )
 }
@@ -108,7 +119,7 @@ const checkInput = function (Static, target) {
     return
 }
 
-const Input = function ({ Static, classDiv, className, before, after }) {
-    return (textConstuctor(Static, classDiv, className, before, after))
+const Input = function ({ Static, classDiv, className, before, after, callback }) {
+    return (textConstuctor(Static, classDiv, className, before, after, callback))
 };
 export { Input };

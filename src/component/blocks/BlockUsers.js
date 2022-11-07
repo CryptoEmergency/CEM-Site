@@ -13,13 +13,50 @@ import { api } from '@src/apiFunctions.js'
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
 import { Input } from '@component/element/index.js';
 let elFilters
+let Static = {}
 
 const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 21 }) {
     await initOne(
         async () => {
+            Static.Frends = {
+                value: "",
+                label: "",
+                placeholder:Variable.lang.placeholder.findFriends,
+                condition:async (value) => {
+                   
+                    change(value)
+                      return true
+                   
+                    
+                },
+              
+            }
+
             await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
         }
     )
+
+
+
+const change = async function (arg){
+let value = arg
+
+
+let filter =  Helpers.getFilterUsers(filters, type) ;
+
+filter.search = value
+filter.limit = limit
+filter.offset = 0
+console.log(filter)
+  //  console.log( await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter:filter}))
+  
+  let response =  await api({ type: "get", action: "getUsers",short: true, filter: {filter} })
+  Variable[nameRecords] = response
+  console.log(response)
+}
+
+
+
     return (
         <div class="c-friends">
             <div class="c-friends__container c-container">
@@ -29,14 +66,14 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                 <div class="c-friends__block">
                     <div class="c-friends__search">
                         <div class="c-friends__filter">
-                            {/* Сделать поиск */}
-                            </Input />
-                            <input
+                           
+                            <Input className="c-friends__field" Static={Static.Frends}  />
+                            {/* Сделать поиск  <input
                                 class="c-friends__field"
                                 autocomplete="off"
                                 type="text"
                                 placeholder={Variable.lang.placeholder.findFriends}
-                            />
+                            />*/}
                             <div
                                 class="c-friends__toggler"
                                 onClick={() => {
