@@ -15,11 +15,9 @@ import { Input } from '@component/element/index.js';
 
 
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filters }) {
-
+  filters = {}
   const change = async function (arg) {
     let value = arg
-    // let filters = Helpers.getFilterQuestions(Static.filtersQuestions) ;
-    let filters = {}
     filters.$text = { $search: value }
     let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
     Variable[nameRecords] = response
