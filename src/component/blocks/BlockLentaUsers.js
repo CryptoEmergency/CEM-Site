@@ -54,7 +54,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
       dataIf={
         <div
           class="c-fullnews__item user_news_item"
-          href={"/lenta-users/show/" + item._id}
+          data-href={"/lenta-users/show/" + item._id}
           ElemVisible={total < totalFound && numIndex == (total - 3) ?
             async () => {
               // console.log('=0c6881=', "Load more")
