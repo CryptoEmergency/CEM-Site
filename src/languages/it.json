@@ -72,7 +72,10 @@
 		"withdrawal": "visualizzare",
 		"join": "unirsi",
         "pre_view": "anteprima",
-        "allPartners": "Tutti i partner"
+        "allPartners": "Tutti i partner",
+
+        "resetCrop": "Annulla",
+		"reset": "Cancellazione"
     },
     "h": {
         "success": "Con successo!",
@@ -151,7 +154,10 @@
 		"modal_pageDeleted": "Pagina rimossa",
         "chats": "Chat",
         "partners": "Partner di informazione",
-        "modal_cropImage": "Aggiunta di foto"
+        "modal_cropImage": "Aggiunta di foto",
+
+        "lottery": "Lotteria «passaparola»",
+		"lotterySubtitle": "WIN the CEM"
     },
     "a": {
         "about": "Chi siamo",
@@ -350,7 +356,24 @@
 		"transactionLevel": "Per il livello ricevuto",
 		"October2022": "Ottobre 2022",
 		"aboutProjectDate19May2022": "Rilasciato il 19 maggio 2022",
-		"aboutProjectDateAugust2022": "Rilasciato agosto 2022"
+		"aboutProjectDateAugust2022": "Rilasciato agosto 2022",
+
+        "lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
+		"lotteryAction1": "Invite your friends to increase Prize Pool.",
+		"lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
+		"lotteryAction3": "5 winners will share the Prize Pool!",
+		"lotteryAnnounce": "Give a word of mouth to your friends as every user registered in the lottery will add 1CEM into a 1000CEM Prize Pool. 5 winners will share the Prize Pool!",
+		"lotteryDates": "Dates of Lottery:",
+		"lotteryTicket": "Job done, get your ticket!",
+		"lotteryBanner": "Download banner:",
+		"getTicket": "To get lottery ticket:",
+		"lotteryQuest1": "Register at Crypto-emergency.com.",
+		"lotteryQuest2": "Enter your Email",
+		"lotteryQuest3": "Join our Telegram group and inform us your @nickname below.",
+		"lotteryQuest4": "Retweet post and give us a link",
+		"lotteryQuest5": "Make an Instagram post and give us a link",
+		"lotteryQuest6": "Answer a shortest quiz.",
+		"lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?"
     },
     "text": {
         "starups": "Startup",
