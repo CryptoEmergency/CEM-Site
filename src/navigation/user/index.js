@@ -143,25 +143,28 @@ const start = function (userInfo, ID = "mainBlock") {
                             />
 
                             {/* <div class="c-userpreview__buttons">
-                    <div class="c-userpreview__container">
-                        <a class="c-userpreview__btn">
-                            <span>
-                                {Variable.lang.button.write}
-                            </span>
-                        </a>
-                        <a class="c-userpreview__btn">
-                            <span class="subscribe_status">
-                                {Variable.lang.button.subscribe}
-                            </span>
-                        </a>
-                    </div>
-                </div> */}
+                                    <div class="c-userpreview__container">
+                                        <a class="c-userpreview__btn">
+                                            <span>
+                                                {Variable.lang.button.write}
+                                            </span>
+                                        </a>
+                                        <a class="c-userpreview__btn">
+                                            <span class="subscribe_status">
+                                                {Variable.lang.button.subscribe}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div> 
+                            */}
 
                             <div class="c-userpreview__settings">
-                                {/* <img
-                        class="c-userpreview__toggler"
-                        src={svg.user_custimize_settings}
-                    /> */}
+                                {/* 
+                                    <img
+                                        class="c-userpreview__toggler"
+                                        src={svg.user_custimize_settings}
+                                    /> 
+                                */}
                                 <div
                                     style="display: none;"
                                     class="c-userpreview__menu"

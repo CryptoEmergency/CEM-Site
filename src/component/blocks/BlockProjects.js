@@ -139,7 +139,7 @@ const BlockProjects = async function () {
                     "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
                     "icon": "user_news_page",
                     "link": "lenta-users",
-                    modal: true
+                    modal: false
                 },
                 {
                     "title": Variable.lang.a.questionsAnswers,
