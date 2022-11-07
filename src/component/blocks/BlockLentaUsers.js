@@ -199,34 +199,58 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
                   return (
                     <div>
                       <span Element={($el) => {
-                        Static.elShowTextMore = $el
+                        Static.elShowTextShort[item._id] = $el
                       }}>{Helpers.editText(item.text, { slice: 50, clear: true, html: true })}</span>
-                      <span
-                        class="show_full_post"
-                        onclick={function (e) {
-                          e.stopPropagation();
-                          Static.elShowTextMore.innerHTML = Helpers.editText(item.text, { paragraph: true, clear: true, html: true })
-                          console.log('=4b1b82=', Static.elShowTextMore, item.text)
-                          this.innerHTML = ""
-                        }}>
-                        {Variable.lang.button.show_all}</span>
+                      {() => {
+                        if (item.text.length > 50) {
+                          return (
+                            <div>
+                              <span hidden={true} Element={($el) => {
+                                Static.elShowTextFull[item._id] = $el
+                              }}>{Helpers.editText(item.text, { paragraph: true, clear: true, html: true })}</span>
+                              <span
+                                class="show_full_post"
+                                onclick={function (e) {
+                                  e.stopPropagation();
+                                  Static.elShowTextShort[item._id].hidden = true
+                                  Static.elShowTextFull[item._id].hidden = false
+                                  this.innerHTML = ""
+                                }}>
+                                {Variable.lang.button.show_all}</span>
+                            </div>
+                          )
+                        }
+                      }}
+
                     </div>
                   )
                 } else if (item.text.length) {
                   return (
                     <div>
                       <span Element={($el) => {
-                        Static.elShowTextMore = $el
+                        Static.elShowTextShort[item._id] = $el
                       }}>{Helpers.editText(item.text, { slice: 750, paragraph: true, clear: true, html: true })} </span>
-                      <span
-                        class="show_full_post"
-                        onclick={function (e) {
-                          e.stopPropagation();
-                          Static.elShowTextMore.innerHTML = Helpers.editText(item.text, { paragraph: true, clear: true, html: true })
-                          console.log('=4b1b82=', Static.elShowTextMore, item.text)
-                          this.innerHTML = ""
-                        }}
-                      >{Variable.lang.button.show_all}</span>
+                      {() => {
+                        if (item.text.length > 750) {
+                          return (
+                            <div>
+                              <span hidden={true} Element={($el) => {
+                                Static.elShowTextFull[item._id] = $el
+                              }}>{Helpers.editText(item.text, { paragraph: true, clear: true, html: true })}</span>
+                              <span
+                                class="show_full_post"
+                                onclick={function (e) {
+                                  e.stopPropagation();
+                                  Static.elShowTextShort[item._id].hidden = true
+                                  Static.elShowTextFull[item._id].hidden = false
+                                  this.innerHTML = ""
+                                }}
+                              >{Variable.lang.button.show_all}</span>
+                            </div>
+                          )
+                        }
+                      }}
+
                     </div>
                   )
                 }

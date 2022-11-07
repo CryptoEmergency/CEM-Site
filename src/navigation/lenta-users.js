@@ -23,7 +23,8 @@ const ToogleItem = function ({ Static, name }) {
         Static.nameRecords = "PageLenta" + name;
         Static.changeToogle = true
         Static.elMedia = {}
-        Static.elShowTextMore = {}
+        Static.elShowTextFull = {}
+        Static.elShowTextShort = {}
         await restApi.getPost({ name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
         initReload()
       }}>
@@ -38,7 +39,9 @@ const start = function (data, ID) {
     async () => {
       Static.nameRecords = "PageLentaall";
       Static.lentaPage = "all";
-
+      Static.elMedia = {}
+      Static.elShowTextFull = {}
+      Static.elShowTextShort = {}
       Static.lentaFilters = {
         lang: Variable.lang.code,
         langName: Variable.lang.lang_orig,
