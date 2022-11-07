@@ -47,7 +47,6 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
     }
   }
 
-  console.log(Variable.Static)
   return (
 
     <If
@@ -55,9 +54,10 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
       dataIf={
         <div
           class="c-fullnews__item user_news_item"
+          href={"/lenta-users/show/" + item._id}
           ElemVisible={total < totalFound && numIndex == (total - 3) ?
             async () => {
-              console.log('=0c6881=', "Load more")
+              // console.log('=0c6881=', "Load more")
               let tmp = await sendApi.send({
                 action: "getPost",
                 short: true,
@@ -75,29 +75,9 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
             :
             false
           }
-          onClick={async (e) => {
-            e.stopPropagation();
 
-            // if (true) {
-            //   Variable.SetModals({
-            //     name: "ModalFullSize",
-            //     data: { item: item, type: "post" },
-            //   });
-            // }
+          onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
 
-            // let post;
-            // post = await getPostsItemInShow(item._id);
-            // post = post.list_records[0];
-            // console.log('=item1111111111111111=',item)
-            // if (total !== undefined && e.target.dataset.name === undefined)
-            //   Variable.SetModals({
-            //     name: "ModalFullSize",
-            //     data: {
-            //       item, type: "post", numIndex: numIndex,
-            //       elem: elem
-            //     },
-            //   });
-          }}
         >
           <div class="main_comment">
             <Avatar author={item.author} nickName={item.author.nickname} />
@@ -131,7 +111,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                       onlyAuth: true,
                       onclick: async () => {
                         const response = await api({ type: "set", action: "setUsers", data: { value: { subscribed: item.author._id } } })
-                        console.log('=b959ac=', response)
+                        // console.log('=b959ac=', response)
                         if (response.status === "ok") {
                           if (response.result) {
                             item.subscribe = response.result.subscribe
@@ -431,7 +411,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
                         onlyAuth: true,
                         onclick: async () => {
                           const response = await api({ type: "set", action: "setUsers", data: { value: { subscribed: item.author._id } } })
-                          console.log('=b959ac=', response)
+                          // console.log('=b959ac=', response)
                           if (response.status === "ok") {
                             if (response.result) {
                               item.subscribe = response.result.subscribe

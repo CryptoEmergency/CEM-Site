@@ -62,7 +62,7 @@ const BlockShowLenta = function ({ item }) {
                           onlyAuth: true,
                           onclick: async () => {
                             const response = await api({ type: "set", action: "setUsers", data: { value: { subscribed: item.author._id } } })
-                            console.log('=b959ac=', response)
+                            // console.log('=b959ac=', response)
                             if (response.status === "ok") {
                               if (response.result) {
                                 item.subscribe = response.result.subscribe

@@ -15,7 +15,6 @@ export { BlockInfoPartners } from './BlockInfoPartners.js';
 export { BlockTrade } from "./BlockTrade.js";
 export { BlockExchange } from './BlockExchange.js';
 export { BlockLentaUsers } from './BlockLentaUsers.js';
-export { BlockUserForLenta } from './BlockUserForLenta.js';
 
 export { BlockShowNews } from './BlockShowNews.js';
 

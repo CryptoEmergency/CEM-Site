@@ -239,7 +239,7 @@ const ModalAuth = function () {
                                 Static.email.error = false
                                 Static.email.valid = false
                                 checkValid(Static, [wayAuth, "pass"])
-                                console.log(" email" + Static.isValid)
+                                // console.log(" email" + Static.isValid)
                             }}>
                             {Variable.lang.button.email}
                         </button>
@@ -251,7 +251,7 @@ const ModalAuth = function () {
                                 Static.phone.error = false
                                 Static.phone.valid = false
                                 checkValid(Static, [wayAuth, "pass"])
-                                console.log(" phone" + Static.isValid)
+                                // console.log(" phone" + Static.isValid)
 
                             }}>
                             {Variable.lang.button.phone}

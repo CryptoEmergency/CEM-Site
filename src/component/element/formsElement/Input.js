@@ -18,7 +18,6 @@ const textConstuctor = function (Static, classDiv, className, before, after, cal
                     {textElem(Static, className, callback)}
                     {Static.type == "password" ? <img src={svg["eye"]} class="password_eye"
                         onClick={function () {
-                            console.log('=b52a91=', Static.elInput.type)
                             if (Static.elInput.type == "text") {
                                 Static.elInput.type = "password"
                                 this.src = svg["eye"]
@@ -74,22 +73,21 @@ const textElem = function (Static, className, callback) {
             value={value}
             class={className}
             oninput={function () {
-                checkInput(Static, this) 
-                if(callback)
-                {
+                checkInput(Static, this)
+                if (callback) {
                     callback()
                 }
             }}
-               
+
             onclick={() => {
                 if (typeof Static.onclick == "function") {
                     Static.onclick()
                 }
-                
+
             }}
-         
-            
-            
+
+
+
         />
     )
 }

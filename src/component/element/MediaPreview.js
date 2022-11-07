@@ -9,10 +9,10 @@ import {
 
 
 const MediaPreview = function ({ item, index, type, formInputs, el }) {
-  console.log('=2f8e9a=', item)
-    if(item.type === "audio"){
-        el[index] = Variable.setRef();
-    }
+  // console.log('=2f8e9a=', item)
+  if (item.type === "audio") {
+    el[index] = Variable.setRef();
+  }
   return (
     <div>
       <If
@@ -213,7 +213,7 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                   item={item}
                   index={index}
                   path={`/assets/upload/${type}/`}
-                  el = {el}
+                  el={el}
                 />
               }
             />
