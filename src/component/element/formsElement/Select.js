@@ -3,6 +3,7 @@ import {
   jsxFrag,
   Variable,
 } from "@betarost/cemjs";
+import svg from "@assets/svg/index.js";
 
 const changeSelect = function (selectIndex, options, callback) {
   let optionsActive
