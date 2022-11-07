@@ -3,20 +3,14 @@ import {
     jsxFrag,
     init,
     initReload,
-    Variable,
-    sendApi
+    Variable
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-import { checkAnswerApi } from '@src/functions.js'
-
-import { If } from '@component/helpers/All.js';
+import { api } from '@src/apiFunctions.js'
 
 const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-
     let ticketNumber
 
     let buttonContainer = Variable.setRef()
@@ -46,7 +40,7 @@ const start = function () {
         // let htmlData = getFirstData()
         // htmlData.ticketNumber = res.ticketNumber
         // $('.lottery_data').html(await partialsHtml('ticket', htmlData))
-        let response = checkAnswerApi(await sendApi.create("setLottery", { value: value }));
+        let response = await api({ type: "set", action: "setLottery", short: true, data: { value: value }})
         ticketNumber = response.list_records[0].ticketNumber
         initReload()
     }
@@ -104,9 +98,12 @@ const start = function () {
 
     init(
         async () => {
-            let response = checkAnswerApi(await sendApi.create("getLottery", { filter: { nickname: Variable.myInfo.nickname } }));
-            // console.log('response', response)
-            if (response.totalFound != 0) {
+            let response = null
+            if(Variable.auth && Variable.myInfo){
+                response = await api({ type: "get", action: "getLottery", short: true, cache: true, limit: 1, filter: { nickname: Variable.myInfo.nickname }})
+            }
+            console.log('response', response, Variable.myInfo.nickname)
+            if (response && response.totalFound != 0) {
                 ticketNumber = response.list_records[0].ticketNumber
             } else {
                 ticketNumber = false
@@ -123,7 +120,7 @@ const start = function () {
         () => {
             // console.log("Second Init ", questions)
             return (
-                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
+                <div class="c-main__body">
                     <div class="page-content">
                         <div class="lottery_block">
                             <h1>«Word of Mouth» lottery</h1>
@@ -147,18 +144,18 @@ const start = function () {
                             <p>Dates of Lottery:</p>
                             <div class="lottery_main">
                                 <div class="lottery_data">
-                                    { }
-                                    <If
-                                        data={ticketNumber}
-                                        dataIf={
-                                            <div class="ticket_container">
-                                                <div class="ticket">
-                                                    <p>Job done, get your ticket!</p>
-                                                    <div class="ticket_number"><span>{ticketNumber}</span></div>
+                                    {()=> {
+                                        if(ticketNumber){
+                                            return(
+                                                <div class="ticket_container">
+                                                    <div class="ticket">
+                                                        <p>Job done, get your ticket!</p>
+                                                        <div class="ticket_number"><span>{ticketNumber}</span></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }
-                                        dataElse={
+                                            )
+                                        } else {
+                                            return(
                                             <div>
                                                 <form class="lottery_form" onsubmit={SendLotteryForm} >
                                                     <p>To get lottery ticket:</p>
@@ -212,8 +209,9 @@ const start = function () {
                                                     </div>
                                                 </form>
                                             </div>
+                                            )
                                         }
-                                    />
+                                    }}
                                 </div>
                                 <div>
                                     <p class="lottery_post_banner_text">Download banner:</p>

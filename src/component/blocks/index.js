@@ -3,7 +3,7 @@ export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js"
 //Блок для новостей, блога, медиа о нас
 export { BlockNews } from "./BlockNews.js"
 
-
+export { BlockShowLenta } from "./BlockShowLenta.js"
 
 export { BlockBanners } from "./BlockBanners.js"
 export { BlockProjects } from "./BlockProjects.js"
