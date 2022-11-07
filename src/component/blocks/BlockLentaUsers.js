@@ -10,7 +10,7 @@ import {
 
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
-import { LentaMedia } from "@component/element/index.js";
+import { LentaMedia, Evaluation } from "@component/element/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
 import {
@@ -248,7 +248,32 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
             </div>
           </div>
           <div class="user_post_statistic_item">
-            {/* <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} /> */}
+            <Evaluation
+              rating={item.statistic.rating}
+              callBackBefore={async (type) => {
+                let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { evaluation: type } } })
+                if (response.status === 'ok') {
+                  if (type == "plus") {
+                    item.statistic.rating++
+                  } else {
+                    item.statistic.rating--
+                  }
+                  initReload()
+                } else {
+                  Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+                }
+              }}
+              callBackAfter={async (type) => {
+                let response = await api({ type: "get", action: "getPost", filter: { _id: item._id }, select: { evaluation: 1, } })
+                let whoLike = []
+                if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
+                  whoLike = response.result.list_records[0].evaluation.filter(
+                    (item) => item.type === type
+                  );
+                }
+                Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
+              }}
+            />
           </div>
         </div>
       </div>
