@@ -7,7 +7,7 @@ import {
   sendApi,
   Helpers,
 } from "@betarost/cemjs";
-import { sendInBlackList } from "@src/apiFunctionsE.js";
+import { sendInBlackList } from "@src/apiFunctions.js";
 
 const ModalBlackList = function (data, reload) {
   return (

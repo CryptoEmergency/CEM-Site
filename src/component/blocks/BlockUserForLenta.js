@@ -15,10 +15,8 @@ import svg from "@assets/svg/index.js";
 import { LentaMedia } from "@component/element/index.js";
 import images from "@assets/images/index.js";
 import { getDateFormat } from "@src/functions.js";
-import { getPostsItemInShow } from "@src/apiFunctions.js";
 import {
   Avatar,
-  Likes,
   AnswerAdditionallyToggleNew,
 } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
@@ -91,7 +89,7 @@ const BlockUserForLenta = function ({ item }) {
           </div>
         </div>
         <div class="user_post_statistic_item">
-          <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} />
+          {/* <Likes item={item} typeGet="getPost" typeSet="setPost" callBack={getItem} /> */}
         </div>
       </div>
       <div class="comment_icons">

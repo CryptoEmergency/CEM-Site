@@ -10,7 +10,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { allValidation } from "@src/functions.js";
-import { sendResetMessage, giveNewCodeForReset } from "@src/apiFunctionsE.js";
+import { sendResetMessage, giveNewCodeForReset } from "@src/apiFunctions.js";
 import { If } from '@component/helpers/All.js';
 
 let time, wayType

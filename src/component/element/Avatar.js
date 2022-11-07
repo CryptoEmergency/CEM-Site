@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Variable, initReload, initOne, sendApi, Helpers } from "@betarost/cemjs";
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
-import { getDateFormat, siteLink, uploadMedia } from "@src/functions.js";
+import { getDateFormat, uploadMedia } from "@src/functions.js";
 import { If } from "@component/helpers/All.js";
 
 let visibleSettings, formInputs;

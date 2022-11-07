@@ -20,11 +20,9 @@ export { LentaMedia } from "./LentaMedia.js"
 export { AudioPlayerCopy } from "./AudioPlayerCopy.js"
 
 export { MediaButton } from "./MediaButton.js"
-export { Likes } from "./Likes.js"
 
 
 export { MediaPreview } from "./MediaPreview.js"
-export { QuestionAnswerItemComment } from "./QuestionAnswerItemComment.js";
 
 export { AnswerAdditionallyToggleNew } from "./AnswerAdditionallyToggleNew.js";
 export { AwardsProgress } from "./AwardsProgress.js";

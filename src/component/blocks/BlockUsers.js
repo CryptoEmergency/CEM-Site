@@ -363,7 +363,7 @@ console.log(filter)
                     }
                 }}
             </div>
-        </div>
+        </div >
     )
 }
 export { BlockUsers }
