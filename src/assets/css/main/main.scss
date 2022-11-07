@@ -1687,7 +1687,8 @@ textarea {
 @media(min-width: 768px) {
     .c-container {
         width: calc(100% - 60px);
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .c-page {

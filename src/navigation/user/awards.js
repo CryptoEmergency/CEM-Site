@@ -36,7 +36,13 @@ const start = function () {
             // console.log('=9dcce1=', tmp)
             // awards.kindGroup.one.push(...awards.kindGroup.one)
             return (
-                <div class="awards c-container">
+                <div
+                    class={[
+                        "awards",
+                        "c-container",
+                        Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+                      ]}
+                >
                     <div class="awards_block">
                         <div class="awards_body">
                             {() => {
