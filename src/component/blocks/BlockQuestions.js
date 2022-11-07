@@ -23,6 +23,10 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
     filters.$text = { $search: value }
     let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
     Variable[nameRecords] = response
+    if (Static.quest.value.length == 0) {
+      await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+ 
+    }
   }
 
   await initOne(async () => {
@@ -263,7 +267,6 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
                   let new_filter = Helpers.getFilterQuestions(Static.filtersQuestions);
                   if (Static.quest.value.length > 0) {
                     new_filter.search = filters.$text = { $search: Static.quest.value }
-                    console.log()
                   }
                   let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
                   if (tmp && tmp.list_records) {

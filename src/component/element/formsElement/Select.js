@@ -3,7 +3,7 @@ import {
   jsxFrag,
   Variable,
 } from "@betarost/cemjs";
-import svg from "@assets/svg/index.js";
+//import svg from "@assets/svg/index.js";
 
 import svg from '@assets/svg/index.js';
 
