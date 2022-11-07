@@ -72,7 +72,10 @@
 		"withdrawal": "以显示",
 		"join": "加入",
         "pre_view": "预览",
-        "allPartners": "所有合作伙伴"
+        "allPartners": "所有合作伙伴",
+
+        "resetCrop": "取消",
+		"reset": "消除"
     },
     "h": {
         "success": "成功地！ ",
@@ -151,7 +154,10 @@
 		"modal_pageDeleted": "删除页面",
         "chats": "聊天记录",
         "partners": "信息合作伙伴",
-        "modal_cropImage": "添加照片"
+        "modal_cropImage": "添加照片",
+
+        "lottery": "«口碑» 彩票",
+		"lotterySubtitle": "赢得 CEM"
     },
     "a": {
         "about": "关于我们",
@@ -350,7 +356,24 @@
 		"transactionLevel": "对于接收到的水平",
 		"October2022": "2022年10月",
 		"aboutProjectDate19May2022": "2022年5月19日发布",
-		"aboutProjectDateAugust2022": "2022年8月发布"
+		"aboutProjectDateAugust2022": "2022年8月发布",
+
+        "lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
+		"lotteryAction1": "Invite your friends to increase Prize Pool.",
+		"lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
+		"lotteryAction3": "5 winners will share the Prize Pool!",
+		"lotteryAnnounce": "Give a word of mouth to your friends as every user registered in the lottery will add 1CEM into a 1000CEM Prize Pool. 5 winners will share the Prize Pool!",
+		"lotteryDates": "Dates of Lottery:",
+		"lotteryTicket": "Job done, get your ticket!",
+		"lotteryBanner": "Download banner:",
+		"getTicket": "To get lottery ticket:",
+		"lotteryQuest1": "Register at Crypto-emergency.com.",
+		"lotteryQuest2": "Enter your Email",
+		"lotteryQuest3": "Join our Telegram group and inform us your @nickname below.",
+		"lotteryQuest4": "Retweet post and give us a link",
+		"lotteryQuest5": "Make an Instagram post and give us a link",
+		"lotteryQuest6": "Answer a shortest quiz.",
+		"lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?"
     },
     "text": {
         "starups": "初创公司",

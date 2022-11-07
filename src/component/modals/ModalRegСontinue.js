@@ -10,7 +10,7 @@ import {
 
 import images from '@assets/images/index.js';
 
-import { allValidation, validator, checkValid } from '@src/functions.js';
+import { validator, checkValid } from '@src/functions.js';
 import { Input, CheckBox } from '@component/element/index.js';
 
 

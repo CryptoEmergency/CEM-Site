@@ -11,7 +11,7 @@ import { api } from '@src/apiFunctions.js'
 
 import svg from "@assets/svg/index.js";
 let tmp = 0
-const start = function (data, ID = "mainBlock") {
+const start = function (data, ID) {
 
     Variable.Static.tpm = 5
     init(

@@ -7,7 +7,7 @@ import {
   timersStop,
 } from "@betarost/cemjs";
 
-import { changeSubscription } from "@src/apiFunctions.js";
+
 
 const ModalContextMenuNew = function (data, reload) {
 
@@ -56,7 +56,7 @@ const ModalContextMenuNew = function (data, reload) {
   const clickSubscription = async () => {
     // Variable.Static.answerAdditionally = "";
     Variable.DelModals("ModalContextMenuNew")
-    changeSubscription(data.item.author._id, "setUsers", data.callBack);
+    // changeSubscription(data.item.author._id, "setUsers", data.callBack);
   };
 
   const clickComplain = () => {

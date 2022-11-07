@@ -3,32 +3,35 @@ import {
     jsxFrag,
     timersStart,
     sendApi,
-    getStorage,
-    setStorage,
     init,
     initReload,
     Variable,
     Helpers
 } from '@betarost/cemjs';
-import { If } from '@component/helpers/All.js';
-import { BlockUsers, BlockMainNews, BlockBanners, BlockExchange, BlockInfoPartners, BlockPreview, BlockProjects } from '@component/blocks/index.js';
 
-
+import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
+import { api } from '@src/apiFunctions.js'
 
-import { BlockQuestions } from '@component/blocks/BlockQuestions.js';
-import { BlockTrade } from '@component/blocks/BlockTrade.js';
 
+import {
+    BlockUsers,
+    BlockBanners,
+    BlockExchange,
+    BlockInfoPartners,
+    BlockProjects,
+    BlockTrade,
+    BlockQuestions
+} from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
+
 const start = function () {
-    let filters,
-        filtersQuestions
-    let type = "all"
-    Variable.visibleFilterUser = false
+    let Static = {}
+    let filtersQuestions
 
     init(
         async () => {
-            filters = {
+            Static.filters = {
                 lang: {
                     code: "",
                     name: "all"
@@ -45,7 +48,7 @@ const start = function () {
                 online: false
             }
 
-            filtersQuestions = {
+            Static.filtersQuestions = {
                 lang: {
                     code: Variable.lang.code,
                     name: `${Variable.lang.lang} (${Variable.lang.lang_orig})`
@@ -58,14 +61,66 @@ const start = function () {
                 },
                 desc: -1
             }
-            // Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, cache: true, name: "MainQuestions", filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions), limit: 6 });
-            // Variable.MainTrades = await sendApi.send({ action: "getTrade", short: true, cache: true, name: "MainTrades" });
-            timersStart("Course", async () => { Variable.Course = await sendApi.send({ action: "getCourse", short: true }) }, 10000)
+            await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
+            await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
+            timersStart("Course", async () => { Variable.Course = await api({ type: "get", action: "getCourse", short: true, name: "Course" }) }, 10000)
         },
         () => {
             return (
                 <div class="c-main__body">
-                    <BlockPreview />
+                    <div class="с-preview">
+                        <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
+                        <div class="с-preview__title">
+                            <img class="с-preview__bg" src={images["background/cem"]} />
+                            <div class="с-preview__text с-preview__text--auth">
+                                <span>{Variable.lang.homePreview.ask}</span>
+                                <div class="с-preview__imgblock">
+                                    <img class="с-preview__img" src={svg.two} />
+                                    <img class="с-preview__img" src={svg.two5} />
+                                    {Variable.lang.homePreview.earn}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="с-preview__crypto">
+                            {
+                                () => {
+                                    if (Variable.Course && Variable.Course.list_records && Variable.Course.list_records.length) {
+                                        const arrReturn = Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
+                                            let course = Variable.Course.list_records[0][key]
+                                            return (
+                                                <a
+                                                    href={key == "cem" ? "https://www.bitmart.com/trade/en?layout=basic&symbol=CEM_USDT" : "/list-trade/"}
+                                                    rel="nofollow noopener"
+                                                    target={key == "cem" ? "_blank" : "_self"}
+                                                    class="c-currency"
+                                                >
+                                                    <div class="c-currency__icon">
+                                                        <div class={`icon-color-${key}`}>
+                                                            <img src={`/assets/icons/coins/${key}2.svg`} />
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-currency__info">
+                                                        <div class="c-currency__left">
+                                                            <div class="c-currency__name">{key.toLocaleUpperCase() + "/USDT"}</div>
+                                                            <div class="c-currency__price"><span class="btcusdt_price">{Helpers.numberFixWithSpaces(course.usdt, key === "cem" ? 4 : 2)}</span></div>
+                                                        </div>
+                                                        <div class="c-currency__right">
+                                                            <div class={`c-currency__percent ${course.change >= 0 ? " c-currency__percent--up" : " c-currency__percent--down"}`}>
+                                                                <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow} />
+                                                                <span class="btcusdt_change">{Helpers.numberFixWithSpaces(course.change, 2)}</span>
+                                                            </div>
+                                                            {/* <div class="c-currency__update">24h.</div> */}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            )
+                                        })
+                                        return arrReturn
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
                         {() => {
@@ -78,86 +133,79 @@ const start = function () {
                             }
                         }}
                         <BlockQuestions
-                            version={Variable.dataUrl}
-                            filters={filtersQuestions}
-                            button={
-                                // <div class="c-questions__footer">
-                                //     <a
-                                //         class="c-button c-button--gray"
-                                //         href="/question/"
-                                //         onclick={Helpers.siteLink}
-                                //     >
-                                //         <span class="c-button__wrapper">{Variable.lang.button.allQuestions}</span>
-                                //     </a>
-                                // </div>
-                                <If
-                                    data={Variable.dataUrl && Variable.dataUrl.adress == "question" && Variable.MainQuestions.list_records.length < Variable.MainQuestions.totalFound}
-                                    dataIf={
-                                        <ButtonShowMore
-                                            onclick={async () => {
-                                                let tmp = await sendApi.send({ action: "getQuestions", short: true, limit: 6, offset: Variable.MainQuestions.list_records.length, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) })
-                                                Variable.MainQuestions.list_records.push(...tmp.list_records)
-                                                // console.log('=Variable.MainQuestions.list_records=', Variable.MainQuestions.list_records)
-                                                // console.log('= Variable.MainQuestions.list_records.length.MainQuestions.totalFound=', Variable.MainQuestions.list_records.length)
-                                                initReload()
-                                            }}
-                                        />
-                                    }
-                                    dataElse={
-                                        <a class="btn-view-all-a c-button c-button--gray" href="/question/" onclick={Helpers.siteLink}>
-                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                        </a>
-                                    }
-                                />
-                            }
-                            callBack={
-                                async function (active, nameOptions) {
-                                    filtersQuestions[nameOptions].value = active
-                                    Variable.MainQuestions = await sendApi.send({ action: "getQuestions", short: true, filter: Helpers.getFilterQuestions(filtersQuestions), sort: Helpers.getSortQuestions(filtersQuestions) });
-                                    initReload();
-                                }
-                            }
-                            name={"MainQuestions"}
-                            items={Variable.MainQuestions}
+                            Static={Static}
+                            limit={6}
+                            nameRecords="MainQuestions"
                         />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
                             <BlockTrade
                                 nameRecords="MainTrades"
                                 limit={6}
-                                button={
-                                    <div class="crypto_exchanges_footer">
-                                        <a class="c-button c-button--gray" href="/list-trade/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.trade }) }}>
-                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                        </a>
-                                    </div>
-                                }
                             />
                             <div class="top_professionals_container">
                                 <BlockExchange
                                     nameRecords="MainExchanges"
                                     limit={6}
-                                    button={
-                                        <div class="crypto_exchanges_footer">
-                                            <a class="c-button c-button--gray" href="/list-exchange/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.exchange }) }}>
-                                                <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                            </a>
-                                        </div>
-                                    }
                                 />
                                 <BlockUsers
                                     title={Variable.lang.h.top_users}
-                                    filters={filters}
+                                    filters={Static.filters}
                                     nameRecords="MainUsers"
-                                    type={type}
+                                    type={"all"}
                                     limit={6}
-                                    button={
-                                        <a class="btn-view-all-a c-button c-button--gray" href="/users/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.top_users }) }}>
-                                            <span class="c-button__wrapper">{Variable.lang.button.show_all}</span>
-                                        </a>
-                                    }
                                 />
-                                <BlockMainNews />
+                                <div class="news_block_container">
+                                    <div class="news_block">
+                                        <div class="home_page_news">
+                                            <a class="crypto_news_link" href="/news/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news }) }}>Crypto News</a>
+                                            <div class="gradient_line"></div>
+                                        </div>
+                                        <div class="main_page_news_block">
+                                            {() => {
+                                                if (Variable.MainNews && Variable.MainNews.list_records && Variable.MainNews.list_records.length) {
+                                                    const arrReturn = Variable.MainNews.list_records.map(function (item, i) {
+                                                        return (
+                                                            <a
+                                                                class="blog_news_item"
+                                                                onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news, item: item }) }}
+                                                                href={`/news/show/${item._id}`}
+                                                            >
+                                                                <img
+                                                                    style="margin-bottom: 20px"
+                                                                    src={`/assets/upload/news/${item.image}`}
+                                                                />
+                                                                <p style="margin-bottom: 20px" class="blog_new_title ">
+                                                                    {item.title}
+                                                                </p>
+                                                                <div style="display: flex!important;" class="blog_post_stat">
+                                                                    <span>
+                                                                        <img src={svg.question_views} />
+                                                                        <span class="">{item.statistic.view + 1}</span>
+                                                                    </span>
+                                                                    <span>
+                                                                        <img src={svg.question_answers} />
+                                                                        <span class="">{item.statistic.comments}</span>
+                                                                    </span>
+                                                                    <span class="">{Helpers.getDateFormat(item.showDate)}</span>
+                                                                </div>
+                                                            </a>
+                                                        )
+                                                    })
+                                                    return arrReturn
+                                                }
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div class="button-container-preview">
+                                        <a class="btn-news-preview" href="/news/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news }) }}>
+                                            <span>
+                                                {Variable.lang.button.allNews}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
                                 <BlockInfoPartners
                                     limit={4}
                                 />

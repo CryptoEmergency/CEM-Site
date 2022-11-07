@@ -1,4 +1,11 @@
-import { jsx, jsxFrag, Variable, initReload, sendApi } from "@betarost/cemjs";
+import {
+  jsx,
+  jsxFrag,
+  Variable,
+  initReload,
+  sendApi,
+  Helpers
+} from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
 import { If, Map } from '@component/helpers/All.js';
@@ -20,7 +27,8 @@ const changeTextAnswer = (e) => {
   } else if (text.length > 2000) {
     formInputs.textAnswer.error = Variable.lang.error_div.maxSymbol;
   }
-  formInputs.textAnswer.value = wrapTextWithATag(text);
+  formInputs.textAnswer.value = Helpers.editText(text, { clear: true })
+  // wrapTextWithATag(text);
   if (formInputs.textAnswer.error === "") {
     formInputs.isValid = true;
   } else {
@@ -194,32 +202,34 @@ const ModalAnswer = function (data, reload) {
                 contenteditable="true"
                 oninput={changeTextAnswer}
               ></div>
-              <If
-                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
-                dataIf={
-                  <div class="create_post_chapter createPostImage">
-                    {
-                      formInputs.mediaInputs.value.map((item, index) => {
-                        if (item.type != "audio") {
-                          return (
-                            <MediaPreview
-                              item={item}
-                              index={index}
-                              type="answers"
-                              formInputs={formInputs}
-                            />
-                          );
-                        }
-                      })
-                    }
-                  </div>
+              {() => {
+                if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
+                  return (
+                    <div class="create_post_chapter createPostImage">
+                      {
+                        formInputs.mediaInputs.value.map((item, index) => {
+                          if (item.type != "audio") {
+                            return (
+                              <MediaPreview
+                                item={item}
+                                index={index}
+                                type="answers"
+                                formInputs={formInputs}
+                              />
+                            );
+                          }
+                        })
+                      }
+                    </div>
+                  )
                 }
-              />
-              <If
-                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length}
-                dataIf={
-                  <div class="create_post_chapter createPostAudio">
-                    {/* <Map
+              }}
+
+              {() => {
+                if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                  return (
+                    <div class="create_post_chapter createPostAudio">
+                      {/* <Map
                       data={formInputs.mediaInputs.value}
                       dataIf={(item, index) => {
                         if (item.type == "audio") {
@@ -234,23 +244,24 @@ const ModalAnswer = function (data, reload) {
                         }
                       }}
                     /> */}
-                    {
-                      formInputs.mediaInputs.value.map((item, index) => {
-                        if (item.type == "audio") {
-                          return (
-                            <MediaPreview
-                              item={item}
-                              index={index}
-                              type="answers"
-                              formInputs={formInputs}
-                            />
-                          );
-                        }
-                      })
-                    }
-                  </div>
+                      {
+                        formInputs.mediaInputs.value.map((item, index) => {
+                          if (item.type == "audio") {
+                            return (
+                              <MediaPreview
+                                item={item}
+                                index={index}
+                                type="answers"
+                                formInputs={formInputs}
+                              />
+                            );
+                          }
+                        })
+                      }
+                    </div>
+                  )
                 }
-              />
+              }}
             </div>
 
             <MediaButton

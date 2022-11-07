@@ -1,8 +1,13 @@
-import { jsx, jsxFrag, Variable } from '@betarost/cemjs';
+import {
+    jsx,
+    jsxFrag,
+    Variable,
+    Helpers
+} from '@betarost/cemjs';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
-import { getDateFormat, siteLink } from "@src/functions.js";
+import { getDateFormat } from "@src/functions.js";
 
 const NotifyItem = function ({ data, type }) {
     return (
@@ -23,7 +28,7 @@ const NotifyItem = function ({ data, type }) {
                         <If
                             data={item.url}
                             dataIf={
-                                <a onclick={siteLink} href={`/${item.url}/show/${item.urlId}`}>
+                                <a onclick={Helpers.siteLink} href={`/${item.url}/show/${item.urlId}`}>
                                     <img class="notifications_open_questions" src={iconName} />
                                     <p>{Variable.lang.notify[item.notify.name]}</p>
                                     <span><If

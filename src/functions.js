@@ -2,27 +2,16 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  getStorage,
-  setValue,
-  getValue,
-  getAction,
-  getVariable,
-  sendApi,
-  delDOM,
-  timersClear,
   parsingUrl,
-  initGo,
   initReload,
   Helpers,
 } from "@betarost/cemjs";
-import validator from "validator";
+
+const validator = Helpers.validator
+// import validator from "validator";
 import moment from "moment";
 
-import {
-  changeStatistic,
-  showVotersApi,
-  getNewsItemInShow,
-} from "@src/apiFunctions.js";
+
 
 
 const wrapTextWithATag = (text) => {
@@ -37,15 +26,6 @@ const wrapTextWithATag = (text) => {
   return res;
 };
 
-const sliceString = function (str, number = 66) {
-  let sliceStr = '';
-  if (str.length >= number) {
-    sliceStr = `${str.slice(0, number)} ...`;
-  } else {
-    sliceStr = str;
-  }
-  return sliceStr;
-};
 
 const wrapTagToText = (text) => {
   let textTag = Helpers.sanitizeHtml(text, { allowedTags: ['p'] });
@@ -62,18 +42,31 @@ const wrapTagToText = (text) => {
 const clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
-      if (!document.body.contains(item[0]())) {
+      let first, second
+      if (typeof item[0] == "function") {
+        first = item[0]()
+      } else {
+        first = item[0]
+      }
+
+      if (typeof item[1] == "function") {
+        second = item[1]()
+      } else {
+        second = item[1]
+      }
+
+      if (!document.body.contains(first)) {
         Variable.OutHideWindows.splice(index, 1);
         return;
       }
-      if (item[0]() === e.target || item[0]().contains(e.target)) {
+      if (first === e.target || first.contains(e.target)) {
       } else {
         if (item[1] && typeof item[1] == "function") {
           if (typeof item[1]() != "boolean") {
-            item[1]().hidden = true;
+            second.hidden = true;
           }
-        } else if (typeof item[1] == "string") {
-          Variable.DelModals(item[1]);
+        } else if (typeof second == "string") {
+          Variable.DelModals(second);
         }
         Variable.OutHideWindows.splice(index, 1);
       }
@@ -85,49 +78,6 @@ const timerTik = function () {
   //console.log("timerTik", "tt")
 };
 
-const getNewsItem = async function (type, count, category, mediaActveCategory) {
-  let getLang = "en";
-  let a = 6;
-  let b = 12;
-  if (getStorage("lang") == "ru") {
-    getLang = "ru";
-  }
-
-  if (type === "media") {
-    getLang = mediaActveCategory || getStorage("lang");
-  }
-
-  let data = {
-    filter: {
-      type: type,
-      "languages.code": getLang,
-    },
-    select: {
-      title: 1,
-      preview: 1,
-      image: 1,
-      showDate: 1,
-      "statistic.view": 1,
-      "statistic.comments": 1,
-    },
-    sort: {
-      showDate: -1,
-    },
-    limit: 6,
-  };
-
-  if (count > 0) {
-    data.limit = b;
-    data.offset = a + (count - 1) * b;
-  }
-
-  if (category && category != "All") {
-    data.filter["category.name"] = category;
-  }
-
-  var response = checkAnswerApi(await sendApi.create("getNews", data));
-  return response;
-};
 
 const getDateFormat = function (data, type) {
   // const lang = getVariable("languages")[getStorage("lang")];
@@ -148,20 +98,6 @@ const getDateFormat = function (data, type) {
     default:
       return moment(data).format("YYYY-MM-DD");
   }
-};
-
-const siteLink = function (e) {
-  e.preventDefault();
-  let link = this.href;
-  history.pushState(null, null, link);
-  // timersClear();
-  window.scrollTo({
-    top: 0,
-    // behavior: "smooth",
-    behavior: "instant",
-  });
-  parsingUrl();
-  //getAction("App", "start")();
 };
 
 const checkAnswerApi = function (data) {
@@ -223,57 +159,9 @@ const allValidation = (str, type, condition) => {
   }
 };
 
-const changeActiveCommentsInput = (id) => {
-  Variable.Static.activeCommentsInput = id;
-  Variable.Static.showMainInput = false;
-  initReload();
-};
 
 let sec = 0;
 let interval;
-const showVotersAndchangeStatistic = async (e, id, typeGet, typeSet, mainId, commentId, callBack) => {
-  e.preventDefault();
-  let type = e.target.dataset.name;
-  if (e.type === "mousedown" || e.type === "touchstart") {
-    interval = setInterval(async () => {
-      sec = sec + 100;
-      if (sec === 1000) {
-        clearInterval(interval);
-        sec = 0;
-        let response = await showVotersApi(id, typeGet);
-        if (response !== undefined) {
-          response = response.list_records[0].evaluation.filter(
-            (item) => item.type === type
-          );
-          Variable.SetModals(
-            { name: "ModalWhoLike", data: { response } },
-            true
-          );
-        }
-      }
-    }, 100);
-  } else {
-    clearInterval(interval);
-    if (sec < 1000) {
-      await changeStatistic(e, id, typeSet, mainId, commentId);
-      if (typeof callBack == "function") {
-        callBack();
-      }
-      // if (Variable.dataUrl.params === undefined) {
-      //   await renderModalFullNews();
-      // }
-    }
-    if (700 <= sec && sec < 1000) {
-      let response = await showVotersApi(id, typeGet);
-      response = response.list_records[0].evaluation.filter(
-        (item) => item.type === type
-      );
-
-      Variable.SetModals({ name: "ModalWhoLike", data: { response } }, true);
-    }
-    sec = 0;
-  }
-};
 
 function isEmpty(obj) {
   for (let key in obj) {
@@ -281,72 +169,6 @@ function isEmpty(obj) {
   }
   return true;
 }
-
-const changeNewsCategory = async (e, type, init) => {
-  const ID = "mainBlock";
-  // e.target.closest('.tags').childNodes.forEach(function(child) {
-  //   child.classList.remove('tag_button_active');
-  // });
-  // e.currentTarget.classList.add('tag_button_active');
-  let typeCategory = e.currentTarget.dataset.name;
-  setValue(ID, "activeCategory", typeCategory);
-  let data = {
-    select: {
-      title: 1,
-      preview: 1,
-      image: 1,
-      showDate: 1,
-      "statistic.view": 1,
-      "statistic.comments": 1,
-    },
-    sort: {
-      showDate: -1,
-    },
-    limit: 6,
-  };
-  let response;
-  if (type === "media") {
-    if (typeCategory !== "en") {
-      setValue(ID, `${type}Item`, await getNewsItem(type));
-    } else {
-      data.filter = {
-        "languages.code": "en",
-        type: type,
-      };
-      response = checkAnswerApi(await sendApi.create("getNews", data));
-      setValue(ID, `${type}Item`, response);
-    }
-  } else {
-    if (typeCategory === "All") {
-      setValue(ID, `${type}Item`, await getNewsItem("news"));
-    } else {
-      let getLang = "en";
-      if (getStorage("lang") == "ru") {
-        getLang = "ru";
-      }
-      data.filter = {
-        type,
-        "languages.code": getLang,
-        "category.name": typeCategory,
-      };
-
-      response = checkAnswerApi(await sendApi.create("getNews", data));
-      setValue(ID, `${type}Item`, response);
-    }
-  }
-  //init(true);
-};
-
-const ifHaveMedia = function (mediaArr, type, whatReturn) {
-  if (mediaArr === null) {
-    return "";
-  }
-  var media = mediaArr.filter((tmp) => tmp.type == type);
-  if (media.length == 0) {
-    return "";
-  }
-  return whatReturn;
-};
 
 
 const uploadMedia = function (file, type, onload, onprogress, xhr) {
@@ -379,20 +201,13 @@ const checkValid = function (Static, Array) {
 
 
 export {
-  sliceString,
   wrapTextWithATag,
   isEmpty,
-  showVotersAndchangeStatistic,
-  changeActiveCommentsInput,
-  changeNewsCategory,
   getDateFormat,
-  getNewsItem,
-  siteLink,
   timerTik,
   clickHide,
   checkAnswerApi,
   allValidation,
-  ifHaveMedia,
   uploadMedia,
   wrapTagToText,
   validator,

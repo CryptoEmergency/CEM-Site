@@ -8,49 +8,12 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { allValidation, checkValid, validator } from "@src/functions.js";
-import { checkNickName } from "@src/apiFunctionsE.js";
+import { checkValid, validator } from "@src/functions.js";
+
 import { Input } from '@component/element/index.js';
 let formInputs;
 
 
-const changeInput = async (e) => {
-  let response;
-  let type = e.target.dataset.validate_type;
-  let value = e.target.value.trim();
-  formInputs[type].error = "";
-  formInputs[type].value = value;
-
-  if (formInputs[type].value.length > 2 && formInputs[type].value.length < 17) {
-    if (!allValidation(value, type)) {
-      formInputs[type].error = Variable.lang.error_div.nicknameErr4;
-    } else {
-      response = await checkNickName(value);
-      if (response > 0) {
-        formInputs[type].error = Variable.lang.error_div.nicknameErr11;
-      }
-    }
-  } else {
-    formInputs[type].error = Variable.lang.error_div.nicknameErr3;
-  }
-
-  if (formInputs[type].value.length === 0) {
-    formInputs[type].error = Variable.lang.error_div.nicknameErr;
-  }
-
-  if (formInputs[type].error === "") {
-    formInputs[type].valid = true;
-  } else {
-    formInputs[type].valid = false;
-  }
-
-  if (formInputs.country.valid && formInputs.language.valid && formInputs.nickName.valid) {
-    formInputs.isValid = true
-  } else {
-    formInputs.isValid = false;
-  }
-  initReload("modals")
-};
 let Static = {}
 
 let test = {}

@@ -1,11 +1,11 @@
 import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
-
+import { Input } from '@component/element/index.js';
 //"alarm_icon" : "confirm_icon"
 
 
 let inputValue, allLang;
-
+let Static = {}
 
 
 const changeInput = (e) => {
@@ -20,7 +20,12 @@ const changeInput = (e) => {
 const ModalChangeLanguage = function (data, reload) {
 
   allLang = Variable.listsLang;
+  Static.Language = {
+    value :"",
+    oninput:()=>{
 
+    } 
+  }
   return (
     <div class="c-modal c-modal--open" id="changeLanguage">
       <section class="c-modal__dialog">
@@ -35,6 +40,7 @@ const ModalChangeLanguage = function (data, reload) {
           ></button>
         </header>
         <div class="c-modal__body">
+          
           <input data-language=""
             id="changeLanguageInput"
             type="text"

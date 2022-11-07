@@ -29,22 +29,22 @@ const start = function (data, ID = "mainBlock") {
         {
           title: "Crypto Emergency",
           description:
-           "atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expeditan distinctio! blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expeditan distinctio!",
+            "atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expeditan distinctio! blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expeditan distinctio!",
           type: "profession",
           img: svg["logo"],
-          stock:[
-           {
-            text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-            promo:"Promo1"
-           }, 
-           {
-            text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-            promo:"Promo2"
-           }, 
-           {
-            text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-            promo:"Promo3"
-           }, 
+          stock: [
+            {
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo1"
+            },
+            {
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo2"
+            },
+            {
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo3"
+            },
           ]
         },
         {
@@ -53,20 +53,20 @@ const start = function (data, ID = "mainBlock") {
             "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
           type: "language",
           img: images["banners/crypto_summit"],
-          stock:[
+          stock: [
             {
-             text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-             promo:"Promo1"
-            }, 
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo1"
+            },
             {
-             text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-             promo:"Promo2"
-            }, 
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo2"
+            },
             {
-             text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-             promo:"Promo3"
-            }, 
-           ]
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo3"
+            },
+          ]
         },
         {
           title: "Blockchain24.pro",
@@ -74,20 +74,20 @@ const start = function (data, ID = "mainBlock") {
             "Ведущий информационный портал о криптовалютах и технологиях blockchain",
           type: "education",
           img: images["banners/blockchain24"],
-          stock:[
+          stock: [
             {
-             text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-             promo:"Promo1"
-            }, 
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo1"
+            },
             {
-             text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-             promo:"Promo2"
-            }, 
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo2"
+            },
             {
-             text:"At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
-             promo:"Promo3"
-            }, 
-           ]
+              text: "At vero eos et accusamus et iusto odio dignissimos ducimus, blanditiis praesentium voluptatum deleniti atque corrupti, quos doloreset quas molestias excepturi sint, obcaecati cupiditate non provident,",
+              promo: "Promo3"
+            },
+          ]
         },
       ];
 
@@ -107,9 +107,8 @@ const start = function (data, ID = "mainBlock") {
 
       return (
         <div
-          class={`${
-            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-          } c-aboutus about_us_container`}
+          class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+            } c-aboutus about_us_container`}
         >
           <div class="c-university__container c-container">
             <h1 class="c-university__title" style={"padding-top: 10vw"}
@@ -221,23 +220,23 @@ const start = function (data, ID = "mainBlock") {
                       <h5 class="c-universitycard__title">{item.title}</h5>
                       <p class="c-universitycard__text">{item.description}</p>
                       {/* <button class="c-universitycard__btn">Подробнее</button> */}
-                      
+
                       {/* <div class="c-question__footer"   style={"width:25vw"} > */}
-                        <a
-                          class="c-universitycard__btn c-button c-button--outline2 "
-                          onclick={() => {
-                            Variable.SetModals({
-                              name: "ModalFullSize",
-                              data: {
-                                item, type: "university"
-                              },
-                            });
-                          }}
-                        >
-                          <div class="c-button__wrapper">
-                            Подробнее
-                          </div>
-                        </a>
+                      <a
+                        class="c-universitycard__btn c-button c-button--outline2 "
+                        onclick={() => {
+                          // Variable.SetModals({
+                          //   name: "ModalFullSize",
+                          //   data: {
+                          //     item, type: "university"
+                          //   },
+                          // });
+                        }}
+                      >
+                        <div class="c-button__wrapper">
+                          Подробнее
+                        </div>
+                      </a>
                       {/* </div> */}
                     </div>
                   </li>

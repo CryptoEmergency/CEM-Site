@@ -3,21 +3,14 @@ import {
     jsxFrag,
     init,
     initReload,
-    Variable,
-    sendApi
+    Variable
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-import { checkAnswerApi } from '@src/functions.js'
-
-import { If } from '@component/helpers/All.js';
-import { Select } from '@component/element/Select.js';
+import { api } from '@src/apiFunctions.js'
 
 const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-
     let ticketNumber
 
     let buttonContainer = Variable.setRef()
@@ -47,8 +40,9 @@ const start = function () {
         // let htmlData = getFirstData()
         // htmlData.ticketNumber = res.ticketNumber
         // $('.lottery_data').html(await partialsHtml('ticket', htmlData))
-        let response = checkAnswerApi(await sendApi.create("setLottery", { value: value }));
-        ticketNumber = response.list_records[0].ticketNumber
+        let response = await api({ type: "set", action: "setLottery", short: true, data: { value: value }})
+        console.log(response)
+        ticketNumber = response.result.list_records[0].ticketNumber
         initReload()
     }
 
@@ -105,9 +99,12 @@ const start = function () {
 
     init(
         async () => {
-            let response = checkAnswerApi(await sendApi.create("getLottery", { filter: { nickname: Variable.myInfo.nickname } }));
-            // console.log('response', response)
-            if (response.totalFound != 0) {
+            let response = null
+            if(Variable.auth && Variable.myInfo){
+                response = await api({ type: "get", action: "getLottery", short: true, cache: true, limit: 1, filter: { nickname: Variable.myInfo.nickname }})
+            }
+            console.log('response', response, Variable.myInfo.nickname)
+            if (response && response.totalFound != 0) {
                 ticketNumber = response.list_records[0].ticketNumber
             } else {
                 ticketNumber = false
@@ -124,77 +121,77 @@ const start = function () {
         () => {
             // console.log("Second Init ", questions)
             return (
-                <div class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"}`}>
+                <div class="c-main__body">
                     <div class="page-content">
                         <div class="lottery_block">
-                            <h1>«Word of Mouth» lottery</h1>
-                            <h2>WIN the CEM</h2>
-                            <p>Do the simplest actions to get a lucky lottery ticket!</p>
+                            <h1>{Variable.lang.h.lottery}</h1>
+                            <h2>{Variable.lang.h.lotterySubtitle}</h2>
+                            <p>{Variable.lang.p.lotteryActions}</p>
                             <div class="lottery_steps_list">
                                 <div class="lottery_steps_item">
                                     <img src={svg['lottery_step1']} />
-                                    <p>Invite your friends to increase Prize Pool.</p>
+                                    <p>{Variable.lang.p.lotteryAction1}</p>
                                 </div>
                                 <div class="lottery_steps_item">
                                     <img src={svg['lottery_step2']} />
-                                    <p>Every registered user = 1 CEM additionally to 1000 CEM Prize Pool</p>
+                                    <p>{Variable.lang.p.lotteryAction2}</p>
                                 </div>
                                 <div class="lottery_steps_item">
                                     <img src={svg['lottery_step3']} />
-                                    <p>5 winners will share the Prize Pool!</p>
+                                    <p>{Variable.lang.p.lotteryAction3}</p>
                                 </div>
                             </div>
-                            <p>Give a word of mouth to your friends as every user registered in the lottery will add 1CEM into a 1000CEM Prize Pool. 5 winners will share the Prize Pool!</p>
-                            <p>Dates of Lottery:</p>
+                            <p>{Variable.lang.p.lotteryAnnounce}</p>
+                            <p>{Variable.lang.p.lotteryDates}</p>
                             <div class="lottery_main">
                                 <div class="lottery_data">
-                                    { }
-                                    <If
-                                        data={ticketNumber}
-                                        dataIf={
-                                            <div class="ticket_container">
-                                                <div class="ticket">
-                                                    <p>Job done, get your ticket!</p>
-                                                    <div class="ticket_number"><span>{ticketNumber}</span></div>
+                                    {()=> {
+                                        if(ticketNumber){
+                                            return(
+                                                <div class="ticket_container">
+                                                    <div class="ticket">
+                                                        <p>{Variable.lang.p.lotteryTicket}</p>
+                                                        <div class="ticket_number"><span>{ticketNumber}</span></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }
-                                        dataElse={
+                                            )
+                                        } else {
+                                            return(
                                             <div>
                                                 <form class="lottery_form" onsubmit={SendLotteryForm} >
-                                                    <p>To get lottery ticket:</p>
+                                                    <p>{Variable.lang.p.getTicket}</p>
                                                     <div ref={nickname} class={Variable.auth ? 'lottery_check lottery_check_valid' : 'lottery_check'}>
-                                                        <p>1. Register at Crypto-emergency.com.</p>
+                                                        <p>1. {Variable.lang.p.lotteryQuest1}</p>
                                                         <input type="text" name="nickname" placeholder="Nickname" readonly value={Variable.auth ? Variable.myInfo.nickname : ''} />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={email} data-name="email" class="lottery_check">
-                                                        <p>2. Enter your Email</p>
+                                                        <p>2. {Variable.lang.p.lotteryQuest2}</p>
                                                         <input onkeyup={lotteryValidCheckKeyup} type="text" name="email" placeholder="Email" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={telegram} data-name="telegram" class="lottery_check">
-                                                        <p>3. Join our Telegram group and inform us your @nickname below.</p>
+                                                        <p>3. {Variable.lang.p.lotteryQuest3}</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/emergencycrypto">https://t.me/emergencycrypto</a></p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/cryptoemergencychat">https://t.me/cryptoemergencychat</a></p>
                                                         <input onkeyup={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={twitter} data-name="twitter" class="lottery_check">
-                                                        <p>4. Retweet post and give us a link</p>
+                                                        <p>4. {Variable.lang.p.lotteryQuest4}</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://twitter.com/cryptoemergency">https://twitter.com/cryptoemergency</a></p>
                                                         <input onkeyup={lotteryValidCheckKeyup} type="text" name="twitter" placeholder="Twitter" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={instagram} data-name="instagram" class="lottery_check">
-                                                        <p>5. Make an Instagram post and give us a link</p>
+                                                        <p>5. {Variable.lang.p.lotteryQuest5}</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/cryptoemergency/">https://www.instagram.com/cryptoemergency/</a></p>
                                                         <input onkeyup={lotteryValidCheckKeyup} type="text" name="instagram" placeholder="Instagram" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={quiz} data-name="quiz" class="lottery_check">
-                                                        <p>6. Answer a shortest quiz.</p>
-                                                        <label for="">How many CEMD do everyone get for registration in Crypto Emergency?</label>
+                                                        <p>6. {Variable.lang.p.lotteryQuest6}</p>
+                                                        <label for="">{Variable.lang.p.lotteryQuiz}</label>
                                                         <div class="lottery_quiz_container">
                                                             <div onclick={lotteryQuiz} class="lottery_quiz_button">
                                                                 5
@@ -213,11 +210,12 @@ const start = function () {
                                                     </div>
                                                 </form>
                                             </div>
+                                            )
                                         }
-                                    />
+                                    }}
                                 </div>
                                 <div>
-                                    <p class="lottery_post_banner_text">Download banner:</p>
+                                    <p class="lottery_post_banner_text">{Variable.lang.p.lotteryBanner}</p>
                                     <img class="lottery_post_banner" src={images['lottery_post_banner_en']} />
                                 </div>
                             </div>

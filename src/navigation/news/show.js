@@ -5,10 +5,10 @@ import {
   Variable,
 } from "@betarost/cemjs";
 // poydet
-import { BlockNewsShow } from '@component/blocks/index.js';
+import { BlockShowNews } from '@component/blocks/index.js';
 import { api } from '@src/apiFunctions.js'
 
-const start = function (data, ID = "mainBlock") {
+const start = function (data, ID) {
   let item;
   init(
     async () => {
@@ -25,7 +25,7 @@ const start = function (data, ID = "mainBlock") {
           <div class="full_news_container">
             <div class="full_news_block">
               <div class="full_news_content">
-                <BlockNewsShow
+                <BlockShowNews
                   item={item}
                   type={"news"}
                 />

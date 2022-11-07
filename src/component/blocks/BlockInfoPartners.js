@@ -4,7 +4,7 @@ import {
     Variable,
     Helpers
 } from '@betarost/cemjs';
-// poydet
+// check
 import images from "@assets/images/index.js";
 
 // Сделать запрос через Базу

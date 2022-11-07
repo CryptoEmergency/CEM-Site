@@ -5,8 +5,8 @@ import {
     init,
     Helpers,
 } from "@betarost/cemjs";
-// poydet
-const start = function (data, ID = "mainBlock") {
+// check
+const start = function (data, ID) {
     init(
         null,
         () => {

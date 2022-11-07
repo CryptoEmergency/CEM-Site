@@ -2,8 +2,7 @@ import {
     jsx,
     jsxFrag,
 } from '@betarost/cemjs';
-// poydet
-import svg from "@assets/svg/index.js";
+// check
 import images from "@assets/images/index.js";
 import { Swiper } from '@component/element/index.js';
 

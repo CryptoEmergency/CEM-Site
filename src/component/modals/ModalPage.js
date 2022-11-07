@@ -18,16 +18,12 @@ import svg from "@assets/svg/index.js";
 
 import { If } from "@component/helpers/All.js";
 import { getDateFormat } from "@src/functions.js";
-import { BlockUserComment } from "@src/component/blocks/user/BlockUserComment.js";
-import { CommentInput } from "@src/component/element/CommentInput.js";
-import { getNewsItemInShow } from "@src/apiFunctions.js";
 import { BottomMenu } from '@component/element/BottomMenu.js';
-import { AnswerAdditionallyToggleNew } from '@component/element/index.js'
+import { ItemsMenu } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
   let data = Variable.ModalsPage[ID].data
-  // console.log('=c1d88c=2 ModalPage', ID, reload)
   // let mainId = item._id;
 
   initAfter(
@@ -42,10 +38,7 @@ const ModalPage = async function (ID, reload) {
   if (!reload && getInitList()[ID].firstStart) {
     await getInitList()[ID].firstStart(reload)
   }
-  // news =  getNewsItemInShow(item._id);
-  // console.log('=c0791d=',news)
-  // news = news.list_records[0];
-  //  news = item
+
   return (
     <div
       class="c-modal c-modal--open c-modal--fullscreen c-modal--menu"
@@ -73,9 +66,11 @@ const ModalPage = async function (ID, reload) {
 
                     <h5 class="c-fullnews__title">{data.title}</h5>
 
-                    <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
+                    <ItemsMenu
+                    />
+                    {/* <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
                       <img class="answer_additionally_toggle_img" src={svg["points"]} />
-                    </div>
+                    </div> */}
                     {/* <AnswerAdditionallyToggle
                     item={item}
                     typeApi={"setPost"}

@@ -5128,6 +5128,15 @@ s
 	}
 }
 
+/* modal #ModalWhoLike (модалка кто оценил) */
+#ModalWhoLike {
+	.c-modal {
+		&__body {
+			padding-bottom: 20px;
+		}
+	}
+}
+
 @media(max-width: 1240px) {
 	.go_back_icon {
 		width: 7px !important;

@@ -11,28 +11,30 @@ import svg from '@assets/svg/index.js';
 import {
     Avatar,
     Evaluation,
-    Likes,
-    CommentInput,
     TextArea,
-    AnswerAdditionallyToggleNew,
-    ButtonSend
+    ButtonSubmit
 } from "@component/element/index.js";
 
 import { api } from '@src/apiFunctions.js'
 
 
 
-const Comment = function ({ item, include, mainId, action, quoteId }) {
+const Comment = function ({ item, include, mainId, action, quoteId, mainItem }) {
 
     let Static = Variable.State(item._id)
 
-    initOne(() => {
+    if (!Static.secondComment) {
         Static.secondComment = {
             rows: 1,
             adaptive: 4,
         }
-    })
-    console.log('=13a692=', item._id, Static.secondComment)
+    }
+    // initOne(() => {
+    //     Static.secondComment = {
+    //         rows: 1,
+    //         adaptive: 4,
+    //     }
+    // })
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -63,7 +65,7 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         }
                     }}
                     callBackAfter={async (type) => {
-                        let response = await api({ type: "get", action: "getComments", filter: { _id: item._id, }, select: { evaluation: 1, } })
+                        let response = await api({ type: "get", action: "getComments", filter: { _id: item._id }, select: { evaluation: 1, } })
                         let whoLike = []
                         if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
                             whoLike = response.result.list_records[0].evaluation.filter(
@@ -79,7 +81,9 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                             <span
                                 class="c-actioncomment__answer"
                                 onclick={() => {
-                                    Static.secondComment.elShowInput.style = "display:flex;"
+                                    if (Static.secondComment.elShowInput) {
+                                        Static.secondComment.elShowInput.style = "display:flex;"
+                                    }
                                     return
                                 }}
                             >
@@ -114,10 +118,10 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         className="text1 create_post_chapter"
                     />
                 </div>
-                <ButtonSend
+                <ButtonSubmit
                     text={<img class="c-comments__icon" src={svg["send_message"]} />}
                     className="c-comments__send button-container-preview comments_send"
-                    onclick={async (el) => {
+                    onclick={async (tmp, el) => {
                         if (!Static.secondComment.el.value.trim().length) {
                             return
                         }
@@ -132,7 +136,6 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         }
 
                         let response = await api({ type: "set", action: action, data: data })
-                        console.log('=abf729=', action, data, response)
                         if (response.status === "ok") {
                             Static.secondComment.el.value = ""
                             if (Static.adaptive) {
@@ -140,7 +143,12 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                             }
                             if (response.result && response.result.list_records && response.result.list_records[0]) {
                                 let newRes = response.result.list_records[0]
-                                item.comments.unshift(newRes)
+                                if (include) {
+                                    mainItem.comments.unshift(newRes)
+                                } else {
+                                    item.comments.unshift(newRes)
+                                }
+
                                 initReload();
                             }
                         } else {
@@ -155,6 +163,7 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         return (
                             <Comment
                                 item={itemIn}
+                                mainItem={item}
                                 mainId={mainId}
                                 quoteId={item._id}
                                 include={true}
