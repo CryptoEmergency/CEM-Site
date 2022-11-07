@@ -157,11 +157,7 @@ const ModalConfirmCode = function ({ way }) {
                     <div class="reset_password">
                         <div class="reset_password_step2">
                             <p>
-                                <If
-                                    data={way == "email"}
-                                    dataIf={Variable.lang.text.confirmEmail}
-                                    dataElse={Variable.lang.text.confirmPhone}
-                                />
+                                {way == "email" ? Variable.lang.text.confirmEmail : Variable.lang.text.confirmPhone}
                             </p>
                             <div class="reset_password_input_block">
                                 <form id="resetPassword2" data-button_id="reset_next_step-2">
@@ -177,22 +173,24 @@ const ModalConfirmCode = function ({ way }) {
                                     })}
                                 </form>
                             </div>
-                            <If
-                                data={time > 0}
-                                dataIf={
-                                    <div class="reset_timer_block">
-                                        {Variable.lang.text.timeCode}
-                                        <div class="reset_timer">{time < 10 ? `0:0${time}` : `0:${time}`}</div>
-                                    </div>
+                            {() => {
+                                if (time > 0) {
+                                    return (
+                                        <div class="reset_timer_block">
+                                            {Variable.lang.text.timeCode}
+                                            <div class="reset_timer">{time < 10 ? `0:0${time}` : `0:${time}`}</div>
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <a class="reset_timer_success"
+                                            onclick={resetTimer}
+                                        >
+                                            {Variable.lang.a.newCodeConfirm}
+                                        </a>
+                                    )
                                 }
-                                dataElse={
-                                    <a class="reset_timer_success"
-                                        onclick={resetTimer}
-                                    >
-                                        {Variable.lang.a.newCodeConfirm}
-                                    </a>
-                                }
-                            />
+                            }}
                         </div>
                     </div>
                 </div>
@@ -200,5 +198,4 @@ const ModalConfirmCode = function ({ way }) {
         </div>
     );
 };
-
 export default ModalConfirmCode;

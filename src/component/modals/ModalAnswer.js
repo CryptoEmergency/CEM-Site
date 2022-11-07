@@ -202,32 +202,34 @@ const ModalAnswer = function (data, reload) {
                 contenteditable="true"
                 oninput={changeTextAnswer}
               ></div>
-              <If
-                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
-                dataIf={
-                  <div class="create_post_chapter createPostImage">
-                    {
-                      formInputs.mediaInputs.value.map((item, index) => {
-                        if (item.type != "audio") {
-                          return (
-                            <MediaPreview
-                              item={item}
-                              index={index}
-                              type="answers"
-                              formInputs={formInputs}
-                            />
-                          );
-                        }
-                      })
-                    }
-                  </div>
+              {() => {
+                if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
+                  return (
+                    <div class="create_post_chapter createPostImage">
+                      {
+                        formInputs.mediaInputs.value.map((item, index) => {
+                          if (item.type != "audio") {
+                            return (
+                              <MediaPreview
+                                item={item}
+                                index={index}
+                                type="answers"
+                                formInputs={formInputs}
+                              />
+                            );
+                          }
+                        })
+                      }
+                    </div>
+                  )
                 }
-              />
-              <If
-                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length}
-                dataIf={
-                  <div class="create_post_chapter createPostAudio">
-                    {/* <Map
+              }}
+
+              {() => {
+                if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                  return (
+                    <div class="create_post_chapter createPostAudio">
+                      {/* <Map
                       data={formInputs.mediaInputs.value}
                       dataIf={(item, index) => {
                         if (item.type == "audio") {
@@ -242,23 +244,24 @@ const ModalAnswer = function (data, reload) {
                         }
                       }}
                     /> */}
-                    {
-                      formInputs.mediaInputs.value.map((item, index) => {
-                        if (item.type == "audio") {
-                          return (
-                            <MediaPreview
-                              item={item}
-                              index={index}
-                              type="answers"
-                              formInputs={formInputs}
-                            />
-                          );
-                        }
-                      })
-                    }
-                  </div>
+                      {
+                        formInputs.mediaInputs.value.map((item, index) => {
+                          if (item.type == "audio") {
+                            return (
+                              <MediaPreview
+                                item={item}
+                                index={index}
+                                type="answers"
+                                formInputs={formInputs}
+                              />
+                            );
+                          }
+                        })
+                      }
+                    </div>
+                  )
                 }
-              />
+              }}
             </div>
 
             <MediaButton

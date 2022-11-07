@@ -282,61 +282,68 @@ const ModalAskQuestion = function (data, reload) {
                     value={formInputs.question.value}
                   />
                   {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
-                  <If
-                    data={formInputs.textQuestion.show}
-                    dataIf={<div
-                      contenteditable="true"
-                      oninput={changeTextQuestion}
-                      class="c-form__field create_post_chapter create_post_main_text"
-                    ></div>}
-                    dataElse={<></>}
-                  />
-                  <If
-                    data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
-                    dataIf={
-                      <div class="create_post_chapter createPostImage">
-                        {
-                          formInputs.mediaInputs.value.map(
-                            (item, index) => {
-                              if (item.type != "audio") {
-                                return (
-                                  <MediaPreview
-                                    item={item}
-                                    index={index}
-                                    type="question"
-                                    formInputs={formInputs}
-                                  />
-                                );
-                              }
-                            }
-                          )
-                        }
-                      </div>
+                  {() => {
+                    if (formInputs.textQuestion.show) {
+                      return (
+                        <div
+                          contenteditable="true"
+                          oninput={changeTextQuestion}
+                          class="c-form__field create_post_chapter create_post_main_text"
+                        ></div>
+                      )
                     }
-                  />
-                  <If
-                    data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length}
-                    dataIf={
-                      <div class="create_post_chapter createPostAudio">
-                        {
-                          formInputs.mediaInputs.value.map(
-                            (item, index) => {
-                              if (item.type == "audio") {
-                                return (
-                                  <MediaPreview
-                                    item={item}
-                                    index={index}
-                                    type="question"
-                                    formInputs={formInputs}
-                                  />
-                                );
+                  }}
+
+                  {() => {
+                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
+                      return (
+                        <div class="create_post_chapter createPostImage">
+                          {
+                            formInputs.mediaInputs.value.map(
+                              (item, index) => {
+                                if (item.type != "audio") {
+                                  return (
+                                    <MediaPreview
+                                      item={item}
+                                      index={index}
+                                      type="question"
+                                      formInputs={formInputs}
+                                    />
+                                  );
+                                }
                               }
-                            }
-                          )
-                        }
-                      </div>
+                            )
+                          }
+                        </div>
+                      )
                     }
-                  />
+                  }}
+
+                  {() => {
+                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                      return (
+                        <div class="create_post_chapter createPostAudio">
+                          {
+                            formInputs.mediaInputs.value.map(
+                              (item, index) => {
+                                if (item.type == "audio") {
+                                  return (
+                                    <MediaPreview
+                                      item={item}
+                                      index={index}
+                                      type="question"
+                                      formInputs={formInputs}
+                                    />
+                                  );
+                                }
+                              }
+                            )
+                          }
+                        </div>
+                      )
+                    }
+                  }}
+
                 </div>
               </div>
               {/* <div class="c-askquestion__controls create_post_control_block"> */}
