@@ -3142,6 +3142,11 @@ span#procent::after {
   position: relative;
 }
 
+.your_answers_table_item .c-avataricon__name {
+  top: 10px !important;
+	left: 53px !important;
+}
+
 .your_answers_table_item:first-child {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -6111,7 +6116,7 @@ span#procent::after {
 }
 
 .question_text p {
-  height: 24px;
+  /* height: 24px; */
 }
 
 .answer_tags {
