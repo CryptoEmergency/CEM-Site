@@ -22,6 +22,20 @@ BlockUserProfilePage.aboutUser = function (data) {
     return (
         <div class="bl_one c-container" id="UserInfoAbout">
             <h2>{Variable.lang.h.personalInfo}</h2>
+            <ItemsMenu
+                author={data.userInfo}
+                items={
+                    [
+                        {
+                            text: Variable.lang.button.edit,
+                            type: "edit",
+                            onclick: async () => {
+                                console.log('=7e4dce=', "gggg")
+                            }
+                        }
+                    ]
+                }
+            />
             <div class="about_user">
                 <div class="about_user_section-1 about_user_section-row_type-2">
                     <div class="about_user_section-row_type-3">
@@ -71,27 +85,7 @@ BlockUserProfilePage.aboutUser = function (data) {
                                                 <div><input type="date" class="userinfoinput" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
                                             </div>
                                         </div>
-                                        <ItemsMenu
-                                            author={data.userInfo}
-                                            items={
-                                                [
-                                                    {
-                                                        text: Variable.lang.button.edit,
-                                                        type: "edit",
-                                                        onclick: async () => {
-                                                            console.log('=7e4dce=', "gggg")
-                                                            // Переработать модалку
-                                                            // Variable.SetModals(
-                                                            //   {
-                                                            //     name: "ModalBlackList",
-                                                            //     data: { id: item.author._id, type: "перебрать" },
-                                                            //   }, true
-                                                            // );
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        />
+
                                         <div class="about_user_section_points_container">
                                             <img class="about_user_section_points" src={svg['points']} />
                                             <div class="about_user_section_points_menu">
