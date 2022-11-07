@@ -139,7 +139,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
       <div
         class={`c-avataricon ${parent == "big_user_avatar"
           ? ""
-          : "c-avataricon--micro micro_user_avatar"
+          : "c-avataricon--micro"
           }`}
       >
         <img

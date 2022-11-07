@@ -72,7 +72,10 @@
 		"withdrawal": "to display",
 		"join": "to join",
         "pre_view": "Preview",
-        "allPartners": "All partners"
+        "allPartners": "All partners",
+        
+		"resetCrop": "Cancel",
+		"reset": "Cancellation"
     },
     "h": {
         "success": "Successfully!",
