@@ -35,9 +35,28 @@ const start = function (data, ID) {
         author: null,
       };
 
-      await api({ type: "get", action: "getPost", short: true, cache: true, name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, Static.lentaPage) })
 
-      console.log('=5da7c6=', Variable.PageLentaall)
+      Static.filters = {
+        posts: {
+          value: "all",
+        },
+      };
+
+      Static.optionsSelect = {
+        posts: {
+          nameOptions: "posts",
+          items: [
+            { text: Variable.lang.span.userNews, value: "all" },
+            { text: Variable.lang.h.posts_friends, value: "friends" },
+          ],
+          open: false,
+          active: Static.filters.posts.value,
+        },
+      };
+
+
+
+      await api({ type: "get", action: "getPost", short: true, cache: true, name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
 
       // Variable.PageLentaall = await sendApi.send({
       //   action: "getPost",
@@ -45,7 +64,7 @@ const start = function (data, ID) {
       //   cache: true,
       //   name: "PageLentaall",
       //   limit: 15,
-      //   filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "all"),
+      //   filter: Helpers.getFilterLenta(Static.lentaFilters, "all"),
       // });
 
 
@@ -81,41 +100,34 @@ const start = function (data, ID) {
                       "c-questions__filter",
                       "c-questions__filter--openmobile",
                       "questions_filter",
-                      Static.showFilter ? "c-questions__filter--openmobile" : null,
+                      // Static.showFilter ? "c-questions__filter--openmobile" : null,
                     ]}
                   >
                     <Select
-                      options={optionsSelect.posts}
+                      options={Static.optionsSelect.posts}
                       callback={async function (active, nameOptions) {
-                        filters[nameOptions].value = active;
-                        Variable.Static.lentaFilters.author =
-                          filters[nameOptions].value === "friends"
+                        Static.filters[nameOptions].value = active;
+                        Static.lentaFilters.author =
+                          Static.filters[nameOptions].value === "friends"
                             ? {
                               $in: Variable.myInfo.subscribed,
                             }
                             : null;
 
-                        Variable[`PageLenta${Variable.Static.lentaPage}`] =
+                        Variable[`PageLenta${Static.lentaPage}`] =
                           await sendApi.send({
                             action: "getPost",
                             short: true,
                             limit: 15,
                             filter: Helpers.getFilterLenta(
-                              Variable.Static.lentaFilters,
-                              Variable.Static.lentaPage
+                              Static.lentaFilters,
+                              Static.lentaPage
                             ),
                           });
                       }}
                     />
                   </div>
                   <div style="display: flex; grid-gap: 20px">
-                    {/* <div class="news_category_filter">
-                      <img src={svg["filter"]}
-                        onClick={() => {
-                          showFilter = !showFilter;
-                          initReload();
-                        }} />
-                    </div> */}
                     <div
                       class="alt_language_change"
                       onclick={() => {
@@ -123,18 +135,18 @@ const start = function (data, ID) {
                           name: "ModalChangeLanguage",
                           data: {
                             onclick: async (langCode, langName, langOrig) => {
-                              Variable.Static.lentaFilters.langName = langOrig;
-                              Variable.Static.lentaFilters.lang = langCode;
+                              Static.lentaFilters.langName = langOrig;
+                              Static.lentaFilters.lang = langCode;
 
                               Variable[
-                                `PageLenta${Variable.Static.lentaPage}`
+                                `PageLenta${Static.lentaPage}`
                               ] = await sendApi.send({
                                 action: "getPost",
                                 short: true,
                                 limit: 15,
                                 filter: Helpers.getFilterLenta(
-                                  Variable.Static.lentaFilters,
-                                  Variable.Static.lentaPage
+                                  Static.lentaFilters,
+                                  Static.lentaPage
                                 ),
                               });
                             },
@@ -142,159 +154,86 @@ const start = function (data, ID) {
                         });
                       }}
                     >
-                      {Variable.Static.lentaFilters.langName}
+                      {Static.lentaFilters.langName}
                     </div>
                   </div>
                 </div>
 
-                {/* <SwitchLenta switchPage={Variable.Static.lentaPage} /> */}
+                {/* <SwitchLenta switchPage={Static.lentaPage} /> */}
 
                 <div class="users_news_categories">
                   <div
                     class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "all"}
                     onClick={async () => {
-                      if (Variable.Static.lentaPage == "all") {
+                      if (Static.lentaPage == "all") {
                         return
                       }
-                      Variable.Static.lentaPage = "all"
-                      Variable.PageLentaall = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 15, filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "all")
-                      });
+                      Static.lentaPage = "all"
+                      Static.nameRecords = "PageLentaall";
+                      await api({ type: "get", action: "getPost", short: true, cache: true, name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                       initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--all users_news_category_icon--all_inactive"></i>
-                    {/* <img src={svg['sections/news_all_inactive']} /> */}
+                    }}>
+                    <i class={["users_news_category_icon", Static.lentaPage == "all" ? "users_news_category_icon--all" : "users_news_category_icon--all_inactive"]}></i>
                   </div>
 
                   <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "all"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--all"></i>
-                    {/* <img src={svg['sections/news_all']} /> */}
-                  </div>
-
-
-                  <div
-                    data-type="photo"
                     class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "photo"}
                     onClick={async () => {
-                      if (Variable.Static.lentaPage == "photo") {
+                      if (Static.lentaPage == "photo") {
                         return
                       }
-                      Variable.Static.lentaPage = "photo"
-                      Variable.PageLentaphoto = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentaphoto", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "photo")
-                      });
+                      Static.lentaPage = "photo"
+                      Static.nameRecords = "PageLentaphoto";
+                      await api({ type: "get", action: "getPost", short: true, cache: true, name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                       initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_photo users_news_category_icon--news_photo_inactive"></i>
-                    {/* <img src={svg['sections/news_photo_inactive']} /> */}
+                    }}>
+                    <i class={["users_news_category_icon", Static.lentaPage == "photo" ? "users_news_category_icon--news_photo" : "users_news_category_icon--news_photo_inactive"]}></i>
                   </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "photo"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_photo"></i>
-                    {/* <img src={svg['sections/news_photo']} /> */}
-                  </div>
-
-
 
                   <div
                     data-type="video"
                     class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "video"}
                     onClick={async () => {
-                      if (Variable.Static.lentaPage == "video") {
+                      if (Static.lentaPage == "video") {
                         return
                       }
-                      Variable.Static.lentaPage = "video"
-                      Variable.PageLentavideo = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentavideo", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "video")
-                      });
+                      Static.lentaPage = "video"
+                      Static.nameRecords = "PageLentavideo";
+                      await api({ type: "get", action: "getPost", short: true, cache: true, name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                       initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_video users_news_category_icon--news_video_inactive"></i>
-                    {/* <img src={svg['sections/news_video_inactive']} /> */}
+                    }}>
+                    <i class={["users_news_category_icon", Static.lentaPage == "video" ? "users_news_category_icon--news_video" : "users_news_category_icon--news_video_inactive"]}></i>
                   </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "video"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_video"></i>
-                    {/* <img src={svg['sections/news_video']} /> */}
-                  </div>
-
 
                   <div
                     data-type="audio"
                     class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "audio"}
                     onClick={async () => {
-                      if (Variable.Static.lentaPage == "audio") {
+                      if (Static.lentaPage == "audio") {
                         return
                       }
-                      Variable.Static.lentaPage = "audio"
-                      Variable.PageLentaaudio = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "audio")
-                      });
+                      Static.lentaPage = "audio"
+                      Static.nameRecords = "PageLentaaudio";
+                      await api({ type: "get", action: "getPost", short: true, cache: true, name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                       initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_audio users_news_category_icon--news_audio_inactive"></i>
-                    {/* <img src={svg['sections/news_audio_inactive']} /> */}
+                    }}>
+                    <i class={["users_news_category_icon", Static.lentaPage == "audio" ? "users_news_category_icon--news_audio" : "users_news_category_icon--news_audio_inactive"]}></i>
                   </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "audio"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_audio"></i>
-                    {/* <img src={svg['sections/news_audio']} /> */}
-                  </div>
-
 
                   <div
                     data-type="text"
                     class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "text"}
                     onClick={async () => {
-                      if (Variable.Static.lentaPage == "text") {
+                      if (Static.lentaPage == "text") {
                         return
                       }
-                      Variable.Static.lentaPage = "text"
-                      Variable.PageLentatext = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "text")
-                      });
+                      Static.lentaPage = "text"
+                      Static.nameRecords = "PageLentatext";
+                      await api({ type: "get", action: "getPost", short: true, cache: true, name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                       initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_text users_news_category_icon--news_text_inactive"></i>
-                    {/* <img src={svg['sections/news_text_inactive']} /> */}
+                    }}>
+                    <i class={["users_news_category_icon", Static.lentaPage == "text" ? "users_news_category_icon--news_text" : "users_news_category_icon--news_text_inactive"]}></i>
                   </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "text"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_text"></i>
-                    {/* <img src={svg['sections/news_text']} /> */}
-                  </div>
-
-
-
                 </div>
 
 
@@ -313,7 +252,7 @@ const start = function (data, ID) {
                     // }}
                     >
                       {
-                        Variable[`PageLenta${Variable.Static.lentaPage}`]
+                        Variable[`PageLenta${Static.lentaPage}`]
                           .list_records.map((item, index) => {
                             elem[index] = [];
 
@@ -321,7 +260,7 @@ const start = function (data, ID) {
                               <BlockLentaUsers
                                 totalFound={
                                   Variable[
-                                    `PageLenta${Variable.Static.lentaPage}`
+                                    `PageLenta${Static.lentaPage}`
                                   ].totalFound
                                 }
                                 item={item}
@@ -329,7 +268,7 @@ const start = function (data, ID) {
                                 elem={elem}
                                 total={
                                   Variable[
-                                    `PageLenta${Variable.Static.lentaPage}`
+                                    `PageLenta${Static.lentaPage}`
                                   ].list_records.length
                                 }
                               />
