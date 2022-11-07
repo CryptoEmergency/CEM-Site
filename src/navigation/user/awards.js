@@ -8,7 +8,7 @@ import {
 
 import { If, Map } from '@component/helpers/All.js';
 import svg from '@assets/svg/index.js';
-import { AwardsProgress, Swiper } from '@component/element/index.js';
+import { Swiper } from '@component/element/index.js';
 
 let swiperOptions = {
     effect: "cards",
@@ -39,66 +39,137 @@ const start = function () {
                 <div class="awards c-container">
                     <div class="awards_block">
                         <div class="awards_body">
+                            {() => {
+                                let awardsItems = awards.kindGroup.one[0]
+                                return (
+                                    <div class="award swiper-slide">
+                                        <img src={svg["badge/" + awardsItems.icon.split(".")[0]]} class="awards_small_badge" />
+                                        <img src={svg["badge/" + awardsItems.icon.split(".")[0]]} class="awards_badge" />
+                                        {() => {
+                                            if (awardsItems.bonus == "exp") {
+                                                return (
+                                                    <div class="awards_exp">
+                                                        <img src={svg["awards_plus"]} />{awardsItems.bonusValue} exp
+                                                    </div>
+                                                )
+                                            } else if (awardsItems.bonus == "cemd") {
+                                                return (
+                                                    <div class="awards_exp">
+                                                        <img src={svg["awards_plus"]} />{awardsItems.bonusValue} CEMD
+                                                    </div>
+                                                )
+                                            } else {
+                                                return (
+                                                    <div>
+                                                        <div class="awards_exp">
+                                                            <img src={svg["awards_plus"]} />{awardsItems.extraValue} exp
+                                                        </div>
+                                                        <div class="awards_exp">
+                                                            <img src={svg["awards_plus"]} />{awardsItems.bonusValue} CEMD
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
+                                        }}
+                                        <div class="award_description">
+                                            <p class="awards_title">{Variable.lang.awards[awardsItems.name]}</p>
+                                            <p class="awards_text">{Variable.lang.awards[awardsItems.description]}</p>
+                                            {() => {
+                                                if (awardsItems.have >= awardsItems.count) {
+                                                    return (
+                                                        <div>
+                                                            <div class="progress_bar green"></div>
+                                                            <p class="progress_bar_label green-grad">{Variable.lang.p.receive}</p>
+                                                        </div>
+                                                    )
+                                                } else {
+                                                    return (
+                                                        <div>
+                                                            <div class="progress_bar" style={`width: ${(awardsItems.have / awardsItems.count) * 100}%`}></div>
+                                                            <p class="progress_bar_label">{(awardsItems.have / awardsItems.count).toFixed(2)}</p>
+                                                        </div>
+                                                    )
+                                                }
+                                            }}
+                                        </div>
+                                    </div>
+                                )
+                            }}
 
-                            {/* <Map
-                                data={awards.kindGroup.one}
-                                dataIf={(item, index) => {
+                            {() => {
+                                let arrReturn = tmp.map((item) => {
                                     return (
-                                        <AwardsProgress
-                                            item={item}
+                                        <Swiper
+                                            slide={
+                                                item.map(function (awardsItems) {
+                                                    return (
+                                                        <div class="award swiper-slide">
+                                                            <img src={svg["badge/" + awardsItems.icon.split(".")[0]]} class="awards_small_badge" />
+                                                            <img src={svg["badge/" + awardsItems.icon.split(".")[0]]} class="awards_badge" />
+                                                            {() => {
+                                                                if (awardsItems.bonus == "exp") {
+                                                                    return (
+                                                                        <div class="awards_exp">
+                                                                            <img src={svg["awards_plus"]} />{awardsItems.bonusValue} exp
+                                                                        </div>
+                                                                    )
+                                                                } else if (awardsItems.bonus == "cemd") {
+                                                                    return (
+                                                                        <div class="awards_exp">
+                                                                            <img src={svg["awards_plus"]} />{awardsItems.bonusValue} CEMD
+                                                                        </div>
+                                                                    )
+                                                                } else {
+                                                                    return (
+                                                                        <div>
+                                                                            <div class="awards_exp">
+                                                                                <img src={svg["awards_plus"]} />{awardsItems.extraValue} exp
+                                                                            </div>
+                                                                            <div class="awards_exp">
+                                                                                <img src={svg["awards_plus"]} />{awardsItems.bonusValue} CEMD
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            }}
+                                                            <div class="award_description">
+                                                                <p class="awards_title">{Variable.lang.awards[awardsItems.name]}</p>
+                                                                <p class="awards_text">{Variable.lang.awards[awardsItems.description]}</p>
+                                                                {() => {
+                                                                    if (awardsItems.have >= awardsItems.count) {
+                                                                        return (
+                                                                            <div>
+                                                                                <div class="progress_bar green"></div>
+                                                                                <p class="progress_bar_label green-grad">{Variable.lang.p.receive}</p>
+                                                                            </div>
+                                                                        )
+                                                                    } else {
+                                                                        return (
+                                                                            <div>
+                                                                                <div class="progress_bar" style={`width: ${(awardsItems.have / awardsItems.count) * 100}%`}></div>
+                                                                                <p class="progress_bar_label">{(awardsItems.have / awardsItems.count).toFixed(2)}</p>
+                                                                            </div>
+                                                                        )
+                                                                    }
+                                                                }}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                            options={swiperOptions}
+                                            className="awardsSwiper"
                                         />
                                     )
-
-                                }}
-                            /> */}
-
-                            <AwardsProgress
-                                item={awards.kindGroup.one[0]}
-                            />
-                            {tmp.map((item) => {
-                                return (
-                                    <Swiper
-                                        slide={
-                                            item.map(function (item) {
-                                                return (
-                                                    <AwardsProgress
-                                                        item={item}
-                                                    />
-                                                )
-                                            })
-                                        }
-                                        options={swiperOptions}
-                                        className="awardsSwiper"
-                                    />
-                                )
-
-                            })}
-
-
-                            {/* {
-                                tmp.map((item) => {
-                                    let tmp
-                                    for (let awar of item) {
-
-                                        console.log('=a58168=', awar)
-                                    }
-                                    // return (
-                                    //     <AwardsProgress
-                                    //         item={item}
-                                    //     />
-                                    // )
                                 })
-
-                            } */}
+                                return arrReturn
+                            }
+                            }
                         </div>
                     </div>
                 </div>
             )
         }
     )
-
-
-
 }
-
 export default start;

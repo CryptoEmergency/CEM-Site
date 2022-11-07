@@ -24,8 +24,6 @@ export { MediaButton } from "./MediaButton.js"
 
 export { MediaPreview } from "./MediaPreview.js"
 
-export { AnswerAdditionallyToggleNew } from "./AnswerAdditionallyToggleNew.js";
-export { AwardsProgress } from "./AwardsProgress.js";
 
 export { CheckBox } from "./CheckBox.js";
 
