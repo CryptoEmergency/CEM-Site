@@ -2,9 +2,6 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  getVariable,
-  getStorage,
-  getValue,
   stringToHtml,
   Helpers,
   initOne,
@@ -12,19 +9,16 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { LentaMedia, ItemsMenu, Evaluation, TextArea, ButtonSubmit, Comment } from "@component/element/index.js";
-import images from "@assets/images/index.js";
+import { Avatar, LentaMedia, ItemsMenu, Evaluation, TextArea, ButtonSubmit, Comment } from "@component/element/index.js";
+import { api } from '@src/apiFunctions.js'
 import { getDateFormat } from "@src/functions.js";
-import {
-  Avatar,
-  AnswerAdditionallyToggleNew,
-} from "@component/element/index.js";
-import { If } from "@component/helpers/All.js";
+
+
 
 let Static = {}
 
 const BlockShowLenta = function ({ item }) {
-  Variable.Static.FooterShow = false
+  // Variable.Static.FooterShow = false
   initOne(() => {
     Static.mainComment = {
       rows: 1,
@@ -227,27 +221,27 @@ const BlockShowLenta = function ({ item }) {
                     <Evaluation
                       rating={item.statistic.rating}
                       callBackBefore={async (type) => {
-                        // let response = await api({ type: "set", action: action, data: { _id: mainId, value: { comments: { evaluation: type, _id: item._id } } } })
-                        // if (response.status === 'ok') {
-                        //   if (type == "plus") {
-                        //     item.statistic.rating++
-                        //   } else {
-                        //     item.statistic.rating--
-                        //   }
-                        //   initReload()
-                        // } else {
-                        //   Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
-                        // }
+                        let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { evaluation: type } } })
+                        if (response.status === 'ok') {
+                          if (type == "plus") {
+                            item.statistic.rating++
+                          } else {
+                            item.statistic.rating--
+                          }
+                          initReload()
+                        } else {
+                          Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+                        }
                       }}
                       callBackAfter={async (type) => {
-                        // let response = await api({ type: "get", action: "getComments", filter: { _id: item._id }, select: { evaluation: 1, } })
-                        // let whoLike = []
-                        // if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
-                        //   whoLike = response.result.list_records[0].evaluation.filter(
-                        //     (item) => item.type === type
-                        //   );
-                        // }
-                        // Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
+                        let response = await api({ type: "get", action: "getPost", filter: { _id: item._id }, select: { evaluation: 1, } })
+                        let whoLike = []
+                        if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
+                          whoLike = response.result.list_records[0].evaluation.filter(
+                            (item) => item.type === type
+                          );
+                        }
+                        Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
                       }}
                     />
                   </div>

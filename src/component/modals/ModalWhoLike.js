@@ -9,7 +9,6 @@ const ModalWhoLike = function ({ whoLike }, reload) {
     <div class="c-modal c-modal--open" id="ModalWhoLike">
       <section class="c-modal__dialog">
         <header class="c-modal__header">
-          <h2 class="c-modal__title">{Variable.lang.text.evaluated}</h2>
           <button
             type="button"
             class="c-modal__close"
