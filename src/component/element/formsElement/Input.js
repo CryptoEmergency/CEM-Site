@@ -103,11 +103,13 @@ const checkInput = function (Static, target) {
             return
         }
         Static.valid = await Static.condition(target.value.trim())
-        Static.error = !Static.valid
-        if (Static.error) {
-            target.style = "border-color: rgb(200, 23, 38);";
-        } else {
-            target.style = "border-color: rgb(37, 249, 48);"
+        if (typeof Static.error != "undefined") {
+            Static.error = !Static.valid
+            if (Static.error) {
+                target.style = "border-color: rgb(200, 23, 38);";
+            } else {
+                target.style = "border-color: rgb(37, 249, 48);"
+            }
         }
         if (Static.afterValid) {
             Static.afterValid();

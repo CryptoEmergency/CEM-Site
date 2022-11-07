@@ -1,3 +1,8 @@
+//===errors===
+// Страница не найдена
+export { BlockError404 } from './errors/BlockError404.js';
+//============
+
 // Партнерские баннеры
 export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js"
 // Карусель баннеров на главной
@@ -12,22 +17,29 @@ export { BlockInfoPartners } from './BlockInfoPartners.js';
 export { BlockNews } from "./BlockNews.js"
 // Меню иконок на главной
 export { BlockProjects } from "./BlockProjects.js"
-
-
-
+// Отображение ленты по url, раскрытие и предпросмотр
 export { BlockShowLenta } from "./BlockShowLenta.js"
+// Отображение по url, раскртие новостей,блог, медиа о нас
+export { BlockShowNews } from './BlockShowNews.js';
+// Список бирж
+export { BlockTrade } from "./BlockTrade.js";
 
 
 
-export { BlockUsers } from "./BlockUsers.js"
+
+//===Users===
+
+//===Users===
+
 export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
 export { BlockUserProfilePage } from "./user/BlockUserProfilePage.js"
 export { BlockQuestions } from './BlockQuestions.js';
 
-export { BlockTrade } from "./BlockTrade.js";
+
 
 export { BlockLentaUsers } from './BlockLentaUsers.js';
 
-export { BlockShowNews } from './BlockShowNews.js';
+// Список пользователей
+export { BlockUsers } from "./BlockUsers.js"
 
 export { BlockError404 } from './errors/BlockError404.js';
