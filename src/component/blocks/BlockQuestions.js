@@ -14,7 +14,7 @@ import { Input } from '@component/element/index.js';
 
 
 
-const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
+const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filters }) {
 
   const change = async function (arg) {
     let value = arg
