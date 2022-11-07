@@ -266,7 +266,7 @@ const BlockShowLenta = function ({ item }) {
                       return
                     }
                     let text = Static.mainComment.el.value.trim()
-                    let response = await api({ type: "set", action: "setNews", data: { _id: item._id, value: { comments: { text: text } } } })
+                    let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { comments: { text: text } } } })
                     if (response.status === "ok") {
                       Static.mainComment.el.value = ""
                       if (Static.adaptive) {
@@ -290,7 +290,7 @@ const BlockShowLenta = function ({ item }) {
                       <Comment
                         item={itemComments}
                         mainId={item._id}
-                        action="setNews"
+                        action="setPost"
                       />
                     )
                   })

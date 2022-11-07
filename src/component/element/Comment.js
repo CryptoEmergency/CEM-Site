@@ -20,7 +20,7 @@ import { api } from '@src/apiFunctions.js'
 
 
 
-const Comment = function ({ item, include, mainId, action, quoteId }) {
+const Comment = function ({ item, include, mainId, action, quoteId, mainItem }) {
 
     let Static = Variable.State(item._id)
 
@@ -144,7 +144,12 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                             }
                             if (response.result && response.result.list_records && response.result.list_records[0]) {
                                 let newRes = response.result.list_records[0]
-                                item.comments.unshift(newRes)
+                                if (include) {
+                                    mainItem.comments.unshift(newRes)
+                                } else {
+                                    item.comments.unshift(newRes)
+                                }
+
                                 initReload();
                             }
                         } else {
@@ -159,6 +164,7 @@ const Comment = function ({ item, include, mainId, action, quoteId }) {
                         return (
                             <Comment
                                 item={itemIn}
+                                mainItem={item}
                                 mainId={mainId}
                                 quoteId={item._id}
                                 include={true}
