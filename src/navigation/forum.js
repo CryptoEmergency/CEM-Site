@@ -463,6 +463,17 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Crypto News — это сервис для криптоэнтузиастов, сделанный криптоэнтузиастами. Мы постарались сделать максимально полезную цифровую платформу для всех, кто хочет быть в курсе событий на крипторынке и стремится на этом зарабатывать.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://digitalfutureclub.ru" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_11']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Академия криптовалют «Digital Future” Обучают людей базовым знаниям для работы с криптовалютой, а именно:</p>
+                                            <p>1. Как покупать и продавать?</p>
+                                            <p>2. Как переводить другим людям?</p>
+                                            <p>3. Где хранить?</p>
+                                            <p>4. Как платить налоги с крипты?</p>
+                                            <p>5. Как анализировать проекты?</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -582,9 +593,13 @@ const start = function (data, ID) {
                                             <p>Адвокат, юрист-международник</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_13']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Евгений Царицанский</p>
+                                            <p>Криптоэксперт, основатель академии криптовалют. Обучил финансовой грамотности более 4000 человек. Щедролог </p>
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
@@ -708,6 +723,14 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_12"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://digitalfutureclub.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_13"]} />
                                     </a>
                                 </div>
                             </div>
