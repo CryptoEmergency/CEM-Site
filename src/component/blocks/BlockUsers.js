@@ -11,6 +11,7 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
+import { Input } from '@component/element/index.js';
 let elFilters
 
 const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 21 }) {
@@ -29,6 +30,7 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                     <div class="c-friends__search">
                         <div class="c-friends__filter">
                             {/* Сделать поиск */}
+                            </Input />
                             <input
                                 class="c-friends__field"
                                 autocomplete="off"

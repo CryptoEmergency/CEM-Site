@@ -26,12 +26,15 @@ import {
 import { If } from "@component/helpers/All.js";
 
 const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, type }) {
+
+  
+  
   let mainId = item._id;
   if (total === undefined && type !== "post") {
     return <></>;
   }
   let getItem = ""
-  console.log(total)
+
   if (total === undefined) {
     getItem = async function () {
       let tmp = await sendApi.send({ action: "getPost", short: true, filter: { _id: item._id }, limit: 1 });
@@ -46,7 +49,7 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
     }
   }
 
-
+console.log(Variable.Static)
   return (
 
     <If
@@ -653,16 +656,11 @@ const BlockLentaUsers = function ({ item, numIndex, elem, total, totalFound, typ
 
           <div class="news_page_comments">
             <h2>{Variable.lang.h.modal_comment}</h2>
-
-            <If
-              data={
-                Variable.Static.activeInputId.length === 0 &&
-                Variable.Static.EditInput.length === 0
-              }
-              dataIf={
+        
+        
                 <CommentInput item={item} typeSet="setPost" callBack={getItem} />
-              }
-            />
+          
+    
 
             <If
               data={item.comments.length > 0}

@@ -347,6 +347,7 @@ const start = function () {
                         Variable[`PageLenta${Variable.Static.lentaPage}`]
                           .list_records.map((item, index) => {
                             elem[index] = [];
+                        
                             return (
                               <BlockLentaUsers
                                 totalFound={
