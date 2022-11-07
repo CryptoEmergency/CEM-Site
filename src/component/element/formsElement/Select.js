@@ -4,6 +4,8 @@ import {
   Variable,
 } from "@betarost/cemjs";
 
+import svg from '@assets/svg/index.js';
+
 const changeSelect = function (selectIndex, options, callback) {
   let optionsActive
   options.open = false;
@@ -82,7 +84,7 @@ const Select = function ({ options, callback, toggler = null }) {
           }}
         </ul>
       </div>
-      {toggler ? <img class="filter_sort_toggler" src={svg.filter_arrow_bottom} /> : null}
+      {/* {toggler ? <img class="filter_sort_toggler" src={svg.filter_arrow_bottom} /> : null} */}
     </div>
   );
 };

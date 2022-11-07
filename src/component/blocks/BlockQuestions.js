@@ -6,7 +6,7 @@ import {
   initOne,
   Helpers
 } from "@betarost/cemjs";
-//check
+//
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { Select, ButtonShowMore, NotFound, Avatar } from '@component/element/index.js';
@@ -15,33 +15,26 @@ import { Input } from '@component/element/index.js';
 
 
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
-  await initOne(async () => {
 
-   
-    Static.quest = {
-      value: "",
-      label:"",
-      condition:async (value) => {
-                   
-        change(value)
-          return true
-       
-        
-    }              
-}
-
-const change = async function (arg){
-  let value = arg
-  // let filters = Helpers.getFilterQuestions(Static.filtersQuestions) ;
-  let filters ={}
-  filters.$text = {$search: value}
-    let response =  await api({ type: "get", action: "getQuestions",short: true, filter: filters })
+  const change = async function (arg) {
+    let value = arg
+    // let filters = Helpers.getFilterQuestions(Static.filtersQuestions) ;
+    let filters = {}
+    filters.$text = { $search: value }
+    let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
     Variable[nameRecords] = response
   }
-    
-  
 
+  await initOne(async () => {
 
+    Static.quest = {
+      value: "",
+      label: "",
+      condition: async (value) => {
+        change(value)
+        return true
+      }
+    }
 
     Static.optionsSelect = {
       questions: {
@@ -82,7 +75,7 @@ const change = async function (arg){
             <div class="c-search__wrapper">
               <img class="c-search__icon" src={svg.search_icon} />
               <Input className="c-search__input" Static={Static.quest} />
-            
+
               <img
                 class="c-search__icon c-search__icon--filter"
                 src={svg.filter}
@@ -268,12 +261,10 @@ const change = async function (arg){
               <ButtonShowMore
                 onclick={async () => {
                   let new_filter = Helpers.getFilterQuestions(Static.filtersQuestions);
-                  if(Static.quest.value.length > 0)
-                  
-                                        {
-                                           new_filter.search =   filters.$text = {$search: Static.quest.value}
-                                           console.log()
-                                        }
+                  if (Static.quest.value.length > 0) {
+                    new_filter.search = filters.$text = { $search: Static.quest.value }
+                    console.log()
+                  }
                   let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
                   if (tmp && tmp.list_records) {
                     Variable[nameRecords].list_records.push(...tmp.list_records)
