@@ -69,7 +69,8 @@ const BlockProjects = async function () {
             projects = [
                 {
                     "title": Variable.lang.a.exchange,
-                    "icon": "shuffle",
+                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
+                    "icon": "exchanger_menu_icon",
                     "link": "list-exchange",
                     modal: true
                 },
@@ -80,6 +81,7 @@ const BlockProjects = async function () {
                 // },
                 {
                     "title": Variable.lang.a.contentCreater,
+                    "style": "",
                     "icon": "graph",
                     "link": "content-creator",
                     modal: true
@@ -101,19 +103,29 @@ const BlockProjects = async function () {
                 // },
                 {
                     "title": Variable.lang.a.trade,
-                    "icon": "stock-market",
+                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
+                    "icon": "exchange_menu_icon",
                     "link": "list-trade",
                     modal: true
                 },
                 {
                     "title": Variable.lang.a.news,
-                    "icon": "world-news",
+                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
+                    "icon": "news_menu_icon1",
                     "link": "news",
                     modal: true
                 },
                 {
+                    "title": Variable.lang.a.blog,
+                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
+                    "icon": "blog_menu_icon1",
+                    "link": "blog",
+                    modal: true
+                },
+                {
                     "title": Variable.lang.a.experts,
-                    "icon": "user",
+                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
+                    "icon": "expert_menu_icon",
                     "link": "experts",
                     modal: true
                 },
@@ -123,7 +135,22 @@ const BlockProjects = async function () {
                 //     "link": "nft-market"
                 // },
                 {
+                    "title": Variable.lang.span.userNews,
+                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
+                    "icon": "user_news_page",
+                    "link": "lenta-users",
+                    modal: true
+                },
+                {
+                    "title": Variable.lang.a.questionsAnswers,
+                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
+                    "icon": "user_mobile_answers_and_questions",
+                    "link": "question",
+                    modal: true
+                },
+                {
                     "title": Variable.lang.a.career,
+                    "style": "",
                     "icon": "careers_icon",
                     "link": "career-whith-us",
                     modal: true
@@ -143,7 +170,7 @@ const BlockProjects = async function () {
                             }}>
                             <div class="projects_icons_text">
                                 <div class="nav-more_item">
-                                    <img src={svg[item.icon]} alt="" />
+                                    <img style={item.style} src={svg[item.icon]} alt="" />
                                 </div>
                                 <p>{item.title}</p>
                             </div>
