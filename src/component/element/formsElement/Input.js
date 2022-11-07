@@ -7,7 +7,7 @@ import {
 import svg from '@assets/svg/index.js';
 
 const textConstuctor = function (Static, classDiv, className, before, after, callback) {
-    if (typeof Static.label != "undefined" || typeof Static.error != "undefined" || typeof classDiv != "undefined" || typeof before != "undefined" || typeof after != "undefined") {
+    if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined" || typeof classDiv != "undefined" || typeof before != "undefined" || typeof after != "undefined")) {
         return (
             <div>
                 {Static.label ? <label>{Static.label}</label> : null}

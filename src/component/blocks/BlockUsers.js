@@ -61,6 +61,7 @@ filter.search = value
                         <div class="c-friends__filter">
                            
                             <Input className="c-friends__field" Static={Static.Frends}  />
+
                             <div
                                 class="c-friends__toggler"
                                 onClick={() => {
