@@ -2,16 +2,7 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  getStorage,
-  setValue,
-  getValue,
-  getAction,
-  getVariable,
-  sendApi,
-  delDOM,
-  timersClear,
   parsingUrl,
-  initGo,
   initReload,
   Helpers,
 } from "@betarost/cemjs";
@@ -35,15 +26,6 @@ const wrapTextWithATag = (text) => {
   return res;
 };
 
-const sliceString = function (str, number = 66) {
-  let sliceStr = '';
-  if (str.length >= number) {
-    sliceStr = `${str.slice(0, number)} ...`;
-  } else {
-    sliceStr = str;
-  }
-  return sliceStr;
-};
 
 const wrapTagToText = (text) => {
   let textTag = Helpers.sanitizeHtml(text, { allowedTags: ['p'] });
@@ -116,20 +98,6 @@ const getDateFormat = function (data, type) {
     default:
       return moment(data).format("YYYY-MM-DD");
   }
-};
-
-const siteLink = function (e) {
-  e.preventDefault();
-  let link = this.href;
-  history.pushState(null, null, link);
-  // timersClear();
-  window.scrollTo({
-    top: 0,
-    // behavior: "smooth",
-    behavior: "instant",
-  });
-  parsingUrl();
-  //getAction("App", "start")();
 };
 
 const checkAnswerApi = function (data) {
@@ -233,11 +201,9 @@ const checkValid = function (Static, Array) {
 
 
 export {
-  sliceString,
   wrapTextWithATag,
   isEmpty,
   getDateFormat,
-  siteLink,
   timerTik,
   clickHide,
   checkAnswerApi,
