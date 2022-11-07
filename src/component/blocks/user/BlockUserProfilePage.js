@@ -31,6 +31,7 @@ BlockUserProfilePage.aboutUser = function (data) {
                             type: "edit",
                             onclick: async () => {
                                 console.log('=7e4dce=', "gggg")
+
                             }
                         }
                     ]

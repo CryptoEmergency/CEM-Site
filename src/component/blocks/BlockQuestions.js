@@ -25,7 +25,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
     Variable[nameRecords] = response
     if (Static.quest.value.length == 0) {
       await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
- 
+
     }
   }
 
@@ -266,11 +266,15 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
                 onclick={async () => {
                   let new_filter = Helpers.getFilterQuestions(Static.filtersQuestions);
                   if (Static.quest.value.length > 0) {
-                    new_filter.search = filters.$text = { $search: Static.quest.value }
+                    // new_filter.search = filters.$text = { $search: Static.quest.value }
+                    new_filter.$text = { $search: Static.quest.value }
+
                   }
                   let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
+                  console.log('=88f53b=', tmp)
                   if (tmp && tmp.list_records) {
                     Variable[nameRecords].list_records.push(...tmp.list_records)
+                    Variable[nameRecords].totalFound = tmp.totalFound
                   }
                   initReload()
                 }}

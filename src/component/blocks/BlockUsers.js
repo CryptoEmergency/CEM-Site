@@ -11,7 +11,7 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
-import { Input,NotFound } from '@component/element/index.js';
+import { Input, NotFound } from '@component/element/index.js';
 let elFilters
 let Static = {}
 
@@ -22,15 +22,15 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
             Static.Frends = {
                 value: "",
                 label: "",
-                placeholder:Variable.lang.placeholder.findFriends,
-                condition:async (value) => {
-                   
+                placeholder: Variable.lang.placeholder.findFriends,
+                condition: async (value) => {
+
                     change(value)
-                      return true
-                   
-                    
+                    return true
+
+
                 },
-              
+
             }
 
             await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
@@ -39,14 +39,14 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
 
 
 
-const change = async function (arg){
-let value = arg
-let filter =  Helpers.getFilterUsers(filters, type) ;
-filter.search = value
-  let response =  await api({ type: "get", action: "getUsers",short: true, filter: filter })
-  Variable[nameRecords] = response
-  
-}
+    const change = async function (arg) {
+        let value = arg
+        let filter = Helpers.getFilterUsers(filters, type);
+        filter.search = value
+        let response = await api({ type: "get", action: "getUsers", short: true, filter: filter })
+        Variable[nameRecords] = response
+
+    }
 
 
 
@@ -59,7 +59,7 @@ filter.search = value
                 <div class="c-friends__block">
                     <div class="c-friends__search">
                         <div class="c-friends__filter">
-                            <Input className="c-friends__field" Static={Static.Frends}  />
+                            <Input className="c-friends__field" Static={Static.Frends} />
 
                             <div
                                 class="c-friends__toggler"
@@ -330,7 +330,7 @@ filter.search = value
                                     )
                                 })
                                 return arrReturn
-                            }else {
+                            } else {
                                 return (
                                     <NotFound
                                     />
@@ -345,14 +345,14 @@ filter.search = value
                             return (
                                 <ButtonShowMore
                                     onclick={async () => {
-                                    let new_filter = Helpers.getFilterUsers(filters, type);
-                                        if(Static.Frends.value.length > 0)
-                                        {
-                                           new_filter.search = Static.Frends.value
+                                        let new_filter = Helpers.getFilterUsers(filters, type);
+                                        if (Static.Frends.value.length > 0) {
+                                            new_filter.search = Static.Frends.value
                                         }
 
                                         let tmp = await api({ type: "get", action: "getUsers", short: true, limit, filter: new_filter, offset: Variable[nameRecords].list_records.length })
                                         Variable[nameRecords].list_records.push(...tmp.list_records)
+                                        Variable[nameRecords].totalFound = tmp.totalFound
                                         initReload()
                                     }}
                                 />
