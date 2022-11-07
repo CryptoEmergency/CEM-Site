@@ -72,7 +72,10 @@
 		"withdrawal": "Tarik",
 		"join": "Ikuti",
 		"pre_view": "Pratinjau",
-		"allPartners": "Semua mitra"
+		"allPartners": "Semua mitra",
+
+		"resetCrop": "Cancel",
+		"reset": "Cancellation"
 	},	
 	"h":{
 		"success": "Berhasil!",
@@ -151,7 +154,10 @@
 		"modal_pageDeleted": "Halaman dihapus",
 		"chats": "Obrolan",
 		"partners": "Mitra informasi",
-		"modal_cropImage": "Menambahkan foto"
+		"modal_cropImage": "Menambahkan foto",
+
+		"lottery": "lotere «dari mulut ke mulut»",
+		"lotterySubtitle": "MENANGKAN CEM"
 	},
 	"a":{
 		"about": "Tentang kami",
@@ -350,7 +356,24 @@
 		"transactionLevel": "Untuk tingkat yang diterima",
 		"October2022": "Oktober 2022",
 		"aboutProjectDate19May2022": "Dirilis 19 Mei 2022",
-		"aboutProjectDateAugust2022": "Rilis Agustus 2022"
+		"aboutProjectDateAugust2022": "Rilis Agustus 2022",
+
+		"lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
+		"lotteryAction1": "Invite your friends to increase Prize Pool.",
+		"lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
+		"lotteryAction3": "5 winners will share the Prize Pool!",
+		"lotteryAnnounce": "Give a word of mouth to your friends as every user registered in the lottery will add 1CEM into a 1000CEM Prize Pool. 5 winners will share the Prize Pool!",
+		"lotteryDates": "Dates of Lottery:",
+		"lotteryTicket": "Job done, get your ticket!",
+		"lotteryBanner": "Download banner:",
+		"getTicket": "To get lottery ticket:",
+		"lotteryQuest1": "Register at Crypto-emergency.com.",
+		"lotteryQuest2": "Enter your Email",
+		"lotteryQuest3": "Join our Telegram group and inform us your @nickname below.",
+		"lotteryQuest4": "Retweet post and give us a link",
+		"lotteryQuest5": "Make an Instagram post and give us a link",
+		"lotteryQuest6": "Answer a shortest quiz.",
+		"lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?"
 	},
 	"text": {
 		"starups": "Perusahaan rintisan ",
