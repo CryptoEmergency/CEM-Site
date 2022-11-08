@@ -160,7 +160,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
               async (active, nameOptions) => {
          
                 Static.filtersQuestions[nameOptions].value = active 
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
                 // initReload();
               }
             }
@@ -172,26 +172,25 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
               
               async (active, nameOptions) => {
           
-         if(!active){
-          console.log(Static.newFilter)
+         if(active){
+          Static.filtersQuestions[nameOptions].value = active
+         }
 
-        if(Static.filtersQuestions.date.value == 'date')
+         if(Static.filtersQuestions.date.value == 'date')
         {
+          Static.newQustion.sort = ""
           Static.newQustion.sort = {showDate: Static.optionsSelect.date.asort}
         }
         if(Static.filtersQuestions.date.value == 'views')
         {
-          Static.newQustion.sort = {statistic: {view:Static.optionsSelect.date.asort}}
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {"statistic.view":Static.optionsSelect.date.asort}
         }
         if(Static.filtersQuestions.date.value == 'answers')
         {
-          Static.newQustion.sort = {statistic: {answer:Static.optionsSelect.date.asort}}
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {"statistic.answer":Static.optionsSelect.date.asort}
         }
-
-         }
-         else{
-          Static.filtersQuestions[nameOptions].value = active
-         }
            
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
