@@ -284,16 +284,16 @@ const start = function (data, ID) {
                                                 onclick={function () {
                                                   if (this.dataset.show) {
                                                     this.removeAttribute("data-show")
-                                                    this.innerHTML = Variable.lang.span.showComments;
+                                                    this.innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
                                                     Static[index].secondComment.elShowComment.hidden = true
                                                   } else {
                                                     this.dataset.show = true
-                                                    this.innerHTML = Variable.lang.span.hideComments;
+                                                    this.innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
                                                     Static[index].secondComment.elShowComment.hidden = false
                                                   }
                                                 }}
                                               >
-                                                {Variable.lang.span.showComments}
+                                                {Variable.lang.span.showComments} (<span class="comment_count">{item.statistic.comments}</span>)
                                               </span>
                                             }
                                           />
