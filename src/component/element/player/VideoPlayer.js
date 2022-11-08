@@ -31,7 +31,7 @@ const VideoPlayer = function ({ Static, item, path }) {
         <div class="video_container">
             <video
                 playsinline
-                //poster={images["video_background"]}
+                poster={images["video_background"]}
                 preload="metadata"
                 src={path + item.name}
                 Element={($el) => { elMedia.el = $el; }}
