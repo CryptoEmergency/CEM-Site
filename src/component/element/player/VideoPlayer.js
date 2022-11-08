@@ -21,9 +21,12 @@ const formatTime = function (time) {
     let s = Math.floor(time % 60)
     return lead0(h, 2) + ":" + lead0(m, 2) + ":" + lead0(s, 2)
 }
-
-const VideoPlayer = function ({ item, path }) {
-    let Static = Variable.State(item._id)
+// let Static = Variable.State(item._id)
+const VideoPlayer = function ({ Static, item, path }) {
+    if (!Static.elMedia[item._id]) {
+        Static.elMedia[item._id] = {}
+    }
+    let elMedia = Static.elMedia[item._id]
     return (
         <div class="video_container">
             <video
@@ -31,33 +34,38 @@ const VideoPlayer = function ({ item, path }) {
                 poster={images["video_background"]}
                 preload="metadata"
                 src={path + item.name}
-                Element={($el) => { Static.el = $el; }}
+                Element={($el) => { elMedia.el = $el; }}
                 onclick={function (e) {
                     e.stopPropagation();
                     this.paused ? this.play() : this.pause();
                 }}
                 onplay={function (e) {
-                    Static.play = true
-                    Static.controlsPause.src = svg["player_pause"]
-                    Static.controlsPause.classList.remove("paused");
+                    Object.values(Static.elMedia).forEach((audio)=>{
+                        if(audio.play && audio != elMedia){
+                          audio.el.pause()
+                        }
+                    })
+                    elMedia.play = true
+                    elMedia.controlsPause.src = svg["player_pause"]
+                    elMedia.controlsPause.classList.remove("paused");
                 }}
                 onpause={function (e) {
-                    Static.play = false
-                    Static.controlsPause.src = svg["player_play"]
-                    Static.controlsPause.classList.add("paused");
+                    elMedia.play = false
+                    elMedia.controlsPause.src = svg["player_play"]
+                    elMedia.controlsPause.classList.add("paused");
                 }}
                 oncanplay={function (e) {
-                    Static.controlsDuration.innerText = formatTime(this.duration)
+                    elMedia.controlsDuration.innerText = formatTime(this.duration)
                 }}
                 onended={function (e) {
-                    Static.play = false
-                    Static.controlsPause.src = svg["player_play"]
-                    Static.controlsPause.classList.add("paused");
+                    elMedia.play = false
+                    elMedia.controlsPause.src = svg["player_play"]
+                    elMedia.controlsPause.classList.add("paused");
                 }}
                 ontimeupdate={function (e) {
-                    Static.controlsCurrentTime.innerText = formatTime(this.currentTime)
+                    elMedia.controlsCurrentTime.innerText = formatTime(this.currentTime)
                     let progress = Math.floor(this.currentTime) / Math.floor(this.duration);
-                    Static.controlsProgressLine.style.width = progress * 100 + '%'
+                    elMedia.controlsProgressLine.style.width = progress * 100 + '%'
                 }}
                 ondblclick={function (e) {
                     if (this.requestFullscreen) {
@@ -73,10 +81,10 @@ const VideoPlayer = function ({ item, path }) {
                 <img
                     src={svg["player_play"]}
                     class="playpause paused"
-                    Element={($el) => { Static.controlsPause = $el; }}
+                    Element={($el) => { elMedia.controlsPause = $el; }}
                     onclick={function (e) {
                         e.stopPropagation();
-                        Static.el.paused ? Static.el.play() : Static.el.pause();
+                        elMedia.el.paused ? elMedia.el.play() : elMedia.el.pause();
                     }}
                 />
                 <span class="progress_player">
@@ -91,12 +99,12 @@ const VideoPlayer = function ({ item, path }) {
                                 elem = e.target
                             }
                             let progress = Math.floor(e.offsetX) / Math.floor(elem.clientWidth);
-                            Static.controlsProgressLine.style.width = progress * 100 + '%'
-                            Static.el.currentTime = Static.el.duration * progress
+                            elMedia.controlsProgressLine.style.width = progress * 100 + '%'
+                            elMedia.el.currentTime = elMedia.el.duration * progress
                         }}
                     >
                         <span
-                            Element={($el) => { Static.controlsProgressLine = $el; }}
+                            Element={($el) => { elMedia.controlsProgressLine = $el; }}
                             class="current"
                         >​</span>
                     </span>
@@ -104,11 +112,11 @@ const VideoPlayer = function ({ item, path }) {
                 <span class="time">
                     <span
                         class="currentTime"
-                        Element={($el) => { Static.controlsCurrentTime = $el; }}
+                        Element={($el) => { elMedia.controlsCurrentTime = $el; }}
                     >00:00:00</span> /
                     <span
                         class="duration"
-                        Element={($el) => { Static.controlsDuration = $el; }}
+                        Element={($el) => { elMedia.controlsDuration = $el; }}
                     >00:00:00</span>
                 </span>
                 <span class="volume">
@@ -117,8 +125,8 @@ const VideoPlayer = function ({ item, path }) {
                         class="dynamic"
                         onclick={function (e) {
                             e.stopPropagation();
-                            Static.el.muted = !Static.el.muted
-                            if (Static.el.muted) {
+                            elMedia.el.muted = !elMedia.el.muted
+                            if (elMedia.el.muted) {
                                 this.src = svg["player_dynamic_off"];
                                 this.classList.add("off");
                             } else {
@@ -133,12 +141,12 @@ const VideoPlayer = function ({ item, path }) {
                         src={svg["player_fullsize_on"]}
                         onclick={function (e) {
                             e.stopPropagation();
-                            if (Static.el.requestFullscreen) {
-                                Static.el.requestFullscreen()
-                            } else if (Static.el.webkitRequestFullscreen) {
-                                Static.el.webkitRequestFullscreen()
-                            } else if (Static.el.msRequestFullscreen) {
-                                Static.el.msRequestFullscreen()
+                            if (elMedia.el.requestFullscreen) {
+                                elMedia.el.requestFullscreen()
+                            } else if (elMedia.el.webkitRequestFullscreen) {
+                                elMedia.el.webkitRequestFullscreen()
+                            } else if (elMedia.el.msRequestFullscreen) {
+                                elMedia.el.msRequestFullscreen()
                             }
                         }}
                     />

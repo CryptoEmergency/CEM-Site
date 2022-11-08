@@ -4276,6 +4276,12 @@ s
 			display: block;
 			margin-bottom: 5px;
 		}
+
+		.c-avataricon {
+			&--micro {
+				margin-left: 0;
+			}
+		}
 	}
 }
 
@@ -4477,6 +4483,21 @@ s
 				padding: 0 20px;
 			}
 		}
+
+		.c-main__body {
+			@media(max-width:1023px) {
+				padding-left: 0;
+				padding-right: 0;
+			}
+
+			.user_news_block {
+				@media(max-width:1023px) {
+					padding-top: 0;
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+		}
 	}
 }
 
@@ -4524,7 +4545,8 @@ s
 		position: static;
 		display: flex;
 		justify-content: space-between;
-		align-self: flex-end;
+		// align-self: flex-end;
+		align-self: center;
 		width: 46px;
 		margin: 0 !important;
 		filter: invert(96%) sepia(5%) saturate(6439%) hue-rotate(180deg) brightness(95%) contrast(76%);

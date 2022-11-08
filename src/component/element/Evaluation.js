@@ -13,6 +13,10 @@ const Evaluation = function ({ rating, callBackBefore, callBackAfter }) {
         <img
           class={[!Variable.auth ? "comment_inactive" : null]}
           src={svg["dislike"]}
+          onclick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           PressWait={{
             timeout: 1000,
             callBackBefore: () => {
@@ -21,7 +25,6 @@ const Evaluation = function ({ rating, callBackBefore, callBackAfter }) {
             callBackAfter: () => {
               callBackAfter("minus")
             },
-
           }}
         />
       </div>
@@ -30,6 +33,10 @@ const Evaluation = function ({ rating, callBackBefore, callBackAfter }) {
         <img
           class={[!Variable.auth ? "comment_inactive" : null]}
           src={svg["like"]}
+          onclick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           PressWait={{
             timeout: 1000,
             callBackBefore: () => {

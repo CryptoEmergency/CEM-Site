@@ -152,6 +152,21 @@
     }
 }
 
+.lenta_avatar {
+    display: flex;
+}
+
+.c-lentaitem {
+
+    &__header {
+        display: flex;
+    }
+
+    &__link {
+        flex-grow: 1;
+    }
+}
+
 .bl_one {
 
     .comment {

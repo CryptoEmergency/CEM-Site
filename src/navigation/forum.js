@@ -467,11 +467,6 @@ const start = function (data, ID) {
                                         <img style="height: 150px; width: 150px;" src={images['forum/forum_company_11']} />
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Академия криптовалют «Digital Future” Обучают людей базовым знаниям для работы с криптовалютой, а именно:</p>
-                                            <p>1. Как покупать и продавать?</p>
-                                            <p>2. Как переводить другим людям?</p>
-                                            <p>3. Где хранить?</p>
-                                            <p>4. Как платить налоги с крипты?</p>
-                                            <p>5. Как анализировать проекты?</p>
                                         </div>
                                     </a>
                                 </div>
@@ -505,6 +500,15 @@ const start = function (data, ID) {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_14']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Игорь Еньшин</p>
+                                            <p>Руководитель IT-направления компании CryptoEmergency</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_7']} />
                                         </div>
                                         <div>
@@ -523,11 +527,20 @@ const start = function (data, ID) {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_5']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_15']} />
                                         </div>
                                         <div>
-                                            <p style="margin-top: 10px; margin-bottom: 5px">Руслан Захаркин</p>
-                                            <p>крипто блогер</p>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Кожухов Ярослав</p>
+                                            <p>Community Manager и Ambassador Lead в Metis</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_16']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Владимир Бочаров</p>
+                                            <p>Tech Community and Integration Associate в Metis</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
@@ -568,6 +581,15 @@ const start = function (data, ID) {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_5']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Руслан Захаркин</p>
+                                            <p>крипто блогер</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_9']} />
                                         </div>
                                         <div>
@@ -599,7 +621,17 @@ const start = function (data, ID) {
                                         </div>
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Евгений Царицанский</p>
-                                            <p>Криптоэксперт, основатель академии криптовалют. Обучил финансовой грамотности более 4000 человек. Щедролог </p>
+                                            <p>Криптоэксперт, основатель академии криптовалют.</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
