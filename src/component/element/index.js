@@ -17,7 +17,7 @@ export { Avatar } from './Avatar.js';
 
 export { LentaMedia } from "./LentaMedia.js"
 export { AudioPlayerCopy } from "./AudioPlayerCopy.js"
-export { AudioPlayer } from "./AudioPlayer.js"
+export { AudioPlayer } from "./player/AudioPlayer.js"
 
 export { MediaButton } from "./MediaButton.js"
 

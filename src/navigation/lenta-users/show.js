@@ -13,14 +13,13 @@ import { api } from '@src/apiFunctions.js'
 import { BlockShowLenta } from "@component/blocks/index.js";
 
 const start = function (data, ID = "mainBlock") {
-  console.log('=d29407=', data, ID)
   let Static = {}
   Static.elMedia = {}
   Static.elToogle = {}
   Static.elShowTextFull = {}
   Static.elShowTextShort = {}
   Static.elMedia = {}
-  let item;
+  let item, showItemsMenu;
 
   init(
     async () => {
@@ -28,6 +27,7 @@ const start = function (data, ID = "mainBlock") {
       if (data && data.item) {
         item = data.item
       } else {
+        showItemsMenu = true
         let response = await api({ type: "get", action: "getPost", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
         item = response.list_records[0]
       }
@@ -40,6 +40,7 @@ const start = function (data, ID = "mainBlock") {
           <BlockShowLenta
             Static={Static}
             item={item}
+            showItemsMenu={showItemsMenu}
           />
 
         </div>

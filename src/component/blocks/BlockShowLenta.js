@@ -12,7 +12,7 @@ import { BlockLentaUsers } from '@component/blocks/index.js';
 import { api } from '@src/apiFunctions.js'
 
 
-const BlockShowLenta = function ({ Static, item }) {
+const BlockShowLenta = function ({ Static, item, showItemsMenu }) {
   // Variable.Static.FooterShow = false
   initOne(() => {
     Static.mainComment = {
@@ -28,6 +28,7 @@ const BlockShowLenta = function ({ Static, item }) {
             <BlockLentaUsers
               Static={Static}
               item={item}
+              showItemsMenu={showItemsMenu}
             />
             <h2>{Variable.lang.h.modal_comment}</h2>
             <div class="c-comments__form">
