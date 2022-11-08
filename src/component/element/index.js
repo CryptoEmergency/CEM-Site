@@ -31,7 +31,6 @@ export { Select } from "./formsElement/Select.js"
 export { CheckBox } from "./formsElement/CheckBox.js";
 //============
 
-export { LentaMedia } from "./LentaMedia.js"
 //===player===
 // Медиа плееры
 export { VideoPlayer } from "./player/VideoPlayer.js";
