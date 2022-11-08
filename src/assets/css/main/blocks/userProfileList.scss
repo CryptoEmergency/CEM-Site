@@ -499,6 +499,11 @@
         margin-top: 5px;
         position: relative;
         overflow: hidden;
+        max-height: 100%;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 14;
+        // -webkit-box-orient: vertical;
+        // overflow: hidden;
 
         a {
             color: $cold_heights;
