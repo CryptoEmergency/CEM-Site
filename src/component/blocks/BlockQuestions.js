@@ -157,16 +157,18 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
               async (active, nameOptions) => {
           
                 Static.filtersQuestions[nameOptions].value = active 
-                       
-                     if(active == 'all')
-                    {
-                      console.log(Static.newFilter)
-                    }
+                if(active == 'all')
+                {
+               
+           
+                 delete Static.newFilter.close
+                }  
+                   
                     if(active == 'open')
                     {
-                      console.log(1)
-                  //    delete Static.newFilter.languages.code
-                      console.log(Static.newFilter)
+                   
+               
+                      Static.newFilter.close = false
                     }
                     if(active == 'close')
                     {
