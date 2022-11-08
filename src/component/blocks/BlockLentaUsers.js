@@ -182,11 +182,11 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
           />
         </div>
         <div class="comment_body">
-          {/* <LentaMedia
+          <LentaMedia
             Static={Static}
             items={item.media}
             path="posts"
-          /> */}
+          />
           <div class={!item.media.length && item.text.length < 450 ? "user_post_text_background" : null}>
             <span class="comment_text">
               {() => {

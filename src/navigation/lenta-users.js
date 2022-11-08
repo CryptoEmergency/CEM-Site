@@ -42,6 +42,7 @@ const start = function (data, ID) {
       Static.elMedia = {}
       Static.elShowTextFull = {}
       Static.elShowTextShort = {}
+      Static.elMedia = {}
       Static.lentaFilters = {
         lang: Variable.lang.code,
         langName: Variable.lang.lang_orig,
