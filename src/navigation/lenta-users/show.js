@@ -13,13 +13,18 @@ import { api } from '@src/apiFunctions.js'
 import { BlockShowLenta } from "@component/blocks/index.js";
 
 const start = function (data, ID = "mainBlock") {
+  console.log('=d29407=', data, ID)
+  let Static = {}
+  Static.elMedia = {}
+  Static.elToogle = {}
+  Static.elShowTextFull = {}
+  Static.elShowTextShort = {}
+  Static.elMedia = {}
   let item;
 
-
   init(
-
-
     async () => {
+
       if (data && data.item) {
         item = data.item
       } else {
@@ -32,7 +37,10 @@ const start = function (data, ID = "mainBlock") {
       return (
 
         <div class="answer_container c-main__body">
-          <BlockShowLenta item={item} />
+          <BlockShowLenta
+            Static={Static}
+            item={item}
+          />
 
         </div>
       )

@@ -18,7 +18,7 @@ import { getDateFormat } from "@src/functions.js";
 
 let Static = {}
 
-const BlockShowLenta = function ({ item }) {
+const BlockShowLenta = function ({ Static, item }) {
   // Variable.Static.FooterShow = false
   initOne(() => {
     Static.mainComment = {

@@ -39,15 +39,15 @@ const ToogleItem = function ({ Static, name }) {
 
 const start = function (data, ID) {
   let Static = {}
+  Static.elMedia = {}
+  Static.elToogle = {}
+  Static.elShowTextFull = {}
+  Static.elShowTextShort = {}
+  Static.elMedia = {}
   init(
     async () => {
       Static.nameRecords = "PageLentaall";
       Static.lentaPage = "all";
-      Static.elMedia = {}
-      Static.elToogle = {}
-      Static.elShowTextFull = {}
-      Static.elShowTextShort = {}
-      Static.elMedia = {}
       Static.lentaFilters = {
         lang: Variable.lang.code,
         langName: Variable.lang.lang_orig,
