@@ -36,65 +36,65 @@ const BlockShowLenta = function ({ item }) {
               item={item}
 
             />
-            <div class="news_page_comments">
-              <h2>{Variable.lang.h.modal_comment}</h2>
-              <div class="c-comments__form">
-                <div class="c-comments__field create_post_container1">
-                  <TextArea
-                    Static={Static.mainComment}
-                    className="text1 create_post_chapter"
-                  />
-                </div>
-                <ButtonSubmit
-                  text={<img class="c-comments__icon" src={svg["send_message"]} />}
-                  className="c-comments__send button-container-preview"
-                  onclick={async (tmp, el) => {
-                    if (!Static.mainComment.el.value.trim().length) {
-                      return
-                    }
-                    let text = Static.mainComment.el.value.trim()
-                    let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { comments: { text: text } } } })
-                    if (response.status === "ok") {
-                      Static.mainComment.el.value = ""
-                      if (Static.adaptive) {
-                        Static.mainComment.el.style.height = (Static.mainComment.el.dataset.maxHeight / Static.adaptive) + 'px';
-                      }
-                      if (response.result && response.result.list_records && response.result.list_records[0]) {
-                        let newRes = response.result.list_records[0]
-                        item.comments.unshift(newRes)
-                        initReload();
-                      }
-                    } else {
-                      Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                    }
-                  }}
+
+            <h2>{Variable.lang.h.modal_comment}</h2>
+            <div class="c-comments__form">
+              <div class="c-comments__field create_post_container1">
+                <TextArea
+                  Static={Static.mainComment}
+                  className="text1 create_post_chapter"
                 />
               </div>
-              {() => {
-                if (item.comments && item.comments.length) {
-                  const arrReturn = item.comments.map(function (itemComments, i) {
-                    return (
-                      <Comment
-                        item={itemComments}
-                        mainId={item._id}
-                        action="setPost"
-                      />
-                    )
-                  })
-                  return (
-                    <div class="post_comments">
-                      <div class="user_news_item">
-                        {arrReturn}
-                      </div>
-                    </div>
-                  )
-                } else {
-                  // return (<NotFound
-                  // />
-                  // )
-                }
-              }}
+              <ButtonSubmit
+                text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                className="c-comments__send button-container-preview"
+                onclick={async (tmp, el) => {
+                  if (!Static.mainComment.el.value.trim().length) {
+                    return
+                  }
+                  let text = Static.mainComment.el.value.trim()
+                  let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { comments: { text: text } } } })
+                  if (response.status === "ok") {
+                    Static.mainComment.el.value = ""
+                    if (Static.adaptive) {
+                      Static.mainComment.el.style.height = (Static.mainComment.el.dataset.maxHeight / Static.adaptive) + 'px';
+                    }
+                    if (response.result && response.result.list_records && response.result.list_records[0]) {
+                      let newRes = response.result.list_records[0]
+                      item.comments.unshift(newRes)
+                      initReload();
+                    }
+                  } else {
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                  }
+                }}
+              />
             </div>
+            {() => {
+              if (item.comments && item.comments.length) {
+                const arrReturn = item.comments.map(function (itemComments, i) {
+                  return (
+                    <Comment
+                      item={itemComments}
+                      mainId={item._id}
+                      action="setPost"
+                    />
+                  )
+                })
+                return (
+                  <div class="post_comments">
+                    <div class="user_news_item">
+                      {arrReturn}
+                    </div>
+                  </div>
+                )
+              } else {
+                // return (<NotFound
+                // />
+                // )
+              }
+            }}
+
 
           </div>
         </div>
