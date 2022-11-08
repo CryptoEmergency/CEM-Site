@@ -122,8 +122,7 @@ const ModalAfterRegisterForm = function (data, reload) {
       },
   
     }
-
-
+    
     Static.country = {
       value:"",
       type:"text",

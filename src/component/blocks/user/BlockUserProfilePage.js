@@ -9,7 +9,6 @@ import {
 } from '@betarost/cemjs';
 
 import svg from '@assets/svg/index.js';
-import { If } from '@component/helpers/All.js';
 import { Avatar, ItemsMenu } from '@component/element/index.js';
 
 const BlockUserProfilePage = {}
@@ -41,129 +40,139 @@ BlockUserProfilePage.aboutUser = function (data) {
                 <div class="about_user_section-1 about_user_section-row_type-2">
                     <div class="about_user_section-row_type-3">
                         <div class="about_user_section">
-                            <If
-                                data={Variable.myInfo._id == data.userInfo._id}
-                                dataIf={
-                                    <div class="about_user_section_inner">
-                                        <p>{Variable.lang.p.aboutMe}</p>
-                                        <span class="about_me_block">
-                                            {data.userInfo.information.about ? Helpers.clearText(data.userInfo.information.about) : ''}
-                                        </span>
-                                        <img class="edit_about_me" src={svg['pencil']} />
-                                        <div class="user_grid_info-1">
-                                            <div class="user_short_info_row">
-                                                <span>{Variable.lang.label.name}</span>
-                                                <div>
-                                                    <img class="editblockinfo" src={svg['pencil']} />
-                                                    <input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
-                                            </div>
-                                            <div class="user_short_info_row">
-                                                <span>{Variable.lang.label.speciality}</span>
-                                                <div>
-                                                    <img class="editblockinfo" src={svg['pencil']} />
-                                                    <input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} />
+                            {()=>{
+                                if(Variable.myInfo._id == data.userInfo._id){
+                                    return(
+                                        <div class="about_user_section_inner">
+                                            <p>{Variable.lang.p.aboutMe}</p>
+                                            <span class="about_me_block">
+                                                {data.userInfo.information.about ? Helpers.clearText(data.userInfo.information.about) : ''}
+                                            </span>
+                                            <img class="edit_about_me" src={svg['pencil']} />
+                                            <div class="user_grid_info-1">
+                                                <div class="user_short_info_row">
+                                                    <span>{Variable.lang.label.name}</span>
+                                                    <div>
+                                                        <img class="editblockinfo" src={svg['pencil']} />
+                                                        <input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
+                                                </div>
+                                                <div class="user_short_info_row">
+                                                    <span>{Variable.lang.label.speciality}</span>
+                                                    <div>
+                                                        <img class="editblockinfo" src={svg['pencil']} />
+                                                        <input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} />
+                                                    </div>
+                                                </div>
+                                                <div class="user_short_info_row">
+                                                    <span>{Variable.lang.label.country}</span>
+                                                    <div><input id="country" class="userinfoinput" readonly value={data.userInfo.country.eng_name} />
+                                                    </div>
+                                                </div>
+                                                <div class="user_short_info_row">
+                                                    <span>{Variable.lang.label.city}</span>
+                                                    <div><img class="editblockinfo" src={svg['pencil']} />
+                                                        <input id="city" class="userinfoinput" readonly value={data.userInfo.information.city} />
+                                                    </div>
+                                                </div>
+                                                <div class="user_short_info_row">
+                                                    <span>{Variable.lang.label.birthDate}</span>
+                                                    <div>
+                                                        <img class="editblockinfo" src={svg['pencil']} />
+                                                        <input type="date" id="birthday" class="userinfoinput" readonly value={data.userInfo.information.birthday ? Helpers.getDateFormat(data.userInfo.information.birthday) : ''} /></div>
+                                                </div>
+                                                <div class="user_short_info_row">
+                                                    <span>{Variable.lang.span.regDate}</span>
+                                                    <div><input type="date" class="userinfoinput" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
                                                 </div>
                                             </div>
-                                            <div class="user_short_info_row">
-                                                <span>{Variable.lang.label.country}</span>
-                                                <div><input id="country" class="userinfoinput" readonly value={data.userInfo.country.eng_name} />
-                                                </div>
-                                            </div>
-                                            <div class="user_short_info_row">
-                                                <span>{Variable.lang.label.city}</span>
-                                                <div><img class="editblockinfo" src={svg['pencil']} />
-                                                    <input id="city" class="userinfoinput" readonly value={data.userInfo.information.city} />
-                                                </div>
-                                            </div>
-                                            <div class="user_short_info_row">
-                                                <span>{Variable.lang.label.birthDate}</span>
-                                                <div>
-                                                    <img class="editblockinfo" src={svg['pencil']} />
-                                                    <input type="date" id="birthday" class="userinfoinput" readonly value={data.userInfo.information.birthday ? Helpers.getDateFormat(data.userInfo.information.birthday) : ''} /></div>
-                                            </div>
-                                            <div class="user_short_info_row">
-                                                <span>{Variable.lang.span.regDate}</span>
-                                                <div><input type="date" class="userinfoinput" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
-                                            </div>
-                                        </div>
 
-                                        <div class="about_user_section_points_container">
-                                            <img class="about_user_section_points" src={svg['points']} />
-                                            <div class="about_user_section_points_menu">
-                                                <div class="about_user_section_points_menu_item about_user_edit_handler" >{Variable.lang.text.edit}</div>
+                                            <div class="about_user_section_points_container">
+                                                <img 
+                                                    onclick={()=>{
+                                                        Variable.SetModals({ name: "ModalUserInfoEdit", data: {} })
+                                                    }} 
+                                                    class="about_user_section_points" 
+                                                    src={svg['pencil']} 
+                                                />
                                             </div>
                                         </div>
-                                    </div>
-
-                                }
-                                dataElse={
-                                    <div class="about_user_section_inner">
-                                        <p>{Variable.lang.p.aboutMe}</p>
-                                        <If
-                                            data={data.userInfo.information.about}
-                                            dataIf={
-                                                <span class="about_me_block">{Helpers.clearText(data.userInfo.information.about)}</span>
-                                            }
-                                        />
-                                        <div class="user_grid_info-1">
-                                            <If
-                                                data={data.userInfo.fullname}
-                                                dataIf={
-                                                    <div class="user_short_info_row">
-                                                        <span>{Variable.lang.label.name}</span>
-                                                        <div><input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
-                                                    </div>
+                                    )
+                                } else {
+                                    return(
+                                        <div class="about_user_section_inner">
+                                            <p>{Variable.lang.p.aboutMe}</p>
+                                            {()=>{
+                                                if(data.userInfo.information.about){
+                                                    return(
+                                                        <span class="about_me_block">{Helpers.clearText(data.userInfo.information.about)}</span>
+                                                    )
                                                 }
-                                            />
-                                            <If
-                                                data={data.userInfo.information.speciality}
-                                                dataIf={
-                                                    <div class="user_short_info_row">
-                                                        <span>{Variable.lang.label.speciality}</span>
-                                                        <div><input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /></div>
-                                                    </div>
-                                                }
-                                            />
-                                            <If
-                                                data={data.userInfo.country.eng_name}
-                                                dataIf={
-                                                    <div class="user_short_info_row">
-                                                        <span>{Variable.lang.label.country}</span>
-                                                        <div><input id="country" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.country.eng_name} /></div>
-                                                    </div>
-                                                }
-                                            />
-                                            <If
-                                                data={data.userInfo.information.city}
-                                                dataIf={
-                                                    <div class="user_short_info_row">
-                                                        <span>{Variable.lang.label.city}</span>
-                                                        <div><input id="city" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.information.city} /></div>
-                                                    </div>
-                                                }
-                                            />
-                                            {/* <If
-                                                data={data.userInfo.information.birthday}
-                                                dataIf={
-                                                    <div class="user_short_info_row">
-                                                        <span>{Variable.lang.label.birthDate}</span>
-                                                        <div><input type="date" id="birthDate" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.birthday)} /></div>
-                                                    </div>
-                                                }
-                                            /> */}
-                                            <If
-                                                data={data.userInfo.information.dateCreate}
-                                                dataIf={
-                                                    <div class="user_short_info_row">
-                                                        <span>{Variable.lang.span.regDate}</span>
-                                                        <div><input type="date" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
-                                                    </div>
-                                                }
-                                            />
+                                            }}
+                                            <div class="user_grid_info-1">
+                                                {()=>{
+                                                    if(data.userInfo.fullname){
+                                                        return(
+                                                            <div class="user_short_info_row">
+                                                                <span>{Variable.lang.label.name}</span>
+                                                                <div><input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                }}
+                                                {()=>{
+                                                    if(data.userInfo.information.speciality){
+                                                        return(
+                                                            <div class="user_short_info_row">
+                                                                <span>{Variable.lang.label.speciality}</span>
+                                                                <div><input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /></div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                }}
+                                                {()=>{
+                                                    if(data.userInfo.country.eng_name){
+                                                        return(
+                                                            <div class="user_short_info_row">
+                                                                <span>{Variable.lang.label.country}</span>
+                                                                <div><input id="country" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.country.eng_name} /></div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                }}
+                                                {()=>{
+                                                    if(data.userInfo.information.city){
+                                                        return(
+                                                            <div class="user_short_info_row">
+                                                                <span>{Variable.lang.label.city}</span>
+                                                                <div><input id="city" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.information.city} /></div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                }}
+                                                {()=>{
+                                                    if(data.userInfo.information.dateCreate){
+                                                        return(
+                                                            <div class="user_short_info_row">
+                                                                <span>{Variable.lang.span.regDate}</span>
+                                                                <div><input type="date" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
+                                                            </div> 
+                                                        )
+                                                    }
+                                                }}
+                                                {/* <If
+                                                    data={data.userInfo.information.birthday}
+                                                    dataIf={
+                                                        <div class="user_short_info_row">
+                                                            <span>{Variable.lang.label.birthDate}</span>
+                                                            <div><input type="date" id="birthDate" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.birthday)} /></div>
+                                                        </div>
+                                                    }
+                                                /> */}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )
                                 }
-                            />
+                            }}
                         </div>
                     </div>
                 </div>
@@ -172,23 +181,25 @@ BlockUserProfilePage.aboutUser = function (data) {
                         <div class="about_user_section">
                             <div class="about_user_section_inner interests_block">
                                 <p>{Variable.lang.p.interests}</p>
-                                <If
-                                    data={Variable.myInfo._id == data.userInfo._id}
-                                    dataIf={
-                                        <div class="about_user_section_points_container">
-                                            <img class="about_user_section_points" src={svg['points']} />
-                                            <div class="about_user_section_points_menu">
-                                                <div id="addNewInterests" class="about_user_section_points_menu_item">{Variable.lang.button.add}</div>
-                                                <If
-                                                    data={data.userInfo.interest.length != 0}
-                                                    dataIf={
-                                                        <div class="about_user_section_points_menu_item about_user_edit_handler">{Variable.lang.button.edit}</div>
-                                                    }
-                                                />
+                                {()=>{
+                                    if(Variable.myInfo._id == data.userInfo._id){
+                                        return(
+                                            <div class="about_user_section_points_container">
+                                                <img class="about_user_section_points" src={svg['points']} />
+                                                <div class="about_user_section_points_menu">
+                                                    <div id="addNewInterests" class="about_user_section_points_menu_item">{Variable.lang.button.add}</div>
+                                                    {()=>{
+                                                        if(data.userInfo.interest.length != 0){
+                                                            return(
+                                                                <div class="about_user_section_points_menu_item about_user_edit_handler">{Variable.lang.button.edit}</div>
+                                                            )
+                                                        }
+                                                    }}
+                                                </div>
                                             </div>
-                                        </div>
+                                        )
                                     }
-                                />
+                                }}
                                 {
                                     data.userInfo.interest.map((item, index) => {
                                         return (
@@ -208,23 +219,23 @@ BlockUserProfilePage.aboutUser = function (data) {
                                 <p>{Variable.lang.p.work}</p>
                                 <div class="work_and_education">
                                 </div>
-                                <If
-                                    data={Variable.myInfo._id == data.userInfo._id}
-                                    dataIf={
-                                        <div class="about_user_section_points_container">
-                                            <img class="about_user_section_points" src={svg['points']} />
-                                            <div class="about_user_section_points_menu">
-                                                <div id="addNewWork" class="about_user_section_points_menu_item about_user_add_handler">{Variable.lang.button.add}</div>
-                                                <If
-                                                    data={data.userInfo.work.length != 0}
-                                                    dataIf={
-                                                        <div class="about_user_section_points_menu_item about_user_edit_handler">{Variable.lang.button.edit}</div>
-                                                    }
-                                                />
+                                {()=>{
+                                    if(Variable.myInfo._id == data.userInfo._id){
+                                        return(
+                                            <div class="about_user_section_points_container">
+                                                <img class="about_user_section_points" src={svg['points']} />
+                                                <div class="about_user_section_points_menu">
+                                                    <div id="addNewWork" class="about_user_section_points_menu_item about_user_add_handler">{Variable.lang.button.add}</div>
+                                                    {()=>{
+                                                        if(data.userInfo.work.length != 0){
+                                                            <div class="about_user_section_points_menu_item about_user_edit_handler">{Variable.lang.button.edit}</div>
+                                                        }
+                                                    }}
+                                                </div>
                                             </div>
-                                        </div>
+                                        )
                                     }
-                                />
+                                }}
                                 {
                                     data.userInfo.work.map((item, index) => {
                                         return (
@@ -498,54 +509,57 @@ BlockUserProfilePage.answers = function (data) {
                                     {Helpers.clearText(item.text)}
                                 </div>
                             </div>
-                            <If
-                                data={item.active}
-                                dataIf={
-                                    <div data-action="yourAnswersOptional" class="your_answers_optional">
-                                        <img src={svg['points2']} />
-                                        {/* <div class="your_answers_menu dn">
-                                        <div class="your_answers_menu_inner">
-                                        <div data-action="answerAdditionallyItem" class="answer_additionally_item delete" data-answer-id="{{_id}}" data-type="answer">{Variable.lang.select.delete}</div>
+                            {()=>{
+                                if(item.active){
+                                    return(
+                                        <div data-action="yourAnswersOptional" class="your_answers_optional">
+                                            <img src={svg['points2']} />
+                                            {/* <div class="your_answers_menu dn">
+                                            <div class="your_answers_menu_inner">
+                                            <div data-action="answerAdditionallyItem" class="answer_additionally_item delete" data-answer-id="{{_id}}" data-type="answer">{Variable.lang.select.delete}</div>
+                                            </div>
+                                        </div> */}
                                         </div>
-                                    </div> */}
-                                    </div>
+                                    )
+                                } else {
+                                    return(
+                                        <div class="delete_question"></div>
+                                    )
                                 }
-                                dataElse={
-                                    <div class="delete_question"></div>
-                                }
-                            />
+                            }}
                         </div>
                     )
                 })
             }
-            <If
-                data={data.items.list_records.length < data.items.totalFound}
-                dataIf={
-                    <div class="crypto_exchanges_footer">
-                        <a class="btn-view-all-a"
-                            onclick={async () => {
+            {()=>{
+                if(data.items.list_records.length < data.items.totalFound){
+                    return(
+                        <div class="crypto_exchanges_footer">
+                            <a class="btn-view-all-a"
+                                onclick={async () => {
 
-                                let tmp = await sendApi.send({
-                                    action: "getAnswers", short: true, filter: {
-                                        author: data.userInfo._id,
-                                    },
-                                    select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
-                                    limit: 10,
-                                    offset: data.items.list_records.length
-                                });
+                                    let tmp = await sendApi.send({
+                                        action: "getAnswers", short: true, filter: {
+                                            author: data.userInfo._id,
+                                        },
+                                        select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
+                                        limit: 10,
+                                        offset: data.items.list_records.length
+                                    });
 
-                                Variable.PageUserProfileAnswers.list_records.push(...tmp.list_records)
-                                initReload()
-                            }
-                            }
-                        >
-                            <div class="btn-view-all" >
-                                <div>{Variable.lang.button.showMore}</div>
-                            </div>
-                        </a>
-                    </div>
+                                    Variable.PageUserProfileAnswers.list_records.push(...tmp.list_records)
+                                    initReload()
+                                }
+                                }
+                            >
+                                <div class="btn-view-all" >
+                                    <div>{Variable.lang.button.showMore}</div>
+                                </div>
+                            </a>
+                        </div>
+                    )
                 }
-            />
+            }}
         </div>
     )
 
@@ -594,105 +608,105 @@ BlockUserProfilePage.questions = function (data) {
                                 <div class="your_answers_counter">
                                     <span class="your_answers_counter_desc">{Variable.lang.tableTitle.views}</span><span class="your_answers_counter_number">{item.statistic.view}</span>
                                 </div>
-                                <If
-                                    data={item.bestId}
-                                    dataIf={
-                                        <div class="your_answers_avatar">
-                                            <Avatar
-                                                author={item.author}
-                                            />
-                                            <div class="your_answers_name">
-                                                <p>{item.author.nickname}</p>
-                                                <p> </p>
+                                {()=>{
+                                    if(item.bestId){
+                                        return(
+                                            <div class="your_answers_avatar">
+                                                <Avatar
+                                                    author={item.author}
+                                                />
+                                                <div class="your_answers_name">
+                                                    <p>{item.author.nickname}</p>
+                                                    <p> </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        )
+                                    }else{
+                                        return(
+                                            <div class="your_answers_avatar">
+                                                ---
+                                            </div>
+                                        )
                                     }
-                                    dataElse={
-                                        <div class="your_answers_avatar">
-                                            ---
-                                        </div>
-                                    }
-                                />
+                                }}
                                 <div class="your_answers_status">
                                     <div class="your_answers_status_inner">
-                                        <If
-                                            data={item.del}
-                                            dataIf={
-                                                <img src={svg['question_status_delete']} />
+                                        {()=>{
+                                            if(item.del){
+                                                return(
+                                                    <img src={svg['question_status_delete']} />
+                                                )
+                                            } else if(item.close){
+                                                if(item.bestId){
+                                                    return(
+                                                        <img src={svg['best_answer']} />
+                                                    )
+                                                } else {
+                                                    return(
+                                                        <img src={svg['closed_question']} />
+                                                    )
+                                                }
+                                            } else {
+                                                return(
+                                                    <img src={svg['open_question']} />
+                                                )
                                             }
-                                            dataElse={
-                                                <If
-                                                    data={item.close}
-                                                    dataIf={
-                                                        <If
-                                                            data={item.bestId}
-                                                            dataIf={
-                                                                <img src={svg['best_answer']} />
-                                                            }
-                                                            dataElse={
-                                                                <img src={svg['closed_question']} />
-                                                            }
-                                                        />
-                                                    }
-                                                    dataElse={
-                                                        <img src={svg['open_question']} />
-                                                    }
-                                                />
-                                            }
-                                        />
+                                        }}
                                     </div>
                                 </div>
-                                <If
-                                    data={item.del}
-                                    dataIf={
-                                        <div class="delete_question"></div>
+                                {()=>{
+                                    if(item.del){
+                                        return(
+                                            <div class="delete_question"></div>
+                                        )
+                                    } else {
+                                        return(
+                                            <div class="your_answers_optional">
+                                                <img src={svg['points2']} />
+                                                {/* <div class="your_answers_menu dn">
+                                                    <div class="your_answers_menu_inner">
+                                                        <a data-action="link" href={'/question/show/' + item._id}><div class="answer_additionally_item">{Variable.lang.select.selectBest}</div></a>
+                                                        <div data-action="answerAdditionallyItem" class="answer_additionally_item close" data-answer-id={item._id} data-type="question">{Variable.lang.select.closeQuestion}</div>
+                                                        <div data-action="answerAdditionallyItem" class="answer_additionally_item delete" data-answer-id={questions.list_records[key]._id} data-type="question">{Variable.lang.select.delete}</div>
+                                                    </div>
+                                                </div> */}
+                                            </div>
+                                        )
                                     }
-                                    dataElse={
-                                        <div class="your_answers_optional">
-                                            <img src={svg['points2']} />
-                                            {/* <div class="your_answers_menu dn">
-                                                <div class="your_answers_menu_inner">
-                                                    <a data-action="link" href={'/question/show/' + item._id}><div class="answer_additionally_item">{Variable.lang.select.selectBest}</div></a>
-                                                    <div data-action="answerAdditionallyItem" class="answer_additionally_item close" data-answer-id={item._id} data-type="question">{Variable.lang.select.closeQuestion}</div>
-                                                    <div data-action="answerAdditionallyItem" class="answer_additionally_item delete" data-answer-id={questions.list_records[key]._id} data-type="question">{Variable.lang.select.delete}</div>
-                                                </div>
-                                            </div> */}
-                                        </div>
-                                    }
-                                />
+                                }}
                             </div>
                         )
                     })
                 }
             </div>
-            <If
-                data={data.items.list_records.length < data.items.totalFound}
-                dataIf={
-                    <div class="crypto_exchanges_footer">
-                        <a class="btn-view-all-a"
-                            onclick={async () => {
+            {()=>{
+                if(data.items.list_records.length < data.items.totalFound){
+                    return(
+                        <div class="crypto_exchanges_footer">
+                            <a class="btn-view-all-a"
+                                onclick={async () => {
 
-                                let tmp = await sendApi.send({
-                                    action: "getQuestions", short: true, filter: {
-                                        author: data.userInfo._id,
-                                    },
-                                    select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
-                                    limit: 10,
-                                    offset: data.items.list_records.length
-                                });
+                                    let tmp = await sendApi.send({
+                                        action: "getQuestions", short: true, filter: {
+                                            author: data.userInfo._id,
+                                        },
+                                        select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
+                                        limit: 10,
+                                        offset: data.items.list_records.length
+                                    });
 
-                                Variable.PageUserProfileQuestions.list_records.push(...tmp.list_records)
-                                initReload()
-                            }
-                            }
-                        >
-                            <div class="btn-view-all" >
-                                <div>{Variable.lang.button.showMore}</div>
-                            </div>
-                        </a>
-                    </div>
+                                    Variable.PageUserProfileQuestions.list_records.push(...tmp.list_records)
+                                    initReload()
+                                }}
+                            >
+                                <div class="btn-view-all" >
+                                    <div>{Variable.lang.button.showMore}</div>
+                                </div>
+                            </a>
+                        </div>
+                    )
                 }
-            />
+            }}
         </div>
     )
 };

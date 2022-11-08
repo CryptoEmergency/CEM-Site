@@ -208,3 +208,30 @@
     margin-bottom: 5px;
     margin-top: 15px;
   }
+
+  @media(max-width: 970px) {
+    .lottery_form{
+      padding: 20px 15px;
+    }
+    .lottery_data{
+      margin-bottom: 20px;
+    }
+    .lottery_main{
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+    .lottery_steps_list{
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+  }
+
+  @media(max-width: 767px) {
+    .lottery_post_banner{
+      width: auto;
+      max-width: 100%;
+    }
+  }
