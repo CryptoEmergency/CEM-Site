@@ -60,7 +60,12 @@ const start = function () {
 
             // console.log('=633dca=', messageUser, activeUser)
             return (
-                <div class="messages_block">
+                <div
+                    class={[
+                        "messages_block",
+                        Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+                      ]}
+                    >
                     <div class="messages_left_part">
                         <div class="chats_search">
                         </div>
