@@ -212,7 +212,7 @@ const restApi = {}
 restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort }) {
   // console.log('=847793=', "restApi.getPost", cache, name, limit, offset, filter, select, sort)
   let response = { totalFound: 0, list_records: [] }
-  let data = { type: "get", action: "getPost", short: true, cache, limit, offset, filter, select, sort }
+  let data = { type: "get", action: "getPost", short: true, cache, name, limit, offset, filter, select, sort }
   let tmp = await sendApi.send(data);
   if (tmp) {
     if (typeof tmp.totalFound == "undefined")

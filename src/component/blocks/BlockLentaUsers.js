@@ -19,7 +19,7 @@ import {
 } from "@component/element/index.js";
 import { If } from "@component/helpers/All.js";
 
-const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, show, numIndex, elem, total, totalFound, type }) {
+const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, show, index }) {
   return (
     <div
       class="c-fullnews__item user_news_item"
@@ -186,6 +186,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
             Static={Static}
             items={item.media}
             path="posts"
+            changeToogle={changeToogle}
           />
           <div class={!item.media.length && item.text.length < 450 ? "user_post_text_background" : null}>
             <span class="comment_text">
@@ -278,9 +279,18 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
                 let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { evaluation: type } } })
                 if (response.status === 'ok') {
                   if (type == "plus") {
-                    item.statistic.rating++
+                    if (Static.nameRecords && typeof index != "undefined") {
+                      Variable[Static.nameRecords].list_records[index].statistic.rating++
+                    } else {
+                      item.statistic.rating++
+                    }
                   } else {
-                    item.statistic.rating--
+                    if (Static.nameRecords && index) {
+                      Variable[Static.nameRecords].list_records[index].statistic.rating--
+                    } else {
+                      item.statistic.rating--
+                    }
+
                   }
                   initReload()
                 } else {

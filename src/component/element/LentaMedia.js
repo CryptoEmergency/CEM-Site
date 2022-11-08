@@ -31,15 +31,13 @@ const swiperOptions = {
   spaceBetween: 20,
 };
 
-const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, replace }) {
+const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeToogle }) {
   if (items.length == 0) {
     return <></>;
   }
 
   if (items.find((item) => item.type === "audio")) {
     let ArrWithAudio = items.filter((item) => item.type === "audio");
-
-    items = items.filter((item) => item.type !== "audio");
 
     const array_size = 3;
 
@@ -48,13 +46,14 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, replace 
     for (let i = 0; i < ArrWithAudio.length; i += array_size) {
       audioArr.push(ArrWithAudio.slice(i, i + array_size));
     }
-    items = items.concat(audioArr);
+    items.push(audioArr);
   }
-  console.log('=654405=', items)
   return (
     <Swiper
       className=""
       options={swiperOptions}
+      replace={changeToogle}
+      // replace={false}
       slide={
         items.map(
           (item, index) => {
@@ -64,7 +63,7 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, replace 
                   <VideoPlayer
                     Static={Static}
                     item={item}
-                    path={path}
+                    path={`/assets/upload/${path}/`}
                   //  path={"/assets/upload/posts/"}
                   />
                 </div>
@@ -88,7 +87,6 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, replace 
                 <div class="swiper-slide user_post_text_background">
                   {
                     item.map((item, index) => {
-                      elem[numIndex][index + i * 3] = Variable.setRef();
                       return (
                         <AudioPlayerCopy
                           item={item}

@@ -9,7 +9,7 @@ import {
 // check
 import { restApi } from '@src/apiFunctions.js'
 import { Select, NotFound } from "@component/element/index.js";
-import { BlockLentaUsers } from "@component/blocks/index.js";
+import { BlockLentaUsers, BlockShowLenta } from "@component/blocks/index.js";
 
 const ToogleItem = function ({ Static, name }) {
   let addClass = "news_" + name
@@ -17,7 +17,7 @@ const ToogleItem = function ({ Static, name }) {
   return (
     <div
       class="users_news_category"
-      onClick={async () => {
+      onClick={async function () {
         if (Static.lentaPage == name) { return }
         Static.lentaPage = name
         Static.nameRecords = "PageLenta" + name;
@@ -25,10 +25,14 @@ const ToogleItem = function ({ Static, name }) {
         Static.elMedia = {}
         Static.elShowTextFull = {}
         Static.elShowTextShort = {}
-        await restApi.getPost({ name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
+        // this.classList.add("users_news_category_icon--" + addClass)
+        await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
         initReload()
       }}>
-      <i class={["users_news_category_icon", Static.lentaPage == name ? "users_news_category_icon--" + addClass : "users_news_category_icon--" + addClass + "_inactive"]}></i>
+      <i class={["users_news_category_icon", Static.lentaPage == name ? "users_news_category_icon--" + addClass : "users_news_category_icon--" + addClass + "_inactive"]}
+        Element={($el) => {
+          Static.elToogle[name] = $el
+        }}></i>
     </div>
   )
 }
@@ -40,6 +44,7 @@ const start = function (data, ID) {
       Static.nameRecords = "PageLentaall";
       Static.lentaPage = "all";
       Static.elMedia = {}
+      Static.elToogle = {}
       Static.elShowTextFull = {}
       Static.elShowTextShort = {}
       Static.elMedia = {}
@@ -61,7 +66,7 @@ const start = function (data, ID) {
         },
       };
 
-      await restApi.getPost({ name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
+      await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
     },
     () => {
       return (
@@ -80,7 +85,8 @@ const start = function (data, ID) {
                         } else {
                           Static.lentaFilters.author = null
                         }
-                        await restApi.getPost({ name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
+                        Static.changeToogle = true
+                        await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                       }}
                     />
                   </div>
@@ -93,7 +99,8 @@ const start = function (data, ID) {
                             onclick: async (langCode, langName, langOrig) => {
                               Static.lentaFilters.langName = langOrig;
                               Static.lentaFilters.lang = langCode;
-                              await restApi.getPost({ name: Static.nameRecords, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
+                              Static.changeToogle = true
+                              await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                             },
                           },
                         });
@@ -120,32 +127,18 @@ const start = function (data, ID) {
                             return (
                               <BlockLentaUsers
                                 Static={Static}
+                                index={index}
                                 item={item}
                                 changeToogle={changeToogle}
                                 ElemVisible={Variable[Static.nameRecords].list_records.length < Variable[Static.nameRecords].totalFound && index == (Variable[Static.nameRecords].list_records.length - 5) ?
                                   async () => {
                                     console.log('=0c6881=', "Load more")
                                     let tmp = await restApi.getPost({ limit: 15, offset: Variable[Static.nameRecords].list_records.length, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
-                                    console.log('=0b83c9=', tmp)
                                     Variable[Static.nameRecords].list_records.push(...tmp.list_records)
                                     initReload()
                                   }
                                   :
                                   false
-                                }
-
-                                totalFound={
-                                  Variable[
-                                    `PageLenta${Static.lentaPage}`
-                                  ].totalFound
-                                }
-
-                                numIndex={index}
-                                elem={null}
-                                total={
-                                  Variable[
-                                    `PageLenta${Static.lentaPage}`
-                                  ].list_records.length
                                 }
                               />
                             );
