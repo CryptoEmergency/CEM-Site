@@ -274,9 +274,6 @@ const start = function () {
                                             }
                                         /> */}
                                         </div>
-
-
-                                        gggg
                                     </div>
                                 )
                             } else {
