@@ -24,7 +24,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
     Variable[nameRecords] = response
     if (Static.quest.value.length == 0) {
    
-
+      delete Static.newFilter.$text
       await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
 
     }
@@ -156,30 +156,32 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
             callback={
               async (active, nameOptions) => {
           
-                Static.filtersQuestions[nameOptions].value = active 
+                Static.filtersQuestions[nameOptions].value =  active
                 if(active == 'all')
                 {
-               
-           
                  delete Static.newFilter.close
+                 delete Static.newFilter.bestId
                 }  
                    
                     if(active == 'open')
                     {
-                   
-               
+                      delete Static.newFilter.bestId
+          
                       Static.newFilter.close = false
                     }
-                    if(active == 'close')
+                    if(active == 'closed')
                     {
+                      delete Static.newFilter.bestId
               
+                      Static.newFilter.close = true
                     }
                     if(active == 'best')
                     {
-              
+                      delete Static.newFilter.close
+                      Static.newFilter.bestId = {$exists: true}
                     }
+                   
                     
-
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
@@ -211,7 +213,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
           Static.newQustion.sort = ""
           Static.newQustion.sort = {"statistic.answer":Static.optionsSelect.date.asort}
         }
-        console.log(Static.filtersQuestions)
+ 
            
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
