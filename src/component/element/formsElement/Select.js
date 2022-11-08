@@ -21,7 +21,9 @@ const changeSelect = function (selectIndex, options, callback) {
   callback(options.active, options.nameOptions);
 };
 
-const Select = function ({ options, callback, toggler = null }) {
+const Select = function ({ options, callback, toggler }) {
+  let aimg = svg["filter_arrow_bottom"]
+
   return (
     <div class="profit_calculator_inputs_container">
       {options.title ? <span>{options.title}</span> : null}
@@ -88,7 +90,22 @@ const Select = function ({ options, callback, toggler = null }) {
           }}
         </ul>
       </div>
-      {/* {toggler ? <img class="filter_sort_toggler" src={svg.filter_arrow_bottom} /> : null} */}
+      { toggler ? <img class="filter_sort_toggler" onclick={function(){
+
+
+if(options.asort == -1)
+{
+  aimg = svg["filter_arrow_top"]
+  options.asort = 1
+}
+else{
+  options.asort = -1
+  aimg = svg["filter_arrow_bottom"]
+}
+this.src = aimg
+
+callback();
+      }} src={aimg} /> : null}
     </div>
   );
 };

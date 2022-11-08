@@ -21,7 +21,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
   Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
   Static.newQustion = Helpers.getSortQuestions(Static.filtersQuestions);
     filters = {}
- 
+    Static.newFilter.sort
     const change = async function (arg) {
       let value = arg
       filters.$text = { $search: value }
@@ -69,6 +69,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
       date: {
         nameOptions: "date",
         title: Variable.lang.span.sort,
+        asort: -1,
         items: [
           { text: Variable.lang.select.byDate, value: "date" },
           { text: Variable.lang.select.byViews, value: "views" },
@@ -81,7 +82,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
     await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
   });
 
-console.log('=fc9acf=',Variable)
+
 
 
   return (
@@ -152,8 +153,9 @@ console.log('=fc9acf=',Variable)
             options={Static.optionsSelect.questions}
             callback={
               async (active, nameOptions) => {
+         
                 Static.filtersQuestions[nameOptions].value = active 
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
                 // initReload();
               }
             }
@@ -164,15 +166,21 @@ console.log('=fc9acf=',Variable)
             callback={
               
               async (active, nameOptions) => {
-
+           
+         if(!active){
+          Static.newQustion.sort = {showDate: Static.optionsSelect.date.asort}
+        
+         }
+         else{
+          Static.filtersQuestions[nameOptions].value = active
+         }
                 
-                Static.filtersQuestions[nameOptions].value = active
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
-             console.log("фильтры",Static.newFilter)
-                console.log("сортировка",Helpers.getSortQuestions(Static.filtersQuestions))
+        
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
             }
+
           />
           <div
             class="c-questions__lang"
