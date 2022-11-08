@@ -25,7 +25,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
       class="c-fullnews__item user_news_item"
       // data-href={"/lenta-users/show/" + item._id}
       ElemVisible={ElemVisible}
-      // onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
+    // onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
     >
       <div class="main_comment">
         <div class="c-lentaitem__header">
@@ -189,7 +189,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
             }
           }}
           <div
-            class="c-lentaitem__link" 
+            class="c-lentaitem__link"
             data-href={"/lenta-users/show/" + item._id}
             onclick={(e) => { e.stopPropagation(); Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
           ></div>
@@ -203,7 +203,10 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
             changeToogle={changeToogle}
           />
           <div class={!item.media.length && item.text.length < 450 ? "user_post_text_background" : null}>
-            <span class="comment_text">
+            <span class="comment_text"
+              data-href={"/lenta-users/show/" + item._id}
+              onclick={(e) => { e.stopPropagation(); Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
+            >
               {() => {
                 if (show) {
                   return Helpers.editText(item.text, { clear: true, paragraph: true, html: true })
@@ -273,7 +276,10 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
             </span>
           </div>
         </div>
-        <div class="user_post_statistic">
+        <div class="user_post_statistic"
+          data-href={"/lenta-users/show/" + item._id}
+          onclick={(e) => { e.stopPropagation(); Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
+        >
           <span class="c-date" data-id={item._id}>
             {item.updateTime ? Variable.lang.text.update + " " + Helpers.getDateFormat(item.updateTime, "now") : Helpers.getDateFormat(item.showDate, "now")}
           </span>
