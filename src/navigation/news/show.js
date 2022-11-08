@@ -14,6 +14,12 @@ const start = function (data, ID) {
     async () => {
       if (data && data.item) {
         item = data.item
+setTimeout(async () => {
+  await api({ type: "get", action: "getNews", short: true, limit: 1, filter: { _id: item._id } })
+}, 3000);
+     
+
+
       } else {
         let response = await api({ type: "get", action: "getNews", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
         item = response.list_records[0]

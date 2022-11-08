@@ -15,19 +15,34 @@ import { Input } from '@component/element/index.js';
 
 
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filters }) {
-  filters = {}
-  const change = async function (arg) {
-    let value = arg
-    filters.$text = { $search: value }
-    let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
-    Variable[nameRecords] = response
-    if (Static.quest.value.length == 0) {
-      await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
-
-    }
-  }
-
+ 
+ 
   await initOne(async () => {
+  Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
+  Static.newQustion = Helpers.getSortQuestions(Static.filtersQuestions);
+    filters = {}
+ 
+    const change = async function (arg) {
+      let value = arg
+      filters.$text = { $search: value }
+      let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
+      Variable[nameRecords] = response
+      if (Static.quest.value.length == 0) {
+        Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
+        await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+  
+      }
+      if (Static.quest.value.length > 0) {
+                    
+        Static.newFilter.$text = { $search: Static.quest.value }
+  
+      }
+  
+  
+      
+    }
+
+
 
     Static.quest = {
       value: "",
@@ -137,8 +152,8 @@ console.log('=fc9acf=',Variable)
             options={Static.optionsSelect.questions}
             callback={
               async (active, nameOptions) => {
-                Static.filtersQuestions[nameOptions].value = active
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                Static.filtersQuestions[nameOptions].value = active 
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
                 // initReload();
               }
             }
@@ -147,9 +162,14 @@ console.log('=fc9acf=',Variable)
             options={Static.optionsSelect.date}
             toggler={true}
             callback={
+              
               async (active, nameOptions) => {
+
+                
                 Static.filtersQuestions[nameOptions].value = active
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+             console.log("фильтры",Static.newFilter)
+                console.log("сортировка",Helpers.getSortQuestions(Static.filtersQuestions))
                 // initReload();
               }
             }
@@ -274,14 +294,10 @@ console.log('=fc9acf=',Variable)
             return (
               <ButtonShowMore
                 onclick={async () => {
-                  let new_filter = Helpers.getFilterQuestions(Static.filtersQuestions);
-                  if (Static.quest.value.length > 0) {
-                    // new_filter.search = filters.$text = { $search: Static.quest.value }
-                    new_filter.$text = { $search: Static.quest.value }
-
-                  }
-                  let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
-                  console.log('=88f53b=', tmp)
+                 
+                 
+                  let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
+              
                   if (tmp && tmp.list_records) {
                     Variable[nameRecords].list_records.push(...tmp.list_records)
                     Variable[nameRecords].totalFound = tmp.totalFound

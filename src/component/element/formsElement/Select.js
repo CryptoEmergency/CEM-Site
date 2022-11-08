@@ -72,9 +72,12 @@ const Select = function ({ options, callback, toggler = null }) {
                       item.text === Variable.lang.h.posts_friends &&
                       (!Variable.auth || Variable.myInfo.subscribed.length === 0)
                     ) {
+                      
                       return;
                     } else {
+                
                       changeSelect(index, options, callback);
+                     
                     }
                   }}
                 >
