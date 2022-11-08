@@ -19,8 +19,8 @@ const start = function () {
         messageUser,
         activeUser
 
-    Variable.HeaderShow = false
-    Variable.FooterShow = false
+    Variable.Static.HeaderShow = false
+    Variable.Static.FooterShow = false
     Variable.showUserMenu = false
 
 
@@ -159,31 +159,33 @@ const start = function () {
                         </div>
                     </div>
                     <div class="messages_dialog">
-                        <If
-                            data={activeUser}
-                            dataIf={
-                                <div>
-                                    <div class="companion">
-                                        <Avatar author={activeUser} />
-                                        <p>{activeUser.nickname}</p>
-                                        {/* <If
+                        {() => {
+                            if (activeUser) {
+                                return (
+                                    <div>
+                                        <div class="companion">
+                                            <Avatar author={activeUser} />
+                                            <p>{activeUser.nickname}</p>
+                                            {/* <If
                                             data={Variable.myInfo._id != messageList.list_records[0].users[0]._id}
                                             dataIf={
                                                 <Avatar author={messageList.list_records[0].users[0]} />
                                             }
                                         /> */}
+                                        </div>
+
+
+                                        gggg
                                     </div>
-
-
-                                    gggg
-                                </div>
+                                )
+                            } else {
+                                return (
+                                    <div class="empty_message_dialog_block">
+                                        {Variable.lang.text.selectChat}
+                                    </div>
+                                )
                             }
-                            dataElse={
-                                <div class="empty_message_dialog_block">
-                                    {Variable.lang.text.selectChat}
-                                </div>
-                            }
-                        />
+                        }}
 
                     </div>
 
