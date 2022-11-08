@@ -6,6 +6,7 @@ import {
 //
 import {
   AudioPlayerCopy,
+  AudioPlayer,
   Swiper,
   VideoPlayer
 } from "@component/element/index.js";
