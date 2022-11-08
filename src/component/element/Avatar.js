@@ -1,8 +1,16 @@
-import { jsx, jsxFrag, Variable, initReload, initOne, sendApi, Helpers } from "@betarost/cemjs";
+import {
+  jsx,
+  jsxFrag,
+  Variable,
+  initReload,
+  initOne,
+  sendApi,
+  Helpers
+} from "@betarost/cemjs";
+
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { getDateFormat, uploadMedia } from "@src/functions.js";
-import { If } from "@component/helpers/All.js";
 
 let visibleSettings, formInputs;
 let inputAvatar = Variable.setRef();
@@ -105,7 +113,6 @@ const sendPhoto = async function (crooper, path) {
 
 const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false }) {
 
-  // console.log('=132e7f=',author)
   initOne(() => {
     visibleSettings = false;
 
