@@ -6,7 +6,7 @@ import {
     initReload,
     Helpers,
 } from '@betarost/cemjs';
-
+// check
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
@@ -17,27 +17,6 @@ let Static = {}
 
 
 const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 21 }) {
-    await initOne(
-        async () => {
-            Static.Frends = {
-                value: "",
-                label: "",
-                placeholder: Variable.lang.placeholder.findFriends,
-                condition: async (value) => {
-
-                    change(value)
-                    return true
-
-
-                },
-
-            }
-
-            await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
-        }
-    )
-
-
 
     const change = async function (arg) {
         let value = arg
@@ -48,7 +27,20 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
 
     }
 
-
+    await initOne(
+        async () => {
+            Static.Frends = {
+                value: "",
+                label: "",
+                placeholder: Variable.lang.placeholder.findFriends,
+                condition: async (value) => {
+                    change(value)
+                    return true
+                },
+            }
+            await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
+        }
+    )
 
     return (
         <div class="c-friends">
@@ -60,7 +52,6 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                     <div class="c-friends__search">
                         <div class="c-friends__filter">
                             <Input className="c-friends__field" Static={Static.Frends} />
-
                             <div
                                 class="c-friends__toggler"
                                 onClick={() => {
@@ -252,14 +243,14 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                                                     <p
                                                         style="width: 80%; margin: 5px auto;"
                                                         class="new_professional_name "
-                                                    > {/* load */}
+                                                    >
                                                         {user.nickname}
                                                     </p>
                                                 </a>
                                                 <p
                                                     style="width: 50%; margin: 0 auto;"
                                                     class="new_professional_spec "
-                                                > {/* load */}
+                                                >
                                                     {user.information ? user.information.speciality : ''}
                                                 </p>
                                                 <div class="new_professional_badges">
@@ -279,15 +270,15 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                                                 </div>
                                                 <div class="new_professional_statistic">
                                                     <div class="new_professional_info_block">
-                                                        <p class="">{user.statistic.answer}</p> {/* load */}
+                                                        <p class="">{user.statistic.answer}</p>
                                                         <p>{Variable.lang.p.answers}</p>
                                                     </div>
                                                     <div class="new_professional_info_block">
-                                                        <p class="">{user.statistic.follower}</p> {/* load */}
+                                                        <p class="">{user.statistic.follower}</p>
                                                         <p>{Variable.lang.p.subscribe}</p>
                                                     </div>
                                                     <div class="new_professional_info_block">
-                                                        <p class="">{user.statistic.view}</p> {/* load */}
+                                                        <p class="">{user.statistic.view}</p>
                                                         <p>{Variable.lang.p.views}</p>
                                                     </div>
                                                 </div>
@@ -320,7 +311,6 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                                                                         )
                                                                     }
                                                                 }}
-
                                                             </span>
                                                         </a>
                                                     </div>
@@ -349,7 +339,6 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                                         if (Static.Frends.value.length > 0) {
                                             new_filter.search = Static.Frends.value
                                         }
-
                                         let tmp = await api({ type: "get", action: "getUsers", short: true, limit, filter: new_filter, offset: Variable[nameRecords].list_records.length })
                                         Variable[nameRecords].list_records.push(...tmp.list_records)
                                         Variable[nameRecords].totalFound = tmp.totalFound

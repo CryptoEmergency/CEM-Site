@@ -14,20 +14,37 @@ import { Input } from '@component/element/index.js';
 
 
 
-const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filters }) {
-  filters = {}
+const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
+
   const change = async function (arg) {
+    let filters = {}
     let value = arg
     filters.$text = { $search: value }
     let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
     Variable[nameRecords] = response
     if (Static.quest.value.length == 0) {
+   
+
       await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
 
     }
+    if (Static.quest.value.length > 0) {
+      Static.newFilter = {}            
+      Static.newFilter.$text = { $search: Static.quest.value }
+
+    }   
   }
 
+
   await initOne(async () => {
+  Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
+  Static.newQustion = Helpers.getSortQuestions(Static.filtersQuestions);
+  Static.newQustion.sort = ""
+
+  
+  
+
+
 
     Static.quest = {
       value: "",
@@ -54,6 +71,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
       date: {
         nameOptions: "date",
         title: Variable.lang.span.sort,
+        asort: -1,
         items: [
           { text: Variable.lang.select.byDate, value: "date" },
           { text: Variable.lang.select.byViews, value: "views" },
@@ -72,6 +90,18 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
   return (
     <div class="c-questions">
       <div class="c-questions__header">
+        {
+          () => {
+            if(Variable.dataUrl.adress == 'question') {
+              return (
+                <div>
+                  <h4>{Variable.lang.h.lastQuestions}</h4>
+                  <p>{Variable.lang.p.addQuestionsSlog}</p>
+                </div>
+              )
+            }
+          }
+        }
         <div class="c-questions__searchblock c-search">
           <div class="c-search__container">
             <div class="c-search__wrapper">
@@ -125,8 +155,32 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
             options={Static.optionsSelect.questions}
             callback={
               async (active, nameOptions) => {
-                Static.filtersQuestions[nameOptions].value = active
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+          
+                Static.filtersQuestions[nameOptions].value = active 
+                if(active == 'all')
+                {
+               
+           
+                 delete Static.newFilter.close
+                }  
+                   
+                    if(active == 'open')
+                    {
+                   
+               
+                      Static.newFilter.close = false
+                    }
+                    if(active == 'close')
+                    {
+              
+                    }
+                    if(active == 'best')
+                    {
+              
+                    }
+                    
+
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
             }
@@ -135,12 +189,35 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
             options={Static.optionsSelect.date}
             toggler={true}
             callback={
+              
               async (active, nameOptions) => {
-                Static.filtersQuestions[nameOptions].value = active
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+          
+         if(active){
+          Static.filtersQuestions[nameOptions].value = active
+         }
+
+         if(Static.filtersQuestions.date.value == 'date')
+        {
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {showDate: Static.optionsSelect.date.asort}
+        }
+        if(Static.filtersQuestions.date.value == 'views')
+        {
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {"statistic.view":Static.optionsSelect.date.asort}
+        }
+        if(Static.filtersQuestions.date.value == 'answers')
+        {
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {"statistic.answer":Static.optionsSelect.date.asort}
+        }
+        console.log(Static.filtersQuestions)
+           
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
             }
+
           />
           <div
             class="c-questions__lang"
@@ -151,7 +228,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
                   onclick: async (langCode, langName, langOrig) => {
                     Static.filtersQuestions.lang.name = `${langName} (${langOrig})`;
                     Static.filtersQuestions.lang.code = langCode;
-                    await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                    await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                     // initReload()
                   },
                 },
@@ -262,14 +339,10 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
             return (
               <ButtonShowMore
                 onclick={async () => {
-                  let new_filter = Helpers.getFilterQuestions(Static.filtersQuestions);
-                  if (Static.quest.value.length > 0) {
-                    // new_filter.search = filters.$text = { $search: Static.quest.value }
-                    new_filter.$text = { $search: Static.quest.value }
-
-                  }
-                  let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: new_filter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
-                  console.log('=88f53b=', tmp)
+                 
+                 
+                  let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: Static.newFilter, sort: Static.newQustion.sort, offset: Variable[nameRecords].list_records.length })
+              
                   if (tmp && tmp.list_records) {
                     Variable[nameRecords].list_records.push(...tmp.list_records)
                     Variable[nameRecords].totalFound = tmp.totalFound

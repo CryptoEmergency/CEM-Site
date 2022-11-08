@@ -75,12 +75,124 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.one ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" href="/about/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.about }) }} >
+                                                    <a class="c-footer__link" href="/about/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.about, items:
+                      [
+                        {
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/about/",
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+            },
+            {
+                text: Variable.lang.p.copy+ " URL",
+                type: "copyurl",
+                onclick: async () => {
+                    navigator.clipboard.writeText(window.location.origin + "/about/");
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+             
+                }
+  }
+            
+            ]}) }} >
                                                         <span>{Variable.lang.a.about}</span>
                                                     </a>
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.blog }) }} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.career }) }} href="/career-whith-us/"><span>{Variable.lang.a.career}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.mediaUs }) }} href="/media/"><span>{Variable.lang.h.mediaUs}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.blog,items:
+                      [
+                        {
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/blog/",
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+            },
+            {
+                text: Variable.lang.p.copy+ " URL",
+                type: "copyurl",
+                onclick: async () => {
+                    navigator.clipboard.writeText(window.location.origin + "/blog/");
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+             
+                }
+  }
+            
+            ]} ) }} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.career, items:
+                      [
+                        {
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/career-whith-us/",
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+            },
+            {
+                text: Variable.lang.p.copy+ " URL",
+                type: "copyurl",
+                onclick: async () => {
+                    navigator.clipboard.writeText(window.location.origin + "/career-whith-us/");
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+             
+                }
+  }
+            
+            ]}) }} href="/career-whith-us/"><span>{Variable.lang.a.career}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.mediaUs, items:
+                      [
+                        {
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/media/",
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+            },
+            {
+                text: Variable.lang.p.copy+ " URL",
+                type: "copyurl",
+                onclick: async () => {
+                    navigator.clipboard.writeText(window.location.origin + "/media/");
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+             
+                }
+  }
+            
+            ]} ) }} href="/media/"><span>{Variable.lang.h.mediaUs}</span></a>
 
                                                     {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
                                                     <a class="c-footer__link" href="/assets/docs/whitePaperEN.pdf">
@@ -106,8 +218,64 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.two ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.contacts }) }} href="/contacts/"><span>{Variable.lang.a.contacts}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.affiliate }) }} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.contacts , items:
+                      [
+                        {
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/contacts/",
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+            },
+            {
+                text: Variable.lang.p.copy+ " URL",
+                type: "copyurl",
+                onclick: async () => {
+                    navigator.clipboard.writeText(window.location.origin + "/contacts/");
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+             
+                }
+  }
+            
+            ]}) }} href="/contacts/"><span>{Variable.lang.a.contacts}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.affiliate , items:
+                      [
+                        {
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/affiliate/",
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+            },
+            {
+                text: Variable.lang.p.copy+ " URL",
+                type: "copyurl",
+                onclick: async () => {
+                    navigator.clipboard.writeText(window.location.origin + "/affiliate/");
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+             
+                }
+  }
+            
+            ] }) }} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
                                                 </div>
                                             </div>
                                         </div>

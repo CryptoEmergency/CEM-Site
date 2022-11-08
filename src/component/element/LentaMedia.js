@@ -1,24 +1,16 @@
 import {
   jsx,
   jsxFrag,
-  Helpers,
-  initOne,
-  initAfter,
   Variable,
 } from "@betarost/cemjs";
-
-import svg from "@assets/svg/index.js";
-import { If } from "@component/helpers/All.js";
+//
 import {
   AudioPlayerCopy,
+  AudioPlayer,
   Swiper,
   VideoPlayer
 } from "@component/element/index.js";
 
-// import Swiper from 'swiper/bundle';
-// import 'swiper/css/bundle';
-
-let swiperitem = [];
 const swiperOptions = {
   effect: "cube",
   grabCursor: true,
@@ -40,94 +32,13 @@ const swiperOptions = {
   spaceBetween: 20,
 };
 
-const swiperGo = function (numIndex) {
-  // if (!swiperitem) {
-  swiperitem[numIndex] = new Swiper(".swiper-post_media", {
-    effect: "cube",
-    grabCursor: true,
-    cubeEffect: {
-      shadow: true,
-      slideShadows: true,
-      shadowOffset: 20,
-      shadowScale: 0.94,
-    },
-    loop: false,
-    // autoHeight: true,
-    pagination: {
-      el: ".swiper-pagination",
-    },
-    scrollbar: {
-      el: ".swiper-scrollbar",
-    },
-    slidesPerView: 1,
-    spaceBetween: 20,
-  });
-  // }
-};
-const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
+const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeToogle }) {
   if (items.length == 0) {
     return <></>;
   }
-  // swiperitem = null
-  // items.push(...items)
-  // items.push(...items)
-  // initOne(
-  //     () => {
-  //         swiperitem = null
-  //     }
-  // )
-
-  // initAfter(
-  //     () => {
-
-  //         if (typeof swiperitem[numIndex] != "undefined") {
-  //             swiperitem[numIndex].destroy()
-  //             swiperitem[numIndex].init()
-  //             // swiperitem[numIndex].update()
-  //             // swiperitem[numIndex].update()
-  //         }
-  //         if (!swiperitem) {
-  //             // swiperitem = new Swiper(".swiper-post_media", {
-  //             //     effect: "cube",
-  //             //     grabCursor: true,
-  //             //     cubeEffect: {
-  //             //         shadow: true,
-  //             //         slideShadows: true,
-  //             //         shadowOffset: 20,
-  //             //         shadowScale: 0.94,
-  //             //     },
-  //             //     loop: false,
-  //             //     autoHeight: true,
-  //             //     pagination: {
-  //             //         el: '.swiper-pagination-post_media',
-  //             //     },
-  //             //     scrollbar: {
-  //             //         el: '.swiper-scrollbar-post_media',
-  //             //     },
-  //             //     slidesPerView: 1,
-  //             //     spaceBetween: 20
-  //             // });
-
-  //             // swiperitem = new Swiper(".swiper-post_media", {
-  //             //     loop: false,
-  //             //     autoHeight: true,
-  //             //     pagination: {
-  //             //         el: '.swiper-pagination-post_media',
-  //             //     },
-  //             //     scrollbar: {
-  //             //         el: '.swiper-scrollbar-post_media',
-  //             //     },
-  //             //     slidesPerView: 1,
-  //             //     spaceBetween: 20
-  //             // });
-  //         }
-  //     }
-  // )
 
   if (items.find((item) => item.type === "audio")) {
     let ArrWithAudio = items.filter((item) => item.type === "audio");
-
-    items = items.filter((item) => item.type !== "audio");
 
     const array_size = 3;
 
@@ -136,29 +47,24 @@ const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
     for (let i = 0; i < ArrWithAudio.length; i += array_size) {
       audioArr.push(ArrWithAudio.slice(i, i + array_size));
     }
-    items = items.concat(audioArr);
+    items.push(audioArr);
   }
-
   return (
     <Swiper
+      className=""
+      options={swiperOptions}
+      replace={changeToogle}
+      // replace={false}
       slide={
-
-
         items.map(
           (item, index) => {
             if (item.type == "video" && !Array.isArray(item)) {
-              if (typeof elem[numIndex] == "undefined") {
-                elem[numIndex] = []
-              }
-              elem[numIndex][index] = Variable.setRef();
               return (
                 <div class="swiper-slide">
                   <VideoPlayer
+                    Static={Static}
                     item={item}
-                    index={index}
-                    numIndex={numIndex}
-                    elem={elem}
-                    path={path}
+                    path={`/assets/upload/${path}/`}
                   //  path={"/assets/upload/posts/"}
                   />
                 </div>
@@ -169,7 +75,7 @@ const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
               return (
                 <div class="swiper-slide">
                   <div class="swiper-post_media_image_container">
-                    <img src={path + item.name} />
+                    <img src={`/assets/upload/${path}/` + item.name} />
                   </div>
                 </div>
               );
@@ -178,42 +84,24 @@ const LentaMedia = function ({ items, numIndex = 0, elem, path }) {
             if (Array.isArray(item)) {
               let i = index;
               return (
-                // <div class="user_post_text_background">
                 <div class="swiper-slide user_post_text_background">
                   {
                     item.map((item, index) => {
-                      elem[numIndex][index + i * 3] = Variable.setRef();
                       return (
-                        <AudioPlayerCopy
+                        <AudioPlayer
+                          Static={Static}
                           item={item}
-                          index={index + i * 3}
-                          numIndex={numIndex}
-                          elem={elem}
-                          path={path}
-                          type="posts"
-                        //  path={"/assets/upload/posts/"}
+                          path={`/assets/upload/${path}/`}
                         />
                       );
                     })
                   }
-                  {/* <AudioPlayer
-                    item={item}
-                    index={index}
-                    numIndex={numIndex}
-                    elem={elem}
-                    path={path}
-                    type="posts"
-                    //  path={"/assets/upload/posts/"}
-                  /> */}
                 </div>
-
               );
             }
           }
         )
       }
-      options={swiperOptions}
-      className=""
     />
   );
 };

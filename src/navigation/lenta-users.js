@@ -1,406 +1,165 @@
 import {
   jsx,
   jsxFrag,
-  sendApi,
   Variable,
   init,
   initReload,
   Helpers,
 } from "@betarost/cemjs";
+// check
+import { restApi } from '@src/apiFunctions.js'
+import { Select, NotFound } from "@component/element/index.js";
+import { BlockLentaUsers, BlockShowLenta } from "@component/blocks/index.js";
 
-import svg from "@assets/svg/index.js";
-import { If, Map } from "@component/helpers/All.js";
-import { Select } from "@component/element/index.js";
-import { BlockLentaUsers } from "@component/blocks/index.js";
+const ToogleItem = function ({ Static, name }) {
+  let addClass = "news_" + name
+  if (name == "all") { addClass = "all" }
+  return (
+    <div
+      class="users_news_category"
+      onClick={async function () {
+        if (Static.lentaPage == name) { return }
+        Static.lentaPage = name
+        Static.nameRecords = "PageLenta" + name;
+        Static.changeToogle = true
+        Static.elMedia = {}
+        Static.elShowTextFull = {}
+        Static.elShowTextShort = {}
+        // this.classList.add("users_news_category_icon--" + addClass)
+        await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
+        initReload()
+      }}>
+      <i class={["users_news_category_icon", Static.lentaPage == name ? "users_news_category_icon--" + addClass : "users_news_category_icon--" + addClass + "_inactive"]}
+        Element={($el) => {
+          Static.elToogle[name] = $el
+        }}></i>
+    </div>
+  )
+}
 
-let optionsSelect, filters, showFilter;
-
-const start = function () {
-  Variable.Static.lentaFilters = {
-    lang: Variable.lang.code,
-    langName: Variable.lang.lang_orig,
-    author: null,
-  };
-
-  let elem = [];
-  Variable.HeaderShow = true;
-  Variable.FooterShow = true;
-
+const start = function (data, ID) {
+  let Static = {}
+  Static.elMedia = {}
+  Static.elToogle = {}
+  Static.elShowTextFull = {}
+  Static.elShowTextShort = {}
+  Static.elMedia = {}
   init(
     async () => {
-      elem = [];
-      Variable.Static.lentaPage = "all";
-      Variable.PageLentaall = await sendApi.send({
-        action: "getPost",
-        short: true,
-        cache: true,
-        name: "PageLentaall",
-        limit: 15,
-        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "all"),
-      });
-
-      Variable.PageLentaphoto = await sendApi.send({
-        action: "getPost",
-        short: true,
-        cache: true,
-        name: "PageLentaphoto",
-        limit: 15,
-        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "photo"),
-      });
-
-      Variable.PageLentavideo = await sendApi.send({
-        action: "getPost",
-        short: true,
-        cache: true,
-        name: "PageLentavideo",
-        limit: 15,
-        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "video"),
-      });
-
-      Variable.PageLentaaudio = await sendApi.send({
-        action: "getPost",
-        short: true,
-        cache: true,
-        name: "PageLentaaudio",
-        limit: 15,
-        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "audio"),
-      });
-
-      Variable.PageLentatext = await sendApi.send({
-        action: "getPost",
-        short: true,
-        cache: true,
-        name: "PageLentatext",
-        limit: 15,
-        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "text"),
-      });
-
-      filters = {
-        posts: {
-          value: "all",
-        },
+      Static.nameRecords = "PageLentaall";
+      Static.lentaPage = "all";
+      Static.lentaFilters = {
+        lang: Variable.lang.code,
+        langName: Variable.lang.lang_orig,
+        author: null,
       };
-      showFilter = false;
-      optionsSelect = {
+
+      Static.optionsSelect = {
         posts: {
           nameOptions: "posts",
-
           items: [
             { text: Variable.lang.span.userNews, value: "all" },
             { text: Variable.lang.h.posts_friends, value: "friends" },
           ],
           open: false,
-          active: filters.posts.value,
+          active: "all",
         },
       };
 
+      await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
     },
-
     () => {
       return (
-        <div
-          class={[
-            Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
-          ]}
-        >
+        <div class="c-main__body">
           <div class="page-content page-content--full">
             <div class="users_news">
               <div class="users_news_left">
                 <div class="user_news_top">
-                  <div
-                    class={[
-                      "c-questions__filter",
-                      "c-questions__filter--openmobile",
-                      "questions_filter",
-                      // showFilter ? "c-questions__filter--openmobile" : null,
-                    ]}
-                  >
+                  <div class="c-questions__filter c-questions__filter--openmobile questions_filter">
                     <Select
-                      options={optionsSelect.posts}
+                      options={Static.optionsSelect.posts}
                       callback={async function (active, nameOptions) {
-                        filters[nameOptions].value = active;
-                        Variable.Static.lentaFilters.author =
-                          filters[nameOptions].value === "friends"
-                            ? {
-                              $in: Variable.myInfo.subscribed,
-                            }
-                            : null;
-
-                        Variable[`PageLenta${Variable.Static.lentaPage}`] =
-                          await sendApi.send({
-                            action: "getPost",
-                            short: true,
-                            limit: 15,
-                            filter: Helpers.getFilterLenta(
-                              Variable.Static.lentaFilters,
-                              Variable.Static.lentaPage
-                            ),
-                          });
+                        Static.optionsSelect[nameOptions].active = active;
+                        if (active == "friends") {
+                          Static.lentaFilters.author = { $in: Variable.myInfo.subscribed }
+                        } else {
+                          Static.lentaFilters.author = null
+                        }
+                        Static.changeToogle = true
+                        await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                       }}
                     />
                   </div>
                   <div style="display: flex; grid-gap: 20px">
-                    {/* <div class="news_category_filter">
-                      <img src={svg["filter"]}
-                        onClick={() => {
-                          showFilter = !showFilter;
-                          initReload();
-                        }} />
-                    </div> */}
                     <div
                       class="alt_language_change"
                       onclick={() => {
                         Variable.SetModals({
-                          name: "ModalChangeLanguage",
-                          data: {
+                          name: "ModalChangeLanguage", data: {
                             onclick: async (langCode, langName, langOrig) => {
-                              Variable.Static.lentaFilters.langName = langOrig;
-                              Variable.Static.lentaFilters.lang = langCode;
-
-                              Variable[
-                                `PageLenta${Variable.Static.lentaPage}`
-                              ] = await sendApi.send({
-                                action: "getPost",
-                                short: true,
-                                limit: 15,
-                                filter: Helpers.getFilterLenta(
-                                  Variable.Static.lentaFilters,
-                                  Variable.Static.lentaPage
-                                ),
-                              });
+                              Static.lentaFilters.langName = langOrig;
+                              Static.lentaFilters.lang = langCode;
+                              Static.changeToogle = true
+                              await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                             },
                           },
                         });
-                      }}
-                    >
-                      {Variable.Static.lentaFilters.langName}
+                      }}>
+                      {Static.lentaFilters.langName}
                     </div>
                   </div>
                 </div>
-
-                {/* <SwitchLenta switchPage={Variable.Static.lentaPage} /> */}
-
                 <div class="users_news_categories">
-                  <div
-                    class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "all"}
-                    onClick={async () => {
-                      if (Variable.Static.lentaPage == "all") {
-                        return
-                      }
-                      Variable.Static.lentaPage = "all"
-                      Variable.PageLentaall = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentaall", limit: 15, filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "all")
-                      });
-                      initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--all users_news_category_icon--all_inactive"></i>
-                    {/* <img src={svg['sections/news_all_inactive']} /> */}
-                  </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "all"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--all"></i>
-                    {/* <img src={svg['sections/news_all']} /> */}
-                  </div>
-
-
-                  <div
-                    data-type="photo"
-                    class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "photo"}
-                    onClick={async () => {
-                      if (Variable.Static.lentaPage == "photo") {
-                        return
-                      }
-                      Variable.Static.lentaPage = "photo"
-                      Variable.PageLentaphoto = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentaphoto", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "photo")
-                      });
-                      initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_photo users_news_category_icon--news_photo_inactive"></i>
-                    {/* <img src={svg['sections/news_photo_inactive']} /> */}
-                  </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "photo"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_photo"></i>
-                    {/* <img src={svg['sections/news_photo']} /> */}
-                  </div>
-
-
-
-                  <div
-                    data-type="video"
-                    class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "video"}
-                    onClick={async () => {
-                      if (Variable.Static.lentaPage == "video") {
-                        return
-                      }
-                      Variable.Static.lentaPage = "video"
-                      Variable.PageLentavideo = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentavideo", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "video")
-                      });
-                      initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_video users_news_category_icon--news_video_inactive"></i>
-                    {/* <img src={svg['sections/news_video_inactive']} /> */}
-                  </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "video"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_video"></i>
-                    {/* <img src={svg['sections/news_video']} /> */}
-                  </div>
-
-
-                  <div
-                    data-type="audio"
-                    class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "audio"}
-                    onClick={async () => {
-                      if (Variable.Static.lentaPage == "audio") {
-                        return
-                      }
-                      Variable.Static.lentaPage = "audio"
-                      Variable.PageLentaaudio = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentaaudio", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "audio")
-                      });
-                      initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_audio users_news_category_icon--news_audio_inactive"></i>
-                    {/* <img src={svg['sections/news_audio_inactive']} /> */}
-                  </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "audio"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_audio"></i>
-                    {/* <img src={svg['sections/news_audio']} /> */}
-                  </div>
-
-
-                  <div
-                    data-type="text"
-                    class={['users_news_category']}
-                    hidden={Variable.Static.lentaPage == "text"}
-                    onClick={async () => {
-                      if (Variable.Static.lentaPage == "text") {
-                        return
-                      }
-                      Variable.Static.lentaPage = "text"
-                      Variable.PageLentatext = await sendApi.send({
-                        action: "getPost", short: true, cache: true, name: "PageLentatext", limit: 15,
-                        filter: Helpers.getFilterLenta(Variable.Static.lentaFilters, "text")
-                      });
-                      initReload()
-                    }}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_text users_news_category_icon--news_text_inactive"></i>
-                    {/* <img src={svg['sections/news_text_inactive']} /> */}
-                  </div>
-
-                  <div
-                    class={['users_news_category', 'users_news_category_active']}
-                    hidden={Variable.Static.lentaPage != "text"}
-                  >
-                    <i class="users_news_category_icon users_news_category_icon--news_text"></i>
-                    {/* <img src={svg['sections/news_text']} /> */}
-                  </div>
-
-
-
+                  <ToogleItem Static={Static} name="all" />
+                  <ToogleItem Static={Static} name="photo" />
+                  <ToogleItem Static={Static} name="video" />
+                  <ToogleItem Static={Static} name="audio" />
+                  <ToogleItem Static={Static} name="text" />
                 </div>
-
-
-
                 <div class="userNewsBlock">
-                  <div
-                    data-touchmove="userNewsSlide"
-                    data-touchstart="userNewsSlideStart"
-                    data-touchend="userNewsSlideEnd"
-                    class="bl_one bl_active"
-                  >
-                    <div
-                      class="user_news_block"
-                    // After={() => {
-                    //   swiperGo()
-                    // }}
-                    >
-                      {
-                        Variable[`PageLenta${Variable.Static.lentaPage}`]
-                          .list_records.map((item, index) => {
-                            elem[index] = [];
-                        
+                  <div class="bl_one bl_active">
+                    <div class="user_news_block">
+                      {() => {
+                        if (Variable[Static.nameRecords] && Variable[Static.nameRecords].list_records.length) {
+                          let changeToogle = Static.changeToogle
+                          Static.changeToogle = false
+                          const arrReturn = Variable[Static.nameRecords].list_records.map((item, index) => {
                             return (
                               <BlockLentaUsers
-                                totalFound={
-                                  Variable[
-                                    `PageLenta${Variable.Static.lentaPage}`
-                                  ].totalFound
-                                }
+                                Static={Static}
+                                index={index}
                                 item={item}
-                                numIndex={index}
-                                elem={elem}
-                                total={
-                                  Variable[
-                                    `PageLenta${Variable.Static.lentaPage}`
-                                  ].list_records.length
+                                showItemsMenu={true}
+                                changeToogle={changeToogle}
+                                ElemVisible={Variable[Static.nameRecords].list_records.length < Variable[Static.nameRecords].totalFound && index == (Variable[Static.nameRecords].list_records.length - 5) ?
+                                  async () => {
+                                    console.log('=0c6881=', "Load more")
+                                    let tmp = await restApi.getPost({ limit: 15, offset: Variable[Static.nameRecords].list_records.length, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
+                                    Variable[Static.nameRecords].list_records.push(...tmp.list_records)
+                                    initReload()
+                                  }
+                                  :
+                                  false
                                 }
                               />
                             );
                           })
-                      }
+                          return (arrReturn)
+                        } else {
+                          return (
+                            <NotFound />
+                          )
+                        }
+                      }}
                     </div>
                   </div>
-                  <div
-                    data-touchmove="userNewsSlide"
-                    data-touchstart="userNewsSlideStart"
-                    data-touchend="userNewsSlideEnd"
-                    class="bl_one overflowNo"
-                  ></div>
-                  <div
-                    data-touchmove="userNewsSlide"
-                    data-touchstart="userNewsSlideStart"
-                    data-touchend="userNewsSlideEnd"
-                    class="bl_one overflowNo"
-                  ></div>
-                  <div
-                    data-touchmove="userNewsSlide"
-                    data-touchstart="userNewsSlideStart"
-                    data-touchend="userNewsSlideEnd"
-                    class="bl_one overflowNo"
-                  ></div>
-                  <div
-                    data-touchmove="userNewsSlide"
-                    data-touchstart="userNewsSlideStart"
-                    data-touchend="userNewsSlideEnd"
-                    class="bl_one overflowNo"
-                  ></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       );
-    }
+    }, ID
   );
 };
-
 export default start;

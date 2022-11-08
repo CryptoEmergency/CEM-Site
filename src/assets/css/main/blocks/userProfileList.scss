@@ -160,7 +160,7 @@
         display: flex;
         justify-content: space-between;
         /* border-bottom: 2px solid #353C50;*/
-        margin-top: 10px;
+        // margin-top: 10px;
         overflow-y: hidden;
         overflow-x: auto;
 
@@ -271,6 +271,7 @@
         align-items: center;
         padding-top: 15px;
         max-width: 1024px;
+        width: 100%;
         margin: 0 auto;
 
         .micro_user_avatar {
@@ -335,7 +336,7 @@
                     padding: 18px 0 18px 25px;
 
                     @media(max-width: 1199px) {
-                        padding: 18px 50px 18px 25px;
+                        padding: 18px 50px 18px 0px;
                         background-position: center right 25px;
                     }
                 }
@@ -458,7 +459,7 @@
 
     .user_post_statistic,
     .post_audio_container,
-    .comment_body>*:not(.swiper-post_media_image_container):not(.swiper-container):not(.video_container) {
+    .comment_body>*:not(.swiper-post_media_image_container):not(.swiper-container):not(.video_container):not(.swiper-cube):not(.swiper) {
         padding-left: 20px;
         padding-right: 20px;
         margin-left: 0;
@@ -498,6 +499,11 @@
         margin-top: 5px;
         position: relative;
         overflow: hidden;
+        max-height: 100%;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 14;
+        // -webkit-box-orient: vertical;
+        // overflow: hidden;
 
         a {
             color: $cold_heights;

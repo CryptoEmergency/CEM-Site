@@ -1,3 +1,15 @@
+//===errors===
+// Страница не найдена
+export { BlockError404 } from './errors/BlockError404.js';
+//============
+
+//===Users===
+// Страница профиля
+export { BlockUserProfilePage } from "./user/BlockUserProfilePage.js"
+// Страница настроек
+export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
+//===Users===
+
 // Партнерские баннеры
 export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js"
 // Карусель баннеров на главной
@@ -6,28 +18,19 @@ export { BlockBanners } from "./BlockBanners.js"
 export { BlockExchange } from './BlockExchange.js';
 // Инфорпартнеры
 export { BlockInfoPartners } from './BlockInfoPartners.js';
-
-
+// Лента пользователя
+export { BlockLentaUsers } from './BlockLentaUsers.js';
 //Блок для новостей, блога, медиа о нас
 export { BlockNews } from "./BlockNews.js"
 // Меню иконок на главной
 export { BlockProjects } from "./BlockProjects.js"
-
-
-
-export { BlockShowLenta } from "./BlockShowLenta.js"
-
-
-
-export { BlockUsers } from "./BlockUsers.js"
-export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
-export { BlockUserProfilePage } from "./user/BlockUserProfilePage.js"
+// Отображение блоков вопросов
 export { BlockQuestions } from './BlockQuestions.js';
-
-export { BlockTrade } from "./BlockTrade.js";
-
-export { BlockLentaUsers } from './BlockLentaUsers.js';
-
+// Отображение ленты по url, раскрытие и предпросмотр
+export { BlockShowLenta } from "./BlockShowLenta.js"
+// Отображение по url, раскртие новостей,блог, медиа о нас
 export { BlockShowNews } from './BlockShowNews.js';
-
-export { BlockError404 } from './errors/BlockError404.js';
+// Список бирж
+export { BlockTrade } from "./BlockTrade.js";
+// Список пользователей
+export { BlockUsers } from "./BlockUsers.js"
