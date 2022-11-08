@@ -66,12 +66,24 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
     await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
   });
 
-
+console.log('=fc9acf=',Variable)
 
 
   return (
     <div class="c-questions">
       <div class="c-questions__header">
+        {
+          () => {
+            if(Variable.dataUrl.adress == 'question') {
+              return (
+                <div>
+                  <h4>{Variable.lang.h.lastQuestions}</h4>
+                  <p>{Variable.lang.p.addQuestionsSlog}</p>
+                </div>
+              )
+            }
+          }
+        }
         <div class="c-questions__searchblock c-search">
           <div class="c-search__container">
             <div class="c-search__wrapper">
