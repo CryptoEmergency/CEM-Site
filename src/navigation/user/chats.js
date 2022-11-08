@@ -42,6 +42,7 @@ const start = function () {
                     "users": 1
                 }
             });
+            console.log('=08e20a=', chatsList)
 
 
         },
@@ -64,7 +65,102 @@ const start = function () {
                         <div class="chats_search">
                         </div>
                         <div class="messages_list" data-action="messagesLinkPrevent" data-nofollow="true">
-                            {/* <Map
+
+                            {() => {
+                                if (chatsList && chatsList.list_records.length) {
+                                    const arrReturn = chatsList.list_records.map((item, index) => {
+                                        let user
+                                        let lastMessage = item.message[0]
+                                        let iconStatus
+
+                                        if (lastMessage.status == 0) {
+                                            iconStatus = "sent_message_icon"
+                                        } else if (lastMessage.status == 1) {
+                                            iconStatus = "unread_message_icon"
+                                        } else {
+                                            iconStatus = "read_message_icon"
+                                        }
+
+                                        if (Variable.myInfo._id != item.users[0]._id) {
+                                            user = item.users[0]
+                                        } else {
+                                            user = item.users[1]
+                                        }
+                                        return (
+                                            <div
+                                                class={["messages_list_item", item._id == activeChat ? "active" : null]}
+                                                onclick={async () => {
+                                                    activeChat = item._id
+                                                    messageList = await sendApi.send({
+                                                        action: "getUserChats", short: true,
+                                                        filter: {
+                                                            "$and": [
+                                                                {
+                                                                    "users": user._id
+                                                                }
+                                                            ]
+                                                        },
+                                                        select: {
+                                                            "message": {
+                                                                "$slice": [
+                                                                    0,
+                                                                    120
+                                                                ]
+                                                            },
+                                                            "users": 1
+                                                        }
+                                                    });
+                                                    console.log('=c35516=', messageList)
+                                                    initReload()
+                                                }}
+                                            >
+                                                <Avatar
+                                                    author={user} />
+                                                <div class="messages_list_item_info">
+                                                    <div class="messages_list_item_info-1">
+                                                        <p>{user.nickname}</p>
+                                                        <If
+                                                            data={lastMessage.text}
+                                                            dataIf={
+                                                                <span>{lastMessage.text}</span>
+                                                            }
+                                                        />
+
+                                                    </div>
+                                                    <div class="messages_list_item_info-2">
+                                                        <If
+                                                            data={lastMessage.author == Variable.myInfo._id}
+                                                            dataIf={
+                                                                <p>{Helpers.getDateFormat(lastMessage.showDate)}</p>
+                                                            }
+                                                            dataElse={
+                                                                <p class="message--new">
+                                                                    <span>{Helpers.getDateFormat(lastMessage.showDate)}</span>
+                                                                    <If
+                                                                        data={item.unreadMessage}
+                                                                        dataIf={<i>{item.unreadMessage}</i>}
+                                                                    />
+                                                                </p>
+                                                            }
+                                                        />
+
+                                                        <If
+                                                            data={lastMessage.author == Variable.myInfo._id}
+                                                            dataIf={
+                                                                <img src={svg[iconStatus]} />
+                                                            }
+                                                        />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                    return (arrReturn)
+                                }
+                            }}
+
+                            <Map
                                 data={chatsList.list_records}
                                 dataIf={(item, index) => {
                                     let user
@@ -155,7 +251,7 @@ const start = function () {
                                     )
                                 }
                                 }
-                            /> */}
+                            />
                         </div>
                     </div>
                     <div class="messages_dialog">
