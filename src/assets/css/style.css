@@ -15944,6 +15944,7 @@ span#procent::after {
 } */
 .userNewsBlock {
   display: flex;
+  max-width: 100%;
 }
 
 .overflowNo {
