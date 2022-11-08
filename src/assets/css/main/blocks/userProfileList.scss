@@ -160,7 +160,7 @@
         display: flex;
         justify-content: space-between;
         /* border-bottom: 2px solid #353C50;*/
-        margin-top: 10px;
+        // margin-top: 10px;
         overflow-y: hidden;
         overflow-x: auto;
 
@@ -459,7 +459,7 @@
 
     .user_post_statistic,
     .post_audio_container,
-    .comment_body>*:not(.swiper-post_media_image_container):not(.swiper-container):not(.video_container):not(.swiper-cube) {
+    .comment_body>*:not(.swiper-post_media_image_container):not(.swiper-container):not(.video_container):not(.swiper-cube):not(.swiper) {
         padding-left: 20px;
         padding-right: 20px;
         margin-left: 0;
