@@ -23,19 +23,16 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
     let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
     Variable[nameRecords] = response
     if (Static.quest.value.length == 0) {
-      Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
+   
 
       await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
 
     }
     if (Static.quest.value.length > 0) {
-                  
+      Static.newFilter = {}            
       Static.newFilter.$text = { $search: Static.quest.value }
 
-    }
-
-
-    
+    }   
   }
 
 
@@ -158,9 +155,30 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
             options={Static.optionsSelect.questions}
             callback={
               async (active, nameOptions) => {
-         
+          
                 Static.filtersQuestions[nameOptions].value = active 
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                       
+                     if(active == 'all')
+                    {
+                      console.log(Static.newFilter)
+                    }
+                    if(active == 'open')
+                    {
+                      console.log(1)
+                  //    delete Static.newFilter.languages.code
+                      console.log(Static.newFilter)
+                    }
+                    if(active == 'close')
+                    {
+              
+                    }
+                    if(active == 'best')
+                    {
+              
+                    }
+                    
+
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
             }
@@ -191,6 +209,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
           Static.newQustion.sort = ""
           Static.newQustion.sort = {"statistic.answer":Static.optionsSelect.date.asort}
         }
+        console.log(Static.filtersQuestions)
            
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
@@ -207,7 +226,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                   onclick: async (langCode, langName, langOrig) => {
                     Static.filtersQuestions.lang.name = `${langName} (${langOrig})`;
                     Static.filtersQuestions.lang.code = langCode;
-                    await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                    await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                     // initReload()
                   },
                 },
@@ -320,7 +339,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                 onclick={async () => {
                  
                  
-                  let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions), offset: Variable[nameRecords].list_records.length })
+                  let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: Static.newFilter, sort: Static.newQustion.sort, offset: Variable[nameRecords].list_records.length })
               
                   if (tmp && tmp.list_records) {
                     Variable[nameRecords].list_records.push(...tmp.list_records)
