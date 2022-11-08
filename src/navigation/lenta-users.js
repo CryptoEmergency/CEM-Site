@@ -129,6 +129,7 @@ const start = function (data, ID) {
                                 Static={Static}
                                 index={index}
                                 item={item}
+                                showItemsMenu={true}
                                 changeToogle={changeToogle}
                                 ElemVisible={Variable[Static.nameRecords].list_records.length < Variable[Static.nameRecords].totalFound && index == (Variable[Static.nameRecords].list_records.length - 5) ?
                                   async () => {
