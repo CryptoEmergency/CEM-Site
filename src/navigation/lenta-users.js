@@ -69,7 +69,7 @@ const start = function (data, ID) {
           <div class="page-content page-content--full">
             <div class="users_news">
               <div class="users_news_left">
-                <div class="user_news_top" style="margin-top: 10px;">
+                <div class="user_news_top">
                   <div class="c-questions__filter c-questions__filter--openmobile questions_filter">
                     <Select
                       options={Static.optionsSelect.posts}
