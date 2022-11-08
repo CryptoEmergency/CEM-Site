@@ -14,33 +14,38 @@ import { Input } from '@component/element/index.js';
 
 
 
-const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filters }) {
- 
- 
+const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
+
+  const change = async function (arg) {
+    let filters = {}
+    let value = arg
+    filters.$text = { $search: value }
+    let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
+    Variable[nameRecords] = response
+    if (Static.quest.value.length == 0) {
+      Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
+
+      await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+
+    }
+    if (Static.quest.value.length > 0) {
+                  
+      Static.newFilter.$text = { $search: Static.quest.value }
+
+    }
+
+
+    
+  }
+
+
   await initOne(async () => {
   Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
   Static.newQustion = Helpers.getSortQuestions(Static.filtersQuestions);
-    filters = {}
-    Static.newFilter.sort
-    const change = async function (arg) {
-      let value = arg
-      filters.$text = { $search: value }
-      let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
-      Variable[nameRecords] = response
-      if (Static.quest.value.length == 0) {
-        Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
-        await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
-  
-      }
-      if (Static.quest.value.length > 0) {
-                    
-        Static.newFilter.$text = { $search: Static.quest.value }
-  
-      }
+  Static.newQustion.sort = ""
+
   
   
-      
-    }
 
 
 
@@ -155,7 +160,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
               async (active, nameOptions) => {
          
                 Static.filtersQuestions[nameOptions].value = active 
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
                 // initReload();
               }
             }
@@ -166,17 +171,28 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
             callback={
               
               async (active, nameOptions) => {
-           
-         if(!active){
-          Static.newQustion.sort = {showDate: Static.optionsSelect.date.asort}
-        
-         }
-         else{
+          
+         if(active){
           Static.filtersQuestions[nameOptions].value = active
          }
-                
-        
-                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filters: Static.newFilter, sort: Static.newQustion.sort })
+
+         if(Static.filtersQuestions.date.value == 'date')
+        {
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {showDate: Static.optionsSelect.date.asort}
+        }
+        if(Static.filtersQuestions.date.value == 'views')
+        {
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {"statistic.view":Static.optionsSelect.date.asort}
+        }
+        if(Static.filtersQuestions.date.value == 'answers')
+        {
+          Static.newQustion.sort = ""
+          Static.newQustion.sort = {"statistic.answer":Static.optionsSelect.date.asort}
+        }
+           
+                await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
             }
@@ -191,7 +207,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21, filter
                   onclick: async (langCode, langName, langOrig) => {
                     Static.filtersQuestions.lang.name = `${langName} (${langOrig})`;
                     Static.filtersQuestions.lang.code = langCode;
-                    await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
+                    await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Helpers.getSortQuestions(Static.filtersQuestions) })
                     // initReload()
                   },
                 },
