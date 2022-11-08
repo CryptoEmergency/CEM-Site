@@ -43,7 +43,6 @@ const start = function (data, ID) {
   Static.elToogle = {}
   Static.elShowTextFull = {}
   Static.elShowTextShort = {}
-  Static.elMedia = {}
   init(
     async () => {
       Static.nameRecords = "PageLentaall";

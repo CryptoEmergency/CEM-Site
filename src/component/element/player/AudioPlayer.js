@@ -87,50 +87,73 @@ let controlTotalClick = function (e, progressLine, currentTime, mainElement) {
   mainElement().currentTime = tmp;
 };
 
-const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
-  let mainElement =elem ? elem[numIndex][index] : el[index];
-  let fullTime = Variable.setRef();
-  let currentTime = Variable.setRef();
-  let progressLine = Variable.setRef();
+const AudioPlayer = function ({ Static, item, path }) {
+  if (!Static.elMedia[item._id]) {
+    Static.elMedia[item._id] = {}
+  }
+  let elMedia = Static.elMedia[item._id]
   return (
-    <div id={item._id || ""} class="audio_container">
-      {/* <audio preload="none" onended="playerEnded(event, this)" onplay="playerPlay(event, this)" onpause="playerPause(event, this)" oncanplay="playerCanplay(event, this)" ontimeupdate="playerTimeupdate(event, this)" src="{{path}}{{src}}"></audio> */}
+    <div class="audio_container">
       <audio
         preload="metadata"
-        ref={elem? elem[numIndex][index] :  el[index]}
-        onended={(e) => playerEnded(e)}
-        onplay={(e) => playerPlay(e)}
-        onpause={(e) => playerPause(e)}
-        oncanplay={(e) => playerCanplay(e, mainElement, fullTime)}
-        ontimeupdate={(e) => playerTimeupdate(e, currentTime, progressLine)}
+        Element={($el) => { elMedia.el = $el; }}
         src={path + item.name}
+        onplay={function (e) {
+          elMedia.play = true
+          elMedia.controlsPause.src = svg["player_pause"]
+          elMedia.controlsPause.classList.remove("paused");
+        }}
+        onpause={function (e) {
+            elMedia.play = false
+            elMedia.controlsPause.src = svg["player_play"]
+            elMedia.controlsPause.classList.add("paused");
+        }}
+        //onended={(e) => playerEnded(e)}
+        oncanplay={function (e) {
+          if (this.duration === Infinity){
+            this.currentTime = 1e101;
+            this.ontimeupdate = function() {
+                 this.ontimeupdate = () => {
+                   return;
+                 }
+                 this.currentTime = 0;
+          }}else{
+            elMedia.controlsDuration.innerText = formatTime(this.duration)
+          }
+        }}
+        //ontimeupdate={(e) => playerTimeupdate(e, currentTime, progressLine)}
       ></audio>
       <div class="controls">
         <img
           src={svg["player_play"]}
           class="playpause paused"
-          onclick={(e) => {
-            controlPlaypause(e, mainElement);
+          Element={($el) => { elMedia.controlsPause = $el; }}
+          onclick={function (e) {
+            e.stopPropagation();
+            elMedia.el.paused ? elMedia.el.play() : elMedia.el.pause();
           }}
+          // onclick={(e) => {
+          //   controlPlaypause(e, mainElement);
+          // }}
         />
         <span class="progress_player">
           <span
             class="total_player"
-            onclick={(e) =>
-              controlTotalClick(e, progressLine, currentTime, mainElement)
-            }
+            // onclick={(e) =>
+            //   controlTotalClick(e, progressLine, currentTime, mainElement)
+            // }
           >
-            <span ref={progressLine} class="current">
+            <span Element={($el) => { elMedia.controlsProgressLine = $el; }} class="current">
               ​
             </span>
           </span>
         </span>
         <span class="time">
-          <span ref={currentTime} class="currentTime">
+          <span Element={($el) => { elMedia.controlsCurrentTime = $el; }} class="currentTime">
             00:00:00
           </span>{" "}
           /
-          <span ref={fullTime} class="duration">
+          <span Element={($el) => { elMedia.controlsDuration = $el; }} class="duration">
             00:00:00
           </span>
         </span>
@@ -138,9 +161,9 @@ const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
           <img
             src={svg["player_dynamic_on"]}
             class="dynamic"
-            onclick={(e) => {
-              controlDynamicClick(e, mainElement);
-            }}
+            // onclick={(e) => {
+            //   controlDynamicClick(e, mainElement);
+            // }}
           />
         </span>
       </div>
@@ -148,4 +171,4 @@ const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
   );
 };
 
-export { AudioPlayerCopy };
+export { AudioPlayer };

@@ -621,7 +621,7 @@ const start = function (data, ID) {
                                         </div>
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Евгений Царицанский</p>
-                                            <p>Криптоэксперт, основатель академии криптовалют. Обучил финансовой грамотности более 4000 человек. Щедролог </p>
+                                            <p>Криптоэксперт, основатель академии криптовалют.</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">

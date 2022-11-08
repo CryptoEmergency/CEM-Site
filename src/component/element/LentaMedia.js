@@ -47,7 +47,7 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
     for (let i = 0; i < ArrWithAudio.length; i += array_size) {
       audioArr.push(ArrWithAudio.slice(i, i + array_size));
     }
-    items.push(audioArr);
+    items.push(...audioArr);
   }
   return (
     <Swiper
@@ -86,11 +86,11 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
               return (
                 <div class="swiper-slide user_post_text_background">
                   {
-                    item.map((item, index) => {
+                    item.map((itemAudio, index) => {
                       return (
                         <AudioPlayer
                           Static={Static}
-                          item={item}
+                          item={itemAudio}
                           path={`/assets/upload/${path}/`}
                         />
                       );
