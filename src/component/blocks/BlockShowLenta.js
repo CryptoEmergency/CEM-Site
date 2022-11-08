@@ -2,21 +2,15 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  stringToHtml,
-  Helpers,
   initOne,
   initReload,
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { Avatar, LentaMedia, ItemsMenu, Evaluation, TextArea, ButtonSubmit, Comment } from "@component/element/index.js";
+import { TextArea, ButtonSubmit, Comment } from "@component/element/index.js";
 import { BlockLentaUsers } from '@component/blocks/index.js';
 import { api } from '@src/apiFunctions.js'
-import { getDateFormat } from "@src/functions.js";
 
-
-
-let Static = {}
 
 const BlockShowLenta = function ({ Static, item }) {
   // Variable.Static.FooterShow = false
@@ -34,9 +28,7 @@ const BlockShowLenta = function ({ Static, item }) {
             <BlockLentaUsers
               Static={Static}
               item={item}
-
             />
-
             <h2>{Variable.lang.h.modal_comment}</h2>
             <div class="c-comments__form">
               <div class="c-comments__field create_post_container1">
@@ -94,8 +86,6 @@ const BlockShowLenta = function ({ Static, item }) {
                 // )
               }
             }}
-
-
           </div>
         </div>
       </div>

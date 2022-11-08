@@ -83,34 +83,19 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
             if (Array.isArray(item)) {
               let i = index;
               return (
-                // <div class="user_post_text_background">
                 <div class="swiper-slide user_post_text_background">
                   {
                     item.map((item, index) => {
                       return (
-                        <AudioPlayerCopy
+                        <AudioPlayer
+                          Static={Static}
                           item={item}
-                          index={index + i * 3}
-                          numIndex={numIndex}
-                          elem={elem}
-                          path={path}
-                          type="posts"
-                        //  path={"/assets/upload/posts/"}
+                          path={`/assets/upload/${path}/`}
                         />
                       );
                     })
                   }
-                  {/* <AudioPlayer
-                    item={item}
-                    index={index}
-                    numIndex={numIndex}
-                    elem={elem}
-                    path={path}
-                    type="posts"
-                    //  path={"/assets/upload/posts/"}
-                  /> */}
                 </div>
-
               );
             }
           }
