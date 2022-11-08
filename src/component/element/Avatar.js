@@ -125,7 +125,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
   return (
     <a
       href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
-      class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : parent == "c-comments__avacomment" ? "c-comments__avacomment" : "comment_avatar"}`}
+      class={`${parent == "big_user_avatar" ? "" : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar" : parent == "c-comments__avacomment" ? "c-comments__avacomment" : parent == "lenta" ? "lenta_avatar" : "comment_avatar"}`}
       // onclick={Helpers.siteLink}
       onclick={(e) => {
         if (Variable.myInfo && Variable.myInfo.nickname == author.nickname) {
