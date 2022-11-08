@@ -31,7 +31,7 @@ const VideoPlayer = function ({ Static, item, path }) {
         <div class="video_container">
             <video
                 playsinline
-                poster={images["video_background"]}
+                //poster={images["video_background"]}
                 preload="metadata"
                 src={path + item.name}
                 Element={($el) => { elMedia.el = $el; }}
@@ -40,6 +40,11 @@ const VideoPlayer = function ({ Static, item, path }) {
                     this.paused ? this.play() : this.pause();
                 }}
                 onplay={function (e) {
+                    Object.values(Static.elMedia).forEach((audio)=>{
+                        if(audio.play && audio != elMedia){
+                          audio.el.pause()
+                        }
+                    })
                     elMedia.play = true
                     elMedia.controlsPause.src = svg["player_pause"]
                     elMedia.controlsPause.classList.remove("paused");

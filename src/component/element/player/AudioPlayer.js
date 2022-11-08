@@ -1,91 +1,22 @@
 import { jsx, jsxFrag, Variable } from "@betarost/cemjs";
-import { checkAnswerApi } from "@src/functions.js";
 
 import svg from "@assets/svg/index.js";
 
-let controlPlaypause = function (e, mainElement) {
-  e.stopPropagation();
-  mainElement().paused ? mainElement().play() : mainElement().pause();
-};
-
-let controlDynamicClick = function (e, mainElement) {
-  e.stopPropagation();
-  let el = e.target;
-  if (el.classList.length > 1) {
-    el.classList.remove("off");
-    el.src = svg["player_dynamic_on"];
-  } else {
-    el.classList.add("off");
-    el.src = svg["player_dynamic_off"];
-  }
-  mainElement().muted = !mainElement().muted;
-};
-
-let playerPlay = function (e) {
-  let element = e.target.nextElementSibling.childNodes[0];
-  element.src = svg["player_pause"];
-  element.classList.toggle("paused");
-};
-let playerPause = function (e) {
-  let element = e.target.nextElementSibling.childNodes[0];
-  element.src = svg["player_play"];
-  element.classList.toggle("paused");
-};
-
-let playerEnded = function (e) {
-  e.target.pause();
-  let element = e.target.nextElementSibling.childNodes[0];
-  element.src = svg["player_play"];
-  element.classList.toggle("paused");
-};
-
-let playerCanplay = function (e, mainElement, fullTime) {
- if (mainElement().duration === Infinity){
-   mainElement().currentTime = 1e101;
-   mainElement().ontimeupdate = function() {
-        this.ontimeupdate = () => {
-          return;
-        }
-        mainElement().currentTime = 0;
- }}else{
-  fullTime().innerText = formatTime(mainElement().duration);
- }
-};
-
-let playerTimeupdate = function (e, currentTime, progressLine) {
-  currentTime().innerText = formatTime(e.target.currentTime);
-  let progress =
-    Math.floor(e.target.currentTime) / Math.floor(e.target.duration);
-  progressLine().style.width = progress * 100 + "%";
-};
-let formatTime = function (time) {
-  let h = Math.floor(time / 3600);
-  time = time - h * 3600;
-  let m = Math.floor(time / 60);
-  let s = Math.floor(time % 60);
-  return h.lead0(2) + ":" + m.lead0(2) + ":" + s.lead0(2);
-};
-Number.prototype.lead0 = function (n) {
-  var nz = "" + this;
+const lead0 = function (val, n) {
+  var nz = "" + val
   while (nz.length < n) {
-    nz = "0" + nz;
+      nz = "0" + nz
   }
-  return nz;
-};
+  return nz
+}
 
-let controlTotalClick = function (e, progressLine, currentTime, mainElement) {
-  e.stopPropagation();
-  let elem;
-  if (e.target.className === "current") {
-    elem = e.target.parentElement;
-  } else {
-    elem = e.target;
-  }
-  let progress = Math.floor(e.offsetX) / Math.floor(elem.clientWidth);
-  let tmp = mainElement().duration * progress;
-  progressLine().style.width = progress * 100 + "%";
-  mainElement().currentTime = tmp;
-};
+const formatTime = function (time) {
+  let h = Math.floor(time / 3600)
+  time = time - h * 3600
+  let m = Math.floor(time / 60)
+  let s = Math.floor(time % 60)
+  return lead0(h, 2) + ":" + lead0(m, 2) + ":" + lead0(s, 2)
+}
 
 const AudioPlayer = function ({ Static, item, path }) {
   if (!Static.elMedia[item._id]) {
@@ -99,6 +30,11 @@ const AudioPlayer = function ({ Static, item, path }) {
         Element={($el) => { elMedia.el = $el; }}
         src={path + item.name}
         onplay={function (e) {
+          Object.values(Static.elMedia).forEach((audio)=>{
+            if(audio.play && audio != elMedia){
+              audio.el.pause()
+            }
+          })
           elMedia.play = true
           elMedia.controlsPause.src = svg["player_pause"]
           elMedia.controlsPause.classList.remove("paused");
@@ -108,7 +44,11 @@ const AudioPlayer = function ({ Static, item, path }) {
             elMedia.controlsPause.src = svg["player_play"]
             elMedia.controlsPause.classList.add("paused");
         }}
-        //onended={(e) => playerEnded(e)}
+        onended={function (e) {
+          elMedia.play = false
+          elMedia.controlsPause.src = svg["player_play"]
+          elMedia.controlsPause.classList.add("paused");
+        }}
         oncanplay={function (e) {
           if (this.duration === Infinity){
             this.currentTime = 1e101;
@@ -121,7 +61,11 @@ const AudioPlayer = function ({ Static, item, path }) {
             elMedia.controlsDuration.innerText = formatTime(this.duration)
           }
         }}
-        //ontimeupdate={(e) => playerTimeupdate(e, currentTime, progressLine)}
+        ontimeupdate={function (e) {
+          elMedia.controlsCurrentTime.innerText = formatTime(this.currentTime)
+          let progress = Math.floor(this.currentTime) / Math.floor(this.duration);
+          elMedia.controlsProgressLine.style.width = progress * 100 + '%'
+        }}
       ></audio>
       <div class="controls">
         <img
@@ -132,16 +76,22 @@ const AudioPlayer = function ({ Static, item, path }) {
             e.stopPropagation();
             elMedia.el.paused ? elMedia.el.play() : elMedia.el.pause();
           }}
-          // onclick={(e) => {
-          //   controlPlaypause(e, mainElement);
-          // }}
         />
         <span class="progress_player">
           <span
             class="total_player"
-            // onclick={(e) =>
-            //   controlTotalClick(e, progressLine, currentTime, mainElement)
-            // }
+            onclick={function (e) {
+              e.stopPropagation()
+              let elem
+              if (e.target.className === "current") {
+                  elem = e.target.parentElement
+              } else {
+                  elem = e.target
+              }
+              let progress = Math.floor(e.offsetX) / Math.floor(elem.clientWidth);
+              elMedia.controlsProgressLine.style.width = progress * 100 + '%'
+              elMedia.el.currentTime = elMedia.el.duration * progress
+            }}
           >
             <span Element={($el) => { elMedia.controlsProgressLine = $el; }} class="current">
               ​
@@ -161,9 +111,17 @@ const AudioPlayer = function ({ Static, item, path }) {
           <img
             src={svg["player_dynamic_on"]}
             class="dynamic"
-            // onclick={(e) => {
-            //   controlDynamicClick(e, mainElement);
-            // }}
+            onclick={function (e) {
+              e.stopPropagation();
+              elMedia.el.muted = !elMedia.el.muted
+              if (elMedia.el.muted) {
+                  this.src = svg["player_dynamic_off"];
+                  this.classList.add("off");
+              } else {
+                  this.src = svg["player_dynamic_on"];
+                  this.classList.remove("off");
+              }
+            }}
           />
         </span>
       </div>
