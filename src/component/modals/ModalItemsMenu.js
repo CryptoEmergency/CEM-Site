@@ -5,7 +5,7 @@ import {
 } from "@betarost/cemjs";
 
 const arrMyAction = ["share","copyurl", "edit", "delete"]
-const arrVisitorAction = ["share","copyurl", "subscription", "complainItem", "complainUser", "blackList"]
+const arrVisitorAction = ["addanswer","share","copyurl", "subscription", "complainItem", "complainUser", "blackList"]
 const arrRoleAction = ["deleteRole"]
 
 const ModalItemsMenu = function ({ items, author }) {

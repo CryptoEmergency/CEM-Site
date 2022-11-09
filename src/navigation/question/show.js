@@ -92,6 +92,7 @@ const start = function (data, ID) {
                 () => {
                   if (!itemAnswer) {
                     setTimeout(async function () {
+                  
                       itemAnswer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
                       initReload()
                     }, 1000)

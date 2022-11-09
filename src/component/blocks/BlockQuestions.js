@@ -316,7 +316,67 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                     <a
                       class="c-button c-button--outline2 "
                       href={`/question/show/${question._id}`}
-                      onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question }) }}
+                      onclick={(e) => {
+                
+                        Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author:question.author,
+                        items:[
+                          //не авторизованый пользователь
+                          {
+                            //предложить ответ
+                             text: Variable.lang.h.modal_answer,
+                             type: "addanswer",   
+                          },
+                          {
+                            //поделиться
+                            text: Variable.lang.select.share,
+                            type: "share",
+                            onclick: async () => {
+                              try {
+                                if (navigator.share) {
+                                  await navigator.share({
+                                    url: window.location.origin + "/blog/",
+                                  });
+                                }
+                              } catch (err) {
+                                // Вывести ошибку
+                                console.error("Share", err)
+                              }
+                            }
+                            },
+                            {
+                              //пожаловаьбся на вопрос
+                              text: Variable.lang.select.complainAnswer,
+                              type: "complainItem",
+                              color: "red",
+                              onclick: async () => {
+                            
+                              }
+                            },
+                            {
+                              text: Variable.lang.select.complainUser,
+                              type: "complainUser",
+                              color: "red",
+                              onclick: async () => {
+                                // Переработать модалку
+                                Variable.SetModals(
+                                  {
+                                    name: "ModalComplainComment",
+                                    data: {
+                                      id: data.item._id,
+                                      typeSet: data.typeApi,
+                                      mainId: data.mainId,
+                                      mainCom: !data.commentId ? true : false,
+                                    },
+                                  }, true
+                                );
+                              }
+                            },
+                          //авторизованый пользователь
+                         ] }) 
+                    
+
+                      
+                    }}
                     >
                       <div class="c-button__wrapper">
                         {Variable.lang.button.giveAnswer}
