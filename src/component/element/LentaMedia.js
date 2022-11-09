@@ -79,7 +79,7 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
                 <div class="swiper-slide">
                   <div class="swiper-post_media_image_container">
                     <LazyImage
-                      path={`/assets/upload/${path}/` + item.name} 
+                      path={`/assets/upload/${path}/` + item.name}
                     />
                   </div>
                 </div>
