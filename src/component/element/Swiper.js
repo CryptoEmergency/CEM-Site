@@ -11,7 +11,6 @@ const swiperInit = function ($el, options, swiperElem) {
 }
 
 const Swiper = function ({ slide, options, className, navigation = false, swiperElem, replace = false }) {
-
     if (navigation) {
         return (
             <div class="swiper-container" replace={replace}>
