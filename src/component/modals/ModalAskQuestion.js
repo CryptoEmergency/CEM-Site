@@ -162,6 +162,9 @@ const sendVideo = async function (files) {
 }
 
 const ModalAskQuestion = function (data, reload) {
+  // Подключаем переменную для модалки
+  if (!data.Static) { data.Static = {} }
+  let Static = data.Static
   if (!reload) {
     formInputs = {
       language: {
