@@ -4,11 +4,12 @@ import {
 	Variable,
 } from "@betarost/cemjs";
 
-const arrMyAction = ["share","copyurl", "edit", "delete"]
-const arrVisitorAction = ["share","copyurl", "subscription", "complainItem", "complainUser", "blackList"]
+const arrMyAction = ["share","copyurl", "edit", "delete","closequestion","bestquestion"]
+const arrVisitorAction = ["addanswer","share","copyurl", "subscription", "complainItem", "complainUser", "blackList"]
 const arrRoleAction = ["deleteRole"]
 
 const ModalItemsMenu = function ({ items, author }) {
+	
 	return (
 		<div class="c-modal c-modal--open" id="ModalContextMenu">
 			<section class="c-modal__dialog">

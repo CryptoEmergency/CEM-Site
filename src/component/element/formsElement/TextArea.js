@@ -32,7 +32,7 @@ const textElem = function (Static, className) {
             placeholder = Static.placeholder
         }
         if (Static.value) {
-            // text = Static.value
+             text = Static.value
         }
     }
     return (

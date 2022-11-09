@@ -18,6 +18,7 @@ import {
 } from '@component/blocks/index.js';
 
 const start = function (userInfo, ID = "mainBlock") {
+    Variable.Static.FooterShow = false
     let profilePage,
         activeItems
     Variable.HeaderShow = true

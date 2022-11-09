@@ -77,6 +77,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
                           text: Variable.lang.select.complainPost,
                           type: "complainItem",
                           onlyAuth: true,
+                     
                           color: "red",
                           onclick: async () => {
                             // Переработать модалку
@@ -211,8 +212,8 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
                 if (show) {
                   return Helpers.editText(item.text, { clear: true, paragraph: true, html: true })
                 }
-                if (!item.media.length && item.text.length < 450) {
-                  return Helpers.editText(item.text, { slice: 450, clear: true, paragraph: true, html: true })
+                if (!item.media.length && item.text.length < 250) {
+                  return Helpers.editText(item.text, { slice: 250, clear: true, paragraph: true, html: true })
                 } else if (item.media.length && item.text.length) {
                   return (
                     <div>

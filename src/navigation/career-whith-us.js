@@ -17,9 +17,9 @@ const start = function (data, ID) {
                             <div class="c-jobs__textpreview">
                                 <h3 class="c-jobs__title">{Variable.lang.h.career_with_us}</h3>
                                 <p>{Variable.lang.p.connectTeam}</p>
-                                <a href="" class="c-button c-button--primary">
+                                {/* <a href="" class="c-button c-button--primary">
                                     <span class="c-button__text">{Variable.lang.button.our_vacancies}</span>
-                                </a>
+                                </a> */}
                             </div>
                         </div>
 

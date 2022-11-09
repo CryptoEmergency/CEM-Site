@@ -15,7 +15,7 @@ import { Input } from '@component/element/index.js';
 
 
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
-
+  let item = []
   const change = async function (arg) {
     let filters = {}
     let value = arg
@@ -24,7 +24,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
     Variable[nameRecords] = response
     if (Static.quest.value.length == 0) {
    
-
+      delete Static.newFilter.$text
       await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
 
     }
@@ -156,30 +156,32 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
             callback={
               async (active, nameOptions) => {
           
-                Static.filtersQuestions[nameOptions].value = active 
+                Static.filtersQuestions[nameOptions].value =  active
                 if(active == 'all')
                 {
-               
-           
                  delete Static.newFilter.close
+                 delete Static.newFilter.bestId
                 }  
                    
                     if(active == 'open')
                     {
-                   
-               
+                      delete Static.newFilter.bestId
+          
                       Static.newFilter.close = false
                     }
-                    if(active == 'close')
+                    if(active == 'closed')
                     {
+                      delete Static.newFilter.bestId
               
+                      Static.newFilter.close = true
                     }
                     if(active == 'best')
                     {
-              
+                      delete Static.newFilter.close
+                      Static.newFilter.bestId = {$exists: true}
                     }
+                   
                     
-
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
@@ -211,7 +213,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
           Static.newQustion.sort = ""
           Static.newQustion.sort = {"statistic.answer":Static.optionsSelect.date.asort}
         }
-        console.log(Static.filtersQuestions)
+ 
            
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
@@ -288,7 +290,112 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                     style=""
                     href={`/question/show/${question._id}`}
                     class="c-question__body"
-                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question }) }}
+                    //ссылка твой вопрос
+                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author:question.author,
+                      items:[
+                        //не авторизованый пользователь
+                     
+                           {
+                            //предложить ответ
+                             text: Variable.lang.h.modal_answer,
+                             type: "addanswer",   
+                             onlyAuth: true,
+                             onclick: async () => {
+                              Variable.SetModals({
+                                name: "ModalAnswer", data: {
+                                  item,
+                                  onClose: async () => {
+                                    // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                                    // itemAnswer = answer.list_records
+                                    // initReload()
+                                  }
+                                }
+                              })
+                            }
+                          }
+                        ,
+                        {
+                          //поделиться
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/question/show/" + question._id,
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+                          },
+                          {
+                            //пожаловаьбся на вопрос
+                            text: Variable.lang.select.complainAnswer,
+                            type: "complainItem",
+                            color: "red",
+                            onlyAuth: true,
+                            onclick: async () => {
+                          
+                            }
+                          },
+                          //пожаловаться на пользователя
+                          {
+                            text: Variable.lang.select.complainUser,
+                            type: "complainUser",
+                            color: "red",
+                            onlyAuth: true,
+                            onclick: async () => {
+                              // Переработать модалку
+                              Variable.SetModals(
+                                {
+                                  name: "ModalComplainComment",
+                                  data: {
+                                    id: data.item._id,
+                                    typeSet: data.typeApi,
+                                    mainId: data.mainId,
+                                    mainCom: !data.commentId ? true : false,
+                                  },
+                                }, true
+                              );
+                            }
+                          },
+                        //авторизованый пользовательъ
+                         {
+                          //редактировать
+                           text: Variable.lang.button.edit,
+                           type: "edit",   
+                           onlyAuth: true,
+                           onclick: async () => {
+                            Static.editQuestion = true
+                          }
+
+                        },
+                        {
+                          //закрыть
+                           text: Variable.lang.select.closeQuestion,
+                           type: "closequestion",   
+                           onlyAuth: true,
+                        }
+                        ,
+                        {
+                          //выбрать лучший ответ
+                           text: Variable.lang.itemsMenu.SelectBestQuestion,
+                           type: "bestquestion",   
+                           color: "green",
+                           onlyAuth: true,
+                        }
+                        ,
+                        {
+                          //удалить
+                           text: Variable.lang.select.delete,
+                           type: "delete",  
+                           color: "red", 
+                           onlyAuth: true,
+                        }
+                       ]  }) }}
                   >
                     <div class="c-question__preview">
                       <span class="">
@@ -314,7 +421,113 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                     <a
                       class="c-button c-button--outline2 "
                       href={`/question/show/${question._id}`}
-                      onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question }) }}
+                      onclick={(e) => {
+                
+                        Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author:question.author,
+                        items:[
+                          //не авторизованый пользователь
+                       
+                             {
+                              //предложить ответ
+                               text: Variable.lang.h.modal_answer,
+                               type: "addanswer",   
+                               onlyAuth: true,
+                               onclick: async () => {
+                                Variable.SetModals({
+                                  name: "ModalAnswer", data: {
+                                    item,
+                                    onClose: async () => {
+                                      // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                                      // itemAnswer = answer.list_records
+                                      // initReload()
+                                    }
+                                  }
+                                })
+                              }
+                            }
+                          ,
+                          {
+                            //поделиться
+                            text: Variable.lang.select.share,
+                            type: "share",
+                            onclick: async () => {
+                              try {
+                                if (navigator.share) {
+                                  await navigator.share({
+                                    url: window.location.origin + "/question/show/" + question._id,
+                                  });
+                                }
+                              } catch (err) {
+                                // Вывести ошибку
+                                console.error("Share", err)
+                              }
+                            }
+                            },
+                            {
+                              //пожаловаьбся на вопрос
+                              text: Variable.lang.select.complainAnswer,
+                              type: "complainItem",
+                              color: "red",
+                              onlyAuth: true,
+                              onclick: async () => {
+                            
+                              }
+                            },
+                            //пожаловаться на пользователя
+                            {
+                              text: Variable.lang.select.complainUser,
+                              type: "complainUser",
+                              color: "red",
+                              onlyAuth: true,
+                              onclick: async () => {
+                                // Переработать модалку
+                                Variable.SetModals(
+                                  {
+                                    name: "ModalComplainComment",
+                                    data: {
+                                      id: data.item._id,
+                                      typeSet: data.typeApi,
+                                      mainId: data.mainId,
+                                      mainCom: !data.commentId ? true : false,
+                                    },
+                                  }, true
+                                );
+                              }
+                            },
+                          //авторизованый пользовательъ
+                           {
+                            //редактировать
+                             text: Variable.lang.button.edit,
+                             type: "edit",   
+                             onlyAuth: true,
+                          },
+                          {
+                            //закрыть
+                             text: Variable.lang.select.closeQuestion,
+                             type: "closequestion",   
+                             onlyAuth: true,
+                          }
+                          ,
+                          {
+                            //выбрать лучший ответ
+                             text: Variable.lang.itemsMenu.SelectBestQuestion,
+                             type: "bestquestion",   
+                             color: "green",
+                             onlyAuth: true,
+                          }
+                          ,
+                          {
+                            //удалить
+                             text: Variable.lang.select.delete,
+                             type: "delete",  
+                             color: "red", 
+                             onlyAuth: true,
+                          }
+                         ] }) 
+                    
+
+                      
+                    }}
                     >
                       <div class="c-button__wrapper">
                         {Variable.lang.button.giveAnswer}

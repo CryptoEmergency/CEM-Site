@@ -8,8 +8,11 @@ import {
   AudioPlayerCopy,
   AudioPlayer,
   Swiper,
-  VideoPlayer
+  VideoPlayer,
+  LazyImage
 } from "@component/element/index.js";
+
+import images from '@assets/images/index.js';
 
 const swiperOptions = {
   effect: "cube",
@@ -75,7 +78,9 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
               return (
                 <div class="swiper-slide">
                   <div class="swiper-post_media_image_container">
-                    <img src={`/assets/upload/${path}/` + item.name} />
+                    <LazyImage
+                      path={`/assets/upload/${path}/` + item.name} 
+                    />
                   </div>
                 </div>
               );

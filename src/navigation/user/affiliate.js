@@ -18,9 +18,9 @@ import { BlockAffiliateBanners } from '@component/blocks/index.js';
 const start = function () {
 
     let copyWindow = Variable.setRef()
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-    Variable.showUserMenu = false
+    Variable.Static.HeaderShow = true
+    Variable.Static.FooterShow = true
+    Variable.Static.showUserMenu = false
 
     init(
         async () => {
@@ -28,7 +28,12 @@ const start = function () {
         },
         () => {
             return (
-                <div class="page-content">
+                <div
+                    class={[
+                        "page-content",
+                        Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+                    ]}
+                >
                     <img class="affiliate_program_blur" style="position: absolute; right: 0;" src={svg["icon/affiliate_blur-1"]} />
                     <img class="affiliate_program_blur" style="position: absolute; left: 0;" src={svg["icon/affiliate_blur-4"]} />
                     <div class="affiliate_program_block user_affiliate">

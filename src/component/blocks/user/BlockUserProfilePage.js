@@ -89,7 +89,7 @@ BlockUserProfilePage.aboutUser = function (data) {
                                             <div class="about_user_section_points_container">
                                                 <img 
                                                     onclick={()=>{
-                                                        Variable.SetModals({ name: "ModalUserInfoEdit", data: {} })
+                                                        Variable.SetModals({ name: "ModalUserInfoEdit", data: data.userInfo.information })
                                                     }} 
                                                     class="about_user_section_points" 
                                                     src={svg['pencil']} 

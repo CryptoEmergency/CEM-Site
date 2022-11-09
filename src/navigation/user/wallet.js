@@ -16,9 +16,9 @@ import {
 } from '@component/element/index.js';
 
 const start = function () {
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-    Variable.showUserMenu = false
+    Variable.Static.HeaderShow = true
+    Variable.Static.FooterShow = true
+    Variable.Static.showUserMenu = false
 
     init(
         async () => {
@@ -33,7 +33,12 @@ const start = function () {
         () => {
             return (
                 <div class="page-content">
-                    <div class="c-wallet">
+                    <div
+                        class={[
+                            "c-wallet",
+                            Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+                          ]}
+                    >
                         <div class="c-wallet__container">
                             <div class="c-wallet__left">
                                 <UserWalletCard

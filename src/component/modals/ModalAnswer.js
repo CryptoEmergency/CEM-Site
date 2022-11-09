@@ -159,6 +159,8 @@ const sendVideo = async function (files) {
 
 
 const ModalAnswer = function (data, reload) {
+  if(!data.Static){data.Static= {}} 
+let Static = data.Static
 
   if (!reload) {
     Variable.OutHideWindows.push([elem, "ModalAnswer"])
@@ -186,7 +188,7 @@ const ModalAnswer = function (data, reload) {
             class="c-modal__close"
             onclick={() => {
               Variable.DelModals("ModalAnswer");
-              // initReload("modals");
+               initReload("modals");
             }}
           ></button>
         </header>
