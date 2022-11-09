@@ -38,6 +38,7 @@ const ToogleItem = function ({ Static, name }) {
 }
 
 const start = function (data, ID) {
+  Variable.Static.FooterShow = false
   let Static = {}
   Static.elMedia = {}
   Static.elToogle = {}
