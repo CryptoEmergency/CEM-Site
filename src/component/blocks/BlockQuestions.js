@@ -325,6 +325,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                             //предложить ответ
                              text: Variable.lang.h.modal_answer,
                              type: "addanswer",   
+                             onlyAuth: true,
                           },
                           {
                             //поделиться
@@ -348,14 +349,17 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                               text: Variable.lang.select.complainAnswer,
                               type: "complainItem",
                               color: "red",
+                              onlyAuth: true,
                               onclick: async () => {
                             
                               }
                             },
+                            //пожаловаться на пользователя
                             {
                               text: Variable.lang.select.complainUser,
                               type: "complainUser",
                               color: "red",
+                              onlyAuth: true,
                               onclick: async () => {
                                 // Переработать модалку
                                 Variable.SetModals(
@@ -371,7 +375,35 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                                 );
                               }
                             },
-                          //авторизованый пользователь
+                          //авторизованый пользовательъ
+                           {
+                            //редактировать
+                             text: Variable.lang.button.edit,
+                             type: "edit",   
+                             onlyAuth: true,
+                          },
+                          {
+                            //закрыть
+                             text: Variable.lang.select.closeQuestion,
+                             type: "closequestion",   
+                             onlyAuth: true,
+                          }
+                          ,
+                          {
+                            //выбрать лучший ответ
+                             text: Variable.lang.itemsMenu.SelectBestQuestion,
+                             type: "bestquestion",   
+                             color: "green",
+                             onlyAuth: true,
+                          }
+                          ,
+                          {
+                            //удалить
+                             text: Variable.lang.select.delete,
+                             type: "delete",  
+                             color: "red", 
+                             onlyAuth: true,
+                          }
                          ] }) 
                     
 

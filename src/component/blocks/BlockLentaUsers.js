@@ -77,6 +77,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
                           text: Variable.lang.select.complainPost,
                           type: "complainItem",
                           onlyAuth: true,
+                     
                           color: "red",
                           onclick: async () => {
                             // Переработать модалку

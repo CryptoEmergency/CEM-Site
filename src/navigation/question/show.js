@@ -12,20 +12,24 @@ import { api } from '@src/apiFunctions.js'
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
 
 const start = function (data, ID) {
-  let item, itemAnswer, itemID;
+  let item, itemAnswer, itemID, itemMenuCheck;
   let Static = []
   init(
     async () => {
       if (data && data.item) {
         item = data.item
-        if (data.item._id) {
+        if (data.item._id) {    
+          //если в модалке
           itemID = data.item._id
+          itemMenuCheck = true
         }
       } else {
         if (data && data.itemID) {
           itemID = data.itemID
         } else {
+            //если в статике
           itemID = Variable.dataUrl.params
+          itemMenuCheck = false
         }
         let response = await api({ type: "get", action: "getQuestions", short: true, limit: 1, filter: { _id: itemID } })
         if (response && response.list_records && response.list_records[0]) {
@@ -42,7 +46,103 @@ const start = function (data, ID) {
             <div class="answer_content">
               <div class="question_author_block">
                 <Avatar author={item.author} nickName={item.author.nickname} />
+
+                <div class="comment_icons">
+                <ItemsMenu author={item.author} 
+              items = {
+                [
+                  //не авторизованый пользователь
+                  {
+                    //предложить ответ
+                     text: Variable.lang.h.modal_answer,
+                     type: "addanswer",   
+                     onlyAuth: true,
+                  },
+                  {
+                    //поделиться
+                    text: Variable.lang.select.share,
+                    type: "share",
+                    onclick: async () => {
+                      try {
+                        if (navigator.share) {
+                          await navigator.share({
+                            url: window.location.origin + "/blog/",
+                          });
+                        }
+                      } catch (err) {
+                        // Вывести ошибку
+                        console.error("Share", err)
+                      }
+                    }
+                    },
+                    {
+                      //пожаловаьбся на вопрос
+                      text: Variable.lang.select.complainAnswer,
+                      type: "complainItem",
+                      color: "red",
+                      onlyAuth: true,
+                      onclick: async () => {
+                    
+                      }
+                    },
+                    //пожаловаться на пользователя
+                    {
+                      text: Variable.lang.select.complainUser,
+                      type: "complainUser",
+                      color: "red",
+                      onlyAuth: true,
+                      onclick: async () => {
+                        // Переработать модалку
+                        Variable.SetModals(
+                          {
+                            name: "ModalComplainComment",
+                            data: {
+                              id: data.item._id,
+                              typeSet: data.typeApi,
+                              mainId: data.mainId,
+                              mainCom: !data.commentId ? true : false,
+                            },
+                          }, true
+                        );
+                      }
+                    },
+                  //авторизованый пользовательъ
+                   {
+                    //редактировать
+                     text: Variable.lang.button.edit,
+                     type: "edit",   
+                     onlyAuth: true,
+                  },
+                  {
+                    //закрыть
+                     text: Variable.lang.select.closeQuestion,
+                     type: "closequestion",   
+                     onlyAuth: true,
+                  }
+                  ,
+                  {
+                    //выбрать лучший ответ
+                     text: Variable.lang.itemsMenu.SelectBestQuestion,
+                     type: "bestquestion",   
+                     color: "green",
+                     onlyAuth: true,
+                  }
+                  ,
+                  {
+                    //удалить
+                     text: Variable.lang.select.delete,
+                     type: "delete",  
+                     color: "red", 
+                     onlyAuth: true,
+                  }
+                 ] 
+              }  />
+
+                </div>
+              
               </div>
+      
+                
               <p class="question_title">{item.title}</p>
               <div class="question_text"> {Helpers.clearText(item.text)}</div>
               <LentaMedia

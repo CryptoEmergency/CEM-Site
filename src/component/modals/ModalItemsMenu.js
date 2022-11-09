@@ -4,7 +4,7 @@ import {
 	Variable,
 } from "@betarost/cemjs";
 
-const arrMyAction = ["share","copyurl", "edit", "delete"]
+const arrMyAction = ["share","copyurl", "edit", "delete","closequestion","bestquestion"]
 const arrVisitorAction = ["addanswer","share","copyurl", "subscription", "complainItem", "complainUser", "blackList"]
 const arrRoleAction = ["deleteRole"]
 

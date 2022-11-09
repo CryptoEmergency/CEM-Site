@@ -187,7 +187,7 @@ let Static = data.Static
             type="button"
             class="c-modal__close"
             onclick={() => {
-              //Variable.DelModals("ModalAnswer");
+              Variable.DelModals("ModalAnswer");
                initReload("modals");
             }}
           ></button>
