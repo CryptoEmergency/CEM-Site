@@ -167,26 +167,26 @@ const start = function () {
                                                     </div>
                                                     <div ref={email} data-name="email" class="lottery_check">
                                                         <p>2. {Variable.lang.p.lotteryQuest2}</p>
-                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="email" placeholder="Email" />
+                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="email" placeholder="Email" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={telegram} data-name="telegram" class="lottery_check">
                                                         <p>3. {Variable.lang.p.lotteryQuest3}</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/emergencycrypto">https://t.me/emergencycrypto</a></p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://t.me/cryptoemergencychat">https://t.me/cryptoemergencychat</a></p>
-                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
+                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={twitter} data-name="twitter" class="lottery_check">
                                                         <p>4. {Variable.lang.p.lotteryQuest4}</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://twitter.com/cryptoemergency">https://twitter.com/cryptoemergency</a></p>
-                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="twitter" placeholder="Twitter" />
+                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="twitter" placeholder="Twitter" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={instagram} data-name="instagram" class="lottery_check">
                                                         <p>5. {Variable.lang.p.lotteryQuest5}</p>
                                                         <p><a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/cryptoemergency/">https://www.instagram.com/cryptoemergency/</a></p>
-                                                        <input onkeyup={lotteryValidCheckKeyup} type="text" name="instagram" placeholder="Instagram" />
+                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="instagram" placeholder="Instagram" />
                                                         <img src={svg['check_lottery_black']} />
                                                     </div>
                                                     <div ref={quiz} data-name="quiz" class="lottery_check">

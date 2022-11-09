@@ -8,7 +8,7 @@ import {
     getValue
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { Input } from '@component/element/index.js';
+import { Input, ButtonSubmit } from '@component/element/index.js';
 
 const showModalUserInfoEdit = function (e) {
     e.stopPropagation()
@@ -17,9 +17,10 @@ const showModalUserInfoEdit = function (e) {
 
 let Static = {}
 
-const ModalUserInfoEdit = function ({ }, reload) {
+const ModalUserInfoEdit = function (userInfo, reload) {
     // console.log("ModalComingSoon");
     const userInfoEditModalShow = getValue("modals", "userInfoEditModalShow")
+    console.log(userInfo)
     initOne(() => {
         Static = {
           isValid: false
@@ -32,20 +33,35 @@ const ModalUserInfoEdit = function ({ }, reload) {
             code: "",
             name: "",
             autocomplete:"off",
-            placeholder:Variable.lang.error_div.selectFromList,
-            onclick: () => {
-              Variable.SetModals({
-                name: "ModalSelectCountry", data: {
-                  onclick: (code, name) => {
-                    Static.country.value = name
-                    Static.country.code = code
-                    Static.country.valid = true
-                    checkValid(Static, ["nickName","language","country"])
-                  }
-                }
-              }, true);
-            }
-          }
+            placeholder:Variable.lang.label.name,
+        }
+        Static.speciality = {
+            value:"",
+            type:"text",
+            valid: false,
+            code: "",
+            name: "",
+            autocomplete:"off",
+            placeholder:Variable.lang.label.speciality,
+        }
+        Static.birthday = {
+            value:"",
+            type:"date",
+            valid: false,
+            code: "",
+            name: "",
+            autocomplete:"off",
+            placeholder:Variable.lang.label.birthDate,
+        }
+        Static.city = {
+            value:"",
+            type:"text",
+            valid: false,
+            code: "",
+            name: "",
+            autocomplete:"off",
+            placeholder:Variable.lang.label.city,
+        }
 
         Static.country = {
             value:"",
@@ -62,19 +78,18 @@ const ModalUserInfoEdit = function ({ }, reload) {
                     Static.country.value = name
                     Static.country.code = code
                     Static.country.valid = true
-                    checkValid(Static, ["nickName","language","country"])
                   }
                 }
               }, true);
             }
-          }
+        }
     })
 
     return (
         <div class="c-modal c-modal--open">
             <section class="c-modal__dialog">
                 <header class="c-modal__header">
-                    <h2 class="c-modal__title">Edit</h2>
+                    <h2 class="c-modal__title">{Variable.lang.button.edit}</h2>
                     <button
                         type="button"
                         class="c-modal__close"
@@ -82,8 +97,20 @@ const ModalUserInfoEdit = function ({ }, reload) {
                     ></button>
                 </header>
                 <div class="c-modal__body">
-                    <div class="after_register_form">
-                        <form id="afterRegisterForm"> 
+                    <div style="padding: 0" class="after_register_form">
+                        <form> 
+                            <div>
+                                <Input classDiv="" Static={Static.name} />
+                            </div>
+                            <div>
+                                <Input classDiv="" Static={Static.speciality} />
+                            </div>
+                            <div>
+                                <Input classDiv="" Static={Static.birthday} />
+                            </div>
+                            <div>
+                                <Input classDiv="" Static={Static.city} />
+                            </div>
                             <div class="country_select_wrapper">
                                 <Input classDiv="" Static={Static.country} />
                                 <div
@@ -99,11 +126,12 @@ const ModalUserInfoEdit = function ({ }, reload) {
                     </div>
                 </div>
                 <footer class="c-modal__footer">
-                    <button class="c-button c-button--primary"
-                        onclick={showModalUserInfoEdit}
-                    >
-                        <span>Закрыть</span>
-                    </button>
+                    <ButtonSubmit
+                        text={Variable.lang.button.edit}
+                        onclick={()=>{
+                            console.error('success')
+                        }}
+                    />
                 </footer>
             </section>
         </div>
