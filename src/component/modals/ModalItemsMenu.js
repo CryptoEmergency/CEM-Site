@@ -9,6 +9,7 @@ const arrVisitorAction = ["addanswer","share","copyurl", "subscription", "compla
 const arrRoleAction = ["deleteRole"]
 
 const ModalItemsMenu = function ({ items, author }) {
+	
 	return (
 		<div class="c-modal c-modal--open" id="ModalContextMenu">
 			<section class="c-modal__dialog">

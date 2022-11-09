@@ -9,10 +9,10 @@ import {
 // check
 import svg from '@assets/svg/index.js';
 import { api } from '@src/apiFunctions.js'
-import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
+import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment, Input } from "@component/element/index.js";
 
 const start = function (data, ID) {
-  let item, itemAnswer, itemID, itemMenuCheck;
+  let item, itemAnswer, itemID, itemMenuCheck,showItemsMenu;
   let Static = []
   init(
     async () => {
@@ -38,6 +38,119 @@ const start = function (data, ID) {
           item = []
         }
       }
+
+      if(!itemMenuCheck)
+      {
+        showItemsMenu = <ItemsMenu author={item.author} 
+        items = {
+          [
+            //не авторизованый пользователь
+            {
+              //предложить ответ
+               text: Variable.lang.h.modal_answer,
+               type: "addanswer",   
+               onlyAuth: true,
+               onclick: async () => {
+                Variable.SetModals({
+                  name: "ModalAnswer", data: {
+                    item,
+                    onClose: async () => {
+                      // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                      // itemAnswer = answer.list_records
+                      // initReload()
+                    }
+                  }
+                })
+              }
+            },
+            {
+              //поделиться
+              text: Variable.lang.select.share,
+              type: "share",
+              onclick: async () => {
+                try {
+                  if (navigator.share) {
+                    await navigator.share({
+                      url: window.location.origin + "/question/show/" + itemID,
+                    });
+                  }
+                } catch (err) {
+                  // Вывести ошибку
+                  console.error("Share", err)
+                }
+              }
+              },
+              {
+                //пожаловаьбся на вопрос
+                text: Variable.lang.select.complainAnswer,
+                type: "complainItem",
+                color: "red",
+                onlyAuth: true,
+                onclick: async () => {
+              
+                }
+              },
+              //пожаловаться на пользователя
+              {
+                text: Variable.lang.select.complainUser,
+                type: "complainUser",
+                color: "red",
+                onlyAuth: true,
+                onclick: async () => {
+                  // Переработать модалку
+                  Variable.SetModals(
+                    {
+                      name: "ModalComplainComment",
+                      data: {
+                        id: data.item._id,
+                        typeSet: data.typeApi,
+                        mainId: data.mainId,
+                        mainCom: !data.commentId ? true : false,
+                      },
+                    }, true
+                  );
+                }
+              },
+            //авторизованый пользовательъ
+             {
+              //редактировать
+               text: Variable.lang.button.edit,
+               type: "edit",   
+               onlyAuth: true,
+               onclick: async () => {
+                Static.editQuestion = true
+                initReload()
+              }
+
+            },
+            {
+              //закрыть
+               text: Variable.lang.select.closeQuestion,
+               type: "closequestion",   
+               onlyAuth: true,
+            }
+            ,
+            {
+              //выбрать лучший ответ
+               text: Variable.lang.itemsMenu.SelectBestQuestion,
+               type: "bestquestion",   
+               color: "green",
+               onlyAuth: true,
+            }
+            ,
+            {
+              //удалить
+               text: Variable.lang.select.delete,
+               type: "delete",  
+               color: "red", 
+               onlyAuth: true,
+            }
+           ] 
+        }  />
+      }
+      else{
+        showItemsMenu = ""
+      }
     },
     async () => {
       return (
@@ -48,103 +161,54 @@ const start = function (data, ID) {
                 <Avatar author={item.author} nickName={item.author.nickname} />
 
                 <div class="comment_icons">
-                <ItemsMenu author={item.author} 
-              items = {
-                [
-                  //не авторизованый пользователь
-                  {
-                    //предложить ответ
-                     text: Variable.lang.h.modal_answer,
-                     type: "addanswer",   
-                     onlyAuth: true,
-                  },
-                  {
-                    //поделиться
-                    text: Variable.lang.select.share,
-                    type: "share",
-                    onclick: async () => {
-                      try {
-                        if (navigator.share) {
-                          await navigator.share({
-                            url: window.location.origin + "/blog/",
-                          });
-                        }
-                      } catch (err) {
-                        // Вывести ошибку
-                        console.error("Share", err)
-                      }
-                    }
-                    },
-                    {
-                      //пожаловаьбся на вопрос
-                      text: Variable.lang.select.complainAnswer,
-                      type: "complainItem",
-                      color: "red",
-                      onlyAuth: true,
-                      onclick: async () => {
-                    
-                      }
-                    },
-                    //пожаловаться на пользователя
-                    {
-                      text: Variable.lang.select.complainUser,
-                      type: "complainUser",
-                      color: "red",
-                      onlyAuth: true,
-                      onclick: async () => {
-                        // Переработать модалку
-                        Variable.SetModals(
-                          {
-                            name: "ModalComplainComment",
-                            data: {
-                              id: data.item._id,
-                              typeSet: data.typeApi,
-                              mainId: data.mainId,
-                              mainCom: !data.commentId ? true : false,
-                            },
-                          }, true
-                        );
-                      }
-                    },
-                  //авторизованый пользовательъ
-                   {
-                    //редактировать
-                     text: Variable.lang.button.edit,
-                     type: "edit",   
-                     onlyAuth: true,
-                  },
-                  {
-                    //закрыть
-                     text: Variable.lang.select.closeQuestion,
-                     type: "closequestion",   
-                     onlyAuth: true,
-                  }
-                  ,
-                  {
-                    //выбрать лучший ответ
-                     text: Variable.lang.itemsMenu.SelectBestQuestion,
-                     type: "bestquestion",   
-                     color: "green",
-                     onlyAuth: true,
-                  }
-                  ,
-                  {
-                    //удалить
-                     text: Variable.lang.select.delete,
-                     type: "delete",  
-                     color: "red", 
-                     onlyAuth: true,
-                  }
-                 ] 
-              }  />
+                {
+                //смотрим в модалке или нет вызов меню
+                showItemsMenu
+                
+                }
 
                 </div>
               
               </div>
       
-                
-              <p class="question_title">{item.title}</p>
-              <div class="question_text"> {Helpers.clearText(item.text)}</div>
+                {()=>{
+
+                  Static.edit_question_text = {
+                    value: Helpers.editText(item.text, { clear: true}),
+                    rows:7
+                  }
+
+                  Static.edit_question_title = {
+                    value: Helpers.editText(item.title, { clear: true}),
+                    rows:7
+                  }
+
+                  if(!Static.editQuestion){
+                    return (
+                      <div>
+                    <p class="question_title">{item.title}</p>
+                    <div class="question_text"> {Helpers.clearText(item.text)}</div></div>
+                    )
+                  }else{
+                  
+                    return (
+                      <div>
+                        <TextArea Static={ Static.edit_question_title}  />
+                        <br />
+                        <TextArea Static={ Static.edit_question_text} />
+                        <br />
+                        <ButtonSubmit text={"submit"} onclick={async () => {
+
+
+            await api({ type: "set", action: "setQuestions", data: { _id: itemID, value: { title: Static.edit_question_title, text:Static.edit_question_text} } })
+                     // initReload()
+
+                        }} />
+                        </div>
+                    )
+                  }
+                }}
+             
               <LentaMedia
                 items={item.media}
                 numIndex={0}

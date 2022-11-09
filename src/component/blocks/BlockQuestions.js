@@ -15,7 +15,7 @@ import { Input } from '@component/element/index.js';
 
 
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
-
+  let item = []
   const change = async function (arg) {
     let filters = {}
     let value = arg
@@ -290,7 +290,112 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                     style=""
                     href={`/question/show/${question._id}`}
                     class="c-question__body"
-                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question }) }}
+                    //ссылка твой вопрос
+                    onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author:question.author,
+                      items:[
+                        //не авторизованый пользователь
+                     
+                           {
+                            //предложить ответ
+                             text: Variable.lang.h.modal_answer,
+                             type: "addanswer",   
+                             onlyAuth: true,
+                             onclick: async () => {
+                              Variable.SetModals({
+                                name: "ModalAnswer", data: {
+                                  item,
+                                  onClose: async () => {
+                                    // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                                    // itemAnswer = answer.list_records
+                                    // initReload()
+                                  }
+                                }
+                              })
+                            }
+                          }
+                        ,
+                        {
+                          //поделиться
+                          text: Variable.lang.select.share,
+                          type: "share",
+                          onclick: async () => {
+                            try {
+                              if (navigator.share) {
+                                await navigator.share({
+                                  url: window.location.origin + "/question/show/" + question._id,
+                                });
+                              }
+                            } catch (err) {
+                              // Вывести ошибку
+                              console.error("Share", err)
+                            }
+                          }
+                          },
+                          {
+                            //пожаловаьбся на вопрос
+                            text: Variable.lang.select.complainAnswer,
+                            type: "complainItem",
+                            color: "red",
+                            onlyAuth: true,
+                            onclick: async () => {
+                          
+                            }
+                          },
+                          //пожаловаться на пользователя
+                          {
+                            text: Variable.lang.select.complainUser,
+                            type: "complainUser",
+                            color: "red",
+                            onlyAuth: true,
+                            onclick: async () => {
+                              // Переработать модалку
+                              Variable.SetModals(
+                                {
+                                  name: "ModalComplainComment",
+                                  data: {
+                                    id: data.item._id,
+                                    typeSet: data.typeApi,
+                                    mainId: data.mainId,
+                                    mainCom: !data.commentId ? true : false,
+                                  },
+                                }, true
+                              );
+                            }
+                          },
+                        //авторизованый пользовательъ
+                         {
+                          //редактировать
+                           text: Variable.lang.button.edit,
+                           type: "edit",   
+                           onlyAuth: true,
+                           onclick: async () => {
+                            Static.editQuestion = true
+                          }
+
+                        },
+                        {
+                          //закрыть
+                           text: Variable.lang.select.closeQuestion,
+                           type: "closequestion",   
+                           onlyAuth: true,
+                        }
+                        ,
+                        {
+                          //выбрать лучший ответ
+                           text: Variable.lang.itemsMenu.SelectBestQuestion,
+                           type: "bestquestion",   
+                           color: "green",
+                           onlyAuth: true,
+                        }
+                        ,
+                        {
+                          //удалить
+                           text: Variable.lang.select.delete,
+                           type: "delete",  
+                           color: "red", 
+                           onlyAuth: true,
+                        }
+                       ]  }) }}
                   >
                     <div class="c-question__preview">
                       <span class="">
@@ -321,12 +426,26 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                         Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author:question.author,
                         items:[
                           //не авторизованый пользователь
-                          {
-                            //предложить ответ
-                             text: Variable.lang.h.modal_answer,
-                             type: "addanswer",   
-                             onlyAuth: true,
-                          },
+                       
+                             {
+                              //предложить ответ
+                               text: Variable.lang.h.modal_answer,
+                               type: "addanswer",   
+                               onlyAuth: true,
+                               onclick: async () => {
+                                Variable.SetModals({
+                                  name: "ModalAnswer", data: {
+                                    item,
+                                    onClose: async () => {
+                                      // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                                      // itemAnswer = answer.list_records
+                                      // initReload()
+                                    }
+                                  }
+                                })
+                              }
+                            }
+                          ,
                           {
                             //поделиться
                             text: Variable.lang.select.share,
@@ -335,7 +454,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                               try {
                                 if (navigator.share) {
                                   await navigator.share({
-                                    url: window.location.origin + "/blog/",
+                                    url: window.location.origin + "/question/show/" + question._id,
                                   });
                                 }
                               } catch (err) {
