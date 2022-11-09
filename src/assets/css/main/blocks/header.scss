@@ -550,9 +550,10 @@
             &__photo {
                 object-fit: fill;
                 object-fit: cover;
-                width: auto;
-                min-width: 78%;
-                max-width: 89%;
+                // width: auto;
+                // min-width: 78%;
+                // max-width: 89%;
+                width: 78%;
             }
 
             &__level {

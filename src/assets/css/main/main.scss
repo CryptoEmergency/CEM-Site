@@ -229,6 +229,17 @@ textarea {
             padding-right: 20px;
         }
     }
+
+    
+	&-cube {
+		& + div {
+			.comment {
+				&_text {
+					margin-top: 20px;
+				}
+			}
+		}
+	}
 }
 
 .swiper-wrapper {

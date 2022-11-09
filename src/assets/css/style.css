@@ -20115,6 +20115,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
   .question_title {
     padding-left: 20px;
     padding-right: 20px;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 27px;
+
   }
 
   .question_author_block {
