@@ -25,6 +25,16 @@ const BlockNews = async function ({ nameRecords, type, Static }) {
   )
   return (
     <div class="blog_page">
+      <div class="blog_filter">
+        <h2>{Variable.lang.h.blog}</h2>
+        {/* <div class="profit_calculator_inputs_container">
+          <input type="text" id="datepicker"></p>
+        </div>
+        <input data-keyup="newsSearchEnter" data-type="blog" class="news_search_input" type="text" />
+        <div data-action="searchNewsInputSummon" class="news_search_button">
+          <img src={svg.search_button} />
+        </div> */}
+      </div>
       {
         () => {
           if (type == "media") {
