@@ -20,6 +20,10 @@ export { NotFound } from "./NotFound.js"
 // Свайпер
 export { Swiper } from "./Swiper.js";
 
+export { LazyImage } from "./LazyImage.js";
+
+
+
 
 //===formsElement===
 // Формы ввода: Инпуты, чекбоксы

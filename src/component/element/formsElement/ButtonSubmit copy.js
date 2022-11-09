@@ -6,8 +6,8 @@ import {
 // check
 const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
     return (
-        <button
-            class={[className ? className : 'c-button c-button--primary', Static && !Static.isValid ? 'c-button--inactive' : null]}
+        <div
+            class={[className ? className : 'search-button', Static && !Static.isValid ? 'c-button--inactive' : null]}
             onclick={function (e) {
                 e.preventDefault();
                 if (onlyAuth && !Variable.auth) {
@@ -26,7 +26,7 @@ const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
                 }
             }}>
             {text}
-        </button>
+        </div>
     )
 }
 export { ButtonSubmit }
