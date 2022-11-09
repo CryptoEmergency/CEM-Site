@@ -179,7 +179,7 @@
 				margin-bottom: -63px;
 				min-height: calc(100vh - 41px);
 				padding-bottom: 63px;
-			
+
 				@media(max-width: 1024px) {
 					margin-bottom: 0;
 					padding-bottom: 0;
@@ -191,7 +191,7 @@
 			margin-bottom: -63px;
 			min-height: calc(100vh - 41px);
 			padding-bottom: 63px;
-		
+
 			@media(max-width: 1024px) {
 				margin-bottom: 0;
 				padding-bottom: 0;
@@ -206,10 +206,10 @@
 			margin-bottom: -63px;
 			padding-bottom: 80px;
 			min-height: calc(100vh - 41px);
-		
+
 			@media(max-width: 1024px) {
 				margin-bottom: 0;
-    		}
+			}
 		}
 
 		.c-userpreview {
@@ -4262,11 +4262,32 @@ s
 
 	.c-comments {
 
+		&__form {
+			@media(max-width: 1023px) {
+				width: calc(100% - 20px);
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+		}
+
 		&__field {
 
 			textarea {
 				width: 100%;
 				font-size: 16px;
+
+				@media(max-width: 1023px) {
+					min-height: auto;
+					padding-top: 5px;
+					padding-bottom: 5px;
+				}
+			}
+		}
+
+
+		&__send {
+			@media(max-width: 1023px) {
+				width: 35px;
 			}
 		}
 	}
@@ -4633,6 +4654,13 @@ s
 					width: 10px;
 					height: 10px;
 				}
+			}
+
+			&__team {
+				width: 17px;
+				height: 17px;
+				bottom: 3px;
+				right: 3px;
 			}
 
 			&--micro {
