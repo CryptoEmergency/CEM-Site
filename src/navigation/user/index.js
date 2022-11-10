@@ -12,6 +12,7 @@ import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { Avatar } from '@component/element/Avatar.js';
 import { percent } from '@component/helpers/All.js';
+import { api } from '@src/apiFunctions.js'
 
 import {
     BlockUserProfilePage,
@@ -143,21 +144,47 @@ const start = function (userInfo, ID = "mainBlock") {
                                 src={userInfo.background ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
                             />
 
-                            {/* <div class="c-userpreview__buttons">
-                                    <div class="c-userpreview__container">
-                                        <a class="c-userpreview__btn">
-                                            <span>
-                                                {Variable.lang.button.write}
-                                            </span>
-                                        </a>
-                                        <a class="c-userpreview__btn">
-                                            <span class="subscribe_status">
-                                                {Variable.lang.button.subscribe}
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div> 
-                            */}
+                            {()=>{
+                                if(Variable.auth && userInfo._id != Variable.myInfo._id){
+                                    return(
+                                        <div class="c-userpreview__buttons">
+                                            <div class="c-userpreview__container">
+                                                <a 
+                                                    class="c-userpreview__btn"
+                                                    onclick={async () => {
+                                                        console.error('startChat Button')
+                                                    }}
+                                                >
+                                                    <span>
+                                                        {Variable.lang.button.write}
+                                                    </span>
+                                                </a>
+                                                <a 
+                                                    class="c-userpreview__btn"
+                                                    onclick={async () => {
+                                                        let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: userInfo._id } } })
+                                                        userInfo.subscribe = !userInfo.subscribe
+                                                    }}
+                                                >
+                                                    <span class="subscribe_status">
+                                                        {() => {
+                                                            if (userInfo.subscribe) {
+                                                                return (
+                                                                    Variable.lang.button.unsubscribe
+                                                                )
+                                                            } else {
+                                                                return (
+                                                                    Variable.lang.button.subscribe
+                                                                )
+                                                            }
+                                                        }}
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div> 
+                                    )
+                                }
+                            }}
 
                             <div class="c-userpreview__settings">
                                 {/* 

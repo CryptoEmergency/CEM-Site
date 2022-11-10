@@ -25,7 +25,6 @@ const BottomMenu = function () {
     const toggleVisibleNotify = function () {
         Variable.notifyWindowShow = !Variable.notifyWindowShow;
     }
-    console.log('=b084b4=', Variable.dataUrl)
     return (
 
         <If
