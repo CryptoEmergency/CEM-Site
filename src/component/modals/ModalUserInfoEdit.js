@@ -9,6 +9,7 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import { Input, ButtonSubmit } from '@component/element/index.js';
+import { api } from '@src/apiFunctions.js'
 
 const showModalUserInfoEdit = function (e) {
     e.stopPropagation()
@@ -20,14 +21,14 @@ let Static = {}
 const ModalUserInfoEdit = function (userInfo, reload) {
     // console.log("ModalComingSoon");
     const userInfoEditModalShow = getValue("modals", "userInfoEditModalShow")
-    console.log(userInfo)
+    console.log('dwa', userInfo)
     initOne(() => {
         Static = {
           isValid: false
         }  
 
         Static.name = {
-            value:"",
+            value:  userInfo.fullname,
             type:"text",
             valid: false,
             code: "",
@@ -36,7 +37,7 @@ const ModalUserInfoEdit = function (userInfo, reload) {
             placeholder:Variable.lang.label.name,
         }
         Static.speciality = {
-            value:"",
+            value: userInfo.information.speciality,
             type:"text",
             valid: false,
             code: "",
@@ -45,7 +46,7 @@ const ModalUserInfoEdit = function (userInfo, reload) {
             placeholder:Variable.lang.label.speciality,
         }
         Static.birthday = {
-            value:"",
+            value: userInfo.information.birthday,
             type:"date",
             valid: false,
             code: "",
@@ -54,7 +55,7 @@ const ModalUserInfoEdit = function (userInfo, reload) {
             placeholder:Variable.lang.label.birthDate,
         }
         Static.city = {
-            value:"",
+            value: userInfo.information.city,
             type:"text",
             valid: false,
             code: "",
@@ -129,7 +130,15 @@ const ModalUserInfoEdit = function (userInfo, reload) {
                     <ButtonSubmit
                         text={Variable.lang.button.edit}
                         onclick={()=>{
-                            console.error('success')
+                            console.log(Static)
+                            let value = {}
+                            if(Static.name != userInfo.fullname && Static.name.length != 0){
+                                value.fullname = Static.name
+                            }
+                            if(Static.country.code != userInfo.country.code && Static.country.code.length != 0){
+                                value.country = Static.country.code
+                            }
+
                         }}
                     />
                 </footer>
