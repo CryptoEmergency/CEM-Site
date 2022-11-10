@@ -9,19 +9,69 @@ import {
 // check
 import svg from '@assets/svg/index.js';
 import { api } from '@src/apiFunctions.js'
+import { fn } from '@src/functions/index.js'
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment, Input } from "@component/element/index.js";
 
 const start = function (data, ID) {
+
+
   let item, itemAnswer, itemID, itemMenuCheck,showItemsMenu;
-  let Static = []
+  let Static = {}
+  
+ 
+//нижнее меню
+let bottomMenuitems = fn.CreateMenuItems({
+    text:[Variable.lang.select.complainAnswer,
+      Variable.lang.select.complainUser,
+      Variable.lang.select.blackList,
+      Variable.lang.select.delete,
+      Variable.lang.select.delete
+     ],
+     type:["complainItem","complainUser","blackList","delete","deleteRole"],
+     auth:[true,true,true,false,false],
+     color:["red","red","red","red","red"],
+     onclick:["",
+      async () => {
+        // Переработать модалку
+        Variable.SetModals(
+          {
+            name: "ModalComplainComment",
+            data: {
+              id: data.item._id,
+              typeSet: data.typeApi,
+              mainId: data.mainId,
+              mainCom: !data.commentId ? true : false,
+            },
+          }, true
+        );
+      }
+      ,
+      async () => {
+        // Переработать модалку
+        Variable.SetModals(
+          {
+            name: "ModalBlackList",
+            data: { id: item.author._id, type: "перебрать" },
+          }, true
+        );
+      },
+      "",
+      ""
+     ]
+  })
+
+
   init(
     async () => {
+
+
       if (data && data.item) {
         item = data.item
         if (data.item._id) {    
           //если в модалке
           itemID = data.item._id
           itemMenuCheck = true
+ 
         }
       } else {
         if (data && data.itemID) {
@@ -42,116 +92,87 @@ const start = function (data, ID) {
       if(!itemMenuCheck)
       {
         showItemsMenu = <ItemsMenu author={item.author} 
-        items = {
-          [
-            //не авторизованый пользователь
-            {
-              //предложить ответ
-               text: Variable.lang.h.modal_answer,
-               type: "addanswer",   
-               onlyAuth: true,
-               onclick: async () => {
-                Variable.SetModals({
-                  name: "ModalAnswer", data: {
-                    item,
-                    onClose: async () => {
-                      // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-                      // itemAnswer = answer.list_records
-                      // initReload()
-                    }
-                  }
-                })
-              }
-            },
-            {
-              //поделиться
-              text: Variable.lang.select.share,
-              type: "share",
-              onclick: async () => {
-                try {
-                  if (navigator.share) {
-                    await navigator.share({
-                      url: window.location.origin + "/question/show/" + itemID,
-                    });
-                  }
-                } catch (err) {
-                  // Вывести ошибку
-                  console.error("Share", err)
-                }
-              }
-              },
-              {
-                //пожаловаьбся на вопрос
-                text: Variable.lang.select.complainAnswer,
-                type: "complainItem",
-                color: "red",
-                onlyAuth: true,
-                onclick: async () => {
-              
-                }
-              },
-              //пожаловаться на пользователя
-              {
-                text: Variable.lang.select.complainUser,
-                type: "complainUser",
-                color: "red",
-                onlyAuth: true,
-                onclick: async () => {
-                  // Переработать модалку
-                  Variable.SetModals(
-                    {
-                      name: "ModalComplainComment",
-                      data: {
-                        id: data.item._id,
-                        typeSet: data.typeApi,
-                        mainId: data.mainId,
-                        mainCom: !data.commentId ? true : false,
-                      },
-                    }, true
-                  );
-                }
-              },
-            //авторизованый пользовательъ
-             {
-              //редактировать
-               text: Variable.lang.button.edit,
-               type: "edit",   
-               onlyAuth: true,
-               onclick: async () => {
-                Static.editQuestion = true
-                initReload()
-              }
-
-            },
-            {
-              //закрыть
-               text: Variable.lang.select.closeQuestion,
-               type: "closequestion",   
-               onlyAuth: true,
-            }
-            ,
-            {
-              //выбрать лучший ответ
-               text: Variable.lang.itemsMenu.SelectBestQuestion,
-               type: "bestquestion",   
-               color: "green",
-               onlyAuth: true,
-            }
-            ,
-            {
-              //удалить
-               text: Variable.lang.select.delete,
-               type: "delete",  
-               color: "red", 
-               onlyAuth: true,
-            }
-           ] 
-        }  />
+        items = {upperMenuitems}  />
       }
       else{
+ 
         showItemsMenu = ""
+        Variable["modalEditQuestion"] = data.editVisible
+   
       }
+
+ //верхнее меню   
+      let upperMenuitems = fn.CreateMenuItems({
+        text:[Variable.lang.h.modal_answer,
+          Variable.lang.select.share,
+          Variable.lang.select.complainAnswer,
+          Variable.lang.select.complainUser,
+          Variable.lang.button.edit,
+          Variable.lang.select.closeQuestion,
+          Variable.lang.itemsMenu.SelectBestQuestion,
+          Variable.lang.select.delete],
+        type:["addanswer","share","complainItem","complainUser","edit","closequestion","bestquestion","delete"],
+        auth:[true,false,true,true,true,true,true,true],
+        color:["","","red","","","red","green","red"],
+        onclick:[async () => 
+          {
+          //ответить
+          Variable.SetModals({
+            name: "ModalAnswer", data: {
+              item,
+              onClose: async () => {
+                // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                // itemAnswer = answer.list_records
+                // initReload()
+              }
+            }
+          })
+        },
+        //поделиться
+        async () => {
+          try {
+            if (navigator.share) {
+              await navigator.share({
+                url: window.location.origin + "/question/show/" + itemID,
+              });
+            }
+          } catch (err) {
+            console.error("Share", err)
+          }
+        },
+        //пожаловаьбся на вопрос
+        "",
+        //пожаловаться на пользователя
+        async () => {
+          Variable.SetModals(
+            {
+              name: "ModalComplainComment",
+              data: {
+                id: data.item._id,
+                typeSet: data.typeApi,
+                mainId: data.mainId,
+                mainCom: !data.commentId ? true : false,
+              },
+            }, true
+          );
+        },
+        //редактировать
+        async () => {
+         
+          Static.editQuestion = true
+          initReload()
+        },
+        //закрыть вопрос
+        "",
+        //выбрать лучший ответ
+        "",
+        //удалить
+        ""]
+      })
     },
+
+
+    
     async () => {
       return (
         <div class="answer_container c-main__body">
@@ -183,14 +204,17 @@ const start = function (data, ID) {
                     rows:7
                   }
 
-                  if(!Static.editQuestion){
+                  if(!Static.editQuestion || !Variable.modalEditQuestion){
+              
                     return (
                       <div>
                     <p class="question_title">{item.title}</p>
                     <div class="question_text"> {Helpers.clearText(item.text)}</div></div>
                     )
                   }else{
-                  
+                 
+               
+                   
                     return (
                       <div>
                         <TextArea Static={ Static.edit_question_title}  />
@@ -200,13 +224,21 @@ const start = function (data, ID) {
                         <ButtonSubmit text={"submit"} onclick={async () => {
 
 
-            await api({ type: "set", action: "setQuestions", data: { _id: itemID, value: { title: Static.edit_question_title, text:Static.edit_question_text} } })
-                     // initReload()
-
+           let response = await api({ type: "set", action: "setQuestion", data: { _id: itemID, value: { title: Static.edit_question_title.value, text:Static.edit_question_text.value} } })
+            if (response.status === 'ok') {
+           item.title = Static.edit_question_title.value
+           item.text = Static.edit_question_text.value
+           Static.editQuestion =false
+              initReload()
+          } else {
+              Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+           
+          }
+          return
                         }} />
                         </div>
-                    )
-                  }
+                    )}
+                  
                 }}
              
               <LentaMedia
@@ -333,108 +365,7 @@ const start = function (data, ID) {
                                       Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
                                     }}
                                   />
-                                  <ItemsMenu
-                                    author={item.author}
-                                    items={
-                                      [
-                                        {
-                                          text: Variable.lang.select.complainAnswer,
-                                          type: "complainItem",
-                                          onlyAuth: true,
-                                          color: "red",
-                                          onclick: async () => {
-                                            // Переработать модалку
-                                            // Variable.SetModals(
-                                            //   {
-                                            //     name: "ModalComplainComment",
-                                            //     data: {
-                                            //       id: data.item._id,
-                                            //       typeSet: data.typeApi,
-                                            //       mainId: data.mainId,
-                                            //       mainCom: !data.commentId ? true : false,
-                                            //     },
-                                            //   }, true
-                                            // );
-                                          }
-                                        },
-                                        {
-                                          text: Variable.lang.select.complainUser,
-                                          type: "complainUser",
-                                          onlyAuth: true,
-                                          color: "red",
-                                          onclick: async () => {
-                                            // Переработать модалку
-                                            Variable.SetModals(
-                                              {
-                                                name: "ModalComplainComment",
-                                                data: {
-                                                  id: data.item._id,
-                                                  typeSet: data.typeApi,
-                                                  mainId: data.mainId,
-                                                  mainCom: !data.commentId ? true : false,
-                                                },
-                                              }, true
-                                            );
-                                          }
-                                        },
-                                        {
-                                          text: Variable.lang.select.blackList,
-                                          type: "blackList",
-                                          onlyAuth: true,
-                                          color: "red",
-                                          onclick: async () => {
-                                            // Переработать модалку
-                                            Variable.SetModals(
-                                              {
-                                                name: "ModalBlackList",
-                                                data: { id: item.author._id, type: "перебрать" },
-                                              }, true
-                                            );
-                                          }
-                                        },
-                                        {
-                                          text: Variable.lang.select.delete,
-                                          type: "delete",
-                                          color: "red",
-                                          onclick: async () => {
-                                            // Переработать модалку
-                                            // Variable.SetModals(
-                                            //   {
-                                            //     name: "ModalDelComment",
-                                            //     data: {
-                                            //       id: data.item._id,
-                                            //       typeSet: data.typeApi,
-                                            //       mainId: data.mainId,
-                                            //       mainCom: !data.commentId ? true : false,
-                                            //       callBack: data.callBack,
-                                            //     },
-                                            //   }, true
-                                            // );
-                                          }
-                                        },
-                                        {
-                                          text: Variable.lang.select.delete,
-                                          type: "deleteRole",
-                                          color: "red",
-                                          onclick: async () => {
-                                            // Переработать модалку
-                                            // Variable.SetModals(
-                                            //   {
-                                            //     name: "ModalDelComment",
-                                            //     data: {
-                                            //       id: data.item._id,
-                                            //       typeSet: data.typeApi,
-                                            //       mainId: data.mainId,
-                                            //       mainCom: !data.commentId ? true : false,
-                                            //       callBack: data.callBack,
-                                            //     },
-                                            //   }, true
-                                            // );
-                                          }
-                                        },
-                                      ]
-                                    }
-                                  />
+                                  <ItemsMenu author={item.author} items={bottomMenuitems}/>
                                 </div>
                                 {() => {
                                   if (item.comments && item.comments.length) {

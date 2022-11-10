@@ -25,7 +25,6 @@ const BottomMenu = function () {
     const toggleVisibleNotify = function () {
         Variable.notifyWindowShow = !Variable.notifyWindowShow;
     }
-
     return (
 
         <If
@@ -45,10 +44,18 @@ const BottomMenu = function () {
                             onclick={Helpers.siteLink}
                         ></a>
                         <a
-                            class={`c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--disabled c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : ""}`}
-                        // href="#"
-                        // onclick={Helpers.siteLink}
-                        ></a>
+                            class={`c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--disabled c-userpanel__icon--mobile_visible ${(Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : ""}`}
+                            //c-userpanel__icon--disabled
+                            href="/user/chats/"
+                            onclick={Helpers.siteLink}
+                        >
+                            {() => {
+                                if (Variable.myInfo && Variable.myInfo.unreadMessage) {
+                                    return (<div class="messages_notifications_counter">{Variable.myInfo.unreadMessage}</div>)
+                                }
+                            }}
+
+                        </a>
 
                         <a
                             href="/user/posts/"

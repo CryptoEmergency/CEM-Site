@@ -4,67 +4,67 @@ import {
     setAction,
     setValue,
     initOne,
+    initReload,
     Variable,
     getValue
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { Input, ButtonSubmit } from '@component/element/index.js';
+import { Input, ButtonSubmit, TextArea } from '@component/element/index.js';
+import { api } from '@src/apiFunctions.js'
 
 const showModalUserInfoEdit = function (e) {
     e.stopPropagation()
-    setValue("modals", "userInfoEditModalShow", !getValue("modals", "userInfoEditModalShow"))
+    Variable.DelModals("ModalUserInfoEdit");
 }
 
 let Static = {}
 
 const ModalUserInfoEdit = function (userInfo, reload) {
-    // console.log("ModalComingSoon");
-    const userInfoEditModalShow = getValue("modals", "userInfoEditModalShow")
-    console.log(userInfo)
+    console.log('dwa', userInfo)
     initOne(() => {
         Static = {
           isValid: false
         }  
 
-        Static.name = {
-            value:"",
+        Static.about = {
+            value:  userInfo.information.about,
             type:"text",
             valid: false,
-            code: "",
-            name: "",
+            autocomplete:"off",
+            placeholder:Variable.lang.p.aboutMe,
+        }
+
+        Static.name = {
+            value:  userInfo.fullname,
+            type:"text",
+            valid: false,
             autocomplete:"off",
             placeholder:Variable.lang.label.name,
         }
         Static.speciality = {
-            value:"",
+            value: userInfo.information.speciality,
             type:"text",
             valid: false,
-            code: "",
-            name: "",
             autocomplete:"off",
             placeholder:Variable.lang.label.speciality,
         }
         Static.birthday = {
-            value:"",
+            value: userInfo.information.birthday,
             type:"date",
             valid: false,
-            code: "",
-            name: "",
             autocomplete:"off",
             placeholder:Variable.lang.label.birthDate,
         }
         Static.city = {
-            value:"",
+            value: userInfo.information.city,
             type:"text",
             valid: false,
-            code: "",
-            name: "",
             autocomplete:"off",
             placeholder:Variable.lang.label.city,
         }
 
         Static.country = {
-            value:"",
+            value: userInfo.country.eng_name,
             type:"text",
             valid: false,
             code: "",
@@ -99,7 +99,11 @@ const ModalUserInfoEdit = function (userInfo, reload) {
                 <div class="c-modal__body">
                     <div style="padding: 0" class="after_register_form">
                         <form> 
-                            <div>
+                            <TextArea
+                                Static={Static.about}
+                                className="text1 create_post_chapter"
+                            />
+                            <div style="margin-top: 20px">
                                 <Input classDiv="" Static={Static.name} />
                             </div>
                             <div>
@@ -128,8 +132,42 @@ const ModalUserInfoEdit = function (userInfo, reload) {
                 <footer class="c-modal__footer">
                     <ButtonSubmit
                         text={Variable.lang.button.edit}
-                        onclick={()=>{
-                            console.error('success')
+                        onclick={async()=>{
+                            console.log(Static)
+                            let value = {
+                                information: {}
+                            }
+                            if(Static.name.value != userInfo.fullname){
+                                value.fullname = Static.name.value
+                                userInfo.fullname = Static.name.value
+                            }
+                            if(Static.about.value != userInfo.information.about){
+                                value.information.about = Static.about.value
+                                userInfo.information.about = Static.about.value
+                            }
+                            if(Static.city.value != userInfo.information.city){
+                                value.information.city = Static.city.value
+                                userInfo.information.city = Static.city.value
+                            }
+                            if(Static.birthday.value != userInfo.information.birthday){
+                                value.information.birthday = Static.birthday.value
+                                userInfo.information.birthday = Static.birthday.value
+                            }
+                            if(Static.speciality.value != userInfo.information.speciality){
+                                value.information.speciality = Static.speciality.value
+                                userInfo.information.speciality = Static.speciality.value
+                            }
+                            if(Static.country.code != userInfo.country.code && Static.country.code.length != 0){
+                                value.country = Static.country.code
+                                userInfo.country.eng_name = Static.country.value
+                            }
+                            let data = {
+                                value: value
+                            }
+                            let response = await api({ type: "set", action: "setUsers", data })
+                            Variable.DelModals("ModalUserInfoEdit");
+                            console.log('data', data)
+                            console.log(response)
                         }}
                     />
                 </footer>

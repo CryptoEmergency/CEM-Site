@@ -9,6 +9,7 @@ import { BlockShowNews } from '@component/blocks/index.js';
 import { api } from '@src/apiFunctions.js'
 
 const start = function (data, ID) {
+ 
   let item;
   init(
     async () => {

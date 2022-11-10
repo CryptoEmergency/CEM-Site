@@ -7,7 +7,7 @@ import {
 import svg from "@assets/svg/index.js";
 
 const ItemsMenu = function (data) {
-  console.log(data)
+
   let items, author
   if (data) {
     if (data.items) {
@@ -21,7 +21,6 @@ const ItemsMenu = function (data) {
     <div
       class={["answer_additionally_toggle", "comment_icon_type-1", !items || !items.length ? "comment_inactive" : null]}
       onclick={(e) => {
-        console.log(author)
         e.stopPropagation();
         e.preventDefault();
         if (items && items.length) {
