@@ -36,7 +36,7 @@ const textConstuctor = function (Static, classDiv, className, before, after, cal
     }
 }
 const textElem = function (Static, className, callback) {
-    console.log(Static,"fratgtahf")
+
     let rows = null
     let adaptive = null
     let placeholder = null
