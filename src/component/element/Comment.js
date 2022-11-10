@@ -138,8 +138,8 @@ const Comment = function ({ item, include, mainId, action, quoteId, mainItem }) 
                         let response = await api({ type: "set", action: action, data: data })
                         if (response.status === "ok") {
                             Static.secondComment.el.value = ""
-                            if (Static.adaptive) {
-                                Static.secondComment.el.style.height = (Static.secondComment.el.dataset.maxHeight / Static.adaptive) + 'px';
+                            if (Static.secondComment.adaptive) {
+                                Static.secondComment.el.style.height = (Static.secondComment.el.dataset.maxHeight / Static.secondComment.adaptive) + 'px';
                             }
                             if (response.result && response.result.list_records && response.result.list_records[0]) {
                                 let newRes = response.result.list_records[0]

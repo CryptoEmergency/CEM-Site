@@ -10,8 +10,8 @@ import {
 
 import { If, Map } from '@component/helpers/All.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer } from '@component/element/index.js';
-
+import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer, TextArea, ButtonSubmit } from '@component/element/index.js';
+import { api } from '@src/apiFunctions.js'
 
 const swiperOptions = {
     loop: false,
@@ -43,6 +43,12 @@ const start = function () {
 
     init(
         async () => {
+
+            Static.message = {
+                rows: 1,
+                adaptive: 3,
+            }
+
             chatsList = await sendApi.send({
                 action: "getUserChats", short: true, sort: {
                     "message": {
@@ -59,7 +65,7 @@ const start = function () {
                     "users": 1
                 }
             });
-            console.log('=08e20a=', chatsList)
+            // console.log('=08e20a=', chatsList)
 
 
         },
@@ -89,7 +95,7 @@ const start = function () {
                         <div class="messages_list" data-action="messagesLinkPrevent" data-nofollow="true">
 
                             {() => {
-                                if (chatsList && chatsList.list_records.length) {
+                                if (chatsList && chatsList.list_records && chatsList.list_records.length) {
                                     const arrReturn = chatsList.list_records.map((item, index) => {
                                         let user
                                         let lastMessage = item.message[0]
@@ -132,7 +138,7 @@ const start = function () {
                                                             "users": 1
                                                         }
                                                     });
-                                                    console.log('=c35516=', messageList)
+                                                    console.log('=b604cf=', messageList)
                                                     initReload()
                                                 }}
                                             >
@@ -186,7 +192,7 @@ const start = function () {
                                                                     {() => {
                                                                         if (item.media && item.media.length) {
                                                                             const arrMedia = item.media.map((item, index) => {
-                                                                                console.log('=d379f8=', item)
+
                                                                                 if (item.type == "video" && !Array.isArray(item)) {
                                                                                     return (
                                                                                         <div class="swiper-slide">
@@ -257,6 +263,58 @@ const start = function () {
                                             }}
 
                                         </div>
+                                        <div class="c-comments__field create_post_container1">
+                                            <TextArea
+                                                Static={Static.message}
+                                                className="text1 create_post_chapter"
+                                            />
+                                        </div>
+                                        <ButtonSubmit
+                                            text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                                            className="c-comments__send button-container-preview comments_send"
+                                            onclick={async (tmp, el) => {
+                                                if (!Static.message.el.value.trim().length) {
+                                                    return
+                                                }
+                                                let text = Static.message.el.value.trim()
+
+                                                let data = { value: { users: activeUser._id, message: { text } } }
+
+
+
+
+                                                let response = await api({ type: "set", action: "setUserChats", data: data })
+                                                console.log('=6befba=', response)
+                                                if (response.status === "ok") {
+                                                    Static.message.el.value = ""
+                                                    if (Static.message.adaptive) {
+                                                        Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
+                                                    }
+                                                    if (response.result && response.result.list_records && response.result.list_records[0]) {
+                                                        let newRes = response.result.list_records[0]
+
+                                                        if (messageList && messageList.list_records[0] && messageList.list_records[0].message) {
+                                                            messageList.list_records[0].message.unshift(newRes)
+                                                        } else {
+                                                            messageList.list_records[0].message = [newRes]
+                                                        }
+                                                        console.log('=46ae17=', chatsList)
+
+                                                        if (chatsList && chatsList.list_records) {
+                                                            chatsList.list_records.map((item) => {
+                                                                let tmp = item.users.filter(item => item._id == activeUser._id)
+                                                                if (tmp.length) {
+                                                                    item.message[0] = newRes
+                                                                }
+                                                            })
+                                                        }
+                                                        initReload();
+                                                    }
+                                                } else {
+                                                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                                                }
+                                            }}
+                                        />
                                     </div>
                                 )
                             } else {
