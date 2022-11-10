@@ -284,16 +284,31 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                                                 </div>
                                                 <div class="new_professional_buttons">
                                                     <div class="button-container-preview">
-                                                        <a style="opacity: 0.2" class="btn-news-preview " href="#" data-action="link" data-needauth="true">
+                                                        <a style="opacity: 0.2" class="btn-news-preview " href="#"
+                                                            onclick={async () => {
+                                                                console.log('=c826eb=', "ffff", user)
+                                                                let data = {
+                                                                    select: {
+                                                                        message: { $slice: [0, 120] },
+                                                                        users: 1
+                                                                    }
+                                                                    ,
+                                                                    filter: {
+                                                                        $and: [{ users: user._id }]
+                                                                    }
+                                                                }
+                                                                let tmp = await api({ type: "get", action: "getUserChats", short: true, data })
+                                                                console.log('=3484c3=', tmp)
+
+
+
+                                                            }} >
                                                             <span>
                                                                 {Variable.lang.button.write}
                                                             </span>
                                                         </a>
                                                         <a
                                                             class="btn-news-preview"
-                                                            data-id="{{_id}}"
-                                                            data-action="userSubscribe"
-                                                            data-needauth="true"
                                                             onclick={async () => {
                                                                 let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: user._id } } })
                                                                 user.subscribe = !user.subscribe
