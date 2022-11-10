@@ -5,6 +5,7 @@ import {
   parsingUrl,
   initReload,
   Helpers,
+  sendApi
 } from "@betarost/cemjs";
 
 const validator = Helpers.validator
@@ -74,8 +75,13 @@ const clickHide = function (e) {
   }
 };
 
-const timerTik = function () {
-  //console.log("timerTik", "tt")
+const timerTik = async function () {
+  // console.log("timerTik", "tt")
+  let response = await sendApi.create("tik", {})
+  if (response && response.result && Object.keys(response.result).length) {
+    console.log('=df2a55=', response)
+  }
+
 };
 
 
