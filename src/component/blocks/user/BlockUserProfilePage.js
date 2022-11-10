@@ -21,21 +21,6 @@ BlockUserProfilePage.aboutUser = function (data) {
     return (
         <div class="bl_one c-container" id="UserInfoAbout">
             <h2>{Variable.lang.h.personalInfo}</h2>
-            <ItemsMenu
-                author={data.userInfo}
-                items={
-                    [
-                        {
-                            text: Variable.lang.button.edit,
-                            type: "edit",
-                            onclick: async () => {
-                                console.log('=7e4dce=', "gggg")
-
-                            }
-                        }
-                    ]
-                }
-            />
             <div class="about_user">
                 <div class="about_user_section-1 about_user_section-row_type-2">
                     <div class="about_user_section-row_type-3">
@@ -185,17 +170,29 @@ BlockUserProfilePage.aboutUser = function (data) {
                                     if(Variable.myInfo._id == data.userInfo._id){
                                         return(
                                             <div class="about_user_section_points_container">
-                                                <img class="about_user_section_points" src={svg['points']} />
-                                                <div class="about_user_section_points_menu">
-                                                    <div id="addNewInterests" class="about_user_section_points_menu_item">{Variable.lang.button.add}</div>
-                                                    {()=>{
-                                                        if(data.userInfo.interest.length != 0){
-                                                            return(
-                                                                <div class="about_user_section_points_menu_item about_user_edit_handler">{Variable.lang.button.edit}</div>
-                                                            )
-                                                        }
-                                                    }}
-                                                </div>
+                                                <ItemsMenu
+                                                    author={data.userInfo}
+                                                    items={
+                                                        [
+                                                            {
+                                                                text: Variable.lang.button.add,
+                                                                type: "edit",
+                                                                onclick: async () => {
+                                                                    console.log('=7e4dce=', "gggg")
+
+                                                                }
+                                                            },
+                                                            {
+                                                                text: Variable.lang.button.edit,
+                                                                type: "edit",
+                                                                onclick: async () => {
+                                                                    console.log('=7e4dce=', "gggg")
+
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                />
                                             </div>
                                         )
                                     }
@@ -223,15 +220,30 @@ BlockUserProfilePage.aboutUser = function (data) {
                                     if(Variable.myInfo._id == data.userInfo._id){
                                         return(
                                             <div class="about_user_section_points_container">
-                                                <img class="about_user_section_points" src={svg['points']} />
-                                                <div class="about_user_section_points_menu">
-                                                    <div id="addNewWork" class="about_user_section_points_menu_item about_user_add_handler">{Variable.lang.button.add}</div>
-                                                    {()=>{
-                                                        if(data.userInfo.work.length != 0){
-                                                            <div class="about_user_section_points_menu_item about_user_edit_handler">{Variable.lang.button.edit}</div>
-                                                        }
-                                                    }}
-                                                </div>
+                                                <ItemsMenu
+                                                    author={data.userInfo}
+                                                    items={
+                                                        [
+                                                            {
+                                                                text: Variable.lang.button.add,
+                                                                type: "edit",
+                                                                onclick: async () => {
+                                                                    console.log('=7e4dce=', "gggg")
+
+                                                                }
+                                                            },
+                                                            {
+                                                                text: Variable.lang.button.edit,
+                                                                type: "edit",
+                                                                onclick: async () => {
+                                                                    console.log('=7e4dce=', "gggg")
+
+                                                                }
+                                                            }
+                                                            
+                                                        ]
+                                                    }
+                                                />
                                             </div>
                                         )
                                     }
