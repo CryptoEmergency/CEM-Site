@@ -10,7 +10,21 @@ import {
 
 import { If, Map } from '@component/helpers/All.js';
 import svg from '@assets/svg/index.js';
-import { Avatar } from '@component/element/index.js';
+import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer } from '@component/element/index.js';
+
+
+const swiperOptions = {
+    loop: false,
+    // autoHeight: true, 
+    pagination: {
+        el: ".swiper-pagination",
+    },
+    scrollbar: {
+        el: ".swiper-scrollbar",
+    },
+    slidesPerView: 1,
+    spaceBetween: 20
+};
 
 const start = function () {
     let Static = {}
@@ -164,12 +178,72 @@ const start = function () {
                                             {() => {
                                                 if (messageList && messageList.list_records && messageList.list_records[0].message) {
                                                     const arrReturn = messageList.list_records[0].message.map((item, index) => {
-                                                        console.log('=0a9ec9=', item)
                                                         return (
                                                             <div class={item.author == Variable.myInfo._id ? "your_message_container" : "friend_message_container"}>
                                                                 <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", Helpers.ifHaveMedia(item.media, "video") ? "chat_have_video" : null, Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
                                                                     {Helpers.editText(item.text, { clear: true, paragraph: true, html: true })}
 
+                                                                    {() => {
+                                                                        if (item.media && item.media.length) {
+                                                                            const arrMedia = item.media.map((item, index) => {
+                                                                                console.log('=d379f8=', item)
+                                                                                if (item.type == "video" && !Array.isArray(item)) {
+                                                                                    return (
+                                                                                        <div class="swiper-slide">
+                                                                                            <VideoPlayer
+                                                                                                Static={Static}
+                                                                                                item={item}
+                                                                                                path={`/assets/upload/chat/`}
+                                                                                            //  path={"/assets/upload/posts/"}
+                                                                                            />
+                                                                                        </div>
+                                                                                    );
+                                                                                }
+
+                                                                                if (item.type == "image" && !Array.isArray(item)) {
+                                                                                    return (
+                                                                                        <div class="swiper-slide">
+                                                                                            <div class="swiper-post_media_image_container">
+                                                                                                <LazyImage
+                                                                                                    path={`/assets/upload/chat/` + item.name}
+                                                                                                />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    );
+                                                                                }
+
+                                                                                if (Array.isArray(item)) {
+                                                                                    let i = index;
+                                                                                    return (
+                                                                                        <div class="swiper-slide user_post_text_background">
+                                                                                            {
+                                                                                                item.map((itemAudio, index) => {
+                                                                                                    return (
+                                                                                                        <AudioPlayer
+                                                                                                            Static={Static}
+                                                                                                            item={itemAudio}
+                                                                                                            path={`/assets/upload/chat/`}
+                                                                                                        />
+                                                                                                    );
+                                                                                                })
+                                                                                            }
+                                                                                        </div>
+                                                                                    );
+                                                                                }
+                                                                            })
+                                                                            return (
+                                                                                <Swiper
+                                                                                    className="swiper-post_media"
+                                                                                    options={swiperOptions}
+                                                                                    // replace={changeToogle}
+                                                                                    // replace={false}
+                                                                                    slide={arrMedia}
+                                                                                />
+                                                                            )
+
+                                                                            return arrMedia
+                                                                        }
+                                                                    }}
                                                                     <div class={item.author == Variable.myInfo._id ? "your_message_date" : "friend_message_date"}>
                                                                         {Helpers.getDateFormat(item.showDate, "now")}
                                                                     </div>
