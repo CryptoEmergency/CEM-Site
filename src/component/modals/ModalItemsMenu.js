@@ -23,9 +23,9 @@ const ModalItemsMenu = function ({ items, author }) {
 											return (
 												<li
 													class="c-actions__item"
-													onclick={function () {
+													onclick={function (e) {
 														Variable.DelModals("ModalItemsMenu");
-														item.onclick()
+														item.onclick(e)
 													}
 													}>
 													<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>

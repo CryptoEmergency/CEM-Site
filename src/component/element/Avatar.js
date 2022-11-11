@@ -169,10 +169,48 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                 <div
                   class="c-avataricon__settings"
                   onclick={(e) => {
+                    let author = Variable.myInfo
+                    let items = [
+                      {
+                        text: Variable.lang.text.changeAvatar,
+                        type: "edit",
+                        onclick: function(e){
+                          console.log(e)
+                          e.stopPropagation();
+                          e.preventDefault();
+                          inputAvatar().click();
+                        }
+                      },
+                      {
+                        text: Variable.lang.text.changeBackground,
+                        type: "edit",
+                        onclick: function(e){
+                          e.stopPropagation();
+                          e.preventDefault();
+                          inputBg().click();
+                        }
+                      },
+                      {
+                        text: Variable.lang.select.share,
+                        type: "share",
+                        onclick: function(e){
+                          
+                        }
+                      },
+                      {
+                        text: Variable.lang.text.settings,
+                        type: "edit",
+                        onclick: function(e){
+                          e.currentTarget = {
+                            href: "/user/settings/"
+                          }
+                          Helpers.siteLink(e)
+                        }
+                      }
+                    ]
                     e.stopPropagation();
                     e.preventDefault();
-                    visibleSettings = !visibleSettings;
-                    initReload();
+                    Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
                   }
                   }
                 >

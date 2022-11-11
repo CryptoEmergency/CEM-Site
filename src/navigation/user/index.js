@@ -209,7 +209,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                         {Variable.lang.select.share}
                                     </p>
                                     <p data-action="showFramesModal" class="c-userpreview__action">
-                                        <a onclick={Helpers.siteLink} href="/user/222/">{Variable.lang.text.settings}</a>
+                                        <a onclick={Helpers.siteLink} href="/user/settings/">{Variable.lang.text.settings}</a>
                                     </p>
                                     {/* ELSE */}
 
