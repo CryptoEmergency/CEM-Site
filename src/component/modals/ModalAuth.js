@@ -135,7 +135,7 @@ let Static = {}
 
 
 const ModalAuth = function () {
-    [Static] = fn.GetParams({ data: {}, ID: null })
+    // [Static] = fn.GetParams({ data: {}, ID: null })
     initOne(
         () => {
 

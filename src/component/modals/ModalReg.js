@@ -12,7 +12,7 @@ import images from '@assets/images/index.js';
 import { If } from '@component/helpers/All.js';
 import { validator, checkValid } from '@src/functions.js';
 import { Input, CheckBox } from '@component/element/index.js';
-
+import { fn } from '@src/functions/index.js';
 let listCodes
 
 let elem = Variable.setRef()
@@ -55,14 +55,32 @@ const sendRegistration = async function (e) {
 }
 
 
-let wayReg, Static
+let wayReg
+let Static = {}
 
-const ModalReg = function () {
+const ModalReg = function (data, reload, ID) {
+    if (!this.Static) {
+        this.Static = {}
+    }
+    // Static = this.Static
+    // console.log('=d79aa2=22222222', this)
+    // Static = fn.Static[8]
+    // let Static = fn.Static[8]
+    // let Static = {}
+    // let [Static] = fn.GetParams({ data, ID: 8, actual: false, reload })
+    // console.log('=3c3e95=', Static)
+    Static.t1 = "4"
+    // Static = {
+    //     isValid: false
+    // }
 
     initOne(
         () => {
-            wayReg = "email"
+            console.log("=================", this, "===========")
+            // let [Static] = fn.GetParams({ data, ID, actual: false, reload })
 
+            wayReg = "email"
+            // let Static = this.Static
             Static = {
                 isValid: false
             }
@@ -141,7 +159,7 @@ const ModalReg = function () {
 
         }
     )
-
+    console.log('=3c3e95= Static', Static)
     return (
         <div class="c-modal c-modal--open" id="ModalReg">
             <section class="c-modal__dialog" ref={elem}>

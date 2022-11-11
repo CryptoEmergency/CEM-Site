@@ -1,3 +1,4 @@
+import { Variable } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 
 const fn = {}
@@ -61,24 +62,59 @@ fn.CreateMenuItems = function (data) {
     }
   }
 }
+console.log('=af83ea=', "fn.Staticfn.Staticfn.Staticfn.Staticfn.Staticfn.Staticfn.Staticfn.Static")
+fn.Static = {}
+fn.Static.mainBlock = {}
+fn.Static[8] = { j: 1 }
+fn.GetParams = function ({ data, reload = false, ID = "mainBlock", actual = false }) {
+  console.log('=0d1e0d=', "fn.GetParams", this.Static[8])
+  return [this.Static[8]]
+  // if (data) {
+  //   console.log('=cbb618=', data.Static)
+  //   if (!data.Static) { data.Static = {} }
 
-let Static = {}
-Static.mainBlock = {}
+  //   return [data.Static]
+  // }
 
-fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
-  console.log('=0d1e0d=', "fn.GetParams", data, reload, ID)
-  if (actual) { return [Static[ID]] }
+  // console.log('=131fc9=', Static)
+
+  if (actual) { return [this.Static[ID]] }
+  console.log('=303532=actual', actual)
+  if (!reload || !this.Static[ID]) {
+    console.log('=f1189c===================================', this.Static[ID])
+    this.Static[ID] = {};
+  }
+  console.log('=303532=reload', reload)
 
   if (!ID) {
     if (!reload) {
-      Static[ID] = {};
-      return [Static[ID]];
+      this.Static[ID] = {};
+      return [this.Static[ID]];
     } else {
-      return [Static[ID]];
+      return [this.Static[ID]];
     }
   }
 
-  return [Static[ID]]
+  return [this.Static[ID]]
 }
+
+// fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
+//   console.log('=131fc9=', this.Static)
+//   console.log('=0d1e0d=', "fn.GetParams", data, reload, ID)
+//   if (actual) { return this.Static[ID] }
+//   if (!reload) { this.Static[ID] = {}; }
+
+
+//   if (!ID) {
+//     if (!reload) {
+//       this.Static[ID] = {};
+//       return this.Static[ID];
+//     } else {
+//       return this.Static[ID];
+//     }
+//   }
+
+//   return this.Static[ID]
+// }
 
 export { fn }
