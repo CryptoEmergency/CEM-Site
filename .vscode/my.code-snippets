@@ -88,7 +88,7 @@
 		"scope": "javascript,typescript",
 		"prefix": "_func",
 		"body": [
-			"import { checkAnswerApi, siteLink } from '@src/functions.js';"
+			"import { fn } from '@src/functions/index.js';"
 		],
 		"description": ""
 	},
