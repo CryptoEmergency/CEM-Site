@@ -660,5 +660,8 @@
 		"reciveComment-Comment": "Menerima komentar pada komentar Anda",
 		"reciveLike": "Anda diberi seperti. Peringkat meningkat",
 		"reciveReferralPay": "Referral anda telah mencapai level 3."
+	},
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
 	}
 }

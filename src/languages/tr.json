@@ -659,5 +659,8 @@
         "reciveComment-Comment": "Yorumunuza bir yorum bırakıldı",
         "reciveLike": "Size bir beğeni geldi. Sıralamadaki yeriniz yükseldi",
         "reciveReferralPay": "Ortaklık linki ile gelen kullanıcı 3. seviyeye ulaştı."
-    }
+    },
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
+	}
 } 

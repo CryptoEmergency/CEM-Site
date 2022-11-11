@@ -1,3 +1,4 @@
+import { Variable } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 
 const fn = {}
@@ -71,5 +72,24 @@ fn.CreateMenuItems = function (data){
       }
     }
     }
+
+// fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
+//   console.log('=131fc9=', this.Static)
+//   console.log('=0d1e0d=', "fn.GetParams", data, reload, ID)
+//   if (actual) { return this.Static[ID] }
+//   if (!reload) { this.Static[ID] = {}; }
+
+
+//   if (!ID) {
+//     if (!reload) {
+//       this.Static[ID] = {};
+//       return this.Static[ID];
+//     } else {
+//       return this.Static[ID];
+//     }
+//   }
+
+//   return this.Static[ID]
+// }
 
 export { fn }
