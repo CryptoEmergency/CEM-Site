@@ -81,6 +81,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
                           color: "red",
                           onclick: async () => {
                             // Переработать модалку
+                            console.log(data)
                             Variable.SetModals(
                               {
                                 name: "ModalComplainComment",

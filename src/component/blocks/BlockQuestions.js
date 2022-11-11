@@ -10,13 +10,14 @@ import {
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { fn } from '@src/functions/index.js'
+import { modals } from '@src/functions/index.js'
 import { Select, ButtonShowMore, NotFound, Avatar } from '@component/element/index.js';
 import { Input } from '@component/element/index.js';
 
 
 
 const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
-
+  Variable.editMenu = false
 //менюшки для ссылок
   let hrefMenuitems = fn.CreateMenuItems({
     text:[Variable.lang.h.modal_answer,
@@ -57,7 +58,20 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
       }
     },
     //пожаловаьбся на вопрос
-    "",
+    async () => {
+      // Переработать модалку
+      Variable.SetModals(
+        {
+          name: "ModalComplainComment",
+          data: {
+            id: data.item._id,
+            typeSet: data.typeApi,
+            mainId: data.mainId,
+            mainCom: !data.commentId ? true : false,
+          },
+        }, true
+      );
+    },
     //пожаловаться на пользователя
     async () => {
       Variable.SetModals(
@@ -75,7 +89,8 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
     //редактировать
     async () => {
 
-  Variable.modalEditQuestion = true
+      Variable.editMenu = true
+      console.log(Variable.editMenu)
 
       initReload()
     },

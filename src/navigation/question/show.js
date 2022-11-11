@@ -15,57 +15,6 @@ import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotF
 const start = function (data, ID) {
 
 
-  function editquestion(Static){
-
-    Static.edit_question_text = {
-      value: Helpers.editText(item.text, { clear: true}),
-      rows:7
-    }
-
-    Static.edit_question_title = {
-      value: Helpers.editText(item.title, { clear: true}),
-      rows:7
-    }
-
-    if(!Static.editQuestion){
-
-      return (
-        <div>
-      <p class="question_title">{item.title}</p>
-      <div class="question_text"> {Helpers.clearText(item.text)}</div></div>
-      )
-    }else{
-   
- 
-     
-      return (
-        <div>
-          <TextArea Static={ Static.edit_question_title}  />
-          <br />
-          <TextArea Static={ Static.edit_question_text} />
-          <br />
-          <ButtonSubmit text={"submit"} onclick={async () => {
-
-
-let response = await api({ type: "set", action: "setQuestion", data: { _id: itemID, value: { title: Static.edit_question_title.value, text:Static.edit_question_text.value} } })
-if (response.status === 'ok') {
-item.title = Static.edit_question_title.value
-item.text = Static.edit_question_text.value
-Static.editQuestion =false
-initReload()
-} else {
-Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
-
-}
-return
-          }} />
-          </div>
-      )}
-    
-  }
-
-
-
   let item, itemAnswer, itemID, itemMenuCheck,showItemsMenu;
   let Static = {}
   
@@ -131,6 +80,7 @@ let bottomMenuitems = fn.CreateMenuItems({
             //если в статике
           itemID = Variable.dataUrl.params
           itemMenuCheck = false
+       
         }
         let response = await api({ type: "get", action: "getQuestions", short: true, limit: 1, filter: { _id: itemID } })
         if (response && response.list_records && response.list_records[0]) {
@@ -140,19 +90,8 @@ let bottomMenuitems = fn.CreateMenuItems({
         }
       }
 
-      if(!itemMenuCheck)
-      {
-        showItemsMenu = <ItemsMenu author={item.author} 
-        items = {upperMenuitems}  />
-      }
-      else{
- 
-        showItemsMenu = ""
-        Variable["modalEditQuestion"] = data.editVisible
-   
-      }
 
- //верхнее меню   
+      //верхнее меню   
       let upperMenuitems = fn.CreateMenuItems({
         text:[Variable.lang.h.modal_answer,
           Variable.lang.select.share,
@@ -164,7 +103,7 @@ let bottomMenuitems = fn.CreateMenuItems({
           Variable.lang.select.delete],
         type:["addanswer","share","complainItem","complainUser","edit","closequestion","bestquestion","delete"],
         auth:[true,false,true,true,true,true,true,true],
-        color:["","","red","","","red","green","red"],
+        color:["","","red","red","","red","green","red"],
         onclick:[async () => 
           {
           //ответить
@@ -192,14 +131,29 @@ let bottomMenuitems = fn.CreateMenuItems({
           }
         },
         //пожаловаьбся на вопрос
-        "",
+        async () => {
+
+          Variable.SetModals(
+            {
+              name: "ModalComplainComment",
+              data: {
+                item,
+                onClose: async () => {
+                  // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+                  // itemAnswer = answer.list_records
+                  // initReload()
+                }
+              }
+            }, true
+          );
+        },
         //пожаловаться на пользователя
         async () => {
           Variable.SetModals(
             {
               name: "ModalComplainComment",
               data: {
-                id: data.item._id,
+                id: itemID,
                 typeSet: data.typeApi,
                 mainId: data.mainId,
                 mainCom: !data.commentId ? true : false,
@@ -211,7 +165,6 @@ let bottomMenuitems = fn.CreateMenuItems({
         async () => {
          
           Static.editQuestion = true
-          editquestion(Static.editQuestion)
           initReload()
         },
         //закрыть вопрос
@@ -221,11 +174,28 @@ let bottomMenuitems = fn.CreateMenuItems({
         //удалить
         ""]
       })
+
+
+      if(!itemMenuCheck)
+      {
+
+        showItemsMenu = <ItemsMenu author={item.author} 
+        items = {upperMenuitems}  />
+      }
+      else{
+ 
+        showItemsMenu = ""
+        Variable["modalEditQuestion"] = data.editVisible
+   
+      }
+
+ 
     },
 
 
     
     async () => {
+      console.log(Variable.editMenu)
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
@@ -244,7 +214,54 @@ let bottomMenuitems = fn.CreateMenuItems({
               
               </div>
       
-                {}
+                {()=>{
+
+                  Static.edit_question_text = {
+                    value: Helpers.editText(item.text, { clear: true}),
+                    rows:7
+                  }
+
+                  Static.edit_question_title = {
+                    value: Helpers.editText(item.title, { clear: true}),
+                    rows:7
+                  }
+
+                  if(!Static.editQuestion){
+              
+                    return (
+                      <div>
+                    <p class="question_title">{item.title}</p>
+                    <div class="question_text"> {Helpers.clearText(item.text)}</div></div>
+                    )
+                  }else{
+                 
+               
+                   
+                    return (
+                      <div>
+                        <TextArea Static={ Static.edit_question_title}  />
+                        <br />
+                        <TextArea Static={ Static.edit_question_text} />
+                        <br />
+                        <ButtonSubmit text={"submit"} onclick={async () => {
+
+
+           let response = await api({ type: "set", action: "setQuestion", data: { _id: itemID, value: { title: Static.edit_question_title.value, text:Static.edit_question_text.value} } })
+            if (response.status === 'ok') {
+           item.title = Static.edit_question_title.value
+           item.text = Static.edit_question_text.value
+           Static.editQuestion =false
+              initReload()
+          } else {
+              Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+           
+          }
+          return
+                        }} />
+                        </div>
+                    )}
+                  
+                }}
              
               <LentaMedia
                 items={item.media}
