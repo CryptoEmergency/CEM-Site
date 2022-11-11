@@ -18,7 +18,7 @@ import { Input } from '@component/element/index.js';
 
 
 const ModalAuth = function (data, ID) {
-
+    console.log('=eb4754=', "dgdfg")
 
 
     let wayAuth,
