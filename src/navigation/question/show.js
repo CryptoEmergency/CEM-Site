@@ -373,7 +373,7 @@ let bottomMenuitems = fn.CreateMenuItems({
                                       <div class="user_news_top">
                                         <div class="button-container-comm">
                                           <ButtonSubmit
-                                            className="btn-comm"
+                                            className="c-button--comm"
                                             data-show={false}
                                             text={
                                               <span

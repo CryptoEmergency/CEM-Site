@@ -26,7 +26,7 @@ const BlockNews = async function ({ nameRecords, type, Static }) {
   return (
     <div class="blog_page">
       <div class="blog_filter">
-        <h2>{Variable.lang.h.blog}</h2>
+        {/* <h2>{Variable.lang.h.blog}</h2> */}
         {/* <div class="profit_calculator_inputs_container">
           <input type="text" id="datepicker"></p>
         </div>

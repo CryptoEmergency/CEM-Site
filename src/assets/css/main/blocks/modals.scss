@@ -173,6 +173,13 @@
 						text-decoration: none;
 					}
 				}
+
+				.tags {
+					@media(max-width: 1023px) {
+						padding-left: 10px;
+						padding-right: 10px;
+					}
+				}
 			}
 
 			&__wrapper {

@@ -17807,11 +17807,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
   /* .main_site_bottom_menu{
     display: block;
   } */
-  .tags {
+  /* .tags {
     flex-wrap: nowrap;
     overflow-x: auto;
     white-space: nowrap;
-  }
+  } */
 
   /* .question_search_container img{
     top: 80px;
@@ -20265,7 +20265,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
     padding-top: 30px;
   }
 
-  .tag_button {
+  /* .tag_button {
     padding: 0px 10px;
     height: 26px;
     font-size: 15px;
@@ -20282,7 +20282,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   .tag_button span {
     line-height: 26px;
     font-size: 10px;
-  }
+  } */
 
   .blog_page_container {
     padding: 0 10px;

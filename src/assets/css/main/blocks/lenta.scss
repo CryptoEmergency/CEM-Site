@@ -79,6 +79,14 @@
             margin: 0 auto;
             // margin-top: 40px;
 
+            .justselect {
+                &-list {
+                    border: 1px solid $black_flame;
+                    width: 115%;
+                    max-width: 220px;
+                }
+            }
+
             .tox {
                 margin-bottom: 0 !important;
             }

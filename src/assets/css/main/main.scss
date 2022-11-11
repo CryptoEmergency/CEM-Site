@@ -230,16 +230,16 @@ textarea {
         }
     }
 
-    
-	&-cube {
-		& + div {
-			.comment {
-				&_text {
-					margin-top: 20px;
-				}
-			}
-		}
-	}
+
+    &-cube {
+        &+div {
+            .comment {
+                &_text {
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
 }
 
 .swiper-wrapper {
@@ -423,10 +423,10 @@ textarea {
         }
 
         li {
-            line-height: 60px;
+            line-height: normal;
             cursor: pointer;
             text-align: left;
-            padding: 0 15px;
+            padding: 20px 15px;
             // background: $white;
             // color: $black;
             background-color: #313643;
@@ -848,7 +848,7 @@ textarea {
 
         &.clicked_button-type_1-part_1 {
             width: 100% !important;
-            background: $spaceman !important;
+            background: $spaceman  !important;
             margin-left: auto !important;
             margin-right: auto !important;
         }
@@ -859,7 +859,7 @@ textarea {
             width: 100% !important;
 
             span {
-                color: $white !important;
+                color: $white  !important;
             }
         }
 
@@ -1365,6 +1365,56 @@ textarea {
             right: 0;
             top: 0;
             animation: animatedButton2 4s ease-in-out infinite;
+        }
+    }
+
+    &--comm {
+        text-align: center;
+        border-radius: 3px;
+        display: block;
+        min-height: 32px;
+        width: max-content;
+        padding-left: 10px;
+        padding-right: 10px;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+        padding-top: 0;
+
+        &::after {
+            position: absolute;
+            top: 0;
+            content: "";
+            display: inline-block;
+            background: #3bade3;
+            background: linear-gradient(45deg, #3bade3 0%, #576fe6 10%, #9844b7 70%, #ff357f 90%);
+            height: 55px;
+            width: 440px;
+            z-index: -1;
+            -webkit-transform: translateX(-330px);
+            transform: translateX(-330px);
+            transition: -webkit-transform 400ms ease-in;
+            transition: transform 400ms ease-in;
+            transition: transform 400ms ease-in, -webkit-transform 400ms ease-in;
+        }
+
+        &:hover {
+            &::after {
+                -webkit-transform: translateX(-236px);
+                transform: translateX(-236px);
+            }
+        }
+
+        span {
+            color: #fff;
         }
     }
 }
