@@ -660,5 +660,8 @@
 		"reciveComment-Comment": "コメントにコメントを頂いた方は、",
 		"reciveLike": "あなたは好きなものを与えられました。 評価が増加",
 		"reciveReferralPay": "あなたの紹介はレベル3に達しました。"
+	},
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
 	}
 }

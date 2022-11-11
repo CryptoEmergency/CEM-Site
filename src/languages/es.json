@@ -659,5 +659,8 @@
 		"reciveComment-Comment": "Recibido un comentario sobre Su comentario",
 		"reciveLike": "Te gusta. Ranking aumentado",
 		"reciveReferralPay": "Su referencia ha alcanzado el nivel 3."
+	},
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
 	}
 }

@@ -659,5 +659,8 @@
         "reciveComment-Comment": "התקבלה תגובה על התגובה שלך",
         "reciveLike": "קיבלת לייק. הדירוג שלך גדל",
         "reciveReferralPay": "ההפניה שלך הגיעה לרמה 3."
-    }
+    },
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
+	}
 } 

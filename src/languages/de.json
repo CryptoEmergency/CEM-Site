@@ -659,5 +659,8 @@
 		"reciveComment-Comment": "Ein Kommentar zu Ihrem Kommentar wurde erhalten",
 		"reciveLike": "Sie haben Ihnen gefällt. Bewertung erhöht",
 		"reciveReferralPay": "Ihre Empfehlung hat Stufe 3 erreicht."
+	},
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
 	}
 }

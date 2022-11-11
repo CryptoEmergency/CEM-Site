@@ -659,5 +659,8 @@
         "reciveComment-Comment": "Otrzymano koment na twój koment",
         "reciveLike": "Otrzymałeś like. Twój ranking wzrósł",
         "reciveReferralPay": "Twój referral osiągnął 3 stopień i otrzymał płatność."
-    }
+    },
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
+	}
 } 

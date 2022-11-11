@@ -200,7 +200,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                           <p class="user_custimize_settings_item">{Variable.lang.text.changeFrame}</p>
                           <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>
                           <p class="user_custimize_settings_item">
-                            <a data-action="link" href="/user/settings/">{Variable.lang.text.settings}</a>
+                            <a onclick={Helpers.siteLink} href="/user/settings/">{Variable.lang.text.settings}</a>
                           </p>
                           <input
                             style="display: none;"

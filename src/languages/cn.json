@@ -659,5 +659,8 @@
 		"reciveComment-Comment": "收到你的评论",
 		"reciveLike": "你被赋予了类似的东西。 评级增加",
 		"reciveReferralPay": "你被赋予了类似的东西。 评级增加"
+	},
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
 	}
 }
