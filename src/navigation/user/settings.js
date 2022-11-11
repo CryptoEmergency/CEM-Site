@@ -8,11 +8,11 @@ import {
 } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
-import { If } from '@component/helpers/All.js';
+import { api } from '@src/apiFunctions.js'
+
 
 import { BlockUserSettingsPage } from '@component/blocks/index.js';
-
-
+import { NotFound } from "@component/element/index.js";
 
 import { Avatar } from '@component/element/Avatar.js';
 
@@ -24,22 +24,12 @@ const deleteUserFromBlacklist = async (user) => {
             blackList: user
         }
     }
-    let response = checkAnswerApi(await sendApi.create("setUsers", data));
+    let response = await api({ type: "set", action: "setUsers", short: true, data })
     return response
 }
 
 const getUserBlackList = async (count = 0) => {
-    let data = {
-        select: {
-            blackList: 1
-        },
-        limit: 5,
-        offset: 5 * count,
-        filter: {
-            _id: Variable.myInfo._id
-        }
-    }
-    let response = checkAnswerApi(await sendApi.create("getUsers", data));
+    let response = await api({ type: "get", action: "getUsers", short: true, select: {blackList: 1}, filter: {_id: Variable.myInfo._id} })
     return response
 }
 
@@ -56,18 +46,23 @@ const start = function () {
     Variable.showUserMenu = false
 
     const userBlackList = function () {
-        const BlackListBlock = Object.keys(blackList.list_records[0].blackList).map(function (key) {
-            return (
-                <li style="justify-content: space-between" data-id="{{_id}}" class="settings_blackuser friend" data-action="link" data-href="">
-                    <Avatar
-                        author={blackList.list_records[0].blackList[key]}
-                    // nickName={item.author.nickname} 
-                    // dateShow={true}
-                    />
-                    <div onclick={deleteFromBlacklist} data-id={blackList.list_records[0].blackList[key]._id} class="settings_deleteuser">{Variable.lang.text.deleteFromBlacklist}</div>
-                </li>
-            )
-        })
+        let BlackListBlock
+        if (blackList && blackList.list_records && blackList.list_records.length && blackList.list_records[0].blackList && blackList.list_records[0].blackList.length){
+            BlackListBlock = Object.keys(blackList.list_records[0].blackList).map(function (key) {
+                return (
+                    <li style="justify-content: space-between" class="settings_blackuser friend">
+                        <Avatar
+                            author={blackList.list_records[0].blackList[key]}
+                        // nickName={item.author.nickname} 
+                        // dateShow={true}
+                        />
+                        <div onclick={deleteFromBlacklist} data-id={blackList.list_records[0].blackList[key]._id} class="settings_deleteuser">{Variable.lang.text.deleteFromBlacklist}</div>
+                    </li>
+                )
+            })
+        } else {
+            BlackListBlock = NotFound()
+        }
 
         return (
             <ul class="settings_blacklist">
@@ -87,6 +82,7 @@ const start = function () {
     init(
         async () => {
             blackList = await getUserBlackList()
+            console.log(blackList)
 
             settingsPage = "security"
         },
