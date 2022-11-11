@@ -15,6 +15,57 @@ import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotF
 const start = function (data, ID) {
 
 
+  function editquestion(Static){
+
+    Static.edit_question_text = {
+      value: Helpers.editText(item.text, { clear: true}),
+      rows:7
+    }
+
+    Static.edit_question_title = {
+      value: Helpers.editText(item.title, { clear: true}),
+      rows:7
+    }
+
+    if(!Static.editQuestion){
+
+      return (
+        <div>
+      <p class="question_title">{item.title}</p>
+      <div class="question_text"> {Helpers.clearText(item.text)}</div></div>
+      )
+    }else{
+   
+ 
+     
+      return (
+        <div>
+          <TextArea Static={ Static.edit_question_title}  />
+          <br />
+          <TextArea Static={ Static.edit_question_text} />
+          <br />
+          <ButtonSubmit text={"submit"} onclick={async () => {
+
+
+let response = await api({ type: "set", action: "setQuestion", data: { _id: itemID, value: { title: Static.edit_question_title.value, text:Static.edit_question_text.value} } })
+if (response.status === 'ok') {
+item.title = Static.edit_question_title.value
+item.text = Static.edit_question_text.value
+Static.editQuestion =false
+initReload()
+} else {
+Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+
+}
+return
+          }} />
+          </div>
+      )}
+    
+  }
+
+
+
   let item, itemAnswer, itemID, itemMenuCheck,showItemsMenu;
   let Static = {}
   
@@ -160,6 +211,7 @@ let bottomMenuitems = fn.CreateMenuItems({
         async () => {
          
           Static.editQuestion = true
+          editquestion(Static.editQuestion)
           initReload()
         },
         //закрыть вопрос
@@ -192,54 +244,7 @@ let bottomMenuitems = fn.CreateMenuItems({
               
               </div>
       
-                {()=>{
-
-                  Static.edit_question_text = {
-                    value: Helpers.editText(item.text, { clear: true}),
-                    rows:7
-                  }
-
-                  Static.edit_question_title = {
-                    value: Helpers.editText(item.title, { clear: true}),
-                    rows:7
-                  }
-
-                  if(!Static.editQuestion || !Variable.modalEditQuestion){
-              
-                    return (
-                      <div>
-                    <p class="question_title">{item.title}</p>
-                    <div class="question_text"> {Helpers.clearText(item.text)}</div></div>
-                    )
-                  }else{
-                 
-               
-                   
-                    return (
-                      <div>
-                        <TextArea Static={ Static.edit_question_title}  />
-                        <br />
-                        <TextArea Static={ Static.edit_question_text} />
-                        <br />
-                        <ButtonSubmit text={"submit"} onclick={async () => {
-
-
-           let response = await api({ type: "set", action: "setQuestion", data: { _id: itemID, value: { title: Static.edit_question_title.value, text:Static.edit_question_text.value} } })
-            if (response.status === 'ok') {
-           item.title = Static.edit_question_title.value
-           item.text = Static.edit_question_text.value
-           Static.editQuestion =false
-              initReload()
-          } else {
-              Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
-           
-          }
-          return
-                        }} />
-                        </div>
-                    )}
-                  
-                }}
+                {}
              
               <LentaMedia
                 items={item.media}
