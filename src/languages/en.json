@@ -660,5 +660,8 @@
 		"reciveComment-Comment": "Received a comment on your comment",
 		"reciveLike": "You were given a like. Rating increased",
 		"reciveReferralPay": "Your referral has reached level 3."
+	},
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
 	}
 }

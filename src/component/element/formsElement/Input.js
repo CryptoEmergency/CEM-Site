@@ -121,6 +121,7 @@ const checkInput = function (Static, target) {
 }
 
 const Input = function ({ Static, classDiv, className, before, after, callback }) {
+    // console.log('=3c3e95= Input', Static)
     return (textConstuctor(Static, classDiv, className, before, after, callback))
 };
 export { Input };

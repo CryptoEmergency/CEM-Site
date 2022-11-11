@@ -112,7 +112,7 @@ const ModalMobileMainSettings = function ({ }, reload) {
                                             <img src={svg["profile_icon-3"]} />
                                             <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
                                         </a>
-                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                        <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/settings/">
                                             <img src={svg["settings_icon"]} />
                                             <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
                                         </a>
@@ -136,7 +136,36 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <span class="mobile_user_menu_link">{Variable.lang.span.userNews}</span>
                         </a>
                         <a
-                            onclick={Helpers.siteLink}
+                            onclick={(e) => { 
+                                Variable.DelModals("ModalMobileMainSettings");
+                                Helpers.siteLinkModal(e, { title: Variable.lang.a.experts,items:
+                                    [
+                                        {
+                                            text: Variable.lang.select.share,
+                                            type: "share",
+                                            onclick: async () => {
+                                                try {
+                                                    if (navigator.share) {
+                                                    await navigator.share({
+                                                        url: window.location.origin + "/experts/",
+                                                    });
+                                                    }
+                                                } catch (err) {
+                                                    console.error("Share", err)
+                                                }
+                                            }
+                                        },
+                                        {
+                                            text: Variable.lang.p.copy+ " URL",
+                                            type: "copyurl",
+                                            onclick: async () => {
+                                                navigator.clipboard.writeText(window.location.origin + "/experts/");
+                                                Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+                                            }
+                                        }
+                                    ]
+                                })
+                            }}
                             class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "experts" ? "user_icon_active" : ""}`}
                             href="/experts/"
                         >
@@ -161,7 +190,36 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <span class="mobile_user_menu_link">{Variable.lang.a.chatsPublic}</span>
                         </a> */}
                         <a
-                            onclick={Helpers.siteLink}
+                            onclick={(e) => { 
+                                Variable.DelModals("ModalMobileMainSettings");
+                                Helpers.siteLinkModal(e, { title: Variable.lang.a.news,items:
+                                [
+                                    {
+                                        text: Variable.lang.select.share,
+                                        type: "share",
+                                        onclick: async () => {
+                                            try {
+                                                if (navigator.share) {
+                                                await navigator.share({
+                                                    url: window.location.origin + "/news/",
+                                                });
+                                                }
+                                            } catch (err) {
+                                                console.error("Share", err)
+                                            }
+                                        }
+                                    },
+                                    {
+                                        text: Variable.lang.p.copy+ " URL",
+                                        type: "copyurl",
+                                        onclick: async () => {
+                                            navigator.clipboard.writeText(window.location.origin + "/news/");
+                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+                                        }
+                                    }
+                                ]
+                                })
+                            }}
                             class="user_icon_mobile_visible user_icon"
                             href={`${Variable.lang.url}news/`}
                         >
@@ -169,7 +227,36 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <span class="mobile_user_menu_link">{Variable.lang.a.news}</span>
                         </a>
                         <a
-                            onclick={Helpers.siteLink}
+                            onclick={(e) => { 
+                                Variable.DelModals("ModalMobileMainSettings");
+                                Helpers.siteLinkModal(e, { title: Variable.lang.a.blog,items:
+                                [
+                                    {
+                                        text: Variable.lang.select.share,
+                                        type: "share",
+                                        onclick: async () => {
+                                            try {
+                                                if (navigator.share) {
+                                                await navigator.share({
+                                                    url: window.location.origin + "/blog/",
+                                                });
+                                                }
+                                            } catch (err) {
+                                                console.error("Share", err)
+                                            }
+                                        }
+                                    },
+                                    {
+                                        text: Variable.lang.p.copy+ " URL",
+                                        type: "copyurl",
+                                        onclick: async () => {
+                                            navigator.clipboard.writeText(window.location.origin + "/blog/");
+                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+                                        }
+                                    }
+                                ]
+                                })
+                            }}
                             class="user_icon_mobile_visible user_icon"
                             href={`${Variable.lang.url}blog/`}
                         >
@@ -186,7 +273,36 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <span class="mobile_user_menu_link">{Variable.lang.a.starups}</span>
                         </a> */}
                         <a
-                            onclick={Helpers.siteLink}
+                            onclick={(e) => { 
+                                Variable.DelModals("ModalMobileMainSettings");
+                                Helpers.siteLinkModal(e, { title: Variable.lang.a.trade,items:
+                                [
+                                    {
+                                        text: Variable.lang.select.share,
+                                        type: "share",
+                                        onclick: async () => {
+                                            try {
+                                                if (navigator.share) {
+                                                await navigator.share({
+                                                    url: window.location.origin + "/list-trade/",
+                                                });
+                                                }
+                                            } catch (err) {
+                                                console.error("Share", err)
+                                            }
+                                        }
+                                    },
+                                    {
+                                        text: Variable.lang.p.copy+ " URL",
+                                        type: "copyurl",
+                                        onclick: async () => {
+                                            navigator.clipboard.writeText(window.location.origin + "/list-trade/");
+                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+                                        }
+                                    }
+                                ]
+                                })
+                            }}
                             class="user_icon_mobile_visible user_icon"
                             href={`${Variable.lang.url}list-trade/`}
                         >
@@ -194,7 +310,36 @@ const ModalMobileMainSettings = function ({ }, reload) {
                             <span class="mobile_user_menu_link">{Variable.lang.a.trade}</span>
                         </a>
                         <a
-                            onclick={Helpers.siteLink}
+                            onclick={(e) => { 
+                                Variable.DelModals("ModalMobileMainSettings");
+                                Helpers.siteLinkModal(e, { title: Variable.lang.a.exchange,items:
+                                [
+                                    {
+                                        text: Variable.lang.select.share,
+                                        type: "share",
+                                        onclick: async () => {
+                                            try {
+                                                if (navigator.share) {
+                                                await navigator.share({
+                                                    url: window.location.origin + "/list-exchange/",
+                                                });
+                                                }
+                                            } catch (err) {
+                                                console.error("Share", err)
+                                            }
+                                        }
+                                    },
+                                    {
+                                        text: Variable.lang.p.copy+ " URL",
+                                        type: "copyurl",
+                                        onclick: async () => {
+                                            navigator.clipboard.writeText(window.location.origin + "/list-exchange/");
+                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
+                                        }
+                                    }
+                                ]
+                                })
+                            }}
                             class="user_icon_mobile_visible user_icon"
                             href={`${Variable.lang.url}list-exchange/`}
                         >

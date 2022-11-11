@@ -19,7 +19,7 @@
     overflow: hidden;
 
     @media (max-width: 750px) {
-        padding-top: 30px;
+        padding-top: 10px;
         padding-bottom: 0;
     }
 }
@@ -627,7 +627,7 @@
     transition: 1s;
 
     @media (max-width: 750px) {
-        height: 26px;
+        height: 30px;
     }
 }
 
@@ -637,7 +637,7 @@
 
     @media (max-width: 750px) {
         line-height: 26px;
-        font-size: 10px;
+        font-size: 14px;
     }
 }
 

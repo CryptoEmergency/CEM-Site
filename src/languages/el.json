@@ -659,5 +659,8 @@
         "reciveComment-Comment": " Ελήφθη σχόλιο στο σχόλιό σας",
         "reciveLike": "Σας έβαλαν like. Η βαθμολόγηση αυξήθηκε",
         "reciveReferralPay": "Ο προσκεκλημένος σας έφτασε στο 3ο επίπεδο."
-    }
+    },
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
+	}
 } 

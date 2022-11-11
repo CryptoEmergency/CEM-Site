@@ -8,9 +8,10 @@ import {
 } from '@betarost/cemjs';
 
 import svg from '@assets/svg/index.js';
-import { If, Map } from '@component/helpers/All.js';
 
 import { allValidation } from '@src/functions.js';
+
+import { api } from '@src/apiFunctions.js'
 
 
 
@@ -128,14 +129,15 @@ BlockUserSettingsPage.security = function (data) {
                         <h3>{Variable.lang.h.changePassword}</h3>
                         <div class="container-input">
                             <label>{Variable.lang.label.oldPassword}</label>
-                            <If
-                                data={securityInputs.oldPass.error}
-                                dataIf={
-                                    <div class="error-div">
-                                        <div class="error-div-variant">{securityInputs.oldPass.errorText}</div>
-                                    </div>
+                            {()=>{
+                                if(securityInputs.oldPass.error){
+                                    return(
+                                        <div class="error-div">
+                                            <div class="error-div-variant">{securityInputs.oldPass.errorText}</div>
+                                        </div>
+                                    )
                                 }
-                            />
+                            }}
                             <div class="input-div">
                                 <img src={svg["lock"]} class="icon-input" />
                                 <input
@@ -158,15 +160,16 @@ BlockUserSettingsPage.security = function (data) {
                         </div>
 
                         <div class="container-input">
-                            <label>{Variable.lang.label.oldPassword}</label>
-                            <If
-                                data={securityInputs.newPass.error}
-                                dataIf={
-                                    <div class="error-div">
-                                        <div class="error-div-variant">{securityInputs.newPass.errorText}</div>
-                                    </div>
+                            <label>{Variable.lang.label.newPassword}</label>
+                            {()=>{
+                                if(securityInputs.newPass.error){
+                                    return(
+                                        <div class="error-div">
+                                            <div class="error-div-variant">{securityInputs.newPass.errorText}</div>
+                                        </div>
+                                    )
                                 }
-                            />
+                            }}
                             <div class="input-div">
                                 <img src={svg["lock"]} class="icon-input" />
                                 <input
@@ -193,7 +196,7 @@ BlockUserSettingsPage.security = function (data) {
                             type="button"
                             onClick={changePasswordForm}>
                             <span class="c-button__text">
-                                {Variable.lang.button.login}
+                                {Variable.lang.button.apply}
                             </span>
                         </button>
 
@@ -201,39 +204,55 @@ BlockUserSettingsPage.security = function (data) {
                 </form>
 
             </div>
-            {/* <div class="setting_body_item_chapter">
+            <div class="setting_body_item_chapter">
                 <p>{Variable.lang.text.youCanDeletePage}</p>
-
                 <form class="settings_form" id="deleteUser">
-                    <If
-                        data={Variable.myInfo.status.delete == true}
-                        dataIf={
-                            <div>
-                                <p>
-                                    {Variable.lang.text.deletePageDate} {dateDelete(Variable.myInfo.startDelete)}
-                                </p>
+                    {()=>{
+                        if(Variable.myInfo.status.delete == true){
+                            return(
+                                <div>
+                                    <p>
+                                        {Variable.lang.text.deletePageDate} {dateDelete(Variable.myInfo.startDelete)}
+                                    </p>
+                                    <div class="button-container-preview">
+                                        <a data-deletedcan="true" class="btn-news-preview" onclick={async()=>{
+                                        let data = {
+                                            value: {
+                                                'status.delete': false,
+                                                startDelete: ''
+                                          }
+                                        }
+                                        await api({ type: "set", action: "setUsers", short: true, data })
+                                    }}>
+                                            <span>
+                                                {Variable.lang.text.restorePage}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            )
+                        } else {
+                            return(
                                 <div class="button-container-preview">
-                                    <a data-deletedcan="true" class="btn-news-preview" onclick={restoreUser}>
+                                    <a class="btn-news-preview" onclick={async()=>{
+                                        let data = {
+                                            value: {
+                                                'status.delete': true,
+                                                startDelete: new Date().toISOString()
+                                          }
+                                        }
+                                        await api({ type: "set", action: "setUsers", short: true, data })
+                                    }}>
                                         <span>
-                                            {Variable.lang.text.restorePage}
+                                            {Variable.lang.text.deletePage}
                                         </span>
                                     </a>
                                 </div>
-                            </div>
+                            )
                         }
-                        dataElse={
-                            <div class="button-container-preview">
-                                <a class="btn-news-preview" onclick={deleteUser}>
-                                    <span>
-                                        {Variable.lang.text.deletePage}
-                                    </span>
-                                </a>
-                            </div>
-                        }
-                    />
+                    }}
                 </form>
-
-            </div> */}
+            </div> 
         </div>
     )
 };

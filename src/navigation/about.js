@@ -9,6 +9,8 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function (data, ID) {
+  // let [Static] = fn.GetParams({ data, ID })
+  // console.log('=3c3e95=', Static)
   init(
     null,
     () => {
@@ -17,7 +19,7 @@ const start = function (data, ID) {
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
               <h2 class="c-whowe__title"
-               >
+              >
                 {Variable.lang.h.who_are_we}
               </h2>
               <img

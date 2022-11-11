@@ -659,5 +659,8 @@
         "reciveComment-Comment": "Одержано коментар на ваш коментар",
         "reciveLike": "Вам поставили лайк. Рейтинг збільшено", 
         "reciveReferralPay": "Ваш реферал досяг 3 рівня."
-    }
+    },
+	"itemsMenu": {
+		"SelectBestQuestion": "Выбрать лучший ответ"
+	}
 } 

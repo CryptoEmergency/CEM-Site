@@ -14,7 +14,9 @@ import { clickHide } from '@src/functions.js'
 import listsLang from '@src/lists/languages.json'
 import phoneCodes from '@src/lists/phoneCodes.json'
 import allCountries from '@src/lists/allCountries.json'
+import list from "@src/modalsList.js";
 import { test } from '@src/test.js'
+Variable.listModals = list
 Variable.languages = languages
 Variable.allCountries = allCountries
 Variable.listsLang = listsLang

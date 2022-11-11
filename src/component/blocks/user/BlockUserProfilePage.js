@@ -178,7 +178,7 @@ BlockUserProfilePage.aboutUser = function (data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    console.log('=7e4dce=', "gggg")
+                                                                    Variable.SetModals({ name: "ModalUserInterests", data: {} })
 
                                                                 }
                                                             },

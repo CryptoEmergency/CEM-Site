@@ -10,9 +10,9 @@ import {
 import { api } from '@src/apiFunctions.js'
 import { BlockUsers } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
-
+import { fn } from '@src/functions/index.js';
 const start = function (data, ID) {
-    let Static = {}
+    const [Static] = fn.GetParams({ data, ID })
     init(
         async () => {
             Static.filters = {
