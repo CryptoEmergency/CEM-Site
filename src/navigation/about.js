@@ -3,30 +3,22 @@ import {
   jsxFrag,
   init,
   Variable,
-  initReload,
 } from "@betarost/cemjs";
 // check
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { fn } from '@src/functions/index.js';
+
 const start = function (data, ID) {
-  const [Static] = fn.GetParams({ data, ID })
-  console.log('=3c3e95=', Static)
-  Static.test = "fdfdf"
+  // let [Static] = fn.GetParams({ data, ID })
+  // console.log('=3c3e95=', Static)
   init(
-    () => {
-      Static.test2 = "555"
-    },
+    null,
     () => {
       return (
         <div class="c-aboutus about_us_container c-main__body" id="test2">
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
               <h2 class="c-whowe__title"
-                onclick={() => {
-                  console.log('=7ee8b6=', Static)
-                  initReload()
-                }}
               >
                 {Variable.lang.h.who_are_we}
               </h2>
@@ -34,12 +26,7 @@ const start = function (data, ID) {
                 class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}
               />
-              <p
-                onclick={() => {
-                  Static.test2++
-
-                }}
-              >{Variable.lang.p.aboutPreview}</p>
+              <p>{Variable.lang.p.aboutPreview}</p>
             </div>
             <div class="c-whowe__bg"></div>
           </div>
