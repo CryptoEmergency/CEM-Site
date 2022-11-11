@@ -19,7 +19,7 @@
     overflow: hidden;
 
     @media (max-width: 750px) {
-        padding-top: 30px;
+        padding-top: 10px;
         padding-bottom: 0;
     }
 }
@@ -568,9 +568,9 @@
     flex-wrap: wrap;
 
     @media (max-width: 1199px) {
-        // flex-wrap: nowrap;
-        // overflow-x: auto;
-        // white-space: nowrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }
 
