@@ -17,12 +17,7 @@ const start = function (data, ID) {
     () => {
       return (
         <div class="blog_page_container c-main__body">
-          <BlockNews
-            Static={Static}
-            nameRecords="PageBlog"
-            type="blog"
-
-          />
+          <BlockNews Static={Static} />
         </div>
       )
     }, ID

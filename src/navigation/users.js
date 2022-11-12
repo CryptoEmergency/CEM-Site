@@ -13,7 +13,7 @@ const start = function (data, ID) {
     if (data) { Static.openModals = true }
     init(
         async () => {
-            Static.filters = fn.initData.generate(["lang", "country", "group", "online"])
+            // Static.filters = fn.initData.generate(["lang", "country", "group", "online"])
             Static.filters.type = "all"
         },
         () => {

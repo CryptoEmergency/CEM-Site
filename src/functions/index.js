@@ -1,4 +1,4 @@
-import { Variable } from "@betarost/cemjs";
+import { Variable, parsingUrl, initPage, Helpers } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
@@ -76,6 +76,66 @@ fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
 
 
   return [this.Static[ID]]
+}
+
+
+fn.sliceString = function (str, number = 66) {
+  let sliceStr = '';
+  if (str.length >= number) {
+    sliceStr = `${str.slice(0, number)} ...`;
+  } else {
+    sliceStr = str;
+  }
+  return sliceStr;
+};
+
+fn.getDateFormat = function (data, type) {
+  Helpers.moment.locale(Variable.lang.code);
+  data = data.replace(' ', 'T')
+  switch (type) {
+    case "now":
+      let secondsBefor = Math.round(
+        (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000
+      );
+      if (secondsBefor < 86400) {
+        return Helpers.moment(data).fromNow();
+      } else {
+        return Helpers.moment(data).format("DD MMMM YYYY");
+      };
+    case "time":
+      return Helpers.moment(data).format('YYYY-MM-DD hh:mm')
+    default:
+      return Helpers.moment(data).format("YYYY-MM-DD");
+  }
+};
+
+fn.siteLink = function (e) {
+  let link
+  if (typeof e == "string") {
+    link = e
+  } else {
+    e.preventDefault();
+    if (!e.currentTarget || !e.currentTarget.href) {
+      console.error("Not have href")
+      return
+    }
+    link = e.currentTarget.href;
+  }
+  history.pushState(null, null, link);
+  parsingUrl()
+  return
+}
+
+fn.siteLinkModal = async function (e, data) {
+  e.preventDefault();
+  if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
+    console.error("Not have href")
+    return
+  }
+  let link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
+  let dataUrl = parsingUrl(link)
+  await initPage(dataUrl, data);
+  return
 }
 
 export { fn }

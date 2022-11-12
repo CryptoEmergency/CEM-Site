@@ -1,132 +1,106 @@
 import {
   jsx,
   jsxFrag,
-  Helpers,
   Variable,
-  initReload,
   initOne
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { api } from '@src/apiFunctions.js'
-import { NotFound, ButtonShowMore } from "@component/element/index.js";
+import { NotFound, ButtonShowMore, LazyImage } from "@component/element/index.js";
 
-const BlockNews = async function ({ nameRecords, type, Static }) {
+
+const Tags = function ({ Static, classActive, text, type }) {
+  return (
+    <div class={["tag_button", classActive]}
+      onclick={async () => {
+        if (Static.activeCategory == type) {
+          return;
+        }
+        Static.activeCategory = type;
+        Static.apiFilter = makeFilter(Static)
+        await fn.restApi.getNews({ short: true, name: Static.nameRecords, filter: Static.apiFilter })
+      }}>
+      <span>{text}</span>
+    </div>
+  )
+}
+
+const makeFilter = function (Static) {
+  let objReturn = { type: Static.type }
+  if (Static.type == "media") {
+    objReturn["languages.code"] = Static.activeCategory
+  } else {
+    if (Static.activeCategory != "All") {
+      objReturn["category.name"] = Static.activeCategory
+    }
+  }
+  return objReturn
+}
+
+const BlockNews = async function ({ Static }) {
   await initOne(
     async () => {
-      Static.apiFilter = {
-        type: Static.type
-      }
-      if (Static.type == "media") {
-        Static.apiFilter["languages.code"] = Static.activeCategory
-      } else {
+      Static.apiFilter = makeFilter(Static)
+      if (Static.type != "media") {
         await fn.restApi.getCategories({ short: true, cache: true, name: Static.nameRecords + "Category", filter: Static.apiFilter })
-        await api({ type: "get", action: "getCategories", short: true, cache: true, name: nameRecords + "Category", filter })
       }
-      await api({ type: "get", action: "getNews", short: true, cache: true, name: nameRecords, filter })
+      await fn.restApi.getNews({ short: true, cache: true, name: Static.nameRecords, filter: Static.apiFilter })
     }
   )
   return (
     <div class="blog_page">
       <div class="blog_filter">
-        {
-          () => {
-            if (Variable.dataUrl && Variable.dataUrl.adress == "news") {
-              return (
-                <h2>{Variable.lang.h.news}</h2>
-              )
-            } else if (Variable.dataUrl && Variable.dataUrl.adress == "blog") {
-              return (
-                <h2>{Variable.lang.h.blog}</h2>
-              )
-            }
-          }
-        }
-        {/* <div class="profit_calculator_inputs_container">
-          <input type="text" id="datepicker"></p>
-        </div>
-        <input data-keyup="newsSearchEnter" data-type="blog" class="news_search_input" type="text" />
-        <div data-action="searchNewsInputSummon" class="news_search_button">
-          <img src={svg.search_button} />
-        </div> */}
+        {!Static.openModals ? <h2>{Variable.lang.h[Static.type]}</h2> : null}
       </div>
       {
         () => {
-          if (type == "media") {
+          if (Static.type == "media") {
+            let arrReturn = [
+              <Tags
+                Static={Static}
+                text={Variable.languages.en.lang_orig}
+                classActive={Static.activeCategory == "en" ? "tag_button_active" : ""}
+                type="en"
+              />
+            ]
+            if (Variable.lang.code !== "en") {
+              arrReturn.push(
+                <Tags
+                  Static={Static}
+                  text={Variable.lang.lang_orig}
+                  classActive={Static.activeCategory != "en" ? "tag_button_active" : ""}
+                  type={Variable.lang.code}
+                />
+              )
+            }
             return (
               <div class="tags">
-                <div
-                  class={[
-                    "tag_button",
-                    Static.lang == "en" ? "tag_button_active" : "",
-                  ]}
-                  onclick={async (e) => {
-                    if (Static.lang == "en") {
-                      return;
-                    }
-                    Static.lang = "en";
-                    await api({ type: "get", action: "getNews", short: true, name: nameRecords, filter: { type, "languages.code": Static.lang } })
-                  }}
-                >
-                  <span>{Variable.languages.en.lang_orig}</span>
-                </div>
-                {
-                  () => {
-                    if (Variable.lang.code !== "en") {
-                      return (
-                        <div
-                          class={[
-                            "tag_button",
-                            Static.lang != "en" ? "tag_button_active" : "",
-                          ]}
-                          onclick={async (e) => {
-                            if (Static.lang != "en") {
-                              return;
-                            }
-                            Static.lang = Variable.lang.code;
-                            await api({ type: "get", action: "getNews", short: true, name: nameRecords, filter: { type, "languages.code": Static.lang } })
-                          }}
-                        >
-                          <span>{Variable.lang.lang_orig}</span>
-                        </div>
-                      )
-                    }
-                  }
-                }
+                {arrReturn}
               </div>
             )
           } else {
             return (
               <div class="tags">
-                <div
-                  class={['tag_button', Static.activeCategory == "All" ? 'tag_button_active' : null]}
-                  onclick={async () => {
-                    if (Static.activeCategory == "All") {
-                      return
-                    }
-                    Static.activeCategory = "All"
-                    await api({ type: "get", action: "getNews", short: true, name: nameRecords, filter: { type } })
-                  }}
-                >
-                  <span>{Variable.lang.categoryName.all}</span>
-                </div>
+                <Tags
+                  Static={Static}
+                  text={Variable.lang.categoryName.all}
+                  classActive={Static.activeCategory == "All" ? "tag_button_active" : ""}
+                  type="All"
+                />
                 {() => {
-                  return Variable[nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
-                    return (
-                      <div
-                        class={['tag_button', Static.activeCategory == item.name ? 'tag_button_active' : null]}
-                        onclick={async () => {
-                          if (Static.activeCategory == item.name) {
-                            return
-                          }
-                          Static.activeCategory = item.name
-                          await api({ type: "get", action: "getNews", short: true, name: nameRecords, filter: { type, "category.name": Static.activeCategory } })
-                        }}
-                      >
-                        <span>{Variable.lang.categoryName[item.name]}</span>
-                      </div>
-                    )
-                  })
+                  if (Variable[Static.nameRecords + "Category"]) {
+                    let arrReturn = Variable[Static.nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
+                      return (
+                        <Tags
+                          Static={Static}
+                          text={Variable.lang.categoryName[item.name]}
+                          classActive={Static.activeCategory == item.name ? "tag_button_active" : ""}
+                          type={item.name}
+                        />
+                      )
+                    })
+                    return arrReturn
+                  }
                 }}
               </div>
             )
@@ -138,21 +112,21 @@ const BlockNews = async function ({ nameRecords, type, Static }) {
           <div class="blog_news">
             {
               () => {
-                if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].list_records.length) {
-                  const arrReturn = Variable[nameRecords].list_records.map(
-                    (item, index) => {
+                if (Variable[Static.nameRecords] && Variable[Static.nameRecords].list_records.length) {
+                  const arrReturn = Variable[Static.nameRecords].list_records.map(
+                    (item) => {
                       return (
                         <a
                           class="blog_news_item"
-                          href={`/${type}/show/${item._id}`}
-                          onclick={(e) => { Helpers.siteLinkModal(e, { title: Helpers.sliceString(item.title, 85), item }) }} >
+                          href={`/${Static.type}/show/${item._id}`}
+                          onclick={(e) => {
+                            fn.siteLinkModal(e, { title: fn.sliceString(item.title, 85), item })
+                          }} >
+                          {/* <LazyImage path={"/assets/upload/news/" + item.image} /> */}
                           <img src={"/assets/upload/news/" + item.image} />
-                          <p class="blog_new_title">{Helpers.sliceString(item.title, 85)}</p>
-                          <span class="blog_new_text">{Helpers.sliceString(item.preview, 170)}</span>
-                          <div
-                            style="display: flex!important;"
-                            class="blog_post_stat"
-                          >
+                          <p class="blog_new_title">{fn.sliceString(item.title, 85)}</p>
+                          <span class="blog_new_text">{fn.sliceString(item.preview, 170)}</span>
+                          <div style="display: flex!important;" class="blog_post_stat" >
                             <span>
                               <img src={svg["question_views"]} />
                               {item.statistic.view}
@@ -161,7 +135,7 @@ const BlockNews = async function ({ nameRecords, type, Static }) {
                               <img src={svg["question_answers"]} />
                               {item.statistic.comments}
                             </span>
-                            <span>{Helpers.getDateFormat(item.showDate)}</span>
+                            <span>{fn.getDateFormat(item.showDate)}</span>
                           </div>
                         </a>
                       );
@@ -169,43 +143,16 @@ const BlockNews = async function ({ nameRecords, type, Static }) {
                   )
                   return arrReturn
                 } else {
-                  return (
-                    <NotFound />
-                  )
+                  return (<NotFound />)
                 }
               }
             }
           </div>
-          {
-            () => {
-              if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
-                if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
-                  return (
-                    <ButtonShowMore
-                      onclick={async () => {
-                        let filter = { type: type }
-                        if (type == "media") {
-                          filter["languages.code"] = Static.lang
-                        } else {
-                          if (Static.activeCategory != "All") {
-                            filter["category.name"] = Static.activeCategory
-                          }
-                        }
-                        let tmp = await api({ type: "get", action: "getNews", short: true, filter: filter, offset: Variable[nameRecords].list_records.length })
-                        if (tmp && tmp.list_records) {
-                          Variable[nameRecords].list_records.push(...tmp.list_records)
-                        }
-                        initReload()
-                      }}
-                    />
-                  )
-                }
-              }
-            }
-          }
+          <ButtonShowMore Static={Static} action="getNews" />
         </div>
       </div>
     </div>
   );
 };
 export { BlockNews };
+// OK

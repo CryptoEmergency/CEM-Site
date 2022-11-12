@@ -1,4 +1,4 @@
-import { Variable, } from "@betarost/cemjs";
+import { Variable, Helpers } from "@betarost/cemjs";
 
 const initData = {}
 
@@ -40,8 +40,31 @@ const input = {
     placeholder: "",
 }
 
+const typeCollections = {
+    input: {
+        value: "",
+        type: "text",
+        valid: false,
+        autocomplete: "off",
+        placeholder: "",
+    },
+    textArea: {
+        value: "",
+        type: "text",
+        valid: false,
+        autocomplete: "off",
+        placeholder: ""
+    }
+}
 
-
+const generate = function (type, error) {
+    let objReturn = typeCollections[type]
+    if (error) {
+        objReturn.error = false
+        objReturn.errorText = ""
+    }
+    return objReturn
+}
 
 initData.ModalUserInfoEdit = function (Static, userInfo, action) {
     Static.isValid = false
@@ -66,6 +89,28 @@ initData.ModalUserInfoEdit = function (Static, userInfo, action) {
     Static.birthday.value = userInfo.information.birthday
     Static.birthday.placeholder = Variable.lang.label.birthDate
     Static.birthday.type = "date"
+
+
+    return
+}
+
+initData.contacts = function (Static) {
+    Static.isValid = false
+    Static.submitClick = false
+    Static.messageSent = false
+
+    Static.name = generate("input", true)
+    Static.name.placeholder = Variable.lang.placeholder.name
+    Static.name.errorText = Variable.lang.error_div.nicknameErr
+    Static.name.label = Variable.lang.label.name
+    Static.name.label = Variable.lang.label.name
+    Static.name.condition = (value) => {
+        return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+    }
+    Static.name.afterValid = () => {
+        Helpers.checkValid(Static, ["name", "email", "message"])
+    }
+
 
 
     return

@@ -11,7 +11,7 @@ const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   init(
     async () => {
-      Static.lang = Variable.lang.code
+      // Static.lang = Variable.lang.code
       Static.activeCategory = Variable.lang.code
       Static.type = "media"
       Static.nameRecords = "PageMedia"

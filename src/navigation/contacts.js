@@ -6,7 +6,7 @@ import {
   initReload,
   Helpers
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { Input, TextArea, ButtonSubmit } from '@component/element/index.js';
@@ -29,29 +29,31 @@ const sendMessage = async (Static) => {
 };
 
 const start = function (data, ID) {
-  let Static = {}
+  let [Static] = fn.GetParams({ data, ID })
   init(
     () => {
-      Static = {
-        isValid: false,
-        submitClick: false,
-        messageSent: false
-      }
+      fn.initData.contacts(Static)
 
-      Static.name = {
-        value: "",
-        valid: false,
-        error: false,
-        label: Variable.lang.label.name,
-        placeholder: Variable.lang.placeholder.name,
-        errorText: Variable.lang.error_div.nicknameErr,
-        condition: (value) => {
-          return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-        },
-        afterValid: () => {
-          Helpers.checkValid(Static, ["name", "email", "message"])
-        }
-      }
+      // Static = {
+      //   isValid: false,
+      //   submitClick: false,
+      //   messageSent: false
+      // }
+
+      // Static.name = {
+      //   value: "",
+      //   valid: false,
+      //   error: false,
+      //   label: Variable.lang.label.name,
+      //   placeholder: Variable.lang.placeholder.name,
+      //   errorText: Variable.lang.error_div.nicknameErr,
+      //   condition: (value) => {
+      //     return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+      //   },
+      //   afterValid: () => {
+      //     Helpers.checkValid(Static, ["name", "email", "message"])
+      //   }
+      // }
 
       Static.email = {
         value: "",
