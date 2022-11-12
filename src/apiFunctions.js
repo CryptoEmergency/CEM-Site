@@ -226,7 +226,6 @@ restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, 
     Variable[name] = response
   }
   return response
-
 }
 
 export {

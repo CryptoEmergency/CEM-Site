@@ -6,7 +6,7 @@ import {
   initReload,
   initOne
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { NotFound, ButtonShowMore } from "@component/element/index.js";
@@ -14,10 +14,13 @@ import { NotFound, ButtonShowMore } from "@component/element/index.js";
 const BlockNews = async function ({ nameRecords, type, Static }) {
   await initOne(
     async () => {
-      let filter = { type }
-      if (type == "media") {
-        filter["languages.code"] = Static.lang
+      Static.apiFilter = {
+        type: Static.type
+      }
+      if (Static.type == "media") {
+        Static.apiFilter["languages.code"] = Static.activeCategory
       } else {
+        await fn.restApi.getCategories({ short: true, cache: true, name: Static.nameRecords + "Category", filter: Static.apiFilter })
         await api({ type: "get", action: "getCategories", short: true, cache: true, name: nameRecords + "Category", filter })
       }
       await api({ type: "get", action: "getNews", short: true, cache: true, name: nameRecords, filter })
@@ -26,19 +29,19 @@ const BlockNews = async function ({ nameRecords, type, Static }) {
   return (
     <div class="blog_page">
       <div class="blog_filter">
-      {
-        () => {
-          if (Variable.dataUrl && Variable.dataUrl.adress == "news") {
-            return (
-              <h2>{Variable.lang.h.news}</h2>
-            )
-          } else if (Variable.dataUrl && Variable.dataUrl.adress == "blog") {
-            return (
-              <h2>{Variable.lang.h.blog}</h2>
-            )
+        {
+          () => {
+            if (Variable.dataUrl && Variable.dataUrl.adress == "news") {
+              return (
+                <h2>{Variable.lang.h.news}</h2>
+              )
+            } else if (Variable.dataUrl && Variable.dataUrl.adress == "blog") {
+              return (
+                <h2>{Variable.lang.h.blog}</h2>
+              )
+            }
           }
         }
-      }
         {/* <div class="profit_calculator_inputs_container">
           <input type="text" id="datepicker"></p>
         </div>

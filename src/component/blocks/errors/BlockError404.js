@@ -4,7 +4,7 @@ import {
     Variable,
     Helpers
 } from '@betarost/cemjs';
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
 const BlockError404 = function () {

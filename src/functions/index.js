@@ -1,11 +1,14 @@
 import { Variable } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
+import { apiData } from "./apiData.js"
+import { restApi } from "./restApi.js"
 
 const fn = {}
 fn.modals = modals
 fn.initData = initData
-
+fn.apiData = apiData
+fn.restApi = restApi
 
 fn.test = function () {
   console.log('=f83cf3 FN=', this)

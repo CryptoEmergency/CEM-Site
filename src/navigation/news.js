@@ -3,14 +3,16 @@ import {
   jsxFrag,
   init,
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import { BlockNews } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
-  let Static = {}
+  let [Static] = fn.GetParams({ data, ID })
   init(
     async () => {
       Static.activeCategory = "All"
+      Static.type = "news"
+      Static.nameRecords = "PageNews"
     },
     () => {
       return (
@@ -26,3 +28,4 @@ const start = function (data, ID) {
   );
 };
 export default start;
+// OK
