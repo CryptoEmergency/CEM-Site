@@ -5,7 +5,6 @@ import {
   initReload,
   initOne
 } from "@betarost/cemjs";
-// check
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
@@ -209,3 +208,4 @@ const BlockAffiliateBanners = function () {
   );
 };
 export { BlockAffiliateBanners };
+// OK

@@ -69,7 +69,7 @@ fn.Static = {}
 fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
   if (actual) { return [this.Static[ID]] }
   if (!reload || !this.Static[ID]) { this.Static[ID] = {}; }
-
+  if (data) { this.Static[ID].openModals = true }
 
 
   return [this.Static[ID]]
