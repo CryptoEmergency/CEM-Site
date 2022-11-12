@@ -8,7 +8,7 @@ for (let name in list) {
         Variable.SetModals({ name, data }, add);
     }
 }
-console.log('=30defa=', modals)
+
 
 // const modals = function () {
 //     console.log('=9e6811=', "ggg")

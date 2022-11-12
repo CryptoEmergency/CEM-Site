@@ -21,7 +21,6 @@ const mainModal = async function () {
         },
 
         async function (reload) {
-            console.log('=aec948=', getInitList(), reload)
 
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
@@ -32,7 +31,6 @@ const mainModal = async function () {
             }
 
             let ID = "Modal-" + (Variable.Modals.length - 1)
-            console.log('=aec948=', getInitList()[ID], ID)
             if (!reload && getInitList()[ID].firstStart) {
                 await getInitList()[ID].firstStart(reload)
             }

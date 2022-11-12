@@ -1,9 +1,10 @@
 import { Variable } from "@betarost/cemjs";
 import { modals } from "./modals.js"
+import { initData } from "./initData.js"
 
 const fn = {}
 fn.modals = modals
-
+fn.initData = initData
 
 
 fn.test = function () {
@@ -66,12 +67,12 @@ fn.CreateMenuItems = function (data) {
 fn.Static = {}
 
 fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
-  if (actual) { return this.Static[ID] }
+  if (actual) { return [this.Static[ID]] }
   if (!reload || !this.Static[ID]) { this.Static[ID] = {}; }
 
 
 
-  return this.Static[ID]
+  return [this.Static[ID]]
 }
 
 export { fn }
