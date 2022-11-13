@@ -121,17 +121,17 @@ BlockUserSettingsPage.security = function (data) {
 
     return (
         <div class="settings_body_item">
-            <div class="setting_body_item_chapter">
+            <div class="settings_body_item_chapter">
                 <p>{Variable.lang.label.password}</p>
                 <form class="settings_form" onsubmit={changePasswordForm}>
                     <input style="display: none;" type="submit" />
-                    <div class="">
+                    <div class="settings_changepass">
                         <h3>{Variable.lang.h.changePassword}</h3>
                         <div class="container-input">
                             <label>{Variable.lang.label.oldPassword}</label>
-                            {()=>{
-                                if(securityInputs.oldPass.error){
-                                    return(
+                            {() => {
+                                if (securityInputs.oldPass.error) {
+                                    return (
                                         <div class="error-div">
                                             <div class="error-div-variant">{securityInputs.oldPass.errorText}</div>
                                         </div>
@@ -161,9 +161,9 @@ BlockUserSettingsPage.security = function (data) {
 
                         <div class="container-input">
                             <label>{Variable.lang.label.newPassword}</label>
-                            {()=>{
-                                if(securityInputs.newPass.error){
-                                    return(
+                            {() => {
+                                if (securityInputs.newPass.error) {
+                                    return (
                                         <div class="error-div">
                                             <div class="error-div-variant">{securityInputs.newPass.errorText}</div>
                                         </div>
@@ -192,7 +192,11 @@ BlockUserSettingsPage.security = function (data) {
                         </div>
 
                         <button
-                            class={`c-button c-button--gradient2 ${!securityInputs.isValid && "c-button--inactive"}`}
+                            class={[
+                                "c-button",
+                                "c-button--gradient2",
+                                !securityInputs.isValid ? "c-button--inactive" : "",
+                            ]}
                             type="button"
                             onClick={changePasswordForm}>
                             <span class="c-button__text">
@@ -204,55 +208,62 @@ BlockUserSettingsPage.security = function (data) {
                 </form>
 
             </div>
-            <div class="setting_body_item_chapter">
+            <div class="settings_body_item_chapter">
                 <p>{Variable.lang.text.youCanDeletePage}</p>
                 <form class="settings_form" id="deleteUser">
-                    {()=>{
-                        if(Variable.myInfo.status.delete == true){
-                            return(
-                                <div>
+                    {() => {
+                        if (Variable.myInfo.status.delete == true) {
+                            return (
+                                <div class="settings_resetdeleteuser">
                                     <p>
                                         {Variable.lang.text.deletePageDate} {dateDelete(Variable.myInfo.startDelete)}
                                     </p>
-                                    <div class="button-container-preview">
-                                        <a data-deletedcan="true" class="btn-news-preview" onclick={async()=>{
-                                        let data = {
-                                            value: {
-                                                'status.delete': false,
-                                                startDelete: ''
-                                          }
-                                        }
-                                        await api({ type: "set", action: "setUsers", short: true, data })
-                                    }}>
-                                            <span>
-                                                {Variable.lang.text.restorePage}
-                                            </span>
-                                        </a>
-                                    </div>
+                                    <button
+                                        class="c-button c-button--gradient2"
+                                        type="button"
+                                        data-deletedcan="true"
+                                        onclick={async () => {
+                                            let data = {
+                                                value: {
+                                                    'status.delete': false,
+                                                    startDelete: ''
+                                                }
+                                            }
+                                            await api({ type: "set", action: "setUsers", short: true, data })
+                                        }}
+                                    >
+                                        <span class="c-button__text">
+                                            {Variable.lang.text.restorePage}
+                                        </span>
+                                    </button>
                                 </div>
                             )
                         } else {
-                            return(
-                                <div class="button-container-preview">
-                                    <a class="btn-news-preview" onclick={async()=>{
-                                        let data = {
-                                            value: {
-                                                'status.delete': true,
-                                                startDelete: new Date().toISOString()
-                                          }
-                                        }
-                                        await api({ type: "set", action: "setUsers", short: true, data })
-                                    }}>
-                                        <span>
+                            return (
+                                <div class="settings_deleteuser">
+                                    <button
+                                        class="c-button c-button--gradient2"
+                                        type="button"
+                                        onclick={async () => {
+                                            let data = {
+                                                value: {
+                                                    'status.delete': true,
+                                                    startDelete: new Date().toISOString()
+                                                }
+                                            }
+                                            await api({ type: "set", action: "setUsers", short: true, data })
+                                        }}
+                                    >
+                                        <span class="c-button__text">
                                             {Variable.lang.text.deletePage}
                                         </span>
-                                    </a>
+                                    </button>
                                 </div>
                             )
                         }
                     }}
                 </form>
-            </div> 
+            </div>
         </div>
     )
 };
