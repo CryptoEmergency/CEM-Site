@@ -126,6 +126,7 @@ initData.contacts = function (Static) {
 
     tmpName = "message"
     Static[tmpName] = generate("input", true)
+    // Static[tmpName].value = "gdggd"
     Static[tmpName].placeholder = Variable.lang.placeholder.message
     Static[tmpName].errorText = Variable.lang.error_div.not_empty_input
     Static[tmpName].label = Variable.lang.label.message

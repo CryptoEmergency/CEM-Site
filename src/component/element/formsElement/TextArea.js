@@ -2,7 +2,7 @@ import {
     jsx,
     jsxFrag,
 } from "@betarost/cemjs";
-//check
+
 const textConstuctor = function (Static, className, classDiv) {
     if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined")) {
         return (
@@ -32,7 +32,7 @@ const textElem = function (Static, className) {
             placeholder = Static.placeholder
         }
         if (Static.value) {
-             text = Static.value
+            text = Static.value
         }
     }
     return (
@@ -40,6 +40,7 @@ const textElem = function (Static, className) {
             class={className}
             placeholder={placeholder}
             // wrap="soft"
+            value={Static.value}
             rows={rows}
             Element={($el) => {
                 if (Static) {
@@ -74,9 +75,8 @@ const textElem = function (Static, className) {
                 if (Static.afterValid) {
                     Static.afterValid();
                 }
-            }}
-        >
-            {text}
+            }}>
+            {/* {text} */}
         </textarea>
     )
 }
@@ -85,3 +85,4 @@ const TextArea = function ({ Static, className, classDiv }) {
     return (textConstuctor(Static, className, classDiv))
 };
 export { TextArea };
+// OK

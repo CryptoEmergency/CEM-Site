@@ -1,9 +1,7 @@
 import {
     jsx,
-    jsxFrag,
-    initReload
+    jsxFrag
 } from "@betarost/cemjs";
-// check
 import svg from '@assets/svg/index.js';
 
 const textConstuctor = function (Static, classDiv, className, before, after, callback) {
@@ -36,7 +34,6 @@ const textConstuctor = function (Static, classDiv, className, before, after, cal
     }
 }
 const textElem = function (Static, className, callback) {
-
     let rows = null
     let adaptive = null
     let placeholder = null
@@ -79,16 +76,11 @@ const textElem = function (Static, className, callback) {
                     callback()
                 }
             }}
-
             onclick={() => {
                 if (typeof Static.onclick == "function") {
                     Static.onclick()
                 }
-
             }}
-
-
-
         />
     )
 }
@@ -121,7 +113,7 @@ const checkInput = function (Static, target) {
 }
 
 const Input = function ({ Static, classDiv, className, before, after, callback }) {
-    // console.log('=3c3e95= Input', Static)
     return (textConstuctor(Static, classDiv, className, before, after, callback))
 };
 export { Input };
+// OK
