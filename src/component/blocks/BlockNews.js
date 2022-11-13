@@ -18,7 +18,7 @@ const Tags = function ({ Static, classActive, text, type }) {
         }
         Static.activeCategory = type;
         Static.apiFilter = makeFilter(Static)
-        await fn.restApi.getNews({ short: true, name: Static.nameRecords, filter: Static.apiFilter })
+        await fn.restApi.getNews({ name: Static.nameRecords, filter: Static.apiFilter })
       }}>
       <span>{text}</span>
     </div>
@@ -42,9 +42,9 @@ const BlockNews = async function ({ Static }) {
     async () => {
       Static.apiFilter = makeFilter(Static)
       if (Static.type != "media") {
-        await fn.restApi.getCategories({ short: true, cache: true, name: Static.nameRecords + "Category", filter: Static.apiFilter })
+        await fn.restApi.getCategories({ cache: true, name: Static.nameRecords + "Category", filter: Static.apiFilter })
       }
-      await fn.restApi.getNews({ short: true, cache: true, name: Static.nameRecords, filter: Static.apiFilter })
+      await fn.restApi.getNews({ cache: true, name: Static.nameRecords, filter: Static.apiFilter })
     }
   )
   return (

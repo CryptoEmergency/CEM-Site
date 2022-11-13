@@ -1,5 +1,5 @@
 import { Variable, Helpers } from "@betarost/cemjs";
-
+import { modals } from "./modals.js"
 const initData = {}
 
 
@@ -7,6 +7,15 @@ const filters = {
     lang: {
         code: "",
         name: "all"
+    },
+    language: {
+        value: "",
+        type: "text",
+        valid: false,
+        code: "",
+        name: "all",
+        autocomplete: "off",
+        readonly: true
     },
     country: {
         code: "",
@@ -18,6 +27,22 @@ const filters = {
         expert: true
     },
     online: false
+}
+
+const lang = {
+    code: "",
+    name: "all"
+}
+
+const country = {
+    code: "",
+    name: "all"
+}
+
+const group = {
+    common: true,
+    content: true,
+    expert: true
 }
 
 const textArea = {
@@ -154,6 +179,39 @@ initData.contacts = function (Static) {
 
     return
 }
+
+initData.content_creator = function (Static) {
+    Static.filters = {
+        language: Object.create(filters.language),
+        country: Object.create(country),
+        group: false,
+        online: false
+    }
+
+    Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
+    // Static.language.value = Variable.lang.error_div.selectFromList
+
+    Static.search = generate("input")
+    Static.search.placeholder = Variable.lang.placeholder.findFriends
+
+    return
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 initData.generate = function (arrData) {
     console.log('=f1839b=', arrData)

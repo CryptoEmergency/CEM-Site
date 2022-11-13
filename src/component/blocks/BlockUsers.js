@@ -6,39 +6,89 @@ import {
     initReload,
     Helpers,
 } from '@betarost/cemjs';
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
 import { Input, NotFound } from '@component/element/index.js';
 let elFilters
-let Static = {}
+// let Static = {}
 
+const makeFilter = function (Static) {
+    let objReturn = {}
 
-const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 21 }) {
-
-    const change = async function (arg) {
-        let value = arg
-        let filter = Helpers.getFilterUsers(filters, type);
-        filter.search = value
-        let response = await api({ type: "get", action: "getUsers", short: true, filter: filter })
-        Variable[nameRecords] = response
-
+    if (Static.type && Static.type != "all") {
+        if (Static.type == "experts") {
+            objReturn["rank.expert"] = true;
+        } else if (Static.type == "creator") {
+            objReturn["rank.creator"] = true;
+        }
+    } else {
+        objReturn["$or"] = [
+            {
+                "rank.basic": true,
+                "rank.expert": false,
+                "rank.creator": false,
+            },
+            {
+                "rank.basic": false,
+                "rank.expert": true,
+                "rank.creator": false,
+            },
+            {
+                "rank.basic": false,
+                "rank.expert": false,
+                "rank.creator": true,
+            },
+        ];
     }
+    if (Static.filters.group && Static.type == "all") {
+        if (Static.filters.group.common) {
+            objReturn["$or"][0]["rank.basic"] = true;
+        } else {
+            objReturn["$or"][0]["rank.basic"] = false;
+        }
+
+        if (Static.filters.group.content) {
+            objReturn["$or"][2]["rank.creator"] = true;
+        } else {
+            objReturn["$or"][2]["rank.creator"] = false;
+        }
+
+        if (Static.filters.group.expert) {
+            objReturn["$or"][1]["rank.expert"] = true;
+        } else {
+            objReturn["$or"][1]["rank.expert"] = false;
+        }
+    }
+    if (Static.filters.language && Static.filters.language.name != "all") {
+        objReturn["mainLanguage.code"] = Static.filters.language.code
+    }
+    if (Static.filters.country && Static.filters.country.name != "all") {
+        objReturn["country.code"] = Static.filters.country.code
+    }
+    if (Static.filters.online) {
+        objReturn.online = true;
+    }
+    if (Static.search.value) {
+        objReturn.search = Static.search.value;
+    }
+    return objReturn
+}
+
+const BlockUsers = async function ({ Static, title, filters, type, nameRecords, limit = 21 }) {
 
     await initOne(
         async () => {
-            Static.Frends = {
-                value: "",
-                label: "",
-                placeholder: Variable.lang.placeholder.findFriends,
-                condition: async (value) => {
-                    change(value)
-                    return true
-                },
+            Static.search.condition = async (value) => {
+                Static.apiFilter = makeFilter(Static)
+                await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                return true
             }
-            await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: limit, filter: Helpers.getFilterUsers(filters, type) })
+
+            Static.apiFilter = makeFilter(Static)
+            await fn.restApi.getUsers({ cache: true, name: Static.nameRecords, filter: Static.apiFilter })
         }
     )
 
@@ -46,26 +96,25 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
         <div class="c-friends">
             <div class="c-friends__container c-container">
                 <h2>
-                    {title ? title : Variable.lang.h.top_users}
+                    {!Static.openModals ? Static.type == "creator" ? <h2>{Variable.lang.a.contentCreater}</h2> : Static.type == "experts" ? <h2>{Variable.lang.a.experts}</h2> : <h2>{Variable.lang.h.top_users}</h2> : null}
                 </h2>
                 <div class="c-friends__block">
                     <div class="c-friends__search">
                         <div class="c-friends__filter">
-                            <Input className="c-friends__field" Static={Static.Frends} />
+                            <Input className="c-friends__field" Static={Static.search} />
                             <div
                                 class="c-friends__toggler"
                                 onClick={() => {
-                                    if (elFilters.dataset.active === "true") {
-                                        elFilters.dataset.active = false
-                                        elFilters.style = "height: 0px"
+                                    if (Static.elFilters.dataset.active === "true") {
+                                        Static.elFilters.dataset.active = false
+                                        Static.elFilters.style = "height: 0px"
                                     } else {
-                                        elFilters.dataset.active = true
-                                        elFilters.style = "";
-                                        let h = elFilters.offsetHeight;
-                                        elFilters.style = `height: ${h}px`
+                                        Static.elFilters.dataset.active = true
+                                        Static.elFilters.style = "";
+                                        let h = Static.elFilters.offsetHeight;
+                                        Static.elFilters.style = `height: ${h}px`
                                     }
-                                }}
-                            >
+                                }}>
                                 <img src={svg.filter} />
                                 <span>{Variable.lang.span.filter}</span>
                             </div>
@@ -75,25 +124,23 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                             data-active={false}
                             style={"height: 0px"}
                             Element={($el) => {
-                                elFilters = $el
-                            }}
-                        >
+                                Static.elFilters = $el
+                            }}>
                             <div class="c-friends__wrapper">
+                                {/* <Input classDiv="" Static={Static.filters.language} /> */}
                                 <div
                                     class="c-friends__lang"
                                     onclick={() => {
-                                        Variable.SetModals({
-                                            name: "ModalChangeLanguage", data: {
-                                                onclick: async (langCode, langName) => {
-                                                    filters.lang.name = langName;
-                                                    filters.lang.code = langCode;
-                                                    Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
-                                                }
+                                        fn.modals.ModalChangeLanguage({
+                                            onclick: async (langCode, langName) => {
+                                                Static.filters.language.name = langName;
+                                                Static.filters.language.code = langCode;
+                                                Static.apiFilter = makeFilter(Static)
+                                                await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
                                             }
                                         })
-                                    }}
-                                >
-                                    {filters.lang.name == "all" ? Variable.lang.text.language : filters.lang.name}
+                                    }}>
+                                    {Static.filters.language.name == "all" ? Variable.lang.text.language : Static.filters.language.name}
                                 </div>
                                 <img
                                     style="display: none;"
@@ -105,18 +152,16 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                                 <div
                                     class="c-friends__country"
                                     onclick={() => {
-                                        Variable.SetModals({
-                                            name: "ModalSelectCountry", data: {
-                                                onclick: async (countryCode, countryName) => {
-                                                    filters.country.name = countryName;
-                                                    filters.country.code = countryCode;
-                                                    Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
-                                                }
+                                        fn.modals.ModalSelectCountry({
+                                            onclick: async (countryCode, countryName) => {
+                                                Static.filters.country.name = countryName;
+                                                Static.filters.country.code = countryCode;
+                                                Static.apiFilter = makeFilter(Static)
+                                                await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
                                             }
                                         })
-                                    }}
-                                >
-                                    {filters.country.name == "all" ? Variable.lang.text.country : filters.country.name}
+                                    }}>
+                                    {Static.filters.country.name == "all" ? Variable.lang.text.country : Static.filters.country.name}
                                 </div>
                                 <img
                                     style="display: none;"
@@ -351,8 +396,8 @@ const BlockUsers = async function ({ title, filters, type, nameRecords, limit = 
                                 <ButtonShowMore
                                     onclick={async () => {
                                         let new_filter = Helpers.getFilterUsers(filters, type);
-                                        if (Static.Frends.value.length > 0) {
-                                            new_filter.search = Static.Frends.value
+                                        if (Static.search.value.length > 0) {
+                                            new_filter.search = Static.search.value
                                         }
                                         let tmp = await api({ type: "get", action: "getUsers", short: true, limit, filter: new_filter, offset: Variable[nameRecords].list_records.length })
                                         Variable[nameRecords].list_records.push(...tmp.list_records)

@@ -148,13 +148,13 @@ const start = function () {
                                     nameRecords="MainExchanges"
                                     limit={6}
                                 />
-                                <BlockUsers
+                                {/* <BlockUsers
                                     title={Variable.lang.h.top_users}
                                     filters={Static.filters}
                                     nameRecords="MainUsers"
                                     type={"all"}
                                     limit={6}
-                                />
+                                /> */}
                                 <div class="news_block_container">
                                     <div class="news_block">
                                         <div class="home_page_news">

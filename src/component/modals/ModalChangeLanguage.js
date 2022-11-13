@@ -1,11 +1,12 @@
-import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, init } from "@betarost/cemjs";
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
 //"alarm_icon" : "confirm_icon"
 
 
 let inputValue, allLang;
-let Static = {}
+// let Static = {}
 
 
 const changeInput = (e) => {
@@ -17,49 +18,57 @@ const changeInput = (e) => {
 
 
 
-const ModalChangeLanguage = function (data, reload) {
-
+const ModalChangeLanguage = function (data, ID) {
+  let Static = fn.GetParams({ data, ID })
   allLang = Variable.listsLang;
   Static.Language = {
-    value :"",
-    oninput:()=>{
+    value: "",
+    oninput: () => {
 
-    } 
+    }
   }
-  return (
-    <div class="c-modal c-modal--open" id="changeLanguage">
-      <section class="c-modal__dialog">
-        <header class="c-modal__header">
-          <h2 class="c-modal__title">{Variable.lang.h.modal_listLanguage}</h2>
-          <button
-            class="c-modal__close"
-            onclick={() => {
-              Variable.DelModals("ModalChangeLanguage");
-              initReload("modals");
-            }}
-          ></button>
-        </header>
-        <div class="c-modal__body">
-          
-          <input data-language=""
-            id="changeLanguageInput"
-            type="text"
-            oninput={changeInput}
-          />
-          <div class="changeLanguageContainer">
-            {allLang.map((item) => {
-              let str = `${item.eng_name} (${item.orig_name})`
 
-              return <div class="changeLanguageItem" onclick={() => { data.onclick(item.code, item.eng_name, item.orig_name); Variable.DelModals("ModalChangeLanguage"); }}>{str}</div>
-            })}
-          </div>
-          <div class="changeLanguageEmpty">
-            {Variable.lang.error_div.selectFromList}
-          </div>
+  init(
+    null,
+    () => {
+      return (
+        <div class="c-modal c-modal--open" id="changeLanguage">
+          <section class="c-modal__dialog">
+            <header class="c-modal__header">
+              <h2 class="c-modal__title">{Variable.lang.h.modal_listLanguage}</h2>
+              <button
+                class="c-modal__close"
+                onclick={() => {
+                  Variable.DelModals("ModalChangeLanguage");
+                  initReload("modals");
+                }}
+              ></button>
+            </header>
+            <div class="c-modal__body">
+
+              <input data-language=""
+                id="changeLanguageInput"
+                type="text"
+                oninput={changeInput}
+              />
+              <div class="changeLanguageContainer">
+                {allLang.map((item) => {
+                  let str = `${item.eng_name} (${item.orig_name})`
+
+                  return <div class="changeLanguageItem" onclick={() => { data.onclick(item.code, item.eng_name, item.orig_name); Variable.DelModals("ModalChangeLanguage"); }}>{str}</div>
+                })}
+              </div>
+              <div class="changeLanguageEmpty">
+                {Variable.lang.error_div.selectFromList}
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-    </div>
-  );
+      );
+    }, ID
+  )
+
+
 };
 
 export default ModalChangeLanguage;

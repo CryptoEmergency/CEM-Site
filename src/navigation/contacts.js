@@ -4,11 +4,9 @@ import {
   Variable,
   init,
   initReload,
-  Helpers
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { api } from '@src/apiFunctions.js'
 import { Input, TextArea, ButtonSubmit } from '@component/element/index.js';
 
 const sendMessage = async (Static) => {

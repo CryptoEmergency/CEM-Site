@@ -96,6 +96,45 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
     return checkAnswer(response, name)
 }
 
+restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 } }) {
+
+    let defaultFilter = {
+        "confirm.registrasion": true
+    }
+
+    let defaultSelect = {
+        rank: 1,
+        social: 1,
+        subscribe: 1,
+        nickname: 1,
+        fullname: 1,
+        information: 1,
+        "avatar.name": 1,
+        "frame.name": 1,
+        statistic: 1,
+        online: 1,
+        awards: 1,
+        status: 1,
+        showDate: 1,
+    }
+
+
+    let data = {
+        action: "getUsers",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    return checkAnswer(response, name)
+}
+//
 // SET
 restApi.supportMessage = async function ({ name, email, text, noAlert = false }) {
     let data = {
