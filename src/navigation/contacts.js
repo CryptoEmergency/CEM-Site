@@ -55,53 +55,54 @@ const start = function (data, ID) {
       //   }
       // }
 
-      Static.email = {
-        value: "",
-        valid: false,
-        error: false,
-        label: Variable.lang.label.email,
-        placeholder: Variable.lang.placeholder.email,
-        errorText: Variable.lang.error_div.wrong_email,
-        type: "text",
-        condition: (value) => {
-          return Helpers.validator.isEmail(value);
-        },
-        afterValid: () => {
-          Helpers.checkValid(Static, ["name", "email", "message"])
-        }
-      }
+      // Static.email = {
+      //   value: "",
+      //   valid: false,
+      //   error: false,
+      //   label: Variable.lang.label.email,
+      //   placeholder: Variable.lang.placeholder.email,
+      //   errorText: Variable.lang.error_div.wrong_email,
+      //   type: "text",
+      //   condition: (value) => {
+      //     return Helpers.validator.isEmail(value);
+      //   },
+      //   afterValid: () => {
+      //     Helpers.checkValid(Static, ["name", "email", "message"])
+      //   }
+      // }
 
-      Static.message = {
-        value: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.not_empty_input,
-        label: Variable.lang.label.message,
-        placeholder: Variable.lang.placeholder.message,
-        condition: (value) => {
-          return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-        },
-        afterValid: () => {
-          Helpers.checkValid(Static, ["name", "email", "message"])
-        }
-      }
+      // Static.message = {
+      //   value: "",
+      //   valid: false,
+      //   error: false,
+      //   errorText: Variable.lang.error_div.not_empty_input,
+      //   label: Variable.lang.label.message,
+      //   placeholder: Variable.lang.placeholder.message,
+      //   condition: (value) => {
+      //     return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+      //   },
+      //   afterValid: () => {
+      //     Helpers.checkValid(Static, ["name", "email", "message"])
+      //   }
+      // }
 
-      /**
-       * проверка имени и мыла 
-       */
-      if (Variable.myInfo.nickname) {
-        Static.name.value = Variable.myInfo.nickname
-        Static.name.valid = true
-        Static.name.readonly = true
-      }
+      // /**
+      //  * проверка имени и мыла 
+      //  */
+      // if (Variable.myInfo.nickname) {
+      //   Static.name.value = Variable.myInfo.nickname
+      //   Static.name.valid = true
+      //   Static.name.readonly = true
+      // }
 
-      if (Variable.myInfo.email) {
-        Static.email.value = Variable.myInfo.email
-        Static.email.valid = true
-        Static.email.readonly = true
-      }
+      // if (Variable.myInfo.email) {
+      //   Static.email.value = Variable.myInfo.email
+      //   Static.email.valid = true
+      //   Static.email.readonly = true
+      // }
     },
     () => {
+      console.log('=fe5a94=', Static)
       return (
         <div class='contacts_container c-main__body'>
           <div class="c-container">

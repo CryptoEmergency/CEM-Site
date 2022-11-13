@@ -58,7 +58,7 @@ const typeCollections = {
 }
 
 const generate = function (type, error) {
-    let objReturn = typeCollections[type]
+    let objReturn = Object.create(typeCollections[type])
     if (error) {
         objReturn.error = false
         objReturn.errorText = ""
@@ -95,23 +95,61 @@ initData.ModalUserInfoEdit = function (Static, userInfo, action) {
 }
 
 initData.contacts = function (Static) {
+    let tmpName
     Static.isValid = false
     Static.submitClick = false
     Static.messageSent = false
 
-    Static.name = generate("input", true)
-    Static.name.placeholder = Variable.lang.placeholder.name
-    Static.name.errorText = Variable.lang.error_div.nicknameErr
-    Static.name.label = Variable.lang.label.name
-    Static.name.label = Variable.lang.label.name
-    Static.name.condition = (value) => {
+    tmpName = "name"
+    Static[tmpName] = generate("input", true)
+    Static[tmpName].placeholder = Variable.lang.placeholder.name
+    Static[tmpName].errorText = Variable.lang.error_div.nicknameErr
+    Static[tmpName].label = Variable.lang.label.name
+    Static[tmpName].condition = (value) => {
         return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
     }
-    Static.name.afterValid = () => {
+    Static[tmpName].afterValid = () => {
         Helpers.checkValid(Static, ["name", "email", "message"])
     }
 
+    tmpName = "email"
+    Static[tmpName] = generate("input", true)
+    Static[tmpName].placeholder = Variable.lang.placeholder.email
+    Static[tmpName].errorText = Variable.lang.error_div.wrong_email
+    Static[tmpName].label = Variable.lang.label.email
+    Static[tmpName].condition = (value) => {
+        return Helpers.validator.isEmail(value);
+    }
+    Static[tmpName].afterValid = () => {
+        Helpers.checkValid(Static, ["name", "email", "message"])
+    }
 
+    tmpName = "message"
+    Static[tmpName] = generate("input", true)
+    Static[tmpName].placeholder = Variable.lang.placeholder.message
+    Static[tmpName].errorText = Variable.lang.error_div.not_empty_input
+    Static[tmpName].label = Variable.lang.label.message
+    Static[tmpName].condition = (value) => {
+        return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+    }
+    Static[tmpName].afterValid = () => {
+        Helpers.checkValid(Static, ["name", "email", "message"])
+    }
+
+    /**
+       * проверка имени и мыла 
+       */
+    if (Variable.myInfo.nickname) {
+        Static.name.value = Variable.myInfo.nickname
+        Static.name.valid = true
+        Static.name.readonly = true
+    }
+
+    if (Variable.myInfo.email) {
+        Static.email.value = Variable.myInfo.email
+        Static.email.valid = true
+        Static.email.readonly = true
+    }
 
     return
 }
