@@ -16,23 +16,22 @@ import { Input } from '@component/element/index.js';
 
 
 
-const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
+const BlockQuestions = async function ({ Static, nameRecords, limit = 21 }) {
   Variable.editMenu = false
-//менюшки для ссылок
+  //менюшки для ссылок
   let hrefMenuitems = fn.CreateMenuItems({
-    text:[Variable.lang.h.modal_answer,
-      Variable.lang.select.share,
-      Variable.lang.select.complainAnswer,
-      Variable.lang.select.complainUser,
-      Variable.lang.button.edit,
-      Variable.lang.select.closeQuestion,
-      Variable.lang.itemsMenu.SelectBestQuestion,
-      Variable.lang.select.delete],
-    type:["addanswer","share","complainItem","complainUser","edit","closequestion","bestquestion","delete"],
-    auth:[true,false,true,true,true,true,true,true],
-    color:["","","red","red","","red","green","red"],
-    onclick:[async () => 
-      {
+    text: [Variable.lang.h.modal_answer,
+    Variable.lang.select.share,
+    Variable.lang.select.complainAnswer,
+    Variable.lang.select.complainUser,
+    Variable.lang.button.edit,
+    Variable.lang.select.closeQuestion,
+    Variable.lang.itemsMenu.SelectBestQuestion,
+    Variable.lang.select.delete],
+    type: ["addanswer", "share", "complainItem", "complainUser", "edit", "closequestion", "bestquestion", "delete"],
+    auth: [true, false, true, true, true, true, true, true],
+    color: ["", "", "red", "red", "", "red", "green", "red"],
+    onclick: [async () => {
       //ответить
       Variable.SetModals({
         name: "ModalAnswer", data: {
@@ -94,12 +93,12 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
 
       initReload()
     },
-    //закрыть вопрос
-    "",
-    //выбрать лучший ответ
-    "",
-    //удалить
-    ""]
+      //закрыть вопрос
+      "",
+      //выбрать лучший ответ
+      "",
+      //удалить
+      ""]
   })
 
 
@@ -111,24 +110,24 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
     let response = await api({ type: "get", action: "getQuestions", short: true, filter: filters })
     Variable[nameRecords] = response
     if (Static.quest.value.length == 0) {
-   
+
       delete Static.newFilter.$text
       await api({ type: "get", action: "getQuestions", short: true, cache: true, name: nameRecords, limit, filter: Helpers.getFilterQuestions(Static.filtersQuestions), sort: Helpers.getSortQuestions(Static.filtersQuestions) })
 
     }
     if (Static.quest.value.length > 0) {
-      Static.newFilter = {}            
+      Static.newFilter = {}
       Static.newFilter.$text = { $search: Static.quest.value }
 
-    }   
+    }
   }
 
 
   await initOne(async () => {
-  Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
-  Static.newQustion = Helpers.getSortQuestions(Static.filtersQuestions);
-  Static.newQustion.sort = ""
- 
+    Static.newFilter = Helpers.getFilterQuestions(Static.filtersQuestions);
+    Static.newQustion = Helpers.getSortQuestions(Static.filtersQuestions);
+    Static.newQustion.sort = ""
+
 
     Static.quest = {
       value: "",
@@ -176,7 +175,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
       <div class="c-questions__header">
         {
           () => {
-            if(Variable.dataUrl.adress == 'question') {
+            if (Variable.dataUrl.adress == 'question') {
               return (
                 <div>
                   <h4>{Variable.lang.h.lastQuestions}</h4>
@@ -219,7 +218,8 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
               if (Variable.auth) {
                 Variable.SetModals({ name: "ModalAskQuestion", data: {} });
               } else {
-                Variable.SetModals({ name: "ModalNeedAuth", data: {} });
+                fn.modals.ModalNeedAuth()
+                // Variable.SetModals({ name: "ModalNeedAuth", data: {} });
               }
             }}
           >
@@ -239,33 +239,29 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
             options={Static.optionsSelect.questions}
             callback={
               async (active, nameOptions) => {
-          
-                Static.filtersQuestions[nameOptions].value =  active
-                if(active == 'all')
-                {
-                 delete Static.newFilter.close
-                 delete Static.newFilter.bestId
-                }  
-                   
-                    if(active == 'open')
-                    {
-                      delete Static.newFilter.bestId
-          
-                      Static.newFilter.close = false
-                    }
-                    if(active == 'closed')
-                    {
-                      delete Static.newFilter.bestId
-              
-                      Static.newFilter.close = true
-                    }
-                    if(active == 'best')
-                    {
-                      delete Static.newFilter.close
-                      Static.newFilter.bestId = {$exists: true}
-                    }
-                   
-                    
+
+                Static.filtersQuestions[nameOptions].value = active
+                if (active == 'all') {
+                  delete Static.newFilter.close
+                  delete Static.newFilter.bestId
+                }
+
+                if (active == 'open') {
+                  delete Static.newFilter.bestId
+
+                  Static.newFilter.close = false
+                }
+                if (active == 'closed') {
+                  delete Static.newFilter.bestId
+
+                  Static.newFilter.close = true
+                }
+                if (active == 'best') {
+                  delete Static.newFilter.close
+                  Static.newFilter.bestId = { $exists: true }
+                }
+
+
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
@@ -275,30 +271,27 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
             options={Static.optionsSelect.date}
             toggler={true}
             callback={
-              
-              async (active, nameOptions) => {
-          
-         if(active){
-          Static.filtersQuestions[nameOptions].value = active
-         }
 
-         if(Static.filtersQuestions.date.value == 'date')
-        {
-          Static.newQustion.sort = ""
-          Static.newQustion.sort = {showDate: Static.optionsSelect.date.asort}
-        }
-        if(Static.filtersQuestions.date.value == 'views')
-        {
-          Static.newQustion.sort = ""
-          Static.newQustion.sort = {"statistic.view":Static.optionsSelect.date.asort}
-        }
-        if(Static.filtersQuestions.date.value == 'answers')
-        {
-          Static.newQustion.sort = ""
-          Static.newQustion.sort = {"statistic.answer":Static.optionsSelect.date.asort}
-        }
- 
-           
+              async (active, nameOptions) => {
+
+                if (active) {
+                  Static.filtersQuestions[nameOptions].value = active
+                }
+
+                if (Static.filtersQuestions.date.value == 'date') {
+                  Static.newQustion.sort = ""
+                  Static.newQustion.sort = { showDate: Static.optionsSelect.date.asort }
+                }
+                if (Static.filtersQuestions.date.value == 'views') {
+                  Static.newQustion.sort = ""
+                  Static.newQustion.sort = { "statistic.view": Static.optionsSelect.date.asort }
+                }
+                if (Static.filtersQuestions.date.value == 'answers') {
+                  Static.newQustion.sort = ""
+                  Static.newQustion.sort = { "statistic.answer": Static.optionsSelect.date.asort }
+                }
+
+
                 await api({ type: "get", action: "getQuestions", short: true, name: nameRecords, limit, filter: Static.newFilter, sort: Static.newQustion.sort })
                 // initReload();
               }
@@ -329,7 +322,7 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
         {() => {
           if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].list_records.length) {
             const arrReturn = Variable[nameRecords].list_records.map(function (question, i) {
-       
+
               return (
                 <div class="c-questions__item c-question question-block questionLoad">
                   <div class="c-question__header">
@@ -373,16 +366,16 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                     </div>
                   </div>
                   <a
-           
+
                     style=""
                     href={`/question/show/${question._id}`}
                     class="c-question__body"
                     //ссылка твой вопрос
-                    onclick={function(e){ 
-  
+                    onclick={function (e) {
+
                       Static.Question_id = question._id
-                      Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author:question.author,items: hrefMenuitems,editVisible:false})
-                    
+                      Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author: question.author, items: hrefMenuitems, editVisible: false })
+
                     }}
                   >
                     <div class="c-question__preview">
@@ -407,16 +400,18 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
                   </div>
                   <div class="c-question__footer">
                     <a
-                      
+
                       class="c-button c-button--outline2 buttonunswer"
                       href={`/question/show/${question._id}`}
                       onclick={(e) => {
                         //костыль
                         Static.Question_id = question._id
-                        
-                        Helpers.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author:question.author,
-                        items: hrefMenuitems, editVisible:false }) 
-                    }}
+
+                        Helpers.siteLinkModal(e, {
+                          title: Variable.lang.span.QA, item: question, author: question.author,
+                          items: hrefMenuitems, editVisible: false
+                        })
+                      }}
                     >
                       <div class="c-button__wrapper">
                         {Variable.lang.button.giveAnswer}
@@ -441,10 +436,10 @@ const BlockQuestions = async function ({ Static, nameRecords, limit = 21}) {
             return (
               <ButtonShowMore
                 onclick={async () => {
-                 
-                 
+
+
                   let tmp = await api({ type: "get", action: "getQuestions", short: true, limit, filter: Static.newFilter, sort: Static.newQustion.sort, offset: Variable[nameRecords].list_records.length })
-              
+
                   if (tmp && tmp.list_records) {
                     Variable[nameRecords].list_records.push(...tmp.list_records)
                     Variable[nameRecords].totalFound = tmp.totalFound

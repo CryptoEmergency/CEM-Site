@@ -9,8 +9,8 @@ for (let name in list) {
     }
 }
 
+modals.close = function (ID) {
+    Variable.DelModals(ID)
+}
 
-// const modals = function () {
-//     console.log('=9e6811=', "ggg")
-// }
 export { modals };

@@ -17,6 +17,27 @@ const checkAnswer = function (response, name) {
     return objResponse
 }
 
+const checkSetAnswer = function (response, noAlert) {
+    let objResponse = { totalFound: 0, list_records: [], status: "no" }
+    if (response) {
+        objResponse.status = response.status
+
+        if (response.result && response.result.totalFound) {
+            objResponse.totalFound = response.result.totalFound
+        }
+        if (response.result && response.result.list_records) {
+            objResponse.list_records = response.result.list_records
+        }
+        if (!noAlert) {
+            if (response.status != "ok" && response.error) {
+                Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
+            }
+        }
+    }
+
+    return objResponse
+}
+
 const restApi = {}
 
 restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort }) {
@@ -73,5 +94,14 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
 
     let response = await sendApi.send(data);
     return checkAnswer(response, name)
+}
+
+// SET
+restApi.supportMessage = async function ({ name, email, text, noAlert = false }) {
+    let data = {
+        value: { name, email, text }
+    }
+    const response = await sendApi.create("supportMessage", data);
+    return checkSetAnswer(response, noAlert)
 }
 export { restApi };

@@ -15,15 +15,12 @@ const sendMessage = async (Static) => {
   if (!Static.isValid) {
     return false
   }
-  const response = await api({
-    type: "set", action: "supportMessage", data: { value: { email: Static.email.value, name: Static.name.value, text: Static.message.value }, }
-  })
-  if (response.status === "ok") {
+  const response = await fn.restApi.supportMessage({ email: Static.email.value, name: Static.name.value, text: Static.message.value })
+  if (response.status == "ok") {
     Static.messageSent = true;
     Static.submitClick = false;
     initReload()
   } else {
-    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
     Static.submitClick = false;
   }
 };
