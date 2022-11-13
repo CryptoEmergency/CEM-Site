@@ -41,9 +41,9 @@ const start = function () {
 
 
 
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-    Variable.showUserMenu = false
+    Variable.Static.HeaderShow = true
+    Variable.Static.FooterShow = true
+    Variable.Static.showUserMenu = false
 
     const userBlackList = function () {
         let BlackListBlock
@@ -88,10 +88,14 @@ const start = function () {
         },
         () => {
             return (
-                <div class="settings_container">
+                <div class={[
+                    "settings_container",
+                    Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+                  ]}
+                >
                     <h4 class="settings_title">{Variable.lang.text.socialNetwork}</h4>
                     <div class="settings">
-                        <div class="setting_list_block">
+                        <div class="settings_list_block">
                             <div class="settings_list">
                                 <div class="settings_list_item settings_list_item_active">
                                     <p class="settings_list_title">

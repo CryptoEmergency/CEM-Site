@@ -5,10 +5,11 @@
 
     &_container {
         width: calc(100% - 224px);
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
         color: $white;
         display: flex;
-        margin-top: 20px;
+        // margin-top: 20px;
         flex-wrap: wrap;
     }
 
@@ -17,6 +18,16 @@
         width: 268px;
         background: $atlantic_charter;
         position: relative;
+
+        @media(max-width: 599px) {
+            width: 100%;
+        }
+
+        &_block {
+            @media(max-width: 599px) {
+                width: 100%;
+            }
+        }
 
         &_item {
             padding-left: 22px;
@@ -29,7 +40,7 @@
                 border-radius: 12px 12px 0 0;
                 padding-top: 8px;
                 border-radius: 12px 12px 0 0;
-                
+
             }
 
             &:first-child {
@@ -118,9 +129,9 @@
             margin-bottom: 20px;
 
             &_chapter {
+                width: 100%;
                 padding: 30px 0;
                 border-bottom: 1px solid $german_liquorice2;
-                width: 100%;
 
                 &:first-child {
                     padding-top: 0;
@@ -183,7 +194,7 @@
         height: 100%;
         cursor: pointer;
 
-        &_wrapper{
+        &_wrapper {
             width: 74px;
             height: 30px;
             border-radius: 20px;
@@ -277,7 +288,7 @@
         &::-ms-input-placeholder {
             font-weight: 600;
             font-size: 14px;
-            color: $aster_flower_blue; 
+            color: $aster_flower_blue;
         }
     }
 
@@ -355,7 +366,7 @@
         &:last-child {
             margin-bottom: 0;
         }
-        
+
         .friend {
 
             &_info {
@@ -390,6 +401,46 @@
         background-clip: text;
         text-fill-color: transparent;
         cursor: pointer;
+    }
+
+    &_changepass {
+        width: 100%;
+        max-width: 350px;
+
+        @media(max-width: 599px) {
+            max-width: 100%;
+        }
+    }
+
+    &_deleteuser {
+        width: 100%;
+        max-width: 350px;
+
+        @media(max-width: 599px) {
+            max-width: 100%;
+        }
+    }
+
+    &_resetdeleteuser {
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+        width: 100%;
+        
+
+        @media(max-width: 599px) {
+            flex-direction: column;
+        }
+
+        .c-button {
+            width: 50%;
+            max-width: 350px;
+
+            @media(max-width: 599px) {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
     }
 }
 
