@@ -13,23 +13,12 @@ import { api } from '@src/apiFunctions.js'
 
 
 const BlockShowLenta = function ({ Static, item, showItemsMenu }) {
-  // Variable.Static.FooterShow = false
-  initOne(() => {
-    Static.mainComment = {
-      rows: 1,
-      adaptive: 4
-    }
-  })
   return (
     <div class="user_post_container">
       <div class="userNewsBlock">
         <div class="bl_one bl_active">
           <div class="user_news_block">
-            <BlockLentaUsers
-              Static={Static}
-              item={item}
-              showItemsMenu={showItemsMenu}
-            />
+            <BlockLentaUsers Static={Static} item={item} />
             <h2>{Variable.lang.h.modal_comment}</h2>
             <div class="c-comments__form">
               <div class="c-comments__field create_post_container1">

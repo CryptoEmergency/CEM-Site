@@ -70,12 +70,16 @@ fn.CreateMenuItems = function (data) {
 fn.Static = {}
 
 fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
+  let item = { _id: Variable.dataUrl.params }
   if (actual) { return [this.Static[ID]] }
   if (!reload || !this.Static[ID]) { this.Static[ID] = {}; }
-  if (data) { this.Static[ID].openModals = true }
+  if (data) {
+    this.Static[ID].openModals = true
+    if (data.item) { item = data.item }
+  }
 
 
-  return [this.Static[ID]]
+  return [this.Static[ID], item]
 }
 
 
@@ -133,6 +137,8 @@ fn.siteLinkModal = async function (e, data) {
     return
   }
   let link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
+  console.log('=f2cfa3=', link)
+  history.pushState(null, null, link);
   let dataUrl = parsingUrl(link)
   await initPage(dataUrl, data);
   return

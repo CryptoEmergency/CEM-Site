@@ -7,7 +7,7 @@ import {
     Helpers,
     initReload
 } from "@betarost/cemjs";
-
+import { fn } from '@src/functions/index.js';
 import { If, Map } from '@component/helpers/All.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer, TextArea, ButtonSubmit } from '@component/element/index.js';
@@ -26,9 +26,9 @@ const swiperOptions = {
     spaceBetween: 20
 };
 
-const start = function () {
-    let Static = {}
-
+const start = function (data, ID) {
+    // let Static = {}
+    let [Static] = fn.GetParams({ data, ID })
 
     let chatsList,
         activeChat,
@@ -70,7 +70,7 @@ const start = function () {
 
         },
         () => {
-
+            console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
             if (messageList) {
 
                 if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {
@@ -334,7 +334,7 @@ const start = function () {
 
                 </div>
             )
-        }
+        }, ID
     )
 }
 

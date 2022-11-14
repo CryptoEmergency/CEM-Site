@@ -17,7 +17,6 @@ import {
   Avatar,
   ItemsMenu
 } from "@component/element/index.js";
-import { If } from "@component/helpers/All.js";
 
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, show, index, showItemsMenu }) {
   return (
@@ -31,7 +30,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
         <div class="c-lentaitem__header">
           <Avatar author={item.author} parent={"lenta"} nickName={item.author.nickname} />
           {() => {
-            if (showItemsMenu) {
+            if (Static.openModals) {
               return (
                 <div class="comment_icons">
                   <ItemsMenu
@@ -77,7 +76,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, sho
                           text: Variable.lang.select.complainPost,
                           type: "complainItem",
                           onlyAuth: true,
-                     
+
                           color: "red",
                           onclick: async () => {
                             // Переработать модалку

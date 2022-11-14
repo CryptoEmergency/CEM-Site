@@ -7,7 +7,7 @@ import {
     sendApi,
     Helpers
 } from "@betarost/cemjs";
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { Avatar } from '@component/element/Avatar.js';
@@ -17,6 +17,7 @@ import { api } from '@src/apiFunctions.js'
 import {
     BlockUserProfilePage,
 } from '@component/blocks/index.js';
+// import { fn } from "moment";
 
 const start = function (userInfo, ID = "mainBlock") {
     Variable.Static.FooterShow = false
@@ -144,22 +145,23 @@ const start = function (userInfo, ID = "mainBlock") {
                                 src={userInfo.background ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
                             />
 
-                            {()=>{
-                                if(Variable.auth && userInfo._id != Variable.myInfo._id){
-                                    return(
+                            {() => {
+                                if (Variable.auth && userInfo._id != Variable.myInfo._id) {
+                                    return (
                                         <div class="c-userpreview__buttons">
                                             <div class="c-userpreview__container">
-                                                <a 
+                                                <a
                                                     class="c-userpreview__btn"
                                                     onclick={async () => {
-                                                        console.error('startChat Button')
+                                                        Variable.Static.startChatsID = userInfo._id
+                                                        fn.siteLink("/user/chats/");
                                                     }}
                                                 >
                                                     <span>
                                                         {Variable.lang.button.write}
                                                     </span>
                                                 </a>
-                                                <a 
+                                                <a
                                                     class="c-userpreview__btn"
                                                     onclick={async () => {
                                                         let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: userInfo._id } } })
@@ -181,7 +183,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                                     </span>
                                                 </a>
                                             </div>
-                                        </div> 
+                                        </div>
                                     )
                                 }
                             }}

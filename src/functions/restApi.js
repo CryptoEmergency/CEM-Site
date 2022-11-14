@@ -40,7 +40,7 @@ const checkSetAnswer = function (response, noAlert) {
 
 const restApi = {}
 
-restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort }) {
+restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
 
     let defaultFilter = {}
     defaultFilter["count." + (Variable.lang.code != "ru" ? "en" : "ru")] = { $gt: 0 }
@@ -58,10 +58,19 @@ restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, fi
     }
 
     let response = await sendApi.send(data);
-    return checkAnswer(response, name)
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
 }
 
-restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 } }) {
+restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
 
     let defaultFilter = {
         type: "news",
@@ -93,10 +102,19 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 
     let response = await sendApi.send(data);
-    return checkAnswer(response, name)
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
 }
 
-restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 } }) {
+restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
 
     let defaultFilter = {
         "confirm.registrasion": true
@@ -132,7 +150,61 @@ restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter,
     }
 
     let response = await sendApi.send(data);
-    return checkAnswer(response, name)
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+
+restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+
+    let defaultFilter = {
+        "languages.code": Variable.lang.code
+    }
+
+    let defaultSelect = {
+        author: 1,
+        forFriends: 1,
+        languages: 1,
+        media: 1,
+        showDate: 1,
+        statistic: 1,
+        text: 1,
+        title: 1,
+        updateTime: 1,
+    }
+
+
+    let data = {
+        action: "getPost",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
 }
 //
 // SET

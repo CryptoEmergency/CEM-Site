@@ -206,7 +206,20 @@ initData.content_creator = function (Static) {
 }
 
 
+initData.lenta_users_show = function (Static) {
+    Static.elMedia = {}
+    Static.elToogle = {}
+    Static.elShowTextFull = {}
+    Static.elShowTextShort = {}
+    Static.elMedia = {}
 
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4
+    }
+
+    return
+}
 
 
 

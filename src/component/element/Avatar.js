@@ -1,4 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initOne, sendApi, Helpers } from "@betarost/cemjs";
+import { fn } from '@src/functions/index.js';
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { getDateFormat, uploadMedia } from "@src/functions.js";
@@ -129,9 +130,9 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
       // onclick={Helpers.siteLink}
       onclick={(e) => {
         if (Variable.myInfo && Variable.myInfo.nickname == author.nickname) {
-          Helpers.siteLink(e)
+          fn.siteLink(e)
         } else {
-          Helpers.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;' })
+          fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;' })
         }
       }
       }
@@ -174,7 +175,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                       {
                         text: Variable.lang.text.changeAvatar,
                         type: "edit",
-                        onclick: function(e){
+                        onclick: function (e) {
                           console.log(e)
                           e.stopPropagation();
                           e.preventDefault();
@@ -184,7 +185,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                       {
                         text: Variable.lang.text.changeBackground,
                         type: "edit",
-                        onclick: function(e){
+                        onclick: function (e) {
                           e.stopPropagation();
                           e.preventDefault();
                           inputBg().click();
@@ -193,18 +194,18 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                       {
                         text: Variable.lang.select.share,
                         type: "share",
-                        onclick: function(e){
-                          
+                        onclick: function (e) {
+
                         }
                       },
                       {
                         text: Variable.lang.text.settings,
                         type: "edit",
-                        onclick: function(e){
+                        onclick: function (e) {
                           e.currentTarget = {
                             href: "/user/settings/"
                           }
-                          Helpers.siteLink(e)
+                          fn.siteLink(e)
                         }
                       }
                     ]
@@ -238,7 +239,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                           {/* <p class="user_custimize_settings_item">{Variable.lang.text.changeFrame}</p>
                           <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p> */}
                           <p class="user_custimize_settings_item">
-                            <a onclick={Helpers.siteLink} href="/user/settings/">{Variable.lang.text.settings}</a>
+                            <a onclick={fn.siteLink} href="/user/settings/">{Variable.lang.text.settings}</a>
                           </p>
                           <input
                             style="display: none;"
