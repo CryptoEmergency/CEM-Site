@@ -1,5 +1,5 @@
 import { Variable } from '@betarost/cemjs'
-import list from "@src/modalsList.js";
+import list from "@src/lists/modalsList.js";
 
 const modals = {}
 

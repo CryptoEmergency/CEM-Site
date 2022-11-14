@@ -1,7 +1,7 @@
-const req = import.meta.webpackContext('./component/modals', {
+const req = import.meta.webpackContext('../navigation', {
     recursive: true,
     regExp: /\.js$/,
-    exclude: /(index.js|index_old.js)/
+    exclude: /(header|footer|modal)/
 });
 
 const forExport = req.keys().reduce((acc, next) => {

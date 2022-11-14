@@ -6,7 +6,7 @@ import {
     sendApi
 } from '@betarost/cemjs'
 import { timerTik } from '@src/functions.js'
-import list from "@src/routerList.js";
+import list from "@src/lists/routerList.js";
 
 const mainBlock = async function () {
 

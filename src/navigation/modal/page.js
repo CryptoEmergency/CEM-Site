@@ -5,7 +5,7 @@ import {
     init,
 } from '@betarost/cemjs';
 
-import list from "@src/modalsList.js";
+import list from "@src/lists/modalsList.js";
 
 Variable.Static.countModals = 0
 Variable.Static.countModalsPage = 0
