@@ -43,8 +43,8 @@ const BlockShowNews = function ({ item }) {
       </div>
       <div class="news_page_comments">
         <h2>{Variable.lang.h.modal_comment}</h2>
-        <div class="c-comments__form create_post_coments">
-          <div class="c-comments__field create_post_container1">
+        <div class="c-comments__form">
+          <div class="c-comments__field">
             <TextArea
               Static={Static.mainComment}
               className="text1 create_post_chapter"
@@ -52,7 +52,7 @@ const BlockShowNews = function ({ item }) {
           </div>
           <ButtonSubmit
             text={<img class="c-comments__icon" src={svg["send_message"]} />}
-            className="c-comments__send button-container-preview comments_send"
+            className="c-comments__send"
             onclick={async (tmp, el) => {
               if (!Static.mainComment.el.value.trim().length) {
                 return
