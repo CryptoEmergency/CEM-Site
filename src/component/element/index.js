@@ -44,8 +44,6 @@ export { AudioPlayer } from "./player/AudioPlayer.js"
 
 
 //===user===
-// Отображение клшелька (счета)
-export { UserWalletCard } from './user/UserWalletCard.js';
 //============
 
 //

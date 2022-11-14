@@ -11,7 +11,7 @@ import { ButtonShowMore, NotFound } from "@component/element/index.js";
 const BlockExchange = async function ({ Static, limit = 21 }) {
     await initOne(
         async () => {
-            await fn.restApi.getExchange({ name: Static.nameRecords, filter: Static.apiFilter, limit })
+            await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit })
         }
     )
     return (

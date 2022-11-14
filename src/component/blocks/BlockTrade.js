@@ -11,7 +11,7 @@ import { ButtonShowMore, NotFound } from "@component/element/index.js";
 const BlockTrade = async function ({ Static, limit = 55 }) {
     await initOne(
         async () => {
-            await fn.restApi.getTrade({ name: Static.nameRecords, filter: Static.apiFilter, limit })
+            await fn.restApi.getTrade({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit })
         }
     )
     return (

@@ -17,6 +17,34 @@ fn.test = function () {
   return true
 
 }
+fn.transactionTypeToLang = function (type) {
+  let returnType = ""
+  switch (type) {
+    case 'registration':
+      returnType = Variable.lang.p.transactionRegistration
+      break
+    case 'referral_registration':
+      returnType = Variable.lang.p.transactionReferralRegistration
+      break
+    case 'other':
+      returnType = Variable.lang.p.transactionOther
+      break
+    case 'awards':
+      returnType = Variable.lang.p.transactionAwards
+      break
+    case 'level':
+      returnType = Variable.lang.p.transactionLevel
+      break
+  }
+  return returnType;
+
+}
+fn.numberFixWithSpaces = function (num, fix) {
+  let x = parseFloat(num).toFixed(fix)
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return parts.join(".");
+}
 
 fn.CreateMenuItems = function (data) {
 
