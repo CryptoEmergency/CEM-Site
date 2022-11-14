@@ -9,8 +9,6 @@ import {
   initGo,
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
 
 import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
 import {
@@ -18,8 +16,6 @@ import {
   Avatar,
   MediaPreview
 } from "@component/element/index.js";
-
-import { If, Map } from "@component/helpers/All.js";
 
 let formInputs, selectAspect;
 
@@ -401,19 +397,20 @@ const start = function () {
               >{formInputs.lang.name}</div>
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
-              <If
-                data={formInputs.textInputs.show}
-                dataIf={
+              {
+                formInputs.textInputs.show
+                  ?
                   <div
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
                     oninput={changeTextPost}
                   ></div>
-                }
-              />
-              <If
-                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
-                dataIf={
+                  :
+                  null
+              }
+              {
+                formInputs.mediaInputs.show && formInputs.mediaInputs.value.length
+                  ?
                   <div class="create_post_chapter createPostImage">
                     {
                       formInputs.mediaInputs.value.map((item, index) => {
@@ -431,12 +428,13 @@ const start = function () {
                       })
                     }
                   </div>
-                }
-              />
+                  :
+                  null
+              }
               {/* Добавил еще один иф для айдио */}
-              <If
-                data={formInputs.audioInputs.show && formInputs.audioInputs.value.length}
-                dataIf={
+              {
+                formInputs.audioInputs.show && formInputs.audioInputs.value.length
+                  ?
                   <div class="create_post_chapter createPostAudio">
                     {
                       formInputs.audioInputs.value.map((item, index) => {
@@ -453,8 +451,9 @@ const start = function () {
                       })
                     }
                   </div>
-                }
-              />
+                  :
+                  null
+              }
             </div>
 
             <MediaButton
