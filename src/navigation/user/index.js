@@ -11,7 +11,6 @@ import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { Avatar } from '@component/element/Avatar.js';
-import { percent } from '@component/helpers/All.js';
 import { api } from '@src/apiFunctions.js'
 
 import {
@@ -274,7 +273,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             {/* IF (myInfo._id=userInfo._id) */}
                             <div class="c-userpreview__level">
                                 <div
-                                    style={`width: ${percent(userInfo.statistic.exp, userInfo.statistic.expNext)}%;`}
+                                    style={`width: ${fn.percent(userInfo.statistic.exp, userInfo.statistic.expNext)}%;`}
                                     class="c-userpreview__current"
                                 ></div>
                                 <div class="c-userpreview__num">{userInfo.statistic.exp}/{userInfo.statistic.expNext}</div>

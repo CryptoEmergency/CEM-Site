@@ -2,10 +2,7 @@ import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
 
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { If, Map } from "@component/helpers/All.js";
-import {
-  AudioPlayerCopy
-} from "@component/element/index.js";
+import { AudioPlayerCopy } from "@component/element/index.js";
 
 
 const MediaPreview = function ({ item, index, type, formInputs, el }) {
@@ -15,9 +12,9 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
   }
   return (
     <div>
-      <If
-        data={item.type == "image"}
-        dataIf={
+      {
+        item.type == "image"
+          ?
           <div class="create_post_photo_preview">
             <img
               class="fullsize media"
@@ -27,10 +24,9 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                   : `/assets/upload/${type}/${item.name}`
               }
             />
-
-            <If
-              data={item.size !== undefined}
-              dataIf={
+            {
+              item.size !== undefined
+                ?
                 <div class="circle-wrap">
                   <div class="circle">
                     <div
@@ -56,12 +52,12 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                     </div>
                   </div>
                 </div>
-              }
-            />
-
-            <If
-              data={item.size === undefined}
-              dataIf={
+                :
+                null
+            }
+            {
+              item.size === undefined
+                ?
                 <div
                   class="delete_post_media"
                   style="display: block;"
@@ -75,8 +71,7 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                 >
                   <img src={svg["delete_icon"]} />
                 </div>
-              }
-              dataElse={
+                :
                 <div
                   class="stop_loading"
                   onclick={() => {
@@ -89,36 +84,29 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                     initReload();
                   }}
                 ></div>
-              }
-            />
+            }
           </div>
-        }
-      />
+          :
+          null
+      }
 
-      <If
-        data={item.type == "video"}
-        dataIf={
+      {
+        item.type == "video"
+          ?
           <div class="create_post_photo_preview">
-            {/* <img
-                            class="fullsize media"
-                            src={images["video_background"]}
-                        /> */}
-            <If
-              data={item.src !== undefined}
-              dataIf={
+            {
+              item.src !== undefined
+                ?
                 <img class="fullsize media" src={images["video_background"]} />
-              }
-              dataElse={
+                :
                 <video
                   class="fullsize media"
                   src={`/assets/upload/${type}/${item.name}`}
                 />
-              }
-            />
-
-            <If
-              data={item.size !== undefined}
-              dataIf={
+            }
+            {
+              item.size !== undefined
+                ?
                 <div class="circle-wrap">
                   <div class="circle">
                     <div
@@ -144,12 +132,12 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                     </div>
                   </div>
                 </div>
-              }
-            />
-
-            <If
-              data={item.size === undefined}
-              dataIf={
+                :
+                null
+            }
+            {
+              item.size === undefined
+                ?
                 <div
                   class="delete_post_media"
                   style="display: block;"
@@ -161,8 +149,7 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                 >
                   <img src={svg["delete_icon"]} />
                 </div>
-              }
-              dataElse={
+                :
                 <div
                   class="stop_loading"
                   onclick={() => {
@@ -173,54 +160,30 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                     initReload();
                   }}
                 ></div>
-              }
-            />
-
-            {/* <div class="delete_post_media" style="display: block;" onClick={() => {
-                            formInputs.mediaInputs.value.splice(index, 1);
-                            if (formInputs.mediaInputs.value.length == 0) {
-                                formInputs.mediaInputs.selectAspect = null;
-                            }
-                            initReload()
-                        }}>
-                            <img src={svg["delete_icon"]} />
-                        </div> */}
+            }
           </div>
-        }
-      />
-
-      <If
-        data={item.type == "audio"}
-        dataIf={
-
-
+          :
+          null
+      }
+      {
+        item.type == "audio"
+          ?
           <div class="create_post_photo_preview">
-            {/* <img
-    class="fullsize media"
-    src={images["video_background"]}
-/> */}
-            <If
-              data={item.src !== undefined}
-              dataIf={
+            {
+              item.src !== undefined
+                ?
                 <audio src={item.src}></audio>
-              }
-              dataElse={
-                // <audio
-                //   class="fullsize media"
-                //   src={`/assets/upload/${type}/${item.name}`}
-                // />
+                :
                 <AudioPlayerCopy
                   item={item}
                   index={index}
                   path={`/assets/upload/${type}/`}
                   el={el}
                 />
-              }
-            />
-
-            <If
-              data={item.size !== undefined}
-              dataIf={
+            }
+            {
+              item.size !== undefined
+                ?
                 <div class="circle-wrap">
                   <div class="circle">
                     <div
@@ -246,12 +209,12 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                     </div>
                   </div>
                 </div>
-              }
-            />
-
-            <If
-              data={item.size === undefined}
-              dataIf={
+                :
+                null
+            }
+            {
+              item.size === undefined
+                ?
                 <div
                   class="delete_post_media"
                   style="display: block;"
@@ -263,8 +226,7 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                 >
                   <img src={svg["delete_icon"]} />
                 </div>
-              }
-              dataElse={
+                :
                 <div
                   class="stop_loading"
                   onclick={() => {
@@ -275,23 +237,12 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                     initReload();
                   }}
                 ></div>
-              }
-            />
-
-            {/* <div class="delete_post_media" style="display: block;" onClick={() => {
-    formInputs.mediaInputs.value.splice(index, 1);
-    if (formInputs.mediaInputs.value.length == 0) {
-        formInputs.mediaInputs.selectAspect = null;
-    }
-    initReload()
-}}>
-    <img src={svg["delete_icon"]} />
-</div> */}
+            }
           </div>
-        }
-      />
+          :
+          null
+      }
     </div>
   );
 };
-//I check
 export { MediaPreview };

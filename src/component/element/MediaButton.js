@@ -3,13 +3,12 @@ import {
     jsxFrag,
     Variable
 } from '@betarost/cemjs';
-
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { If, Map } from '@component/helpers/All.js';
 
-let inputImg = Variable.setRef();
-let inputVideo = Variable.setRef();
-let inputAudio = Variable.setRef();
+let inputImg,
+    inputVideo,
+    inputAudio
 
 const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic }) {
 
@@ -31,7 +30,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                 typeof onclickPhoto == "function"
                     ?
                     <div class="c-mediabtn__action createPostImageCreator create_post_control_item" onclick={() => {
-                        inputImg().click();
+                        inputImg.click();
                     }}>
                         <img class="c-mediabtn__icon" src={svg["post_photo"]} />
                         <input
@@ -40,7 +39,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                             onchange={onclickPhoto}
                             type="file"
                             accept=".jpg,.jpeg,.png,.gif"
-                            ref={inputImg}
+                            Element={($el) => { inputImg = $el }}
                         // multiple="multiple"
                         />
                     </div>
@@ -51,7 +50,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                 typeof onclickVideo == "function"
                     ?
                     <div class="c-mediabtn__action createPostVideoCreator create_post_control_item" onclick={() => {
-                        inputVideo().click();
+                        inputVideo.click();
                     }}>
                         <img class="c-mediabtn__icon" src={svg["post_video"]} />
                         <input
@@ -60,7 +59,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                             onchange={onclickVideo}
                             type="file"
                             accept=".mp4,.avi,.mov,.mkv,.avi,.flv"
-                            ref={inputVideo}
+                            Element={($el) => { inputVideo = $el }}
                         />
                     </div>
                     :
@@ -70,7 +69,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                 typeof onclickAudio == "function"
                     ?
                     <div class="c-mediabtn__action createPostAudioCreator create_post_control_item" onclick={() => {
-                        inputAudio().click();
+                        inputAudio.click();
                     }}>
                         <img class="c-mediabtn__icon" src={svg["post_audio"]} />
                         <input
@@ -79,7 +78,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                             onchange={onclickAudio}
                             type="file"
                             accept=".mp3,.wav,.aiff,.aac,.ogg,.wma"
-                            ref={inputAudio}
+                            Element={($el) => { inputAudio = $el }}
                         />
                     </div>
                     :
@@ -96,4 +95,3 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
     )
 }
 export { MediaButton }
-// OK
