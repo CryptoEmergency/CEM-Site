@@ -102,7 +102,12 @@ fn.Static = {}
 fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
   let item = { _id: Variable.dataUrl.params }
   if (actual) { return [this.Static[ID]] }
-  if (!reload || !this.Static[ID]) { this.Static[ID] = {}; }
+  if (!reload || !this.Static[ID]) {
+    this.Static[ID] = {};
+    if (data) {
+      this.Static[ID] = Object.assign(this.Static[ID], data)
+    }
+  }
   if (data) {
     this.Static[ID].openModals = true
     if (data.item) { item = data.item }

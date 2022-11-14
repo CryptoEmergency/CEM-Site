@@ -4,7 +4,7 @@ import {
     Variable,
     init
 } from "@betarost/cemjs";
-
+import { fn } from '@src/functions/index.js';
 
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
@@ -19,6 +19,7 @@ let cropper, aspectActive;
 
 const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
     let Static = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+    console.log('=453e8a=', Static)
     console.log('=018927=', aspectSelect)
 
     const cropperGo = function (el) {
