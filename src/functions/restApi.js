@@ -70,6 +70,62 @@ restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, fi
     }
 }
 
+restApi.getCourse = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getCourse",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+restApi.getTransactions = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getTransactions",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getExchange = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { score: -1 }, firstRecord }) {
 
 

@@ -16,7 +16,7 @@ const start = function (data, ID) {
         async () => {
             Static.nameRecords = "PageUserAffilate"
             Static.apiFilter = { "referral.user": Variable.myInfo._id }
-            await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+            await fn.restApi.getUsers({ cache: true, name: Static.nameRecords, filter: Static.apiFilter })
         },
         () => {
             return (
