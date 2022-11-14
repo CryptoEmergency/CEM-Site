@@ -1,14 +1,16 @@
-import { Variable, parsingUrl, initPage, Helpers } from "@betarost/cemjs";
+import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
 import { restApi } from "./restApi.js"
+import { itemsMenu } from "./itemsMenu.js"
 
 const fn = {}
 fn.modals = modals
 fn.initData = initData
 fn.apiData = apiData
 fn.restApi = restApi
+fn.itemsMenu = itemsMenu
 
 fn.test = function () {
   console.log('=f83cf3 FN=', this)
@@ -132,16 +134,33 @@ fn.siteLink = function (e) {
 
 fn.siteLinkModal = async function (e, data) {
   e.preventDefault();
+  e.stopPropagation();
   if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
     console.error("Not have href")
     return
   }
   let link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
-  console.log('=f2cfa3=', link)
   history.pushState(null, null, link);
   let dataUrl = parsingUrl(link)
   await initPage(dataUrl, data);
   return
+}
+
+fn.recordsView = function (_id, action) {
+  let timeNow = Math.floor(Date.now() / 1000)
+  let objView = getStorage("recordsView")
+  if (!objView) (objView = {})
+  if (!objView[_id]) {
+    objView[_id] = timeNow
+    fn.restApi[action].view({ _id })
+    setStorage("recordsView", objView)
+  } else {
+    if (timeNow - objView[_id] >= 86400) {
+      objView[_id] = timeNow
+      fn.restApi[action].view({ _id })
+      setStorage("recordsView", objView)
+    }
+  }
 }
 
 export { fn }

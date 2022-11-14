@@ -6,7 +6,7 @@ import {
   initReload,
   Helpers,
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import { restApi } from '@src/apiFunctions.js'
 import { Select, NotFound } from "@component/element/index.js";
 import { BlockLentaUsers, BlockShowLenta } from "@component/blocks/index.js";
@@ -134,12 +134,15 @@ const start = function (data, ID) {
                                 ElemVisible={Variable[Static.nameRecords].list_records.length < Variable[Static.nameRecords].totalFound && index == (Variable[Static.nameRecords].list_records.length - 5) ?
                                   async () => {
                                     console.log('=0c6881=', "Load more")
+                                    fn.recordsView(item._id, "setPost")
                                     let tmp = await restApi.getPost({ limit: 15, offset: Variable[Static.nameRecords].list_records.length, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
                                     Variable[Static.nameRecords].list_records.push(...tmp.list_records)
                                     initReload()
                                   }
                                   :
-                                  false
+                                  () => {
+                                    fn.recordsView(item._id, "setPost")
+                                  }
                                 }
                               />
                             );

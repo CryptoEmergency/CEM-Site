@@ -11,8 +11,6 @@ const start = function (data, ID) {
   Variable.Static.FooterShow = false
   let [Static, item] = fn.GetParams({ data, ID })
 
-  let showItemsMenu;
-
   init(
     async () => {
       fn.initData.lenta_users_show(Static)

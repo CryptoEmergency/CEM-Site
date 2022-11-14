@@ -215,4 +215,16 @@ restApi.supportMessage = async function ({ name, email, text, noAlert = false })
     const response = await sendApi.create("supportMessage", data);
     return checkSetAnswer(response, noAlert)
 }
+
+restApi.setPost = {}
+
+restApi.setPost.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
+    }
+    const response = await sendApi.create("setPost", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 export { restApi };
