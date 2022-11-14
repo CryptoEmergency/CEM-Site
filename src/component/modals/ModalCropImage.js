@@ -5,7 +5,6 @@ import {
     init
 } from "@betarost/cemjs";
 
-import { If } from "@component/helpers/All.js";
 
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';

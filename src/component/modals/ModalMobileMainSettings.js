@@ -12,7 +12,6 @@ import {
     init
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { If } from '@component/helpers/All.js';
 import youtube from '@assets/svg/youtube_icon.svg'
 // const showAllLangMedia = function (e, target) {
 //     e.preventDefault()

@@ -8,7 +8,6 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
-import { If, Map } from '@component/helpers/All.js';
 import { MediaButton, MediaPreview } from '@component/element/index.js';
 
 let formInputs;

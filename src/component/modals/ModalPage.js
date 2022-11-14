@@ -16,8 +16,6 @@ import {
 import svg from "@assets/svg/index.js";
 
 
-import { If } from "@component/helpers/All.js";
-import { getDateFormat } from "@src/functions.js";
 import { BottomMenu } from '@component/element/BottomMenu.js';
 import { ItemsMenu } from '@component/element/index.js'
 let news;

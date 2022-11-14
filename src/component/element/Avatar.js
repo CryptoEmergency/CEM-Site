@@ -3,7 +3,6 @@ import { fn } from '@src/functions/index.js';
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
 import { getDateFormat, uploadMedia } from "@src/functions.js";
-import { If } from "@component/helpers/All.js";
 
 let visibleSettings, formInputs;
 let inputAvatar = Variable.setRef();

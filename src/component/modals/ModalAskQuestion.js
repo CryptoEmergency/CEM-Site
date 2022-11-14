@@ -10,7 +10,6 @@ import {
 } from "@betarost/cemjs";
 
 import { wrapTextWithATag, uploadMedia } from "@src/functions.js";
-import { If, Map } from "@component/helpers/All.js";
 import { MediaButton, MediaPreview } from '@component/element/index.js';
 import svg from '@assets/svg/index.js';
 let formInputs, inputImg, inputVideo, inputAudio, selectAspect;
