@@ -12,8 +12,7 @@ import images from '@assets/images/index.js';
 import { api } from '@src/apiFunctions.js'
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
 import { Input, NotFound } from '@component/element/index.js';
-let elFilters
-// let Static = {}
+
 
 const makeFilter = function (Static) {
     let objReturn = {}
@@ -81,6 +80,18 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
 
     await initOne(
         async () => {
+            Static.filters.language.onclick = async () => {
+                fn.modals.ModalChangeLanguage({
+                    onclick: async (langCode, langName, langOrig) => {
+                        Static.filters.language.name = langName + ` (${langOrig})`;
+                        Static.filters.language.code = langCode;
+                        Static.filters.language.value = langName + ` (${langOrig})`;
+                        Static.apiFilter = makeFilter(Static)
+                        await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                    }
+                }, true)
+            }
+
             Static.search.condition = async (value) => {
                 Static.apiFilter = makeFilter(Static)
                 await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
@@ -127,21 +138,7 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                                 Static.elFilters = $el
                             }}>
                             <div class="c-friends__wrapper">
-                                {/* <Input classDiv="" Static={Static.filters.language} /> */}
-                                <div
-                                    class="c-friends__lang"
-                                    onclick={() => {
-                                        fn.modals.ModalChangeLanguage({
-                                            onclick: async (langCode, langName) => {
-                                                Static.filters.language.name = langName;
-                                                Static.filters.language.code = langCode;
-                                                Static.apiFilter = makeFilter(Static)
-                                                await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
-                                            }
-                                        })
-                                    }}>
-                                    {Static.filters.language.name == "all" ? Variable.lang.text.language : Static.filters.language.name}
-                                </div>
+                                <Input classDiv="language_select_wrapper" className="c-friends__lang" Static={Static.filters.language} />
                                 <img
                                     style="display: none;"
                                     class="refresh_language"

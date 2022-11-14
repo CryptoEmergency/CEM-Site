@@ -189,7 +189,7 @@ initData.content_creator = function (Static) {
     }
 
     Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
-    // Static.language.value = Variable.lang.error_div.selectFromList
+    Static.filters.language.value = Variable.lang.text.language
 
     Static.search = generate("input")
     Static.search.placeholder = Variable.lang.placeholder.findFriends
