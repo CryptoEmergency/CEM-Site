@@ -66,33 +66,40 @@ const start = function (data, ID) {
                 }
             });
             // console.log('=08e20a=', chatsList)
-            chatsList.list_records.forEach(async (chat) => {
-                if(chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1]._id == Variable.Static.startChatsID._id ){
-                    console.log(1)
-                    activeChat = chat._id
-                    messageList = await sendApi.send({
-                        action: "getUserChats", short: true,
-                        filter: {
-                            "$and": [
-                                {
-                                    "users": Variable.Static.startChatsID._id
-                                }
-                            ]
-                        },
-                        select: {
-                            "message": {
-                                "$slice": [
-                                    0,
-                                    120
+            if(Variable.Static.startChatsID){
+                let existingChat = false
+                chatsList.list_records.forEach(async (chat) => {
+                    if(chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1]._id == Variable.Static.startChatsID._id ){
+                        existingChat = true
+                        activeChat = chat._id
+                        messageList = await sendApi.send({
+                            action: "getUserChats", short: true,
+                            filter: {
+                                "$and": [
+                                    {
+                                        "users": Variable.Static.startChatsID._id
+                                    }
                                 ]
                             },
-                            "users": 1
-                        }
-                    });
-                    initReload()
+                            select: {
+                                "message": {
+                                    "$slice": [
+                                        0,
+                                        120
+                                    ]
+                                },
+                                "users": 1
+                            }
+                        });
+                        initReload()
+                    }
+                })
+                if(!existingChat){
+                    activeUser = Variable.Static.startChatsID
+                    console.log(chatsList)
+                    chatsList.list_records.unshift({_id: 1,message: [{}],users: [Variable.Static.startChatsID, Variable.myInfo]})
                 }
-            })
-
+            }
         },
         () => {
             console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
@@ -177,10 +184,10 @@ const start = function (data, ID) {
                                                     <div class="messages_list_item_info-2">
                                                         {lastMessage.author == Variable.myInfo._id
                                                             ?
-                                                            <p>{Helpers.getDateFormat(lastMessage.showDate, "now")}</p>
+                                                            <p>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</p>
                                                             :
                                                             <p class="message--new">
-                                                                <span>{Helpers.getDateFormat(lastMessage.showDate, "now")}</span>
+                                                                <span>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</span>
                                                                 {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
 
                                                             </p>
