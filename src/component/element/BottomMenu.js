@@ -5,7 +5,7 @@ import {
     Variable
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
-import { fn } from "@src/functions";
+import { fn } from "@src/functions/index.js";
 
 const findUnread = function (arr) {
     let unread = false
