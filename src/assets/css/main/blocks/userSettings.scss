@@ -397,22 +397,23 @@
         align-items: center;
         background: linear-gradient(225deg, #FF7272 0%, #D93030 100%);
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        // -webkit-text-fill-color: transparent;
         background-clip: text;
-        text-fill-color: transparent;
+        // text-fill-color: transparent;
         cursor: pointer;
-    }
-
-    &_changepass {
         width: 100%;
         max-width: 350px;
 
         @media(max-width: 599px) {
             max-width: 100%;
         }
+
+        @media(max-width: 479px) {
+            grid-area: set_del;
+        }
     }
 
-    &_deleteuser {
+    &_changepass {
         width: 100%;
         max-width: 350px;
 
@@ -525,10 +526,6 @@
                     grid-area: set_info;
                 }
             }
-        }
-
-        &_deleteuser {
-            grid-area: set_del;
         }
     }
 }
