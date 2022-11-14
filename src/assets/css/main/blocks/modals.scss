@@ -180,6 +180,35 @@
 						padding-right: 10px;
 					}
 				}
+
+				.c-comments {
+					&__field {
+						position: relative;
+		
+						textarea {
+							min-height: 41px;
+							padding-top: 7px;
+							padding-bottom: 7px;
+						}
+					}
+
+					&__form {
+						padding: 0 !important;
+						width: 100% !important;
+						margin-left: 0 !important;
+						margin-right: 0 !important;
+					}
+		
+					&__send {
+						position: absolute !important;
+						right: 1px;
+						top: 50%;
+						transform: translateY(-50%) !important;
+						outline: none;
+						border: none;
+						background: transparent;
+					}
+				}
 			}
 
 			&__wrapper {
