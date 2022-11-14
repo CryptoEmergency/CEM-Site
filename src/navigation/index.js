@@ -8,7 +8,7 @@ import {
     Variable,
     Helpers
 } from '@betarost/cemjs';
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
 import { api } from '@src/apiFunctions.js'
@@ -25,12 +25,16 @@ import {
 } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
 
-const start = function () {
-    let Static = {}
+const start = function (data, ID) {
+    let [Static] = fn.GetParams({ data, ID })
     let filtersQuestions
 
     init(
         async () => {
+            Static.dataUsers = {}
+            fn.initData.users(Static.dataUsers)
+            Static.dataUsers.nameRecords = "MainUsers"
+
             Static.filters = {
                 lang: {
                     code: "",
@@ -148,13 +152,7 @@ const start = function () {
                                     nameRecords="MainExchanges"
                                     limit={6}
                                 />
-                                {/* <BlockUsers
-                                    title={Variable.lang.h.top_users}
-                                    filters={Static.filters}
-                                    nameRecords="MainUsers"
-                                    type={"all"}
-                                    limit={6}
-                                /> */}
+                                <BlockUsers Static={Static.dataUsers} limit={6} />
                                 <div class="news_block_container">
                                     <div class="news_block">
                                         <div class="home_page_news">

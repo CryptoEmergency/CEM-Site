@@ -76,7 +76,7 @@ const makeFilter = function (Static) {
     return objReturn
 }
 
-const BlockUsers = async function ({ Static, title, filters, type, nameRecords, limit = 21 }) {
+const BlockUsers = async function ({ Static, limit = 21 }) {
 
     await initOne(
         async () => {
@@ -158,47 +158,47 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                                 <img style="display: none;" class="refresh_country" src={svg.refresh_filter} />
                             </div>
                             {() => {
-                                if (filters.group != false) {
+                                if (Static.filters.group != false) {
                                     return (
                                         <div class="c-friends__checkboxes">
                                             <div class="checkbox">
                                                 <input
-                                                    checked={filters.group.common ? true : false}
+                                                    checked={Static.filters.group.common ? true : false}
                                                     class="checkbox__input"
                                                     type="checkbox"
                                                     id="common"
                                                     required="required"
                                                     onChange={async () => {
-                                                        filters.group.common = !filters.group.common
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        Static.filters.group.common = !Static.filters.group.common
+                                                        Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: Static.nameRecords, limit: 21, filter: Static.apiFilter })
                                                     }}
                                                 />
                                                 <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
                                             </div>
                                             <div class="checkbox">
                                                 <input
-                                                    checked={filters.group.content ? true : false}
+                                                    checked={Static.filters.group.content ? true : false}
                                                     class="checkbox__input"
                                                     type="checkbox"
                                                     id="content-makers"
                                                     required="required"
                                                     onChange={async () => {
-                                                        filters.group.content = !filters.group.content
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        Static.filters.group.content = !Static.filters.group.content
+                                                        Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: Static.nameRecords, limit: 21, filter: Static.apiFilter })
                                                     }}
                                                 />
                                                 <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
                                             </div>
                                             <div class="checkbox">
                                                 <input
-                                                    checked={filters.group.expert ? true : false}
+                                                    checked={Static.filters.group.expert ? true : false}
                                                     class="checkbox__input"
                                                     type="checkbox"
                                                     id="specialists"
                                                     required="required"
                                                     onChange={async () => {
-                                                        filters.group.expert = !filters.group.expert
-                                                        Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        Static.filters.group.expert = !Static.filters.group.expert
+                                                        Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: Static.nameRecords, limit: 21, filter: Static.apiFilter })
                                                     }}
                                                 />
                                                 <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
@@ -214,7 +214,7 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                                                             required="required"
                                                             onChange={async () => {
                                                                 filters.online = !filters.online
-                                                                Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                                Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: Static.nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
                                                             }}
                                                         />
                                                         <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
@@ -238,7 +238,7 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                                                             required="required"
                                                             onChange={async () => {
                                                                 filters.online = !filters.online
-                                                                Variable[nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                                Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: Static.nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
                                                             }}
                                                         />
                                                         <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
@@ -252,11 +252,11 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                         </div>
                     </div>
                     <div class="c-friends__list top_professionals_block">
-                        {!Variable[nameRecords] || !Variable[nameRecords].list_records.length
+                        {!Variable[Static.nameRecords] || !Variable[Static.nameRecords].list_records.length
                             ?
                             <NotFound />
                             :
-                            Variable[nameRecords].list_records.map(function (user, i) {
+                            Variable[Static.nameRecords].list_records.map(function (user, i) {
                                 return (
                                     <div class="new_professional_card userLoad" data-id={user._id}>
                                         <div class="new_professional_card_top">

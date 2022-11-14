@@ -119,7 +119,7 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 }
 
-restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: 1 }, firstRecord }) {
 
     let defaultFilter = {
         "confirm.registrasion": true
