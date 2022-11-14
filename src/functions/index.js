@@ -147,6 +147,7 @@ fn.siteLinkModal = async function (e, data) {
 }
 
 fn.recordsView = function (_id, action) {
+  console.log('=e0fd8f= recordsView', _id, action)
   let timeNow = Math.floor(Date.now() / 1000)
   let objView = getStorage("recordsView")
   if (!objView) (objView = {})

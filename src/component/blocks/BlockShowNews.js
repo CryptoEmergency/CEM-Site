@@ -6,25 +6,21 @@ import {
   initReload,
   initOne
 } from "@betarost/cemjs";
-//check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { Comment, TextArea, ButtonSubmit } from "@component/element/index.js";
 
-let Static = {}
-
-const BlockShowNews = function ({ item }) {
 
 
-  initOne(() => {
-    Static.mainComment = {
-      rows: 1,
-      adaptive: 4
-    }
-  })
+const BlockShowNews = function ({ Static, item }) {
+
   return (
     <div>
-      <div class="full_news_content">
+      <div class="full_news_content"
+        ElemVisible={() => {
+          fn.recordsView(item._id, "setNews")
+        }}>
         <h1 class="full_news_name">{item.title}</h1>
         {item.image ? <img class="full_news_image" src={`/assets/upload/news/${item.image}`} /> : null}
         <p class="full_news_text mrb30">{item.preview}</p>
@@ -32,7 +28,7 @@ const BlockShowNews = function ({ item }) {
         {item.source ? <p class="full_news_disclaimer mr20">{Variable.lang.p.source}<a href={item.source} rel="nofollow" target="_blank">{item.source}</a></p> : null}
         <div style="display: flex" class="blog_post_stat">
           <p class="full_news_date">
-            <img src={svg["question_views"]} /> {item.statistic.view + 1}
+            <img src={svg["question_views"]} /> {item.statistic.view}
           </p>
           <p class="full_news_date">
             <img src={svg["question_answers"]} />

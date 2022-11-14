@@ -1,44 +1,28 @@
 import {
   jsx,
   jsxFrag,
-  init,
-  Variable,
+  init
 } from "@betarost/cemjs";
-// check
-import { api } from '@src/apiFunctions.js'
+import { fn } from '@src/functions/index.js';
 import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
-const start = function (data, ID = "mainBlock") {
-  let item;
+const start = function (data, ID) {
+  let [Static, item] = fn.GetParams({ data, ID })
   init(
     async () => {
-      if (data && data.item) {
-        item = data.item
-      } else {
-        let response = await api({ type: "get", action: "getNews", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
-        if (!response.list_records || !response.list_records[0]) {
-          item = {}
-          return
-        }
-        item = response.list_records[0]
+      fn.initData.blog_show(Static)
+      if (!Static.openModals) {
+        item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
       }
-      return
     },
     () => {
-      if (!item._id) {
-        return (
-          <div><BlockError404 /></div>
-        )
-      }
+      if (!item._id) { return (<div><BlockError404 /></div>) }
       return (
         <div class="c-main__body">
           <div class="full_news_container">
             <div class="full_news_block">
               <div class="full_news_content">
-                <BlockShowNews
-                  item={item}
-                  type={"blog"}
-                />
+                <BlockShowNews Static={Static} item={item} />
               </div>
             </div>
           </div>
@@ -48,3 +32,4 @@ const start = function (data, ID = "mainBlock") {
   );
 };
 export default start;
+// OK

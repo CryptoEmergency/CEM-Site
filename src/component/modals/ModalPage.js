@@ -47,7 +47,35 @@ const ModalPage = async function (ID, reload) {
     >
       <section class="c-modal__dialog">
         <div class="c-modal__body" >
-          <div class="c-fullnews" id="test" Element={($el) => { Variable.ModalsPage[ID].el = $el }}>{/*  full_news_container */}
+          <div
+            class="c-fullnews"
+            id="test"
+            Element={($el) => { Variable.ModalsPage[ID].el = $el }}
+            After={(el) => {
+              el.addEventListener("scroll", function () {
+                let windowPosition = {
+                  top: window.pageYOffset,
+                  left: window.pageXOffset,
+                  right: window.pageXOffset + document.documentElement.clientWidth,
+                  bottom: window.pageYOffset + document.documentElement.clientHeight
+                };
+                Variable.ElemVisible.map((item, index) => {
+                  let targetPosition = {
+                    top: window.pageYOffset + item.elem.getBoundingClientRect().top,
+                    left: window.pageXOffset + item.elem.getBoundingClientRect().left,
+                    right: window.pageXOffset + item.elem.getBoundingClientRect().right,
+                    bottom: window.pageYOffset + item.elem.getBoundingClientRect().bottom
+                  }
+                  if (targetPosition.bottom > windowPosition.top &&
+                    targetPosition.top < windowPosition.bottom &&
+                    targetPosition.right > windowPosition.left &&
+                    targetPosition.left < windowPosition.right) {
+                    item.fn()
+                    Variable.ElemVisible.splice(index, 1);
+                  }
+                })
+              });
+            }}>{/*  full_news_container */}
             <div class="c-fullnews__block">{/*  full_news_block */}
               <div class="c-fullnews__content" >{/*  full_news_content. style={type === "university" ? "max-width:1100px" : null} */}
                 <div class="c-fullnews__header">{/*  user_post_header */}
@@ -66,7 +94,7 @@ const ModalPage = async function (ID, reload) {
 
                     <h5 class="c-fullnews__title">{data.title}</h5>
 
-                    <ItemsMenu items={data.items} author = {data.author}
+                    <ItemsMenu items={data.items} author={data.author}
                     />
                     {/* <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
                       <img class="answer_additionally_toggle_img" src={svg["points"]} />

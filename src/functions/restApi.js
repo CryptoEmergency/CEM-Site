@@ -70,7 +70,7 @@ restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, fi
     }
 }
 
-restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord, defaultReset }) {
 
     let defaultFilter = {
         type: "news",
@@ -99,6 +99,11 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
         filter: Object.assign(defaultFilter, filter),
         select: Object.assign(defaultSelect, select),
         sort
+    }
+
+    if (defaultReset) {
+        if (filter) { data.filter = filter }
+        if (select) { data.select = select }
     }
 
     let response = await sendApi.send(data);
@@ -217,6 +222,7 @@ restApi.supportMessage = async function ({ name, email, text, noAlert = false })
 }
 
 restApi.setPost = {}
+restApi.setNews = {}
 
 restApi.setPost.view = async function ({ _id, noAlert = true }) {
     let data = {
@@ -224,6 +230,15 @@ restApi.setPost.view = async function ({ _id, noAlert = true }) {
         _id
     }
     const response = await sendApi.create("setPost", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setNews.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
+    }
+    const response = await sendApi.create("setNews", data);
     return checkSetAnswer(response, noAlert)
 }
 

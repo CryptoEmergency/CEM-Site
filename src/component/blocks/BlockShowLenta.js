@@ -57,7 +57,8 @@ const BlockShowLenta = function ({ Static, item }) {
                       initReload();
                     }
                   } else {
-                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                    fn.modals.ModalNeedAuth()
+                    // Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                   }
                 }}
               />

@@ -227,6 +227,56 @@ initData.lenta_users_show = function (Static) {
 }
 
 
+initData.blog_show = function (Static) {
+
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.showPage = true
+
+
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4
+    }
+
+    return
+}
+
+
+initData.news_show = function (Static) {
+
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.showPage = true
+
+
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4
+    }
+
+    return
+}
+
+initData.media_show = function (Static) {
+
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.showPage = true
+
+
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4
+    }
+
+    return
+}
+
+
 
 
 
