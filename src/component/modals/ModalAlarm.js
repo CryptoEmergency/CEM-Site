@@ -1,23 +1,18 @@
 import {
     jsx,
     jsxFrag,
-    Variable,
-    initReload,
     init
 } from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-
 //"alarm_icon" : "confirm_icon"
 const ModalAlarm = function ({ icon, text }, ID) {
-    let Static = fn.GetParams({ ID })
+    setTimeout(() => {
+        fn.modals.close(ID)
+    }, 1500);
     init(
+        null,
         () => {
-            setTimeout(() => {
-                fn.modals.close(ID)
-                Variable.DelModals("ModalAlarm")
-            }, 1500);
-        }, () => {
             return (
                 <div id="alarm" class="error_alarm_container">
                     <div class="error_alarm">
@@ -28,9 +23,6 @@ const ModalAlarm = function ({ icon, text }, ID) {
             )
         }, ID
     )
-
-
-
 };
-
 export default ModalAlarm;
+// OK
