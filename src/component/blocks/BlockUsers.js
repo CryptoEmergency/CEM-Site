@@ -92,6 +92,18 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                 }, true)
             }
 
+            Static.filters.country.onclick = async () => {
+                fn.modals.ModalSelectCountry({
+                    onclick: async (countryCode, countryName) => {
+                        Static.filters.country.name = countryName;
+                        Static.filters.country.code = countryCode;
+                        Static.filters.country.value = countryName;
+                        Static.apiFilter = makeFilter(Static)
+                        await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                    }
+                }, true)
+            }
+
             Static.search.condition = async (value) => {
                 Static.apiFilter = makeFilter(Static)
                 await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
@@ -139,32 +151,11 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                             }}>
                             <div class="c-friends__wrapper">
                                 <Input classDiv="language_select_wrapper" className="c-friends__lang" Static={Static.filters.language} />
-                                <img
-                                    style="display: none;"
-                                    class="refresh_language"
-                                    src={svg.refresh_filter}
-                                />
+                                <img style="display: none;" class="refresh_language" src={svg.refresh_filter} />
                             </div>
                             <div class="c-friends__wrapper">
-                                <div
-                                    class="c-friends__country"
-                                    onclick={() => {
-                                        fn.modals.ModalSelectCountry({
-                                            onclick: async (countryCode, countryName) => {
-                                                Static.filters.country.name = countryName;
-                                                Static.filters.country.code = countryCode;
-                                                Static.apiFilter = makeFilter(Static)
-                                                await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
-                                            }
-                                        })
-                                    }}>
-                                    {Static.filters.country.name == "all" ? Variable.lang.text.country : Static.filters.country.name}
-                                </div>
-                                <img
-                                    style="display: none;"
-                                    class="refresh_country"
-                                    src={svg.refresh_filter}
-                                />
+                                <Input classDiv="language_select_wrapper" className="c-friends__country" Static={Static.filters.country} />
+                                <img style="display: none;" class="refresh_country" src={svg.refresh_filter} />
                             </div>
                             {() => {
                                 if (filters.group != false) {
@@ -261,132 +252,129 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                         </div>
                     </div>
                     <div class="c-friends__list top_professionals_block">
-                        {() => {
-                            if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].list_records.length) {
-                                const arrReturn = Variable[nameRecords].list_records.map(function (user, i) {
-                                    return (
-                                        <div class="new_professional_card userLoad" data-id={user._id}>
-                                            <div class="new_professional_card_top">
-                                                <div class="new_professional_card_avatar">
-                                                    <Avatar author={user} nickName={true} speciality={[user.information && user.information.speciality ? user.information.speciality : false]} />
-                                                </div>
-                                                {() => {
-                                                    if (user.rank.creator) {
+                        {!Variable[nameRecords] || !Variable[nameRecords].list_records.length
+                            ?
+                            <NotFound />
+                            :
+                            Variable[nameRecords].list_records.map(function (user, i) {
+                                return (
+                                    <div class="new_professional_card userLoad" data-id={user._id}>
+                                        <div class="new_professional_card_top">
+                                            <div class="new_professional_card_avatar">
+                                                <Avatar author={user} nickName={true} speciality={[user.information && user.information.speciality ? user.information.speciality : false]} />
+                                            </div>
+                                            {() => {
+                                                if (user.rank.creator) {
+                                                    return (
+                                                        <div class="user_rank_badge">
+                                                            <img src={images.content_creator} />
+                                                        </div>
+                                                    )
+                                                }
+                                            }}
+                                        </div>
+                                        <div class="new_professional_card_main">
+                                            <a href={`/user/${user.nickname}`}>
+                                                <p
+                                                    style="width: 80%; margin: 5px auto;"
+                                                    class="new_professional_name "
+                                                >
+                                                    {user.nickname}
+                                                </p>
+                                            </a>
+                                            <p
+                                                style="width: 50%; margin: 0 auto;"
+                                                class="new_professional_spec "
+                                            >
+                                                {user.information ? user.information.speciality : ''}
+                                            </p>
+                                            <div class="new_professional_badges">
+                                                {
+                                                    user.awards.slice(0, 5).map(function (badge) {
                                                         return (
-                                                            <div class="user_rank_badge">
-                                                                <img src={images.content_creator} />
+                                                            <div class="badge_container">
+                                                                <div class="badge_description">
+                                                                    <p>{Variable.lang.awards[badge.name]}</p>
+                                                                    <span>{Variable.lang.awards[badge.description]}</span>
+                                                                </div>
+                                                                <img src={svg[`badge/${badge.icon.split(".")[0]}`]} />
                                                             </div>
                                                         )
-                                                    }
-                                                }}
+                                                    })
+                                                }
                                             </div>
-                                            <div class="new_professional_card_main">
-                                                <a href={`/user/${user.nickname}`}>
-                                                    <p
-                                                        style="width: 80%; margin: 5px auto;"
-                                                        class="new_professional_name "
-                                                    >
-                                                        {user.nickname}
-                                                    </p>
-                                                </a>
-                                                <p
-                                                    style="width: 50%; margin: 0 auto;"
-                                                    class="new_professional_spec "
-                                                >
-                                                    {user.information ? user.information.speciality : ''}
-                                                </p>
-                                                <div class="new_professional_badges">
-                                                    {
-                                                        user.awards.slice(0, 5).map(function (badge) {
-                                                            return (
-                                                                <div class="badge_container">
-                                                                    <div class="badge_description">
-                                                                        <p>{Variable.lang.awards[badge.name]}</p>
-                                                                        <span>{Variable.lang.awards[badge.description]}</span>
-                                                                    </div>
-                                                                    <img src={svg[`badge/${badge.icon.split(".")[0]}`]} />
-                                                                </div>
-                                                            )
-                                                        })
-                                                    }
+                                            <div class="new_professional_statistic">
+                                                <div class="new_professional_info_block">
+                                                    <p class="">{user.statistic.answer}</p>
+                                                    <p>{Variable.lang.p.answers}</p>
                                                 </div>
-                                                <div class="new_professional_statistic">
-                                                    <div class="new_professional_info_block">
-                                                        <p class="">{user.statistic.answer}</p>
-                                                        <p>{Variable.lang.p.answers}</p>
-                                                    </div>
-                                                    <div class="new_professional_info_block">
-                                                        <p class="">{user.statistic.follower}</p>
-                                                        <p>{Variable.lang.p.subscribe}</p>
-                                                    </div>
-                                                    <div class="new_professional_info_block">
-                                                        <p class="">{user.statistic.view}</p>
-                                                        <p>{Variable.lang.p.views}</p>
-                                                    </div>
+                                                <div class="new_professional_info_block">
+                                                    <p class="">{user.statistic.follower}</p>
+                                                    <p>{Variable.lang.p.subscribe}</p>
                                                 </div>
-                                                <div class="new_professional_buttons">
-                                                    <div class="button-container-preview">
-                                                        <a style="opacity: 0.2" class="btn-news-preview " href="#"
-                                                            onclick={async () => {
-                                                                console.log('=c826eb=', "ffff", user)
-                                                                let data = {
-                                                                    select: {
-                                                                        message: { $slice: [0, 120] },
-                                                                        users: 1
-                                                                    }
-                                                                    ,
-                                                                    filter: {
-                                                                        $and: [{ users: user._id }]
-                                                                    }
+                                                <div class="new_professional_info_block">
+                                                    <p class="">{user.statistic.view}</p>
+                                                    <p>{Variable.lang.p.views}</p>
+                                                </div>
+                                            </div>
+                                            <div class="new_professional_buttons">
+                                                <div class="button-container-preview">
+                                                    <a style="opacity: 0.2" class="btn-news-preview " href="#"
+                                                        onclick={async () => {
+                                                            console.log('=c826eb=', "ffff", user)
+                                                            let data = {
+                                                                select: {
+                                                                    message: { $slice: [0, 120] },
+                                                                    users: 1
                                                                 }
-                                                                let tmp = await api({ type: "get", action: "getUserChats", short: true, data })
-                                                                console.log('=3484c3=', tmp)
+                                                                ,
+                                                                filter: {
+                                                                    $and: [{ users: user._id }]
+                                                                }
+                                                            }
+                                                            let tmp = await api({ type: "get", action: "getUserChats", short: true, data })
+                                                            console.log('=3484c3=', tmp)
 
 
 
-                                                            }} >
-                                                            <span>
-                                                                {Variable.lang.button.write}
-                                                            </span>
-                                                        </a>
-                                                        <a
-                                                            class="btn-news-preview"
-                                                            onclick={async () => {
-                                                                let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: user._id } } })
-                                                                user.subscribe = !user.subscribe
+                                                        }} >
+                                                        <span>
+                                                            {Variable.lang.button.write}
+                                                        </span>
+                                                    </a>
+                                                    <a
+                                                        class="btn-news-preview"
+                                                        onclick={async () => {
+                                                            let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: user._id } } })
+                                                            user.subscribe = !user.subscribe
+                                                        }}
+                                                    >
+                                                        <span class="subscribe_status">
+                                                            {() => {
+                                                                if (user.subscribe) {
+                                                                    return (
+                                                                        Variable.lang.button.unsubscribe
+                                                                    )
+                                                                } else {
+                                                                    return (
+                                                                        Variable.lang.button.subscribe
+                                                                    )
+                                                                }
                                                             }}
-                                                        >
-                                                            <span class="subscribe_status">
-                                                                {() => {
-                                                                    if (user.subscribe) {
-                                                                        return (
-                                                                            Variable.lang.button.unsubscribe
-                                                                        )
-                                                                    } else {
-                                                                        return (
-                                                                            Variable.lang.button.subscribe
-                                                                        )
-                                                                    }
-                                                                }}
-                                                            </span>
-                                                        </a>
-                                                    </div>
+                                                        </span>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
-                                    )
-                                })
-                                return arrReturn
-                            } else {
-                                return (
-                                    <NotFound
-                                    />
+                                    </div>
                                 )
                             }
-                        }}
+                            )
+                        }
                     </div>
                 </div>
-                {() => {
+                <ButtonShowMore Static={Static} action="getUsers" />
+                {/* {() => {
                     if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
                         if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
                             return (
@@ -405,7 +393,7 @@ const BlockUsers = async function ({ Static, title, filters, type, nameRecords, 
                             )
                         }
                     }
-                }}
+                }} */}
             </div>
         </div >
     )

@@ -18,8 +18,13 @@ const filters = {
         readonly: true
     },
     country: {
+        value: "",
+        type: "text",
+        valid: false,
         code: "",
-        name: "all"
+        name: "all",
+        autocomplete: "off",
+        readonly: true
     },
     group: {
         common: true,
@@ -183,13 +188,16 @@ initData.contacts = function (Static) {
 initData.content_creator = function (Static) {
     Static.filters = {
         language: Object.create(filters.language),
-        country: Object.create(country),
+        country: Object.create(filters.country),
         group: false,
         online: false
     }
 
     Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
     Static.filters.language.value = Variable.lang.text.language
+
+    Static.filters.country.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.country.value = Variable.lang.text.country
 
     Static.search = generate("input")
     Static.search.placeholder = Variable.lang.placeholder.findFriends
