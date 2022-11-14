@@ -6,6 +6,7 @@ import {
   initOne,
   sendApi,
   Helpers,
+  init
 } from "@betarost/cemjs";
 
 import { wrapTextWithATag, uploadMedia } from "@src/functions.js";
@@ -161,41 +162,11 @@ const sendVideo = async function (files) {
   return
 }
 
-const ModalAskQuestion = function (data, reload) {
+const ModalAskQuestion = function (data, ID) {
   // Подключаем переменную для модалки
   if (!data.Static) { data.Static = {} }
   let Static = data.Static
-  if (!reload) {
-    formInputs = {
-      language: {
-        value:
-          Variable.myInfo.mainLanguage.eng_name +
-          ` (${Variable.myInfo.country.orig_name})`,
-        code: Variable.myInfo.mainLanguage.code,
-      },
-      question: {
-        value: "",
-        error: "",
-      },
-      textQuestion: {
-        value: "",
-        show: true,
-      },
-      mediaInputs: {
-        value: [],
-        show: false,
-        selectAspect: null,
-      },
-      isValid: false,
-    };
 
-    inputImg = Variable.setRef();
-    inputVideo = Variable.setRef();
-    inputAudio = Variable.setRef();
-
-    selectAspect = null;
-
-  }
 
   const downloadFile = (e) => {
     let type;
@@ -217,202 +188,239 @@ const ModalAskQuestion = function (data, reload) {
     // console.log('=5ce284=', e)
   }
 
-  return (
-    <div class="c-modal c-modal--open" id="ModalAskQuestion">
-      <section class="c-modal__dialog">
-        <header class="c-modal__header">
-          {/* <h2 class="c-modal__title">{Variable.lang.h.modal_question}</h2> */}
-          <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>
-          <button
-            type="button"
-            class="c-modal__close"
-            onclick={() => {
-              Variable.DelModals("ModalAskQuestion");
-              initReload("modals");
-            }}
-          ></button>
-        </header>
-        <div class="c-modal__body">
-          <div class="c-askquestion ask_question">
-            <form id="askQuestion" onsubmit={sendQuestion}>
-              <input style="display: none;" type="submit" />
-              <div class="c-askquestion__lang c-form__block ask_question_tags">
-                <label class="c-form__label" for="addTagInput">{Variable.lang.label.lang}</label>
-                <div style="display: none;" class="c-form__errormsg error-div">
-                  {Variable.lang.error_div.selectFromList}
-                </div>
-                <div class="c-form__wrapfield language_select_wrapper">
-                  <input
-                    readonly
-                    class="c-form__field"
-                    id="language_search"
-                    type="text"
-                    autocomplete="off"
-                    value={formInputs.language.value}
-                    placeholder={Variable.lang.error_div.selectFromList}
-                    onclick={() => {
-                      Variable.SetModals(
-                        {
-                          name: "ModalChangeLanguage",
-                          data: {
-                            onclick: (code, name, orig) => {
-                              formInputs.language.value =
-                                name + ` (${orig})`;
-                              formInputs.language.code = code;
+  init(
+    () => {
+      formInputs = {
+        language: {
+          value:
+            Variable.myInfo.mainLanguage.eng_name +
+            ` (${Variable.myInfo.country.orig_name})`,
+          code: Variable.myInfo.mainLanguage.code,
+        },
+        question: {
+          value: "",
+          error: "",
+        },
+        textQuestion: {
+          value: "",
+          show: true,
+        },
+        mediaInputs: {
+          value: [],
+          show: false,
+          selectAspect: null,
+        },
+        isValid: false,
+      };
+
+      inputImg = Variable.setRef();
+      inputVideo = Variable.setRef();
+      inputAudio = Variable.setRef();
+
+      selectAspect = null;
+    },
+    () => {
+      return (
+        <div class="c-modal c-modal--open" id="ModalAskQuestion">
+          <section class="c-modal__dialog">
+            <header class="c-modal__header">
+              {/* <h2 class="c-modal__title">{Variable.lang.h.modal_question}</h2> */}
+              <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>
+              <button
+                type="button"
+                class="c-modal__close"
+                onclick={() => {
+                  Variable.DelModals("ModalAskQuestion");
+                  initReload("modals");
+                }}
+              ></button>
+            </header>
+            <div class="c-modal__body">
+              <div class="c-askquestion ask_question">
+                <form id="askQuestion" onsubmit={sendQuestion}>
+                  <input style="display: none;" type="submit" />
+                  <div class="c-askquestion__lang c-form__block ask_question_tags">
+                    <label class="c-form__label" for="addTagInput">{Variable.lang.label.lang}</label>
+                    <div style="display: none;" class="c-form__errormsg error-div">
+                      {Variable.lang.error_div.selectFromList}
+                    </div>
+                    <div class="c-form__wrapfield language_select_wrapper">
+                      <input
+                        readonly
+                        class="c-form__field"
+                        id="language_search"
+                        type="text"
+                        autocomplete="off"
+                        value={formInputs.language.value}
+                        placeholder={Variable.lang.error_div.selectFromList}
+                        onclick={() => {
+                          Variable.SetModals(
+                            {
+                              name: "ModalChangeLanguage",
+                              data: {
+                                onclick: (code, name, orig) => {
+                                  formInputs.language.value =
+                                    name + ` (${orig})`;
+                                  formInputs.language.code = code;
+                                },
+                              },
                             },
-                          },
-                        },
-                        true
-                      );
-                    }}
-                  />
-                </div>
-              </div>
-              <div class="c-askquestion__textblock c-form__block">
-                <label class="c-form__label" for="questionText">
-                  {Variable.lang.label.question}
-                </label>
-                <div class="c-form__errormsg error-div">
-                  {formInputs.question.error}
-                </div>
-                <div class="c-form__wrapfield create_post_container" data-type="question">
-                  <input
-                    type="text"
-                    data-type="question"
-                    oninput={changeInput}
-                    class="c-form__field create_post_chapter create_post_title"
-                    placeholder={Variable.lang.placeholder.titleAsk}
-                    value={formInputs.question.value}
-                  />
-                  {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
-                  {() => {
-                    if (formInputs.textQuestion.show) {
-                      return (
-                        <div
-                          contenteditable="true"
-                          oninput={changeTextQuestion}
-                          class="c-form__field create_post_chapter create_post_main_text"
-                        ></div>
-                      )
-                    }
-                  }}
+                            true
+                          );
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div class="c-askquestion__textblock c-form__block">
+                    <label class="c-form__label" for="questionText">
+                      {Variable.lang.label.question}
+                    </label>
+                    <div class="c-form__errormsg error-div">
+                      {formInputs.question.error}
+                    </div>
+                    <div class="c-form__wrapfield create_post_container" data-type="question">
+                      <input
+                        type="text"
+                        data-type="question"
+                        oninput={changeInput}
+                        class="c-form__field create_post_chapter create_post_title"
+                        placeholder={Variable.lang.placeholder.titleAsk}
+                        value={formInputs.question.value}
+                      />
+                      {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
+                      {() => {
+                        if (formInputs.textQuestion.show) {
+                          return (
+                            <div
+                              contenteditable="true"
+                              oninput={changeTextQuestion}
+                              class="c-form__field create_post_chapter create_post_main_text"
+                            ></div>
+                          )
+                        }
+                      }}
 
-                  {() => {
-                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
-                      return (
-                        <div class="create_post_chapter createPostImage">
-                          {
-                            formInputs.mediaInputs.value.map(
-                              (item, index) => {
-                                if (item.type != "audio") {
-                                  return (
-                                    <MediaPreview
-                                      item={item}
-                                      index={index}
-                                      type="question"
-                                      formInputs={formInputs}
-                                    />
-                                  );
-                                }
+                      {() => {
+                        if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
+                          return (
+                            <div class="create_post_chapter createPostImage">
+                              {
+                                formInputs.mediaInputs.value.map(
+                                  (item, index) => {
+                                    if (item.type != "audio") {
+                                      return (
+                                        <MediaPreview
+                                          item={item}
+                                          index={index}
+                                          type="question"
+                                          formInputs={formInputs}
+                                        />
+                                      );
+                                    }
+                                  }
+                                )
                               }
-                            )
-                          }
-                        </div>
-                      )
-                    }
-                  }}
+                            </div>
+                          )
+                        }
+                      }}
 
-                  {() => {
-                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
-                      return (
-                        <div class="create_post_chapter createPostAudio">
-                          {
-                            formInputs.mediaInputs.value.map(
-                              (item, index) => {
-                                if (item.type == "audio") {
-                                  return (
-                                    <MediaPreview
-                                      item={item}
-                                      index={index}
-                                      type="question"
-                                      formInputs={formInputs}
-                                    />
-                                  );
-                                }
+                      {() => {
+                        if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                          return (
+                            <div class="create_post_chapter createPostAudio">
+                              {
+                                formInputs.mediaInputs.value.map(
+                                  (item, index) => {
+                                    if (item.type == "audio") {
+                                      return (
+                                        <MediaPreview
+                                          item={item}
+                                          index={index}
+                                          type="question"
+                                          formInputs={formInputs}
+                                        />
+                                      );
+                                    }
+                                  }
+                                )
                               }
-                            )
-                          }
-                        </div>
-                      )
-                    }
-                  }}
+                            </div>
+                          )
+                        }
+                      }}
 
-                </div>
-              </div>
-              {/* <div class="c-askquestion__controls create_post_control_block"> */}
-              <MediaButton
+                    </div>
+                  </div>
+                  {/* <div class="c-askquestion__controls create_post_control_block"> */}
+                  <MediaButton
 
-                // onclickText={function () {
-                //   if (formInputs.textQuestion.show === true) {
-                //     return;
-                //   } else {
-                //     formInputs.textQuestion.show = true;
-                //     initReload("modals");
-                //   }
-                // }}
+                    // onclickText={function () {
+                    //   if (formInputs.textQuestion.show === true) {
+                    //     return;
+                    //   } else {
+                    //     formInputs.textQuestion.show = true;
+                    //     initReload("modals");
+                    //   }
+                    // }}
 
-                onclickPhoto={function () {
-                  if (this.files.length == 0) {
-                    return;
-                  }
-
-                  Variable.SetModals({
-                    name: "ModalCropImage",
-                    data: {
-                      file: this.files[0],
-                      typeUpload: 'question',
-                      arrMedia: formInputs.mediaInputs.value,
-                      aspectSelect: formInputs.mediaInputs.selectAspect,
-                      uploadCropImage: async function (cropper) {
-                        await sendPhoto(cropper)
+                    onclickPhoto={function () {
+                      if (this.files.length == 0) {
                         return;
                       }
-                    },
-                  }, true);
-                  // formInputs.isValid = true;
-                  this.value = '';
-                }}
 
-                onclickVideo={function () {
-                  if (this.files.length == 0) {
-                    return;
-                  }
-                  sendVideo(this.files)
-                  this.value = '';
-                  return;
-                }}
-              />
-            </form>
-          </div>
+                      Variable.SetModals({
+                        name: "ModalCropImage",
+                        data: {
+                          file: this.files[0],
+                          typeUpload: 'question',
+                          arrMedia: formInputs.mediaInputs.value,
+                          aspectSelect: formInputs.mediaInputs.selectAspect,
+                          uploadCropImage: async function (cropper) {
+                            await sendPhoto(cropper)
+                            return;
+                          }
+                        },
+                      }, true);
+                      // formInputs.isValid = true;
+                      this.value = '';
+                    }}
+
+                    onclickVideo={function () {
+                      if (this.files.length == 0) {
+                        return;
+                      }
+                      sendVideo(this.files)
+                      this.value = '';
+                      return;
+                    }}
+                  />
+                </form>
+              </div>
+            </div>
+            <div class="c-modal__footer">
+              <button
+                class={[
+                  "c-button c-button--gradient2",
+                  !formInputs.isValid ? "c-button--inactive" : "",
+                ]}
+                type="button"
+                // ref={elemButton}
+                onClick={sendQuestion}
+              >
+                <span class="c-button__text">
+                  {Variable.lang.button.send}
+                </span>
+              </button>
+            </div>
+          </section>
         </div>
-        <div class="c-modal__footer">
-          <button
-            class={[
-              "c-button c-button--gradient2",
-              !formInputs.isValid ? "c-button--inactive" : "",
-            ]}
-            type="button"
-            // ref={elemButton}
-            onClick={sendQuestion}
-          >
-            <span class="c-button__text">
-              {Variable.lang.button.send}
-            </span>
-          </button>
-        </div>
-      </section>
-    </div>
-  );
+      );
+    }, ID
+  )
+
+
+
 };
 
 export default ModalAskQuestion;

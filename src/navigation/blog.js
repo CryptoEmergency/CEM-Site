@@ -1,7 +1,7 @@
 import {
   jsx,
   jsxFrag,
-  init,
+  init
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import { BlockNews } from '@component/blocks/index.js';
@@ -10,9 +10,7 @@ const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   init(
     async () => {
-      Static.activeCategory = "All"
-      Static.type = "blog"
-      Static.nameRecords = "PageBlog"
+      fn.initData.blog(Static)
     },
     () => {
       return (

@@ -186,6 +186,9 @@ initData.contacts = function (Static) {
 }
 
 initData.content_creator = function (Static) {
+    Static.nameRecords = "PageCreators"
+    Static.type = "creator"
+
     Static.filters = {
         language: Object.create(filters.language),
         country: Object.create(filters.country),
@@ -222,6 +225,34 @@ initData.lenta_users_show = function (Static) {
         rows: 1,
         adaptive: 4
     }
+
+    return
+}
+
+
+initData.blog = function (Static) {
+
+    Static.activeCategory = "All"
+    Static.type = "blog"
+    Static.nameRecords = "PageBlog"
+
+    return
+}
+
+initData.news = function (Static) {
+
+    Static.activeCategory = "All"
+    Static.type = "news"
+    Static.nameRecords = "PageNews"
+
+    return
+}
+
+initData.media = function (Static) {
+
+    Static.activeCategory = Variable.lang.code
+    Static.type = "media"
+    Static.nameRecords = "PageMedia"
 
     return
 }

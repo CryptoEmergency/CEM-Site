@@ -12,8 +12,6 @@ const start = function (data, ID) {
     init(
         async () => {
             fn.initData.content_creator(Static)
-            Static.nameRecords = "PageCreators"
-            Static.type = "creator"
         },
         () => {
             return (
