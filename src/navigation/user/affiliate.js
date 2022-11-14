@@ -2,38 +2,25 @@ import {
     jsx,
     jsxFrag,
     init,
-    initReload,
-    Variable,
-    sendApi,
-    Helpers
+    Variable
 } from '@betarost/cemjs';
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
-
-import { If } from '@component/helpers/All.js';
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
 
-const start = function () {
-
-    let copyWindow = Variable.setRef()
-    Variable.Static.HeaderShow = true
-    Variable.Static.FooterShow = true
-    Variable.Static.showUserMenu = false
-
+const start = function (data, ID) {
+    let [Static] = fn.GetParams({ data, ID })
     init(
         async () => {
-            Variable.PageUserAffilate = await sendApi.send({ action: "getUsers", short: true, cache: true, name: "PageUserAffilate", limit: 1, filter: { "referral.user": Variable.myInfo._id } });
+            Static.nameRecords = "PageUserAffilate"
+            Static.apiFilter = { "referral.user": Variable.myInfo._id }
+            await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
         },
         () => {
             return (
-                <div
-                    class={[
-                        "page-content",
-                        Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
-                    ]}
-                >
+                <div class="page-content c-main__body">
                     <img class="affiliate_program_blur" style="position: absolute; right: 0;" src={svg["icon/affiliate_blur-1"]} />
                     <img class="affiliate_program_blur" style="position: absolute; left: 0;" src={svg["icon/affiliate_blur-4"]} />
                     <div class="affiliate_program_block user_affiliate">
@@ -50,18 +37,17 @@ const start = function () {
                                                 <div class="copy_link_block"
                                                     onclick={() => {
                                                         navigator.clipboard.writeText(`https://crypto-emergency.com/user/${Variable.myInfo.nickname}`);
-                                                        copyWindow().hidden = false
-                                                        setTimeout(() => {
-                                                            copyWindow().hidden = true
-                                                        }, 1000)
+                                                        Static.copyWindow.hidden = false
+                                                        setTimeout(() => { Static.copyWindow.hidden = true }, 1000)
                                                     }}
                                                 >
                                                     <img src={svg.copy} />
                                                     <div
                                                         class="success_copy"
                                                         hidden={true}
-                                                        ref={copyWindow}
-                                                    >
+                                                        Element={($el) => {
+                                                            Static.copyWindow = $el
+                                                        }}>
                                                         {Variable.lang.text.coppied}
                                                     </div>
                                                 </div>
@@ -74,8 +60,7 @@ const start = function () {
                                                     if (navigator.share) {
                                                         await navigator.share(shareData)
                                                     }
-                                                }}
-                                            >
+                                                }}>
                                                 <div class="copy_link_block">
                                                     <img src={svg.share} />
                                                 </div>
@@ -100,9 +85,9 @@ const start = function () {
                         <div class="my_partners_block">
                             <p>{Variable.lang.p.myPartners}</p>
                             <div class="affiliate_partner_list">
-                                < If
-                                    data={Variable.PageUserAffilate.list_records.length != 0}
-                                    dataIf={
+                                {
+                                    Variable.PageUserAffilate.list_records.length
+                                        ?
                                         Variable.PageUserAffilate.list_records.map(function (item) {
                                             return (
                                                 <div class="affiliate_partner_item">
@@ -111,53 +96,28 @@ const start = function () {
                                                         <span>{item.nickname}</span>
                                                     </div>
                                                     <div>
-                                                        {Helpers.getDateFormat(item.showDate)}
+                                                        {fn.getDateFormat(item.showDate)}
                                                     </div>
-                                                    <div>
-                                                        <If
-                                                            data={item.statistic.level >= 3}
-                                                            dataIf={"0.5 CEM"}
-                                                            dataElse={"0 CEM"}
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <If
-                                                            data={item.statistic.level >= 3}
-                                                            dataIf={<img src={images["icon/transaction_success"]} />}
-                                                            dataElse={<img src={images["icon/transaction_in_time"]} />}
-                                                        />
-                                                    </div>
+                                                    <div> {item.statistic.level >= 3 ? "0.5 CEM" : "0 CEM"}     </div>
+                                                    <div> {item.statistic.level >= 3 ? <img src={images["icon/transaction_success"]} /> : <img src={images["icon/transaction_in_time"]} />} </div>
                                                 </div>
                                             )
                                         })
-                                    }
-                                    dataElse={
+                                        :
                                         <div class="my_partners_empty_list">
                                             <img src={svg["partner-list_icon"]} />
                                             <p>{Variable.lang.p.dontHavePartners}</p>
                                         </div>
-                                    }
-                                />
-                            </div>
-                            <If
-                                data={Variable.PageUserAffilate.list_records.length < Variable.PageUserAffilate.totalFound}
-                                dataIf={
-                                    <ButtonShowMore
-                                        onclick={async () => {
-                                            let tmp = await sendApi.send({ action: "getUsers", short: true, limit: 20, offset: Variable.PageUserAffilate.list_records.length, filter: { "referral.user": Variable.myInfo._id } })
-                                            Variable.PageUserAffilate.list_records.push(...tmp.list_records)
-                                            initReload()
-                                        }}
-                                    />
                                 }
-                            />
+                            </div>
+                            <ButtonShowMore Static={Static} action="getUsers" />
                         </div>
                         <BlockAffiliateBanners />
                     </div>
                 </div>
             )
-        }
+        }, ID
     )
 };
-//I check
 export default start;
+// OK

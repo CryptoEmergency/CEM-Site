@@ -1,14 +1,9 @@
 import {
   jsx,
   jsxFrag,
-  init,
-  Variable,
-  initReload,
+  init
 } from "@betarost/cemjs";
-// check
-import { api } from '@src/apiFunctions.js'
 import { BlockExchange } from '@component/blocks/index.js';
-import { ButtonShowMore } from "@component/element/index.js";
 
 const start = function (data, ID) {
   init(
