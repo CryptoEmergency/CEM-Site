@@ -2,24 +2,33 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  initOne,
+  getStorage,
   initReload,
 } from "@betarost/cemjs";
-
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { TextArea, ButtonSubmit, Comment } from "@component/element/index.js";
 import { BlockLentaUsers } from '@component/blocks/index.js';
 import { api } from '@src/apiFunctions.js'
 
 
-const BlockShowLenta = function ({ Static, item, showItemsMenu }) {
+
+
+const BlockShowLenta = function ({ Static, item }) {
+
   return (
     <div class="user_post_container">
       <div class="userNewsBlock">
         <div class="bl_one bl_active">
           <div class="user_news_block">
-            <BlockLentaUsers Static={Static} item={item} />
-            <h2>{Variable.lang.h.modal_comment}</h2>
+            <BlockLentaUsers
+              Static={Static}
+              item={item}
+              ElemVisible={() => {
+                fn.recordsView(item._id, "setPost")
+              }}
+            />
+            {/* <h2>{Variable.lang.h.modal_comment}</h2> */}
             <div class="c-comments__form">
               <div class="c-comments__field create_post_container1">
                 <TextArea
@@ -28,6 +37,7 @@ const BlockShowLenta = function ({ Static, item, showItemsMenu }) {
                 />
               </div>
               <ButtonSubmit
+                Static={Static}
                 text={<img class="c-comments__icon" src={svg["send_message"]} />}
                 className="c-comments__send button-container-preview"
                 onclick={async (tmp, el) => {

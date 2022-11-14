@@ -207,6 +207,11 @@ initData.content_creator = function (Static) {
 
 
 initData.lenta_users_show = function (Static) {
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.showPage = true
+
     Static.elMedia = {}
     Static.elToogle = {}
     Static.elShowTextFull = {}
