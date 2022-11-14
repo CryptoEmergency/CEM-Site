@@ -66,11 +66,37 @@ const start = function (data, ID) {
                 }
             });
             // console.log('=08e20a=', chatsList)
-
+            chatsList.list_records.forEach(async (chat) => {
+                if(chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1]._id == Variable.Static.startChatsID._id ){
+                    console.log(1)
+                    activeChat = chat._id
+                    messageList = await sendApi.send({
+                        action: "getUserChats", short: true,
+                        filter: {
+                            "$and": [
+                                {
+                                    "users": Variable.Static.startChatsID._id
+                                }
+                            ]
+                        },
+                        select: {
+                            "message": {
+                                "$slice": [
+                                    0,
+                                    120
+                                ]
+                            },
+                            "users": 1
+                        }
+                    });
+                    initReload()
+                }
+            })
 
         },
         () => {
             console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
+            
             if (messageList) {
 
                 if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {

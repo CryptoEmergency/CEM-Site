@@ -153,7 +153,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                                 <a
                                                     class="c-userpreview__btn"
                                                     onclick={async () => {
-                                                        Variable.Static.startChatsID = userInfo._id
+                                                        Variable.Static.startChatsID = userInfo
                                                         fn.siteLink("/user/chats/");
                                                     }}
                                                 >
