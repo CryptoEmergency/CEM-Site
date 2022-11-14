@@ -2,14 +2,10 @@ import {
     jsx,
     jsxFrag,
     init,
-    Variable,
-    initReload,
-    sendApi,
-    Helpers
+    Variable
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { If, Map } from '@component/helpers/All.js';
 import { ButtonShowMore, NotFound } from '@component/element/index.js';
 
 const UserWalletCard = function ({ balance, coin, course, logo }) {
