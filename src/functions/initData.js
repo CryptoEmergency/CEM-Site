@@ -264,6 +264,7 @@ initData.lenta_users_show = function (Static) {
     Static.submitClick = false
     Static.messageSent = false
     Static.showPage = true
+    Static.path = "posts"
 
     Static.elMedia = {}
     Static.elToogle = {}

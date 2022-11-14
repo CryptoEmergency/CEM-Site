@@ -12,12 +12,56 @@ fn.apiData = apiData
 fn.restApi = restApi
 fn.itemsMenu = itemsMenu
 fn.validator = Helpers.validator
+fn.sanitizeHtml = Helpers.sanitizeHtml
 fn.test = function () {
   console.log('=f83cf3 FN=', this)
   return true
 
 }
 
+fn.paragraph = function (str) {
+  let textTag = str;
+  textTag = textTag.replace(new RegExp("\n\n", 'g'), "\n").split("\n");
+  let res = "";
+  for (let item of textTag) {
+    res += "<p>" + item + "</p>";
+  }
+  return res;
+}
+
+fn.editText = function (str, filter = {}) {
+  if (!str) { str = "" }
+  let out = str.trim()
+
+  if (filter.clear) {
+    out = out.replace(new RegExp("</p><p>", 'gi'), "</p><p>\n")
+    out = Helpers.sanitizeHtml(out, { allowedTags: [], allowedAttributes: {} })
+  }
+
+  if (filter.slice) {
+    out = fn.sliceString(out, filter.slice)
+  }
+
+
+
+  if (filter.paragraph) {
+    out = fn.paragraph(out).trim()
+  }
+
+  if (filter.html) {
+    out = Helpers.stringToHtml(out)
+  }
+
+  return out
+}
+
+fn.splitArray = function (arr, size) {
+  let arrReturn = [];
+  for (let i = 0; i < arr.length; i += size) {
+    arrReturn.push(arr.slice(i, i + size));
+  }
+  return arrReturn
+}
 fn.clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {

@@ -2,82 +2,87 @@ import {
 	jsx,
 	jsxFrag,
 	Variable,
+	init
 } from "@betarost/cemjs";
 
-const arrMyAction = ["share","copyurl", "edit", "delete","closequestion","bestquestion"]
-const arrVisitorAction = ["addanswer","share","copyurl", "subscription", "complainItem", "complainUser", "blackList"]
+const arrMyAction = ["share", "copyurl", "edit", "delete", "closequestion", "bestquestion"]
+const arrVisitorAction = ["addanswer", "share", "copyurl", "subscription", "complainItem", "complainUser", "blackList"]
 const arrRoleAction = ["deleteRole"]
 
-const ModalItemsMenu = function ({ items, author }) {
-	
-	return (
-		<div class="c-modal c-modal--open" id="ModalContextMenu">
-			<section class="c-modal__dialog">
-				<div class="c-modal__body">
-					<ul class="c-actions">
-						{() => {
-							if (items && items.length) {
-								const arrReturn = items.map((item) => {
-									if (Variable.auth && Variable.myInfo && author && Variable.myInfo._id == author._id) {
-										if (arrMyAction.includes(item.type)) {
-											return (
-												<li
-													class="c-actions__item"
-													onclick={function (e) {
-														Variable.DelModals("ModalItemsMenu");
-														item.onclick(e)
-													}
-													}>
-													<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
-												</li>
-											)
-										}
-
-									} else if (arrVisitorAction.includes(item.type) && (!item.onlyAuth || Variable.auth)) {
-										return (
-											<li
-												class="c-actions__item"
-												onclick={function () {
-													Variable.DelModals("ModalItemsMenu");
-													item.onclick()
+const ModalItemsMenu = function ({ items, author }, ID) {
+	init(
+		null,
+		() => {
+			return (
+				<div class="c-modal c-modal--open" id="ModalContextMenu">
+					<section class="c-modal__dialog">
+						<div class="c-modal__body">
+							<ul class="c-actions">
+								{() => {
+									if (items && items.length) {
+										const arrReturn = items.map((item) => {
+											if (Variable.auth && Variable.myInfo && author && Variable.myInfo._id == author._id) {
+												if (arrMyAction.includes(item.type)) {
+													return (
+														<li
+															class="c-actions__item"
+															onclick={function (e) {
+																Variable.DelModals("ModalItemsMenu");
+																item.onclick(e)
+															}
+															}>
+															<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
+														</li>
+													)
 												}
-												}>
-												<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
-											</li>
-										)
-									} else {
-										if (Variable.auth && Variable.myInfo && Variable.myInfo.status && Variable.myInfo.status.role && arrRoleAction.includes(item.type)) {
-											return (
-												<li
-													class="c-actions__item"
-													onclick={function () {
-														Variable.DelModals("ModalItemsMenu");
-														item.onclick()
-													}
-													}>
-													<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
-												</li>
-											)
-										}
-									}
 
-								})
-								return arrReturn
-							}
-						}}
-					</ul>
+											} else if (arrVisitorAction.includes(item.type) && (!item.onlyAuth || Variable.auth)) {
+												return (
+													<li
+														class="c-actions__item"
+														onclick={function () {
+															Variable.DelModals("ModalItemsMenu");
+															item.onclick()
+														}
+														}>
+														<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
+													</li>
+												)
+											} else {
+												if (Variable.auth && Variable.myInfo && Variable.myInfo.status && Variable.myInfo.status.role && arrRoleAction.includes(item.type)) {
+													return (
+														<li
+															class="c-actions__item"
+															onclick={function () {
+																Variable.DelModals("ModalItemsMenu");
+																item.onclick()
+															}
+															}>
+															<span class={item.color == "red" ? "c-text--error" : item.color == "green" ? "c-text--green" : null}>{item.text}</span>
+														</li>
+													)
+												}
+											}
+
+										})
+										return arrReturn
+									}
+								}}
+							</ul>
+						</div>
+						<div class="c-modal__footer">
+							<button
+								class="c-button c-button--inverse"
+								onclick={() => {
+									Variable.DelModals("ModalItemsMenu");
+								}}					>
+								<span class="c-button__wrapper">{Variable.lang.button.reset}</span>
+							</button>
+						</div>
+					</section>
 				</div>
-				<div class="c-modal__footer">
-					<button
-						class="c-button c-button--inverse"
-						onclick={() => {
-							Variable.DelModals("ModalItemsMenu");
-						}}					>
-						<span class="c-button__wrapper">{Variable.lang.button.reset}</span>
-					</button>
-				</div>
-			</section>
-		</div>
-	);
+			);
+		}, ID
+	)
 };
 export default ModalItemsMenu;
