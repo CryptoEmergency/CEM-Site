@@ -235,10 +235,30 @@ const ModalAskQuestion = function (data, ID) {
               ></button>
             </header>
             <div class="c-modal__body">
-              <div class="c-askquestion ask_question">
+              <div class="c-askquestion">
                 <form id="askQuestion" onsubmit={sendQuestion}>
                   <input style="display: none;" type="submit" />
-                  <div class="c-askquestion__lang c-form__block ask_question_tags">
+                  <div
+                    class="alt_language_change"
+                    onclick={() => {
+                      Variable.SetModals(
+                        {
+                          name: "ModalChangeLanguage",
+                          data: {
+                            onclick: (code, name, orig) => {
+                              formInputs.language.value =
+                                name + ` (${orig})`;
+                              formInputs.language.code = code;
+                            },
+                          },
+                        },
+                        true
+                      );
+                    }}
+                  >
+                    {formInputs.language.value}
+                  </div>
+                  {/* <div class="c-askquestion__lang c-form__block ask_question_tags">
                     <label class="c-form__label" for="addTagInput">{Variable.lang.label.lang}</label>
                     <div style="display: none;" class="c-form__errormsg error-div">
                       {Variable.lang.error_div.selectFromList}
@@ -269,7 +289,7 @@ const ModalAskQuestion = function (data, ID) {
                         }}
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <div class="c-askquestion__textblock c-form__block">
                     <label class="c-form__label" for="questionText">
                       {Variable.lang.label.question}
