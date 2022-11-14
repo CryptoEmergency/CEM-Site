@@ -8,8 +8,7 @@ import {
   Helpers,
   init
 } from "@betarost/cemjs";
-
-import { wrapTextWithATag, uploadMedia } from "@src/functions.js";
+import { fn } from '@src/functions/index.js';
 import { MediaButton, MediaPreview } from '@component/element/index.js';
 import svg from '@assets/svg/index.js';
 let formInputs, inputImg, inputVideo, inputAudio, selectAspect;
@@ -72,8 +71,8 @@ const sendQuestion = async function (e) {
 };
 
 const changeTextQuestion = (e) => {
-  let text = wrapTextWithATag(e.target.innerText.trim());
-  formInputs.textQuestion.value = text;
+  // let text = wrapTextWithATag(e.target.innerText.trim());
+  formInputs.textQuestion.value = e.target.innerText.trim();
 };
 
 const sendPhoto = async function (crooper) {
@@ -88,7 +87,7 @@ const sendPhoto = async function (crooper) {
   });
 
   await canvas.toBlob(function (blob) {
-    uploadMedia(
+    fn.uploadMedia(
       blob,
       "question",
       async function () {
@@ -125,7 +124,7 @@ const sendPhoto = async function (crooper) {
 }
 
 const sendVideo = async function (files) {
-  uploadMedia(
+  fn.uploadMedia(
     files[0],
     "question",
     async function () {

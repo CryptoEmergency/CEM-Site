@@ -8,8 +8,8 @@ import {
     initReload,
     sendApi
 } from "@betarost/cemjs";
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { allValidation } from "@src/functions.js";
 
 
 let time, wayType
@@ -38,7 +38,7 @@ const change = async (e, index) => {
     let tmp = false;
     let arrEvent = e.target.parentElement.children;
     if (e.inputType === "insertFromPaste" &&
-        allValidation(e.target.value, "inputNumberPaste")) {
+        fn.validator.matches(e.target.value, /^\d{1,}$/)) {
         let strArr = e.target.value.split("");
         if (pass[index] === "") {
             for (let i = index; i < index + strArr.length; i++) {
@@ -68,7 +68,7 @@ const change = async (e, index) => {
         }
     } else if (e.inputType !== "deleteContentBackward") {
         e.target.value = e.target.value[0];
-        let isNumber = allValidation(e.target.value, "inputNumber");
+        let isNumber = fn.validator.matches(e.target.value, /[0-9]{1}/i)
         if (!isNumber) {
             e.target.value = "";
             pass[index] = "";

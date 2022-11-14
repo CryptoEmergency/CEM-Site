@@ -5,12 +5,11 @@ import {
     Variable,
     initReload,
 } from "@betarost/cemjs";
-import { getWorldPress } from "@src/apiFunctions.js";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-
+//await sendApi.create("getPress", data)
 const start = function () {
-
+    return null
     let pressList, count, sortBy, sortType
 
     Variable.HeaderShow = true

@@ -6,9 +6,7 @@ import {
   initOne,
   sendApi
 } from "@betarost/cemjs";
-
 import svg from "@assets/svg/index.js";
-import { validator, checkValid } from "@src/functions.js";
 import { Input } from '@component/element/index.js';
 import { api } from '@src/apiFunctions.js'
 import { fn } from '@src/functions/index.js';
@@ -50,7 +48,7 @@ const ModalAfterRegisterForm = function (data, reload) {
           let errorText = "";
           //если value не пустое перебериаем регулярки и запихиваем их ключи в массив 
           for (let a in arrayRegular) {
-            if (!validator.matches(value, arrayRegular[a])) {
+            if (!fn.validator.matches(value, arrayRegular[a])) {
               errorText += Variable.lang.error_div["nicknameErr" + a] + ".\r\n"
             }
           }
@@ -90,7 +88,7 @@ const ModalAfterRegisterForm = function (data, reload) {
         },
         afterValid: () => {
 
-          checkValid(Static, ["nickName", "language", "country"])
+          fn.checkValid(Static, ["nickName", "language", "country"])
 
         }
       }
@@ -110,7 +108,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                 Static.language.value = name + ` (${orig})`
                 Static.language.code = code
                 Static.language.valid = true
-                checkValid(Static, ["nickName", "language", "country"])
+                fn.checkValid(Static, ["nickName", "language", "country"])
               }
             }
           }, true);
@@ -133,7 +131,7 @@ const ModalAfterRegisterForm = function (data, reload) {
                 Static.country.value = name
                 Static.country.code = code
                 Static.country.valid = true
-                checkValid(Static, ["nickName", "language", "country"])
+                fn.checkValid(Static, ["nickName", "language", "country"])
               }
             }
           }, true);

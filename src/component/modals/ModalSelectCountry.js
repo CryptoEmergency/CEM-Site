@@ -2,7 +2,6 @@ import { jsx, jsxFrag, Variable, initReload, init } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
 import images from '@assets/images/index.js';
-import { validator, checkValid } from "@src/functions.js";
 import { Input } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';
 
@@ -35,7 +34,7 @@ const ModalSelectCountry = function (data, ID) {
     },
     afterValid: () => {
 
-      checkValid(Static, ["changeCountry"])
+      fn.checkValid(Static, ["changeCountry"])
 
     }
   }

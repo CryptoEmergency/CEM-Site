@@ -10,7 +10,6 @@ import {
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 
-import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
 import {
   MediaButton,
   Avatar,
@@ -22,7 +21,7 @@ let formInputs, selectAspect;
 const changeTextPost = (e) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
   let text = e.target.innerText.trim();
-  formInputs.textInputs.value = wrapTextWithATag(text);
+  formInputs.textInputs.value = text;
   if (text || formInputs.mediaInputs.length > 0) {
     formInputs.isValid = true;
   } else {
@@ -103,7 +102,7 @@ const start = function () {
     let numItem = formInputs.mediaInputs.value.length - 1
     initReload();
     await canvas.toBlob(function (blob) {
-      uploadMedia(
+      fn.uploadMedia(
         blob,
         "posts",
         async function () {
@@ -164,7 +163,7 @@ const start = function () {
     let numItem = formInputs.mediaInputs.value.length - 1
     initReload();
 
-    uploadMedia(
+    fn.uploadMedia(
       files[0],
       "posts",
       async function () {
@@ -223,7 +222,7 @@ const start = function () {
 
     initReload();
 
-    uploadMedia(
+    fn.uploadMedia(
       files[0],
       "posts",
       async function () {

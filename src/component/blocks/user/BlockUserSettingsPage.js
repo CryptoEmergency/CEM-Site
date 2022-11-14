@@ -6,10 +6,9 @@ import {
     initOne,
     sendApi
 } from '@betarost/cemjs';
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 
-import { allValidation } from '@src/functions.js';
 
 import { api } from '@src/apiFunctions.js'
 
@@ -61,7 +60,13 @@ const changePasswordForm = async function (e) {
 
 const securityChangeInput = function () {
     securityInputs[this.dataset.type].value = this.value.trim()
-    securityInputs[this.dataset.type].valid = allValidation(this.value.trim(), "pass");
+    securityInputs[this.dataset.type].valid = fn.validator.isStrongPassword(this.value.trim(), {
+        minLength: 8,
+        minLowercase: 0,
+        minUppercase: 0,
+        minNumbers: 0,
+        minSymbols: 1,
+    })
 
     if (!securityInputs[this.dataset.type].valid) {
         securityInputs[this.dataset.type].error = true;

@@ -6,8 +6,7 @@ import {
   sendApi,
   Helpers
 } from "@betarost/cemjs";
-import svg from "@assets/svg/index.js";
-import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
+import { fn } from '@src/functions/index.js';
 import { MediaButton, MediaPreview } from '@component/element/index.js';
 
 let formInputs;
@@ -83,7 +82,7 @@ const sendPhoto = async function (crooper) {
   });
 
   await canvas.toBlob(function (blob) {
-    uploadMedia(
+    fn.uploadMedia(
       blob,
       "answers",
       async function () {
@@ -120,7 +119,7 @@ const sendPhoto = async function (crooper) {
 }
 
 const sendVideo = async function (files) {
-  uploadMedia(
+  fn.uploadMedia(
     files[0],
     "answers",
     async function () {

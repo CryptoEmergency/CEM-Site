@@ -10,7 +10,7 @@ import "@assets/css/index.js"
 import "@assets/js/index.js"
 import { initApp } from '@src/init.js'
 import { default as languages } from '@src/languages/index.js'
-import { clickHide } from '@src/functions.js'
+import { fn } from '@src/functions/index.js';
 import listsLang from '@src/lists/languages.json'
 import phoneCodes from '@src/lists/phoneCodes.json'
 import allCountries from '@src/lists/allCountries.json'
@@ -21,7 +21,7 @@ Variable.allCountries = allCountries
 Variable.listsLang = listsLang
 Variable.phoneCodes = phoneCodes
 Variable.load = false
-Variable.clickHide = clickHide
+Variable.clickHide = fn.clickHide
 const start = async function () {
     try {
         await initCache();

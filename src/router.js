@@ -5,7 +5,7 @@ import {
     timersClear,
     sendApi
 } from '@betarost/cemjs'
-import { timerTik } from '@src/functions.js'
+import { fn } from '@src/functions/index.js';
 import list from "@src/lists/routerList.js";
 
 const mainBlock = async function () {
@@ -14,7 +14,7 @@ const mainBlock = async function () {
     init(
         () => {
             timersClear();
-            timersStart("TikTok", timerTik, 1500)
+            timersStart("TikTok", fn.timerTik, 1500)
         },
         async (reload, ID, url, data) => {
             try {

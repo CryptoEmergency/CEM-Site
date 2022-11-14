@@ -1,4 +1,4 @@
-import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage } from "@betarost/cemjs";
+import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
@@ -11,12 +11,71 @@ fn.initData = initData
 fn.apiData = apiData
 fn.restApi = restApi
 fn.itemsMenu = itemsMenu
-
+fn.validator = Helpers.validator
 fn.test = function () {
   console.log('=f83cf3 FN=', this)
   return true
 
 }
+
+fn.clickHide = function (e) {
+  if (Variable.OutHideWindows.length != 0) {
+    Variable.OutHideWindows.map((item, index) => {
+      let first, second
+      if (typeof item[0] == "function") {
+        first = item[0]()
+      } else {
+        first = item[0]
+      }
+
+      if (typeof item[1] == "function") {
+        second = item[1]()
+      } else {
+        second = item[1]
+      }
+
+      if (!document.body.contains(first)) {
+        Variable.OutHideWindows.splice(index, 1);
+        return;
+      }
+      if (first === e.target || first.contains(e.target)) {
+      } else {
+        if (item[1] && typeof item[1] == "function") {
+          if (typeof item[1]() != "boolean") {
+            second.hidden = true;
+          }
+        } else if (typeof second == "string") {
+          Variable.DelModals(second);
+        }
+        Variable.OutHideWindows.splice(index, 1);
+      }
+    });
+  }
+};
+
+fn.uploadMedia = function (file, type, onload, onprogress, xhr) {
+  let nameFile = "file.png"
+  if (file.name) {
+    nameFile = file.name
+  }
+  const formData = new FormData()
+  formData.append('media', file, nameFile);
+
+  xhr = new XMLHttpRequest()
+  xhr.open('POST', `/upload/${type}/`)
+  xhr.onload = onload
+  xhr.upload.onprogress = onprogress
+  xhr.send(formData)
+}
+
+fn.timerTik = async function () {
+  // console.log("timerTik", "tt")
+  let response = await sendApi.create("tik", {})
+  if (response && response.result && Object.keys(response.result).length) {
+    console.log('=df2a55=', response)
+  }
+
+};
 
 fn.percent = function (num1, num2) {
   return ((Number(num1) / Number(num2)) * 100)

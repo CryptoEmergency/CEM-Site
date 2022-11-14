@@ -2,7 +2,6 @@ import { jsx, jsxFrag, Variable, initReload, initOne, sendApi, Helpers } from "@
 import { fn } from '@src/functions/index.js';
 import images from "@assets/images/index.js";
 import svg from "@assets/svg/index.js";
-import { getDateFormat, uploadMedia } from "@src/functions.js";
 
 let visibleSettings, formInputs;
 let inputAvatar = Variable.setRef();
@@ -37,7 +36,7 @@ const sendPhoto = async function (crooper, path) {
     //   formData.append('media', blob, 'galary.jpg');
     //   formData.append('media_id', uniqueID);
     // }
-    uploadMedia(
+    fn.uploadMedia(
       blob,
       path,
       async function () {
@@ -368,7 +367,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                 <span class="c-avataricon__speciality">{speciality}</span>
               )}
               {dateShow && (
-                <span class="text--gray">{getDateFormat(dateShow, "userComment")}</span>
+                <span class="text--gray">{fn.getDateFormat(dateShow, "time")}</span>
               )}
             </div>
           )

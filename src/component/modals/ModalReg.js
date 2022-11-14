@@ -10,7 +10,6 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { validator, checkValid } from '@src/functions.js';
 import { Input, CheckBox } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';
 let listCodes
@@ -90,11 +89,11 @@ const ModalReg = function (data, ID) {
                 errorText: Variable.lang.error_div.wrong_phone,
                 type: "text",
                 condition: (value) => {
-                    return validator.matches(value, /[0-9]{9,13}/i);
+                    return fn.validator.matches(value, /[0-9]{9,13}/i);
                 },
                 afterValid: () => {
 
-                    checkValid(Static, ["phone", "pass", "agreement"])
+                    fn.checkValid(Static, ["phone", "pass", "agreement"])
 
                 }
             }
@@ -108,11 +107,11 @@ const ModalReg = function (data, ID) {
                 errorText: Variable.lang.error_div.wrong_email,
                 type: "text",
                 condition: (value) => {
-                    return validator.isEmail(value);
+                    return fn.validator.isEmail(value);
                 },
                 afterValid: () => {
 
-                    checkValid(Static, ["email", "pass", "agreement"])
+                    fn.checkValid(Static, ["email", "pass", "agreement"])
 
                 }
             }
@@ -126,7 +125,7 @@ const ModalReg = function (data, ID) {
                 errorText: Variable.lang.error_div.password5,
                 type: "password",
                 condition: (value) => {
-                    return validator.isStrongPassword(value, {
+                    return fn.validator.isStrongPassword(value, {
                         minLength: 8,
                         minLowercase: 0,
                         minUppercase: 0,
@@ -136,7 +135,7 @@ const ModalReg = function (data, ID) {
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayReg, "pass", "agreement"])
+                    fn.checkValid(Static, [wayReg, "pass", "agreement"])
 
                 }
             }
@@ -180,7 +179,7 @@ const ModalReg = function (data, ID) {
                                         Static.email.value = ""
                                         Static.email.error = false
                                         Static.email.valid = false
-                                        checkValid(Static, [wayReg, "pass", "agreement"])
+                                        fn.checkValid(Static, [wayReg, "pass", "agreement"])
                                     }}
                                 >
                                     {Variable.lang.button.email}
@@ -198,7 +197,7 @@ const ModalReg = function (data, ID) {
                                         Static.phone.value = ""
                                         Static.phone.error = false
                                         Static.phone.valid = false
-                                        checkValid(Static, [wayReg, "pass", "agreement"])
+                                        fn.checkValid(Static, [wayReg, "pass", "agreement"])
                                     }}
                                 >
                                     {Variable.lang.button.phone}
@@ -313,7 +312,7 @@ const ModalReg = function (data, ID) {
                                             </label>
                                         }
                                         afterValid={() => {
-                                            checkValid(Static, [wayReg, "pass", "agreement"])
+                                            fn.checkValid(Static, [wayReg, "pass", "agreement"])
                                         }}
                                     />
                                 </div>
@@ -361,11 +360,11 @@ const ModalReg = function (data, ID) {
                 errorText: Variable.lang.error_div.wrong_phone,
                 type: "text",
                 condition: (value) => {
-                    return validator.matches(value, /[0-9]{9,13}/i);
+                    return fn.matches(value, /[0-9]{9,13}/i);
                 },
                 afterValid: () => {
 
-                    checkValid(Static, ["phone", "pass", "agreement"])
+                    fn.checkValid(Static, ["phone", "pass", "agreement"])
 
                 }
             }
@@ -379,11 +378,11 @@ const ModalReg = function (data, ID) {
                 errorText: Variable.lang.error_div.wrong_email,
                 type: "text",
                 condition: (value) => {
-                    return validator.isEmail(value);
+                    return fn.validator.isEmail(value);
                 },
                 afterValid: () => {
 
-                    checkValid(Static, ["email", "pass", "agreement"])
+                    fn.checkValid(Static, ["email", "pass", "agreement"])
 
                 }
             }
@@ -397,7 +396,7 @@ const ModalReg = function (data, ID) {
                 errorText: Variable.lang.error_div.password5,
                 type: "password",
                 condition: (value) => {
-                    return validator.isStrongPassword(value, {
+                    return fn.validator.isStrongPassword(value, {
                         minLength: 8,
                         minLowercase: 0,
                         minUppercase: 0,
@@ -407,7 +406,7 @@ const ModalReg = function (data, ID) {
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayReg, "pass", "agreement"])
+                    fn.checkValid(Static, [wayReg, "pass", "agreement"])
 
                 }
             }
@@ -452,7 +451,7 @@ const ModalReg = function (data, ID) {
                                 Static.email.value = ""
                                 Static.email.error = false
                                 Static.email.valid = false
-                                checkValid(Static, [wayReg, "pass", "agreement"])
+                                fn.checkValid(Static, [wayReg, "pass", "agreement"])
                             }}
                         >
                             {Variable.lang.button.email}
@@ -470,7 +469,7 @@ const ModalReg = function (data, ID) {
                                 Static.phone.value = ""
                                 Static.phone.error = false
                                 Static.phone.valid = false
-                                checkValid(Static, [wayReg, "pass", "agreement"])
+                                fn.checkValid(Static, [wayReg, "pass", "agreement"])
                             }}
                         >
                             {Variable.lang.button.phone}
@@ -585,7 +584,7 @@ const ModalReg = function (data, ID) {
                                     </label>
                                 }
                                 afterValid={() => {
-                                    checkValid(Static, [wayReg, "pass", "agreement"])
+                                    fn.checkValid(Static, [wayReg, "pass", "agreement"])
                                 }}
                             />
                         </div>

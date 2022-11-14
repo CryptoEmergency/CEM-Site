@@ -7,9 +7,7 @@ import {
   sendApi,
   Helpers
 } from '@betarost/cemjs';
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
-import { validator, checkValid } from "@src/functions.js";
+import { fn } from '@src/functions/index.js';
 import { Input, TextArea } from '@component/element/index.js';
 
 let elem = Variable.setRef()
@@ -51,13 +49,13 @@ const ModalForumMessage = function () {
         placeholder: Variable.lang.placeholder.name,
         errorText: Variable.lang.error_div.nicknameErr,
         condition: (value) => {
-         
-          return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+
+          return fn.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
 
         },
         afterValid: () => {
 
-          checkValid(Static, ["name", "email", "text"])
+          fn.checkValid(Static, ["name", "email", "text"])
 
         }
       }
@@ -70,32 +68,32 @@ const ModalForumMessage = function () {
         placeholder: Variable.lang.placeholder.email,
         errorText: Variable.lang.error_div.wrong_email,
         type: "text",
-        condition:  (value) => {
+        condition: (value) => {
 
-          return  validator.isEmail(value);
+          return fn.validator.isEmail(value);
         },
         afterValid: () => {
 
-          checkValid(Static, ["name", "email", "text"])
+          fn.checkValid(Static, ["name", "email", "text"])
 
         }
       }
 
-      
+
       Static.text = {
-        value:"",
+        value: "",
         valid: false,
         error: false,
         label: Variable.lang.label.text,
-        error:Variable.lang.error_div.not_empty_input,
-        placeholder:Variable.lang.placeholder.message,
-        type:"text",
-        condition:(value) => {
-                    return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-                  },
-        afterValid:() => {                    
-          checkValid(Static, ["name", "email", "text"])
-                  }
+        error: Variable.lang.error_div.not_empty_input,
+        placeholder: Variable.lang.placeholder.message,
+        type: "text",
+        condition: (value) => {
+          return fn.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
+        },
+        afterValid: () => {
+          fn.checkValid(Static, ["name", "email", "text"])
+        }
       }
 
 
@@ -136,17 +134,17 @@ const ModalForumMessage = function () {
             <form onsubmit={sendMessage}>
               <input style="display: none;" type="submit" />
               <Input classDiv="contacts_form_name_icon" Static={Static.name} />
-          
-                    
+
+
               <Input
                 classDiv="contacts_form_email_icon"
                 Static={Static.email}
               />
               <div>
                 <TextArea
-                classDiv=""
-                className = ""
-                Static={Static.text}
+                  classDiv=""
+                  className=""
+                  Static={Static.text}
                 />
                 <div
                   style={Static.isValid ? "display:block; margin-top: 20px;" : "display:none"}

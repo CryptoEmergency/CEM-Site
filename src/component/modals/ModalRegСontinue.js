@@ -7,10 +7,7 @@ import {
     initGo,
     initOne
 } from '@betarost/cemjs';
-
-import images from '@assets/images/index.js';
-
-import { validator, checkValid } from '@src/functions.js';
+import { fn } from '@src/functions/index.js';
 import { Input, CheckBox } from '@component/element/index.js';
 
 
@@ -33,10 +30,10 @@ const ModalRegСontinue = function () {
                 errorText: Variable.lang.error_div.nicknameErr,
                 type: "text",
                 condition: (value) => {
-                    return validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i);
+                    return fn.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{5,30}/i);
                 },
                 afterValid: () => {
-                    checkValid(Static, ["nickName"])
+                    fn.checkValid(Static, ["nickName"])
                 }
             }
         }

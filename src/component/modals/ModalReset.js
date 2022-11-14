@@ -6,9 +6,9 @@ import {
     Variable,
     getValue
 } from '@betarost/cemjs';
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { PhoneCode } from '@component/element/PhoneCode.js';
-import { validator,checkValid } from "@src/functions.js";
 import { Input } from '@component/element/index.js';
 
 const showModalReset = function (e) {
@@ -26,22 +26,22 @@ const ModalReset = function ({ lang, changeCode, ID, abbr, codeTitle, wayReset, 
     // console.log("ModalReset", { lang, changeCode, ID, abbr, codeTitle, wayReset, changeWayReset });
     const showStepReset = getValue(ID, "toggleStepReset");
 
-    Static.phone ={
+    Static.phone = {
         value: "",
         valid: false,
         error: false,
-        autofocus:"true",
-        placeholder:"9990000000",
+        autofocus: "true",
+        placeholder: "9990000000",
         type: "text",
-        "data-co":{abbr},
+        "data-co": { abbr },
         condition: (value) => {
-            return validator.matches(value, /[0-9]{9,13}/i);
-      },
-      afterValid: () => {
-  
-        checkValid(Static, ["phone"])
-  
-      }
+            return fn.validator.matches(value, /[0-9]{9,13}/i);
+        },
+        afterValid: () => {
+
+            fn.checkValid(Static, ["phone"])
+
+        }
     }
 
 

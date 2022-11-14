@@ -9,7 +9,6 @@ import {
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { validator, checkValid } from '@src/functions.js';
 import { fn } from '@src/functions/index.js';
 import { Input } from '@component/element/index.js';
 
@@ -170,12 +169,12 @@ const ModalAuth = function (data, ID) {
                 condition: (value) => {
 
 
-                    return validator.isEmail(value);
+                    return fn.validator.isEmail(value);
 
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayAuth, "pass"])
+                    fn.checkValid(Static, [wayAuth, "pass"])
 
                 }
             }
@@ -190,7 +189,7 @@ const ModalAuth = function (data, ID) {
                 errorText: Variable.lang.error_div.password5,
                 condition: (value) => {
 
-                    return validator.isStrongPassword(value, {
+                    return fn.validator.isStrongPassword(value, {
                         minLength: 8,
                         minLowercase: 0,
                         minUppercase: 0,
@@ -201,7 +200,7 @@ const ModalAuth = function (data, ID) {
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayAuth, "pass"])
+                    fn.checkValid(Static, [wayAuth, "pass"])
 
                 }
             }
@@ -217,12 +216,12 @@ const ModalAuth = function (data, ID) {
                 errorText: Variable.lang.error_div.wrong_phone,
                 condition: (value) => {
 
-                    return validator.isMobilePhone(value);
+                    return fn.validator.isMobilePhone(value);
 
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayAuth, "pass"])
+                    fn.checkValid(Static, [wayAuth, "pass"])
 
                 }
             }
@@ -254,7 +253,7 @@ const ModalAuth = function (data, ID) {
                                         Static.email.value = ""
                                         Static.email.error = false
                                         Static.email.valid = false
-                                        checkValid(Static, [wayAuth, "pass"])
+                                        fn.checkValid(Static, [wayAuth, "pass"])
                                         // console.log(" email" + Static.isValid)
                                     }}>
                                     {Variable.lang.button.email}
@@ -266,7 +265,7 @@ const ModalAuth = function (data, ID) {
                                         Static.phone.value = ""
                                         Static.phone.error = false
                                         Static.phone.valid = false
-                                        checkValid(Static, [wayAuth, "pass"])
+                                        fn.checkValid(Static, [wayAuth, "pass"])
                                         // console.log(" phone" + Static.isValid)
 
                                     }}>
@@ -352,12 +351,12 @@ const ModalAuth = function (data, ID) {
                 condition: (value) => {
 
 
-                    return validator.isEmail(value);
+                    return fn.validator.isEmail(value);
 
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayAuth, "pass"])
+                    fn.checkValid(Static, [wayAuth, "pass"])
 
                 }
             }
@@ -372,7 +371,7 @@ const ModalAuth = function (data, ID) {
                 errorText: Variable.lang.error_div.password5,
                 condition: (value) => {
 
-                    return validator.isStrongPassword(value, {
+                    return fn.validator.isStrongPassword(value, {
                         minLength: 8,
                         minLowercase: 0,
                         minUppercase: 0,
@@ -383,7 +382,7 @@ const ModalAuth = function (data, ID) {
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayAuth, "pass"])
+                    fn.checkValid(Static, [wayAuth, "pass"])
 
                 }
             }
@@ -399,12 +398,12 @@ const ModalAuth = function (data, ID) {
                 errorText: Variable.lang.error_div.wrong_phone,
                 condition: (value) => {
 
-                    return validator.isMobilePhone(value);
+                    return fn.validator.isMobilePhone(value);
 
                 },
                 afterValid: () => {
 
-                    checkValid(Static, [wayAuth, "pass"])
+                    fn.checkValid(Static, [wayAuth, "pass"])
 
                 }
             }
@@ -436,7 +435,7 @@ const ModalAuth = function (data, ID) {
                                 Static.email.value = ""
                                 Static.email.error = false
                                 Static.email.valid = false
-                                checkValid(Static, [wayAuth, "pass"])
+                                fn.checkValid(Static, [wayAuth, "pass"])
                                 // console.log(" email" + Static.isValid)
                             }}>
                             {Variable.lang.button.email}
@@ -448,7 +447,7 @@ const ModalAuth = function (data, ID) {
                                 Static.phone.value = ""
                                 Static.phone.error = false
                                 Static.phone.valid = false
-                                checkValid(Static, [wayAuth, "pass"])
+                                fn.checkValid(Static, [wayAuth, "pass"])
                                 // console.log(" phone" + Static.isValid)
 
                             }}>

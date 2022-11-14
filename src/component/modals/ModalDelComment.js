@@ -1,5 +1,68 @@
 import { jsx, jsxFrag, Variable, initReload, initGo, sendApi, Helpers, parsingUrl } from "@betarost/cemjs";
-import { delCom } from "@src/apiFunctions.js";
+
+const delCom = async (info) => {
+
+  let data = {
+    value: {},
+    _id: info.mainId,
+  };
+
+  if (info.typeSet === "doRole") {
+    if (info.id === info.mainId) {
+      data.value = { active: false };
+      data.roleAction = info.roleAction;
+    } else if (info.mainCom === true) {
+      data.value.comments = {
+        active: false,
+        _id: info.id,
+      };
+      data.roleAction = info.roleAction;
+    } else if (info.mainCom === false) {
+      data.value.comments = {
+        comments: {
+          active: false,
+          _id: info.id,
+        },
+      };
+      data.roleAction = info.roleAction;
+    }
+  } else {
+    if (info.id === info.mainId) {
+      data.value = { active: false };
+    } else if (info.mainCom === true) {
+      data.value.comments = {
+        active: false,
+        _id: info.id,
+      };
+    } else if (info.mainCom === false) {
+      data.value.comments = {
+        comments: {
+          active: false,
+          _id: info.id,
+        },
+      };
+    }
+  }
+  // let data = {
+  //   value: {
+  //     comments: {},
+  //   },
+  //   _id: Variable.Static.showNewsId,
+  // };
+
+  // info.mainCom
+  //   ? (data.value.comments = {
+  //     active: false,
+  //     _id: info.id,
+  //   })
+  //   : (data.value.comments = {
+  //     comments: {
+  //       active: false,
+  //       _id: info.id,
+  //     },
+  //   });
+  let response = await sendApi.create(info.typeSet, data);
+};
 
 const ModalDelComment = function (data, reload) {
   return (

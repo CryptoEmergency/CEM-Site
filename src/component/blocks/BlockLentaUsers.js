@@ -12,7 +12,6 @@ import svg from "@assets/svg/index.js";
 import { api } from '@src/apiFunctions.js'
 import { LentaMedia, Evaluation } from "@component/element/index.js";
 import images from "@assets/images/index.js";
-import { getDateFormat } from "@src/functions.js";
 import {
   Avatar,
   ItemsMenu
