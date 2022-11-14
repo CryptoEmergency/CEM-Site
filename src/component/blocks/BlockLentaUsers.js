@@ -19,6 +19,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
   return (
     <div
       class="c-fullnews__item user_news_item"
+      replace={changeToogle}
       // data-href={"/lenta-users/show/" + item._id}
       ElemVisible={ElemVisible}
     // onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
@@ -45,7 +46,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
             Static={Static}
             items={item.media}
             path="posts"
-            changeToogle={changeToogle}
+          // changeToogle={changeToogle}
           />
           <div class={!item.media.length && item.text.length < 250 ? "user_post_text_background" : null}>
             <span class="comment_text"
