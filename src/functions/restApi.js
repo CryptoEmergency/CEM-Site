@@ -70,6 +70,62 @@ restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, fi
     }
 }
 
+restApi.getExchange = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { score: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getExchange",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+restApi.getTrade = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { score: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getTrade",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord, defaultReset }) {
 
     let defaultFilter = {

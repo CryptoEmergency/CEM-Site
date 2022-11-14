@@ -8,7 +8,6 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { NotFound, ButtonShowMore, LazyImage } from "@component/element/index.js";
 
-
 const Tags = function ({ Static, classActive, text, type }) {
   return (
     <div class={["tag_button", classActive]}

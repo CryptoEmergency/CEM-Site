@@ -1,10 +1,9 @@
 import {
     jsx,
     jsxFrag,
-    Variable,
-    Helpers
+    Variable
 } from '@betarost/cemjs';
-// check
+import { fn } from '@src/functions/index.js';
 import images from "@assets/images/index.js";
 
 // Сделать запрос через Базу
@@ -93,7 +92,7 @@ const BlockInfoPartners = function (data) {
                 if (data && data.limit && partners.length > data.limit) {
                     return (
                         <div class="crypto_exchanges_footer">
-                            <a class="c-button c-button--gray" href="/partners/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.partners }) }}>
+                            <a class="c-button c-button--gray" href="/partners/" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.partners }) }}>
                                 <span class="c-button__wrapper">{Variable.lang.button.allPartners}</span>
                             </a>
                         </div>
@@ -104,3 +103,4 @@ const BlockInfoPartners = function (data) {
     )
 }
 export { BlockInfoPartners }
+// OK

@@ -95,6 +95,13 @@ fn.sliceString = function (str, number = 66) {
   return sliceStr;
 };
 
+fn.NumFormat = function (num) {
+  if (num === null || num === undefined) {
+    return 0;
+  }
+  return num.toLocaleString('en-US')
+};
+
 fn.getDateFormat = function (data, type) {
   Helpers.moment.locale(Variable.lang.code);
   data = data.replace(' ', 'T')

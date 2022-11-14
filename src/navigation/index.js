@@ -34,7 +34,8 @@ const start = function (data, ID) {
             Static.dataUsers = {}
             fn.initData.users(Static.dataUsers)
             Static.dataUsers.nameRecords = "MainUsers"
-
+            Static.dataExchange = { nameRecords: "MainExchanges" }
+            Static.dataTrade = { nameRecords: "MainTrades" }
             Static.filters = {
                 lang: {
                     code: "",
@@ -143,15 +144,9 @@ const start = function (data, ID) {
                         />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
-                            <BlockTrade
-                                nameRecords="MainTrades"
-                                limit={6}
-                            />
+                            <BlockTrade Static={Static.dataTrade} limit={6} />
                             <div class="top_professionals_container">
-                                <BlockExchange
-                                    nameRecords="MainExchanges"
-                                    limit={6}
-                                />
+                                <BlockExchange Static={Static.dataExchange} limit={6} />
                                 <BlockUsers Static={Static.dataUsers} limit={6} />
                                 <div class="news_block_container">
                                     <div class="news_block">

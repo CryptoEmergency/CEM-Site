@@ -2,10 +2,9 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initOne,
-    Helpers
+    initOne
 } from '@betarost/cemjs';
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Swiper } from '@component/element/index.js';
 
@@ -163,9 +162,9 @@ const BlockProjects = async function () {
                         <a href={`/${item.link}/`}
                             onclick={(e) => {
                                 if (item.modal) {
-                                    Helpers.siteLinkModal(e, { title: item.title })
+                                    fn.siteLinkModal(e, { title: item.title })
                                 } else {
-                                    Helpers.siteLink(e)
+                                    fn.siteLink(e)
                                 }
                             }}>
                             <div class="projects_icons_text">
@@ -205,3 +204,4 @@ const BlockProjects = async function () {
     )
 }
 export { BlockProjects }
+//  OK
