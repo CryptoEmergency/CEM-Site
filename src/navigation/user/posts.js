@@ -8,6 +8,7 @@ import {
   Helpers,
   initGo,
 } from "@betarost/cemjs";
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 
@@ -472,19 +473,29 @@ const start = function () {
                   return;
                 }
 
-                Variable.SetModals({
-                  name: "ModalCropImage",
-                  data: {
-                    file: this.files[0],
-                    typeUpload: 'posts',
-                    arrMedia: formInputs.mediaInputs.value,
-                    aspectSelect: formInputs.mediaInputs.selectAspect,
-                    uploadCropImage: async function (cropper) {
-                      await sendPhoto(cropper)
-                      return;
-                    }
-                  },
-                }, true);
+                fn.modals.ModalCropImage({
+                  file: this.files[0],
+                  typeUpload: 'posts',
+                  arrMedia: formInputs.mediaInputs.value,
+                  aspectSelect: formInputs.mediaInputs.selectAspect,
+                  uploadCropImage: async function (cropper) {
+                    await sendPhoto(cropper)
+                    return;
+                  }
+                })
+                // Variable.SetModals({
+                //   name: "ModalCropImage",
+                //   data: {
+                //     file: this.files[0],
+                //     typeUpload: 'posts',
+                //     arrMedia: formInputs.mediaInputs.value,
+                //     aspectSelect: formInputs.mediaInputs.selectAspect,
+                //     uploadCropImage: async function (cropper) {
+                //       await sendPhoto(cropper)
+                //       return;
+                //     }
+                //   },
+                // }, true);
                 // formInputs.isValid = true;
                 this.value = '';
               }}

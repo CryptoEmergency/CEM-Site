@@ -15,20 +15,21 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
 
     return (
         <div class="c-mediabtn create_post_control_block">
-            <If
-                data={onclickText && typeof onclickText == "function"}
-                dataIf={
+            {
+                typeof onclickText == "function"
+                    ?
                     <div
                         class="c-mediabtn__action create_post_control_item"
                         onclick={onclickText}
                     >
                         <img class="c-mediabtn__icon" src={svg["post_text"]} />
                     </div>
-                }
-            />
-            <If
-                data={onclickPhoto && typeof onclickPhoto == "function"}
-                dataIf={
+                    :
+                    null
+            }
+            {
+                typeof onclickPhoto == "function"
+                    ?
                     <div class="c-mediabtn__action createPostImageCreator create_post_control_item" onclick={() => {
                         inputImg().click();
                     }}>
@@ -43,11 +44,12 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                         // multiple="multiple"
                         />
                     </div>
-                }
-            />
-            <If
-                data={onclickVideo && typeof onclickVideo == "function"}
-                dataIf={
+                    :
+                    null
+            }
+            {
+                typeof onclickVideo == "function"
+                    ?
                     <div class="c-mediabtn__action createPostVideoCreator create_post_control_item" onclick={() => {
                         inputVideo().click();
                     }}>
@@ -61,11 +63,12 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                             ref={inputVideo}
                         />
                     </div>
-                }
-            />
-            <If
-                data={onclickAudio && typeof onclickAudio == "function"}
-                dataIf={
+                    :
+                    null
+            }
+            {
+                typeof onclickAudio == "function"
+                    ?
                     <div class="c-mediabtn__action createPostAudioCreator create_post_control_item" onclick={() => {
                         inputAudio().click();
                     }}>
@@ -79,16 +82,18 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                             ref={inputAudio}
                         />
                     </div>
-                }
-            />
-            <If
-                data={onclickMic && typeof onclickMic == "function"}
-                dataIf={
+                    :
+                    null
+            }
+            {
+                typeof onclickMic == "function"
+                    ?
                     <button data-page_type="posts" data-type="voiceline" class="c-mediabtn__action createPostAudioCreator create_post_control_item" onclick={onclickMic}></button>
-                }
-            />
+                    :
+                    null
+            }
         </div>
     )
 }
-//I check
 export { MediaButton }
+// OK
