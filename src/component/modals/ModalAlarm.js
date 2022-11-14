@@ -9,8 +9,8 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
 //"alarm_icon" : "confirm_icon"
-const ModalAlarm = function ({ icon, text }) {
-    let Static = fn.GetParams({ data, ID })
+const ModalAlarm = function ({ icon, text }, ID) {
+    let Static = fn.GetParams({ ID })
     init(
         () => {
             setTimeout(() => {
