@@ -7,7 +7,6 @@ import {
 } from "@betarost/cemjs";
 // poydet data-action
 
-import { api } from '@src/apiFunctions.js'
 
 import svg from "@assets/svg/index.js";
 let tmp = 0

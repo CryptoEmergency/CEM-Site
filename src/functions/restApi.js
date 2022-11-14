@@ -335,6 +335,7 @@ restApi.supportMessage = async function ({ name, email, text, noAlert = false })
 
 restApi.setPost = {}
 restApi.setNews = {}
+restApi.setUsers = {}
 
 restApi.setPost.view = async function ({ _id, noAlert = true }) {
     let data = {
@@ -349,6 +350,16 @@ restApi.setNews.view = async function ({ _id, noAlert = true }) {
     let data = {
         value: { "statistic.view": true },
         _id
+    }
+    const response = await sendApi.create("setNews", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: {
+            blackList: _id
+        }
     }
     const response = await sendApi.create("setNews", data);
     return checkSetAnswer(response, noAlert)
