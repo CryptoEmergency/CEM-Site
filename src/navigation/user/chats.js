@@ -8,7 +8,6 @@ import {
     initReload
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
-import { If, Map } from '@component/helpers/All.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer, TextArea, ButtonSubmit } from '@component/element/index.js';
 import { api } from '@src/apiFunctions.js'
@@ -69,7 +68,7 @@ const start = function (data, ID) {
             if(Variable.Static.startChatsID){
                 let existingChat = false
                 chatsList.list_records.forEach(async (chat) => {
-                    if(chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1]._id == Variable.Static.startChatsID._id ){
+                    if(chat.users[0] && chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1] && chat.users[1]._id == Variable.Static.startChatsID._id ){
                         existingChat = true
                         activeChat = chat._id
                         messageList = await sendApi.send({
@@ -98,14 +97,23 @@ const start = function (data, ID) {
                     activeUser = Variable.Static.startChatsID
                     console.log(chatsList)
                     chatsList.list_records.unshift({_id: 1,message: [{}],users: [Variable.Static.startChatsID, Variable.myInfo]})
+                    messageList={
+                        list_records: [
+                            {
+                                message: [],
+                                users: [Variable.Static.startChatsID, Variable.myInfo]
+                            }
+                        ]
+                        
+                    }
                 }
             }
+            Variable.Static.startChatsID = null
         },
         () => {
             console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
-            
+        
             if (messageList) {
-
                 if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {
                     activeUser = messageList.list_records[0].users[0]
                 } else {
@@ -116,12 +124,7 @@ const start = function (data, ID) {
 
             // console.log('=633dca=', messageUser, activeUser)
             return (
-                <div
-                    class={[
-                        "messages_block",
-                        Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
-                    ]}
-                >
+                <div class= "messages_block c-main__body--noheader">
                     <div class="messages_left_part">
                         <div class="chats_search">
                         </div>
@@ -313,12 +316,7 @@ const start = function (data, ID) {
                                                         return
                                                     }
                                                     let text = Static.message.el.value.trim()
-
                                                     let data = { value: { users: activeUser._id, message: { text } } }
-
-
-
-
                                                     let response = await api({ type: "set", action: "setUserChats", data: data })
                                                     console.log('=6befba=', response)
                                                     if (response.status === "ok") {
@@ -362,9 +360,7 @@ const start = function (data, ID) {
                                 )
                             }
                         }}
-
                     </div>
-
                 </div>
             )
         }, ID
