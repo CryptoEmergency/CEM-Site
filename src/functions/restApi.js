@@ -663,8 +663,23 @@ restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
 
 restApi.setUserRoom = {}
 
-restApi.setUserRoom.create = async function ({ }) {
-
+restApi.setUserRoom.create = async function ({status, visible, confirmuser, title, description, images, languages, country}) {
+    let data = {
+        value: {
+            settingsroom: {
+                status: status,
+                visible: visible,
+                confirmuser: confirmuser,
+                title: title,
+                description: description,
+                images: images,
+            },
+            languages: languages,
+            country: country
+        }
+    }
+    const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
 }
 
 export { restApi };
