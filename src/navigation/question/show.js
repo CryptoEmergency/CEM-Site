@@ -71,7 +71,7 @@ const start = function (data, ID) {
 
 
     async () => {
-      
+
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
@@ -249,38 +249,14 @@ const start = function (data, ID) {
                                       if (response.list_records[0]) {
                                         let newRes = response.list_records[0]
                                         item.comments.unshift(newRes)
+                                        Static.mainComment.elShowInput[index].removeAttribute("data-show")
+                                        Static.mainComment.elShowInput[index].dataset.show = true
+                                        Static.mainComment.elShowInput[index].style = "display:none;"
                                         initReload();
                                       }
                                     }
                                   }}
                                 />
-                                {/* <ButtonSubmit
-                                  text={<img class="c-comments__icon" src={svg["send_message"]} />}
-                                  className="c-comments__send button-container-preview comments_send"
-                                  onclick={async (tmp, el) => {
-                                    if (!Static[index].secondComment.el.value.trim().length) {
-                                      return
-                                    }
-                                    let text = Static[index].secondComment.el.value.trim()
-                                    let data = { _id: item._id, value: { comments: { text } } }
-                                    let response = await api({ type: "set", action: "setAnswer", data: data })
-                                    if (response.status === "ok") {
-                                      Static[index].secondComment.el.value = ""
-                                      if (Static[index].adaptive) {
-                                        Static[index].secondComment.el.style.height = (Static[index].secondComment.el.dataset.maxHeight / Static[index].adaptive) + 'px';
-                                      }
-                                      Static[index].secondComment.elShowInput.style = "display:none;"
-                                      Static[index].secondComment.elShowInput.removeAttribute("data-show")
-                                      if (response.result && response.result.list_records && response.result.list_records[0]) {
-                                        let newRes = response.result.list_records[0]
-                                        item.comments.unshift(newRes)
-                                        initReload();
-                                      }
-                                    } else {
-                                      Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                                    }
-                                  }}
-                                /> */}
                               </div>
                               {/* {() => {
                                 if (item.comments && item.comments.length) {
