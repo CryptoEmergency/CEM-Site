@@ -10,7 +10,6 @@ import { TextArea, ButtonSubmit, Comment, NotFound } from "@component/element/in
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
 const BlockShowLenta = function ({ Static, item }) {
-  console.log('=a4f6b9=', item)
   return (
     <div class="user_post_container">
       <div class="userNewsBlock">

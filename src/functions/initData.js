@@ -291,7 +291,6 @@ initData.lenta_users = function (Static) {
     Static.isValid = true
     Static.submitClick = false
     Static.messageSent = false
-    Static.showPage = true
     Static.path = "posts"
 
     Static.elMedia = {}

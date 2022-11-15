@@ -3,13 +3,11 @@ import {
   jsxFrag,
   Variable,
   init,
-  initReload,
-  Helpers,
+  initReload
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
-import { restApi } from '@src/apiFunctions.js'
 import { Select, NotFound } from "@component/element/index.js";
-import { BlockLentaUsers, BlockShowLenta } from "@component/blocks/index.js";
+import { BlockLentaUsers } from "@component/blocks/index.js";
 
 const ToogleItem = function ({ Static, name }) {
   let addClass = "news_" + name
@@ -25,7 +23,6 @@ const ToogleItem = function ({ Static, name }) {
         Static.elMedia = {}
         Static.elShowTextFull = {}
         Static.elShowTextShort = {}
-
         Static.secondComment = {
           rows: 1,
           adaptive: 4,
@@ -44,9 +41,7 @@ const ToogleItem = function ({ Static, name }) {
 
 const makeFilter = function (Static) {
   let objReturn = {}
-
   switch (Static.lentaPage) {
-
     case "text":
       objReturn["media.type"] = { $nin: ["video", "audio", "image"] };
       break;
@@ -72,22 +67,17 @@ const makeFilter = function (Static) {
       ];
       break;
   }
-
   if (Static.lentaFilters && Static.lentaFilters.lang) {
     objReturn["languages.code"] = Static.lentaFilters.lang
   }
-
   if (Static.lentaFilters && Static.lentaFilters.author) {
     objReturn.author = Static.lentaFilters.author
   }
-
   return objReturn
 }
 const start = function (data, ID) {
   Variable.Static.FooterShow = false
   let [Static] = fn.GetParams({ data, ID })
-
-  // let Static = {}
 
   init(
     async () => {
@@ -153,7 +143,6 @@ const start = function (data, ID) {
                           ?
                           <NotFound />
                           :
-
                           () => {
                             let changeToogle = Static.changeToogle
                             Static.changeToogle = false
@@ -183,7 +172,6 @@ const start = function (data, ID) {
                               );
                             })
                           }
-
                       }
                     </div>
                   </div>
