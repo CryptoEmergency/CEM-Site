@@ -473,6 +473,57 @@ restApi.supportMessage = async function ({ name, email, text, noAlert = false })
     return checkSetAnswer(response, noAlert)
 }
 
+
+
+restApi.setAnswers = {}
+restApi.setAnswers.evaluation = async function ({ _id, evaluation, comment, mainId, noAlert }) {
+    let data = {}
+    if (comment) {
+        data = { _id: mainId, value: { comments: { evaluation, _id } } }
+    } else {
+        data = {
+            _id: _id,
+            value: { evaluation }
+        }
+
+    }
+
+    const response = await sendApi.create("setAnswers", data);
+    return checkSetAnswer(response, noAlert)
+}
+// Комментарий на пост главный
+restApi.setAnswers.comment = async function ({ _id, text, mainId, quoteId, noAlert }) {
+    let data = {}
+    if (quoteId) {
+        data = {
+            _id: mainId,
+            value: {
+                comments: { _id: quoteId, comments: { text, quote: quoteId } }
+            }
+        }
+    } else {
+        if (mainId) {
+            data = {
+                _id: mainId,
+                value: {
+                    comments: { _id, comments: { text } }
+                }
+            }
+        } else {
+            data = {
+                _id: _id,
+                value: {
+                    comments: { text }
+                }
+            }
+        }
+    }
+
+
+    //{ _id: mainId, value: { comments: { evaluation: type, _id: item._id } } }
+    const response = await sendApi.create("setAnswers", data);
+    return checkSetAnswer(response, noAlert)
+}
 // Запросы на посты
 restApi.setPost = {}
 // Увеличить просмотры
@@ -612,7 +663,7 @@ restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
 
 restApi.setUserRoom = {}
 
-restApi.setUserRoom.create = async function ({}){
+restApi.setUserRoom.create = async function ({ }) {
 
 }
 

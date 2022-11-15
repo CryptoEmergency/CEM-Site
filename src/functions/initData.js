@@ -280,8 +280,8 @@ initData.lenta_users_show = function (Static) {
     Static.secondComment = {
         rows: 1,
         adaptive: 4,
-        elShowInput: [],
-        el: []
+        elShowInput: {},
+        el: {}
     }
 
     return
@@ -300,16 +300,20 @@ initData.question_show = function (Static) {
     Static.elShowTextShort = {}
     Static.elMedia = {}
 
+    // Static.itemAnswer={}
+
     Static.mainComment = {
         rows: 1,
-        adaptive: 4
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
     }
 
     Static.secondComment = {
         rows: 1,
         adaptive: 4,
-        elShowInput: [],
-        el: []
+        elShowInput: {},
+        el: {}
     }
 
     return
@@ -360,8 +364,8 @@ initData.blog_show = function (Static) {
     Static.secondComment = {
         rows: 1,
         adaptive: 4,
-        elShowInput: [],
-        el: []
+        elShowInput: {},
+        el: {}
     }
 
     return
@@ -384,8 +388,8 @@ initData.news_show = function (Static) {
     Static.secondComment = {
         rows: 1,
         adaptive: 4,
-        elShowInput: [],
-        el: []
+        elShowInput: {},
+        el: {}
     }
 
     return
@@ -407,8 +411,8 @@ initData.media_show = function (Static) {
     Static.secondComment = {
         rows: 1,
         adaptive: 4,
-        elShowInput: [],
-        el: []
+        elShowInput: {},
+        el: {}
     }
 
     return

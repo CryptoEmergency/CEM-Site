@@ -1,6 +1,47 @@
 import { Variable } from '@betarost/cemjs'
 const itemsMenu = {}
 
+//нижнее меню
+//  let bottomMenuitems = fn.CreateMenuItems({
+//     text: [Variable.lang.select.complainAnswer,
+//     Variable.lang.select.complainUser,
+//     Variable.lang.select.blackList,
+//     Variable.lang.select.delete,
+//     Variable.lang.select.delete
+//     ],
+//     type: ["complainItem", "complainUser", "blackList", "delete", "deleteRole"],
+//     auth: [true, true, true, false, false],
+//     color: ["red", "red", "red", "red", "red"],
+//     onclick: ["",
+//       async () => {
+//         // Переработать модалку
+//         Variable.SetModals(
+//           {
+//             name: "ModalComplainComment",
+//             data: {
+//               id: data.item._id,
+//               typeSet: data.typeApi,
+//               mainId: data.mainId,
+//               mainCom: !data.commentId ? true : false,
+//             },
+//           }, true
+//         );
+//       }
+//       ,
+//       async () => {
+//         // Переработать модалку
+//         Variable.SetModals(
+//           {
+//             name: "ModalBlackList",
+//             data: { id: item.author._id, type: "перебрать" },
+//           }, true
+//         );
+//       },
+//       "",
+//       ""
+//     ]
+//   })
+
 //верхнее меню   вопросы
 // let upperMenuitems = fn.CreateMenuItems({
 //     text: [Variable.lang.h.modal_answer,
