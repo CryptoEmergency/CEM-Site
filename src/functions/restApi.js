@@ -435,6 +435,34 @@ restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, 
         return responseCheck
     }
 }
+
+restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
+    let data = {
+        action: "getUserRoom",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select: select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+
 //
 // SET
 restApi.supportMessage = async function ({ name, email, text, noAlert = false }) {
@@ -579,6 +607,13 @@ restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
     }
     const response = await sendApi.create("setNews", data);
     return checkSetAnswer(response, noAlert)
+}
+
+
+restApi.setUserRoom = {}
+
+restApi.setUserRoom.create = async function ({}){
+
 }
 
 export { restApi };
