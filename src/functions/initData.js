@@ -287,6 +287,34 @@ initData.lenta_users_show = function (Static) {
     return
 }
 
+initData.question_show = function (Static) {
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.showPage = true
+    Static.path = "question"
+
+    Static.elMedia = {}
+    Static.elToogle = {}
+    Static.elShowTextFull = {}
+    Static.elShowTextShort = {}
+    Static.elMedia = {}
+
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4
+    }
+
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: [],
+        el: []
+    }
+
+    return
+}
+
 
 initData.blog = function (Static) {
 

@@ -6,31 +6,33 @@ import {
   Helpers,
   initReload
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import { api } from '@src/apiFunctions.js'
-import { fn } from '@src/functions/index.js'
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment, Input } from "@component/element/index.js";
 
 const start = function (data, ID) {
+  let [Static, item] = fn.GetParams({ data, ID })
 
 
-  let item, itemAnswer, itemID, itemMenuCheck,showItemsMenu;
-  let Static = {}
-  
- 
-//нижнее меню
-let bottomMenuitems = fn.CreateMenuItems({
-    text:[Variable.lang.select.complainAnswer,
-      Variable.lang.select.complainUser,
-      Variable.lang.select.blackList,
-      Variable.lang.select.delete,
-      Variable.lang.select.delete
-     ],
-     type:["complainItem","complainUser","blackList","delete","deleteRole"],
-     auth:[true,true,true,false,false],
-     color:["red","red","red","red","red"],
-     onclick:["",
+
+
+  let itemAnswer, itemID, itemMenuCheck, showItemsMenu;
+  // let Static = {}
+
+
+  //нижнее меню
+  let bottomMenuitems = fn.CreateMenuItems({
+    text: [Variable.lang.select.complainAnswer,
+    Variable.lang.select.complainUser,
+    Variable.lang.select.blackList,
+    Variable.lang.select.delete,
+    Variable.lang.select.delete
+    ],
+    type: ["complainItem", "complainUser", "blackList", "delete", "deleteRole"],
+    auth: [true, true, true, false, false],
+    color: ["red", "red", "red", "red", "red"],
+    onclick: ["",
       async () => {
         // Переработать модалку
         Variable.SetModals(
@@ -57,217 +59,95 @@ let bottomMenuitems = fn.CreateMenuItems({
       },
       "",
       ""
-     ]
+    ]
   })
 
 
   init(
     async () => {
-
-
-      if (data && data.item) {
-        item = data.item
-        if (data.item._id) {    
-          //если в модалке
-          itemID = data.item._id
-          itemMenuCheck = true
- 
+      fn.initData.question_show(Static)
+      if (!Static.openModals) {
+        item = await fn.restApi.getQuestions({ filter: { _id: item._id }, firstRecord: true })
+      }
+      if (item.text) {
+        Static.edit_question_text = {
+          value: fn.editText(item.text, { clear: true }),
+          rows: 7
         }
-      } else {
-        if (data && data.itemID) {
-          itemID = data.itemID
-        } else {
-            //если в статике
-          itemID = Variable.dataUrl.params
-          itemMenuCheck = false
-       
-        }
-        let response = await api({ type: "get", action: "getQuestions", short: true, limit: 1, filter: { _id: itemID } })
-        if (response && response.list_records && response.list_records[0]) {
-          item = response.list_records[0]
-        } else {
-          item = []
+      }
+      if (item.title) {
+        Static.edit_question_title = {
+          value: fn.editText(item.title, { clear: true }),
+          rows: 7
         }
       }
 
 
-      //верхнее меню   
-      let upperMenuitems = fn.CreateMenuItems({
-        text:[Variable.lang.h.modal_answer,
-          Variable.lang.select.share,
-          Variable.lang.select.complainAnswer,
-          Variable.lang.select.complainUser,
-          Variable.lang.button.edit,
-          Variable.lang.select.closeQuestion,
-          Variable.lang.itemsMenu.SelectBestQuestion,
-          Variable.lang.select.delete],
-        type:["addanswer","share","complainItem","complainUser","edit","closequestion","bestquestion","delete"],
-        auth:[true,false,true,true,true,true,true,true],
-        color:["","","red","red","","red","green","red"],
-        onclick:[async () => 
-          {
-          //ответить
-          Variable.SetModals({
-            name: "ModalAnswer", data: {
-              item,
-              onClose: async () => {
-                // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-                // itemAnswer = answer.list_records
-                // initReload()
-              }
-            }
-          })
-        },
-        //поделиться
-        async () => {
-          try {
-            if (navigator.share) {
-              await navigator.share({
-                url: window.location.origin + "/question/show/" + itemID,
-              });
-            }
-          } catch (err) {
-            console.error("Share", err)
-          }
-        },
-        //пожаловаьбся на вопрос
-        async () => {
-
-          Variable.SetModals(
-            {
-              name: "ModalComplainComment",
-              data: {
-                item,
-                onClose: async () => {
-                  // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-                  // itemAnswer = answer.list_records
-                  // initReload()
-                }
-              }
-            }, true
-          );
-        },
-        //пожаловаться на пользователя
-        async () => {
-          Variable.SetModals(
-            {
-              name: "ModalComplainComment",
-              data: {
-                id: itemID,
-                typeSet: data.typeApi,
-                mainId: data.mainId,
-                mainCom: !data.commentId ? true : false,
-              },
-            }, true
-          );
-        },
-        //редактировать
-        async () => {
-         
-          Static.editQuestion = true
-          initReload()
-        },
-        //закрыть вопрос
-        "",
-        //выбрать лучший ответ
-        "",
-        //удалить
-        ""]
-      })
 
 
-      if(!itemMenuCheck)
-      {
 
-        showItemsMenu = <ItemsMenu author={item.author} 
-        items = {upperMenuitems}  />
+      itemMenuCheck = true
+
+
+
+
+
+      if (!itemMenuCheck) {
+
+        showItemsMenu = <ItemsMenu author={item.author}
+          items={upperMenuitems} />
       }
-      else{
- 
+      else {
+
         showItemsMenu = ""
         Variable["modalEditQuestion"] = data.editVisible
-   
+
       }
 
- 
+
     },
 
 
-    
+
     async () => {
-      console.log(Variable.editMenu)
+      if (!item._id) { return (<div><BlockError404 /></div>) }
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
             <div class="answer_content">
               <div class="question_author_block">
                 <Avatar author={item.author} nickName={item.author.nickname} />
-
-                <div class="comment_icons">
-                {
-                //смотрим в модалке или нет вызов меню
-                showItemsMenu
-                
-                }
-
-                </div>
-              
+                {!Static.openModals ? <div class="comment_icons"> <ItemsMenu author={item.author} items={fn.itemsMenu.lenta_users(Static, item)} /> </div> : null}
               </div>
-      
-                {()=>{
+              {
+                !Static.editQuestion
+                  ?
+                  <div>
+                    <p class="question_title">{fn.clearText(item.title)}</p>
+                    <div class="question_text"> {fn.clearText(item.text)}</div>
+                  </div>
+                  :
+                  <div>
+                    <TextArea Static={Static.edit_question_title} />
+                    <br />
+                    <TextArea Static={Static.edit_question_text} />
+                    <br />
+                    <ButtonSubmit text={"submit"} onclick={async () => {
+                      // let response = await api({ type: "set", action: "setQuestion", data: { _id: itemID, value: { title: Static.edit_question_title.value, text: Static.edit_question_text.value } } })
+                      // if (response.status === 'ok') {
+                      //   item.title = Static.edit_question_title.value
+                      //   item.text = Static.edit_question_text.value
+                      //   Static.editQuestion = false
+                      //   initReload()
+                      // } else {
+                      //   Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
 
-                  Static.edit_question_text = {
-                    value: Helpers.editText(item.text, { clear: true}),
-                    rows:7
-                  }
-
-                  Static.edit_question_title = {
-                    value: Helpers.editText(item.title, { clear: true}),
-                    rows:7
-                  }
-
-                  if(!Static.editQuestion){
-              
-                    return (
-                      <div>
-                    <p class="question_title">{item.title}</p>
-                    <div class="question_text"> {Helpers.clearText(item.text)}</div></div>
-                    )
-                  }else{
-                 
-               
-                   
-                    return (
-                      <div>
-                        <TextArea Static={ Static.edit_question_title}  />
-                        <br />
-                        <TextArea Static={ Static.edit_question_text} />
-                        <br />
-                        <ButtonSubmit text={"submit"} onclick={async () => {
-
-
-           let response = await api({ type: "set", action: "setQuestion", data: { _id: itemID, value: { title: Static.edit_question_title.value, text:Static.edit_question_text.value} } })
-            if (response.status === 'ok') {
-           item.title = Static.edit_question_title.value
-           item.text = Static.edit_question_text.value
-           Static.editQuestion =false
-              initReload()
-          } else {
-              Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
-           
-          }
-          return
-                        }} />
-                        </div>
-                    )}
-                  
-                }}
-             
-              <LentaMedia
-                items={item.media}
-                numIndex={0}
-                path={"/assets/upload/question/"}
-              />
+                      // }
+                      return
+                    }} />
+                  </div>
+              }
+              <LentaMedia Static={Static} items={item.media} path="question" />
               <div class="post_audio_container"></div>
               <div class="answers_block">
                 <p>
@@ -277,40 +157,30 @@ let bottomMenuitems = fn.CreateMenuItems({
                   <img src={svg["question_views"]} /> <b>{item.statistic.view}</b>
                 </p>
                 <p>
-                  <img src={svg["question_time"]} />{" "}
-                  <b>{Helpers.getDateFormat(item.showDate, "lenta")}</b>{" "}
+                  <img src={svg["question_time"]} />
+                  <b>{fn.getDateFormat(item.showDate, "time")}</b>
                 </p>
-                {() => {
-                  if (Variable.auth && Variable.myInfo && Variable.myInfo._id && !item.close && item.author._id !== Variable.myInfo._id) {
-                    return (<div
+                {
+                  Variable.auth && Variable.myInfo && Variable.myInfo._id && !item.close && item.author._id !== Variable.myInfo._id
+                    ?
+                    <div
                       class="btn-answer"
-                      onclick={() => {
-                        Variable.SetModals({
-                          name: "ModalAnswer", data: {
-                            item,
-                            onClose: async () => {
-                              // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
-                              // itemAnswer = answer.list_records
-                              // initReload()
-                            }
-                          }
-                        })
-                      }}>
+                      onclick={() => { fn.modals.ModalAnswer({ item, onClose: async () => { console.log('=118993=', "test close") } }) }}>
                       <a class="btn-gr-answer">
                         <span>{Variable.lang.button.giveAnswer}</span>
                       </a>
                     </div>
-                    )
-                  }
-                }}
+                    :
+                    null
+                }
               </div>
             </div>
             <div class="user_news_block">
-              {
+              {/* {
                 () => {
                   if (!itemAnswer) {
                     setTimeout(async function () {
-                  
+
                       itemAnswer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
                       initReload()
                     }, 1000)
@@ -387,7 +257,7 @@ let bottomMenuitems = fn.CreateMenuItems({
                                       Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
                                     }}
                                   />
-                                  <ItemsMenu author={item.author} items={bottomMenuitems}/>
+                                  <ItemsMenu author={item.author} items={bottomMenuitems} />
                                 </div>
                                 {() => {
                                   if (item.comments && item.comments.length) {
@@ -490,7 +360,7 @@ let bottomMenuitems = fn.CreateMenuItems({
                     }
                   }
                 }
-              }
+              } */}
             </div>
           </div>
         </div>

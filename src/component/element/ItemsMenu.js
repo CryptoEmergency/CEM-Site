@@ -3,7 +3,7 @@ import {
   jsxFrag,
   Variable,
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
 const ItemsMenu = function (data) {
@@ -24,7 +24,7 @@ const ItemsMenu = function (data) {
         e.stopPropagation();
         e.preventDefault();
         if (items && items.length) {
-          
+
           Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
         }
       }}>

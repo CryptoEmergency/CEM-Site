@@ -231,6 +231,47 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 }
 
+restApi.getAnswers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: 1 }, firstRecord }) {
+
+    let defaultFilter = {
+    }
+
+    let defaultSelect = {
+        author: 1,
+        best: 1,
+        comments: 1,
+        media: 1,
+        showDate: 1,
+        statistic: 1,
+        text: 1,
+    }
+
+
+    let data = {
+        action: "getAnswers",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: 1 }, firstRecord }) {
 
     let defaultFilter = {
@@ -307,6 +348,50 @@ restApi.getComments = async function ({ cache, name, limit = 6, offset = 0, filt
         return responseCheck
     }
 }
+
+restApi.getQuestions = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+
+    let defaultFilter = {
+    }
+
+    let defaultSelect = {
+        title: 1,
+        showDate: 1,
+        statistic: 1,
+        languages: 1,
+        close: 1,
+        bestId: 1,
+        media: 1,
+        author: 1,
+        text: 1
+    }
+
+
+    let data = {
+        action: "getQuestions",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
 
     let defaultFilter = {

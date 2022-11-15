@@ -26,7 +26,7 @@ const swiperOptions = {
   spaceBetween: 20,
 };
 
-const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeToogle }) {
+const LentaMedia = function ({ Static, items, path, changeToogle }) {
   if (items.length == 0) { return null }
   let ArrWithAudio = items.filter((item) => item.type === "audio");
   let ArrWithVideo = items.filter((item) => item.type === "video");
