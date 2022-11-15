@@ -239,7 +239,6 @@ const start = function (data, ID) {
                                                                                                 Static={Static}
                                                                                                 item={item}
                                                                                                 path={`/assets/upload/chat/`}
-                                                                                            //  path={"/assets/upload/posts/"}
                                                                                             />
                                                                                         </div>
                                                                                     );
