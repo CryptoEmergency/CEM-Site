@@ -18,7 +18,6 @@ import {
 
 
 const Comment = function ({ Static, index, item, include, mainId, action, quoteId, mainItem }) {
-
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -40,7 +39,9 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
                             <span
                                 class="c-actioncomment__answer"
                                 onclick={() => {
+                                    console.log('=9481cc=', item.author.nickname)
                                     if (Static.secondComment.elShowInput[index]) {
+                                        // Static.secondComment.elShowInput[index].value = item.author.nickname
                                         Static.secondComment.elShowInput[index].style = "display:flex;"
                                     }
                                     return
@@ -84,7 +85,7 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
                         if (!Static.secondComment.el[index].value.trim().length) {
                             return
                         }
-                        let text = Static.secondComment.el[index].value.trim()
+                        let text = item.author.nickname + ", " + Static.secondComment.el[index].value.trim()
                         let response = await fn.restApi["set" + action].comment({ _id: item._id, text, mainId, quoteId })
                         if (response.status === "ok") {
                             Static.secondComment.el[index].value = ""
@@ -127,24 +128,8 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
                     :
                     null
             }
-            {/* {() => {
-                if (item.comments && item.comments.length) {
-                    const arrReturn = item.comments.map(function (itemIn, i) {
-                        return (
-                            <Comment
-                                item={itemIn}
-                                mainItem={item}
-                                mainId={mainId}
-                                quoteId={item._id}
-                                include={true}
-                                action={action}
-                            />
-                        )
-                    })
-                    return arrReturn
-                }
-            }} */}
         </div>
     );
 };
 export { Comment };
+// OK
