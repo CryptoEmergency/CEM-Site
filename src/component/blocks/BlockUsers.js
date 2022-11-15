@@ -16,7 +16,6 @@ import { Input, NotFound } from '@component/element/index.js';
 
 const makeFilter = function (Static) {
     let objReturn = {}
-
     if (Static.type && Static.type != "all") {
         if (Static.type == "experts") {
             objReturn["rank.expert"] = true;
@@ -374,26 +373,6 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                     </div>
                 </div>
                 <ButtonShowMore Static={Static} action="getUsers" />
-                {/* {() => {
-                    if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
-                        if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
-                            return (
-                                <ButtonShowMore
-                                    onclick={async () => {
-                                        let new_filter = Helpers.getFilterUsers(filters, type);
-                                        if (Static.search.value.length > 0) {
-                                            new_filter.search = Static.search.value
-                                        }
-                                        let tmp = await api({ type: "get", action: "getUsers", short: true, limit, filter: new_filter, offset: Variable[nameRecords].list_records.length })
-                                        Variable[nameRecords].list_records.push(...tmp.list_records)
-                                        Variable[nameRecords].totalFound = tmp.totalFound
-                                        initReload()
-                                    }}
-                                />
-                            )
-                        }
-                    }
-                }} */}
             </div>
         </div >
     )
