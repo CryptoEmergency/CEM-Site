@@ -71,7 +71,7 @@ const start = function (data, ID) {
 
 
     async () => {
-      if (!item._id) { return (<div><BlockError404 /></div>) }
+      
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
