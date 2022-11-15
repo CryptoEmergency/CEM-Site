@@ -693,6 +693,10 @@ restApi.setUserChats.sendMessage = async function ({ users, text, noAlert = true
 
 restApi.setUsers = {}
 
+restApi.setUsers.any = async function ({ data, noAlert = true }) {
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
 
 restApi.setUsers.delete = async function ({ del, noAlert = true }) {
     let data = {}

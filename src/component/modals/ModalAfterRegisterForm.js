@@ -8,7 +8,6 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
-import { api } from '@src/apiFunctions.js'
 import { fn } from '@src/functions/index.js';
 
 // let Static = {}
@@ -54,9 +53,10 @@ const ModalAfterRegisterForm = function (data, reload) {
           }
           //если ошибок нет проверим на уникальность имени пользователя
           if (errorText.trim().length == 0) {
-            let response = await api({ type: "get", action: "getUsers", filter: { nickname: value } })
+            let response = await fn.restApi.getUsers({ filter: { nickname: value } })
+            // api({ type: "get", action: "getUsers", filter: { nickname: value } })
             //если ник нейм свободен вернем true
-            if (response.result.totalFound == 0) {
+            if (response.totalFound == 0) {
               return true
             }
             else {

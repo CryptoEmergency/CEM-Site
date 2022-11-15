@@ -7,7 +7,6 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Input, ButtonSubmit, TextArea } from '@component/element/index.js';
-import { api } from '@src/apiFunctions.js'
 
 const showModalUserInfoEdit = function (e) {
     e.stopPropagation()
@@ -166,7 +165,8 @@ const ModalUserInfoEdit = function (userInfo, ID) {
                                     let data = {
                                         value: value
                                     }
-                                    let response = await api({ type: "set", action: "setUsers", data })
+                                    let response = await fn.restApi.setUsers.any({ data })
+                                    // api({ type: "set", action: "setUsers", data })
                                     Variable.DelModals("ModalUserInfoEdit");
                                     console.log('data', data)
                                     console.log(response)
