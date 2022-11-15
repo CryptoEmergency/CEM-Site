@@ -18,9 +18,9 @@ const URL = window.URL || window.webkitURL;
 let cropper, aspectActive;
 
 const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
-    let Static = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+    let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
     console.log('=453e8a=', Static)
-    console.log('=018927=', aspectSelect)
+    console.log('=018927=', Static.aspectSelect)
 
     const cropperGo = function (el) {
         if (cropper) {
@@ -43,10 +43,10 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
     }
 
     init(
-        () => {
+        async () => {
             cropper = null
             if (aspectSelect) {
-                aspectActive = aspectSelect
+                aspectActive = Static.aspectSelect
             } else {
                 if (typeUpload == "bg") {
                     aspectActive = 4
