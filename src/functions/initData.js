@@ -277,6 +277,45 @@ initData.lenta_users_show = function (Static) {
         adaptive: 4
     }
 
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
+    return
+}
+
+initData.question_show = function (Static) {
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.showPage = true
+    Static.path = "question"
+
+    Static.elMedia = {}
+    Static.elToogle = {}
+    Static.elShowTextFull = {}
+    Static.elShowTextShort = {}
+    Static.elMedia = {}
+
+    // Static.itemAnswer={}
+
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
     return
 }
 
@@ -322,6 +361,13 @@ initData.blog_show = function (Static) {
         adaptive: 4
     }
 
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
     return
 }
 
@@ -339,6 +385,13 @@ initData.news_show = function (Static) {
         adaptive: 4
     }
 
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
     return
 }
 
@@ -353,6 +406,13 @@ initData.media_show = function (Static) {
     Static.mainComment = {
         rows: 1,
         adaptive: 4
+    }
+
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
     }
 
     return

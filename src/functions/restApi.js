@@ -231,6 +231,47 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 }
 
+restApi.getAnswers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: 1 }, firstRecord }) {
+
+    let defaultFilter = {
+    }
+
+    let defaultSelect = {
+        author: 1,
+        best: 1,
+        comments: 1,
+        media: 1,
+        showDate: 1,
+        statistic: 1,
+        text: 1,
+    }
+
+
+    let data = {
+        action: "getAnswers",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: 1 }, firstRecord }) {
 
     let defaultFilter = {
@@ -280,6 +321,77 @@ restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter,
 }
 
 
+restApi.getComments = async function ({ cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getComments",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select: select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+restApi.getQuestions = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+
+    let defaultFilter = {
+    }
+
+    let defaultSelect = {
+        title: 1,
+        showDate: 1,
+        statistic: 1,
+        languages: 1,
+        close: 1,
+        bestId: 1,
+        media: 1,
+        author: 1,
+        text: 1
+    }
+
+
+    let data = {
+        action: "getQuestions",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
 
     let defaultFilter = {
@@ -323,6 +435,34 @@ restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, 
         return responseCheck
     }
 }
+
+restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
+    let data = {
+        action: "getUserRoom",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select: select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+
 //
 // SET
 restApi.supportMessage = async function ({ name, email, text, noAlert = false }) {
@@ -333,6 +473,57 @@ restApi.supportMessage = async function ({ name, email, text, noAlert = false })
     return checkSetAnswer(response, noAlert)
 }
 
+
+
+restApi.setAnswers = {}
+restApi.setAnswers.evaluation = async function ({ _id, evaluation, comment, mainId, noAlert }) {
+    let data = {}
+    if (comment) {
+        data = { _id: mainId, value: { comments: { evaluation, _id } } }
+    } else {
+        data = {
+            _id: _id,
+            value: { evaluation }
+        }
+
+    }
+
+    const response = await sendApi.create("setAnswers", data);
+    return checkSetAnswer(response, noAlert)
+}
+// Комментарий на пост главный
+restApi.setAnswers.comment = async function ({ _id, text, mainId, quoteId, noAlert }) {
+    let data = {}
+    if (quoteId) {
+        data = {
+            _id: mainId,
+            value: {
+                comments: { _id: quoteId, comments: { text, quote: quoteId } }
+            }
+        }
+    } else {
+        if (mainId) {
+            data = {
+                _id: mainId,
+                value: {
+                    comments: { _id, comments: { text } }
+                }
+            }
+        } else {
+            data = {
+                _id: _id,
+                value: {
+                    comments: { text }
+                }
+            }
+        }
+    }
+
+
+    //{ _id: mainId, value: { comments: { evaluation: type, _id: item._id } } }
+    const response = await sendApi.create("setAnswers", data);
+    return checkSetAnswer(response, noAlert)
+}
 // Запросы на посты
 restApi.setPost = {}
 // Увеличить просмотры
@@ -345,28 +536,107 @@ restApi.setPost.view = async function ({ _id, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 // Лайк-Дизлайк
-restApi.setPost.evaluation = async function ({ _id, evaluation, noAlert }) {
-    let data = {
-        _id: _id,
-        value: { evaluation }
+restApi.setPost.evaluation = async function ({ _id, evaluation, comment, mainId, noAlert }) {
+    let data = {}
+    if (comment) {
+        data = { _id: mainId, value: { comments: { evaluation, _id } } }
+    } else {
+        data = {
+            _id: _id,
+            value: { evaluation }
+        }
+
     }
+
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
 }
 // Комментарий на пост главный
-restApi.setPost.comment = async function ({ _id, text, noAlert }) {
-    let data = {
-        _id: _id,
-        value: {
-            comments: { text }
+restApi.setPost.comment = async function ({ _id, text, mainId, quoteId, noAlert }) {
+    let data = {}
+    if (quoteId) {
+        data = {
+            _id: mainId,
+            value: {
+                comments: { _id: quoteId, comments: { text, quote: quoteId } }
+            }
+        }
+    } else {
+        if (mainId) {
+            data = {
+                _id: mainId,
+                value: {
+                    comments: { _id, comments: { text } }
+                }
+            }
+        } else {
+            data = {
+                _id: _id,
+                value: {
+                    comments: { text }
+                }
+            }
         }
     }
+
+
+    //{ _id: mainId, value: { comments: { evaluation: type, _id: item._id } } }
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
 }
 
 // Запросы  на новости
 restApi.setNews = {}
+
+restApi.setNews.evaluation = async function ({ _id, evaluation, comment, mainId, noAlert }) {
+    let data = {}
+    if (comment) {
+        data = { _id: mainId, value: { comments: { evaluation, _id } } }
+    } else {
+        data = {
+            _id: _id,
+            value: { evaluation }
+        }
+
+    }
+
+    const response = await sendApi.create("setNews", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setNews.comment = async function ({ _id, text, mainId, quoteId, noAlert }) {
+    let data = {}
+    if (quoteId) {
+        data = {
+            _id: mainId,
+            value: {
+                comments: { _id: quoteId, comments: { text, quote: quoteId } }
+            }
+        }
+    } else {
+        if (mainId) {
+            data = {
+                _id: mainId,
+                value: {
+                    comments: { _id, comments: { text } }
+                }
+            }
+        } else {
+            data = {
+                _id: _id,
+                value: {
+                    comments: { text }
+                }
+            }
+        }
+    }
+
+
+    //{ _id: mainId, value: { comments: { evaluation: type, _id: item._id } } }
+    const response = await sendApi.create("setNews", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 restApi.setUsers = {}
 
 
@@ -388,6 +658,13 @@ restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
     }
     const response = await sendApi.create("setNews", data);
     return checkSetAnswer(response, noAlert)
+}
+
+
+restApi.setUserRoom = {}
+
+restApi.setUserRoom.create = async function ({ }) {
+
 }
 
 export { restApi };

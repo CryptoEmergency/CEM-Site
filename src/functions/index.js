@@ -19,6 +19,10 @@ fn.test = function () {
 
 }
 
+fn.clearText = function (data) {
+  return Helpers.stringToHtml(Helpers.sanitizeHtml(data))
+}
+
 fn.paragraph = function (str) {
   let textTag = str;
   textTag = textTag.replace(new RegExp("\n\n", 'g'), "\n").split("\n");

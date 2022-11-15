@@ -7,7 +7,7 @@ import {
 } from "@betarost/cemjs";
 // poydet data-action
 
-
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 let tmp = 0
 const start = function (data, ID) {
@@ -15,7 +15,8 @@ const start = function (data, ID) {
     Variable.Static.tpm = 5
     init(
         async () => {
-
+            let tmp = await fn.restApi.getCourse({cache: false, firstRecord: true})
+            console.log(tmp)
         },
         () => {
             return (

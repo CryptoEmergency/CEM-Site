@@ -131,7 +131,7 @@
         margin: 0 12px; */
         width: 100%;
         min-width: 100%;
-        margin: 0 auto;
+        margin: 0 auto 24px;
     }
 
     .c-avataricon {
@@ -172,6 +172,17 @@
 
     &__link {
         flex-grow: 1;
+    }
+
+    &__counter {
+        position: absolute;
+        z-index: 2;
+        right: 14px;
+        top: 75px;
+        padding: 3px;
+        text-align: right;
+        color: #8192F6;
+        font-weight: 600;
     }
 }
 

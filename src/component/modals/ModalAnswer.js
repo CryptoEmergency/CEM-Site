@@ -4,7 +4,8 @@ import {
   Variable,
   initReload,
   sendApi,
-  Helpers
+  Helpers,
+  init
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import { MediaButton, MediaPreview } from '@component/element/index.js';
@@ -156,175 +157,178 @@ const sendVideo = async function (files) {
 }
 
 
-const ModalAnswer = function (data, reload) {
-  if (!data.Static) { data.Static = {} }
-  let Static = data.Static
-
-  if (!reload) {
-    Variable.OutHideWindows.push([elem, "ModalAnswer"])
-    formInputs = {
-      textAnswer: {
-        value: "",
-        error: "",
-        show: true,
-      },
-      mediaInputs: {
-        value: [],
-        show: false,
-        selectAspect: null,
-      },
-      isValid: false,
-    };
-  }
-  return (
-    <div class="c-modal c-modal--open" id="ModalAnswer">
-      <section class="c-modal__dialog">
-        <header class="c-modal__header">
-          <h2 class="c-modal__title">{Variable.lang.h.modal_answer}</h2>
-          <button
-            type="button"
-            class="c-modal__close"
-            onclick={() => {
-              Variable.DelModals("ModalAnswer");
-              initReload("modals");
-            }}
-          ></button>
-        </header>
-        <div class="c-modal__body">
-          <form id="createPostForm" onsubmit={(e) => sendAnswer(e, data)} >
-            <input style="display: none;" type="submit" />
-            <div class="error-div">
-              <div class="error-div-variant">{formInputs.textAnswer.error}</div>
-            </div>
-            <div data-type="answers" class="create_post_container">
-              <div
-                class="c-chapter create_post_chapter create_post_main_text"
-                contenteditable="true"
-                oninput={changeTextAnswer}
-              ></div>
-              {() => {
-                if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
-                  return (
-                    <div class="create_post_chapter createPostImage">
-                      {
-                        formInputs.mediaInputs.value.map((item, index) => {
-                          if (item.type != "audio") {
-                            return (
-                              <MediaPreview
-                                item={item}
-                                index={index}
-                                type="answers"
-                                formInputs={formInputs}
-                              />
-                            );
+const ModalAnswer = function (data, ID) {
+  let Static = fn.GetParams({ data, ID })
+  init(
+    () => {
+      Variable.OutHideWindows.push([elem, "ModalAnswer"])
+      formInputs = {
+        textAnswer: {
+          value: "",
+          error: "",
+          show: true,
+        },
+        mediaInputs: {
+          value: [],
+          show: false,
+          selectAspect: null,
+        },
+        isValid: false,
+      };
+    },
+    () => {
+      return (
+        <div class="c-modal c-modal--open" id="ModalAnswer">
+          <section class="c-modal__dialog">
+            <header class="c-modal__header">
+              <h2 class="c-modal__title">{Variable.lang.h.modal_answer}</h2>
+              <button
+                type="button"
+                class="c-modal__close"
+                onclick={() => {
+                  Variable.DelModals("ModalAnswer");
+                  initReload("modals");
+                }}
+              ></button>
+            </header>
+            <div class="c-modal__body">
+              <form id="createPostForm" onsubmit={(e) => sendAnswer(e, data)} >
+                <input style="display: none;" type="submit" />
+                <div class="error-div">
+                  <div class="error-div-variant">{formInputs.textAnswer.error}</div>
+                </div>
+                <div data-type="answers" class="create_post_container">
+                  <div
+                    class="c-chapter create_post_chapter create_post_main_text"
+                    contenteditable="true"
+                    oninput={changeTextAnswer}
+                  ></div>
+                  {() => {
+                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
+                      return (
+                        <div class="create_post_chapter createPostImage">
+                          {
+                            formInputs.mediaInputs.value.map((item, index) => {
+                              if (item.type != "audio") {
+                                return (
+                                  <MediaPreview
+                                    item={item}
+                                    index={index}
+                                    type="answers"
+                                    formInputs={formInputs}
+                                  />
+                                );
+                              }
+                            })
                           }
-                        })
-                      }
-                    </div>
-                  )
-                }
-              }}
+                        </div>
+                      )
+                    }
+                  }}
 
-              {() => {
-                if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
-                  return (
-                    <div class="create_post_chapter createPostAudio">
-                      {/* <Map
-                      data={formInputs.mediaInputs.value}
-                      dataIf={(item, index) => {
-                        if (item.type == "audio") {
-                          return (
-                            <MediaPreview
-                              item={item}
-                              index={index}
-                              type="answers"
-                              formInputs={formInputs}
-                            />
-                          );
-                        }
-                      }}
-                    /> */}
-                      {
-                        formInputs.mediaInputs.value.map((item, index) => {
-                          if (item.type == "audio") {
-                            return (
-                              <MediaPreview
-                                item={item}
-                                index={index}
-                                type="answers"
-                                formInputs={formInputs}
-                              />
-                            );
+                  {() => {
+                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                      return (
+                        <div class="create_post_chapter createPostAudio">
+                          {/* <Map
+                          data={formInputs.mediaInputs.value}
+                          dataIf={(item, index) => {
+                            if (item.type == "audio") {
+                              return (
+                                <MediaPreview
+                                  item={item}
+                                  index={index}
+                                  type="answers"
+                                  formInputs={formInputs}
+                                />
+                              );
+                            }
+                          }}
+                        /> */}
+                          {
+                            formInputs.mediaInputs.value.map((item, index) => {
+                              if (item.type == "audio") {
+                                return (
+                                  <MediaPreview
+                                    item={item}
+                                    index={index}
+                                    type="answers"
+                                    formInputs={formInputs}
+                                  />
+                                );
+                              }
+                            })
                           }
-                        })
-                      }
-                    </div>
-                  )
-                }
-              }}
-            </div>
+                        </div>
+                      )
+                    }
+                  }}
+                </div>
 
-            <MediaButton
+                <MediaButton
 
-              // onclickText={function () {
-              //   if (formInputs.textAnswer.show === true) {
-              //     return;
-              //   } else {
-              //     formInputs.textAnswer.show = true;
-              //     initReload("modals");
-              //   }
-              // }}
+                  // onclickText={function () {
+                  //   if (formInputs.textAnswer.show === true) {
+                  //     return;
+                  //   } else {
+                  //     formInputs.textAnswer.show = true;
+                  //     initReload("modals");
+                  //   }
+                  // }}
 
-              onclickPhoto={function () {
-                if (this.files.length == 0) {
-                  return;
-                }
-
-                Variable.SetModals({
-                  name: "ModalCropImage",
-                  data: {
-                    file: this.files[0],
-                    typeUpload: 'answers',
-                    arrMedia: formInputs.mediaInputs.value,
-                    aspectSelect: formInputs.mediaInputs.selectAspect,
-                    uploadCropImage: async function (cropper) {
-                      await sendPhoto(cropper)
+                  onclickPhoto={function () {
+                    if (this.files.length == 0) {
                       return;
                     }
-                  },
-                }, true);
-                // formInputs.isValid = true;
-                this.value = '';
-              }}
 
-              onclickVideo={function () {
-                if (this.files.length == 0) {
-                  return;
-                }
-                sendVideo(this.files)
-                this.value = '';
-                return;
-              }}
-            />
+                    Variable.SetModals({
+                      name: "ModalCropImage",
+                      data: {
+                        file: this.files[0],
+                        typeUpload: 'answers',
+                        arrMedia: formInputs.mediaInputs.value,
+                        aspectSelect: formInputs.mediaInputs.selectAspect,
+                        uploadCropImage: async function (cropper) {
+                          await sendPhoto(cropper)
+                          return;
+                        }
+                      },
+                    }, true);
+                    // formInputs.isValid = true;
+                    this.value = '';
+                  }}
 
-          </form>
+                  onclickVideo={function () {
+                    if (this.files.length == 0) {
+                      return;
+                    }
+                    sendVideo(this.files)
+                    this.value = '';
+                    return;
+                  }}
+                />
+
+              </form>
+            </div>
+            <div class="c-modal__footer">
+              <button
+                class={[
+                  "c-button c-button--gradient2",
+                  !formInputs.isValid ? "c-button--inactive" : "",
+                ]}
+                type="button"
+                // ref={elemButton}
+                onClick={(e) => sendAnswer(e, data)}
+              >
+                <span class="c-button__text">{Variable.lang.button.send}</span>
+              </button>
+            </div>
+          </section>
         </div>
-        <div class="c-modal__footer">
-          <button
-            class={[
-              "c-button c-button--gradient2",
-              !formInputs.isValid ? "c-button--inactive" : "",
-            ]}
-            type="button"
-            // ref={elemButton}
-            onClick={(e) => sendAnswer(e, data)}
-          >
-            <span class="c-button__text">{Variable.lang.button.send}</span>
-          </button>
-        </div>
-      </section>
-    </div>
-  );
+      );
+    }, ID
+  )
+
 };
 
 export default ModalAnswer;

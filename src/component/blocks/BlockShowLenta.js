@@ -8,10 +8,9 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { TextArea, ButtonSubmit, Comment, NotFound } from "@component/element/index.js";
 import { BlockLentaUsers } from '@component/blocks/index.js';
-import { api } from '@src/apiFunctions.js'
-
 
 const BlockShowLenta = function ({ Static, item }) {
+  console.log('=a4f6b9=', item)
   return (
     <div class="user_post_container">
       <div class="userNewsBlock">
@@ -63,12 +62,14 @@ const BlockShowLenta = function ({ Static, item }) {
                 :
                 <div class="post_comments">
                   <div class="user_news_item">
-                    {item.comments.map(function (itemComments, i) {
+                    {item.comments.map(function (itemComments, index) {
                       return (
                         <Comment
+                          Static={Static}
                           item={itemComments}
+                          index={index}
                           mainId={item._id}
-                          action="setPost"
+                          action="Post"
                         />
                       )
                     })}

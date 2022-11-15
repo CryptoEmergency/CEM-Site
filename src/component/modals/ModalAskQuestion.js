@@ -117,8 +117,8 @@ const sendPhoto = async function (crooper) {
         // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
       }
     );
-    initReload("modals");
     Variable.DelModals("ModalCropImage");
+    initReload();
   });
   return
 }

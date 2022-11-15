@@ -418,9 +418,13 @@
         @media(min-width: 390px) and (max-width: 767px) {
             position: absolute;
             right: 3px;
-            top: 26px; //9px;
+            top: 10px;
             left: auto;
             justify-content: flex-end;
+        }
+
+        @media(max-width: 389px) {
+            top: 26px;
         }
     }
 

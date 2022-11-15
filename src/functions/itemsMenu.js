@@ -1,6 +1,130 @@
 import { Variable } from '@betarost/cemjs'
 const itemsMenu = {}
 
+//нижнее меню
+//  let bottomMenuitems = fn.CreateMenuItems({
+//     text: [Variable.lang.select.complainAnswer,
+//     Variable.lang.select.complainUser,
+//     Variable.lang.select.blackList,
+//     Variable.lang.select.delete,
+//     Variable.lang.select.delete
+//     ],
+//     type: ["complainItem", "complainUser", "blackList", "delete", "deleteRole"],
+//     auth: [true, true, true, false, false],
+//     color: ["red", "red", "red", "red", "red"],
+//     onclick: ["",
+//       async () => {
+//         // Переработать модалку
+//         Variable.SetModals(
+//           {
+//             name: "ModalComplainComment",
+//             data: {
+//               id: data.item._id,
+//               typeSet: data.typeApi,
+//               mainId: data.mainId,
+//               mainCom: !data.commentId ? true : false,
+//             },
+//           }, true
+//         );
+//       }
+//       ,
+//       async () => {
+//         // Переработать модалку
+//         Variable.SetModals(
+//           {
+//             name: "ModalBlackList",
+//             data: { id: item.author._id, type: "перебрать" },
+//           }, true
+//         );
+//       },
+//       "",
+//       ""
+//     ]
+//   })
+
+//верхнее меню   вопросы
+// let upperMenuitems = fn.CreateMenuItems({
+//     text: [Variable.lang.h.modal_answer,
+//     Variable.lang.select.share,
+//     Variable.lang.select.complainAnswer,
+//     Variable.lang.select.complainUser,
+//     Variable.lang.button.edit,
+//     Variable.lang.select.closeQuestion,
+//     Variable.lang.itemsMenu.SelectBestQuestion,
+//     Variable.lang.select.delete],
+//     type: ["addanswer", "share", "complainItem", "complainUser", "edit", "closequestion", "bestquestion", "delete"],
+//     auth: [true, false, true, true, true, true, true, true],
+//     color: ["", "", "red", "red", "", "red", "green", "red"],
+//     onclick: [async () => {
+//         //ответить
+//         Variable.SetModals({
+//             name: "ModalAnswer", data: {
+//                 item,
+//                 onClose: async () => {
+//                     // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+//                     // itemAnswer = answer.list_records
+//                     // initReload()
+//                 }
+//             }
+//         })
+//     },
+//     //поделиться
+//     async () => {
+//         try {
+//             if (navigator.share) {
+//                 await navigator.share({
+//                     url: window.location.origin + "/question/show/" + itemID,
+//                 });
+//             }
+//         } catch (err) {
+//             console.error("Share", err)
+//         }
+//     },
+//     //пожаловаьбся на вопрос
+//     async () => {
+
+//         Variable.SetModals(
+//             {
+//                 name: "ModalComplainComment",
+//                 data: {
+//                     item,
+//                     onClose: async () => {
+//                         // let answer = await api({ type: "get", action: "getAnswers", short: true, filter: { questionId: itemID } })
+//                         // itemAnswer = answer.list_records
+//                         // initReload()
+//                     }
+//                 }
+//             }, true
+//         );
+//     },
+//     //пожаловаться на пользователя
+//     async () => {
+//         Variable.SetModals(
+//             {
+//                 name: "ModalComplainComment",
+//                 data: {
+//                     id: itemID,
+//                     typeSet: data.typeApi,
+//                     mainId: data.mainId,
+//                     mainCom: !data.commentId ? true : false,
+//                 },
+//             }, true
+//         );
+//     },
+//     //редактировать
+//     async () => {
+
+//         Static.editQuestion = true
+//         initReload()
+//     },
+//         //закрыть вопрос
+//         "",
+//         //выбрать лучший ответ
+//         "",
+//         //удалить
+//         ""]
+// })
+
 
 itemsMenu.lenta_users = function (Static, item) {
     const items =
