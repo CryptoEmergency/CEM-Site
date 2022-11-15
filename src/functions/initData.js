@@ -329,6 +329,13 @@ initData.blog_show = function (Static) {
         adaptive: 4
     }
 
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: [],
+        el: []
+    }
+
     return
 }
 
@@ -346,6 +353,13 @@ initData.news_show = function (Static) {
         adaptive: 4
     }
 
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: [],
+        el: []
+    }
+
     return
 }
 
@@ -360,6 +374,13 @@ initData.media_show = function (Static) {
     Static.mainComment = {
         rows: 1,
         adaptive: 4
+    }
+
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: [],
+        el: []
     }
 
     return

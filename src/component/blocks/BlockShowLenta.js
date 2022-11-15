@@ -39,7 +39,7 @@ const BlockShowLenta = function ({ Static, item }) {
                     return
                   }
                   if (!Static.mainComment.el.value.trim().length) { return }
-                  let text = item.author.nickname + ", " + Static.mainComment.el.value.trim()
+                  let text = Static.mainComment.el.value.trim()
                   let response = await fn.restApi.setPost.comment({ _id: item._id, text })
                   if (response.status === "ok") {
                     Static.mainComment.el.value = ""

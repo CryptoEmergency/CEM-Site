@@ -1,21 +1,12 @@
 import {
     jsx,
     jsxFrag,
-    Helpers,
     Variable,
-    initReload,
-    initOne
+    initReload
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import {
-    Avatar,
-    Evaluation,
-    TextArea,
-    ButtonSubmit
-} from "@component/element/index.js";
-
-
+import { Avatar, Evaluation, TextArea, ButtonSubmit } from "@component/element/index.js";
 
 const Comment = function ({ Static, index, item, include, mainId, action, quoteId, mainItem }) {
     return (
