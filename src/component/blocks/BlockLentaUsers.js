@@ -16,7 +16,13 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
       <div class="main_comment">
         <div class="c-lentaitem__header">
           <Avatar author={item.author} parent={"lenta"} nickName={item.author.nickname} />
-          <div class="c-lentaitem__counter"><span>{item.media.length ? item.media.length : null}</span></div>
+          {
+            item.media.length
+              ?
+              <div class="c-lentaitem__counter"><span>{item.media.length ? item.media.length : null}</span></div>
+              :
+              null
+          }
           {!Static.openModals ? <div class="comment_icons"> <ItemsMenu author={item.author} items={fn.itemsMenu.lenta_users(Static, item)} /> </div> : null}
           {
             !Static.openModals && !Static.showPage
