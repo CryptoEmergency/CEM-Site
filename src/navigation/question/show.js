@@ -7,7 +7,7 @@ import {
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment, Input } from "@component/element/index.js";
+import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
 
 const start = function (data, ID) {
   let [Static, item] = fn.GetParams({ data, ID })

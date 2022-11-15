@@ -287,6 +287,54 @@ initData.lenta_users_show = function (Static) {
     return
 }
 
+initData.lenta_users = function (Static) {
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.showPage = true
+    Static.path = "posts"
+
+    Static.elMedia = {}
+    Static.elToogle = {}
+    Static.elShowTextFull = {}
+    Static.elShowTextShort = {}
+    Static.elMedia = {}
+
+    Static.nameRecords = "PageLentaall";
+    Static.lentaPage = "all";
+    Static.lentaFilters = {
+        lang: Variable.lang.code,
+        langName: Variable.lang.lang_orig,
+        author: null,
+    };
+
+    Static.optionsSelect = {
+        posts: {
+            nameOptions: "posts",
+            items: [
+                { text: Variable.lang.span.userNews, value: "all" },
+                { text: Variable.lang.h.posts_friends, value: "friends" },
+            ],
+            open: false,
+            active: "all",
+        },
+    };
+
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4
+    }
+
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
+    return
+}
+
 initData.question_show = function (Static) {
     Static.isValid = true
     Static.submitClick = false
