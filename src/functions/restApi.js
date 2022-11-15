@@ -280,6 +280,33 @@ restApi.getUsers = async function ({ cache, name, limit = 6, offset = 0, filter,
 }
 
 
+restApi.getComments = async function ({ cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getComments",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select: select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
 restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
 
     let defaultFilter = {
@@ -345,23 +372,50 @@ restApi.setPost.view = async function ({ _id, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 // Лайк-Дизлайк
-restApi.setPost.evaluation = async function ({ _id, evaluation, noAlert }) {
-    let data = {
-        _id: _id,
-        value: { evaluation }
+restApi.setPost.evaluation = async function ({ _id, evaluation, comment, mainId, noAlert }) {
+    let data = {}
+    if (comment) {
+        data = { _id: mainId, value: { comments: { evaluation, _id } } }
+    } else {
+        data = {
+            _id: _id,
+            value: { evaluation }
+        }
+
     }
+
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
 }
 // Комментарий на пост главный
-restApi.setPost.comment = async function ({ _id, text, noAlert }) {
+restApi.setPost.comment = async function ({ _id, text, mainId, quoteId, noAlert }) {
     let data = {}
-    data = {
-        _id: _id,
-        value: {
-            comments: { text }
+    if (quoteId) {
+        data = {
+            _id: mainId,
+            value: {
+                comments: { _id: quoteId, comments: { text, quote: quoteId } }
+            }
+        }
+    } else {
+        if (mainId) {
+            data = {
+                _id: mainId,
+                value: {
+                    comments: { _id, comments: { text } }
+                }
+            }
+        } else {
+            data = {
+                _id: _id,
+                value: {
+                    comments: { text }
+                }
+            }
         }
     }
+
+
     //{ _id: mainId, value: { comments: { evaluation: type, _id: item._id } } }
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)

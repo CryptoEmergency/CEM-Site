@@ -25,6 +25,12 @@ const ToogleItem = function ({ Static, name }) {
         Static.elMedia = {}
         Static.elShowTextFull = {}
         Static.elShowTextShort = {}
+
+        Static.secondComment = {
+          rows: 1,
+          adaptive: 4,
+        }
+
         // this.classList.add("users_news_category_icon--" + addClass)
         await restApi.getPost({ name: Static.nameRecords, cache: true, limit: 15, filter: Helpers.getFilterLenta(Static.lentaFilters, Static.lentaPage) })
         initReload()
