@@ -1,86 +1,54 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, initOne } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initGo, init, Static } from "@betarost/cemjs";
 
-
-let complaint, input, inputValue;
 
 let isChecked
 
-
 const changeComplaint = function (checkdata) {
 
-  if (!checkdata.check) {
-    isChecked[checkdata.name].check = true
-    isChecked[checkdata.name].checked = "checked"
-  }
-  else {
-    isChecked[checkdata.name].check = false
-    isChecked[checkdata.name].checked = ""
-  }
+ 
+    isChecked[checkdata.name].check = checkdata.check
+
 
   if (checkdata.name == "other") {
 
-    for (let k in isChecked) {
-      if (k !== "other")
-        isChecked[k].check = false
-      isChecked[k].checked = ""
+    //если записали в массив текст
+    if (checkdata.value)
+    {
+      isChecked[checkdata.name].value = checkdata.value
     }
 
-    initReload();
+    for (let k in isChecked) {
+      
+      if (k !== "other")
+      {
+        isChecked[k].check = false
+
+      }
+
+    }
+   
+  
   }
 
-
-  /*
-  if (this.dataset.complain == "other") {
-    Static.abusive.checked = false;
-    isChecked.poison().checked = false;
-    isChecked.obscene().checked = false;
-    isChecked.malicious().checked = false;
-    complaint = [];
-  } else {
-    isChecked.other().checked = false;
-    isCheck
-      ? complaint.push(type)
-      : (complaint = complaint.filter((item) => item !== type));
-  }*/
-  // initReload("modals");
+  initReload();
   return;
 };
-/*
-const sendComplaint = async (data) => {
-  if (
-    isChecked.other() !== undefined &&
-    (complaint.length > 0 || input().innerText.trim().length > 2)
-  ) {
-    if (complaint.length > 0) {
-      await sendComplaintApi({ data, complaint });
-    } else {
-      complaint = [`<p>${input().innerText.trim()}</p>`];
-      await sendComplaintApi({ data, complaint });
-    }
-    Variable.Static.answerAdditionally = "";
-    Variable.DelModals("ModalComplainComment");
-    initReload();
 
+
+
+
+const ModalComplainComment = function ({ data }, ID) {
+ 
+  isChecked = {
+    abusive: { check: '', complain: Variable.lang.select.complainOne },
+    poison: { check: '', complain: Variable.lang.select.complainTwo  },
+    obscene: { check: '', complain: Variable.lang.select.complainThree   },
+    malicious: { check: '', complain: Variable.lang.select.complainFour},
+    other: { check: '', complain: Variable.lang.select.other, value:"" }
   }
-};*/
 
-const ModalComplainComment = function (data, reload) {
-  console.log(data)
-  initOne(() => {
-    isChecked = {
-      abusive: { check: false, complain: Variable.lang.select.complainOne, checked: "" },
-      poison: { check: false, complain: Variable.lang.select.complainTwo, checked: "" },
-      obscene: { check: false, complain: Variable.lang.select.complainThree, checked: "" },
-      malicious: { check: false, complain: Variable.lang.select.complainFour, checked: "" },
-      other: { check: false, complain: Variable.lang.select.other, checked: "" },
-    }
+  init(null,() => {
 
-  })
-  if (!reload) {
-    //(input = Static.input), (inputValue = "");
-
-    complaint = [];
-  }
 
   return (
     <div class="c-modal c-modal--open" id="ModalComplainComment">
@@ -94,12 +62,14 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="abusive"
                   class="checkbox__input complain_checkbox"
-                  onclick={() => {
-
-                    changeComplaint({ "name": "abusive", "checked": "", "check": isChecked.abusive.check })
+                  onChange={function(){
+           
+                    changeComplaint({ "name": "abusive", "check": this.checked})
+                      console.log(isChecked.abusive.check )  
+                   // initReload()
                   }}
                   type="checkbox"
-                  checked={isChecked.abusive.checked ? "checked" : ""}
+                  checked={isChecked.abusive.check ? "checked" : ""}
 
                 />
                 <label class="checkbox__label">
@@ -113,10 +83,15 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="poison"
                   class="checkbox__input complain_checkbox"
-                  onclick={() => { changeComplaint({ "name": "poison", "checked": "", "check": isChecked.poison.check }) }}
+                  onChange={function() { 
+                  
+                    changeComplaint({ "name": "poison", "check": this.checked }) 
+                 
+                  }}
                   type="checkbox"
-                  checked={isChecked.poison.checked ? "checked" : ""}
-
+                  checked={isChecked.poison.check ? "checked" : ""}
+               
+               
                 />
                 <label class="checkbox__label">
                   {Variable.lang.select.complainTwo}
@@ -129,9 +104,13 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="obscene"
                   class="checkbox__input complain_checkbox"
-                  onclick={() => { changeComplaint({ "name": "obscene", "checked": "", "check": isChecked.obscene.check }) }}
+                  onChange={function() { 
+                
+                    changeComplaint({ "name": "obscene", "check": this.checked})
+                 
+                  }}
                   type="checkbox"
-                  checked={isChecked.obscene.checked ? "checked" : ""}
+                  checked={isChecked.obscene.check ? true : false}
 
                 />
                 <label class="checkbox__label">
@@ -145,10 +124,14 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="malicious"
                   class="checkbox__input complain_checkbox"
-                  onclick={() => { changeComplaint({ "name": "malicious", "checked": "", "check": isChecked.malicious.check }) }}
+                  onChange={function(){ changeComplaint({ "name": "malicious", "check": this.checked }) 
+              
+                }
+                
+                }
                   type="checkbox"
-                  checked={isChecked.malicious.checked ? "checked" : ""}
-
+                  checked={isChecked.malicious.check ? true : false}
+               
                 />
                 <label class="checkbox__label">
                   {Variable.lang.select.complainFour}
@@ -161,11 +144,12 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="other"
                   class="checkbox__input complain_checkbox"
-                  onclick={function (e) {
-                    changeComplaint({ "name": "other", "checked": "", "check": isChecked.other.check })
+                  onChange={function (e) {
+                    changeComplaint({ "name": "other", "check": this.checked, "value":isChecked.other.value})
+           
                   }}
                   type="checkbox"
-                  checked={isChecked.other.checked}
+                  checked={isChecked.other.check ? true : false }
 
                 />
                 <label data-complain_id="5" class="checkbox__label">
@@ -177,23 +161,25 @@ const ModalComplainComment = function (data, reload) {
 
             <div
               style={
-                //  isChecked.other() !== undefined &&
-                //    isChecked.other().checked === true
-                "display: block"
-                //     : "display: none"
+           
+                    isChecked.other.check ?
+                      "display: block"
+                     : "display: none"
               }
               contenteditable="true"
               class="complain_other"
               data-keyup="complainKeyup"
               data-onpaste="editorPaste"
-              oninput={() => {
-                initReload("modals");
+              oninput={function(){
+              
+                changeComplaint({ "name": "other", "check": isChecked.other.check, "value":this.textContent })
+              //  initReload();
               }}
 
             ></div>
 
             <div
-              class="registration-btn inactive_form_button"
+              class="registration-btn registration-btn"
               /* class={[
                   "registration-btn",
                   
@@ -205,7 +191,10 @@ const ModalComplainComment = function (data, reload) {
               data-active="0"
               data-action="answerComplain"
             >
-              <a class="btn-gr-reg" onclick={() => { }
+              <a class="btn-gr-reg" onclick={() => { 
+                
+                console.log(isChecked)
+              }
               }>
                 <span>{Variable.lang.button.send}</span>
               </a>
@@ -214,7 +203,9 @@ const ModalComplainComment = function (data, reload) {
         </header>
       </section>
     </div>
+ 
   );
-};
+}, ID
+)};
 
 export default ModalComplainComment;

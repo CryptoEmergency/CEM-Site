@@ -195,7 +195,7 @@ let bottomMenuitems = fn.CreateMenuItems({
 
     
     async () => {
-      console.log(Variable.editMenu)
+      
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
