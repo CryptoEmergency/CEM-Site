@@ -30,7 +30,7 @@ const changeComplaint = function (checkdata) {
   
   }
 
-  initReload();
+ // initReload();
   return;
 };
 
