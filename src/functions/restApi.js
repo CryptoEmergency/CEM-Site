@@ -639,7 +639,13 @@ restApi.setNews.comment = async function ({ _id, text, mainId, quoteId, noAlert 
 
 restApi.setUsers = {}
 
-
+restApi.setUsers.subscribe = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { subscribed: _id },
+    }
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
 
 restApi.setNews.view = async function ({ _id, noAlert = true }) {
     let data = {
@@ -663,7 +669,7 @@ restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
 
 restApi.setUserRoom = {}
 
-restApi.setUserRoom.create = async function ({status, visible, confirmuser, title, description, images, languages, country}) {
+restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country }) {
     let data = {
         value: {
             settingsroom: {

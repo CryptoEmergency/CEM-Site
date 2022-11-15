@@ -156,98 +156,97 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                 <Input classDiv="language_select_wrapper" className="c-friends__country" Static={Static.filters.country} />
                                 <img style="display: none;" class="refresh_country" src={svg.refresh_filter} />
                             </div>
-                            {() => {
-                                if (Static.filters.group != false) {
-                                    return (
-                                        <div class="c-friends__checkboxes">
-                                            <div class="checkbox">
-                                                <input
-                                                    checked={Static.filters.group.common ? true : false}
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="common"
-                                                    required="required"
-                                                    onChange={async () => {
-                                                        Static.filters.group.common = !Static.filters.group.common
-                                                        Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: Static.nameRecords, limit: 21, filter: Static.apiFilter })
-                                                    }}
-                                                />
-                                                <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input
-                                                    checked={Static.filters.group.content ? true : false}
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="content-makers"
-                                                    required="required"
-                                                    onChange={async () => {
-                                                        Static.filters.group.content = !Static.filters.group.content
-                                                        Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: Static.nameRecords, limit: 21, filter: Static.apiFilter })
-                                                    }}
-                                                />
-                                                <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input
-                                                    checked={Static.filters.group.expert ? true : false}
-                                                    class="checkbox__input"
-                                                    type="checkbox"
-                                                    id="specialists"
-                                                    required="required"
-                                                    onChange={async () => {
-                                                        Static.filters.group.expert = !Static.filters.group.expert
-                                                        Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, name: Static.nameRecords, limit: 21, filter: Static.apiFilter })
-                                                    }}
-                                                />
-                                                <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
-                                            </div>
-                                            {
-                                                /* 
-                                                    <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                        <input
-                                                            checked={filters.online ? true : false}
-                                                            class="checkbox__input"
-                                                            type="checkbox"
-                                                            id="online"
-                                                            required="required"
-                                                            onChange={async () => {
-                                                                filters.online = !filters.online
-                                                                Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: Static.nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
-                                                            }}
-                                                        />
-                                                        <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
-                                                    </div>
-                                                */
-                                            }
+                            {
+                                !Static.filters.group
+                                    ?
+                                    <div class="c-friends__checkboxes">
+                                        {
+                                            /* 
+                                                <div class="checkbox" data-action="friendsFilterCheckbox">
+                                                    <input
+                                                        checked={filters.online ? true : false}
+                                                        class="checkbox__input"
+                                                        type="checkbox"
+                                                        id="online"
+                                                        required="required"
+                                                        onChange={async () => {
+                                                            filters.online = !filters.online
+                                                            Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: Static.nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        }}
+                                                    />
+                                                    <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
+                                                </div>
+                                            */
+                                        }
+                                    </div>
+                                    :
+                                    <div class="c-friends__checkboxes">
+                                        <div class="checkbox">
+                                            <input
+                                                checked={Static.filters.group.common ? true : false}
+                                                class="checkbox__input"
+                                                type="checkbox"
+                                                id="common"
+                                                required="required"
+                                                onChange={async () => {
+                                                    Static.filters.group.common = !Static.filters.group.common
+                                                    Static.apiFilter = makeFilter(Static)
+                                                    await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                                                }}
+                                            />
+                                            <label class="checkbox__label" for="common">{Variable.lang.h.top_users}</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <input
+                                                checked={Static.filters.group.content ? true : false}
+                                                class="checkbox__input"
+                                                type="checkbox"
+                                                id="content-makers"
+                                                required="required"
+                                                onChange={async () => {
+                                                    Static.filters.group.content = !Static.filters.group.content
+                                                    Static.apiFilter = makeFilter(Static)
+                                                    await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                                                }}
+                                            />
+                                            <label class="checkbox__label" for="content-makers">{Variable.lang.select.users_contentCreater}</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <input
+                                                checked={Static.filters.group.expert ? true : false}
+                                                class="checkbox__input"
+                                                type="checkbox"
+                                                id="specialists"
+                                                required="required"
+                                                onChange={async () => {
+                                                    Static.filters.group.expert = !Static.filters.group.expert
+                                                    Static.apiFilter = makeFilter(Static)
+                                                    await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                                                }}
+                                            />
+                                            <label class="checkbox__label" for="specialists">{Variable.lang.select.users_experts}</label>
+                                        </div>
+                                        {
+                                            /* 
+                                                <div class="checkbox" data-action="friendsFilterCheckbox">
+                                                    <input
+                                                        checked={filters.online ? true : false}
+                                                        class="checkbox__input"
+                                                        type="checkbox"
+                                                        id="online"
+                                                        required="required"
+                                                        onChange={async () => {
+                                                            filters.online = !filters.online
+                                                            Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: Static.nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
+                                                        }}
+                                                    />
+                                                    <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
+                                                </div>
+                                            */
+                                        }
 
-                                        </div>
-                                    )
-                                } else {
-                                    return (
-                                        <div class="c-friends__checkboxes">
-                                            {
-                                                /* 
-                                                    <div class="checkbox" data-action="friendsFilterCheckbox">
-                                                        <input
-                                                            checked={filters.online ? true : false}
-                                                            class="checkbox__input"
-                                                            type="checkbox"
-                                                            id="online"
-                                                            required="required"
-                                                            onChange={async () => {
-                                                                filters.online = !filters.online
-                                                                Variable[Static.nameRecords] = await api({ type: "get", action: "getUsers", short: true, cache: true, name: Static.nameRecords, limit: 21, filter: Helpers.getFilterUsers(filters, type) })
-                                                            }}
-                                                        />
-                                                        <label class="checkbox__label" for="online">{Variable.lang.span.online}</label>
-                                                    </div>
-                                                */
-                                            }
-                                        </div>
-                                    )
-                                }
-                            }}
+                                    </div>
+                            }
                         </div>
                     </div>
                     <div class="c-friends__list top_professionals_block">
@@ -262,15 +261,14 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                             <div class="new_professional_card_avatar">
                                                 <Avatar author={user} nickName={true} speciality={[user.information && user.information.speciality ? user.information.speciality : false]} />
                                             </div>
-                                            {() => {
-                                                if (user.rank.creator) {
-                                                    return (
-                                                        <div class="user_rank_badge">
-                                                            <img src={images.content_creator} />
-                                                        </div>
-                                                    )
-                                                }
-                                            }}
+                                            {
+                                                user.rank.creator
+                                                    ?
+                                                    <div class="user_rank_badge">
+                                                        <img src={images.content_creator} />
+                                                    </div>
+                                                    :
+                                                    null}
                                         </div>
                                         <div class="new_professional_card_main">
                                             <a href={`/user/${user.nickname}`}>
@@ -320,19 +318,18 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                                 <div class="button-container-preview">
                                                     <a style="opacity: 0.2" class="btn-news-preview " href="#"
                                                         onclick={async () => {
-                                                            console.log('=c826eb=', "ffff", user)
-                                                            let data = {
-                                                                select: {
-                                                                    message: { $slice: [0, 120] },
-                                                                    users: 1
-                                                                }
-                                                                ,
-                                                                filter: {
-                                                                    $and: [{ users: user._id }]
-                                                                }
-                                                            }
-                                                            let tmp = await api({ type: "get", action: "getUserChats", short: true, data })
-                                                            console.log('=3484c3=', tmp)
+                                                            // let data = {
+                                                            //     select: {
+                                                            //         message: { $slice: [0, 120] },
+                                                            //         users: 1
+                                                            //     }
+                                                            //     ,
+                                                            //     filter: {
+                                                            //         $and: [{ users: user._id }]
+                                                            //     }
+                                                            // }
+                                                            // let tmp = await api({ type: "get", action: "getUserChats", short: true, data })
+                                                            // console.log('=3484c3=', tmp)
 
 
 
@@ -344,22 +341,18 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                                     <a
                                                         class="btn-news-preview"
                                                         onclick={async () => {
-                                                            let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: user._id } } })
+                                                            fn.restApi.setUsers.subscribe({ _id: user._id })
                                                             user.subscribe = !user.subscribe
                                                         }}
                                                     >
                                                         <span class="subscribe_status">
-                                                            {() => {
-                                                                if (user.subscribe) {
-                                                                    return (
-                                                                        Variable.lang.button.unsubscribe
-                                                                    )
-                                                                } else {
-                                                                    return (
-                                                                        Variable.lang.button.subscribe
-                                                                    )
-                                                                }
-                                                            }}
+                                                            {
+                                                                user.subscribe
+                                                                    ?
+                                                                    Variable.lang.button.unsubscribe
+                                                                    :
+                                                                    Variable.lang.button.subscribe
+                                                            }
                                                         </span>
                                                     </a>
                                                 </div>
@@ -378,3 +371,4 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
     )
 }
 export { BlockUsers }
+// OK
