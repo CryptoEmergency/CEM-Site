@@ -110,41 +110,38 @@ const BlockNews = async function ({ Static }) {
         <div class="bl_one bl_active">
           <div class="blog_news">
             {
-              () => {
-                if (Variable[Static.nameRecords] && Variable[Static.nameRecords].list_records.length) {
-                  const arrReturn = Variable[Static.nameRecords].list_records.map(
-                    (item) => {
-                      return (
-                        <a
-                          class="blog_news_item"
-                          href={`/${Static.type}/show/${item._id}`}
-                          onclick={(e) => {
-                            fn.siteLinkModal(e, { title: fn.sliceString(item.title, 85), item })
-                          }} >
-                          {/* <LazyImage path={"/assets/upload/news/" + item.image} /> */}
-                          <img src={"/assets/upload/news/" + item.image} />
-                          <p class="blog_new_title">{fn.sliceString(item.title, 85)}</p>
-                          <span class="blog_new_text">{fn.sliceString(item.preview, 170)}</span>
-                          <div style="display: flex!important;" class="blog_post_stat" >
-                            <span>
-                              <img src={svg["question_views"]} />
-                              {item.statistic.view}
-                            </span>
-                            <span>
-                              <img src={svg["question_answers"]} />
-                              {item.statistic.comments}
-                            </span>
-                            <span>{fn.getDateFormat(item.showDate)}</span>
-                          </div>
-                        </a>
-                      );
-                    }
-                  )
-                  return arrReturn
-                } else {
-                  return (<NotFound />)
-                }
-              }
+              !Variable[Static.nameRecords] || !Variable[Static.nameRecords].list_records.length
+                ?
+                <NotFound />
+                :
+                Variable[Static.nameRecords].list_records.map(
+                  (item) => {
+                    return (
+                      <a
+                        class="blog_news_item"
+                        href={`/${Static.type}/show/${item._id}`}
+                        onclick={(e) => {
+                          fn.siteLinkModal(e, { title: fn.sliceString(item.title, 85), item })
+                        }} >
+                        {/* <LazyImage path={"/assets/upload/news/" + item.image} /> */}
+                        <img src={"/assets/upload/news/" + item.image} />
+                        <p class="blog_new_title">{fn.sliceString(item.title, 85)}</p>
+                        <span class="blog_new_text">{fn.sliceString(item.preview, 170)}</span>
+                        <div style="display: flex!important;" class="blog_post_stat" >
+                          <span>
+                            <img src={svg["question_views"]} />
+                            {item.statistic.view}
+                          </span>
+                          <span>
+                            <img src={svg["question_answers"]} />
+                            {item.statistic.comments}
+                          </span>
+                          <span>{fn.getDateFormat(item.showDate)}</span>
+                        </div>
+                      </a>
+                    );
+                  }
+                )
             }
           </div>
           <ButtonShowMore Static={Static} action="getNews" />

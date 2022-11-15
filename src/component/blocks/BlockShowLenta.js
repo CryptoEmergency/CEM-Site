@@ -1,21 +1,17 @@
 import {
   jsx,
   jsxFrag,
-  Variable,
-  getStorage,
   initReload,
+  Variable,
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { TextArea, ButtonSubmit, Comment } from "@component/element/index.js";
+import { TextArea, ButtonSubmit, Comment, NotFound } from "@component/element/index.js";
 import { BlockLentaUsers } from '@component/blocks/index.js';
 import { api } from '@src/apiFunctions.js'
 
 
-
-
 const BlockShowLenta = function ({ Static, item }) {
-
   return (
     <div class="user_post_container">
       <div class="userNewsBlock">
@@ -26,9 +22,7 @@ const BlockShowLenta = function ({ Static, item }) {
               item={item}
               ElemVisible={() => {
                 fn.recordsView(item._id, "setPost")
-              }}
-            />
-            {/* <h2>{Variable.lang.h.modal_comment}</h2> */}
+              }} />
             <div class="c-comments__form">
               <div class="c-comments__field create_post_container1">
                 <TextArea
@@ -40,53 +34,47 @@ const BlockShowLenta = function ({ Static, item }) {
                 Static={Static}
                 text={<img class="c-comments__icon" src={svg["send_message"]} />}
                 className="c-comments__send button-container-preview"
-                onclick={async (tmp, el) => {
-                  if (!Static.mainComment.el.value.trim().length) {
+                onclick={async () => {
+                  if (!Variable.auth) {
+                    fn.modals.ModalNeedAuth()
                     return
                   }
+                  if (!Static.mainComment.el.value.trim().length) { return }
                   let text = Static.mainComment.el.value.trim()
-                  let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { comments: { text: text } } } })
+                  let response = await fn.restApi.setPost.comment({ _id: item._id, text })
                   if (response.status === "ok") {
                     Static.mainComment.el.value = ""
-                    if (Static.adaptive) {
-                      Static.mainComment.el.style.height = (Static.mainComment.el.dataset.maxHeight / Static.adaptive) + 'px';
+                    if (Static.mainComment.adaptive) {
+                      Static.mainComment.el.style.height = (Static.mainComment.el.dataset.maxHeight / Static.mainComment.adaptive) + 'px';
                     }
-                    if (response.result && response.result.list_records && response.result.list_records[0]) {
-                      let newRes = response.result.list_records[0]
+                    if (response.list_records[0]) {
+                      let newRes = response.list_records[0]
                       item.comments.unshift(newRes)
                       initReload();
                     }
-                  } else {
-                    fn.modals.ModalNeedAuth()
-                    // Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                   }
                 }}
               />
             </div>
-            {() => {
-              if (item.comments && item.comments.length) {
-                const arrReturn = item.comments.map(function (itemComments, i) {
-                  return (
-                    <Comment
-                      item={itemComments}
-                      mainId={item._id}
-                      action="setPost"
-                    />
-                  )
-                })
-                return (
-                  <div class="post_comments">
-                    <div class="user_news_item">
-                      {arrReturn}
-                    </div>
+            {
+              !item.comments || !item.comments.length
+                ?
+                <NotFound />
+                :
+                <div class="post_comments">
+                  <div class="user_news_item">
+                    {item.comments.map(function (itemComments, i) {
+                      return (
+                        <Comment
+                          item={itemComments}
+                          mainId={item._id}
+                          action="setPost"
+                        />
+                      )
+                    })}
                   </div>
-                )
-              } else {
-                // return (<NotFound
-                // />
-                // )
-              }
-            }}
+                </div>
+            }
           </div>
         </div>
       </div>
@@ -94,3 +82,4 @@ const BlockShowLenta = function ({ Static, item }) {
   )
 }
 export { BlockShowLenta };
+// OK

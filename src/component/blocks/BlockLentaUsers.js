@@ -2,28 +2,18 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  stringToHtml,
-  Helpers,
-  sendApi,
-  initReload,
+  initReload
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { api } from '@src/apiFunctions.js'
-import { LentaMedia, Evaluation } from "@component/element/index.js";
-import { Avatar, ItemsMenu } from "@component/element/index.js";
-
-
+import { LentaMedia, Evaluation, Avatar, ItemsMenu } from "@component/element/index.js";
 
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {
   return (
     <div
       class="c-fullnews__item user_news_item"
       replace={changeToogle}
-      // data-href={"/lenta-users/show/" + item._id}
-      ElemVisible={ElemVisible}
-    // onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
-    >
+      ElemVisible={ElemVisible}>
       <div class="main_comment">
         <div class="c-lentaitem__header">
           <Avatar author={item.author} parent={"lenta"} nickName={item.author.nickname} />
@@ -146,41 +136,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
             </div>
           </div>
           <div class="user_post_statistic_item">
-            <Evaluation
-              rating={item.statistic.rating}
-              callBackBefore={async (type) => {
-                let response = await api({ type: "set", action: "setPost", data: { _id: item._id, value: { evaluation: type } } })
-                if (response.status === 'ok') {
-                  if (type == "plus") {
-                    if (Static.nameRecords && typeof index != "undefined") {
-                      Variable[Static.nameRecords].list_records[index].statistic.rating++
-                    } else {
-                      item.statistic.rating++
-                    }
-                  } else {
-                    if (Static.nameRecords && index) {
-                      Variable[Static.nameRecords].list_records[index].statistic.rating--
-                    } else {
-                      item.statistic.rating--
-                    }
-
-                  }
-                  initReload()
-                } else {
-                  Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
-                }
-              }}
-              callBackAfter={async (type) => {
-                let response = await api({ type: "get", action: "getPost", filter: { _id: item._id }, select: { evaluation: 1, } })
-                let whoLike = []
-                if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
-                  whoLike = response.result.list_records[0].evaluation.filter(
-                    (item) => item.type === type
-                  );
-                }
-                Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
-              }}
-            />
+            <Evaluation Static={Static} item={item} index={index} action="Post" />
           </div>
         </div>
       </div>
@@ -188,3 +144,4 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
   );
 };
 export { BlockLentaUsers };
+// OK

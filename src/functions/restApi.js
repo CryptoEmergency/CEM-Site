@@ -333,10 +333,9 @@ restApi.supportMessage = async function ({ name, email, text, noAlert = false })
     return checkSetAnswer(response, noAlert)
 }
 
+// Запросы на посты
 restApi.setPost = {}
-restApi.setNews = {}
-restApi.setUsers = {}
-
+// Увеличить просмотры
 restApi.setPost.view = async function ({ _id, noAlert = true }) {
     let data = {
         value: { "statistic.view": true },
@@ -345,6 +344,32 @@ restApi.setPost.view = async function ({ _id, noAlert = true }) {
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
 }
+// Лайк-Дизлайк
+restApi.setPost.evaluation = async function ({ _id, evaluation, noAlert }) {
+    let data = {
+        _id: _id,
+        value: { evaluation }
+    }
+    const response = await sendApi.create("setPost", data);
+    return checkSetAnswer(response, noAlert)
+}
+// Комментарий на пост главный
+restApi.setPost.comment = async function ({ _id, text, noAlert }) {
+    let data = {
+        _id: _id,
+        value: {
+            comments: { text }
+        }
+    }
+    const response = await sendApi.create("setPost", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+// Запросы  на новости
+restApi.setNews = {}
+restApi.setUsers = {}
+
+
 
 restApi.setNews.view = async function ({ _id, noAlert = true }) {
     let data = {

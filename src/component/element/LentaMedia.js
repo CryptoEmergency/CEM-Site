@@ -34,10 +34,10 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
 
   if (!ArrWithVideo.length && !ArrWithAudio.length && ArrWithImage.length == 1) {
     return (
-      <div class="swiper-post_media_image_container">
-        <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} />
-      </div>
-      // <LazyImage className="swiper-post_media_image_container" path={`/assets/upload/${path}/` + ArrWithImage[0].name} />
+      // <div class="swiper-post_media_image_container">
+      //   <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} />
+      // </div>
+      <LazyImage className="swiper-post_media_image_container" path={`/assets/upload/${path}/` + ArrWithImage[0].name} />
     )
   }
 
@@ -84,8 +84,8 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
               return (
                 <div class="swiper-slide">
                   <div class="swiper-post_media_image_container">
-                    <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} />
-                    {/* <LazyImage path={`/assets/upload/${path}/` + item.name} /> */}
+                    {/* <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} /> */}
+                    <LazyImage path={`/assets/upload/${path}/` + item.name} />
                   </div>
                 </div>
               );
