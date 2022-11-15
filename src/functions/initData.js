@@ -299,7 +299,7 @@ initData.question_show = function (Static) {
     Static.elShowTextFull = {}
     Static.elShowTextShort = {}
     Static.elMedia = {}
-
+    Static.elShowComment = {}
     // Static.itemAnswer={}
 
     Static.mainComment = {

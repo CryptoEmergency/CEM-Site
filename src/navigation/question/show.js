@@ -143,7 +143,6 @@ const start = function (data, ID) {
                   () => {
                     setTimeout(async function () {
                       Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id } })
-                      console.log('=1b4866=', Static.itemAnswer)
                       initReload()
                     }, 700)
                     return (
@@ -175,8 +174,8 @@ const start = function (data, ID) {
                                     style={item.media.length > 0 && "margin: 40px 0 0 0;"}
                                     onclick={function () {
                                       this.dataset.show = true
-                                      Static.secondComment.elShowInput[index].dataset.show = true
-                                      Static.secondComment.elShowInput[index].style = "display:flex;"
+                                      Static.mainComment.elShowInput[index].dataset.show = true
+                                      Static.mainComment.elShowInput[index].style = "display:flex;"
                                     }}
                                   >
                                     {Variable.lang.button.giveAnswer}
@@ -186,77 +185,76 @@ const start = function (data, ID) {
                               }
                               <div class="comment_icons">
                                 <Evaluation Static={Static} item={item} index={index} action="Answers" />
-                                {/* <Evaluation
-                                Static={Static}
-                                  rating={item.statistic.rating}
-                                  callBackBefore={async (type) => {
-                                    let response = await api({ type: "set", action: "setAnswer", data: { _id: item._id, value: { evaluation: type } } })
-                                    if (response.status === 'ok') {
-                                      if (type == "plus") {
-                                        item.statistic.rating++
-                                      } else {
-                                        item.statistic.rating--
-                                      }
-                                      initReload()
-                                    } else {
-                                      Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true)
-                                    }
-                                  }}
-                                  callBackAfter={async (type) => {
-                                    let response = await api({ type: "get", action: "getAnswers", filter: { _id: item._id }, select: { evaluation: 1, } })
-                                    let whoLike = []
-                                    if (response && response.result.list_records && response.result.list_records[0].evaluation && response.result.list_records[0].evaluation.length) {
-                                      whoLike = response.result.list_records[0].evaluation.filter(
-                                        (item) => item.type === type
-                                      );
-                                    }
-                                    Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
-                                  }}
-                                /> */}
                                 {/* <ItemsMenu author={item.author} items={bottomMenuitems} /> */}
                               </div>
-                              {/* {() => {
-                                if (item.comments && item.comments.length) {
-                                  return (
-                                    <div class="user_news_top">
-                                      <div class="button-container-comm">
-                                        <ButtonSubmit
-                                          className="c-button--comm"
-                                          data-show={false}
-                                          text={
-                                            <span
-                                              onclick={function () {
-                                                if (this.dataset.show) {
-                                                  this.removeAttribute("data-show")
-                                                  this.innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                                  Static[index].secondComment.elShowComment.hidden = true
-                                                } else {
-                                                  this.dataset.show = true
-                                                  this.innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                                  Static[index].secondComment.elShowComment.hidden = false
-                                                }
-                                              }}
-                                            >
-                                              {Variable.lang.span.showComments} (<span class="comment_count">{item.statistic.comments}</span>)
-                                            </span>
-                                          }
-                                        />
-                                      </div>
+                              {
+                                item.comments && item.comments.length
+                                  ?
+                                  <div class="user_news_top">
+                                    <div class="button-container-comm">
+                                      <ButtonSubmit
+                                        className="c-button--comm"
+                                        data-show={false}
+                                        text={
+                                          <span
+                                            onclick={function () {
+                                              if (this.dataset.show) {
+                                                this.removeAttribute("data-show")
+                                                this.innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                                Static.mainComment.elShowComment[index].hidden = true
+                                              } else {
+                                                this.dataset.show = true
+                                                this.innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                                Static.mainComment.elShowComment[index].hidden = false
+                                              }
+                                            }}
+                                          >
+                                            {Variable.lang.span.showComments} (<span class="comment_count">{item.statistic.comments}</span>)
+                                          </span>
+                                        }
+                                      />
                                     </div>
-                                  )
-                                }
-                              }} */}
-                              {/* <div class="c-comments__form create_post_coments"
+                                  </div>
+                                  :
+                                  null
+                              }
+                              <div class="c-comments__form create_post_coments"
                                 style="display:none;"
-                                Element={($el) => { Static[index].secondComment.elShowInput = $el; }}
+                                Element={($el) => { Static.mainComment.elShowInput[index] = $el; }}
                               >
                                 <div class="c-comments__field create_post_container1">
                                   <TextArea
-                                    Static={Static[index].secondComment}
+                                    Static={Static.mainComment}
+                                    index={index}
                                     className="text1 create_post_chapter"
                                   />
                                 </div>
                                 <ButtonSubmit
+                                  Static={Static}
+                                  text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                                  className="c-comments__send button-container-preview"
+                                  onclick={async () => {
+                                    if (!Variable.auth) {
+                                      fn.modals.ModalNeedAuth()
+                                      return
+                                    }
+                                    if (!Static.mainComment.el[index].value.trim().length) { return }
+                                    let text = Static.mainComment.el[index].value.trim()
+                                    let response = await fn.restApi.setAnswers.comment({ _id: item._id, text })
+                                    if (response.status === "ok") {
+                                      Static.mainComment.el[index].value = ""
+                                      if (Static.mainComment.adaptive) {
+                                        Static.mainComment.el[index].style.height = (Static.mainComment.el[index].dataset.maxHeight / Static.mainComment.adaptive) + 'px';
+                                      }
+                                      if (response.list_records[0]) {
+                                        let newRes = response.list_records[0]
+                                        item.comments.unshift(newRes)
+                                        initReload();
+                                      }
+                                    }
+                                  }}
+                                />
+                                {/* <ButtonSubmit
                                   text={<img class="c-comments__icon" src={svg["send_message"]} />}
                                   className="c-comments__send button-container-preview comments_send"
                                   onclick={async (tmp, el) => {
@@ -282,8 +280,8 @@ const start = function (data, ID) {
                                       Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                                     }
                                   }}
-                                />
-                              </div> */}
+                                /> */}
+                              </div>
                               {/* {() => {
                                 if (item.comments && item.comments.length) {
                                   const arrReturn = item.comments.map(function (itemComments, i) {
