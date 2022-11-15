@@ -32,8 +32,11 @@ const start = function (data, ID) {
     init(
         async () => {
             Static.dataUsers = {}
+            Static.dataQuestions = {}
             fn.initData.users(Static.dataUsers)
+            fn.initData.question(Static.dataQuestions)
             Static.dataUsers.nameRecords = "MainUsers"
+            Static.dataQuestions.nameRecords = "MainQuestions"
             Static.dataExchange = { nameRecords: "MainExchanges" }
             Static.dataTrade = { nameRecords: "MainTrades" }
             Static.filters = {
@@ -137,11 +140,7 @@ const start = function (data, ID) {
                                 )
                             }
                         }}
-                        <BlockQuestions
-                            Static={Static}
-                            limit={6}
-                            nameRecords="MainQuestions"
-                        />
+                        <BlockQuestions Static={Static.dataQuestions} limit={6} />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
                             <BlockTrade Static={Static.dataTrade} limit={6} />

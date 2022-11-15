@@ -2,10 +2,9 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    init,
-    Helpers,
+    init
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 const start = function (data, ID) {
     init(
         null,
@@ -45,7 +44,7 @@ const start = function (data, ID) {
                                     <p>Мы также предоставляем рекламодателям отчеты о результативности рекламы, которые помогают им понять, как люди взаимодействуют с их контентом в сети Crypto Emergency и за ее пределами. Так, мы предоставляем рекламодателям общие демографические данные и информацию об интересах, чтобы они получили более четкое представление о своей аудитории. Мы никому не предоставляем информацию, по которой можно установить вашу личность (например, ваше имя и электронный адрес, которые сами по себе могут использоваться для связи с вами или для установления вашей личности), если вы не дадите нам на это специальное разрешение. </p>
                                 </div>
                                 <h2 class="c-terms__subtitle mr30">Политика использования данных</h2>
-                                <p class="c-terms__text">Для предоставления нашего Сервиса нам необходимо собирать и использовать вашу информацию. В <a href="/ru/data-policy/" onclick={Helpers.siteLink}>Политике использования данных</a> разъясняется, как мы собираем, используем и передаем информацию в различных Продуктах Crypto Emergency. В ней также описано множество имеющихся у вас способов управления вашей информацией, включая Настройки конфиденциальности и безопасности Crypto Emergency. Чтобы использовать Crypto Emergency, вы должны принять Политику использования данных.</p>
+                                <p class="c-terms__text">Для предоставления нашего Сервиса нам необходимо собирать и использовать вашу информацию. В <a href="/ru/data-policy/" onclick={fn.siteLink}>Политике использования данных</a> разъясняется, как мы собираем, используем и передаем информацию в различных Продуктах Crypto Emergency. В ней также описано множество имеющихся у вас способов управления вашей информацией, включая Настройки конфиденциальности и безопасности Crypto Emergency. Чтобы использовать Crypto Emergency, вы должны принять Политику использования данных.</p>
                                 <h2 class="c-terms__subtitle mr30">Ваши обязательства</h2>
                                 <div class="c-terms__content">
                                     <p>В обмен на наше обязательство предоставлять Сервис вы должны взять на себя следующие обязательства перед нами.</p>
@@ -155,7 +154,7 @@ const start = function (data, ID) {
                                 <p>We provide you with relevant and useful advertising without revealing your identity to advertisers. We do not sell your personal information. We allow advertisers to tell us their business goals and the target audience to whom they want to show their ads. We then show their ads to people who might be interested in them.</p>
                                 <p>We also provide advertisers with ad performance reports that help them understand how people are interacting with their content on and off the Crypto Emergency network. For example, we provide advertisers with general demographics and interest information to give them a clearer picture of their audience. We do not share personally identifiable information (such as your name and email address, which may themselves be used to contact you or to identify you) with anyone unless you give us specific permission to do so. </p>
                                 <h2 class="full_news_title mr30">Data Use Policy</h2>
-                                <p>In order to provide our Service, we need to collect and use your information. The <a href="/data-policy/" onclick={Helpers.siteLink} >Data Use Policy</a> explains how we collect, use and share information in the various Crypto Emergency Products. It also describes the many ways you can manage your information, including Crypto Emergency\'s Privacy and Security Settings. In order to use Crypto Emergency, you must accept the Data Use Policy.</p>
+                                <p>In order to provide our Service, we need to collect and use your information. The <a href="/data-policy/" onclick={fn.siteLink} >Data Use Policy</a> explains how we collect, use and share information in the various Crypto Emergency Products. It also describes the many ways you can manage your information, including Crypto Emergency\'s Privacy and Security Settings. In order to use Crypto Emergency, you must accept the Data Use Policy.</p>
                                 <h2 class="full_news_title mr30">Your obligations</h2>
                                 <p>In exchange for our obligation to provide the Service, you must assume the following obligations to us.</p>
                                 <p>Who can use Crypto Emergency. We want our Service to be as open and accessible to everyone as possible, but at the same time safe, secure and compliant with legal requirements. Therefore, in order to become part of the Crypto Emergency community, you must comply with certain restrictions.</p>

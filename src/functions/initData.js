@@ -258,6 +258,81 @@ initData.users = function (Static) {
     return
 }
 
+initData.question = function (Static) {
+    Static.nameRecords = "PageQuestions"
+    Static.filters = {
+        language: Object.create(filters.language),
+        questions: {
+            value: "all"
+        },
+        date: {
+            value: "date"
+        },
+        desc: -1
+    }
+    Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.language.value = Variable.lang.text.language
+    Static.filters.language.code = Variable.lang.code
+    Static.filters.language.name = `${Variable.lang.lang} (${Variable.lang.lang_orig})`
+
+    Static.elShowFilter
+
+    // Static.type = "all"
+
+
+
+    // Static.filtersQuestions = {
+    //     lang: {
+    //         code: Variable.lang.code,
+    //         name: `${Variable.lang.lang} (${Variable.lang.lang_orig})`
+    //     },
+    //     questions: {
+    //         value: "all"
+    //     },
+    //     date: {
+    //         value: "date"
+    //     },
+    //     desc: -1
+    // }
+
+    Static.optionsSelect = {
+        questions: {
+            nameOptions: "questions",
+            title: Variable.lang.span.sort,
+            items: [
+                { text: Variable.lang.select.showAllQuestions, value: "all" },
+                { text: Variable.lang.select.openQuestions, value: "open" },
+                { text: Variable.lang.select.closeQuestions, value: "closed" },
+                { text: Variable.lang.select.bestQuestions, value: "best" },
+            ],
+            open: false,
+            active: "all",
+        },
+        date: {
+            nameOptions: "date",
+            title: Variable.lang.span.sort,
+            asort: -1,
+            items: [
+                { text: Variable.lang.select.byDate, value: "date" },
+                { text: Variable.lang.select.byViews, value: "views" },
+                { text: Variable.lang.select.byAnswers, value: "answers" },
+            ],
+            open: false,
+            active: "date",
+        },
+    };
+
+
+
+    // Static.filters.country.placeholder = Variable.lang.error_div.selectFromList
+    // Static.filters.country.value = Variable.lang.text.country
+
+    // Static.search = generate("input")
+    // Static.search.placeholder = Variable.lang.placeholder.findFriends
+
+    return
+}
+
 
 initData.lenta_users_show = function (Static) {
     Static.isValid = true

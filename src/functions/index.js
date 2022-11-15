@@ -33,6 +33,17 @@ fn.paragraph = function (str) {
   return res;
 }
 
+fn.ifHaveMedia = function (mediaArr, type) {
+  if (!mediaArr || !mediaArr.length || !Array.isArray(mediaArr)) {
+    return false
+  }
+  var media = mediaArr.filter((tmp) => tmp.type == type);
+  if (media.length == 0) {
+    return false
+  }
+  return true;
+};
+
 fn.editText = function (str, filter = {}) {
   if (!str) { str = "" }
   let out = str.trim()

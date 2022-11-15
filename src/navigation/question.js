@@ -1,41 +1,25 @@
 import {
     jsx,
     jsxFrag,
-    init,
-    Variable,
+    init
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import { BlockQuestions } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
-    let Static = {}
+    let [Static] = fn.GetParams({ data, ID })
     init(
         async () => {
-            Static.filtersQuestions = {
-                lang: {
-                    code: Variable.lang.code,
-                    name: `${Variable.lang.lang} (${Variable.lang.lang_orig})`
-                },
-                questions: {
-                    value: "all"
-                },
-                date: {
-                    value: "date"
-                },
-                desc: -1
-            }
+            fn.initData.question(Static)
         },
         () => {
             return (
                 <div class='c-main__body'>
-                    <BlockQuestions
-                        Static={Static}
-                        nameRecords="PageQuestions"
-                        limit={12}
-                    />
+                    <BlockQuestions Static={Static} />
                 </div>
             )
         }, ID
     )
 }
 export default start;
+// OK
