@@ -10,7 +10,6 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer, TextArea, ButtonSubmit } from '@component/element/index.js';
-import { api } from '@src/apiFunctions.js'
 
 const swiperOptions = {
     loop: false,
@@ -65,10 +64,10 @@ const start = function (data, ID) {
                 }
             });
             // console.log('=08e20a=', chatsList)
-            if(Variable.Static.startChatsID){
+            if (Variable.Static.startChatsID) {
                 let existingChat = false
                 chatsList.list_records.forEach(async (chat) => {
-                    if(chat.users[0] && chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1] && chat.users[1]._id == Variable.Static.startChatsID._id ){
+                    if (chat.users[0] && chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1] && chat.users[1]._id == Variable.Static.startChatsID._id) {
                         existingChat = true
                         activeChat = chat._id
                         messageList = await sendApi.send({
@@ -93,18 +92,18 @@ const start = function (data, ID) {
                         initReload()
                     }
                 })
-                if(!existingChat){
+                if (!existingChat) {
                     activeUser = Variable.Static.startChatsID
                     console.log(chatsList)
-                    chatsList.list_records.unshift({_id: 1,message: [{}],users: [Variable.Static.startChatsID, Variable.myInfo]})
-                    messageList={
+                    chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
+                    messageList = {
                         list_records: [
                             {
                                 message: [],
                                 users: [Variable.Static.startChatsID, Variable.myInfo]
                             }
                         ]
-                        
+
                     }
                 }
             }
@@ -112,7 +111,7 @@ const start = function (data, ID) {
         },
         () => {
             console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
-        
+
             if (messageList) {
                 if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {
                     activeUser = messageList.list_records[0].users[0]
@@ -124,7 +123,7 @@ const start = function (data, ID) {
 
             // console.log('=633dca=', messageUser, activeUser)
             return (
-                <div class= "messages_block c-main__body--noheader">
+                <div class="messages_block c-main__body--noheader">
                     <div class="messages_left_part">
                         <div class="chats_search">
                         </div>
@@ -315,16 +314,17 @@ const start = function (data, ID) {
                                                         return
                                                     }
                                                     let text = Static.message.el.value.trim()
-                                                    let data = { value: { users: activeUser._id, message: { text } } }
-                                                    let response = await api({ type: "set", action: "setUserChats", data: data })
+                                                    // let data = { value: { users: activeUser._id, message: { text } } }
+                                                    // let response = await api({ type: "set", action: "setUserChats", data: data })
+                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: activeUser._id, text })
                                                     console.log('=6befba=', response)
                                                     if (response.status === "ok") {
                                                         Static.message.el.value = ""
                                                         if (Static.message.adaptive) {
                                                             Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
                                                         }
-                                                        if (response.result && response.result.list_records && response.result.list_records[0]) {
-                                                            let newRes = response.result.list_records[0]
+                                                        if (response && response.list_records && response.list_records[0]) {
+                                                            let newRes = response.list_records[0]
 
                                                             if (messageList && messageList.list_records[0] && messageList.list_records[0].message) {
                                                                 messageList.list_records[0].message.unshift(newRes)

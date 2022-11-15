@@ -11,7 +11,6 @@ import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { Avatar } from '@component/element/Avatar.js';
-import { api } from '@src/apiFunctions.js'
 
 import {
     BlockUserProfilePage,
@@ -163,7 +162,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                                 <a
                                                     class="c-userpreview__btn"
                                                     onclick={async () => {
-                                                        let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: userInfo._id } } })
+                                                        fn.restApi.setUsers.subscribe({ _id: userInfo._id })
                                                         userInfo.subscribe = !userInfo.subscribe
                                                     }}
                                                 >

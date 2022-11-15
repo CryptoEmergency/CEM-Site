@@ -2,17 +2,12 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initOne,
-    initReload,
-    Helpers,
+    initOne
 } from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { api } from '@src/apiFunctions.js'
-import { Avatar, ButtonShowMore } from '@component/element/index.js';
-import { Input, NotFound } from '@component/element/index.js';
-
+import { Avatar, ButtonShowMore, Input, NotFound } from '@component/element/index.js';
 
 const makeFilter = function (Static) {
     let objReturn = {}
@@ -318,21 +313,8 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                                 <div class="button-container-preview">
                                                     <a style="opacity: 0.2" class="btn-news-preview " href="#"
                                                         onclick={async () => {
-                                                            // let data = {
-                                                            //     select: {
-                                                            //         message: { $slice: [0, 120] },
-                                                            //         users: 1
-                                                            //     }
-                                                            //     ,
-                                                            //     filter: {
-                                                            //         $and: [{ users: user._id }]
-                                                            //     }
-                                                            // }
-                                                            // let tmp = await api({ type: "get", action: "getUserChats", short: true, data })
-                                                            // console.log('=3484c3=', tmp)
-
-
-
+                                                            Variable.Static.startChatsID = user
+                                                            fn.siteLink("/user/chats/");
                                                         }} >
                                                         <span>
                                                             {Variable.lang.button.write}

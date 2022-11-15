@@ -8,7 +8,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-import { api } from '@src/apiFunctions.js'
+import { fn } from "@src/functions/index.js";
 
 const start = function () {
     let ticketNumber
@@ -28,21 +28,28 @@ const start = function () {
 
     const SendLotteryForm = async function (event) {
         event.preventDefault()
-        let value = {
-            nickname: this.elements.nickname.value,
-            telegram: this.elements.telegram.value,
-            twitter: this.elements.twitter.value,
-            instagram: this.elements.instagram.value,
-            email: this.elements.email.value
-        }
+        // let value = {
+        //     nickname: this.elements.nickname.value,
+        //     telegram: this.elements.telegram.value,
+        //     twitter: this.elements.twitter.value,
+        //     instagram: this.elements.instagram.value,
+        //     email: this.elements.email.value
+        // }
         // let tmpRes = await SendData(data)
         // let res = await makeData({ res: tmpRes, one: true })
         // let htmlData = getFirstData()
         // htmlData.ticketNumber = res.ticketNumber
         // $('.lottery_data').html(await partialsHtml('ticket', htmlData))
-        let response = await api({ type: "set", action: "setLottery", short: true, data: { value: value }})
+        // let response = await api({ type: "set", action: "setLottery", short: true, data: { value: value }})
+        fn.restApi.setLottery.join({
+            ickname: this.elements.nickname.value,
+            telegram: this.elements.telegram.value,
+            twitter: this.elements.twitter.value,
+            instagram: this.elements.instagram.value,
+            email: this.elements.email.value
+        })
         console.log(response)
-        ticketNumber = response.result.list_records[0].ticketNumber
+        ticketNumber = response.list_records[0].ticketNumber
         initReload()
     }
 
@@ -100,8 +107,9 @@ const start = function () {
     init(
         async () => {
             let response = null
-            if(Variable.auth && Variable.myInfo){
-                response = await api({ type: "get", action: "getLottery", short: true, cache: true, limit: 1, filter: { nickname: Variable.myInfo.nickname }})
+            if (Variable.auth && Variable.myInfo) {
+                response = await fn.restApi.getLottery({ limit: 1, filter: { nickname: Variable.myInfo.nickname } })
+                // response = await api({ type: "get", action: "getLottery", short: true, cache: true, limit: 1, filter: { nickname: Variable.myInfo.nickname } })
             }
             console.log('response', response, Variable.myInfo.nickname)
             if (response && response.totalFound != 0) {
@@ -145,9 +153,9 @@ const start = function () {
                             <p>{Variable.lang.p.lotteryDates}</p>
                             <div class="lottery_main">
                                 <div class="lottery_data">
-                                    {()=> {
-                                        if(ticketNumber){
-                                            return(
+                                    {() => {
+                                        if (ticketNumber) {
+                                            return (
                                                 <div class="ticket_container">
                                                     <div class="ticket">
                                                         <p>{Variable.lang.p.lotteryTicket}</p>
@@ -156,60 +164,60 @@ const start = function () {
                                                 </div>
                                             )
                                         } else {
-                                            return(
-                                            <div>
-                                                <form class="lottery_form" onsubmit={SendLotteryForm} >
-                                                    <p>{Variable.lang.p.getTicket}</p>
-                                                    <div ref={nickname} class={Variable.auth ? 'lottery_check lottery_check_valid' : 'lottery_check'}>
-                                                        <p>1. {Variable.lang.p.lotteryQuest1}</p>
-                                                        <input type="text" name="nickname" placeholder="Nickname" readonly value={Variable.auth ? Variable.myInfo.nickname : ''} />
-                                                        <img src={svg['check_lottery_black']} />
-                                                    </div>
-                                                    <div ref={email} data-name="email" class="lottery_check">
-                                                        <p>2. {Variable.lang.p.lotteryQuest2}</p>
-                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="email" placeholder="Email" />
-                                                        <img src={svg['check_lottery_black']} />
-                                                    </div>
-                                                    <div ref={telegram} data-name="telegram" class="lottery_check">
-                                                        <p>3. {Variable.lang.p.lotteryQuest3}</p>
-                                                        <p><a target="_blank" rel="nofollow noopener" href="https://t.me/emergencycrypto">https://t.me/emergencycrypto</a></p>
-                                                        <p><a target="_blank" rel="nofollow noopener" href="https://t.me/cryptoemergencychat">https://t.me/cryptoemergencychat</a></p>
-                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
-                                                        <img src={svg['check_lottery_black']} />
-                                                    </div>
-                                                    <div ref={twitter} data-name="twitter" class="lottery_check">
-                                                        <p>4. {Variable.lang.p.lotteryQuest4}</p>
-                                                        <p><a target="_blank" rel="nofollow noopener" href="https://twitter.com/cryptoemergency">https://twitter.com/cryptoemergency</a></p>
-                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="twitter" placeholder="Twitter" />
-                                                        <img src={svg['check_lottery_black']} />
-                                                    </div>
-                                                    <div ref={instagram} data-name="instagram" class="lottery_check">
-                                                        <p>5. {Variable.lang.p.lotteryQuest5}</p>
-                                                        <p><a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/cryptoemergency/">https://www.instagram.com/cryptoemergency/</a></p>
-                                                        <input oninput={lotteryValidCheckKeyup} type="text" name="instagram" placeholder="Instagram" />
-                                                        <img src={svg['check_lottery_black']} />
-                                                    </div>
-                                                    <div ref={quiz} data-name="quiz" class="lottery_check">
-                                                        <p>6. {Variable.lang.p.lotteryQuest6}</p>
-                                                        <label for="">{Variable.lang.p.lotteryQuiz}</label>
-                                                        <div class="lottery_quiz_container">
-                                                            <div onclick={lotteryQuiz} class="lottery_quiz_button">
-                                                                5
-                                                            </div>
-                                                            <div data-true="true" onclick={lotteryQuiz} class="lottery_quiz_button">
-                                                                0.5
-                                                            </div>
-                                                            <div onclick={lotteryQuiz} class="lottery_quiz_button">
-                                                                0.2
-                                                            </div>
+                                            return (
+                                                <div>
+                                                    <form class="lottery_form" onsubmit={SendLotteryForm} >
+                                                        <p>{Variable.lang.p.getTicket}</p>
+                                                        <div ref={nickname} class={Variable.auth ? 'lottery_check lottery_check_valid' : 'lottery_check'}>
+                                                            <p>1. {Variable.lang.p.lotteryQuest1}</p>
+                                                            <input type="text" name="nickname" placeholder="Nickname" readonly value={Variable.auth ? Variable.myInfo.nickname : ''} />
+                                                            <img src={svg['check_lottery_black']} />
                                                         </div>
-                                                        <img src={svg['check_lottery_black']} />
-                                                    </div>
-                                                    <div ref={buttonContainer} class="lottery_form_button lottery_form_button_inactive">
-                                                        <button ref={button}>OK</button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                        <div ref={email} data-name="email" class="lottery_check">
+                                                            <p>2. {Variable.lang.p.lotteryQuest2}</p>
+                                                            <input oninput={lotteryValidCheckKeyup} type="text" name="email" placeholder="Email" />
+                                                            <img src={svg['check_lottery_black']} />
+                                                        </div>
+                                                        <div ref={telegram} data-name="telegram" class="lottery_check">
+                                                            <p>3. {Variable.lang.p.lotteryQuest3}</p>
+                                                            <p><a target="_blank" rel="nofollow noopener" href="https://t.me/emergencycrypto">https://t.me/emergencycrypto</a></p>
+                                                            <p><a target="_blank" rel="nofollow noopener" href="https://t.me/cryptoemergencychat">https://t.me/cryptoemergencychat</a></p>
+                                                            <input oninput={lotteryValidCheckKeyup} type="text" name="telegram" placeholder="Telegram" />
+                                                            <img src={svg['check_lottery_black']} />
+                                                        </div>
+                                                        <div ref={twitter} data-name="twitter" class="lottery_check">
+                                                            <p>4. {Variable.lang.p.lotteryQuest4}</p>
+                                                            <p><a target="_blank" rel="nofollow noopener" href="https://twitter.com/cryptoemergency">https://twitter.com/cryptoemergency</a></p>
+                                                            <input oninput={lotteryValidCheckKeyup} type="text" name="twitter" placeholder="Twitter" />
+                                                            <img src={svg['check_lottery_black']} />
+                                                        </div>
+                                                        <div ref={instagram} data-name="instagram" class="lottery_check">
+                                                            <p>5. {Variable.lang.p.lotteryQuest5}</p>
+                                                            <p><a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/cryptoemergency/">https://www.instagram.com/cryptoemergency/</a></p>
+                                                            <input oninput={lotteryValidCheckKeyup} type="text" name="instagram" placeholder="Instagram" />
+                                                            <img src={svg['check_lottery_black']} />
+                                                        </div>
+                                                        <div ref={quiz} data-name="quiz" class="lottery_check">
+                                                            <p>6. {Variable.lang.p.lotteryQuest6}</p>
+                                                            <label for="">{Variable.lang.p.lotteryQuiz}</label>
+                                                            <div class="lottery_quiz_container">
+                                                                <div onclick={lotteryQuiz} class="lottery_quiz_button">
+                                                                    5
+                                                                </div>
+                                                                <div data-true="true" onclick={lotteryQuiz} class="lottery_quiz_button">
+                                                                    0.5
+                                                                </div>
+                                                                <div onclick={lotteryQuiz} class="lottery_quiz_button">
+                                                                    0.2
+                                                                </div>
+                                                            </div>
+                                                            <img src={svg['check_lottery_black']} />
+                                                        </div>
+                                                        <div ref={buttonContainer} class="lottery_form_button lottery_form_button_inactive">
+                                                            <button ref={button}>OK</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             )
                                         }
                                     }}

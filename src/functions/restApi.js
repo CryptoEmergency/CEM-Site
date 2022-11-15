@@ -182,6 +182,34 @@ restApi.getTrade = async function ({ cache, name, limit = 6, offset = 0, filter,
     }
 }
 
+restApi.getLottery = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { score: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getLottery",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord, defaultReset }) {
 
     let defaultFilter = {
@@ -637,7 +665,56 @@ restApi.setNews.comment = async function ({ _id, text, mainId, quoteId, noAlert 
     return checkSetAnswer(response, noAlert)
 }
 
+
+restApi.setLottery = {}
+restApi.setLottery.join = async function ({ nickname, telegram, twitter, instagram, email }) {
+    let data = {
+        value: {
+            nickname,
+            telegram,
+            twitter,
+            instagram,
+            email
+        }
+    }
+    const response = await sendApi.create("setLottery", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setUserChats = {}
+
+restApi.setUserChats.sendMessage = async function ({ users, text, noAlert = true }) {
+    let data = {
+        value: { users, message: { text } }
+    }
+    const response = await sendApi.create("setUserChats", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 restApi.setUsers = {}
+
+
+restApi.setUsers.delete = async function ({ del, noAlert = true }) {
+    let data = {}
+    if (del) {
+        data = {
+            value: {
+                'status.delete': true,
+                startDelete: new Date().toISOString()
+            }
+        }
+
+    } else {
+        data = {
+            value: {
+                'status.delete': false,
+                startDelete: ''
+            }
+        }
+    }
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
 
 restApi.setUsers.subscribe = async function ({ _id, noAlert = true }) {
     let data = {

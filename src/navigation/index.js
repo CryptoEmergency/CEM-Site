@@ -11,7 +11,6 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
-import { api } from '@src/apiFunctions.js'
 
 
 import {
@@ -69,9 +68,11 @@ const start = function (data, ID) {
                 },
                 desc: -1
             }
-            await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
-            await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
-            timersStart("Course", async () => { Variable.Course = await api({ type: "get", action: "getCourse", short: true, name: "Course" }) }, 10000)
+            await fn.restApi.getCourse({ cache: true, name: "Course", filter: {} })
+            // await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
+            await fn.restApi.getNews({ cache: true, name: "MainNews", filter: {} })
+            // await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
+            timersStart("Course", async () => { fn.restApi.getCourse({ name: "Course", filter: {} }) }, 10000)
         },
         () => {
             return (

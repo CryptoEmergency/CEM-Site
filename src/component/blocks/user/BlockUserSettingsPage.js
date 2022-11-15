@@ -10,9 +10,6 @@ import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 
 
-import { api } from '@src/apiFunctions.js'
-
-
 
 const dateDelete = function (str) {
     if (str == null) {
@@ -228,13 +225,7 @@ BlockUserSettingsPage.security = function (data) {
                                         type="button"
                                         data-deletedcan="true"
                                         onclick={async () => {
-                                            let data = {
-                                                value: {
-                                                    'status.delete': false,
-                                                    startDelete: ''
-                                                }
-                                            }
-                                            await api({ type: "set", action: "setUsers", short: true, data })
+                                            fn.restApi.setUsers.delete({ del: false })
                                         }}
                                     >
                                         <span class="c-button__text">
@@ -250,13 +241,7 @@ BlockUserSettingsPage.security = function (data) {
                                         class="c-button c-button--gradient2"
                                         type="button"
                                         onclick={async () => {
-                                            let data = {
-                                                value: {
-                                                    'status.delete': true,
-                                                    startDelete: new Date().toISOString()
-                                                }
-                                            }
-                                            await api({ type: "set", action: "setUsers", short: true, data })
+                                            fn.restApi.setUsers.delete({ del: true })
                                         }}
                                     >
                                         <span class="c-button__text">
