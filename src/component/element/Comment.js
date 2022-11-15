@@ -30,7 +30,6 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
                             <span
                                 class="c-actioncomment__answer"
                                 onclick={() => {
-                                    console.log('=9481cc=', item.author.nickname)
                                     if (Static.secondComment.elShowInput[index]) {
                                         // Static.secondComment.elShowInput[index].value = item.author.nickname
                                         Static.secondComment.elShowInput[index].style = "display:flex;"

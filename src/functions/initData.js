@@ -300,6 +300,7 @@ initData.question_show = function (Static) {
     Static.elShowTextShort = {}
     Static.elMedia = {}
     Static.elShowComment = {}
+    Static.elShowAnswersComment = {}
     // Static.itemAnswer={}
 
     Static.mainComment = {

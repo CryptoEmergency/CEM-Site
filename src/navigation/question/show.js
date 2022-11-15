@@ -3,26 +3,14 @@ import {
   jsxFrag,
   Variable,
   init,
-  Helpers,
   initReload
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { api } from '@src/apiFunctions.js'
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment, Input } from "@component/element/index.js";
 
 const start = function (data, ID) {
   let [Static, item] = fn.GetParams({ data, ID })
-
-
-
-
-  let itemAnswer, itemID, itemMenuCheck, showItemsMenu;
-  // let Static = {}
-
-
-
-
 
   init(
     async () => {
@@ -42,36 +30,8 @@ const start = function (data, ID) {
           rows: 7
         }
       }
-
-
-
-
-
-      itemMenuCheck = true
-
-
-
-
-
-      if (!itemMenuCheck) {
-
-        showItemsMenu = <ItemsMenu author={item.author}
-          items={upperMenuitems} />
-      }
-      else {
-
-        showItemsMenu = ""
-        Variable["modalEditQuestion"] = data.editVisible
-
-      }
-
-
     },
-
-
-
     async () => {
-
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
@@ -201,11 +161,11 @@ const start = function (data, ID) {
                                               if (this.dataset.show) {
                                                 this.removeAttribute("data-show")
                                                 this.innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                                Static.mainComment.elShowComment[index].hidden = true
+                                                Static.elShowAnswersComment[index].hidden = true
                                               } else {
                                                 this.dataset.show = true
                                                 this.innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                                Static.mainComment.elShowComment[index].hidden = false
+                                                Static.elShowAnswersComment[index].hidden = false
                                               }
                                             }}
                                           >
@@ -258,24 +218,25 @@ const start = function (data, ID) {
                                   }}
                                 />
                               </div>
-                              {/* {() => {
-                                if (item.comments && item.comments.length) {
-                                  const arrReturn = item.comments.map(function (itemComments, i) {
-                                    return (
-                                      <Comment
-                                        item={itemComments}
-                                        mainId={item._id}
-                                        action="setAnswer"
-                                      />
-                                    )
-                                  })
-                                  return (
-                                    <div class="comment_answer" hidden={true} Element={($el) => { Static[index].secondComment.elShowComment = $el; }}>
-                                      {arrReturn}
-                                    </div>
-                                  )
-                                }
-                              }} */}
+                              {
+                                item.comments && item.comments.length
+                                  ?
+                                  <div class="comment_answer" hidden={true} Element={($el) => { Static.elShowAnswersComment[index] = $el; }}>
+                                    {item.comments.map(function (itemComments, i) {
+                                      return (
+                                        <Comment
+                                          Static={Static}
+                                          item={itemComments}
+                                          index={"A-" + String(index) + String(i)}
+                                          mainId={item._id}
+                                          action="Answers"
+                                        />
+                                      )
+                                    })}
+                                  </div>
+                                  :
+                                  null
+                              }
                             </div>
                           </div>
                         </div>
