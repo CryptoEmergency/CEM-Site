@@ -6,7 +6,7 @@ import {
     initReload,
     initOne
 } from "@betarost/cemjs";
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import {
     Avatar,
@@ -19,22 +19,7 @@ import { api } from '@src/apiFunctions.js'
 
 
 
-const Comment = function ({ item, include, mainId, action, quoteId, mainItem }) {
-
-    let Static = Variable.State(item._id)
-
-    if (!Static.secondComment) {
-        Static.secondComment = {
-            rows: 1,
-            adaptive: 4,
-        }
-    }
-    // initOne(() => {
-    //     Static.secondComment = {
-    //         rows: 1,
-    //         adaptive: 4,
-    //     }
-    // })
+const Comment = function ({ Static, index, item, include, mainId, action, quoteId, mainItem }) {
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -45,11 +30,12 @@ const Comment = function ({ item, include, mainId, action, quoteId, mainItem }) 
             />
             <div class="c-comments__bodycomment">
                 <span class="c-comments__textcomment">
-                    {Helpers.editText(item.text, { clear: true, paragraph: true, html: true })}
+                    {fn.editText(item.text, { clear: true, paragraph: true, html: true })}
                 </span>
             </div>
             <div class="c-comments__icons c-actioncomment">
-                <Evaluation
+                <Evaluation Static={Static} item={item} index={index} action={action} comment={true} />
+                {/* <Evaluation
                     rating={item.statistic.rating}
                     callBackBefore={async (type) => {
                         let response = await api({ type: "set", action: action, data: { _id: mainId, value: { comments: { evaluation: type, _id: item._id } } } })
@@ -74,7 +60,7 @@ const Comment = function ({ item, include, mainId, action, quoteId, mainItem }) 
                         }
                         Variable.SetModals({ name: "ModalWhoLike", data: { whoLike } }, true);
                     }}
-                />
+                /> */}
                 {() => {
                     if (Variable.auth) {
                         return (

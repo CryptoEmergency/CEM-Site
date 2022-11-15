@@ -355,12 +355,14 @@ restApi.setPost.evaluation = async function ({ _id, evaluation, noAlert }) {
 }
 // Комментарий на пост главный
 restApi.setPost.comment = async function ({ _id, text, noAlert }) {
-    let data = {
+    let data = {}
+    data = {
         _id: _id,
         value: {
             comments: { text }
         }
     }
+    //{ _id: mainId, value: { comments: { evaluation: type, _id: item._id } } }
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
 }

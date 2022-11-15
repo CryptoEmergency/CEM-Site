@@ -7,7 +7,8 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
-const Evaluation = function ({ Static, item, index, rating, action, callBackBefore, callBackAfter }) {
+const Evaluation = function ({ Static, item, index, comment, action }) {
+  console.log('=baa779=', Static, item, index)
   return (
     <div style={"display: flex"}>
       <div class="c-actioncomment__btn c-actioncomment__btn--dislike">
@@ -21,7 +22,7 @@ const Evaluation = function ({ Static, item, index, rating, action, callBackBefo
           PressWait={{
             timeout: 1000,
             callBackBefore: async () => {
-              let response = await fn.restApi["set" + action].evaluation({ _id: item._id, evaluation: "minus" })
+              let response = await fn.restApi["set" + action].evaluation({ _id: item._id, evaluation: "minus", comment })
               if (response.status === 'ok') {
                 if (Static.nameRecords && typeof index != "undefined") {
                   Variable[Static.nameRecords].list_records[index].statistic.rating--
@@ -46,7 +47,7 @@ const Evaluation = function ({ Static, item, index, rating, action, callBackBefo
           }}
         />
       </div>
-      <div class="c-actioncomment__counter">{item && item.statistic.rating ? item.statistic.rating : rating}</div>
+      <div class="c-actioncomment__counter">{item.statistic.rating}</div>
       <div class="c-actioncomment__btn c-actioncomment__btn--like">
         <img
           class={[!Variable.auth ? "comment_inactive" : null]}
@@ -59,7 +60,7 @@ const Evaluation = function ({ Static, item, index, rating, action, callBackBefo
             timeout: 1000,
             callBackBefore: async () => {
 
-              let response = await fn.restApi["set" + action].evaluation({ _id: item._id, evaluation: "plus" })
+              let response = await fn.restApi["set" + action].evaluation({ _id: item._id, evaluation: "plus", comment })
               if (response.status === 'ok') {
                 if (Static.nameRecords && typeof index != "undefined") {
                   Variable[Static.nameRecords].list_records[index].statistic.rating++

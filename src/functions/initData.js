@@ -277,6 +277,11 @@ initData.lenta_users_show = function (Static) {
         adaptive: 4
     }
 
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+    }
+
     return
 }
 
