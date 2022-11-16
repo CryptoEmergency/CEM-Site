@@ -134,8 +134,17 @@ const start = function (data, ID) {
                                     style={item.media.length > 0 && "margin: 40px 0 0 0;"}
                                     onclick={function () {
                                       this.dataset.show = true
+                                      Object.keys(Static.mainComment.elShowInput).map((key) => {
+                                        if (index != key && Static.mainComment.elShowInput[key].dataset.show) {
+                                          Static.mainComment.elShowInput[key].removeAttribute("data-show")
+                                          Static.mainComment.elShowInput[key].dataset.show = true
+                                          Static.mainComment.elShowInput[key].style = "display:none;"
+                                        }
+                                      });
+
                                       Static.mainComment.elShowInput[index].dataset.show = true
                                       Static.mainComment.elShowInput[index].style = "display:flex;"
+                                      Static.mainComment.el[index].focus();
                                     }}
                                   >
                                     {Variable.lang.button.giveAnswer}
