@@ -19,7 +19,11 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
           {
             item.media.length
               ?
-              <div class="c-lentaitem__counter"><span Element={($el) => { Static.elNumberSwiper[index] = $el }}>{item.media.length ? item.media.length : null}</span></div>
+              <div class="c-lentaitem__counter">
+                <span Element={($el) => { Static.elNumberSwiper[index] = $el }}>1</span>
+                &ensp;/&ensp;
+                <span>{item.media.length ? item.media.length : null}</span>
+              </div>
               :
               null
           }
