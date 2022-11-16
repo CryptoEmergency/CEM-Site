@@ -320,6 +320,12 @@
         .micro_user_avatar {
             margin-left: 0;
         }
+
+        .comment_body {
+            &:last-child {
+                padding-bottom: 10px;
+            }
+        }
     }
 
     &_top {
@@ -1832,6 +1838,10 @@
                 .comment_avatar {
                     padding-left: 20px;
                 }
+            }
+
+            .comment_answer {
+                border-radius: 0;
             }
         }
     }

@@ -137,7 +137,6 @@ const start = function (data, ID) {
                                       Object.keys(Static.mainComment.elShowInput).map((key) => {
                                         if (index != key && Static.mainComment.elShowInput[key].dataset.show) {
                                           Static.mainComment.elShowInput[key].removeAttribute("data-show")
-                                          Static.mainComment.elShowInput[key].dataset.show = true
                                           Static.mainComment.elShowInput[key].style = "display:none;"
                                         }
                                       });
@@ -155,6 +154,53 @@ const start = function (data, ID) {
                               <div class="comment_icons">
                                 <Evaluation Static={Static} item={item} index={index} action="Answers" />
                                 {/* <ItemsMenu author={item.author} items={bottomMenuitems} /> */}
+                              </div>
+                              <div class="c-comments__form"
+                                style="display:none;"
+                                Element={($el) => { Static.mainComment.elShowInput[index] = $el; }}
+                              >
+                                <div class="c-comments__field create_post_container1">
+                                  <TextArea
+                                    Static={Static.mainComment}
+                                    index={index}
+                                    className="text1 create_post_chapter"
+                                  />
+                                </div>
+                                <ButtonSubmit
+                                  Static={Static}
+                                  text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                                  className="c-comments__send button-container-preview"
+                                  onclick={async () => {
+                                    if (!Variable.auth) {
+                                      fn.modals.ModalNeedAuth()
+                                      return
+                                    }
+                                    if (!Static.mainComment.el[index].value.trim().length) { return }
+                                    let text = Static.mainComment.el[index].value.trim()
+                                    let response = await fn.restApi.setAnswers.comment({ _id: item._id, text })
+                                    if (response.status === "ok") {
+                                      Static.mainComment.el[index].value = ""
+                                      if (Static.mainComment.adaptive) {
+                                        Static.mainComment.el[index].style.height = (Static.mainComment.el[index].dataset.maxHeight / Static.mainComment.adaptive) + 'px';
+                                      }
+                                      if (response.list_records[0]) {
+                                        let newRes = response.list_records[0]
+                                        item.statistic.comments++
+                                        item.comments.unshift(newRes)
+                                        Static.mainComment.elShowInput[index].removeAttribute("data-show")
+                                        Static.mainComment.elShowInput[index].dataset.show = true
+                                        Static.mainComment.elShowInput[index].style = "display:none;"
+
+                                        if (Static.elButtonSubmit[index]) {
+                                          Static.elButtonSubmit[index].dataset.show = true
+                                          Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                        }
+                                        Static.elShowAnswersComment[index].hidden = false
+                                        initReload();
+                                      }
+                                    }
+                                  }}
+                                />
                               </div>
                               {
                                 item.comments && item.comments.length
@@ -187,46 +233,6 @@ const start = function (data, ID) {
                                   :
                                   null
                               }
-                              <div class="c-comments__form create_post_coments"
-                                style="display:none;"
-                                Element={($el) => { Static.mainComment.elShowInput[index] = $el; }}
-                              >
-                                <div class="c-comments__field create_post_container1">
-                                  <TextArea
-                                    Static={Static.mainComment}
-                                    index={index}
-                                    className="text1 create_post_chapter"
-                                  />
-                                </div>
-                                <ButtonSubmit
-                                  Static={Static}
-                                  text={<img class="c-comments__icon" src={svg["send_message"]} />}
-                                  className="c-comments__send button-container-preview"
-                                  onclick={async () => {
-                                    if (!Variable.auth) {
-                                      fn.modals.ModalNeedAuth()
-                                      return
-                                    }
-                                    if (!Static.mainComment.el[index].value.trim().length) { return }
-                                    let text = Static.mainComment.el[index].value.trim()
-                                    let response = await fn.restApi.setAnswers.comment({ _id: item._id, text })
-                                    if (response.status === "ok") {
-                                      Static.mainComment.el[index].value = ""
-                                      if (Static.mainComment.adaptive) {
-                                        Static.mainComment.el[index].style.height = (Static.mainComment.el[index].dataset.maxHeight / Static.mainComment.adaptive) + 'px';
-                                      }
-                                      if (response.list_records[0]) {
-                                        let newRes = response.list_records[0]
-                                        item.comments.unshift(newRes)
-                                        Static.mainComment.elShowInput[index].removeAttribute("data-show")
-                                        Static.mainComment.elShowInput[index].dataset.show = true
-                                        Static.mainComment.elShowInput[index].style = "display:none;"
-                                        initReload();
-                                      }
-                                    }
-                                  }}
-                                />
-                              </div>
                               {
                                 item.comments && item.comments.length
                                   ?

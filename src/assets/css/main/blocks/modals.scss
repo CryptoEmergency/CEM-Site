@@ -184,7 +184,7 @@
 				.c-comments {
 					&__field {
 						position: relative;
-		
+
 						textarea {
 							min-height: 41px;
 							padding-top: 7px;
@@ -198,7 +198,7 @@
 						margin-left: 0 !important;
 						margin-right: 0 !important;
 					}
-		
+
 					&__send {
 						position: absolute !important;
 						right: 1px;
@@ -1218,6 +1218,11 @@
 		margin-bottom: 30px;
 		gap: 20px;
 		justify-content: space-around;
+
+		@media(max-width: 464px) {
+			flex-wrap: wrap;
+			margin-bottom: 35px
+		}
 	}
 
 	&-dialog {
@@ -1246,6 +1251,26 @@
 		border-top: none;
 		width: 100%;
 		margin: 0 auto;
+		justify-content: center;
+
+		.registration-btn {
+			width: 100%;
+			-webkit-transform: translate(0%, 0%);
+			transform: translate(0%, 0%);
+			top: 0;
+			left: 0;
+			transition: 1s;
+
+			.btn-gr-reg {
+				transition: 1s;
+
+				&::after {
+					left: 0;
+					top: 0;
+					width: 1578px;
+				}
+			}
+		}
 	}
 
 	&-body {
@@ -4592,6 +4617,11 @@ s
 		max-width: 1024px;
 		margin: 0 auto;
 		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+			margin-top: 10px;
+		}
 	}
 
 	&__field {
@@ -4668,6 +4698,10 @@ s
 	&__usercomment {
 		position: relative;
 		padding: 0 10px;
+
+		&:last-child {
+			padding-bottom: 10px;
+		}
 
 		.c-avataricon {
 
@@ -4818,6 +4852,7 @@ s
 
 		@media (max-width: 399px) {
 			position: static;
+			padding-bottom: 3px;
 		}
 	}
 }

@@ -209,6 +209,36 @@ const itemsMenu = {}
 //       ""]
 //   })
 
+itemsMenu.onlyPage = function({url}){
+    const items = [
+        {
+            text: Variable.lang.select.share,
+            type: "share",
+            onclick: async () => {
+                try {
+                    if (navigator.share) {
+                        await navigator.share({
+                            url: window.location.origin + url,
+                        });
+                    }
+                } catch (err) {
+                    // Вывести ошибку
+                    console.error("Share", err)
+                }
+            }
+        },
+        {
+            text: Variable.lang.p.copy + " URL",
+            type: "copyurl",
+            onclick: async () => {
+                navigator.clipboard.writeText(window.location.origin + url);
+                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+            }
+        }
+    ]
+    return items
+}
+
 itemsMenu.blog = function(Static, item){
     const items = [
         {

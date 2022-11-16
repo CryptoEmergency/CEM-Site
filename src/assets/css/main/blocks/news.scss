@@ -9,6 +9,15 @@
         max-width: 1240px;
         margin: 0 auto;
         padding-bottom: 30px;
+
+        .c-button {
+            &--primary {
+                width: 207px;
+                height: 45px;
+                text-transform: none;
+                border-radius: 3px;
+            }
+        }
     }
 
     &_text {

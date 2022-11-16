@@ -120,6 +120,7 @@ const BlockProjects = async function () {
                     "title": Variable.lang.a.blog,
                     "icon": "preview_line_blog",
                     "link": "blog",
+                    "items": fn.itemsMenu.onlyPage({url: '/blog/'}),
                     modal: true
                 },
                 {
@@ -160,7 +161,7 @@ const BlockProjects = async function () {
                         <a href={`/${item.link}/`}
                             onclick={(e) => {
                                 if (item.modal) {
-                                    fn.siteLinkModal(e, { title: item.title })
+                                    fn.siteLinkModal(e, { title: item.title, items: item.items})
                                 } else {
                                     fn.siteLink(e)
                                 }
