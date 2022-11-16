@@ -748,8 +748,24 @@ restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
 }
 
 
-restApi.setUserRoom = {}
 
+
+restApi.setQuestions = {}
+restApi.setQuestions.complain = async function ({ _id, complain }) {
+    let data = {
+        _id,
+        value: {
+        complain
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setQuestion", data);
+    console.log(response)
+    return checkSetAnswer(response)
+}
+
+
+restApi.setUserRoom = {}
 restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country }) {
     let data = {
         value: {

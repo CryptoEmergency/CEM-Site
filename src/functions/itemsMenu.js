@@ -1,4 +1,5 @@
 import { Variable } from '@betarost/cemjs'
+import { modals} from './modals.js';
 const itemsMenu = {}
 
 //нижнее меню
@@ -252,20 +253,25 @@ itemsMenu.lenta_users = function (Static, item) {
 
                 color: "red",
                 onclick: async () => {
-                    // Переработать модалку
-                    console.log(data)
+                    modals.ModalComplainComment({
+                        id: item._id,
+                        typeSet: item.typeApi,
+                        mainId: item.mainId,
+                        mainCom: !item.commentId ? true : false
+                    })
+                /*
                     Variable.SetModals(
                         {
                             name: "ModalComplainComment",
                             data: {
-                                id: data.item._id,
-                                typeSet: data.typeApi,
-                                mainId: data.mainId,
-                                mainCom: !data.commentId ? true : false,
+                                id: item._id,
+                                typeSet: item.typeApi,
+                                mainId: item.mainId,
+                                mainCom: !item.commentId ? true : false,
                             },
-                        }, true
-                    );
-                }
+                        }, true*/
+                    }
+                
             },
             {
                 text: Variable.lang.select.complainUser,

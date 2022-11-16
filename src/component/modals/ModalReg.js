@@ -59,7 +59,7 @@ let wayReg
 
 const ModalReg = function (data, ID) {
 
-    let Static = fn.GetParams({ data, ID })
+    let [Static] = fn.GetParams({ data, ID })
 
 
 
