@@ -34,7 +34,7 @@ const makeSwiperOptions = function (Static, index) {
       slideChange: function () {
         console.log('swiper slide change ***');
         // console.log('=8d7c32=', this.activeIndex, Static.elNumberSwiper[index])
-        Static.elNumberSwiper[index].innerText = this.activeIndex
+        Static.elNumberSwiper[index].innerText = this.activeIndex + 1
       }
     }
   }
