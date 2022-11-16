@@ -150,25 +150,25 @@ const start = function (data, ID) {
                               {
                                 item.comments && item.comments.length
                                   ?
-                                  <div class="user_news_top">
+                                  <div class="user_news_top"
+                                    onclick={function () {
+                                      if (Static.elButtonSubmit[index].dataset.show) {
+                                        Static.elButtonSubmit[index].removeAttribute("data-show")
+                                        Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                        Static.elShowAnswersComment[index].hidden = true
+                                      } else {
+                                        Static.elButtonSubmit[index].dataset.show = true
+                                        Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                        Static.elShowAnswersComment[index].hidden = false
+                                      }
+                                    }}
+                                  >
                                     <div class="button-container-comm">
                                       <ButtonSubmit
                                         className="c-button--comm"
                                         data-show={false}
                                         text={
-                                          <span
-                                            onclick={function () {
-                                              if (this.dataset.show) {
-                                                this.removeAttribute("data-show")
-                                                this.innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                                Static.elShowAnswersComment[index].hidden = true
-                                              } else {
-                                                this.dataset.show = true
-                                                this.innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                                Static.elShowAnswersComment[index].hidden = false
-                                              }
-                                            }}
-                                          >
+                                          <span Element={($el) => { Static.elButtonSubmit[index] = $el; }}>
                                             {Variable.lang.span.showComments} (<span class="comment_count">{item.statistic.comments}</span>)
                                           </span>
                                         }
