@@ -46,7 +46,8 @@ const mainHeader = async function () {
                                 <div
                                     class="language"
                                     onclick={() => {
-                                        Variable.SetModals({ name: "ModalLanguageSite", data: {}, });
+                                        fn.modals.ModalLanguageSite({})
+                                        // Variable.SetModals({ name: "ModalLanguageSite", data: {}, });
                                     }}
                                 >
                                     <div class="selectlink">
