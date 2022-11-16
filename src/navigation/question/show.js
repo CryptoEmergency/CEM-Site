@@ -137,7 +137,6 @@ const start = function (data, ID) {
                                       Object.keys(Static.mainComment.elShowInput).map((key) => {
                                         if (index != key && Static.mainComment.elShowInput[key].dataset.show) {
                                           Static.mainComment.elShowInput[key].removeAttribute("data-show")
-                                          Static.mainComment.elShowInput[key].dataset.show = true
                                           Static.mainComment.elShowInput[key].style = "display:none;"
                                         }
                                       });

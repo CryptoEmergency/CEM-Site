@@ -30,10 +30,18 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
                             <span
                                 class="c-actioncomment__answer"
                                 onclick={() => {
-                                    if (Static.secondComment.elShowInput[index]) {
-                                        // Static.secondComment.elShowInput[index].value = item.author.nickname
-                                        Static.secondComment.elShowInput[index].style = "display:flex;"
-                                    }
+
+                                    Object.keys(Static.secondComment.elShowInput).map((key) => {
+                                        if (index != key && Static.secondComment.elShowInput[key].dataset.show) {
+                                            Static.secondComment.elShowInput[key].removeAttribute("data-show")
+                                            Static.secondComment.elShowInput[key].style = "display:none;"
+                                        }
+                                    });
+
+                                    Static.secondComment.elShowInput[index].dataset.show = true
+                                    Static.secondComment.elShowInput[index].style = "display:flex;"
+                                    Static.secondComment.el[index].focus();
+
                                     return
                                 }}
                             >
