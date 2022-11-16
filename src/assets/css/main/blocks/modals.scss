@@ -4592,6 +4592,10 @@ s
 		max-width: 1024px;
 		margin: 0 auto;
 		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 	&__field {
@@ -4668,6 +4672,10 @@ s
 	&__usercomment {
 		position: relative;
 		padding: 0 10px;
+
+		&:last-child {
+			padding-bottom: 10px;
+		}
 
 		.c-avataricon {
 
@@ -4818,6 +4826,7 @@ s
 
 		@media (max-width: 399px) {
 			position: static;
+			padding-bottom: 3px;
 		}
 	}
 }

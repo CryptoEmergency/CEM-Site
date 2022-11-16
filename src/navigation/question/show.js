@@ -186,7 +186,7 @@ const start = function (data, ID) {
                                   :
                                   null
                               }
-                              <div class="c-comments__form create_post_coments"
+                              <div class="c-comments__form"
                                 style="display:none;"
                                 Element={($el) => { Static.mainComment.elShowInput[index] = $el; }}
                               >

@@ -66,7 +66,7 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
           callBack={callBack}
         /> */}
             </div>
-            <div class="c-comments__form create_post_coments"
+            <div class="c-comments__form"
                 style="display:none;"
                 Element={($el) => { Static.secondComment.elShowInput[index] = $el; }}>
                 <div class="c-comments__field create_post_container1">
