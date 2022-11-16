@@ -12,9 +12,10 @@ import {
 
 const ModalLanguageSite = function (data, ID) {
 
-  init(() => {
+  init(
+    () => {
 
-  },
+    },
     () => {
       return (
         <div class="c-modal c-modal--open">

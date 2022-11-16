@@ -23,7 +23,7 @@ import youtube from '@assets/svg/youtube_icon.svg'
 // }
 let elem = {}
 
-const ModalMobileMainSettings = function ({ }, ID) {
+const ModalMobileMainSettings = function (data, ID) {
 
     let socialIcon
 
