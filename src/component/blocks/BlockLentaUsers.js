@@ -19,7 +19,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
           {
             item.media.length
               ?
-              <div class="c-lentaitem__counter"><span>{item.media.length ? item.media.length : null}</span></div>
+              <div class="c-lentaitem__counter"><span Element={($el) => { Static.elNumberSwiper[index] = $el }}>{item.media.length ? item.media.length : null}</span></div>
               :
               null
           }
@@ -41,6 +41,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
             Static={Static}
             items={item.media}
             path="posts"
+            index={index}
           // changeToogle={changeToogle}
           />
           <div class={!item.media.length && item.text.length < 250 ? "user_post_text_background" : null}>
