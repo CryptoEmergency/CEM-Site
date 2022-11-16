@@ -100,68 +100,12 @@ const mainHeader = async function () {
                                 </a>
                                 <a class="c-menu__link" href="/contacts/" onclick={(e) => {
                                     fn.siteLinkModal(e, {
-                                        title: Variable.lang.a.contacts, items:
-                                            [
-                                                {
-                                                    text: Variable.lang.select.share,
-                                                    type: "share",
-                                                    onclick: async () => {
-                                                        try {
-                                                            if (navigator.share) {
-                                                                await navigator.share({
-                                                                    url: window.location.origin + "/contacts/",
-                                                                });
-                                                            }
-                                                        } catch (err) {
-                                                            // Вывести ошибку
-                                                            console.error("Share", err)
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    text: Variable.lang.p.copy + " URL",
-                                                    type: "copyurl",
-                                                    onclick: async () => {
-                                                        navigator.clipboard.writeText(window.location.origin + "/contacts/");
-                                                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-
-                                                    }
-                                                }
-
-                                            ]
+                                        title: Variable.lang.a.contacts, items: fn.itemsMenu.onlyPage({url: '/contacts/'})
                                     })
                                 }}>{Variable.lang.a.contacts}</a>
                                 <a class="c-menu__link" href="/about/" onclick={(e) => {
                                     fn.siteLinkModal(e, {
-                                        title: Variable.lang.a.about, items:
-                                            [
-                                                {
-                                                    text: Variable.lang.select.share,
-                                                    type: "share",
-                                                    onclick: async () => {
-                                                        try {
-                                                            if (navigator.share) {
-                                                                await navigator.share({
-                                                                    url: window.location.origin + "/about/",
-                                                                });
-                                                            }
-                                                        } catch (err) {
-                                                            // Вывести ошибку
-                                                            console.error("Share", err)
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    text: Variable.lang.p.copy + " URL",
-                                                    type: "copyurl",
-                                                    onclick: async () => {
-                                                        navigator.clipboard.writeText(window.location.origin + "/about/");
-                                                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-
-                                                    }
-                                                }
-
-                                            ]
+                                        title: Variable.lang.a.about, items: fn.itemsMenu.onlyPage({url: '/about/'})
                                     })
                                 }}>{Variable.lang.a.about}</a>
                                 <a class="c-menu__link" href="/blog/" onclick={(e) => {
