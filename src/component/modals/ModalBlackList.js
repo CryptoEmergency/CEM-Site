@@ -5,7 +5,8 @@ import {
   initReload,
   initGo,
   sendApi,
-  Helpers,
+  Helpers, 
+  init
 } from "@betarost/cemjs";
 
 const sendInBlackList = async (info) => {

@@ -4,7 +4,8 @@ import {
   Variable,
   initReload,
   initOne,
-  sendApi
+  sendApi, 
+  init
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
@@ -12,7 +13,7 @@ import { fn } from '@src/functions/index.js';
 
 // let Static = {}
 
-const ModalAfterRegisterForm = function (data, reload) {
+const ModalAfterRegisterForm = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
   init(
     () => {
