@@ -374,6 +374,8 @@ initData.lenta_users = function (Static) {
     Static.elShowTextShort = {}
     Static.elMedia = {}
 
+    Static.elNumberSwiper = {}
+
     Static.nameRecords = "PageLentaall";
     Static.lentaPage = "all";
     Static.lentaFilters = {
@@ -423,6 +425,8 @@ initData.question_show = function (Static) {
     Static.elMedia = {}
     Static.elShowComment = {}
     Static.elShowAnswersComment = {}
+
+    Static.elButtonSubmit = {}
     // Static.itemAnswer={}
 
     Static.mainComment = {

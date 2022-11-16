@@ -5,28 +5,45 @@ import {
 import { fn } from '@src/functions/index.js';
 import { AudioPlayer, Swiper, VideoPlayer, LazyImage } from "@component/element/index.js";
 
-const swiperOptions = {
-  effect: "cube",
-  grabCursor: true,
-  cubeEffect: {
-    shadow: false,
-    slideShadows: true,
-    shadowOffset: 20,
-    shadowScale: 0.94,
-  },
-  loop: false,
-  // autoHeight: true,
-  pagination: {
-    el: ".swiper-pagination",
-  },
-  scrollbar: {
-    el: ".swiper-scrollbar",
-  },
-  slidesPerView: 1,
-  spaceBetween: 20,
-};
 
-const LentaMedia = function ({ Static, items, path, changeToogle }) {
+const makeSwiperOptions = function (Static, index) {
+
+  let swiperOptions = {
+    effect: "cube",
+    grabCursor: true,
+    cubeEffect: {
+      shadow: false,
+      slideShadows: true,
+      shadowOffset: 20,
+      shadowScale: 0.94,
+    },
+    loop: false,
+    // autoHeight: true,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    scrollbar: {
+      el: ".swiper-scrollbar",
+    },
+    slidesPerView: 1,
+    spaceBetween: 20
+  };
+
+  if (typeof index != "undefined") {
+    swiperOptions.on = {
+      slideChange: function () {
+        console.log('swiper slide change ***');
+        // console.log('=8d7c32=', this.activeIndex, Static.elNumberSwiper[index])
+        Static.elNumberSwiper[index].innerText = this.activeIndex + 1
+      }
+    }
+  }
+
+  return swiperOptions
+}
+
+
+const LentaMedia = function ({ Static, items, path, changeToogle, index }) {
   if (items.length == 0) { return null }
   let ArrWithAudio = items.filter((item) => item.type === "audio");
   let ArrWithVideo = items.filter((item) => item.type === "video");
@@ -61,11 +78,11 @@ const LentaMedia = function ({ Static, items, path, changeToogle }) {
 
   return (
     <Swiper
-      options={swiperOptions}
+      options={makeSwiperOptions(Static, index)}
       replace={changeToogle}
       slide={
         items.map(
-          (item) => {
+          (item, index) => {
             if (Array.isArray(item)) {
               return (
                 <div class="swiper-slide user_post_text_background">
@@ -82,7 +99,7 @@ const LentaMedia = function ({ Static, items, path, changeToogle }) {
 
             if (item.type == "image") {
               return (
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-i={`${index + 1} / ${items.length}`}>
                   <div class="swiper-post_media_image_container">
                     {/* <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} /> */}
                     <LazyImage path={`/assets/upload/${path}/` + item.name} />

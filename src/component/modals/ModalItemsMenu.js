@@ -68,9 +68,17 @@ const ModalItemsMenu = function ({ items, author }, ID) {
 										return arrReturn
 									}
 								}}
+								<li
+									class="c-actions__item"
+									onclick={function () {
+										Variable.DelModals("ModalItemsMenu");
+									}
+									}>
+									<span class="c-button__wrapper">{Variable.lang.button.reset}</span>
+								</li>
 							</ul>
 						</div>
-						<div class="c-modal__footer">
+						{/* <div class="c-modal__footer">
 							<button
 								class="c-button c-button--inverse"
 								onclick={() => {
@@ -78,7 +86,7 @@ const ModalItemsMenu = function ({ items, author }, ID) {
 								}}					>
 								<span class="c-button__wrapper">{Variable.lang.button.reset}</span>
 							</button>
-						</div>
+						</div> */}
 					</section>
 				</div>
 			);

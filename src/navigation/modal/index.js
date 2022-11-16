@@ -29,7 +29,7 @@ const mainModal = async function () {
                 }
                 return <div></div>
             }
-
+            document.getElementById('backdrop').classList.add("c-backdrop--show");
             let ID = "Modal-" + (Variable.Modals.length - 1)
             if (!reload && getInitList()[ID].firstStart) {
                 await getInitList()[ID].firstStart(reload)
