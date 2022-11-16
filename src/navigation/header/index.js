@@ -166,35 +166,7 @@ const mainHeader = async function () {
                                 }}>{Variable.lang.a.about}</a>
                                 <a class="c-menu__link" href="/blog/" onclick={(e) => {
                                     fn.siteLinkModal(e, {
-                                        title: Variable.lang.h.blog, items:
-                                            [
-                                                {
-                                                    text: Variable.lang.select.share,
-                                                    type: "share",
-                                                    onclick: async () => {
-                                                        try {
-                                                            if (navigator.share) {
-                                                                await navigator.share({
-                                                                    url: window.location.origin + "/blog/",
-                                                                });
-                                                            }
-                                                        } catch (err) {
-                                                            // Вывести ошибку
-                                                            console.error("Share", err)
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    text: Variable.lang.p.copy + " URL",
-                                                    type: "copyurl",
-                                                    onclick: async () => {
-                                                        navigator.clipboard.writeText(window.location.origin + "/blog/");
-                                                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-
-                                                    }
-                                                }
-
-                                            ]
+                                        title: Variable.lang.h.blog, items: fn.itemsMenu.blog()
                                     })
                                 }}>{Variable.lang.a.blog}</a>
                             </nav>

@@ -14,9 +14,9 @@ import { Input } from '@component/element/index.js';
 
 
 
-const ModalReset = function ({ lang, changeCode, ID, abbr, codeTitle, wayReset, changeWayReset, changeStepReset }, ID) {
+const ModalReset = function ({ lang, changeCode, abbr, codeTitle, wayReset, changeWayReset, changeStepReset }, ID) {
     // console.log("ModalReset", { lang, changeCode, ID, abbr, codeTitle, wayReset, changeWayReset });
-    const showStepReset = getValue(ID, "toggleStepReset");
+    //const showStepReset = getValue(ID, "toggleStepReset");
     const showModalReset = function (e) {
         e.stopPropagation()
         let show = getValue("modals", "resetModalShow");
