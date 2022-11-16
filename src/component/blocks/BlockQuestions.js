@@ -76,7 +76,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
     <div class="c-questions">
       <div class="c-questions__header">
         {
-          !Static.showPage
+          Variable.Static.DataUrl.adress == "question"
             ?
             <div>
               <h4>{Variable.lang.h.lastQuestions}</h4>
