@@ -165,9 +165,7 @@ const mainHeader = async function () {
                                     })
                                 }}>{Variable.lang.a.about}</a>
                                 <a class="c-menu__link" href="/blog/" onclick={(e) => {
-                                    fn.siteLinkModal(e, {
-                                        title: Variable.lang.h.blog, items: fn.itemsMenu.blog()
-                                    })
+                                    fn.siteLinkModal(e, {title: Variable.lang.h.blog, items: fn.itemsMenu.onlyPage({url: '/blog/'})})
                                 }}>{Variable.lang.a.blog}</a>
                             </nav>
                         </div>

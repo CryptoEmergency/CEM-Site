@@ -12,6 +12,7 @@ import {
     init
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
+import { fn } from '@src/functions/index.js';
 import youtube from '@assets/svg/youtube_icon.svg'
 // const showAllLangMedia = function (e, target) {
 //     e.preventDefault()
@@ -232,33 +233,8 @@ const ModalMobileMainSettings = function (data, ID) {
                                 <a
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
-                                        Helpers.siteLinkModal(e, {
-                                            title: Variable.lang.a.blog, items:
-                                                [
-                                                    {
-                                                        text: Variable.lang.select.share,
-                                                        type: "share",
-                                                        onclick: async () => {
-                                                            try {
-                                                                if (navigator.share) {
-                                                                    await navigator.share({
-                                                                        url: window.location.origin + "/blog/",
-                                                                    });
-                                                                }
-                                                            } catch (err) {
-                                                                console.error("Share", err)
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        text: Variable.lang.p.copy + " URL",
-                                                        type: "copyurl",
-                                                        onclick: async () => {
-                                                            navigator.clipboard.writeText(window.location.origin + "/blog/");
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-                                                        }
-                                                    }
-                                                ]
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.blog, items: fn.itemsMenu.onlyPage({url: '/blog/'})
                                         })
                                     }}
                                     class="user_icon_mobile_visible user_icon"

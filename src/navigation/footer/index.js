@@ -6,6 +6,7 @@ import {
     Variable,
     Helpers
 } from '@betarost/cemjs'
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js"
 import { BottomMenu } from '@component/element/BottomMenu.js';
 
@@ -106,36 +107,8 @@ const mainFooter = async function () {
             ]}) }} >
                                                         <span>{Variable.lang.a.about}</span>
                                                     </a>
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.blog,items:
-                      [
-                        {
-                          text: Variable.lang.select.share,
-                          type: "share",
-                          onclick: async () => {
-                            try {
-                              if (navigator.share) {
-                                await navigator.share({
-                                  url: window.location.origin + "/blog/",
-                                });
-                              }
-                            } catch (err) {
-                              // Вывести ошибку
-                              console.error("Share", err)
-                            }
-                          }
-            },
-            {
-                text: Variable.lang.p.copy+ " URL",
-                type: "copyurl",
-                onclick: async () => {
-                    navigator.clipboard.writeText(window.location.origin + "/blog/");
-                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied} }, true)
-             
-                }
-  }
-            
-            ]} ) }} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.career, items:
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.blog,items: fn.itemsMenu.onlyPage({url: '/blog/'})})}} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.career, items:
                       [
                         {
                           text: Variable.lang.select.share,
