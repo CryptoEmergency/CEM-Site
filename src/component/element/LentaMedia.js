@@ -24,6 +24,12 @@ const swiperOptions = {
   },
   slidesPerView: 1,
   spaceBetween: 20,
+  on: {
+    slideChange: function () {
+      console.log('swiper slide change ***');
+      console.log('=8d7c32=', Swiper.activeIndex)
+    },
+  },
 };
 
 const LentaMedia = function ({ Static, items, path, changeToogle }) {
@@ -65,7 +71,7 @@ const LentaMedia = function ({ Static, items, path, changeToogle }) {
       replace={changeToogle}
       slide={
         items.map(
-          (item) => {
+          (item, index) => {
             if (Array.isArray(item)) {
               return (
                 <div class="swiper-slide user_post_text_background">
@@ -82,7 +88,7 @@ const LentaMedia = function ({ Static, items, path, changeToogle }) {
 
             if (item.type == "image") {
               return (
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-i={`${index+1} / ${items.length}`}>
                   <div class="swiper-post_media_image_container">
                     {/* <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} /> */}
                     <LazyImage path={`/assets/upload/${path}/` + item.name} />
