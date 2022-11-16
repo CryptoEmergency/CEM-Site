@@ -6,11 +6,11 @@ import {
     Variable,
     getValue,
     initReload,
-    sendApi
+    sendApi, 
+    init
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { init } from "@betarost/cem";
 
 
 const ModalConfirmCode = function (data, ID) {

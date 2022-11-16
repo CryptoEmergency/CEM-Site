@@ -4,10 +4,10 @@ import {
     setAction,
     setValue,
     Variable,
-    getValue
+    getValue, 
+    init
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { init } from '@betarost/cem';
 
 
 

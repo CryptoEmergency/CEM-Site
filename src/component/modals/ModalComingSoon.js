@@ -4,17 +4,17 @@ import {
     setAction,
     setValue,
     Variable,
-    getValue
+    getValue, 
+    init
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-import { init } from '@betarost/cem';
 
 
 
 const ModalComingSoon = function (data, ID) {
     // console.log("ModalComingSoon");
     const commingSoonModalShow = getValue("modals", "commingSoonModalShow")
-    
+
     const showModalCommingSoon = function (e) {
         e.stopPropagation()
         setValue("modals", "commingSoonModalShow", !getValue("modals", "commingSoonModalShow"))

@@ -4,7 +4,8 @@ import {
   Variable,
   initReload,
   initOne,
-  sendApi
+  sendApi, 
+  init
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';

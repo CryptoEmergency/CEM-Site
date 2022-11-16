@@ -1,5 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, timersStart, timersStop } from "@betarost/cemjs";
-import { init } from "@betarost/cem";
+import { jsx, jsxFrag, Variable, initReload, timersStart, timersStop, init } from "@betarost/cemjs";
 
 const ModalContextMenu = function (data, ID) {
 	init(

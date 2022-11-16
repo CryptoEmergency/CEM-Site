@@ -5,8 +5,8 @@ import {
   initReload,
   timersStart,
   timersStop,
+  init
 } from "@betarost/cemjs";
-import { init } from "@betarost/cem";
 
 
 
