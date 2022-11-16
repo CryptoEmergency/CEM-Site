@@ -12,7 +12,7 @@ import { fn } from '@src/functions/index.js';
 
 // let Static = {}
 
-const ModalAfterRegisterForm = function (data, reload) {
+const ModalAfterRegisterForm = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
   init(
     () => {

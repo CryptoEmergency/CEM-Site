@@ -9,16 +9,18 @@ import { fn } from '@src/functions/index.js';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-let elemImg = Variable.setRef()
-let elemRatio1 = Variable.setRef()
-let elemRatio2 = Variable.setRef()
-let elemRatio3 = Variable.setRef()
 
-const URL = window.URL || window.webkitURL;
-let cropper, aspectActive;
 
 const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
     let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+
+    let elemImg = Variable.setRef()
+    let elemRatio1 = Variable.setRef()
+    let elemRatio2 = Variable.setRef()
+    let elemRatio3 = Variable.setRef()
+
+    const URL = window.URL || window.webkitURL;
+    let cropper, aspectActive;
     console.log('=453e8a=', Static)
     console.log('=018927=', Static.aspectSelect)
 
