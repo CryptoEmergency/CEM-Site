@@ -1,4 +1,4 @@
-import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi } from "@betarost/cemjs";
+import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi, initGo } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
@@ -290,8 +290,18 @@ fn.siteLink = function (e) {
     }
     link = e.currentTarget.href;
   }
-  history.pushState(null, null, link);
-  parsingUrl()
+  // console.log('=fc61e3=', link, window.location.href, Variable.dataUrl)
+  if (link == window.location.href || link == Variable.dataUrl.href) {
+    initGo("newPage")
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: "instant",
+    // });
+  } else {
+
+    history.pushState(null, null, link);
+    parsingUrl()
+  }
   return
 }
 
