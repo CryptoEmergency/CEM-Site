@@ -5,11 +5,12 @@ import {
   initReload,
   timersStart,
   timersStop,
+  init
 } from "@betarost/cemjs";
 
 
 
-const ModalContextMenuNew = function (data, reload) {
+const ModalContextMenuNew = function (data, ID) {
 
   const clickShare = async () => {
     let shareData;
@@ -171,79 +172,85 @@ const ModalContextMenuNew = function (data, reload) {
     },
   };
   // console.log('=99a31e=',Object.keys(data.type))
-  return (
-    <div class="c-modal c-modal--open" id="ModalContextMenu">
-      <section class="c-modal__dialog">
-        {/* <header class="c-modal__header">
-          <h4></h4>
-        </header> */}
-        <div class="c-modal__body">
-          <ul class="c-actions">
-            {() => {
-              if (
-                data.item.author._id === Variable.myInfo._id
-                // false
-              ) {
-                return Object.keys(data.type).map((key) => {
-                  if (data.type[key] && typeText.author[key] !== undefined) {
-                    return (
-                      <li
-                        class={"c-actions__item"}
-                        onclick={typeText.author[key].onclick}
-                      >
-                        <span>{typeText.author[key].text}</span>
-                      </li>
-                    );
-                  }
-                });
-                // return tmp
-                // return <p style ={"color:black"}>sadsadasd</p>
-              } else {
-                return Object.keys(data.type).map((key) => {
-                  if (data.type[key] && typeText.notAuthor[key] !== undefined) {
-                    return (
-                      <li
-                        class=
-                        "c-actions__item"
-                        onclick={typeText.notAuthor[key].onclick}
-                      >
-                        <span
-                          class={[key.includes("complain") || key === "blackList" ? "c-text--error" : null]}
-                        >{typeText.notAuthor[key].text}</span>
 
+  init(
+    null,
+    ()=>{
+      return (
+        <div class="c-modal c-modal--open" id="ModalContextMenu">
+          <section class="c-modal__dialog">
+            {/* <header class="c-modal__header">
+              <h4></h4>
+            </header> */}
+            <div class="c-modal__body">
+              <ul class="c-actions">
+                {() => {
+                  if (
+                    data.item.author._id === Variable.myInfo._id
+                    // false
+                  ) {
+                    return Object.keys(data.type).map((key) => {
+                      if (data.type[key] && typeText.author[key] !== undefined) {
+                        return (
+                          <li
+                            class={"c-actions__item"}
+                            onclick={typeText.author[key].onclick}
+                          >
+                            <span>{typeText.author[key].text}</span>
+                          </li>
+                        );
+                      }
+                    });
+                    // return tmp
+                    // return <p style ={"color:black"}>sadsadasd</p>
+                  } else {
+                    return Object.keys(data.type).map((key) => {
+                      if (data.type[key] && typeText.notAuthor[key] !== undefined) {
+                        return (
+                          <li
+                            class=
+                            "c-actions__item"
+                            onclick={typeText.notAuthor[key].onclick}
+                          >
+                            <span
+                              class={[key.includes("complain") || key === "blackList" ? "c-text--error" : null]}
+                            >{typeText.notAuthor[key].text}</span>
+    
+                          </li>
+                        );
+                      }
+                    });
+                  }
+                }}
+                {() => {
+                  if (Variable.auth && Variable.myInfo.status.role) {
+                    return (
+                      <li
+                        class="c-actions__item"
+                        onclick={typeText.role.onclick}
+                      >
+                        <span class="c-text--green">{typeText.role.text}</span>
                       </li>
                     );
                   }
-                });
-              }
-            }}
-            {() => {
-              if (Variable.auth && Variable.myInfo.status.role) {
-                return (
-                  <li
-                    class="c-actions__item"
-                    onclick={typeText.role.onclick}
-                  >
-                    <span class="c-text--green">{typeText.role.text}</span>
-                  </li>
-                );
-              }
-            }}
-          </ul>
+                }}
+              </ul>
+            </div>
+            <div class="c-modal__footer">
+              <button
+                class="c-button c-button--inverse"
+                onclick={() => {
+                  Variable.DelModals("ModalContextMenuNew");
+                }}
+              >
+                <span class="c-button__wrapper">{Variable.lang.button.reset}</span>
+              </button>
+            </div>
+          </section>
         </div>
-        <div class="c-modal__footer">
-          <button
-            class="c-button c-button--inverse"
-            onclick={() => {
-              Variable.DelModals("ModalContextMenuNew");
-            }}
-          >
-            <span class="c-button__wrapper">{Variable.lang.button.reset}</span>
-          </button>
-        </div>
-      </section>
-    </div>
-  );
+      );
+    }, ID
+  )
 };
 
 export default ModalContextMenuNew;

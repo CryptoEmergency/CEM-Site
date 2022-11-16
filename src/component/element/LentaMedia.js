@@ -1,108 +1,117 @@
 import {
   jsx,
-  jsxFrag,
-  Variable,
+  jsxFrag
 } from "@betarost/cemjs";
-//
-import {
-  AudioPlayerCopy,
-  AudioPlayer,
-  Swiper,
-  VideoPlayer,
-  LazyImage
-} from "@component/element/index.js";
-
-import images from '@assets/images/index.js';
-
-const swiperOptions = {
-  effect: "cube",
-  grabCursor: true,
-  cubeEffect: {
-    shadow: true,
-    slideShadows: true,
-    shadowOffset: 20,
-    shadowScale: 0.94,
-  },
-  loop: false,
-  // autoHeight: true,
-  pagination: {
-    el: ".swiper-pagination",
-  },
-  scrollbar: {
-    el: ".swiper-scrollbar",
-  },
-  slidesPerView: 1,
-  spaceBetween: 20,
-};
+import { fn } from '@src/functions/index.js';
+import { AudioPlayer, Swiper, VideoPlayer, LazyImage } from "@component/element/index.js";
 
 
+const makeSwiperOptions = function (Static, index) {
 
-const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeToogle }) {
-  if (items.length == 0) {
-    return <></>;
-  }
+  let swiperOptions = {
+    effect: "cube",
+    grabCursor: true,
+    cubeEffect: {
+      shadow: false,
+      slideShadows: true,
+      shadowOffset: 20,
+      shadowScale: 0.94,
+    },
+    loop: false,
+    // autoHeight: true,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    scrollbar: {
+      el: ".swiper-scrollbar",
+    },
+    slidesPerView: 1,
+    spaceBetween: 20
+  };
 
-  if (items.find((item) => item.type === "audio")) {
-    let ArrWithAudio = items.filter((item) => item.type === "audio");
-
-    const array_size = 3;
-
-    const audioArr = [];
-
-    for (let i = 0; i < ArrWithAudio.length; i += array_size) {
-      audioArr.push(ArrWithAudio.slice(i, i + array_size));
+  if (typeof index != "undefined") {
+    swiperOptions.on = {
+      slideChange: function () {
+        console.log('swiper slide change ***');
+        // console.log('=8d7c32=', this.activeIndex, Static.elNumberSwiper[index])
+        Static.elNumberSwiper[index].innerText = this.activeIndex + 1
+      }
     }
-    items.push(...audioArr);
   }
+
+  return swiperOptions
+}
+
+
+const LentaMedia = function ({ Static, items, path, changeToogle, index }) {
+  if (items.length == 0) { return null }
+  let ArrWithAudio = items.filter((item) => item.type === "audio");
+  let ArrWithVideo = items.filter((item) => item.type === "video");
+  let ArrWithImage = items.filter((item) => item.type === "image");
+
+  if (!ArrWithVideo.length && !ArrWithAudio.length && ArrWithImage.length == 1) {
+    return (
+      // <div class="swiper-post_media_image_container">
+      //   <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} />
+      // </div>
+      <LazyImage className="swiper-post_media_image_container" path={`/assets/upload/${path}/` + ArrWithImage[0].name} />
+    )
+  }
+
+  if (!ArrWithImage.length && !ArrWithAudio.length && ArrWithVideo.length == 1) {
+    return (
+      <VideoPlayer Static={Static} item={ArrWithVideo[0]} path={`/assets/upload/${path}/`} />
+    )
+  }
+
+  if (!ArrWithImage.length && !ArrWithVideo.length && ArrWithAudio.length == 1) {
+    return (
+      <div class="user_post_text_background">
+        <AudioPlayer Static={Static} item={ArrWithAudio[0]} path={`/assets/upload/${path}/`} />
+      </div>
+    )
+  }
+  if (ArrWithAudio.length) {
+    let audioSplit = fn.splitArray(ArrWithAudio, 3)
+    items.push(...audioSplit)
+  }
+
   return (
     <Swiper
-      className=""
-      options={swiperOptions}
+      options={makeSwiperOptions(Static, index)}
       replace={changeToogle}
-      // replace={false}
       slide={
         items.map(
           (item, index) => {
-            if (item.type == "video" && !Array.isArray(item)) {
+            if (Array.isArray(item)) {
               return (
-                <div class="swiper-slide">
-                  <VideoPlayer
-                    Static={Static}
-                    item={item}
-                    path={`/assets/upload/${path}/`}
-                  //  path={"/assets/upload/posts/"}
-                  />
+                <div class="swiper-slide user_post_text_background">
+                  {
+                    item.map((itemAudio) => {
+                      return (
+                        <AudioPlayer Static={Static} item={itemAudio} path={`/assets/upload/${path}/`} />
+                      );
+                    })
+                  }
                 </div>
               );
             }
 
-            if (item.type == "image" && !Array.isArray(item)) {
+            if (item.type == "image") {
               return (
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-i={`${index + 1} / ${items.length}`}>
                   <div class="swiper-post_media_image_container">
-                    <LazyImage
-                      path={`/assets/upload/${path}/` + item.name}
-                    />
+                    {/* <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} /> */}
+                    <LazyImage path={`/assets/upload/${path}/` + item.name} />
                   </div>
                 </div>
               );
             }
 
-            if (Array.isArray(item)) {
-              let i = index;
+            if (item.type == "video" && !Array.isArray(item)) {
               return (
-                <div class="swiper-slide user_post_text_background">
-                  {
-                    item.map((itemAudio, index) => {
-                      return (
-                        <AudioPlayer
-                          Static={Static}
-                          item={itemAudio}
-                          path={`/assets/upload/${path}/`}
-                        />
-                      );
-                    })
-                  }
+                <div class="swiper-slide">
+                  <VideoPlayer Static={Static} item={item} path={`/assets/upload/${path}/`} />
                 </div>
               );
             }
@@ -112,39 +121,5 @@ const LentaMedia = function ({ Static, items, numIndex = 0, elem, path, changeTo
     />
   );
 };
-//I check
 export { LentaMedia };
-
-// if (Array.isArray(item)) {
-//     console.log('=f2bef3=',item)
-//     return (
-//         <div class="user_post_text_background">
-//         <div class="swiper-slide">
-//             <Map
-//             data = {
-//                 item
-//             }
-//             dataIf = {
-//                 (item,index) => {
-//                     return(
-//                         <AudioPlayer
-//                 item={item}
-//                 index={index}
-//                 numIndex={numIndex}
-//                 elem={elem}
-//                 path={path}
-//                 type="posts"
-//             //  path={"/assets/upload/posts/"}
-//             />
-//                     )
-//                 }
-//             }
-//             />
-
-//         </div>
-//         </div>
-
-//     )
-// }
-
-// }
+// OK

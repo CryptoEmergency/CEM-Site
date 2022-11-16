@@ -2,21 +2,16 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    Helpers,
-    initOne,
-    initReload
+    initOne
 } from '@betarost/cemjs';
-// poydet
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { ButtonShowMore } from "@component/element/index.js";
-import { api } from '@src/apiFunctions.js'
+import { ButtonShowMore, NotFound } from "@component/element/index.js";
 
-import { NotFound } from "@component/element/index.js";
-
-const BlockTrade = async function ({ nameRecords, limit = 55 }) {
+const BlockTrade = async function ({ Static, limit = 55 }) {
     await initOne(
         async () => {
-            await api({ type: "get", action: "getTrade", short: true, cache: true, name: nameRecords, limit: limit })
+            await fn.restApi.getTrade({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit })
         }
     )
     return (
@@ -43,9 +38,12 @@ const BlockTrade = async function ({ nameRecords, limit = 55 }) {
 
                     </div>
                 </div>
-                {() => {
-                    if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].list_records.length) {
-                        const arrReturn = Variable[nameRecords].list_records.map(function (item, i) {
+                {
+                    !Variable[Static.nameRecords] || !Variable[Static.nameRecords].list_records.length
+                        ?
+                        <NotFound />
+                        :
+                        Variable[Static.nameRecords].list_records.map(function (item, i) {
                             return (
                                 <a
                                     class="crypto_exchanges-row tradeListLoad"
@@ -73,7 +71,7 @@ const BlockTrade = async function ({ nameRecords, limit = 55 }) {
                                                 <span class="crypto_exchanges_percent_green_mobile">
                                                     <img src={svg.exange_money} />
                                                 </span>
-                                                {Helpers.NumFormat(item.spotVolumeUsd)}
+                                                {fn.NumFormat(item.spotVolumeUsd)}
                                             </span>
                                         </div>
                                     </div>
@@ -83,7 +81,7 @@ const BlockTrade = async function ({ nameRecords, limit = 55 }) {
                                                 <span class="crypto_exchanges_percent_green_mobile">
                                                     <img src={svg.exange_visitors} />
                                                 </span>
-                                                {Helpers.NumFormat(item.weeklyVisits)}
+                                                {fn.NumFormat(item.weeklyVisits)}
                                             </span>
                                         </div>
                                     </div>
@@ -105,33 +103,11 @@ const BlockTrade = async function ({ nameRecords, limit = 55 }) {
                                 </a>
                             )
                         })
-                        return arrReturn
-                    } else {
-                        return (
-                            <NotFound
-                            />
-                        )
-                    }
-                }}
-            </div>
-            {() => {
-                if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
-                    if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
-                        return (
-                            <ButtonShowMore
-                                onclick={async () => {
-                                    let tmp = await api({ type: "get", action: "getTrade", short: true, limit, offset: Variable[nameRecords].list_records.length })
-                                    if (tmp && tmp.list_records) {
-                                        Variable[nameRecords].list_records.push(...tmp.list_records)
-                                    }
-                                    initReload();
-                                }}
-                            />
-                        )
-                    }
                 }
-            }}
+            </div>
+            <ButtonShowMore Static={Static} action="getTrade" limit={limit} />
         </div>
     )
 }
 export { BlockTrade }
+// OK

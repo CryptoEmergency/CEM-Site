@@ -1,34 +1,28 @@
 import {
   jsx,
   jsxFrag,
-  init,
-  Variable,
+  init
 } from "@betarost/cemjs";
-// poydet
-import { BlockShowNews } from '@component/blocks/index.js';
-import { api } from '@src/apiFunctions.js'
+import { fn } from '@src/functions/index.js';
+import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
 const start = function (data, ID = "mainBlock") {
-  let item;
+  let [Static, item] = fn.GetParams({ data, ID })
   init(
     async () => {
-      if (data && data.item) {
-        item = data.item
-      } else {
-        let response = await api({ type: "get", action: "getNews", short: true, limit: 1, filter: { _id: Variable.dataUrl.params } })
-        item = response.list_records[0]
+      fn.initData.media_show(Static)
+      if (!Static.openModals) {
+        item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
       }
     },
     () => {
+      if (!item._id) { return (<div><BlockError404 /></div>) }
       return (
         <div class="c-main__body">
           <div class="full_news_container">
             <div class="full_news_block">
               <div class="full_news_content">
-                <BlockShowNews
-                  item={item}
-                  type={"media"}
-                />
+                <BlockShowNews Static={Static} item={item} />
               </div>
             </div>
           </div>
@@ -37,5 +31,5 @@ const start = function (data, ID = "mainBlock") {
     }, ID
   );
 };
-
 export default start;
+// OK

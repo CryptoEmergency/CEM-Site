@@ -1,20 +1,17 @@
 import {
     jsx,
     jsxFrag,
-    Helpers,
     Variable,
-    initOne,
-    initReload
+    initOne
 } from '@betarost/cemjs';
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { api } from '@src/apiFunctions.js'
-import { ButtonShowMore } from "@component/element/index.js";
+import { ButtonShowMore, NotFound } from "@component/element/index.js";
 
-const BlockExchange = async function ({ nameRecords, limit = 21 }) {
+const BlockExchange = async function ({ Static, limit = 21 }) {
     await initOne(
         async () => {
-            await api({ type: "get", action: "getExchange", short: true, cache: true, name: nameRecords, limit: limit })
+            await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit })
         }
     )
     return (
@@ -35,9 +32,12 @@ const BlockExchange = async function ({ nameRecords, limit = 21 }) {
                         {Variable.lang.tableTitle.startDate}
                     </div>
                 </div>
-                {() => {
-                    if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].list_records.length) {
-                        const arrReturn = Variable[nameRecords].list_records.map(function (item, i) {
+                {
+                    !Variable[Static.nameRecords] || !Variable[Static.nameRecords].list_records.length
+                        ?
+                        <NotFound />
+                        :
+                        Variable[Static.nameRecords].list_records.map(function (item, i) {
                             return (
                                 <a
                                     class="crypto_exchanges-row exchangeListLoad"
@@ -87,7 +87,7 @@ const BlockExchange = async function ({ nameRecords, limit = 21 }) {
                                     </div>
                                     <div class="crypto_exchanges-cell exanges_date_create">
                                         <span class="">
-                                            {Helpers.getDateFormat(item.startDate)}
+                                            {fn.getDateFormat(item.startDate)}
                                         </span>
                                     </div>
                                     <div>
@@ -102,31 +102,11 @@ const BlockExchange = async function ({ nameRecords, limit = 21 }) {
                                 </a>
                             )
                         })
-                        return arrReturn
-                    }
-                }}
-            </div>
-            {
-                () => {
-                    if (Variable[nameRecords] && Variable[nameRecords].list_records && Variable[nameRecords].totalFound) {
-                        if (Variable[nameRecords].list_records.length < Variable[nameRecords].totalFound) {
-                            return (
-                                <ButtonShowMore
-                                    onclick={async () => {
-                                        let tmp = await api({ type: "get", action: "getExchange", short: true, limit, offset: Variable[nameRecords].list_records.length })
-                                        if (tmp && tmp.list_records) {
-                                            Variable[nameRecords].list_records.push(...tmp.list_records)
-                                        }
-                                        initReload()
-                                    }
-                                    }
-                                />
-                            )
-                        }
-                    }
                 }
-            }
+            </div>
+            <ButtonShowMore Static={Static} action="getExchange" limit={limit} />
         </div>
     )
 }
 export { BlockExchange }
+// OK

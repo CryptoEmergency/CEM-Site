@@ -7,11 +7,9 @@ import {
     Helpers,
     initReload
 } from "@betarost/cemjs";
-
-import { If, Map } from '@component/helpers/All.js';
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer, TextArea, ButtonSubmit } from '@component/element/index.js';
-import { api } from '@src/apiFunctions.js'
 
 const swiperOptions = {
     loop: false,
@@ -26,9 +24,9 @@ const swiperOptions = {
     spaceBetween: 20
 };
 
-const start = function () {
-    let Static = {}
-
+const start = function (data, ID) {
+    // let Static = {}
+    let [Static] = fn.GetParams({ data, ID })
 
     let chatsList,
         activeChat,
@@ -66,13 +64,55 @@ const start = function () {
                 }
             });
             // console.log('=08e20a=', chatsList)
+            if (Variable.Static.startChatsID) {
+                let existingChat = false
+                chatsList.list_records.forEach(async (chat) => {
+                    if (chat.users[0] && chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1] && chat.users[1]._id == Variable.Static.startChatsID._id) {
+                        existingChat = true
+                        activeChat = chat._id
+                        messageList = await sendApi.send({
+                            action: "getUserChats", short: true,
+                            filter: {
+                                "$and": [
+                                    {
+                                        "users": Variable.Static.startChatsID._id
+                                    }
+                                ]
+                            },
+                            select: {
+                                "message": {
+                                    "$slice": [
+                                        0,
+                                        120
+                                    ]
+                                },
+                                "users": 1
+                            }
+                        });
+                        initReload()
+                    }
+                })
+                if (!existingChat) {
+                    activeUser = Variable.Static.startChatsID
+                    console.log(chatsList)
+                    chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
+                    messageList = {
+                        list_records: [
+                            {
+                                message: [],
+                                users: [Variable.Static.startChatsID, Variable.myInfo]
+                            }
+                        ]
 
-
+                    }
+                }
+            }
+            Variable.Static.startChatsID = null
         },
         () => {
+            console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
 
             if (messageList) {
-
                 if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {
                     activeUser = messageList.list_records[0].users[0]
                 } else {
@@ -83,12 +123,7 @@ const start = function () {
 
             // console.log('=633dca=', messageUser, activeUser)
             return (
-                <div
-                    class={[
-                        "messages_block",
-                        Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
-                    ]}
-                >
+                <div class="messages_block c-main__body--noheader">
                     <div class="messages_left_part">
                         <div class="chats_search">
                         </div>
@@ -151,10 +186,10 @@ const start = function () {
                                                     <div class="messages_list_item_info-2">
                                                         {lastMessage.author == Variable.myInfo._id
                                                             ?
-                                                            <p>{Helpers.getDateFormat(lastMessage.showDate, "now")}</p>
+                                                            <p>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</p>
                                                             :
                                                             <p class="message--new">
-                                                                <span>{Helpers.getDateFormat(lastMessage.showDate, "now")}</span>
+                                                                <span>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</span>
                                                                 {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
 
                                                             </p>
@@ -203,7 +238,6 @@ const start = function () {
                                                                                                 Static={Static}
                                                                                                 item={item}
                                                                                                 path={`/assets/upload/chat/`}
-                                                                                            //  path={"/assets/upload/posts/"}
                                                                                             />
                                                                                         </div>
                                                                                     );
@@ -280,21 +314,17 @@ const start = function () {
                                                         return
                                                     }
                                                     let text = Static.message.el.value.trim()
-
-                                                    let data = { value: { users: activeUser._id, message: { text } } }
-
-
-
-
-                                                    let response = await api({ type: "set", action: "setUserChats", data: data })
+                                                    // let data = { value: { users: activeUser._id, message: { text } } }
+                                                    // let response = await api({ type: "set", action: "setUserChats", data: data })
+                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: activeUser._id, text })
                                                     console.log('=6befba=', response)
                                                     if (response.status === "ok") {
                                                         Static.message.el.value = ""
                                                         if (Static.message.adaptive) {
                                                             Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
                                                         }
-                                                        if (response.result && response.result.list_records && response.result.list_records[0]) {
-                                                            let newRes = response.result.list_records[0]
+                                                        if (response && response.list_records && response.list_records[0]) {
+                                                            let newRes = response.list_records[0]
 
                                                             if (messageList && messageList.list_records[0] && messageList.list_records[0].message) {
                                                                 messageList.list_records[0].message.unshift(newRes)
@@ -329,12 +359,10 @@ const start = function () {
                                 )
                             }
                         }}
-
                     </div>
-
                 </div>
             )
-        }
+        }, ID
     )
 }
 

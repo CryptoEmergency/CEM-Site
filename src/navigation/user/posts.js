@@ -8,24 +8,20 @@ import {
   Helpers,
   initGo,
 } from "@betarost/cemjs";
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
+import { fn } from '@src/functions/index.js';
 
-import { uploadMedia, wrapTextWithATag } from "@src/functions.js";
 import {
   MediaButton,
   Avatar,
   MediaPreview
 } from "@component/element/index.js";
 
-import { If, Map } from "@component/helpers/All.js";
-
 let formInputs, selectAspect;
 
 const changeTextPost = (e) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
   let text = e.target.innerText.trim();
-  formInputs.textInputs.value = wrapTextWithATag(text);
+  formInputs.textInputs.value = text;
   if (text || formInputs.mediaInputs.length > 0) {
     formInputs.isValid = true;
   } else {
@@ -106,7 +102,7 @@ const start = function () {
     let numItem = formInputs.mediaInputs.value.length - 1
     initReload();
     await canvas.toBlob(function (blob) {
-      uploadMedia(
+      fn.uploadMedia(
         blob,
         "posts",
         async function () {
@@ -167,7 +163,7 @@ const start = function () {
     let numItem = formInputs.mediaInputs.value.length - 1
     initReload();
 
-    uploadMedia(
+    fn.uploadMedia(
       files[0],
       "posts",
       async function () {
@@ -226,7 +222,7 @@ const start = function () {
 
     initReload();
 
-    uploadMedia(
+    fn.uploadMedia(
       files[0],
       "posts",
       async function () {
@@ -400,19 +396,20 @@ const start = function () {
               >{formInputs.lang.name}</div>
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
-              <If
-                data={formInputs.textInputs.show}
-                dataIf={
+              {
+                formInputs.textInputs.show
+                  ?
                   <div
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
                     oninput={changeTextPost}
                   ></div>
-                }
-              />
-              <If
-                data={formInputs.mediaInputs.show && formInputs.mediaInputs.value.length}
-                dataIf={
+                  :
+                  null
+              }
+              {
+                formInputs.mediaInputs.show && formInputs.mediaInputs.value.length
+                  ?
                   <div class="create_post_chapter createPostImage">
                     {
                       formInputs.mediaInputs.value.map((item, index) => {
@@ -430,12 +427,13 @@ const start = function () {
                       })
                     }
                   </div>
-                }
-              />
+                  :
+                  null
+              }
               {/* Добавил еще один иф для айдио */}
-              <If
-                data={formInputs.audioInputs.show && formInputs.audioInputs.value.length}
-                dataIf={
+              {
+                formInputs.audioInputs.show && formInputs.audioInputs.value.length
+                  ?
                   <div class="create_post_chapter createPostAudio">
                     {
                       formInputs.audioInputs.value.map((item, index) => {
@@ -452,8 +450,9 @@ const start = function () {
                       })
                     }
                   </div>
-                }
-              />
+                  :
+                  null
+              }
             </div>
 
             <MediaButton
@@ -472,19 +471,29 @@ const start = function () {
                   return;
                 }
 
-                Variable.SetModals({
-                  name: "ModalCropImage",
-                  data: {
-                    file: this.files[0],
-                    typeUpload: 'posts',
-                    arrMedia: formInputs.mediaInputs.value,
-                    aspectSelect: formInputs.mediaInputs.selectAspect,
-                    uploadCropImage: async function (cropper) {
-                      await sendPhoto(cropper)
-                      return;
-                    }
-                  },
-                }, true);
+                fn.modals.ModalCropImage({
+                  file: this.files[0],
+                  typeUpload: 'posts',
+                  arrMedia: formInputs.mediaInputs.value,
+                  aspectSelect: formInputs.mediaInputs.selectAspect,
+                  uploadCropImage: async function (cropper) {
+                    await sendPhoto(cropper)
+                    return;
+                  }
+                })
+                // Variable.SetModals({
+                //   name: "ModalCropImage",
+                //   data: {
+                //     file: this.files[0],
+                //     typeUpload: 'posts',
+                //     arrMedia: formInputs.mediaInputs.value,
+                //     aspectSelect: formInputs.mediaInputs.selectAspect,
+                //     uploadCropImage: async function (cropper) {
+                //       await sendPhoto(cropper)
+                //       return;
+                //     }
+                //   },
+                // }, true);
                 // formInputs.isValid = true;
                 this.value = '';
               }}

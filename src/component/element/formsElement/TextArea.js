@@ -2,8 +2,8 @@ import {
     jsx,
     jsxFrag,
 } from "@betarost/cemjs";
-//check
-const textConstuctor = function (Static, className, classDiv) {
+
+const textConstuctor = function (Static, className, classDiv, index) {
     if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined")) {
         return (
             <div>
@@ -13,10 +13,10 @@ const textConstuctor = function (Static, className, classDiv) {
             </div>
         )
     } else {
-        return (textElem(Static, className))
+        return (textElem(Static, className, index))
     }
 }
-const textElem = function (Static, className) {
+const textElem = function (Static, className, index) {
     let rows = null
     let adaptive = null
     let placeholder = null
@@ -32,7 +32,7 @@ const textElem = function (Static, className) {
             placeholder = Static.placeholder
         }
         if (Static.value) {
-             text = Static.value
+            text = Static.value
         }
     }
     return (
@@ -40,10 +40,15 @@ const textElem = function (Static, className) {
             class={className}
             placeholder={placeholder}
             // wrap="soft"
+            value={Static.value}
             rows={rows}
             Element={($el) => {
                 if (Static) {
-                    Static.el = $el
+                    if (typeof index != "undefined") {
+                        Static.el[index] = $el
+                    } else {
+                        Static.el = $el
+                    }
                 }
             }
             }
@@ -74,14 +79,14 @@ const textElem = function (Static, className) {
                 if (Static.afterValid) {
                     Static.afterValid();
                 }
-            }}
-        >
-            {text}
+            }}>
+            {/* {text} */}
         </textarea>
     )
 }
 
-const TextArea = function ({ Static, className, classDiv }) {
-    return (textConstuctor(Static, className, classDiv))
+const TextArea = function ({ Static, className, classDiv, index }) {
+    return (textConstuctor(Static, className, classDiv, index))
 };
 export { TextArea };
+// OK

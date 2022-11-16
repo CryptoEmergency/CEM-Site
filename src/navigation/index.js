@@ -8,10 +8,9 @@ import {
     Variable,
     Helpers
 } from '@betarost/cemjs';
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
-import { api } from '@src/apiFunctions.js'
 
 
 import {
@@ -25,12 +24,20 @@ import {
 } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
 
-const start = function () {
-    let Static = {}
+const start = function (data, ID) {
+    let [Static] = fn.GetParams({ data, ID })
     let filtersQuestions
 
     init(
         async () => {
+            Static.dataUsers = {}
+            Static.dataQuestions = {}
+            fn.initData.users(Static.dataUsers)
+            fn.initData.question(Static.dataQuestions)
+            Static.dataUsers.nameRecords = "MainUsers"
+            Static.dataQuestions.nameRecords = "MainQuestions"
+            Static.dataExchange = { nameRecords: "MainExchanges" }
+            Static.dataTrade = { nameRecords: "MainTrades" }
             Static.filters = {
                 lang: {
                     code: "",
@@ -61,9 +68,11 @@ const start = function () {
                 },
                 desc: -1
             }
-            await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
-            await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
-            timersStart("Course", async () => { Variable.Course = await api({ type: "get", action: "getCourse", short: true, name: "Course" }) }, 10000)
+            await fn.restApi.getCourse({ cache: true, name: "Course", filter: {} })
+            // await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
+            await fn.restApi.getNews({ cache: true, name: "MainNews", filter: {} })
+            // await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
+            timersStart("Course", async () => { fn.restApi.getCourse({ name: "Course", filter: {} }) }, 10000)
         },
         () => {
             return (
@@ -132,29 +141,13 @@ const start = function () {
                                 )
                             }
                         }}
-                        <BlockQuestions
-                            Static={Static}
-                            limit={6}
-                            nameRecords="MainQuestions"
-                        />
+                        <BlockQuestions Static={Static.dataQuestions} limit={6} />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
-                            <BlockTrade
-                                nameRecords="MainTrades"
-                                limit={6}
-                            />
+                            <BlockTrade Static={Static.dataTrade} limit={6} />
                             <div class="top_professionals_container">
-                                <BlockExchange
-                                    nameRecords="MainExchanges"
-                                    limit={6}
-                                />
-                                <BlockUsers
-                                    title={Variable.lang.h.top_users}
-                                    filters={Static.filters}
-                                    nameRecords="MainUsers"
-                                    type={"all"}
-                                    limit={6}
-                                />
+                                <BlockExchange Static={Static.dataExchange} limit={6} />
+                                <BlockUsers Static={Static.dataUsers} limit={6} />
                                 <div class="news_block_container">
                                     <div class="news_block">
                                         <div class="home_page_news">

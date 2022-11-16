@@ -5,10 +5,19 @@ import {
   initReload,
   initGo,
   sendApi,
-  Helpers,
+  Helpers, 
+  init
 } from "@betarost/cemjs";
-import { sendInBlackList } from "@src/apiFunctions.js";
 
+const sendInBlackList = async (info) => {
+  let data = {
+    value: {
+      blackList: info.id,
+    },
+  };
+
+  let response = await sendApi.create("setUsers", data);
+};
 const ModalBlackList = function (data, reload) {
   return (
     <div class="c-modal c-modal--open" id="ModalBlackList">

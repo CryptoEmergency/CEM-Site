@@ -1,5 +1,4 @@
 import { jsx, jsxFrag, Variable } from "@betarost/cemjs";
-import { checkAnswerApi } from "@src/functions.js";
 
 import svg from "@assets/svg/index.js";
 
@@ -40,16 +39,17 @@ let playerEnded = function (e) {
 };
 
 let playerCanplay = function (e, mainElement, fullTime) {
- if (mainElement().duration === Infinity){
-   mainElement().currentTime = 1e101;
-   mainElement().ontimeupdate = function() {
-        this.ontimeupdate = () => {
-          return;
-        }
-        mainElement().currentTime = 0;
- }}else{
-  fullTime().innerText = formatTime(mainElement().duration);
- }
+  if (mainElement().duration === Infinity) {
+    mainElement().currentTime = 1e101;
+    mainElement().ontimeupdate = function () {
+      this.ontimeupdate = () => {
+        return;
+      }
+      mainElement().currentTime = 0;
+    }
+  } else {
+    fullTime().innerText = formatTime(mainElement().duration);
+  }
 };
 
 let playerTimeupdate = function (e, currentTime, progressLine) {
@@ -87,8 +87,8 @@ let controlTotalClick = function (e, progressLine, currentTime, mainElement) {
   mainElement().currentTime = tmp;
 };
 
-const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
-  let mainElement =elem ? elem[numIndex][index] : el[index];
+const AudioPlayerCopy = function ({ item, numIndex, index, path, elem, el }) {
+  let mainElement = elem ? elem[numIndex][index] : el[index];
   let fullTime = Variable.setRef();
   let currentTime = Variable.setRef();
   let progressLine = Variable.setRef();
@@ -97,7 +97,7 @@ const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
       {/* <audio preload="none" onended="playerEnded(event, this)" onplay="playerPlay(event, this)" onpause="playerPause(event, this)" oncanplay="playerCanplay(event, this)" ontimeupdate="playerTimeupdate(event, this)" src="{{path}}{{src}}"></audio> */}
       <audio
         preload="metadata"
-        ref={elem? elem[numIndex][index] :  el[index]}
+        ref={elem ? elem[numIndex][index] : el[index]}
         onended={(e) => playerEnded(e)}
         onplay={(e) => playerPlay(e)}
         onpause={(e) => playerPause(e)}
@@ -121,7 +121,7 @@ const AudioPlayerCopy = function ({ item, numIndex, index, path, elem,el }) {
             }
           >
             <span ref={progressLine} class="current">
-              ​
+
             </span>
           </span>
         </span>

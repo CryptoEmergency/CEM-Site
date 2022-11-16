@@ -1,58 +1,68 @@
-import { jsx, jsxFrag, Variable, initReload, initGo } from "@betarost/cemjs";
-import { sendComplaintApi } from "@src/apiFunctions.js";
+import { jsx, jsxFrag, Variable, initReload, initGo, init } from "@betarost/cemjs";
+import { fn } from '@src/functions/index.js';
 
-let isChecked, complaint, input, inputValue;
+const changeComplaint = function (Static,checkdata) {
+  Static.modal[checkdata.name].check = checkdata.check
+  if (checkdata.name == "other") {
+    Static.modal.activeData = []
+    //если записали в массив текст
+    if (checkdata.value )
+    {
+      Static.modal[checkdata.name].value = checkdata.value
+    }
+    for (let k in Static.modal) {
+      
+      if (k !== "other" && k !== "activeData")
+      {
+        Static.modal[k].check = false
+        Static.modal[k].el.checked =false
+      }
 
-const changeComplaint = function (e) {
-  let type = e.target.dataset.complain;
-  let isCheck = e.target.checked;
-  if (this.dataset.complain == "other") {
-    isChecked.abusive().checked = false;
-    isChecked.poison().checked = false;
-    isChecked.obscene().checked = false;
-    isChecked.malicious().checked = false;
-    complaint = [];
-  } else {
-    isChecked.other().checked = false;
-    isCheck
-      ? complaint.push(type)
-      : (complaint = complaint.filter((item) => item !== type));
+    }
   }
-  initReload("modals");
+  else{
+    Static.modal["other"].check = false
+    Static.modal["other"].el.checked =false
+    Static.modal.activeData = []
+    for (let k in Static.modal) {
+      
+      if (k !== "other" && k !== "activeData" && Static.modal[k].check === true)
+      {
+        Static.modal.activeData.push(k)
+      }
+    }
+
+  }
+   initReload()
   return;
 };
 
-const sendComplaint = async (data) => {
-  if (
-    isChecked.other() !== undefined &&
-    (complaint.length > 0 || input().innerText.trim().length > 2)
-  ) {
-    if (complaint.length > 0) {
-      await sendComplaintApi({ data, complaint });
-    } else {
-      complaint = [`<p>${input().innerText.trim()}</p>`];
-      await sendComplaintApi({ data, complaint });
-    }
-    Variable.Static.answerAdditionally = "";
-    Variable.DelModals("ModalComplainComment");
-    initReload();
 
+
+
+const ModalComplainComment = function ( data , ID) {
+ console.log(data)
+  let [Static] = fn.GetParams({ data, ID })
+  init(function(){ 
+    Static.modal = {
+    abusive: { check: false, complain: Variable.lang.select.complainOne },
+    poison: { check: false, complain: Variable.lang.select.complainTwo  },
+    obscene: { check: false, complain: Variable.lang.select.complainThree   },
+    malicious: { check: false, complain: Variable.lang.select.complainFour},
+    other: { check: false, complain: Variable.lang.select.other, value:true },
+    activeData:[]
   }
-};
-const ModalComplainComment = function (data, reload) {
-  if (!reload) {
-    isChecked = {
-      abusive: Variable.setRef(),
-      poison: Variable.setRef(),
-      obscene: Variable.setRef(),
-      malicious: Variable.setRef(),
-      other: Variable.setRef(),
-    };
-    (input = Variable.setRef()), (inputValue = "");
-
-    complaint = [];
+},() => {
+  let active
+  let text
+if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) || Static.modal.activeData.length > 0)
+  {
+    active =  null
   }
-
+  else
+  {
+    active =  "inactive_form_button"
+  }
   return (
     <div class="c-modal c-modal--open" id="ModalComplainComment">
       <section class="c-modal__dialog">
@@ -65,9 +75,13 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="abusive"
                   class="checkbox__input complain_checkbox"
-                  onchange={changeComplaint}
+                  
+                  onChange={function(e){
+                    changeComplaint(Static,{ "name": "abusive", "check": this.checked})
+                  }}
                   type="checkbox"
-                  ref={isChecked.abusive}
+                  checked={Static.modal.obscene.check ? true : false}
+                  Element={($el) => {Static.modal.abusive.el = $el}}
                 />
                 <label class="checkbox__label">
                   {Variable.lang.select.complainOne}
@@ -80,9 +94,13 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="poison"
                   class="checkbox__input complain_checkbox"
-                  onchange={changeComplaint}
+                  onChange={function() { 
+                    changeComplaint(Static,{ "name": "poison", "check": this.checked }) 
+                  }}
                   type="checkbox"
-                  ref={isChecked.poison}
+                  
+                  checked={Static.modal.obscene.check ? true : false}
+                  Element={($el) => {Static.modal.poison.el = $el}}
                 />
                 <label class="checkbox__label">
                   {Variable.lang.select.complainTwo}
@@ -95,9 +113,12 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="obscene"
                   class="checkbox__input complain_checkbox"
-                  onchange={changeComplaint}
+                  onChange={function() { 
+                    changeComplaint(Static,{ "name": "obscene", "check": this.checked})   
+                  }}
                   type="checkbox"
-                  ref={isChecked.obscene}
+                  checked={Static.modal.obscene.check ? true : false}
+                  Element={($el) => {Static.modal.obscene.el = $el}}
                 />
                 <label class="checkbox__label">
                   {Variable.lang.select.complainThree}
@@ -110,9 +131,11 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="malicious"
                   class="checkbox__input complain_checkbox"
-                  onchange={changeComplaint}
+                  onChange={function(){ changeComplaint(Static,{ "name": "malicious", "check": this.checked })}
+                }
                   type="checkbox"
-                  ref={isChecked.malicious}
+                  checked={Static.modal.malicious.check ? true : false}
+                  Element={($el) => {Static.modal.malicious.el = $el}}
                 />
                 <label class="checkbox__label">
                   {Variable.lang.select.complainFour}
@@ -125,9 +148,11 @@ const ModalComplainComment = function (data, reload) {
                 <input
                   data-complain="other"
                   class="checkbox__input complain_checkbox"
-                  onchange={changeComplaint}
+                  onChange={function (e) {
+                    changeComplaint(Static,{ "name": "other", "check": this.checked, "value":Static.modal.other.value})}}
                   type="checkbox"
-                  ref={isChecked.other}
+                  checked={Static.modal.other.check ? true : false }
+                  Element={($el) => {Static.modal.other.el = $el}}
                 />
                 <label data-complain_id="5" class="checkbox__label">
                   {Variable.lang.select.other}
@@ -135,38 +160,41 @@ const ModalComplainComment = function (data, reload) {
                 </label>
               </div>
             </div>
-
             <div
               style={
-                isChecked.other() !== undefined &&
-                  isChecked.other().checked === true
-                  ? "display: block"
-                  : "display: none"
+           
+                Static.modal.other.check ?
+                      "display: block"
+                     : "display: none"
               }
               contenteditable="true"
               class="complain_other"
-              data-keyup="complainKeyup"
-              data-onpaste="editorPaste"
-              oninput={() => {
-                initReload("modals");
-              }}
-              ref={input}
-            ></div>
-
-            <div
-              // class="registration-btn inactive_form_button"
-              class={[
-                "registration-btn",
-                isChecked.other() !== undefined &&
-                  (complaint.length > 0 || input().innerText.trim().length > 2)
-                  ? null
-                  : "inactive_form_button",
-              ]}
-              id="answerComplain"
-              data-active="0"
-              data-action="answerComplain"
-            >
-              <a class="btn-gr-reg" onclick={() => sendComplaint(data)}>
+              oninput={function(e){
+                if(e.inputType == "deleteContentBackward" && this.textContent.trim() == "")
+                {
+                  text = true
+                }
+                else
+                {
+                  text = this.textContent
+                }
+                changeComplaint(Static,{ "name": "other", "check": Static.modal.other.check, "value":text })
+              }}>
+              </div>
+            <div class={["registration-btn",active]}>
+              <a class="btn-gr-reg" onclick={async() => { 
+                  let response
+                if(Static.modal.other.value.length >0){
+                  response= await fn.restApi.setQuestions.complain({_id:data.id,complain:[Static.modal.other.value]})
+                }else{
+                  response= await fn.restApi.setQuestions.complain({_id:data.id,complain:Static.modal.activeData})
+                }
+                if(response.status == "ok")
+                {
+                  fn.modals.close(ID)
+                }
+              }
+              }>
                 <span>{Variable.lang.button.send}</span>
               </a>
             </div>
@@ -174,7 +202,9 @@ const ModalComplainComment = function (data, reload) {
         </header>
       </section>
     </div>
+ 
   );
-};
+}, ID
+)};
 
 export default ModalComplainComment;

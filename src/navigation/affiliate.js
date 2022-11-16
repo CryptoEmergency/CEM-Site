@@ -4,7 +4,6 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
-// check
 import svg from "@assets/svg/index.js";
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
 
@@ -69,3 +68,4 @@ const start = function (data, ID) {
   );
 };
 export default start;
+// OK

@@ -249,7 +249,7 @@ const start = function (data, ID) {
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Майнинг оборудование и способ добычи криптовалюты
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Что такое технология блокчен и где используется
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Что такое технология блокчейн и где используется
                                         </p>
                                         <p style="display: flex; align-items: center;">
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Стартапы со всей России представят свои проекты
@@ -463,7 +463,13 @@ const start = function (data, ID) {
                                     <a target="_blank" rel="nofollow nooopener" href="https://digitalfutureclub.ru" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
                                         <img style="height: 150px; width: 150px;" src={images['forum/forum_company_11']} />
                                         <div>
-                                            <p style="margin-top: 10px; margin-bottom: 5px">Академия криптовалют «Digital Future” Обучают людей базовым знаниям для работы с криптовалютой, а именно:</p>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Академия криптовалют «Digital Future” Обучают людей базовым знаниям для работы с криптовалютой</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="http://www.onestopmining.com" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_12']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Onestopmining – международная компания, которая специализируется на комплексных решениях для майнинга.</p>
                                         </div>
                                     </a>
                                 </div>
@@ -621,9 +627,13 @@ const start = function (data, ID) {
                                             <p>Криптоэксперт, основатель академии криптовалют.</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_17']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Cici Shu</p>
+                                            <p>Региональный директор Onestopmining</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
@@ -760,6 +770,14 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_13"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://www.onestopmining.com"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_14"]} />
                                     </a>
                                 </div>
                             </div>

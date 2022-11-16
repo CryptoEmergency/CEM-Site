@@ -6,9 +6,8 @@ import {
     initReload,
     sendApi
 } from "@betarost/cemjs";
-
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { api } from '@src/apiFunctions.js'
 
 
 import { BlockUserSettingsPage } from '@component/blocks/index.js';
@@ -19,17 +18,14 @@ import { Avatar } from '@component/element/Avatar.js';
 
 
 const deleteUserFromBlacklist = async (user) => {
-    let data = {
-        value: {
-            blackList: user
-        }
-    }
-    let response = await api({ type: "set", action: "setUsers", short: true, data })
+    let response = await fn.restApi.setNews.blackList(user)
+    //let response = await api({ type: "set", action: "setUsers", short: true, data })
     return response
 }
 
 const getUserBlackList = async (count = 0) => {
-    let response = await api({ type: "get", action: "getUsers", short: true, select: {blackList: 1}, filter: {_id: Variable.myInfo._id} })
+    let response = await fn.restApi.getUsers({ select: { blackList: 1 }, filter: { _id: Variable.myInfo._id } })
+    //api({ type: "get", action: "getUsers", short: true, select: {blackList: 1}, filter: {_id: Variable.myInfo._id} })
     return response
 }
 
@@ -41,13 +37,13 @@ const start = function () {
 
 
 
-    Variable.HeaderShow = true
-    Variable.FooterShow = true
-    Variable.showUserMenu = false
+    Variable.Static.HeaderShow = true
+    Variable.Static.FooterShow = true
+    Variable.Static.showUserMenu = false
 
     const userBlackList = function () {
         let BlackListBlock
-        if (blackList && blackList.list_records && blackList.list_records.length && blackList.list_records[0].blackList && blackList.list_records[0].blackList.length){
+        if (blackList && blackList.list_records && blackList.list_records.length && blackList.list_records[0].blackList && blackList.list_records[0].blackList.length) {
             BlackListBlock = Object.keys(blackList.list_records[0].blackList).map(function (key) {
                 return (
                     <li style="justify-content: space-between" class="settings_blackuser friend">
@@ -88,10 +84,14 @@ const start = function () {
         },
         () => {
             return (
-                <div class="settings_container">
+                <div class={[
+                    "settings_container",
+                    Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+                ]}
+                >
                     <h4 class="settings_title">{Variable.lang.text.socialNetwork}</h4>
                     <div class="settings">
-                        <div class="setting_list_block">
+                        <div class="settings_list_block">
                             <div class="settings_list">
                                 <div class="settings_list_item settings_list_item_active">
                                     <p class="settings_list_title">

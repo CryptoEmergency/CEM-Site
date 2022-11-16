@@ -1,45 +1,25 @@
 import {
     jsx,
     jsxFrag,
-    init,
-    initReload,
-    Variable,
-    Helpers
+    init
 } from "@betarost/cemjs";
-// check
-import { api } from '@src/apiFunctions.js'
+import { fn } from '@src/functions/index.js';
 import { BlockUsers } from '@component/blocks/index.js';
-import { ButtonShowMore } from '@component/element/index.js';
 
 const start = function (data, ID) {
-    let Static = {}
+    let [Static] = fn.GetParams({ data, ID })
     init(
         async () => {
-            Static.filters = {
-                lang: {
-                    code: "",
-                    name: "all"
-                },
-                country: {
-                    code: "",
-                    name: "all"
-                },
-                group: false,
-                online: false
-            }
+            fn.initData.content_creator(Static)
         },
         () => {
             return (
                 <div class='c-main__body'>
-                    <BlockUsers
-                        title={Variable.lang.a.contentCreater}
-                        filters={Static.filters}
-                        nameRecords="PageCreators"
-                        type="creator"
-                    />
+                    <BlockUsers Static={Static} />
                 </div>
             )
         }, ID
     )
 }
 export default start;
+// OK

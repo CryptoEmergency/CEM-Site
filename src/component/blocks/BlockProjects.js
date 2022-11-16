@@ -2,10 +2,9 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initOne,
-    Helpers
+    initOne
 } from '@betarost/cemjs';
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Swiper } from '@component/element/index.js';
 
@@ -68,9 +67,20 @@ const BlockProjects = async function () {
         () => {
             projects = [
                 {
+                    "title": Variable.lang.span.userNews,
+                    "icon": "preview_line_lenta",
+                    "link": "lenta-users",
+                    modal: false
+                },
+                {
+                    "title": Variable.lang.a.questionsAnswers,
+                    "icon": "preview_line_questions",
+                    "link": "question",
+                    modal: true
+                },
+                {
                     "title": Variable.lang.a.exchange,
-                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
-                    "icon": "exchanger_menu_icon",
+                    "icon": "preview_line_exchanger",
                     "link": "list-exchange",
                     modal: true
                 },
@@ -79,13 +89,6 @@ const BlockProjects = async function () {
                 //     "icon": "mortarboard",
                 //     "link": "university"
                 // },
-                {
-                    "title": Variable.lang.a.contentCreater,
-                    "style": "",
-                    "icon": "graph",
-                    "link": "content-creator",
-                    modal: true
-                },
                 // {
                 //     "title": Variable.lang.a.starups,
                 //     "icon": "startup",
@@ -103,30 +106,39 @@ const BlockProjects = async function () {
                 // },
                 {
                     "title": Variable.lang.a.trade,
-                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
-                    "icon": "exchange_menu_icon",
+                    "icon": "preview_line_exchange",
                     "link": "list-trade",
                     modal: true
                 },
                 {
                     "title": Variable.lang.a.news,
-                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
-                    "icon": "news_menu_icon1",
+                    "icon": "preview_line_news",
                     "link": "news",
                     modal: true
                 },
                 {
                     "title": Variable.lang.a.blog,
-                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
-                    "icon": "blog_menu_icon1",
+                    "icon": "preview_line_blog",
                     "link": "blog",
                     modal: true
                 },
                 {
+                    "title": Variable.lang.h.top_users,
+                    "icon": "preview_line_users",
+                    "link": "users",
+                    modal: true
+                },
+                {
                     "title": Variable.lang.a.experts,
-                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
-                    "icon": "expert_menu_icon",
+                    "icon": "preview_line_experts",
                     "link": "experts",
+                    modal: true
+                },
+                {
+                    "title": Variable.lang.a.contentCreater,
+                    "style": "",
+                    "icon": "graph",
+                    "link": "content-creator",
                     modal: true
                 },
                 // {
@@ -135,26 +147,11 @@ const BlockProjects = async function () {
                 //     "link": "nft-market"
                 // },
                 {
-                    "title": Variable.lang.span.userNews,
-                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
-                    "icon": "user_news_page",
-                    "link": "lenta-users",
-                    modal: false
-                },
-                {
-                    "title": Variable.lang.a.questionsAnswers,
-                    "style": "filter: invert(100%) sepia(15%) saturate(7500%) hue-rotate(180deg) brightness(107%) contrast(114%);",
-                    "icon": "user_mobile_answers_and_questions",
-                    "link": "question",
-                    modal: true
-                },
-                {
                     "title": Variable.lang.a.career,
-                    "style": "",
                     "icon": "careers_icon",
                     "link": "career-whith-us",
                     modal: true
-                },
+                }
             ];
 
             projectRecords = projects.map(function (item) {
@@ -163,9 +160,9 @@ const BlockProjects = async function () {
                         <a href={`/${item.link}/`}
                             onclick={(e) => {
                                 if (item.modal) {
-                                    Helpers.siteLinkModal(e, { title: item.title })
+                                    fn.siteLinkModal(e, { title: item.title })
                                 } else {
-                                    Helpers.siteLink(e)
+                                    fn.siteLink(e)
                                 }
                             }}>
                             <div class="projects_icons_text">
@@ -205,3 +202,4 @@ const BlockProjects = async function () {
     )
 }
 export { BlockProjects }
+//  OK

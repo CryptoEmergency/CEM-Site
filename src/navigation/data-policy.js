@@ -4,7 +4,7 @@ import {
     Variable,
     init
 } from "@betarost/cemjs";
-// check
+
 const start = function (data, ID) {
     init(
         null,
@@ -279,3 +279,4 @@ const start = function (data, ID) {
         }, ID)
 };
 export default start;
+// OK

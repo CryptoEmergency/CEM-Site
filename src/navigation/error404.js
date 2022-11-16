@@ -3,7 +3,6 @@ import {
   jsxFrag,
   init
 } from "@betarost/cemjs";
-// check
 import { BlockError404 } from '@component/blocks/index.js';
 
 const start = function () {
@@ -18,3 +17,4 @@ const start = function () {
     })
 };
 export default start;
+// OK

@@ -3,7 +3,7 @@ import {
     jsxFrag,
     Variable
 } from "@betarost/cemjs";
-// check
+
 const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
     return (
         <button
@@ -11,7 +11,7 @@ const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
             onclick={function (e) {
                 e.preventDefault();
                 if (onlyAuth && !Variable.auth) {
-                    Variable.SetModals({ name: "ModalNeedAuth", data: {} });
+                    fn.modals.ModalNeedAuth()
                     return
                 }
                 if (Static) {
@@ -30,3 +30,4 @@ const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
     )
 }
 export { ButtonSubmit }
+// OK

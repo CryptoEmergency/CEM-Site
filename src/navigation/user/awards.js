@@ -6,7 +6,6 @@ import {
     sendApi
 } from "@betarost/cemjs";
 
-import { If, Map } from '@component/helpers/All.js';
 import svg from '@assets/svg/index.js';
 import { Swiper } from '@component/element/index.js';
 
@@ -41,7 +40,7 @@ const start = function () {
                         "awards",
                         "c-container",
                         Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
-                      ]}
+                    ]}
                 >
                     <div class="awards_block">
                         <div class="awards_body">

@@ -76,14 +76,6 @@
 		],
 		"description": ""
 	},
-	"All helpers": {
-		"scope": "javascript,typescript",
-		"prefix": "_helpers",
-		"body": [
-			"import { If,Map } from '@component/helpers/All.js';"
-		],
-		"description": ""
-	},
 	"Import функция": {
 		"scope": "javascript,typescript",
 		"prefix": "_func",

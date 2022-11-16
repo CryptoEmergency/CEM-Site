@@ -7,16 +7,15 @@ import {
     sendApi,
     Helpers
 } from "@betarost/cemjs";
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { Avatar } from '@component/element/Avatar.js';
-import { percent } from '@component/helpers/All.js';
-import { api } from '@src/apiFunctions.js'
 
 import {
     BlockUserProfilePage,
 } from '@component/blocks/index.js';
+// import { fn } from "moment";
 
 const start = function (userInfo, ID = "mainBlock") {
     Variable.Static.FooterShow = false
@@ -144,25 +143,26 @@ const start = function (userInfo, ID = "mainBlock") {
                                 src={userInfo.background ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
                             />
 
-                            {()=>{
-                                if(Variable.auth && userInfo._id != Variable.myInfo._id){
-                                    return(
+                            {() => {
+                                if (Variable.auth && userInfo._id != Variable.myInfo._id) {
+                                    return (
                                         <div class="c-userpreview__buttons">
                                             <div class="c-userpreview__container">
-                                                <a 
+                                                <a
                                                     class="c-userpreview__btn"
                                                     onclick={async () => {
-                                                        console.error('startChat Button')
+                                                        Variable.Static.startChatsID = userInfo
+                                                        fn.siteLink("/user/chats/");
                                                     }}
                                                 >
                                                     <span>
                                                         {Variable.lang.button.write}
                                                     </span>
                                                 </a>
-                                                <a 
+                                                <a
                                                     class="c-userpreview__btn"
                                                     onclick={async () => {
-                                                        let tmp = await api({ type: "set", action: "setUsers", short: true, data: { value: { subscribed: userInfo._id } } })
+                                                        fn.restApi.setUsers.subscribe({ _id: userInfo._id })
                                                         userInfo.subscribe = !userInfo.subscribe
                                                     }}
                                                 >
@@ -181,7 +181,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                                     </span>
                                                 </a>
                                             </div>
-                                        </div> 
+                                        </div>
                                     )
                                 }
                             }}
@@ -209,7 +209,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                         {Variable.lang.select.share}
                                     </p>
                                     <p data-action="showFramesModal" class="c-userpreview__action">
-                                        <a onclick={Helpers.siteLink} href="/user/222/">{Variable.lang.text.settings}</a>
+                                        <a onclick={Helpers.siteLink} href="/user/settings/">{Variable.lang.text.settings}</a>
                                     </p>
                                     {/* ELSE */}
 
@@ -272,7 +272,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             {/* IF (myInfo._id=userInfo._id) */}
                             <div class="c-userpreview__level">
                                 <div
-                                    style={`width: ${percent(userInfo.statistic.exp, userInfo.statistic.expNext)}%;`}
+                                    style={`width: ${fn.percent(userInfo.statistic.exp, userInfo.statistic.expNext)}%;`}
                                     class="c-userpreview__current"
                                 ></div>
                                 <div class="c-userpreview__num">{userInfo.statistic.exp}/{userInfo.statistic.expNext}</div>

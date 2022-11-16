@@ -131,7 +131,7 @@
         margin: 0 12px; */
         width: 100%;
         min-width: 100%;
-        margin: 0 auto;
+        margin: 0 auto 24px;
     }
 
     .c-avataricon {
@@ -172,6 +172,28 @@
 
     &__link {
         flex-grow: 1;
+    }
+
+    &__counter {
+        position: absolute;
+        z-index: 200;
+        right: 14px;
+        top: 80px;
+        display: flex;
+        align-items: center;
+        min-width: 26px;
+        // aspect-ratio : 1 / 1;
+        padding: 5px;
+        text-align: right;
+        color: #8192F6;
+        font-weight: 600;
+        text-align: center;
+        background: rgba(0,0,0,0.4);
+        border-radius: 10px;
+
+        * {
+            margin: auto;
+        }
     }
 }
 

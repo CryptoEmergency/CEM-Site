@@ -4,100 +4,30 @@ import {
   Variable,
   init,
   initReload,
-  Helpers
 } from "@betarost/cemjs";
-// check
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { api } from '@src/apiFunctions.js'
 import { Input, TextArea, ButtonSubmit } from '@component/element/index.js';
 
 const sendMessage = async (Static) => {
   if (!Static.isValid) {
     return false
   }
-  const response = await api({
-    type: "set", action: "supportMessage", data: { value: { email: Static.email.value, name: Static.name.value, text: Static.message.value }, }
-  })
-  if (response.status === "ok") {
+  const response = await fn.restApi.supportMessage({ email: Static.email.value, name: Static.name.value, text: Static.message.value })
+  if (response.status == "ok") {
     Static.messageSent = true;
     Static.submitClick = false;
     initReload()
   } else {
-    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
     Static.submitClick = false;
   }
 };
 
 const start = function (data, ID) {
-  let Static = {}
+  let [Static] = fn.GetParams({ data, ID })
   init(
     () => {
-      Static = {
-        isValid: false,
-        submitClick: false,
-        messageSent: false
-      }
-
-      Static.name = {
-        value: "",
-        valid: false,
-        error: false,
-        label: Variable.lang.label.name,
-        placeholder: Variable.lang.placeholder.name,
-        errorText: Variable.lang.error_div.nicknameErr,
-        condition: (value) => {
-          return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-        },
-        afterValid: () => {
-          Helpers.checkValid(Static, ["name", "email", "message"])
-        }
-      }
-
-      Static.email = {
-        value: "",
-        valid: false,
-        error: false,
-        label: Variable.lang.label.email,
-        placeholder: Variable.lang.placeholder.email,
-        errorText: Variable.lang.error_div.wrong_email,
-        type: "text",
-        condition: (value) => {
-          return Helpers.validator.isEmail(value);
-        },
-        afterValid: () => {
-          Helpers.checkValid(Static, ["name", "email", "message"])
-        }
-      }
-
-      Static.message = {
-        value: "",
-        valid: false,
-        error: false,
-        errorText: Variable.lang.error_div.not_empty_input,
-        label: Variable.lang.label.message,
-        placeholder: Variable.lang.placeholder.message,
-        condition: (value) => {
-          return Helpers.validator.matches(value, /[a-zA-Zа-яА-Яё\d]{2,500}/i);
-        },
-        afterValid: () => {
-          Helpers.checkValid(Static, ["name", "email", "message"])
-        }
-      }
-
-      /**
-       * проверка имени и мыла 
-       */
-      if (Variable.myInfo.nickname) {
-        Static.name.value = Variable.myInfo.nickname
-        Static.name.valid = true
-        Static.name.readonly = true
-      }
-
-      if (Variable.myInfo.email) {
-        Static.email.value = Variable.myInfo.email
-        Static.email.valid = true
-        Static.email.readonly = true
-      }
+      fn.initData.contacts(Static)
     },
     () => {
       return (
@@ -105,50 +35,46 @@ const start = function (data, ID) {
           <div class="c-container">
             <div class="contacts_content">
               <div class="contacts_form_block">
-                {() => {
-                  if (Static.messageSent != "") {
-                    return (
-                      <div class="contacts_form">
-                        <div class="modal_success">
-                          <h4>{Variable.lang.h.modal_success}</h4>
-                          <img
-                            class="modal_success_icon"
-                            src={svg["modal_success"]}
-                            width="40"
-                          />
-                        </div>
+                {
+                  Static.messageSent != ""
+                    ?
+                    <div class="contacts_form">
+                      <div class="modal_success">
+                        <h4>{Variable.lang.h.modal_success}</h4>
+                        <img
+                          class="modal_success_icon"
+                          src={svg["modal_success"]}
+                          width="40"
+                        />
                       </div>
-                    )
-                  } else {
-                    return (
-                      <div class="contacts_form">
-                        <h4>{Variable.lang.h.contact}</h4>
-                        <p>{Variable.lang.p.writeUs}</p>
-                        <form id="contactsForm" onsubmit={(e) => { sendMessage(Static) }}>
-                          <input style="display: none;" type="submit" />
-                          <Input
-                            classDiv="contacts_form_name_icon"
-                            Static={Static.name}
-                          />
-                          <Input
-                            classDiv="contacts_form_email_icon"
-                            Static={Static.email}
-                          />
-                          <TextArea
-                            Static={Static.message}
-                          />
-                          <ButtonSubmit
-                            Static={Static}
-                            text={Variable.lang.button.send}
-                            onclick={(Static, el) => {
-                              sendMessage(Static)
-                            }}
-                          />
-                        </form>
-                      </div>
-                    )
-                  }
-                }}
+                    </div>
+                    :
+                    <div class="contacts_form">
+                      <h4>{Variable.lang.h.contact}</h4>
+                      <p>{Variable.lang.p.writeUs}</p>
+                      <form id="contactsForm" onsubmit={(e) => { sendMessage(Static) }}>
+                        <input style="display: none;" type="submit" />
+                        <Input
+                          Static={Static.name}
+                          classDiv="contacts_form_name_icon"
+                        />
+                        <Input
+                          Static={Static.email}
+                          classDiv="contacts_form_email_icon"
+                        />
+                        <TextArea
+                          Static={Static.message}
+                        />
+                        <ButtonSubmit
+                          Static={Static}
+                          text={Variable.lang.button.send}
+                          onclick={(Static, el) => {
+                            sendMessage(Static)
+                          }}
+                        />
+                      </form>
+                    </div>
+                }
               </div>
               <div class="contacts_info" style={[Static.messageSent ? "margin-top: 20px" : null]}>
                 <span class="contact_info_label">
@@ -178,3 +104,4 @@ const start = function (data, ID) {
   );
 };
 export default start;
+// OK

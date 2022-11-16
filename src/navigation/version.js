@@ -7,8 +7,7 @@ import {
 } from "@betarost/cemjs";
 // poydet data-action
 
-import { api } from '@src/apiFunctions.js'
-
+import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 let tmp = 0
 const start = function (data, ID) {
@@ -16,7 +15,8 @@ const start = function (data, ID) {
     Variable.Static.tpm = 5
     init(
         async () => {
-
+            let tmp = await fn.restApi.setUserRoom.create({ status: true, visible: true, confirmuser: "111", title: "zxc 100 - 7", description: "111", images: "111", languages: "ru", country: "ru"})
+            console.log(tmp)
         },
         () => {
             return (

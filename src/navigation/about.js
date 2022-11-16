@@ -4,13 +4,10 @@ import {
   init,
   Variable,
 } from "@betarost/cemjs";
-// check
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function (data, ID) {
-  // let [Static] = fn.GetParams({ data, ID })
-  // console.log('=3c3e95=', Static)
   init(
     null,
     () => {
@@ -162,3 +159,4 @@ const start = function (data, ID) {
     }, ID)
 };
 export default start;
+// OK
