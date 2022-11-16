@@ -21,20 +21,19 @@ const ModalSelectCountry = function (data, ID) {
 
   allCountries = Variable.allCountries;
 
-
   Static.changeCountry = {
     value: "",
     valid: false,
     error: false,
     type: "text",
     condition: async (value) => {
-      if (await checkBefore(Static, value)) {
-        return true
-      }
+      // if (await checkBefore(Static, value)) {
+      //   return true
+      // }
     },
     afterValid: () => {
 
-      fn.checkValid(Static, ["changeCountry"])
+      // fn.checkValid(Static, ["changeCountry"])
 
     }
   }
@@ -57,7 +56,12 @@ const ModalSelectCountry = function (data, ID) {
               ></button>
             </header>
             <div class="c-modal__body">
-              <Input classDiv="" Static={Static.changeCountry} />
+              {/* <Input classDiv="" Static={Static.changeCountry} oninput={changeInput} /> */}
+              <input data-language=""
+                id=""
+                type="text"
+                oninput={changeInput}
+              />
               <div class="changeCityContainer">
                 {allCountries.map((item) => {
                   return <div class="changeCityItem"
