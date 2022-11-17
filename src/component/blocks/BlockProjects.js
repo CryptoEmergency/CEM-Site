@@ -151,6 +151,7 @@ const BlockProjects = async function () {
                     "title": Variable.lang.a.career,
                     "icon": "careers_icon",
                     "link": "career-whith-us",
+                    "items": fn.itemsMenu.onlyPage({url: '/career-whith-us/'}),
                     modal: true
                 }
             ];

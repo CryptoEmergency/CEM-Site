@@ -209,7 +209,7 @@ const itemsMenu = {}
 //       ""]
 //   })
 
-itemsMenu.onlyPage = function({url}){
+itemsMenu.onlyPage = function({url, downloadurl}){
     const items = [
         {
             text: Variable.lang.select.share,
@@ -236,6 +236,20 @@ itemsMenu.onlyPage = function({url}){
             }
         }
     ]
+    if(typeof downloadurl != "undefined"){
+        items.push({
+            text: Variable.lang.button.save,
+            type: "share",
+            onclick: async () => {
+                const anchor = document.createElement("a");
+                anchor.href = downloadurl;
+                anchor.download = downloadurl;
+                document.body.appendChild(anchor);
+                anchor.click();
+                document.body.removeChild(anchor);
+            }
+        })
+    }
     return items
 }
 

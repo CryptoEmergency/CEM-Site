@@ -130,7 +130,7 @@ const mainFooter = async function () {
                                             >
                                                 <div class="c-accordion__body">
                                                     <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.userTerms, items: fn.itemsMenu.onlyPage({url: '/terms-of-service/'}) }) }} href="/terms-of-service/"><span>{Variable.lang.a.userTerms}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.dataPolicy, items: fn.itemsMenu.onlyPage({url: '/data-policy/'}) }) }} href="/data-policy/"><span>{Variable.lang.a.dataPolicy}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.dataPolicy, items: fn.itemsMenu.onlyPage({url: '/data-policy/', downloadurl: (Variable.lang.code == "ru") ? '/assets/docs/policyRU.pdf' : '/assets/docs/policyEN.pdf'}) }) }} href="/data-policy/"><span>{Variable.lang.a.dataPolicy}</span></a>
                                                     <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.cookies, items: fn.itemsMenu.onlyPage({url: '/cookies-policy/'}) }) }} href="/cookies-policy/"><span>{Variable.lang.a.cookies}</span></a>
                                                 </div>
                                             </div>
