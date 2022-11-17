@@ -4,7 +4,6 @@ import {
   init,
   initReload,
   Variable,
-  sendApi,
   Helpers,
   initGo,
 } from "@betarost/cemjs";
@@ -16,37 +15,28 @@ import {
   MediaPreview
 } from "@component/element/index.js";
 
-let formInputs, selectAspect;
+let Static, selectAspect;
 
-const changeTextPost = (e) => {
+const changeTextPost = (e, Static) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
+  console.log(Static)
   let text = e.target.innerText.trim();
-  formInputs.textInputs.value = text;
-  if (text || formInputs.mediaInputs.length > 0) {
-    formInputs.isValid = true;
+  Static.textInputs.value = text;
+  if (text || Static.mediaInputs.value.length > 0) {
+    Static.isValid = true;
   } else {
-    formInputs.isValid = false;
+    Static.isValid = false;
   }
   initReload();
 };
 
-const sendPost = async (e) => {
+const sendPost = async (e, Static) => {
   e.preventDefault();
-  if (!formInputs.isValid) {
+  if (!Static.isValid) {
     return false;
   }
 
-  let data = {
-    value: {
-      forFriends: formInputs.forFriends,
-      languages: formInputs.lang.code,
-      media: [...formInputs.mediaInputs.value, ...formInputs.audioInputs.value],
-      text: formInputs.textInputs.value,
-    },
-  };
-
-  let tmpRes = await sendApi.create("setPost", data);
-
+  let tmpRes = await fn.restApi.setPost.create({text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value]});
 
   if (tmpRes.status === "ok") {
     initGo();
@@ -66,13 +56,13 @@ const sendPost = async (e) => {
 };
 
 const deleteMediaFile = function (index) {
-  formInputs.mediaInputs.value.splice(index, 1);
-  if (formInputs.mediaInputs.value.length == 0) {
+  Static.mediaInputs.value.splice(index, 1);
+  if (Static.mediaInputs.value.length == 0) {
     selectAspect = null;
   }
 };
 
-const start = function () {
+const start = function (data, ID) {
   Variable.HeaderShow = true
   Variable.FooterShow = true
   Variable.showUserMenu = false
@@ -86,7 +76,7 @@ const start = function () {
       return
     }
     let canvas;
-    formInputs.mediaInputs.selectAspect = crooper.options.aspectRatio;
+    Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
     canvas = crooper.getCroppedCanvas({
       // width: 166,
       // height: 166,
@@ -97,26 +87,26 @@ const start = function () {
       upload: 0,
       size: 0
     };
-    formInputs.mediaInputs.show = true;
-    formInputs.mediaInputs.value.push(previewObj);
-    let numItem = formInputs.mediaInputs.value.length - 1
+    Static.mediaInputs.show = true;
+    Static.mediaInputs.value.push(previewObj);
+    let numItem = Static.mediaInputs.value.length - 1
     initReload();
     await canvas.toBlob(function (blob) {
       fn.uploadMedia(
         blob,
         "posts",
         async function () {
-          formInputs.mediaInputs.show = true;
+          Static.mediaInputs.show = true;
           if (!this.response) {
             return
           }
           let response = JSON.parse(this.response);
-          formInputs.mediaInputs.value[numItem] = {
-            aspect: formInputs.mediaInputs.selectAspect,
+          Static.mediaInputs.value[numItem] = {
+            aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
             name: response.name
           }
-          formInputs.isValid = true;
+          Static.isValid = true;
           initReload();
         },
         async function (e) {
@@ -132,14 +122,13 @@ const start = function () {
             );
           }
 
-          if (formInputs.mediaInputs.value[numItem].upload === formInputs.mediaInputs.value[numItem].size && formInputs.mediaInputs.value[numItem].upload !== 0) {
-            formInputs.mediaInputs.value.splice(numItem, 1);
+          if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+            Static.mediaInputs.value.splice(numItem, 1);
             initReload()
             return
           }
-          formInputs.mediaInputs.value[numItem].upload = e.loaded
-          formInputs.mediaInputs.value[numItem].size = contentLength;
-          // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+          Static.mediaInputs.value[numItem].upload = e.loaded
+          Static.mediaInputs.value[numItem].size = contentLength;
           initReload();
         }
       );
@@ -158,27 +147,27 @@ const start = function () {
       upload: 0,
       size: 0
     }
-    formInputs.mediaInputs.show = true;
-    formInputs.mediaInputs.value.push(previewObj);
-    let numItem = formInputs.mediaInputs.value.length - 1
+    Static.mediaInputs.show = true;
+    Static.mediaInputs.value.push(previewObj);
+    let numItem = Static.mediaInputs.value.length - 1
     initReload();
 
     fn.uploadMedia(
       files[0],
       "posts",
       async function () {
-        formInputs.mediaInputs.show = true;
+        Static.mediaInputs.show = true;
 
 
-        // formInputs.mediaInputs.value.push(obj);
+        // Static.mediaInputs.value.push(obj);
         let response = JSON.parse(this.response);
-        formInputs.mediaInputs.value[numItem] = {
+        Static.mediaInputs.value[numItem] = {
           aspect: undefined,
           type: response.mimetype.split("/")[0],
           name: response.name
         }
 
-        formInputs.isValid = true;
+        Static.isValid = true;
         initReload();
       },
       async function (e) {
@@ -193,15 +182,8 @@ const start = function () {
             10
           );
         }
-        formInputs.mediaInputs.value[numItem].upload = e.loaded
-        formInputs.mediaInputs.value[numItem].size = contentLength;
-        // console.log(
-        //   "=3c5fa7= ",
-        //   "Загружено",
-        //   e.loaded,
-        //   "из",
-        //   contentLength
-        // );
+        Static.mediaInputs.value[numItem].upload = e.loaded
+        Static.mediaInputs.value[numItem].size = contentLength;
         initReload()
       }
     );
@@ -216,9 +198,9 @@ const start = function () {
       upload: 0,
       size: 0
     }
-    formInputs.audioInputs.show = true;
-    formInputs.audioInputs.value.push(previewObj);
-    let numItem = formInputs.audioInputs.value.length - 1
+    Static.audioInputs.show = true;
+    Static.audioInputs.value.push(previewObj);
+    let numItem = Static.audioInputs.value.length - 1
 
     initReload();
 
@@ -226,17 +208,17 @@ const start = function () {
       files[0],
       "posts",
       async function () {
-        formInputs.mediaInputs.show = true;
+        Static.mediaInputs.show = true;
 
 
-        // formInputs.mediaInputs.value.push(obj);
+        // Static.mediaInputs.value.push(obj);
         let response = JSON.parse(this.response);
-        formInputs.audioInputs.value[numItem] = {
+        Static.audioInputs.value[numItem] = {
           aspect: undefined,
           type: response.mimetype.split("/")[0],
           name: response.name
         }
-        formInputs.isValid = true;
+        Static.isValid = true;
         initReload();
       },
       async function (e) {
@@ -251,8 +233,8 @@ const start = function () {
             10
           );
         }
-        formInputs.audioInputs.value[numItem].upload = e.loaded
-        formInputs.audioInputs.value[numItem].size = contentLength;
+        Static.audioInputs.value[numItem].upload = e.loaded
+        Static.audioInputs.value[numItem].size = contentLength;
         // console.log(
         //   "=3c5fa7= ",
         //   "Загружено",
@@ -278,7 +260,7 @@ const start = function () {
 
   const sendAuthorization = async function (e) {
     e.preventDefault();
-    if (!formInputs.isValid) {
+    if (!Static.isValid) {
       return false;
     }
   };
@@ -324,48 +306,17 @@ const start = function () {
   };
 
   let el = [];
+
+  let [Static] = fn.GetParams({ data, ID })
+
   init(
     async () => {
-      formInputs = {
-        textInputs: {
-          value: "",
-          show: false,
-        },
-        mediaInputs: {
-          value: [],
-          show: false,
-        },
-        audioInputs: {
-          value: [],
-          show: false,
-        },
-        lang: {
-          code: Variable.myInfo.mainLanguage.code,
-          name: Variable.myInfo.mainLanguage.orig_name
-        },
-        forFriends: false,
-        isValid: false,
-      };
+      fn.initData.posts(Static)
 
 
       selectAspect = null;
 
-      // authorPosts = await fn.getPost()
-
-      authorPosts = await sendApi.send({
-        action: "getPost",
-        short: true,
-        cache: true,
-        name: "MainPosts",
-        filter: {
-          //Helpers.getFilterQuestions(filtersQuestions),
-          author: Variable.myInfo._id,
-        },
-        sort: {
-          //Helpers.getSortQuestions(filtersQuestions)
-          showDate: -1,
-        },
-      });
+      authorPosts = await fn.restApi.getPost({cache: true, name: "MainPosts", filter: {author: Variable.myInfo._id}, sort: {showDate: -1,}})
 
     },
 
@@ -388,40 +339,40 @@ const start = function () {
                     name: "ModalChangeLanguage",
                     data: {
                       onclick: async (langCode, langName, langOrig) => {
-                        formInputs.lang.name = langOrig;
-                        formInputs.lang.code = langCode;
+                        Static.lang.name = langOrig;
+                        Static.lang.code = langCode;
                         initReload()
                       },
                     },
                   });
                 }}
-              >{formInputs.lang.name}</div>
+              >{Static.lang.name}</div>
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
               {
-                formInputs.textInputs.show
+                Static.textInputs.show
                   ?
                   <div
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
-                    oninput={changeTextPost}
+                    oninput={(e)=>changeTextPost(e, Static)}
                   ></div>
                   :
                   null
               }
               {
-                formInputs.mediaInputs.show && formInputs.mediaInputs.value.length
+                Static.mediaInputs.show && Static.mediaInputs.value.length
                   ?
                   <div class="create_post_chapter createPostImage">
                     {
-                      formInputs.mediaInputs.value.map((item, index) => {
+                      Static.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
                           return (
                             <MediaPreview
                               item={item}
                               index={index}
                               type="posts"
-                              formInputs={formInputs}
+                              Static={Static}
 
                             />
                           );
@@ -434,18 +385,18 @@ const start = function () {
               }
               {/* Добавил еще один иф для айдио */}
               {
-                formInputs.audioInputs.show && formInputs.audioInputs.value.length
+                Static.audioInputs.show && Static.audioInputs.value.length
                   ?
                   <div class="create_post_chapter createPostAudio">
                     {
-                      formInputs.audioInputs.value.map((item, index) => {
+                      Static.audioInputs.value.map((item, index) => {
 
                         return (
                           <MediaPreview
                             item={item}
                             index={index}
                             type="posts"
-                            formInputs={formInputs}
+                            Static={Static}
                             el={el}
                           />
                         );
@@ -460,10 +411,10 @@ const start = function () {
             <MediaButton
 
               onclickText={function () {
-                if (formInputs.textInputs.show === true) {
+                if (Static.textInputs.show === true) {
                   return;
                 } else {
-                  formInputs.textInputs.show = true;
+                  Static.textInputs.show = true;
                   initReload();
                 }
               }}
@@ -476,8 +427,8 @@ const start = function () {
                 fn.modals.ModalCropImage({
                   file: this.files[0],
                   typeUpload: 'posts',
-                  arrMedia: formInputs.mediaInputs.value,
-                  aspectSelect: formInputs.mediaInputs.selectAspect,
+                  arrMedia: Static.mediaInputs.value,
+                  aspectSelect: Static.mediaInputs.selectAspect,
                   uploadCropImage: async function (cropper) {
                     await sendPhoto(cropper)
                     return;
@@ -488,15 +439,15 @@ const start = function () {
                 //   data: {
                 //     file: this.files[0],
                 //     typeUpload: 'posts',
-                //     arrMedia: formInputs.mediaInputs.value,
-                //     aspectSelect: formInputs.mediaInputs.selectAspect,
+                //     arrMedia: Static.mediaInputs.value,
+                //     aspectSelect: Static.mediaInputs.selectAspect,
                 //     uploadCropImage: async function (cropper) {
                 //       await sendPhoto(cropper)
                 //       return;
                 //     }
                 //   },
                 // }, true);
-                // formInputs.isValid = true;
+                // Static.isValid = true;
                 this.value = '';
               }}
 
@@ -528,7 +479,7 @@ const start = function () {
                   data-complain="abusive"
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
-                    formInputs.forFriends = e.target.checked;
+                    Static.forFriends = e.target.checked;
                   }}
                   type="checkbox"
                 />
@@ -542,7 +493,7 @@ const start = function () {
               {/* <button
                 class={[
                   "c-button c-button--gradient2",
-                  !formInputs.isValid ? "c-button--inactive" : "",
+                  !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 style="margin-right: 30px"
                 type="button"
@@ -555,10 +506,10 @@ const start = function () {
               <button
                 class={[
                   "c-button c-button--gradient2",
-                  !formInputs.isValid ? "c-button--inactive" : "",
+                  !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 type="button"
-                onClick={sendPost}
+                onClick={(e)=>sendPost(e, Static)}
               >
                 <span class="c-button__text">
                   {Variable.lang.button.create}
@@ -576,7 +527,7 @@ const start = function () {
           </form>
         </div>
       );
-    }
+    }, ID
   );
 };
 

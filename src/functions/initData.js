@@ -465,6 +465,30 @@ initData.news = function (Static) {
     return
 }
 
+initData.posts = function (Static) {
+
+    Static.textInputs = {
+        value: "",
+        show: false,
+    }
+    Static.mediaInputs = {
+        value: [],
+        show: false,
+    }
+    Static.audioInputs = {
+      value: [],
+      show: false,
+    }
+    Static.lang = {
+      code: Variable.myInfo.mainLanguage.code,
+      name: Variable.myInfo.mainLanguage.orig_name
+    }
+    Static.forFriends = false
+    Static.isValid = false
+
+    return
+}
+
 initData.media = function (Static) {
 
     Static.activeCategory = Variable.lang.code
