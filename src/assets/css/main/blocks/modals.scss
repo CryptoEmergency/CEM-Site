@@ -175,6 +175,8 @@
 				}
 
 				.tags {
+					top: 40px;
+
 					@media(max-width: 1023px) {
 						padding-left: 10px;
 						padding-right: 10px;
@@ -213,6 +215,7 @@
 				.userNewsBlock {
 					.bl_one {
 						margin-bottom: 0;
+						padding-top: 0;
 					}
 				}
 			}
@@ -242,6 +245,7 @@
 
 		.blog_page {
 			padding-bottom: 0;
+			padding-top: 0;
 		}
 
 		.affiliate {
@@ -4853,6 +4857,18 @@ s
 		@media (max-width: 399px) {
 			position: static;
 			padding-bottom: 3px;
+		}
+	}
+
+	&__toggler {
+		position: absolute;
+		bottom: 15px;
+		right: 5px;
+		cursor: pointer;
+
+		img {
+			filter: invert(67%) sepia(8%) saturate(758%) hue-rotate(190deg) brightness(89%) contrast(83%);
+			height: 30px;
 		}
 	}
 }
