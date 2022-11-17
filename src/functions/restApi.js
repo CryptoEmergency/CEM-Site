@@ -564,7 +564,7 @@ restApi.setPost.create = async function ({ text, forFriends, languages, media, n
             languages: languages,
             media: media
         },
-      };
+    };
 
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
@@ -773,19 +773,19 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
     let data = {
         _id,
         value: {
-        complain
+            complain
         }
     }
     console.log(data)
-   // const response = await sendApi.create("setQuestion", data);
+    const response = await sendApi.create("setQuestion", data);
     console.log(response)
-  //  return checkSetAnswer(response)
+    return checkSetAnswer(response)
 }
 
 
 restApi.setUserRoom = {}
 
-restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country, system=false }) {
+restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country, system = false }) {
     let data = {
         value: {
             settingsroom: {
@@ -802,8 +802,8 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
         }
     }
     console.log(data)
-  //  const response = await sendApi.create("setUserRoom", data);
- //   return checkSetAnswer(response)
+    //  const response = await sendApi.create("setUserRoom", data);
+    //   return checkSetAnswer(response)
 }
 
 export { restApi };
