@@ -19,13 +19,13 @@ console.log(Variable.myInfo.country)
     }
      //инпут язык
      Static.Lang ={
-        value: Variable.myInfo.country.code,
+        value: Variable.myInfo.country.code+ ` (${Variable.myInfo.country.orig_name})`,
         label:"Выбирете язык",
         onclick:()=>{
             fn.modals.ModalChangeLanguage({
                 onclick: async (langCode, langName, langOrig) => {
            
-                    Static.Lang.value= langCode
+                    Static.Lang.value= langCode + ` (${langOrig})`
   
                 }
               },ID)
