@@ -501,7 +501,7 @@
 
 @media(max-width: 1370px) {
     .friends_block {
-        margin-top: 30px;
+        // margin-top: 30px;
         display: grid;
         grid-template-columns: calc(33.3% - 6.6px) calc(33.3% - 6.6px) calc(33.3% - 6.6px);
         gap: 10px;
@@ -510,6 +510,7 @@
 
 @media(max-width: 970px) {
     .friends_block {
+        margin-top: 0;
         grid-template-columns: calc(50% - 5px) calc(50% - 5px);
     }
 }
