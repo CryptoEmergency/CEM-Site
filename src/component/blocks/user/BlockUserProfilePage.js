@@ -25,9 +25,9 @@ BlockUserProfilePage.aboutUser = function (data) {
                 <div class="about_user_section-1 about_user_section-row_type-2">
                     <div class="about_user_section-row_type-3">
                         <div class="about_user_section">
-                            {()=>{
-                                if(Variable.myInfo._id == data.userInfo._id){
-                                    return(
+                            {() => {
+                                if (Variable.myInfo._id == data.userInfo._id) {
+                                    return (
                                         <div class="about_user_section_inner">
                                             <p>{Variable.lang.p.aboutMe}</p>
                                             <span class="about_me_block">
@@ -72,31 +72,31 @@ BlockUserProfilePage.aboutUser = function (data) {
                                             </div>
 
                                             <div class="about_user_section_points_container">
-                                                <img 
-                                                    onclick={()=>{
+                                                <img
+                                                    onclick={() => {
                                                         Variable.SetModals({ name: "ModalUserInfoEdit", data: data.userInfo })
-                                                    }} 
-                                                    class="about_user_section_points" 
-                                                    src={svg['pencil']} 
+                                                    }}
+                                                    class="about_user_section_points"
+                                                    src={svg['pencil']}
                                                 />
                                             </div>
                                         </div>
                                     )
                                 } else {
-                                    return(
+                                    return (
                                         <div class="about_user_section_inner">
                                             <p>{Variable.lang.p.aboutMe}</p>
-                                            {()=>{
-                                                if(data.userInfo.information.about){
-                                                    return(
+                                            {() => {
+                                                if (data.userInfo.information.about) {
+                                                    return (
                                                         <span class="about_me_block">{Helpers.clearText(data.userInfo.information.about)}</span>
                                                     )
                                                 }
                                             }}
                                             <div class="user_grid_info-1">
-                                                {()=>{
-                                                    if(data.userInfo.fullname){
-                                                        return(
+                                                {() => {
+                                                    if (data.userInfo.fullname) {
+                                                        return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.name}</span>
                                                                 <div><input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
@@ -104,9 +104,9 @@ BlockUserProfilePage.aboutUser = function (data) {
                                                         )
                                                     }
                                                 }}
-                                                {()=>{
-                                                    if(data.userInfo.information.speciality){
-                                                        return(
+                                                {() => {
+                                                    if (data.userInfo.information.speciality) {
+                                                        return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.speciality}</span>
                                                                 <div><input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /></div>
@@ -114,9 +114,9 @@ BlockUserProfilePage.aboutUser = function (data) {
                                                         )
                                                     }
                                                 }}
-                                                {()=>{
-                                                    if(data.userInfo.country.eng_name){
-                                                        return(
+                                                {() => {
+                                                    if (data.userInfo.country.eng_name) {
+                                                        return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.country}</span>
                                                                 <div><input id="country" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.country.eng_name} /></div>
@@ -124,9 +124,9 @@ BlockUserProfilePage.aboutUser = function (data) {
                                                         )
                                                     }
                                                 }}
-                                                {()=>{
-                                                    if(data.userInfo.information.city){
-                                                        return(
+                                                {() => {
+                                                    if (data.userInfo.information.city) {
+                                                        return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.city}</span>
                                                                 <div><input id="city" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.information.city} /></div>
@@ -134,13 +134,13 @@ BlockUserProfilePage.aboutUser = function (data) {
                                                         )
                                                     }
                                                 }}
-                                                {()=>{
-                                                    if(data.userInfo.information.dateCreate){
-                                                        return(
+                                                {() => {
+                                                    if (data.userInfo.information.dateCreate) {
+                                                        return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.span.regDate}</span>
                                                                 <div><input type="date" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
-                                                            </div> 
+                                                            </div>
                                                         )
                                                     }
                                                 }}
@@ -166,9 +166,9 @@ BlockUserProfilePage.aboutUser = function (data) {
                         <div class="about_user_section">
                             <div class="about_user_section_inner interests_block">
                                 <p>{Variable.lang.p.interests}</p>
-                                {()=>{
-                                    if(Variable.myInfo._id == data.userInfo._id){
-                                        return(
+                                {() => {
+                                    if (Variable.myInfo._id == data.userInfo._id) {
+                                        return (
                                             <div class="about_user_section_points_container">
                                                 <ItemsMenu
                                                     author={data.userInfo}
@@ -216,9 +216,9 @@ BlockUserProfilePage.aboutUser = function (data) {
                                 <p>{Variable.lang.p.work}</p>
                                 <div class="work_and_education">
                                 </div>
-                                {()=>{
-                                    if(Variable.myInfo._id == data.userInfo._id){
-                                        return(
+                                {() => {
+                                    if (Variable.myInfo._id == data.userInfo._id) {
+                                        return (
                                             <div class="about_user_section_points_container">
                                                 <ItemsMenu
                                                     author={data.userInfo}
@@ -240,7 +240,7 @@ BlockUserProfilePage.aboutUser = function (data) {
 
                                                                 }
                                                             }
-                                                            
+
                                                         ]
                                                     }
                                                 />
@@ -311,6 +311,7 @@ BlockUserProfilePage.subscribers = function (data) {
 
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
+            <h2>{Variable.lang.toggle.subscribers}</h2>
             <div class="friends_block">
                 {
                     data.items.list_records.map((item, index) => {
@@ -393,6 +394,7 @@ BlockUserProfilePage.friends = function (data) {
     }
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
+            <h2>{Variable.lang.toggle.friends}</h2>
             <div class="friends_block">
                 {
                     data.items.list_records[0].subscribed.map((item, index) => {
@@ -521,9 +523,9 @@ BlockUserProfilePage.answers = function (data) {
                                     {Helpers.clearText(item.text)}
                                 </div>
                             </div>
-                            {()=>{
-                                if(item.active){
-                                    return(
+                            {() => {
+                                if (item.active) {
+                                    return (
                                         <div data-action="yourAnswersOptional" class="your_answers_optional">
                                             <img src={svg['points2']} />
                                             {/* <div class="your_answers_menu dn">
@@ -534,7 +536,7 @@ BlockUserProfilePage.answers = function (data) {
                                         </div>
                                     )
                                 } else {
-                                    return(
+                                    return (
                                         <div class="delete_question"></div>
                                     )
                                 }
@@ -543,9 +545,9 @@ BlockUserProfilePage.answers = function (data) {
                     )
                 })
             }
-            {()=>{
-                if(data.items.list_records.length < data.items.totalFound){
-                    return(
+            {() => {
+                if (data.items.list_records.length < data.items.totalFound) {
+                    return (
                         <div class="crypto_exchanges_footer">
                             <a class="btn-view-all-a"
                                 onclick={async () => {
@@ -620,9 +622,9 @@ BlockUserProfilePage.questions = function (data) {
                                 <div class="your_answers_counter">
                                     <span class="your_answers_counter_desc">{Variable.lang.tableTitle.views}</span><span class="your_answers_counter_number">{item.statistic.view}</span>
                                 </div>
-                                {()=>{
-                                    if(item.bestId){
-                                        return(
+                                {() => {
+                                    if (item.bestId) {
+                                        return (
                                             <div class="your_answers_avatar">
                                                 <Avatar
                                                     author={item.author}
@@ -633,8 +635,8 @@ BlockUserProfilePage.questions = function (data) {
                                                 </div>
                                             </div>
                                         )
-                                    }else{
-                                        return(
+                                    } else {
+                                        return (
                                             <div class="your_answers_avatar">
                                                 ---
                                             </div>
@@ -643,36 +645,36 @@ BlockUserProfilePage.questions = function (data) {
                                 }}
                                 <div class="your_answers_status">
                                     <div class="your_answers_status_inner">
-                                        {()=>{
-                                            if(item.del){
-                                                return(
+                                        {() => {
+                                            if (item.del) {
+                                                return (
                                                     <img src={svg['question_status_delete']} />
                                                 )
-                                            } else if(item.close){
-                                                if(item.bestId){
-                                                    return(
+                                            } else if (item.close) {
+                                                if (item.bestId) {
+                                                    return (
                                                         <img src={svg['best_answer']} />
                                                     )
                                                 } else {
-                                                    return(
+                                                    return (
                                                         <img src={svg['closed_question']} />
                                                     )
                                                 }
                                             } else {
-                                                return(
+                                                return (
                                                     <img src={svg['open_question']} />
                                                 )
                                             }
                                         }}
                                     </div>
                                 </div>
-                                {()=>{
-                                    if(item.del){
-                                        return(
+                                {() => {
+                                    if (item.del) {
+                                        return (
                                             <div class="delete_question"></div>
                                         )
                                     } else {
-                                        return(
+                                        return (
                                             <div class="your_answers_optional">
                                                 <img src={svg['points2']} />
                                                 {/* <div class="your_answers_menu dn">
@@ -691,9 +693,9 @@ BlockUserProfilePage.questions = function (data) {
                     })
                 }
             </div>
-            {()=>{
-                if(data.items.list_records.length < data.items.totalFound){
-                    return(
+            {() => {
+                if (data.items.list_records.length < data.items.totalFound) {
+                    return (
                         <div class="crypto_exchanges_footer">
                             <a class="btn-view-all-a"
                                 onclick={async () => {

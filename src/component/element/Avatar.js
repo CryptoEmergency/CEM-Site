@@ -192,18 +192,27 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                       {
                         text: Variable.lang.select.share,
                         type: "share",
-                        onclick: function (e) {
-
+                        onclick: async function (e) {
+                          try {
+                            if (navigator.share) {
+                              await navigator.share({
+                                url: window.location.href,
+                              });
+                            }
+                          } catch (err) {
+                            // Вывести ошибку
+                            console.error("Share", err)
+                          }
                         }
                       },
                       {
                         text: Variable.lang.text.settings,
                         type: "edit",
                         onclick: function (e) {
-                          e.currentTarget = {
-                            href: "/user/settings/"
-                          }
-                          fn.siteLink(e)
+                          // e.currentTarget = {
+                          //   href: "/user/settings/"
+                          // }
+                          fn.siteLink("/user/settings/")
                         }
                       }
                     ]
