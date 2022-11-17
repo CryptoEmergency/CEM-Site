@@ -554,6 +554,22 @@ restApi.setAnswers.comment = async function ({ _id, text, mainId, quoteId, noAle
 }
 // Запросы на посты
 restApi.setPost = {}
+
+
+restApi.setPost.create = async function ({ text, forFriends, languages, media, noAlert }) {
+    let data = {
+        value: {
+            text: text,
+            forFriends: forFriends,
+            languages: languages,
+            media: media
+        },
+      };
+
+    const response = await sendApi.create("setPost", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 // Увеличить просмотры
 restApi.setPost.view = async function ({ _id, noAlert = true }) {
     let data = {

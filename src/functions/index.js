@@ -326,6 +326,7 @@ fn.siteLinkModal = async function (e, data) {
   }
   let link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
   history.pushState(null, null, link);
+  Variable.Modals = []
   let dataUrl = parsingUrl(link)
   await initPage(dataUrl, data);
   return
