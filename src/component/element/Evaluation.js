@@ -21,6 +21,7 @@ const Evaluation = function ({ Static, item, index, comment, action, mainId }) {
           PressWait={{
             timeout: 1000,
             callBackBefore: async () => {
+              // console.log('=f46811=', "callBackBefore")
               let response = await fn.restApi["set" + action].evaluation({ _id: item._id, evaluation: "minus", comment, mainId })
               if (response.status === 'ok') {
                 if (Static.nameRecords && typeof index != "undefined") {

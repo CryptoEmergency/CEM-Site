@@ -59,11 +59,22 @@ const textElem = function (Static, className, index) {
                     }
                     if (this.scrollHeight > this.offsetHeight && this.offsetHeight < this.dataset.maxHeight) {
                         if (this.scrollHeight <= this.dataset.maxHeight) {
+                            this.style.height = 'auto';
                             this.style.height = this.scrollHeight + 'px';
                         } else {
+                            this.style.height = 'auto';
+                            this.style.height = this.dataset.maxHeight + 'px';
+                        }
+                    } else if (this.dataset.scrollLast && this.scrollHeight < this.dataset.scrollLast) {
+                        if (this.scrollHeight <= this.dataset.maxHeight) {
+                            this.style.height = 'auto';
+                            this.style.height = this.scrollHeight + 'px';
+                        } else {
+                            this.style.height = 'auto';
                             this.style.height = this.dataset.maxHeight + 'px';
                         }
                     }
+                    this.dataset.scrollLast = this.scrollHeight
                 }
                 Static.value = this.value.trim()
                 if (!Static.condition) {

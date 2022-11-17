@@ -34,3 +34,5 @@ export { BlockShowNews } from './BlockShowNews.js';
 export { BlockTrade } from "./BlockTrade.js";
 // Список пользователей
 export { BlockUsers } from "./BlockUsers.js"
+// Комнаты
+export { BlockUserRooms } from "./BlockUserRooms.js"

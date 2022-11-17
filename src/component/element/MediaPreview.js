@@ -5,7 +5,7 @@ import images from "@assets/images/index.js";
 import { AudioPlayerCopy } from "@component/element/index.js";
 
 
-const MediaPreview = function ({ item, index, type, formInputs, el }) {
+const MediaPreview = function ({ item, index, type, Static, el }) {
   // console.log('=2f8e9a=', item)
   if (item.type === "audio") {
     el[index] = Variable.setRef();
@@ -62,9 +62,12 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-                    formInputs.mediaInputs.value.splice(index, 1);
-                    if (formInputs.mediaInputs.value.length == 0) {
-                      formInputs.mediaInputs.selectAspect = null;
+                    Static.mediaInputs.value.splice(index, 1);
+                    if (Static.mediaInputs.value.length == 0) {
+                      Static.mediaInputs.selectAspect = null;
+                      if(Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                        Static.isValid = false;
+                      }
                     }
                     initReload();
                   }}
@@ -75,11 +78,14 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                 <div
                   class="stop_loading"
                   onclick={() => {
-                    formInputs.mediaInputs.value[index].upload =
-                      formInputs.mediaInputs.value[index].size;
-                    formInputs.mediaInputs.value.splice(index, 1);
-                    if (formInputs.mediaInputs.value.length == 0) {
-                      formInputs.mediaInputs.selectAspect = null;
+                    Static.mediaInputs.value[index].upload =
+                      Static.mediaInputs.value[index].size;
+                    Static.mediaInputs.value.splice(index, 1);
+                    if (Static.mediaInputs.value.length == 0) {
+                      Static.mediaInputs.selectAspect = null;
+                      if(Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                        Static.isValid = false;
+                      }
                     }
                     initReload();
                   }}
@@ -142,8 +148,10 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-                    formInputs.mediaInputs.value.splice(index, 1);
-
+                    Static.mediaInputs.value.splice(index, 1);
+                    if(Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                      Static.isValid = false;
+                    }
                     initReload();
                   }}
                 >
@@ -153,10 +161,12 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                 <div
                   class="stop_loading"
                   onclick={() => {
-                    formInputs.mediaInputs.value[index].upload =
-                      formInputs.mediaInputs.value[index].size;
-                    formInputs.mediaInputs.value.splice(index, 1);
-
+                    Static.mediaInputs.value[index].upload =
+                      Static.mediaInputs.value[index].size;
+                    Static.mediaInputs.value.splice(index, 1);
+                    if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
+                        Static.isValid = false;
+                    }
                     initReload();
                   }}
                 ></div>
@@ -219,8 +229,10 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-                    formInputs.mediaInputs.value.splice(index, 1);
-
+                    Static.mediaInputs.value.splice(index, 1);
+                    if(Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                      Static.isValid = false;
+                    }
                     initReload();
                   }}
                 >
@@ -230,10 +242,12 @@ const MediaPreview = function ({ item, index, type, formInputs, el }) {
                 <div
                   class="stop_loading"
                   onclick={() => {
-                    formInputs.mediaInputs.value[index].upload =
-                      formInputs.mediaInputs.value[index].size;
-                    formInputs.mediaInputs.value.splice(index, 1);
-
+                    Static.mediaInputs.value[index].upload =
+                      Static.mediaInputs.value[index].size;
+                    Static.mediaInputs.value.splice(index, 1);
+                    if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
+                      Static.isValid = false;
+                    }
                     initReload();
                   }}
                 ></div>

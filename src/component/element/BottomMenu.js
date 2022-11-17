@@ -4,7 +4,7 @@ import {
     Variable
 } from "@betarost/cemjs";
 import { fn } from "@src/functions/index.js";
-
+import svg from '@assets/svg/index.js';
 const findUnread = function (arr) {
     let unread = false
     if (!arr || !arr.length) { return false }
@@ -96,6 +96,27 @@ const BottomMenu = function () {
                     <img src={svg.close} />
                 </div>
             </div> */}
+            <div
+                id="toTop"
+                Element={($el) => { Variable.Static.elArrowTop = $el }}
+                onclick={() => {
+                    if (!Variable.ModalsPage.length) {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    } else {
+                        Variable.ModalsPage[Variable.ModalsPage.length - 1].el.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    }
+                    Variable.Static.elArrowTop.style.display = "none"
+                    clearTimeout(Variable.Static.elArrowTopLink);
+                }}
+            >
+                <img src={svg.arrowTop} />
+            </div>
         </div>
     )
 };

@@ -472,6 +472,12 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Onestopmining – международная компания, которая специализируется на комплексных решениях для майнинга.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cripta.games" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_13']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Настольная игра "КРИПТА. Начало" - битва криптотрейдеров, стань лучшим за игровым столом! Два в одном - азартная настолка и обучающий тренажёр, поможет разобраться в мире криптовалют и трейдинга.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -778,6 +784,14 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_14"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cripta.games"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_15"]} />
                                     </a>
                                 </div>
                             </div>

@@ -554,6 +554,22 @@ restApi.setAnswers.comment = async function ({ _id, text, mainId, quoteId, noAle
 }
 // Запросы на посты
 restApi.setPost = {}
+
+
+restApi.setPost.create = async function ({ text, forFriends, languages, media, noAlert }) {
+    let data = {
+        value: {
+            text: text,
+            forFriends: forFriends,
+            languages: languages,
+            media: media
+        },
+      };
+
+    const response = await sendApi.create("setPost", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 // Увеличить просмотры
 restApi.setPost.view = async function ({ _id, noAlert = true }) {
     let data = {
@@ -759,14 +775,15 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
         }
     }
     console.log(data)
-    const response = await sendApi.create("setQuestion", data);
+   // const response = await sendApi.create("setQuestion", data);
     console.log(response)
-    return checkSetAnswer(response)
+  //  return checkSetAnswer(response)
 }
 
 
 restApi.setUserRoom = {}
-restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country }) {
+
+restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country, system=false }) {
     let data = {
         value: {
             settingsroom: {
@@ -778,11 +795,13 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
                 images: images,
             },
             languages: languages,
-            country: country
+            country: country,
+            system: system
         }
     }
-    const response = await sendApi.create("setUserRoom", data);
-    return checkSetAnswer(response)
+    console.log(data)
+  //  const response = await sendApi.create("setUserRoom", data);
+ //   return checkSetAnswer(response)
 }
 
 export { restApi };
