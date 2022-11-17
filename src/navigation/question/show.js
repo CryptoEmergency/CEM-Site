@@ -251,7 +251,7 @@ const start = function (data, ID) {
                                         )
                                       })}
                                     </div>
-                                    <div
+                                    {/* <div
                                       class="c-comments__toggler"
                                       onClick={function () {
                                         if (Static.elButtonSubmit[index].dataset.show) {
@@ -266,7 +266,7 @@ const start = function (data, ID) {
                                       }}
                                     >
                                       <img src={svg.scroll_top} />
-                                    </div>
+                                    </div> */}
                                   </div>
                                   :
                                   null

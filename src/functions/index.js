@@ -318,13 +318,18 @@ fn.checkValid = function (Static, Array) {
 }
 
 fn.siteLinkModal = async function (e, data) {
-  e.preventDefault();
-  e.stopPropagation();
-  if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
-    console.error("Not have href")
-    return
+  let link
+  if (typeof e == "string") {
+    link = e
+  } else {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
+      console.error("Not have href")
+      return
+    }
+    link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
   }
-  let link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
   history.pushState(null, null, link);
   Variable.Modals = []
   let dataUrl = parsingUrl(link)
