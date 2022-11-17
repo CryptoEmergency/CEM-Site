@@ -759,9 +759,9 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
         }
     }
     console.log(data)
-    const response = await sendApi.create("setQuestion", data);
+   // const response = await sendApi.create("setQuestion", data);
     console.log(response)
-    return checkSetAnswer(response)
+  //  return checkSetAnswer(response)
 }
 
 
