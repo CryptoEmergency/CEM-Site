@@ -1,4 +1,4 @@
-import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi, initGo } from "@betarost/cemjs";
+import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi, initGo, initReload } from "@betarost/cemjs";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
@@ -303,6 +303,18 @@ fn.siteLink = function (e) {
     parsingUrl()
   }
   return
+}
+
+
+fn.checkValid = function (Static, Array) {
+  Static.isValid = true
+  Array.forEach(function (elem) {
+    if (!Static[elem].valid) {
+      Static.isValid = false
+    }
+  })
+  initReload()
+  return;
 }
 
 fn.siteLinkModal = async function (e, data) {
