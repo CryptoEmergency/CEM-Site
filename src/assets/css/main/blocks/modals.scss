@@ -247,9 +247,7 @@
 			padding-bottom: 0;
 			padding-top: 0;
 
-			&_container {
-
-			}
+			&_container {}
 		}
 
 		.affiliate {
@@ -308,6 +306,10 @@
 	&__title {
 		font-size: 1.8rem;
 		padding-right: 45px;
+
+		@media(max-width: 389px) {
+			font-size: 1.6rem;
+		}
 	}
 
 	&__close {
@@ -348,8 +350,8 @@
 }
 
 .full_news_content {
-	
-	
+
+
 	.full_news_content {
 		padding-left: 0;
 		padding-right: 0;

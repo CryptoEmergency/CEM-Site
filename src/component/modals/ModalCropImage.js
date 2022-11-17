@@ -72,7 +72,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                             <div class="c-cropper container crop-container" style="addCropImage">
                                 <div class="c-cropper__row row">
                                     <div class="c-cropper__wrapimage img-container">
-                                        <img width="300" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={URL.createObjectURL(file)} After={cropperGo} ref={elemImg} />
+                                        <img width="100%" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={URL.createObjectURL(file)} After={cropperGo} ref={elemImg} />
                                     </div>
                                 </div>
                                 {() => {

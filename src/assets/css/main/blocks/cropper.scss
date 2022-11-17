@@ -1,6 +1,13 @@
 /* Cropper styles */
 .c-cropper {
 
+    &__wrapimage {
+
+        @media screen and (orientation: portrait) {
+            max-height: calc(100vh - 242px) !important;
+        }
+    }
+
     &__cropimage {
         width: 100%;
         height: auto;
