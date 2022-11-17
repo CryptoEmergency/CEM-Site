@@ -350,6 +350,8 @@ const start = function () {
 
       selectAspect = null;
 
+      // authorPosts = await fn.getPost()
+
       authorPosts = await sendApi.send({
         action: "getPost",
         short: true,
