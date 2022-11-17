@@ -57,7 +57,8 @@ const BlockShowLenta = function ({ Static, item }) {
             {
               !item.comments || !item.comments.length
                 ?
-                <NotFound />
+                null
+                // <NotFound />
                 :
                 <div class="post_comments">
                   <div class="user_news_item">
