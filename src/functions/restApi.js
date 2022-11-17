@@ -767,6 +767,7 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
 
 restApi.setUserRoom = {}
 restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country }) {
+
     let data = {
         value: {
             settingsroom: {
@@ -781,8 +782,9 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
             country: country
         }
     }
-    const response = await sendApi.create("setUserRoom", data);
-    return checkSetAnswer(response)
+    console.log(data)
+  //  const response = await sendApi.create("setUserRoom", data);
+ //   return checkSetAnswer(response)
 }
 
 export { restApi };

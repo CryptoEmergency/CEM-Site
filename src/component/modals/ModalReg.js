@@ -60,13 +60,6 @@ let wayReg
 const ModalReg = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
-
-
-
-
-
-
-
     init(
         () => {
             console.log("=========INIT========", Static, "=====ONE======")
