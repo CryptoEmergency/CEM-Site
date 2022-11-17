@@ -246,6 +246,10 @@
 		.blog_page {
 			padding-bottom: 0;
 			padding-top: 0;
+
+			&_container {
+
+			}
 		}
 
 		.affiliate {
@@ -340,6 +344,20 @@
 				margin-right: 0;
 			}
 		}
+	}
+}
+
+.full_news_content {
+	
+	
+	.full_news_content {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.news_page_comments {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
