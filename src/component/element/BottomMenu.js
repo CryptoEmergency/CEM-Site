@@ -100,10 +100,17 @@ const BottomMenu = function () {
                 id="toTop"
                 Element={($el) => { Variable.Static.elArrowTop = $el }}
                 onclick={() => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth",
-                    });
+                    if (!Variable.ModalsPage.length) {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    } else {
+                        Variable.ModalsPage[Variable.ModalsPage.length - 1].el.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    }
                     Variable.Static.elArrowTop.style.display = "none"
                     clearTimeout(Variable.Static.elArrowTopLink);
                 }}

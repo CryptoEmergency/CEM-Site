@@ -51,6 +51,20 @@ const ModalPage = async function (ID, reload) {
             Element={($el) => { Variable.ModalsPage[ID].el = $el }}
             After={(el) => {
               el.addEventListener("scroll", function () {
+                if (Variable.ModalsPage[ID].el.scrollTop > 500 && !Variable.Static.elArrowTopLink) {
+                  Variable.Static.elArrowTop.style.display = "block"
+                  Variable.Static.elArrowTopLink = setTimeout(() => {
+                    Variable.Static.elArrowTop.style.display = "none"
+                    Variable.Static.elArrowTopLink = null
+                  }, 2500);
+                } else if (Variable.ModalsPage[ID].el.scrollTop > 500) {
+                  clearTimeout(Variable.Static.elArrowTopLink);
+                  Variable.Static.elArrowTopLink = setTimeout(() => {
+                    Variable.Static.elArrowTop.style.display = "none"
+                    Variable.Static.elArrowTopLink = null
+                  }, 2500);
+                }
+
                 let windowPosition = {
                   top: window.pageYOffset,
                   left: window.pageXOffset,
