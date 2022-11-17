@@ -18,46 +18,75 @@ const NotifyItem = function ({ data, type }) {
                 } else {
                     iconName = svg[item.notify.icon.split(".")[0]]
                 }
-                // console.log('=38e227=', item, index, iconName)
+                if (item.url) {
+                    return (
+                        <div class="notifications_list_item"
+                            data-href={`/${item.url}/show/${item.urlId}`}
+                            onclick={(e) => {
+                                fn.siteLinkModal(e, { title: Variable.lang.notify[item.notify.name], style: 'background: #1D2029;' })
+                            }}
+                        >
+
+
+                            <div>
+                                <img class="notifications_open_questions" src={iconName} />
+                                <p>{Variable.lang.notify[item.notify.name]}</p>
+                                <span>
+                                    {
+                                        item.type
+                                            ?
+                                            `${Variable.lang.notify[item.notify.description + "-" + item.type]}`
+                                            :
+                                            Variable.lang.notify[item.notify.description]
+                                    }
+                                </span>
+                            </div>
+
+
+                            {
+                                item.nickName
+                                    ?
+                                    <span class="notifyNickname">{Variable.lang.text.user}: <a
+                                        href={`/user/${item.nickName}`}
+                                        onclick={(e) => {
+                                            fn.siteLinkModal(e, { title: item.nickName, style: 'background: #1D2029;' })
+                                        }}
+                                    >{item.nickName}</a></span>
+                                    :
+                                    null
+                            }
+
+                            <span>{fn.getDateFormat(item.dateCreate, "now")}</span>
+                        </div>
+                    )
+                }
                 return (
                     <div class="notifications_list_item">
-                        {/* {{#if url}} */}
-                        {
-                            item.url
-                                ?
-                                <a onclick={fn.siteLink} href={`/${item.url}/show/${item.urlId}`}>
-                                    <img class="notifications_open_questions" src={iconName} />
-                                    <p>{Variable.lang.notify[item.notify.name]}</p>
-                                    <span>
-                                        {
-                                            item.type
-                                                ?
-                                                `${Variable.lang.notify[item.notify.description + "-" + item.type]}`
-                                                :
-                                                Variable.lang.notify[item.notify.description]
-                                        }
-                                    </span>
-                                </a>
-                                :
-                                <div>
-                                    <img class="notifications_open_questions" src={iconName} />
-                                    <p>{Variable.lang.notify[item.notify.name]}</p>
-                                    <span>
-                                        {
-                                            item.type
-                                                ?
-                                                `${Variable.lang.notify[item.notify.description + "-" + item.type]}`
-                                                :
-                                                Variable.lang.notify[item.notify.description]
-                                        }
-                                    </span>
-                                </div>
-                        }
+
+                        <div>
+                            <img class="notifications_open_questions" src={iconName} />
+                            <p>{Variable.lang.notify[item.notify.name]}</p>
+                            <span>
+                                {
+                                    item.type
+                                        ?
+                                        `${Variable.lang.notify[item.notify.description + "-" + item.type]}`
+                                        :
+                                        Variable.lang.notify[item.notify.description]
+                                }
+                            </span>
+                        </div>
+
 
                         {
                             item.nickName
                                 ?
-                                <span class="notifyNickname">{Variable.lang.text.user}: <a data-action="link" href={`/user/${item.nickName}`}>{item.nickName}</a></span>
+                                <span class="notifyNickname">{Variable.lang.text.user}: <a
+                                    href={`/user/${item.nickName}`}
+                                    onclick={(e) => {
+                                        fn.siteLinkModal(e, { title: item.nickName, style: 'background: #1D2029;' })
+                                    }}
+                                >{item.nickName}</a></span>
                                 :
                                 null
                         }

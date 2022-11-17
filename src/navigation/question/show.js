@@ -15,7 +15,7 @@ const start = function (data, ID) {
   init(
     async () => {
       fn.initData.question_show(Static)
-      if (!Static.openModals) {
+      if (!Static.openModals || !item.author) {
         item = await fn.restApi.getQuestions({ filter: { _id: item._id }, firstRecord: true })
       }
       if (item.text) {
