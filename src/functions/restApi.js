@@ -683,7 +683,7 @@ restApi.setNews.comment = async function ({ _id, text, mainId, quoteId, noAlert 
 
 
 restApi.setLottery = {}
-restApi.setLottery.join = async function ({ nickname, telegram, twitter, instagram, email }) {
+restApi.setLottery.join = async function ({ nickname, telegram, twitter, instagram, email, noAlert }) {
     let data = {
         value: {
             nickname,
@@ -694,6 +694,8 @@ restApi.setLottery.join = async function ({ nickname, telegram, twitter, instagr
         }
     }
     const response = await sendApi.create("setLottery", data);
+    console.log(data)
+    console.log('response', response)
     return checkSetAnswer(response, noAlert)
 }
 
