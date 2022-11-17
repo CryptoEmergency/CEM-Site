@@ -41,15 +41,17 @@ const start = function () {
         // htmlData.ticketNumber = res.ticketNumber
         // $('.lottery_data').html(await partialsHtml('ticket', htmlData))
         // let response = await api({ type: "set", action: "setLottery", short: true, data: { value: value }})
-        fn.restApi.setLottery.join({
-            ickname: this.elements.nickname.value,
+        let response = await fn.restApi.setLottery.join({
+            nickname: this.elements.nickname.value,
             telegram: this.elements.telegram.value,
             twitter: this.elements.twitter.value,
             instagram: this.elements.instagram.value,
             email: this.elements.email.value
         })
         console.log(response)
-        ticketNumber = response.list_records[0].ticketNumber
+        if(response.list_records.length != 0){
+            ticketNumber = response.list_records[0].ticketNumber
+        }
         initReload()
     }
 
