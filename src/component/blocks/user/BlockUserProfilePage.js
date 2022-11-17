@@ -7,7 +7,7 @@ import {
     sendApi,
     Helpers
 } from '@betarost/cemjs';
-
+import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, ItemsMenu } from '@component/element/index.js';
 
@@ -316,7 +316,17 @@ BlockUserProfilePage.subscribers = function (data) {
                 {
                     data.items.list_records.map((item, index) => {
                         return (
-                            <div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
+                            <div
+                                class="friend"
+                                onclick={(e) => {
+                                    if (Variable.myInfo && Variable.myInfo.nickname == item.nickname) {
+                                        fn.siteLink(e)
+                                    } else {
+                                        fn.siteLinkModal(e, { title: item.nickname, style: 'background: #1D2029;' })
+                                    }
+                                }
+                                }
+                                data-href={'/user/' + item.nickname}>
                                 <Avatar author={item} />
                                 <div class="friend_info">
                                     <p>{item.nickname}</p>
@@ -399,7 +409,17 @@ BlockUserProfilePage.friends = function (data) {
                 {
                     data.items.list_records[0].subscribed.map((item, index) => {
                         return (
-                            <div class="friend" onclick={Helpers.siteLink} data-href={'/user/' + item.nickname}>
+                            <div
+                                class="friend"
+                                onclick={(e) => {
+                                    if (Variable.myInfo && Variable.myInfo.nickname == item.nickname) {
+                                        fn.siteLink(e)
+                                    } else {
+                                        fn.siteLinkModal(e, { title: item.nickname, style: 'background: #1D2029;' })
+                                    }
+                                }
+                                }
+                                data-href={'/user/' + item.nickname}>
                                 <Avatar author={item} />
                                 <div class="friend_info">
                                     <p>{item.nickname}</p>

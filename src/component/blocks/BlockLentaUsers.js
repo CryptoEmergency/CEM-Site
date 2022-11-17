@@ -17,7 +17,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
         <div class="c-lentaitem__header">
           <Avatar author={item.author} parent={"lenta"} nickName={item.author.nickname} />
           {
-            item.media.length
+            item.media.length > 1
               ?
               <div class="c-lentaitem__counter">
                 <span Element={($el) => { Static.elNumberSwiper[index] = $el }}>1</span>
