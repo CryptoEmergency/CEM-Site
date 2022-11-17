@@ -5,7 +5,6 @@ const changeComplaint = function (Static,checkdata) {
   Static.modal[checkdata.name].check = checkdata.check
   if (checkdata.name == "other") {
     Static.modal.activeData = []
-    //если записали в массив текст
     if (checkdata.value )
     {
       Static.modal[checkdata.name].value = checkdata.value
@@ -37,11 +36,8 @@ const changeComplaint = function (Static,checkdata) {
   return;
 };
 
-
-
-
 const ModalComplainComment = function ( data , ID) {
- console.log(data)
+
   let [Static] = fn.GetParams({ data, ID })
   init(function(){ 
     Static.modal = {
@@ -69,6 +65,12 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
         <header class="c-modal__header">
           <div class="complain_modal">
             <h4>{Variable.lang.h.modal_complain}</h4>
+            <button
+                class="c-modal__close"
+                onclick={() => {
+                  fn.modals.close(ID)
+                }}
+              ></button>
             <div class="complain_error">{Variable.lang.error_div.complain}</div>
             <div class="container-checkbox">
               <div class="checkbox">

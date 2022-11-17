@@ -566,4 +566,8 @@ initData.generate = function (arrData) {
 }
 
 
+initData.rooms = function(Static){
+
+}
+
 export { initData };
