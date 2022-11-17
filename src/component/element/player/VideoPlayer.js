@@ -29,6 +29,7 @@ const VideoPlayer = function ({ Static, item, path }) {
     let elMedia = Static.elMedia[item._id]
     return (
         <div class="video_container">
+            <div class="video_sign"></div>
             <video
                 playsinline
                 poster={images["video_background"]}

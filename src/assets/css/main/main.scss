@@ -678,6 +678,15 @@ textarea {
     }
 }
 
+.video_sign {
+    position: absolute;
+    top: 7px;
+    left: 5px;
+    width: 34px;
+    height: 29px;
+    background: no-repeat url("../svg/sections/news_video_inactive.svg") center/100%;
+}
+
 .time {
     color: #E5E5E5;
     font-size: 11px;

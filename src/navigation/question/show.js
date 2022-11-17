@@ -205,7 +205,8 @@ const start = function (data, ID) {
                               {
                                 item.comments && item.comments.length
                                   ?
-                                  <div class="user_news_top"
+                                  <div
+                                    class="user_news_top"
                                     onclick={function () {
                                       if (Static.elButtonSubmit[index].dataset.show) {
                                         Static.elButtonSubmit[index].removeAttribute("data-show")
@@ -236,18 +237,36 @@ const start = function (data, ID) {
                               {
                                 item.comments && item.comments.length
                                   ?
-                                  <div class="comment_answer" hidden={true} Element={($el) => { Static.elShowAnswersComment[index] = $el; }}>
-                                    {item.comments.map(function (itemComments, i) {
-                                      return (
-                                        <Comment
-                                          Static={Static}
-                                          item={itemComments}
-                                          index={"A-" + String(index) + String(i)}
-                                          mainId={item._id}
-                                          action="Answers"
-                                        />
-                                      )
-                                    })}
+                                  <div style="padding-left: 0; padding-right: 0" hidden={true} Element={($el) => { Static.elShowAnswersComment[index] = $el; }}>
+                                    <div class="comment_answer">
+                                      {item.comments.map(function (itemComments, i) {
+                                        return (
+                                          <Comment
+                                            Static={Static}
+                                            item={itemComments}
+                                            index={"A-" + String(index) + String(i)}
+                                            mainId={item._id}
+                                            action="Answers"
+                                          />
+                                        )
+                                      })}
+                                    </div>
+                                    <div
+                                      class="c-comments__toggler"
+                                      onClick={function () {
+                                        if (Static.elButtonSubmit[index].dataset.show) {
+                                          Static.elButtonSubmit[index].removeAttribute("data-show")
+                                          Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                          Static.elShowAnswersComment[index].hidden = true
+                                        } else {
+                                          Static.elButtonSubmit[index].dataset.show = true
+                                          Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                          Static.elShowAnswersComment[index].hidden = false
+                                        }
+                                      }}
+                                    >
+                                      <img src={svg.scroll_top} />
+                                    </div>
                                   </div>
                                   :
                                   null
