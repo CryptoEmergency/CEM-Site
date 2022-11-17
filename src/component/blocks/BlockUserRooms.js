@@ -9,16 +9,55 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound } from '@component/element/index.js';
 
-const BlockUserRooms = function ({ Static }) {
+const BlockUserRooms = function (Static) {
 
-console.log(Static)
+
+//настройки языка
+Static.UserLang = Variable.myInfo.mainLanguage
+//Зарегистрирован или нет
+Static.Auth = Variable.auth
+
+console.log()
+
+
+
   initOne(async()=>{
-//системные комнаты
+
 
 })
 
 return (
-<div class="c-questions__list questions-blocks">
+<div class="c-questions__list questions-blocks c-chats__wrapper">
+  <aside class="c-chats__aside">
+    <div class="c-chats__list">
+      <ul class="c-chats__togglers">
+        <li class="c-chats__toggler c-toggler c-toggler--active">
+          <a href="#" class="c-toggler__link" data-action="viewChat" title="Одна группа">
+            <img src="/assets/image/nft/creator-1.png" width="46" height="46" class="c-toggler__img" />
+              <div class="c-toggler__delete" title="Удалить">
+                <img src="/assets/icon/close_group.svg" alt="" width="" height="" class="c-toggler__close" />
+                  </div>
+                  </a>
+                  </li>
+               </ul>
+              </div>
+              <div class="c-chats__actions" onclick={()=>{
+                if(Static.Auth)
+                {
+                  fn.modals.ModalCreateRoom()
+                }
+                else
+                {
+                  fn.modals.ModalNeedAuth()
+                }
+                
+              }}>
+              <div data-needauth="true" data-action="addNewChat" class="c-action">
+              <img src="/assets/icon/add_chats.svg" class="c-action__icon" width="30" height="30" alt="" title="" />
+              <span class="c-action__title">Создать комнату</span>
+              </div>
+              </div>
+              </aside>
        <div class="c-questions__item c-question question-block questionLoad">
                   <div class="c-question__header">
                     <div class="c-question__avatar">
@@ -29,7 +68,9 @@ return (
                         class="c-question__nickname"
                         style="display: block; left: 5px;bottom:5px"
                         //href={/*`/user/${question.author.nickname}`*/}
-                        onclick={(e) => {}}>
+                        onclick={(e) => {
+                          
+                        }}>
                       {/*question.author.nickname*/}
                       </a>
                       <div class="c-question__info">
@@ -98,11 +139,8 @@ return (
                     </a>
                   </div>
         </div>  
-        <ButtonShowMore Static={Static} action="getQuestions" />
+        <ButtonShowMore Static={Static} action="getRooms" />
   </div>
-
-  
- 
 
 )
 }
