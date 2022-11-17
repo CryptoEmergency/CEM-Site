@@ -31,13 +31,21 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
 
         cropper = new Cropper(el, {
             aspectRatio: aspectActive,
-            viewMode: 2,
-            cropBoxResizable: true,
+            // viewMode: 2,
+            // cropBoxResizable: true,
             autoCropArea: 1,
             strict: false,
             guides: false,
             highlight: true,
-            dragCrop: false,
+            // dragCrop: false,
+
+          dragMode: 'move',
+          restore: false,
+          cropBoxMovable: false,
+          cropBoxResizable: false,
+          toggleDragModeOnDblclick: false,
+    
+
             crop: function (e) {
                 var data = e.detail;
             }
