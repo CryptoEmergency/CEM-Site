@@ -14,6 +14,7 @@ const BlockUserRooms = function ({ Static }) {
 console.log(Static)
   initOne(async()=>{
 //системные комнаты
+
 })
 
 return (
