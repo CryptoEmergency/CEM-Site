@@ -98,14 +98,14 @@ const BottomMenu = function () {
             </div> */}
             <div
                 id="toTop"
-                Element={($el) => { Variable.elArrowTop = $el }}
+                Element={($el) => { Variable.Static.elArrowTop = $el }}
                 onclick={() => {
                     window.scrollTo({
                         top: 0,
                         behavior: "smooth",
                     });
-                    Variable.elArrowTop.style.display = "none"
-                    clearTimeout(Variable.elArrowTopLink);
+                    Variable.Static.elArrowTop.style.display = "none"
+                    clearTimeout(Variable.Static.elArrowTopLink);
                 }}
             >
                 <img src={svg.arrowTop} />
