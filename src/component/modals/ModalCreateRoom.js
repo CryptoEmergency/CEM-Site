@@ -7,7 +7,7 @@ const ModalCreateRoom = function ( data , ID) {
 
   let [Static] = fn.GetParams({ data, ID })
 
-
+console.log(Variable.myInfo.country)
 
   //инпут название
     Static.label ={
@@ -19,17 +19,19 @@ const ModalCreateRoom = function ( data , ID) {
     }
      //инпут язык
      Static.Lang ={
+        value: Variable.myInfo.country.code,
         label:"Выбирете язык",
         onclick:()=>{
             fn.modals.ModalChangeLanguage({
                 onclick: async (langCode, langName, langOrig) => {
            
-                    Static.Lang.lang= langCode
+                    Static.Lang.value= langCode
+  
                 }
-              })
+              },ID)
         },
-        reedonly:true,
-        lang: false
+        readonly:"readonly",
+
         }
     //инпут страна
         Static.Country={
