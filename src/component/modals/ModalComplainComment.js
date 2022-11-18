@@ -76,7 +76,7 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
             <div class="container-checkbox">
               <div class="checkbox">
                 <input
-                  data-complain="abusive"
+     
                   class="checkbox__input complain_checkbox"
                   
                   onChange={function(e){
@@ -95,7 +95,7 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
             <div class="container-checkbox">
               <div class="checkbox">
                 <input
-                  data-complain="poison"
+         
                   class="checkbox__input complain_checkbox"
                   onChange={function() { 
                     changeComplaint(Static,{ "name": "poison", "check": this.checked }) 
@@ -114,7 +114,7 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
             <div class="container-checkbox">
               <div class="checkbox">
                 <input
-                  data-complain="obscene"
+             
                   class="checkbox__input complain_checkbox"
                   onChange={function() { 
                     changeComplaint(Static,{ "name": "obscene", "check": this.checked})   
@@ -132,7 +132,7 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
             <div class="container-checkbox">
               <div class="checkbox">
                 <input
-                  data-complain="malicious"
+             
                   class="checkbox__input complain_checkbox"
                   onChange={function(){ changeComplaint(Static,{ "name": "malicious", "check": this.checked })}
                 }
@@ -149,7 +149,7 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
             <div class="container-checkbox">
               <div class="checkbox">
                 <input
-                  data-complain="other"
+
                   class="checkbox__input complain_checkbox"
                   onChange={function (e) {
                     changeComplaint(Static,{ "name": "other", "check": this.checked, "value":Static.modal.other.value})}}
