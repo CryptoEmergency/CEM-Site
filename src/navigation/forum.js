@@ -484,6 +484,18 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Современная ИТ-компания, специализирующаяся на создании инновационных решений. В настоящий момент продвигает собственную платформу для создания виртуальных миров - voltep.online</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cryptometa.media" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_15']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Это закрытый клуб венчурных инвесторов в веб3 стартапы. С нами можно инвестировать на ранних стадиях в отборные проекты, которые мы отсеяли от множества других.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://t.me/unionclub_invest" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_16']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Клуб инвесторов «UnionClub» - это сообщество экологичных инвесторов, которые всегда готовы помочь друг другу в вопросе инвестиций.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -657,6 +669,39 @@ const start = function (data, ID) {
                                             <p>CEO / Founder проекта voltep.online</p>
                                         </div>
                                     </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_19']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Александр Изюрьев</p>
+                                            <p>Сооснователь клуба инвесторов «UnionClub». Криптоинвестор. Игропрактик.</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_20']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Козлов Денис</p>
+                                            <p>Трейдер и эксперт по личным финансам. Сооснователь Клуба инвесторов «UnionClub». Криптоинвестор.</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
@@ -810,6 +855,22 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_16"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cryptometa.media"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_17"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://t.me/unionclub_invest"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_18"]} />
                                     </a>
                                 </div>
                             </div>
