@@ -478,6 +478,12 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Настольная игра "КРИПТА. Начало" - битва криптотрейдеров, стань лучшим за игровым столом! Два в одном - азартная настолка и обучающий тренажёр, поможет разобраться в мире криптовалют и трейдинга.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://voltep.online" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_14']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Современная ИТ-компания, специализирующаяся на создании инновационных решений. В настоящий момент продвигает собственную платформу для создания виртуальных миров - voltep.online</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -642,9 +648,13 @@ const start = function (data, ID) {
                                             <p>Региональный директор Onestopmining</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_18']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Иван Теплов</p>
+                                            <p>CEO / Founder проекта voltep.online</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
@@ -792,6 +802,14 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_15"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://voltep.online"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_16"]} />
                                     </a>
                                 </div>
                             </div>
