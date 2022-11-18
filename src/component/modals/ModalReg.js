@@ -293,7 +293,41 @@ const ModalReg = function (data, ID) {
 
                                 <div class="container-checkbox">
 
-                                    <CheckBox
+                                    <div class="checkbox">
+                                        <div class="error-div">
+                                            {
+                                                () => {
+                                                    if (Static.agreement.error) {
+                                                        return (
+                                                            <div class="error-div-variant">{error}</div>
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                        <div>
+                                            <input
+                                                class="checkbox__input"
+                                                type="checkbox"
+                                                id="fast_agree"
+                                                required="required"
+                                                checked={Static.agreement.value}
+                                                onchange={() => {
+                                                    Static.agreement.value = !Static.agreement.value
+                                                    Static.agreement.valid = Static.agreement.value
+                                                    fn.checkValid(Static, [wayReg, "pass", "agreement"])
+                                                }}
+                                            />
+                                            <label class="checkbox__label" for="fast_agree">
+                                                {Variable.lang.text.agree}
+                                                <span class="cont_a-link">
+                                                    <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.userTerms, items: fn.itemsMenu.onlyPage({url: '/terms-of-service/'}) }) }} class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    {/* <CheckBox
                                         Static={Static.agreement}
                                         id="fast_agree"
                                         label={
@@ -307,7 +341,7 @@ const ModalReg = function (data, ID) {
                                         afterValid={() => {
                                             fn.checkValid(Static, [wayReg, "pass", "agreement"])
                                         }}
-                                    />
+                                    /> */}
                                 </div>
                                 <footer class="c-modal__footer">
                                     <button

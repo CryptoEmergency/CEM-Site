@@ -15,7 +15,7 @@ const start = function (data, ID) {
   init(
     async () => {
       fn.initData.question_show(Static)
-      if (!Static.openModals) {
+      if (!Static.openModals || !item.author) {
         item = await fn.restApi.getQuestions({ filter: { _id: item._id }, firstRecord: true })
       }
       if (item.text) {
@@ -251,7 +251,7 @@ const start = function (data, ID) {
                                         )
                                       })}
                                     </div>
-                                    <div
+                                    {/* <div
                                       class="c-comments__toggler"
                                       onClick={function () {
                                         if (Static.elButtonSubmit[index].dataset.show) {
@@ -266,7 +266,7 @@ const start = function (data, ID) {
                                       }}
                                     >
                                       <img src={svg.scroll_top} />
-                                    </div>
+                                    </div> */}
                                   </div>
                                   :
                                   null

@@ -564,7 +564,7 @@ restApi.setPost.create = async function ({ text, forFriends, languages, media, n
             languages: languages,
             media: media
         },
-      };
+    };
 
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
@@ -627,6 +627,19 @@ restApi.setPost.comment = async function ({ _id, text, mainId, quoteId, noAlert 
     //{ _id: mainId, value: { comments: { evaluation: type, _id: item._id } } }
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
+}
+
+restApi.setPost.complain = async function ({ _id, complain }) {
+    let data = {
+        _id,
+        value: {
+            complain
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setPost", data);
+    console.log(response)
+    return checkSetAnswer(response)
 }
 
 // Запросы  на новости
@@ -746,6 +759,19 @@ restApi.setUsers.subscribe = async function ({ _id, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setUsers.complain = async function ({ _id, complain }) {
+    let data = {
+        _id,
+        value: {
+            complain
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setUsers", data);
+    console.log(response)
+    return checkSetAnswer(response)
+}
+
 restApi.setNews.view = async function ({ _id, noAlert = true }) {
     let data = {
         value: { "statistic.view": true },
@@ -773,19 +799,19 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
     let data = {
         _id,
         value: {
-        complain
+            complain
         }
     }
     console.log(data)
-   // const response = await sendApi.create("setQuestion", data);
+    const response = await sendApi.create("setQuestion", data);
     console.log(response)
-  //  return checkSetAnswer(response)
+    return checkSetAnswer(response)
 }
 
 
 restApi.setUserRoom = {}
 
-restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country, system=false }) {
+restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country, system = false }) {
     let data = {
         value: {
             settingsroom: {
@@ -802,8 +828,8 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
         }
     }
     console.log(data)
-  //  const response = await sendApi.create("setUserRoom", data);
- //   return checkSetAnswer(response)
+    //  const response = await sendApi.create("setUserRoom", data);
+    //   return checkSetAnswer(response)
 }
 
 export { restApi };

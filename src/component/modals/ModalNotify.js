@@ -10,6 +10,7 @@ import {
 } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import { NotifyItem } from '@component/element/NotifyItem.js';
+import { fn } from "@src/functions/index.js";
 
 let notify, currentNotify;
 
@@ -80,7 +81,8 @@ const ModalNotify = async function (data, ID) {
 							class="notify_close"
 							src={svg.close}
 							onclick={() => {
-								Variable.DelModals("ModalNotify")
+								fn.modals.close(ID)
+								// Variable.DelModals("ModalNotify")
 							}}
 						/>
 						<div class="notifications_title">

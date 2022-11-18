@@ -21,7 +21,7 @@ const mainModal = async function () {
         },
 
         async function (reload) {
-
+            console.log('=50716e= mainModal', reload)
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
                 if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
@@ -30,52 +30,49 @@ const mainModal = async function () {
                 return <div></div>
             }
             document.getElementById('backdrop').classList.add("c-backdrop--show");
-            let ID = "Modal-" + (Variable.Modals.length - 1)
-            let InitList = getInitList()
-            if (!reload && InitList[ID].firstStart) {
-                await InitList[ID].firstStart(reload)
-            }
-            let replase = !reload
-            if (Variable.Modals.length > 1) {
-                replase = true
-            }
 
-            // let arrReturn = [
-            //     <div replace={replase}>
-            //         {async () => {
-            //             return await InitList[ID].function(reload)
-            //         }}
-            //     </div>
-            // ]
-            let arrReturn = Variable.Modals.map((item, index) => {
-                let ID = "Modal-" + index
-                let rel = reload
-                if (index != Variable.Modals.length - 1) {
-                    rel = false
+            if (Variable.Modals.length == 1) {
+                let ID = "Modal-" + (Variable.Modals.length - 1)
+                if (!reload && getInitList()[ID].firstStart) {
+                    await getInitList()[ID].firstStart(reload)
                 }
-                return (
 
+                return (
                     <div>
                         {async () => {
-                            return await InitList[ID].function(rel)
+                            return await getInitList()[ID].function(reload)
                         }}
                     </div>
                 )
-            })
-            return (
-                <div>
-                    {arrReturn}
-                </div>
+            } else {
+                const arrReturn = Variable.Modals.map(async (item, index) => {
+                    let ID = "Modal-" + index
+                    let rel = reload
+                    if (!reload && getInitList()[ID].firstStart && index != Variable.Modals.length - 1) {
+                        await getInitList()[ID].firstStart(reload)
+                    }
+                    if (index != Variable.Modals.length - 1) {
+                        rel = false
+                    }
+                    return (
+                        <div>
+                            {async () => {
+                                return await getInitList()[ID].function(rel)
+                            }}
+                        </div>
+                    )
+                })
+                console.log('=f76ca7= arrReturn', arrReturn)
+                return (
+                    <div>
+                        {arrReturn}
+                    </div>
 
-            )
-            return (
-                <div replace={replase}>
-                    {async () => {
-                        return await getInitList()[ID].function(reload)
-                    }}
-                </div>
-            )
+                )
 
+
+
+            }
             return (
                 <div>ffff</div>
             )

@@ -74,7 +74,7 @@
         "pre_view": "Preview",
         "allPartners": "All partners",
         "resetCrop": "Cancel",
-        "reset": "Cancellation"
+        "reset": "Cancel"
     },
     "h": {
         "success": "Successfully!",
@@ -346,7 +346,7 @@
         "affiliateConditionDescription4": "Share your partner link on platforms and earn rewards for new users",
         "socialLink": "Post a link on social media, share with friends and earn CEM tokens from each registered user. Also, for the most active participants, we have to prepare an expanded monetization program for content authors.",
         "referal": "Referral link",
-        "copy": "To copy",
+        "copy": "Copy",
         "pageDeleted": "The user's page has been deleted, redirecting to the main page",
         "transactionRegistration": "For registration",
         "transactionReferralRegistration": "For the referral",
@@ -506,7 +506,7 @@
         "selectBest": "Choose the best",
         "byAnswers": "As per answers",
         "other": "Other",
-        "share": "To share",
+        "share": "Share",
         "complainPost": "Complain about the post",
         "complainQuestion": "Report a question",
         "complainComment": "Report a comment",

@@ -110,11 +110,15 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg.absolutely_new_wallet} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
                                                 </a>
-                                                <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.affiliate , items: fn.itemsMenu.onlyPage({url: '/affiliate/'}) }) }}  class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                                <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.affiliate, items: fn.itemsMenu.onlyPage({ url: '/affiliate/' }) }) }} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
                                                     <img src={svg["profile_icon-3"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
                                                 </a>
-                                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/settings/">
+                                                <a
+                                                    // onclick={Helpers.siteLink} 
+                                                    onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
+                                                    class="user_icon_mobile_visible user_icon"
+                                                    href="/user/settings/">
                                                     <img src={svg["settings_icon"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
                                                 </a>
@@ -196,32 +200,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
                                         Helpers.siteLinkModal(e, {
-                                            title: Variable.lang.a.news, items:
-                                                [
-                                                    {
-                                                        text: Variable.lang.select.share,
-                                                        type: "share",
-                                                        onclick: async () => {
-                                                            try {
-                                                                if (navigator.share) {
-                                                                    await navigator.share({
-                                                                        url: window.location.origin + "/news/",
-                                                                    });
-                                                                }
-                                                            } catch (err) {
-                                                                console.error("Share", err)
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        text: Variable.lang.p.copy + " URL",
-                                                        type: "copyurl",
-                                                        onclick: async () => {
-                                                            navigator.clipboard.writeText(window.location.origin + "/news/");
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-                                                        }
-                                                    }
-                                                ]
+                                            title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({url: '/news/'})
                                         })
                                     }}
                                     class="user_icon_mobile_visible user_icon"
@@ -234,7 +213,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
                                         fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.blog, items: fn.itemsMenu.onlyPage({url: '/blog/'})
+                                            title: Variable.lang.a.blog, items: fn.itemsMenu.onlyPage({ url: '/blog/' })
                                         })
                                     }}
                                     class="user_icon_mobile_visible user_icon"

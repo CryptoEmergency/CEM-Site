@@ -233,7 +233,11 @@ fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
   }
   if (data) {
     this.Static[ID].openModals = true
-    if (data.item) { item = data.item }
+    if (data.item) {
+      item = data.item
+    } else {
+      item._id = Variable.Static.DataUrl.params
+    }
   }
 
 
@@ -318,15 +322,21 @@ fn.checkValid = function (Static, Array) {
 }
 
 fn.siteLinkModal = async function (e, data) {
-  e.preventDefault();
-  e.stopPropagation();
-  if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
-    console.error("Not have href")
-    return
+  let link
+  if (typeof e == "string") {
+    link = e
+  } else {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
+      console.error("Not have href")
+      return
+    }
+    link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
   }
-  let link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
   history.pushState(null, null, link);
   Variable.Modals = []
+  // let dataUrl = parsingUrl(link)
   let dataUrl = parsingUrl(link)
   await initPage(dataUrl, data);
   return

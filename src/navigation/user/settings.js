@@ -29,7 +29,7 @@ const getUserBlackList = async (count = 0) => {
     return response
 }
 
-const start = function () {
+const start = function (data, ID) {
     let settingsPage
 
 
@@ -144,7 +144,8 @@ const start = function () {
                     </div>
                 </div>
             )
-        })
+        }, ID
+    )
 };
 
 export default start;

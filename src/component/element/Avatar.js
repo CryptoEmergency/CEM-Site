@@ -208,12 +208,13 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                       {
                         text: Variable.lang.text.settings,
                         type: "edit",
-                        onclick: function (e) {
-                          // e.currentTarget = {
-                          //   href: "/user/settings/"
-                          // }
-                          fn.siteLink("/user/settings/")
-                        }
+                        onclick: (e) => { fn.siteLinkModal("/user/settings/", { title: Variable.lang.text.settings }) }
+                        // onclick: function (e) {
+                        //   // e.currentTarget = {
+                        //   //   href: "/user/settings/"
+                        //   // }
+                        //   fn.siteLink("/user/settings/")
+                        // }
                       }
                     ]
                     e.stopPropagation();
@@ -246,7 +247,10 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                           {/* <p class="user_custimize_settings_item">{Variable.lang.text.changeFrame}</p>
                           <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p> */}
                           <p class="user_custimize_settings_item">
-                            <a onclick={fn.siteLink} href="/user/settings/">{Variable.lang.text.settings}</a>
+                            <a
+                              // onclick={fn.siteLink}
+                              onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
+                              href="/user/settings/">{Variable.lang.text.settings}</a>
                           </p>
                           <input
                             style="display: none;"

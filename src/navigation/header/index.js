@@ -100,16 +100,16 @@ const mainHeader = async function () {
                                 </a>
                                 <a class="c-menu__link" href="/contacts/" onclick={(e) => {
                                     fn.siteLinkModal(e, {
-                                        title: Variable.lang.a.contacts, items: fn.itemsMenu.onlyPage({url: '/contacts/'})
+                                        title: Variable.lang.a.contacts, items: fn.itemsMenu.onlyPage({ url: '/contacts/' })
                                     })
                                 }}>{Variable.lang.a.contacts}</a>
                                 <a class="c-menu__link" href="/about/" onclick={(e) => {
                                     fn.siteLinkModal(e, {
-                                        title: Variable.lang.a.about, items: fn.itemsMenu.onlyPage({url: '/about/'})
+                                        title: Variable.lang.a.about, items: fn.itemsMenu.onlyPage({ url: '/about/' })
                                     })
                                 }}>{Variable.lang.a.about}</a>
                                 <a class="c-menu__link" href="/blog/" onclick={(e) => {
-                                    fn.siteLinkModal(e, {title: Variable.lang.h.blog, items: fn.itemsMenu.onlyPage({url: '/blog/'})})
+                                    fn.siteLinkModal(e, { title: Variable.lang.h.blog, items: fn.itemsMenu.onlyPage({ url: '/blog/' }) })
                                 }}>{Variable.lang.a.blog}</a>
                             </nav>
                         </div>
@@ -117,7 +117,7 @@ const mainHeader = async function () {
                 )
             } else {
                 return (
-                    <></>
+                    <div></div>
                 )
             }
         }, "mainHeader")

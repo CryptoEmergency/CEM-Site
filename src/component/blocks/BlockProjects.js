@@ -114,6 +114,7 @@ const BlockProjects = async function () {
                     "title": Variable.lang.a.news,
                     "icon": "preview_line_news",
                     "link": "news",
+                    "items": fn.itemsMenu.onlyPage({url: '/news/'}),
                     modal: true
                 },
                 {
@@ -151,6 +152,7 @@ const BlockProjects = async function () {
                     "title": Variable.lang.a.career,
                     "icon": "careers_icon",
                     "link": "career-whith-us",
+                    "items": fn.itemsMenu.onlyPage({url: '/career-whith-us/'}),
                     modal: true
                 }
             ];
