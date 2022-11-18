@@ -129,7 +129,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                         Static.elFilters.dataset.active = true
                                         Static.elFilters.style = "";
                                         let h = Static.elFilters.offsetHeight;
-                                        Static.elFilters.style = `height: ${h}px`
+                                        Static.elFilters.style = `height: ${h}px; margin-bottom: 20px;`
                                     }
                                 }}>
                                 <img src={svg.filter} />

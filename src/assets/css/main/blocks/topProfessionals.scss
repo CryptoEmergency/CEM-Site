@@ -10,7 +10,7 @@
     }
 
     &_block {
-        margin-top: 20px;
+        // margin-top: 20px;
         display: grid;
         grid-template-columns: calc(33.3% - 8px) calc(33.3% - 8px) calc(33.3% - 8px);
         grid-gap: 12px;
@@ -217,21 +217,25 @@
             transform: translateX(-50%);
             top: 50%;
 
-            .micro_user_avatar {
+            .micro_user_avatar,
+            .c-avataricon--micro {
                 height: 100px;
                 width: 100px;
             }
 
-            .user_avatar_level {
+            .user_avatar_level,
+            .c-avataricon__level {
                 height: 35px !important;
             }
 
-            .avatar_user_online {
+            .avatar_user_online,
+            .c-avataricon__status--online {
                 right: 6%;
                 bottom: 24%;
             }
 
-            .avatar_user_offline {
+            .avatar_user_offline,
+            .c-avataricon__status--offline {
                 right: 6%;
                 bottom: 24%;
             }
@@ -545,7 +549,8 @@
                 }
             }
 
-            .micro_user_avatar {
+            .micro_user_avatar,
+            .c-avataricon--micro {
                 height: 80px;
                 width: 80px;
             }
@@ -567,15 +572,18 @@
     .new_professional {
         &_card {
             &_avatar {
-                .user_avatar_level {
+                .user_avatar_level,
+                .c-avataricon__level {
                     height: 25px !important;
                 }
 
-                .user_avatar_level span {
+                .user_avatar_level span,
+                .c-avataricon__level span {
                     font-size: 8px !important;
                 }
 
-                .avatar_user_online {
+                .avatar_user_online,
+                .c-avataricon__status--online {
                     right: 8%;
                     bottom: 25%;
                     border: 2px solid #fff;
@@ -583,7 +591,8 @@
                     height: 11px;
                 }
 
-                .avatar_user_offline {
+                .avatar_user_offline,
+                .c-avataricon__status--offline {
                     right: 8%;
                     bottom: 25%;
                     border: 2px solid #fff;
@@ -671,7 +680,8 @@
                 }
             }
 
-            .micro_user_avatar {
+            .micro_user_avatar,
+            .c-avataricon--micro {
                 height: 66px;
                 width: 66px;
             }
