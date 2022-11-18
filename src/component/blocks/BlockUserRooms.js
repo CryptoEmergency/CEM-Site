@@ -9,7 +9,7 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound } from '@component/element/index.js';
 
-const BlockUserRooms = function (Static) {
+const BlockUserRooms = async function (Static) {
 
 
 //настройки языка
@@ -17,12 +17,13 @@ Static.UserLang = Variable.myInfo.mainLanguage
 //Зарегистрирован или нет
 Static.Auth = Variable.auth
 
-console.log()
 
 
 
-  initOne(async()=>{
 
+  await initOne(async()=>{
+    Static.testrooms = await fn.restApi.getUserRoom({filter:{system:true},limit:10})
+    console.log(Static.testrooms)
 
 })
 
@@ -58,7 +59,9 @@ return (
               </div>
               </div>
               </aside>
-       <div class="c-questions__item c-question question-block questionLoad">
+              { Static.testrooms.list_records.map(function (rooms, i) {
+                return(
+                  <div class="c-questions__item c-question question-block questionLoad">
                   <div class="c-question__header">
                     <div class="c-question__avatar">
  
@@ -139,6 +142,9 @@ return (
                     </a>
                   </div>
         </div>  
+              )})
+              }
+ 
         <ButtonShowMore Static={Static} action="getRooms" />
   </div>
 

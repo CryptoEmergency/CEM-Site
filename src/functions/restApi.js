@@ -801,9 +801,9 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
             system: system
         }
     }
-    console.log(data)
-    //  const response = await sendApi.create("setUserRoom", data);
-    //   return checkSetAnswer(response)
+ 
+    const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
 }
 
 export { restApi };

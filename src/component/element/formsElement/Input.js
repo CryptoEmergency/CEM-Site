@@ -71,9 +71,16 @@ const textElem = function (Static, className, callback) {
             value={value}
             class={className}
             oninput={function () {
+                
+
                 checkInput(Static, this)
                 if (callback) {
+                
                     callback()
+                }
+                if (Static.callback) {
+                
+                    Static.callback(this)
                 }
             }}
             onclick={() => {
@@ -86,6 +93,7 @@ const textElem = function (Static, className, callback) {
 }
 
 const checkInput = function (Static, target) {
+    Static.value = target.value.trim()
     if (Static.timer) {
         clearTimeout(Static.timer);
     }
