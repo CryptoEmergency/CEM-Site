@@ -71,7 +71,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
     Static.apiFilterSort = makeFilterSort(Static)
     await fn.restApi.getQuestions({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, sort: Static.apiFilterSort, limit })
   });
-
+//console.log(Variable[Static.nameRecords])
   return (
     <div class="c-questions">
       <div class="c-questions__header">
