@@ -3,6 +3,7 @@
 
 	&_block {
 		width: 100%;
+		max-width: 1240px;
 		height: 100vh;
 		margin-left: auto;
 		margin-right: auto;
@@ -29,6 +30,26 @@
 		width: 35%;
 		padding-bottom: 63px;
 		margin-bottom: -63px;
+
+		&--inactive {
+
+			@media(max-width: 1199px) {
+				display: none !important;
+			}
+
+			&~.messages_goback {
+				@media(max-width: 1199px) {
+					display: block;
+					position: absolute;
+					height: 28px;
+					filter: invert(70%) sepia(6%) saturate(518%) hue-rotate(208deg) brightness(94%) contrast(88%);
+					top: 30px;
+					left: 15px;
+					cursor: pointer;
+				}
+
+			}
+		}
 	}
 
 	&_list {
@@ -211,8 +232,10 @@
 		.c-comments {
 			&__field {
 				position: relative;
+				width: 100%;
 
 				textarea {
+					width: calc(100% - 56px);
 					min-height: 41px;
 					padding-top: 7px;
 					padding-bottom: 7px;
@@ -230,7 +253,7 @@
 			}
 		}
 
-		&> section {
+		&>section {
 			display: flex;
 			flex-direction: column;
 			justify-content: stretch;
@@ -278,6 +301,10 @@
 		&::-webkit-scrollbar-track {
 			background-color: transparent;
 		}
+	}
+
+	&_goback {
+		display: none;
 	}
 }
 
@@ -711,10 +738,6 @@
 	}
 }
 
-#chatGoBack {
-	display: none;
-}
-
 button[data-type='voiceline'][data-page_type="chat"] {
 	background-image: url(../svg/chat_micro.svg);
 	background-size: 45%;
@@ -757,22 +780,7 @@ button[data-type=voiceline][data-page_type=chat] {
 	transform: none;
 }
 
-#chatGoBack {
-	top: 30px;
-	left: 15px;
-}
-
 @media(max-width: 1199px) {
-	#chatGoBack {
-		position: absolute;
-		height: 28px;
-		filter: invert(70%) sepia(6%) saturate(518%) hue-rotate(208deg) brightness(94%) contrast(88%);
-		// top: 36px;
-		// left: 25px;
-		top: 30px;
-		left: 15px;
-	}
-
 	.companion {
 		justify-content: center;
 	}
@@ -926,7 +934,7 @@ button[data-type=voiceline][data-page_type=chat] {
 	.messages {
 
 		&_dialog {
-			padding: 0;
+			// padding: 0;
 			padding-right: 15px;
 			padding-left: 15px;
 			padding-top: 10px;

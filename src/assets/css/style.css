@@ -12278,14 +12278,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
   #crypto_exchange .btn-news-preview span {
     padding: 0 5px;
   }
-
-  .messages_dialog {
-    padding: 0;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-top: 10px;
-  }
-
 }
 
 @media(max-width: 375px) {

@@ -124,10 +124,15 @@ const start = function (data, ID) {
             // console.log('=633dca=', messageUser, activeUser)
             return (
                 <div class="messages_block c-main__body--noheader">
-                    <div class="messages_left_part">
+                    <div
+                        class={[
+                            "messages_left_part",
+                            activeChat ? "messages_left_part--inactive" : null
+                        ]}
+                    >
                         <div class="chats_search">
                         </div>
-                        <div class="messages_list" data-action="messagesLinkPrevent" data-nofollow="true">
+                        <div class="messages_list">
 
                             {() => {
                                 if (chatsList && chatsList.list_records && chatsList.list_records.length) {
@@ -206,7 +211,7 @@ const start = function (data, ID) {
                             }}
                         </div>
                     </div>
-                    <div class="messages_dialog">
+                    <div class="messages_dialog" style={ activeChat ? "height: 100%; overflow-y: hidden; display: block;" : "height: 100%; overflow-y: hidden;" }>
                         {() => {
                             if (activeUser) {
                                 return (
@@ -360,6 +365,11 @@ const start = function (data, ID) {
                             }
                         }}
                     </div>
+                    <img
+                        class="messages_goback"
+                        src={svg.chats_back}
+                        onClick={ () => { activeChat = null; initReload();} }
+                    />
                 </div>
             )
         }, ID

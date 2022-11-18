@@ -200,32 +200,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
                                         Helpers.siteLinkModal(e, {
-                                            title: Variable.lang.a.news, items:
-                                                [
-                                                    {
-                                                        text: Variable.lang.select.share,
-                                                        type: "share",
-                                                        onclick: async () => {
-                                                            try {
-                                                                if (navigator.share) {
-                                                                    await navigator.share({
-                                                                        url: window.location.origin + "/news/",
-                                                                    });
-                                                                }
-                                                            } catch (err) {
-                                                                console.error("Share", err)
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        text: Variable.lang.p.copy + " URL",
-                                                        type: "copyurl",
-                                                        onclick: async () => {
-                                                            navigator.clipboard.writeText(window.location.origin + "/news/");
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-                                                        }
-                                                    }
-                                                ]
+                                            title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({url: '/news/'})
                                         })
                                     }}
                                     class="user_icon_mobile_visible user_icon"

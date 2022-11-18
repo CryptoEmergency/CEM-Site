@@ -151,7 +151,7 @@ const start = function (data, ID) {
                                 <div class="news_block_container">
                                     <div class="news_block">
                                         <div class="home_page_news">
-                                            <a class="crypto_news_link" href="/news/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news }) }}>Crypto News</a>
+                                            <a class="crypto_news_link" href="/news/" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({url: '/news/'}) }) }}>Crypto News</a>
                                             <div class="gradient_line"></div>
                                         </div>
                                         <div class="main_page_news_block">
@@ -161,7 +161,7 @@ const start = function (data, ID) {
                                                         return (
                                                             <a
                                                                 class="blog_news_item"
-                                                                onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news, item: item }) }}
+                                                                onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, item: item, items: fn.itemsMenu.onlyPage({url: `/news/show/${item._id}`}) }) }}
                                                                 href={`/news/show/${item._id}`}
                                                             >
                                                                 <img

@@ -31,13 +31,43 @@ const mainModal = async function () {
             }
             document.getElementById('backdrop').classList.add("c-backdrop--show");
             let ID = "Modal-" + (Variable.Modals.length - 1)
-            if (!reload && getInitList()[ID].firstStart) {
-                await getInitList()[ID].firstStart(reload)
+            let InitList = getInitList()
+            if (!reload && InitList[ID].firstStart) {
+                await InitList[ID].firstStart(reload)
             }
             let replase = !reload
             if (Variable.Modals.length > 1) {
                 replase = true
             }
+
+            // let arrReturn = [
+            //     <div replace={replase}>
+            //         {async () => {
+            //             return await InitList[ID].function(reload)
+            //         }}
+            //     </div>
+            // ]
+            let arrReturn = Variable.Modals.map((item, index) => {
+                let ID = "Modal-" + index
+                let rel = reload
+                if (index != Variable.Modals.length - 1) {
+                    rel = false
+                }
+                return (
+
+                    <div>
+                        {async () => {
+                            return await InitList[ID].function(rel)
+                        }}
+                    </div>
+                )
+            })
+            return (
+                <div>
+                    {arrReturn}
+                </div>
+
+            )
             return (
                 <div replace={replase}>
                     {async () => {
