@@ -39,6 +39,7 @@ const changeComplaint = function (Static,checkdata) {
 const ModalComplainComment = function ( data , ID) {
 
   let [Static] = fn.GetParams({ data, ID })
+  console.log(Static)
   init(function(){ 
     Static.modal = {
     abusive: { check: false, complain: Variable.lang.select.complainOne },
@@ -185,11 +186,11 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
               </div>
             <div class={["registration-btn",active]}>
               <a class="btn-gr-reg" onclick={async() => { 
-                  let response
+                let response
                 if(Static.modal.other.value.length >0){
-                  response= await fn.restApi.setQuestions.complain({_id:data.id,complain:[Static.modal.other.value]})
+                  response = await fn.restApi[Static.action].complain({_id:Static.id,complain:[Static.modal.other.value]})
                 }else{
-                  response= await fn.restApi.setQuestions.complain({_id:data.id,complain:Static.modal.activeData})
+                  response = await fn.restApi[Static.action].complain({_id:Static.id,complain:Static.modal.activeData})
                 }
                 if(response.status == "ok")
                 {

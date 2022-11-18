@@ -629,6 +629,19 @@ restApi.setPost.comment = async function ({ _id, text, mainId, quoteId, noAlert 
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setPost.complain = async function ({ _id, complain }) {
+    let data = {
+        _id,
+        value: {
+            complain
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setPost", data);
+    console.log(response)
+    return checkSetAnswer(response)
+}
+
 // Запросы  на новости
 restApi.setNews = {}
 
@@ -744,6 +757,19 @@ restApi.setUsers.subscribe = async function ({ _id, noAlert = true }) {
     }
     const response = await sendApi.create("setUsers", data);
     return checkSetAnswer(response, noAlert)
+}
+
+restApi.setUsers.complain = async function ({ _id, complain }) {
+    let data = {
+        _id,
+        value: {
+            complain
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setUsers", data);
+    console.log(response)
+    return checkSetAnswer(response)
 }
 
 restApi.setNews.view = async function ({ _id, noAlert = true }) {

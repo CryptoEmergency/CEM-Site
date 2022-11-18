@@ -1,5 +1,6 @@
-import { Variable } from '@betarost/cemjs'
+import { Variable, initReload } from '@betarost/cemjs'
 import { modals} from './modals.js';
+import { fn } from '@src/functions/index.js';
 const itemsMenu = {}
 
 //нижнее меню
@@ -308,13 +309,13 @@ itemsMenu.lenta_users = function (Static, item) {
                 type: "subscription",
                 onlyAuth: true,
                 onclick: async () => {
-                    const response = await api({ type: "set", action: "setUsers", data: { value: { subscribed: item.author._id } } })
+                    
+                    const response = await fn.restApi.setUsers.subscribe({_id: item.author._id})
+                    console.log(response)
                     // console.log('=b959ac=', response)
                     if (response.status === "ok") {
-                        if (response.result) {
-                            item.subscribe = response.result.subscribe
-                            initReload();
-                        }
+                        item.subscribe = !item.subscribe
+                        initReload();
                     } else {
                         Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                     }
@@ -329,22 +330,22 @@ itemsMenu.lenta_users = function (Static, item) {
                 onclick: async () => {
                     modals.ModalComplainComment({
                         id: item._id,
-                        typeSet: item.typeApi,
-                        mainId: item.mainId,
-                        mainCom: !item.commentId ? true : false
+                        action: "setPost"
                     })
-                /*
-                    Variable.SetModals(
-                        {
-                            name: "ModalComplainComment",
-                            data: {
-                                id: item._id,
-                                typeSet: item.typeApi,
-                                mainId: item.mainId,
-                                mainCom: !item.commentId ? true : false,
-                            },
-                        }, true*/
-                    }
+                    /*
+                        Variable.SetModals(
+                            {
+                                name: "ModalComplainComment",
+                                data: {
+                                    id: item._id,
+                                    typeSet: item.typeApi,
+                                    mainId: item.mainId,
+                                    mainCom: !item.commentId ? true : false,
+                                },
+                            }, true
+                        )
+                    */
+                }
                 
             },
             {
@@ -354,87 +355,79 @@ itemsMenu.lenta_users = function (Static, item) {
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
-                    Variable.SetModals(
-                        {
-                            name: "ModalComplainComment",
-                            data: {
-                                id: data.item._id,
-                                typeSet: data.typeApi,
-                                mainId: data.mainId,
-                                mainCom: !data.commentId ? true : false,
-                            },
-                        }, true
-                    );
+                    modals.ModalComplainComment({
+                        id: item.author._id,
+                        action: "setUsers"
+                    })
                 }
             },
-            {
-                text: Variable.lang.select.blackList,
-                type: "blackList",
-                onlyAuth: true,
-                color: "red",
-                onclick: async () => {
-                    // Переработать модалку
-                    Variable.SetModals(
-                        {
-                            name: "ModalBlackList",
-                            data: { id: item.author._id, type: "перебрать" },
-                        }, true
-                    );
-                }
-            },
-            {
-                text: Variable.lang.button.edit,
-                type: "edit",
-                onclick: async () => {
-                    // Переработать модалку
-                    // Variable.SetModals(
-                    //   {
-                    //     name: "ModalBlackList",
-                    //     data: { id: item.author._id, type: "перебрать" },
-                    //   }, true
-                    // );
-                }
-            },
-            {
-                text: Variable.lang.select.delete,
-                type: "delete",
-                color: "red",
-                onclick: async () => {
-                    // Переработать модалку
-                    // Variable.SetModals(
-                    //   {
-                    //     name: "ModalDelComment",
-                    //     data: {
-                    //       id: data.item._id,
-                    //       typeSet: data.typeApi,
-                    //       mainId: data.mainId,
-                    //       mainCom: !data.commentId ? true : false,
-                    //       callBack: data.callBack,
-                    //     },
-                    //   }, true
-                    // );
-                }
-            },
-            {
-                text: Variable.lang.select.delete,
-                type: "deleteRole",
-                color: "red",
-                onclick: async () => {
-                    // Переработать модалку
-                    // Variable.SetModals(
-                    //   {
-                    //     name: "ModalDelComment",
-                    //     data: {
-                    //       id: data.item._id,
-                    //       typeSet: data.typeApi,
-                    //       mainId: data.mainId,
-                    //       mainCom: !data.commentId ? true : false,
-                    //       callBack: data.callBack,
-                    //     },
-                    //   }, true
-                    // );
-                }
-            },
+            // {
+            //     text: Variable.lang.select.blackList,
+            //     type: "blackList",
+            //     onlyAuth: true,
+            //     color: "red",
+            //     onclick: async () => {
+            //         // Переработать модалку
+            //         Variable.SetModals({
+            //                 name: "ModalBlackList",
+            //                 data: { id: item.author._id, type: "перебрать" },
+            //             }, true
+            //         );
+            //     }
+            // },
+            // {
+            //     text: Variable.lang.button.edit,
+            //     type: "edit",
+            //     onclick: async () => {
+            //         // Переработать модалку
+            //         // Variable.SetModals(
+            //         //   {
+            //         //     name: "ModalBlackList",
+            //         //     data: { id: item.author._id, type: "перебрать" },
+            //         //   }, true
+            //         // );
+            //     }
+            // },
+            // {
+            //     text: Variable.lang.select.delete,
+            //     type: "delete",
+            //     color: "red",
+            //     onclick: async () => {
+            //         // Переработать модалку
+            //         // Variable.SetModals(
+            //         //   {
+            //         //     name: "ModalDelComment",
+            //         //     data: {
+            //         //       id: data.item._id,
+            //         //       typeSet: data.typeApi,
+            //         //       mainId: data.mainId,
+            //         //       mainCom: !data.commentId ? true : false,
+            //         //       callBack: data.callBack,
+            //         //     },
+            //         //   }, true
+            //         // );
+            //     }
+            // },
+            // {
+            //     text: Variable.lang.select.delete,
+            //     type: "deleteRole",
+            //     color: "red",
+            //     onclick: async () => {
+            //         // Переработать модалку
+            //         // Variable.SetModals(
+            //         //   {
+            //         //     name: "ModalDelComment",
+            //         //     data: {
+            //         //       id: data.item._id,
+            //         //       typeSet: data.typeApi,
+            //         //       mainId: data.mainId,
+            //         //       mainCom: !data.commentId ? true : false,
+            //         //       callBack: data.callBack,
+            //         //     },
+            //         //   }, true
+            //         // );
+            //     }
+            // },
         ]
 
 
