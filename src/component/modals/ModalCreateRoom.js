@@ -289,7 +289,7 @@ const ModalCreateRoom = function (data, ID) {
                     let requier = await fn.restApi.setUserRoom.create(request)
 
                     if (requier.status == "ok") {
-
+                    Static.callback(requier)
                       fn.modals.close(ID)
                     }
                   }
