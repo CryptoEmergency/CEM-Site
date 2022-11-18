@@ -114,6 +114,7 @@ const BlockProjects = async function () {
                     "title": Variable.lang.a.news,
                     "icon": "preview_line_news",
                     "link": "news",
+                    "items": fn.itemsMenu.onlyPage({url: '/news/'}),
                     modal: true
                 },
                 {
