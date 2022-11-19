@@ -300,6 +300,12 @@
         padding-bottom: 0;
         padding-top: 2px !important;
 
+        &--best {
+            order: -1;
+            border: 1px solid #00E741 !important;
+            border-radius: 15px !important;
+        }
+
         .avatar_user_online {
             right: 6%;
             bottom: 25%;

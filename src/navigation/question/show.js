@@ -116,7 +116,12 @@ const start = function (data, ID) {
                     :
                     Static.itemAnswer.list_records.map(function (item, index) {
                       return (
-                        <div style={[item.best ? "order: -1; border-color: #00E741" : null]} class="user_news_item">
+                        <div
+                          class={[
+                            "user_news_item",
+                            item.best ? "user_news_item--best" : null
+                          ]}
+                        >
                           <div class="main_comment">
                             <Avatar
                               author={item.author}
