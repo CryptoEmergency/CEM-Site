@@ -872,6 +872,14 @@ const start = function (data, ID) {
                                     >
                                         <img src={images["forum/partner_18"]} />
                                     </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://hotel-novoros.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_19"]} />
+                                    </a>
                                 </div>
                             </div>
                         </div>

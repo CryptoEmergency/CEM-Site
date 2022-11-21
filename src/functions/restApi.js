@@ -799,20 +799,20 @@ restApi.setUsers.complain = async function ({ _id, complain }) {
     return checkSetAnswer(response)
 }
 
-restApi.setNews.view = async function ({ _id, noAlert = true }) {
-    let data = {
-        value: { "statistic.view": true },
-        _id
-    }
-    const response = await sendApi.create("setNews", data);
-    return checkSetAnswer(response, noAlert)
-}
-
-restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
+restApi.setUsers.blackList = async function ({ _id, noAlert = true }) {
     let data = {
         value: {
             blackList: _id
         }
+    }
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setNews.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
     }
     const response = await sendApi.create("setNews", data);
     return checkSetAnswer(response, noAlert)
