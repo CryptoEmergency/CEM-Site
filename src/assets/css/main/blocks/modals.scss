@@ -3306,6 +3306,7 @@
 /* modal change border avatar */
 .frames_list {
 	display: flex;
+	flex-wrap: wrap;
 	grid-gap: 15px;
 
 	.micro_user_avatar {
