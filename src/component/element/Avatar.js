@@ -33,7 +33,7 @@ const sendPhoto = async function (crooper, path) {
     //   formData.append('media', blob);
     // } else if(path == 'bg') {
     //   let uniqueID = Date.now();
-    //   formData.append('media', blob, 'galary.jpg');
+    //   formData.append('media', blob);
     //   formData.append('media_id', uniqueID);
     // }
     fn.uploadMedia(
@@ -68,7 +68,7 @@ const sendPhoto = async function (crooper, path) {
         }
 
         let res = await sendApi.create("setUsers", data);
-        res ? console.log("Update user data") : console.log('...')
+        res.error ? console.log('...Error update user data') : console.log("Update user data");
         initReload();
       },
       async function (e) {

@@ -53,7 +53,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
     }
 
     init(
-        async () => {
+        () => {
             cropper = null
             if (aspectSelect) {
                 aspectActive = Static.aspectSelect
