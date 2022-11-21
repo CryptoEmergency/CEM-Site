@@ -144,14 +144,14 @@ const start = function (data, ID) {
                         <BlockQuestions Static={Static.dataQuestions} limit={6} />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />
-                            <BlockTrade Static={Static.dataTrade} limit={6} />
+                            {/* <BlockTrade Static={Static.dataTrade} limit={6} /> */}
                             <div class="top_professionals_container">
-                                <BlockExchange Static={Static.dataExchange} limit={6} />
+                                {/* <BlockExchange Static={Static.dataExchange} limit={6} /> */}
                                 <BlockUsers Static={Static.dataUsers} limit={6} />
                                 <div class="news_block_container">
                                     <div class="news_block">
                                         <div class="home_page_news">
-                                            <a class="crypto_news_link" href="/news/" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({url: '/news/'}) }) }}>Crypto News</a>
+                                            <a class="crypto_news_link" href="/news/" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({ url: '/news/' }) }) }}>Crypto News</a>
                                             <div class="gradient_line"></div>
                                         </div>
                                         <div class="main_page_news_block">
@@ -161,7 +161,7 @@ const start = function (data, ID) {
                                                         return (
                                                             <a
                                                                 class="blog_news_item"
-                                                                onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, item: item, items: fn.itemsMenu.onlyPage({url: `/news/show/${item._id}`}) }) }}
+                                                                onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, item: item, items: fn.itemsMenu.onlyPage({ url: `/news/show/${item._id}` }) }) }}
                                                                 href={`/news/show/${item._id}`}
                                                             >
                                                                 <img
@@ -199,10 +199,16 @@ const start = function (data, ID) {
                                         </a>
                                     </div>
                                 </div>
+                                {
+                                    Variable.lang.code == "ru"
+                                        ?
+                                        <BlockInfoPartners
+                                            limit={4}
+                                        />
+                                        :
+                                        null
+                                }
 
-                                <BlockInfoPartners
-                                    limit={4}
-                                />
                             </div>
                         </div>
                     </div>
