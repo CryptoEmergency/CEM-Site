@@ -270,7 +270,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                                 arrMedia: formInputs.mediaInputs.value,
                                 aspectSelect: 1,
                                 uploadCropImage: async function (cropper) {
-                                  await sendPhoto(cropper)
+                                  await sendPhoto(cropper, "avatar")
                                   return;
                                 }
                               })
@@ -305,11 +305,8 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                               if (inputBg().files.length == 0) {
                                 return;
                               }
-
-                              Variable.SetModals({
-                                name: "ModalCropImage",
-                                data: {
-                                  file: inputBg().files[0],
+                              fn.modals.ModalCropImage({
+                                file: inputBg().files[0],
                                   typeUpload: 'bg',
                                   arrMedia: formInputs.mediaInputs.value,
                                   aspectSelect: 4,
@@ -317,8 +314,20 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                                     await sendPhoto(cropper, 'background')
                                     return;
                                   }
-                                },
-                              }, true);
+                              })
+                              // Variable.SetModals({
+                              //   name: "ModalCropImage",
+                              //   data: {
+                              //     file: inputBg().files[0],
+                              //     typeUpload: 'bg',
+                              //     arrMedia: formInputs.mediaInputs.value,
+                              //     aspectSelect: 4,
+                              //     uploadCropImage: async function (cropper) {
+                              //       await sendPhoto(cropper, 'background')
+                              //       return;
+                              //     }
+                              //   },
+                              // }, true);
                             }
                             }
                           />

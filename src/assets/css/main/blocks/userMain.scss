@@ -95,6 +95,7 @@
         height: 100%;
         border-radius: 15px 15px 0 0;
         max-height: 400px;
+        object-fit: cover;
 
         @media(max-width: 767px) {
             border-radius: 0;
