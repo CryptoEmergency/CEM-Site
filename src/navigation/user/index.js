@@ -128,7 +128,7 @@ const start = function (userInfo, ID = "mainBlock") {
             }
         },
         () => {
-
+            if (userInfo && userInfo.nickname == Variable.myInfo.nickname) { userInfo = Variable.myInfo }
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <div class="c-userpreview c-container">
