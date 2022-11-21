@@ -142,7 +142,40 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               : images["profile/avatar/default"]
           }
         />
-        <img
+        {
+          settings && Variable.dataUrl.adress == "user" && parent == "big_user_avatar" ?
+            <img
+              class="c-avataricon__frame"
+              src={
+                author.frame && author.frame.name
+                  ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
+                  images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+                  svg["profile/frame/default"]
+                  : svg["profile/frame/default"]
+              }
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                // console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
+                let nameFile = e.target.previousSibling.attributes.src.value.slice(22);
+                fn.modals.ModalViewPhoto({
+                  path: nameFile
+                });
+              }}
+            />
+            :
+            <img
+              class="c-avataricon__frame"
+              src={
+                author.frame && author.frame.name
+                  ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
+                  images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+                  svg["profile/frame/default"]
+                  : svg["profile/frame/default"]
+              }
+            />
+        }
+        {/* <img
           class="c-avataricon__frame"
           // style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height: 100%;width: "
           src={
@@ -152,12 +185,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               svg["profile/frame/default"]
               : svg["profile/frame/default"]
           }
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
-          }}
-        />
+        /> */}
         {() => {
           if (settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar") {
             return (
@@ -307,13 +335,13 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                               }
                               fn.modals.ModalCropImage({
                                 file: inputBg().files[0],
-                                  typeUpload: 'bg',
-                                  arrMedia: formInputs.mediaInputs.value,
-                                  aspectSelect: 4,
-                                  uploadCropImage: async function (cropper) {
-                                    await sendPhoto(cropper, 'background')
-                                    return;
-                                  }
+                                typeUpload: 'bg',
+                                arrMedia: formInputs.mediaInputs.value,
+                                aspectSelect: 4,
+                                uploadCropImage: async function (cropper) {
+                                  await sendPhoto(cropper, 'background')
+                                  return;
+                                }
                               })
                               // Variable.SetModals({
                               //   name: "ModalCropImage",
