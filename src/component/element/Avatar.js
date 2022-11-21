@@ -155,7 +155,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            console.log('=6a69b7=',e.target.previousSibling.attributes.src.value)
+            console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
           }}
         />
         {() => {
@@ -264,20 +264,29 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                               if (inputAvatar().files.length == 0) {
                                 return;
                               }
-
-                              Variable.SetModals({
-                                name: "ModalCropImage",
-                                data: {
-                                  file: inputAvatar().files[0],
-                                  typeUpload: 'avatar',
-                                  arrMedia: formInputs.mediaInputs.value,
-                                  aspectSelect: 1,
-                                  uploadCropImage: async function (cropper) {
-                                    await sendPhoto(cropper, 'avatar')
-                                    return;
-                                  }
-                                },
-                              }, true);
+                              fn.modals.ModalCropImage({
+                                file: inputAvatar().files[0],
+                                typeUpload: 'avatar',
+                                arrMedia: formInputs.mediaInputs.value,
+                                aspectSelect: 1,
+                                uploadCropImage: async function (cropper) {
+                                  await sendPhoto(cropper)
+                                  return;
+                                }
+                              })
+                              // Variable.SetModals({
+                              //   name: "ModalCropImage",
+                              //   data: {
+                              //     file: inputAvatar().files[0],
+                              //     typeUpload: 'avatar',
+                              //     arrMedia: formInputs.mediaInputs.value,
+                              //     aspectSelect: 1,
+                              //     uploadCropImage: async function (cropper) {
+                              //       await sendPhoto(cropper, 'avatar')
+                              //       return;
+                              //     }
+                              //   },
+                              // }, true);
                             }
                             }
                           />
