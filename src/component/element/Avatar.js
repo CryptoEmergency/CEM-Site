@@ -150,7 +150,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           //выбор новой рамки
           changeFrame(frame);
         } else if (!frame && Variable.myInfo && Variable.myInfo.nickname == author.nickname) {
-          alert()
+          // alert()
           fn.siteLink(e)
         } else {
           fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;' })
