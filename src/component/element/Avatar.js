@@ -28,14 +28,6 @@ const sendPhoto = async function (crooper, path) {
   let numItem = formInputs.mediaInputs.value.length - 1
   initReload();
   await canvas.toBlob(function (blob) {
-    // const formData = new FormData();
-    // if(path == 'avatar') {
-    //   formData.append('media', blob);
-    // } else if(path == 'bg') {
-    //   let uniqueID = Date.now();
-    //   formData.append('media', blob);
-    //   formData.append('media_id', uniqueID);
-    // }
     fn.uploadMedia(
       blob,
       path,
@@ -59,7 +51,7 @@ const sendPhoto = async function (crooper, path) {
               "avatar.name": response.name,
             },
           };
-        } else if (path == 'bg') {
+        } else if (path == 'background') {
           data = {
             value: {
               "background.name": response.name,
@@ -160,6 +152,11 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               svg["profile/frame/default"]
               : svg["profile/frame/default"]
           }
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            console.log('=6a69b7=',e.target.previousSibling.attributes.src.value)
+          }}
         />
         {() => {
           if (settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar") {
