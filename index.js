@@ -14,7 +14,7 @@ init({
     mode: "development",
     // Какую базу подключить office - локальную, "" - основную, test - Тестовую
     api: "",
-    // api: "office"
+   //  api: "office"
 });
 //Собираем и запускаем
 build({}).then((result) => { if (result) start(result) });

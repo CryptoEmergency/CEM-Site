@@ -29,7 +29,7 @@ const BlockUserRooms = async function (Static) {
 
   })
 
-
+console.log(Variable.UsersRooms)
 
   return (
     <div>
@@ -131,7 +131,7 @@ const BlockUserRooms = async function (Static) {
         <div class="c-chats__list">
           <ul class="c-chats__togglers">
           {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-     
+  
            if(userrooms.author.nickname == Variable.myInfo.nickname)
            {
         return (
@@ -215,7 +215,25 @@ const BlockUserRooms = async function (Static) {
     <a href="#" class="c-form__action c-form__action--right" title="">
         <img src="/assets/icon/email.svg" width="13" height="13" alt="" class="c-form__icon"/></a>
     </div>
-    <button onclick={()=>{alert()}} type="submit" class="c-form__send">
+    <button onclick={async ()=>{
+     //оправим сообщение
+
+
+     
+     Variable.UsersRooms.list_records[0].user
+    
+let _id =  Variable.UsersRooms.list_records[0]._id
+let text = "привет это моеё первое тестовое сообщение"
+let author = Variable.UsersRooms.list_records[0].author
+let user = Variable.UsersRooms.list_records[0].users
+let languages = Variable.UsersRooms.list_records[0].languages
+let country= Variable.UsersRooms.list_records[0].country
+  //нулевая комната 
+
+      let response = fn.restApi.setUserRoomMessage.sendMessage({ _id,text,author,user,languages,country})
+  // let response = await fn.restApi.setUserRoomMessage.sendMessage({ _id,text})
+ 
+    }} type="submit" class="c-form__send">
         <img src="/assets/icon/send.svg" width="13" height="13" alt="" class="c-form__icon"/>
     </button>
 </div>
@@ -230,7 +248,7 @@ const BlockUserRooms = async function (Static) {
     </div>  
       <div class="c-questions__list">
       {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-        console.log(userrooms)
+   
         return (
           <div class="c-questions__item c-question question-block questionLoad">
             <div class="c-question__header">
@@ -298,9 +316,7 @@ const BlockUserRooms = async function (Static) {
                 class="c-button c-button--outline2 buttonunswer"
                  
                 onclick={async (e) => {
-                  let request = {}
-                  let requier = await fn.restApi.setUserRoom.create("637787d7ef86b7bb84aee185", ["test"] ,Variable.myInfo )
-                  console.log(requier)
+           
                 }}
 
               >
