@@ -97,7 +97,10 @@ const start = function (data, ID) {
                                         <img style="padding: 3px 0;position: absolute; top:23px;right:20px;" src={svg['settings_active_category_line']} />
                                     </p>
                                     <div
-                                        class="settings_list_subcategory"
+                                        class={[
+                                            "settings_list_subcategory",
+                                            settingsPage == "security" ? "settings_list_subcategory--active" : null
+                                        ]}
                                         onclick={() => {
                                             if (settingsPage == "security") {
                                                 return
@@ -109,7 +112,10 @@ const start = function (data, ID) {
                                         <p>{Variable.lang.text.security}</p>
                                     </div>
                                     <div
-                                        class="settings_list_subcategory"
+                                        class={[
+                                            "settings_list_subcategory",
+                                            settingsPage == "blackList" ? "settings_list_subcategory--active" : null
+                                        ]}
                                         onclick={() => {
                                             if (settingsPage == "blackList") {
                                                 return

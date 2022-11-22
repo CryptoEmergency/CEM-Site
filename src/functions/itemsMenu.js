@@ -374,7 +374,8 @@ itemsMenu.lenta_users = function (Static, item) {
                             Variable.DelModals("ModalConfirmAction")
                             await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
-                        text: Variable.lang.p.toBlackListConfirm
+                        text: Variable.lang.p.toBlackListConfirm,
+                        button: Variable.lang.button.yes
                     })
                 }
             },
@@ -418,11 +419,12 @@ itemsMenu.lenta_users = function (Static, item) {
                 onclick: async () => {
                     modals.ModalConfirmAction({
                         action: async()=>{
-
+                            let response = await fn.restApi.doRole.deletePost({_id: item._id})
                             Variable.DelModals("ModalConfirmAction")
-
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
-                        text: Variable.lang.p.deletePostConfirm
+                        text: Variable.lang.p.deletePostConfirm,
+                        button: Variable.lang.button.yes
                     })
                 }
             },

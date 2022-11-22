@@ -669,6 +669,19 @@ restApi.setPost.complain = async function ({ _id, complain }) {
     return checkSetAnswer(response)
 }
 
+
+restApi.setPost.delete = async function ({ _id }) {
+    let data = {
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setPost", data);
+    console.log(response)
+    return checkSetAnswer(response)
+}
 // Запросы  на новости
 restApi.setNews = {}
 
@@ -756,6 +769,15 @@ restApi.setUsers.any = async function ({ data, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setUsers.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
+    }
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 restApi.setUsers.delete = async function ({ del, noAlert = true }) {
     let data = {}
     if (del) {
@@ -835,6 +857,15 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
     return checkSetAnswer(response)
 }
 
+restApi.setQuestions.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
+    }
+    const response = await sendApi.create("setQuestions", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 
 restApi.setUserRoom = {}
 
@@ -856,6 +887,22 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
     }
 
     const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
+}
+
+
+restApi.doRole = {}
+
+restApi.doRole.deletePost = async function ({_id}) {
+    let data = {
+        roleAction: "setPost",
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+
+    const response = await sendApi.create("doRole", data);
     return checkSetAnswer(response)
 }
 

@@ -156,8 +156,8 @@
         "partners": "שותפי מידע",
         "modal_cropImage": "הוספת תמונה",
 
-        "lottery": "«מפה לאוזן» הגרלת",
-		"lotterySubtitle": "זכה ב-CEM"
+        "lottery": "«Word of Mouth» lottery",
+        "lotterySubtitle": "WIN the 1000CEM!"
     },
     "a":{
         "about": "אודותינו",
@@ -359,22 +359,21 @@
 		"aboutProjectDateAugust2022": "שחרור אוגוסט 2022",
 
         "lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
-		"lotteryAction1": "Invite your friends to increase Prize Pool.",
-		"lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
-		"lotteryAction3": "5 winners will share the Prize Pool!",
-		"lotteryAnnounce": "Give a word of mouth to your friends as every user registered in the lottery will add 1CEM into a 1000CEM Prize Pool. 5 winners will share the Prize Pool!",
-		"lotteryDates": "Dates of Lottery:",
-		"lotteryTicket": "Job done, get your ticket!",
-		"lotteryBanner": "Download banner:",
-		"getTicket": "To get lottery ticket:",
-		"lotteryQuest1": "Register at Crypto-emergency.com.",
-		"lotteryQuest2": "Enter your Email",
-		"lotteryQuest3": "Join our Telegram group and inform us your @nickname below.",
-		"lotteryQuest4": "Retweet post and give us a link",
-		"lotteryQuest5": "Subscribe to our instagram, repost our post in your stories, be sure to mark our account",
-	    "lotteryQuest55": "Enter your nickname on Instagram",
-		"lotteryQuest6": "Answer a shortest quiz.",
-		"lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?"
+        "lotteryAction1": "Invite your friends to increase Prize Pool.",
+        "lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
+        "lotteryAction3": "5 winners will share the Prize Pool!",
+        "lotteryAnnounce": "Give a word of mouth to your friends as every user registered in the lottery will add 1CEM into a 1000CEM Prize Pool. 5 winners will share the Prize Pool!",
+        "lotteryDates": "Dates of Lottery:",
+        "lotteryTicket": "Congratulations! Number of your lucky ticket:",
+        "getTicket": "To get lottery ticket:",
+        "lotteryQuest1": "Register at Crypto-emergency.com or sign in",
+        "lotteryQuest2": "Enter your Email",
+        "lotteryQuest3": "Join our Telegram group and inform us your @nickname below.",
+        "lotteryQuest4": "Retweet post and give us retweet link",
+        "lotteryQuest5": "Subscribe to our Instagram, repost our post in your stories, be sure to tag @cryptoemergency",
+        "lotteryQuest55": "Enter your Instagram account name",
+        "lotteryQuest6": "Answer a shortest quiz.",
+        "lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?"
     },
     "text": {
         "starups": "סטארט-אפים",
