@@ -9,6 +9,13 @@ import images from "@assets/images/index.js";
 const LazyImage = function ({ path, ratio, className }) {
     return (
         <div class={className}>
+            <img src={path}
+            />
+        </div>
+    );
+
+    return (
+        <div class={className}>
             <img hidden={true} src={path}
                 onload={function () {
                     //console.log('onload', this)

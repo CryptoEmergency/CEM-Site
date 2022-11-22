@@ -18,7 +18,7 @@ const BlockShowNews = function ({ Static, item }) {
         }}>
         <h1 class="full_news_name">{item.title}</h1>
         {item.image ? <img class="full_news_image" src={`/assets/upload/news/${item.image}`} /> : null}
-        <p class="full_news_text mrb30">{item.preview}</p>
+        {item.preview ? <p class="full_news_text mrb30">{item.preview}</p> : null }
         <p class="full_news_text mr20">{fn.editText(item.text, { clear: true, paragraph: true, html: true })}</p>
         {item.source ? <p class="full_news_disclaimer mr20">{Variable.lang.p.source}<a href={item.source} rel="nofollow" target="_blank">{item.source}</a></p> : null}
         <div style="display: flex" class="blog_post_stat">

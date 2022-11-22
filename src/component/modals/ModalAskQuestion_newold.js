@@ -249,21 +249,12 @@ const ModalAskQuestion = function (data, ID) {
                   </div>
 
                   <div class="c-askquestion__textblock c-form__block">
-                    <label class="c-form__label" for="questionText">
-                      {Variable.lang.label.question}
-                    </label>
-                    <div class="c-form__errormsg error-div">
-                      {formInputs.question.error}
-                    </div>
-                    <div class="c-form__wrapfield create_post_container" data-type="question">
-                      <input
-                        type="text"
-                        data-type="question"
-                        oninput={changeInput}
-                        class="c-form__field create_post_chapter create_post_title"
-                        placeholder={Variable.lang.placeholder.titleAsk}
-                        value={formInputs.question.value}
-                      />
+
+
+                    <Input Static={Static.form.title} />
+                    <div class="c-form__wrapfield create_post_container">
+
+
                       {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
                       {() => {
                         if (formInputs.textQuestion.show) {

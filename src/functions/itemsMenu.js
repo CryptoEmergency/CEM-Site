@@ -361,20 +361,23 @@ itemsMenu.lenta_users = function (Static, item) {
                     })
                 }
             },
-            // {
-            //     text: Variable.lang.select.blackList,
-            //     type: "blackList",
-            //     onlyAuth: true,
-            //     color: "red",
-            //     onclick: async () => {
-            //         // Переработать модалку
-            //         Variable.SetModals({
-            //                 name: "ModalBlackList",
-            //                 data: { id: item.author._id, type: "перебрать" },
-            //             }, true
-            //         );
-            //     }
-            // },
+            {
+                text: Variable.lang.select.blackList,
+                type: "blackList",
+                onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    // Переработать модалку
+                    modals.ModalConfirmAction({
+                        action: async()=>{
+                            let response = await fn.restApi.setUsers.blackList({_id: item.author._id})
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.toBlackListConfirm
+                    })
+                }
+            },
             // {
             //     text: Variable.lang.button.edit,
             //     type: "edit",
@@ -408,26 +411,21 @@ itemsMenu.lenta_users = function (Static, item) {
             //         // );
             //     }
             // },
-            // {
-            //     text: Variable.lang.select.delete,
-            //     type: "deleteRole",
-            //     color: "red",
-            //     onclick: async () => {
-            //         // Переработать модалку
-            //         // Variable.SetModals(
-            //         //   {
-            //         //     name: "ModalDelComment",
-            //         //     data: {
-            //         //       id: data.item._id,
-            //         //       typeSet: data.typeApi,
-            //         //       mainId: data.mainId,
-            //         //       mainCom: !data.commentId ? true : false,
-            //         //       callBack: data.callBack,
-            //         //     },
-            //         //   }, true
-            //         // );
-            //     }
-            // },
+            {
+                text: Variable.lang.select.delete,
+                type: "deleteRole",
+                color: "red",
+                onclick: async () => {
+                    modals.ModalConfirmAction({
+                        action: async()=>{
+
+                            Variable.DelModals("ModalConfirmAction")
+
+                        },
+                        text: Variable.lang.p.deletePostConfirm
+                    })
+                }
+            },
         ]
 
 

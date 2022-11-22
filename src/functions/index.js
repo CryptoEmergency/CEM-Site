@@ -313,7 +313,7 @@ fn.siteLink = function (e) {
 fn.checkValid = function (Static, Array) {
   Static.isValid = true
   Array.forEach(function (elem) {
-    if (!Static[elem].valid) {
+    if (!Static[elem] || !Static[elem].valid) {
       Static.isValid = false
     }
   })

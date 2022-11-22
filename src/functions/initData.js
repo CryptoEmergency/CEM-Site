@@ -1,6 +1,19 @@
 import { Variable, Helpers } from "@betarost/cemjs";
 import { modals } from "./modals.js"
+import { fn } from '@src/functions/index.js';
 const initData = {}
+
+const form = {
+    language: {
+        value: "",
+        type: "text",
+        valid: true,
+        code: "",
+        name: "all",
+        autocomplete: "off",
+        readonly: true
+    },
+}
 
 
 const filters = {
@@ -84,14 +97,37 @@ const typeCollections = {
         valid: false,
         autocomplete: "off",
         placeholder: ""
+    },
+    language: {
+        value: "",
+        type: "text",
+        valid: false,
+        code: "",
+        name: "all",
+        autocomplete: "off",
+        readonly: true
+    },
+    media: {
+        value: [],
+        show: false,
+        selectAspect: null,
     }
 }
 
 const generate = function (type, error) {
+
     let objReturn = Object.create(typeCollections[type])
     if (error) {
         objReturn.error = false
         objReturn.errorText = ""
+    }
+    return objReturn
+}
+
+const createData = function (type, data = {}) {
+    let objReturn = Object.assign({}, typeCollections[type], data)
+    if (data.errorText) {
+        objReturn.error = false
     }
     return objReturn
 }
@@ -207,6 +243,47 @@ initData.content_creator = function (Static) {
 
     return
 }
+
+
+initData.ModalAskQuestion = function (Static) {
+    Static.form = {
+        language: createData("language", {
+            value: Variable.myInfo.mainLanguage.eng_name + ` (${Variable.myInfo.country.orig_name})`,
+            code: Variable.myInfo.mainLanguage.code
+        }),
+        title: createData("input", {
+            errorText: Variable.lang.error_div.minSymbol,
+            placeholder: Variable.lang.placeholder.titleAsk,
+            label: Variable.lang.label.question,
+            condition: function (value) {
+                if (!value || !value.length) {
+                    this.errorText = Variable.lang.error_div.not_empty_input
+                    return false
+                } else if (value.length < 5) {
+                    this.errorText = Variable.lang.error_div.minSymbol
+                    return false
+                } else if (value.length > 500) {
+                    this.errorText = Variable.lang.error_div.maxSymbol
+                    return false
+                }
+                return true
+            },
+            afterValid: function () {
+                fn.checkValid(Static.form, ["title"])
+            }
+        }),
+        description: createData("input", {
+            placeholder: Variable.lang.label.description
+        }),
+        media: createData("media"),
+        isValid: false,
+        submitClick: false,
+        messageSent: false
+    }
+
+    return
+}
+
 
 initData.experts = function (Static) {
     Static.nameRecords = "PageExperts"
@@ -476,12 +553,12 @@ initData.posts = function (Static) {
         show: false,
     }
     Static.audioInputs = {
-      value: [],
-      show: false,
+        value: [],
+        show: false,
     }
     Static.lang = {
-      code: Variable.myInfo.mainLanguage.code,
-      name: Variable.myInfo.mainLanguage.orig_name
+        code: Variable.myInfo.mainLanguage.code,
+        name: Variable.myInfo.mainLanguage.orig_name
     }
     Static.forFriends = false
     Static.isValid = false
@@ -590,7 +667,7 @@ initData.generate = function (arrData) {
 }
 
 
-initData.rooms = function(Static){
+initData.rooms = function (Static) {
 
 }
 

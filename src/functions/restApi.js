@@ -490,6 +490,33 @@ restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filt
     }
 }
 
+restApi.getFrames = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getFrames",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
 
 //
 // SET
@@ -772,20 +799,20 @@ restApi.setUsers.complain = async function ({ _id, complain }) {
     return checkSetAnswer(response)
 }
 
-restApi.setNews.view = async function ({ _id, noAlert = true }) {
-    let data = {
-        value: { "statistic.view": true },
-        _id
-    }
-    const response = await sendApi.create("setNews", data);
-    return checkSetAnswer(response, noAlert)
-}
-
-restApi.setNews.blackList = async function ({ _id, noAlert = true }) {
+restApi.setUsers.blackList = async function ({ _id, noAlert = true }) {
     let data = {
         value: {
             blackList: _id
         }
+    }
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setNews.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
     }
     const response = await sendApi.create("setNews", data);
     return checkSetAnswer(response, noAlert)

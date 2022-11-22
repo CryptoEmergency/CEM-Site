@@ -296,10 +296,13 @@ const BlockUserRooms = async function (Static) {
             <div class="c-question__footer">
               <a
                 class="c-button c-button--outline2 buttonunswer"
-                 href={`/question/show/${userrooms._id}`}
-                onclick={(e) => {
-                  /* fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, })*/
+                 
+                onclick={async (e) => {
+                  let request = {}
+                  let requier = await fn.restApi.setUserRoom.create("637787d7ef86b7bb84aee185", ["test"] ,Variable.myInfo )
+                  console.log(requier)
                 }}
+
               >
                 <div class="c-button__wrapper">
               войти

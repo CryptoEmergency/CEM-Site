@@ -70,16 +70,17 @@ const textElem = function (Static, className, callback) {
             type={type}
             value={value}
             class={className}
+            style={"border-radius: 10px;"}
             oninput={function () {
-                
+
 
                 checkInput(Static, this)
                 if (callback) {
-                
+
                     callback()
                 }
                 if (Static.callback) {
-                
+
                     Static.callback(this)
                 }
             }}

@@ -1,6 +1,7 @@
 import {
     jsx,
     jsxFrag,
+    Variable,
 } from '@betarost/cemjs';
 import images from "@assets/images/index.js";
 import { Swiper } from '@component/element/index.js';
@@ -48,24 +49,54 @@ const banners = [
     //     "image": "banner2022-09-09"
     // },
     {
+        "href": "https://crypto-emergency.com/",
+        "image": "ecosystemCEM",
+        lang: "en"
+    },
+    {
+        "href": "https://crypto-emergency.com/",
+        "image": "ecosystemCEM",
+        lang: "en"
+    },
+    {
         "href": "https://metis.io/",
-        "image": "metis_banner"
+        "image": "metis_banner",
+        lang: "en"
+    },
+    {
+        "href": "https://crypto-emergency.com/",
+        "image": "ecosystemCEM",
+        lang: "en"
+    },
+    {
+        "href": "https://crypto-emergency.com/",
+        "image": "ecosystemCEM",
+        lang: "en"
+    },
+    {
+        "href": "https://metis.io/",
+        "image": "metis_banner",
+        lang: "ru"
     },
     {
         "href": "https://crypto-emergency.com/forum/",
-        "image": "forum_banner"
+        "image": "forum_banner",
+        lang: "ru"
     },
     {
         "href": "https://blockchain24.pro/",
-        "image": "blockchain_banner"
+        "image": "blockchain_banner",
+        lang: "ru"
     },
     {
         "href": "https://crypto.ru/",
-        "image": "crypto_banner"
+        "image": "crypto_banner",
+        lang: "ru"
     },
     {
         "href": "https://carding.pro/ru/glavnaya/",
-        "image": "pro_banner"
+        "image": "pro_banner",
+        lang: "ru"
     },
 ];
 
@@ -111,17 +142,23 @@ const swiperOptions = {
     },
 }
 
-const bannersRecords = banners.map(function (item) {
-    return (
-        <a rel="nofollow noopener" target="_blank" href={item.href} class="swiper-slide">
-            <div>
-                <img src={images[`banners/${item.image}`]} />
-            </div>
-        </a>
-    )
-})
+
 
 const BlockBanners = function () {
+
+    const bannersRecords = banners.map(function (item) {
+        let lang = Variable.lang.code == "ru" ? "ru" : "en"
+        if (item.lang == lang) {
+            return (
+                <a rel="nofollow noopener" target="_blank" href={item.href} class="swiper-slide">
+                    <div>
+                        <img src={images[`banners/${item.image}`]} />
+                    </div>
+                </a>
+            )
+        }
+    })
+
     return (
         <div class="c-startaps">
             <Swiper

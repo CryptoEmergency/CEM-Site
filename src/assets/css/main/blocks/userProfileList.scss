@@ -300,6 +300,12 @@
         padding-bottom: 0;
         padding-top: 2px !important;
 
+        &--best {
+            order: -1;
+            border: 1px solid #00E741 !important;
+            border-radius: 15px !important;
+        }
+
         .avatar_user_online {
             right: 6%;
             bottom: 25%;
@@ -1038,6 +1044,11 @@
     text-align: center;
     padding: 5px;
     width: 100%;
+
+    @media(max-width: 599px) {
+        height: 188px !important;
+        background-size: 100% 100%;
+    }
 
     .audio_container {
         margin-bottom: 0;
