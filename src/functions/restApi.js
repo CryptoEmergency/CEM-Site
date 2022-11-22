@@ -756,6 +756,15 @@ restApi.setUsers.any = async function ({ data, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setUsers.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
+    }
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 restApi.setUsers.delete = async function ({ del, noAlert = true }) {
     let data = {}
     if (del) {
@@ -833,6 +842,15 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
     const response = await sendApi.create("setQuestion", data);
     console.log(response)
     return checkSetAnswer(response)
+}
+
+restApi.setQuestions.view = async function ({ _id, noAlert = true }) {
+    let data = {
+        value: { "statistic.view": true },
+        _id
+    }
+    const response = await sendApi.create("setQuestions", data);
+    return checkSetAnswer(response, noAlert)
 }
 
 

@@ -132,7 +132,11 @@ const start = function (userInfo, ID = "mainBlock") {
             return (
                 <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}>
                     <div class="c-userpreview c-container">
-                        <div class="c-userpreview__header">
+                        <div class="c-userpreview__header"
+                            ElemVisible={() => {
+                                fn.recordsView(userInfo._id, "setUsers")
+                            }}
+                        >
 
                             <div class="c-userpreview__avatar">
                                 <Avatar author={userInfo} parent={'big_user_avatar'} settings={true} />
