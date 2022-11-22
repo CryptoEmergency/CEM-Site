@@ -16,7 +16,7 @@ import { Input } from '@component/element/index.js';
 
 
 const ModalAuth = function (data, ID) {
-    console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
+    // console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
 
 
     let wayAuth,
@@ -129,10 +129,12 @@ const ModalAuth = function (data, ID) {
 
         let tmpRes = await sendApi.create("userAuth", data);
         if (tmpRes.status === 'ok') {
-            Variable.DelModals("ModalAuth")
+            // Variable.DelModals("ModalAuth")
+            fn.modals.close(ID)
             initReload()
         } else {
-            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
+            fn.modals.ModalAlarm({ icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] }, true)
+            // Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
             elemButton().classList.remove('c-button--animated');
         }
         return
@@ -188,7 +190,9 @@ const ModalAuth = function (data, ID) {
                 type: `${viewPassword ? 'text' : 'password'}`,
                 errorText: Variable.lang.error_div.password5,
                 condition: (value) => {
-
+                    if (value && value.length > 4) {
+                        return true
+                    }
                     return fn.validator.isStrongPassword(value, {
                         minLength: 8,
                         minLowercase: 0,

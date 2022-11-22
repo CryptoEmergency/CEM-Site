@@ -39,12 +39,12 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
             highlight: true,
             // dragCrop: false,
 
-          dragMode: 'move',
-          restore: false,
-          cropBoxMovable: false,
-          cropBoxResizable: false,
-          toggleDragModeOnDblclick: false,
-    
+            dragMode: 'move',
+            restore: false,
+            cropBoxMovable: false,
+            cropBoxResizable: false,
+            toggleDragModeOnDblclick: false,
+
 
             crop: function (e) {
                 var data = e.detail;
@@ -53,7 +53,8 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
     }
 
     init(
-        async () => {
+        () => {
+            console.log('=0ae14c=', Static)
             cropper = null
             if (aspectSelect) {
                 aspectActive = Static.aspectSelect

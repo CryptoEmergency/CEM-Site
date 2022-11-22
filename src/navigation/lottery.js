@@ -194,6 +194,7 @@ const start = function () {
                                                         </div>
                                                         <div ref={instagram} data-name="instagram" class="lottery_check">
                                                             <p>5. {Variable.lang.p.lotteryQuest5}</p>
+                                                            <p>{Variable.lang.p.lotteryQuest55}</p>
                                                             {Variable.lang.code == 'ru' ? <p><a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/p/ClGfX9HqAfo/?igshid=YmMyMTA2M2Y=">https://www.instagram.com/p/ClGfX9HqAfo/?igshid=YmMyMTA2M2Y=</a></p> : <p><a target="_blank" rel="nofollow noopener" href="https://www.instagram.com/p/ClGkx_pscof/?igshid=YmMyMTA2M2Y=">https://www.instagram.com/p/ClGkx_pscof/?igshid=YmMyMTA2M2Y=</a></p>}
                                                             <input oninput={lotteryValidCheckKeyup} type="text" name="instagram" placeholder="Instagram" />
                                                             <img src={svg['check_lottery_black']} />

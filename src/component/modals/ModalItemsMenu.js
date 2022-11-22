@@ -4,6 +4,7 @@ import {
 	Variable,
 	init
 } from "@betarost/cemjs";
+import { fn } from "@src/functions/index.js";
 
 const arrMyAction = ["share", "copyurl", "edit", "delete", "closequestion", "bestquestion"]
 const arrVisitorAction = ["addanswer", "share", "copyurl", "subscription", "complainItem", "complainUser", "blackList"]
@@ -68,25 +69,26 @@ const ModalItemsMenu = function ({ items, author }, ID) {
 										return arrReturn
 									}
 								}}
-								<li
+								{/* <li
 									class="c-actions__item"
 									onclick={function () {
 										Variable.DelModals("ModalItemsMenu");
 									}
 									}>
 									<span class="c-button__wrapper">{Variable.lang.button.reset}</span>
-								</li>
+								</li> */}
 							</ul>
 						</div>
-						{/* <div class="c-modal__footer">
+						<div class="c-modal__footer">
 							<button
 								class="c-button c-button--inverse"
 								onclick={() => {
-									Variable.DelModals("ModalItemsMenu");
+									fn.modals.close(ID)
+									// Variable.DelModals("ModalItemsMenu");
 								}}					>
 								<span class="c-button__wrapper">{Variable.lang.button.reset}</span>
 							</button>
-						</div> */}
+						</div>
 					</section>
 				</div>
 			);

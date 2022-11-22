@@ -18,7 +18,7 @@ import { Avatar } from '@component/element/Avatar.js';
 
 
 const deleteUserFromBlacklist = async (user) => {
-    let response = await fn.restApi.setNews.blackList(user)
+    let response = await fn.restApi.setUsers.blackList({_id: user})
     //let response = await api({ type: "set", action: "setUsers", short: true, data })
     return response
 }
@@ -31,8 +31,6 @@ const getUserBlackList = async (count = 0) => {
 
 const start = function (data, ID) {
     let settingsPage
-
-
     let blackList
 
 
