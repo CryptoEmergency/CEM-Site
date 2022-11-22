@@ -1,5 +1,5 @@
 import { Variable, initReload } from '@betarost/cemjs'
-import { modals} from './modals.js';
+import { modals } from './modals.js';
 import { fn } from '@src/functions/index.js';
 const itemsMenu = {}
 
@@ -210,7 +210,7 @@ const itemsMenu = {}
 //       ""]
 //   })
 
-itemsMenu.onlyPage = function({url, downloadurl}){
+itemsMenu.onlyPage = function ({ url, downloadurl }) {
     const items = [
         {
             text: Variable.lang.select.share,
@@ -237,7 +237,7 @@ itemsMenu.onlyPage = function({url, downloadurl}){
             }
         }
     ]
-    if(typeof downloadurl != "undefined"){
+    if (typeof downloadurl != "undefined") {
         items.push({
             text: Variable.lang.button.save,
             type: "share",
@@ -254,7 +254,7 @@ itemsMenu.onlyPage = function({url, downloadurl}){
     return items
 }
 
-itemsMenu.blog = function(Static, item){
+itemsMenu.blog = function (Static, item) {
     const items = [
         {
             text: Variable.lang.select.share,
@@ -309,8 +309,8 @@ itemsMenu.lenta_users = function (Static, item) {
                 type: "subscription",
                 onlyAuth: true,
                 onclick: async () => {
-                    
-                    const response = await fn.restApi.setUsers.subscribe({_id: item.author._id})
+
+                    const response = await fn.restApi.setUsers.subscribe({ _id: item.author._id })
                     console.log(response)
                     // console.log('=b959ac=', response)
                     if (response.status === "ok") {
@@ -324,7 +324,7 @@ itemsMenu.lenta_users = function (Static, item) {
             {
                 text: Variable.lang.select.complainPost,
                 type: "complainItem",
-                onlyAuth: true,
+                // onlyAuth: true,
 
                 color: "red",
                 onclick: async () => {
@@ -346,12 +346,12 @@ itemsMenu.lenta_users = function (Static, item) {
                         )
                     */
                 }
-                
+
             },
             {
                 text: Variable.lang.select.complainUser,
                 type: "complainUser",
-                onlyAuth: true,
+                // onlyAuth: true,
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
@@ -369,8 +369,8 @@ itemsMenu.lenta_users = function (Static, item) {
                 onclick: async () => {
                     // Переработать модалку
                     modals.ModalConfirmAction({
-                        action: async()=>{
-                            let response = await fn.restApi.setUsers.blackList({_id: item.author._id})
+                        action: async () => {
+                            let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
                             await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
@@ -418,8 +418,8 @@ itemsMenu.lenta_users = function (Static, item) {
                 color: "red",
                 onclick: async () => {
                     modals.ModalConfirmAction({
-                        action: async()=>{
-                            let response = await fn.restApi.doRole.deletePost({_id: item._id})
+                        action: async () => {
+                            let response = await fn.restApi.doRole.deletePost({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
                             await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
