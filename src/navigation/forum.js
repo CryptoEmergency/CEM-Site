@@ -12,6 +12,10 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
+
+import { fn } from "@src/functions/index.js";
+
+
 import 'swiper/css/bundle';
 
 
@@ -254,6 +258,9 @@ const start = function (data, ID) {
                                         <p style="display: flex; align-items: center;">
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Стартапы со всей России представят свои проекты
                                         </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Будут подведены итоги <a style="padding-left: 6px;     text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 600;" href="/lottery/" onclick={async (e) => {fn.siteLink(e)}}>  лотереи "Сарафанное радио"</a> 
+                                        </p>
                                     </div>
                                     <div style="font-size: 18px;">
                                         <p>
@@ -362,6 +369,50 @@ const start = function (data, ID) {
                                 <a style="margin: 40px auto" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
                                     <span>Купить билет</span>
                                 </a>
+                                <div style="font-size: 18px; max-width: 500px; margin: 0 auto;margin-top: 10px">
+                                    <p>
+                                        Билет предоставляет ряд привлекательных предложений:
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 16 - 17 декабря посещение Форума Crypto ЮГ 2022
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Шампанское и вкусные закуски
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Проживание в отелях: 
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Hilton – скидка 30% на проживание
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Капитал - скидка 10% на проживание
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Гостиница Новороссийск - скидка 10% на проживание
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Кафе и рестораны:
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Абрау Дюрсо - 10% на все меню
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Вижу море - 10% на все меню
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> BARY – бесплатный кофе и вкусный комплимент.
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Доступ к онлайн трансляции форума и записи.
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 По завершении форума, 17 декабря, пройдёт After party.
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Билет даст Вам возможность бесплатного входа в лучший, новый клуб города Новороссийска «Философ»
+                                    </p>
+                                </div>
                             </div>
                             <div>
                                 <h4 style="text-align: center; margin: 25px 0;">Стенды</h4>

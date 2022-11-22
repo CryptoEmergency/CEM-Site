@@ -859,4 +859,20 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
     return checkSetAnswer(response)
 }
 
+
+restApi.doRole = {}
+
+restApi.doRole.deletePost = async function ({_id}) {
+    let data = {
+        roleAction: "setPost",
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+
+    const response = await sendApi.create("doRole", data);
+    return checkSetAnswer(response)
+}
+
 export { restApi };
