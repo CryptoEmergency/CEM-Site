@@ -16,9 +16,8 @@ import { NotFound } from "@component/element/index.js";
 import { Avatar } from '@component/element/Avatar.js';
 
 
-
 const deleteUserFromBlacklist = async (user) => {
-    let response = await fn.restApi.setUsers.blackList({_id: user})
+    let response = await fn.restApi.setUsers.blackList({ _id: user })
     //let response = await api({ type: "set", action: "setUsers", short: true, data })
     return response
 }
@@ -30,10 +29,13 @@ const getUserBlackList = async (count = 0) => {
 }
 
 const start = function (data, ID) {
+    let [Static] = fn.GetParams({ data, ID })
+
     let settingsPage
     let blackList
 
 
+    let activeGroup, elSocial, elCategory;
 
     Variable.Static.HeaderShow = true
     Variable.Static.FooterShow = true
@@ -73,12 +75,13 @@ const start = function (data, ID) {
         initReload()
     }
 
+
     init(
         async () => {
             blackList = await getUserBlackList()
             console.log(blackList)
 
-            settingsPage = "security"
+            settingsPage = "security";
         },
         () => {
             return (
@@ -87,14 +90,38 @@ const start = function (data, ID) {
                     Variable.Static.HeaderShow ? "c-main__body" : "c-main__body--noheader",
                 ]}
                 >
-                    <h4 class="settings_title">{Variable.lang.text.socialNetwork}</h4>
+                    {/* <h4 class="settings_title">{Variable.lang.text.socialNetwork}</h4> */}
                     <div class="settings">
                         <div class="settings_list_block">
                             <div class="settings_list">
-                                <div class="settings_list_item settings_list_item_active">
-                                    <p class="settings_list_title">
+                                <div
+                                    class={[
+                                        'settings_list_item',
+                                        activeGroup == Static.elSocial ? 'settings_list_item_active' : null
+                                    ]}
+                                    data-active="true"
+                                    Element={($el) => {
+                                        Static.elSocial = $el
+                                    }}
+                                >
+                                    <p
+                                        class="settings_list_title"
+                                        onClick={() => {
+                                            activeGroup = Static.elSocial
+                                            // console.log('=034949=',activeGroup)
+                                            if (Static.elSocial.dataset.active == "true") {
+                                                console.log('=c15202=', "not active")
+                                                Static.elSocial.dataset.active = false;
+                                                Static.elSocial.classList.remove("settings_list_item_active")
+                                            } else {
+                                                console.log('=9ca0c2=', "active")
+                                                Static.elSocial.dataset.active = true;
+                                                Static.elSocial.classList.add("settings_list_item_active")
+                                            }
+                                        }}
+                                    >
                                         {Variable.lang.text.socialNetwork}
-                                        <img style="padding: 3px 0;position: absolute; top:23px;right:20px;" src={svg['settings_active_category_line']} />
+                                        {/* <img style="padding: 3px 0;position: absolute; top:23px;right:20px;" src={svg['settings_active_category_line']} /> */}
                                     </p>
                                     <div
                                         class={[
@@ -116,7 +143,7 @@ const start = function (data, ID) {
                                             "settings_list_subcategory",
                                             settingsPage == "blackList" ? "settings_list_subcategory--active" : null
                                         ]}
-                                        onclick={() => {
+                                        onClick={() => {
                                             if (settingsPage == "blackList") {
                                                 return
                                             }
@@ -126,6 +153,36 @@ const start = function (data, ID) {
                                     >
                                         <p>{Variable.lang.text.blackList}</p>
                                     </div>
+                                    <div class="settings_gradient_line"></div>
+                                </div>
+                                <div
+                                    class={[
+                                        'settings_list_item',
+                                        activeGroup == Static.elCategory ? '' : null
+                                    ]}
+                                    data-active="false"
+                                    Element={($el) => {
+                                        Static.elCategory = $el
+                                    }}
+                                >
+                                    <p
+                                        class="settings_list_title"
+                                        onClick={() => {
+                                            activeGroup = Static.elCategory
+                                            // console.log('=f1cab4=',activeGroup)
+                                            if (Static.elCategory.dataset.active == "true") {
+                                                console.log('=c15202=', "not active 2")
+                                                Static.elCategory.dataset.active = false;
+                                                Static.elCategory.classList.remove("settings_list_item_active")
+                                            } else {
+                                                console.log('=9ca0c2=', "active 2")
+                                                Static.elCategory.dataset.active = true;
+                                                Static.elCategory.classList.add("settings_list_item_active")
+                                            }
+                                        }}
+                                    >
+                                        Еще категория
+                                    </p>
                                     <div class="settings_gradient_line"></div>
                                 </div>
                             </div>
