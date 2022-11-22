@@ -43,7 +43,9 @@ const start = function (data, ID) {
               {
                 !Static.editQuestion
                   ?
-                  <div>
+                  <div ElemVisible={() => {
+                    fn.recordsView(item._id, "setQuestions")
+                  }}>
                     <p class="question_title">{fn.clearText(item.title)}</p>
                     <div class="question_text"> {fn.clearText(item.text)}</div>
                   </div>
