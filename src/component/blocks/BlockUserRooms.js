@@ -22,6 +22,7 @@ const BlockUserRooms = async function (Static) {
 
 
 
+
   await initOne(async () => {
     await fn.restApi.getUserRoom({ cache: true, name: "SystemsRooms", filter: { system: true }, limit: 10 })
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
@@ -29,8 +30,7 @@ const BlockUserRooms = async function (Static) {
 
   })
 
-
-
+console.log(Variable.UsersRooms)
   return (
     <div>
     <div class="c-questions__list questions-blocks c-chats__wrapper">
@@ -131,7 +131,7 @@ const BlockUserRooms = async function (Static) {
         <div class="c-chats__list">
           <ul class="c-chats__togglers">
           {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-     
+  
            if(userrooms.author.nickname == Variable.myInfo.nickname)
            {
         return (
@@ -161,7 +161,7 @@ const BlockUserRooms = async function (Static) {
           else {
             fn.modals.ModalNeedAuth()
           }
-
+        
         }}>
           <div data-needauth="true" data-action="addNewChat" class="c-action">
             <img src="/assets/icon/add_chats.svg" class="c-action__icon" width="30" height="30" alt="" title="" />
@@ -172,7 +172,14 @@ const BlockUserRooms = async function (Static) {
       <section class="c-chats__content" >
     <div class="c-chats__border">
             <ul class="c-chats__messages">
-            <li class="c-chats__message c-message">
+
+
+            {Variable.UsersRooms.list_records.map(function (userrooms, i) {
+  
+           if(userrooms.message.length > 0)
+             {
+              return (
+                <li class="c-chats__message c-message">
                 <div class="c-message__avatar micro_user_avatar">
                     <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
                     <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;" src="/assets/profile/frame/default.svg" />
@@ -195,30 +202,42 @@ const BlockUserRooms = async function (Static) {
                 {
                 //сообщения
                 <div class="c-message__body">
-                  
+                 {userrooms.message} 
                 </div>
               }
             </li>
+          )
+            }})}
+
+            
              </ul>
       </div>
       <div class="c-chats__form c-form">
 
                 <div class="c-form__block">
-<div class="c-form__wrapfield c-form__wrapfield--text">
+<div class="">
   <textarea name="message" id="" cols="" rows="1" class="c-form__field" placeholder="Написать сообщение"></textarea>
-    <div class="c-form__actions"><a href="#" class="c-form__action c-form__action--left" title="">
-        <img src="/assets/icon/smile.svg" width="13" height="13" alt="" class="c-form__icon"/>
-    </a>
-    <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
-        <img src="/assets/icon/attach.svg" width="13" height="13" alt="" class="c-form__icon"/>
-    </label>
-    <a href="#" class="c-form__action c-form__action--right" title="">
-        <img src="/assets/icon/email.svg" width="13" height="13" alt="" class="c-form__icon"/></a>
-    </div>
-    <button onclick={()=>{alert()}} type="submit" class="c-form__send">
-        <img src="/assets/icon/send.svg" width="13" height="13" alt="" class="c-form__icon"/>
+  <button onclick={async ()=>{
+     //оправим сообщение
+
+
+    
+let _id =  Variable.UsersRooms.list_records[0]._id
+
+let text = "привет это моеё первое тестовое сообщение"
+
+  //нулевая комната 
+
+      let  response = await fn.restApi.setUserRoomMessage.sendMessage({ _id,text})
+  // let response = await fn.restApi.setUserRoomMessage.sendMessage({ _id,text})
+ //console.log(response)
+    }} 
+    
+   >
+       отправить
     </button>
-</div>
+</div>  
+
 <div class="c-form__wrapfield" style="display: none;">
     <input type="file" id="file" class="c-form__field" name="file" />
 </div>
@@ -228,92 +247,96 @@ const BlockUserRooms = async function (Static) {
       </section>
       </div>
     </div>  
-      <div class="c-questions__list">
-      {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-        console.log(userrooms)
-        return (
-          <div class="c-questions__item c-question question-block questionLoad">
-            <div class="c-question__header">
-              <div class="c-question__avatar">
+    {/*
+    блок для пользовательских комнат
+    */} 
+    <br />
+    <br />
+    <br />
+    <div class="c-questions__list">
+{Variable.UsersRooms.list_records.map(function (userrooms, i) {
 
-              </div>
-              <div class="c-question__name">
-                <a
-                  class="c-question__nickname"
-                  style="display: block; left: 5px;bottom:5px"
-                  href={`/user/${userrooms.author.nickname}`}
-                  onclick={(e) => {
+  return (
+    <div class="c-questions__item c-question question-block questionLoad">
+      <div class="c-question__header">
+        <div class="c-question__avatar">
 
-                  }}>
-                 {userrooms.author.nickname}
-                </a>
-                <div class="c-question__info">
-                  <div class="c-question__icons">
-                    {userrooms.close ?
-                            <img
-                              class="c-question__icon c-question__icon--status"
-                              src={svg[`${(typeof userrooms.bestId == "string") ? "best_answer" : "closed_question"}`]}
-                            />
-                            :
-                            <img class="c-question__icon c-question__icon--status" src={svg.open_question} />
-                        }
-                    <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "audio") ? "c-question__icon--active" : null]} src={svg.userrooms} />
-                    <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "video") ? "c-question__icon--active" : null]} src={svg.userrooms} />
-                    <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "image") ? "c-question__icon--active" : null]} src={svg.userrooms} />
-                  </div>
-                  <div class="c-question__langcontainer language_container ">
-                    <div class="c-question__lang language-question">
-                      {userrooms.languages.orig_name}
-                    </div>
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div class="c-question__name">
+          <a
+            class="c-question__nickname"
+            style="display: block; left: 5px;bottom:5px"
+            href={`/user/${userrooms.author.nickname}`}
+            onclick={(e) => {
+
+            }}>
+           {userrooms.author.nickname}
+          </a>
+          <div class="c-question__info">
+            <div class="c-question__icons">
+              {userrooms.close ?
+                      <img
+                        class="c-question__icon c-question__icon--status"
+                        src={svg[`${(typeof userrooms.bestId == "string") ? "best_answer" : "closed_question"}`]}
+                      />
+                      :
+                      <img class="c-question__icon c-question__icon--status" src={svg.open_question} />
+                  }
+              <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "audio") ? "c-question__icon--active" : null]} src={svg.userrooms} />
+              <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "video") ? "c-question__icon--active" : null]} src={svg.userrooms} />
+              <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "image") ? "c-question__icon--active" : null]} src={svg.userrooms} />
             </div>
-            <a
-              style=""
-              href={`/chat/show/${userrooms._id}`}
-              class="c-question__body"
-              //ссылка твой вопрос
-              onclick={function (e) {
-                // fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author: question.author, items: hrefMenuitems, editVisible: false })
-                //fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question })
-              }}
-            >
-              <div class="c-question__preview">
-                <span class="">
-                  {fn.sliceString(userrooms.settingsroom.title, 66)}
-                </span>
-                
+            <div class="c-question__langcontainer language_container ">
+              <div class="c-question__lang language-question">
+                {userrooms.languages.orig_name}
               </div>
-            </a>
-         
-            <div class="c-question__statistic">
-              <div class="c-question__stats ">
-                <img />
-                {fn.getDateFormat(userrooms.showDate, "now")}
-              </div>
-            </div>
-            <div class="c-question__footer">
-              <a
-                class="c-button c-button--outline2 buttonunswer"
-                 
-                onclick={async (e) => {
-                  let request = {}
-                  let requier = await fn.restApi.setUserRoom.create("637787d7ef86b7bb84aee185", ["test"] ,Variable.myInfo )
-                  console.log(requier)
-                }}
-
-              >
-                <div class="c-button__wrapper">
-              войти
-                </div>
-              </a>
             </div>
           </div>
-        )
-      })
-      }
+        </div>
       </div>
+      <a
+        style=""
+        href={`/chat/show/${userrooms._id}`}
+        class="c-question__body"
+        //ссылка твой вопрос
+        onclick={function (e) {
+          // fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author: question.author, items: hrefMenuitems, editVisible: false })
+          //fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question })
+        }}
+      >
+        <div class="c-question__preview">
+          <span class="">
+            {fn.sliceString(userrooms.settingsroom.title, 66)}
+          </span>
+          
+        </div>
+      </a>
+   
+      <div class="c-question__statistic">
+        <div class="c-question__stats ">
+          <img />
+          {fn.getDateFormat(userrooms.showDate, "now")}
+        </div>
+      </div>
+      <div class="c-question__footer">
+        <a
+          class="c-button c-button--outline2 buttonunswer"
+           
+          onclick={async (e) => {
+     
+          }}
+
+        >
+          <div class="c-button__wrapper">
+        войти
+          </div>
+        </a>
+      </div>
+    </div>
+  )
+})
+}
+</div>
 
 <ButtonShowMore Static={Static} action="getRooms" />
 </div>

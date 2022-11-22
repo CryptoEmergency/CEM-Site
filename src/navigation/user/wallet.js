@@ -56,7 +56,7 @@ const start = function (data, ID) {
                         <div class="c-wallet__container">
                             <div class="c-wallet__left">
                                 <UserWalletCard logo={true} balance={Variable.myInfo.balance.cemd} course={1} coin={"CEMD"} />
-                                <UserWalletCard logo={true} balance={Variable.myInfo.balance.cem} course={Variable.Course.list_records[0].cem.usdt} coin={"CEM"} />
+                                {/* <UserWalletCard logo={true} balance={Variable.myInfo.balance.cem} course={Variable.Course.list_records[0].cem.usdt} coin={"CEM"} /> */}
                             </div>
                         </div>
                         <div class="c-wallet__operations">

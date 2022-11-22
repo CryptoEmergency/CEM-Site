@@ -476,7 +476,6 @@ restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filt
         select: select,
         sort
     }
-
     let response = await sendApi.send(data);
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
@@ -890,19 +889,24 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
     return checkSetAnswer(response)
 }
 
+restApi.setUserRoomMessage = {}
 
-restApi.doRole = {}
-
-restApi.doRole.deletePost = async function ({_id}) {
+restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
     let data = {
-        roleAction: "setPost",
-        _id: _id,
-        value: {
-            active: false
+        value:{
+        message:{
+            text: text,
+          /*  media:[{
+                type: {type: String},
+                name: {type: String},
+                active:{type: Boolean, default: true}
+            }]*/
+        }},
+        _id
         }
-    }
+  
 
-    const response = await sendApi.create("doRole", data);
+    const response = await sendApi.create("setUserRoom", data);
     return checkSetAnswer(response)
 }
 

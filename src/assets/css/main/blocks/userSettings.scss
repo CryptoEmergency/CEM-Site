@@ -32,9 +32,10 @@
         }
 
         &_item {
+            position: relative;
+            margin-bottom: 13px;
             padding-left: 22px;
             padding-right: 10px;
-            position: relative;
             z-index: 2;
 
             &:nth-child(1) {
@@ -62,7 +63,6 @@
 
             &_active {
                 background: linear-gradient(107.19deg, $china_aster1 1.5%, $atlantic_charter 109.67%);
-                margin-bottom: 13px;
                 overflow: hidden;
 
                 .settings {
@@ -70,9 +70,15 @@
                         &_title {
                             margin-bottom: 5px;
                             color: $white;
+
+                            &::after {
+                                content: none;
+                            }
                         }
 
                         &_subcategory {
+                            display: block;
+
                             &--active {
                                 background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
                                 -webkit-background-clip: text;
@@ -89,6 +95,7 @@
         }
 
         &_title {
+            position: relative;
             font-weight: 600;
             font-size: 16px;
             line-height: 32px;
@@ -97,9 +104,25 @@
             padding-top: 8px;
             padding-bottom: 5px;
             color: $sweet_emily;
+
+            &::before,
+            &::after {
+                position: absolute;
+                content: url('../svg/settings_active_category_line.svg');
+                top: 0;
+                right: 20px;
+                padding: 3px 0;
+            }
+
+            &::after {
+                top: 4px;
+                right: 16px;
+                transform: rotate(90deg);
+            }
         }
 
         &_subcategory {
+            display: none;
             padding-left: 9px;
             padding-bottom: 10px;
 
