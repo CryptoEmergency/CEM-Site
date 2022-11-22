@@ -66,9 +66,19 @@
                 overflow: hidden;
 
                 .settings {
-                    &_list_title {
-                        margin-bottom: 5px;
-                        color: $white;
+                    &_list {
+                        &_title {
+                            margin-bottom: 5px;
+                            color: $white;
+                        }
+
+                        &_subcategory {
+                            &--active {
+                                background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                            }
+                        }
                     }
 
                     &_gradient_line {
@@ -429,7 +439,7 @@
         align-items: baseline;
         gap: 20px;
         width: 100%;
-        
+
 
         @media(max-width: 599px) {
             flex-direction: column;

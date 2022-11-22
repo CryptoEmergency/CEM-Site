@@ -6,7 +6,7 @@ import {
 } from "@betarost/cemjs";
 import { Avatar } from "@component/element/Avatar.js";
 
-const ModalConfirmAction = function ({ action, text }, ID) {
+const ModalConfirmAction = function ({ action, text, button }, ID) {
   init(
     null,
     () => {
@@ -26,7 +26,7 @@ const ModalConfirmAction = function ({ action, text }, ID) {
                   <div
                     onclick={action}
                   >
-                      {Variable.lang.button.apply}
+                    {button}
                   </div>
               </div>
             </div>
