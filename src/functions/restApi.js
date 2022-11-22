@@ -669,6 +669,19 @@ restApi.setPost.complain = async function ({ _id, complain }) {
     return checkSetAnswer(response)
 }
 
+
+restApi.setPost.delete = async function ({ _id }) {
+    let data = {
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setPost", data);
+    console.log(response)
+    return checkSetAnswer(response)
+}
 // Запросы  на новости
 restApi.setNews = {}
 
