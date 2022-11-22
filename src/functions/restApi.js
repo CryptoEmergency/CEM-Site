@@ -476,7 +476,6 @@ restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filt
         select: select,
         sort
     }
-
     let response = await sendApi.send(data);
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
@@ -892,25 +891,22 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
 
 restApi.setUserRoomMessage = {}
 
-restApi.setUserRoomMessage.sendMessage = async function ({ text,_id,user,author,languages,country }) {
+restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
     let data = {
-        message:[{
+        value:{
+        message:{
             text: text,
-           /* media:[{
+          /*  media:[{
                 type: {type: String},
                 name: {type: String},
                 active:{type: Boolean, default: true}
-            }],*/
-        }],
-        author:author,
-        user:user,
-        languages:languages,
-        country:country,
+            }]*/
+        }},
         _id
         }
   
-console.log(data)
-    const response = await sendApi.create("setUserRoomMessage", data);
+
+    const response = await sendApi.create("setUserRoom", data);
     return checkSetAnswer(response)
 }
 
