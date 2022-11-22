@@ -1045,6 +1045,11 @@
     padding: 5px;
     width: 100%;
 
+    @media(max-width: 599px) {
+        height: 188px !important;
+        background-size: 100% 100%;
+    }
+
     .audio_container {
         margin-bottom: 0;
     }
