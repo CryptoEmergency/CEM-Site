@@ -78,12 +78,12 @@ const BlockProjects = async function () {
                     "link": "question",
                     modal: true
                 },
-                {
-                    "title": Variable.lang.a.exchange,
-                    "icon": "preview_line_exchanger",
-                    "link": "list-exchange",
-                    modal: true
-                },
+                // {
+                //     "title": Variable.lang.a.exchange,
+                //     "icon": "preview_line_exchanger",
+                //     "link": "list-exchange",
+                //     modal: true
+                // },
                 // {
                 //     "title": Variable.lang.a.university,
                 //     "icon": "mortarboard",
@@ -104,24 +104,24 @@ const BlockProjects = async function () {
                 //     "icon": "star1",
                 //     "link": "ico-rating"
                 // },
-                {
-                    "title": Variable.lang.a.trade,
-                    "icon": "preview_line_exchange",
-                    "link": "list-trade",
-                    modal: true
-                },
+                // {
+                //     "title": Variable.lang.a.trade,
+                //     "icon": "preview_line_exchange",
+                //     "link": "list-trade",
+                //     modal: true
+                // },
                 {
                     "title": Variable.lang.a.news,
                     "icon": "preview_line_news",
                     "link": "news",
-                    "items": fn.itemsMenu.onlyPage({url: '/news/'}),
+                    "items": fn.itemsMenu.onlyPage({ url: '/news/' }),
                     modal: true
                 },
                 {
                     "title": Variable.lang.a.blog,
                     "icon": "preview_line_blog",
                     "link": "blog",
-                    "items": fn.itemsMenu.onlyPage({url: '/blog/'}),
+                    "items": fn.itemsMenu.onlyPage({ url: '/blog/' }),
                     modal: true
                 },
                 {
@@ -152,7 +152,7 @@ const BlockProjects = async function () {
                     "title": Variable.lang.a.career,
                     "icon": "careers_icon",
                     "link": "career-whith-us",
-                    "items": fn.itemsMenu.onlyPage({url: '/career-whith-us/'}),
+                    "items": fn.itemsMenu.onlyPage({ url: '/career-whith-us/' }),
                     modal: true
                 }
             ];
@@ -163,7 +163,7 @@ const BlockProjects = async function () {
                         <a href={`/${item.link}/`}
                             onclick={(e) => {
                                 if (item.modal) {
-                                    fn.siteLinkModal(e, { title: item.title, items: item.items})
+                                    fn.siteLinkModal(e, { title: item.title, items: item.items })
                                 } else {
                                     fn.siteLink(e)
                                 }
