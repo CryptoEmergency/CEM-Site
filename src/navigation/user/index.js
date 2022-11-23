@@ -18,6 +18,8 @@ import {
 // import { fn } from "moment";
 
 const start = function (userInfo, ID = "mainBlock") {
+    let [Static] = fn.GetParams({ userInfo, ID })
+    console.log('=3d3693=', Variable)
     Variable.Static.FooterShow = false
     let profilePage,
         activeItems
@@ -29,7 +31,24 @@ const start = function (userInfo, ID = "mainBlock") {
             return
         }
         profilePage = this.dataset.profilepage
-        if (profilePage == "questions") {
+        if (profilePage == "lentaFriends") {
+            if (userInfo._id == Variable.myInfo._id) {
+                console.log('=6b3d8b=', 777)
+                activeItems = Variable.PageUserProfileMyLenta
+            } else {
+                console.log('=85f00f=', 999)
+                activeItems = await sendApi.send({
+                    action: "getPost", short: true,
+                    filter: {
+                        author: userInfo._id,
+                    },
+                    select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
+                    limit: 12
+                });
+            }
+            console.log('=2b1496=', activeItems)
+
+        } else if (profilePage == "questions") {
             if (userInfo._id == Variable.myInfo._id) {
                 activeItems = Variable.PageUserProfileQuestions
             } else {
@@ -88,9 +107,19 @@ const start = function (userInfo, ID = "mainBlock") {
 
     init(
         async () => {
+            fn.initData.lenta_users(Static)
             profilePage = "aboutUser"
 
             if (userInfo._id == Variable.myInfo._id) {
+                Variable.PageUserProfileMyLenta = await sendApi.send({
+                    action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
+                    filter: {
+                        author: userInfo._id,
+                    },
+                    select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
+                    limit: 12
+                })
+
                 Variable.PageUserProfileQuestions = await sendApi.send({
                     action: "getQuestions", short: true, cache: true, name: "PageUserProfileQuestions", filter: {
                         author: userInfo._id,
@@ -288,28 +317,36 @@ const start = function (userInfo, ID = "mainBlock") {
                     <div class="c-usercategories  c-container">
 
 
-                        {/*
-                            <div class="c-usercategories__item">
-                                <img
-                                    class="c-usercategories__img"
-                                    src={svg[`sections/user_feeds${profilePage != 'lentaFriends' ? '_inactive' : ''}`]}
-                                    data-profilePage = "lentaFriends"
-                                    onclick={changeType}
-                                />
-                            </div> 
-                        */}
+
+                        <div class="c-usercategories__item">
+                            <i
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'lentaFriends' ? 'c-usercategories__icon--lentafriends' : 'c-usercategories__icon--lentafriends_inactive'
+                                ]}
+                                data-profilePage="lentaFriends"
+                                onclick={changeType}
+                            ></i>
+                        </div>
+
 
 
                         <div class="c-usercategories__item">
                             <i
-                                class={['c-usercategories__icon c-usercategories__icon--information', profilePage != 'aboutUser' ? '_inactive' : null]}
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'aboutUser' ? 'c-usercategories__icon--information' : 'c-usercategories__icon--information_inactive'
+                                ]}
                                 data-profilePage="aboutUser"
                                 onclick={changeType}
                             ></i>
                         </div>
                         <div data-type="questions" class="c-usercategories__item">
                             <i
-                                class={['c-usercategories__icon c-usercategories__icon--questions', profilePage != 'questions' ? '_inactive' : null]}
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'questions' ? 'c-usercategories__icon--questions' : 'c-usercategories__icon--questions_inactive'
+                                ]}
                                 data-profilePage="questions"
                                 onclick={changeType}
                             ></i>
@@ -321,7 +358,10 @@ const start = function (userInfo, ID = "mainBlock") {
                         </div>
                         <div data-type="answers" class="c-usercategories__item">
                             <i
-                                class={['c-usercategories__icon c-usercategories__icon--answers', profilePage != 'answers' ? '_inactive' : null]}
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'answers' ? 'c-usercategories__icon--answers' : 'c-usercategories__icon--answers_inactive'
+                                ]}
                                 data-profilePage="answers"
                                 onclick={changeType}
                             ></i>
@@ -333,7 +373,10 @@ const start = function (userInfo, ID = "mainBlock") {
                         </div>
                         <div data-type="subscribers" class="c-usercategories__item">
                             <i
-                                class={['c-usercategories__icon c-usercategories__icon--followers', profilePage != 'subscribers' ? '_inactive' : null]}
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'subscribers' ? 'c-usercategories__icon--followers' : 'c-usercategories__icon--followers_inactive'
+                                ]}
                                 data-profilePage="subscribers"
                                 onclick={changeType}
                             ></i>
@@ -345,7 +388,10 @@ const start = function (userInfo, ID = "mainBlock") {
                         </div>
                         <div data-type="friends" class="c-usercategories__item">
                             <i
-                                class={['c-usercategories__icon c-usercategories__icon--friends', profilePage != 'friends' ? '_inactive' : null]}
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'friends' ? 'c-usercategories__icon--friends' : 'c-usercategories__icon--friends_inactive'
+                                ]}
                                 data-profilePage="friends"
                                 onclick={changeType}
                             ></i>
@@ -357,14 +403,20 @@ const start = function (userInfo, ID = "mainBlock") {
                         </div>
                         <div data-type="awards" class="c-usercategories__item">
                             <i
-                                class={['c-usercategories__icon c-usercategories__icon--awards', profilePage != 'awards' ? '_inactive' : null]}
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'awards' ? 'c-usercategories__icon--awards' : 'c-usercategories__icon--awards_inactive'
+                                ]}
                                 data-profilePage="awards"
                                 onclick={changeType}
                             ></i>
                         </div>
                         {/* <div data-type="social" class="c-usercategories__item">
                                 <i
-                                    class={`c-usercategories__icon c-usercategories__icon--social${profilePage != 'social' ? '_inactive' : ''}`}
+                                    class={[
+                                        `c-usercategories__icon',
+                                        profilePage == 'social' ? 'c-usercategories__icon--social' : 'c-usercategories__icon--social_inactive'
+                                    ]}
                                     data-profilePage="social"
                                     onclick={changeType}
                                 ></i>
