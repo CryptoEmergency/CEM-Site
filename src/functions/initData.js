@@ -660,7 +660,6 @@ initData.media_show = function (Static) {
 
 
 initData.generate = function (arrData) {
-    console.log('=f1839b=', arrData)
     let objReturn = {}
     arrData.map(key => objReturn[key] = filters[key])
     return objReturn
@@ -668,7 +667,7 @@ initData.generate = function (arrData) {
 
 
 initData.rooms = function (Static) {
-   // Static.Rooms = {}
+    Static.Rooms = {}
     Static.MessageValue = {}
 }
 

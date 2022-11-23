@@ -8,13 +8,13 @@ import { BlockUserRooms } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
-    console.log(Static,"rooms1")
+
     init(()=>{
         fn.initData.rooms(Static)
 
     },
         () => {
-            console.log(Static,"rooms2")
+           
             return (
                 <div class='c-main__body'>
                     
