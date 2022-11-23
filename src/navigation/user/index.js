@@ -19,7 +19,7 @@ import {
 
 const start = function (userInfo, ID = "mainBlock") {
     let [Static] = fn.GetParams({ userInfo, ID })
-    console.log('=3d3693=', Variable)
+
     Variable.Static.FooterShow = false
     let profilePage,
         activeItems
@@ -33,10 +33,8 @@ const start = function (userInfo, ID = "mainBlock") {
         profilePage = this.dataset.profilepage
         if (profilePage == "lentaFriends") {
             if (userInfo._id == Variable.myInfo._id) {
-                console.log('=6b3d8b=', 777)
                 activeItems = Variable.PageUserProfileMyLenta
             } else {
-                console.log('=85f00f=', 999)
                 activeItems = await sendApi.send({
                     action: "getPost", short: true,
                     filter: {
@@ -46,7 +44,7 @@ const start = function (userInfo, ID = "mainBlock") {
                     limit: 12
                 });
             }
-            console.log('=2b1496=', activeItems)
+            // console.log('=2b1496=', activeItems)
 
         } else if (profilePage == "questions") {
             if (userInfo._id == Variable.myInfo._id) {
@@ -462,7 +460,7 @@ const start = function (userInfo, ID = "mainBlock") {
 
                     <div class="userMainBlock">
                         {() => {
-                            return BlockUserProfilePage[profilePage]({ profilePage, items: activeItems, userInfo })
+                            return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
                         }}
                     </div>
                 </div>

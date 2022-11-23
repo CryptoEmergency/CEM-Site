@@ -14,9 +14,8 @@ import { BlockLentaUsers } from '@component/blocks/index.js';
 
 const BlockUserProfilePage = {}
 
-BlockUserProfilePage.lentaFriends = function (data, ID) {
-    let [Static] = fn.GetParams({ data, ID })
-    console.log('=8d74d9=', Static)
+BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
+    // console.log('=8d74d9=', data)
 
     if (!data || data.profilePage != "lentaFriends") {
         return (<></>)
@@ -28,25 +27,25 @@ BlockUserProfilePage.lentaFriends = function (data, ID) {
                 <div class="user_news">
                     <div class="user_news_block">
                         {
-                            Variable.myInfo._id ?
+                            data.userInfo._id == Variable.myInfo._id ?
                                 <h2>{Variable.lang.h.posts_my}</h2>
                                 :
                                 <h2>{Variable.lang.h.posts_user}</h2>
                         }
                         {
-                            !Static.items || !Static.items.list_records.length
+                            !data.items || !data.items.list_records.length
                                 ?
                                 <NotFound />
                                 :
                                 <div>
-                                    <BlockLentaUsers
+                                    {/* <BlockLentaUsers
                                         Static={Static}
-                                        item={Static.items.list_records[0]}
+                                        item={data.items.list_records[0]}
                                         ElemVisible={() => {
                                             fn.recordsView(item._id, "setPost")
                                         }}
-                                    />
-                                    {/* { Static.items.list_records.map((item) => {
+                                    /> */}
+                                    { data.items.list_records.map((item) => {
                                         return (
                                             <BlockLentaUsers
                                                 Static={Static}
@@ -57,7 +56,7 @@ BlockUserProfilePage.lentaFriends = function (data, ID) {
                                             />
                                             )
                                         })
-                                    } */}
+                                    }
                                 </div>
                         }
                     </div>
@@ -67,7 +66,7 @@ BlockUserProfilePage.lentaFriends = function (data, ID) {
     )
 }
 
-BlockUserProfilePage.aboutUser = function (data) {
+BlockUserProfilePage.aboutUser = function (Static, data) {
     if (!data || data.profilePage != "aboutUser") {
         return (<></>)
     }
@@ -323,7 +322,7 @@ BlockUserProfilePage.aboutUser = function (data) {
     )
 }
 
-BlockUserProfilePage.awards = function (data) {
+BlockUserProfilePage.awards = function (Static, data) {
     if (!data || data.profilePage != "awards") {
         return (<></>)
     }
@@ -359,7 +358,7 @@ BlockUserProfilePage.awards = function (data) {
     )
 }
 
-BlockUserProfilePage.subscribers = function (data) {
+BlockUserProfilePage.subscribers = function (Static, data) {
     if (!data || data.profilePage != "subscribers") {
         return (<></>)
     }
@@ -453,7 +452,7 @@ BlockUserProfilePage.subscribers = function (data) {
 
 }
 
-BlockUserProfilePage.friends = function (data) {
+BlockUserProfilePage.friends = function (Static, data) {
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }
@@ -546,7 +545,7 @@ BlockUserProfilePage.friends = function (data) {
 }
 
 
-BlockUserProfilePage.answers = function (data) {
+BlockUserProfilePage.answers = function (Static, data) {
     if (!data || data.profilePage != "answers") {
         return (<></>)
     }
@@ -654,7 +653,7 @@ BlockUserProfilePage.answers = function (data) {
 
 }
 
-BlockUserProfilePage.questions = function (data) {
+BlockUserProfilePage.questions = function (Static, data) {
     if (!data || data.profilePage != "questions") {
         return (<></>)
     }
