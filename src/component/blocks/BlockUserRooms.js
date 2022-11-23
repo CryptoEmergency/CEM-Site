@@ -16,10 +16,10 @@ const BlockUserRooms = async function ({Static}) {
   Static.UserLang = Variable.myInfo.mainLanguage
   //Зарегистрирован или нет
   Static.Auth = Variable.auth
-
+  //динамическая идишка
+  let roomsId
 
   Static.MessageValue = {
-    value:"",
     id:""
   }
 
@@ -30,9 +30,9 @@ const BlockUserRooms = async function ({Static}) {
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
       CheckSystemInterface()
   })
-console.log(Variable.ListSystemsRooms.list_records)
 
-  function checkAthorisation(Static)
+    //если не авторизован
+    function checkAthorisation(Static)
   {
     if(Static.Auth)
     {
@@ -42,9 +42,7 @@ console.log(Variable.ListSystemsRooms.list_records)
       fn.modals.ModalNeedAuth()
       return false
     }
-  }
-
-
+    }
 
    //чекнем системную комнату отинтерфейса
    function CheckSystemInterface()
@@ -65,22 +63,24 @@ console.log(Variable.ListSystemsRooms.list_records)
    //меняем комнаты
    async function ChangeRooms(_id,system)
    {
+    
+    document.getElementById("spinner").hidden=false  
 
    let response = await fn.restApi.getUserRoom({_id,  filter: { system: system,  _id: _id } })
 
- 
      Static.Rooms = response.list_records[0]
-  
-  
+
      ShowMessage(Static)
+     
+     Static.MessageValue.el.value = ""
      initReload()
+
    }
   
   //пишем сообщения
   async function sendRoomsMessage(id,textdata)
   {
  
-
     let _id = id
     let text = textdata
 
@@ -91,16 +91,17 @@ console.log(Variable.ListSystemsRooms.list_records)
     let response = await fn.restApi.getUserRoom({_id,filter: { _id: _id } })
     Static.Rooms = response.list_records[0]
 initReload()
+
   }
 
   //показываем сообщения
  function ShowMessage(Static)
   {
-
+    Static.MessageValue.id = Static.Rooms._id
     if(Static.Rooms.message.length > 0)
     {
 
-      Static.MessageValue.id = Static.Rooms._id
+  
 
      return  Static.Rooms.message.map(function (userrooms, i) {
 
@@ -136,12 +137,25 @@ initReload()
      
          )})
    }
+   else{
+
+    return(
+      <li class="c-chats__message c-message">
+      <div class="c-message__title">
+          <center>В данной комнате пока нет сообщений</center>
+
+      </div>
+ </li>
+    )
+  
+   }
+   
  
   }
 
 
 
-let roomsId
+
 
   return (
     <div>
@@ -167,7 +181,7 @@ let roomsId
                     style="display: block; left: 5px;bottom:5px"
                     href={`/user/${systemsrooms.author.nickname}`}
                     onclick={(e) => {
-        
+                   
                     }}>
                    {systemsrooms.author.nickname}
                   </a>
@@ -199,8 +213,7 @@ let roomsId
                 class="c-question__body"
                 //ссылка твой вопрос
                 onclick={function (e) {
-                  // fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author: question.author, items: hrefMenuitems, editVisible: false })
-                  //fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question })
+             alert()
                 }}
               >
                 <div class="c-question__preview">
@@ -262,11 +275,10 @@ let roomsId
            {
         return (
             <li class="c-chats__toggler c-toggler c-toggler--active">
-              <a href="#" class="c-toggler__link" data-action="viewChat" title="Одна группа">
-   
-                <div class="c-toggler__delete" title="Удалить">
-                  <img src="/assets/icon/close_group.svg" alt="" width="" height="" class="c-toggler__close" />
-                </div>
+              <a class="c-toggler__link" onclick={function (e) {
+           roomsId = userrooms._id
+           ChangeRooms(roomsId,false)
+                }}>
               </a>
             </li>
         )
@@ -297,16 +309,12 @@ let roomsId
       </aside>
       <section class="c-chats__content" >
     <div class="c-chats__border">
-            <ul class="c-chats__messages">
+            <ul class="c-chats__messages" id="chatMessage">
   
 
             {
-             
-             
                ShowMessage(Static)
-          
-          
-          }
+            }
             
              </ul>
       </div>
@@ -320,7 +328,7 @@ let roomsId
      //оправим сообщение
      checkAthorisation(Static)
      sendRoomsMessage(Static.MessageValue.id,Static.MessageValue.el.value)
-    
+     Static.MessageValue.el.value = ""
     }} 
     
    >
@@ -340,6 +348,8 @@ let roomsId
     {/*
     блок для пользовательских комнат
     */} 
+    <br />
+    <br />
     <br />
     <br />
     <br />
