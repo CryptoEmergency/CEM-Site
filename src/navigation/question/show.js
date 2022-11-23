@@ -38,7 +38,7 @@ const start = function (data, ID) {
             <div class="answer_content">
               <div class="question_author_block">
                 <Avatar author={item.author} nickName={item.author.nickname} />
-                {!Static.openModals ? <div class="comment_icons"> <ItemsMenu author={item.author} items={fn.itemsMenu.lenta_users(Static, item)} /> </div> : null}
+                {!Static.openModals ? <div class="comment_icons"> <ItemsMenu author={item.author} items={fn.itemsMenu.question(Static, item)} /> </div> : null}
               </div>
               {
                 !Static.editQuestion

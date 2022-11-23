@@ -867,6 +867,16 @@ restApi.setQuestions.view = async function ({ _id, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setQuestions.delete = async function ({ _id }) {
+    let data = {
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+    const response = await sendApi.create("setQuestions", data);
+    return checkSetAnswer(response, noAlert)
+}
 
 restApi.setUserRoom = {}
 
