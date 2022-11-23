@@ -668,7 +668,8 @@ initData.generate = function (arrData) {
 
 
 initData.rooms = function (Static) {
-
+   // Static.Rooms = {}
+    Static.MessageValue = {}
 }
 
 export { initData };
