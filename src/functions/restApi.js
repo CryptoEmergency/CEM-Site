@@ -464,18 +464,20 @@ restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 }
 
-restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
+restApi.getUserRoom = async function ({cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
     let data = {
         action: "getUserRoom",
         short: true,
-        cache,
+        cache:cache,
         name,
         limit,
         offset,
         filter: filter,
         select: select,
-        sort
+        sort,
+   
     }
+
     let response = await sendApi.send(data);
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
