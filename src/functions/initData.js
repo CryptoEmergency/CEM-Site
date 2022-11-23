@@ -667,6 +667,10 @@ initData.generate = function (arrData) {
 
 
 initData.rooms = function (Static) {
+     //Зарегистрирован или нет
+    Static.Auth = Variable.auth
+     //настройки языка
+    Static.UserLang = Variable.myInfo.mainLanguage
     Static.Rooms = {}
     Static.MessageValue = {}
 }
