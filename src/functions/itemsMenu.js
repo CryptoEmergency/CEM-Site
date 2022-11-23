@@ -254,7 +254,8 @@ itemsMenu.onlyPage = function ({ url, downloadurl }) {
     return items
 }
 
-itemsMenu.userProfile = function (Static, item) {
+itemsMenu.userProfile = function (item) {
+    console.log(item)
     const items = [
         {
             text: Variable.lang.select.share,
@@ -273,29 +274,12 @@ itemsMenu.userProfile = function (Static, item) {
             }
         },
         {
-            text: Variable.lang.p.copy + " URL",
-            type: "copyurl",
-            onclick: async () => {
-                navigator.clipboard.writeText(window.location.origin + "/user/" + item.nickname);
-                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
-            }
-        },
-        {
-            text: item.subscribe
-                ? Variable.lang.button.unsubscribe
-                : Variable.lang.button.subscribe,
-            type: "subscription",
+            text: Variable.lang.button.write,
+            type: "blackList",
             onlyAuth: true,
             onclick: async () => {
-
-                const response = await fn.restApi.setUsers.subscribe({ _id: item._id })
-                console.log(response)
-                if (response.status === "ok") {
-                    item.subscribe = !item.subscribe
-                    initReload();
-                } else {
-                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                }
+                Variable.Static.startChatsID = item
+                fn.siteLink("/user/chats/");
             }
         },
         {
