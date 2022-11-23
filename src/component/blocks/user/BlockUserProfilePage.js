@@ -38,14 +38,7 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                 <NotFound />
                                 :
                                 <div>
-                                    {/* <BlockLentaUsers
-                                        Static={Static}
-                                        item={data.items.list_records[0]}
-                                        ElemVisible={() => {
-                                            fn.recordsView(item._id, "setPost")
-                                        }}
-                                    /> */}
-                                    { data.items.list_records.map((item) => {
+                                    {data.items.list_records.map((item) => {
                                         return (
                                             <BlockLentaUsers
                                                 Static={Static}
@@ -54,8 +47,8 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                                     fn.recordsView(item._id, "setPost")
                                                 }}
                                             />
-                                            )
-                                        })
+                                        )
+                                    })
                                     }
                                 </div>
                         }

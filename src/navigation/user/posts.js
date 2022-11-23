@@ -6,6 +6,7 @@ import {
   Variable,
   Helpers,
   initGo,
+  sendApi,
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 
@@ -14,6 +15,8 @@ import {
   Avatar,
   MediaPreview
 } from "@component/element/index.js";
+
+import { BlockLentaUsers } from '@component/blocks/index.js';
 
 let Static, selectAspect;
 
@@ -36,7 +39,7 @@ const sendPost = async (e, Static) => {
     return false;
   }
 
-  let tmpRes = await fn.restApi.setPost.create({text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value]});
+  let tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
 
   if (tmpRes.status === "ok") {
     initGo();
@@ -68,8 +71,6 @@ const start = function (data, ID) {
   Variable.showUserMenu = false
 
   let authorPosts;
-
-
 
   const sendPhoto = async function (crooper) {
     if (!crooper) {
@@ -308,15 +309,34 @@ const start = function (data, ID) {
   let el = [];
 
   let [Static] = fn.GetParams({ data, ID })
+  Static.posts = []
+  Static.userInfo = Variable.myInfo;
+  Static.elShowTextShort = {}
+  Static.elShowTextFull = {}
 
   init(
     async () => {
       fn.initData.posts(Static)
 
+      // console.log('=cb696d=', Static)
+      // console.log('=0bb638=', Variable)
+
+      if (Static.userInfo._id == Variable.myInfo._id) {
+        Static.posts = await sendApi.send({
+          action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
+          filter: {
+            author: Static.userInfo._id,
+          },
+          select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
+          limit: 12
+        })
+      }
+
+      // console.log('=50f15c=', Static.posts)
 
       selectAspect = null;
 
-      authorPosts = await fn.restApi.getPost({cache: true, name: "MainPosts", filter: {author: Variable.myInfo._id}, sort: {showDate: -1,}})
+      authorPosts = await fn.restApi.getPost({ cache: true, name: "MainPosts", filter: { author: Variable.myInfo._id }, sort: { showDate: -1, } })
 
     },
 
@@ -355,7 +375,7 @@ const start = function (data, ID) {
                   <div
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
-                    oninput={(e)=>changeTextPost(e, Static)}
+                    oninput={(e) => changeTextPost(e, Static)}
                   ></div>
                   :
                   null
@@ -509,7 +529,7 @@ const start = function (data, ID) {
                   !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 type="button"
-                onClick={(e)=>sendPost(e, Static)}
+                onClick={(e) => sendPost(e, Static)}
               >
                 <span class="c-button__text">
                   {Variable.lang.button.create}
@@ -519,10 +539,30 @@ const start = function (data, ID) {
 
             <div class="c-userpostcreate__myposts my_posts">
               {Variable.lang.h.posts_my}
-              <div class="user_news_block">
-                {/* {{> userPost}} */}
-
-              </div>
+              {/* {{> userPost}} */}
+              {
+                !Static.posts || !Static.posts.list_records.length
+                  ?
+                  <div class="user_news_block">
+                    <NotFound />
+                  </div>
+                  :
+                  <div class="user_news_block">
+                    {
+                      Static.posts.list_records.map((item) => {
+                        return (
+                          <BlockLentaUsers
+                            Static={Static}
+                            item={item}
+                            ElemVisible={() => {
+                              fn.recordsView(item._id, "setPost")
+                            }}
+                          />
+                        )
+                      })
+                    }
+                  </div>
+              }
             </div>
           </form>
         </div>
