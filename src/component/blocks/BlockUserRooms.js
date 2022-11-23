@@ -17,20 +17,36 @@ const BlockUserRooms = async function (Static) {
   Static.UserLang = Variable.myInfo.mainLanguage
   //Зарегистрирован или нет
   Static.Auth = Variable.auth
+  
+  Static.Rooms ={}
 
+  //чекнем системную комнату отинтерфейса
+  function CheckSystemInterface(user)
+  {
+   
 
+    Variable.SystemsRooms.list_records.forEach(function(room){
 
+     if(Variable.myInfo.mainLanguage.code == room.languages.code && Variable.myInfo.mainLanguage.eng_name == room.languages.eng_name && Variable.myInfo.mainLanguage.orig_name == room.languages.orig_name)
+     {
+       //системная комната
+      Static.Rooms = room
+     }
+    })
+
+  }
 
 
 
   await initOne(async () => {
     await fn.restApi.getUserRoom({ cache: true, name: "SystemsRooms", filter: { system: true }, limit: 10 })
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
-
-
+    CheckSystemInterface()
   })
 
-console.log(Variable.UsersRooms)
+
+
+
   return (
     <div>
     <div class="c-questions__list questions-blocks c-chats__wrapper">
@@ -113,6 +129,7 @@ console.log(Variable.UsersRooms)
                 }}
               >
                 <div class="c-button__wrapper">
+
                   {/*Variable.lang.button.giveAnswer*/}
                 </div>
               </a>
@@ -172,13 +189,17 @@ console.log(Variable.UsersRooms)
       <section class="c-chats__content" >
     <div class="c-chats__border">
             <ul class="c-chats__messages">
-
-
-            {Variable.UsersRooms.list_records.map(function (userrooms, i) {
   
-           if(userrooms.message.length > 0)
+
+            {
+              ()=>{
+            if(Static.Rooms.message.length > 0)
              {
-              return (
+               
+              return  Static.Rooms.message.map(function (userrooms, i) {
+
+            
+                  return(
                 <li class="c-chats__message c-message">
                 <div class="c-message__avatar micro_user_avatar">
                     <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
@@ -191,24 +212,28 @@ console.log(Variable.UsersRooms)
                     <div style="display: none;" class="avatar_user_offline">
                     </div>
                 </div>
-                {
-                //ники пользователей
                 
+                {
+                //ники пользователей showDate
+               
                 <div class="c-message__title">
-                    <div class="c-message__nick">Raghav</div>
-                    <div class="c-message__date">12:21</div>
+                    <div class="c-message__nick">{userrooms.author.nickname}</div>
+                    <div class="c-message__date">{userrooms.author.showDate}</div>
                 </div>
                 }
                 {
                 //сообщения
                 <div class="c-message__body">
-                 {userrooms.message} 
+                  {userrooms.text}
                 </div>
               }
             </li>
-          )
-            }})}
-
+              
+                  )})
+            }
+            }
+          
+          }
             
              </ul>
       </div>
@@ -222,15 +247,14 @@ console.log(Variable.UsersRooms)
 
 
     
-let _id =  Variable.UsersRooms.list_records[0]._id
+let _id =  Variable.SystemsRooms.list_records[2]._id
 
-let text = "привет это моеё первое тестовое сообщение"
+let text = "привет это моеё тестовое сообщение для ситемной  комнаты от интерфейсаы"
 
   //нулевая комната 
 
       let  response = await fn.restApi.setUserRoomMessage.sendMessage({ _id,text})
-  // let response = await fn.restApi.setUserRoomMessage.sendMessage({ _id,text})
- //console.log(response)
+
     }} 
     
    >
