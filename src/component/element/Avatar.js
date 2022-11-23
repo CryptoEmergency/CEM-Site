@@ -153,7 +153,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           // alert()
           fn.siteLink(e)
         } else {
-          fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;' })
+          fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(author) })
         }
       }
       }

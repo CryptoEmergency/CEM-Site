@@ -195,7 +195,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                           if (Variable.myInfo && Variable.myInfo.nickname == question.author.nickname) {
                             fn.siteLink(e)
                           } else {
-                            fn.siteLinkModal(e, { title: question.author.nickname, style: 'background: #1D2029;' })
+                            fn.siteLinkModal(e, { title: question.author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(question.author) })
                           }
                         }}>
                         {question.author.nickname}
