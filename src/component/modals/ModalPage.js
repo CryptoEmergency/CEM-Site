@@ -21,6 +21,7 @@ import { ItemsMenu } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
+  
   let data = Variable.ModalsPage[ID].data
   // let mainId = item._id;
 

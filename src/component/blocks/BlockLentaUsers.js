@@ -34,7 +34,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
               <div
                 class="c-lentaitem__link"
                 data-href={"/lenta-users/show/" + item._id}
-                onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item }) }}
+                onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, items: fn.itemsMenu.lenta_users(Static, item) }) }}
               ></div>
               :
               null
@@ -130,7 +130,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
           onclick={(e) => {
             e.stopPropagation();
             if (!Static.openModals && !Static.showPage) {
-              fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item })
+              fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, items: fn.itemsMenu.lenta_users(Static, item) })
             }
           }}>
           <span class="c-date" data-id={item._id}>

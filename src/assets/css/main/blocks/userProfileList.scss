@@ -64,6 +64,14 @@
         width: 71px;
         height: 65px;
 
+        &--lentafriends {
+            background: no-repeat url("../svg/sections/user_feeds.svg") center/100%;
+
+            &_inactive {
+                background: no-repeat url("../svg/sections/user_feeds_inactive.svg") center/100%;
+            }
+        }
+
         &--information {
             background: no-repeat url("../svg/sections/information.svg") center/100%;
 

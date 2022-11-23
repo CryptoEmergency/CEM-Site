@@ -266,7 +266,16 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                                     null}
                                         </div>
                                         <div class="new_professional_card_main">
-                                            <a href={`/user/${user.nickname}`}>
+                                            <a 
+                                                href={`/user/${user.nickname}`} 
+                                                onclick={(e) => {
+                                                    if (Variable.myInfo && Variable.myInfo.nickname == user.nickname) {
+                                                        fn.siteLink(e)
+                                                    } else {
+                                                        fn.siteLinkModal(e, { title: user.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(user) })
+                                                    }
+                                                    }}
+                                            >
                                                 <p
                                                     style="width: 80%; margin: 5px auto;"
                                                     class="new_professional_name "

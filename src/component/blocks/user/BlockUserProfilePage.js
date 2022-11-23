@@ -9,11 +9,57 @@ import {
 } from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, ItemsMenu } from '@component/element/index.js';
+import { Avatar, ItemsMenu, NotFound } from '@component/element/index.js';
+import { BlockLentaUsers } from '@component/blocks/index.js';
 
 const BlockUserProfilePage = {}
 
-BlockUserProfilePage.aboutUser = function (data) {
+BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
+    // console.log('=8d74d9=', data)
+
+    if (!data || data.profilePage != "lentaFriends") {
+        return (<></>)
+    }
+
+    return (
+        <div class="bl_one c-container" id="UserInfoLenta">
+            <div class="user_main_block">
+                <div class="user_news">
+                    <div class="user_news_block">
+                        {
+                            data.userInfo._id == Variable.myInfo._id ?
+                                <h2>{Variable.lang.h.posts_my}</h2>
+                                :
+                                <h2>{Variable.lang.h.posts_user}</h2>
+                        }
+                        {
+                            !data.items || !data.items.list_records.length
+                                ?
+                                <NotFound />
+                                :
+                                <div>
+                                    {data.items.list_records.map((item) => {
+                                        return (
+                                            <BlockLentaUsers
+                                                Static={Static}
+                                                item={item}
+                                                ElemVisible={() => {
+                                                    fn.recordsView(item._id, "setPost")
+                                                }}
+                                            />
+                                        )
+                                    })
+                                    }
+                                </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+BlockUserProfilePage.aboutUser = function (Static, data) {
     if (!data || data.profilePage != "aboutUser") {
         return (<></>)
     }
@@ -74,7 +120,8 @@ BlockUserProfilePage.aboutUser = function (data) {
                                             <div class="about_user_section_points_container">
                                                 <img
                                                     onclick={() => {
-                                                        Variable.SetModals({ name: "ModalUserInfoEdit", data: data.userInfo })
+                                                        fn.modals.ModalUserInfoEdit(data.userInfo);
+                                                        // Variable.SetModals({ name: "ModalUserInfoEdit", data: data.userInfo })
                                                     }}
                                                     class="about_user_section_points"
                                                     src={svg['pencil']}
@@ -268,7 +315,7 @@ BlockUserProfilePage.aboutUser = function (data) {
     )
 }
 
-BlockUserProfilePage.awards = function (data) {
+BlockUserProfilePage.awards = function (Static, data) {
     if (!data || data.profilePage != "awards") {
         return (<></>)
     }
@@ -304,7 +351,7 @@ BlockUserProfilePage.awards = function (data) {
     )
 }
 
-BlockUserProfilePage.subscribers = function (data) {
+BlockUserProfilePage.subscribers = function (Static, data) {
     if (!data || data.profilePage != "subscribers") {
         return (<></>)
     }
@@ -398,7 +445,7 @@ BlockUserProfilePage.subscribers = function (data) {
 
 }
 
-BlockUserProfilePage.friends = function (data) {
+BlockUserProfilePage.friends = function (Static, data) {
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }
@@ -491,7 +538,7 @@ BlockUserProfilePage.friends = function (data) {
 }
 
 
-BlockUserProfilePage.answers = function (data) {
+BlockUserProfilePage.answers = function (Static, data) {
     if (!data || data.profilePage != "answers") {
         return (<></>)
     }
@@ -599,7 +646,7 @@ BlockUserProfilePage.answers = function (data) {
 
 }
 
-BlockUserProfilePage.questions = function (data) {
+BlockUserProfilePage.questions = function (Static, data) {
     if (!data || data.profilePage != "questions") {
         return (<></>)
     }

@@ -98,9 +98,11 @@ const start = function (data, ID) {
                                             let course = Variable.Course.list_records[0][key]
                                             return (
                                                 <a
-                                                    href={key == "cem" ? "https://www.bitmart.com/trade/en?layout=basic&symbol=CEM_USDT" : "/list-trade/"}
+                                                    href="/"
+                                                    // href={key == "cem" ? "https://www.bitmart.com/trade/en?layout=basic&symbol=CEM_USDT" : "/list-trade/"}
                                                     rel="nofollow noopener"
-                                                    target={key == "cem" ? "_blank" : "_self"}
+                                                    target="_self"
+                                                    // target={key == "cem" ? "_blank" : "_self"}
                                                     class="c-currency"
                                                 >
                                                     <div class="c-currency__icon">

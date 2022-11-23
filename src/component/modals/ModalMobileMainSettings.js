@@ -200,7 +200,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
                                         Helpers.siteLinkModal(e, {
-                                            title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({url: '/news/'})
+                                            title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({ url: '/news/' })
                                         })
                                     }}
                                     class="user_icon_mobile_visible user_icon"
@@ -231,7 +231,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <img src={svg.startup_menu_icon} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.starups}</span>
                                 </a> */}
-                                <a
+                                {/* <a
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
                                         Helpers.siteLinkModal(e, {
@@ -268,8 +268,8 @@ const ModalMobileMainSettings = function (data, ID) {
                                 >
                                     <img src={svg.exchange_menu_icon} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.trade}</span>
-                                </a>
-                                <a
+                                </a> */}
+                                {/* <a
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
                                         Helpers.siteLinkModal(e, {
@@ -306,7 +306,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                 >
                                     <img src={svg.exchanger_menu_icon} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.exchange}</span>
-                                </a>
+                                </a> */}
                                 {/* <a
                                     data-updating="true"
                                     onclick={Helpers.siteLink}
