@@ -49,7 +49,7 @@ const NotifyItem = function ({ data, type }) {
                                     <span class="notifyNickname">{Variable.lang.text.user}: <a
                                         href={`/user/${item.nickName}`}
                                         onclick={(e) => {
-                                            fn.siteLinkModal(e, { title: item.nickName, style: 'background: #1D2029;' })
+                                            fn.siteLinkModal(e, { title: item.nickName, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(item) })
                                         }}
                                     >{item.nickName}</a></span>
                                     :
