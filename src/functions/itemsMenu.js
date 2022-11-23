@@ -254,6 +254,84 @@ itemsMenu.onlyPage = function ({ url, downloadurl }) {
     return items
 }
 
+itemsMenu.userProfile = function (Static, item) {
+    const items = [
+        {
+            text: Variable.lang.select.share,
+            type: "share",
+            onclick: async () => {
+                try {
+                    if (navigator.share) {
+                        await navigator.share({
+                            url: window.location.origin + "/user/" + item.nickname,
+                        });
+                    }
+                } catch (err) {
+                    // Вывести ошибку
+                    console.error("Share", err)
+                }
+            }
+        },
+        {
+            text: Variable.lang.p.copy + " URL",
+            type: "copyurl",
+            onclick: async () => {
+                navigator.clipboard.writeText(window.location.origin + "/user/" + item.nickname);
+                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+            }
+        },
+        {
+            text: item.subscribe
+                ? Variable.lang.button.unsubscribe
+                : Variable.lang.button.subscribe,
+            type: "subscription",
+            onlyAuth: true,
+            onclick: async () => {
+
+                const response = await fn.restApi.setUsers.subscribe({ _id: item._id })
+                console.log(response)
+                if (response.status === "ok") {
+                    item.subscribe = !item.subscribe
+                    initReload();
+                } else {
+                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                }
+            }
+        },
+        {
+            text: Variable.lang.select.complainUser,
+            type: "complainUser",
+            // onlyAuth: true,
+            color: "red",
+            onclick: async () => {
+                // Переработать модалку
+                modals.ModalComplainComment({
+                    id: item._id,
+                    action: "setUsers"
+                })
+            }
+        },
+        {
+            text: Variable.lang.select.blackList,
+            type: "blackList",
+            onlyAuth: true,
+            color: "red",
+            onclick: async () => {
+                modals.ModalConfirmAction({
+                    action: async () => {
+                        let response = await fn.restApi.setUsers.blackList({ _id: item._id })
+                        Variable.DelModals("ModalConfirmAction")
+                        await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                    },
+                    text: Variable.lang.p.toBlackListConfirm,
+                    button: Variable.lang.button.yes
+                })
+            }
+        },
+    ]
+    return items
+}
+
 itemsMenu.blog = function (Static, item) {
     const items = [
         {
@@ -367,7 +445,9 @@ itemsMenu.lenta_users = function (Static, item) {
                 onlyAuth: true,
                 color: "red",
                 onclick: async () => {
-                    // Переработать модалку
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
                     modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
@@ -417,6 +497,9 @@ itemsMenu.lenta_users = function (Static, item) {
                 type: "deleteRole",
                 color: "red",
                 onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
                     modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.doRole.deletePost({ _id: item._id })
