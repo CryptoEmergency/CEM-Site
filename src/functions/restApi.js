@@ -922,4 +922,18 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
     return checkSetAnswer(response)
 }
 
+
+
+
+restApi.userRoomCode = async function ({ _id,value }) {
+    let data = {
+        value:{confirmuser:value},
+        _id:_id
+        }
+  
+
+    const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
+}
+
 export { restApi };

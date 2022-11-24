@@ -77,12 +77,9 @@ function ShowMessage(Static) {
  * делаем проверку на пользователя
  * если комната приватная и у руля её содатель то не запрашиваем пароль и отображаем все сообщения
 */
-if(Static.Rooms.settingsroom.status)
-{
-  Static.privateRoom.status  = Static.Rooms.settingsroom.status
-}
 
-if(Static.privateRoom.status)
+
+if(Static.Rooms.settingsroom.status)
 {
 if(Static.Rooms.author._id == Variable.myInfo._id )
 {
@@ -139,21 +136,49 @@ if(Static.Rooms.author._id == Variable.myInfo._id )
 
 }
 else{
+  let authInput
+  let authMessage
+ 
+  if(Static.Auth)
+  {
+     authInput = <Input className="" Static={Static.confirmPasword} />
+     authMessage = "данная комната защищена паролем и вся секретная информация в ней скрыта до тех пор пока не введеш пароль, который я сделаю позже"
+  }
+  else
+  {
+     authMessage = "Только авторизованные пользователи могут просматривать данный контент" 
+ 
+  }
   return (
     <li class="c-chats__message c-message">
       <div class="c-message__title">
-        <center>данная комната защищена паролем и вся секретная информация в ней скрыта до тех пор пока не введеш пароль, который я сделаю позже</center>
-
+        <center>{
+        authMessage
+        }</center>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <p><center>
+        {authInput}
+          </center></p>
       </div>
+      
     </li>
   )
+
 }
-}else
+}
+else
 {
 
-/**
- * если в приватную комнату пришёл другой пользователь запрашиваем у него пароль
-*/
+   if(!Static.Auth)
+   {
+  
+   }
+
+
+  //для не авторизованных пользователей
 
 if (Static.Rooms.message.length > 0) {
     return Static.Rooms.message.map(function (userrooms, i) {
@@ -196,6 +221,7 @@ if (Static.Rooms.message.length > 0) {
 
   }
   else {
+
     return (
       <li class="c-chats__message c-message">
         <div class="c-message__title">
