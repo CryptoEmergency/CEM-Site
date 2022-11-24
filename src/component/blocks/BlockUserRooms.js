@@ -79,7 +79,7 @@ function ShowMessage(Static) {
 */
 if(Static.Rooms.settingsroom.status)
 {
-  Static.privateRoom.status 
+  Static.privateRoom.status  = Static.Rooms.settingsroom.status
 }
 
 if(Static.privateRoom.status)
@@ -142,7 +142,7 @@ else{
   return (
     <li class="c-chats__message c-message">
       <div class="c-message__title">
-        <center>данная комната защищена паролем и вся секретная инфа в ней скрыта пока до тех пор пока не введеш пароль, который я сделаю позже</center>
+        <center>данная комната защищена паролем и вся секретная информация в ней скрыта до тех пор пока не введеш пароль, который я сделаю позже</center>
 
       </div>
     </li>
