@@ -688,8 +688,8 @@ initData.rooms = function (Static) {
     errorText: "Не верный пароль",
     condition: async (value) => {
 
-  
-      let confirm = await fn.restApi.userRoomCode({_id,value })
+        let id = Static.Rooms._id
+      let confirm = await fn.restApi.userRoomCode({id,value })
         console.log(confirm)
      
     },
