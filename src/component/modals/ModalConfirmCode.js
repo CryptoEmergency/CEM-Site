@@ -6,7 +6,7 @@ import {
     Variable,
     getValue,
     initReload,
-    sendApi, 
+    sendApi,
     init
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
@@ -135,11 +135,11 @@ const ModalConfirmCode = function (data, ID) {
     wayType = data.way
 
     init(
-        ()=>{
+        () => {
             time = 60
             timerFunc()
         },
-        ()=>{
+        () => {
             return (
                 <div class="c-modal c-modal--open" id="ModalReset">
                     <section class="c-modal__dialog">
@@ -156,7 +156,7 @@ const ModalConfirmCode = function (data, ID) {
                             <div class="reset_password">
                                 <div class="reset_password_step2">
                                     <p>
-                                        {way == "email" ? Variable.lang.text.confirmEmail : Variable.lang.text.confirmPhone}
+                                        {wayType == "email" ? Variable.lang.text.confirmEmail : Variable.lang.text.confirmPhone}
                                     </p>
                                     <div class="reset_password_input_block">
                                         <form id="resetPassword2" data-button_id="reset_next_step-2">
@@ -197,6 +197,6 @@ const ModalConfirmCode = function (data, ID) {
                 </div>
             );
         }, ID
-    )    
+    )
 };
 export default ModalConfirmCode;
