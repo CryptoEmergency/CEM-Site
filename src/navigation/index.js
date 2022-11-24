@@ -137,9 +137,14 @@ const start = function (data, ID) {
                         {() => {
                             if (Variable.lang.code == "ru") {
                                 return (
-                                    <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
-                                        <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
-                                    </a>
+                                    <div>
+                                        <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
+                                            <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
+                                        </a>
+                                        <a onclick={Helpers.siteLink} href="/lottery/" style="max-width: 1240px; margin: 10px auto;display: block">
+                                            <img style="border-radius: 4px; width: 100%" src={images['banners/lottery_banner']} />
+                                        </a>
+                                    </div>
                                 )
                             }
                         }}
@@ -163,7 +168,7 @@ const start = function (data, ID) {
                                                         return (
                                                             <a
                                                                 class="blog_news_item"
-                                                                onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, item: item, items: fn.itemsMenu.onlyPage({ url: `/news/show/${item._id}` }) }) }}
+                                                                onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news, item: item, items: fn.itemsMenu.news({ url: `/news/show/${item._id}` }) }) }}
                                                                 href={`/news/show/${item._id}`}
                                                             >
                                                                 <img

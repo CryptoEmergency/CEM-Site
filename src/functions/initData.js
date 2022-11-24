@@ -667,8 +667,46 @@ initData.generate = function (arrData) {
 
 
 initData.rooms = function (Static) {
+     //Зарегистрирован или нет
+    Static.Auth = Variable.auth
+     //настройки языка
+    Static.UserLang = Variable.myInfo.mainLanguage
     Static.Rooms = {}
     Static.MessageValue = {}
+    Static.searchInput = {}
+    Static.ActiveListRooms = {}
+    Static.privateRoom = {status:false}
+    Static.label = {}
+
+    //кодовое слово
+  Static.confirmPasword = {
+    label: "Введите пароль от комнаты",
+    value: "",
+    valid: false,
+    error: false,
+    type: "text",
+    errorText: "Не верный пароль",
+    condition: async (value) => {
+
+let id = Static.Rooms._id
+
+      let confirm = await fn.restApi.userRoomCode({id,value })
+if(confirm.status == "ok")
+{
+    return true
+}
+else
+{
+ return false
+}
+
+
+    },
+    afterValid: () => {
+        Helpers.checkValid(Static, ["confirmPasword"])
+
+    }
+  }
 }
 
 export { initData };

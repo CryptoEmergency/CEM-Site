@@ -867,6 +867,16 @@ restApi.setQuestions.view = async function ({ _id, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setQuestions.delete = async function ({ _id }) {
+    let data = {
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+    const response = await sendApi.create("setQuestions", data);
+    return checkSetAnswer(response, noAlert)
+}
 
 restApi.setUserRoom = {}
 
@@ -909,6 +919,20 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
   
 
     const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
+}
+
+
+
+
+restApi.userRoomCode = async function ({ id,value }) {
+    let data = {
+        value:{confirmuser:value},
+        _id:id
+        }
+  
+
+    const response = await sendApi.create("userRoomCode", data);
     return checkSetAnswer(response)
 }
 

@@ -229,7 +229,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                     //ссылка твой вопрос
                     onclick={function (e) {
                       // fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author: question.author, items: hrefMenuitems, editVisible: false })
-                      fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question })
+                      fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, items: fn.itemsMenu.question(Static, question) })
                     }}
                   >
                     <div class="c-question__preview">

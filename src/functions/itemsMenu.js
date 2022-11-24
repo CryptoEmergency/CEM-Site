@@ -254,6 +254,48 @@ itemsMenu.onlyPage = function ({ url, downloadurl }) {
     return items
 }
 
+itemsMenu.news = function ({ url, downloadurl }) {
+    const items = [
+        {
+            text: Variable.lang.select.share,
+            type: "share",
+            onclick: async () => {
+                try {
+                    if (navigator.share) {
+                        await navigator.share({
+                            url: window.location.origin + url,
+                        });
+                    }
+                } catch (err) {
+                    // Вывести ошибку
+                    console.error("Share", err)
+                }
+            }
+        },
+        {
+            text: Variable.lang.p.copy + " URL",
+            type: "copyurl",
+            onclick: async () => {
+                navigator.clipboard.writeText(window.location.origin + url);
+                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+            }
+        },
+        {
+            text: Variable.lang.h.modal_comment,
+            type: "copyurl",
+            onlyAuth: true,
+            onclick: async () => {
+                const [tmp] = fn.GetParams({ID:Variable.ModalsPage.length - 1,actual:true})
+                tmp.mainComment.el.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                tmp.mainComment.el.focus()
+            }
+        }
+    ]
+    return items
+}
+
+
+
 itemsMenu.userProfile = function (item) {
     console.log(item)
     const items = [
@@ -345,6 +387,275 @@ itemsMenu.blog = function (Static, item) {
     ]
     return items
 }
+
+itemsMenu.question = function (Static, item) {
+    const items =
+        [
+            {
+                text: Variable.lang.select.share,
+                type: "share",
+                onclick: async () => {
+                    try {
+                        if (navigator.share) {
+                            await navigator.share({
+                                url: window.location.origin + "/question/show/" + item._id,
+                            });
+                        }
+                    } catch (err) {
+                        // Вывести ошибку
+                        console.error("Share", err)
+                    }
+                }
+            },
+            {
+                text: Variable.lang.select.complainQuestion,
+                type: "complainItem",
+                // onlyAuth: true,
+
+                color: "red",
+                onclick: async () => {
+                    modals.ModalComplainComment({
+                        id: item._id,
+                        action: "setQuestions"
+                    })
+                }
+
+            },
+            {
+                text: Variable.lang.select.complainUser,
+                type: "complainUser",
+                // onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    // Переработать модалку
+                    modals.ModalComplainComment({
+                        id: item.author._id,
+                        action: "setUsers"
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.blackList,
+                type: "blackList",
+                onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.toBlackListConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.delete,
+                type: "delete",
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setQuestions.delete({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.deletePostConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.delete,
+                type: "deleteRole",
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.doRole.deleteQuestion({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.deletePostConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+        ]
+
+
+    return items
+}
+
+itemsMenu.comment = function (Static, item, action) {
+    console.log(Static, item, action)
+    const items =
+        [
+            {
+                text: Variable.lang.select.share,
+                type: "share",
+                onclick: async () => {
+                    try {
+                        if (navigator.share) {
+                            await navigator.share({
+                                url: window.location.origin + "/lenta-users/show/" + item._id,
+                            });
+                        }
+                    } catch (err) {
+                        // Вывести ошибку
+                        console.error("Share", err)
+                    }
+                }
+            },
+            {
+                text: item.subscribe
+                    ? Variable.lang.button.unsubscribe
+                    : Variable.lang.button.subscribe,
+                type: "subscription",
+                onlyAuth: true,
+                onclick: async () => {
+
+                    const response = await fn.restApi.setUsers.subscribe({ _id: item.author._id })
+                    console.log(response)
+                    // console.log('=b959ac=', response)
+                    if (response.status === "ok") {
+                        item.subscribe = !item.subscribe
+                        initReload();
+                    } else {
+                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                    }
+                }
+            },
+            {
+                text: Variable.lang.select.complainPost,
+                type: "complainItem",
+                // onlyAuth: true,
+
+                color: "red",
+                onclick: async () => {
+                    modals.ModalComplainComment({
+                        id: item._id,
+                        action: "set" + action
+                    })
+                    /*
+                        Variable.SetModals(
+                            {
+                                name: "ModalComplainComment",
+                                data: {
+                                    id: item._id,
+                                    typeSet: item.typeApi,
+                                    mainId: item.mainId,
+                                    mainCom: !item.commentId ? true : false,
+                                },
+                            }, true
+                        )
+                    */
+                }
+
+            },
+            {
+                text: Variable.lang.select.complainUser,
+                type: "complainUser",
+                // onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    // Переработать модалку
+                    modals.ModalComplainComment({
+                        id: item.author._id,
+                        action: "setUsers"
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.blackList,
+                type: "blackList",
+                onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.toBlackListConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+            // {
+            //     text: Variable.lang.button.edit,
+            //     type: "edit",
+            //     onclick: async () => {
+            //         // Переработать модалку
+            //         // Variable.SetModals(
+            //         //   {
+            //         //     name: "ModalBlackList",
+            //         //     data: { id: item.author._id, type: "перебрать" },
+            //         //   }, true
+            //         // );
+            //     }
+            // },
+            // {
+            {
+                text: Variable.lang.select.delete,
+                type: "delete",
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setPost.delete({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.deletePostConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.delete,
+                type: "deleteRole",
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.doRole.deletePost({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.deletePostConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+        ]
+
+
+    return items
+}
+
+
 itemsMenu.lenta_users = function (Static, item) {
     const items =
         [
@@ -457,25 +768,25 @@ itemsMenu.lenta_users = function (Static, item) {
             //     }
             // },
             // {
-            //     text: Variable.lang.select.delete,
-            //     type: "delete",
-            //     color: "red",
-            //     onclick: async () => {
-            //         // Переработать модалку
-            //         // Variable.SetModals(
-            //         //   {
-            //         //     name: "ModalDelComment",
-            //         //     data: {
-            //         //       id: data.item._id,
-            //         //       typeSet: data.typeApi,
-            //         //       mainId: data.mainId,
-            //         //       mainCom: !data.commentId ? true : false,
-            //         //       callBack: data.callBack,
-            //         //     },
-            //         //   }, true
-            //         // );
-            //     }
-            // },
+            {
+                text: Variable.lang.select.delete,
+                type: "delete",
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setPost.delete({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.deletePostConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
             {
                 text: Variable.lang.select.delete,
                 type: "deleteRole",
