@@ -703,7 +703,7 @@ else
     },
     afterValid: () => {
         Helpers.checkValid(Static, ["confirmPasword"])
-
+console.log(Static.confirmPasword.valid)
     }
   }
 }
