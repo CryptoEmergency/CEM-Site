@@ -549,7 +549,7 @@ const start = function (data, ID) {
                   })
                   previewPost.showDate = new Date().toISOString()
                   previewPost.forFriends = Static.forFriends
-                  console.log('=0d0932=',previewPost)
+                  console.log('=0d0932=', previewPost)
                   // fn.siteLinkModal(e, { title: "Просмотр создаваемого поста", previewPost, items: fn.itemsMenu.lenta_users(Static, previewPost) })
                   fn.modals.ModalPostPreview(previewPost)
                 }}
@@ -575,7 +575,7 @@ const start = function (data, ID) {
             <div class="c-userpostcreate__myposts my_posts">
               {Variable.lang.h.posts_my}
               {/* {{> userPost}} */}
-              {
+              {/* {
                 !Static.posts || !Static.posts.list_records.length
                   ?
                   <div class="user_news_block">
@@ -597,7 +597,7 @@ const start = function (data, ID) {
                       })
                     }
                   </div>
-              }
+              } */}
             </div>
           </form>
         </div>
