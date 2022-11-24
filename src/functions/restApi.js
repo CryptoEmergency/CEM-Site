@@ -925,10 +925,10 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
 
 
 
-restApi.userRoomCode = async function ({ _id,value }) {
+restApi.userRoomCode = async function ({ id,value }) {
     let data = {
         value:{confirmuser:value},
-        _id:_id
+        _id:id
         }
   
 
