@@ -37,7 +37,7 @@ function CheckSystemInterface(Static) {
 
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
-  Static.searchInput.active = false
+
   document.getElementById("spinner").hidden = false
 
   let response = await fn.restApi.getUserRoom({ _id, filter: { system: system, _id: _id } })
@@ -71,9 +71,24 @@ function ShowMessage(Static) {
 
   Static.MessageValue.id = Static.Rooms._id
 
+
+
+/**
+ * делаем проверку на пользователя
+ * если комната приватная и у руля её содатель то не запрашиваем пароль и отображаем все сообщения
+*/
+if(Static.Rooms.settingsroom.status)
+{
+  Static.privateRoom.status 
+}
+
+if(Static.privateRoom.status)
+{
+if(Static.Rooms.author._id == Variable.myInfo._id )
+{
   if (Static.Rooms.message.length > 0) {
-   // if(!Static.searchInput.active){
     return Static.Rooms.message.map(function (userrooms, i) {
+
 
       return (
         <li class="c-chats__message c-message">
@@ -106,20 +121,12 @@ function ShowMessage(Static) {
         </li>
 
       )
-    })//}
-   // else{
-   //   return (
-   //     <li class="c-chats__message c-message">
-    //      <div class="c-message__title">
-    //        <center>Для просмотра сообщений войдите в комнату</center>
-  
-  //        </div>
-   //     </li>
- //     ) 
- //   }
+
+
+    })
+
   }
   else {
-  //  if(!Static.searchInput.active){
     return (
       <li class="c-chats__message c-message">
         <div class="c-message__title">
@@ -128,25 +135,79 @@ function ShowMessage(Static) {
         </div>
       </li>
     )
-  //  }
-   // else{
-   //   return (
-     //   <li class="c-chats__message c-message">
-     //     <div class="c-message__title">
-      //      <center>Для просмотра сообщений войдите в комнату</center>
-  
-      //    </div>
-     //   </li>
-    //  ) 
-  //  } 
-    
   }
 
+}
+else{
+  return (
+    <li class="c-chats__message c-message">
+      <div class="c-message__title">
+        <center>данная комната защищена паролем и вся секретная инфа в ней скрыта пока до тех пор пока не введеш пароль, который я сделаю позже</center>
+
+      </div>
+    </li>
+  )
+}
+}else
+{
+
+/**
+ * если в приватную комнату пришёл другой пользователь запрашиваем у него пароль
+*/
+
+if (Static.Rooms.message.length > 0) {
+    return Static.Rooms.message.map(function (userrooms, i) {
 
 
+      return (
+        <li class="c-chats__message c-message">
+          <div class="c-message__avatar micro_user_avatar">
+            <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
+            <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;" src="/assets/profile/frame/default.svg" />
+            <div class="user_avatar_level">
+              <img src="/assets/profile/levelGray.svg" />
+              <span>0</span>
+            </div>
+            <div class="avatar_user_online"></div>
+            <div style="display: none;" class="avatar_user_offline">
+            </div>
+          </div>
+
+          {
+            //ники пользователей showDate
+
+            <div class="c-message__title">
+              <div class="c-message__nick">{userrooms.author.nickname}</div>
+              <div class="c-message__date">{userrooms.showDate}</div>
+            </div>
+          }
+          {
+            //сообщения
+            <div class="c-message__body">
+              {userrooms.text}
+            </div>
+          }
+        </li>
+
+      )
+
+
+    })
+
+  }
+  else {
+    return (
+      <li class="c-chats__message c-message">
+        <div class="c-message__title">
+          <center>В данной комнате пока нет сообщений</center>
+
+        </div>
+      </li>
+    )
+  }
 
 }
-
+}
 //поиск
 async function SearchRooms(Static)
 {
@@ -161,7 +222,7 @@ async function SearchRooms(Static)
       response =  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { $text:{$search:value}} , limit:10 })
       if(response.list_records.length == 1)
       {
-      //  Static.Rooms = response.list_records[0]
+   
         Static.ActiveListRooms = [response.list_records[0]]
       }else if(response.list_records.length == 0){
       
@@ -175,8 +236,9 @@ async function SearchRooms(Static)
     {
     
     
-      Static.searchInput.active=false
+
        await fn.restApi.getUserRoom({name: "ListUsersRooms", filter: { system: false  } , limit:10 })
+       Static.ActiveListRooms = Variable.ListUsersRooms.list_records
        CheckSystemInterface(Static)
     }
     
@@ -190,30 +252,25 @@ const BlockUserRooms = async function ({ Static }) {
   
 
 
-  await initOne(async () => {
+    await initOne(async () => {
     await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system: true }, limit: 10 })
 
 
     await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false }, limit: 10 })
     //для пользовательских комнат которые пользователь сам создал
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
- 
+    //при первом заходе открываем системный чат
     CheckSystemInterface(Static)
-
+    //запускаем поиск и фильтры
     SearchRooms(Static)
 
   })
-   
-    if(!Static.searchInput.active)
-    {
-      Static.ActiveListRooms = Variable.ListUsersRooms.list_records
-    }
-
-   
-   
-    
   
-
+  //если не используем фильтры
+  if(!Static.searchInput.active)
+  {
+    Static.ActiveListRooms = Variable.ListUsersRooms.list_records
+  }
 
 
   return (

@@ -675,6 +675,7 @@ initData.rooms = function (Static) {
     Static.MessageValue = {}
     Static.searchInput = {}
     Static.ActiveListRooms = {}
+    Static.privateRoom = {status:false}
 }
 
 export { initData };
