@@ -510,19 +510,54 @@ const start = function (data, ID) {
               </div>
             </div>
             <div style={"display:flex; width: 100%; max-width: 500px; margin: 20px auto"}>
-              {/* <button
+              <button
                 class={[
                   "c-button c-button--gradient2",
                   !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 style="margin-right: 30px"
                 type="button"
-              //   onClick={sendQuestion}
+                //   onClick={sendQuestion}
+                data-href={"/lenta-users/show/123456789"}
+                onclick={(e) => {
+                  console.log('=cf4a37=', Static)
+                  let previewPost = {}
+                  previewPost.author = {
+                    avatar: Variable.myInfo.avatar,
+                    frame: Variable.myInfo.frame,
+                    nickname: Variable.myInfo.nickname,
+                    online: Variable.myInfo.online,
+                    statistic: {
+                      level: Variable.myInfo.level
+                    },
+                    status: Variable.myInfo.status,
+                    subscribed: Variable.myInfo.subscribed,
+                    _id: Variable.myInfo._id
+                  }
+                  previewPost.statistic = {
+                    view: 0,
+                    rating: 0,
+                    comments: 0
+                  }
+                  previewPost.text = Static.textInputs.value
+                  previewPost.media = []
+                  Static.mediaInputs.value.forEach(function (item) {
+                    previewPost.media.push({ name: item.name, type: item.type })
+                  })
+                  Static.audioInputs.value.forEach(function (audio) {
+                    previewPost.media.push({ name: audio.name, type: audio.type })
+                  })
+                  previewPost.showDate = new Date().toISOString()
+                  previewPost.forFriends = Static.forFriends
+                  console.log('=0d0932=',previewPost)
+                  // fn.siteLinkModal(e, { title: "Просмотр создаваемого поста", previewPost, items: fn.itemsMenu.lenta_users(Static, previewPost) })
+                  fn.modals.ModalPostPreview(previewPost)
+                }}
               >
                 <span class="c-button__text">
                   {Variable.lang.button.pre_view}
                 </span>
-              </button> */}
+              </button>
               <button
                 class={[
                   "c-button c-button--gradient2",
