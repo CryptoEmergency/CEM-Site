@@ -689,9 +689,16 @@ initData.rooms = function (Static) {
     condition: async (value) => {
 
 let id = Static.Rooms._id
-console.log(id,value)
+
       let confirm = await fn.restApi.userRoomCode({id,value })
-console.log(confirm)
+if(confirm.status == "ok")
+{
+    Static.confirmPasword.valid = true
+}
+else
+{
+    Static.confirmPasword.valid = false
+}
 
     },
     afterValid: () => {

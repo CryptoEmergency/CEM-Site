@@ -137,6 +137,60 @@ if(Static.Rooms.author._id == Variable.myInfo._id )
 
 }
 else{
+if(Static.confirmPasword.valid)
+{
+  if (Static.Rooms.message.length > 0) {
+    return Static.Rooms.message.map(function (userrooms, i) {
+
+
+      return (
+        <li class="c-chats__message c-message">
+          <div class="c-message__avatar micro_user_avatar">
+            <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
+            <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;" src="/assets/profile/frame/default.svg" />
+            <div class="user_avatar_level">
+              <img src="/assets/profile/levelGray.svg" />
+              <span>0</span>
+            </div>
+            <div class="avatar_user_online"></div>
+            <div style="display: none;" class="avatar_user_offline">
+            </div>
+          </div>
+
+          {
+            //ники пользователей showDate
+
+            <div class="c-message__title">
+              <div class="c-message__nick">{userrooms.author.nickname}</div>
+              <div class="c-message__date">{userrooms.showDate}</div>
+            </div>
+          }
+          {
+            //сообщения
+            <div class="c-message__body">
+              {userrooms.text}
+            </div>
+          }
+        </li>
+
+      )
+
+
+    })
+
+  }
+  else {
+    return (
+      <li class="c-chats__message c-message">
+        <div class="c-message__title">
+          <center>В данной комнате пока нет сообщений</center>
+
+        </div>
+      </li>
+    )
+  }
+}
+
   let authInput
   let authMessage
  
