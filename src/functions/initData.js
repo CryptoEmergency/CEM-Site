@@ -688,10 +688,10 @@ initData.rooms = function (Static) {
     errorText: "Не верный пароль",
     condition: async (value) => {
 
-        let id = Static.Rooms._id
+let id = Static.Rooms._id
       let confirm = await fn.restApi.userRoomCode({id,value })
-        console.log(confirm)
-     
+console.log(confirm)
+
     },
     afterValid: () => {
         Helpers.checkValid(Static, ["confirmPasword"])

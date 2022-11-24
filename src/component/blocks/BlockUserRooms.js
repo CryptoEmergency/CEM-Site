@@ -39,6 +39,7 @@ function CheckSystemInterface(Static) {
 async function ChangeRooms(Static, _id, system) {
 
   document.getElementById("spinner").hidden = false
+  Static.Rooms._id = _id
 
   let response = await fn.restApi.getUserRoom({ _id, filter: { system: system, _id: _id } })
 
@@ -147,7 +148,7 @@ else{
   else
   {
      authMessage = "Только авторизованные пользователи могут просматривать данный контент" 
- 
+     authInput = <Input className="" Static={Static.confirmPasword} />
   }
   return (
     <li class="c-chats__message c-message">
@@ -172,10 +173,7 @@ else{
 else
 {
 
-   if(!Static.Auth)
-   {
   
-   }
 
 
   //для не авторизованных пользователей
@@ -523,7 +521,8 @@ const BlockUserRooms = async function ({ Static }) {
         {
 
         //мапим юзерские комнаты
-      
+
+    
         Static.ActiveListRooms.map(function (userrooms, i) {
 
           return (

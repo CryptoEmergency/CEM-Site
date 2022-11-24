@@ -932,7 +932,7 @@ restApi.userRoomCode = async function ({ _id,value }) {
         }
   
 
-    const response = await sendApi.create("setUserRoom", data);
+    const response = await sendApi.create("userRoomCode", data);
     return checkSetAnswer(response)
 }
 
