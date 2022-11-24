@@ -693,17 +693,18 @@ let id = Static.Rooms._id
       let confirm = await fn.restApi.userRoomCode({id,value })
 if(confirm.status == "ok")
 {
-    Static.confirmPasword.valid = true
+    return true
 }
 else
 {
-    Static.confirmPasword.valid = false
+ return false
 }
+
 
     },
     afterValid: () => {
         Helpers.checkValid(Static, ["confirmPasword"])
-console.log(Static.confirmPasword.valid)
+
     }
   }
 }
