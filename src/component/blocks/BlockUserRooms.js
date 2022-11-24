@@ -37,7 +37,7 @@ function CheckSystemInterface(Static) {
 
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
-
+  Static.searchInput.active = false
   document.getElementById("spinner").hidden = false
 
   let response = await fn.restApi.getUserRoom({ _id, filter: { system: system, _id: _id } })
@@ -68,11 +68,11 @@ async function sendRoomsMessage(Static, id, textdata) {
 
 //показываем сообщения
 function ShowMessage(Static) {
+
   Static.MessageValue.id = Static.Rooms._id
+
   if (Static.Rooms.message.length > 0) {
-
-
-
+   // if(!Static.searchInput.active){
     return Static.Rooms.message.map(function (userrooms, i) {
 
       return (
@@ -106,10 +106,20 @@ function ShowMessage(Static) {
         </li>
 
       )
-    })
+    })//}
+   // else{
+   //   return (
+   //     <li class="c-chats__message c-message">
+    //      <div class="c-message__title">
+    //        <center>Для просмотра сообщений войдите в комнату</center>
+  
+  //        </div>
+   //     </li>
+ //     ) 
+ //   }
   }
   else {
-
+  //  if(!Static.searchInput.active){
     return (
       <li class="c-chats__message c-message">
         <div class="c-message__title">
@@ -118,28 +128,91 @@ function ShowMessage(Static) {
         </div>
       </li>
     )
-
+  //  }
+   // else{
+   //   return (
+     //   <li class="c-chats__message c-message">
+     //     <div class="c-message__title">
+      //      <center>Для просмотра сообщений войдите в комнату</center>
+  
+      //    </div>
+     //   </li>
+    //  ) 
+  //  } 
+    
   }
 
 
+
+
+}
+
+//поиск
+async function SearchRooms(Static)
+{
+  Static.searchInput = {
+    value: "",
+    label: "",
+    active:false,
+    condition: async (value) => {
+      let response
+    if(value.length > 0){
+      Static.searchInput.active=true
+      response =  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { $text:{$search:value}} , limit:10 })
+      if(response.list_records.length == 1)
+      {
+      //  Static.Rooms = response.list_records[0]
+        Static.ActiveListRooms = [response.list_records[0]]
+      }else if(response.list_records.length == 0){
+      
+      }else
+      {
+
+      }
+    
+    }
+    else
+    {
+    
+    
+      Static.searchInput.active=false
+       await fn.restApi.getUserRoom({name: "ListUsersRooms", filter: { system: false  } , limit:10 })
+       CheckSystemInterface(Static)
+    }
+    
+    }
+  }
 }
 
 
 const BlockUserRooms = async function ({ Static }) {
 
-
+  
 
 
   await initOne(async () => {
     await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system: true }, limit: 10 })
-    await fn.restApi.getUserRoom({ cache: true, name: "SystemsRooms", filter: { system: true }, limit: 10 })
+
 
     await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false }, limit: 10 })
+    //для пользовательских комнат которые пользователь сам создал
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
+ 
     CheckSystemInterface(Static)
+
+    SearchRooms(Static)
+
   })
+   
+    if(!Static.searchInput.active)
+    {
+      Static.ActiveListRooms = Variable.ListUsersRooms.list_records
+    }
 
-
+   
+   
+    
+  
 
 
 
@@ -150,12 +223,13 @@ const BlockUserRooms = async function ({ Static }) {
         {
 
 
-
+          //мапим системные комнаты
           Variable.ListSystemsRooms.list_records.map(function (systemsrooms, i) {
 
             return (
-
+              <div class="c-questions__list">
               <div class="c-questions__item c-question question-block questionLoad">
+                <div class="c-question__preview">
                 <div class="c-question__header">
                   <div class="c-question__avatar">
 
@@ -192,11 +266,12 @@ const BlockUserRooms = async function ({ Static }) {
                     </div>
                   </div>
                 </div>
+                </div>
                 <a
                   style=""
                   href={`/chat/show/${systemsrooms._id}`}
                   class="c-question__body"
-                  //ссылка твой вопрос
+               
                   onclick={function (e) {
                     alert()
                   }}
@@ -208,12 +283,11 @@ const BlockUserRooms = async function ({ Static }) {
 
                   </div>
                 </a>
-                {() => {
-                  if (systemsrooms.message.length > 0) {
+                  <span>количество сообщений {systemsrooms.message.length}</span>
+                 
 
-                  }
-                }
-                }
+                
+              
                 <div class="c-question__statistic">
                   <div class="c-question__stats ">
                     <img />
@@ -237,6 +311,7 @@ const BlockUserRooms = async function ({ Static }) {
                   </a>
                 </div>
               </div>
+              </div>
 
             )
 
@@ -249,6 +324,28 @@ const BlockUserRooms = async function ({ Static }) {
 
       </div>
       <hr></hr>
+      <div class="c-questions__searchblock c-search">
+      <div class="c-search__container">
+            <div class="c-search__wrapper">
+              <img class="c-search__icon" src={svg.search_icon} />
+              <Input className="c-search__input" Static={Static.searchInput} />
+              <img
+                class="c-search__icon c-search__icon--filter"
+                src={svg.filter}
+                onClick={() => {
+                
+                }}
+              />
+            </div>
+            <div style="display: none;" class="questions_search">
+              <div class="question_search_half_empty">
+                {Variable.lang.text.contInput}
+              </div>
+              <div style="display: none;" class="question_search_help"></div>
+            </div>
+      </div>
+      </div>
+          <hr></hr>
       <div class="c-container">
         <div class=" c-chats__wrapper">
           <aside class="c-chats__aside">
@@ -276,7 +373,7 @@ const BlockUserRooms = async function ({ Static }) {
                   callback: (response) => {
 
                     if (response.list_records.length > 0) {
-                      Variable.UsersRooms.list_records.unshift(response.list_records[0])
+                      Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
                       initReload()
                     }
                   }
@@ -321,16 +418,13 @@ const BlockUserRooms = async function ({ Static }) {
                     отправить
                   </button>
                 </div>
-
-                <div class="c-form__wrapfield" style="display: none;">
-                  <input type="file" id="file" class="c-form__field" name="file" />
-                </div>
               </div>
 
             </div>
           </section>
         </div>
       </div>
+
       {/*
     блок для пользовательских комнат
     */}
@@ -339,8 +433,15 @@ const BlockUserRooms = async function ({ Static }) {
       <br />
       <br />
       <br />
+      <hr></hr>
       <div class="c-questions__list">
-        {Variable.ListUsersRooms.list_records.map(function (userrooms, i) {
+     
+
+        {
+
+        //мапим юзерские комнаты
+      
+        Static.ActiveListRooms.map(function (userrooms, i) {
 
           return (
             <div class="c-questions__item c-question question-block questionLoad">
@@ -384,10 +485,9 @@ const BlockUserRooms = async function ({ Static }) {
                 style=""
                 href={`/chat/show/${userrooms._id}`}
                 class="c-question__body"
-                //ссылка твой вопрос
+        
                 onclick={function (e) {
-                  // fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, author: question.author, items: hrefMenuitems, editVisible: false })
-                  //fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question })
+
                 }}
               >
                 <div class="c-question__preview">
@@ -397,12 +497,7 @@ const BlockUserRooms = async function ({ Static }) {
 
                 </div>
               </a>
-              {() => {
-                if (userrooms.message.length > 0) {
-
-                }
-              }
-              }
+              <span>количество сообщений {userrooms.message.length}</span>
               <div class="c-question__statistic">
                 <div class="c-question__stats ">
                   <img />

@@ -673,6 +673,8 @@ initData.rooms = function (Static) {
     Static.UserLang = Variable.myInfo.mainLanguage
     Static.Rooms = {}
     Static.MessageValue = {}
+    Static.searchInput = {}
+    Static.ActiveListRooms = {}
 }
 
 export { initData };

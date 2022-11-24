@@ -132,8 +132,13 @@ fn.timerTik = async function () {
   if(Variable.dataUrl.adress =="rooms"){
     let [Static] = fn.GetParams({ ID:"mainBlock",actual:true })
   //   console.log("timerTik", "tt",Static)
-
+    if(Static.Rooms._id){ 
      let _id = Static.Rooms._id
+
+     if(Static.Rooms.message[0])
+     {
+
+     }
        let messageID = null
      if(Static.Rooms.message[0])
      {
@@ -141,13 +146,14 @@ fn.timerTik = async function () {
       messageID = Static.Rooms.message[0]._id
     
      }
+    
 
      let response = await sendApi.create("tik", {rooms:{_id,messageID}})
      if(response.result && response.result.list_records){
       Static.Rooms.message = response.result.list_records
       initReload()
      }
-
+}
   }else{
   // 
   let response = await sendApi.create("tik", {})
