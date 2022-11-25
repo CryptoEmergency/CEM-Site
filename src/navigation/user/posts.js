@@ -313,6 +313,8 @@ const start = function (data, ID) {
   Static.userInfo = Variable.myInfo;
   Static.elShowTextShort = {}
   Static.elShowTextFull = {}
+  Static.elMedia = {}
+  Static.elNumberSwiper = {}
 
   init(
     async () => {
