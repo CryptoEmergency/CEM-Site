@@ -12,11 +12,12 @@ import {
 
 const ModalEditRoom = function (data, ID) {
 
+console.log(data.userrooms)
   let [Static] = fn.GetParams({ data, ID })
 
   let valid
 
-  if(data.settingsroom.title)
+  if(data.userrooms.settingsroom.title)
   {
     valid = true
   }
@@ -27,7 +28,7 @@ const ModalEditRoom = function (data, ID) {
 
   //инпут название
   Static.label = {
-    value: data.settingsroom.title,
+    value: data.userrooms.settingsroom.title,
     valid: valid,
     error: false,
     type: "text",
@@ -60,13 +61,13 @@ const ModalEditRoom = function (data, ID) {
   //инпут описание
   Static.Title = {
     label: "Описание",
-    value: data.settingsroom.description
+    value: data.userrooms.settingsroom.description
   }
   //инпут язык
   Static.Lang = {
-    value: data.country.code + ` (${data.country.orig_name})`,
+    value: data.userrooms.country.code + ` (${data.userrooms.country.orig_name})`,
     label: "Выбирете язык",
-    code: data.country.code,
+    code: data.userrooms.country.code,
     onclick: () => {
       fn.modals.ModalChangeLanguage({
         onclick: async (langCode, langName, langOrig) => {
@@ -82,9 +83,9 @@ const ModalEditRoom = function (data, ID) {
   }
   //инпут страна
   Static.Country = {
-    value: data.country.eng_name + ` (${data.country.orig_name})`,
+    value: data.userrooms.country.eng_name + ` (${data.userrooms.country.orig_name})`,
     label: "Выбирите страну",
-    code: data.country.code,
+    code: data.userrooms.country.code,
 
     onclick: () => {
       Variable.SetModals({
@@ -101,11 +102,11 @@ const ModalEditRoom = function (data, ID) {
 
   //приват
   Static.Private = {
-    checked: data.settingsroom.status,
+    checked: data.userrooms.settingsroom.status,
   }
   //видимость
   Static.Visible = {
-    checked: data.settingsroom.visible,
+    checked: data.userrooms.settingsroom.visible,
 
   }
 
@@ -316,7 +317,7 @@ const ModalEditRoom = function (data, ID) {
                     let request = {_id, status, visible, confirmuser, title, description, images, languages, country }
                    
                     let requier = await fn.restApi.setUserRoom.edit(request)
-                    console.log(requier)
+              
                     if (requier.status == "ok") {
                     Static.callback(requier)
                       fn.modals.close(ID)

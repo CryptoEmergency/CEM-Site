@@ -681,11 +681,12 @@ const BlockUserRooms = async function ({ Static }) {
             onclick={(e) => {
 
               if (Static.Auth) {
-                fn.modals.ModalEditRoom(userrooms,{
+                fn.modals.ModalEditRoom({Static,userrooms,
                   callback: (response) => {
 
                     if (response.list_records.length > 0) {
                       Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
+                      Variable.UsersRooms.list_records.unshift(response.list_records[0])
                       initReload()
                     }
                   }
