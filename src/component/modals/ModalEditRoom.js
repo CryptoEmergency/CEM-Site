@@ -314,9 +314,9 @@ const ModalEditRoom = function (data, ID) {
                     let _id = data._id
                     // let system = false
                     let request = {_id, status, visible, confirmuser, title, description, images, languages, country }
-                    console.log(request)
+                   
                     let requier = await fn.restApi.setUserRoom.edit(request)
-
+                    console.log(requier)
                     if (requier.status == "ok") {
                     Static.callback(requier)
                       fn.modals.close(ID)
