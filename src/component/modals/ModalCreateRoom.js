@@ -1,7 +1,9 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi } from "@betarost/cemjs";
 import { Input, CheckBox, Select, TextArea, MediaButton } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';
+import {
 
+} from '@component/blocks/index.js';
 
 
 
@@ -11,6 +13,7 @@ import { fn } from '@src/functions/index.js';
 const ModalCreateRoom = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
+  
 
   //инпут название
   Static.label = {
@@ -146,7 +149,28 @@ const ModalCreateRoom = function (data, ID) {
     else {
       active = "inactive_form_button"
     }
-
+  //  Variable.PageUserProfileFriends
+  console.log(Variable.myInfo)
+ async function getFriends(){ 
+      let activeItems 
+      activeItems = await sendApi.send({
+        action: "getUsers", short: true, filter: {
+            _id: Variable.myInfo._id,
+        },
+        select: {
+            _id: 1,
+            subscribed: 1,
+            status: 1
+        },
+        limit: 20
+    });
+    console.log(activeItems)
+  }
+ 
+    if(Static.Visible.checked)
+    {
+      getFriends()
+    }
 
     return (
       <div class="c-modal c-modal--open" id="ModalComplainComment">
@@ -248,6 +272,12 @@ const ModalCreateRoom = function (data, ID) {
                   </label>
                 </div>
               </div>
+            
+              <div class="userMainBlock">
+                        {() => {
+                          //  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
+                        }}
+                    </div>
               <MediaButton
                 onclickPhoto={function () {
                   if (this.files.length == 0) {

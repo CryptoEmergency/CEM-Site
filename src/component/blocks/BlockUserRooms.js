@@ -382,21 +382,23 @@ async function SearchRooms(Static)
       let response
     if(value.length > 0){
       Static.searchInput.active=true
-      response =  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { $text:{$search:value}} , limit:10 })
+      response =  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { $text:{$search:value},system:false } , limit:10 })
 
       if(response.list_records.length == 1)
       {
-   
+
         Static.ActiveListRooms = [response.list_records[0]]
+
       }else if(response.list_records.length == 0){
       
-
+        Static.ActiveListRooms = []
 
       }else
       {
 
+        Static.ActiveListRooms = response.list_records
+
       }
-    
     }
     else
     {
@@ -663,10 +665,14 @@ const BlockUserRooms = async function ({ Static }) {
         {
 
         //мапим юзерские комнаты
+       ()=>{
 
-    
-        Static.ActiveListRooms.map(function (userrooms, i) {
-
+        if(Static.ActiveListRooms.length > 0){
+   
+       return Static.ActiveListRooms.map(function (userrooms, i) {
+        if((userrooms.settingsroom.visible && userrooms.author.nickname == Variable.myInfo.nickname) || (userrooms.settingsroom.visible))
+        {
+      // console.log(userrooms.settingsroom.visible)
           return (
             <div class="c-questions__item c-question question-block questionLoad">
               <div class="c-question__header">
@@ -746,7 +752,98 @@ const BlockUserRooms = async function ({ Static }) {
               </div>
             </div>
           )
+        }
+        else{
+          return (
+            <div class="c-questions__item c-question question-block questionLoad">
+              <div class="c-question__header">
+                <div class="c-question__avatar">
+
+                </div>
+                <div class="c-question__name">
+                  <a
+                    class="c-question__nickname"
+                    style="display: block; left: 5px;bottom:5px"
+                    href={`/user/${userrooms.author.nickname}`}
+                    onclick={(e) => {
+
+                    }}>
+                    {userrooms.author.nickname}
+                  </a>
+                  <div class="c-question__info">
+                    <div class="c-question__icons">
+                      {userrooms.close ?
+                        <img
+                          class="c-question__icon c-question__icon--status"
+                          src={svg[`${(typeof userrooms.bestId == "string") ? "best_answer" : "closed_question"}`]}
+                        />
+                        :
+                        <img class="c-question__icon c-question__icon--status" src={svg.open_question} />
+                      }
+                      <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "audio") ? "c-question__icon--active" : null]} src={svg.userrooms} />
+                      <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "video") ? "c-question__icon--active" : null]} src={svg.userrooms} />
+                      <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "image") ? "c-question__icon--active" : null]} src={svg.userrooms} />
+                    </div>
+                    <div class="c-question__langcontainer language_container ">
+                      <div class="c-question__lang language-question">
+                        {userrooms.languages.orig_name}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a
+                style=""
+                href={`/chat/show/${userrooms._id}`}
+                class="c-question__body"
+        
+                onclick={function (e) {
+
+                }}
+              >
+                <div class="c-question__preview">
+                  <span class="">
+                    {fn.sliceString(userrooms.settingsroom.title, 66)}
+                  </span>
+
+                </div>
+              </a>
+              <span>количество сообщений {userrooms.message.length}</span>
+              <div class="c-question__statistic">
+                <div class="c-question__stats ">
+                  <img />
+                  {fn.getDateFormat(userrooms.showDate, "now")}
+                </div>
+              </div>
+              <div class="c-question__footer">
+                <a
+                  class="c-button c-button--outline2 buttonunswer"
+
+                  onclick={(e) => {
+
+                    ChangeRooms(Static, userrooms._id, false)
+
+                  }}
+
+                >
+                  <div class="c-button__wrapper">
+                    войти
+                  </div>
+                </a>
+              </div>
+            </div>
+          )
+        }
         })
+        }
+        
+        else
+        {
+          return(
+            <div><center><h4>По данному запросу комнат не найдено</h4></center></div>
+          )
+        }
+        }
         }
       </div>
 
