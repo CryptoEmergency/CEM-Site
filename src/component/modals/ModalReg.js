@@ -18,14 +18,14 @@ let elem = Variable.setRef()
 let elemButton = Variable.setRef()
 let elemCountry = Variable.setRef()
 
-const changeSearch = (e) => {
+const changeSearch = (Static, e) => {
     let inputValue = e.target.value.toLowerCase();
     listCodes = Variable.phoneCodes.filter((item) => item.text.toLowerCase().includes(inputValue) || `+${item.code}`.toLowerCase().includes(inputValue))
     initReload("modals");
 }
 
 
-const sendRegistration = async function (e) {
+const sendRegistration = async function (Static, e) {
     e.preventDefault();
     if (!Static.isValid) {
         return false
@@ -196,7 +196,7 @@ const ModalReg = function (data, ID) {
                                     {Variable.lang.button.phone}
                                 </button>
                             </div>
-                            <form id="registrationForm" onsubmit={sendRegistration}>
+                            <form id="registrationForm" onsubmit={(e) => { sendRegistration(Static, e) }}>
                                 <input style="display: none;" type="submit" />
                                 <div class="reset_password_input_block">
                                     {
@@ -242,7 +242,7 @@ const ModalReg = function (data, ID) {
                                                                                         type="text"
                                                                                         class="country-phone-search2"
                                                                                         value=""
-                                                                                        oninput={changeSearch}
+                                                                                        oninput={(e) => { changeSearch(Static, e) }}
                                                                                     />
                                                                                     <label class="country-phone-search-label2">{Variable.lang.h.modal_changeCountry}</label>
                                                                                     <ul>
@@ -321,7 +321,7 @@ const ModalReg = function (data, ID) {
                                             <label class="checkbox__label" for="fast_agree">
                                                 {Variable.lang.text.agree}
                                                 <span class="cont_a-link">
-                                                    <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.userTerms, items: fn.itemsMenu.onlyPage({url: '/terms-of-service/'}) }) }} class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a>
+                                                    <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.userTerms, items: fn.itemsMenu.onlyPage({ url: '/terms-of-service/' }) }) }} class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a>
                                                 </span>
                                             </label>
                                         </div>
@@ -349,7 +349,7 @@ const ModalReg = function (data, ID) {
                                         id="fast_reg"
                                         type="button"
                                         ref={elemButton}
-                                        onClick={sendRegistration}>
+                                        onClick={(e) => { sendRegistration(Static, e) }}>
                                         <span class="c-button__text">
                                             {Variable.lang.button.registration}
                                         </span>
