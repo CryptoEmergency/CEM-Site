@@ -547,6 +547,12 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Клуб инвесторов «UnionClub» - это сообщество экологичных инвесторов, которые всегда готовы помочь друг другу в вопросе инвестиций.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://racib.com" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_17']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">РОССИЙСКАЯ АССОЦИАЦИЯ КРИПТОЭКОНОМИКИ, ИСКУССТВЕННОГО ИНТЕЛЛЕКТА И БЛОКЧЕЙНА.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -947,7 +953,16 @@ const start = function (data, ID) {
                                     >
                                         <img src={images["forum/partner_20"]} />
                                     </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://racib.com"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_21"]} />
+                                    </a>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

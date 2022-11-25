@@ -65,7 +65,7 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
           mainId={mainId}
           callBack={callBack}
         /> */}
-            <ItemsMenu author={item.author} items={fn.itemsMenu.comment(Static, item, action)} />
+            <ItemsMenu author={item.author} items={fn.itemsMenu.comment(Static, item, action, index)} />
             </div>
             <div class="c-comments__form"
                 style="display:none;"

@@ -498,8 +498,8 @@ itemsMenu.question = function (Static, item) {
     return items
 }
 
-itemsMenu.comment = function (Static, item, action) {
-    console.log(Static, item, action)
+itemsMenu.comment = function (Static, item, action, index) {
+    console.log(Static, item, action, Variable)
     const items =
         [
             {
@@ -509,13 +509,47 @@ itemsMenu.comment = function (Static, item, action) {
                     try {
                         if (navigator.share) {
                             await navigator.share({
-                                url: window.location.origin + "/lenta-users/show/" + item._id,
+                                url: window.location.origin + "/" + Variable.dataUrl.adress + "/show/" + item._id,
                             });
                         }
                     } catch (err) {
                         // Вывести ошибку
                         console.error("Share", err)
                     }
+                }
+            },
+            {
+                text: Variable.lang.button.giveAnswer,
+                type: "share",
+                onlyAuth: true,
+                onclick: async () => {
+                    Object.keys(Static.secondComment.elShowInput).map((key) => {
+                        if (index != key && Static.secondComment.elShowInput[key].dataset.show) {
+                            Static.secondComment.elShowInput[key].removeAttribute("data-show")
+                            Static.secondComment.elShowInput[key].style = "display:none;"
+                        }
+                    });
+                    Static.secondComment.elShowInput[index].dataset.show = true
+                    Static.secondComment.elShowInput[index].style = "display:flex;"
+                    Static.secondComment.el[index].focus();
+
+                    return
+                }
+            },
+            {
+                text: Variable.lang.button.whoLike,
+                type: "share",
+                onlyAuth: true,
+                onclick: async () => {
+                    let response
+                    response = await fn.restApi.getComments({ filter: { _id: item._id }, select: { evaluation: 1, }, firstRecord: true })
+                    let whoLike = []
+                    if (response && response.evaluation && response.evaluation.length) {
+                        whoLike = response.evaluation.filter(
+                        (item) => item.type === "plus"
+                        );
+                    }
+                    fn.modals.ModalWhoLike({ whoLike }, true)
                 }
             },
             {
@@ -548,19 +582,6 @@ itemsMenu.comment = function (Static, item, action) {
                         id: item._id,
                         action: "set" + action
                     })
-                    /*
-                        Variable.SetModals(
-                            {
-                                name: "ModalComplainComment",
-                                data: {
-                                    id: item._id,
-                                    typeSet: item.typeApi,
-                                    mainId: item.mainId,
-                                    mainCom: !item.commentId ? true : false,
-                                },
-                            }, true
-                        )
-                    */
                 }
 
             },
@@ -583,9 +604,6 @@ itemsMenu.comment = function (Static, item, action) {
                 onlyAuth: true,
                 color: "red",
                 onclick: async () => {
-                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
-                        console.log('Post in modal, close this')
-                    }
                     modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
@@ -610,15 +628,11 @@ itemsMenu.comment = function (Static, item, action) {
             //         // );
             //     }
             // },
-            // {
             {
                 text: Variable.lang.select.delete,
                 type: "delete",
                 color: "red",
                 onclick: async () => {
-                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
-                        console.log('Post in modal, close this')
-                    }
                     modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setPost.delete({ _id: item._id })
@@ -635,9 +649,6 @@ itemsMenu.comment = function (Static, item, action) {
                 type: "deleteRole",
                 color: "red",
                 onclick: async () => {
-                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
-                        console.log('Post in modal, close this')
-                    }
                     modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.doRole.deletePost({ _id: item._id })
