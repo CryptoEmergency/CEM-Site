@@ -202,7 +202,7 @@ if(Static.confirmPasword.valid)
   else
   {
      authMessage = "Только авторизованные пользователи могут просматривать данный контент" 
-     authInput = <Input className="" Static={Static.confirmPasword} />
+  
   }
   return (
     <li class="c-chats__message c-message">
@@ -227,10 +227,8 @@ if(Static.confirmPasword.valid)
 else
 {
 
-  
-
-
-  //для не авторизованных пользователей
+    //для не авторизованных пользователей
+//if(!Static.Auth && Static.Rooms.system)
 
 if (Static.Rooms.message.length > 0) {
     return Static.Rooms.message.map(function (userrooms, i) {
