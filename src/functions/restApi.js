@@ -916,7 +916,9 @@ restApi.setUserRoom.edit = async function ({_id, status, visible, confirmuser, t
             languages: languages,
             country: country,
             system: system
-        }
+            
+        },
+        edit:true
     }
 
     const response = await sendApi.create("setUserRoom", data);
