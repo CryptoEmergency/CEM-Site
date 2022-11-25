@@ -6,7 +6,7 @@ import {
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, Evaluation, TextArea, ButtonSubmit } from "@component/element/index.js";
+import { Avatar, Evaluation, TextArea, ButtonSubmit, ItemsMenu } from "@component/element/index.js";
 
 const Comment = function ({ Static, index, item, include, mainId, action, quoteId, mainItem }) {
     return (
@@ -65,6 +65,7 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
           mainId={mainId}
           callBack={callBack}
         /> */}
+            <ItemsMenu author={item.author} items={fn.itemsMenu.comment(Static, item, action)} />
             </div>
             <div class="c-comments__form"
                 style="display:none;"

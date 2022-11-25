@@ -623,6 +623,15 @@ const start = function (data, ID) {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_21']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Андрей Тугарин</p>
+                                            <p>Управляющий партнер GMT Legal</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_3']} />
                                         </div>
                                         <div>
@@ -738,14 +747,13 @@ const start = function (data, ID) {
                                             <p>Трейдер и эксперт по личным финансам. Сооснователь Клуба инвесторов «UnionClub». Криптоинвестор.</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_22']} />
                                         </div>
-                                    </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
-                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Виктор Пуляев</p>
+                                            <p>Директор по развитию blockchain24.pro</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
@@ -930,6 +938,14 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_19"]} />
+                                    </a>
+                                    <a style="display: block!important; background: #FFFFFF"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_20"]} />
                                     </a>
                                 </div>
                             </div>

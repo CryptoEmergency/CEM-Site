@@ -121,7 +121,7 @@ const BlockNews = async function ({ Static }) {
                         class="blog_news_item"
                         href={`/${Static.type}/show/${item._id}`}
                         onclick={(e) => {
-                          fn.siteLinkModal(e, { title: fn.sliceString(item.title, 85), item, items: fn.itemsMenu.onlyPage({url: `/${Static.type}/show/${item._id}`}) })
+                          fn.siteLinkModal(e, { title: fn.sliceString(item.title, 85), item, items: fn.itemsMenu.news({ url: `/${Static.type}/show/${item._id}`}) })
                         }} >
                         {/* <LazyImage path={"/assets/upload/news/" + item.image} /> */}
                         <img src={"/assets/upload/news/" + item.image} />
