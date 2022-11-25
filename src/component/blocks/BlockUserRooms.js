@@ -10,6 +10,7 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
 
+
 //если не авторизован
 function checkAthorisation(Static) {
   if (Static.Auth) {
@@ -115,8 +116,7 @@ if(Static.Rooms.author._id == Variable.myInfo._id || checkArray.length > 0)
           </div>
 
           {
-            //ники пользователей showDate
-
+            //ники пользователей 
             <div class="c-message__title">
               <div class="c-message__nick">{userrooms.author.nickname}</div>
               <div class="c-message__date">{userrooms.showDate}</div>
@@ -206,8 +206,6 @@ if(Static.confirmPasword.valid)
 
 }
 
-
- 
   if(Static.Auth)
   {
      authInput = <Input className="" Static={Static.confirmPasword} />
@@ -418,9 +416,6 @@ async function SearchRooms(Static)
 
 const BlockUserRooms = async function ({ Static }) {
 
-  
-
-
     await initOne(async () => {
     await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system: true }, limit: 10 })
 
@@ -441,20 +436,27 @@ const BlockUserRooms = async function ({ Static }) {
     Static.ActiveListRooms = Variable.ListUsersRooms.list_records
   }
 
-
+  let redborder
+  let edit
   return (
     <div>
       <div class="c-questions__list questions-blocks c-chats__wrapper">
 
         {
-
-
+          
           //мапим системные комнаты
           Variable.ListSystemsRooms.list_records.map(function (systemsrooms, i) {
-
+            if(Static.Rooms._id == systemsrooms._id)
+            {
+              redborder = "border:1px solid #ff22ac"
+            }
+            else
+            {
+              redborder = "border:1px solid #474c5a"
+            }
             return (
               <div class="c-questions__list">
-              <div class="c-questions__item c-question question-block questionLoad">
+              <div style={redborder}  class="c-questions__item c-question question-block questionLoad">
                 <div class="c-question__preview">
                 <div class="c-question__header">
                   <div class="c-question__avatar">
@@ -559,7 +561,7 @@ const BlockUserRooms = async function ({ Static }) {
                 class="c-search__icon c-search__icon--filter"
                 src={svg.filter}
                 onClick={() => {
-                
+                  
                 }}
               />
             </div>
@@ -618,6 +620,7 @@ const BlockUserRooms = async function ({ Static }) {
           </aside>
           <section class="c-chats__content" >
             <div class="c-chats__border">
+            <center><div class="c-question__preview"><span>комната: {Static.Rooms.settingsroom.title}</span></div></center>
               <ul class="c-chats__messages" id="chatMessage">
 
 
@@ -661,7 +664,6 @@ const BlockUserRooms = async function ({ Static }) {
       <br />
       <hr></hr>
       <div class="c-questions__list">
-     
 
         {
 
@@ -671,11 +673,54 @@ const BlockUserRooms = async function ({ Static }) {
         if(Static.ActiveListRooms.length > 0){
    
        return Static.ActiveListRooms.map(function (userrooms, i) {
+        if(Variable.myInfo._id == userrooms.author._id){
+          edit =  <div class="c-question__footer">
+          <a
+            class="c-button c-button--outline2 buttonunswer"
 
-      
+            onclick={(e) => {
+
+              if (Static.Auth) {
+                fn.modals.ModalEditRoom(userrooms,{
+                  callback: (response) => {
+
+                    if (response.list_records.length > 0) {
+                      Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
+                      initReload()
+                    }
+                  }
+                })
+              }
+              else {
+                fn.modals.ModalNeedAuth()
+              }
+
+            }}
+
+          >
+            <div class="c-button__wrapper">
+              редактировать
+            </div>
+          </a>
+        </div>
+        }
+        else
+        {
+          edit = ''
+        }
+
+      if(Static.Rooms._id == userrooms._id)
+      {
+        redborder = "border:1px solid #ff22ac"
+      }
+      else
+      {
+        redborder = "border:1px solid #474c5a"
+      }
           return (
-            <div class="c-questions__item c-question question-block questionLoad">
+            <div style={redborder} class="c-questions__item c-question question-block questionLoad">
               <div class="c-question__header">
+               
                 <div class="c-question__avatar">
 
                 </div>
@@ -734,6 +779,7 @@ const BlockUserRooms = async function ({ Static }) {
                   {fn.getDateFormat(userrooms.showDate, "now")}
                 </div>
               </div>
+              
               <div class="c-question__footer">
                 <a
                   class="c-button c-button--outline2 buttonunswer"
@@ -750,6 +796,9 @@ const BlockUserRooms = async function ({ Static }) {
                   </div>
                 </a>
               </div>
+             <br/>
+             {edit}
+            
             </div>
           )
         

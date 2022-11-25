@@ -901,6 +901,30 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
     return checkSetAnswer(response)
 }
 
+restApi.setUserRoom.edit = async function ({_id, status, visible, confirmuser, title, description, images, languages, country, system = false }) {
+    let data = {
+        _id: _id,
+        value: {
+            settingsroom: {
+                status: status,
+                visible: visible,
+                confirmuser: confirmuser,
+                title: title,
+                description: description,
+                images: images,
+            },
+            languages: languages,
+            country: country,
+            system: system
+        }
+    }
+
+    const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
+}
+
+
+
 restApi.setUserRoomMessage = {}
 
 restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {

@@ -39,7 +39,7 @@ const changeComplaint = function (Static,checkdata) {
 const ModalComplainComment = function ( data , ID) {
 
   let [Static] = fn.GetParams({ data, ID })
-  console.log(Static)
+
   init(function(){ 
     Static.modal = {
     abusive: { check: false, complain: Variable.lang.select.complainOne },
