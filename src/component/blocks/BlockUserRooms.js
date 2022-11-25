@@ -81,9 +81,20 @@ function ShowMessage(Static) {
 */
 
 
+let checkArray = []
+Static.Rooms.users.forEach(function(elem,i){
+
+  if(Variable.myInfo._id == elem._id)
+  {
+    checkArray.push(Variable.myInfo._id)
+  }
+})
+
+
+
 if(Static.Rooms.settingsroom.status)
 {
-if(Static.Rooms.author._id == Variable.myInfo._id )
+if(Static.Rooms.author._id == Variable.myInfo._id || checkArray.length > 0)
 {
   if (Static.Rooms.message.length > 0) {
     return Static.Rooms.message.map(function (userrooms, i) {
@@ -140,6 +151,7 @@ if(Static.Rooms.author._id == Variable.myInfo._id )
 else{
 if(Static.confirmPasword.valid)
 {
+ 
   if (Static.Rooms.message.length > 0) {
     return Static.Rooms.message.map(function (userrooms, i) {
 
@@ -190,6 +202,8 @@ if(Static.confirmPasword.valid)
       </li>
     )
   }
+
+
 }
 
 
