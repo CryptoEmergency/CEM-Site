@@ -4477,16 +4477,19 @@ s
 .full_news_date {
 	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 	font-style: italic;
 	font-weight: 500;
 	font-size: 12px;
 	line-height: 52px;
 	color: #909CBF;
 	margin-bottom: 15px;
+	white-space: nowrap;
 }
 
 .full_news_date img {
 	margin-bottom: 0;
+	flex-basis: 26px;
 }
 
 .full_news_name {
