@@ -43,7 +43,7 @@
 				margin: 0;
 				border-radius: 0;
 				border: none;
-				min-height: 100vh;
+				min-height: 100%; //100vh;
 			}
 
 			&__dialog,
