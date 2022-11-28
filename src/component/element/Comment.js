@@ -18,7 +18,7 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
                 dateShow={item.showDate}
             />
             <div class="c-comments__bodycomment">
-                <span class="c-comments__textcomment">
+                <span Element={($el) => { Static.commentText[index] = $el; }} class="c-comments__textcomment">
                     {fn.editText(item.text, { clear: true, paragraph: true, html: true })}
                 </span>
             </div>
@@ -65,7 +65,7 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
           mainId={mainId}
           callBack={callBack}
         /> */}
-            <ItemsMenu author={item.author} items={fn.itemsMenu.comment(Static, item, action, index)} />
+            <ItemsMenu author={item.author} items={fn.itemsMenu.comment(Static, item, action, index, mainId)} />
             </div>
             <div class="c-comments__form"
                 style="display:none;"

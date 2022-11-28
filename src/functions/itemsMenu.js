@@ -1,6 +1,7 @@
 import { Variable, initReload } from '@betarost/cemjs'
 import { modals } from './modals.js';
 import { fn } from '@src/functions/index.js';
+import { TextArea } from "@component/element/index.js";
 const itemsMenu = {}
 
 //нижнее меню
@@ -498,8 +499,8 @@ itemsMenu.question = function (Static, item) {
     return items
 }
 
-itemsMenu.comment = function (Static, item, action, index) {
-    console.log(Static, item, action, Variable)
+itemsMenu.comment = function (Static, item, action, index, mainId) {
+    console.log(Static, item, action, Variable, mainId)
     const items =
         [
             {
@@ -553,26 +554,7 @@ itemsMenu.comment = function (Static, item, action, index) {
                 }
             },
             {
-                text: item.subscribe
-                    ? Variable.lang.button.unsubscribe
-                    : Variable.lang.button.subscribe,
-                type: "subscription",
-                onlyAuth: true,
-                onclick: async () => {
-
-                    const response = await fn.restApi.setUsers.subscribe({ _id: item.author._id })
-                    console.log(response)
-                    // console.log('=b959ac=', response)
-                    if (response.status === "ok") {
-                        item.subscribe = !item.subscribe
-                        initReload();
-                    } else {
-                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                    }
-                }
-            },
-            {
-                text: Variable.lang.select.complainPost,
+                text: Variable.lang.select.complainComment,
                 type: "complainItem",
                 // onlyAuth: true,
 
@@ -580,7 +562,7 @@ itemsMenu.comment = function (Static, item, action, index) {
                 onclick: async () => {
                     modals.ModalComplainComment({
                         id: item._id,
-                        action: "set" + action
+                        action: "setComments"
                     })
                 }
 
@@ -608,26 +590,31 @@ itemsMenu.comment = function (Static, item, action, index) {
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
                         text: Variable.lang.p.toBlackListConfirm,
                         button: Variable.lang.button.yes
                     })
                 }
             },
-            // {
-            //     text: Variable.lang.button.edit,
-            //     type: "edit",
-            //     onclick: async () => {
-            //         // Переработать модалку
-            //         // Variable.SetModals(
-            //         //   {
-            //         //     name: "ModalBlackList",
-            //         //     data: { id: item.author._id, type: "перебрать" },
-            //         //   }, true
-            //         // );
-            //     }
-            // },
+            {
+                text: Variable.lang.button.edit,
+                type: "edit",
+                onclick: async () => {
+                    // Object.keys(Static.commentText).map((key) => {
+                    //     if (index != key && Static.secondComment.elShowInput[key].dataset.show) {
+                    //         Static.secondComment.elShowInput[key].removeAttribute("data-show")
+                    //         Static.secondComment.elShowInput[key].style = "display:none;"
+                    //     }
+                    // });
+                    console.log(Static.commentText[index].innerHTML)
+                    console.log(Static.commentText[index].innerText)
+                    console.log(TextArea({Static: {value: Static.commentText[index].innerHTML}, className: "text1 create_post_chapter"}))
+                    //Static.commentText[index].append(TextArea({Static: {value: Static.commentText[index].innerHTML}, className: "text1 create_post_chapter"}))
+                    //Static.secondComment.el[index].focus();
+
+                    return
+                }
+            },
             {
                 text: Variable.lang.select.delete,
                 type: "delete",
@@ -635,9 +622,8 @@ itemsMenu.comment = function (Static, item, action, index) {
                 onclick: async () => {
                     modals.ModalConfirmAction({
                         action: async () => {
-                            let response = await fn.restApi.setPost.delete({ _id: item._id })
+                            let response = await fn.restApi.setComments.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
                         text: Variable.lang.p.deletePostConfirm,
                         button: Variable.lang.button.yes
@@ -651,9 +637,8 @@ itemsMenu.comment = function (Static, item, action, index) {
                 onclick: async () => {
                     modals.ModalConfirmAction({
                         action: async () => {
-                            let response = await fn.restApi.doRole.deletePost({ _id: item._id })
+                            let response = await fn.restApi.doRole.deleteComment({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
                         text: Variable.lang.p.deletePostConfirm,
                         button: Variable.lang.button.yes

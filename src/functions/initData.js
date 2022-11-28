@@ -424,6 +424,7 @@ initData.lenta_users_show = function (Static) {
     Static.elShowTextShort = {}
     Static.elMedia = {}
     Static.elNumberSwiper = {}
+    Static.commentText = []
     Static.mainComment = {
         rows: 1,
         adaptive: 4

@@ -16,6 +16,8 @@ import Swiper from 'swiper/bundle';
 import { fn } from "@src/functions/index.js";
 
 
+
+
 import 'swiper/css/bundle';
 
 
@@ -366,7 +368,12 @@ const start = function (data, ID) {
                                         </a>
                                     </div>
                                 </div>
-                                <a style="margin: 40px auto" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
+                                <div style="display: flex; justify-content: center; margin-top: 20px">
+                                    <span style="text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 700; font-size: 36px">
+                                        2990 ₽
+                                    </span>
+                                </div>
+                                <a style="margin: 40px auto; margin-top: 20px" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
                                     <span>Купить билет</span>
                                 </a>
                                 <div style="font-size: 18px; max-width: 500px; margin: 0 auto;margin-top: 10px">
@@ -553,6 +560,12 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">РОССИЙСКАЯ АССОЦИАЦИЯ КРИПТОЭКОНОМИКИ, ИСКУССТВЕННОГО ИНТЕЛЛЕКТА И БЛОКЧЕЙНА.</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://www.artemotiochain.ru/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_18']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Образовательная платформа, где участники могут изучать NFT, современное искусство, живопись, технологию токенизации своих навыков и услуг с целью создавать и получать за своё творчество вознаграждение.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -588,7 +601,7 @@ const start = function (data, ID) {
                                         </div>
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Игорь Еньшин</p>
-                                            <p>Руководитель IT-направления компании CryptoEmergency</p>
+                                            <p>Руководитель IT-направления компании Crypto Emergency</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
@@ -762,14 +775,22 @@ const start = function (data, ID) {
                                             <p>Директор по развитию blockchain24.pro</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_23']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Владимир Туров</p>
+                                            <p>Учредитель TUROV •INVEST</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_24']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Овчинников Артём</p>
+                                            <p>Идеолог акселератора для web 3 проектов Фрактал</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
@@ -960,6 +981,14 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_21"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.artemotiochain.ru/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_22"]} />
                                     </a>
                                 </div>
                                 
