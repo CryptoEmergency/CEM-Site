@@ -487,6 +487,10 @@ const BlockUserRooms = async function ({ Static }) {
                 onclick: async (langCode, langOrig) => {
                   Static.lang.name = langOrig;
                   Static.lang.code = langCode;
+                  let lang = Variable.ListSystemsRooms.list_records.filter((item) => {
+                    return item.languages.code == langCode;
+                  });
+                  ChangeRooms(Static, lang[0]._id, true)
                   initReload()
                 },
               },
@@ -529,7 +533,7 @@ const BlockUserRooms = async function ({ Static }) {
               </div>
               <ul class="c-chats__togglers">
                 {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-                  console.log('=8c56fb=', userrooms)
+                  // console.log('=8c56fb=', userrooms)
 
                   if (userrooms.author.nickname == Variable.myInfo.nickname) {
                     return (
