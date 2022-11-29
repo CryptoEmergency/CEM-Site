@@ -10,28 +10,42 @@ import {
 
 
 
-const ModalCreateRoom = function (data, ID) {
+const ModalEditRoom = function (data, ID) {
 
+console.log(data.userrooms)
   let [Static] = fn.GetParams({ data, ID })
+
+  let valid
+
+  if(data.userrooms.settingsroom.title)
+  {
+    valid = true
+  }
+  else{
+    valid = false
+  }
 
 
   //инпут название
   Static.label = {
-    value: "",
-    valid: false,
+    value: data.userrooms.settingsroom.title,
+    valid: valid,
     error: false,
     type: "text",
-    label: "Название",
+    label: "Назвние",
     placeholder: "Фускоф =)",
     errorText: "больше 5 симаволов",
     condition: async (value) => {
+      
+
       if (value.length < 5) {
+   
         return false
       }
       else {
         return true
       }
-
+    
     },
     afterValid: () => {
       if (Static.label.valid) {
@@ -47,14 +61,13 @@ const ModalCreateRoom = function (data, ID) {
   //инпут описание
   Static.Title = {
     label: "Описание",
-    value: "",
-    placeholder: "Добавьте описание группы"
+    value: data.userrooms.settingsroom.description
   }
   //инпут язык
   Static.Lang = {
-    value: Variable.myInfo.country.code + ` (${Variable.myInfo.country.orig_name})`,
+    value: data.userrooms.country.code + ` (${data.userrooms.country.orig_name})`,
     label: "Выбирете язык",
-    code: Variable.myInfo.country.code,
+    code: data.userrooms.country.code,
     onclick: () => {
       fn.modals.ModalChangeLanguage({
         onclick: async (langCode, langName, langOrig) => {
@@ -70,9 +83,9 @@ const ModalCreateRoom = function (data, ID) {
   }
   //инпут страна
   Static.Country = {
-    value: Variable.myInfo.country.eng_name + ` (${Variable.myInfo.country.orig_name})`,
+    value: data.userrooms.country.eng_name + ` (${data.userrooms.country.orig_name})`,
     label: "Выбирите страну",
-    code: Variable.myInfo.country.code,
+    code: data.userrooms.country.code,
 
     onclick: () => {
       Variable.SetModals({
@@ -89,22 +102,24 @@ const ModalCreateRoom = function (data, ID) {
 
   //приват
   Static.Private = {
-    checked: false,
+    checked: data.userrooms.settingsroom.status,
   }
   //видимость
   Static.Visible = {
-    checked: false,
+    checked: data.userrooms.settingsroom.visible,
 
   }
+
+
   //кодовое слово
   Static.Confirm = {
-    label: "Придумайте кодовое слово",
+    label: "придумайте кодовое слово",
     value: "",
     valid: false,
     error: false,
     type: "text",
     placeholder: "Gfhdsk",
-    errorText: "Больше 1 символа",
+    errorText: "больше 1 символов",
     condition: async (value) => {
       if (value.length < 1) {
         return false
@@ -151,8 +166,11 @@ const ModalCreateRoom = function (data, ID) {
       active = "inactive_form_button"
     }
 
+
+
+
     return (
-      <div class="c-modal c-modal--open" id="ModalCreateRoom">
+      <div class="c-modal c-modal--open" id="ModalComplainComment">
         <section class="c-modal__dialog">
           <header class="c-modal__header">
             <div class="complain_modal">
@@ -243,6 +261,7 @@ const ModalCreateRoom = function (data, ID) {
                       initReload()
                     }}
                     type="checkbox"
+                    checked={Static.Visible.checked ? true : false }
 
                   />
                   <label class="checkbox__label">
@@ -251,12 +270,12 @@ const ModalCreateRoom = function (data, ID) {
                   </label>
                 </div>
               </div>
-
+            
               <div class="userMainBlock">
-                {() => {
-                  //  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
-                }}
-              </div>
+                        {() => {
+                          //  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
+                        }}
+                    </div>
               <MediaButton
                 onclickPhoto={function () {
                   if (this.files.length == 0) {
@@ -293,18 +312,20 @@ const ModalCreateRoom = function (data, ID) {
                     let images = ""
                     let languages = Static.Lang.code
                     let country = Static.Country.code
+                    let _id = data._id
                     // let system = false
-                    let request = { status, visible, confirmuser, title, description, images, languages, country }
-                    let requier = await fn.restApi.setUserRoom.create(request)
-
+                    let request = {_id, status, visible, confirmuser, title, description, images, languages, country }
+                   
+                    let requier = await fn.restApi.setUserRoom.edit(request)
+              
                     if (requier.status == "ok") {
-                      Static.callback(requier)
+                    Static.callback(requier)
                       fn.modals.close(ID)
                     }
                   }
                 }
                 >
-                  <span>Создать</span>
+                  <span>Отправить</span>
                 </a>
               </div>
             </div>
@@ -317,4 +338,4 @@ const ModalCreateRoom = function (data, ID) {
   )
 };
 
-export default ModalCreateRoom;
+export default ModalEditRoom;

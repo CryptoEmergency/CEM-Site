@@ -1,6 +1,7 @@
 import { Variable, initReload } from '@betarost/cemjs'
 import { modals } from './modals.js';
 import { fn } from '@src/functions/index.js';
+import { TextArea } from "@component/element/index.js";
 const itemsMenu = {}
 
 //нижнее меню
@@ -498,8 +499,8 @@ itemsMenu.question = function (Static, item) {
     return items
 }
 
-itemsMenu.comment = function (Static, item, action) {
-    console.log(Static, item, action)
+itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
+    console.log(Static, item, action, Variable, mainId)
     const items =
         [
             {
@@ -509,7 +510,7 @@ itemsMenu.comment = function (Static, item, action) {
                     try {
                         if (navigator.share) {
                             await navigator.share({
-                                url: window.location.origin + "/lenta-users/show/" + item._id,
+                                url: window.location.origin + "/" + Variable.dataUrl.adress + "/show/" + mainId,
                             });
                         }
                     } catch (err) {
@@ -519,55 +520,56 @@ itemsMenu.comment = function (Static, item, action) {
                 }
             },
             {
-                text: item.subscribe
-                    ? Variable.lang.button.unsubscribe
-                    : Variable.lang.button.subscribe,
-                type: "subscription",
+                text: Variable.lang.button.giveAnswer,
+                type: "share",
                 onlyAuth: true,
                 onclick: async () => {
+                    Object.keys(Static.secondComment.elShowInput).map((key) => {
+                        if (index != key && Static.secondComment.elShowInput[key].dataset.show) {
+                            Static.secondComment.elShowInput[key].removeAttribute("data-show")
+                            Static.secondComment.elShowInput[key].style = "display:none;"
+                        }
+                    });
+                    Static.secondComment.elShowInput[index].dataset.show = true
+                    Static.secondComment.elShowInput[index].style = "display:flex;"
+                    Static.secondComment.el[index].focus();
 
-                    const response = await fn.restApi.setUsers.subscribe({ _id: item.author._id })
-                    console.log(response)
-                    // console.log('=b959ac=', response)
-                    if (response.status === "ok") {
-                        item.subscribe = !item.subscribe
-                        initReload();
-                    } else {
-                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                    }
+                    return
                 }
             },
             {
-                text: Variable.lang.select.complainPost,
+                text: Variable.lang.button.whoLike,
+                type: "share",
+                onclick: async () => {
+                    let response
+                    response = await fn.restApi.getComments({ filter: { _id: item._id }, select: { evaluation: 1, }, firstRecord: true })
+                    let whoLike = []
+                    if (response && response.evaluation && response.evaluation.length) {
+                        whoLike = response.evaluation.filter(
+                        (item) => item.type === "plus"
+                        );
+                    }
+                    fn.modals.ModalWhoLike({ whoLike }, true)
+                }
+            },
+            {
+                text: Variable.lang.select.complainComment,
                 type: "complainItem",
-                // onlyAuth: true,
+                onlyAuth: true,
 
                 color: "red",
                 onclick: async () => {
                     modals.ModalComplainComment({
                         id: item._id,
-                        action: "set" + action
+                        action: "setComments"
                     })
-                    /*
-                        Variable.SetModals(
-                            {
-                                name: "ModalComplainComment",
-                                data: {
-                                    id: item._id,
-                                    typeSet: item.typeApi,
-                                    mainId: item.mainId,
-                                    mainCom: !item.commentId ? true : false,
-                                },
-                            }, true
-                        )
-                    */
                 }
 
             },
             {
                 text: Variable.lang.select.complainUser,
                 type: "complainUser",
-                // onlyAuth: true,
+                onlyAuth: true,
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
@@ -583,49 +585,55 @@ itemsMenu.comment = function (Static, item, action) {
                 onlyAuth: true,
                 color: "red",
                 onclick: async () => {
-                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
-                        console.log('Post in modal, close this')
-                    }
                     modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
                         text: Variable.lang.p.toBlackListConfirm,
                         button: Variable.lang.button.yes
                     })
                 }
             },
-            // {
-            //     text: Variable.lang.button.edit,
-            //     type: "edit",
-            //     onclick: async () => {
-            //         // Переработать модалку
-            //         // Variable.SetModals(
-            //         //   {
-            //         //     name: "ModalBlackList",
-            //         //     data: { id: item.author._id, type: "перебрать" },
-            //         //   }, true
-            //         // );
-            //     }
-            // },
-            // {
+            {
+                text: Variable.lang.button.edit,
+                type: "edit",
+                onclick: async () => {
+                    Object.keys(Static.editComment.elShowInput).map((key) => {
+                        if (index != key && Static.editComment.elShowInput[key].dataset.show) {
+                            Static.editComment.elShowInput[key].removeAttribute("data-show")
+                            Static.editComment.elShowInput[key].style = "display:none;"
+                            Static.commentText[key].dataset.show = true
+                            Static.commentText[key].style = "display:flex;"
+                        }
+                    });
+                    Static.commentText[index].removeAttribute("data-show")
+                    Static.commentText[index].style = "display:none;"
+                    Static.editComment.elShowInput[index].dataset.show = true
+                    Static.editComment.elShowInput[index].style = "display:flex;"
+                    Static.editComment.el[index].value = item.text
+                    Static.editComment.el[index].focus();
+
+                    initReload()
+
+                    return
+                }
+            },
             {
                 text: Variable.lang.select.delete,
                 type: "delete",
                 color: "red",
                 onclick: async () => {
-                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
-                        console.log('Post in modal, close this')
-                    }
                     modals.ModalConfirmAction({
                         action: async () => {
-                            let response = await fn.restApi.setPost.delete({ _id: item._id })
+                            let response = await fn.restApi.setComments.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                            console.log(mainItem)
+                            mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
+                            console.log(mainItem)
+                            initReload()
                         },
-                        text: Variable.lang.p.deletePostConfirm,
+                        text: Variable.lang.p.deleteCommentConfirm,
                         button: Variable.lang.button.yes
                     })
                 }
@@ -635,16 +643,16 @@ itemsMenu.comment = function (Static, item, action) {
                 type: "deleteRole",
                 color: "red",
                 onclick: async () => {
-                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
-                        console.log('Post in modal, close this')
-                    }
                     modals.ModalConfirmAction({
                         action: async () => {
-                            let response = await fn.restApi.doRole.deletePost({ _id: item._id })
+                            let response = await fn.restApi.doRole.deleteComment({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                            console.log('get' + action)
+                            mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
+                            console.log(mainItem)
+                            initReload()
                         },
-                        text: Variable.lang.p.deletePostConfirm,
+                        text: Variable.lang.p.deleteCommentConfirm,
                         button: Variable.lang.button.yes
                     })
                 }

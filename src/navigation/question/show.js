@@ -253,6 +253,7 @@ const start = function (data, ID) {
                                             item={itemComments}
                                             index={"A-" + String(index) + String(i)}
                                             mainId={item._id}
+                                            mainItem={item}
                                             action="Answers"
                                           />
                                         )

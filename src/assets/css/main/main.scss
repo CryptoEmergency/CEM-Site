@@ -19,6 +19,15 @@ p {
     z-index: 9999;
 }
 
+:root {
+    --app-height: 100%;
+}
+
+html,
+body {
+    height: var(--app-height);
+}
+
 html {
     scrollbar-color: $akebi_purple transparent;
     scrollbar-width: thin;
@@ -58,6 +67,8 @@ body {
     // padding-top: 80px;
     overflow: hidden;
     min-height: 100vh;
+    /* mobile viewport bug fix */
+    min-height: -webkit-fill-available;
 
     &[data-scroll="scrollUserNews"] {
 
@@ -857,7 +868,7 @@ textarea {
 
         &.clicked_button-type_1-part_1 {
             width: 100% !important;
-            background: $spaceman  !important;
+            background: $spaceman !important;
             margin-left: auto !important;
             margin-right: auto !important;
         }
@@ -868,7 +879,7 @@ textarea {
             width: 100% !important;
 
             span {
-                color: $white  !important;
+                color: $white !important;
             }
         }
 
@@ -1848,3 +1859,5 @@ textarea {
 @import 'blocks/wallet.scss';
 /* Cropper Image */
 @import 'blocks/cropper.scss';
+/* Rooms */
+@import 'blocks/rooms.scss';

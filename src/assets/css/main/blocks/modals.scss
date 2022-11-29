@@ -43,7 +43,7 @@
 				margin: 0;
 				border-radius: 0;
 				border: none;
-				min-height: 100vh;
+				min-height: 100%; //100vh;
 			}
 
 			&__dialog,
@@ -4477,16 +4477,19 @@ s
 .full_news_date {
 	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 	font-style: italic;
 	font-weight: 500;
 	font-size: 12px;
 	line-height: 52px;
 	color: #909CBF;
 	margin-bottom: 15px;
+	white-space: nowrap;
 }
 
 .full_news_date img {
 	margin-bottom: 0;
+	flex-basis: 26px;
 }
 
 .full_news_name {
@@ -5475,6 +5478,15 @@ s
 	.c-modal {
 		&__body {
 			padding-bottom: 20px;
+		}
+	}
+}
+
+/* modal #ModalCreateRoom (Создание комнаты) */
+#ModalCreateRoom {
+	.input-div {
+		input {
+			padding-left: 20px;
 		}
 	}
 }

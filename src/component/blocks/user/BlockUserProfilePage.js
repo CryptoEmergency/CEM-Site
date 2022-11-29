@@ -446,6 +446,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
 }
 
 BlockUserProfilePage.friends = function (Static, data) {
+    console.log(data,"block friends")
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }

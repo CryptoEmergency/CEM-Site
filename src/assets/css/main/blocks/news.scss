@@ -230,6 +230,26 @@
             display: block !important;
             position: absolute;
             bottom: 10px;
+
+
+
+            &.blog_post_stat {
+                &--list {
+                    display: flex ! important;
+                    justify-content: space-between;
+
+                    &>span {
+                        display: flex;
+                        justify-content: flex-start;
+                        white-space: nowrap;
+
+                    }
+
+                    img {
+                        flex-basis: 26px;
+                    }
+                }
+            }
         }
     }
 }
@@ -256,6 +276,7 @@
 
     @media(max-width: 599px) {
         grid-area: blog_stat;
+        width: 100%;
     }
 
     span {

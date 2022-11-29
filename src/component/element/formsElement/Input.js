@@ -4,7 +4,7 @@ import {
 } from "@betarost/cemjs";
 import svg from '@assets/svg/index.js';
 
-const textConstuctor = function (Static, classDiv, className, before, after, callback) {
+const textConstuctor = function (Static, classDiv, className, before, after, callback, customStyle = false) {
     if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined" || typeof classDiv != "undefined" || typeof before != "undefined" || typeof after != "undefined")) {
         return (
             <div>
@@ -13,7 +13,7 @@ const textConstuctor = function (Static, classDiv, className, before, after, cal
                 <div class={classDiv}>
                     {before ? before : null}
                     {Static.type == "password" ? <img src={svg.lock} class="icon-input" /> : null}
-                    {textElem(Static, className, callback)}
+                    {textElem(Static, className, callback, customStyle)}
                     {Static.type == "password" ? <img src={svg["eye"]} class="password_eye"
                         onClick={function () {
                             if (Static.elInput.type == "text") {
@@ -30,10 +30,10 @@ const textConstuctor = function (Static, classDiv, className, before, after, cal
             </div>
         )
     } else {
-        return (textElem(Static, className, callback))
+        return (textElem(Static, className, callback, customStyle))
     }
 }
-const textElem = function (Static, className, callback) {
+const textElem = function (Static, className, callback, customStyle) {
     let rows = null
     let adaptive = null
     let placeholder = null
@@ -70,7 +70,7 @@ const textElem = function (Static, className, callback) {
             type={type}
             value={value}
             class={className}
-            style={"border-radius: 10px;"}
+            style={customStyle ? customStyle : "border-radius: 10px;"}
             oninput={function () {
 
 
@@ -121,8 +121,8 @@ const checkInput = function (Static, target) {
     return
 }
 
-const Input = function ({ Static, classDiv, className, before, after, callback }) {
-    return (textConstuctor(Static, classDiv, className, before, after, callback))
+const Input = function ({ Static, classDiv, className, before, after, callback, customStyle }) {
+    return (textConstuctor(Static, classDiv, className, before, after, callback, customStyle))
 };
 export { Input };
 // OK

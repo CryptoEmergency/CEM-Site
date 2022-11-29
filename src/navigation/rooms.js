@@ -11,13 +11,11 @@ const start = function (data, ID) {
 
     init(()=>{
         fn.initData.rooms(Static)
-
     },
         () => {
            
             return (
-                <div class='c-main__body'>
-                    
+                <div class='c-main__body'>                   
                     <BlockUserRooms Static={Static} />
                 </div>
             )

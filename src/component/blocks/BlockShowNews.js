@@ -82,6 +82,7 @@ const BlockShowNews = function ({ Static, item }) {
                       item={itemComments}
                       index={index}
                       mainId={item._id}
+                      mainItem={item}
                       action="News"
                     />
                   )

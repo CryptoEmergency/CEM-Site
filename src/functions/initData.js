@@ -424,12 +424,21 @@ initData.lenta_users_show = function (Static) {
     Static.elShowTextShort = {}
     Static.elMedia = {}
     Static.elNumberSwiper = {}
+    Static.commentText = []
+    
     Static.mainComment = {
         rows: 1,
         adaptive: 4
     }
 
     Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
+    Static.editComment = {
         rows: 1,
         adaptive: 4,
         elShowInput: {},
@@ -504,6 +513,7 @@ initData.question_show = function (Static) {
     Static.elShowAnswersComment = {}
 
     Static.elButtonSubmit = {}
+    Static.commentText = []
     // Static.itemAnswer={}
 
     Static.mainComment = {
@@ -514,6 +524,12 @@ initData.question_show = function (Static) {
     }
 
     Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+    Static.editComment = {
         rows: 1,
         adaptive: 4,
         elShowInput: {},
@@ -582,7 +598,14 @@ initData.blog_show = function (Static) {
     Static.submitClick = false
     Static.messageSent = false
     Static.showPage = true
+    Static.commentText = []
 
+    Static.editComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
 
     Static.mainComment = {
         rows: 1,
@@ -606,6 +629,13 @@ initData.news_show = function (Static) {
     Static.submitClick = false
     Static.messageSent = false
     Static.showPage = true
+    Static.commentText = []
+    Static.editComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
 
 
     Static.mainComment = {
@@ -629,7 +659,13 @@ initData.media_show = function (Static) {
     Static.submitClick = false
     Static.messageSent = false
     Static.showPage = true
-
+    Static.commentText = []
+    Static.editComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
 
     Static.mainComment = {
         rows: 1,
@@ -667,46 +703,48 @@ initData.generate = function (arrData) {
 
 
 initData.rooms = function (Static) {
-     //Зарегистрирован или нет
+    //Зарегистрирован или нет
     Static.Auth = Variable.auth
-     //настройки языка
+    //настройки языка
     Static.UserLang = Variable.myInfo.mainLanguage
     Static.Rooms = {}
     Static.MessageValue = {}
     Static.searchInput = {}
     Static.ActiveListRooms = {}
-    Static.privateRoom = {status:false}
+    Static.privateRoom = {}
     Static.label = {}
+    Static.lang = {
+        code: Variable.myInfo.mainLanguage.code,
+        name: Variable.myInfo.mainLanguage.orig_name
+    }
 
     //кодовое слово
-  Static.confirmPasword = {
-    label: "Введите пароль от комнаты",
-    value: "",
-    valid: false,
-    error: false,
-    type: "text",
-    errorText: "Не верный пароль",
-    condition: async (value) => {
+    Static.confirmPasword = {
+        label: "Введите пароль от комнаты",
+        value: "",
+        valid: false,
+        error: false,
+        type: "text",
+        errorText: "Не верный пароль",
+        condition: async (value) => {
 
-let id = Static.Rooms._id
+            let id = Static.Rooms._id
 
-      let confirm = await fn.restApi.userRoomCode({id,value })
-if(confirm.status == "ok")
-{
-    return true
-}
-else
-{
- return false
-}
+            let confirm = await fn.restApi.userRoomCode({ id, value })
+            if (confirm.status == "ok") {
+                return true
+            }
+            else {
+                return false
+            }
 
 
-    },
-    afterValid: () => {
-        Helpers.checkValid(Static, ["confirmPasword"])
+        },
+        afterValid: () => {
+            Helpers.checkValid(Static, ["confirmPasword"])
 
+        }
     }
-  }
 }
 
 export { initData };

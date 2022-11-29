@@ -901,6 +901,32 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
     return checkSetAnswer(response)
 }
 
+restApi.setUserRoom.edit = async function ({_id, status, visible, confirmuser, title, description, images, languages, country, system = false }) {
+    let data = {
+        _id: _id,
+        value: {
+            settingsroom: {
+                status: status,
+                visible: visible,
+                confirmuser: confirmuser,
+                title: title,
+                description: description,
+                images: images,
+            },
+            languages: languages,
+            country: country,
+            system: system
+            
+        },
+        edit:true
+    }
+
+    const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
+}
+
+
+
 restApi.setUserRoomMessage = {}
 
 restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
@@ -923,6 +949,42 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
 }
 
 
+restApi.setComments = {}
+
+restApi.setComments.complain = async function ({ _id, complain }) {
+    let data = {
+        _id,
+        value: {
+            complain
+        }
+    }
+    const response = await sendApi.create("setComments", data);
+    return checkSetAnswer(response)
+}
+
+restApi.setComments.edit = async function ({ _id, text }) {
+    let data = {
+        _id,
+        value: {
+            text: text
+        }
+    }
+    const response = await sendApi.create("setComments", data);
+    return checkSetAnswer(response)
+}
+
+restApi.setComments.delete = async function ({ _id }) {
+    let data = {
+        _id,
+        value: {
+            active: false
+        }
+    }
+    const response = await sendApi.create("setComments", data);
+    return checkSetAnswer(response)
+}
+
+
 
 
 restApi.userRoomCode = async function ({ id,value }) {
@@ -933,6 +995,35 @@ restApi.userRoomCode = async function ({ id,value }) {
   
 
     const response = await sendApi.create("userRoomCode", data);
+    return checkSetAnswer(response)
+}
+
+
+restApi.doRole = {}
+
+restApi.doRole.deletePost = async function ({_id}) {
+    let data = {
+        roleAction: "setPost",
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+
+    const response = await sendApi.create("doRole", data);
+    return checkSetAnswer(response)
+}
+
+restApi.doRole.deleteComment = async function ({_id}) {
+    let data = {
+        roleAction: "setComments",
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+
+    const response = await sendApi.create("doRole", data);
     return checkSetAnswer(response)
 }
 
