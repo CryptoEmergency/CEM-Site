@@ -446,6 +446,7 @@ const BlockUserRooms = async function ({ Static }) {
 
             //мапим системные комнаты
             Variable.ListSystemsRooms.list_records.map(function (systemsrooms, i) {
+              console.log('=482561=', systemsrooms)
               if (Static.Rooms._id == systemsrooms._id) {
                 redborder = "border:1px solid #ff22ac"
               }
@@ -465,12 +466,12 @@ const BlockUserRooms = async function ({ Static }) {
                 >
                   <a href="#" class="c-toggler__link" data-action="viewChat" title={fn.sliceString(systemsrooms.settingsroom.title, 66)}>
                     <div class="c-toggler__wrap">
-                      <span class="c-toggler__name">{systemsrooms.languages.code}</span>
+                      <span class="c-toggler__name">{systemsrooms.settingsroom.title}</span>
                     </div>
                     {/* <img src={images["nft/creator-1"]} width="46" height="46" class="c-toggler__img" /> */}
-                    <div class="c-toggler__delete" title="Удалить">
+                    {/* <div class="c-toggler__delete" title="Удалить">
                       <img src={svg.close_group} alt="" width="" height="" class="c-toggler__close" />
-                    </div>
+                    </div> */}
                   </a>
                 </li>
               )
@@ -485,12 +486,16 @@ const BlockUserRooms = async function ({ Static }) {
               name: "ModalChangeLanguage",
               data: {
                 onclick: async (langCode, langOrig) => {
-                  Static.lang.name = langOrig;
-                  Static.lang.code = langCode;
                   let lang = Variable.ListSystemsRooms.list_records.filter((item) => {
                     return item.languages.code == langCode;
                   });
-                  ChangeRooms(Static, lang[0]._id, true)
+                  if (lang.length > 0) {
+                    Static.lang.name = langOrig;
+                    Static.lang.code = langCode;
+                    ChangeRooms(Static, lang[0]._id, true)
+                  } else {
+                    alert("Нет такой системной комнаты")
+                  }
                   initReload()
                 },
               },
@@ -533,7 +538,7 @@ const BlockUserRooms = async function ({ Static }) {
               </div>
               <ul class="c-chats__togglers">
                 {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-                  // console.log('=8c56fb=', userrooms)
+                  console.log('=8c56fb=', userrooms)
 
                   if (userrooms.author.nickname == Variable.myInfo.nickname) {
                     return (
@@ -549,27 +554,11 @@ const BlockUserRooms = async function ({ Static }) {
                         }}>
                           {
                             userrooms.settingsroom.images ?
-                              <img src={`assets/upload/rooms/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
+                              <img src={`/assets/upload/rooms/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
                               :
                               <div class="c-toggler__wrap">
                                 <span class="c-toggler__name">{userrooms.settingsroom.title}</span>
                               </div>
-                          }
-                          {
-                            Static.Rooms._id == userrooms._id ?
-                              <div
-                                class="c-toggler__delete"
-                                title="Удалить"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  alert('Удаление')
-                                }}
-                              >
-                                <img src={svg.close_group} alt="" width="" height="" class="c-toggler__close" />
-                              </div>
-                              :
-                              null
                           }
                         </a>
                       </li>
@@ -646,7 +635,21 @@ const BlockUserRooms = async function ({ Static }) {
         </div>
       </div>
 
-      {/* <hr></hr> */}
+      {/* <div class="tags">
+        <Tags
+          Static={Static}
+          text={Variable.lang.categoryName.all}
+          classActive={Static.activeCategory == "All" ? "tag_button_active" : ""}
+          type="All"
+        />
+        <Tags
+          Static={Static}
+          text={Variable.lang.categoryName[item.name]}
+          classActive={Static.activeCategory == item.name ? "tag_button_active" : ""}
+          type={item.name}
+        />
+      </div> */}
+
       <div class="c-rooms__searchblock c-search">
         <div class="c-search__container">
           <div class="c-search__wrapper">
@@ -671,14 +674,35 @@ const BlockUserRooms = async function ({ Static }) {
       {/*
     блок для пользовательских комнат
     */}
-      {/* <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <hr></hr> */}
-      <div class="c-questions__list">
 
+      <div class="c-rooms__list">
+        <div class="c-room">
+          <header class="c-room__header">
+            <date class="c-room__datecreate" datetime="">25 ноября 2022</date>
+            <a class="c-room__settings" href="" >
+              <img class="c-room__icon" src={svg.settings_icon} width="20" height="20" title="Редактировать" />
+            </a>
+          </header>
+          <figure class="c-room__wrapper">
+            <div class="c-room__image">
+              <img src={`/assets/upload/rooms/d506bb5227ed06b218c5bdcc19490c58.png`} alt="" />
+            </div>
+            <figcaption>
+              <div class="c-room__caption">
+                <span class="c-room__lang c-question__langcontainer language_container">
+                  <div class="c-question__lang language-question">Русский</div>
+                </span>
+                <h4 class="c-room__title" title="Название комнаты">
+                  <span>Название комнаты</span>
+                </h4>
+              </div>
+              <p class="c-room__count">Количество участников: 124</p>
+              <button class="c-button c-button--outline2">
+                <div class="c-button__wrapper">{Variable.lang.button.join}</div>
+              </button>
+            </figcaption>
+          </figure>
+        </div>
         {
 
           //мапим юзерские комнаты
