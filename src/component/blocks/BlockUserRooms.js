@@ -76,7 +76,7 @@ function ShowMessage(Static) {
   let authInput
   let authMessage
 
-  
+
 
 
   let checkArray = []
@@ -88,10 +88,10 @@ function ShowMessage(Static) {
   })
 
 
-/**
-   * делаем проверку на пользователя
-   * если комната приватная и у руля её создатель то не запрашиваем пароль и отображаем все сообщения
-  */
+  /**
+     * делаем проверку на пользователя
+     * если комната приватная и у руля её создатель то не запрашиваем пароль и отображаем все сообщения
+    */
   if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || checkArray.length > 0) {
       if (Static.Rooms.message.length > 0) {
@@ -249,14 +249,14 @@ function ShowMessage(Static) {
     //системные комнаты для не авторизованных пользователей
     if (!Static.Auth && Static.Rooms.system) {
 
-        if (Static.Rooms.message.length > 0) {
-          return Static.Rooms.message.map(function (userrooms, i) {
+      if (Static.Rooms.message.length > 0) {
+        return Static.Rooms.message.map(function (userrooms, i) {
 
 
-            return (
-              <li class="c-chats__message c-message">
-                <Avatar author={userrooms.author} parent={"c-message__avatar"} />
-                {/* <div class="c-message__avatar micro_user_avatar">
+          return (
+            <li class="c-chats__message c-message">
+              <Avatar author={userrooms.author} parent={"c-message__avatar"} />
+              {/* <div class="c-message__avatar micro_user_avatar">
                   <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
                   <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;" src="/assets/profile/frame/default.svg" />
                   <div class="user_avatar_level">
@@ -268,40 +268,40 @@ function ShowMessage(Static) {
                   </div>
                 </div> */}
 
-                {
-                  //ники пользователей showDate
+              {
+                //ники пользователей showDate
 
-                  <div class="c-message__title">
-                    <div class="c-message__nick">{userrooms.author.nickname}</div>
-                    <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
-                  </div>
-                }
-                {
-                  //сообщения
-                  <div class="c-message__body">
-                    {userrooms.text}
-                  </div>
-                }
-              </li>
-
-            )
-
-
-          })
-
-        }
-        else {
-
-          return (
-            <li class="c-chats__message c-message">
-              <div class="c-message__title">
-                <center>В данной комнате пока нет сообщений</center>
-
-              </div>
+                <div class="c-message__title">
+                  <div class="c-message__nick">{userrooms.author.nickname}</div>
+                  <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
+                </div>
+              }
+              {
+                //сообщения
+                <div class="c-message__body">
+                  {userrooms.text}
+                </div>
+              }
             </li>
+
           )
-        }
-        //вывод всех комнат для авторизованных пользоватлей
+
+
+        })
+
+      }
+      else {
+
+        return (
+          <li class="c-chats__message c-message">
+            <div class="c-message__title">
+              <center>В данной комнате пока нет сообщений</center>
+
+            </div>
+          </li>
+        )
+      }
+      //вывод всех комнат для авторизованных пользоватлей
     } else if (Static.Auth) {
       if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
@@ -478,31 +478,24 @@ const BlockUserRooms = async function ({ Static }) {
             )
           }
         </ul>
+        <div
+          class="blog_filter_language"
+          onclick={() => {
+            Variable.SetModals({
+              name: "ModalChangeLanguage",
+              data: {
+                onclick: async (langCode, langOrig) => {
+                  Static.lang.name = langOrig;
+                  Static.lang.code = langCode;
+                  initReload()
+                },
+              },
+            });
+          }}
+        >{Static.lang.name}</div>
       </div>
       {/* <hr></hr> */}
-      <div class="c-rooms__searchblock c-search">
-        <div class="c-search__container">
-          <div class="c-search__wrapper">
-            <img class="c-search__icon" src={svg.search_icon} />
-            <Input className="c-search__input" Static={Static.searchInput} customStyle={"border-radius: 3px"} />
-            <img
-              class="c-search__icon c-search__icon--filter"
-              src={svg.filter}
-              onClick={() => {
-
-              }}
-            />
-          </div>
-          <div style="display: none;" class="questions_search">
-            <div class="question_search_half_empty">
-              {Variable.lang.text.contInput}
-            </div>
-            <div style="display: none;" class="question_search_help"></div>
-          </div>
-        </div>
-      </div>
-      {/* <hr></hr> */}
-      <div class="c-container">
+      <div class="c-rooms__chats">
         <div class=" c-chats__wrapper">
           <aside class="c-chats__aside">
             <div class="c-chats__list">
@@ -649,6 +642,28 @@ const BlockUserRooms = async function ({ Static }) {
         </div>
       </div>
 
+      {/* <hr></hr> */}
+      <div class="c-rooms__searchblock c-search">
+        <div class="c-search__container">
+          <div class="c-search__wrapper">
+            <img class="c-search__icon" src={svg.search_icon} />
+            <Input className="c-search__input" Static={Static.searchInput} customStyle={"border-radius: 3px"} />
+            <img
+              class="c-search__icon c-search__icon--filter"
+              src={svg.filter}
+              onClick={() => {
+
+              }}
+            />
+          </div>
+          <div style="display: none;" class="questions_search">
+            <div class="question_search_half_empty">
+              {Variable.lang.text.contInput}
+            </div>
+            <div style="display: none;" class="question_search_help"></div>
+          </div>
+        </div>
+      </div>
       {/*
     блок для пользовательских комнат
     */}

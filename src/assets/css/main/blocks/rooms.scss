@@ -10,12 +10,20 @@
         .c-search {
 
             &__icon {
-                top: 23px;
+                top: 14px;
+
+                &--filter {
+                    top: 23px;
+                }
             }
 
             &__container {
                 margin-right: 0;
             }
         }
+    }
+
+    &__chats {
+        margin-bottom: 30px;
     }
 }

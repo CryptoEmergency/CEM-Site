@@ -668,9 +668,9 @@ initData.generate = function (arrData) {
 
 
 initData.rooms = function (Static) {
-     //Зарегистрирован или нет
+    //Зарегистрирован или нет
     Static.Auth = Variable.auth
-     //настройки языка
+    //настройки языка
     Static.UserLang = Variable.myInfo.mainLanguage
     Static.Rooms = {}
     Static.MessageValue = {}
@@ -678,36 +678,38 @@ initData.rooms = function (Static) {
     Static.ActiveListRooms = {}
     Static.privateRoom = {}
     Static.label = {}
+    Static.lang = {
+        code: Variable.myInfo.mainLanguage.code,
+        name: Variable.myInfo.mainLanguage.orig_name
+    }
 
     //кодовое слово
-  Static.confirmPasword = {
-    label: "Введите пароль от комнаты",
-    value: "",
-    valid: false,
-    error: false,
-    type: "text",
-    errorText: "Не верный пароль",
-    condition: async (value) => {
+    Static.confirmPasword = {
+        label: "Введите пароль от комнаты",
+        value: "",
+        valid: false,
+        error: false,
+        type: "text",
+        errorText: "Не верный пароль",
+        condition: async (value) => {
 
-let id = Static.Rooms._id
+            let id = Static.Rooms._id
 
-      let confirm = await fn.restApi.userRoomCode({id,value })
-if(confirm.status == "ok")
-{
-    return true
-}
-else
-{
- return false
-}
+            let confirm = await fn.restApi.userRoomCode({ id, value })
+            if (confirm.status == "ok") {
+                return true
+            }
+            else {
+                return false
+            }
 
 
-    },
-    afterValid: () => {
-        Helpers.checkValid(Static, ["confirmPasword"])
+        },
+        afterValid: () => {
+            Helpers.checkValid(Static, ["confirmPasword"])
 
+        }
     }
-  }
 }
 
 export { initData };
