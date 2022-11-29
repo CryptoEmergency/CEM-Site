@@ -69,6 +69,7 @@ const BlockShowLenta = function ({ Static, item }) {
                           item={itemComments}
                           index={index}
                           mainId={item._id}
+                          mainItem={item}
                           action="Post"
                         />
                       )

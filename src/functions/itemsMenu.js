@@ -499,7 +499,7 @@ itemsMenu.question = function (Static, item) {
     return items
 }
 
-itemsMenu.comment = function (Static, item, action, index, mainId) {
+itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
     console.log(Static, item, action, Variable, mainId)
     const items =
         [
@@ -628,6 +628,10 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                         action: async () => {
                             let response = await fn.restApi.setComments.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
+                            console.log(mainItem)
+                            mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
+                            console.log(mainItem)
+                            initReload()
                         },
                         text: Variable.lang.p.deleteCommentConfirm,
                         button: Variable.lang.button.yes
@@ -643,6 +647,10 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                         action: async () => {
                             let response = await fn.restApi.doRole.deleteComment({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
+                            console.log('get' + action)
+                            mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
+                            console.log(mainItem)
+                            initReload()
                         },
                         text: Variable.lang.p.deleteCommentConfirm,
                         button: Variable.lang.button.yes
