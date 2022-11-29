@@ -624,6 +624,24 @@ const start = function (data, ID) {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_23']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Владимир Туров</p>
+                                            <p>Учредитель TUROV •INVEST</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_24']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Овчинников Артём</p>
+                                            <p>Идеолог акселератора для web 3 проектов Фрактал</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_15']} />
                                         </div>
                                         <div>
@@ -674,6 +692,15 @@ const start = function (data, ID) {
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Лев Пониманский</p>
                                             <p>Профессионал в области криптовалюты и майнинга</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_25']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Никита Балашов</p>
+                                            <p>Директор по маркетингу, крипто менеджер.</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
@@ -775,22 +802,24 @@ const start = function (data, ID) {
                                             <p>Директор по развитию blockchain24.pro</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item" style="text-align: center">
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_23']} />
-                                        </div>
-                                        <div>
-                                            <p style="margin-top: 10px; margin-bottom: 5px">Владимир Туров</p>
-                                            <p>Учредитель TUROV •INVEST</p>
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
                                     </div>
-                                    <div class="speaker_item" style="text-align: center">
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_24']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
-                                        <div>
-                                            <p style="margin-top: 10px; margin-bottom: 5px">Овчинников Артём</p>
-                                            <p>Идеолог акселератора для web 3 проектов Фрактал</p>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">

@@ -513,6 +513,7 @@ initData.question_show = function (Static) {
     Static.elShowAnswersComment = {}
 
     Static.elButtonSubmit = {}
+    Static.commentText = []
     // Static.itemAnswer={}
 
     Static.mainComment = {
@@ -523,6 +524,12 @@ initData.question_show = function (Static) {
     }
 
     Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+    Static.editComment = {
         rows: 1,
         adaptive: 4,
         elShowInput: {},
@@ -591,7 +598,14 @@ initData.blog_show = function (Static) {
     Static.submitClick = false
     Static.messageSent = false
     Static.showPage = true
+    Static.commentText = []
 
+    Static.editComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
 
     Static.mainComment = {
         rows: 1,
@@ -615,6 +629,13 @@ initData.news_show = function (Static) {
     Static.submitClick = false
     Static.messageSent = false
     Static.showPage = true
+    Static.commentText = []
+    Static.editComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
 
 
     Static.mainComment = {
@@ -638,7 +659,13 @@ initData.media_show = function (Static) {
     Static.submitClick = false
     Static.messageSent = false
     Static.showPage = true
-
+    Static.commentText = []
+    Static.editComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
 
     Static.mainComment = {
         rows: 1,

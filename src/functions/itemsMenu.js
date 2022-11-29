@@ -629,7 +629,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                             let response = await fn.restApi.setComments.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
                         },
-                        text: Variable.lang.p.deletePostConfirm,
+                        text: Variable.lang.p.deleteCommentConfirm,
                         button: Variable.lang.button.yes
                     })
                 }
@@ -644,7 +644,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                             let response = await fn.restApi.doRole.deleteComment({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
                         },
-                        text: Variable.lang.p.deletePostConfirm,
+                        text: Variable.lang.p.deleteCommentConfirm,
                         button: Variable.lang.button.yes
                     })
                 }
