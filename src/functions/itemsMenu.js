@@ -510,7 +510,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                     try {
                         if (navigator.share) {
                             await navigator.share({
-                                url: window.location.origin + "/" + Variable.dataUrl.adress + "/show/" + item._id,
+                                url: window.location.origin + "/" + Variable.dataUrl.adress + "/show/" + mainId,
                             });
                         }
                     } catch (err) {
@@ -540,7 +540,6 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
             {
                 text: Variable.lang.button.whoLike,
                 type: "share",
-                onlyAuth: true,
                 onclick: async () => {
                     let response
                     response = await fn.restApi.getComments({ filter: { _id: item._id }, select: { evaluation: 1, }, firstRecord: true })
@@ -556,7 +555,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
             {
                 text: Variable.lang.select.complainComment,
                 type: "complainItem",
-                // onlyAuth: true,
+                onlyAuth: true,
 
                 color: "red",
                 onclick: async () => {
@@ -570,7 +569,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
             {
                 text: Variable.lang.select.complainUser,
                 type: "complainUser",
-                // onlyAuth: true,
+                onlyAuth: true,
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
@@ -600,17 +599,22 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                 text: Variable.lang.button.edit,
                 type: "edit",
                 onclick: async () => {
-                    // Object.keys(Static.commentText).map((key) => {
-                    //     if (index != key && Static.secondComment.elShowInput[key].dataset.show) {
-                    //         Static.secondComment.elShowInput[key].removeAttribute("data-show")
-                    //         Static.secondComment.elShowInput[key].style = "display:none;"
-                    //     }
-                    // });
-                    console.log(Static.commentText[index].innerHTML)
-                    console.log(Static.commentText[index].innerText)
-                    console.log(TextArea({Static: {value: Static.commentText[index].innerHTML}, className: "text1 create_post_chapter"}))
-                    //Static.commentText[index].append(TextArea({Static: {value: Static.commentText[index].innerHTML}, className: "text1 create_post_chapter"}))
-                    //Static.secondComment.el[index].focus();
+                    Object.keys(Static.editComment.elShowInput).map((key) => {
+                        if (index != key && Static.editComment.elShowInput[key].dataset.show) {
+                            Static.editComment.elShowInput[key].removeAttribute("data-show")
+                            Static.editComment.elShowInput[key].style = "display:none;"
+                            Static.commentText[key].dataset.show = true
+                            Static.commentText[key].style = "display:flex;"
+                        }
+                    });
+                    Static.commentText[index].removeAttribute("data-show")
+                    Static.commentText[index].style = "display:none;"
+                    Static.editComment.elShowInput[index].dataset.show = true
+                    Static.editComment.elShowInput[index].style = "display:flex;"
+                    Static.editComment.el[index].value = item.text
+                    Static.editComment.el[index].focus();
+
+                    initReload()
 
                     return
                 }

@@ -958,9 +958,18 @@ restApi.setComments.complain = async function ({ _id, complain }) {
             complain
         }
     }
-    console.log(data)
     const response = await sendApi.create("setComments", data);
-    console.log(response)
+    return checkSetAnswer(response)
+}
+
+restApi.setComments.edit = async function ({ _id, text }) {
+    let data = {
+        _id,
+        value: {
+            text: text
+        }
+    }
+    const response = await sendApi.create("setComments", data);
     return checkSetAnswer(response)
 }
 
@@ -971,9 +980,7 @@ restApi.setComments.delete = async function ({ _id }) {
             active: false
         }
     }
-    console.log(data)
     const response = await sendApi.create("setComments", data);
-    console.log(response)
     return checkSetAnswer(response)
 }
 

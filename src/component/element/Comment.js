@@ -21,6 +21,36 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
                 <span Element={($el) => { Static.commentText[index] = $el; }} class="c-comments__textcomment">
                     {fn.editText(item.text, { clear: true, paragraph: true, html: true })}
                 </span>
+                <div class="c-comments__form"
+                    style="display:none;"
+                    Element={($el) => { Static.editComment.elShowInput[index] = $el; }}>
+                    <div class="c-comments__field create_post_container1">
+                        <TextArea
+                            Static={Static.editComment}
+                            index={index}
+                            className="text1 create_post_chapter"
+                        />
+                    </div>
+                    <ButtonSubmit
+                        text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                        className="c-comments__send button-container-preview comments_send"
+                        onclick={async () => {
+                            if (!Static.editComment.el[index].value.trim().length) {
+                                return
+                            }
+                            let text = Static.editComment.el[index].value.trim()
+                            let response = await fn.restApi.setComments.edit({ _id: item._id, text })
+                            if (response.status === "ok") {
+                                item.text = text
+                                Static.editComment.elShowInput[index].removeAttribute("data-show")
+                                Static.editComment.elShowInput[index].style = "display:none;"
+                                Static.commentText[index].dataset.show = true
+                                Static.commentText[index].style = "display:flex;"
+                                initReload()
+                            }
+                        }}
+                    />
+                </div>
             </div>
             <div class="c-comments__icons c-actioncomment">
                 <Evaluation Static={Static} item={item} index={index} action={action} comment={true} mainId={mainId} />

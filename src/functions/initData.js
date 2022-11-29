@@ -425,12 +425,20 @@ initData.lenta_users_show = function (Static) {
     Static.elMedia = {}
     Static.elNumberSwiper = {}
     Static.commentText = []
+    
     Static.mainComment = {
         rows: 1,
         adaptive: 4
     }
 
     Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
+    Static.editComment = {
         rows: 1,
         adaptive: 4,
         elShowInput: {},
