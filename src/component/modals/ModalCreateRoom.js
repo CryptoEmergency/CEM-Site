@@ -13,7 +13,7 @@ import {
 const ModalCreateRoom = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
-  
+
 
   //инпут название
   Static.label = {
@@ -21,7 +21,7 @@ const ModalCreateRoom = function (data, ID) {
     valid: false,
     error: false,
     type: "text",
-    label: "Назвние",
+    label: "Название",
     placeholder: "Фускоф =)",
     errorText: "больше 5 симаволов",
     condition: async (value) => {
@@ -47,7 +47,8 @@ const ModalCreateRoom = function (data, ID) {
   //инпут описание
   Static.Title = {
     label: "Описание",
-    value: ""
+    value: "",
+    placeholder: "Добавьте описание группы"
   }
   //инпут язык
   Static.Lang = {
@@ -97,13 +98,13 @@ const ModalCreateRoom = function (data, ID) {
   }
   //кодовое слово
   Static.Confirm = {
-    label: "придумайте кодовое слово",
+    label: "Придумайте кодовое слово",
     value: "",
     valid: false,
     error: false,
     type: "text",
     placeholder: "Gfhdsk",
-    errorText: "больше 1 символов",
+    errorText: "Больше 1 символа",
     condition: async (value) => {
       if (value.length < 1) {
         return false
@@ -151,7 +152,7 @@ const ModalCreateRoom = function (data, ID) {
     }
 
     return (
-      <div class="c-modal c-modal--open" id="ModalComplainComment">
+      <div class="c-modal c-modal--open" id="ModalCreateRoom">
         <section class="c-modal__dialog">
           <header class="c-modal__header">
             <div class="complain_modal">
@@ -250,12 +251,12 @@ const ModalCreateRoom = function (data, ID) {
                   </label>
                 </div>
               </div>
-            
+
               <div class="userMainBlock">
-                        {() => {
-                          //  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
-                        }}
-                    </div>
+                {() => {
+                  //  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
+                }}
+              </div>
               <MediaButton
                 onclickPhoto={function () {
                   if (this.files.length == 0) {
@@ -297,7 +298,7 @@ const ModalCreateRoom = function (data, ID) {
                     let requier = await fn.restApi.setUserRoom.create(request)
 
                     if (requier.status == "ok") {
-                    Static.callback(requier)
+                      Static.callback(requier)
                       fn.modals.close(ID)
                     }
                   }

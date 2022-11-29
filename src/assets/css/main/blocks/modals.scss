@@ -5482,6 +5482,15 @@ s
 	}
 }
 
+/* modal #ModalCreateRoom (Создание комнаты) */
+#ModalCreateRoom {
+	.input-div {
+		input {
+			padding-left: 20px;
+		}
+	}
+}
+
 @media(max-width: 1240px) {
 	.go_back_icon {
 		width: 7px !important;

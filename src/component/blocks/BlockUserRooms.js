@@ -428,7 +428,7 @@ const BlockUserRooms = async function ({ Static }) {
     CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
-    console.log(Variable)
+    // console.log(Variable)
   })
 
   //если не используем фильтры
@@ -538,7 +538,7 @@ const BlockUserRooms = async function ({ Static }) {
               </div>
               <ul class="c-chats__togglers">
                 {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-                  console.log('=8c56fb=', userrooms)
+                  // console.log('=8c56fb=', userrooms)
 
                   if (userrooms.author.nickname == Variable.myInfo.nickname) {
                     return (

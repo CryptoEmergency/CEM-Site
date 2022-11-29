@@ -531,6 +531,24 @@ button[data-type='voiceline'][data-page_type="posts"] {
             padding-right: 0;
         }
     }
+
+    .c-button {
+        &--gradient2 {
+
+            @media(max-width: 389px) {
+                width: auto;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-right: 10px !important;
+            }
+
+            &:last-child {
+                @media(max-width: 389px) {
+                    margin-right: 0 !important;
+                }
+            }
+        }
+    }
 }
 
 .c-mediabtn {

@@ -511,7 +511,7 @@ const start = function (data, ID) {
                 </label>
               </div>
             </div>
-            <div style={"display:flex; width: 100%; max-width: 500px; margin: 20px auto"}>
+            <div style={"display:flex; justify-content: space-between; width: 100%; max-width: 500px; margin: 20px auto"}>
               <button
                 class={[
                   "c-button c-button--gradient2",
