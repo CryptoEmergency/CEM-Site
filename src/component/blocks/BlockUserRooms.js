@@ -76,10 +76,7 @@ function ShowMessage(Static) {
   let authInput
   let authMessage
 
-  /**
-   * делаем проверку на пользователя
-   * если комната приватная и у руля её содатель то не запрашиваем пароль и отображаем все сообщения
-  */
+  
 
 
   let checkArray = []
@@ -91,7 +88,10 @@ function ShowMessage(Static) {
   })
 
 
-
+/**
+   * делаем проверку на пользователя
+   * если комната приватная и у руля её создатель то не запрашиваем пароль и отображаем все сообщения
+  */
   if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || checkArray.length > 0) {
       if (Static.Rooms.message.length > 0) {
@@ -145,6 +145,7 @@ function ShowMessage(Static) {
 
       }
       else {
+        //если сообщений нет
         return (
           <li class="c-chats__message c-message">
             <div class="c-message__title">
@@ -157,6 +158,7 @@ function ShowMessage(Static) {
 
     }
     else {
+      //если пользователь ввел пароль
       if (Static.confirmPasword.valid) {
 
         if (Static.Rooms.message.length > 0) {
@@ -213,10 +215,10 @@ function ShowMessage(Static) {
 
 
       }
-
+      //если пользователь авторизоваеый но не вводил пароль выводим инпут
       if (Static.Auth) {
         authInput = <Input className="" Static={Static.confirmPasword} />
-        authMessage = "Данная комната защищена паролем и вся секретная информация в ней скрыта до тех пор пока не введеш пароль, который я сделаю позже"
+        authMessage = "Данная комната защищена паролем и вся секретная информация в ней скрыта до тех пор пока не введешь пароль"
       }
       else {
         authMessage = "Только авторизованные пользователи могут просматривать данный контент"
@@ -244,11 +246,9 @@ function ShowMessage(Static) {
   }
   else {
 
-    //для не авторизованных пользователей
+    //системные комнаты для не авторизованных пользователей
     if (!Static.Auth && Static.Rooms.system) {
 
-
-      if (Static.Rooms.system) {
         if (Static.Rooms.message.length > 0) {
           return Static.Rooms.message.map(function (userrooms, i) {
 
@@ -301,7 +301,7 @@ function ShowMessage(Static) {
             </li>
           )
         }
-      }
+        //вывод всех комнат для авторизованных пользоватлей
     } else if (Static.Auth) {
       if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
@@ -420,15 +420,15 @@ const BlockUserRooms = async function ({ Static }) {
   await initOne(async () => {
     await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system: true }, limit: 10 })
 
-
     await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false }, limit: 10 })
+    Static.nameRecords = "ListUsersRooms"
     //для пользовательских комнат которые пользователь сам создал
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
     //при первом заходе открываем системный чат
     CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
-
+    console.log(Variable)
   })
 
   //если не используем фильтры
@@ -808,7 +808,7 @@ const BlockUserRooms = async function ({ Static }) {
         }
       </div>
 
-      <ButtonShowMore Static={Static} action="getRooms" />
+      <ButtonShowMore Static={Static} action="getUserRoom" />
     </div>
   )
 }
