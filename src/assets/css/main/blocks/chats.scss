@@ -3,16 +3,40 @@
     &__wrapper {
         display: flex;
         flex-direction: column;
+
+        @media(min-width: 1240px) {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            height: 500px; //TODO
+        }
     }
 
     &__aside {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        align-items: stretch;
         flex-basis: 95px;
         flex-grow: 0;
         flex-shrink: 0;
         background: $corbeau;
+
+        @media(min-width: 768px) {
+            border-radius: 20px 20px 0px 0px;
+        }
+
+        @media(max-width: 1239px) {
+            flex-basis: 80px;
+        }
+
+        @media(min-width: 1240px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+            border-radius: 20px 0 0 20px;
+        }
     }
 
     &__content {
@@ -21,6 +45,16 @@
         flex-grow: 1;
         padding: 20px 0 15px;
         background: $moonless_mystery1;
+
+        @media(min-width: 768px) {
+            position: relative;
+            box-shadow: 0px 0px 70px $coarse_wool;
+            border-radius: 0 0 20px 20px;
+        }
+
+        @media(min-width: 1240px) {
+            border-radius: 0 20px 20px 0;
+        }
     }
 
     &__title {
@@ -69,9 +103,30 @@
         padding-top: 0;
         border-radius: 20px 0 0 0;
 
+        @media(min-width: 768px) {
+            flex-basis: calc(100% - 86px);
+            width: 100%;
+            padding: 0 30px;
+            padding-top: 0;
+        }
+
+        @media(max-width: 1239px) {
+            display: flex;
+            flex-direction: row;
+            padding-left: 0;
+        }
+
+        @media(min-width: 1240px) {
+            padding: 25px 0 15px 0; //25px 22px 15px 10px;
+            padding-top: 0;
+            height: calc(100% - 80px);
+        }
+
         &--system {
             display: flex; //TODO
             flex-basis: 100%;
+            align-items: center;
+            gap: 20px;
             height: 95px;
             padding-top: 20px !important;
 
@@ -81,7 +136,7 @@
                     display: flex;
                     gap: 15px;
                     width: 100%;
-                    overflow-y: visible;
+                    // overflow-y: visible;
                 }
 
                 &__toggler {
@@ -142,6 +197,37 @@
         &::-webkit-scrollbar-track {
             background-color: transparent;
         }
+
+        @media(min-width: 768px) {
+            padding: 13px 0;
+        }
+
+        @media(min-width: 1240px) {
+            display: block;
+            padding: 0 22px 0 10px;
+            max-height: 100%;
+            overflow-x: visible;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-button {
+                background-repeat: no-repeat;
+                width: 6px;
+                height: 0px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+                background: linear-gradient(45deg, $summer_sky 0, $blue_oyster_cult 45%, $akebi_purple 57%, $lilac_lotion 70%);
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: transparent;
+            }
+        }
     }
 
     &__toggler {
@@ -149,6 +235,15 @@
 
         &:last-child {
             margin-right: 0;
+        }
+
+        @media(min-width: 1240px) {
+            margin-bottom: 15px;
+            margin-right: 0;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 
@@ -178,6 +273,10 @@
         &::-webkit-scrollbar-track {
             background-color: transparent;
         }
+
+        @media(min-width: 768px) {
+            margin-bottom: 15px;
+        }
     }
 
     &__message {
@@ -186,10 +285,32 @@
         &:last-child {
             margin-bottom: 0;
         }
+
+        @media(min-width: 768px) {
+            padding: 15px;
+        }
+
+        @media(min-width: 1240px) {
+            padding: 15px 50px;
+        }
     }
 
     &__form {
         padding: 0 20px;
+
+        @media(min-width: 768px) {
+            padding: 0 15px;
+        }
+
+        @media(min-width: 1240px) {
+            padding: 0 60px 0 50px;
+        }
+    }
+
+    &__actions {
+        .c-action {
+            height: 100%;
+        }
     }
 
     &__checkboxes {
@@ -197,7 +318,17 @@
         align-items: stretch;
         margin-bottom: 15px;
         background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
-        border-radius: 20px 0 0 0;
+
+        @media(min-width: 768px) {
+            border-radius: 20px 0 0 0;
+        }
+
+        @media(max-width: 1239px) {
+            display: block;
+            width: 37px;
+            margin-bottom: 0;
+            margin-right: 20px;
+        }
     }
 
     &__check {
@@ -207,7 +338,10 @@
         cursor: pointer;
 
         &--created {
-            border-radius: 20px 0 0 0;
+
+            @media(min-width: 768px) {
+                border-radius: 20px 0 0 0;
+            }
         }
 
         &--fellowship {}
@@ -732,41 +866,6 @@
 }
 
 @media(min-width: 768px) {
-    .c-chats {
-        &__aside {
-            border-radius: 20px 20px 0px 0px;
-        }
-
-        &__content {
-            position: relative;
-            box-shadow: 0px 0px 70px $coarse_wool;
-            border-radius: 0 0 20px 20px;
-        }
-
-        &__list {
-            flex-basis: calc(100% - 86px);
-            width: 100%;
-            padding: 0 30px;
-            padding-top: 0;
-        }
-
-        &__togglers {
-            padding: 13px 0;
-        }
-
-        &__messages {
-            margin-bottom: 15px;
-        }
-
-        &__message {
-            padding: 15px;
-        }
-
-        &__form {
-            padding: 0 15px;
-        }
-    }
-
     .c-toggler {
         width: 54px;
         height: 54px;
@@ -793,78 +892,6 @@
 }
 
 @media(min-width: 1240px) {
-    .c-chats {
-
-        &__wrapper {
-            display: flex;
-            flex-direction: row;
-            align-items: stretch;
-            height: 500px; //TODO
-        }
-
-        &__aside {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: stretch;
-            border-radius: 20px 0 0 20px;
-        }
-
-        &__togglers {
-            display: block;
-            padding: 0 22px 0 10px;
-            max-height: 100%;
-            overflow-x: visible;
-            overflow-y: auto;
-
-            &::-webkit-scrollbar {
-                width: 6px;
-            }
-
-            &::-webkit-scrollbar-button {
-                background-repeat: no-repeat;
-                width: 6px;
-                height: 0px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                border-radius: 5px;
-                background: linear-gradient(45deg, $summer_sky 0, $blue_oyster_cult 45%, $akebi_purple 57%, $lilac_lotion 70%);
-            }
-
-            &::-webkit-scrollbar-track {
-                background-color: transparent;
-            }
-        }
-
-        &__toggler {
-            margin-bottom: 15px;
-            margin-right: 0;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        &__content {
-            border-radius: 0 20px 20px 0;
-        }
-
-        &__list {
-            padding: 25px 0 15px 0; //25px 22px 15px 10px;
-            padding-top: 0;
-            height: calc(100% - 80px);
-        }
-
-        &__message {
-            padding: 15px 50px;
-        }
-
-        &__form {
-            padding: 0 60px 0 50px;
-        }
-    }
-
     .c-toggler {
         width: 50px;
         height: 50px;

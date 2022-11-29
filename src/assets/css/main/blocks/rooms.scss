@@ -6,5 +6,16 @@
 
     &__searchblock {
         margin-bottom: 30px;
+
+        .c-search {
+
+            &__icon {
+                top: 23px;
+            }
+
+            &__container {
+                margin-right: 0;
+            }
+        }
     }
 }
