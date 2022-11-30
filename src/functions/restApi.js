@@ -921,7 +921,7 @@ restApi.setUserRoom.edit = async function ({_id, status, visible, confirmuser, t
         edit:true
     }
 
-    const response = await sendApi.create("setUserRoom", data);
+   const response = await sendApi.create("setUserRoom", data);
     return checkSetAnswer(response)
 }
 

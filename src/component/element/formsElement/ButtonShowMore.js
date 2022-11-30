@@ -13,8 +13,8 @@ const ButtonShowMore = function ({ Static, action, onclick, limit = 6 }) {
                 <a
                     class="c-button c-button--gray"
                     onclick={async () => {
-                       
-                        let tmpResponse = await fn.restApi[action]({ limit, filter: Static.apiFilter, offset: Variable[Static.nameRecords].list_records.length })
+                       let name = Static.name
+                        let tmpResponse = await fn.restApi[action]({name, limit, filter: Static.apiFilter, offset: Variable[Static.nameRecords].list_records.length })
                         if (tmpResponse && tmpResponse.list_records) {
                             Variable[Static.nameRecords].list_records.push(...tmpResponse.list_records)
                         }
