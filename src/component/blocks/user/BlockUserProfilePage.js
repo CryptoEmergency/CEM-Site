@@ -37,7 +37,7 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                 ?
                                 <NotFound />
                                 :
-                                <div>
+                                <div style="width: 100%">
                                     {data.items.list_records.map((item) => {
                                         return (
                                             <BlockLentaUsers
