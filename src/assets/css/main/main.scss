@@ -243,6 +243,30 @@ textarea {
 
 
     &-cube {
+        .swiper-slide {
+            width: 100% !important;
+        }
+
+        &.swiper {
+            width: 100%;
+            height: auto;
+            // position: absolute;
+            // left: 50%;
+            // top: 50%;
+            // margin-left: -150px;
+            // margin-top: -150px;
+          }
+    
+          .swiper-slide {
+            // background-position: center;
+            // background-size: cover;
+          }
+    
+          .swiper-slide img {
+            display: block;
+            width: 100%;
+          }
+
         &+div {
             .comment {
                 &_text {
