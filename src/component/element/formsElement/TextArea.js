@@ -31,7 +31,7 @@ const textElem = function (Static, className, index) {
         if (Static.placeholder) {
             placeholder = Static.placeholder
         }
-        if (Static.value) {
+        if (Static.value && Static.value.trim().length > 0) {
             text = Static.value
         }
     }
@@ -91,7 +91,7 @@ const textElem = function (Static, className, index) {
                     Static.afterValid();
                 }
             }}>
-            {/* {text} */}
+            { text }
         </textarea>
     )
 }

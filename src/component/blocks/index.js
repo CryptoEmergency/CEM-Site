@@ -8,6 +8,8 @@ export { BlockError404 } from './errors/BlockError404.js';
 export { BlockUserProfilePage } from "./user/BlockUserProfilePage.js"
 // Страница настроек
 export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js"
+// стартап
+export { BlockUserStartupPage } from "./user/BlockUserStartupPage.js"
 //===Users===
 
 // Партнерские баннеры

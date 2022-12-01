@@ -532,7 +532,7 @@ const BlockUserRooms = async function ({ Static }) {
           }}
         >{Static.lang.name}</div>
       </div>
-      {
+      {/*
         <Tags
           Static={Static}
           text={Variable.lang.categoryName.all}
@@ -540,7 +540,7 @@ const BlockUserRooms = async function ({ Static }) {
           type="all"
 
         />
-
+*/
       }
       {
 
@@ -738,10 +738,13 @@ const BlockUserRooms = async function ({ Static }) {
                 <span class="c-room__lang c-question__langcontainer language_container">
                   <div class="c-question__lang language-question">Русский</div>
                 </span>
-                <h4 class="c-room__title" title="Название комнаты">
-                  <span>Название комнаты</span>
+                <h4 class="c-room__title" title="Категория">
+                  <span>категория</span>
                 </h4>
               </div>
+              <h4 class="c-room__title" title="Название комнаты">
+                  <span>Название комнаты</span>
+                </h4>
               <p class="c-room__count">Количество участников: 124</p>
               <button class="c-button c-button--outline2">
                 <div class="c-button__wrapper">{Variable.lang.button.join}</div>
@@ -768,8 +771,8 @@ const BlockUserRooms = async function ({ Static }) {
                           fn.modals.ModalEditRoom({
                             Static, userrooms,
                             callback: (response) => {
-
-                              if (response.list_records.length > 0) {
+                      
+                              if (response.status =="ok") {
                                 Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
                                 Variable.UsersRooms.list_records.unshift(response.list_records[0])
                                 initReload()

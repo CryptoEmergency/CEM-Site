@@ -295,9 +295,10 @@ const ModalCreateRoom = function (data, ID) {
                     let country = Static.Country.code
                     // let system = false
                     let request = { status, visible, confirmuser, title, description, images, languages, country }
+             
                     let requier = await fn.restApi.setUserRoom.create(request)
 
-                    if (requier.status == "ok") {
+                   if (requier.status == "ok") {
                       Static.callback(requier)
                       fn.modals.close(ID)
                     }

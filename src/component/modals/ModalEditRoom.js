@@ -179,7 +179,7 @@ const ModalEditRoom = function (data, ID) {
         <section class="c-modal__dialog">
           <header class="c-modal__header">
             <div class="complain_modal">
-              <h4>Редактирогвать комнату</h4>
+              <h4>Редактировать комнату</h4>
               <button
                 class="c-modal__close"
                 onclick={() => {
@@ -234,6 +234,7 @@ const ModalEditRoom = function (data, ID) {
                       initReload()
                     }}
                     type="checkbox"
+                    checked={Static.Private.checked ? true : false }
 
                   />
                   <label class="checkbox__label">
@@ -323,10 +324,11 @@ const ModalEditRoom = function (data, ID) {
                     let request = {_id, status, visible, confirmuser, title, description, images, languages, country }
        
                     let requier = await fn.restApi.setUserRoom.edit(request)
-              
+                    
                     if (requier.status == "ok") {
                     Static.callback(requier)
                       fn.modals.close(ID)
+                   
                     }
                   }
                 }

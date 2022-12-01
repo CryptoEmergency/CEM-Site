@@ -10,7 +10,7 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
 
-import { BlockUserSettingsPage } from '@component/blocks/index.js';
+import { BlockUserSettingsPage, BlockUserStartupPage} from '@component/blocks/index.js';
 import { NotFound } from "@component/element/index.js";
 
 import { Avatar } from '@component/element/Avatar.js';
@@ -33,9 +33,9 @@ const start = function (data, ID) {
 
     let settingsPage
     let blackList
+    let startUP
 
-
-    let activeGroup, elSocial, elCategory;
+    let activeGroup, elSocial, elCategory, elStartup;
 
     Variable.Static.HeaderShow = true
     Variable.Static.FooterShow = true
@@ -67,6 +67,41 @@ const start = function (data, ID) {
         )
     }
 
+ const StartUpMenu= function(data)
+ {
+
+let start
+let menuItem =[{settingsPage:"startUP",itemMenu:"мой стартап",item:true},
+{settingsPage:"editstartUP",itemMenu:"Редактировать",item:true},
+{settingsPage:"createstartUP",itemMenu:"создать стартап",item:false}]
+
+start = menuItem.map(function (key) {
+
+    if(key.item === data){
+       return( <div
+        class={[
+            "settings_list_subcategory",
+            settingsPage == key.settingsPage ? "settings_list_subcategory--active" : null
+        ]}
+        onclick={() => {
+            if (settingsPage == key.settingsPage) {
+                Static.settingsPage = key.settingsPage
+                return
+            }
+            settingsPage = key.settingsPage
+            initReload()
+        }}
+    >
+        <p>{key.itemMenu}</p>
+    </div>)
+    }
+ 
+})
+    return (start)
+ }
+
+ 
+    
 
 
     const deleteFromBlacklist = async function () {
@@ -80,7 +115,7 @@ const start = function (data, ID) {
         async () => {
             blackList = await getUserBlackList()
             console.log(blackList)
-
+            Static.startUP = false
             settingsPage = "security";
         },
         () => {
@@ -183,6 +218,42 @@ const start = function (data, ID) {
                                     >
                                         Еще категория
                                     </p>
+                                    
+                                    <div class="settings_gradient_line"></div>
+                                </div>
+                                <div
+                                    class={[
+                                        'settings_list_item',
+                                        activeGroup == Static.elStartup ? '' : null
+                                    ]}
+                                    data-active="false"
+                                    Element={($el) => {
+                                        Static.elStartup = $el
+                                    }}
+                                >
+                                    <p
+                                        class="settings_list_title"
+                                        onClick={() => {
+                                            activeGroup = Static.elStartup
+                                            // console.log('=f1cab4=',activeGroup)
+                                            if (Static.elStartup.dataset.active == "true") {
+                                                console.log('=c15202=', "not active 2")
+                                                Static.elStartup.dataset.active = false;
+                                                Static.elStartup.classList.remove("settings_list_item_active")
+                                            } else {
+                                                console.log('=9ca0c2=', "active 2")
+                                                Static.elStartup.dataset.active = true;
+                                                Static.elStartup.classList.add("settings_list_item_active")
+                                            }
+                                        }}
+                                    >
+                                        Стартап
+                                    </p>
+                                 
+                                    
+                                    {StartUpMenu(Static.startUP)}
+                                  
+                      
                                     <div class="settings_gradient_line"></div>
                                 </div>
                             </div>
@@ -191,6 +262,7 @@ const start = function (data, ID) {
                         <div class="settings_body">
                             <BlockUserSettingsPage.security
                                 settingsPage={settingsPage}
+                                
                             />
 
 
@@ -199,6 +271,15 @@ const start = function (data, ID) {
                                     {userBlackList()}
                                 </div>
                             </div>
+
+                            <div style={settingsPage == 'startUP' || settingsPage == 'editstartUP' || settingsPage == 'createstartUP' ? '' : 'display: none;'} data-type="blackList" class="settings_body_item">
+                                <div class="setting_body_item_chapter">
+                                <BlockUserStartupPage Static={Static} />
+                                </div>
+                            </div>
+                           
+
+                      
 
 
                         </div>
