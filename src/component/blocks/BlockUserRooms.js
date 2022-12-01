@@ -730,14 +730,17 @@ const BlockUserRooms = async function ({ Static }) {
             </a>
           </header>
           <figure class="c-room__wrapper">
-            <div class="c-room__image">
+            <div class="c-room__image c-room__image--quadro">
               <img src={`/assets/upload/rooms/d506bb5227ed06b218c5bdcc19490c58.png`} alt="" />
             </div>
             <figcaption>
               <div class="c-room__caption">
                 <span class="c-room__lang c-question__langcontainer language_container">
-                  <div class="c-question__lang language-question">Русский</div>
+                  <div class="c-question__lang language-question">Ru</div>
                 </span>
+                <h5 class="c-room__category" title="Название категории">
+                  <span>Название категории</span>
+                </h5>
                 <h4 class="c-room__title" title="Название комнаты">
                   <span>Название комнаты</span>
                 </h4>
