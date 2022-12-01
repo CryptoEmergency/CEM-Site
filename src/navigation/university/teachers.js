@@ -16,7 +16,7 @@ const start = function (data, ID) {
             return (
                 <div class="c-aboutteacher c-main__body">
                     <div class="c-aboutteacher__container c-container">
-                        <h1 class="c-aboutteacher__title">Преподаватель</h1>
+                        {/* <h1 class="c-aboutteacher__title">Преподаватель</h1> */}
                         <div class="c-aboutteacher__photo">
                             <img src={images[`${data.src}`]} />
                         </div>

@@ -13,7 +13,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 const start = function (data, ID = "mainBlock") {
-  let filterArrLogo, type, arrLogo, teachers;
+  let filterArrLogo, type, arrLogo, teachers, courses;
 
   Variable.HeaderShow = true;
   Variable.FooterShow = true;
@@ -94,6 +94,7 @@ const start = function (data, ID = "mainBlock") {
 
       teachers = [
         {
+          title: "Преподаватель",
           src: "university/teacher2",
           name: "Анастасия Рудаченко",
           position: "Криптоэксперт-практик, основатель академии криптовалют.",
@@ -107,6 +108,7 @@ const start = function (data, ID = "mainBlock") {
           link: "/university/teachers/anastasiya/"
         },
         {
+          title: "Преподаватель",
           src: "university/teacher1",
           name: "Евгений Царицанский",
           position: "Криптоэксперт, основатель академии криптовалют.",
@@ -119,6 +121,159 @@ const start = function (data, ID = "mainBlock") {
           },
           link: "/university/teachers/evgeniy/"
         },
+      ]
+
+      courses = [
+        {
+          logo: "",
+          title: "Курс 'SILVER'",
+          link: "/university/courses/silver/",
+          src: "university/course1",
+          resourse: "https://digitalfutureclub.ru/",
+          for_whom: "Для тех, кто хочет самостоятельно научиться работать с криптовалютой",
+          booking: true,
+          installment_plan: true,
+          modules: [
+            {
+              item: "Модуль «Предобучение»"
+            },
+            {
+              item: "Модуль «Базовый»"
+            },
+            {
+              item: "Модуль «Фундаментальный»"
+            },
+            {
+              item: "Модуль «Децентрализованные финансы»"
+            },
+            {
+              item: "Модуль «Создание криптопортфеля»"
+            },
+          ],
+          content: [
+            {
+              item: "4 секретных урока"
+            },
+            {
+              item: "1 живая встреча «Вопрос-Ответ»"
+            },
+            {
+              item: "Дневник траектории успеха"
+            },
+            {
+              item: "Набор чек-листов и образовательных материалов"
+            },
+            {
+              item: "Сертификат об окончании курса"
+            },
+          ],
+          primary_color: "#083c61"
+        },
+        {
+          logo: "",
+          title: "Курс 'GOLD'",
+          link: "/university/courses/gold/",
+          src: "university/course1",
+          resourse: "https://digitalfutureclub.ru/",
+          for_whom: "Для тех, кто хочет научиться работать с криптовалютой под наставничеством опытного куратора",
+          booking: true,
+          installment_plan: true,
+          modules: [
+            {
+              item: "Модуль «Предобучение»"
+            },
+            {
+              item: "Модуль «Базовый»"
+            },
+            {
+              item: "Модуль «Фундаментальный»"
+            },
+            {
+              item: "Модуль «Децентрализованные финансы»"
+            },
+            {
+              item: "Модуль «Создание криптопортфеля»"
+            },
+          ],
+          content: [
+            {
+              item: "4 секретных урока"
+            },
+            {
+              item: "Проверка домашних заданий куратором"
+            },
+            {
+              item: "4 видеоурока по проработке мышления миллионера"
+            },
+            {
+              item: "4 живые встреча «Вопрос-Ответ»"
+            },
+            {
+              item: "Дневник траектории успеха"
+            },
+            {
+              item: "Набор чек-листов и образовательных материалов"
+            },
+            {
+              item: "Сертификат об окончании курса"
+            },
+          ],
+          primary_color: "#083c61"
+        },
+        {
+          logo: "",
+          title: "Курс 'PLATINUM'",
+          link: "/university/courses/platinum/",
+          src: "university/course1",
+          resourse: "https://digitalfutureclub.ru/",
+          for_whom: "Для тех, кто хочет научиться работать с криптовалютой под наставничеством опытного куратора",
+          booking: true,
+          installment_plan: true,
+          modules: [
+            {
+              item: "Модуль «Предобучение»"
+            },
+            {
+              item: "Модуль «Базовый»"
+            },
+            {
+              item: "Модуль «Фундаментальный»"
+            },
+            {
+              item: "Модуль «Децентрализованные финансы»"
+            },
+            {
+              item: "Модуль «Создание криптопортфеля»"
+            },
+          ],
+          content: [
+            {
+              item: "4 секретных урока"
+            },
+            {
+              item: "Проверка домашних заданий лично экспертами"
+            },
+            {
+              item: "4 видеоурока по проработке мышления миллионера"
+            },
+            {
+              item: "4 живые встреча «Вопрос-Ответ»"
+            },
+            {
+              item: "Служба заботы"
+            },
+            {
+              item: "Дневник траектории успеха"
+            },
+            {
+              item: "Набор чек-листов и образовательных материалов"
+            },
+            {
+              item: "Сертификат об окончании курса"
+            },
+          ],
+          primary_color: "#083c61"
+        }
       ]
 
       if (!getStorage("FILTER_UNIVERSITY")) {
@@ -178,6 +333,31 @@ const start = function (data, ID = "mainBlock") {
                   )
                 })
               }
+            </div>
+            <div class="c-university__courses">
+              <h2 class="c-university__subtitle">Курсы</h2>
+              <div class="c-university__courseslist">
+                {
+                  courses.map(function (course, i) {
+                    return (
+                      <a
+                        href={course.link}
+                        class="c-university__course"
+                        onclick={(e) => {
+                          fn.siteLinkModal(e, course)
+                        }}
+                      >
+                        <span class="c-university__wrapper" style={`--bg: ${course.primary_color}`}>
+                          <img class="c-university__photo" src={images[`${course.src}`]} />
+                        </span>
+                        <span class="c-university__caption">
+                          <p class="c-university__name">{course.title}</p>
+                        </span>
+                      </a>
+                    )
+                  })
+                }
+              </div>
             </div>
             {/* <h3 class="c-university__promo">
               At vero eos et accusamus et iusto odio dignissimos ducimus, qui
@@ -299,7 +479,7 @@ const start = function (data, ID = "mainBlock") {
               })}
             </ul> */}
           </div>
-        </div>
+        </div >
       );
     }, ID
   );

@@ -30,6 +30,7 @@
         display: grid;
         grid-template-columns: calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px);
         grid-gap: 10px;
+        margin-bottom: 30px;
 
         @media(max-width: 1000px) {
             grid-template-columns: 100%;
@@ -83,6 +84,86 @@
     &__name {
         margin-top: 10px;
         margin-bottom: 5px;
+    }
+
+    &__courses {
+        margin-bottom: 30px;
+
+        .c-university {
+
+            &__subtitle {
+                margin-top: 0;
+            }
+
+            &__wrapper {
+                position: relative;
+                overflow: hidden;
+                height: 158px;
+
+                &::before {
+                    position: absolute;
+                    content: '';
+                    top: 50%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                    width: calc(100% - 8px);
+                    height: calc(100% - 8px);
+                    background: var(--bg);
+                    border-radius: 50%;
+                }
+            }
+
+            &__photo {
+                max-height: 150px;
+                max-width: 150px;
+                width: 100%;
+                height: auto;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                border-radius: 0;
+            }
+
+            &__name {
+                font-weight: 500;
+            }
+        }
+    }
+
+    &__courseslist {
+        display: grid;
+        grid-template-columns: calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px) calc(20% - 10px);
+        grid-gap: 10px;
+
+        @media(max-width: 1000px) {
+            grid-template-columns: 100%;
+            justify-items: center;
+        }
+    }
+
+    &__course {
+        text-align: center;
+        text-decoration: none;
+
+        @media(max-width: 1000px) {
+            display: grid;
+            grid-template-columns: 200px 420px;
+            align-items: center;
+        }
+
+        @media(max-width: 800px) {
+            grid-template-columns: 200px 320px;
+            font-size: 14px;
+        }
+
+        @media(max-width: 600px) {
+            grid-template-columns: 180px 220px;
+        }
+
+        @media (max-width: 400px) {
+            grid-template-columns: 180px 120px;
+        }
     }
 
     &__position {}
@@ -290,4 +371,104 @@
     &__caption {}
 
     &__text {}
+}
+
+.c-aboutcourse {
+    padding-top: 30px;
+
+    &__container {}
+
+    &__logo {
+        display: flex;
+        margin-bottom: 30px;
+
+        img {
+            margin: auto;
+        }
+    }
+
+    &__forwhom {
+        margin-bottom: 20px;
+    }
+
+    &__caption {}
+
+    &__text {
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__modules {
+        margin-bottom: 20px;
+    }
+
+    &__moduleslist {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__modulesitem {
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__buns {
+        margin-bottom: 20px;
+    }
+
+    &__bunslist {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__bunsitem {
+        position: relative;
+        margin-bottom: 10px;
+        padding: 0 0 0 20px;
+
+        &::before {
+            position: absolute;
+            content: '';
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background: no-repeat url("../svg/star.svg") center / cover;
+            width: 15px;
+            height: 15px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__resourse {
+
+        a {
+            display: inline-block;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 300;
+            color: #EEEFF4;
+            text-decoration: none;
+
+            span {
+                display: inline-block;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+            }
+
+            &:hover {
+                background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
 }
