@@ -127,6 +127,7 @@
         &--system {
             display: flex; //TODO
             flex-basis: 100%;
+            flex-direction: row;
             align-items: center;
             gap: 20px;
             height: 95px;
