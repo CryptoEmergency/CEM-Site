@@ -718,6 +718,8 @@ initData.rooms = function (Static) {
         name: Variable.myInfo.mainLanguage.orig_name
     }
 
+    Static.apiFilter = {system:false}
+
     //кодовое слово
     Static.confirmPasword = {
         label: "Введите пароль от комнаты",

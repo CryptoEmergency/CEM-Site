@@ -10,6 +10,25 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
 
+const Tags = function ({ Static, classActive, text, type }) {
+
+  return (
+    <div class={["tag_button", classActive]}
+      onclick={async () => {
+    
+      Static.defaultUserRoom = type
+
+      await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system:true,"settingsroom.description":Static.defaultUserRoom }, limit: 10 })
+ 
+   
+    CheckSystemInterface(Static,true)
+    ChangeRooms(Static, Static.Rooms._id, true)
+
+      }}>
+      <span>{text}</span>
+    </div>
+  )
+}
 
 //если не авторизован
 function checkAthorisation(Static) {
@@ -23,28 +42,40 @@ function checkAthorisation(Static) {
 }
 
 //чекнем системную комнату отинтерфейса
-function CheckSystemInterface(Static) {
+function CheckSystemInterface(Static,tag) {
+  let langCode
+ if(tag)
+ {
+   langCode = Static.Rooms.languages.code 
+ }
+ else{
+  langCode = Variable.lang.code
+ }
+ Variable.ListSystemsRooms.list_records.forEach(function (room, i) {
+  
+  if (langCode == room.languages.code) {
 
-  Variable.ListSystemsRooms.list_records.forEach(function (room, i) {
-
-    if (Variable.lang.code == room.languages.code) {
-      //системная комната
-      Static.Rooms = Variable.ListSystemsRooms.list_records[i]
-    }
-  })
-
-
+    //системная комната
+    Static.Rooms = Variable.ListSystemsRooms.list_records[i]
+    
+  }
+})
 }
 
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
 
+
   document.getElementById("spinner").hidden = false
   Static.Rooms._id = _id
-
   let response = await fn.restApi.getUserRoom({ _id, filter: { system: system, _id: _id } })
+ 
+  
 
   Static.Rooms = response.list_records[0]
+
+  Static.lang.name = Static.Rooms.languages.orig_name
+  Static.lang.code = Static.Rooms.languages.code
 
   ShowMessage(Static)
 
@@ -417,8 +448,11 @@ async function SearchRooms(Static) {
 
 const BlockUserRooms = async function ({ Static }) {
 
+
   await initOne(async () => {
-    await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system: true }, limit: 10 })
+
+    Static.defaultUserRoom = "crypto"
+    await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system:true,"settingsroom.description":Static.defaultUserRoom }, limit: 10 })
 
     await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "ListUsersRooms"
@@ -438,21 +472,20 @@ const BlockUserRooms = async function ({ Static }) {
 
   let redborder
   let edit
+
+
   return (
+    
     <div class="c-rooms c-container">
+       
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
         <ul class="c-chats__togglers">
           {
 
             //мапим системные комнаты
-            Variable.ListSystemsRooms.list_records.map(function (systemsrooms, i) {
-              console.log('=482561=', systemsrooms)
-              if (Static.Rooms._id == systemsrooms._id) {
-                redborder = "border:1px solid #ff22ac"
-              }
-              else {
-                redborder = "border:1px solid #474c5a"
-              }
+    
+              Variable.ListSystemsRooms.list_records.map(function (systemsrooms, i) {
+            
               return (
                 <li
                   class={[
@@ -462,11 +495,12 @@ const BlockUserRooms = async function ({ Static }) {
                   ]}
                   onclick={(e) => {
                     ChangeRooms(Static, systemsrooms._id, true)
+             
                   }}
                 >
                   <a href="#" class="c-toggler__link" data-action="viewChat" title={fn.sliceString(systemsrooms.settingsroom.title, 66)}>
                     <div class="c-toggler__wrap">
-                      <span class="c-toggler__name">{systemsrooms.settingsroom.title}</span>
+                      <span class="c-toggler__name">{systemsrooms.languages.code}</span>
                     </div>
                     {/* <img src={images["nft/creator-1"]} width="46" height="46" class="c-toggler__img" /> */}
                     {/* <div class="c-toggler__delete" title="Удалить">
@@ -489,6 +523,7 @@ const BlockUserRooms = async function ({ Static }) {
                   let lang = Variable.ListSystemsRooms.list_records.filter((item) => {
                     return item.languages.code == langCode;
                   });
+                
                   if (lang.length > 0) {
                     Static.lang.name = langOrig;
                     Static.lang.code = langCode;
@@ -496,13 +531,42 @@ const BlockUserRooms = async function ({ Static }) {
                   } else {
                     alert("Нет такой системной комнаты")
                   }
-                  initReload()
                 },
               },
             });
           }}
         >{Static.lang.name}</div>
       </div>
+      { 
+        <Tags
+        Static={Static}
+        text={Variable.lang.categoryName.all}
+        classActive={Static.defaultUserRoom == "all" ? "tag_button_active" : ""}
+        type="all"
+      
+      />
+
+      }
+       { 
+    
+    <Tags
+    Static={Static}
+    text={"ФЛУДИЛКА"}
+    classActive={Static.defaultUserRoom == "flood" ? "tag_button_active" : ""}
+    type="flood"
+
+  />
+  }
+  { 
+    
+    <Tags
+    Static={Static}
+    text={"CRYPTO"}
+    classActive={Static.defaultUserRoom  == "crypto" ? "tag_button_active" : ""}
+    type="crypto"
+
+  />
+  }
       {/* <hr></hr> */}
       <div class="c-rooms__chats">
         <div class=" c-chats__wrapper">
@@ -635,20 +699,7 @@ const BlockUserRooms = async function ({ Static }) {
         </div>
       </div>
 
-      {/* <div class="tags">
-        <Tags
-          Static={Static}
-          text={Variable.lang.categoryName.all}
-          classActive={Static.activeCategory == "All" ? "tag_button_active" : ""}
-          type="All"
-        />
-        <Tags
-          Static={Static}
-          text={Variable.lang.categoryName[item.name]}
-          classActive={Static.activeCategory == item.name ? "tag_button_active" : ""}
-          type={item.name}
-        />
-      </div> */}
+   
 
       <div class="c-rooms__searchblock c-search">
         <div class="c-search__container">
@@ -851,7 +902,7 @@ const BlockUserRooms = async function ({ Static }) {
         }
       </div>
 
-      <ButtonShowMore Static={Static} action="getUserRoom" />
+      <ButtonShowMore Static={Static} action="getUserRoom" limit={10} />
     </div>
   )
 }
