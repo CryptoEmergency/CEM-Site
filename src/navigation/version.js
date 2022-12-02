@@ -6,7 +6,12 @@ import {
     initReload
 } from "@betarost/cemjs";
 // poydet data-action
-
+import EmojiPicker from "rm-emoji-picker";
+console.log('=8eafb8=', EmojiPicker)
+console.log('=8eafb8=', new EmojiPicker.default())
+const picker = new EmojiPicker.default();
+const emoji_text = EmojiPicker.default.render('lol! :laughing:')
+console.log(emoji_text)
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 let tmp = 0
@@ -15,7 +20,7 @@ const start = function (data, ID) {
     Variable.Static.tpm = 5
     init(
         async () => {
-            let tmp = await fn.restApi.setUserRoom.create({ visible: true,system: true, title: "Chat for communication EN", description: "Chat with other users on various topics", images: "111", languages: "en"})
+            let tmp = await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Chat for communication EN", description: "Chat with other users on various topics", images: "111", languages: "en" })
             console.log(tmp)
         },
         () => {

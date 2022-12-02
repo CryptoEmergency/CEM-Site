@@ -12,6 +12,7 @@
     "cropperjs": "^1.5.12",
     "moment": "^2.29.4",
     "path": "^0.12.7",
+    "rm-emoji-picker": "^1.0.0",
     "swiper": "^8.4.2"
   }
 }
