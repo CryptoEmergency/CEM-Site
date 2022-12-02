@@ -22,7 +22,8 @@ import {
 } from '@component/element/index.js';
 
 import EmojiPicker from "rm-emoji-picker";
-// const picker = new EmojiPicker();
+import 'rm-emoji-picker/dist/emojipicker.css';
+// 
 const swiperOptions = {
     loop: false,
     // autoHeight: true, 
@@ -37,7 +38,6 @@ const swiperOptions = {
 };
 
 const start = function (data, ID) {
-    // let Static = {}
     let [Static] = fn.GetParams({ data, ID })
 
     let chatsList,
@@ -50,16 +50,90 @@ const start = function (data, ID) {
     Variable.Static.FooterShow = false
     Variable.showUserMenu = false
 
-    const sendPhoto = async function (crooper) {
+    const picker = new EmojiPicker.default();
+    const icon = document.getElementById('emoji');
+    const container = document.querySelector('.create_post_container1');
+    const editable = document.querySelector('.create_post_chapter');
+    // picker.listenOn(icon, container, editable);
+
+    const loadPhoto = async function (file, type, xhr) {
+        let dataURL;
+        let fileImg = file[0];
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            // convert image file to base64 string
+            dataURL = reader.result;
+        }, false);
+        if (fileImg) {
+            reader.readAsDataURL(fileImg);
+        }
+
+        let previewObj = {
+            src: dataURL,
+            type: "image",
+            upload: 0,
+            size: 0
+        };
+        Static.mediaInputs.show = true;
+        Static.mediaInputs.value.push(previewObj);
+        let numItem = Static.mediaInputs.value.length - 1;
+
+        let nameFile = "file.png"
+        if (fileImg.name) {
+            nameFile = fileImg.name
+        }
+        const formData = new FormData()
+        formData.append('media', fileImg, nameFile);
+
+        xhr = new XMLHttpRequest()
+        xhr.open('POST', `/upload/${type}/`)
+        xhr.onload = async function () {
+            Static.mediaInputs.show = true;
+            if (!this.response) {
+                return
+            }
+            let response = JSON.parse(this.response);
+            Static.mediaInputs.value[numItem] = {
+                aspect: Static.mediaInputs.selectAspect,
+                type: response.mimetype.split("/")[0],
+                name: response.name
+            }
+            Static.isValid = true;
+            initReload();
+            // console.log('=af134a=', response)
+        }
+        xhr.upload.onprogress = async function (e) {
+            let contentLength;
+            if (e.lengthComputable) {
+                contentLength = e.total;
+            } else {
+                contentLength = parseInt(
+                    e.target.getResponseHeader(
+                        "x-decompressed-content-length"
+                    ),
+                    10
+                );
+            }
+
+            if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                Static.mediaInputs.value.splice(numItem, 1);
+                initReload()
+                return
+            }
+            Static.mediaInputs.value[numItem].upload = e.loaded
+            Static.mediaInputs.value[numItem].size = contentLength;
+            initReload();
+        }
+
+        xhr.send(formData)
+    };
+
+    const sendPhoto = async function (crooper, index) {
         if (!crooper) {
             return
         }
         let canvas;
-        Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
-        canvas = crooper.getCroppedCanvas({
-            // width: 166,
-            // height: 166,
-        });
+        canvas = crooper.getCroppedCanvas({});
         let previewObj = {
             src: canvas.toDataURL(),
             type: "image",
@@ -67,9 +141,9 @@ const start = function (data, ID) {
             size: 0
         };
         Static.mediaInputs.show = true;
-        Static.mediaInputs.value.push(previewObj);
-        let numItem = Static.mediaInputs.value.length - 1
+        Static.mediaInputs.value[index] = previewObj;
         initReload();
+
         await canvas.toBlob(function (blob) {
             fn.uploadMedia(
                 blob,
@@ -80,7 +154,7 @@ const start = function (data, ID) {
                         return
                     }
                     let response = JSON.parse(this.response);
-                    Static.mediaInputs.value[numItem] = {
+                    Static.mediaInputs.value[index] = {
                         aspect: Static.mediaInputs.selectAspect,
                         type: response.mimetype.split("/")[0],
                         name: response.name
@@ -101,13 +175,13 @@ const start = function (data, ID) {
                         );
                     }
 
-                    if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
-                        Static.mediaInputs.value.splice(numItem, 1);
+                    if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
+                        Static.mediaInputs.value.splice(index, 1);
                         initReload()
                         return
                     }
-                    Static.mediaInputs.value[numItem].upload = e.loaded
-                    Static.mediaInputs.value[numItem].size = contentLength;
+                    Static.mediaInputs.value[index].upload = e.loaded
+                    Static.mediaInputs.value[index].size = contentLength;
                     initReload();
                 }
             );
@@ -177,7 +251,7 @@ const start = function (data, ID) {
                 })
                 if (!existingChat) {
                     activeUser = Variable.Static.startChatsID
-                    console.log(chatsList)
+                    // console.log(chatsList)
                     chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
                     messageList = {
                         list_records: [
@@ -193,7 +267,7 @@ const start = function (data, ID) {
             Variable.Static.startChatsID = null
         },
         () => {
-            console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
+            // console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
 
             if (messageList) {
                 if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {
@@ -268,7 +342,7 @@ const start = function (data, ID) {
                                                             "users": 1
                                                         }
                                                     });
-                                                    console.log('=b604cf=', messageList)
+                                                    // console.log('=b604cf=', messageList)
                                                     initReload()
                                                 }}
                                             >
@@ -401,22 +475,26 @@ const start = function (data, ID) {
                                                 className="text1 create_post_chapter"
                                             />
 
+                                            {/* <div id="emoji">@</div> */}
+
                                             <MediaButton
                                                 onclickPhoto={function () {
                                                     if (this.files.length == 0) {
                                                         return;
                                                     }
 
-                                                    fn.modals.ModalCropImage({
-                                                        file: this.files[0],
-                                                        typeUpload: 'chat',
-                                                        arrMedia: Static.mediaInputs.value,
-                                                        aspectSelect: Static.mediaInputs.selectAspect,
-                                                        uploadCropImage: async function (cropper) {
-                                                            await sendPhoto(cropper)
-                                                            return;
-                                                        }
-                                                    })
+                                                    loadPhoto(this.files, "chat");
+
+                                                    // fn.modals.ModalCropImage({
+                                                    //     file: this.files[0],
+                                                    //     typeUpload: 'chat',
+                                                    //     arrMedia: Static.mediaInputs.value,
+                                                    //     aspectSelect: Static.mediaInputs.selectAspect,
+                                                    //     uploadCropImage: async function (cropper) {
+                                                    //         await sendPhoto(cropper)
+                                                    //         return;
+                                                    //     }
+                                                    // })
                                                 }}
                                                 onclickMic={function () {
                                                     alert("onclicMic")
@@ -428,14 +506,22 @@ const start = function (data, ID) {
                                                 text={<img class="c-comments__icon" src={svg["send_message"]} />}
                                                 className="c-comments__send button-container-preview"
                                                 onclick={async (tmp, el) => {
-                                                    if (!Static.message.el.value.trim().length) {
+                                                    if (!Static.message.el.value.trim().length && Static.mediaInputs.value.length == 0) {
                                                         return
                                                     }
-                                                    let text = Static.message.el.value.trim()
+                                                    let text, media = [];
+                                                    if (Static.message.el.value.trim().length) {
+                                                        text = Static.message.el.value.trim()
+                                                    }
+                                                    if (Static.mediaInputs.value.length != 0) {
+                                                        Static.mediaInputs.value.forEach((file) => {
+                                                            media.push(file)
+                                                        })
+                                                    }
                                                     // let data = { value: { users: activeUser._id, message: { text } } }
                                                     // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: activeUser._id, text })
-                                                    console.log('=6befba=', response)
+                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: activeUser._id, text, media })
+                                                    // console.log('=6befba=', response)
                                                     if (response.status === "ok") {
                                                         Static.message.el.value = ""
                                                         if (Static.message.adaptive) {
@@ -449,7 +535,7 @@ const start = function (data, ID) {
                                                             } else {
                                                                 messageList.list_records[0].message = [newRes]
                                                             }
-                                                            console.log('=46ae17=', chatsList)
+                                                            // console.log('=46ae17=', chatsList)
 
                                                             if (chatsList && chatsList.list_records) {
                                                                 chatsList.list_records.map((item) => {
@@ -459,6 +545,7 @@ const start = function (data, ID) {
                                                                     }
                                                                 })
                                                             }
+                                                            Static.mediaInputs.value = [];
                                                             initReload();
                                                         }
                                                     } else {
@@ -478,9 +565,9 @@ const start = function (data, ID) {
                                                                     <MediaPreview
                                                                         item={item}
                                                                         index={index}
-                                                                        type="posts"
+                                                                        type="chat"
                                                                         Static={Static}
-
+                                                                        sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
                                                                     />
                                                                 );
                                                             }

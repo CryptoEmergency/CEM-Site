@@ -15,7 +15,7 @@ const findUnread = function (arr) {
 };
 
 const BottomMenu = function () {
-    console.log('=b85f6c=', Variable)
+    // console.log('=b85f6c=', Variable)
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">

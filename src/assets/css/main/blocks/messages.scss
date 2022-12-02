@@ -301,6 +301,11 @@
 
 		.create_post_chapter {
 			width: calc(100% - 56px);
+
+			&.createPostImage {
+				border: none;
+				background-color: transparent;
+			}
 		}
 	}
 
@@ -342,6 +347,16 @@
 
 	&_goback {
 		display: none;
+	}
+
+	&_settings {
+		position: absolute;
+		z-index: 2;
+		font-size: 0;
+		width: 16px;
+		height: 16px;
+		top: 0px;
+		right: 22px;
 	}
 }
 
