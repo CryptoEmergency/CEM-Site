@@ -229,6 +229,11 @@
 		margin-bottom: -63px;
 		position: relative;
 
+		@media(max-width: 767px) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+
 		.c-comments {
 			&__field {
 				position: relative;
@@ -264,6 +269,38 @@
 			flex-basis: 83px;
 			flex-grow: 0;
 			flex-shrink: 0;
+		}
+
+		.c-mediabtn {
+			position: absolute;
+			top: 50%;
+			right: 58px;
+			transform: translateY(-50%);
+			display: inline-flex;
+			margin-top: 0;
+			grid-gap: 0;
+
+			&__action {
+				width: 38px;
+				height: 41px;
+				padding: 8px 6px;
+				background: transparent;
+			}
+
+			&__icon {
+				width: 100%;
+			}
+		}
+
+		button[data-type='voiceline'][data-page_type="posts"] {
+			width: 38px;
+			height: 41px;
+			padding: 10px 6px;
+			background-image: url("../svg/icon/chat_micro.svg");
+		}
+
+		.create_post_chapter {
+			width: calc(100% - 56px);
 		}
 	}
 
@@ -928,16 +965,6 @@ button[data-type=voiceline][data-page_type=chat] {
 					max-width: 125px;
 				}
 			}
-		}
-	}
-
-	.messages {
-
-		&_dialog {
-			// padding: 0;
-			padding-right: 15px;
-			padding-left: 15px;
-			padding-top: 10px;
 		}
 	}
 }

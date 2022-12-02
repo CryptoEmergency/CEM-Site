@@ -9,8 +9,20 @@ import {
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer, TextArea, ButtonSubmit } from '@component/element/index.js';
+import {
+    Avatar,
+    Swiper,
+    AudioPlayer,
+    LazyImage,
+    VideoPlayer,
+    TextArea,
+    ButtonSubmit,
+    MediaButton,
+    MediaPreview
+} from '@component/element/index.js';
 
+import EmojiPicker from "rm-emoji-picker";
+// const picker = new EmojiPicker();
 const swiperOptions = {
     loop: false,
     // autoHeight: true, 
@@ -38,6 +50,79 @@ const start = function (data, ID) {
     Variable.Static.FooterShow = false
     Variable.showUserMenu = false
 
+    //First construct an instance of EmojiPicker
+    // const picker = new EmojiPicker();
+
+    // const icon = document.querySelector('.emoji');
+    // const container = document.querySelector('container');
+    // const editable = document.querySelector('my-input');
+
+    const sendPhoto = async function (crooper) {
+        if (!crooper) {
+            return
+        }
+        let canvas;
+        Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
+        canvas = crooper.getCroppedCanvas({
+            // width: 166,
+            // height: 166,
+        });
+        let previewObj = {
+            src: canvas.toDataURL(),
+            type: "image",
+            upload: 0,
+            size: 0
+        };
+        Static.mediaInputs.show = true;
+        Static.mediaInputs.value.push(previewObj);
+        let numItem = Static.mediaInputs.value.length - 1
+        initReload();
+        await canvas.toBlob(function (blob) {
+            fn.uploadMedia(
+                blob,
+                "chat",
+                async function () {
+                    Static.mediaInputs.show = true;
+                    if (!this.response) {
+                        return
+                    }
+                    let response = JSON.parse(this.response);
+                    Static.mediaInputs.value[numItem] = {
+                        aspect: Static.mediaInputs.selectAspect,
+                        type: response.mimetype.split("/")[0],
+                        name: response.name
+                    }
+                    Static.isValid = true;
+                    initReload();
+                },
+                async function (e) {
+                    let contentLength;
+                    if (e.lengthComputable) {
+                        contentLength = e.total;
+                    } else {
+                        contentLength = parseInt(
+                            e.target.getResponseHeader(
+                                "x-decompressed-content-length"
+                            ),
+                            10
+                        );
+                    }
+
+                    if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                        Static.mediaInputs.value.splice(numItem, 1);
+                        initReload()
+                        return
+                    }
+                    Static.mediaInputs.value[numItem].upload = e.loaded
+                    Static.mediaInputs.value[numItem].size = contentLength;
+                    initReload();
+                }
+            );
+            initReload();
+            Variable.DelModals("ModalCropImage");
+        });
+        return
+    }
 
     init(
         async () => {
@@ -45,6 +130,11 @@ const start = function (data, ID) {
             Static.message = {
                 rows: 1,
                 adaptive: 3,
+            }
+
+            Static.mediaInputs = {
+                value: [],
+                show: false,
             }
 
             chatsList = await sendApi.send({
@@ -131,6 +221,13 @@ const start = function (data, ID) {
                         ]}
                     >
                         <div class="chats_search">
+                            <form id="chatsSearchForm">
+                                <a class="goBackFromChatLink" href="/" onclick={(e) => fn.siteLink(e)}>
+                                    <img class="goBackFromChat" src={svg.chats_back} />
+                                </a>
+                                <input type="text" disabled />
+                                <img src={svg.chats_search_icon} />
+                            </form>
                         </div>
                         <div class="messages_list">
 
@@ -211,7 +308,7 @@ const start = function (data, ID) {
                             }}
                         </div>
                     </div>
-                    <div class="messages_dialog" style={ activeChat ? "height: 100%; overflow-y: hidden; display: block;" : "height: 100%; overflow-y: hidden;" }>
+                    <div class="messages_dialog" style={activeChat ? "height: 100%; overflow-y: hidden; display: block;" : "height: 100%; overflow-y: hidden;"}>
                         {() => {
                             if (activeUser) {
                                 return (
@@ -311,6 +408,39 @@ const start = function (data, ID) {
                                                 className="text1 create_post_chapter"
                                             />
 
+                                            {/* <button
+                                                data-page_type="chat"
+                                                data-type="voiceline"
+                                                class="createPostAudioCreator create_post_control_item"
+                                                style="right: 44px; width: 54px; height: 54px; background-color: transparent;"
+                                                onClick={(e) => alert()}
+                                            ></button> */}
+
+                                            {/* <i class="emoji">*</i> */}
+
+                                            <MediaButton
+                                                onclickPhoto={function () {
+                                                    if (this.files.length == 0) {
+                                                        return;
+                                                    }
+
+                                                    fn.modals.ModalCropImage({
+                                                        file: this.files[0],
+                                                        typeUpload: 'chat',
+                                                        arrMedia: Static.mediaInputs.value,
+                                                        aspectSelect: Static.mediaInputs.selectAspect,
+                                                        uploadCropImage: async function (cropper) {
+                                                            await sendPhoto(cropper)
+                                                            return;
+                                                        }
+                                                    })
+                                                }}
+                                                onclickMic={function () {
+                                                    alert("onclicMic")
+                                                }}
+                                                iconPhoto={"message_camera"}
+                                            />
+
                                             <ButtonSubmit
                                                 text={<img class="c-comments__icon" src={svg["send_message"]} />}
                                                 className="c-comments__send button-container-preview"
@@ -354,6 +484,29 @@ const start = function (data, ID) {
                                                 }}
                                             />
                                         </div>
+                                        {
+                                            Static.mediaInputs.show && Static.mediaInputs.value.length
+                                                ?
+                                                <div class="create_post_chapter createPostImage">
+                                                    {
+                                                        Static.mediaInputs.value.map((item, index) => {
+                                                            if (item.type != "audio") {
+                                                                return (
+                                                                    <MediaPreview
+                                                                        item={item}
+                                                                        index={index}
+                                                                        type="posts"
+                                                                        Static={Static}
+
+                                                                    />
+                                                                );
+                                                            }
+                                                        })
+                                                    }
+                                                </div>
+                                                :
+                                                null
+                                        }
                                     </section>
                                 )
                             } else {
@@ -368,7 +521,7 @@ const start = function (data, ID) {
                     <img
                         class="messages_goback"
                         src={svg.chats_back}
-                        onClick={ () => { activeChat = null; initReload();} }
+                        onClick={() => { activeChat = null; initReload(); }}
                     />
                 </div>
             )
