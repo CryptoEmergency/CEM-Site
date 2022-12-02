@@ -29,46 +29,65 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
             cropper.destroy();
         }
 
-        cropper = new Cropper(el, {
-            //**1 */
-            // aspectRatio: aspectActive,
-            // viewMode: 2,
-            // cropBoxResizable: true,
-            // autoCropArea: 1,
-            // strict: false,
-            // guides: false,
-            // highlight: true,
-            // dragCrop: false,
+        if (aspectActive) {
+            cropper = new Cropper(el, {
+                //**1 */
+                // aspectRatio: aspectActive,
+                // viewMode: 2,
+                // cropBoxResizable: true,
+                // autoCropArea: 1,
+                // strict: false,
+                // guides: false,
+                // highlight: true,
+                // dragCrop: false,
 
-            //**2 */
-            // aspectRatio: aspectActive,
-            // CropArea: 1,
-            // strict: false,
-            // guides: false,
-            // highlight: true,
-            // dragMode: 'move',
-            // restore: false,
-            // cropBoxMovable: false,
-            // cropBoxResizable: false,
-            // toggleDragModeOnDblclick: false,
+                //**2 */
+                // aspectRatio: aspectActive,
+                // CropArea: 1,
+                // strict: false,
+                // guides: false,
+                // highlight: true,
+                // dragMode: 'move',
+                // restore: false,
+                // cropBoxMovable: false,
+                // cropBoxResizable: false,
+                // toggleDragModeOnDblclick: false,
 
-            /**3 */
-            aspectRatio: aspectActive,
-            viewMode: 3,
-            dragMode: 'move',
-            autoCropArea: 1,
-            restore: false,
-            modal: false,
-            guides: false,
-            highlight: false,
-            cropBoxMovable: true,
-            cropBoxResizable: false,
-            toggleDragModeOnDblclick: false,
+                /**3 */
+                aspectRatio: aspectActive,
+                viewMode: 3,
+                dragMode: 'move',
+                autoCropArea: 1,
+                restore: false,
+                modal: false,
+                guides: false,
+                highlight: false,
+                cropBoxMovable: true,
+                cropBoxResizable: false,
+                toggleDragModeOnDblclick: false,
 
-            crop: function (e) {
-                var data = e.detail;
-            }
-        });
+                crop: function (e) {
+                    var data = e.detail;
+                }
+            });
+        } else {
+            cropper = new Cropper(el, {
+                viewMode: 3,
+                dragMode: 'move',
+                autoCropArea: 1,
+                restore: false,
+                modal: false,
+                guides: false,
+                highlight: true,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: false,
+
+                crop: function (e) {
+                    var data = e.detail;
+                }
+            });
+        }
     }
 
     init(
@@ -82,6 +101,8 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                     aspectActive = 4
                 } else if (typeUpload == "avatar") {
                     aspectActive = 1
+                } else if (typeUpload == "chat") {
+                    aspectActive = null
                 } else {
                     aspectActive = 1.7777777777777777
                 }

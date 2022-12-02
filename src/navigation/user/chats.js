@@ -50,13 +50,6 @@ const start = function (data, ID) {
     Variable.Static.FooterShow = false
     Variable.showUserMenu = false
 
-    //First construct an instance of EmojiPicker
-    // const picker = new EmojiPicker();
-
-    // const icon = document.querySelector('.emoji');
-    // const container = document.querySelector('container');
-    // const editable = document.querySelector('my-input');
-
     const sendPhoto = async function (crooper) {
         if (!crooper) {
             return
@@ -407,16 +400,6 @@ const start = function (data, ID) {
                                                 Static={Static.message}
                                                 className="text1 create_post_chapter"
                                             />
-
-                                            {/* <button
-                                                data-page_type="chat"
-                                                data-type="voiceline"
-                                                class="createPostAudioCreator create_post_control_item"
-                                                style="right: 44px; width: 54px; height: 54px; background-color: transparent;"
-                                                onClick={(e) => alert()}
-                                            ></button> */}
-
-                                            {/* <i class="emoji">*</i> */}
 
                                             <MediaButton
                                                 onclickPhoto={function () {
