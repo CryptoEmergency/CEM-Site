@@ -8,15 +8,24 @@ import {
 } from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
+import { MediaButton } from '@component/element/index.js';
+import images from "@assets/images/index.js";
 
 
 
 
+function addSocialNetworkDiv(elem)
+{
+
+
+elem.insertAdjacentHTML('afterend', '<div style="background:none" class="startup_page_table_row settings_list_item_active"><div>Add social network:</div><p class="settings_list_title" onClick="this.closest(\'div\').remove()"></p><div contenteditable="true" style="margin-top:5px;" data-placeholder="enter social network" class="pl"></div></div>');
+
+}
 
 const BlockUserStartupPage = function ({Static})
     {
      
-
+     
         if (!Static && (Static.settingsPage != "startUP" || Static.settingsPage != "createstartUP" || Static.settingsPage != "editstartUP")) {
             return (<></>)
         }
@@ -35,8 +44,55 @@ const BlockUserStartupPage = function ({Static})
     <div class="startup_page">
         <div class="startup_page_block-1">
             <div class="startup_page_preview">
-               Логотип
-                <div class="startup_page_contacts">
+                <img style="border:1px solid #9844b7;border-radius: 10px" height="200px" width="400px" src={images["banners/ecosystem"]}/>
+               
+               <MediaButton
+                onclickPhoto={function () {
+                  if (this.files.length == 0) {
+                    return;
+                  }
+
+                  Variable.SetModals({
+                    name: "ModalCropImage",
+                    data: {
+                      file: this.files[0],
+                      typeUpload: 'answers',
+                      arrMedia: formInputs.mediaInputs.value,
+                      aspectSelect: formInputs.mediaInputs.selectAspect,
+                      uploadCropImage: async function (cropper) {
+                        await sendPhoto(cropper)
+                        return;
+                      }
+                    },
+                  }, true);
+                  this.value = '';
+                }}
+
+              />
+              <br />
+               <div class="startup_page_table_row">
+                     <div>
+                      Website:
+                     </div>
+                     <div contenteditable="true" data-placeholder="enter website" class="pl">
+                     </div>
+                </div>
+                
+                <div class="startup_page_table_row">
+                     <div>
+                      Add social network:
+                     </div>
+                  
+                     <p class="settings_list_title" onClick={function(){addSocialNetworkDiv(Static.social)}}></p>
+                    
+                     <div contenteditable="true" style="margin-top:5px;" data-placeholder="enter social network" class="pl">
+                     </div>
+            
+                </div>
+                <div Element={($el) => {Static.social = $el}} class="social">
+                    
+                </div>
+                {<div class="startup_page_contacts">
                     <a href="" class="startup_page_contact_container">
                         <div class="startup_page_contact_icon">
                             <img src="/assets/img/web_icon.svg" />
@@ -61,10 +117,17 @@ const BlockUserStartupPage = function ({Static})
                         </div>
                         <p class="startup_page_contact_name">4{}</p>
                     </a>
-                </div>
+                </div>}
                 <p class="startup_page_short_description">
-                  5  {}
+                Короткое описание:
+                
                 </p>
+               
+                <div style="width:400px" contenteditable="true" data-placeholder="enter text" class="pl">
+            
+                  
+               
+                </div>
             </div>
             <div class="startup_page_table">
                 <label>Название</label>
