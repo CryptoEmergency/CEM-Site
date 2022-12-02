@@ -95,6 +95,8 @@
     }
 
     &__list {
+        display: flex;
+        flex-direction: column;
         flex-basis: calc(100% - 50px);
         flex-grow: 0;
         flex-shrink: 0;
@@ -125,6 +127,7 @@
         &--system {
             display: flex; //TODO
             flex-basis: 100%;
+            flex-direction: row;
             align-items: center;
             gap: 20px;
             height: 95px;
@@ -172,6 +175,7 @@
     &__togglers {
         display: flex;
         align-items: center;
+        flex-grow: 1;
         margin: 0;
         padding: 3px 0 7px;
         max-width: 100%;
@@ -362,6 +366,41 @@
         display: block;
         width: 75%;
         margin: auto;
+    }
+
+    &__passmessage {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 10vh;
+    }
+}
+
+.c-passmessage {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &__title {
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    &__form {
+
+        .c-form {
+
+            &__wrapfield {}
+
+            &__field {
+                max-width: 300px;
+            }
+        }
+
+        .error-div {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
     }
 }
 

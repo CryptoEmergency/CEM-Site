@@ -252,7 +252,7 @@
         .c-notification {
 
             &__link {
-                filter: invert(61%) sepia(60%) saturate(485%) hue-rotate(94deg) brightness(94%) contrast(96%);
+                filter: invert(61%) sepia(60%) saturate(485%) hue-rotate(94deg) brightness(94%) contrast(96%) !important;
             }
         }
     }
@@ -1016,7 +1016,21 @@
                 }
 
                 &--chats {
-                    background: no-repeat url("../svg/profile_icon-2.svg") center / 75%;
+                    position: relative !important;
+                    padding: 0 !important;
+                    width: 48px !important;
+                    height: 48px !important;
+                    filter: none !important;
+
+                    i {
+                        display: block;
+                        width: 20px;
+                        height: 20px;
+                        padding: 14px;
+                        box-sizing: content-box;
+                        background: no-repeat url("../svg/profile_icon-2.svg") center / 75%;
+                        filter: invert(45%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%) !important;
+                    }
                 }
 
                 &--posts {
@@ -1042,6 +1056,10 @@
 
                 &--disabled {
                     filter: invert(45%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%) !important;
+
+                    &.c-userpanel__icon--chats {
+                        filter: none !important;
+                    }
                 }
             }
         }

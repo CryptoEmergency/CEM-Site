@@ -10,7 +10,7 @@ let inputImg,
     inputVideo,
     inputAudio
 
-const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic }) {
+const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, iconPhoto = false }) {
 
     return (
         <div class="c-mediabtn create_post_control_block">
@@ -32,7 +32,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                     <div class="c-mediabtn__action createPostImageCreator create_post_control_item" onclick={() => {
                         inputImg.click();
                     }}>
-                        <img class="c-mediabtn__icon" src={svg["post_photo"]} />
+                        <img class="c-mediabtn__icon" src={svg[`${iconPhoto ? iconPhoto : "post_photo"}`]} />
                         <input
                             style="display: none;"
                             class="c-mediabtn__hidefield createPostImageInput"
@@ -87,7 +87,12 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
             {
                 typeof onclickMic == "function"
                     ?
-                    <button data-page_type="posts" data-type="voiceline" class="c-mediabtn__action createPostAudioCreator create_post_control_item" onclick={onclickMic}></button>
+                    <button
+                        data-page_type="posts"
+                        data-type="voiceline"
+                        class="c-mediabtn__action createPostAudioCreator create_post_control_item"
+                        onclick={onclickMic}
+                    ></button>
                     :
                     null
             }

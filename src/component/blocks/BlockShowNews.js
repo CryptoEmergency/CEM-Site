@@ -16,6 +16,7 @@ const BlockShowNews = function ({ Static, item }) {
         ElemVisible={() => {
           fn.recordsView(item._id, "setNews")
         }}>
+      
         <h1 class="full_news_name">{item.title}</h1>
         {item.image ? <img class="full_news_image" src={`/assets/upload/news/${item.image}`} /> : null}
         {item.preview ? <p class="full_news_text mrb30">{item.preview}</p> : null}
@@ -32,6 +33,7 @@ const BlockShowNews = function ({ Static, item }) {
           <p class="full_news_date">{fn.getDateFormat(item.showDate)}</p>
         </div>
       </div>
+
       <div class="news_page_comments">
         <h2>{Variable.lang.h.modal_comment}</h2>
         <div class="c-comments__form">

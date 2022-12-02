@@ -3,10 +3,10 @@ import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import { AudioPlayerCopy } from "@component/element/index.js";
+import { fn } from '@src/functions/index.js';
 
-
-const MediaPreview = function ({ item, index, type, Static, el }) {
-  // console.log('=2f8e9a=', item)
+const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
+  // console.log('=2f8e9a=', item, type)
   if (item.type === "audio") {
     el[index] = Variable.setRef();
   }
@@ -56,6 +56,44 @@ const MediaPreview = function ({ item, index, type, Static, el }) {
                 null
             }
             {
+              type == "chat" && item.size === undefined
+                ?
+                <div
+                  class="messages_settings"
+                  title={Variable.lang.text.settings}
+                  onclick={(e) => {
+                    let author = Variable.myInfo
+                    let items = [
+                      {
+                        text: Variable.lang.button.edit,
+                        type: "edit",
+                        onclick: function (e) {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          fn.modals.ModalCropImage({
+                            file: `/assets/upload/${type}/${item.name}`,
+                            typeUpload: 'chat',
+                            arrMedia: Static.mediaInputs.value,
+                            aspectSelect: Static.mediaInputs.selectAspect,
+                            uploadCropImage: async function (cropper) {
+                              await sendPhotoChat(cropper, index)
+                              return;
+                            }
+                          })
+                        }
+                      },
+                    ]
+                    e.stopPropagation();
+                    e.preventDefault();
+                    Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
+                  }
+                  }
+                >
+                  <img class="" src={svg.settings_icon} width="20" height="20" />
+                </div>
+                : null
+            }
+            {
               item.size === undefined
                 ?
                 <div
@@ -65,7 +103,7 @@ const MediaPreview = function ({ item, index, type, Static, el }) {
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0) {
                       Static.mediaInputs.selectAspect = null;
-                      if(Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                      if (Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                         Static.isValid = false;
                       }
                     }
@@ -83,7 +121,7 @@ const MediaPreview = function ({ item, index, type, Static, el }) {
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0) {
                       Static.mediaInputs.selectAspect = null;
-                      if(Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                      if (Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                         Static.isValid = false;
                       }
                     }
@@ -149,7 +187,7 @@ const MediaPreview = function ({ item, index, type, Static, el }) {
                   style="display: block;"
                   onClick={() => {
                     Static.mediaInputs.value.splice(index, 1);
-                    if(Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                    if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;
                     }
                     initReload();
@@ -165,7 +203,7 @@ const MediaPreview = function ({ item, index, type, Static, el }) {
                       Static.mediaInputs.value[index].size;
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
-                        Static.isValid = false;
+                      Static.isValid = false;
                     }
                     initReload();
                   }}
@@ -230,7 +268,7 @@ const MediaPreview = function ({ item, index, type, Static, el }) {
                   style="display: block;"
                   onClick={() => {
                     Static.mediaInputs.value.splice(index, 1);
-                    if(Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0){
+                    if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;
                     }
                     initReload();

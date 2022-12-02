@@ -9,8 +9,21 @@ import {
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, Swiper, AudioPlayer, LazyImage, VideoPlayer, TextArea, ButtonSubmit } from '@component/element/index.js';
+import {
+    Avatar,
+    Swiper,
+    AudioPlayer,
+    LazyImage,
+    VideoPlayer,
+    TextArea,
+    ButtonSubmit,
+    MediaButton,
+    MediaPreview
+} from '@component/element/index.js';
 
+import EmojiPicker from "rm-emoji-picker";
+import 'rm-emoji-picker/dist/emojipicker.css';
+// 
 const swiperOptions = {
     loop: false,
     // autoHeight: true, 
@@ -25,7 +38,6 @@ const swiperOptions = {
 };
 
 const start = function (data, ID) {
-    // let Static = {}
     let [Static] = fn.GetParams({ data, ID })
 
     let chatsList,
@@ -38,6 +50,146 @@ const start = function (data, ID) {
     Variable.Static.FooterShow = false
     Variable.showUserMenu = false
 
+    const picker = new EmojiPicker.default();
+    const icon = document.getElementById('emoji');
+    const container = document.querySelector('.create_post_container1');
+    const editable = document.querySelector('.create_post_chapter');
+    // picker.listenOn(icon, container, editable);
+
+    const loadPhoto = async function (file, type, xhr) {
+        let dataURL;
+        let fileImg = file[0];
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            // convert image file to base64 string
+            dataURL = reader.result;
+        }, false);
+        if (fileImg) {
+            reader.readAsDataURL(fileImg);
+        }
+
+        let previewObj = {
+            src: dataURL,
+            type: "image",
+            upload: 0,
+            size: 0
+        };
+        Static.mediaInputs.show = true;
+        Static.mediaInputs.value.push(previewObj);
+        let numItem = Static.mediaInputs.value.length - 1;
+
+        let nameFile = "file.png"
+        if (fileImg.name) {
+            nameFile = fileImg.name
+        }
+        const formData = new FormData()
+        formData.append('media', fileImg, nameFile);
+
+        xhr = new XMLHttpRequest()
+        xhr.open('POST', `/upload/${type}/`)
+        xhr.onload = async function () {
+            Static.mediaInputs.show = true;
+            if (!this.response) {
+                return
+            }
+            let response = JSON.parse(this.response);
+            Static.mediaInputs.value[numItem] = {
+                aspect: Static.mediaInputs.selectAspect,
+                type: response.mimetype.split("/")[0],
+                name: response.name
+            }
+            Static.isValid = true;
+            initReload();
+            // console.log('=af134a=', response)
+        }
+        xhr.upload.onprogress = async function (e) {
+            let contentLength;
+            if (e.lengthComputable) {
+                contentLength = e.total;
+            } else {
+                contentLength = parseInt(
+                    e.target.getResponseHeader(
+                        "x-decompressed-content-length"
+                    ),
+                    10
+                );
+            }
+
+            if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                Static.mediaInputs.value.splice(numItem, 1);
+                initReload()
+                return
+            }
+            Static.mediaInputs.value[numItem].upload = e.loaded
+            Static.mediaInputs.value[numItem].size = contentLength;
+            initReload();
+        }
+
+        xhr.send(formData)
+    };
+
+    const sendPhoto = async function (crooper, index) {
+        if (!crooper) {
+            return
+        }
+        let canvas;
+        canvas = crooper.getCroppedCanvas({});
+        let previewObj = {
+            src: canvas.toDataURL(),
+            type: "image",
+            upload: 0,
+            size: 0
+        };
+        Static.mediaInputs.show = true;
+        Static.mediaInputs.value[index] = previewObj;
+        initReload();
+
+        await canvas.toBlob(function (blob) {
+            fn.uploadMedia(
+                blob,
+                "chat",
+                async function () {
+                    Static.mediaInputs.show = true;
+                    if (!this.response) {
+                        return
+                    }
+                    let response = JSON.parse(this.response);
+                    Static.mediaInputs.value[index] = {
+                        aspect: Static.mediaInputs.selectAspect,
+                        type: response.mimetype.split("/")[0],
+                        name: response.name
+                    }
+                    Static.isValid = true;
+                    initReload();
+                },
+                async function (e) {
+                    let contentLength;
+                    if (e.lengthComputable) {
+                        contentLength = e.total;
+                    } else {
+                        contentLength = parseInt(
+                            e.target.getResponseHeader(
+                                "x-decompressed-content-length"
+                            ),
+                            10
+                        );
+                    }
+
+                    if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
+                        Static.mediaInputs.value.splice(index, 1);
+                        initReload()
+                        return
+                    }
+                    Static.mediaInputs.value[index].upload = e.loaded
+                    Static.mediaInputs.value[index].size = contentLength;
+                    initReload();
+                }
+            );
+            initReload();
+            Variable.DelModals("ModalCropImage");
+        });
+        return
+    }
 
     init(
         async () => {
@@ -45,6 +197,21 @@ const start = function (data, ID) {
             Static.message = {
                 rows: 1,
                 adaptive: 3,
+            }
+
+            Static.textInputs = {
+                value: "",
+                show: false,
+            }
+
+            Static.audioInputs = {
+                value: [],
+                show: false,
+            }
+
+            Static.mediaInputs = {
+                value: [],
+                show: false,
             }
 
             chatsList = await sendApi.send({
@@ -94,7 +261,7 @@ const start = function (data, ID) {
                 })
                 if (!existingChat) {
                     activeUser = Variable.Static.startChatsID
-                    console.log(chatsList)
+                    // console.log(chatsList)
                     chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
                     messageList = {
                         list_records: [
@@ -110,7 +277,7 @@ const start = function (data, ID) {
             Variable.Static.startChatsID = null
         },
         () => {
-            console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
+            // console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
 
             if (messageList) {
                 if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {
@@ -131,6 +298,13 @@ const start = function (data, ID) {
                         ]}
                     >
                         <div class="chats_search">
+                            <form id="chatsSearchForm">
+                                <a class="goBackFromChatLink" href="/" onclick={(e) => fn.siteLink(e)}>
+                                    <img class="goBackFromChat" src={svg.chats_back} />
+                                </a>
+                                <input type="text" disabled />
+                                <img src={svg.chats_search_icon} />
+                            </form>
                         </div>
                         <div class="messages_list">
 
@@ -178,7 +352,7 @@ const start = function (data, ID) {
                                                             "users": 1
                                                         }
                                                     });
-                                                    console.log('=b604cf=', messageList)
+                                                    // console.log('=b604cf=', messageList)
                                                     initReload()
                                                 }}
                                             >
@@ -211,7 +385,7 @@ const start = function (data, ID) {
                             }}
                         </div>
                     </div>
-                    <div class="messages_dialog" style={ activeChat ? "height: 100%; overflow-y: hidden; display: block;" : "height: 100%; overflow-y: hidden;" }>
+                    <div class="messages_dialog" style={activeChat ? "height: 100%; overflow-y: hidden; display: block;" : "height: 100%; overflow-y: hidden;"}>
                         {() => {
                             if (activeUser) {
                                 return (
@@ -311,18 +485,53 @@ const start = function (data, ID) {
                                                 className="text1 create_post_chapter"
                                             />
 
+                                            {/* <div id="emoji">@</div> */}
+
+                                            <MediaButton
+                                                onclickPhoto={function () {
+                                                    if (this.files.length == 0) {
+                                                        return;
+                                                    }
+
+                                                    loadPhoto(this.files, "chat");
+
+                                                    // fn.modals.ModalCropImage({
+                                                    //     file: this.files[0],
+                                                    //     typeUpload: 'chat',
+                                                    //     arrMedia: Static.mediaInputs.value,
+                                                    //     aspectSelect: Static.mediaInputs.selectAspect,
+                                                    //     uploadCropImage: async function (cropper) {
+                                                    //         await sendPhoto(cropper)
+                                                    //         return;
+                                                    //     }
+                                                    // })
+                                                }}
+                                                onclickMic={function () {
+                                                    alert("onclicMic")
+                                                }}
+                                                iconPhoto={"message_camera"}
+                                            />
+
                                             <ButtonSubmit
                                                 text={<img class="c-comments__icon" src={svg["send_message"]} />}
                                                 className="c-comments__send button-container-preview"
                                                 onclick={async (tmp, el) => {
-                                                    if (!Static.message.el.value.trim().length) {
+                                                    if (!Static.message.el.value.trim().length && Static.mediaInputs.value.length == 0) {
                                                         return
                                                     }
-                                                    let text = Static.message.el.value.trim()
+                                                    let text, media = [];
+                                                    if (Static.message.el.value.trim().length) {
+                                                        text = Static.message.el.value.trim()
+                                                    }
+                                                    if (Static.mediaInputs.value.length != 0) {
+                                                        Static.mediaInputs.value.forEach((file) => {
+                                                            media.push(file)
+                                                        })
+                                                    }
                                                     // let data = { value: { users: activeUser._id, message: { text } } }
                                                     // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: activeUser._id, text })
-                                                    console.log('=6befba=', response)
+                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: activeUser._id, text, media })
+                                                    // console.log('=6befba=', response)
                                                     if (response.status === "ok") {
                                                         Static.message.el.value = ""
                                                         if (Static.message.adaptive) {
@@ -336,7 +545,7 @@ const start = function (data, ID) {
                                                             } else {
                                                                 messageList.list_records[0].message = [newRes]
                                                             }
-                                                            console.log('=46ae17=', chatsList)
+                                                            // console.log('=46ae17=', chatsList)
 
                                                             if (chatsList && chatsList.list_records) {
                                                                 chatsList.list_records.map((item) => {
@@ -346,6 +555,7 @@ const start = function (data, ID) {
                                                                     }
                                                                 })
                                                             }
+                                                            Static.mediaInputs.value = [];
                                                             initReload();
                                                         }
                                                     } else {
@@ -354,6 +564,29 @@ const start = function (data, ID) {
                                                 }}
                                             />
                                         </div>
+                                        {
+                                            Static.mediaInputs.show && Static.mediaInputs.value.length
+                                                ?
+                                                <div class="create_post_chapter createPostImage">
+                                                    {
+                                                        Static.mediaInputs.value.map((item, index) => {
+                                                            if (item.type != "audio") {
+                                                                return (
+                                                                    <MediaPreview
+                                                                        item={item}
+                                                                        index={index}
+                                                                        type="chat"
+                                                                        Static={Static}
+                                                                        sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
+                                                                    />
+                                                                );
+                                                            }
+                                                        })
+                                                    }
+                                                </div>
+                                                :
+                                                null
+                                        }
                                     </section>
                                 )
                             } else {
@@ -368,7 +601,7 @@ const start = function (data, ID) {
                     <img
                         class="messages_goback"
                         src={svg.chats_back}
-                        onClick={ () => { activeChat = null; initReload();} }
+                        onClick={() => { activeChat = null; initReload(); }}
                     />
                 </div>
             )

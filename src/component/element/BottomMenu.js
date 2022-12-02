@@ -15,6 +15,7 @@ const findUnread = function (arr) {
 };
 
 const BottomMenu = function () {
+    // console.log('=b85f6c=', Variable)
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -36,6 +37,7 @@ const BottomMenu = function () {
                             href="/user/chats/"
                             class={["c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--disabled c-userpanel__icon--mobile_visible", (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : null]}
                             onclick={fn.siteLink}>
+                            <i></i>
                             {Variable.myInfo && Variable.myInfo.unreadMessage ? <div class="messages_notifications_counter">{Variable.myInfo.unreadMessage}</div> : null}
                         </a>
                         :
@@ -65,7 +67,10 @@ const BottomMenu = function () {
                 {
                     Variable.auth
                         ?
-                        <div class={["c-notification", (findUnread(Variable.notifyQuestions) || findUnread(Variable.notifyAwards) || findUnread(Variable.notifySystem)) ? "c-notification--active" : null]}>
+                        <div class={[
+                            "c-notification",
+                            (findUnread(Variable.myInfo.notifyQuestions) || findUnread(Variable.myInfo.notifyAwards) || findUnread(Variable.myInfo.notifySystem)) ? "c-notification--active" : null
+                        ]}>
                             <a
                                 class="c-userpanel__icon c-userpanel__icon--notify c-userpanel__icon--mobile_visible c-notification__link"
                                 onClick={(e) => { e.stopPropagation(); fn.modals.ModalNotify(); }}>

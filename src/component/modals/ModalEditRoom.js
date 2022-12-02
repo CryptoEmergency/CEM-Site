@@ -12,7 +12,7 @@ import {
 
 const ModalEditRoom = function (data, ID) {
 
-console.log(data.userrooms)
+
   let [Static] = fn.GetParams({ data, ID })
 
   let valid
@@ -61,7 +61,8 @@ console.log(data.userrooms)
   //инпут описание
   Static.Title = {
     label: "Описание",
-    value: data.userrooms.settingsroom.description
+    value: data.userrooms.settingsroom.description,
+    
   }
   //инпут язык
   Static.Lang = {
@@ -143,6 +144,10 @@ console.log(data.userrooms)
 
   }, () => {
 
+
+
+
+
     let active
     if (Static.label.valid) {
 
@@ -174,7 +179,7 @@ console.log(data.userrooms)
         <section class="c-modal__dialog">
           <header class="c-modal__header">
             <div class="complain_modal">
-              <h4>Создать комнату</h4>
+              <h4>Редактировать комнату</h4>
               <button
                 class="c-modal__close"
                 onclick={() => {
@@ -196,6 +201,7 @@ console.log(data.userrooms)
                 <TextArea
                   className="text1 create_post_chapter"
                   Static={Static.Title}
+               
                 />
               </div>
               <br />
@@ -228,6 +234,7 @@ console.log(data.userrooms)
                       initReload()
                     }}
                     type="checkbox"
+                    checked={Static.Private.checked ? true : false }
 
                   />
                   <label class="checkbox__label">
@@ -273,7 +280,7 @@ console.log(data.userrooms)
             
               <div class="userMainBlock">
                         {() => {
-                          //  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
+                            //return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
                         }}
                     </div>
               <MediaButton
@@ -312,15 +319,16 @@ console.log(data.userrooms)
                     let images = ""
                     let languages = Static.Lang.code
                     let country = Static.Country.code
-                    let _id = data._id
+                    let _id = data.userrooms._id
                     // let system = false
                     let request = {_id, status, visible, confirmuser, title, description, images, languages, country }
-                   
+       
                     let requier = await fn.restApi.setUserRoom.edit(request)
-              
+                    
                     if (requier.status == "ok") {
                     Static.callback(requier)
                       fn.modals.close(ID)
+                   
                     }
                   }
                 }

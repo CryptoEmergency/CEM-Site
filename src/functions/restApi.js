@@ -464,18 +464,18 @@ restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 }
 
-restApi.getUserRoom = async function ({cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
+restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filter = {}, select = {}, sort = { showDate: -1 }, firstRecord }) {
     let data = {
         action: "getUserRoom",
         short: true,
-        cache:cache,
+        cache: cache,
         name,
         limit,
         offset,
         filter: filter,
         select: select,
         sort,
-   
+
     }
 
     let response = await sendApi.send(data);
@@ -755,11 +755,13 @@ restApi.setLottery.join = async function ({ nickname, telegram, twitter, instagr
 
 restApi.setUserChats = {}
 
-restApi.setUserChats.sendMessage = async function ({ users, text, noAlert = true }) {
+restApi.setUserChats.sendMessage = async function ({ users, text, media, noAlert = true }) {
     let data = {
-        value: { users, message: { text } }
+        value: { users, message: { text, media } }
     }
+    console.log('=805a2d=', data)
     const response = await sendApi.create("setUserChats", data);
+    console.log('=4e499a=', response)
     return checkSetAnswer(response, noAlert)
 }
 
@@ -901,7 +903,7 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
     return checkSetAnswer(response)
 }
 
-restApi.setUserRoom.edit = async function ({_id, status, visible, confirmuser, title, description, images, languages, country, system = false }) {
+restApi.setUserRoom.edit = async function ({ _id, status, visible, confirmuser, title, description, images, languages, country, system = false }) {
     let data = {
         _id: _id,
         value: {
@@ -916,9 +918,9 @@ restApi.setUserRoom.edit = async function ({_id, status, visible, confirmuser, t
             languages: languages,
             country: country,
             system: system
-            
+
         },
-        edit:true
+        edit: true
     }
 
     const response = await sendApi.create("setUserRoom", data);
@@ -929,20 +931,21 @@ restApi.setUserRoom.edit = async function ({_id, status, visible, confirmuser, t
 
 restApi.setUserRoomMessage = {}
 
-restApi.setUserRoomMessage.sendMessage = async function ({ text,_id }) {
+restApi.setUserRoomMessage.sendMessage = async function ({ text, _id }) {
     let data = {
-        value:{
-        message:{
-            text: text,
-          /*  media:[{
-                type: {type: String},
-                name: {type: String},
-                active:{type: Boolean, default: true}
-            }]*/
-        }},
+        value: {
+            message: {
+                text: text,
+                /*  media:[{
+                      type: {type: String},
+                      name: {type: String},
+                      active:{type: Boolean, default: true}
+                  }]*/
+            }
+        },
         _id
-        }
-  
+    }
+
 
     const response = await sendApi.create("setUserRoom", data);
     return checkSetAnswer(response)
@@ -987,12 +990,12 @@ restApi.setComments.delete = async function ({ _id }) {
 
 
 
-restApi.userRoomCode = async function ({ id,value }) {
+restApi.userRoomCode = async function ({ id, value }) {
     let data = {
-        value:{confirmuser:value},
-        _id:id
-        }
-  
+        value: { confirmuser: value },
+        _id: id
+    }
+
 
     const response = await sendApi.create("userRoomCode", data);
     return checkSetAnswer(response)
@@ -1001,7 +1004,7 @@ restApi.userRoomCode = async function ({ id,value }) {
 
 restApi.doRole = {}
 
-restApi.doRole.deletePost = async function ({_id}) {
+restApi.doRole.deletePost = async function ({ _id }) {
     let data = {
         roleAction: "setPost",
         _id: _id,
@@ -1014,7 +1017,7 @@ restApi.doRole.deletePost = async function ({_id}) {
     return checkSetAnswer(response)
 }
 
-restApi.doRole.deleteComment = async function ({_id}) {
+restApi.doRole.deleteComment = async function ({ _id }) {
     let data = {
         roleAction: "setComments",
         _id: _id,

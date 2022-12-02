@@ -236,3 +236,10 @@
 .c-images .swiper-viewImg .swiper-slide-active {
   height: auto
 }
+
+.pl:empty:before {
+  content:attr(data-placeholder);
+  color:gray;
+  cursor:pointer;
+}
+
