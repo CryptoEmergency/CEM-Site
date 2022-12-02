@@ -199,6 +199,16 @@ const start = function (data, ID) {
                 adaptive: 3,
             }
 
+            Static.textInputs = {
+                value: "",
+                show: false,
+            }
+
+            Static.audioInputs = {
+                value: [],
+                show: false,
+            }
+
             Static.mediaInputs = {
                 value: [],
                 show: false,
