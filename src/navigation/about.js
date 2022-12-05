@@ -23,7 +23,11 @@ const start = function (data, ID) {
                 class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}
               />
-              <p>{Variable.lang.p.aboutPreview}</p>
+              <h2>Crypto Emergency</h2>
+              <p style="font-size: 22px; font-weight: 600">{Variable.lang.p.aboutObjectiveTitle}</p>
+              <p>{Variable.lang.p.aboutObjective}</p>
+              <p style="font-size: 22px; font-weight: 600">{Variable.lang.p.aboutСonceptTitle}</p>
+              <p>{Variable.lang.p.aboutСoncept}</p>
             </div>
             <div class="c-whowe__bg"></div>
           </div>

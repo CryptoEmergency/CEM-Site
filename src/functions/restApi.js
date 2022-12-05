@@ -1017,6 +1017,19 @@ restApi.doRole.deletePost = async function ({ _id }) {
     return checkSetAnswer(response)
 }
 
+restApi.doRole.deleteQuestion = async function ({ _id }) {
+    let data = {
+        roleAction: "setQuestion",
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+
+    const response = await sendApi.create("doRole", data);
+    return checkSetAnswer(response)
+}
+
 restApi.doRole.deleteComment = async function ({ _id }) {
     let data = {
         roleAction: "setComments",
