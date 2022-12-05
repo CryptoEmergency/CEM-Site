@@ -21,8 +21,8 @@ import {
     MediaPreview
 } from '@component/element/index.js';
 
-import EmojiPicker from "rm-emoji-picker";
-import 'rm-emoji-picker/dist/emojipicker.css';
+// import EmojiPicker from "rm-emoji-picker";
+// import 'rm-emoji-picker/dist/emojipicker.css';
 // 
 const swiperOptions = {
     loop: false,
@@ -50,10 +50,10 @@ const start = function (data, ID) {
     Variable.Static.FooterShow = false
     Variable.showUserMenu = false
 
-    const picker = new EmojiPicker.default();
-    const icon = document.getElementById('emoji');
-    const container = document.querySelector('.create_post_container1');
-    const editable = document.querySelector('.create_post_chapter');
+    // const picker = new EmojiPicker.default();
+    // const icon = document.getElementById('emoji');
+    // const container = document.querySelector('.create_post_container1');
+    // const editable = document.querySelector('.create_post_chapter');
     // picker.listenOn(icon, container, editable);
 
     const loadPhoto = async function (file, type, xhr) {

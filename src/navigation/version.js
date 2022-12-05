@@ -6,12 +6,12 @@ import {
     initReload
 } from "@betarost/cemjs";
 // poydet data-action
-import EmojiPicker from "rm-emoji-picker";
-console.log('=8eafb8=', EmojiPicker)
-console.log('=8eafb8=', new EmojiPicker.default())
-const picker = new EmojiPicker.default();
-const emoji_text = EmojiPicker.default.render('lol! :laughing:')
-console.log(emoji_text)
+// import EmojiPicker from "rm-emoji-picker";
+// console.log('=8eafb8=', EmojiPicker)
+// console.log('=8eafb8=', new EmojiPicker.default())
+// const picker = new EmojiPicker.default();
+// const emoji_text = EmojiPicker.default.render('lol! :laughing:')
+// console.log(emoji_text)
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 let tmp = 0
