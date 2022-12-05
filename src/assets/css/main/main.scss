@@ -262,7 +262,7 @@ textarea {
             // background-size: cover;
           }
     
-          .swiper-slide img {
+          .swiper-slide img:not(.playpause) {
             display: block;
             width: 100%;
           }
@@ -651,6 +651,7 @@ textarea {
 .audio_container {
     position: relative;
     width: 100%;
+    z-index: 2000;
 
     .controls {
         background: #232733;
