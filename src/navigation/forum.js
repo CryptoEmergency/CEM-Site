@@ -566,6 +566,25 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Образовательная платформа, где участники могут изучать NFT, современное искусство, живопись, технологию токенизации своих навыков и услуг с целью создавать и получать за своё творчество вознаграждение.</p>
                                         </div>
                                     </a>
+
+                                    <a target="_blank" rel="nofollow nooopener" href="https://zerogravity.foundation/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_19']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Децентрализованный венчурный фонд. Международный агрегатор по цифровым, инновационным и блокчейн технологиям.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://zh.cash/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_20']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">ZHCHAIN - Блокчейн платформа 5-го поколения!</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://t.me/zhcashcrypto/1036" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_21']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Видеосервис на блокчейне с уникальной реферальной программой!</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -802,9 +821,13 @@ const start = function (data, ID) {
                                             <p>Директор по развитию blockchain24.pro</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_26']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Евгений Мусиенко</p>
+                                            <p>Специалист по инвестициям</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
@@ -1030,10 +1053,26 @@ const start = function (data, ID) {
                                     <a style="display: block!important; background: #EDEDED"
                                         target="_blank"
                                         rel="nofollow nooopener"
-                                        href="http://www.zhcashcrypto.site"
+                                        href="https://zh.cash/"
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_24"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://t.me/zhcashcrypto/1036"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_26"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://bloknot-novorossiysk.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_25"]} />
                                     </a>
                                 </div>
                                 
