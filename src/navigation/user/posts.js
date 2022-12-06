@@ -42,7 +42,9 @@ const sendPost = async (e, Static) => {
   let tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
 
   if (tmpRes.status === "ok") {
-    initGo();
+    Static.posts.list_records.unshift(tmpRes.list_records[0])
+    fn.initData.posts(Static)
+    initReload()
   } else {
     Variable.SetModals(
       {
@@ -521,6 +523,7 @@ const start = function (data, ID) {
                 type="button"
                 //   onClick={sendQuestion}
                 data-href={"/lenta-users/show/123456789"}
+                disabled={!Static.isValid}
                 onclick={(e) => {
                   console.log('=cf4a37=', Static)
                   let previewPost = {}
@@ -566,6 +569,7 @@ const start = function (data, ID) {
                   !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 type="button"
+                disabled={!Static.isValid}
                 onClick={(e) => sendPost(e, Static)}
               >
                 <span class="c-button__text">
@@ -577,7 +581,7 @@ const start = function (data, ID) {
             <div class="c-userpostcreate__myposts my_posts">
               {Variable.lang.h.posts_my}
               {/* {{> userPost}} */}
-              {/* {
+              {
                 !Static.posts || !Static.posts.list_records.length
                   ?
                   <div class="user_news_block">
@@ -586,11 +590,12 @@ const start = function (data, ID) {
                   :
                   <div class="user_news_block">
                     {
-                      Static.posts.list_records.map((item) => {
+                      Static.posts.list_records.map((item, index) => {
                         return (
                           <BlockLentaUsers
                             Static={Static}
                             item={item}
+                            index={index}
                             ElemVisible={() => {
                               fn.recordsView(item._id, "setPost")
                             }}
@@ -599,7 +604,7 @@ const start = function (data, ID) {
                       })
                     }
                   </div>
-              } */}
+              }
             </div>
           </form>
         </div>

@@ -29,15 +29,15 @@ const makeSwiperOptions = function (Static, index) {
     spaceBetween: 20
   };
 
-  if (typeof index != "undefined") {
+  // if (typeof index != "undefined") {
     swiperOptions.on = {
       slideChange: function () {
-        console.log('swiper slide change ***');
-        // console.log('=8d7c32=', this.activeIndex, Static.elNumberSwiper[index])
+        // console.log('swiper slide change ***');
+        // console.log('=8d7c32=', index, Static.elNumberSwiper[index])
         Static.elNumberSwiper[index].innerText = this.activeIndex + 1
       }
     }
-  }
+  // }
 
   return swiperOptions
 }

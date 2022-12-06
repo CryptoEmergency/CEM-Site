@@ -390,6 +390,7 @@ itemsMenu.blog = function (Static, item) {
 }
 
 itemsMenu.question = function (Static, item) {
+    console.log(item)
     const items =
         [
             {
@@ -448,7 +449,6 @@ itemsMenu.question = function (Static, item) {
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
                         text: Variable.lang.p.toBlackListConfirm,
                         button: Variable.lang.button.yes
@@ -467,9 +467,8 @@ itemsMenu.question = function (Static, item) {
                         action: async () => {
                             let response = await fn.restApi.setQuestions.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
-                        text: Variable.lang.p.deletePostConfirm,
+                        text: Variable.lang.p.deleteQuestionConfirm,
                         button: Variable.lang.button.yes
                     })
                 }
@@ -486,7 +485,6 @@ itemsMenu.question = function (Static, item) {
                         action: async () => {
                             let response = await fn.restApi.doRole.deleteQuestion({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
                         text: Variable.lang.p.deletePostConfirm,
                         button: Variable.lang.button.yes
@@ -495,9 +493,165 @@ itemsMenu.question = function (Static, item) {
             },
         ]
 
+        if(!item.close){
+            items.push({
+                text: Variable.lang.select.closeQuestion,
+                type: "delete",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setQuestions.close({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                        },
+                        text: Variable.lang.p.closeQuestionConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            })
+        }
+    return items
+}
+
+itemsMenu.answer = function (Static, item, index) {
+    console.log(Static, item)
+    const items =
+        [
+            {
+                text: Variable.lang.select.share,
+                type: "share",
+                onclick: async () => {
+                    try {
+                        if (navigator.share) {
+                            await navigator.share({
+                                url: window.location.origin + "/question/show/" + item.questionId._id,
+                            });
+                        }
+                    } catch (err) {
+                        // Вывести ошибку
+                        console.error("Share", err)
+                    }
+                }
+            },
+            {
+                text: Variable.lang.button.giveAnswer,
+                type: "share",
+                onlyAuth: true,
+                onclick: async () => {
+                    Object.keys(Static.mainComment.elShowInput).map((key) => {
+                        if (index != key && Static.mainComment.elShowInput[key].dataset.show) {
+                            Static.mainComment.elShowInput[key].removeAttribute("data-show")
+                            Static.mainComment.elShowInput[key].style = "display:none;"
+                        }
+                    });
+                    Static.mainComment.elShowInput[index].dataset.show = true
+                    Static.mainComment.elShowInput[index].style = "display:flex;"
+                    Static.mainComment.el[index].focus();
+
+                    return
+                }
+            },
+            {
+                text: Variable.lang.select.complainAnswer,
+                type: "complainItem",
+                // onlyAuth: true,
+
+                color: "red",
+                onclick: async () => {
+                    modals.ModalComplainComment({
+                        id: item._id,
+                        action: "setAnswers"
+                    })
+                }
+
+            },
+            {
+                text: Variable.lang.select.complainUser,
+                type: "complainUser",
+                // onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    // Переработать модалку
+                    modals.ModalComplainComment({
+                        id: item.author._id,
+                        action: "setUsers"
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.blackList,
+                type: "blackList",
+                onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
+                            Variable.DelModals("ModalConfirmAction")
+                        },
+                        text: Variable.lang.p.toBlackListConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.delete,
+                type: "delete",
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setAnswers.delete({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                        },
+                        text: Variable.lang.p.deleteQuestionConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+            {
+                text: Variable.lang.select.delete,
+                type: "deleteRole",
+                color: "red",
+                onclick: async () => {
+                    if(Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id){
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.doRole.deleteAnswer({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+
+                        },
+                        text: Variable.lang.p.deletePostConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+        ]
+
+        if(!item.questionId.close && item.questionId.author._id == Variable.myInfo._id){
+            items.push({
+                text: Variable.lang.select.selectBest,
+                type: "share",
+                onlyAuth: true,
+                onclick: async () => {
+                    let response = await fn.restApi.setQuestions.best({ _id: item.questionId._id, answerID: item._id })
+                }
+            },)
+        }
 
     return items
 }
+
 
 itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
     console.log(Static, item, action, Variable, mainId)

@@ -580,6 +580,32 @@ restApi.setAnswers.comment = async function ({ _id, text, mainId, quoteId, noAle
     const response = await sendApi.create("setAnswers", data);
     return checkSetAnswer(response, noAlert)
 }
+
+restApi.setAnswers.delete = async function ({ _id }) {
+    let data = {
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setAnswers", data);
+    console.log(response)
+    return checkSetAnswer(response)
+}
+
+restApi.setAnswers.complain = async function ({ _id, complain }) {
+    let data = {
+        _id,
+        value: {
+            complain
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setAnswers", data);
+    console.log(response)
+    return checkSetAnswer(response)
+}
 // Запросы на посты
 restApi.setPost = {}
 
@@ -847,6 +873,18 @@ restApi.setNews.view = async function ({ _id, noAlert = true }) {
 
 
 restApi.setQuestions = {}
+
+restApi.setQuestions.best = async function ({ _id, answerID }) {
+    let data = {
+        _id,
+        value: {
+            bestId: answerID
+        }
+    }
+    const response = await sendApi.create("setQuestion", data);
+    return checkSetAnswer(response)
+}
+
 restApi.setQuestions.complain = async function ({ _id, complain }) {
     let data = {
         _id,
@@ -869,11 +907,22 @@ restApi.setQuestions.view = async function ({ _id, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 
-restApi.setQuestions.delete = async function ({ _id }) {
+restApi.setQuestions.delete = async function ({ _id, noAlert = true }) {
     let data = {
         _id: _id,
         value: {
             active: false
+        }
+    }
+    const response = await sendApi.create("setQuestions", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setQuestions.close = async function ({ _id, noAlert = true }) {
+    let data = {
+        _id: _id,
+        value: {
+            close: true
         }
     }
     const response = await sendApi.create("setQuestions", data);
@@ -1007,6 +1056,19 @@ restApi.doRole = {}
 restApi.doRole.deletePost = async function ({ _id }) {
     let data = {
         roleAction: "setPost",
+        _id: _id,
+        value: {
+            active: false
+        }
+    }
+
+    const response = await sendApi.create("doRole", data);
+    return checkSetAnswer(response)
+}
+
+restApi.doRole.deleteAnswer = async function ({ _id }) {
+    let data = {
+        roleAction: "setAnswer",
         _id: _id,
         value: {
             active: false

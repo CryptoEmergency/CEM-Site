@@ -1053,7 +1053,7 @@ const start = function (data, ID) {
                                     <a style="display: block!important; background: #EDEDED"
                                         target="_blank"
                                         rel="nofollow nooopener"
-                                        href="https://zh.cash/"
+                                        href="http://www.zhcashcrypto.site"
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_24"]} />

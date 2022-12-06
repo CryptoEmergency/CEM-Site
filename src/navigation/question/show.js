@@ -160,7 +160,7 @@ const start = function (data, ID) {
                               }
                               <div class="comment_icons">
                                 <Evaluation Static={Static} item={item} index={index} action="Answers" />
-                                {/* <ItemsMenu author={item.author} items={bottomMenuitems} /> */}
+                                <ItemsMenu author={item.author} items={fn.itemsMenu.answer(Static, item, index)} />
                               </div>
                               <div class="c-comments__form"
                                 style="display:none;"
