@@ -22,11 +22,13 @@ const ModalConfirmAction = function ({ action, text, button }, ID) {
             </header>
             <div class="c-modal__body">
               <div class="modal_doRole">
-                  <p>{text}</p>
+                  <h5>{text}</h5>
                   <div
                     onclick={action}
                   >
-                    {button}
+                    <button class="c-button c-button--gradient2">
+                      <span class="c-button__text">{button}</span>
+                    </button>
                   </div>
               </div>
             </div>

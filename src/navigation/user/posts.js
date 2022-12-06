@@ -42,7 +42,9 @@ const sendPost = async (e, Static) => {
   let tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
 
   if (tmpRes.status === "ok") {
-    initGo();
+    Static.posts.list_records.unshift(tmpRes.list_records[0])
+    fn.initData.posts(Static)
+    initReload()
   } else {
     Variable.SetModals(
       {
