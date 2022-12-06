@@ -8,6 +8,10 @@ import svg from "@assets/svg/index.js";
 import { LentaMedia, Evaluation, Avatar, ItemsMenu } from "@component/element/index.js";
 
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {
+  let mediaFiles = item.media.filter((item) => {
+    return typeof item == 'object'
+  });
+  // console.log('=41fe83=',mediaFiles)
   return (
     <div
       class="c-fullnews__item user_news_item"
@@ -17,12 +21,12 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
         <div class="c-lentaitem__header">
           <Avatar author={item.author} parent={"lenta"} nickName={item.author.nickname} />
           {
-            item.media.length > 1
+            mediaFiles.length > 1
               ?
               <div class="c-lentaitem__counter">
                 <span Element={($el) => { Static.elNumberSwiper[index] = $el }}>1</span>
                 &ensp;/&ensp;
-                <span>{item.media.length ? item.media.length : null}</span>
+                <span>{mediaFiles.length ? mediaFiles.length : null}</span>
               </div>
               :
               null
@@ -43,12 +47,12 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
         <div class="comment_body">
           <LentaMedia
             Static={Static}
-            items={item.media}
+            items={mediaFiles}
             path="posts"
             index={index}
           // changeToogle={changeToogle}
           />
-          <div class={!item.media.length && item.text.length < 250 ? "user_post_text_background" : null}>
+          <div class={!mediaFiles.length && item.text.length < 250 ? "user_post_text_background" : null}>
             <span class="comment_text"
               data-href={"/lenta-users/show/" + item._id}
               onclick={(e) => {
@@ -61,7 +65,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                 if (Static.showPage) {
                   return fn.editText(item.text, { clear: true, paragraph: true, html: true })
                 }
-                if (!item.media.length && item.text.length < 250) {
+                if (!mediaFiles.length && item.text.length < 250) {
                   return fn.editText(item.text, { clear: true, paragraph: true, html: true })
                 } else if (item.text.length) {
                   return (
@@ -70,7 +74,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                         Static.elShowTextShort[item._id] = $el
                       }}>
                         {
-                          item.media.length
+                          mediaFiles.length
                             ?
                             fn.editText(item.text, { slice: 50, clear: true, html: true })
                             :
@@ -78,7 +82,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                         }
                       </span>
                       {
-                        item.media.length
+                        mediaFiles.length
                           ?
                           item.text.length > 50
                             ?
