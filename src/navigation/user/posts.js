@@ -322,7 +322,7 @@ const start = function (data, ID) {
     async () => {
       fn.initData.posts(Static)
 
-      // console.log('=cb696d=', Static)
+      console.log('=cb696d=', Static)
       // console.log('=0bb638=', Variable)
 
       if (Static.userInfo._id == Variable.myInfo._id) {
@@ -596,6 +596,7 @@ const start = function (data, ID) {
                             Static={Static}
                             item={item}
                             index={index}
+                            changeTextPost={(e) => changeTextPost(e, Static)}
                             ElemVisible={() => {
                               fn.recordsView(item._id, "setPost")
                             }}
