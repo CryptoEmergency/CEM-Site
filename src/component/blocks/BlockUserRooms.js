@@ -474,7 +474,7 @@ const BlockUserRooms = async function ({ Static }) {
     <div class="c-rooms c-container">
 
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
-        <ul class="c-chats__togglers">
+        <ul style="display:none" class="c-chats__togglers">
           {
 
             //мапим системные комнаты
