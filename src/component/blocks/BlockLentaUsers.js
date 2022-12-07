@@ -7,11 +7,10 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { LentaMedia, Evaluation, Avatar, ItemsMenu } from "@component/element/index.js";
 
-const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index, changeTextPost }) {
+const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {
   let mediaFiles = item.media.filter((item) => {
     return typeof item == 'object'
   });
-  // console.log('=41fe83=',changeTextPost)
   return (
     <div
       class="c-fullnews__item user_news_item"
@@ -31,7 +30,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
               :
               null
           }
-          {!Static.openModals ? <div class="comment_icons"> <ItemsMenu author={item.author} items={fn.itemsMenu.lenta_users(Static, item)} changeTextPost={(e) => changeTextPost()} /> </div> : null}
+          {!Static.openModals ? <div class="comment_icons"> <ItemsMenu author={item.author} items={fn.itemsMenu.lenta_users(Static, item)} /> </div> : null}
           {
             !Static.openModals && !Static.showPage
               ?

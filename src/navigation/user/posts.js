@@ -39,7 +39,12 @@ const sendPost = async (e, Static) => {
     return false;
   }
 
-  let tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
+  let tmpRes;
+  if (Variable.dataUrl.params) {
+    tmpRes = await fn.restApi.setPost.create({ id: Static.idEditPost, text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
+  } else {
+    tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
+  }
 
   if (tmpRes.status === "ok") {
     Static.posts.list_records.unshift(tmpRes.list_records[0])
@@ -317,14 +322,55 @@ const start = function (data, ID) {
   Static.elShowTextFull = {}
   Static.elMedia = {}
   Static.elNumberSwiper = {}
+  Static.idEditPost
+  Static.startEditText = false
 
   init(
     async () => {
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
-        const postForEdit = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params }, limit: 1 })
+        const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params }, limit: 1 })
+        let postForEdit = data.list_records[0];
         console.log('=b37faa=', postForEdit)
+        let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
+        let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
+
+        Static.idEditPost = postForEdit._id;
+
+        if (postForEdit.text.length > 0) {
+          Static.textInputs = {
+            value: postForEdit.text,
+            show: true,
+          }
+          console.log('=c9259f= textInputs =', Static.textInputs)
+        }
+        if (postForEdit.media.length > 0 && imageVideoFiles.length > 0) {
+          Static.mediaInputs = {
+            value: [],
+            show: true,
+          }
+          imageVideoFiles.forEach((file) => {
+            Static.mediaInputs.value.push(file);
+          })
+        }
+
+        if (postForEdit.media.length > 0 && audioFiles.length > 0) {
+          Static.audioInputs = {
+            value: [],
+            show: true,
+          }
+          audioFiles.forEach((audio) => {
+            Static.audioInputs.value.push(audio);
+          })
+        }
+
+        Static.lang = {
+          code: postForEdit.languages.code,
+          name: postForEdit.languages.orig_name
+        }
+        Static.forFriends = postForEdit.forFriends;
+        Static.isValid = Static.textInputs.value.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
       }
 
       console.log('=cb696d=', Static)
@@ -347,6 +393,7 @@ const start = function (data, ID) {
 
       authorPosts = await fn.restApi.getPost({ cache: true, name: "MainPosts", filter: { author: Variable.myInfo._id }, sort: { showDate: -1, } })
 
+      Static.startEditText = true
     },
 
     () => {
@@ -381,11 +428,27 @@ const start = function (data, ID) {
               {
                 Static.textInputs.show
                   ?
-                  <div
-                    class="create_post_chapter create_post_main_text"
-                    contenteditable="true"
-                    oninput={(e) => changeTextPost(e, Static)}
-                  ></div>
+                  Variable.dataUrl.params
+                    ?
+                    <div
+                      class="create_post_chapter create_post_main_text"
+                      contenteditable="true"
+                      oninput={Static.startEditText ? (e) => changeTextPost(e, Static) : null}
+                    >
+                      {
+                        Static.textInputs.value && !Static.startEditText
+                          ?
+                          Static.textInputs.value
+                          :
+                          null
+                      }
+                    </div>
+                    : <div
+                      class="create_post_chapter create_post_main_text"
+                      contenteditable="true"
+                      oninput={(e) => changeTextPost(e, Static)}
+                    >
+                    </div>
                   :
                   null
               }
@@ -601,7 +664,6 @@ const start = function (data, ID) {
                             Static={Static}
                             item={item}
                             index={index}
-                            changeTextPost={(e) => changeTextPost(e, Static)}
                             ElemVisible={() => {
                               fn.recordsView(item._id, "setPost")
                             }}

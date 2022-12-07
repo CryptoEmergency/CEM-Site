@@ -823,8 +823,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
 }
 
 
-itemsMenu.lenta_users = function (Static, item, changeTextPost) {
-    console.log('=b5e7ae=', changeTextPost)
+itemsMenu.lenta_users = function (Static, item) {
     const items =
         [
             {
@@ -946,7 +945,6 @@ itemsMenu.lenta_users = function (Static, item, changeTextPost) {
                     if (data[0].text.length > 0) {
                         Static.textInputs.show = true
                         Static.textInputs.value = data[0].text;
-                        changeTextPost(e, Static)
                     }
                     if (data[0].media.length > 0) {
                         Static.mediaInputs.show = true;
