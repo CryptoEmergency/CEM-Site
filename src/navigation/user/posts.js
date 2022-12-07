@@ -322,6 +322,11 @@ const start = function (data, ID) {
     async () => {
       fn.initData.posts(Static)
 
+      if (Variable.dataUrl.params) {
+        const postForEdit = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params }, limit: 1 })
+        console.log('=b37faa=', postForEdit)
+      }
+
       console.log('=cb696d=', Static)
       // console.log('=0bb638=', Variable)
 

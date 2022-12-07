@@ -819,7 +819,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
 
 
 itemsMenu.lenta_users = function (Static, item, changeTextPost) {
-    console.log('=b5e7ae=',changeTextPost)
+    console.log('=b5e7ae=', changeTextPost)
     const items =
         [
             {
@@ -921,7 +921,8 @@ itemsMenu.lenta_users = function (Static, item, changeTextPost) {
                 text: Variable.lang.button.edit,
                 type: "edit",
                 onclick: async (e) => {
-
+                    fn.siteLink("/user/posts/" + item._id);
+                    return false
                     let response = await sendApi.send({
                         action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
                         filter: {
@@ -956,9 +957,9 @@ itemsMenu.lenta_users = function (Static, item, changeTextPost) {
                     }
                     if (data[0].text.length > 0 || Static.mediaInputs.value.length > 0) {
                         Static.isValid = true;
-                      } else {
+                    } else {
                         Static.isValid = false;
-                      }
+                    }
                     initReload()
                     console.log('=ba91a4=', Static)
                     initReload()
