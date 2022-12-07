@@ -35,11 +35,51 @@ const start = function (data, ID) {
     let blackList
     let startUP
 
+    let StartUPData
+    let Ticker
+    let Title
+    let BlNetwork
+    let TotalTOken
+    let Evaluation
+    let MarketCap
+    let Ido
+    let Price
+    let Allocation
+    let Logo
+    let WebSite
+    let Socials
+    let ShortDesc
+    let Desc
+    let RoadMap
+    let Team
+
+
+    Static.StartUPData = {}
+    Static.StartUPData.Title = ""
+    Static.StartUPData.Ticker = ""
+    Static.StartUPData.BlNetwork = ""
+    Static.StartUPData.TotalTOken = ""
+    Static.StartUPData.Evaluation = ""
+    Static.StartUPData.MarketCap = ""
+    Static.StartUPData.Ido = ""
+    Static.StartUPData.Price = ""
+    Static.StartUPData.Allocation = ""
+    Static.StartUPData.Logo = ""
+    Static.StartUPData.WebSite = ""
+    Static.StartUPData.Socials = {network:""}
+    Static.StartUPData.ShortDesc = ""
+    Static.StartUPData.Desc = ""
+    Static.StartUPData.RoadMap = ""
+    Static.StartUPData.Team = ""
+
+      
+
     let activeGroup, elSocial, elCategory, elStartup;
 
     Variable.Static.HeaderShow = true
     Variable.Static.FooterShow = true
     Variable.Static.showUserMenu = false
+
 
     const userBlackList = function () {
         let BlackListBlock
@@ -70,6 +110,9 @@ const start = function (data, ID) {
  const StartUpMenu= function(data)
  {
 
+
+   
+
 let start
 let menuItem =[{settingsPage:"startUP",itemMenu:"мой стартап",item:true},
 {settingsPage:"editstartUP",itemMenu:"Редактировать",item:true},
@@ -78,15 +121,18 @@ let menuItem =[{settingsPage:"startUP",itemMenu:"мой стартап",item:tru
 start = menuItem.map(function (key) {
 
     if(key.item === data){
+       
        return( <div
         class={[
             "settings_list_subcategory",
             settingsPage == key.settingsPage ? "settings_list_subcategory--active" : null
         ]}
         onclick={() => {
+         
             if (settingsPage == key.settingsPage) {
+         
                 Static.settingsPage = key.settingsPage
-                return
+
             }
             settingsPage = key.settingsPage
             initReload()
@@ -114,9 +160,15 @@ start = menuItem.map(function (key) {
     init(
         async () => {
             blackList = await getUserBlackList()
-            console.log(blackList)
+            
             Static.startUP = false
+            if(!Static.startUP)
+            {
+                Static.StartUPData.settings = "createstartUP"
+            }
+         
             settingsPage = "security";
+    
         },
         () => {
             return (
@@ -274,7 +326,7 @@ start = menuItem.map(function (key) {
 
                             <div style={settingsPage == 'startUP' || settingsPage == 'editstartUP' || settingsPage == 'createstartUP' ? '' : 'display: none;'} data-type="blackList" class="settings_body_item">
                                 <div class="setting_body_item_chapter">
-                                <BlockUserStartupPage Static={Static} />
+                                <BlockUserStartupPage  settingsPage={settingsPage} Static={Static} />
                                 </div>
                             </div>
                            

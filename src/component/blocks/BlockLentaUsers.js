@@ -11,7 +11,6 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
   let mediaFiles = item.media.filter((item) => {
     return typeof item == 'object'
   });
-  // console.log('=41fe83=',mediaFiles)
   return (
     <div
       class="c-fullnews__item user_news_item"

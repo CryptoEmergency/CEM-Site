@@ -623,6 +623,20 @@ restApi.setPost.create = async function ({ text, forFriends, languages, media, n
     const response = await sendApi.create("setPost", data);
     return checkSetAnswer(response, noAlert)
 }
+restApi.setPost.update = async function ({ id, text, forFriends, languages, media, noAlert }) {
+    let data = {
+        _id: id,
+        value: {
+            text: text,
+            forFriends: forFriends,
+            languages: languages,
+            media: media
+        },
+    };
+
+    const response = await sendApi.create("setPost", data);
+    return checkSetAnswer(response, noAlert)
+}
 
 // Увеличить просмотры
 restApi.setPost.view = async function ({ _id, noAlert = true }) {

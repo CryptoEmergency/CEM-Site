@@ -95,6 +95,7 @@ const securityChangeInput = function () {
 }
 
 BlockUserSettingsPage.security = function (data) {
+  
     if (!data || data.settingsPage != "security") {
         return (<></>)
     }
