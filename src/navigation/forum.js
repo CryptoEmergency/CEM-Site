@@ -1074,6 +1074,14 @@ const start = function (data, ID) {
                                     >
                                         <img src={images["forum/partner_25"]} />
                                     </a>
+                                    <a style="display: block!important; background: #C4CFE3"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://t.me/zhcashcrypto/1040"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_27"]} />
+                                    </a>
                                 </div>
                                 
                             </div>

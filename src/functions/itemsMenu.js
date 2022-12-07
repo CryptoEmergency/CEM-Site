@@ -516,7 +516,7 @@ itemsMenu.question = function (Static, item) {
 }
 
 itemsMenu.answer = function (Static, item, index) {
-    console.log(Static, item)
+    console.log(Static, item, index)
     const items =
         [
             {
@@ -533,24 +533,6 @@ itemsMenu.answer = function (Static, item, index) {
                         // Вывести ошибку
                         console.error("Share", err)
                     }
-                }
-            },
-            {
-                text: Variable.lang.button.giveAnswer,
-                type: "share",
-                onlyAuth: true,
-                onclick: async () => {
-                    Object.keys(Static.mainComment.elShowInput).map((key) => {
-                        if (index != key && Static.mainComment.elShowInput[key].dataset.show) {
-                            Static.mainComment.elShowInput[key].removeAttribute("data-show")
-                            Static.mainComment.elShowInput[key].style = "display:none;"
-                        }
-                    });
-                    Static.mainComment.elShowInput[index].dataset.show = true
-                    Static.mainComment.elShowInput[index].style = "display:flex;"
-                    Static.mainComment.el[index].focus();
-
-                    return
                 }
             },
             {
@@ -648,6 +630,29 @@ itemsMenu.answer = function (Static, item, index) {
             }
         },)
     }
+
+        if(typeof index != "undefined"){
+            items.push(
+                {
+                    text: Variable.lang.button.giveAnswer,
+                    type: "share",
+                    onlyAuth: true,
+                    onclick: async () => {
+                        Object.keys(Static.mainComment.elShowInput).map((key) => {
+                            if (index != key && Static.mainComment.elShowInput[key].dataset.show) {
+                                Static.mainComment.elShowInput[key].removeAttribute("data-show")
+                                Static.mainComment.elShowInput[key].style = "display:none;"
+                            }
+                        });
+                        Static.mainComment.elShowInput[index].dataset.show = true
+                        Static.mainComment.elShowInput[index].style = "display:flex;"
+                        Static.mainComment.el[index].focus();
+    
+                        return
+                    }
+                }
+            )
+        }
 
     return items
 }
