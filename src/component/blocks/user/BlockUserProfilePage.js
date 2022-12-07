@@ -595,12 +595,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                                 if (item.active) {
                                     return (
                                         <div data-action="yourAnswersOptional" class="your_answers_optional">
-                                            <img src={svg['points2']} />
-                                            {/* <div class="your_answers_menu dn">
-                                            <div class="your_answers_menu_inner">
-                                            <div data-action="answerAdditionallyItem" class="answer_additionally_item delete" data-answer-id="{{_id}}" data-type="answer">{Variable.lang.select.delete}</div>
-                                            </div>
-                                        </div> */}
+                                            <ItemsMenu author={item.author} items={fn.itemsMenu.answer(Static, item, undefined)} />
                                         </div>
                                     )
                                 } else {
@@ -744,14 +739,7 @@ BlockUserProfilePage.questions = function (Static, data) {
                                     } else {
                                         return (
                                             <div class="your_answers_optional">
-                                                <img src={svg['points2']} />
-                                                {/* <div class="your_answers_menu dn">
-                                                    <div class="your_answers_menu_inner">
-                                                        <a data-action="link" href={'/question/show/' + item._id}><div class="answer_additionally_item">{Variable.lang.select.selectBest}</div></a>
-                                                        <div data-action="answerAdditionallyItem" class="answer_additionally_item close" data-answer-id={item._id} data-type="question">{Variable.lang.select.closeQuestion}</div>
-                                                        <div data-action="answerAdditionallyItem" class="answer_additionally_item delete" data-answer-id={questions.list_records[key]._id} data-type="question">{Variable.lang.select.delete}</div>
-                                                    </div>
-                                                </div> */}
+                                                <ItemsMenu author={item.author} items={fn.itemsMenu.question(Static, item)} />
                                             </div>
                                         )
                                     }
