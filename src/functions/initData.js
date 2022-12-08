@@ -703,6 +703,19 @@ initData.generate = function (arrData) {
 
 
 initData.rooms = function (Static) {
+
+Static.sytemInfo = {}
+if(Variable.auth)
+{
+    Static.sytemInfo.code = Variable.myInfo.mainLanguage.code
+    Static.sytemInfo.name = Variable.myInfo.mainLanguage.orig_name
+}
+else{
+    Static.sytemInfo.code = Variable.lang.code
+    Static.sytemInfo.name = Variable.lang.lang_orig
+}
+
+   
     //Зарегистрирован или нет
     Static.Auth = Variable.auth
     //настройки языка
@@ -714,8 +727,8 @@ initData.rooms = function (Static) {
     Static.privateRoom = {}
     Static.label = {}
     Static.lang = {
-        code: Variable.myInfo.mainLanguage.code,
-        name: Variable.myInfo.mainLanguage.orig_name
+        code: Static.sytemInfo.code,
+        name: Static.sytemInfo.name
     }
 
     Static.apiFilter = {system:false}

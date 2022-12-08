@@ -10,6 +10,46 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
 
+
+
+async function chatRooms(Static,main)
+{
+  Static.chatRooms = {}
+  let arr = []
+if(main)
+{
+  await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false } })
+   Variable.ListChatUsersRooms.list_records.forEach(function(e,i){
+console.log(e)
+   if (e.author.nickname == Variable.myInfo.nickname) { 
+
+    arr.push(e)
+   }
+   })
+   Static.chatRooms.list_records = arr
+}
+else{
+  await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false } })
+  Variable.ListChatUsersRooms.list_records.forEach(function(e){
+    //перебираем массив с юзерами
+    e.users.forEach(function(u){
+     if(u._id == Variable.myInfo._id)
+     {
+      arr.push(e)
+     }
+    })
+  
+    })
+    Static.chatRooms.list_records = arr
+}
+console.log(Static.chatRooms)
+
+
+initReload()
+}
+
+
+//системные комнаты
 const Tags = function ({ Static, classActive, text, type }) {
 
   return (
@@ -458,6 +498,8 @@ const BlockUserRooms = async function ({ Static }) {
     //запускаем поиск и фильтры
     SearchRooms(Static)
     // console.log(Variable)
+
+    Static.chatRooms = Variable.ListUsersRooms
   })
 
   //если не используем фильтры
@@ -467,19 +509,20 @@ const BlockUserRooms = async function ({ Static }) {
 
   let redborder
   let edit
-
+  let roomImage
 
   return (
 
     <div class="c-rooms c-container">
 
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
-        <ul style="display:none" class="c-chats__togglers">
-          {
+        <ul  class="c-chats__togglers">
+          {/*
 
             //мапим системные комнаты
 
-            Variable.ListSystemsRooms.list_records.map(function (systemsrooms, i) {
+            Variable.ListSyst
+            emsRooms.list_records.map(function (systemsrooms, i) {
 
               return (
                 <li
@@ -497,16 +540,13 @@ const BlockUserRooms = async function ({ Static }) {
                     <div class="c-toggler__wrap">
                       <span class="c-toggler__name">{systemsrooms.languages.code}</span>
                     </div>
-                    {/* <img src={images["nft/creator-1"]} width="46" height="46" class="c-toggler__img" /> */}
-                    {/* <div class="c-toggler__delete" title="Удалить">
-                      <img src={svg.close_group} alt="" width="" height="" class="c-toggler__close" />
-                    </div> */}
+           
                   </a>
                 </li>
               )
             }
             )
-          }
+          */}
         </ul>
         <div
           class="blog_filter_language"
@@ -542,27 +582,7 @@ const BlockUserRooms = async function ({ Static }) {
         />
 */
       }
-      {
 
-        <Tags
-          Static={Static}
-          text={"ФЛУДИЛКА"}
-          classActive={Static.defaultUserRoom == "flood" ? "tag_button_active" : ""}
-          type="flood"
-
-        />
-      }
-      {
-
-        <Tags
-          Static={Static}
-          text={"CRYPTO"}
-          classActive={Static.defaultUserRoom == "crypto" ? "tag_button_active" : ""}
-          type="crypto"
-
-        />
-      }
-      {/* <hr></hr> */}
       <div class="c-rooms__chats">
         <div class=" c-chats__wrapper">
           <aside class="c-chats__aside">
@@ -576,7 +596,7 @@ const BlockUserRooms = async function ({ Static }) {
                   ]}
                   title="Группы, созданные мной"
                   onClick={(e) => {
-                    alert('Группы, созданные мной')
+                    chatRooms(Static,true) 
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_created"]} />
@@ -589,16 +609,15 @@ const BlockUserRooms = async function ({ Static }) {
                   ]}
                   title="Группы, в которых я состою"
                   onClick={(e) => {
-                    alert('Группы, в которых я состою')
+                    chatRooms(Static,false) 
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_fellowship"]} />
                 </div>
               </div>
               <ul class="c-chats__togglers">
-                {Variable.UsersRooms.list_records.map(function (userrooms, i) {
-                  // console.log('=8c56fb=', userrooms)
-
+                {
+                Static.chatRooms.list_records.map(function (userrooms, i) {
                   if (userrooms.author.nickname == Variable.myInfo.nickname) {
                     return (
                       <li
@@ -623,7 +642,8 @@ const BlockUserRooms = async function ({ Static }) {
                       </li>
                     )
                   }
-                })}
+                })
+                }
               </ul>
             </div>
             <div class="c-chats__actions" onclick={() => {
@@ -648,6 +668,7 @@ const BlockUserRooms = async function ({ Static }) {
                 <span class="c-action__title">Создать комнату</span>
               </div>
             </div>
+   
           </aside>
           <section class="c-chats__content" >
             <div class="c-chats__border">
@@ -694,7 +715,26 @@ const BlockUserRooms = async function ({ Static }) {
         </div>
       </div>
 
+      {
 
+<Tags
+  Static={Static}
+  text={"ФЛУДИЛКА"}
+  classActive={Static.defaultUserRoom == "flood" ? "tag_button_active" : ""}
+  type="flood"
+
+/>
+}
+{
+
+<Tags
+  Static={Static}
+  text={"CRYPTO"}
+  classActive={Static.defaultUserRoom == "crypto" ? "tag_button_active" : ""}
+  type="crypto"
+
+/>
+}
 
       <div class="c-rooms__searchblock c-search">
         <div class="c-search__container">
@@ -722,36 +762,7 @@ const BlockUserRooms = async function ({ Static }) {
     */}
 
       <div class="c-rooms__list">
-        <div class="c-room">
-          <header class="c-room__header">
-            <date class="c-room__datecreate" datetime="">25 ноября 2022</date>
-            <a class="c-room__settings" href="" >
-              <img class="c-room__icon" src={svg.settings_icon} width="20" height="20" title="Редактировать" />
-            </a>
-          </header>
-          <figure class="c-room__wrapper">
-            <div class="c-room__image c-room__image--quadro">
-              <img src={`/assets/upload/rooms/d506bb5227ed06b218c5bdcc19490c58.png`} alt="" />
-            </div>
-            <figcaption>
-              <div class="c-room__caption">
-                <span class="c-room__lang c-question__langcontainer language_container">
-                  <div class="c-question__lang language-question">Ru</div>
-                </span>
-                <h4 class="c-room__title" title="Категория">
-                  <span>категория</span>
-                </h4>
-              </div>
-              <h4 class="c-room__title" title="Название комнаты">
-                  <span>Название комнаты</span>
-                </h4>
-              <p class="c-room__count">Количество участников: 124</p>
-              <button class="c-button c-button--outline2">
-                <div class="c-button__wrapper">{Variable.lang.button.join}</div>
-              </button>
-            </figcaption>
-          </figure>
-        </div>
+     
         {
 
           //мапим юзерские комнаты
@@ -760,38 +771,38 @@ const BlockUserRooms = async function ({ Static }) {
             if (Static.ActiveListRooms.length > 0) {
 
               return Static.ActiveListRooms.map(function (userrooms, i) {
+                
+                if(userrooms.settingsroom.images.length > 0)
+                {
+                  roomImage = userrooms.settingsroom.images
+                }
+                else{
+                  roomImage  = images["banners/ecosystem"]
+                }
+                   
                 if (Variable.myInfo._id == userrooms.author._id) {
-                  edit = <div class="c-question__footer">
-                    <a
-                      class="c-button c-button--outline2 buttonunswer"
+                  edit = 
+                  <a class="c-room__settings" href=""  onclick={(e) => {
 
-                      onclick={(e) => {
-
-                        if (Static.Auth) {
-                          fn.modals.ModalEditRoom({
-                            Static, userrooms,
-                            callback: (response) => {
-                      
-                              if (response.status =="ok") {
-                                Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
-                                Variable.UsersRooms.list_records.unshift(response.list_records[0])
-                                initReload()
-                              }
-                            }
-                          })
+                    if (Static.Auth) {
+                      fn.modals.ModalEditRoom({
+                        Static, userrooms,
+                        callback: (response) => {
+                  
+                          if (response.status =="ok") {
+                            Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
+                            Variable.UsersRooms.list_records.unshift(response.list_records[0])
+                            initReload()
+                          }
                         }
-                        else {
-                          fn.modals.ModalNeedAuth()
-                        }
-
-                      }}
-
-                    >
-                      <div class="c-button__wrapper">
-                        редактировать
-                      </div>
+                      })
+                    }
+                    else {
+                      fn.modals.ModalNeedAuth()
+                    } 
+                  }}>
+                      <img class="c-room__icon" src={svg.settings_icon} width="20" height="20" title="Редактировать" />
                     </a>
-                  </div>
                 }
                 else {
                   edit = ''
@@ -804,88 +815,47 @@ const BlockUserRooms = async function ({ Static }) {
                   redborder = "border:1px solid #474c5a"
                 }
                 return (
-                  <div style={redborder} class="c-questions__item c-question question-block questionLoad">
-                    <div class="c-question__header">
-
-                      <div class="c-question__avatar">
-
-                      </div>
-                      <div class="c-question__name">
-                        <a
-                          class="c-question__nickname"
-                          style="display: block; left: 5px;bottom:5px"
-                          href={`/user/${userrooms.author.nickname}`}
-                          onclick={(e) => {
-
-                          }}>
-                          {userrooms.author.nickname}
-                        </a>
-                        <div class="c-question__info">
-                          <div class="c-question__icons">
-                            {userrooms.close ?
-                              <img
-                                class="c-question__icon c-question__icon--status"
-                                src={svg[`${(typeof userrooms.bestId == "string") ? "best_answer" : "closed_question"}`]}
-                              />
-                              :
-                              <img class="c-question__icon c-question__icon--status" src={svg.open_question} />
-                            }
-                            <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "audio") ? "c-question__icon--active" : null]} src={svg.userrooms} />
-                            <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "video") ? "c-question__icon--active" : null]} src={svg.userrooms} />
-                            <img class={"c-question__icon"["c-question__icon", fn.ifHaveMedia(userrooms.media, "image") ? "c-question__icon--active" : null]} src={svg.userrooms} />
-                          </div>
-                          <div class="c-question__langcontainer language_container ">
-                            <div class="c-question__lang language-question">
-                              {userrooms.languages.orig_name}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <a
-                      style=""
-                      href={`/chat/show/${userrooms._id}`}
-                      class="c-question__body"
-
-                      onclick={function (e) {
-
-                      }}
-                    >
-                      <div class="c-question__preview">
-                        <span class="">
-                          {fn.sliceString(userrooms.settingsroom.title, 66)}
-                        </span>
-
-                      </div>
-                    </a>
-                    <span>количество сообщений {userrooms.message.length}</span>
-                    <div class="c-question__statistic">
-                      <div class="c-question__stats ">
-                        <img />
-                        {fn.getDateFormat(userrooms.showDate, "now")}
-                      </div>
-                    </div>
-
-                    <div class="c-question__footer">
-                      <a
-                        class="c-button c-button--outline2 buttonunswer"
-
-                        onclick={(e) => {
-
-                          ChangeRooms(Static, userrooms._id, false)
-
-                        }}
-
-                      >
-                        <div class="c-button__wrapper">
-                          войти
-                        </div>
-                      </a>
-                    </div>
-                    <br />
+                  <div style={redborder} class="c-room">
+                  <header class="c-room__header">
+                    <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date>
                     {edit}
-
-                  </div>
+                  </header>
+                  <figure class="c-room__wrapper">
+                    <div class="c-room__image c-room__image--quadro" style="border-radius: 5px; border:1px solid #474c5a">
+                      <img src={roomImage} alt="" />
+                    </div>
+                    <figcaption>
+                      <div class="c-room__caption">
+                        <span class="c-room__lang c-question__langcontainer language_container">
+                          <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
+                        </span>
+                       { /*<h4 class="c-room__title" title="Категория">
+                          <span>категория</span>
+                        </h4>*/}
+                      </div>
+                      <h4 class="c-room__title" title="Название комнаты">
+                          <span> {fn.sliceString(userrooms.settingsroom.title, 66)} </span>
+                        </h4>
+                      <p class="c-room__count">Количество участников: {userrooms.users.length}</p>
+                      <div class="c-question__footer">
+                              <a
+                                class="c-button c-button--outline2"
+        
+                                onclick={(e) => {
+        
+                                  ChangeRooms(Static, userrooms._id, false)
+        
+                                }}
+        
+                              >
+                                <div class="c-button__wrapper">
+                                  войти
+                                </div>
+                              </a>
+                            </div>
+                    </figcaption>
+                  </figure>
+                </div>
                 )
 
               })
