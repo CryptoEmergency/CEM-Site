@@ -1082,6 +1082,14 @@ const start = function (data, ID) {
                                     >
                                         <img src={images["forum/partner_27"]} />
                                     </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.cls.global"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_28"]} />
+                                    </a>
                                 </div>
                                 
                             </div>
