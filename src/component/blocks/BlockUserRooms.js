@@ -11,16 +11,20 @@ import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
 
 
-
+//комнаты в чате 
 async function chatRooms(Static,main)
 {
+
+  document.getElementById("spinner").hidden = false
+
   Static.chatRooms = {}
   let arr = []
 if(main)
 {
-  await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false } })
+  await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
+
    Variable.ListChatUsersRooms.list_records.forEach(function(e,i){
-console.log(e)
+
    if (e.author.nickname == Variable.myInfo.nickname) { 
 
     arr.push(e)
@@ -35,19 +39,15 @@ else{
     e.users.forEach(function(u){
      if(u._id == Variable.myInfo._id)
      {
-      arr.push(e)
+      arr.push(e)  
      }
     })
   
     })
     Static.chatRooms.list_records = arr
 }
-console.log(Static.chatRooms)
-
-
 initReload()
 }
-
 
 //системные комнаты
 const Tags = function ({ Static, classActive, text, type }) {
@@ -491,6 +491,9 @@ const BlockUserRooms = async function ({ Static }) {
 
     await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "ListUsersRooms"
+
+    await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
+    Static.chatRooms = Variable.ListChatUsersRooms
     //для пользовательских комнат которые пользователь сам создал
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
     //при первом заходе открываем системный чат
@@ -499,7 +502,7 @@ const BlockUserRooms = async function ({ Static }) {
     SearchRooms(Static)
     // console.log(Variable)
 
-    Static.chatRooms = Variable.ListUsersRooms
+
   })
 
   //если не используем фильтры
@@ -518,7 +521,6 @@ const BlockUserRooms = async function ({ Static }) {
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
         <ul  class="c-chats__togglers">
           {/*
-
             //мапим системные комнаты
 
             Variable.ListSyst
