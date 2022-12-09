@@ -35,14 +35,8 @@ const start = function (userInfo, ID = "mainBlock") {
             if (userInfo._id == Variable.myInfo._id) {
                 activeItems = Variable.PageUserProfileMyLenta
             } else {
-                activeItems = await sendApi.send({
-                    action: "getPost", short: true,
-                    filter: {
-                        author: userInfo._id,
-                    },
-                    select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
-                    limit: 12
-                });
+                activeItems = await fn.restApi.getPost({short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
+                
             }
             // console.log('=2b1496=', activeItems)
 
@@ -109,14 +103,7 @@ const start = function (userInfo, ID = "mainBlock") {
             profilePage = "aboutUser"
 
             if (userInfo._id == Variable.myInfo._id) {
-                Variable.PageUserProfileMyLenta = await sendApi.send({
-                    action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
-                    filter: {
-                        author: userInfo._id,
-                    },
-                    select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
-                    limit: 12
-                })
+                Variable.PageUserProfileMyLenta = await fn.restApi.getPost({short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
 
                 Variable.PageUserProfileQuestions = await sendApi.send({
                     action: "getQuestions", short: true, cache: true, name: "PageUserProfileQuestions", filter: {
