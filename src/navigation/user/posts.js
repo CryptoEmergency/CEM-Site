@@ -392,15 +392,7 @@ const start = function (data, ID) {
       // console.log('=0bb638=', Variable)
 
       if (Static.userInfo._id == Variable.myInfo._id) {
-        Static.posts = await sendApi.send({
-          action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
-          filter: {
-            author: Static.userInfo._id,
-            // "languages.code": "all"
-          },
-          select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
-          limit: 12
-        })
+        Static.posts = await fn.restApi.getPost({short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: Static.userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
       }
 
       console.log('=50f15c=', Static.posts)
