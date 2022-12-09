@@ -10,6 +10,27 @@ import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
 
+async function checkUserInRoom(id)
+{
+let user = []
+  let response = await fn.restApi.getUserRoom({ id, filter: { _id: id } })
+let item
+  console.log(item = response.list_records[0].users.filter(item.includes(id)))
+  response.list_records.forEach(function(e){
+    if(e.users._id!== Variable.myInfo._id)
+    {
+      user.push(1)
+    }
+  })
+
+  if(user.length > 0)
+  {
+   
+    await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
+    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+  }
+
+}
 
 //комнаты в чате 
 async function chatRooms(Static,main)
@@ -19,9 +40,10 @@ async function chatRooms(Static,main)
 
   Static.chatRooms = {}
   let arr = []
+  await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
 if(main)
 {
-  await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
+  
 
    Variable.ListChatUsersRooms.list_records.forEach(function(e,i){
 
@@ -31,21 +53,25 @@ if(main)
    }
    })
    Static.chatRooms.list_records = arr
+   main = true
 }
 else{
-  await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false } })
+
   Variable.ListChatUsersRooms.list_records.forEach(function(e){
-    //перебираем массив с юзерами
+    //перебираем массив с юзерами 
     e.users.forEach(function(u){
-     if(u._id == Variable.myInfo._id)
+     if(u._id == Variable.myInfo._id && e.author._id!==Variable.myInfo._id)
      {
       arr.push(e)  
+      return false
      }
     })
   
     })
     Static.chatRooms.list_records = arr
+    main = false
 }
+
 initReload()
 }
 
@@ -134,6 +160,7 @@ async function sendRoomsMessage(Static, id, textdata) {
   }
   let response = await fn.restApi.getUserRoom({ _id, filter: { _id: _id } })
   Static.Rooms = response.list_records[0]
+  checkUserInRoom(_id)
   initReload()
 
 }
@@ -502,7 +529,7 @@ const BlockUserRooms = async function ({ Static }) {
     SearchRooms(Static)
     // console.log(Variable)
 
-
+main = true
   })
 
   //если не используем фильтры
@@ -513,6 +540,7 @@ const BlockUserRooms = async function ({ Static }) {
   let redborder
   let edit
   let roomImage
+  let main
 
   return (
 
@@ -620,6 +648,7 @@ const BlockUserRooms = async function ({ Static }) {
               <ul class="c-chats__togglers">
                 {
                 Static.chatRooms.list_records.map(function (userrooms, i) {
+                  if(main){
                   if (userrooms.author.nickname == Variable.myInfo.nickname) {
                     return (
                       <li
@@ -644,6 +673,34 @@ const BlockUserRooms = async function ({ Static }) {
                       </li>
                     )
                   }
+                }
+                  else
+                  {
+                   
+                      return (
+                        <li
+                          class={[
+                            "c-chats__toggler",
+                            "c-toggler",
+                            Static.Rooms._id == userrooms._id ? "c-toggler--active" : null
+                          ]}
+                        >
+                          <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
+                            ChangeRooms(Static, userrooms._id, false)
+                          }}>
+                            {
+                              userrooms.settingsroom.images ?
+                                <img src={`/assets/upload/rooms/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
+                                :
+                                <div class="c-toggler__wrap">
+                                  <span class="c-toggler__name">{userrooms.settingsroom.title}</span>
+                                </div>
+                            }
+                          </a>
+                        </li>
+                      )
+                  }
+
                 })
                 }
               </ul>
