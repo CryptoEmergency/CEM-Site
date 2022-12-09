@@ -26,16 +26,19 @@ let user = []
     })
         
     })
+  
 
 if(!user.includes(Variable.myInfo._id))
 {
  
-  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false }, limit:-1})
+  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false }, limit: 10})
   await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+
  return false
 }
 else
 {
+
   return true
 }
 
@@ -47,6 +50,7 @@ else
 async function chatRooms(Static,main)
 {
   console.log("chatRooms")
+  
   Static.chatRooms = {}
   document.getElementById("spinner").hidden = false
 
@@ -84,7 +88,9 @@ else{
   
 }
 
-initReload()
+  initReload()
+
+
 }
 
 //системные комнаты
@@ -176,7 +182,7 @@ async function sendRoomsMessage(Static, id, textdata) {
   }
   let response = await fn.restApi.getUserRoom({ _id, filter: { _id: _id } })
   Static.Rooms = response.list_records[0]
-  checkUserInRoom(_id)
+  chatRooms(Static,await checkUserInRoom(_id)) 
   initReload()
 
 }
@@ -538,6 +544,9 @@ const BlockUserRooms = async function ({ Static }) {
 
    // await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
     Static.chatRooms = Variable.ListUsersRooms
+    setTimeout(async function(){
+      await chatRooms(Static,true)
+    },100)
     //для пользовательских комнат которые пользователь сам создал
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
     //при первом заходе открываем системный чат
@@ -545,7 +554,6 @@ const BlockUserRooms = async function ({ Static }) {
     //запускаем поиск и фильтры
     SearchRooms(Static)
     // console.log(Variable)
-
 
   })
 
@@ -567,10 +575,17 @@ const BlockUserRooms = async function ({ Static }) {
     quit =  <a
     class="c-button c-button--outline2"
 
-    onclick={(e) => {
+    onclick={async (e) => {
 let _id = Static.Rooms._id
        fn.restApi.setUserRoom.quit({ _id })
-       checkUserInRoom(_id)
+       
+       
+      setTimeout(async function(){
+        
+        await chatRooms(Static,await checkUserInRoom(_id))
+        CheckSystemInterface(Static)
+      },100)
+       initReload()
     }}
 
   >
@@ -687,9 +702,11 @@ let _id = Static.Rooms._id
                 </div>
               </div>
               <ul class="c-chats__togglers">
+   
                 {
+                  
                 Static.chatRooms.list_records.map(function (userrooms, i) {
-                  if(main){
+                 /* if(main){
                   if (userrooms.author.nickname == Variable.myInfo.nickname) {
                     return (
                       <li
@@ -718,7 +735,7 @@ let _id = Static.Rooms._id
                 }
                   else
                   {
-                   
+                   */
                       return (
                         <li
                           class={[
@@ -744,7 +761,7 @@ let _id = Static.Rooms._id
                           </a>
                         </li>
                       )
-                  }
+                 // }
 
                 })
                 }

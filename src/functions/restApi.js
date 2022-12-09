@@ -858,9 +858,9 @@ restApi.setUsers.complain = async function ({ _id, complain }) {
             complain
         }
     }
-    console.log(data)
+ 
     const response = await sendApi.create("setUsers", data);
-    console.log(response)
+
     return checkSetAnswer(response)
 }
 
@@ -906,7 +906,7 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
             complain
         }
     }
-    console.log(data)
+    
     const response = await sendApi.create("setQuestion", data);
     console.log(response)
     return checkSetAnswer(response)
@@ -997,7 +997,7 @@ restApi.setUserRoom.quit = async function ({ _id }) {
     }
 
     const response = await sendApi.create("setUserRoom", data);
-    console.log(response)
+   
     return checkSetAnswer(response)
 }
 
