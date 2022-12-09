@@ -251,6 +251,14 @@ initData.ModalAskQuestion = function (Static) {
             value: Variable.myInfo.mainLanguage.eng_name + ` (${Variable.myInfo.country.orig_name})`,
             code: Variable.myInfo.mainLanguage.code
         }),
+        mediaInputs: {
+            value: [],
+            show: false,
+        },
+        audioInputs: {
+            value: [],
+            show: false,
+        },
         title: createData("input", {
             errorText: Variable.lang.error_div.minSymbol,
             placeholder: Variable.lang.placeholder.titleAsk,
