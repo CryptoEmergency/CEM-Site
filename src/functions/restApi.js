@@ -997,6 +997,7 @@ restApi.setUserRoom.quit = async function ({ _id }) {
     }
 
     const response = await sendApi.create("setUserRoom", data);
+    console.log(response)
     return checkSetAnswer(response)
 }
 

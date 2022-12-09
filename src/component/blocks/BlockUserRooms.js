@@ -569,7 +569,7 @@ const BlockUserRooms = async function ({ Static }) {
 
     onclick={(e) => {
 let _id = Static.Rooms._id
-       fn.restApi.setUserRoomMessage.quit({ _id })
+       fn.restApi.setUserRoom.quit({ _id })
        checkUserInRoom(_id)
     }}
 
