@@ -990,6 +990,16 @@ restApi.setUserRoom.edit = async function ({ _id, status, visible, confirmuser, 
     return checkSetAnswer(response)
 }
 
+restApi.setUserRoom.quit = async function ({ _id }) {
+    let data = {
+        _id: _id,
+        quit: true
+    }
+
+    const response = await sendApi.create("setUserRoom", data);
+    return checkSetAnswer(response)
+}
+
 
 
 restApi.setUserRoomMessage = {}
