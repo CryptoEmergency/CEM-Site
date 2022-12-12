@@ -25,9 +25,9 @@ const changeTextPost = (e, Static) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
   let editableText;
   let text = '';
-  if(Variable.dataUrl.params && !Static.startEditText) {
+  if (Variable.dataUrl.params && !Static.startEditText) {
     editableText = Static.textInputs.value
-    console.log('=2b3247=',editableText)
+    console.log('=2b3247=', editableText)
     text = e.target.textContent = editableText.trim();
   }
   console.log(Static)
@@ -54,7 +54,7 @@ const sendPost = async (e, Static) => {
   } else {
     tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
   }
-  console.log('=270fb8=',tmpRes)
+  console.log('=270fb8=', tmpRes)
 
   if (tmpRes.status === "ok") {
     if (Variable.dataUrl.params) {
@@ -62,7 +62,7 @@ const sendPost = async (e, Static) => {
     } else {
       Static.posts.list_records.unshift(tmpRes.list_records[0])
     }
-    
+
     fn.initData.posts(Static)
     initReload()
   } else {
@@ -345,54 +345,56 @@ const start = function (data, ID) {
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
-        const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params }, limit: 1 })
-        let postForEdit = data.list_records[0];
-        console.log('=b37faa=', postForEdit)
-        let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
-        let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
+        const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params, "languages.code": "all" }, limit: 1 })
+        if (data.list_records.length) {
+          let postForEdit = data.list_records[0];
+          console.log('=b37faa=', postForEdit)
+          let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
+          let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
 
-        Static.idEditPost = postForEdit._id;
+          Static.idEditPost = postForEdit._id;
 
-        if (postForEdit.text.length > 0) {
-          Static.textInputs = {
-            value: postForEdit.text,
-            show: true,
+          if (postForEdit.text.length > 0) {
+            Static.textInputs = {
+              value: postForEdit.text,
+              show: true,
+            }
+            console.log('=c9259f= textInputs =', Static.textInputs)
           }
-          console.log('=c9259f= textInputs =', Static.textInputs)
-        }
-        if (postForEdit.media.length > 0 && imageVideoFiles.length > 0) {
-          Static.mediaInputs = {
-            value: [],
-            show: true,
+          if (postForEdit.media.length > 0 && imageVideoFiles.length > 0) {
+            Static.mediaInputs = {
+              value: [],
+              show: true,
+            }
+            imageVideoFiles.forEach((file) => {
+              Static.mediaInputs.value.push(file);
+            })
           }
-          imageVideoFiles.forEach((file) => {
-            Static.mediaInputs.value.push(file);
-          })
-        }
 
-        if (postForEdit.media.length > 0 && audioFiles.length > 0) {
-          Static.audioInputs = {
-            value: [],
-            show: true,
+          if (postForEdit.media.length > 0 && audioFiles.length > 0) {
+            Static.audioInputs = {
+              value: [],
+              show: true,
+            }
+            audioFiles.forEach((audio) => {
+              Static.audioInputs.value.push(audio);
+            })
           }
-          audioFiles.forEach((audio) => {
-            Static.audioInputs.value.push(audio);
-          })
-        }
 
-        Static.lang = {
-          code: postForEdit.languages.code,
-          name: postForEdit.languages.orig_name
+          Static.lang = {
+            code: postForEdit.languages.code,
+            name: postForEdit.languages.orig_name
+          }
+          Static.forFriends = postForEdit.forFriends;
+          Static.isValid = Static.textInputs.value.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
         }
-        Static.forFriends = postForEdit.forFriends;
-        Static.isValid = Static.textInputs.value.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
       }
 
       console.log('=cb696d=', Static)
       // console.log('=0bb638=', Variable)
 
       if (Static.userInfo._id == Variable.myInfo._id) {
-        Static.posts = await fn.restApi.getPost({short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: Static.userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
+        Static.posts = await fn.restApi.getPost({ short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: Static.userInfo._id, "languages.code": "all" }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
       }
 
       console.log('=50f15c=', Static.posts)
@@ -436,19 +438,19 @@ const start = function (data, ID) {
               {
                 Static.textInputs.show
                   ?
-                    <div
-                      class="create_post_chapter create_post_main_text"
-                      contenteditable="true"
-                      oninput={(e) => changeTextPost(e, Static)}
-                    >
-                      {/* {
+                  <div
+                    class="create_post_chapter create_post_main_text"
+                    contenteditable="true"
+                    oninput={(e) => changeTextPost(e, Static)}
+                  >
+                    {/* {
                         Variable.dataUrl.params && !Static.startEditText
                           ?
                           Static.textInputs.value
                           :
                           null
                       } */}
-                    </div>
+                  </div>
                   :
                   null
               }
