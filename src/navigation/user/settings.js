@@ -273,7 +273,7 @@ start = menuItem.map(function (key) {
                                     
                                     <div class="settings_gradient_line"></div>
                                 </div>
-                                <div
+                                {/*<div
                                     class={[
                                         'settings_list_item',
                                         activeGroup == Static.elStartup ? '' : null
@@ -307,7 +307,7 @@ start = menuItem.map(function (key) {
                                   
                       
                                     <div class="settings_gradient_line"></div>
-                                </div>
+                                    </div>*/}
                             </div>
                         </div>
 
@@ -323,12 +323,12 @@ start = menuItem.map(function (key) {
                                     {userBlackList()}
                                 </div>
                             </div>
-
+                              {/*         
                             <div style={settingsPage == 'startUP' || settingsPage == 'editstartUP' || settingsPage == 'createstartUP' ? '' : 'display: none;'} data-type="blackList" class="settings_body_item">
                                 <div class="setting_body_item_chapter">
                                 <BlockUserStartupPage  settingsPage={settingsPage} Static={Static} />
                                 </div>
-                            </div>
+                                    </div>*/} 
                            
 
                       

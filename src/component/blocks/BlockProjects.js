@@ -155,13 +155,13 @@ const BlockProjects = async function () {
                     "items": fn.itemsMenu.onlyPage({ url: '/career-whith-us/' }),
                     modal: true
                 },
-                {
+              /*  {
                     "title": Variable.lang.a.rooms,
                     "icon": "careers_icon",
                     "link": "rooms",
                     "items": fn.itemsMenu.onlyPage({ url: '/rooms/' }),
                     modal: false
-                }
+                }*/
             ];
 
             projectRecords = projects.map(function (item) {

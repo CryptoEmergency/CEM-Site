@@ -8,6 +8,7 @@ import {
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 const ModalNeedAuth = function (data, ID) {
+ 
   init(
     () => {
       timersStart("needAuth", () => {

@@ -738,6 +738,7 @@ else{
         code: Static.sytemInfo.code,
         name: Static.sytemInfo.name
     }
+   
 
     Static.apiFilter = {system:false}
 
@@ -768,6 +769,7 @@ else{
 
         }
     }
+    return
 }
 
 export { initData };

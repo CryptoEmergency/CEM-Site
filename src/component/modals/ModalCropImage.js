@@ -11,9 +11,11 @@ import 'cropperjs/dist/cropper.css';
 
 
 
-const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
-    let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uploadCropImage}, ID) {
 
+
+    let [Static] = fn.GetParams({ data: { file,typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+   
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
     let elemRatio2 = Variable.setRef()
