@@ -591,6 +591,12 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Захватывающий многопользовательский онлайн шутер с криптовалютой, элементами DeFi и рынком NFT</p>
                                         </div>
                                     </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://garantex.io/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_23']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Криптовалютная биржа Garantex работает с 2019 года и с тех пор зарекомендовала себя как надежный партнер и один из самых удобных хабов для работы с криптой в России.</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a
                                     style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
@@ -640,11 +646,11 @@ const start = function (data, ID) {
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_12']} />
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_28']} />
                                         </div>
                                         <div>
-                                            <p style="margin-top: 10px; margin-bottom: 5px">Сергей Павлович</p>
-                                            <p>Автор и ведущий канала Люди PRO, владелец бизнесов в IT, e-commerce и медиа, инвестор</p>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Евгения Бурова</p>
+                                            <p>PR-директор биржи Garantex</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
@@ -654,6 +660,15 @@ const start = function (data, ID) {
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Владимир Туров</p>
                                             <p>Учредитель TUROV •INVEST</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_12']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Сергей Павлович</p>
+                                            <p>Автор и ведущий канала Люди PRO, владелец бизнесов в IT, e-commerce и медиа, инвестор</p>
                                         </div>
                                     </div>
                                     <div class="speaker_item" style="text-align: center">
@@ -834,11 +849,6 @@ const start = function (data, ID) {
                                         <div>
                                             <p style="margin-top: 10px; margin-bottom: 5px">Евгений Мусиенко</p>
                                             <p>Специалист по инвестициям</p>
-                                        </div>
-                                    </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
-                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
                                     </div>
                                     <div class="speaker_item speaker_item_example" style="text-align: center">
@@ -1103,6 +1113,14 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_29"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://garantex.io/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_30"]} />
                                     </a>
                                 </div>
                                 
