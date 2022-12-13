@@ -64,6 +64,18 @@
     border-radius: 6px
 }
 
+.forum_timesheet{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.forum_timesheet img{
+    width: 49.5%;
+    border-radius: 6px;
+}
+
 @media(max-width: 1000px) {
     .forum_plan {
         width: 100%;
@@ -98,6 +110,12 @@
 
     .speaker_item_example:last-child {
         display: grid !important;
+    }
+
+    .forum_timesheet img{
+        width: 100%;
+        border-radius: 6px;
+        margin-bottom: 10px;
     }
 
 }
