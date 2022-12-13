@@ -946,7 +946,8 @@ restApi.setQuestions.close = async function ({ _id, noAlert = true }) {
 
 restApi.setUserRoom = {}
 
-restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country,category, system = false }) {
+
+restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country, system = false, category }) {
     let data = {
         value: {
             settingsroom: {

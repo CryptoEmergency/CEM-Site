@@ -79,7 +79,7 @@ initReload()
 async function chatRooms(Static,main)
 {
   console.log("chatRooms")
-
+  
 
   document.getElementById("spinner").hidden = false
 
@@ -182,7 +182,7 @@ async function ChangeRooms(Static, _id, system) {
 
   Static.MessageValue.el.value = ""
 
-
+ 
 
   initReload()
 
@@ -200,7 +200,7 @@ async function sendRoomsMessage(Static, id, textdata) {
   }
   let response = await fn.restApi.getUserRoom({ _id, filter: { _id: _id } })
   Static.Rooms = response.list_records[0]
-
+ 
 
   if(Static.usChat.show)
 {
@@ -222,7 +222,7 @@ Static.ChatData  = await ShowMessage(Static)
     await chatRooms(Static,false) 
   }
   */
-
+  
 
   initReload()
 
@@ -242,11 +242,10 @@ async function ShowMessage(Static) {
   let checkArray = []
   Static.Rooms.subscribeUsers.forEach(function (elem, i) {
 
-      if (Variable.myInfo._id == elem._id) {
-        checkArray.push(Variable.myInfo._id)
-      }
-    })
-  }
+    if (Variable.myInfo._id == elem._id) {
+      checkArray.push(Variable.myInfo._id)
+    }
+  })
 
 
   let arrUser = []
@@ -283,7 +282,7 @@ async function ShowMessage(Static) {
      * делаем проверку на пользователя
      * если комната приватная и у руля её создатель то не запрашиваем пароль и отображаем все сообщения
     */
-  if (Static.Rooms.settingsroom && Static.Rooms.settingsroom.status) {
+  if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || checkArray.length > 0) {
       if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
@@ -330,7 +329,7 @@ async function ShowMessage(Static) {
       //если пользователь ввел пароль
       if (Static.confirmPasword.valid) {
 
-        if (Static.Rooms.message && Static.Rooms.message.length > 0) {
+        if (Static.Rooms.message.length > 0) {
           return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -442,7 +441,7 @@ async function ShowMessage(Static) {
       }
       //вывод всех комнат для авторизованных пользоватлей
     } else if (Static.Auth) {
-      if (Static.Rooms.message && Static.Rooms.message.length > 0) {
+      if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -536,7 +535,7 @@ async function SearchRooms(Static) {
 
         await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
         Static.ActiveListRooms = Variable.UsersRooms.list_records
-        //   CheckSystemInterface(Static) ?????????????? хз зачем
+     //   CheckSystemInterface(Static) ?????????????? хз зачем
       }
 
     }
@@ -585,10 +584,10 @@ Static.usChat = {show:true}
 
 
   })
-
+ 
   Static.ChatRooms = Variable.ListUsersRooms
-
-  Static.quit
+  
+   Static.quit
 
 
   //если не используем фильтры
@@ -610,7 +609,7 @@ Static.usChat = {show:true}
     <div class="c-rooms c-container">
 
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
-        <ul class="c-chats__togglers">
+        <ul  class="c-chats__togglers">
           {/*
             //мапим системные комнаты
 
@@ -691,9 +690,9 @@ Static.usChat = {show:true}
                   ]}
                   title="Группы, созданные мной"
                   onClick={(e) => {
-                    chatRooms(Static, true)
+                    chatRooms(Static,true) 
                     Static.usChat.show = true
-
+                   
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_created"]} />
@@ -706,16 +705,16 @@ Static.usChat = {show:true}
                   ]}
                   title="Группы, в которых я состою"
                   onClick={(e) => {
-                    chatRooms(Static, false)
+                    chatRooms(Static,false) 
                     Static.usChat.show = true
-
+            
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_fellowship"]} />
                 </div>
               </div>
               <ul class="c-chats__togglers">
-
+   
                 {
               
                   Variable.ListUsersRooms.list_records.map(function (userrooms, i) {
@@ -731,9 +730,9 @@ Static.usChat = {show:true}
                       >
                         <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
                           ChangeRooms(Static, userrooms._id, false)
-
-
-
+                          
+                             
+                         
                         }}>
                           {
                             userrooms.settingsroom.images ?
@@ -781,7 +780,7 @@ Static.usChat = {show:true}
                 <span class="c-action__title">Создать комнату</span>
               </div>
             </div>
-
+   
           </aside>
           <section class="c-chats__content" >
             <div class="c-chats__border">
@@ -790,7 +789,7 @@ Static.usChat = {show:true}
               }
               <h4 class="c-chats__title"><span>Комната: { Static.RoomTitle}</span></h4>
               <ul class="c-chats__messages" id="chatMessage">
-
+             
 
                 {
              
@@ -874,7 +873,7 @@ Static.Tag.list_records.map(function(tag){
     */}
 
       <div class="c-rooms__list">
-
+     
         {
 
           //мапим юзерские комнаты
@@ -889,8 +888,8 @@ Static.Tag.list_records.map(function(tag){
                 {
                   roomImage = "/assets/upload/chat/"+userrooms.settingsroom.images
                 }
-                else {
-                  roomImage = images["banners/ecosystem"]
+                else{
+                  roomImage  = images["banners/ecosystem"]
                 }
 
                 let arrUser = []
@@ -927,12 +926,13 @@ Static.Tag.list_records.map(function(tag){
    
                             initReload()
                           }
-                        })
-                      }
-                      else {
-                        fn.modals.ModalNeedAuth()
-                      }
-                    }}>
+                        }
+                      })
+                    }
+                    else {
+                      fn.modals.ModalNeedAuth()
+                    } 
+                  }}>
                       <img class="c-room__icon" src={svg.settings_icon} width="20" height="20" title="Редактировать" />
                     </a>
                     subscribe = ''
@@ -997,11 +997,9 @@ Static.Tag.list_records.map(function(tag){
                                 </div>
                               </a>
                             </div>
-                          </a>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </div>
+                    </figcaption>
+                  </figure>
+                </div>
                 )
 
               })
