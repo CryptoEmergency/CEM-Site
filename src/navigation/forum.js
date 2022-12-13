@@ -232,7 +232,8 @@ const start = function (data, ID) {
                             <div>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
                                 <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
-                                <h4 style="text-align: center; margin-bottom: 30px">Соорганизатор – CRYPTO HOLDING</h4>
+                                <h4 style="text-align: center; margin-bottom: 20px">Соорганизатор – CRYPTO HOLDING</h4>
+                                <img style="width: 150px; margin: 0 auto; text-align: center; display: block;  margin-bottom: 30px" src={images['forum/eighteen']} />
                                 <h2 style="text-align: center; margin-bottom: 30px; font-weight: 800">C 10:00 до 18:00</h2>
                                 <div class="forum_timesheet">
                                     <img src={images['forum/forum_timesheet_16']} />
