@@ -20,8 +20,8 @@ const start = function (data, ID) {
     Variable.Static.tpm = 5
     init(
         async () => {
-            let tmp = await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Chat for communication EN", description: "Chat with other users on various topics", images: "111", languages: "en" })
-            console.log(tmp)
+            await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Крипто RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Crypto" })
+            await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
         },
         () => {
             return (

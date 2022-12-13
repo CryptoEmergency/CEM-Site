@@ -1,16 +1,24 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    sendApi,
+    initReload
 } from "@betarost/cemjs";
 import { fn } from "@src/functions/index.js";
 import svg from '@assets/svg/index.js';
-const findUnread = function (arr) {
+const findUnread = function (arr, title = false) {
     let unread = false
     if (!arr || !arr.length) { return false }
-    arr.forEach(element => {
-        if (!element.read) { unread = true }
-    })
+    if (title) {
+        arr.forEach(element => {
+            if (!element.read) { unread = title }
+        })
+    } else {
+        arr.forEach(element => {
+            if (!element.read) { unread = true }
+        })
+    }
     return unread
 };
 
@@ -73,7 +81,28 @@ const BottomMenu = function () {
                         ]}>
                             <a
                                 class="c-userpanel__icon c-userpanel__icon--notify c-userpanel__icon--mobile_visible c-notification__link"
-                                onClick={(e) => { e.stopPropagation(); fn.modals.ModalNotify(); }}>
+                                onClick={async function (e) {
+                                    e.stopPropagation();
+                                    console.log('=4c896c=', Variable)
+                                    let data = {
+                                        value: {
+                                            readNotify: findUnread(Variable.myInfo.notifyQuestions, 'questions')
+                                                ||
+                                                findUnread(Variable.myInfo.notifyAwards, 'awards')
+                                                ||
+                                                findUnread(Variable.myInfo.notifySystem, 'system')
+                                        }
+                                    }
+
+                                    let tmpRes = await sendApi.create("setUsers", data);
+                                    console.log('=e19671=', data, tmpRes)
+                                    if (tmpRes.status === 'ok') {
+                                        fn.modals.ModalNotify();
+                                        initReload()
+                                    } else {
+                                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true);
+                                    }
+                                }}>
                             </a>
                             <div class="c-notification__new"></div>
                         </div>
@@ -122,7 +151,7 @@ const BottomMenu = function () {
             >
                 <img src={svg.arrowTop} />
             </div>
-        </div>
+        </div >
     )
 };
 export { BottomMenu };

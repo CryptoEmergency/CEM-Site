@@ -957,6 +957,7 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
                 description: description,
                 category:category,
                 images: images,
+                category: category
             },
             languages: languages,
             country: country,
