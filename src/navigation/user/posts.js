@@ -17,13 +17,22 @@ import {
 } from "@component/element/index.js";
 
 import { BlockLentaUsers } from '@component/blocks/index.js';
+import { NotFound } from "@component/element/index.js";
 
 let Static, selectAspect;
 
 const changeTextPost = (e, Static) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
+  let editableText;
+  let text = '';
+  if (Variable.dataUrl.params && !Static.startEditText) {
+    editableText = Static.textInputs.value
+    console.log('=2b3247=', editableText)
+    text = e.target.textContent = editableText.trim();
+  }
   console.log(Static)
-  let text = e.target.innerText.trim();
+  text = e.target.innerText.trim();
+  Static.startEditText = true
   Static.textInputs.value = text;
   if (text || Static.mediaInputs.value.length > 0) {
     Static.isValid = true;
@@ -41,13 +50,19 @@ const sendPost = async (e, Static) => {
 
   let tmpRes;
   if (Variable.dataUrl.params) {
-    tmpRes = await fn.restApi.setPost.create({ id: Static.idEditPost, text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
+    tmpRes = await fn.restApi.setPost.update({ id: Static.idEditPost, text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
   } else {
     tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
   }
+  console.log('=270fb8=', tmpRes)
 
   if (tmpRes.status === "ok") {
-    Static.posts.list_records.unshift(tmpRes.list_records[0])
+    if (Variable.dataUrl.params) {
+      Static.posts.list_records.splice(Static.posts.list_records.findIndex(el => el._id == Static.idEditPost), 1, tmpRes.list_records[0]);
+    } else {
+      Static.posts.list_records.unshift(tmpRes.list_records[0])
+    }
+
     fn.initData.posts(Static)
     initReload()
   } else {
@@ -330,70 +345,65 @@ const start = function (data, ID) {
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
-        const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params }, limit: 1 })
-        let postForEdit = data.list_records[0];
-        console.log('=b37faa=', postForEdit)
-        let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
-        let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
+        const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params, "languages.code": "all" }, limit: 1 })
+        if (data.list_records.length) {
+          let postForEdit = data.list_records[0];
+          console.log('=b37faa=', postForEdit)
+          let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
+          let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
 
-        Static.idEditPost = postForEdit._id;
+          Static.idEditPost = postForEdit._id;
 
-        if (postForEdit.text.length > 0) {
-          Static.textInputs = {
-            value: postForEdit.text,
-            show: true,
+          if (postForEdit.text.length > 0) {
+            Static.textInputs = {
+              value: postForEdit.text,
+              show: true,
+            }
+            console.log('=c9259f= textInputs =', Static.textInputs)
           }
-          console.log('=c9259f= textInputs =', Static.textInputs)
-        }
-        if (postForEdit.media.length > 0 && imageVideoFiles.length > 0) {
-          Static.mediaInputs = {
-            value: [],
-            show: true,
+          if (postForEdit.media.length > 0 && imageVideoFiles.length > 0) {
+            Static.mediaInputs = {
+              value: [],
+              show: true,
+            }
+            imageVideoFiles.forEach((file) => {
+              Static.mediaInputs.value.push(file);
+            })
           }
-          imageVideoFiles.forEach((file) => {
-            Static.mediaInputs.value.push(file);
-          })
-        }
 
-        if (postForEdit.media.length > 0 && audioFiles.length > 0) {
-          Static.audioInputs = {
-            value: [],
-            show: true,
+          if (postForEdit.media.length > 0 && audioFiles.length > 0) {
+            Static.audioInputs = {
+              value: [],
+              show: true,
+            }
+            audioFiles.forEach((audio) => {
+              Static.audioInputs.value.push(audio);
+            })
           }
-          audioFiles.forEach((audio) => {
-            Static.audioInputs.value.push(audio);
-          })
-        }
 
-        Static.lang = {
-          code: postForEdit.languages.code,
-          name: postForEdit.languages.orig_name
+          Static.lang = {
+            code: postForEdit.languages.code,
+            name: postForEdit.languages.orig_name
+          }
+          Static.forFriends = postForEdit.forFriends;
+          Static.isValid = Static.textInputs.value.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
         }
-        Static.forFriends = postForEdit.forFriends;
-        Static.isValid = Static.textInputs.value.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
       }
 
       console.log('=cb696d=', Static)
       // console.log('=0bb638=', Variable)
 
       if (Static.userInfo._id == Variable.myInfo._id) {
-        Static.posts = await sendApi.send({
-          action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
-          filter: {
-            author: Static.userInfo._id,
-          },
-          select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
-          limit: 12
-        })
+        Static.posts = await fn.restApi.getPost({ short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: Static.userInfo._id, "languages.code": "all" }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
       }
 
-      // console.log('=50f15c=', Static.posts)
+      console.log('=50f15c=', Static.posts)
 
       selectAspect = null;
 
-      authorPosts = await fn.restApi.getPost({ cache: true, name: "MainPosts", filter: { author: Variable.myInfo._id }, sort: { showDate: -1, } })
+      // authorPosts = await fn.restApi.getPost({ cache: true, name: "MainPosts", filter: { author: Variable.myInfo._id }, sort: { showDate: -1, } })
 
-      Static.startEditText = true
+      // Static.startEditText = true
     },
 
     () => {
@@ -428,27 +438,19 @@ const start = function (data, ID) {
               {
                 Static.textInputs.show
                   ?
-                  Variable.dataUrl.params
-                    ?
-                    <div
-                      class="create_post_chapter create_post_main_text"
-                      contenteditable="true"
-                      oninput={Static.startEditText ? (e) => changeTextPost(e, Static) : null}
-                    >
-                      {
-                        Static.textInputs.value && !Static.startEditText
+                  <div
+                    class="create_post_chapter create_post_main_text"
+                    contenteditable="true"
+                    oninput={(e) => changeTextPost(e, Static)}
+                  >
+                    {/* {
+                        Variable.dataUrl.params && !Static.startEditText
                           ?
                           Static.textInputs.value
                           :
                           null
-                      }
-                    </div>
-                    : <div
-                      class="create_post_chapter create_post_main_text"
-                      contenteditable="true"
-                      oninput={(e) => changeTextPost(e, Static)}
-                    >
-                    </div>
+                      } */}
+                  </div>
                   :
                   null
               }
@@ -641,7 +643,7 @@ const start = function (data, ID) {
                 onClick={(e) => sendPost(e, Static)}
               >
                 <span class="c-button__text">
-                  {Variable.lang.button.create}
+                  {Variable.dataUrl.params ? Variable.lang.button.save : Variable.lang.button.create}
                 </span>
               </button>
             </div>

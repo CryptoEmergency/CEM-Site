@@ -154,6 +154,13 @@ const BlockProjects = async function () {
                     "link": "career-whith-us",
                     "items": fn.itemsMenu.onlyPage({ url: '/career-whith-us/' }),
                     modal: true
+                },
+                {
+                    "title": Variable.lang.a.rooms,
+                    "icon": "careers_icon",
+                    "link": "rooms",
+                    "items": fn.itemsMenu.onlyPage({ url: '/rooms/' }),
+                    modal: false
                 }
             ];
 
