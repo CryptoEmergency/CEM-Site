@@ -13,64 +13,59 @@ import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/el
 
 
 //проверим есть ли мы в этой комнате
-async function checkUserInRoom(id)
-{
-let user = []
+async function checkUserInRoom(id) {
+  let user = []
   let response = await fn.restApi.getUserRoom({ id, filter: { _id: id } })
 
 
-  response.list_records.forEach(function(e){
-    e.users.forEach(function(u){
+  response.list_records.forEach(function (e) {
+    e.users.forEach(function (u) {
 
-    user.push(u._id)
+      user.push(u._id)
     })
-        
-    })
-  
 
-if(!user.includes(Variable.myInfo._id))
-{
- 
-  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false }, limit: 10})
-  await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+  })
 
- return false
-}
-else
-{
 
-  return true
-}
+  if (!user.includes(Variable.myInfo._id)) {
+
+    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false }, limit: 10 })
+    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+
+    return false
+  }
+  else {
+
+    return true
+  }
 
 
 
 }
 
 //комнаты в чате 
-async function chatRooms(Static,main)
-{
+async function chatRooms(Static, main) {
   console.log("chatRooms")
-  
+
 
   document.getElementById("spinner").hidden = false
 
 
 
 
-if(main)
-{
-  
-  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:Variable.myInfo._id }, limit:10})
+  if (main) {
 
-  Static.ChatRooms = Variable.ListUsersRooms
-}
-else{
-  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},users:Variable.myInfo._id }, limit:10})
+    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: Variable.myInfo._id }, limit: 10 })
 
-  Static.ChatRooms = Variable.ListUsersRooms
-  
-  
-}
+    Static.ChatRooms = Variable.ListUsersRooms
+  }
+  else {
+    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: { "$ne": Variable.myInfo._id }, users: Variable.myInfo._id }, limit: 10 })
+
+    Static.ChatRooms = Variable.ListUsersRooms
+
+
+  }
 
   initReload()
 
@@ -149,47 +144,46 @@ async function ChangeRooms(Static, _id, system) {
   Static.lang.name = Static.Rooms.languages.orig_name
   Static.lang.code = Static.Rooms.languages.code
 
-let arrUser = []
+  let arrUser = []
 
-Static.Rooms.users.forEach(function(u){
-  arrUser.push(u._id)
-})
+  Static.Rooms.users.forEach(function (u) {
+    arrUser.push(u._id)
+  })
 
 
-    if(arrUser.includes(Variable.myInfo._id) && !Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
-    {
- 
-      Static.quit =  <a
+  if (arrUser.includes(Variable.myInfo._id) && !Static.Rooms.system && Static.Rooms.author._id !== Variable.myInfo._id) {
+
+    Static.quit = <a
       class="c-button c-button--outline2"
-  
+
       onclick={async (e) => {
-  let _id = Static.Rooms._id
-         fn.restApi.setUserRoom.quit({ _id })
-         
-         
-    
-          await chatRooms(Static,true)
-          CheckSystemInterface(Static)
-     
-         initReload()
+        let _id = Static.Rooms._id
+        fn.restApi.setUserRoom.quit({ _id })
+
+
+
+        await chatRooms(Static, true)
+        CheckSystemInterface(Static)
+
+        initReload()
       }}
-  
+
     >
       <div class="c-button__wrapper">
         выйти из комнаты
       </div>
     </a>
-    }
-    else{
-      Static.quit = "" 
-    }
-   
+  }
+  else {
+    Static.quit = ""
+  }
+
 
   ShowMessage(Static)
 
   Static.MessageValue.el.value = ""
 
- 
+
 
   initReload()
 
@@ -206,7 +200,7 @@ async function sendRoomsMessage(Static, id, textdata) {
   }
   let response = await fn.restApi.getUserRoom({ _id, filter: { _id: _id } })
   Static.Rooms = response.list_records[0]
- 
+
 
   /*
   if(await checkUserInRoom(_id) && Static.Rooms.author._id == Variable.myInfo._id &&  !Static.Rooms.system )
@@ -217,7 +211,7 @@ async function sendRoomsMessage(Static, id, textdata) {
     await chatRooms(Static,false) 
   }
   */
-  
+
 
   initReload()
 
@@ -235,19 +229,21 @@ function ShowMessage(Static) {
 
 
   let checkArray = []
-  Static.Rooms.users.forEach(function (elem, i) {
+  if (Static.Rooms.users != undefined) {
+    Static.Rooms.users.forEach(function (elem, i) {
 
-    if (Variable.myInfo._id == elem._id) {
-      checkArray.push(Variable.myInfo._id)
-    }
-  })
+      if (Variable.myInfo._id == elem._id) {
+        checkArray.push(Variable.myInfo._id)
+      }
+    })
+  }
 
 
   /**
      * делаем проверку на пользователя
      * если комната приватная и у руля её создатель то не запрашиваем пароль и отображаем все сообщения
     */
-  if (Static.Rooms.settingsroom.status) {
+  if (Static.Rooms.settingsroom && Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || checkArray.length > 0) {
       if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
@@ -316,7 +312,7 @@ function ShowMessage(Static) {
       //если пользователь ввел пароль
       if (Static.confirmPasword.valid) {
 
-        if (Static.Rooms.message.length > 0) {
+        if (Static.Rooms.message && Static.Rooms.message.length > 0) {
           return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -454,7 +450,7 @@ function ShowMessage(Static) {
       }
       //вывод всех комнат для авторизованных пользоватлей
     } else if (Static.Auth) {
-      if (Static.Rooms.message.length > 0) {
+      if (Static.Rooms.message && Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -559,7 +555,7 @@ async function SearchRooms(Static) {
 
         await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
         Static.ActiveListRooms = Variable.UsersRooms.list_records
-     //   CheckSystemInterface(Static) ?????????????? хз зачем
+        //   CheckSystemInterface(Static) ?????????????? хз зачем
       }
 
     }
@@ -569,38 +565,38 @@ async function SearchRooms(Static) {
 
 const BlockUserRooms = async function ({ Static }) {
 
-Static.ChatRooms = {}
+  Static.ChatRooms = {}
   await initOne(async () => {
 
     Static.defaultUserRoom = "crypto"
     await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system: true, "settingsroom.description": Static.defaultUserRoom }, limit: 10 })
 
-    await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false ,author:Variable.myInfo._id}, limit: 10 })
+    await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false, author: Variable.myInfo._id }, limit: 10 })
 
- 
+
     //await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
-    
-  
-      //await chatRooms(Static,true)
+
+
+    //await chatRooms(Static,true)
 
     //для пользовательских комнат которые пользователь сам создал
     await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
-      Static.nameRecords = "UsersRooms"
+    Static.nameRecords = "UsersRooms"
     //при первом заходе открываем системный чат
- 
+
     CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
     // console.log(Variable)
 
-Static.usChat = {show:false} 
- 
+    Static.usChat = { show: false }
+
 
   })
- 
+
   Static.ChatRooms = Variable.ListUsersRooms
-  
-   Static.quit
+
+  Static.quit
 
 
   //если не используем фильтры
@@ -613,16 +609,16 @@ Static.usChat = {show:false}
   let roomImage
 
 
- 
 
- 
+
+
 
   return (
 
     <div class="c-rooms c-container">
 
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
-        <ul  class="c-chats__togglers">
+        <ul class="c-chats__togglers">
           {/*
             //мапим системные комнаты
 
@@ -701,9 +697,9 @@ Static.usChat = {show:false}
                   ]}
                   title="Группы, созданные мной"
                   onClick={(e) => {
-                    chatRooms(Static,true) 
+                    chatRooms(Static, true)
                     Static.usChat.show = true
-                   
+
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_created"]} />
@@ -716,18 +712,18 @@ Static.usChat = {show:false}
                   ]}
                   title="Группы, в которых я состою"
                   onClick={(e) => {
-                    chatRooms(Static,false) 
+                    chatRooms(Static, false)
                     Static.usChat.show = true
-            
+
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_fellowship"]} />
                 </div>
               </div>
               <ul class="c-chats__togglers">
-   
+
                 {
-                  
+
                   Variable.ListUsersRooms.list_records.map(function (userrooms, i) {
                     return (
                       <li
@@ -739,9 +735,9 @@ Static.usChat = {show:false}
                       >
                         <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
                           ChangeRooms(Static, userrooms._id, false)
-                          
-                             
-                         
+
+
+
                         }}>
                           {
                             userrooms.settingsroom.images ?
@@ -754,8 +750,8 @@ Static.usChat = {show:false}
                         </a>
                       </li>
                     )
-                  
-                }) 
+
+                  })
                 }
               </ul>
             </div>
@@ -781,17 +777,24 @@ Static.usChat = {show:false}
                 <span class="c-action__title">Создать комнату</span>
               </div>
             </div>
-   
+
           </aside>
           <section class="c-chats__content" >
             <div class="c-chats__border">
               {Static.quit}
-              <h4 class="c-chats__title"><span>Комната: {Static.Rooms.settingsroom.title}</span></h4>
+              {
+                Static.Rooms.settingsroom != undefined
+                  ?
+                  <h4 class="c-chats__title"><span>Комната: {Static.Rooms.settingsroom.title}</span></h4>
+                  :
+                  null
+              }
+
               <ul class="c-chats__messages" id="chatMessage">
-             
+
 
                 {
-             
+
                   ShowMessage(Static)
                 }
 
@@ -832,24 +835,24 @@ Static.usChat = {show:false}
 
       {
 
-<Tags
-  Static={Static}
-  text={"ФЛУДИЛКА"}
-  classActive={Static.defaultUserRoom == "flood" ? "tag_button_active" : ""}
-  type="flood"
+        <Tags
+          Static={Static}
+          text={"ФЛУДИЛКА"}
+          classActive={Static.defaultUserRoom == "flood" ? "tag_button_active" : ""}
+          type="flood"
 
-/>
-}
-{
+        />
+      }
+      {
 
-<Tags
-  Static={Static}
-  text={"CRYPTO"}
-  classActive={Static.defaultUserRoom == "crypto" ? "tag_button_active" : ""}
-  type="crypto"
+        <Tags
+          Static={Static}
+          text={"CRYPTO"}
+          classActive={Static.defaultUserRoom == "crypto" ? "tag_button_active" : ""}
+          type="crypto"
 
-/>
-}
+        />
+      }
 
       <div class="c-rooms__searchblock c-search">
         <div class="c-search__container">
@@ -877,7 +880,7 @@ Static.usChat = {show:false}
     */}
 
       <div class="c-rooms__list">
-     
+
         {
 
           //мапим юзерские комнаты
@@ -886,36 +889,35 @@ Static.usChat = {show:false}
             if (Static.ActiveListRooms.length > 0) {
 
               return Static.ActiveListRooms.map(function (userrooms, i) {
-                
-                if(userrooms.settingsroom.images.length > 0)
-                {
+
+                if (userrooms.settingsroom.images.length > 0) {
                   roomImage = userrooms.settingsroom.images
                 }
-                else{
-                  roomImage  = images["banners/ecosystem"]
+                else {
+                  roomImage = images["banners/ecosystem"]
                 }
-                   
-                if (Variable.myInfo._id == userrooms.author._id) {
-                  edit = 
-                  <a class="c-room__settings" href=""  onclick={(e) => {
 
-                    if (Static.Auth) {
-                      fn.modals.ModalEditRoom({
-                        Static, userrooms,
-                        callback: (response) => {
-                  
-                          if (response.status =="ok") {
-                            Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
-                            Variable.UsersRooms.list_records.unshift(response.list_records[0])
-                            initReload()
+                if (userrooms.author && Variable.myInfo._id == userrooms.author._id) {
+                  edit =
+                    <a class="c-room__settings" href="" onclick={(e) => {
+
+                      if (Static.Auth) {
+                        fn.modals.ModalEditRoom({
+                          Static, userrooms,
+                          callback: (response) => {
+
+                            if (response.status == "ok") {
+                              Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
+                              Variable.UsersRooms.list_records.unshift(response.list_records[0])
+                              initReload()
+                            }
                           }
-                        }
-                      })
-                    }
-                    else {
-                      fn.modals.ModalNeedAuth()
-                    } 
-                  }}>
+                        })
+                      }
+                      else {
+                        fn.modals.ModalNeedAuth()
+                      }
+                    }}>
                       <img class="c-room__icon" src={svg.settings_icon} width="20" height="20" title="Редактировать" />
                     </a>
                 }
@@ -931,46 +933,46 @@ Static.usChat = {show:false}
                 }
                 return (
                   <div style={redborder} class="c-room">
-                  <header class="c-room__header">
-                    <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date>
-                    {edit}
-                  </header>
-                  <figure class="c-room__wrapper">
-                    <div class="c-room__image c-room__image--quadro" style="border-radius: 5px; border:1px solid #474c5a">
-                      <img src={roomImage} alt="" />
-                    </div>
-                    <figcaption>
-                      <div class="c-room__caption">
-                        <span class="c-room__lang c-question__langcontainer language_container">
-                          <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
-                        </span>
-                       { /*<h4 class="c-room__title" title="Категория">
+                    <header class="c-room__header">
+                      <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date>
+                      {edit}
+                    </header>
+                    <figure class="c-room__wrapper">
+                      <div class="c-room__image c-room__image--quadro" style="border-radius: 5px; border:1px solid #474c5a">
+                        <img src={roomImage} alt="" />
+                      </div>
+                      <figcaption>
+                        <div class="c-room__caption">
+                          <span class="c-room__lang c-question__langcontainer language_container">
+                            <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
+                          </span>
+                          { /*<h4 class="c-room__title" title="Категория">
                           <span>категория</span>
                         </h4>*/}
-                      </div>
-                      <h4 class="c-room__title" title="Название комнаты">
+                        </div>
+                        <h4 class="c-room__title" title="Название комнаты">
                           <span> {fn.sliceString(userrooms.settingsroom.title, 66)} </span>
                         </h4>
-                      <p class="c-room__count">Количество участников: {userrooms.users.length}</p>
-                      <div class="c-question__footer">
-                              <a
-                                class="c-button c-button--outline2"
-        
-                                onclick={(e) => {
-        
-                                  ChangeRooms(Static, userrooms._id, false)
-        
-                                }}
-        
-                              >
-                                <div class="c-button__wrapper">
-                                  войти
-                                </div>
-                              </a>
+                        <p class="c-room__count">Количество участников: {userrooms.users.length}</p>
+                        <div class="c-question__footer">
+                          <a
+                            class="c-button c-button--outline2"
+
+                            onclick={(e) => {
+
+                              ChangeRooms(Static, userrooms._id, false)
+
+                            }}
+
+                          >
+                            <div class="c-button__wrapper">
+                              войти
                             </div>
-                    </figcaption>
-                  </figure>
-                </div>
+                          </a>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </div>
                 )
 
               })
