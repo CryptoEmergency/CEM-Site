@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi } from "@betarost/cemjs";
-import { Input, CheckBox, Select, TextArea, MediaButton } from '@component/element/index.js';
+import { Input, CheckBox, Select, TextArea, MediaButton, MediaPreview } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';
 import {
 
@@ -8,12 +8,145 @@ import {
 
 
 
-
-
 const ModalCreateRoom = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
 
+  const loadPhoto = async function (file, type, xhr) {
+    
+    let dataURL;
+    let fileImg = file[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        // convert image file to base64 string
+        dataURL = reader.result;
+    }, false);
+    if (fileImg) {
+        reader.readAsDataURL(fileImg);
+    }
+
+    let previewObj = {
+        src: dataURL,
+        type: "image",
+        upload: 0,
+        size: 0
+    };
+    Static.mediaInputs.show = true;
+    Static.mediaInputs.value.push(previewObj);
+    let numItem = Static.mediaInputs.value.length - 1;
+
+    let nameFile = "file.png"
+    if (fileImg.name) {
+        nameFile = fileImg.name
+    }
+    const formData = new FormData()
+    formData.append('media', fileImg, nameFile);
+
+    xhr = new XMLHttpRequest()
+    xhr.open('POST', `/upload/${type}/`)
+    xhr.onload = async function () {
+        Static.mediaInputs.show = true;
+        if (!this.response) {
+            return
+        }
+        let response = JSON.parse(this.response);
+        Static.mediaInputs.value[numItem] = {
+            aspect: Static.mediaInputs.selectAspect,
+            type: response.mimetype.split("/")[0],
+            name: response.name
+        }
+        Static.isValid = true;
+        initReload();
+        // console.log('=af134a=', response)
+    }
+    xhr.upload.onprogress = async function (e) {
+        let contentLength;
+        if (e.lengthComputable) {
+            contentLength = e.total;
+        } else {
+            contentLength = parseInt(
+                e.target.getResponseHeader(
+                    "x-decompressed-content-length"
+                ),
+                10
+            );
+        }
+
+        if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+            Static.mediaInputs.value.splice(numItem, 1);
+            initReload()
+            return
+        }
+        Static.mediaInputs.value[numItem].upload = e.loaded
+        Static.mediaInputs.value[numItem].size = contentLength;
+        initReload();
+    }
+
+    xhr.send(formData)
+};
+
+const sendPhoto = async function (crooper, index) {
+    if (!crooper) {
+        return
+    }
+    let canvas;
+    canvas = crooper.getCroppedCanvas({});
+    let previewObj = {
+        src: canvas.toDataURL(),
+        type: "image",
+        upload: 0,
+        size: 0
+    };
+    Static.mediaInputs.show = true;
+    Static.mediaInputs.value[index] = previewObj;
+    initReload();
+
+    await canvas.toBlob(function (blob) {
+        fn.uploadMedia(
+            blob,
+            "chat",
+            async function () {
+                Static.mediaInputs.show = true;
+                if (!this.response) {
+                    return
+                }
+                let response = JSON.parse(this.response);
+                Static.mediaInputs.value[index] = {
+                    aspect: Static.mediaInputs.selectAspect,
+                    type: response.mimetype.split("/")[0],
+                    name: response.name
+                }
+                Static.isValid = true;
+                initReload();
+            },
+            async function (e) {
+                let contentLength;
+                if (e.lengthComputable) {
+                    contentLength = e.total;
+                } else {
+                    contentLength = parseInt(
+                        e.target.getResponseHeader(
+                            "x-decompressed-content-length"
+                        ),
+                        10
+                    );
+                }
+
+                if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
+                    Static.mediaInputs.value.splice(index, 1);
+                    initReload()
+                    return
+                }
+                Static.mediaInputs.value[index].upload = e.loaded
+                Static.mediaInputs.value[index].size = contentLength;
+                initReload();
+            }
+        );
+        initReload();
+        Variable.DelModals("ModalCropImage");
+    });
+    return
+}
 
   //инпут название
   Static.label = {
@@ -96,6 +229,9 @@ const ModalCreateRoom = function (data, ID) {
     checked: false,
 
   }
+
+  Static.Category ="NFT"
+  
   //кодовое слово
   Static.Confirm = {
     label: "Придумайте кодовое слово",
@@ -122,6 +258,11 @@ const ModalCreateRoom = function (data, ID) {
       }
     }
   }
+
+  Static.mediaInputs = {
+    value: [],
+    show: false,
+}
 
 
   init(async function () {
@@ -179,6 +320,23 @@ const ModalCreateRoom = function (data, ID) {
                   className="text1 create_post_chapter"
                   Static={Static.Title}
                 />
+              </div>
+              <br />
+              <div class="c-comments__field">
+
+                <select className="justselect-title" Static={Static.Category} onChange={function(e) {
+                  Static.Category = this.value
+         
+                      }}
+                         >
+                  <option selected value="NFT">NFT</option>
+                  <option value="Crypto вселенная">Crypto вселенная</option>
+                  <option value="Altcoin">Altcoin</option>
+                  <option value="Bitcoin">Bitcoin</option>
+                  <option value="Finances">Finances</option>
+                  <option value="Trading">Trading</option>
+                  </select>
+               
               </div>
               <br />
               <div class="container-input">
@@ -258,28 +416,39 @@ const ModalCreateRoom = function (data, ID) {
                 }}
               </div>
               <MediaButton
-                onclickPhoto={function () {
-                  if (this.files.length == 0) {
-                    return;
-                  }
+                                                onclickPhoto={function () {
+                                                    if (this.files.length == 0) {
+                                                        return;
+                                                    }
 
-                  Variable.SetModals({
-                    name: "ModalCropImage",
-                    data: {
-                      file: this.files[0],
-                      typeUpload: 'answers',
-                      arrMedia: formInputs.mediaInputs.value,
-                      aspectSelect: formInputs.mediaInputs.selectAspect,
-                      uploadCropImage: async function (cropper) {
-                        await sendPhoto(cropper)
-                        return;
-                      }
-                    },
-                  }, true);
-                  this.value = '';
-                }}
+                                                    loadPhoto(this.files, "chat");
 
-              />
+                                                }}
+                                          
+                                                iconPhoto={"message_camera"}
+                                            />
+                                            {  Static.mediaInputs.show && Static.mediaInputs.value.length
+                                                ?
+                                                <div class="create_post_chapter createPostImage">
+                                                    {
+                                                        Static.mediaInputs.value.map((item, index) => {
+                                                            if (item.type != "audio") {
+                                                                return (
+                                                                    <MediaPreview
+                                                                        item={item}
+                                                                        index={index}
+                                                                        type="chat"
+                                                                        Static={Static}
+                                                                        sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
+                                                                    />
+                                                                );
+                                                            }
+                                                        })
+                                                    }
+                                                </div>
+                                                :
+                                                null
+                                        }
 
 
               <div class={["registration-btn", active]}>
@@ -290,16 +459,18 @@ const ModalCreateRoom = function (data, ID) {
                     let confirmuser = Static.Confirm.value
                     let title = Static.label.value
                     let description = Static.Title.value
-                    let images = ""
+                    let category = Static.Category
+                    let images = Static.mediaInputs.value[0].name
                     let languages = Static.Lang.code
                     let country = Static.Country.code
                     // let system = false
-                    let request = { status, visible, confirmuser, title, description, images, languages, country }
-             
+                    let request = { status, visible, confirmuser, title, description, images, languages, country,category }
+                   // console.log(Static.mediaInputs.value[0].name)
                     let requier = await fn.restApi.setUserRoom.create(request)
 
                    if (requier.status == "ok") {
-                      Static.callback(requier)
+                    
+                     Static.callback(requier)
                       fn.modals.close(ID)
                     }
                   }

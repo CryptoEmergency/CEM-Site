@@ -244,7 +244,10 @@ const ModalAuth = function (data, ID) {
                                 type="button"
                                 class="c-modal__close"
                                 onclick={() => {
-                                    Variable.DelModals(ID)
+                                  //  if(Variable.dataUrl.adress!== "rooms")
+                                //    {
+                                        Variable.DelModals(ID)
+                                  //  } 
                                 }}
                             ></button>
                         </header>

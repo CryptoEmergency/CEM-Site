@@ -477,8 +477,9 @@ restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filt
         sort,
 
     }
-
+//console.log('=89815b=',data)
     let response = await sendApi.send(data);
+  //  console.log('=7755d1=',response)
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
         if (responseCheck.list_records.length) {
@@ -945,7 +946,7 @@ restApi.setQuestions.close = async function ({ _id, noAlert = true }) {
 
 restApi.setUserRoom = {}
 
-restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country, system = false }) {
+restApi.setUserRoom.create = async function ({ status, visible, confirmuser, title, description, images, languages, country,category, system = false }) {
     let data = {
         value: {
             settingsroom: {
@@ -954,6 +955,7 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
                 confirmuser: confirmuser,
                 title: title,
                 description: description,
+                category:category,
                 images: images,
             },
             languages: languages,
@@ -966,7 +968,7 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
     return checkSetAnswer(response)
 }
 
-restApi.setUserRoom.edit = async function ({ _id, status, visible, confirmuser, title, description, images, languages, country, system = false }) {
+restApi.setUserRoom.edit = async function ({ _id, status, visible, confirmuser, title, description, images, languages, category, country, system = false }) {
     let data = {
         _id: _id,
         value: {
@@ -976,6 +978,7 @@ restApi.setUserRoom.edit = async function ({ _id, status, visible, confirmuser, 
                 confirmuser: confirmuser,
                 title: title,
                 description: description,
+                category:category,
                 images: images,
             },
             languages: languages,
@@ -990,10 +993,23 @@ restApi.setUserRoom.edit = async function ({ _id, status, visible, confirmuser, 
     return checkSetAnswer(response)
 }
 
+
+
 restApi.setUserRoom.quit = async function ({ _id }) {
     let data = {
         _id: _id,
         quit: true
+    }
+
+    const response = await sendApi.create("setUserRoom", data);
+   
+    return checkSetAnswer(response)
+}
+
+restApi.setUserRoom.add = async function ({ _id }) {
+    let data = {
+        _id: _id,
+        add: true
     }
 
     const response = await sendApi.create("setUserRoom", data);
@@ -1022,6 +1038,7 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text, _id }) {
 
 
     const response = await sendApi.create("setUserRoom", data);
+   
     return checkSetAnswer(response)
 }
 

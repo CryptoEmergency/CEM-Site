@@ -64,6 +64,9 @@ const ModalEditRoom = function (data, ID) {
     value: data.userrooms.settingsroom.description,
     
   }
+  Static.Category = data.userrooms.settingsroom.category
+
+
   //инпут язык
   Static.Lang = {
     value: data.userrooms.country.code + ` (${data.userrooms.country.orig_name})`,
@@ -205,6 +208,23 @@ const ModalEditRoom = function (data, ID) {
                 />
               </div>
               <br />
+              <div class="c-comments__field">
+
+                <select className="justselect-title" Static={Static.Category} onChange={function(e) {
+                  Static.Category = this.value
+       
+                      }}
+                         >
+                  <option value="NFT">NFT</option>
+                  <option value="Crypto вселенная">Crypto вселенная</option>
+                  <option value="Altcoin">Altcoin</option>
+                  <option value="Bitcoin">Bitcoin</option>
+                  <option value="Finances">Finances</option>
+                  <option value="Trading">Trading</option>
+                  </select>
+               
+              </div>
+              <br />
               <div class="container-input">
 
 
@@ -316,13 +336,15 @@ const ModalEditRoom = function (data, ID) {
                     let confirmuser = Static.Confirm.value
                     let title = Static.label.value
                     let description = Static.Title.value
+                    let category = Static.Category
                     let images = ""
                     let languages = Static.Lang.code
                     let country = Static.Country.code
                     let _id = data.userrooms._id
+   
                     // let system = false
-                    let request = {_id, status, visible, confirmuser, title, description, images, languages, country }
-       
+                    let request = {_id, status, visible, confirmuser, title, description, images, languages, country,category }
+       console.log(request)
                     let requier = await fn.restApi.setUserRoom.edit(request)
                     
                     if (requier.status == "ok") {

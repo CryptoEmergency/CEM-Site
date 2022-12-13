@@ -12,41 +12,70 @@ import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
 
 
-//проверим есть ли мы в этой комнате
-async function checkUserInRoom(id)
+//подписаться на комнату
+async function subscribeRoom(Static,title,_id)
 {
-let user = []
-  let response = await fn.restApi.getUserRoom({ id, filter: { _id: id } })
 
+ let text = "Пользователь: "+ Variable.myInfo.nickname + " поодписан на уведомления"
 
-  response.list_records.forEach(function(e){
-    e.users.forEach(function(u){
-
-    user.push(u._id)
-    })
-        
-    })
-  
-
-if(!user.includes(Variable.myInfo._id))
+if(Static.usChat.show)
 {
- 
-  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false }, limit: 10})
+  await fn.restApi.setUserRoom.add({ _id })
+
+ await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
+ await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+
+ Static.ChatData  = await ShowMessage(Static)
+
+}
+else{
+
+  await fn.restApi.setUserRoom.add({ _id })
+
+  await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
+ await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
+
   await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
 
- return false
+  Static.ChatData  = await ShowMessage(Static)
+
 }
-else
+
+
+initReload()
+
+}
+
+//отписаться от комнаты
+ async function unsubscribeRoom(Static)
 {
 
-  return true
+  if(Static.usChat.show)
+  {
+    let _id = Static.Rooms._id
+    await fn.restApi.setUserRoom.quit({ _id })
+
+
+    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+    await CheckSystemInterface(Static)
+
+  }
+  else{
+    let _id = Static.Rooms._id
+    await fn.restApi.setUserRoom.quit({ _id })
+    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},users:Variable.myInfo._id }, limit:10})
+ 
+    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+    await CheckSystemInterface(Static)
+ 
+   //  await chatRooms(Static,false)
+     
+  }
+
+initReload()
 }
 
-
-
-}
-
-//комнаты в чате 
+//мои комнаты и комнаты на которые подписан
 async function chatRooms(Static,main)
 {
   console.log("chatRooms")
@@ -56,20 +85,19 @@ async function chatRooms(Static,main)
 
 
 
-
 if(main)
 {
-  
+  Static.usChat.show = true
   await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:Variable.myInfo._id }, limit:10})
 
   Static.ChatRooms = Variable.ListUsersRooms
 }
 else{
-  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},users:Variable.myInfo._id }, limit:10})
+  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
 
   Static.ChatRooms = Variable.ListUsersRooms
   
-  
+  Static.usChat.show  = false
 }
 
   initReload()
@@ -78,19 +106,21 @@ else{
 }
 
 //системные комнаты
-const Tags = function ({ Static, classActive, text, type }) {
-  console.log("Tags")
+const Tags = async function ({ Static, _id,classActive, text, type }) {
+
+  Static.defaultUserRoom = "crypto"
   return (
     <div class={["tag_button", classActive]}
       onclick={async () => {
 
         Static.defaultUserRoom = type
 
-        await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "settingsroom.description": Static.defaultUserRoom }, limit: 10 })
+     // let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "settingsroom.description": Static.defaultUserRoom }, limit: 10 })
 
 
-        CheckSystemInterface(Static, true)
-        ChangeRooms(Static, Static.Rooms._id, true)
+      //  CheckSystemInterface(Static, true)
+        ChangeRooms(Static, _id, true)
+    
 
       }}>
       <span>{text}</span>
@@ -104,31 +134,30 @@ function checkAthorisation(Static) {
     return true
   }
   else {
+
     fn.modals.ModalNeedAuth()
     return false
   }
 }
 
 //чекнем системную комнату отинтерфейса
-function CheckSystemInterface(Static, tag) {
+ async function CheckSystemInterface(Static, tag) {
   console.log("CheckSystemInterface")
 
-  let langCode
-  if (tag) {
-    langCode = Static.Rooms.languages.code
-  }
-  else {
-    langCode = Variable.lang.code
-  }
-  Variable.ListSystemsRooms.list_records.forEach(function (room, i) {
+  let langCode = Static.lang.code
 
-    if (langCode == room.languages.code) {
+
+  await fn.restApi.getUserRoom({  name: "ListSystemsRooms", filter: { system: true, "settingsroom.category": Static.defaultUserRoom,"languages.code":langCode }, limit: 10 })
 
       //системная комната
-      Static.Rooms = Variable.ListSystemsRooms.list_records[i]
+      Static.Rooms = Variable.ListSystemsRooms.list_records[0]
 
-    }
-  })
+ 
+  
+  Static.ChatData  = await ShowMessage(Static)
+
+  Static.RoomTitle =   Static.Rooms.settingsroom.title
+  initReload()
 }
 
 //меняем комнаты
@@ -146,46 +175,10 @@ async function ChangeRooms(Static, _id, system) {
 
   Static.Rooms = response.list_records[0]
 
-  Static.lang.name = Static.Rooms.languages.orig_name
-  Static.lang.code = Static.Rooms.languages.code
 
-let arrUser = []
-
-Static.Rooms.users.forEach(function(u){
-  arrUser.push(u._id)
-})
-
-
-    if(arrUser.includes(Variable.myInfo._id) && !Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
-    {
- 
-      Static.quit =  <a
-      class="c-button c-button--outline2"
+  Static.ChatData  = await ShowMessage(Static)
   
-      onclick={async (e) => {
-  let _id = Static.Rooms._id
-         fn.restApi.setUserRoom.quit({ _id })
-         
-         
-    
-          await chatRooms(Static,true)
-          CheckSystemInterface(Static)
-     
-         initReload()
-      }}
-  
-    >
-      <div class="c-button__wrapper">
-        выйти из комнаты
-      </div>
-    </a>
-    }
-    else{
-      Static.quit = "" 
-    }
-   
-
-  ShowMessage(Static)
+  Static.RoomTitle =   Static.Rooms.settingsroom.title
 
   Static.MessageValue.el.value = ""
 
@@ -203,11 +196,23 @@ async function sendRoomsMessage(Static, id, textdata) {
 
   if (textdata && textdata.length > 0) {
     await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
+
   }
   let response = await fn.restApi.getUserRoom({ _id, filter: { _id: _id } })
   Static.Rooms = response.list_records[0]
  
 
+  if(Static.usChat.show)
+{
+
+
+  await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+  
+}
+else{
+  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},users:Variable.myInfo._id }, limit:10})
+}
+Static.ChatData  = await ShowMessage(Static)
   /*
   if(await checkUserInRoom(_id) && Static.Rooms.author._id == Variable.myInfo._id &&  !Static.Rooms.system )
   {
@@ -224,7 +229,7 @@ async function sendRoomsMessage(Static, id, textdata) {
 }
 
 //показываем сообщения
-function ShowMessage(Static) {
+async function ShowMessage(Static) {
   console.log("ShowMessage")
   Static.MessageValue.id = Static.Rooms._id
 
@@ -235,12 +240,42 @@ function ShowMessage(Static) {
 
 
   let checkArray = []
-  Static.Rooms.users.forEach(function (elem, i) {
+  Static.Rooms.subscribeUsers.forEach(function (elem, i) {
 
     if (Variable.myInfo._id == elem._id) {
       checkArray.push(Variable.myInfo._id)
     }
   })
+
+
+  let arrUser = []
+
+  Static.Rooms.subscribeUsers.forEach(function(u){
+    arrUser.push(u._id)
+  })
+  
+  
+      if(arrUser.includes(Variable.myInfo._id) && !Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
+      {
+   
+        Static.quit =  <a
+        class="c-button c-button--outline2"
+    
+        onclick={async (e) => {
+          unsubscribeRoom(Static);
+   }}
+    
+      >
+        <div class="c-button__wrapper">
+          выйти из комнаты
+        </div>
+      </a>
+      }
+      else{
+        Static.quit = "" 
+      }
+
+
 
 
   /**
@@ -256,28 +291,6 @@ function ShowMessage(Static) {
           return (
             <li class="c-chats__message c-message">
               <Avatar author={userrooms.author} parent={"c-message__avatar"} />
-              {/* <div class="c-message__avatar micro_user_avatar">
-                <img
-                  style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);"
-                  src="/assets/image/nft/sample4.png"
-                  width="206"
-                  height="198"
-                  alt=""
-                  class="c-message__img"
-                />
-                <img
-                  style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;"
-                  src="/assets/profile/frame/default.svg"
-                />
-                <div class="user_avatar_level">
-                  <img src="/assets/profile/levelGray.svg" />
-                  <span>0</span>
-                </div>
-                <div class="avatar_user_online"></div>
-                <div style="display: none;" class="avatar_user_offline">
-                </div>
-              </div> */}
-
               {
                 //ники пользователей 
                 <div class="c-message__title">
@@ -322,20 +335,7 @@ function ShowMessage(Static) {
 
             return (
               <li class="c-chats__message c-message">
-                <Avatar author={userrooms.author} parent={"c-message__avatar"} />
-                {/* <div class="c-message__avatar micro_user_avatar">
-                  <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
-                  <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;" src="/assets/profile/frame/default.svg" />
-                  <div class="user_avatar_level">
-                    <img src="/assets/profile/levelGray.svg" />
-                    <span>0</span>
-                  </div>
-                  <div class="avatar_user_online"></div>
-                  <div style="display: none;" class="avatar_user_offline">
-                  </div>
-                </div> */}
-
-                {
+                <Avatar author={userrooms.author} parent={"c-message__avatar"} />{
                   //ники пользователей showDate
 
                   <div class="c-message__title">
@@ -406,20 +406,7 @@ function ShowMessage(Static) {
 
           return (
             <li class="c-chats__message c-message">
-              <Avatar author={userrooms.author} parent={"c-message__avatar"} />
-              {/* <div class="c-message__avatar micro_user_avatar">
-                  <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
-                  <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;" src="/assets/profile/frame/default.svg" />
-                  <div class="user_avatar_level">
-                    <img src="/assets/profile/levelGray.svg" />
-                    <span>0</span>
-                  </div>
-                  <div class="avatar_user_online"></div>
-                  <div style="display: none;" class="avatar_user_offline">
-                  </div>
-                </div> */}
-
-              {
+              <Avatar author={userrooms.author} parent={"c-message__avatar"} />{
                 //ники пользователей showDate
 
                 <div class="c-message__title">
@@ -460,20 +447,7 @@ function ShowMessage(Static) {
 
           return (
             <li class="c-chats__message c-message">
-              <Avatar author={userrooms.author} parent={"c-message__avatar"} />
-              {/* <div class="c-message__avatar micro_user_avatar">
-                <img style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 69%; width: 69%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);" src="/assets/image/nft/sample4.png" width="206" height="198" alt="" class="c-message__img" />
-                <img style="position: absolute; top: 0;left: 50%;transform: translateX(-50%);z-index: 2; height:100%;width: 100%;" src="/assets/profile/frame/default.svg" />
-                <div class="user_avatar_level">
-                  <img src="/assets/profile/levelGray.svg" />
-                  <span>0</span>
-                </div>
-                <div class="avatar_user_online"></div>
-                <div style="display: none;" class="avatar_user_offline">
-                </div>
-              </div> */}
-
-              {
+              <Avatar author={userrooms.author} parent={"c-message__avatar"} /> {
                 //ники пользователей showDate
 
                 <div class="c-message__title">
@@ -528,12 +502,14 @@ function ShowMessage(Static) {
 
 //поиск
 async function SearchRooms(Static) {
+ 
   console.log("searchroom")
   Static.searchInput = {
     value: "",
     label: "",
     active: false,
     condition: async (value) => {
+    
       let response
       if (value.length > 0) {
         Static.searchInput.active = true
@@ -567,34 +543,45 @@ async function SearchRooms(Static) {
 }
 
 
+
+
+
 const BlockUserRooms = async function ({ Static }) {
 
 Static.ChatRooms = {}
+
   await initOne(async () => {
 
+    Static.Tag = {}
+    //для тегов
+    let resp = await fn.restApi.getUserRoom({  name: "ListSystemsRooms", filter: { system: true, "languages.code":Variable.lang.code}, limit: 10 })
+    Static.Tag = resp
     Static.defaultUserRoom = "crypto"
-    await fn.restApi.getUserRoom({ cache: true, name: "ListSystemsRooms", filter: { system: true, "settingsroom.description": Static.defaultUserRoom }, limit: 10 })
 
-    await fn.restApi.getUserRoom({ cache: true, name: "ListUsersRooms", filter: { system: false ,author:Variable.myInfo._id}, limit: 10 })
-
- 
-    //await fn.restApi.getUserRoom({ name: "ListChatUsersRooms", filter: {system: false }, limit:-1})
-    
-  
-      //await chatRooms(Static,true)
+    //комнаты в чате
+    await fn.restApi.getUserRoom({  name: "ListUsersRooms", filter: { system: false ,author:Variable.myInfo._id}, limit: 10 })
 
     //для пользовательских комнат которые пользователь сам создал
-    await fn.restApi.getUserRoom({ cache: true, name: "UsersRooms", filter: { system: false }, limit: 10 })
+    await fn.restApi.getUserRoom({  name: "UsersRooms", filter: { system: false }, limit: 10 })
       Static.nameRecords = "UsersRooms"
-    //при первом заходе открываем системный чат
- 
-    CheckSystemInterface(Static)
-    //запускаем поиск и фильтры
-    SearchRooms(Static)
-    // console.log(Variable)
 
-Static.usChat = {show:false} 
+     // if(checkAthorisation(Static))
+     // {
+       
+  //при первом заходе открываем системный чат
+ CheckSystemInterface(Static)
+  //запускаем поиск и фильтры
+  SearchRooms(Static)
+
+ //     }
+  
+
+   
+//комнаты в чате
+Static.usChat = {show:true} 
  
+
+
 
   })
  
@@ -610,11 +597,11 @@ Static.usChat = {show:false}
 
   let redborder
   let edit
+  let subscribe
   let roomImage
-
+  let bell
 
  
-
  
 
   return (
@@ -660,14 +647,27 @@ Static.usChat = {show:false}
               name: "ModalChangeLanguage",
               data: {
                 onclick: async (langCode, langOrig) => {
-                  let lang = Variable.ListSystemsRooms.list_records.filter((item) => {
-                    return item.languages.code == langCode;
+                  let lang = Variable.listsLang.filter((item) => {
+                    return item.code == langCode;
                   });
+                  let searchLang = lang[0].code
+             
+                  let resp = await fn.restApi.getUserRoom({  name: "ListSystemsRooms", filter: { system: true, "languages.code":searchLang}, limit: 10 })
+                  if (resp.totalFound > 0) {
+              
+                   Static.lang.name = langOrig;
+                   Static.lang.code = langCode;
+                   Static.Tag = resp
 
-                  if (lang.length > 0) {
-                    Static.lang.name = langOrig;
-                    Static.lang.code = langCode;
-                    ChangeRooms(Static, lang[0]._id, true)
+                   let systemroom = Static.Tag.list_records.filter((item) => {
+                    return item.settingsroom.category == Static.defaultUserRoom;
+                  });
+              
+                 if(Static.Rooms.system)
+                 {
+                  ChangeRooms(Static, systemroom[0]._id, true)
+                 }
+                   // 
                   } else {
                     alert("Нет такой системной комнаты")
                   }
@@ -677,17 +677,6 @@ Static.usChat = {show:false}
           }}
         >{Static.lang.name}</div>
       </div>
-      {/*
-        <Tags
-          Static={Static}
-          text={Variable.lang.categoryName.all}
-          classActive={Static.defaultUserRoom == "all" ? "tag_button_active" : ""}
-          type="all"
-
-        />
-*/
-      }
-
       <div class="c-rooms__chats">
         <div class=" c-chats__wrapper">
           <aside class="c-chats__aside">
@@ -727,8 +716,10 @@ Static.usChat = {show:false}
               <ul class="c-chats__togglers">
    
                 {
-                  
+              
                   Variable.ListUsersRooms.list_records.map(function (userrooms, i) {
+                   if(userrooms.settingsroom.title && typeof userrooms.settingsroom.title!=="undefined")
+                   {
                     return (
                       <li
                         class={[
@@ -745,7 +736,7 @@ Static.usChat = {show:false}
                         }}>
                           {
                             userrooms.settingsroom.images ?
-                              <img src={`/assets/upload/rooms/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
+                              <img src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
                               :
                               <div class="c-toggler__wrap">
                                 <span class="c-toggler__name">{userrooms.settingsroom.title}</span>
@@ -754,19 +745,27 @@ Static.usChat = {show:false}
                         </a>
                       </li>
                     )
-                  
+                  }
                 }) 
-                }
+                
+              }
+                
               </ul>
             </div>
             <div class="c-chats__actions" onclick={() => {
               if (Static.Auth) {
                 fn.modals.ModalCreateRoom({
-                  callback: (response) => {
+                  callback: async (response) => {
+               
+                    if (response.list_records.length ==1) {
+                      await fn.restApi.getUserRoom({  name: "ListUsersRooms", filter: { system: false ,author:Variable.myInfo._id}, limit: 10 })
 
-                    if (response.list_records.length > 0) {
-                      Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
-                      initReload()
+                      //для пользовательских комнат которые пользователь сам создал
+                      await fn.restApi.getUserRoom({  name: "UsersRooms", filter: { system: false }, limit: 10 })
+                  initReload()
+                    }
+                    else{
+                      initReload()  
                     }
                   }
                 })
@@ -785,14 +784,16 @@ Static.usChat = {show:false}
           </aside>
           <section class="c-chats__content" >
             <div class="c-chats__border">
-              {Static.quit}
-              <h4 class="c-chats__title"><span>Комната: {Static.Rooms.settingsroom.title}</span></h4>
+              {Static.quit
+              
+              }
+              <h4 class="c-chats__title"><span>Комната: { Static.RoomTitle}</span></h4>
               <ul class="c-chats__messages" id="chatMessage">
              
 
                 {
              
-                  ShowMessage(Static)
+             Static.ChatData 
                 }
 
               </ul>
@@ -831,25 +832,20 @@ Static.usChat = {show:false}
       </div>
 
       {
-
+Static.Tag.list_records.map(function(tag){
+  return(
 <Tags
   Static={Static}
-  text={"ФЛУДИЛКА"}
-  classActive={Static.defaultUserRoom == "flood" ? "tag_button_active" : ""}
-  type="flood"
+  _id = {tag._id}
+  text={tag.settingsroom.title}
+  classActive={Static.defaultUserRoom == tag.settingsroom.category ? "tag_button_active" : ""}
+  type={tag.settingsroom.category}
 
-/>
+/>)
+})
+
 }
-{
 
-<Tags
-  Static={Static}
-  text={"CRYPTO"}
-  classActive={Static.defaultUserRoom == "crypto" ? "tag_button_active" : ""}
-  type="crypto"
-
-/>
-}
 
       <div class="c-rooms__searchblock c-search">
         <div class="c-search__container">
@@ -882,18 +878,36 @@ Static.usChat = {show:false}
 
           //мапим юзерские комнаты
           () => {
-
+       
+         
             if (Static.ActiveListRooms.length > 0) {
 
               return Static.ActiveListRooms.map(function (userrooms, i) {
                 
                 if(userrooms.settingsroom.images.length > 0)
                 {
-                  roomImage = userrooms.settingsroom.images
+                  roomImage = "/assets/upload/chat/"+userrooms.settingsroom.images
                 }
                 else{
                   roomImage  = images["banners/ecosystem"]
                 }
+
+                let arrUser = []
+
+                userrooms.subscribeUsers.forEach(function(u){
+                  arrUser.push(u._id)
+                })
+                
+                
+                    if(arrUser.includes(Variable.myInfo._id) && !userrooms.settingsroom.system  && userrooms.author._id!==Variable.myInfo._id)
+                    {
+                      bell = svg.bell
+                      
+                    }
+                    else
+                    {
+                      bell = svg.bell_1
+                    }
                    
                 if (Variable.myInfo._id == userrooms.author._id) {
                   edit = 
@@ -902,11 +916,14 @@ Static.usChat = {show:false}
                     if (Static.Auth) {
                       fn.modals.ModalEditRoom({
                         Static, userrooms,
-                        callback: (response) => {
+                        callback: async(response) => {
                   
                           if (response.status =="ok") {
-                            Variable.ListUsersRooms.list_records.unshift(response.list_records[0])
-                            Variable.UsersRooms.list_records.unshift(response.list_records[0])
+                            await fn.restApi.getUserRoom({  name: "ListUsersRooms", filter: { system: false ,author:Variable.myInfo._id}, limit: 10 })
+                            
+                            //для пользовательских комнат которые пользователь сам создал
+                            await fn.restApi.getUserRoom({  name: "UsersRooms", filter: { system: false }, limit: 10 })
+   
                             initReload()
                           }
                         }
@@ -918,10 +935,16 @@ Static.usChat = {show:false}
                   }}>
                       <img class="c-room__icon" src={svg.settings_icon} width="20" height="20" title="Редактировать" />
                     </a>
+                    subscribe = ''
                 }
                 else {
                   edit = ''
+                  subscribe =   
+                  <a class="c-room__settings" href=""
+                  onclick={(e) => {subscribeRoom(Static,userrooms.settingsroom.title,userrooms._id)}}><img class="c-room__icon" src={bell} width="20" height="20" title="подписаться" /></a>
                 }
+
+                
 
                 if (Static.Rooms._id == userrooms._id) {
                   redborder = "border:1px solid #ff22ac"
@@ -933,7 +956,11 @@ Static.usChat = {show:false}
                   <div style={redborder} class="c-room">
                   <header class="c-room__header">
                     <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date>
+                  <div>
+                    {subscribe}
+                     </div>
                     {edit}
+                   
                   </header>
                   <figure class="c-room__wrapper">
                     <div class="c-room__image c-room__image--quadro" style="border-radius: 5px; border:1px solid #474c5a">
@@ -944,14 +971,16 @@ Static.usChat = {show:false}
                         <span class="c-room__lang c-question__langcontainer language_container">
                           <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
                         </span>
-                       { /*<h4 class="c-room__title" title="Категория">
-                          <span>категория</span>
-                        </h4>*/}
-                      </div>
-                      <h4 class="c-room__title" title="Название комнаты">
+                       { <h4 class="c-room__title" title="Категория">
+                        
+                          <span> {fn.sliceString(userrooms.settingsroom.category, 66)} </span>
                           <span> {fn.sliceString(userrooms.settingsroom.title, 66)} </span>
-                        </h4>
-                      <p class="c-room__count">Количество участников: {userrooms.users.length}</p>
+                        </h4>}
+                      
+                     { /*<h4 class="c-room__title" title="Название комнаты">
+                          
+                </h4>*/}</div>
+                      <p class="c-room__count">Количество участников: {userrooms.subscribeUsers.length+1}</p>
                       <div class="c-question__footer">
                               <a
                                 class="c-button c-button--outline2"
@@ -981,8 +1010,9 @@ Static.usChat = {show:false}
                 <div><center><h4>По данному запросу комнат не найдено</h4></center></div>
               )
             }
-          }
+        
         }
+      }
       </div>
 
       <ButtonShowMore Static={Static} action="getUserRoom" limit={10} />
