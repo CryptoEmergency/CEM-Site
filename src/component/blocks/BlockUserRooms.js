@@ -597,7 +597,7 @@ const BlockUserRooms = async function ({ Static }) {
     Static.Tag = {}
     //для тегов
     let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }, limit: 10 })
- console.log(resp)
+
    if(resp.totalFound == 0)
    {
     Static.showTag = false
