@@ -23,11 +23,16 @@ const start = function (data, ID) {
             await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Крипто RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Crypto" })
             await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
         },
+
+
+
+        
         () => {
             return (
                 <div class="c-main__body">
                     {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
                     Version page {Variable.Static.tpm}
+
 
                     <div>={tmp}=</div>
                     <img src={svg['load']} />

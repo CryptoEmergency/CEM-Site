@@ -13,86 +13,142 @@ import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/el
 
 
 //подписаться на комнату
-async function subscribeRoom(Static, title, _id) {
+async function subscribeRoom(Static,title,_id)
+{
+ let text = "Пользователь: "+ Variable.myInfo.nickname + " подписан на уведомления"
+ Static.Subscription = true
+if(Static.usChat.show)
+{
 
-  let text = "Пользователь: " + Variable.myInfo.nickname + " поодписан на уведомления"
+  console.log("subscribeRoom left")
+  await fn.restApi.setUserRoom.add({ _id })
 
-  if (Static.usChat.show) {
-    await fn.restApi.setUserRoom.add({ _id })
+ await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
+ let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
 
-    await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
-    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+ //если включены мои комнаты и я сижу в чужой комнате
+ if(Static.Rooms._id == _id)
+ {
 
-    Static.ChatData = await ShowMessage(Static)
+  Static.Rooms ={}
+  Static.ChatData = ""
+  let newRoom= resp.list_records.filter((item) => {
+    return item._id == _id;
+  });
+  
+  Static.Rooms = newRoom[0]
+  
+   Static.ChatData  = await ShowMessage(Static)
+ }
+ 
 
-  }
-  else {
+}
+else{
+  console.log("subscribeRoom right")
+  await fn.restApi.setUserRoom.add({ _id })
 
-    await fn.restApi.setUserRoom.add({ _id })
+  await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
+ await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
 
-    await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
-    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: { "$ne": Variable.myInfo._id }, subscribeUsers: Variable.myInfo._id }, limit: 10 })
+ let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+ 
 
-    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+ if(Static.Rooms._id == _id)
+ {
 
-    Static.ChatData = await ShowMessage(Static)
+  Static.Rooms ={}
+ Static.ChatData = ""
+  let newRoom= resp.list_records.filter((item) => {
+    return item._id == _id;
+  });
+  
+  Static.Rooms = newRoom[0]
+  
+   Static.ChatData  = await ShowMessage(Static)
+ }
 
-  }
+}
 
 
-  initReload()
+
+//initReload()
 
 }
 
 //отписаться от комнаты
-async function unsubscribeRoom(Static) {
-
-  if (Static.usChat.show) {
-    let _id = Static.Rooms._id
+ async function unsubscribeRoom(Static,title,_id)
+{
+  let text = "Пользователь: "+ Variable.myInfo.nickname + " отписался от уведомлений"
+  Static.Subscription = false
+  if(Static.usChat.show)
+  {
+    console.log("unsubscribeRoom left")
+  
     await fn.restApi.setUserRoom.quit({ _id })
+    await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
 
-
-    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
-    await CheckSystemInterface(Static)
+   let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+    let newRoom= resp.list_records.filter((item) => {
+      return item._id == _id;
+    });
+    Static.Rooms ={}
+    Static.ChatData = ""
+    Static.Rooms = newRoom[0]
+     Static.ChatData  = await ShowMessage(Static)
+   // await CheckSystemInterface(Static)
 
   }
-  else {
-    let _id = Static.Rooms._id
+  else{
+    console.log("unsubscribeRoom right")
+   
     await fn.restApi.setUserRoom.quit({ _id })
-    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: { "$ne": Variable.myInfo._id }, users: Variable.myInfo._id }, limit: 10 })
+    await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
+    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
+ 
+   let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+    
+    let newRoom= resp.list_records.filter((item) => {
+      return item._id == _id;
+    });
+    Static.Rooms ={}
+  Static.ChatData = ""
+    Static.Rooms = newRoom[0]
+     Static.ChatData  = await ShowMessage(Static)
 
-    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
-    await CheckSystemInterface(Static)
 
-    //  await chatRooms(Static,false)
-
+  //  await CheckSystemInterface(Static)
+ 
+   //  await chatRooms(Static,false)
+     
   }
 
-  initReload()
+//initReload()
 }
 
 //мои комнаты и комнаты на которые подписан
-async function chatRooms(Static, main) {
+async function chatRooms(Static,main)
+{
   console.log("chatRooms")
-
+  
 
   document.getElementById("spinner").hidden = false
 
 
 
-  if (main) {
-    Static.usChat.show = true
-    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: Variable.myInfo._id }, limit: 10 })
+if(main)
+{
+  Static.usChat.show = true
+  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:Variable.myInfo._id }, limit:10})
 
-    Static.ChatRooms = Variable.ListUsersRooms
-  }
-  else {
-    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: { "$ne": Variable.myInfo._id }, subscribeUsers: Variable.myInfo._id }, limit: 10 })
+  Static.ChatRooms = Variable.ListUsersRooms
+}
+else{
+  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
 
-    Static.ChatRooms = Variable.ListUsersRooms
-
-    Static.usChat.show = false
-  }
+  Static.ChatRooms = Variable.ListUsersRooms
+  
+  Static.usChat.show  = false
+}
 
   initReload()
 
@@ -100,8 +156,8 @@ async function chatRooms(Static, main) {
 }
 
 //системные комнаты
-const Tags = async function ({ Static, _id, classActive, text, type }) {
-
+const Tags = async function ({ Static, _id,classActive, text, type }) {
+  
   Static.defaultUserRoom = "crypto"
   return (
     <div class={["tag_button", classActive]}
@@ -109,12 +165,12 @@ const Tags = async function ({ Static, _id, classActive, text, type }) {
 
         Static.defaultUserRoom = type
 
-        // let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "settingsroom.description": Static.defaultUserRoom }, limit: 10 })
+     // let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "settingsroom.description": Static.defaultUserRoom }, limit: 10 })
 
 
-        //  CheckSystemInterface(Static, true)
+      //  CheckSystemInterface(Static, true)
         ChangeRooms(Static, _id, true)
-
+    
 
       }}>
       <span>{text}</span>
@@ -135,22 +191,22 @@ function checkAthorisation(Static) {
 }
 
 //чекнем системную комнату отинтерфейса
-async function CheckSystemInterface(Static, tag) {
+ async function CheckSystemInterface(Static, tag) {
   console.log("CheckSystemInterface")
 
   let langCode = Static.lang.code
 
 
-  await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "settingsroom.category": Static.defaultUserRoom, "languages.code": langCode }, limit: 10 })
+  await fn.restApi.getUserRoom({  name: "ListSystemsRooms", filter: { system: true, "settingsroom.category": Static.defaultUserRoom,"languages.code":langCode }, limit: 10 })
 
-  //системная комната
-  Static.Rooms = Variable.ListSystemsRooms.list_records[0]
+      //системная комната
+      Static.Rooms = Variable.ListSystemsRooms.list_records[0]
 
+ 
+  
+  Static.ChatData  = await ShowMessage(Static)
 
-
-  Static.ChatData = typeof Static.Rooms !== "undefined" ? await ShowMessage(Static) : null
-
-  Static.RoomTitle = typeof Static.Rooms !== "undefined" ? Static.Rooms.settingsroom.title : null
+  Static.RoomTitle =   Static.Rooms.settingsroom.title
   initReload()
 }
 
@@ -158,7 +214,7 @@ async function CheckSystemInterface(Static, tag) {
 async function ChangeRooms(Static, _id, system) {
 
   console.log("ChangeRooms")
-
+  Static.Rooms ={}
 
 
   document.getElementById("spinner").hidden = false
@@ -170,13 +226,13 @@ async function ChangeRooms(Static, _id, system) {
   Static.Rooms = response.list_records[0]
 
 
-  Static.ChatData = await ShowMessage(Static)
-
-  Static.RoomTitle = Static.Rooms.settingsroom.title
+  Static.ChatData  = await ShowMessage(Static)
+  
+  Static.RoomTitle =   Static.Rooms.settingsroom.title
 
   Static.MessageValue.el.value = ""
 
-
+ 
 
   initReload()
 
@@ -194,18 +250,19 @@ async function sendRoomsMessage(Static, id, textdata) {
   }
   let response = await fn.restApi.getUserRoom({ _id, filter: { _id: _id } })
   Static.Rooms = response.list_records[0]
+ 
+
+  if(Static.usChat.show)
+{
 
 
-  if (Static.usChat.show) {
-
-
-    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
-
-  }
-  else {
-    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: { "$ne": Variable.myInfo._id }, users: Variable.myInfo._id }, limit: 10 })
-  }
-  Static.ChatData = await ShowMessage(Static)
+  await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+  
+}
+else{
+  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
+}
+Static.ChatData  = await ShowMessage(Static)
   /*
   if(await checkUserInRoom(_id) && Static.Rooms.author._id == Variable.myInfo._id &&  !Static.Rooms.system )
   {
@@ -215,7 +272,7 @@ async function sendRoomsMessage(Static, id, textdata) {
     await chatRooms(Static,false) 
   }
   */
-
+  
 
   initReload()
 
@@ -229,44 +286,44 @@ async function ShowMessage(Static) {
   let authInput
   let authMessage
 
+  Static.quit = ""
+   
+      let t
 
-
-
-  let checkArray = []
-  Static.Rooms.subscribeUsers.forEach(function (elem, i) {
-
-    if (Variable.myInfo._id == elem._id) {
-      checkArray.push(Variable.myInfo._id)
-    }
-  })
-
-
-  let arrUser = []
-
-  Static.Rooms.subscribeUsers.forEach(function (u) {
-    arrUser.push(u._id)
-  })
-
-
-  if (arrUser.includes(Variable.myInfo._id) && !Static.Rooms.system && Static.Rooms.author._id !== Variable.myInfo._id) {
-
-    Static.quit = <a
-      class="c-button c-button--outline2"
-
-      onclick={async (e) => {
-        unsubscribeRoom(Static);
-      }}
-
-    >
-      <div class="c-button__wrapper">
-        выйти из комнаты
-      </div>
-    </a>
-  }
-  else {
-    Static.quit = ""
-  }
-
+      if(!Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
+      {
+        if(!Static.Subscription && !Static.Rooms.subscribeUsers.includes(Variable.myInfo._id))
+        {
+           t = "подписаться"
+        }
+        else{
+           t = "отписаться" 
+        }
+        Static.quit =  <a
+        class="c-button c-button--outline2"
+    
+        onclick={ function(event){
+           event.preventDefault();
+           if(!Static.Subscription && !Static.Rooms.subscribeUsers.includes(Variable.myInfo._id))
+           {
+            subscribeRoom(Static,"",Static.MessageValue.id);
+           }else{
+            unsubscribeRoom(Static,"",Static.MessageValue.id);
+           }
+          
+        
+   }}
+    
+      >
+        <div class="c-button__wrapper">
+        {t }
+        </div>
+      </a>
+      }
+      else{
+        Static.quit = ""
+      }
+     
 
 
 
@@ -490,18 +547,19 @@ async function ShowMessage(Static) {
 
 
   }
+
 }
 
 //поиск
 async function SearchRooms(Static) {
-
+ 
   console.log("searchroom")
   Static.searchInput = {
     value: "",
     label: "",
     active: false,
     condition: async (value) => {
-
+    
       let response
       if (value.length > 0) {
         Static.searchInput.active = true
@@ -527,7 +585,7 @@ async function SearchRooms(Static) {
 
         await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
         Static.ActiveListRooms = Variable.UsersRooms.list_records
-        //   CheckSystemInterface(Static) ?????????????? хз зачем
+     //   CheckSystemInterface(Static) ?????????????? хз зачем
       }
 
     }
@@ -538,12 +596,15 @@ async function SearchRooms(Static) {
 
 
 
+
+
 const BlockUserRooms = async function ({ Static }) {
 
   Static.ChatRooms = {}
+ 
 
   await initOne(async () => {
-
+    Static.Subscription = false
     Static.Tag = {}
     //для тегов
     let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }, limit: 10 })
@@ -881,16 +942,7 @@ const BlockUserRooms = async function ({ Static }) {
                   roomImage = images["banners/ecosystem"]
                 }
 
-                let arrUser = []
-
-                if (userrooms.subscribeUsers.length) {
-                  userrooms.subscribeUsers.forEach(function (u) {
-                    arrUser.push(u._id)
-                  })
-                }
-
-
-                if (arrUser.includes(Variable.myInfo._id) && !userrooms.settingsroom.system && userrooms.author._id !== Variable.myInfo._id) {
+                if (userrooms.subscribeUsers.includes(Variable.myInfo._id) && !userrooms.settingsroom.system && userrooms.author._id !== Variable.myInfo._id) {
                   bell = svg.bell
 
                 }
