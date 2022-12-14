@@ -15,7 +15,7 @@ import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/el
 //подписаться на комнату
 async function subscribeRoom(Static,title,_id)
 {
- let text = "Пользователь: "+ Variable.myInfo.nickname + " подписан на уведомления"
+ let text = "Пользователь:  "+ Variable.myInfo.nickname + " подписан на уведомления"
  Static.Subscription = true
 if(Static.usChat.show)
 {
@@ -74,7 +74,7 @@ else{
 //отписаться от комнаты
  async function unsubscribeRoom(Static,title,_id)
 {
-  let text = "Пользователь: "+ Variable.myInfo.nickname + " отписался от уведомлений"
+  let text = "Пользователь: <div class='c-message__nick'>"+ Variable.myInfo.nickname + "</div> отписался от уведомлений"
   Static.Subscription = false
   if(Static.usChat.show)
   {
@@ -264,20 +264,20 @@ async function ShowMessage(Static) {
   let authInput
   let authMessage
 
-  Static.quit = ""
+  Static.subMarker = ""
   if (Static.Auth) {
-      let t
+      let SubUnsab
 
       if(!Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
       {
         if(!Static.Subscription && !Static.Rooms.subscribeUsers.includes(Variable.myInfo._id))
         {
-           t = "подписаться"
+          SubUnsab = "подписаться"
         }
         else{
-           t = "отписаться" 
+          SubUnsab = "отписаться" 
         }
-        Static.quit =  <a
+        Static.subMarker =  <a
         class="c-button c-button--outline2"
     
         onclick={ function(event){
@@ -294,12 +294,12 @@ async function ShowMessage(Static) {
     
       >
         <div class="c-button__wrapper">
-        {t }
+        {SubUnsab}
         </div>
       </a>
       }
       else{
-        Static.quit = ""
+        Static.subMarker = ""
       }
      
     }
@@ -608,7 +608,7 @@ const BlockUserRooms = async function ({ Static }) {
 
 
 
-    Static.quit
+    Static.subMarker
   })
 
   Static.ChatRooms = Variable.ListUsersRooms
@@ -808,7 +808,7 @@ const BlockUserRooms = async function ({ Static }) {
           </aside>
           <section class="c-chats__content" >
             <div class="c-chats__border">
-              {Static.quit
+              {Static.subMarker
 
               }
               <h4 class="c-chats__title"><span>Комната: {Static.RoomTitle}</span></h4>
@@ -955,7 +955,7 @@ const BlockUserRooms = async function ({ Static }) {
                   edit = ''
                   subscribe =
                     <a class="c-room__settings" href=""
-                      onclick={(e) => { subscribeRoom(Static, userrooms.settingsroom.title, userrooms._id) }}><img class="c-room__icon" src={bell} width="20" height="20" title="подписаться" /></a>
+                      onclick={(e) => {if(!userrooms.subscribeUsers.includes(Variable.myInfo._id)){subscribeRoom(Static, userrooms.settingsroom.title, userrooms._id)} }}><img class="c-room__icon" src={bell} width="20" height="20" title="подписаться" /></a>
                 }
               }
 
@@ -970,6 +970,9 @@ const BlockUserRooms = async function ({ Static }) {
                   <div style={redborder} class="c-room">
                     <header class="c-room__header">
                       <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date>
+                  
+                        <div class="c-question__lang language-question ">{userrooms.languages.orig_name}</div>
+                      
                       <div>
                         {subscribe}
                       </div>
@@ -982,9 +985,9 @@ const BlockUserRooms = async function ({ Static }) {
                       </div>
                       <figcaption>
                         <div class="c-room__caption">
-                          <span class="c-room__lang c-question__langcontainer language_container">
+                          {/*<span class="c-room__lang c-question__langcontainer language_container">
                             <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
-                          </span>
+                </span>*/}
                           {<h4 class="c-room__title" title="Категория">
 
                             <span> {userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
