@@ -70,9 +70,6 @@ else{
 }
 
 
-
-//initReload()
-
 }
 
 //отписаться от комнаты
@@ -95,7 +92,7 @@ else{
     Static.ChatData = ""
     Static.Rooms = newRoom[0]
      Static.ChatData  = await ShowMessage(Static)
-   // await CheckSystemInterface(Static)
+
 
   }
   else{
@@ -114,15 +111,10 @@ else{
   Static.ChatData = ""
     Static.Rooms = newRoom[0]
      Static.ChatData  = await ShowMessage(Static)
-
-
-  //  await CheckSystemInterface(Static)
- 
-   //  await chatRooms(Static,false)
      
   }
 
-//initReload()
+
 }
 
 //мои комнаты и комнаты на которые подписан
@@ -618,16 +610,11 @@ const BlockUserRooms = async function ({ Static }) {
     await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "UsersRooms"
 
-    // if(checkAthorisation(Static))
-    // {
 
     //при первом заходе открываем системный чат
     CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
-
-    //     }
-
 
 
     //комнаты в чате
@@ -635,12 +622,12 @@ const BlockUserRooms = async function ({ Static }) {
 
 
 
-
+    Static.quit
   })
 
   Static.ChatRooms = Variable.ListUsersRooms
 
-  Static.quit
+
 
 
   //если не используем фильтры
