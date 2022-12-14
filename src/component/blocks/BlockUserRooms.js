@@ -265,7 +265,7 @@ async function ShowMessage(Static) {
   let authMessage
 
   Static.quit = ""
-   
+  if (Static.Auth) {
       let t
 
       if(!Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
@@ -302,7 +302,7 @@ async function ShowMessage(Static) {
         Static.quit = ""
       }
      
-
+    }
 
 
   /**
@@ -922,7 +922,7 @@ const BlockUserRooms = async function ({ Static }) {
                 else {
                   bell = svg.bell_1
                 }
-
+                if (Static.Auth) {
                 if (userrooms.author && Variable.myInfo._id == userrooms.author._id) {
                   edit =
                     <a class="c-room__settings" href="" onclick={(e) => {
@@ -957,7 +957,7 @@ const BlockUserRooms = async function ({ Static }) {
                     <a class="c-room__settings" href=""
                       onclick={(e) => { subscribeRoom(Static, userrooms.settingsroom.title, userrooms._id) }}><img class="c-room__icon" src={bell} width="20" height="20" title="подписаться" /></a>
                 }
-
+              }
 
 
                 if (typeof Static.Rooms._id !== "undefined" && Static.Rooms._id == userrooms._id) {
