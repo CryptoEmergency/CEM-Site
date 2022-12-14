@@ -22,11 +22,13 @@ const start = function (data, ID) {
         async () => {
             await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Крипто RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Crypto" })
             await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
+       
+            Variable.listsLang.forEach(function(elem){
+                console.log(elem)
+            })
+       
+       
         },
-
-
-
-        
         () => {
             return (
                 <div class="c-main__body">
