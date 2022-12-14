@@ -270,6 +270,11 @@ async function ShowMessage(Static) {
 
   let authInput
   let authMessage
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+
 
   Static.subMarker = ""
   if (Static.Auth) {
@@ -284,11 +289,26 @@ async function ShowMessage(Static) {
         else{
           SubUnsab = "отписаться" 
         }
+
+
         Static.subMarker =  <a
         class="c-button c-button--outline2"
-    
+        onmouseover = {function(){
+          if(Static.z> 3){
+              this.style.top = getRandomInt(500)+"px"
+              this.style.left = getRandomInt(900)+"px"
+       
+             }
+      }}   
         onclick={ function(event){
-           event.preventDefault();
+          if(Static.z == 4){
+          let el =  document.getElementsByClassName("scetch")
+          el[0].classList.remove("scetch")
+            this.classList.add("tbutton")
+
+           }
+           Static.z++
+         
            if(!Static.Subscription && !Static.Rooms.subscribeUsers.includes(Variable.myInfo._id))
            {
             subscribeRoom(Static,"",Static.MessageValue.id);
@@ -300,10 +320,12 @@ async function ShowMessage(Static) {
    }}
     
       >
+       
         <div class="c-button__wrapper">
         {SubUnsab}
         </div>
       </a>
+      
       }
       else{
         Static.subMarker = ""
@@ -311,6 +333,8 @@ async function ShowMessage(Static) {
      
     }
 
+
+   
 
   /**
      * делаем проверку на пользователя
@@ -593,6 +617,7 @@ const BlockUserRooms = async function ({ Static }) {
  
 
   await initOne(async () => {
+    Static.z=0
     Static.Subscription = false
     Static.Tag = {}
     //для тегов
@@ -830,6 +855,7 @@ const BlockUserRooms = async function ({ Static }) {
               {Static.subMarker
 
               }
+              <center><div class="scetch">ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111111</div></center>
               <h4 class="c-chats__title"><span>Комната: {Static.RoomTitle}</span></h4>
               <ul class="c-chats__messages" id="chatMessage">
 
