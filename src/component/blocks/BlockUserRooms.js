@@ -74,7 +74,7 @@ else{
 //отписаться от комнаты
  async function unsubscribeRoom(Static,title,_id)
 {
-  let text = "Пользователь: <div class='c-message__nick'>"+ Variable.myInfo.nickname + "</div> отписался от уведомлений"
+  let text = "Пользователь: "+ Variable.myInfo.nickname + " отписался от уведомлений"
   Static.Subscription = false
   if(Static.usChat.show)
   {
@@ -186,8 +186,15 @@ function checkAthorisation(Static) {
 
   await fn.restApi.getUserRoom({  name: "ListSystemsRooms", filter: { system: true, "settingsroom.category": Static.defaultUserRoom,"languages.code":langCode }, limit: 10 })
 
-      //системная комната
-      Static.Rooms = Variable.ListSystemsRooms.list_records[0]
+if(typeof Variable.ListSystemsRooms.list_records[0] == "undefined")
+{
+  Static.Rooms = Variable.UsersRooms.list_records[0]
+}
+else{
+ //системная комната
+ Static.Rooms = Variable.ListSystemsRooms.list_records[0]
+}
+     
 
  
   
@@ -590,6 +597,14 @@ const BlockUserRooms = async function ({ Static }) {
     Static.Tag = {}
     //для тегов
     let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }, limit: 10 })
+ console.log(resp)
+   if(resp.totalFound == 0)
+   {
+    Static.showTag = false
+   }
+   else{
+    Static.showTag = true
+   }
     Static.Tag = resp
     Static.defaultUserRoom = "crypto"
 
@@ -859,8 +874,10 @@ const BlockUserRooms = async function ({ Static }) {
         </div>
       </div>
 
-      {
-        Static.Tag.list_records.map(function (tag) {
+      {()=>{
+       
+        if(Static.showTag){
+      return  Static.Tag.list_records.map(function (tag) {
           return (
             <Tags
               Static={Static}
@@ -871,7 +888,8 @@ const BlockUserRooms = async function ({ Static }) {
 
             />)
         })
-
+      }
+}
       }
 
 
