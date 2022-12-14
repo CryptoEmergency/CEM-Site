@@ -206,7 +206,7 @@ else{
 
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
-
+  Static.z=0
   console.log("ChangeRooms")
   Static.Rooms ={}
 
