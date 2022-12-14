@@ -310,7 +310,7 @@ async function ShowMessage(Static) {
      * если комната приватная и у руля её создатель то не запрашиваем пароль и отображаем все сообщения
     */
   if (Static.Rooms.settingsroom.status) {
-    if (Static.Rooms.author._id == Variable.myInfo._id || checkArray.length > 0) {
+    if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
 
@@ -511,15 +511,19 @@ async function ShowMessage(Static) {
     else {
       authMessage = "Только авторизованные пользователи могут просматривать данный контент"
       return (
+
         <li class="c-chats__message c-message">
-          <div class="c-message__title">
-            <center>{
-              authMessage
-            }</center>
-
+        <div class="c-message__title">
+          <div class="c-chats__passmessage c-passmessage">
+            <h4 class="c-passmessage__title">{authMessage}</h4>
+            <div class="c-passmessage__form">
+          
+            </div>
           </div>
+        </div>
 
-        </li>
+      </li>
+      
       )
     }
 
