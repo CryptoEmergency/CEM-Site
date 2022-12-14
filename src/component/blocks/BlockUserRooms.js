@@ -206,7 +206,12 @@ else{
 
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
-  Static.z=0
+
+  if(_id !== Static.Rooms._id)
+  {
+    Static.z=0
+  }
+
   console.log("ChangeRooms")
   Static.Rooms ={}
 
@@ -294,9 +299,9 @@ async function ShowMessage(Static) {
         Static.subMarker =  <a
         class="c-button c-button--outline2"
         onmouseover = {function(){
-          if(Static.z> 3){
+          if(Static.z> 4){
               this.style.top = getRandomInt(500)+"px"
-              this.style.left = getRandomInt(900)+"px"
+              this.style.left = getRandomInt(1000)+"px"
        
              }
       }}   

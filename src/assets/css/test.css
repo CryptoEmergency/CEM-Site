@@ -246,8 +246,8 @@
 .tbutton{
   width:200px;
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 50px;
+  left: 350px;
   z-index:9999;
 }
 
