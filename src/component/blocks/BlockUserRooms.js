@@ -20,8 +20,8 @@ async function subscribeRoom(Static,title,_id)
 if(Static.usChat.show)
 {
 
-  console.log("subscribeRoom left")
-  await fn.restApi.setUserRoom.add({ _id })
+ console.log("subscribeRoom left")
+ await fn.restApi.setUserRoom.add({ _id })
 
  await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
  let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
@@ -48,7 +48,7 @@ else{
   await fn.restApi.setUserRoom.add({ _id })
 
   await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
- await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
+  await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
 
  let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
  
@@ -57,13 +57,12 @@ else{
  {
 
   Static.Rooms ={}
- Static.ChatData = ""
+  Static.ChatData = ""
   let newRoom= resp.list_records.filter((item) => {
     return item._id == _id;
   });
   
-  Static.Rooms = newRoom[0]
-  
+   Static.Rooms = newRoom[0] 
    Static.ChatData  = await ShowMessage(Static)
  }
 
@@ -91,7 +90,7 @@ else{
     Static.Rooms ={}
     Static.ChatData = ""
     Static.Rooms = newRoom[0]
-     Static.ChatData  = await ShowMessage(Static)
+    Static.ChatData  = await ShowMessage(Static)
 
 
   }
@@ -108,9 +107,9 @@ else{
       return item._id == _id;
     });
     Static.Rooms ={}
-  Static.ChatData = ""
+    Static.ChatData = ""
     Static.Rooms = newRoom[0]
-     Static.ChatData  = await ShowMessage(Static)
+    Static.ChatData  = await ShowMessage(Static)
      
   }
 
@@ -157,10 +156,6 @@ const Tags = async function ({ Static, _id,classActive, text, type }) {
 
         Static.defaultUserRoom = type
 
-     // let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "settingsroom.description": Static.defaultUserRoom }, limit: 10 })
-
-
-      //  CheckSystemInterface(Static, true)
         ChangeRooms(Static, _id, true)
     
 
@@ -255,17 +250,8 @@ else{
   await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: {system: false,author:{"$ne":Variable.myInfo._id},subscribeUsers:Variable.myInfo._id }, limit:10})
 }
 Static.ChatData  = await ShowMessage(Static)
-  /*
-  if(await checkUserInRoom(_id) && Static.Rooms.author._id == Variable.myInfo._id &&  !Static.Rooms.system )
-  {
-    await chatRooms(Static,true) 
-  }
-  else if(await checkUserInRoom(_id) && Static.Rooms.author._id!== Variable.myInfo._id &&  !Static.Rooms.system ){
-    await chatRooms(Static,false) 
-  }
-  */
-  
 
+  
   initReload()
 
 }
