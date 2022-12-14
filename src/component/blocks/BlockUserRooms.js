@@ -991,7 +991,7 @@ const BlockUserRooms = async function ({ Static }) {
                 return (
                   <div style={redborder} class="c-room">
                     <header class="c-room__header">
-                      <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date>
+                      {/* <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date> */}
                   
                         <div class="c-question__lang language-question ">{userrooms.languages.orig_name}</div>
                       
@@ -1002,7 +1002,7 @@ const BlockUserRooms = async function ({ Static }) {
 
                     </header>
                     <figure class="c-room__wrapper">
-                      <div class="c-room__image c-room__image--quadro" style="border-radius: 5px; border:1px solid #474c5a">
+                      <div class="c-room__image c-room__image--rectangle" style="border-radius: 5px; border:1px solid #474c5a">
                         <img src={roomImage} alt="" />
                       </div>
                       <figcaption>
@@ -1010,10 +1010,10 @@ const BlockUserRooms = async function ({ Static }) {
                           {/*<span class="c-room__lang c-question__langcontainer language_container">
                             <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
                 </span>*/}
-                          {<h4 class="c-room__title" title="Категория">
+                          {<h4 class="c-room__title">
 
-                            <span> {userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
-                            <span> {userrooms.settingsroom.title ? fn.sliceString(userrooms.settingsroom.title, 66) : null} </span>
+                            <span title="Категория"><i>Категория: </i>{userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
+                            <span title="Комната"><i>Комната: </i>{userrooms.settingsroom.title ? fn.sliceString(userrooms.settingsroom.title, 66) : null} </span>
                           </h4>}
 
                           { /*<h4 class="c-room__title" title="Название комнаты">
