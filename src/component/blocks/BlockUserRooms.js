@@ -1229,10 +1229,10 @@ const BlockUserRooms = async function ({ Static }) {
                             
                             <h4 class="c-room__title">
 
-                            <span class="c-room__subtitle" title="Категория">
+                            <span style="cursor:pointer" class="c-room__subtitle" title="Категория">
                               <span><i>Категория: </i>{userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
                             </span>
-                            <span class="c-room__subtitle"  title="Комната">
+                            <span style="cursor:pointer" class="c-room__subtitle"  title="Комната">
                               <span><i>Комната: </i>{userrooms.settingsroom.title ? fn.sliceString(userrooms.settingsroom.title, 66) : null} </span>
                             </span>
                           </h4>}
