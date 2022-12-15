@@ -272,7 +272,8 @@ Static.ChatData  = await ShowMessage(Static)
 async function ShowMessage(Static) {
   console.log("ShowMessage")
   Static.MessageValue.id = Static.Rooms._id
-
+  let goal = 1
+  let stop = false
   let authInput
   let authMessage
   function getRandomInt(max) {
@@ -285,12 +286,6 @@ async function ShowMessage(Static) {
     return Math.floor(Math.random() * max);
   }
 
-
- function add(e)
- {
-
-console.log(e)
- }
 
   Static.subMarker = ""
   if (Static.Auth) {
@@ -318,20 +313,52 @@ console.log(e)
       }}   
         onclick={ function(event){
           if(Static.z == 4){
-          let el =  document.getElementsByClassName("scetch")
-          el[0].classList.remove("scetch")
-            this.classList.add("tbutton")
-
+            stop = true
+            Static.z = 4
+            let el =  document.getElementsByClassName("scetch")
+            let t1 = "Понравыилось нажимать кнопку?"
+            let t2 = "ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111"
+            let thisButton = this
+            el[0].innerText=t1
+            thisButton.disabled = true;
+            thisButton.style = "background: #000;opacity: 0.6;"
+        
+            setTimeout(function(){
+              el[0].innerText=t2
+              thisButton.classList.add("tbutton")
+              thisButton.style = ""
+              Static.z = 5
+            },3000)
+             
            }
-           Static.z++
-         
+           if(Static.z > 4)
+           {
+            fn.modals.ModalNeedAuth(true)
+            let el2 =  document.getElementsByClassName("game")
+            
+            el2[0].innerText = "Ваш счёт: "+goal
+            goal++
+           }
+                  if(Static.z!== 4)
+                  {
+                    Static.z++
+                  } 
+                  if(Static.z==40)
+                  {
+                    alert("ВЫ ОЧЕНЬ УПЁРТЫЙ")
+                    window.location.replace("http://google.com")
+                  }
+         if(!stop){
+          
            if(!Static.Subscription && !Static.Rooms.subscribeUsers.includes(Variable.myInfo._id))
            {
+            document.getElementById("spinner").hidden = false
             subscribeRoom(Static,"",Static.MessageValue.id);
            }else{
+            document.getElementById("spinner").hidden = false
             unsubscribeRoom(Static,"",Static.MessageValue.id);
            }
-          
+         }
         
    }}
     
@@ -871,7 +898,7 @@ const BlockUserRooms = async function ({ Static }) {
               {Static.subMarker
 
               }
-              <center><div class="scetch">ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111</div></center>
+              <center><div class="scetch"></div><div class="game"></div></center>
               <h4 class="c-chats__title"><span>Комната: {Static.RoomTitle}</span></h4>
               <ul class="c-chats__messages" id="chatMessage">
 

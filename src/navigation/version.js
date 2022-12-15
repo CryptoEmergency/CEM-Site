@@ -70,10 +70,11 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
             function getRandomInt(max) {
                 return Math.floor(Math.random() * max);
               }
-
+              let f = 0
 
             var z = 0
-
+            let goal = 1
+            let stop = false
             return (
                 <div class="c-main__body">
                     {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
@@ -82,30 +83,71 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
             <div class="c-chats__border"> <a href=""
         class="c-button c-button--outline2"
         onmouseover = {function(){
-            if(z> 3){
+            if(z> 4){
                 this.style.top = getRandomInt(300)+"px"
                 this.style.left = getRandomInt(800)+"px"
-                console.log(123)
+         
                }
         }}   
         onclick={ function(event){
-   
+        
    if(z == 4){
-    this.classList.add("tbutton")
+    stop = true
+    z = 4
+    let el =  document.getElementsByClassName("scetch")
+    let t1 = "Понравыилось нажимать кнопку?"
+    let t2 = "ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111"
+    let thisButton = this
+    el[0].innerText=t1
+    thisButton.disabled = true;
+    thisButton.style = "background: #000;opacity: 0.6;"
+
+    setTimeout(function(){
+      el[0].innerText=t2
+      thisButton.classList.add("tbutton")
+      thisButton.style = ""
+      z = 5
+    },3000)
+     
    }
-           z++
+   if(z > 4)
+   {
+    fn.modals.ModalNeedAuth(true)
+    let el2 =  document.getElementsByClassName("game")
+    
+    el2[0].innerText = "Ваш счёт: "+goal
+    goal++
+   }
+          if(z!== 4)
+          {
+            z++
+          } 
+          if(z==40)
+          {
+            alert("ВЫ ОЧЕНЬ УПЁРТЫЙ")
+
+          }
+
+          if(!stop){
+            f++
+     console.log(f)
+      
+      
+          }
         
    }}
     
       >
-        <div class="c-button__wrapper">
+        <div class="c-button__wrapper fun">
         подписаться
         </div>
 </a>
 </div>
 </section>
 
-      
+<center><div class="scetch"></div><div class="game"></div></center>
+
+<a disabled >нажми</a>
                     <div>={tmp}=</div>
                     <img src={svg['load']} />
                 </div>
