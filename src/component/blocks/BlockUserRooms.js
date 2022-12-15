@@ -630,7 +630,7 @@ async function SearchRooms(Static) {
            request = { name: "UsersRooms", filter: { $text: { $search: value }, system: false }, limit: 10 }
         }
         else{
-          request = { name: "UsersRooms", filter: { $text: { $search: value },"settingsrooms":Static.Category.value, system: false }, limit: 10 }
+          request = { name: "UsersRooms", filter: { $text: { $search: value },"settingsroom.category":Static.Category.value, system: false }, limit: 10 }
           
         }
  
@@ -652,13 +652,15 @@ async function SearchRooms(Static) {
       }
       else {
         Static.searchInput.active = false
+    
         if(Static.Category.value == "all" )
-        {
+        {  
           await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
         }
         else{
-          await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { $text: { $search: value },"settingsrooms":Static.Category.value, system: false }, limit: 10 })
-          
+
+         await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { "settingsroom.category":Static.Category.value, system: false }, limit: 10 })
+    
         }
    
         Static.ActiveListRooms = Variable.UsersRooms.list_records
@@ -1062,29 +1064,32 @@ const BlockUserRooms = async function ({ Static }) {
               Static.Category.value = active
               if(Static.searchInput.active)
               {
-                console.log(1)
+               
                 if(active == "all")
                 {
+                  
                 request ={ name: "UsersRooms", filter: {system:false,$text: { $search: Static.searchInput.value }} };
                 }
                 else{
+                 
                   request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active,$text: { $search: Static.searchInput.value }} }; 
                 }
                
               }
               else{
-                console.log(2)
+               
                 if(active == "all")
                 {
                   request ={ name: "UsersRooms", filter: {system:false}, limit:10};
                   
                 }
                 else{
+              
                   request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active} };
                 }
                 
               }
-
+           
              let response = await fn.restApi.getUserRoom(request)
 
               if (response.list_records.length == 1) {
