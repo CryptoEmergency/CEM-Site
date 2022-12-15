@@ -24,8 +24,20 @@ const start = function (data, ID) {
          //   await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
        
 
-         let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": "ru" }, limit: 10 })
-            console.log(resp)
+         //let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": "ru" }, limit: 10 })
+        //    console.log(resp)
+//var go = document.getElementsByClassName("tbutton")
+//addEventListener('mouseover', (event) => {console.log(1)});
+
+
+
+
+       
+
+           
+       
+      
+
 /*
 let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"Флудилка",category:"flood"}]},{en:[{roomName:"Crypto",category:"crypto"},{roomName:"Flood",category:"flood"}]}]
 
@@ -54,12 +66,46 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
           //   let requier = await fn.restApi.setUserRoom.create(request)
         },
         () => {
+      
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max);
+              }
+
+
+            var z = 0
+
             return (
                 <div class="c-main__body">
                     {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
                     Version page {Variable.Static.tpm}
+                    <section class="c-chats__content" >
+            <div class="c-chats__border"> <a href=""
+        class="c-button c-button--outline2"
+        onmouseover = {function(){
+            if(z> 3){
+                this.style.top = getRandomInt(300)+"px"
+                this.style.left = getRandomInt(800)+"px"
+                console.log(123)
+               }
+        }}   
+        onclick={ function(event){
+   
+   if(z == 4){
+    this.classList.add("tbutton")
+   }
+           z++
+        
+   }}
+    
+      >
+        <div class="c-button__wrapper">
+        подписаться
+        </div>
+</a>
+</div>
+</section>
 
-
+      
                     <div>={tmp}=</div>
                     <img src={svg['load']} />
                 </div>

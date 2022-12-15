@@ -281,6 +281,17 @@ async function ShowMessage(Static) {
 
 
 
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+
+ function add(e)
+ {
+
+console.log(e)
+ }
+
   Static.subMarker = ""
   if (Static.Auth) {
       let SubUnsab
@@ -654,7 +665,7 @@ const BlockUserRooms = async function ({ Static }) {
 
     //комнаты в чате
     Static.usChat = { show: true }
-
+    Static.z = 0
 
 
     Static.subMarker
@@ -860,7 +871,7 @@ const BlockUserRooms = async function ({ Static }) {
               {Static.subMarker
 
               }
-              <center><div class="scetch">ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111111</div></center>
+              <center><div class="scetch">ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111</div></center>
               <h4 class="c-chats__title"><span>Комната: {Static.RoomTitle}</span></h4>
               <ul class="c-chats__messages" id="chatMessage">
 
@@ -1041,7 +1052,9 @@ const BlockUserRooms = async function ({ Static }) {
                           {/*<span class="c-room__lang c-question__langcontainer language_container">
                             <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
                 </span>*/}
-                          {<h4 class="c-room__title">
+                          {
+                            
+                            <h4 class="c-room__title">
 
                             <span class="c-room__subtitle" title="Категория">
                               <span><i>Категория: </i>{userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
