@@ -15,7 +15,7 @@ const ModalNeedAuth = function (data, ID) {
   g2 = Variable.lang.p.needAuth
  }
  else{
-  g1 = "Нравиться нажимать?"
+  g1 = "Так и будем дальше нажимать?"
   g2 = "Давайте вести счёт!"
  }
 

@@ -9,7 +9,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
+import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
 
 
 //подписаться на комнату
@@ -333,7 +333,11 @@ async function ShowMessage(Static) {
            }
            if(Static.z > 4)
            {
+            if(Static.z == 5)
+          {
             fn.modals.ModalNeedAuth(true)
+           }
+           
             let el2 =  document.getElementsByClassName("game")
             
             el2[0].innerText = "Ваш счёт: "+goal
@@ -343,9 +347,9 @@ async function ShowMessage(Static) {
                   {
                     Static.z++
                   } 
-                  if(Static.z==40)
+                  if(goal==40)
                   {
-                    alert("ВЫ ОЧЕНЬ УПЁРТЫЙ")
+                    alert("ВЫ ОЧЕНЬ УПЁРТЫЙ, ВСЕГО ХОРОШЕГО")
                     window.location.replace("http://google.com")
                   }
          if(!stop){
@@ -652,12 +656,23 @@ async function SearchRooms(Static) {
 
 
 
-
-
 const BlockUserRooms = async function ({ Static }) {
 
   Static.ChatRooms = {}
  
+  Static.Category = {active:"all",
+  items:[
+    {text:"Все ктегории",value:"all"},
+    {text:"NFT",value:"NFT"},
+    {text:"Crypto вселененная",value:"Crypto"},
+    {text:"Altcoin",value:"Altcoin"},
+    {text:"Bitcoin",value:"Bitcoin"},
+    {text:"Finances",value:"Finances"},
+    {text:"Trading",value:"Trading"}
+  ],
+nameOptions:"category",
+open:false,
+title:"Категории"}
 
   await initOne(async () => {
     Static.z=0
@@ -974,6 +989,7 @@ const BlockUserRooms = async function ({ Static }) {
 
               }}
             />
+          
           </div>
           <div style="display: none;" class="questions_search">
             <div class="question_search_half_empty">
@@ -983,6 +999,61 @@ const BlockUserRooms = async function ({ Static }) {
           </div>
         </div>
       </div>
+
+      <div
+          data-show={false}
+          class="c-questions__filter questions_filter"
+          Element={($el) => {
+            Static.elShowFilter = $el
+          }}
+        >
+             <Select
+            options={Static.Category}
+             callback={
+             async (active) => {
+              let request 
+              if(Static.searchInput.active)
+              {
+                if(active == "all")
+                {
+                request ={ name: "UsersRooms", filter: {system:false,$text: { $search: Static.searchInput.value }} };
+                }
+                else{
+                  request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active,$text: { $search: Static.searchInput.value }} }; 
+                }
+               
+              }
+              else{
+                if(active == "all")
+                {
+                  request ={ name: "UsersRooms", filter: {system:false}, limit:10};
+                  
+                }
+                else{
+                  request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active} };
+                }
+                
+              }
+             let response = await fn.restApi.getUserRoom(request)
+
+              if (response.list_records.length == 1) {
+      
+                Static.ActiveListRooms = [response.list_records[0]]
+      
+              } else if (response.list_records.length == 0) {
+      
+                Static.ActiveListRooms = []
+      
+              } else {
+      
+                Static.ActiveListRooms = response.list_records
+      
+              }
+                
+              }
+            }
+          /></div>
+   
       {/*
     блок для пользовательских комнат
     */}

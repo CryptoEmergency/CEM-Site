@@ -84,8 +84,8 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
         class="c-button c-button--outline2"
         onmouseover = {function(){
             if(z> 4){
-                this.style.top = getRandomInt(300)+"px"
-                this.style.left = getRandomInt(800)+"px"
+                this.style.top = getRandomInt(10)+"px"
+                this.style.left = getRandomInt(10)+"px"
          
                }
         }}   
@@ -112,7 +112,11 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
    }
    if(z > 4)
    {
-    fn.modals.ModalNeedAuth(true)
+    if(z == 5)
+    {
+        fn.modals.ModalNeedAuth(true)
+    }
+    
     let el2 =  document.getElementsByClassName("game")
     
     el2[0].innerText = "Ваш счёт: "+goal
@@ -122,10 +126,10 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
           {
             z++
           } 
-          if(z==40)
+          if(goal==40)
           {
-            alert("ВЫ ОЧЕНЬ УПЁРТЫЙ")
-
+            alert("ВЫ ОЧЕНЬ УПЁРТЫЙ, ВСЕГО ХОРОШЕГО")
+            window.location.replace("http://google.com")
           }
 
           if(!stop){

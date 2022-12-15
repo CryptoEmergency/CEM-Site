@@ -45,11 +45,13 @@ const Select = function ({ options, callback, toggler }) {
           }}
         >
           {() => {
+      
             let tmp = options.items.filter((item) => {
               if (options.active == item.value) {
                 return true;
               }
             })
+
             return tmp[0].text
           }}
         </div>
