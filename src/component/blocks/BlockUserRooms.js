@@ -909,7 +909,7 @@ const BlockUserRooms = async function ({ Static }) {
                           }}>
                             {
                               userrooms.settingsroom.images ?
-                                <img src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
+                                <img title={userrooms.settingsroom.title} src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
                                 :
                                 <div class="c-toggler__wrap">
                                   <span class="c-toggler__name">{userrooms.settingsroom.title}</span>
