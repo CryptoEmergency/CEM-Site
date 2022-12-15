@@ -243,3 +243,22 @@
   cursor:pointer;
 }
 
+.tbutton{
+  width:200px;
+  position: absolute;
+  top: 50px;
+  left: 350px;
+  z-index:9999;
+}
+
+.scetch{
+
+  font-weight: bold;
+}
+
+
+
+
+
+
+

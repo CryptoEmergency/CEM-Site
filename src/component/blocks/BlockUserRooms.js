@@ -9,7 +9,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { Avatar, ButtonShowMore, Input, NotFound, TextArea } from '@component/element/index.js';
+import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
 
 
 //подписаться на комнату
@@ -207,6 +207,11 @@ else{
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
 
+  if(_id !== Static.Rooms._id)
+  {
+    Static.z=0
+  }
+
   console.log("ChangeRooms")
   Static.Rooms ={}
 
@@ -267,9 +272,20 @@ Static.ChatData  = await ShowMessage(Static)
 async function ShowMessage(Static) {
   console.log("ShowMessage")
   Static.MessageValue.id = Static.Rooms._id
-
+  let goal = 1
+  let stop = false
   let authInput
   let authMessage
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
 
   Static.subMarker = ""
   if (Static.Auth) {
@@ -284,26 +300,79 @@ async function ShowMessage(Static) {
         else{
           SubUnsab = "отписаться" 
         }
+
+
         Static.subMarker =  <a
         class="c-button c-button--outline2"
-    
+        onmouseover = {function(){
+          if(Static.z> 4){
+              this.style.top = getRandomInt(500)+"px"
+              this.style.left = getRandomInt(1000)+"px"
+       
+             }
+      }}   
         onclick={ function(event){
-           event.preventDefault();
+          if(Static.z == 4){
+            stop = true
+            Static.z = 4
+            let el =  document.getElementsByClassName("scetch")
+            let t1 = "Понравыилось нажимать кнопку?"
+            let t2 = "ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111"
+            let thisButton = this
+            el[0].innerText=t1
+            thisButton.disabled = true;
+            thisButton.style = "background: #000;opacity: 0.6;"
+        
+            setTimeout(function(){
+              el[0].innerText=t2
+              thisButton.classList.add("tbutton")
+              thisButton.style = ""
+              Static.z = 5
+            },3000)
+             
+           }
+           if(Static.z > 4)
+           {
+            if(Static.z == 5)
+          {
+            fn.modals.ModalNeedAuth(true)
+           }
+           
+            let el2 =  document.getElementsByClassName("game")
+            
+            el2[0].innerText = "Ваш счёт: "+goal
+            goal++
+           }
+                  if(Static.z!== 4)
+                  {
+                    Static.z++
+                  } 
+                  if(goal==40)
+                  {
+                    alert("ВЫ ОЧЕНЬ УПЁРТЫЙ, ВСЕГО ХОРОШЕГО")
+                    window.location.replace("http://google.com")
+                  }
+         if(!stop){
+          
            if(!Static.Subscription && !Static.Rooms.subscribeUsers.includes(Variable.myInfo._id))
            {
+            document.getElementById("spinner").hidden = false
             subscribeRoom(Static,"",Static.MessageValue.id);
            }else{
+            document.getElementById("spinner").hidden = false
             unsubscribeRoom(Static,"",Static.MessageValue.id);
            }
-          
+         }
         
    }}
     
       >
+       
         <div class="c-button__wrapper">
         {SubUnsab}
         </div>
       </a>
+      
       }
       else{
         Static.subMarker = ""
@@ -311,6 +380,8 @@ async function ShowMessage(Static) {
      
     }
 
+
+   
 
   /**
      * делаем проверку на пользователя
@@ -585,14 +656,26 @@ async function SearchRooms(Static) {
 
 
 
-
-
 const BlockUserRooms = async function ({ Static }) {
 
   Static.ChatRooms = {}
  
+  Static.Category = {active:"all",
+  items:[
+    {text:"Все ктегории",value:"all"},
+    {text:"NFT",value:"NFT"},
+    {text:"Crypto вселененная",value:"Crypto"},
+    {text:"Altcoin",value:"Altcoin"},
+    {text:"Bitcoin",value:"Bitcoin"},
+    {text:"Finances",value:"Finances"},
+    {text:"Trading",value:"Trading"}
+  ],
+nameOptions:"category",
+open:false,
+title:"Категории"}
 
   await initOne(async () => {
+    Static.z=0
     Static.Subscription = false
     Static.Tag = {}
     //для тегов
@@ -624,7 +707,7 @@ const BlockUserRooms = async function ({ Static }) {
 
     //комнаты в чате
     Static.usChat = { show: true }
-
+    Static.z = 0
 
 
     Static.subMarker
@@ -830,6 +913,7 @@ const BlockUserRooms = async function ({ Static }) {
               {Static.subMarker
 
               }
+              <center><div class="scetch"></div><div class="game"></div></center>
               <h4 class="c-chats__title"><span>Комната: {Static.RoomTitle}</span></h4>
               <ul class="c-chats__messages" id="chatMessage">
 
@@ -905,6 +989,7 @@ const BlockUserRooms = async function ({ Static }) {
 
               }}
             />
+          
           </div>
           <div style="display: none;" class="questions_search">
             <div class="question_search_half_empty">
@@ -914,6 +999,61 @@ const BlockUserRooms = async function ({ Static }) {
           </div>
         </div>
       </div>
+
+      <div
+          data-show={false}
+          class="c-questions__filter questions_filter"
+          Element={($el) => {
+            Static.elShowFilter = $el
+          }}
+        >
+             <Select
+            options={Static.Category}
+             callback={
+             async (active) => {
+              let request 
+              if(Static.searchInput.active)
+              {
+                if(active == "all")
+                {
+                request ={ name: "UsersRooms", filter: {system:false,$text: { $search: Static.searchInput.value }} };
+                }
+                else{
+                  request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active,$text: { $search: Static.searchInput.value }} }; 
+                }
+               
+              }
+              else{
+                if(active == "all")
+                {
+                  request ={ name: "UsersRooms", filter: {system:false}, limit:10};
+                  
+                }
+                else{
+                  request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active} };
+                }
+                
+              }
+             let response = await fn.restApi.getUserRoom(request)
+
+              if (response.list_records.length == 1) {
+      
+                Static.ActiveListRooms = [response.list_records[0]]
+      
+              } else if (response.list_records.length == 0) {
+      
+                Static.ActiveListRooms = []
+      
+              } else {
+      
+                Static.ActiveListRooms = response.list_records
+      
+              }
+                
+              }
+            }
+          /></div>
+   
       {/*
     блок для пользовательских комнат
     */}
@@ -991,7 +1131,7 @@ const BlockUserRooms = async function ({ Static }) {
                 return (
                   <div style={redborder} class="c-room">
                     <header class="c-room__header">
-                      <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date>
+                      {/* <date class="c-room__datecreate" datetime="">{fn.getDateFormat(userrooms.showDate, "now")}</date> */}
                   
                         <div class="c-question__lang language-question ">{userrooms.languages.orig_name}</div>
                       
@@ -1002,7 +1142,7 @@ const BlockUserRooms = async function ({ Static }) {
 
                     </header>
                     <figure class="c-room__wrapper">
-                      <div class="c-room__image c-room__image--quadro" style="border-radius: 5px; border:1px solid #474c5a">
+                      <div class="c-room__image c-room__image--rectangle" style="border-radius: 5px; border:1px solid #474c5a">
                         <img src={roomImage} alt="" />
                       </div>
                       <figcaption>
@@ -1010,10 +1150,16 @@ const BlockUserRooms = async function ({ Static }) {
                           {/*<span class="c-room__lang c-question__langcontainer language_container">
                             <div class="c-question__lang language-question">{userrooms.languages.orig_name}</div>
                 </span>*/}
-                          {<h4 class="c-room__title" title="Категория">
+                          {
+                            
+                            <h4 class="c-room__title">
 
-                            <span> {userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
-                            <span> {userrooms.settingsroom.title ? fn.sliceString(userrooms.settingsroom.title, 66) : null} </span>
+                            <span class="c-room__subtitle" title="Категория">
+                              <span><i>Категория: </i>{userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
+                            </span>
+                            <span class="c-room__subtitle"  title="Комната">
+                              <span><i>Комната: </i>{userrooms.settingsroom.title ? fn.sliceString(userrooms.settingsroom.title, 66) : null} </span>
+                            </span>
                           </h4>}
 
                           { /*<h4 class="c-room__title" title="Название комнаты">

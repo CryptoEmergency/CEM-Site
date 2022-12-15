@@ -15,6 +15,10 @@ let swiperOptions = {
     hashNavigation: true,
 }
 
+const isInteger = function(num) {
+    return (num ^ 0) === num;
+}
+
 const start = function () {
     let awards
 
@@ -26,8 +30,6 @@ const start = function () {
     init(
         async () => {
             awards = await sendApi.send({ action: "getAwards", short: true, filter: { kindGroup: true } });
-
-
         },
         () => {
             // console.log('=76f689=', awards.kindGroup.group, Object.values(awards.kindGroup.group))
@@ -91,7 +93,7 @@ const start = function () {
                                                     return (
                                                         <div>
                                                             <div class="progress_bar" style={`width: ${(awardsItems.have / awardsItems.count) * 100}%`}></div>
-                                                            <p class="progress_bar_label">{(awardsItems.have / awardsItems.count).toFixed(2)}</p>
+                                                            <p class="progress_bar_label">{`${isInteger(awardsItems.have) ? awardsItems.have : awardsItems.have.toFixed(2)} / ${awardsItems.count}`}</p>
                                                         </div>
                                                     )
                                                 }
@@ -152,7 +154,7 @@ const start = function () {
                                                                         return (
                                                                             <div>
                                                                                 <div class="progress_bar" style={`width: ${(awardsItems.have / awardsItems.count) * 100}%`}></div>
-                                                                                <p class="progress_bar_label">{(awardsItems.have / awardsItems.count).toFixed(2)}</p>
+                                                                                <p class="progress_bar_label">{`${isInteger(awardsItems.have) ? awardsItems.have : awardsItems.have.toFixed(2)} / ${awardsItems.count}`}</p>
                                                                             </div>
                                                                         )
                                                                     }

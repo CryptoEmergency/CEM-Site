@@ -24,8 +24,20 @@ const start = function (data, ID) {
          //   await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
        
 
-         let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": "ru" }, limit: 10 })
-            console.log(resp)
+         //let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": "ru" }, limit: 10 })
+        //    console.log(resp)
+//var go = document.getElementsByClassName("tbutton")
+//addEventListener('mouseover', (event) => {console.log(1)});
+
+
+
+
+       
+
+           
+       
+      
+
 /*
 let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"Флудилка",category:"flood"}]},{en:[{roomName:"Crypto",category:"crypto"},{roomName:"Flood",category:"flood"}]}]
 
@@ -54,12 +66,92 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
           //   let requier = await fn.restApi.setUserRoom.create(request)
         },
         () => {
+      
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max);
+              }
+              let f = 0
+
+            var z = 0
+            let goal = 1
+            let stop = false
             return (
                 <div class="c-main__body">
                     {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
                     Version page {Variable.Static.tpm}
+                    <section class="c-chats__content" >
+            <div class="c-chats__border"> <a href=""
+        class="c-button c-button--outline2"
+        onmouseover = {function(){
+            if(z> 4){
+                this.style.top = getRandomInt(10)+"px"
+                this.style.left = getRandomInt(10)+"px"
+         
+               }
+        }}   
+        onclick={ function(event){
+        
+   if(z == 4){
+    stop = true
+    z = 4
+    let el =  document.getElementsByClassName("scetch")
+    let t1 = "Понравыилось нажимать кнопку?"
+    let t2 = "ПОПРОБУЙ ТЕПЕРЬ НАЖАТЬ!!!!!!!!!!1111"
+    let thisButton = this
+    el[0].innerText=t1
+    thisButton.disabled = true;
+    thisButton.style = "background: #000;opacity: 0.6;"
 
+    setTimeout(function(){
+      el[0].innerText=t2
+      thisButton.classList.add("tbutton")
+      thisButton.style = ""
+      z = 5
+    },3000)
+     
+   }
+   if(z > 4)
+   {
+    if(z == 5)
+    {
+        fn.modals.ModalNeedAuth(true)
+    }
+    
+    let el2 =  document.getElementsByClassName("game")
+    
+    el2[0].innerText = "Ваш счёт: "+goal
+    goal++
+   }
+          if(z!== 4)
+          {
+            z++
+          } 
+          if(goal==40)
+          {
+            alert("ВЫ ОЧЕНЬ УПЁРТЫЙ, ВСЕГО ХОРОШЕГО")
+            window.location.replace("http://google.com")
+          }
 
+          if(!stop){
+            f++
+     console.log(f)
+      
+      
+          }
+        
+   }}
+    
+      >
+        <div class="c-button__wrapper fun">
+        подписаться
+        </div>
+</a>
+</div>
+</section>
+
+<center><div class="scetch"></div><div class="game"></div></center>
+
+<a disabled >нажми</a>
                     <div>={tmp}=</div>
                     <img src={svg['load']} />
                 </div>
