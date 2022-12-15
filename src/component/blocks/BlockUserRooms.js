@@ -619,12 +619,23 @@ async function SearchRooms(Static) {
     label: "",
     active: false,
     condition: async (value) => {
-    
+  
       let response
       if (value.length > 0) {
         Static.searchInput.active = true
-        response = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { $text: { $search: value }, system: false }, limit: 10 })
+        let request 
 
+        if(Static.Category.value == "all" )
+        {
+           request = { name: "UsersRooms", filter: { $text: { $search: value }, system: false }, limit: 10 }
+        }
+        else{
+          request = { name: "UsersRooms", filter: { $text: { $search: value },"settingsrooms":Static.Category.value, system: false }, limit: 10 }
+          
+        }
+ 
+        response = await fn.restApi.getUserRoom(request)
+    
         if (response.list_records.length == 1) {
 
           Static.ActiveListRooms = [response.list_records[0]]
@@ -640,10 +651,16 @@ async function SearchRooms(Static) {
         }
       }
       else {
-
-
-
-        await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+        Static.searchInput.active = false
+        if(Static.Category.value == "all" )
+        {
+          await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+        }
+        else{
+          await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { $text: { $search: value },"settingsrooms":Static.Category.value, system: false }, limit: 10 })
+          
+        }
+   
         Static.ActiveListRooms = Variable.UsersRooms.list_records
      //   CheckSystemInterface(Static) ?????????????? хз зачем
       }
@@ -654,27 +671,50 @@ async function SearchRooms(Static) {
 
 
 
-
-
 const BlockUserRooms = async function ({ Static }) {
 
   Static.ChatRooms = {}
+
  
-  Static.Category = {active:"all",
-  items:[
-    {text:"Все ктегории",value:"all"},
-    {text:"NFT",value:"NFT"},
-    {text:"Crypto вселененная",value:"Crypto"},
-    {text:"Altcoin",value:"Altcoin"},
-    {text:"Bitcoin",value:"Bitcoin"},
-    {text:"Finances",value:"Finances"},
-    {text:"Trading",value:"Trading"}
-  ],
-nameOptions:"category",
-open:false,
-title:"Категории"}
+
+
 
   await initOne(async () => {
+
+
+  
+    Static.optionsSelect = {
+      Category: {
+        active:"all",
+        items:[
+          {text:"Все категории",value:"all"},
+          {text:"NFT",value:"NFT"},
+          {text:"Crypto вселененная",value:"Crypto"},
+          {text:"Altcoin",value:"Altcoin"},
+          {text:"Bitcoin",value:"Bitcoin"},
+          {text:"Finances",value:"Finances"},
+          {text:"Trading",value:"Trading"}
+        ],
+      nameOptions:"Category",
+      open:false,
+      title:"Показать"
+      },
+      Date: {
+        active:"date",
+        items:[
+          {text:"По дате создания",value:"date"},
+          {text:"По количеству участников",value:"users"},
+          {text:"По количеству сообщений",value:"message"}
+        
+        ],
+        nameOptions:"Date",
+        open:false,
+        title:"Сортировать"}
+  };
+   Static.Category={value:"all"}
+  
+  Static.language = {name:"all",code:Variable.lang.code}
+
     Static.z=0
     Static.Subscription = false
     Static.Tag = {}
@@ -1008,12 +1048,14 @@ title:"Категории"}
           }}
         >
              <Select
-            options={Static.Category}
+            options={Static.optionsSelect.Category}
              callback={
              async (active) => {
               let request 
+              Static.Category.value = active
               if(Static.searchInput.active)
               {
+                console.log(1)
                 if(active == "all")
                 {
                 request ={ name: "UsersRooms", filter: {system:false,$text: { $search: Static.searchInput.value }} };
@@ -1024,6 +1066,7 @@ title:"Категории"}
                
               }
               else{
+                console.log(2)
                 if(active == "all")
                 {
                   request ={ name: "UsersRooms", filter: {system:false}, limit:10};
@@ -1034,6 +1077,7 @@ title:"Категории"}
                 }
                 
               }
+
              let response = await fn.restApi.getUserRoom(request)
 
               if (response.list_records.length == 1) {
@@ -1052,7 +1096,31 @@ title:"Категории"}
                 
               }
             }
-          /></div>
+          />
+          {/*<Select
+            options={Static.optionsSelect.Date}
+            toggler={true}
+            callback={
+              async (active, nameOptions) => {
+              
+   
+
+              }
+            }
+          />
+             <div
+            class="c-questions__lang"
+            onclick={() => {
+              fn.modals.ModalChangeLanguage({
+                onclick: async (langCode, langName, langOrig) => {
+                  console.log(langCode)
+                },
+              })
+            }}>
+            {Static.language.name == "all" ? `${Variable.myInfo.mainLanguage.eng_name} (${Variable.myInfo.mainLanguage.orig_name})` : Static.language.name
+            }
+          </div>*/}
+          </div>
    
       {/*
     блок для пользовательских комнат

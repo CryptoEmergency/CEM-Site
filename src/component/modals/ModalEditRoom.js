@@ -206,9 +206,7 @@ const sendPhoto = async function (crooper, index) {
     value: data.userrooms.settingsroom.description,
     
   }
-  Static.Category = data.userrooms.settingsroom.category
-
-
+  
   //инпут язык
   Static.Lang = {
     value: data.userrooms.country.code + ` (${data.userrooms.country.orig_name})`,
@@ -287,6 +285,24 @@ const sendPhoto = async function (crooper, index) {
 
   init(async function () {
 
+
+    Static.optionsSelect = {
+      Category: {
+        active:data.userrooms.settingsroom.category,
+        items:[
+          {text:"NFT",value:"NFT"},
+          {text:"Crypto вселененная",value:"Crypto"},
+          {text:"Altcoin",value:"Altcoin"},
+          {text:"Bitcoin",value:"Bitcoin"},
+          {text:"Finances",value:"Finances"},
+          {text:"Trading",value:"Trading"}
+        ],
+      nameOptions:"Category",
+      open:false,
+      title:"Выбрать"
+      }};
+
+
   }, () => {
 
 
@@ -351,20 +367,20 @@ const sendPhoto = async function (crooper, index) {
               </div>
               <br />
               <div class="c-comments__field">
+                <label>Категории</label>
+              <Select
+            options={Static.optionsSelect.Category}
+      
+            callback={
+              async (active, nameOptions) => {
+              
+                Static.Category = active
 
-                <select className="justselect-title" Static={Static.Category} onChange={function(e) {
-                  Static.Category = this.value
-       
-                      }}
-                         >
-                  <option value="NFT">NFT</option>
-                  <option value="Crypto вселенная">Crypto вселенная</option>
-                  <option value="Altcoin">Altcoin</option>
-                  <option value="Bitcoin">Bitcoin</option>
-                  <option value="Finances">Finances</option>
-                  <option value="Trading">Trading</option>
-                  </select>
-               
+              }
+            }
+          />
+                
+          
               </div>
               <br />
               <div class="container-input">
@@ -497,7 +513,7 @@ const sendPhoto = async function (crooper, index) {
    
                     // let system = false
                     let request = {_id, status, visible, confirmuser, title, description, images, languages, country,category }
-       console.log(request)
+ 
                     let requier = await fn.restApi.setUserRoom.edit(request)
                     
                     if (requier.status == "ok") {

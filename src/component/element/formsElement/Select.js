@@ -23,7 +23,6 @@ const changeSelect = function (selectIndex, options, callback) {
 
 const Select = function ({ options, callback, toggler }) {
   let aimg = svg["filter_arrow_bottom"]
-
   return (
     <div class="profit_calculator_inputs_container">
       {options.title ? <span>{options.title}</span> : null}
