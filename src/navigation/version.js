@@ -35,10 +35,8 @@ const start = function (data, ID) {
        
 
            
-       
-      
-
-/*
+   /*    
+    
 let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"Флудилка",category:"flood"}]},{en:[{roomName:"Crypto",category:"crypto"},{roomName:"Flood",category:"flood"}]}]
 
             Variable.listsLang.forEach(function(elem,i){
@@ -46,28 +44,28 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
                     if(elem.code == "ru")
                     {
                         systemrooms[0].ru.forEach(async function(name){
-                            await fn.restApi.setUserRoom.create({ visible: true, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
+                            await fn.restApi.setUserRoom.create({staus:false, visible: false, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
                         })
                  
                     }
                     else{
                         systemrooms[1].en.forEach(async function(name){
-                            await fn.restApi.setUserRoom.create( { visible: true, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
+                            await fn.restApi.setUserRoom.create( {staus:false, visible: false, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
                         }) 
                     }
          
            
               //  console.log(elem)
 
-            })*/
-       
+            })
+       */
          //   let request = { status, visible, confirmuser, title, description, images, languages, country,category }
             // console.log(Static.mediaInputs.value[0].name)
           //   let requier = await fn.restApi.setUserRoom.create(request)
         },
         () => {
       
-            function getRandomInt(max) {
+          function getRandomInt(max) {
                 return Math.floor(Math.random() * max);
               }
               let f = 0
@@ -77,10 +75,12 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
             let stop = false
             return (
                 <div class="c-main__body">
-                    {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
+       
                     Version page {Variable.Static.tpm}
-                    <section class="c-chats__content" >
-            <div class="c-chats__border"> <a href=""
+                    
+    
+      <section class="c-chats__content" >
+      <div class="c-chats__border"> <a href=""
         class="c-button c-button--outline2"
         onmouseover = {function(){
             if(z> 4){
@@ -114,7 +114,7 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
    {
     if(z == 5)
     {
-        fn.modals.ModalNeedAuth(true)
+        fn.modals.ModalNeedAuth({game:"begin"})
     }
     
     let el2 =  document.getElementsByClassName("game")
@@ -152,6 +152,8 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
 <center><div class="scetch"></div><div class="game"></div></center>
 
 <a disabled >нажми</a>
+ 
+
                     <div>={tmp}=</div>
                     <img src={svg['load']} />
                 </div>
