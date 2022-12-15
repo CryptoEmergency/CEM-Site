@@ -720,7 +720,7 @@ const BlockUserRooms = async function ({ Static }) {
     Static.Tag = {}
     //для тегов
     let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }})
-console.log({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }})
+
    if(resp.totalFound == 0)
    {
     Static.showTag = false
@@ -855,14 +855,18 @@ console.log({ name: "ListSystemsRooms", filter: { system: true, "languages.code"
                     "c-chats__check--created",
                     true ? "c-chats__check--active" : null
                   ]}
-                  title="Группы, созданные мной"
+                  style="cursor:pointer"
+                  title="Комнаты, созданные мной"
                   onClick={(e) => {
                     chatRooms(Static, true)
                     Static.usChat.show = true
 
                   }}
+                  
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_created"]} />
+                  
+                  
                 </div>
                 <div
                   class={[
@@ -870,7 +874,9 @@ console.log({ name: "ListSystemsRooms", filter: { system: true, "languages.code"
                     "c-chats__check--fellowship",
                     false ? "c-chats__check--active" : null
                   ]}
-                  title="Группы, в которых я состою"
+                
+                  style="cursor:pointer"
+                  title="Комнаты, на которые я подписан"
                   onClick={(e) => {
                     chatRooms(Static, false)
                     Static.usChat.show = true
@@ -878,6 +884,7 @@ console.log({ name: "ListSystemsRooms", filter: { system: true, "languages.code"
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_fellowship"]} />
+                  
                 </div>
               </div>
               <ul class="c-chats__togglers">
@@ -969,7 +976,7 @@ console.log({ name: "ListSystemsRooms", filter: { system: true, "languages.code"
                 <div class="c-form__wrapfield c-form__wrapfield--text">
                   <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
                   <div class="c-form__actions">
-                    <a href="#" class="c-form__action c-form__action--left" title="">
+                    {/*<a href="#" class="c-form__action c-form__action--left" title="">
                       <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
                     </a>
                     <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
@@ -977,7 +984,7 @@ console.log({ name: "ListSystemsRooms", filter: { system: true, "languages.code"
                     </label>
                     <a href="#" class="c-form__action c-form__action--right" title="">
                       <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
-                    </a>
+              </a>*/}
                   </div>
                   <button
                     class="c-form__send"
