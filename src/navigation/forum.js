@@ -95,7 +95,7 @@ const start = function (data, ID) {
                 <div class='c-main__body'>
                     <div class="page-content page-content--full">
                         <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px">
-                            <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
+                          {/*  <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
                             <div class="swiper-container">
                                 <div class="swiper swiper-post_media" After={() => swiperGo()}>
                                     <div class="swiper-wrapper">
@@ -228,7 +228,11 @@ const start = function (data, ID) {
                                     <div class="swiper-pagination swiper-pagination-post_media"></div>
                                     <div class="swiper-scrollbar-post_media"></div>
                                 </div>
-                            </div>
+                            </div>*/}
+                            <div class="video-container-forum">
+                                    
+                                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/RfdWzyN2Df8" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                        
                             <div>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
                                 <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
@@ -239,10 +243,7 @@ const start = function (data, ID) {
                                     <img src={images['forum/forum_timesheet_16']} />
                                     <img src={images['forum/forum_timesheet_17']} />
                                 </div>
-                                <div class="video-container-forum">
-                                    
-                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/RfdWzyN2Df8" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                                    <div class="video-container-forum">
+                               <div class="video-container-forum">
                                     <iframe width="1280" height="720" src="https://www.youtube.com/embed/P6iDJkDZiyE" title="Crypto ЮГ 2022 (Зал)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                   </div>
                                 <p style="font-size: 18px;">
@@ -303,7 +304,7 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                                 <div style="margin: 35px 0" class="swiper-container">
-                                    <div class="swiper swiper-two" After={() => swiperTwo()}>
+                                   { /*<div class="swiper swiper-two" After={() => swiperTwo()}>
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide">
                                                 <div class="swiper-post_media_image_container">
@@ -353,7 +354,7 @@ const start = function (data, ID) {
                                         </div>
                                         <div class="swiper-pagination swiper-pagination-two"></div>
                                         <div class="swiper-scrollbar-two"></div>
-                                    </div>
+                        </div>*/}
                                 </div>
                                 <div style="font-size: 18px; margin-top: 10px">
                                     <p>
