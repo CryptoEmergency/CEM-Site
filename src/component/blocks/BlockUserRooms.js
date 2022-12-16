@@ -175,6 +175,7 @@ function checkAthorisation(Static) {
     fn.modals.ModalNeedAuth()
     return false
   }
+
 }
 
 //чекнем системную комнату отинтерфейса
@@ -390,6 +391,7 @@ async function ShowMessage(Static) {
   if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
+       
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -399,7 +401,14 @@ async function ShowMessage(Static) {
               {
                 //ники пользователей 
                 <div class="c-message__title">
-                  <div class="c-message__nick">{userrooms.author.nickname}</div>
+                  <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    minichat(Static.Rooms.author._id)
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
+                  </div>
                   <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
                 </div>
               }
@@ -444,9 +453,17 @@ async function ShowMessage(Static) {
                   //ники пользователей showDate
 
                   <div class="c-message__title">
-                    <div class="c-message__nick">{userrooms.author.nickname}</div>
-                    <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
+                       <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    minichat(userrooms._id)
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
                   </div>
+                  <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
+                </div>
+              
                 }
                 {
                   //сообщения
@@ -515,7 +532,14 @@ async function ShowMessage(Static) {
                 //ники пользователей showDate
 
                 <div class="c-message__title">
-                  <div class="c-message__nick">{userrooms.author.nickname}</div>
+                   <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    minichat(userrooms._id)
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
+                  </div>
                   <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
                 </div>
               }
@@ -547,6 +571,7 @@ async function ShowMessage(Static) {
       //вывод всех комнат для авторизованных пользоватлей
     } else if (Static.Auth) {
       if (Static.Rooms.message.length > 0) {
+        console.log(Static.Rooms.message)
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -556,7 +581,16 @@ async function ShowMessage(Static) {
                 //ники пользователей showDate
 
                 <div class="c-message__title">
-                  <div class="c-message__nick">{userrooms.author.nickname}</div>
+                     <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    
+                    document.createElement("div")
+                    
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
+                  </div>
                   <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
                 </div>
               }
@@ -673,6 +707,66 @@ async function SearchRooms(Static) {
 
 
 
+
+function minichat(data)
+{
+  let div = document.getElementsByClassName("block1");
+   
+  let listener = function(e) {
+  
+    div[0].style.left = e.pageX - 50 + "px";
+    div[0].style.top = e.pageY - 50 + "px";
+  };
+  
+  <div onmousedown={function(e){ document.addEventListener('mousemove', listener);}} onmouseup={function(e){  document.removeEventListener('mousemove', listener);}} class="block1" id="test">
+  <section class="c-chats__content" >
+              <div class="c-chats__border">
+      
+                <ul class="c-chats__messages" style="height:300px">
+  
+  
+                  {
+  
+                    Static.ChatData
+                  }
+  
+                </ul>
+                <div class="c-chats__form c-form">
+  
+                  <div class="c-form__wrapfield c-form__wrapfield--text">
+                    <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
+                    <div class="c-form__actions">
+                      {/*<a href="#" class="c-form__action c-form__action--left" title="">
+                        <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
+                      </a>
+                      <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
+                        <img src={svg.attach} width="13" height="13" alt="" class="c-form__icon" />
+                      </label>
+                      <a href="#" class="c-form__action c-form__action--right" title="">
+                        <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
+                </a>*/}
+                    </div>
+                    <button
+                      class="c-form__send"
+                      onclick={() => {
+                        //оправим сообщение
+                        checkAthorisation(Static)
+                        sendRoomsMessage(Static, Static.MessageValue.id, Static.MessageValue.el.value)
+                        Static.MessageValue.el.value = ""
+                      }}
+                    >
+                      <img src={svg.send} width="13" height="13" alt="" class="c-form__icon" />
+                    </button>
+                  </div>
+  
+                </div>
+              </div>
+            </section>
+  </div>
+
+
+}
+
 const BlockUserRooms = async function ({ Static }) {
 
   Static.ChatRooms = {}
@@ -770,14 +864,14 @@ const BlockUserRooms = async function ({ Static }) {
   let subscribe
   let roomImage
   let bell
-
+  
 
 
 
   return (
 
     <div class="c-rooms c-container">
-
+  
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
         <ul class="c-chats__togglers">
           {/*

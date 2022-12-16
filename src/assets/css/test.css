@@ -256,6 +256,17 @@
   font-weight: bold;
 }
 
+.block1 {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  border-radius: 22px;
+  z-index: 9999;
+}
+
+
 
 
 
