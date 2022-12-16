@@ -8,8 +8,12 @@ import {
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 const ModalNeedAuth = function (data, ID) {
+
+  let isEmpty = Object.entries(data).length === 0;
+
+
  let g1,g2
- if(!data)
+ if(isEmpty)
  {
   g1 = Variable.lang.h.modal_needAuth;
   g2 = Variable.lang.p.needAuth
@@ -21,7 +25,7 @@ const ModalNeedAuth = function (data, ID) {
 
   init(
     () => {
-      if(!data){
+      if(isEmpty){
       timersStart("needAuth", () => {
         fn.modals.ModalAuth()
         timersStop("needAuth");

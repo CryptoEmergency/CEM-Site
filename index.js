@@ -13,7 +13,7 @@ init({
     // mode: "production",
     mode: "development",
     // Какую базу подключить office - локальную, "" - основную, test - Тестовую
-    //api: "",
+   // api: "",
      api: "office"
 });
 //Собираем и запускаем

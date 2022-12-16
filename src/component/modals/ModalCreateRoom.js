@@ -230,7 +230,7 @@ const sendPhoto = async function (crooper, index) {
 
   }
 
-  Static.Category ="NFT"
+
   
   //кодовое слово
   Static.Confirm = {
@@ -266,8 +266,26 @@ const sendPhoto = async function (crooper, index) {
 
 
   init(async function () {
-
+  Static.optionsSelect = {
+      Category: {
+        active:"NFT",
+        items:[
+          {text:"NFT",value:"NFT"},
+          {text:"Crypto вселененная",value:"Crypto"},
+          {text:"Altcoin",value:"Altcoin"},
+          {text:"Bitcoin",value:"Bitcoin"},
+          {text:"Finances",value:"Finances"},
+          {text:"Trading",value:"Trading"}
+        ],
+      nameOptions:"Category",
+      open:false,
+      title:"Выбрать"
+      }};
+      
   }, () => {
+
+
+    Static.Category = Static.optionsSelect.Category.active
 
     let active
     if (Static.label.valid) {
@@ -324,19 +342,18 @@ const sendPhoto = async function (crooper, index) {
               <br />
               <div class="c-comments__field">
 
-                <select className="justselect-title" Static={Static.Category} onChange={function(e) {
-                  Static.Category = this.value
-         
-                      }}
-                         >
-                  <option selected value="NFT">NFT</option>
-                  <option value="Crypto вселенная">Crypto вселенная</option>
-                  <option value="Altcoin">Altcoin</option>
-                  <option value="Bitcoin">Bitcoin</option>
-                  <option value="Finances">Finances</option>
-                  <option value="Trading">Trading</option>
-                  </select>
-               
+              <label>Категории</label>
+              <Select
+            options={Static.optionsSelect.Category}
+      
+            callback={
+              async (active, nameOptions) => {
+              
+                Static.Category = active
+
+              }
+            }
+          />
               </div>
               <br />
               <div class="container-input">

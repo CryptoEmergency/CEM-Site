@@ -239,7 +239,12 @@ const start = function (data, ID) {
                                     <img src={images['forum/forum_timesheet_16']} />
                                     <img src={images['forum/forum_timesheet_17']} />
                                 </div>
-                                <div class="video-container-forum"><iframe src="https://www.youtube.com/embed/e-LBppoZXJs" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                                <div class="video-container-forum">
+                                    
+                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/RfdWzyN2Df8" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                    <div class="video-container-forum">
+                                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/P6iDJkDZiyE" title="Crypto ЮГ 2022 (Зал)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                  </div>
                                 <p style="font-size: 18px;">
                                     Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>

@@ -14,6 +14,7 @@ import {
 // console.log(emoji_text)
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
+import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
 let tmp = 0
 const start = function (data, ID) {
 
@@ -35,10 +36,8 @@ const start = function (data, ID) {
        
 
            
-       
-      
-
-/*
+   /*    
+    
 let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"Флудилка",category:"flood"}]},{en:[{roomName:"Crypto",category:"crypto"},{roomName:"Flood",category:"flood"}]}]
 
             Variable.listsLang.forEach(function(elem,i){
@@ -46,28 +45,60 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
                     if(elem.code == "ru")
                     {
                         systemrooms[0].ru.forEach(async function(name){
-                            await fn.restApi.setUserRoom.create({ visible: true, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
+                            await fn.restApi.setUserRoom.create({staus:false, visible: false, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
                         })
                  
                     }
                     else{
                         systemrooms[1].en.forEach(async function(name){
-                            await fn.restApi.setUserRoom.create( { visible: true, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
+                            await fn.restApi.setUserRoom.create( {staus:false, visible: false, system: true, title: name.roomName+" "+elem.code.toUpperCase(), description: "", images: "", languages: elem.code, category: name.category }) 
                         }) 
                     }
          
            
               //  console.log(elem)
 
-            })*/
-       
+            })
+       */
          //   let request = { status, visible, confirmuser, title, description, images, languages, country,category }
             // console.log(Static.mediaInputs.value[0].name)
           //   let requier = await fn.restApi.setUserRoom.create(request)
         },
         () => {
+
+
+
+          var div = document.getElementsByClassName('block1');
+   
+          var listener = function(e) {
+    
+            div[0].style.left = e.pageX - 50 + "px";
+            div[0].style.top = e.pageY - 50 + "px";
+          };
+      /*    
+          circle.addEventListener('mousedown', e => {
+              document.addEventListener('mousemove', listener);
+          });
+          
+          circle.addEventListener('mouseup', e => {
+              document.removeEventListener('mousemove', listener);
+          });
+*/
+
+
+
+
+
+let StaticMessageValue = ""
+
+
+
+
+
+
+
       
-            function getRandomInt(max) {
+          function getRandomInt(max) {
                 return Math.floor(Math.random() * max);
               }
               let f = 0
@@ -77,10 +108,12 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
             let stop = false
             return (
                 <div class="c-main__body">
-                    {/* <div class={[Variable.HeaderShow ? 'c-main__body' : 'c-main__body--noheader']}> */}
+       
                     Version page {Variable.Static.tpm}
-                    <section class="c-chats__content" >
-            <div class="c-chats__border"> <a href=""
+                    
+    
+      <section class="c-chats__content" >
+      <div class="c-chats__border"> <a href=""
         class="c-button c-button--outline2"
         onmouseover = {function(){
             if(z> 4){
@@ -114,7 +147,7 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
    {
     if(z == 5)
     {
-        fn.modals.ModalNeedAuth(true)
+        fn.modals.ModalNeedAuth({game:"begin"})
     }
     
     let el2 =  document.getElementsByClassName("game")
@@ -151,7 +184,39 @@ let systemrooms = [{ru:[{roomName:"Крипто",category:"crypto"},{roomName:"�
 
 <center><div class="scetch"></div><div class="game"></div></center>
 
-<a disabled >нажми</a>
+
+ 
+<div onmousedown={function(e){ document.addEventListener('mousemove', listener);}} onmouseup={function(e){  document.removeEventListener('mousemove', listener);}} class="block1">
+<div class="c-chats__form c-form">
+
+<div class="c-form__wrapfield c-form__wrapfield--text">
+  <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
+  <div class="c-form__actions">
+    {/*<a href="#" class="c-form__action c-form__action--left" title="">
+      <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
+    </a>
+    <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
+      <img src={svg.attach} width="13" height="13" alt="" class="c-form__icon" />
+    </label>
+    <a href="#" class="c-form__action c-form__action--right" title="">
+      <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
+</a>*/}
+  </div>
+  <button
+    class="c-form__send"
+    onclick={() => {
+      //оправим сообщение
+    //  checkAthorisation(Static)
+    //  sendRoomsMessage(Static, Static.MessageValue.id, Static.MessageValue.el.value)
+    //  Static.MessageValue.el.value = ""
+    }}
+  >
+    <img src={svg.send} width="13" height="13" alt="" class="c-form__icon" />
+  </button>
+</div>
+
+</div>
+</div>
                     <div>={tmp}=</div>
                     <img src={svg['load']} />
                 </div>

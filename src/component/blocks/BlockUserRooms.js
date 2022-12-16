@@ -175,6 +175,7 @@ function checkAthorisation(Static) {
     fn.modals.ModalNeedAuth()
     return false
   }
+
 }
 
 //чекнем системную комнату отинтерфейса
@@ -390,6 +391,7 @@ async function ShowMessage(Static) {
   if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
+       
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -399,7 +401,14 @@ async function ShowMessage(Static) {
               {
                 //ники пользователей 
                 <div class="c-message__title">
-                  <div class="c-message__nick">{userrooms.author.nickname}</div>
+                  <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    minichat(Static.Rooms.author._id)
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
+                  </div>
                   <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
                 </div>
               }
@@ -444,9 +453,17 @@ async function ShowMessage(Static) {
                   //ники пользователей showDate
 
                   <div class="c-message__title">
-                    <div class="c-message__nick">{userrooms.author.nickname}</div>
-                    <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
+                       <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    minichat(userrooms._id)
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
                   </div>
+                  <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
+                </div>
+              
                 }
                 {
                   //сообщения
@@ -515,7 +532,14 @@ async function ShowMessage(Static) {
                 //ники пользователей showDate
 
                 <div class="c-message__title">
-                  <div class="c-message__nick">{userrooms.author.nickname}</div>
+                   <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    minichat(userrooms._id)
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
+                  </div>
                   <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
                 </div>
               }
@@ -547,6 +571,7 @@ async function ShowMessage(Static) {
       //вывод всех комнат для авторизованных пользоватлей
     } else if (Static.Auth) {
       if (Static.Rooms.message.length > 0) {
+        console.log(Static.Rooms.message)
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -556,7 +581,16 @@ async function ShowMessage(Static) {
                 //ники пользователей showDate
 
                 <div class="c-message__title">
-                  <div class="c-message__nick">{userrooms.author.nickname}</div>
+                     <div class="c-message__nick" style="cursor:pointer">
+                    <a href="" 
+                  onclick={function(){
+                    
+                    document.createElement("div")
+                    
+                  }}
+                  
+                  >{userrooms.author.nickname}</a>
+                  </div>
                   <div class="c-message__date">{fn.getDateFormat(userrooms.showDate, "time")}</div>
                 </div>
               }
@@ -619,12 +653,23 @@ async function SearchRooms(Static) {
     label: "",
     active: false,
     condition: async (value) => {
-    
+  
       let response
       if (value.length > 0) {
         Static.searchInput.active = true
-        response = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { $text: { $search: value }, system: false }, limit: 10 })
+        let request 
 
+        if(Static.Category.value == "all" )
+        {
+           request = { name: "UsersRooms", filter: { $text: { $search: value }, system: false }, limit: 10 }
+        }
+        else{
+          request = { name: "UsersRooms", filter: { $text: { $search: value },"settingsroom.category":Static.Category.value, system: false }, limit: 10 }
+          
+        }
+ 
+        response = await fn.restApi.getUserRoom(request)
+    
         if (response.list_records.length == 1) {
 
           Static.ActiveListRooms = [response.list_records[0]]
@@ -640,10 +685,18 @@ async function SearchRooms(Static) {
         }
       }
       else {
+        Static.searchInput.active = false
+    
+        if(Static.Category.value == "all" )
+        {  
+          await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+        }
+        else{
 
-
-
-        await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+         await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { "settingsroom.category":Static.Category.value, system: false }, limit: 10 })
+    
+        }
+   
         Static.ActiveListRooms = Variable.UsersRooms.list_records
      //   CheckSystemInterface(Static) ?????????????? хз зачем
       }
@@ -655,31 +708,114 @@ async function SearchRooms(Static) {
 
 
 
+function minichat(data)
+{
+  let div = document.getElementsByClassName("block1");
+   
+  let listener = function(e) {
+  
+    div[0].style.left = e.pageX - 50 + "px";
+    div[0].style.top = e.pageY - 50 + "px";
+  };
+  
+  <div onmousedown={function(e){ document.addEventListener('mousemove', listener);}} onmouseup={function(e){  document.removeEventListener('mousemove', listener);}} class="block1" id="test">
+  <section class="c-chats__content" >
+              <div class="c-chats__border">
+      
+                <ul class="c-chats__messages" style="height:300px">
+  
+  
+                  {
+  
+                    Static.ChatData
+                  }
+  
+                </ul>
+                <div class="c-chats__form c-form">
+  
+                  <div class="c-form__wrapfield c-form__wrapfield--text">
+                    <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
+                    <div class="c-form__actions">
+                      {/*<a href="#" class="c-form__action c-form__action--left" title="">
+                        <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
+                      </a>
+                      <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
+                        <img src={svg.attach} width="13" height="13" alt="" class="c-form__icon" />
+                      </label>
+                      <a href="#" class="c-form__action c-form__action--right" title="">
+                        <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
+                </a>*/}
+                    </div>
+                    <button
+                      class="c-form__send"
+                      onclick={() => {
+                        //оправим сообщение
+                        checkAthorisation(Static)
+                        sendRoomsMessage(Static, Static.MessageValue.id, Static.MessageValue.el.value)
+                        Static.MessageValue.el.value = ""
+                      }}
+                    >
+                      <img src={svg.send} width="13" height="13" alt="" class="c-form__icon" />
+                    </button>
+                  </div>
+  
+                </div>
+              </div>
+            </section>
+  </div>
+
+
+}
 
 const BlockUserRooms = async function ({ Static }) {
 
   Static.ChatRooms = {}
+
  
-  Static.Category = {active:"all",
-  items:[
-    {text:"Все ктегории",value:"all"},
-    {text:"NFT",value:"NFT"},
-    {text:"Crypto вселененная",value:"Crypto"},
-    {text:"Altcoin",value:"Altcoin"},
-    {text:"Bitcoin",value:"Bitcoin"},
-    {text:"Finances",value:"Finances"},
-    {text:"Trading",value:"Trading"}
-  ],
-nameOptions:"category",
-open:false,
-title:"Категории"}
+
+
 
   await initOne(async () => {
+
+
+  
+    Static.optionsSelect = {
+      Category: {
+        active:"all",
+        items:[
+          {text:"Все категории",value:"all"},
+          {text:"NFT",value:"NFT"},
+          {text:"Crypto вселененная",value:"Crypto"},
+          {text:"Altcoin",value:"Altcoin"},
+          {text:"Bitcoin",value:"Bitcoin"},
+          {text:"Finances",value:"Finances"},
+          {text:"Trading",value:"Trading"}
+        ],
+      nameOptions:"Category",
+      open:false,
+      title:"Показать"
+      },
+      Date: {
+        active:"date",
+        items:[
+          {text:"По дате создания",value:"date"},
+          {text:"По количеству участников",value:"users"},
+          {text:"По количеству сообщений",value:"message"}
+        
+        ],
+        nameOptions:"Date",
+        open:false,
+        title:"Сортировать"}
+  };
+   Static.Category={value:"all"}
+  
+  Static.language = {name:"all",code:Variable.lang.code}
+
     Static.z=0
     Static.Subscription = false
     Static.Tag = {}
     //для тегов
-    let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }, limit: 10 })
+    let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }})
 
    if(resp.totalFound == 0)
    {
@@ -728,14 +864,14 @@ title:"Категории"}
   let subscribe
   let roomImage
   let bell
-
+  
 
 
 
   return (
 
     <div class="c-rooms c-container">
-
+  
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
         <ul class="c-chats__togglers">
           {/*
@@ -815,14 +951,18 @@ title:"Категории"}
                     "c-chats__check--created",
                     true ? "c-chats__check--active" : null
                   ]}
-                  title="Группы, созданные мной"
+                  style="cursor:pointer"
+                  title="Комнаты, созданные мной"
                   onClick={(e) => {
                     chatRooms(Static, true)
                     Static.usChat.show = true
 
                   }}
+                  
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_created"]} />
+                  
+                  
                 </div>
                 <div
                   class={[
@@ -830,7 +970,9 @@ title:"Категории"}
                     "c-chats__check--fellowship",
                     false ? "c-chats__check--active" : null
                   ]}
-                  title="Группы, в которых я состою"
+                
+                  style="cursor:pointer"
+                  title="Комнаты, на которые я подписан"
                   onClick={(e) => {
                     chatRooms(Static, false)
                     Static.usChat.show = true
@@ -838,6 +980,7 @@ title:"Категории"}
                   }}
                 >
                   <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_fellowship"]} />
+                  
                 </div>
               </div>
               <ul class="c-chats__togglers">
@@ -862,7 +1005,7 @@ title:"Категории"}
                           }}>
                             {
                               userrooms.settingsroom.images ?
-                                <img src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
+                                <img title={userrooms.settingsroom.title} src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
                                 :
                                 <div class="c-toggler__wrap">
                                   <span class="c-toggler__name">{userrooms.settingsroom.title}</span>
@@ -929,7 +1072,7 @@ title:"Категории"}
                 <div class="c-form__wrapfield c-form__wrapfield--text">
                   <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
                   <div class="c-form__actions">
-                    <a href="#" class="c-form__action c-form__action--left" title="">
+                    {/*<a href="#" class="c-form__action c-form__action--left" title="">
                       <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
                     </a>
                     <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
@@ -937,7 +1080,7 @@ title:"Категории"}
                     </label>
                     <a href="#" class="c-form__action c-form__action--right" title="">
                       <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
-                    </a>
+              </a>*/}
                   </div>
                   <button
                     class="c-form__send"
@@ -1008,32 +1151,39 @@ title:"Категории"}
           }}
         >
              <Select
-            options={Static.Category}
+            options={Static.optionsSelect.Category}
              callback={
              async (active) => {
               let request 
+              Static.Category.value = active
               if(Static.searchInput.active)
               {
+               
                 if(active == "all")
                 {
+                  
                 request ={ name: "UsersRooms", filter: {system:false,$text: { $search: Static.searchInput.value }} };
                 }
                 else{
+                 
                   request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active,$text: { $search: Static.searchInput.value }} }; 
                 }
                
               }
               else{
+               
                 if(active == "all")
                 {
                   request ={ name: "UsersRooms", filter: {system:false}, limit:10};
                   
                 }
                 else{
+              
                   request ={ name: "UsersRooms", filter: {system:false,"settingsroom.category":active} };
                 }
                 
               }
+           
              let response = await fn.restApi.getUserRoom(request)
 
               if (response.list_records.length == 1) {
@@ -1052,7 +1202,31 @@ title:"Категории"}
                 
               }
             }
-          /></div>
+          />
+          {/*<Select
+            options={Static.optionsSelect.Date}
+            toggler={true}
+            callback={
+              async (active, nameOptions) => {
+              
+   
+
+              }
+            }
+          />
+             <div
+            class="c-questions__lang"
+            onclick={() => {
+              fn.modals.ModalChangeLanguage({
+                onclick: async (langCode, langName, langOrig) => {
+                  console.log(langCode)
+                },
+              })
+            }}>
+            {Static.language.name == "all" ? `${Variable.myInfo.mainLanguage.eng_name} (${Variable.myInfo.mainLanguage.orig_name})` : Static.language.name
+            }
+          </div>*/}
+          </div>
    
       {/*
     блок для пользовательских комнат
@@ -1154,10 +1328,10 @@ title:"Категории"}
                             
                             <h4 class="c-room__title">
 
-                            <span class="c-room__subtitle" title="Категория">
+                            <span style="cursor:pointer" class="c-room__subtitle" title="Категория">
                               <span><i>Категория: </i>{userrooms.settingsroom.category ? fn.sliceString(userrooms.settingsroom.category, 66) : null} </span>
                             </span>
-                            <span class="c-room__subtitle"  title="Комната">
+                            <span style="cursor:pointer" class="c-room__subtitle"  title="Комната">
                               <span><i>Комната: </i>{userrooms.settingsroom.title ? fn.sliceString(userrooms.settingsroom.title, 66) : null} </span>
                             </span>
                           </h4>}
