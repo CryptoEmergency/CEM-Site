@@ -16,7 +16,7 @@ const start = function (data, ID) {
             return (
                 <div class="c-aboutcourse c-main__body">
                     <div class="c-aboutcourse__container c-container">
-                        <div class="c-aboutcourse__logo">
+                        <div class="c-aboutcourse__logo"  style={`--bg: ${data.primary_color}`}>
                             <img src={images[`${data.src}`]} />
                         </div>
                         <section class="c-aboutcourse__forwhom">
