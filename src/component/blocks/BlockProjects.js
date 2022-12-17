@@ -156,8 +156,8 @@ const BlockProjects = async function () {
                     modal: true
                 },
                 {
-                    "title": "Комнты",
-                    "icon": "room",
+                    "title": "Комнаты",
+                    "icon": "room3",
                     "link": "rooms",
                     "items": fn.itemsMenu.onlyPage({ url: '/rooms/' }),
                     modal: false

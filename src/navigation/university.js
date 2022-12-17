@@ -104,6 +104,7 @@ const start = function (data, ID = "mainBlock") {
             email: "",
             phone: "",
             telegram: "",
+            web: "www.digitalfutureclub.ru"
           },
           link: "/university/teachers/anastasiya/"
         },
@@ -118,6 +119,7 @@ const start = function (data, ID = "mainBlock") {
             email: "",
             phone: "+79881234568",
             telegram: "",
+            web: "www.digitalfutureclub.ru/"
           },
           link: "/university/teachers/evgeniy/"
         },
@@ -156,7 +158,8 @@ const start = function (data, ID = "mainBlock") {
       courses = [
         {
           logo: "",
-          title: "Курс 'SILVER'",
+          title: "Курс 'NFT «Digital Future»'",
+          subtitle: "Пакет 'SILVER'",
           link: "/university/courses/silver/",
           src: "university/course1",
           resourse: "https://digitalfutureclub.ru/",
@@ -201,7 +204,8 @@ const start = function (data, ID = "mainBlock") {
         },
         {
           logo: "",
-          title: "Курс 'GOLD'",
+          title: "Курс 'NFT «Digital Future»'",
+          subtitle: "Пакет 'GOLD'",
           link: "/university/courses/gold/",
           src: "university/course1",
           resourse: "https://digitalfutureclub.ru/",
@@ -252,7 +256,8 @@ const start = function (data, ID = "mainBlock") {
         },
         {
           logo: "",
-          title: "Курс 'PLATINUM'",
+          title: "Курс 'NFT «Digital Future»'",
+          subtitle: "Пакет 'PLATINUM'",
           link: "/university/courses/platinum/",
           src: "university/course1",
           resourse: "https://digitalfutureclub.ru/",
@@ -303,6 +308,174 @@ const start = function (data, ID = "mainBlock") {
             },
           ],
           primary_color: "#083c61"
+        },
+        {
+          logo: "",
+          title: "Курс 'NFT как ИСКУССТВО'",
+          subtitle: "Пакет 'НОВАТОР'",
+          link: "/university/courses/innovator/",
+          src: "university/course2",
+          resourse: "https://www.artemotio.ru/",
+          for_whom: "Образовательная платформа, где участники могут изучать NFT, современное искусство, живопись, технологию токенизации своих навыков и услуг с целью создавать и получать за своё творчество вознаграждение.",
+          booking: true,
+          installment_plan: true,
+          modules: [
+            {
+              item: "В чем суть NFT"
+            },
+            {
+              item: "Какие есть тренды"
+            },
+            {
+              item: "Что дает блокчейн"
+            },
+            {
+              item: "Как устроена Метавселенная"
+            },
+          ],
+          content: [
+            {
+              item: "Доступ к учебным материалам"
+            },
+            {
+              item: "Обучение в закрытой группе"
+            },
+            {
+              item: "Блок по технической части и искусству"
+            },
+            {
+              item: "Теоретический материал: лекции, видео-уроки"
+            },
+            {
+              item: "Практические задания"
+            },
+            {
+              item: "28 видеоуроков"
+            },
+            {
+              item: "4 недели полного погружения"
+            },
+          ],
+          primary_color: "#ffffff"
+        },
+        {
+          logo: "",
+          title: "Курс 'NFT как ИСКУССТВО'",
+          subtitle: "Пакет 'ЭНТУЗИАСТ'",
+          link: "/university/courses/enthusiast/",
+          src: "university/course2",
+          resourse: "https://www.artemotio.ru/",
+          for_whom: "Образовательная платформа, где участники могут изучать NFT, современное искусство, живопись, технологию токенизации своих навыков и услуг с целью создавать и получать за своё творчество вознаграждение.",
+          booking: true,
+          installment_plan: true,
+          modules: [
+            {
+              item: "В чем суть NFT"
+            },
+            {
+              item: "Какие есть тренды"
+            },
+            {
+              item: "Что дает блокчейн"
+            },
+            {
+              item: "Как устроена Метавселенная"
+            },
+          ],
+          content: [
+            {
+              item: "Доступ к учебным материалам"
+            },
+            {
+              item: "Обучение в закрытой группе"
+            },
+            {
+              item: "Блок по технической части и искусству"
+            },
+            {
+              item: "Теоретический материал: лекции, видео-уроки"
+            },
+            {
+              item: "Практические задания"
+            },
+            {
+              item: "28 видеоуроков"
+            },
+            {
+              item: "Чек-листы и инструкции"
+            },
+            {
+              item: "4 недели полного погружения"
+            },
+            {
+              item: "Разбор домашних заданий и практических кейсов"
+            },
+          ],
+          primary_color: "#ffffff"
+        },
+        {
+          logo: "",
+          title: "Курс 'NFT как ИСКУССТВО'",
+          subtitle: "Пакет 'NFT-зация бизнеса'",
+          link: "/university/courses/nftzation-of-business/",
+          src: "university/course2",
+          resourse: "https://www.artemotio.ru/",
+          for_whom: "Образовательная платформа, где участники могут изучать NFT, современное искусство, живопись, технологию токенизации своих навыков и услуг с целью создавать и получать за своё творчество вознаграждение.",
+          booking: true,
+          installment_plan: true,
+          modules: [
+            {
+              item: "В чем суть NFT"
+            },
+            {
+              item: "Какие есть тренды"
+            },
+            {
+              item: "Что дает блокчейн"
+            },
+            {
+              item: "Как устроена Метавселенная"
+            },
+          ],
+          content: [
+            {
+              item: "Анализ вашего проекта"
+            },
+            {
+              item: "Поиск идеи для NFT"
+            },
+            {
+              item: "Проработка концепции и roadmap"
+            },
+            {
+              item: "Формирование рабочей модели проекта"
+            },
+            {
+              item: "Поиск оптимального total supply проекта"
+            },
+            {
+              item: "Определение формата продвижения и запуска"
+            },
+            {
+              item: "Формирование команды"
+            },
+            {
+              item: "Сопровождение в подготовке презентации для фондов"
+            },
+            {
+              item: "Создание драфта токеномики проекта"
+            },
+            {
+              item: "Нетворкинг в установлении нужных связей"
+            },
+            {
+              item: "Выбор блокчейна и маркетплейса"
+            },
+            {
+              item: "4 ПЕРСОНАЛЬНЫХ КОНСУЛЬТАЦИИ ПО ВОПРОСАМ ВНЕДРЕНИЯ NFT"
+            }
+          ],
+          primary_color: "#ffffff"
         }
       ]
 
@@ -382,6 +555,12 @@ const start = function (data, ID = "mainBlock") {
                         </span>
                         <span class="c-university__caption">
                           <p class="c-university__name">{course.title}</p>
+                          {
+                            course.subtitle ?
+                              <p class="c-university__secondname">{course.subtitle}</p>
+                              :
+                              null
+                          }
                         </span>
                       </a>
                     )

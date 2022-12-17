@@ -95,7 +95,7 @@ const start = function (data, ID) {
                 <div class='c-main__body'>
                     <div class="page-content page-content--full">
                         <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px">
-                          {/*  <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
+                            {/*  <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
                             <div class="swiper-container">
                                 <div class="swiper swiper-post_media" After={() => swiperGo()}>
                                     <div class="swiper-wrapper">
@@ -230,9 +230,9 @@ const start = function (data, ID) {
                                 </div>
                             </div>*/}
                             <div class="video-container-forum">
-                                    
-                                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/RfdWzyN2Df8" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                                        
+
+                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/1wvHegEMrEU" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
                             <div>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
                                 <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
@@ -243,9 +243,9 @@ const start = function (data, ID) {
                                     <img src={images['forum/forum_timesheet_16']} />
                                     <img src={images['forum/forum_timesheet_17']} />
                                 </div>
-                               <div class="video-container-forum">
-                                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/P6iDJkDZiyE" title="Crypto ЮГ 2022 (Зал)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                  </div>
+                                <div class="video-container-forum">
+                                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/GQiMrMWivWY" title="Crypto ЮГ 2022 (Зал)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
                                 <p style="font-size: 18px;">
                                     Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
@@ -273,7 +273,7 @@ const start = function (data, ID) {
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Стартапы со всей России представят свои проекты
                                         </p>
                                         <p style="display: flex; align-items: center;">
-                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Будут подведены итоги <a style="padding-left: 6px;     text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 600;" href="/lottery/" onclick={async (e) => {fn.siteLink(e)}}>  лотереи "Сарафанное радио"</a> 
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Будут подведены итоги <a style="padding-left: 6px;     text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 600;" href="/lottery/" onclick={async (e) => { fn.siteLink(e) }}>  лотереи "Сарафанное радио"</a>
                                         </p>
                                     </div>
                                     <div style="font-size: 18px;">
@@ -304,7 +304,7 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                                 <div style="margin: 35px 0" class="swiper-container">
-                                   { /*<div class="swiper swiper-two" After={() => swiperTwo()}>
+                                    { /*<div class="swiper swiper-two" After={() => swiperTwo()}>
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide">
                                                 <div class="swiper-post_media_image_container">
@@ -399,7 +399,7 @@ const start = function (data, ID) {
                                         🔥 Шампанское и вкусные закуски
                                     </p>
                                     <p style="display: flex; align-items: center;">
-                                        🔥 Проживание в отелях: 
+                                        🔥 Проживание в отелях:
                                     </p>
                                     <p>
                                         <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Hilton – скидка 30% на проживание
@@ -1049,7 +1049,7 @@ const start = function (data, ID) {
                                     <a style="display: block!important; background: #FFFFFF"
                                         target="_blank"
                                         rel="nofollow nooopener"
-                                        
+
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_20"]} />
@@ -1135,7 +1135,7 @@ const start = function (data, ID) {
                                         <img src={images["forum/partner_30"]} />
                                     </a>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
