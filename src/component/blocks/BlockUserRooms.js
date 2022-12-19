@@ -13,6 +13,28 @@ import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
 
 
+
+
+const Mini = function(Static){
+
+  return(
+    <div name={Static.Rooms.author._id} class='c-modal__dialog block1' onmousedown={function(e){ document.addEventListener('mousemove', checker);}} onmouseup={function(e){  document.removeEventListener('mousemove', checker);}}>
+    <div class="c-chats__form c-form">
+   
+    <div class="c-form__actions">
+   
+   <a class="c-form__action c-form__action--left " onclick={function(){
+   fn.modals.close(ID)
+   }}>Закрыть</a>
+    <a class="c-form__action c-form__action--right" id={"showhide"+Static.Rooms.author._id} onclick={function(){toggle(document.getElementsByName("chat"+Static.Rooms.author._id))}}>Свернуть</a>
+    </div> 
+   
+    </div>
+    </div>
+  )
+
+}
+
 //подписаться на комнату
 async function subscribeRoom(Static,title,_id)
 {
@@ -585,10 +607,9 @@ async function ShowMessage(Static) {
                      <div class="c-message__nick" style="cursor:pointer">
                     <a href="" 
                   onclick={function(){
-                    
-                   
+                      
                     fn.modals.MiniChat(Static)
-
+                  
                     
                   }}
                   
@@ -710,58 +731,21 @@ async function SearchRooms(Static) {
 
 
 
-
-
-
-
 const BlockUserRooms = async function ({ Static }) {
 
+  //комнаты в чате
   Static.ChatRooms = {}
-
- 
-
-
 
   await initOne(async () => {
 
-
-  
-    Static.optionsSelect = {
-      Category: {
-        active:"all",
-        items:[
-          {text:"Все категории",value:"all"},
-          {text:"NFT",value:"NFT"},
-          {text:"Crypto вселененная",value:"Crypto"},
-          {text:"Altcoin",value:"Altcoin"},
-          {text:"Bitcoin",value:"Bitcoin"},
-          {text:"Finances",value:"Finances"},
-          {text:"Trading",value:"Trading"}
-        ],
-      nameOptions:"Category",
-      open:false,
-      title:"Показать"
-      },
-      Date: {
-        active:"date",
-        items:[
-          {text:"По дате создания",value:"date"},
-          {text:"По количеству участников",value:"users"},
-          {text:"По количеству сообщений",value:"message"}
-        
-        ],
-        nameOptions:"Date",
-        open:false,
-        title:"Сортировать"}
-  };
-   Static.Category={value:"all"}
-  
-  Static.language = {name:"all",code:Variable.lang.code}
-
+    //мини игра с кнопкой подписаться
     Static.z=0
+
+    //подписаться по умолчанию 
     Static.Subscription = false
+
+    //для тегов 
     Static.Tag = {}
-    //для тегов
     let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }})
 
    if(resp.totalFound == 0)
@@ -781,25 +765,20 @@ const BlockUserRooms = async function ({ Static }) {
     await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "UsersRooms"
 
-
     //при первом заходе открываем системный чат
     CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
 
-
     //комнаты в чате
     Static.usChat = { show: true }
-    Static.z = 0
-
-
+ 
+    //кнопка подписаться
     Static.subMarker
+
   })
 
   Static.ChatRooms = Variable.ListUsersRooms
-
-
-
 
   //если не используем фильтры
   if (!Static.searchInput.active) {
@@ -812,9 +791,6 @@ const BlockUserRooms = async function ({ Static }) {
   let roomImage
   let bell
   
-
-
-
   return (
 
     <div class="c-rooms c-container">
@@ -947,8 +923,6 @@ const BlockUserRooms = async function ({ Static }) {
                           <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
                             ChangeRooms(Static, userrooms._id, false)
 
-
-
                           }}>
                             {
                               userrooms.settingsroom.images ?
@@ -1019,7 +993,7 @@ const BlockUserRooms = async function ({ Static }) {
                 <div class="c-form__wrapfield c-form__wrapfield--text">
                   <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
                   <div class="c-form__actions">
-                    {/*<a href="#" class="c-form__action c-form__action--left" title="">
+                    <a href="#" class="c-form__action c-form__action--left" title="">
                       <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
                     </a>
                     <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
@@ -1027,7 +1001,7 @@ const BlockUserRooms = async function ({ Static }) {
                     </label>
                     <a href="#" class="c-form__action c-form__action--right" title="">
                       <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
-              </a>*/}
+              </a>
                   </div>
                   <button
                     class="c-form__send"
@@ -1176,17 +1150,16 @@ const BlockUserRooms = async function ({ Static }) {
           </div>
    
       {/*
-    блок для пользовательских комнат
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+ ///                                               блок для пользовательских комнат                                                                       ///
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     */}
 
       <div class="c-rooms__list">
 
         {
-
           //мапим юзерские комнаты
           () => {
-
-
             if (Static.ActiveListRooms.length > 0) {
 
               return Static.ActiveListRooms.map(function (userrooms, i) {

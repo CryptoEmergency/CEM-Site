@@ -56,6 +56,7 @@ const makeFilterSort = function (Static) {
 }
 
 const BlockQuestions = async function ({ Static, limit = 21 }) {
+  console.log(Static.apiFilter)
   await initOne(async () => {
     Static.quest = {
       value: "",

@@ -190,7 +190,7 @@ let StaticMessageValue = ""
 <div class="c-chats__form c-form">
 
 <div class="c-form__wrapfield c-form__wrapfield--text">
-  <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
+
   <div class="c-form__actions">
     {/*<a href="#" class="c-form__action c-form__action--left" title="">
       <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
