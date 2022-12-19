@@ -190,7 +190,7 @@ const Tags = async function ({ Static, _id,classActive, text, type }) {
 
 //если не авторизован
 function checkAthorisation(Static) {
-  if (Static.Auth) {
+  if (Variable.auth) {
     return true
   }
   else {
@@ -312,7 +312,7 @@ async function ShowMessage(Static) {
 
 
   Static.subMarker = ""
-  if (Static.Auth) {
+  if (Variable.auth) {
       let SubUnsab
 
       if(!Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
@@ -414,7 +414,7 @@ async function ShowMessage(Static) {
   if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
-       
+       console.log(1)
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -465,7 +465,7 @@ async function ShowMessage(Static) {
     else {
       //если пользователь ввел пароль
       if (Static.confirmPasword.valid) {
-
+      
         if (Static.Rooms.message.length > 0) {
           return Static.Rooms.message.map(function (userrooms, i) {
 
@@ -516,14 +516,15 @@ async function ShowMessage(Static) {
 
       }
       //если пользователь авторизоваеый но не вводил пароль выводим инпут
-      if (Static.Auth) {
+      if (Variable.auth) {
         authInput = <Input classDiv="c-form__wrapfield" className="c-form__field" Static={Static.confirmPasword} />
         authMessage = "Данная комната защищена паролем и вся секретная информация в ней скрыта до тех пор пока не введешь пароль"
       }
       else {
         authMessage = "Только авторизованные пользователи могут просматривать данный контент"
-
+     
       }
+ 
       return (
         <li class="c-chats__message c-message">
           <div class="c-message__title">
@@ -543,8 +544,8 @@ async function ShowMessage(Static) {
   else {
 
     //системные комнаты для не авторизованных пользователей
-    if (!Static.Auth && Static.Rooms.system) {
-
+    if (!Variable.auth && Static.Rooms.system) {
+    
       if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
 
@@ -581,7 +582,7 @@ async function ShowMessage(Static) {
 
       }
       else {
-
+    
         return (
           <li class="c-chats__message c-message">
             <div class="c-message__title">
@@ -592,9 +593,9 @@ async function ShowMessage(Static) {
         )
       }
       //вывод всех комнат для авторизованных пользоватлей
-    } else if (Static.Auth) {
+    } else if (Variable.auth) {
       if (Static.Rooms.message.length > 0) {
-     
+        
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -645,6 +646,7 @@ async function ShowMessage(Static) {
       }
     }
     else {
+    
       authMessage = "Только авторизованные пользователи могут просматривать данный контент"
       return (
 
@@ -795,6 +797,7 @@ const BlockUserRooms = async function ({ Static }) {
     await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "UsersRooms"
 
+    
     //при первом заходе открываем системный чат
     CheckSystemInterface(Static)
     //запускаем поиск и фильтры
@@ -807,6 +810,12 @@ const BlockUserRooms = async function ({ Static }) {
     Static.subMarker
 
   })
+
+ if(!Variable.Rooms)
+ {
+  CheckSystemInterface(Static)
+  Variable.Rooms = true
+ }
 
   Static.ChatRooms = Variable.ListUsersRooms
 
@@ -973,7 +982,7 @@ const BlockUserRooms = async function ({ Static }) {
               </ul>
             </div>
             <div class="c-chats__actions" onclick={() => {
-              if (Static.Auth) {
+              if (Variable.auth) {
                 fn.modals.ModalCreateRoom({
                   callback: async (response) => {
 
@@ -1208,12 +1217,12 @@ const BlockUserRooms = async function ({ Static }) {
                 else {
                   bell = svg.bell_1
                 }
-                if (Static.Auth) {
+                if (Variable.auth) {
                 if (userrooms.author && Variable.myInfo._id == userrooms.author._id) {
                   edit =
                     <a class="c-room__settings" href="" onclick={(e) => {
 
-                      if (Static.Auth) {
+                      if (Variable.auth) {
                         fn.modals.ModalEditRoom({
                           Static, userrooms,
                           callback: async (response) => {

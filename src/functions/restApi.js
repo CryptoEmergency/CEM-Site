@@ -1094,6 +1094,38 @@ restApi.userRoomCode = async function ({ id, value }) {
     return checkSetAnswer(response)
 }
 
+restApi.userRoomCode = async function ({ id, value }) {
+    let data = {
+        value: { confirmuser: value },
+        _id: id
+    }
+
+
+    const response = await sendApi.create("userRoomCode", data);
+    return checkSetAnswer(response)
+}
+
+restApi.resetPassword = async function(value)
+{
+
+    let data = {
+        value: { email: value }
+    }
+ 
+    const response = await sendApi.create("resetPassword", data);
+ 
+    return checkSetAnswer(response)
+}
+
+restApi.logOut = async function()
+{
+
+ 
+    const response = await sendApi.create("logout");
+
+    return checkSetAnswer(response)
+}
+
 
 restApi.doRole = {}
 

@@ -114,7 +114,7 @@ const ModalReg = function (data, ID) {
                 valid: false,
                 error: false,
                 label: Variable.lang.label.password,
-                placeholder: Variable.lang.placeholder.password,
+                placeholder: "",
                 errorText: Variable.lang.error_div.password5,
                 type: "password",
                 condition: (value) => {
@@ -138,7 +138,7 @@ const ModalReg = function (data, ID) {
                 valid: false,
                 error: false,
                 label: "Подтвердите пароль",
-                placeholder: Variable.lang.placeholder.password,
+                placeholder: "",
                 errorText: "Пароли не сопадают",
                 type: "password",
                 condition: (value) => {

@@ -17,23 +17,45 @@ import { Input } from '@component/element/index.js';
 const ModalRecoverPass = function(data, ID){
 
 
+ 
+
+
+
     let Static = fn.GetParams({ data, ID })
 
-    init(()=>{},
-    ()=>{
+    init(()=>{
 
+        Static.email = {
+            value: "",
+            valid: false,
+            error: false,
+            label: Variable.lang.label.email,
+            placeholder: Variable.lang.placeholder.email,
+            errorText: Variable.lang.error_div.wrong_email,
+            type: "text",
+            condition: (value) => {
+return true
+
+        
+                
+            }
+
+        }
+
+    },
+    ()=>{
+return(
         <div class="c-modal c-modal--open" id="ModalRecoverPass">
-        <section class="c-modal__dialog" ref={elem}>
+        <section class="c-modal__dialog" >
             <header class="c-modal__header">
                 <h2 class="c-modal__title">Восстановление пароля</h2>
                 <button
                     type="button"
                     class="c-modal__close"
                     onclick={() => {
-                      //  if(Variable.dataUrl.adress!== "rooms")
-                    //    {
+
                             Variable.DelModals(ID)
-                      //  } 
+
                     }}
                 ></button>
             </header>
@@ -42,34 +64,45 @@ const ModalRecoverPass = function(data, ID){
                    
                 </div>
 
-                <form onsubmit={sendAuthorization}>
+                <form >
                     <input style="display: none;" type="submit" />
                     <div class="reset_password_input_block">
-                        <WayAuthForm />
-                    </div>
-                    <div class="container-input">
+             
 
-                        <Input classDiv="input-div" Static={Static.pass} />
+                        <Input classDiv="input-div" Static={Static.email} />
 
                     </div>
                 </form>
-
+                <div id="response"></div>   
             </div>
             <footer class="c-modal__footer">
                 <button
-                    class={`c-button c-button--gradient2 ${!Static.isValid && "c-button--inactive"}`}
+                    class={`c-button c-button--gradient2 false`}
                     type="button"
-                    ref={elemButton}
-                    onClick={sendAuthorization}>
+                    onclick={async function()
+                        {
+                               let response = await fn.restApi.resetPassword(Static.email.value)
+                               if(response.status == "ok")
+                               {
+                           let res =  document.getElementById("response")
+                           res.innerText="На электронную почту отправлено письмо с инструкциями по восстановлению"
+
+                                setTimeout(function(){
+                        Variable.DelModals(ID)
+                        
+                                },3000)
+                               }
+                        }}
+                   >
                     <span class="c-button__text">
-                        {Variable.lang.button.login}
+                        Восстановить
                     </span>
                 </button>
             </footer>
         </section>
     </div>
+)
 
-
-    }),ID
+    },ID)
 }
 export default ModalRecoverPass;

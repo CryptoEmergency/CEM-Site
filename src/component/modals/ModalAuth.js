@@ -137,6 +137,8 @@ const ModalAuth = function (data, ID) {
             // Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
             elemButton().classList.remove('c-button--animated');
         }
+
+        Variable.Rooms = false
         return
     }
 
@@ -306,15 +308,16 @@ const ModalAuth = function (data, ID) {
                                 <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
                             </div>
                             <div class="authAgree">
-                                <span><a
+                                <span>Забыли пароль? <a
                                 class="a-link"
                                 href=""
                                 onclick={() => {
-                                    console.log(1)
+                                  
                                     Variable.DelModals("ModalAuth")
+
                                     Variable.SetModals({ name: "ModalRecoverPass", data: {} })
                                 }}
-                            >Забыли пароль? </a></span>
+                            >Ссылка для восстановления</a></span>
                             </div>
                         </div>
                         <footer class="c-modal__footer">
