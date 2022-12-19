@@ -16,7 +16,7 @@ import { Input } from '@component/element/index.js';
 
 
 const ModalAuth = function (data, ID) {
-    // console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
+  //   console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
 
 
     let wayAuth,
@@ -253,7 +253,7 @@ const ModalAuth = function (data, ID) {
                         </header>
                         <div class="c-modal__body">
                             <div class="c-mobileoremail">
-                                <button
+                                {/*<button
                                     class={`c-button c-button--toggler ${wayAuth == "email" && "c-button--active"}`}
                                     onClick={() => {
                                         wayAuth = "email"
@@ -277,7 +277,7 @@ const ModalAuth = function (data, ID) {
 
                                     }}>
                                     {Variable.lang.button.phone}
-                                </button>
+                                </button>*/}
                             </div>
 
                             <form onsubmit={sendAuthorization}>
@@ -304,6 +304,17 @@ const ModalAuth = function (data, ID) {
                             </div>
                             <div class="authAgree">
                                 <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
+                            </div>
+                            <div class="authAgree">
+                                <span><a
+                                class="a-link"
+                                href=""
+                                onclick={() => {
+                                    console.log(1)
+                                    Variable.DelModals("ModalAuth")
+                                    Variable.SetModals({ name: "ModalRecoverPass", data: {} })
+                                }}
+                            >Забыли пароль? </a></span>
                             </div>
                         </div>
                         <footer class="c-modal__footer">

@@ -128,7 +128,32 @@ const ModalReg = function (data, ID) {
                 },
                 afterValid: () => {
 
-                    fn.checkValid(Static, [wayReg, "pass", "agreement"])
+                    fn.checkValid(Static, [wayReg, "pass","confirmpass", "agreement"])
+
+                }
+            }
+
+            Static.confirmpass = {
+                value: "",
+                valid: false,
+                error: false,
+                label: "Подтвердите пароль",
+                placeholder: Variable.lang.placeholder.password,
+                errorText: "Пароли не сопадают",
+                type: "password",
+                condition: (value) => {
+                    if(Static.pass.value!==value)
+                    {
+                     return false
+                    }else{
+                        return true
+                    }
+                  
+                   
+                },
+                afterValid: () => {
+
+                    fn.checkValid(Static, [wayReg, "pass","confirmpass", "agreement"])
 
                 }
             }
@@ -165,7 +190,7 @@ const ModalReg = function (data, ID) {
                         </header>
                         <div id="body_reg-fast" class="c-modal__body">
                             <div class="c-mobileoremail">
-                                <button
+                                {/* <button
                                     id="regByEmail"
                                     class={['c-button c-button--toggler', wayReg == "email" ? 'c-button--active' : null]}
                                     onClick={() => {
@@ -176,12 +201,12 @@ const ModalReg = function (data, ID) {
                                         Static.email.value = ""
                                         Static.email.error = false
                                         Static.email.valid = false
-                                        fn.checkValid(Static, [wayReg, "pass", "agreement"])
+                                        fn.checkValid(Static, [wayReg, "pass","confirmpass", "agreement"])
                                     }}
                                 >
                                     {Variable.lang.button.email}
                                 </button>
-                                <button
+                               <button
                                     id="regByMobile"
                                     class={['c-button c-button--toggler', wayReg == "phone" ? 'c-button--active' : null]}
                                     onClick={() => {
@@ -198,7 +223,7 @@ const ModalReg = function (data, ID) {
                                     }}
                                 >
                                     {Variable.lang.button.phone}
-                                </button>
+                                </button>*/}
                             </div>
                             <form id="registrationForm" onsubmit={(e) => { sendRegistration(Static, e) }}>
                                 <input style="display: none;" type="submit" />
@@ -214,7 +239,7 @@ const ModalReg = function (data, ID) {
                                                 )
                                             } else {
                                                 return (
-                                                    <div>
+                                                    <div >
                                                         <div class='reset_by_mobile_block'>
 
                                                             <div class="reset_by_mobile_block_container c-phonecode">
@@ -295,6 +320,13 @@ const ModalReg = function (data, ID) {
                                     />
                                 </div>
 
+                                <div class="container-input">
+                                    <Input
+                                        classDiv="input-div"
+                                        Static={Static.confirmpass}
+                                    />
+                                </div>
+
                                 <div class="container-checkbox">
 
                                     <div class="checkbox">
@@ -319,7 +351,7 @@ const ModalReg = function (data, ID) {
                                                 onchange={() => {
                                                     Static.agreement.value = !Static.agreement.value
                                                     Static.agreement.valid = Static.agreement.value
-                                                    fn.checkValid(Static, [wayReg, "pass", "agreement"])
+                                                    fn.checkValid(Static, [wayReg, "pass","confirmpass", "agreement"])
                                                 }}
                                             />
                                             <label class="checkbox__label" for="fast_agree">

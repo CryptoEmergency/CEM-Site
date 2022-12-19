@@ -730,6 +730,36 @@ async function SearchRooms(Static) {
 }
 
 
+const makeFilter = function (Static) {
+  let objReturn = {}
+
+  if (Static.searchInput.active != 0) {
+    objReturn = {
+      $text: { $search: Static.quest.value }
+    }
+  } else {
+    objReturn = {
+      "languages.code": "",
+    }
+  }
+/*
+  if (!Static.filters) {
+    return filter
+  }
+*/
+  if (Static.filters.questions.value == "open") {
+    objReturn.close = false;
+  } else if (Static.filters.questions.value == "closed") {
+    objReturn.close = true;
+    objReturn.bestId = { "$exists": false };
+  } else if (Static.filters.questions.value == "best") {
+    objReturn.close = true;
+    objReturn.bestId = { "$exists": true };
+  }
+
+  return objReturn
+}
+
 
 const BlockUserRooms = async function ({ Static }) {
 
