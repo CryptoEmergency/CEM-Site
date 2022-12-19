@@ -218,7 +218,7 @@ const ModalAskQuestion = function (data, ID) {
     },
     () => {
       return (
-        <div class="c-modal c-modal--open" id="ModalAskQuestion">
+        <div class="c-modal -modal--ocpen" id="ModalAskQuestion">
           <section class="c-modal__dialog">
             <header class="c-modal__header">
               <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>

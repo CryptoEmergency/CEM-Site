@@ -230,9 +230,15 @@ const start = function (data, ID) {
                                 </div>
                             </div>*/}
                             <div class="video-container-forum">
+<<<<<<< Updated upstream
 
                                 <iframe width="1280" height="720" src="https://www.youtube.com/embed/1wvHegEMrEU" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
+=======
+                                    
+                                 </div>
+                                        
+>>>>>>> Stashed changes
                             <div>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
                                 <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>

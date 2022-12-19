@@ -258,12 +258,12 @@
 
 .block1 {
   width: 400px;
-  height: 400px;
+  height: 100px;
   position: absolute;
   left: 50px;
   top: 50px;
   border-radius: 22px;
-  z-index: 9999;
+  z-index: 2000;
 }
 
 
