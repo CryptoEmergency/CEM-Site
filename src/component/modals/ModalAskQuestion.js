@@ -75,32 +75,43 @@ const changeTextQuestion = (e) => {
   formInputs.textQuestion.value = e.target.innerText.trim();
 };
 
-const sendPhoto = async function (crooper) {
+const sendPhoto = async function (Static,crooper) {
   if (!crooper) {
     return
   }
   let canvas;
-  formInputs.mediaInputs.selectAspect = crooper.options.aspectRatio;
+  Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
   canvas = crooper.getCroppedCanvas({
     // width: 166,
     // height: 166,
   });
-
+  let previewObj = {
+    src: canvas.toDataURL(),
+    type: "image",
+    upload: 0,
+    size: 0
+  };
+  Static.mediaInputs.show = true;
+  Static.mediaInputs.value.push(previewObj);
+  let numItem = Static.mediaInputs.value.length - 1
+  initReload();
   await canvas.toBlob(function (blob) {
     fn.uploadMedia(
       blob,
       "question",
       async function () {
-        formInputs.mediaInputs.show = true;
+        Static.mediaInputs.show = true;
         if (!this.response) {
           return
         }
         let response = JSON.parse(this.response);
-        formInputs.mediaInputs.value.push({
-          aspect: formInputs.mediaInputs.selectAspect,
+        Static.mediaInputs.value[numItem] = {
+          aspect: Static.mediaInputs.selectAspect,
           type: response.mimetype.split("/")[0],
           name: response.name
-        });
+        }
+        Static.isValid = true;
+        initReload();
       },
       async function (e) {
         let contentLength;
@@ -114,11 +125,19 @@ const sendPhoto = async function (crooper) {
             10
           );
         }
-        // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+
+        if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+          Static.mediaInputs.value.splice(numItem, 1);
+          initReload()
+          return
+        }
+        Static.mediaInputs.value[numItem].upload = e.loaded
+        Static.mediaInputs.value[numItem].size = contentLength;
+        initReload();
       }
     );
-    Variable.DelModals("ModalCropImage");
     initReload();
+    Variable.DelModals("ModalCropImage");
   });
   return
 }
@@ -181,13 +200,13 @@ const ModalAskQuestion = function (data, ID) {
     }
   };
 
-
+  
   init(
     () => {
       fn.initData.ModalAskQuestion(Static)
 
 
-      formInputs = {
+      Static = {
         language: {
           value:
             Variable.myInfo.mainLanguage.eng_name +
@@ -215,6 +234,8 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio = Variable.setRef();
 
       selectAspect = null;
+
+  
     },
     () => {
       return (
@@ -238,14 +259,17 @@ const ModalAskQuestion = function (data, ID) {
                   <div
                     class="alt_language_change"
                     onclick={() => {
+
                       fn.modals.ModalChangeLanguage({
+                        
                         onclick: (code, name, orig) => {
-                          Static.form.language.value = name + ` (${orig})`;
-                          Static.form.language.code = code;
+                          console.log(Variable.Modals)
+                          Static.language.value = name + ` (${orig})`;
+                          Static.language.code = code;
                         }
                       }, true)
                     }}>
-                    {Static.form.language.value}
+                    {Static.language.value}
                   </div>
 
                   <div class="c-askquestion__textblock c-form__block">
@@ -253,7 +277,7 @@ const ModalAskQuestion = function (data, ID) {
                       {Variable.lang.label.question}
                     </label>
                     <div class="c-form__errormsg error-div">
-                      {formInputs.question.error}
+                      {Static.question.error}
                     </div>
                     <div class="c-form__wrapfield create_post_container" data-type="question">
                       <input
@@ -262,11 +286,11 @@ const ModalAskQuestion = function (data, ID) {
                         oninput={changeInput}
                         class="c-form__field create_post_chapter create_post_title"
                         placeholder={Variable.lang.placeholder.titleAsk}
-                        value={formInputs.question.value}
+                        value={Static.question.value}
                       />
                       {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
                       {() => {
-                        if (formInputs.textQuestion.show) {
+                        if (Static.textQuestion.show) {
                           return (
                             <div
                               contenteditable="true"
@@ -277,12 +301,14 @@ const ModalAskQuestion = function (data, ID) {
                         }
                       }}
 
-                      {() => {
-                        if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
+                      {
+                      
+                      () => {
+                        if (Static.mediaInputs.show && Static.mediaInputs.value.length) {
                           return (
                             <div class="create_post_chapter createPostImage">
                               {
-                                formInputs.mediaInputs.value.map(
+                                Static.mediaInputs.value.map(
                                   (item, index) => {
                                     if (item.type != "audio") {
                                       return (
@@ -290,7 +316,7 @@ const ModalAskQuestion = function (data, ID) {
                                           item={item}
                                           index={index}
                                           type="question"
-                                          formInputs={formInputs}
+                                          Static={Static}
                                         />
                                       );
                                     }
@@ -300,14 +326,20 @@ const ModalAskQuestion = function (data, ID) {
                             </div>
                           )
                         }
-                      }}
+                        else
+                        {
+                          null
+                        }
+                      }
+                      
+                      }
 
                       {() => {
-                        if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                        if (Static.mediaInputs.show && Static.mediaInputs.value.length && Static.mediaInputs.value.filter((item) => item.type == "audio").length) {
                           return (
                             <div class="create_post_chapter createPostAudio">
                               {
-                                formInputs.mediaInputs.value.map(
+                                Static.mediaInputs.value.map(
                                   (item, index) => {
                                     if (item.type == "audio") {
                                       return (
@@ -315,7 +347,7 @@ const ModalAskQuestion = function (data, ID) {
                                           item={item}
                                           index={index}
                                           type="question"
-                                          formInputs={formInputs}
+                                          Static={Static}
                                         />
                                       );
                                     }
@@ -342,24 +374,34 @@ const ModalAskQuestion = function (data, ID) {
                     // }}
 
                     onclickPhoto={function () {
+                   
                       if (this.files.length == 0) {
                         return;
                       }
-
-                      Variable.SetModals({
-                        name: "ModalCropImage",
-                        data: {
-                          file: this.files[0],
-                          typeUpload: 'question',
-                          arrMedia: formInputs.mediaInputs.value,
-                          aspectSelect: formInputs.mediaInputs.selectAspect,
-                          uploadCropImage: async function (cropper) {
-                            await sendPhoto(cropper)
-                            return;
-                          }
-                        },
-                      }, true);
-                      // formInputs.isValid = true;
+                      fn.modals.ModalCropImage({
+                        file: this.files[0],
+                        typeUpload: 'question',
+                        arrMedia: Static.mediaInputs.value,
+                        aspectSelect: Static.mediaInputs.selectAspect,
+                        uploadCropImage: async function (cropper) {
+                          await sendPhoto(Static,cropper)
+                          return;
+                        }
+                      },ID)
+                      // Variable.SetModals({
+                      //   name: "ModalCropImage",
+                      //   data: {
+                      //     file: this.files[0],
+                      //     typeUpload: 'posts',
+                      //     arrMedia: Static.mediaInputs.value,
+                      //     aspectSelect: Static.mediaInputs.selectAspect,
+                      //     uploadCropImage: async function (cropper) {
+                      //       await sendPhoto(cropper)
+                      //       return;
+                      //     }
+                      //   },
+                      // }, true);
+                      // Static.isValid = true;
                       this.value = '';
                     }}
 
@@ -379,7 +421,7 @@ const ModalAskQuestion = function (data, ID) {
               <button
                 class={[
                   "c-button c-button--gradient2",
-                  !formInputs.isValid ? "c-button--inactive" : "",
+                  !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 type="button"
                 // ref={elemButton}

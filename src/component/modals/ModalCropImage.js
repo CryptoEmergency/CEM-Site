@@ -15,6 +15,7 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
 
 
     let [Static] = fn.GetParams({ data: { file,typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+
    
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
@@ -91,10 +92,14 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
             });
         }
     }
-
-    init(
+  
+    init(() => {
+       
+      
+        },
         () => {
-            console.log('=0ae14c=', Static)
+
+            console.log('=0ae14c=', Static)    
             cropper = null
             if (aspectSelect) {
                 aspectActive = Static.aspectSelect
@@ -109,10 +114,9 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                     aspectActive = 1.7777777777777777
                 }
             }
-            console.log('=ca484b=', aspectActive)
-        },
-        () => {
+        
             console.log('=ca484b=2', aspectActive)
+          
             return (
                 <div class="c-modal c-modal--open" id="addCropImage">
                     <section class="c-modal__dialog c-modal__dialog--lg">

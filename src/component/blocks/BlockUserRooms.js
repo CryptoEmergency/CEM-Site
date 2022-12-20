@@ -829,7 +829,7 @@ const BlockUserRooms = async function ({ Static }) {
     await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "UsersRooms"
 
-    
+   
     //при первом заходе открываем системный чат
     //CheckSystemInterface(Static)
     //запускаем поиск и фильтры
