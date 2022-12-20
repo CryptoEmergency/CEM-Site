@@ -16,7 +16,7 @@ import { Input } from '@component/element/index.js';
 
 
 const ModalAuth = function (data, ID) {
-    // console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
+  //   console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
 
 
     let wayAuth,
@@ -137,6 +137,8 @@ const ModalAuth = function (data, ID) {
             // Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true)
             elemButton().classList.remove('c-button--animated');
         }
+
+        Variable.Rooms = false
         return
     }
 
@@ -234,7 +236,7 @@ const ModalAuth = function (data, ID) {
             listCodes = Variable.phoneCodes
         },
         () => {
-            console.log("=========INIT========", Static, "=====SECOND======")
+           // console.log("=========INIT========", Static, "=====SECOND======")
             return (
                 <div class="c-modal c-modal--open" id="ModalAuth">
                     <section class="c-modal__dialog" ref={elem}>
@@ -253,7 +255,7 @@ const ModalAuth = function (data, ID) {
                         </header>
                         <div class="c-modal__body">
                             <div class="c-mobileoremail">
-                                <button
+                                {/*<button
                                     class={`c-button c-button--toggler ${wayAuth == "email" && "c-button--active"}`}
                                     onClick={() => {
                                         wayAuth = "email"
@@ -277,7 +279,7 @@ const ModalAuth = function (data, ID) {
 
                                     }}>
                                     {Variable.lang.button.phone}
-                                </button>
+                                </button>*/}
                             </div>
 
                             <form onsubmit={sendAuthorization}>
@@ -304,6 +306,18 @@ const ModalAuth = function (data, ID) {
                             </div>
                             <div class="authAgree">
                                 <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
+                            </div>
+                            <div class="authAgree">
+                                <span>Забыли пароль? <a
+                                class="a-link"
+                                href=""
+                                onclick={() => {
+                                  
+                                    Variable.DelModals("ModalAuth")
+
+                                    Variable.SetModals({ name: "ModalRecoverPass", data: {} })
+                                }}
+                            >Ссылка для восстановления</a></span>
                             </div>
                         </div>
                         <footer class="c-modal__footer">

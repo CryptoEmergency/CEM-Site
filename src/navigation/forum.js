@@ -228,12 +228,13 @@ const start = function (data, ID) {
                                     <div class="swiper-pagination swiper-pagination-post_media"></div>
                                     <div class="swiper-scrollbar-post_media"></div>
                                 </div>
-                            </div>*/}
+                            </div>
                             <div class="video-container-forum">
 
                                 <iframe width="1280" height="720" src="https://www.youtube.com/embed/1wvHegEMrEU" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
+*/}
                             <div>
+                                <h2 style="text-align: center; font-weight: 700; margin-bottom: 20px">Мероприятие закончилось</h2>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
                                 <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
                                 <h4 style="text-align: center; margin-bottom: 20px">Соорганизатор – CRYPTO HOLDING</h4>
@@ -247,12 +248,12 @@ const start = function (data, ID) {
                                     <iframe width="1280" height="720" src="https://www.youtube.com/embed/GQiMrMWivWY" title="Crypto ЮГ 2022 (Зал)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                                 <p style="font-size: 18px;">
-                                    Первый ежегодный криптовалютный форум пройдет в центре Новороссийска прямо на берегу прекрасного черного моря.
+                                    Первый ежегодный криптовалютный форум прошёл в центре Новороссийска прямо на берегу прекрасного черного моря.
                                 </p>
                                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
                                     <div style="font-size: 18px;">
                                         <p style="align-items: center;">
-                                            Будут подняты такие темы как:
+                                            Были подняты такие темы, как:
                                         </p>
                                         <p style="display: flex; align-items: center;">
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Новички в крипто индустрии
@@ -278,7 +279,7 @@ const start = function (data, ID) {
                                     </div>
                                     <div style="font-size: 18px;">
                                         <p>
-                                            На форуме будет представлено:
+                                            На форуме были представлены:
                                         </p>
                                         <p style="display: flex; align-items: center;">
                                             <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 25+ проектов
@@ -380,14 +381,14 @@ const start = function (data, ID) {
                                         </a>
                                     </div>
                                 </div>
-                                <div style="display: flex; justify-content: center; margin-top: 20px">
+                                {/* <div style="display: flex; justify-content: center; margin-top: 20px">
                                     <span style="text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 700; font-size: 36px">
                                         2990 ₽
                                     </span>
                                 </div>
                                 <a style="margin: 40px auto; margin-top: 20px" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
                                     <span>Купить билет</span>
-                                </a>
+                                </a> */}
                                 <div style="font-size: 18px; max-width: 500px; margin: 0 auto;margin-top: 10px">
                                     <p>
                                         Билет предоставляет ряд привлекательных предложений:
@@ -438,15 +439,15 @@ const start = function (data, ID) {
                                 <p>
                                     Форум "Crypto ЮГ 2022" -  это отличное место для презентации своей компании и демонстрации своего проекта на берегу черного моря в отличной локации.
                                 </p>
-                                <p>
+                                {/* <p>
                                     Воспользуйтесь данной возможностью, привлеките будущих клиентов и партнеров к своему проекту.
                                 </p>
                                 <p>
                                     Как это сделать? Напишите нам и мы вам поможем!
-                                </p>
+                                </p> */}
 
                                 <img class="forum_plan" src={images['forum/forum_plan']} />
-                                <a
+                                {/* <a
                                     style="margin: 50px auto"
                                     class="с-preview__part"
                                     onclick={(e) => {
@@ -455,7 +456,7 @@ const start = function (data, ID) {
                                     }}
                                 >
                                     <span>Купить стенд</span>
-                                </a>
+                                </a> */}
                             </div>
                             <div style="margin-bottom: 40px">
                                 <h4 style="text-align: center; margin-bottom: 40px">Генеральный спонсор</h4>
@@ -863,23 +864,13 @@ const start = function (data, ID) {
                                             <p>Специалист по инвестициям</p>
                                         </div>
                                     </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                    {/* <div class="speaker_item speaker_item_example" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
-                                    </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
-                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
-                                        </div>
-                                    </div>
-                                    <div class="speaker_item speaker_item_example" style="text-align: center">
-                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
-                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
-                                        </div>
-                                    </div>
+                                    </div> */}
                                 </div>
-                                <a
+                                {/* <a
                                     style="margin: 40px auto"
                                     class="с-preview__part"
                                     onclick={(e) => {
@@ -888,7 +879,7 @@ const start = function (data, ID) {
                                     }}
                                 >
                                     <span>Стать спикером</span>
-                                </a>
+                                </a> */}
                             </div>
                             <div>
                                 <h4 style="text-align: center; margin-bottom: 40px">Партнеры</h4>
@@ -1139,8 +1130,8 @@ const start = function (data, ID) {
                             </div>
                         </div>
                     </div>
-                    <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
-                    <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script>
+                    {/* <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
+                    <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script> */}
                 </div>
             )
         }, ID

@@ -263,6 +263,7 @@ const start = function (data, ID) {
                     activeUser = Variable.Static.startChatsID
                     // console.log(chatsList)
                     chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
+                    activeChat = 1
                     messageList = {
                         list_records: [
                             {
@@ -333,6 +334,10 @@ const start = function (data, ID) {
                                                 class={["messages_list_item", item._id == activeChat ? "active" : null]}
                                                 onclick={async () => {
                                                     activeChat = item._id
+                                                    if(item._id == 1){
+                                                        initReload()
+                                                        return
+                                                    }
                                                     messageList = await sendApi.send({
                                                         action: "getUserChats", short: true,
                                                         filter: {

@@ -4,12 +4,17 @@ import {
   Variable,
   initOne,
   initReload,
-  Static
+  Static,
+  init
 } from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
+
+
+
+
 
 
 //подписаться на комнату
@@ -167,7 +172,7 @@ const Tags = async function ({ Static, _id,classActive, text, type }) {
 
 //если не авторизован
 function checkAthorisation(Static) {
-  if (Static.Auth) {
+  if (Variable.auth) {
     return true
   }
   else {
@@ -201,12 +206,23 @@ else{
   
   Static.ChatData  = await ShowMessage(Static)
 
-  Static.RoomTitle =   Static.Rooms.settingsroom.title
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+    // Take the user to a different screen here.
+    Static.RoomTitleMobile = "Комната: "+Static.Rooms.settingsroom.title
+    Static.RoomTitle = ""
+}
+else{
+  Static.RoomTitleMobile = ""
+  Static.RoomTitle =   "Комната: "+Static.Rooms.settingsroom.title
+}
+  
   initReload()
 }
 
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
+
 
   if(_id !== Static.Rooms._id)
   {
@@ -228,13 +244,17 @@ async function ChangeRooms(Static, _id, system) {
 
   Static.ChatData  = await ShowMessage(Static)
   
-  Static.RoomTitle =   Static.Rooms.settingsroom.title
+  Static.RoomTitle =  "Комната: "+ Static.Rooms.settingsroom.title
 
   Static.MessageValue.el.value = ""
 
- 
+  
 
   initReload()
+  document.getElementById("MainBlock").style.display="block"
+ document.getElementById("ChatRoom").style.display=""
+
+
 
 }
 
@@ -270,7 +290,7 @@ Static.ChatData  = await ShowMessage(Static)
 }
 
 //показываем сообщения
-async function ShowMessage(Static) {
+const ShowMessage = async function (Static) {
   console.log("ShowMessage")
   Static.MessageValue.id = Static.Rooms._id
   let goal = 1
@@ -289,7 +309,7 @@ async function ShowMessage(Static) {
 
 
   Static.subMarker = ""
-  if (Static.Auth) {
+  if (Variable.auth) {
       let SubUnsab
 
       if(!Static.Rooms.system  && Static.Rooms.author._id!==Variable.myInfo._id)
@@ -391,7 +411,7 @@ async function ShowMessage(Static) {
   if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
-       
+       console.log(1)
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -442,7 +462,7 @@ async function ShowMessage(Static) {
     else {
       //если пользователь ввел пароль
       if (Static.confirmPasword.valid) {
-
+      
         if (Static.Rooms.message.length > 0) {
           return Static.Rooms.message.map(function (userrooms, i) {
 
@@ -493,14 +513,15 @@ async function ShowMessage(Static) {
 
       }
       //если пользователь авторизоваеый но не вводил пароль выводим инпут
-      if (Static.Auth) {
+      if (Variable.auth) {
         authInput = <Input classDiv="c-form__wrapfield" className="c-form__field" Static={Static.confirmPasword} />
         authMessage = "Данная комната защищена паролем и вся секретная информация в ней скрыта до тех пор пока не введешь пароль"
       }
       else {
         authMessage = "Только авторизованные пользователи могут просматривать данный контент"
-
+     
       }
+ 
       return (
         <li class="c-chats__message c-message">
           <div class="c-message__title">
@@ -520,8 +541,8 @@ async function ShowMessage(Static) {
   else {
 
     //системные комнаты для не авторизованных пользователей
-    if (!Static.Auth && Static.Rooms.system) {
-
+    if (!Variable.auth && Static.Rooms.system) {
+    
       if (Static.Rooms.message.length > 0) {
         return Static.Rooms.message.map(function (userrooms, i) {
 
@@ -558,7 +579,7 @@ async function ShowMessage(Static) {
 
       }
       else {
-
+    
         return (
           <li class="c-chats__message c-message">
             <div class="c-message__title">
@@ -569,9 +590,9 @@ async function ShowMessage(Static) {
         )
       }
       //вывод всех комнат для авторизованных пользоватлей
-    } else if (Static.Auth) {
+    } else if (Variable.auth) {
       if (Static.Rooms.message.length > 0) {
-        console.log(Static.Rooms.message)
+        
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -584,8 +605,9 @@ async function ShowMessage(Static) {
                      <div class="c-message__nick" style="cursor:pointer">
                     <a href="" 
                   onclick={function(){
-                    
-                    document.createElement("div")
+                      
+                    fn.modals.MiniChat(Static)
+                  
                     
                   }}
                   
@@ -621,6 +643,7 @@ async function ShowMessage(Static) {
       }
     }
     else {
+    
       authMessage = "Только авторизованные пользователи могут просматривать данный контент"
       return (
 
@@ -707,114 +730,85 @@ async function SearchRooms(Static) {
 
 
 
+function hide(el) {
 
-function minichat(data)
-{
-  let div = document.getElementsByClassName("block1");
-   
-  let listener = function(e) {
-  
-    div[0].style.left = e.pageX - 50 + "px";
-    div[0].style.top = e.pageY - 50 + "px";
-  };
-  
-  <div onmousedown={function(e){ document.addEventListener('mousemove', listener);}} onmouseup={function(e){  document.removeEventListener('mousemove', listener);}} class="block1" id="test">
-  <section class="c-chats__content" >
-              <div class="c-chats__border">
-      
-                <ul class="c-chats__messages" style="height:300px">
-  
-  
-                  {
-  
-                    Static.ChatData
-                  }
-  
-                </ul>
-                <div class="c-chats__form c-form">
-  
-                  <div class="c-form__wrapfield c-form__wrapfield--text">
-                    <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
-                    <div class="c-form__actions">
-                      {/*<a href="#" class="c-form__action c-form__action--left" title="">
-                        <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
-                      </a>
-                      <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
-                        <img src={svg.attach} width="13" height="13" alt="" class="c-form__icon" />
-                      </label>
-                      <a href="#" class="c-form__action c-form__action--right" title="">
-                        <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
-                </a>*/}
-                    </div>
-                    <button
-                      class="c-form__send"
-                      onclick={() => {
-                        //оправим сообщение
-                        checkAthorisation(Static)
-                        sendRoomsMessage(Static, Static.MessageValue.id, Static.MessageValue.el.value)
-                        Static.MessageValue.el.value = ""
-                      }}
-                    >
-                      <img src={svg.send} width="13" height="13" alt="" class="c-form__icon" />
-                    </button>
-                  </div>
-  
-                </div>
-              </div>
-            </section>
-  </div>
+  el.style.display = "none"
+ let a = document.getElementById("ShowHide")
+a.innerText = "Развернуть"
+}
 
+function isHidden(el) {
+  if(el.style.display == "")
+  {
+   return false
+  }
+  else
+  {
+   return true
+  }
 
 }
 
+function toggle(el) {
+
+  isHidden(el) ? show(el) : hide(el)
+}
+
+function show(el) {
+  el.style.display = ""
+  let a = document.getElementById("ShowHide")
+  a.innerText = "Свернуть"
+}
+
+
+
 const BlockUserRooms = async function ({ Static }) {
 
-  Static.ChatRooms = {}
 
+  let dragging = false
+  let element = document.getElementById("MainBlock")
+  
+  // В переменных startX и startY мы будем держать координаты точки,
+  // в которой находился элемент, когда мы начали его тащить мышью.
+  let startX = 0;  
+  
+  let startY = 0;
+
+
+  document.body.addEventListener('mousemove', (e) => {
+    // Если элемент не тащат, то ничего не делаем.
+    if (!dragging) return
  
+    const x = e.pageX - startX
+    const y = e.pageY - startY
+  
+    // В этот раз мы можем объединить обновлённые координаты
+    // в одну запись translate, которую потом
+    // присвоим в качестве значения свойству transform.
+    element.style.transform = `translate(${x}px, ${y}px)`
+  })
+  
+  // Когда мы отпускаем мышь, мы отмечаем dragging как false.
+  document.body.addEventListener('mouseup', () => {
+    dragging = false
+  })
+
+  
 
 
+  //комнаты в чате
+  Static.ChatRooms = {}
 
   await initOne(async () => {
 
-
-  
-    Static.optionsSelect = {
-      Category: {
-        active:"all",
-        items:[
-          {text:"Все категории",value:"all"},
-          {text:"NFT",value:"NFT"},
-          {text:"Crypto вселененная",value:"Crypto"},
-          {text:"Altcoin",value:"Altcoin"},
-          {text:"Bitcoin",value:"Bitcoin"},
-          {text:"Finances",value:"Finances"},
-          {text:"Trading",value:"Trading"}
-        ],
-      nameOptions:"Category",
-      open:false,
-      title:"Показать"
-      },
-      Date: {
-        active:"date",
-        items:[
-          {text:"По дате создания",value:"date"},
-          {text:"По количеству участников",value:"users"},
-          {text:"По количеству сообщений",value:"message"}
-        
-        ],
-        nameOptions:"Date",
-        open:false,
-        title:"Сортировать"}
-  };
-   Static.Category={value:"all"}
-  
-  Static.language = {name:"all",code:Variable.lang.code}
-
+    //мини игра с кнопкой подписаться
     Static.z=0
+
+    //подписаться по умолчанию 
     Static.Subscription = false
+
+    //для тегов 
     Static.Tag = {}
-    //для тегов
     let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": Variable.lang.code }})
 
    if(resp.totalFound == 0)
@@ -834,25 +828,37 @@ const BlockUserRooms = async function ({ Static }) {
     await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "UsersRooms"
 
-
+   
     //при первом заходе открываем системный чат
-    CheckSystemInterface(Static)
+    //CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
-
-
+    Static.showData = {function:ShowMessage}
     //комнаты в чате
     Static.usChat = { show: true }
-    Static.z = 0
-
-
+ 
+    //кнопка подписаться
     Static.subMarker
+
+    Static.RoomTitleMobile = ""
+   
+
   })
 
+  if(!Variable.Rooms)
+  {
+   if(!Static.Rooms._id)
+   {
+     CheckSystemInterface(Static)
+   }
+   else{
+     ChangeRooms(Static,Static.Rooms._id,Static.Rooms.system)
+   }
+ 
+   Variable.Rooms = true
+  }
+
   Static.ChatRooms = Variable.ListUsersRooms
-
-
-
 
   //если не используем фильтры
   if (!Static.searchInput.active) {
@@ -864,8 +870,24 @@ const BlockUserRooms = async function ({ Static }) {
   let subscribe
   let roomImage
   let bell
-  
+  if(typeof Static.ChatData == "undefined")
+  {
+    Static.RoomTitle = "Нет выбранных комнат"
+    Static.ChatData =  <li class="c-chats__message c-message">
+    <div class="c-message__title">
+      <div class="c-chats__passmessage c-passmessage">
+        <h4 class="c-passmessage__title">Выбирите комнату</h4>
+        <div class="c-passmessage__form">
+      
+        </div>
+      </div>
+    </div>
 
+  </li>
+  }
+
+
+  
 
 
   return (
@@ -940,8 +962,42 @@ const BlockUserRooms = async function ({ Static }) {
           }}
         >{Static.lang.name}</div>
       </div>
+      
       <div class="c-rooms__chats">
-        <div class=" c-chats__wrapper">
+      <div class="block2" onmousedown={function(e){
+        if(Static.dragging )
+        {
+  dragging = true
+  element = this
+  const style = window.getComputedStyle(element)
+
+
+  const transform = new DOMMatrixReadOnly(style.transform)
+
+  const translateX = transform.m41
+  const translateY = transform.m42
+
+  startX = e.pageX - translateX
+  startY = e.pageY - translateY
+      } }
+} 
+
+style="display:none" id={"MainBlock"} >
+      <div class="c-chats__form c-form"  >
+        <div class="c-form__wrapfield c-form__wrapfield--text">
+          <div class="c-form__field" style="cursor:grab">
+            <div class="c-form__actions">
+<a class="c-form__action c-form__action--left" onclick={function(){
+document.getElementById("MainBlock").style.display="none"
+document.getElementById("ShowHide").innerText="Свернуть"
+}}>Закрыть</a>
+ <center><h4 class=""><span>{Static.RoomTitle}</span></h4></center>
+ <a class="c-form__action c-form__action--right" id={"ShowHide"}  onclick={function(){toggle(document.getElementById("ChatRoom"))}}>Свернуть</a>
+            </div>
+          </div>
+        </div>
+     </div>
+        <div style="display:none" id={"ChatRoom"} class=" c-chats__wrapper" onmouseout={function(e){Static.dragging = true }}  onmouseover={function(e){Static.dragging = false }} >
           <aside class="c-chats__aside">
             <div class="c-chats__list">
               <div class="c-chats__checkboxes">
@@ -1000,8 +1056,6 @@ const BlockUserRooms = async function ({ Static }) {
                           <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
                             ChangeRooms(Static, userrooms._id, false)
 
-
-
                           }}>
                             {
                               userrooms.settingsroom.images ?
@@ -1022,7 +1076,7 @@ const BlockUserRooms = async function ({ Static }) {
               </ul>
             </div>
             <div class="c-chats__actions" onclick={() => {
-              if (Static.Auth) {
+              if (Variable.auth) {
                 fn.modals.ModalCreateRoom({
                   callback: async (response) => {
 
@@ -1051,13 +1105,16 @@ const BlockUserRooms = async function ({ Static }) {
             </div>
 
           </aside>
+   
           <section class="c-chats__content" >
             <div class="c-chats__border">
+            
+          
               {Static.subMarker
 
               }
               <center><div class="scetch"></div><div class="game"></div></center>
-              <h4 class="c-chats__title"><span>Комната: {Static.RoomTitle}</span></h4>
+              <center><h4 class="c-chats__title"><span>{ Static.RoomTitleMobile}</span></h4></center>
               <ul class="c-chats__messages" id="chatMessage">
 
 
@@ -1072,7 +1129,7 @@ const BlockUserRooms = async function ({ Static }) {
                 <div class="c-form__wrapfield c-form__wrapfield--text">
                   <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
                   <div class="c-form__actions">
-                    {/*<a href="#" class="c-form__action c-form__action--left" title="">
+                    <a href="#" class="c-form__action c-form__action--left" title="">
                       <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
                     </a>
                     <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
@@ -1080,7 +1137,7 @@ const BlockUserRooms = async function ({ Static }) {
                     </label>
                     <a href="#" class="c-form__action c-form__action--right" title="">
                       <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
-              </a>*/}
+              </a>
                   </div>
                   <button
                     class="c-form__send"
@@ -1100,7 +1157,7 @@ const BlockUserRooms = async function ({ Static }) {
           </section>
         </div>
       </div>
-
+    </div>
       {()=>{
        
         if(Static.showTag){
@@ -1110,7 +1167,7 @@ const BlockUserRooms = async function ({ Static }) {
               Static={Static}
               _id={tag._id}
               text={tag.settingsroom.title}
-              classActive={Static.defaultUserRoom == tag.settingsroom.category ? "tag_button_active" : ""}
+              classActive={Static.Rooms._id == tag._id ? "tag_button_active" : ""}
               type={tag.settingsroom.category}
 
             />)
@@ -1229,17 +1286,16 @@ const BlockUserRooms = async function ({ Static }) {
           </div>
    
       {/*
-    блок для пользовательских комнат
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+ ///                                               блок для пользовательских комнат                                                                       ///
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     */}
 
       <div class="c-rooms__list">
 
         {
-
           //мапим юзерские комнаты
           () => {
-
-
             if (Static.ActiveListRooms.length > 0) {
 
               return Static.ActiveListRooms.map(function (userrooms, i) {
@@ -1258,12 +1314,12 @@ const BlockUserRooms = async function ({ Static }) {
                 else {
                   bell = svg.bell_1
                 }
-                if (Static.Auth) {
+                if (Variable.auth) {
                 if (userrooms.author && Variable.myInfo._id == userrooms.author._id) {
                   edit =
                     <a class="c-room__settings" href="" onclick={(e) => {
 
-                      if (Static.Auth) {
+                      if (Variable.auth) {
                         fn.modals.ModalEditRoom({
                           Static, userrooms,
                           callback: async (response) => {
@@ -1377,6 +1433,8 @@ const BlockUserRooms = async function ({ Static }) {
       <ButtonShowMore Static={Static} action="getUserRoom" limit={10} />
     </div>
   )
+
+  
 }
 
 export { BlockUserRooms }

@@ -723,6 +723,38 @@ else{
     Static.sytemInfo.name = Variable.lang.lang_orig
 }
 
+
+Static.optionsSelect = {
+    Category: {
+      active:"all",
+      items:[
+        {text:"Все категории",value:"all"},
+        {text:"NFT",value:"NFT"},
+        {text:"Crypto вселененная",value:"Crypto"},
+        {text:"Altcoin",value:"Altcoin"},
+        {text:"Bitcoin",value:"Bitcoin"},
+        {text:"Finances",value:"Finances"},
+        {text:"Trading",value:"Trading"}
+      ],
+    nameOptions:"Category",
+    open:false,
+    title:"Показать"
+    },
+    Date: {
+      active:"date",
+      items:[
+        {text:"По дате создания",value:"date"},
+        {text:"По количеству участников",value:"users"},
+        {text:"По количеству сообщений",value:"message"}
+      
+      ],
+      nameOptions:"Date",
+      open:false,
+      title:"Сортировать"}
+};
+ Static.Category={value:"all"}
+
+Static.language = {name:"all",code:Variable.lang.code}
    
     //Зарегистрирован или нет
     Static.Auth = Variable.auth

@@ -122,6 +122,17 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg["settings_icon"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
                                                 </a>
+                                                <a class="user_icon_mobile_visible user_icon" href="#" onclick={
+                                                        function(){
+                                                        
+                                                          fn.restApi.logOut()
+                                                          Variable.Modals = []
+                                                          Variable.Rooms = false
+                                                        }
+
+                                                    }>
+                                                        <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
+                                                    </a>
                                             </div>
                                             <div class="user_mobile_menu_part">
                                                 <div class="user_mobile_menu_content">
@@ -440,7 +451,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-                            {() => {
+                            {() => {/*
                                 if (Variable.auth) {
                                     return (
                                         <div>
@@ -451,7 +462,13 @@ const ModalMobileMainSettings = function (data, ID) {
                                             </div>
                                             <div class="user_mobile_menu_bottom">
                                                 <div class="user_mobile_menu_content">
-                                                    <a class="user_icon_mobile_visible user_icon" href="/logout/" onclick={Helpers.siteLink}>
+                                                    <a class="user_icon_mobile_visible user_icon" href="" onclick={
+                                                        function(){
+                                                            
+                                                          fn.restApi.logOut(Variable.myInfo._id)
+                                                        }
+
+                                                    }>
                                                         <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
                                                     </a>
                                                 </div>
@@ -459,7 +476,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                         </div>
                                     )
                                 }
-                            }}
+                            */}}
                         </div>
                     </section>
                 </div>
