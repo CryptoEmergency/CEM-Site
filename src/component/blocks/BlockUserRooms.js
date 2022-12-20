@@ -290,7 +290,7 @@ Static.ChatData  = await ShowMessage(Static)
 }
 
 //показываем сообщения
-async function ShowMessage(Static) {
+const ShowMessage = async function (Static) {
   console.log("ShowMessage")
   Static.MessageValue.id = Static.Rooms._id
   let goal = 1
@@ -754,7 +754,6 @@ function toggle(el) {
   isHidden(el) ? show(el) : hide(el)
 }
 
-
 function show(el) {
   el.style.display = ""
   let a = document.getElementById("ShowHide")
@@ -834,7 +833,7 @@ const BlockUserRooms = async function ({ Static }) {
     //CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
-
+    Static.showData = {function:ShowMessage}
     //комнаты в чате
     Static.usChat = { show: true }
  
@@ -986,7 +985,7 @@ const BlockUserRooms = async function ({ Static }) {
 style="display:none" id={"MainBlock"} >
       <div class="c-chats__form c-form"  >
         <div class="c-form__wrapfield c-form__wrapfield--text">
-          <div class="c-form__field" style="cursur:grab">
+          <div class="c-form__field" style="cursor:grab">
             <div class="c-form__actions">
 <a class="c-form__action c-form__action--left" onclick={function(){
 document.getElementById("MainBlock").style.display="none"

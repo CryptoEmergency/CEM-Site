@@ -129,10 +129,12 @@ fn.uploadMedia = function (file, type, onload, onprogress, xhr) {
 
 fn.timerTik = async function () {
   // console.log("timerTik", "tt",Variable.dataUrl)
+
   if(Variable.dataUrl.adress =="rooms"){
     let [Static] = fn.GetParams({ ID:"mainBlock",actual:true })
    //  console.log("timerTik", "tt",Static)
     if(Static.Rooms._id){ 
+   
      let _id = Static.Rooms._id
 
      if(Static.Rooms.message[0])
@@ -151,6 +153,7 @@ fn.timerTik = async function () {
      let response = await sendApi.create("tik", {rooms:{_id,messageID}})
      if(response.result && response.result.list_records){
       Static.Rooms.message = response.result.list_records
+      Static.showData.function.ShowMessage(Static)
       initReload()
      }
 }

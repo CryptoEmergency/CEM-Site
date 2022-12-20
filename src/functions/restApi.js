@@ -1117,6 +1117,21 @@ restApi.resetPassword = async function(value)
     return checkSetAnswer(response)
 }
 
+
+restApi.setNewPassword = async function(linkOne,linkTwo,password)
+{
+
+    let data = {
+        value: { linkOne: linkOne ,
+                linkTwo:linkTwo,
+            password:password}
+    }
+ console.log(data)
+   // const response = await sendApi.create("resetPassword", data);
+ 
+  //  return checkSetAnswer(response)
+}
+
 restApi.logOut = async function()
 {
 

@@ -232,7 +232,7 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                                         type="button"
                                         class="c-button c-button--outline c-button--secondary"
                                         onclick={() => {
-                                            Variable.DelModals("ModalCropImage");
+                                            fn.modals.close(ID)
                                         }}
                                     >
                                         <div class="c-button__wrapper">

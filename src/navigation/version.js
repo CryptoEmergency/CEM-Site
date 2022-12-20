@@ -93,7 +93,7 @@ let StaticMessageValue = ""
 
 
 
-
+window.location.replace("/")
 
 
 
