@@ -15,25 +15,7 @@ import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@comp
 
 
 
-const Mini = function(Static){
 
-  return(
-    <div name={Static.Rooms.author._id} class='c-modal__dialog block1' onmousedown={function(e){ document.addEventListener('mousemove', checker);}} onmouseup={function(e){  document.removeEventListener('mousemove', checker);}}>
-    <div class="c-chats__form c-form">
-   
-    <div class="c-form__actions">
-   
-   <a class="c-form__action c-form__action--left " onclick={function(){
-   fn.modals.close(ID)
-   }}>Закрыть</a>
-    <a class="c-form__action c-form__action--right" id={"showhide"+Static.Rooms.author._id} onclick={function(){toggle(document.getElementsByName("chat"+Static.Rooms.author._id))}}>Свернуть</a>
-    </div> 
-   
-    </div>
-    </div>
-  )
-
-}
 
 //подписаться на комнату
 async function subscribeRoom(Static,title,_id)
@@ -224,12 +206,23 @@ else{
   
   Static.ChatData  = await ShowMessage(Static)
 
-  Static.RoomTitle =   Static.Rooms.settingsroom.title
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+    // Take the user to a different screen here.
+    Static.RoomTitleMobile = "Комната: "+Static.Rooms.settingsroom.title
+    Static.RoomTitle = ""
+}
+else{
+  Static.RoomTitleMobile = ""
+  Static.RoomTitle =   "Комната: "+Static.Rooms.settingsroom.title
+}
+  
   initReload()
 }
 
 //меняем комнаты
 async function ChangeRooms(Static, _id, system) {
+
 
   if(_id !== Static.Rooms._id)
   {
@@ -251,13 +244,17 @@ async function ChangeRooms(Static, _id, system) {
 
   Static.ChatData  = await ShowMessage(Static)
   
-  Static.RoomTitle =   Static.Rooms.settingsroom.title
+  Static.RoomTitle =  "Комната: "+ Static.Rooms.settingsroom.title
 
   Static.MessageValue.el.value = ""
 
- 
+  
 
   initReload()
+  document.getElementById("MainBlock").style.display="block"
+ document.getElementById("ChatRoom").style.display=""
+
+
 
 }
 
@@ -732,38 +729,73 @@ async function SearchRooms(Static) {
 }
 
 
-const makeFilter = function (Static) {
-  let objReturn = {}
 
-  if (Static.searchInput.active != 0) {
-    objReturn = {
-      $text: { $search: Static.quest.value }
-    }
-  } else {
-    objReturn = {
-      "languages.code": "",
-    }
+function hide(el) {
+
+  el.style.display = "none"
+ let a = document.getElementById("ShowHide")
+a.innerText = "Развернуть"
+}
+
+function isHidden(el) {
+  if(el.style.display == "")
+  {
+   return false
   }
-/*
-  if (!Static.filters) {
-    return filter
-  }
-*/
-  if (Static.filters.questions.value == "open") {
-    objReturn.close = false;
-  } else if (Static.filters.questions.value == "closed") {
-    objReturn.close = true;
-    objReturn.bestId = { "$exists": false };
-  } else if (Static.filters.questions.value == "best") {
-    objReturn.close = true;
-    objReturn.bestId = { "$exists": true };
+  else
+  {
+   return true
   }
 
-  return objReturn
+}
+
+function toggle(el) {
+
+  isHidden(el) ? show(el) : hide(el)
 }
 
 
+function show(el) {
+  el.style.display = ""
+  let a = document.getElementById("ShowHide")
+  a.innerText = "Свернуть"
+}
+
+
+
 const BlockUserRooms = async function ({ Static }) {
+
+
+  let dragging = false
+  let element = document.getElementById("MainBlock")
+  
+  // В переменных startX и startY мы будем держать координаты точки,
+  // в которой находился элемент, когда мы начали его тащить мышью.
+  let startX = 0;  
+  
+  let startY = 0;
+
+
+  document.body.addEventListener('mousemove', (e) => {
+    // Если элемент не тащат, то ничего не делаем.
+    if (!dragging) return
+ 
+    const x = e.pageX - startX
+    const y = e.pageY - startY
+  
+    // В этот раз мы можем объединить обновлённые координаты
+    // в одну запись translate, которую потом
+    // присвоим в качестве значения свойству transform.
+    element.style.transform = `translate(${x}px, ${y}px)`
+  })
+  
+  // Когда мы отпускаем мышь, мы отмечаем dragging как false.
+  document.body.addEventListener('mouseup', () => {
+    dragging = false
+  })
+
+  
+
 
   //комнаты в чате
   Static.ChatRooms = {}
@@ -799,7 +831,7 @@ const BlockUserRooms = async function ({ Static }) {
 
     
     //при первом заходе открываем системный чат
-    CheckSystemInterface(Static)
+    //CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
 
@@ -809,13 +841,23 @@ const BlockUserRooms = async function ({ Static }) {
     //кнопка подписаться
     Static.subMarker
 
+    Static.RoomTitleMobile = ""
+   
+
   })
 
- if(!Variable.Rooms)
- {
-  CheckSystemInterface(Static)
-  Variable.Rooms = true
- }
+  if(!Variable.Rooms)
+  {
+   if(!Static.Rooms._id)
+   {
+     CheckSystemInterface(Static)
+   }
+   else{
+     ChangeRooms(Static,Static.Rooms._id,Static.Rooms.system)
+   }
+ 
+   Variable.Rooms = true
+  }
 
   Static.ChatRooms = Variable.ListUsersRooms
 
@@ -829,7 +871,26 @@ const BlockUserRooms = async function ({ Static }) {
   let subscribe
   let roomImage
   let bell
+  if(typeof Static.ChatData == "undefined")
+  {
+    Static.RoomTitle = "Нет выбранных комнат"
+    Static.ChatData =  <li class="c-chats__message c-message">
+    <div class="c-message__title">
+      <div class="c-chats__passmessage c-passmessage">
+        <h4 class="c-passmessage__title">Выбирите комнату</h4>
+        <div class="c-passmessage__form">
+      
+        </div>
+      </div>
+    </div>
+
+  </li>
+  }
+
+
   
+
+
   return (
 
     <div class="c-rooms c-container">
@@ -902,8 +963,42 @@ const BlockUserRooms = async function ({ Static }) {
           }}
         >{Static.lang.name}</div>
       </div>
+      
       <div class="c-rooms__chats">
-        <div class=" c-chats__wrapper">
+      <div class="block2" onmousedown={function(e){
+        if(Static.dragging )
+        {
+  dragging = true
+  element = this
+  const style = window.getComputedStyle(element)
+
+
+  const transform = new DOMMatrixReadOnly(style.transform)
+
+  const translateX = transform.m41
+  const translateY = transform.m42
+
+  startX = e.pageX - translateX
+  startY = e.pageY - translateY
+      } }
+} 
+
+style="display:none" id={"MainBlock"} >
+      <div class="c-chats__form c-form"  >
+        <div class="c-form__wrapfield c-form__wrapfield--text">
+          <div class="c-form__field" style="cursur:grab">
+            <div class="c-form__actions">
+<a class="c-form__action c-form__action--left" onclick={function(){
+document.getElementById("MainBlock").style.display="none"
+document.getElementById("ShowHide").innerText="Свернуть"
+}}>Закрыть</a>
+ <center><h4 class=""><span>{Static.RoomTitle}</span></h4></center>
+ <a class="c-form__action c-form__action--right" id={"ShowHide"}  onclick={function(){toggle(document.getElementById("ChatRoom"))}}>Свернуть</a>
+            </div>
+          </div>
+        </div>
+     </div>
+        <div style="display:none" id={"ChatRoom"} class=" c-chats__wrapper" onmouseout={function(e){Static.dragging = true }}  onmouseover={function(e){Static.dragging = false }} >
           <aside class="c-chats__aside">
             <div class="c-chats__list">
               <div class="c-chats__checkboxes">
@@ -1011,13 +1106,16 @@ const BlockUserRooms = async function ({ Static }) {
             </div>
 
           </aside>
+   
           <section class="c-chats__content" >
             <div class="c-chats__border">
+            
+          
               {Static.subMarker
 
               }
               <center><div class="scetch"></div><div class="game"></div></center>
-              <h4 class="c-chats__title"><span>Комната: {Static.RoomTitle}</span></h4>
+              <center><h4 class="c-chats__title"><span>{ Static.RoomTitleMobile}</span></h4></center>
               <ul class="c-chats__messages" id="chatMessage">
 
 
@@ -1060,7 +1158,7 @@ const BlockUserRooms = async function ({ Static }) {
           </section>
         </div>
       </div>
-
+    </div>
       {()=>{
        
         if(Static.showTag){
@@ -1070,7 +1168,7 @@ const BlockUserRooms = async function ({ Static }) {
               Static={Static}
               _id={tag._id}
               text={tag.settingsroom.title}
-              classActive={Static.defaultUserRoom == tag.settingsroom.category ? "tag_button_active" : ""}
+              classActive={Static.Rooms._id == tag._id ? "tag_button_active" : ""}
               type={tag.settingsroom.category}
 
             />)
@@ -1336,6 +1434,8 @@ const BlockUserRooms = async function ({ Static }) {
       <ButtonShowMore Static={Static} action="getUserRoom" limit={10} />
     </div>
   )
+
+  
 }
 
 export { BlockUserRooms }

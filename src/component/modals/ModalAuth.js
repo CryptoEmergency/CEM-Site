@@ -236,7 +236,7 @@ const ModalAuth = function (data, ID) {
             listCodes = Variable.phoneCodes
         },
         () => {
-            console.log("=========INIT========", Static, "=====SECOND======")
+           // console.log("=========INIT========", Static, "=====SECOND======")
             return (
                 <div class="c-modal c-modal--open" id="ModalAuth">
                     <section class="c-modal__dialog" ref={elem}>

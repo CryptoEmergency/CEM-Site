@@ -131,7 +131,7 @@ fn.timerTik = async function () {
   // console.log("timerTik", "tt",Variable.dataUrl)
   if(Variable.dataUrl.adress =="rooms"){
     let [Static] = fn.GetParams({ ID:"mainBlock",actual:true })
-  //   console.log("timerTik", "tt",Static)
+   //  console.log("timerTik", "tt",Static)
     if(Static.Rooms._id){ 
      let _id = Static.Rooms._id
 
