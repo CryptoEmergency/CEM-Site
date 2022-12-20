@@ -1126,10 +1126,10 @@ restApi.setNewPassword = async function(linkOne,linkTwo,password)
                 linkTwo:linkTwo,
             password:password}
     }
- console.log(data)
-   // const response = await sendApi.create("resetPassword", data);
+
+    const response = await sendApi.create("resetPassword", data);
  
-  //  return checkSetAnswer(response)
+    return checkSetAnswer(response)
 }
 
 restApi.logOut = async function()

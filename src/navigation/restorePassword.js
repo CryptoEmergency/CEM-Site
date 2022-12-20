@@ -73,8 +73,10 @@ import {
      
 
 Static.check = {}
+Static.mail = {}
 let response = await fn.restApi.getUsers({ name: "checkUser", filter: { "confirm.linkOne": Static.params[0], "confirm.linkTwo": Static.params[1] } })
 Static.check=response.totalFound
+
  }
      },
       () => {
@@ -114,17 +116,17 @@ if(Static.params && Static.params.length == 2 && Static.check == 1){
                                         class={['c-button c-button--gradient2', !Static.isValid ? 'c-button--inactive' : null]}
                                         id="fast_reg"
                                         type="button"
-                                        onClick={(e) => { 
+                                        onClick={async(e) => { 
                                           
-                                         let response = fn.restApi.setNewPassword(Static.params[0],Static.params[1],Static.pass.value)
-                                          
+                                         let response = await fn.restApi.setNewPassword(Static.params[0],Static.params[1],Static.pass.value)
+                                          console.log(response)
                                           if(response.status == "ok")
                                           {
                                       let res =  document.getElementById("response")
                                       res.innerText="Пароль успешно изменен"
            
-                                           setTimeout(function(){
-                                  
+                                           setTimeout(async function(){
+
                                             window.location.replace("/")
                                            },3000)
                                           }
