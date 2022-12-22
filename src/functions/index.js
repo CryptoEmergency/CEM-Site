@@ -4,6 +4,7 @@ import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
 import { restApi } from "./restApi.js"
 import { itemsMenu } from "./itemsMenu.js"
+// import { web3CEM, web3Action } from "./web3.js"
 
 const fn = {}
 fn.modals = modals
@@ -11,6 +12,8 @@ fn.initData = initData
 fn.apiData = apiData
 fn.restApi = restApi
 fn.itemsMenu = itemsMenu
+// fn.web3CEM = web3CEM
+// fn.web3Action = web3Action
 fn.validator = Helpers.validator
 fn.sanitizeHtml = Helpers.sanitizeHtml
 fn.test = function () {
@@ -130,40 +133,38 @@ fn.uploadMedia = function (file, type, onload, onprogress, xhr) {
 fn.timerTik = async function () {
   // console.log("timerTik", "tt",Variable.dataUrl)
 
-  if(Variable.dataUrl.adress =="rooms"){
-    let [Static] = fn.GetParams({ ID:"mainBlock",actual:true })
-   //  console.log("timerTik", "tt",Static)
-    if(Static.Rooms._id){ 
-   
-     let _id = Static.Rooms._id
+  if (Variable.dataUrl.adress == "rooms") {
+    let [Static] = fn.GetParams({ ID: "mainBlock", actual: true })
+    //  console.log("timerTik", "tt",Static)
+    if (Static.Rooms._id) {
 
-     if(Static.Rooms.message[0])
-     {
+      let _id = Static.Rooms._id
 
-     }
-       let messageID = null
-     if(Static.Rooms.message[0])
-     {
-    
-      messageID = Static.Rooms.message[0]._id
-    
-     }
-    
+      if (Static.Rooms.message[0]) {
 
-     let response = await sendApi.create("tik", {rooms:{_id,messageID}})
-     if(response.result && response.result.list_records){
+      }
+      let messageID = null
+      if (Static.Rooms.message[0]) {
 
-      Static.new = _id
-     // initReload()
-     }
-}
-  }else{
-  // 
-  let response = await sendApi.create("tik", {})
-  if (response && response.result && Object.keys(response.result).length) {
-    console.log('=df2a55=', response)
+        messageID = Static.Rooms.message[0]._id
+
+      }
+
+
+      let response = await sendApi.create("tik", { rooms: { _id, messageID } })
+      if (response.result && response.result.list_records) {
+
+        Static.new = _id
+        // initReload()
+      }
+    }
+  } else {
+    // 
+    let response = await sendApi.create("tik", {})
+    if (response && response.result && Object.keys(response.result).length) {
+      console.log('=df2a55=', response)
+    }
   }
-}
 
 };
 
