@@ -480,13 +480,14 @@ const sendPhoto = async function (crooper, index) {
   Static.elNumberSwiper = {}
   Static.idEditPost
   Static.startEditText = false
-  Static.photo = false
+
   Static.mediaInputs = {
     value: [],
     show: false,
 }
   init(
     async () => {
+      Static.photo = false
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
@@ -554,6 +555,7 @@ const sendPhoto = async function (crooper, index) {
     },
 
     () => {
+     
 
       return (
         <div class={[
@@ -618,6 +620,7 @@ const sendPhoto = async function (crooper, index) {
                               index={index}
                               type="posts"
                               Static={Static}
+                              
                             />
                             );
                           }
@@ -666,7 +669,6 @@ const sendPhoto = async function (crooper, index) {
             </div>
 
             <MediaButton
-
               onclickText={function () {
                 if (Static.textInputs.show === true) {
                   return;
@@ -675,13 +677,12 @@ const sendPhoto = async function (crooper, index) {
                   initReload();
                 }
               }}
-
-              onclickPhoto={function () {
-            
+              multiple={function(){Static.photo}}
+      
+              onclickPhoto={function (e) {
                 if (this.files.length == 0) {
                   return;
                 }
-
                 if(Static.photo)
                 {
                   fn.modals.ModalCropImage({
@@ -698,33 +699,12 @@ const sendPhoto = async function (crooper, index) {
                 else{
                   for(let i = 0 ; i<this.files.length; i++)
                   {
-              
                        loadPhoto(this.files[i], "posts");
-               
-                 
                   }
-               
                 }
-                //
-
-           /*
-                v*/
-                // Variable.SetModals({
-                //   name: "ModalCropImage",
-                //   data: {
-                //     file: this.files[0],
-                //     typeUpload: 'posts',
-                //     arrMedia: Static.mediaInputs.value,
-                //     aspectSelect: Static.mediaInputs.selectAspect,
-                //     uploadCropImage: async function (cropper) {
-                //       await sendPhoto(cropper)
-                //       return;
-                //     }
-                //   },
-                // }, true);
-                // Static.isValid = true;
                 this.value = '';
-              }}
+              }
+            }
 
               onclickVideo={function () {
                 if (this.files.length == 0) {
@@ -755,6 +735,7 @@ const sendPhoto = async function (crooper, index) {
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
                     Static.forFriends = e.target.checked;
+                    initReload()
                   }}
                   type="checkbox"
                 />

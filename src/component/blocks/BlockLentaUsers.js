@@ -11,6 +11,15 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
   let mediaFiles = item.media.filter((item) => {
     return typeof item == 'object'
   });
+  let text
+if(typeof item.text !=="undefined")
+{
+  text = item.text
+}
+else{
+  text = ""
+}
+
   return (
     <div
       class="c-fullnews__item user_news_item"
@@ -51,7 +60,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
             index={index}
           // changeToogle={changeToogle}
           />
-          <div class={!mediaFiles.length && item.text.length < 250 ? "user_post_text_background" : null}>
+          <div class={!mediaFiles.length && text.length < 250 ? "user_post_text_background" : null}>
             <span class="comment_text"
               data-href={"/lenta-users/show/" + item._id}
               onclick={(e) => {
@@ -62,11 +71,11 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
               }}>
               {() => {
                 if (Static.showPage) {
-                  return fn.editText(item.text, { clear: true, paragraph: true, html: true })
+                  return fn.editText(text, { clear: true, paragraph: true, html: true })
                 }
-                if (!mediaFiles.length && item.text.length < 250) {
-                  return fn.editText(item.text, { clear: true, paragraph: true, html: true })
-                } else if (item.text.length) {
+                if (!mediaFiles.length && text.length < 250) {
+                  return fn.editText(text, { clear: true, paragraph: true, html: true })
+                } else if (text.length) {
                   return (
                     <div>
                       <span Element={($el) => {
@@ -75,20 +84,20 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                         {
                           mediaFiles.length
                             ?
-                            fn.editText(item.text, { slice: 50, clear: true, html: true })
+                            fn.editText(text, { slice: 50, clear: true, html: true })
                             :
-                            fn.editText(item.text, { slice: 550, paragraph: true, clear: true, html: true })
+                            fn.editText(text, { slice: 550, paragraph: true, clear: true, html: true })
                         }
                       </span>
                       {
                         mediaFiles.length
                           ?
-                          item.text.length > 50
+                          text.length > 50
                             ?
                             <div>
                               <span hidden={true} Element={($el) => {
                                 Static.elShowTextFull[item._id] = $el
-                              }}>{fn.editText(item.text, { paragraph: true, clear: true, html: true })}</span>
+                              }}>{fn.editText(text, { paragraph: true, clear: true, html: true })}</span>
                               <span
                                 class="show_full_post"
                                 onclick={function (e) {
@@ -102,12 +111,12 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                             :
                             null
                           :
-                          item.text.length > 550
+                          text.length > 550
                             ?
                             <div>
                               <span hidden={true} Element={($el) => {
                                 Static.elShowTextFull[item._id] = $el
-                              }}>{fn.editText(item.text, { paragraph: true, clear: true, html: true })}</span>
+                              }}>{fn.editText(text, { paragraph: true, clear: true, html: true })}</span>
                               <span
                                 class="show_full_post"
                                 onclick={function (e) {

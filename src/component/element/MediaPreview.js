@@ -9,6 +9,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
   // console.log('=2f8e9a=', item, type)item.size
   console.log("============on load",Static)
 
+
   if (item.type == "audio") {
     el[index] = Variable.setRef();
   }

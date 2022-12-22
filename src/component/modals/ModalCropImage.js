@@ -95,12 +95,11 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
    
       
     init(() => {
-       
-      //  console.log('=0ae14c=', Static)    
-       
+     
         },
         () => {
          
+       
             cropper = null
             if (aspectSelect) {
                 aspectActive = Static.aspectSelect
@@ -115,7 +114,6 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                     aspectActive = 1.7777777777777777
                 }
             }
-     
           
             return (
                 <div class="c-modal c-modal--open" id="addCropImage">

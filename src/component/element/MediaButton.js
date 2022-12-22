@@ -10,7 +10,7 @@ let inputImg,
     inputVideo,
     inputAudio
 
-const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, iconPhoto = false }) {
+const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple=false, iconPhoto = false  }) {
 
     return (
         <div class="c-mediabtn create_post_control_block">
@@ -40,7 +40,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                             type="file"
                             accept=".jpg,.jpeg,.png,.gif"
                             Element={($el) => { inputImg = $el }}
-                            multiple="multiple"
+                            multiple={multiple}
                         />
                     </div>
                     :
@@ -49,6 +49,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
             {
                 typeof onclickVideo == "function"
                     ?
+                    
                     <div class="c-mediabtn__action createPostVideoCreator create_post_control_item" onclick={() => {
                         inputVideo.click();
                     }}>
