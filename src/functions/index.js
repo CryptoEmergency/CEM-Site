@@ -4,7 +4,7 @@ import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
 import { restApi } from "./restApi.js"
 import { itemsMenu } from "./itemsMenu.js"
-// import { web3CEM, web3Action } from "./web3.js"
+import { web3CEM, web3Action } from "./web3.js"
 
 const fn = {}
 fn.modals = modals
@@ -12,8 +12,8 @@ fn.initData = initData
 fn.apiData = apiData
 fn.restApi = restApi
 fn.itemsMenu = itemsMenu
-// fn.web3CEM = web3CEM
-// fn.web3Action = web3Action
+fn.web3CEM = web3CEM
+fn.web3Action = web3Action
 fn.validator = Helpers.validator
 fn.sanitizeHtml = Helpers.sanitizeHtml
 fn.test = function () {
