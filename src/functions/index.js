@@ -152,9 +152,9 @@ fn.timerTik = async function () {
 
      let response = await sendApi.create("tik", {rooms:{_id,messageID}})
      if(response.result && response.result.list_records){
-      Static.Rooms.message = response.result.list_records
-      Static.showData.function.ShowMessage(Static)
-      initReload()
+
+      Static.new = _id
+     // initReload()
      }
 }
   }else{

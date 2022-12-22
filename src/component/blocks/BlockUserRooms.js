@@ -15,7 +15,25 @@ import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@comp
 
 
 
+const Mini = function(Static){
 
+  return(
+    <div name={Static.Rooms.author._id} class='c-modal__dialog block1' onmousedown={function(e){ document.addEventListener('mousemove', checker);}} onmouseup={function(e){  document.removeEventListener('mousemove', checker);}}>
+    <div class="c-chats__form c-form">
+   
+    <div class="c-form__actions">
+   
+   <a class="c-form__action c-form__action--left " onclick={function(){
+   fn.modals.close(ID)
+   }}>Закрыть</a>
+    <a class="c-form__action c-form__action--right" id={"showhide"+Static.Rooms.author._id} onclick={function(){toggle(document.getElementsByName("chat"+Static.Rooms.author._id))}}>Свернуть</a>
+    </div> 
+   
+    </div>
+    </div>
+  )
+
+}
 
 //подписаться на комнату
 async function subscribeRoom(Static,title,_id)
@@ -233,7 +251,7 @@ async function ChangeRooms(Static, _id, system) {
   Static.Rooms ={}
 
 
-  document.getElementById("spinner").hidden = false
+ 
   Static.Rooms._id = _id
   let response = await fn.restApi.getUserRoom({ _id, filter: { system: system, _id: _id } })
 
@@ -290,8 +308,9 @@ Static.ChatData  = await ShowMessage(Static)
 }
 
 //показываем сообщения
-const ShowMessage = async function (Static) {
+async function ShowMessage(Static) {
   console.log("ShowMessage")
+
   Static.MessageValue.id = Static.Rooms._id
   let goal = 1
   let stop = false
@@ -412,6 +431,7 @@ const ShowMessage = async function (Static) {
     if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
        console.log(1)
+       initReload()
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -627,7 +647,10 @@ const ShowMessage = async function (Static) {
           )
 
 
-        })
+        }
+        
+        
+        )
 
       }
       else {
@@ -660,6 +683,7 @@ const ShowMessage = async function (Static) {
       </li>
       
       )
+      
     }
 
 
@@ -730,6 +754,7 @@ async function SearchRooms(Static) {
 
 
 
+
 function hide(el) {
 
   el.style.display = "none"
@@ -753,6 +778,7 @@ function toggle(el) {
 
   isHidden(el) ? show(el) : hide(el)
 }
+
 
 function show(el) {
   el.style.display = ""
@@ -803,7 +829,7 @@ const BlockUserRooms = async function ({ Static }) {
 
     //мини игра с кнопкой подписаться
     Static.z=0
-
+    Static.new = {}
     //подписаться по умолчанию 
     Static.Subscription = false
 
@@ -828,20 +854,35 @@ const BlockUserRooms = async function ({ Static }) {
     await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
     Static.nameRecords = "UsersRooms"
 
-   
+    
     //при первом заходе открываем системный чат
     //CheckSystemInterface(Static)
     //запускаем поиск и фильтры
     SearchRooms(Static)
-    Static.showData = {function:ShowMessage}
+
     //комнаты в чате
     Static.usChat = { show: true }
  
     //кнопка подписаться
     Static.subMarker
-
-    Static.RoomTitleMobile = ""
    
+    
+
+   Static.RoomTitleMobile = ""
+   setInterval(async function(){
+if(Static.new.length > 0)
+{
+ let r = await fn.restApi.getUserRoom({ name: "chats", filter: { _id:Static.Rooms._id} })
+Static.Rooms = r.list_records[0]
+
+
+await ChangeRooms(Static,Static.Rooms._id,Static.Rooms.system)
+  
+initReload()
+
+  Static.new = {}
+}
+   },1000)
 
   })
 
@@ -859,6 +900,8 @@ const BlockUserRooms = async function ({ Static }) {
   }
 
   Static.ChatRooms = Variable.ListUsersRooms
+
+
 
   //если не используем фильтры
   if (!Static.searchInput.active) {
@@ -950,6 +993,7 @@ const BlockUserRooms = async function ({ Static }) {
                     });
 
                     if (Static.Rooms.system) {
+                      document.getElementById("spinner").hidden = false
                       ChangeRooms(Static, systemroom[0]._id, true)
                     }
                     // 
@@ -985,7 +1029,7 @@ const BlockUserRooms = async function ({ Static }) {
 style="display:none" id={"MainBlock"} >
       <div class="c-chats__form c-form"  >
         <div class="c-form__wrapfield c-form__wrapfield--text">
-          <div class="c-form__field" style="cursor:grab">
+          <div class="c-form__field" style="cursur:grab">
             <div class="c-form__actions">
 <a class="c-form__action c-form__action--left" onclick={function(){
 document.getElementById("MainBlock").style.display="none"
@@ -1010,6 +1054,7 @@ document.getElementById("ShowHide").innerText="Свернуть"
                   style="cursor:pointer"
                   title="Комнаты, созданные мной"
                   onClick={(e) => {
+                    document.getElementById("spinner").hidden = false
                     chatRooms(Static, true)
                     Static.usChat.show = true
 
@@ -1030,6 +1075,7 @@ document.getElementById("ShowHide").innerText="Свернуть"
                   style="cursor:pointer"
                   title="Комнаты, на которые я подписан"
                   onClick={(e) => {
+                    document.getElementById("spinner").hidden = false
                     chatRooms(Static, false)
                     Static.usChat.show = true
 
@@ -1054,6 +1100,7 @@ document.getElementById("ShowHide").innerText="Свернуть"
                           ]}
                         >
                           <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
+                             document.getElementById("spinner").hidden = false
                             ChangeRooms(Static, userrooms._id, false)
 
                           }}>
@@ -1401,7 +1448,7 @@ document.getElementById("ShowHide").innerText="Свернуть"
                             class="c-button c-button--outline2"
 
                             onclick={(e) => {
-
+                              document.getElementById("spinner").hidden = false
                               ChangeRooms(Static, userrooms._id, false)
 
                             }}
