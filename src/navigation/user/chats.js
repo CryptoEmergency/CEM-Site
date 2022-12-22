@@ -39,7 +39,7 @@ const swiperOptions = {
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
-    console.log(Static)
+   
     let chatsList,
         activeChat,
         messageList,
@@ -318,7 +318,7 @@ const start = function (data, ID) {
                                         let user
                                         let lastMessage = item.message[0]
                                         let iconStatus
-
+                                   
                                         if (lastMessage.status == 0) {
                                             iconStatus = "sent_message_icon"
                                         } else if (lastMessage.status == 1) {
@@ -332,6 +332,7 @@ const start = function (data, ID) {
                                         } else {
                                             user = item.users[1]
                                         }
+                                       
                                         return (
                                             <div
                                                 class={["messages_list_item", item._id == activeChat ? "active" : null]}
