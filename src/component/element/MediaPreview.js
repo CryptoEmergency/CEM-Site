@@ -58,7 +58,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 null
             }
             {
-              type == "chat" && item.size === undefined
+              ((type == "chat" || type == "posts") && !Static.photo) && item.size === undefined
                 ?
                 <div
                   class="messages_settings"
@@ -120,7 +120,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 <div
                   class="stop_loading"
                   onclick={() => {
-            
+                    console.log(2)
                     Static.mediaInputs.value[index].upload =
                       Static.mediaInputs.value[index].size;
                     Static.mediaInputs.value.splice(index, 1);
@@ -191,7 +191,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-
+                    console.log(3)
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;
@@ -273,7 +273,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-           
+                    console.log(4)
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;

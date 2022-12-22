@@ -147,7 +147,7 @@ const start = function (data, ID) {
         await canvas.toBlob(function (blob) {
             fn.uploadMedia(
                 blob,
-                "chat",
+                "posts",
                 async function () {
                     Static.mediaInputs.show = true;
                     if (!this.response) {

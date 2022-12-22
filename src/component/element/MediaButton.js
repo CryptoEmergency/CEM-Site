@@ -40,7 +40,7 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                             type="file"
                             accept=".jpg,.jpeg,.png,.gif"
                             Element={($el) => { inputImg = $el }}
-                        // multiple="multiple"
+                            multiple="multiple"
                         />
                     </div>
                     :
