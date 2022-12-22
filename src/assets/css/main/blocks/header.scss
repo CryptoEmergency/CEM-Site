@@ -984,7 +984,7 @@
                     position: static;
                     align-self: center;
                     margin: 0;
-                    filter: invert(70%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%);
+                    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(101%) contrast(103%);
 
                     &.c-userpanel__icon--active {
                         filter: invert(39%) sepia(18%) saturate(4538%) hue-rotate(228deg) brightness(93%) contrast(90%);
@@ -1020,7 +1020,6 @@
                     padding: 0 !important;
                     width: 48px !important;
                     height: 48px !important;
-                    filter: none !important;
 
                     i {
                         display: block;
@@ -1028,13 +1027,14 @@
                         height: 20px;
                         padding: 14px;
                         box-sizing: content-box;
-                        background: no-repeat url("../svg/profile_icon-2.svg") center / 75%;
-                        filter: invert(45%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%) !important;
+                        background: no-repeat url("../svg/bottom_menu_chats_icon.svg") center / 75%;
                     }
                 }
 
                 &--posts {
-                    background: no-repeat url("../svg/plus_in_circle.svg") center / 71%;
+                    background: no-repeat url("../svg/bottom_menu_add_icon.svg") center / 71%;
+                    width: 40px !important;
+                    height: 40px !important;
                 }
 
                 &--questions {
@@ -1051,15 +1051,12 @@
 
                 &--burger {
                     display: block;
-                    background: no-repeat url("../svg/user_burger_menu.svg") center / 68%;
+                    background: no-repeat url("../svg/bottom_menu_burger_icon.svg") center / 68%;
                 }
 
                 &--disabled {
                     filter: invert(45%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%) !important;
 
-                    &.c-userpanel__icon--chats {
-                        filter: none !important;
-                    }
                 }
             }
         }

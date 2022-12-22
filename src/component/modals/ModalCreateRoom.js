@@ -21,6 +21,7 @@ const ModalCreateRoom = function (data, ID) {
         // convert image file to base64 string
         dataURL = reader.result;
     }, false);
+    
     if (fileImg) {
         reader.readAsDataURL(fileImg);
     }

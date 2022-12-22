@@ -39,7 +39,7 @@ const swiperOptions = {
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
-
+   
     let chatsList,
         activeChat,
         messageList,
@@ -147,7 +147,7 @@ const start = function (data, ID) {
         await canvas.toBlob(function (blob) {
             fn.uploadMedia(
                 blob,
-                "chat",
+                "posts",
                 async function () {
                     Static.mediaInputs.show = true;
                     if (!this.response) {
@@ -228,6 +228,9 @@ const start = function (data, ID) {
                         ]
                     },
                     "users": 1
+                },
+                sort: {
+                    'message.showDate': -1
                 }
             });
             // console.log('=08e20a=', chatsList)
@@ -315,7 +318,7 @@ const start = function (data, ID) {
                                         let user
                                         let lastMessage = item.message[0]
                                         let iconStatus
-
+                                   
                                         if (lastMessage.status == 0) {
                                             iconStatus = "sent_message_icon"
                                         } else if (lastMessage.status == 1) {
@@ -329,6 +332,7 @@ const start = function (data, ID) {
                                         } else {
                                             user = item.users[1]
                                         }
+                                       
                                         return (
                                             <div
                                                 class={["messages_list_item", item._id == activeChat ? "active" : null]}

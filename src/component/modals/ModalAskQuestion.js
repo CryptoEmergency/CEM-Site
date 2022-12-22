@@ -11,48 +11,49 @@ import {
 import { fn } from '@src/functions/index.js';
 import { MediaButton, MediaPreview, Input } from '@component/element/index.js';
 import svg from '@assets/svg/index.js';
-let formInputs, inputImg, inputVideo, inputAudio, selectAspect;
+let inputImg, inputVideo, inputAudio, selectAspect;
 
-const changeInput = function (e) {
-  let type = e.target.dataset.type;
-  let value = e.target.value.trim();
-  formInputs[type].error = "";
-  formInputs[type].value = value;
-
-  if (formInputs[type].value.length === 0) {
-    formInputs[type].error = Variable.lang.error_div.not_empty_input;
-  } else if (formInputs[type].value.length < 5) {
-    formInputs[type].error = Variable.lang.error_div.minSymbol;
-  } else if (formInputs[type].value.length > 500) {
-    formInputs[type].error = Variable.lang.error_div.maxSymbol;
+const changeInput = function (Static,e) {
+ 
+  if (e.length == 0) {
+    Static.question.error = Variable.lang.error_div.not_empty_input;
+  } else if (e.length < 5) {
+    Static.question.error = Variable.lang.error_div.minSymbol;
+  } else if (e.length > 500) {
+    Static.question.error = Variable.lang.error_div.maxSymbol;
+  }else if(e.length>=5 && e.length<=500 && e.length!== 0)
+  {
+    Static.question.error = ""
   }
+ 
 
-  if (formInputs[type].error === "") {
-    formInputs.isValid = true;
+  if (Static.question.error == "") {
+    Static.isValid = true;
   } else {
-    formInputs.isValid = false;
+    Static.isValid = false;
   }
-  initReload("modals");
+  initReload();
 };
 
-const sendQuestion = async function (e) {
-  e.preventDefault();
-  if (!formInputs.isValid) {
+const sendQuestion = async function (Static) {
+
+  if (!Static.isValid) {
     return false;
   }
 
 
   let data = {
     value: {
-      languages: formInputs.language.code,
-      media: formInputs.mediaInputs.value,
-      text: formInputs.textQuestion.value,
-      title: formInputs.question.value,
+      languages: Static.language.code,
+      media: Static.mediaInputs.value,
+      text: Static.textQuestion.value,
+      title: Static.question.value,
     },
   };
-  let tmpRes = await sendApi.create("setQuestion", data);
 
-  if (tmpRes.status === "ok") {
+  let tmpRes = await sendApi.create("setQuestions", data);
+
+  if (tmpRes.status == "ok") {
     Variable.DelModals("ModalAskQuestion");
     initReload();
   } else {
@@ -70,9 +71,9 @@ const sendQuestion = async function (e) {
   return;
 };
 
-const changeTextQuestion = (e) => {
+const changeTextQuestion = (Static,e) => {
   // let text = wrapTextWithATag(e.target.innerText.trim());
-  formInputs.textQuestion.value = e.target.innerText.trim();
+  Static.textQuestion.value = e;
 };
 
 const sendPhoto = async function (Static,crooper) {
@@ -147,12 +148,12 @@ const sendVideo = async function (files) {
     files[0],
     "question",
     async function () {
-      formInputs.mediaInputs.show = true;
+      Static.mediaInputs.show = true;
       let tmp = JSON.parse(this.response);
       let type = tmp.mimetype.split("/")[0];
       let obj = { aspect: undefined, type, name: tmp.name };
 
-      formInputs.mediaInputs.value.push(obj);
+      Static.mediaInputs.value.push(obj);
       initReload();
     },
     async function (e) {
@@ -254,7 +255,7 @@ const ModalAskQuestion = function (data, ID) {
             <div class="c-modal__body">
               <div class="c-askquestion">
                 {/* <form id="askQuestion" onsubmit={sendQuestion}> */}
-                <form onsubmit={sendQuestion}>
+           
                   {/* <input style="display: none;" type="submit" /> */}
                   <div
                     class="alt_language_change"
@@ -263,7 +264,7 @@ const ModalAskQuestion = function (data, ID) {
                       fn.modals.ModalChangeLanguage({
                         
                         onclick: (code, name, orig) => {
-                          console.log(Variable.Modals)
+                       
                           Static.language.value = name + ` (${orig})`;
                           Static.language.code = code;
                         }
@@ -283,7 +284,9 @@ const ModalAskQuestion = function (data, ID) {
                       <input
                         type="text"
                         data-type="question"
-                        oninput={changeInput}
+                        oninput={function(e){
+                          
+                          changeInput(Static,this.value)}}
                         class="c-form__field create_post_chapter create_post_title"
                         placeholder={Variable.lang.placeholder.titleAsk}
                         value={Static.question.value}
@@ -294,7 +297,10 @@ const ModalAskQuestion = function (data, ID) {
                           return (
                             <div
                               contenteditable="true"
-                              oninput={changeTextQuestion}
+                              oninput={function(e){
+                          
+                                changeTextQuestion(Static,this.value)}}
+                        
                               class="c-form__field create_post_chapter create_post_main_text"
                             ></div>
                           )
@@ -365,10 +371,10 @@ const ModalAskQuestion = function (data, ID) {
                   <MediaButton
 
                     // onclickText={function () {
-                    //   if (formInputs.textQuestion.show === true) {
+                    //   if (Static.textQuestion.show === true) {
                     //     return;
                     //   } else {
-                    //     formInputs.textQuestion.show = true;
+                    //     Static.textQuestion.show = true;
                     //     initReload("modals");
                     //   }
                     // }}
@@ -414,7 +420,7 @@ const ModalAskQuestion = function (data, ID) {
                       return;
                     }}
                   />
-                </form>
+             
               </div>
             </div>
             <div class="c-modal__footer">
@@ -425,7 +431,7 @@ const ModalAskQuestion = function (data, ID) {
                 ]}
                 type="button"
                 // ref={elemButton}
-                onClick={sendQuestion}
+                onClick={function(){sendQuestion(Static)}}
               >
                 <span class="c-button__text">
                   {Variable.lang.button.send}

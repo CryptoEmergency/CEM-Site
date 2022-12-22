@@ -15,8 +15,8 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
 
 
     let [Static] = fn.GetParams({ data: { file,typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+   // console.log('=ca484b=2', file)
 
-   
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
     let elemRatio2 = Variable.setRef()
@@ -24,8 +24,8 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
 
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
-    console.log('=453e8a=', Static)
-    console.log('=018927=', Static.aspectSelect)
+   // console.log('=453e8a=', Static)
+  //  console.log('=018927=', Static.aspectSelect)
 
     const cropperGo = function (el) {
         if (cropper) {
@@ -92,14 +92,14 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
             });
         }
     }
-  
-    init(() => {
-       
+   
       
+    init(() => {
+     
         },
         () => {
-
-            console.log('=0ae14c=', Static)    
+         
+       
             cropper = null
             if (aspectSelect) {
                 aspectActive = Static.aspectSelect
@@ -114,8 +114,6 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                     aspectActive = 1.7777777777777777
                 }
             }
-        
-            console.log('=ca484b=2', aspectActive)
           
             return (
                 <div class="c-modal c-modal--open" id="addCropImage">
@@ -125,11 +123,15 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                         </header>
                         <div class="c-modal__body">
                             <div class="c-cropper container crop-container" style="addCropImage">
+                                {//file.map(function(file){return(
+                                    
+                              
                                 <div class="c-cropper__row row">
                                     <div class="c-cropper__wrapimage img-container">
                                         <img width="100%" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={aspectActive ? URL.createObjectURL(file) : file} After={cropperGo} ref={elemImg} />
                                     </div>
-                                </div>
+                                </div> //) })
+                                }
                                 {() => {
                                     if (typeUpload == "bg") {
                                         return (
@@ -149,7 +151,7 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                                                 </div>
                                             </div>
                                         )
-                                    } else if (typeUpload != "chat") {
+                                    } else if (typeUpload != "chat" || typeUpload != "posts") {
                                         return (
                                             <div class="c-cropper__toggles col-12 docs-toggles">
                                                 <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">

@@ -80,6 +80,9 @@ const sendPost = async (e, Static) => {
   return;
 };
 
+
+
+
 const deleteMediaFile = function (index) {
   Static.mediaInputs.value.splice(index, 1);
   if (Static.mediaInputs.value.length == 0) {
@@ -94,7 +97,7 @@ const start = function (data, ID) {
 
   let authorPosts;
 
-  const sendPhoto = async function (crooper) {
+  const sendPhotoOne = async function (Static,crooper) {
     if (!crooper) {
       return
     }
@@ -144,7 +147,7 @@ const start = function (data, ID) {
               10
             );
           }
-
+  
           if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
             Static.mediaInputs.value.splice(numItem, 1);
             initReload()
@@ -161,6 +164,69 @@ const start = function (data, ID) {
     return
   }
 
+
+const sendPhoto = async function (crooper, index) {
+  if (!crooper) {
+      return
+  }
+  let canvas;
+  canvas = crooper.getCroppedCanvas({});
+  let previewObj = {
+      src: canvas.toDataURL(),
+      type: "image",
+      upload: 0,
+      size: 0
+  };
+  Static.mediaInputs.show = true;
+  Static.mediaInputs.value[index] = previewObj;
+  initReload();
+
+  await canvas.toBlob(function (blob) {
+      fn.uploadMedia(
+          blob,
+          "posts",
+          async function () {
+              Static.mediaInputs.show = true;
+              if (!this.response) {
+                  return
+              }
+              let response = JSON.parse(this.response);
+              Static.mediaInputs.value[index] = {
+                  aspect: Static.mediaInputs.selectAspect,
+                  type: response.mimetype.split("/")[0],
+                  name: response.name
+              }
+              Static.isValid = true;
+              initReload();
+          },
+          async function (e) {
+              let contentLength;
+              if (e.lengthComputable) {
+                  contentLength = e.total;
+              } else {
+                  contentLength = parseInt(
+                      e.target.getResponseHeader(
+                          "x-decompressed-content-length"
+                      ),
+                      10
+                  );
+              }
+
+              if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
+                  Static.mediaInputs.value.splice(index, 1);
+                  initReload()
+                  return
+              }
+              Static.mediaInputs.value[index].upload = e.loaded
+              Static.mediaInputs.value[index].size = contentLength;
+              initReload();
+          }
+      );
+      initReload();
+      Variable.DelModals("ModalCropImage");
+  });
+  return
+}
 
   const sendVideo = async function (files) {
     let blob = new Blob([files], { type: 'video/mp4' });
@@ -328,6 +394,81 @@ const start = function (data, ID) {
     }
   };
 
+
+  const loadPhoto = async function (file, type, xhr) {
+
+  let dataURL;
+  let fileImg = file;
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+      // convert image file to base64 string
+      dataURL = reader.result;
+  }, false);
+  
+  if (fileImg) {
+      reader.readAsDataURL(fileImg);
+  }
+
+  let previewObj = {
+      src: dataURL,
+      type: "image",
+      upload: 0,
+      size: 0
+  };
+  Static.mediaInputs.show = true;
+  Static.mediaInputs.value.push(previewObj);
+  let numItem = Static.mediaInputs.value.length - 1;
+
+  let nameFile = "file.png"
+  if (fileImg.name) {
+      nameFile = fileImg.name
+  }
+  const formData = new FormData()
+  formData.append('media', fileImg, nameFile);
+
+  xhr = new XMLHttpRequest()
+  xhr.open('POST', `/upload/${type}/`)
+  xhr.onload = async function () {
+      Static.mediaInputs.show = true;
+      if (!this.response) {
+          return
+      }
+      let response = JSON.parse(this.response);
+      Static.mediaInputs.value[numItem] = {
+          aspect: Static.mediaInputs.selectAspect,
+          type: response.mimetype.split("/")[0],
+          name: response.name
+      }
+      Static.isValid = true;
+      initReload();
+      // console.log('=af134a=', response)
+  }
+  xhr.upload.onprogress = async function (e) {
+      let contentLength;
+      if (e.lengthComputable) {
+          contentLength = e.total;
+      } else {
+          contentLength = parseInt(
+              e.target.getResponseHeader(
+                  "x-decompressed-content-length"
+              ),
+              10
+          );
+      }
+
+      if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+          Static.mediaInputs.value.splice(numItem, 1);
+          initReload()
+          return
+      }
+      Static.mediaInputs.value[numItem].upload = e.loaded
+      Static.mediaInputs.value[numItem].size = contentLength;
+      initReload();
+  }
+
+  xhr.send(formData)
+};
+
   let el = [];
 
   let [Static] = fn.GetParams({ data, ID })
@@ -340,8 +481,13 @@ const start = function (data, ID) {
   Static.idEditPost
   Static.startEditText = false
 
+  Static.mediaInputs = {
+    value: [],
+    show: false,
+}
   init(
     async () => {
+      Static.photo = false
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
@@ -385,12 +531,14 @@ const start = function (data, ID) {
             code: postForEdit.languages.code,
             name: postForEdit.languages.orig_name
           }
+
           Static.forFriends = postForEdit.forFriends;
+          Static.photo = postForEdit.photo;
           Static.isValid = Static.textInputs.value.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
         }
       }
 
-      console.log('=cb696d=', Static)
+     // console.log('=cb696d=', Static)
       // console.log('=0bb638=', Variable)
 
       if (Static.userInfo._id == Variable.myInfo._id) {
@@ -407,6 +555,7 @@ const start = function (data, ID) {
     },
 
     () => {
+     
 
       return (
         <div class={[
@@ -454,6 +603,7 @@ const start = function (data, ID) {
                   :
                   null
               }
+               
               {
                 Static.mediaInputs.show && Static.mediaInputs.value.length
                   ?
@@ -461,15 +611,31 @@ const start = function (data, ID) {
                     {
                       Static.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
-                          return (
-                            <MediaPreview
+                     
+                          if(Static.photo)
+                          {
+                            return (
+                              <MediaPreview
                               item={item}
                               index={index}
                               type="posts"
                               Static={Static}
-
+                              
                             />
-                          );
+                            );
+                          }
+                          else{
+                            return (
+                              <MediaPreview
+                              item={item}
+                              index={index}
+                              type="posts"
+                              Static={Static}
+                              sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
+                            />
+                            );
+                          }
+                        
                         }
                       })
                     }
@@ -503,7 +669,6 @@ const start = function (data, ID) {
             </div>
 
             <MediaButton
-
               onclickText={function () {
                 if (Static.textInputs.show === true) {
                   return;
@@ -512,38 +677,34 @@ const start = function (data, ID) {
                   initReload();
                 }
               }}
-
-              onclickPhoto={function () {
+              multiple={function(){Static.photo}}
+      
+              onclickPhoto={function (e) {
                 if (this.files.length == 0) {
                   return;
                 }
-
-                fn.modals.ModalCropImage({
-                  file: this.files[0],
-                  typeUpload: 'posts',
-                  arrMedia: Static.mediaInputs.value,
-                  aspectSelect: Static.mediaInputs.selectAspect,
-                  uploadCropImage: async function (cropper) {
-                    await sendPhoto(cropper)
-                    return;
+                if(Static.photo)
+                {
+                  fn.modals.ModalCropImage({
+                    file: this.files[0],
+                    typeUpload: 'posts',
+                    arrMedia: Static.mediaInputs.value,
+                    aspectSelect: Static.mediaInputs.selectAspect,
+                    uploadCropImage: async function (cropper) {
+                      await sendPhotoOne(Static,cropper)
+                      return;
+                    }
+                  },ID)
+                }
+                else{
+                  for(let i = 0 ; i<this.files.length; i++)
+                  {
+                       loadPhoto(this.files[i], "posts");
                   }
-                })
-                // Variable.SetModals({
-                //   name: "ModalCropImage",
-                //   data: {
-                //     file: this.files[0],
-                //     typeUpload: 'posts',
-                //     arrMedia: Static.mediaInputs.value,
-                //     aspectSelect: Static.mediaInputs.selectAspect,
-                //     uploadCropImage: async function (cropper) {
-                //       await sendPhoto(cropper)
-                //       return;
-                //     }
-                //   },
-                // }, true);
-                // Static.isValid = true;
+                }
                 this.value = '';
-              }}
+              }
+            }
 
               onclickVideo={function () {
                 if (this.files.length == 0) {
@@ -574,11 +735,29 @@ const start = function (data, ID) {
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
                     Static.forFriends = e.target.checked;
+                    initReload()
                   }}
                   type="checkbox"
                 />
                 <label class="checkbox__label" for="forfrends">
                   {Variable.lang.span.forFriends}
+                  <span class="cont_a-link"></span>
+                </label>
+              </div>
+            </div>
+            <div class="c-userpostcreate__forfriends">
+              <div class="checkbox">
+                <input
+                  id="forphoto"
+                  data-complain="abusive"
+                  class="checkbox__input complain_checkbox"
+                  onchange={(e) => {
+                    Static.photo = e.target.checked;
+                  }}
+                  type="checkbox"
+                />
+                <label class="checkbox__label" for="forphoto">
+                  Загружать фотографии по 1
                   <span class="cont_a-link"></span>
                 </label>
               </div>
