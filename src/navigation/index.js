@@ -134,20 +134,6 @@ const start = function (data, ID) {
                     </div>
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
-                        {() => {
-                            if (Variable.lang.code == "ru") {
-                                return (
-                                    <div>
-                                        <a onclick={Helpers.siteLink} href="/forum/" style="max-width: 1240px; margin: 10px auto;display: block">
-                                            <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
-                                        </a>
-                                        <a onclick={Helpers.siteLink} href="/lottery/" style="max-width: 1240px; margin: 10px auto;display: block">
-                                            <img style="border-radius: 4px; width: 100%" src={images['banners/lottery_banner']} />
-                                        </a>
-                                    </div>
-                                )
-                            }
-                        }}
                         <BlockQuestions Static={Static.dataQuestions} limit={6} />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />

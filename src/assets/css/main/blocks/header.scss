@@ -1020,7 +1020,6 @@
                     padding: 0 !important;
                     width: 48px !important;
                     height: 48px !important;
-                    filter: none !important;
 
                     i {
                         display: block;
@@ -1057,9 +1056,6 @@
                 &--disabled {
                     filter: invert(45%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%) !important;
 
-                    &.c-userpanel__icon--chats {
-                        filter: none !important;
-                    }
                 }
             }
         }

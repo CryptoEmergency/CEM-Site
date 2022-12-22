@@ -39,7 +39,7 @@ const swiperOptions = {
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
-
+    console.log(Static)
     let chatsList,
         activeChat,
         messageList,
@@ -228,6 +228,9 @@ const start = function (data, ID) {
                         ]
                     },
                     "users": 1
+                },
+                sort: {
+                    'message.showDate': -1
                 }
             });
             // console.log('=08e20a=', chatsList)

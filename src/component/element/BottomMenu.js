@@ -23,7 +23,7 @@ const findUnread = function (arr, title = false) {
 };
 
 const BottomMenu = function () {
-    // console.log('=b85f6c=', Variable)
+    console.log('=b85f6c=', Variable.dataUrl.adress)
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -43,7 +43,7 @@ const BottomMenu = function () {
                         ?
                         <a
                             href="/user/chats/"
-                            class={["c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--disabled c-userpanel__icon--mobile_visible", (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : null]}
+                            class={["c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--mobile_visible", (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : null]}
                             onclick={fn.siteLink}>
                             <i></i>
                             {Variable.myInfo && Variable.myInfo.unreadMessage ? <div class="messages_notifications_counter">{Variable.myInfo.unreadMessage}</div> : null}
