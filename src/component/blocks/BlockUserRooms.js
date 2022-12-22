@@ -829,7 +829,7 @@ const BlockUserRooms = async function ({ Static }) {
 
     //мини игра с кнопкой подписаться
     Static.z=0
-    Static.new = {}
+    Static.new = ""
     //подписаться по умолчанию 
     Static.Subscription = false
 
@@ -870,7 +870,7 @@ const BlockUserRooms = async function ({ Static }) {
 
    Static.RoomTitleMobile = ""
    setInterval(async function(){
-if(Static.new.length > 0)
+if(Static.new.length > 0 && Static.new == Static.Rooms._id)
 {
  let r = await fn.restApi.getUserRoom({ name: "chats", filter: { _id:Static.Rooms._id} })
 Static.Rooms = r.list_records[0]
@@ -880,7 +880,7 @@ await ChangeRooms(Static,Static.Rooms._id,Static.Rooms.system)
   
 initReload()
 
-  Static.new = {}
+  Static.new = ""
 }
    },1000)
 

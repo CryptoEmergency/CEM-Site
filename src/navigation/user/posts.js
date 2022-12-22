@@ -519,7 +519,7 @@ const start = function (data, ID) {
                 }
 
                 fn.modals.ModalCropImage({
-                  file: this.files[0],
+                  file: this.files,
                   typeUpload: 'posts',
                   arrMedia: Static.mediaInputs.value,
                   aspectSelect: Static.mediaInputs.selectAspect,
