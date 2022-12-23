@@ -5,7 +5,6 @@ import { apiData } from "./apiData.js"
 import { restApi } from "./restApi.js"
 import { itemsMenu } from "./itemsMenu.js"
 import { web3CEM, web3Action } from "./web3.js"
-import { init } from "@betarost/cem";
 
 const fn = {}
 fn.modals = modals
@@ -173,7 +172,7 @@ fn.timerTik = async function () {
         Static.chatsList.list_records.forEach(chat => {
           if(chat.users[0] == response.info.myInfo.chatMessage[0].author || chat.users[1] == response.info.myInfo.chatMessage[0].author){
             chat.message[0] = response.info.myInfo.chatMessage[0]
-
+  
           }
         })
       }
