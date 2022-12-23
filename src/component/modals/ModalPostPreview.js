@@ -25,7 +25,7 @@ const ModalPostPreview = function (data, ID) {
             Static.elShowTextShort = {}
             Static.elMedia = {}
             Static.elNumberSwiper = {}
-            console.log('=828ffb=', Static)
+         //   console.log('=828ffb=', Static)
         },
         () => {
             return (

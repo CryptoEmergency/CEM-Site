@@ -27,10 +27,10 @@ const changeTextPost = (e, Static) => {
   let text = '';
   if (Variable.dataUrl.params && !Static.startEditText) {
     editableText = Static.textInputs.value
-    console.log('=2b3247=', editableText)
+   // console.log('=2b3247=', editableText)
     text = e.target.textContent = editableText.trim();
   }
-  console.log(Static)
+  //console.log(Static)
   text = e.target.innerText.trim();
   Static.startEditText = true
   Static.textInputs.value = text;
@@ -54,7 +54,7 @@ const sendPost = async (e, Static) => {
   } else {
     tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
   }
-  console.log('=270fb8=', tmpRes)
+ // console.log('=270fb8=', tmpRes)
 
   if (tmpRes.status === "ok") {
     if (Variable.dataUrl.params) {
@@ -494,7 +494,7 @@ const sendPhoto = async function (crooper, index) {
         const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params, "languages.code": "all" }, limit: 1 })
         if (data.list_records.length) {
           let postForEdit = data.list_records[0];
-          console.log('=b37faa=', postForEdit)
+      //    console.log('=b37faa=', postForEdit)
           let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
           let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
 
@@ -505,7 +505,7 @@ const sendPhoto = async function (crooper, index) {
               value: postForEdit.text,
               show: true,
             }
-            console.log('=c9259f= textInputs =', Static.textInputs)
+      //      console.log('=c9259f= textInputs =', Static.textInputs)
           }
           if (postForEdit.media.length > 0 && imageVideoFiles.length > 0) {
             Static.mediaInputs = {
@@ -545,7 +545,7 @@ const sendPhoto = async function (crooper, index) {
         Static.posts = await fn.restApi.getPost({ short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: Static.userInfo._id, "languages.code": "all" }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
       }
 
-      console.log('=50f15c=', Static.posts)
+     // console.log('=50f15c=', Static.posts)
 
       selectAspect = null;
 
@@ -774,7 +774,7 @@ const sendPhoto = async function (crooper, index) {
                 data-href={"/lenta-users/show/123456789"}
                 disabled={!Static.isValid}
                 onclick={(e) => {
-                  console.log('=cf4a37=', Static)
+               //   console.log('=cf4a37=', Static)
                   let previewPost = {}
                   previewPost.author = {
                     avatar: Variable.myInfo.avatar,
@@ -803,7 +803,7 @@ const sendPhoto = async function (crooper, index) {
                   })
                   previewPost.showDate = new Date().toISOString()
                   previewPost.forFriends = Static.forFriends
-                  console.log('=0d0932=', previewPost)
+                 // console.log('=0d0932=', previewPost)
                   // fn.siteLinkModal(e, { title: "Просмотр создаваемого поста", previewPost, items: fn.itemsMenu.lenta_users(Static, previewPost) })
                   fn.modals.ModalPostPreview(previewPost)
                 }}

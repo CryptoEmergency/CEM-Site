@@ -17,7 +17,7 @@ fn.web3Action = web3Action
 fn.validator = Helpers.validator
 fn.sanitizeHtml = Helpers.sanitizeHtml
 fn.test = function () {
-  console.log('=f83cf3 FN=', this)
+//  console.log('=f83cf3 FN=', this)
   return true
 
 }
@@ -161,8 +161,11 @@ fn.timerTik = async function () {
   } else {
     // 
     let response = await sendApi.create("tik", {})
+    if(response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length){
+      //console.log(response.info.myInfo.chatMessage)
+    }
     if (response && response.result && Object.keys(response.result).length) {
-      console.log('=df2a55=', response)
+      //console.log('=df2a55=', response)
     }
   }
 
@@ -375,7 +378,7 @@ fn.siteLinkModal = async function (e, data) {
 }
 
 fn.recordsView = function (_id, action) {
-  console.log('=e0fd8f= recordsView', _id, action)
+ // console.log('=e0fd8f= recordsView', _id, action)
   let timeNow = Math.floor(Date.now() / 1000)
   let objView = getStorage("recordsView")
   if (!objView) (objView = {})

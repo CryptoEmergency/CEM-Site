@@ -5,6 +5,7 @@ import {
 } from "@betarost/cemjs";
 
 const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
+
     return (
         <button
             class={[className ? className : 'c-button c-button--primary', Static && !Static.isValid ? 'c-button--inactive' : null]}

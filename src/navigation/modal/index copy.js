@@ -21,7 +21,7 @@ const mainModal = async function () {
         },
 
         async function (reload) {
-            console.log('=50716e= mainModal', reload)
+         //   console.log('=50716e= mainModal', reload)
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
                 if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
@@ -62,7 +62,7 @@ const mainModal = async function () {
                         </div>
                     )
                 })
-                console.log('=f76ca7= arrReturn', arrReturn)
+            //    console.log('=f76ca7= arrReturn', arrReturn)
                 return (
                     <div>
                         {arrReturn}

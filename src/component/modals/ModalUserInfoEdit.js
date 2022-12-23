@@ -19,7 +19,7 @@ const ModalUserInfoEdit = function (userInfo, ID) {
     let Static = fn.GetParams({ ID })
 
     fn.initData.ModalUserInfoEdit(Static, userInfo, {})
-    console.log('dwa', userInfo, Static)
+   // console.log('dwa', userInfo, Static)
     //fn.initData.generate(["lang", "country", "group", "online"])
     init(
         () => {
@@ -134,7 +134,7 @@ const ModalUserInfoEdit = function (userInfo, ID) {
                             <ButtonSubmit
                                 text={Variable.lang.button.edit}
                                 onclick={async () => {
-                                    console.log(Static)
+                                  //  console.log(Static)
                                     let value = {
                                         information: {}
                                     }
@@ -168,8 +168,8 @@ const ModalUserInfoEdit = function (userInfo, ID) {
                                     let response = await fn.restApi.setUsers.any({ data })
                                     // api({ type: "set", action: "setUsers", data })
                                     Variable.DelModals("ModalUserInfoEdit");
-                                    console.log('data', data)
-                                    console.log(response)
+                                //    console.log('data', data)
+                                //    console.log(response)
                                 }}
                             />
                         </footer>

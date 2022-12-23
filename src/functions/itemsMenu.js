@@ -298,7 +298,7 @@ itemsMenu.news = function ({ url, downloadurl }) {
 
 
 itemsMenu.userProfile = function (item) {
-    console.log(item)
+    //console.log(item)
     const items = [
         {
             text: Variable.lang.select.share,
@@ -390,7 +390,7 @@ itemsMenu.blog = function (Static, item) {
 }
 
 itemsMenu.question = function (Static, item) {
-    console.log(item)
+   // console.log(item)
     const items =
         [
             {
@@ -443,7 +443,7 @@ itemsMenu.question = function (Static, item) {
                 color: "red",
                 onclick: async () => {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
-                        console.log('Post in modal, close this')
+                //        console.log('Post in modal, close this')
                     }
                     modals.ModalConfirmAction({
                         action: async () => {
@@ -461,7 +461,7 @@ itemsMenu.question = function (Static, item) {
                 color: "red",
                 onclick: async () => {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
-                        console.log('Post in modal, close this')
+                      //  console.log('Post in modal, close this')
                     }
                     modals.ModalConfirmAction({
                         action: async () => {
@@ -479,7 +479,7 @@ itemsMenu.question = function (Static, item) {
                 color: "red",
                 onclick: async () => {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
-                        console.log('Post in modal, close this')
+                      //  console.log('Post in modal, close this')
                     }
                     modals.ModalConfirmAction({
                         action: async () => {
@@ -516,7 +516,7 @@ itemsMenu.question = function (Static, item) {
 }
 
 itemsMenu.answer = function (Static, item, index) {
-    console.log(Static, item, index)
+   // console.log(Static, item, index)
     const items =
         [
             {
@@ -659,7 +659,7 @@ itemsMenu.answer = function (Static, item, index) {
 
 
 itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
-    console.log(Static, item, action, Variable, mainId)
+   // console.log(Static, item, action, Variable, mainId)
     const items =
         [
             {
@@ -787,9 +787,9 @@ itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
                         action: async () => {
                             let response = await fn.restApi.setComments.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            console.log(mainItem)
+                       //     console.log(mainItem)
                             mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
-                            console.log(mainItem)
+                        //    console.log(mainItem)
                             initReload()
                         },
                         text: Variable.lang.p.deleteCommentConfirm,
@@ -806,9 +806,9 @@ itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
                         action: async () => {
                             let response = await fn.restApi.doRole.deleteComment({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
-                            console.log('get' + action)
+                          //  console.log('get' + action)
                             mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
-                            console.log(mainItem)
+                        //    console.log(mainItem)
                             initReload()
                         },
                         text: Variable.lang.p.deleteCommentConfirm,
@@ -851,7 +851,7 @@ itemsMenu.lenta_users = function (Static, item) {
                 onclick: async () => {
 
                     const response = await fn.restApi.setUsers.subscribe({ _id: item.author._id })
-                    console.log(response)
+                 //   console.log(response)
                     // console.log('=b959ac=', response)
                     if (response.status === "ok") {
                         item.subscribe = !item.subscribe

@@ -81,7 +81,7 @@ const Evaluation = function ({ Static, item, index, comment, action, mainId }) {
               let response
               if (comment) {
                 response = await fn.restApi.getComments({ filter: { _id: item._id }, select: { evaluation: 1, }, firstRecord: true })
-                console.log('=032e47=', response)
+              //  console.log('=032e47=', response)
               } else {
                 response = await fn.restApi["get" + action]({ filter: { _id: item._id }, select: { evaluation: 1, }, firstRecord: true })
               }

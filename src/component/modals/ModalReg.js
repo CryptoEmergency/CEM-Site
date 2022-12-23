@@ -62,7 +62,7 @@ const ModalReg = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
     init(
         () => {
-            console.log("=========INIT========", Static, "=====ONE======")
+        //    console.log("=========INIT========", Static, "=====ONE======")
             // let [Static] = fn.GetParams({ data, ID, actual: false, reload })
 
             wayReg = "email"
@@ -170,7 +170,7 @@ const ModalReg = function (data, ID) {
 
         },
         () => {
-            console.log("=========INIT========", Static, "=====SECOND======")
+          //  console.log("=========INIT========", Static, "=====SECOND======")
             return (
                 <div class="c-modal c-modal--open" id="ModalReg">
                     <section class="c-modal__dialog" ref={elem}>

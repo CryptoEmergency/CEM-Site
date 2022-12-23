@@ -245,7 +245,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                         text: Variable.lang.text.changeAvatar,
                         type: "edit",
                         onclick: function (e) {
-                          console.log(e)
+                        //  console.log(e)
                           e.stopPropagation();
                           e.preventDefault();
                           inputAvatar().click();

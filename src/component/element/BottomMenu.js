@@ -23,7 +23,7 @@ const findUnread = function (arr, title = false) {
 };
 
 const BottomMenu = function () {
-    console.log('=b85f6c=', Variable.dataUrl.adress)
+  //  console.log('=b85f6c=', Variable.dataUrl.adress)
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -83,7 +83,7 @@ const BottomMenu = function () {
                                 class="c-userpanel__icon c-userpanel__icon--notify c-userpanel__icon--mobile_visible c-notification__link"
                                 onClick={async function (e) {
                                     e.stopPropagation();
-                                    console.log('=4c896c=', Variable)
+                                   // console.log('=4c896c=', Variable)
                                     let data = {
                                         value: {
                                             readNotify: findUnread(Variable.myInfo.notifyQuestions, 'questions')
@@ -95,7 +95,7 @@ const BottomMenu = function () {
                                     }
 
                                     let tmpRes = await sendApi.create("setUsers", data);
-                                    console.log('=e19671=', data, tmpRes)
+                                 //   console.log('=e19671=', data, tmpRes)
                                     if (tmpRes.status === 'ok') {
                                         fn.modals.ModalNotify();
                                         initReload()

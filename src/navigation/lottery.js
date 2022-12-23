@@ -48,7 +48,7 @@ const start = function () {
             instagram: this.elements.instagram.value,
             email: this.elements.email.value
         })
-        console.log(response)
+       // console.log(response)
         if(response.list_records.length != 0){
             ticketNumber = response.list_records[0].ticketNumber
         }

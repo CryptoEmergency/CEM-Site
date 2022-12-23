@@ -715,7 +715,7 @@ else{
                  Static.StartUPData.Team = Static.Team
 
                   Static.StartUPData
-                  console.log(Static.StartUPData)
+                //  console.log(Static.StartUPData)
 
                 }}>
                 <div class="our_team_watch_all">

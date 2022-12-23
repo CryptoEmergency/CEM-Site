@@ -8,9 +8,13 @@ import svg from "@assets/svg/index.js";
 import { LentaMedia, Evaluation, Avatar, ItemsMenu } from "@component/element/index.js";
 
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {
-  let mediaFiles = item.media.filter((item) => {
+  let mediaFiles
+
+  if(item.media){
+    mediaFiles = item.media.filter((item) => {
     return typeof item == 'object'
   });
+}
   let text
 if(typeof item.text !=="undefined")
 {
