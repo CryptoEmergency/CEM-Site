@@ -170,9 +170,9 @@ fn.timerTik = async function () {
           Static.messageList.list_records[0].message.unshift(response.info.myInfo.chatMessage[0])
         }
         Static.chatsList.list_records.forEach(chat => {
-          if(chat.users[0] == response.info.myInfo.chatMessage[0].author || chat.users[1] == response.info.myInfo.chatMessage[0].author){
+          if(chat.users[0]._id == response.info.myInfo.chatMessage[0].author || chat.users[1]._id == response.info.myInfo.chatMessage[0].author){
             chat.message[0] = response.info.myInfo.chatMessage[0]
-  
+            initReload()
           }
         })
       }
