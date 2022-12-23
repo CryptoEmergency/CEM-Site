@@ -39,12 +39,7 @@ const swiperOptions = {
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
-   
-    let chatsList,
-        activeChat,
-        messageList,
-        messageUser,
-        activeUser
+
 
     Variable.Static.HeaderShow = false
     Variable.Static.FooterShow = false
@@ -214,7 +209,7 @@ const start = function (data, ID) {
                 show: false,
             }
 
-            chatsList = await sendApi.send({
+            Static.chatsList = await sendApi.send({
                 action: "getUserChats", short: true, sort: {
                     "message": {
                         "showDate": -1
@@ -233,14 +228,14 @@ const start = function (data, ID) {
                     'message.showDate': -1
                 }
             });
-            // console.log('=08e20a=', chatsList)
+            // console.log('=08e20a=', Static.chatsList)
             if (Variable.Static.startChatsID) {
                 let existingChat = false
-                chatsList.list_records.forEach(async (chat) => {
+                Static.chatsList.list_records.forEach(async (chat) => {
                     if (chat.users[0] && chat.users[0]._id == Variable.Static.startChatsID._id || chat.users[1] && chat.users[1]._id == Variable.Static.startChatsID._id) {
                         existingChat = true
-                        activeChat = chat._id
-                        messageList = await sendApi.send({
+                        Static.activeChat = chat._id
+                        Static.messageList = await sendApi.send({
                             action: "getUserChats", short: true,
                             filter: {
                                 "$and": [
@@ -263,11 +258,11 @@ const start = function (data, ID) {
                     }
                 })
                 if (!existingChat) {
-                    activeUser = Variable.Static.startChatsID
-                    // console.log(chatsList)
-                    chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
-                    activeChat = 1
-                    messageList = {
+                    Static.activeUser = Variable.Static.startChatsID
+                    // console.log(Static.chatsList)
+                    Static.chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
+                    Static.activeChat = 1
+                    Static.messageList = {
                         list_records: [
                             {
                                 message: [],
@@ -281,24 +276,24 @@ const start = function (data, ID) {
             Variable.Static.startChatsID = null
         },
         () => {
-            // console.log('=da21b3=', chatsList, Variable.Static.startChatsID)
+            // console.log('=da21b3=', Static.chatsList, Variable.Static.startChatsID)
 
-            if (messageList) {
-                if (Variable.myInfo._id != messageList.list_records[0].users[0]._id) {
-                    activeUser = messageList.list_records[0].users[0]
+            if (Static.messageList) {
+                if (Variable.myInfo._id != Static.messageList.list_records[0].users[0]._id) {
+                    Static.activeUser = Static.messageList.list_records[0].users[0]
                 } else {
-                    activeUser = messageList.list_records[0].users[1]
+                    Static.activeUser = Static.messageList.list_records[0].users[1]
                 }
-                messageUser = messageList.list_records[0].message
+                Static.messageUser = Static.messageList.list_records[0].message
             }
 
-            // console.log('=633dca=', messageUser, activeUser)
+            // console.log('=633dca=', Static.messageUser, Static.activeUser)
             return (
                 <div class="messages_block c-main__body--noheader">
                     <div
                         class={[
                             "messages_left_part",
-                            activeChat ? "messages_left_part--inactive" : null
+                            Static.activeChat ? "messages_left_part--inactive" : null
                         ]}
                     >
                         <div class="chats_search">
@@ -313,8 +308,8 @@ const start = function (data, ID) {
                         <div class="messages_list">
 
                             {() => {
-                                if (chatsList && chatsList.list_records && chatsList.list_records.length) {
-                                    const arrReturn = chatsList.list_records.map((item, index) => {
+                                if (Static.chatsList && Static.chatsList.list_records && Static.chatsList.list_records.length) {
+                                    const arrReturn = Static.chatsList.list_records.map((item, index) => {
                                         let user
                                         let lastMessage = item.message[0]
                                         let iconStatus
@@ -338,14 +333,14 @@ const start = function (data, ID) {
                                  
                                         return (
                                             <div
-                                                class={["messages_list_item", item._id == activeChat ? "active" : null]}
+                                                class={["messages_list_item", item._id == Static.activeChat ? "active" : null]}
                                                 onclick={async () => {
-                                                    activeChat = item._id
+                                                    Static.activeChat = item._id
                                                     if(item._id == 1){
                                                         initReload()
                                                         return
                                                     }
-                                                    messageList = await sendApi.send({
+                                                    Static.messageList = await sendApi.send({
                                                         action: "getUserChats", short: true,
                                                         filter: {
                                                             "$and": [
@@ -364,7 +359,7 @@ const start = function (data, ID) {
                                                             "users": 1
                                                         }
                                                     });
-                                                    // console.log('=b604cf=', messageList)
+                                                    // console.log('=b604cf=', Static.messageList)
                                                     initReload()
                                                 }}
                                             >
@@ -397,22 +392,22 @@ const start = function (data, ID) {
                             }}
                         </div>
                     </div>
-                    <div class="messages_dialog" style={activeChat ? "height: 100%; overflow-y: hidden; display: block;" : "height: 100%; overflow-y: hidden;"}>
+                    <div class="messages_dialog" style={Static.activeChat ? "height: 100%; overflow-y: hidden; display: block;" : "height: 100%; overflow-y: hidden;"}>
                         {() => {
-                            if (activeUser) {
+                            if (Static.activeUser) {
                                 return (
                                     <section>
                                         <div class="companion">
-                                            <Avatar author={activeUser} />
+                                            <Avatar author={Static.activeUser} />
                                             <div class="companion_info">
-                                                <p>{activeUser.nickname}</p>
+                                                <p>{Static.activeUser.nickname}</p>
                                                 <p></p>
                                             </div>
                                         </div>
                                         <div class="messages_container">
                                             {() => {
-                                                if (messageList && messageList.list_records && messageList.list_records[0].message) {
-                                                    const arrReturn = messageList.list_records[0].message.map((item, index) => {
+                                                if (Static.messageList && Static.messageList.list_records && Static.messageList.list_records[0].message) {
+                                                    const arrReturn = Static.messageList.list_records[0].message.map((item, index) => {
                                                         return (
                                                             <div class={item.author == Variable.myInfo._id ? "your_message_container" : "friend_message_container"}>
                                                                 <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", Helpers.ifHaveMedia(item.media, "video") ? "chat_have_video" : null, Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
@@ -540,9 +535,9 @@ const start = function (data, ID) {
                                                             media.push(file)
                                                         })
                                                     }
-                                                    // let data = { value: { users: activeUser._id, message: { text } } }
+                                                    // let data = { value: { users: Static.activeUser._id, message: { text } } }
                                                     // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: activeUser._id, text, media })
+                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
                                                     // console.log('=6befba=', response)
                                                     if (response.status === "ok") {
                                                         Static.message.el.value = ""
@@ -552,16 +547,16 @@ const start = function (data, ID) {
                                                         if (response && response.list_records && response.list_records[0]) {
                                                             let newRes = response.list_records[0]
 
-                                                            if (messageList && messageList.list_records[0] && messageList.list_records[0].message) {
-                                                                messageList.list_records[0].message.unshift(newRes)
+                                                            if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                                                                Static.messageList.list_records[0].message.unshift(newRes)
                                                             } else {
-                                                                messageList.list_records[0].message = [newRes]
+                                                                Static.messageList.list_records[0].message = [newRes]
                                                             }
-                                                            // console.log('=46ae17=', chatsList)
+                                                            // console.log('=46ae17=', Static.chatsList)
 
-                                                            if (chatsList && chatsList.list_records) {
-                                                                chatsList.list_records.map((item) => {
-                                                                    let tmp = item.users.filter(item => item._id == activeUser._id)
+                                                            if (Static.chatsList && Static.chatsList.list_records) {
+                                                                Static.chatsList.list_records.map((item) => {
+                                                                    let tmp = item.users.filter(item => item._id == Static.activeUser._id)
                                                                     if (tmp.length) {
                                                                         item.message[0] = newRes
                                                                     }
@@ -613,7 +608,7 @@ const start = function (data, ID) {
                     <img
                         class="messages_goback"
                         src={svg.chats_back}
-                        onClick={() => { activeChat = null; initReload(); }}
+                        onClick={() => { Static.activeChat = null; initReload(); }}
                     />
                 </div>
             )

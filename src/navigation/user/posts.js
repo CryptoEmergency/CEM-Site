@@ -177,6 +177,8 @@ const sendPhoto = async function (crooper, index) {
       upload: 0,
       size: 0
   };
+
+ 
   Static.mediaInputs.show = true;
   Static.mediaInputs.value[index] = previewObj;
   initReload();
@@ -415,6 +417,7 @@ const sendPhoto = async function (crooper, index) {
       upload: 0,
       size: 0
   };
+
   Static.mediaInputs.show = true;
   Static.mediaInputs.value.push(previewObj);
   let numItem = Static.mediaInputs.value.length - 1;
@@ -423,6 +426,12 @@ const sendPhoto = async function (crooper, index) {
   if (fileImg.name) {
       nameFile = fileImg.name
   }
+  console.log(fileImg)
+  console.log(nameFile)
+
+
+
+  
   const formData = new FormData()
   formData.append('media', fileImg, nameFile);
 
@@ -439,6 +448,7 @@ const sendPhoto = async function (crooper, index) {
           type: response.mimetype.split("/")[0],
           name: response.name
       }
+    
       Static.isValid = true;
       initReload();
       // console.log('=af134a=', response)
@@ -487,7 +497,7 @@ const sendPhoto = async function (crooper, index) {
 }
   init(
     async () => {
-      Static.photo = false
+      Static.photo = true
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
@@ -755,6 +765,7 @@ const sendPhoto = async function (crooper, index) {
                     Static.photo = e.target.checked;
                   }}
                   type="checkbox"
+                  checked={Static.photo}
                 />
                 <label class="checkbox__label" for="forphoto">
                   Загружать фотографии по 1

@@ -128,7 +128,6 @@ const ModalAuth = function (data, ID) {
         }
 
         let tmpRes = await sendApi.create("userAuth", data);
-        console.log(tmpRes, data)
         if (tmpRes.status === 'ok') {
             // Variable.DelModals("ModalAuth")
             fn.modals.close(ID)

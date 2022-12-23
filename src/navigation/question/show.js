@@ -52,7 +52,7 @@ const start = function (data, ID) {
         elShowInput: {},
         el: {}
     }
- 
+
 
       if (!item._id) { return (<div><BlockError404 /></div>) }
       return (
@@ -244,6 +244,8 @@ const start = function (data, ID) {
                                         if(typeof Static.elShowAnswersComment[index]!=="undefined")
                                         {
                                           Static.elShowAnswersComment[index].hidden = false
+                                          Static.elShowButtonComment[index].style.display = ""
+                                         
                                         }
                                   
                                         
@@ -254,20 +256,20 @@ const start = function (data, ID) {
                                   }}
                                 />
                               </div>
+                    
                               {
-                                item.comments && item.comments.length 
-                                  ?
-                                 
-                                  <div
+
+                                  <div 
                                     class="user_news_top"
                                     onclick={function () {
                                       if (Static.elButtonSubmit[index].dataset.show) {
-                                  
-                                        Static.elButtonSubmit[index].removeAttribute("data-show")
-                                        Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                        Static.elShowAnswersComment[index].hidden = true
+
+                                    Static.elButtonSubmit[index].removeAttribute("data-show")
+                                    Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                    Static.elShowAnswersComment[index].hidden = true
+                                       
                                       } else {
-                  
+                                      
                                         Static.elButtonSubmit[index].dataset.show = true
                                         Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
                                         Static.elShowAnswersComment[index].hidden = false
@@ -275,9 +277,21 @@ const start = function (data, ID) {
                                     }}
 
                                   >
-                                    <div class="button-container-comm">
+                              
+
+                              {()=>{
+                                let st
+                                  if(item.comments.length >0){
+                                    st = "display:block"
+
+                                  }
+                                  else{
+                                    st = "display:none"
+                                  }
+                                   return( <div Element={($el) => { Static.elShowButtonComment[index] = $el;  }} style={st}  class="button-container-comm">
                                       <ButtonSubmit
                                         className="c-button--comm"
+                                       
                                         data-show={false}
                                         text={
                                           <span Element={($el) => { Static.elButtonSubmit[index] = $el; }}>
@@ -285,14 +299,14 @@ const start = function (data, ID) {
                                           </span>
                                         }
                                       />
-                                    </div>
+                                    </div>) }}
+                             
                                   </div>
-                                  :
-                                  null
+                      
                               }
+                              
                               {
-                                item.comments && item.comments.length
-                                  ?
+                              
                                   <div style="padding-left: 0; padding-right: 0" hidden={true} Element={($el) => { Static.elShowAnswersComment[index] = $el; }}>
                                     <div class="comment_answer">
                                       {item.comments.map(function (itemComments, i) {
@@ -325,8 +339,7 @@ const start = function (data, ID) {
                                       <img src={svg.scroll_top} />
                                     </div> */}
                                   </div>
-                                  :
-                                  null
+                                
                               }
                             
                             </div>

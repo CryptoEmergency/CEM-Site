@@ -23,7 +23,8 @@ const findUnread = function (arr, title = false) {
 };
 
 const BottomMenu = function () {
-  //  console.log('=b85f6c=', Variable.dataUrl.adress)
+
+ //   console.log('=b85f6c=', Variable.dataUrl)
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -58,7 +59,7 @@ const BottomMenu = function () {
                 }
                 <a
                     href="/user/posts/"
-                    class="c-userpanel__icon c-userpanel__icon--posts c-userpanel__icon--mobile_visible"
+                    class={["c-userpanel__icon c-userpanel__icon--posts c-userpanel__icon--mobile_visible",(Variable.dataUrl.category == "posts") ? "c-userpanel__icon--active" : null]}
                     onclick={(e) => {
                         if (Variable.auth) {
                             fn.siteLink(e)

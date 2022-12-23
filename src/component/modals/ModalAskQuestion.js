@@ -22,8 +22,15 @@ const changeInput = function (Static,e) {
   } else if (e.length > 500) {
     Static.question.error = Variable.lang.error_div.maxSymbol;
   }else if(e.length>=5 && e.length<=500 && e.length!== 0)
-  {
-    Static.question.error = ""
+  { 
+    if(e.trim().length > 5 )
+    {
+      Static.question.error = ""
+    }
+    else{
+      Static.question.error = Variable.lang.error_div.not_empty_input; 
+    }
+  
   }
  
 

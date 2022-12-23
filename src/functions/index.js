@@ -161,8 +161,21 @@ fn.timerTik = async function () {
   } else {
     // 
     let response = await sendApi.create("tik", {})
-    if(response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length){
-      //console.log(response.info.myInfo.chatMessage)
+    if(response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length > 0){
+      let [Static] = fn.GetParams({ ID: "mainBlock", actual: true })
+      if (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") {
+        console.log(response.info.myInfo.chatMessage)
+        console.log(Static)
+        if(Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author){
+          Static.messageList.list_records[0].message.unshift(response.info.myInfo.chatMessage[0])
+        }
+        Static.chatsList.list_records.forEach(chat => {
+          if(chat.users[0]._id == response.info.myInfo.chatMessage[0].author || chat.users[1]._id == response.info.myInfo.chatMessage[0].author){
+            chat.message[0] = response.info.myInfo.chatMessage[0]
+            initReload()
+          }
+        })
+      }
     }
     if (response && response.result && Object.keys(response.result).length) {
       //console.log('=df2a55=', response)
