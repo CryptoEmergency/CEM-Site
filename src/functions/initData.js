@@ -519,6 +519,7 @@ initData.question_show = function (Static) {
     Static.elMedia = {}
     Static.elShowComment = {}
     Static.elShowAnswersComment = {}
+    Static.elShowButtonComment = []
 
     Static.elButtonSubmit = {}
     Static.commentText = []
