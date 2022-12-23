@@ -7,7 +7,7 @@ import { fn } from '@src/functions/index.js';
 
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
-  console.log("============on load",Static)
+  //console.log("============on load",Static)
 
 
   if (item.type == "audio") {
@@ -121,7 +121,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 <div
                   class="stop_loading"
                   onclick={() => {
-                    console.log(2)
+                //    console.log(2)
                     Static.mediaInputs.value[index].upload =
                       Static.mediaInputs.value[index].size;
                     Static.mediaInputs.value.splice(index, 1);
@@ -192,7 +192,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-                    console.log(3)
+                  //  console.log(3)
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;
@@ -274,7 +274,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-                    console.log(4)
+                  //  console.log(4)
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;

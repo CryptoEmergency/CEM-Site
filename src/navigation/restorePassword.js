@@ -119,7 +119,7 @@ if(Static.params && Static.params.length == 2 && Static.check == 1){
                                         onClick={async(e) => { 
                                           
                                          let response = await fn.restApi.setNewPassword(Static.params[0],Static.params[1],Static.pass.value)
-                                          console.log(response)
+                                       //   console.log(response)
                                           if(response.status == "ok")
                                           {
                                       let res =  document.getElementById("response")

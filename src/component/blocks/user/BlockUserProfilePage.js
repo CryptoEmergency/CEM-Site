@@ -233,7 +233,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    console.log('=7e4dce=', "gggg")
+                                                                 //   console.log('=7e4dce=', "gggg")
 
                                                                 }
                                                             }
@@ -275,7 +275,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    console.log('=7e4dce=', "gggg")
+                                                                 //   console.log('=7e4dce=', "gggg")
 
                                                                 }
                                                             },
@@ -283,7 +283,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    console.log('=7e4dce=', "gggg")
+                                                                 //   console.log('=7e4dce=', "gggg")
 
                                                                 }
                                                             }
@@ -446,7 +446,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
 }
 
 BlockUserProfilePage.friends = function (Static, data) {
-    console.log(data,"block friends")
+   // console.log(data,"block friends")
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }

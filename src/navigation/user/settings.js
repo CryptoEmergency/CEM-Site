@@ -197,11 +197,11 @@ start = menuItem.map(function (key) {
                                             activeGroup = Static.elSocial
                                             // console.log('=034949=',activeGroup)
                                             if (Static.elSocial.dataset.active == "true") {
-                                                console.log('=c15202=', "not active")
+                                             //   console.log('=c15202=', "not active")
                                                 Static.elSocial.dataset.active = false;
                                                 Static.elSocial.classList.remove("settings_list_item_active")
                                             } else {
-                                                console.log('=9ca0c2=', "active")
+                                           //     console.log('=9ca0c2=', "active")
                                                 Static.elSocial.dataset.active = true;
                                                 Static.elSocial.classList.add("settings_list_item_active")
                                             }
@@ -258,11 +258,11 @@ start = menuItem.map(function (key) {
                                             activeGroup = Static.elCategory
                                             // console.log('=f1cab4=',activeGroup)
                                             if (Static.elCategory.dataset.active == "true") {
-                                                console.log('=c15202=', "not active 2")
+                                             //   console.log('=c15202=', "not active 2")
                                                 Static.elCategory.dataset.active = false;
                                                 Static.elCategory.classList.remove("settings_list_item_active")
                                             } else {
-                                                console.log('=9ca0c2=', "active 2")
+                                            //    console.log('=9ca0c2=', "active 2")
                                                 Static.elCategory.dataset.active = true;
                                                 Static.elCategory.classList.add("settings_list_item_active")
                                             }

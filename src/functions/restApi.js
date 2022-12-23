@@ -406,9 +406,9 @@ restApi.getQuestions = async function ({ cache, name, limit = 6, offset = 0, fil
         select: Object.assign(defaultSelect, select),
         sort
     }
-    console.log(data)
+   // console.log(data)
     let response = await sendApi.send(data);
-    console.log(response)
+   // console.log(response)
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
         if (responseCheck.list_records.length) {
@@ -590,9 +590,9 @@ restApi.setAnswers.delete = async function ({ _id }) {
             active: false
         }
     }
-    console.log(data)
+   // console.log(data)
     const response = await sendApi.create("setAnswers", data);
-    console.log(response)
+  //  console.log(response)
     return checkSetAnswer(response)
 }
 
@@ -603,9 +603,9 @@ restApi.setAnswers.complain = async function ({ _id, complain }) {
             complain
         }
     }
-    console.log(data)
+    //console.log(data)
     const response = await sendApi.create("setAnswers", data);
-    console.log(response)
+   // console.log(response)
     return checkSetAnswer(response)
 }
 // Запросы на посты
@@ -720,9 +720,9 @@ restApi.setPost.delete = async function ({ _id }) {
             active: false
         }
     }
-    console.log(data)
+   // console.log(data)
     const response = await sendApi.create("setPost", data);
-    console.log(response)
+  //  console.log(response)
     return checkSetAnswer(response)
 }
 // Запросы  на новости
@@ -790,8 +790,8 @@ restApi.setLottery.join = async function ({ nickname, telegram, twitter, instagr
         }
     }
     const response = await sendApi.create("setLottery", data);
-    console.log(data)
-    console.log('response', response)
+   // console.log(data)
+   // console.log('response', response)
     return checkSetAnswer(response, noAlert)
 }
 
@@ -801,9 +801,9 @@ restApi.setUserChats.sendMessage = async function ({ users, text, media, noAlert
     let data = {
         value: { users, message: { text, media } }
     }
-    console.log('=805a2d=', data)
+   // console.log('=805a2d=', data)
     const response = await sendApi.create("setUserChats", data);
-    console.log('=4e499a=', response)
+  //  console.log('=4e499a=', response)
     return checkSetAnswer(response, noAlert)
 }
 
@@ -910,7 +910,7 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
     }
     
     const response = await sendApi.create("setQuestion", data);
-    console.log(response)
+   // console.log(response)
     return checkSetAnswer(response)
 }
 

@@ -9,6 +9,7 @@ import { LentaMedia, Evaluation, Avatar, ItemsMenu } from "@component/element/in
 
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {
   let mediaFiles
+
   if(item.media){
     mediaFiles = item.media.filter((item) => {
     return typeof item == 'object'

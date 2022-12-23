@@ -20,7 +20,7 @@ const showModalUserInfoEdit = function (e) {
 let Static = {}
 
 const ModalUserInterests = function (userInfo, reload) {
-    console.log('dwa', userInfo)
+   // console.log('dwa', userInfo)
 
     init(
         () => {
@@ -76,7 +76,7 @@ const ModalUserInterests = function (userInfo, reload) {
                             <ButtonSubmit
                                 text={Variable.lang.button.edit}
                                 onclick={async () => {
-                                    console.log(Static)
+                                 //   console.log(Static)
                                     if (Static.name.value == "" || Static.description.value == "") {
                                         return
                                     }

@@ -13,9 +13,11 @@ const start = function (data, ID) {
   init(
     async () => {
       fn.initData.lenta_users_show(Static)
-      if (!Static.openModals) {
+
+  if (!Static.openModals || typeof item.text== "undefined") {
+    
         item = await fn.restApi.getPost({ filter: { _id: item._id }, firstRecord: true })
-      }
+     }
     },
     async () => {
       if (!item._id) { return (<div><BlockError404 /></div>) }

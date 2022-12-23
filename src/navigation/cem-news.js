@@ -14,7 +14,7 @@ const start = function (data, ID) {
       fn.initData.news(Static)
       const tmp = await fn.web3Action.getNews()
       Static.list_records = tmp
-      console.log("Static.list_records", Static.list_records)
+    //  console.log("Static.list_records", Static.list_records)
     },
     () => {
       return (
