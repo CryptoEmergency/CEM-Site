@@ -161,6 +161,9 @@ fn.timerTik = async function () {
   } else {
     // 
     let response = await sendApi.create("tik", {})
+    if(response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length){
+      //console.log(response.info.myInfo.chatMessage)
+    }
     if (response && response.result && Object.keys(response.result).length) {
       console.log('=df2a55=', response)
     }
