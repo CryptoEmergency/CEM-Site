@@ -326,13 +326,16 @@ const start = function (data, ID) {
                                         } else {
                                             iconStatus = "read_message_icon"
                                         }
-
+                                         if(item.users.length <2)
+                                         {
+                                            user = item.users[0]
+                                         }else{
                                         if (Variable.myInfo._id != item.users[0]._id) {
                                             user = item.users[0]
                                         } else {
                                             user = item.users[1]
-                                        }
-                                       
+                                        }}
+                                 
                                         return (
                                             <div
                                                 class={["messages_list_item", item._id == activeChat ? "active" : null]}

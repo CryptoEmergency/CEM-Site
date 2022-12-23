@@ -17,6 +17,7 @@ const start = function (data, ID) {
       fn.initData.question_show(Static)
       if (!Static.openModals || !item.author) {
         item = await fn.restApi.getQuestions({ filter: { _id: item._id }, firstRecord: true })
+     
       }
       if (item.text) {
         Static.edit_question_text = {
@@ -31,7 +32,12 @@ const start = function (data, ID) {
         }
       }
     },
+
+    
     async () => {
+
+      let isEmpty = Object.entries(item).length === 0
+ 
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
