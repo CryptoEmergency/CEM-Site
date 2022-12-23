@@ -50,7 +50,7 @@ const ModalAuth = function (data, ID) {
                 <div class='reset_by_mobile_block'>
                     <label for="resetByEmailInput">{Variable.lang.label.phone}</label>
                     <div class="reset_by_mobile_block_container c-phonecode">
-                        <div class="country-phone2">
+                        <div class="country-phone2" style="margin-top: 3px">
                             <div class="country-phone-selector2">
                                 <div
                                     class="country-phone-selected2"
@@ -128,6 +128,7 @@ const ModalAuth = function (data, ID) {
         }
 
         let tmpRes = await sendApi.create("userAuth", data);
+        console.log(tmpRes, data)
         if (tmpRes.status === 'ok') {
             // Variable.DelModals("ModalAuth")
             fn.modals.close(ID)
@@ -218,7 +219,6 @@ const ModalAuth = function (data, ID) {
                 placeholder: "9990000000",
                 valid: false,
                 error: false,
-                label: "phone",
                 errorText: Variable.lang.error_div.wrong_phone,
                 condition: (value) => {
 
@@ -255,7 +255,7 @@ const ModalAuth = function (data, ID) {
                         </header>
                         <div class="c-modal__body">
                             <div class="c-mobileoremail">
-                                {/*<button
+                                <button
                                     class={`c-button c-button--toggler ${wayAuth == "email" && "c-button--active"}`}
                                     onClick={() => {
                                         wayAuth = "email"
@@ -279,7 +279,7 @@ const ModalAuth = function (data, ID) {
 
                                     }}>
                                     {Variable.lang.button.phone}
-                                </button>*/}
+                                </button>
                             </div>
 
                             <form onsubmit={sendAuthorization}>
