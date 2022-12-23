@@ -8,8 +8,11 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
+import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
+
+  // console.log("ggg=",data,ID)
   let [Static, item] = fn.GetParams({ data, ID })
 
   init(
@@ -37,7 +40,7 @@ const start = function (data, ID) {
     async () => {
 
       let isEmpty = Object.entries(item).length === 0
- 
+      if (!item._id) { return (<div><BlockError404 /></div>) }
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">

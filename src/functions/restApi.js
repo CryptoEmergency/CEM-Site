@@ -406,8 +406,9 @@ restApi.getQuestions = async function ({ cache, name, limit = 6, offset = 0, fil
         select: Object.assign(defaultSelect, select),
         sort
     }
-
+    console.log(data)
     let response = await sendApi.send(data);
+    console.log(response)
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
         if (responseCheck.list_records.length) {

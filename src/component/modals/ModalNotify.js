@@ -64,7 +64,7 @@ const ModalNotify = async function (data, ID) {
 		},
 		() => {
 
-			console.log(notify)
+			// console.log(notify)
 			return (
 				<div class="c-modal c-modal--open" id="ModalNotify">
 					<section class="c-modal__dialog">
