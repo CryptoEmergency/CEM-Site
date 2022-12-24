@@ -690,10 +690,10 @@ BlockUserProfilePage.questions = function (Static, data) {
                                         return (
                                             <div class="your_answers_avatar">
                                                 <Avatar
-                                                    author={item.author}
+                                                    author={item.bestId.author}
                                                 />
                                                 <div class="your_answers_name">
-                                                    <p>{item.author.nickname}</p>
+                                                    <p>{item.bestId.author.nickname}</p>
                                                     <p> </p>
                                                 </div>
                                             </div>
