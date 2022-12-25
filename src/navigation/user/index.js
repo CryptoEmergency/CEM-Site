@@ -32,60 +32,39 @@ const start = function (userInfo, ID = "mainBlock") {
         }
         profilePage = this.dataset.profilepage
         if (profilePage == "lentaFriends") {
-            if (userInfo._id == Variable.myInfo._id) {
-                activeItems = Variable.PageUserProfileMyLenta
-            } else {
-                activeItems = await fn.restApi.getPost({short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
-                
-            }
+            activeItems = await fn.restApi.getPost({short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
             // console.log('=2b1496=', activeItems)
 
         } else if (profilePage == "questions") {
-            if (userInfo._id == Variable.myInfo._id) {
-                activeItems = Variable.PageUserProfileQuestions
-            } else {
-                activeItems = await fn.restApi.getQuestions({short: true, cache: true, name: "PageUserProfileQuestions", filter: {author: userInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10})
-            }
+            activeItems = await fn.restApi.getQuestions({short: true, cache: false, name: "PageUserProfileQuestions", filter: {author: userInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10})
 
         } else if (profilePage == "answers") {
-            if (userInfo._id == Variable.myInfo._id) {
-                activeItems = Variable.PageUserProfileAnswers
-            } else {
-                activeItems = await sendApi.send({
-                    action: "getAnswers", short: true, filter: {
-                        author: userInfo._id,
-                    },
-                    select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
-                    limit: 10
-                });
-            }
+            activeItems = await sendApi.send({
+                action: "getAnswers", short: true, filter: {
+                    author: userInfo._id,
+                },
+                select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
+                limit: 10
+            });
         } else if (profilePage == "subscribers") {
-            if (userInfo._id == Variable.myInfo._id) {
-                activeItems = Variable.PageUserProfileSubscribers
-            } else {
-                activeItems = await sendApi.send({
-                    action: "getUsers", short: true, filter: {
-                        subscribed: userInfo._id,
-                    },
-                    limit: 20
-                });
-            }
+            activeItems = await sendApi.send({
+                action: "getUsers", short: true, filter: {
+                    subscribed: userInfo._id,
+                },
+                limit: 20
+            });
         } else if (profilePage == "friends") {
-            if (userInfo._id == Variable.myInfo._id) {
-                activeItems = Variable.PageUserProfileFriends
-            } else {
-                activeItems = await sendApi.send({
-                    action: "getUsers", short: true, filter: {
-                        _id: userInfo._id,
-                    },
-                    select: {
-                        _id: 1,
-                        subscribed: 1,
-                        status: 1
-                    },
-                    limit: 20
-                });
-            }
+            activeItems = await sendApi.send({
+                action: "getUsers", short: true, filter: {
+                    _id: userInfo._id,
+                },
+                select: {
+                    _id: 1,
+                    subscribed: 1,
+                    status: 1
+                },
+                limit: 20
+            });
         }
         initReload()
     }
@@ -95,12 +74,12 @@ const start = function (userInfo, ID = "mainBlock") {
             fn.initData.lenta_users(Static)
             profilePage = "aboutUser"
 
-                Variable.PageUserProfileMyLenta = await fn.restApi.getPost({short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
+                Variable.PageUserProfileMyLenta = await fn.restApi.getPost({short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
 
-                Variable.PageUserProfileQuestions = await fn.restApi.getQuestions({short: true, cache: true, name: "PageUserProfileQuestions", filter: {author: userInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10})
+                Variable.PageUserProfileQuestions = await fn.restApi.getQuestions({short: true, cache: false, name: "PageUserProfileQuestions", filter: {author: userInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10})
 
                 Variable.PageUserProfileAnswers = await sendApi.send({
-                    action: "getAnswers", short: true, cache: true, name: "PageUserProfileAnswers", filter: {
+                    action: "getAnswers", short: true, cache: false, name: "PageUserProfileAnswers", filter: {
                         author: userInfo._id,
                     },
                     select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
@@ -108,7 +87,7 @@ const start = function (userInfo, ID = "mainBlock") {
                 });
 
                 Variable.PageUserProfileFriends = await sendApi.send({
-                    action: "getUsers", short: true, cache: true, name: "PageUserProfileFriends", filter: {
+                    action: "getUsers", short: true, cache: false, name: "PageUserProfileFriends", filter: {
                         _id: userInfo._id,
                     },
                     select: {
@@ -120,7 +99,7 @@ const start = function (userInfo, ID = "mainBlock") {
                 });
 
                 Variable.PageUserProfileSubscribers = await sendApi.send({
-                    action: "getUsers", short: true, cache: true, name: "PageUserProfileSubscribers", filter: {
+                    action: "getUsers", short: true, cache: false, name: "PageUserProfileSubscribers", filter: {
                         subscribed: userInfo._id,
                     },
                     limit: 20
