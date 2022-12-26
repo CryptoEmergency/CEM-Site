@@ -18,6 +18,8 @@ import {
 
 import { BlockLentaUsers } from '@component/blocks/index.js';
 import { NotFound } from "@component/element/index.js";
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
 
 let Static, selectAspect;
 
@@ -397,86 +399,168 @@ const sendPhoto = async function (crooper, index) {
   };
 
 
-  const loadPhoto = async function (file, type, xhr) {
+  const loadPhoto = async function (file, type, xhr ) {
+
 
   let dataURL;
-  let fileImg = file;
-  const reader = new FileReader();
-  reader.addEventListener("load", () => {
-      // convert image file to base64 string
-      dataURL = reader.result;
-  }, false);
+
+  let imageUrl
+  let image
+
+  const newImg = new Image();
+
+  async function cropImage(imagePath, type, xhr) {
+    let fileImg ;
+    let sx,sy,sw,sh,dx,dy,dw,dh
   
-  if (fileImg) {
-      reader.readAsDataURL(fileImg);
-  }
+      const originalImage = new Image();
+      originalImage.src = imagePath;
+   
+  
+      const canvas = document.getElementById('canvas'); 
+      const ctx = canvas.getContext('2d');
+   
+  
+      originalImage.addEventListener('load', async function() {
+   
+          let height = originalImage.height;
+          let width = originalImage.width;
+      
+         //прямоугольник c длинной
+         if(width>height)
+         {
+           sx = (width - height)/2
+           sy = 1
+           sw = height
+           sh = height
+           dx = 0
+           dy = 0
+           dw = height
+           dh = height
+           
+         }
+         //прямоугольник c высотой
+         if(height>width)
+         {
+           sx = 1
+           sy = (height - width)/2
+           sw = width
+           sh = width
+           dx = 0
+           dy = 0
+           dw = width
+           dh = width
+         }
+  
+         canvas.width = dw;
+         canvas.height = dh;
+          
+  
+          //draw the image
+         await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh); 
+       
+  
+          newImg.src = document.getElementById('canvas').toDataURL();
 
-  let previewObj = {
-      src: dataURL,
-      type: "image",
-      upload: 0,
-      size: 0
-  };
-
-  Static.mediaInputs.show = true;
-  Static.mediaInputs.value.push(previewObj);
-  let numItem = Static.mediaInputs.value.length - 1;
-
-  let nameFile = "file.png"
-  if (fileImg.name) {
-      nameFile = fileImg.name
-  }
-  console.log(fileImg)
-  console.log(nameFile)
 
 
+         await fetch(newImg.src)
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new File([blob], 'dot.png', blob)
+            fileImg = file
+          })
+        
+        
+        
+          const reader = new FileReader();
+          reader.addEventListener("load", () => {
+              // convert image file to base64 string
+              dataURL = reader.result;
+          }, false);
+          
+          if (fileImg) {
+              reader.readAsDataURL(fileImg);
+          }
+        
+         let previewObj = {
+              src: dataURL,
+              type: "image",
+              upload: 0,
+              size: 0
+            };
+        
+        
+          Static.mediaInputs.show = true;
+          Static.mediaInputs.value.push(previewObj);
+          let numItem = Static.mediaInputs.value.length - 1;
+        
+          let nameFile = "file.png"
+          if (fileImg.name) {
+              nameFile = fileImg.name
+          }
+        
+          const formData = new FormData()
+          formData.append('media', fileImg, nameFile);
+        
+          xhr = new XMLHttpRequest()
+          xhr.open('POST', `/upload/${type}/`)
+          xhr.onload = async function () {
+              Static.mediaInputs.show = true;
+              if (!this.response) {
+                  return
+              }
+              let response = JSON.parse(this.response);
+              Static.mediaInputs.value[numItem] = {
+                  aspect: Static.mediaInputs.selectAspect,
+                  type: response.mimetype.split("/")[0],
+                  name: response.name
+              }
+            
+              Static.isValid = true;
+              initReload();
+        
+          }
+
+          xhr.upload.onprogress = function (e) {
+            let contentLength;
+            if (e.lengthComputable) {
+                contentLength = e.total;
+            } else {
+                contentLength = parseInt(
+                    e.target.getResponseHeader(
+                        "x-decompressed-content-length"
+                    ),
+                    10
+                );
+            }
+      
+            if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                Static.mediaInputs.value.splice(numItem, 1);
+                initReload()
+                return
+            }
+            Static.mediaInputs.value[numItem].upload = e.loaded
+            Static.mediaInputs.value[numItem].size = contentLength;
+            initReload();
+        }
+           await xhr.send(formData)
+      });
+  
+ 
 
   
-  const formData = new FormData()
-  formData.append('media', fileImg, nameFile);
-
-  xhr = new XMLHttpRequest()
-  xhr.open('POST', `/upload/${type}/`)
-  xhr.onload = async function () {
-      Static.mediaInputs.show = true;
-      if (!this.response) {
-          return
-      }
-      let response = JSON.parse(this.response);
-      Static.mediaInputs.value[numItem] = {
-          aspect: Static.mediaInputs.selectAspect,
-          type: response.mimetype.split("/")[0],
-          name: response.name
-      }
-    
-      Static.isValid = true;
-      initReload();
-      // console.log('=af134a=', response)
   }
-  xhr.upload.onprogress = async function (e) {
-      let contentLength;
-      if (e.lengthComputable) {
-          contentLength = e.total;
-      } else {
-          contentLength = parseInt(
-              e.target.getResponseHeader(
-                  "x-decompressed-content-length"
-              ),
-              10
-          );
-      }
+  
+    imageUrl = URL.createObjectURL(file);
+    image = document.createElement("img");
+    image.src = imageUrl;
+  
+  
+  await cropImage(image.src, type, xhr) ;
+  
 
-      if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
-          Static.mediaInputs.value.splice(numItem, 1);
-          initReload()
-          return
-      }
-      Static.mediaInputs.value[numItem].upload = e.loaded
-      Static.mediaInputs.value[numItem].size = contentLength;
-      initReload();
-  }
 
-  xhr.send(formData)
 };
 
   let el = [];
@@ -568,10 +652,13 @@ const sendPhoto = async function (crooper, index) {
      
 
       return (
+        
         <div class={[
           "c-userpostcreate",
           Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
         ]}>
+          <canvas hidden id="canvas"></canvas>
+       
           <h3 class="c-userpostcreate__title">{Variable.lang.h.createPost}</h3>
           <form id="userPostCreate" class="c-userpostcreate__form" onsubmit={sendAuthorization}>
             <input class="c-userpostcreate__submit" hidden type="submit" />
@@ -689,7 +776,7 @@ const sendPhoto = async function (crooper, index) {
               }}
               multiple={function(){Static.photo}}
       
-              onclickPhoto={function (e) {
+              onclickPhoto={async function (e) {
                 if (this.files.length == 0) {
                   return;
                 }
@@ -709,7 +796,7 @@ const sendPhoto = async function (crooper, index) {
                 else{
                   for(let i = 0 ; i<this.files.length; i++)
                   {
-                       loadPhoto(this.files[i], "posts");
+                      await loadPhoto(this.files[i], "posts");
                   }
                 }
                 this.value = '';

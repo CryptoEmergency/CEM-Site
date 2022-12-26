@@ -19,8 +19,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
         item.type == "image"
           ?
           <div class="create_post_photo_preview">
+
             <img
-              class="fullsize media"
+              class={"fullsize media"}
               src={
                 item.src !== undefined
                   ? item.src
