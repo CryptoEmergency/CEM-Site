@@ -78,7 +78,6 @@ const sendQuestion = async function (Static) {
 };
 
 
-
 const sendPhoto = async function (Static,crooper) {
   if (!crooper) {
     return
@@ -187,7 +186,7 @@ const ModalAskQuestion = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
 
 
-
+/*
   const downloadFile = (e) => {
     let type;
     if (e.target.localName === "div") {
@@ -203,7 +202,7 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio().click();
     }
   };
-
+*/
   
   init(
     () => {
@@ -238,13 +237,27 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio = Variable.setRef();
 
       selectAspect = null;
-
+      Static.close = true
   
     },
     () => {
       return (
-        <div class="c-modal c-modal--open" id="ModalAskQuestion">
-          <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(Static.close){ 
+  
+          fn.modals.close(ID)
+        }}}>
+          <section class="c-modal__dialog" onmouseover={function(){
+           
+            Static.close = false
+
+          }}
+            onmouseout={function(){
+              
+              Static.close = true
+     
+            }
+            }
+            >
             <header class="c-modal__header">
               <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>
               <button
@@ -255,7 +268,7 @@ const ModalAskQuestion = function (data, ID) {
                 }}
               ></button>
             </header>
-            <div class="c-modal__body">
+            <div class="c-modal__body" >
               <div class="c-askquestion">
                 {/* <form id="askQuestion" onsubmit={sendQuestion}> */}
            
