@@ -193,7 +193,7 @@ const start = function (data, ID) {
                 rows: 1,
                 adaptive: 3,
             }
-
+            Static.elMedia = {}
             Static.textInputs = {
                 value: "",
                 show: false,
@@ -228,7 +228,7 @@ const start = function (data, ID) {
                     'message.showDate': -1
                 }
             });
-            console.log(Static.chatsList)
+            console.log(Static)
             // console.log('=08e20a=', Static.chatsList)
             if (Variable.Static.startChatsID) {
                 let existingChat = false
