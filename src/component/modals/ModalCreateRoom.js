@@ -311,9 +311,22 @@ const sendPhoto = async function (crooper, index) {
       active = "inactive_form_button"
     }
 
+
     return (
-      <div class="c-modal c-modal--open" id="ModalCreateRoom">
-        <section class="c-modal__dialog">
+      <div class="c-modal c-modal--open" id="ModalCreateRoom" onclick={function(e){ if(close){ 
+  
+        fn.modals.close(ID)
+      }}}>
+        <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+
+         }}
+           onmouseout={function(){
+             
+             close = true
+    
+           }}>
           <header class="c-modal__header">
             <div class="complain_modal">
               <h4>Создать комнату</h4>

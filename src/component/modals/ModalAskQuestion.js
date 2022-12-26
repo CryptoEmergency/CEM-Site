@@ -23,7 +23,8 @@ const changeInput = function (Static,e) {
     Static.question.error = Variable.lang.error_div.maxSymbol;
   }else if(e.length>=5 && e.length<=500 && e.length!== 0)
   { 
-    if(e.trim().length > 5 )
+   
+    if(e.trim().length > 4 && e.trim()!=="")
     {
       Static.question.error = ""
     }
@@ -32,8 +33,6 @@ const changeInput = function (Static,e) {
     }
   
   }
- 
-
   if (Static.question.error == "") {
     Static.isValid = true;
   } else {
@@ -78,10 +77,6 @@ const sendQuestion = async function (Static) {
   return;
 };
 
-const changeTextQuestion = (Static,e) => {
-  // let text = wrapTextWithATag(e.target.innerText.trim());
-  Static.textQuestion.value = e;
-};
 
 const sendPhoto = async function (Static,crooper) {
   if (!crooper) {
@@ -191,7 +186,7 @@ const ModalAskQuestion = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
 
 
-
+/*
   const downloadFile = (e) => {
     let type;
     if (e.target.localName === "div") {
@@ -207,7 +202,7 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio().click();
     }
   };
-
+*/
   
   init(
     () => {
@@ -242,13 +237,28 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio = Variable.setRef();
 
       selectAspect = null;
-
+      
   
     },
     () => {
+      let close = true
+
       return (
-        <div class="c-modal c-modal--open" id="ModalAskQuestion">
-          <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(close){ 
+  
+          fn.modals.close(ID)
+        }}}>
+          <section class="c-modal__dialog" onmouseover={function(){
+           
+            close = false
+
+          }}
+            onmouseout={function(){
+              
+              close = true
+     
+            }}
+            >
             <header class="c-modal__header">
               <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>
               <button
@@ -259,7 +269,7 @@ const ModalAskQuestion = function (data, ID) {
                 }}
               ></button>
             </header>
-            <div class="c-modal__body">
+            <div class="c-modal__body" >
               <div class="c-askquestion">
                 {/* <form id="askQuestion" onsubmit={sendQuestion}> */}
            
@@ -292,7 +302,7 @@ const ModalAskQuestion = function (data, ID) {
                         type="text"
                         data-type="question"
                         oninput={function(e){
-                          
+                          Static.question.value = this.value
                           changeInput(Static,this.value)}}
                         class="c-form__field create_post_chapter create_post_title"
                         placeholder={Variable.lang.placeholder.titleAsk}
@@ -304,9 +314,12 @@ const ModalAskQuestion = function (data, ID) {
                           return (
                             <div
                               contenteditable="true"
-                              oninput={function(e){
+                              oninput={function(){
+
+                  
+                                Static.textQuestion.value = this.textContent;
                           
-                                changeTextQuestion(Static,this.value)}}
+                               }}
                         
                               class="c-form__field create_post_chapter create_post_main_text"
                             ></div>

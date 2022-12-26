@@ -15,8 +15,20 @@ const ModalItemsMenu = function ({ items, author }, ID) {
 		null,
 		() => {
 			return (
-				<div class="c-modal c-modal--open" id="ModalContextMenu">
-					<section class="c-modal__dialog">
+				<div class="c-modal c-modal--open" id="ModalContextMenu" onclick={function(e){ if(close){ 
+  
+					fn.modals.close(ID)
+				  }}}>
+					<section class="c-modal__dialog" onmouseover={function(){
+           
+		   close = false
+
+		 }}
+		   onmouseout={function(){
+			 
+			 close = true
+	
+		   }}>
 						<div class="c-modal__body">
 							<ul class="c-actions">
 								{() => {
