@@ -455,12 +455,10 @@ const sendPhoto = async function (crooper, index) {
          canvas.width = dw;
          canvas.height = dh;
           
-  
-          //draw the image
          await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh); 
        
   
-          newImg.src = document.getElementById('canvas').toDataURL();
+          newImg.src = canvas.toDataURL();
 
 
 
