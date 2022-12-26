@@ -430,6 +430,18 @@ const start = function (data, ID) {
                                                                                     );
                                                                                 }
 
+                                                                                if (item.type == "audio" && !Array.isArray(item)) {
+                                                                                    return (
+                                                                                        <div class="swiper-slide">
+                                                                                            <AudioPlayer
+                                                                                                Static={Static}
+                                                                                                item={item}
+                                                                                                path={`/assets/upload/chat/`}
+                                                                                            />
+                                                                                        </div>
+                                                                                    );
+                                                                                }
+
                                                                                 if (item.type == "image" && !Array.isArray(item)) {
                                                                                     return (
                                                                                         <div class="swiper-slide">
@@ -463,7 +475,7 @@ const start = function (data, ID) {
                                                                             })
                                                                             return (
                                                                                 <Swiper
-                                                                                    className="swiper-post_media"
+                                                                                    className="swiper-chat"
                                                                                     options={swiperOptions}
                                                                                     // replace={changeToogle}
                                                                                     // replace={false}
