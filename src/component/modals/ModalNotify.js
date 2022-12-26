@@ -51,7 +51,7 @@ const ModalNotify = async function (data, ID) {
 		// console.log('=d68221=', currentNotify)
 		initReload()
 	}
-
+	
 	init(
 		() => {
 			notify = Variable.myInfo.notifyQuestions;
@@ -61,13 +61,26 @@ const ModalNotify = async function (data, ID) {
 				awards: false,
 				system: false
 			};
+		
 		},
 		() => {
-
+			let close = true
 			// console.log(notify)
 			return (
-				<div class="c-modal c-modal--open" id="ModalNotify">
-					<section class="c-modal__dialog">
+				<div class="c-modal c-modal--open" id="ModalNotify" onclick={function(e){ if(close){ 
+  
+					fn.modals.close(ID)
+				  }}}>
+					<section class="c-modal__dialog" onmouseover={function(){
+           
+		   close = false
+
+		 }}
+		   onmouseout={function(){
+			 
+			close = true
+	
+		   }}>
 						{/* <header class="c-modal__header">
 							<h4>Уведомления</h4>
 							<button

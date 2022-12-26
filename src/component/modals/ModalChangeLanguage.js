@@ -27,13 +27,25 @@ const ModalChangeLanguage = function (data, ID) {
 
     }
   }
-
+  let close = true
   init(
     null,
     () => {
       return (
-        <div class="c-modal c-modal--open" id="changeLanguage">
-          <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="changeLanguage"  onclick={function(e){ if(close){ 
+  
+          fn.modals.close(ID)
+        }}}>
+          <section class="c-modal__dialog"  onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseout={function(){
+           
+          close = true
+      
+           }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title">{Variable.lang.h.modal_listLanguage}</h2>
               <button

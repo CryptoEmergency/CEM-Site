@@ -8,10 +8,10 @@ import {
     init
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-
+import { fn } from "@src/functions/index.js";
 
 const ModalLangChange = function (data, ID) {
-
+    let close = true
     init(
         null,
         ()=>{

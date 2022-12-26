@@ -237,26 +237,27 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio = Variable.setRef();
 
       selectAspect = null;
-      Static.close = true
+      
   
     },
     () => {
+      let close = true
+
       return (
-        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(Static.close){ 
+        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(close){ 
   
           fn.modals.close(ID)
         }}}>
           <section class="c-modal__dialog" onmouseover={function(){
            
-            Static.close = false
+            close = false
 
           }}
             onmouseout={function(){
               
-              Static.close = true
+              close = true
      
-            }
-            }
+            }}
             >
             <header class="c-modal__header">
               <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>
