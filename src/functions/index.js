@@ -164,10 +164,10 @@ fn.timerTik = async function () {
     if(response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length > 0){
       let [Static] = fn.GetParams({ ID: "mainBlock", actual: true })
       if (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") {
-        console.log(response.info.myInfo.chatMessage)
-        console.log(Static)
         if(Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author){
-          Static.messageList.list_records[0].message.unshift(response.info.myInfo.chatMessage[0])
+          if(Static.messageList.list_records[0].message[0]._id != response.info.myInfo.chatMessage[0]._id){
+            Static.messageList.list_records[0].message.unshift(response.info.myInfo.chatMessage[0])
+          }
         }
         Static.chatsList.list_records.forEach(chat => {
           if(chat.users[0]._id == response.info.myInfo.chatMessage[0].author || chat.users[1]._id == response.info.myInfo.chatMessage[0].author){
