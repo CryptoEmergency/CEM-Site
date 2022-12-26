@@ -793,7 +793,7 @@ const sendPhoto = async function (crooper, index) {
                 }
                 else{
                   for(let i = 0 ; i<this.files.length; i++)
-                  {
+                  {  document.getElementById("spinner").hidden = false
                       await loadPhoto(this.files[i], "posts");
                   }
                 }

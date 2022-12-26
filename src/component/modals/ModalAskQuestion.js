@@ -14,7 +14,7 @@ import svg from '@assets/svg/index.js';
 let inputImg, inputVideo, inputAudio, selectAspect;
 
 const changeInput = function (Static,e) {
- 
+  Static.close = false
   if (e.length == 0) {
     Static.question.error = Variable.lang.error_div.not_empty_input;
   } else if (e.length < 5) {
@@ -241,21 +241,21 @@ const ModalAskQuestion = function (data, ID) {
   
     },
     () => {
-      let close = true
+       Static.close = true
 
       return (
-        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(close){ 
-  
-          fn.modals.close(ID)
+        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(Static.close){ 
+
+         fn.modals.close(ID)
         }}}>
           <section class="c-modal__dialog" onmouseover={function(){
            
-            close = false
+           Static.close = false
 
           }}
             onmouseout={function(){
               
-              close = true
+              Static.close = true
      
             }}
             >
@@ -316,7 +316,7 @@ const ModalAskQuestion = function (data, ID) {
                               contenteditable="true"
                               oninput={function(){
 
-                  
+                                Static.close = false
                                 Static.textQuestion.value = this.textContent;
                           
                                }}
