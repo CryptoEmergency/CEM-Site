@@ -17,6 +17,7 @@ const changeInput = (e) => {
 
 // let Static = {}
 const ModalSelectCountry = function (data, ID) {
+  let close = true
   let Static = fn.GetParams({ data, ID })
 
   allCountries = Variable.allCountries;
@@ -41,9 +42,23 @@ const ModalSelectCountry = function (data, ID) {
   init(
     null,
     () => {
+ 
       return (
-        <div class="c-modal c-modal--open" id="ModalSelectCountry">
-          <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="ModalSelectCountry"
+        nclick={function(e){ if(close){ 
+
+          fn.modals.close(ID)
+         }}}>
+          <section class="c-modal__dialog" onmouseover={function(){
+           
+        close = false
+
+          }}
+          onmouseleave={function(){
+              
+             close = true
+     
+            }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title">{Variable.lang.h.modal_changeCountry}</h2>
               <button

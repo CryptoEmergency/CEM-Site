@@ -11,7 +11,7 @@ import {
 const ModalCreateRoom = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
-
+  let close = true
   const loadPhoto = async function (file, type, xhr) {
     
     let dataURL;
@@ -322,7 +322,7 @@ const sendPhoto = async function (crooper, index) {
            close = false
 
          }}
-           onmouseout={function(){
+         onmouseleave={function(){
              
              close = true
     

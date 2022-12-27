@@ -141,7 +141,7 @@ const start = function (data, ID) {
                   </span>
                   <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateAugust2022}</p>
                 </a>
-                <div class="c-aboutus__project">
+                {/*<div class="c-aboutus__project">
                   <img class="c-aboutus__banner" src={images["about_us_banner6"]} />
                   <span class="c-aboutus__projectcompany">
                     {Variable.lang.span.aboutProjectNameTwo}
@@ -154,7 +154,7 @@ const start = function (data, ID) {
                     crypto vpn
                   </span>
                   <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateTwo}</p>
-                </div>
+      </div>*/}
               </div>
             </div>
           </div>

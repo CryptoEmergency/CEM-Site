@@ -22,7 +22,7 @@ const ModalRecoverPass = function(data, ID){
 
 
     let Static = fn.GetParams({ data, ID })
-
+    let close = true
     init(()=>{
 
         Static.email = {
@@ -45,8 +45,20 @@ return true
     },
     ()=>{
 return(
-        <div class="c-modal c-modal--open" id="ModalRecoverPass">
-        <section class="c-modal__dialog" >
+        <div class="c-modal c-modal--open" id="ModalRecoverPass"   onclick={function(e){ if(close){ 
+  
+            fn.modals.close(ID)
+            }}}>
+        <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+         onmouseleave={function(){
+           
+          close = true
+      
+           }}>
             <header class="c-modal__header">
                 <h2 class="c-modal__title">Восстановление пароля</h2>
                 <button

@@ -30,11 +30,12 @@ const start = function () {
     init(
         async () => {
             awards = await sendApi.send({ action: "getAwards", short: true, filter: { kindGroup: true } });
+    
         },
         () => {
             // console.log('=76f689=', awards.kindGroup.group, Object.values(awards.kindGroup.group))
             let tmp = Object.values(awards.kindGroup.group)
-            // console.log('=9dcce1=', tmp)
+          
             // awards.kindGroup.one.push(...awards.kindGroup.one)
             return (
                 <div
@@ -48,6 +49,7 @@ const start = function () {
                         <div class="awards_body">
                             {() => {
                                 let awardsItems = awards.kindGroup.one[0]
+                         
                                 return (
                                     <div class="award swiper-slide">
                                         <img src={svg["badge/" + awardsItems.icon.split(".")[0]]} class="awards_small_badge" />
@@ -87,6 +89,7 @@ const start = function () {
                                                         <div>
                                                             <div class="progress_bar green"></div>
                                                             <p class="progress_bar_label green-grad">{Variable.lang.p.receive}</p>
+                                                      
                                                         </div>
                                                     )
                                                 } else {
@@ -141,7 +144,8 @@ const start = function () {
                                                             }}
                                                             <div class="award_description">
                                                                 <p class="awards_title">{Variable.lang.awards[awardsItems.name]}</p>
-                                                                <p class="awards_text">{Variable.lang.awards[awardsItems.description]}</p>
+                                                                <p class="awards_text">{awardsItems.count} {Variable.lang.awards[awardsItems.description]}</p>
+
                                                                 {() => {
                                                                     if (awardsItems.have >= awardsItems.count) {
                                                                         return (

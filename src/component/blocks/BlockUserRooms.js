@@ -430,7 +430,7 @@ async function ShowMessage(Static) {
   if (Static.Rooms.settingsroom.status) {
     if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
-       console.log(1)
+      
        initReload()
         return Static.Rooms.message.map(function (userrooms, i) {
 

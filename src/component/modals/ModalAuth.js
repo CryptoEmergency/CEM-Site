@@ -151,7 +151,7 @@ const ModalAuth = function (data, ID) {
 
 
 
-
+let close = true
 
 
     init(
@@ -237,8 +237,21 @@ const ModalAuth = function (data, ID) {
         () => {
            // console.log("=========INIT========", Static, "=====SECOND======")
             return (
-                <div class="c-modal c-modal--open" id="ModalAuth">
-                    <section class="c-modal__dialog" ref={elem}>
+                <div class="c-modal c-modal--open" id="ModalAuth" onclick={function(e){ if(close){ 
+  
+                    fn.modals.close(ID)
+                    }}}>
+                    <section class="c-modal__dialog" ref={elem}  onmouseover={function(){
+        
+        close = false
+ 
+
+      }}
+        onmouseleave={function(){
+         
+         close = true
+
+        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2>
                             <button

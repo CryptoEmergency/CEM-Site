@@ -332,9 +332,12 @@ fn.getDateFormat = function (data, type) {
 
 fn.siteLink = function (e) {
   let link
+ 
   if (typeof e == "string") {
     link = e
+  
   } else {
+   // console.log(e)
     e.preventDefault();
     if (!e.currentTarget || !e.currentTarget.href) {
       console.error("Not have href")
@@ -344,6 +347,7 @@ fn.siteLink = function (e) {
   }
   // console.log('=fc61e3=', link, window.location.href, Variable.dataUrl)
   if (link == window.location.href || link == Variable.dataUrl.href) {
+
     initGo("newPage")
     // window.scrollTo({
     //   top: 0,
@@ -371,11 +375,13 @@ fn.checkValid = function (Static, Array) {
 
 fn.siteLinkModal = async function (e, data) {
   let link
+
   if (typeof e == "string") {
     link = e
   } else {
     e.preventDefault();
     e.stopPropagation();
+  
     if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
       console.error("Not have href")
       return

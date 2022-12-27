@@ -19,9 +19,22 @@ const sendInBlackList = async (info) => {
   let response = await sendApi.create("setUsers", data);
 };
 const ModalBlackList = function (data, reload) {
+  let close = true
   return (
-    <div class="c-modal c-modal--open" id="ModalBlackList">
-      <section class="c-modal__dialog">
+    <div class="c-modal c-modal--open" id="ModalBlackList" onclick={function(e){ if(close){ 
+  
+      fn.modals.close(ID)
+      }}}>
+      <section class="c-modal__dialog"  onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
         <header class="c-modal__header">
           <h2 class="c-modal__title">{Variable.lang.text.confirmBlockUser}</h2>
           <button

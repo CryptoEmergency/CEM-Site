@@ -10,7 +10,7 @@ let inputImg,
     inputVideo,
     inputAudio
 
-const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple=false, iconPhoto = false  }) {
+const MediaButton = function ({onclickAll, onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple=false, iconPhoto = false  }) {
 
     return (
         <div class="c-mediabtn create_post_control_block">
@@ -22,6 +22,25 @@ const MediaButton = function ({ onclickText, onclickPhoto, onclickVideo, onclick
                         onclick={onclickText}
                     >
                         <img class="c-mediabtn__icon" src={svg["post_text"]} />
+                    </div>
+                    :
+                    null
+            }
+            {
+                typeof onclickAll == "function"
+                    ?
+                    <div class="c-mediabtn__action createPostImageCreator create_post_control_item" onclick={() => {
+                        inputImg.click();
+                    }}>
+                        <img class="c-mediabtn__icon" src={svg[`${iconPhoto ? iconPhoto : "post_photo"}`]} />
+                        <input
+                            style="display: none;"
+                            class="c-mediabtn__hidefield createPostImageInput"
+                            onchange={onclickAll}
+                            type="file"
+                            Element={($el) => { inputImg = $el }}
+                            multiple={multiple}
+                        />
                     </div>
                     :
                     null

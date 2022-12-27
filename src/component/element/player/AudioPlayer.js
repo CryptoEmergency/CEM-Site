@@ -19,6 +19,7 @@ const formatTime = function (time) {
 }
 
 const AudioPlayer = function ({ Static, item, path }) {
+  console.log(Static, item, path)
   if (!Static.elMedia[item._id]) {
     Static.elMedia[item._id] = {}
   }

@@ -21,6 +21,7 @@ const ModalUserInfoEdit = function (userInfo, ID) {
     fn.initData.ModalUserInfoEdit(Static, userInfo, {})
    // console.log('dwa', userInfo, Static)
     //fn.initData.generate(["lang", "country", "group", "online"])
+    let close = true
     init(
         () => {
             Static = {
@@ -87,8 +88,20 @@ const ModalUserInfoEdit = function (userInfo, ID) {
         },
         () => {
             return (
-                <div class="c-modal c-modal--open">
-                    <section class="c-modal__dialog">
+                <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
+  
+                    fn.modals.close(ID)
+                    }}}>
+                    <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+         onmouseleave={function(){
+           
+          close = true
+      
+           }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.button.edit}</h2>
                             <button

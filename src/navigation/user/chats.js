@@ -193,7 +193,7 @@ const start = function (data, ID) {
                 rows: 1,
                 adaptive: 3,
             }
-
+            Static.elMedia = {}
             Static.textInputs = {
                 value: "",
                 show: false,
@@ -228,7 +228,7 @@ const start = function (data, ID) {
                     'message.showDate': -1
                 }
             });
-            console.log(Static.chatsList)
+           // console.log(Static)
             // console.log('=08e20a=', Static.chatsList)
             if (Variable.Static.startChatsID) {
                 let existingChat = false
@@ -430,6 +430,18 @@ const start = function (data, ID) {
                                                                                     );
                                                                                 }
 
+                                                                                if (item.type == "audio" && !Array.isArray(item)) {
+                                                                                    return (
+                                                                                        <div class="swiper-slide">
+                                                                                            <AudioPlayer
+                                                                                                Static={Static}
+                                                                                                item={item}
+                                                                                                path={`/assets/upload/chat/`}
+                                                                                            />
+                                                                                        </div>
+                                                                                    );
+                                                                                }
+
                                                                                 if (item.type == "image" && !Array.isArray(item)) {
                                                                                     return (
                                                                                         <div class="swiper-slide">
@@ -463,7 +475,7 @@ const start = function (data, ID) {
                                                                             })
                                                                             return (
                                                                                 <Swiper
-                                                                                    className="swiper-post_media"
+                                                                                    className="swiper-chat"
                                                                                     options={swiperOptions}
                                                                                     // replace={changeToogle}
                                                                                     // replace={false}
@@ -496,7 +508,7 @@ const start = function (data, ID) {
                                             {/* <div id="emoji">@</div> */}
 
                                             <MediaButton
-                                                onclickPhoto={function () {
+                                                onclickAll={function () {
                                                     if (this.files.length == 0) {
                                                         return;
                                                     }

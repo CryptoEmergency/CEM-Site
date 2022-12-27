@@ -12,11 +12,15 @@ const ItemsMenu = function (data) {
   if (data) {
     if (data.items) {
       items = data.items
-    }
+    } 
+
     if (data.author) {
       author = data.author
     }
+ 
+    console.log(data)
   }
+
   return (
     <div
       class={["answer_additionally_toggle", "comment_icon_type-1", !items || !items.length ? "comment_inactive" : null]}

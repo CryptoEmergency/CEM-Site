@@ -41,7 +41,7 @@ const ModalChangeLanguage = function (data, ID) {
            close = false
     
          }}
-           onmouseout={function(){
+         onmouseleave={function(){
            
           close = true
       

@@ -449,6 +449,7 @@ itemsMenu.question = function (Static, item) {
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
+                         
                         },
                         text: Variable.lang.p.toBlackListConfirm,
                         button: Variable.lang.button.yes
@@ -467,6 +468,9 @@ itemsMenu.question = function (Static, item) {
                         action: async () => {
                             let response = await fn.restApi.setQuestions.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
+                            response =  await fn.restApi.getQuestions({short: true, cache: false, name: "PageUserProfileQuestions", filter: {author: Variable.myInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10})
+                            Static.activeItems = response
+                              initReload()
                         },
                         text: Variable.lang.p.deleteQuestionConfirm,
                         button: Variable.lang.button.yes
@@ -515,8 +519,8 @@ itemsMenu.question = function (Static, item) {
     return items
 }
 
-itemsMenu.answer = function (Static, item, index) {
-   // console.log(Static, item, index)
+itemsMenu.answer = function (Static, item, active) {
+   
     const items =
         [
             {
@@ -589,14 +593,28 @@ itemsMenu.answer = function (Static, item, index) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
+              
                     modals.ModalConfirmAction({
                         action: async () => {
-                            let response = await fn.restApi.setAnswers.delete({ _id: item._id })
+                            let response =  await fn.restApi.setAnswers.delete({ _id: item._id })
+                       
                             Variable.DelModals("ModalConfirmAction")
+                           response = await sendApi.send({
+                                action: "getAnswers", short: true, filter: {
+                                    author: Variable.myInfo._id,
+                                },
+                                select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
+                                limit: 10
+                            });
+                            Static.activeItems = response
+                       
+                            initReload()
                         },
+
                         text: Variable.lang.p.deleteQuestionConfirm,
                         button: Variable.lang.button.yes
                     })
+                
                 }
             },
             {
@@ -926,7 +944,8 @@ itemsMenu.lenta_users = function (Static, item) {
                 type: "edit",
                 onclick: async (e) => {
                     fn.siteLink("/user/posts/" + item._id);
-                    return false
+              
+                return false
                     let response = await sendApi.send({
                         action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
                         filter: {
@@ -935,6 +954,7 @@ itemsMenu.lenta_users = function (Static, item) {
                         // select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 },
                         // limit: 12
                     })
+                
                     console.log('=055882=', response)
                     let data = response.list_records.filter((post) => {
                         return post._id == item._id
@@ -963,9 +983,9 @@ itemsMenu.lenta_users = function (Static, item) {
                     } else {
                         Static.isValid = false;
                     }
-                    initReload()
+                  //  initReload()
                     console.log('=ba91a4=', Static)
-                    initReload()
+                //    initReload()
                     // Переработать модалку
                     // Variable.SetModals(
                     //   {
