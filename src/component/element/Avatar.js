@@ -308,7 +308,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                   }
                   }
                 >
-                  <img class="" src={svg.settings_icon} width="20" height="20" />
+                  <img class="" src={svg.settings_avatar} width="20" height="20" />
                   {() => {
 
                     

@@ -130,7 +130,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a  onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
                                                     class="user_icon_mobile_visible user_icon"
                                                     href="/user/settings/">
-                                                    <img src={svg["settings_icon"]} />
+                                                    <img src={svg["settings_menu"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
                                                 </a>
                                                 <a class="user_icon_mobile_visible user_icon" href="#" onclick={
