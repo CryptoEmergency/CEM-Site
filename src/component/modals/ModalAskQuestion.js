@@ -184,7 +184,7 @@ const sendVideo = async function (files) {
 
 const ModalAskQuestion = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
-
+  let close = true
 
 /*
   const downloadFile = (e) => {
@@ -241,21 +241,21 @@ const ModalAskQuestion = function (data, ID) {
   
     },
     () => {
-       Static.close = true
+       
 
       return (
-        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(Static.close){ 
+        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(close){ 
 
          fn.modals.close(ID)
         }}}>
           <section class="c-modal__dialog" onmouseover={function(){
            
-           Static.close = false
+           close = false
 
           }}
-            onmouseout={function(){
+          onmouseleave={function(){
               
-              Static.close = true
+              close = true
      
             }}
             >

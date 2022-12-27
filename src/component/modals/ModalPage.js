@@ -21,8 +21,9 @@ import { ItemsMenu } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
-  
+
   let data = Variable.ModalsPage[ID].data
+ // console.log(data)
   // let mainId = item._id;
 
   initAfter(
@@ -107,8 +108,8 @@ const ModalPage = async function (ID, reload) {
 
                     <h5 class="c-fullnews__title">{data.title}</h5>
 
-                    <ItemsMenu items={data.items} author={data.author}
-                    />
+                    {<ItemsMenu items={data.items} author={data.author}
+                    />}
                     {/* <div class={`comment_icon_type-1 answer_additionally_toggle} `}>
                       <img class="answer_additionally_toggle_img" src={svg["points"]} />
                     </div> */}

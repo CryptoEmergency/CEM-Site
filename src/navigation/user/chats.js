@@ -228,7 +228,7 @@ const start = function (data, ID) {
                     'message.showDate': -1
                 }
             });
-            console.log(Static)
+           // console.log(Static)
             // console.log('=08e20a=', Static.chatsList)
             if (Variable.Static.startChatsID) {
                 let existingChat = false

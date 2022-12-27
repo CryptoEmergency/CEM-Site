@@ -38,7 +38,7 @@ const ModalMobileMainSettings = function (data, ID) {
         // youtube: false,
         tiktok: false
     }
-
+    let close = true
     init(
         () => {
             elem.telegram = Variable.setRef()
@@ -53,8 +53,21 @@ const ModalMobileMainSettings = function (data, ID) {
         },
         () => {
             return (
-                <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings">
-                    <section class="c-modal__dialog">
+                <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings" onclick={function(e){ if(close){ 
+  
+                    fn.modals.close(ID)
+                    }}}>
+                    <section class="c-modal__dialog"  onmouseover={function(){
+        
+        close = false
+ 
+
+      }}
+        onmouseleave={function(){
+         
+         close = true
+
+        }}>
                         <header class="c-modal__header">
                             {/* <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2> */}
                             <div
@@ -114,9 +127,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg["profile_icon-3"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
                                                 </a>
-                                                <a
-                                                    // onclick={Helpers.siteLink} 
-                                                    onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
+                                                <a  onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
                                                     class="user_icon_mobile_visible user_icon"
                                                     href="/user/settings/">
                                                     <img src={svg["settings_icon"]} />

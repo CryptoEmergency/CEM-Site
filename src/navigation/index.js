@@ -97,14 +97,7 @@ const start = function (data, ID) {
                                         const arrReturn = Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
                                             let course = Variable.Course.list_records[0][key]
                                             return (
-                                                <a
-                                                    href="/"
-                                                    // href={key == "cem" ? "https://www.bitmart.com/trade/en?layout=basic&symbol=CEM_USDT" : "/list-trade/"}
-                                                    rel="nofollow noopener"
-                                                    target="_self"
-                                                    // target={key == "cem" ? "_blank" : "_self"}
-                                                    class="c-currency"
-                                                >
+                                         <div  class="c-currency">
                                                     <div class="c-currency__icon">
                                                         <div class={`icon-color-${key}`}>
                                                             <img src={`/assets/icons/coins/${key}2.svg`} />
@@ -123,7 +116,7 @@ const start = function (data, ID) {
                                                             {/* <div class="c-currency__update">24h.</div> */}
                                                         </div>
                                                     </div>
-                                                </a>
+                                            </div>
                                             )
                                         })
                                         return arrReturn

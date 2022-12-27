@@ -320,6 +320,7 @@ BlockUserProfilePage.awards = function (Static, data) {
         return (<></>)
     }
 
+
     return (
         <div class="bl_one c-container" id="UserInfoAwards">
             <h2>{Variable.lang.h.reciveAwards}</h2>
@@ -327,6 +328,7 @@ BlockUserProfilePage.awards = function (Static, data) {
                 <div class="awards_body">
                     {
                         data.userInfo.awards.map((item, index) => {
+                         
                             let icon = item.icon.split(".")[0];
                             return (
                                 <div class="award">
@@ -334,7 +336,7 @@ BlockUserProfilePage.awards = function (Static, data) {
                                     <img src={svg[`badge/${icon}`]} class="awards_badge" />
                                     <div class="award_description">
                                         <p class="awards_title">{Variable.lang.awards[item.name]}</p>
-                                        <p class="awards_text">{Variable.lang.awards[item.description]}</p>
+                                        <p class="awards_text">{item.action.split("-")[1]} {Variable.lang.awards[item.description]}</p>
                                         <p class="progress_bar_label">{Variable.lang.p.receive}</p>
                                         <p class="progress_bar_label">{Helpers.getDateFormat(item.dateCreate)}</p>
                                     </div>
@@ -361,7 +363,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
             <h2>{Variable.lang.toggle.subscribers}</h2>
             <div class="friends_block">
                 {
-                    data.items.list_records.map((item, index) => {
+                    Static.activeItems.list_records.map((item, index) => {
                         return (
                             <div
                                 class="friend"
@@ -455,7 +457,7 @@ BlockUserProfilePage.friends = function (Static, data) {
             <h2>{Variable.lang.toggle.friends}</h2>
             <div class="friends_block">
                 {
-                    data.items.list_records[0].subscribed.map((item, index) => {
+                    Static.activeItems.list_records[0].subscribed.map((item, index) => {
                         return (
                             <div
                                 class="friend"
@@ -544,7 +546,6 @@ BlockUserProfilePage.answers = function (Static, data) {
         return (<></>)
     }
 
-
     return (
         <div class="bl_one c-container" id="UserInfoAnswers">
             <h2>{Variable.lang.h.sendAnswers}</h2>
@@ -555,7 +556,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                 <span>{Variable.lang.tableTitle.answer}</span>
             </div>
             {
-                data.items.list_records.map((item, index) => {
+                Static.activeItems.list_records.map((item, index) => {
                     return (
                         <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
                             <div class="your_answers_main">
@@ -595,7 +596,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                                 if (item.active) {
                                     return (
                                         <div data-action="yourAnswersOptional" class="your_answers_optional">
-                                            <ItemsMenu author={item.author} items={fn.itemsMenu.answer(Static, item, undefined)} />
+                                            <ItemsMenu author={item.author} items={fn.itemsMenu.answer(Static, item, data.items)} />
                                         </div>
                                     )
                                 } else {
@@ -609,7 +610,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                 })
             }
             {() => {
-                if (data.items.list_records.length < data.items.totalFound) {
+                if (Static.activeItems.list_records.length < Static.activeItems.totalFound) {
                     return (
                         <div class="crypto_exchanges_footer">
                             <a class="btn-view-all-a"
@@ -621,7 +622,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                                         },
                                         select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
                                         limit: 10,
-                                        offset: data.items.list_records.length
+                                        offset: Static.activeItems.list_records.length
                                     });
 
                                     Variable.PageUserProfileAnswers.list_records.push(...tmp.list_records)
@@ -664,7 +665,7 @@ BlockUserProfilePage.questions = function (Static, data) {
             </div>
             <div class="your_answers_table">
                 {
-                    data.items.list_records.map((item, index) => {
+                    Static.activeItems.list_records.map((item, index) => {
                         return (
                             <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
                                 <div class="your_answers_main">
@@ -750,7 +751,7 @@ BlockUserProfilePage.questions = function (Static, data) {
                 }
             </div>
             {() => {
-                if (data.items.list_records.length < data.items.totalFound) {
+                if (Static.activeItems.list_records.length < Static.activeItems.totalFound) {
                     return (
                         <div class="crypto_exchanges_footer">
                             <a class="btn-view-all-a"
@@ -762,7 +763,7 @@ BlockUserProfilePage.questions = function (Static, data) {
                                         },
                                         select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 },
                                         limit: 10,
-                                        offset: data.items.list_records.length
+                                        offset: Static.activeItems.list_records.length
                                     });
 
                                     Variable.PageUserProfileQuestions.list_records.push(...tmp.list_records)

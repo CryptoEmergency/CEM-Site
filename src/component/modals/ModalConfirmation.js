@@ -8,11 +8,12 @@ import {
     init
 } from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
-
+import { fn } from '@src/functions/index.js';
 
 
 //const ModalConfirmation = function ({ lang, wayReg, confirmationTimer, confirmAccount }) {
 const ModalConfirmation = function (data, ID) {
+    let close =true
     // console.log("ModalConfirmation");
     const showModalConfirmation = function (e) {
         e.stopPropagation()
@@ -22,8 +23,20 @@ const ModalConfirmation = function (data, ID) {
         null,
         ()=>{
             return (
-                <div class="c-modal c-modal--open">
-                    <section class="c-modal__dialog">
+                <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
+  
+                    fn.modals.close(ID)
+                  }}}>
+                    <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{lang.h.modal_resetСonfirm}</h2>
                             <button

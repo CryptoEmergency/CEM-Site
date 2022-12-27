@@ -20,26 +20,26 @@ import {
 const start = function (userInfo, ID = "mainBlock") {
     let [Static] = fn.GetParams({ userInfo, ID })
     Variable.Static.FooterShow = false
-    let profilePage,
-        activeItems
+    let profilePage
+    Static.activeItems = {}
     Variable.HeaderShow = true
     Variable.FooterShow = true
     Variable.showUserMenu = false
     const changeType = async function () {
-        console.log(userInfo)
+  
         if (this.dataset.profilePage == profilePage) {
             return
         }
         profilePage = this.dataset.profilepage
         if (profilePage == "lentaFriends") {
-            activeItems = await fn.restApi.getPost({short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
+            Static.activeItems = await fn.restApi.getPost({short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all"}, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
             // console.log('=2b1496=', activeItems)
 
         } else if (profilePage == "questions") {
-            activeItems = await fn.restApi.getQuestions({short: true, cache: false, name: "PageUserProfileQuestions", filter: {author: userInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10})
+            Static.activeItems = await fn.restApi.getQuestions({short: true, cache: false, name: "PageUserProfileQuestions", filter: {author: userInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10})
 
         } else if (profilePage == "answers") {
-            activeItems = await sendApi.send({
+            Static.activeItems = await sendApi.send({
                 action: "getAnswers", short: true, filter: {
                     author: userInfo._id,
                 },
@@ -47,14 +47,14 @@ const start = function (userInfo, ID = "mainBlock") {
                 limit: 10
             });
         } else if (profilePage == "subscribers") {
-            activeItems = await sendApi.send({
+            Static.activeItems = await sendApi.send({
                 action: "getUsers", short: true, filter: {
                     subscribed: userInfo._id,
                 },
                 limit: 20
             });
         } else if (profilePage == "friends") {
-            activeItems = await sendApi.send({
+            Static.activeItems = await sendApi.send({
                 action: "getUsers", short: true, filter: {
                     _id: userInfo._id,
                 },
@@ -412,7 +412,8 @@ const start = function (userInfo, ID = "mainBlock") {
 
                     <div class="userMainBlock">
                         {() => {
-                            return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
+                          
+                            return BlockUserProfilePage[profilePage](Static, { profilePage, userInfo })
                         }}
                     </div>
                 </div>

@@ -289,11 +289,11 @@ start = menuItem.map(function (key) {
                                             activeGroup = Static.elStartup
                                             // console.log('=f1cab4=',activeGroup)
                                             if (Static.elStartup.dataset.active == "true") {
-                                                console.log('=c15202=', "not active 2")
+                                            //    console.log('=c15202=', "not active 2")
                                                 Static.elStartup.dataset.active = false;
                                                 Static.elStartup.classList.remove("settings_list_item_active")
                                             } else {
-                                                console.log('=9ca0c2=', "active 2")
+                                            //    console.log('=9ca0c2=', "active 2")
                                                 Static.elStartup.dataset.active = true;
                                                 Static.elStartup.classList.add("settings_list_item_active")
                                             }

@@ -30,6 +30,7 @@ const mainHeader = async function () {
             //     Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
 
             // }
+         
         },
         () => {
             // initAfter(() => {

@@ -39,7 +39,7 @@ const changeComplaint = function (Static,checkdata) {
 const ModalComplainComment = function ( data , ID) {
 
   let [Static] = fn.GetParams({ data, ID })
-
+let close =true
   init(function(){ 
     Static.modal = {
     abusive: { check: false, complain: Variable.lang.select.complainOne },
@@ -61,8 +61,20 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
     active =  "inactive_form_button"
   }
   return (
-    <div class="c-modal c-modal--open" id="ModalComplainComment">
-      <section class="c-modal__dialog">
+    <div class="c-modal c-modal--open" id="ModalComplainComment" onclick={function(e){ if(close){ 
+  
+      fn.modals.close(ID)
+    }}}>
+      <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
         <header class="c-modal__header">
           <div class="complain_modal">
             <h4>{Variable.lang.h.modal_complain}</h4>

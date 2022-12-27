@@ -11,6 +11,7 @@ const arrVisitorAction = ["addanswer", "share", "copyurl", "subscription", "comp
 const arrRoleAction = ["deleteRole"]
 
 const ModalItemsMenu = function ({ items, author }, ID) {
+	let close = true
 	init(
 		null,
 		() => {
@@ -24,7 +25,7 @@ const ModalItemsMenu = function ({ items, author }, ID) {
 		   close = false
 
 		 }}
-		   onmouseout={function(){
+		   onmouseleave={function(){
 			 
 			 close = true
 	

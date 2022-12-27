@@ -33,7 +33,7 @@ const start = function (data, ID) {
                       :
                       Static.list_records.map(
                         (item) => {
-                          console.log("item", item, item[0], item[1])
+                       //   console.log("item", item, item[0], item[1])
                           return (
                             <a
                               class="blog_news_item">

@@ -17,6 +17,7 @@ const changeInput = (e) => {
 
 // let Static = {}
 const ModalSelectCountry = function (data, ID) {
+  let close = true
   let Static = fn.GetParams({ data, ID })
 
   allCountries = Variable.allCountries;
@@ -41,7 +42,7 @@ const ModalSelectCountry = function (data, ID) {
   init(
     null,
     () => {
-      let close = true
+ 
       return (
         <div class="c-modal c-modal--open" id="ModalSelectCountry"
         nclick={function(e){ if(close){ 
@@ -53,7 +54,7 @@ const ModalSelectCountry = function (data, ID) {
         close = false
 
           }}
-            onmouseout={function(){
+          onmouseleave={function(){
               
              close = true
      

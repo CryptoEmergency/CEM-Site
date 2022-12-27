@@ -159,6 +159,7 @@ const sendVideo = async function (files) {
 
 const ModalAnswer = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
+  let close = true
   init(
     () => {
       Variable.OutHideWindows.push([elem, "ModalAnswer"])
@@ -178,8 +179,20 @@ const ModalAnswer = function (data, ID) {
     },
     () => {
       return (
-        <div class="c-modal c-modal--open" id="ModalAnswer">
-          <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="ModalAnswer" onclick={function(e){ if(close){ 
+  
+					fn.modals.close(ID)
+				  }}}>
+          <section class="c-modal__dialog"  onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title">{Variable.lang.h.modal_answer}</h2>
               <button

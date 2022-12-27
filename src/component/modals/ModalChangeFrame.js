@@ -11,7 +11,7 @@ import { Avatar } from '@component/element/index.js';
 
 const ModalChangeFrame = function ({ author }, ID) {
     let [Static] = fn.GetParams({ data: { author } })
-
+    let close = true
     // console.log('=7637ad=', author)
     // console.log('=b20eed=', Variable)
 
@@ -26,8 +26,20 @@ const ModalChangeFrame = function ({ author }, ID) {
         },
         () => {
             return (
-                <div class="c-modal c-modal--open" id="addFrame">
-                    <section class="c-modal__dialog">
+                <div class="c-modal c-modal--open" id="addFrame" onclick={function(e){ if(close){ 
+  
+					fn.modals.close(ID)
+				  }}}>
+                    <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_changeFrame}</h2>
                             <button

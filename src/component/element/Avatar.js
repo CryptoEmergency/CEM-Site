@@ -120,10 +120,13 @@ const changeFrame = async function (frame) {
 
 const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false, frame = false }) {
 
-  // console.log('=132e7f=',author)
-
+  let myProfile = false
+  if(Variable.myInfo && Variable.myInfo._id == author._id){
+    myProfile = true
+  }
+  
   initOne(() => {
-    visibleSettings = false;
+
 
     formInputs = {
       mediaInputs: {
@@ -134,14 +137,17 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
 
   });
 
+  // console.log("=AVATAR=",author.nickname,myProfile,frame)
   if (!author || !author.nickname) {
+
     return (
       <></>
     )
   }
   return (
     <a
-      href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
+      // href={`${parent != "big_user_avatar" ? `/user/${author.nickname}` : ""}`}
+      href={`/user/${author.nickname}`}
       class={`
         ${parent == "big_user_avatar" ? ""
           : parent == "c-userpanel__icon--avatar" ? "c-userpanel__icon c-userpanel__icon--avatar"
@@ -152,16 +158,16 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
       `}
       // onclick={Helpers.siteLink}
       onclick={async (e) => {
-        if (frame && Variable.myInfo && Variable.myInfo.nickname == author.nickname) {
-          e.preventDefault();
-          //выбор новой рамки
-          changeFrame(frame);
-        } else if (!frame && Variable.myInfo && Variable.myInfo.nickname == author.nickname) {
-          // alert()
+
+    //     e.preventDefault();
+    // e.stopPropagation();
+    // return
+        if(myProfile){
           fn.siteLink(e)
-        } else {
+        }else{
           fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(author) })
         }
+
       }
       }
     >
@@ -182,7 +188,11 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
           }
         />
         {
-          settings && Variable.dataUrl.adress == "user" && parent == "big_user_avatar" ?
+
+          
+          // console.log("parent")
+          // settings && Variable.dataUrl.adress == "user" && parent == "big_user_avatar" ?
+          settings && parent == "big_user_avatar" ?
             <img
               class="c-avataricon__frame"
               src={
@@ -193,6 +203,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                   : svg["profile/frame/default"]
               }
               onClick={(e) => {
+           
                 e.stopPropagation();
                 e.preventDefault();
                 // console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
@@ -221,12 +232,15 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
             />
         }
         {() => {
-          if (settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar") {
+          // if (settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar") {
+            if (myProfile && settings){
             return (
               <div class="user_custimize_settings_container">
                 <div
                   class="c-avataricon__settings"
                   onclick={(e) => {
+
+
                     let author = Variable.myInfo
                     let items = [
                       {
@@ -296,7 +310,10 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                 >
                   <img class="" src={svg.settings_icon} width="20" height="20" />
                   {() => {
-                    if (author._id == Variable.myInfo._id) {
+
+                    
+                    // if (author._id == Variable.myInfo._id) {
+                      if (myProfile){
                       return (
                         <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
                           <p
@@ -408,6 +425,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                         </div>
                       )
                     } else {
+                     // console.log("ELSELLLLL")
                       return (
                         <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
                           <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>

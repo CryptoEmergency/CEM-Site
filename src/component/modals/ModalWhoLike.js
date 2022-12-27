@@ -7,12 +7,25 @@ import {
 import { Avatar } from "@component/element/Avatar.js";
 
 const ModalWhoLike = function ({ whoLike, type }, ID) {
+  let close = true
   init(
     null,
     () => {
       return (
-        <div class="c-modal c-modal--open" id="ModalWhoLike">
-          <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="ModalWhoLike" onclick={function(e){ if(close){ 
+  
+          fn.modals.close(ID)
+          }}}>
+          <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+         onmouseleave={function(){
+           
+          close = true
+      
+           }}>
             <header class="c-modal__header">
               <button
                 type="button"

@@ -21,7 +21,7 @@ let Static = {}
 
 const ModalUserInterests = function (userInfo, reload) {
    // console.log('dwa', userInfo)
-
+    let close = true
     init(
         () => {
             Static = {
@@ -46,8 +46,20 @@ const ModalUserInterests = function (userInfo, reload) {
         },
         () => {
             return (
-                <div class="c-modal c-modal--open">
-                    <section class="c-modal__dialog">
+                <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
+  
+                    fn.modals.close(ID)
+                    }}}>
+                    <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+         onmouseleave={function(){
+           
+          close = true
+      
+           }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_interests}</h2>
                             <button

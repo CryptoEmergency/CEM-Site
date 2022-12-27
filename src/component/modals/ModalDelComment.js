@@ -66,13 +66,25 @@ const ModalDelComment = function (data, ID) {
     //   });
     let response = await sendApi.create(info.typeSet, data);
   };
-
+let close = true
   init(
     null,
     ()=>{
       return (
-        <div class="c-modal c-modal--open" id="ModalDelComment">
-          <section class="c-modal__dialog">
+        <div class="c-modal c-modal--open" id="ModalDelComment" onclick={function(e){ if(close){ 
+  
+					fn.modals.close(ID)
+				  }}}>
+          <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
             <header class="c-modal__header">
               {/* не нашел  такую фразу */}
               <h2 class="c-modal__title">{Variable.lang.text.deletePageComment}</h2>

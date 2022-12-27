@@ -12,7 +12,7 @@ import { fn } from '@src/functions/index.js';
 import { Input, TextArea } from '@component/element/index.js';
 
 const ModalForumMessage = function (data, ID) {
-
+  let close = true
   let elem = Variable.setRef()
   let Static = {}
   const sendMessage = async function (e) {
@@ -107,8 +107,20 @@ const ModalForumMessage = function (data, ID) {
     },
     ()=>{
       return (
-        <div class="c-modal c-modal--open" id="ModalForumMessage">
-          <section class="c-modal__dialog" ref={elem}>
+        <div class="c-modal c-modal--open" id="ModalForumMessage" onclick={function(e){ if(close){ 
+  
+          fn.modals.close(ID)
+          }}}>
+          <section class="c-modal__dialog" ref={elem} onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title"></h2>
               <button

@@ -113,7 +113,7 @@ const start = function () {
                 response = await fn.restApi.getLottery({ limit: 1, filter: { nickname: Variable.myInfo.nickname } })
                 // response = await api({ type: "get", action: "getLottery", short: true, cache: true, limit: 1, filter: { nickname: Variable.myInfo.nickname } })
             }
-            console.log('response', response, Variable.myInfo.nickname)
+            //console.log('response', response, Variable.myInfo.nickname)
             if (response && response.totalFound != 0) {
                 ticketNumber = response.list_records[0].ticketNumber
             } else {

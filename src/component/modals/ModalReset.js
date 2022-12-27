@@ -44,12 +44,25 @@ const ModalReset = function ({ lang, changeCode, abbr, codeTitle, wayReset, chan
 
         }
     }
+    let close = true
     init(
         null,
         ()=>{
             return (
-                <div class="c-modal c-modal--open" id="ModalReset">
-                    <section class="c-modal__dialog">
+                <div class="c-modal c-modal--open" id="ModalReset" onclick={function(e){ if(close){ 
+  
+                    fn.modals.close(ID)
+                    }}}>
+                    <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+         onmouseleave={function(){
+           
+          close = true
+      
+           }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{`${showStepReset == "1" ? lang.h.modal_reset : lang.h.modal_resetСonfirm}`}</h2>
                             <button

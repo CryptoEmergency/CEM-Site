@@ -282,7 +282,7 @@ const sendPhoto = async function (crooper, index) {
     }
   }
 
-
+let close = true
   init(async function () {
 
 
@@ -336,8 +336,20 @@ const sendPhoto = async function (crooper, index) {
 
 
     return (
-      <div class="c-modal c-modal--open" id="ModalComplainComment">
-        <section class="c-modal__dialog">
+      <div class="c-modal c-modal--open" id="ModalComplainComment" onclick={function(e){ if(close){ 
+  
+        fn.modals.close(ID)
+        }}}>
+        <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
+    
+         }}
+           onmouseleave={function(){
+           
+           close = true
+      
+           }}>
           <header class="c-modal__header">
             <div class="complain_modal">
               <h4>Редактировать комнату</h4>

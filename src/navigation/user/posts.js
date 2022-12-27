@@ -591,7 +591,7 @@ const sendPhoto = async function (crooper, index) {
           let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
 
           Static.idEditPost = postForEdit._id;
-
+         
           if (postForEdit.text.length > 0) {
             Static.textInputs = {
               value: postForEdit.text,
@@ -647,7 +647,7 @@ const sendPhoto = async function (crooper, index) {
     },
 
     () => {
-     
+     console.log(Static.textInputs)
 
       return (
         
@@ -686,7 +686,7 @@ const sendPhoto = async function (crooper, index) {
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
                     oninput={(e) => changeTextPost(e, Static)}
-                  >
+                  >{Static.textInputs.value}
                     {/* {
                         Variable.dataUrl.params && !Static.startEditText
                           ?
