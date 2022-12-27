@@ -508,7 +508,7 @@ const start = function (data, ID) {
                                             {/* <div id="emoji">@</div> */}
 
                                             <MediaButton
-                                                onclickPhoto={function () {
+                                                onclickAll={function () {
                                                     if (this.files.length == 0) {
                                                         return;
                                                     }
