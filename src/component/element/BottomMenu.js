@@ -65,6 +65,7 @@ const BottomMenu = function () {
                             fn.siteLink(e)
                         } else {
                             fn.modals.ModalAuth()
+                            return false
                         }
                     }}>
                 </a>
@@ -130,7 +131,7 @@ const BottomMenu = function () {
                 <div data-action="user_cabinet_add_close" class="c-userpanel__close">
                     <img src={svg.close} />
                 </div>
-            </div> */}
+            </div>
             <div
                 id="toTop"
                 Element={($el) => { Variable.Static.elArrowTop = $el }}
@@ -151,7 +152,7 @@ const BottomMenu = function () {
                 }}
             >
                 <img src={svg.arrowTop} />
-            </div>
+            </div> */}
         </div >
     )
 };

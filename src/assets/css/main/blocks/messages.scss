@@ -228,6 +228,8 @@
 		padding-bottom: 63px;
 		margin-bottom: -63px;
 		position: relative;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
 
 		@media(max-width: 767px) {
 			padding-left: 10px;
@@ -238,23 +240,31 @@
 			&__field {
 				position: relative;
 				width: 100%;
+				padding: 10px;
+				background: #637AAF;
+				display: flex;
+				align-items: flex-end;
 
 				textarea {
 					width: calc(100% - 56px);
 					min-height: 41px;
 					padding-top: 7px;
 					padding-bottom: 7px;
+					border-radius: 30px !important;
+					border: 0;
+					background: #333E6C;
 				}
 			}
 
 			&__send {
-				position: absolute !important;
-				right: 1px;
-				top: 50%;
-				transform: translateY(-50%) !important;
+				height: 41px;
+				margin-left: 1px !important;
+				position: relative;
+				filter: none;
 				outline: none;
 				border: none;
 				background: transparent;
+				align-self: flex-end;
 			}
 		}
 
@@ -262,7 +272,7 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: stretch;
-			height: calc(100% - 20px);
+			height: 100%;
 		}
 
 		.companion {
@@ -272,10 +282,6 @@
 		}
 
 		.c-mediabtn {
-			position: absolute;
-			top: 50%;
-			right: 58px;
-			transform: translateY(-50%);
 			display: inline-flex;
 			margin-top: 0;
 			grid-gap: 0;
@@ -296,7 +302,7 @@
 			width: 38px;
 			height: 41px;
 			padding: 10px 6px;
-			background-image: url("../svg/icon/chat_micro.svg");
+			background-image: url("../svg/message_voice.svg");
 		}
 
 		.create_post_chapter {
@@ -791,7 +797,7 @@
 }
 
 button[data-type='voiceline'][data-page_type="chat"] {
-	background-image: url(../svg/chat_micro.svg);
+	background-image: url(../svg/message_voice.svg);
 	background-size: 45%;
 	background-position: center;
 	background-repeat: no-repeat;

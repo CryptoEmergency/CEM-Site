@@ -561,8 +561,10 @@ const sendPhoto = async function (crooper, index) {
 Static.photo = true
 Static.edittext =  ""
 Static.checked = true
+
   init(
     async () => {
+      Static.sendPhoto = true
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
@@ -678,34 +680,7 @@ else{
               >{Static.lang.name}</div>
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
-              {
-                Static.textInputs.show
-                  ?
-                  <div
-                    class="create_post_chapter create_post_main_text"
-                    contenteditable="true"
-                    oninput={function(e){
-                      Static.textInputs.value = this.textContent.trim()
-                      if(this.textContent.trim() || Static.mediaInputs.value.length > 0)
-                      {Static.isValid = true;
-                      } else {
-                        Static.isValid = false;
-                      }
-
-                    }
-                    }
-                  >{Static.edittext}
-                    {/* {
-                        Variable.dataUrl.params && !Static.startEditText
-                          ?
-                          Static.textInputs.value
-                          :
-                          null
-                      } */}
-                  </div>
-                  :
-                  null
-              }
+             
                
               {
                 Static.mediaInputs.show && Static.mediaInputs.value.length
@@ -714,20 +689,8 @@ else{
                     {
                       Static.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
-                     
-                          if(Static.checked)
-                          { 
-                            return (
-                              <MediaPreview
-                              item={item}
-                              index={index}
-                              type="posts"
-                              Static={Static}
-                              
-                            />
-                            );
-                          }
-                          else{
+                    
+                        
                             return (
                               <MediaPreview
                               item={item}
@@ -737,7 +700,7 @@ else{
                               sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
                             />
                             );
-                          }
+                          
                         
                         }
                       })
@@ -765,6 +728,34 @@ else{
                         );
                       })
                     }
+                  </div>
+                  :
+                  null
+              }
+               {
+                Static.textInputs.show
+                  ?
+                  <div
+                    class="create_post_chapter create_post_main_text"
+                    contenteditable="true"
+                    oninput={function(e){
+                      Static.textInputs.value = this.textContent.trim()
+                      if(this.textContent.trim() || Static.mediaInputs.value.length > 0)
+                      {Static.isValid = true;
+                      } else {
+                        Static.isValid = false;
+                      }
+
+                    }
+                    }
+                  >{Static.edittext}
+                    {/* {
+                        Variable.dataUrl.params && !Static.startEditText
+                          ?
+                          Static.textInputs.value
+                          :
+                          null
+                      } */}
                   </div>
                   :
                   null
@@ -860,7 +851,16 @@ else{
                   onchange={(e) => {
         
                     Static.checked = e.target.checked;
-                    initReload()
+                    if(Static.checked)
+                    {
+                      Static.sendPhoto = true
+                    }
+                    else
+                    {
+                      Static.sendPhoto = false
+                    }
+                    
+                    initReload();
                   }}
                   type="checkbox"
                   checked={Static.checked}
