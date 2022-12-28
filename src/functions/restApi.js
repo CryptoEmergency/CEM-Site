@@ -247,6 +247,7 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 
     let response = await sendApi.send(data);
+    
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
         if (responseCheck.list_records.length) {

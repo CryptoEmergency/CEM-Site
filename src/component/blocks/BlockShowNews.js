@@ -9,28 +9,29 @@ import svg from "@assets/svg/index.js";
 import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/index.js";
 
 
-const BlockShowNews = function ({ Static, item }) {
+const BlockShowNews = function ({ Static }) {
+
   return (
     <div>
       <div class="full_news_content"
         ElemVisible={() => {
-          fn.recordsView(item._id, "setNews")
+          fn.recordsView(Static.item._id, "setNews")
         }}>
       
-        <h1 class="full_news_name">{item.title}</h1>
-        {item.image ? <img class="full_news_image" src={`/assets/upload/news/${item.image}`} /> : null}
-        {item.preview ? <p class="full_news_text mrb30">{item.preview}</p> : null}
-        <p class="full_news_text mr20">{fn.editText(item.text, { clear: true, paragraph: true, html: true })}</p>
-        {item.source ? <p class="full_news_disclaimer mr20">{Variable.lang.p.source}<a href={item.source} rel="nofollow" target="_blank">{item.source}</a></p> : null}
+        <h1 class="full_news_name">{Static.item.title}</h1>
+        {Static.item.image ? <img class="full_news_image" src={`/assets/upload/news/${Static.item.image}`} /> : null}
+        {Static.item.preview ? <p class="full_news_text mrb30">{Static.item.preview}</p> : null}
+        <p class="full_news_text mr20">{fn.editText(Static.item.text, { clear: true, paragraph: true, html: true })}</p>
+        {Static.item.source ? <p class="full_news_disclaimer mr20">{Variable.lang.p.source}<a href={Static.item.source} rel="nofollow" target="_blank">{Static.item.source}</a></p> : null}
         <div style="display: flex" class="blog_post_stat">
           <p class="full_news_date">
-            <img src={svg["question_views"]} /> {item.statistic.view}
+            <img src={svg["question_views"]} /> {Static.item.statistic.view}
           </p>
           <p class="full_news_date">
             <img src={svg["question_answers"]} />
-            {item.statistic.comments}
+            {Static.item.statistic.comments}
           </p>
-          <p class="full_news_date">{fn.getDateFormat(item.showDate)}</p>
+          <p class="full_news_date">{fn.getDateFormat(Static.item.showDate)}</p>
         </div>
       </div>
 
@@ -53,7 +54,7 @@ const BlockShowNews = function ({ Static, item }) {
               }
               if (!Static.mainComment.el.value.trim().length) { return }
               let text = Static.mainComment.el.value.trim()
-              let response = await fn.restApi.setNews.comment({ _id: item._id, text })
+              let response = await fn.restApi.setNews.comment({ _id: Static.item._id, text })
               // let response = await api({ type: "set", action: "setNews", data: { _id: item._id, value: { comments: { text: text } } } })
               if (response.status === "ok") {
                 Static.mainComment.el.value = ""
@@ -62,7 +63,7 @@ const BlockShowNews = function ({ Static, item }) {
                 }
                 if (response.list_records[0]) {
                   let newRes = response.list_records[0]
-                  item.comments.unshift(newRes)
+                  Static.item.comments.unshift(newRes)
                   initReload();
                 }
               }
@@ -70,21 +71,20 @@ const BlockShowNews = function ({ Static, item }) {
           />
         </div>
         {
-          !item.comments || !item.comments.length
+          !Static.item.comments || !Static.item.comments.length
             ?
             null
             // <NotFound />
             :
             <div class="post_comments">
               <div class="user_news_item">
-                {item.comments.map(function (itemComments, index) {
+                {Static.item.comments.map(function (itemComments, index) {
                   return (
                     <Comment
                       Static={Static}
                       item={itemComments}
                       index={index}
-                      mainId={item._id}
-                      mainItem={item}
+                      mainId={Static.item._id}
                       action="News"
                     />
                   )

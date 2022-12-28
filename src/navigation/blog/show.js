@@ -12,7 +12,7 @@ const start = function (data, ID) {
     async () => {
       fn.initData.blog_show(Static)
       if (!Static.openModals) {
-        item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
+        Static.item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
       }
     },
     () => {
@@ -22,7 +22,7 @@ const start = function (data, ID) {
           <div class="full_news_container">
             <div class="full_news_block">
               <div class="full_news_content">
-                <BlockShowNews Static={Static} item={item} />
+                <BlockShowNews Static={Static} />
               </div>
             </div>
           </div>

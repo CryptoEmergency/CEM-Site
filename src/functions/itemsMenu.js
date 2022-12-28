@@ -295,8 +295,6 @@ itemsMenu.news = function ({ url, downloadurl }) {
     return items
 }
 
-
-
 itemsMenu.userProfile = function (item) {
     //console.log(item)
     const items = [
@@ -676,8 +674,16 @@ itemsMenu.answer = function (Static, item, active) {
 }
 
 
-itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
-   // console.log(Static, item, action, Variable, mainId)
+itemsMenu.comment = function (Static, item, action, index, mainId) {
+
+    let type
+    if(action == "News")
+    {
+        type = 'blog'
+    }
+    else{
+        type = Variable.dataUrl.adress
+    }
     const items =
         [
             {
@@ -806,8 +812,9 @@ itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
                             let response = await fn.restApi.setComments.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
                        //     console.log(mainItem)
-                            mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
-                        //    console.log(mainItem)
+                      response = await fn.restApi['get' + action]({ filter: { _id: mainId, type:type }, firstRecord: true })
+                      Static.item = response
+  
                             initReload()
                         },
                         text: Variable.lang.p.deleteCommentConfirm,
@@ -825,8 +832,8 @@ itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
                             let response = await fn.restApi.doRole.deleteComment({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
                           //  console.log('get' + action)
-                            mainItem = await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
-                        //    console.log(mainItem)
+                             await fn.restApi['get' + action]({ filter: { _id: mainId }, firstRecord: true })
+                          
                             initReload()
                         },
                         text: Variable.lang.p.deleteCommentConfirm,
@@ -839,7 +846,6 @@ itemsMenu.comment = function (Static, item, action, index, mainId, mainItem) {
 
     return items
 }
-
 
 itemsMenu.lenta_users = function (Static, item) {
     const items =
