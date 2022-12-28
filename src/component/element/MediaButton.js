@@ -10,7 +10,7 @@ let inputImg,
     inputVideo,
     inputAudio
 
-const MediaButton = function ({onclickAll, onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple=false, iconPhoto = false  }) {
+const MediaButton = function ({onclickAll, onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple, iconPhoto = false  }) {
 
     return (
         <div class="c-mediabtn create_post_control_block">
