@@ -26,7 +26,7 @@ const start = function (userInfo, ID = "mainBlock") {
     Variable.FooterShow = true
     Variable.showUserMenu = false
     const changeType = async function () {
-  
+
         if (this.dataset.profilePage == profilePage) {
             return
         }
