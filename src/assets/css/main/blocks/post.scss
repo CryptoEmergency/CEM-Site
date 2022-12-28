@@ -333,14 +333,14 @@
 }
 
 button[data-type='voiceline'][data-page_type="posts"] {
-    background-image: url(../svg/post_voiceline.svg);
-    background-size: 60%;
+    background-image: url(../svg/message_voice.svg);
+    background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 10px;
+    padding: 3px;
     outline: none;
     border: 0;
-    background-color: #2D3445;
+
 }
 
 .fullsize {

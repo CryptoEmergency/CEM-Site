@@ -1,4 +1,5 @@
 import {
+    initReload,
     jsx,
     jsxFrag,
 } from "@betarost/cemjs";
@@ -75,6 +76,9 @@ const textElem = function (Static, className, index) {
                         }
                     }
                     this.dataset.scrollLast = this.scrollHeight
+                }
+                if(typeof Static.value == 'undefined' || Static.value == '' || this.value.trim() == ''){
+                    initReload()
                 }
                 Static.value = this.value.trim()
                 if (!Static.condition) {

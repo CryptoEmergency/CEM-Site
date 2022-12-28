@@ -169,8 +169,40 @@ fn.timerTik = async function () {
             Static.messageList.list_records[0].message.unshift(response.info.myInfo.chatMessage[0])
           }
         }
-        Static.chatsList.list_records.forEach(chat => {
+        Static.chatsList.list_records.forEach(async chat => {
           if(chat.users[0]._id == response.info.myInfo.chatMessage[0].author || chat.users[1]._id == response.info.myInfo.chatMessage[0].author){
+            if(chat.message[0]._id != response.info.myInfo.chatMessage[0]._id && ((!Static.activeUser) || !(Static.activeUser._id == response.info.myInfo.chatMessage[0].author))){
+              console.log('INCREMENT')
+              if(typeof chat.unreadMessage == "undefined"){
+                chat.unreadMessage = 1
+              } else {
+                chat.unreadMessage++
+              }
+            } else if(Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author){
+              console.log("QUERY")
+                Static.messageList = await sendApi.send({
+                  action: "getUserChats", short: true,
+                  filter: {
+                      "$and": [
+                          {
+                              "users": chat.users[0]
+                          },
+                          {
+                            "users": chat.users[1]
+                          }
+                      ]
+                  },
+                  select: {
+                      "message": {
+                          "$slice": [
+                              0,
+                              120
+                          ]
+                      },
+                      "users": 1
+                  }
+              });
+            }
             chat.message[0] = response.info.myInfo.chatMessage[0]
             initReload()
           }
