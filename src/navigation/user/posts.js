@@ -680,34 +680,7 @@ else{
               >{Static.lang.name}</div>
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
-              {
-                Static.textInputs.show
-                  ?
-                  <div
-                    class="create_post_chapter create_post_main_text"
-                    contenteditable="true"
-                    oninput={function(e){
-                      Static.textInputs.value = this.textContent.trim()
-                      if(this.textContent.trim() || Static.mediaInputs.value.length > 0)
-                      {Static.isValid = true;
-                      } else {
-                        Static.isValid = false;
-                      }
-
-                    }
-                    }
-                  >{Static.edittext}
-                    {/* {
-                        Variable.dataUrl.params && !Static.startEditText
-                          ?
-                          Static.textInputs.value
-                          :
-                          null
-                      } */}
-                  </div>
-                  :
-                  null
-              }
+             
                
               {
                 Static.mediaInputs.show && Static.mediaInputs.value.length
@@ -755,6 +728,34 @@ else{
                         );
                       })
                     }
+                  </div>
+                  :
+                  null
+              }
+               {
+                Static.textInputs.show
+                  ?
+                  <div
+                    class="create_post_chapter create_post_main_text"
+                    contenteditable="true"
+                    oninput={function(e){
+                      Static.textInputs.value = this.textContent.trim()
+                      if(this.textContent.trim() || Static.mediaInputs.value.length > 0)
+                      {Static.isValid = true;
+                      } else {
+                        Static.isValid = false;
+                      }
+
+                    }
+                    }
+                  >{Static.edittext}
+                    {/* {
+                        Variable.dataUrl.params && !Static.startEditText
+                          ?
+                          Static.textInputs.value
+                          :
+                          null
+                      } */}
                   </div>
                   :
                   null
