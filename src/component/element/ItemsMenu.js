@@ -18,7 +18,7 @@ const ItemsMenu = function (data) {
       author = data.author
     }
  
-    console.log(data)
+ 
   }
 
   return (

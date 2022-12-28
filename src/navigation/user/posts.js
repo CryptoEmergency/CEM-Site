@@ -561,8 +561,10 @@ const sendPhoto = async function (crooper, index) {
 Static.photo = true
 Static.edittext =  ""
 Static.checked = true
+
   init(
     async () => {
+      Static.sendPhoto = true
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
@@ -714,20 +716,8 @@ else{
                     {
                       Static.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
-                     
-                          if(Static.checked)
-                          { 
-                            return (
-                              <MediaPreview
-                              item={item}
-                              index={index}
-                              type="posts"
-                              Static={Static}
-                              
-                            />
-                            );
-                          }
-                          else{
+                    
+                        
                             return (
                               <MediaPreview
                               item={item}
@@ -737,7 +727,7 @@ else{
                               sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
                             />
                             );
-                          }
+                          
                         
                         }
                       })
@@ -860,7 +850,16 @@ else{
                   onchange={(e) => {
         
                     Static.checked = e.target.checked;
-                    initReload()
+                    if(Static.checked)
+                    {
+                      Static.sendPhoto = true
+                    }
+                    else
+                    {
+                      Static.sendPhoto = false
+                    }
+                    
+                    initReload();
                   }}
                   type="checkbox"
                   checked={Static.checked}

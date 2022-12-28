@@ -65,6 +65,7 @@ const BottomMenu = function () {
                             fn.siteLink(e)
                         } else {
                             fn.modals.ModalAuth()
+                            return false
                         }
                     }}>
                 </a>
