@@ -33,12 +33,12 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                 <h2>{Variable.lang.h.posts_user}</h2>
                         }
                         {
-                            !data.items || !data.items.list_records.length
+                            !Static.activeItems || !Static.activeItems.list_records.length
                                 ?
                                 <NotFound />
                                 :
                                 <div style="width: 100%">
-                                    {data.items.list_records.map((item) => {
+                                    {Static.activeItems.list_records.map((item) => {
                                         return (
                                             <BlockLentaUsers
                                                 Static={Static}

@@ -23,26 +23,7 @@ import 'cropperjs/dist/cropper.css';
 
 let Static, selectAspect;
 
-const changeTextPost = (e, Static) => {
-  // let text = wrapTextWithATag(e.target.innerText.trim());
-  let editableText;
-  let text = '';
-  if (Variable.dataUrl.params && !Static.startEditText) {
-    editableText = Static.textInputs.value
-   // console.log('=2b3247=', editableText)
-    text = e.target.textContent = editableText.trim();
-  }
-  //console.log(Static)
-  text = e.target.innerText.trim();
-  Static.startEditText = true
-  Static.textInputs.value = text;
-  if (text || Static.mediaInputs.value.length > 0) {
-    Static.isValid = true;
-  } else {
-    Static.isValid = false;
-  }
-  initReload();
-};
+
 
 const sendPost = async (e, Static) => {
   e.preventDefault();
@@ -577,25 +558,33 @@ const sendPhoto = async function (crooper, index) {
     value: [],
     show: false,
 }
+Static.photo = true
+Static.edittext =  ""
+Static.checked = true
   init(
     async () => {
-      Static.photo = true
       fn.initData.posts(Static)
 
       if (Variable.dataUrl.params) {
+
+    
         const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params, "languages.code": "all" }, limit: 1 })
         if (data.list_records.length) {
+
+          Static.checked =  Static.editphoto = true
           let postForEdit = data.list_records[0];
+          Static.edittext  = postForEdit.text
       //    console.log('=b37faa=', postForEdit)
           let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
           let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
 
           Static.idEditPost = postForEdit._id;
-          Static.editInputs
+
           if (postForEdit.text.length > 0) {
-            Static.editInputs = {
-              value: postForEdit.text,
-              show: true,
+         
+             
+            Static.textInputs = { 
+               show: true,
             }
       //      console.log('=c9259f= textInputs =', Static.textInputs)
           }
@@ -626,8 +615,11 @@ const sendPhoto = async function (crooper, index) {
 
           Static.forFriends = postForEdit.forFriends;
           Static.photo = postForEdit.photo;
-          Static.isValid = Static.textInputs.value.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
+          Static.isValid = Static.edittext.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
         }
+      }
+      else{
+        Static.edittext  = Static.textInputs.value
       }
 
      // console.log('=cb696d=', Static)
@@ -647,7 +639,14 @@ const sendPhoto = async function (crooper, index) {
     },
 
     () => {
-
+      let multiple
+if(Static.checked)
+{
+  multiple = false
+}
+else{
+  multiple = true
+}
 
       return (
         
@@ -680,13 +679,22 @@ const sendPhoto = async function (crooper, index) {
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
               {
-                Static.editInputs.show
+                Static.textInputs.show
                   ?
                   <div
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
-                    oninput={(e) => changeTextPost(e, Static)}
-                  >{Static.editInputs.value}
+                    oninput={function(e){
+                      Static.textInputs.value = this.textContent.trim()
+                      if(this.textContent.trim() || Static.mediaInputs.value.length > 0)
+                      {Static.isValid = true;
+                      } else {
+                        Static.isValid = false;
+                      }
+
+                    }
+                    }
+                  >{Static.edittext}
                     {/* {
                         Variable.dataUrl.params && !Static.startEditText
                           ?
@@ -707,8 +715,8 @@ const sendPhoto = async function (crooper, index) {
                       Static.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
                      
-                          if(Static.photo)
-                          {
+                          if(Static.checked)
+                          { 
                             return (
                               <MediaPreview
                               item={item}
@@ -764,21 +772,24 @@ const sendPhoto = async function (crooper, index) {
             </div>
 
             <MediaButton
+
+            
               onclickText={function () {
                 if (Static.textInputs.show === true) {
                   return;
                 } else {
                   Static.textInputs.show = true;
+                  Static.textInputs.value = ""
                   initReload();
                 }
               }}
-              multiple={function(){Static.photo}}
-      
+     
+              multiple = {multiple}
               onclickPhoto={async function (e) {
                 if (this.files.length == 0) {
                   return;
                 }
-                if(Static.photo)
+                if(Static.checked)
                 {
                   fn.modals.ModalCropImage({
                     file: this.files[0],
@@ -847,10 +858,12 @@ const sendPhoto = async function (crooper, index) {
                   data-complain="abusive"
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
-                    Static.photo = e.target.checked;
+        
+                    Static.checked = e.target.checked;
+                    initReload()
                   }}
                   type="checkbox"
-                  checked={Static.photo}
+                  checked={Static.checked}
                 />
                 <label class="checkbox__label" for="forphoto">
                   Загружать фотографии по 1
