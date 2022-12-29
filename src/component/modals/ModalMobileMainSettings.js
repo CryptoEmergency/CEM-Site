@@ -38,7 +38,7 @@ const ModalMobileMainSettings = function (data, ID) {
         // youtube: false,
         tiktok: false
     }
-    let close = true
+    let close
     init(
         () => {
             elem.telegram = Variable.setRef()
@@ -53,27 +53,33 @@ const ModalMobileMainSettings = function (data, ID) {
         },
         () => {
             return (
-                <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings" onclick={function(e){ if(close){ 
-  
-                    fn.modals.close(ID)
-                    }}}>
-                    <section class="c-modal__dialog"  onmouseover={function(){
-        
-        close = false
- 
-
-      }}
-        onmouseleave={function(){
-         
-         close = true
-
-        }}>
+                <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings" 
+                    onclick={
+                        function(e){ 
+                            if(close){ 
+                                fn.modals.close(ID)
+                            }
+                        }
+                    }
+                >
+                    <section class="c-modal__dialog"  
+                        onmouseover={
+                            function(){
+                                    close = false
+                                }
+                        }
+                        onmouseleave={
+                            function(){
+                                close = true
+                            }
+                        }
+                    >
                         <header class="c-modal__header">
                             {/* <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2> */}
                             <div
                                 class="language language_visible"
                                 onclick={() => {
-                                    Variable.SetModals({ name: "ModalLanguageSite", data: {}, });
+                                    fn.modals.ModalLanguageSite()
                                 }}
                             >
                                 <div class="selectlink">

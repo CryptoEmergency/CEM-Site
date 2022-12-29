@@ -11,7 +11,7 @@ import { fn } from "@src/functions/index.js";
 
 
 const ModalLanguageSite = function (data, ID) {
-  let close = true
+  let close
   init(
     () => {
 

@@ -598,12 +598,6 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Видеосервис на блокчейне с уникальной реферальной программой!</p>
                                         </div>
                                     </a>
-                                    <a target="_blank" rel="nofollow nooopener" href="https://robobattle.games" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
-                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_22']} />
-                                        <div>
-                                            <p style="margin-top: 10px; margin-bottom: 5px">Захватывающий многопользовательский онлайн шутер с криптовалютой, элементами DeFi и рынком NFT</p>
-                                        </div>
-                                    </a>
                                     <a target="_blank" rel="nofollow nooopener" href="https://garantex.io/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
                                         <img style="height: 150px; width: 150px;" src={images['forum/forum_company_23']} />
                                         <div>
@@ -1108,14 +1102,6 @@ const start = function (data, ID) {
                                         class="c-infopartners__item"
                                     >
                                         <img src={images["forum/partner_28"]} />
-                                    </a>
-                                    <a style="display: block!important;"
-                                        target="_blank"
-                                        rel="nofollow nooopener"
-                                        href="https://robobattle.games"
-                                        class="c-infopartners__item"
-                                    >
-                                        <img src={images["forum/partner_29"]} />
                                     </a>
                                     <a style="display: block!important;"
                                         target="_blank"
