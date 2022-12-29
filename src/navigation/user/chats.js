@@ -499,6 +499,29 @@ const start = function (data, ID) {
                                             }}
 
                                         </div>
+                                        {
+                                            Static.mediaInputs.show && Static.mediaInputs.value.length
+                                                ?
+                                                <div class="create_post_chapter createPostImage">
+                                                    {
+                                                        Static.mediaInputs.value.map((item, index) => {
+                                                            if (item.type != "audio") {
+                                                                return (
+                                                                    <MediaPreview
+                                                                        item={item}
+                                                                        index={index}
+                                                                        type="chat"
+                                                                        Static={Static}
+                                                                        sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
+                                                                    />
+                                                                );
+                                                            }
+                                                        })
+                                                    }
+                                                </div>
+                                                :
+                                                null
+                                        }
                                         <div class="c-comments__field create_post_container1">
                                         <MediaButton
                                                 onclickAll={function () {
@@ -590,29 +613,7 @@ const start = function (data, ID) {
                                                 />
                                             }
                                         </div>
-                                        {
-                                            Static.mediaInputs.show && Static.mediaInputs.value.length
-                                                ?
-                                                <div class="create_post_chapter createPostImage">
-                                                    {
-                                                        Static.mediaInputs.value.map((item, index) => {
-                                                            if (item.type != "audio") {
-                                                                return (
-                                                                    <MediaPreview
-                                                                        item={item}
-                                                                        index={index}
-                                                                        type="chat"
-                                                                        Static={Static}
-                                                                        sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
-                                                                    />
-                                                                );
-                                                            }
-                                                        })
-                                                    }
-                                                </div>
-                                                :
-                                                null
-                                        }
+                                        
                                     </section>
                                 )
                             } else {
