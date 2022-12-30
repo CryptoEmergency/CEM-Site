@@ -2720,7 +2720,7 @@ span#procent::after {
 
 .your_answers_table_item .c-avataricon__name {
   top: 10px !important;
-	left: 53px !important;
+  left: 53px !important;
 }
 
 .your_answers_table_item:first-child {
@@ -9022,7 +9022,9 @@ span#procent::after {
 
 .uc_container {
   width: calc(100% - 224px);
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1px;
 }
 
 .world_publications_header {
@@ -10248,7 +10250,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 
 @media(max-width: 1199px) {
-  
+
   .user_panel_notify img {
     position: relative;
     left: 0px;
@@ -10278,7 +10280,8 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
   .uc_container {
     width: calc(100% - 24px);
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .profit_calculator_inputs_container span {
@@ -10937,7 +10940,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 @media(max-width: 768px) {
-  
+
   .title-text-preview {
     font-size: 40px;
     width: 450px;
@@ -12541,6 +12544,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   width: 80px;
   height: 80px;
 }
+
 .lds-dual-ring:after {
   content: " ";
   display: block;
@@ -12552,19 +12556,22 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border-color: #fcf transparent #fcf transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
-.lazy_load_container{
+.lazy_load_container {
   position: relative;
 }
-.lazy_load_element{
+
+.lazy_load_element {
   position: absolute;
   top: 50%;
   left: 50%;

@@ -59,7 +59,11 @@ const start = function () {
 
         () => {
             return (
-                <div class="uc_container">
+                <div class={[
+                    "uc_container",
+                    Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
+                ]}
+                >
                     <div class="notifications_title">
                         {Variable.lang.text.yourNotification}
                         <div class="notifications_toggle_block">
