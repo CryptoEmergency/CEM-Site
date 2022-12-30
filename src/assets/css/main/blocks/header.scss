@@ -958,6 +958,10 @@
 
         .c-userpanel {
 
+            &__wrappericon {
+                position: relative;
+            }
+
             &__icons {
                 flex-direction: row;
                 justify-content: space-between;

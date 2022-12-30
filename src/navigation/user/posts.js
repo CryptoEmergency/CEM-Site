@@ -37,7 +37,7 @@ const sendPost = async (e, Static) => {
   } else {
     tmpRes = await fn.restApi.setPost.create({ text: Static.textInputs.value, forFriends: Static.forFriends, languages: Static.lang.code, media: [...Static.mediaInputs.value, ...Static.audioInputs.value] });
   }
- // console.log('=270fb8=', tmpRes)
+  // console.log('=270fb8=', tmpRes)
 
   if (tmpRes.status === "ok") {
     if (Variable.dataUrl.params) {
@@ -80,7 +80,7 @@ const start = function (data, ID) {
 
   let authorPosts;
 
-  const sendPhotoOne = async function (Static,crooper) {
+  const sendPhotoOne = async function (Static, crooper) {
     if (!crooper) {
       return
     }
@@ -130,7 +130,7 @@ const start = function (data, ID) {
               10
             );
           }
-  
+
           if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
             Static.mediaInputs.value.splice(numItem, 1);
             initReload()
@@ -148,70 +148,70 @@ const start = function (data, ID) {
   }
 
 
-const sendPhoto = async function (crooper, index) {
-  if (!crooper) {
+  const sendPhoto = async function (crooper, index) {
+    if (!crooper) {
       return
-  }
-  let canvas;
-  canvas = crooper.getCroppedCanvas({});
-  let previewObj = {
+    }
+    let canvas;
+    canvas = crooper.getCroppedCanvas({});
+    let previewObj = {
       src: canvas.toDataURL(),
       type: "image",
       upload: 0,
       size: 0
-  };
+    };
 
- 
-  Static.mediaInputs.show = true;
-  Static.mediaInputs.value[index] = previewObj;
-  initReload();
 
-  await canvas.toBlob(function (blob) {
+    Static.mediaInputs.show = true;
+    Static.mediaInputs.value[index] = previewObj;
+    initReload();
+
+    await canvas.toBlob(function (blob) {
       fn.uploadMedia(
-          blob,
-          "posts",
-          async function () {
-              Static.mediaInputs.show = true;
-              if (!this.response) {
-                  return
-              }
-              let response = JSON.parse(this.response);
-              Static.mediaInputs.value[index] = {
-                  aspect: Static.mediaInputs.selectAspect,
-                  type: response.mimetype.split("/")[0],
-                  name: response.name
-              }
-              Static.isValid = true;
-              initReload();
-          },
-          async function (e) {
-              let contentLength;
-              if (e.lengthComputable) {
-                  contentLength = e.total;
-              } else {
-                  contentLength = parseInt(
-                      e.target.getResponseHeader(
-                          "x-decompressed-content-length"
-                      ),
-                      10
-                  );
-              }
-
-              if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
-                  Static.mediaInputs.value.splice(index, 1);
-                  initReload()
-                  return
-              }
-              Static.mediaInputs.value[index].upload = e.loaded
-              Static.mediaInputs.value[index].size = contentLength;
-              initReload();
+        blob,
+        "posts",
+        async function () {
+          Static.mediaInputs.show = true;
+          if (!this.response) {
+            return
           }
+          let response = JSON.parse(this.response);
+          Static.mediaInputs.value[index] = {
+            aspect: Static.mediaInputs.selectAspect,
+            type: response.mimetype.split("/")[0],
+            name: response.name
+          }
+          Static.isValid = true;
+          initReload();
+        },
+        async function (e) {
+          let contentLength;
+          if (e.lengthComputable) {
+            contentLength = e.total;
+          } else {
+            contentLength = parseInt(
+              e.target.getResponseHeader(
+                "x-decompressed-content-length"
+              ),
+              10
+            );
+          }
+
+          if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
+            Static.mediaInputs.value.splice(index, 1);
+            initReload()
+            return
+          }
+          Static.mediaInputs.value[index].upload = e.loaded
+          Static.mediaInputs.value[index].size = contentLength;
+          initReload();
+        }
       );
       initReload();
       Variable.DelModals("ModalCropImage");
-  });
-  return
-}
+    });
+    return
+  }
 
   const sendVideo = async function (files) {
     let blob = new Blob([files], { type: 'video/mp4' });
@@ -380,167 +380,223 @@ const sendPhoto = async function (crooper, index) {
   };
 
 
-  const loadPhoto = async function (file, type, xhr ) {
+  const loadPhoto = async function (file, type, xhr, selectAspect = false) {
 
+    // console.log('=ebf8e1=', selectAspect)
+    let dataURL;
 
-  let dataURL;
+    let imageUrl
+    let image
 
-  let imageUrl
-  let image
+    const newImg = new Image();
 
-  const newImg = new Image();
+    async function cropImage(imagePath, type, xhr) {
+      let fileImg;
+      let sx, sy, sw, sh, dx, dy, dw, dh
 
-  async function cropImage(imagePath, type, xhr) {
-    let fileImg ;
-    let sx,sy,sw,sh,dx,dy,dw,dh
-  
       const originalImage = new Image();
       originalImage.src = imagePath;
-   
-  
-      const canvas = document.getElementById('canvas'); 
+
+
+      const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
-   
-  
-      originalImage.addEventListener('load', async function() {
-   
-          let height = originalImage.height;
-          let width = originalImage.width;
-      
-         //прямоугольник c длинной
-         if(width>height)
-         {
-           sx = (width - height)/2
-           sy = 1
-           sw = height
-           sh = height
-           dx = 0
-           dy = 0
-           dw = height
-           dh = height
-           
-         }
-         //прямоугольник c высотой
-         if(height>width)
-         {
-           sx = 1
-           sy = (height - width)/2
-           sw = width
-           sh = width
-           dx = 0
-           dy = 0
-           dw = width
-           dh = width
-         }
-  
-         canvas.width = dw;
-         canvas.height = dh;
-          
-         await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh); 
-       
-  
-          newImg.src = canvas.toDataURL();
+
+
+      originalImage.addEventListener('load', async function () {
+
+        let height = originalImage.height;
+        let width = originalImage.width;
+
+        //если есть выбранный размер фото
+        if (selectAspect && selectAspect != 1) {
+          //aspect == 0.8
+          if (selectAspect == 0.8 && width > height) {
+            sx = (width - height) / 2
+            sy = 1
+            sw = 0.8 * height
+            sh = height
+            dx = 0
+            dy = 0
+            dw = 0.8 * height
+            dh = height
+          }
+          if (selectAspect == 0.8 && height > width) {
+            sx = 1
+            sy = (height - width) / 2
+            sw = width
+            sh = width / 0.8
+            dx = 0
+            dy = 0
+            dw = width
+            dh = width / 0.8
+          }
+          //aspect == 1.7777777777777777
+          if (selectAspect == 1.7777777777777777 && width > height) {
+            if (1.7777777777777777 * height > width) {
+              sx = 1
+              sy = (width - height) / 2
+              sw = width
+              sh = width / 1.7777777777777777
+              dx = 0
+              dy = 0
+              dw = width
+              dh = width / 1.7777777777777777
+            } else {
+              sx = (width - height) / 2
+              sy = 1
+              sw = 1.7777777777777777 * height
+              sh = height
+              dx = 0
+              dy = 0
+              dw = 1.7777777777777777 * height
+              dh = height
+            }
+          }
+          if (selectAspect == 1.7777777777777777 && height > width) {
+            sx = 1
+            sy = (height - width) / 2
+            sw = width
+            sh = width / 1.7777777777777777
+            dx = 0
+            dy = 0
+            dw = width
+            dh = width / 1.7777777777777777
+          }
+          //aspect  == 1 || aspect == undefined
+        } else {
+          //прямоугольник c шириной
+          if (width > height) {
+            sx = (width - height) / 2
+            sy = 1
+            sw = height
+            sh = height
+            dx = 0
+            dy = 0
+            dw = height
+            dh = height
+
+          }
+          //прямоугольник c высотой
+          if (height > width) {
+            sx = 1
+            sy = (height - width) / 2
+            sw = width
+            sh = width
+            dx = 0
+            dy = 0
+            dw = width
+            dh = width
+          }
+        }
+
+        canvas.width = dw;
+        canvas.height = dh;
+
+        await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh);
+
+
+        newImg.src = canvas.toDataURL();
 
 
 
-         await fetch(newImg.src)
+        await fetch(newImg.src)
           .then(res => res.blob())
           .then(blob => {
             const file = new File([blob], 'dot.png', blob)
             fileImg = file
           })
-        
-        
-        
-          const reader = new FileReader();
-          reader.addEventListener("load", () => {
-              // convert image file to base64 string
-              dataURL = reader.result;
-          }, false);
-          
-          if (fileImg) {
-              reader.readAsDataURL(fileImg);
-          }
-        
-         let previewObj = {
-              src: dataURL,
-              type: "image",
-              upload: 0,
-              size: 0
-            };
-        
-        
-          Static.mediaInputs.show = true;
-          Static.mediaInputs.value.push(previewObj);
-          let numItem = Static.mediaInputs.value.length - 1;
-        
-          let nameFile = "file.png"
-          if (fileImg.name) {
-              nameFile = fileImg.name
-          }
-        
-          const formData = new FormData()
-          formData.append('media', fileImg, nameFile);
-        
-          xhr = new XMLHttpRequest()
-          xhr.open('POST', `/upload/${type}/`)
-          xhr.onload = async function () {
-              Static.mediaInputs.show = true;
-              if (!this.response) {
-                  return
-              }
-              let response = JSON.parse(this.response);
-              Static.mediaInputs.value[numItem] = {
-                  aspect: Static.mediaInputs.selectAspect,
-                  type: response.mimetype.split("/")[0],
-                  name: response.name
-              }
-            
-              Static.isValid = true;
-              initReload();
-        
-          }
 
-          xhr.upload.onprogress = function (e) {
-            let contentLength;
-            if (e.lengthComputable) {
-                contentLength = e.total;
-            } else {
-                contentLength = parseInt(
-                    e.target.getResponseHeader(
-                        "x-decompressed-content-length"
-                    ),
-                    10
-                );
-            }
-      
-            if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
-                Static.mediaInputs.value.splice(numItem, 1);
-                initReload()
-                return
-            }
-            Static.mediaInputs.value[numItem].upload = e.loaded
-            Static.mediaInputs.value[numItem].size = contentLength;
-            initReload();
+
+
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          // convert image file to base64 string
+          dataURL = reader.result;
+        }, false);
+
+        if (fileImg) {
+          reader.readAsDataURL(fileImg);
         }
-           await xhr.send(formData)
-      });
-  
- 
 
-  
-  }
-  
+        let previewObj = {
+          src: dataURL,
+          type: "image",
+          upload: 0,
+          size: 0
+        };
+
+
+        Static.mediaInputs.show = true;
+        Static.mediaInputs.value.push(previewObj);
+        let numItem = Static.mediaInputs.value.length - 1;
+
+        let nameFile = "file.png"
+        if (fileImg.name) {
+          nameFile = fileImg.name
+        }
+
+        const formData = new FormData()
+        formData.append('media', fileImg, nameFile);
+
+        xhr = new XMLHttpRequest()
+        xhr.open('POST', `/upload/${type}/`)
+        xhr.onload = async function () {
+          Static.mediaInputs.show = true;
+          if (!this.response) {
+            return
+          }
+          let response = JSON.parse(this.response);
+          Static.mediaInputs.value[numItem] = {
+            aspect: Static.mediaInputs.selectAspect,
+            type: response.mimetype.split("/")[0],
+            name: response.name
+          }
+
+          Static.isValid = true;
+          initReload();
+
+        }
+
+        xhr.upload.onprogress = function (e) {
+          let contentLength;
+          if (e.lengthComputable) {
+            contentLength = e.total;
+          } else {
+            contentLength = parseInt(
+              e.target.getResponseHeader(
+                "x-decompressed-content-length"
+              ),
+              10
+            );
+          }
+
+          if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+            Static.mediaInputs.value.splice(numItem, 1);
+            initReload()
+            return
+          }
+          Static.mediaInputs.value[numItem].upload = e.loaded
+          Static.mediaInputs.value[numItem].size = contentLength;
+          initReload();
+        }
+        await xhr.send(formData)
+      });
+
+
+
+
+    }
+
     imageUrl = URL.createObjectURL(file);
     image = document.createElement("img");
     image.src = imageUrl;
-  
-  
-  await cropImage(image.src, type, xhr) ;
-  
 
 
-};
+    await cropImage(image.src, type, xhr);
+
+
+
+  };
 
   let el = [];
 
@@ -557,10 +613,10 @@ const sendPhoto = async function (crooper, index) {
   Static.mediaInputs = {
     value: [],
     show: false,
-}
-Static.photo = true
-Static.edittext =  ""
-Static.checked = true
+  }
+  Static.photo = true
+  Static.edittext = ""
+  Static.checked = true
 
   init(
     async () => {
@@ -569,26 +625,26 @@ Static.checked = true
 
       if (Variable.dataUrl.params) {
 
-    
+
         const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params, "languages.code": "all" }, limit: 1 })
         if (data.list_records.length) {
 
-          Static.checked =  Static.editphoto = true
+          Static.checked = Static.editphoto = true
           let postForEdit = data.list_records[0];
-          Static.edittext  = postForEdit.text
-      //    console.log('=b37faa=', postForEdit)
+          Static.edittext = postForEdit.text
+          //    console.log('=b37faa=', postForEdit)
           let imageVideoFiles = postForEdit.media.filter((file) => file.type != 'audio');
           let audioFiles = postForEdit.media.filter((file) => file.type == 'audio');
 
           Static.idEditPost = postForEdit._id;
 
           if (postForEdit.text.length > 0) {
-         
-             
-            Static.textInputs = { 
-               show: true,
+
+
+            Static.textInputs = {
+              show: true,
             }
-      //      console.log('=c9259f= textInputs =', Static.textInputs)
+            //      console.log('=c9259f= textInputs =', Static.textInputs)
           }
           if (postForEdit.media.length > 0 && imageVideoFiles.length > 0) {
             Static.mediaInputs = {
@@ -620,18 +676,18 @@ Static.checked = true
           Static.isValid = Static.edittext.length > 0 || Static.mediaInputs.value.length > 0 ? true : false
         }
       }
-      else{
-        Static.edittext  = Static.textInputs.value
+      else {
+        Static.edittext = Static.textInputs.value
       }
 
-     // console.log('=cb696d=', Static)
+      // console.log('=cb696d=', Static)
       // console.log('=0bb638=', Variable)
 
       if (Static.userInfo._id == Variable.myInfo._id) {
         Static.posts = await fn.restApi.getPost({ short: true, cache: true, name: "PageUserProfileMyLenta", filter: { author: Static.userInfo._id, "languages.code": "all" }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
       }
 
-     // console.log('=50f15c=', Static.posts)
+      // console.log('=50f15c=', Static.posts)
 
       selectAspect = null;
 
@@ -642,22 +698,21 @@ Static.checked = true
 
     () => {
       let multiple
-if(Static.checked)
-{
-  multiple = false
-}
-else{
-  multiple = true
-}
+      if (Static.checked) {
+        multiple = false
+      }
+      else {
+        multiple = true
+      }
 
       return (
-        
+
         <div class={[
           "c-userpostcreate",
           Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader",
         ]}>
           <canvas hidden id="canvas"></canvas>
-       
+
           <h3 class="c-userpostcreate__title">{Variable.lang.h.createPost}</h3>
           <form id="userPostCreate" class="c-userpostcreate__form" onsubmit={sendAuthorization}>
             <input class="c-userpostcreate__submit" hidden type="submit" />
@@ -680,8 +735,8 @@ else{
               >{Static.lang.name}</div>
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
-             
-               
+
+
               {
                 Static.mediaInputs.show && Static.mediaInputs.value.length
                   ?
@@ -689,19 +744,19 @@ else{
                     {
                       Static.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
-                    
-                        
-                            return (
-                              <MediaPreview
+
+
+                          return (
+                            <MediaPreview
                               item={item}
                               index={index}
                               type="posts"
                               Static={Static}
                               sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
                             />
-                            );
-                          
-                        
+                          );
+
+
                         }
                       })
                     }
@@ -732,16 +787,16 @@ else{
                   :
                   null
               }
-               {
+              {
                 Static.textInputs.show
                   ?
                   <div
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
-                    oninput={function(e){
+                    oninput={function (e) {
                       Static.textInputs.value = this.textContent.trim()
-                      if(this.textContent.trim() || Static.mediaInputs.value.length > 0)
-                      {Static.isValid = true;
+                      if (this.textContent.trim() || Static.mediaInputs.value.length > 0) {
+                        Static.isValid = true;
                       } else {
                         Static.isValid = false;
                       }
@@ -764,7 +819,7 @@ else{
 
             <MediaButton
 
-            
+
               onclickText={function () {
                 if (Static.textInputs.show === true) {
                   return;
@@ -774,34 +829,37 @@ else{
                   initReload();
                 }
               }}
-     
-              multiple = {multiple}
+
+              multiple={multiple}
               onclickPhoto={async function (e) {
                 if (this.files.length == 0) {
                   return;
                 }
-                if(Static.checked)
-                {
+                if (Static.checked) {
+                  if (Static.mediaInputs.show && Static.mediaInputs.value.length && !Static.mediaInputs.selectAspect) {
+                    Static.mediaInputs.selectAspect = 1
+                    // console.log('=d491dd=', Static.mediaInputs.selectAspect)
+                  }
                   fn.modals.ModalCropImage({
                     file: this.files[0],
                     typeUpload: 'posts',
                     arrMedia: Static.mediaInputs.value,
                     aspectSelect: Static.mediaInputs.selectAspect,
                     uploadCropImage: async function (cropper) {
-                      await sendPhotoOne(Static,cropper)
+                      await sendPhotoOne(Static, cropper)
                       return;
                     }
-                  },ID)
+                  }, ID)
                 }
-                else{
-                  for(let i = 0 ; i<this.files.length; i++)
-                  {  document.getElementById("spinner").hidden = false
-                      await loadPhoto(this.files[i], "posts");
+                else {
+                  for (let i = 0; i < this.files.length; i++) {
+                    document.getElementById("spinner").hidden = false
+                    Static.mediaInputs.selectAspect ? await loadPhoto(this.files[i], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(this.files[i], "posts");
                   }
                 }
                 this.value = '';
               }
-            }
+              }
 
               onclickVideo={function () {
                 if (this.files.length == 0) {
@@ -849,17 +907,15 @@ else{
                   data-complain="abusive"
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
-        
+
                     Static.checked = e.target.checked;
-                    if(Static.checked)
-                    {
+                    if (Static.checked) {
                       Static.sendPhoto = true
                     }
-                    else
-                    {
+                    else {
                       Static.sendPhoto = false
                     }
-                    
+
                     initReload();
                   }}
                   type="checkbox"
@@ -883,7 +939,7 @@ else{
                 data-href={"/lenta-users/show/123456789"}
                 disabled={!Static.isValid}
                 onclick={(e) => {
-               //   console.log('=cf4a37=', Static)
+                  //   console.log('=cf4a37=', Static)
                   let previewPost = {}
                   previewPost.author = {
                     avatar: Variable.myInfo.avatar,
@@ -912,7 +968,7 @@ else{
                   })
                   previewPost.showDate = new Date().toISOString()
                   previewPost.forFriends = Static.forFriends
-                 // console.log('=0d0932=', previewPost)
+                  // console.log('=0d0932=', previewPost)
                   // fn.siteLinkModal(e, { title: "Просмотр создаваемого поста", previewPost, items: fn.itemsMenu.lenta_users(Static, previewPost) })
                   fn.modals.ModalPostPreview(previewPost)
                 }}

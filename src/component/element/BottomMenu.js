@@ -24,7 +24,7 @@ const findUnread = function (arr, title = false) {
 
 const BottomMenu = function () {
 
- //   console.log('=b85f6c=', Variable.dataUrl)
+    //   console.log('=b85f6c=', Variable.dataUrl)
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -44,9 +44,17 @@ const BottomMenu = function () {
                         ?
                         <a
                             href="/user/chats/"
-                            class={["c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--mobile_visible", (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : null]}
+                            class="c-userpanel__wrappericon"
+                            // class={["c-userpanel__icon c-userpanel__icon--chats c-userpanel__icon--mobile_visible", (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : null]}
                             onclick={fn.siteLink}>
-                            <i></i>
+                            <span class={[
+                                "c-userpanel__icon",
+                                "c-userpanel__icon--chats",
+                                "c-userpanel__icon--mobile_visible",
+                                (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") ? "c-userpanel__icon--active" : null
+                            ]}>
+                                <i></i>
+                            </span>
                             {Variable.myInfo && Variable.myInfo.unreadMessage ? <div class="messages_notifications_counter">{Variable.myInfo.unreadMessage}</div> : null}
                         </a>
                         :
@@ -59,7 +67,7 @@ const BottomMenu = function () {
                 }
                 <a
                     href="/user/posts/"
-                    class={["c-userpanel__icon c-userpanel__icon--posts c-userpanel__icon--mobile_visible",(Variable.dataUrl.category == "posts") ? "c-userpanel__icon--active" : null]}
+                    class={["c-userpanel__icon c-userpanel__icon--posts c-userpanel__icon--mobile_visible", (Variable.dataUrl.category == "posts") ? "c-userpanel__icon--active" : null]}
                     onclick={(e) => {
                         if (Variable.auth) {
                             fn.siteLink(e)
@@ -85,7 +93,7 @@ const BottomMenu = function () {
                                 class="c-userpanel__icon c-userpanel__icon--notify c-userpanel__icon--mobile_visible c-notification__link"
                                 onClick={async function (e) {
                                     e.stopPropagation();
-                                   // console.log('=4c896c=', Variable)
+                                    // console.log('=4c896c=', Variable)
                                     let data = {
                                         value: {
                                             readNotify: findUnread(Variable.myInfo.notifyQuestions, 'questions')
@@ -97,7 +105,7 @@ const BottomMenu = function () {
                                     }
 
                                     let tmpRes = await sendApi.create("setUsers", data);
-                                 //   console.log('=e19671=', data, tmpRes)
+                                    //   console.log('=e19671=', data, tmpRes)
                                     if (tmpRes.status === 'ok') {
                                         fn.modals.ModalNotify();
                                         initReload()

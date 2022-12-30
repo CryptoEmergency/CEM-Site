@@ -11,11 +11,11 @@ import 'cropperjs/dist/cropper.css';
 
 
 
-const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uploadCropImage}, ID) {
+const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
 
 
-    let [Static] = fn.GetParams({ data: { file,typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
-   // console.log('=ca484b=2', file)
+    let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+    // console.log('=ca484b=2', file)
 
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
@@ -24,8 +24,8 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
 
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
-   // console.log('=453e8a=', Static)
-  //  console.log('=018927=', Static.aspectSelect)
+    // console.log('=453e8a=', Static)
+    //  console.log('=018927=', Static.aspectSelect)
 
     const cropperGo = function (el) {
         if (cropper) {
@@ -64,7 +64,7 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                 restore: false,
                 modal: false,
                 guides: false,
-                highlight: false,
+                highlight: true,
                 cropBoxMovable: true,
                 cropBoxResizable: false,
                 toggleDragModeOnDblclick: false,
@@ -92,14 +92,14 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
             });
         }
     }
-   
-      
+
+
     init(() => {
-     
-        },
+
+    },
         () => {
-         
-       
+
+
             cropper = null
             if (aspectSelect) {
                 aspectActive = Static.aspectSelect
@@ -114,7 +114,7 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                     aspectActive = 1.7777777777777777
                 }
             }
-          
+
             return (
                 <div class="c-modal c-modal--open" id="addCropImage">
                     <section class="c-modal__dialog c-modal__dialog--lg">
@@ -122,15 +122,23 @@ const ModalCropImage = function ({ file,typeUpload, arrMedia, aspectSelect, uplo
                             <h2 class="c-modal__title">{Variable.lang.h.modal_cropImage}</h2>
                         </header>
                         <div class="c-modal__body">
-                            <div class="c-cropper container crop-container" style="addCropImage">
+                            <div
+                                class={[
+                                    "c-cropper",
+                                    "container",
+                                    "crop-container",
+                                    Static.aspectSelect == 1 && typeUpload == "avatar" ? "c-cropper--avatar" : null
+                                ]}
+                            // style="addCropImage"
+                            >
                                 {//file.map(function(file){return(
-                                    
-                              
-                                <div class="c-cropper__row row">
-                                    <div class="c-cropper__wrapimage img-container">
-                                        <img width="100%" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={aspectActive ? URL.createObjectURL(file) : file} After={cropperGo} ref={elemImg} />
-                                    </div>
-                                </div> //) })
+
+
+                                    <div class="c-cropper__row row">
+                                        <div class="c-cropper__wrapimage img-container">
+                                            <img width="100%" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={aspectActive ? URL.createObjectURL(file) : file} After={cropperGo} ref={elemImg} />
+                                        </div>
+                                    </div> //) })
                                 }
                                 {() => {
                                     if (typeUpload == "bg") {

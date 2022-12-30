@@ -95,6 +95,174 @@ const start = function (data, ID) {
                 <div class='c-main__body'>
                     <div class="page-content page-content--full">
                         <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px">
+                            <div>
+                                <h2 style="text-align: center; font-weight: 700; margin-bottom: 20px">Фотоотчёт Crypto ЮГ 2022</h2>
+                                <div class="forum_end_photos">
+                                    <img src={images['forum/forum_end/forum_end_1']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_1'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_2']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_2'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_3']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_3'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_4']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_4'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_5']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_5'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_6']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_6'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_7']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_7'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_8']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_8'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_9']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_9'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_10']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_10'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_11']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_11'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_12']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_12'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_13']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_13'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_14']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_14'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_15']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_15'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_16']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_16'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                </div>
+                                <a target="_blank" class="all_photo_button_container" rel="nofollow noopener" href="https://disk.yandex.ru/d/olZACsw71YjlNQ">
+                                    <div class="all_photo_button">Смотреть все фото</div>
+                                </a>
+                            </div>
                             {/*  <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
                             <div class="swiper-container">
                                 <div class="swiper swiper-post_media" After={() => swiperGo()}>
@@ -233,7 +401,7 @@ const start = function (data, ID) {
 
                                 <iframe width="1280" height="720" src="https://www.youtube.com/embed/1wvHegEMrEU" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 */}
-                            <div>
+                            {/* <div>
                                 <h2 style="text-align: center; font-weight: 700; margin-bottom: 20px">Мероприятие закончилось</h2>
                                 <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
                                 <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
@@ -304,7 +472,7 @@ const start = function (data, ID) {
                                         </p>
                                     </div>
                                 </div>
-                                <div style="margin: 35px 0" class="swiper-container">
+                                <div style="margin: 35px 0" class="swiper-container"> */}
                                     { /*<div class="swiper swiper-two" After={() => swiperTwo()}>
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide">
@@ -356,7 +524,7 @@ const start = function (data, ID) {
                                         <div class="swiper-pagination swiper-pagination-two"></div>
                                         <div class="swiper-scrollbar-two"></div>
                         </div>*/}
-                                </div>
+                                {/* </div>
                                 <div style="font-size: 18px; margin-top: 10px">
                                     <p>
                                         Отличная локация в центре города:
@@ -380,7 +548,7 @@ const start = function (data, ID) {
                                             <img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединиться в телеграм</span>
                                         </a>
                                     </div>
-                                </div>
+                                </div> */}
                                 {/* <div style="display: flex; justify-content: center; margin-top: 20px">
                                     <span style="text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 700; font-size: 36px">
                                         2990 ₽
@@ -389,7 +557,7 @@ const start = function (data, ID) {
                                 <a style="margin: 40px auto; margin-top: 20px" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
                                     <span>Купить билет</span>
                                 </a> */}
-                                <div style="font-size: 18px; max-width: 500px; margin: 0 auto;margin-top: 10px">
+                                {/* <div style="font-size: 18px; max-width: 500px; margin: 0 auto;margin-top: 10px">
                                     <p>
                                         Билет предоставляет ряд привлекательных предложений:
                                     </p>
@@ -438,7 +606,7 @@ const start = function (data, ID) {
                                 <h4 style="text-align: center; margin: 25px 0;">Стенды</h4>
                                 <p>
                                     Форум "Crypto ЮГ 2022" -  это отличное место для презентации своей компании и демонстрации своего проекта на берегу черного моря в отличной локации.
-                                </p>
+                                </p> */}
                                 {/* <p>
                                     Воспользуйтесь данной возможностью, привлеките будущих клиентов и партнеров к своему проекту.
                                 </p>
@@ -446,7 +614,7 @@ const start = function (data, ID) {
                                     Как это сделать? Напишите нам и мы вам поможем!
                                 </p> */}
 
-                                <img class="forum_plan" src={images['forum/forum_plan']} />
+                                {/* <img class="forum_plan" src={images['forum/forum_plan']} /> */}
                                 {/* <a
                                     style="margin: 50px auto"
                                     class="с-preview__part"
@@ -457,7 +625,7 @@ const start = function (data, ID) {
                                 >
                                     <span>Купить стенд</span>
                                 </a> */}
-                            </div>
+                            {/* </div>
                             <div style="margin-bottom: 40px">
                                 <h4 style="text-align: center; margin-bottom: 40px">Генеральный спонсор</h4>
                                 <a target="_blank" rel="nofollow nooopener" href="https://blockchain24.pro" class="general_sponsor_banner">
@@ -857,13 +1025,13 @@ const start = function (data, ID) {
                                             <p style="margin-top: 10px; margin-bottom: 5px">Евгений Мусиенко</p>
                                             <p>Специалист по инвестициям</p>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     {/* <div class="speaker_item speaker_item_example" style="text-align: center">
                                         <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
                                             <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
                                         </div>
                                     </div> */}
-                                </div>
+                                {/* </div> */}
                                 {/* <a
                                     style="margin: 40px auto"
                                     class="с-preview__part"
@@ -874,7 +1042,7 @@ const start = function (data, ID) {
                                 >
                                     <span>Стать спикером</span>
                                 </a> */}
-                            </div>
+                            {/* </div>
                             <div>
                                 <h4 style="text-align: center; margin-bottom: 40px">Партнеры</h4>
                                 <div data-mainpage="true" class="c-infopartners__list partners_container">
@@ -1113,9 +1281,9 @@ const start = function (data, ID) {
                                     </a>
                                 </div>
 
-                            </div>
+                            </div>*/}
                         </div>
-                    </div>
+                    </div> 
                     {/* <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
                     <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script> */}
                 </div>

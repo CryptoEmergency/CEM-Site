@@ -9,7 +9,7 @@ import { fn } from '@src/functions/index.js';
 
 
 
-const ModalViewPhoto = function ({ path }, ID) {
+const ModalViewPhoto = function ({fullPath=false, path }, ID) {
     let [Static] = fn.GetParams({ data: { path } })
     let close = true
     init(
@@ -42,7 +42,7 @@ const ModalViewPhoto = function ({ path }, ID) {
                             ></button>
                         </header>
                         <div class="c-modal__body">
-                            <img src={`/assets/upload/orig/${path}`} width="100%" height="" />
+                            <img src={fullPath ? path : `/assets/upload/orig/${path}`} width="100%" height="" />
                         </div>
                         <div class="c-modal__footer"></div>
                     </section >
