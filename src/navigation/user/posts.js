@@ -836,6 +836,10 @@ const start = function (data, ID) {
                   return;
                 }
                 if (Static.checked) {
+                  if (Static.mediaInputs.show && Static.mediaInputs.value.length && !Static.mediaInputs.selectAspect) {
+                    Static.mediaInputs.selectAspect = 1
+                    // console.log('=d491dd=', Static.mediaInputs.selectAspect)
+                  }
                   fn.modals.ModalCropImage({
                     file: this.files[0],
                     typeUpload: 'posts',

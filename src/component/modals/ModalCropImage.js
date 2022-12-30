@@ -127,7 +127,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                     "c-cropper",
                                     "container",
                                     "crop-container",
-                                    Static.aspectSelect == 1 ? "c-cropper--avatar" : null
+                                    Static.aspectSelect == 1 && typeUpload == "avatar" ? "c-cropper--avatar" : null
                                 ]}
                             // style="addCropImage"
                             >
