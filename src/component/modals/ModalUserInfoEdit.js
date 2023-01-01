@@ -19,7 +19,7 @@ const ModalUserInfoEdit = function (userInfo, ID) {
     let Static = fn.GetParams({ ID })
 
     fn.initData.ModalUserInfoEdit(Static, userInfo, {})
-   // console.log('dwa', userInfo, Static)
+   console.log('pdf', userInfo, Static)
     //fn.initData.generate(["lang", "country", "group", "online"])
     let close = true
     init(

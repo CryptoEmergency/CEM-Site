@@ -12,6 +12,8 @@ import svg from '@assets/svg/index.js';
 import { Avatar, ItemsMenu, NotFound } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
+let visibleEdit = false;
+
 const BlockUserProfilePage = {}
 
 BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
@@ -225,16 +227,15 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    Variable.SetModals({ name: "ModalUserInterests", data: {} })
-
+                                                                    fn.modals.ModalUserInterests({type: 'add', userInfo: {}});
                                                                 }
                                                             },
                                                             {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                 //   console.log('=7e4dce=', "gggg")
-
+                                                                    visibleEdit = true
+                                                                    initReload()
                                                                 }
                                                             }
                                                         ]
@@ -248,7 +249,17 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                     data.userInfo.interest.map((item, index) => {
                                         return (
                                             <div>
-                                                <b>{item.title}<img class="editbigblockinfo" style="display: none;" src={svg['pencil']} /></b>
+                                                <b>
+                                                    {item.title}
+                                                    <img
+                                                        class="editbigblockinfo"
+                                                        src={svg['pencil']}
+                                                        style={visibleEdit ? "display: inline;" : "display: none;"}
+                                                        onclick={ async () => {
+                                                            fn.modals.ModalUserInterests({type: 'edit', userInfo: item});
+                                                        }}
+                                                    />
+                                                </b>
                                                 <span>{item.description}</span>
                                             </div>
                                         )

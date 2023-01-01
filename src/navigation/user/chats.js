@@ -575,6 +575,7 @@ const start = function (data, ID) {
                                                                 media.push(file)
                                                             })
                                                         }
+                                                        // console.log('=d2dd12=',media)
                                                         // let data = { value: { users: Static.activeUser._id, message: { text } } }
                                                         // let response = await api({ type: "set", action: "setUserChats", data: data })
                                                         let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })

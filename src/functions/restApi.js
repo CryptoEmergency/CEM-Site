@@ -815,6 +815,11 @@ restApi.setUsers.any = async function ({ data, noAlert = true }) {
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setUsers.update = async function ({ data, noAlert = true }) {
+    const response = await sendApi.create("setUsers", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 restApi.setUsers.view = async function ({ _id, noAlert = true }) {
     let data = {
         value: { "statistic.view": true },

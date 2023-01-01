@@ -311,6 +311,7 @@
 			&.createPostImage {
 				border: none;
 				background-color: transparent;
+				overflow-y: auto;
 			}
 		}
 	}

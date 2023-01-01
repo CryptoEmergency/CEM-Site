@@ -160,6 +160,39 @@ initData.ModalUserInfoEdit = function (Static, userInfo, action) {
     return
 }
 
+initData.ModalUserInterests = function (Static, userInfo, action) {
+    Static.isValid = false
+
+    if (userInfo) {
+        Static.name = input
+        Static.name.value = userInfo.title
+        Static.name.placeholder = Variable.lang.label.label
+        
+        Static.description = input
+        Static.description.value = userInfo.description
+        Static.description.placeholder = Variable.lang.label.labelDetails
+    } else {
+
+        Static.name = {
+            value: "",
+            type: "text",
+            valid: false,
+            autocomplete: "off",
+            placeholder: Variable.lang.label.label,
+        }
+
+        Static.description = {
+            value: "",
+            type: "text",
+            valid: false,
+            autocomplete: "off",
+            placeholder: Variable.lang.label.labelDetails,
+        }
+    }
+
+    return
+}
+
 initData.contacts = function (Static) {
     let tmpName
     Static.isValid = false
@@ -433,7 +466,7 @@ initData.lenta_users_show = function (Static) {
     Static.elMedia = {}
     Static.elNumberSwiper = {}
     Static.commentText = []
-    
+
     Static.mainComment = {
         rows: 1,
         adaptive: 4
@@ -713,50 +746,50 @@ initData.generate = function (arrData) {
 
 initData.rooms = function (Static) {
 
-Static.sytemInfo = {}
-if(Variable.auth)
-{
-    Static.sytemInfo.code = Variable.myInfo.mainLanguage.code
-    Static.sytemInfo.name = Variable.myInfo.mainLanguage.orig_name
-}
-else{
-    Static.sytemInfo.code = Variable.lang.code
-    Static.sytemInfo.name = Variable.lang.lang_orig
-}
+    Static.sytemInfo = {}
+    if (Variable.auth) {
+        Static.sytemInfo.code = Variable.myInfo.mainLanguage.code
+        Static.sytemInfo.name = Variable.myInfo.mainLanguage.orig_name
+    }
+    else {
+        Static.sytemInfo.code = Variable.lang.code
+        Static.sytemInfo.name = Variable.lang.lang_orig
+    }
 
 
-Static.optionsSelect = {
-    Category: {
-      active:"all",
-      items:[
-        {text:"Все категории",value:"all"},
-        {text:"NFT",value:"NFT"},
-        {text:"Crypto вселененная",value:"Crypto"},
-        {text:"Altcoin",value:"Altcoin"},
-        {text:"Bitcoin",value:"Bitcoin"},
-        {text:"Finances",value:"Finances"},
-        {text:"Trading",value:"Trading"}
-      ],
-    nameOptions:"Category",
-    open:false,
-    title:"Показать"
-    },
-    Date: {
-      active:"date",
-      items:[
-        {text:"По дате создания",value:"date"},
-        {text:"По количеству участников",value:"users"},
-        {text:"По количеству сообщений",value:"message"}
-      
-      ],
-      nameOptions:"Date",
-      open:false,
-      title:"Сортировать"}
-};
- Static.Category={value:"all"}
+    Static.optionsSelect = {
+        Category: {
+            active: "all",
+            items: [
+                { text: "Все категории", value: "all" },
+                { text: "NFT", value: "NFT" },
+                { text: "Crypto вселененная", value: "Crypto" },
+                { text: "Altcoin", value: "Altcoin" },
+                { text: "Bitcoin", value: "Bitcoin" },
+                { text: "Finances", value: "Finances" },
+                { text: "Trading", value: "Trading" }
+            ],
+            nameOptions: "Category",
+            open: false,
+            title: "Показать"
+        },
+        Date: {
+            active: "date",
+            items: [
+                { text: "По дате создания", value: "date" },
+                { text: "По количеству участников", value: "users" },
+                { text: "По количеству сообщений", value: "message" }
 
-Static.language = {name:"all",code:Variable.lang.code}
-   
+            ],
+            nameOptions: "Date",
+            open: false,
+            title: "Сортировать"
+        }
+    };
+    Static.Category = { value: "all" }
+
+    Static.language = { name: "all", code: Variable.lang.code }
+
     //Зарегистрирован или нет
     Static.Auth = Variable.auth
     //настройки языка
@@ -771,9 +804,9 @@ Static.language = {name:"all",code:Variable.lang.code}
         code: Static.sytemInfo.code,
         name: Static.sytemInfo.name
     }
-   
 
-    Static.apiFilter = {system:false}
+
+    Static.apiFilter = { system: false }
 
     //кодовое слово
     Static.confirmPasword = {
