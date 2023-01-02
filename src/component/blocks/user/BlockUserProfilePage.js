@@ -12,7 +12,8 @@ import svg from '@assets/svg/index.js';
 import { Avatar, ItemsMenu, NotFound } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
-let visibleEdit = false;
+let visibleEditInterest = false;
+let visibleEditWork = false;
 
 const BlockUserProfilePage = {}
 
@@ -234,7 +235,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    visibleEdit = true
+                                                                    visibleEditInterest = true
                                                                     initReload()
                                                                 }
                                                             }
@@ -254,7 +255,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     <img
                                                         class="editbigblockinfo"
                                                         src={svg['pencil']}
-                                                        style={visibleEdit ? "display: inline;" : "display: none;"}
+                                                        style={visibleEditInterest ? "display: inline;" : "display: none;"}
                                                         onclick={ async () => {
                                                             fn.modals.ModalUserInterests({type: 'edit', userInfo: item});
                                                         }}
@@ -286,16 +287,15 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                 //   console.log('=7e4dce=', "gggg")
-
+                                                                    fn.modals.ModalUserAddWork({type: 'add', userInfo: {}});
                                                                 }
                                                             },
                                                             {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                 //   console.log('=7e4dce=', "gggg")
-
+                                                                   visibleEditWork = true
+                                                                   initReload()
                                                                 }
                                                             }
 
@@ -310,7 +310,17 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                     data.userInfo.work.map((item, index) => {
                                         return (
                                             <div id={item._id} class="work_and_education_block">
-                                                <span>{item.title} <img class="editworkinfo" style="display: none;" src={svg['pencil']} /></span>
+                                                <span>
+                                                    {item.title} 
+                                                    <img
+                                                        class="editworkinfo"
+                                                        src={svg['pencil']}
+                                                        style={visibleEditWork ? "display: inline;" : "display: none;"}
+                                                        onclick={ async () => {
+                                                            fn.modals.ModalUserAddWork({type: 'edit', userInfo: item});
+                                                        }}
+                                                    />
+                                                </span>
                                                 <span>{item.period}</span>
                                                 <span>{item.description}</span>
                                             </div>
