@@ -97,30 +97,33 @@ const ModalUserInterests = function ({ userInfo, type }, ID) {
                             <ButtonSubmit
                                 text={type == 'add' ? Variable.lang.button.add : Variable.lang.button.edit}
                                 onclick={async () => {
-                                    if (Static.name.value == "" || Static.description.value == "") {
-                                        return
-                                    }
-                                    let data = {
-                                        value: {
-                                            interest: []
-                                        }
-                                    }
-                                    if (type == 'edit') {
-                                        data.value.interest.push({
-                                            title: Static.name.value,
-                                            description: Static.description.value,
-                                        })
+                                    if(!!Static.name.value && !!Static.description.value) {
+                                        let response;
 
-                                        data._id = Static._id
-                                    } else {
-                                        data.value.interest.push({
-                                            title: Static.name.value,
-                                            description: Static.description.value,
-                                        })
+                                        let data = {
+                                            value: {
+                                                interest: []
+                                            }
+                                        }
+                                        if (type == 'edit') {
+                                            data.value.interest.push({
+                                                title: Static.name.value,
+                                                description: Static.description.value,
+                                            })
+
+                                            data._id = Static._id
+                                            // console.log('=9615aa=', data)
+                                            response = await fn.restApi.setUsers.update({ data })
+                                        } else {
+                                            data.value.interest.push({
+                                                title: Static.name.value,
+                                                description: Static.description.value,
+                                            })
+                                            // console.log('=2c7e95=', data)
+                                            response = await fn.restApi.setUsers.any({ data })
+                                        }
+                                        Variable.DelModals("ModalUserInterests");
                                     }
-                                    // let response = await api({ type: "set", action: "setUsers", data })
-                                    let response = await fn.restApi.setUsers.update({ data })
-                                    Variable.DelModals("ModalUserInterests");
                                 }}
                             />
                         </footer>
