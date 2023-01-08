@@ -1,0 +1,33 @@
+.c-groupimage {
+    display: grid;
+    grid-template-columns: calc(50% - 4px) calc(50% - 4px);
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+
+    &__item {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 7.5px;
+    }
+
+    &__img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: auto;
+        height: auto;
+        min-width: 100%;
+        min-height: 100%;
+        margin: 0 !important;
+
+        &.video_container {
+            .progress_player,
+            .time {
+                display: none;
+            }
+        }
+    }
+}

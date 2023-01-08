@@ -12,6 +12,7 @@ import svg from '@assets/svg/index.js';
 import {
     Avatar,
     Swiper,
+    GroupImage,
     AudioPlayer,
     LazyImage,
     VideoPlayer,
@@ -313,7 +314,7 @@ const start = function (data, ID) {
                                         let user
                                         let lastMessage = item.message[0]
                                         let iconStatus
-                                   
+
                                         if (lastMessage.status == 0) {
                                             iconStatus = "sent_message_icon"
                                         } else if (lastMessage.status == 1) {
@@ -321,22 +322,22 @@ const start = function (data, ID) {
                                         } else {
                                             iconStatus = "read_message_icon"
                                         }
-                                         if(item.users.length <2)
-                                         {
-                                            user = item.users[0]
-                                         }else{
-                                        if (Variable.myInfo._id != item.users[0]._id) {
+                                        if (item.users.length < 2) {
                                             user = item.users[0]
                                         } else {
-                                            user = item.users[1]
-                                        }}
-                                 
+                                            if (Variable.myInfo._id != item.users[0]._id) {
+                                                user = item.users[0]
+                                            } else {
+                                                user = item.users[1]
+                                            }
+                                        }
+
                                         return (
                                             <div
                                                 class={["messages_list_item", item._id == Static.activeChat ? "active" : null]}
                                                 onclick={async () => {
                                                     Static.activeChat = item._id
-                                                    if(item._id == 1){
+                                                    if (item._id == 1) {
                                                         initReload()
                                                         return
                                                     }
@@ -411,10 +412,10 @@ const start = function (data, ID) {
                                                     const arrReturn = Static.messageList.list_records[0].message.map((item, index) => {
                                                         return (
                                                             <div class={item.author == Variable.myInfo._id ? "your_message_container" : "friend_message_container"}>
-                                                                <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", Helpers.ifHaveMedia(item.media, "video") ? "chat_have_video" : null, Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
+                                                                <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", /*Helpers.ifHaveMedia(item.media, "video") ? "chat_have_video" : null,*/ Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
                                                                     {Helpers.editText(item.text, { clear: true, paragraph: true, html: true })}
 
-                                                                    {() => {
+                                                                    {/* {() => {
                                                                         if (item.media && item.media.length) {
                                                                             const arrMedia = item.media.map((item, index) => {
 
@@ -485,6 +486,142 @@ const start = function (data, ID) {
 
                                                                             return arrMedia
                                                                         }
+                                                                    }} */}
+
+                                                                    {() => {
+                                                                        if (item.media && item.media.length) {
+                                                                            // console.log(`=6cf50b= media `, item.media)
+
+                                                                            if (item.media.length < 4) {
+
+                                                                                const arrMedia = item.media.map((item, index) => {
+
+                                                                                    if (item.type == "video" && !Array.isArray(item)) {
+                                                                                        return (
+                                                                                            // <div class="swiper-slide">
+                                                                                            <VideoPlayer
+                                                                                                Static={Static}
+                                                                                                item={item}
+                                                                                                path={`/assets/upload/chat/`}
+                                                                                            />
+                                                                                            // </div>
+                                                                                        );
+                                                                                    }
+
+                                                                                    if (item.type == "audio" && !Array.isArray(item)) {
+                                                                                        return (
+                                                                                            // <div class="swiper-slide">
+                                                                                            <AudioPlayer
+                                                                                                Static={Static}
+                                                                                                item={item}
+                                                                                                path={`/assets/upload/chat/`}
+                                                                                            />
+                                                                                            // </div>
+                                                                                        );
+                                                                                    }
+
+                                                                                    if (item.type == "image" && !Array.isArray(item)) {
+                                                                                        return (
+                                                                                            // <div class="swiper-slide">
+                                                                                            //     <div class="swiper-post_media_image_container">
+                                                                                            <LazyImage
+                                                                                                path={`/assets/upload/chat/` + item.name}
+                                                                                            />
+                                                                                            //     </div>
+                                                                                            // </div>
+                                                                                            // <LazyImage
+                                                                                            //     className={"c-groupimage__item"}
+                                                                                            //     classImg={"c-groupimage__img"}
+                                                                                            //     path={`/assets/upload/chat/` + item.name}
+                                                                                            // />
+                                                                                        );
+                                                                                    }
+
+                                                                                    if (Array.isArray(item)) {
+                                                                                        let i = index;
+                                                                                        return (
+                                                                                            <div class="swiper-slide user_post_text_background">
+                                                                                                {
+                                                                                                    item.map((itemAudio, index) => {
+                                                                                                        return (
+                                                                                                            <AudioPlayer
+                                                                                                                Static={Static}
+                                                                                                                item={itemAudio}
+                                                                                                                path={`/assets/upload/chat/`}
+                                                                                                            />
+                                                                                                        );
+                                                                                                    })
+                                                                                                }
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+                                                                                })
+                                                                                return arrMedia;
+                                                                            } else {
+                                                                                const arrMedia = item.media.map((item, index) => {
+
+                                                                                    if (item.type == "video" && !Array.isArray(item)) {
+                                                                                        return (
+                                                                                            <div class="c-groupimage__item">
+                                                                                                <VideoPlayer
+                                                                                                    Static={Static}
+                                                                                                    item={item}
+                                                                                                    path={`/assets/upload/chat/`}
+                                                                                                    className={"c-groupimage__img"}
+                                                                                                />
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+
+                                                                                    if (item.type == "audio" && !Array.isArray(item)) {
+                                                                                        return (
+                                                                                            // <div class="swiper-slide">
+                                                                                            <AudioPlayer
+                                                                                                Static={Static}
+                                                                                                item={item}
+                                                                                                path={`/assets/upload/chat/`}
+                                                                                            />
+                                                                                            // </div>
+                                                                                        );
+                                                                                    }
+
+                                                                                    if (item.type == "image" && !Array.isArray(item)) {
+                                                                                        return (
+                                                                                            <LazyImage
+                                                                                                className={"c-groupimage__item"}
+                                                                                                classImg={"c-groupimage__img"}
+                                                                                                path={`/assets/upload/chat/` + item.name}
+                                                                                            />
+                                                                                        );
+                                                                                    }
+
+                                                                                    // if (Array.isArray(item)) {
+                                                                                    //     let i = index;
+                                                                                    //     return (
+                                                                                    //         <div class="swiper-slide user_post_text_background">
+                                                                                    //             {
+                                                                                    //                 item.map((itemAudio, index) => {
+                                                                                    //                     return (
+                                                                                    //                         <AudioPlayer
+                                                                                    //                             Static={Static}
+                                                                                    //                             item={itemAudio}
+                                                                                    //                             path={`/assets/upload/chat/`}
+                                                                                    //                         />
+                                                                                    //                     );
+                                                                                    //                 })
+                                                                                    //             }
+                                                                                    //         </div>
+                                                                                    //     );
+                                                                                    // }
+                                                                                })
+                                                                                return (
+                                                                                    <GroupImage
+                                                                                        className="c-groupimage__item"
+                                                                                        image={arrMedia}
+                                                                                    />
+                                                                                )
+                                                                            }
+                                                                        }
                                                                     }}
                                                                     <div class={item.author == Variable.myInfo._id ? "your_message_date" : "friend_message_date"}>
                                                                         {Helpers.getDateFormat(item.showDate, "now")}
@@ -523,12 +660,12 @@ const start = function (data, ID) {
                                                 null
                                         }
                                         <div class="c-comments__field create_post_container1">
-                                        <MediaButton
+                                            <MediaButton
                                                 onclickAll={function () {
                                                     if (this.files.length == 0) {
                                                         return;
                                                     }
-
+                                                    console.log('=ca274b=', this.files)
                                                     loadPhoto(this.files, "chat");
 
                                                     // fn.modals.ModalCropImage({
@@ -542,7 +679,7 @@ const start = function (data, ID) {
                                                     //     }
                                                     // })
                                                 }}
-                                                
+
                                                 iconPhoto={"message_add_file"}
                                             />
 
@@ -552,7 +689,7 @@ const start = function (data, ID) {
                                             />
 
                                             {/* <div id="emoji">@</div> */}
-                                            {Static.mediaInputs.value.length == 0 && (typeof Static.message.value == 'undefined' || Static.message.value == '') ? 
+                                            {Static.mediaInputs.value.length == 0 && (typeof Static.message.value == 'undefined' || Static.message.value == '') ?
                                                 <MediaButton
                                                     onclickMic={function () {
                                                         alert("onclicMic")
@@ -570,51 +707,58 @@ const start = function (data, ID) {
                                                         if (Static.message.el.value.trim().length) {
                                                             text = Static.message.el.value.trim()
                                                         }
+                                                        debugger
                                                         if (Static.mediaInputs.value.length != 0) {
-                                                            Static.mediaInputs.value.forEach((file) => {
-                                                                media.push(file)
+                                                            Static.mediaInputs.value.forEach(async (file) => {
+                                                                if (file.type == 'audio') {
+                                                                    let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
+                                                                } else if (file.type == 'image' || file.type == 'video') {
+                                                                    media.push(file)
+                                                                }
                                                             })
                                                         }
-                                                        // console.log('=d2dd12=',media)
+                                                        console.log('=d2dd12=', media)
                                                         // let data = { value: { users: Static.activeUser._id, message: { text } } }
                                                         // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                        let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
-                                                        // console.log('=6befba=', response)
-                                                        if (response.status === "ok") {
-                                                            Static.message.el.value = ""
-                                                            Static.message.value = ""
-                                                            if (Static.message.adaptive) {
-                                                                Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
-                                                            }
-                                                            if (response && response.list_records && response.list_records[0]) {
-                                                                let newRes = response.list_records[0]
-
-                                                                if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
-                                                                    Static.messageList.list_records[0].message.unshift(newRes)
-                                                                } else {
-                                                                    Static.messageList.list_records[0].message = [newRes]
+                                                        if (media.length > 0) {
+                                                            let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
+                                                            // console.log('=6befba=', response)
+                                                            if (response.status === "ok") {
+                                                                Static.message.el.value = ""
+                                                                Static.message.value = ""
+                                                                if (Static.message.adaptive) {
+                                                                    Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
                                                                 }
-                                                                // console.log('=46ae17=', Static.chatsList)
+                                                                if (response && response.list_records && response.list_records[0]) {
+                                                                    let newRes = response.list_records[0]
 
-                                                                if (Static.chatsList && Static.chatsList.list_records) {
-                                                                    Static.chatsList.list_records.map((item) => {
-                                                                        let tmp = item.users.filter(item => item._id == Static.activeUser._id)
-                                                                        if (tmp.length) {
-                                                                            item.message[0] = newRes
-                                                                        }
-                                                                    })
+                                                                    if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                                                                        Static.messageList.list_records[0].message.unshift(newRes)
+                                                                    } else {
+                                                                        Static.messageList.list_records[0].message = [newRes]
+                                                                    }
+                                                                    // console.log('=46ae17=', Static.chatsList)
+
+                                                                    if (Static.chatsList && Static.chatsList.list_records) {
+                                                                        Static.chatsList.list_records.map((item) => {
+                                                                            let tmp = item.users.filter(item => item._id == Static.activeUser._id)
+                                                                            if (tmp.length) {
+                                                                                item.message[0] = newRes
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                    Static.mediaInputs.value = [];
+                                                                    initReload();
                                                                 }
-                                                                Static.mediaInputs.value = [];
-                                                                initReload();
+                                                            } else {
+                                                                Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                                                             }
-                                                        } else {
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                                                         }
                                                     }}
                                                 />
                                             }
                                         </div>
-                                        
+
                                     </section>
                                 )
                             } else {

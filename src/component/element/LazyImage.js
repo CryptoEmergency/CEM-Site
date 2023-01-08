@@ -6,10 +6,20 @@ import {
 // check
 import images from "@assets/images/index.js";
 
-const LazyImage = function ({ path, ratio, className }) {
+const calcWidthHeight = function(e) {
+    let ratio = e.path[0].naturalWidth / e.path[0].naturalHeight;
+    e.target.style = ratio < 1 ? "width: 100%" : "height: 100%";
+}
+
+const LazyImage = function ({ path, ratio, className, classImg = '' }) {
     return (
         <div class={className}>
-            <img src={path}
+            <img
+                src={path}
+                class={classImg}
+                onload={ (e) => {
+                    className == 'c-groupimage__item' ? calcWidthHeight(e) : null
+                }}
             />
         </div>
     );

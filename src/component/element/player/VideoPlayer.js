@@ -22,13 +22,18 @@ const formatTime = function (time) {
     return lead0(h, 2) + ":" + lead0(m, 2) + ":" + lead0(s, 2)
 }
 // let Static = Variable.State(item._id)
-const VideoPlayer = function ({ Static, item, path }) {
+const VideoPlayer = function ({ Static, item, path, className = false }) {
     if (!Static.elMedia[item._id]) {
         Static.elMedia[item._id] = {}
     }
     let elMedia = Static.elMedia[item._id]
     return (
-        <div class="video_container">
+        <div
+            class={[
+                "video_container",
+                className ? className : null
+            ]}
+        >
             <div class="video_sign"></div>
             <video
                 playsinline
