@@ -259,6 +259,7 @@ async function ChangeRooms(Static, _id, system) {
 
   Static.Rooms = response.list_records[0]
 
+  Static.users = response.list_records[0].users
 
   Static.ChatData  = await ShowMessage(Static)
   
@@ -267,10 +268,11 @@ async function ChangeRooms(Static, _id, system) {
   Static.MessageValue.el.value = ""
 
   
-
+  
   initReload()
   document.getElementById("MainBlock").style.display="block"
- document.getElementById("ChatRoom").style.display=""
+  document.getElementById("ChatRoom").style.display=""
+  document.getElementById("ShowHide").innerText="Свернуть"
 
 
 
@@ -779,7 +781,6 @@ function toggle(el) {
   isHidden(el) ? show(el) : hide(el)
 }
 
-
 function show(el) {
   el.style.display = ""
   let a = document.getElementById("ShowHide")
@@ -936,7 +937,116 @@ initReload()
   return (
 
     <div class="c-rooms c-container">
-  
+   {<aside class="c-chats__aside">
+            <div class="c-chats__list">
+              <div class="c-chats__checkboxes">
+                <div
+                  class={[
+                    "c-chats__check",
+                    "c-chats__check--created",
+                    true ? "c-chats__check--active" : null
+                  ]}
+                  style="cursor:pointer"
+                  title="Комнаты, созданные мной"
+                  onClick={(e) => {
+                    document.getElementById("spinner").hidden = false
+                    chatRooms(Static, true)
+                    Static.usChat.show = true
+
+                  }}
+                  
+                >
+                  <img class="c-chats__checkimgav"  src={svg["icon/icon_group_created"]} />
+                  
+                  
+                </div>
+                <div
+                  class={[
+                    "c-chats__check",
+                    "c-chats__check--fellowship",
+                    false ? "c-chats__check--active" : null
+                  ]}
+                
+                  style="cursor:pointer"
+                  title="Комнаты, на которые я подписан"
+                  onClick={(e) => {
+                    document.getElementById("spinner").hidden = false
+                    chatRooms(Static, false)
+                    Static.usChat.show = true
+
+                  }}
+                >
+                  <img class="c-chats__checkimgav"  src={svg["icon/icon_group_fellowship"]} />
+                  
+                </div>
+              </div>
+              <ul class="c-chats__togglers">
+
+                {
+
+                  Variable.ListUsersRooms.list_records.map(function (userrooms, i) {
+                    if (userrooms.settingsroom.title && typeof userrooms.settingsroom.title !== "undefined") {
+                      return (
+                        <li
+                          class={[
+                            "c-chats__toggler",
+                            "c-toggler",
+                            typeof Static.Rooms._id !== "undefined" && Static.Rooms._id == userrooms._id ? "c-toggler--active" : null
+                          ]}
+                        >
+                          <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
+                             document.getElementById("spinner").hidden = false
+                            ChangeRooms(Static, userrooms._id, false)
+
+                          }}>
+                            {
+                              userrooms.settingsroom.images ?
+                                <img title={userrooms.settingsroom.title} src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
+                                :
+                                <div class="c-toggler__wrap">
+                                  <span class="c-toggler__name">{userrooms.settingsroom.title}</span>
+                                </div>
+                            }
+                          </a>
+                        </li>
+                      )
+                    }
+                  })
+
+                }
+
+              </ul>
+            </div>
+            <div class="c-chats__actions" onclick={() => {
+              if (Variable.auth) {
+                fn.modals.ModalCreateRoom({
+                  callback: async (response) => {
+
+                    if (response.list_records.length == 1) {
+                      await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: Variable.myInfo._id }, limit: 10 })
+
+                      //для пользовательских комнат которые пользователь сам создал
+                      await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+                      initReload()
+                    }
+                    else {
+                      initReload()
+                    }
+                  }
+                })
+              }
+              else {
+                fn.modals.ModalNeedAuth()
+              }
+
+            }}>
+              <div class="c-action">
+                <img src={svg.add_chats} class="c-action__icon" width="30" height="30" alt="" title="" />
+                <span class="c-action__title">Создать комнату</span>
+              </div>
+            </div>
+
+          </aside>}
       <div class="c-rooms__langs c-chats__list c-chats__list--system">
         <ul class="c-chats__togglers">
           {/*
@@ -1027,7 +1137,7 @@ initReload()
 } 
 
 style="display:none" id={"MainBlock"} >
-      <div class="c-chats__form c-form"  >
+      <div class="c-chats__form c-form" style="cursor:grab" >
         <div class="c-form__wrapfield c-form__wrapfield--text">
           <div class="c-form__field" style="cursur:grab">
             <div class="c-form__actions">
@@ -1044,112 +1154,49 @@ document.getElementById("ShowHide").innerText="Свернуть"
         <div style="display:none" id={"ChatRoom"} class=" c-chats__wrapper" onmouseout={function(e){Static.dragging = true }}  onmouseover={function(e){Static.dragging = false }} >
           <aside class="c-chats__aside">
             <div class="c-chats__list">
-              <div class="c-chats__checkboxes">
+          
                 <div
                   class={[
-                    "c-chats__check",
+                 
                     "c-chats__check--created",
                     true ? "c-chats__check--active" : null
                   ]}
-                  style="cursor:pointer"
-                  title="Комнаты, созданные мной"
-                  onClick={(e) => {
-                    document.getElementById("spinner").hidden = false
-                    chatRooms(Static, true)
-                    Static.usChat.show = true
-
-                  }}
+                  title="Список участников"
                   
                 >
-                  <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_created"]} />
+                  <img class="c-chats__checkimg" width="" height="30px" src={svg["icon/icon_group_created"]} />
                   
                   
                 </div>
-                <div
-                  class={[
-                    "c-chats__check",
-                    "c-chats__check--fellowship",
-                    false ? "c-chats__check--active" : null
-                  ]}
-                
-                  style="cursor:pointer"
-                  title="Комнаты, на которые я подписан"
-                  onClick={(e) => {
-                    document.getElementById("spinner").hidden = false
-                    chatRooms(Static, false)
-                    Static.usChat.show = true
-
-                  }}
-                >
-                  <img class="c-chats__checkimg" width="" height="" src={svg["icon/icon_group_fellowship"]} />
-                  
-                </div>
-              </div>
+      
               <ul class="c-chats__togglers">
 
                 {
+                  ()=>{
 
-                  Variable.ListUsersRooms.list_records.map(function (userrooms, i) {
-                    if (userrooms.settingsroom.title && typeof userrooms.settingsroom.title !== "undefined") {
-                      return (
-                        <li
-                          class={[
-                            "c-chats__toggler",
-                            "c-toggler",
-                            typeof Static.Rooms._id !== "undefined" && Static.Rooms._id == userrooms._id ? "c-toggler--active" : null
-                          ]}
-                        >
-                          <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
-                             document.getElementById("spinner").hidden = false
-                            ChangeRooms(Static, userrooms._id, false)
-
-                          }}>
-                            {
-                              userrooms.settingsroom.images ?
-                                <img title={userrooms.settingsroom.title} src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
-                                :
-                                <div class="c-toggler__wrap">
-                                  <span class="c-toggler__name">{userrooms.settingsroom.title}</span>
-                                </div>
-                            }
-                          </a>
-                        </li>
-                      )
+                    if(Static.users)
+                    {
+                     
+                     return Static.users.map(function (userrooms, i) {
+                      if(userrooms._id!==Variable.myInfo._id)
+                      {
+                        return(
+                          <li>
+                          <Avatar author={userrooms} />
+                          <center>{userrooms.nickname}</center>
+                          </li>
+                        )
+                      }
+                      })
                     }
-                  })
+                  }                 
+                  
 
                 }
 
               </ul>
             </div>
-            <div class="c-chats__actions" onclick={() => {
-              if (Variable.auth) {
-                fn.modals.ModalCreateRoom({
-                  callback: async (response) => {
-
-                    if (response.list_records.length == 1) {
-                      await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: Variable.myInfo._id }, limit: 10 })
-
-                      //для пользовательских комнат которые пользователь сам создал
-                      await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
-                      initReload()
-                    }
-                    else {
-                      initReload()
-                    }
-                  }
-                })
-              }
-              else {
-                fn.modals.ModalNeedAuth()
-              }
-
-            }}>
-              <div class="c-action">
-                <img src={svg.add_chats} class="c-action__icon" width="30" height="30" alt="" title="" />
-                <span class="c-action__title">Создать комнату</span>
-              </div>
-            </div>
+          
 
           </aside>
    
