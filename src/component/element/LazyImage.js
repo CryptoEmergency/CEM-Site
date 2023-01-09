@@ -12,15 +12,15 @@ const calcWidthHeight = function (e) {
 }
 
 const LazyImage = function ({ path, ratio, className, classImg = '', counter = null, onClick = null }) {
-
-    if (className.includes('c-groupimage__item--more')) {
+    if (className && className.includes('c-groupimage__item--more')) {
+        
         return (
             <div class={className} onClick={onClick}>
                 <img
                     src={path}
                     class={classImg}
                     onload={(e) => {
-                        className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
+                        className && className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
                     }}
                 />
                 <span class="c-groupimage__counter">+ {counter}</span>
@@ -33,7 +33,7 @@ const LazyImage = function ({ path, ratio, className, classImg = '', counter = n
                     src={path}
                     class={classImg}
                     onload={(e) => {
-                        className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
+                        className && className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
                     }}
                 />
             </div>
