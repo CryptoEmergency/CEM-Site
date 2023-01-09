@@ -46,7 +46,7 @@ async function subscribeRoom(Static, title, _id) {
 
     await fn.restApi.setUserRoomMessage.sendMessage({ _id, text })
     let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
-
+    Static.Subscription = false
     //если включены мои комнаты и я сижу в чужой комнате
     if (Static.Rooms._id == _id) {
 
@@ -72,7 +72,7 @@ async function subscribeRoom(Static, title, _id) {
 
     let resp = await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
 
-
+    Static.Subscription = false
     if (Static.Rooms._id == _id) {
 
       Static.Rooms = {}
@@ -263,8 +263,12 @@ async function ChangeRooms(Static, _id, system) {
   document.getElementById("MainBlock").style.display = "block"
   document.getElementById("ChatRoom").style.display = ""
   document.getElementById("ShowHide").innerText = "Свернуть"
-
-
+  if(document.getElementById("scetchButton"))
+  {
+   document.getElementById("scetchButton").classList.remove("tbutton")
+  }
+ 
+  document.getElementsByClassName("scetch")[0].innerText = ""
 
 }
 
@@ -333,6 +337,7 @@ async function ShowMessage(Static) {
 
       Static.subMarker = <a
         class="c-button c-button--outline2"
+        id={"scetchButton"}
         onmouseover={function () {
           if (Static.z > 4) {
             this.style.top = getRandomInt(500) + "px"
@@ -362,7 +367,7 @@ async function ShowMessage(Static) {
           }
           if (Static.z > 4) {
             if (Static.z == 5) {
-              fn.modals.ModalNeedAuth(true)
+              fn.modals.ModalNeedAuth({game:"begin"})
             }
 
             let el2 = document.getElementsByClassName("game")
