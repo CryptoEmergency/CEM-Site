@@ -36,6 +36,10 @@ const ModalPage = async function (ID, reload) {
     true
   )
   if (!reload && getInitList()[ID].firstStart) {
+    if (Variable.Static.elArrowTop && Variable.Static.elArrowTop.style.display != "none") {
+      Variable.Static.elArrowTop.style.display = "none"
+      // Variable.Static.elArrowTopLink = null
+    }
     await getInitList()[ID].firstStart(reload)
   }
 
