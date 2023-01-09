@@ -19,6 +19,8 @@ export { MediaPreview } from "./MediaPreview.js"
 export { NotFound } from "./NotFound.js"
 // Свайпер
 export { Swiper } from "./Swiper.js";
+// Группа изображений в чате
+export { GroupImage } from './GroupImage.js';
 
 export { LazyImage } from "./LazyImage.js";
 

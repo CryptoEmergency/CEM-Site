@@ -37,6 +37,61 @@
             align-items: stretch;
             border-radius: 20px 0 0 20px;
         }
+
+        &--newstyle {
+            flex-wrap: wrap;
+
+            .c-chats {
+                &__lang {
+                    position: static;
+                    flex-basis: 100%;
+                    flex-shrink: 0;
+                    padding-top: 20px;
+                    background: #1D2029;
+                }
+            }
+
+            @media(min-width: 1240px) {
+                position: relative;
+                flex-wrap: nowrap;
+
+                .c-chats {
+                    &__list {
+                        min-height: 150px;
+                    }
+
+                    &__togglers {
+                        padding-left: 110px;
+                        padding-right: 110px;
+                    }
+
+                    &__checkboxes {
+                        border-radius: 20px 20px 0 0;
+                    }
+
+                    &__actions {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        top: 70px;
+                        width: 100px;
+
+                        .c-action {
+                            border-radius: 0;
+                        }
+                    }
+
+                    &__lang {
+                        position: absolute;
+                        right: 10px;
+                        top: 95px;
+                        flex-basis: auto;
+                        padding-top: 0;
+                        background: transparent;
+                    }
+                }
+            }
+        }
     }
 
     &__content {
@@ -238,6 +293,21 @@
                 background-color: transparent;
             }
         }
+
+        &--horizontal {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            .c-chats {
+
+                &__toggler {
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
 
     &__toggler {
@@ -364,7 +434,7 @@
 
     &__checkimg {
         display: block;
-        width: 75%;
+        // width: 75%;
         margin: auto;
     }
 

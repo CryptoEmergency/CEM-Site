@@ -128,7 +128,7 @@ const BottomMenu = function () {
                     onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings(); }}>
                 </a>
             </div>
-            {/* <div class="c-userpanel__addmodal">
+            <div class="c-userpanel__addmodal">
                 <div class="c-userpanel__inner">
                     <p>{Variable.lang.button.create}</p>
                     <a class="c-userpanel__link" onclick={fn.siteLink} href="/user/posts/">
@@ -139,7 +139,7 @@ const BottomMenu = function () {
                 <div data-action="user_cabinet_add_close" class="c-userpanel__close">
                     <img src={svg.close} />
                 </div>
-            </div>
+            </div> */}
             <div
                 id="toTop"
                 Element={($el) => { Variable.Static.elArrowTop = $el }}
@@ -160,7 +160,7 @@ const BottomMenu = function () {
                 }}
             >
                 <img src={svg.arrowTop} />
-            </div> */}
+            </div>
         </div >
     )
 };

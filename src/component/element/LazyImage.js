@@ -6,13 +6,39 @@ import {
 // check
 import images from "@assets/images/index.js";
 
-const LazyImage = function ({ path, ratio, className }) {
-    return (
-        <div class={className}>
-            <img src={path}
-            />
-        </div>
-    );
+const calcWidthHeight = function (e) {
+    let ratio = e.path[0].naturalWidth / e.path[0].naturalHeight;
+    e.target.style = ratio < 1 ? "width: 100%" : "height: 100%";
+}
+
+const LazyImage = function ({ path, ratio, className, classImg = '', counter = null, onClick = null }) {
+
+    if (className.includes('c-groupimage__item--more')) {
+        return (
+            <div class={className} onClick={onClick}>
+                <img
+                    src={path}
+                    class={classImg}
+                    onload={(e) => {
+                        className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
+                    }}
+                />
+                <span class="c-groupimage__counter">+ {counter}</span>
+            </div>
+        );
+    } else {
+        return (
+            <div class={className} onClick={onClick}>
+                <img
+                    src={path}
+                    class={classImg}
+                    onload={(e) => {
+                        className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
+                    }}
+                />
+            </div>
+        );
+    }
 
     return (
         <div class={className}>

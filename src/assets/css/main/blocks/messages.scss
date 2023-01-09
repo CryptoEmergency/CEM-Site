@@ -311,6 +311,7 @@
 			&.createPostImage {
 				border: none;
 				background-color: transparent;
+				overflow-y: auto;
 			}
 		}
 	}
@@ -582,6 +583,12 @@
 		justify-content: flex-end;
 		flex-wrap: wrap;
 		word-break: break-word;
+	}
+
+	&_content {
+		img {
+			width: 100%;
+		}
 	}
 
 	img {

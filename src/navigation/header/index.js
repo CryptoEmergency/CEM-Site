@@ -73,6 +73,7 @@ const mainHeader = async function () {
                                                     <a
                                                         class="log-in"
                                                         onclick={(e) => {
+                                                       
                                                             Variable.SetModals({ name: "ModalAuth", data: {} })
                                                             e.stopPropagation();
                                                         }}

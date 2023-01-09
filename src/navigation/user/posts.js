@@ -176,6 +176,7 @@ const start = function (data, ID) {
             return
           }
           let response = JSON.parse(this.response);
+        
           Static.mediaInputs.value[index] = {
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
@@ -286,6 +287,7 @@ const start = function (data, ID) {
 
 
         // Static.mediaInputs.value.push(obj);
+
         let response = JSON.parse(this.response);
         Static.audioInputs.value[numItem] = {
           aspect: undefined,
@@ -386,7 +388,7 @@ const start = function (data, ID) {
     let dataURL;
 
     let imageUrl
-    let image
+   
 
     const newImg = new Image();
 
@@ -397,7 +399,7 @@ const start = function (data, ID) {
       const originalImage = new Image();
       originalImage.src = imagePath;
 
-
+console.log(originalImage.src)
       const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
 
@@ -487,10 +489,24 @@ const start = function (data, ID) {
             dw = width
             dh = width
           }
+
+            //ровный квадрат
+            if (height == width) {
+              sx = 1
+              sy = 1
+              sw = width
+              sh = width
+              dx = 0
+              dy = 0
+              dw = width
+              dh = width
+            }
+
         }
 
         canvas.width = dw;
         canvas.height = dh;
+
 
         await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh);
 
@@ -536,6 +552,7 @@ const start = function (data, ID) {
         }
 
         const formData = new FormData()
+   
         formData.append('media', fileImg, nameFile);
 
         xhr = new XMLHttpRequest()
@@ -545,7 +562,9 @@ const start = function (data, ID) {
           if (!this.response) {
             return
           }
+          
           let response = JSON.parse(this.response);
+    
           Static.mediaInputs.value[numItem] = {
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
@@ -588,11 +607,12 @@ const start = function (data, ID) {
     }
 
     imageUrl = URL.createObjectURL(file);
-    image = document.createElement("img");
-    image.src = imageUrl;
+  
+    //image = document.createElement("img");
+   // image.src = imageUrl;
 
 
-    await cropImage(image.src, type, xhr);
+    await cropImage(imageUrl, type, xhr);
 
 
 

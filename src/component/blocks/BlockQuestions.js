@@ -262,7 +262,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                       class="c-button c-button--outline2 buttonunswer"
                       href={`/question/show/${question._id}`}
                       onclick={(e) => {
-                        fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, })
+                        fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, items: fn.itemsMenu.question(Static, question)})
                       }}
                     >
                       <div class="c-button__wrapper">

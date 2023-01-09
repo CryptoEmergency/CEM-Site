@@ -12,6 +12,9 @@ import svg from '@assets/svg/index.js';
 import { Avatar, ItemsMenu, NotFound } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
+let visibleEditInterest = false;
+let visibleEditWork = false;
+
 const BlockUserProfilePage = {}
 
 BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
@@ -225,16 +228,15 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    Variable.SetModals({ name: "ModalUserInterests", data: {} })
-
+                                                                    fn.modals.ModalUserInterests({type: 'add', userInfo: {}});
                                                                 }
                                                             },
                                                             {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                 //   console.log('=7e4dce=', "gggg")
-
+                                                                    visibleEditInterest = true
+                                                                    initReload()
                                                                 }
                                                             }
                                                         ]
@@ -248,7 +250,17 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                     data.userInfo.interest.map((item, index) => {
                                         return (
                                             <div>
-                                                <b>{item.title}<img class="editbigblockinfo" style="display: none;" src={svg['pencil']} /></b>
+                                                <b>
+                                                    {item.title}
+                                                    <img
+                                                        class="editbigblockinfo"
+                                                        src={svg['pencil']}
+                                                        style={visibleEditInterest ? "display: inline;" : "display: none;"}
+                                                        onclick={ async () => {
+                                                            fn.modals.ModalUserInterests({type: 'edit', userInfo: item});
+                                                        }}
+                                                    />
+                                                </b>
                                                 <span>{item.description}</span>
                                             </div>
                                         )
@@ -275,16 +287,15 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                 //   console.log('=7e4dce=', "gggg")
-
+                                                                    fn.modals.ModalUserAddWork({type: 'add', userInfo: {}});
                                                                 }
                                                             },
                                                             {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                 //   console.log('=7e4dce=', "gggg")
-
+                                                                   visibleEditWork = true
+                                                                   initReload()
                                                                 }
                                                             }
 
@@ -299,7 +310,17 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                     data.userInfo.work.map((item, index) => {
                                         return (
                                             <div id={item._id} class="work_and_education_block">
-                                                <span>{item.title} <img class="editworkinfo" style="display: none;" src={svg['pencil']} /></span>
+                                                <span>
+                                                    {item.title} 
+                                                    <img
+                                                        class="editworkinfo"
+                                                        src={svg['pencil']}
+                                                        style={visibleEditWork ? "display: inline;" : "display: none;"}
+                                                        onclick={ async () => {
+                                                            fn.modals.ModalUserAddWork({type: 'edit', userInfo: item});
+                                                        }}
+                                                    />
+                                                </span>
                                                 <span>{item.period}</span>
                                                 <span>{item.description}</span>
                                             </div>
