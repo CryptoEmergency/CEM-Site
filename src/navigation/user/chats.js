@@ -189,6 +189,7 @@ const start = function (data, ID) {
 
     init(
         async () => {
+            Static.clickVideo = false;
             Static.message = {
                 rows: 1,
                 adaptive: 3,
@@ -412,7 +413,7 @@ const start = function (data, ID) {
                                                     const arrReturn = Static.messageList.list_records[0].message.map((item, index) => {
                                                         return (
                                                             <div class={item.author == Variable.myInfo._id ? "your_message_container" : "friend_message_container"}>
-                                                                <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", /*Helpers.ifHaveMedia(item.media, "video") ? "chat_have_video" : null,*/ Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
+                                                                <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", Helpers.ifHaveMedia(item.media, "video") && item.media.length < 4 ? "chat_have_video" : null, Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
                                                                     {Helpers.editText(item.text, { clear: true, paragraph: true, html: true })}
 
                                                                     {/* {() => {
@@ -492,6 +493,7 @@ const start = function (data, ID) {
                                                                         if (item.media && item.media.length) {
                                                                             // console.log(`=6cf50b= media `, item.media)
 
+                                                                            //если вложенных в сообщение файлов менее 4
                                                                             if (item.media.length < 4) {
 
                                                                                 const arrMedia = item.media.map((item, index) => {
@@ -522,18 +524,10 @@ const start = function (data, ID) {
 
                                                                                     if (item.type == "image" && !Array.isArray(item)) {
                                                                                         return (
-                                                                                            // <div class="swiper-slide">
-                                                                                            //     <div class="swiper-post_media_image_container">
                                                                                             <LazyImage
+                                                                                                className={"your_message_content"}
                                                                                                 path={`/assets/upload/chat/` + item.name}
                                                                                             />
-                                                                                            //     </div>
-                                                                                            // </div>
-                                                                                            // <LazyImage
-                                                                                            //     className={"c-groupimage__item"}
-                                                                                            //     classImg={"c-groupimage__img"}
-                                                                                            //     path={`/assets/upload/chat/` + item.name}
-                                                                                            // />
                                                                                         );
                                                                                     }
 
@@ -557,42 +551,154 @@ const start = function (data, ID) {
                                                                                     }
                                                                                 })
                                                                                 return arrMedia;
-                                                                            } else {
-                                                                                const arrMedia = item.media.map((item, index) => {
 
-                                                                                    if (item.type == "video" && !Array.isArray(item)) {
-                                                                                        return (
-                                                                                            <div class="c-groupimage__item">
-                                                                                                <VideoPlayer
-                                                                                                    Static={Static}
-                                                                                                    item={item}
-                                                                                                    path={`/assets/upload/chat/`}
-                                                                                                    className={"c-groupimage__img"}
-                                                                                                />
-                                                                                            </div>
-                                                                                        );
+                                                                                //если вложенных в сообщение файлов 4 и более
+                                                                            } else {
+                                                                                const arrMedia = item.media.map((mediafile, index) => {
+
+                                                                                    if (mediafile.type == "video" && !Array.isArray(mediafile)) {
+                                                                                        if (index == 3) {
+                                                                                            if (item.media.length > 4) {
+                                                                                                return (
+                                                                                                    <div
+                                                                                                        class="c-groupimage__item c-groupimage__item--more"
+                                                                                                        onClick={(e) => {
+                                                                                                            e.stopPropagation();
+                                                                                                            e.preventDefault();
+                                                                                                            console.log('=0372f9=', 'click video item!!! index = ', index, ', item.media.length = ', item.media.length)
+                                                                                                            fn.modals.ModalViewPhoto({
+                                                                                                                path: mediafile.name,
+                                                                                                                arrMedia: item.media,
+                                                                                                            });
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <VideoPlayer
+                                                                                                            Static={Static}
+                                                                                                            item={mediafile}
+                                                                                                            path={`/assets/upload/chat/`}
+                                                                                                            className={"c-groupimage__img"}
+                                                                                                        />
+                                                                                                        <span class="c-groupimage__counter">+ {item.media.length - 4}</span>
+                                                                                                    </div>
+                                                                                                );
+                                                                                            } else if (item.media.length == 4) {
+                                                                                                return (
+                                                                                                    <div
+                                                                                                        class="c-groupimage__item"
+                                                                                                        onClick={(e) => {
+                                                                                                            e.stopPropagation();
+                                                                                                            e.preventDefault();
+                                                                                                            console.log('=0372f9=', 'click video item!!! index = ', index, ', item.media.length = ', item.media.length)
+                                                                                                            fn.modals.ModalViewPhoto({
+                                                                                                                path: mediafile.name,
+                                                                                                                arrMedia: item.media,
+                                                                                                            });
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <VideoPlayer
+                                                                                                            Static={Static}
+                                                                                                            item={mediafile}
+                                                                                                            path={`/assets/upload/chat/`}
+                                                                                                            className={"c-groupimage__img"}
+                                                                                                        />
+                                                                                                        <span class="c-groupimage__counter">{item.media.length - 4}</span>
+                                                                                                    </div>
+                                                                                                );
+                                                                                            }
+                                                                                        } else if (index < 3) {
+                                                                                            return (
+                                                                                                <div
+                                                                                                    class="c-groupimage__item"
+                                                                                                    onClick={(e) => {
+                                                                                                        e.stopPropagation();
+                                                                                                        e.preventDefault();
+                                                                                                        console.log('=0372f9=', 'click video item!!! index = ', index, ', item.media.length = ', item.media.length)
+                                                                                                        fn.modals.ModalViewPhoto({
+                                                                                                            path: mediafile.name,
+                                                                                                            arrMedia: item.media,
+                                                                                                        });
+                                                                                                    }}
+                                                                                                >
+                                                                                                    <VideoPlayer
+                                                                                                        Static={Static}
+                                                                                                        item={mediafile}
+                                                                                                        path={`/assets/upload/chat/`}
+                                                                                                        className={"c-groupimage__img"}
+                                                                                                    />
+                                                                                                </div>
+                                                                                            );
+                                                                                        }
                                                                                     }
 
-                                                                                    if (item.type == "audio" && !Array.isArray(item)) {
+                                                                                    if (mediafile.type == "audio" && !Array.isArray(mediafile)) {
                                                                                         return (
                                                                                             // <div class="swiper-slide">
                                                                                             <AudioPlayer
                                                                                                 Static={Static}
-                                                                                                item={item}
+                                                                                                item={mediafile}
                                                                                                 path={`/assets/upload/chat/`}
                                                                                             />
                                                                                             // </div>
                                                                                         );
                                                                                     }
 
-                                                                                    if (item.type == "image" && !Array.isArray(item)) {
-                                                                                        return (
-                                                                                            <LazyImage
-                                                                                                className={"c-groupimage__item"}
-                                                                                                classImg={"c-groupimage__img"}
-                                                                                                path={`/assets/upload/chat/` + item.name}
-                                                                                            />
-                                                                                        );
+                                                                                    if (mediafile.type == "image" && !Array.isArray(mediafile)) {
+                                                                                        console.log('=43cdb6=', mediafile)
+                                                                                        if (index == 3) {
+                                                                                            if (item.media.length > 4) {
+                                                                                                return (
+                                                                                                    <LazyImage
+                                                                                                        className={"c-groupimage__item c-groupimage__item--more"}
+                                                                                                        classImg={"c-groupimage__img"}
+                                                                                                        path={`/assets/upload/chat/` + mediafile.name}
+                                                                                                        counter={item.media.length - 4}
+                                                                                                        onClick={(e) => {
+                                                                                                            e.stopPropagation();
+                                                                                                            e.preventDefault();
+                                                                                                            console.log('=b3699e=', 'click item!!! index = ', index, ', item.media.length = ', item.media.length)
+                                                                                                            fn.modals.ModalViewPhoto({
+                                                                                                                path: mediafile.name,
+                                                                                                                arrMedia: item.media
+                                                                                                            });
+                                                                                                        }}
+                                                                                                    />
+                                                                                                );
+                                                                                            } else if (item.media.length == 4) {
+                                                                                                return (
+                                                                                                    <LazyImage
+                                                                                                        className={"c-groupimage__item"}
+                                                                                                        classImg={"c-groupimage__img"}
+                                                                                                        path={`/assets/upload/chat/` + mediafile.name}
+                                                                                                        onClick={(e) => {
+                                                                                                            e.stopPropagation();
+                                                                                                            e.preventDefault();
+                                                                                                            console.log('=b3699e=', 'click item!!! index = ', index, ', item.media.length = ', item.media.length)
+                                                                                                            fn.modals.ModalViewPhoto({
+                                                                                                                path: mediafile.name,
+                                                                                                                arrMedia: item.media
+                                                                                                            });
+                                                                                                        }}
+                                                                                                    />
+                                                                                                );
+                                                                                            }
+                                                                                        } else if (index < 3) {
+                                                                                            return (
+                                                                                                <LazyImage
+                                                                                                    className={"c-groupimage__item"}
+                                                                                                    classImg={"c-groupimage__img"}
+                                                                                                    path={`/assets/upload/chat/` + mediafile.name}
+                                                                                                    onClick={(e) => {
+                                                                                                        e.stopPropagation();
+                                                                                                        e.preventDefault();
+                                                                                                        console.log('=b3699e=', 'click item!!! index = ', index)
+                                                                                                        fn.modals.ModalViewPhoto({
+                                                                                                            path: mediafile.name,
+                                                                                                            arrMedia: item.media
+                                                                                                        });
+                                                                                                    }}
+                                                                                                />
+                                                                                            );
+                                                                                        }
                                                                                     }
 
                                                                                     // if (Array.isArray(item)) {

@@ -161,7 +161,8 @@
 		"lottery": "Лотерея «Сарафанное радио»",
 		"lotterySubtitle": "Выиграй 1000CEM!",
 		"modal_viewImage": "Просмотр фото",
-		"modal_changeFrame": "Рамка аватара"
+		"modal_changeFrame": "Рамка аватара",
+		"modal_viewFile": "Файлы"
 	},
 	"a": {
 		"about": "О нас",

@@ -7,7 +7,7 @@ const GroupImage = function ({ image, className }) {
     if (true) {
         return (
             <div class="c-groupimage">
-                {image} 
+                {image}
             </div>
         )
     } else {

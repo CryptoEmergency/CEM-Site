@@ -585,6 +585,12 @@
 		word-break: break-word;
 	}
 
+	&_content {
+		img {
+			width: 100%;
+		}
+	}
+
 	img {
 		margin-top: 10px;
 		margin-bottom: 5px;
