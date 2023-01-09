@@ -128,7 +128,7 @@ const BottomMenu = function () {
                     onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings(); }}>
                 </a>
             </div>
-            {/* <div class="c-userpanel__addmodal">
+            <div class="c-userpanel__addmodal">
                 <div class="c-userpanel__inner">
                     <p>{Variable.lang.button.create}</p>
                     <a class="c-userpanel__link" onclick={fn.siteLink} href="/user/posts/">

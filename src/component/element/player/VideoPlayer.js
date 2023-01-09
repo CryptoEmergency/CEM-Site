@@ -35,6 +35,7 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
             ]}
         >
             <div class="video_sign"></div>
+            {/* <img style="width: 13%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)" src={svg['play_button']} /> */}
             <video
                 playsinline
                 poster={images["video_background"]}
