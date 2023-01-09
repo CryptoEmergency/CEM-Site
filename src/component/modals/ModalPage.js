@@ -37,6 +37,10 @@ const ModalPage = async function (ID, reload) {
   )
   if (!reload && getInitList()[ID].firstStart) {
     await getInitList()[ID].firstStart(reload)
+    if (Variable.Static.elArrowTop && Variable.Static.elArrowTop.style.display != "none") {
+      Variable.Static.elArrowTop.style.display = "none"
+      // Variable.Static.elArrowTopLink = null
+    }
   }
 
   return (
@@ -97,6 +101,8 @@ const ModalPage = async function (ID, reload) {
                     <a
                       class="c-goback"
                       onclick={() => {
+                        // console.log('=acda1c=', Variable.Static, Variable.dataUrl)
+                        // Variable.Static.DataUrl = Variable.dataUrl
                         Variable.ModalsPage.splice(ID, 1)
                         initReload("modalsPage")
                       }}
