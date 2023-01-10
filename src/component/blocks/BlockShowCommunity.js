@@ -235,7 +235,7 @@ const BlockShowCommunity = async function ({ Static }) {
             <div class="c-communitycard__logo">
               <img class="" src={images["community/anon_nft"]} width="40" height="" />
             </div>
-            <h6 class="c-communitycard__name">Anonymous NFT TON</h6>
+            <h6 class="c-communitycard__name" title="Anonymous NFT TON">Anonymous NFT TON</h6>
             {/* Три точки меню */}
             <ItemsMenu author={Variable.myInfo} items={fn.itemsMenu.community(Static, {})} />
           </header>
@@ -267,7 +267,7 @@ const BlockShowCommunity = async function ({ Static }) {
             <div class="c-communitycard__logo">
               <img class="" src={images["community/anon_nft"]} width="40" height="" />
             </div>
-            <h6 class="c-communitycard__name">Anonymous NFT TON</h6>
+            <h6 class="c-communitycard__name" title="Anonymous NFT TON">Anonymous NFT TON</h6>
             {/* Три точки меню */}
             <ItemsMenu author={Variable.myInfo} items={fn.itemsMenu.community(Static, {})} />
           </header>
@@ -299,7 +299,7 @@ const BlockShowCommunity = async function ({ Static }) {
             <div class="c-communitycard__logo">
               <img class="" src={images["community/anon_nft"]} width="40" height="" />
             </div>
-            <h6 class="c-communitycard__name">Anonymous NFT TON</h6>
+            <h6 class="c-communitycard__name" title="Anonymous NFT TON">Anonymous NFT TON</h6>
             {/* Три точки меню (API нужно) */}
             <ItemsMenu author={Variable.myInfo} items={fn.itemsMenu.community(Static, {})} />
           </header>
@@ -331,7 +331,7 @@ const BlockShowCommunity = async function ({ Static }) {
             <div class="c-communitycard__logo">
               <img class="" src={images["community/anon_nft"]} width="40" height="" />
             </div>
-            <h6 class="c-communitycard__name">Anonymous NFT TON</h6>
+            <h6 class="c-communitycard__name" title="Anonymous NFT TON">Anonymous NFT TON</h6>
             {/* Три точки меню (API нужно) */}
             <ItemsMenu author={Variable.myInfo} items={fn.itemsMenu.community(Static, {})} />
           </header>
