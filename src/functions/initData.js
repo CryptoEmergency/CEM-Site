@@ -767,7 +767,7 @@ initData.rooms = function (Static) {
     Static.sytemInfo = {}
     if (Variable.auth) {
         Static.sytemInfo.code = Variable.myInfo.mainLanguage.code
-        Static.sytemInfo.name = Variable.myInfo.mainLanguage.orig_name
+        Static.sytemInfo.name = Variable.myInfo.mainLanguage.eng_name
     }
     else {
         Static.sytemInfo.code = Variable.lang.code
