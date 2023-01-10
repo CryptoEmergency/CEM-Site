@@ -1,9 +1,9 @@
 .c-groupimage {
     display: grid;
-    grid-template-columns: calc(50% - 4px) calc(50% - 4px);
+    grid-template-columns: 50% 50%;
     grid-template-rows: 1fr 1fr;
-    gap: 8px;
-    max-width: 208px;
+    gap: 3px;
+    max-width: 203px;
 
     &__item {
         position: relative;

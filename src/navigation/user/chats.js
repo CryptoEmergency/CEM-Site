@@ -414,7 +414,7 @@ const start = function (data, ID) {
                                                         return (
                                                             <div class={item.author == Variable.myInfo._id ? "your_message_container" : "friend_message_container"}>
                                                                 <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", Helpers.ifHaveMedia(item.media, "video") && item.media.length < 4 ? "chat_have_video" : null, Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
-                                                                    {Helpers.editText(item.text, { clear: true, paragraph: true, html: true })}
+                                                                    {fn.editText(item.text, { clear: true, paragraph: true, html: true, notp: true })}
 
                                                                     {/* {() => {
                                                                         if (item.media && item.media.length) {
