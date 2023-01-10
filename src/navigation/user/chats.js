@@ -826,40 +826,40 @@ const start = function (data, ID) {
                                                         console.log('=d2dd12=', media)
                                                         // let data = { value: { users: Static.activeUser._id, message: { text } } }
                                                         // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                        if (media.length > 0) {
-                                                            let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
-                                                            // console.log('=6befba=', response)
-                                                            if (response.status === "ok") {
-                                                                Static.message.el.value = ""
-                                                                Static.message.value = ""
-                                                                if (Static.message.adaptive) {
-                                                                    Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
-                                                                }
-                                                                if (response && response.list_records && response.list_records[0]) {
-                                                                    let newRes = response.list_records[0]
-
-                                                                    if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
-                                                                        Static.messageList.list_records[0].message.unshift(newRes)
-                                                                    } else {
-                                                                        Static.messageList.list_records[0].message = [newRes]
-                                                                    }
-                                                                    // console.log('=46ae17=', Static.chatsList)
-
-                                                                    if (Static.chatsList && Static.chatsList.list_records) {
-                                                                        Static.chatsList.list_records.map((item) => {
-                                                                            let tmp = item.users.filter(item => item._id == Static.activeUser._id)
-                                                                            if (tmp.length) {
-                                                                                item.message[0] = newRes
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                    Static.mediaInputs.value = [];
-                                                                    initReload();
-                                                                }
-                                                            } else {
-                                                                Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                                                        // if (media.length > 0) {
+                                                        let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
+                                                        // console.log('=6befba=', response)
+                                                        if (response.status === "ok") {
+                                                            Static.message.el.value = ""
+                                                            Static.message.value = ""
+                                                            if (Static.message.adaptive) {
+                                                                Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
                                                             }
+                                                            if (response && response.list_records && response.list_records[0]) {
+                                                                let newRes = response.list_records[0]
+
+                                                                if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                                                                    Static.messageList.list_records[0].message.unshift(newRes)
+                                                                } else {
+                                                                    Static.messageList.list_records[0].message = [newRes]
+                                                                }
+                                                                // console.log('=46ae17=', Static.chatsList)
+
+                                                                if (Static.chatsList && Static.chatsList.list_records) {
+                                                                    Static.chatsList.list_records.map((item) => {
+                                                                        let tmp = item.users.filter(item => item._id == Static.activeUser._id)
+                                                                        if (tmp.length) {
+                                                                            item.message[0] = newRes
+                                                                        }
+                                                                    })
+                                                                }
+                                                                Static.mediaInputs.value = [];
+                                                                initReload();
+                                                            }
+                                                        } else {
+                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                                                         }
+                                                        // }
                                                     }}
                                                 />
                                             }
