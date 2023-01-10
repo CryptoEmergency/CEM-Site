@@ -251,7 +251,7 @@ const BlockShowCommunities = async function ({ Static }) {
                 class="c-button c-button--outline2"
                 href="/communities/community/1"
                 onclick={(e) => {
-                  fn.siteLinkModal(e, {})
+                  fn.siteLinkModal(e, { title: 'Страница сообщества' })
                 }}
               >
                 <div class="c-button__wrapper">

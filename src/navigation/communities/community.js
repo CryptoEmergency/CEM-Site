@@ -29,6 +29,22 @@ const start = function (data, ID) {
                                 <span class="c-community__caption">Описание:</span>
                                 <span class="c-community__value">Децентрализованное сообщество людей, объединённых великой целью - стать лучшей версией себя</span>
                             </li>
+                            <li class="c-community__line">
+                                <span class="c-community__caption">Создатель:</span>
+                                <span class="c-community__value">Vin Diesel</span>
+                            </li>
+                            <li class="c-community__line">
+                                <span class="c-community__caption">Количество участников:</span>
+                                <span class="c-community__value">1296 чел</span>
+                            </li>
+                            <li class="c-community__line">
+                                <span class="c-community__caption">Язык:</span>
+                                <span class="c-community__value">Русский</span>
+                            </li>
+                            <li class="c-community__line">
+                                <span class="c-community__caption">Страна:</span>
+                                <span class="c-community__value">Бразилия</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
