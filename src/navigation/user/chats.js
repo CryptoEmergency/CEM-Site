@@ -527,6 +527,13 @@ const start = function (data, ID) {
                                                                                             <LazyImage
                                                                                                 className={"your_message_content"}
                                                                                                 path={`/assets/upload/chat/` + item.name}
+                                                                                                onClick={(e) => {
+                                                                                                    e.stopPropagation();
+                                                                                                    e.preventDefault();
+                                                                                                    fn.modals.ModalViewPhoto({
+                                                                                                        path: item.name,
+                                                                                                    });
+                                                                                                }}
                                                                                             />
                                                                                         );
                                                                                     }
@@ -813,7 +820,7 @@ const start = function (data, ID) {
                                                         if (Static.message.el.value.trim().length) {
                                                             text = Static.message.el.value.trim()
                                                         }
-                                                        debugger
+                                                        // debugger
                                                         if (Static.mediaInputs.value.length != 0) {
                                                             Static.mediaInputs.value.forEach(async (file) => {
                                                                 if (file.type == 'audio') {
