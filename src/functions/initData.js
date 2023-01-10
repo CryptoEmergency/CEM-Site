@@ -39,6 +39,24 @@ const filters = {
         autocomplete: "off",
         readonly: true
     },
+    cities: {
+        value: "",
+        type: "text",
+        valid: false,
+        code: "",
+        name: "all",
+        autocomplete: "off",
+        readonly: true
+    },
+    interests: {
+        value: "",
+        type: "text",
+        valid: false,
+        code: "",
+        name: "all",
+        autocomplete: "off",
+        readonly: true
+    },
     group: {
         common: true,
         content: true,
@@ -167,7 +185,7 @@ initData.ModalUserInterests = function (Static, userInfo, action) {
         Static.name = input
         Static.name.value = userInfo.title
         Static.name.placeholder = Variable.lang.label.label
-        
+
         Static.description = input
         Static.description.value = userInfo.description
         Static.description.placeholder = Variable.lang.label.labelDetails
@@ -836,6 +854,71 @@ initData.rooms = function (Static) {
         }
     }
     return
+}
+
+initData.community = function (Static) {
+
+    Static.sytemInfo = {}
+    if (Variable.auth) {
+        Static.sytemInfo.code = Variable.myInfo.mainLanguage.code
+        Static.sytemInfo.name = Variable.myInfo.mainLanguage.orig_name
+    }
+    else {
+        Static.sytemInfo.code = Variable.lang.code
+        Static.sytemInfo.name = Variable.lang.lang_orig
+    }
+
+    Static.lang = {
+        code: Static.sytemInfo.code,
+        name: Static.sytemInfo.name
+    }
+
+    Static.nameRecords = "PageCommunity"
+    Static.type = "all"
+
+    Static.filters = {
+        language: Object.create(filters.language),
+        country: Object.create(filters.country),
+        cities: Object.create(filters.cities),
+        interests: Object.create(filters.interests),
+        group: {
+            offline: true,
+        },
+    }
+
+    Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.language.value = Variable.lang.text.language
+
+    Static.filters.country.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.country.value = Variable.lang.text.country
+
+    Static.filters.cities.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.cities.value = Variable.lang.text.city
+
+    Static.filters.interests.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.interests.value = Variable.lang.text.interests
+
+    Static.search = generate("input")
+    Static.search.placeholder = Variable.lang.placeholder.findCommunity
+
+    Static.optionsSelect = {
+        sortCommunity: {
+            nameOptions: "sortCommunity",
+            title: Variable.lang.span.sort,
+            asort: -1,
+            items: [
+                { text: Variable.lang.select.byDate, value: "date" },
+                { text: Variable.lang.select.byRating, value: "rating" },
+                { text: Variable.lang.select.byNew, value: "new" },
+            ],
+            open: false,
+            active: "date",
+        },
+    };
+
+    Static.activeCategory = "All"
+    Static.type = "community"
+    Static.nameRecords = "PageCommunity"
 }
 
 export { initData };
