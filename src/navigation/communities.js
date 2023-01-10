@@ -4,7 +4,7 @@ import {
     init
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
-import { BlockShowCommunity } from '@component/blocks/index.js';
+import { BlockShowCommunities } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
@@ -16,7 +16,7 @@ const start = function (data, ID) {
         () => {
             return (
                 <div class="c-community c-main__body">
-                    <BlockShowCommunity Static={Static} />
+                    <BlockShowCommunities Static={Static} />
                 </div>
             )
         }, ID

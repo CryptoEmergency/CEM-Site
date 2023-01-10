@@ -28,7 +28,7 @@ const Tags = function ({ Static, classActive, text, type }) {
   )
 }
 
-const BlockShowCommunity = async function ({ Static }) {
+const BlockShowCommunities = async function ({ Static }) {
 
 
   await initOne(
@@ -63,9 +63,9 @@ const BlockShowCommunity = async function ({ Static }) {
   )
 
   return (
-    <div class="c-community__container c-container">
+    <div class="c-communities__container c-container">
       <h2>{Variable.lang.h.community}</h2>
-      <div class="c-community__header c-searchpage">
+      <div class="c-communities__header c-searchpage">
         <div class="c-searchpage__mainblock">
           <div class="c-searchpage__filter">
             <Input className="c-searchpage__field" Static={Static.search} />
@@ -205,7 +205,7 @@ const BlockShowCommunity = async function ({ Static }) {
           }}
         >{Static.lang.name}</div>
 
-        <div class="c-community__tags tags">
+        <div class="c-communities__tags tags">
           <Tags
             Static={Static}
             text={Variable.lang.categoryName.all}
@@ -229,7 +229,7 @@ const BlockShowCommunity = async function ({ Static }) {
           }}
         </div>
       </div>
-      <ul class="c-community__list">
+      <ul class="c-communities__list">
         <li class="c-communitycard">
           <header class="c-communitycard__header">
             <div class="c-communitycard__logo">
@@ -248,8 +248,11 @@ const BlockShowCommunity = async function ({ Static }) {
               </ul>
               <p class="c-communitycard__short">Децентрализованное сообщество людей, объединённых великой целью - стать лучшей версией себя.</p>
               <a
-                href=""
                 class="c-button c-button--outline2"
+                href="/communities/community/1"
+                onclick={(e) => {
+                  fn.siteLinkModal(e, {})
+                }}
               >
                 <div class="c-button__wrapper">
                   {Variable.lang.a.moreDetails}
@@ -276,7 +279,6 @@ const BlockShowCommunity = async function ({ Static }) {
             <figcaption class="c-communitycard__description">
               <ul class="c-communitycard__tags">
                 <li class="tag_button tag_button_active"><span>NFT</span></li>
-                <li class="tag_button tag_button_active"><span>Творчество</span></li>
               </ul>
               <p class="c-communitycard__short">Децентрализованное сообщество людей, объединённых великой целью - стать лучшей версией себя.</p>
               <a
@@ -365,4 +367,4 @@ const BlockShowCommunity = async function ({ Static }) {
 
 }
 
-export { BlockShowCommunity }
+export { BlockShowCommunities }

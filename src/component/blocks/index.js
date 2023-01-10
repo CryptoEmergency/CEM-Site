@@ -39,4 +39,4 @@ export { BlockUsers } from "./BlockUsers.js"
 // Комнаты
 export { BlockUserRooms } from "./BlockUserRooms.js"
 // Сообщества/Community
-export { BlockShowCommunity } from "./BlockShowCommunity.js"
+export { BlockShowCommunities } from "./BlockShowCommunities.js"
