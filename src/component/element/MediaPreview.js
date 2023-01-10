@@ -7,12 +7,13 @@ import { fn } from '@src/functions/index.js';
 
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
-  //console.log("============on load",Static)
+  //console.log("============on load",Static,"=======item",item)
 
 
   if (item.type == "audio") {
     el[index] = Variable.setRef();
   }
+
   return (
     <div>
       {
@@ -60,7 +61,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 null
             }
             {
-              ((type == "chat" || type == "posts") && !Static.photo) && item.size === undefined
+             
+           //   ((type == "chat" || type == "posts") && !Static.photo) && item.size === undefined
+           (type == "chat" || type == "posts")
                 ?
                 <div
                   class="messages_settings"

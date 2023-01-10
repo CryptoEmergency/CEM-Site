@@ -17,14 +17,20 @@ fn.web3Action = web3Action
 fn.validator = Helpers.validator
 fn.sanitizeHtml = Helpers.sanitizeHtml
 fn.test = function () {
-//  console.log('=f83cf3 FN=', this)
+  //  console.log('=f83cf3 FN=', this)
   return true
 
 }
 
-fn.clearText = function (data) {
+fn.clearText = function (data, abt = false) {
+
+  if (abt && (!data || data.length == 0)) {
+    return ""
+  }
   return Helpers.stringToHtml(Helpers.sanitizeHtml(data))
 }
+
+
 
 fn.paragraph = function (str) {
   let textTag = str;
@@ -49,6 +55,11 @@ fn.ifHaveMedia = function (mediaArr, type) {
 
 fn.editText = function (str, filter = {}) {
   if (!str) { str = "" }
+
+  if (filter.notp && str == "") {
+    return str
+  }
+
   let out = str.trim()
 
   if (filter.clear) {
@@ -161,46 +172,46 @@ fn.timerTik = async function () {
   } else {
     // 
     let response = await sendApi.create("tik", {})
-    if(response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length > 0){
+    if (response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length > 0) {
       let [Static] = fn.GetParams({ ID: "mainBlock", actual: true })
       if (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") {
-        if(Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author){
-          if(Static.messageList.list_records[0].message[0]._id != response.info.myInfo.chatMessage[0]._id){
+        if (Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author) {
+          if (Static.messageList.list_records[0].message[0]._id != response.info.myInfo.chatMessage[0]._id) {
             Static.messageList.list_records[0].message.unshift(response.info.myInfo.chatMessage[0])
           }
         }
         Static.chatsList.list_records.forEach(async chat => {
-          if(chat.users[0]._id == response.info.myInfo.chatMessage[0].author || chat.users[1]._id == response.info.myInfo.chatMessage[0].author){
-            if(chat.message[0]._id != response.info.myInfo.chatMessage[0]._id && ((!Static.activeUser) || !(Static.activeUser._id == response.info.myInfo.chatMessage[0].author))){
+          if (chat.users[0]._id == response.info.myInfo.chatMessage[0].author || chat.users[1]._id == response.info.myInfo.chatMessage[0].author) {
+            if (chat.message[0]._id != response.info.myInfo.chatMessage[0]._id && ((!Static.activeUser) || !(Static.activeUser._id == response.info.myInfo.chatMessage[0].author))) {
               console.log('INCREMENT')
-              if(typeof chat.unreadMessage == "undefined"){
+              if (typeof chat.unreadMessage == "undefined") {
                 chat.unreadMessage = 1
               } else {
                 chat.unreadMessage++
               }
-            } else if(Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author){
+            } else if (Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author) {
               console.log("QUERY")
-                Static.messageList = await sendApi.send({
-                  action: "getUserChats", short: true,
-                  filter: {
-                      "$and": [
-                          {
-                              "users": chat.users[0]
-                          },
-                          {
-                            "users": chat.users[1]
-                          }
-                      ]
+              Static.messageList = await sendApi.send({
+                action: "getUserChats", short: true,
+                filter: {
+                  "$and": [
+                    {
+                      "users": chat.users[0]
+                    },
+                    {
+                      "users": chat.users[1]
+                    }
+                  ]
+                },
+                select: {
+                  "message": {
+                    "$slice": [
+                      0,
+                      120
+                    ]
                   },
-                  select: {
-                      "message": {
-                          "$slice": [
-                              0,
-                              120
-                          ]
-                      },
-                      "users": 1
-                  }
+                  "users": 1
+                }
               });
             }
             chat.message[0] = response.info.myInfo.chatMessage[0]
@@ -364,12 +375,12 @@ fn.getDateFormat = function (data, type) {
 
 fn.siteLink = function (e) {
   let link
- 
+
   if (typeof e == "string") {
     link = e
-  
+
   } else {
-   // console.log(e)
+    // console.log(e)
     e.preventDefault();
     if (!e.currentTarget || !e.currentTarget.href) {
       console.error("Not have href")
@@ -413,7 +424,7 @@ fn.siteLinkModal = async function (e, data) {
   } else {
     e.preventDefault();
     e.stopPropagation();
-  
+
     if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
       console.error("Not have href")
       return
@@ -429,7 +440,7 @@ fn.siteLinkModal = async function (e, data) {
 }
 
 fn.recordsView = function (_id, action) {
- // console.log('=e0fd8f= recordsView', _id, action)
+  // console.log('=e0fd8f= recordsView', _id, action)
   let timeNow = Math.floor(Date.now() / 1000)
   let objView = getStorage("recordsView")
   if (!objView) (objView = {})

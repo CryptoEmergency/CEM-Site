@@ -540,7 +540,7 @@
 	margin-top: 8px;
 	background: linear-gradient(89.03deg, rgba(136, 89, 236, 0.7) 0.54%, rgba(44, 102, 184, 0.7) 97.66%);
 	color: white;
-	padding: 8px 15px 8px;
+	padding: 3px; //8px 15px 8px;
 	border-radius: 10px;
 	position: relative;
 	max-width: 100%;
@@ -589,6 +589,19 @@
 		img {
 			width: 100%;
 		}
+
+		&:first-child {
+			img {
+				margin-top: 0;
+				border-radius: 10px 10px 0 0;
+			}
+		}
+
+		&:nth-last-child(2) {
+			img {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	img {
@@ -604,6 +617,14 @@
 
 		&-slide {
 			width: 100% !important;
+		}
+	}
+
+	p {
+		margin-bottom: 0;
+
+		&+p {
+			margin-top: 1rem;
 		}
 	}
 }
