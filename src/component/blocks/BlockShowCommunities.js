@@ -233,9 +233,9 @@ const BlockShowCommunities = async function ({ Static }) {
         <li class="c-communitycard">
           <header class="c-communitycard__header">
             <div class="c-communitycard__logo">
-              <img class="" src={images["community/anon_nft"]} width="40" height="" />
+              <img class="" src={images["community/cryptoclubnvrsk"]} width="40" height="" />
             </div>
-            <h6 class="c-communitycard__name" title="Anonymous NFT TON">Anonymous NFT TON</h6>
+            <h6 class="c-communitycard__name" title="CryptoClub NVRSK">CryptoClub NVRSK</h6>
             {/* Три точки меню */}
             <ItemsMenu author={Variable.myInfo} items={fn.itemsMenu.community(Static, {})} />
           </header>
@@ -243,15 +243,68 @@ const BlockShowCommunities = async function ({ Static }) {
             <img class="c-communitycard__cover" src={images["community/community1"]} width="" height="" />
             <figcaption class="c-communitycard__description">
               <ul class="c-communitycard__tags">
+                <li class="tag_button tag_button_active"><span>Крипта</span></li>
+                <li class="tag_button tag_button_active"><span>Блокчейн</span></li>
+                {/* <li class="tag_button tag_button_active"><span>Технологии</span></li>
+                <li class="tag_button tag_button_active"><span>Майнинг</span></li>
+                <li class="tag_button tag_button_active"><span>Трейдинг</span></li>
+                <li class="tag_button tag_button_active"><span>Финансовая грамотность</span></li>
+                <li class="tag_button tag_button_active"><span>Цифровая гигиена</span></li>
                 <li class="tag_button tag_button_active"><span>NFT</span></li>
-                <li class="tag_button tag_button_active"><span>Творчество</span></li>
+                <li class="tag_button tag_button_active"><span>DeFi</span></li> */}
               </ul>
-              <p class="c-communitycard__short">Децентрализованное сообщество людей, объединённых великой целью - стать лучшей версией себя.</p>
+              <p class="c-communitycard__short">Сообщество по интересам, связным с криптой и блокчейн технологиями.</p>
               <a
                 class="c-button c-button--outline2"
                 href="/communities/community/1"
                 onclick={(e) => {
-                  fn.siteLinkModal(e, { title: 'Страница сообщества' })
+                  fn.siteLinkModal(e, {
+                    title: 'Страница сообщества',
+                    community: {
+                      src: "community1",
+                      name: "CryptoClub NVRSK",
+                      description: "Сообщество криптоинтузиастов для встреч и общения. На встречах обсуждаем - майнинг, трейдинг, дефай, нфт, различные блокчейн проекты и делимся своим мнением в целом о крипте. Планируются встречи с экспертами из разных направлений и мастермаинды.",
+                      short: "Сообщество по интересам, связанным с криптой и блокчейн технологиями.",
+                      categories: [
+                        "NFT", "Безопасность", "Defi", "token", "altcoin", "Mining", "Trading", "ICO", "GameFi", "Move2Earn", "Блокчейн"
+                      ],
+                      creator: {
+                        title: "Сэм",
+                        href: "#"
+                      },
+                      member: 9,
+                      language: "Русский",
+                      country: "Россия",
+                      city: "Новороссийск",
+                      contacts: {
+                        phone: "",
+                        web: "",
+                      },
+                      social: {
+                        telegram: "https://t.me/+vmw6S8KTzGMxZWYy",
+                        twitter: "",
+                        discord: "",
+                        instagram: "",
+                      },
+                      galary: [
+                        {
+                          path: "",
+                          image: "community1",
+                        },
+                        {
+                          path: "",
+                          image: "community2",
+                        }
+                      ],
+                      events: [
+                        {
+                          title: "Встреча каждую субботу",
+                          date: "16-00",
+                          place: "кафе/бар (по согласованию)"
+                        },
+                      ]
+                    }
+                  })
                 }}
               >
                 <div class="c-button__wrapper">
@@ -261,8 +314,8 @@ const BlockShowCommunities = async function ({ Static }) {
             </figcaption>
           </figure>
           <footer class="c-communitycard__footer">
-            <span class="c-communitycard__count">1362 участников</span>
-            <date class="c-communitycard__date" datetime="">31.12.2022</date>
+            <span class="c-communitycard__count">9 участников</span>
+            <date class="c-communitycard__date" datetime="">19.12.2022</date>
           </footer>
         </li>
         <li class="c-communitycard">
@@ -282,8 +335,13 @@ const BlockShowCommunities = async function ({ Static }) {
               </ul>
               <p class="c-communitycard__short">Децентрализованное сообщество людей, объединённых великой целью - стать лучшей версией себя.</p>
               <a
-                href=""
                 class="c-button c-button--outline2"
+                href="/communities/community/1"
+                onclick={(e) => {
+                  fn.siteLinkModal(e, {
+                    title: 'Страница сообщества'
+                  })
+                }}
               >
                 <div class="c-button__wrapper">
                   {Variable.lang.a.moreDetails}
@@ -314,8 +372,13 @@ const BlockShowCommunities = async function ({ Static }) {
               </ul>
               <p class="c-communitycard__short">Децентрализованное сообщество людей, объединённых великой целью - стать лучшей версией себя.</p>
               <a
-                href=""
                 class="c-button c-button--outline2"
+                href="/communities/community/1"
+                onclick={(e) => {
+                  fn.siteLinkModal(e, {
+                    title: 'Страница сообщества',
+                  })
+                }}
               >
                 <div class="c-button__wrapper">
                   {Variable.lang.a.moreDetails}
@@ -346,8 +409,13 @@ const BlockShowCommunities = async function ({ Static }) {
               </ul>
               <p class="c-communitycard__short">Децентрализованное сообщество людей, объединённых великой целью - стать лучшей версией себя.</p>
               <a
-                href=""
                 class="c-button c-button--outline2"
+                href="/communities/community/1"
+                onclick={(e) => {
+                  fn.siteLinkModal(e, {
+                    title: 'Страница сообщества',
+                  })
+                }}
               >
                 <div class="c-button__wrapper">
                   {Variable.lang.a.moreDetails}
