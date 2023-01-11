@@ -635,7 +635,9 @@ const start = function (data, ID) {
         const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params, "languages.code": "all" }, limit: 1 })
         if (data.list_records.length) {
 
-          Static.checked = Static.editphoto = true
+          Static.checked = false
+          
+          Static.editphoto = true
           let postForEdit = data.list_records[0];
           Static.edittext = postForEdit.text
           //    console.log('=b37faa=', postForEdit)

@@ -997,9 +997,20 @@ const BlockUserRooms = async function ({ Static }) {
                         typeof Static.Rooms._id !== "undefined" && Static.Rooms._id == userrooms._id ? "c-toggler--active" : null
                       ]}
                     >
-                      <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
-                        document.getElementById("spinner").hidden = false
-                        ChangeRooms(Static, userrooms._id, false)
+                      <a class="c-toggler__link" title={userrooms.settingsroom.description}
+                       ontouchstart = {function(e){
+
+                        checkEvent(Static,userrooms._id,false,e)
+
+                      }}
+                      
+                      onclick={function (e) {
+                         if(!Static.mobile)
+                         {
+                         checkEvent(Static,userrooms._id,false,e)
+                       
+                       }
+               
 
                       }}>
                         {
