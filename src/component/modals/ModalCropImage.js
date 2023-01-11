@@ -45,29 +45,31 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                 // dragCrop: false,
 
                 //**2 */
+               
+                 autoCropArea: 1,
+                 viewMode: 3,
+                 strict: false,
+                 guides: false,
+                 highlight: false,
+                 dragMode: 'move',
+                 restore: false,
+                 modal: false,
+                 cropBoxMovable: false,
+                 cropBoxResizable: false,
+                 toggleDragModeOnDblclick: false,
+                 
+                /**3 */
                 // aspectRatio: aspectActive,
-                // CropArea: 1,
-                // strict: false,
+                // viewMode: 3,
+                // dragMode: 'move',
+                // autoCropArea: 1,
+                // restore: false,
+                // modal: false,
                 // guides: false,
                 // highlight: true,
-                // dragMode: 'move',
-                // restore: false,
-                // cropBoxMovable: false,
+                // cropBoxMovable: true,
                 // cropBoxResizable: false,
                 // toggleDragModeOnDblclick: false,
-
-                /**3 */
-                aspectRatio: aspectActive,
-                viewMode: 3,
-                dragMode: 'move',
-                autoCropArea: 1,
-                restore: false,
-                modal: false,
-                guides: false,
-                highlight: true,
-                cropBoxMovable: true,
-                cropBoxResizable: false,
-                toggleDragModeOnDblclick: false,
 
                 crop: function (e) {
                     var data = e.detail;

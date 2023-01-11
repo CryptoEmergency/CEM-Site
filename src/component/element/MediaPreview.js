@@ -63,7 +63,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
             {
              
            //   ((type == "chat" || type == "posts") && !Static.photo) && item.size === undefined
-           (type == "chat" || type == "posts" && !Static.checked)
+           (type == "posts")
                 ?
                 <div
                   class="messages_settings"
@@ -79,9 +79,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           e.preventDefault();
                           fn.modals.ModalCropImage({
                             file: `/assets/upload/${type}/${item.name}`,
-                            typeUpload: 'chat',
+                            typeUpload: 'posts',
                             arrMedia: Static.mediaInputs.value,
-                            aspectSelect: Static.mediaInputs.selectAspect,
+                            aspectSelect: null,
                             uploadCropImage: async function (cropper) {
                               await sendPhotoChat(cropper, index)
                               return;

@@ -381,7 +381,7 @@ return selectAspect
   }
 
 
-  const loadPhoto = async function (file, type, xhr, selectAspect = false) {
+  const loadPhoto = async function (file, type, xhr, selectAspect = false,key) {
 
     // console.log('=ebf8e1=', selectAspect)
     let dataURL;
@@ -530,7 +530,7 @@ return selectAspect
 
         canvas.width = dw;
         canvas.height = dh;
-
+        
 
         await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh);
 
@@ -588,13 +588,25 @@ return selectAspect
           }
           
           let response = JSON.parse(this.response);
-    
+          if(numItem == 0)
+          {
           Static.mediaInputs.value[numItem] = {
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
-            name: response.name
+            name: response.name,
+            width:dw,
+            height:dh
           }
-       
+        }
+        else{
+          Static.mediaInputs.value[numItem] = {
+            aspect: Static.mediaInputs.selectAspect,
+            type: response.mimetype.split("/")[0],
+            name: response.name,
+            width:"",
+            height:""
+          }
+        }
    
           initReload();
 
@@ -771,7 +783,7 @@ return selectAspect
         Static.mediaInputs.selectAspect = null
       }
 
-     
+     console.log(Static.mediaInputs.value)
       return (
 
         <div class={[
@@ -899,10 +911,11 @@ return selectAspect
                     {
                     Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect,originalImage.width,originalImage.height)
                     }
-                    console.log('=70d997=',Static.mediaInputs.value)
+               
 
                 if(!Static.mediaInputs.value || Static.mediaInputs.value.length == 0)
                 {
+                
                   fn.modals.ModalCropImage({
                     file: Static.files[0],
                     typeUpload: 'posts',
