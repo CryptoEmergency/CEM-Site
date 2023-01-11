@@ -2,7 +2,8 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    init
+    init,
+    initReload
 } from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 
@@ -13,10 +14,9 @@ import 'cropperjs/dist/cropper.css';
 
 const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
 
-
     let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
     // console.log('=ca484b=2', file)
-
+  
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
     let elemRatio2 = Variable.setRef()
@@ -25,7 +25,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
     // console.log('=453e8a=', Static)
-    //  console.log('=018927=', Static.aspectSelect)
+    
 
     const cropperGo = function (el) {
         if (cropper) {
@@ -234,7 +234,13 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                     <button
                                         type="button"
                                         class="c-button c-button--primary2"
-                                        onClick={() => uploadCropImage(cropper)}
+                                        onClick={() => {
+                                            uploadCropImage(cropper,aspectActive)
+                                            fn.modals.close(ID)
+                                      
+                                          
+                                        }
+                                    }
                                     >
                                         <span class="c-button__wrapper">{Variable.lang.button.upload}</span>
                                     </button>
@@ -242,7 +248,10 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                         type="button"
                                         class="c-button c-button--outline c-button--secondary"
                                         onclick={() => {
+                                           // Static.mediaInputs.selectAspect = null;
                                             fn.modals.close(ID)
+                                           initReload()
+                                        
                                         }}
                                     >
                                         <div class="c-button__wrapper">

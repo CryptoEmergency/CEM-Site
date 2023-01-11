@@ -7,7 +7,7 @@ import { fn } from '@src/functions/index.js';
 
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
-  console.log("============on load",Static,"=======item",item)
+ // console.log("============on load",Static,"=======item",item)
 
 
   if (item.type == "audio") {

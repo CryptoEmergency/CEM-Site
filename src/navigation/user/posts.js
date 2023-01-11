@@ -25,6 +25,8 @@ let Static, selectAspect;
 
 
 
+
+
 const sendPost = async (e, Static) => {
   e.preventDefault();
   if (!Static.isValid) {
@@ -79,7 +81,9 @@ const start = function (data, ID) {
       return
     }
     let canvas;
+   
     Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
+
     canvas = crooper.getCroppedCanvas({
       // width: 166,
       // height: 166,
@@ -353,6 +357,30 @@ const start = function (data, ID) {
   };
 
    
+
+  const whatIsAspect = function(selectAspect,width,height){
+
+//console.log('=f0f70e=',selectAspect,width,height)
+
+if(selectAspect){
+return selectAspect
+}
+
+
+  //прямоугольник c шириной
+  if (width > height) {
+    return 1.7777777777777777
+  }
+  //прямоугольник c высотой
+  if (height > width) {
+   return 0.8
+  }
+  return 1
+
+
+  }
+
+
   const loadPhoto = async function (file, type, xhr, selectAspect = false) {
 
     // console.log('=ebf8e1=', selectAspect)
@@ -406,6 +434,16 @@ const start = function (data, ID) {
             dw = width
             dh = width / 0.8
           }
+          if (selectAspect == 0.8 && height == width) {
+            sx = 1
+            sy = (height - width) / 2
+            sw = width
+            sh = width / 0.8
+            dx = 0
+            dy = 0
+            dw = width
+            dh = width / 0.8
+          }
           //aspect == 1.7777777777777777
           if (selectAspect == 1.7777777777777777 && width > height) {
             if (1.7777777777777777 * height > width) {
@@ -438,8 +476,20 @@ const start = function (data, ID) {
             dw = width
             dh = width / 1.7777777777777777
           }
+
+          if (selectAspect == 1.7777777777777777 && height == width) {
+            sx = 1
+            sy = (height - width) / 2
+            sw = width
+            sh = width / 1.7777777777777777
+            dx = 0
+            dy = 0
+            dw = width
+            dh = width / 1.7777777777777777
+          }
           //aspect  == 1 || aspect == undefined
         } else {
+      
           //прямоугольник c шириной
           if (width > height) {
             sx = (width - height) / 2
@@ -563,17 +613,18 @@ const start = function (data, ID) {
               10
             );
           }
-
+ /*
           if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
             Static.mediaInputs.value.splice(numItem, 1);
             initReload()
-          //  return
+            return
           }
-    
+   */
           Static.mediaInputs.value[numItem].upload = e.loaded
           Static.mediaInputs.value[numItem].size = contentLength;
   
           initReload();
+         
      
         }
        
@@ -583,21 +634,21 @@ const start = function (data, ID) {
       });
 
 
-
+      
 
     }
     
     imageUrl = URL.createObjectURL(file);
 
 
-   if(cropImage(imageUrl, type, xhr))
-   {
+   cropImage(imageUrl, type, xhr)
+   
     Static.isValid = true
-   }
+   
+   
    
  
-
-
+ 
 
 
   };
@@ -605,6 +656,7 @@ const start = function (data, ID) {
   let el = [];
 
   let [Static] = fn.GetParams({ data, ID })
+  Static.loadedPhoto = []
   Static.posts = []
   Static.userInfo = Variable.myInfo;
   Static.elShowTextShort = {}
@@ -712,16 +764,12 @@ const start = function (data, ID) {
     },
 
     () => {
-      let multiple
-      if (Static.checked) {
-        multiple = false
+   
+   
+      if(!Static.mediaInputs.value || Static.mediaInputs.value.length == 0 )
+      {
+        Static.mediaInputs.selectAspect = null
       }
-      else {
-        multiple = true
-      }
-
-
-
 
      
       return (
@@ -830,37 +878,84 @@ const start = function (data, ID) {
                 }
               }}
 
-              multiple={multiple}
+              multiple={true}
               onclickPhoto={async function (e) {
                 if (this.files.length == 0) {
                   return;
                 }
-                if (Static.checked) {
-                  Static.photo = false
-                  if (Static.mediaInputs.show && Static.mediaInputs.value.length && !Static.mediaInputs.selectAspect) {
-                    Static.mediaInputs.selectAspect = 1
-                    // console.log('=d491dd=', Static.mediaInputs.selectAspect)
-                  }
+             
+       
+                 Static.files = Object.assign({},this.files) 
+              //   console.log('=09ca68=',Static.files)
+
+              let imageUrl = URL.createObjectURL(this.files[0]);
+              const originalImage = new Image();
+             originalImage.src = imageUrl;
+                  
+                  originalImage.addEventListener('load', async function () {
+               //     console.log('=7a7ecf=',originalImage.height)
+           
+                    if(!Static.mediaInputs.selectAspect)
+                    {
+                    Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect,originalImage.width,originalImage.height)
+                    }
+                    console.log('=70d997=',Static.mediaInputs.value)
+
+                if(!Static.mediaInputs.value || Static.mediaInputs.value.length == 0)
+                {
                   fn.modals.ModalCropImage({
-                    file: this.files[0],
+                    file: Static.files[0],
                     typeUpload: 'posts',
                     arrMedia: Static.mediaInputs.value,
                     aspectSelect: Static.mediaInputs.selectAspect,
-                    uploadCropImage: async function (cropper) {
-                      await sendPhotoOne(Static, cropper)
+                    uploadCropImage: async function (cropper,aspectActive) {
+                      // console.log('=2e552a=',cropper,aspectActive,Static.files)
+                      Static.mediaInputs.selectAspect = aspectActive
+                       document.getElementById("spinner").hidden = false
+for (let key in Static.files){
+if (Static.files[key]){
+Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+} 
+
+}
                       return;
                     }
                   }, ID)
                 }
-                else {
-                 Static.files = this.files.length
-                  for (let i = 0; i < this.files.length; i++) {
-                    document.getElementById("spinner").hidden = false
-                   Static.mediaInputs.selectAspect ? await loadPhoto(this.files[i], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(this.files[i], "posts")
-  
-                  }
-             
+                else{
+                  document.getElementById("spinner").hidden = false
+                  for (let key in Static.files){
+                    if (Static.files[key]){
+                    Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                    } 
+                    
+                    } 
                 }
+               
+
+                  })
+              
+                //   for (let i = 0; i < this.files.length; i++) {
+                //     if(i == 0)
+                //     {
+                //     fn.modals.ModalCropImage({
+                //       file: this.files[0],
+                //       typeUpload: 'posts',
+                //       arrMedia: Static.mediaInputs.value,
+                //       aspectSelect: Static.mediaInputs.selectAspect,
+                //       uploadCropImage: async function (cropper) {
+                //         await sendPhotoOne(Static, cropper)
+                //         return;
+                //       }
+                //     }, ID)
+                //   }
+                // }
+                  //  document.getElementById("spinner").hidden = false
+             //      Static.mediaInputs.selectAspect ? await loadPhoto(this.files[i], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(this.files[i], "posts")
+  
+                  
+             
+            
                 this.value = '';
               }
               }
@@ -904,7 +999,7 @@ const start = function (data, ID) {
                 </label>
               </div>
             </div>
-            <div class="c-userpostcreate__forfriends">
+            {/*<div class="c-userpostcreate__forfriends">
               <div class="checkbox">
                 <input
                   id="forphoto"
@@ -930,6 +1025,17 @@ const start = function (data, ID) {
                   <span class="cont_a-link"></span>
                 </label>
               </div>
+            
+                </div>*/}
+            <div class={[Static.checked ? "c-hidden" : "c-userpostcreate__forfriends"]}>
+              <div class="checkbox">
+            
+                <label class="" for="">
+                  формат фото
+                  <span class="cont_a-link"></span>
+                </label>
+              </div>
+            
             </div>
             <div style={"display:flex; justify-content: space-between; width: 100%; max-width: 500px; margin: 20px auto"}>
               <button
@@ -940,7 +1046,7 @@ const start = function (data, ID) {
                 style="margin-right: 30px"
                 type="button"
                 //   onClick={sendQuestion}
-                data-href={"/lenta-users/show/123456789"}
+            
                 disabled={!Static.isValid}
                 onclick={(e) => {
                   //   console.log('=cf4a37=', Static)
@@ -979,6 +1085,20 @@ const start = function (data, ID) {
               >
                 <span class="c-button__text">
                   {Variable.lang.button.pre_view}
+                </span>
+              </button>
+              <button
+              style="margin-right: 30px"
+                class={[
+             
+                  Variable.dataUrl.params ? "c-button c-button--gradient2" : "c-hidden",
+                ]}
+                type="button"
+            
+                onClick={(e) => {document.getElementsByClassName('c-userpanel__icon--active')[0].click()}}
+              >
+                <span class="c-button__text">
+                  Отменить
                 </span>
               </button>
               <button
