@@ -25,8 +25,6 @@ let Static, selectAspect;
 
 
 
-
-
 const sendPost = async (e, Static) => {
   e.preventDefault();
   if (!Static.isValid) {
@@ -68,6 +66,12 @@ const sendPost = async (e, Static) => {
 
 
 
+const deleteMediaFile = function (index) {
+  Static.mediaInputs.value.splice(index, 1);
+  if (Static.mediaInputs.value.length == 0) {
+    selectAspect = null;
+  }
+};
 
 const start = function (data, ID) {
   Variable.HeaderShow = true
@@ -81,9 +85,7 @@ const start = function (data, ID) {
       return
     }
     let canvas;
-   
     Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
-
     canvas = crooper.getCroppedCanvas({
       // width: 166,
       // height: 166,
@@ -322,6 +324,15 @@ const start = function (data, ID) {
     return
   }
 
+  const toggleAdditionalyMenu = function (e) {
+    if (e.currentTarget.children[1].style.display == "none") {
+      e.currentTarget.children[1].style = "display: block";
+      showAdditionalyMenu = true;
+    } else {
+      e.currentTarget.children[1].style = "display: none";
+      showAdditionalyMenu = false;
+    }
+  };
 
   const sendAuthorization = async function (e) {
     e.preventDefault();
@@ -330,58 +341,67 @@ const start = function (data, ID) {
     }
   };
 
+  const arrayLengthOne = function (arr) {
+    let count = 0;
+    arr.forEach((element) => {
+      if (element.type != "audio") {
+        count++;
+      }
+    });
+    if (count > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-
- 
+  const audioCountCheck = function (array) {
+    let audioCount = 0;
+    let otherMediaCount = 0;
+    array.forEach((element) => {
+      if (element.type == "audio") {
+        audioCount++;
+      } else {
+        otherMediaCount++;
+      }
+    });
+    if (audioCount <= 2 && audioCount != 0 && otherMediaCount == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   let setT
    async function textLengthCheck(str,e) {
 
     clearTimeout(setT);
-    setT = setTimeout(async function(){
+if(str.trim().length>0)
+{  
+     setT = setTimeout(async function(){
       if (str.trim().length>0 || Static.mediaInputs.value.length > 0) {
         Static.isValid = true;
-      }
-      else{
+      } 
+  
+   
+  
+      Static.textInputs.value = str.trim()
 
-        Static.isValid = false;
-        Static.textInputs.show = false
-      }
-
+      Static.edittext = Static.textInputs.value
       initReload()
      
     },500)
-
+  }else{
  
-  
+    Static.isValid = false;
+    Static.textInputs.value = ""
+   // e.target.innerText = Static.textInputs.value
+    initReload()
+  }
 
   };
 
    
-
-  const whatIsAspect = function(selectAspect,width,height){
-
-//console.log('=f0f70e=',selectAspect,width,height)
-
-if(selectAspect){
-return selectAspect
-}
-
-
-  //прямоугольник c шириной
-  if (width > height) {
-    return 1.7777777777777777
-  }
-  //прямоугольник c высотой
-  if (height > width) {
-   return 0.8
-  }
-  return 1
-
-
-  }
-
-
-  const loadPhoto = async function (file, type, xhr, selectAspect = false,key) {
+  const loadPhoto = async function (file, type, xhr, selectAspect = false) {
 
     // console.log('=ebf8e1=', selectAspect)
     let dataURL;
@@ -434,16 +454,6 @@ return selectAspect
             dw = width
             dh = width / 0.8
           }
-          if (selectAspect == 0.8 && height == width) {
-            sx = 1
-            sy = (height - width) / 2
-            sw = width
-            sh = width / 0.8
-            dx = 0
-            dy = 0
-            dw = width
-            dh = width / 0.8
-          }
           //aspect == 1.7777777777777777
           if (selectAspect == 1.7777777777777777 && width > height) {
             if (1.7777777777777777 * height > width) {
@@ -476,20 +486,8 @@ return selectAspect
             dw = width
             dh = width / 1.7777777777777777
           }
-
-          if (selectAspect == 1.7777777777777777 && height == width) {
-            sx = 1
-            sy = (height - width) / 2
-            sw = width
-            sh = width / 1.7777777777777777
-            dx = 0
-            dy = 0
-            dw = width
-            dh = width / 1.7777777777777777
-          }
           //aspect  == 1 || aspect == undefined
         } else {
-      
           //прямоугольник c шириной
           if (width > height) {
             sx = (width - height) / 2
@@ -530,7 +528,7 @@ return selectAspect
 
         canvas.width = dw;
         canvas.height = dh;
-        
+
 
         await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh);
 
@@ -588,25 +586,13 @@ return selectAspect
           }
           
           let response = JSON.parse(this.response);
-          if(numItem == 0)
-          {
+    
           Static.mediaInputs.value[numItem] = {
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
-            name: response.name,
-            width:dw,
-            height:dh
+            name: response.name
           }
-        }
-        else{
-          Static.mediaInputs.value[numItem] = {
-            aspect: Static.mediaInputs.selectAspect,
-            type: response.mimetype.split("/")[0],
-            name: response.name,
-            width:"",
-            height:""
-          }
-        }
+       
    
           initReload();
 
@@ -625,18 +611,17 @@ return selectAspect
               10
             );
           }
- /*
+
           if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
             Static.mediaInputs.value.splice(numItem, 1);
             initReload()
-            return
+          //  return
           }
-   */
+    
           Static.mediaInputs.value[numItem].upload = e.loaded
           Static.mediaInputs.value[numItem].size = contentLength;
   
           initReload();
-         
      
         }
        
@@ -646,21 +631,21 @@ return selectAspect
       });
 
 
-      
+
 
     }
     
     imageUrl = URL.createObjectURL(file);
 
 
-   cropImage(imageUrl, type, xhr)
-   
+   if(cropImage(imageUrl, type, xhr))
+   {
     Static.isValid = true
-   
-   
+   }
    
  
- 
+
+
 
 
   };
@@ -668,7 +653,6 @@ return selectAspect
   let el = [];
 
   let [Static] = fn.GetParams({ data, ID })
-  Static.loadedPhoto = []
   Static.posts = []
   Static.userInfo = Variable.myInfo;
   Static.elShowTextShort = {}
@@ -689,7 +673,6 @@ return selectAspect
   init(
     async () => {
 
-
       Static.sendPhoto = true
       fn.initData.posts(Static)
 
@@ -699,9 +682,7 @@ return selectAspect
         const data = await fn.restApi.getPost({ filter: { _id: Variable.dataUrl.params, "languages.code": "all" }, limit: 1 })
         if (data.list_records.length) {
 
-          Static.checked = false
-          
-          Static.editphoto = true
+          Static.checked = Static.editphoto = true
           let postForEdit = data.list_records[0];
           Static.edittext = postForEdit.text
           //    console.log('=b37faa=', postForEdit)
@@ -715,7 +696,6 @@ return selectAspect
 
             Static.textInputs = {
               show: true,
-              value: Static.edittext
             }
             //      console.log('=c9259f= textInputs =', Static.textInputs)
           }
@@ -727,12 +707,6 @@ return selectAspect
             imageVideoFiles.forEach((file) => {
               Static.mediaInputs.value.push(file);
             })
-          }
-          else{
-            Static.mediaInputs = {
-              value: [],
-              show: false,
-            }
           }
 
           if (postForEdit.media.length > 0 && audioFiles.length > 0) {
@@ -756,7 +730,7 @@ return selectAspect
         }
       }
       else {
-        Static.edittext = Static.textInputs.value
+      //  Static.edittext = Static.textInputs.value
       }
 
       // console.log('=cb696d=', Static)
@@ -776,14 +750,14 @@ return selectAspect
     },
 
     () => {
-   
-   
-      if(!Static.mediaInputs.value || Static.mediaInputs.value.length == 0 )
-      {
-        Static.mediaInputs.selectAspect = null
+      let multiple
+      if (Static.checked) {
+        multiple = false
+      }
+      else {
+        multiple = true
       }
 
-     console.log(Static.mediaInputs.value)
       return (
 
         <div class={[
@@ -816,9 +790,10 @@ return selectAspect
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
 
 
-             
-                  <div
-                  class={[ Static.mediaInputs.show ? "create_post_chapter createPostImage":"c-hidden"]}>
+              {
+                Static.mediaInputs.show && Static.mediaInputs.value.length
+                  ?
+                  <div class="create_post_chapter createPostImage">
                     {
 
                       Static.mediaInputs.value.map((item, index) => {
@@ -839,13 +814,17 @@ return selectAspect
                         }
                       })
                     }
-                  </div>  
-                  <div
-
-                  class={[Static.audioInputs.show ? "create_post_chapter createPostAudio":"c-hidden"]}>
-                    {()=>{
-                      if(Static.audioInputs.value.length >0){
-                      Static.audioInputs.value.value.map((item, index) => {
+                  </div>
+                  :
+                  null
+              }
+              {/* Добавил еще один иф для айдио */}
+              {
+                Static.audioInputs.show && Static.audioInputs.value.length
+                  ?
+                  <div class="create_post_chapter createPostAudio">
+                    {
+                      Static.audioInputs.value.map((item, index) => {
 
                         return (
                           <MediaPreview
@@ -857,24 +836,42 @@ return selectAspect
                           />
                         );
                       })
-                    }}}
+                    }
                   </div>
+                  :
+                  null
+              }
+              {
+                Static.textInputs.show
+                  ?
                   <div
-                 
-    
-                    class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
+                    class="create_post_chapter create_post_main_text"
                     contenteditable="true"
                     oninput={function (e) {
                       
                       textLengthCheck(this.textContent.trim(),this)
-          
-                      Static.textInputs.value = this.textContent.trim()
-                   
-          
+                      Static.edittext = this.textContent.trim()
+                    /*  Static.textInputs.value = this.textContent.trim()
+                      if (this.textContent.trim() || Static.mediaInputs.value.length > 0) {
+                        Static.isValid = true;
+                      } else {
+                        Static.isValid = false;
+                      }*/
+                // initReload()
                     }
                     }
-                  >{Static.edittext}</div>
-              
+                  >{Static.edittext}
+                    {/* {
+                        Variable.dataUrl.params && !Static.startEditText
+                          ?
+                          Static.textInputs.value
+                          :
+                          null
+                      } */}
+                  </div>
+                  :
+                  null
+              }
             </div>
 
             <MediaButton
@@ -890,85 +887,36 @@ return selectAspect
                 }
               }}
 
-              multiple={true}
+              multiple={multiple}
               onclickPhoto={async function (e) {
                 if (this.files.length == 0) {
                   return;
                 }
-             
-       
-                 Static.files = Object.assign({},this.files) 
-              //   console.log('=09ca68=',Static.files)
-
-              let imageUrl = URL.createObjectURL(this.files[0]);
-              const originalImage = new Image();
-             originalImage.src = imageUrl;
-                  
-                  originalImage.addEventListener('load', async function () {
-               //     console.log('=7a7ecf=',originalImage.height)
-           
-                    if(!Static.mediaInputs.selectAspect)
-                    {
-                    Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect,originalImage.width,originalImage.height)
-                    }
-               
-
-                if(!Static.mediaInputs.value || Static.mediaInputs.value.length == 0)
-                {
-                
+                if (Static.checked) {
+                  if (Static.mediaInputs.show && Static.mediaInputs.value.length && !Static.mediaInputs.selectAspect) {
+                    Static.mediaInputs.selectAspect = 1
+                    // console.log('=d491dd=', Static.mediaInputs.selectAspect)
+                  }
                   fn.modals.ModalCropImage({
-                    file: Static.files[0],
+                    file: this.files[0],
                     typeUpload: 'posts',
                     arrMedia: Static.mediaInputs.value,
                     aspectSelect: Static.mediaInputs.selectAspect,
-                    uploadCropImage: async function (cropper,aspectActive) {
-                      // console.log('=2e552a=',cropper,aspectActive,Static.files)
-                      Static.mediaInputs.selectAspect = aspectActive
-                       document.getElementById("spinner").hidden = false
-for (let key in Static.files){
-if (Static.files[key]){
-Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-} 
-
-}
+                    uploadCropImage: async function (cropper) {
+                      await sendPhotoOne(Static, cropper)
                       return;
                     }
                   }, ID)
                 }
-                else{
-                  document.getElementById("spinner").hidden = false
-                  for (let key in Static.files){
-                    if (Static.files[key]){
-                    Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-                    } 
-                    
-                    } 
-                }
-               
-
-                  })
-              
-                //   for (let i = 0; i < this.files.length; i++) {
-                //     if(i == 0)
-                //     {
-                //     fn.modals.ModalCropImage({
-                //       file: this.files[0],
-                //       typeUpload: 'posts',
-                //       arrMedia: Static.mediaInputs.value,
-                //       aspectSelect: Static.mediaInputs.selectAspect,
-                //       uploadCropImage: async function (cropper) {
-                //         await sendPhotoOne(Static, cropper)
-                //         return;
-                //       }
-                //     }, ID)
-                //   }
-                // }
-                  //  document.getElementById("spinner").hidden = false
-             //      Static.mediaInputs.selectAspect ? await loadPhoto(this.files[i], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(this.files[i], "posts")
+                else {
+                 Static.files = this.files.length
+                  for (let i = 0; i < this.files.length; i++) {
+                    document.getElementById("spinner").hidden = false
+                   Static.mediaInputs.selectAspect ? await loadPhoto(this.files[i], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(this.files[i], "posts")
   
-                  
+                  }
              
-            
+                }
                 this.value = '';
               }
               }
@@ -1012,7 +960,7 @@ Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", nu
                 </label>
               </div>
             </div>
-            {/*<div class="c-userpostcreate__forfriends">
+            <div class="c-userpostcreate__forfriends">
               <div class="checkbox">
                 <input
                   id="forphoto"
@@ -1038,17 +986,6 @@ Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", nu
                   <span class="cont_a-link"></span>
                 </label>
               </div>
-            
-                </div>*/}
-            <div class={[Static.checked ? "c-hidden" : "c-userpostcreate__forfriends"]}>
-              <div class="checkbox">
-            
-                <label class="" for="">
-                  формат фото
-                  <span class="cont_a-link"></span>
-                </label>
-              </div>
-            
             </div>
             <div style={"display:flex; justify-content: space-between; width: 100%; max-width: 500px; margin: 20px auto"}>
               <button
@@ -1059,7 +996,7 @@ Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", nu
                 style="margin-right: 30px"
                 type="button"
                 //   onClick={sendQuestion}
-            
+                data-href={"/lenta-users/show/123456789"}
                 disabled={!Static.isValid}
                 onclick={(e) => {
                   //   console.log('=cf4a37=', Static)
@@ -1098,20 +1035,6 @@ Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", nu
               >
                 <span class="c-button__text">
                   {Variable.lang.button.pre_view}
-                </span>
-              </button>
-              <button
-              style="margin-right: 30px"
-                class={[
-             
-                  Variable.dataUrl.params ? "c-button c-button--gradient2" : "c-hidden",
-                ]}
-                type="button"
-            
-                onClick={(e) => {document.getElementsByClassName('c-userpanel__icon--active')[0].click()}}
-              >
-                <span class="c-button__text">
-                  Отменить
                 </span>
               </button>
               <button

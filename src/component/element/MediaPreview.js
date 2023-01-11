@@ -7,7 +7,7 @@ import { fn } from '@src/functions/index.js';
 
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
-  //console.log("============on load",Static,"=======item",item)
+ // console.log("============on load",Static,"=======item",item)
 
 
   if (item.type == "audio") {
@@ -63,7 +63,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
             {
              
            //   ((type == "chat" || type == "posts") && !Static.photo) && item.size === undefined
-           (type == "chat" || type == "posts")
+           (type == "posts")
                 ?
                 <div
                   class="messages_settings"
@@ -79,9 +79,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           e.preventDefault();
                           fn.modals.ModalCropImage({
                             file: `/assets/upload/${type}/${item.name}`,
-                            typeUpload: 'chat',
+                            typeUpload: 'posts',
                             arrMedia: Static.mediaInputs.value,
-                            aspectSelect: Static.mediaInputs.selectAspect,
+                            aspectSelect: null,
                             uploadCropImage: async function (cropper) {
                               await sendPhotoChat(cropper, index)
                               return;
@@ -111,7 +111,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0) {
                       Static.mediaInputs.selectAspect = null;
-              
+                      Static.mediaInputs.show = false
                       if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
                         Static.isValid = false;
                       }
