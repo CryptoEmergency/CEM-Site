@@ -130,7 +130,7 @@ const start = function (data, ID) {
                             </div>
                         </div>
                         <div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px">
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
                                     <div style="font-size: 26px; font-weight: 600">
@@ -186,7 +186,13 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                                 <div>
-                                    <div style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px">
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
                                         <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
                                             Откликнуться
                                         </div>
@@ -198,7 +204,7 @@ const start = function (data, ID) {
 
 
 
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px">
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
                                     <div style="font-size: 26px; font-weight: 600">
@@ -249,7 +255,13 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                                 <div>
-                                    <div style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px">
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
                                         <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
                                             Откликнуться
                                         </div>
@@ -260,7 +272,7 @@ const start = function (data, ID) {
 
 
 
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px">
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
                                     <div style="font-size: 26px; font-weight: 600">
@@ -315,7 +327,13 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                                 <div>
-                                    <div style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px">
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
                                         <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
                                             Откликнуться
                                         </div>
@@ -324,9 +342,9 @@ const start = function (data, ID) {
                             </div>
 
 
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px">
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
+                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
                                     <div style="font-size: 26px; font-weight: 600">
                                         Backend developer
                                     </div>
@@ -374,7 +392,13 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                                 <div>
-                                    <div style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px">
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
                                         <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
                                             Откликнуться
                                         </div>
@@ -387,9 +411,9 @@ const start = function (data, ID) {
 
 
 
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px">
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
+                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
                                     <div style="font-size: 26px; font-weight: 600">
                                         DevOps
                                     </div>
@@ -437,13 +461,240 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                                 <div>
-                                    <div style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px">
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
                                         <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
                                             Откликнуться
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+                                    <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
+                                    <div style="font-size: 26px; font-weight: 600">
+                                        React native developer
+                                    </div>
+                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                        Активно
+                                    </div>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
+                                    <p style="color: #CACACA">Полная занятость, полный день</p>
+                                    
+                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
+                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
+                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Разработка кросс платформенных приложений на React Native с нуля;</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поддержка и доработка существующий приложений;</p>
+                                            <p style="font-size: 14px; color: #CACACA">Участие в оценке и планировании;</p>
+                                        </div>
+                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
+                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Отличное знание React Native, его использование на коммерческих проектах</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание концепции работы React Native и встраиваемых модулей;</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание концепции работы React Hooks;</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Хорошие знания TypeScript</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы Firebase</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Знание работы Xcode, Android Studio</p>
+                                            <p style="font-size: 14px; color: #CACACA">Наличие практического опыта работы с Google Play и App Store (включая подписи приложений, заливку и публикацию в сторы)</p> 
+                                        </div>
+                                    </div>
+                                    
+                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
+                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
+                                    
+                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
+                                    <div style="display: flex; flex-wrap: wrap">
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">React</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">React Native</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">TypeScript</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Firebase</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Xcode</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Android Studio</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Google Play</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">App Store</div>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
+                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
+                                            Откликнуться
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
+                                    <div style="font-size: 26px; font-weight: 600">
+                                        Blockchain developer
+                                    </div>
+                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                        Активно
+                                    </div>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
+                                    <p style="color: #CACACA">Полная занятость, полный день</p>
+                                    
+                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
+                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
+                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Участвовать в проектировании, разработке и внедрении блокчейн-проектов</p>
+                                            <p style="font-size: 14px; color: #CACACA">Разрабатывать, тестировать, анализировать смарт-контракты</p>
+                                        </div>
+                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
+                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Базовое понимание технологии blockchain</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Базовые знания blockchain-инфраструктуры (NFT-marketplace, DAO, DeFI, DEX, и пр).</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание Blockchain. Знание Solidity, hardhat, web3</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение читать и разрабатывать smart-контракты;</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт выпуска собственных токенов на Ethereum;</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Будет плюсом опыт создания собственных монет.</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Широкий технический кругозор (знание других языков программирования, инфраструктурных решений, бэкграунд в системном администрировании и DevOps).</p>
+                                            <p style="font-size: 14px; color: #CACACA">Опыт разворачивания собственных нод и оракулов</p> 
+                                        </div>
+                                    </div>
+                                    
+                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
+                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
+                                    
+                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
+                                    <div style="display: flex; flex-wrap: wrap">
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">blockchain</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">NFT</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">DAO</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">DeFI</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Xcode</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">DEX</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Solidity</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">web3</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
+                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
+                                            Откликнуться
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--marketing"></i>
+                                    <div style="font-size: 26px; font-weight: 600">
+                                        SEO-специалист
+                                    </div>
+                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                        Активно
+                                    </div>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
+                                    <p style="color: #CACACA">Полная занятость, полный день</p>
+                                    
+                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
+                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
+                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Работа с информационными статьями репутационного характера</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">SEO-оптимизация сайтов</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Проработка поисковых подсказок</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Фиксация результатов поиска Яндекс и Google</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Анализ результатов поиска в системах Яндекс и Google по запросам</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Регулярный анализ динамики приоритетных запросов</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Подбор и анализ целевых запросов, составление семантического ядра.</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поиск новых способов продвижения сайта.</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Создавать и публиковать уникальный и интересный контент в Instagram, Telegram, YouTube, ВКонтакте.</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Оформление аккаунтов, ежедневный постинг, копирайтинг / рерайтинг. Посевы в пабликах.</p>
+                                            <p style="font-size: 14px; color: #CACACA">Разработка и реализация стратегии SMM для привлечения аудитории, составление контент-плана.</p>
+                                        </div>
+                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
+                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Хорошее знание принципов и факторов ранжирования в Яндекс и Google</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение работать с сервисами: ahrefs, topvisor, checktrust, Google Analytics, Яндекс Метрика и т. д.</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение работать в команде, работать с большими объемами информации, быстро принимать решения, воплощать их в жизнь и нести ответственность за результат</p>
+                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Знаете что такое информационный стиль и пишите соответствующие тексты, без орфографических и пунктуационных ошибок.</p>
+                                            <p style="font-size: 14px; color: #CACACA">Постоянно развиваетесь и готовы бесконечно совершенствовать аккаунты и контент.</p> 
+                                        </div>
+                                    </div>
+                                    
+                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
+                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
+                                    
+                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
+                                    <div style="display: flex; flex-wrap: wrap">
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">SEO</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Яндекс Метрика</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Google Analytics</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">checktrust</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">topvisor</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">ahrefs</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Instagram</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Telegram</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">YouTube</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">ВКонтакте</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Яндекс</div>
+                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Google</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
+                                        onclick={(e) => {
+                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                            e.stopPropagation();
+                                        }}
+                                    >
+                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
+                                            Откликнуться
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                         </div>
                         <div class="c-job__withus">
                             <h2 class="c-jobs__subtitle">{Variable.lang.p.waitYouTeam}</h2>
