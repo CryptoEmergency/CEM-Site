@@ -16,7 +16,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
 
     let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
     // console.log('=ca484b=2', file)
-  
+
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
     let elemRatio2 = Variable.setRef()
@@ -25,7 +25,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
     // console.log('=453e8a=', Static)
-    
+
 
     const cropperGo = function (el) {
         if (cropper) {
@@ -45,31 +45,31 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                 // dragCrop: false,
 
                 //**2 */
-               
-                 autoCropArea: 1,
-                 viewMode: 3,
-                 strict: false,
-                 guides: false,
-                 highlight: false,
-                 dragMode: 'move',
-                 restore: false,
-                 modal: false,
-                 cropBoxMovable: false,
-                 cropBoxResizable: false,
-                 toggleDragModeOnDblclick: false,
-                 
-                /**3 */
                 // aspectRatio: aspectActive,
-                // viewMode: 3,
-                // dragMode: 'move',
                 // autoCropArea: 1,
+                // viewMode: 3,
+                // strict: false,
+                // guides: false,
+                // highlight: false,
+                // dragMode: 'move',
                 // restore: false,
                 // modal: false,
-                // guides: false,
-                // highlight: true,
-                // cropBoxMovable: true,
+                // cropBoxMovable: false,
                 // cropBoxResizable: false,
                 // toggleDragModeOnDblclick: false,
+
+                /**3 */
+                aspectRatio: aspectActive,
+                viewMode: 3,
+                dragMode: 'move',
+                autoCropArea: 1,
+                restore: false,
+                modal: false,
+                guides: false,
+                highlight: true,
+                cropBoxMovable: true,
+                cropBoxResizable: false,
+                toggleDragModeOnDblclick: false,
 
                 crop: function (e) {
                     var data = e.detail;
@@ -237,12 +237,12 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                         type="button"
                                         class="c-button c-button--primary2"
                                         onClick={() => {
-                                            uploadCropImage(cropper,aspectActive)
+                                            uploadCropImage(cropper, aspectActive)
                                             fn.modals.close(ID)
-                                      
-                                          
+
+
                                         }
-                                    }
+                                        }
                                     >
                                         <span class="c-button__wrapper">{Variable.lang.button.upload}</span>
                                     </button>
@@ -250,10 +250,10 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                         type="button"
                                         class="c-button c-button--outline c-button--secondary"
                                         onclick={() => {
-                                           // Static.mediaInputs.selectAspect = null;
+                                            // Static.mediaInputs.selectAspect = null;
                                             fn.modals.close(ID)
-                                           initReload()
-                                        
+                                            initReload()
+
                                         }}
                                     >
                                         <div class="c-button__wrapper">
