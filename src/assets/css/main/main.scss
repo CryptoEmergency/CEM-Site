@@ -9,6 +9,10 @@
     box-sizing: border-box
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 p {
     margin-top: 0;
     margin-bottom: 1rem;
