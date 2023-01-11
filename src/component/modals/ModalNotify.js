@@ -18,6 +18,21 @@ let notify, currentNotify;
 
 const ModalNotify = async function (data, ID) {
 
+	const findUnread = function (arr, title = false) {
+		let unread = false
+		if (!arr || !arr.length) { return false }
+		if (title) {
+			arr.forEach(element => {
+				if (!element.read) { unread = title }
+			})
+		} else {
+			arr.forEach(element => {
+				if (!element.read) { unread = true }
+			})
+		}
+		return unread
+	};
+
 	const changeCategory = async function () {
 		if (currentNotify[this.dataset.type]) {
 			return
@@ -51,7 +66,9 @@ const ModalNotify = async function (data, ID) {
 		// console.log('=d68221=', currentNotify)
 		initReload()
 	}
+
 	let close = true
+
 	init(
 		() => {
 			notify = Variable.myInfo.notifyQuestions;
@@ -61,28 +78,29 @@ const ModalNotify = async function (data, ID) {
 				awards: false,
 				system: false
 			};
-			
+
 		},
 		() => {
-	
-			// console.log(notify)
+
+			console.log('=60d77f=', notify)
 			return (
-				<div class="c-modal c-modal--open" id="ModalNotify" onclick={function(e){	
-					 if(close){ 
- 
-					fn.modals.close(ID)
-				  }}}>
-					<section class="c-modal__dialog" onmouseover={function(){
-        
-		   close = false
-	
+				<div class="c-modal c-modal--open" id="ModalNotify" onclick={function (e) {
+					if (close) {
 
-		 }}
-		   onmouseleave={function(){
-			
-			close = true
+						fn.modals.close(ID)
+					}
+				}}>
+					<section class="c-modal__dialog" onmouseover={function () {
 
-		   }}>
+						close = false
+
+
+					}}
+						onmouseleave={function () {
+
+							close = true
+
+						}}>
 						{/* <header class="c-modal__header">
 							<h4>Уведомления</h4>
 							<button
@@ -108,13 +126,28 @@ const ModalNotify = async function (data, ID) {
 								<a data-action="link" href="/user/notify/">{Variable.lang.button.show_all}</a>
 							</div>
 							<div class="notifications_toggle_block">
-								<div data-type='question' onclick={changeCategory} class={currentNotify.question ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
+								<div
+									data-type='question'
+									onclick={changeCategory}
+									style={findUnread(Variable.myInfo.notifyQuestions) ? "color: #2ECB74" : null}
+									class={currentNotify.question ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}
+								>
 									{Variable.lang.text.questions}
 								</div>
-								<div data-type='awards' onclick={changeCategory} class={currentNotify.awards ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
+								<div
+									data-type='awards'
+									onclick={changeCategory}
+									style={findUnread(Variable.myInfo.notifyAwards) ? "color: #2ECB74" : null}
+									class={currentNotify.awards ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}
+								>
 									{Variable.lang.text.awards}
 								</div>
-								<div data-type='system' onclick={changeCategory} class={currentNotify.system ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}>
+								<div
+									data-type='system'
+									onclick={changeCategory}
+									style={findUnread(Variable.myInfo.notifySystem) ? "color: #2ECB74" : null}
+									class={currentNotify.system ? 'notifications_toggle_item notifications_toggle_item_active' : 'notifications_toggle_item'}
+								>
 									{Variable.lang.text.system}
 								</div>
 							</div>
