@@ -159,7 +159,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                                 </div>
                                             </div>
                                         )
-                                    } else if (typeUpload != "chat" || typeUpload != "posts") {
+                                    } else if (typeUpload != "chat") {
                                         return (
                                             <div class="c-cropper__toggles col-12 docs-toggles">
                                                 <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">

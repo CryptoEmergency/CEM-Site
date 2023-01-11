@@ -111,7 +111,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0) {
                       Static.mediaInputs.selectAspect = null;
-              
+                      Static.mediaInputs.show = false
                       if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
                         Static.isValid = false;
                       }

@@ -66,6 +66,12 @@ const sendPost = async (e, Static) => {
 
 
 
+const deleteMediaFile = function (index) {
+  Static.mediaInputs.value.splice(index, 1);
+  if (Static.mediaInputs.value.length == 0) {
+    selectAspect = null;
+  }
+};
 
 const start = function (data, ID) {
   Variable.HeaderShow = true
@@ -318,6 +324,15 @@ const start = function (data, ID) {
     return
   }
 
+  const toggleAdditionalyMenu = function (e) {
+    if (e.currentTarget.children[1].style.display == "none") {
+      e.currentTarget.children[1].style = "display: block";
+      showAdditionalyMenu = true;
+    } else {
+      e.currentTarget.children[1].style = "display: none";
+      showAdditionalyMenu = false;
+    }
+  };
 
   const sendAuthorization = async function (e) {
     e.preventDefault();
@@ -326,29 +341,62 @@ const start = function (data, ID) {
     }
   };
 
+  const arrayLengthOne = function (arr) {
+    let count = 0;
+    arr.forEach((element) => {
+      if (element.type != "audio") {
+        count++;
+      }
+    });
+    if (count > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-
- 
+  const audioCountCheck = function (array) {
+    let audioCount = 0;
+    let otherMediaCount = 0;
+    array.forEach((element) => {
+      if (element.type == "audio") {
+        audioCount++;
+      } else {
+        otherMediaCount++;
+      }
+    });
+    if (audioCount <= 2 && audioCount != 0 && otherMediaCount == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   let setT
    async function textLengthCheck(str,e) {
 
     clearTimeout(setT);
-    setT = setTimeout(async function(){
+if(str.trim().length>0)
+{  
+     setT = setTimeout(async function(){
       if (str.trim().length>0 || Static.mediaInputs.value.length > 0) {
         Static.isValid = true;
-      }
-      else{
+      } 
+  
+   
+  
+      Static.textInputs.value = str.trim()
 
-        Static.isValid = false;
-        Static.textInputs.show = false
-      }
-
+      Static.edittext = Static.textInputs.value
       initReload()
      
     },500)
-
+  }else{
  
-  
+    Static.isValid = false;
+    Static.textInputs.value = ""
+   // e.target.innerText = Static.textInputs.value
+    initReload()
+  }
 
   };
 
@@ -625,7 +673,6 @@ const start = function (data, ID) {
   init(
     async () => {
 
-
       Static.sendPhoto = true
       fn.initData.posts(Static)
 
@@ -649,7 +696,6 @@ const start = function (data, ID) {
 
             Static.textInputs = {
               show: true,
-              value: Static.edittext
             }
             //      console.log('=c9259f= textInputs =', Static.textInputs)
           }
@@ -661,12 +707,6 @@ const start = function (data, ID) {
             imageVideoFiles.forEach((file) => {
               Static.mediaInputs.value.push(file);
             })
-          }
-          else{
-            Static.mediaInputs = {
-              value: [],
-              show: false,
-            }
           }
 
           if (postForEdit.media.length > 0 && audioFiles.length > 0) {
@@ -690,7 +730,7 @@ const start = function (data, ID) {
         }
       }
       else {
-        Static.edittext = Static.textInputs.value
+      //  Static.edittext = Static.textInputs.value
       }
 
       // console.log('=cb696d=', Static)
@@ -718,10 +758,6 @@ const start = function (data, ID) {
         multiple = true
       }
 
-
-
-
-     
       return (
 
         <div class={[
@@ -754,9 +790,10 @@ const start = function (data, ID) {
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
 
 
-             
-                  <div
-                  class={[ Static.mediaInputs.show ? "create_post_chapter createPostImage":"c-hidden"]}>
+              {
+                Static.mediaInputs.show && Static.mediaInputs.value.length
+                  ?
+                  <div class="create_post_chapter createPostImage">
                     {
 
                       Static.mediaInputs.value.map((item, index) => {
@@ -777,13 +814,17 @@ const start = function (data, ID) {
                         }
                       })
                     }
-                  </div>  
-                  <div
-
-                  class={[Static.audioInputs.show ? "create_post_chapter createPostAudio":"c-hidden"]}>
-                    {()=>{
-                      if(Static.audioInputs.value.length >0){
-                      Static.audioInputs.value.value.map((item, index) => {
+                  </div>
+                  :
+                  null
+              }
+              {/* Добавил еще один иф для айдио */}
+              {
+                Static.audioInputs.show && Static.audioInputs.value.length
+                  ?
+                  <div class="create_post_chapter createPostAudio">
+                    {
+                      Static.audioInputs.value.map((item, index) => {
 
                         return (
                           <MediaPreview
@@ -795,24 +836,42 @@ const start = function (data, ID) {
                           />
                         );
                       })
-                    }}}
+                    }
                   </div>
+                  :
+                  null
+              }
+              {
+                Static.textInputs.show
+                  ?
                   <div
-                 
-    
-                    class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
+                    class="create_post_chapter create_post_main_text"
                     contenteditable="true"
                     oninput={function (e) {
                       
                       textLengthCheck(this.textContent.trim(),this)
-          
-                      Static.textInputs.value = this.textContent.trim()
-                   
-          
+                      Static.edittext = this.textContent.trim()
+                    /*  Static.textInputs.value = this.textContent.trim()
+                      if (this.textContent.trim() || Static.mediaInputs.value.length > 0) {
+                        Static.isValid = true;
+                      } else {
+                        Static.isValid = false;
+                      }*/
+                // initReload()
                     }
                     }
-                  >{Static.edittext}</div>
-              
+                  >{Static.edittext}
+                    {/* {
+                        Variable.dataUrl.params && !Static.startEditText
+                          ?
+                          Static.textInputs.value
+                          :
+                          null
+                      } */}
+                  </div>
+                  :
+                  null
+              }
             </div>
 
             <MediaButton
@@ -834,7 +893,6 @@ const start = function (data, ID) {
                   return;
                 }
                 if (Static.checked) {
-                  Static.photo = false
                   if (Static.mediaInputs.show && Static.mediaInputs.value.length && !Static.mediaInputs.selectAspect) {
                     Static.mediaInputs.selectAspect = 1
                     // console.log('=d491dd=', Static.mediaInputs.selectAspect)
