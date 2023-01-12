@@ -593,11 +593,13 @@
 
             &>* {
                 margin-left: 0;
+                text-align: left;
             }
         }
 
         &>* {
             margin: auto;
+            text-align: center;
         }
 
         // &:hover {
