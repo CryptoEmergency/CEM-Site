@@ -27,6 +27,7 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
         Static.elMedia[item._id] = {}
     }
     let elMedia = Static.elMedia[item._id]
+    let playButton
     return (
         <div
             class={[
@@ -35,11 +36,12 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
             ]}
         >
             <div class="video_sign"></div>
-            {/* <img style="width: 13%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)" src={svg['play_button']} /> */}
+            <img Element={($el) => { playButton = $el; }} style="width: 10%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)" src={svg['play_button']} />
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none;" class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             <video
                 playsinline
                 poster={images["video_background"]}
-                preload="metadata"
+                preload="none"  //metadata
                 src={path + item.name}
                 Element={($el) => { elMedia.el = $el; }}
                 onclick={function (e) {
@@ -47,17 +49,19 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
                     this.paused ? this.play() : this.pause();
                 }}
                 onplay={function (e) {
-                    Object.values(Static.elMedia).forEach((audio)=>{
-                        if(audio.play && audio != elMedia){
-                          audio.el.pause()
+                    Object.values(Static.elMedia).forEach((audio) => {
+                        if (audio.play && audio != elMedia) {
+                            audio.el.pause()
                         }
                     })
                     elMedia.play = true
+                    playButton.style.display = 'none'
                     elMedia.controlsPause.src = svg["player_pause"]
                     elMedia.controlsPause.classList.remove("paused");
                 }}
                 onpause={function (e) {
                     elMedia.play = false
+                    playButton.style.display = 'block'
                     elMedia.controlsPause.src = svg["player_play"]
                     elMedia.controlsPause.classList.add("paused");
                 }}
@@ -71,7 +75,7 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
                 }}
                 ontimeupdate={function (e) {
                     elMedia.controlsCurrentTime.innerText = formatTime(this.currentTime)
-                    let progress = Math.floor(this.currentTime) / Math.floor(this.duration);
+                    let progress = this.currentTime / this.duration;
                     elMedia.controlsProgressLine.style.width = progress * 100 + '%'
                 }}
                 ondblclick={function (e) {

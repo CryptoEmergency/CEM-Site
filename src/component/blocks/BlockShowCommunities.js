@@ -261,7 +261,7 @@ const BlockShowCommunities = async function ({ Static }) {
                   fn.siteLinkModal(e, {
                     title: 'Страница сообщества',
                     community: {
-                      src: "community1",
+                      src: "cryptoclubnvrsk",
                       name: "CryptoClub NVRSK",
                       description: "Сообщество криптоинтузиастов для встреч и общения. На встречах обсуждаем - майнинг, трейдинг, дефай, нфт, различные блокчейн проекты и делимся своим мнением в целом о крипте. Планируются встречи с экспертами из разных направлений и мастермаинды.",
                       short: "Сообщество по интересам, связанным с криптой и блокчейн технологиями.",
@@ -339,7 +339,105 @@ const BlockShowCommunities = async function ({ Static }) {
                 href="/communities/community/1"
                 onclick={(e) => {
                   fn.siteLinkModal(e, {
-                    title: 'Страница сообщества'
+                    // title: 'Страница сообщества',
+                    custom: 'anonymus',
+                    community: {
+                      src: "cryptoclubnvrsk",
+                      name: "DAO Anonymous",
+                      heroes: [
+                        {
+                          path: "anonymous",
+                          image: "hero1",
+                          name: "Ghost"
+                        },
+                        {
+                          path: "anonymous",
+                          image: "hero2",
+                          name: "Technican"
+                        },
+                        {
+                          path: "anonymous",
+                          image: "hero3",
+                          name: "Samurai"
+                        },
+                        {
+                          path: "anonymous",
+                          image: "hero4",
+                          name: "Reaper"
+                        },
+                        {
+                          path: "anonymous",
+                          image: "hero5",
+                          name: "Synthetic"
+                        },
+                      ],
+                      actions: [
+                        {
+                          link: "",
+                          title: "Купить NFT"
+                        },
+                        {
+                          link: "",
+                          title: "Чат-бот"
+                        },
+                        {
+                          link: "",
+                          title: "Описание"
+                        },
+                        {
+                          link: "",
+                          title: "Merch"
+                        },
+                        {
+                          link: "",
+                          title: "Вакансии"
+                        },
+                        {
+                          link: "",
+                          title: "Ссылки"
+                        },
+                      ],
+                      description: "Сообщество криптоинтузиастов для встреч и общения. На встречах обсуждаем - майнинг, трейдинг, дефай, нфт, различные блокчейн проекты и делимся своим мнением в целом о крипте. Планируются встречи с экспертами из разных направлений и мастермаинды.",
+                      short: "Сообщество по интересам, связанным с криптой и блокчейн технологиями.",
+                      categories: [
+                        "NFT", "Безопасность", "Defi", "token", "altcoin", "Mining", "Trading", "ICO", "GameFi", "Move2Earn", "Блокчейн"
+                      ],
+                      creator: {
+                        title: "Сэм",
+                        href: "#"
+                      },
+                      member: 9,
+                      language: "Русский",
+                      country: "Россия",
+                      city: "Новороссийск",
+                      contacts: {
+                        phone: "",
+                        web: "",
+                      },
+                      social: {
+                        telegram: "https://t.me/+vmw6S8KTzGMxZWYy",
+                        twitter: "",
+                        discord: "",
+                        instagram: "",
+                      },
+                      galary: [
+                        {
+                          path: "",
+                          image: "community1",
+                        },
+                        {
+                          path: "",
+                          image: "community2",
+                        }
+                      ],
+                      events: [
+                        {
+                          title: "Встреча каждую субботу",
+                          date: "16-00",
+                          place: "кафе/бар (по согласованию)"
+                        },
+                      ]
+                    }
                   })
                 }}
               >
