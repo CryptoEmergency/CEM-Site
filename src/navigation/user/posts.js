@@ -382,7 +382,6 @@ const start = function (data, ID) {
 
 
   const loadPhoto = async function (file, type, xhr, selectAspect = false, key) {
-
     // console.log('=ebf8e1=', selectAspect)
     let dataURL;
 
@@ -403,9 +402,6 @@ const start = function (data, ID) {
       const ctx = canvas.getContext('2d');
 
 
-
-
-
       originalImage.addEventListener('load', async function () {
 
         let height = originalImage.height;
@@ -415,7 +411,7 @@ const start = function (data, ID) {
         if (selectAspect && selectAspect != 1) {
           //aspect == 0.8
           if (selectAspect == 0.8 && width > height) {
-            sx = (width - height) / 2
+            sx = (width - 0.8 * height) / 2
             sy = 1
             sw = 0.8 * height
             sh = height
@@ -426,7 +422,7 @@ const start = function (data, ID) {
           }
           if (selectAspect == 0.8 && height > width) {
             sx = 1
-            sy = (height - width) / 2
+            sy = (height - width / 0.8) / 2
             sw = width
             sh = width / 0.8
             dx = 0
@@ -444,31 +440,19 @@ const start = function (data, ID) {
             dw = width
             dh = width / 0.8
           }
-          //aspect == 1.7777777777777777
           if (selectAspect == 1.7777777777777777 && width > height) {
-            if (1.7777777777777777 * height > width) {
-              sx = 1
-              sy = (width - height) / 2
-              sw = width
-              sh = width / 1.7777777777777777
-              dx = 0
-              dy = 0
-              dw = width
-              dh = width / 1.7777777777777777
-            } else {
-              sx = (width - height) / 2
-              sy = 1
-              sw = 1.7777777777777777 * height
-              sh = height
-              dx = 0
-              dy = 0
-              dw = 1.7777777777777777 * height
-              dh = height
-            }
+            sx = 1
+            sy = (height - width / 1.7777777777777777) / 2
+            sw = width
+            sh = width / 1.7777777777777777
+            dx = 0
+            dy = 0
+            dw = width
+            dh = width / 1.7777777777777777
           }
           if (selectAspect == 1.7777777777777777 && height > width) {
             sx = 1
-            sy = (height - width) / 2
+            sy = (height - width / 1.7777777777777777) / 2
             sw = width
             sh = width / 1.7777777777777777
             dx = 0
@@ -531,7 +515,7 @@ const start = function (data, ID) {
         canvas.width = dw;
         canvas.height = dh;
 
-
+        console.log('=e1d7e3=', height, width)
         await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh);
 
 
@@ -941,14 +925,17 @@ const start = function (data, ID) {
                       aspectSelect: Static.mediaInputs.selectAspect,
                       uploadCropImage: async function (cropper, aspectActive) {
                         Static.mediaInputs.selectAspect = aspectActive
-                        // sendPhotoOne(Static, cropper)
+                        sendPhotoOne(Static, cropper)
 
                         // console.log('=2e552a=',cropper,aspectActive,Static.files)
 
+                        const sX = cropper.getData();
+                        console.log('=770465=', ' x = ', sX.x, ', y = ', sX.y)
+
                         document.getElementById("spinner").hidden = false
                         for (let key in Static.files) {
-                          if (Static.files[key]) {
-                            Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                          if (Static.files[key] && key != 0) {
+                            Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect, sX) : await loadPhoto(Static.files[key], "posts")
                           }
 
                         }
