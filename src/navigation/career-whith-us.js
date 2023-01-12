@@ -199,11 +199,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
                             <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
@@ -268,10 +263,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                             <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
@@ -340,8 +331,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
-
                             <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
@@ -405,12 +394,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
                             <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
@@ -474,7 +457,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
                             <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
@@ -541,12 +523,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
                             <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
@@ -612,11 +588,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
                             <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
                                     <i class="c-jobs__iconprofession c-jobs__iconprofession--marketing"></i>
@@ -692,9 +663,6 @@ const start = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                         <div class="c-job__withus">
                             <h2 class="c-jobs__subtitle">{Variable.lang.p.waitYouTeam}</h2>
