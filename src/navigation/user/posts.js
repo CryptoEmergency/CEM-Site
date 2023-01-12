@@ -910,9 +910,8 @@ const start = function (data, ID) {
                     Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect, originalImage.width, originalImage.height)
                   }
 
-
-                  if (!Static.mediaInputs.value || Static.mediaInputs.value.length == 0) {
-
+                  // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
+                  if (Object.keys(Static.files).length == 1) {
                     fn.modals.ModalCropImage({
                       file: Static.files[0],
                       typeUpload: 'posts',
@@ -934,16 +933,63 @@ const start = function (data, ID) {
                         return;
                       }
                     }, ID)
-                  }
-                  else {
-                    document.getElementById("spinner").hidden = false
-                    for (let key in Static.files) {
-                      if (Static.files[key]) {
-                        Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-                      }
+                  } else {
+                    fn.modals.ModalCropImage({
+                      file: Static.files[0],
+                      typeUpload: 'posts',
+                      arrMedia: Static.mediaInputs.value,
+                      aspectSelect: Static.mediaInputs.selectAspect,
+                      uploadCropImage: async function (cropper, aspectActive) {
+                        Static.mediaInputs.selectAspect = aspectActive
+                        // sendPhotoOne(Static, cropper)
 
-                    }
+                        // console.log('=2e552a=',cropper,aspectActive,Static.files)
+
+                        document.getElementById("spinner").hidden = false
+                        for (let key in Static.files) {
+                          if (Static.files[key]) {
+                            Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                          }
+
+                        }
+                        return;
+                      }
+                    }, ID)
                   }
+
+                  // if (!Static.mediaInputs.value || Static.mediaInputs.value.length == 0) {
+
+                  //   fn.modals.ModalCropImage({
+                  //     file: Static.files[0],
+                  //     typeUpload: 'posts',
+                  //     arrMedia: Static.mediaInputs.value,
+                  //     aspectSelect: Static.mediaInputs.selectAspect,
+                  //     uploadCropImage: async function (cropper, aspectActive) {
+                  //       Static.mediaInputs.selectAspect = aspectActive
+                  //       sendPhotoOne(Static, cropper)
+
+                  //       // console.log('=2e552a=',cropper,aspectActive,Static.files)
+
+                  //       //                        document.getElementById("spinner").hidden = false
+                  //       // for (let key in Static.files){
+                  //       // if (Static.files[key]){
+                  //       // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                  //       // } 
+
+                  //       // }
+                  //       return;
+                  //     }
+                  //   }, ID)
+                  // }
+                  // else {
+                  //   document.getElementById("spinner").hidden = false
+                  //   for (let key in Static.files) {
+                  //     if (Static.files[key]) {
+                  //       Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                  //     }
+
+                  //   }
+                  // }
 
 
                 })
