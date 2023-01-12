@@ -39,7 +39,7 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
             <video
                 playsinline
                 poster={images["video_background"]}
-                preload="metadata"
+                preload="none"  //metadata
                 src={path + item.name}
                 Element={($el) => { elMedia.el = $el; }}
                 onclick={function (e) {
@@ -47,9 +47,9 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
                     this.paused ? this.play() : this.pause();
                 }}
                 onplay={function (e) {
-                    Object.values(Static.elMedia).forEach((audio)=>{
-                        if(audio.play && audio != elMedia){
-                          audio.el.pause()
+                    Object.values(Static.elMedia).forEach((audio) => {
+                        if (audio.play && audio != elMedia) {
+                            audio.el.pause()
                         }
                     })
                     elMedia.play = true
