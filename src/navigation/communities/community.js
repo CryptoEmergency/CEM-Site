@@ -114,7 +114,7 @@ const start = function (data, ID) {
     init(
         null,
         () => {
-            if (data && data.community) {
+            if (data && data.community && !data.custom) {
                 return (
                     <div class="c-community c-main__body">
                         <div class="c-community__container c-container">
@@ -326,6 +326,75 @@ const start = function (data, ID) {
                         </div>
                     </div>
                 );
+            } else if (data && data.community && data.custom) {
+                if (data.custom == "anonymus") {
+                    return (
+                        <section class="c-community c-community--anonymus c-main__body">
+                            <div class="c-container">
+                                <header class="c-community__header">
+                                    <h1 class="c-community__title">{data.community.name}</h1>
+                                    <p class="c-community__slogan">{Variable.lang.p.communityWelcome}</p>
+                                    <ul class="c-community__heroes">
+                                        {
+                                            data.community.heroes ?
+                                                data.community.heroes.map((hero) => {
+                                                    return (
+                                                        <li class="c-community__hero">
+                                                            <figure class="c-community__heroavatar">
+                                                                <img class="" src={images["community/" + hero.path + "/" + hero.image]} width="150" height="150" />
+                                                                <figcaption class="c-community__heroname"><span>{hero.name}</span></figcaption>
+                                                            </figure>
+                                                        </li>
+                                                    )
+                                                })
+                                                :
+                                                null
+                                        }
+                                    </ul>
+                                </header>
+                                <div class="c-community__main">
+                                    <div class="c-community__tabs c-tab">
+                                        <input type="radio" id="tab1" class="c-tab__radio" name="tab-group" checked />
+                                        <label for="tab1" class="c-tab__title">Общий чат</label>
+                                        <section class="c-tab__content">
+                                            Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
+                                        </section>
+                                        <input type="radio" id="tab2" class="c-tab__radio" name="tab-group" />
+                                        <label for="tab2" class="c-tab__title">Сотрудничество</label>
+                                        <section class="c-tab__content">Два</section>
+                                        <input type="radio" id="tab3" class="c-tab__radio" name="tab-group" />
+                                        <label for="tab3" class="c-tab__title">Pro merch</label>
+                                        <section class="c-tab__content">Три</section>
+                                        <input type="radio" id="tab4" class="c-tab__radio" name="tab-group" />
+                                        <label for="tab4" class="c-tab__title">Шифры</label>
+                                        <section class="c-tab__content">Четыре</section>
+                                        <input type="radio" id="tab5" class="c-tab__radio" name="tab-group" />
+                                        <label for="tab5" class="c-tab__title">Идеи</label>
+                                        <section class="c-tab__content">Пять</section>
+                                    </div>
+                                </div>
+                                <footer class="c-community__footer">
+                                    <ul class="c-community__actions">
+                                        {
+                                            data.community.actions ?
+                                                data.community.actions.map((action) => {
+                                                    return (
+                                                        <li class="c-community__action">
+                                                            <a href={action.link ? action : "#"} target="_blank" class="">
+                                                                <span>{action.title}</span>
+                                                            </a>
+                                                        </li>
+                                                    )
+                                                })
+                                                :
+                                                null
+                                        }
+                                    </ul>
+                                </footer>
+                            </div>
+                        </section>
+                    )
+                }
             } else {
                 return (
                     <div class="c-community c-main__body">
