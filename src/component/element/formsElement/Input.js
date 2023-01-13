@@ -1,7 +1,7 @@
 import {
     jsx,
     jsxFrag
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import svg from '@assets/svg/index.js';
 
 const textConstuctor = function (Static, classDiv, className, before, after, callback, customStyle = false) {

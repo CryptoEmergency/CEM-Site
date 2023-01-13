@@ -5,7 +5,7 @@ import {
     initGo,
     Variable,
     Helpers
-} from '@betarost/cemserver/cem.js'
+} from '@betarost/cemjs'
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js"
 import { BottomMenu } from '@component/element/BottomMenu.js';

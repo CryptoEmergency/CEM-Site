@@ -11,18 +11,9 @@
             "@component/*": [
                 "./src/component/*"
             ],
-            "@htmlBlocks/*": [
-                "./src/component/htmlBlocks/*"
-            ],
-            "@htmlElements/*": [
-                "./src/component/htmlElements/*"
-            ],
             "@navigation/*": [
                 "./src/navigation/*"
             ],
-            "@modules/*": [
-                "./src/modules/*"
-            ]
         }
     }
 }

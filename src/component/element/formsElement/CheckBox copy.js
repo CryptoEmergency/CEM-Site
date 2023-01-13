@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Helpers, Variable, initReload } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Helpers, Variable, initReload } from "@betarost/cemjs";
 import svg from '@assets/svg/index.js';
 
 

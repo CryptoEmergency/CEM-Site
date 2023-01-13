@@ -3,7 +3,7 @@ import {
 	jsxFrag,
 	Variable,
 	init
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { fn } from "@src/functions/index.js";
 
 const arrMyAction = ["share", "copyurl", "edit", "delete", "closequestion", "bestquestion"]

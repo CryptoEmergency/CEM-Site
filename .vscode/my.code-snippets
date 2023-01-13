@@ -1,4 +1,65 @@
 {
+	// Place your Рабочая область CEM-Site snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// "${1|one,two,three|}"
+	// Example:
+	"Создание нового блока": {
+		"scope": "javascript,typescript",
+		"prefix": "_newBlock",
+		"body": [
+			"import {jsx,jsxFrag,Variable} from '@betarost/cemjs';",
+			"import svg from '@assets/svg/index.js';",
+			"import images from '@assets/images/index.js';",
+			"",
+			"const $TM_FILENAME_BASE = function (data) {",
+			"",
+			"return (",
+			"<div>",
+			"$1",
+			"</div>",
+			")",
+			"}",
+			"",
+			"export { $TM_FILENAME_BASE };"
+		],
+		"description": "Новый элемент/блок"
+	},
+	"Страница сайта": {
+		"scope": "javascript,typescript",
+		"prefix": "_newPage",
+		"body": [
+			"import {jsx,jsxFrag,init,initReload,Variable,sendApi} from '@betarost/cemjs';",
+			"import svg from '@assets/svg/index.js';",
+			"import images from '@assets/images/index.js';",
+			"",
+			"const start = function () {",
+			"",
+			"Variable.HeaderShow = false",
+			"Variable.FooterShow = false",
+			"",
+			"init(",
+			"",
+			"async () => {",
+			"",
+			"},",
+			"",
+			"() => {",
+			"return (",
+			" <></>",
+			")",
+			" }",
+			" )",
+			"return",
+			"};",
+			"",
+			"export default start;"
+		],
+		"description": "Страница сайта"
+	},
 	"svg иконка": {
 		"scope": "javascript,typescript",
 		"prefix": "_svg",
@@ -52,6 +113,26 @@
 		"prefix": "_log",
 		"body": [
 			"console.log('=$RANDOM_HEX=',${1:Переменная})"
+		],
+		"description": ""
+	},
+	"Перебор массива": {
+		"scope": "javascript,typescript",
+		"prefix": "_map",
+		"body": [
+			"{${1:Переменная}.map((item,index) => {",
+			"return (",
+			"<></>",
+			")",
+			"})}"
+		],
+		"description": ""
+	},
+	"Задаём class с условием": {
+		"scope": "javascript,typescript",
+		"prefix": "_class",
+		"body": [
+			"class={['${1:Дефолтное}',${2:Условие} ? '${3:Если}' : ${4:null}]}"
 		],
 		"description": ""
 	}

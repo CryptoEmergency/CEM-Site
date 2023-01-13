@@ -2,7 +2,7 @@ import {
     initReload,
     jsx,
     jsxFrag,
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 
 const textConstuctor = function (Static, className, classDiv, index) {
     if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined")) {

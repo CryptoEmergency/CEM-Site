@@ -4,7 +4,7 @@ import {
     init,
     Variable,
     initReload
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 // poydet data-action
 // import EmojiPicker from "rm-emoji-picker";
 // console.log('=8eafb8=', EmojiPicker)

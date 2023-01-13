@@ -6,7 +6,7 @@ import {
     sendApi,
     Helpers,
     initReload
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import {
@@ -414,7 +414,7 @@ const start = function (data, ID) {
                                                         return (
                                                             <div class={item.author == Variable.myInfo._id ? "your_message_container" : "friend_message_container"}>
                                                                 <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", Helpers.ifHaveMedia(item.media, "video") && item.media.length < 4 ? "chat_have_video" : null, Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
-                                                                    {fn.editText(item.text, { clear: true, paragraph: true, html: true, notp: true })}
+                                                                    {Helpers.editText(item.text, { clear: true, paragraph: true, html: true })}
 
                                                                     {/* {() => {
                                                                         if (item.media && item.media.length) {
@@ -527,13 +527,6 @@ const start = function (data, ID) {
                                                                                             <LazyImage
                                                                                                 className={"your_message_content"}
                                                                                                 path={`/assets/upload/chat/` + item.name}
-                                                                                                onClick={(e) => {
-                                                                                                    e.stopPropagation();
-                                                                                                    e.preventDefault();
-                                                                                                    fn.modals.ModalViewPhoto({
-                                                                                                        path: item.name,
-                                                                                                    });
-                                                                                                }}
                                                                                             />
                                                                                         );
                                                                                     }
@@ -820,7 +813,7 @@ const start = function (data, ID) {
                                                         if (Static.message.el.value.trim().length) {
                                                             text = Static.message.el.value.trim()
                                                         }
-                                                        // debugger
+                                                        debugger
                                                         if (Static.mediaInputs.value.length != 0) {
                                                             Static.mediaInputs.value.forEach(async (file) => {
                                                                 if (file.type == 'audio') {
@@ -833,40 +826,40 @@ const start = function (data, ID) {
                                                         console.log('=d2dd12=', media)
                                                         // let data = { value: { users: Static.activeUser._id, message: { text } } }
                                                         // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                        // if (media.length > 0) {
-                                                        let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
-                                                        // console.log('=6befba=', response)
-                                                        if (response.status === "ok") {
-                                                            Static.message.el.value = ""
-                                                            Static.message.value = ""
-                                                            if (Static.message.adaptive) {
-                                                                Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
-                                                            }
-                                                            if (response && response.list_records && response.list_records[0]) {
-                                                                let newRes = response.list_records[0]
-
-                                                                if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
-                                                                    Static.messageList.list_records[0].message.unshift(newRes)
-                                                                } else {
-                                                                    Static.messageList.list_records[0].message = [newRes]
+                                                        if (media.length > 0) {
+                                                            let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
+                                                            // console.log('=6befba=', response)
+                                                            if (response.status === "ok") {
+                                                                Static.message.el.value = ""
+                                                                Static.message.value = ""
+                                                                if (Static.message.adaptive) {
+                                                                    Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
                                                                 }
-                                                                // console.log('=46ae17=', Static.chatsList)
+                                                                if (response && response.list_records && response.list_records[0]) {
+                                                                    let newRes = response.list_records[0]
 
-                                                                if (Static.chatsList && Static.chatsList.list_records) {
-                                                                    Static.chatsList.list_records.map((item) => {
-                                                                        let tmp = item.users.filter(item => item._id == Static.activeUser._id)
-                                                                        if (tmp.length) {
-                                                                            item.message[0] = newRes
-                                                                        }
-                                                                    })
+                                                                    if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                                                                        Static.messageList.list_records[0].message.unshift(newRes)
+                                                                    } else {
+                                                                        Static.messageList.list_records[0].message = [newRes]
+                                                                    }
+                                                                    // console.log('=46ae17=', Static.chatsList)
+
+                                                                    if (Static.chatsList && Static.chatsList.list_records) {
+                                                                        Static.chatsList.list_records.map((item) => {
+                                                                            let tmp = item.users.filter(item => item._id == Static.activeUser._id)
+                                                                            if (tmp.length) {
+                                                                                item.message[0] = newRes
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                    Static.mediaInputs.value = [];
+                                                                    initReload();
                                                                 }
-                                                                Static.mediaInputs.value = [];
-                                                                initReload();
+                                                            } else {
+                                                                Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                                                             }
-                                                        } else {
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
                                                         }
-                                                        // }
                                                     }}
                                                 />
                                             }

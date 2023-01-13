@@ -6,7 +6,7 @@ import {
     initOne,
     sendApi,
     Helpers
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, ItemsMenu, NotFound } from '@component/element/index.js';

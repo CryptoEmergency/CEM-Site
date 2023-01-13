@@ -1,0 +1,445 @@
+.books {
+    max-width: 1240px;
+    margin: 0 auto;
+    // padding-top: 50px;
+    padding-bottom: 120px;
+    margin-top: 65px;
+
+    @media (max-width: 1199px) {
+        width: calc(100% - 30px);
+    }
+
+    @media(max-width: 992px) {
+        width: calc(100% - 20px);
+        margin-top: 45px;
+    }
+
+    @media(max-width: 464px) {
+        width: calc(100% - 10px);
+    }
+}
+
+.books h2 {
+    margin-bottom: 30px;
+}
+
+.books_container {
+    display: flex;
+    padding-bottom: 120px;
+
+    @media(max-width: 992px) {
+        flex-direction: column;
+    }
+}
+
+.books-filter {
+    height: 100%;
+    margin-right: 40px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #2b3040;
+
+    @media(max-width: 992px) {
+        margin-right: 0;
+        padding: 0;
+        background-color: transparent;
+    }
+}
+
+.books-filter .books-filter-search {
+    width: 218px;
+    padding: 10px;
+    padding-left: 38px;
+    font-style: italic;
+    font-size: 12px;
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    background: url('../svg/search_menu.svg');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    background-color: #464b5b;
+
+    @media(max-width: 992px) {
+        padding: 16px 10px;
+        padding-left: 38px;
+        width: 100%;
+        background-position: 10px 17px;
+    }
+}
+
+.books-filter-container {
+    display: block;
+
+    @media(max-width: 992px) {
+        display: grid;
+        grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+        gap: 20px;
+    }
+
+    @media(max-width: 680px) {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+.books-filter-popular {
+    margin-top: 22px;
+}
+
+.books-filter-new {
+    margin-top: 28px;
+}
+
+.books-filter-subtitle {
+    position: relative;
+    display: block;
+
+    @media(max-width: 992px)  {
+        height: 60px;
+        margin-top: 20px;
+        border-radius: 10px;
+        background-color: #464b5b;
+    }
+
+    @media(max-width: 680px) {
+        margin-top: 15px;
+    }
+}
+
+.books-filter-subtitle span {
+    position: relative;
+    display: block;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    @media(max-width: 992px) {
+        position: absolute;
+        z-index: 10;
+        color: #7D8CA9;
+        left: 26px;
+        top: 10px;
+        font-size: 11px;
+        text-transform: capitalize;
+    }
+}
+
+.books-filter-subtitle span::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 1px;
+    width: 55px;
+    background-color: #7b8195;
+
+    @media(max-width: 992px) {
+        content: none;
+    }
+}
+
+.books-filter-select {
+    cursor: pointer;
+}
+
+.books-filter-select-title {
+    display: none;
+
+    @media(max-width: 992px) {
+        display: block;
+        width: 100%;
+        height: 60px;
+        padding-top: 30px;
+        padding-left: 26px;
+        font-size: 13px;
+        background-image: url('../svg/select_arrow.svg');
+        background-repeat: no-repeat;
+        background-size: 8px 5px;
+        background-position: 95% 50%;
+    }
+}
+
+.books-filter-list {
+    display: block;
+
+    @media(max-width: 992px) {
+        display: none;
+    }
+}
+
+.books_checkbox {
+    position: relative;
+}
+
+.checkbox_input {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+}
+
+.checkbox_input:checked+.checkbox_label::before {
+    background: linear-gradient(120.57deg, #699eef 0%, #888ef7 51.56%, #a77fff 105.28%);
+    border-color: #bec7e4;
+}
+
+.checkbox_label {
+    padding-left: 27px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 32px;
+    color: #bec7e4;
+    user-select: none;
+}
+
+.checkbox_label:hover {
+    background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.checkbox_label::before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    border: 2px solid #bec7e4;
+    background-color: transparent;
+    position: absolute;
+    top: 9px;
+    left: 0;
+    z-index: 1;
+    transition: background 0.1s linear, border 0.1s linear;
+
+    @media(max-width: 992px) {
+        content: none;
+    }
+}
+
+.checkbox_label::after {
+    content: "";
+    display: block;
+    width: 9px;
+    height: 7px;
+    background: url('../svg/check_books.svg') 0% 0% / 9px 7px no-repeat;
+    opacity: 0;
+    position: absolute;
+    top: 14px;
+    left: 3px;
+    z-index: 2;
+    transition: opacity 0.1s linear;
+
+    @media(max-width: 992px) {
+        content: none;
+    }
+}
+
+.checkbox_input:checked+.checkbox_label::after {
+    opacity: 1;
+}
+
+.books-filter-button {
+    width: 100%;
+    height: 47px;
+    margin-top: 30px;
+    cursor: pointer;
+    border: 1px solid #8191f5;
+    border-radius: 3px;
+    background: transparent;
+
+    @media (max-width: 992px) {
+        display: none;
+    }
+}
+
+.books-filter-button:hover {
+    background-color: #8191f5;
+    transition: 1s;
+}
+
+.books-filter-button span {
+    font-size: 13px;
+    color: #ffffff;
+}
+
+.books-catalog {
+    display: flex;
+    flex-direction: column;
+
+    @media(max-width: 992px) {
+        margin-top: 45px;
+    }
+
+    @media(max-width: 464px) {
+        margin-top: 35px;
+    }
+}
+
+.books-catalog-sorting {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    font-size: 16px;
+    font-weight: 600;
+
+    @media(max-width: 464px) {
+        flex-direction: column;
+    }
+}
+
+.books-sorting-popular {
+    position: relative;
+    margin-right: 40px;
+
+    @media(max-width: 464px) {
+        margin-right: 35px;
+    }
+}
+
+.books-sorting-new {
+    position: relative;
+}
+
+.books-catalog-sorting h3 {
+    line-height: 20px;
+    margin: 0;
+}
+
+.books-sorting {
+    display: flex;
+
+    @media(max-width: 464px) {
+        margin-top: 25px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #464b5b;
+    }
+}
+
+.books-catalog-list {
+    display: grid;
+    grid-template-columns: calc(33.3% - 14px) calc(33.3% - 14px) calc(33.3% - 14px);
+    gap: 39px 22px;
+
+    @media(max-width: 680px) {
+        grid-template-columns: calc(50% - 12px) calc(50% - 12px);
+    }
+}
+
+.books-catalog-item {
+    width: 100%;
+}
+
+.books-catalog-item img {
+    width: 100%;
+}
+
+.books-sorting-active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(56.57deg, #6A9ef0 50%, #9588fa 80.56%, #9774e5 105.28%);
+
+    @media(max-width: 464px) {
+        bottom: -13px;
+    }
+}
+
+.books-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120px;
+}
+
+.books-title {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+
+    @media(max-width: 1199px) {
+        margin-top: 17px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    @media(max-width: 464px) {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    @media(max-width: 390px) {
+        margin-top: 15px;
+        font-size: 13px;
+    }
+}
+
+.books-price {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-weight: 600;
+}
+
+.books-buy {
+    position: relative;
+    width: 86px;
+    margin-right: 20px;
+    line-height: 40px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    background: linear-gradient(70.57deg, #6a9ef0 60%, #9588fa 80.56%, #9774e5 105.28%);
+
+    @media(max-width: 464px) {
+        margin-right: 12px;
+    }
+}
+
+.books-buy::after {
+    content: '';
+    position: absolute;
+    top: 11px;
+    right: 10px;
+    width: 18px;
+    height: 16px;
+    background: url('../svg/basket.svg') 0% 0% / 18px 16px no-repeat;
+}
+
+.books-buy span {
+    font-size: 14px;
+    border-left: 1px solid #6a9ef0;
+    border-bottom: 1px solid #6a9ef0;
+    border-top: 1px solid #6a9ef0;
+    border-radius: 6px 0 0 6px;
+    padding: 10px 9px;
+    background: #232733;
+
+    @media(max-width: 464px) {
+        padding: 12px 9px;
+        font-size: 12px;
+    }
+}
+
+.books-buy:hover {
+    cursor: pointer;
+}
+
+.books-buy:hover span {
+    background: #6a9ef0;
+}
+
+.books-cost {
+    font-size: 18px;
+    font-weight: 600;
+
+    @media(max-width: 464px) {
+        font-size: 16px;
+    }
+}

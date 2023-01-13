@@ -6,7 +6,7 @@ import {
     init,
     initReload,
     Helpers
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 
 
 import svg from "@assets/svg/index.js";

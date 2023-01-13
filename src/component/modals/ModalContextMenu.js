@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, timersStart, timersStop, init } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, timersStart, timersStop, init } from "@betarost/cemjs";
 
 const ModalContextMenu = function (data, ID) {
 	let close = true

@@ -4,7 +4,7 @@ import {
     addListen,
     parsingUrl,
     Variable
-} from '@betarost/cemserver/cem.js'
+} from '@betarost/cemjs'
 
 import "@assets/css/index.js"
 import "@assets/js/index.js"

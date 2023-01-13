@@ -2,7 +2,7 @@ import {
     jsx,
     jsxFrag,
     Variable,
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import images from "@assets/images/index.js";
 import { Swiper } from '@component/element/index.js';
 

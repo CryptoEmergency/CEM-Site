@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, sendApi, Helpers, parsingUrl, init } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, initGo, sendApi, Helpers, parsingUrl, init } from "@betarost/cemjs";
 
 
 

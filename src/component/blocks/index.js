@@ -38,5 +38,3 @@ export { BlockTrade } from "./BlockTrade.js";
 export { BlockUsers } from "./BlockUsers.js"
 // Комнаты
 export { BlockUserRooms } from "./BlockUserRooms.js"
-// Сообщества/Community
-export { BlockShowCommunities } from "./BlockShowCommunities.js"

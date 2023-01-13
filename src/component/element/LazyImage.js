@@ -2,7 +2,7 @@ import {
     jsx,
     jsxFrag,
     Variable,
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 // check
 import images from "@assets/images/index.js";
 

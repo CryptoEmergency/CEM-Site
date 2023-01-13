@@ -1,4 +1,4 @@
-import { Variable, sendApi } from "@betarost/cemserver/cem.js";
+import { Variable, sendApi } from "@betarost/cemjs";
 
 const checkAnswer = function (response, name) {
     let objResponse = { totalFound: 0, list_records: [] }

@@ -4,7 +4,7 @@ import {
     Variable,
     sendApi,
     initReload
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { fn } from "@src/functions/index.js";
 import svg from '@assets/svg/index.js';
 const findUnread = function (arr, title = false) {

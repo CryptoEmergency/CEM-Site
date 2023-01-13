@@ -2,9 +2,8 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    init,
-    initReload
-} from "@betarost/cemserver/cem.js";
+    init
+} from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 
 import Cropper from 'cropperjs';
@@ -13,6 +12,7 @@ import 'cropperjs/dist/cropper.css';
 
 
 const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
+
 
     let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
     // console.log('=ca484b=2', file)
@@ -25,7 +25,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
     // console.log('=453e8a=', Static)
-
+    //  console.log('=018927=', Static.aspectSelect)
 
     const cropperGo = function (el) {
         if (cropper) {
@@ -46,14 +46,12 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
 
                 //**2 */
                 // aspectRatio: aspectActive,
-                // autoCropArea: 1,
-                // viewMode: 3,
+                // CropArea: 1,
                 // strict: false,
                 // guides: false,
-                // highlight: false,
+                // highlight: true,
                 // dragMode: 'move',
                 // restore: false,
-                // modal: false,
                 // cropBoxMovable: false,
                 // cropBoxResizable: false,
                 // toggleDragModeOnDblclick: false,
@@ -161,7 +159,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                                 </div>
                                             </div>
                                         )
-                                    } else if (typeUpload != "chat") {
+                                    } else if (typeUpload != "chat" || typeUpload != "posts") {
                                         return (
                                             <div class="c-cropper__toggles col-12 docs-toggles">
                                                 <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
@@ -236,13 +234,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                     <button
                                         type="button"
                                         class="c-button c-button--primary2"
-                                        onClick={() => {
-                                            uploadCropImage(cropper, aspectActive)
-                                            fn.modals.close(ID)
-
-
-                                        }
-                                        }
+                                        onClick={() => uploadCropImage(cropper)}
                                     >
                                         <span class="c-button__wrapper">{Variable.lang.button.upload}</span>
                                     </button>
@@ -250,10 +242,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                         type="button"
                                         class="c-button c-button--outline c-button--secondary"
                                         onclick={() => {
-                                            // Static.mediaInputs.selectAspect = null;
                                             fn.modals.close(ID)
-                                            initReload()
-
                                         }}
                                     >
                                         <div class="c-button__wrapper">

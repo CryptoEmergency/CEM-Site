@@ -8,7 +8,7 @@ import {
     Variable,
     getValue,
     init
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Input, ButtonSubmit, TextArea } from '@component/element/index.js';

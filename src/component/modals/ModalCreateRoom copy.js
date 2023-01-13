@@ -7,7 +7,7 @@ import {
     initGo,
     initOne,
     init
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Input, CheckBox, Select, TextArea } from '@component/element/index.js';

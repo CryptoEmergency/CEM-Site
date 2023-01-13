@@ -3,7 +3,7 @@ import {
   jsxFrag,
   Variable,
   init
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { Avatar } from "@component/element/Avatar.js";
 import { fn } from '@src/functions/index.js';
 const ModalConfirmAction = function ({ action, text, button }, ID) {

@@ -2,7 +2,7 @@ import {
     jsx,
     jsxFrag,
     init
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import { BlockUsers } from '@component/blocks/index.js';
 

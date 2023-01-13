@@ -9,10 +9,6 @@
     box-sizing: border-box
 }
 
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
 p {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -259,17 +255,17 @@ textarea {
             // top: 50%;
             // margin-left: -150px;
             // margin-top: -150px;
-        }
-
-        .swiper-slide {
+          }
+    
+          .swiper-slide {
             // background-position: center;
             // background-size: cover;
-        }
-
-        .swiper-slide img:not(.playpause) {
+          }
+    
+          .swiper-slide img:not(.playpause) {
             display: block;
             width: 100%;
-        }
+          }
 
         &+div {
             .comment {
@@ -819,7 +815,7 @@ textarea {
     }
 }
 
-.swiper-chat {
+.swiper-chat{
     width: 100%;
 }
 
@@ -1895,5 +1891,3 @@ textarea {
 @import 'blocks/cropper.scss';
 /* Rooms */
 @import 'blocks/rooms.scss';
-/* Community */
-@import 'blocks/community.scss';

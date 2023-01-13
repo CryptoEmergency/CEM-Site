@@ -6,7 +6,7 @@ import {
     Variable,
     getValue, 
     init
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import { fn } from '@src/functions/index.js';
 

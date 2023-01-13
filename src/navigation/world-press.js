@@ -4,7 +4,7 @@ import {
     init,
     Variable,
     initReload,
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 //await sendApi.create("getPress", data)

@@ -7,13 +7,13 @@ import {
   sendApi,
   Helpers,
   init
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import { MediaButton, MediaPreview, Input } from '@component/element/index.js';
 import svg from '@assets/svg/index.js';
 let inputImg, inputVideo, inputAudio, selectAspect;
 
-const changeInput = function (Static, e) {
+const changeInput = function (Static,e) {
   Static.close = false
   if (e.length == 0) {
     Static.question.error = Variable.lang.error_div.not_empty_input;
@@ -21,15 +21,17 @@ const changeInput = function (Static, e) {
     Static.question.error = Variable.lang.error_div.minSymbol;
   } else if (e.length > 500) {
     Static.question.error = Variable.lang.error_div.maxSymbol;
-  } else if (e.length >= 5 && e.length <= 500 && e.length !== 0) {
-
-    if (e.trim().length > 4 && e.trim() !== "") {
+  }else if(e.length>=5 && e.length<=500 && e.length!== 0)
+  { 
+   
+    if(e.trim().length > 4 && e.trim()!=="")
+    {
       Static.question.error = ""
     }
-    else {
-      Static.question.error = Variable.lang.error_div.not_empty_input;
+    else{
+      Static.question.error = Variable.lang.error_div.not_empty_input; 
     }
-
+  
   }
   if (Static.question.error == "") {
     Static.isValid = true;
@@ -76,7 +78,7 @@ const sendQuestion = async function (Static) {
 };
 
 
-const sendPhoto = async function (Static, crooper) {
+const sendPhoto = async function (Static,crooper) {
   if (!crooper) {
     return
   }
@@ -138,6 +140,7 @@ const sendPhoto = async function (Static, crooper) {
       }
     );
     initReload();
+    Variable.DelModals("ModalCropImage");
   });
   return
 }
@@ -183,24 +186,24 @@ const ModalAskQuestion = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   let close = true
 
-  /*
-    const downloadFile = (e) => {
-      let type;
-      if (e.target.localName === "div") {
-        type = e.target.dataset.type;
-      } else {
-        type = e.target.parentElement.dataset.type;
-      }
-      if (type === "image") {
-        inputImg().click();
-      } else if (type === "video") {
-        inputVideo().click();
-      } else {
-        inputAudio().click();
-      }
-    };
-  */
-
+/*
+  const downloadFile = (e) => {
+    let type;
+    if (e.target.localName === "div") {
+      type = e.target.dataset.type;
+    } else {
+      type = e.target.parentElement.dataset.type;
+    }
+    if (type === "image") {
+      inputImg().click();
+    } else if (type === "video") {
+      inputVideo().click();
+    } else {
+      inputAudio().click();
+    }
+  };
+*/
+  
   init(
     () => {
       fn.initData.ModalAskQuestion(Static)
@@ -234,30 +237,28 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio = Variable.setRef();
 
       selectAspect = null;
-
-
+      
+  
     },
     () => {
-
+       
 
       return (
-        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function (e) {
-          if (close) {
+        <div class="c-modal c-modal--open" id="ModalAskQuestion" onclick={function(e){ if(close){ 
 
-            fn.modals.close(ID)
-          }
-        }}>
-          <section class="c-modal__dialog" onmouseover={function () {
-
-            close = false
+         fn.modals.close(ID)
+        }}}>
+          <section class="c-modal__dialog" onmouseover={function(){
+           
+           close = false
 
           }}
-            onmouseleave={function () {
-
+          onmouseleave={function(){
+              
               close = true
-
+     
             }}
-          >
+            >
             <header class="c-modal__header">
               <h4 class="c-modal__title">{Variable.lang.h.modal_question}</h4>
               <button
@@ -271,64 +272,63 @@ const ModalAskQuestion = function (data, ID) {
             <div class="c-modal__body" >
               <div class="c-askquestion">
                 {/* <form id="askQuestion" onsubmit={sendQuestion}> */}
+           
+                  {/* <input style="display: none;" type="submit" /> */}
+                  <div
+                    class="alt_language_change"
+                    onclick={() => {
 
-                {/* <input style="display: none;" type="submit" /> */}
-                <div
-                  class="alt_language_change"
-                  onclick={() => {
-
-                    fn.modals.ModalChangeLanguage({
-
-                      onclick: (code, name, orig) => {
-
-                        Static.language.value = name + ` (${orig})`;
-                        Static.language.code = code;
-                      }
-                    }, true)
-                  }}>
-                  {Static.language.value}
-                </div>
-
-                <div class="c-askquestion__textblock c-form__block">
-                  <label class="c-form__label" for="questionText">
-                    {Variable.lang.label.question}
-                  </label>
-                  <div class="c-form__errormsg error-div">
-                    {Static.question.error}
+                      fn.modals.ModalChangeLanguage({
+                        
+                        onclick: (code, name, orig) => {
+                       
+                          Static.language.value = name + ` (${orig})`;
+                          Static.language.code = code;
+                        }
+                      }, true)
+                    }}>
+                    {Static.language.value}
                   </div>
-                  <div class="c-form__wrapfield create_post_container" data-type="question">
-                    <input
-                      type="text"
-                      data-type="question"
-                      oninput={function (e) {
-                        Static.question.value = this.value
-                        changeInput(Static, this.value)
+
+                  <div class="c-askquestion__textblock c-form__block">
+                    <label class="c-form__label" for="questionText">
+                      {Variable.lang.label.question}
+                    </label>
+                    <div class="c-form__errormsg error-div">
+                      {Static.question.error}
+                    </div>
+                    <div class="c-form__wrapfield create_post_container" data-type="question">
+                      <input
+                        type="text"
+                        data-type="question"
+                        oninput={function(e){
+                          Static.question.value = this.value
+                          changeInput(Static,this.value)}}
+                        class="c-form__field create_post_chapter create_post_title"
+                        placeholder={Variable.lang.placeholder.titleAsk}
+                        value={Static.question.value}
+                      />
+                      {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
+                      {() => {
+                        if (Static.textQuestion.show) {
+                          return (
+                            <div
+                              contenteditable="true"
+                              oninput={function(){
+
+                                Static.close = false
+                                Static.textQuestion.value = this.textContent;
+                          
+                               }}
+                        
+                              class="c-form__field create_post_chapter create_post_main_text"
+                            ></div>
+                          )
+                        }
                       }}
-                      class="c-form__field create_post_chapter create_post_title"
-                      placeholder={Variable.lang.placeholder.titleAsk}
-                      value={Static.question.value}
-                    />
-                    {/* Вставлять блок по условию выбора текстового вопроса (<If />), иначе едет верстка */}
-                    {() => {
-                      if (Static.textQuestion.show) {
-                        return (
-                          <div
-                            contenteditable="true"
-                            oninput={function () {
 
-                              Static.close = false
-                              Static.textQuestion.value = this.textContent;
-
-                            }}
-
-                            class="c-form__field create_post_chapter create_post_main_text"
-                          ></div>
-                        )
-                      }
-                    }}
-
-                    {
-
+                      {
+                      
                       () => {
                         if (Static.mediaInputs.show && Static.mediaInputs.value.length) {
                           return (
@@ -352,94 +352,95 @@ const ModalAskQuestion = function (data, ID) {
                             </div>
                           )
                         }
-                        else {
+                        else
+                        {
                           null
                         }
                       }
-
-                    }
-
-                    {() => {
-                      if (Static.mediaInputs.show && Static.mediaInputs.value.length && Static.mediaInputs.value.filter((item) => item.type == "audio").length) {
-                        return (
-                          <div class="create_post_chapter createPostAudio">
-                            {
-                              Static.mediaInputs.value.map(
-                                (item, index) => {
-                                  if (item.type == "audio") {
-                                    return (
-                                      <MediaPreview
-                                        item={item}
-                                        index={index}
-                                        type="question"
-                                        Static={Static}
-                                      />
-                                    );
-                                  }
-                                }
-                              )
-                            }
-                          </div>
-                        )
+                      
                       }
-                    }}
 
+                      {() => {
+                        if (Static.mediaInputs.show && Static.mediaInputs.value.length && Static.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                          return (
+                            <div class="create_post_chapter createPostAudio">
+                              {
+                                Static.mediaInputs.value.map(
+                                  (item, index) => {
+                                    if (item.type == "audio") {
+                                      return (
+                                        <MediaPreview
+                                          item={item}
+                                          index={index}
+                                          type="question"
+                                          Static={Static}
+                                        />
+                                      );
+                                    }
+                                  }
+                                )
+                              }
+                            </div>
+                          )
+                        }
+                      }}
+
+                    </div>
                   </div>
-                </div>
-                {/* <div class="c-askquestion__controls create_post_control_block"> */}
-                <MediaButton
+                  {/* <div class="c-askquestion__controls create_post_control_block"> */}
+                  <MediaButton
 
-                  // onclickText={function () {
-                  //   if (Static.textQuestion.show === true) {
-                  //     return;
-                  //   } else {
-                  //     Static.textQuestion.show = true;
-                  //     initReload("modals");
-                  //   }
-                  // }}
+                    // onclickText={function () {
+                    //   if (Static.textQuestion.show === true) {
+                    //     return;
+                    //   } else {
+                    //     Static.textQuestion.show = true;
+                    //     initReload("modals");
+                    //   }
+                    // }}
 
-                  onclickPhoto={function () {
-
-                    if (this.files.length == 0) {
-                      return;
-                    }
-                    fn.modals.ModalCropImage({
-                      file: this.files[0],
-                      typeUpload: 'question',
-                      arrMedia: Static.mediaInputs.value,
-                      aspectSelect: Static.mediaInputs.selectAspect,
-                      uploadCropImage: async function (cropper) {
-                        await sendPhoto(Static, cropper)
+                    onclickPhoto={function () {
+                   
+                      if (this.files.length == 0) {
                         return;
                       }
-                    }, ID)
-                    // Variable.SetModals({
-                    //   name: "ModalCropImage",
-                    //   data: {
-                    //     file: this.files[0],
-                    //     typeUpload: 'posts',
-                    //     arrMedia: Static.mediaInputs.value,
-                    //     aspectSelect: Static.mediaInputs.selectAspect,
-                    //     uploadCropImage: async function (cropper) {
-                    //       await sendPhoto(cropper)
-                    //       return;
-                    //     }
-                    //   },
-                    // }, true);
-                    // Static.isValid = true;
-                    this.value = '';
-                  }}
+                      fn.modals.ModalCropImage({
+                        file: this.files[0],
+                        typeUpload: 'question',
+                        arrMedia: Static.mediaInputs.value,
+                        aspectSelect: Static.mediaInputs.selectAspect,
+                        uploadCropImage: async function (cropper) {
+                          await sendPhoto(Static,cropper)
+                          return;
+                        }
+                      },ID)
+                      // Variable.SetModals({
+                      //   name: "ModalCropImage",
+                      //   data: {
+                      //     file: this.files[0],
+                      //     typeUpload: 'posts',
+                      //     arrMedia: Static.mediaInputs.value,
+                      //     aspectSelect: Static.mediaInputs.selectAspect,
+                      //     uploadCropImage: async function (cropper) {
+                      //       await sendPhoto(cropper)
+                      //       return;
+                      //     }
+                      //   },
+                      // }, true);
+                      // Static.isValid = true;
+                      this.value = '';
+                    }}
 
-                  onclickVideo={function () {
-                    if (this.files.length == 0) {
+                    onclickVideo={function () {
+                      if (this.files.length == 0) {
+                        return;
+                      }
+                      sendVideo(this.files)
+                      this.value = '';
                       return;
-                    }
-                    sendVideo(this.files)
-                    this.value = '';
-                    return;
-                  }}
-                />
-
+                    }}
+                  />
+             
               </div>
             </div>
             <div class="c-modal__footer">
@@ -450,7 +451,7 @@ const ModalAskQuestion = function (data, ID) {
                 ]}
                 type="button"
                 // ref={elemButton}
-                onClick={function () { sendQuestion(Static) }}
+                onClick={function(){sendQuestion(Static)}}
               >
                 <span class="c-button__text">
                   {Variable.lang.button.send}

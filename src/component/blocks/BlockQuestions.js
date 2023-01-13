@@ -3,7 +3,7 @@ import {
   jsxFrag,
   Variable,
   initOne,
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js'
 import svg from "@assets/svg/index.js";
 import { Select, ButtonShowMore, NotFound, Avatar, Input } from '@component/element/index.js';

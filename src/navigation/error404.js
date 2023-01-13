@@ -2,7 +2,7 @@ import {
   jsx,
   jsxFrag,
   init
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { BlockError404 } from '@component/blocks/index.js';
 
 const start = function () {

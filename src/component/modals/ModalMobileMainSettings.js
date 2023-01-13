@@ -10,7 +10,7 @@ import {
     initGo,
     Helpers,
     init
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import svg from "@assets/svg/index.js";
 import { fn } from '@src/functions/index.js';
 import youtube from '@assets/svg/youtube_icon.svg'

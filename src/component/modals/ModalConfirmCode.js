@@ -8,7 +8,7 @@ import {
     initReload,
     sendApi,
     init
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 

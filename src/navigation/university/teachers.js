@@ -3,7 +3,7 @@ import {
     jsxFrag,
     init,
     Variable,
-} from "@betarost/cemserver/cem.js";
+} from "@betarost/cemjs";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 

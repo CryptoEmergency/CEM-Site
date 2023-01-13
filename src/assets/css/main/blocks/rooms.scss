@@ -25,89 +25,6 @@
 
     &__chats {
         margin-bottom: 30px;
-
-        &--mobile {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 65px;
-            width: 100%;
-            z-index: 2000;
-            height: calc(100vh - 65px);
-            margin-bottom: 0;
-
-            #MainBlock,
-            .c-chats__wrapper {
-                height: 100%;
-            }
-
-            .c-chats__content {
-                height: calc(100% - 105px);
-            }
-
-            .c-chats {
-
-                &__check {
-                    &--active {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-around;
-                        align-items: center;
-                    }
-                }
-
-                &__back {
-                    width: 50px;
-                    padding: 0 10px;
-                }
-
-                &__list {
-                    flex-basis: 100%;
-                    padding-right: 0;
-                }
-
-                &__togglers {
-                    padding: 3px 6px 7px;
-
-                    .c-chats__member {
-                        center {
-                            width: 90px;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                &__checkimg {
-                    padding: 0 10px;
-                    margin: 0;
-                }
-
-                &__content {
-                    padding-top: 0;
-                }
-
-                &__title {
-                    height: 50px;
-                }
-
-                &__messages {
-                    height: 473px;
-                }
-            }
-
-            .c-message {
-                &__avatar {
-                    transform: scale(0.8);
-                }
-
-                &__body {
-                    font-size: 13px;
-                }
-            }
-        }
     }
 
     &__list {
@@ -252,7 +169,7 @@
 
         &--rectangle {
             background: none;
-
+            
             img {
                 position: static;
                 transform: none;
@@ -296,7 +213,7 @@
             width: 100%;
             display: -webkit-box;
             -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
+            -webkit-box-orient: vertical;  
         }
 
         i {

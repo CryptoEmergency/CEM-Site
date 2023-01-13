@@ -4,7 +4,7 @@ import {
     Variable,
     init,
     getInitList
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 
 import { fn } from '@src/functions/index.js';
 import list from "@src/lists/modalsList.js";

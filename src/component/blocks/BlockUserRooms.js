@@ -6,7 +6,7 @@ import {
   initReload,
   Static,
   init
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
@@ -33,19 +33,6 @@ const Mini = function (Static) {
     </div>
   )
 
-}
-
-async function checkEvent(Static, id, system, e) {
-  if (e.type == "touchstart") {
-    Static.mobile = true
-
-  }
-  else {
-    Static.mobile = false
-  }
-  document.getElementById("spinner").hidden = false
-  await ChangeRooms(Static, id, system)
-  initReload()
 }
 
 //подписаться на комнату
@@ -180,22 +167,14 @@ const Tags = async function ({ Static, _id, classActive, text, type }) {
   Static.defaultUserRoom = "crypto"
   return (
     <div class={["tag_button", classActive]}
-      ontouchstart={function (e) {
+      onclick={async () => {
 
         Static.defaultUserRoom = type
-        checkEvent(Static, _id, true, e)
 
-      }}
-      onclick={function (e) {
-        if (!Static.mobile) {
-          Static.defaultUserRoom = type
-          checkEvent(Static, _id, true, e)
+        ChangeRooms(Static, _id, true)
 
-        }
 
-      }}
-
-    >
+      }}>
       <span>{text}</span>
     </div>
   )
@@ -217,7 +196,7 @@ function checkAthorisation(Static) {
 //чекнем системную комнату отинтерфейса
 async function CheckSystemInterface(Static, tag) {
   console.log("CheckSystemInterface")
-  Static.mobile = false
+
   let langCode = Static.lang.code
 
 
@@ -280,18 +259,18 @@ async function ChangeRooms(Static, _id, system) {
 
 
 
-  if (!Static.mobile) {
-    document.getElementById("MainBlock").style.display = "block"
-    document.getElementById("ChatRoom").style.display = ""
-    document.getElementById("ShowHide").innerText = "Свернуть"
-    if (document.getElementById("scetchButton")) {
-      document.getElementById("scetchButton").classList.remove("tbutton")
-    }
-
-    document.getElementsByClassName("scetch")[0].innerText = ""
+  initReload()
+  document.getElementById("MainBlock").style.display = "block"
+  document.getElementById("ChatRoom").style.display = ""
+  document.getElementById("ShowHide").innerText = "Свернуть"
+  if(document.getElementById("scetchButton"))
+  {
+   document.getElementById("scetchButton").classList.remove("tbutton")
   }
-}
+ 
+  document.getElementsByClassName("scetch")[0].innerText = ""
 
+}
 
 //пишем сообщения
 async function sendRoomsMessage(Static, id, textdata) {
@@ -388,7 +367,7 @@ async function ShowMessage(Static) {
           }
           if (Static.z > 4) {
             if (Static.z == 5) {
-              fn.modals.ModalNeedAuth({ game: "begin" })
+              fn.modals.ModalNeedAuth({game:"begin"})
             }
 
             let el2 = document.getElementsByClassName("game")
@@ -441,7 +420,7 @@ async function ShowMessage(Static) {
     if (Static.Rooms.author._id == Variable.myInfo._id || Static.Rooms.subscribeUsers.includes(Variable.myInfo._id)) {
       if (Static.Rooms.message.length > 0) {
 
-        //  initReload()
+        initReload()
         return Static.Rooms.message.map(function (userrooms, i) {
 
 
@@ -993,21 +972,11 @@ const BlockUserRooms = async function ({ Static }) {
                         typeof Static.Rooms._id !== "undefined" && Static.Rooms._id == userrooms._id ? "c-toggler--active" : null
                       ]}
                     >
-                      <a class="c-toggler__link" title={userrooms.settingsroom.description}
-                        ontouchstart={function (e) {
+                      <a class="c-toggler__link" title={userrooms.settingsroom.description} onclick={function (e) {
+                        document.getElementById("spinner").hidden = false
+                        ChangeRooms(Static, userrooms._id, false)
 
-                          checkEvent(Static, userrooms._id, false, e)
-
-                        }}
-
-                        onclick={function (e) {
-                          if (!Static.mobile) {
-                            checkEvent(Static, userrooms._id, false, e)
-
-                          }
-
-
-                        }}>
+                      }}>
                         {
                           userrooms.settingsroom.images ?
                             <img title={userrooms.settingsroom.title} src={`/assets/upload/chat/${userrooms.settingsroom.images}`} width="46" height="46" class="c-toggler__img" />
@@ -1081,7 +1050,6 @@ const BlockUserRooms = async function ({ Static }) {
                       document.getElementById("spinner").hidden = false
                       ChangeRooms(Static, systemroom[0]._id, true)
                     }
-                    initReload()
                     // 
                   } else {
                     alert("Нет такой системной комнаты")
@@ -1092,260 +1060,209 @@ const BlockUserRooms = async function ({ Static }) {
           }}
         >{Static.lang.name}</div>
       </aside>}
+      <div class="c-rooms__langs c-chats__list c-chats__list--system" style="display: none">
+        <ul class="c-chats__togglers">
+          {/*
+            //мапим системные комнаты
 
-      {////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////                   версия для компа / мобилы                                             ////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      }
+            Variable.ListSyst
+            emsRooms.list_records.map(function (systemsrooms, i) {
 
-      {
-        !Static.mobile ?
-          <div class="c-rooms__chats">
-            <div class="block2" onmousedown={function (e) {
-              if (Static.dragging) {
-                dragging = true
-                element = this
-                const style = window.getComputedStyle(element)
+              return (
+                <li
+                  class={[
+                    "c-chats__toggler",
+                    "c-toggler",
+                    Static.Rooms._id == systemsrooms._id ? "c-toggler--active" : null
+                  ]}
+                  onclick={(e) => {
+                    ChangeRooms(Static, systemsrooms._id, true)
 
-
-                const transform = new DOMMatrixReadOnly(style.transform)
-
-                const translateX = transform.m41
-                const translateY = transform.m42
-
-                startX = e.pageX - translateX
-                startY = e.pageY - translateY
-              }
-            }
-            }
-
-              style="display:none" id={"MainBlock"} >
-
-              <div class="c-chats__form c-form" style="cursor:grab" >
-                <div class="c-form__wrapfield c-form__wrapfield--text">
-                  <div class="c-form__field" style="cursur:grab">
-                    <div class="c-form__actions">
-                      <a class="c-form__action c-form__action--left" onclick={function () {
-                        document.getElementById("MainBlock").style.display = "none"
-                        document.getElementById("ShowHide").innerText = "Свернуть"
-                      }}>Закрыть</a>
-                      <center><h4 class=""><span>{Static.RoomTitle}</span></h4></center>
-                      <a class="c-form__action c-form__action--right" id={"ShowHide"} onclick={function () { toggle(document.getElementById("ChatRoom")) }}>Свернуть</a>
+                  }}
+                >
+                  <a href="#" class="c-toggler__link" data-action="viewChat" title={fn.sliceString(systemsrooms.settingsroom.title, 66)}>
+                    <div class="c-toggler__wrap">
+                      <span class="c-toggler__name">{systemsrooms.languages.code}</span>
                     </div>
-                  </div>
+           
+                  </a>
+                </li>
+              )
+            }
+            )
+          */}
+        </ul>
+        <div
+          class="blog_filter_language"
+          onclick={() => {
+            Variable.SetModals({
+              name: "ModalChangeLanguage",
+              data: {
+                onclick: async (langCode, langOrig) => {
+                  let lang = Variable.listsLang.filter((item) => {
+                    return item.code == langCode;
+                  });
+                  let searchLang = lang[0].code
+
+                  let resp = await fn.restApi.getUserRoom({ name: "ListSystemsRooms", filter: { system: true, "languages.code": searchLang }, limit: 10 })
+                  if (resp.totalFound > 0) {
+
+                    Static.lang.name = langOrig;
+                    Static.lang.code = langCode;
+                    Static.Tag = resp
+
+                    let systemroom = Static.Tag.list_records.filter((item) => {
+                      return item.settingsroom.category == Static.defaultUserRoom;
+                    });
+
+                    if (Static.Rooms.system) {
+                      document.getElementById("spinner").hidden = false
+                      ChangeRooms(Static, systemroom[0]._id, true)
+                    }
+                    // 
+                  } else {
+                    alert("Нет такой системной комнаты")
+                  }
+                },
+              },
+            });
+          }}
+        >{Static.lang.name}</div>
+      </div>
+
+      <div class="c-rooms__chats">
+        <div class="block2" onmousedown={function (e) {
+          if (Static.dragging) {
+            dragging = true
+            element = this
+            const style = window.getComputedStyle(element)
+
+
+            const transform = new DOMMatrixReadOnly(style.transform)
+
+            const translateX = transform.m41
+            const translateY = transform.m42
+
+            startX = e.pageX - translateX
+            startY = e.pageY - translateY
+          }
+        }
+        }
+
+          style="display:none" id={"MainBlock"} >
+          <div class="c-chats__form c-form" style="cursor:grab" >
+            <div class="c-form__wrapfield c-form__wrapfield--text">
+              <div class="c-form__field" style="cursur:grab">
+                <div class="c-form__actions">
+                  <a class="c-form__action c-form__action--left" onclick={function () {
+                    document.getElementById("MainBlock").style.display = "none"
+                    document.getElementById("ShowHide").innerText = "Свернуть"
+                  }}>Закрыть</a>
+                  <center><h4 class=""><span>{Static.RoomTitle}</span></h4></center>
+                  <a class="c-form__action c-form__action--right" id={"ShowHide"} onclick={function () { toggle(document.getElementById("ChatRoom")) }}>Свернуть</a>
                 </div>
               </div>
-
-              <div style="display:none" id={"ChatRoom"} class=" c-chats__wrapper" onmouseout={function (e) { Static.dragging = true }} onmouseover={function (e) { Static.dragging = false }} >
-                <aside class="c-chats__aside">
-                  <div class="c-chats__list">
-
-                    <div
-                      class={[
-
-                        "c-chats__check--created",
-                        true ? "c-chats__check--active" : null
-                      ]}
-                      title="Список участников"
-
-                    >
-                      <img class="c-chats__checkimg" width="" height="30px" src={svg["icon/icon_group_created"]} />
-
-
-                    </div>
-
-                    <ul class="c-chats__togglers">
-
-                      {
-                        () => {
-
-                          if (Static.users) {
-
-                            return Static.users.map(function (userrooms, i) {
-                              if (userrooms._id !== Variable.myInfo._id) {
-                                return (
-                                  <li>
-                                    <Avatar author={userrooms} />
-                                    <center>{userrooms.nickname}</center>
-                                  </li>
-                                )
-                              }
-                            })
-                          }
-                        }
-
-
-                      }
-
-                    </ul>
-                  </div>
-
-
-                </aside>
-
-                <section class="c-chats__content" >
-                  <div class="c-chats__border">
-
-
-                    {Static.subMarker
-
-                    }
-                    <center><div class="scetch"></div><div class="game"></div></center>
-                    <center><h4 class="c-chats__title"><span>{Static.RoomTitleMobile}</span></h4></center>
-                    <ul class="c-chats__messages" id="chatMessage">
-                      {
-
-                        Static.ChatData
-                      }
-                    </ul>
-                    <div class="c-chats__form c-form">
-
-                      <div class="c-form__wrapfield c-form__wrapfield--text">
-                        <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
-                        <div class="c-form__actions">
-                          <a href="#" class="c-form__action c-form__action--left" title="">
-                            <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
-                          </a>
-                          <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
-                            <img src={svg.attach} width="13" height="13" alt="" class="c-form__icon" />
-                          </label>
-                          <a href="#" class="c-form__action c-form__action--right" title="">
-                            <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
-                          </a>
-                        </div>
-                        <button
-                          class="c-form__send"
-                          onclick={() => {
-                            //оправим сообщение
-                            checkAthorisation(Static)
-                            sendRoomsMessage(Static, Static.MessageValue.id, Static.MessageValue.el.value)
-                            Static.MessageValue.el.value = ""
-                          }}
-                        >
-                          <img src={svg.send} width="13" height="13" alt="" class="c-form__icon" />
-                        </button>
-                      </div>
-
-                    </div>
-                  </div>
-                </section>
-              </div>
             </div>
           </div>
-          :
-          <div class="c-rooms__chats c-rooms__chats--mobile">
-            <div id={"MainBlock"} >
+          <div style="display:none" id={"ChatRoom"} class=" c-chats__wrapper" onmouseout={function (e) { Static.dragging = true }} onmouseover={function (e) { Static.dragging = false }} >
+            <aside class="c-chats__aside">
+              <div class="c-chats__list">
 
-              <div id={"ChatRoom"} class=" c-chats__wrapper"  >
-                <aside class="c-chats__aside">
-                  <div class="c-chats__list">
+                <div
+                  class={[
 
-                    <div
-                      class={[
+                    "c-chats__check--created",
+                    true ? "c-chats__check--active" : null
+                  ]}
+                  title="Список участников"
 
-                        "c-chats__check--created",
-                        true ? "c-chats__check--active" : null
-                      ]}
-                      title="Список участников"
-
-                    >
-                      <img
-                        class="c-chats__back"
-                        src={svg.chats_back}
-                        onClick={() => {
-                          alert("Назад");
-                        }}
-                      />
-
-                      <img class="c-chats__checkimg" width="" height="30px" src={svg["icon/icon_group_created"]} />
+                >
+                  <img class="c-chats__checkimg" width="" height="30px" src={svg["icon/icon_group_created"]} />
 
 
-                    </div>
+                </div>
 
-                    <ul class="c-chats__togglers">
+                <ul class="c-chats__togglers">
 
-                      {
-                        () => {
+                  {
+                    () => {
 
-                          if (Static.users) {
+                      if (Static.users) {
 
-                            return Static.users.map(function (userrooms, i) {
-                              if (userrooms._id !== Variable.myInfo._id) {
-                                return (
-                                  <li class="c-chats__member">
-                                    <Avatar author={userrooms} />
-                                    <center>{userrooms.nickname}</center>
-                                  </li>
-                                )
-                              }
-                            })
+                        return Static.users.map(function (userrooms, i) {
+                          if (userrooms._id !== Variable.myInfo._id) {
+                            return (
+                              <li>
+                                <Avatar author={userrooms} />
+                                <center>{userrooms.nickname}</center>
+                              </li>
+                            )
                           }
-                        }
-
-
+                        })
                       }
-
-                    </ul>
-                  </div>
-
-
-                </aside>
-
-                <section class="c-chats__content" >
-                  <div class="c-chats__border">
-
-
-                    {Static.subMarker
-
                     }
-                    <center><div class="scetch"></div><div class="game"></div></center>
-                    <center><h4 class="c-chats__title"><span>{Static.RoomTitleMobile}</span></h4></center>
-                    <ul class="c-chats__messages" id="chatMessage">
-                      {
 
-                        Static.ChatData
-                      }
-                    </ul>
-                    <div class="c-chats__form c-form">
 
-                      <div class="c-form__wrapfield c-form__wrapfield--text">
-                        <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
-                        <div class="c-form__actions">
-                          <a href="#" class="c-form__action c-form__action--left" title="">
-                            <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
-                          </a>
-                          <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
-                            <img src={svg.attach} width="13" height="13" alt="" class="c-form__icon" />
-                          </label>
-                          <a href="#" class="c-form__action c-form__action--right" title="">
-                            <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
-                          </a>
-                        </div>
-                        <button
-                          class="c-form__send"
-                          onclick={() => {
-                            //оправим сообщение
-                            checkAthorisation(Static)
-                            sendRoomsMessage(Static, Static.MessageValue.id, Static.MessageValue.el.value)
-                            Static.MessageValue.el.value = ""
-                          }}
-                        >
-                          <img src={svg.send} width="13" height="13" alt="" class="c-form__icon" />
-                        </button>
-                      </div>
+                  }
 
-                    </div>
-                  </div>
-                </section>
+                </ul>
               </div>
-            </div>
+
+
+            </aside>
+
+            <section class="c-chats__content" >
+              <div class="c-chats__border">
+
+
+                {Static.subMarker
+
+                }
+                <center><div class="scetch"></div><div class="game"></div></center>
+                <center><h4 class="c-chats__title"><span>{Static.RoomTitleMobile}</span></h4></center>
+                <ul class="c-chats__messages" id="chatMessage">
+
+
+                  {
+
+                    Static.ChatData
+                  }
+
+                </ul>
+                <div class="c-chats__form c-form">
+
+                  <div class="c-form__wrapfield c-form__wrapfield--text">
+                    <TextArea className="c-form__field" Static={Static.MessageValue} placeholder="Написать сообщение" />
+                    <div class="c-form__actions">
+                      <a href="#" class="c-form__action c-form__action--left" title="">
+                        <img src={svg.smile} width="13" height="13" alt="" class="c-form__icon" />
+                      </a>
+                      <label for="file" class="c-form__action c-form__action--right" title="Прикрепить файл">
+                        <img src={svg.attach} width="13" height="13" alt="" class="c-form__icon" />
+                      </label>
+                      <a href="#" class="c-form__action c-form__action--right" title="">
+                        <img src={svg.email} width="13" height="13" alt="" class="c-form__icon" />
+                      </a>
+                    </div>
+                    <button
+                      class="c-form__send"
+                      onclick={() => {
+                        //оправим сообщение
+                        checkAthorisation(Static)
+                        sendRoomsMessage(Static, Static.MessageValue.id, Static.MessageValue.el.value)
+                        Static.MessageValue.el.value = ""
+                      }}
+                    >
+                      <img src={svg.send} width="13" height="13" alt="" class="c-form__icon" />
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </section>
           </div>
-
-      }
-
-
-
-
+        </div>
+      </div>
       {() => {
 
         if (Static.showTag) {
@@ -1584,16 +1501,10 @@ const BlockUserRooms = async function ({ Static }) {
                         <div class="c-question__footer">
                           <a
                             class="c-button c-button--outline2"
-                            ontouchstart={function (e) {
 
-                              checkEvent(Static, userrooms._id, false, e)
-
-                            }}
-                            onclick={function (e) {
-                              if (!Static.mobile) {
-                                checkEvent(Static, userrooms._id, false, e)
-
-                              }
+                            onclick={(e) => {
+                              document.getElementById("spinner").hidden = false
+                              ChangeRooms(Static, userrooms._id, false)
 
                             }}
 

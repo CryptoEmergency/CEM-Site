@@ -7,7 +7,7 @@ import {
     initGo,
     initOne,
     init
-} from '@betarost/cemserver/cem.js';
+} from '@betarost/cemjs';
 import { fn } from '@src/functions/index.js';
 import { Input, CheckBox } from '@component/element/index.js';
 
