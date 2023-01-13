@@ -1,4 +1,4 @@
-import { init, build, start } from '@betarost/cem'
+import { ServerInit, ServerBuild, ServerStart } from '@betarost/cemserver'
 import path from 'path'
 
 const port = 80
@@ -7,7 +7,7 @@ const target = "crypto-emergency.com"
 const mode = "development"
 // const mode = "production"
 
-init({
+ServerInit({
     //Указываем пути к папке ресурсов, публичной папки.
     path: {
         src: path.resolve('src/index.js'),
@@ -38,4 +38,4 @@ init({
     }
 });
 //Собираем и запускаем
-build({}).then((result) => { if (result) start(result) });
+ServerBuild({}).then((result) => { if (result) ServerStart(result) });
