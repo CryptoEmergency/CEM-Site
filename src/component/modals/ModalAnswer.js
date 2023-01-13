@@ -13,63 +13,7 @@ import { MediaButton, MediaPreview } from '@component/element/index.js';
 // let formInputs;
 let elem = Variable.setRef()
 
-const changeTextAnswer = (e) => {
-  // let text = wrapTextWithATag(e.target.innerText.trim());
-  let text = e.target.innerText.trim();
-  Static.textAnswer.error = "";
 
-
-  if (text.length === 0) {
-    Static.textAnswer.error = Variable.lang.error_div.not_empty_input;
-  } else if (text.length < 5) {
-    Static.textAnswer.error = Variable.lang.error_div.minSymbol;
-  } else if (text.length > 2000) {
-    Static.textAnswer.error = Variable.lang.error_div.maxSymbol;
-  }
-  Static.textAnswer.value = Helpers.editText(text, { clear: true })
-  // wrapTextWithATag(text);
-  if (Static.textAnswer.error === "") {
-    Static.isValid = true;
-  } else {
-    Static.isValid = false;
-  }
-  initReload("modals");
-};
-
-const sendAnswer = async function (e, res) {
-  e.preventDefault();
-  if (!Static.isValid) {
-    return false;
-  }
-
-  let mediaArr = [];
-  let data = {
-    value: {
-      media: Static.mediaInputs.value,
-      questionId: res.item._id,
-      text: Static.textAnswer.value,
-    }
-  }
-  let tmpRes = await sendApi.create("setAnswer", data);
-  if (tmpRes.status === "ok") {
-    res.onClose()
-    Variable.DelModals("ModalAnswer");
-
-    //initReload();
-  } else {
-    Variable.SetModals(
-      {
-        name: "ModalAlarm",
-        data: {
-          icon: "alarm_icon",
-          text: Variable.lang.error_div[tmpRes.error],
-        },
-      },
-      true
-    );
-  }
-  return;
-};
 
 const sendPhoto = async function (Static, crooper) {
   if (!crooper) {
@@ -177,6 +121,64 @@ const sendVideo = async function (files) {
 const ModalAnswer = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
   let close = true
+
+  const changeTextAnswer = (e) => {
+    // let text = wrapTextWithATag(e.target.innerText.trim());
+    let text = e.target.innerText.trim();
+    Static.textAnswer.error = "";
+  
+  
+    if (text.length === 0) {
+      Static.textAnswer.error = Variable.lang.error_div.not_empty_input;
+    } else if (text.length < 5) {
+      Static.textAnswer.error = Variable.lang.error_div.minSymbol;
+    } else if (text.length > 2000) {
+      Static.textAnswer.error = Variable.lang.error_div.maxSymbol;
+    }
+    Static.textAnswer.value = Helpers.editText(text, { clear: true })
+    // wrapTextWithATag(text);
+    if (Static.textAnswer.error === "") {
+      Static.isValid = true;
+    } else {
+      Static.isValid = false;
+    }
+    initReload("modals");
+  };
+  
+  const sendAnswer = async function (e, res) {
+    e.preventDefault();
+    if (!Static.isValid) {
+      return false;
+    }
+  
+    let mediaArr = [];
+    let data = {
+      value: {
+        media: Static.mediaInputs.value,
+        questionId: res.item._id,
+        text: Static.textAnswer.value,
+      }
+    }
+    let tmpRes = await sendApi.create("setAnswer", data);
+    if (tmpRes.status === "ok") {
+      res.onClose()
+      Variable.DelModals("ModalAnswer");
+  
+      //initReload();
+    } else {
+      Variable.SetModals(
+        {
+          name: "ModalAlarm",
+          data: {
+            icon: "alarm_icon",
+            text: Variable.lang.error_div[tmpRes.error],
+          },
+        },
+        true
+      );
+    }
+    return;
+  };
   init(
     () => {
       Variable.OutHideWindows.push([elem, "ModalAnswer"])
