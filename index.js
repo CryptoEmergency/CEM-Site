@@ -1,5 +1,12 @@
 import { init, build, start } from '@betarost/cem'
 import path from 'path'
+
+const port = 80
+const target = "crypto-emergency.com"
+// const target = "idns.work"
+const mode = "development"
+// const mode = "production"
+
 init({
     //Указываем пути к папке ресурсов, публичной папки.
     path: {
@@ -8,13 +15,27 @@ init({
         fileName: "main.js"
     },
     // Порт сервера
-    port: 80,
+    port,
     //Режим запуска
-    // mode: "production",
-    mode: "development",
-    // Какую базу подключить office - локальную, "" - основную, test - Тестовую
-    //api: "",
-    api: "office"
+    mode,
+    allowedHosts: [target],
+    proxy: {
+        '/api': {
+            target: `https://${target}`,
+            changeOrigin: true,
+            secure: false
+        },
+        '/assets/upload': {
+            target: `https://${target}`,
+            changeOrigin: true,
+            secure: false
+        },
+        '/upload': {
+            target: `https://${target}`,
+            changeOrigin: true,
+            secure: false
+        },
+    }
 });
 //Собираем и запускаем
 build({}).then((result) => { if (result) start(result) });
