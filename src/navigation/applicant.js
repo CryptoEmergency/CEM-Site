@@ -6,18 +6,18 @@ import {
 import images from "@assets/images/index.js";
 
 const booksCatalog = [
-    {img: images["books/books_catalog-1"], name: "Dangerous games with derivatives", cost: 20},
-    {img: images["books/books_catalog-2"], name: "Hoolinomics", cost: 16},
-    {img: images["books/books_catalog-3"], name: "Rich Dad, Poor Dad", cost: 24},
-    {img: images["books/books_catalog-4"], name: "Cryptomatics", cost: 15},
-    {img: images["books/books_catalog-5"], name: "The Peter Lynch Method", cost: 28},
-    {img: images["books/books_catalog-6"], name: "Blockchain and NFT Technology", cost: 18},
-    {img: images["books/books_catalog-7"], name: "The Book about Cryptocurrency № 1", cost: 20},
-    {img: images["books/books_catalog-8"], name: "Blockchain. Principles and fundamentals", cost: 16},
-    {img: images["books/books_catalog-9"], name: "Rich Dad, Poor Dad", cost: 24},
-    {img: images["books/books_catalog-10"], name: "Inputs and outputs", cost: 22},
-    {img: images["books/books_catalog-11"], name: "Options: Volatility and valuation", cost: 18},
-    {img: images["books/books_catalog-12"], name: "Financial planning", cost: 16}
+    {category: "Knowledge books", img: images["books/books_catalog-1"], name: "Dangerous games with derivatives", cost: 20},
+    {category: "Memory books", img: images["books/books_catalog-2"], name: "Hoolinomics", cost: 16},
+    {category: "Story books", img: images["books/books_catalog-3"], name: "Rich Dad, Poor Dad", cost: 24},
+    {category: "Business Books", img: images["books/books_catalog-4"], name: "Cryptomatics", cost: 15},
+    {category: "Business Books", img: images["books/books_catalog-5"], name: "The Peter Lynch Method", cost: 28},
+    {category: "Knowledge books", img: images["books/books_catalog-6"], name: "Blockchain and NFT Technology", cost: 18},
+    {category: "Knowledge books", img: images["books/books_catalog-7"], name: "The Book about Cryptocurrency № 1", cost: 20},
+    {category: "Business Books", img: images["books/books_catalog-8"], name: "Blockchain. Principles and fundamentals", cost: 16},
+    {category: "Knowledge books", img: images["books/books_catalog-9"], name: "Rich Dad, Poor Dad", cost: 24},
+    {category: "Memory books", img: images["books/books_catalog-10"], name: "Inputs and outputs", cost: 22},
+    {category: "Knowledge books", img: images["books/books_catalog-11"], name: "Options: Volatility and valuation", cost: 18},
+    {category: "Memory books", img: images["books/books_catalog-12"], name: "Financial planning", cost: 16}
 ]
 
 const categoryPopular = [
@@ -52,6 +52,10 @@ const start = function (data, ID) {
         }
     })
 
+    function menuSelect () {
+            document.querySelector(".books-filter-list-popular").classList.toggle("active");
+    }
+
     init(
     async () => {
     
@@ -68,12 +72,12 @@ const start = function (data, ID) {
                                     <div class="books-filter-subtitle books-filter-popular">
                                         <span>popular categories</span>
                                         <div class="books-filter-select">
-                                            <div class="books-filter-select-title">{selected}</div>
-                                            <div class="books-filter-list">
+                                            <div class="books-filter-select-title" onClick={menuSelect}>{selected}</div>
+                                            <div class="books-filter-list books-filter-list-popular">
                                                 {categoryPopular.map(function (item) {
                                                     return (
                                                         <div class="books_checkbox">
-                                                            <input class="checkbox_input" type="checkbox" id={item.id} checked={item.checked} />
+                                                            <input class="checkbox_input" type="checkbox" id={item.id} checked={item.checked}/>
                                                             <label class="checkbox_label" for={item.id}>
                                                                 {item.category}
                                                             </label>
@@ -87,7 +91,7 @@ const start = function (data, ID) {
                                         <span>new books categories</span>
                                         <div class="books-filter-select">
                                             <div class="books-filter-select-title">{selected}</div>
-                                            <div class="books-filter-list">
+                                            <div class="books-filter-list books-filter-list-new">
                                                 {categoryNew.map(function (item) {
                                                     return (
                                                         <div class="books_checkbox">
