@@ -7,7 +7,7 @@ import {
   sendApi,
   Helpers, 
   init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 
 const sendInBlackList = async (info) => {
   let data = {

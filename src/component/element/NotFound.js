@@ -2,7 +2,7 @@ import {
     jsx,
     jsxFrag,
     Variable,
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 
 const NotFound = function (data) {

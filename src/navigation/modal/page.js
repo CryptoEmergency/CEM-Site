@@ -3,7 +3,7 @@ import {
     jsxFrag,
     Variable,
     init,
-} from '@betarost/cemjs';
+} from '@betarost/cemserver/cem.js';
 
 import list from "@src/lists/modalsList.js";
 

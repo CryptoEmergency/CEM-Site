@@ -2,7 +2,7 @@ import {
     jsx,
     jsxFrag,
     Variable
-} from '@betarost/cemjs';
+} from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import images from "@assets/images/index.js";
 

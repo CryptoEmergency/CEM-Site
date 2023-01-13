@@ -1,7 +1,7 @@
 import {
   jsx,
   jsxFrag
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { AudioPlayer, Swiper, VideoPlayer, LazyImage } from "@component/element/index.js";
 

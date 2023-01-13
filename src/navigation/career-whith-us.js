@@ -3,7 +3,7 @@ import {
     jsxFrag,
     Variable,
     init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 
 const start = function (data, ID) {
     init(

@@ -1,7 +1,7 @@
 import {
     jsx,
     jsxFrag,
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 //check
 import { Swiper as SwiperJs } from 'swiper/bundle';
 import 'swiper/css/bundle';

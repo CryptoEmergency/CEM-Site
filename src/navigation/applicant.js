@@ -3,7 +3,7 @@ import {
     jsxFrag,
     init,
     initReload
-  } from "@betarost/cemjs";
+  } from "@betarost/cemserver/cem.js";
 
 
   

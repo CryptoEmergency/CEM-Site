@@ -6,7 +6,7 @@ import {
   timersStart,
   timersStop,
   init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 
 
 

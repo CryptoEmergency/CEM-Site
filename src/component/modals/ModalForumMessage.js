@@ -7,7 +7,7 @@ import {
   sendApi,
   Helpers,
   init
-} from '@betarost/cemjs';
+} from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import { Input, TextArea } from '@component/element/index.js';
 

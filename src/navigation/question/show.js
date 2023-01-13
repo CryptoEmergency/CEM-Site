@@ -4,7 +4,7 @@ import {
   Variable,
   init,
   initReload
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import { Avatar, LentaMedia, Evaluation, ItemsMenu,  ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";

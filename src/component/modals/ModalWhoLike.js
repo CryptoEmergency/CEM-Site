@@ -3,7 +3,7 @@ import {
   jsxFrag,
   Variable,
   init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { Avatar } from "@component/element/Avatar.js";
 
 const ModalWhoLike = function ({ whoLike, type }, ID) {

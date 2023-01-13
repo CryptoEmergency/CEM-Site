@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initGo, init } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 
 const changeComplaint = function (Static,checkdata) {

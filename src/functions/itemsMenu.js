@@ -1,4 +1,4 @@
-import { Variable, initReload, sendApi } from '@betarost/cemjs'
+import { Variable, initReload, sendApi } from '@betarost/cemserver/cem.js'
 import { modals } from './modals.js';
 import { fn } from '@src/functions/index.js';
 import { TextArea } from "@component/element/index.js";

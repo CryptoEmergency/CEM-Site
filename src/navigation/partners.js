@@ -2,7 +2,7 @@ import {
   jsx,
   jsxFrag,
   init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 // check
 import { BlockInfoPartners } from '@component/blocks/index.js';
 

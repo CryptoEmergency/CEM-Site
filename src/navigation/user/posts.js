@@ -7,7 +7,7 @@ import {
   Helpers,
   initGo,
   sendApi,
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 
 import {

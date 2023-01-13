@@ -1,4 +1,4 @@
-import { Variable, Helpers } from "@betarost/cemjs";
+import { Variable, Helpers } from "@betarost/cemserver/cem.js";
 import { modals } from "./modals.js"
 import { fn } from '@src/functions/index.js';
 const initData = {}

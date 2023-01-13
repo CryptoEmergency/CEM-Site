@@ -4,7 +4,7 @@ import {
   Variable,
   init,
   initReload
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { Select, NotFound } from "@component/element/index.js";
 import { BlockLentaUsers } from "@component/blocks/index.js";

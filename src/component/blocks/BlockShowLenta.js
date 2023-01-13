@@ -3,7 +3,7 @@ import {
   jsxFrag,
   initReload,
   Variable,
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { TextArea, ButtonSubmit, Comment, NotFound } from "@component/element/index.js";

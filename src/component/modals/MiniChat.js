@@ -6,7 +6,7 @@ import {
     init,
     timersStart,
     timersStop
-  } from "@betarost/cemjs";
+  } from "@betarost/cemserver/cem.js";
   import { fn } from '@src/functions/index.js';
   import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
   import svg from "@assets/svg/index.js";
