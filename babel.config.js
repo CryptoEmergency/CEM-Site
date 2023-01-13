@@ -2,22 +2,25 @@ export default {
     "presets": [
         ["@babel/preset-env"],
         ["@babel/preset-react",
-        {
-            "pragma": "jsx",
-            "pragmaFrag": "jsxFrag",
-            "throwIfNamespace": false
-        }]
+            {
+                "pragma": "jsx",
+                "pragmaFrag": "jsxFrag",
+                "throwIfNamespace": false
+            }]
     ],
-    "plugins":[
+    "plugins": [
         ["module-resolver",
-        {
-            "alias": {
-            "@src": "./src",
-            "@assets": "./src/assets",
-            "@component": "./src/component",
-            "@navigation": "./src/navigation"
+            {
+                "alias": {
+                    "@src": "./src",
+                    "@assets": "./src/assets",
+                    "@component": "./src/component",
+                    "@htmlBlocks": "./src/component/htmlBlocks",
+                    "@htmlElements": "./src/component/htmlElements",
+                    "@navigation": "./src/navigation",
+                    "@modules": "./src/modules"
+                }
             }
-        }
         ]
     ]
 
