@@ -7,7 +7,7 @@ import {
 	sendApi,
 	Helpers,
 	init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import { NotifyItem } from '@component/element/NotifyItem.js';
 import { fn } from "@src/functions/index.js";

@@ -3,7 +3,7 @@ import {
     jsxFrag,
     Variable,
     initReload
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 
 const ButtonShowMore = function ({ Static, action, onclick, limit = 6 }) {

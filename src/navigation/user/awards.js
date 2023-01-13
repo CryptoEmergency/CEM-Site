@@ -4,7 +4,7 @@ import {
     Variable,
     init,
     sendApi
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 
 import svg from '@assets/svg/index.js';
 import { Swiper } from '@component/element/index.js';

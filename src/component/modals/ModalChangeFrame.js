@@ -3,7 +3,7 @@ import {
     jsxFrag,
     Variable,
     init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { Avatar } from '@component/element/index.js';
 

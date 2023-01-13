@@ -465,7 +465,13 @@
 		"deletePageComment": "Вы уверены, что хотите удалить?",
 		"--------------------------новые слова--------------": "--добавить перевод--",
 		"city": "Город",
-		"interests": "Интересы"
+		"interests": "Интересы",
+		"communityName": "Название сообщества",
+		"shortDescription": "Краткое описание",
+		"descriptionCommunity": "Описание",
+		"creatorCommunity": "Создатель",
+		"memberCommunity": "Количество участников",
+		"contactsCommunity": "Контакты"
 	},
 	"label": {
 		"name": "Имя",

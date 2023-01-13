@@ -4,7 +4,7 @@ import {
     Variable,
     getValue,
     initReload
-} from '@betarost/cemjs';
+} from '@betarost/cemserver/cem.js';
 
 import images from '@assets/images/index.js';
 

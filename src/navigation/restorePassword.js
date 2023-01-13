@@ -3,7 +3,7 @@ import {
     jsxFrag,
     init,
     Variable,
-  } from "@betarost/cemjs";
+  } from "@betarost/cemserver/cem.js";
 
   import {  Input} from '@component/element/index.js';
   import { BlockError404 } from '@component/blocks/index.js';

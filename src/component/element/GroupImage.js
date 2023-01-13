@@ -1,7 +1,7 @@
 import {
     jsx,
     jsxFrag,
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 
 const GroupImage = function ({ image, className }) {
     if (true) {

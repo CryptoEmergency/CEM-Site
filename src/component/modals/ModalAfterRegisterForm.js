@@ -6,7 +6,7 @@ import {
   initOne,
   sendApi, 
   init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';

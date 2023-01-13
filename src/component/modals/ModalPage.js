@@ -12,7 +12,7 @@ import {
   stringToHtml,
   initAfter,
   getInitList
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 
 

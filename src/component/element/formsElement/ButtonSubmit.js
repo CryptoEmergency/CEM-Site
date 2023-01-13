@@ -2,7 +2,7 @@ import {
     jsx,
     jsxFrag,
     Variable
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 
 const ButtonSubmit = function ({ Static, className, text, onclick, onlyAuth }) {
 

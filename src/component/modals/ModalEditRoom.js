@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi } from "@betarost/cemjs";
+import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi } from "@betarost/cemserver/cem.js";
 import { Input, CheckBox, Select, TextArea, MediaButton,MediaPreview } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';
 import {

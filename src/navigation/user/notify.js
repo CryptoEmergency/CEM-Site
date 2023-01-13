@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, init, initReload, Variable, sendApi } from '@betarost/cemjs';
+import { jsx, jsxFrag, init, initReload, Variable, sendApi } from '@betarost/cemserver/cem.js';
 import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { NotifyItem } from '@component/element/NotifyItem.js';

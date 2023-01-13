@@ -6,97 +6,52 @@ import {
   sendApi,
   Helpers,
   init
-} from "@betarost/cemjs";
+} from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { MediaButton, MediaPreview } from '@component/element/index.js';
 
-let formInputs;
+// let formInputs;
 let elem = Variable.setRef()
 
-const changeTextAnswer = (e) => {
-  // let text = wrapTextWithATag(e.target.innerText.trim());
-  let text = e.target.innerText.trim();
-  formInputs.textAnswer.error = "";
 
 
-  if (text.length === 0) {
-    formInputs.textAnswer.error = Variable.lang.error_div.not_empty_input;
-  } else if (text.length < 5) {
-    formInputs.textAnswer.error = Variable.lang.error_div.minSymbol;
-  } else if (text.length > 2000) {
-    formInputs.textAnswer.error = Variable.lang.error_div.maxSymbol;
-  }
-  formInputs.textAnswer.value = Helpers.editText(text, { clear: true })
-  // wrapTextWithATag(text);
-  if (formInputs.textAnswer.error === "") {
-    formInputs.isValid = true;
-  } else {
-    formInputs.isValid = false;
-  }
-  initReload("modals");
-};
-
-const sendAnswer = async function (e, res) {
-  e.preventDefault();
-  if (!formInputs.isValid) {
-    return false;
-  }
-
-  let mediaArr = [];
-  let data = {
-    value: {
-      media: formInputs.mediaInputs.value,
-      questionId: res.item._id,
-      text: formInputs.textAnswer.value,
-    }
-  }
-  let tmpRes = await sendApi.create("setAnswer", data);
-  if (tmpRes.status === "ok") {
-    res.onClose()
-    Variable.DelModals("ModalAnswer");
-
-    //initReload();
-  } else {
-    Variable.SetModals(
-      {
-        name: "ModalAlarm",
-        data: {
-          icon: "alarm_icon",
-          text: Variable.lang.error_div[tmpRes.error],
-        },
-      },
-      true
-    );
-  }
-  return;
-};
-
-const sendPhoto = async function (crooper) {
+const sendPhoto = async function (Static, crooper) {
   if (!crooper) {
     return
   }
   let canvas;
-  formInputs.mediaInputs.selectAspect = crooper.options.aspectRatio;
+  Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
   canvas = crooper.getCroppedCanvas({
     // width: 166,
     // height: 166,
   });
-
+  let previewObj = {
+    src: canvas.toDataURL(),
+    type: "image",
+    upload: 0,
+    size: 0
+  };
+  Static.mediaInputs.show = true;
+  Static.mediaInputs.value.push(previewObj);
+  let numItem = Static.mediaInputs.value.length - 1
+  initReload();
   await canvas.toBlob(function (blob) {
     fn.uploadMedia(
       blob,
       "answers",
       async function () {
-        formInputs.mediaInputs.show = true;
+        Static.mediaInputs.show = true;
         if (!this.response) {
           return
         }
         let response = JSON.parse(this.response);
-        formInputs.mediaInputs.value.push({
-          aspect: formInputs.mediaInputs.selectAspect,
+        Static.mediaInputs.value[numItem] = {
+          aspect: Static.mediaInputs.selectAspect,
           type: response.mimetype.split("/")[0],
           name: response.name
-        });
+        };
+        Static.isValid = true;
+        initReload();
       },
       async function (e) {
         let contentLength;
@@ -110,11 +65,17 @@ const sendPhoto = async function (crooper) {
             10
           );
         }
-        // console.log("=3c5fa7= ", "Загружено", e.loaded, "из", contentLength);
+        if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+          Static.mediaInputs.value.splice(numItem, 1);
+          initReload()
+          return
+        }
+        Static.mediaInputs.value[numItem].upload = e.loaded
+        Static.mediaInputs.value[numItem].size = contentLength;
+        initReload();
       }
     );
-    initReload("modals");
-    Variable.DelModals("ModalCropImage");
+    initReload();
   });
   return
 }
@@ -124,12 +85,12 @@ const sendVideo = async function (files) {
     files[0],
     "answers",
     async function () {
-      formInputs.mediaInputs.show = true;
+      Static.mediaInputs.show = true;
       let tmp = JSON.parse(this.response);
       let type = tmp.mimetype.split("/")[0];
       let obj = { aspect: undefined, type, name: tmp.name };
 
-      formInputs.mediaInputs.value.push(obj);
+      Static.mediaInputs.value.push(obj);
       initReload();
     },
     async function (e) {
@@ -160,10 +121,68 @@ const sendVideo = async function (files) {
 const ModalAnswer = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
   let close = true
+
+  const changeTextAnswer = (e) => {
+    // let text = wrapTextWithATag(e.target.innerText.trim());
+    let text = e.target.innerText.trim();
+    Static.textAnswer.error = "";
+  
+  
+    if (text.length === 0) {
+      Static.textAnswer.error = Variable.lang.error_div.not_empty_input;
+    } else if (text.length < 5) {
+      Static.textAnswer.error = Variable.lang.error_div.minSymbol;
+    } else if (text.length > 2000) {
+      Static.textAnswer.error = Variable.lang.error_div.maxSymbol;
+    }
+    Static.textAnswer.value = Helpers.editText(text, { clear: true })
+    // wrapTextWithATag(text);
+    if (Static.textAnswer.error === "") {
+      Static.isValid = true;
+    } else {
+      Static.isValid = false;
+    }
+    initReload("modals");
+  };
+  
+  const sendAnswer = async function (e, res) {
+    e.preventDefault();
+    if (!Static.isValid) {
+      return false;
+    }
+  
+    let mediaArr = [];
+    let data = {
+      value: {
+        media: Static.mediaInputs.value,
+        questionId: res.item._id,
+        text: Static.textAnswer.value,
+      }
+    }
+    let tmpRes = await sendApi.create("setAnswer", data);
+    if (tmpRes.status === "ok") {
+      res.onClose()
+      Variable.DelModals("ModalAnswer");
+  
+      //initReload();
+    } else {
+      Variable.SetModals(
+        {
+          name: "ModalAlarm",
+          data: {
+            icon: "alarm_icon",
+            text: Variable.lang.error_div[tmpRes.error],
+          },
+        },
+        true
+      );
+    }
+    return;
+  };
   init(
     () => {
       Variable.OutHideWindows.push([elem, "ModalAnswer"])
-      formInputs = {
+      Static = {
         textAnswer: {
           value: "",
           error: "",
@@ -179,20 +198,22 @@ const ModalAnswer = function (data, ID) {
     },
     () => {
       return (
-        <div class="c-modal c-modal--open" id="ModalAnswer" onclick={function(e){ if(close){ 
-  
-					fn.modals.close(ID)
-				  }}}>
-          <section class="c-modal__dialog"  onmouseover={function(){
-           
-           close = false
-    
-         }}
-           onmouseleave={function(){
-           
-           close = true
-      
-           }}>
+        <div class="c-modal c-modal--open" id="ModalAnswer" onclick={function (e) {
+          if (close) {
+
+            fn.modals.close(ID)
+          }
+        }}>
+          <section class="c-modal__dialog" onmouseover={function () {
+
+            close = false
+
+          }}
+            onmouseleave={function () {
+
+              close = true
+
+            }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title">{Variable.lang.h.modal_answer}</h2>
               <button
@@ -208,7 +229,7 @@ const ModalAnswer = function (data, ID) {
               <form id="createPostForm" onsubmit={(e) => sendAnswer(e, data)} >
                 <input style="display: none;" type="submit" />
                 <div class="error-div">
-                  <div class="error-div-variant">{formInputs.textAnswer.error}</div>
+                  <div class="error-div-variant">{Static.textAnswer.error}</div>
                 </div>
                 <div data-type="answers" class="create_post_container">
                   <div
@@ -217,18 +238,19 @@ const ModalAnswer = function (data, ID) {
                     oninput={changeTextAnswer}
                   ></div>
                   {() => {
-                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length) {
+                    if (Static.mediaInputs.show && Static.mediaInputs.value.length) {
                       return (
                         <div class="create_post_chapter createPostImage">
                           {
-                            formInputs.mediaInputs.value.map((item, index) => {
+                            Static.mediaInputs.value.map((item, index) => {
                               if (item.type != "audio") {
                                 return (
                                   <MediaPreview
                                     item={item}
                                     index={index}
                                     type="answers"
-                                    formInputs={formInputs}
+                                    // formInputs={formInputs}
+                                    Static={Static}
                                   />
                                 );
                               }
@@ -240,7 +262,7 @@ const ModalAnswer = function (data, ID) {
                   }}
 
                   {() => {
-                    if (formInputs.mediaInputs.show && formInputs.mediaInputs.value.length && formInputs.mediaInputs.value.filter((item) => item.type == "audio").length) {
+                    if (Static.mediaInputs.show && Static.mediaInputs.value.length && Static.mediaInputs.value.filter((item) => item.type == "audio").length) {
                       return (
                         <div class="create_post_chapter createPostAudio">
                           {/* <Map
@@ -259,14 +281,15 @@ const ModalAnswer = function (data, ID) {
                           }}
                         /> */}
                           {
-                            formInputs.mediaInputs.value.map((item, index) => {
+                            Static.mediaInputs.value.map((item, index) => {
                               if (item.type == "audio") {
                                 return (
                                   <MediaPreview
                                     item={item}
                                     index={index}
                                     type="answers"
-                                    formInputs={formInputs}
+                                    // formInputs={formInputs}
+                                    Static={Static}
                                   />
                                 );
                               }
@@ -299,10 +322,10 @@ const ModalAnswer = function (data, ID) {
                       data: {
                         file: this.files[0],
                         typeUpload: 'answers',
-                        arrMedia: formInputs.mediaInputs.value,
-                        aspectSelect: formInputs.mediaInputs.selectAspect,
+                        arrMedia: Static.mediaInputs.value,
+                        aspectSelect: Static.mediaInputs.selectAspect,
                         uploadCropImage: async function (cropper) {
-                          await sendPhoto(cropper)
+                          await sendPhoto(Static, cropper)
                           return;
                         }
                       },
@@ -327,7 +350,7 @@ const ModalAnswer = function (data, ID) {
               <button
                 class={[
                   "c-button c-button--gradient2",
-                  !formInputs.isValid ? "c-button--inactive" : "",
+                  !Static.isValid ? "c-button--inactive" : "",
                 ]}
                 type="button"
                 // ref={elemButton}

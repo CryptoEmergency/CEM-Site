@@ -3,7 +3,7 @@ import {
     jsxFrag,
     Variable,
     initOne
-} from '@betarost/cemjs';
+} from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Swiper } from '@component/element/index.js';
