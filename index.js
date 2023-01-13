@@ -8,15 +8,12 @@ const mode = "development"
 // const mode = "production"
 
 ServerInit({
-    //Указываем пути к папке ресурсов, публичной папки.
     path: {
         src: path.resolve('src/index.js'),
         public: path.resolve('public'),
         fileName: "main.js"
     },
-    // Порт сервера
     port,
-    //Режим запуска
     mode,
     allowedHosts: [target],
     proxy: {
@@ -37,5 +34,4 @@ ServerInit({
         },
     }
 });
-//Собираем и запускаем
 ServerBuild({}).then((result) => { if (result) ServerStart(result) });
