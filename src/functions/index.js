@@ -327,7 +327,7 @@ fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
     if (data.item) {
       item = data.item
     } else {
-      item._id = Variable.Static.DataUrl.params
+      item._id = Variable.DataUrl.params
     }
   }
 

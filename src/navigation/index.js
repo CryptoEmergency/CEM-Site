@@ -72,7 +72,12 @@ const start = function (data, ID) {
             // await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
             await fn.restApi.getNews({ cache: true, name: "MainNews", filter: {} })
             // await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
-            timersStart("Course", async () => { fn.restApi.getCourse({ name: "Course", filter: {} }) }, 10000)
+            // timersStart("Course", async () => { fn.restApi.getCourse({ name: "Course", filter: {} }) }, 10000)
+            timersStart({
+                name: "Course",
+                fn: async () => { fn.restApi.getCourse({ name: "Course", filter: {} }) },
+                msecond: 10000
+            })
         },
         () => {
             return (
@@ -97,7 +102,7 @@ const start = function (data, ID) {
                                         const arrReturn = Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
                                             let course = Variable.Course.list_records[0][key]
                                             return (
-                                         <div  class="c-currency">
+                                                <div class="c-currency">
                                                     <div class="c-currency__icon">
                                                         <div class={`icon-color-${key}`}>
                                                             <img src={`/assets/icons/coins/${key}2.svg`} />
@@ -116,7 +121,7 @@ const start = function (data, ID) {
                                                             {/* <div class="c-currency__update">24h.</div> */}
                                                         </div>
                                                     </div>
-                                            </div>
+                                                </div>
                                             )
                                         })
                                         return arrReturn

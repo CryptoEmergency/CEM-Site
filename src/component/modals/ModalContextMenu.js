@@ -1,25 +1,27 @@
-import { jsx, jsxFrag, Variable, initReload, timersStart, timersStop, init } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, timersStop, init } from "@betarost/cemserver/cem.js";
 
 const ModalContextMenu = function (data, ID) {
 	let close = true
 	init(
 		null,
-		()=>{
+		() => {
 			return (
-				<div class="c-modal c-modal--open" id="ModalContextMenu" onclick={function(e){ if(close){ 
-  
-					fn.modals.close(ID)
-				  }}}>
-					<section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
-    
-         }}
-           onmouseleave={function(){
-           
-           close = true
-      
-           }}>
+				<div class="c-modal c-modal--open" id="ModalContextMenu" onclick={function (e) {
+					if (close) {
+
+						fn.modals.close(ID)
+					}
+				}}>
+					<section class="c-modal__dialog" onmouseover={function () {
+
+						close = false
+
+					}}
+						onmouseleave={function () {
+
+							close = true
+
+						}}>
 						{/* <header class="c-modal__header">
 				  <h4></h4>
 				</header> */}

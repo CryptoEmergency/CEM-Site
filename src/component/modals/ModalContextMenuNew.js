@@ -3,7 +3,6 @@ import {
   jsxFrag,
   Variable,
   initReload,
-  timersStart,
   timersStop,
   init
 } from "@betarost/cemserver/cem.js";
@@ -175,7 +174,7 @@ const ModalContextMenuNew = function (data, ID) {
 
   init(
     null,
-    ()=>{
+    () => {
       return (
         <div class="c-modal c-modal--open" id="ModalContextMenu">
           <section class="c-modal__dialog">
@@ -215,7 +214,7 @@ const ModalContextMenuNew = function (data, ID) {
                             <span
                               class={[key.includes("complain") || key === "blackList" ? "c-text--error" : null]}
                             >{typeText.notAuthor[key].text}</span>
-    
+
                           </li>
                         );
                       }
