@@ -1,12 +1,9 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
     initOne,
     initReload,
     Variable,
-    getValue,
     init
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
@@ -97,7 +94,7 @@ const ModalUserInterests = function ({ userInfo, type }, ID) {
                             <ButtonSubmit
                                 text={type == 'add' ? Variable.lang.button.add : Variable.lang.button.edit}
                                 onclick={async () => {
-                                    if(!!Static.name.value && !!Static.description.value) {
+                                    if (!!Static.name.value && !!Static.description.value) {
                                         let response;
 
                                         let data = {

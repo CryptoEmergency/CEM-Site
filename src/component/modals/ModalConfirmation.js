@@ -1,10 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
     Variable,
-    getValue, 
     init
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
@@ -13,30 +10,32 @@ import { fn } from '@src/functions/index.js';
 
 //const ModalConfirmation = function ({ lang, wayReg, confirmationTimer, confirmAccount }) {
 const ModalConfirmation = function (data, ID) {
-    let close =true
+    let close = true
     // console.log("ModalConfirmation");
     const showModalConfirmation = function (e) {
         e.stopPropagation()
-        setValue("modals", "confirmationModalShow", !getValue("modals", "confirmationModalShow"))
+        // setValue("modals", "confirmationModalShow", !getValue("modals", "confirmationModalShow"))
     }
     init(
         null,
-        ()=>{
+        () => {
             return (
-                <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
-  
-                    fn.modals.close(ID)
-                  }}}>
-                    <section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
-    
-         }}
-           onmouseleave={function(){
-           
-           close = true
-      
-           }}>
+                <div class="c-modal c-modal--open" onclick={function (e) {
+                    if (close) {
+
+                        fn.modals.close(ID)
+                    }
+                }}>
+                    <section class="c-modal__dialog" onmouseover={function () {
+
+                        close = false
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{lang.h.modal_resetСonfirm}</h2>
                             <button
@@ -93,7 +92,7 @@ const ModalConfirmation = function (data, ID) {
         }, ID
     )
 
-    
+
 };
 
 

@@ -1,10 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
     Variable,
-    getValue,
     initReload,
     sendApi,
     initGo,
@@ -53,23 +50,23 @@ const ModalMobileMainSettings = function (data, ID) {
         },
         () => {
             return (
-                <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings" 
+                <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings"
                     onclick={
-                        function(e){ 
-                            if(close){ 
+                        function (e) {
+                            if (close) {
                                 fn.modals.close(ID)
                             }
                         }
                     }
                 >
-                    <section class="c-modal__dialog"  
+                    <section class="c-modal__dialog"
                         onmouseover={
-                            function(){
-                                    close = false
-                                }
+                            function () {
+                                close = false
+                            }
                         }
                         onmouseleave={
-                            function(){
+                            function () {
                                 close = true
                             }
                         }
@@ -133,23 +130,23 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg["profile_icon-3"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
                                                 </a>
-                                                <a  onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
+                                                <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
                                                     class="user_icon_mobile_visible user_icon"
                                                     href="/user/settings/">
                                                     <img src={svg["settings_menu"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
                                                 </a>
                                                 <a class="user_icon_mobile_visible user_icon" href="#" onclick={
-                                                        function(){
-                                                        
-                                                          fn.restApi.logOut()
-                                                          Variable.Modals = []
-                                                          Variable.Rooms = false
-                                                        }
+                                                    function () {
 
-                                                    }>
-                                                        <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
-                                                    </a>
+                                                        fn.restApi.logOut()
+                                                        Variable.Modals = []
+                                                        Variable.Rooms = false
+                                                    }
+
+                                                }>
+                                                    <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
+                                                </a>
                                             </div>
                                             <div class="user_mobile_menu_part">
                                                 <div class="user_mobile_menu_content">
