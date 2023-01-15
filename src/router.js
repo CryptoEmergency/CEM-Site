@@ -10,7 +10,6 @@ import list from "@src/lists/routerList.js";
 
 const mainBlock = async function () {
 
-
     init(
         () => {
             timersClear();
