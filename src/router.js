@@ -19,7 +19,7 @@ const mainBlock = async function () {
                 msecond: 1500
             })
         },
-        fn: async (reload, ID, url, data) => {
+        fn: async ({ reload, ID, url, data }) => {
             try {
                 let dataUrl = Variable.dataUrl
                 if (url) { dataUrl = url }

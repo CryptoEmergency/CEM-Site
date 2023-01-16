@@ -3,7 +3,8 @@ import {
     jsxFrag,
     Variable,
     init,
-    getInitList
+    getInitList,
+    load
 } from '@betarost/cemserver/cem.js';
 
 import { fn } from '@src/functions/index.js';
@@ -14,13 +15,10 @@ Variable.Static.countModalsPage = 0
 
 
 const mainModal = async function () {
-    init(
-        () => {
-            // console.log("modals", Variable.Modals)
-            //Variable.OutHideWindows = []
-        },
 
-        async function (reload) {
+    load({
+        ID: "modals",
+        fn: async function (reload) {
 
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
@@ -190,16 +188,16 @@ const mainModal = async function () {
                     }}
                     {/* {mm} */}
                     {/* {() => {
-                        return modals.map(async (item, index) => {
-                            return (
-                                await item.fn(item.data, item.reload, index)
-                            )
-                        })
-                    }} */}
+                    return modals.map(async (item, index) => {
+                        return (
+                            await item.fn(item.data, item.reload, index)
+                        )
+                    })
+                }} */}
                 </div>
             )
         },
-        "modals")
+    })
     return
 };
 
