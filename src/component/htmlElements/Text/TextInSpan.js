@@ -1,22 +1,19 @@
 import {
     jsx,
-    jsxFrag,
-    Variable,
+    jsxFrag
 } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
 
-const TextInSpan = function ({ mainClass, elemClass, text = "Текст", onclick }) {
-    // console.log('=0889a6=', data, data2)
+const TextInSpan = function ({ style, mClass, className, onclick, children, reloadActive }) {
     return (
         <div
-            class={mainClass}
+            style={style}
+            class={mClass}
             onclick={onclick}>
             <span
-                class={elemClass}>
-                {text}
+                class={className}>
+                {children}
             </span>
         </div>
     )
 }
 export { TextInSpan }
-// OK

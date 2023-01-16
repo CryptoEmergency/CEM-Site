@@ -9,7 +9,7 @@ import {
 import svg from "@assets/svg/index.js"
 import { fn } from '@src/functions/index.js';
 import { Avatar } from '@component/element/index.js';
-import { TextInSpan } from '@htmlElements/index.js'
+import { TextInSpan, Row, Link, Button, Img } from '@htmlElements/index.js'
 const mainHeader = async function () {
 
     load({
@@ -20,26 +20,16 @@ const mainHeader = async function () {
                     <div class="c-header__container c-container">
                         <div class="c-header__inner">
                             <div class="c-header__auth">
-
-
-                                <TextInSpan
-                                    mainClass={["selectlink", "selectlink-control"]}
-                                    text={Variable.lang.lang_orig}
-                                    onclick={() => {
-                                        fn.modals.ModalLanguageSite({})
-                                    }}
-                                />
-                                {/* <div
+                                <Row
                                     class="language"
                                     onclick={() => {
                                         fn.modals.ModalLanguageSite({})
-                                        // Variable.SetModals({ name: "ModalLanguageSite", data: {}, });
-                                    }}
-                                >
-                                    <div class="selectlink">
-                                        <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
-                                    </div>
-                                </div> */}
+                                    }}>
+                                    <TextInSpan
+                                        mClass={["selectlink", "selectlink-control"]}>
+                                        {Variable.lang.lang_orig}
+                                    </TextInSpan>
+                                </Row>
                                 {
                                     () => {
                                         if (Variable.auth && Variable.myInfo) {
@@ -54,50 +44,77 @@ const mainHeader = async function () {
                                             )
                                         } else {
                                             return (
-                                                <div style="display: flex; align-items: center">
-                                                    <a
+                                                <Row style="display: flex; align-items: center">
+                                                    <Link
                                                         class="log-in"
-                                                        onclick={(e) => {
 
-                                                            Variable.SetModals({ name: "ModalAuth", data: {} })
-                                                            e.stopPropagation();
-                                                        }}
-                                                    >
-                                                        {Variable.lang.button.login}
-                                                    </a>
-                                                    <button
-                                                        class="c-button c-button--gradient"
-                                                        type="button"
                                                         onclick={(e) => {
-                                                            Variable.SetModals({ name: "ModalReg", data: {} })
                                                             e.stopPropagation();
-                                                        }}
-                                                    >
-                                                        <span class="c-button__text">{Variable.lang.button.registration}</span>
-                                                    </button>
-                                                </div>
+                                                            fn.modals.ModalAuth({})
+                                                        }}>
+                                                        {Variable.lang.button.login}
+                                                    </Link>
+
+                                                    <Button
+                                                        class="c-button c-button--gradient"
+                                                        text={Variable.lang.button.registration}
+                                                        textClass="c-button__text"
+                                                        onclick={(e) => {
+                                                            e.stopPropagation();
+                                                            fn.modals.ModalReg({})
+                                                        }}>
+
+                                                    </Button>
+                                                </Row>
                                             )
                                         }
                                     }
                                 }
                             </div>
                             <nav class="c-header__menu c-menu">
-                                <a class="c-logo c-menu__link" href="/" onclick={fn.siteLink}>
-                                    <img class="c-logo__image" src={svg.logo} />
-                                </a>
-                                <a class="c-menu__link" href="/contacts/" onclick={(e) => {
-                                    fn.siteLinkModal(e, {
-                                        title: Variable.lang.a.contacts, items: fn.itemsMenu.onlyPage({ url: '/contacts/' })
-                                    })
-                                }}>{Variable.lang.a.contacts}</a>
-                                <a class="c-menu__link" href="/about/" onclick={(e) => {
-                                    fn.siteLinkModal(e, {
-                                        title: Variable.lang.a.about, items: fn.itemsMenu.onlyPage({ url: '/about/' })
-                                    })
-                                }}>{Variable.lang.a.about}</a>
-                                <a class="c-menu__link" href="/blog/" onclick={(e) => {
-                                    fn.siteLinkModal(e, { title: Variable.lang.h.blog, items: fn.itemsMenu.onlyPage({ url: '/blog/' }) })
-                                }}>{Variable.lang.a.blog}</a>
+                                <Link
+                                    class="c-logo c-menu__link"
+                                    href="/"
+                                    onclick={fn.siteLink}>
+                                    <Img
+                                        eClass="c-logo__image"
+                                        src={svg.logo}
+                                    >
+                                    </Img>
+                                </Link>
+
+                                <Link
+                                    class="c-menu__link"
+                                    href="/contacts/"
+                                    onclick={(e) => {
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.contacts, items: fn.itemsMenu.onlyPage({ url: '/contacts/' })
+                                        })
+                                    }}>
+                                    {Variable.lang.a.contacts}
+                                </Link>
+
+                                <Link
+                                    class="c-menu__link"
+                                    href="/about/"
+                                    onclick={(e) => {
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.about, items: fn.itemsMenu.onlyPage({ url: '/about/' })
+                                        })
+                                    }}>
+                                    {Variable.lang.a.about}
+                                </Link>
+
+                                <Link
+                                    class="c-menu__link"
+                                    href="/blog/"
+                                    onclick={(e) => {
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.blog, items: fn.itemsMenu.onlyPage({ url: '/blog/' })
+                                        })
+                                    }}>
+                                    {Variable.lang.a.blog}
+                                </Link>
                             </nav>
                         </div>
                     </div>
