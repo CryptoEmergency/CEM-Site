@@ -47,14 +47,13 @@ const mainHeader = async function () {
                                                 <Row style="display: flex; align-items: center">
                                                     <Link
                                                         class="log-in"
-
                                                         onclick={(e) => {
                                                             e.stopPropagation();
                                                             fn.modals.ModalAuth({})
-                                                        }}>
+                                                        }}
+                                                    >
                                                         {Variable.lang.button.login}
                                                     </Link>
-
                                                     <Button
                                                         class="c-button c-button--gradient"
                                                         text={Variable.lang.button.registration}
@@ -62,8 +61,8 @@ const mainHeader = async function () {
                                                         onclick={(e) => {
                                                             e.stopPropagation();
                                                             fn.modals.ModalReg({})
-                                                        }}>
-
+                                                        }}
+                                                    >
                                                     </Button>
                                                 </Row>
                                             )
