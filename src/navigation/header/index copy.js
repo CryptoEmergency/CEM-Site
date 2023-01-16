@@ -9,7 +9,7 @@ import {
 import svg from "@assets/svg/index.js"
 import { fn } from '@src/functions/index.js';
 import { Avatar } from '@component/element/index.js';
-import { TextInSpan } from '@htmlElements/index.js'
+
 const mainHeader = async function () {
 
     load({
@@ -20,16 +20,7 @@ const mainHeader = async function () {
                     <div class="c-header__container c-container">
                         <div class="c-header__inner">
                             <div class="c-header__auth">
-
-
-                                <TextInSpan
-                                    mainClass={["selectlink", "selectlink-control"]}
-                                    text={Variable.lang.lang_orig}
-                                    onclick={() => {
-                                        fn.modals.ModalLanguageSite({})
-                                    }}
-                                />
-                                {/* <div
+                                <div
                                     class="language"
                                     onclick={() => {
                                         fn.modals.ModalLanguageSite({})
@@ -39,7 +30,7 @@ const mainHeader = async function () {
                                     <div class="selectlink">
                                         <div class="selectlink-control"><span>{Variable.lang.lang_orig}</span></div>
                                     </div>
-                                </div> */}
+                                </div>
                                 {
                                     () => {
                                         if (Variable.auth && Variable.myInfo) {

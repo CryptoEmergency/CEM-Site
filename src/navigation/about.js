@@ -16,9 +16,6 @@ const start = function (data, ID) {
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
               <h2 class="c-whowe__title"
-                ondblclick={() => {
-                  console.log('=958425=', "dsfdf")
-                }}
               >
                 {Variable.lang.h.who_are_we}
               </h2>

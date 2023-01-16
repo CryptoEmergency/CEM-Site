@@ -32,8 +32,8 @@ const mainModal = async function () {
             document.getElementById('backdrop').classList.add("c-backdrop--show");
             let ID = "Modal-" + (Variable.Modals.length - 1)
             let InitList = getInitList()
-            if (!reload && InitList[ID].firstStart) {
-                await InitList[ID].firstStart(reload)
+            if (!reload && InitList[ID].fnLoad) {
+                await InitList[ID].fnLoad(reload)
             }
             let replase = !reload
             if (Variable.Modals.length > 1) {
@@ -43,7 +43,7 @@ const mainModal = async function () {
             // let arrReturn = [
             //     <div replace={replase}>
             //         {async () => {
-            //             return await InitList[ID].function(reload)
+            //             return await InitList[ID].fn(reload)
             //         }}
             //     </div>
             // ]
@@ -57,7 +57,7 @@ const mainModal = async function () {
 
                     <div>
                         {async () => {
-                            return await InitList[ID].function(rel)
+                            return await InitList[ID].fn(rel)
                         }}
                     </div>
                 )
@@ -71,7 +71,7 @@ const mainModal = async function () {
             return (
                 <div replace={replase}>
                     {async () => {
-                        return await getInitList()[ID].function(reload)
+                        return await getInitList()[ID].fn(reload)
                     }}
                 </div>
             )

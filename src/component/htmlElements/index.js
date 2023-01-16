@@ -1,0 +1,1 @@
+export { TextInSpan } from './Text/TextInSpan.js';
