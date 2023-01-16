@@ -23,6 +23,8 @@ export { Swiper } from "./Swiper.js";
 export { GroupImage } from './GroupImage.js';
 
 export { LazyImage } from "./LazyImage.js";
+// Масштабируемый контент Fancybox
+export { Panzoom } from "./Panzoom.js"
 
 
 

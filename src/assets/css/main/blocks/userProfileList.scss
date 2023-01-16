@@ -500,7 +500,7 @@
 
     .user_post_statistic,
     .post_audio_container,
-    .comment_body>*:not(.swiper-post_media_image_container):not(.swiper-container):not(.video_container):not(.swiper-cube):not(.swiper) {
+    .comment_body>*:not(.swiper-post_media_image_container):not(.swiper-container):not(.video_container):not(.swiper-cube):not(.swiper):not([class^="panzoom"]) {
         padding-left: 20px;
         padding-right: 20px;
         margin-left: 0;

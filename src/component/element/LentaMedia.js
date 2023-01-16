@@ -3,7 +3,7 @@ import {
   jsxFrag
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
-import { AudioPlayer, Swiper, VideoPlayer, LazyImage } from "@component/element/index.js";
+import { AudioPlayer, Swiper, VideoPlayer, LazyImage, Panzoom } from "@component/element/index.js";
 
 
 const makeSwiperOptions = function (Static, index) {
@@ -30,13 +30,13 @@ const makeSwiperOptions = function (Static, index) {
   };
 
   // if (typeof index != "undefined") {
-    swiperOptions.on = {
-      slideChange: function () {
-        // console.log('swiper slide change ***');
-        // console.log('=8d7c32=', index, Static.elNumberSwiper[index])
-        Static.elNumberSwiper[index].innerText = this.activeIndex + 1
-      }
+  swiperOptions.on = {
+    slideChange: function () {
+      // console.log('swiper slide change ***');
+      // console.log('=8d7c32=', index, Static.elNumberSwiper[index])
+      Static.elNumberSwiper[index].innerText = this.activeIndex + 1
     }
+  }
   // }
 
   return swiperOptions
@@ -54,7 +54,8 @@ const LentaMedia = function ({ Static, items, path, changeToogle, index }) {
       // <div class="swiper-post_media_image_container">
       //   <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} />
       // </div>
-      <LazyImage className="swiper-post_media_image_container" path={`/assets/upload/${path}/` + ArrWithImage[0].name} />
+      // <LazyImage className="swiper-post_media_image_container" path={`/assets/upload/${path}/` + ArrWithImage[0].name} />
+      <Panzoom path={`/assets/upload/${path}/` + ArrWithImage[0].name} panzoomElem={{}} index={index} />
     )
   }
 
