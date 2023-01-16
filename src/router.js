@@ -10,11 +10,15 @@ import list from "@src/lists/routerList.js";
 
 const mainBlock = async function () {
 
-
     init(
         () => {
             timersClear();
-            timersStart("TikTok", fn.timerTik, 1500)
+            timersStart({
+                name: "TikTok",
+                fn: fn.timerTik,
+                msecond: 1500
+            })
+            // timersStart("TikTok", fn.timerTik, 1500)
         },
         async (reload, ID, url, data) => {
             try {

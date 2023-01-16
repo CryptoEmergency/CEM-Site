@@ -1,10 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
     Variable,
-    getValue,
     init
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
@@ -19,13 +16,14 @@ const ModalReset = function ({ lang, changeCode, abbr, codeTitle, wayReset, chan
     //const showStepReset = getValue(ID, "toggleStepReset");
     const showModalReset = function (e) {
         e.stopPropagation()
-        let show = getValue("modals", "resetModalShow");
+        let show = false
+        // let show = getValue("modals", "resetModalShow");
         if (show) {
-            setValue("modals", 'toggleStepReset', "1");
+            // setValue("modals", 'toggleStepReset', "1");
         }
-        setValue("modals", "resetModalShow", !getValue("modals", "resetModalShow"))
+        // setValue("modals", "resetModalShow", !getValue("modals", "resetModalShow"))
     };
-    
+
     let Static = {}
     Static.phone = {
         value: "",
@@ -47,22 +45,24 @@ const ModalReset = function ({ lang, changeCode, abbr, codeTitle, wayReset, chan
     let close = true
     init(
         null,
-        ()=>{
+        () => {
             return (
-                <div class="c-modal c-modal--open" id="ModalReset" onclick={function(e){ if(close){ 
-  
-                    fn.modals.close(ID)
-                    }}}>
-                    <section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
-    
-         }}
-         onmouseleave={function(){
-           
-          close = true
-      
-           }}>
+                <div class="c-modal c-modal--open" id="ModalReset" onclick={function (e) {
+                    if (close) {
+
+                        fn.modals.close(ID)
+                    }
+                }}>
+                    <section class="c-modal__dialog" onmouseover={function () {
+
+                        close = false
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{`${showStepReset == "1" ? lang.h.modal_reset : lang.h.modal_resetСonfirm}`}</h2>
                             <button
@@ -108,7 +108,7 @@ const ModalReset = function ({ lang, changeCode, abbr, codeTitle, wayReset, chan
                                                 <label for="resetByEmailInput">{lang.label.phone}</label>
                                                 <div class="error-div"></div>
                                                 <div class="reset_by_mobile_block_container  c-phonecode">
-        
+
                                                     <PhoneCode lang={lang} changeCode={changeCode} abbr={abbr} codeTitle={codeTitle} ID={ID} />
                                                     <Input classDiv="" Static={Static.phone} />
                                                     {/*<input
@@ -120,7 +120,7 @@ const ModalReset = function ({ lang, changeCode, abbr, codeTitle, wayReset, chan
                                                         placeholder="9990000000"
                                                         data-co={abbr}
                                                         />*/}
-        
+
                                                     <input id="phone_prefix3" type="hidden" name="__phone_prefix" value={codeTitle} />
                                                 </div>
                                             </div>
@@ -180,7 +180,7 @@ const ModalReset = function ({ lang, changeCode, abbr, codeTitle, wayReset, chan
                                 </div>
                             </div>
                         </div >
-        
+
                         <footer class="c-modal__footer">
                             {/* <button class="c-button c-button--gradient2 c-button--inactive" type="button">
                                 <span class="c-button__text">

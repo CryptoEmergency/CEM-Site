@@ -56,7 +56,7 @@ const makeFilterSort = function (Static) {
 }
 
 const BlockQuestions = async function ({ Static, limit = 21 }) {
- 
+
   await initOne(async () => {
     Static.quest = {
       value: "",
@@ -72,12 +72,12 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
     Static.apiFilterSort = makeFilterSort(Static)
     await fn.restApi.getQuestions({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, sort: Static.apiFilterSort, limit })
   });
-//console.log(Variable[Static.nameRecords])
+  //console.log(Variable[Static.nameRecords])
   return (
     <div class="c-questions">
       <div class="c-questions__header">
         {
-          Variable.Static.DataUrl.adress == "question"
+          Variable.DataUrl.adress == "question"
             ?
             <div>
               <h4>{Variable.lang.h.lastQuestions}</h4>
@@ -115,7 +115,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
           <div
             class="mobile_search_container"
             onclick={() => {
-       
+
               if (Variable.auth) {
                 fn.modals.ModalAskQuestion()
               } else {
@@ -193,13 +193,13 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                         class="c-question__nickname"
                         style="display: block; left: 5px;bottom:5px"
                         href={`/user/${question.author.nickname}`}
-                        onclick={function(e){
-                    
+                        onclick={function (e) {
+
                           if (Variable.myInfo && Variable.myInfo.nickname == question.author.nickname) {
-                         
+
                             fn.siteLink(e)
                           } else {
-                     
+
                             fn.siteLinkModal(this.e, { title: question.author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(question.author) })
                           }
                         }}>
@@ -262,7 +262,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                       class="c-button c-button--outline2 buttonunswer"
                       href={`/question/show/${question._id}`}
                       onclick={(e) => {
-                        fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, items: fn.itemsMenu.question(Static, question)})
+                        fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, items: fn.itemsMenu.question(Static, question) })
                       }}
                     >
                       <div class="c-button__wrapper">

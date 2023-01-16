@@ -2,9 +2,7 @@ import {
     jsx,
     jsxFrag,
     initOne,
-    setValue,
     Variable,
-    getValue,
     initReload,
     sendApi,
     init

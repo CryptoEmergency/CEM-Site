@@ -1,10 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    setAction,
-    setValue,
     Variable,
-    getValue, 
     init
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
@@ -14,31 +11,33 @@ import svg from "@assets/svg/index.js";
 const ModalComingSoon = function (data, ID) {
     let close = true
     // console.log("ModalComingSoon");
-    const commingSoonModalShow = getValue("modals", "commingSoonModalShow")
-
+    // const commingSoonModalShow = getValue("modals", "commingSoonModalShow")
+    const commingSoonModalShow = false
     const showModalCommingSoon = function (e) {
         e.stopPropagation()
-        setValue("modals", "commingSoonModalShow", !getValue("modals", "commingSoonModalShow"))
+        // setValue("modals", "commingSoonModalShow", !getValue("modals", "commingSoonModalShow"))
     }
 
     init(
         null,
-        ()=>{
+        () => {
             return (
-                <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
-  
-                    fn.modals.close(ID)
-                  }}}>
-                    <section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
-    
-         }}
-           onmouseleave={function(){
-           
-           close = true
-      
-           }}>
+                <div class="c-modal c-modal--open" onclick={function (e) {
+                    if (close) {
+
+                        fn.modals.close(ID)
+                    }
+                }}>
+                    <section class="c-modal__dialog" onmouseover={function () {
+
+                        close = false
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">Updating</h2>
                             <button
@@ -63,7 +62,7 @@ const ModalComingSoon = function (data, ID) {
             )
         }, ID
     )
-    
+
 };
 
 
