@@ -373,7 +373,7 @@ fn.getDateFormat = function (data, type) {
   }
 };
 
-fn.siteLink = function (e) {
+fn.siteLink = async function (e) {
   let link
 
   if (typeof e == "string") {
@@ -399,7 +399,7 @@ fn.siteLink = function (e) {
   } else {
 
     history.pushState(null, null, link);
-    parsingUrl()
+    await parsingUrl()
   }
   return
 }
@@ -434,7 +434,8 @@ fn.siteLinkModal = async function (e, data) {
   history.pushState(null, null, link);
   Variable.Modals = []
   // let dataUrl = parsingUrl(link)
-  let dataUrl = parsingUrl(link)
+  let dataUrl = await parsingUrl(link)
+  // console.log('=cab10c=', link, dataUrl)
   await initPage(dataUrl, data);
   return
 }

@@ -18,7 +18,6 @@ import { ItemsMenu } from '@component/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {
-
   let data = Variable.ModalsPage[ID].data
 
   // let mainId = item._id;
@@ -32,7 +31,7 @@ const ModalPage = async function (ID, reload) {
     null,
     true
   )
-  if (!reload && getInitList()[ID].firstStart) {
+  if (!reload && getInitList()[ID] && getInitList()[ID].firstStart) {
     if (Variable.Static.elArrowTop && Variable.Static.elArrowTop.style.display != "none") {
       Variable.Static.elArrowTop.style.display = "none"
       // Variable.Static.elArrowTopLink = null
