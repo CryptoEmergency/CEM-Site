@@ -3,7 +3,8 @@ import {
     jsxFrag,
     Variable,
     init,
-    getInitList
+    getInitList,
+    load
 } from '@betarost/cemserver/cem.js';
 
 import { fn } from '@src/functions/index.js';
@@ -14,13 +15,10 @@ Variable.Static.countModalsPage = 0
 
 
 const mainModal = async function () {
-    init(
-        () => {
-            // console.log("modals", Variable.Modals)
-            //Variable.OutHideWindows = []
-        },
 
-        async function (reload) {
+    load({
+        ID: "modals",
+        fn: async function (reload) {
 
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
@@ -32,8 +30,8 @@ const mainModal = async function () {
             document.getElementById('backdrop').classList.add("c-backdrop--show");
             let ID = "Modal-" + (Variable.Modals.length - 1)
             let InitList = getInitList()
-            if (!reload && InitList[ID].firstStart) {
-                await InitList[ID].firstStart(reload)
+            if (!reload && InitList[ID].fnLoad) {
+                await InitList[ID].fnLoad(reload)
             }
             let replase = !reload
             if (Variable.Modals.length > 1) {
@@ -43,7 +41,7 @@ const mainModal = async function () {
             // let arrReturn = [
             //     <div replace={replase}>
             //         {async () => {
-            //             return await InitList[ID].function(reload)
+            //             return await InitList[ID].fn(reload)
             //         }}
             //     </div>
             // ]
@@ -57,7 +55,7 @@ const mainModal = async function () {
 
                     <div>
                         {async () => {
-                            return await InitList[ID].function(rel)
+                            return await InitList[ID].fn(rel)
                         }}
                     </div>
                 )
@@ -71,7 +69,7 @@ const mainModal = async function () {
             return (
                 <div replace={replase}>
                     {async () => {
-                        return await getInitList()[ID].function(reload)
+                        return await getInitList()[ID].fn(reload)
                     }}
                 </div>
             )
@@ -190,16 +188,16 @@ const mainModal = async function () {
                     }}
                     {/* {mm} */}
                     {/* {() => {
-                        return modals.map(async (item, index) => {
-                            return (
-                                await item.fn(item.data, item.reload, index)
-                            )
-                        })
-                    }} */}
+                    return modals.map(async (item, index) => {
+                        return (
+                            await item.fn(item.data, item.reload, index)
+                        )
+                    })
+                }} */}
                 </div>
             )
         },
-        "modals")
+    })
     return
 };
 

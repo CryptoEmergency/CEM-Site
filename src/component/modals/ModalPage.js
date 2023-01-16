@@ -31,12 +31,12 @@ const ModalPage = async function (ID, reload) {
     null,
     true
   )
-  if (!reload && getInitList()[ID] && getInitList()[ID].firstStart) {
+  if (!reload && getInitList()[ID] && getInitList()[ID].fnLoad) {
     if (Variable.Static.elArrowTop && Variable.Static.elArrowTop.style.display != "none") {
       Variable.Static.elArrowTop.style.display = "none"
       // Variable.Static.elArrowTopLink = null
     }
-    await getInitList()[ID].firstStart(reload)
+    await getInitList()[ID].fnLoad(reload)
   }
 
   return (
@@ -132,7 +132,7 @@ const ModalPage = async function (ID, reload) {
 
                 <div class="c-fullnews__itemwrapp" style={data.style ? data.style : ''} >
                   {async () => {
-                    return await getInitList()[ID].function(reload)
+                    return await getInitList()[ID].fn(reload)
                   }}
 
                 </div>

@@ -135,7 +135,7 @@ const start = function (data, ID) {
                   <ToogleItem Static={Static} name="audio" />
                   <ToogleItem Static={Static} name="text" />
                 </div>
-                <div class="userNewsBlock">
+                <div class="userNewsBlock" id="myPanzoom">
                   <div class="bl_one bl_active">
                     <div class="user_news_block">
                       {
@@ -156,7 +156,7 @@ const start = function (data, ID) {
                                   changeToogle={changeToogle}
                                   ElemVisible={Variable[Static.nameRecords].list_records.length < Variable[Static.nameRecords].totalFound && index == (Variable[Static.nameRecords].list_records.length - 5) ?
                                     async () => {
-                                //      console.log('=0c6881=', "Load more")
+                                      //      console.log('=0c6881=', "Load more")
                                       fn.recordsView(item._id, "setPost")
                                       Static.apiFilter = makeFilter(Static)
                                       let response = await await fn.restApi.getPost({ filter: Static.apiFilter, limit: 15, offset: Variable[Static.nameRecords].list_records.length })

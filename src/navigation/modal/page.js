@@ -3,6 +3,7 @@ import {
     jsxFrag,
     Variable,
     init,
+    load
 } from '@betarost/cemserver/cem.js';
 
 import list from "@src/lists/modalsList.js";
@@ -11,14 +12,9 @@ Variable.Static.countModals = 0
 Variable.Static.countModalsPage = 0
 
 const mainModalPage = async function () {
-
-    init(
-        () => {
-            // console.log("modals", Variable.Modals)
-            //Variable.OutHideWindows = []
-        },
-
-        async (reload) => {
+    load({
+        ID: "modalsPage",
+        fn: async (reload) => {
 
             if (!Variable.ModalsPage.length) {
                 document.querySelector('body').style = "";
@@ -42,7 +38,7 @@ const mainModalPage = async function () {
 
 
         },
-        "modalsPage")
+    })
     return
 };
 

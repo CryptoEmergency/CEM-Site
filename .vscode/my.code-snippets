@@ -54,5 +54,17 @@
 			"console.log('=$RANDOM_HEX=',${1:Переменная})"
 		],
 		"description": ""
+	},
+	"Загрузка страницы": {
+		"scope": "javascript,typescript",
+		"prefix": "_initNew",
+		"body": [
+			"load({",
+			"ID,",
+			"fnLoad:()=>{},",
+			"fn:()=>{},",
+			"})"
+		],
+		"description": ""
 	}
 }

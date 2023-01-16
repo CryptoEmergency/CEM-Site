@@ -4,7 +4,7 @@ import {
     init,
     initGo,
     Variable,
-    Helpers
+    load
 } from '@betarost/cemserver/cem.js'
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js"
@@ -28,8 +28,10 @@ const mainFooter = async function () {
         initGo(null, true);
     }
 
-    init(
-        () => {
+
+    load({
+        ID: "mainFooter",
+        fnLoad: () => {
 
             socialIcon = {
                 telegram: false,
@@ -43,7 +45,7 @@ const mainFooter = async function () {
                 "four": false,
             }
         },
-        () => {
+        fn: () => {
 
             return (
                 <div>
@@ -76,12 +78,12 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.one ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" href="/about/" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.about, items: fn.itemsMenu.onlyPage({url: '/about/'})}) }} >
+                                                    <a class="c-footer__link" href="/about/" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.about, items: fn.itemsMenu.onlyPage({ url: '/about/' }) }) }} >
                                                         <span>{Variable.lang.a.about}</span>
                                                     </a>
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.blog,items: fn.itemsMenu.onlyPage({url: '/blog/'})})}} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.career, items: fn.itemsMenu.onlyPage({url: '/career-whith-us/'})}) }} href="/career-whith-us/"><span>{Variable.lang.a.career}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.mediaUs, items: fn.itemsMenu.onlyPage({url: '/media/'})} ) }} href="/media/"><span>{Variable.lang.h.mediaUs}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.blog, items: fn.itemsMenu.onlyPage({ url: '/blog/' }) }) }} href="/blog/"><span>{Variable.lang.a.blog}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.career, items: fn.itemsMenu.onlyPage({ url: '/career-whith-us/' }) }) }} href="/career-whith-us/"><span>{Variable.lang.a.career}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.mediaUs, items: fn.itemsMenu.onlyPage({ url: '/media/' }) }) }} href="/media/"><span>{Variable.lang.h.mediaUs}</span></a>
 
                                                     {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
                                                     <a class="c-footer__link" href="/assets/docs/whitePaperEN.pdf">
@@ -107,8 +109,8 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.two ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.contacts , items: fn.itemsMenu.onlyPage({url: '/contacts/'})}) }} href="/contacts/"><span>{Variable.lang.a.contacts}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.affiliate , items: fn.itemsMenu.onlyPage({url: '/affiliate/'}) }) }} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.contacts, items: fn.itemsMenu.onlyPage({ url: '/contacts/' }) }) }} href="/contacts/"><span>{Variable.lang.a.contacts}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.affiliate, items: fn.itemsMenu.onlyPage({ url: '/affiliate/' }) }) }} href="/affiliate/"><span>{Variable.lang.h.affiliate}</span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,9 +131,9 @@ const mainFooter = async function () {
                                                 style={`${!collapseBodyShow.three ? '' : 'max-height: 200px'}`}
                                             >
                                                 <div class="c-accordion__body">
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.userTerms, items: fn.itemsMenu.onlyPage({url: '/terms-of-service/'}) }) }} href="/terms-of-service/"><span>{Variable.lang.a.userTerms}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.dataPolicy, items: fn.itemsMenu.onlyPage({url: '/data-policy/', downloadurl: (Variable.lang.code == "ru") ? '/assets/docs/policyRU.pdf' : '/assets/docs/policyEN.pdf'}) }) }} href="/data-policy/"><span>{Variable.lang.a.dataPolicy}</span></a>
-                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.cookies, items: fn.itemsMenu.onlyPage({url: '/cookies-policy/'}) }) }} href="/cookies-policy/"><span>{Variable.lang.a.cookies}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.userTerms, items: fn.itemsMenu.onlyPage({ url: '/terms-of-service/' }) }) }} href="/terms-of-service/"><span>{Variable.lang.a.userTerms}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.dataPolicy, items: fn.itemsMenu.onlyPage({ url: '/data-policy/', downloadurl: (Variable.lang.code == "ru") ? '/assets/docs/policyRU.pdf' : '/assets/docs/policyEN.pdf' }) }) }} href="/data-policy/"><span>{Variable.lang.a.dataPolicy}</span></a>
+                                                    <a class="c-footer__link" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.cookies, items: fn.itemsMenu.onlyPage({ url: '/cookies-policy/' }) }) }} href="/cookies-policy/"><span>{Variable.lang.a.cookies}</span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,13 +164,13 @@ const mainFooter = async function () {
                                                 <img src={svg['appstore']} />
                                             </a>
                                             {/* <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" class="c-button__app">
-                                                <img src={svg['googleplay']} />
-                                            </a> */}
+                                            <img src={svg['googleplay']} />
+                                        </a> */}
                                         </div>
                                     </div>
                                     <div class="c-footer__bottom">
                                         <div class="c-footer__copyright">
-                                            ©2020-2022 Crypto Emergency
+                                            ©2020-2023 Crypto Emergency
                                         </div>
                                         <div class="c-footer__socials">
                                             <div class="footer-icon-block c-socialicon">
@@ -326,7 +328,8 @@ const mainFooter = async function () {
                     }}
                 </div>
             )
-        }, "mainFooter")
+        },
+    })
     return
 }
 

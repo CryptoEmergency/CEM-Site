@@ -1,31 +1,28 @@
 import {
     Variable,
-    init,
     timersStart,
     timersClear,
-    sendApi
+    sendApi,
+    load
 } from '@betarost/cemserver/cem.js'
 import { fn } from '@src/functions/index.js';
 import list from "@src/lists/routerList.js";
 
 const mainBlock = async function () {
-
-    init(
-        () => {
+    load({
+        ID: "newPage",
+        fnLoad: () => {
             timersClear();
             timersStart({
                 name: "TikTok",
                 fn: fn.timerTik,
                 msecond: 1500
             })
-            // timersStart("TikTok", fn.timerTik, 1500)
         },
-        async (reload, ID, url, data) => {
+        fn: async ({ reload, ID, url, data }) => {
             try {
                 let dataUrl = Variable.dataUrl
-                if (url) {
-                    dataUrl = url
-                }
+                if (url) { dataUrl = url }
                 Variable.Static.HeaderShow = true;
                 Variable.Static.FooterShow = true;
                 Variable.Static.FooterMenuShow = true;
@@ -82,8 +79,9 @@ const mainBlock = async function () {
             } catch (error) {
                 console.error(error, "route", data, ID, url)
             }
-
-        }, "newPage")
+        }
+    })
     return
 }
+
 export { mainBlock }
