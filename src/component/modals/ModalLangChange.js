@@ -4,7 +4,7 @@ import {
     Variable,
     initReload,
     parsingUrl,
-    initOne, 
+    initOne,
     init
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
@@ -14,7 +14,7 @@ const ModalLangChange = function (data, ID) {
     let close = true
     init(
         null,
-        ()=>{
+        () => {
             return (
                 <div
                     class="c-changelanguage"
@@ -30,11 +30,11 @@ const ModalLangChange = function (data, ID) {
                                     <a
                                         class="c-changelanguage__link"
                                         href={"/" + key + "/" + Variable.dataUrl.adress}
-                                        onclick={function (e) {
+                                        onclick={async function (e) {
                                             e.preventDefault();
                                             Variable.Modals.pop()
                                             history.pushState(null, null, this.href);
-                                            parsingUrl()
+                                            await parsingUrl()
                                         }}
                                     >
                                         <span class="c-changelanguage__text">{Variable.languages[key].lang_orig}</span></a>
@@ -47,7 +47,7 @@ const ModalLangChange = function (data, ID) {
         }, ID
     )
 
-    
+
 };
 
 export default ModalLangChange;

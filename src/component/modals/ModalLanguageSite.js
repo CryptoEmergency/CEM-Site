@@ -18,20 +18,22 @@ const ModalLanguageSite = function (data, ID) {
     },
     () => {
       return (
-        <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
-  
-					fn.modals.close(ID)
-				  }}}>
-          <section class="c-modal__dialog"  onmouseover={function(){
-           
-           close = false
-    
-         }}
-         onmouseleave={function(){
-           
-          close = true
-      
-           }}>
+        <div class="c-modal c-modal--open" onclick={function (e) {
+          if (close) {
+
+            fn.modals.close(ID)
+          }
+        }}>
+          <section class="c-modal__dialog" onmouseover={function () {
+
+            close = false
+
+          }}
+            onmouseleave={function () {
+
+              close = true
+
+            }}>
             <header class="c-modal__header c-modal__header--nopadding">
               <h4 class="c-changelanguage__title">{Variable.lang.h.modal_listLanguage}</h4>
               <button
@@ -50,11 +52,11 @@ const ModalLanguageSite = function (data, ID) {
                       <a
                         class="c-changelanguage__link"
                         href={"/" + key + "/" + Variable.dataUrl.adress}
-                        onclick={function (e) {
+                        onclick={async function (e) {
                           e.preventDefault();
                           // elem().hidden = true
                           history.pushState(null, null, this.href);
-                          parsingUrl()
+                          await parsingUrl()
                           // Variable.DelModals("ModalLanguageSite");
                         }}
                       >
