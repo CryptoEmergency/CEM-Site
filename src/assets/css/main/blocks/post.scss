@@ -549,6 +549,12 @@ button[data-type='voiceline'][data-page_type="posts"] {
             }
         }
     }
+
+    .messages {
+        &_settings {
+            right: 3px;
+        }
+    }
 }
 
 .c-mediabtn {

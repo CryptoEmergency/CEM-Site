@@ -12,10 +12,10 @@ import 'cropperjs/dist/cropper.css';
 
 
 
-const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
+const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
 
-    let [Static] = fn.GetParams({ data: { file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
-    // console.log('=ca484b=2', file)
+    let [Static] = fn.GetParams({ data: { original, file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
+    // console.log('=ca484b=2', Static)
 
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
@@ -33,6 +33,14 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
         }
 
         if (aspectActive) {
+            Static.classAspectContainer = aspectActive == 1
+                ? "one"
+                : aspectActive == 0.8
+                    ? "two"
+                    : aspectActive == 1.7777777777777777
+                        ? "three"
+                        : null
+
             cropper = new Cropper(el, {
                 //**1 */
                 // aspectRatio: aspectActive,
@@ -67,9 +75,11 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                 modal: false,
                 guides: false,
                 highlight: true,
-                cropBoxMovable: true,
+                cropBoxMovable: false,
                 cropBoxResizable: false,
                 toggleDragModeOnDblclick: false,
+                center: false,
+                responsive: true,
 
                 crop: function (e) {
                     var data = e.detail;
@@ -86,6 +96,7 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                 highlight: true,
                 cropBoxMovable: true,
                 cropBoxResizable: true,
+                cropBoxDraggble: true,
                 toggleDragModeOnDblclick: false,
 
                 crop: function (e) {
@@ -93,33 +104,61 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                 }
             });
         }
+
+        Static.elCropBox.classList.contains("one")
+            ? Static.elCropBox.classList.remove("one")
+            : Static.elCropBox.classList.contains("two")
+                ? Static.elCropBox.classList.remove("two")
+                : Static.elCropBox.classList.contains("three")
+                    ? Static.elCropBox.classList.remove("three")
+                    : null
+        Static.elCropBox.style = "";
+        Static.elCropBox.classList.add(Static.classAspectContainer)
+        let widthImg = Static.elCropBox.offsetWidth;
+        let heightImg = aspectActive == 1
+            ? 1
+            : aspectActive == 0.8
+                ? 1.25
+                : aspectActive == 1.7777777777777777
+                    ? 0.5625
+                    : 1
+        Static.elCropBox.style = `width: ${widthImg}px; height: calc(${widthImg}px * ${heightImg})`
     }
 
 
     init(() => {
 
+        if (aspectSelect) {
+            aspectActive = Static.aspectSelect
+        } else {
+            if (typeUpload == "bg") {
+                aspectActive = 4
+            } else if (typeUpload == "avatar") {
+                aspectActive = 1
+            } else if (typeUpload == "chat") {
+                aspectActive = null
+            } else {
+                aspectActive = 1.7777777777777777
+            }
+
+            Static.classAspectContainer = aspectActive == 1
+                ? "one"
+                : aspectActive == 0.8
+                    ? "two"
+                    : aspectActive == 1.7777777777777777
+                        ? "three"
+                        : null
+            // console.log('=c98352=', Static.classAspectContainer, aspectActive)
+        }
     },
         () => {
 
-
             cropper = null
-            if (aspectSelect) {
-                aspectActive = Static.aspectSelect
-            } else {
-                if (typeUpload == "bg") {
-                    aspectActive = 4
-                } else if (typeUpload == "avatar") {
-                    aspectActive = 1
-                } else if (typeUpload == "chat") {
-                    aspectActive = null
-                } else {
-                    aspectActive = 1.7777777777777777
-                }
-            }
 
+            // console.log('=272ba4=', Static.test, Static.classAspectContainer)
             return (
                 <div class="c-modal c-modal--open" id="addCropImage">
-                    <section class="c-modal__dialog c-modal__dialog--lg">
+                    <section class="c-modal__dialog c-modal__dialog--lg1">
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_cropImage}</h2>
                         </header>
@@ -133,15 +172,19 @@ const ModalCropImage = function ({ file, typeUpload, arrMedia, aspectSelect, upl
                                 ]}
                             // style="addCropImage"
                             >
-                                {//file.map(function(file){return(
 
-
-                                    <div class="c-cropper__row row">
-                                        <div class="c-cropper__wrapimage img-container">
-                                            <img width="100%" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={aspectActive ? URL.createObjectURL(file) : file} After={cropperGo} ref={elemImg} />
-                                        </div>
-                                    </div> //) })
-                                }
+                                <div class="c-cropper__row row">
+                                    <div class={[
+                                        "c-cropper__wrapimage",
+                                        "img-container",
+                                        aspectActive == 1 ? "one" : aspectActive == 0.8 ? "two" : aspectActive == 1.7777777777777777 ? "three" : null,
+                                        Static.classAspectContainer ? Static.classAspectContainer : null
+                                    ]}
+                                        Element={($el) => { Static.elCropBox = $el }}
+                                    >
+                                        <img width="600" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={!original ? aspectActive ? URL.createObjectURL(file) : file : original.getAttribute("src")} After={cropperGo} ref={elemImg} />
+                                    </div>
+                                </div>
                                 {() => {
                                     if (typeUpload == "bg") {
                                         return (

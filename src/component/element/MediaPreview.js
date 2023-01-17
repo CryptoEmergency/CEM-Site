@@ -7,7 +7,7 @@ import { fn } from '@src/functions/index.js';
 
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
- // console.log("============on load",Static,"=======item",item)
+  // console.log("============on load",Static,"=======item",item)
 
 
   if (item.type == "audio") {
@@ -61,9 +61,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 null
             }
             {
-             
-           //   ((type == "chat" || type == "posts") && !Static.photo) && item.size === undefined
-           (type == "posts")
+
+              //   ((type == "chat" || type == "posts") && !Static.photo) && item.size === undefined
+              (type == "posts")
                 ?
                 <div
                   class="messages_settings"
@@ -78,7 +78,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           e.stopPropagation();
                           e.preventDefault();
                           fn.modals.ModalCropImage({
-                            file: `/assets/upload/${type}/${item.name}`,
+                            original: Static.originalImage,
+                            // file: `/assets/upload/${type}/${item.name}`,
+                            file: {},
                             typeUpload: 'posts',
                             arrMedia: Static.mediaInputs.value,
                             aspectSelect: null,
@@ -87,6 +89,24 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                               return;
                             }
                           })
+                        }
+                      },
+                      {
+                        text: Variable.lang.select.delete,
+                        type: "delete",
+                        color: "red",
+                        onclick: function (e) {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          Static.mediaInputs.value.splice(index, 1);
+                          if (Static.mediaInputs.value.length == 0) {
+                            Static.mediaInputs.selectAspect = null;
+                            Static.mediaInputs.show = false
+                            if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                              Static.isValid = false;
+                            }
+                          }
+                          initReload();
                         }
                       },
                     ]
@@ -103,29 +123,31 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
             {
               item.size === undefined
                 ?
-                <div
-                  class="delete_post_media"
-                  style="display: block;"
-                  onClick={() => {
-          
-                    Static.mediaInputs.value.splice(index, 1);
-                    if (Static.mediaInputs.value.length == 0) {
-                      Static.mediaInputs.selectAspect = null;
-                      Static.mediaInputs.show = false
-                      if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
-                        Static.isValid = false;
+                type != "posts"
+                  ? <div
+                    class="delete_post_media"
+                    style="display: block;"
+                    onClick={() => {
+
+                      Static.mediaInputs.value.splice(index, 1);
+                      if (Static.mediaInputs.value.length == 0) {
+                        Static.mediaInputs.selectAspect = null;
+                        Static.mediaInputs.show = false
+                        if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                          Static.isValid = false;
+                        }
                       }
-                    }
-                    initReload();
-                  }}
-                >
-                  <img src={svg["delete_icon"]} />
-                </div>
+                      initReload();
+                    }}
+                  >
+                    <img src={svg["delete_icon"]} />
+                  </div>
+                  : null
                 :
                 <div
                   class="stop_loading"
                   onclick={() => {
-                //    console.log(2)
+                    //    console.log(2)
                     Static.mediaInputs.value[index].upload =
                       Static.mediaInputs.value[index].size;
                     Static.mediaInputs.value.splice(index, 1);
@@ -196,7 +218,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-                  //  console.log(3)
+                    //  console.log(3)
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;
@@ -278,7 +300,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   class="delete_post_media"
                   style="display: block;"
                   onClick={() => {
-                  //  console.log(4)
+                    //  console.log(4)
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                       Static.isValid = false;
