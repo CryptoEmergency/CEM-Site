@@ -217,6 +217,10 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
         "languages.code": Variable.lang.code != "ru" ? "en" : "ru"
     }
 
+    if(filter._id){
+        defaultFilter = {}
+    }
+
     let defaultSelect = {
         title: 1,
         preview: 1,
@@ -426,6 +430,10 @@ restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, 
 
     let defaultFilter = {
         "languages.code": Variable.lang.code
+    }
+
+    if(filter._id){
+        defaultFilter = {}
     }
 
     let defaultSelect = {

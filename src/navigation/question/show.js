@@ -72,8 +72,8 @@ const start = function (data, ID) {
                   <div ElemVisible={() => {
                     fn.recordsView(item._id, "setQuestions")
                   }}>
-                    <p class="question_title">{fn.clearText(item.title)}</p>
-                    <div class="question_text"> {fn.clearText(item.text)}</div>
+                    <p class="question_title">{fn.editText(item.title, {paragraph: true, clear: true, html: true})}</p>
+                    <div class="question_text">{fn.editText(item.text, {paragraph: true, clear: true, html: true})}</div>
                   </div>
                   :
                   <div>
@@ -177,7 +177,7 @@ const start = function (data, ID) {
                               dateShow={item.showDate}
                             />
                             <div class="comment_body">
-                              <span class="comment_text">{fn.clearText(item.text)}</span>
+                              <span class="comment_text">{fn.editText(item.text, {paragraph: true, clear: true, html: true})}</span>
                               <LentaMedia Static={Static} items={item.media} path="answers" />
                               {
                                 Variable.auth

@@ -2,8 +2,8 @@ import { ServerInit, ServerBuild, ServerStart } from '@betarost/cemserver'
 import path from 'path'
 
 const port = 80
-const target = "crypto-emergency.com"
-// const target = "idns.work"
+// const target = "crypto-emergency.com"
+const target = "idns.work"
 const mode = "development"
 // const mode = "production"
 

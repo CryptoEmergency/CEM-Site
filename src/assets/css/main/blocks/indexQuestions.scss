@@ -673,44 +673,44 @@
 
         .question-block {
 
-            &:nth-child(5),
-            &:nth-child(6) {
-                @media(max-width: 1024px) {
-                    display: none;
-                }
-            }
+            // &:nth-child(5),
+            // &:nth-child(6) {
+            //     @media(max-width: 1024px) {
+            //         display: none;
+            //     }
+            // }
         }
 
         .new_professional_card {
 
-            &:nth-child(5),
-            &:nth-child(6) {
-                @media(max-width: 1024px) {
-                    display: none;
-                }
-            }
+            // &:nth-child(5),
+            // &:nth-child(6) {
+            //     @media(max-width: 1024px) {
+            //         display: none;
+            //     }
+            // }
         }
     }
 }
 
 .question-block {
 
-    &:nth-child(5),
-    &:nth-child(6) {
-        @media(max-width: 1024px) {
-            display: none;
-        }
-    }
+    //&:nth-child(5),
+    //&:nth-child(6) {
+    //    @media(max-width: 1024px) {
+    //        display: none;
+    //    }
+    //}
 }
 
 .new_professional_card {
 
-    &:nth-child(5),
-    &:nth-child(6) {
-        @media(max-width: 1024px) {
-            display: none;
-        }
-    }
+    // &:nth-child(5),
+    // &:nth-child(6) {
+    //     @media(max-width: 1024px) {
+    //         display: none;
+    //     }
+    // }
 }
 
 .profit_calculator_inputs_container {
