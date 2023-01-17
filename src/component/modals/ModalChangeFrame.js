@@ -26,20 +26,22 @@ const ModalChangeFrame = function ({ author }, ID) {
         },
         () => {
             return (
-                <div class="c-modal c-modal--open" id="addFrame" onclick={function(e){ if(close){ 
-  
-					fn.modals.close(ID)
-				  }}}>
-                    <section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
-    
-         }}
-           onmouseleave={function(){
-           
-           close = true
-      
-           }}>
+                <div class="c-modal c-modal--open" id="addFrame" onclick={function (e) {
+                    if (close) {
+
+                        fn.modals.close(ID)
+                    }
+                }}>
+                    <section class="c-modal__dialog" onmouseover={function () {
+
+                        close = false
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_changeFrame}</h2>
                             <button
@@ -53,6 +55,7 @@ const ModalChangeFrame = function ({ author }, ID) {
                             <div class="frames_list">
                                 {
                                     frames.map((item, index) => {
+                                        console.log('=27c9c2=', author, item, 'chooseFrame')
                                         return (
                                             <Avatar author={author} frame={item} parent={'chooseFrame'} />
                                         )
