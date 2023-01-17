@@ -1,8 +1,26 @@
 import { Variable, Helpers } from "@betarost/cemserver/cem.js";
-import { modals } from "./modals.js"
 import { fn } from '@src/functions/index.js';
+
 const initData = {}
 
+// 2023
+initData.any = function (Static) {
+    Static.elMedia = {}
+    Static.elToogle = {}
+    Static.elShowTextFull = {}
+    Static.elShowTextShort = {}
+    Static.elMedia = {}
+    Static.elShowComment = {}
+    Static.elShowAnswersComment = {}
+    Static.elShowButtonComment = []
+
+    Static.elButtonSubmit = {}
+    Static.commentText = []
+
+    return
+}
+
+// 2022
 const form = {
     language: {
         value: "",

@@ -3,24 +3,26 @@ import {
   jsxFrag,
   Variable,
   init,
-  initReload
+  initReload,
+  load,
+  Data
 } from "@betarost/cemserver/cem.js";
+
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, LentaMedia, Evaluation, ItemsMenu,  ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
+import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
 import { BlockError404 } from '@component/blocks/index.js';
 
+
 const start = function (data, ID) {
+  let [Static, item] = fn.GetParams({ data, ID, initData: "question_show" })
 
-  // console.log("ggg=",data,ID)
-  let [Static, item] = fn.GetParams({ data, ID })
-
-  init(
-    async () => {
-      fn.initData.question_show(Static)
+  load({
+    ID,
+    fnLoad: async () => {
+      // fn.initData.question_show(Static)
       if (!Static.openModals || !item.author) {
         item = await fn.restApi.getQuestions({ filter: { _id: item._id }, firstRecord: true })
-     
       }
 
       if (item.text) {
@@ -35,26 +37,27 @@ const start = function (data, ID) {
           rows: 7
         }
       }
-   
+
     },
-    async () => {
+
+    fn: async () => {
 
       Static.submitClick = false
       Static.secondComment = {
-          rows: 1,
-          adaptive: 4,
-          elShowInput: {},
-          el: {}
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
       }
       Static.mainComment = {
         rows: 1,
         adaptive: 4,
         elShowInput: {},
         el: {}
-    }
-
+      }
 
       if (!item._id) { return (<div><BlockError404 /></div>) }
+
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
@@ -69,8 +72,8 @@ const start = function (data, ID) {
                   <div ElemVisible={() => {
                     fn.recordsView(item._id, "setQuestions")
                   }}>
-                    <p class="question_title">{fn.clearText(item.title)}</p>
-                    <div class="question_text"> {fn.clearText(item.text)}</div>
+                    <p class="question_title">{fn.editText(item.title, {paragraph: true, clear: true, html: true})}</p>
+                    <div class="question_text">{fn.editText(item.text, {paragraph: true, clear: true, html: true})}</div>
                   </div>
                   :
                   <div>
@@ -111,17 +114,22 @@ const start = function (data, ID) {
                     ?
                     <div
                       class="btn-answer"
-                      onclick={() => { fn.modals.ModalAnswer({ item, onClose: async () => { 
-                 
-                        setTimeout(async function () {
-                      
-                        Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id } , limit:6, sort:{showDate:-1}})
-                      
-                        initReload()
-                      }, 700)
-                      return (
-                        <img src={svg['load']} />
-                      )} }) }}>
+                      onclick={() => {
+                        fn.modals.ModalAnswer({
+                          item, onClose: async () => {
+
+                            setTimeout(async function () {
+
+                              Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id }, limit: 6, sort: { showDate: -1 } })
+
+                              initReload()
+                            }, 700)
+                            return (
+                              <img src={svg['load']} />
+                            )
+                          }
+                        })
+                      }}>
                       <a class="btn-gr-answer">
                         <span>{Variable.lang.button.giveAnswer}</span>
                       </a>
@@ -138,23 +146,23 @@ const start = function (data, ID) {
                   () => {
                     setTimeout(async function () {
                       Static.itemAnswer = {}
-                      Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id } , limit:6, sort:{showDate:-1}})
-                    
+                      Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id }, limit: 6, sort: { showDate: -1 } })
+
                       initReload()
                     }, 700)
                     return (
                       <img src={svg['load']} />
                     )
-             
+
                   }
                   :
                   !Static.itemAnswer.list_records.length
                     ?
                     <NotFound />
                     :
-               
-                    Static.itemAnswer.list_records.map(function (item,index) {
-                  
+
+                    Static.itemAnswer.list_records.map(function (item, index) {
+
                       return (
                         <div
                           class={[
@@ -169,7 +177,7 @@ const start = function (data, ID) {
                               dateShow={item.showDate}
                             />
                             <div class="comment_body">
-                              <span class="comment_text">{fn.clearText(item.text)}</span>
+                              <span class="comment_text">{fn.editText(item.text, {paragraph: true, clear: true, html: true})}</span>
                               <LentaMedia Static={Static} items={item.media} path="answers" />
                               {
                                 Variable.auth
@@ -215,8 +223,8 @@ const start = function (data, ID) {
                                   Static={Static}
                                   text={<img class="c-comments__icon" src={svg["send_message"]} />}
                                   className="c-comments__send button-container-preview"
-                                  onclick={async function(e){
-                                  
+                                  onclick={async function (e) {
+
                                     if (!Variable.auth) {
                                       fn.modals.ModalNeedAuth()
                                       return
@@ -241,57 +249,56 @@ const start = function (data, ID) {
                                           Static.elButtonSubmit[index].dataset.show = true
                                           Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
                                         }
-                                        if(typeof Static.elShowAnswersComment[index]!=="undefined")
-                                        {
+                                        if (typeof Static.elShowAnswersComment[index] !== "undefined") {
                                           Static.elShowAnswersComment[index].hidden = false
                                           Static.elShowButtonComment[index].style.display = ""
-                                         
+
                                         }
-                                  
-                                        
+
+
                                         initReload();
                                       }
                                     }
-                        
+
                                   }}
                                 />
                               </div>
-                    
+
                               {
 
-                                  <div 
-                                    class="user_news_top"
-                                    onclick={function () {
-                                      if (Static.elButtonSubmit[index].dataset.show) {
+                                <div
+                                  class="user_news_top"
+                                  onclick={function () {
+                                    if (Static.elButtonSubmit[index].dataset.show) {
 
-                                    Static.elButtonSubmit[index].removeAttribute("data-show")
-                                    Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                    Static.elShowAnswersComment[index].hidden = true
-                                       
-                                      } else {
-                                      
-                                        Static.elButtonSubmit[index].dataset.show = true
-                                        Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                        Static.elShowAnswersComment[index].hidden = false
-                                      }
-                                    }}
+                                      Static.elButtonSubmit[index].removeAttribute("data-show")
+                                      Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                      Static.elShowAnswersComment[index].hidden = true
 
-                                  >
-                              
+                                    } else {
 
-                              {()=>{
-                                let st
-                                  if(item.comments.length >0){
-                                    st = "display:block"
+                                      Static.elButtonSubmit[index].dataset.show = true
+                                      Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                      Static.elShowAnswersComment[index].hidden = false
+                                    }
+                                  }}
 
-                                  }
-                                  else{
-                                    st = "display:none"
-                                  }
-                                   return( <div Element={($el) => { Static.elShowButtonComment[index] = $el;  }} style={st}  class="button-container-comm">
+                                >
+
+
+                                  {() => {
+                                    let st
+                                    if (item.comments.length > 0) {
+                                      st = "display:block"
+
+                                    }
+                                    else {
+                                      st = "display:none"
+                                    }
+                                    return (<div Element={($el) => { Static.elShowButtonComment[index] = $el; }} style={st} class="button-container-comm">
                                       <ButtonSubmit
                                         className="c-button--comm"
-                                       
+
                                         data-show={false}
                                         text={
                                           <span Element={($el) => { Static.elButtonSubmit[index] = $el; }}>
@@ -299,68 +306,71 @@ const start = function (data, ID) {
                                           </span>
                                         }
                                       />
-                                    </div>) }}
-                             
-                                  </div>
-                      
+                                    </div>)
+                                  }}
+
+                                </div>
+
                               }
-                              
+
                               {
-                              
-                                  <div style="padding-left: 0; padding-right: 0" hidden={true} Element={($el) => { Static.elShowAnswersComment[index] = $el; }}>
-                                    <div class="comment_answer">
-                                      {item.comments.map(function (itemComments, i) {
-                                        return (
-                                          <Comment
-                                            Static={Static}
-                                            item={itemComments}
-                                            index={"A-" + String(index) + String(i)}
-                                            mainId={item._id}
-                                            mainItem={item}
-                                            action="Answers"
-                                          />
-                                        )
-                                      })}
-                                    </div>
-                                    {/* <div
-                                      class="c-comments__toggler"
-                                      onClick={function () {
-                                        if (Static.elButtonSubmit[index].dataset.show) {
-                                          Static.elButtonSubmit[index].removeAttribute("data-show")
-                                          Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                          Static.elShowAnswersComment[index].hidden = true
-                                        } else {
-                                          Static.elButtonSubmit[index].dataset.show = true
-                                          Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
-                                          Static.elShowAnswersComment[index].hidden = false
-                                        }
-                                      }}
-                                    >
-                                      <img src={svg.scroll_top} />
-                                    </div> */}
+
+                                <div style="padding-left: 0; padding-right: 0" hidden={true} Element={($el) => { Static.elShowAnswersComment[index] = $el; }}>
+                                  <div class="comment_answer">
+                                    {item.comments.map(function (itemComments, i) {
+                                      return (
+                                        <Comment
+                                          Static={Static}
+                                          item={itemComments}
+                                          index={"A-" + String(index) + String(i)}
+                                          mainId={item._id}
+                                          mainItem={item}
+                                          action="Answers"
+                                        />
+                                      )
+                                    })}
                                   </div>
-                                
+                                  {/* <div
+                                    class="c-comments__toggler"
+                                    onClick={function () {
+                                      if (Static.elButtonSubmit[index].dataset.show) {
+                                        Static.elButtonSubmit[index].removeAttribute("data-show")
+                                        Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.showComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                        Static.elShowAnswersComment[index].hidden = true
+                                      } else {
+                                        Static.elButtonSubmit[index].dataset.show = true
+                                        Static.elButtonSubmit[index].innerHTML = `${Variable.lang.span.hideComments} (<span class="comment_count">${item.statistic.comments}</span>)`;
+                                        Static.elShowAnswersComment[index].hidden = false
+                                      }
+                                    }}
+                                  >
+                                    <img src={svg.scroll_top} />
+                                  </div> */}
+                                </div>
+
                               }
-                            
+
                             </div>
-                            
+
                           </div>
                         </div>
-                        
+
                       )
-                      
-                      i++ })
+
+                      i++
+                    })
 
               }
- 
+
             </div>
-          { /* <ButtonShowMore Static={Static} action="getAnswers" limit={10} />*/}
+            { /* <ButtonShowMore Static={Static} action="getAnswers" limit={10} />*/}
           </div>
-         
+
         </div>
       )
-    }, ID
-  );
+    },
+  })
+  return
 };
+
 export default start;
-// OK

@@ -1,10 +1,12 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    Data
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
+
 
 const BlockError404 = function () {
     return (

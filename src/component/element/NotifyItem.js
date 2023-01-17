@@ -7,7 +7,7 @@ import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 
 const NotifyItem = function ({ data, type }) {
-    
+
     return (
         <div>
             {data.map((item, index) => {
@@ -24,8 +24,9 @@ const NotifyItem = function ({ data, type }) {
                         <div class="notifications_list_item"
                             data-href={`/${item.url}/show/${item.urlId}`}
                             onclick={(e) => {
-                              
+
                                 fn.siteLinkModal(e, { title: Variable.lang.notify[item.notify.name], style: 'background: #1D2029;' })
+                                fn.modals.close(0)
                             }}
                         >
 
@@ -52,6 +53,7 @@ const NotifyItem = function ({ data, type }) {
                                         href={`/user/${item.nickName}`}
                                         onclick={(e) => {
                                             fn.siteLinkModal(e, { title: item.nickName, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(item) })
+                                            fn.modals.close(0)
                                         }}
                                     >{item.nickName}</a></span>
                                     :
@@ -87,6 +89,7 @@ const NotifyItem = function ({ data, type }) {
                                     href={`/user/${item.nickName}`}
                                     onclick={(e) => {
                                         fn.siteLinkModal(e, { title: item.nickName, style: 'background: #1D2029;' })
+                                        fn.modals.close(0)
                                     }}
                                 >{item.nickName}</a></span>
                                 :

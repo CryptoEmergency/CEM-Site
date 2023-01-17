@@ -82,7 +82,6 @@ const ModalNotify = async function (data, ID) {
 		},
 		() => {
 
-			console.log('=60d77f=', notify)
 			return (
 				<div class="c-modal c-modal--open" id="ModalNotify" onclick={function (e) {
 					if (close) {

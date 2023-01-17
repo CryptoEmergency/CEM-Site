@@ -765,7 +765,7 @@ const start = function (data, ID) {
         Static.mediaInputs.selectAspect = null
       }
 
-      console.log(Static.mediaInputs.value)
+      // console.log(Static.mediaInputs.value)
       return (
 
         <div class={[
@@ -886,9 +886,10 @@ const start = function (data, ID) {
                 let imageUrl = URL.createObjectURL(this.files[0]);
                 const originalImage = new Image();
                 originalImage.src = imageUrl;
+                Static.originalImage = originalImage;
 
                 originalImage.addEventListener('load', async function () {
-                  //     console.log('=7a7ecf=',originalImage.height)
+                  // console.log('=7a7ecf=', Static.originalImage)
 
                   if (!Static.mediaInputs.selectAspect) {
                     Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect, originalImage.width, originalImage.height)
@@ -897,6 +898,7 @@ const start = function (data, ID) {
                   // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
                   if (Object.keys(Static.files).length == 1) {
                     fn.modals.ModalCropImage({
+                      original: originalImage,
                       file: Static.files[0],
                       typeUpload: 'posts',
                       arrMedia: Static.mediaInputs.value,

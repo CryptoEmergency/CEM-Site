@@ -1,4 +1,4 @@
-import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi, initGo, initReload } from "@betarost/cemserver/cem.js";
+import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi, initGo, initReload, Data } from "@betarost/cemserver/cem.js";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
 import { apiData } from "./apiData.js"
@@ -6,9 +6,47 @@ import { restApi } from "./restApi.js"
 import { itemsMenu } from "./itemsMenu.js"
 import { web3CEM, web3Action } from "./web3.js"
 
+
 const fn = {}
-fn.modals = modals
+fn.Static = {}
 fn.initData = initData
+
+// 2023 ================
+fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false, initData }) {
+  let item = { _id: Variable.dataUrl.params }
+
+  if (actual) { return [this.Static[ID]] }
+
+  if (!reload || !this.Static[ID]) {
+    this.Static[ID] = {};
+    if (data) {
+      this.Static[ID] = Object.assign(this.Static[ID], data)
+    }
+  }
+
+  if (data) {
+    this.Static[ID].openModals = true
+    if (data.item) {
+      item = data.item
+    } else {
+      item._id = Variable.DataUrl.params
+    }
+  }
+
+  fn.initData.any(this.Static[ID])
+  if (initData && fn.initData[initData]) {
+    fn.initData[initData](this.Static[ID])
+  }
+  Data.Static = this.Static[ID]
+  return [this.Static[ID], item]
+}
+
+
+
+//2022 =======================
+
+fn.modals = modals
+
 fn.apiData = apiData
 fn.restApi = restApi
 fn.itemsMenu = itemsMenu
@@ -23,7 +61,6 @@ fn.test = function () {
 }
 
 fn.clearText = function (data, abt = false) {
-
   if (abt && (!data || data.length == 0)) {
     return ""
   }
@@ -311,29 +348,7 @@ fn.CreateMenuItems = function (data) {
   }
 }
 
-fn.Static = {}
 
-fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false }) {
-  let item = { _id: Variable.dataUrl.params }
-  if (actual) { return [this.Static[ID]] }
-  if (!reload || !this.Static[ID]) {
-    this.Static[ID] = {};
-    if (data) {
-      this.Static[ID] = Object.assign(this.Static[ID], data)
-    }
-  }
-  if (data) {
-    this.Static[ID].openModals = true
-    if (data.item) {
-      item = data.item
-    } else {
-      item._id = Variable.DataUrl.params
-    }
-  }
-
-
-  return [this.Static[ID], item]
-}
 
 
 fn.sliceString = function (str, number = 66) {
