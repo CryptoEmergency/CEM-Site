@@ -7,7 +7,7 @@
     "start": "node index"
   },
   "dependencies": {
-    "@betarost/cemserver": "^1.0.24",
+    "@betarost/cemserver": "^1.0.25",
     "@fancyapps/ui": "^4.0.31",
     "cropperjs": "^1.5.12",
     "moment": "^2.29.4",

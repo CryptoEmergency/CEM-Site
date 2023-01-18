@@ -2557,7 +2557,7 @@ span#procent::after {
   text-decoration: none;
 } */
 .comment_text p {
-  /* margin-bottom: 0px; */
+  min-height: 18px; 
 }
 
 .comment_image {
@@ -4865,7 +4865,7 @@ span#procent::after {
 }
 
 .question_text p {
-  /* height: 24px; */
+  min-height: 24px;
 }
 
 .answer_tags {

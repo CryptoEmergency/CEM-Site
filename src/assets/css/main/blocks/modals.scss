@@ -1579,6 +1579,11 @@
 	.c-button {
 		font-weight: 700;
 	}
+
+	.c-askquestion__textblock [contenteditable="true"] {
+		overflow-y: auto;
+		display: block;
+	}
 }
 
 .c-askquestion {
@@ -3426,6 +3431,11 @@
 
 	.create_post_control_block {
 		margin-bottom: 30px;
+	}
+
+	.create_post_chapter {
+		max-height: 165px;
+		overflow-y: auto;
 	}
 }
 

@@ -2,27 +2,53 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    init
+    init,
+    initReload,
+    sendApi
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { Avatar } from '@component/element/index.js';
 
+let newFrame = null;
 
+const changeFrame = async function (frame) {
+    newFrame = frame.name;
+
+    let data = {
+        value: {
+            "frame.name": newFrame
+        }
+    }
+
+    let tmpRes = await sendApi.create("setUsers", data);
+
+
+    if (tmpRes.status === 'ok') {
+        Variable.DelModals("ModalChangeFrame")
+        initReload()
+    } else {
+        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true);
+
+    }
+    return
+}
 
 const ModalChangeFrame = function ({ author }, ID) {
     let [Static] = fn.GetParams({ data: { author } })
     let close = true
-    // console.log('=7637ad=', author)
+    // console.log('=7637ad=', Static)
     // console.log('=b20eed=', Variable)
 
     let frames = [];
 
     init(
         async () => {
+            Static.frames = []
             let data = await fn.restApi.getFrames({ cache: true, name: "getFrames", filter: {} })
             data.list_records.forEach((frame) => {
-                frames.push(frame);
+                Static.frames.push(frame);
             })
+            Static.activeFrame = Variable.myInfo.frame.name;
         },
         () => {
             return (
@@ -54,15 +80,33 @@ const ModalChangeFrame = function ({ author }, ID) {
                         <div class="c-modal__body">
                             <div class="frames_list">
                                 {
-                                    frames.map((item, index) => {
-                                        console.log('=27c9c2=', author, item, 'chooseFrame')
+                                    Static.frames.map((item, index) => {
                                         return (
-                                            <Avatar author={author} frame={item} parent={'chooseFrame'} />
+                                            <Avatar
+                                                author={author}
+                                                frame={item}
+                                                parent={'chooseFrame'}
+                                                activeFrame={Static.activeFrame}
+                                                toggleActiveFrame={function (newFrameName) {
+                                                    Static.activeFrame = newFrameName
+                                                    initReload()
+                                                }}
+                                            />
                                         )
                                     })
                                 }
                             </div>
-                            <div class="add_avatar_button_container" data-action="sendFrame">
+                            <div
+                                class="add_avatar_button_container"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    let frame = {
+                                        name: Static.activeFrame
+                                    }
+                                    changeFrame(frame)
+                                }}
+                            >
                                 <div class="add_avatar_button">
                                     <span>Выбрать</span>
                                 </div>

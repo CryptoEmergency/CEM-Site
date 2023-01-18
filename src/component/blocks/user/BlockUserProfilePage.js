@@ -18,29 +18,86 @@ let visibleEditWork = false;
 const BlockUserProfilePage = {}
 
 BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
-    // console.log('=8d74d9=', data)
+
+
+    // console.log('=8d74d9=', Static, data)
 
     if (!data || data.profilePage != "lentaFriends") {
         return (<></>)
     }
 
+    initOne(
+        () => {
+            Static.activeView = "list";
+        }
+    )
+
     return (
         <div class="bl_one c-container" id="UserInfoLenta">
             <div class="user_main_block">
                 <div class="user_news">
-                    <div class="user_news_block">
-                        {
-                            data.userInfo._id == Variable.myInfo._id ?
-                                <h2>{Variable.lang.h.posts_my}</h2>
-                                :
-                                <h2>{Variable.lang.h.posts_user}</h2>
-                        }
+                    <div
+                        class={[
+                            "user_news_block",
+                            Static.activeView == "tile" ? "user_news_block--tiles" : null
+                        ]}
+                    >
+                        <div class="user_news_header">
+                            {
+                                data.userInfo._id == Variable.myInfo._id ?
+                                    <h2>{Variable.lang.h.posts_my}</h2>
+                                    :
+                                    <h2>{Variable.lang.h.posts_user}</h2>
+                            }
+
+                            {/* <ul class="user_news_togglersview">
+                                <li
+                                    onclick={function (e) {
+                                        e.stopPropagation();
+                                        Static.activeView = "list"
+                                        initReload();
+                                        console.log('=040e91=', Static.activeView)
+                                    }}
+                                >
+                                    <a
+                                        href=""
+                                        class={[
+                                            "user_news_toggler",
+                                            "user_news_toggler--list",
+                                            Static.activeView == "list" ? "user_news_toggler--active" : null
+                                        ]}
+                                    >Список</a>
+                                </li>
+                                <li
+                                    onclick={function (e) {
+                                        e.stopPropagation();
+                                        Static.activeView = "tile"
+                                        initReload();
+                                        console.log('=040e92=', Static.activeView)
+                                    }}
+                                >
+                                    <a
+                                        href=""
+                                        class={[
+                                            "user_news_toggler",
+                                            "user_news_toggler--tile",
+                                            Static.activeView == "tile" ? "user_news_toggler--active" : null
+                                        ]}
+                                    >Плитка</a>
+                                </li>
+                            </ul> */}
+                        </div>
                         {
                             !Static.activeItems || !Static.activeItems.list_records.length
                                 ?
                                 <NotFound />
                                 :
-                                <div style="width: 100%">
+                                <div
+                                    style="width: 100%"
+                                    class={[
+                                        Static.activeView == "tile" ? "c-tiles" : null
+                                    ]}
+                                >
                                     {Static.activeItems.list_records.map((item) => {
                                         return (
                                             <BlockLentaUsers
@@ -228,7 +285,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    fn.modals.ModalUserInterests({type: 'add', userInfo: {}});
+                                                                    fn.modals.ModalUserInterests({ type: 'add', userInfo: {} });
                                                                 }
                                                             },
                                                             {
@@ -256,8 +313,8 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                         class="editbigblockinfo"
                                                         src={svg['pencil']}
                                                         style={visibleEditInterest ? "display: inline;" : "display: none;"}
-                                                        onclick={ async () => {
-                                                            fn.modals.ModalUserInterests({type: 'edit', userInfo: item});
+                                                        onclick={async () => {
+                                                            fn.modals.ModalUserInterests({ type: 'edit', userInfo: item });
                                                         }}
                                                     />
                                                 </b>
@@ -287,15 +344,15 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    fn.modals.ModalUserAddWork({type: 'add', userInfo: {}});
+                                                                    fn.modals.ModalUserAddWork({ type: 'add', userInfo: {} });
                                                                 }
                                                             },
                                                             {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                   visibleEditWork = true
-                                                                   initReload()
+                                                                    visibleEditWork = true
+                                                                    initReload()
                                                                 }
                                                             }
 
@@ -311,13 +368,13 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                         return (
                                             <div id={item._id} class="work_and_education_block">
                                                 <span>
-                                                    {item.title} 
+                                                    {item.title}
                                                     <img
                                                         class="editworkinfo"
                                                         src={svg['pencil']}
                                                         style={visibleEditWork ? "display: inline;" : "display: none;"}
-                                                        onclick={ async () => {
-                                                            fn.modals.ModalUserAddWork({type: 'edit', userInfo: item});
+                                                        onclick={async () => {
+                                                            fn.modals.ModalUserAddWork({ type: 'edit', userInfo: item });
                                                         }}
                                                     />
                                                 </span>
@@ -349,7 +406,7 @@ BlockUserProfilePage.awards = function (Static, data) {
                 <div class="awards_body">
                     {
                         data.userInfo.awards.map((item, index) => {
-                         
+
                             let icon = item.icon.split(".")[0];
                             return (
                                 <div class="award">
@@ -469,7 +526,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
 }
 
 BlockUserProfilePage.friends = function (Static, data) {
-   // console.log(data,"block friends")
+    // console.log(data,"block friends")
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }

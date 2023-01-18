@@ -58,7 +58,7 @@ const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null }, ID
 
                         }}>
                         <header class="c-modal__header">
-                            <h2 class="c-modal__title">{arrMedia ? Variable.lang.h.modal_viewFile : Variable.lang.h.modal_viewImage}</h2>
+                            <h2 class="c-modal__title">{arrMedia ? Variable.lang.h.modal_viewFile : ''}</h2>
                             <button
                                 class="c-modal__close"
                                 onclick={() => {

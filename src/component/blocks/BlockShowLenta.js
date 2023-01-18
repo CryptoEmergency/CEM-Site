@@ -11,7 +11,7 @@ import { BlockLentaUsers } from '@component/blocks/index.js';
 
 const BlockShowLenta = function ({ Static, item }) {
 
-
+  console.log('=da69dd=', "BlockShowLenta")
   return (
     <div class="user_post_container">
       <div class="userNewsBlock">
@@ -39,9 +39,13 @@ const BlockShowLenta = function ({ Static, item }) {
                     fn.modals.ModalNeedAuth()
                     return
                   }
-                  if (!Static.mainComment.el.value.trim().length) { return }
+                  if (!Static.mainComment.el.value.trim().length) {
+                    Static.submitClick = false
+                    return
+                  }
                   let text = Static.mainComment.el.value.trim()
                   let response = await fn.restApi.setPost.comment({ _id: item._id, text })
+                  Static.submitClick = false
                   if (response.status === "ok") {
                     Static.mainComment.el.value = ""
                     if (Static.mainComment.adaptive) {

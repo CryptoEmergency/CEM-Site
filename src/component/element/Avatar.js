@@ -7,8 +7,6 @@ let visibleSettings, formInputs;
 let inputAvatar = Variable.setRef();
 let inputBg = Variable.setRef();
 
-let newFrame = null;
-
 const sendPhoto = async function (crooper, path) {
   if (!crooper) {
     return
@@ -96,35 +94,13 @@ const sendPhoto = async function (crooper, path) {
   return
 }
 
-const changeFrame = async function (frame) {
-  newFrame = frame.name;
-
-  let data = {
-    value: {
-      "frame.name": newFrame
-    }
-  }
-
-  let tmpRes = await sendApi.create("setUsers", data);
-
-
-  if (tmpRes.status === 'ok') {
-    Variable.DelModals("ModalChangeFrame")
-    initReload()
-  } else {
-    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true);
-
-  }
-  return
-}
-
-const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false, frame = false }) {
+const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false, frame = false, activeFrame = false, toggleActiveFrame = false }) {
 
   let myProfile = false
-  if(Variable.myInfo && Variable.myInfo._id == author._id){
+  if (Variable.myInfo && Variable.myInfo._id == author._id) {
     myProfile = true
   }
-  
+
   initOne(() => {
 
 
@@ -159,12 +135,12 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
       // onclick={Helpers.siteLink}
       onclick={async (e) => {
 
-    //     e.preventDefault();
-    // e.stopPropagation();
-    // return
-        if(myProfile){
+        //     e.preventDefault();
+        // e.stopPropagation();
+        // return
+        if (myProfile) {
           fn.siteLink(e)
-        }else{
+        } else {
           fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(author) })
         }
 
@@ -175,7 +151,8 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
         class={[
           "c-avataricon",
           parent != "big_user_avatar" ? "c-avataricon--micro" : null,
-          frame && frame.name == author.frame.name && author._id === Variable.myInfo._id ? "c-avataricon--active" : null
+          // (frame && frame.name == author.frame.name && author._id === Variable.myInfo._id) ? "c-avataricon--active" : null
+          (activeFrame == frame.name) ? "c-avataricon--active" : null
         ]}
       >
         <img
@@ -189,9 +166,9 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
         />
         {
 
-          
-          // console.log("parent")
+
           // settings && Variable.dataUrl.adress == "user" && parent == "big_user_avatar" ?
+          // settings && parent == "big_user_avatar" ?
           settings && parent == "big_user_avatar" ?
             <img
               class="c-avataricon__frame"
@@ -203,37 +180,61 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                   : svg["profile/frame/default"]
               }
               onClick={(e) => {
-           
                 e.stopPropagation();
                 e.preventDefault();
                 // console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
-                let nameFile = e.target.previousSibling.attributes.src.value.slice(22);
-                fn.modals.ModalViewPhoto({
-                  path: nameFile
-                });
+                if (author.avatar && author.avatar.name) {
+                  let nameFile = e.target.previousSibling.attributes.src.value.slice(22);
+                  fn.modals.ModalViewPhoto({
+                    path: nameFile
+                  });
+                }
               }}
             />
             :
-            <img
-              class={[
-                "c-avataricon__frame",
-              ]}
-              src={
-                frame && parent == "chooseFrame" && author._id === Variable.myInfo._id ?
-                  images[`profile/frame/${frame.name.split(".")[0]}`] ||
-                  images[`profile/frame/${frame.name.split("\n.")[0]}`] ||
-                  svg["profile/frame/default"]
-                  : author.frame && author.frame.name
-                    ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
-                    images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+            toggleActiveFrame ?
+              <img
+                class={[
+                  "c-avataricon__frame",
+                ]}
+                src={
+                  frame && parent == "chooseFrame" && author._id === Variable.myInfo._id ?
+                    images[`profile/frame/${frame.name.split(".")[0]}`] ||
+                    images[`profile/frame/${frame.name.split("\n.")[0]}`] ||
                     svg["profile/frame/default"]
-                    : svg["profile/frame/default"]
-              }
-            />
+                    : author.frame && author.frame.name
+                      ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
+                      images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+                      svg["profile/frame/default"]
+                      : svg["profile/frame/default"]
+                }
+                onClick={function (e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleActiveFrame(frame.name)
+                }}
+              />
+              :
+              <img
+                class={[
+                  "c-avataricon__frame",
+                ]}
+                src={
+                  frame && parent == "chooseFrame" && author._id === Variable.myInfo._id ?
+                    images[`profile/frame/${frame.name.split(".")[0]}`] ||
+                    images[`profile/frame/${frame.name.split("\n.")[0]}`] ||
+                    svg["profile/frame/default"]
+                    : author.frame && author.frame.name
+                      ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
+                      images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+                      svg["profile/frame/default"]
+                      : svg["profile/frame/default"]
+                }
+              />
         }
         {() => {
           // if (settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar") {
-            if (myProfile && settings){
+          if (myProfile && settings) {
             return (
               <div class="user_custimize_settings_container">
                 <div
@@ -259,7 +260,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                         text: Variable.lang.text.changeAvatar,
                         type: "edit",
                         onclick: function (e) {
-                        //  console.log(e)
+                          //  console.log(e)
                           e.stopPropagation();
                           e.preventDefault();
                           inputAvatar().click();
@@ -311,9 +312,9 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                   <img class="" src={svg.settings_avatar} width="20" height="20" />
                   {() => {
 
-                    
+
                     // if (author._id == Variable.myInfo._id) {
-                      if (myProfile){
+                    if (myProfile) {
                       return (
                         <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
                           <p
@@ -425,7 +426,7 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                         </div>
                       )
                     } else {
-                     // console.log("ELSELLLLL")
+                      // console.log("ELSELLLLL")
                       return (
                         <div style={`${visibleSettings ? '' : 'display: none;'}`} class="user_custimize_settings_list">
                           <p class="user_custimize_settings_item share" data-answer-id={author.nickname} data-type="user">{Variable.lang.select.share}</p>

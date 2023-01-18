@@ -808,12 +808,12 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                 onclick: async () => {
                     modals.ModalConfirmAction({
                         action: async () => {
-                            let response = await fn.restApi.setComments.delete({ _id: item._id })
+                            let response = await fn.restApi.setComments.delete({ _id: item._id, action, mainId })
                             Variable.DelModals("ModalConfirmAction")
-                            //     console.log(mainItem)
+                            console.log("fffff", action, mainId)
                             response = await fn.restApi['get' + action]({ filter: { _id: mainId, type: type }, firstRecord: true })
                             Static.item = response
-
+                            // item = response
                             initReload()
                         },
                         text: Variable.lang.p.deleteCommentConfirm,

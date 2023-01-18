@@ -14,12 +14,15 @@ const start = function (data, ID) {
     async () => {
       fn.initData.lenta_users_show(Static)
 
-  if (!Static.openModals || typeof item.text== "undefined") {
-    
+      if (!Static.openModals || typeof item.text == "undefined") {
+
         item = await fn.restApi.getPost({ filter: { _id: item._id }, firstRecord: true })
-     }
+      }
     },
     async () => {
+      if (Static.item) {
+        item = Static.item
+      }
       if (!item._id) { return (<div><BlockError404 /></div>) }
       return (
         <div class="answer_container c-main__body">
