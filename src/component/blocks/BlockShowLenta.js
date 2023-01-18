@@ -35,7 +35,6 @@ const BlockShowLenta = function ({ Static, item }) {
                 text={<img class="c-comments__icon" src={svg["send_message"]} />}
                 className="c-comments__send button-container-preview"
                 onclick={async () => {
-                  console.log('=d415d9=', "sdgsdgsdg")
                   if (!Variable.auth) {
                     fn.modals.ModalNeedAuth()
                     return
