@@ -182,11 +182,13 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
-                let nameFile = e.target.previousSibling.attributes.src.value.slice(22);
-                fn.modals.ModalViewPhoto({
-                  path: nameFile
-                });
+                // console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
+                if (author.avatar && author.avatar.name) {
+                  let nameFile = e.target.previousSibling.attributes.src.value.slice(22);
+                  fn.modals.ModalViewPhoto({
+                    path: nameFile
+                  });
+                }
               }}
             />
             :
