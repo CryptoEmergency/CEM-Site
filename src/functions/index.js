@@ -28,6 +28,7 @@ fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false, initD
     this.Static[ID].openModals = true
     if (data.item) {
       item = data.item
+      this.Static[ID].item = item
     } else {
       item._id = Variable.DataUrl.params
     }
@@ -117,7 +118,7 @@ fn.editText = function (str, filter = {}) {
     out = fn.paragraph(out).trim()
   }
 
-  if (filter.html){
+  if (filter.html) {
     out = fn.findLink(out)
     out = Helpers.stringToHtml(out)
   }
@@ -125,18 +126,18 @@ fn.editText = function (str, filter = {}) {
   return out
 }
 
-fn.findLink = function(str){
+fn.findLink = function (str) {
   let linkRegular = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm
-  if(str.match(linkRegular) != null){
+  if (str.match(linkRegular) != null) {
     str.match(linkRegular).forEach(link => {
       let shortLink = link
-      if(link.length > 30){
+      if (link.length > 30) {
         shortLink = link.slice(0, 27) + '...'
       }
       str = str.replace(link, `<a href="${link}" rel="nofollow noopener" target="_blank">${shortLink}</a>`)
     })
   }
-  
+
   return str
 }
 

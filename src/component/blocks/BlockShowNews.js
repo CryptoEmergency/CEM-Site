@@ -10,14 +10,14 @@ import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/in
 
 
 const BlockShowNews = function ({ Static }) {
-
+  // console.log('=c68f22=', Static)
   return (
     <div>
       <div class="full_news_content"
         ElemVisible={() => {
           fn.recordsView(Static.item._id, "setNews")
         }}>
-      
+
         <h1 class="full_news_name">{Static.item.title}</h1>
         {Static.item.image ? <img class="full_news_image" src={`/assets/upload/news/${Static.item.image}`} /> : null}
         {Static.item.preview ? <p class="full_news_text mrb30">{Static.item.preview}</p> : null}

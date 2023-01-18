@@ -13,9 +13,11 @@ const start = function (data, ID) {
       fn.initData.news_show(Static)
       if (!Static.openModals) {
         item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
+        Static.item = item
       }
     },
     () => {
+      // console.log('=2def43=', Static)
       if (!item._id) { return (<div><BlockError404 /></div>) }
       return (
         <div class="c-main__body">
