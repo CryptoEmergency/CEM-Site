@@ -18,7 +18,7 @@ let visibleEditWork = false;
 const BlockUserProfilePage = {}
 
 BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
-    // console.log('=8d74d9=', data)
+    console.log('=8d74d9=', Static, data)
 
     if (!data || data.profilePage != "lentaFriends") {
         return (<></>)
@@ -228,7 +228,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    fn.modals.ModalUserInterests({type: 'add', userInfo: {}});
+                                                                    fn.modals.ModalUserInterests({ type: 'add', userInfo: {} });
                                                                 }
                                                             },
                                                             {
@@ -256,8 +256,8 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                         class="editbigblockinfo"
                                                         src={svg['pencil']}
                                                         style={visibleEditInterest ? "display: inline;" : "display: none;"}
-                                                        onclick={ async () => {
-                                                            fn.modals.ModalUserInterests({type: 'edit', userInfo: item});
+                                                        onclick={async () => {
+                                                            fn.modals.ModalUserInterests({ type: 'edit', userInfo: item });
                                                         }}
                                                     />
                                                 </b>
@@ -287,15 +287,15 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                 text: Variable.lang.button.add,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                    fn.modals.ModalUserAddWork({type: 'add', userInfo: {}});
+                                                                    fn.modals.ModalUserAddWork({ type: 'add', userInfo: {} });
                                                                 }
                                                             },
                                                             {
                                                                 text: Variable.lang.button.edit,
                                                                 type: "edit",
                                                                 onclick: async () => {
-                                                                   visibleEditWork = true
-                                                                   initReload()
+                                                                    visibleEditWork = true
+                                                                    initReload()
                                                                 }
                                                             }
 
@@ -311,13 +311,13 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                         return (
                                             <div id={item._id} class="work_and_education_block">
                                                 <span>
-                                                    {item.title} 
+                                                    {item.title}
                                                     <img
                                                         class="editworkinfo"
                                                         src={svg['pencil']}
                                                         style={visibleEditWork ? "display: inline;" : "display: none;"}
-                                                        onclick={ async () => {
-                                                            fn.modals.ModalUserAddWork({type: 'edit', userInfo: item});
+                                                        onclick={async () => {
+                                                            fn.modals.ModalUserAddWork({ type: 'edit', userInfo: item });
                                                         }}
                                                     />
                                                 </span>
@@ -349,7 +349,7 @@ BlockUserProfilePage.awards = function (Static, data) {
                 <div class="awards_body">
                     {
                         data.userInfo.awards.map((item, index) => {
-                         
+
                             let icon = item.icon.split(".")[0];
                             return (
                                 <div class="award">
@@ -469,7 +469,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
 }
 
 BlockUserProfilePage.friends = function (Static, data) {
-   // console.log(data,"block friends")
+    // console.log(data,"block friends")
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }
