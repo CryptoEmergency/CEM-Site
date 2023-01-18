@@ -555,6 +555,11 @@ button[data-type='voiceline'][data-page_type="posts"] {
             right: 3px;
         }
     }
+
+    .create_post_chapter {
+        max-height: 165px;
+        overflow-y: auto;
+    }
 }
 
 .c-mediabtn {
