@@ -19,7 +19,7 @@ import {
 
 const start = function (userInfo, ID = "mainBlock") {
     let [Static] = fn.GetParams({ userInfo, ID })
-    console.log('=07dba5=', Static)
+    // console.log('=07dba5=', Static)
     Variable.Static.FooterShow = false
     let profilePage
     Static.activeItems = {}
@@ -34,7 +34,7 @@ const start = function (userInfo, ID = "mainBlock") {
         profilePage = this.dataset.profilepage
         if (profilePage == "lentaFriends") {
             Static.activeItems = await fn.restApi.getPost({ short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all" }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
-            console.log('=2b1496=', activeItems)
+            // console.log('=2b1496=', activeItems)
 
         } else if (profilePage == "questions") {
             Static.activeItems = await fn.restApi.getQuestions({ short: true, cache: false, name: "PageUserProfileQuestions", filter: { author: userInfo._id, }, select: { title: 1, text: 1, showDate: 1, statistic: 1, languages: 1, close: 1, bestId: 1, media: 1, author: 1 }, limit: 10 })
@@ -108,11 +108,12 @@ const start = function (userInfo, ID = "mainBlock") {
                 limit: 20
             });
 
-            if (userInfo && userInfo.nickname == Variable.myInfo.nickname) {
+
+            profilePage = "aboutUser"
+
+            if (userInfo && userInfo.nickname == Variable.myInfo.nickname && Variable.PageUserProfileMyLenta.list_records.length != 0) {
                 profilePage = "lentaFriends";
                 Static.activeItems = Variable.PageUserProfileMyLenta
-            } else {
-                profilePage = "aboutUser"
             }
 
 

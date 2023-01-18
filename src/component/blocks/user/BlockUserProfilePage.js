@@ -18,29 +18,86 @@ let visibleEditWork = false;
 const BlockUserProfilePage = {}
 
 BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
-    console.log('=8d74d9=', Static, data)
+
+
+    // console.log('=8d74d9=', Static, data)
 
     if (!data || data.profilePage != "lentaFriends") {
         return (<></>)
     }
 
+    initOne(
+        () => {
+            Static.activeView = "list";
+        }
+    )
+
     return (
         <div class="bl_one c-container" id="UserInfoLenta">
             <div class="user_main_block">
                 <div class="user_news">
-                    <div class="user_news_block">
-                        {
-                            data.userInfo._id == Variable.myInfo._id ?
-                                <h2>{Variable.lang.h.posts_my}</h2>
-                                :
-                                <h2>{Variable.lang.h.posts_user}</h2>
-                        }
+                    <div
+                        class={[
+                            "user_news_block",
+                            Static.activeView == "tile" ? "user_news_block--tiles" : null
+                        ]}
+                    >
+                        <div class="user_news_header">
+                            {
+                                data.userInfo._id == Variable.myInfo._id ?
+                                    <h2>{Variable.lang.h.posts_my}</h2>
+                                    :
+                                    <h2>{Variable.lang.h.posts_user}</h2>
+                            }
+
+                            {/* <ul class="user_news_togglersview">
+                                <li
+                                    onclick={function (e) {
+                                        e.stopPropagation();
+                                        Static.activeView = "list"
+                                        initReload();
+                                        console.log('=040e91=', Static.activeView)
+                                    }}
+                                >
+                                    <a
+                                        href=""
+                                        class={[
+                                            "user_news_toggler",
+                                            "user_news_toggler--list",
+                                            Static.activeView == "list" ? "user_news_toggler--active" : null
+                                        ]}
+                                    >Список</a>
+                                </li>
+                                <li
+                                    onclick={function (e) {
+                                        e.stopPropagation();
+                                        Static.activeView = "tile"
+                                        initReload();
+                                        console.log('=040e92=', Static.activeView)
+                                    }}
+                                >
+                                    <a
+                                        href=""
+                                        class={[
+                                            "user_news_toggler",
+                                            "user_news_toggler--tile",
+                                            Static.activeView == "tile" ? "user_news_toggler--active" : null
+                                        ]}
+                                    >Плитка</a>
+                                </li>
+                            </ul> */}
+                        </div>
                         {
                             !Static.activeItems || !Static.activeItems.list_records.length
                                 ?
                                 <NotFound />
                                 :
-                                <div style="width: 100%">
+                                <div
+                                    style="width: 100%"
+                                    class={[
+                                        Static.activeView == "tile" ? "c-tiles" : null
+                                    ]}
+                                >
                                     {Static.activeItems.list_records.map((item) => {
                                         return (
                                             <BlockLentaUsers
