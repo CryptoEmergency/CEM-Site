@@ -4865,7 +4865,7 @@ span#procent::after {
 }
 
 .question_text p {
-  /* height: 24px; */
+  height: 24px;
 }
 
 .answer_tags {

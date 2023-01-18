@@ -316,7 +316,7 @@ const ModalAskQuestion = function (data, ID) {
                             contenteditable="true"
                             oninput={function () {
                               Static.close = false
-                              Static.textQuestion.value = this.textContent;
+                              Static.textQuestion.value = this.innerText;
 
                             }}
 
