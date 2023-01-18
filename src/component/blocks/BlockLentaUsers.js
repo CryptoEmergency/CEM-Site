@@ -10,20 +10,20 @@ import { LentaMedia, Evaluation, Avatar, ItemsMenu } from "@component/element/in
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {
   let mediaFiles
 
-  if(item.media){
+  if (item.media) {
     mediaFiles = item.media.filter((item) => {
-    return typeof item == 'object'
-  });
-}
+      return typeof item == 'object'
+    });
+  }
   let text
-if(typeof item.text !=="undefined")
-{
-  text = item.text
-}
-else{
-  text = ""
-}
+  if (typeof item.text !== "undefined") {
+    text = item.text
+  }
+  else {
+    text = ""
+  }
 
+  // console.log('=a3c1e1=', item)
   return (
     <div
       class="c-fullnews__item user_news_item"

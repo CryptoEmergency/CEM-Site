@@ -217,7 +217,7 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
         "languages.code": Variable.lang.code != "ru" ? "en" : "ru"
     }
 
-    if(filter._id){
+    if (filter._id) {
         defaultFilter = {}
     }
 
@@ -251,7 +251,7 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, 
     }
 
     let response = await sendApi.send(data);
-    
+
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
         if (responseCheck.list_records.length) {
@@ -411,7 +411,7 @@ restApi.getQuestions = async function ({ cache, name, limit = 6, offset = 0, fil
         select: Object.assign(defaultSelect, select),
         sort
     }
-   //console.log('QUESTIONS!', data)
+    //console.log('QUESTIONS!', data)
     let response = await sendApi.send(data);
     //console.log('QUESTIONS!', response)
     let responseCheck = checkAnswer(response, name)
@@ -432,7 +432,7 @@ restApi.getPost = async function ({ cache, name, limit = 6, offset = 0, filter, 
         "languages.code": Variable.lang.code
     }
 
-    if(filter._id){
+    if (filter._id) {
         defaultFilter = {}
     }
 
@@ -487,9 +487,9 @@ restApi.getUserRoom = async function ({ cache, name, limit = 6, offset = 0, filt
         sort,
 
     }
-//console.log('=89815b=',data)
+    //console.log('=89815b=',data)
     let response = await sendApi.send(data);
-  //  console.log('=7755d1=',response)
+    //  console.log('=7755d1=',response)
     let responseCheck = checkAnswer(response, name)
     if (firstRecord) {
         if (responseCheck.list_records.length) {
@@ -599,9 +599,9 @@ restApi.setAnswers.delete = async function ({ _id }) {
             active: false
         }
     }
-   // console.log(data)
+    // console.log(data)
     const response = await sendApi.create("setAnswers", data);
-  //  console.log(response)
+    //  console.log(response)
     return checkSetAnswer(response)
 }
 
@@ -614,7 +614,7 @@ restApi.setAnswers.complain = async function ({ _id, complain }) {
     }
     //console.log(data)
     const response = await sendApi.create("setAnswers", data);
-   // console.log(response)
+    // console.log(response)
     return checkSetAnswer(response)
 }
 // Запросы на посты
@@ -715,9 +715,9 @@ restApi.setPost.complain = async function ({ _id, complain }) {
             complain
         }
     }
-  
+
     const response = await sendApi.create("setPost", data);
-  
+
     return checkSetAnswer(response)
 }
 
@@ -729,9 +729,9 @@ restApi.setPost.delete = async function ({ _id }) {
             active: false
         }
     }
-   // console.log(data)
+    // console.log(data)
     const response = await sendApi.create("setPost", data);
-  //  console.log(response)
+    //  console.log(response)
     return checkSetAnswer(response)
 }
 // Запросы  на новости
@@ -799,8 +799,8 @@ restApi.setLottery.join = async function ({ nickname, telegram, twitter, instagr
         }
     }
     const response = await sendApi.create("setLottery", data);
-   // console.log(data)
-   // console.log('response', response)
+    // console.log(data)
+    // console.log('response', response)
     return checkSetAnswer(response, noAlert)
 }
 
@@ -810,9 +810,9 @@ restApi.setUserChats.sendMessage = async function ({ users, text, media, noAlert
     let data = {
         value: { users, message: { text, media } }
     }
-   // console.log('=805a2d=', data)
+    // console.log('=805a2d=', data)
     const response = await sendApi.create("setUserChats", data);
-  //  console.log('=4e499a=', response)
+    //  console.log('=4e499a=', response)
     return checkSetAnswer(response, noAlert)
 }
 
@@ -874,7 +874,7 @@ restApi.setUsers.complain = async function ({ _id, complain }) {
             complain
         }
     }
- 
+
     const response = await sendApi.create("setUsers", data);
 
     return checkSetAnswer(response)
@@ -922,9 +922,9 @@ restApi.setQuestions.complain = async function ({ _id, complain }) {
             complain
         }
     }
-    
+
     const response = await sendApi.create("setQuestion", data);
-   // console.log(response)
+    // console.log(response)
     return checkSetAnswer(response)
 }
 
@@ -971,7 +971,7 @@ restApi.setUserRoom.create = async function ({ status, visible, confirmuser, tit
                 confirmuser: confirmuser,
                 title: title,
                 description: description,
-                category:category,
+                category: category,
                 images: images,
                 category: category
             },
@@ -995,7 +995,7 @@ restApi.setUserRoom.edit = async function ({ _id, status, visible, confirmuser, 
                 confirmuser: confirmuser,
                 title: title,
                 description: description,
-                category:category,
+                category: category,
                 images: images,
             },
             languages: languages,
@@ -1019,7 +1019,7 @@ restApi.setUserRoom.quit = async function ({ _id }) {
     }
 
     const response = await sendApi.create("setUserRoom", data);
-   
+
     return checkSetAnswer(response)
 }
 
@@ -1030,7 +1030,7 @@ restApi.setUserRoom.add = async function ({ _id }) {
     }
 
     const response = await sendApi.create("setUserRoom", data);
-   
+
     return checkSetAnswer(response)
 }
 
@@ -1055,7 +1055,7 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text, _id }) {
 
 
     const response = await sendApi.create("setUserRoom", data);
-   
+
     return checkSetAnswer(response)
 }
 
@@ -1084,12 +1084,14 @@ restApi.setComments.edit = async function ({ _id, text }) {
     return checkSetAnswer(response)
 }
 
-restApi.setComments.delete = async function ({ _id }) {
+restApi.setComments.delete = async function ({ _id, action, mainId }) {
     let data = {
         _id,
         value: {
             active: false
-        }
+        },
+        action,
+        mainId
     }
     const response = await sendApi.create("setComments", data);
     return checkSetAnswer(response)
@@ -1120,37 +1122,36 @@ restApi.userRoomCode = async function ({ id, value }) {
     return checkSetAnswer(response)
 }
 
-restApi.resetPassword = async function(value)
-{
+restApi.resetPassword = async function (value) {
 
     let data = {
         value: { email: value }
     }
- 
+
     const response = await sendApi.create("resetPassword", data);
- 
+
     return checkSetAnswer(response)
 }
 
 
-restApi.setNewPassword = async function(linkOne,linkTwo,password)
-{
+restApi.setNewPassword = async function (linkOne, linkTwo, password) {
 
     let data = {
-        value: { linkOne: linkOne ,
-                linkTwo:linkTwo,
-            password:password}
+        value: {
+            linkOne: linkOne,
+            linkTwo: linkTwo,
+            password: password
+        }
     }
 
     const response = await sendApi.create("resetPassword", data);
- 
+
     return checkSetAnswer(response)
 }
 
-restApi.logOut = async function()
-{
+restApi.logOut = async function () {
 
- 
+
     const response = await sendApi.create("logout");
 
     return checkSetAnswer(response)
