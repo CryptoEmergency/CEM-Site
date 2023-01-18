@@ -188,6 +188,16 @@ const start = function (data, ID) {
                                             :
                                             null
                                     }
+                                    {
+                                        data.community.social.youtube ?
+                                            <li>
+                                                <a href={data.community.social.youtube} class="c-socialcommunity__link c-socialcommunity__link--youtube" target="_blank">
+                                                    <img src={svg["community/youtube"]} />
+                                                </a>
+                                            </li>
+                                            :
+                                            null
+                                    }
                                 </ul>
                             </div>
                             <div class="c-community__tags tags">
@@ -476,18 +486,180 @@ const start = function (data, ID) {
                                         <input type="radio" id="tab1" class="c-tab__radio" name="tab-group" checked />
                                         <label for="tab1" class="c-tab__title">Информация</label>
                                         <section class="c-tab__content">
-                                            Тут вся инфа по сообществу по пунктам:
-                                            - Название
-                                            - Описание
-                                            - Краткое Описание
-                                            - и т.д.
+                                            <div class="c-community__photo">
+                                                <img src={images[`community/${data.community.src}`]} />    {/* {images[`${data.src}`]} */}
+                                            </div>
+                                            <ul class="c-community__characteristics">
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.communityName}:</span>
+                                                    <span class="c-community__value c-community__value--name">{data.community.name}</span>  {/* {data.name} */}
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.shortDescription}:</span>
+                                                    <span class="c-community__value">{data.community.short}</span>
+                                                </li> <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.descriptionCommunity}:</span>
+                                                    <span class="c-community__value">{data.community.description}</span>
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.h.categories}:</span>
+                                                    <span class="c-community__value">
+                                                        {
+                                                            data.community.categories.map((category) => {
+                                                                return (
+                                                                    <span>{category}, </span>
+                                                                )
+                                                            })
+                                                        }
+                                                    </span>
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.creatorCommunity}:</span>
+                                                    <span class="c-community__value">
+                                                        <a href={data.community.creator.href} class="c-community__link">{data.community.creator.title}</a>
+                                                    </span>
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.memberCommunity}:</span>
+                                                    <span class="c-community__value">{data.community.member ? data.community.member : 0} участников</span>
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.language}:</span>
+                                                    <span class="c-community__value">{data.community.language}</span>
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.country}:</span>
+                                                    <span class="c-community__value">{data.community.country}</span>
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.city}:</span>
+                                                    <span class="c-community__value">{data.community.city}</span>
+                                                </li>
+                                                <li class="c-community__line">
+                                                    <span class="c-community__caption">{Variable.lang.text.contactsCommunity}:</span>
+                                                    <span class="c-community__value">
+                                                        {
+                                                            data.community.contacts.phone ?
+                                                                <a href={`tel:${data.community.contacts.phone}`} class="c-community__link">{data.community.contacts.phone}</a>
+                                                                :
+                                                                null
+                                                        }
+                                                        {
+                                                            data.community.contacts.web ?
+                                                                <a href={data.community.contacts.web} target="_blank" class="c-community__link">{data.community.contacts.web}</a>
+                                                                :
+                                                                null
+                                                        }
+
+                                                    </span>
+                                                </li>
+                                            </ul>
                                         </section>
                                         <input type="radio" id="tab2" class="c-tab__radio" name="tab-group" />
                                         <label for="tab2" class="c-tab__title">Сотрудничество</label>
-                                        <section class="c-tab__content">Тут кнопки Присоединиться/Вступить/...</section>
+                                        <section class="c-tab__content">
+                                            <p style="margin-bottom: 50px">Тут кнопки Присоединиться/Вступить/...</p>
+                                            <div class="c-community__actions">
+                                                <a
+                                                    class="c-button c-button--outline2"
+                                                    href=""
+                                                    onclick={(e) => {
+                                                        // fn.siteLinkModal(e, { title: 'Страница сообщества' })
+                                                    }}
+                                                >
+                                                    <div class="c-button__wrapper">
+                                                        {Variable.lang.button.join}
+                                                    </div>
+                                                </a>
+                                                <a
+                                                    class="c-button c-button--outline2"
+                                                    href=""
+                                                    onclick={(e) => {
+                                                        // fn.siteLinkModal(e, { title: 'Страница сообщества' })
+                                                    }}
+                                                >
+                                                    <div class="c-button__wrapper">
+                                                        {Variable.lang.button.pin}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="c-socialcommunity">
+                                                {/* <h5 class="c-socialcommunity__title">{Variable.lang.h.userSocials}</h5> */}
+                                                <ul class="c-socialcommunity__list">
+                                                    {
+                                                        data.community.social.telegram ?
+                                                            <li>
+                                                                <a href={data.community.social.telegram} class="c-socialcommunity__link" target="_blank">
+                                                                    <img src={svg["community/telegram"]} />
+                                                                </a>
+                                                            </li>
+                                                            :
+                                                            null
+                                                    }
+                                                    {
+                                                        data.community.social.twitter ?
+                                                            <li>
+                                                                <a href={data.community.social.twitter} class="c-socialcommunity__link" target="_blank">
+                                                                    <img src={svg["community/twitter"]} />
+                                                                </a>
+                                                            </li>
+                                                            :
+                                                            null
+                                                    }
+                                                    {
+                                                        data.community.social.discord ?
+                                                            <li>
+                                                                <a href={data.community.social.discord} class="c-socialcommunity__link" target="_blank">
+                                                                    <img src={svg["community/discord"]} />
+                                                                </a>
+                                                            </li>
+                                                            :
+                                                            null
+                                                    }
+                                                    {
+                                                        data.community.social.instagram ?
+                                                            <li>
+                                                                <a href={data.community.social.instagram} class="c-socialcommunity__link" target="_blank">
+                                                                    <img src={svg["community/instagram"]} />
+                                                                </a>
+                                                            </li>
+                                                            :
+                                                            null
+                                                    }
+                                                    {
+                                                        data.community.social.youtube ?
+                                                            <li>
+                                                                <a href={data.community.social.youtube} class="c-socialcommunity__link c-socialcommunity__link--youtube" target="_blank">
+                                                                    <img src={svg["community/youtube"]} />
+                                                                </a>
+                                                            </li>
+                                                            :
+                                                            null
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </section>
                                         <input type="radio" id="tab3" class="c-tab__radio" name="tab-group" />
                                         <label for="tab3" class="c-tab__title">Ещё...</label>
-                                        <section class="c-tab__content">Еще какой-то блок информации</section>
+                                        <section class="c-tab__content c-tab__content--galary">
+                                            <div class="c-community__galary">
+                                                <Swiper
+                                                    slide={slidesRecords}
+                                                    options={swiperOptions}
+                                                    className="c-projects__item swiper-slide slide-item"
+                                                    navigation={
+                                                        <div>
+                                                            <div class="swiper-button-prev">
+                                                                <img src={svg.swiper_arrow_left} style="height: 40%;" />
+                                                            </div>
+                                                            <div class="swiper-button-next">
+                                                                <img src={svg.swiper_arrow_right} style="height: 40%;" />
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                />
+                                            </div>
+                                        </section>
                                         {/* <input type="radio" id="tab4" class="c-tab__radio" name="tab-group" />
                                         <label for="tab4" class="c-tab__title">Шифры</label>
                                         <section class="c-tab__content">Четыре</section>
@@ -496,7 +668,7 @@ const start = function (data, ID) {
                                         <section class="c-tab__content">Пять</section> */}
                                     </div>
                                 </div>
-                                <footer class="c-community__footer">
+                                <footer class="c-community__footer" style="display: none">
                                     <ul class="c-community__actions">
                                         {
                                             data.community.actions ?

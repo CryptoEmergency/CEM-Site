@@ -524,6 +524,80 @@ const BlockShowCommunities = async function ({ Static }) {
             <date class="c-communitycard__date" datetime="">31.12.2022</date>
           </footer>
         </li>
+        <li class="c-communitycard">
+          <header class="c-communitycard__header">
+            <div class="c-communitycard__logo">
+              <img class="" src={images["community/cryptometadao/logo"]} width="40" height="" />
+            </div>
+            <h6 class="c-communitycard__name" title="CryptoMetaDao">CryptoMetaDao</h6>
+            {/* Три точки меню */}
+            <ItemsMenu author={Variable.myInfo} items={fn.itemsMenu.community(Static, {})} />
+          </header>
+          <figure class="c-communitycard__body">
+            <img class="c-communitycard__cover" src={images["community/cryptometadao/logo"]} width="" height="" />
+            <figcaption class="c-communitycard__description">
+              <ul class="c-communitycard__tags">
+                <li class="tag_button tag_button_active"><span>DAO</span></li>
+                <li class="tag_button tag_button_active"><span>Crypto</span></li>
+              </ul>
+              <p class="c-communitycard__short">Нам интересен фундаментал, прозрачность, полезность и устойчивое развитие. Мы создаем экосистему «умных денег» и стабильного дохода.</p>
+              <a
+                class="c-button c-button--outline2"
+                href="/communities/community/1"
+                onclick={(e) => {
+                  fn.siteLinkModal(e, {
+                    title: 'Страница сообщества',
+                    custom: 'all',
+                    community: {
+                      src: "cryptometadao/logo",
+                      name: "CryptoMetaDao",
+                      description: "Нам интересен фундаментал, прозрачность, полезность и устойчивое развитие. Мы создаем экосистему «умных денег» и стабильного дохода.",
+                      short: "Нам интересен фундаментал, прозрачность, полезность и устойчивое развитие. Мы создаем экосистему «умных денег» и стабильного дохода.",
+                      categories: [
+                        "сообщество", "инвестиции"
+                      ],
+                      creator: {
+                        title: "",
+                        href: "#"
+                      },
+                      member: 100,
+                      language: "Русский",
+                      country: "Планета Земля)",
+                      city: "Россия)",
+                      contacts: {
+                        phone: "",
+                        web: "https://cryptometa.media/",
+                      },
+                      social: {
+                        telegram: "https://t.me/cryptometamedia",
+                        twitter: "https://www.youtube.com/redirect?event=channel_banner&redir_token=QUFFLUhqbGtjdFpRZkQzdjdleS1mUTB2bVNFdVFkaElwUXxBQ3Jtc0tuV0lweTNLUTVfeVVCdXdsajdiSjVpZ1lhUm9HUnpuQktKcXpCU2h5WFlQOFp0ZVc3eDltVlZjYmFteTl2TEJTZHJBME14WHlLcF9nUktCZUZzbU8zUS1tRlhYSGtWYjJsYU13MmtWcjMzRnlYVEpoYw&q=https%3A%2F%2Ftwitter.com%2Fcryptometamedia",
+                        discord: "https://www.youtube.com/redirect?event=channel_banner&redir_token=QUFFLUhqbC05eXNCMTRWTGx2MDVnVWVleU1nWmJZR1pyUXxBQ3Jtc0treXBrNzh5NDI3RDZuYTFQdG41WEdhV2pqYmtkY3AxbmVzVGtaSmszVmZFNXdNTnVXaDM0WGlVTXFCbTdmNk42S3JJdnlLXzd1NUl5N1JBZk9zcWNzTGViR2c4c1l0bGVfNGs5dE5tdVNQd3NNUXlKYw&q=https%3A%2F%2Fdiscord.gg%2FMAxW3s346G",
+                        instagram: "",
+                        youtube: "https://www.youtube.com/c/CRYPTOMETAMEDIA",
+                      },
+                      galary: [],
+                      events: [
+                        {
+                          title: "Web3 Завтраки",
+                          date: "по четвергам",
+                          place: "в г.Москве"
+                        },
+                      ]
+                    }
+                  })
+                }}
+              >
+                <div class="c-button__wrapper">
+                  {Variable.lang.a.moreDetails}
+                </div>
+              </a>
+            </figcaption>
+          </figure>
+          <footer class="c-communitycard__footer">
+            <span class="c-communitycard__count">100 участников</span>
+            <date class="c-communitycard__date" datetime="">12.01.2022</date>
+          </footer>
+        </li>
       </ul>
     </div>
   )
