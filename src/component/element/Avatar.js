@@ -180,7 +180,6 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
                   : svg["profile/frame/default"]
               }
               onClick={(e) => {
-
                 e.stopPropagation();
                 e.preventDefault();
                 console.log('=6a69b7=', e.target.previousSibling.attributes.src.value)
@@ -191,27 +190,45 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               }}
             />
             :
-            <img
-              class={[
-                "c-avataricon__frame",
-              ]}
-              src={
-                frame && parent == "chooseFrame" && author._id === Variable.myInfo._id ?
-                  images[`profile/frame/${frame.name.split(".")[0]}`] ||
-                  images[`profile/frame/${frame.name.split("\n.")[0]}`] ||
-                  svg["profile/frame/default"]
-                  : author.frame && author.frame.name
-                    ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
-                    images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+            toggleActiveFrame ?
+              <img
+                class={[
+                  "c-avataricon__frame",
+                ]}
+                src={
+                  frame && parent == "chooseFrame" && author._id === Variable.myInfo._id ?
+                    images[`profile/frame/${frame.name.split(".")[0]}`] ||
+                    images[`profile/frame/${frame.name.split("\n.")[0]}`] ||
                     svg["profile/frame/default"]
-                    : svg["profile/frame/default"]
-              }
-              onClick={function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleActiveFrame(frame.name)
-              }}
-            />
+                    : author.frame && author.frame.name
+                      ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
+                      images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+                      svg["profile/frame/default"]
+                      : svg["profile/frame/default"]
+                }
+                onClick={function (e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleActiveFrame(frame.name)
+                }}
+              />
+              :
+              <img
+                class={[
+                  "c-avataricon__frame",
+                ]}
+                src={
+                  frame && parent == "chooseFrame" && author._id === Variable.myInfo._id ?
+                    images[`profile/frame/${frame.name.split(".")[0]}`] ||
+                    images[`profile/frame/${frame.name.split("\n.")[0]}`] ||
+                    svg["profile/frame/default"]
+                    : author.frame && author.frame.name
+                      ? images[`profile/frame/${author.frame.name.split(".")[0]}`] ||
+                      images[`profile/frame/${author.frame.name.split("\n.")[0]}`] ||
+                      svg["profile/frame/default"]
+                      : svg["profile/frame/default"]
+                }
+              />
         }
         {() => {
           // if (settings && Variable.dataUrl.adress == "" || settings && author._id === Variable.myInfo._id && parent == "big_user_avatar") {
