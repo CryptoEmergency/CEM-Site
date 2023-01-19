@@ -8,6 +8,7 @@ import { fn } from '@src/functions/index.js';
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
   // console.log("============on load",Static,"=======item",item)
+  console.log('=c423c3=', Static)
 
 
   if (item.type == "audio") {
@@ -77,13 +78,16 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                         onclick: function (e) {
                           e.stopPropagation();
                           e.preventDefault();
+                          // alert(index)
+                          // alert(item.name)
+                          // alert(Static.originalImage[index])
                           fn.modals.ModalCropImage({
-                            original: Static.originalImage,
-                            // file: `/assets/upload/${type}/${item.name}`,
+                            editable: true,
+                            originalImage: Static.originalImage[index],
                             file: {},
                             typeUpload: 'posts',
                             arrMedia: Static.mediaInputs.value,
-                            aspectSelect: null,
+                            aspectSelect: Static.mediaInputs.value[index].aspect,  //null,
                             uploadCropImage: async function (cropper) {
                               await sendPhotoChat(cropper, index)
                               return;
@@ -99,6 +103,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           e.stopPropagation();
                           e.preventDefault();
                           Static.mediaInputs.value.splice(index, 1);
+                          Static.originalImage.splice(index, 1);
                           if (Static.mediaInputs.value.length == 0) {
                             Static.mediaInputs.selectAspect = null;
                             Static.mediaInputs.show = false

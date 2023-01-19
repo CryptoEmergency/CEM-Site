@@ -515,7 +515,7 @@ const start = function (data, ID) {
         canvas.width = dw;
         canvas.height = dh;
 
-        console.log('=e1d7e3=', height, width)
+        // console.log('=e1d7e3=', height, width)
         await ctx.drawImage(originalImage, sx, sy, sw, sh, dx, dy, dw, dh);
 
 
@@ -881,24 +881,41 @@ const start = function (data, ID) {
 
 
                 Static.files = Object.assign({}, this.files)
-                //   console.log('=09ca68=',Static.files)
+                // console.log('=09ca68=', Static.files)
 
-                let imageUrl = URL.createObjectURL(this.files[0]);
-                const originalImage = new Image();
-                originalImage.src = imageUrl;
-                Static.originalImage = originalImage;
+                Static.originalImage = [];
 
-                originalImage.addEventListener('load', async function () {
-                  // console.log('=7a7ecf=', Static.originalImage)
+                Array.from(this.files).forEach((item, index) => {
+                  //для каждой картинки сохраняем оригинал
+                  let imageUrl = URL.createObjectURL(item);
+                  const originalImage = new Image();
+                  originalImage.src = imageUrl;
+                  Static.originalImage.push(originalImage);
+                })
+
+                // let imageUrl = URL.createObjectURL(this.files[0]);
+                // const originalImage = new Image();
+                // originalImage.src = imageUrl;
+                // Static.originalImage = originalImage;
+                // console.log('=b876c8=', originalImage)
+                // console.log('=b876c8=', Static.originalImage[0])
+
+                Static.originalImage.forEach((item) => {
+                  console.log('=86d15a=', '!!!')
+                })
+
+                Static.originalImage[0].addEventListener('load', async function () {
+                  console.log('=7a7ecf=', Static.originalImage[0])
 
                   if (!Static.mediaInputs.selectAspect) {
-                    Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect, originalImage.width, originalImage.height)
+                    Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect, Static.originalImage[0].width, Static.originalImage[0].height)
                   }
 
                   // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
                   if (Object.keys(Static.files).length == 1) {
+                    // alert("Один")
                     fn.modals.ModalCropImage({
-                      original: originalImage,
+                      originalImage: Static.originalImage[0],
                       file: Static.files[0],
                       typeUpload: 'posts',
                       arrMedia: Static.mediaInputs.value,
@@ -920,6 +937,7 @@ const start = function (data, ID) {
                       }
                     }, ID)
                   } else {
+                    // alert("Много")
                     fn.modals.ModalCropImage({
                       file: Static.files[0],
                       typeUpload: 'posts',
