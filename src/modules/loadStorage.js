@@ -1,5 +1,6 @@
 import {
     getStorage,
+    setStorage,
     Variable
 } from '@betarost/cemserver/cem.js'
 
@@ -21,6 +22,16 @@ const loadStorage = async function () {
 
         Variable.auth = getStorage("auth")
         Variable.myInfo = getStorage("myInfo")
+
+        let timeNow = Math.floor(Date.now() / 1000)
+        let objView = getStorage("recordsView")
+        for (let key in objView) {
+            if (timeNow - objView[key] >= 86400) {
+                console.log('=1245ab=', key)
+                delete objView[key]
+            }
+        }
+        setStorage("recordsView", objView)
 
     } catch (error) {
         console.error(error, "loadStorage")
