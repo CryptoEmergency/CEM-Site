@@ -1,0 +1,153 @@
+.notes {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+
+    @media(max-width: 992px) {
+        width: calc(100% - 20px);
+        padding-bottom: 60px;
+    }
+
+    @media(max-width: 464px) {
+        width: calc(100% - 10px);
+        padding-bottom: 40px;
+    }
+}
+
+.notes h2 {
+    margin: 0;
+    padding-top: 40px;
+    font-size: 32px;
+    line-height: 43px;
+    font-weight: 600;
+
+    @media(max-width: 992px) {
+        padding-top: 35px;
+    }
+
+    @media(max-width: 464px) {
+        padding-top: 30px;
+    }
+}
+
+.notes-content {
+    display: flex;
+    min-height: 600px;
+    margin-top: 20px;
+    background: #2c303e;
+    border-radius: 8px;
+}
+
+.notes-list {
+    width: 300px;
+    border-right: 1px solid #464d62;
+
+    @media(max-width: 992px) {
+        width: 220px;
+    }
+
+    @media(max-width: 599px) {
+        width: 100%;
+        border-right: 0;
+    }
+}
+
+.notes-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 70px;
+    padding: 0;
+    padding-left: 60px;
+    border: 0;
+    background-color: transparent;
+    color: #ffffff;
+    cursor: pointer;
+
+    &:hover {
+        background: #464d62;
+        border-radius: 8px 0 0 0;
+    }
+
+    @media(max-width: 992px) {
+        width: 220px;
+    }
+
+    @media(max-width: 599px) {
+        width: 100%;
+
+        &:hover {
+            border-radius: 8px 8px 0 0;
+        }
+    }
+}
+
+.notes-button::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    height: 20px;
+    width: 20px;
+    background: url('../svg/answer_plus.svg');
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+}
+
+.notes-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+    padding: 14px;
+    border-top: 1px solid #464d62;
+    cursor: pointer;
+
+    &:last-child {
+        border-bottom: 1px solid #464d62;
+    }
+
+    &:hover {
+        background: #464d62;
+    }
+}
+
+.notes-item h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.notes-item span {
+    font-size: 14px;
+    color: #a0a0a0;
+}
+
+.notes-content-wrapper {
+    width: 100%;
+    padding: 30px;
+
+    @media(max-width: 599px) {
+        display: none;
+    }
+}
+
+.notes-input-text {
+    width: 100%;
+    padding: 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    background: transparent;
+    border: 0;
+}
+
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus {
+    border:none;
+    outline:none;
+}
+
+.notes-description {
+    margin-top: 10px;
+    color: #ffffff;
+}

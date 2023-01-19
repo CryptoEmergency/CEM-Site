@@ -76,7 +76,7 @@ const BlockProjects = async function () {
                     "title": Variable.lang.a.questionsAnswers,
                     "icon": "preview_line_questions",
                     "link": "question",
-                    modal: true
+                    modal: false
                 },
                 // {
                 //     "title": Variable.lang.a.exchange,

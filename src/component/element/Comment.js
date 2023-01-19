@@ -9,6 +9,7 @@ import svg from '@assets/svg/index.js';
 import { Avatar, Evaluation, TextArea, ButtonSubmit, ItemsMenu } from "@component/element/index.js";
 
 const Comment = function ({ Static, index, item, include, mainId, action, quoteId, mainItem }) {
+    console.log('=ca7d22=', item)
     return (
         <div class="c-comments__usercomment">
             <Avatar
@@ -95,7 +96,7 @@ const Comment = function ({ Static, index, item, include, mainId, action, quoteI
           mainId={mainId}
           callBack={callBack}
         /> */}
-            <ItemsMenu author={item.author} items={fn.itemsMenu.comment(Static, item, action, index, mainId, mainItem)} />
+                <ItemsMenu author={item.author} items={fn.itemsMenu.comment(Static, item, action, index, mainId, mainItem)} />
             </div>
             <div class="c-comments__form"
                 style="display:none;"

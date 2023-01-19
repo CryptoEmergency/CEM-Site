@@ -24,20 +24,28 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
     text = ""
   }
 
-  if (item.media.length) {
-    console.log('=a3c1e1=', item.media[0])
-  }
+  // if (item.media.length) {
+  //   console.log('=a3c1e1=', item.media[0])
+  // }
 
   return (
     Static.activeView == "tile" ?
-      <a href="" class="c-tiles__item">
+      <a
+        class="c-tiles__item"
+        data-href={"/lenta-users/show/" + item._id}
+        onclick={(e) => {
+          e.stopPropagation();
+          fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, items: fn.itemsMenu.lenta_users(Static, item) })
+        }
+        }
+      >
         <figure class="c-tiles__card">
           {
             item.media.length > 0 ?
               item.media[0].type == "image" ?
                 <img
                   class="c-tiles__image"
-                  src={images[`upload/posts/${item.media[0].name.split('.')[0]}`]}
+                  src={`/assets/upload/posts/${item.media[0].name}`}
                   width="100"
                   height="100"
                 />
@@ -46,15 +54,19 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                   : <AudioPlayer Static={Static} item={item.media[0]} path={`/assets/upload/posts/`} />
               :
               <img
-                class="c-tiles__image"
+                class="c-tiles__image c-tiles__image--base"
                 src={images["user_background_image"]}
                 width="100"
                 height="100"
               />
           }
-          <figcaption class="c-tiles__blind">
-            {fn.editText(item.text, { clear: true, paragraph: true, html: true, notp: true })}
-          </figcaption>
+          {
+            item.media.length == 0 ?
+              <figcaption class="c-tiles__blind">
+                {fn.editText(item.text, { clear: true, paragraph: true, html: true, notp: true })}
+              </figcaption>
+              : null
+          }
         </figure>
       </a>
       :

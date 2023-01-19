@@ -12,10 +12,10 @@ import 'cropperjs/dist/cropper.css';
 
 
 
-const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID) {
+const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMedia, aspectSelect, uploadCropImage, editable = false }, ID) {
 
-    let [Static] = fn.GetParams({ data: { original, file, typeUpload, arrMedia, aspectSelect, uploadCropImage }, ID })
-    // console.log('=ca484b=2', Static)
+    let [Static] = fn.GetParams({ data: { originalImage, file, typeUpload, arrMedia, aspectSelect, uploadCropImage, editable }, ID })
+    // console.log('=ca484b=2', Static.editable, Static.originalImage)
 
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
@@ -24,7 +24,7 @@ const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, 
 
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
-    // console.log('=453e8a=', Static)
+    console.log('=453e8a=', Static, arrMedia.length > 1 && !originalImage)
 
 
     const cropperGo = function (el) {
@@ -127,7 +127,6 @@ const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, 
 
 
     init(() => {
-
         if (aspectSelect) {
             aspectActive = Static.aspectSelect
         } else {
@@ -152,10 +151,9 @@ const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, 
         }
     },
         () => {
-
             cropper = null
 
-            // console.log('=272ba4=', Static.test, Static.classAspectContainer)
+            // console.log('=272ba4=', Static.aspectSelect)
             return (
                 <div class="c-modal c-modal--open" id="addCropImage">
                     <section class="c-modal__dialog c-modal__dialog--lg1">
@@ -182,7 +180,15 @@ const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, 
                                     ]}
                                         Element={($el) => { Static.elCropBox = $el }}
                                     >
-                                        <img width="600" height="300" class="c-cropper__cropimage cropImage" id="cropImage" src={!original ? aspectActive ? URL.createObjectURL(file) : file : original.getAttribute("src")} After={cropperGo} ref={elemImg} />
+                                        <img
+                                            width="600"
+                                            height="300"
+                                            class="c-cropper__cropimage cropImage"
+                                            id="cropImage"
+                                            src={!Static.originalImage ? aspectActive ? URL.createObjectURL(file) : file : Static.originalImage.getAttribute("src")}
+                                            After={cropperGo}
+                                            ref={elemImg}
+                                        />
                                     </div>
                                 </div>
                                 {() => {
@@ -213,7 +219,7 @@ const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, 
                                                         hidden={true}
                                                         id="aspectRatio1"
                                                         checked={aspectActive == 1.7777777777777777}
-                                                        disabled={arrMedia.length && aspectSelect != 1.7777777777777777}
+                                                        disabled={((arrMedia.length > 1 && Static.editable) || (arrMedia.length > 0 && !Static.editable)) && aspectSelect != 1.7777777777777777}
                                                         ref={elemRatio1}
                                                     />
                                                     <label class="c-button c-button--outline"
@@ -234,7 +240,7 @@ const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, 
                                                         hidden={true}
                                                         id="aspectRatio2"
                                                         checked={aspectActive == 0.8}
-                                                        disabled={arrMedia.length && aspectSelect != 0.8}
+                                                        disabled={((arrMedia.length > 1 && Static.editable) || (arrMedia.length > 0 && !Static.editable)) && aspectSelect != 0.8}
                                                         ref={elemRatio2}
                                                     />
                                                     <label class="c-button c-button--outline"
@@ -255,7 +261,7 @@ const ModalCropImage = function ({ original = null, file, typeUpload, arrMedia, 
                                                         hidden={true}
                                                         id="aspectRatio3"
                                                         checked={aspectActive == 1}
-                                                        disabled={arrMedia.length && aspectSelect != 1}
+                                                        disabled={((arrMedia.length > 1 && Static.editable) || (arrMedia.length > 0 && !Static.editable)) && aspectSelect != 1}
                                                         ref={elemRatio3}
                                                     />
                                                     <label class="c-button c-button--outline"

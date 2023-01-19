@@ -28,6 +28,7 @@ fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false, initD
     this.Static[ID].openModals = true
     if (data.item) {
       item = data.item
+      this.Static[ID].item = item
     } else {
       item._id = Variable.DataUrl.params
     }
@@ -74,7 +75,7 @@ fn.paragraph = function (str) {
   // textTag = textTag.replace(new RegExp("\n\n", 'g'), "\n").split("\n");
   //textTag = textTag.replace(new RegExp("(\n){3,}", 'g'), "\n\n").split("\n");
   textTag = textTag.replace(new RegExp("[\r\n]{3,}", 'g'), "\n\n").split("\n");
-  console.log(textTag)
+  // console.log(textTag)
   let res = "";
   for (let item of textTag) {
     res += "<p>" + item + "</p>";
@@ -117,26 +118,26 @@ fn.editText = function (str, filter = {}) {
     out = fn.paragraph(out).trim()
   }
 
-  if (filter.html){
+  if (filter.html) {
     out = fn.findLink(out)
     out = Helpers.stringToHtml(out)
   }
-  console.log(out)
+  // console.log(out)
   return out
 }
 
-fn.findLink = function(str){
+fn.findLink = function (str) {
   let linkRegular = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm
-  if(str.match(linkRegular) != null){
+  if (str.match(linkRegular) != null) {
     str.match(linkRegular).forEach(link => {
       let shortLink = link
-      if(link.length > 30){
+      if (link.length > 30) {
         shortLink = link.slice(0, 27) + '...'
       }
       str = str.replace(link, `<a href="${link}" rel="nofollow noopener" target="_blank">${shortLink}</a>`)
     })
   }
-  
+
   return str
 }
 
@@ -424,7 +425,7 @@ fn.siteLink = async function (e) {
   }
   // console.log('=fc61e3=', link, window.location.href, Variable.dataUrl)
   if (link == window.location.href || link == Variable.dataUrl.href) {
-
+    history.pushState(null, null, link);
     initGo("newPage")
     // window.scrollTo({
     //   top: 0,

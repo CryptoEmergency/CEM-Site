@@ -77,7 +77,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
     <div class="c-questions">
       <div class="c-questions__header">
         {
-          Variable.DataUrl.adress == "question"
+          Variable.DataUrl.adress == "question" && Variable.dataUrl.adress != "index"
             ?
             <div>
               <h4>{Variable.lang.h.lastQuestions}</h4>
@@ -194,12 +194,10 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                         style="display: block; left: 5px;bottom:5px"
                         href={`/user/${question.author.nickname}`}
                         onclick={function (e) {
-
+                          // e.preventDefault();
                           if (Variable.myInfo && Variable.myInfo.nickname == question.author.nickname) {
-
                             fn.siteLink(e)
                           } else {
-
                             fn.siteLinkModal(this.e, { title: question.author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(question.author) })
                           }
                         }}>
