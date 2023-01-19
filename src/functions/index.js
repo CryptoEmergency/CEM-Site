@@ -425,7 +425,7 @@ fn.siteLink = async function (e) {
   }
   // console.log('=fc61e3=', link, window.location.href, Variable.dataUrl)
   if (link == window.location.href || link == Variable.dataUrl.href) {
-
+    history.pushState(null, null, link);
     initGo("newPage")
     // window.scrollTo({
     //   top: 0,
