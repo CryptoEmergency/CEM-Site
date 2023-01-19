@@ -75,7 +75,7 @@ fn.paragraph = function (str) {
   // textTag = textTag.replace(new RegExp("\n\n", 'g'), "\n").split("\n");
   //textTag = textTag.replace(new RegExp("(\n){3,}", 'g'), "\n\n").split("\n");
   textTag = textTag.replace(new RegExp("[\r\n]{3,}", 'g'), "\n\n").split("\n");
-  console.log(textTag)
+  // console.log(textTag)
   let res = "";
   for (let item of textTag) {
     res += "<p>" + item + "</p>";
@@ -122,7 +122,7 @@ fn.editText = function (str, filter = {}) {
     out = fn.findLink(out)
     out = Helpers.stringToHtml(out)
   }
-  console.log(out)
+  // console.log(out)
   return out
 }
 

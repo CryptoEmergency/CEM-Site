@@ -194,12 +194,10 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                         style="display: block; left: 5px;bottom:5px"
                         href={`/user/${question.author.nickname}`}
                         onclick={function (e) {
-
+                          // e.preventDefault();
                           if (Variable.myInfo && Variable.myInfo.nickname == question.author.nickname) {
-
                             fn.siteLink(e)
                           } else {
-
                             fn.siteLinkModal(this.e, { title: question.author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(question.author) })
                           }
                         }}>

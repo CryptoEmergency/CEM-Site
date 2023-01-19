@@ -11,7 +11,7 @@ import { BlockLentaUsers } from '@component/blocks/index.js';
 
 const BlockShowLenta = function ({ Static, item }) {
 
-  console.log('=da69dd=', "BlockShowLenta")
+  // console.log('=da69dd=', "BlockShowLenta")
   return (
     <div class="user_post_container">
       <div class="userNewsBlock">

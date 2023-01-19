@@ -28,7 +28,7 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
 
     initOne(
         () => {
-            Static.activeView = "list";
+            Static.activeView = "tile";
         }
     )
 
@@ -50,13 +50,12 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                     <h2>{Variable.lang.h.posts_user}</h2>
                             }
 
-                            {/* <ul class="user_news_togglersview">
+                            <ul class="user_news_togglersview">
                                 <li
                                     onclick={function (e) {
                                         e.stopPropagation();
                                         Static.activeView = "list"
                                         initReload();
-                                        console.log('=040e91=', Static.activeView)
                                     }}
                                 >
                                     <a
@@ -73,7 +72,6 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                         e.stopPropagation();
                                         Static.activeView = "tile"
                                         initReload();
-                                        console.log('=040e92=', Static.activeView)
                                     }}
                                 >
                                     <a
@@ -85,7 +83,7 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                         ]}
                                     >Плитка</a>
                                 </li>
-                            </ul> */}
+                            </ul>
                         </div>
                         {
                             !Static.activeItems || !Static.activeItems.list_records.length
