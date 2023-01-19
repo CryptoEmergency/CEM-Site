@@ -459,6 +459,18 @@
         margin: 0;
         height: 100%;
         overflow: hidden;
+
+        a[target="_blank"] {
+            background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+                text-decoration-color: #8846D3;
+            }
+        }
     }
 
     &__image,
