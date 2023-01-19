@@ -783,7 +783,7 @@ initData.rooms = function (Static) {
             ],
             nameOptions: "Date",
             open: false,
-            title: "Сортировать"
+            title: "ч"
         }
     };
     Static.Category = { value: "all" }

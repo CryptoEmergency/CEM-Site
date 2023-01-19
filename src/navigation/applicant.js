@@ -52,8 +52,8 @@ const start = function (data, ID) {
         }
     })
 
-    function menuSelect () {
-            document.querySelector(".books-filter-list-popular").classList.toggle("active");
+    function menuSelect (selector) {
+        document.querySelector(selector).classList.toggle("active");
     }
 
     init(
@@ -72,7 +72,7 @@ const start = function (data, ID) {
                                     <div class="books-filter-subtitle books-filter-popular">
                                         <span>popular categories</span>
                                         <div class="books-filter-select">
-                                            <div class="books-filter-select-title" onClick={menuSelect}>{selected}</div>
+                                            <div class="books-filter-select-title" onClick={() => menuSelect(".books-filter-list-popular")}>{selected}</div>
                                             <div class="books-filter-list books-filter-list-popular">
                                                 {categoryPopular.map(function (item) {
                                                     return (
@@ -90,7 +90,7 @@ const start = function (data, ID) {
                                     <div class="books-filter-subtitle books-filter-new">
                                         <span>new books categories</span>
                                         <div class="books-filter-select">
-                                            <div class="books-filter-select-title">{selected}</div>
+                                            <div class="books-filter-select-title" onClick={() => menuSelect(".books-filter-list-new")}>{selected}</div>
                                             <div class="books-filter-list books-filter-list-new">
                                                 {categoryNew.map(function (item) {
                                                     return (
@@ -144,4 +144,5 @@ const start = function (data, ID) {
         }, ID
     );
 };
+
 export default start;

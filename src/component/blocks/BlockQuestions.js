@@ -115,7 +115,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
           <div
             class="mobile_search_container"
             onclick={() => {
-       
+
               if (Variable.auth) {
                 fn.modals.ModalAskQuestion()
               } else {
