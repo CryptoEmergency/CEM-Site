@@ -154,7 +154,9 @@ const start = function (data, ID) {
     }
     let canvas;
     canvas = crooper.getCroppedCanvas({});
+    const originalImage = Static.mediaInputs.value[index].originalImage
     let previewObj = {
+      originalImage,
       src: canvas.toDataURL(),
       type: "image",
       upload: 0,
@@ -178,6 +180,7 @@ const start = function (data, ID) {
           let response = JSON.parse(this.response);
 
           Static.mediaInputs.value[index] = {
+            originalImage,
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
             name: response.name
@@ -893,7 +896,7 @@ const start = function (data, ID) {
                 Static.files = Object.assign({}, this.files)
                 // console.log('=09ca68=', Static.files)
 
-                // Static.originalImage = [];
+                Static.originalImage = [];
 
                 Array.from(this.files).forEach((item, index) => {
                   //для каждой картинки сохраняем оригинал

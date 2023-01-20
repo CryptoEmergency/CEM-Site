@@ -24,7 +24,7 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
 
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
-    console.log('=ModalCropImage=', Static, arrMedia.length > 1 && !originalImage)
+    // console.log('=ModalCropImage=', Static, arrMedia.length > 1 && !originalImage)
 
 
     const cropperGo = function (el) {
@@ -185,7 +185,8 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                                             height="300"
                                             class="c-cropper__cropimage cropImage"
                                             id="cropImage"
-                                            src={!Static.originalImage ? aspectActive ? URL.createObjectURL(file) : file : Static.originalImage.getAttribute("src")}
+                                            // src={!Static.originalImage ? aspectActive ? URL.createObjectURL(file) : file : Static.originalImage.getAttribute("src")}
+                                            src={!originalImage ? aspectActive ? URL.createObjectURL(file) : file : originalImage.getAttribute("src")}
                                             After={cropperGo}
                                             ref={elemImg}
                                         />
