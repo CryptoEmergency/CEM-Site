@@ -6,7 +6,7 @@ import {
     load
 } from '@betarost/cemserver/cem.js';
 
-import list from "@src/lists/modalsList.js";
+// import list from "@src/lists/modalsList.js";
 
 Variable.Static.countModals = 0
 Variable.Static.countModalsPage = 0
@@ -29,7 +29,7 @@ const mainModalPage = async function () {
                 return (
                     <div>
                         {async () => {
-                            return await list["ModalPage"](Variable.ModalsPage.length - 1, reload)
+                            return await Variable.listModals["ModalPage"](Variable.ModalsPage.length - 1, reload)
                         }}
                     </div>
                 )
