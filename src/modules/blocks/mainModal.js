@@ -3,25 +3,23 @@ import {
     jsxFrag,
     Variable,
     init,
-    getInitList
+    getInitList,
+    load
 } from '@betarost/cemserver/cem.js';
 
-import { fn } from '@src/functions/index.js';
-import list from "@src/lists/modalsList.js";
+// import { fn } from '@src/functions/index.js';
+// import list from "@src/lists/modalsList.js";
 
 Variable.Static.countModals = 0
 Variable.Static.countModalsPage = 0
 
 
 const mainModal = async function () {
-    init(
-        () => {
-            // console.log("modals", Variable.Modals)
-            //Variable.OutHideWindows = []
-        },
 
-        async function (reload) {
-            //   console.log('=50716e= mainModal', reload)
+    load({
+        ID: "modals",
+        fn: async function (reload) {
+
             if (!Variable.Modals.length) {
                 document.getElementById('backdrop').classList.remove("c-backdrop--show");
                 if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
@@ -30,49 +28,52 @@ const mainModal = async function () {
                 return <div></div>
             }
             document.getElementById('backdrop').classList.add("c-backdrop--show");
+            let ID = "Modal-" + (Variable.Modals.length - 1)
+            let InitList = getInitList()
+            if (!reload && InitList[ID].fnLoad) {
+                await InitList[ID].fnLoad(reload)
+            }
+            let replase = !reload
+            if (Variable.Modals.length > 1) {
+                replase = true
+            }
 
-            if (Variable.Modals.length == 1) {
-                let ID = "Modal-" + (Variable.Modals.length - 1)
-                if (!reload && getInitList()[ID].fnLoad) {
-                    await getInitList()[ID].fnLoad(reload)
+            // let arrReturn = [
+            //     <div replace={replase}>
+            //         {async () => {
+            //             return await InitList[ID].fn(reload)
+            //         }}
+            //     </div>
+            // ]
+            let arrReturn = Variable.Modals.map((item, index) => {
+                let ID = "Modal-" + index
+                let rel = reload
+                if (index != Variable.Modals.length - 1) {
+                    rel = false
                 }
-
                 return (
+
                     <div>
                         {async () => {
-                            return await getInitList()[ID].fn(reload)
+                            return await InitList[ID].fn(rel)
                         }}
                     </div>
                 )
-            } else {
-                const arrReturn = Variable.Modals.map(async (item, index) => {
-                    let ID = "Modal-" + index
-                    let rel = reload
-                    if (!reload && getInitList()[ID].fnLoad && index != Variable.Modals.length - 1) {
-                        await getInitList()[ID].fnLoad(reload)
-                    }
-                    if (index != Variable.Modals.length - 1) {
-                        rel = false
-                    }
-                    return (
-                        <div>
-                            {async () => {
-                                return await getInitList()[ID].fn(rel)
-                            }}
-                        </div>
-                    )
-                })
-                //    console.log('=f76ca7= arrReturn', arrReturn)
-                return (
-                    <div>
-                        {arrReturn}
-                    </div>
+            })
+            return (
+                <div>
+                    {arrReturn}
+                </div>
 
-                )
+            )
+            return (
+                <div replace={replase}>
+                    {async () => {
+                        return await getInitList()[ID].fn(reload)
+                    }}
+                </div>
+            )
 
-
-
-            }
             return (
                 <div>ffff</div>
             )
@@ -187,16 +188,16 @@ const mainModal = async function () {
                     }}
                     {/* {mm} */}
                     {/* {() => {
-                        return modals.map(async (item, index) => {
-                            return (
-                                await item.fn(item.data, item.reload, index)
-                            )
-                        })
-                    }} */}
+                    return modals.map(async (item, index) => {
+                        return (
+                            await item.fn(item.data, item.reload, index)
+                        )
+                    })
+                }} */}
                 </div>
             )
         },
-        "modals")
+    })
     return
 };
 

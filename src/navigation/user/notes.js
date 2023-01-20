@@ -7,26 +7,36 @@ import {
     initReload
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
+import svg from '@assets/svg/index.js';
 
-const notiesList = [
-    { title: "Купить биткоин", date: "20:45" },
-    { title: "Посмотреть новости", date: "21:10" }
+const notesList = [
+    { title: "Купить биткоин", date: "2023-01-19T19:34:00.000Z" },
+    { title: "Посмотреть новости", date: "2023-01-18T14:45:00.000Z" },
+    { title: "Проверить кошелек", date: "2023-01-16T06:18:00.000Z" },
+    { title: "Обновить", date: "2023-01-15T23:40:00.000Z" },
 ]
 
 const start = function (data, ID) {
 
+    function toggle() {
+        if (window.outerWidth <= 599 && !document.querySelector(".notes-content-wrapper").classList.contains("active")){
+            document.querySelector(".notes-content-wrapper").classList.add("active")
+            document.querySelector(".notes-list").classList.add("dead")
+        } else {
+            document.querySelector(".notes-content-wrapper").classList.remove("active")
+            document.querySelector(".notes-list").classList.remove("dead")
+        }
+    }
 
     let [Static] = fn.GetParams({ data, ID })
-
 
     load({
         ID,
         fnLoad: async () => {
-            Static.tmpTest = await fn.restApi.getNews({ filter: {} })
+            Static.tmpTest = notesList
             Static.activeNotes = null
         },
         fn: () => {
-            console.log('=787fec=', Static.tmpTest)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="notes">
@@ -37,40 +47,44 @@ const start = function (data, ID) {
                                     <button class="notes-button">
                                         <span>Новая заметка</span>
                                     </button>
-                                    {/* {notiesList.map(function (item) {
-                                        return (
-                                            <div class="notes-item">
-                                                <h3>{item.title}</h3>
-                                                <span>{item.date}</span>
-                                            </div>
-                                        )
-                                    })} */}
-
-                                    {Static.tmpTest.list_records.map(function (item) {
-                                        console.log('=787fec=', item)
+                                    {Static.tmpTest.map(function (item) {
                                         return (
                                             <div
                                                 class="notes-item"
                                                 onclick={() => {
-                                                    console.log('=e8e785=', item)
                                                     Static.activeNotes = item
+                                                    toggle()
                                                     initReload()
                                                 }}
                                             >
                                                 <h3>{item.title}</h3>
-                                                <span>{fn.getDateFormat(item.showDate, "now")}</span>
+                                                <span>{fn.getDateFormat(item.date, "now")}</span>
                                             </div>
                                         )
                                     })}
                                 </div>
                                 <div class="notes-content-wrapper">
+                                    <img class="notes-content-close" src={svg["close"]} 
+                                        onclick={() => {
+                                            Static.activeNotes.title = document.querySelector(".notes-description").textContent
+                                            toggle()
+                                            initReload()
+                                        }} />
                                     <input class="notes-input-text" type="text" maxlength="100" autocomplete="off" placeholder="Название" />
-                                    <div class="notes-description" contenteditable="true">
+                                    <div 
+                                        class="notes-description" 
+                                        contenteditable="true"
+                                        oninput={() => {
+                                            Static.activeNotes.title = document.querySelector(".notes-description").textContent
+                                            setTimeout(() => initReload(), 3000)
+                                        }}
+                                    >
+                                        
                                         {!Static.activeNotes
                                             ?
                                             "текст"
                                             :
-                                            Static.activeNotes.text
+                                            Static.activeNotes.title
                                         }
 
                                     </div>

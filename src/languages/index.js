@@ -8,6 +8,8 @@ const languages = req.keys().reduce((acc, next) => {
     return acc
 }, {});
 
-const forExport = {ru:languages.ru,en:languages.en}
-Object.assign(forExport,languages)
+const forExport = { ru: languages.ru, en: languages.en }
+Object.assign(forExport, languages)
+
 export default forExport
+//20.01.2023

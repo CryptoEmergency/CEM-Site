@@ -1044,10 +1044,10 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text, _id }) {
             message: {
                 text: text,
                 /*  media:[{
-                      type: {type: String},
-                      name: {type: String},
-                      active:{type: Boolean, default: true}
-                  }]*/
+                    type: {type: String},
+                    name: {type: String},
+                    active:{type: Boolean, default: true}
+                }]*/
             }
         },
         _id
@@ -1155,6 +1155,36 @@ restApi.logOut = async function () {
     const response = await sendApi.create("logout");
 
     return checkSetAnswer(response)
+}
+
+
+restApi.SetCommunity = {}
+
+restApi.SetCommunity.create = async function ({title, icon, cover, usersCount, country, city, languages, еvents, gallery, contacts, social, interest, shortDescription, fullDescription, category, foundationDate}) {
+    let data = {
+        value: {
+            title: title,
+            icon: icon,
+            cover: cover,
+            usersCount: usersCount,
+            country: country,
+            city: city,
+            languages: languages,
+            еvents: еvents,
+            gallery: gallery,
+            contacts: contacts,
+            social: social,
+            interest: interest,
+            shortDescription: shortDescription,
+            fullDescription: fullDescription,
+            category: category,
+            foundationDate: foundationDate
+        }
+    }
+    console.log(data)
+    const response = await sendApi.create("setCommunity", data);
+    console.log(response)
+    // return checkSetAnswer(response)
 }
 
 

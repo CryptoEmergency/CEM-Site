@@ -8,7 +8,7 @@ import { fn } from '@src/functions/index.js';
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
   // console.log("============on load",Static,"=======item",item)
-  console.log('=c423c3=', Static)
+  // console.log('=MediaPreview=', Static)
 
 
   if (item.type == "audio") {
@@ -81,14 +81,18 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           // alert(index)
                           // alert(item.name)
                           // alert(Static.originalImage[index])
+                          // alert("Редактирую")
+
                           fn.modals.ModalCropImage({
                             editable: true,
-                            originalImage: Static.originalImage[index],
+                            originalImage: item.originalImage,
                             file: {},
                             typeUpload: 'posts',
                             arrMedia: Static.mediaInputs.value,
-                            aspectSelect: Static.mediaInputs.value[index].aspect,  //null,
-                            uploadCropImage: async function (cropper) {
+                            aspectSelect: Static.mediaInputs.selectAspect,
+                            // aspectSelect: Static.mediaInputs.value[index].aspect,  //null,
+                            uploadCropImage: async function (cropper, aspectActive) {
+                              Static.mediaInputs.selectAspect = aspectActive
                               await sendPhotoChat(cropper, index)
                               return;
                             }

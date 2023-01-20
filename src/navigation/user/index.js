@@ -19,15 +19,17 @@ import {
 
 const start = function (userInfo, ID = "mainBlock") {
     let [Static] = fn.GetParams({ userInfo, ID })
-    // console.log('=07dba5=', Static)
+    console.log('=07dba5=', userInfo)
     Variable.Static.FooterShow = false
     let profilePage
     Static.activeItems = {}
     Variable.HeaderShow = true
     Variable.FooterShow = true
     Variable.showUserMenu = false
+    if (Variable.auth == false && !localStorage.getItem('refId')) {
+        localStorage.setItem('refId', userInfo.nickname)
+    }
     const changeType = async function () {
-
         if (this.dataset.profilePage == profilePage) {
             return
         }
@@ -66,6 +68,22 @@ const start = function (userInfo, ID = "mainBlock") {
                 },
                 limit: 20
             });
+        } else if (profilePage == "galary") {
+            // Static.activeItems = await sendApi.send({
+            //     action: "getUsers", short: true, filter: {
+            //         nickname: userInfo.nickname,
+            //     },
+            //     select: {
+            //         gallery: 1
+            //     },
+            // });
+            // Static.activeItems = userInfo;
+            Static.activeItems = await fn.restApi.getUsers({ filter: { nickname: userInfo.nickname }, select: { gallery: 1 } })
+
+            Static.mediaInputs = {
+                value: [],
+                show: false,
+            }
         }
         initReload()
     }
@@ -107,7 +125,8 @@ const start = function (userInfo, ID = "mainBlock") {
 
 
             profilePage = "aboutUser"
-
+            Static.activeView = "tile";
+            Static.activeFiletype = "image";
             if (userInfo && userInfo.nickname == Variable.myInfo.nickname && Variable.PageUserProfileMyLenta.list_records.length != 0) {
                 profilePage = "lentaFriends";
                 Static.activeItems = Variable.PageUserProfileMyLenta
@@ -388,21 +407,24 @@ const start = function (userInfo, ID = "mainBlock") {
                                 />
                             </div> 
                         */}
-                        {/* 
-                            <div data-type="galary" class="c-usercategories__item">
-                                <i
-                                    class={`c-usercategories__icon c-usercategories__icon--galary${profilePage != 'galary' ? '_inactive' : ''}`}
-                                    data-profilePage="galary"
-                                    onclick={changeType}
-                                ></i>
-                                <img
-                                    class="c-usercategories__img"
-                                    src={svg[`sections/galary${profilePage != 'galary' ? '_inactive' : ''}`]}
-                                    data-profilePage="galary"
-                                    onclick={changeType}
-                                />
-                            </div> 
-                        */}
+
+                        <div data-type="galary" class="c-usercategories__item">
+                            <i
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'galary' ? 'c-usercategories__icon--galary' : 'c-usercategories__icon--galary_inactive'
+                                ]}
+                                data-profilePage="galary"
+                                onclick={changeType}
+                            ></i>
+                            {/* <img
+                                class="c-usercategories__img"
+                                src={svg[`sections/galary${profilePage != 'galary' ? '_inactive' : ''}`]}
+                                data-profilePage="galary"
+                                onclick={changeType}
+                            /> */}
+                        </div>
+
                         {/* 
                             <div data-updating="true" data-type="donation" data-action="link" class="c-usercategories__item">
                                 <i
