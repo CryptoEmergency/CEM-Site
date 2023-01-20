@@ -76,7 +76,7 @@ const start = function (data, ID) {
 
   let authorPosts;
 
-  const sendPhotoOne = async function (Static, crooper) {
+  const sendPhotoOne = async function (Static, crooper, originalImage) {
     if (!crooper) {
       return
     }
@@ -89,6 +89,7 @@ const start = function (data, ID) {
       // height: 166,
     });
     let previewObj = {
+      originalImage,
       src: canvas.toDataURL(),
       type: "image",
       upload: 0,
@@ -109,6 +110,7 @@ const start = function (data, ID) {
           }
           let response = JSON.parse(this.response);
           Static.mediaInputs.value[numItem] = {
+            originalImage,
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
             name: response.name
@@ -383,6 +385,14 @@ const start = function (data, ID) {
 
   const loadPhoto = async function (file, type, xhr, selectAspect = false, key) {
     // console.log('=ebf8e1=', selectAspect)
+
+
+    let imageUrlTmp = URL.createObjectURL(file);
+    const originalImageTmp = new Image();
+    originalImageTmp.src = imageUrlTmp;
+
+
+
     let dataURL;
 
     let imageUrl
@@ -543,6 +553,7 @@ const start = function (data, ID) {
         }
 
         let previewObj = {
+          originalImage: originalImageTmp,
           src: dataURL,
           type: "image",
           upload: 0,
@@ -574,6 +585,7 @@ const start = function (data, ID) {
           let response = JSON.parse(this.response);
           if (numItem == 0) {
             Static.mediaInputs.value[numItem] = {
+              originalImage: originalImageTmp,
               aspect: Static.mediaInputs.selectAspect,
               type: response.mimetype.split("/")[0],
               name: response.name,
@@ -583,6 +595,7 @@ const start = function (data, ID) {
           }
           else {
             Static.mediaInputs.value[numItem] = {
+              originalImage: originalImageTmp,
               aspect: Static.mediaInputs.selectAspect,
               type: response.mimetype.split("/")[0],
               name: response.name,
@@ -644,6 +657,7 @@ const start = function (data, ID) {
   let el = [];
 
   let [Static] = fn.GetParams({ data, ID })
+  Static.originalImage = [];
   Static.loadedPhoto = []
   Static.posts = []
   Static.userInfo = Variable.myInfo;
@@ -756,6 +770,7 @@ const start = function (data, ID) {
 
       if (!Static.mediaInputs.value || Static.mediaInputs.value.length == 0) {
         Static.mediaInputs.selectAspect = null
+        Static.originalImage = [];
       }
 
       // console.log(Static.mediaInputs.value)
@@ -797,6 +812,8 @@ const start = function (data, ID) {
                 {
 
                   Static.mediaInputs.value.map((item, index) => {
+
+                    // console.log('=2e07f3=', item)
                     if (item.type != "audio") {
 
 
@@ -876,7 +893,7 @@ const start = function (data, ID) {
                 Static.files = Object.assign({}, this.files)
                 // console.log('=09ca68=', Static.files)
 
-                Static.originalImage = [];
+                // Static.originalImage = [];
 
                 Array.from(this.files).forEach((item, index) => {
                   //для каждой картинки сохраняем оригинал
@@ -893,106 +910,117 @@ const start = function (data, ID) {
                 // console.log('=b876c8=', originalImage)
                 // console.log('=b876c8=', Static.originalImage[0])
 
-                Static.originalImage.forEach((item) => {
-                  console.log('=posts Static.originalImage=', '!!!')
-                })
+                // Static.originalImage.forEach((item) => {
+                //   console.log('=posts Static.originalImage=', '!!!')
+                // })
 
-                Static.originalImage[0].addEventListener('load', async function () {
-                  console.log('=posts Static.originalImage[0]=', Static.originalImage[0])
+                // Static.originalImage[0].addEventListener('load', async function () {
+                //   console.log('=posts Static.originalImage[0]=', Static.originalImage[0])
 
-                  if (!Static.mediaInputs.selectAspect) {
-                    Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect, Static.originalImage[0].width, Static.originalImage[0].height)
-                  }
+                if (!Static.mediaInputs.selectAspect) {
+                  Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect, Static.originalImage[0].width, Static.originalImage[0].height)
+                }
 
-                  // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
-                  if (Object.keys(Static.files).length == 1) {
-                    alert("Один выбираю")
-                    fn.modals.ModalCropImage({
-                      originalImage: Static.originalImage[0],
-                      file: Static.files[0],
-                      typeUpload: 'posts',
-                      arrMedia: Static.mediaInputs.value,
-                      aspectSelect: Static.mediaInputs.selectAspect,
-                      uploadCropImage: async function (cropper, aspectActive) {
-                        Static.mediaInputs.selectAspect = aspectActive
-                        sendPhotoOne(Static, cropper)
+                // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
+                if (Object.keys(Static.files).length == 1) {
+                  // alert("Один выбираю")
+                  fn.modals.ModalCropImage({
+                    originalImage: Static.originalImage[0],
+                    file: Static.files[0],
+                    typeUpload: 'posts',
+                    arrMedia: Static.mediaInputs.value,
+                    aspectSelect: Static.mediaInputs.selectAspect,
+                    uploadCropImage: async function (cropper, aspectActive) {
+                      Static.mediaInputs.selectAspect = aspectActive
 
-                        // console.log('=2e552a=',cropper,aspectActive,Static.files)
+                      let imageUrl = URL.createObjectURL(Static.files[0]);
+                      const originalImage = new Image();
+                      originalImage.src = imageUrl;
 
-                        //                        document.getElementById("spinner").hidden = false
-                        // for (let key in Static.files){
-                        // if (Static.files[key]){
-                        // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-                        // } 
 
-                        // }
-                        return;
-                      }
-                    }, ID)
-                  } else {
-                    alert("Много выбираю")
-                    fn.modals.ModalCropImage({
-                      file: Static.files[0],
-                      typeUpload: 'posts',
-                      arrMedia: Static.mediaInputs.value,
-                      aspectSelect: Static.mediaInputs.selectAspect,
-                      uploadCropImage: async function (cropper, aspectActive) {
-                        Static.mediaInputs.selectAspect = aspectActive
-                        sendPhotoOne(Static, cropper)
+                      sendPhotoOne(Static, cropper, originalImage)
 
-                        // console.log('=2e552a=',cropper,aspectActive,Static.files)
+                      // console.log('=2e552a=',cropper,aspectActive,Static.files)
 
-                        const sX = cropper.getData();
-                        console.log('=770465=', ' x = ', sX.x, ', y = ', sX.y)
+                      //                        document.getElementById("spinner").hidden = false
+                      // for (let key in Static.files){
+                      // if (Static.files[key]){
+                      // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                      // } 
 
-                        document.getElementById("spinner").hidden = false
-                        for (let key in Static.files) {
-                          if (Static.files[key] && key != 0) {
-                            Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect, sX) : await loadPhoto(Static.files[key], "posts")
-                          }
+                      // }
+                      return;
+                    }
+                  }, ID)
+                } else {
+                  // alert("Много выбираю")
+                  fn.modals.ModalCropImage({
+                    file: Static.files[0],
+                    typeUpload: 'posts',
+                    arrMedia: Static.mediaInputs.value,
+                    aspectSelect: Static.mediaInputs.selectAspect,
+                    uploadCropImage: async function (cropper, aspectActive) {
+                      Static.mediaInputs.selectAspect = aspectActive
 
+                      let imageUrl = URL.createObjectURL(Static.files[0]);
+                      const originalImage = new Image();
+                      originalImage.src = imageUrl;
+
+                      sendPhotoOne(Static, cropper, originalImage)
+
+                      // console.log('=2e552a=',cropper,aspectActive,Static.files)
+
+                      const sX = cropper.getData();
+                      console.log('=770465=', ' x = ', sX.x, ', y = ', sX.y)
+
+                      document.getElementById("spinner").hidden = false
+                      for (let key in Static.files) {
+                        if (Static.files[key] && key != 0) {
+                          Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect, sX) : await loadPhoto(Static.files[key], "posts")
                         }
-                        return;
+
                       }
-                    }, ID)
-                  }
+                      return;
+                    }
+                  }, ID)
+                }
 
-                  // if (!Static.mediaInputs.value || Static.mediaInputs.value.length == 0) {
+                // if (!Static.mediaInputs.value || Static.mediaInputs.value.length == 0) {
 
-                  //   fn.modals.ModalCropImage({
-                  //     file: Static.files[0],
-                  //     typeUpload: 'posts',
-                  //     arrMedia: Static.mediaInputs.value,
-                  //     aspectSelect: Static.mediaInputs.selectAspect,
-                  //     uploadCropImage: async function (cropper, aspectActive) {
-                  //       Static.mediaInputs.selectAspect = aspectActive
-                  //       sendPhotoOne(Static, cropper)
+                //   fn.modals.ModalCropImage({
+                //     file: Static.files[0],
+                //     typeUpload: 'posts',
+                //     arrMedia: Static.mediaInputs.value,
+                //     aspectSelect: Static.mediaInputs.selectAspect,
+                //     uploadCropImage: async function (cropper, aspectActive) {
+                //       Static.mediaInputs.selectAspect = aspectActive
+                //       sendPhotoOne(Static, cropper)
 
-                  //       // console.log('=2e552a=',cropper,aspectActive,Static.files)
+                //       // console.log('=2e552a=',cropper,aspectActive,Static.files)
 
-                  //       //                        document.getElementById("spinner").hidden = false
-                  //       // for (let key in Static.files){
-                  //       // if (Static.files[key]){
-                  //       // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-                  //       // } 
+                //       //                        document.getElementById("spinner").hidden = false
+                //       // for (let key in Static.files){
+                //       // if (Static.files[key]){
+                //       // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                //       // } 
 
-                  //       // }
-                  //       return;
-                  //     }
-                  //   }, ID)
-                  // }
-                  // else {
-                  //   document.getElementById("spinner").hidden = false
-                  //   for (let key in Static.files) {
-                  //     if (Static.files[key]) {
-                  //       Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-                  //     }
+                //       // }
+                //       return;
+                //     }
+                //   }, ID)
+                // }
+                // else {
+                //   document.getElementById("spinner").hidden = false
+                //   for (let key in Static.files) {
+                //     if (Static.files[key]) {
+                //       Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                //     }
 
-                  //   }
-                  // }
+                //   }
+                // }
 
 
-                })
+                // })
 
                 //   for (let i = 0; i < this.files.length; i++) {
                 //     if(i == 0)
