@@ -16,5 +16,5 @@ const loadLists = async function () {
     Variable.listRouter = routerList()
 }
 
-// loadLists();
 export { loadLists };
+//20.01.2023
