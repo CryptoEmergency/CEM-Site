@@ -1,5 +1,4 @@
 const modalsList = function () {
-
     const req = import.meta.webpackContext('../component/modals', {
         recursive: true,
         regExp: /\.js$/,
@@ -13,4 +12,6 @@ const modalsList = function () {
 
     return forExport
 }
+
 export { modalsList }
+//20.01.2023

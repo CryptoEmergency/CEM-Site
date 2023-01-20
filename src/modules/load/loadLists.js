@@ -5,6 +5,7 @@ import listsLang from '@src/lists/languages.json'
 import phoneCodes from '@src/lists/phoneCodes.json'
 import allCountries from '@src/lists/allCountries.json'
 import { modalsList } from "@src/lists/modalsList.js";
+import { routerList } from "@src/lists/routerList.js";
 
 const loadLists = async function () {
     Variable.languages = languages
@@ -12,6 +13,7 @@ const loadLists = async function () {
     Variable.listsLang = listsLang
     Variable.phoneCodes = phoneCodes
     Variable.listModals = modalsList()
+    Variable.listRouter = routerList()
 }
 
 // loadLists();
