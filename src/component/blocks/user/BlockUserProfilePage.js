@@ -878,17 +878,110 @@ BlockUserProfilePage.galary = function (Static, data) {
                     <div class="c-tiles">
                         {
                             Variable.myInfo._id == data.userInfo._id ?
-                                <div
+                                <label
                                     class="c-tiles__item c-tiles__item--add"
-                                    onclick={function (e) {
-                                        e.stopPropagation();
-                                        alert("Добавление картинки")
-                                    }}
                                 >
                                     <figure class="c-tiles__card">
                                         <img class=" c-tiles__image" src={svg["radius_plus"]} />
+                                        <input
+                                            type="file"
+                                            hidden
+                                            multiple
+                                            onchange={async function (e) {
+                                                e.stopPropagation();
+                                                console.log('=add galary=', e, this.files)
+
+                                                // let gallery = [];
+                                                Array.from(this.files).forEach((item, index, xhr) => {
+
+                                                    let nameFile = "file.png"
+                                                    if (item.name) {
+                                                        nameFile = item.name
+                                                    }
+
+                                                    const formData = new FormData()
+                                                    formData.append('media', item, nameFile);
+                                                    xhr = new XMLHttpRequest()
+                                                    xhr.open('POST', `/upload/post/`)
+                                                    xhr.onload = async function () {
+                                                        Static.mediaInputs.show = true;
+                                                        if (!this.response) {
+                                                            return
+                                                        }
+                                                        let response = JSON.parse(this.response);
+                                                        Static.mediaInputs.value[index] = {
+                                                            type: response.mimetype.split("/")[0],
+                                                            name: response.name
+                                                        }
+                                                        Static.isValid = true;
+                                                        // initReload();
+                                                    }
+                                                    xhr.upload.onprogress = async function (e) {
+                                                        let contentLength;
+                                                        if (e.lengthComputable) {
+                                                            contentLength = e.total;
+                                                        } else {
+                                                            contentLength = parseInt(
+                                                                e.target.getResponseHeader(
+                                                                    "x-decompressed-content-length"
+                                                                ),
+                                                                10
+                                                            );
+                                                        }
+                                                    }
+                                                    xhr.send(formData)
+
+
+                                                    // fn.uploadMedia(
+                                                    //     item,
+                                                    //     "post",
+                                                    //     async function () {
+                                                    //         Static.mediaInputs.show = true;
+                                                    //         if (!this.response) {
+                                                    //             return
+                                                    //         }
+                                                    //         let response = JSON.parse(this.response);
+                                                    //         Static.mediaInputs.value[index] = {
+                                                    //             type: response.mimetype.split("/")[0],
+                                                    //             name: response.name
+                                                    //         }
+                                                    //         Static.isValid = true;
+                                                    //         initReload();
+                                                    //     },
+                                                    //     async function (e) {
+                                                    //         let contentLength;
+                                                    //         if (e.lengthComputable) {
+                                                    //             contentLength = e.total;
+                                                    //         } else {
+                                                    //             contentLength = parseInt(
+                                                    //                 e.target.getResponseHeader(
+                                                    //                     "x-decompressed-content-length"
+                                                    //                 ),
+                                                    //                 10
+                                                    //             );
+                                                    //         }
+                                                    //     }
+                                                    // );
+                                                    // gallery.push({ type: item.type, name: item.name })
+                                                })
+
+                                                // console.log('=gallery=', gallery)
+                                                let data = {
+                                                    // id: Variable.myInfo._id,
+                                                    value: {
+                                                        gallery: Static.mediaInputs.value
+                                                    }
+                                                }
+                                                console.log('=data=', data)
+                                                const response = await fn.restApi.setUsers.update({
+                                                    data: data
+                                                })
+
+                                                console.log('=cdd88f=', response)
+                                            }}
+                                        />
                                     </figure>
-                                </div>
+                                </label>
                                 : null
                         }
                         {

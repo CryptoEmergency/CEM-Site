@@ -26,7 +26,7 @@ const start = function (userInfo, ID = "mainBlock") {
     Variable.HeaderShow = true
     Variable.FooterShow = true
     Variable.showUserMenu = false
-    if(Variable.auth == false && !localStorage.getItem('refId')){
+    if (Variable.auth == false && !localStorage.getItem('refId')) {
         localStorage.setItem('refId', userInfo.nickname)
     }
     const changeType = async function () {
@@ -79,6 +79,11 @@ const start = function (userInfo, ID = "mainBlock") {
             // });
             // Static.activeItems = userInfo;
             Static.activeItems = await fn.restApi.getUsers({ filter: { nickname: userInfo.nickname }, select: { gallery: 1 } })
+
+            Static.mediaInputs = {
+                value: [],
+                show: false,
+            }
         }
         initReload()
     }
