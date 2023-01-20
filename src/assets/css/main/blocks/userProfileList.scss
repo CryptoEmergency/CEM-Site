@@ -537,6 +537,16 @@
         }
     }
 
+    &__delete {
+        position: absolute;
+        z-index: 2;
+        font-size: 0;
+        width: 16px;
+        height: 16px;
+        top: 2px;
+        right: 7px;
+    }
+
     .video_container {
         width: auto;
 

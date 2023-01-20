@@ -56,7 +56,8 @@ const mainBlock = async function () {
                             work: 1,
                             interest: 1,
                             country: 1,
-                            fullname: 1
+                            fullname: 1,
+                            gallery: 1
                         },
                         limit: 1
                     });

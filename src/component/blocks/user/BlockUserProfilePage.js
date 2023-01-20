@@ -858,4 +858,101 @@ BlockUserProfilePage.questions = function (Static, data) {
     )
 };
 
+BlockUserProfilePage.galary = function (Static, data) {
+    if (!data || data.profilePage != "galary") {
+        return (<></>)
+    }
+
+    initOne(
+        () => {
+        }
+    )
+    console.log('=galary Static=', Static)
+    console.log('=galary data=', data)
+
+    return (
+        <div class="bl_one c-container" id="UserInfoGallery">
+            <h2>{Variable.lang.h.galary}</h2>
+            {
+                data.userInfo.gallery ?
+                    <div class="c-tiles">
+                        {
+                            Variable.myInfo._id == data.userInfo._id ?
+                                <div
+                                    class="c-tiles__item c-tiles__item--add"
+                                    onclick={function (e) {
+                                        e.stopPropagation();
+                                        alert("Добавление картинки")
+                                    }}
+                                >
+                                    <figure class="c-tiles__card">
+                                        <img class=" c-tiles__image" src={svg["radius_plus"]} />
+                                    </figure>
+                                </div>
+                                : null
+                        }
+                        {
+                            data.userInfo.gallery.map((item) => {
+                                return (
+                                    <div class="c-tiles__item" data-id={item._id}>
+                                        <figure class="c-tiles__card">
+                                            <img class=" c-tiles__image" src={`/assets/upload/galary/${item.name}`} width="100" height="100" />
+                                            {
+                                                Variable.myInfo._id == data.userInfo._id ?
+                                                    <div
+                                                        class="messages_settings c-tiles__delete"
+                                                        title={Variable.lang.text.settings}
+                                                        onclick={(e) => {
+                                                            let author = Variable.myInfo
+                                                            let items = [
+                                                                {
+                                                                    text: Variable.lang.select.delete,
+                                                                    type: "delete",
+                                                                    color: "red",
+                                                                    onclick: async function (e) {
+                                                                        e.stopPropagation();
+                                                                        e.preventDefault();
+                                                                        alert("Удаление картинки. active = false");
+                                                                        // data.galary.push({
+                                                                        //     id: item._id,
+                                                                        // })
+                                                                        // response = await fn.restApi.setUsers.update({ data })
+                                                                        initReload();
+                                                                    }
+                                                                },
+                                                            ]
+                                                            e.stopPropagation();
+                                                            e.preventDefault();
+                                                            Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
+                                                        }
+                                                        }
+                                                    >
+                                                        <img class="" src={svg.settings_icon} width="20" height="20" />
+                                                    </div>
+                                                    : null
+                                            }
+                                        </figure>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    : Variable.myInfo._id == data.userInfo._id ?
+                        <div
+                            class="c-tiles__item c-tiles__item--add"
+                            onclick={function (e) {
+                                e.stopPropagation();
+                                alert("Добавление картинки")
+                            }}
+                        >
+                            <figure class="c-tiles__card">
+                                <img class=" c-tiles__image" src={svg["radius_plus"]} />
+                            </figure>
+                        </div>
+                        : <NotFound />
+            }
+        </div>
+    )
+};
+
 export { BlockUserProfilePage }
