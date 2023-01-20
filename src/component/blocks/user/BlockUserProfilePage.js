@@ -892,44 +892,90 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                 console.log('=add galary=', e, this.files)
 
                                                 // let gallery = [];
-                                                Array.from(this.files).forEach((item, index, xhr) => {
+                                                Array.from(this.files).forEach((item, index) => {
 
-                                                    let nameFile = "file.png"
-                                                    if (item.name) {
-                                                        nameFile = item.name
-                                                    }
+                                                    console.log('=dd3afb=', item, index)
 
-                                                    const formData = new FormData()
-                                                    formData.append('media', item, nameFile);
-                                                    xhr = new XMLHttpRequest()
-                                                    xhr.open('POST', `/upload/post/`)
-                                                    xhr.onload = async function () {
-                                                        Static.mediaInputs.show = true;
-                                                        if (!this.response) {
-                                                            return
+                                                    fn.uploadMedia(
+                                                        item,
+                                                        "gallery",
+                                                        async function () {
+                                                            // Static.mediaInputs.show = true;
+                                                            // if (!this.response) {
+                                                            //     return
+                                                            // }
+                                                            // let response = JSON.parse(this.response);
+
+                                                            // Static.mediaInputs.value[index] = {
+                                                            //     originalImage,
+                                                            //     aspect: Static.mediaInputs.selectAspect,
+                                                            //     type: response.mimetype.split("/")[0],
+                                                            //     name: response.name
+                                                            // }
+                                                            // Static.isValid = true;
+                                                            // initReload();
+                                                        },
+                                                        async function (e) {
+                                                            // let contentLength;
+                                                            // if (e.lengthComputable) {
+                                                            //     contentLength = e.total;
+                                                            // } else {
+                                                            //     contentLength = parseInt(
+                                                            //         e.target.getResponseHeader(
+                                                            //             "x-decompressed-content-length"
+                                                            //         ),
+                                                            //         10
+                                                            //     );
+                                                            // }
+
+                                                            // if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
+                                                            //     Static.mediaInputs.value.splice(index, 1);
+                                                            //     initReload()
+                                                            //     return
+                                                            // }
+                                                            // Static.mediaInputs.value[index].upload = e.loaded
+                                                            // Static.mediaInputs.value[index].size = contentLength;
+                                                            // initReload();
                                                         }
-                                                        let response = JSON.parse(this.response);
-                                                        Static.mediaInputs.value[index] = {
-                                                            type: response.mimetype.split("/")[0],
-                                                            name: response.name
-                                                        }
-                                                        Static.isValid = true;
-                                                        // initReload();
-                                                    }
-                                                    xhr.upload.onprogress = async function (e) {
-                                                        let contentLength;
-                                                        if (e.lengthComputable) {
-                                                            contentLength = e.total;
-                                                        } else {
-                                                            contentLength = parseInt(
-                                                                e.target.getResponseHeader(
-                                                                    "x-decompressed-content-length"
-                                                                ),
-                                                                10
-                                                            );
-                                                        }
-                                                    }
-                                                    xhr.send(formData)
+                                                    );
+
+
+                                                    // let nameFile = "file.png"
+                                                    // if (item.name) {
+                                                    //     nameFile = item.name
+                                                    // }
+
+                                                    // const formData = new FormData()
+                                                    // formData.append('media', item, nameFile);
+                                                    // xhr = new XMLHttpRequest()
+                                                    // xhr.open('POST', `/upload/post/`)
+                                                    // xhr.onload = async function () {
+                                                    //     Static.mediaInputs.show = true;
+                                                    //     if (!this.response) {
+                                                    //         return
+                                                    //     }
+                                                    //     let response = JSON.parse(this.response);
+                                                    //     Static.mediaInputs.value[index] = {
+                                                    //         type: response.mimetype.split("/")[0],
+                                                    //         name: response.name
+                                                    //     }
+                                                    //     Static.isValid = true;
+                                                    //     // initReload();
+                                                    // }
+                                                    // xhr.upload.onprogress = async function (e) {
+                                                    //     let contentLength;
+                                                    //     if (e.lengthComputable) {
+                                                    //         contentLength = e.total;
+                                                    //     } else {
+                                                    //         contentLength = parseInt(
+                                                    //             e.target.getResponseHeader(
+                                                    //                 "x-decompressed-content-length"
+                                                    //             ),
+                                                    //             10
+                                                    //         );
+                                                    //     }
+                                                    // }
+                                                    // xhr.send(formData)
 
 
                                                     // fn.uploadMedia(
