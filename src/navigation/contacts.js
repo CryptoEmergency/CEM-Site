@@ -60,7 +60,7 @@ const start = function (data, ID) {
                         />
                         <Input
                           Static={Static.email}
-                          classDiv="contacts_form_email_icon"
+                          classDiv="contacts_form_email_icon contacts_form_email_icon--center"
                         />
                         <TextArea
                           Static={Static.message}
