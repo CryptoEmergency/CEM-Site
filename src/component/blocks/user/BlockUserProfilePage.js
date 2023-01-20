@@ -26,11 +26,11 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
         return (<></>)
     }
 
-    initOne(
-        () => {
-            Static.activeView = "tile";
-        }
-    )
+    // initOne(
+    //     () => {
+    //         Static.activeView = "tile";
+    //     }
+    // )
 
     return (
         <div class="bl_one c-container" id="UserInfoLenta">
@@ -86,7 +86,7 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                             </ul>
                         </div>
                         {
-                            !Static.activeItems || !Static.activeItems.list_records.length
+                            !Static.activeItems || !Static.activeItems.list_records || !Static.activeItems.list_records.length
                                 ?
                                 <NotFound />
                                 :
