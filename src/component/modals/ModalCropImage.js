@@ -15,7 +15,7 @@ import 'cropperjs/dist/cropper.css';
 const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMedia, aspectSelect, uploadCropImage, editable = false }, ID) {
 
     let [Static] = fn.GetParams({ data: { originalImage, file, typeUpload, arrMedia, aspectSelect, uploadCropImage, editable }, ID })
-    // console.log('=ca484b=2', Static.editable, Static.originalImage)
+    console.log('=ModalCropImage=2', Static)
 
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
@@ -24,7 +24,7 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
 
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
-    console.log('=453e8a=', Static, arrMedia.length > 1 && !originalImage)
+    console.log('=ModalCropImage=', Static, arrMedia.length > 1 && !originalImage)
 
 
     const cropperGo = function (el) {

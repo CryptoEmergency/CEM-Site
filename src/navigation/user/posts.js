@@ -639,13 +639,6 @@ const start = function (data, ID) {
     cropImage(imageUrl, type, xhr)
 
     Static.isValid = true
-
-
-
-
-
-
-
   };
 
   let el = [];
@@ -901,11 +894,11 @@ const start = function (data, ID) {
                 // console.log('=b876c8=', Static.originalImage[0])
 
                 Static.originalImage.forEach((item) => {
-                  console.log('=86d15a=', '!!!')
+                  console.log('=posts Static.originalImage=', '!!!')
                 })
 
                 Static.originalImage[0].addEventListener('load', async function () {
-                  console.log('=7a7ecf=', Static.originalImage[0])
+                  console.log('=posts Static.originalImage[0]=', Static.originalImage[0])
 
                   if (!Static.mediaInputs.selectAspect) {
                     Static.mediaInputs.selectAspect = whatIsAspect(Static.mediaInputs.selectAspect, Static.originalImage[0].width, Static.originalImage[0].height)
@@ -913,7 +906,7 @@ const start = function (data, ID) {
 
                   // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
                   if (Object.keys(Static.files).length == 1) {
-                    // alert("Один")
+                    alert("Один выбираю")
                     fn.modals.ModalCropImage({
                       originalImage: Static.originalImage[0],
                       file: Static.files[0],
@@ -937,7 +930,7 @@ const start = function (data, ID) {
                       }
                     }, ID)
                   } else {
-                    // alert("Много")
+                    alert("Много выбираю")
                     fn.modals.ModalCropImage({
                       file: Static.files[0],
                       typeUpload: 'posts',

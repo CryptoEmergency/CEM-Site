@@ -8,7 +8,7 @@ import { fn } from '@src/functions/index.js';
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
   // console.log('=2f8e9a=', item, type)item.size
   // console.log("============on load",Static,"=======item",item)
-  console.log('=c423c3=', Static)
+  console.log('=MediaPreview=', Static)
 
 
   if (item.type == "audio") {
@@ -78,9 +78,11 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                         onclick: function (e) {
                           e.stopPropagation();
                           e.preventDefault();
-                          // alert(index)
+                          alert(index)
                           // alert(item.name)
                           // alert(Static.originalImage[index])
+                          alert("Редактирую")
+
                           fn.modals.ModalCropImage({
                             editable: true,
                             originalImage: Static.originalImage[index],
