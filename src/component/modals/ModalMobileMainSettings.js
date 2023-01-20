@@ -54,6 +54,7 @@ const ModalMobileMainSettings = function (data, ID) {
                     onclick={
                         function (e) {
                             if (close) {
+                                // console.log('=87f885=', ID)
                                 fn.modals.close(ID)
                             }
                         }
@@ -88,7 +89,7 @@ const ModalMobileMainSettings = function (data, ID) {
                             <button
                                 type="button"
                                 class="c-modal__close"
-                                onclick={() => { Variable.Modals = [] }}
+                                onclick={() => { fn.modals.close(ID) }}
                             ></button>
                         </header>
                         <div class="c-modal__body">
@@ -102,7 +103,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     return (
                                         <div>
                                             <div class="user_mobile_menu_content user_mobile_menu_main_content">
-                                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href={`/user/${Variable.myInfo.nickname}`}>
+                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href={`/user/${Variable.myInfo.nickname}`}>
                                                     <img src={svg["profile_icon-1"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.profile}</span>
                                                 </a>
@@ -110,11 +111,11 @@ const ModalMobileMainSettings = function (data, ID) {
                                             <img src={svg["profile_icon-2"]} />
                                             <span class="mobile_user_menu_link">{Variable.lang.a.chats}</span>
                                         </a> */}
-                                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
+                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
                                                     <img src={svg["profile_icon-5"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.h.createPost}</span>
                                                 </a>
-                                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/awards/">
+                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/awards/">
                                                     <img src={svg["profile_icon-4"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.awards}</span>
                                                 </a>
@@ -122,15 +123,21 @@ const ModalMobileMainSettings = function (data, ID) {
                                             <img src={svg["profile_icon-10"]} />
                                             <span class="mobile_user_menu_link">{Variable.lang.a.tasks}</span>
                                         </a> */}
-                                                <a onclick={Helpers.siteLink} class="user_icon_mobile_visible user_icon" href="/user/wallet/">
+                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/wallet/">
                                                     <img src={svg.absolutely_new_wallet} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
                                                 </a>
-                                                <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.affiliate, items: fn.itemsMenu.onlyPage({ url: '/affiliate/' }) }) }} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                                <a onclick={(e) => {
+                                                    fn.siteLinkModal(e, { title: Variable.lang.h.affiliate, items: fn.itemsMenu.onlyPage({ url: '/affiliate/' }) })
+                                                    fn.modals.close(ID)
+                                                }} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
                                                     <img src={svg["profile_icon-3"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
                                                 </a>
-                                                <a onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.text.settings }) }}
+                                                <a onclick={(e) => {
+                                                    fn.siteLinkModal(e, { title: Variable.lang.text.settings })
+                                                    fn.modals.close(ID)
+                                                }}
                                                     class="user_icon_mobile_visible user_icon"
                                                     href="/user/settings/">
                                                     <img src={svg["settings_menu"]} />
@@ -159,7 +166,7 @@ const ModalMobileMainSettings = function (data, ID) {
                             }}
                             <div class="user_mobile_menu_content user_mobile_menu_main_content">
                                 <a
-                                    onclick={Helpers.siteLink}
+                                    onclick={fn.siteLink}
                                     class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "lenta-users" ? "user_icon_active" : ""}`}
                                     href="/lenta-users/"
                                 >
@@ -169,7 +176,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                 <a
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
-                                        Helpers.siteLinkModal(e, {
+                                        fn.siteLinkModal(e, {
                                             title: Variable.lang.a.experts, items:
                                                 [
                                                     {
@@ -205,7 +212,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <span class="mobile_user_menu_link">{Variable.lang.a.experts}</span>
                                 </a>
                                 <a
-                                    onclick={Helpers.siteLink}
+                                    onclick={fn.siteLink}
                                     class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "question" ? "user_icon_active" : ""}`}
                                     href="/question/"
                                 >
@@ -224,7 +231,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                 <a
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
-                                        Helpers.siteLinkModal(e, {
+                                        fn.siteLinkModal(e, {
                                             title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({ url: '/news/' })
                                         })
                                     }}

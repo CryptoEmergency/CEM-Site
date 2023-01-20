@@ -229,7 +229,7 @@ fn.timerTik = async function () {
   } else {
     // 
     let response = await sendApi.create("tik", {})
-    if (response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length > 0) {
+    if (response && response.info && response.info.myInfo && response.info.myInfo.chatMessage && response.info.myInfo.chatMessage.length > 0) {
       let [Static] = fn.GetParams({ ID: "mainBlock", actual: true })
       if (Variable.dataUrl.adress == "user" && Variable.dataUrl.category == "chats") {
         if (Static.activeUser && Static.activeUser._id == response.info.myInfo.chatMessage[0].author) {
