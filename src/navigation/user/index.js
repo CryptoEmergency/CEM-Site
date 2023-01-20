@@ -26,8 +26,10 @@ const start = function (userInfo, ID = "mainBlock") {
     Variable.HeaderShow = true
     Variable.FooterShow = true
     Variable.showUserMenu = false
+    if(Variable.auth == false && !localStorage.getItem('refId')){
+        localStorage.setItem('refId', userInfo.nickname)
+    }
     const changeType = async function () {
-
         if (this.dataset.profilePage == profilePage) {
             return
         }

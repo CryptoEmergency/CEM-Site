@@ -99,7 +99,7 @@ const start = function (data, ID) {
                                                         {fn.getDateFormat(item.showDate)}
                                                     </div>
                                                     <div> {item.statistic.level >= 3 ? "0.5 CEM" : "0 CEM"}     </div>
-                                                    <div> {item.statistic.level >= 3 ? <img src={images["icon/transaction_success"]} /> : <img src={images["icon/transaction_in_time"]} />} </div>
+                                                    <div> {item.statistic.level >= 3 ? <img src={svg["transaction_success"]} /> : <img src={svg["transaction_in_time"]} />} </div>
                                                 </div>
                                             )
                                         })
