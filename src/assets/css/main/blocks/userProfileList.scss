@@ -574,6 +574,54 @@
     }
 }
 
+.gallery {
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+}
+
+.c-filetype {
+    display: flex;
+    align-items: stretch;
+    gap: 7px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+
+    @media(max-width: 1024px) {
+        padding-right: 10px;
+    }
+
+    &__item {
+        padding: 7px 3px;
+    }
+
+    &__link {
+        display: block;
+        width: 29px;
+        height: 29px;
+        border-radius: 8px;
+
+        &--image {
+            background: no-repeat url("../svg/sections/galary_inactive.svg") center/100%;
+        }
+
+        &--video {
+            width: 34px;
+            background: no-repeat url("../svg/sections/news_video_inactive.svg") center/100%;
+        }
+
+        &--active {
+            border: 2px solid #40f2d0;
+            border-radius: 8px;
+        }
+    }
+}
+
 .userMainBlock {
     display: flex;
     margin-bottom: 63px;

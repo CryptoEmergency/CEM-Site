@@ -9,7 +9,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, ItemsMenu, NotFound } from '@component/element/index.js';
+import { Avatar, ItemsMenu, NotFound, VideoPlayer } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
 let visibleEditInterest = false;
@@ -868,11 +868,52 @@ BlockUserProfilePage.galary = function (Static, data) {
         }
     )
     console.log('=galary Static=', Static)
-    console.log('=galary data=', data)
+    // console.log('=galary data=', data)
 
     return (
-        <div class="bl_one c-container" id="UserInfoGallery">
-            <h2>{Variable.lang.h.galary}</h2>
+        <div class="bl_one c-container gallery" id="UserInfoGallery">
+            <div class="gallery_header">
+                <h2>{Variable.lang.h.galary}</h2>
+                <ul class="c-filetype">
+                    <li
+                        onclick={function (e) {
+                            e.stopPropagation();
+                            Static.activeFiletype = "image"
+                            initReload();
+                        }}
+                    >
+                        <a
+                            href=""
+                            class={[
+                                "c-filetype__link",
+                                "c-filetype__link--image",
+                                Static.activeFiletype == "image" ? "c-filetype__link--active" : null
+                            ]}
+                        >
+
+                        </a>
+                    </li>
+                    <li
+                        onclick={function (e) {
+                            e.stopPropagation();
+                            Static.activeFiletype = "video"
+                            initReload();
+                        }}
+                    >
+                        <a
+                            href=""
+                            class={[
+                                "c-filetype__link",
+                                "c-filetype__link--video",
+                                Static.activeFiletype == "video" ? "c-filetype__link--active" : null
+                            ]}
+                        >
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             {
                 data.userInfo.gallery ?
                     <div class="c-tiles">
@@ -889,141 +930,33 @@ BlockUserProfilePage.galary = function (Static, data) {
                                             multiple
                                             onchange={async function (e) {
                                                 e.stopPropagation();
-                                                console.log('=add galary=', e, this.files)
-
-                                                // let gallery = [];
-                                                Array.from(this.files).forEach((item, index) => {
-
-                                                    console.log('=dd3afb=', item, index)
-
+                                                Array.from(this.files).forEach((item) => {
                                                     fn.uploadMedia(
                                                         item,
                                                         "gallery",
                                                         async function () {
-                                                            // Static.mediaInputs.show = true;
-                                                            // if (!this.response) {
-                                                            //     return
-                                                            // }
-                                                            // let response = JSON.parse(this.response);
+                                                            if (!this.response) {
+                                                                return
+                                                            }
+                                                            let response = JSON.parse(this.response);
 
-                                                            // Static.mediaInputs.value[index] = {
-                                                            //     originalImage,
-                                                            //     aspect: Static.mediaInputs.selectAspect,
-                                                            //     type: response.mimetype.split("/")[0],
-                                                            //     name: response.name
-                                                            // }
-                                                            // Static.isValid = true;
-                                                            // initReload();
+                                                            let data = {
+                                                                value: {
+                                                                    gallery: [{
+                                                                        type: response.mimetype,
+                                                                        name: response.name
+                                                                    }]
+                                                                }
+                                                            }
+
+                                                            const response2 = await fn.restApi.setUsers.update({
+                                                                data: data
+                                                            })
                                                         },
                                                         async function (e) {
-                                                            // let contentLength;
-                                                            // if (e.lengthComputable) {
-                                                            //     contentLength = e.total;
-                                                            // } else {
-                                                            //     contentLength = parseInt(
-                                                            //         e.target.getResponseHeader(
-                                                            //             "x-decompressed-content-length"
-                                                            //         ),
-                                                            //         10
-                                                            //     );
-                                                            // }
-
-                                                            // if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
-                                                            //     Static.mediaInputs.value.splice(index, 1);
-                                                            //     initReload()
-                                                            //     return
-                                                            // }
-                                                            // Static.mediaInputs.value[index].upload = e.loaded
-                                                            // Static.mediaInputs.value[index].size = contentLength;
-                                                            // initReload();
                                                         }
                                                     );
-
-
-                                                    // let nameFile = "file.png"
-                                                    // if (item.name) {
-                                                    //     nameFile = item.name
-                                                    // }
-
-                                                    // const formData = new FormData()
-                                                    // formData.append('media', item, nameFile);
-                                                    // xhr = new XMLHttpRequest()
-                                                    // xhr.open('POST', `/upload/post/`)
-                                                    // xhr.onload = async function () {
-                                                    //     Static.mediaInputs.show = true;
-                                                    //     if (!this.response) {
-                                                    //         return
-                                                    //     }
-                                                    //     let response = JSON.parse(this.response);
-                                                    //     Static.mediaInputs.value[index] = {
-                                                    //         type: response.mimetype.split("/")[0],
-                                                    //         name: response.name
-                                                    //     }
-                                                    //     Static.isValid = true;
-                                                    //     // initReload();
-                                                    // }
-                                                    // xhr.upload.onprogress = async function (e) {
-                                                    //     let contentLength;
-                                                    //     if (e.lengthComputable) {
-                                                    //         contentLength = e.total;
-                                                    //     } else {
-                                                    //         contentLength = parseInt(
-                                                    //             e.target.getResponseHeader(
-                                                    //                 "x-decompressed-content-length"
-                                                    //             ),
-                                                    //             10
-                                                    //         );
-                                                    //     }
-                                                    // }
-                                                    // xhr.send(formData)
-
-
-                                                    // fn.uploadMedia(
-                                                    //     item,
-                                                    //     "post",
-                                                    //     async function () {
-                                                    //         Static.mediaInputs.show = true;
-                                                    //         if (!this.response) {
-                                                    //             return
-                                                    //         }
-                                                    //         let response = JSON.parse(this.response);
-                                                    //         Static.mediaInputs.value[index] = {
-                                                    //             type: response.mimetype.split("/")[0],
-                                                    //             name: response.name
-                                                    //         }
-                                                    //         Static.isValid = true;
-                                                    //         initReload();
-                                                    //     },
-                                                    //     async function (e) {
-                                                    //         let contentLength;
-                                                    //         if (e.lengthComputable) {
-                                                    //             contentLength = e.total;
-                                                    //         } else {
-                                                    //             contentLength = parseInt(
-                                                    //                 e.target.getResponseHeader(
-                                                    //                     "x-decompressed-content-length"
-                                                    //                 ),
-                                                    //                 10
-                                                    //             );
-                                                    //         }
-                                                    //     }
-                                                    // );
-                                                    // gallery.push({ type: item.type, name: item.name })
                                                 })
-
-                                                // console.log('=gallery=', gallery)
-                                                let data = {
-                                                    // id: Variable.myInfo._id,
-                                                    value: {
-                                                        gallery: Static.mediaInputs.value
-                                                    }
-                                                }
-                                                console.log('=data=', data)
-                                                const response = await fn.restApi.setUsers.update({
-                                                    data: data
-                                                })
-
-                                                console.log('=cdd88f=', response)
                                             }}
                                         />
                                     </figure>
@@ -1033,9 +966,36 @@ BlockUserProfilePage.galary = function (Static, data) {
                         {
                             data.userInfo.gallery.map((item) => {
                                 return (
-                                    <div class="c-tiles__item" data-id={item._id}>
+                                    <div
+                                        class="c-tiles__item"
+                                        onclick={(e) => {
+                                            e.stopPropagation();
+
+                                            console.log('=6a69b7=', e.target)
+                                            console.log('=6a69b7=', e.target.attributes.src.value)
+                                            if (Static.activeItems.list_records[0].avatar) {
+                                                let nameFile;
+                                                if (true) {
+                                                    nameFile = e.target.attributes.src.value.slice(22);
+                                                } else {
+                                                    alert("Упс... А тут видео")
+                                                }
+
+                                                fn.modals.ModalViewPhoto({
+                                                    path: nameFile
+                                                });
+                                            }
+                                        }}
+                                    >
                                         <figure class="c-tiles__card">
-                                            <img class=" c-tiles__image" src={`/assets/upload/galary/${item.name}`} width="100" height="100" />
+                                            {
+                                                item.type.includes('image/') ?
+                                                    <img class=" c-tiles__image" src={`/assets/upload/gallery/${item.name}`} width="100" height="100" />
+                                                    : item.type.includes('video/') ?
+                                                        <VideoPlayer Static={Static} item={item} path={`/assets/upload/gallery/`} />
+                                                        : null
+                                            }
+
                                             {
                                                 Variable.myInfo._id == data.userInfo._id ?
                                                     <div
@@ -1051,11 +1011,14 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                                     onclick: async function (e) {
                                                                         e.stopPropagation();
                                                                         e.preventDefault();
-                                                                        alert("Удаление картинки. active = false");
-                                                                        // data.galary.push({
-                                                                        //     id: item._id,
-                                                                        // })
-                                                                        // response = await fn.restApi.setUsers.update({ data })
+                                                                        const response = await fn.restApi.setUsers.update({
+                                                                            data: {
+                                                                                value: {
+                                                                                    "gallery.active": false
+                                                                                },
+                                                                                filters: { "gallery._id": item._id }
+                                                                            }
+                                                                        })
                                                                         initReload();
                                                                     }
                                                                 },
@@ -1077,17 +1040,48 @@ BlockUserProfilePage.galary = function (Static, data) {
                         }
                     </div>
                     : Variable.myInfo._id == data.userInfo._id ?
-                        <div
+                        <label
                             class="c-tiles__item c-tiles__item--add"
-                            onclick={function (e) {
-                                e.stopPropagation();
-                                alert("Добавление картинки")
-                            }}
                         >
                             <figure class="c-tiles__card">
                                 <img class=" c-tiles__image" src={svg["radius_plus"]} />
+                                <input
+                                    type="file"
+                                    hidden
+                                    multiple
+                                    onchange={async function (e) {
+                                        e.stopPropagation();
+                                        Array.from(this.files).forEach((item) => {
+                                            fn.uploadMedia(
+                                                item,
+                                                "gallery",
+                                                async function () {
+                                                    if (!this.response) {
+                                                        return
+                                                    }
+                                                    let response = JSON.parse(this.response);
+
+                                                    let data = {
+                                                        value: {
+                                                            gallery: [{
+                                                                type: response.mimetype,
+                                                                name: response.name
+                                                            }]
+                                                        }
+                                                    }
+
+                                                    const response2 = await fn.restApi.setUsers.update({
+                                                        data: data
+                                                    })
+                                                },
+                                                async function (e) {
+                                                }
+                                            );
+                                        })
+                                    }}
+                                />
                             </figure>
-                        </div>
+                        </label>
                         : <NotFound />
             }
         </div>
