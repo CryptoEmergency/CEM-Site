@@ -89,8 +89,10 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                             file: {},
                             typeUpload: 'posts',
                             arrMedia: Static.mediaInputs.value,
-                            aspectSelect: Static.mediaInputs.value[index].aspect,  //null,
-                            uploadCropImage: async function (cropper) {
+                            aspectSelect: Static.mediaInputs.selectAspect,
+                            // aspectSelect: Static.mediaInputs.value[index].aspect,  //null,
+                            uploadCropImage: async function (cropper, aspectActive) {
+                              Static.mediaInputs.selectAspect = aspectActive
                               await sendPhotoChat(cropper, index)
                               return;
                             }

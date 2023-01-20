@@ -925,7 +925,7 @@ const start = function (data, ID) {
                 if (Object.keys(Static.files).length == 1) {
                   // alert("Один выбираю")
                   fn.modals.ModalCropImage({
-                    originalImage: Static.originalImage[0],
+                    originalImage: null,
                     file: Static.files[0],
                     typeUpload: 'posts',
                     arrMedia: Static.mediaInputs.value,
