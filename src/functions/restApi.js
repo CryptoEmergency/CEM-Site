@@ -1044,10 +1044,10 @@ restApi.setUserRoomMessage.sendMessage = async function ({ text, _id }) {
             message: {
                 text: text,
                 /*  media:[{
-                      type: {type: String},
-                      name: {type: String},
-                      active:{type: Boolean, default: true}
-                  }]*/
+                    type: {type: String},
+                    name: {type: String},
+                    active:{type: Boolean, default: true}
+                }]*/
             }
         },
         _id

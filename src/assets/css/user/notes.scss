@@ -112,9 +112,18 @@
     }
 }
 
+.dead {
+    @media(max-width: 599px) {
+        display: none;
+    }
+}
+
 .notes-item h3 {
     margin: 0;
     font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .notes-item span {
@@ -123,11 +132,38 @@
 }
 
 .notes-content-wrapper {
-    width: 100%;
+    position: relative;
+    width: calc(100% - 300px);
     padding: 30px;
 
     @media(max-width: 599px) {
         display: none;
+    }
+}
+
+.notes-content-wrapper.active {
+    @media(max-width: 599px) {
+        display: block;
+        width: 100%;
+        padding-top: 50px;
+    }
+}
+
+.notes-content-close {
+    display: none;
+
+    @media(max-width: 599px) {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        display: block;
+        margin-left: auto;
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.6;
+        }
     }
 }
 
