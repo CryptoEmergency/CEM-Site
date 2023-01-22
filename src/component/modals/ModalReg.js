@@ -41,6 +41,9 @@ const sendRegistration = async function (Static, e) {
         data.phone = `+${Static['phone'].code}${Static['phone'].value}`
         data.co = Static['phone'].abbr
     }
+    if(localStorage.getItem('refId')){
+        data.refId = localStorage.getItem('refId')
+    }
     let tmpRes = await sendApi.create("registration", { value: data });
     if (tmpRes.status === 'ok') {
         Variable.DelModals("ModalReg")

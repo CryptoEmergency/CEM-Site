@@ -4,11 +4,11 @@ import { fn } from '@src/functions/index.js';
 const loadListen = async function () {
     try {
         window.onerror = function (message, url, lineNumber) {
-            console.error("Global Error:", message + "\n(" + url + ":" + lineNumber + ")");
+            // console.error("Global Error:", message + "\n(" + url + ":" + lineNumber + ")");
         };
 
         window.addEventListener("unhandledrejection", function (promiseRejectionEvent) {
-            console.error("Global Error (unhandledrejection):", promiseRejectionEvent.reason);
+            // console.error("Global Error (unhandledrejection):", promiseRejectionEvent.reason);
         });
 
         window.onpopstate = function (e) {

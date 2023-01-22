@@ -9,7 +9,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, ItemsMenu, NotFound } from '@component/element/index.js';
+import { Avatar, ItemsMenu, NotFound, VideoPlayer } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
 let visibleEditInterest = false;
@@ -26,11 +26,11 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
         return (<></>)
     }
 
-    initOne(
-        () => {
-            Static.activeView = "tile";
-        }
-    )
+    // initOne(
+    //     () => {
+    //         Static.activeView = "tile";
+    //     }
+    // )
 
     return (
         <div class="bl_one c-container" id="UserInfoLenta">
@@ -86,7 +86,7 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                             </ul>
                         </div>
                         {
-                            !Static.activeItems || !Static.activeItems.list_records.length
+                            !Static.activeItems || !Static.activeItems.list_records || !Static.activeItems.list_records.length
                                 ?
                                 <NotFound />
                                 :
@@ -854,6 +854,236 @@ BlockUserProfilePage.questions = function (Static, data) {
                     )
                 }
             }}
+        </div>
+    )
+};
+
+BlockUserProfilePage.galary = function (Static, data) {
+    if (!data || data.profilePage != "galary") {
+        return (<></>)
+    }
+
+    initOne(
+        () => {
+        }
+    )
+    console.log('=galary Static=', Static)
+    // console.log('=galary data=', data)
+
+    return (
+        <div class="bl_one c-container gallery" id="UserInfoGallery">
+            <div class="gallery_header">
+                <h2>{Variable.lang.h.galary}</h2>
+                <ul class="c-filetype">
+                    <li
+                        onclick={function (e) {
+                            e.stopPropagation();
+                            Static.activeFiletype = "image"
+                            initReload();
+                        }}
+                    >
+                        <a
+                            href=""
+                            class={[
+                                "c-filetype__link",
+                                "c-filetype__link--image",
+                                Static.activeFiletype == "image" ? "c-filetype__link--active" : null
+                            ]}
+                        >
+
+                        </a>
+                    </li>
+                    <li
+                        onclick={function (e) {
+                            e.stopPropagation();
+                            Static.activeFiletype = "video"
+                            initReload();
+                        }}
+                    >
+                        <a
+                            href=""
+                            class={[
+                                "c-filetype__link",
+                                "c-filetype__link--video",
+                                Static.activeFiletype == "video" ? "c-filetype__link--active" : null
+                            ]}
+                        >
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {
+                data.userInfo.gallery ?
+                    <div class="c-tiles">
+                        {
+                            Variable.myInfo._id == data.userInfo._id ?
+                                <label
+                                    class="c-tiles__item c-tiles__item--add"
+                                >
+                                    <figure class="c-tiles__card">
+                                        <img class=" c-tiles__image" src={svg["radius_plus"]} />
+                                        <input
+                                            type="file"
+                                            hidden
+                                            multiple
+                                            onchange={async function (e) {
+                                                e.stopPropagation();
+                                                Array.from(this.files).forEach((item) => {
+                                                    fn.uploadMedia(
+                                                        item,
+                                                        "gallery",
+                                                        async function () {
+                                                            if (!this.response) {
+                                                                return
+                                                            }
+                                                            let response = JSON.parse(this.response);
+
+                                                            let data = {
+                                                                value: {
+                                                                    gallery: [{
+                                                                        type: response.mimetype,
+                                                                        name: response.name
+                                                                    }]
+                                                                }
+                                                            }
+
+                                                            const response2 = await fn.restApi.setUsers.update({
+                                                                data: data
+                                                            })
+                                                        },
+                                                        async function (e) {
+                                                        }
+                                                    );
+                                                })
+                                            }}
+                                        />
+                                    </figure>
+                                </label>
+                                : null
+                        }
+                        {
+                            data.userInfo.gallery.map((item) => {
+                                return (
+                                    <div
+                                        class="c-tiles__item"
+                                        onclick={(e) => {
+                                            e.stopPropagation();
+
+                                            console.log('=6a69b7=', e.target)
+                                            console.log('=6a69b7=', e.target.attributes.src.value)
+                                            if (Static.activeItems.list_records[0].avatar) {
+                                                let nameFile;
+                                                if (true) {
+                                                    nameFile = e.target.attributes.src.value.slice(22);
+                                                } else {
+                                                    alert("Упс... А тут видео")
+                                                }
+
+                                                fn.modals.ModalViewPhoto({
+                                                    path: nameFile
+                                                });
+                                            }
+                                        }}
+                                    >
+                                        <figure class="c-tiles__card">
+                                            {
+                                                item.type && item.type.includes('image/') ?
+                                                    <img class=" c-tiles__image" src={`/assets/upload/gallery/${item.name}`} width="100" height="100" />
+                                                    : item.type && item.type.includes('video/') ?
+                                                        <VideoPlayer Static={Static} item={item} path={`/assets/upload/gallery/`} />
+                                                        : null
+                                            }
+
+                                            {
+                                                Variable.myInfo._id == data.userInfo._id ?
+                                                    <div
+                                                        class="messages_settings c-tiles__delete"
+                                                        title={Variable.lang.text.settings}
+                                                        onclick={(e) => {
+                                                            let author = Variable.myInfo
+                                                            let items = [
+                                                                {
+                                                                    text: Variable.lang.select.delete,
+                                                                    type: "delete",
+                                                                    color: "red",
+                                                                    onclick: async function (e) {
+                                                                        e.stopPropagation();
+                                                                        e.preventDefault();
+                                                                        const response = await fn.restApi.setUsers.update({
+                                                                            data: {
+                                                                                value: {
+                                                                                    "gallery.active": false
+                                                                                },
+                                                                                filters: { "gallery._id": item._id }
+                                                                            }
+                                                                        })
+                                                                        initReload();
+                                                                    }
+                                                                },
+                                                            ]
+                                                            e.stopPropagation();
+                                                            e.preventDefault();
+                                                            Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
+                                                        }
+                                                        }
+                                                    >
+                                                        <img class="" src={svg.settings_icon} width="20" height="20" />
+                                                    </div>
+                                                    : null
+                                            }
+                                        </figure>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    : Variable.myInfo._id == data.userInfo._id ?
+                        <label
+                            class="c-tiles__item c-tiles__item--add"
+                        >
+                            <figure class="c-tiles__card">
+                                <img class=" c-tiles__image" src={svg["radius_plus"]} />
+                                <input
+                                    type="file"
+                                    hidden
+                                    multiple
+                                    onchange={async function (e) {
+                                        e.stopPropagation();
+                                        Array.from(this.files).forEach((item) => {
+                                            fn.uploadMedia(
+                                                item,
+                                                "gallery",
+                                                async function () {
+                                                    if (!this.response) {
+                                                        return
+                                                    }
+                                                    let response = JSON.parse(this.response);
+
+                                                    let data = {
+                                                        value: {
+                                                            gallery: [{
+                                                                type: response.mimetype,
+                                                                name: response.name
+                                                            }]
+                                                        }
+                                                    }
+
+                                                    const response2 = await fn.restApi.setUsers.update({
+                                                        data: data
+                                                    })
+                                                },
+                                                async function (e) {
+                                                }
+                                            );
+                                        })
+                                    }}
+                                />
+                            </figure>
+                        </label>
+                        : <NotFound />
+            }
         </div>
     )
 };

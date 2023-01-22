@@ -27,7 +27,6 @@ const loadStorage = async function () {
         let objView = getStorage("recordsView")
         for (let key in objView) {
             if (timeNow - objView[key] >= 86400) {
-                console.log('=1245ab=', key)
                 delete objView[key]
             }
         }

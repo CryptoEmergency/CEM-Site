@@ -165,19 +165,36 @@
     position: relative;
 }
 
-.contacts_form_email_icon:before {
-    content: ' ';
-    width: 21px;
-    height: 16px;
-    position: absolute;
-    background: url(../svg/contacts_form_name.svg);
-    top: 23px;
-    left: 25px;
-    z-index: 1;
-}
+// .contacts_form_email_icon:before {
+//     content: ' ';
+//     width: 21px;
+//     height: 16px;
+//     position: absolute;
+//     background: url(../svg/contacts_form_name.svg);
+//     top: 23px;
+//     left: 25px;
+//     z-index: 1;
+// }
 
 .contacts_form_email_icon {
     position: relative;
+
+    &::before {
+        content: ' ';
+        width: 21px;
+        height: 16px;
+        position: absolute;
+        background: url(../svg/contacts_form_name.svg);
+        top: 23px;
+        left: 25px;
+        z-index: 1;
+    }
+
+    &--center {
+        &::before {
+            top: 17px;
+        }
+    }
 }
 
 .contacts_form_name_icon:after {

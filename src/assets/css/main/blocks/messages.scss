@@ -489,7 +489,7 @@
 	position: relative;
 	left: 20px;
 	word-break: break-word;
-	max-width: 100%;
+	max-width: 80%;
 
 	&::before {
 		content: '';
@@ -555,7 +555,7 @@
 	padding: 3px; //8px 15px 8px;
 	border-radius: 10px;
 	position: relative;
-	max-width: 100%;
+	max-width: 80%;
 
 	&::before {
 		content: '';
