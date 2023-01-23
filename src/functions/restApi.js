@@ -1312,9 +1312,7 @@ restApi.setNotes.update = async function ({ _id, title, text, media, noAlert }) 
             media
         },
     };
-    console.log('=83974b=', data)
     const response = await sendApi.create("setNotes", data);
-    console.log('=2d183a=', response)
     return checkSetAnswer(response, noAlert)
 }
 

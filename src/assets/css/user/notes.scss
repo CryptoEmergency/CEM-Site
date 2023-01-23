@@ -42,7 +42,7 @@
     width: 300px;
     border-right: 1px solid #464d62;
     overflow: auto;
-    overflow-x:hidden;
+    overflow-x: hidden;
 
     @media(max-width: 992px) {
         width: 220px;
@@ -127,7 +127,7 @@
 
 .notes-item_active {
     background: #464d62;
-    pointer-events:none;
+    pointer-events: none;
 }
 
 .dead {
@@ -201,8 +201,8 @@
 
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus {
-    border:none;
-    outline:none;
+    border: none;
+    outline: none;
 }
 
 .notes-description {
@@ -211,5 +211,9 @@
 }
 
 .notes-description[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text)
+}
+
+.notes-input-text[contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text)
 }
