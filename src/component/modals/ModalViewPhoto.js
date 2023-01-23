@@ -11,13 +11,13 @@ import {
 
 
 
-const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null }, ID) {
+const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, video = false }, ID) {
     let [Static] = fn.GetParams({ data: { path } })
     let [mainStatic] = fn.GetParams({ actual: true })
     let close = true
     init(
         () => {
-            console.log('=3e2bc4=', path, arrMedia, mainStatic)
+            // console.log('=3e2bc4=', arrMedia)
             Static.elMedia = {}
         },
         () => {
@@ -26,18 +26,26 @@ const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null }, ID
                     class="c-modal c-modal--open" id="test2"
                     After={
                         () => {
-                            for (let key in Static.elMedia) {
-                                if (Static.elMedia[key].el.src.includes(path)) {
-                                    Static.elMedia[key].el.play()
-
-                                    const container = document.getElementById('test2');
-                                    const el = document.getElementById(`${path}`);
-                                    container.scrollTop = el.offsetTop
-                                    console.log('=4732e1=', el.offsetTop)
+                            // console.log('=b2bbb6=', typeof video)
+                            if (typeof video === "object") {
+                                for (let key in Static.elMedia) {
+                                    if (Static.elMedia[key].el.src.includes(path)) {
+                                        Static.elMedia[key].el.play()
+                                    }
                                 }
+                            } else {
+                                for (let key in Static.elMedia) {
+                                    if (Static.elMedia[key].el.src.includes(path)) {
+                                        Static.elMedia[key].el.play()
 
+                                        const container = document.getElementById('test2');
+                                        const el = document.getElementById(`${path}`);
+                                        container.scrollTop = el.offsetTop
+                                        console.log('=4732e1=', el.offsetTop)
+                                    }
+
+                                }
                             }
-
                         }
                     }
                     onclick={function (e) {
@@ -69,9 +77,30 @@ const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null }, ID
                         <div class="c-modal__body">
                             {() => {
                                 if (!arrMedia) {
-                                    return (
-                                        <img src={fullPath ? path : `/assets/upload/orig/${path}`} width="100%" height="" />
-                                    )
+                                    if (video) {
+                                        return (
+                                            // <img src={fullPath ? path : `/assets/upload/orig/${path}`} width="100%" height="" />
+                                            <VideoPlayer
+                                                className={"c-viewarrmedia__image1"}
+                                                Static={Static}
+                                                item={video}
+                                                path={`/assets/upload/gallery/`}
+                                            // onLoad={
+                                            //     //работает вряд ли. Чем заменить?
+                                            //     path == item.name ? () => {
+                                            //         const container = document.getElementById('test2');
+                                            //         const el = document.getElementById(`${path}`);
+                                            //         container.scrollTop = el.offsetTop
+                                            //         console.log('=2d2033=', '!!!')
+                                            //     } : null
+                                            // }
+                                            />
+                                        )
+                                    } else {
+                                        return (
+                                            <img src={fullPath ? path : `/assets/upload/orig/${path}`} width="100%" height="" />
+                                        )
+                                    }
                                 } else {
                                     return (
                                         <ul class="c-viewarrmedia">
