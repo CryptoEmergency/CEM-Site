@@ -1160,7 +1160,7 @@ restApi.logOut = async function () {
 
 restApi.SetCommunity = {}
 
-restApi.SetCommunity.create = async function ({title, icon, cover, usersCount, country, city, languages, еvents, gallery, contacts, social, interest, shortDescription, fullDescription, category, foundationDate}) {
+restApi.SetCommunity.create = async function ({ title, icon, cover, usersCount, country, city, languages, еvents, gallery, contacts, social, interest, shortDescription, fullDescription, category, foundationDate }) {
     let data = {
         value: {
             title: title,
@@ -1240,6 +1240,55 @@ restApi.doRole.deleteComment = async function ({ _id }) {
 
     const response = await sendApi.create("doRole", data);
     return checkSetAnswer(response)
+}
+
+
+//==========
+
+restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+
+    let defaultFilter = {}
+
+    if (filter._id) {
+        defaultFilter = {}
+    }
+
+    let defaultSelect = {
+        title: 1,
+        text: 1,
+        media: 1
+    }
+
+
+    let data = {
+        action: "getNotes",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    if (defaultReset) {
+        if (filter) { data.filter = filter }
+        if (select) { data.select = select }
+    }
+
+    let response = await sendApi.send(data);
+
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
 }
 
 export { restApi };
