@@ -1247,6 +1247,8 @@ restApi.doRole.deleteComment = async function ({ _id }) {
 
 restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
 
+
+
     let defaultFilter = {}
 
     if (filter._id) {
@@ -1270,11 +1272,6 @@ restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter,
         filter: Object.assign(defaultFilter, filter),
         select: Object.assign(defaultSelect, select),
         sort
-    }
-
-    if (defaultReset) {
-        if (filter) { data.filter = filter }
-        if (select) { data.select = select }
     }
 
     let response = await sendApi.send(data);
