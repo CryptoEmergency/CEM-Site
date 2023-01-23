@@ -28,6 +28,8 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
     }
     let elMedia = Static.elMedia[item._id]
     let playButton, playLoader
+
+    // console.log('=VideoPlayer=', Static, item, path)
     return (
         <div
             class={[
@@ -56,7 +58,7 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
                     })
                     elMedia.play = true
                     playButton.style.display = 'none'
-                    if(this.buffered.length == 0){
+                    if (this.buffered.length == 0) {
                         playLoader.style.display = 'block'
                     }
                     elMedia.controlsPause.src = svg["player_pause"]

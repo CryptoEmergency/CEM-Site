@@ -964,33 +964,38 @@ BlockUserProfilePage.galary = function (Static, data) {
                                 : null
                         }
                         {
-                            data.userInfo.gallery.map((item) => {
+                            data.userInfo.gallery.filter((item) => {
+                                return item.type.includes(Static.activeFiletype)
+                            }).map((item) => {
                                 return (
                                     <div
                                         class="c-tiles__item"
                                         onclick={(e) => {
+                                            e.preventDefault();
                                             e.stopPropagation();
-
-                                            console.log('=6a69b7=', e.target)
-                                            console.log('=6a69b7=', e.target.attributes.src.value)
                                             if (Static.activeItems.list_records[0].avatar) {
                                                 let nameFile;
-                                                if (true) {
-                                                    nameFile = e.target.attributes.src.value.slice(22);
+                                                if (e.currentTarget.querySelector('.c-tiles__image')) {
+                                                    nameFile = e.currentTarget.querySelector('.c-tiles__image').attributes.src.value.slice(22);
+                                                    fn.modals.ModalViewPhoto({
+                                                        path: nameFile,
+                                                    });
                                                 } else {
-                                                    alert("Упс... А тут видео")
+                                                    nameFile = e.currentTarget.querySelector('video').attributes.src.value.slice(22);
+                                                    fn.modals.ModalViewPhoto({
+                                                        path: nameFile,
+                                                        video: item
+                                                    });
                                                 }
+                                                // console.log('=c88115=', nameFile)
 
-                                                fn.modals.ModalViewPhoto({
-                                                    path: nameFile
-                                                });
                                             }
                                         }}
                                     >
                                         <figure class="c-tiles__card">
                                             {
                                                 item.type && item.type.includes('image/') ?
-                                                    <img class=" c-tiles__image" src={`/assets/upload/gallery/${item.name}`} width="100" height="100" />
+                                                    <img class="c-tiles__image" src={`/assets/upload/gallery/${item.name}`} width="100" height="100" />
                                                     : item.type && item.type.includes('video/') ?
                                                         <VideoPlayer Static={Static} item={item} path={`/assets/upload/gallery/`} />
                                                         : null

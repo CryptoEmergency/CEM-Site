@@ -459,6 +459,15 @@
         }
 
         &--add {
+            border: 2px dashed #c5b8eb;
+            cursor: pointer;
+
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3) {
+                border-top: 2px dashed #c5b8eb;
+            }
+
             .c-tiles {
                 &__card {
                     display: flex;
@@ -473,9 +482,12 @@
                     border: 0;
                     min-width: 0;
                     min-height: 0;
+                    background-image: none;
                 }
             }
         }
+
+
     }
 
     &__card {
@@ -508,7 +520,7 @@
 
     &__image {
         background-color: #1D2029;
-        background-image: url('../images/user_background_image.jpg');
+        // background-image: url('../images/user_background_image.jpg');
         background-size: contain;
         background-repeat: no-repeat;
 
