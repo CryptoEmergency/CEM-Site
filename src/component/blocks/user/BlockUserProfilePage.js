@@ -965,7 +965,10 @@ BlockUserProfilePage.galary = function (Static, data) {
                         }
                         {
                             data.userInfo.gallery.filter((item) => {
-                                return item.type.includes(Static.activeFiletype)
+                                if (item && item.type && item.type.includes(Static.activeFiletype)) {
+                                    return true
+                                }
+                                // return item.type.includes(Static.activeFiletype)
                             }).map((item) => {
                                 return (
                                     <div
