@@ -1135,12 +1135,12 @@ BlockUserProfilePage.social = function (Static, data) {
                                                 e.stopPropagation();
 
                                                 let data = {
+
                                                     value: {
-                                                        value: {
-                                                            "social.active": false
-                                                        },
-                                                        filters: { "social._id": socialItem._id }
-                                                    }
+                                                        "social.active": false
+                                                    },
+                                                    filters: { "social._id": socialItem._id }
+
                                                 }
                                                 console.log('=11bc67=data=', data)
 
