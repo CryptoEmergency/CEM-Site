@@ -69,21 +69,22 @@ const start = function (userInfo, ID = "mainBlock") {
                 limit: 20
             });
         } else if (profilePage == "galary") {
-            // Static.activeItems = await sendApi.send({
-            //     action: "getUsers", short: true, filter: {
-            //         nickname: userInfo.nickname,
-            //     },
-            //     select: {
-            //         gallery: 1
-            //     },
-            // });
-            // Static.activeItems = userInfo;
             Static.activeItems = await fn.restApi.getUsers({ filter: { nickname: userInfo.nickname }, select: { gallery: 1 } })
 
             Static.mediaInputs = {
                 value: [],
                 show: false,
             }
+        } else if (profilePage == "social") {
+            Static.activeItems = await fn.restApi.getUsers({ filter: { nickname: userInfo.nickname }, select: { social: 1 } })
+            Static.viewForm = false;
+            Static.isValid = false;
+            // Static.elShowMenu = null
+            Static.elShowMenu = []
+            // Static.channelNewSocial = "";
+            // Static.linkNewSocial = "";
+            // Static.nameNewSocial = "";
+            // Static.descriptionNewSocial = "";
         }
         initReload()
     }
@@ -390,24 +391,16 @@ const start = function (userInfo, ID = "mainBlock") {
                                 onclick={changeType}
                             ></i>
                         </div>
-                        {/* <div data-type="social" class="c-usercategories__item">
-                                <i
-                                    class={[
-                                        `c-usercategories__icon',
-                                        profilePage == 'social' ? 'c-usercategories__icon--social' : 'c-usercategories__icon--social_inactive'
-                                    ]}
-                                    data-profilePage="social"
-                                    onclick={changeType}
-                                ></i>
-                                <img
-                                    class="c-usercategories__img"
-                                    src={svg[`sections/social${profilePage != 'social' ? '_inactive' : ''}`]}
-                                    data-profilePage="social"
-                                    onclick={changeType}
-                                />
-                            </div> 
-                        */}
-
+                        <div data-type="social" class="c-usercategories__item">
+                            <i
+                                class={[
+                                    'c-usercategories__icon',
+                                    profilePage == 'social' ? 'c-usercategories__icon--social' : 'c-usercategories__icon--social_inactive'
+                                ]}
+                                data-profilePage="social"
+                                onclick={changeType}
+                            ></i>
+                        </div>
                         <div data-type="galary" class="c-usercategories__item">
                             <i
                                 class={[

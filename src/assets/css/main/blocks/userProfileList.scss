@@ -1340,9 +1340,23 @@
     }
 }
 
+.c-usersocial {
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    &__toggler {
+        padding: 0 15px;
+    }
+}
+
 .user_social_header {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 
     img {
         cursor: pointer;
@@ -1357,7 +1371,7 @@
     padding: 20px;
     max-width: 400px;
     margin-bottom: 20px;
-    display: none;
+    // display: none;
 
     .button-container-preview {
         margin: 0 !important;

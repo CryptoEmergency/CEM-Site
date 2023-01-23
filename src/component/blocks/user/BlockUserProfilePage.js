@@ -858,6 +858,319 @@ BlockUserProfilePage.questions = function (Static, data) {
     )
 };
 
+BlockUserProfilePage.social = function (Static, data) {
+    if (!data || data.profilePage != "social") {
+        return (<></>)
+    }
+
+    initOne(
+        () => {
+            Static.channelNewSocial = "";
+            Static.linkNewSocial = "";
+            Static.nameNewSocial = "";
+            Static.descriptionNewSocial = "";
+        }
+    )
+    console.log('=social Static=', Static)
+    // console.log('=social data=', data)
+
+    return (
+        <div class="bl_one c-container c-usersocial" id="UserInfoSocial">
+            <div class="user_social_header c-usersocial__header">
+                <h3>{Variable.lang.h.userSocials}</h3>
+                {
+                    data.userInfo._id == Variable.myInfo._id ?
+                        <img
+                            class="c-usersocial__toggler"
+                            src={svg["pen"]}
+                            onclick={() => {
+                                Static.viewForm = !Static.viewForm
+                                initReload()
+                            }}
+                        />
+                        : null
+                }
+            </div>
+
+            <div
+                class={[
+                    "createSocialForm",
+                    Static.viewForm ? null : "c-hidden"
+                ]}
+
+            >
+                <div class="create_social_icons">
+                    <div class="create_social_icons">
+                        <div
+                            data-link="https://www.youtube.com/c/"
+                            data-social="youtube"
+                            class="create_social_icon youtube"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["youtube_icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.facebook.com/"
+                            data-social="facebook"
+                            class="create_social_icon facebook"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["facebook_icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.twitter.com/"
+                            data-social="twitter"
+                            class="create_social_icon twitter"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["twitter_icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.discord.com/invite/"
+                            data-social="discord"
+                            class="create_social_icon discord"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["discord_icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.instagram.com/"
+                            data-social="instagram"
+                            class="create_social_icon instagram"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["instagram_icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.tiktok.com/@"
+                            data-social="tiktok"
+                            class="create_social_icon tiktok"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["tiktok_icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.twitch.tv/"
+                            data-social="twitch"
+                            class="create_social_icon twitch"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["twitch_icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.vk.com/"
+                            data-social="vk"
+                            class="create_social_icon vk"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["vk-icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://www.t.me/"
+                            data-social="telegram"
+                            class="create_social_icon telegram"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["telegram-icon"]} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="create_social_inputs">
+                    <input
+                        data-keyup="deleteBorder"
+                        class="create_social_link"
+                        type="text"
+                        placeholder={Variable.lang.placeholder.link}
+                        value={Static.linkNewSocial}
+                        oninput={function (e) {
+                            Static.linkNewSocial = this.value.trim()
+                        }}
+                    />
+                    <input
+                        data-keyup="deleteBorder"
+                        class="create_social_name"
+                        type="text"
+                        placeholder={Variable.lang.placeholder.title}
+                        value={Static.nameNewSocial}
+                        oninput={function (e) {
+                            Static.nameNewSocial = this.value.trim()
+                        }}
+                    />
+                    <input
+                        data-keyup="deleteBorder"
+                        class="create_social_desc"
+                        type="text"
+                        placeholder={Variable.lang.placeholder.shortDescription}
+                        value={Static.descriptionNewSocial}
+                        oninput={function (e) {
+                            Static.descriptionNewSocial = this.value.trim()
+                        }}
+                    />
+                </div>
+                <a
+                    href=""
+                    class="c-button c-button--primary2"
+                    disabled={!Static.isValid ? "disabled" : null}
+                    onclick={async function (e) {
+                        e.preventDefault();
+                        // fn.checkValid(Static, ["descriptionNewSocial", "nameNewSocial", "linkNewSocial"])
+                        Static.isValid = (Static.channelNewSocial && Static.channelNewSocial.length > 2)
+                            && (Static.descriptionNewSocial && Static.descriptionNewSocial.length > 2)
+                            && (Static.nameNewSocial && Static.nameNewSocial.length > 2)
+                            && (Static.linkNewSocial && Static.linkNewSocial.length > 2)
+                        console.log('=Static.isValid=', Static.isValid)
+
+                        if (!Static.isValid && Static.isValid != 'undefined') {
+                            return false;
+                        } else {
+                            let data = {
+                                value: {
+                                    social: [
+                                        {
+                                            channel: Static.channelNewSocial,
+                                            description: Static.descriptionNewSocial,
+                                            name: Static.nameNewSocial,
+                                            url: Static.linkNewSocial,
+                                        }
+                                    ]
+                                }
+                            }
+                            console.log('=11bc61=data=', data)
+
+                            const response = await fn.restApi.setUsers.update({
+                                data: data
+                            })
+
+                            console.log('=87542b=response=', response)
+
+                            if (response.status === 'ok') {
+                                Static.channelNewSocial = ""
+                                Static.descriptionNewSocial = ""
+                                Static.nameNewSocial = ""
+                                Static.linkNewSocial = ""
+                                Static.viewForm = false;
+                                initReload()
+                            } else {
+                                Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true);
+                            }
+                        }
+                    }}
+                >
+                    <span class="c-button__wrapper">
+                        {Variable.lang.button.add}
+                    </span>
+                </a>
+            </div >
+
+            <div class="user_social_card_list" style={Static.activeItems.list_records[0].social.length ? null : 'grid-template-columns: calc(100% - 10px);'}>
+                {
+                    Static.activeItems.list_records[0].social.map((socialItem, index) => {
+                        return (
+                            <a
+                                data-id={socialItem._id}
+                                target="_blank"
+                                href={socialItem.url}
+                                class={[
+                                    socialItem.channel,
+                                    "user_social_card"
+                                ]}
+                                onclick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    alert("View")
+                                }}
+                            >
+                                <div class="user_social_card_inner">
+                                    <div class="{{channel}} user_social_card_type">
+                                        <img src={svg[`${socialItem.channel}_icon`]} />
+                                    </div>
+                                    <div class="user_social_card_text">
+                                        <p class="user_social_card_name">{socialItem.name}</p>
+                                        <p class="user_social_card_description">{socialItem.description}</p>
+                                    </div>
+                                </div>
+                                <div class="about_user_section_points_container">
+                                    <img
+                                        class="about_user_section_points"
+                                        src={svg["points"]}
+                                        onclick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            Static.elShowMenu.forEach((item, i) => {
+                                                Static.elShowMenu[i].style = ""
+                                            })
+                                            Static.elShowMenu[index].style = "display: block"
+                                        }}
+                                    />
+                                    <div
+                                        Element={($el) => {
+                                            Static.elShowMenu[index] = $el
+                                        }}
+                                        data-id={index}
+                                        class="about_user_section_points_menu"
+                                    >
+                                        <div
+                                            data-id={socialItem._id}
+                                            class="about_user_section_points_menu_item about_user_edit_handler"
+                                            onclick={async function (e) {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+
+                                                let data = {
+                                                    value: {
+                                                        value: {
+                                                            "social.active": false
+                                                        },
+                                                        filters: { "social._id": socialItem._id }
+                                                    }
+                                                }
+                                                console.log('=11bc67=data=', data)
+
+                                                const response = await fn.restApi.setUsers.update({
+                                                    data: data
+                                                })
+
+                                                console.log('=875427=response=', response)
+
+                                                if (response.status === 'ok') {
+                                                    initReload()
+                                                } else {
+                                                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true);
+                                                }
+                                                Static.elShowMenu[index].style = ""
+                                            }}
+                                        >
+                                            {Variable.lang.select.delete}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    )
+};
+
 BlockUserProfilePage.galary = function (Static, data) {
     if (!data || data.profilePage != "galary") {
         return (<></>)
