@@ -1258,7 +1258,8 @@ restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter,
     let defaultSelect = {
         title: 1,
         text: 1,
-        media: 1
+        media: 1,
+        showDate: 1
     }
 
 
@@ -1286,6 +1287,35 @@ restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter,
     } else {
         return responseCheck
     }
+}
+
+restApi.setNotes = {}
+
+
+restApi.setNotes.create = async function ({ title, text, media, noAlert }) {
+    let data = {
+        value: {
+            title,
+            text,
+            media
+        },
+    };
+    const response = await sendApi.create("setNotes", data);
+    return checkSetAnswer(response, noAlert)
+}
+restApi.setNotes.update = async function ({ _id, title, text, media, noAlert }) {
+    let data = {
+        _id,
+        value: {
+            title,
+            text,
+            media
+        },
+    };
+    console.log('=83974b=', data)
+    const response = await sendApi.create("setNotes", data);
+    console.log('=2d183a=', response)
+    return checkSetAnswer(response, noAlert)
 }
 
 export { restApi };

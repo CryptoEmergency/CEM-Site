@@ -1,9 +1,7 @@
 import {
     jsx,
     jsxFrag,
-    init,
     load,
-    Variable,
     initReload
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
@@ -18,14 +16,14 @@ import svg from '@assets/svg/index.js';
 
 const start = function (data, ID) {
 
-
     let [Static] = fn.GetParams({ data, ID })
 
     load({
         ID,
         fnLoad: async () => {
             Static.notesList = await fn.restApi.getNotes({ filter: {} })
-            Static.elDescription = null
+            Static.elTitle = null
+            Static.elText = null
             Static.activeNotes = null
             Static.timerChange = null
             console.log('=20dcf6=', Static.notesList)
@@ -41,14 +39,14 @@ const start = function (data, ID) {
                                     <button class="notes-button"
                                         onclick={() => {
                                             if (!Static.notesList.list_records[0] || Static.notesList.list_records[0]._id) {
-                                                Static.notesList.list_records.unshift({ title: "Без названия", text: "", media: [], dateCreate: new Date().toISOString() })
+                                                Static.notesList.list_records.unshift({ title: "Без названия", text: "", media: [], showDate: new Date().toISOString() })
                                             }
                                             Static.activeNotes = Static.notesList.list_records[0]
                                             initReload()
                                         }}>
                                         <span>Новая заметка</span>
                                     </button>
-                                    {Static.notesList.list_records.map(function (item, index) {
+                                    {Static.notesList.list_records.map(function (item) {
                                         return (
                                             <div
                                                 class={["notes-item", Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null]}
@@ -56,8 +54,14 @@ const start = function (data, ID) {
                                                     Static.activeNotes = item
                                                     initReload()
                                                 }}>
-                                                <h3>{item.title}</h3>
-                                                <span>{fn.getDateFormat(item.dateCreate)}</span>
+                                                <h3>{
+                                                    Static.activeNotes && Static.activeNotes._id == item._id
+                                                        ?
+                                                        Static.activeNotes.title
+                                                        :
+                                                        item.title
+                                                }</h3>
+                                                <span>{fn.getDateFormat(item.showDate)}</span>
                                             </div>
                                         )
                                     })}
@@ -74,66 +78,74 @@ const start = function (data, ID) {
                                             )
                                         } else {
                                             return (
-                                                // <div class="notes-content-wrapper">
                                                 <div class={["notes-content-wrapper", Static.activeNotes ? "active" : null]}>
                                                     <img class="notes-content-close" src={svg["close"]}
                                                         onclick={() => {
                                                             Static.activeNotes = null
                                                             initReload()
-                                                        }}
-                                                    />
+                                                        }} />
                                                     <div class="notes-input-text"
-                                                        contenteditable={!Static.activeNotes
-                                                            ?
-                                                            this.contentEditable = "false"
-                                                            :
-                                                            this.contentEditable = "true"
-                                                        }
-                                                    // oninput={() => {
-                                                    //     Static.activeNotes.title = document.querySelector(".notes-input-text").textContent
-                                                    // }}
-                                                    >
-                                                        {!Static.activeNotes
-                                                            ?
-                                                            "Название"
-                                                            :
-                                                            Static.activeNotes.title
-                                                        }
+                                                        contenteditable={true}
+                                                        Element={($el) => {
+                                                            Static.elTitle = $el
+                                                        }}
+                                                        textContent={Static.activeNotes.title}
+                                                        oninput={() => {
+                                                            Static.activeNotes.title = Static.elTitle.textContent
+                                                            if (Static.timerChange) {
+                                                                clearTimeout(Static.timerChange);
+                                                            }
+                                                            Static.timerChange = setTimeout(async () => {
+                                                                if (!Static.activeNotes._id) {
+                                                                    const response = await fn.restApi.setNotes.create(Static.activeNotes)
+                                                                    if (response && response.status == "ok") {
+                                                                        if (response.list_records && response.list_records[0]) {
+                                                                            Static.notesList.list_records[0] = response.list_records[0]
+                                                                            Static.activeNotes._id = response.list_records[0]._id
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    fn.restApi.setNotes.update(Static.activeNotes)
+                                                                }
+                                                                initReload()
+                                                            }, 300);
+                                                        }}>
+                                                        {/* {Static.activeNotes.title} */}
                                                     </div>
                                                     <div
                                                         class="notes-description"
-                                                        contenteditable={!Static.activeNotes
-                                                            ?
-                                                            this.contentEditable = "false"
-                                                            :
-                                                            this.contentEditable = "true"
-                                                        }
-                                                        data-text="текст"
+                                                        contenteditable={true}
+                                                        data-text="Текст"
+                                                        textContent={Static.activeNotes.text}
                                                         Element={($el) => {
-                                                            Static.elDescription = $el
+                                                            Static.elText = $el
                                                         }}
                                                         oninput={() => {
-                                                            console.log('=e9d091=', Static.elDescription.textContent)
-                                                            Static.activeNotes.description = Static.elDescription.textContent
-                                                            // Static.activeNotes.description = document.querySelector(".notes-description").textContent
-                                                        }}
-
-                                                    >
-                                                        {!Static.activeNotes
-                                                            ?
-                                                            '12345678'
-                                                            :
-                                                            Static.activeNotes.description
-                                                        }
+                                                            Static.activeNotes.text = Static.elText.textContent
+                                                            if (Static.timerChange) {
+                                                                clearTimeout(Static.timerChange);
+                                                            }
+                                                            Static.timerChange = setTimeout(async () => {
+                                                                if (!Static.activeNotes._id) {
+                                                                    const response = await fn.restApi.setNotes.create(Static.activeNotes)
+                                                                    if (response && response.status == "ok") {
+                                                                        if (response.list_records && response.list_records[0]) {
+                                                                            Static.notesList.list_records[0] = response.list_records[0]
+                                                                            Static.activeNotes._id = response.list_records[0]._id
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    fn.restApi.setNotes.update(Static.activeNotes)
+                                                                }
+                                                                initReload()
+                                                            }, 300);
+                                                        }}>
                                                     </div>
                                                 </div>
                                             )
                                         }
                                     }
                                 }
-
-
-                                {/* </div> */}
                             </div>
                         </div>
                     </div>
