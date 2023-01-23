@@ -139,7 +139,7 @@ const BlockProjects = async function () {
                 {
                     "title": Variable.lang.a.contentCreater,
                     "style": "",
-                    "icon": "graph",
+                    "icon": "contentmaker",
                     "link": "content-creator",
                     modal: true
                 },
@@ -157,7 +157,7 @@ const BlockProjects = async function () {
                 },
                 {
                     "title": "Комнаты",
-                    "icon": "room3",
+                    "icon": "rooms",
                     "link": "rooms",
                     "items": fn.itemsMenu.onlyPage({ url: '/rooms/' }),
                     modal: false
