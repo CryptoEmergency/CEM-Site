@@ -1160,7 +1160,7 @@ restApi.logOut = async function () {
 
 restApi.SetCommunity = {}
 
-restApi.SetCommunity.create = async function ({title, icon, cover, usersCount, country, city, languages, еvents, gallery, contacts, social, interest, shortDescription, fullDescription, category, foundationDate}) {
+restApi.SetCommunity.create = async function ({ title, icon, cover, usersCount, country, city, languages, еvents, gallery, contacts, social, interest, shortDescription, fullDescription, category, foundationDate }) {
     let data = {
         value: {
             title: title,
@@ -1240,6 +1240,80 @@ restApi.doRole.deleteComment = async function ({ _id }) {
 
     const response = await sendApi.create("doRole", data);
     return checkSetAnswer(response)
+}
+
+
+//==========
+
+restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+
+
+
+    let defaultFilter = {}
+
+    if (filter._id) {
+        defaultFilter = {}
+    }
+
+    let defaultSelect = {
+        title: 1,
+        text: 1,
+        media: 1,
+        showDate: 1
+    }
+
+
+    let data = {
+        action: "getNotes",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+restApi.setNotes = {}
+
+
+restApi.setNotes.create = async function ({ title, text, media, noAlert }) {
+    let data = {
+        value: {
+            title,
+            text,
+            media
+        },
+    };
+    const response = await sendApi.create("setNotes", data);
+    return checkSetAnswer(response, noAlert)
+}
+restApi.setNotes.update = async function ({ _id, title, text, media, noAlert }) {
+    let data = {
+        _id,
+        value: {
+            title,
+            text,
+            media
+        },
+    };
+    const response = await sendApi.create("setNotes", data);
+    return checkSetAnswer(response, noAlert)
 }
 
 export { restApi };

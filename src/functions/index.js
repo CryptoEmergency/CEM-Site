@@ -389,6 +389,9 @@ fn.NumFormat = function (num) {
 };
 
 fn.getDateFormat = function (data, type) {
+  if (!data) {
+    return null
+  }
   Helpers.moment.locale(Variable.lang.code);
   data = data.replace(' ', 'T')
   switch (type) {
