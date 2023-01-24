@@ -1,66 +1,65 @@
 import {
     jsx,
     jsxFrag,
-    init,
     load,
-    Variable,
     initReload
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
+import { MediaButton } from '@component/element/index.js';
 
-const notesList = [
-    { title: "Купить биткоин", description: "", date: "2023-01-19T19:34:00.000Z" },
-    { title: "Посмотреть новости", description: "", date: "2023-01-18T14:45:00.000Z" },
-    { title: "Проверить кошелек", description: "", date: "2023-01-16T06:18:00.000Z" },
-    { title: "Обновить", description: "", date: "2023-01-15T23:40:00.000Z" },
-]
+
+// Добавление новой заметки.
+// Подсмотрел другую интересную логику по созданию новой заметки. Ее нельзя создать, пока последняя созданная является пустой.
+// но они сразу добавляются в базу
+const addNew = async function (Static) {
+    if (Static.notesList.list_records.length != 0 && (Static.notesList.list_records[0].title == "" && Static.notesList.list_records[0].text == "" && !Static.notesList.list_records[0].media.length)) {
+        Static.activeNotes = Static.notesList.list_records[0]
+    } else {
+        const response = await fn.restApi.setNotes.create({ title: "", text: "", media: [], showDate: new Date().toISOString() })
+        if (response && response.status == "ok") {
+            if (response.list_records && response.list_records[0]) {
+                Static.notesList.list_records.unshift(response.list_records[0])
+                Static.activeNotes = Static.notesList.list_records
+            }
+        }
+    }
+    initReload()
+}
+
+const deleteNote = function (Static) {
+    const index = Static.notesList.list_records.indexOf(Static.activeNotes)
+    Static.notesList.list_records.splice(index, 1)
+    Static.activeNotes = null
+}
+
+const editNotes = async function (Static) {
+    if (Static.timerChange) {
+        clearTimeout(Static.timerChange);
+    }
+    Static.timerChange = setTimeout(async () => {
+        await fn.restApi.setNotes.update(Static.activeNotes)
+        initReload()
+    }, 300);
+}
 
 const start = function (data, ID) {
 
-    function toggleMobile(contentSelector, contentSelectorActive, listSelector, listSelectorDead) {
-        if (window.outerWidth <= 599 && !document.querySelector(contentSelector).classList.contains(contentSelectorActive)){
-            document.querySelector(contentSelector).classList.add(contentSelectorActive)
-            document.querySelector(listSelector).classList.add(listSelectorDead)
-        } else {
-            document.querySelector(contentSelector).classList.remove(contentSelectorActive)
-            document.querySelector(listSelector).classList.remove(listSelectorDead)
-        }
-    }
-
-    function toggleActive(selector, selectorActive, i) {
-        document.querySelectorAll(selector).forEach((item) => {
-            item.classList.remove(selectorActive)
-        })
-        !document.querySelectorAll(selector)[i].classList.contains(selectorActive)
-        ?
-        document.querySelectorAll(selector)[i].classList.add(selectorActive)
-        :
-        document.querySelectorAll(selector)[i].classList.remove(selectorActive)
-    }
-
-    function toggleNew(selector, selectorActive) {
-        document.querySelectorAll(selector).forEach((item) => {
-            item.classList.remove(selectorActive)
-        })
-    }
-
-    function addItem(date) {
-        const newItem = {
-            title: "Без названия",
-            description: "",
-            date: date,
-        }
-        return newItem
-    }
-
     let [Static] = fn.GetParams({ data, ID })
+    // Первоначальные данные потом переносим в отдельное место
+    Static.elTitle = null
+    Static.elText = null
+    Static.elInputImg = null
+    Static.activeNotes = null
+    Static.timerChange = null
+
 
     load({
         ID,
         fnLoad: async () => {
-            Static.tmpTest = notesList
-            Static.activeNotes = null
+            // Отправляем запрос на болучение данных из базы
+            Static.notesList = await fn.restApi.getNotes({ filter: {} })
+            console.log('=8451ba=', Static.notesList)
         },
         fn: () => {
             return (
@@ -69,85 +68,106 @@ const start = function (data, ID) {
                         <h2>Notes</h2>
                         <div class="notes_container">
                             <div class="notes-content">
-                                <div class="notes-list">
+                                <div class={["notes-list", Static.activeNotes ? "dead" : null]}>
                                     <button class="notes-button"
                                         onclick={() => {
-                                            Static.tmpTest.unshift(addItem(new Date().toISOString()))
-                                            document.querySelector(".notes-description").textContent = null
-                                            toggleNew(".notes-item","notes-item_active")
-                                            initReload()
-                                        }}
-                                    >
+                                            addNew(Static)
+                                        }}>
                                         <span>Новая заметка</span>
                                     </button>
-                                    {Static.tmpTest.map(function (item, index) {
+                                    {Static.notesList.list_records.map(function (item) {
                                         return (
                                             <div
-                                                class="notes-item"
-                                                id={index + 1}
+                                                class={["notes-item", Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null]}
                                                 onclick={() => {
-                                                    document.querySelector(".notes-description").textContent = null
                                                     Static.activeNotes = item
-                                                    toggleMobile(".notes-content-wrapper", "active", ".notes-list", "dead")
-                                                    toggleActive(".notes-item","notes-item_active" ,index)
                                                     initReload()
-                                                }}
-                                            >
-                                                <h3>{item.title}</h3>
-                                                <span>{fn.getDateFormat(item.date, "now")}</span>
+                                                }}>
+                                                <h3>{
+                                                    Static.activeNotes && Static.activeNotes._id == item._id
+                                                        ?
+                                                        Static.activeNotes.title != "" ? Static.activeNotes.title : "Без названия"
+                                                        :
+                                                        item.title != "" ? item.title : "Без названия"
+                                                }</h3>
+                                                <span>{fn.getDateFormat(item.showDate)}</span>
                                             </div>
                                         )
                                     })}
                                 </div>
-                                <div class="notes-content-wrapper">
-                                    <img class="notes-content-close" src={svg["close"]} 
-                                        onclick={() => {
-                                            Static.activeNotes.title = document.querySelector(".notes-input-text").textContent
-                                            toggleMobile(".notes-content-wrapper", "active", ".notes-list", "dead")
-                                            toggleNew(".notes-item","notes-item_active")
-                                            initReload()
-                                        }} 
-                                    />
-                                    <div class="notes-input-text"
-                                        contenteditable={!Static.activeNotes
-                                            ?
-                                            this.contentEditable = "false"
-                                            :
-                                            this.contentEditable = "true"
+                                {
+                                    () => {
+                                        if (!Static.activeNotes) {
+                                            return (
+                                                <div class={["notes-content-wrapper", Static.activeNotes ? "active" : null]}>
+                                                    <div class="empty_message_dialog_block">
+                                                        Выберите или создайте новую заметку
+                                                    </div>
+                                                </div>
+                                            )
+                                        } else {
+                                            return (
+                                                <div class={["notes-content-wrapper", Static.activeNotes ? "active" : null]}>
+                                                    <div class="notes-button__img" onclick={() => {
+                                                        Static.elInputImg.click()
+                                                    }}>
+                                                        <img class="notes-button__icon" src={svg["clip_notes"]} />
+                                                        <input
+                                                            class="input-create__img"
+                                                            onchange={(e) => {
+                                                                Static.activeNotes.media = Object.assign({}, e.target.files)
+                                                                Static.activeNotes.media = URL.createObjectURL(obj[0])
+                                                                console.log(Static.activeNotes.media)
+                                                                initReload()
+                                                            }}
+                                                            type="file"
+                                                            accept=".jpg,.jpeg,.png,.gif"
+                                                            Element={($el) => { Static.elInputImg = $el }}
+                                                        />
+                                                    </div>
+                                                    <div class="notes-image-preview">
+                                                        <img class="notes-content-img" src={Static.activeNotes.media} />
+                                                    </div>
+                                                    <img class="notes-content-delete" src={svg["close"]}
+                                                        onclick={() => {
+                                                            deleteNote(Static)
+                                                            initReload()
+                                                        }} />
+                                                    <img class="notes-content-close" src={svg["gradient_arrow"]}
+                                                        onclick={() => {
+                                                            Static.activeNotes = null
+                                                            initReload()
+                                                        }} />
+                                                    <div class="notes-input-text"
+                                                        contenteditable={true}
+                                                        Element={($el) => {
+                                                            Static.elTitle = $el
+                                                        }}
+                                                        data-text="Название"
+                                                        textContent={Static.activeNotes.title != "" ? Static.activeNotes.title : ""}
+                                                        oninput={() => {
+                                                            Static.activeNotes.title = Static.elTitle.textContent
+                                                            editNotes(Static)
+                                                        }}>
+                                                    </div>
+                                                    <div
+                                                        class="notes-description"
+                                                        contenteditable={true}
+                                                        data-text="Текст"
+                                                        textContent={Static.activeNotes.text}
+                                                        Element={($el) => {
+                                                            Static.elText = $el
+                                                        }}
+                                                        oninput={() => {
+                                                            Static.activeNotes.text = Static.elText.textContent
+                                                            editNotes(Static)
+                                                        }}>
+                                                    </div>
+                                                </div>
+                                            )
                                         }
-                                        oninput={() => {
-                                            Static.activeNotes.title = document.querySelector(".notes-input-text").textContent
-                                        }}
-                                    >
-                                        {!Static.activeNotes
-                                        ?
-                                        "Название"
-                                        :
-                                        Static.activeNotes.title
                                     }
-                                    </div>
-                                    <div 
-                                        class="notes-description" 
-                                        contenteditable={!Static.activeNotes
-                                            ?
-                                            this.contentEditable = "false"
-                                            :
-                                            this.contentEditable = "true"
-                                        }
-                                        data-text="текст"
-                                        oninput={() => {
-                                            Static.activeNotes.description = document.querySelector(".notes-description").textContent
-                                        }}
-                                        
-                                    >
-                                    {!Static.activeNotes
-                                        ?
-                                        ''
-                                        :
-                                        Static.activeNotes.description
-                                    }
-                                    </div>
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>

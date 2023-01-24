@@ -12,21 +12,21 @@
         width: calc(100% - 10px);
         padding-bottom: 40px;
     }
-}
 
-.notes h2 {
-    margin: 0;
-    padding-top: 40px;
-    font-size: 32px;
-    line-height: 43px;
-    font-weight: 600;
-
-    @media(max-width: 992px) {
-        padding-top: 35px;
-    }
-
-    @media(max-width: 464px) {
-        padding-top: 30px;
+    h2 {
+        margin: 0;
+        padding-top: 40px;
+        font-size: 32px;
+        line-height: 43px;
+        font-weight: 600;
+    
+        @media(max-width: 992px) {
+            padding-top: 35px;
+        }
+    
+        @media(max-width: 464px) {
+            padding-top: 30px;
+        }
     }
 }
 
@@ -52,22 +52,22 @@
         width: 100%;
         border-right: 0;
     }
-}
 
-.notes-list::-webkit-scrollbar {
-    width: 24px;
-}
+    &::-webkit-scrollbar {
+        width: 24px;
+    }
 
-.notes-list::-webkit-scrollbar-track {
-    background: transparent;
-    width: 4px;
-    border-radius: 10px;
-}
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        width: 4px;
+        border-radius: 10px;
+    }
 
-.notes-list::-webkit-scrollbar-thumb {
-    background-color: #3b425a;
-    border: 10px solid #2c303e;
-    border-radius: 40px;
+    &::-webkit-scrollbar-thumb {
+        background-color: #3b425a;
+        border: 10px solid #2c303e;
+        border-radius: 40px;
+    }
 }
 
 .notes-button {
@@ -99,17 +99,17 @@
             border-radius: 8px 8px 0 0;
         }
     }
-}
 
-.notes-button::before {
-    content: "";
-    position: absolute;
-    left: 20px;
-    height: 20px;
-    width: 20px;
-    background: url('../svg/answer_plus.svg');
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        height: 20px;
+        width: 20px;
+        background: url('../svg/answer_plus.svg');
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+    }
 }
 
 .notes-item {
@@ -120,14 +120,29 @@
     padding: 14px;
     cursor: pointer;
 
+    h3 {
+        margin: 0;
+        font-size: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    span {
+        font-size: 14px;
+        color: #a0a0a0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
     &:hover {
         background: #464d62;
     }
-}
 
-.notes-item_active {
-    background: #464d62;
-    pointer-events: none;
+    &_active {
+        background: #464d62;
+        pointer-events: none;
+    }
 }
 
 .dead {
@@ -136,37 +151,80 @@
     }
 }
 
-.notes-item h3 {
-    margin: 0;
-    font-size: 16px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.notes-item span {
-    font-size: 14px;
-    color: #a0a0a0;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
 .notes-content-wrapper {
     position: relative;
     width: calc(100% - 300px);
     padding: 30px;
+    padding-top: 50px;
+
+    @media(max-width: 992px) {
+        width: calc(100% - 220px);
+        padding: 30px;
+    }
 
     @media(max-width: 599px) {
         display: none;
     }
+
+    &.active {
+        @media(max-width: 599px) {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            padding-top: 30px;
+        }
+    }
 }
 
-.notes-content-wrapper.active {
-    @media(max-width: 599px) {
-        display: block;
-        width: 100%;
-        padding-top: 50px;
+.notes-button__img {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.6;
     }
+
+    @media(max-width: 599px) {
+        top: 19px;
+        right: 60px;
+    }
+}
+
+.input-create__img {
+    display: none;
+}
+
+.notes-button__icon {
+    width: 20px;
+
+    @media(max-width: 599px) {
+        position: absolute;
+        right: 0;
+    }
+}
+
+.notes-content-img {
+    width: 120px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.notes-content-delete {
+    position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 28px;
+        height: 28px;
+        display: block;
+        margin-left: auto;
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.6;
+        }
 }
 
 .notes-content-close {
@@ -174,12 +232,14 @@
 
     @media(max-width: 599px) {
         position: absolute;
-        top: 20px;
-        right: 10px;
+        top: 15px;
+        left: 20px;
         display: block;
+        width: 35px;
         margin-left: auto;
         padding: 5px;
         cursor: pointer;
+        transform: rotate(180deg);
 
         &:hover {
             opacity: 0.6;
@@ -197,6 +257,10 @@
     border: 0;
     white-space: nowrap;
     overflow: hidden;
+
+    &[contentEditable=true]:empty:not(:focus):before {
+        content: attr(data-text)
+    }
 }
 
 [contenteditable="true"]:active,
@@ -206,14 +270,11 @@
 }
 
 .notes-description {
+    height: 100%;
     margin-top: 10px;
     color: #ffffff;
-}
 
-.notes-description[contentEditable=true]:empty:not(:focus):before {
-    content: attr(data-text)
-}
-
-.notes-input-text[contentEditable=true]:empty:not(:focus):before {
-    content: attr(data-text)
+    &[contentEditable=true]:empty:not(:focus):before {
+        content: attr(data-text)
+    }
 }
