@@ -230,7 +230,7 @@ const start = function (data, ID) {
                 }
             });
             console.log(Static)
-            // console.log('=08e20a=', Static.chatsList)
+            console.log('=08e20a Static.chatsList=', Static.chatsList)
             if (Variable.Static.startChatsID) {
                 let existingChat = false
                 Static.chatsList.list_records.forEach(async (chat) => {
@@ -262,7 +262,9 @@ const start = function (data, ID) {
                 if (!existingChat) {
                     Static.activeUser = Variable.Static.startChatsID
                     // console.log(Static.chatsList)
-                    Static.chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
+                    Static.chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] }).sort((a, b) => {
+                        new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                    })
                     Static.activeChat = 1
                     Static.messageList = {
                         list_records: [
@@ -311,85 +313,88 @@ const start = function (data, ID) {
 
                             {() => {
                                 if (Static.chatsList && Static.chatsList.list_records && Static.chatsList.list_records.length) {
-                                    const arrReturn = Static.chatsList.list_records.map((item, index) => {
-                                        let user
-                                        let lastMessage = item.message[0]
-                                        let iconStatus
+                                    const arrReturn = Static.chatsList.list_records.sort((a, b) => {
+                                        new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                                    })
+                                        .map((item, index) => {
+                                            let user
+                                            let lastMessage = item.message[0]
+                                            let iconStatus
 
-                                        if (lastMessage.status == 0) {
-                                            iconStatus = "sent_message_icon"
-                                        } else if (lastMessage.status == 1) {
-                                            iconStatus = "unread_message_icon"
-                                        } else {
-                                            iconStatus = "read_message_icon"
-                                        }
-                                        if (item.users.length < 2) {
-                                            user = item.users[0]
-                                        } else {
-                                            if (Variable.myInfo._id != item.users[0]._id) {
+                                            if (lastMessage.status == 0) {
+                                                iconStatus = "sent_message_icon"
+                                            } else if (lastMessage.status == 1) {
+                                                iconStatus = "unread_message_icon"
+                                            } else {
+                                                iconStatus = "read_message_icon"
+                                            }
+                                            if (item.users.length < 2) {
                                                 user = item.users[0]
                                             } else {
-                                                user = item.users[1]
+                                                if (Variable.myInfo._id != item.users[0]._id) {
+                                                    user = item.users[0]
+                                                } else {
+                                                    user = item.users[1]
+                                                }
                                             }
-                                        }
 
-                                        return (
-                                            <div
-                                                class={["messages_list_item", item._id == Static.activeChat ? "active" : null]}
-                                                onclick={async () => {
-                                                    Static.activeChat = item._id
-                                                    if (item._id == 1) {
-                                                        initReload()
-                                                        return
-                                                    }
-                                                    Static.messageList = await sendApi.send({
-                                                        action: "getUserChats", short: true,
-                                                        filter: {
-                                                            "$and": [
-                                                                {
-                                                                    "users": user._id
-                                                                }
-                                                            ]
-                                                        },
-                                                        select: {
-                                                            "message": {
-                                                                "$slice": [
-                                                                    0,
-                                                                    120
+                                            return (
+                                                <div
+                                                    class={["messages_list_item", item._id == Static.activeChat ? "active" : null]}
+                                                    onclick={async () => {
+                                                        Static.activeChat = item._id
+                                                        if (item._id == 1) {
+                                                            initReload()
+                                                            return
+                                                        }
+                                                        Static.messageList = await sendApi.send({
+                                                            action: "getUserChats", short: true,
+                                                            filter: {
+                                                                "$and": [
+                                                                    {
+                                                                        "users": user._id
+                                                                    }
                                                                 ]
                                                             },
-                                                            "users": 1
-                                                        }
-                                                    });
-                                                    item.unreadMessage = 0
-                                                    // console.log('=b604cf=', Static.messageList)
-                                                    initReload()
-                                                }}
-                                            >
-                                                <Avatar author={user} />
-                                                <div class="messages_list_item_info">
-                                                    <div class="messages_list_item_info-1">
-                                                        <p>{user.nickname}</p>
-                                                        {lastMessage.text ? <span>{lastMessage.text}</span> : null}
-                                                    </div>
-                                                    <div class="messages_list_item_info-2">
-                                                        {lastMessage.author == Variable.myInfo._id
-                                                            ?
-                                                            <p>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</p>
-                                                            :
-                                                            <p class="message--new">
-                                                                <span>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</span>
-                                                                {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
+                                                            select: {
+                                                                "message": {
+                                                                    "$slice": [
+                                                                        0,
+                                                                        120
+                                                                    ]
+                                                                },
+                                                                "users": 1
+                                                            }
+                                                        });
+                                                        item.unreadMessage = 0
+                                                        // console.log('=b604cf=', Static.messageList)
+                                                        initReload()
+                                                    }}
+                                                >
+                                                    <Avatar author={user} />
+                                                    <div class="messages_list_item_info">
+                                                        <div class="messages_list_item_info-1">
+                                                            <p>{user.nickname}</p>
+                                                            {lastMessage.text ? <span>{lastMessage.text}</span> : null}
+                                                        </div>
+                                                        <div class="messages_list_item_info-2">
+                                                            {lastMessage.author == Variable.myInfo._id
+                                                                ?
+                                                                <p>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</p>
+                                                                :
+                                                                <p class="message--new">
+                                                                    <span>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</span>
+                                                                    {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
 
-                                                            </p>
-                                                        }
+                                                                </p>
+                                                            }
 
-                                                        {lastMessage.author == Variable.myInfo._id ? <img src={svg[iconStatus]} /> : null}
+                                                            {lastMessage.author == Variable.myInfo._id ? <img src={svg[iconStatus]} /> : null}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })
+                                            )
+                                        })
                                     return (arrReturn)
                                 }
                             }}
@@ -836,6 +841,7 @@ const start = function (data, ID) {
                                                         // if (media.length > 0) {
                                                         let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
                                                         // console.log('=6befba=', response)
+                                                        // debugger
                                                         if (response.status === "ok") {
                                                             Static.message.el.value = ""
                                                             Static.message.value = ""
@@ -850,8 +856,9 @@ const start = function (data, ID) {
                                                                 } else {
                                                                     Static.messageList.list_records[0].message = [newRes]
                                                                 }
-                                                                // console.log('=46ae17=', Static.chatsList)
-
+                                                                console.log('=46ae17 Static.chatsList=', Static.chatsList)
+                                                                console.log('=46ae17 Static.messageList=', Static.messageList)
+                                                                // debugger
                                                                 if (Static.chatsList && Static.chatsList.list_records) {
                                                                     Static.chatsList.list_records.map((item) => {
                                                                         let tmp = item.users.filter(item => item._id == Static.activeUser._id)
@@ -860,8 +867,33 @@ const start = function (data, ID) {
                                                                         }
                                                                     })
                                                                 }
+                                                                Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
+                                                                    new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                                                                })
+                                                                console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
                                                                 Static.mediaInputs.value = [];
-                                                                initReload();
+                                                                Static.chatsList = await sendApi.send({
+                                                                    action: "getUserChats", short: true, sort: {
+                                                                        "message": {
+                                                                            "showDate": -1
+                                                                        }
+                                                                    },
+                                                                    select: {
+                                                                        "message": {
+                                                                            "$slice": [
+                                                                                0,
+                                                                                1
+                                                                            ]
+                                                                        },
+                                                                        "users": 1
+                                                                    },
+                                                                    sort: {
+                                                                        'message.showDate': -1
+                                                                    }
+                                                                });
+                                                                setTimeout(() => {
+                                                                    initReload()
+                                                                }, 100);
                                                             }
                                                         } else {
                                                             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);

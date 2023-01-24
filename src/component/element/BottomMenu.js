@@ -24,7 +24,8 @@ const findUnread = function (arr, title = false) {
 
 const BottomMenu = function () {
 
-    //   console.log('=b85f6c=', Variable.dataUrl)
+    // console.log('=b85f6c=', Variable.dataUrl)
+    let Burger
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -124,8 +125,15 @@ const BottomMenu = function () {
                         </a>
                 }
                 <a
-                    class="c-userpanel__icon c-userpanel__icon--burger c-userpanel__icon--mobile_visible"
-                    onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings(); }}>
+                    class={[
+                        "c-userpanel__icon",
+                        "c-userpanel__icon--burger",
+                        "c-userpanel__icon--mobile_visible",
+                    ]}
+                    Element={($el) => {
+                        Burger = $el
+                    }}
+                    onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings({ Burger }); Burger.classList.add("c-userpanel__icon--active") }}>
                 </a>
             </div>
             <div class="c-userpanel__addmodal">
@@ -139,7 +147,7 @@ const BottomMenu = function () {
                 <div data-action="user_cabinet_add_close" class="c-userpanel__close">
                     <img src={svg.close} />
                 </div>
-            </div> 
+            </div>
             <div
                 id="toTop"
                 Element={($el) => { Variable.Static.elArrowTop = $el }}

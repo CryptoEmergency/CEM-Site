@@ -528,6 +528,12 @@
             background: none;
             object-fit: initial;
         }
+
+        &--preview {
+            background-image: url('../images/user_background_image.jpg');
+            background-size: 197% 100%;
+            background-position: center;
+        }
     }
 
     &__blind {
@@ -1340,9 +1346,23 @@
     }
 }
 
+.c-usersocial {
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    &__toggler {
+        padding: 0 15px;
+    }
+}
+
 .user_social_header {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 
     img {
         cursor: pointer;
@@ -1357,7 +1377,7 @@
     padding: 20px;
     max-width: 400px;
     margin-bottom: 20px;
-    display: none;
+    // display: none;
 
     .button-container-preview {
         margin: 0 !important;
