@@ -24,7 +24,8 @@ const findUnread = function (arr, title = false) {
 
 const BottomMenu = function () {
 
-    //   console.log('=b85f6c=', Variable.dataUrl)
+    // console.log('=b85f6c=', Variable.dataUrl)
+    let Burger
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -128,9 +129,11 @@ const BottomMenu = function () {
                         "c-userpanel__icon",
                         "c-userpanel__icon--burger",
                         "c-userpanel__icon--mobile_visible",
-                        Variable.Modals.length && Variable.Modals[0] == "ModalMobileMainSettings" ? "c-userpanel__icon--active" : null
                     ]}
-                    onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings(); console.log('=b85f6c=', Variable) }}>
+                    Element={($el) => {
+                        Burger = $el
+                    }}
+                    onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings({ Burger }); Burger.classList.add("c-userpanel__icon--active") }}>
                 </a>
             </div>
             <div class="c-userpanel__addmodal">
