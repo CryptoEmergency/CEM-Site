@@ -124,8 +124,13 @@ const BottomMenu = function () {
                         </a>
                 }
                 <a
-                    class="c-userpanel__icon c-userpanel__icon--burger c-userpanel__icon--mobile_visible"
-                    onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings(); }}>
+                    class={[
+                        "c-userpanel__icon",
+                        "c-userpanel__icon--burger",
+                        "c-userpanel__icon--mobile_visible",
+                        Variable.Modals.length && Variable.Modals[0] == "ModalMobileMainSettings" ? "c-userpanel__icon--active" : null
+                    ]}
+                    onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings(); console.log('=b85f6c=', Variable) }}>
                 </a>
             </div>
             <div class="c-userpanel__addmodal">
@@ -139,7 +144,7 @@ const BottomMenu = function () {
                 <div data-action="user_cabinet_add_close" class="c-userpanel__close">
                     <img src={svg.close} />
                 </div>
-            </div> 
+            </div>
             <div
                 id="toTop"
                 Element={($el) => { Variable.Static.elArrowTop = $el }}
