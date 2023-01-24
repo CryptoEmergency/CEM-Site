@@ -1135,12 +1135,10 @@ BlockUserProfilePage.social = function (Static, data) {
                                                 e.stopPropagation();
 
                                                 let data = {
-
                                                     value: {
                                                         "social.active": false
                                                     },
                                                     filters: { "social._id": socialItem._id }
-
                                                 }
                                                 console.log('=11bc67=data=', data)
 
@@ -1152,10 +1150,17 @@ BlockUserProfilePage.social = function (Static, data) {
 
                                                 if (response.status === 'ok') {
                                                     initReload()
+                                                    Static.activeItems.list_records[0].social.map((item, i) => {
+                                                        if (item._id == socialItem._id) {
+                                                            Static.activeItems.list_records[0].social.splice(i, 1)
+                                                            // console.log('=bbe5d9=', Static.activeItems.list_records[0].social)
+                                                        }
+                                                    })
                                                 } else {
                                                     Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true);
                                                 }
                                                 Static.elShowMenu[index].style = ""
+                                                initReload()
                                             }}
                                         >
                                             {Variable.lang.select.delete}
