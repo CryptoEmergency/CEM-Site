@@ -272,7 +272,29 @@ fn.timerTik = async function () {
               });
             }
             chat.message[0] = response.info.myInfo.chatMessage[0]
-            initReload()
+            Static.chatsList = await sendApi.send({
+              action: "getUserChats", short: true, sort: {
+                "message": {
+                  "showDate": -1
+                }
+              },
+              select: {
+                "message": {
+                  "$slice": [
+                    0,
+                    1
+                  ]
+                },
+                "users": 1
+              },
+              sort: {
+                'message.showDate': -1
+              }
+            });
+            setTimeout(() => {
+              initReload()
+            }, 100);
+            // initReload()
           }
         })
       }
