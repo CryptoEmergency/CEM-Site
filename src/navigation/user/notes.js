@@ -116,7 +116,7 @@ const start = function (data, ID) {
                                                             class="input-create__img"
                                                             onchange={(e) => {
                                                                 Static.activeNotes.media = Object.assign({}, e.target.files)
-                                                                Static.activeNotes.media = URL.createObjectURL(obj[0])
+                                                                Static.activeNotes.media = URL.createObjectURL(Static.activeNotes.media[0])
                                                                 console.log(Static.activeNotes.media)
                                                                 initReload()
                                                             }}
