@@ -1243,15 +1243,38 @@ BlockUserProfilePage.galary = function (Static, data) {
                                             multiple
                                             onchange={async function (e) {
                                                 e.stopPropagation();
+                                                let response2;
                                                 Array.from(this.files).forEach((item) => {
+                                                    let previewObj = {
+                                                        src: item.name,//URL.createObjectURL(blob),
+                                                        type: item.type,  //"video",
+                                                        upload: 0,
+                                                        size: 0
+                                                    }
+                                                    Static.mediaInputs.show = true;
+                                                    Static.mediaInputs.value.push(previewObj);
+                                                    let numItem = Static.mediaInputs.value.length - 1
+
                                                     fn.uploadMedia(
                                                         item,
                                                         "gallery",
                                                         async function () {
                                                             if (!this.response) {
+                                                                // console.log('=this.response=', this.response)
+                                                                alert("Произошла ошибкаю Попробуйте еще раз")
                                                                 return
                                                             }
                                                             let response = JSON.parse(this.response);
+
+                                                            Static.activeFiletype = response.mimetype.includes("image") ? "image" : "video"
+                                                            // console.log('=5c550c Static.activeFiletype=', Static.activeFiletype)
+
+                                                            if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                                                                Static.mediaInputs.value.splice(numItem, 1);
+                                                                initReload()
+                                                            }
+
+                                                            initReload()
 
                                                             let data = {
                                                                 value: {
@@ -1262,11 +1285,33 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                                 }
                                                             }
 
-                                                            const response2 = await fn.restApi.setUsers.update({
+                                                            response2 = await fn.restApi.setUsers.update({
                                                                 data: data
                                                             })
                                                         },
                                                         async function (e) {
+                                                            console.log('=response2=', response2)
+                                                            let contentLength;
+                                                            if (e.lengthComputable) {
+                                                                contentLength = e.total;
+                                                            } else {
+                                                                contentLength = parseInt(
+                                                                    e.target.getResponseHeader(
+                                                                        "x-decompressed-content-length"
+                                                                    ),
+                                                                    10
+                                                                );
+                                                            }
+
+                                                            // if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                                                            //     debugger
+                                                            //     Static.mediaInputs.value.splice(numItem, 1);
+                                                            //     initReload()
+                                                            //     return
+                                                            // }
+                                                            Static.mediaInputs.value[numItem].upload = e.loaded
+                                                            Static.mediaInputs.value[numItem].size = contentLength;
+                                                            initReload();
                                                         }
                                                     );
                                                 })
@@ -1359,6 +1404,53 @@ BlockUserProfilePage.galary = function (Static, data) {
                                 )
                             })
                         }
+                        {
+                            Static.mediaInputs.value.filter((preview) => {
+                                if (preview && preview.type && preview.type.includes(Static.activeFiletype)) {
+                                    return true
+                                }
+                            }).map((preview) => {
+                                return (
+                                    <div class="c-tiles__item">
+                                        <div class="c-tiles__card">
+                                            <div class="c-tiles__image c-tiles__image--preview">
+                                                {
+                                                    preview.size !== undefined
+                                                        ?
+                                                        <div class="circle-wrap">
+                                                            <div class="circle">
+                                                                <div
+                                                                    class="mask full"
+                                                                    style={`transform: rotate( ${(360 / 200) *
+                                                                        Math.round((preview.upload / preview.size) * 100)
+                                                                        }deg`}
+                                                                >
+                                                                    <div
+                                                                        class="fill"
+                                                                        style={`transform: rotate( ${(360 / 200) *
+                                                                            Math.round((preview.upload / preview.size) * 100)
+                                                                            }deg`}
+                                                                    ></div>
+                                                                </div>
+                                                                <div class="mask half">
+                                                                    <div
+                                                                        class="fill"
+                                                                        style={`transform: rotate( ${(360 / 200) *
+                                                                            Math.round((preview.upload / preview.size) * 100)
+                                                                            }deg`}
+                                                                    ></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        :
+                                                        null
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     : Variable.myInfo._id == data.userInfo._id ?
                         <label
@@ -1373,13 +1465,16 @@ BlockUserProfilePage.galary = function (Static, data) {
                                     onchange={async function (e) {
                                         e.stopPropagation();
                                         Array.from(this.files).forEach((item) => {
+                                            debugger
                                             fn.uploadMedia(
                                                 item,
                                                 "gallery",
                                                 async function () {
                                                     if (!this.response) {
+                                                        alert("Произошла ошибкаю Попробуйте еще раз")
                                                         return
                                                     }
+
                                                     let response = JSON.parse(this.response);
 
                                                     let data = {

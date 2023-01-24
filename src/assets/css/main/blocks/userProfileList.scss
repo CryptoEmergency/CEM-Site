@@ -528,6 +528,12 @@
             background: none;
             object-fit: initial;
         }
+
+        &--preview {
+            background-image: url('../images/user_background_image.jpg');
+            background-size: 197% 100%;
+            background-position: center;
+        }
     }
 
     &__blind {
