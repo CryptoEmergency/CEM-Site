@@ -28,10 +28,17 @@ const addNew = async function (Static) {
     initReload()
 }
 
-const deleteNote = async function ({_id,active}) {
+const deleteNote = async function (Static,{_id,active}) {
     await fn.restApi.setNotes.update({_id,active})
+        Static.notesList.list_records.map((item,index)=>{
+        if(item._id == _id){
+            Static.notesList.list_records.splice(index,1) 
+        }
+    })
+    Static.activeNotes=null   
     initReload()
 }
+
 
 const editNotes = async function (Static) {
     if (Static.timerChange) {
@@ -181,8 +188,8 @@ const start = function (data, ID) {
                                                             fn.modals.ModalConfirmAction({
                                                                 action: async () => {
                                                                     Static.activeNotes.active = false
-                                                                    deleteNote({_id:Static.activeNotes._id,active:false})
-                                                                    Static.activeNotes=null
+                                                                    deleteNote(Static,{_id:Static.activeNotes._id,active:false})
+                                                                    // Static.activeNotes=null
                                                                     fn.modals.close("ModalConfirmAction")
                                                             //initReload()
                                                                 },
