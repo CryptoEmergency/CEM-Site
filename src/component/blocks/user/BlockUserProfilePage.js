@@ -9,7 +9,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, ItemsMenu, NotFound, VideoPlayer } from '@component/element/index.js';
+import { Avatar, ItemsMenu, NotFound, VideoPlayer, Input } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
 let visibleEditInterest = false;
@@ -523,14 +523,33 @@ BlockUserProfilePage.subscribers = function (Static, data) {
 
 }
 
-BlockUserProfilePage.friends = function (Static, data) {
+BlockUserProfilePage.friends = async function (Static, data) {
     // console.log(data,"block friends")
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }
+
+    console.log('=f1fc83=', Static)
+
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
             <h2>{Variable.lang.toggle.friends}</h2>
+
+            {/* <div class="c-questions__searchblock c-search">
+                <div class="c-search__container">
+                    <div class="c-search__wrapper">
+                        <img class="c-search__icon" src={svg.search_icon} />
+                        <Input className="c-search__input" Static={Static.search} customStyle={"border-radius: 3px"} />
+                    </div>
+                    <div style="display: none;" class="questions_search">
+                        <div class="question_search_half_empty">
+                            {Variable.lang.text.contInput}
+                        </div>
+                        <div style="display: none;" class="question_search_help"></div>
+                    </div>
+                </div>
+            </div> */}
+
             <div class="friends_block">
                 {
                     Static.activeItems.list_records[0].subscribed.map((item, index) => {

@@ -17,6 +17,67 @@ import {
 } from '@component/blocks/index.js';
 // import { fn } from "moment";
 
+const makeFilter = function (Static) {
+    let objReturn = {}
+    // if (Static.type && Static.type != "all") {
+    //     if (Static.type == "experts") {
+    //         objReturn["rank.expert"] = true;
+    //     } else if (Static.type == "creator") {
+    //         objReturn["rank.creator"] = true;
+    //     }
+    // } else {
+    //     objReturn["$or"] = [
+    //         {
+    //             "rank.basic": true,
+    //             "rank.expert": false,
+    //             "rank.creator": false,
+    //         },
+    //         {
+    //             "rank.basic": false,
+    //             "rank.expert": true,
+    //             "rank.creator": false,
+    //         },
+    //         {
+    //             "rank.basic": false,
+    //             "rank.expert": false,
+    //             "rank.creator": true,
+    //         },
+    //     ];
+    // }
+    // if (Static.filters.group && Static.type == "all") {
+    //     if (Static.filters.group.common) {
+    //         objReturn["$or"][0]["rank.basic"] = true;
+    //     } else {
+    //         objReturn["$or"][0]["rank.basic"] = false;
+    //     }
+
+    //     if (Static.filters.group.content) {
+    //         objReturn["$or"][2]["rank.creator"] = true;
+    //     } else {
+    //         objReturn["$or"][2]["rank.creator"] = false;
+    //     }
+
+    //     if (Static.filters.group.expert) {
+    //         objReturn["$or"][1]["rank.expert"] = true;
+    //     } else {
+    //         objReturn["$or"][1]["rank.expert"] = false;
+    //     }
+    // }
+    // if (Static.filters.language && Static.filters.language.name != "all") {
+    //     objReturn["mainLanguage.code"] = Static.filters.language.code
+    // }
+    // if (Static.filters.country && Static.filters.country.name != "all") {
+    //     objReturn["country.code"] = Static.filters.country.code
+    // }
+    // if (Static.filters.online) {
+    //     objReturn.online = true;
+    // }
+    if (Static.search.value) {
+        objReturn.search = Static.search.value;
+    }
+    return objReturn
+}
+
 const start = function (userInfo, ID = "mainBlock") {
     let [Static] = fn.GetParams({ userInfo, ID })
     console.log('=07dba5=', userInfo)
@@ -57,6 +118,7 @@ const start = function (userInfo, ID = "mainBlock") {
                 limit: 20
             });
         } else if (profilePage == "friends") {
+            fn.initData.friends(Static)
             Static.activeItems = await sendApi.send({
                 action: "getUsers", short: true, filter: {
                     _id: userInfo._id,
@@ -66,8 +128,37 @@ const start = function (userInfo, ID = "mainBlock") {
                     subscribed: 1,
                     status: 1
                 },
-                limit: 20
+                limit: 24
             });
+            Static.search = {
+                value: "",
+                label: "",
+                condition: async (value) => {
+                    console.log('=028b3c=', value)
+                    Static.apiFilter = makeFilter(Static)
+                    console.log('=028b3c=', Static)
+                    // Static.apiFilterSort = makeFilterSort(Static)
+                    // await fn.restApi.getQuestions({ name: Static.nameRecords, filter: Static.apiFilter, sort: Static.apiFilterSort, limit })
+                    // let a = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                    Static.activeItems = await sendApi.send({
+                        action: "getUsers", short: true, filter: {
+                            _id: userInfo._id,
+                            // search: value
+                        },
+                        select: {
+                            _id: 1,
+                            subscribed: 1,
+                            status: 1
+                        },
+                        limit: 24
+                    });
+                    // console.log('=8f2c43=', a)
+                    return true
+                }
+            }
+            // Static.apiFilter = makeFilter(Static)
+            // Static.apiFilterSort = makeFilterSort(Static)
+            // await fn.restApi.getQuestions({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, sort: Static.apiFilterSort, limit })
         } else if (profilePage == "galary") {
             Static.activeItems = await fn.restApi.getUsers({ filter: { nickname: userInfo.nickname }, select: { gallery: 1 } })
 
