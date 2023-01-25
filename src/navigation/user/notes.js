@@ -80,6 +80,7 @@ const start = function (data, ID) {
                                             <div
                                                 class={["notes-item", Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null]}
                                                 onclick={() => {
+                                                    // console.log(Static.activeNotes)
                                                     Static.activeNotes = item
                                                     initReload()
                                                 }}>
@@ -113,20 +114,53 @@ const start = function (data, ID) {
                                                     }}>
                                                         <img class="notes-button__icon" src={svg["clip_notes"]} />
                                                         <input
-                                                            class="input-create__img"
-                                                            onchange={(e) => {
-                                                                Static.activeNotes.media = Object.assign({}, e.target.files)
-                                                                Static.activeNotes.media = URL.createObjectURL(Static.activeNotes.media[0])
-                                                                console.log(Static.activeNotes.media)
+                                                            type="file"
+                                                            hidden
+                                                            multiple
+                                                            // accept=".jpg,.jpeg,.png,.gif"
+                                                            Element={($el) => { Static.elInputImg = $el }}
+                                                            onchange={async function (e) {
+                                                                e.stopPropagation();
+                                                                Array.from(this.files).forEach((item) => {
+
+                                                                    fn.uploadMedia(
+                                                                        item,
+                                                                        "gallery",
+                                                                        async function () {
+                                                                            if (!this.response) {
+                                                                                alert("Произошла ошибка Попробуйте еще раз")
+                                                                                return
+                                                                            }
+                                                                            let response = JSON.parse(this.response);
+                                                                            Static.activeFiletype = response.mimetype.includes("image") ? "image" : "video"
+                                                                            // console.log(response.mimetype, Static.activeFiletype)
+
+                                                                            initReload()
+
+                                                                            let data = {
+                                                                                type: response.mimetype,
+                                                                                name: response.name
+                                                                            }
+
+                                                                            Static.activeNotes.media.push(data)
+
+                                                                            editNotes(Static)
+
+                                                                        }
+                                                                    )
+                                                                })
                                                                 initReload()
                                                             }}
-                                                            type="file"
-                                                            accept=".jpg,.jpeg,.png,.gif"
-                                                            Element={($el) => { Static.elInputImg = $el }}
                                                         />
                                                     </div>
                                                     <div class="notes-image-preview">
-                                                        <img class="notes-content-img" src={Static.activeNotes.media} />
+                                                    {Static.notesList.list_records.map(function (item) {
+                                                        return (
+                                                            <div>
+
+                                                            </div>
+                                                        )
+                                                    })}
                                                     </div>
                                                     <img class="notes-content-delete" src={svg["close"]}
                                                         onclick={() => {
