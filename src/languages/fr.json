@@ -197,7 +197,10 @@
         "wallet": "Portefeuille",
         "home": "Page principale",
         "affiliate": "Programme des partenaires",
-        "addChats": "Ajouter un chat"
+        "addChats": "Ajouter un chat",
+
+        
+		"notes":"My notes"
     },
     "span": {
         "company": "Compagnie",

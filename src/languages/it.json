@@ -197,7 +197,10 @@
 		"wallet": "Borsa",
 		"home": "Borsa",
         "affiliate": "Programma partner",
-        "addChats": "Aggiungi chat"
+        "addChats": "Aggiungi chat",
+
+        
+		"notes":"My notes"
     },
     "span": {
         "company": "Azienda",

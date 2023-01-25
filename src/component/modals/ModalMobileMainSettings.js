@@ -132,6 +132,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg.absolutely_new_wallet} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
                                                 </a>
+                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/notes/">
+                                                    <img src={svg.absolutely_new_wallet} />
+                                                    <span class="mobile_user_menu_link">{Variable.lang.a.notes}</span>
+                                                </a>
                                                 <a onclick={(e) => {
                                                     fn.siteLinkModal(e, { title: Variable.lang.h.affiliate, items: fn.itemsMenu.onlyPage({ url: '/affiliate/' }) })
                                                     fn.modals.close(ID)

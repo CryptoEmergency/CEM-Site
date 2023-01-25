@@ -9,7 +9,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { Avatar, ItemsMenu, NotFound, VideoPlayer } from '@component/element/index.js';
+import { Avatar, ItemsMenu, NotFound, VideoPlayer, Input } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
 let visibleEditInterest = false;
@@ -523,14 +523,33 @@ BlockUserProfilePage.subscribers = function (Static, data) {
 
 }
 
-BlockUserProfilePage.friends = function (Static, data) {
+BlockUserProfilePage.friends = async function (Static, data) {
     // console.log(data,"block friends")
     if (!data || data.profilePage != "friends") {
         return (<></>)
     }
+
+    console.log('=f1fc83=', Static)
+
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
             <h2>{Variable.lang.toggle.friends}</h2>
+
+            {/* <div class="c-questions__searchblock c-search">
+                <div class="c-search__container">
+                    <div class="c-search__wrapper">
+                        <img class="c-search__icon" src={svg.search_icon} />
+                        <Input className="c-search__input" Static={Static.search} customStyle={"border-radius: 3px"} />
+                    </div>
+                    <div style="display: none;" class="questions_search">
+                        <div class="question_search_half_empty">
+                            {Variable.lang.text.contInput}
+                        </div>
+                        <div style="display: none;" class="question_search_help"></div>
+                    </div>
+                </div>
+            </div> */}
+
             <div class="friends_block">
                 {
                     Static.activeItems.list_records[0].subscribed.map((item, index) => {
@@ -1196,6 +1215,24 @@ BlockUserProfilePage.galary = function (Static, data) {
                     <li
                         onclick={function (e) {
                             e.stopPropagation();
+                            Static.activeFiletype = "all"
+                            initReload();
+                        }}
+                    >
+                        <a
+                            href=""
+                            class={[
+                                "c-filetype__link",
+                                "c-filetype__link--all",
+                                Static.activeFiletype == "all" ? "c-filetype__link--active" : null
+                            ]}
+                        >
+
+                        </a>
+                    </li>
+                    <li
+                        onclick={function (e) {
+                            e.stopPropagation();
                             Static.activeFiletype = "image"
                             initReload();
                         }}
@@ -1236,7 +1273,7 @@ BlockUserProfilePage.galary = function (Static, data) {
                 data.userInfo.gallery ?
                     <div class="c-tiles">
                         {
-                            Variable.myInfo._id == data.userInfo._id ?
+                            Variable.myInfo._id == data.userInfo._id && Static.activeFiletype == "all" ?
                                 <label
                                     class="c-tiles__item c-tiles__item--add"
                                 >
@@ -1254,7 +1291,8 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                         src: item.name,//URL.createObjectURL(blob),
                                                         type: item.type,  //"video",
                                                         upload: 0,
-                                                        size: 0
+                                                        size: 0,
+                                                        deleted: false
                                                     }
                                                     Static.mediaInputs.show = true;
                                                     Static.mediaInputs.value.push(previewObj);
@@ -1265,17 +1303,18 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                         "gallery",
                                                         async function () {
                                                             if (!this.response) {
-                                                                // console.log('=this.response=', this.response)
-                                                                alert("Произошла ошибкаю Попробуйте еще раз")
+                                                                alert("Произошла ошибка Попробуйте еще раз")
                                                                 return
                                                             }
+
                                                             let response = JSON.parse(this.response);
 
-                                                            Static.activeFiletype = response.mimetype.includes("image") ? "image" : "video"
+                                                            // Static.activeFiletype = response.mimetype.includes("image") ? "image" : "video"
                                                             // console.log('=5c550c Static.activeFiletype=', Static.activeFiletype)
 
                                                             if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
-                                                                Static.mediaInputs.value.splice(numItem, 1);
+                                                                // Static.mediaInputs.value.splice(numItem, 1);
+                                                                Static.mediaInputs.value[numItem].deleted = true;
                                                                 initReload()
                                                             }
 
@@ -1295,7 +1334,6 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                             })
                                                         },
                                                         async function (e) {
-                                                            console.log('=response2=', response2)
                                                             let contentLength;
                                                             if (e.lengthComputable) {
                                                                 contentLength = e.total;
@@ -1308,12 +1346,11 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                                 );
                                                             }
 
-                                                            // if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
-                                                            //     debugger
-                                                            //     Static.mediaInputs.value.splice(numItem, 1);
-                                                            //     initReload()
-                                                            //     return
-                                                            // }
+                                                            if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                                                                Static.mediaInputs.value.splice(numItem, 1);
+                                                                initReload()
+                                                            }
+
                                                             Static.mediaInputs.value[numItem].upload = e.loaded
                                                             Static.mediaInputs.value[numItem].size = contentLength;
                                                             initReload();
@@ -1326,9 +1363,10 @@ BlockUserProfilePage.galary = function (Static, data) {
                                 </label>
                                 : null
                         }
+                        {/* Вывод плиток фото/видео */}
                         {
                             data.userInfo.gallery.filter((item) => {
-                                if (item && item.type && item.type.includes(Static.activeFiletype)) {
+                                if (item && item.type && !item.deleted && (item.type.includes(Static.activeFiletype) || Static.activeFiletype == "all")) {
                                     return true
                                 }
                                 // return item.type.includes(Static.activeFiletype)
@@ -1409,9 +1447,10 @@ BlockUserProfilePage.galary = function (Static, data) {
                                 )
                             })
                         }
+                        {/* preview loaded file */}
                         {
                             Static.mediaInputs.value.filter((preview) => {
-                                if (preview && preview.type && preview.type.includes(Static.activeFiletype)) {
+                                if (preview && preview.type && !preview.deleted && (preview.type.includes(Static.activeFiletype) || Static.activeFiletype == "all")) {
                                     return true
                                 }
                             }).map((preview) => {
@@ -1459,7 +1498,7 @@ BlockUserProfilePage.galary = function (Static, data) {
                     </div>
                     : Variable.myInfo._id == data.userInfo._id ?
                         <label
-                            class="c-tiles__item c-tiles__item--add"
+                            class="c-tiles__item c-tiles__item--add 222"
                         >
                             <figure class="c-tiles__card">
                                 <img class=" c-tiles__image" src={svg["radius_plus"]} />

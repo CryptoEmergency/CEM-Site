@@ -197,7 +197,10 @@
 		"wallet": "钱包",
 		"home": "首页",
         "affiliate": "合作伙伴计划",
-        "addChats": "添加聊天"
+        "addChats": "添加聊天",
+
+        
+		"notes":"My notes"
     },
     "span": {
         "company": "公司 ",

@@ -2,7 +2,8 @@ import {
     jsx,
     jsxFrag,
     load,
-    initReload
+    initReload,
+    Variable
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
@@ -27,10 +28,9 @@ const addNew = async function (Static) {
     initReload()
 }
 
-const deleteNote = function (Static) {
-    const index = Static.notesList.list_records.indexOf(Static.activeNotes)
-    Static.notesList.list_records.splice(index, 1)
-    Static.activeNotes = null
+const deleteNote = async function ({_id,active}) {
+    await fn.restApi.setNotes.update({_id,active})
+    initReload()
 }
 
 const editNotes = async function (Static) {
@@ -80,6 +80,7 @@ const start = function (data, ID) {
                                             <div
                                                 class={["notes-item", Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null]}
                                                 onclick={() => {
+                                                    // console.log(Static.activeNotes)
                                                     Static.activeNotes = item
                                                     initReload()
                                                 }}>
@@ -113,25 +114,73 @@ const start = function (data, ID) {
                                                     }}>
                                                         <img class="notes-button__icon" src={svg["clip_notes"]} />
                                                         <input
-                                                            class="input-create__img"
-                                                            onchange={(e) => {
-                                                                Static.activeNotes.media = Object.assign({}, e.target.files)
-                                                                Static.activeNotes.media = URL.createObjectURL(Static.activeNotes.media[0])
-                                                                console.log(Static.activeNotes.media)
+                                                            type="file"
+                                                            hidden
+                                                            multiple
+                                                            // accept=".jpg,.jpeg,.png,.gif"
+                                                            Element={($el) => { Static.elInputImg = $el }}
+                                                            onchange={async function (e) {
+                                                                e.stopPropagation();
+                                                                Array.from(this.files).forEach((item) => {
+
+                                                                    fn.uploadMedia(
+                                                                        item,
+                                                                        "gallery",
+                                                                        async function () {
+                                                                            if (!this.response) {
+                                                                                alert("Произошла ошибка Попробуйте еще раз")
+                                                                                return
+                                                                            }
+                                                                            let response = JSON.parse(this.response);
+                                                                            Static.activeFiletype = response.mimetype.includes("image") ? "image" : "video"
+                                                                            // console.log(response.mimetype, Static.activeFiletype)
+
+                                                                            initReload()
+
+                                                                            let data = {
+                                                                                type: response.mimetype,
+                                                                                name: response.name
+                                                                            }
+
+                                                                            Static.activeNotes.media.push(data)
+
+                                                                            editNotes(Static)
+
+                                                                        }
+                                                                    )
+                                                                })
                                                                 initReload()
                                                             }}
-                                                            type="file"
-                                                            accept=".jpg,.jpeg,.png,.gif"
-                                                            Element={($el) => { Static.elInputImg = $el }}
                                                         />
                                                     </div>
                                                     <div class="notes-image-preview">
-                                                        <img class="notes-content-img" src={Static.activeNotes.media} />
+                                                    {Static.activeNotes.media.map(function (item) {
+                                                        console.log('=d07547=',item)
+                                                        return (
+                                                            <div>
+<img
+                  class="c-tiles__image"
+                  src={`/assets/upload/gallery/${item.name}`}
+                  width="100"
+                  height="100"
+                />
+                                                            </div>
+                                                        )
+                                                    })}
                                                     </div>
                                                     <img class="notes-content-delete" src={svg["close"]}
                                                         onclick={() => {
-                                                            deleteNote(Static)
-                                                            initReload()
+                                                            fn.modals.ModalConfirmAction({
+                                                                action: async () => {
+                                                                    Static.activeNotes.active = false
+                                                                    deleteNote({_id:Static.activeNotes._id,active:false})
+                                                                    Static.activeNotes=null
+                                                                  fn.modals.close("ModalConfirmAction")
+                                                            //initReload()
+                                                                },
+                                                                text: Variable.lang.p.deleteNotesConfirm,
+                                                                button: Variable.lang.button.yes
+                                                            })
                                                         }} />
                                                     <img class="notes-content-close" src={svg["gradient_arrow"]}
                                                         onclick={() => {
