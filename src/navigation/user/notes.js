@@ -158,7 +158,12 @@ const start = function (data, ID) {
                                                         console.log('=d07547=',item)
                                                         return (
                                                             <div>
-
+<img
+                  class="c-tiles__image"
+                  src={`/assets/upload/gallery/${item.name}`}
+                  width="100"
+                  height="100"
+                />
                                                             </div>
                                                         )
                                                     })}
