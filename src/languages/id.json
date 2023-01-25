@@ -197,7 +197,10 @@
 		"wallet": "Dompet",
 		"home": "Halaman utama",
 		"affiliate": "Program kemitraan",
-		"addChats": "Tambahkan obrolan"
+		"addChats": "Tambahkan obrolan",
+
+        
+		"notes":"My notes"
 	},
 	"span":{
 		"company": "Perusahaan",

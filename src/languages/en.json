@@ -196,7 +196,10 @@
         "wallet": "My assets",
         "home": "Home",
         "affiliate": "Partner program",
-        "addChats": "Add a chat"
+        "addChats": "Add a chat",
+
+        
+		"notes":"My notes"
     },
     "span": {
         "company": "Company",

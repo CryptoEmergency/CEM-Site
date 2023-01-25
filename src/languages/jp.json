@@ -197,7 +197,10 @@
 		"wallet": "財布",
 		"home": "ホーム",
         "affiliate": "パートナープログラム",
-        "addChats": "チャットを追加する"
+        "addChats": "チャットを追加する",
+
+        
+		"notes":"My notes"
     },
     "span": {
         "company": "会社",

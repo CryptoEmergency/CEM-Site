@@ -197,7 +197,10 @@
         "wallet": "ארנק",
         "home": "בית",
         "affiliate": "תוכנית שותפים",
-        "addChats": "הוסף צ'אט"
+        "addChats": "הוסף צ'אט",
+
+        
+		"notes":"My notes"
     },
     "span":{
         "company": "חברה",

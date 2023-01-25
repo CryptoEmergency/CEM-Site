@@ -197,7 +197,10 @@
         "wallet": "Πορτοφόλι",
         "home": "Αρχική",
         "affiliate": "Πρόγραμμα συνεργατών",
-        "addChats": "Προσθήκη chat"
+        "addChats": "Προσθήκη chat",
+
+        
+		"notes":"My notes"
     },
     "span":{
         "company": "Εταιρεία",

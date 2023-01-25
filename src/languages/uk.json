@@ -197,7 +197,10 @@
         "wallet": "Гаманець",
         "home": "Головна",
         "affiliate": "Партнерська програма",
-        "addChats": "Додати чат"
+        "addChats": "Додати чат",
+
+        
+		"notes":"My notes"
     },
     "span":{
         "company": "Компанія",

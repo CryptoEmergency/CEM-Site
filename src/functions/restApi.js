@@ -1303,16 +1303,18 @@ restApi.setNotes.create = async function ({ title, text, media, noAlert }) {
     const response = await sendApi.create("setNotes", data);
     return checkSetAnswer(response, noAlert)
 }
-restApi.setNotes.update = async function ({ _id, title, text, media, noAlert }) {
+restApi.setNotes.update = async function ({ _id, title, text, media, noAlert,active=true }) {
     let data = {
         _id,
         value: {
             title,
             text,
-            media
+            media,
+            active
         },
     };
     const response = await sendApi.create("setNotes", data);
+    console.log('=8a8bce=',response)
     return checkSetAnswer(response, noAlert)
 }
 

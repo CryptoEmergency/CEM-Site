@@ -197,7 +197,10 @@
         "wallet": "Cüzdan",
         "home": "Baş",
         "affiliate": "Ortaklar Programı",
-        "addChats": "Sohbeti ekle"
+        "addChats": "Sohbeti ekle",
+
+        
+		"notes":"My notes"
     },
     "span":{
         "company": "Şirket",

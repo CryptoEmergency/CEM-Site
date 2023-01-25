@@ -197,7 +197,10 @@
 		"wallet": "Beutel",
 		"home": "Hauptseite",
         "affiliate": "Partnerprogramm",
-        "addChats": "Chat hinzufügen"
+        "addChats": "Chat hinzufügen",
+
+        
+		"notes":"My notes"
     },
     "span": {
         "company": "Gesellschaft",

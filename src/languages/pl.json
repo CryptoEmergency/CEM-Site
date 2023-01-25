@@ -197,7 +197,10 @@
         "wallet": "Portfel",
         "home": "Początek",
         "affiliate": "Program partnerski",
-        "addChats": "Dodaj czat"
+        "addChats": "Dodaj czat",
+
+        
+		"notes":"My notes"
     },
     "span":{
         "company": "Firma",

@@ -2,7 +2,8 @@ import {
     jsx,
     jsxFrag,
     load,
-    initReload
+    initReload,
+    Variable
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
@@ -27,10 +28,9 @@ const addNew = async function (Static) {
     initReload()
 }
 
-const deleteNote = function (Static) {
-    const index = Static.notesList.list_records.indexOf(Static.activeNotes)
-    Static.notesList.list_records.splice(index, 1)
-    Static.activeNotes = null
+const deleteNote = async function ({_id,active}) {
+    await fn.restApi.setNotes.update({_id,active})
+    initReload()
 }
 
 const editNotes = async function (Static) {
@@ -164,8 +164,17 @@ const start = function (data, ID) {
                                                     </div>
                                                     <img class="notes-content-delete" src={svg["close"]}
                                                         onclick={() => {
-                                                            deleteNote(Static)
-                                                            initReload()
+                                                            fn.modals.ModalConfirmAction({
+                                                                action: async () => {
+                                                                    Static.activeNotes.active = false
+                                                                    deleteNote({_id:Static.activeNotes._id,active:false})
+                                                                    Static.activeNotes=null
+                                                                  fn.modals.close("ModalConfirmAction")
+                                                            //initReload()
+                                                                },
+                                                                text: Variable.lang.p.deleteNotesConfirm,
+                                                                button: Variable.lang.button.yes
+                                                            })
                                                         }} />
                                                     <img class="notes-content-close" src={svg["gradient_arrow"]}
                                                         onclick={() => {
