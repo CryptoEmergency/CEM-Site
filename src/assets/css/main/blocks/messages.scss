@@ -415,8 +415,16 @@
 
 .message--new {
 	// position: relative;
-	font-weight: 700 !important;
-	color: #8846D3 !important;
+
+	span {
+		font-weight: 700 !important;
+		// color: #8846D3 !important;
+		background-image: linear-gradient(90deg, #FFA0AF, #8729DA);
+		background-size: 100%;
+		background-repeat: repeat;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
 
 	i {
 		position: absolute;
@@ -426,7 +434,7 @@
 		height: 23px;
 		border-radius: 50%;
 		border: 2px solid #8846D3;
-		background: #8846D3;
+		background: linear-gradient(90deg, #FFA0AF, #8729DA); //#8846D3;
 		color: black;
 		text-align: center;
 		line-height: 19px;

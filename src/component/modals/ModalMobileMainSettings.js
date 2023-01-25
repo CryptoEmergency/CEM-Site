@@ -54,8 +54,13 @@ const ModalMobileMainSettings = function (data, ID) {
                     onclick={
                         function (e) {
                             if (close) {
-                                // console.log('=87f885=', ID)
+
                                 fn.modals.close(ID)
+
+                            }
+
+                            if (data.Burger) {
+                                data.Burger.classList.remove("c-userpanel__icon--active")
                             }
                         }
                     }
