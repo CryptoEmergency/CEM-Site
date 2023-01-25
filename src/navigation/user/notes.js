@@ -7,7 +7,6 @@ import {
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-import { MediaButton } from '@component/element/index.js';
 
 
 // Добавление новой заметки.
@@ -21,7 +20,7 @@ const addNew = async function (Static) {
         if (response && response.status == "ok") {
             if (response.list_records && response.list_records[0]) {
                 Static.notesList.list_records.unshift(response.list_records[0])
-                Static.activeNotes = Static.notesList.list_records
+                Static.activeNotes = Static.notesList.list_records[0]
             }
         }
     }
@@ -87,7 +86,6 @@ const start = function (data, ID) {
                                             <div
                                                 class={["notes-item", Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null]}
                                                 onclick={() => {
-                                                    // console.log(Static.activeNotes)
                                                     Static.activeNotes = item
                                                     initReload()
                                                 }}>
@@ -124,7 +122,6 @@ const start = function (data, ID) {
                                                             type="file"
                                                             hidden
                                                             multiple
-                                                            // accept=".jpg,.jpeg,.png,.gif"
                                                             Element={($el) => { Static.elInputImg = $el }}
                                                             onchange={async function (e) {
                                                                 e.stopPropagation();
@@ -140,7 +137,6 @@ const start = function (data, ID) {
                                                                             }
                                                                             let response = JSON.parse(this.response);
                                                                             Static.activeFiletype = response.mimetype.includes("image") ? "image" : "video"
-                                                                            // console.log(response.mimetype, Static.activeFiletype)
 
                                                                             initReload()
 
@@ -161,27 +157,51 @@ const start = function (data, ID) {
                                                         />
                                                     </div>
                                                     <div class="notes-content-img">
-                                                    {Static.activeNotes.media.map(function (item) {
-                                                        // console.log('=d07547=',item)
-                                                        return (
-                                                            <div class="notes-img-wrapper">
-                                                                <img
-                                                                    class="notes-img-preview"
-                                                                    src={`/assets/upload/gallery/${item.name}`}
-                                                                    width="100"
-                                                                    height="100"
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        e.preventDefault();
-                                                                        fn.modals.ModalViewPhoto({
-                                                                            path: item.name,
-                                                                            // arrMedia: item.media,
-                                                                        });
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        )
-                                                    })}
+                                                    
+                                                        {   
+                                                            () => {
+                                                                if(!Static.activeNotes.media) {
+                                                                    null
+                                                                } else {
+                                                                    return (
+                                                                        Static.activeNotes.media.map(function (item, index) {
+                                                                            return (
+                                                                                <div class="notes-img-wrapper">
+                                                                                    <img
+                                                                                        class="notes-img-preview"
+                                                                                        src={`/assets/upload/gallery/${item.name}`}
+                                                                                        width="100"
+                                                                                        height="100"
+                                                                                        onClick={(e) => {
+                                                                                            e.stopPropagation();
+                                                                                            e.preventDefault();
+                                                                                            fn.modals.ModalViewPhoto({
+                                                                                                path: item.name,
+                                                                                            });
+                                                                                        }}
+                                                                                    />
+                                                                                    <div
+                                                                                        class="notes-delete-media"
+                                                                                        
+                                                                                        onClick={() => {
+                                                                                            Static.activeNotes.media.splice(index, 1);
+                                                                                            if (Static.activeNotes.media.length == 0) {
+                                                                                                Static.isValid = false;
+                                                                                            }
+                                                                                            editNotes(Static);
+                                                                                        }}
+                                                                                        >
+                                                                                            <img src={svg["delete_icon"]} />
+                                                                                    </div>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                    )
+                                                                    
+                                                                }
+                                                            }
+                                                        }
+                                                        
                                                     </div>
                                                     <img class="notes-content-delete" src={svg["delete_notes"]}
                                                         onclick={() => {
@@ -189,9 +209,7 @@ const start = function (data, ID) {
                                                                 action: async () => {
                                                                     Static.activeNotes.active = false
                                                                     deleteNote(Static,{_id:Static.activeNotes._id,active:false})
-                                                                    // Static.activeNotes=null
                                                                     fn.modals.close("ModalConfirmAction")
-                                                            //initReload()
                                                                 },
                                                                 text: Variable.lang.p.deleteNotesConfirm,
                                                                 button: Variable.lang.button.yes
@@ -202,7 +220,7 @@ const start = function (data, ID) {
                                                             Static.activeNotes = null
                                                             initReload()
                                                         }} />
-                                                    <div class="notes-input-text"
+                                                    <div class="notes-input-title notes-input-placeholder"
                                                         contenteditable={true}
                                                         Element={($el) => {
                                                             Static.elTitle = $el
@@ -215,7 +233,7 @@ const start = function (data, ID) {
                                                         }}>
                                                     </div>
                                                     <div
-                                                        class="notes-description"
+                                                        class="notes-description notes-input-placeholder"
                                                         contenteditable={true}
                                                         data-text="Текст"
                                                         textContent={Static.activeNotes.text}
