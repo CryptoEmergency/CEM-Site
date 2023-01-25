@@ -154,7 +154,8 @@ const start = function (data, ID) {
                                                         />
                                                     </div>
                                                     <div class="notes-image-preview">
-                                                    {Static.notesList.list_records.map(function (item) {
+                                                    {Static.activeNotes.media.map(function (item) {
+                                                        console.log('=d07547=',item)
                                                         return (
                                                             <div>
 
