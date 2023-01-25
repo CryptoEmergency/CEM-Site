@@ -159,7 +159,6 @@
 
     @media(max-width: 992px) {
         width: calc(100% - 220px);
-        padding: 30px;
     }
 
     @media(max-width: 599px) {
@@ -170,8 +169,7 @@
         @media(max-width: 599px) {
             display: block;
             width: 100%;
-            padding: 20px;
-            padding-top: 30px;
+            padding-left: 20px;
         }
     }
 }
@@ -202,8 +200,16 @@
 }
 
 .notes-content-img {
-    width: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.notes-img-preview {
     border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .notes-content-delete {
@@ -211,7 +217,6 @@
         top: 15px;
         right: 15px;
         width: 28px;
-        height: 28px;
         display: block;
         margin-left: auto;
         padding: 5px;

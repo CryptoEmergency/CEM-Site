@@ -153,29 +153,37 @@ const start = function (data, ID) {
                                                             }}
                                                         />
                                                     </div>
-                                                    <div class="notes-image-preview">
+                                                    <div class="notes-content-img">
                                                     {Static.activeNotes.media.map(function (item) {
-                                                        console.log('=d07547=',item)
+                                                        // console.log('=d07547=',item)
                                                         return (
-                                                            <div>
-<img
-                  class="c-tiles__image"
-                  src={`/assets/upload/gallery/${item.name}`}
-                  width="100"
-                  height="100"
-                />
+                                                            <div class="notes-img-wrapper">
+                                                                <img
+                                                                    class="notes-img-preview"
+                                                                    src={`/assets/upload/gallery/${item.name}`}
+                                                                    width="100"
+                                                                    height="100"
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        e.preventDefault();
+                                                                        fn.modals.ModalViewPhoto({
+                                                                            path: item.name,
+                                                                            // arrMedia: item.media,
+                                                                        });
+                                                                    }}
+                                                                />
                                                             </div>
                                                         )
                                                     })}
                                                     </div>
-                                                    <img class="notes-content-delete" src={svg["close"]}
+                                                    <img class="notes-content-delete" src={svg["delete_notes"]}
                                                         onclick={() => {
                                                             fn.modals.ModalConfirmAction({
                                                                 action: async () => {
                                                                     Static.activeNotes.active = false
                                                                     deleteNote({_id:Static.activeNotes._id,active:false})
                                                                     Static.activeNotes=null
-                                                                  fn.modals.close("ModalConfirmAction")
+                                                                    fn.modals.close("ModalConfirmAction")
                                                             //initReload()
                                                                 },
                                                                 text: Variable.lang.p.deleteNotesConfirm,
