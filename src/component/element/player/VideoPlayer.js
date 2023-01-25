@@ -29,7 +29,7 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
     let elMedia = Static.elMedia[item._id]
     let playButton, playLoader
 
-    // console.log('=VideoPlayer=', Static, item, path)
+    // console.log('=VideoPlayer=', item)
     return (
         <div
             class={[
@@ -42,8 +42,8 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
             <div Element={($el) => { playLoader = $el; }} style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none;" class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             <video
                 playsinline
-                poster={images["video_background"]}
-                preload="none"  //metadata
+                poster={item.previewName ? `/assets/upload/posts/${item.previewName}` : images["video_background"]}
+                preload="metadata"  //none
                 src={path + item.name}
                 Element={($el) => { elMedia.el = $el; }}
                 onclick={function (e) {

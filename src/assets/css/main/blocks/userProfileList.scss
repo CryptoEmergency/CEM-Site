@@ -590,6 +590,34 @@
     .controls {
         display: none;
     }
+
+    &--preview {
+        grid-template-columns: repeat(4, minmax(70px, 1fr));
+        gap: 5px;
+
+        .c-tiles {
+            &__item {
+                &--add {
+                    background-image: url("../svg/radius_plus.svg");
+                    background-position: center;
+                    background-size: 25%;
+                    background-repeat: no-repeat;
+
+                    .c-tiles {
+                        &__image {
+                            // height: 25%;
+                        }
+                    }
+                }
+
+                &--selected {
+                    background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 3px, transparent 3px) 0% 0%/8px 8px no-repeat, radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 3px, transparent 3px) 100% 0%/8px 8px no-repeat, radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 3px, transparent 3px) 0% 100%/8px 8px no-repeat, radial-gradient(circle at 0 0, #ffffff 0, #ffffff 3px, transparent 3px) 100% 100%/8px 8px no-repeat, linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 10px) calc(100% - 16px) no-repeat, linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 16px) calc(100% - 10px) no-repeat, linear-gradient(90deg, #ffa0af 0%, #8729DA 100%);
+                    padding: 2px;
+                    box-sizing: border-box;
+                }
+            }
+        }
+    }
 }
 
 .gallery {
@@ -623,6 +651,10 @@
         width: 29px;
         height: 29px;
         border-radius: 8px;
+
+        &--all {
+            background: no-repeat url("../svg/sections/infinite.svg") center/90%;
+        }
 
         &--image {
             background: no-repeat url("../svg/sections/galary_inactive.svg") center/100%;

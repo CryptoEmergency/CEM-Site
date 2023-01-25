@@ -79,7 +79,9 @@
 		"yes": "Да",
 		"whoLike": "Поставили лайк",
 		"pin": "Закрепить",
-		"unpin": "Открепить"
+		"unpin": "Открепить",
+		"preview": "Превью",
+		"attach": "Прикрепить"
 	},
 	"h": {
 		"success": "Успешно!",
@@ -166,7 +168,8 @@
 		"modal_changeFrame": "Рамка аватара",
 		"modal_viewFile": "Файлы",
 		"community": "Сообщества",
-		"offline": "Оффлайн встречи"
+		"offline": "Оффлайн встречи",
+		"modal_previewVideo": "Превью видео"
 	},
 	"a": {
 		"about": "О нас",

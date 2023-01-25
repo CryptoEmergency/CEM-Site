@@ -10,7 +10,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
   // console.log("============on load",Static,"=======item",item)
   // console.log('=MediaPreview=', Static)
 
-
+// console.log('=2bf636=',item, index, type)
   if (item.type == "audio") {
     el[index] = Variable.setRef();
   }
@@ -178,7 +178,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
       {
         item.type == "video"
           ?
-          <div class="create_post_photo_preview">
+          <div class="create_post_photo_preview 77">
             {
               item.src !== undefined
                 ?
@@ -224,19 +224,68 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
               item.size === undefined
                 ?
                 <div
-                  class="delete_post_media"
-                  style="display: block;"
-                  onClick={() => {
-                    //  console.log(3)
-                    Static.mediaInputs.value.splice(index, 1);
-                    if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
-                      Static.isValid = false;
-                    }
-                    initReload();
-                  }}
+                  class="messages_settings"
+                  title={Variable.lang.text.settings}
+                  onclick={(e) => {
+                    let author = Variable.myInfo
+                    let items = [
+                      {
+                        text: Variable.lang.button.preview,
+                        type: "edit",
+                        onclick: function (e) {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          // console.log('=eb4081 Static=', Static)
+
+                          fn.modals.ModalPreviewVideo({
+                            uploadPreviewImage: function (preview) {
+                              Static.mediaInputs.value[index].previewName = preview.name
+                            }
+                          });
+                        }
+                      },
+                      {
+                        text: Variable.lang.select.delete,
+                        type: "delete",
+                        color: "red",
+                        onclick: function (e) {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          Static.mediaInputs.value.splice(index, 1);
+                          Static.originalImage.splice(index, 1);
+                          if (Static.mediaInputs.value.length == 0) {
+                            Static.mediaInputs.selectAspect = null;
+                            Static.mediaInputs.show = false
+                            if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                              Static.isValid = false;
+                            }
+                          }
+                          initReload();
+                        }
+                      },
+                    ]
+                    e.stopPropagation();
+                    e.preventDefault();
+                    Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
+                  }
+                  }
                 >
-                  <img src={svg["delete_icon"]} />
+                  <img class="" src={svg.settings_icon} width="20" height="20" />
                 </div>
+                // <div
+                //   class="delete_post_media"
+                //   style="display: block;"
+                //   onClick={() => {
+                //     //  console.log(3)
+                //     Static.mediaInputs.value.splice(index, 1);
+                //     if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
+                //       Static.isValid = false;
+                //     }
+                //     initReload();
+                //   }}
+                // >
+                //   <img src={svg["delete_icon"]} />
+                // </div>
                 :
                 <div
                   class="stop_loading"

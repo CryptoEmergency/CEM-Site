@@ -218,7 +218,7 @@ const start = function (userInfo, ID = "mainBlock") {
 
             profilePage = "aboutUser"
             Static.activeView = "tile";
-            Static.activeFiletype = "image";
+            Static.activeFiletype = "all";
             if (userInfo && userInfo.nickname == Variable.myInfo.nickname && Variable.PageUserProfileMyLenta.list_records.length != 0) {
                 profilePage = "lentaFriends";
                 Static.activeItems = Variable.PageUserProfileMyLenta
