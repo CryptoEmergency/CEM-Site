@@ -1266,7 +1266,7 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                         async function () {
                                                             if (!this.response) {
                                                                 // console.log('=this.response=', this.response)
-                                                                alert("Произошла ошибкаю Попробуйте еще раз")
+                                                                alert("Произошла ошибка Попробуйте еще раз")
                                                                 return
                                                             }
                                                             let response = JSON.parse(this.response);
