@@ -26,7 +26,7 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
             Static.elSelectedPreview = []
             Static.isValid = false
             Static.preview = null
-            console.log('=a5529e=', Static)
+            // console.log('=a5529e=', Static)
         },
         () => {
             return (
@@ -84,7 +84,8 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
                                                                 mediaInputs.value[numItem].name = response.name;
                                                                 initReload()
                                                             }
-
+                                                            Static.preview =mediaInputs.value[numItem]
+                                                            Static.isValid = true
                                                             initReload()
                                                         },
                                                         async function (e) {
