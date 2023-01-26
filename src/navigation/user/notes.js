@@ -71,7 +71,6 @@ const start = function (data, ID) {
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="notes">
-                        <h2>Notes</h2>
                         <div class="notes_container">
                             <div class="notes-content">
                                 <div class={["notes-list", Static.activeNotes ? "dead" : null]}>

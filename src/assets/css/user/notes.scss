@@ -1,39 +1,20 @@
 .notes {
     max-width: 1240px;
     margin: 0 auto;
-    padding-bottom: 80px;
+    padding: 30px;
 
     @media(max-width: 992px) {
         width: calc(100% - 20px);
-        padding-bottom: 60px;
     }
 
     @media(max-width: 464px) {
         width: calc(100% - 10px);
-        padding-bottom: 40px;
-    }
-
-    h2 {
-        margin: 0;
-        padding-top: 40px;
-        font-size: 32px;
-        line-height: 43px;
-        font-weight: 600;
-    
-        @media(max-width: 992px) {
-            padding-top: 35px;
-        }
-    
-        @media(max-width: 464px) {
-            padding-top: 30px;
-        }
     }
 }
 
 .notes-content {
     display: flex;
     height: 600px;
-    margin-top: 20px;
     background: #2c303e;
     border-radius: 8px;
 }
@@ -155,7 +136,23 @@
     position: relative;
     width: calc(100% - 300px);
     padding: 30px;
-    padding-top: 50px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 24px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        width: 4px;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #3b425a;
+        border: 8px solid #2c303e;
+        border-radius: 40px;
+    }
 
     @media(max-width: 992px) {
         width: calc(100% - 220px);
@@ -201,13 +198,29 @@
 
 .notes-content-img {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px 20px;
+    gap: 20px;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        height: 24px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        width: 4px;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #3b425a;
+        border: 8px solid #2c303e;
+        border-radius: 40px;
+    }
 }
 
 .notes-img-wrapper {
     position: relative;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .notes-img-preview {
@@ -276,6 +289,7 @@
 .notes-input-title {
     position: relative;
     width: 100%;
+    margin-top: 20px;
     padding: 0;
     font-size: 26px;
     font-weight: 600;
@@ -307,7 +321,7 @@
 
 .notes-description {
     position: relative;
-    height: 100%;
+    height: 60%;
     margin-top: 10px;
     color: #ffffff;
 
