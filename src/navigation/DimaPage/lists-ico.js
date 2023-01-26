@@ -166,8 +166,8 @@ const checkForm = async function (Static, ID) {
     }
 
     console.log(data)
-    await restApi.setIco.create(data)
-    fn.modals.close(ID)
+    await fn.restApi.setIco.create(data)
+    fn.siteLink("/DimaPage/")
 
 }
 

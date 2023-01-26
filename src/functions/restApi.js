@@ -1303,7 +1303,26 @@ restApi.getIco = async function ({ cache, name, limit = 6, offset = 0, filter, s
 
     let defaultSelect = {
         title: 1,
-        text: 1,
+        category: 1,
+        description: 1,
+        icon: 1,
+        cover: 1,
+        startDate: 1,
+        endDate: 1,
+        targetMoney: 1,
+        nowMoney: 1,
+        siteLink: 1,
+        whitePaperLink: 1,
+        name: 1,
+        type: 1,
+        price: 1,
+        sellType: 1,
+        totalSupply: 1,
+        forSell: 1,
+        targetSell: 1,
+        review: 1,
+        checked: 1,
+        social: 1,
         media: 1,
         showDate: 1
     }
@@ -1341,11 +1360,13 @@ restApi.setNotes = {}
 restApi.setIco = {}
 
 restApi.setIco.create = async function (data, noAlert = false) {
+    console.log('=007873=', data)
     const response = await sendApi.create("setIco", data);
+    console.log('=29a4cd=', response)
     return checkSetAnswer(response, noAlert)
 }
 
-restApi.setNotes.update = async function (data, noAlert = false) {
+restApi.setIco.update = async function (data, noAlert = false) {
     const response = await sendApi.create("setIco", data);
     return checkSetAnswer(response, noAlert)
 }
