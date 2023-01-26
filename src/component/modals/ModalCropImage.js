@@ -132,7 +132,7 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
         } else {
             if (typeUpload == "bg") {
                 aspectActive = 4
-            } else if (typeUpload == "avatar") {
+            } else if (typeUpload == "avatar" || typeUpload == "preview") {
                 aspectActive = 1
             } else if (typeUpload == "chat") {
                 aspectActive = null
@@ -211,7 +211,7 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                                                 </div>
                                             </div>
                                         )
-                                    } else if (typeUpload != "chat") {
+                                    } else if (typeUpload != "chat" && typeUpload != "preview") {
                                         return (
                                             <div class="c-cropper__toggles col-12 docs-toggles">
                                                 <div class="c-groupbtn c-groupbtn--lg btn-group btn-group-lg" role="group" style="width: 100%;">
