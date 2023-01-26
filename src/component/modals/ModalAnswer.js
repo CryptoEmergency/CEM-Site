@@ -80,7 +80,7 @@ const sendPhoto = async function (Static, crooper) {
   return
 }
 
-const sendVideo = async function (files) {
+const sendVideo = async function (Static, files) {
   fn.uploadMedia(
     files[0],
     "answers",
@@ -126,8 +126,8 @@ const ModalAnswer = function (data, ID) {
     // let text = wrapTextWithATag(e.target.innerText.trim());
     let text = e.target.innerText.trim();
     Static.textAnswer.error = "";
-  
-  
+
+
     if (text.length === 0) {
       Static.textAnswer.error = Variable.lang.error_div.not_empty_input;
     } else if (text.length < 5) {
@@ -144,13 +144,13 @@ const ModalAnswer = function (data, ID) {
     }
     initReload("modals");
   };
-  
+
   const sendAnswer = async function (e, res) {
     e.preventDefault();
     if (!Static.isValid) {
       return false;
     }
-  
+
     let mediaArr = [];
     let data = {
       value: {
@@ -163,7 +163,7 @@ const ModalAnswer = function (data, ID) {
     if (tmpRes.status === "ok") {
       res.onClose()
       Variable.DelModals("ModalAnswer");
-  
+
       //initReload();
     } else {
       Variable.SetModals(
@@ -338,7 +338,7 @@ const ModalAnswer = function (data, ID) {
                     if (this.files.length == 0) {
                       return;
                     }
-                    sendVideo(this.files)
+                    sendVideo(Static, this.files)
                     this.value = '';
                     return;
                   }}
