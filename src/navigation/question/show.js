@@ -55,9 +55,15 @@ const start = function (data, ID) {
         elShowInput: {},
         el: {}
       }
+      Static.mediaInputs = {
+        value: [],
+        show: false,
+      }
+
+      Static.elNumberSwiper = {}
 
       if (!item._id) { return (<div><BlockError404 /></div>) }
-
+      console.log('=1b441a=', Static)
       return (
         <div class="answer_container c-main__body">
           <div class="answer_block" style="flex-direction: column;">
@@ -72,8 +78,8 @@ const start = function (data, ID) {
                   <div ElemVisible={() => {
                     fn.recordsView(item._id, "setQuestions")
                   }}>
-                    <p class="question_title">{fn.editText(item.title, {paragraph: true, clear: true, html: true})}</p>
-                    <div class="question_text">{fn.editText(item.text, {paragraph: true, clear: true, html: true})}</div>
+                    <p class="question_title">{fn.editText(item.title, { paragraph: true, clear: true, html: true })}</p>
+                    <div class="question_text">{fn.editText(item.text, { paragraph: true, clear: true, html: true })}</div>
                   </div>
                   :
                   <div>
@@ -177,7 +183,7 @@ const start = function (data, ID) {
                               dateShow={item.showDate}
                             />
                             <div class="comment_body">
-                              <span class="comment_text">{fn.editText(item.text, {paragraph: true, clear: true, html: true})}</span>
+                              <span class="comment_text">{fn.editText(item.text, { paragraph: true, clear: true, html: true })}</span>
                               <LentaMedia Static={Static} items={item.media} path="answers" />
                               {
                                 Variable.auth
