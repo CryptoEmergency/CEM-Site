@@ -17,20 +17,86 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
     let close = true
     let mediaInputs
 
+    const sendPhotoOne = async function (Static, crooper, originalImage) {
+        if (!crooper) {
+            return
+        }
+        let canvas;
+
+        mediaInputs.selectAspect = crooper.options.aspectRatio;
+
+        canvas = crooper.getCroppedCanvas();
+        let previewObj = {
+            src: canvas.toDataURL(),
+            type: "image",
+            upload: 0,
+            size: 0
+        };
+        mediaInputs.show = true;
+        mediaInputs.value.push(previewObj);
+        let numItem = mediaInputs.value.length - 1
+
+        await canvas.toBlob(function (blob) {
+            fn.uploadMedia(
+                blob,
+                "posts",
+                async function () {
+                    mediaInputs.show = true;
+                    if (!this.response) {
+                        return
+                    }
+                    let response = JSON.parse(this.response);
+
+                    if (mediaInputs.value[numItem].upload === mediaInputs.value[numItem].size && mediaInputs.value[numItem].upload !== 0) {
+                        mediaInputs.value[numItem].name = response.name;
+                        initReload()
+                    }
+                    Static.preview = mediaInputs.value[numItem]
+                    Static.isValid = true
+                    console.log('=debd71=Static.preview=', Static.preview)
+                    initReload()
+                },
+                async function (e) {
+                    let contentLength;
+                    if (e.lengthComputable) {
+                        contentLength = e.total;
+                    } else {
+                        contentLength = parseInt(
+                            e.target.getResponseHeader(
+                                "x-decompressed-content-length"
+                            ),
+                            10
+                        );
+                    }
+                    if (mediaInputs.value[numItem].upload === mediaInputs.value[numItem].size && mediaInputs.value[numItem].upload !== 0) {
+                        mediaInputs.value.splice(numItem, 1);
+                        initReload()
+                    }
+
+                    mediaInputs.value[numItem].upload = e.loaded
+                    mediaInputs.value[numItem].size = contentLength;
+                    initReload();
+                }
+            );
+            initReload();
+        });
+        return
+    }
+
     init(
         () => {
             mediaInputs = {
                 value: [],
                 show: false,
+                selectAspect: null
             }
             Static.elSelectedPreview = []
             Static.isValid = false
             Static.preview = null
-            // console.log('=a5529e=', Static)
         },
         () => {
             return (
-                <div class="c-modal c-modal--open" id="addCropImage">
+                <div class="c-modal c-modal--open" id="ModalPreviewVideo">
                     <section class="c-modal__dialog c-modal__dialog--lg1">
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_previewVideo}</h2>
@@ -56,62 +122,22 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
                                             accept="image/*"
                                             onchange={async function (e) {
                                                 e.stopPropagation();
-                                                let response2;
-                                                Array.from(this.files).forEach((item) => {
-                                                    let blob = new Blob([item], { type: 'video/mp4' });
-                                                    let previewObj = {
-                                                        src: URL.createObjectURL(blob),
-                                                        type: "image",
-                                                        upload: 0,
-                                                        size: 0,
+                                                Static.files = Object.assign({}, this.files)
+                                                fn.modals.ModalCropImage({
+                                                    file: this.files[0],
+                                                    typeUpload: 'preview',
+                                                    arrMedia: mediaInputs.value,
+                                                    uploadCropImage: async function (cropper, aspectActive) {
+                                                        mediaInputs.selectAspect = aspectActive
+                                                        let imageUrl = URL.createObjectURL(Static.files[0]);
+                                                        const originalImage = new Image();
+                                                        originalImage.src = imageUrl;
+
+                                                        sendPhotoOne(Static, cropper, originalImage)
+
+                                                        return false;
                                                     }
-                                                    mediaInputs.show = true;
-                                                    mediaInputs.value.push(previewObj);
-                                                    let numItem = mediaInputs.value.length - 1
-
-                                                    fn.uploadMedia(
-                                                        item,
-                                                        "posts",
-                                                        async function () {
-                                                            if (!this.response) {
-                                                                alert("Произошла ошибка Попробуйте еще раз")
-                                                                return
-                                                            }
-
-                                                            let response = JSON.parse(this.response);
-
-                                                            if (mediaInputs.value[numItem].upload === mediaInputs.value[numItem].size && mediaInputs.value[numItem].upload !== 0) {
-                                                                mediaInputs.value[numItem].name = response.name;
-                                                                initReload()
-                                                            }
-                                                            Static.preview =mediaInputs.value[numItem]
-                                                            Static.isValid = true
-                                                            initReload()
-                                                        },
-                                                        async function (e) {
-                                                            let contentLength;
-                                                            if (e.lengthComputable) {
-                                                                contentLength = e.total;
-                                                            } else {
-                                                                contentLength = parseInt(
-                                                                    e.target.getResponseHeader(
-                                                                        "x-decompressed-content-length"
-                                                                    ),
-                                                                    10
-                                                                );
-                                                            }
-
-                                                            if (mediaInputs.value[numItem].upload === mediaInputs.value[numItem].size && mediaInputs.value[numItem].upload !== 0) {
-                                                                mediaInputs.value.splice(numItem, 1);
-                                                                initReload()
-                                                            }
-
-                                                            mediaInputs.value[numItem].upload = e.loaded
-                                                            mediaInputs.value[numItem].size = contentLength;
-                                                            initReload();
-                                                        }
-                                                    );
-                                                })
+                                                }, true)
                                             }}
                                         />
                                     </figure>
