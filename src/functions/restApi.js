@@ -1289,7 +1289,66 @@ restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter,
     }
 }
 
+
+
+
+restApi.getIco = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+
+
+    let defaultFilter = {}
+
+    if (filter._id) {
+        defaultFilter = {}
+    }
+
+    let defaultSelect = {
+        title: 1,
+        text: 1,
+        media: 1,
+        showDate: 1
+    }
+
+
+    let data = {
+        action: "getIco",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.setNotes = {}
+
+
+restApi.setIco = {}
+
+restApi.setIco.create = async function (data, noAlert = false) {
+    const response = await sendApi.create("setIco", data);
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setNotes.update = async function (data, noAlert = false) {
+    const response = await sendApi.create("setIco", data);
+    return checkSetAnswer(response, noAlert)
+}
 
 
 restApi.setNotes.create = async function ({ title, text, media, noAlert }) {
@@ -1303,7 +1362,7 @@ restApi.setNotes.create = async function ({ title, text, media, noAlert }) {
     const response = await sendApi.create("setNotes", data);
     return checkSetAnswer(response, noAlert)
 }
-restApi.setNotes.update = async function ({ _id, title, text, media, noAlert,active=true }) {
+restApi.setNotes.update = async function ({ _id, title, text, media, noAlert, active = true }) {
     let data = {
         _id,
         value: {

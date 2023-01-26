@@ -27,14 +27,14 @@ const addNew = async function (Static) {
     initReload()
 }
 
-const deleteNote = async function (Static,{_id,active}) {
-    await fn.restApi.setNotes.update({_id,active})
-        Static.notesList.list_records.map((item,index)=>{
-        if(item._id == _id){
-            Static.notesList.list_records.splice(index,1) 
+const deleteNote = async function (Static, { _id, active }) {
+    await fn.restApi.setNotes.update({ _id, active })
+    Static.notesList.list_records.map((item, index) => {
+        if (item._id == _id) {
+            Static.notesList.list_records.splice(index, 1)
         }
     })
-    Static.activeNotes=null   
+    Static.activeNotes = null
     initReload()
 }
 
@@ -83,10 +83,10 @@ const start = function (data, ID) {
                                     {Static.notesList.list_records.map(function (item) {
                                         return (
                                             <div
-                                                class={["notes-item", 
-                                                Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null,
-                                                item.media.length > 0 ? "notes-item_preview-img" : null
-                                            ]}
+                                                class={["notes-item",
+                                                    Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null,
+                                                    item.media.length > 0 ? "notes-item_preview-img" : null
+                                                ]}
                                                 onclick={() => {
                                                     Static.activeNotes = item
                                                     initReload()
@@ -94,38 +94,38 @@ const start = function (data, ID) {
                                                 <div class="notes-item-section">
                                                     <h3>{
                                                         Static.activeNotes && Static.activeNotes._id == item._id
-                                                        ?
-                                                        Static.activeNotes.title != "" ? Static.activeNotes.title : "Без названия"
-                                                        :
-                                                        item.title != "" ? item.title : "Без названия"
+                                                            ?
+                                                            Static.activeNotes.title != "" ? Static.activeNotes.title : "Без названия"
+                                                            :
+                                                            item.title != "" ? item.title : "Без названия"
                                                     }</h3>
                                                     <div class="notes-item_block">
                                                         <span>{fn.getDateFormat(item.showDate)}</span>
                                                         <p>{item.text}</p>
                                                     </div>
                                                 </div>
-                                                {   
+                                                {
                                                     () => {
-                                                        if(!item.media[0]) {
+                                                        if (!item.media[0]) {
                                                             null
                                                         } else {
                                                             return (
                                                                 item.media.map(function (item, index) {
                                                                     if (index == 0) {
                                                                         return (
-                                                                        <div class="notes-item_img">
-                                                                            <img
-                                                                                src={`/assets/upload/gallery/${item.name}`}
-                                                                                width="50"
-                                                                                height="50"
-                                                                            />
-                                                                        </div>
-                                                                    )
+                                                                            <div class="notes-item_img">
+                                                                                <img
+                                                                                    src={`/assets/upload/gallery/${item.name}`}
+                                                                                    width="50"
+                                                                                    height="50"
+                                                                                />
+                                                                            </div>
+                                                                        )
                                                                     }
-                                                                    
+
                                                                 })
                                                             )
-                                                            
+
                                                         }
                                                     }
                                                 }
@@ -189,10 +189,10 @@ const start = function (data, ID) {
                                                         />
                                                     </div>
                                                     <div class="notes-content-img">
-                                                    
-                                                        {   
+
+                                                        {
                                                             () => {
-                                                                if(!Static.activeNotes.media) {
+                                                                if (!Static.activeNotes.media) {
                                                                     null
                                                                 } else {
                                                                     return (
@@ -214,7 +214,7 @@ const start = function (data, ID) {
                                                                                     />
                                                                                     <div
                                                                                         class="notes-delete-media"
-                                                                                        
+
                                                                                         onClick={() => {
                                                                                             Static.activeNotes.media.splice(index, 1);
                                                                                             if (Static.activeNotes.media.length == 0) {
@@ -222,25 +222,25 @@ const start = function (data, ID) {
                                                                                             }
                                                                                             editNotes(Static);
                                                                                         }}
-                                                                                        >
-                                                                                            <img src={svg["delete_icon"]} />
+                                                                                    >
+                                                                                        <img src={svg["delete_icon"]} />
                                                                                     </div>
                                                                                 </div>
                                                                             )
                                                                         })
                                                                     )
-                                                                    
+
                                                                 }
                                                             }
                                                         }
-                                                        
+
                                                     </div>
                                                     <img class="notes-content-delete" src={svg["delete_notes"]}
                                                         onclick={() => {
                                                             fn.modals.ModalConfirmAction({
                                                                 action: async () => {
                                                                     Static.activeNotes.active = false
-                                                                    deleteNote(Static,{_id:Static.activeNotes._id,active:false})
+                                                                    deleteNote(Static, { _id: Static.activeNotes._id, active: false })
                                                                     fn.modals.close("ModalConfirmAction")
                                                                 },
                                                                 text: Variable.lang.p.deleteNotesConfirm,
