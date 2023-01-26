@@ -10,7 +10,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
   // console.log("============on load",Static,"=======item",item)
   // console.log('=MediaPreview=', Static)
 
-// console.log('=2bf636=',item, index, type)
+  // console.log('=2bf636=',item, index, type)
   if (item.type == "audio") {
     el[index] = Variable.setRef();
   }
@@ -78,10 +78,6 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                         onclick: function (e) {
                           e.stopPropagation();
                           e.preventDefault();
-                          // alert(index)
-                          // alert(item.name)
-                          // alert(Static.originalImage[index])
-                          // alert("Редактирую")
 
                           fn.modals.ModalCropImage({
                             editable: true,
@@ -241,7 +237,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                             uploadPreviewImage: function (preview) {
                               Static.mediaInputs.value[index].previewName = preview.name
                             }
-                          });
+                          }, true);
                         }
                       },
                       {

@@ -1141,6 +1141,12 @@
             &:focus {
                 outline: none
             }
+
+            &[type="date"] {
+                &::-webkit-calendar-picker-indicator {
+                    background-image: none;
+                }
+            }
         }
 
         textarea {

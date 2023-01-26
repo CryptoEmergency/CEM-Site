@@ -42,7 +42,7 @@
 					display: block;
 					position: absolute;
 					height: 28px;
-					filter: invert(70%) sepia(6%) saturate(518%) hue-rotate(208deg) brightness(94%) contrast(88%);
+					// filter: invert(70%) sepia(6%) saturate(518%) hue-rotate(208deg) brightness(94%) contrast(88%);
 					top: 30px;
 					left: 15px;
 					cursor: pointer;
@@ -807,6 +807,10 @@
 			height: 21px;
 			filter: invert(70%) sepia(16%) saturate(191%) hue-rotate(199deg) brightness(99%) contrast(88%);
 			cursor: pointer;
+
+			&.goBackFromChat {
+				filter: none
+			}
 		}
 	}
 }

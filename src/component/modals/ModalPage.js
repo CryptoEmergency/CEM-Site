@@ -102,7 +102,7 @@ const ModalPage = async function (ID, reload) {
                       }}
                       title={Variable.lang.span.back}
                     >
-                      <img class="c-goback__arrow" src={svg["chats_back"]} />
+                      <img class="c-goback__arrow" src={svg["chats_back2"]} />
                       {/* <span class="c-goback__text">{Variable.lang.span.back}</span> */}
                     </a>
 

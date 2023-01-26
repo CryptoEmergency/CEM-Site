@@ -1081,15 +1081,18 @@ BlockUserProfilePage.social = function (Static, data) {
                             console.log('=87542b=response=', response)
 
                             if (response.status === 'ok') {
+                                Static.activeItems.list_records[0].social.push(response.list_records)
                                 Static.channelNewSocial = ""
                                 Static.descriptionNewSocial = ""
                                 Static.nameNewSocial = ""
                                 Static.linkNewSocial = ""
+                                initReload()
                                 Static.viewForm = false;
                                 initReload()
                             } else {
                                 Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true);
                             }
+                            initReload()
                         }
                     }}
                 >
@@ -1377,7 +1380,7 @@ BlockUserProfilePage.galary = function (Static, data) {
                                         onclick={(e) => {
                                             e.preventDefault();
                                             e.stopPropagation();
-                                            if (Static.activeItems.list_records[0].avatar) {
+                                            if (Static.activeItems.list_records && Static.activeItems.list_records[0].avatar) {
                                                 let nameFile;
                                                 if (e.currentTarget.querySelector('.c-tiles__image')) {
                                                     nameFile = e.currentTarget.querySelector('.c-tiles__image').attributes.src.value.slice(22);
@@ -1509,7 +1512,6 @@ BlockUserProfilePage.galary = function (Static, data) {
                                     onchange={async function (e) {
                                         e.stopPropagation();
                                         Array.from(this.files).forEach((item) => {
-                                            debugger
                                             fn.uploadMedia(
                                                 item,
                                                 "gallery",
