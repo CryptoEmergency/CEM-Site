@@ -273,11 +273,7 @@ fn.timerTik = async function () {
             }
             chat.message[0] = response.info.myInfo.chatMessage[0]
             Static.chatsList = await sendApi.send({
-              action: "getUserChats", short: true, sort: {
-                "message": {
-                  "showDate": -1
-                }
-              },
+              action: "getUserChats", short: true,
               select: {
                 "message": {
                   "$slice": [

@@ -211,11 +211,7 @@ const start = function (data, ID) {
             }
 
             Static.chatsList = await sendApi.send({
-                action: "getUserChats", short: true, sort: {
-                    "message": {
-                        "showDate": -1
-                    }
-                },
+                action: "getUserChats", short: true,
                 select: {
                     "message": {
                         "$slice": [
@@ -230,7 +226,7 @@ const start = function (data, ID) {
                 }
             });
             console.log(Static)
-            console.log('=08e20a Static.chatsList=', Static.chatsList)
+            // console.log('=08e20a Static.chatsList=', Static.chatsList)
             if (Variable.Static.startChatsID) {
                 let existingChat = false
                 Static.chatsList.list_records.forEach(async (chat) => {
@@ -835,13 +831,12 @@ const start = function (data, ID) {
                                                                 }
                                                             })
                                                         }
-                                                        console.log('=d2dd12=', media)
                                                         // let data = { value: { users: Static.activeUser._id, message: { text } } }
                                                         // let response = await api({ type: "set", action: "setUserChats", data: data })
                                                         // if (media.length > 0) {
                                                         let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
                                                         // console.log('=6befba=', response)
-                                                        // debugger
+                                                        debugger
                                                         if (response.status === "ok") {
                                                             Static.message.el.value = ""
                                                             Static.message.value = ""
@@ -856,8 +851,8 @@ const start = function (data, ID) {
                                                                 } else {
                                                                     Static.messageList.list_records[0].message = [newRes]
                                                                 }
-                                                                console.log('=46ae17 Static.chatsList=', Static.chatsList)
-                                                                console.log('=46ae17 Static.messageList=', Static.messageList)
+                                                                // console.log('=46ae17 Static.chatsList=', Static.chatsList)
+                                                                // console.log('=46ae17 Static.messageList=', Static.messageList)
                                                                 // debugger
                                                                 if (Static.chatsList && Static.chatsList.list_records) {
                                                                     Static.chatsList.list_records.map((item) => {
@@ -867,33 +862,21 @@ const start = function (data, ID) {
                                                                         }
                                                                     })
                                                                 }
-                                                                Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
-                                                                    new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
-                                                                })
-                                                                console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
-                                                                Static.mediaInputs.value = [];
-                                                                Static.chatsList = await sendApi.send({
-                                                                    action: "getUserChats", short: true, sort: {
-                                                                        "message": {
-                                                                            "showDate": -1
-                                                                        }
-                                                                    },
-                                                                    select: {
-                                                                        "message": {
-                                                                            "$slice": [
-                                                                                0,
-                                                                                1
-                                                                            ]
-                                                                        },
-                                                                        "users": 1
-                                                                    },
-                                                                    sort: {
-                                                                        'message.showDate': -1
-                                                                    }
+                                                                // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
+                                                                //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                                                                // })
+                                                                // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
+
+                                                                let i = Static.chatsList.list_records.findIndex(chat => {
+                                                                    return chat.message[0]._id == response.list_records[0]._id;
                                                                 });
-                                                                setTimeout(() => {
-                                                                    initReload()
-                                                                }, 100);
+                                                                // console.log('=1def2b = i =', i)
+
+                                                                Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
+
+                                                                // console.log('=5dfe89= new = ', Static.chatsList.list_records)
+                                                                Static.mediaInputs.value = [];
+                                                                initReload()
                                                             }
                                                         } else {
                                                             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
