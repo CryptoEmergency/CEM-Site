@@ -1251,7 +1251,7 @@ const BlockUserRooms = async function ({ Static }) {
                     >
                       <img
                         class="c-chats__back"
-                        src={svg.chats_back}
+                        src={svg.chats_back2}
                         onClick={() => {
                           alert("Назад");
                         }}

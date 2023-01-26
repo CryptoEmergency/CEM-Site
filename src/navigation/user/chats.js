@@ -303,7 +303,7 @@ const start = function (data, ID) {
                         <div class="chats_search">
                             <form id="chatsSearchForm">
                                 <a class="goBackFromChatLink" href="/" onclick={(e) => fn.siteLink(e)}>
-                                    <img class="goBackFromChat" src={svg.chats_back} />
+                                    <img class="goBackFromChat" src={svg.chats_back2} />
                                 </a>
                                 <input type="text" disabled />
                                 <img src={svg.chats_search_icon} />
@@ -917,7 +917,7 @@ const start = function (data, ID) {
                     </div>
                     <img
                         class="messages_goback"
-                        src={svg.chats_back}
+                        src={svg.chats_back2}
                         onClick={() => { Static.activeChat = null; initReload(); }}
                     />
                 </div>
