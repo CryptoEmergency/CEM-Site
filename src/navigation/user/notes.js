@@ -83,19 +83,52 @@ const start = function (data, ID) {
                                     {Static.notesList.list_records.map(function (item) {
                                         return (
                                             <div
-                                                class={["notes-item", Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null]}
+                                                class={["notes-item", 
+                                                Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null,
+                                                item.media.length > 0 ? "notes-item_preview-img" : null
+                                            ]}
                                                 onclick={() => {
                                                     Static.activeNotes = item
                                                     initReload()
                                                 }}>
-                                                <h3>{
-                                                    Static.activeNotes && Static.activeNotes._id == item._id
+                                                <div class="notes-item-section">
+                                                    <h3>{
+                                                        Static.activeNotes && Static.activeNotes._id == item._id
                                                         ?
                                                         Static.activeNotes.title != "" ? Static.activeNotes.title : "Без названия"
                                                         :
                                                         item.title != "" ? item.title : "Без названия"
-                                                }</h3>
-                                                <span>{fn.getDateFormat(item.showDate)}</span>
+                                                    }</h3>
+                                                    <div class="notes-item_block">
+                                                        <span>{fn.getDateFormat(item.showDate)}</span>
+                                                        <p>{item.text}</p>
+                                                    </div>
+                                                </div>
+                                                {   
+                                                    () => {
+                                                        if(!item.media[0]) {
+                                                            null
+                                                        } else {
+                                                            return (
+                                                                item.media.map(function (item, index) {
+                                                                    if (index == 0) {
+                                                                        return (
+                                                                        <div class="notes-item_img">
+                                                                            <img
+                                                                                src={`/assets/upload/gallery/${item.name}`}
+                                                                                width="50"
+                                                                                height="50"
+                                                                            />
+                                                                        </div>
+                                                                    )
+                                                                    }
+                                                                    
+                                                                })
+                                                            )
+                                                            
+                                                        }
+                                                    }
+                                                }
                                             </div>
                                         )
                                     })}
