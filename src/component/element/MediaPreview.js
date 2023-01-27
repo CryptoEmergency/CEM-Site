@@ -121,7 +121,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   }
                   }
                 >
-                  <img class="" src={svg.settings_icon} width="20" height="20" />
+                  <img class="" src={svg.settings_icon} width="32" height="32" />
                 </div>
                 : null
             }
@@ -276,7 +276,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   }
                   }
                 >
-                  <img class="" src={svg.settings_icon} width="20" height="20" />
+                  <img class="" src={svg.settings_icon} width="32" height="32" />
                 </div>
                 // <div
                 //   class="delete_post_media"
