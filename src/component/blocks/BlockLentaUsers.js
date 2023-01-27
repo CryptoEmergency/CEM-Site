@@ -34,7 +34,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
         class="c-tiles__item"
         data-href={"/lenta-users/show/" + item._id}
         onclick={(e) => {
-          e.stopPropagation();
+          // e.stopPropagation();
           fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, items: fn.itemsMenu.lenta_users(Static, item) })
         }
         }
@@ -50,7 +50,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                   height="100"
                 />
                 : item.media[0].type == "video" ?
-                  <VideoPlayer Static={Static} item={item.media[0]} path={`/assets/upload/posts/`} />
+                  <VideoPlayer Static={Static} item={item.media[0]} path={`/assets/upload/posts/`} customClick={(e) => console.log('customClick')} />
                   : <AudioPlayer Static={Static} item={item.media[0]} path={`/assets/upload/posts/`} />
               :
               <img

@@ -220,7 +220,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                                                                         Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
                                                                     }}
                                                                 >
-                                                                    <img class="" src={svg.settings_icon} width="20" height="20" />
+                                                                    <img class="" src={svg.settings_icon} width="32" height="32" />
                                                                 </div>
                                                                 : null
                                                         }
