@@ -836,7 +836,7 @@ const start = function (data, ID) {
                                                         // if (media.length > 0) {
                                                         let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
                                                         // console.log('=6befba=', response)
-                                                        debugger
+                                                        // debugger
                                                         if (response.status === "ok") {
                                                             Static.message.el.value = ""
                                                             Static.message.value = ""

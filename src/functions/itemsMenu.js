@@ -948,9 +948,11 @@ itemsMenu.lenta_users = function (Static, item) {
                 text: Variable.lang.button.edit,
                 type: "edit",
                 onclick: async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     fn.siteLink("/user/posts/" + item._id);
 
-                    return false
+                    // return false
                     let response = await sendApi.send({
                         action: "getPost", short: true, cache: true, name: "PageUserProfileMyLenta",
                         filter: {
@@ -960,13 +962,13 @@ itemsMenu.lenta_users = function (Static, item) {
                         // limit: 12
                     })
 
-                    console.log('=055882=', response)
+                    console.log('=055882= EditPost = response =', response)
                     let data = response.list_records.filter((post) => {
                         return post._id == item._id
                     })
                     let audio = data[0].media.filter(item => item.type == 'audio');
-                    console.log('=00b984=', data)
-                    fn.siteLink("/user/posts/");
+                    console.log('=00b984= EditPost = data =', data)
+                    // fn.siteLink("/user/posts/");
                     if (data[0].text.length > 0) {
                         Static.textInputs.show = true
                         Static.textInputs.value = data[0].text;
@@ -988,8 +990,8 @@ itemsMenu.lenta_users = function (Static, item) {
                     } else {
                         Static.isValid = false;
                     }
-                    //  initReload()
-                    console.log('=ba91a4=', Static)
+                    initReload()
+                    console.log('=ba91a4= EditPost = Static =', Static)
                     //    initReload()
                     // Переработать модалку
                     // Variable.SetModals(
