@@ -10,6 +10,11 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
+const toDateInputValue = function (tmpDate) {
+    var local = new Date(tmpDate);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
+};
 
 //
 const checkForm = async function (Static, ID) {

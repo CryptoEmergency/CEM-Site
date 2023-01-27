@@ -42,7 +42,24 @@ const start = function (data, ID) {
                         </span>
                     </div>
 
+
+                    <div
+                        class="button-container-preview"
+                        onclick={() => {
+                            fn.siteLink("/DimaPage/records-startaps/")
+                            // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
+                        }}
+                    >
+                        <span class="btn-news-preview">
+                            <span >
+                                Список Стартапов
+                            </span>
+                        </span>
+                    </div>
+
                 </div>
+
+
             )
         }
     })
