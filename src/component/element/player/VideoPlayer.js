@@ -22,7 +22,7 @@ const formatTime = function (time) {
     return lead0(h, 2) + ":" + lead0(m, 2) + ":" + lead0(s, 2)
 }
 // let Static = Variable.State(item._id)
-const VideoPlayer = function ({ Static, item, path, className = false }) {
+const VideoPlayer = function ({ Static, item, path, className = false, customClick = false }) {
     if (!Static.elMedia[item._id]) {
         Static.elMedia[item._id] = {}
     }
@@ -38,7 +38,18 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
             ]}
         >
             <div class="video_sign"></div>
-            <img Element={($el) => { playButton = $el; }} style="width: 10%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)" src={svg['play_button']} />
+            <img
+                Element={($el) => { playButton = $el; }}
+                style="width: 10%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)"
+                src={svg['play_button']} onclick={function (e) {
+                    if (customClick) {
+                        customClick()
+                    } else {
+                        e.stopPropagation();
+                        elMedia.el.paused ? elMedia.el.play() : elMedia.el.pause();
+                    }
+                }}
+            />
             <div Element={($el) => { playLoader = $el; }} style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none;" class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             <video
                 playsinline
@@ -47,44 +58,68 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
                 src={path + item.name}
                 Element={($el) => { elMedia.el = $el; }}
                 onclick={function (e) {
-                    e.stopPropagation();
-                    this.paused ? this.play() : this.pause();
+                    if (customClick) {
+                        customClick()
+                    } else {
+                        e.stopPropagation();
+                        this.paused ? this.play() : this.pause();
+                    }
                 }}
                 onplay={function (e) {
-                    Object.values(Static.elMedia).forEach((audio) => {
-                        if (audio.play && audio != elMedia) {
-                            audio.el.pause()
+                    if (customClick) {
+                        customClick()
+                    } else {
+                        Object.values(Static.elMedia).forEach((audio) => {
+                            if (audio.play && audio != elMedia) {
+                                audio.el.pause()
+                            }
+                        })
+                        elMedia.play = true
+                        playButton.style.display = 'none'
+                        if (this.buffered.length == 0) {
+                            playLoader.style.display = 'block'
                         }
-                    })
-                    elMedia.play = true
-                    playButton.style.display = 'none'
-                    if (this.buffered.length == 0) {
-                        playLoader.style.display = 'block'
+                        elMedia.controlsPause.src = svg["player_pause"]
+                        elMedia.controlsPause.classList.remove("paused");
                     }
-                    elMedia.controlsPause.src = svg["player_pause"]
-                    elMedia.controlsPause.classList.remove("paused");
                 }}
                 onpause={function (e) {
-                    elMedia.play = false
-                    playLoader.style.display = 'none'
-                    playButton.style.display = 'block'
-                    elMedia.controlsPause.src = svg["player_play"]
-                    elMedia.controlsPause.classList.add("paused");
+                    if (customClick) {
+                        customClick()
+                    } else {
+                        elMedia.play = false
+                        playLoader.style.display = 'none'
+                        playButton.style.display = 'block'
+                        elMedia.controlsPause.src = svg["player_play"]
+                        elMedia.controlsPause.classList.add("paused");
+                    }
                 }}
                 oncanplay={function (e) {
-                    elMedia.controlsDuration.innerText = formatTime(this.duration)
-                    playLoader.style.display = 'none'
+                    if (customClick) {
+                        customClick()
+                    } else {
+                        elMedia.controlsDuration.innerText = formatTime(this.duration)
+                        playLoader.style.display = 'none'
+                    }
                 }}
                 onended={function (e) {
-                    elMedia.play = false
-                    elMedia.controlsPause.src = svg["player_play"]
-                    elMedia.controlsPause.classList.add("paused");
+                    if (customClick) {
+                        customClick()
+                    } else {
+                        elMedia.play = false
+                        elMedia.controlsPause.src = svg["player_play"]
+                        elMedia.controlsPause.classList.add("paused");
+                    }
                 }}
                 ontimeupdate={function (e) {
-                    playLoader.style.display = 'none'
-                    elMedia.controlsCurrentTime.innerText = formatTime(this.currentTime)
-                    let progress = this.currentTime / this.duration;
-                    elMedia.controlsProgressLine.style.width = progress * 100 + '%'
+                    if (customClick) {
+                        customClick()
+                    } else {
+                        playLoader.style.display = 'none'
+                        elMedia.controlsCurrentTime.innerText = formatTime(this.currentTime)
+                        let progress = this.currentTime / this.duration;
+                        elMedia.controlsProgressLine.style.width = progress * 100 + '%'
+                    }
 
                 }}
                 ondblclick={function (e) {
@@ -111,7 +146,10 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
                     <span
                         class="total_player"
                         onclick={function (e) {
-                            e.stopPropagation()
+                            customClick ?
+                                customClick()
+                                :
+                                e.stopPropagation()
                             let elem
                             if (e.target.className === "current") {
                                 elem = e.target.parentElement
