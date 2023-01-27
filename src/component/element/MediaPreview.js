@@ -239,17 +239,15 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                               },
                               uploadPreviewImage: function (preview) {
                                 Static.mediaInputs.value[index].previewName = preview.name
-                                // console.log('=eb4081 Static=', Static)
                               }
                             }, true)
                             :
                             fn.modals.ModalPreviewVideo({
                               uploadPreviewImage: function (preview) {
                                 Static.mediaInputs.value[index].previewName = preview.name
-                                // console.log('=eb4081 Static=', Static)
                               }
                             }, true)
-                          console.log('=eb4081 Static=', Static)
+                          // console.log('=eb4081 Static=', Static)
                         }
                       },
                       {
