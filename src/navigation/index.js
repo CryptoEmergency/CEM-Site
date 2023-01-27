@@ -194,7 +194,7 @@ const start = function (data, ID) {
                                     </div>
                                     <div class="button-container-preview">
 
-                                        <a class="c-button c-button--primary 2btn-news-preview" href="/news/" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.news }) }}>
+                                        <a class="c-button c-button--primary 2btn-news-preview" href="/news/" onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.a.news }) }}>
                                             <span class="c-button__text">
                                                 {Variable.lang.button.allNews}
                                             </span>

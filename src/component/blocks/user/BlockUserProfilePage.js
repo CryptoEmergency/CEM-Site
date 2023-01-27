@@ -640,6 +640,7 @@ BlockUserProfilePage.answers = function (Static, data) {
     if (!data || data.profilePage != "answers") {
         return (<></>)
     }
+    console.log('=82412b= Static.activeItems.list_records = ', Static.activeItems.list_records)
 
     return (
         <div class="bl_one c-container" id="UserInfoAnswers">
@@ -652,6 +653,7 @@ BlockUserProfilePage.answers = function (Static, data) {
             </div>
             {
                 Static.activeItems.list_records.map((item, index) => {
+                    console.log('=8b03bc=itemID: ', item.questionId._id)
                     return (
                         <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
                             <div class="your_answers_main">
@@ -660,9 +662,15 @@ BlockUserProfilePage.answers = function (Static, data) {
                                         author={item.questionId.author}
                                     />
                                     <div>
-                                        <a href={'/question/show/' + item.questionId._id} onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers, itemID: item.questionId._id }) }}>
+                                        <a
+                                            href={'/question/show/' + item.questionId._id}
+                                            onclick={(e) => {
+                                                fn.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers, itemID: item.questionId._id })
+                                                // fn.siteLinkModal(e, { title: Variable.lang.span.QA, item: question, items: fn.itemsMenu.question(Static, question) })
+                                            }}
+                                        >
                                             <div class="user_question_title">
-                                                {item.questionId.title}
+                                                77-{item.questionId.title}
                                             </div>
                                         </a>
                                         <div>
@@ -764,7 +772,12 @@ BlockUserProfilePage.questions = function (Static, data) {
                         return (
                             <div class={["your_answers_table_item", !item.close ? 'deleted_question' : null]}>
                                 <div class="your_answers_main">
-                                    <a href={'/question/show/' + item._id} onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers, item: item }) }}>
+                                    <a
+                                        href={'/question/show/' + item._id}
+                                        onclick={(e) => {
+                                            fn.siteLinkModal(e, { title: Variable.lang.a.questionsAnswers, item: item })
+                                        }}
+                                    >
                                         <div class="user_question_title">
                                             {item.title}
                                         </div>

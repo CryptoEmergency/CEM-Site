@@ -114,6 +114,7 @@ const checkForm = async function (Static, ID) {
             review: Static.forms.review,
             media: Static.forms.media,
             social: [],
+            checked: Static.forms.checked
         }
     }
 
@@ -167,7 +168,7 @@ const checkForm = async function (Static, ID) {
 
     console.log(data)
     await fn.restApi.setIco.create(data)
-    fn.siteLink("/DimaPage/")
+    // fn.siteLink("/DimaPage/")
 
 }
 
@@ -400,7 +401,7 @@ const start = function (data, ID) {
                                 type="number"
                                 value={Static.forms.targetMoney}
                                 oninput={function () {
-                                    Static.forms.targetMoney = this.value.trim()
+                                    Static.forms.targetMoney = this.value
                                 }}
                             />
                         </div>
@@ -412,7 +413,7 @@ const start = function (data, ID) {
                                 type="number"
                                 value={Static.forms.nowMoney}
                                 oninput={function () {
-                                    Static.forms.nowMoney = this.value.trim()
+                                    Static.forms.nowMoney = this.value
                                 }}
                             />
                         </div>
@@ -484,7 +485,7 @@ const start = function (data, ID) {
                                 type="number"
                                 value={Static.forms.price}
                                 oninput={function () {
-                                    Static.forms.price = this.value.trim()
+                                    Static.forms.price = this.value
                                 }}
                             />
                         </div>
@@ -497,7 +498,7 @@ const start = function (data, ID) {
                                 type="number"
                                 value={Static.forms.totalSupply}
                                 oninput={function () {
-                                    Static.forms.totalSupply = this.value.trim()
+                                    Static.forms.totalSupply = this.value
                                 }}
                             />
                         </div>
@@ -509,7 +510,7 @@ const start = function (data, ID) {
                                 type="number"
                                 value={Static.forms.forSell}
                                 oninput={function () {
-                                    Static.forms.forSell = this.value.trim()
+                                    Static.forms.forSell = this.value
                                 }}
                             />
                         </div>
@@ -522,7 +523,7 @@ const start = function (data, ID) {
                                 type="number"
                                 value={Static.forms.targetSell}
                                 oninput={function () {
-                                    Static.forms.targetSell = this.value.trim()
+                                    Static.forms.targetSell = this.value
                                 }}
                             />
                         </div>
