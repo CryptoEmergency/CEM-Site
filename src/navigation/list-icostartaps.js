@@ -23,36 +23,19 @@ const listCategories = [
     name: "IGO",
   },
 ];
-const listIcoStartaps = [
-  {
-    category: "active",
-    iconScr: images["ico/ico1"],
-    title: "Solidus AI Tech",
-    description: "Blockchain Service",
-    objective: "6,440,000",
-    have: "8,660,000",
-    procentDone: 74,
-    timeStart: "Not Rated",
-    timeEnd: "4h left",
-  },
-  {
-    category: "upcoming",
-    iconSrc: images["ico/ico3"],
-    title: "SnakeMoney",
-    description: "Gaming",
-    objective: "490,000",
-    have: "640,000",
-    procentDone: 18,
-    timeStart: "Not Rated",
-    timeEnd: "1d left",
-  },
-]
-0
 
-const showBtn = function (listCategories) {
+
+const showBtn = function (Static, listCategories) {
   return listCategories.map((item) => {
     return (
-      <div class="tag_button tag_button-ico">
+      <div
+        class={["tag_button", "tag_button-ico", Static.categoryActive == item.name ? "tag_button_active" : null]}
+        onclick={async () => {
+          Static.categoryActive = item.name
+          Static.recordsIco = await fn.restApi.getIco({ filter: { category: Static.categoryActive } })
+          initReload()
+        }}
+      >
         <span>{item.name}</span>
       </div>
     )
@@ -62,20 +45,25 @@ const showBtn = function (listCategories) {
 const showListIco = function (listIcoStartaps) {
   return listIcoStartaps.map((item) => {
     return (
-      <div class="ico-list_item">
-        <img class="item-img" src={item.iconScr}></img>
+      <div class="ico-list_item"
+        onclick={() => {
+          fn.siteLinkModal("/list-icostartaps/show/" + item._id, { title: item.title, item })
+        }}>
+        <div class="item-img">
+          <img class="item-img_el" src={`/assets/upload/worldPress/${item.icon}`}></img>
+        </div>
         <div class="item-info">
           <h5 class="item-title">{item.title}</h5>
           <p class="item-desc">{item.description}</p>
           <div>
             <p class="item-sum">
-              <span class="item-sum_obj">${item.objective}</span> / ${item.have} <span class="item-sum_procent">{item.procentDone}%</span>
+              <span class="item-sum_obj">${item.nowMoney}</span> / ${item.targetMoney} <span class="item-sum_procent">{Math.round((item.nowMoney * 100) / item.targetMoney)}%</span>
             </p>
           </div>
         </div>
         <div class="item-date">
-          <span>{item.timeStart}</span>
-          <span>{item.timeEnd}</span>
+          <span>{fn.getDateFormat(item.startDate, "time")}</span>
+          <span>{fn.getDateFormat(item.endDate, "time")}</span>
         </div>
       </div>
     )
@@ -85,7 +73,7 @@ const showListIco = function (listIcoStartaps) {
 const showListCalendar = function (listCategories) {
   return listCategories.map((item) => {
     return (
-      <li>{item.name}</li>
+      <li>{item.category}</li>
     )
   })
 }
@@ -93,16 +81,21 @@ const showListCalendar = function (listCategories) {
 const start = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
-  let filterDropdown = false
+  Static.categoryActive = "ICO"
+  let filterDropdown, icoDrop, dateDrop = false
 
   load({
     ID,
+    fnLoad: async () => {
+      Static.recordsIco = await fn.restApi.getIco({ filter: { category: Static.categoryActive } })
+      console.log(Static.recordsIco)
+    },
     fn: () => {
       return (
         <div class="book_container c-main__body">
           <div class="book-inner">
             <div class="tags tags-ico">
-              {showBtn(listCategories)}
+              {showBtn(Static, listCategories)}
             </div>
 
             <div class="ico-list">
@@ -120,21 +113,45 @@ const start = function (data, ID) {
                     onclick={() => {
                       filterDropdown = !filterDropdown
                       initReload()
-                    }}
-                  ></img>
+                    }}></img>
                 </div>
 
                 <div hidden={filterDropdown ? false : true}>
                   <div class="filter-dropdowns">
                     <div class="dropdown">
-                      <span class="dropdown-title">ICO календарь</span>
-                      <ul class="dropdown-list">
-                        {showListCalendar(listCategories)}
+                      <div
+                        class="dropdown-title"
+                        onclick={() => {
+                          icoDrop = !icoDrop
+                          initReload()
+                        }}>
+                        ICO календарь
+                        <span class="dropdown-arrow dropdown-arrow_top">
+                          <img src={svg["arrow-select"]}></img>
+                        </span>
+                      </div>
+
+                      <ul
+                        class="dropdown-list"
+                        hidden={icoDrop ? false : true}>
+                        {showListCalendar(Static.recordsIco.list_records)}
                       </ul>
                     </div>
                     <div class="dropdown">
-                      <span class="dropdown-title">По дате</span>
-                      <ul class="dropdown-list">
+                      <div
+                        class="dropdown-title"
+                        onclick={() => {
+                          dateDrop = !dateDrop
+                          initReload()
+                        }}>
+                        По дате
+                        <span class="dropdown-arrow dropdown-arrow_top">
+                          <img src={svg["arrow-select"]}></img>
+                        </span>
+                      </div>
+                      <ul
+                        class="dropdown-list"
+                        hidden={dateDrop ? false : true}>
                         <li>По дате</li>
                       </ul>
                     </div>
@@ -143,7 +160,7 @@ const start = function (data, ID) {
 
               </div>
 
-              {showListIco(listIcoStartaps)}
+              {showListIco(Static.recordsIco.list_records)}
             </div>
 
           </div>
