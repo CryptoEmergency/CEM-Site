@@ -1023,6 +1023,26 @@ BlockUserProfilePage.social = function (Static, data) {
                                 <img src={svg["telegram-icon"]} />
                             </div>
                         </div>
+                        <div
+                            data-link="http://ru.linkedin.com/in/"
+                            data-social="linkedin"
+                            class="create_social_icon linkedin"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["linkedin-icon"]} />
+                            </div>
+                        </div>
+                        <div
+                            data-link="https://github.com/"
+                            data-social="github"
+                            class="create_social_icon github"
+                            onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
+                        >
+                            <div class="create_social_icon_inner">
+                                <img src={svg["github-icon"]} />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="create_social_inputs">
@@ -1122,19 +1142,25 @@ BlockUserProfilePage.social = function (Static, data) {
                             <a
                                 data-id={socialItem._id}
                                 target="_blank"
+                                rel="nofollow noopener"
                                 href={socialItem.url}
                                 class={[
                                     socialItem.channel,
                                     "user_social_card"
                                 ]}
-                                onclick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    alert("View")
-                                }}
+                            // onclick={(e) => {
+                            //     e.preventDefault();
+                            //     e.stopPropagation();
+                            //     fn.siteLink(e)
+                            // }}
                             >
                                 <div class="user_social_card_inner">
-                                    <div class="{{channel}} user_social_card_type">
+                                    <div
+                                        class={[
+                                            "user_social_card_type",
+                                            socialItem.channel ? socialItem.channel : null
+                                        ]}
+                                    >
                                         <img src={svg[`${socialItem.channel}_icon`]} />
                                     </div>
                                     <div class="user_social_card_text">

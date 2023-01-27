@@ -43,7 +43,7 @@ const VideoPlayer = function ({ Static, item, path, className = false }) {
             <video
                 playsinline
                 poster={item.previewName ? `/assets/upload/posts/${item.previewName}` : images["video_background"]}
-                preload="metadata"  //none
+                preload="none"  //metadata
                 src={path + item.name}
                 Element={($el) => { elMedia.el = $el; }}
                 onclick={function (e) {

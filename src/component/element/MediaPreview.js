@@ -231,13 +231,25 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                         onclick: function (e) {
                           e.stopPropagation();
                           e.preventDefault();
-                          // console.log('=eb4081 Static=', Static)
 
-                          fn.modals.ModalPreviewVideo({
-                            uploadPreviewImage: function (preview) {
-                              Static.mediaInputs.value[index].previewName = preview.name
-                            }
-                          }, true);
+                          Static.mediaInputs.value.filter((item) => { return item.previewName }).length ?
+                            fn.modals.ModalPreviewVideo({
+                              preview: {
+                                name: item.previewName
+                              },
+                              uploadPreviewImage: function (preview) {
+                                Static.mediaInputs.value[index].previewName = preview.name
+                                // console.log('=eb4081 Static=', Static)
+                              }
+                            }, true)
+                            :
+                            fn.modals.ModalPreviewVideo({
+                              uploadPreviewImage: function (preview) {
+                                Static.mediaInputs.value[index].previewName = preview.name
+                                // console.log('=eb4081 Static=', Static)
+                              }
+                            }, true)
+                          console.log('=eb4081 Static=', Static)
                         }
                       },
                       {

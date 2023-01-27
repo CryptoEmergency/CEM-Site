@@ -10,7 +10,11 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-
+const toDateInputValue = function (tmpDate) {
+    var local = new Date(tmpDate);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
+};
 
 //
 const checkForm = async function (Static, ID) {
@@ -34,8 +38,8 @@ const checkForm = async function (Static, ID) {
         return
     }
 
-    if (!Static.forms.cover) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери обложку!!!" })
+    if (!Static.forms.cover ?? !Static.forms.linkVideoYoutube) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери обложку или укажи ссылку на Ютуб!!!" })
         return
     }
 
@@ -101,6 +105,7 @@ const checkForm = async function (Static, ID) {
             title: Static.forms.title,
             description: Static.forms.description,
             cover: Static.forms.cover,
+            linkVideoYoutube: Static.forms.linkVideoYoutube,
             startDate: Static.forms.startDate,
             endDate: Static.forms.endDate,
             targetMoney: Static.forms.targetMoney,
@@ -166,9 +171,22 @@ const checkForm = async function (Static, ID) {
         data.value.social.push({ channel: "vk", url: Static.forms.social.vk.url })
     }
 
-    console.log(data)
-    await fn.restApi.setIco.create(data)
-    // fn.siteLink("/DimaPage/")
+    if (Static.forms.social.github.url) {
+        data.value.social.push({ channel: "github", url: Static.forms.social.github.url })
+    }
+
+    if (Static.forms.social.linkedin.url) {
+        data.value.social.push({ channel: "linkedin", url: Static.forms.social.linkedin.url })
+    }
+
+    // console.log(data)
+    if (!Static.item) {
+        await fn.restApi.setIco.create(data)
+    } else {
+        data._id = Static.item._id
+        await fn.restApi.setIco.update(data)
+    }
+    fn.siteLink("/DimaPage/")
 
 }
 
@@ -176,44 +194,75 @@ const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
 
-    Static.forms = {}
-    Static.forms.category = null
-    Static.forms.icon = null
-    Static.forms.title = null
-    Static.forms.description = null
-    Static.forms.cover = null
-    Static.forms.startDate = null
-    Static.forms.endDate = null
-    Static.forms.targetMoney = null
-    Static.forms.nowMoney = null // не обязательно
-    Static.forms.siteLink = null
-    Static.forms.whitePaperLink = null
-    Static.forms.name = null
-    Static.forms.type = null
-    Static.forms.price = null
-    Static.forms.sellType = "USDT"
-    Static.forms.totalSupply = null
-    Static.forms.forSell = null
-    Static.forms.targetSell = null
-    Static.forms.review = null
-    Static.forms.checked = false
-    Static.forms.media = []
-
-    Static.forms.social = {
-        youtube: {},
-        facebook: {},
-        twitter: {},
-        discord: {},
-        instagram: {},
-        tiktok: {},
-        twitch: {},
-        vk: {},
-        telegram: {}
-    }
-
+    // console.log('=dc5388=', Static)
 
     load({
         ID,
+        fnLoad: () => {
+            if (!Static.item) {
+                Static.forms = {}
+                Static.forms.category = null
+                Static.forms.icon = null
+                Static.forms.title = null
+                Static.forms.description = null
+                Static.forms.cover = null
+                Static.forms.linkVideoYoutube = null
+                Static.forms.startDate = null
+                Static.forms.endDate = null
+                Static.forms.targetMoney = null
+                Static.forms.nowMoney = null // не обязательно
+                Static.forms.siteLink = null
+                Static.forms.whitePaperLink = null
+                Static.forms.name = null
+                Static.forms.type = null
+                Static.forms.price = null
+                Static.forms.sellType = "USDT"
+                Static.forms.totalSupply = null
+                Static.forms.forSell = null
+                Static.forms.targetSell = null
+                Static.forms.review = null
+                Static.forms.checked = false
+                Static.forms.media = []
+
+                Static.forms.social = {
+                    youtube: {},
+                    facebook: {},
+                    twitter: {},
+                    discord: {},
+                    instagram: {},
+                    tiktok: {},
+                    twitch: {},
+                    vk: {},
+                    telegram: {},
+                    github: {},
+                    linkedin: {},
+                }
+
+            } else {
+                Static.forms = Object.assign({}, Static.item)
+
+                Static.forms.social = {
+                    youtube: {},
+                    facebook: {},
+                    twitter: {},
+                    discord: {},
+                    instagram: {},
+                    tiktok: {},
+                    twitch: {},
+                    vk: {},
+                    telegram: {},
+                    github: {},
+                    linkedin: {},
+                }
+
+                if (Static.item.social && Static.item.social.length) {
+                    for (let tmp of Static.item.social) {
+                        Static.forms.social[tmp.channel].url = tmp.url
+                    }
+                }
+                // console.log('=65ea9b=', Static.item.social, Static.forms.social)
+            }
+        },
         fn: () => {
 
             // if (!Variable.auth || !Variable.myInfo || !Variable.myInfo.status || !Variable.myInfo.role){
@@ -319,6 +368,7 @@ const start = function (data, ID) {
                                 placeholder="Описание"
                                 rows={10}
                                 value={Static.forms.description}
+                                textContent={Static.forms.description}
                                 oninput={function () {
                                     Static.forms.description = this.value.trim()
                                 }}
@@ -374,12 +424,28 @@ const start = function (data, ID) {
 
                             </div>
                         </div>
+
+                        <div>
+                            <label>Правильная ссылка на Ютуб видео</label>
+                            <input
+                                placeholder="Правильная ссылка на Ютуб видео"
+                                type="text"
+                                value={Static.forms.linkVideoYoutube}
+                                oninput={function () {
+                                    Static.forms.linkVideoYoutube = this.value.trim()
+                                }}
+                            />
+                        </div>
+
                         <div>
                             <label>Дата запуска</label>
                             <input
                                 type="datetime-local"
+                                value={fn.getDateFormat(Static.forms.startDate, "time")}
+                                // valueAsDate={new Date()}
                                 oninput={function () {
                                     Static.forms.startDate = this.value
+                                    // console.log('=91916f=', fn.getDateFormat(Static.forms.startDate, "time"))
                                 }}
                             />
                         </div>
@@ -388,6 +454,7 @@ const start = function (data, ID) {
                             <label>Дата окончания</label>
                             <input
                                 type="datetime-local"
+                                value={fn.getDateFormat(Static.forms.endDate, "time")}
                                 oninput={function () {
                                     Static.forms.endDate = this.value
                                 }}
@@ -534,6 +601,7 @@ const start = function (data, ID) {
                             <textarea
                                 placeholder="Краткий обзор"
                                 rows={5}
+                                textContent={Static.forms.review}
                                 value={Static.forms.review}
                                 oninput={function () {
                                     Static.forms.review = this.value.trim()
@@ -601,7 +669,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на youtube"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.youtube ? Static.forms.social.youtube.url : null}
                                 oninput={function () {
                                     Static.forms.social.youtube.url = this.value.trim()
                                 }}
@@ -613,7 +681,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на facebook"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.facebook ? Static.forms.social.facebook.url : null}
                                 oninput={function () {
                                     Static.forms.social.facebook.url = this.value.trim()
                                 }}
@@ -625,7 +693,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на twitter"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.twitter ? Static.forms.social.twitter.url : null}
                                 oninput={function () {
                                     Static.forms.social.twitter.url = this.value.trim()
                                 }}
@@ -637,7 +705,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на discord"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.discord ? Static.forms.social.discord.url : null}
                                 oninput={function () {
                                     Static.forms.social.discord.url = this.value.trim()
                                 }}
@@ -649,7 +717,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на instagram"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.instagram ? Static.forms.social.instagram.url : null}
                                 oninput={function () {
                                     Static.forms.social.instagram.url = this.value.trim()
                                 }}
@@ -661,7 +729,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на tiktok"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.tiktok ? Static.forms.social.tiktok.url : null}
                                 oninput={function () {
                                     Static.forms.social.tiktok.url = this.value.trim()
                                 }}
@@ -673,7 +741,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на twitch"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.twitch ? Static.forms.social.twitch.url : null}
                                 oninput={function () {
                                     Static.forms.social.twitch.url = this.value.trim()
                                 }}
@@ -685,7 +753,7 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на vk"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.vk ? Static.forms.social.vk.url : null}
                                 oninput={function () {
                                     Static.forms.social.vk.url = this.value.trim()
                                 }}
@@ -697,9 +765,33 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Ссылка на telegram"
                                 type="text"
-                                // value={Static.forms.whitePaperLink}
+                                value={Static.forms.social.telegram ? Static.forms.social.telegram.url : null}
                                 oninput={function () {
                                     Static.forms.social.telegram.url = this.value.trim()
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>Ссылка на github </label>
+                            <input
+                                placeholder="Ссылка на github"
+                                type="text"
+                                value={Static.forms.social.github ? Static.forms.social.github.url : null}
+                                oninput={function () {
+                                    Static.forms.social.github.url = this.value.trim()
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>Ссылка на linkedin </label>
+                            <input
+                                placeholder="Ссылка на linkedin"
+                                type="text"
+                                value={Static.forms.social.linkedin ? Static.forms.social.linkedin.url : null}
+                                oninput={function () {
+                                    Static.forms.social.linkedin.url = this.value.trim()
                                 }}
                             />
                         </div>
@@ -709,6 +801,7 @@ const start = function (data, ID) {
                             <label>Проверенно</label>
                             <input
                                 type="checkbox"
+                                checked={Static.forms.checked}
                                 oninput={function () {
                                     Static.forms.checked = !Static.forms.checked
                                 }}
@@ -723,10 +816,43 @@ const start = function (data, ID) {
                         >
                             <span class="btn-news-preview">
                                 <span >
-                                    Добавить
+                                    {
+                                        Static.item
+                                            ?
+                                            "Редактировать"
+                                            :
+                                            "Добавить"
+                                    }
+
                                 </span>
                             </span>
                         </div>
+
+                        {
+                            Static.item
+                                ?
+                                <div
+                                    class="button-container-preview"
+                                    onclick={async () => {
+                                        data = {
+                                            _id: Static.item._id,
+                                            value: {
+                                                active: false
+                                            }
+                                        }
+                                        await fn.restApi.setIco.update(data)
+                                        fn.siteLink("/DimaPage/")
+                                    }}
+                                >
+                                    <span class="btn-news-preview">
+                                        <span >
+                                            Удалить
+                                        </span>
+                                    </span>
+                                </div>
+                                :
+                                null
+                        }
 
                     </div>
                 </div>

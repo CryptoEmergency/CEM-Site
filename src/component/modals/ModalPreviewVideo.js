@@ -12,8 +12,8 @@ import images from '@assets/images/index.js';
 import { fn } from '@src/functions/index.js';
 import { Input, VideoPlayer } from '@component/element/index.js';
 
-const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
-    let [Static] = fn.GetParams({ data, uploadPreviewImage, ID })
+const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = false }, ID) {
+    let [Static] = fn.GetParams({ preview, uploadPreviewImage, ID })
     let close = true
     let mediaInputs
 
@@ -54,6 +54,7 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
                     Static.preview = mediaInputs.value[numItem]
                     Static.isValid = true
                     console.log('=debd71=Static.preview=', Static.preview)
+                    console.log('=debd71= mediaInputs.value =', mediaInputs.value)
                     initReload()
                 },
                 async function (e) {
@@ -83,16 +84,31 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
         return
     }
 
+
     init(
         () => {
-            mediaInputs = {
-                value: [],
-                show: false,
-                selectAspect: null
+            if (preview) {
+                mediaInputs = {
+                    value: [
+                        preview
+                    ],
+                    show: false,
+                    selectAspect: null
+                }
+                Static.isValid = true
+                Static.preview = preview
+            } else {
+                mediaInputs = {
+                    value: [],
+                    show: false,
+                    selectAspect: null
+                }
+                Static.isValid = false
+                Static.preview = null
             }
             Static.elSelectedPreview = []
-            Static.isValid = false
-            Static.preview = null
+            console.log('=0bd58b= Static modal', Static, uploadPreviewImage)
+            console.log('=cd84a1= mediaInputs ', mediaInputs)
         },
         () => {
             return (
@@ -167,7 +183,7 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
                                                     }}
                                                 >
                                                     <figure class="c-tiles__card">
-                                                        <img class="c-tiles__image" src={`/assets/upload/posts/${imgFile.name}`} width="100" height="100" />
+                                                        <img class="c-tiles__image" src={`/assets/upload/posts/${imgFile.previewName ? imgFile.previewName : imgFile.name}`} width="100" height="100" />
                                                     </figure>
                                                 </div>
                                             )
@@ -184,6 +200,7 @@ const ModalPreviewVideo = function ({ data, uploadPreviewImage = false }, ID) {
                                 ]}
                                 type="button"
                                 onClick={(e) => {
+                                    console.log('=988fb7= Static.preview =', Static.preview)
                                     uploadPreviewImage(Static.preview)
                                     fn.modals.close(ID)
                                 }}
