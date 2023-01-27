@@ -31,7 +31,8 @@ const start = function (data, ID) {
                     <div
                         class="button-container-preview"
                         onclick={() => {
-                            fn.siteLinkModal("/DimaPage/lists-ico/", { title: "Список ICO" })
+                            fn.siteLink("/DimaPage/records-ico/")
+                            // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
                         }}
                     >
                         <span class="btn-news-preview">
