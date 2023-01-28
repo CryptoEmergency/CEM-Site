@@ -37,28 +37,6 @@ fn.sanitizeHtml = Helpers.sanitizeHtml
 // }
 
 
-fn.findLink = function (str) {
-  let linkRegular = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm
-  if (str.match(linkRegular) != null) {
-    str.match(linkRegular).forEach(link => {
-      let shortLink = link
-      if (link.length > 30) {
-        shortLink = link.slice(0, 27) + '...'
-      }
-      str = str.replace(link, `<a href="${link}" rel="nofollow noopener" target="_blank">${shortLink}</a>`)
-    })
-  }
-
-  return str
-}
-
-fn.splitArray = function (arr, size) {
-  let arrReturn = [];
-  for (let i = 0; i < arr.length; i += size) {
-    arrReturn.push(arr.slice(i, i + size));
-  }
-  return arrReturn
-}
 fn.clickHide = function (e) {
   if (Variable.OutHideWindows.length != 0) {
     Variable.OutHideWindows.map((item, index) => {
