@@ -1,7 +1,6 @@
 import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi, initGo, initReload, Data } from "@betarost/cemserver/cem.js";
 import { modals } from "./modals.js"
 import { initData } from "./initData.js"
-import { apiData } from "./apiData.js"
 import { restApi } from "./restApi.js"
 import { itemsMenu } from "./itemsMenu.js"
 import { web3CEM, web3Action } from "./web3.js"
@@ -23,7 +22,6 @@ Object.assign(fn, functionsMain())
 
 fn.modals = modals
 
-fn.apiData = apiData
 fn.restApi = restApi
 fn.itemsMenu = itemsMenu
 fn.web3CEM = web3CEM
