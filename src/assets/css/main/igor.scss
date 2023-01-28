@@ -26,12 +26,24 @@ $numto in $numbers {
     .mb--#{$num} {
         margin-bottom: $numto;
     }
+
+    .mt--#{$num} {
+        margin-top: $numto;
+    }
 }
 
-// .mb--#{$colorname} {
-//     background-color: #ff0000;
-// }
+.mt {
+    &--70 {
+        margin-top: 70px;
+    }
+}
 
-// .mb--1 {
-//     background-color: #ff0000;
-// }
+.i-page {
+    &__body {
+        margin-top: 70px;
+
+        &--noheader {
+            margin-top: 0;
+        }
+    }
+}

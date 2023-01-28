@@ -6,43 +6,17 @@ import { restApi } from "./restApi.js"
 import { itemsMenu } from "./itemsMenu.js"
 import { web3CEM, web3Action } from "./web3.js"
 
+import { functionsMain } from "@src/lists/files/index.js"
+
 
 const fn = {}
 fn.Static = {}
 fn.initData = initData
 
+
+Object.assign(fn, functionsMain())
+
 // 2023 ================
-fn.GetParams = function ({ data, reload, ID = "mainBlock", actual = false, initData }) {
-  let item = { _id: Variable.dataUrl.params }
-
-  if (actual) { return [this.Static[ID]] }
-
-  if (!reload || !this.Static[ID]) {
-    this.Static[ID] = {};
-    if (data) {
-      this.Static[ID] = Object.assign(this.Static[ID], data)
-    }
-  }
-
-  if (data) {
-    this.Static[ID].openModals = true
-    if (data.item) {
-      item = data.item
-      this.Static[ID].item = item
-    } else {
-      item._id = Variable.DataUrl.params
-
-    }
-  }
-
-  fn.initData.any(this.Static[ID])
-  if (initData && fn.initData[initData]) {
-    fn.initData[initData](this.Static[ID])
-  }
-  Data.Static = this.Static[ID]
-  return [this.Static[ID], item]
-}
-
 
 
 //2022 =======================
@@ -56,76 +30,12 @@ fn.web3CEM = web3CEM
 fn.web3Action = web3Action
 fn.validator = Helpers.validator
 fn.sanitizeHtml = Helpers.sanitizeHtml
-fn.test = function () {
-  //  console.log('=f83cf3 FN=', this)
-  return true
+// fn.test = function () {
+//   //  console.log('=f83cf3 FN=', this)
+//   return true
 
-}
+// }
 
-fn.clearText = function (data, abt = false) {
-  if (abt && (!data || data.length == 0)) {
-    return ""
-  }
-  return Helpers.stringToHtml(Helpers.sanitizeHtml(data))
-}
-
-
-
-fn.paragraph = function (str) {
-  let textTag = str;
-  // textTag = textTag.replace(new RegExp("\n\n", 'g'), "\n").split("\n");
-  //textTag = textTag.replace(new RegExp("(\n){3,}", 'g'), "\n\n").split("\n");
-  textTag = textTag.replace(new RegExp("[\r\n]{3,}", 'g'), "\n\n").split("\n");
-  // console.log(textTag)
-  let res = "";
-  for (let item of textTag) {
-    res += "<p>" + item + "</p>";
-  }
-  return res;
-}
-
-fn.ifHaveMedia = function (mediaArr, type) {
-  if (!mediaArr || !mediaArr.length || !Array.isArray(mediaArr)) {
-    return false
-  }
-  var media = mediaArr.filter((tmp) => tmp.type == type);
-  if (media.length == 0) {
-    return false
-  }
-  return true;
-};
-
-fn.editText = function (str, filter = {}) {
-  if (!str) { str = "" }
-
-  if (filter.notp && str == "") {
-    return str
-  }
-
-  let out = str.trim()
-
-  if (filter.clear) {
-    out = out.replace(new RegExp("</p><p>", 'gi'), "</p><p>\n")
-    out = Helpers.sanitizeHtml(out, { allowedTags: [], allowedAttributes: {} })
-  }
-
-  if (filter.slice) {
-    out = fn.sliceString(out, filter.slice)
-  }
-
-
-
-  if (filter.paragraph) {
-    out = fn.paragraph(out).trim()
-  }
-
-  if (filter.html) {
-    out = fn.findLink(out)
-    out = Helpers.stringToHtml(out)
-  }
-  // console.log(out)
-  return out
-}
 
 fn.findLink = function (str) {
   let linkRegular = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm
