@@ -71,59 +71,64 @@ const start = function (data, ID) {
                 </div>
                 <div class="card-main_info">
                   <h3>{Static.item.title}</h3>
-
-                  <p class="main-info_subtitle">{Static.item.type}</p>
                   <p class="main-info_desc">{Static.item.description}</p>
                 </div>
               </div>
 
-              <img class="card-img" src={Static.item.cover}></img>
-
-              <div class="card-info">
-                <span class="card-info_status">is ended</span>
-                <div class="card-info_summ">
-                  <span class="info-summ_obj">${Static.item.nowMoney}</span>
-                  <span class="info-summ_done">of</span>
-                  <span class="info-summ_done">${`${Static.item.targetMoney} (${Math.round((Static.item.nowMoney * 100) / Static.item.targetMoney)})%`}</span>
+              <div class="card-media">
+                <div class="card-img_wrap">
+                  <img class="card-img" src={Static.item.cover}></img>
                 </div>
-                <button type="button" class="card-btn card-btn_active">
-                  <span class="card-btn_text">active</span>
-                </button>
-                <button type="button" class="card-btn">
-                  <span class="card-btn_text">passive</span>
-                </button>
-                <div class="info-social">
-                  <a href={"https://t.me/cryptoemergencychat"} class="info-social_link">
-                    <img src={svg['telegram-icon']}></img>
-                  </a>
-                  <a href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg/" class="info-social_link">
-                    <img src={svg['youtube_icon']}></img>
-                  </a>
-                  <a href="https://twitter.com/cryptoemergency" class="info-social_link">
-                    <img src={svg['twitter-icon']}></img>
-                  </a>
-                  <a href="https://discord.com/invite/Qdm7W8DjYc" class="info-social_link">
-                    <img src={svg['discord-icon']}></img>
-                  </a>
-                  <a href="https://github.com/CryptoEmergency" class="info-social_link">
-                    <img src={svg['github-icon2']}></img>
-                  </a>
-                  <a href="https://vm.tiktok.com/ZSefEMs2c/" class="info-social_link">
-                    <img src={svg['tiktok-icon']}></img>
-                  </a>
+
+                <div class="card-info">
+                  <span class="card-info_status">is ended</span>
+                  <div class="card-info_summ">
+                    <span class="info-summ_obj">${Static.item.nowMoney}</span>
+                    <span class="info-summ_done">of</span>
+                    <span class="info-summ_done">${`${Static.item.targetMoney} (${Math.round((Static.item.nowMoney * 100) / Static.item.targetMoney)})%`}</span>
+                  </div>
+                  <button type="button" class="card-btn card-btn_active">
+                    <span class="card-btn_text">active</span>
+                  </button>
+                  <button type="button" class="card-btn">
+                    <span class="card-btn_text">passive</span>
+                  </button>
+                  <div class="info-social">
+                    <a href={"https://t.me/cryptoemergencychat"} class="info-social_link">
+                      <img src={svg['telegram-icon']}></img>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg/" class="info-social_link">
+                      <img src={svg['youtube_icon']}></img>
+                    </a>
+                    <a href="https://twitter.com/cryptoemergency" class="info-social_link">
+                      <img src={svg['twitter-icon']}></img>
+                    </a>
+                    <a href="https://discord.com/invite/Qdm7W8DjYc" class="info-social_link">
+                      <img src={svg['discord-icon']}></img>
+                    </a>
+                    <a href="https://github.com/CryptoEmergency" class="info-social_link">
+                      <img src={svg['github-icon2']}></img>
+                    </a>
+                    <a href="https://vm.tiktok.com/ZSefEMs2c/" class="info-social_link">
+                      <img src={svg['tiktok-icon']}></img>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="ico-details">
               <h4>Token Sale: {`${fn.getDateFormat(Static.item.startDate, "time")} - ${fn.getDateFormat(Static.item.startDate, "time")}`}</h4>
-              <p>Name: <span class="details_bold">AITECH</span></p>
-              <p>Token type: <span class="details_bold">CEM</span></p>
-              <p>ICO Token Price: <span class="details_bold">1 cem = {Static.item.price} USD</span></p>
-              <p>Fundraising Goal: <span class="details_bold">{Static.item.targetSell} Token </span></p>
-              <p>Total Tokens: <span class="details_bold">{Static.item.totalSupply} token</span></p>
-              <p>Available for Token Sale: <span class="details_bold">{Math.round((Static.item.forSell * 100) / Static.item.totalSupply)}%</span></p>
-              <p>Accepts: <span class="details_bold">{Static.item.sellType}</span></p>
+              <div class="ico-details_items">
+                <p>Name: <span class="details_bold">AITECH</span></p>
+                <p>Token type: <span class="details_bold">CEM</span></p>
+                <p>ICO Token Price: <span class="details_bold">1 cem = {Static.item.price} USD</span></p>
+                <p>Fundraising Goal: <span class="details_bold">{Static.item.targetSell} Token </span></p>
+                <p>Total Tokens: <span class="details_bold">{Static.item.totalSupply} token</span></p>
+                <p>Available for Token Sale: <span class="details_bold">{Math.round((Static.item.forSell * 100) / Static.item.totalSupply)}%</span></p>
+                <p>Accepts: <span class="details_bold">{Static.item.sellType}</span></p>
+              </div>
+              
             </div>
 
             <div class="ico-media">

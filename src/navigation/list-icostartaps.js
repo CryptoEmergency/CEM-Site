@@ -24,6 +24,17 @@ const listCategories = [
   },
 ];
 
+const listCalendar = [
+  {
+    name: "Active",
+  },
+  {
+    name: "Upcoming",
+  },
+  {
+    name: "Ended",
+  },
+]
 
 const showBtn = function (Static, listCategories) {
   return listCategories.map((item) => {
@@ -44,6 +55,7 @@ const showBtn = function (Static, listCategories) {
 
 const showListIco = function (listIcoStartaps) {
   return listIcoStartaps.map((item) => {
+    // console.log(item)
     return (
       <div class="ico-list_item"
         onclick={() => {
@@ -54,8 +66,10 @@ const showListIco = function (listIcoStartaps) {
         </div>
         <div class="item-info">
           <h5 class="item-title">{item.title}</h5>
-          <p class="item-desc">{item.description}</p>
-          <div>
+          <div class="item-desc_wrap">
+            <p class="item-desc">{item.description}</p>
+          </div>
+          <div class="item-sum_wrap">
             <p class="item-sum">
               <span class="item-sum_obj">${item.nowMoney}</span> / ${item.targetMoney} <span class="item-sum_procent">{Math.round((item.nowMoney * 100) / item.targetMoney)}%</span>
             </p>
@@ -70,10 +84,30 @@ const showListIco = function (listIcoStartaps) {
   })
 }
 
-const showListCalendar = function (listCategories) {
-  return listCategories.map((item) => {
+let filterDropdown, icoDrop, dateDrop = false
+let textCalendar = "ICO календарь"
+let textDate = "По дате"
+
+const showListCalendar = function (listCalendar) {
+  return listCalendar.map((item) => {
     return (
-      <li>{item.category}</li>
+      <li 
+        onclick={()=>{
+          if(icoDrop){
+            textCalendar = item.name
+            icoDrop = !icoDrop
+            console.log(icoDrop)
+
+          }else if(dateDrop){
+            console.log(dateDrop)
+            textDate = item.name
+            dateDrop = !dateDrop
+            console.log(dateDrop)
+
+          }
+          initReload()
+        }}
+      >{item.name}</li>
     )
   })
 }
@@ -82,18 +116,18 @@ const start = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
   Static.categoryActive = "ICO"
-  let filterDropdown, icoDrop, dateDrop = false
+
 
   load({
     ID,
     fnLoad: async () => {
       Static.recordsIco = await fn.restApi.getIco({ filter: { category: Static.categoryActive } })
-      console.log(Static.recordsIco)
+      // console.log(Static.recordsIco)
     },
     fn: () => {
       return (
         <div class="book_container c-main__body">
-          <div class="book-inner">
+          <div class="book-inner ico-inner">
             <div class="tags tags-ico">
               {showBtn(Static, listCategories)}
             </div>
@@ -123,18 +157,19 @@ const start = function (data, ID) {
                         class="dropdown-title"
                         onclick={() => {
                           icoDrop = !icoDrop
+                          // console.log(listCategories.name)
                           initReload()
                         }}>
-                        ICO календарь
-                        <span class="dropdown-arrow dropdown-arrow_top">
+                        {textCalendar}
+                        <span class={["dropdown-arrow", icoDrop ? "dropdown-checked" : null]}>
                           <img src={svg["arrow-select"]}></img>
                         </span>
                       </div>
 
                       <ul
-                        class="dropdown-list"
+                        class={["dropdown-list", icoDrop ? "dropdown-checked" : null]}
                         hidden={icoDrop ? false : true}>
-                        {showListCalendar(Static.recordsIco.list_records)}
+                        {showListCalendar(listCalendar)}
                       </ul>
                     </div>
                     <div class="dropdown">
@@ -142,10 +177,11 @@ const start = function (data, ID) {
                         class="dropdown-title"
                         onclick={() => {
                           dateDrop = !dateDrop
+                          console.log(dateDrop)
                           initReload()
                         }}>
-                        По дате
-                        <span class="dropdown-arrow dropdown-arrow_top">
+                        {textDate}
+                        <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
                           <img src={svg["arrow-select"]}></img>
                         </span>
                       </div>
@@ -159,8 +195,10 @@ const start = function (data, ID) {
                 </div>
 
               </div>
-
-              {showListIco(Static.recordsIco.list_records)}
+              <div class="list-ico">
+                {showListIco(Static.recordsIco.list_records)}
+              </div>
+              
             </div>
 
           </div>
