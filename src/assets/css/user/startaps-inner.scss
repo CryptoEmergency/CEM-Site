@@ -9,7 +9,7 @@ $icon: #393C47;
 
 .startap {
   background: $background;
-  padding-top: 100px;
+  padding-top: 35px;
 
 }
 
@@ -28,9 +28,10 @@ $icon: #393C47;
     padding-bottom: 40px;
   }
 
+  // main block
   .crypto {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     grid-gap: 30px;
 
@@ -54,10 +55,17 @@ $icon: #393C47;
     }
 
     .social-icons {
+      display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       text-decoration: none;
       padding-top: 25px;
       padding-bottom: 35px;
+
+      @media(max-width: 992px) {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
 
 
       .icons-item {
@@ -145,6 +153,7 @@ $icon: #393C47;
       }
 
       .info-list {
+        margin: 0;
         padding: 0;
 
         .info-list_item {
@@ -157,11 +166,55 @@ $icon: #393C47;
           border-bottom: 1px solid #3C445A;
           font-weight: 500;
           font-size: 16px;
-          line-height: 43px;
+          // line-height: 43px;
           color: #FFFFFF;
         }
       }
 
+      .info-list>.info-list_item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+    }
+  }
+
+  // about startap
+  .startap-about {
+    position: relative;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: auto;
+    grid-gap: 15px;
+
+    .startap-about_text {
+      color: #FFFFFF;
+
+      .startap-about_text {
+        font-weight: 700;
+        font-size: 52px;
+        line-height: 115%;
+        display: flex;
+        align-items: center;
+
+        >p {
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 28px;
+        }
+
+        .startap-about_list {
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 42px;
+        }
+      }
+    }
+
+    .startap-about_img {
+      position: absolute;
+      right: 0;
+      top: 0;
     }
   }
 }

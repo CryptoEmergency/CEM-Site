@@ -9,42 +9,54 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-const icoCard = {
-  title: "test",
-  category: { type: String, enum: ['ICO', 'IDO', 'IEO', 'IGO'], default: 'ICO' },
-  description: { type: String },
-  icon: { type: String },
-  cover: { type: String },
-  startDate: { type: Date },
-  endDate: { type: Date },
-  targetMoney: { type: Number },
-  nowMoney: { type: Number },
-  siteLink: { type: String },
-  whitePaperLink: { type: String },
-  name: { type: String },
-  type: { type: String },
-  price: { type: Number },
-  sellType: { type: String },
-  totalSupply: { type: Number },
-  forSell: { type: Number },
-  targetSell: { type: Number },
-  review: { type: String },
-  checked: { type: Boolean, default: false },
-  media: [{
-    type: { type: String },
-    name: { type: String },
-    active: { type: Boolean, default: true },
-    dateCreate: { type: Date, default: Date.now },
-    aspect: { type: Number },
-    previewName: { type: String },
-  }],
-  social: [{
-    channel: { type: String },
-    active: { type: Boolean, default: true },
-    url: { type: String },
-    dateCreate: { type: Date, default: Date.now }
-  }],
-}
+// const icoCard = {
+//   title: "test",
+//   category: { type: String, enum: ['ICO', 'IDO', 'IEO', 'IGO'], default: 'ICO' },
+//   description: { type: String },
+//   icon: { type: String },
+//   cover: { type: String },
+//   startDate: { type: Date },
+//   endDate: { type: Date },
+//   targetMoney: { type: Number },
+//   nowMoney: { type: Number },
+//   siteLink: { type: String },
+//   whitePaperLink: { type: String },
+//   name: { type: String },
+//   type: { type: String },
+//   price: { type: Number },
+//   sellType: { type: String },
+//   totalSupply: { type: Number },
+//   forSell: { type: Number },
+//   targetSell: { type: Number },
+//   review: { type: String },
+//   checked: { type: Boolean, default: false },
+//   media: [{
+//     type: { type: String },
+//     name: { type: String },
+//     active: { type: Boolean, default: true },
+//     dateCreate: { type: Date, default: Date.now },
+//     aspect: { type: Number },
+//     previewName: { type: String },
+//   }],
+//   social: [{
+//     channel: { type: String },
+//     active: { type: Boolean, default: true },
+//     url: { type: String },
+//     dateCreate: { type: Date, default: Date.now }
+//   }],
+// }
+
+const listCalendar = [
+  {
+    name: "Active",
+  },
+  {
+    name: "Upcoming",
+  },
+  {
+    name: "Ended",
+  },
+]
 
 const start = function (data, ID) {
 
@@ -128,7 +140,7 @@ const start = function (data, ID) {
                 <p>Available for Token Sale: <span class="details_bold">{Math.round((Static.item.forSell * 100) / Static.item.totalSupply)}%</span></p>
                 <p>Accepts: <span class="details_bold">{Static.item.sellType}</span></p>
               </div>
-              
+
             </div>
 
             <div class="ico-media">
@@ -138,37 +150,37 @@ const start = function (data, ID) {
                   <div class="media-img">
                     <img src={images["ico/ico1"]}></img>
                   </div>
-                  <span class="media-item_title">Solidus AI Tech Info</span>
+                  <h5 class="media-item_title">Solidus AI Tech Info</h5>
                 </div>
                 <div class="media_item">
                   <div class="media-img">
                     <img src={images["ico/ico2"]}></img>
                   </div>
-                  <span class="media-item_title">Solidus AI Tech Roadmap 1</span>
+                  <h5 class="media-item_title">Solidus AI Tech Roadmap 1</h5>
                 </div>
                 <div class="media_item">
                   <div class="media-img">
                     <img src={images["ico/ico3"]}></img>
                   </div>
-                  <span class="media-item_title">Solidus AI Tech Roadmap 2</span>
+                  <h5 class="media-item_title">Solidus AI Tech Roadmap 2</h5>
                 </div>
                 <div class="media_item">
                   <div class="media-img">
                     <img src={images["ico/ico4"]}></img>
                   </div>
-                  <span class="media-item_title">Solidus AI Tech Token Distribution</span>
+                  <h5 class="media-item_title">Solidus AI Tech Token Distribution</h5>
                 </div>
                 <div class="media_item">
                   <div class="media-img">
                     <img src={images["ico/ico5"]}></img>
                   </div>
-                  <span class="media-item_title">Solidus AI Tech Token Sales</span>
+                  <h5 class="media-item_title">Solidus AI Tech Token Sales</h5>
                 </div>
                 <div class="media_item">
                   <div class="media-img">
                     <img src={images["ico/ico6"]}></img>
                   </div>
-                  <span class="media-item_title">Solidus AI Tech Team 1</span>
+                  <h5 class="media-item_title">Solidus AI Tech Team 1</h5>
                 </div>
               </div>
 
