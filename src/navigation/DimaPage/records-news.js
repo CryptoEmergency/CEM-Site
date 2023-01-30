@@ -39,7 +39,7 @@ const start = function (data, ID) {
                         <div
                             class="ico-list_item"
                             onclick={() => {
-                                fn.siteLinkModal("/DimaPage/edit-news/", { title: "Добавить Новости" })
+                                fn.siteLinkModal("/DimaPage/edit-news/", { title: "Добавить Новость" })
                             }}
                         >
                             <img src={svg["radius_plus"]} width="100" height="100" />
@@ -49,17 +49,12 @@ const start = function (data, ID) {
                                 return (
                                     <div class="ico-list_item"
                                         onclick={() => {
-                                            fn.siteLinkModal("/DimaPage/lists-ico/", { title: "Редактировать ICO", item })
+                                            fn.siteLinkModal("/DimaPage/edit-news/", { title: "Редактировать Новость", item })
                                         }}>
-                                        <img class="item-img" width="100" height="100" src={`/assets/upload/worldPress/${item.icon}`}></img>
+                                        <img class="item-img" width="100" height="100" src={`/assets/upload/news/${item.image}`}></img>
                                         <div class="item-info">
                                             <h5 class="item-title">{item.title}</h5>
-                                            <p class="item-desc">{item.description}</p>
-                                            <div>
-                                                <p class="item-sum">
-                                                    <span class="item-sum_obj">${item.nowMoney}</span> / ${item.targetMoney}
-                                                </p>
-                                            </div>
+                                            <p class="item-desc">{item.preview}</p>
                                         </div>
                                         <div class="item-date">
                                             <span>{fn.getDateFormat(item.startDate, "time")}</span>
