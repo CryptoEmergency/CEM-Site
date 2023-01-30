@@ -91,7 +91,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
             <div class="c-search__wrapper">
               <img class="c-search__icon" src={svg.search_icon} />
               <Input className="c-search__input 984" Static={Static.quest} customStyle={"border-radius: 3px"} /*paste={function (e) { true }}*/ />
-              <input id="c-editor" oninput={function (e) {
+              {/* <input id="c-editor" oninput={function (e) {
                 console.log('=dcea08=', "oninput")
                 if (e.inputType == "insertFromPaste") {
                   console.log("onPaste", e)
@@ -111,7 +111,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                   console.log("onPaste", e)
                   e.currentTarget.innerHTML = e.currentTarget.innerText
                 }
-              }}></div>
+              }}></div> */}
               <img
                 class="c-search__icon c-search__icon--filter"
                 src={svg.filter}
