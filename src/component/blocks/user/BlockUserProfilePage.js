@@ -1490,7 +1490,7 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                 item.type && item.type.includes('image/') ?
                                                     <img class="c-tiles__image" src={`/assets/upload/gallery/${item.name}`} width="100" height="100" />
                                                     : item.type && item.type.includes('video/') ?
-                                                        <VideoPlayer Static={Static} item={item} path={`/assets/upload/gallery/`} />
+                                                        <VideoPlayer Static={Static} item={item} path={`/assets/upload/gallery/`} customClick={(e) => console.log('customClick')} />
                                                         : null
                                             }
 
