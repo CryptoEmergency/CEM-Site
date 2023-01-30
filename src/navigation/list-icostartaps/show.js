@@ -9,60 +9,10 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-// const icoCard = {
-//   title: "test",
-//   category: { type: String, enum: ['ICO', 'IDO', 'IEO', 'IGO'], default: 'ICO' },
-//   description: { type: String },
-//   icon: { type: String },
-//   cover: { type: String },
-//   startDate: { type: Date },
-//   endDate: { type: Date },
-//   targetMoney: { type: Number },
-//   nowMoney: { type: Number },
-//   siteLink: { type: String },
-//   whitePaperLink: { type: String },
-//   name: { type: String },
-//   type: { type: String },
-//   price: { type: Number },
-//   sellType: { type: String },
-//   totalSupply: { type: Number },
-//   forSell: { type: Number },
-//   targetSell: { type: Number },
-//   review: { type: String },
-//   checked: { type: Boolean, default: false },
-//   media: [{
-//     type: { type: String },
-//     name: { type: String },
-//     active: { type: Boolean, default: true },
-//     dateCreate: { type: Date, default: Date.now },
-//     aspect: { type: Number },
-//     previewName: { type: String },
-//   }],
-//   social: [{
-//     channel: { type: String },
-//     active: { type: Boolean, default: true },
-//     url: { type: String },
-//     dateCreate: { type: Date, default: Date.now }
-//   }],
-// }
-
-const listCalendar = [
-  {
-    name: "Active",
-  },
-  {
-    name: "Upcoming",
-  },
-  {
-    name: "Ended",
-  },
-]
-
 const start = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
   Variable.Static.FooterShow = false
-  // console.log('=7a39ac=', Static, Variable.dataUrl)
 
   load({
     ID,
@@ -89,42 +39,58 @@ const start = function (data, ID) {
 
               <div class="card-media">
                 <div class="card-img_wrap">
-                  <img class="card-img" src={`/assets/upload/worldPress/${Static.item.cover}`}></img>
+                  {
+                    Static.item.cover
+
+                      ?
+                      <img class="card-img" src={`/assets/upload/worldPress/${Static.item.cover}`}></img>
+                      :
+                      Static.item.coverVideo
+                        ?
+                        <iframe id="startupVideoPlayer" width="100%" height="585px" src={Static.item.coverVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        :
+                        null
+                  }
                 </div>
 
                 <div class="card-info">
-                  <span class="card-info_status">is ended</span>
+                  <span class="card-info_status">
+                    is ended</span>
                   <div class="card-info_summ">
-                    <span class="info-summ_obj">${Static.item.nowMoney}</span>
+                    <span class="info-summ_obj">${Static.item.nowMoney && Static.item.nowMoney > 0 ? Static.item.nowMoney : 0}</span>
                     <span class="info-summ_done">of</span>
-                    <span class="info-summ_done">${`${Static.item.targetMoney} (${Math.round((Static.item.nowMoney * 100) / Static.item.targetMoney)})%`}</span>
+                    <span class="info-summ_done">${`${Static.item.targetMoney} (${Math.round(((Static.item.nowMoney && Static.item.nowMoney > 0 ? Static.item.nowMoney : 0) * 100) / Static.item.targetMoney)})%`}</span>
                   </div>
                   <button type="button" class="card-btn card-btn_active">
-                    <span class="card-btn_text">active</span>
+                    <a
+                      style='display: block !important'
+                      target="_blank"
+                      rel="nofollow nooopener"
+                      href={Static.item.siteLink}
+                    >
+                      <span class="card-btn_text">Web Site</span>
+                    </a>
                   </button>
-                  <button type="button" class="card-btn">
-                    <span class="card-btn_text">passive</span>
+                  <button type="button" class={["card-btn", Static.item.whitePaperLink ? "card-btn_active" : null]}>
+                    <span class="card-btn_text">White Paper</span>
                   </button>
-                  <div class="info-social">
-                    <a href={"https://t.me/cryptoemergencychat"} class="info-social_link">
-                      <img src={svg['telegram-icon']}></img>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg/" class="info-social_link">
-                      <img src={svg['youtube_icon']}></img>
-                    </a>
-                    <a href="https://twitter.com/cryptoemergency" class="info-social_link">
-                      <img src={svg['twitter-icon']}></img>
-                    </a>
-                    <a href="https://discord.com/invite/Qdm7W8DjYc" class="info-social_link">
-                      <img src={svg['discord-icon']}></img>
-                    </a>
-                    <a href="https://github.com/CryptoEmergency" class="info-social_link">
-                      <img src={svg['github-icon2']}></img>
-                    </a>
-                    <a href="https://vm.tiktok.com/ZSefEMs2c/" class="info-social_link">
-                      <img src={svg['tiktok-icon']}></img>
-                    </a>
-                  </div>
+                  {
+                    Static.item.social.length
+                      ?
+                      <div class="info-social">
+                        {
+                          Static.item.social.map((item) => {
+                            return (
+                              <a href={item.url} class="info-social_link">
+                                <img src={svg[`${item.channel}-icon`]}></img>
+                              </a>
+                            )
+                          })
+                        }
+                      </div>
+                      :
+                      null
+                  }
                 </div>
               </div>
             </div>
@@ -132,9 +98,9 @@ const start = function (data, ID) {
             <div class="ico-details">
               <h4>Token Sale: {`${fn.getDateFormat(Static.item.startDate, "time")} - ${fn.getDateFormat(Static.item.startDate, "time")}`}</h4>
               <div class="ico-details_items">
-                <p>Name: <span class="details_bold">AITECH</span></p>
-                <p>Token type: <span class="details_bold">CEM</span></p>
-                <p>ICO Token Price: <span class="details_bold">1 cem = {Static.item.price} USD</span></p>
+                <p>Name: <span class="details_bold">{Static.item.name}</span></p>
+                <p>Token type: <span class="details_bold">{Static.item.type}</span></p>
+                <p>ICO Token Price: <span class="details_bold">1 {Static.item.name} = {Static.item.price} USD</span></p>
                 <p>Fundraising Goal: <span class="details_bold">{Static.item.targetSell} Token </span></p>
                 <p>Total Tokens: <span class="details_bold">{Static.item.totalSupply} token</span></p>
                 <p>Available for Token Sale: <span class="details_bold">{Math.round((Static.item.forSell * 100) / Static.item.totalSupply)}%</span></p>
