@@ -79,7 +79,7 @@ const start = function (data, ID) {
             <div class="ico-card">
               <div class="card-head">
                 <div class="card-icon">
-                  <img class="card-img_el" src={images["ico/ico1"]}></img>
+                  <img class="card-img_el" src={`/assets/upload/worldPress/${Static.item.icon}`}></img>
                 </div>
                 <div class="card-main_info">
                   <h3>{Static.item.title}</h3>
@@ -89,7 +89,7 @@ const start = function (data, ID) {
 
               <div class="card-media">
                 <div class="card-img_wrap">
-                  <img class="card-img" src={Static.item.cover}></img>
+                  <img class="card-img" src={`/assets/upload/worldPress/${Static.item.cover}`}></img>
                 </div>
 
                 <div class="card-info">
