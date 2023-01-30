@@ -90,7 +90,28 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
           <div class="c-search__container">
             <div class="c-search__wrapper">
               <img class="c-search__icon" src={svg.search_icon} />
-              <Input className="c-search__input" Static={Static.quest} customStyle={"border-radius: 3px"} />
+              <Input className="c-search__input 984" Static={Static.quest} customStyle={"border-radius: 3px"} /*paste={function (e) { true }}*/ />
+              <input id="c-editor" oninput={function (e) {
+                console.log('=dcea08=', "oninput")
+                if (e.inputType == "insertFromPaste") {
+                  console.log("onPaste", e)
+                  e.currentTarget.innerHTML = e.currentTarget.innerText
+                }
+              }} />
+              <textarea class="c-editor" oninput={function (e) {
+                e.preventDefault();
+                if (e.inputType == "insertFromPaste") {
+                  console.log("onPaste", e)
+                  e.currentTarget.innerHTML = e.currentTarget.innerText
+                }
+              }}></textarea>
+              <div class="c-editor" contenteditable="true" placeholder="Введите текст" oninput={function (e) {
+                e.preventDefault();
+                if (e.inputType == "insertFromPaste") {
+                  console.log("onPaste", e)
+                  e.currentTarget.innerHTML = e.currentTarget.innerText
+                }
+              }}></div>
               <img
                 class="c-search__icon c-search__icon--filter"
                 src={svg.filter}

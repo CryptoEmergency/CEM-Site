@@ -4,7 +4,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 import svg from '@assets/svg/index.js';
 
-const textConstuctor = function (Static, classDiv, className, before, after, callback, customStyle = false) {
+const textConstuctor = function (Static, classDiv, className, before, after, callback, customStyle = false, paste = false) {
     if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined" || typeof classDiv != "undefined" || typeof before != "undefined" || typeof after != "undefined")) {
         return (
             <div>
@@ -13,7 +13,7 @@ const textConstuctor = function (Static, classDiv, className, before, after, cal
                 <div class={classDiv}>
                     {before ? before : null}
                     {Static.type == "password" ? <img src={svg.lock} class="icon-input" /> : null}
-                    {textElem(Static, className, callback, customStyle)}
+                    {textElem(Static, className, callback, customStyle, paste)}
                     {Static.type == "password" ? <img src={svg["eye"]} class="password_eye"
                         onClick={function () {
                             if (Static.elInput.type == "text") {
@@ -30,10 +30,10 @@ const textConstuctor = function (Static, classDiv, className, before, after, cal
             </div>
         )
     } else {
-        return (textElem(Static, className, callback, customStyle))
+        return (textElem(Static, className, callback, customStyle, paste))
     }
 }
-const textElem = function (Static, className, callback, customStyle) {
+const textElem = function (Static, className, callback, customStyle, paste) {
     let rows = null
     let adaptive = null
     let placeholder = null
@@ -71,8 +71,13 @@ const textElem = function (Static, className, callback, customStyle) {
             value={value}
             class={className}
             style={customStyle ? customStyle : "border-radius: 10px;"}
-            oninput={function () {
-
+            oninput={function (e) {
+                if (paste) {
+                    //событие вставки текста
+                    if (e.inputType == "insertFromPaste") {
+                        console.log("onPaste", e)
+                    }
+                }
 
                 checkInput(Static, this)
                 if (callback) {
@@ -121,8 +126,8 @@ const checkInput = function (Static, target) {
     return
 }
 
-const Input = function ({ Static, classDiv, className, before, after, callback, customStyle }) {
-    return (textConstuctor(Static, classDiv, className, before, after, callback, customStyle))
+const Input = function ({ Static, classDiv, className, before, after, callback, customStyle, paste }) {
+    return (textConstuctor(Static, classDiv, className, before, after, callback, customStyle, paste))
 };
 export { Input };
 // OK
