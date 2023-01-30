@@ -89,11 +89,11 @@ const BlockProjects = async function () {
                 //     "icon": "mortarboard",
                 //     "link": "university"
                 // },
-                {
-                    "title": Variable.lang.a.starups,
-                    "icon": "startup",
-                    "link": "startups"
-                },
+                // {
+                //     "title": Variable.lang.a.starups,
+                //     "icon": "startup",
+                //     "link": "startups"
+                // },
                 // {
                 //     "title": Variable.lang.a.universes,
                 //     "icon": "meta_universes",
@@ -102,7 +102,7 @@ const BlockProjects = async function () {
                 {
                     "title": Variable.lang.a.icoRating,
                     "icon": "star1",
-                    "link": "ico-rating"
+                    "link": "list-icostartaps"//"ico-rating"
                 },
                 // {
                 //     "title": Variable.lang.a.trade,
