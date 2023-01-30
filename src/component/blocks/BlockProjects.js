@@ -102,7 +102,7 @@ const BlockProjects = async function () {
                 {
                     "title": Variable.lang.a.icoRating,
                     "icon": "star1",
-                    "link": "ico-rating"
+                    "link": "list-icostartaps"//"ico-rating"
                 },
                 // {
                 //     "title": Variable.lang.a.trade,
