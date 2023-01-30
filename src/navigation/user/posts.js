@@ -81,7 +81,6 @@ const start = function (data, ID) {
       return
     }
     let canvas;
-
     Static.mediaInputs.selectAspect = crooper.options.aspectRatio;
 
     canvas = crooper.getCroppedCanvas({
@@ -95,6 +94,7 @@ const start = function (data, ID) {
       upload: 0,
       size: 0
     };
+    console.log('=c83d58= previewObj =', previewObj)
     Static.mediaInputs.show = true;
     Static.mediaInputs.value.push(previewObj);
     let numItem = Static.mediaInputs.value.length - 1
@@ -940,7 +940,6 @@ const start = function (data, ID) {
                       const originalImage = new Image();
                       originalImage.src = imageUrl;
 
-
                       sendPhotoOne(Static, cropper, originalImage)
 
                       // console.log('=2e552a=',cropper,aspectActive,Static.files)
@@ -974,7 +973,7 @@ const start = function (data, ID) {
                       // console.log('=2e552a=',cropper,aspectActive,Static.files)
 
                       const sX = cropper.getData();
-                      console.log('=770465=', ' x = ', sX.x, ', y = ', sX.y)
+                      // console.log('=770465=', ' x = ', sX.x, ', y = ', sX.y)
 
                       document.getElementById("spinner").hidden = false
                       for (let key in Static.files) {
@@ -1139,7 +1138,7 @@ const start = function (data, ID) {
 
                 disabled={!Static.isValid}
                 onclick={(e) => {
-                  //   console.log('=cf4a37=', Static)
+                  ym(88768376, 'reachGoal', 'post_sent')
                   let previewPost = {}
                   previewPost.author = {
                     avatar: Variable.myInfo.avatar,
@@ -1161,7 +1160,7 @@ const start = function (data, ID) {
                   previewPost.text = Static.textInputs.value
                   previewPost.media = []
                   Static.mediaInputs.value.forEach(function (item) {
-                    previewPost.media.push({ name: item.name, type: item.type })
+                    previewPost.media.push({ name: item.name, type: item.type, previewName: item.previewName ? item.previewName : null })
                   })
                   Static.audioInputs.value.forEach(function (audio) {
                     previewPost.media.push({ name: audio.name, type: audio.type })

@@ -90,7 +90,7 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
           <div class="c-search__container">
             <div class="c-search__wrapper">
               <img class="c-search__icon" src={svg.search_icon} />
-              <Input className="c-search__input" Static={Static.quest} />
+              <Input className="c-search__input" Static={Static.quest} customStyle={"border-radius: 3px"} />
               <img
                 class="c-search__icon c-search__icon--filter"
                 src={svg.filter}

@@ -20,7 +20,7 @@ import {
     BlockInfoPartners,
     BlockProjects,
     BlockTrade,
-    BlockQuestions
+    BlockQuestions,
 } from '@component/blocks/index.js';
 import { ButtonShowMore } from '@component/element/index.js';
 
@@ -68,6 +68,8 @@ const start = function (data, ID) {
                 },
                 desc: -1
             }
+
+            Static.Rooms = fn.initData.rooms(Static)
             await fn.restApi.getCourse({ cache: true, name: "Course", filter: {} })
             // await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
             await fn.restApi.getNews({ cache: true, name: "MainNews", filter: {} })
@@ -143,6 +145,9 @@ const start = function (data, ID) {
                                 )
                             }
                         }}
+
+                        {/* <BlockUserRoomsChat Static={Static.Rooms} /> */}
+
                         <BlockQuestions Static={Static.dataQuestions} limit={6} />
                         <div class="c-main__wrapperbg2">
                             <BlockBanners />

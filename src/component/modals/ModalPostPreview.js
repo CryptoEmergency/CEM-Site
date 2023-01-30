@@ -18,35 +18,37 @@ import { BlockLentaUsers } from '@component/blocks/index.js';
 
 const ModalPostPreview = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
-    let close =true
+    let close = true
     init(
         () => {
             Static.elShowTextFull = {}
             Static.elShowTextShort = {}
             Static.elMedia = {}
             Static.elNumberSwiper = {}
-         //   console.log('=828ffb=', Static)
+            // console.log('=828ffb=', Static)
         },
         () => {
             return (
                 <div
                     class="c-modal c-modal--open c-modal--fullscreen c-modal--menu"
                     id="userPost"
-                    onclick={function(e){ if(close){ 
-  
-                        fn.modals.close(ID)
-                        }}}
+                    onclick={function (e) {
+                        if (close) {
+
+                            fn.modals.close(ID)
+                        }
+                    }}
                 >
-                    <section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
-    
-         }}
-         onmouseleave={function(){
-           
-          close = true
-      
-           }}>
+                    <section class="c-modal__dialog" onmouseover={function () {
+
+                        close = false
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <div class="c-modal__body" >
                             <div class="user_post_container">
                                 <div class="user_news_block">
@@ -68,9 +70,9 @@ const ModalPostPreview = function (data, ID) {
                                     <BlockLentaUsers
                                         Static={Static}
                                         item={data}
-                                        // ElemVisible={() => {
-                                        //     fn.recordsView(data._id, "setPost")
-                                        // }}
+                                    // ElemVisible={() => {
+                                    //     fn.recordsView(data._id, "setPost")
+                                    // }}
                                     />
                                 </div >
                             </div >

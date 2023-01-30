@@ -89,21 +89,21 @@ const BlockProjects = async function () {
                 //     "icon": "mortarboard",
                 //     "link": "university"
                 // },
-                // {
-                //     "title": Variable.lang.a.starups,
-                //     "icon": "startup",
-                //     "link": "startups"
-                // },
+                {
+                    "title": Variable.lang.a.starups,
+                    "icon": "startup",
+                    "link": "startups"
+                },
                 // {
                 //     "title": Variable.lang.a.universes,
                 //     "icon": "meta_universes",
                 //     "link": "university"
                 // },
-                // {
-                //     "title": Variable.lang.a.icoRating,
-                //     "icon": "star1",
-                //     "link": "ico-rating"
-                // },
+                {
+                    "title": Variable.lang.a.icoRating,
+                    "icon": "star1",
+                    "link": "ico-rating"
+                },
                 // {
                 //     "title": Variable.lang.a.trade,
                 //     "icon": "preview_line_exchange",

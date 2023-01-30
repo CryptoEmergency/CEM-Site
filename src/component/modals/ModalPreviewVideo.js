@@ -209,7 +209,6 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                                                                                         Static.isValid = false;
                                                                                         Static.preview.name = null
                                                                                     }
-                                                                                    debugger
                                                                                     // }
                                                                                     initReload();
                                                                                 }

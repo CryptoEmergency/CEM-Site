@@ -320,6 +320,15 @@ const mainFooter = async function () {
                                                     <img class="c-socialicon__icon" src={svg['tiktok-icon']} />
                                                 </a>
                                             </div>
+                                            <div class="c-socialicon">
+                                                <a
+                                                    href="https://www.linkedin.com/company/86302977"
+                                                    target="_blank"
+                                                    class="c-socialicon__link"
+                                                >
+                                                    <img class="c-socialicon__icon" src={svg['linkedin-icon']} />
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
