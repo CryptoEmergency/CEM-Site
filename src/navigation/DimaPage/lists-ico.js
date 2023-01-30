@@ -33,7 +33,7 @@ const checkForm = async function (Static, ID) {
         return
     }
 
-    if (!Static.forms.cover && !Static.forms.linkVideoYoutube) {
+    if (!Static.forms.cover && !Static.forms.coverVideo) {
         fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери обложку или укажи ссылку на Ютуб!!!" })
         return
     }
@@ -100,7 +100,7 @@ const checkForm = async function (Static, ID) {
             title: Static.forms.title,
             description: Static.forms.description,
             cover: Static.forms.cover,
-            linkVideoYoutube: Static.forms.linkVideoYoutube,
+            coverVideo: Static.forms.coverVideo,
             startDate: Static.forms.startDate,
             endDate: Static.forms.endDate,
             targetMoney: Static.forms.targetMoney,
@@ -174,7 +174,7 @@ const checkForm = async function (Static, ID) {
         data.value.social.push({ channel: "linkedin", url: Static.forms.social.linkedin.url })
     }
 
-    // console.log(data)
+    console.log(data)
     if (!Static.item) {
         await fn.restApi.setIco.create(data)
     } else {
@@ -201,7 +201,7 @@ const start = function (data, ID) {
                 Static.forms.title = null
                 Static.forms.description = null
                 Static.forms.cover = null
-                Static.forms.linkVideoYoutube = null
+                Static.forms.coverVideo = null
                 Static.forms.startDate = null
                 Static.forms.endDate = null
                 Static.forms.targetMoney = null
@@ -425,9 +425,9 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Правильная ссылка на Ютуб видео"
                                 type="text"
-                                value={Static.forms.linkVideoYoutube}
+                                value={Static.forms.coverVideo}
                                 oninput={function () {
-                                    Static.forms.linkVideoYoutube = this.value.trim()
+                                    Static.forms.coverVideo = this.value.trim()
                                 }}
                             />
                         </div>

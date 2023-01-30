@@ -13,122 +13,53 @@ import images from "@assets/images/index.js";
 
 //
 const checkForm = async function (Static, ID) {
-    if (!Static.forms.category) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери категорию!!!" })
-        return
-    }
 
-    if (!Static.forms.icon) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери иконку!!!" })
-        return
-    }
-
-    if (!Static.forms.title) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи название!!!" })
-        return
-    }
-
-    if (!Static.forms.description) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи описание!!!" })
-        return
-    }
-
-    if (!Static.forms.cover ?? !Static.forms.linkVideoYoutube) {
+    if (!Static.forms.cover && !Static.forms.coverVideo) {
         fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери обложку или укажи ссылку на Ютуб!!!" })
         return
     }
 
-    if (!Static.forms.startDate) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи дату запуска!!!" })
+    if (!Static.forms.descriptionShort) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи описание Краткое!!!" })
         return
     }
 
-    if (!Static.forms.endDate) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи дату окончания!!!" })
+    if (!Static.forms.description) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи описание полное!!!" })
         return
     }
 
-    if (!Static.forms.targetMoney) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи цель $!!!" })
-        return
-    }
-
-    if (!Static.forms.targetMoney) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи цель $!!!" })
-        return
-    }
-
-    if (!Static.forms.name) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи имя!!!" })
-        return
-    }
-
-    if (!Static.forms.type) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи тип!!!" })
-        return
-    }
-
-    if (!Static.forms.price) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи цену!!!" })
-        return
-    }
-
-    if (!Static.forms.totalSupply) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Сколько выпущено!!!" })
-        return
-    }
-
-    if (!Static.forms.forSell) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Сколько для продажи!!!" })
-        return
-    }
-
-    if (!Static.forms.targetSell) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Цель продажи кол-во!!!" })
-        return
-    }
-
-    if (!Static.forms.review) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи краткий обзор!!!" })
-        return
-    }
 
     let data = {
         value: {
-            category: Static.forms.category,
-            icon: Static.forms.icon,
-            title: Static.forms.title,
-            description: Static.forms.description,
             cover: Static.forms.cover,
-            linkVideoYoutube: Static.forms.linkVideoYoutube,
-            startDate: Static.forms.startDate,
-            endDate: Static.forms.endDate,
-            targetMoney: Static.forms.targetMoney,
-            name: Static.forms.name,
-            type: Static.forms.type,
-            price: Static.forms.price,
-            sellType: Static.forms.sellType,
-            totalSupply: Static.forms.totalSupply,
-            forSell: Static.forms.forSell,
-            targetSell: Static.forms.targetSell,
-            review: Static.forms.review,
+            coverVideo: Static.forms.coverVideo,
+            siteLink: Static.forms.siteLink,
+            whitePaperLink: Static.forms.whitePaperLink,
+            descriptionShort: Static.forms.descriptionShort,
+            description: Static.forms.description,
             media: Static.forms.media,
+            team: Static.forms.team,
+            roadMap: Static.forms.roadMap,
+            totalSupply: Static.forms.totalSupply,
+            tokenomica: Static.forms.tokenomica,
+            descriptionMore: Static.forms.descriptionMore,
             social: [],
-            checked: Static.forms.checked
+            limited: Static.forms.limited
         }
     }
 
-    if (Static.forms.nowMoney) {
-        data.value.nowMoney = Static.forms.nowMoney
+    if (Static.forms.country && Static.forms.country.code) {
+        data.value.country = Static.forms.country.code
     }
 
-    if (Static.forms.siteLink) {
-        data.value.siteLink = Static.forms.siteLink
-    }
+    // if (Static.forms.siteLink) {
+    //     data.value.siteLink = Static.forms.siteLink
+    // }
 
-    if (Static.forms.whitePaperLink) {
-        data.value.whitePaperLink = Static.forms.whitePaperLink
-    }
+    // if (Static.forms.whitePaperLink) {
+    //     data.value.whitePaperLink = Static.forms.whitePaperLink
+    // }
 
     if (Static.forms.social.youtube.url) {
         data.value.social.push({ channel: "youtube", url: Static.forms.social.youtube.url })
@@ -174,12 +105,12 @@ const checkForm = async function (Static, ID) {
         data.value.social.push({ channel: "linkedin", url: Static.forms.social.linkedin.url })
     }
 
-    // console.log(data)
+    console.log(data)
     if (!Static.item) {
-        await fn.restApi.setIco.create(data)
+        await fn.restApi.setStartaps.create(data)
     } else {
         data._id = Static.item._id
-        await fn.restApi.setIco.update(data)
+        await fn.restApi.setStartaps.update(data)
     }
     fn.siteLink("/DimaPage/")
 
@@ -197,7 +128,7 @@ const start = function (data, ID) {
             if (!Static.item) {
                 Static.forms = {}
                 Static.forms.cover = null
-                Static.forms.linkVideoYoutube = null
+                Static.forms.coverVideo = null
                 Static.forms.siteLink = null
                 Static.forms.whitePaperLink = null
                 Static.forms.descriptionShort = null
@@ -219,34 +150,22 @@ const start = function (data, ID) {
                 Static.forms.country = {}
                 Static.forms.team = []
                 Static.forms.roadMap = []
-                Static.forms.descriptionMore = null
-
-
-
-
-
-                Static.forms.title = null
-
-
-
-                Static.forms.startDate = null
-                Static.forms.endDate = null
-                Static.forms.targetMoney = null
-                Static.forms.nowMoney = null // не обязательно
-
-                Static.forms.name = null
-                Static.forms.type = null
-                Static.forms.price = null
-                Static.forms.sellType = "USDT"
                 Static.forms.totalSupply = null
-                Static.forms.forSell = null
-                Static.forms.targetSell = null
-                Static.forms.review = null
-                Static.forms.checked = false
                 Static.forms.limited = true
-
-
-
+                Static.forms.tokenomica = {
+                    team: 0,
+                    marketing: 0,
+                    staking: 0,
+                    preSale: 0,
+                    airDrops: 0,
+                    publickSale: 0,
+                    reserveCompany: 0,
+                    charity: 0,
+                    investors: 0,
+                    baunty: 0,
+                    ico: 0
+                }
+                Static.forms.descriptionMore = null
 
             } else {
                 Static.forms = Object.assign({}, Static.item)
@@ -264,13 +183,12 @@ const start = function (data, ID) {
                     github: {},
                     linkedin: {},
                 }
-
+                Static.forms.country = {}
                 if (Static.item.social && Static.item.social.length) {
                     for (let tmp of Static.item.social) {
                         Static.forms.social[tmp.channel].url = tmp.url
                     }
                 }
-                // console.log('=65ea9b=', Static.item.social, Static.forms.social)
             }
         },
         fn: () => {
@@ -340,9 +258,9 @@ const start = function (data, ID) {
                             <input
                                 placeholder="Правильная ссылка на Ютуб видео"
                                 type="text"
-                                value={Static.forms.linkVideoYoutube}
+                                value={Static.forms.coverVideo}
                                 oninput={function () {
-                                    Static.forms.linkVideoYoutube = this.value.trim()
+                                    Static.forms.coverVideo = this.value.trim()
                                 }}
                             />
                         </div>
@@ -677,12 +595,12 @@ const start = function (data, ID) {
                                                 />
                                                 <div class="notes-content-img">
                                                     {
-                                                        Static.forms.cover
+                                                        Static.forms.team[index].foto
                                                             ?
                                                             <div class="notes-img-wrapper">
                                                                 <img
                                                                     class="notes-img-preview"
-                                                                    src={`/assets/upload/worldPress/${Static.forms.cover}`}
+                                                                    src={`/assets/upload/worldPress/${Static.forms.team[index].foto}`}
                                                                     width="350"
                                                                     height="100"
                                                                 />
@@ -793,11 +711,148 @@ const start = function (data, ID) {
                         </div>
 
 
+                        <div>
+                            <label>На команду %</label>
+                            <input
+                                placeholder="На команду %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.team}
+                                oninput={function () {
+                                    Static.forms.tokenomica.team = this.value
+                                }}
+                            />
+                        </div>
 
+                        <div>
+                            <label>На маркетинг %</label>
+                            <input
+                                placeholder="На маркетинг %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.marketing}
+                                oninput={function () {
+                                    Static.forms.tokenomica.marketing = this.value
+                                }}
+                            />
+                        </div>
 
+                        <div>
+                            <label>На стейкинг %</label>
+                            <input
+                                placeholder="На стейкинг %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.staking}
+                                oninput={function () {
+                                    Static.forms.tokenomica.staking = this.value
+                                }}
+                            />
+                        </div>
 
+                        <div>
+                            <label>На pre продажу %</label>
+                            <input
+                                placeholder="На pre продажу %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.preSale}
+                                oninput={function () {
+                                    Static.forms.tokenomica.preSale = this.value
+                                }}
+                            />
+                        </div>
 
+                        <div>
+                            <label>На Air Drop %</label>
+                            <input
+                                placeholder="На Air Drop %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.airDrops}
+                                oninput={function () {
+                                    Static.forms.tokenomica.airDrops = this.value
+                                }}
+                            />
+                        </div>
 
+                        <div>
+                            <label>На Publick sale %</label>
+                            <input
+                                placeholder="На Publick sale %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.publickSale}
+                                oninput={function () {
+                                    Static.forms.tokenomica.publickSale = this.value
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>На резерв компании %</label>
+                            <input
+                                placeholder="На резерв компании %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.reserveCompany}
+                                oninput={function () {
+                                    Static.forms.tokenomica.reserveCompany = this.value
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>На благотворительность %</label>
+                            <input
+                                placeholder="На благотворительность %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.charity}
+                                oninput={function () {
+                                    Static.forms.tokenomica.charity = this.value
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>На инвесторов %</label>
+                            <input
+                                placeholder="На инвесторов %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.investors}
+                                oninput={function () {
+                                    Static.forms.tokenomica.investors = this.value
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>На Баунти %</label>
+                            <input
+                                placeholder="На Баунти %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.baunty}
+                                oninput={function () {
+                                    Static.forms.tokenomica.baunty = this.value
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>На ICO %</label>
+                            <input
+                                placeholder="На ICO %"
+                                required="required"
+                                type="number"
+                                value={Static.forms.tokenomica.ico}
+                                oninput={function () {
+                                    Static.forms.tokenomica.ico = this.value
+                                }}
+                            />
+                        </div>
 
                         <div
                             class="button-container-preview"
@@ -831,7 +886,7 @@ const start = function (data, ID) {
                                                 active: false
                                             }
                                         }
-                                        await fn.restApi.setIco.update(data)
+                                        await fn.restApi.setStartaps.update(data)
                                         fn.siteLink("/DimaPage/")
                                     }}
                                 >

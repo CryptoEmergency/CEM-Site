@@ -28,7 +28,7 @@ const start = function (data, ID) {
 
 
       // const tmp = await fn.restApi.getIco({ filter: { startDate: { $gte: new Date() } } })
-      const tmp = await fn.restApi.getIco({ filter: { startDate: { $lte: new Date() } } })
+      const tmp = await fn.restApi.getStartaps({ filter: {} })
       console.log('=e5bcc8=', tmp)
       return
 

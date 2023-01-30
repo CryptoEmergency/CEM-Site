@@ -1291,6 +1291,59 @@ restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter,
 
 
 
+restApi.getStartaps = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+
+
+    let defaultFilter = {}
+
+    if (filter._id) {
+        defaultFilter = {}
+    }
+
+    let defaultSelect = {
+        cover: 1,
+        coverVideo: 1,
+        siteLink: 1,
+        whitePaperLink: 1,
+        descriptionShort: 1,
+        description: 1,
+        social: 1,
+        media: 1,
+        country: 1,
+        team: 1,
+        roadMap: 1,
+        totalSupply: 1,
+        limited: 1,
+        tokenomica: 1,
+        descriptionMore: 1,
+    }
+
+
+    let data = {
+        action: "getStartaps",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
 
 restApi.getIco = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
 
@@ -1324,7 +1377,8 @@ restApi.getIco = async function ({ cache, name, limit = 6, offset = 0, filter, s
         checked: 1,
         social: 1,
         media: 1,
-        showDate: 1
+        showDate: 1,
+        coverVideo: 1
     }
 
 
@@ -1356,13 +1410,28 @@ restApi.getIco = async function ({ cache, name, limit = 6, offset = 0, filter, s
 
 restApi.setNotes = {}
 
+restApi.setStartaps = {}
+
+restApi.setStartaps.create = async function (data, noAlert = false) {
+    // console.log('=007873=', data)
+    const response = await sendApi.create("setStartaps", data);
+    // console.log('=29a4cd=', response)
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setStartaps.update = async function (data, noAlert = false) {
+    const response = await sendApi.create("setStartaps", data);
+    return checkSetAnswer(response, noAlert)
+}
+
 
 restApi.setIco = {}
 
+
 restApi.setIco.create = async function (data, noAlert = false) {
-    console.log('=007873=', data)
+    // console.log('=007873=', data)
     const response = await sendApi.create("setIco", data);
-    console.log('=29a4cd=', response)
+    // console.log('=29a4cd=', response)
     return checkSetAnswer(response, noAlert)
 }
 

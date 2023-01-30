@@ -22,8 +22,8 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            // Static.recordsIco = await fn.restApi.getIco({ filter: {} })
-            // console.log('=e5bcc8=', Static.recordsIco)
+            Static.recordsIco = await fn.restApi.getStartaps({ filter: {} })
+            console.log('=e5bcc8=', Static.recordsIco)
         },
         fn: () => {
 
@@ -45,31 +45,29 @@ const start = function (data, ID) {
                             <img src={svg["radius_plus"]} width="100" height="100" />
                         </div>
                         {
-                            // Static.recordsIco.list_records.map((item, index) => {
-                            //     return (
-                            //         <div class="ico-list_item"
-                            //             onclick={() => {
-                            //                 fn.siteLinkModal("/DimaPage/lists-ico/", { title: "Редактировать ICO", item })
-                            //             }}>
-                            //             <img class="item-img" src={`/assets/upload/worldPress/${item.icon}`}></img>
-                            //             <div class="item-info">
-                            //                 <h5 class="item-title">{item.title}</h5>
-                            //                 <p class="item-desc">{item.description}</p>
-                            //                 <div>
-                            //                     <p class="item-sum">
-                            //                         <span class="item-sum_obj">${item.nowMoney}</span> / ${item.targetMoney}
-                            //                     </p>
-                            //                 </div>
-                            //             </div>
-                            //             <div class="item-date">
-                            //                 <span>{fn.getDateFormat(item.startDate, "time")}</span>
-                            //                 <span>{fn.getDateFormat(item.endDate, "time")}</span>
-                            //             </div>
-                            //         </div>
-                            //     )
+                            Static.recordsIco.list_records.map((item, index) => {
+                                return (
+                                    <div class="ico-list_item"
+                                        onclick={() => {
+                                            fn.siteLinkModal("/DimaPage/lists-startaps/", { title: "Редактировать Startap", item })
+                                        }}>
+                                        <img class="item-img" width="100" height="100" src={`/assets/upload/worldPress/${item.cover}`}></img>
+                                        <div class="item-info">
+                                            {/* <h5 class="item-title">{item.title}</h5> */}
+                                            <p class="item-desc">{item.description}</p>
+                                            <div>
+                                                <p class="item-desc">{item.descriptionShort}</p>
+                                            </div>
+                                        </div>
+                                        {/* <div class="item-date">
+                                            <span>{fn.getDateFormat(item.startDate, "time")}</span>
+                                            <span>{fn.getDateFormat(item.endDate, "time")}</span>
+                                        </div> */}
+                                    </div>
+                                )
 
 
-                            // })
+                            })
                         }
                     </div>
                 </div>

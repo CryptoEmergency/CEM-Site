@@ -51,7 +51,7 @@ const start = function (data, ID) {
                                         onclick={() => {
                                             fn.siteLinkModal("/DimaPage/lists-ico/", { title: "Редактировать ICO", item })
                                         }}>
-                                        <img class="item-img" src={`/assets/upload/worldPress/${item.icon}`}></img>
+                                        <img class="item-img" width="100" height="100" src={`/assets/upload/worldPress/${item.icon}`}></img>
                                         <div class="item-info">
                                             <h5 class="item-title">{item.title}</h5>
                                             <p class="item-desc">{item.description}</p>
