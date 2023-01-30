@@ -717,7 +717,7 @@ async function SearchRooms(Static) {
         let request
 
         if (Static.Category.value == "all") {
-          request = { name: "UsersRooms", filter: { $text: { $search: value }, system: false }, limit: 10 }
+          request = { name: "UsersRooms", filter: { $text: { arch: value }, system: false }, limit: 10 }
         }
         else {
           request = { name: "UsersRooms", filter: { $text: { $search: value }, "settingsroom.category": Static.Category.value, system: false }, limit: 10 }

@@ -218,6 +218,7 @@ const start = function (data, ID) {
                 Static.forms.media = []
                 Static.forms.country = {}
                 Static.forms.team = []
+                Static.forms.roadMap = []
                 Static.forms.descriptionMore = null
 
 
@@ -242,6 +243,7 @@ const start = function (data, ID) {
                 Static.forms.targetSell = null
                 Static.forms.review = null
                 Static.forms.checked = false
+                Static.forms.limited = true
 
 
 
@@ -698,48 +700,58 @@ const start = function (data, ID) {
                         </div>
 
 
-                        <div>
-                            <label>Кого ищет</label>
-                            <textarea
-                                placeholder="Кого ищет"
-                                rows={10}
-                                value={Static.forms.descriptionMore}
-                                textContent={Static.forms.descriptionMore}
-                                oninput={function () {
-                                    Static.forms.descriptionMore = this.value.trim()
-                                }}
-                            // hidden={Static.forms.category == "ICO" ? true : false}
-                            />
-                        </div>
-
-
-
-
 
                         <div>
-                            <label>Название</label>
-                            <input
-                                placeholder="Название"
-                                type="text"
-                                value={Static.forms.title}
-                                oninput={function () {
-                                    Static.forms.title = this.value.trim()
+                            <label>Дорожная карта <img class="notes-button__icon" src={svg["like_icon"]}
+                                onclick={() => {
+                                    Static.forms.roadMap.push({})
+                                    initReload()
                                 }}
-                            />
-                        </div>
+                            /></label>
+                            {
+                                Static.forms.roadMap.map((item, index) => {
+                                    return (
+                                        <div>
+                                            <div>
+                                                <label>Событие {index + 1} год</label>
+                                                <input
+                                                    placeholder={`Событие ${index + 1} год`}
+                                                    type="text"
+                                                    value={item.year}
+                                                    oninput={function () {
+                                                        Static.forms.roadMap[index].year = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label>Событие {index + 1} месяц</label>
+                                                <input
+                                                    placeholder={`Событие ${index + 1} месяц`}
+                                                    type="text"
+                                                    value={item.month}
+                                                    oninput={function () {
+                                                        Static.forms.roadMap[index].month = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
 
-
-
-                        <div>
-                            <label>Цель в $</label>
-                            <input
-                                placeholder="Цель в $"
-                                type="number"
-                                value={Static.forms.targetMoney}
-                                oninput={function () {
-                                    Static.forms.targetMoney = this.value
-                                }}
-                            />
+                                            <div>
+                                                <label>{`Событие ${index + 1} описание`}</label>
+                                                <textarea
+                                                    placeholder={`Событие ${index + 1} описание`}
+                                                    rows={7}
+                                                    value={item.description}
+                                                    textContent={item.description}
+                                                    oninput={function () {
+                                                        Static.forms.roadMap[index].description = this.value.trim()
+                                                    }}
+                                                // hidden={Static.forms.category == "ICO" ? true : false}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
 
                         <div>
@@ -756,43 +768,35 @@ const start = function (data, ID) {
                         </div>
 
                         <div>
-                            <label>Для продажи</label>
-                            <input
-                                placeholder="Для продажи"
-                                type="number"
-                                value={Static.forms.forSell}
-                                oninput={function () {
-                                    Static.forms.forSell = this.value
-                                }}
-                            />
-                        </div>
-
-
-                        <div>
-                            <label>Цель продать</label>
-                            <input
-                                placeholder="Цель продать"
-                                type="number"
-                                value={Static.forms.targetSell}
-                                oninput={function () {
-                                    Static.forms.targetSell = this.value
-                                }}
-                            />
-                        </div>
-
-
-                        <div>
-                            <label>Краткий обзор</label>
+                            <label>Кого ищет</label>
                             <textarea
-                                placeholder="Краткий обзор"
-                                rows={5}
-                                textContent={Static.forms.review}
-                                value={Static.forms.review}
+                                placeholder="Кого ищет"
+                                rows={10}
+                                value={Static.forms.descriptionMore}
+                                textContent={Static.forms.descriptionMore}
                                 oninput={function () {
-                                    Static.forms.review = this.value.trim()
+                                    Static.forms.descriptionMore = this.value.trim()
+                                }}
+                            // hidden={Static.forms.category == "ICO" ? true : false}
+                            />
+                        </div>
+
+                        <div>
+                            <label>Ограниченный выпуск</label>
+                            <input
+                                type="checkbox"
+                                checked={Static.forms.limited}
+                                oninput={function () {
+                                    Static.forms.limited = !Static.forms.limited
                                 }}
                             />
                         </div>
+
+
+
+
+
+
 
 
                         <div
