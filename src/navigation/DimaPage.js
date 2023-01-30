@@ -46,7 +46,7 @@ const start = function (data, ID) {
 
                     {/* <div class="mb--2">gdg</div> */}
                     <div
-                        class="button-container-preview"
+                        class="button-container-preview mb--10"
                         onclick={() => {
                             fn.siteLink("/DimaPage/records-startaps/")
                             // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
@@ -55,6 +55,19 @@ const start = function (data, ID) {
                         <span class="btn-news-preview">
                             <span >
                                 Список Стартапов
+                            </span>
+                        </span>
+                    </div>
+
+                    <div
+                        class="button-container-preview mb--10"
+                        onclick={() => {
+                            fn.siteLink("/DimaPage/records-news/")
+                        }}
+                    >
+                        <span class="btn-news-preview">
+                            <span >
+                                Новости
                             </span>
                         </span>
                     </div>
