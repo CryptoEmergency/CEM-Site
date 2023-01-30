@@ -9,6 +9,7 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
+
 const start = function (data, ID) {
 
   let [Static] = fn.GetParams({ data, ID })
@@ -55,25 +56,28 @@ const start = function (data, ID) {
 
                 <div class="card-info">
                   <span class="card-info_status">
+
                     is ended</span>
                   <div class="card-info_summ">
                     <span class="info-summ_obj">${Static.item.nowMoney && Static.item.nowMoney > 0 ? Static.item.nowMoney : 0}</span>
                     <span class="info-summ_done">of</span>
                     <span class="info-summ_done">${`${Static.item.targetMoney} (${Math.round(((Static.item.nowMoney && Static.item.nowMoney > 0 ? Static.item.nowMoney : 0) * 100) / Static.item.targetMoney)})%`}</span>
                   </div>
-                  <button type="button" class="card-btn card-btn_active">
-                    <a
-                      style='display: block !important'
-                      target="_blank"
-                      rel="nofollow nooopener"
-                      href={Static.item.siteLink}
-                    >
-                      <span class="card-btn_text">Web Site</span>
-                    </a>
-                  </button>
-                  <button type="button" class={["card-btn", Static.item.whitePaperLink ? "card-btn_active" : null]}>
+
+                  <a
+                    class={["card-btn", Static.item.siteLink ? "card-btn_active" : null]}
+                    target="_blank"
+                    href={Static.item.siteLink}
+                    rel="nofollow nooopener">
+                    <span class="card-btn_text">Web Site</span>
+                  </a>
+
+                  <a
+                    class={["card-btn", Static.item.whitePaperLink ? "card-btn_active" : null]}
+                  >
                     <span class="card-btn_text">White Paper</span>
-                  </button>
+
+                  </a>
                   {
                     Static.item.social.length
                       ?
@@ -109,48 +113,26 @@ const start = function (data, ID) {
 
             </div>
 
-            <div class="ico-media">
+            {/* <div class="ico-media">
               <h4>Screenshots</h4>
-              <div class="media-wrap">
-                <div class="media_item">
-                  <div class="media-img">
-                    <img src={images["ico/ico1"]}></img>
+              {
+                Static.item.media.length
+                  ?
+                  <div class="media-wrap">
+                    {
+                      Static.item.media.map((item) => {
+                        return (
+                          <div>
+                            <img src={item.name}></img>
+                          </div>
+                        )
+                      })
+                    }
                   </div>
-                  <h5 class="media-item_title">Solidus AI Tech Info</h5>
-                </div>
-                <div class="media_item">
-                  <div class="media-img">
-                    <img src={images["ico/ico2"]}></img>
-                  </div>
-                  <h5 class="media-item_title">Solidus AI Tech Roadmap 1</h5>
-                </div>
-                <div class="media_item">
-                  <div class="media-img">
-                    <img src={images["ico/ico3"]}></img>
-                  </div>
-                  <h5 class="media-item_title">Solidus AI Tech Roadmap 2</h5>
-                </div>
-                <div class="media_item">
-                  <div class="media-img">
-                    <img src={images["ico/ico4"]}></img>
-                  </div>
-                  <h5 class="media-item_title">Solidus AI Tech Token Distribution</h5>
-                </div>
-                <div class="media_item">
-                  <div class="media-img">
-                    <img src={images["ico/ico5"]}></img>
-                  </div>
-                  <h5 class="media-item_title">Solidus AI Tech Token Sales</h5>
-                </div>
-                <div class="media_item">
-                  <div class="media-img">
-                    <img src={images["ico/ico6"]}></img>
-                  </div>
-                  <h5 class="media-item_title">Solidus AI Tech Team 1</h5>
-                </div>
-              </div>
-
-            </div>
+                  :
+                  null
+              }
+            </div> */}
           </div>
         </div>
       )
