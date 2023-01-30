@@ -89,11 +89,11 @@ const BlockProjects = async function () {
                 //     "icon": "mortarboard",
                 //     "link": "university"
                 // },
-                {
-                    "title": Variable.lang.a.starups,
-                    "icon": "startup",
-                    "link": "startups"
-                },
+                // {
+                //     "title": Variable.lang.a.starups,
+                //     "icon": "startup",
+                //     "link": "startups"
+                // },
                 // {
                 //     "title": Variable.lang.a.universes,
                 //     "icon": "meta_universes",
