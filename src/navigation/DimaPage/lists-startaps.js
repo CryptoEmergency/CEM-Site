@@ -10,11 +10,6 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
-const toDateInputValue = function (tmpDate) {
-    var local = new Date(tmpDate);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0, 10);
-};
 
 //
 const checkForm = async function (Static, ID) {
@@ -201,29 +196,12 @@ const start = function (data, ID) {
         fnLoad: () => {
             if (!Static.item) {
                 Static.forms = {}
-                Static.forms.category = null
-                Static.forms.icon = null
-                Static.forms.title = null
-                Static.forms.description = null
                 Static.forms.cover = null
                 Static.forms.linkVideoYoutube = null
-                Static.forms.startDate = null
-                Static.forms.endDate = null
-                Static.forms.targetMoney = null
-                Static.forms.nowMoney = null // не обязательно
                 Static.forms.siteLink = null
                 Static.forms.whitePaperLink = null
-                Static.forms.name = null
-                Static.forms.type = null
-                Static.forms.price = null
-                Static.forms.sellType = "USDT"
-                Static.forms.totalSupply = null
-                Static.forms.forSell = null
-                Static.forms.targetSell = null
-                Static.forms.review = null
-                Static.forms.checked = false
-                Static.forms.media = []
-
+                Static.forms.descriptionShort = null
+                Static.forms.description = null
                 Static.forms.social = {
                     youtube: {},
                     facebook: {},
@@ -237,6 +215,36 @@ const start = function (data, ID) {
                     github: {},
                     linkedin: {},
                 }
+                Static.forms.media = []
+                Static.forms.country = {}
+                Static.forms.team = []
+                Static.forms.descriptionMore = null
+
+
+
+
+
+                Static.forms.title = null
+
+
+
+                Static.forms.startDate = null
+                Static.forms.endDate = null
+                Static.forms.targetMoney = null
+                Static.forms.nowMoney = null // не обязательно
+
+                Static.forms.name = null
+                Static.forms.type = null
+                Static.forms.price = null
+                Static.forms.sellType = "USDT"
+                Static.forms.totalSupply = null
+                Static.forms.forSell = null
+                Static.forms.targetSell = null
+                Static.forms.review = null
+                Static.forms.checked = false
+
+
+
 
             } else {
                 Static.forms = Object.assign({}, Static.item)
@@ -275,106 +283,6 @@ const start = function (data, ID) {
                 <div class="c-main__body">
 
                     <div class="contacts_form">
-                        <div class={["tag_button", Static.forms.category == "ICO" ? "tag_button_active" : null]}
-                            onclick={() => {
-                                Static.forms.category = "ICO"
-                                initReload()
-                            }}>
-                            <span>ICO</span>
-                        </div>
-                        <div class={["tag_button", Static.forms.category == "IDO" ? "tag_button_active" : null]} onclick={() => {
-                            Static.forms.category = "IDO"
-                            initReload()
-                        }}>
-                            <span>IDO</span>
-                        </div>
-                        <div class={["tag_button", Static.forms.category == "IEO" ? "tag_button_active" : null]} onclick={() => {
-                            Static.forms.category = "IEO"
-                            initReload()
-                        }}>
-                            <span>IEO</span>
-                        </div>
-                        <div class={["tag_button", Static.forms.category == "IGO" ? "tag_button_active" : null]} onclick={() => {
-                            Static.forms.category = "IGO"
-                            initReload()
-                        }}>
-                            <span>IGO</span>
-                        </div>
-
-                        <div>
-                            <label>Иконка <img class="notes-button__icon" src={svg["clip_notes"]}
-                                onclick={() => {
-                                    Static.elInputImg.click()
-                                }}
-                            /></label>
-                            <input
-                                type="file"
-                                hidden
-                                Element={($el) => { Static.elInputImg = $el }}
-                                onchange={async function (e) {
-                                    e.stopPropagation();
-                                    Array.from(this.files).forEach((item) => {
-                                        fn.uploadMedia(
-                                            item,
-                                            "worldPress",
-                                            async function () {
-                                                if (!this.response) {
-                                                    alert("Произошла ошибка Попробуйте еще раз")
-                                                    return
-                                                }
-                                                let response = JSON.parse(this.response);
-                                                Static.forms.icon = response.name
-                                                initReload()
-                                            }
-                                        )
-                                    })
-                                    initReload()
-                                }}
-                            />
-                            <div class="notes-content-img">
-                                {
-                                    Static.forms.icon
-                                        ?
-                                        <div class="notes-img-wrapper">
-                                            <img
-                                                class="notes-img-preview"
-                                                src={`/assets/upload/worldPress/${Static.forms.icon}`}
-                                                width="100"
-                                                height="100"
-                                            />
-                                        </div>
-                                        :
-                                        null
-                                }
-
-                            </div>
-                        </div>
-
-                        <div>
-                            <label>Название</label>
-                            <input
-                                placeholder="Название"
-                                type="text"
-                                value={Static.forms.title}
-                                oninput={function () {
-                                    Static.forms.title = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Описание</label>
-                            <textarea
-                                placeholder="Описание"
-                                rows={10}
-                                value={Static.forms.description}
-                                textContent={Static.forms.description}
-                                oninput={function () {
-                                    Static.forms.description = this.value.trim()
-                                }}
-                            // hidden={Static.forms.category == "ICO" ? true : false}
-                            />
-                        </div>
 
                         <div>
                             <label>Обложка <img class="notes-button__icon" src={svg["clip_notes"]}
@@ -438,54 +346,6 @@ const start = function (data, ID) {
                         </div>
 
                         <div>
-                            <label>Дата запуска</label>
-                            <input
-                                type="datetime-local"
-                                value={fn.getDateFormat(Static.forms.startDate, "time")}
-                                // valueAsDate={new Date()}
-                                oninput={function () {
-                                    Static.forms.startDate = this.value
-                                    // console.log('=91916f=', fn.getDateFormat(Static.forms.startDate, "time"))
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Дата окончания</label>
-                            <input
-                                type="datetime-local"
-                                value={fn.getDateFormat(Static.forms.endDate, "time")}
-                                oninput={function () {
-                                    Static.forms.endDate = this.value
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Цель в $</label>
-                            <input
-                                placeholder="Цель в $"
-                                type="number"
-                                value={Static.forms.targetMoney}
-                                oninput={function () {
-                                    Static.forms.targetMoney = this.value
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Собрано в $</label>
-                            <input
-                                placeholder="Собрано в $"
-                                type="number"
-                                value={Static.forms.nowMoney}
-                                oninput={function () {
-                                    Static.forms.nowMoney = this.value
-                                }}
-                            />
-                        </div>
-
-                        <div>
                             <label>Web сайт</label>
                             <input
                                 placeholder="Web сайт"
@@ -510,158 +370,31 @@ const start = function (data, ID) {
                         </div>
 
                         <div>
-                            <label>Имя </label>
-                            <input
-                                placeholder="Имя"
-                                type="text"
-                                value={Static.forms.name}
-                                oninput={function () {
-                                    Static.forms.name = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Тип </label>
-                            <input
-                                placeholder="Тип"
-                                type="text"
-                                value={Static.forms.type}
-                                oninput={function () {
-                                    Static.forms.type = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Продажа за</label>
-                            <input
-                                placeholder="Продажа за"
-                                type="text"
-                                value={Static.forms.sellType}
-                                oninput={function () {
-                                    Static.forms.sellType = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Цена</label>
-                            <input
-                                placeholder="Цена в $"
-                                type="number"
-                                value={Static.forms.price}
-                                oninput={function () {
-                                    Static.forms.price = this.value
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Всего выпущено</label>
-                            <input
-                                placeholder="Всего выпущено"
-                                required="required"
-                                type="number"
-                                value={Static.forms.totalSupply}
-                                oninput={function () {
-                                    Static.forms.totalSupply = this.value
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Для продажи</label>
-                            <input
-                                placeholder="Для продажи"
-                                type="number"
-                                value={Static.forms.forSell}
-                                oninput={function () {
-                                    Static.forms.forSell = this.value
-                                }}
-                            />
-                        </div>
-
-
-                        <div>
-                            <label>Цель продать</label>
-                            <input
-                                placeholder="Цель продать"
-                                type="number"
-                                value={Static.forms.targetSell}
-                                oninput={function () {
-                                    Static.forms.targetSell = this.value
-                                }}
-                            />
-                        </div>
-
-
-                        <div>
-                            <label>Краткий обзор</label>
+                            <label>Описание Краткое</label>
                             <textarea
-                                placeholder="Краткий обзор"
-                                rows={5}
-                                textContent={Static.forms.review}
-                                value={Static.forms.review}
+                                placeholder="Описание Краткое"
+                                rows={10}
+                                value={Static.forms.descriptionShort}
+                                textContent={Static.forms.descriptionShort}
                                 oninput={function () {
-                                    Static.forms.review = this.value.trim()
+                                    Static.forms.descriptionShort = this.value.trim()
                                 }}
+                            // hidden={Static.forms.category == "ICO" ? true : false}
                             />
                         </div>
 
-
                         <div>
-                            <label>Галлерея <img class="notes-button__icon" src={svg["clip_notes"]}
-                                onclick={() => {
-                                    Static.elInputImgGallery.click()
+                            <label>Описание</label>
+                            <textarea
+                                placeholder="Описание"
+                                rows={10}
+                                value={Static.forms.description}
+                                textContent={Static.forms.description}
+                                oninput={function () {
+                                    Static.forms.description = this.value.trim()
                                 }}
-                            /></label>
-                            <input
-                                type="file"
-                                hidden
-                                multiple
-                                Element={($el) => { Static.elInputImgGallery = $el }}
-                                onchange={async function (e) {
-                                    e.stopPropagation();
-                                    Static.forms.media = []
-                                    Array.from(this.files).forEach((item) => {
-                                        fn.uploadMedia(
-                                            item,
-                                            "worldPress",
-                                            async function () {
-                                                if (!this.response) {
-                                                    alert("Произошла ошибка Попробуйте еще раз")
-                                                    return
-                                                }
-                                                let response = JSON.parse(this.response);
-                                                let data = {
-                                                    type: response.mimetype,
-                                                    name: response.name
-                                                }
-
-                                                Static.forms.media.push(data)
-                                                initReload()
-                                            }
-                                        )
-                                    })
-                                    initReload()
-                                }}
+                            // hidden={Static.forms.category == "ICO" ? true : false}
                             />
-                            <div class="notes-content-img">
-                                {Static.forms.media.map((item => {
-
-                                    return (
-                                        <div class="notes-img-wrapper">
-                                            <img
-                                                class="notes-img-preview"
-                                                src={`/assets/upload/worldPress/${item.name}`}
-                                                width="100"
-                                                height="100"
-                                            />
-                                        </div>
-                                    )
-                                }))}
-                            </div>
                         </div>
 
                         <div>
@@ -797,16 +530,270 @@ const start = function (data, ID) {
                         </div>
 
 
+
                         <div>
-                            <label>Проверенно</label>
+                            <label>Галлерея <img class="notes-button__icon" src={svg["clip_notes"]}
+                                onclick={() => {
+                                    Static.elInputImgGallery.click()
+                                }}
+                            /></label>
                             <input
-                                type="checkbox"
-                                checked={Static.forms.checked}
-                                oninput={function () {
-                                    Static.forms.checked = !Static.forms.checked
+                                type="file"
+                                hidden
+                                multiple
+                                Element={($el) => { Static.elInputImgGallery = $el }}
+                                onchange={async function (e) {
+                                    e.stopPropagation();
+                                    Static.forms.media = []
+                                    Array.from(this.files).forEach((item) => {
+                                        fn.uploadMedia(
+                                            item,
+                                            "worldPress",
+                                            async function () {
+                                                if (!this.response) {
+                                                    alert("Произошла ошибка Попробуйте еще раз")
+                                                    return
+                                                }
+                                                let response = JSON.parse(this.response);
+                                                let data = {
+                                                    type: response.mimetype,
+                                                    name: response.name
+                                                }
+
+                                                Static.forms.media.push(data)
+                                                initReload()
+                                            }
+                                        )
+                                    })
+                                    initReload()
+                                }}
+                            />
+                            <div class="notes-content-img">
+                                {Static.forms.media.map((item => {
+
+                                    return (
+                                        <div class="notes-img-wrapper">
+                                            <img
+                                                class="notes-img-preview"
+                                                src={`/assets/upload/worldPress/${item.name}`}
+                                                width="100"
+                                                height="100"
+                                            />
+                                        </div>
+                                    )
+                                }))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Страна </label>
+                            <input
+                                placeholder="Выбери страну"
+                                type="text"
+                                readonly
+                                value={Static.forms.country.value}
+                                // value="hhh"
+                                Element={(el) => {
+                                    Static.forms.country.el = el
+                                }}
+                                onclick={() => {
+                                    fn.modals.ModalSelectCountry({
+                                        onclick: async (countryCode, countryName) => {
+                                            Static.forms.country.name = countryName;
+                                            Static.forms.country.code = countryCode;
+                                            Static.forms.country.value = countryName;
+                                            Static.forms.country.el.value = countryName
+                                        }
+                                    }, true)
                                 }}
                             />
                         </div>
+
+                        <div>
+                            <label>Команда <img class="notes-button__icon" src={svg["like_icon"]}
+                                onclick={() => {
+                                    Static.forms.team.push({})
+                                    initReload()
+                                }}
+                            /></label>
+                            {
+                                Static.forms.team.map((item, index) => {
+                                    return (
+                                        <div>
+                                            <div>
+                                                <label>Член {index + 1} ФИО</label>
+                                                <input
+                                                    placeholder={`Член ${index + 1} ФИО`}
+                                                    type="text"
+                                                    value={item.name}
+                                                    oninput={function () {
+                                                        Static.forms.team[index].name = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label>Член {index + 1} Должность</label>
+                                                <input
+                                                    placeholder={`Член ${index + 1} Должность`}
+                                                    type="text"
+                                                    value={item.position}
+                                                    oninput={function () {
+                                                        Static.forms.team[index].position = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <label>Член {index + 1} Фото <img class="notes-button__icon" src={svg["clip_notes"]}
+                                                    onclick={() => {
+                                                        Static.forms.team[index].el.click()
+                                                    }}
+                                                /></label>
+                                                <input
+                                                    type="file"
+                                                    hidden
+                                                    Element={($el) => { Static.forms.team[index].el = $el }}
+                                                    onchange={async function (e) {
+                                                        e.stopPropagation();
+                                                        Array.from(this.files).forEach((item) => {
+                                                            fn.uploadMedia(
+                                                                item,
+                                                                "worldPress",
+                                                                async function () {
+                                                                    if (!this.response) {
+                                                                        alert("Произошла ошибка Попробуйте еще раз")
+                                                                        return
+                                                                    }
+                                                                    let response = JSON.parse(this.response);
+                                                                    Static.forms.team[index].foto = response.name
+                                                                    initReload()
+                                                                }
+                                                            )
+                                                        })
+                                                        initReload()
+                                                    }}
+                                                />
+                                                <div class="notes-content-img">
+                                                    {
+                                                        Static.forms.cover
+                                                            ?
+                                                            <div class="notes-img-wrapper">
+                                                                <img
+                                                                    class="notes-img-preview"
+                                                                    src={`/assets/upload/worldPress/${Static.forms.cover}`}
+                                                                    width="350"
+                                                                    height="100"
+                                                                />
+                                                            </div>
+                                                            :
+                                                            null
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
+
+                        <div>
+                            <label>Кого ищет</label>
+                            <textarea
+                                placeholder="Кого ищет"
+                                rows={10}
+                                value={Static.forms.descriptionMore}
+                                textContent={Static.forms.descriptionMore}
+                                oninput={function () {
+                                    Static.forms.descriptionMore = this.value.trim()
+                                }}
+                            // hidden={Static.forms.category == "ICO" ? true : false}
+                            />
+                        </div>
+
+
+
+
+
+                        <div>
+                            <label>Название</label>
+                            <input
+                                placeholder="Название"
+                                type="text"
+                                value={Static.forms.title}
+                                oninput={function () {
+                                    Static.forms.title = this.value.trim()
+                                }}
+                            />
+                        </div>
+
+
+
+                        <div>
+                            <label>Цель в $</label>
+                            <input
+                                placeholder="Цель в $"
+                                type="number"
+                                value={Static.forms.targetMoney}
+                                oninput={function () {
+                                    Static.forms.targetMoney = this.value
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>Всего выпущено</label>
+                            <input
+                                placeholder="Всего выпущено"
+                                required="required"
+                                type="number"
+                                value={Static.forms.totalSupply}
+                                oninput={function () {
+                                    Static.forms.totalSupply = this.value
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>Для продажи</label>
+                            <input
+                                placeholder="Для продажи"
+                                type="number"
+                                value={Static.forms.forSell}
+                                oninput={function () {
+                                    Static.forms.forSell = this.value
+                                }}
+                            />
+                        </div>
+
+
+                        <div>
+                            <label>Цель продать</label>
+                            <input
+                                placeholder="Цель продать"
+                                type="number"
+                                value={Static.forms.targetSell}
+                                oninput={function () {
+                                    Static.forms.targetSell = this.value
+                                }}
+                            />
+                        </div>
+
+
+                        <div>
+                            <label>Краткий обзор</label>
+                            <textarea
+                                placeholder="Краткий обзор"
+                                rows={5}
+                                textContent={Static.forms.review}
+                                value={Static.forms.review}
+                                oninput={function () {
+                                    Static.forms.review = this.value.trim()
+                                }}
+                            />
+                        </div>
+
 
                         <div
                             class="button-container-preview"

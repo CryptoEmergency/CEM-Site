@@ -13,6 +13,7 @@ export default {
             {
                 "alias": {
                     "@src": "./src",
+                    "@fn": "./src/functions",
                     "@assets": "./src/assets",
                     "@component": "./src/component",
                     "@htmlBlocks": "./src/component/htmlBlocks",

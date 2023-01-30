@@ -33,7 +33,7 @@ const checkForm = async function (Static, ID) {
         return
     }
 
-    if (!Static.forms.cover ?? !Static.forms.linkVideoYoutube) {
+    if (!Static.forms.cover && !Static.forms.linkVideoYoutube) {
         fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери обложку или укажи ссылку на Ютуб!!!" })
         return
     }

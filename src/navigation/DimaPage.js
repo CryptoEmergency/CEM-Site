@@ -10,10 +10,12 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
+import test from "@fn/main/test.js"
 //worldPress
 
 const start = function (data, ID) {
-
+    test()
+    fn.test()
     let [Static] = fn.GetParams({ data, ID })
 
     load({
@@ -27,9 +29,9 @@ const start = function (data, ID) {
             }
 
             return (
-                <div class="c-main__body">
+                <div class="mt--70">
                     <div
-                        class="button-container-preview"
+                        class="button-container-preview mb--10"
                         onclick={() => {
                             fn.siteLink("/DimaPage/records-ico/")
                             // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
@@ -42,7 +44,7 @@ const start = function (data, ID) {
                         </span>
                     </div>
 
-
+                    {/* <div class="mb--2">gdg</div> */}
                     <div
                         class="button-container-preview"
                         onclick={() => {
@@ -56,10 +58,7 @@ const start = function (data, ID) {
                             </span>
                         </span>
                     </div>
-
                 </div>
-
-
             )
         }
     })
