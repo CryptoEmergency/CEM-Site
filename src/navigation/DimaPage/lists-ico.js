@@ -301,7 +301,19 @@ const start = function (data, ID) {
                                 onclick={() => {
                                     Static.elInputImg.click()
                                 }}
-                            /></label>
+                            />
+                                {
+                                    Static.forms.icon
+                                        ?
+                                        <img src={svg["delete_notes"]}
+                                            onclick={() => {
+                                                Static.forms.icon = null
+                                                initReload()
+                                            }} />
+                                        :
+                                        null
+                                }
+                            </label>
                             <input
                                 type="file"
                                 hidden
@@ -376,7 +388,19 @@ const start = function (data, ID) {
                                 onclick={() => {
                                     Static.elInputImgCover.click()
                                 }}
-                            /></label>
+                            />
+                                {
+                                    Static.forms.cover
+                                        ?
+                                        <img src={svg["delete_notes"]}
+                                            onclick={() => {
+                                                Static.forms.cover = null
+                                                initReload()
+                                            }} />
+                                        :
+                                        null
+                                }
+                            </label>
                             <input
                                 type="file"
                                 hidden
@@ -610,7 +634,19 @@ const start = function (data, ID) {
                                 onclick={() => {
                                     Static.elInputImgGallery.click()
                                 }}
-                            /></label>
+                            />
+                                {
+                                    Static.forms.media && Static.forms.media.length
+                                        ?
+                                        <img src={svg["delete_notes"]}
+                                            onclick={() => {
+                                                Static.forms.media = []
+                                                initReload()
+                                            }} />
+                                        :
+                                        null
+                                }
+                            </label>
                             <input
                                 type="file"
                                 hidden
