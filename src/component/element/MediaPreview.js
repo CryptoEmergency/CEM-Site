@@ -71,57 +71,83 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   title={Variable.lang.text.settings}
                   onclick={(e) => {
                     let author = Variable.myInfo
-                    let items = [
-                      {
-                        text: Variable.lang.button.edit,
-                        type: "edit",
-                        onclick: function (e) {
-                          e.stopPropagation();
-                          e.preventDefault();
-
-                          fn.modals.ModalCropImage({
-                            editable: true,
-                            originalImage: item.originalImage,
-                            file: {},
-                            typeUpload: 'posts',
-                            arrMedia: Static.mediaInputs.value,
-                            aspectSelect: Static.mediaInputs.selectAspect,
-                            // aspectSelect: Static.mediaInputs.value[index].aspect,  //null,
-                            uploadCropImage: async function (cropper, aspectActive) {
-                              Static.mediaInputs.selectAspect = aspectActive
-                              await sendPhotoChat(cropper, index)
-                              return;
+                    let items
+                    if (!item.originalImage) {
+                      items = [
+                        {
+                          text: Variable.lang.select.delete,
+                          type: "delete",
+                          color: "red",
+                          onclick: function (e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            Static.mediaInputs.value.splice(index, 1);
+                            Static.originalImage.splice(index, 1);
+                            if (Static.mediaInputs.value.length == 0) {
+                              Static.mediaInputs.selectAspect = null;
+                              Static.mediaInputs.show = false
+                              if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                                Static.isValid = false;
+                              }
                             }
-                          })
-                        }
-                      },
-                      {
-                        text: Variable.lang.select.delete,
-                        type: "delete",
-                        color: "red",
-                        onclick: function (e) {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          Static.mediaInputs.value.splice(index, 1);
-                          Static.originalImage.splice(index, 1);
-                          if (Static.mediaInputs.value.length == 0) {
-                            Static.mediaInputs.selectAspect = null;
-                            Static.mediaInputs.show = false
-                            if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
-                              Static.isValid = false;
-                            }
+                            initReload();
                           }
-                          initReload();
-                        }
-                      },
-                    ]
+                        },
+                      ]
+                    } else {
+                      items = [
+                        {
+                          text: Variable.lang.button.edit,
+                          type: "edit",
+                          onclick: function (e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+
+                            fn.modals.ModalCropImage({
+                              editable: true,
+                              originalImage: item.originalImage,
+                              file: {},
+                              typeUpload: 'posts',
+                              arrMedia: Static.mediaInputs.value,
+                              aspectSelect: Static.mediaInputs.selectAspect,
+                              // aspectSelect: Static.mediaInputs.value[index].aspect,  //null,
+                              uploadCropImage: async function (cropper, aspectActive) {
+                                Static.mediaInputs.selectAspect = aspectActive
+                                await sendPhotoChat(cropper, index)
+                                return;
+                              }
+                            })
+                          }
+                        },
+                        {
+                          text: Variable.lang.select.delete,
+                          type: "delete",
+                          color: "red",
+                          onclick: function (e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            Static.mediaInputs.value.splice(index, 1);
+                            Static.originalImage.splice(index, 1);
+                            if (Static.mediaInputs.value.length == 0) {
+                              Static.mediaInputs.selectAspect = null;
+                              Static.mediaInputs.show = false
+                              if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                                Static.isValid = false;
+                              }
+                            }
+                            initReload();
+                          }
+                        },
+                      ]
+                    }
+
                     e.stopPropagation();
                     e.preventDefault();
                     Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
                   }
                   }
                 >
-                  <img class="" src={svg.settings_icon} width="20" height="20" />
+                  <img class="" src={svg.settings_icon} width="32" height="32" />
                 </div>
                 : null
             }
@@ -239,17 +265,15 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                               },
                               uploadPreviewImage: function (preview) {
                                 Static.mediaInputs.value[index].previewName = preview.name
-                                // console.log('=eb4081 Static=', Static)
                               }
                             }, true)
                             :
                             fn.modals.ModalPreviewVideo({
                               uploadPreviewImage: function (preview) {
                                 Static.mediaInputs.value[index].previewName = preview.name
-                                // console.log('=eb4081 Static=', Static)
                               }
                             }, true)
-                          console.log('=eb4081 Static=', Static)
+                          // console.log('=eb4081 Static=', Static)
                         }
                       },
                       {
@@ -278,7 +302,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   }
                   }
                 >
-                  <img class="" src={svg.settings_icon} width="20" height="20" />
+                  <img class="" src={svg.settings_icon} width="32" height="32" />
                 </div>
                 // <div
                 //   class="delete_post_media"

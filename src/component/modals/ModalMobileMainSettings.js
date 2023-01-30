@@ -152,15 +152,24 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg["settings_menu"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
                                                 </a>
-                                                <a class="user_icon_mobile_visible user_icon" href="#" onclick={
-                                                    function () {
-
-                                                        fn.restApi.logOut()
-                                                        Variable.Modals = []
-                                                        Variable.Rooms = false
-                                                    }
-
-                                                }>
+                                                <a
+                                                    class="user_icon_mobile_visible user_icon"
+                                                    href="#"
+                                                    onclick={(e) => {
+                                                        e.preventDefault();
+                                                        e.stopPropagation();
+                                                        fn.modals.ModalConfirmAction({
+                                                            action: async () => {
+                                                                fn.restApi.logOut()
+                                                                Variable.Modals = []
+                                                                Variable.Rooms = false
+                                                                fn.modals.close("ModalConfirmAction")
+                                                            },
+                                                            text: Variable.lang.p.exitConfirm,
+                                                            button: Variable.lang.button.yes
+                                                        })
+                                                    }}
+                                                >
                                                     <img src={svg["exit-icon"]} /> <span class="mobile_user_menu_link">{Variable.lang.a.exit}</span>
                                                 </a>
                                             </div>

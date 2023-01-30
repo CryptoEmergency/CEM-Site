@@ -15,6 +15,8 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
+
+//$text: { $search: Static.quest.value }
 let tmp = 0
 const start = function (data, ID) {
 
@@ -25,7 +27,8 @@ const start = function (data, ID) {
       //   await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
 
 
-      const tmp = await fn.restApi.getIco({ filter: {} })
+      // const tmp = await fn.restApi.getIco({ filter: { startDate: { $gte: new Date() } } })
+      const tmp = await fn.restApi.getStartaps({ filter: {} })
       console.log('=e5bcc8=', tmp)
       return
 

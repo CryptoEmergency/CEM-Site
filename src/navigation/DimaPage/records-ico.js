@@ -12,28 +12,6 @@ import images from "@assets/images/index.js";
 
 
 
-const showListIco = function (listIcoStartaps) {
-    return listIcoStartaps.map((item) => {
-        return (
-            <div class="ico-list_item">
-                <img class="item-img" src={item.iconScr}></img>
-                <div class="item-info">
-                    <h5 class="item-title">{item.title}</h5>
-                    <p class="item-desc">{item.description}</p>
-                    <div>
-                        <p class="item-sum">
-                            <span class="item-sum_obj">${item.objective}</span> / ${item.have} <span class="item-sum_procent">{item.procentDone}%</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="item-date">
-                    <span>{item.timeStart}</span>
-                    <span>{item.timeEnd}</span>
-                </div>
-            </div>
-        )
-    })
-}
 
 const start = function (data, ID) {
 
@@ -73,7 +51,7 @@ const start = function (data, ID) {
                                         onclick={() => {
                                             fn.siteLinkModal("/DimaPage/lists-ico/", { title: "Редактировать ICO", item })
                                         }}>
-                                        <img class="item-img" src={`/assets/upload/worldPress/${item.icon}`}></img>
+                                        <img class="item-img" width="100" height="100" src={`/assets/upload/worldPress/${item.icon}`}></img>
                                         <div class="item-info">
                                             <h5 class="item-title">{item.title}</h5>
                                             <p class="item-desc">{item.description}</p>

@@ -53,8 +53,8 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                     }
                     Static.preview = mediaInputs.value[numItem]
                     Static.isValid = true
-                    console.log('=debd71=Static.preview=', Static.preview)
-                    console.log('=debd71= mediaInputs.value =', mediaInputs.value)
+                    // console.log('=debd71=Static.preview=', Static.preview)
+                    // console.log('=debd71= mediaInputs.value =', mediaInputs.value)
                     initReload()
                 },
                 async function (e) {
@@ -107,8 +107,8 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                 Static.preview = null
             }
             Static.elSelectedPreview = []
-            console.log('=0bd58b= Static modal', Static, uploadPreviewImage)
-            console.log('=cd84a1= mediaInputs ', mediaInputs)
+            // console.log('=0bd58b= Static modal', Static, uploadPreviewImage)
+            // console.log('=cd84a1= mediaInputs ', mediaInputs)
         },
         () => {
             return (
@@ -184,6 +184,45 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                                                 >
                                                     <figure class="c-tiles__card">
                                                         <img class="c-tiles__image" src={`/assets/upload/posts/${imgFile.previewName ? imgFile.previewName : imgFile.name}`} width="100" height="100" />
+                                                        {
+                                                            imgFile.size === undefined
+                                                                ?
+                                                                <div
+                                                                    class="messages_settings"
+                                                                    title={Variable.lang.text.settings}
+                                                                    onclick={(e) => {
+                                                                        let author = Variable.myInfo
+                                                                        let items = [
+                                                                            {
+                                                                                text: Variable.lang.select.delete,
+                                                                                type: "delete",
+                                                                                color: "red",
+                                                                                onclick: function (e) {
+                                                                                    e.stopPropagation();
+                                                                                    e.preventDefault();
+                                                                                    mediaInputs.value.splice(index, 1);
+                                                                                    // Static.originalImage.splice(index, 1);
+                                                                                    if (mediaInputs.value.length == 0) {
+                                                                                        //     Static.mediaInputs.selectAspect = null;
+                                                                                        mediaInputs.show = false
+                                                                                        //     if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                                                                                        Static.isValid = false;
+                                                                                        Static.preview.name = null
+                                                                                    }
+                                                                                    // }
+                                                                                    initReload();
+                                                                                }
+                                                                            },
+                                                                        ]
+                                                                        e.stopPropagation();
+                                                                        e.preventDefault();
+                                                                        Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
+                                                                    }}
+                                                                >
+                                                                    <img class="" src={svg.settings_icon} width="32" height="32" />
+                                                                </div>
+                                                                : null
+                                                        }
                                                     </figure>
                                                 </div>
                                             )
@@ -193,20 +232,36 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                             </div>
                         </div>
                         <footer class="c-modal__footer">
-                            <button
-                                class={[
-                                    "c-button c-button--gradient2",
-                                    !Static.isValid ? "c-button--inactive" : "",
-                                ]}
-                                type="button"
-                                onClick={(e) => {
-                                    console.log('=988fb7= Static.preview =', Static.preview)
-                                    uploadPreviewImage(Static.preview)
-                                    fn.modals.close(ID)
-                                }}
-                            >
-                                <span class="c-button__text">{Variable.lang.button.attach}</span>
-                            </button>
+                            {
+                                Static.isValid && Static.preview ?
+                                    <button
+                                        class={[
+                                            "c-button c-button--gradient2",
+                                            !Static.isValid ? "c-button--inactive" : "",
+                                        ]}
+                                        type="button"
+                                        onClick={(e) => {
+                                            uploadPreviewImage(Static.preview)
+                                            fn.modals.close(ID)
+                                        }}
+                                    >
+                                        <span class="c-button__text">{Variable.lang.button.attach}</span>
+                                    </button>
+                                    :
+                                    <button
+                                        class={[
+                                            "c-button c-button--gradient2",
+                                            Static.isValid ? "c-button--inactive" : "",
+                                        ]}
+                                        type="button"
+                                        onClick={(e) => {
+                                            uploadPreviewImage({ name: null })
+                                            fn.modals.close(ID)
+                                        }}
+                                    >
+                                        <span class="c-button__text">{Variable.lang.button.close}</span>
+                                    </button>
+                            }
                         </footer>
                     </section>
                 </div>

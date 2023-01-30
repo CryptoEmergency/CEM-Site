@@ -11,6 +11,7 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
+import { BlockUserRoomsChat } from '@component/blocks/index.js';;
 
 
 
@@ -717,7 +718,7 @@ async function SearchRooms(Static) {
         let request
 
         if (Static.Category.value == "all") {
-          request = { name: "UsersRooms", filter: { $text: { $search: value }, system: false }, limit: 10 }
+          request = { name: "UsersRooms", filter: { $text: { arch: value }, system: false }, limit: 10 }
         }
         else {
           request = { name: "UsersRooms", filter: { $text: { $search: value }, "settingsroom.category": Static.Category.value, system: false }, limit: 10 }
@@ -1093,12 +1094,13 @@ const BlockUserRooms = async function ({ Static }) {
         >{Static.lang.name}</div>
       </aside>}
 
+      <BlockUserRoomsChat Static={Static} />
       {////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////                   версия для компа / мобилы                                             ////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       }
 
-      {
+      {/* {
         !Static.mobile ?
           <div class="c-rooms__chats">
             <div class="block2" onmousedown={function (e) {
@@ -1341,7 +1343,7 @@ const BlockUserRooms = async function ({ Static }) {
             </div>
           </div>
 
-      }
+      } */}
 
 
 

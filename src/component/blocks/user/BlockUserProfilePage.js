@@ -936,7 +936,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.youtube.com/c/"
                             data-social="youtube"
-                            class="create_social_icon youtube"
+                            class={[
+                                "create_social_icon",
+                                "youtube",
+                                Static.channelNewSocial == "youtube" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -946,7 +950,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.facebook.com/"
                             data-social="facebook"
-                            class="create_social_icon facebook"
+                            class={[
+                                "create_social_icon",
+                                "facebook",
+                                Static.channelNewSocial == "facebook" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -956,7 +964,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.twitter.com/"
                             data-social="twitter"
-                            class="create_social_icon twitter"
+                            class={[
+                                "create_social_icon",
+                                "twitter",
+                                Static.channelNewSocial == "twitter" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -966,7 +978,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.discord.com/invite/"
                             data-social="discord"
-                            class="create_social_icon discord"
+                            class={[
+                                "create_social_icon",
+                                "discord",
+                                Static.channelNewSocial == "discord" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -976,7 +992,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.instagram.com/"
                             data-social="instagram"
-                            class="create_social_icon instagram"
+                            class={[
+                                "create_social_icon",
+                                "instagram",
+                                Static.channelNewSocial == "instagram" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -986,7 +1006,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.tiktok.com/@"
                             data-social="tiktok"
-                            class="create_social_icon tiktok"
+                            class={[
+                                "create_social_icon",
+                                "tiktok",
+                                Static.channelNewSocial == "tiktok" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -996,7 +1020,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.twitch.tv/"
                             data-social="twitch"
-                            class="create_social_icon twitch"
+                            class={[
+                                "create_social_icon",
+                                "twitch",
+                                Static.channelNewSocial == "twitch" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -1006,7 +1034,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.vk.com/"
                             data-social="vk"
-                            class="create_social_icon vk"
+                            class={[
+                                "create_social_icon",
+                                "vk",
+                                Static.channelNewSocial == "vk" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -1016,7 +1048,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://www.t.me/"
                             data-social="telegram"
-                            class="create_social_icon telegram"
+                            class={[
+                                "create_social_icon",
+                                "telegram",
+                                Static.channelNewSocial == "telegram" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -1026,7 +1062,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="http://ru.linkedin.com/in/"
                             data-social="linkedin"
-                            class="create_social_icon linkedin"
+                            class={[
+                                "create_social_icon",
+                                "linkedin",
+                                Static.channelNewSocial == "linkedin" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -1036,7 +1076,11 @@ BlockUserProfilePage.social = function (Static, data) {
                         <div
                             data-link="https://github.com/"
                             data-social="github"
-                            class="create_social_icon github"
+                            class={[
+                                "create_social_icon",
+                                "github",
+                                Static.channelNewSocial == "github" ? "create_social_icon_active" : null
+                            ]}
                             onclick={(e) => { e.preventDefault(); Static.channelNewSocial = e.currentTarget.dataset.social; Static.linkNewSocial = e.currentTarget.dataset.link; initReload(); }}
                         >
                             <div class="create_social_icon_inner">
@@ -1045,6 +1089,9 @@ BlockUserProfilePage.social = function (Static, data) {
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="create_social_inputs">
                     <input
                         data-keyup="deleteBorder"
@@ -1178,7 +1225,7 @@ BlockUserProfilePage.social = function (Static, data) {
                                             Static.elShowMenu.forEach((item, i) => {
                                                 Static.elShowMenu[i].style = ""
                                             })
-                                            Static.elShowMenu[index].style = "display: block"
+                                            Static.elShowMenu[index].style = Static.elShowMenu[index].style.display == "" ? "display: block" : ""
                                         }}
                                     />
                                     <div
@@ -1443,7 +1490,7 @@ BlockUserProfilePage.galary = function (Static, data) {
                                                 item.type && item.type.includes('image/') ?
                                                     <img class="c-tiles__image" src={`/assets/upload/gallery/${item.name}`} width="100" height="100" />
                                                     : item.type && item.type.includes('video/') ?
-                                                        <VideoPlayer Static={Static} item={item} path={`/assets/upload/gallery/`} />
+                                                        <VideoPlayer Static={Static} item={item} path={`/assets/upload/gallery/`} customClick={(e) => console.log('customClick')} />
                                                         : null
                                             }
 
