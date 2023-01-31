@@ -14,6 +14,11 @@ import images from "@assets/images/index.js";
 //
 const checkForm = async function (Static, ID) {
 
+    if (!Static.forms.category) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери категорию!!!" })
+        return
+    }
+
     if (!Static.forms.icon) {
         fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери иконку!!!" })
         return
@@ -37,6 +42,7 @@ const checkForm = async function (Static, ID) {
 
     let data = {
         value: {
+            category: Static.forms.category,
             icon: Static.forms.icon,
             cover: Static.forms.cover,
             coverVideo: Static.forms.coverVideo,
@@ -133,6 +139,7 @@ const start = function (data, ID) {
         fnLoad: () => {
             if (!Static.item) {
                 Static.forms = {}
+                Static.forms.category = null
                 Static.forms.icon = null
                 Static.forms.cover = null
                 Static.forms.coverVideo = null
@@ -215,6 +222,46 @@ const start = function (data, ID) {
 
                     <div class="contacts_form">
 
+
+                        <div>
+                            <div class={["tag_button", Static.forms.category == "Blockchain" ? "tag_button_active" : null]}
+                                onclick={() => {
+                                    Static.forms.category = "Blockchain"
+                                    initReload()
+                                }}>
+                                <span>Blockchain</span>
+                            </div>
+                            <div class={["tag_button", Static.forms.category == "NFT" ? "tag_button_active" : null]} onclick={() => {
+                                Static.forms.category = "NFT"
+                                initReload()
+                            }}>
+                                <span>NFT</span>
+                            </div>
+                            <div class={["tag_button", Static.forms.category == "Web3" ? "tag_button_active" : null]} onclick={() => {
+                                Static.forms.category = "Web3"
+                                initReload()
+                            }}>
+                                <span>Web3</span>
+                            </div>
+                            <div class={["tag_button", Static.forms.category == "Games" ? "tag_button_active" : null]} onclick={() => {
+                                Static.forms.category = "Games"
+                                initReload()
+                            }}>
+                                <span>Games</span>
+                            </div>
+                            <div class={["tag_button", Static.forms.category == "DeFi" ? "tag_button_active" : null]} onclick={() => {
+                                Static.forms.category = "DeFi"
+                                initReload()
+                            }}>
+                                <span>DeFi</span>
+                            </div>
+                            <div class={["tag_button", Static.forms.category == "IT" ? "tag_button_active" : null]} onclick={() => {
+                                Static.forms.category = "IT"
+                                initReload()
+                            }}>
+                                <span>IT</span>
+                            </div>
+                        </div>
                         <div>
                             <label>Иконка <img class="notes-button__icon" src={svg["clip_notes"]}
                                 onclick={() => {

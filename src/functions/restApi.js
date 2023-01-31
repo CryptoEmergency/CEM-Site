@@ -1302,6 +1302,7 @@ restApi.getStartaps = async function ({ cache, name, limit = 6, offset = 0, filt
 
     let defaultSelect = {
         icon: 1,
+        category: 1,
         cover: 1,
         coverVideo: 1,
         siteLink: 1,
