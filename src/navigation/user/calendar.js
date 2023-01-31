@@ -2,6 +2,7 @@ import {
     jsx,
     jsxFrag,
     load,
+    Helpers,
     initReload,
     Variable
 } from "@betarost/cemserver/cem.js";
@@ -17,44 +18,27 @@ const listColors = [
     "linear-gradient(125.97deg, #9B51E0 -0.04%, #E051D2 121.46%)"
 ];
 
-const listDate = [
-    {
-        _id: 1,
-        date: 1,
-        title: '32',
-        createdDate: new Date().toLocaleDateString(),
-        completed: '',
-        notifyDate: new Date().toISOString()
-    },
-    {
-        _id: 2,
-        date: 2,
-        title: '',
-        createdDate: new Date().toLocaleDateString(),
-        completed: '',
-        notifyDate: new Date().toISOString()
-    },
-    {
-        _id: 3,
-        date: 3,
-        title: '',
-        createdDate: new Date().toLocaleDateString(),
-        completed: '',
-        notifyDate: new Date().toISOString()
-    },
-    {
-        _id: 4,
-        date: 4 ,
-        title: '',
-        createdDate: new Date().toLocaleDateString(),
-        completed: '',
-        notifyDate: new Date().toISOString()
-    },
-    ...Array(38)
-];
+Helpers.moment.updateLocale("en", {week: {dow: 1}});
+const month = Helpers.moment().startOf("month");
+const startDay = Helpers.moment().startOf("month").startOf("week");
+const day = startDay.clone().subtract(1, "day");
+const isCurrentDay = (day) => Helpers.moment().isSame(day, "day");
+
+const prevHandler = () => Helpers.moment().subtract(1, "month");
+console.log(Helpers.moment().subtract(1, "month"))
+
+const listDate = [...Array(42)].map(() => day.add(1, "day").clone());
+
+// {
+    //     _id: 1,
+    //     date: 1,
+    //     title: '32',
+    //     createdDate: new Date().toLocaleDateString(),
+    //     completed: '',
+    //     notifyDate: new Date().toISOString()
+    // },
 
 const listNames = {
-    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu' , 'Fri', 'Sun', 'Sat']
 }
 
@@ -108,7 +92,7 @@ const addForm = function (Static) {
                             class="c-modal__close"
                             onclick={() => {
                                 Static.modal = false
-                                initReload();
+                                initReload()
                             }}
                             ></button>
                         </header>
@@ -152,6 +136,16 @@ const addForm = function (Static) {
     }
 }
 
+
+
+// const endDay = Helpers.moment().endOf('month').endOf('week');
+// const calendar = [];
+
+// while (!day.isAfter(endDay)) {
+//     calendar.push(day.clone())
+//     day.add(1, 'day')
+// }
+
 const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
@@ -170,14 +164,25 @@ const start = function (data, ID) {
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
                         <div class="calendar-title">
-                            <h2>{listNames.monthNames[new Date().getMonth()]} <span>2023</span></h2>
+                            <h2>{month.format("MMMM")}
+                                <span> {month.format("YYYY")}</span>
+                            </h2>
                             <div class="calendar-subtitle">
-                                <button>
-                                    <img src={svg["calendar-arrow"]} />
+                                <button
+                                    onClick={() => {
+                                        prevHandler()
+                                        initReload()
+                                    }}
+                                >
+                                    <img src={svg["calendar-arrow"]}/>
                                 </button>
-                                    <h3>{listNames.monthNames[new Date().getMonth()]} 2023</h3>
-                                <button>
-                                    <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]} />
+                                    <h3>{month.format("MMMM YYYY")}</h3>
+                                <button
+                                    onClick={() => {
+                                        console.log("next")
+                                    }}
+                                >
+                                    <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]}/>
                                 </button>
                             </div>
                         </div>
@@ -193,7 +198,7 @@ const start = function (data, ID) {
                                 return (
                                     <div
                                         class="calendar-cell"
-                                        id={index + 1}
+                                        // id={index + 1}
                                         onclick={() => {
                                             // Static.tmpTest.splice(index, 1, addNote(index + 1))
                                             Static.active = item
@@ -204,20 +209,20 @@ const start = function (data, ID) {
                                     >
                                         <span 
                                             class={["calendar-day",
-                                            item && Static.active && Static.active._id == item._id ? "calendar-day_active" : null
+                                            isCurrentDay(item) ? "calendar-day_active" : null
                                             ]}
                                             onDblClick={() => {
                                                 Static.modal = true
                                                 initReload()
                                             }}
-                                            style={[item && item.title != "" ? "color: #ffffff" : null]}
+                                            // style={[item && item.title != "" ? "color: #ffffff" : null]}
                                         >
-                                            {index + 1}</span>
+                                            {item.format('D')}</span>
                                         <div>
                                             <div class={["calendar-notes", 
                                                 item && item.title != "" ? "calendar-notes--show" : null
                                             ]}
-                                            style={[item && item.title != "" ? `background: ${randomColor(listColors)}` : null]}
+                                            // style={[item && item.title != "" ? `background: ${randomColor(listColors)}` : null]}
                                             >
                                                 <p>
                                                     {!item

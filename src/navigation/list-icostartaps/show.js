@@ -7,8 +7,22 @@ import {
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
 
+const showDate = function(start, end){
+  let currentDate = new Date()
+  console.log('=4abdb2=', currentDate)
+  console.log('=906862=',start)
+  let statusDate = ""
+  if(currentDate >= start &&  currentDate <= end){
+    statusDate = "active"
+  } else if(currentDate <= start){
+    statusDate = "upcoming"
+  } else if(currentDate >= end){
+    statusDate = "ended"
+  }
+  console.log('=56c485=',statusDate)
+  return statusDate
+}
 
 const start = function (data, ID) {
 
@@ -55,9 +69,7 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="card-info">
-                  <span class="card-info_status">
-
-                    is ended</span>
+                  <span class="card-info_status">{showDate(Static.item.startDate, Static.item.startDate)}</span>
                   <div class="card-info_summ">
                     <span class="info-summ_obj">${Static.item.nowMoney && Static.item.nowMoney > 0 ? Static.item.nowMoney : 0}</span>
                     <span class="info-summ_done">of</span>
@@ -113,7 +125,7 @@ const start = function (data, ID) {
 
             </div>
 
-            {/* <div class="ico-media">
+            <div class="ico-media">
               <h4>Screenshots</h4>
               {
                 Static.item.media.length
@@ -123,7 +135,7 @@ const start = function (data, ID) {
                       Static.item.media.map((item) => {
                         return (
                           <div>
-                            <img src={item.name}></img>
+                            <img src={`/assets/upload/worldPress/${item.name}`}></img>
                           </div>
                         )
                       })
@@ -132,7 +144,8 @@ const start = function (data, ID) {
                   :
                   null
               }
-            </div> */}
+            </div>
+            
           </div>
         </div>
       )

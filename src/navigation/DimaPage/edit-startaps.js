@@ -126,7 +126,7 @@ const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
 
-    // console.log('=dc5388=', Static)
+    // console.log('=dc5388=', data)
 
     load({
         ID,
@@ -159,19 +159,20 @@ const start = function (data, ID) {
                 Static.forms.roadMap = []
                 Static.forms.totalSupply = null
                 Static.forms.limited = true
-                Static.forms.tokenomica = {
-                    team: 0,
-                    marketing: 0,
-                    staking: 0,
-                    preSale: 0,
-                    airDrops: 0,
-                    publickSale: 0,
-                    reserveCompany: 0,
-                    charity: 0,
-                    investors: 0,
-                    baunty: 0,
-                    ico: 0
-                }
+                Static.forms.tokenomica = []
+                // Static.forms.tokenomica = {
+                //     team: 0,
+                //     marketing: 0,
+                //     staking: 0,
+                //     preSale: 0,
+                //     airDrops: 0,
+                //     publickSale: 0,
+                //     reserveCompany: 0,
+                //     charity: 0,
+                //     investors: 0,
+                //     baunty: 0,
+                //     ico: 0
+                // }
                 Static.forms.descriptionMore = null
 
             } else {
@@ -190,7 +191,10 @@ const start = function (data, ID) {
                     github: {},
                     linkedin: {},
                 }
-                Static.forms.country = {}
+                if (!Static.forms.country) {
+                    Static.forms.country = {}
+                }
+
                 if (Static.item.social && Static.item.social.length) {
                     for (let tmp of Static.item.social) {
                         Static.forms.social[tmp.channel].url = tmp.url
@@ -579,7 +583,7 @@ const start = function (data, ID) {
                                 placeholder="Выбери страну"
                                 type="text"
                                 readonly
-                                value={Static.forms.country.value}
+                                value={Static.forms.country.eng_name}
                                 // value="hhh"
                                 Element={(el) => {
                                     Static.forms.country.el = el
@@ -590,6 +594,8 @@ const start = function (data, ID) {
                                             Static.forms.country.name = countryName;
                                             Static.forms.country.code = countryCode;
                                             Static.forms.country.value = countryName;
+                                            Static.forms.country.eng_name = countryName;
+
                                             Static.forms.country.el.value = countryName
                                         }
                                     }, true)
@@ -777,9 +783,46 @@ const start = function (data, ID) {
                                 }}
                             />
                         </div>
+                        <div class="mb--20">
+                            <label>Токеномика <img class="notes-button__icon" src={svg["like_icon"]}
+                                onclick={() => {
+                                    Static.forms.tokenomica.push({})
+                                    initReload()
+                                }}
+                            /></label>
+                            {
+                                Static.forms.tokenomica.map((item, index) => {
+                                    return (
+                                        <div>
+                                            <div>
+                                                <label>Название</label>
+                                                <input
+                                                    placeholder={`Название`}
+                                                    type="text"
+                                                    value={item.name}
+                                                    oninput={function () {
+                                                        Static.forms.tokenomica[index].name = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label>Значение %</label>
+                                                <input
+                                                    placeholder={`Значение %`}
+                                                    type="text"
+                                                    value={item.value}
+                                                    oninput={function () {
+                                                        Static.forms.tokenomica[index].value = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
 
-
-                        <div>
+                        {/* <div>
                             <label>На команду %</label>
                             <input
                                 placeholder="На команду %"
@@ -920,7 +963,7 @@ const start = function (data, ID) {
                                     Static.forms.tokenomica.ico = this.value
                                 }}
                             />
-                        </div>
+                        </div> */}
 
                         <div
                             class="button-container-preview"
