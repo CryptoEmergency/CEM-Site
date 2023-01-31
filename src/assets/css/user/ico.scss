@@ -363,9 +363,10 @@ $icon: #353a46;
     .main-info_desc {
       font-size: 18px;
       line-height: 22px;
+
       @media(max-width: 767px) {
         font-size: 16px;
-        
+
       }
     }
   }
@@ -559,7 +560,11 @@ $icon: #353a46;
       height: auto;
     }
 
-    @media(max-width: 464px) {}
+    @media(max-width: 464px) {
+      >p {
+        font-size: 14px;
+      }
+    }
   }
 
   .details_bold {
@@ -573,6 +578,10 @@ $icon: #353a46;
 // gallery
 .ico-media {
   padding-bottom: 50px;
+
+  @media(max-width: 767px) {
+    padding-bottom: 0;
+  }
 }
 
 .ico-media>h4 {
@@ -583,6 +592,11 @@ $icon: #353a46;
 .media-wrap {
   display: flex;
   flex-wrap: wrap;
+  padding-bottom: 20px;
+
+  @media(max-width: 767px) {
+    padding-bottom: 0;
+  }
 
   .media_item {
     flex: 0 0 25%;

@@ -7,10 +7,26 @@ $icon: #393C47;
   box-sizing: border-box;
 }
 
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+.appearience {
+  padding-bottom: 60px;
+}
+
 .startap {
   background: $background;
   padding-top: 35px;
+  // position: relative;
+}
 
+.startap-img {
+  position: absolute;
+  right: 0;
+  z-index: 0;
 }
 
 .startap-inner {
@@ -181,40 +197,69 @@ $icon: #393C47;
 
   // about startap
   .startap-about {
-    position: relative;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    grid-template-rows: auto;
-    grid-gap: 15px;
+    z-index: 1;
+  }
 
-    .startap-about_text {
-      color: #FFFFFF;
+  .startap-about_text {
+    width: 65%;
 
-      .startap-about_text {
-        font-weight: 700;
-        font-size: 52px;
-        line-height: 115%;
-        display: flex;
-        align-items: center;
-
-        >p {
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 28px;
-        }
-
-        .startap-about_list {
-          font-weight: 700;
-          font-size: 18px;
-          line-height: 42px;
-        }
-      }
-    }
-
-    .startap-about_img {
-      position: absolute;
-      right: 0;
-      top: 0;
+    >p {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
     }
   }
+
+  .startap-about_title {
+    font-size: 52px;
+    line-height: 115%;
+    font-weight: 700;
+    padding-bottom: 20px;
+  }
+
+  .startap-about_list {
+    padding-left: 20px;
+
+    .startap-about_list-item {
+      color: #A87FFF;
+
+      >span {
+        color: #FFFFFF;
+        line-height: 42px;
+        font-size: 18px;
+        font-weight: 700;
+
+      }
+    }
+  }
+
+  // Road Map
+  .startap-title {
+    font-weight: 700;
+    font-size: 76px;
+    line-height: 115%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 60px;
+  }
+
+  .roadmap-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 20px;
+
+    @media(max-width: 992px) {}
+
+    @media(max-width: 767px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media(max-width: 464px) {}
+
+
+    .roadmap-item {}
+  }
+
 }

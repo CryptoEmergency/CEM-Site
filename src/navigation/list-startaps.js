@@ -44,7 +44,7 @@ const showListStartaps = function (listStartaps) {
     return listStartaps.map((item) => {
         return (
             <div class="ico-list_item"
-               
+
             >
                 <div class="item-img">
                     <img class="item-img_el" src={images["ico/ico1"]}></img>
@@ -70,9 +70,15 @@ const showListStartaps = function (listStartaps) {
 }
 
 const start = function (data, ID) {
+    let [Static] = fn.GetParams({ data, ID })
+
 
     load({
-
+        ID,
+        fnLoad: async () => {
+            Static.recordsIco = await fn.restApi.getStartaps({ filter: {} })
+            console.log('=fbfa89=', Static.recordsIco)
+        },
 
         fn: () => {
             return (
