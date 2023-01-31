@@ -40,7 +40,7 @@ const checkSetAnswer = function (response, noAlert) {
 
 const restApi = {}
 
-restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord, defaultReset }) {
 
     let defaultFilter = {}
     defaultFilter["count." + (Variable.lang.code != "ru" ? "en" : "ru")] = { $gt: 0 }
@@ -55,6 +55,11 @@ restApi.getCategories = async function ({ cache, name, limit = 6, offset = 0, fi
         filter: Object.assign(defaultFilter, filter),
         select,
         sort
+    }
+
+    if (defaultReset) {
+        if (filter) { data.filter = filter }
+        if (select) { data.select = select }
     }
 
     let response = await sendApi.send(data);
@@ -1301,6 +1306,7 @@ restApi.getStartaps = async function ({ cache, name, limit = 6, offset = 0, filt
     }
 
     let defaultSelect = {
+        title: 1,
         icon: 1,
         category: 1,
         cover: 1,
@@ -1316,6 +1322,7 @@ restApi.getStartaps = async function ({ cache, name, limit = 6, offset = 0, filt
         roadMap: 1,
         totalSupply: 1,
         limited: 1,
+        checked: 1,
         tokenomica: 1,
         descriptionMore: 1,
     }
@@ -1323,6 +1330,69 @@ restApi.getStartaps = async function ({ cache, name, limit = 6, offset = 0, filt
 
     let data = {
         action: "getStartaps",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
+restApi.getUniversity = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+
+
+    let defaultFilter = {}
+
+    if (filter._id) {
+        defaultFilter = {}
+    }
+
+    let defaultSelect = {
+        title: 1,
+        category: 1,
+        description: 1,
+        icon: 1,
+        cover: 1,
+        startDate: 1,
+        endDate: 1,
+        targetMoney: 1,
+        nowMoney: 1,
+        siteLink: 1,
+        whitePaperLink: 1,
+        name: 1,
+        type: 1,
+        price: 1,
+        sellType: 1,
+        totalSupply: 1,
+        forSell: 1,
+        targetSell: 1,
+        review: 1,
+        checked: 1,
+        social: 1,
+        media: 1,
+        showDate: 1,
+        coverVideo: 1
+    }
+
+
+    let data = {
+        action: "getUniversity",
         short: true,
         cache,
         name,
@@ -1480,7 +1550,22 @@ restApi.setNews.create = async function (data, noAlert = false) {
 
 restApi.setNews.update = async function (data, noAlert = false) {
     const response = await sendApi.create("setNews", data);
-    console.log('=7c9e07=', response)
+    // console.log('=7c9e07=', response)
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setUniversity = {}
+
+restApi.setUniversity.create = async function (data, noAlert = false) {
+    // console.log('=007873=', data)
+    const response = await sendApi.create("setUniversity", data);
+    // console.log('=29a4cd=', response)
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setUniversity.update = async function (data, noAlert = false) {
+    const response = await sendApi.create("setUniversity", data);
+    // console.log('=7c9e07=', response)
     return checkSetAnswer(response, noAlert)
 }
 

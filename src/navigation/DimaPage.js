@@ -75,7 +75,7 @@ const start = function (data, ID) {
                     <div
                         class="button-container-preview mb--10"
                         onclick={() => {
-                            fn.siteLink("/DimaPage/records-news/")
+                            fn.siteLink("/DimaPage/records-university/")
                         }}
                     >
                         <span class="btn-news-preview">
