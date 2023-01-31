@@ -23,9 +23,19 @@ const month = Helpers.moment().startOf("month");
 const startDay = Helpers.moment().startOf("month").startOf("week");
 const day = startDay.clone().subtract(1, "day");
 const isCurrentDay = (day) => Helpers.moment().isSame(day, "day");
+let isCurrentMonth = (day) => Helpers.moment().isSame(day, "month");
 
-const prevHandler = () => Helpers.moment().subtract(1, "month");
-console.log(Helpers.moment().subtract(1, "month"))
+const monthHandler = (Static, prev = true) => {
+    if (prev) {
+        Static.moment.subtract(1, "month")
+    } else {
+        Static.moment.add(1, "month")
+    }
+    Static.startDay = Static.moment.clone().startOf("month").startOf("week");
+    Static.day = Static.startDay.clone().subtract(1, "day");
+    isCurrentMonth = (item) => Static.moment.isSame(item, "month");
+    Static.tmpTest = [...Array(42)].map(() => Static.day.add(1, "day").clone());
+};
 
 const listDate = [...Array(42)].map(() => day.add(1, "day").clone());
 
@@ -73,7 +83,7 @@ const addNote = (id) => {
     return note
 }
 
-function randomColor(colors){
+const randomColor = (colors) => {
     const randomColor = colors[Math.floor(Math.random()*colors.length)];
     
     return randomColor;
@@ -135,8 +145,26 @@ const addForm = function (Static) {
         null
     }
 }
-
-
+let monthsName = Helpers.moment.months();
+const renderMonth = (Static) => {
+    if (Static.renderMonth == true) {
+        return (
+            <div class="calendar-month">
+                {monthsName.map((item) => {
+                    return (
+                        <div class="calendar-month_cell">
+                            <div class="calendar-month_name">
+                                {item}
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    } else {
+        null
+    }
+}
 
 // const endDay = Helpers.moment().endOf('month').endOf('week');
 // const calendar = [];
@@ -158,8 +186,14 @@ const start = function (data, ID) {
             Static.active = null
             Static.modal = false
             Static.elTitle = null
+            Static.moment = Helpers.moment()
+            Static.startDay = null
+            Static.day = null
+            Static.isCurrentMonth = isCurrentMonth()
+            Static.renderMonth = false
         },
         fn: () => {
+            // console.log(Static.tmpTest)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
@@ -170,21 +204,32 @@ const start = function (data, ID) {
                             <div class="calendar-subtitle">
                                 <button
                                     onClick={() => {
-                                        prevHandler()
+                                        monthHandler(Static)
                                         initReload()
                                     }}
                                 >
                                     <img src={svg["calendar-arrow"]}/>
                                 </button>
-                                    <h3>{month.format("MMMM YYYY")}</h3>
+                                    <h3
+                                        onClick={() => {
+                                            Static.renderMonth = true
+                                            initReload()
+                                        }}
+                                    >
+                                        {Static.moment.format("MMMM YYYY")}
+                                    </h3>
                                 <button
                                     onClick={() => {
-                                        console.log("next")
+                                        monthHandler(Static, false)
+                                        initReload()
                                     }}
                                 >
                                     <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]}/>
                                 </button>
                             </div>
+                        </div>
+                        <div class="calendar-render">
+                            {renderMonth(Static)}
                         </div>
                         <div class="calendar-day-name">
                             {listNames.weekDayNames.map(function (name) {
@@ -194,7 +239,7 @@ const start = function (data, ID) {
                             })}
                         </div>
                         <div class="calendar-container">
-                            {Static.tmpTest.map((item, index) => {
+                            {Static.tmpTest.map((item) => {
                                 return (
                                     <div
                                         class="calendar-cell"
@@ -208,16 +253,17 @@ const start = function (data, ID) {
                                         
                                     >
                                         <span 
-                                            class={["calendar-day",
-                                            isCurrentDay(item) ? "calendar-day_active" : null
-                                            ]}
+                                            class="calendar-day"
                                             onDblClick={() => {
                                                 Static.modal = true
                                                 initReload()
                                             }}
-                                            // style={[item && item.title != "" ? "color: #ffffff" : null]}
+                                            style={[isCurrentMonth(item) ? "color: #ffffff; opacity: 0.7;" : null,
+                                                    isCurrentDay(item) ? "color: red; opacity: 1" : null
+                                            ]}
                                         >
-                                            {item.format('D')}</span>
+                                            {item.format('D')}
+                                        </span>
                                         <div>
                                             <div class={["calendar-notes", 
                                                 item && item.title != "" ? "calendar-notes--show" : null
