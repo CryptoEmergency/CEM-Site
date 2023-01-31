@@ -2,14 +2,15 @@ import {
   jsx,
   jsxFrag,
   load,
-  initReload
+  initReload,
+  Variable
 } from "@betarost/cemserver/cem.js";
 
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
 let filterDropdown, icoDrop, dateDrop = false
-
+let listStatus = {}
 const listCategories = [
   {
     name: "ICO",
@@ -25,17 +26,7 @@ const listCategories = [
   },
 ];
 
-const listStatus = [
-  {
-    name: "Активные",
-  },
-  {
-    name: "Текущие",
-  },
-  {
-    name: "Завершённые",
-  },
-]
+
 
 const showBtn = function (Static) {
   return listCategories.map((item) => {
@@ -114,14 +105,14 @@ const makeFiltersApi = function (Static, onlySearch = false) {
   }
 
   filter.category = Static.filtersSearch.categoryActive
-  if (Static.filtersSearch.textCalendar == "Активные") {
+  if (Static.filtersSearch.textCalendar == Variable.lang.select.active) {
     filter["$and"] = []
     filter["$and"].push({ startDate: { $lte: new Date() } })
     filter["$and"].push({ endDate: { $gte: new Date() } })
-  } else if (Static.filtersSearch.textCalendar == "Текущие") {
+  } else if (Static.filtersSearch.textCalendar == Variable.lang.select.upcoming) {
     filter["$and"] = []
     filter["$and"].push({ startDate: { $gte: new Date() } })
-  } else if (Static.filtersSearch.textCalendar == "Завершённые") {
+  } else if (Static.filtersSearch.textCalendar == Variable.lang.select.ended) {
     filter["$and"] = []
     filter["$and"].push({ endDate: { $lt: new Date() } })
   }
@@ -131,12 +122,24 @@ const makeFiltersApi = function (Static, onlySearch = false) {
 
 const start = function (data, ID) {
 
+  listStatus = [
+    {
+      name: Variable.lang.select.active,
+    },
+    {
+      name: Variable.lang.select.upcoming,
+    },
+    {
+      name: Variable.lang.select.ended,
+    },
+  ]
+
   let [Static] = fn.GetParams({ data, ID })
   Static.timerChange = null
   Static.filtersSearch = {
     textSearch: null,
     categoryActive: "ICO",
-    textCalendar: "Активные",
+    textCalendar: Variable.lang.select.active,
     sortDate: false,
   }
 
@@ -157,7 +160,7 @@ const start = function (data, ID) {
                 <div class="search-wrap">
                   <div class="ico-search">
                     <img src={svg.search_icon} class="ico-search_icon"></img>
-                    <input type="search" class="search" placeholder="Search ico"
+                    <input type="search" class="search" placeholder={Variable.lang.button.search}
                       value={Static.filtersSearch.textSearch}
                       oninput={function () {
                         Static.filtersSearch.textSearch = this.value.trim()
@@ -210,7 +213,7 @@ const start = function (data, ID) {
                     </div>
 
                     <div class="filter-dropdown_date">
-                      <span class="filter-name">Сортировать</span>
+                      <span class="filter-name">{Variable.lang.span.sort}</span>
                       <div class="dropdown">
                         <div
                           class={["dropdown-title", "dropdown-title_date"]}
@@ -218,7 +221,7 @@ const start = function (data, ID) {
                             dateDrop = !dateDrop
                             initReload()
                           }}>
-                          По дате
+                          {Variable.lang.select.byDate}
                           <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
                             <img src={svg["arrow-select"]}></img>
                           </span>
@@ -231,7 +234,7 @@ const start = function (data, ID) {
                             initReload()
                           }}
                         >
-                          <li>По дате</li>
+                          <li>{Variable.lang.select.byDate}</li>
                         </ul>
                       </div>
                       <img

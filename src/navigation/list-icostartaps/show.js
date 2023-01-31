@@ -8,19 +8,20 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
-const showDate = function(start, end){
-  let currentDate = new Date()
-  console.log('=4abdb2=', currentDate)
-  console.log('=906862=',start)
+const showDate = function (start, end) {
+  let currentDate = Math.round(new Date() / 1000)
+  let startDate = Math.round(new Date(start) / 1000)
+  let endDate = Math.round(new Date(end) / 1000)
   let statusDate = ""
-  if(currentDate >= start &&  currentDate <= end){
-    statusDate = "active"
-  } else if(currentDate <= start){
-    statusDate = "upcoming"
-  } else if(currentDate >= end){
-    statusDate = "ended"
+
+  if (currentDate >= startDate && currentDate <= endDate) {
+    statusDate = "Активный"
+  } else if (currentDate <= startDate) {
+    statusDate = "Текущий"
+  } else if (currentDate >= endDate) {
+    statusDate = "Завершённый"
   }
-  console.log('=56c485=',statusDate)
+  console.log('=56c485=', statusDate)
   return statusDate
 }
 
@@ -69,7 +70,8 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="card-info">
-                  <span class="card-info_status">{showDate(Static.item.startDate, Static.item.startDate)}</span>
+                  <span class="card-info_status">{showDate(Static.item.startDate, Static.item.endDate)}</span>
+
                   <div class="card-info_summ">
                     <span class="info-summ_obj">${Static.item.nowMoney && Static.item.nowMoney > 0 ? Static.item.nowMoney : 0}</span>
                     <span class="info-summ_done">of</span>
@@ -112,7 +114,7 @@ const start = function (data, ID) {
             </div>
 
             <div class="ico-details">
-              <h4>Token Sale: {`${fn.getDateFormat(Static.item.startDate, "time")} - ${fn.getDateFormat(Static.item.startDate, "time")}`}</h4>
+              <h4>Token Sale: {`${fn.getDateFormat(Static.item.startDate, "time")} - ${fn.getDateFormat(Static.item.endDate, "time")}`}</h4>
               <div class="ico-details_items">
                 <p>Name: <span class="details_bold">{Static.item.name}</span></p>
                 <p>Token type: <span class="details_bold">{Static.item.type}</span></p>
@@ -134,8 +136,19 @@ const start = function (data, ID) {
                     {
                       Static.item.media.map((item) => {
                         return (
-                          <div>
-                            <img src={`/assets/upload/worldPress/${item.name}`}></img>
+                          <div class="media_item">
+                            <div class="media-img">
+                              <img
+                                src={`/assets/upload/worldPress/${item.name}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  e.preventDefault();
+                                  fn.modals.ModalViewPhoto({
+                                    path: item.name,
+                                  });
+                                }}
+                              ></img>
+                            </div>
                           </div>
                         )
                       })
@@ -145,7 +158,7 @@ const start = function (data, ID) {
                   null
               }
             </div>
-            
+
           </div>
         </div>
       )

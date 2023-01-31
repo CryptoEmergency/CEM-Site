@@ -197,9 +197,7 @@
         "home": "Home",
         "affiliate": "Partner program",
         "addChats": "Add a chat",
-
-        
-		"notes":"My notes"
+        "notes": "My notes"
     },
     "span": {
         "company": "Company",
@@ -519,7 +517,11 @@
         "complainComment": "Report a comment",
         "complainAnswer": "Complain about the response",
         "complainUser": "Report a user",
-        "blackList": "To the blacklist"
+        "blackList": "To the blacklist",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "active": "Active",
+        "upcoming": "Upcoming",
+        "ended": "Ended"
     },
     "toggle": {
         "friends": "Friends",
