@@ -134,7 +134,12 @@ const start = function (data, ID) {
                     </div>
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
-                        {() => {
+                        <div>
+                            <a target="_blank" rel="nofollow nooopener" href="https://blockchain-life.com/asia/en/#tickets-row" style="max-width: 1240px; margin: 10px auto;display: block">
+                                <img style="border-radius: 4px; width: 100%" src={images['banners/BlockchainLifeBig']} />
+                            </a>
+                        </div>
+                        {/* {() => {
                             if (Variable.lang.code == "ru") {
                                 return (
                                     <div>
@@ -144,7 +149,7 @@ const start = function (data, ID) {
                                     </div>
                                 )
                             }
-                        }}
+                        }} */}
 
                         {/* <BlockUserRoomsChat Static={Static.Rooms} /> */}
 
