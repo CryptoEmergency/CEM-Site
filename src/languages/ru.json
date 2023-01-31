@@ -82,7 +82,8 @@
 		"unpin": "Открепить",
 		"preview": "Превью",
 		"attach": "Прикрепить",
-		"close": "Закрыть"
+		"close": "Закрыть",
+		"createRoom": "Создать комнату"
 	},
 	"h": {
 		"success": "Успешно!",
@@ -170,7 +171,9 @@
 		"modal_viewFile": "Файлы",
 		"community": "Сообщества",
 		"offline": "Оффлайн встречи",
-		"modal_previewVideo": "Превью видео"
+		"modal_previewVideo": "Превью видео",
+		"roomCreator": "Комнаты, созданные мной",
+		"roomIAmIn": "Комнаты, в которых состою"
 	},
 	"a": {
 		"about": "О нас",

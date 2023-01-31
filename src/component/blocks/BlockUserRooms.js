@@ -888,6 +888,13 @@ const BlockUserRooms = async function ({ Static }) {
       }
     }, 1000)
 
+    Static.filters = {
+      group: {
+        creator: true,
+        in: true,
+      }
+    }
+
   })
 
   if (!Variable.Rooms) {
@@ -930,15 +937,15 @@ const BlockUserRooms = async function ({ Static }) {
     </li>
   }
 
-
+  console.log('=1910e5= Static Rooms = ', Static)
 
 
 
   return (
 
     <div class="c-rooms c-container">
-      {<aside class="c-chats__aside c-chats__aside--newstyle">
-        <div class="c-chats__list">
+      {/* {<aside class="c-chats__aside c-chats__aside--newstyle">
+      {<div class="c-chats__list">
           <div class="c-chats__checkboxes">
             <div
               class={[
@@ -1026,8 +1033,8 @@ const BlockUserRooms = async function ({ Static }) {
             }
 
           </ul>
-        </div>
-        <div class="c-chats__actions" onclick={() => {
+        </div> */}
+      {/* <div class="c-chats__actions" onclick={() => {
           if (Variable.auth) {
             fn.modals.ModalCreateRoom({
               callback: async (response) => {
@@ -1054,7 +1061,37 @@ const BlockUserRooms = async function ({ Static }) {
             <img src={svg.add_chats} class="c-action__icon" width="30" height="30" alt="" title="" />
             <span class="c-action__title">Создать комнату</span>
           </div>
-        </div>
+        </div> */}
+      <div class="c-rooms__actions">
+        <a
+          href=""
+          class="c-button c-button--gradient3"
+          onclick={() => {
+            if (Variable.auth) {
+              fn.modals.ModalCreateRoom({
+                callback: async (response) => {
+
+                  if (response.list_records.length == 1) {
+                    await fn.restApi.getUserRoom({ name: "ListUsersRooms", filter: { system: false, author: Variable.myInfo._id }, limit: 10 })
+
+                    //для пользовательских комнат которые пользователь сам создал
+                    await fn.restApi.getUserRoom({ name: "UsersRooms", filter: { system: false }, limit: 10 })
+                    initReload()
+                  }
+                  else {
+                    initReload()
+                  }
+                }
+              })
+            }
+            else {
+              fn.modals.ModalNeedAuth()
+            }
+
+          }}
+        >
+          <span class="c-button__text">{Variable.lang.button.createRoom}</span>
+        </a>
         <div
           class="c-chats__lang blog_filter_language"
           onclick={() => {
@@ -1092,7 +1129,8 @@ const BlockUserRooms = async function ({ Static }) {
             });
           }}
         >{Static.lang.name}</div>
-      </aside>}
+      </div>
+      {/* </aside>} */}
 
       <BlockUserRoomsChat Static={Static} />
       {////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1376,7 +1414,13 @@ const BlockUserRooms = async function ({ Static }) {
               class="c-search__icon c-search__icon--filter"
               src={svg.filter}
               onClick={() => {
-
+                if (Static.elShowFilter.dataset.show) {
+                  Static.elShowFilter.removeAttribute("data-show")
+                  Static.elShowFilter.classList.remove("c-questions__filter--openmobile")
+                } else {
+                  Static.elShowFilter.dataset.show = true
+                  Static.elShowFilter.classList.add("c-questions__filter--openmobile")
+                }
               }}
             />
 
@@ -1447,6 +1491,42 @@ const BlockUserRooms = async function ({ Static }) {
             }
           }
         />
+        {
+          Static.filters.group ?
+            <div class="c-friends__checkboxes">
+              <div class="checkbox">
+                <input
+                  checked={Static.filters.group.creator ? true : false}
+                  class="checkbox__input"
+                  type="checkbox"
+                  id="creator"
+                  required="required"
+                  onChange={async () => {
+                    Static.filters.group.creator = !Static.filters.group.creator
+                    // Static.apiFilter = makeFilter(Static)
+                    // await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                  }}
+                />
+                <label class="checkbox__label" for="creator">{Variable.lang.h.roomCreator}</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  checked={Static.filters.group.in ? true : false}
+                  class="checkbox__input"
+                  type="checkbox"
+                  id="in"
+                  required="required"
+                  onChange={async () => {
+                    Static.filters.group.in = !Static.filters.group.in
+                    // Static.apiFilter = makeFilter(Static)
+                    // await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter })
+                  }}
+                />
+                <label class="checkbox__label" for="in">{Variable.lang.h.roomIAmIn}</label>
+              </div>
+            </div>
+            : null
+        }
         {/*<Select
             options={Static.optionsSelect.Date}
             toggler={true}
@@ -1478,7 +1558,11 @@ const BlockUserRooms = async function ({ Static }) {
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     */}
 
-      <div class="c-rooms__list">
+      <div class={[
+        "c-rooms__list",
+        Static.ActiveListRooms.length == 0 ? "c-rooms__list--empty" : null
+      ]}
+      >
 
         {
           //мапим юзерские комнаты
