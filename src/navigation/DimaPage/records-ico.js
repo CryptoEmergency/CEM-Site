@@ -39,7 +39,7 @@ const start = function (data, ID) {
                         <div
                             class="ico-list_item"
                             onclick={() => {
-                                fn.siteLinkModal("/DimaPage/lists-ico/", { title: "Добавить ICO" })
+                                fn.siteLinkModal("/DimaPage/edit-ico/", { title: "Добавить ICO" })
                             }}
                         >
                             <img src={svg["radius_plus"]} width="100" height="100" />
@@ -49,7 +49,7 @@ const start = function (data, ID) {
                                 return (
                                     <div class="ico-list_item"
                                         onclick={() => {
-                                            fn.siteLinkModal("/DimaPage/lists-ico/", { title: "Редактировать ICO", item })
+                                            fn.siteLinkModal("/DimaPage/edit-ico/", { title: "Редактировать ICO", item })
                                         }}>
                                         <img class="item-img" width="100" height="100" src={`/assets/upload/worldPress/${item.icon}`}></img>
                                         <div class="item-info">

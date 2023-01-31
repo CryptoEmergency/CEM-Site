@@ -22,7 +22,7 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            Static.recordsNews = await fn.restApi.getNews({ limit: 50, filter: { type: "news" }, sort: { dateCreate: -1 }, defaultReset: true })
+            Static.recordsNews = await fn.restApi.getNews({ limit: 50, filter: { type: "news" }, select: { category: 1, title: 1, preview: 1, text: 1, image: 1, showDate: 1, source: 1, languages: 1 }, sort: { dateCreate: -1 }, defaultReset: true })
             console.log('=e5bcc8=', Static.recordsNews)
         },
         fn: () => {

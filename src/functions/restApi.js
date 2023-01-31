@@ -1469,4 +1469,18 @@ restApi.setNotes.update = async function ({ _id, title, text, media, noAlert, ac
     return checkSetAnswer(response, noAlert)
 }
 
+
+restApi.setNews.create = async function (data, noAlert = false) {
+    // console.log('=007873=', data)
+    const response = await sendApi.create("setNews", data);
+    // console.log('=29a4cd=', response)
+    return checkSetAnswer(response, noAlert)
+}
+
+restApi.setNews.update = async function (data, noAlert = false) {
+    const response = await sendApi.create("setNews", data);
+    console.log('=7c9e07=', response)
+    return checkSetAnswer(response, noAlert)
+}
+
 export { restApi };

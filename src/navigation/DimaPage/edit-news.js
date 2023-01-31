@@ -13,173 +13,64 @@ import images from "@assets/images/index.js";
 
 //
 const checkForm = async function (Static, ID) {
-    if (!Static.forms.category) {
+    if (!Static.forms.category || !Static.forms.category.name) {
         fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери категорию!!!" })
         return
     }
 
-    if (!Static.forms.icon) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери иконку!!!" })
+    if (!Static.forms.languages || !Static.forms.languages.code) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери язык новости!!!" })
+        return
+    }
+
+    if (!Static.forms.image) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери картинку!!!" })
         return
     }
 
     if (!Static.forms.title) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи название!!!" })
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи загаловок!!!" })
         return
     }
 
-    if (!Static.forms.description) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи описание!!!" })
+    if (!Static.forms.preview) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи Анонс!!!" })
         return
     }
 
-    if (!Static.forms.cover && !Static.forms.coverVideo) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери обложку или укажи ссылку на Ютуб!!!" })
+    if (!Static.forms.text) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи Текст новости!!!" })
         return
     }
 
-    if (!Static.forms.startDate) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи дату запуска!!!" })
-        return
-    }
 
-    if (!Static.forms.endDate) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи дату окончания!!!" })
-        return
-    }
 
-    if (!Static.forms.targetMoney) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи цель $!!!" })
-        return
-    }
-
-    if (!Static.forms.targetMoney) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи цель $!!!" })
-        return
-    }
-
-    if (!Static.forms.name) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи имя!!!" })
-        return
-    }
-
-    if (!Static.forms.type) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи тип!!!" })
-        return
-    }
-
-    if (!Static.forms.price) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи цену!!!" })
-        return
-    }
-
-    if (!Static.forms.totalSupply) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Сколько выпущено!!!" })
-        return
-    }
-
-    if (!Static.forms.forSell) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Сколько для продажи!!!" })
-        return
-    }
-
-    if (!Static.forms.targetSell) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Цель продажи кол-во!!!" })
-        return
-    }
-
-    if (!Static.forms.review) {
-        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи краткий обзор!!!" })
-        return
-    }
+    // if (!Static.forms.startDate) {
+    //     fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи дату запуска!!!" })
+    //     return
+    // }
 
     let data = {
         value: {
             category: Static.forms.category,
-            icon: Static.forms.icon,
+            image: Static.forms.image,
             title: Static.forms.title,
-            description: Static.forms.description,
-            cover: Static.forms.cover,
-            coverVideo: Static.forms.coverVideo,
-            startDate: Static.forms.startDate,
-            endDate: Static.forms.endDate,
-            targetMoney: Static.forms.targetMoney,
-            name: Static.forms.name,
-            type: Static.forms.type,
-            price: Static.forms.price,
-            sellType: Static.forms.sellType,
-            totalSupply: Static.forms.totalSupply,
-            forSell: Static.forms.forSell,
-            targetSell: Static.forms.targetSell,
-            review: Static.forms.review,
-            media: Static.forms.media,
-            social: [],
-            checked: Static.forms.checked
+            preview: Static.forms.preview,
+            text: Static.forms.text,
+            source: Static.forms.source,
+            showDate: Static.forms.showDate,
         }
     }
 
-    if (Static.forms.nowMoney) {
-        data.value.nowMoney = Static.forms.nowMoney
-    }
+    data.value.languages = Static.forms.languages.code
 
-    if (Static.forms.siteLink) {
-        data.value.siteLink = Static.forms.siteLink
-    }
 
-    if (Static.forms.whitePaperLink) {
-        data.value.whitePaperLink = Static.forms.whitePaperLink
-    }
-
-    if (Static.forms.social.youtube.url) {
-        data.value.social.push({ channel: "youtube", url: Static.forms.social.youtube.url })
-    }
-
-    if (Static.forms.social.facebook.url) {
-        data.value.social.push({ channel: "facebook", url: Static.forms.social.facebook.url })
-    }
-
-    if (Static.forms.social.twitter.url) {
-        data.value.social.push({ channel: "twitter", url: Static.forms.social.twitter.url })
-    }
-
-    if (Static.forms.social.discord.url) {
-        data.value.social.push({ channel: "discord", url: Static.forms.social.discord.url })
-    }
-
-    if (Static.forms.social.instagram.url) {
-        data.value.social.push({ channel: "instagram", url: Static.forms.social.instagram.url })
-    }
-
-    if (Static.forms.social.tiktok.url) {
-        data.value.social.push({ channel: "tiktok", url: Static.forms.social.tiktok.url })
-    }
-
-    if (Static.forms.social.twitch.url) {
-        data.value.social.push({ channel: "twitch", url: Static.forms.social.twitch.url })
-    }
-
-    if (Static.forms.social.telegram.url) {
-        data.value.social.push({ channel: "telegram", url: Static.forms.social.telegram.url })
-    }
-
-    if (Static.forms.social.vk.url) {
-        data.value.social.push({ channel: "vk", url: Static.forms.social.vk.url })
-    }
-
-    if (Static.forms.social.github.url) {
-        data.value.social.push({ channel: "github", url: Static.forms.social.github.url })
-    }
-
-    if (Static.forms.social.linkedin.url) {
-        data.value.social.push({ channel: "linkedin", url: Static.forms.social.linkedin.url })
-    }
-
-    console.log(data)
+    // console.log(data)
     if (!Static.item) {
-        await fn.restApi.setIco.create(data)
+        await fn.restApi.setNews.create(data)
     } else {
         data._id = Static.item._id
-        await fn.restApi.setIco.update(data)
+        await fn.restApi.setNews.update(data)
     }
     fn.siteLink("/DimaPage/")
 
@@ -195,16 +86,18 @@ const start = function (data, ID) {
         ID,
         fnLoad: async () => {
             Static.listCategory = await fn.restApi.getCategories({ filter: { type: "news" } })
-            console.log('=a11bea=', Static.listCategory)
+
+
 
             if (!Static.item) {
                 Static.forms = {}
-                Static.forms.category = null
+                Static.forms.category = {}
                 Static.forms.image = null
                 Static.forms.title = null
                 Static.forms.preview = null
                 Static.forms.text = null
                 Static.forms.source = null
+                Static.forms.showDate = null
                 Static.forms.languages = {}
 
 
@@ -212,6 +105,10 @@ const start = function (data, ID) {
             } else {
                 Static.forms = Object.assign({}, Static.item)
             }
+            if (!Static.forms.category) {
+                Static.forms.category = {}
+            }
+            // console.log('=a11bea=', Static.forms)
         },
         fn: () => {
 
@@ -225,26 +122,29 @@ const start = function (data, ID) {
                 <div class="c-main__body">
 
                     <div class="contacts_form">
-                        {/* {
-                            Static.listCategory.list_records.map((item) => {
-                                return (<div class={["tag_button", Static.forms.category.name == item.name ? "tag_button_active" : null]}
-                                    onclick={() => {
-                                        Static.forms.category.name = item.name
-                                        Static.forms.category.type = "news"
-                                        initReload()
-                                    }}>
-                                    <span>{item.name}</span>
-                                </div>
-                                )
-                            })
-                        } */}
+                        <div>
+                            {
+                                Static.listCategory.list_records.map((item) => {
+                                    // console.log('=687fc6=', item)
+                                    return (<div class={["tag_button", Static.forms.category.name == item.name ? "tag_button_active" : null]}
+                                        onclick={() => {
+                                            Static.forms.category.name = item.name
+                                            Static.forms.category.type = "news"
+                                            initReload()
+                                        }}>
+                                        <span>{item.name}</span>
+                                    </div>
+                                    )
+                                })
+                            }
+                        </div>
                         <div>
                             <label>Язык </label>
                             <input
                                 placeholder="Выбери Язык"
                                 type="text"
                                 readonly
-                                value={Static.forms.languages.value}
+                                value={Static.forms.languages.eng_name}
                                 // value="hhh"
                                 Element={(el) => {
                                     Static.forms.languages.el = el
@@ -256,6 +156,7 @@ const start = function (data, ID) {
                                             Static.forms.languages.code = langCode;
                                             Static.forms.languages.value = langName + ` (${langOrig})`;
                                             Static.forms.languages.el.value = langName + ` (${langOrig})`;
+                                            Static.forms.languages.eng_name = Static.forms.languages.value
                                         }
                                     }, true)
                                 }}
@@ -352,9 +253,9 @@ const start = function (data, ID) {
                             <label>Текст новости</label>
                             <textarea
                                 placeholder="Текст новости"
-                                rows={10}
-                                value={Static.forms.text}
-                                textContent={Static.forms.text}
+                                rows={20}
+                                // value={Static.forms.text}
+                                textContent={fn.editText(Static.forms.text, { clear: true })}
                                 oninput={function () {
                                     Static.forms.text = this.value.trim()
                                 }}
@@ -370,6 +271,19 @@ const start = function (data, ID) {
                                 value={Static.forms.source}
                                 oninput={function () {
                                     Static.forms.source = this.value.trim()
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label>Дата показа</label>
+                            <input
+                                type="datetime-local"
+                                value={fn.getDateFormat(Static.forms.showDate, "time")}
+                                // valueAsDate={new Date()}
+                                oninput={function () {
+                                    Static.forms.showDate = this.value
+                                    // console.log('=91916f=', fn.getDateFormat(Static.forms.startDate, "time"))
                                 }}
                             />
                         </div>
@@ -406,7 +320,7 @@ const start = function (data, ID) {
                                                 active: false
                                             }
                                         }
-                                        await fn.restApi.setIco.update(data)
+                                        await fn.restApi.setNews.update(data)
                                         fn.siteLink("/DimaPage/")
                                     }}
                                 >
