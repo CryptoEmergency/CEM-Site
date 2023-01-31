@@ -49,13 +49,13 @@ const banners = [
     //     "image": "banner2022-09-09"
     // },
     {
-        "href": "https://crypto-emergency.com/",
-        "image": "ecosystemCEM",
+        "href": "https://blockchain-life.com/asia/en/#tickets-row",
+        "image": "BlockchainLife",
         lang: "en"
     },
     {
-        "href": "https://crypto-emergency.com/",
-        "image": "ecosystemCEM",
+        "href": "https://blockchain-life.com/asia/en/#tickets-row",
+        "image": "BlockchainLife",
         lang: "en"
     },
     {
@@ -64,13 +64,13 @@ const banners = [
         lang: "en"
     },
     {
-        "href": "https://crypto-emergency.com/",
-        "image": "ecosystemCEM",
+        "href": "https://blockchain-life.com/asia/en/#tickets-row",
+        "image": "BlockchainLife",
         lang: "en"
     },
     {
-        "href": "https://crypto-emergency.com/",
-        "image": "ecosystemCEM",
+        "href": "https://blockchain-life.com/asia/en/#tickets-row",
+        "image": "BlockchainLife",
         lang: "en"
     },
     {
@@ -79,8 +79,8 @@ const banners = [
         lang: "ru"
     },
     {
-        "href": "https://crypto-emergency.com/forum/",
-        "image": "forum_banner",
+        "href": "https://blockchain-life.com/asia/en/#tickets-row",
+        "image": "BlockchainLife",
         lang: "ru"
     },
     {

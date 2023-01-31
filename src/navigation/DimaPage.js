@@ -71,6 +71,19 @@ const start = function (data, ID) {
                             </span>
                         </span>
                     </div>
+
+                    <div
+                        class="button-container-preview mb--10"
+                        onclick={() => {
+                            fn.siteLink("/DimaPage/records-news/")
+                        }}
+                    >
+                        <span class="btn-news-preview">
+                            <span >
+                                Крипто Университет
+                            </span>
+                        </span>
+                    </div>
                 </div>
             )
         }
