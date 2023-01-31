@@ -5501,6 +5501,29 @@ s
 			padding-left: 20px;
 		}
 	}
+
+	.c-comments {
+		&__field {
+			width: 100%;
+
+			label {
+				display: block;
+				margin-bottom: 5px;
+			}
+		}
+	}
+
+	.container-input {
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+	}
+
+	.c-mediabtn {
+		margin-top: 10px;
+		margin-bottom: 15px;
+	}
 }
 
 @media(max-width: 1240px) {

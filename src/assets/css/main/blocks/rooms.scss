@@ -1,16 +1,22 @@
 .c-rooms {
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     &__langs {
         margin-bottom: 30px;
     }
 
     &__searchblock {
-        margin-bottom: 30px;
+        margin-bottom: 15px;
 
         .c-search {
 
             &__icon {
                 top: 14px;
+
+                @media(max-width: 1199px) {
+                    top: 23px;
+                }
 
                 &--filter {
                     top: 23px;
@@ -19,6 +25,15 @@
 
             &__container {
                 margin-right: 0;
+            }
+        }
+
+        .c-questions {
+            &__filter {
+
+                li {
+                    white-space: nowrap;
+                }
             }
         }
     }
@@ -138,6 +153,43 @@
             max-width: calc(100%);
             margin-left: 20px;
             margin-right: 20px;
+        }
+
+        &--empty {
+            grid-template-columns: 1fr;
+            margin-left: 0;
+            margin-right: 0;
+
+            .c-room {
+                width: 100%;
+            }
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media(max-width: 1024px) {
+            flex-direction: column;
+            gap: 15px
+        }
+    }
+
+    .c-questions {
+        &__filter {
+            &--openmobile {
+                width: auto;
+            }
+        }
+    }
+
+    .c-friends {
+        &__checkboxes {
+            @media(max-width: 1199px) {
+                margin-top: 15px;
+            }
         }
     }
 }

@@ -17,8 +17,6 @@ const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
 
-
-
     load({
         ID,
         fnLoad: async () => {
@@ -38,7 +36,7 @@ const start = function (data, ID) {
                         <div
                             class="ico-list_item"
                             onclick={() => {
-                                fn.siteLinkModal("/DimaPage/edit-ico/", { title: "Добавить ICO" })
+                                fn.siteLinkModal("/DimaPage/edit-university/", { title: "Добавить Компанию в университет" })
                             }}>
                             <img src={svg["radius_plus"]} width="100" height="100" />
                         </div>

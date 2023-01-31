@@ -85,7 +85,7 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            Static.listCategory = await fn.restApi.getCategories({ filter: { type: "news" } })
+            Static.listCategory = await fn.restApi.getCategories({ filter: { type: "news" }, defaultReset: true })
 
 
 

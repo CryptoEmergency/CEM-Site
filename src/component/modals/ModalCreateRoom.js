@@ -441,11 +441,11 @@ const sendPhoto = async function (crooper, index) {
                 </div>
               </div>
 
-              <div class="userMainBlock">
+              {/* <div class="userMainBlock">
                 {() => {
-                  //  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
+                  return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
                 }}
-              </div>
+              </div> */}
               <MediaButton
                                                 onclickPhoto={function () {
                                                     if (this.files.length == 0) {

@@ -14,6 +14,11 @@ import images from "@assets/images/index.js";
 //
 const checkForm = async function (Static, ID) {
 
+    if (!Static.forms.title) {
+        fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Укажи название!!!" })
+        return
+    }
+
     if (!Static.forms.category) {
         fn.modals.ModalAlarm({ icon: "alarm_icon", text: "Выбери категорию!!!" })
         return
@@ -42,6 +47,7 @@ const checkForm = async function (Static, ID) {
 
     let data = {
         value: {
+            title: Static.forms.title,
             category: Static.forms.category,
             icon: Static.forms.icon,
             cover: Static.forms.cover,
@@ -57,7 +63,8 @@ const checkForm = async function (Static, ID) {
             tokenomica: Static.forms.tokenomica,
             descriptionMore: Static.forms.descriptionMore,
             social: [],
-            limited: Static.forms.limited
+            limited: Static.forms.limited,
+            checked: Static.forms.checked
         }
     }
 
@@ -371,7 +378,17 @@ const start = function (data, ID) {
 
                             </div>
                         </div>
-
+                        <div>
+                            <label>Название</label>
+                            <input
+                                placeholder="Название"
+                                type="text"
+                                value={Static.forms.title}
+                                oninput={function () {
+                                    Static.forms.title = this.value.trim()
+                                }}
+                            />
+                        </div>
                         <div>
                             <label>Правильная ссылка на Ютуб видео</label>
                             <input
@@ -827,6 +844,16 @@ const start = function (data, ID) {
                                 checked={Static.forms.limited}
                                 oninput={function () {
                                     Static.forms.limited = !Static.forms.limited
+                                }}
+                            />
+                        </div>
+                        <div>
+                            <label>Проверенно</label>
+                            <input
+                                type="checkbox"
+                                checked={Static.forms.checked}
+                                oninput={function () {
+                                    Static.forms.checked = !Static.forms.checked
                                 }}
                             />
                         </div>
