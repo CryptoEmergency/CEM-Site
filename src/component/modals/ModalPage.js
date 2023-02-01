@@ -19,7 +19,7 @@ let news;
 
 const ModalPage = async function (ID, reload) {
   let data = Variable.ModalsPage[ID].data
-
+  console.log('=eea8d2=', data)
   // let mainId = item._id;
 
   initAfter(
@@ -97,8 +97,14 @@ const ModalPage = async function (ID, reload) {
                     <a
                       class="c-goback"
                       onclick={() => {
-                        Variable.ModalsPage.splice(ID, 1)
-                        initReload("modalsPage")
+                        if (Variable.ModalsPage[ID] && Variable.ModalsPage[ID].data && Variable.ModalsPage[ID].data.needReload) {
+                          Variable.ModalsPage.splice(ID, 1)
+                          initReload()
+                        } else {
+                          Variable.ModalsPage.splice(ID, 1)
+                          initReload("modalsPage")
+                        }
+
                       }}
                       title={Variable.lang.span.back}
                     >

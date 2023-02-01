@@ -1,5 +1,11 @@
 $background: #232733;
 $icon: #393C47;
+$fiolet: #A43CF9;
+$orange: #FF9B00;
+$blue: #1D7AF8;
+$red: #FF6E6C;
+$mint: #00F2C6;
+$lightBlue: #00A5F7;
 
 *,
 *::before,
@@ -13,26 +19,88 @@ li {
   padding: 0;
 }
 
-.appearience {
-  padding-bottom: 60px;
+// .appearience {
+//   padding-bottom: 60px;
+// }
+
+// styles page list-startaps 
+.ico-list_item.startaps-item {
+  padding-bottom: 12px;
 }
+
+// style btns
+.btn-item {
+  margin-top: 20px;
+  width: 100%;
+  color: $title;
+  background: none;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 15px 50px;
+  border: 5px solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-image-source: linear-gradient(to left, #679FEF, #A87FFF);
+  border-radius: 6px;
+  cursor: pointer;
+
+  .btn-item_text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// classes color
+.fiolet {
+  color: $fiolet;
+}
+
+.orange {
+  color: $orange;
+}
+
+.blue {
+  color: $blue;
+}
+
+.red {
+  color: $red;
+}
+
+.mint {
+  color: $mint;
+}
+
+.lightBlue {
+  color: $lightBlue;
+}
+
+// classes color
 
 .startap {
   background: $background;
   padding-top: 35px;
-  // position: relative;
 }
 
 .startap-img {
   position: absolute;
   right: 0;
+  top: 50%;
   z-index: 0;
+  height: 65%;
+  opacity: .6;
+
+  @media(max-width: 992px) {
+    display: none;
+  }
 }
 
 .startap-inner {
   max-width: 1240px;
   margin: 0 auto;
-  padding-bottom: 80px;
+  padding-bottom: 70px;
 
   @media(max-width: 992px) {
     width: calc(100% - 20px);
@@ -64,6 +132,11 @@ li {
 
     // social
     .social-img {
+
+      @media(max-width: 767px) {
+        margin-bottom: 55px;
+      }
+
       >img {
         width: 100%;
         height: auto;
@@ -87,6 +160,8 @@ li {
       .icons-item {
         display: flex;
         align-items: center;
+        text-decoration: none;
+
 
         .icons-img {
           width: 34px;
@@ -96,12 +171,15 @@ li {
           display: flex;
           justify-content: center;
           align-items: center;
+
+          >img {
+            max-height: 18px;
+          }
         }
       }
 
-      .icons-link {
+      .icons-text {
         display: flex;
-        text-decoration: none;
         margin-left: 10px;
         font-weight: 500;
         font-size: 15px;
@@ -128,22 +206,7 @@ li {
       grid-template-rows: 1fr;
       grid-gap: 18px;
 
-      .btn-item {
-        margin-top: 20px;
-        width: 100%;
-        color: $title;
-        background: none;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 15px 50px;
-        border: 5px solid;
-        border-image-slice: 1;
-        border-width: 2px;
-        border-image-source: linear-gradient(to left, #679FEF, #A87FFF);
-        border-radius: 6px;
-        cursor: pointer;
-      }
+
     }
 
     // information
@@ -152,86 +215,16 @@ li {
       border: 1px solid #444B5F;
       border-radius: 10px;
       padding: 35px;
+      height: fit-content;
 
-      .info-title {
-        font-weight: 600;
-        font-size: 32px;
-        line-height: 43px;
-        color: #FFFFFF;
-      }
-
-      .info-subtitle {
-        font-weight: 600;
+      .info-desc {
         font-size: 18px;
-        line-height: 43px;
-        text-transform: uppercase;
-        color: #D6E0FF;
-      }
-
-      .info-list {
-        margin: 0;
-        padding: 0;
-
-        .info-list_item {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: auto;
-          grid-gap: 15px;
-          list-style-type: none;
-          padding: 25px 0;
-          border-bottom: 1px solid #3C445A;
-          font-weight: 500;
-          font-size: 16px;
-          // line-height: 43px;
-          color: #FFFFFF;
-        }
-      }
-
-      .info-list>.info-list_item:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-
-    }
-  }
-
-  // about startap
-  .startap-about {
-    z-index: 1;
-  }
-
-  .startap-about_text {
-    width: 65%;
-
-    >p {
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 28px;
-    }
-  }
-
-  .startap-about_title {
-    font-size: 52px;
-    line-height: 115%;
-    font-weight: 700;
-    padding-bottom: 20px;
-  }
-
-  .startap-about_list {
-    padding-left: 20px;
-
-    .startap-about_list-item {
-      color: #A87FFF;
-
-      >span {
-        color: #FFFFFF;
-        line-height: 42px;
-        font-size: 18px;
-        font-weight: 700;
-
+        line-height: 24px;
       }
     }
   }
+
+
 
   // Road Map
   .startap-title {
@@ -241,7 +234,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 60px;
+    padding: 60px 0;
   }
 
   .roadmap-inner {
@@ -249,6 +242,20 @@ li {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
     grid-gap: 20px;
+
+    .roadmap-item_year {
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 115%;
+      margin-bottom: 20px;
+    }
+
+    .roadmap-item_text {
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 24px;
+      font-feature-settings: 'salt' on, 'liga' off;
+    }
 
     @media(max-width: 992px) {}
 
@@ -258,8 +265,200 @@ li {
 
     @media(max-width: 464px) {}
 
-
-    .roadmap-item {}
   }
+
+  // tokenomics
+  .diagramm {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-rows: 1fr;
+    grid-gap: 25px;
+  }
+
+  .diagramm-line,
+  .diagramm-circle {
+    background: #2D3241;
+    box-shadow: 0px 4px 54px #202532;
+    border-radius: 15px;
+    padding: 30px;
+  }
+
+  //diagramm-line 
+  .diagramm-line {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    // height: 300px;
+  }
+
+  .progressBlock {
+    // width: 380px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+
+    >span {
+      margin-left: 10px;
+    }
+  }
+
+  .progressBlock-column {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10px;
+    background: $fiolet;
+    border-radius: 4px;
+  }
+
+  // line progress
+  .progressBlock:first-child .progressBlock-column {
+    background: $fiolet;
+    width: calc(100% / 100 * 30);
+  }
+
+  .progressBlock:nth-child(2) .progressBlock-column {
+    background: $orange;
+    width: calc(100% / 100 * 15);
+  }
+
+  .progressBlock:nth-child(3) .progressBlock-column {
+    background: $blue;
+    width: calc(100% / 100 * 40);
+  }
+
+  .progressBlock:nth-child(4) .progressBlock-column {
+    background: $red;
+    width: calc(100% / 100 * 25);
+  }
+
+  .progressBlock:nth-child(5) .progressBlock-column {
+    background: $mint;
+    width: calc(100% / 100 * 10);
+  }
+
+  .progressBlock:nth-child(6) .progressBlock-column {
+    background: $lightBlue;
+    width: calc(100% / 100 * 10);
+  }
+
+  // line progress
+
+  .line-points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+
+
+    .line-point_item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+
+      .line-point_circle {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+
+      .line-point_procent {
+        position: absolute;
+        right: 0;
+
+      }
+    }
+
+    // points illustration
+    .line-point_item:first-child .line-point_circle {
+      border: 4px solid $fiolet;
+    }
+
+    .line-point_item:nth-child(2) .line-point_circle {
+      border: 4px solid $orange;
+    }
+
+    .line-point_item:nth-child(3) .line-point_circle {
+      border: 4px solid $blue;
+    }
+
+    .line-point_item:nth-child(4) .line-point_circle {
+      border: 4px solid $red;
+    }
+
+    .line-point_item:nth-child(5) .line-point_circle {
+      border: 4px solid $mint;
+    }
+
+    .line-point_item:nth-child(6) .line-point_circle {
+      border: 4px solid $lightBlue;
+    }
+
+    // points illustration
+
+  }
+
+
+  // diagramm line
+
+  // our team
+
+  .team-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-template-rows: auto;
+    grid-column-gap: 15px;
+    grid-row-gap: 30px;
+    justify-content: center;
+
+    @media(max-width: 992px) {}
+
+    @media(max-width: 767px) {}
+
+    @media(max-width: 464px) {}
+  }
+
+  .team-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h5> {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 175%;
+    }
+
+    >span {
+      text-align: center;
+      color: #CAD4F3;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 150%;
+      padding: 0 10px;
+    }
+  }
+
+  .team-img {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-image: linear-gradient(334.15deg, #171B27 1.13%, #272B39 101.15%);
+    border-radius: 10px;
+    height: auto;
+    max-height: 365px;
+    margin-bottom: 20px;
+  }
+
+  .team-btn {
+    width: 260px;
+  }
+
+  // gallery
+
 
 }

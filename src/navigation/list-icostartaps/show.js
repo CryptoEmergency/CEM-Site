@@ -36,7 +36,7 @@ const start = function (data, ID) {
       if (!Static.item) {
         Static.item = await fn.restApi.getIco({ filter: { _id: Variable.dataUrl.params }, firstRecord: true })
       }
-      console.log(Static.item)
+      console.log("Static.item", Static.item)
     },
     fn: () => {
       return (
@@ -128,7 +128,7 @@ const start = function (data, ID) {
             </div>
 
             <div class="ico-media">
-              <h4>Screenshots</h4>
+              {Static.item.media.length ? <h4>Screenshots</h4> : null}
               {
                 Static.item.media.length
                   ?
@@ -136,7 +136,7 @@ const start = function (data, ID) {
                     {
                       Static.item.media.map((item) => {
                         return (
-                          <div class="media_item">
+                          <div class="media-item">
                             <div class="media-img">
                               <img
                                 src={`/assets/upload/worldPress/${item.name}`}

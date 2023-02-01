@@ -588,6 +588,11 @@
         overflow-x: auto;
         white-space: nowrap;
     }
+
+    &--static {
+        position: static;
+        transform: none;
+    }
 }
 
 .tags::-webkit-scrollbar {
