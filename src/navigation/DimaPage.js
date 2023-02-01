@@ -11,6 +11,7 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
 import test from "@fn/main/test.js"
+import { ButtonGradient } from "@htmlElements/index.js"
 //worldPress
 
 const start = function (data, ID) {
@@ -71,19 +72,9 @@ const start = function (data, ID) {
                             </span>
                         </span>
                     </div>
+                    <ButtonGradient class="mb--10" text="Крипто Университет" onclick={() => { fn.siteLink("/DimaPage/records-university/") }} />
+                    <ButtonGradient class="mb--10" text="Новости новый формат" onclick={() => { fn.siteLink("/DimaPage/records-newsNew/") }} />
 
-                    <div
-                        class="button-container-preview mb--10"
-                        onclick={() => {
-                            fn.siteLink("/DimaPage/records-university/")
-                        }}
-                    >
-                        <span class="btn-news-preview">
-                            <span >
-                                Крипто Университет
-                            </span>
-                        </span>
-                    </div>
                 </div>
             )
         }
