@@ -27,8 +27,17 @@ $numto in $numbers {
         margin-bottom: $numto;
     }
 
+    .mv--#{$num} {
+        margin-bottom: $numto;
+        margin-top: $numto;
+    }
+
     .mt--#{$num} {
         margin-top: $numto;
+    }
+
+    .pt--#{$num} {
+        padding-top: $numto;
     }
 }
 
