@@ -147,6 +147,7 @@ const start = function (data, ID) {
     ID,
     fnLoad: async () => {
       Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+      console.log('=bacf0f=', Static.recordsIco)
     },
     fn: () => {
       return (
