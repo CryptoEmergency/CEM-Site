@@ -22,7 +22,7 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            Static.recordsItem = await fn.restApi.getNews({ limit: 50, filter: { type: "news" }, select: { moderation: 1, category: 1, title: 1, preview: 1, text: 1, image: 1, showDate: 1, source: 1, languages: 1 }, sort: { dateCreate: -1 }, defaultReset: true })
+            Static.recordsItem = await fn.restApi.getNews({ limit: 50, filter: { type: "news" }, select: { statistic: 1, moderation: 1, category: 1, title: 1, preview: 1, text: 1, image: 1, showDate: 1, source: 1, languages: 1 }, sort: { dateCreate: -1 }, defaultReset: true })
             console.log('=e5bcc8=', Static.recordsItem)
         },
         fn: () => {
@@ -44,7 +44,7 @@ const start = function (data, ID) {
                         </div>
                         <div class="list-ico">
                             <div class="ico-list_item mv--5" style="border: 1px white solid;" onclick={() => {
-                                fn.siteLinkModal("/DimaPage/edit-news/", { title: "Добавить Новость" })
+                                fn.siteLinkModal("/DimaPage/edit-news/", { title: "Добавить Новость", needReload: true })
                             }}>
                                 <div class="item-img">
                                     <img width="100" height="100" src={svg["radius_plus"]}></img>
@@ -59,7 +59,7 @@ const start = function (data, ID) {
                                     return (
                                         <div class="ico-list_item mv--5" style="border: 1px white solid;"
                                             onclick={() => {
-                                                fn.siteLinkModal("/DimaPage/edit-newsNew/", { title: "Редактировать Новость", item })
+                                                fn.siteLinkModal("/DimaPage/edit-newsNew/", { title: "Редактировать Новость", needReload: true, item })
                                             }}>
                                             <div class="item-img">
                                                 <img class="item-img_el" src={`/assets/upload/news/${item.image}`}></img>

@@ -76,6 +76,19 @@ const checkForm = async function (Static, ID) {
 
 }
 
+const updateValue = async function (Static, { key, value }) {
+    if (Static.timerChange[key]) {
+        clearTimeout(Static.timerChange[key]);
+        delete Static.timerChange[key]
+    }
+    Static.timerChange[key] = setTimeout(async () => {
+        let val = {}
+        // val[key] = fn.editText(value, { clear: true })
+        val[key] = value
+        updateRecords(Static, val)
+    }, 300);
+}
+
 const updateRecords = async function (Static, value) {
     let data = {
         _id: Static.item._id,
@@ -83,11 +96,10 @@ const updateRecords = async function (Static, value) {
     }
     let responce = await fn.restApi.setNews.update(data)
     let [StaticMain] = fn.GetParams({ actual: true })
-    console.log('=3f9f36=', StaticMain, responce)
-    if (StaticMain && StaticMain.recordsItem && Static.recordsItem.list_records && responce && responce.list_records && responce.list_records[0] && responce.list_records[0]._id) {
-        Static.recordsItem.list_records.forEach((item, index) => {
+    if (StaticMain && StaticMain.recordsItem && StaticMain.recordsItem.list_records && responce && responce.list_records && responce.list_records[0] && responce.list_records[0]._id) {
+        StaticMain.recordsItem.list_records.forEach((item, index) => {
             if (item._id == responce.list_records[0]._id) {
-                console.log('=a6d1d2=', index, item)
+                StaticMain.recordsItem.list_records[index] = responce.list_records[0]
             }
         })
     }
@@ -97,7 +109,7 @@ const updateRecords = async function (Static, value) {
 const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
-
+    Static.timerChange = []
     load({
         ID,
         fnLoad: async () => {
@@ -146,7 +158,7 @@ const start = function (data, ID) {
 
             return (
                 <div class="c-main__body">
-                    <div class="contacts_form">
+                    <div class="i-panel">
                         <div>
                             {
                                 Static.listCategory.list_records.map((item) => {
@@ -155,7 +167,7 @@ const start = function (data, ID) {
                                             Static.forms.category.name = item.name
                                             Static.forms.category.type = "news"
                                             updateRecords(Static, { category: Static.forms.category })
-                                            Static.item.title = "fddfdffdfd"
+                                            // Static.item.title = "fddfdffdfd"
                                             initReload()
                                         }}>
                                         <span>{item.name}</span>
@@ -164,9 +176,9 @@ const start = function (data, ID) {
                                 })
                             }
                         </div>
-                        <div>
-                            <label>Язык </label>
+                        <div class="i-flex">
                             <input
+                                class="i-input"
                                 placeholder="Выбери Язык"
                                 type="text"
                                 readonly
@@ -182,181 +194,126 @@ const start = function (data, ID) {
                                             Static.forms.languages.value = langName + ` (${langOrig})`;
                                             Static.forms.languages.el.value = langName + ` (${langOrig})`;
                                             Static.forms.languages.eng_name = Static.forms.languages.value
+                                            updateRecords(Static, { languages: Static.forms.languages.code })
                                         }
                                     }, true)
                                 }} />
-                        </div>
-
-                        <div>
-                            <label>Картинка <img class="notes-button__icon" src={svg["clip_notes"]}
-                                onclick={() => {
-                                    Static.elInputImg.click()
-                                }}
-                            />
-                                {
-                                    Static.forms.image
-                                        ?
-                                        <img src={svg["delete_notes"]}
-                                            onclick={() => {
-                                                Static.forms.image = null
-                                                initReload()
-                                            }} />
-                                        :
-                                        null
-                                }
-                            </label>
-                            <input
-                                type="file"
-                                hidden
-                                Element={($el) => { Static.elInputImg = $el }}
-                                onchange={async function (e) {
-                                    e.stopPropagation();
-                                    Array.from(this.files).forEach((item) => {
-                                        fn.uploadMedia(
-                                            item,
-                                            "news",
-                                            async function () {
-                                                if (!this.response) {
-                                                    alert("Произошла ошибка Попробуйте еще раз")
-                                                    return
-                                                }
-                                                let response = JSON.parse(this.response);
-                                                Static.forms.image = response.name
-                                                initReload()
-                                            }
-                                        )
-                                    })
-                                    initReload()
-                                }}
-                            />
-                            <div class="notes-content-img">
-                                {
-                                    Static.forms.image
-                                        ?
-                                        <div class="notes-img-wrapper">
-                                            <img
-                                                class="notes-img-preview"
-                                                src={`/assets/upload/news/${Static.forms.image}`}
-                                                width="100"
-                                                height="100"
-                                            />
-                                        </div>
-                                        :
-                                        null
-                                }
-
+                            <div>
+                                <input
+                                    class="i-input"
+                                    type="datetime-local"
+                                    value={fn.getDateFormat(Static.forms.showDate, "time")}
+                                    // valueAsDate={new Date()}
+                                    oninput={function () {
+                                        Static.forms.showDate = this.value
+                                        updateValue(Static, { key: "showDate", value: Static.forms.showDate })
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <label>Просмотры</label>
+                                <input
+                                    class="i-input"
+                                    type="number"
+                                    value={Static.item.statistic.view}
+                                    // valueAsDate={new Date()}
+                                    oninput={function () {
+                                        // Static.forms.showDate = this.value
+                                        updateValue(Static, { key: "statistic.view", value: this.value })
+                                    }}
+                                />
                             </div>
                         </div>
 
                         <div>
-                            <label>Загаловок</label>
-                            <input
-                                placeholder="Загаловок"
-                                type="text"
-                                value={Static.forms.title}
-                                oninput={function () {
-                                    Static.forms.title = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Анонс (краткий)</label>
-                            <textarea
-                                placeholder="Анонс (краткий)"
-                                rows={5}
-                                value={Static.forms.preview}
-                                textContent={Static.forms.preview}
-                                oninput={function () {
-                                    Static.forms.preview = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Текст новости</label>
-                            <textarea
-                                placeholder="Текст новости"
-                                rows={20}
-                                // value={Static.forms.text}
-                                textContent={fn.editText(Static.forms.text, { clear: true })}
-                                oninput={function () {
-                                    Static.forms.text = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-
-                        <div>
-                            <label>Источник новости</label>
-                            <input
-                                placeholder="Источник новости"
-                                type="text"
-                                value={Static.forms.source}
-                                oninput={function () {
-                                    Static.forms.source = this.value.trim()
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label>Дата показа</label>
-                            <input
-                                type="datetime-local"
-                                value={fn.getDateFormat(Static.forms.showDate, "time")}
-                                // valueAsDate={new Date()}
-                                oninput={function () {
-                                    Static.forms.showDate = this.value
-                                    // console.log('=91916f=', fn.getDateFormat(Static.forms.startDate, "time"))
-                                }}
-                            />
-                        </div>
-
-                        <div
-                            class="button-container-preview"
-                            onclick={() => {
-                                checkForm(Static, ID)
-                            }}
-                        >
-                            <span class="btn-news-preview">
-                                <span >
-                                    {
-                                        Static.item
-                                            ?
-                                            "Редактировать"
-                                            :
-                                            "Добавить"
-                                    }
-
-                                </span>
-                            </span>
-                        </div>
-
-                        {
-                            Static.item
-                                ?
-                                <div
-                                    class="button-container-preview"
-                                    onclick={async () => {
-                                        data = {
-                                            _id: Static.item._id,
-                                            value: {
-                                                active: false
-                                            }
-                                        }
-                                        await fn.restApi.setNews.update(data)
-                                        fn.siteLink("/DimaPage/")
+                            <div class="full_news_content">
+                                <h1
+                                    class="full_news_name edit-area"
+                                    contenteditable={true}
+                                    textContent={Static.forms.title != "" ? Static.forms.title : ""}
+                                    data-text="Укажи загаловок"
+                                    oninput={function () {
+                                        Static.forms.title = this.textContent
+                                        updateValue(Static, { key: "title", value: Static.forms.title })
+                                        // console.log('=5a0798=', Static.forms.title)
+                                    }}></h1>
+                                {
+                                    Static.forms.image ?
+                                        <img class="full_news_image" src={`/assets/upload/news/${Static.forms.image}`} onclick={() => {
+                                            Static.elInputImg.click()
+                                        }} />
+                                        :
+                                        <img class="full_news_image" src={images.ecosystem} onclick={() => {
+                                            Static.elInputImg.click()
+                                        }} />
+                                }
+                                <input
+                                    type="file"
+                                    hidden
+                                    Element={($el) => { Static.elInputImg = $el }}
+                                    onchange={async function (e) {
+                                        e.stopPropagation();
+                                        Array.from(this.files).forEach((item) => {
+                                            fn.uploadMedia(
+                                                item,
+                                                "news",
+                                                async function () {
+                                                    if (!this.response) {
+                                                        alert("Произошла ошибка Попробуйте еще раз")
+                                                        return
+                                                    }
+                                                    let response = JSON.parse(this.response);
+                                                    Static.forms.image = response.name
+                                                    updateRecords(Static, { image: Static.forms.image })
+                                                    initReload()
+                                                }
+                                            )
+                                        })
                                     }}
-                                >
-                                    <span class="btn-news-preview">
-                                        <span >
-                                            Удалить
-                                        </span>
-                                    </span>
-                                </div>
-                                :
-                                null
-                        }
+                                />
+                                <p class="full_news_text mrb30 edit-area"
+                                    contenteditable={true}
+                                    // textContent={Static.forms.preview != "" ? Static.forms.preview : ""}
+                                    data-text="Укажи Анонс"
+                                    oninput={function () {
+                                        Static.forms.preview = this.innerText
+                                        updateValue(Static, { key: "preview", value: Static.forms.preview })
+                                    }}
+                                >{Static.forms.preview != "" ? fn.editText(Static.forms.preview, { clear: true, paragraph: true, html: true }) : ""}
+                                </p>
+
+                                <p class="full_news_text mr20 edit-area"
+                                    contenteditable={true}
+                                    data-text="Укажи текст новости"
+                                    // textContent={Static.forms.text != "" ? Static.forms.text : ""}
+                                    oninput={function () {
+                                        // Static.forms.text = this.textContent
+                                        Static.forms.text = this.innerText
+                                        updateValue(Static, { key: "text", value: Static.forms.text })
+                                    }}
+                                >{Static.forms.text != "" ? fn.editText(Static.forms.text, { clear: true, paragraph: true, html: true }) : ""}</p>
+
+                                <label>Источник: <p class="full_news_disclaimer mr20 edit-area"
+                                    contenteditable={true}
+                                    data-text="Укажи источник"
+                                    oninput={function () {
+                                        // Static.forms.text = this.textContent
+                                        Static.forms.source = this.innerText
+                                        updateValue(Static, { key: "source", value: Static.forms.source })
+                                    }}
+                                >{Static.forms.source}</p></label>
+                                {/* <div style="display: flex" class="blog_post_stat">
+                                    <p class="full_news_date">
+                                        <img src={svg["question_views"]} /> {Static.item.statistic.view}
+                                    </p>
+                                    <p class="full_news_date">
+                                        <img src={svg["question_answers"]} />
+                                        {Static.item.statistic.comments}
+                                    </p>
+                                    <p class="full_news_date">{fn.getDateFormat(Static.item.showDate)}</p>
+                                </div> */}
+                            </div>
+                        </div>
 
                     </div>
                 </div>

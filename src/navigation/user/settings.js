@@ -10,7 +10,7 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
 
-import { BlockUserSettingsPage, BlockUserStartupPage} from '@component/blocks/index.js';
+import { BlockUserSettingsPage, BlockUserStartupPage } from '@component/blocks/index.js';
 import { NotFound } from "@component/element/index.js";
 
 import { Avatar } from '@component/element/Avatar.js';
@@ -66,13 +66,13 @@ const start = function (data, ID) {
     Static.StartUPData.Allocation = ""
     Static.StartUPData.Logo = ""
     Static.StartUPData.WebSite = ""
-    Static.StartUPData.Socials = {network:""}
+    Static.StartUPData.Socials = { network: "" }
     Static.StartUPData.ShortDesc = ""
     Static.StartUPData.Desc = ""
     Static.StartUPData.RoadMap = ""
     Static.StartUPData.Team = ""
 
-      
+
 
     let activeGroup, elSocial, elCategory, elStartup;
 
@@ -107,47 +107,46 @@ const start = function (data, ID) {
         )
     }
 
- const StartUpMenu= function(data)
- {
+    const StartUpMenu = function (data) {
 
 
-   
 
-let start
-let menuItem =[{settingsPage:"startUP",itemMenu:"мой стартап",item:true},
-{settingsPage:"editstartUP",itemMenu:"Редактировать",item:true},
-{settingsPage:"createstartUP",itemMenu:"создать стартап",item:false}]
 
-start = menuItem.map(function (key) {
+        let start
+        let menuItem = [{ settingsPage: "startUP", itemMenu: "мой стартап", item: true },
+        { settingsPage: "editstartUP", itemMenu: "Редактировать", item: true },
+        { settingsPage: "createstartUP", itemMenu: "создать стартап", item: false }]
 
-    if(key.item === data){
-       
-       return( <div
-        class={[
-            "settings_list_subcategory",
-            settingsPage == key.settingsPage ? "settings_list_subcategory--active" : null
-        ]}
-        onclick={() => {
-         
-            if (settingsPage == key.settingsPage) {
-         
-                Static.settingsPage = key.settingsPage
+        start = menuItem.map(function (key) {
 
+            if (key.item === data) {
+
+                return (<div
+                    class={[
+                        "settings_list_subcategory",
+                        settingsPage == key.settingsPage ? "settings_list_subcategory--active" : null
+                    ]}
+                    onclick={() => {
+
+                        if (settingsPage == key.settingsPage) {
+
+                            Static.settingsPage = key.settingsPage
+
+                        }
+                        settingsPage = key.settingsPage
+                        initReload()
+                    }}
+                >
+                    <p>{key.itemMenu}</p>
+                </div>)
             }
-            settingsPage = key.settingsPage
-            initReload()
-        }}
-    >
-        <p>{key.itemMenu}</p>
-    </div>)
-    }
- 
-})
-    return (start)
- }
 
- 
-    
+        })
+        return (start)
+    }
+
+
+
 
 
     const deleteFromBlacklist = async function () {
@@ -160,15 +159,14 @@ start = menuItem.map(function (key) {
     init(
         async () => {
             blackList = await getUserBlackList()
-            
+
             Static.startUP = false
-            if(!Static.startUP)
-            {
+            if (!Static.startUP) {
                 Static.StartUPData.settings = "createstartUP"
             }
-         
+
             settingsPage = "security";
-    
+
         },
         () => {
             return (
@@ -197,11 +195,11 @@ start = menuItem.map(function (key) {
                                             activeGroup = Static.elSocial
                                             // console.log('=034949=',activeGroup)
                                             if (Static.elSocial.dataset.active == "true") {
-                                             //   console.log('=c15202=', "not active")
+                                                //   console.log('=c15202=', "not active")
                                                 Static.elSocial.dataset.active = false;
                                                 Static.elSocial.classList.remove("settings_list_item_active")
                                             } else {
-                                           //     console.log('=9ca0c2=', "active")
+                                                //     console.log('=9ca0c2=', "active")
                                                 Static.elSocial.dataset.active = true;
                                                 Static.elSocial.classList.add("settings_list_item_active")
                                             }
@@ -242,7 +240,7 @@ start = menuItem.map(function (key) {
                                     </div>
                                     <div class="settings_gradient_line"></div>
                                 </div>
-                                <div
+                                {/* <div
                                     class={[
                                         'settings_list_item',
                                         activeGroup == Static.elCategory ? '' : null
@@ -272,8 +270,8 @@ start = menuItem.map(function (key) {
                                     </p>
                                     
                                     <div class="settings_gradient_line"></div>
-                                </div>
-                                <div
+                                </div> */}
+                                {/* <div
                                     class={[
                                         'settings_list_item',
                                         activeGroup == Static.elStartup ? '' : null
@@ -289,11 +287,11 @@ start = menuItem.map(function (key) {
                                             activeGroup = Static.elStartup
                                             // console.log('=f1cab4=',activeGroup)
                                             if (Static.elStartup.dataset.active == "true") {
-                                            //    console.log('=c15202=', "not active 2")
+                                                //    console.log('=c15202=', "not active 2")
                                                 Static.elStartup.dataset.active = false;
                                                 Static.elStartup.classList.remove("settings_list_item_active")
                                             } else {
-                                            //    console.log('=9ca0c2=', "active 2")
+                                                //    console.log('=9ca0c2=', "active 2")
                                                 Static.elStartup.dataset.active = true;
                                                 Static.elStartup.classList.add("settings_list_item_active")
                                             }
@@ -301,20 +299,20 @@ start = menuItem.map(function (key) {
                                     >
                                         Стартап
                                     </p>
-                                 
-                                    
+
+
                                     {StartUpMenu(Static.startUP)}
-                                  
-                      
+
+
                                     <div class="settings_gradient_line"></div>
-                                    </div>
+                                </div> */}
                             </div>
                         </div>
 
                         <div class="settings_body">
                             <BlockUserSettingsPage.security
                                 settingsPage={settingsPage}
-                                
+
                             />
 
 
@@ -323,15 +321,15 @@ start = menuItem.map(function (key) {
                                     {userBlackList()}
                                 </div>
                             </div>
-        
+
                             <div style={settingsPage == 'startUP' || settingsPage == 'editstartUP' || settingsPage == 'createstartUP' ? '' : 'display: none;'} data-type="blackList" class="settings_body_item">
                                 <div class="setting_body_item_chapter">
-                                <BlockUserStartupPage  settingsPage={settingsPage} Static={Static} />
+                                    <BlockUserStartupPage settingsPage={settingsPage} Static={Static} />
                                 </div>
                             </div>
-                           
 
-                      
+
+
 
 
                         </div>
