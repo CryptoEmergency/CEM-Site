@@ -787,6 +787,48 @@ initData.friends = function (Static) {
     return
 }
 
+initData.cryptouniversity_show = function (Static) {
+    // Static.isValid = true
+    // Static.submitClick = false
+    // Static.messageSent = false
+    // Static.showPage = true
+    // Static.path = "question"
+
+    // Static.elMedia = {}
+    // Static.elToogle = {}
+    // Static.elShowTextFull = {}
+    // Static.elShowTextShort = {}
+    // Static.elMedia = {}
+    // Static.elShowComment = {}
+    // Static.elShowAnswersComment = {}
+    // Static.elShowButtonComment = []
+
+    // Static.elButtonSubmit = {}
+    // Static.commentText = []
+    // // Static.itemAnswer={}
+
+    // Static.mainComment = {
+    //     rows: 1,
+    //     adaptive: 4,
+    //     elShowInput: {},
+    //     el: {}
+    // }
+
+    // Static.secondComment = {
+    //     rows: 1,
+    //     adaptive: 4,
+    //     elShowInput: {},
+    //     el: {}
+    // }
+    // Static.editComment = {
+    //     rows: 1,
+    //     adaptive: 4,
+    //     elShowInput: {},
+    //     el: {}
+    // }
+
+    return
+}
 
 
 

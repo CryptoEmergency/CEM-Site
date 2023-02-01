@@ -34,14 +34,14 @@ const Tags = function ({ Static, classActive, text, type }) {
 const makeFilter = function (Static) {
     let objReturn = { type: Static.type }
     if (Static.type == "university") {
-      objReturn["languages.code"] = Static.activeCategory
+        objReturn["languages.code"] = Static.activeCategory
     } else {
-      if (Static.activeCategory != "All") {
-        objReturn["category.name"] = Static.activeCategory
-      }
+        if (Static.activeCategory != "All") {
+            objReturn["category.name"] = Static.activeCategory
+        }
     }
     return objReturn
-  }
+}
 
 const start = function (data, ID = "mainBlock") {
     let [Static] = fn.GetParams({ data, ID })
@@ -156,10 +156,10 @@ const start = function (data, ID = "mainBlock") {
                             />
                             {() => {
                                 // if (Variable[Static.nameRecords + "Category"]) {
-                                    let arrReturn = 
-                                        // Variable[Static.nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
-                                        Static.CryptoUniversityCategory.filter((item) => item.name !== null).map((item) => {
-                                            
+                                let arrReturn =
+                                    // Variable[Static.nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
+                                    Static.CryptoUniversityCategory.filter((item) => item.name !== null).map((item) => {
+
                                         return (
                                             <Tags
                                                 Static={Static}
@@ -169,14 +169,20 @@ const start = function (data, ID = "mainBlock") {
                                             />
                                         )
                                     })
-                                    return arrReturn
+                                return arrReturn
                                 // }
                             }}
                         </div>
 
                         <ul class="c-criptouniversity__cards">
                             <li class="c-criptouniversity__card">
-                                <a href="#" class="c-criptouniversity__link">
+                                <a
+                                    href={`/crypto-university/show/1`}
+                                    class="c-criptouniversity__link"
+                                    onclick={function (e) {
+                                        fn.siteLink(e, { title: "", item: {}, items: {} })
+                                    }}
+                                >
                                     <figure class="c-criptouniversity__wrapperimg">
                                         <img class="c-criptouniversity__logo" src="https://www.block-chain24.com/sites/default/files/styles/full_bg/public/img/kembridzhskii_universitet_zapuskaet_kripto-issledovatelskii_proekt_s_mvf_i_bis.jpeg?itok=8gdkoX1L" width="100" height="100" />
                                     </figure>
@@ -191,12 +197,18 @@ const start = function (data, ID = "mainBlock") {
                                         Возможно строки разделены переносами.
                                     </p>
                                     <div class="c-criptouniversity__info">
-                                    Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+                                        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
                                     </div>
                                 </a>
                             </li>
                             <li class="c-criptouniversity__card">
-                                <a href="#" class="c-criptouniversity__link">
+                                <a
+                                    href={`/crypto-university/show/2`}
+                                    class="c-criptouniversity__link"
+                                    onclick={function (e) {
+                                        fn.siteLink(e, { title: "", item: {}, items: {} })
+                                    }}
+                                >
                                     <figure class="c-criptouniversity__wrapperimg">
                                         <img class="c-criptouniversity__logo" src="https://www.block-chain24.com/sites/default/files/styles/full_bg/public/img/kembridzhskii_universitet_zapuskaet_kripto-issledovatelskii_proekt_s_mvf_i_bis.jpeg?itok=8gdkoX1L" width="100" height="100" />
                                     </figure>
@@ -211,12 +223,18 @@ const start = function (data, ID = "mainBlock") {
                                         Возможно строки разделены переносами.
                                     </p>
                                     <div class="c-criptouniversity__info">
-                                    Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+                                        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
                                     </div>
                                 </a>
                             </li>
                             <li class="c-criptouniversity__card">
-                                <a href="#" class="c-criptouniversity__link">
+                                <a
+                                    href={`/crypto-university/show/3`}
+                                    class="c-criptouniversity__link"
+                                    onclick={function (e) {
+                                        fn.siteLink(e, { title: "", item: {}, items: {} })
+                                    }}
+                                >
                                     <figure class="c-criptouniversity__wrapperimg">
                                         <img class="c-criptouniversity__logo" src="https://www.block-chain24.com/sites/default/files/styles/full_bg/public/img/kembridzhskii_universitet_zapuskaet_kripto-issledovatelskii_proekt_s_mvf_i_bis.jpeg?itok=8gdkoX1L" width="100" height="100" />
                                     </figure>
@@ -231,7 +249,7 @@ const start = function (data, ID = "mainBlock") {
                                         Возможно строки разделены переносами.
                                     </p>
                                     <div class="c-criptouniversity__info">
-                                    Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+                                        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
                                     </div>
                                 </a>
                             </li>
