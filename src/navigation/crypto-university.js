@@ -51,15 +51,15 @@ const start = function (data, ID = "mainBlock") {
     Variable.FooterShow = true;
 
     const swiperGo = function (numIndex) {
-        let swiperitem1 = new Swiper(".swiper-post_university", {
-            effect: "cube",
+        let swiperitem = new Swiper(".swiper-post_university", {
+            // effect: "cube",
             grabCursor: true,
-            cubeEffect: {
-                shadow: true,
-                slideShadows: true,
-                shadowOffset: 20,
-                shadowScale: 0.94,
-            },
+            // cubeEffect: {
+            //     shadow: true,
+            //     slideShadows: true,
+            //     shadowOffset: 20,
+            //     shadowScale: 0.94,
+            // },
             loop: true,
             autoplay: {
                 delay: 3000,

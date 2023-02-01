@@ -37,8 +37,6 @@ const makeFilter = function (Static) {
 }
 
 const BlockNews = async function ({ Static }) {
-  console.log('=43094c=',Static)
-  console.log('=43094c=',Variable)
   await initOne(
     async () => {
       Static.apiFilter = makeFilter(Static)
