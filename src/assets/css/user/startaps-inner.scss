@@ -385,7 +385,7 @@ $lightBlue: #00A5F7;
   // diagramm circle
   .diagramm-circle {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 
     @each $index,
@@ -393,13 +393,47 @@ $lightBlue: #00A5F7;
       .progress-circle--#{$index} {
         stroke: $color;
       }
+      .progress-circle--#{$index}:hover{
+        stroke-width: 3;
+      }
+    }
+    // .progress-circle:hover{
+    //   stroke-width: 3;
+    // }
+
+    .circle-points{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      grid-gap: 10px;
+      margin-top: 20px;
+    }
+    .circle-points_item{
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      .circle-line {
+        width: 30px;
+        height: 4px;
+        border-radius: 4px;
+        margin-right: 15px;
+        margin-top: 5px;
+      }
+      .circle-desc{
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        .circle-desc_bold{
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: 700;
+        }
+      }
     }
 
-    .circle-line {
-      width: 30px;
-      height: 4px;
-      border-radius: 4px;
-    }
+    
   }
 
 
@@ -475,12 +509,9 @@ $lightBlue: #00A5F7;
     }
 
   }
-
-
   // diagramm line
 
   // our team
-
   .team-wrap {
     display: grid;
     grid-template-columns: repeat(auto-fill, 280px);

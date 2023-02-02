@@ -121,7 +121,7 @@ const start = function (data, ID) {
                 <p class="info-desc">{Static.item.description}</p>
               </div>
             </div>
-            <img class="startap-img" src={svg['startaps-inner/figure']}></img>
+            <img class="startap-img" src={svg['startaps-inner/figure']} alt={Static.item.name}></img>
             <div class="roadmap appearience">
               <h2 class="startap-title">Road Map</h2>
               <div class="roadmap-inner">
@@ -163,7 +163,7 @@ const start = function (data, ID) {
               <div class="diagramm">
 
                 <div class="diagramm-circle">
-                  <svg width="250" height="250" viewBox="0 0 50 50">
+                  <svg width="250" height="250" viewBox="0 0 35 35">
                     {() => {
                       let offset = 0
                       return Static.item.tokenomica.map((item, index) => {
@@ -177,7 +177,7 @@ const start = function (data, ID) {
                             stroke-width="2"
                             stroke-dasharray={`${item.value} 100`}
                             stroke-dashoffset={`-${offset - item.value}`}
-                            class={`progress-circle--${index}`}
+                            class={["progress-circle", `progress-circle--${index}`]}
                           ></circle>
                         )
                       })
@@ -191,7 +191,7 @@ const start = function (data, ID) {
                           <div class="circle-points_item">
                             <div class={["circle-line", `progressBlock-column--${index}`]}></div>
                             <div class="circle-desc">
-                              <span>{item.value}%</span>
+                              <span class="circle-desc_bold">{item.value}%</span>
                               <span>{item.name}</span>
                             </div>
                           </div>
