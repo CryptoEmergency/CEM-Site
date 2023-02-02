@@ -143,7 +143,17 @@ const start = function (data, ID) {
                     <div class="c-criptocompany__authors swiper-container">
                         <div class="swiper swiper-post_authors" After={() => swiperGo()}>
                             <div class="swiper-wrapper">
-                                <a class="swiper-slide">
+                                <a
+                                    class="swiper-slide"
+                                    href="/crypto-university/teacher/1/"
+                                    onclick={function(e){
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        fn.siteLinkModal(e, { title: "Преподаватель: Иванов Иван Иванович", teacher: {
+                                            name: "Иванов Иван Иванович"
+                                        }})
+                                    }}
+                                >
                                     <div class="swiper-post_media_image_container">
                                         <figure class="c-criptocompany__sliderwrap">
                                             <img src={images["university/teacher1"]} />
@@ -151,7 +161,17 @@ const start = function (data, ID) {
                                         </figure>
                                     </div>
                                 </a>
-                                <a class="swiper-slide">
+                                <a
+                                    class="swiper-slide"
+                                    href="/crypto-university/teacher/2/"
+                                    onclick={function(e){
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        fn.siteLinkModal(e, { title: "Преподаватель: Алексеева Ксения Александровна", teacher: {
+                                            name: "Алексеева Ксения Александровна"
+                                        }})
+                                    }}
+                                >
                                     <div class="swiper-post_media_image_container">
                                         <figure class="c-criptocompany__sliderwrap">
                                             <img src={images["university/teacher2"]} />
@@ -159,7 +179,17 @@ const start = function (data, ID) {
                                         </figure>
                                     </div>
                                 </a>
-                                <a class="swiper-slide">
+                                <a
+                                    class="swiper-slide"
+                                    href="/crypto-university/teacher/3/"
+                                    onclick={function(e){
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        fn.siteLinkModal(e, { title: "Преподаватель: Крылов Петр Ильич", teacher: {
+                                            name: "Крылов Петр Ильич"
+                                        }})
+                                    }}
+                                >
                                     <div class="swiper-post_media_image_container">
                                         <figure class="c-criptocompany__sliderwrap">
                                             <img src={images["university/teacher3"]} />
@@ -167,7 +197,17 @@ const start = function (data, ID) {
                                         </figure>
                                     </div>
                                 </a>
-                                <a class="swiper-slide">
+                                <a
+                                    class="swiper-slide"
+                                    href="/crypto-university/teacher/4/"
+                                    onclick={function(e){
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        fn.siteLinkModal(e, { title: "Преподаватель: Мальцева Надежда Николаевна", teacher: {
+                                            name: "Мальцева Надежда Николаевна"
+                                        }})
+                                    }}
+                                >
                                     <div class="swiper-post_media_image_container">
                                         <figure class="c-criptocompany__sliderwrap">
                                             <img src={images["university/teacher4"]} />
