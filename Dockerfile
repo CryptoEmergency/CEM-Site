@@ -1,4 +1,4 @@
-FROM node:19
+FROM node:17.8.0
 LABEL maintainer="inbox@ienshin.ru"
 ENV TZ=Europe/Moscow
 WORKDIR /app
