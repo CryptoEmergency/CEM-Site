@@ -26,7 +26,6 @@ const start = function (data, ID) {
       //  await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Крипто RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Crypto" })
       //   await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
 
-
       // const tmp = await fn.restApi.getIco({ filter: { startDate: { $gte: new Date() } } })
       const tmp = await fn.restApi.getStartaps({ filter: {} })
       console.log('=e5bcc8=', tmp)
@@ -317,7 +316,23 @@ const start = function (data, ID) {
     },
     () => {
 
+      // <svg class="progress-ring" width="120" height="120">
+      //   <circle class="progress-ring_circle" stroke="#000" stroke-width="4" cx="60" cy="60" r="52" fill="transparent" />
+      // </svg>
+      return (
+        <div class="mt--70">
+          <span>123</span>
+          <div style='width="24px"; height="24px";'>
+            <svg width="50px" height="50px" viewBox="0 0 50 50" >
+              <rect width="100%" height="100%" fill="green" />
+            </svg>
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="progress-ring_circle" stroke="#000" stroke-width="4" cx="60" cy="60" r="52" fill="transparent" />
+            </svg>
+          </div>
 
+        </div>
+      )
       return (
         <div>
 
