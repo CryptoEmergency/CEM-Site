@@ -213,7 +213,14 @@ const start = function (data, ID) {
 
                         <ul class="c-criptocompany__list">
                             <li class="">
-                                <a href="#" class="c-criptocompany__course">
+                                <a
+                                    class="c-criptocompany__course"
+                                    href="/crypto-university/course/1/"
+                                    onclick={(e) => {
+                                        e.preventDefault();
+                                        fn.siteLinkModal(e, { title: "Курс по NFT-технологии. Вводный"})
+                                    }}
+                                >
                                     <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
                                     <footer class="c-criptocompany__footer">
                                         <time class="c-criptocompany__time" datetime="">22.02.2023</time>
