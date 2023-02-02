@@ -1296,7 +1296,7 @@ restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter,
 
 
 
-restApi.getStartaps = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+restApi.getStartaps = async function ({ cache, name, limit = 60, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
 
 
     let defaultFilter = {}
@@ -1417,7 +1417,7 @@ restApi.getUniversity = async function ({ cache, name, limit = 6, offset = 0, fi
     }
 }
 
-restApi.getIco = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+restApi.getIco = async function ({ cache, name, limit = 60, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
 
 
     let defaultFilter = {}

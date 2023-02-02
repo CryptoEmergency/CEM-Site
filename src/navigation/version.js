@@ -20,12 +20,14 @@ import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@comp
 let tmp = 0
 const start = function (data, ID) {
 
+  const arrColor = ["#86cfa3", "#a2c6e0", "#ffc7ec", "#f8faa0", "#adffd8"]
+  const arrTokek = [{ name: 1, value: 4 }, { name: 1, value: 8 }, { name: 1, value: 8 }, { name: 1, value: 20 }, { name: 1, value: 60 }]
+
   Variable.Static.tpm = 5
   init(
     async () => {
       //  await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Крипто RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Crypto" })
       //   await fn.restApi.setUserRoom.create({ visible: true, system: true, title: "Флудилка RU", description: "Chat with other users on various topics", images: "111", languages: "ru", category: "Flood" })
-
 
       // const tmp = await fn.restApi.getIco({ filter: { startDate: { $gte: new Date() } } })
       const tmp = await fn.restApi.getStartaps({ filter: {} })
@@ -317,7 +319,97 @@ const start = function (data, ID) {
     },
     () => {
 
+      // <svg class="progress-ring" width="120" height="120">
+      //   <circle class="progress-ring_circle" stroke="#000" stroke-width="4" cx="60" cy="60" r="52" fill="transparent" />
+      // </svg>
+      return (
+        <div class="mt--70">
+          <span>123</span>
+          <div>
+            <svg class="chart" width="500" height="500" viewBox="0 0 50 50">
 
+              {() => {
+                let befor = 0
+                return arrTokek.map((item, index) => {
+                  befor = befor + item.value
+                  if (index == 0) {
+                    return (
+                      <circle
+                        stroke={arrColor[index]}
+                        stroke-dasharray={`${item.value} 100`}
+                        r="15.9"
+                        cx="50%"
+                        cy="50%"
+                      ></circle>
+                    )
+                  } else {
+                    return (
+                      <circle
+                        stroke={arrColor[index]}
+                        stroke-dasharray={`${item.value} 100`}
+                        stroke-dashoffset={`-${befor - item.value}`}
+                        r="15.9"
+                        cx="50%"
+                        cy="50%"
+                      ></circle>
+                    )
+                  }
+                })
+              }}
+              {/* {
+
+                arrTokek.map((item, index) => {
+
+                  return (
+                    <circle
+                      stroke={arrColor[index]}
+                      stroke-dasharray={`${item.value} 100`}
+                      r="15.9"
+                      cx="50%"
+                      cy="50%"
+                    ></circle>
+                  )
+
+                })
+              } */}
+            </svg>
+            <svg class="chart" width="500" height="500" viewBox="0 0 50 50">
+              <circle
+                stroke="#86cfa3"
+                stroke-dasharray="8 100"
+                r="15.9"
+                cx="50%"
+                cy="50%"
+              >
+              </circle>
+              <circle stroke="#a2c6e0"
+                stroke-dasharray="32 100"
+                stroke-dashoffset="-8"
+                r="15.9"
+                cx="50%"
+                cy="50%"
+              >
+              </circle>
+              <circle stroke="#ffc7ec"
+                stroke-dasharray="30 100"
+                stroke-dashoffset="-40"
+                r="15.9"
+                cx="50%"
+                cy="50%"
+              >
+              </circle>
+              <circle stroke="#f8faa0"
+                stroke-dasharray="30 100"
+                stroke-dashoffset="-70"
+                r="15.9"
+                cx="50%"
+                cy="50%"
+              >
+              </circle>
+            </svg>
+          </div>
+        </div>
+      )
       return (
         <div>
 

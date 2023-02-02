@@ -25,16 +25,25 @@ const day = startDay.clone().subtract(1, "day");
 const isCurrentDay = (day) => Helpers.moment().isSame(day, "day");
 let isCurrentMonth = (day) => Helpers.moment().isSame(day, "month");
 
-const monthHandler = (Static, prev = true) => {
-    if (prev) {
-        Static.moment.subtract(1, "month")
-    } else {
-        Static.moment.add(1, "month")
-    }
+const staticRenderCalendar = (Static) => {
     Static.startDay = Static.moment.clone().startOf("month").startOf("week");
     Static.day = Static.startDay.clone().subtract(1, "day");
     isCurrentMonth = (item) => Static.moment.isSame(item, "month");
     Static.tmpTest = [...Array(42)].map(() => Static.day.add(1, "day").clone());
+}
+
+const monthHandler = (Static, prev = true) => {
+    if (Static.renderMonth) {
+        null
+    } else {
+        if (prev) {
+            Static.moment.subtract(1, "month")
+        } else {
+            Static.moment.add(1, "month")
+        }
+
+        staticRenderCalendar(Static)
+    }
 };
 
 const listDate = [...Array(42)].map(() => day.add(1, "day").clone());
@@ -145,15 +154,49 @@ const addForm = function (Static) {
         null
     }
 }
+
+let difference;
+
+const monthActive = (Static, index) => {
+    Static.moment = Helpers.moment()
+    if (index + 1 == Static.activeMonthClone.format("M")) {
+        Static.calendarMonth.style.display = "none";
+        Static.renderMonth = false;
+    } else if (index + 1 > Static.activeMonthClone.format("M")) {
+        difference = (index + 1) - Static.activeMonthClone.format("M");
+        Static.moment.add(difference, "month");
+
+        staticRenderCalendar(Static)
+    } else {
+        difference = Static.activeMonthClone.format("M") - (index + 1);
+        Static.moment.subtract(difference, "month");
+
+        staticRenderCalendar(Static)
+    }
+
+    Static.calendarMonth.style.display = "none";
+    Static.renderMonth = false;
+}
+
 let monthsName = Helpers.moment.months();
 const renderMonth = (Static) => {
-    if (Static.renderMonth == true) {
+    if (Static.renderMonth) {
         return (
-            <div class="calendar-month">
-                {monthsName.map((item) => {
+            <div 
+                class="calendar-month"
+                Element={($el) => { Static.calendarMonth = $el }}
+            >
+                {monthsName.map((item, index) => {
                     return (
                         <div class="calendar-month_cell">
-                            <div class="calendar-month_name">
+                            <div 
+                                class="calendar-month_name"
+                                onClick={() => {
+                                    monthActive(Static, index)
+                                    initReload()
+                                }}
+                                style={[Static.activeMonth.format("MMMM") == item ? "color: red" : null]}
+                            >
                                 {item}
                             </div>
                         </div>
@@ -191,6 +234,9 @@ const start = function (data, ID) {
             Static.day = null
             Static.isCurrentMonth = isCurrentMonth()
             Static.renderMonth = false
+            Static.activeMonth = Helpers.moment().clone().startOf("month")
+            Static.activeMonthClone
+            Static.calendarMonth = null
         },
         fn: () => {
             // console.log(Static.tmpTest)
@@ -213,16 +259,18 @@ const start = function (data, ID) {
                                     <h3
                                         onClick={() => {
                                             Static.renderMonth = true
+                                            Static.activeMonthClone = Static.activeMonth;
                                             initReload()
                                         }}
                                     >
-                                        {Static.moment.format("MMMM YYYY")}
+                                        {Static.renderMonth ? `${Static.moment.format("YYYY")} year` : Static.moment.format("MMMM YYYY")}
                                     </h3>
                                 <button
                                     onClick={() => {
                                         monthHandler(Static, false)
                                         initReload()
                                     }}
+                                    
                                 >
                                     <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]}/>
                                 </button>
