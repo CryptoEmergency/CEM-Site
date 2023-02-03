@@ -6,6 +6,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
+import { fn } from '@src/functions/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
@@ -154,7 +155,7 @@ const start = function (data, ID) {
                                 </li>
                                 <li class="">
                                     <a href="#" class="c-criptocompany__course">
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии.</span>
                                         <footer class="c-criptocompany__footer">
                                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
                                             <span class="c-criptocompany__hourse">22 ч</span>
@@ -166,50 +167,14 @@ const start = function (data, ID) {
                                 </li>
                                 <li class="">
                                     <a href="#" class="c-criptocompany__course">
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Продвинутый</span>
                                         <footer class="c-criptocompany__footer">
                                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                            <span class="c-criptocompany__hourse">22 ч</span>
+                                            <span class="c-criptocompany__hourse">45 ч</span>
                                         </footer>
                                         <div class="c-criptocompany__stiker">
                                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
                                         </div>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="c-criptocompany__course">
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                        <footer class="c-criptocompany__footer">
-                                            <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                            <span class="c-criptocompany__hourse">22 ч</span>
-                                        </footer>
-                                        <div class="c-criptocompany__stiker">
-                                            <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="c-criptocompany__course">
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                        <footer class="c-criptocompany__footer">
-                                            <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                            <span class="c-criptocompany__hourse">22 ч</span>
-                                        </footer>
-                                        {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="c-criptocompany__course">
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                        <footer class="c-criptocompany__footer">
-                                            <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                            <span class="c-criptocompany__hourse">22 ч</span>
-                                        </footer>
-                                        {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
                                     </a>
                                 </li>
                             </ul>
