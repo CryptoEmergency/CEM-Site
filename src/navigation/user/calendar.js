@@ -48,17 +48,20 @@ const monthHandler = (Static, prev = true) => {
 
 const listDate = [...Array(42)].map(() => day.add(1, "day").clone());
 
-// {
-    //     _id: 1,
-    //     date: 1,
-    //     title: '32',
-    //     createdDate: new Date().toLocaleDateString(),
-    //     completed: '',
-    //     notifyDate: new Date().toISOString()
-    // },
-
 const listNames = {
     weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu' , 'Fri', 'Sun', 'Sat']
+}
+
+const addNew = async function (Static) {
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.elTitle, text: "", media: [], notify: "", type: "", showDate: new Date().toISOString(), noAlert: "" })
+    console.log(response)
+    if (response && response.status == "ok") {
+        if (response.list_records && response.list_records[0]) {
+            Static.notesCalendar.list_records.unshift(response.list_records[0])
+        }
+    }
+    console.log(response)
+    initReload()
 }
 
 const addNote = (id) => {
@@ -135,6 +138,7 @@ const addForm = function (Static) {
                             type="button"
                             // ref={elemButton}
                             onClick={() => {
+                                addNew(Static)
                                 Static.modal = false
                                 initReload()
                             }}
@@ -277,23 +281,28 @@ const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
 
+    Static.tmpTest = listDate
+    Static.active = null
+    Static.modal = false
+    Static.elTitle = null
+    Static.moment = Helpers.moment()
+    Static.startDay = null
+    Static.day = null
+    Static.isCurrentMonth = isCurrentMonth()
+    Static.renderMonth = false
+    Static.renderYear = false
+    Static.activeMonth = Helpers.moment().clone().startOf("month")
+    Static.activeMonthClone = null
+
     load({
         ID,
         fnLoad: async () => {
-            Static.tmpTest = listDate
-            Static.active = null
-            Static.modal = false
-            Static.elTitle = null
-            Static.moment = Helpers.moment()
-            Static.startDay = null
-            Static.day = null
-            Static.isCurrentMonth = isCurrentMonth()
-            Static.renderMonth = false
-            Static.renderYear = false
-            Static.activeMonth = Helpers.moment().clone().startOf("month")
-            Static.activeMonthClone = null
+            
+            Static.notesCalendar = await fn.restApi.getUserCalendar({ filter: {} })
+            console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
+            console.log(Static.notesCalendar)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
@@ -407,6 +416,9 @@ const start = function (data, ID) {
                                 )
                             })}
                         </div>
+                        {/* <div class="calendar-notes">
+                            {Static.notesCalendar.title}
+                        </div> */}
                         <div class="modals-test">
                             {addForm(Static)}
                         </div>
