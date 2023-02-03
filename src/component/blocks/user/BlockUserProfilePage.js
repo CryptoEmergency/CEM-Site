@@ -434,12 +434,15 @@ BlockUserProfilePage.subscribers = function (Static, data) {
         return (<></>)
     }
 
+    console.log('=6916b1= data =',data)
+
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
             <h2>{Variable.lang.toggle.subscribers}</h2>
             <div class="friends_block">
                 {
                     Static.activeItems.list_records.map((item, index) => {
+                        console.log('=592c0a=> ItemsMenu ( ', fn.itemsMenu.subscribers(Static, item))
                         return (
                             <div
                                 class="friend"
@@ -457,6 +460,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
                                     <p>{item.nickname}</p>
                                     <p>{item.fullname ? item.fullname : ''}</p>
                                 </div>
+                                {<ItemsMenu items={fn.itemsMenu.subscribers(Static, item)} author={Variable.myInfo} />}
                             </div>
                         )
                     })
