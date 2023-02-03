@@ -1295,6 +1295,51 @@ restApi.getNotes = async function ({ cache, name, limit = 6, offset = 0, filter,
 }
 
 
+restApi.getUserCalendar = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
+
+    let defaultFilter = {}
+
+    if (filter._id) {
+        defaultFilter = {}
+    }
+
+    let defaultSelect = {
+        title: 1,
+        text: 1,
+        media: 1,
+        showDate: 1,
+        type: 1,
+        notify: 1,
+        showDate: 1
+    }
+
+
+    let data = {
+        action: "getUserCalendar",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: Object.assign(defaultFilter, filter),
+        select: Object.assign(defaultSelect, select),
+        sort
+    }
+
+    let response = await sendApi.send(data);
+
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 
 restApi.getStartaps = async function ({ cache, name, limit = 60, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
 
@@ -1512,6 +1557,39 @@ restApi.setIco.update = async function (data, noAlert = false) {
     return checkSetAnswer(response, noAlert)
 }
 
+restApi.setUserCalendar = {}
+restApi.setUserCalendar.create = async function ({ title, text, media, notify, type, showDate, noAlert }) {
+    let data = {
+        value: {
+            title,
+            text,
+            media,
+            notify,
+            type,
+            showDate
+        },
+    };
+    const response = await sendApi.create("setUserCalendar", data);
+    return checkSetAnswer(response, noAlert)
+}
+restApi.setUserCalendar.update = async function ({ _id, title, text, media, notify, showDate, type, noAlert, active = true }) {
+    let data = {
+        _id,
+        value: {
+            title,
+            text,
+            media,
+            active,
+            notify,
+            type,
+            showDate
+        },
+    };
+    // console.log('=8a8bce=',data)
+    const response = await sendApi.create("setUserCalendar", data);
+    // console.log('=8a8bce=',response)
+    return checkSetAnswer(response, noAlert)
+}
 
 restApi.setNotes.create = async function ({ title, text, media, noAlert }) {
     let data = {

@@ -8,6 +8,7 @@ import svg from "@assets/svg/index.js";
 
 const ItemsMenu = function (data) {
 
+  console.log('=e04ea6= data =',data)
   let items, author
   if (data) {
     if (data.items) {

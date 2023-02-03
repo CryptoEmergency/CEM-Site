@@ -1124,4 +1124,51 @@ itemsMenu.community = function (Static, item) {
     return items
 }
 
+itemsMenu.subscribers = function (Static, item) {
+    const items =
+        [
+            {
+                text: item.subscribe
+                    ? Variable.lang.button.unsubscribe
+                    : Variable.lang.button.subscribe,
+                type: "subscription",
+                onlyAuth: true,
+                onclick: async () => {
+                    const response = await fn.restApi.setUsers.subscribe({ _id: item._id })
+                      console.log(response)
+                    console.log('=b959ac=', response)
+                    if (response.status === "ok") {
+                        item.subscribe = !item.subscribe
+                        initReload();
+                    } else {
+                        Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                    }
+                }
+            },
+            {
+                text: Variable.lang.select.blackList,
+                type: "blackList",
+                onlyAuth: true,
+                color: "red",
+                onclick: async () => {
+                    if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
+                        console.log('Post in modal, close this')
+                    }
+                    modals.ModalConfirmAction({
+                        action: async () => {
+                            let response = await fn.restApi.setUsers.blackList({ _id: item._id })
+                            Variable.DelModals("ModalConfirmAction")
+                            await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+                        },
+                        text: Variable.lang.p.toBlackListConfirm,
+                        button: Variable.lang.button.yes
+                    })
+                }
+            },
+        ]
+
+
+    return items
+}
+
 export { itemsMenu };

@@ -434,6 +434,8 @@ BlockUserProfilePage.subscribers = function (Static, data) {
         return (<></>)
     }
 
+    console.log('=6916b1= data =', data)
+
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
             <h2>{Variable.lang.toggle.subscribers}</h2>
@@ -457,6 +459,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
                                     <p>{item.nickname}</p>
                                     <p>{item.fullname ? item.fullname : ''}</p>
                                 </div>
+                                {<ItemsMenu items={fn.itemsMenu.subscribers(Static, item)} author={item} />}
                             </div>
                         )
                     })
@@ -1223,7 +1226,9 @@ BlockUserProfilePage.social = function (Static, data) {
                                             e.preventDefault();
                                             e.stopPropagation();
                                             Static.elShowMenu.forEach((item, i) => {
-                                                Static.elShowMenu[i].style = ""
+                                                if (i != index) {
+                                                    Static.elShowMenu[i].style = ""
+                                                }
                                             })
                                             Static.elShowMenu[index].style = Static.elShowMenu[index].style.display == "" ? "display: block" : ""
                                         }}

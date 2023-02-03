@@ -48,21 +48,21 @@ const monthHandler = (Static, prev = true) => {
 
 const listDate = [...Array(42)].map(() => day.add(1, "day").clone());
 
-// {
-    //     _id: 1,
-    //     date: 1,
-    //     title: '32',
-    //     createdDate: new Date().toLocaleDateString(),
-    //     completed: '',
-    //     notifyDate: new Date().toISOString()
-    // },
-
 const listNames = {
     weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu' , 'Fri', 'Sun', 'Sat']
 }
 
-const addDataNotes = [];
-
+const addNew = async function (Static) {
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.elTitle, text: "", media: [], notify: "", type: "", showDate: new Date().toISOString(), noAlert: "" })
+    console.log(response)
+    if (response && response.status == "ok") {
+        if (response.list_records && response.list_records[0]) {
+            Static.notesCalendar.list_records.unshift(response.list_records[0])
+        }
+    }
+    console.log(response)
+    initReload()
+}
 
 const addNote = (id) => {
     // если поле для ввода текста пустое, ничего не делаем
@@ -138,6 +138,7 @@ const addForm = function (Static) {
                             type="button"
                             // ref={elemButton}
                             onClick={() => {
+                                addNew(Static)
                                 Static.modal = false
                                 initReload()
                             }}
@@ -160,8 +161,7 @@ let difference;
 const monthActive = (Static, index) => {
     Static.moment = Helpers.moment()
     if (index + 1 == Static.activeMonthClone.format("M")) {
-        Static.calendarMonth.style.display = "none";
-        Static.renderMonth = false;
+        staticRenderCalendar(Static)
     } else if (index + 1 > Static.activeMonthClone.format("M")) {
         difference = (index + 1) - Static.activeMonthClone.format("M");
         Static.moment.add(difference, "month");
@@ -174,17 +174,39 @@ const monthActive = (Static, index) => {
         staticRenderCalendar(Static)
     }
 
-    Static.calendarMonth.style.display = "none";
     Static.renderMonth = false;
 }
 
+const yearActive = (Static, index) => {
+    Static.moment = Helpers.moment()
+    console.log(Static.moment)
+    if (index + 2019 == Static.activeMonthClone.format("Y")) {
+        staticRenderCalendar(Static)
+    } else if (index + 2019 > Static.activeMonthClone.format("Y")) {
+        difference = (index + 2019) - Static.activeMonthClone.format("Y");
+        Static.moment.add(difference, "year");
+
+        staticRenderCalendar(Static)
+    } else {
+        difference = Static.activeMonthClone.format("Y") - (index + 1 + 2018);
+        Static.moment.subtract(difference, "year");
+
+        staticRenderCalendar(Static)
+    }
+
+    Static.renderYear = false;
+    Static.renderMonth = true;
+}
+
 let monthsName = Helpers.moment.months();
+const yearsName = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+
 const renderMonth = (Static) => {
     if (Static.renderMonth) {
+        console.log(22)
         return (
             <div 
                 class="calendar-month"
-                Element={($el) => { Static.calendarMonth = $el }}
             >
                 {monthsName.map((item, index) => {
                     return (
@@ -193,6 +215,7 @@ const renderMonth = (Static) => {
                                 class="calendar-month_name"
                                 onClick={() => {
                                     monthActive(Static, index)
+                                    console.log(Static.activeMonthClone.format("Y"))
                                     initReload()
                                 }}
                                 style={[Static.activeMonth.format("MMMM") == item ? "color: red" : null]}
@@ -204,8 +227,45 @@ const renderMonth = (Static) => {
                 })}
             </div>
         )
+    } else if (Static.renderYear) {
+        console.log(Static.renderYear)
+        return (
+            <div 
+                class="calendar-year"
+            >
+                {yearsName.map((item, index) => {
+                    return (
+                        <div class="calendar-year_cell">
+                            <div 
+                                class="calendar-year_name"
+                                onClick={() => {
+                                    yearActive(Static, index)
+                                    // Static.renderMonth = true
+                                    // monthActive(Static, index)
+                                    initReload()
+                                }}
+                                style={[Static.activeMonth.format("Y") == item ? "color: red" : null]}
+                            >
+                                {item}
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        )
     } else {
         null
+    }
+}
+
+const activeCalendarTitle = (Static) => {
+    // Static.renderMonth ? `${Static.moment.format("YYYY")} year` : Static.moment.format("MMMM YYYY")
+    if (Static.renderMonth) {
+        `${Static.moment.format("YYYY")} year`
+    } else if (Static.renderYear) {
+        `${yearsName[0]} - ${yearsName[-1]}`
+    } else {
+        Static.moment.format("MMMM YYYY")
     }
 }
 
@@ -221,25 +281,28 @@ const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
 
+    Static.tmpTest = listDate
+    Static.active = null
+    Static.modal = false
+    Static.elTitle = null
+    Static.moment = Helpers.moment()
+    Static.startDay = null
+    Static.day = null
+    Static.isCurrentMonth = isCurrentMonth()
+    Static.renderMonth = false
+    Static.renderYear = false
+    Static.activeMonth = Helpers.moment().clone().startOf("month")
+    Static.activeMonthClone = null
+
     load({
         ID,
         fnLoad: async () => {
-            Static.tmpTest = listDate
-            Static.notes = addDataNotes
-            Static.active = null
-            Static.modal = false
-            Static.elTitle = null
-            Static.moment = Helpers.moment()
-            Static.startDay = null
-            Static.day = null
-            Static.isCurrentMonth = isCurrentMonth()
-            Static.renderMonth = false
-            Static.activeMonth = Helpers.moment().clone().startOf("month")
-            Static.activeMonthClone
-            Static.calendarMonth = null
+            
+            Static.notesCalendar = await fn.restApi.getUserCalendar({ filter: {} })
+            console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
-            // console.log(Static.tmpTest)
+            console.log(Static.notesCalendar)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
@@ -258,12 +321,32 @@ const start = function (data, ID) {
                                 </button>
                                     <h3
                                         onClick={() => {
-                                            Static.renderMonth = true
+                                            
+                                            if (Static.renderMonth) {
+                                                Static.renderYear = true
+                                                Static.renderMonth = false
+                                            }  else if (Static.renderYear) {
+                                                null
+                                            } else {
+                                                Static.renderMonth = true
+                                            }
+
                                             Static.activeMonthClone = Static.activeMonth;
+                                            
                                             initReload()
                                         }}
+                                        
+                                        style={[Static.renderYear ? "cursor: default; opacity: 1;" : null]}
                                     >
-                                        {Static.renderMonth ? `${Static.moment.format("YYYY")} year` : Static.moment.format("MMMM YYYY")}
+                                        {() => {
+                                            if (Static.renderMonth) {
+                                                return `${Static.moment.format("YYYY")} year`
+                                            } else if (Static.renderYear) {
+                                                return `${yearsName[0]} - ${yearsName[yearsName.length - 1]}`
+                                            } else {
+                                                return Static.moment.format("MMMM YYYY")
+                                            }
+                                        }}
                                     </h3>
                                 <button
                                     onClick={() => {
@@ -295,6 +378,7 @@ const start = function (data, ID) {
                                         onclick={() => {
                                             // Static.tmpTest.splice(index, 1, addNote(index + 1))
                                             Static.active = item
+                                            console.log(Static.moment)
                                             // addNotes()
                                             initReload()
                                         }}
@@ -332,6 +416,9 @@ const start = function (data, ID) {
                                 )
                             })}
                         </div>
+                        {/* <div class="calendar-notes">
+                            {Static.notesCalendar.title}
+                        </div> */}
                         <div class="modals-test">
                             {addForm(Static)}
                         </div>
