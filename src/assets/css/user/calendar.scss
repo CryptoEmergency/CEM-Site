@@ -217,3 +217,51 @@
         align-items: center;
     }
 }
+
+.calendar-year {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 270px);
+    margin-top: 25px;
+    border-right: 1px dashed #767E98;
+    border-bottom: 1px dashed #767E98;
+
+    @media(max-width: 1199px) {
+        grid-template-rows: repeat(3, 270px);
+    }
+
+    @media(max-width: 970px) {
+        grid-template-rows: repeat(3, 211px);
+    }
+
+    @media(max-width: 600px) {
+        grid-template-rows: repeat(3, 149px);
+    }
+
+    @media(max-width: 490px) {
+        grid-template-rows: repeat(3, 99px);
+    }
+
+    &_cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px dashed #767E98;
+        border-left: 1px dashed #767E98;
+        background-color: #232733;
+
+        &:hover {
+            background-color: #373d51;
+            transition: .5s ease-in-out;
+            cursor: pointer;
+        }
+    }
+
+    &_name {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
