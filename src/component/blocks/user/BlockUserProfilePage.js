@@ -434,7 +434,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
         return (<></>)
     }
 
-    console.log('=6916b1= data =',data)
+    console.log('=6916b1= data =', data)
 
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
@@ -460,7 +460,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
                                     <p>{item.nickname}</p>
                                     <p>{item.fullname ? item.fullname : ''}</p>
                                 </div>
-                                {<ItemsMenu items={fn.itemsMenu.subscribers(Static, item)} author={Variable.myInfo} />}
+                                {<ItemsMenu items={fn.itemsMenu.subscribers(Static, item)} author={item} />}
                             </div>
                         )
                     })
