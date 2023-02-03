@@ -1223,7 +1223,9 @@ BlockUserProfilePage.social = function (Static, data) {
                                             e.preventDefault();
                                             e.stopPropagation();
                                             Static.elShowMenu.forEach((item, i) => {
-                                                Static.elShowMenu[i].style = ""
+                                                if (i != index) {
+                                                    Static.elShowMenu[i].style = ""
+                                                }
                                             })
                                             Static.elShowMenu[index].style = Static.elShowMenu[index].style.display == "" ? "display: block" : ""
                                         }}

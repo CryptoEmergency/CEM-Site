@@ -10,11 +10,12 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 
+
 const showLines = function (listLines) {
-  return listLines.map((item) => {
+  return listLines.map((item, index) => {
     return (
       <div class="progressBlock">
-        <div class="progressBlock-column" style={[`width: calc(100% / 100 * ${item.value})`]}></div>
+        <div class={["progressBlock-column", `progressBlock-column--${index}`]} style={[`width: calc(100% / 100 * ${item.value})`]}></div>
         <span>{item.value}%</span>
       </div>
     )
@@ -22,10 +23,10 @@ const showLines = function (listLines) {
 }
 
 const showPoints = function (listPoints) {
-  return listPoints.map((item) => {
+  return listPoints.map((item, index) => {
     return (
       <div class="line-point_item">
-        <div class="line-point_circle"></div>
+        <div class={["line-point_circle", `line-point_circle--${index}`]}></div>
         <span>{item.name}</span>
         <span class="line-point_procent">{item.value}%</span>
       </div>
@@ -66,7 +67,17 @@ const start = function (data, ID) {
             <div class="crypto appearience">
               <div class="social">
                 <div class="social-img">
-                  <img src={`/assets/upload/worldPress/${Static.item.cover}`}></img>
+                  {
+                    Static.item.cover
+                      ?
+                      <img src={`/assets/upload/worldPress/${Static.item.cover}`}></img>
+                      :
+                      Static.item.coverVideo
+                        ?
+                        <iframe id="startupVideoPlayer" width="100%" height="400px" src={Static.item.coverVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        :
+                        null
+                  }
                 </div>
 
                 {
@@ -93,7 +104,7 @@ const start = function (data, ID) {
 
                 <div class="social-btns">
 
-                  <a href={Static.item.whitePaperLink} class="btn-item">
+                  <a href={Static.item.whitePaperLink} class={["btn-item", Static.item.whitePaperLink ? "social-btn_passive" : null]}>
                     <div class="btn-item_text">White paper</div>
                   </a>
 
@@ -106,14 +117,11 @@ const start = function (data, ID) {
               </div>
 
               <div class="info">
+                <h2>{Static.item.title}</h2>
                 <p class="info-desc">{Static.item.description}</p>
               </div>
             </div>
-
-            <img class="startap-img" src={svg['startaps-inner/figure']}></img>
-
-
-
+            <img class="startap-img" src={svg['startaps-inner/figure']} alt={Static.item.name}></img>
             <div class="roadmap appearience">
               <h2 class="startap-title">Road Map</h2>
               <div class="roadmap-inner">
@@ -144,13 +152,55 @@ const start = function (data, ID) {
               </div>
             </div>
 
+            <div class="promovideo">
+              <h2 class="startap-title">Promo video</h2>
+              <iframe class="promovideo-video" id="startupVideoPlayer" width="100%" height="500px" src={Static.item.coverVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
             <div class="tokenomics">
               <h2 class="startap-title">Tokenomics</h2>
 
-
               <div class="diagramm">
+
                 <div class="diagramm-circle">
-                  <p>Hello World!</p>
+                  <svg width="250" height="250" viewBox="0 0 35 35">
+                    {() => {
+                      let offset = 0
+                      return Static.item.tokenomica.map((item, index) => {
+                        offset += item.value
+                        return (
+                          <circle
+                            fill="transparent"
+                            cx="50%"
+                            cy="50%"
+                            r="15.9"
+                            stroke-width="2"
+                            stroke-dasharray={`${item.value} 100`}
+                            stroke-dashoffset={`-${offset - item.value}`}
+                            class={["progress-circle", `progress-circle--${index}`]}
+                          ></circle>
+                        )
+                      })
+                    }}
+                  </svg>
+
+                  <div class="circle-points">
+                    {() => {
+                      return Static.item.tokenomica.map((item, index) => {
+                        return (
+                          <div class="circle-points_item">
+                            <div class={["circle-line", `progressBlock-column--${index}`]}></div>
+                            <div class="circle-desc">
+                              <span class="circle-desc_bold">{item.value}%</span>
+                              <span>{item.name}</span>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }}
+
+
+                  </div>
                 </div>
 
                 <div class="diagramm-line">

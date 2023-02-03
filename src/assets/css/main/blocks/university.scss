@@ -684,6 +684,11 @@
 
     &__authors {
         grid-area: com_authors;
+
+        .swiper-slide {
+            color: inherit;
+            text-decoration: none;
+        }
     }
 
     &__sliderwrap {
@@ -719,6 +724,7 @@
     &__list {
         display: grid;
         grid-template-columns: repeat(3, minmax(300px, 1fr));
+        align-items: stretch;
         gap: 20px;
         list-style-type: none;
         margin: 0;
@@ -735,7 +741,9 @@
 
     &__course {
         position: relative;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         padding: 20px;
         color: inherit;
         text-decoration: none;
@@ -746,6 +754,7 @@
 
     &__coursedesc {
         display: block;
+        flex-grow: 1;
         margin-bottom: 20px;
         font-size: 30px;
         background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
@@ -1022,5 +1031,95 @@
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 20px;
+    }
+}
+
+.c-cryptoteacher {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    &__container {
+        display: grid;
+        grid-template-areas:
+            'cr_photo cr_name'
+            'cr_photo cr_bio'
+            'cr_ach cr_ach'
+            'cr_cours cr_cours'
+            'cr_rev cr_rev';
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: minmax(40px, min-content) repeat(4, auto);
+        gap: 20px;
+
+        @media(max-width: 800px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__photo {
+        grid-area: cr_photo;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+
+        img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+        }
+    }
+
+    &__jobtitle {
+        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &__title {
+        grid-area: cr_name;
+        font-weight: 600;
+        text-align: center;
+        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &__biography {
+        grid-area: cr_bio;
+
+        p {
+            text-indent: 2rem;
+        }
+    }
+
+    &__subtitle {
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    &__courses {
+        grid-area: cr_cours;
+    }
+
+    &__achievements {
+        grid-area: cr_ach;
+
+        p {
+            text-indent: 2rem;
+        }
+    }
+
+    &__reviews {
+        grid-area: cr_rev;
+
+        @media(max-width: 800px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
     }
 }
