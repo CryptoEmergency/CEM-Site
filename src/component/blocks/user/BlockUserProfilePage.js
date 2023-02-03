@@ -442,7 +442,6 @@ BlockUserProfilePage.subscribers = function (Static, data) {
             <div class="friends_block">
                 {
                     Static.activeItems.list_records.map((item, index) => {
-                        console.log('=592c0a=> ItemsMenu ( ', fn.itemsMenu.subscribers(Static, item))
                         return (
                             <div
                                 class="friend"

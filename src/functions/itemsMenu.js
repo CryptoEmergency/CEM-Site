@@ -1134,8 +1134,7 @@ itemsMenu.subscribers = function (Static, item) {
                 type: "subscription",
                 onlyAuth: true,
                 onclick: async () => {
-                    debugger
-                    const response = await fn.restApi.setUsers.subscribe({ _id: item.author._id })
+                    const response = await fn.restApi.setUsers.subscribe({ _id: item._id })
                       console.log(response)
                     console.log('=b959ac=', response)
                     if (response.status === "ok") {
@@ -1157,7 +1156,7 @@ itemsMenu.subscribers = function (Static, item) {
                     }
                     modals.ModalConfirmAction({
                         action: async () => {
-                            let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
+                            let response = await fn.restApi.setUsers.blackList({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
                             await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
                         },
