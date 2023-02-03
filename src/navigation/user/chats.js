@@ -258,7 +258,8 @@ const start = function (data, ID) {
                 if (!existingChat) {
                     Static.activeUser = Variable.Static.startChatsID
                     // console.log(Static.chatsList)
-                    Static.chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] }).sort((a, b) => {
+                    Static.chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
+                    Static.chatsList.list_records.sort((a, b) => {
                         new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
                     })
                     Static.activeChat = 1
