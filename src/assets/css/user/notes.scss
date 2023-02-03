@@ -334,6 +334,11 @@
         content: attr(data-text)
     }
 }
+.notes-input-placeholder[contenteditable="true"]:active,
+.notes-input-placeholder[contenteditable="true"]:focus {
+    border: none;
+    outline: none;
+}
 
 .notes-input-placeholder::before {
     content: '';
@@ -342,12 +347,6 @@
     left: 0;
     pointer-events: none;
     opacity: .4;
-}
-
-[contenteditable="true"]:active,
-[contenteditable="true"]:focus {
-    border: none;
-    outline: none;
 }
 
 .notes-description {

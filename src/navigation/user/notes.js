@@ -68,7 +68,6 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesList)
         },
         fn: () => {
-            console.log('=8451ba=', Static.notesList)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="notes">

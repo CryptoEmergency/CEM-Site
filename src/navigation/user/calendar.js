@@ -18,12 +18,18 @@ const listColors = [
     "linear-gradient(125.97deg, #9B51E0 -0.04%, #E051D2 121.46%)"
 ];
 
+const listNames = {
+    weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu' , 'Fri', 'Sun', 'Sat']
+}
+
 Helpers.moment.updateLocale("en", {week: {dow: 1}});
 const month = Helpers.moment().startOf("month");
 const startDay = Helpers.moment().startOf("month").startOf("week");
 const day = startDay.clone().subtract(1, "day");
 const isCurrentDay = (day) => Helpers.moment().isSame(day, "day");
 let isCurrentMonth = (day) => Helpers.moment().isSame(day, "month");
+
+const listDate = [...Array(42)].map(() => day.add(1, "day").clone());
 
 const staticRenderCalendar = (Static) => {
     Static.startDay = Static.moment.clone().startOf("month").startOf("week");
@@ -46,50 +52,14 @@ const monthHandler = (Static, prev = true) => {
     }
 };
 
-const listDate = [...Array(42)].map(() => day.add(1, "day").clone());
-
-const listNames = {
-    weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu' , 'Fri', 'Sun', 'Sat']
-}
-
 const addNew = async function (Static) {
-    const response = await fn.restApi.setUserCalendar.create({ title: Static.elTitle, text: "", media: [], notify: "", type: "", showDate: new Date().toISOString(), noAlert: "" })
-    console.log(response)
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.description, showDate: new Date().toISOString() })
     if (response && response.status == "ok") {
         if (response.list_records && response.list_records[0]) {
             Static.notesCalendar.list_records.unshift(response.list_records[0])
         }
     }
-    console.log(response)
     initReload()
-}
-
-const addNote = (id) => {
-    // если поле для ввода текста пустое, ничего не делаем
-    // if (textarea.value === '') return
-
-    // получаем значение этого поля
-    // let text = textarea.value
-
-    // объявляем переменную для даты напоминания
-    // с помощью тернарного оператора
-    // присваиваем этой переменной null или значение соответствующего поля
-    let date = new Date().toISOString();
-    // dateInput.value === '' ? date = null : date = dateInput.value
-
-    // заметка представляет собой объект
-    let note = {
-        _id: id,
-        date: id,
-        description: '',
-        // дата создания
-        createdDate: new Date().toLocaleDateString(),
-        // индикатор выполнения
-        completed: '',
-        // дата напоминания
-        notifyDate: date
-    }
-    return note
 }
 
 const randomColor = (colors) => {
@@ -105,7 +75,7 @@ const addForm = function (Static) {
                 <div class="c-modal c-modal--open">
                     <section class="c-modal__dialog">
                         <header class="c-modal__header">
-                            <h2 class="c-modal__title">Название</h2>
+                            <h2 class="c-modal__title">Заметка</h2>
                             <button
                             type="button"
                             class="c-modal__close"
@@ -118,13 +88,25 @@ const addForm = function (Static) {
                         <div class="c-modal__body">
                             <div class="create_post_container">
                                 <div
-                                    class="c-chapter create_post_chapter create_post_main_text"
+                                    class="create_post_calendar create_post_calendar-title"
                                     contenteditable="true"
+                                    data-text="Название"
                                     Element={($el) => {
                                         Static.elTitle = $el
                                     }}
                                     oninput={()=> {
                                         Static.active.title = Static.elTitle.textContent
+                                    }}
+                                ></div>
+                                <div
+                                    class="create_post_calendar create_post_calendar-description"
+                                    contenteditable="true"
+                                    data-text="Текст"
+                                    Element={($el) => {
+                                        Static.elDescription = $el
+                                    }}
+                                    oninput={()=> {
+                                        Static.active.description = Static.elDescription.textContent
                                     }}
                                 ></div>
                             </div>
@@ -136,7 +118,6 @@ const addForm = function (Static) {
                                 // !Static.isValid ? "c-button--inactive" : "",
                             ]}
                             type="button"
-                            // ref={elemButton}
                             onClick={() => {
                                 addNew(Static)
                                 Static.modal = false
@@ -159,7 +140,10 @@ const addForm = function (Static) {
 let difference;
 
 const monthActive = (Static, index) => {
-    Static.moment = Helpers.moment()
+    if (Static.moment.format("Y") == Helpers.moment().format("Y")) {
+        Static.moment = Helpers.moment()
+    }
+    
     if (index + 1 == Static.activeMonthClone.format("M")) {
         staticRenderCalendar(Static)
     } else if (index + 1 > Static.activeMonthClone.format("M")) {
@@ -211,14 +195,14 @@ const renderMonth = (Static) => {
                 {monthsName.map((item, index) => {
                     return (
                         <div class="calendar-month_cell">
-                            <div 
+                            <div
                                 class="calendar-month_name"
                                 onClick={() => {
                                     monthActive(Static, index)
-                                    console.log(Static.activeMonthClone.format("Y"))
+                                    // console.log(Static.moment.format("Y"))
                                     initReload()
                                 }}
-                                style={[Static.activeMonth.format("MMMM") == item ? "color: red" : null]}
+                                style={[Static.activeMonth.format("MMMM") == item && Static.activeMonth.format("Y") == Static.moment.format("Y") ? "color: red" : null]}
                             >
                                 {item}
                             </div>
@@ -236,12 +220,10 @@ const renderMonth = (Static) => {
                 {yearsName.map((item, index) => {
                     return (
                         <div class="calendar-year_cell">
-                            <div 
+                            <div
                                 class="calendar-year_name"
                                 onClick={() => {
                                     yearActive(Static, index)
-                                    // Static.renderMonth = true
-                                    // monthActive(Static, index)
                                     initReload()
                                 }}
                                 style={[Static.activeMonth.format("Y") == item ? "color: red" : null]}
@@ -258,25 +240,6 @@ const renderMonth = (Static) => {
     }
 }
 
-const activeCalendarTitle = (Static) => {
-    // Static.renderMonth ? `${Static.moment.format("YYYY")} year` : Static.moment.format("MMMM YYYY")
-    if (Static.renderMonth) {
-        `${Static.moment.format("YYYY")} year`
-    } else if (Static.renderYear) {
-        `${yearsName[0]} - ${yearsName[-1]}`
-    } else {
-        Static.moment.format("MMMM YYYY")
-    }
-}
-
-// const endDay = Helpers.moment().endOf('month').endOf('week');
-// const calendar = [];
-
-// while (!day.isAfter(endDay)) {
-//     calendar.push(day.clone())
-//     day.add(1, 'day')
-// }
-
 const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
@@ -285,6 +248,7 @@ const start = function (data, ID) {
     Static.active = null
     Static.modal = false
     Static.elTitle = null
+    Static.elDescription = null
     Static.moment = Helpers.moment()
     Static.startDay = null
     Static.day = null
@@ -307,7 +271,15 @@ const start = function (data, ID) {
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
                         <div class="calendar-title">
-                            <h2>{month.format("MMMM")}
+                            <h2
+                                onClick={() => {
+                                    Static.tmpTest = listDate
+                                    Static.moment = Helpers.moment()
+                                    initReload()
+                                }}
+                                style="cursor: default"
+                            >
+                                {month.format("MMMM")}
                                 <span> {month.format("YYYY")}</span>
                             </h2>
                             <div class="calendar-subtitle">
@@ -378,7 +350,7 @@ const start = function (data, ID) {
                                         onclick={() => {
                                             // Static.tmpTest.splice(index, 1, addNote(index + 1))
                                             Static.active = item
-                                            console.log(Static.moment)
+                                            // console.log(Static.moment)
                                             // addNotes()
                                             initReload()
                                         }}
@@ -416,9 +388,21 @@ const start = function (data, ID) {
                                 )
                             })}
                         </div>
-                        {/* <div class="calendar-notes">
-                            {Static.notesCalendar.title}
-                        </div> */}
+                        <div class="calendar-notes">
+                            {Static.notesCalendar.list_records.map((item) => {
+                                    return (
+                                        <div class="calendar-notes_item">
+                                            <div class="calendar-notes_item-date">
+                                                {Helpers.moment(item.showDate).format("D")}
+                                            </div>
+                                            <div class="calendar-notes_item-description">
+                                                <h3>{item.title}</h3>
+                                                <p>{item.text}</p>
+                                            </div>
+                                        </div>
+                                    )
+                            })}
+                        </div>
                         <div class="modals-test">
                             {addForm(Static)}
                         </div>
