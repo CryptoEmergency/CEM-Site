@@ -99,12 +99,10 @@ $lightBlue: #00A5F7;
 
   @media(max-width: 992px) {
     width: calc(100% - 20px);
-    padding-bottom: 60px;
   }
 
   @media(max-width: 464px) {
     width: calc(100% - 10px);
-    padding-bottom: 40px;
   }
 
   // style btns
@@ -159,24 +157,30 @@ $lightBlue: #00A5F7;
     // social
     .social-img {
 
-      @media(max-width: 767px) {
-        margin-bottom: 55px;
-      }
-
       @media(max-width: 464px) {
-        margin-bottom: 20px;
+
+        .social-video {
+          height: 300px;
+          margin-bottom: 20px;
+        }
       }
 
       >img {
         width: 100%;
         height: auto;
+
+        @media(max-width: 464px) {
+          margin-bottom: 20px;
+        }
       }
     }
 
-    .social-icons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    .startap-social_icons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 130px);
+      grid-row-gap: 15px;
+      grid-column-gap: 15px;
+      justify-content: space-evenly;
       text-decoration: none;
       padding-top: 25px;
       padding-bottom: 35px;
@@ -184,8 +188,8 @@ $lightBlue: #00A5F7;
       @media(max-width: 992px) {
         padding-top: 15px;
         padding-bottom: 15px;
+        grid-template-columns: repeat(auto-fill, 120px);
       }
-
 
       .icons-item {
         display: flex;
@@ -194,8 +198,8 @@ $lightBlue: #00A5F7;
 
 
         .icons-img {
-          width: 34px;
-          height: 34px;
+          width: 32px;
+          height: 32px;
           background: $icon;
           border-radius: 50%;
           display: flex;
@@ -203,7 +207,7 @@ $lightBlue: #00A5F7;
           align-items: center;
 
           >img {
-            max-height: 18px;
+            max-height: 15px;
           }
         }
       }
@@ -289,13 +293,19 @@ $lightBlue: #00A5F7;
     padding: 60px 0;
 
     @media(max-width: 767px) {
-      font-size: 60px;
+      font-size: 48px;
+      padding: 35px 0;
     }
 
     @media(max-width: 464px) {
       font-size: 36px;
       padding: 25px 0;
     }
+  }
+
+  .roadmap {
+    position: relative;
+    z-index: 1;
   }
 
   .roadmap-inner {
@@ -340,7 +350,7 @@ $lightBlue: #00A5F7;
 
       .roadmap-item_year {
         font-size: 24px;
-        margin-bottom: 10px;
+        margin-bottom: 0;
         display: flex;
         justify-content: center;
       }
@@ -355,8 +365,20 @@ $lightBlue: #00A5F7;
   .promovideo {
     margin: 0 15%;
 
-    @media(max-width: 767px) {
+    @media(max-width: 992px) {
       margin: 0;
+    }
+
+    @media(max-width: 767px) {
+      .promovideo-video {
+        height: 400px;
+      }
+    }
+
+    @media(max-width: 464px) {
+      .promovideo-video {
+        height: 300px;
+      }
     }
   }
 
@@ -380,6 +402,10 @@ $lightBlue: #00A5F7;
     border-radius: 15px;
     padding: 30px;
     height: fit-content;
+
+    @media(max-width: 464px) {
+      padding: 15px;
+    }
   }
 
   // diagramm circle
@@ -388,30 +414,46 @@ $lightBlue: #00A5F7;
     flex-direction: column;
     align-items: center;
 
+    .diagramm-circle_wrap {
+      width: 250px;
+      height: 250px;
+
+      @media(max-width: 464px) {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
     @each $index,
     $color in $colors {
       .progress-circle--#{$index} {
         stroke: $color;
       }
-      .progress-circle--#{$index}:hover{
-        stroke-width: 3;
-      }
     }
+
     // .progress-circle:hover{
     //   stroke-width: 3;
     // }
 
-    .circle-points{
+    .circle-points {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: auto;
       grid-gap: 10px;
       margin-top: 20px;
+
+      @media(max-width: 464px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 10px;
+      }
     }
-    .circle-points_item{
+
+    .circle-points_item {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
+
       .circle-line {
         width: 30px;
         height: 4px;
@@ -419,13 +461,15 @@ $lightBlue: #00A5F7;
         margin-right: 15px;
         margin-top: 5px;
       }
-      .circle-desc{
+
+      .circle-desc {
         display: flex;
         flex-direction: column;
         font-weight: 500;
         font-size: 14px;
         line-height: 22px;
-        .circle-desc_bold{
+
+        .circle-desc_bold {
           font-size: 16px;
           line-height: 22px;
           font-weight: 700;
@@ -433,7 +477,7 @@ $lightBlue: #00A5F7;
       }
     }
 
-    
+
   }
 
 
@@ -451,6 +495,14 @@ $lightBlue: #00A5F7;
 
     >span {
       margin-left: 10px;
+    }
+
+    @media(max-width: 464px) {
+      margin-bottom: 10px;
+
+      .progressBlock-column {
+        height: 8px;
+      }
     }
   }
 
@@ -479,6 +531,10 @@ $lightBlue: #00A5F7;
     grid-column-gap: 25px;
     grid-row-gap: 25px;
 
+    @media(max-width: 464px) {
+      grid-column-gap: 20px;
+      grid-row-gap: 17px;
+    }
 
     .line-point_item {
       display: flex;
@@ -491,12 +547,29 @@ $lightBlue: #00A5F7;
         height: 25px;
         border-radius: 50%;
         margin-right: 15px;
+
+        @media(max-width: 464px) {
+          margin-right: 8px;
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .line-point_name,
+      .line-point_procent {
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 500;
+
+        @media(max-width: 464px) {
+          font-size: 13px;
+        }
       }
 
       .line-point_procent {
         position: absolute;
         right: 0;
-
+        margin-left: 5px;
       }
     }
 
@@ -509,6 +582,7 @@ $lightBlue: #00A5F7;
     }
 
   }
+
   // diagramm line
 
   // our team
@@ -519,12 +593,6 @@ $lightBlue: #00A5F7;
     grid-column-gap: 15px;
     grid-row-gap: 30px;
     justify-content: center;
-
-    @media(max-width: 992px) {}
-
-    @media(max-width: 767px) {}
-
-    @media(max-width: 464px) {}
   }
 
   .team-item {
@@ -532,6 +600,11 @@ $lightBlue: #00A5F7;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 40px;
+
+    @media(max-width: 464px) {
+      margin-bottom: 30px;
+    }
 
     h5> {
       font-weight: 600;
@@ -560,13 +633,18 @@ $lightBlue: #00A5F7;
     margin-bottom: 20px;
   }
 
-  .team-btn {
-    width: 260px;
-    margin: 0 auto;
-    display: block;
+  // swiper slider for block our team
+  .mySwiper {
+    .swiper-pagination {
+      margin-top: 15px;
+    }
   }
 
   // gallery
-
+  .gallery-wrap.media-wrap {
+    @media(max-width: 464px) {
+      padding-bottom: 20px;
+    }
+  }
 
 }

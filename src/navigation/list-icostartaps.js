@@ -9,7 +9,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
-let filterDropdown, icoDrop, dateDrop = false
+let filterDropdown, dateDrop = false
 let listStatus = {}
 const listCategories = [
   {
@@ -75,18 +75,16 @@ const showListIco = function (listIcoStartaps) {
 const showListCalendar = function (Static) {
   return listStatus.map((item) => {
     return (
-      <li
+      <div
+        class={["ico-tabs", Static.filtersSearch.textCalendar == item.name ? "ico_tabs-active" : null]}
         onclick={async () => {
-          if (icoDrop) {
-            Static.filtersSearch.textCalendar = item.name
-            icoDrop = !icoDrop
-          } else if (dateDrop) {
-            dateDrop = !dateDrop
-          }
+          Static.filtersSearch.textCalendar = item.name
           Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
           initReload()
         }}
-      >{item.name}</li>
+      >
+        {item.name}
+      </div>
     )
   })
 }
@@ -117,7 +115,11 @@ const makeFiltersApi = function (Static, onlySearch = false) {
     filter["$and"].push({ endDate: { $lt: new Date() } })
   }
 
-  return { filter, sort }
+  if (Static.filtersSearch.filterCheck) {
+    filter.checked = true
+  }
+
+  return { filter, sort, limit: 10 }
 }
 
 const start = function (data, ID) {
@@ -141,6 +143,7 @@ const start = function (data, ID) {
     categoryActive: "ICO",
     textCalendar: Variable.lang.select.active,
     sortDate: false,
+    filterCheck: false
   }
 
   load({
@@ -190,29 +193,6 @@ const start = function (data, ID) {
 
                 <div hidden={filterDropdown ? false : true}>
                   <div class="filter-dropdowns">
-                    <div>
-                      <span class="filter-name">ICO статус</span>
-                      <div class="dropdown">
-                        <div
-                          class="dropdown-title"
-                          onclick={() => {
-                            icoDrop = !icoDrop
-                            initReload()
-                          }}>
-                          {Static.filtersSearch.textCalendar}
-                          <span class={["dropdown-arrow", icoDrop ? "dropdown-checked" : null]}>
-                            <img src={svg["arrow-select"]}></img>
-                          </span>
-                        </div>
-
-                        <ul
-                          class={["dropdown-list", icoDrop ? "dropdown-checked" : null]}
-                          hidden={icoDrop ? false : true}>
-                          {showListCalendar(Static)}
-                        </ul>
-                      </div>
-                    </div>
-
                     <div class="filter-dropdown_date">
                       <span class="filter-name">{Variable.lang.span.sort}</span>
                       <div class="dropdown">
@@ -248,12 +228,40 @@ const start = function (data, ID) {
                         }}
                       ></img>
                     </div>
+
+                    <div class="filter-check">
+                      <input
+                        type="checkbox"
+                        id="cryptoCheck"
+                        checked={Static.filtersSearch.filterCheck ? true : false}
+                        class="custom-checkbox"
+                        required="required"
+                        onChange={async () => {
+                          Static.filtersSearch.filterCheck = !Static.filtersSearch.filterCheck
+
+                          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+                          initReload()
+                        }}>
+                      </input>
+                      <label for="cryptoCheck" class="filter-item">Проверено Crypto Emergency</label>
+                    </div>
+
                   </div>
+
+
+
                 </div>
               </div>
-              <div class="list-ico">
-                {showListIco(Static.recordsIco.list_records)}
+
+              <div class="list-ico_wrap">
+                <div class="list-ico_tabs">
+                  {showListCalendar(Static)}
+                </div>
+                <div class="list-ico">
+                  {showListIco(Static.recordsIco.list_records)}
+                </div>
               </div>
+
             </div>
           </div>
         </div>

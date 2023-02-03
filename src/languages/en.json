@@ -156,7 +156,9 @@
         "modal_cropImage": "Adding a photo",
         "--------------------------новые слова--------------": "--добавить перевод--",
         "lottery": "«Word of Mouth» lottery",
-        "lotterySubtitle": "WIN the 1000CEM!"
+        "lotterySubtitle": "WIN the 1000CEM!",
+        "promo_video": "Promo video",
+        "tokenomica": "Tokenomica"
     },
     "a": {
         "about": "About Us",

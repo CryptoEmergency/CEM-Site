@@ -43,8 +43,6 @@ $icon: #353a46;
 .tag_button-ico {
   width: 140px;
 
-  @media(max-width: 992px) {}
-
   @media(max-width: 464px) {
     width: 80px;
   }
@@ -54,6 +52,30 @@ $icon: #353a46;
 .ico-list {
   display: flex;
   flex-direction: column;
+
+  .list-ico_wrap {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #474c5a;
+  }
+
+  .list-ico_tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .ico_tabs {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ico_tabs-active {
+      border-bottom: 2px solid $objective;
+    }
+  }
 
   .list-ico {
     padding-top: 15px;
@@ -128,9 +150,6 @@ $icon: #353a46;
   grid-template-rows: auto;
   grid-gap: 10px;
   padding-top: 10px;
-  // position: relative;
-
-
 
   >div {
     position: relative;
@@ -167,8 +186,6 @@ $icon: #353a46;
   position: relative;
   cursor: pointer;
 
-
-
   .dropdown-title {
     font-size: 14px;
     box-sizing: border-box;
@@ -182,7 +199,6 @@ $icon: #353a46;
     display: flex;
     align-items: center;
     position: relative;
-
 
     .dropdown-arrow {
       position: absolute;
@@ -207,18 +223,7 @@ $icon: #353a46;
     width: 100%;
     background: $icoItem;
     border: 1px solid $borderFilter;
-    // box-shadow: 0px 0px 10px rgb(0 0 0 / 5%);
-    // -webkit-box-shdow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-    // -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-    // max-height: 0;
-    // transition: 0.5s ease-out;
-
-    // &.dropdown-checked {
-    //   max-height:100vh;
-    //   transition: 0.5s ease-in;
-    // }
   }
-
 
   .dropdown-list:last-child {
     border-radius: 0 0 4px 4px;
@@ -226,7 +231,6 @@ $icon: #353a46;
 
   .dropdown-list>li {
     list-style-type: none;
-    // padding: 5px 5px 5px 25px;
     padding: 20px 15px;
     border-bottom: 1px solid $borderFilter;
     font-size: 14px;
@@ -239,7 +243,11 @@ $icon: #353a46;
   }
 }
 
-
+// filter check crypto emergency
+.filter-check {
+  position: relative;
+  cursor: pointer;
+}
 
 .ico-list_item {
   background: $icoItem;
@@ -366,7 +374,6 @@ $icon: #353a46;
 
       @media(max-width: 767px) {
         font-size: 16px;
-
       }
     }
   }
@@ -400,8 +407,6 @@ $icon: #353a46;
   @media(max-width: 767px) {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-
-
   }
 
   @media(max-width: 464px) {}
@@ -642,6 +647,4 @@ $icon: #353a46;
     grid-template-columns: 1fr;
     grid-gap: 10px;
   }
-
-  @media(max-width: 464px) {}
 }

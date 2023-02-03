@@ -9,6 +9,9 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
+import Swiper from 'swiper/bundle';
+
+import 'swiper/css/bundle';
 
 
 const showLines = function (listLines) {
@@ -27,7 +30,7 @@ const showPoints = function (listPoints) {
     return (
       <div class="line-point_item">
         <div class={["line-point_circle", `line-point_circle--${index}`]}></div>
-        <span>{item.name}</span>
+        <span class="line-point_name">{item.name}</span>
         <span class="line-point_procent">{item.value}%</span>
       </div>
     )
@@ -37,7 +40,7 @@ const showPoints = function (listPoints) {
 const showTeam = function (listTeam) {
   return listTeam.map((item) => {
     return (
-      <div class="team-item">
+      <div class="team-item swiper-slide">
         <div class="team-img">
           <img src={`/assets/upload/worldPress/${item.foto}`}></img>
         </div>
@@ -51,6 +54,43 @@ const showTeam = function (listTeam) {
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   Variable.Static.FooterShow = false
+  const swiperGo = function (index) {
+    let swiperItem = new Swiper(".mySwiper", {
+      // grid: {
+      //   rows: 2,
+      // },
+      spaceBetween: 30,
+      autoplay: {
+        delay: 3000,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      breakpoints: {
+        100: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        620: {  //600
+          slidesPerView: 2,
+          spaceBetween: 10
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 50
+        },
+        910: {  //800
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1240: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+      },
+      spaceBetween: 20
+    })
+  }
 
   load({
     ID,
@@ -74,16 +114,15 @@ const start = function (data, ID) {
                       :
                       Static.item.coverVideo
                         ?
-                        <iframe id="startupVideoPlayer" width="100%" height="400px" src={Static.item.coverVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe class="social-video" id="startupVideoPlayer" width="100%" height="400px" src={Static.item.coverVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         :
                         null
                   }
                 </div>
-
                 {
                   Static.item.social.length
                     ?
-                    <div class="social-icons">
+                    <div class="startap-social_icons">
                       {
                         Static.item.social.map((item) => {
                           return (
@@ -103,17 +142,14 @@ const start = function (data, ID) {
                 <p class="social-desc">{Static.item.descriptionShort}</p>
 
                 <div class="social-btns">
-
-                  <a href={Static.item.whitePaperLink} class={["btn-item", Static.item.whitePaperLink ? "social-btn_passive" : null]}>
+                  <a href={Static.item.whitePaperLink} class={["btn-item", !Static.item.whitePaperLink ? "social-btn_passive" : null]}>
                     <div class="btn-item_text">White paper</div>
                   </a>
 
-                  <a href={Static.item.siteLink} class="btn-item">
+                  <a href={Static.item.siteLink} class={["btn-item", !Static.item.siteLink ? "social-btn_passive" : null]}>
                     <div class="btn-item_text">Web site</div>
                   </a>
-
                 </div>
-
               </div>
 
               <div class="info">
@@ -122,8 +158,9 @@ const start = function (data, ID) {
               </div>
             </div>
             <img class="startap-img" src={svg['startaps-inner/figure']} alt={Static.item.name}></img>
+
             <div class="roadmap appearience">
-              <h2 class="startap-title">Road Map</h2>
+              <h2 class="startap-title">{Variable.lang.h.road_map}</h2>
               <div class="roadmap-inner">
                 <div class="roadmap-item">
                   <div class="roadmap-item_year fiolet"><span>2</span>022</div>
@@ -153,89 +190,90 @@ const start = function (data, ID) {
             </div>
 
             <div class="promovideo">
-              <h2 class="startap-title">Promo video</h2>
-              <iframe class="promovideo-video" id="startupVideoPlayer" width="100%" height="500px" src={Static.item.coverVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              {Static.item.coverVideo ? <h2 class="startap-title">{Variable.lang.h.promo_video}</h2> : null}
+              {Static.item.coverVideo
+                ?
+                <iframe class="promovideo-video" id="startupVideoPlayer" width="100%" height="500px" src={Static.item.coverVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                :
+                null
+              }
             </div>
 
             <div class="tokenomics">
-              <h2 class="startap-title">Tokenomics</h2>
+              {Static.item.tokenomica.length ? <h2 class="startap-title">{Variable.lang.h.tokenomica}</h2> : null}
+              {Static.item.tokenomica.length
+                ?
+                <div class="diagramm">
+                  <div class="diagramm-circle">
+                    <svg class="diagramm-circle_wrap" viewBox="0 0 35 35">
+                      {() => {
+                        let offset = 0
+                        return Static.item.tokenomica.map((item, index) => {
+                          offset += item.value
+                          return (
+                            <circle
+                              onmouseover={
+                                function (event) {
 
-              <div class="diagramm">
-
-                <div class="diagramm-circle">
-                  <svg width="250" height="250" viewBox="0 0 35 35">
-                    {() => {
-                      let offset = 0
-                      return Static.item.tokenomica.map((item, index) => {
-                        offset += item.value
-                        return (
-                          <circle
-                            fill="transparent"
-                            cx="50%"
-                            cy="50%"
-                            r="15.9"
-                            stroke-width="2"
-                            stroke-dasharray={`${item.value} 100`}
-                            stroke-dashoffset={`-${offset - item.value}`}
-                            class={["progress-circle", `progress-circle--${index}`]}
-                          ></circle>
-                        )
-                      })
-                    }}
-                  </svg>
-
-                  <div class="circle-points">
-                    {() => {
-                      return Static.item.tokenomica.map((item, index) => {
-                        return (
-                          <div class="circle-points_item">
-                            <div class={["circle-line", `progressBlock-column--${index}`]}></div>
-                            <div class="circle-desc">
-                              <span class="circle-desc_bold">{item.value}%</span>
-                              <span>{item.name}</span>
+                                }
+                              }
+                              fill="transparent"
+                              cx="50%"
+                              cy="50%"
+                              r="15.9"
+                              stroke-width="2"
+                              stroke-dasharray={`${item.value} 100`}
+                              stroke-dashoffset={`-${offset - item.value}`}
+                              class={["progress-circle", `progress-circle--${index}`]}
+                            ></circle>
+                          )
+                        })
+                      }}
+                    </svg>
+                    <div class="circle-points">
+                      {() => {
+                        return Static.item.tokenomica.map((item, index) => {
+                          return (
+                            <div class="circle-points_item">
+                              <div class={["circle-line", `progressBlock-column--${index}`]}></div>
+                              <div class="circle-desc">
+                                <span class="circle-desc_bold">{item.value}%</span>
+                                <span>{item.name}</span>
+                              </div>
                             </div>
-                          </div>
-                        )
-                      })
-                    }}
+                          )
+                        })
+                      }}
+                    </div>
+                  </div>
+                  <div class="diagramm-line">
+                    <div>
+                      {showLines(Static.item.tokenomica)}
+                    </div>
 
+                    <div class="line-points">
+                      {showPoints(Static.item.tokenomica)}
+                    </div>
 
                   </div>
                 </div>
-
-                <div class="diagramm-line">
-                  <div>
-                    {showLines(Static.item.tokenomica)}
-                  </div>
-
-                  <div class="line-points">
-                    {showPoints(Static.item.tokenomica)}
-                  </div>
-
-                </div>
-              </div>
-
+                :
+                null
+              }
             </div>
 
             <div class="team">
-              {Static.item.team.length ? <h2 class="startap-title">Our team</h2> : null}
-
-              <div class="team-wrap">
-                {showTeam(Static.item.team)}
+              {Static.item.team.length ? <h2 class="startap-title">{Variable.lang.h.our_team}</h2> : null}
+              <div class="swiper mySwiper" After={() => swiperGo()}>
+                <div class="swiper-wrapper">
+                  {showTeam(Static.item.team)}
+                </div>
+                <div class="swiper-pagination"></div>
               </div>
-
-              {
-                Static.item.team.length ?
-                  <button class="btn-item team-btn">
-                    <div>Показать ещё</div>
-                  </button>
-                  : null
-              }
-
             </div>
 
             <div class="gallery">
-              {Static.item.media.length ? <h2 class="startap-title">Gallery</h2> : null}
+              {Static.item.media.length ? <h2 class="startap-title">{Variable.lang.h.galary}</h2> : null}
               {
                 Static.item.media.length
                   ?

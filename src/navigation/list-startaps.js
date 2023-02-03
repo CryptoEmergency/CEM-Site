@@ -2,12 +2,12 @@ import {
     jsx,
     jsxFrag,
     load,
-    initReload
+    initReload,
+    Variable
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-
 
 const showListStartaps = function (listStartaps) {
     return listStartaps.map((item) => {
