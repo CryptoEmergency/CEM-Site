@@ -113,31 +113,49 @@ const start = function (data, ID = "mainBlock") {
 
             Static.events = [
                 {
+                    _id: 1,
                     title: "Название первого мероприятия",
                     short: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века.",
                     date: "10.02.2023",
-                    country: "ru",
-                    citi: "Москва",
+                    country: "РФ",
+                    city: "Москва",
                     place: "ТЦ 'Спелая вишня'",
                     src: "news/28b51539438d9ac9dda97e3bd54d2113.png",
+                    contacts: [
+                        "https://ru.lipsum.com/",
+                        "https://crypto-emergency.com/",
+                        "https://cryptosummit.ru/"
+                    ]
                 },
                 {
+                    _id: 2,
                     title: "Название второго мероприятия",
                     short: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века.",
                     date: "20.05.2023",
-                    country: "ch",
-                    citi: "Шанхай",
+                    country: "Китай",
+                    city: "Шанхай",
                     place: "ТЦ 'Абракадабра'",
                     src: "news/916d69888aca4aff798ee3cf8720a064.png",
+                    contacts: [
+                        "https://ru.lipsum.com/",
+                        "https://crypto-emergency.com/",
+                        "https://cryptosummit.ru/"
+                    ]
                 },
                 {
+                    _id: 3,
                     title: "Название еще одного мероприятия",
                     short: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века.",
                     date: "14.06.2023",
-                    country: "ru",
-                    citi: "Краснодар",
+                    country: "РФ",
+                    city: "Краснодар",
                     place: "ТЦ 'Озмолл'",
                     src: "news/90869929c316f20195d9206a892147d7.jpg",
+                    contacts: [
+                        "https://ru.lipsum.com/",
+                        "https://crypto-emergency.com/",
+                        "https://cryptosummit.ru/"
+                    ]
                 }
             ]
 
@@ -250,7 +268,13 @@ const start = function (data, ID = "mainBlock") {
                                     Static.events.map(function (item, index) {
                                         return (
                                             <li class="">
-                                                <a href="" class="c-events__card">
+                                                <a
+                                                    class="c-events__card"
+                                                    href={`/events/show/${index + 1}`}
+                                                    onclick={function (e) {
+                                                        fn.siteLinkModal(e, { title: item.title, item: item })
+                                                    }}
+                                                >
                                                     <figure class="c-events__covercard">
                                                         <img src={`/assets/upload/${item.src}`} width="" height="" />
                                                     </figure>
@@ -258,7 +282,7 @@ const start = function (data, ID = "mainBlock") {
                                                     <p class="c-events__shortcard">{item.short}</p>
                                                     <footer class="c-events__footercard">
                                                         <date datetime="" class="c-events__datecard">{item.date}</date>
-                                                        <span class="c-events__citycard">{item.citi}</span>
+                                                        <span class="c-events__citycard">{item.city}</span>
                                                     </footer>
                                                 </a>
                                             </li>
