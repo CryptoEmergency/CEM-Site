@@ -122,6 +122,7 @@ const makeFiltersApi = function (Static, onlySearch = false) {
   return { filter, sort, limit: 10 }
 }
 
+
 const start = function (data, ID) {
 
   listStatus = [
@@ -193,31 +194,38 @@ const start = function (data, ID) {
 
                 <div hidden={filterDropdown ? false : true}>
                   <div class="filter-dropdowns">
+                 
                     <div class="filter-dropdown_date">
+
                       <span class="filter-name">{Variable.lang.span.sort}</span>
-                      <div class="dropdown">
-                        <div
-                          class={["dropdown-title", "dropdown-title_date"]}
-                          onclick={() => {
-                            dateDrop = !dateDrop
-                            initReload()
-                          }}>
-                          {Variable.lang.select.byDate}
-                          <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
-                            <img src={svg["arrow-select"]}></img>
-                          </span>
+                      {
+
+                        <div class="dropdown">
+                          <div
+                            class={["dropdown-title", "dropdown-title_date"]}
+                            onclick={() => {
+                              dateDrop = !dateDrop
+                              initReload()
+                            }}>
+                            {Variable.lang.select.byDate}
+                            <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
+                              <img src={svg["arrow-select"]}></img>
+                            </span>
+                          </div>
+                          <ul
+                            class={["dropdown-list", dateDrop ? "dropdown-list_show" : null]}
+                            hidden={dateDrop ? false : true}
+                            onclick={() => {
+                              dateDrop = !dateDrop
+                              initReload()
+                            }}
+                          >
+                            <li class="dropdown-list_el">{Variable.lang.select.byDate}</li>
+                          </ul>
                         </div>
-                        <ul
-                          class="dropdown-list"
-                          hidden={dateDrop ? false : true}
-                          onclick={() => {
-                            dateDrop = !dateDrop
-                            initReload()
-                          }}
-                        >
-                          <li>{Variable.lang.select.byDate}</li>
-                        </ul>
-                      </div>
+                      }
+
+
                       <img
                         src={Static.filtersSearch.sortDate ? svg["filter_arrow_top"] : svg["filter_arrow_bottom"]}
                         class={["arrow-sort"]}
@@ -227,6 +235,7 @@ const start = function (data, ID) {
                           initReload()
                         }}
                       ></img>
+
                     </div>
 
                     <div class="filter-check">

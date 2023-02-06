@@ -167,9 +167,11 @@ $icon: #353a46;
 
   .filter-dropdown_date {
     display: flex;
+    position: relative;
 
     .dropdown {
       width: 100%;
+      position: relative;
     }
 
     .arrow-sort {
@@ -204,7 +206,7 @@ $icon: #353a46;
       position: absolute;
       top: 18px;
       right: 15px;
-      transition: transform .2s ease-in-out;
+      transition: transform .3s ease-in-out;
 
       &.dropdown-checked {
         transform: rotate(-180deg)
@@ -217,16 +219,36 @@ $icon: #353a46;
     padding-left: 0;
     margin: 0;
     position: absolute;
-    top: 54.5px;
-    z-index: 4;
+    top: 100%;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
     overflow: hidden;
     width: 100%;
     background: $icoItem;
     border: 1px solid $borderFilter;
+    max-height: 0;
+    transition: 0.5s ease-out;
+  }
+
+  .dropdown-list_show{
+    z-index: 4;
+    visibility: visible;
+    opacity: 1;
+    max-height:100vh;
+    transition: 0.5s ease-in;
   }
 
   .dropdown-list:last-child {
     border-radius: 0 0 4px 4px;
+  }
+
+  .dropdown-list_el{
+    opacity: .7;
+  }
+
+  .dropdown-list_el:hover{
+    opacity: 1;
   }
 
   .dropdown-list>li {
@@ -247,6 +269,9 @@ $icon: #353a46;
 .filter-check {
   position: relative;
   cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .ico-list_item {
