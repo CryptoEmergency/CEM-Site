@@ -33,6 +33,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
       <a
         class="c-tiles__item"
         data-href={"/lenta-users/show/" + item._id}
+        ElemVisible={ElemVisible}
         onclick={(e) => {
           e.preventDefault();
           e.stopPropagation();
