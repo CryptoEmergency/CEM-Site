@@ -1,0 +1,136 @@
+.c-events {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    &__container {}
+
+    &__title {
+        margin: 0;
+        margin-bottom: 1rem;
+    }
+
+    &__cover {
+        margin: 0 0 1rem;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__searchblock {
+
+        .c-search {
+            &__icon {
+                top: 23px;
+
+                @media(min-width: 1200px) {
+                    top: 14px;
+                }
+
+                &--filter {
+                    top: 23px;
+                }
+            }
+        }
+    }
+
+    &__filter {
+
+        &[data-active="true"] {
+            margin-bottom: 1rem;
+        }
+
+        @media(min-width: 1200px) {
+            height: auto !important;
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__wrapper {
+
+        &:first-child {
+            input {
+                margin-left: 0;
+            }
+        }
+
+        @media(max-width:767px) {
+            width: 100%;
+        }
+
+        div {
+            @media(max-width:767px) {
+                width: 100%;
+            }
+        }
+    } 
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 20px;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        @media(max-width: 767px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        display: block;
+        padding: 20px;
+        background: #303545;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    &__titlecard {
+        margin-bottom: 1rem;
+        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &__covercard {
+        margin: 0;
+        margin-bottom: 1rem;
+
+        img {
+            width: 100%;
+            // aspect-ratio: 1;
+        }
+    }
+
+    &__footercard {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__datecard {
+        position: relative;
+        padding-left: 25px;
+        font-size: 12px;
+        color: #8b93ab;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: url(../svg/calendar_icon.svg);
+            background-repeat: no-repeat;
+        }
+    }
+
+    &__citycard {
+        font-size: 12px;
+        color: #8b93ab;
+    }
+}
