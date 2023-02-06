@@ -12,11 +12,33 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
     await initOne(
         async () => {
             await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit })
+            console.log('=c05d31=', await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit }))
         }
     )
     return (
         <div id="crypto_exchange" class="crypto_exchanges">
-            <h4>{Variable.lang.h.exchange}</h4>
+            <div class="crypto_exchanges-title">
+                <h4>{Variable.lang.h.exchange}</h4>
+                <img
+                    class="filter-search_icon"
+                    src={svg.filter}
+                    onclick={() => {
+                        Variable.SetModals({
+                            name: "ModalFilterCoin",
+                            // data: {
+                            //     onclick: async (langCode, langOrig) => {
+                            //         let lang = Variable.listsLang.filter((item) => {
+                            //             return item.code == langCode;
+                            //         });
+                            //         let searchLang = lang[0].code
+
+                            //     },
+                            // },
+                        });
+                    }}
+                ></img>
+            </div>
+
             <div class="statistics-preview list_exchange_page">
                 <div class="crypto_exchanges-row">
                     <div class="crypto_exchanges-cell">
@@ -29,7 +51,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                         {Variable.lang.tableTitle.coins}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {Variable.lang.tableTitle.startDate}
+                        Авто/Ручной режим
                     </div>
                 </div>
                 {
@@ -86,9 +108,12 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                                         </div>
                                     </div>
                                     <div class="crypto_exchanges-cell exanges_date_create">
-                                        <span class="">
+                                        <div class="switch">
+                                            <input type="checkbox"></input>
+                                        </div>
+                                        {/* <span class="">
                                             {fn.getDateFormat(item.startDate)}
-                                        </span>
+                                        </span> */}
                                     </div>
                                     <div>
                                         <div class="button-container-preview">

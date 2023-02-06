@@ -1,4 +1,17 @@
 /* Crypto exchanges styles */
+.crypto_exchanges-title {
+    display: flex;
+    position: relative;
+
+    .filter-search_icon {
+        position: absolute;
+        right: 0;
+        height: 30px;
+        top: 30px;
+        cursor: pointer;
+    }
+}
+
 .statistics-preview {
     background: $supernatural;
     box-shadow: 15px 15px 25px $infinity2;
@@ -563,5 +576,45 @@
         grid-column-start: 1 !important;
         grid-column-end: 3 !important;
         padding: 0 !important;
+    }
+}
+
+// style checkbox 
+.switch {
+    cursor: pointer;
+
+    input[type="checkbox"] {
+        position: relative;
+        width: 60px;
+        height: 25px;
+        -webkit-appearance: none;
+        outline: none;
+        background: #c6c6c6;
+        border-radius: 20px;
+        transition: .5s;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
+        cursor: pointer;
+    }
+
+    input:checked[type="checkbox"] {
+        background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+    }
+
+    input[type="checkbox"]::before {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border-radius: 20px;
+        top: 0;
+        left: 0;
+        background: #FFFFFF;
+        transition: .5s;
+        transform: scale(1.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    }
+
+    input:checked[type="checkbox"]:before {
+        left: 35px;
     }
 }

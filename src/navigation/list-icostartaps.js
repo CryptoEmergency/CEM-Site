@@ -67,6 +67,7 @@ const showListIco = function (listIcoStartaps) {
         </div>
         <span class="item-date item-date_start">{fn.getDateFormat(item.startDate, "time")}</span>
         <span class="item-date item-date_end">{fn.getDateFormat(item.endDate, "time")}</span>
+
       </div>
     )
   })
@@ -75,6 +76,19 @@ const showListIco = function (listIcoStartaps) {
 const showListCalendar = function (Static) {
   return listStatus.map((item) => {
     return (
+      // <button
+      //   class={["tab", Static.filtersSearch.textCalendar == item.name ? "active" : null]}
+      //   onclick={async () => {
+      //     Static.filtersSearch.textCalendar = item.name
+      //     Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+      //     initReload()
+      //   }}
+      // >
+      //   <div>
+      //     <span>{item.name}</span>
+      //   </div>
+      // </button>
+
       <div
         class={["ico-tabs", Static.filtersSearch.textCalendar == item.name ? "ico_tabs-active" : null]}
         onclick={async () => {
@@ -83,7 +97,7 @@ const showListCalendar = function (Static) {
           initReload()
         }}
       >
-        {item.name}
+        <span>{item.name}</span>
       </div>
     )
   })
@@ -194,7 +208,7 @@ const start = function (data, ID) {
 
                 <div hidden={filterDropdown ? false : true}>
                   <div class="filter-dropdowns">
-                 
+
                     <div class="filter-dropdown_date">
 
                       <span class="filter-name">{Variable.lang.span.sort}</span>

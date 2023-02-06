@@ -54,9 +54,9 @@ $icon: #353a46;
   flex-direction: column;
 
   .list-ico_wrap {
-    margin-top: 25px;
-    padding: 20px;
-    border-radius: 6px;
+    // margin-top: 25px;
+    margin-top: 15px;
+    border-radius: 10px;
     border: 1px solid #474c5a;
   }
 
@@ -64,16 +64,62 @@ $icon: #353a46;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #7B8195;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 
-    .ico_tabs {
+    .ico-tabs:first-child {
+      border-top-left-radius: 8px;
+    }
+
+    .ico-tabs:nth-child(2) {
+      border-right: 2px solid #303545;
+      border-left: 2px solid #303545;
+    }
+
+    .ico-tabs:last-child {
+      border-top-right-radius: 8px;
+    }
+
+    .ico-tabs {
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 10px;
+      width: calc(100% / 3);
+      font-weight: 700;
+      opacity: .7;
+
+      &:focus {
+        outline: none;
+
+        span {
+          border-bottom: 2px solid;
+          border-radius: 0;
+        }
+      }
+
+      @media(max-width: 464px) {
+        font-size: 12px;
+      }
+    }
+
+    // .ico-tabs::after, .ico-tabs
+
+    .ico-tabs:hover {
+      opacity: 1;
     }
 
     .ico_tabs-active {
-      border-bottom: 2px solid $objective;
+      background: #303545;
+      opacity: 1;
+
+      >span {
+        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
     }
   }
 
@@ -81,7 +127,9 @@ $icon: #353a46;
     padding-top: 15px;
     display: grid;
     grid-gap: 15px;
+    padding: 10px;
     grid-template-columns: repeat(2, 1fr);
+
   }
 
   @media(max-width: 992px) {
@@ -106,9 +154,15 @@ $icon: #353a46;
 // style block filtres
 .search-wrap {
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 1fr 0.1fr;
+  grid-gap: 5px;
   align-items: center;
   position: relative;
+
+  @media(max-width: 464px) {
+    grid-template-columns: 1fr 0.2fr;
+
+  }
 
   .filter-search_icon {
     position: absolute;
@@ -123,8 +177,9 @@ $icon: #353a46;
 
   .ico-search_icon {
     position: absolute;
-    top: 12px;
+    top: 10px;
     left: 12px;
+    max-height: 20px;
   }
 
   .search {
@@ -132,7 +187,8 @@ $icon: #353a46;
     border-radius: 5px;
     background: $search;
     color: #A8B0CC;
-    height: 55px;
+    // height: 55px;
+    height: 40px;
     display: flex;
     align-items: center;
     font-size: 13px;
@@ -140,7 +196,7 @@ $icon: #353a46;
     font-weight: 500;
     font-style: italic;
     border: none;
-    padding: 10px 15px 10px 60px;
+    padding: 10px 15px 10px 45px;
   }
 }
 
@@ -151,12 +207,16 @@ $icon: #353a46;
   grid-gap: 10px;
   padding-top: 10px;
 
+  @media(max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+
   >div {
     position: relative;
 
     .filter-name {
       position: absolute;
-      top: 8px;
+      top: 6px;
       left: 25px;
       z-index: 4;
       color: #7D8CA9;
@@ -169,13 +229,32 @@ $icon: #353a46;
     display: flex;
     position: relative;
 
+    @media(max-width: 767px) {
+      display: grid;
+      grid-template-columns: 1fr 0.1fr;
+      grid-template-rows: auto;
+      grid-gap: 5px;
+
+      .arrow-sort {
+        position: absolute;
+        right: 0;
+        margin-right: 6px;
+        margin-left: 0;
+      }
+    }
+
+    @media(max-width: 464px) {
+      grid-template-columns: 1fr 0.2fr;
+    }
+
     .dropdown {
       width: 100%;
       position: relative;
     }
 
     .arrow-sort {
-      height: 55px;
+      // height: 55px;
+      height: 45px;
       margin-left: 15px;
     }
   }
@@ -193,7 +272,8 @@ $icon: #353a46;
     box-sizing: border-box;
     font-weight: 600;
     outline: none;
-    height: 55px;
+    // height: 55px;
+    height: 45px;
     padding-left: 25px;
     padding-top: 25px;
     padding-bottom: 10px;
@@ -204,7 +284,7 @@ $icon: #353a46;
 
     .dropdown-arrow {
       position: absolute;
-      top: 18px;
+      top: 14px;
       right: 15px;
       transition: transform .3s ease-in-out;
 
@@ -231,33 +311,41 @@ $icon: #353a46;
     transition: 0.5s ease-out;
   }
 
-  .dropdown-list_show{
+  .dropdown-list_show {
     z-index: 4;
     visibility: visible;
     opacity: 1;
-    max-height:100vh;
+    max-height: 100vh;
     transition: 0.5s ease-in;
+    -webkit-animation: moveFromTop 300ms ease-in-out;
+    -moz-animation: moveFromTop 300ms ease-in-out;
+    -ms-animation: moveFromTop 300ms ease-in-out;
+    -o-animation: moveFromTop 300ms ease-in-out;
+    animation: moveFromTop 300ms ease-in-out;
   }
+
+
 
   .dropdown-list:last-child {
     border-radius: 0 0 4px 4px;
   }
 
-  .dropdown-list_el{
+  .dropdown-list_el {
     opacity: .7;
   }
 
-  .dropdown-list_el:hover{
+  .dropdown-list_el:hover {
     opacity: 1;
   }
 
   .dropdown-list>li {
     list-style-type: none;
-    padding: 20px 15px;
+    padding: 13px 15px;
     border-bottom: 1px solid $borderFilter;
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
+    height: 45px;
   }
 
   .dropdown-list>li:last-child {
@@ -275,10 +363,13 @@ $icon: #353a46;
 }
 
 .ico-list_item {
+  perspective: 2000px;
+  transition: .4s;
+  transform-style: preserve-3d;
   background: $icoItem;
   border-radius: 8px;
   cursor: pointer;
-  padding: 12px 12px 40px 12px;
+  padding: 12px 12px 20px 12px;
   position: relative;
   display: grid;
   grid-template-columns: 20% 80%;
@@ -305,16 +396,14 @@ $icon: #353a46;
     color: $text;
     font-size: 12px;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
 
     &.item-date_start {
       left: 12px;
-      bottom: 20px;
     }
 
     &.item-date_end {
       right: 12px;
-      bottom: 20px;
     }
   }
 
@@ -327,15 +416,10 @@ $icon: #353a46;
     font-size: 16px;
     line-height: 21px;
     margin: 0;
-    /* Убираем внешний отступ */
     -webkit-line-clamp: 3;
-    /* Число отображаемых строк */
     display: -webkit-box;
-    /* Включаем флексбоксы */
     -webkit-box-orient: vertical;
-    /* Вертикальная ориентация */
     overflow: hidden;
-
   }
 
   .item-sum_wrap {
@@ -355,6 +439,13 @@ $icon: #353a46;
   .item-sum_obj {
     color: $objective;
   }
+}
+
+.ico-list_item:hover {
+  transform: rotateX(-10deg) skewX(2deg);
+  background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+  opacity: .9;
+  transition-duration: .4s;
 }
 
 // ============================
@@ -671,5 +762,27 @@ $icon: #353a46;
     grid-template-rows: auto;
     grid-template-columns: 1fr;
     grid-gap: 10px;
+  }
+}
+
+// ===============================
+// animation
+@keyframes moveFromTop {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%);
   }
 }
