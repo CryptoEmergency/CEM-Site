@@ -288,6 +288,7 @@ const start = function (data, ID) {
                                         monthHandler(Static)
                                         initReload()
                                     }}
+                                    style={[ Static.renderMonth || Static.renderYear ? "cursor: default; opacity: 1;" : null]}
                                 >
                                     <img src={svg["calendar-arrow"]}/>
                                 </button>
@@ -325,7 +326,7 @@ const start = function (data, ID) {
                                         monthHandler(Static, false)
                                         initReload()
                                     }}
-                                    
+                                    style={[ Static.renderMonth || Static.renderYear ? "cursor: default; opacity: 1;" : null]}
                                 >
                                     <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]}/>
                                 </button>
@@ -354,7 +355,7 @@ const start = function (data, ID) {
                                             // addNotes()
                                             initReload()
                                         }}
-                                        
+                                        style={[Static.active == item ? "opacity: 1" : null]}
                                     >
                                         <span 
                                             class="calendar-day"
@@ -362,8 +363,9 @@ const start = function (data, ID) {
                                                 Static.modal = true
                                                 initReload()
                                             }}
-                                            style={[isCurrentMonth(item) ? "color: #ffffff; opacity: 0.7;" : null,
-                                                    isCurrentDay(item) ? "color: red; opacity: 1" : null
+                                            style={[isCurrentMonth(item) ? "color: #8995B8; opacity: 1;" : null,
+                                                    isCurrentDay(item) ? "color: red; opacity: 1" : null,
+                                                    Static.active == item ? "color: #ffffff; opacity: 1" : null
                                             ]}
                                         >
                                             {item.format('D')}
@@ -375,12 +377,12 @@ const start = function (data, ID) {
                                             // style={[item && item.title != "" ? `background: ${randomColor(listColors)}` : null]}
                                             >
                                                 <p>
-                                                    {!item
+                                                    {/* {!item
                                                     ?
                                                     null
                                                     :
                                                     item.title
-                                                }
+                                                } */}
                                                 </p>
                                             </div>
                                         </div>
@@ -389,7 +391,8 @@ const start = function (data, ID) {
                             })}
                         </div>
                         <div class="calendar-notes">
-                            {Static.notesCalendar.list_records.map((item) => {
+                            {Static.notesCalendar.list_records.map((item, index) => {
+                                if (Helpers.moment(item.showDate).format("D") ==  Helpers.moment(Static.active).format("D")) {
                                     return (
                                         <div class="calendar-notes_item">
                                             <div class="calendar-notes_item-date">
@@ -401,6 +404,9 @@ const start = function (data, ID) {
                                             </div>
                                         </div>
                                     )
+                                } else {
+                                    null
+                                }
                             })}
                         </div>
                         <div class="modals-test">
