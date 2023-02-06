@@ -53,12 +53,23 @@ const monthHandler = (Static, prev = true) => {
 };
 
 const addNew = async function (Static) {
-    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.description, showDate: new Date().toISOString() })
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.description, showDate: Static.active, color: randomColor(listColors) })
     if (response && response.status == "ok") {
         if (response.list_records && response.list_records[0]) {
             Static.notesCalendar.list_records.unshift(response.list_records[0])
         }
     }
+    initReload()
+}
+
+const deleteNote = async function (Static, { _id, index, active }) {
+    await fn.restApi.setUserCalendar.update({ _id, active })
+    Static.notesCalendar.list_records.splice(index, 1)
+    initReload()
+}
+
+const editNotes = async function (Static) {
+    await fn.restApi.setUserCalendar.update(Static.activeNotes)
     initReload()
 }
 
@@ -97,7 +108,9 @@ const addForm = function (Static) {
                                     oninput={()=> {
                                         Static.active.title = Static.elTitle.textContent
                                     }}
-                                ></div>
+                                >
+                                    {Static.activeNotes ? Static.activeNotes.title : null}
+                                </div>
                                 <div
                                     class="create_post_calendar create_post_calendar-description"
                                     contenteditable="true"
@@ -108,7 +121,9 @@ const addForm = function (Static) {
                                     oninput={()=> {
                                         Static.active.description = Static.elDescription.textContent
                                     }}
-                                ></div>
+                                >
+                                    {Static.activeNotes ? Static.activeNotes.text : null}
+                                </div>
                             </div>
                         </div>
                         <div class="c-modal__footer">
@@ -119,7 +134,14 @@ const addForm = function (Static) {
                             ]}
                             type="button"
                             onClick={() => {
-                                addNew(Static)
+                                if (Static.activeNotes) {
+                                    // editNotes(Static)
+                                    Static.activeNotes = null
+                                    
+                                } else {
+                                    addNew(Static)
+                                    
+                                }
                                 Static.modal = false
                                 initReload()
                             }}
@@ -240,6 +262,19 @@ const renderMonth = (Static) => {
     }
 }
 
+const notesScroll = (Static) => {
+    Static.notesCalendar.list_records.map((item) => {
+        if (Helpers.moment(item.showDate).format("D") ==  Helpers.moment(Static.active).format("D")) {
+            Static.elNotes.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            })
+        } else {
+            null
+        }
+    })
+}
+
 const start = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
@@ -257,6 +292,8 @@ const start = function (data, ID) {
     Static.renderYear = false
     Static.activeMonth = Helpers.moment().clone().startOf("month")
     Static.activeMonthClone = null
+    Static.elNotes = null
+    Static.activeNotes = null
 
     load({
         ID,
@@ -266,7 +303,7 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
-            console.log(Static.notesCalendar)
+            // console.log(Static.dateNotes)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
@@ -338,21 +375,19 @@ const start = function (data, ID) {
                         <div class="calendar-day-name">
                             {listNames.weekDayNames.map(function (name) {
                                 return (
-                                    <span>{name}</span>    
+                                    <span>{name}</span>
                                 )
                             })}
                         </div>
                         <div class="calendar-container">
-                            {Static.tmpTest.map((item) => {
+                            {Static.tmpTest.map((item, index) => {
                                 return (
                                     <div
                                         class="calendar-cell"
                                         // id={index + 1}
                                         onclick={() => {
-                                            // Static.tmpTest.splice(index, 1, addNote(index + 1))
                                             Static.active = item
-                                            // console.log(Static.moment)
-                                            // addNotes()
+                                            // notesScroll(Static)
                                             initReload()
                                         }}
                                         style={[Static.active == item ? "opacity: 1" : null]}
@@ -371,10 +406,10 @@ const start = function (data, ID) {
                                             {item.format('D')}
                                         </span>
                                         <div>
-                                            <div class={["calendar-notes", 
-                                                item && item.title != "" ? "calendar-notes--show" : null
+                                            <div class={["calendar-text", 
+                                                item && item.title != "" ? "calendar-text--show" : null
                                             ]}
-                                            // style={[item && item.title != "" ? `background: ${randomColor(listColors)}` : null]}
+                                            // style={[ Static.dateNotes ? `background: ${randomColor(listColors)}` : null]}
                                             >
                                                 <p>
                                                     {/* {!item
@@ -390,11 +425,18 @@ const start = function (data, ID) {
                                 )
                             })}
                         </div>
-                        <div class="calendar-notes">
+                        <div 
+                            class="calendar-notes"
+                            Element={($el) => {
+                                Static.elNotes = $el
+                            }}
+                        >
                             {Static.notesCalendar.list_records.map((item, index) => {
                                 if (Helpers.moment(item.showDate).format("D") ==  Helpers.moment(Static.active).format("D")) {
                                     return (
-                                        <div class="calendar-notes_item">
+                                        <div 
+                                            class="calendar-notes_item"
+                                        >
                                             <div class="calendar-notes_item-date">
                                                 {Helpers.moment(item.showDate).format("D")}
                                             </div>
@@ -402,11 +444,35 @@ const start = function (data, ID) {
                                                 <h3>{item.title}</h3>
                                                 <p>{item.text}</p>
                                             </div>
+                                            <img class="calendar-notes_item-delete" src={svg["delete_notes"]}
+                                                onclick={() => {
+                                                    fn.modals.ModalConfirmAction({
+                                                        action: async () => {
+                                                            // Static.active = false
+                                                            deleteNote(Static, { _id: item._id, index, active: false })
+                                                            fn.modals.close("ModalConfirmAction")
+                                                        },
+                                                        text: Variable.lang.p.deleteNotesConfirm,
+                                                        button: Variable.lang.button.yes
+                                                    })
+                                                }} 
+                                            />
+                                            <img 
+                                                class="calendar-notes_item-edit"
+                                                src={svg["edit_calendar-notes"]}
+                                                onClick={() => {
+                                                    Static.activeNotes = item
+                                                    Static.modal = true
+                                                    
+                                                    initReload()
+                                                }}
+                                            />
                                         </div>
                                     )
                                 } else {
-                                    null
+                                    Static.elNotes = null
                                 }
+                                    
                             })}
                         </div>
                         <div class="modals-test">
