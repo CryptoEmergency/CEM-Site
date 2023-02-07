@@ -5,9 +5,24 @@ import { Input } from '@component/element/index.js';
 
 let inputValue, allCoin;
 
+
+// const changeInput = (e) => {
+//   inputValue = e.target.value.toLowerCase();
+//   allCoin.filter((item) => {
+//     item.toLowerCase().includes(inputValue) == true
+//   })
+//   initReload("modals");
+// }
+
 const ModalFilterCoin = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
-  allCoin = Variable.list_coins
+  // allCoin = Variable.list_coins;
+  Static.Coins = {
+    value: "",
+    oninput: () => {
+
+    }
+  }
   console.log('=825ac5=', Static)
 
   let close = true
@@ -32,7 +47,7 @@ const ModalFilterCoin = function (data, ID) {
             }}>
 
             <header class="c-modal__header">
-              <h2 class="c-modal__title">{Variable.lang.h.modal_listKoins}</h2>
+              <h2 class="c-modal__title">Выбрать монеты</h2>
               <button
                 class="c-modal__close"
                 onclick={() => {
@@ -43,12 +58,17 @@ const ModalFilterCoin = function (data, ID) {
             </header>
 
             <div class="c-modal__body">
-              <div class="filterKoinContainer">
-                {/* {allCoin.map((item) => {
-                  let str = `${item.eng_name} (${item.orig_name})`
+              <input data-coin=""
+                id="filterCoinInput"
+                type="text"
+                oninput={changeInput}
+              />
+              <div class="filterCoinContainer">
+                {allCoin.map((item) => {
+                  let str = `${item.name}`
 
-                  return <div class="changeLanguageItem" onclick={() => { data.onclick(item.code, item.eng_name, item.orig_name); Variable.DelModals("ModalFilterCoin"); }}>{str}</div>
-                })} */}
+                  return <div class="changeLanguageItem" onclick={() => { Variable.DelModals("ModalFilterCoin"); }}>{str}</div>
+                })}
               </div>
             </div>
           </section>

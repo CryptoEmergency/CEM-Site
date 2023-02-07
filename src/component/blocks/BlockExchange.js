@@ -11,8 +11,10 @@ import { ButtonShowMore, NotFound } from "@component/element/index.js";
 const BlockExchange = async function ({ Static, limit = 21 }) {
     await initOne(
         async () => {
-            await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit })
-            console.log('=c05d31=', await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit }))
+            let tmp = await fn.restApi.getCoins({ filter: {}, limit: 20, select: { name: 1, icon: 1 } })
+            await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit, select: { name: 1 } })
+
+            console.log('=c05d31=', tmp)
         }
     )
     return (
@@ -51,7 +53,9 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                         {Variable.lang.tableTitle.coins}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        Авто/Ручной режим
+                        <div class="switch">
+                            <input type="checkbox"></input>
+                        </div>
                     </div>
                 </div>
                 {
@@ -108,9 +112,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                                         </div>
                                     </div>
                                     <div class="crypto_exchanges-cell exanges_date_create">
-                                        <div class="switch">
-                                            <input type="checkbox"></input>
-                                        </div>
+
                                         {/* <span class="">
                                             {fn.getDateFormat(item.startDate)}
                                         </span> */}

@@ -9,7 +9,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
-let filterDropdown, dateDrop = false
+let dateDrop = false
 let listStatus = {}
 const listCategories = [
   {
@@ -76,19 +76,6 @@ const showListIco = function (listIcoStartaps) {
 const showListCalendar = function (Static) {
   return listStatus.map((item) => {
     return (
-      // <button
-      //   class={["tab", Static.filtersSearch.textCalendar == item.name ? "active" : null]}
-      //   onclick={async () => {
-      //     Static.filtersSearch.textCalendar = item.name
-      //     Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-      //     initReload()
-      //   }}
-      // >
-      //   <div>
-      //     <span>{item.name}</span>
-      //   </div>
-      // </button>
-
       <div
         class={["ico-tabs", Static.filtersSearch.textCalendar == item.name ? "ico_tabs-active" : null]}
         onclick={async () => {
@@ -201,79 +188,89 @@ const start = function (data, ID) {
                     class="filter-search_icon"
                     src={svg.filter}
                     onclick={() => {
-                      filterDropdown = !filterDropdown
-                      initReload()
+                      if (Static.filterContent.dataset.active == "true") {
+                        Static.filterContent.dataset.active = false
+                        Static.filterContent.style = "height: 0px"
+                      } else {
+                        Static.filterContent.dataset.active = true
+                        Static.filterContent.style = ""
+                        let h = Static.filterContent.offsetHeight
+                        Static.filterContent.style = `height: ${h}px; margin-bottom: 20px`
+                      }
+                      console.log('=e1d085=', Static.filterContent.dataset.active)
                     }}></img>
                 </div>
 
-                <div hidden={filterDropdown ? false : true}>
-                  <div class="filter-dropdowns">
 
-                    <div class="filter-dropdown_date">
+                <div class="filter-dropdowns"
+                  data-active={false}
+                  style={"height: 0px"}
+                  Element={($el) => {
+                    Static.filterContent = $el;
+                  }}>
 
-                      <span class="filter-name">{Variable.lang.span.sort}</span>
-                      {
+                  <div class="filter-dropdown_date">
 
-                        <div class="dropdown">
-                          <div
-                            class={["dropdown-title", "dropdown-title_date"]}
-                            onclick={() => {
-                              dateDrop = !dateDrop
-                              initReload()
-                            }}>
-                            {Variable.lang.select.byDate}
-                            <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
-                              <img src={svg["arrow-select"]}></img>
-                            </span>
-                          </div>
-                          <ul
-                            class={["dropdown-list", dateDrop ? "dropdown-list_show" : null]}
-                            hidden={dateDrop ? false : true}
-                            onclick={() => {
-                              dateDrop = !dateDrop
-                              initReload()
-                            }}
-                          >
-                            <li class="dropdown-list_el">{Variable.lang.select.byDate}</li>
-                          </ul>
+                    <span class="filter-name">{Variable.lang.span.sort}</span>
+                    {
+
+                      <div class="dropdown">
+                        <div
+                          class={["dropdown-title", "dropdown-title_date"]}
+                          onclick={() => {
+                            dateDrop = !dateDrop
+                            initReload()
+                          }}>
+                          {Variable.lang.select.byDate}
+                          <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
+                            <img src={svg["arrow-select"]}></img>
+                          </span>
                         </div>
-                      }
+                        <ul
+                          class={["dropdown-list", dateDrop ? "dropdown-list_show" : null]}
+                          hidden={dateDrop ? false : true}
+                          onclick={() => {
+                            dateDrop = !dateDrop
+                            initReload()
+                          }}
+                        >
+                          <li class="dropdown-list_el">{Variable.lang.select.byDate}</li>
+                        </ul>
+                      </div>
+                    }
 
 
-                      <img
-                        src={Static.filtersSearch.sortDate ? svg["filter_arrow_top"] : svg["filter_arrow_bottom"]}
-                        class={["arrow-sort"]}
-                        onclick={async () => {
-                          Static.filtersSearch.sortDate = !Static.filtersSearch.sortDate
-                          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-                          initReload()
-                        }}
-                      ></img>
-
-                    </div>
-
-                    <div class="filter-check">
-                      <input
-                        type="checkbox"
-                        id="cryptoCheck"
-                        checked={Static.filtersSearch.filterCheck ? true : false}
-                        class="custom-checkbox"
-                        required="required"
-                        onChange={async () => {
-                          Static.filtersSearch.filterCheck = !Static.filtersSearch.filterCheck
-
-                          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-                          initReload()
-                        }}>
-                      </input>
-                      <label for="cryptoCheck" class="filter-item">Проверено Crypto Emergency</label>
-                    </div>
+                    <img
+                      src={Static.filtersSearch.sortDate ? svg["filter_arrow_top"] : svg["filter_arrow_bottom"]}
+                      class={["arrow-sort"]}
+                      onclick={async () => {
+                        Static.filtersSearch.sortDate = !Static.filtersSearch.sortDate
+                        Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+                        initReload()
+                      }}
+                    ></img>
 
                   </div>
 
+                  <div class="filter-check">
+                    <input
+                      type="checkbox"
+                      id="cryptoCheck"
+                      checked={Static.filtersSearch.filterCheck ? true : false}
+                      class="custom-checkbox"
+                      required="required"
+                      onChange={async () => {
+                        Static.filtersSearch.filterCheck = !Static.filtersSearch.filterCheck
 
+                        Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+                        initReload()
+                      }}>
+                    </input>
+                    <label for="cryptoCheck" class="filter-item">Проверено Crypto Emergency</label>
+                  </div>
 
                 </div>
+
               </div>
 
               <div class="list-ico_wrap">

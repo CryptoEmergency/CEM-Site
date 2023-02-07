@@ -54,8 +54,6 @@ $icon: #353a46;
   flex-direction: column;
 
   .list-ico_wrap {
-    // margin-top: 25px;
-    margin-top: 15px;
     border-radius: 10px;
     border: 1px solid #474c5a;
   }
@@ -201,11 +199,14 @@ $icon: #353a46;
 }
 
 .filter-dropdowns {
+  transition: all .3s;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 10px;
   padding-top: 10px;
+
 
   @media(max-width: 767px) {
     grid-template-columns: 1fr;
