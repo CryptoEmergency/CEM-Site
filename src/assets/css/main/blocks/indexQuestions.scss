@@ -731,6 +731,33 @@
             top: 9px;
         }
     }
+
+    &.c-select {
+        &--icon {
+            position: relative;
+
+            span {
+                left: 60px;
+            }
+
+            .justselect-title {
+                padding-left: 60px;
+                border: none;
+                background-color: #3D4457;
+            }
+
+            &-specialization {
+                &::before {
+                    position: absolute;
+                    content: url("../svg/icon/specialization.svg");
+                    top: 50%;
+                    left: 25px;
+                    transform: translateY(-50%);
+                    z-index: 2;
+                }
+            }
+        }
+    }
 }
 
 .filter_sort_toggler {

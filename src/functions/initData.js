@@ -859,6 +859,47 @@ initData.events = function (Static) {
     return
 }
 
+initData.careers = function (Static) {
+
+    Static.nameRecords = "PageCareers"
+
+    Static.filters = {
+        language: Object.create(filters.language),
+        country: Object.create(filters.country),
+    }
+
+    Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.language.value = Variable.lang.text.language
+
+    Static.filters.country.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.country.value = Variable.lang.text.country
+
+    Static.search = generate("input")
+    Static.search.placeholder = Variable.lang.placeholder.searchByKeywords
+
+    Static.optionsSelect = {
+        specialization: {
+            nameOptions: "specialization",
+            title: Variable.lang.span.chooseSpecialization,
+            items: [
+                { text: Variable.lang.select.allSpec, value: "all" },
+                { text: Variable.lang.select.frontend, value: "frontend" },
+                { text: Variable.lang.select.backend, value: "backend" },
+                { text: Variable.lang.select.seo, value: "seo" },
+                { text: Variable.lang.select.blockchain, value: "blockchain" },
+            ],
+            open: false,
+            active: "all",
+
+        },
+    }
+    Static.language = { name: "all", code: Variable.lang.code }
+
+    Static.Auth = Variable.auth
+
+    return
+}
+
 
 
 
