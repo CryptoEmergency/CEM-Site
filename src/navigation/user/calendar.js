@@ -53,7 +53,7 @@ const monthHandler = (Static, prev = true) => {
 };
 
 const addNew = async function (Static) {
-    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.description, showDate: Static.active, color: randomColor(listColors) })
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.text, showDate: Static.active })
     if (response && response.status == "ok") {
         if (response.list_records && response.list_records[0]) {
             Static.notesCalendar.list_records.unshift(response.list_records[0])
@@ -91,6 +91,7 @@ const addForm = function (Static) {
                             type="button"
                             class="c-modal__close"
                             onclick={() => {
+                                Static.activeNotes = null
                                 Static.modal = false
                                 initReload()
                             }}
@@ -106,7 +107,12 @@ const addForm = function (Static) {
                                         Static.elTitle = $el
                                     }}
                                     oninput={()=> {
-                                        Static.active.title = Static.elTitle.textContent
+                                        if (Static.activeNotes) {
+                                            Static.activeNotes.title = Static.elTitle.textContent
+                                            
+                                        } else {
+                                            Static.active.title = Static.elTitle.textContent
+                                        }
                                     }}
                                 >
                                     {Static.activeNotes ? Static.activeNotes.title : null}
@@ -116,10 +122,15 @@ const addForm = function (Static) {
                                     contenteditable="true"
                                     data-text="Текст"
                                     Element={($el) => {
-                                        Static.elDescription = $el
+                                        Static.elText = $el
                                     }}
                                     oninput={()=> {
-                                        Static.active.description = Static.elDescription.textContent
+                                        if (Static.activeNotes) {
+                                            Static.activeNotes.text = Static.elText.textContent
+                                            
+                                        } else {
+                                            Static.active.text = Static.elText.textContent
+                                        }
                                     }}
                                 >
                                     {Static.activeNotes ? Static.activeNotes.text : null}
@@ -135,15 +146,14 @@ const addForm = function (Static) {
                             type="button"
                             onClick={() => {
                                 if (Static.activeNotes) {
-                                    // editNotes(Static)
+                                    editNotes(Static)
                                     Static.activeNotes = null
                                     
                                 } else {
                                     addNew(Static)
-                                    
+                                    initReload()
                                 }
                                 Static.modal = false
-                                initReload()
                             }}
                             >
                                 <span class="c-button__text">{Variable.lang.button.send}</span>
@@ -303,7 +313,6 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
-            // console.log(Static.dateNotes)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
