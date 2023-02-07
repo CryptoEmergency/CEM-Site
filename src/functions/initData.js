@@ -830,7 +830,34 @@ initData.cryptouniversity_show = function (Static) {
     return
 }
 
+initData.events = function (Static) {
 
+    Static.nameRecords = "PageEvents"
+
+    Static.filters = {
+        language: Object.create(filters.language),
+        country: Object.create(filters.country),
+        cities: Object.create(filters.cities),
+    }
+
+    Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.language.value = Variable.lang.text.language
+
+    Static.filters.country.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.country.value = Variable.lang.text.country
+
+    Static.filters.cities.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.cities.value = Variable.lang.text.city
+
+    Static.search = generate("input")
+    Static.search.placeholder = Variable.lang.placeholder.findEvents
+
+    Static.language = { name: "all", code: Variable.lang.code }
+
+    Static.Auth = Variable.auth
+
+    return
+}
 
 
 
