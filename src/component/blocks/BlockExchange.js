@@ -24,6 +24,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
         <div id="crypto_exchange" class="crypto_exchanges">
             <div class="crypto_exchanges-title">
                 <h4>{Variable.lang.h.exchange}</h4>
+                {/* <span>{filterCoins.name}</span> */}
                 <img
                     class="filter-search_icon"
                     src={svg.filter}
@@ -83,7 +84,6 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                                         <div>
                                             <span>
                                                 {item.name}
-
                                             </span>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                                         </div>
                                     </div>
 
-                                    <div>
+                                    <div class="btn-wrap">
                                         <div class="button-container-preview">
                                             <span class="btn-news-preview">
                                                 <span>

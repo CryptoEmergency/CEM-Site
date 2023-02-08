@@ -48,22 +48,27 @@ const ModalFilterCoin = function (data, ID) {
             </header>
 
             <div class="c-modal__body">
-              <form>
-                <input
-                  type="search"
-                  class="filter-coinInput"
-                  placeholder="Выбрать монеты"
-                  oninput={function () {
-                    let searchText = this.value.toLowerCase()
-                    Static.allCoin = Static.list_coins.filter((item) => {
-                      if (item.name.toLowerCase().includes(searchText)) {
-                        return true
-                      }
-                    })
-                    initReload("modals")
-                  }}
-                />
-              </form>
+
+              <div class="coinForm-wrap">
+                <form class="filter-coinForm">
+                  <input
+                    required
+                    type="search"
+                    class="filter-coinInput"
+                    placeholder="Выбрать монеты"
+                    oninput={function () {
+                      let searchText = this.value.toLowerCase()
+                      Static.allCoin = Static.list_coins.filter((item) => {
+                        if (item.name.toLowerCase().includes(searchText)) {
+                          return true
+                        }
+                      })
+                      initReload("modals")
+                    }}
+                  />
+                  <button class="close-icon" type="reset"></button>
+                </form>
+              </div>
 
               <div class="filterCoinContainer">
                 {Static.allCoin.map((item) => {
