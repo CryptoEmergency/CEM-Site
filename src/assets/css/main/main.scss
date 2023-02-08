@@ -1395,6 +1395,34 @@ textarea {
         }
     }
 
+    &--ellipse {
+        min-width: 190px;
+        height: 54px;
+        border-radius: 50px;
+        text-decoration: none;
+    }
+
+    &--transparent {
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: '';
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border-radius: 50px;
+            background: #232733;
+        }
+
+        .c-button {
+            &__text {
+                position: relative;
+            }
+        }
+    }
+
     &--inactive {
 
         &::after {

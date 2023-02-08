@@ -11,7 +11,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
+import { Avatar, Input, Select } from '@component/element/index.js';
 
 const Tags = function ({ Static, classActive, text, type }) {
     return (
@@ -90,11 +90,72 @@ const start = function (data, ID = "mainBlock") {
                     {
                         position: "Make a landing page on the platform alp constructor",
                         about: "We need a written usability consultation on the design of the main and 1 typical internal pages of the site. It is important to know UX design, seo promotion, the ability to.. ",
+                        date: "12 минут назад",
+                        budget: 5000,
+                        urgency: true,
                         applicant: {
-                            _id: 1,
-                            name: "Anton Kharitonov",
+                            _id: "62d7e80490edc15f690791b0",
+                            avatar: {
+                                name: "fb15a09b752156b6e3904bd84fdd3d6d.png"
+                            },
+                            nickname: "Anton Kharitonov",
                             profession: "Web Designer",
-                            rating: ""
+                            company: "Web Studio AX",
+                            // frame: {
+                            //     name: "rainbow.gif"
+                            // },
+                            statistic: {
+                                level: 24,
+                                comments: 12,
+                                view: 224,
+                            }
+                        }
+                    },
+                    {
+                        position: "Make a landing page on the platform alp constructor",
+                        about: "We need a written usability consultation on the design of the main and 1 typical internal pages of the site. It is important to know UX design, seo promotion, the ability to.. ",
+                        date: "12 минут назад",
+                        budget: 5000,
+                        urgency: false,
+                        applicant: {
+                            _id: "62d7e80490edc15f690791b0",
+                            avatar: {
+                                name: "fb15a09b752156b6e3904bd84fdd3d6d.png"
+                            },
+                            nickname: "Anton Kharitonov",
+                            profession: "Web Designer",
+                            company: "Web Studio AX",
+                            // frame: {
+                            //     name: "rainbow.gif"
+                            // },
+                            statistic: {
+                                level: 24,
+                                comments: 12,
+                                view: 224,
+                            }
+                        }
+                    }, {
+                        position: "Make a landing page on the platform alp constructor",
+                        about: "We need a written usability consultation on the design of the main and 1 typical internal pages of the site. It is important to know UX design, seo promotion, the ability to.. ",
+                        date: "12 минут назад",
+                        budget: 5000,
+                        urgency: true,
+                        applicant: {
+                            _id: "62d7e80490edc15f690791b0",
+                            avatar: {
+                                name: "fb15a09b752156b6e3904bd84fdd3d6d.png"
+                            },
+                            nickname: "Anton Kharitonov",
+                            profession: "Web Designer",
+                            company: "Web Studio AX",
+                            // frame: {
+                            //     name: "rainbow.gif"
+                            // },
+                            statistic: {
+                                level: 24,
+                                comments: 12,
+                                view: 224,
+                            }
                         }
                     }
                 ]
@@ -232,7 +293,36 @@ const start = function (data, ID = "mainBlock") {
                                                 return (
                                                     <li>
                                                         <a href="" class="c-careers__resume">
-                                                            {index}
+                                                            <h4 class="c-careers__resposition">{item.position}</h4>
+                                                            <p class="c-careers__resabout">{item.about}</p>
+                                                            <date datetime="" class="c-careers__resdate">{item.date}</date>
+                                                            <Avatar author={item.applicant} parent={'c-careers__resume'} nickName={true} speciality={item.applicant.profession} />
+                                                            <div class="c-careers__rescompany">
+                                                                <span>{item.applicant.company}</span>
+                                                                <span>Сompany name</span>
+                                                            </div><footer class="c-careers__resfooter">
+                                                                <div class="c-careers__resstatistic">
+                                                                    <div class="c-careers__resviews">
+                                                                        <img src={svg["question_views_gradient"]} width="32" height="32" /> 
+                                                                        {item.applicant.statistic.view}
+                                                                    </div>
+                                                                    <div class="c-careers__rescomments">
+                                                                        <img src={svg["resume_answer"]}  width="30" height="30"  />
+                                                                        <span>{item.applicant.statistic.comments} </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="c-careers__resprice">
+                                                                    <span>{item.budget}</span>
+                                                                    <span>{Variable.lang.span.budgetPerOrder}</span>
+                                                                </div>
+                                                                {
+                                                                    item.urgency ?
+                                                                    <div class="c-careers__resurgency">
+                                                                    <span>{Variable.lang.span.urgently}</span>
+                                                                </div>
+                                                                : null
+                                                                }
+                                                            </footer>
                                                         </a>
                                                     </li>
                                                 )
@@ -240,6 +330,35 @@ const start = function (data, ID = "mainBlock") {
                                             : null
                                     }
                                 </ul>
+
+                                {/* Пагинация */}
+                                <div class="c-careers__pagination c-pagination">
+                                    <a href="" class="c-pagination__btn c-button c-button--gradient4 c-button--ellipse c-button--transparent">
+                                        <span class="c-button__text">{Variable.lang.button.backPage}</span>
+                                    </a>
+
+                                    <ul class="c-pagination__pages">
+                                        <li>
+                                            <a href="" class="c-pagination__link"><span>1</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="c-pagination__link c-pagination__link--active"><span>2</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="c-pagination__link"><span>3</span></a>
+                                        </li>
+                                        <li>
+                                            <span class="c-pagination__link"><span>...</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="" class="c-pagination__link"><span>99</span></a>
+                                        </li>
+                                    </ul>
+
+                                    <a href="" class="c-pagination__btn c-button c-button--gradient4 c-button--ellipse c-button--transparent">
+                                        <span class="c-button__text">{Variable.lang.button.forwardPage}</span>
+                                    </a>
+                                </div>
                             </div>
                             <div class="c-careers__content content--сompany">
                                 Содержимое 2...
