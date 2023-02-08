@@ -1,40 +1,51 @@
-import {
-  jsx,
-  jsxFrag,
-  Variable,
-  initReload,
-  load,
-  init
-} from "@betarost/cemserver/cem.js";
-
+import { jsx, jsxFrag, Variable, initReload, init } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
+import svg from "@assets/svg/index.js";
+import { Input } from '@component/element/index.js';
+
+let inputValue, allCoin;
+
+
+const changeInput = (e) => {
+  inputValue = e.target.value.toLowerCase();
+  allCoin.filter((item) => {
+    item.name.toLowerCase().includes(inputValue) == true
+  })
+
+  initReload("modals");
+}
 
 const ModalFilterCoin = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
+  // console.log('=f55b45=', Static)
+  allCoin = Static.list_coins;
+  Static.Coins = {
+    value: "",
+    oninput: () => {
 
-  Static.closeOut = true
-  Static.mouseOut = false
-  Static.allCoin = Static.list_coins;
-  Static.filterCoins = []
+    }
+  }
+  console.log('=allcoin=', allCoin)
 
-  load({
-    ID,
-    fn: () => {
+  let close = true
+  init(
+    null,
+    () => {
       return (
         <div
           class="c-modal c-modal--open"
           onclick={function (e) {
-            if (Static.mouseOut && Static.closeOut) {
+            if (close) {
               fn.modals.close(ID)
             }
           }}>
           <section
             class="c-modal__dialog"
             onmouseover={function () {
-              Static.mouseOut = false
+              close = false
             }}
             onmouseleave={function () {
-              Static.mouseOut = true
+              close = true
             }}>
 
             <header class="c-modal__header">
@@ -48,34 +59,22 @@ const ModalFilterCoin = function (data, ID) {
             </header>
 
             <div class="c-modal__body">
-              <form>
-                <input
-                  type="search"
-                  class="filter-coinInput"
-                  placeholder="Выбрать монеты"
-                  oninput={function () {
-                    let searchText = this.value.toLowerCase()
-                    Static.allCoin = Static.list_coins.filter((item) => {
-                      if (item.name.toLowerCase().includes(searchText)) {
-                        return true
-                      }
-                    })
-                    initReload("modals")
-                  }}
-                />
-              </form>
-
+              <input data-coin=""
+                id="filterCoinInput"
+                type="text"
+                class="filter-coinInput"
+                oninput={changeInput}
+              />
               <div class="filterCoinContainer">
-                {Static.allCoin.map((item) => {
+
+
+                {allCoin.map((item) => {
+
                   return (
-                    <div class={["coin-item", Static.filterCoins.includes(item.name) ? "coin-item_active" : null]}
+                    <div class="coin-item"
                       onclick={() => {
-                        if (Static.filterCoins.includes(item.name)) {
-                          Static.filterCoins.splice(Static.filterCoins.indexOf(item.name), 1)
-                        } else {
-                          Static.filterCoins.push(item.name)
-                        }
-                        initReload("modals")
+                        // Static.callback(item.name)
+                        fn.modals.close(ID)
                       }}>
                       <div class="coin-item_img">
                         <img src={`/assets/icons/coins/${item.icon}.svg`}></img>
@@ -86,14 +85,12 @@ const ModalFilterCoin = function (data, ID) {
                 })}
               </div>
             </div>
+
             <div class="c-modal__footer">
               <button
                 class={["c-button", "c-button--gradient2",]}
                 type="button"
-                onclick={() => {
-                  Static.callback(Static.filterCoins)
-                  fn.modals.close(ID)
-                }}>
+              >
                 <span class="c-button__text">
                   {Variable.lang.button.apply}
                 </span>
@@ -102,8 +99,8 @@ const ModalFilterCoin = function (data, ID) {
           </section>
         </div>
       );
-    }
-  })
+    }, ID
+  )
 }
 
 export default ModalFilterCoin;

@@ -21,6 +21,7 @@ const changeInput = (e) => {
 const ModalChangeLanguage = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
   allLang = Variable.listsLang;
+
   Static.Language = {
     value: "",
     oninput: () => {

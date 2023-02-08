@@ -26,8 +26,6 @@ const listCategories = [
   },
 ];
 
-
-
 const showBtn = function (Static) {
   return listCategories.map((item) => {
     return (
@@ -47,27 +45,30 @@ const showBtn = function (Static) {
 const showListIco = function (listIcoStartaps) {
   return listIcoStartaps.map((item) => {
     return (
-      <div class="ico-list_item"
-        onclick={() => {
-          fn.siteLinkModal("/list-icostartaps/show/" + item._id, { title: item.title, item })
-        }}>
-        <div class="item-img">
-          <img class="item-img_el" src={`/assets/upload/worldPress/${item.icon}`}></img>
-        </div>
-        <div class="item-info">
-          <h5 class="item-title">{item.title}</h5>
-          <div class="item-desc_wrap">
-            <p class="item-desc">{item.description}</p>
-          </div>
-          <div class="item-sum_wrap">
-            <p class="item-sum">
-              <span class="item-sum_obj">${item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0}</span> / ${item.targetMoney} <span class="item-sum_procent">{Math.round(((item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0) * 100) / item.targetMoney)}%</span>
-            </p>
-          </div>
-        </div>
-        <span class="item-date item-date_start">{fn.getDateFormat(item.startDate, "time")}</span>
-        <span class="item-date item-date_end">{fn.getDateFormat(item.endDate, "time")}</span>
+      <div class="ico-list_item-wrap">
+        <div class="ico-list_item"
+          onclick={() => {
+            fn.siteLinkModal("/list-icostartaps/show/" + item._id, { title: item.title, item })
+          }}>
 
+          <div class="item-img">
+            <img class="item-img_el" src={`/assets/upload/worldPress/${item.icon}`}></img>
+          </div>
+          <div class="item-info">
+            <h5 class="item-title">{item.title}</h5>
+            <div class="item-desc_wrap">
+              <p class="item-desc">{item.description}</p>
+            </div>
+            <div class="item-sum_wrap">
+              <p class="item-sum">
+                <span class="item-sum_obj">${item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0}</span> / ${item.targetMoney} <span class="item-sum_procent">{Math.round(((item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0) * 100) / item.targetMoney)}%</span>
+              </p>
+            </div>
+          </div>
+          <span class="item-date item-date_start">{fn.getDateFormat(item.startDate, "time")}</span>
+          <span class="item-date item-date_end">{fn.getDateFormat(item.endDate, "time")}</span>
+
+        </div>
       </div>
     )
   })
@@ -156,7 +157,9 @@ const start = function (data, ID) {
     },
     fn: () => {
       return (
-        <div class="book_container c-main__body">
+        <div class="book_container c-main__body ico-wrap">
+          <img src={svg["background/left"]} class={["ico-back", "ico-back-left"]}></img>
+          <img src={svg["background/right"]} class={["ico-back", "ico-back-right"]}></img>
           <div class="book-inner ico-inner">
             <div class="tags tags-ico">
               {showBtn(Static)}
