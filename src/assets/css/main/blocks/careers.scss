@@ -661,19 +661,39 @@
         color: #FFFFFF;
         text-transform: none;
 
+        @media(max-width: 767px) {
+            min-width: 42px;
+            width: 42px;
+            padding: 22px;
+            height: 42px;
+        }
+
         &:first-of-type {
             padding-left: 43px;
+
+            @media(max-width: 767px) {
+                padding: 22px;
+            }
 
             &::after {
                 position: absolute;
                 content: url("../svg/arr_back.svg");
                 top: 19px;
                 left: 23px;
+
+                @media(max-width: 767px) {
+                    top: 15px;
+                    left: 18px;
+                }
             }
         }
 
         &:nth-of-type(2) {
             padding-right: 43px;
+
+            @media(max-width: 767px) {
+                padding: 22px;
+            }
 
             &::after {
                 position: absolute;
@@ -681,12 +701,25 @@
                 top: 16px;
                 right: 23px;
                 transform: rotate(180deg);
+
+                @media(max-width: 767px) {
+                    top: 12px;
+                    right: 18px;
+                }
             }
         }
 
         &:hover {
             &::before {
                 background: transparent;
+            }
+        }
+
+        .c-button {
+            &__text {
+                @media(max-width: 767px) {
+                    display: none;
+                }
             }
         }
     }

@@ -348,12 +348,6 @@ const start = function (data, ID = "mainBlock") {
                                             <a href="" class="c-pagination__link"><span>3</span></a>
                                         </li>
                                         <li>
-                                            <a href="" class="c-pagination__link"><span>4</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="" class="c-pagination__link"><span>5</span></a>
-                                        </li>
-                                        <li>
                                             <span class="c-pagination__link"><span>...</span></span>
                                         </li>
                                         <li>
