@@ -667,9 +667,8 @@
             &::after {
                 position: absolute;
                 content: url("../svg/arr_back.svg");
-                top: 50%;
+                top: 19px;
                 left: 23px;
-                transform: translateY(-50%);
             }
         }
 
@@ -679,9 +678,9 @@
             &::after {
                 position: absolute;
                 content: url("../svg/arr_back.svg");
-                top: 50%;
+                top: 16px;
                 right: 23px;
-                transform: translateY(-50%) rotate(180deg);
+                transform: rotate(180deg);
             }
         }
 
