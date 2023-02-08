@@ -1,6 +1,14 @@
 .c-careers {
     padding-top: 60px;
 
+    @media(max-width: 1239px) {
+        padding-top: 35px;
+    }
+
+    @media(max-width: 767px) {
+        padding-top: 29px;
+    }
+
     &__container {}
 
     &__title {
@@ -14,6 +22,16 @@
         display: flex;
         align-items: center;
         color: #FFFFFF;
+
+        @media(max-width: 1239px) {
+            margin: 0 0 18px;
+            font-size: 28px;
+        }
+
+        @media(max-width: 767px) {
+            margin: 0 0 5px;
+            font-size: 20px;
+        }
     }
 
     &__tabs {
@@ -68,6 +86,14 @@
             font-size: 24px;
             line-height: 43px;
             cursor: pointer;
+
+            @media(max-width: 1239px) {
+                font-size: 22px
+            }
+
+            @media(max-width: 767px) {
+                font-size: 16px;
+            }
         }
 
         &>div {
@@ -125,6 +151,10 @@
             &__input {
                 height: 75px;
                 padding-right: 200px;
+
+                @media(max-width: 767px) {
+                    padding-right: 20px;
+                }
             }
         }
 
