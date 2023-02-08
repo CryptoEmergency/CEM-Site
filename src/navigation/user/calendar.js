@@ -93,6 +93,7 @@ const addForm = function (Static) {
                             onclick={() => {
                                 Static.activeNotes = null
                                 Static.modal = false
+                                Static.isValid = false
                                 initReload()
                             }}
                             ></button>
@@ -113,6 +114,8 @@ const addForm = function (Static) {
                                         } else {
                                             Static.active.title = Static.elTitle.textContent
                                         }
+                                        Static.elTitle.textContent.length > 0 ? Static.isValid = true : Static.isValid = false
+                                        initReload()
                                     }}
                                 >
                                     {Static.activeNotes ? Static.activeNotes.title : null}
@@ -137,23 +140,72 @@ const addForm = function (Static) {
                                 </div>
                             </div>
                         </div>
+                        <div class="calendar-color">
+                            <p>Выбор цвета заметки</p>
+                            <div 
+                                class="calendar-color-button"
+                                onClick={() => {
+                                    Static.colorNotes = true
+                                    initReload()
+                                }}
+                            >
+                                <span class={["calendar-color-default",
+                                        Static.colorIndex ? `calendar-color-type${Static.colorIndex}` : "calendar-color-type1" ]} 
+                                            tabindex="0">
+                                </span>
+                            </div>
+                                <ul
+                                    class="calendar-color-list"
+                                    style={[Static.colorNotes ? "display: flex" : null]}
+                                    Element={($el) => {
+                                        Static.elListColor = $el
+                                    }}
+                                    onClick={(e) => {
+                                        Static.colorIndex = e.target.id
+                                        Static.colorNotes = false
+                                        initReload()
+                                    }}
+                                >
+                                    <li class="calendar-color-item calendar-color-type1" id="1">
+                                    </li>
+                                    <li class="calendar-color-item calendar-color-type2" id="2">
+                                    </li>
+                                    <li class="calendar-color-item calendar-color-type3" id="3">
+                                    </li>
+                                    <li class="calendar-color-item calendar-color-type4" id="4">
+                                    </li>
+                                    <li class="calendar-color-item calendar-color-type5" id="5">
+                                    </li>
+                                    <li class="calendar-color-item calendar-color-type6" id="6">
+                                    </li>
+                                </ul>
+                            </div>
                         <div class="c-modal__footer">
                             <button
                             class={[
                                 "c-button c-button--gradient2",
-                                // !Static.isValid ? "c-button--inactive" : "",
+                                !Static.isValid ? "c-button--inactive" : null,
                             ]}
                             type="button"
                             onClick={() => {
-                                if (Static.activeNotes) {
-                                    editNotes(Static)
-                                    Static.activeNotes = null
+                                if(Static.isValid) {
+                                    if (Static.activeNotes) {
                                     
+                                        editNotes(Static)
+                                        Static.activeNotes = null
+                                        
+                                    } else {
+                                        
+                                        addNew(Static)
+                                        initReload()
+                                    }
+                                    Static.modal = false
+                                    Static.isValid = false
                                 } else {
-                                    addNew(Static)
-                                    initReload()
+                                    null
                                 }
-                                Static.modal = false
+                                
+                                
                             }}
                             >
                                 <span class="c-button__text">{Variable.lang.button.send}</span>
@@ -244,7 +296,6 @@ const renderMonth = (Static) => {
             </div>
         )
     } else if (Static.renderYear) {
-        console.log(Static.renderYear)
         return (
             <div 
                 class="calendar-year"
@@ -304,15 +355,21 @@ const start = function (data, ID) {
     Static.activeMonthClone = null
     Static.elNotes = null
     Static.activeNotes = null
+    Static.colorNotes = false
+    Static.elListColor = null
+    Static.colorIndex = null
 
     load({
         ID,
         fnLoad: async () => {
+
+            
             
             Static.notesCalendar = await fn.restApi.getUserCalendar({ filter: {} })
             console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
+            // console.log(Static.cont)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
