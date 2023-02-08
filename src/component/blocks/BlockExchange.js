@@ -11,25 +11,59 @@ import { ButtonShowMore, NotFound } from "@component/element/index.js";
 const BlockExchange = async function ({ Static, limit = 21 }) {
     await initOne(
         async () => {
-            await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit })
+            Static.list_coins = await fn.restApi.getCoins({ filter: {}, limit: 20, select: { name: 1, icon: 1 } })
+            await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit, select: { name: 1 } })
+
+            // let tmp = await fn.restApi.getExchange({ filter: {}, select: { name: 1 }, sort: { score: -1 }, limit: 4 })
+
+            // console.log("===", tmp)
+
         }
     )
     return (
         <div id="crypto_exchange" class="crypto_exchanges">
-            <h4>{Variable.lang.h.exchange}</h4>
+            <div class="crypto_exchanges-title">
+                <h4>{Variable.lang.h.exchange}</h4>
+                <img
+                    class="filter-search_icon"
+                    src={svg.filter}
+                    onclick={() => {
+
+
+                        fn.modals.ModalFilterCoin({
+                            list_coins: Static.list_coins.list_records,
+                            callback: async (filterCoins) => {
+                                if (!filterCoins.length) {
+                                    return
+                                }
+                                let filter = { "$or": [] }
+                                for (let item of filterCoins) {
+                                    filter["$or"].push({ "list_coins.name": item })
+                                }
+
+                                console.log('=1e34f2=', filterCoins, filter)
+                                await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter, limit, select: { name: 1 } })
+                                return
+
+                            }
+
+                        })
+                    }}
+                ></img>
+            </div>
+
             <div class="statistics-preview list_exchange_page">
                 <div class="crypto_exchanges-row">
                     <div class="crypto_exchanges-cell">
                         {Variable.lang.tableTitle.appellation}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {Variable.lang.tableTitle.rank}
-                    </div>
-                    <div class="crypto_exchanges-cell">
                         {Variable.lang.tableTitle.coins}
                     </div>
                     <div class="crypto_exchanges-cell">
-                        {Variable.lang.tableTitle.startDate}
+                        <div class="switch">
+                            <input type="checkbox"></input>
+                        </div>
                     </div>
                 </div>
                 {
@@ -48,22 +82,9 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                                     <div class="crypto_exchanges-cell">
                                         <div>
                                             <span>
-                                                <span class="list_exanges_image_container">
-                                                    <img
-                                                        class="crypto_coin_icon load"
-                                                        src={`/assets/upload/exchange/${item.logo}`}
-                                                    />
-                                                </span>
+                                                {item.name}
+
                                             </span>
-                                        </div>
-                                    </div>
-                                    <div class="crypto_exchanges-cell">
-                                        <div>
-                                            {item.score}
-                                            <img
-                                                class="crypto_exchanges_rate"
-                                                src={svg.rate_icon}
-                                            />
                                         </div>
                                     </div>
                                     <div class="crypto_exchanges-cell">
@@ -85,11 +106,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                                             }
                                         </div>
                                     </div>
-                                    <div class="crypto_exchanges-cell exanges_date_create">
-                                        <span class="">
-                                            {fn.getDateFormat(item.startDate)}
-                                        </span>
-                                    </div>
+
                                     <div>
                                         <div class="button-container-preview">
                                             <span class="btn-news-preview">

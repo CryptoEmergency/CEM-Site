@@ -169,7 +169,7 @@ const start = function (data, ID) {
                                         <input type="search" class="search" placeholder="Search book"></input>
 
                                     </form>
-                                    <div class="filter-dropdowns">
+                                    <div class="filter-dropdowns_book">
                                         <div>
                                             <h5 class="filter-subtitle">Popular Categories</h5>
                                             <div

@@ -15,12 +15,49 @@ import { BlockLentaUsers } from '@component/blocks/index.js';
 let visibleEditInterest = false;
 let visibleEditWork = false;
 
+const makeFilter = function (Static) {
+    let objReturn = {}
+    switch (Static.lentaPage) {
+      case "text":
+        objReturn["media.type"] = { $nin: ["video", "audio", "image"] };
+        break;
+  
+      case "audio":
+        objReturn.$and = [
+          { "media.type": "audio" },
+          { "media.type": { $nin: ["video", "image"] } },
+        ];
+        break;
+  
+      case "video":
+        objReturn.$and = [
+          { "media.type": "video" },
+          { "media.type": { $nin: ["audio", "image"] } },
+        ];
+        break;
+  
+      case "photo":
+        objReturn.$and = [
+          { "media.type": "image" },
+          { "media.type": { $nin: ["audio", "video"] } },
+        ];
+        break;
+    }
+    if (Static.lentaFilters && Static.lentaFilters.lang) {
+      objReturn["languages.code"] = Static.lentaFilters.lang
+    }
+    if (Static.lentaFilters && Static.lentaFilters.author) {
+      objReturn.author = Static.lentaFilters.author
+    }
+    return objReturn
+  }
+
 const BlockUserProfilePage = {}
 
 BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
 
 
-    // console.log('=8d74d9=', Static, data)
+    // console.log('=8d74d9= Static lentaFriends =', Static, data)
 
     if (!data || data.profilePage != "lentaFriends") {
         return (<></>)
@@ -96,14 +133,30 @@ BlockUserProfilePage.lentaFriends = function (Static, data, ID) {
                                         Static.activeView == "tile" ? "c-tiles" : null
                                     ]}
                                 >
-                                    {Static.activeItems.list_records.map((item) => {
+                                    {Static.activeItems.list_records.map((item, index) => {
                                         return (
                                             <BlockLentaUsers
                                                 Static={Static}
                                                 item={item}
-                                                ElemVisible={() => {
-                                                    fn.recordsView(item._id, "setPost")
-                                                }}
+                                                ElemVisible={
+                                                    // () => {
+                                                    //     fn.recordsView(item._id, "setPost")
+                                                    // }
+                                                    Static.activeItems.list_records.length < Static.activeItems.totalFound && index == (Static.activeItems.list_records.length - 5) ?
+                                                        async () => {
+
+                                                            console.log('=0c6882=', "Load more")
+                                                            fn.recordsView(item._id, "setPost")
+                                                            Static.apiFilter = makeFilter(Static)
+                                                            let response = await await fn.restApi.getPost({ filter: Static.apiFilter, limit: 15, offset: Static.activeItems.list_records.length })
+                                                            Static.activeItems.list_records.push(...response.list_records)
+                                                            initReload()
+                                                        }
+                                                        :
+                                                        () => {
+                                                            fn.recordsView(item._id, "setPost")
+                                                        }
+                                                }
                                             />
                                         )
                                     })
@@ -434,6 +487,8 @@ BlockUserProfilePage.subscribers = function (Static, data) {
         return (<></>)
     }
 
+    console.log('=6916b1= data =', data)
+
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
             <h2>{Variable.lang.toggle.subscribers}</h2>
@@ -457,6 +512,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
                                     <p>{item.nickname}</p>
                                     <p>{item.fullname ? item.fullname : ''}</p>
                                 </div>
+                                {<ItemsMenu items={fn.itemsMenu.subscribers(Static, item)} author={item} />}
                             </div>
                         )
                     })

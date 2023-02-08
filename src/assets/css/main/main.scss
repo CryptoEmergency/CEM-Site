@@ -901,7 +901,7 @@ textarea {
 
         &.clicked_button-type_1-part_1 {
             width: 100% !important;
-            background: $spaceman !important;
+            background: $spaceman  !important;
             margin-left: auto !important;
             margin-right: auto !important;
         }
@@ -912,7 +912,7 @@ textarea {
             width: 100% !important;
 
             span {
-                color: $white !important;
+                color: $white  !important;
             }
         }
 
@@ -1352,6 +1352,73 @@ textarea {
                 font-style: normal;
                 font-weight: 600;
                 color: #ffffff;
+            }
+        }
+    }
+
+    &--gradient4 {
+        display: flex;
+        height: 50px;
+        width: 100%;
+        max-width: 300px;
+        padding: 0;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 43px;
+        // text-decoration: none;
+        text-decoration-line: underline;
+        text-transform: uppercase;
+        color: #ffffff;
+        font-size: 14px;
+        text-align: center;
+        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+        border-radius: 3px;
+        transition: 1s;
+        overflow: hidden;
+        z-index: 0;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        .c-button {
+
+            &__text {
+                margin: auto;
+                font-family: "Montserrat", Arial, sans-serif;
+                font-style: normal;
+                font-weight: 600;
+                color: #ffffff;
+            }
+        }
+    }
+
+    &--ellipse {
+        min-width: 190px;
+        height: 54px;
+        border-radius: 50px;
+        text-decoration: none;
+    }
+
+    &--transparent {
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: '';
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border-radius: 50px;
+            background: #232733;
+        }
+
+        .c-button {
+            &__text {
+                position: relative;
             }
         }
     }
@@ -1928,3 +1995,7 @@ textarea {
 @import 'blocks/rooms.scss';
 /* Community */
 @import 'blocks/community.scss';
+/* Events */
+@import 'blocks/events.scss';
+/* Careers */
+@import 'blocks/careers.scss';

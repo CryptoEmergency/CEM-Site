@@ -21,10 +21,15 @@ const changeSelect = function (selectIndex, options, callback) {
   callback(options.active, options.nameOptions);
 };
 
-const Select = function ({ options, callback, toggler }) {
+const Select = function ({ options, callback, toggler, icon = false }) {
   let aimg = svg["filter_arrow_bottom"]
   return (
-    <div class="profit_calculator_inputs_container">
+    <div
+      class={[
+        "profit_calculator_inputs_container",
+        (icon && typeof icon == "string") ? `c-select--icon c-select--icon-${icon}` : null
+      ]}
+    >
       {options.title ? <span>{options.title}</span> : null}
       <div class="justselect-wrapper">
         <div
@@ -44,7 +49,7 @@ const Select = function ({ options, callback, toggler }) {
           }}
         >
           {() => {
-      
+
             let tmp = options.items.filter((item) => {
               if (options.active == item.value) {
                 return true;
@@ -75,12 +80,12 @@ const Select = function ({ options, callback, toggler }) {
                       item.text === Variable.lang.h.posts_friends &&
                       (!Variable.auth || Variable.myInfo.subscribed.length === 0)
                     ) {
-                      
+
                       return;
                     } else {
-                
+
                       changeSelect(index, options, callback);
-                     
+
                     }
                   }}
                 >
@@ -91,21 +96,20 @@ const Select = function ({ options, callback, toggler }) {
           }}
         </ul>
       </div>
-      { toggler ? <img class="filter_sort_toggler" onclick={function(){
+      {toggler ? <img class="filter_sort_toggler" onclick={function () {
 
 
-if(options.asort == -1)
-{
-  aimg = svg["filter_arrow_top"]
-  options.asort = 1
-}
-else{
-  options.asort = -1
-  aimg = svg["filter_arrow_bottom"]
-}
-this.src = aimg
+        if (options.asort == -1) {
+          aimg = svg["filter_arrow_top"]
+          options.asort = 1
+        }
+        else {
+          options.asort = -1
+          aimg = svg["filter_arrow_bottom"]
+        }
+        this.src = aimg
 
-callback();
+        callback();
       }} src={aimg} /> : null}
     </div>
   );

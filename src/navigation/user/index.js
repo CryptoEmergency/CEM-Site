@@ -96,7 +96,8 @@ const start = function (userInfo, ID = "mainBlock") {
         }
         profilePage = this.dataset.profilepage
         if (profilePage == "lentaFriends") {
-            Static.activeItems = await fn.restApi.getPost({ short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all" }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 51 })
+            Static.lentaFilters.author = userInfo._id
+            Static.activeItems = await fn.restApi.getPost({ short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: userInfo._id, "languages.code": "all" }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
             // console.log('=2b1496=', activeItems)
 
         } else if (profilePage == "questions") {

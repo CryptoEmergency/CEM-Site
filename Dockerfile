@@ -1,8 +1,7 @@
-FROM node:17.8.0
+FROM node:19.6.0
 LABEL maintainer="inbox@ienshin.ru"
 ENV TZ=Europe/Moscow
 WORKDIR /app
-RUN apt install git
 RUN git clone https://github.com/CryptoEmergency/CEM-Site.git ./
-RUN npm install
+RUN npm install --loglevel=error
 CMD [ "node", "index.js" ]

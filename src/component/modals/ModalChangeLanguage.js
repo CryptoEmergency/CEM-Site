@@ -21,6 +21,7 @@ const changeInput = (e) => {
 const ModalChangeLanguage = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
   allLang = Variable.listsLang;
+
   Static.Language = {
     value: "",
     oninput: () => {
@@ -32,20 +33,22 @@ const ModalChangeLanguage = function (data, ID) {
     null,
     () => {
       return (
-        <div class="c-modal c-modal--open" id="changeLanguage"  onclick={function(e){ if(close){ 
-  
-          fn.modals.close(ID)
-        }}}>
-          <section class="c-modal__dialog"  onmouseover={function(){
-           
-           close = false
-    
-         }}
-         onmouseleave={function(){
-           
-          close = true
-      
-           }}>
+        <div class="c-modal c-modal--open" id="changeLanguage" onclick={function (e) {
+          if (close) {
+
+            fn.modals.close(ID)
+          }
+        }}>
+          <section class="c-modal__dialog" onmouseover={function () {
+
+            close = false
+
+          }}
+            onmouseleave={function () {
+
+              close = true
+
+            }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title">{Variable.lang.h.modal_listLanguage}</h2>
               <button

@@ -103,6 +103,34 @@ restApi.getCourse = async function ({ cache, name, limit = 6, offset = 0, filter
     }
 }
 
+restApi.getCoins = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
+
+
+    let data = {
+        action: "getCoins",
+        short: true,
+        cache,
+        name,
+        limit,
+        offset,
+        filter: filter,
+        select,
+        sort
+    }
+
+    let response = await sendApi.send(data);
+    let responseCheck = checkAnswer(response, name)
+    if (firstRecord) {
+        if (responseCheck.list_records.length) {
+            return responseCheck.list_records[0]
+        } else {
+            return {}
+        }
+    } else {
+        return responseCheck
+    }
+}
+
 restApi.getTransactions = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord }) {
 
 
@@ -1309,7 +1337,8 @@ restApi.getUserCalendar = async function ({ cache, name, limit = 6, offset = 0, 
         media: 1,
         showDate: 1,
         type: 1,
-        notify: 1
+        notify: 1,
+        showDate: 1
     }
 
 
@@ -1557,20 +1586,21 @@ restApi.setIco.update = async function (data, noAlert = false) {
 }
 
 restApi.setUserCalendar = {}
-restApi.setUserCalendar.create = async function ({ title, text, media, notify, type, noAlert }) {
+restApi.setUserCalendar.create = async function ({ title, text, media, notify, type, showDate, noAlert }) {
     let data = {
         value: {
             title,
             text,
             media,
             notify,
-            type
+            type,
+            showDate
         },
     };
     const response = await sendApi.create("setUserCalendar", data);
     return checkSetAnswer(response, noAlert)
 }
-restApi.setUserCalendar.update = async function ({ _id, title, text, media, notify, type, noAlert, active = true }) {
+restApi.setUserCalendar.update = async function ({ _id, title, text, media, notify, showDate, type, noAlert, active = true }) {
     let data = {
         _id,
         value: {
@@ -1579,7 +1609,8 @@ restApi.setUserCalendar.update = async function ({ _id, title, text, media, noti
             media,
             active,
             notify,
-            type
+            type,
+            showDate
         },
     };
     // console.log('=8a8bce=',data)
