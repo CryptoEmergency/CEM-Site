@@ -186,7 +186,7 @@
 		"placeEvent": "Место",
 		"dateEvent": "Дата проведения",
 		"careers": "Работа",
-		"modal_listCoin": "Выбрать монеты"
+		"modalAllServices": "Все сервисы"
 	},
 	"a": {
 		"about": "О нас",
@@ -227,7 +227,8 @@
 		"home": "Главная",
 		"affiliate": "Партнерская программа",
 		"addChats": "Добавить чат",
-		"notes": "Мои заметки"
+		"notes": "Мои заметки",
+		"rooms": "Комнаты"
 	},
 	"span": {
 		"company": "Компания",
