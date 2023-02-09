@@ -73,7 +73,6 @@
         "join": "adhérer",
         "pre_view": "Aperçu",
         "allPartners": "Tous les partenaires",
-
         "lottery": "«Word of Mouth» lottery",
         "lotterySubtitle": "WIN the 1000CEM!"
     },
@@ -155,9 +154,10 @@
         "chats": "Chats",
         "partners": "Informations des partenaires",
         "modal_cropImage": "Ajouter une photo",
-
         "lottery": "Loterie «Bouche à oreille»",
-		"lotterySubtitle": "GAGNEZ le CEM"
+        "lotterySubtitle": "GAGNEZ le CEM",
+        "------------------новые слова-----------------": "добавить новые слова",
+        "modal_listCoin": "Choose coins"
     },
     "a": {
         "about": "À propos de nous",
@@ -198,9 +198,7 @@
         "home": "Page principale",
         "affiliate": "Programme des partenaires",
         "addChats": "Ajouter un chat",
-
-        
-		"notes":"My notes"
+        "notes": "My notes"
     },
     "span": {
         "company": "Compagnie",
@@ -360,7 +358,6 @@
         "October2022": "Octobre 2022",
         "aboutProjectDate19May2022": "Sortie le 19 mai 2022",
         "aboutProjectDateAugust2022": "Libération août 2022",
-
         "lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
         "lotteryAction1": "Invite your friends to increase Prize Pool.",
         "lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
@@ -378,9 +375,9 @@
         "lotteryQuest6": "Answer a shortest quiz.",
         "lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?",
         "aboutObjectiveTitle": "Our Mission",
-		"aboutObjective": "Our Mission is to unite the crypto enthusiasts from all over the world at a unified multifunctional platform called Crypto Emergency which will provide all necessary tools for communication, training, earning and creation of their own content.",
-		"aboutСonceptTitle": "Our Vision",
-		"aboutСoncept": "We create a robust and convenient digital ecosystem which includes our own blockchain with smart contracts, crypto wallet and all-round support of crypto industry startups, universal social media which supports all types of content, and information and educational portal which improves the crypto awareness of the planet’s population. We work 24/7 to improve and develop the Crypto Emergency ecosystem."
+        "aboutObjective": "Our Mission is to unite the crypto enthusiasts from all over the world at a unified multifunctional platform called Crypto Emergency which will provide all necessary tools for communication, training, earning and creation of their own content.",
+        "aboutСonceptTitle": "Our Vision",
+        "aboutСoncept": "We create a robust and convenient digital ecosystem which includes our own blockchain with smart contracts, crypto wallet and all-round support of crypto industry startups, universal social media which supports all types of content, and information and educational portal which improves the crypto awareness of the planet’s population. We work 24/7 to improve and develop the Crypto Emergency ecosystem."
     },
     "text": {
         "starups": "Entreprises de démarrage ",
@@ -520,7 +517,12 @@
         "complainComment": "Signaler un commentaire",
         "complainAnswer": "Se plaindre de la réponse",
         "complainUser": "Signaler un utilisateur",
-        "blackList": "Liste noire"
+        "blackList": "Liste noire",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "active": "Active",
+        "upcoming": "Upcoming",
+        "ended": "Ended",
+        "verified": "Verified"
     },
     "toggle": {
         "friends": "Amis",
@@ -667,7 +669,7 @@
         "reciveLike": "Vous avez mis l'aimant. Classement augmenté",
         "reciveReferralPay": "Votre référence a atteint le niveau 3."
     },
-	"itemsMenu": {
-		"SelectBestQuestion": "Выбрать лучший ответ"
-	}
+    "itemsMenu": {
+        "SelectBestQuestion": "Выбрать лучший ответ"
+    }
 }

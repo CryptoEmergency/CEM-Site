@@ -16,7 +16,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
 
             // let tmp = await fn.restApi.getExchange({ filter: {}, select: { name: 1 }, sort: { score: -1 }, limit: 4 })
 
-            // console.log("===", tmp)
+            console.log("========", await fn.restApi.getExchange({ cache: true, limit, select: { name: 1 } }))
 
         }
     )
@@ -24,7 +24,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
         <div id="crypto_exchange" class="crypto_exchanges">
             <div class="crypto_exchanges-title">
                 <h4>{Variable.lang.h.exchange}</h4>
-                {/* <span>{filterCoins.name}</span> */}
+
                 <img
                     class="filter-search_icon"
                     src={svg.filter}
@@ -33,7 +33,9 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
 
                         fn.modals.ModalFilterCoin({
                             list_coins: Static.list_coins.list_records,
+                            filterCoins: Static.filterCoins,
                             callback: async (filterCoins) => {
+                                Static.filterCoins = filterCoins
                                 if (!filterCoins.length) {
                                     return
                                 }
@@ -42,6 +44,7 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                                     filter["$or"].push({ "list_coins.name": item })
                                 }
 
+                                console.log('=Static.list_coins.list_records=', Static.list_coins.list_records)
                                 console.log('=1e34f2=', filterCoins, filter)
                                 await fn.restApi.getExchange({ cache: true, name: Static.nameRecords, filter, limit, select: { name: 1 } })
                                 return
@@ -51,6 +54,30 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                         })
                     }}
                 ></img>
+            </div>
+
+            <div>
+                {
+                    Static.filterCoins.length ?
+                        <div>
+                            {
+                                Static.filterCoins.map((item) => {
+                                    let iconName
+                                    Static.list_coins.list_records.forEach(el => {
+                                        if (el.name == item) {
+                                            iconName = el.icon
+                                            return
+                                        }
+
+                                    });
+                                    return (
+                                        <img src={`/assets/icons/coins/${iconName}.svg`} ></img>
+                                    )
+                                })
+                            }
+                        </div>
+                        : null
+                }
             </div>
 
             <div class="statistics-preview list_exchange_page">

@@ -158,7 +158,9 @@
         "lottery": "«Word of Mouth» lottery",
         "lotterySubtitle": "WIN the 1000CEM!",
         "promo_video": "Promo video",
-        "tokenomica": "Tokenomica"
+        "tokenomica": "Tokenomica",
+        "------------------новые слова-----------------": "добавить новые слова",
+        "modal_listCoin": "Choose coins"
     },
     "a": {
         "about": "About Us",
@@ -523,7 +525,8 @@
         "--------------------------новые слова--------------": "--добавить перевод--",
         "active": "Active",
         "upcoming": "Upcoming",
-        "ended": "Ended"
+        "ended": "Ended",
+        "verified": "Verified"
     },
     "toggle": {
         "friends": "Friends",

@@ -12,6 +12,7 @@ const start = function (data, ID) {
     () => {
       Static.nameRecords = "PageExchange"
       Static.apiFilter = {}
+      Static.filterCoins = []
     },
     () => {
       return (

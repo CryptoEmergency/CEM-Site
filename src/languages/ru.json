@@ -185,7 +185,8 @@
 		"aboutEvents": "О мероприятии",
 		"placeEvent": "Место",
 		"dateEvent": "Дата проведения",
-		"careers": "Работа"
+		"careers": "Работа",
+		"modal_listCoin": "Выбрать монеты"
 	},
 	"a": {
 		"about": "О нас",
@@ -591,7 +592,8 @@
 		"frontend": "Фронтенд",
 		"backend": "Бэкенд",
 		"seo": "SEO",
-		"blockchain": "Блокчейн"
+		"blockchain": "Блокчейн",
+		"verified": "Проверено"
 	},
 	"toggle": {
 		"friends": "Друзья",

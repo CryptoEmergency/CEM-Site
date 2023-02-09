@@ -1,16 +1,16 @@
 {
     "lang": "Greek",
-    "lang_orig": "Ελληνικά", 
+    "lang_orig": "Ελληνικά",
     "code": "el",
     "url": "/el/",
-    "homePreview":{
-        "ask":"Create",
-        "earn":"Earn",
-        "innovative":"Καινοτομική",
-        "platformFuture":"Πλατφόρμα του μέλλοντος",
-        "unitePeople":"Ενώνουμε ανθρώπους σ’ όλον τον κόσμο"
+    "homePreview": {
+        "ask": "Create",
+        "earn": "Earn",
+        "innovative": "Καινοτομική",
+        "platformFuture": "Πλατφόρμα του μέλλοντος",
+        "unitePeople": "Ενώνουμε ανθρώπους σ’ όλον τον κόσμο"
     },
-    "categoryName":{
+    "categoryName": {
         "all": "Όλοι",
         "P2P": "P2P",
         "Meta": "Μετασύμπαν",
@@ -33,8 +33,8 @@
         "inf_blog": "Πληροφοριακά",
         "experts": "Εμπειρογνώμονες"
     },
-    "button":{
-        "login":"Είσοδος",
+    "button": {
+        "login": "Είσοδος",
         "registration": "Εγγραφή",
         "send": "Αποστολή",
         "search": "Αναζήτηση",
@@ -73,11 +73,10 @@
         "join": "Συμμετοχή",
         "pre_view": "Προεπισκόπηση",
         "allPartners": "Όλοι οι εταίροι",
-
         "resetCrop": "Ματαίωση",
-		"reset": "Ακύρωση"
-    },  
-    "h":{
+        "reset": "Ακύρωση"
+    },
+    "h": {
         "success": "Επιτυχώς!",
         "who_are_we": "Ποιοι είμαστε;",
         "our_goals": "Οι στόχοι μας",
@@ -119,7 +118,7 @@
         "pageNft": "Δημιουργία νέας δημοσίευσης",
         "news": "Κρυπτονέα",
         "mediaUs": "Τα ΜΜΕ για μας",
-        "blog": "Blog της εταιρείας",        
+        "blog": "Blog της εταιρείας",
         "trade": "Κατάλογος χρηματιστηρίων",
         "exchange": "Κατάλογος ανταλλακτηρίων συναλλάγματος",
         "contact": "Επικοινωνήστε μαζί μας",
@@ -155,11 +154,12 @@
         "chats": "Chats",
         "partners": "Συνεργάτες πληροφοριών",
         "modal_cropImage": "Προσθήκη φωτογραφίας",
-
         "lottery": "«Word of Mouth» lottery",
-        "lotterySubtitle": "WIN the 1000CEM!"
+        "lotterySubtitle": "WIN the 1000CEM!",
+        "------------------новые слова-----------------": "добавить новые слова",
+        "modal_listCoin": "Choose coins"
     },
-    "a":{
+    "a": {
         "about": "Για μας",
         "blog": "Blog",
         "career": "Σταδιοδρομία",
@@ -198,11 +198,9 @@
         "home": "Αρχική",
         "affiliate": "Πρόγραμμα συνεργατών",
         "addChats": "Προσθήκη chat",
-
-        
-		"notes":"My notes"
+        "notes": "My notes"
     },
-    "span":{
+    "span": {
         "company": "Εταιρεία",
         "whitePaper": "White Paper",
         "support": "Υποστήριξη",
@@ -313,7 +311,7 @@
         "aboutProjectDateTwo": "Έκδοση του 2022",
         "aboutProjectDateThree": "2022",
         "questions": "ερωτήσεων",
-        "rank":"Βαθμολόγηση",
+        "rank": "Βαθμολόγηση",
         "returnToMainPage": "Επιτρέψετε στην αρχική σελίδα",
         "redirectToMain": "Ανακατεύθυνση στην αρχική σελίδα",
         "redirectToUC": "Ανακατεύθυνση στο προφίλ",
@@ -325,7 +323,7 @@
         "enterAmount": "Δηλώστε το ποσό",
         "adressCEM": "Διεύθυνση CEM",
         "minimumAmount": "Ελάχιστο ποσό",
-        "commissionSite":"Προμήθεια της ιστοσελίδας",
+        "commissionSite": "Προμήθεια της ιστοσελίδας",
         "withdrawalDesc": "Τα χρήματα θα πιστωθούν στο λογαριασμό σας εντός 24 ωρών μετά την επιβεβαίωση του αιτήματος.",
         "historuDeposit": "Ιστορικό πίστωσης",
         "type": "Τύπος",
@@ -333,9 +331,9 @@
         "operation": "Συναλλαγή",
         "amount": "Ποσό",
         "status": "Καθεστώς",
-        "notFound":"Δεν βρέθηκαν εγγραφές",
-        "walletToSite":"Μεταφορά από το πορτοφόλι στο λογαριασμό της ιστοσελίδας",
-        "siteToWallet":"Μεταφορά από την ιστοσελίδα στο πορτοφόλι",
+        "notFound": "Δεν βρέθηκαν εγγραφές",
+        "walletToSite": "Μεταφορά από το πορτοφόλι στο λογαριασμό της ιστοσελίδας",
+        "siteToWallet": "Μεταφορά από την ιστοσελίδα στο πορτοφόλι",
         "dontHaveFriends": "Συμμετέχετε στο πρόγραμμα συνεργατών Crypto Emergency",
         "myPartners": "Οι συνεργάτες μου",
         "dontHavePartners": "Ακόμα δεν έχετε συνεργάτες",
@@ -353,14 +351,13 @@
         "copy": "Αντιγραφή",
         "pageDeleted": "Η σελίδα του χρήστη διαγράφηκε, αναδιεύθυνση στην αρχική σελίδα",
         "transactionRegistration": "Για εγγραφή",
-		"transactionReferralRegistration": "Για την παραπομπή",
-		"transactionOther": "Άλλες",
-		"transactionAwards": "Για το επίτευγμα που έλαβε",
-		"transactionLevel": "Για το ληφθέν επίπεδο",
-		"October2022": "Οκτώβριος 2022",
-		"aboutProjectDate19May2022": "Κυκλοφόρησε Στις 19 Μαΐου 2022",
-		"aboutProjectDateAugust2022": "Κυκλοφορία Αύγουστος 2022",
-
+        "transactionReferralRegistration": "Για την παραπομπή",
+        "transactionOther": "Άλλες",
+        "transactionAwards": "Για το επίτευγμα που έλαβε",
+        "transactionLevel": "Για το ληφθέν επίπεδο",
+        "October2022": "Οκτώβριος 2022",
+        "aboutProjectDate19May2022": "Κυκλοφόρησε Στις 19 Μαΐου 2022",
+        "aboutProjectDateAugust2022": "Κυκλοφορία Αύγουστος 2022",
         "lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
         "lotteryAction1": "Invite your friends to increase Prize Pool.",
         "lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
@@ -378,9 +375,9 @@
         "lotteryQuest6": "Answer a shortest quiz.",
         "lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?",
         "aboutObjectiveTitle": "Our Mission",
-		"aboutObjective": "Our Mission is to unite the crypto enthusiasts from all over the world at a unified multifunctional platform called Crypto Emergency which will provide all necessary tools for communication, training, earning and creation of their own content.",
-		"aboutСonceptTitle": "Our Vision",
-		"aboutСoncept": "We create a robust and convenient digital ecosystem which includes our own blockchain with smart contracts, crypto wallet and all-round support of crypto industry startups, universal social media which supports all types of content, and information and educational portal which improves the crypto awareness of the planet’s population. We work 24/7 to improve and develop the Crypto Emergency ecosystem."
+        "aboutObjective": "Our Mission is to unite the crypto enthusiasts from all over the world at a unified multifunctional platform called Crypto Emergency which will provide all necessary tools for communication, training, earning and creation of their own content.",
+        "aboutСonceptTitle": "Our Vision",
+        "aboutСoncept": "We create a robust and convenient digital ecosystem which includes our own blockchain with smart contracts, crypto wallet and all-round support of crypto industry startups, universal social media which supports all types of content, and information and educational portal which improves the crypto awareness of the planet’s population. We work 24/7 to improve and develop the Crypto Emergency ecosystem."
     },
     "text": {
         "starups": "Νεοφυείς επιχειρήσεις",
@@ -469,8 +466,8 @@
         "codeConfirm": "Κωδικός επιβεβαίωσης",
         "description": "Περιγραφή",
         "notOptional": "(προαιρετικά)",
-        "speciality":"Ειδικότητα",
-        "birthDate":"Ημερομηνία γέννησης",
+        "speciality": "Ειδικότητα",
+        "birthDate": "Ημερομηνία γέννησης",
         "oldPassword": "Παλιός κωδικός πρόσβασης",
         "newPassword": "Καινούριος κωδικός πρόσβασης"
     },
@@ -520,43 +517,48 @@
         "complainComment": "Υποβολή παράπονου στο σχόλιο",
         "complainAnswer": "Υποβολή παράπονου στην απάντηση",
         "complainUser": "Υποβολή παράπονου στον χρήστη",
-        "blackList": "Μπλοκάρισμα χρήστη"
+        "blackList": "Μπλοκάρισμα χρήστη",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "active": "Active",
+        "upcoming": "Upcoming",
+        "ended": "Ended",
+        "verified": "Verified"
     },
-    "toggle":{
-        "friends":"Φίλοι",
-        "subscribers":"Ακόλουθοι",
-        "users":"Χρήστες",
-        "friendsNews":"Νέα των φίλων",
-        "allNews":"Όλα τα νέα",
+    "toggle": {
+        "friends": "Φίλοι",
+        "subscribers": "Ακόλουθοι",
+        "users": "Χρήστες",
+        "friendsNews": "Νέα των φίλων",
+        "allNews": "Όλα τα νέα",
         "myQuestions": "Οι ερωτήσεις μου",
         "myAnswers": "Οι απαντήσεις μου",
         "myBestAnswers": "Καλύτερες απαντήσεις",
         "askQuestions": "Υποβολή ερωτήματος"
     },
-    "tableTitle":{
-        "appellation":"Τίτλος",
-        "volume":"Όγκος",
-        "countVisitors":"Επισκεπτών",
-        "chart":"Διάγραμμα",
-        "rank":"Βαθμολόγηση",
-        "coins":"Coins",
-        "startDate":"Ημερομηνία έναρξης",
-        "question":"Ερώτηση",
-        "comments":"Σχολίων",
-        "myAnswer":"Η απάντησή μου",
+    "tableTitle": {
+        "appellation": "Τίτλος",
+        "volume": "Όγκος",
+        "countVisitors": "Επισκεπτών",
+        "chart": "Διάγραμμα",
+        "rank": "Βαθμολόγηση",
+        "coins": "Coins",
+        "startDate": "Ημερομηνία έναρξης",
+        "question": "Ερώτηση",
+        "comments": "Σχολίων",
+        "myAnswer": "Η απάντησή μου",
         "answers": "Απαντήσεων",
         "views": "Προβολών",
         "bestanswer": "Καλύτερη απάντηση",
         "answer": "Απάντηση"
     },
-    "error_div":{
+    "error_div": {
         "not_empty_input": "Παρακαλώ συμπληρώστε τις πληροφορίες",
-        "wrong_email":"Λάθος διεύθυνση e-mail",
-        "wrong_phone":"Λάθος τηλέφωνο",
-        "needAgree":"Πρέπει να αποδεχτείτε τους όρους",
-        "minSymbol":"Τουλάχιστον 5 σύμβολα",
-        "maxSymbol":"Το μέγιστο μήκος - 200 σύμβολα",
-        "selectFromList":"Επιλέξτε από τη λίστα",
+        "wrong_email": "Λάθος διεύθυνση e-mail",
+        "wrong_phone": "Λάθος τηλέφωνο",
+        "needAgree": "Πρέπει να αποδεχτείτε τους όρους",
+        "minSymbol": "Τουλάχιστον 5 σύμβολα",
+        "maxSymbol": "Το μέγιστο μήκος - 200 σύμβολα",
+        "selectFromList": "Επιλέξτε από τη λίστα",
         "nicknameErr": "Εισάγετε το όνομα χρήστη",
         "nicknameErr2": "Το όνομα χρήστη δεν πρέπει να ξεκινάει με αριθμό",
         "nicknameErr3": "Το μέγιστο μήκος του ονόματος χρήστη πρέπει να είναι από 3 έως 16 σύμβολα",
@@ -575,21 +577,21 @@
         "password5": " Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον 1 ειδικό σύμβολο",
         "password6": "Οι κωδικοί πρόσβασης δεν συμπίπτουν",
         "complain": "Επιλέξτε αιτία του παράπονου",
-        "notAuth":"Δεν έχετε συνδεθεί, συνδεθείτε παρακαλώ!",
-        "ok":"Όλα εντάξει!",
-        "noAccess":"Καμιά πρόσβαση!",
-        "insufficient":"Ανεπαρκή χρήματα στο λογαριασμό",
+        "notAuth": "Δεν έχετε συνδεθεί, συνδεθείτε παρακαλώ!",
+        "ok": "Όλα εντάξει!",
+        "noAccess": "Καμιά πρόσβαση!",
+        "insufficient": "Ανεπαρκή χρήματα στο λογαριασμό",
         "existing_email": "Αυτή η διεύθυνση Email ειναι ήδη εγγεγραμμένη",
         "existing_phone": "Το τηλέφωνο υπάρχει ήδη",
         "empty_userdata": "Πρέπει να δηλώσετε τη διεύθυνση email ή τηλέφωνο!",
         "noMetamask": "Δεν έχετε το Metamask εγκατεστημένο!",
-        "connMetaSuccess":"Το Metamask συνδέθηκε με επιτυχία!",
-        "connMetaFail":"Σφάλμα σύνδεσης του Metamask. Απορρίψατε την παροχή πρόσβασης.",
-        "errorPayment":"Σφάλμα πληρωμής",
-        "successPayment":"Η πληρωμή εστάλη επιτυχώς, αναμένουμε την επιβεβαίωση",
+        "connMetaSuccess": "Το Metamask συνδέθηκε με επιτυχία!",
+        "connMetaFail": "Σφάλμα σύνδεσης του Metamask. Απορρίψατε την παροχή πρόσβασης.",
+        "errorPayment": "Σφάλμα πληρωμής",
+        "successPayment": "Η πληρωμή εστάλη επιτυχώς, αναμένουμε την επιβεβαίωση",
         "errorSocial": "Δεν μπορείτε να προσθέσετε πάνω από 3 ίδια κοινωνικά δίκτυα",
-        "no":"Όλα άσχημα!",
-        "errorQuery":"Σφάλμα αιτήματος",
+        "no": "Όλα άσχημα!",
+        "errorQuery": "Σφάλμα αιτήματος",
         "record_exists": "Η βαθμολόγηση πιστώθηκε",
         "noAuth": "Ο χρήστης με τέτοιο κωδικό πρόσβασης δεν βρέθηκε!",
         "worngQuery": "Το αίτημα συντάχτηκε λανθασμένα",
@@ -607,23 +609,23 @@
         "questionsLimit": "Υπέρβαση του ορίου ερωτήσεων σε αυτήν τη γλώσσα ανά ημέρα",
         "openQuestionsLimit": "Το όριο των ανοιχτών ερωτήσεων έχει ξεπεραστεί"
     },
-    "awards":{
-        "registration":"Καλωσορίσατε",
-        "registrationDesc":"Για την εγγραφή στην ιστοσελίδα",
-        "firstQuestion":"Περιέργεια",
-        "firstQuestionDesc":"Για την πρώτη ερώτηση στην πλατφόρμα",
-        "firstAnswer":"Απαντητής",
-        "firstAnswerDesc":"Για την πρώτη απάντηση στην ερώτηση στην πλατφόρμα",
-        "ICO":"Για τη συμμετοχή στο ICO",
-        "ICODesc":"Για τη συμμετοχή στο ICO, Crypto Emergency",
-        "rating": "Σας βαθμολόγησαν", 
+    "awards": {
+        "registration": "Καλωσορίσατε",
+        "registrationDesc": "Για την εγγραφή στην ιστοσελίδα",
+        "firstQuestion": "Περιέργεια",
+        "firstQuestionDesc": "Για την πρώτη ερώτηση στην πλατφόρμα",
+        "firstAnswer": "Απαντητής",
+        "firstAnswerDesc": "Για την πρώτη απάντηση στην ερώτηση στην πλατφόρμα",
+        "ICO": "Για τη συμμετοχή στο ICO",
+        "ICODesc": "Για τη συμμετοχή στο ICO, Crypto Emergency",
+        "rating": "Σας βαθμολόγησαν",
         "ratingDesc": "Για τη βαθμολόγηση των ενεργειών σας στην πλατφόρμα",
         "firstFollower": "Ιδού είναι η δόξα!",
         "firstFollowerDesc": "Πάρτε τον πρώτο ακόλουθο",
         "KYC": "Είστε σίγουρα Εσείς;",
         "KYCDesc": "Για τη χρήση της υπηρεσίας KYC στην πλατφόρμα",
         "completedProfile": "Πες μας για σένα",
-        "completedProfileDesc" : "Συμπληρώστε όλα τα πεδία του προφίλ σας",
+        "completedProfileDesc": "Συμπληρώστε όλα τα πεδία του προφίλ σας",
         "inviteKYC": "Αληθινός φίλος",
         "inviteKYCDesc": "Για το φίλο που χρησιμοποίησε την υπηρεσία KYC",
         "oneHourTimeSpent": "Τικ-τακ",
@@ -643,21 +645,21 @@
         "activeReferral": "Ботовод",
         "activeReferralDesc": "Για τον πρώτο δραστήριο προσκεκλημένο χρήστη"
     },
-    "notify":{
-        "reciveAwards":"Ελήφθη βραβείο!",
-        "newQuestion":"Υποβλήθηκε καινούριο ερώτημα!",
-        "newAnswer":"Δόθηκε καινούρια απάντηση!",
-        "newComment":"Καινούριο σχόλιο!",
-        "newLike":"Καινούριο like!",
-        "newFollower":"Καινούριος ακόλουθος!",
-        "ReferralPay":"Ελήφθη επιμέρισμα!",
-        "Referral":"Εγγράφτηκε προσκεκλημένος!",
-        "registration":"Για την εγγραφή στην ιστοσελίδα",
-        "firstFollower":"Για τον πρώτο ακόλουθο",
-        "firstQuestion":"Για την πρώτη ερώτηση που υποβάλατε στην ιστοσελίδα",
-        "firstAnswer":"Για την πρώτη απάντηση στην ιστοσελίδα",
-        "firstPost":"Για την πρώτη δημοσίευση στην ιστοσελίδα",
-        "referralCount":"Με το σύνδεσμο συνεργατών σας εγγράφτηκαν νέοι χρήστες:",
+    "notify": {
+        "reciveAwards": "Ελήφθη βραβείο!",
+        "newQuestion": "Υποβλήθηκε καινούριο ερώτημα!",
+        "newAnswer": "Δόθηκε καινούρια απάντηση!",
+        "newComment": "Καινούριο σχόλιο!",
+        "newLike": "Καινούριο like!",
+        "newFollower": "Καινούριος ακόλουθος!",
+        "ReferralPay": "Ελήφθη επιμέρισμα!",
+        "Referral": "Εγγράφτηκε προσκεκλημένος!",
+        "registration": "Για την εγγραφή στην ιστοσελίδα",
+        "firstFollower": "Για τον πρώτο ακόλουθο",
+        "firstQuestion": "Για την πρώτη ερώτηση που υποβάλατε στην ιστοσελίδα",
+        "firstAnswer": "Για την πρώτη απάντηση στην ιστοσελίδα",
+        "firstPost": "Για την πρώτη δημοσίευση στην ιστοσελίδα",
+        "referralCount": "Με το σύνδεσμο συνεργατών σας εγγράφτηκαν νέοι χρήστες:",
         "askQuestion": "Υποβλήθηκε καινούρια ερώτηση στις γλώσσες σας",
         "reciveAnswer": "Ελήφθη απάντηση στην ερώτησή σας",
         "reciveFollower": "Έχετε ακόλουθο",
@@ -667,7 +669,7 @@
         "reciveLike": "Σας έβαλαν like. Η βαθμολόγηση αυξήθηκε",
         "reciveReferralPay": "Ο προσκεκλημένος σας έφτασε στο 3ο επίπεδο."
     },
-	"itemsMenu": {
-		"SelectBestQuestion": "Выбрать лучший ответ"
-	}
-} 
+    "itemsMenu": {
+        "SelectBestQuestion": "Выбрать лучший ответ"
+    }
+}

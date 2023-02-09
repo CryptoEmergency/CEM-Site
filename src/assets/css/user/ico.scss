@@ -17,6 +17,7 @@ $icon: #353a46;
 .ico-back {
   position: absolute;
   z-index: 0;
+  opacity: .6;
   top: 20%;
   height: 70%;
 
@@ -132,14 +133,15 @@ $icon: #353a46;
     }
 
     .ico_tabs-active {
-      background: #303545;
+      // background: #303545;
+      background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
       opacity: 1;
 
-      >span {
-        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
+      // >span {
+      //   background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+      //   -webkit-background-clip: text;
+      //   -webkit-text-fill-color: transparent;
+      // }
     }
   }
 
@@ -398,10 +400,11 @@ $icon: #353a46;
   grid-template-rows: auto;
   grid-template-areas: 'image info';
   background: rgba(255, 255, 255, 0.11);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(10px);
   border-radius: 8px;
   border: 1px solid rgba(43, 43, 43, 0.568);
-  height: 100%;
+  // height: 100%;
+  height: 185px;
 
 
   .item-img {
@@ -474,6 +477,11 @@ $icon: #353a46;
   background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
   transition-duration: .4s;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  @media(max-width: 767px) {
+    transform: rotateX(0) skewX(0);
+    background: rgba(255, 255, 255, 0.11);
+  }
 }
 
 // ============================
@@ -536,8 +544,8 @@ $icon: #353a46;
 
     .card-img {
       width: 100%;
-      // height: auto;
-      height: 100%;
+      height: auto;
+      // height: 100%;
       max-height: 100%;
       border-radius: 8px;
       background-size: cover;
