@@ -673,6 +673,231 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    &__vacancies {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        &>li {
+            margin-bottom: 20px;
+
+            @media(max-width: 1239px) {
+                margin-bottom: 15px;
+            }
+
+            @media(max-width: 767px) {
+                margin-bottom: 10px;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__vacancy {
+        display: grid;
+        grid-template-columns: 50px 1fr max-content;
+        grid-template-rows: auto;
+        gap: 15px;
+        padding: 20px;
+        background: #2B3040;
+        border: 1px solid #40465a;
+        border-radius: 10px;
+
+        @media(max-width: 767px) {
+            grid-template-columns: 1fr 50px;
+            border-radius: 0;
+        }
+    }
+
+    &__vacancylogo {
+        grid-column: 1 / 2;
+        grid-row: 1 / 5;
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        border-radius: 4px;
+        background-color: #2B3040;
+        overflow: hidden;
+
+        @media(max-width: 767px) {
+            grid-column: 2 / 3;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__vacancydate {
+        grid-column: 3 / 4;
+        grid-row: 1 / 5;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-size: 12px;
+        color: #999999;
+
+        @media(max-width: 767px) {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+    }
+
+    &__vacancycompany {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        margin-bottom: 4px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: #FFFFFF;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        @media(max-width: 1239px) {
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        @media(max-width: 767px) {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+    }
+
+    &__vacancyname {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+        margin-bottom: 20px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 20px;
+        color: #FFFFFF;
+        text-decoration: none;
+        cursor: pointer;
+
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        h3 {
+            font-size: inherit;
+            line-height: inherit;
+            font-weight: inherit;
+            margin: 0;
+        }
+
+        @media(max-width: 1239px) {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        @media(max-width: 767px) {
+            grid-column: 1 / 2;
+            grid-row: 3 / 4;
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 16px;
+        }
+    }
+
+    &__vacancyconditions {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        @media(max-width: 767px) {
+            grid-column: 1 / 3;
+            grid-row: 4 / 5;
+        }
+
+        li {
+            position: relative;
+            padding-right: 30px;
+
+            &::after {
+                position: absolute;
+                content: "";
+                top: 50%;
+                right: 12px;
+                transform: translateX(-50%) translateY(-50%);
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: #999999;
+            }
+
+            &:last-child {
+                padding-right: 0;
+
+                &::after {
+                    content: none;
+                }
+            }
+        }
+    }
+
+    &__vacancyskills {
+        grid-column: 2 / 3;
+        grid-row: 4 / 5;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        @media(max-width: 767px) {
+            grid-column: 1 / 3;
+            grid-row: 5 / 6;
+        }
+
+        li {
+            position: relative;
+            padding-right: 30px;
+
+            &::after {
+                position: absolute;
+                content: "";
+                top: 50%;
+                right: 12px;
+                transform: translateX(-50%) translateY(-50%);
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: #999999;
+            }
+
+            &:last-child {
+                padding-right: 0;
+
+                &::after {
+                    content: none;
+                }
+            }
+        }
+    }
 }
 
 .c-pagination {
