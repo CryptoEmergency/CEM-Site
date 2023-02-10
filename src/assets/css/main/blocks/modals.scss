@@ -3499,7 +3499,7 @@
 		height: 65px;
 		margin-bottom: 15px;
 
-		&[type=password] {
+		&.password {
 			margin-bottom: 0;
 		}
 	}

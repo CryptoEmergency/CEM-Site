@@ -288,7 +288,15 @@
         color: $powder_lilac;
         font-size: 12px;
         margin-bottom: 20px;
-        height: 18px;
+        height: 30px;
+        -webkit-line-clamp: 2;
+        /* Число отображаемых строк */
+        display: -webkit-box;
+        /* Включаем флексбоксы */
+        -webkit-box-orient: vertical;
+        /* Вертикальная ориентация */
+        overflow: hidden;
+        /* Обрезаем всё за пределами блока */
     }
 
     &_badges {
@@ -572,6 +580,7 @@
     .new_professional {
         &_card {
             &_avatar {
+
                 .user_avatar_level,
                 .c-avataricon__level {
                     height: 25px !important;
