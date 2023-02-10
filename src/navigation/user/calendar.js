@@ -53,7 +53,7 @@ const monthHandler = (Static, prev = true) => {
 };
 
 const addNew = async function (Static) {
-    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.text, showDate: Static.active, color: "test" })
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.text, showDate: Static.active, color: Static.colorIndex })
     if (response && response.status == "ok") {
         if (response.list_records && response.list_records[0]) {
             Static.notesCalendar.list_records.unshift(response.list_records[0])
@@ -358,12 +358,11 @@ const start = function (data, ID) {
     Static.colorNotes = false
     Static.elListColor = null
     Static.colorIndex = null
+    Static.color = null
 
     load({
         ID,
         fnLoad: async () => {
-
-
 
             Static.notesCalendar = await fn.restApi.getUserCalendar({ filter: {} })
             console.log('=8451ba=', Static.notesCalendar)
@@ -446,11 +445,10 @@ const start = function (data, ID) {
                             })}
                         </div>
                         <div class="calendar-container">
-                            {Static.tmpTest.map((item, index) => {
+                            {Static.tmpTest.map((item) => {
                                 return (
                                     <div
                                         class="calendar-cell"
-                                        // id={index + 1}
                                         onclick={() => {
                                             Static.active = item
                                             // notesScroll(Static)
@@ -473,7 +471,7 @@ const start = function (data, ID) {
                                         </span>
                                         <div>
                                             <div class={["calendar-text",
-                                                item && item.title != "" ? "calendar-text--show" : null
+                                                item && item.title != "" ? "calendar-text--show" : null,
                                             ]}
                                             // style={[ Static.dateNotes ? `background: ${randomColor(listColors)}` : null]}
                                             >
@@ -501,7 +499,9 @@ const start = function (data, ID) {
                                 if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D")) {
                                     return (
                                         <div
-                                            class="calendar-notes_item"
+                                            class={["calendar-notes_item",
+                                                    item.color ? `calendar-color-type${item.color}` : null,
+                                            ]}
                                         >
                                             <div class="calendar-notes_item-date">
                                                 {Helpers.moment(item.showDate).format("D")}
