@@ -104,6 +104,13 @@ const BlockProjects = async function () {
                     "icon": "star1",
                     "link": "list-icostartaps"//"ico-rating"
                 },
+                {
+                    "title": Variable.lang.a.starups,
+                    "icon": "list-startups",
+                    "link": "list-startaps",
+                    // "items": fn.itemsMenu.onlyPage({ url: '/list-startaps/' }),
+                    // modal: true
+                },
                 // {
                 //     "title": Variable.lang.a.trade,
                 //     "icon": "preview_line_exchange",
@@ -161,7 +168,7 @@ const BlockProjects = async function () {
                     "link": "rooms",
                     "items": fn.itemsMenu.onlyPage({ url: '/rooms/' }),
                     modal: false
-                }
+                },
             ];
 
             projectRecords = projects.map(function (item) {
@@ -177,7 +184,7 @@ const BlockProjects = async function () {
                             }}>
                             <div class="projects_icons_text">
                                 <div class="nav-more_item">
-                                    <img style={item.style} src={svg[item.icon]} alt="" />
+                                    <img style={item.style} src={svg[item.icon]} alt={item.title} />
                                 </div>
                                 <p>{item.title}</p>
                             </div>
@@ -205,9 +212,14 @@ const BlockProjects = async function () {
                     </div>
                 }
             />
-            {/* <div class="c-projects__more main_page_show_more">
+            <div
+                class="c-projects__more"
+                onclick={() => {
+                    fn.modals.ModalMainPageIconsMenu()
+                  }}
+            >
                 {Variable.lang.button.see_all}
-            </div> */}
+            </div>
         </div>
     )
 }

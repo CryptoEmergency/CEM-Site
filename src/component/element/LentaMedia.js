@@ -54,8 +54,8 @@ const LentaMedia = function ({ Static, items, path, changeToogle, index }) {
       // <div class="swiper-post_media_image_container">
       //   <img src={`/assets/upload/${path}/` + ArrWithImage[0].name} />
       // </div>
-      // <LazyImage className="swiper-post_media_image_container" path={`/assets/upload/${path}/` + ArrWithImage[0].name} />
-      <Panzoom path={`/assets/upload/${path}/` + ArrWithImage[0].name} panzoomElem={{}} index={index} />
+      <LazyImage className="swiper-post_media_image_container" path={`/assets/upload/${path}/` + ArrWithImage[0].name} />
+      // <Panzoom path={`/assets/upload/${path}/` + ArrWithImage[0].name} panzoomElem={{}} index={index} />
     )
   }
 

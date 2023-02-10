@@ -21,8 +21,8 @@
 
     .button-container-preview {
         margin-top: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        // top: 50%;
+        // transform: translateY(-50%);
 
         .btn-news-preview {
             width: 100%;
@@ -36,6 +36,7 @@
     height: 82px;
     border-bottom: 1px solid $tried_true_blue;
     align-content: center;
+    align-items: center;
     text-decoration: none;
     color: inherit;
 
@@ -45,7 +46,7 @@
 
     &:first-child {
         &:not(a) {
-            height: 36px !important;
+            height: 36px;
             align-content: baseline;
             font-style: normal;
             font-weight: 500;
@@ -254,7 +255,7 @@
 
 @media(max-width: 1240px) {
     .crypto_exchanges-row {
-        grid-template-columns: 30% 20% 20% 15% 15%;
+        grid-template-columns: 20% 60% 20%;
     }
 
     .subscribe_section .crypto_exchanges-row {
@@ -284,7 +285,7 @@
     .button-container-preview {
         justify-content: center;
         margin-top: 30px;
-        margin-bottom: 30px;
+        // margin-bottom: 30px;
         display: flex;
     }
 }
@@ -306,6 +307,8 @@
         &:first-child {
             &:not(a) {
                 align-content: center;
+                height: auto;
+                padding: 25px 0;
             }
         }
     }
@@ -319,162 +322,7 @@
     }
 }
 
-@media(max-width: 970px) {
-    .crypto_exchanges-row:first-child:not(a) {
-        display: none;
-    }
-
-    #crypto_exchange .crypto_exchanges-row:first-child:not(a) {
-        display: none;
-    }
-
-    #crypto_exchange .btn-news-preview {
-        height: 42px;
-        border-radius: 8px;
-    }
-
-    #crypto_exchange .btn-news-preview::after {
-        width: 508px;
-    }
-
-    #crypto_exchange .crypto_exchanges-row {
-        padding: 50px 0;
-        grid-template-columns: 25% 45% 15% 15%;
-        padding-right: 0 !important;
-    }
-
-    #crypto_exchange .crypto_exchanges-cell:nth-child(1) {
-        grid-row-start: 1;
-        grid-row-end: 2;
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
-
-    #crypto_exchange .crypto_exchanges-cell:nth-child(1) a {
-        max-width: 20%;
-    }
-
-    #crypto_exchange .crypto_exchanges-cell:nth-child(2) {
-        grid-row-start: 1;
-        grid-row-end: 2;
-        grid-column-start: 3;
-        grid-column-end: 5;
-    }
-
-    #crypto_exchange .crypto_exchanges-cell:nth-child(2) div {
-        justify-content: flex-end;
-        align-content: center;
-        height: 100%;
-    }
-
-    #crypto_exchange .crypto_exchanges-cell:nth-child(1) {
-        margin-top: 0 !important;
-    }
-
-    #crypto_exchange .crypto_exchanges-cell:nth-child(3) {
-        grid-row-start: 2;
-        grid-row-end: 3;
-        grid-column-start: 1;
-        grid-column-end: 4;
-    }
-
-    #crypto_exchange div:nth-child(5) {
-        grid-column-start: 2;
-        grid-column-end: 3;
-        display: none;
-    }
-
-    .crypto_exchanges_rate {
-        transform: translateY(-13%);
-    }
-
-    .crypto_exchanges-cell div {
-        line-height: 13px;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(1) {
-        grid-row-start: 1 !important;
-        grid-row-end: 2 !important;
-        grid-column-start: 1 !important;
-        grid-column-end: 1 !important;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(2) {
-        grid-row-start: 1 !important;
-        grid-row-end: 2 !important;
-        grid-column-start: 2 !important;
-        grid-column-end: 6 !important;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(2) div {
-        justify-content: start !important;
-        font-size: 16px;
-        font-weight: 500;
-    }
-
-    .list_trade_page .crypto_exchanges_percent_green {
-        font-size: 14px;
-        margin-top: 7px;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(3) {
-        grid-row-start: 2 !important;
-        grid-row-end: 3 !important;
-        grid-column-start: 1 !important;
-        grid-column-end: 6 !important;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(4) {
-        grid-row-start: 3 !important;
-        grid-row-end: 4 !important;
-        grid-column-start: 1 !important;
-        grid-column-end: 6 !important;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(5) {
-        grid-row-start: 1 !important;
-        grid-row-end: 5 !important;
-        grid-column-start: 4 !important;
-        grid-column-end: 6 !important;
-        display: block !important;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(5) img {
-        transform: translateX(0%);
-        margin-top: 25px;
-    }
-
-    .list_trade_page .crypto_exchanges-cell:nth-child(4) img {
-        filter: invert(92%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(107%) contrast(101%);
-    }
-
-    .list_trade_page .crypto_exchanges-row {
-        padding: 57px 0 !important;
-    }
-
-    .list_trade_page .crypto_exchanges_cell_button {
-        grid-row-start: 4;
-        grid-row-end: 5;
-        grid-column-start: 4;
-        grid-column-end: 6;
-        margin-top: 20px;
-        display: none;
-    }
-
-    .list_trade_page .crypto_exchanges_cell_button .btn-news-preview::after {
-        left: 0;
-        width: 900px !important;
-    }
-
-    .list_trade_page .crypto_exchanges-row {
-        grid-template-columns: 4.3% 47.2% 10.7% 25.7% 11.9% !important;
-    }
-
-    .crypto_exchanges_percent_green_mobile {
-        display: inline;
-        padding-right: 10px;
-    }
-}
+@media(max-width: 970px) {}
 
 @media(max-width: 750px) {
     .crypto_exchanges-row {
@@ -581,6 +429,7 @@
 
 // style checkbox 
 .switch {
+    justify-content: flex-end;
     cursor: pointer;
 
     input[type="checkbox"] {
@@ -620,16 +469,65 @@
 }
 
 // style for modal Coins
-.filter-coinInput {
-    outline: none;
-    width: 100%;
-    height: 40px;
-    padding: 20px;
-    border: 1px solid #44495C;
-    background: #313543;
-    border-radius: 8px;
-    color: #FFFFFF;
+.coinForm-wrap {
+    position: relative;
 }
+
+.coinForm-wrap {
+    .filter-coinForm {
+        .filter-coinInput {
+            outline: none;
+            width: 100%;
+            height: 40px;
+            padding: 20px;
+            border: 1px solid #44495C;
+            background: #313543;
+            border-radius: 8px;
+            color: #FFFFFF;
+        }
+
+        .filter-coinInput:focus {
+            box-shadow: 0 0 15px -2px #9844b7;
+        }
+
+        .close-icon {
+            border: 1px solid transparent;
+            background-color: transparent;
+            display: inline-block;
+            vertical-align: middle;
+            outline: 0;
+            cursor: pointer;
+        }
+
+        .close-icon::after {
+            content: "X";
+            display: block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background-color: #9844b7;
+            z-index: 1;
+            right: 10px;
+            top: 10px;
+            margin: auto;
+            padding: 2px;
+            border-radius: 50%;
+            text-align: center;
+            color: white;
+            font-weight: normal;
+            font-size: 12px;
+            box-shadow: 0 0 2px #9844b7;
+            opacity: .5;
+            cursor: pointer;
+        }
+
+        // .filter-coinInput:not(:valid)~.close-icon {
+        //     display: none;
+        // }
+    }
+}
+
+
 
 .filterCoinContainer {
     margin-top: 20px;
@@ -642,6 +540,9 @@
     overflow-y: auto;
     overflow-x: hidden;
 
+    @media(max-width: 1199px) {
+        max-height: 350px;
+    }
 
     &::-webkit-scrollbar {
         width: 6px;

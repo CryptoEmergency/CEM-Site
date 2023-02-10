@@ -185,7 +185,8 @@
 		"aboutEvents": "О мероприятии",
 		"placeEvent": "Место",
 		"dateEvent": "Дата проведения",
-		"careers": "Работа"
+		"careers": "Работа",
+		"modalAllServices": "Все сервисы"
 	},
 	"a": {
 		"about": "О нас",
@@ -226,7 +227,8 @@
 		"home": "Главная",
 		"affiliate": "Партнерская программа",
 		"addChats": "Добавить чат",
-		"notes": "Мои заметки"
+		"notes": "Мои заметки",
+		"rooms": "Комнаты"
 	},
 	"span": {
 		"company": "Компания",
@@ -591,7 +593,8 @@
 		"frontend": "Фронтенд",
 		"backend": "Бэкенд",
 		"seo": "SEO",
-		"blockchain": "Блокчейн"
+		"blockchain": "Блокчейн",
+		"verified": "Проверено"
 	},
 	"toggle": {
 		"friends": "Друзья",

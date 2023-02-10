@@ -9,7 +9,7 @@ import svg from '@assets/svg/index.js';
 import { Avatar, Evaluation, TextArea, ButtonSubmit, ItemsMenu } from "@component/element/index.js";
 
 const Comment = function ({ Static, index, item, include, mainId, action, quoteId, mainItem }) {
-    console.log('=ca7d22=', item)
+    // console.log('=ca7d22=', item)
     return (
         <div class="c-comments__usercomment">
             <Avatar

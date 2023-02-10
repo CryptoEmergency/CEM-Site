@@ -31,50 +31,51 @@ const start = function (data, ID) {
 
             return (
                 <div class="mt--70">
-                    <div
-                        class="button-container-preview mb--10"
-                        onclick={() => {
-                            fn.siteLink("/DimaPage/records-ico/")
-                            // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
-                        }}
-                    >
-                        <span class="btn-news-preview">
-                            <span >
-                                Список ICO
+                    <div class="admin-inner">
+                        <div
+                            class="button-container-preview mb--10"
+                            onclick={() => {
+                                fn.siteLink("/DimaPage/records-ico/")
+                                // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
+                            }}
+                        >
+                            <span class="btn-news-preview">
+                                <span >
+                                    Список ICO
+                                </span>
                             </span>
-                        </span>
-                    </div>
+                        </div>
 
-                    {/* <div class="mb--2">gdg</div> */}
-                    <div
-                        class="button-container-preview mb--12"
-                        onclick={() => {
-                            fn.siteLink("/DimaPage/records-startaps/")
-                            // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
-                        }}
-                    >
-                        <span class="btn-news-preview">
-                            <span >
-                                Список Стартапов
+                        {/* <div class="mb--2">gdg</div> */}
+                        <div
+                            class="button-container-preview mb--12"
+                            onclick={() => {
+                                fn.siteLink("/DimaPage/records-startaps/")
+                                // fn.siteLinkModal("/DimaPage/records-ico/", { title: "Список ICO" })
+                            }}
+                        >
+                            <span class="btn-news-preview">
+                                <span >
+                                    Список Стартапов
+                                </span>
                             </span>
-                        </span>
-                    </div>
+                        </div>
 
-                    <div
-                        class="button-container-preview mb--10"
-                        onclick={() => {
-                            fn.siteLink("/DimaPage/records-news/")
-                        }}
-                    >
-                        <span class="btn-news-preview">
-                            <span >
-                                Новости
+                        <div
+                            class="button-container-preview mb--10"
+                            onclick={() => {
+                                fn.siteLink("/DimaPage/records-news/")
+                            }}
+                        >
+                            <span class="btn-news-preview">
+                                <span >
+                                    Новости
+                                </span>
                             </span>
-                        </span>
+                        </div>
+                        <ButtonGradient class="mb--10" text="Крипто Университет" onclick={() => { fn.siteLink("/DimaPage/records-university/") }} />
+                        <ButtonGradient class="mb--10" text="Новости новый формат" onclick={() => { fn.siteLink("/DimaPage/records-newsNew/") }} />
                     </div>
-                    <ButtonGradient class="mb--10" text="Крипто Университет" onclick={() => { fn.siteLink("/DimaPage/records-university/") }} />
-                    <ButtonGradient class="mb--10" text="Новости новый формат" onclick={() => { fn.siteLink("/DimaPage/records-newsNew/") }} />
-
                 </div>
             )
         }

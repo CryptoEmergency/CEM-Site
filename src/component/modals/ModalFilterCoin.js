@@ -15,7 +15,7 @@ const ModalFilterCoin = function (data, ID) {
   Static.closeOut = true
   Static.mouseOut = false
   Static.allCoin = Static.list_coins;
-  Static.filterCoins = []
+  // Static.filterCoins = []
 
   load({
     ID,
@@ -38,7 +38,7 @@ const ModalFilterCoin = function (data, ID) {
             }}>
 
             <header class="c-modal__header">
-              <h2 class="c-modal__title">Выбрать монеты</h2>
+              <h2 class="c-modal__title">{Variable.lang.h.modal_listCoin}</h2>
               <button
                 class="c-modal__close"
                 onclick={() => {
@@ -48,22 +48,42 @@ const ModalFilterCoin = function (data, ID) {
             </header>
 
             <div class="c-modal__body">
-              <form>
-                <input
-                  type="search"
-                  class="filter-coinInput"
-                  placeholder="Выбрать монеты"
-                  oninput={function () {
-                    let searchText = this.value.toLowerCase()
-                    Static.allCoin = Static.list_coins.filter((item) => {
-                      if (item.name.toLowerCase().includes(searchText)) {
-                        return true
-                      }
-                    })
-                    initReload("modals")
-                  }}
-                />
-              </form>
+
+              <div class="coinForm-wrap">
+                <form
+                  class="filter-coinForm"
+                >
+                  <input
+                    Element={($el) => {
+                      Static.elInput = $el
+                    }}
+                    type="text"
+                    class="filter-coinInput"
+                    placeholder={Variable.lang.h.modal_listCoin}
+                    oninput={function () {
+                      console.log('=1588c3=', "Heello Crypto")
+                      let searchText = this.value.toLowerCase()
+                      Static.allCoin = Static.list_coins.filter((item) => {
+                        if (item.name.toLowerCase().includes(searchText)) {
+                          return true
+                        }
+                      })
+                      initReload("modals")
+                    }}
+                  />
+                  <span
+                    class="close-icon"
+                    onclick={() => {
+                      // Static.elForm.reset()
+                      Static.allCoin = Static.list_coins
+                      Static.elInput.value = ""
+                      initReload("modals")
+
+
+                    }}
+                  ></span>
+                </form>
+              </div>
 
               <div class="filterCoinContainer">
                 {Static.allCoin.map((item) => {

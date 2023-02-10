@@ -408,3 +408,67 @@
         overflow: hidden;
     }
 }
+
+.calendar-color {
+    position: relative;
+    display: block;
+    padding: 20px;
+
+    &-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background: #ffffff;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    &-default {
+        display: block;
+        width: 30px;
+        height: 30px;
+    }
+
+    &-list {
+        position: absolute;
+        bottom: 25px;
+        left: 80px;
+        display: none;
+        margin-top: 15px;
+    }
+
+    &-item {
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        list-style-type: none;
+        cursor: pointer;
+    }
+
+    &-type1 {
+        background: linear-gradient(89.03deg, #2C66B8 0.54%, #8859EC 97.66%);
+    }
+
+    &-type2 {
+        background: linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%);
+    }
+
+    &-type3 {
+        background: linear-gradient(272.66deg, #343B4F -1.2%, rgba(51, 58, 78, 0.35) 116.4%);
+    }
+
+    &-type4 {
+        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+    }
+
+    &-type5 {
+        background: linear-gradient(225deg, #284BC5 0%, #11B883 100%);
+    }
+
+    &-type6 {
+        background: linear-gradient(125.97deg, #9B51E0 -0.04%, #E051D2 121.46%);
+    }
+}

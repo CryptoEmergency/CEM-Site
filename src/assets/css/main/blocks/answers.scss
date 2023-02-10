@@ -1,0 +1,19 @@
+.c-answers {
+
+    &__answer {
+        width: 100%;
+        max-width: 852px;
+        margin: 0 auto;
+        padding-top: 20px;
+
+        .c-mediabtn {
+            margin-bottom: 20px;
+        }
+
+        .c-button {
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

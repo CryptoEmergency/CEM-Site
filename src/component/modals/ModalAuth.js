@@ -301,7 +301,7 @@ let close = true
                                 </div>
                                 <div class="container-input">
 
-                                    <Input classDiv="input-div" Static={Static.pass} />
+                                    <Input class="password" classDiv="input-div" Static={Static.pass} />
 
                                 </div>
                             </form>

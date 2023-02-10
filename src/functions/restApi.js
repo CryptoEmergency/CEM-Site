@@ -1334,6 +1334,7 @@ restApi.getUserCalendar = async function ({ cache, name, limit = 6, offset = 0, 
     let defaultSelect = {
         title: 1,
         text: 1,
+        color: 1,
         media: 1,
         showDate: 1,
         type: 1,
@@ -1586,21 +1587,23 @@ restApi.setIco.update = async function (data, noAlert = false) {
 }
 
 restApi.setUserCalendar = {}
-restApi.setUserCalendar.create = async function ({ title, text, media, notify, type, showDate, noAlert }) {
+restApi.setUserCalendar.create = async function ({ title, text, media, notify, color, showDate, noAlert }) {
     let data = {
         value: {
             title,
             text,
             media,
             notify,
-            type,
+            color,
             showDate
         },
     };
+    console.log('=c1a92c=', data)
     const response = await sendApi.create("setUserCalendar", data);
+    console.log('=c769ef=', response)
     return checkSetAnswer(response, noAlert)
 }
-restApi.setUserCalendar.update = async function ({ _id, title, text, media, notify, showDate, type, noAlert, active = true }) {
+restApi.setUserCalendar.update = async function ({ _id, title, text, media, notify, showDate, color, noAlert, active = true }) {
     let data = {
         _id,
         value: {
@@ -1609,7 +1612,7 @@ restApi.setUserCalendar.update = async function ({ _id, title, text, media, noti
             media,
             active,
             notify,
-            type,
+            color,
             showDate
         },
     };

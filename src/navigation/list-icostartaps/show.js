@@ -15,11 +15,14 @@ const showDate = function (start, end) {
   let statusDate = ""
 
   if (currentDate >= startDate && currentDate <= endDate) {
-    statusDate = "Активный"
+    // statusDate = "Активный"
+    statusDate = Variable.lang.select.active
   } else if (currentDate <= startDate) {
-    statusDate = "Текущий"
+    // statusDate = "Текущий"
+    statusDate = Variable.lang.select.upcoming
   } else if (currentDate >= endDate) {
-    statusDate = "Завершённый"
+    // statusDate = "Завершённый"
+    statusDate = Variable.lang.select.ended
   }
   console.log('=56c485=', statusDate)
   return statusDate
@@ -100,7 +103,7 @@ const start = function (data, ID) {
                           Static.item.social.map((item) => {
                             return (
                               <a href={item.url} class="info-social_link">
-                                <img src={svg[`${item.channel}-icon`]}></img>
+                                <img src={svg[`${item.channel}-icon`]} alt={`${item.channel}`} />
                               </a>
                             )
                           })

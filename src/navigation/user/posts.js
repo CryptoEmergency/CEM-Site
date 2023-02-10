@@ -862,9 +862,9 @@ const start = function (data, ID) {
                 contenteditable="true"
                 oninput={function (e) {
 
-                  textLengthCheck(this.textContent.trim(), this)
+                  textLengthCheck(this.innerText.trim(), this)
 
-                  Static.textInputs.value = this.textContent.trim()
+                  Static.textInputs.value = this.innerText.trim()
 
 
                 }

@@ -3499,7 +3499,7 @@
 		height: 65px;
 		margin-bottom: 15px;
 
-		&[type=password] {
+		&.password {
 			margin-bottom: 0;
 		}
 	}
@@ -5523,6 +5523,117 @@ s
 	.c-mediabtn {
 		margin-top: 10px;
 		margin-bottom: 15px;
+	}
+}
+
+#ModalMainPageIconsMenu {
+
+	.c-modal {
+		&__body {
+			height: calc(100vh - 83px);
+		}
+	}
+}
+
+.c-allservices {
+
+	&__subtitle {
+		width: 100%;
+		height: 35px;
+		padding-left: 30px;
+		/* background: #323746; */
+		border-top: 1px solid #525A73;
+		border-left: 0;
+		border-right: 0;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 35px;
+		background: linear-gradient(89.03deg, #679FEF 0.54%, #A87FFF 97.66%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-fill-color: transparent;
+	}
+
+	&__group {
+		display: flex;
+		justify-content: flex-start;
+		align-items: baseline;
+		gap: 50px;
+		padding-top: 20px;
+		padding-bottom: 30px;
+		padding-left: 52px;
+		width: 100%;
+		overflow-x: auto;
+
+		@extend .customscroll--gorizontal;
+	}
+
+	&__link {
+		flex-basis: 66px;
+		flex-shrink: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+		color: inherit;
+
+		p {
+			margin: 10px 0 0 0;
+			text-align: center;
+			font-weight: 600;
+			font-size: 11px;
+			line-height: 18px;
+		}
+	}
+
+
+	&__wrap {
+		position: relative;
+		display: block;
+		justify-content: center;
+		align-items: center;
+		width: 60px;
+		height: 60px;
+		border-radius: 3px;
+		border-style: solid;
+		border-color: #303749;
+		border-width: 4px;
+		background: rgba(0, 0, 0, 0);
+		text-align: center;
+		overflow: hidden;
+		z-index: 1;
+		cursor: pointer;
+
+		&::after {
+			content: " ";
+			position: absolute;
+			top: 0;
+			width: 140px;
+			height: 140px;
+			background: linear-gradient(56.57deg, #2973ff 0%, #8846d3 45.56%, #ff22ac 65.28%);
+			z-index: -1;
+			border-radius: 3px;
+			transition: 1s;
+			left: -30px;
+			top: -30px;
+		}
+
+		&:hover {
+			&::after {
+				transform: rotate(180deg);
+			}
+		}
+
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 32px;
+			width: 32px;
+		}
 	}
 }
 

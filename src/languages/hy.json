@@ -3,14 +3,14 @@
     "lang_orig": "ռուսերեն",
     "code": "hy",
     "url": "/hy/",
-    "homePreview":{
+    "homePreview": {
         "ask": "Create",
-        "earn":"Earn",
-        "innovative":"Նորարար",
+        "earn": "Earn",
+        "innovative": "Նորարար",
         "platformFuture": "Ապագայի հարթակ",
-        "unitPeople": "Մենք միավորում ենք մարդկանց ամբողջ աշխարհում" 
+        "unitPeople": "Մենք միավորում ենք մարդկանց ամբողջ աշխարհում"
     },
-    "categoryName":{
+    "categoryName": {
         "all": "Բոլորը",
         "P2P": "P2P",
         "Meta": "Կրիպտոտիեզերք",
@@ -33,8 +33,8 @@
         "inf_blog": "Տեղեկատվական",
         "experts": "Փորձագետներ"
     },
-    "button":{
-        "login":"Մուտք",
+    "button": {
+        "login": "Մուտք",
         "registration": "Գրանցում",
         "send": "Ուղարկել",
         "search": "Որոնում",
@@ -73,11 +73,10 @@
         "join": "Միանալ",
         "pre_view": "Նախադիտում",
         "allPartners": "Բոլոր գործընկերները",
-
         "resetCrop": "Չեղարկել",
-		"reset": "Չեղարկում"
+        "reset": "Չեղարկում"
     },
-    "h":{
+    "h": {
         "success": "Հաջող",
         "who_are_we": "Ո՞վ ենք մենք",
         "our_goals": "Մեր նպատակները",
@@ -155,11 +154,12 @@
         "chats": "զրույցներ",
         "partners": "Տեղեկատվական գործընկերներ",
         "modal_cropImage": "Ավելացնելով մի լուսանկար",
-
         "lottery": "«Word of Mouth» lottery",
-        "lotterySubtitle": "WIN the 1000CEM!"
+        "lotterySubtitle": "WIN the 1000CEM!",
+        "------------------новые слова-----------------": "добавить новые слова",
+        "modal_listCoin": "Choose coins"
     },
-    "a":{
+    "a": {
         "about": "Մեր մասին",
         "blog": "Բլոգ",
         "career": "Կարիերա",
@@ -198,11 +198,9 @@
         "home": "Գլխավոր էջ",
         "affiliate": " Աֆիլիատ ծրագիր ",
         "addChats": "Ավելացնել զրույց",
-
-        
-		"notes":"My notes"
+        "notes": "My notes"
     },
-    "span":{
+    "span": {
         "company": "Ընկերություն",
         "whitePaper": "սպիտակ թուղթ",
         "support": "Աջակցություն",
@@ -260,7 +258,7 @@
         "support": "Կապվեք մեզ հետ և մենք կօգնենք ձեզ",
         "resetConfirm": "Լրացրեք հաստատումը ձեր գաղտնաբառը վերականգնելու համար",
         "addQuestionsSlog": "Տվեք ձեր հարցերը, ստացեք գրագետ և հասկանալի պատասխաններ ձեր մայրենի լեզվով, բացարձակապես անվճար",
-        "category": "Ընտրեք կատեգորիա", 
+        "category": "Ընտրեք կատեգորիա",
         "writeUs": "Գրեք մեզ, և մենք կկապնվենք ձեզ հետ",
         "connectTeam": "Միացեք մեր թիմին",
         "friendlyTeam": "Ընկերական թիմ",
@@ -294,7 +292,7 @@
         "mmInstructionThree": "Սեղմեք «Ներմուծել նշաններ",
         "mmInstructionFour": "Տողում «Նշանակի պայմանագրի հասցեն» մուտքագրեք հասցեն",
         "mmInstructionFive": "նորհավորում ենք ձեր գնումը հաջողությամբ ավարտելու կապակցությամբ",
-        "aboutPreview": "Ո՞ր բորսան  ընտրել ո՞ր դրամապանակն օգտագործել, ինչպե՞ս ճիշտ և ապահով գրանցվել, ինչպե՞ս դրամապանակից գումար հանել, և շատ այլ հարցեր մնում են առանց ուշադրության Փնտրեք ինտերնետում, կարող եք շատ ժամանակ ծախսել դրա վրա, բայց դեռ չգտնեք ձեզ անհրաժեշտ պատասխանը. «Ամեն ինչ ցրված է տարբեր անկյուններում, և դուք շատ արագ կհոգնեք Բայց կան մեծ թվով մարդիկ, ովքեր անցել են այս փուլերը և դարձել պրոֆեսիոնալներ կամ փորձառու օգտատերեր կրիպտոարժույթների աշխարհում Եվ նրանք կարող է ամբողջությամբ անվճար կիսվել ձեզ հետ: Դրա համար մենք մշակել ենք «Crypto Emergency» հարթակ, որտեղ մեկ կայքում կարող եք ստանալ բացարձակապես ցանկացած տեղեկատվություն կրիպտո աշխարհի մասին և ստանալ մասնագետների օգնությունը: Բոլոր պատասխաններն ու հարցերը մեկ ռեսուրսում են Crypto Emergency»: Միացե՛ք մեզ",        
+        "aboutPreview": "Ո՞ր բորսան  ընտրել ո՞ր դրամապանակն օգտագործել, ինչպե՞ս ճիշտ և ապահով գրանցվել, ինչպե՞ս դրամապանակից գումար հանել, և շատ այլ հարցեր մնում են առանց ուշադրության Փնտրեք ինտերնետում, կարող եք շատ ժամանակ ծախսել դրա վրա, բայց դեռ չգտնեք ձեզ անհրաժեշտ պատասխանը. «Ամեն ինչ ցրված է տարբեր անկյուններում, և դուք շատ արագ կհոգնեք Բայց կան մեծ թվով մարդիկ, ովքեր անցել են այս փուլերը և դարձել պրոֆեսիոնալներ կամ փորձառու օգտատերեր կրիպտոարժույթների աշխարհում Եվ նրանք կարող է ամբողջությամբ անվճար կիսվել ձեզ հետ: Դրա համար մենք մշակել ենք «Crypto Emergency» հարթակ, որտեղ մեկ կայքում կարող եք ստանալ բացարձակապես ցանկացած տեղեկատվություն կրիպտո աշխարհի մասին և ստանալ մասնագետների օգնությունը: Բոլոր պատասխաններն ու հարցերը մեկ ռեսուրսում են Crypto Emergency»: Միացե՛ք մեզ",
         "goalOne": "Բարձրացնել բնակչության կրիպտոգրագիտությունը",
         "goalOneDesc": "Մենք ստեղծել ենք հարթակ, որտեղ յուրաքանչյուրը կարող է գտնել իր հարցի պատասխանը և սովորել, թե ինչպես ներդրումներ կատարել կրիպտոարժույթում",
         "goalTwo": "Միավորել մարդկանց",
@@ -313,7 +311,7 @@
         "aboutProjectDateTwo": "Release 2022",
         "aboutProjectDateThree": "2022",
         "questions": "հարցեր",
-        "rank":"Վարկանիշ",
+        "rank": "Վարկանիշ",
         "returnToMainPage": "Վերադառնալ գլխավոր էջ",
         "redirectToMain": "Վերահղում դեպի գլխավոր էջ",
         "redirectToUC": "Վերահղում դեպի անձնական հաշիվ",
@@ -325,7 +323,7 @@
         "enterAmount": "Մուտքագրեք գումարը",
         "addressCEM": "CEM հասցե",
         "minimumAmount": " Նվազագույն գումարը ",
-        "commissionSite":"Կայքի հանձնաժողով",
+        "commissionSite": "Կայքի հանձնաժողով",
         "withdrawalDesc": "Գումարները կփոխանցվեն ձեր հաշվին հաստատումից հետո 24 ժամվա ընթացքում",
         "historuDeposit": "Ավանդի պատմություն",
         "type": "Տիպար",
@@ -333,9 +331,9 @@
         "operation": " Գործողություն ",
         "amount": "Գումար",
         "status": "Կարգավիճակ",
-        "notFound":"Գրառումներ չեն գտնվել",
-        "walletToSite":"Փոխանցում դրամապանակից կայքի հաշիվ",
-        "siteToWallet":"Տեղափոխում կայքից դրամապանակ",
+        "notFound": "Գրառումներ չեն գտնվել",
+        "walletToSite": "Փոխանցում դրամապանակից կայքի հաշիվ",
+        "siteToWallet": "Տեղափոխում կայքից դրամապանակ",
         "dontHaveFriends": "Միացեք Crypto Emergency Affiliate ծրագրին",
         "myPartners": "Իմ գործընկերները",
         "dontHavePartners": "Դուք դեռ գործընկերներ չունեք",
@@ -353,14 +351,13 @@
         "copy": " Պատճենել ",
         "pageDeleted": "Օգտվողի էջը ջնջված է, վերահղում դեպի գլխավոր էջ",
         "transactionRegistration": "Գրանցման համար",
-		"transactionReferralRegistration": "Ուղղորդման համար",
-		"transactionOther": "Այլ",
-		"transactionAwards": "Ձեռք բերված նվաճման համար",
-		"transactionLevel": "Ստացված մակարդակի համար",
-		"October2022": "Հոկտեմբեր 2022թ",
-		"aboutProjectDate19May2022": "Թողարկում 19 ՄԱՅԻՍԻ 2022թ",
-		"aboutProjectDateAugust2022": "Թողարկումն Օգոստոս 2022թ",
-
+        "transactionReferralRegistration": "Ուղղորդման համար",
+        "transactionOther": "Այլ",
+        "transactionAwards": "Ձեռք բերված նվաճման համար",
+        "transactionLevel": "Ստացված մակարդակի համար",
+        "October2022": "Հոկտեմբեր 2022թ",
+        "aboutProjectDate19May2022": "Թողարկում 19 ՄԱՅԻՍԻ 2022թ",
+        "aboutProjectDateAugust2022": "Թողարկումն Օգոստոս 2022թ",
         "lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
         "lotteryAction1": "Invite your friends to increase Prize Pool.",
         "lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
@@ -378,9 +375,9 @@
         "lotteryQuest6": "Answer a shortest quiz.",
         "lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?",
         "aboutObjectiveTitle": "Our Mission",
-		"aboutObjective": "Our Mission is to unite the crypto enthusiasts from all over the world at a unified multifunctional platform called Crypto Emergency which will provide all necessary tools for communication, training, earning and creation of their own content.",
-		"aboutСonceptTitle": "Our Vision",
-		"aboutСoncept": "We create a robust and convenient digital ecosystem which includes our own blockchain with smart contracts, crypto wallet and all-round support of crypto industry startups, universal social media which supports all types of content, and information and educational portal which improves the crypto awareness of the planet’s population. We work 24/7 to improve and develop the Crypto Emergency ecosystem."
+        "aboutObjective": "Our Mission is to unite the crypto enthusiasts from all over the world at a unified multifunctional platform called Crypto Emergency which will provide all necessary tools for communication, training, earning and creation of their own content.",
+        "aboutСonceptTitle": "Our Vision",
+        "aboutСoncept": "We create a robust and convenient digital ecosystem which includes our own blockchain with smart contracts, crypto wallet and all-round support of crypto industry startups, universal social media which supports all types of content, and information and educational portal which improves the crypto awareness of the planet’s population. We work 24/7 to improve and develop the Crypto Emergency ecosystem."
     },
     "text": {
         "starups": "Startups",
@@ -469,8 +466,8 @@
         "codeConfirm": "Հաստատման կոդը",
         "description": "Նկարագրություն",
         "notOptional": "(ըստ ցանկության)",
-        "speciality":"մասնագիտացում",
-        "birthDate":"Ծննդյան ամսաթիվ",
+        "speciality": "մասնագիտացում",
+        "birthDate": "Ծննդյան ամսաթիվ",
         "oldPassword": "Հին գաղտնաբառ",
         "newPassword": "Նոր գաղտնաբառ"
     },
@@ -520,36 +517,41 @@
         "complainComment": "Բողոքի մեկնաբանություն",
         "complainAnswer": "Բողոքի պատասխան",
         "complainUser": "Complain User",
-        "blackList": "Արգելափակել օգտվողին"
+        "blackList": "Արգելափակել օգտվողին",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "active": "Active",
+        "upcoming": "Upcoming",
+        "ended": "Ended",
+        "verified": "Verified"
     },
-    "toggle":{
+    "toggle": {
         "friends": "Ընկերներ",
-        "subscribers":"Բաժանորդներ",
-        "users":"Օգտագործողներ",
+        "subscribers": "Բաժանորդներ",
+        "users": "Օգտագործողներ",
         "friendsNews": "Ընկերների նորություններ",
-        "allNews":"Բոլոր նորությունները",
+        "allNews": "Բոլոր նորությունները",
         "myQuestions": "Իմ հարցերը",
         "myAnswers": "Իմ պատասխանները",
         "myBestAnswers": "Լավագույն պատասխաններ",
         "askQuestions": "Հարց տալ"
-    },     
-    "tableTitle":{
-        "appellation":"Անուն",
-        "volume":"Volume",
-        "countVisitors":"Visitors",
-        "chart":"Գծապատկեր",
-        "rank":"Վարկանիշ",
-        "coins":"Կոիններ",
-        "startDate":"StartDate",
+    },
+    "tableTitle": {
+        "appellation": "Անուն",
+        "volume": "Volume",
+        "countVisitors": "Visitors",
+        "chart": "Գծապատկեր",
+        "rank": "Վարկանիշ",
+        "coins": "Կոիններ",
+        "startDate": "StartDate",
         "question": "Հարց",
-        "comments":"Մեկնաբանություններ",
+        "comments": "Մեկնաբանություններ",
         "myAnswer": "Իմ պատասխանը",
         "answers": "Պատասխաններ",
         "views": "Դիտումներ",
         "bestanswer": "լավագույն պատասխան",
         "answer": "Պատասխան"
     },
-    "error_div":{
+    "error_div": {
         "not_empty_input": "Խնդրում ենք լրացնել տեղեկատվությունը",
         "wrong_email": "Անվավեր էլ.փոստ",
         "wrong_phone": "Հեռախոսահամարը սխալ է",
@@ -577,19 +579,19 @@
         "complain": "Ընտրեք բողոքի պատճառը",
         "notAuth": "Դուք մուտք չեք գործել, խնդրում ենք մուտք գործել!",
         "ok": "Ամեն ինչ լավ է",
-        "noAccess":"Մուտք չկա",
-        "insufficient":" Մնացորդի վրա բավարար միջոցներ չկան ",
+        "noAccess": "Մուտք չկա",
+        "insufficient": " Մնացորդի վրա բավարար միջոցներ չկան ",
         "existing_email": "Այս էլ․փոստն արդեն գրանցված է",
         "existing_phone": "Գոյություն ունեցող հեռախոս",
         "empty_userdata": "Պահանջվում է էլ. փոստ կամ հեռախոսահամար!",
         "noMetamask": "Դուք Metamask-ը տեղադրված չեք!",
         "connMetaSuccess": "Metamask-ը հաջողությամբ միացավ!",
         "connMetaFail": "Metamask կապը ձախողվեց: Դուք մերժել եք մուտքը.",
-        "errorPayment":"Թարգմանության սխալ",
-        "successPayment":"Փոխանցումը հաջողությամբ ուղարկվեց, սպասում է հաստատմանը",
+        "errorPayment": "Թարգմանության սխալ",
+        "successPayment": "Փոխանցումը հաջողությամբ ուղարկվեց, սպասում է հաստատմանը",
         "errorSocial": "Դուք չեք կարող ավելացնել ավելի քան 3 նույնական սոցիալական ցանցեր",
         "no": "Ամեն ինչ վատ է",
-        "errorQuery":"Հարցումը ձախողվեց",
+        "errorQuery": "Հարցումը ձախողվեց",
         "record_exists": "Վարկանիշն արդեն ավելացվել է",
         "noAuth": "Այս գաղտնաբառով օգտվող չի գտնվել!",
         "worngQuery": "Հարցումը լավ ձևավորված չէ",
@@ -607,12 +609,12 @@
         "questionsLimit": "Օրվա ընթացքում տվյալ լեզվով հարցերի սահմանաչափը գերազանցվել է",
         "openQuestionsLimit": "Գերազանցվել է բաց հարցերի սահմանաչափը"
     },
-    "awards":{
-        "registration":"Բարի գալուստ",
-        "registrationDesc":"Կայքում գրանցվելու համար",
+    "awards": {
+        "registration": "Բարի գալուստ",
+        "registrationDesc": "Կայքում գրանցվելու համար",
         "firstQuestion": "Հետաքրքրասիրություն",
         "firstQuestionDesc": "Պլատֆորմի առաջին հարցի համար",
-        "firstAnswer":"Պատասխան",
+        "firstAnswer": "Պատասխան",
         "firstAnswerDesc": "Հարցի առաջին պատասխանի համար հարթակում",
         "ICO": "ICO-ին մասնակցելու համար",
         "ICODesc": "ICO, Crypto Emergency-ին մասնակցելու համար",
@@ -623,7 +625,7 @@
         "KYC": "Դա իսկապե՞ս դու ես",
         "KYCDesc": "YC հարթակի վրա անցնելու համար",
         "completedProfile": "Պատմիր ինձ քո մասին",
-        "completedProfileDesc" : "Լրացրեք ձեր անձնական պրոֆիլի բոլոր դաշտերը",
+        "completedProfileDesc": "Լրացրեք ձեր անձնական պրոֆիլի բոլոր դաշտերը",
         "inviteKYC": "Իսկական ընկեր",
         "inviteKYCDesc": "Ընկերոջ համար, ով անցել է KYC",
         "oneHourTimeSpent": "Tick tock",
@@ -643,12 +645,12 @@
         "activeReferral": "Botmaster",
         "activeReferralDesc": "Առաջին ակտիվ ուղղորդման համար"
     },
-    "notify":{
+    "notify": {
         "reciveAwards": "Պարգևատրվել է",
         "newQuestion": "Նոր հարց է տրվել",
         "newAnswer": "Նոր հարց է տրվել",
-        "newComment":"Նոր մեկնաբանություն",
-        "newLike":"Նոր հավանում!",
+        "newComment": "Նոր մեկնաբանություն",
+        "newLike": "Նոր հավանում!",
         "newFollower": "Նոր հետևորդ",
         "ReferralPay": "Բոնուս ստացվեց",
         "Referral": "ռեֆերալ ը գրանցված է",
@@ -656,8 +658,8 @@
         "firstFollower": "Առաջին հետևորդի համար",
         "firstQuestion": "Կայքում տրված առաջին հարցի համար",
         "firstAnswer": "Կայքի առաջին պատասխանի համար",
-        "firstPost":"Կայքում առաջին գրառման համար",
-        "referralCount":"Ձեր փոխկապակցված հղումը գրանցել է նոր օգտվողներ.",
+        "firstPost": "Կայքում առաջին գրառման համար",
+        "referralCount": "Ձեր փոխկապակցված հղումը գրանցել է նոր օգտվողներ.",
         "askQuestion": "Նոր հարց է տրվել ձեր լեզուներով",
         "reciveAnswer": "Ձեր հարցին տրված է պատասխան",
         "reciveFollower": "Դուք բաժանորդագրված էիք",
@@ -667,7 +669,7 @@
         "reciveLike": "Դուք ստացել եք հավանում: Ձեր վարկանիշն ավելացել է",
         "reciveReferralPay": "Ձեր ռեֆերալ ը հասել է 3-րդ մակարդակին"
     },
-	"itemsMenu": {
-		"SelectBestQuestion": "Выбрать лучший ответ"
-	}
+    "itemsMenu": {
+        "SelectBestQuestion": "Выбрать лучший ответ"
+    }
 }

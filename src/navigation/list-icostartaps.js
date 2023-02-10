@@ -52,7 +52,7 @@ const showListIco = function (listIcoStartaps) {
           }}>
 
           <div class="item-img">
-            <img class="item-img_el" src={`/assets/upload/worldPress/${item.icon}`}></img>
+            <img class="item-img_el" src={`/assets/upload/worldPress/${item.icon}`} alt="Startap icon" />
           </div>
           <div class="item-info">
             <h5 class="item-title">{item.title}</h5>
@@ -158,8 +158,8 @@ const start = function (data, ID) {
     fn: () => {
       return (
         <div class="book_container c-main__body ico-wrap">
-          <img src={svg["background/left"]} class={["ico-back", "ico-back-left"]}></img>
-          <img src={svg["background/right"]} class={["ico-back", "ico-back-right"]}></img>
+          <img src={svg["background/left"]} class={["ico-back", "ico-back-left"]} />
+          <img src={svg["background/right"]} class={["ico-back", "ico-back-right"]} />
           <div class="book-inner ico-inner">
             <div class="tags tags-ico">
               {showBtn(Static)}
@@ -269,7 +269,7 @@ const start = function (data, ID) {
                         initReload()
                       }}>
                     </input>
-                    <label for="cryptoCheck" class="filter-item">Проверено Crypto Emergency</label>
+                    <label for="cryptoCheck" class="filter-item">{Variable.lang.select.verified} Crypto Emergency</label>
                   </div>
 
                 </div>
