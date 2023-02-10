@@ -48,11 +48,14 @@ const start = function (data, ID) {
                 Static.forms.title = null
                 Static.forms.slogan = null
                 Static.forms.descriptionShort = null
+                Static.forms.about = null
                 Static.forms.logo = null
                 Static.forms.siteLink = null
                 Static.forms.score = null
                 Static.forms.media = []
                 Static.forms.cover = null
+                Static.forms.teachers = []
+                Static.forms.courses = []
             } else {
                 Static.forms = Object.assign({}, Static.item)
             }
@@ -66,10 +69,11 @@ const start = function (data, ID) {
 
             return (
                 <div class="c-main__body">
-                    <div class="contacts_form">
-                        <div>
-                            <label>Название</label>
+                    <div class="c-adminform c-container">
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label">Название компании</label>
                             <input
+                                class="c-adminform__field"
                                 placeholder="Название"
                                 type="text"
                                 value={Static.forms.title}
@@ -78,12 +82,14 @@ const start = function (data, ID) {
                                 }}
                             />
                         </div>
-                        <div>
-                            <label>Логотип <img class="notes-button__icon" src={svg["clip_notes"]}
-                                onclick={() => {
-                                    Static.elInputImg.click()
-                                }}
-                            />
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label c-adminform__label--adding">
+                                <span>Логотип</span>
+                                <img class="c-adminform__addfile" src={svg["clip_notes"]}
+                                    onclick={() => {
+                                        Static.elInputImg.click()
+                                    }}
+                                />
                                 {
                                     Static.forms.logo
                                         ?
@@ -97,6 +103,7 @@ const start = function (data, ID) {
                                 }
                             </label>
                             <input
+                                class="c-adminform__field"
                                 type="file"
                                 hidden
                                 Element={($el) => { Static.elInputImg = $el }}
@@ -120,13 +127,12 @@ const start = function (data, ID) {
                                     initReload()
                                 }}
                             />
-                            <div class="notes-content-img">
+                            <div class="c-adminform__preview">
                                 {
                                     Static.forms.logo
                                         ?
-                                        <div class="notes-img-wrapper">
+                                        <div class="c-adminform__wrapper">
                                             <img
-                                                class="notes-img-preview"
                                                 src={`/assets/upload/worldPress/${Static.forms.logo}`}
                                                 width="100"
                                                 height="100"
@@ -138,9 +144,10 @@ const start = function (data, ID) {
 
                             </div>
                         </div>
-                        <div>
-                            <label>Слоган</label>
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label">Слоган компании</label>
                             <input
+                                class="c-adminform__field"
                                 placeholder="Слоган"
                                 type="text"
                                 value={Static.forms.slogan}
@@ -149,9 +156,10 @@ const start = function (data, ID) {
                                 }}
                             />
                         </div>
-                        <div>
-                            <label>Краткое Описание</label>
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label">Краткое Описание</label>
                             <textarea
+                                class="c-adminform__field"
                                 placeholder="Краткое Описание"
                                 rows={5}
                                 value={Static.forms.descriptionShort}
@@ -163,9 +171,25 @@ const start = function (data, ID) {
                             />
                         </div>
 
-                        <div>
-                            <label>Рейтинг</label>
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label">О компании</label>
+                            <textarea
+                                class="c-adminform__field"
+                                placeholder="О компании"
+                                rows={5}
+                                value={Static.forms.about}
+                                textContent={Static.forms.about}
+                                oninput={function () {
+                                    Static.forms.about = this.value.trim()
+                                }}
+                            // hidden={Static.forms.category == "ICO" ? true : false}
+                            />
+                        </div>
+
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label">Рейтинг</label>
                             <input
+                                class="c-adminform__field"
                                 placeholder="Рейтинг"
                                 type="number"
                                 value={Static.forms.score}
@@ -174,9 +198,10 @@ const start = function (data, ID) {
                                 }}
                             />
                         </div>
-                        <div>
-                            <label>Web сайт</label>
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label">Web сайт</label>
                             <input
+                                class="c-adminform__field"
                                 placeholder="Web сайт"
                                 type="text"
                                 value={Static.forms.siteLink}
@@ -186,12 +211,14 @@ const start = function (data, ID) {
                             />
                         </div>
 
-                        <div>
-                            <label>Обложка <img class="notes-button__icon" src={svg["clip_notes"]}
-                                onclick={() => {
-                                    Static.elInputImgCover.click()
-                                }}
-                            />
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label c-adminform__label--adding">
+                                <span>Обложка</span>
+                                <img class="c-adminform__addfile" src={svg["clip_notes"]}
+                                    onclick={() => {
+                                        Static.elInputImgCover.click()
+                                    }}
+                                />
                                 {
                                     Static.forms.cover
                                         ?
@@ -228,13 +255,12 @@ const start = function (data, ID) {
                                     initReload()
                                 }}
                             />
-                            <div class="notes-content-img">
+                            <div class="c-adminform__preview">
                                 {
                                     Static.forms.cover
                                         ?
-                                        <div class="notes-img-wrapper">
+                                        <div class="c-adminform__wrapper">
                                             <img
-                                                class="notes-img-preview"
                                                 src={`/assets/upload/worldPress/${Static.forms.cover}`}
                                                 width="350"
                                                 height="100"
@@ -247,12 +273,14 @@ const start = function (data, ID) {
                             </div>
                         </div>
 
-                        <div>
-                            <label>Галлерея <img class="notes-button__icon" src={svg["clip_notes"]}
-                                onclick={() => {
-                                    Static.elInputImgGallery.click()
-                                }}
-                            />
+                        <div class="c-adminform__block">
+                            <label for="" class="c-adminform__label c-adminform__label--adding">
+                                <span>Галлерея</span>
+                                <img class="c-adminform__addfile" src={svg["clip_notes"]}
+                                    onclick={() => {
+                                        Static.elInputImgGallery.click()
+                                    }}
+                                />
                                 {
                                     Static.forms.media && Static.forms.media.length
                                         ?
@@ -296,13 +324,12 @@ const start = function (data, ID) {
                                     initReload()
                                 }}
                             />
-                            <div class="notes-content-img">
+                            <div class="c-adminform__preview">
                                 {Static.forms.media.map((item => {
 
                                     return (
-                                        <div class="notes-img-wrapper">
+                                        <div class="c-adminform__wrapper">
                                             <img
-                                                class="notes-img-preview"
                                                 src={`/assets/upload/worldPress/${item.name}`}
                                                 width="100"
                                                 height="100"
@@ -311,6 +338,307 @@ const start = function (data, ID) {
                                     )
                                 }))}
                             </div>
+                        </div>
+
+                        <div class="c-adminform__section">
+                            <label for="" class="c-adminform__label c-adminform__label--title c-adminform__label--adding">
+                                <span>Список преподавателей</span>
+                                <img class="c-adminform__addfile" src={svg["add_chats"]}
+                                    onclick={() => {
+                                        Static.forms.teachers.push({})
+                                        initReload()
+                                    }}
+                                /></label>
+                            {
+                                Static.forms.teachers.map((item, index) => {
+                                    return (
+                                        <div class="c-adminform__group">
+                                            <h4 class="c-adminform__grouptitle">Преподаватель {index + 1}</h4>
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">ФИО</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder={`ФИО`}
+                                                    type="text"
+                                                    value={item.name}
+                                                    oninput={function () {
+                                                        Static.forms.teachers[index].name = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Должность</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder={`Должность`}
+                                                    type="text"
+                                                    value={item.position}
+                                                    oninput={function () {
+                                                        Static.forms.teachers[index].position = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label c-adminform__label--adding">
+                                                    <span>Фото</span>
+                                                    <img class="c-adminform__addfile" src={svg["clip_notes"]}
+                                                        onclick={() => {
+                                                            Static.forms.teachers[index].el.click()
+                                                        }}
+                                                    /></label>
+                                                <input
+                                                    type="file"
+                                                    hidden
+                                                    Element={($el) => { Static.forms.teachers[index].el = $el }}
+                                                    onchange={async function (e) {
+                                                        e.stopPropagation();
+                                                        Array.from(this.files).forEach((item) => {
+                                                            fn.uploadMedia(
+                                                                item,
+                                                                "worldPress",
+                                                                async function () {
+                                                                    if (!this.response) {
+                                                                        alert("Произошла ошибка Попробуйте еще раз")
+                                                                        return
+                                                                    }
+                                                                    let response = JSON.parse(this.response);
+                                                                    Static.forms.teachers[index].foto = response.name
+                                                                    initReload()
+                                                                }
+                                                            )
+                                                        })
+                                                        initReload()
+                                                    }}
+                                                />
+                                                
+                                                <div class="c-adminform__preview">
+                                                    {
+                                                        Static.forms.teachers[index].foto
+                                                            ?
+                                                            <div class="c-adminform__wrapper">
+                                                                <img
+                                                                    src={`/assets/upload/worldPress/${Static.forms.teachers[index].foto}`}
+                                                                    width="100"
+                                                                    height="100"
+                                                                />
+                                                            </div>
+                                                            :
+                                                            null
+                                                    }
+
+                                                </div>
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Биография</label>
+                                                <textarea
+                                                    class="c-adminform__field"
+                                                    placeholder="Биография"
+                                                    rows={5}
+                                                    value={item.biography}
+                                                    textContent={item.biography}
+                                                    oninput={function () {
+                                                        Static.forms.teachers[index].biography = this.value.trim()
+                                                    }}
+                                                // hidden={Static.forms.category == "ICO" ? true : false}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Личные достижения</label>
+                                                <textarea
+                                                    class="c-adminform__field"
+                                                    placeholder="Достижения"
+                                                    rows={5}
+                                                    value={item.achievements}
+                                                    textContent={item.achievements}
+                                                    oninput={function () {
+                                                        Static.forms.teachers[index].achievements = this.value.trim()
+                                                    }}
+                                                // hidden={Static.forms.category == "ICO" ? true : false}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
+                        <div class="c-adminform__section">
+                            <label for="" class="c-adminform__label c-adminform__label--title c-adminform__label--adding">
+                                <span>Список курсов</span>
+                                <img class="c-adminform__addfile" src={svg["add_chats"]}
+                                    onclick={() => {
+                                        Static.forms.courses.push({})
+                                        initReload()
+                                    }}
+                                /></label>
+                            {
+                                Static.forms.courses.map((item, index) => {
+                                    return (
+                                        <div class="c-adminform__group">
+                                            <h4 class="c-adminform__grouptitle">Курс {index + 1}</h4>
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Название курса</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder={`Название`}
+                                                    type="text"
+                                                    value={item.name}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].name = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Категория</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder={`Категория`}
+                                                    type="text"
+                                                    value={item.category}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].category = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label c-adminform__label--adding">
+                                                    <span>Фото</span>
+                                                    <img class="c-adminform__addfile" src={svg["clip_notes"]}
+                                                        onclick={() => {
+                                                            Static.forms.courses[index].el.click()
+                                                        }}
+                                                    /></label>
+                                                <input
+                                                    type="file"
+                                                    hidden
+                                                    Element={($el) => { Static.forms.courses[index].el = $el }}
+                                                    onchange={async function (e) {
+                                                        e.stopPropagation();
+                                                        Array.from(this.files).forEach((item) => {
+                                                            fn.uploadMedia(
+                                                                item,
+                                                                "worldPress",
+                                                                async function () {
+                                                                    if (!this.response) {
+                                                                        alert("Произошла ошибка Попробуйте еще раз")
+                                                                        return
+                                                                    }
+                                                                    let response = JSON.parse(this.response);
+                                                                    Static.forms.courses[index].foto = response.name
+                                                                    initReload()
+                                                                }
+                                                            )
+                                                        })
+                                                        initReload()
+                                                    }}
+                                                />
+                                                <div class="c-adminform__preview">
+                                                    {
+                                                        Static.forms.courses[index].foto
+                                                            ?
+                                                            <div class="c-adminform__wrapper">
+                                                                <img
+                                                                    src={`/assets/upload/worldPress/${Static.forms.courses[index].foto}`}
+                                                                    width="100"
+                                                                    height="100"
+                                                                />
+                                                            </div>
+                                                            :
+                                                            null
+                                                    }
+
+                                                </div>
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Краткое описание</label>
+                                                <textarea
+                                                    class="c-adminform__field"
+                                                    placeholder="Краткое описание"
+                                                    rows={5}
+                                                    value={item.descriptionShort}
+                                                    textContent={item.descriptionShort}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].descriptionShort = this.value.trim()
+                                                    }}
+                                                // hidden={Static.forms.category == "ICO" ? true : false}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">О курсе</label>
+                                                <textarea
+                                                    class="c-adminform__field"
+                                                    placeholder="О курсе"
+                                                    rows={5}
+                                                    value={item.about}
+                                                    textContent={item.about}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].about = this.value.trim()
+                                                    }}
+                                                // hidden={Static.forms.category == "ICO" ? true : false}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Рейтинг курса</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder="Рейтинг курса"
+                                                    type="number"
+                                                    value={item.rating}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].rating = this.value
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Время обучения</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder={`Время обучения`}
+                                                    type="text"
+                                                    value={item.duration}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].duration = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Количество часов</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder="Количество часов"
+                                                    type="number"
+                                                    value={item.hours}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].hours = this.value
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div class="c-adminform__block">
+                                                <label for="" class="c-adminform__label">Прямая ссылка для записи на курс</label>
+                                                <input
+                                                    class="c-adminform__field"
+                                                    placeholder="Ссылка на курс"
+                                                    type="text"
+                                                    value={item.courseLink}
+                                                    oninput={function () {
+                                                        Static.forms.courses[index].courseLink = this.value.trim()
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
 
                         <div
