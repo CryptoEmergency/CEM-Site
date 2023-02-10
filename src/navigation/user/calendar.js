@@ -53,7 +53,7 @@ const monthHandler = (Static, prev = true) => {
 };
 
 const addNew = async function (Static) {
-    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.text, showDate: Static.active })
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.text, showDate: Static.active, color: "test" })
     if (response && response.status == "ok") {
         if (response.list_records && response.list_records[0]) {
             Static.notesCalendar.list_records.unshift(response.list_records[0])
