@@ -102,11 +102,18 @@ const addForm = function (Static) {
                                             }, 500)
                                         }}
                                     />
-                                    <div class="planning-user_group">
+                                    <div class={[Static.user.length === 0 ? null : "planning-user_group"]}>
                                         {Static.user.map((item) => {
                                             return (
                                                 <div class="planning-user_group-name">
-                                                    {item.nickname}
+                                                    <span>
+                                                        {item.nickname}
+                                                    </span>
+                                                    <img src={svg["close_group"]}
+                                                        onClick={() => {
+                                                            console.log('close')
+                                                        }}
+                                                    />
                                                 </div>
                                             )
                                         })}

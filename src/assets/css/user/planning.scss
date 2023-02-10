@@ -13,6 +13,10 @@
         background: #3d4457;
         border-radius: 6px;
         cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
         
         h3 {
             margin: 0;
@@ -101,4 +105,32 @@
         background: #464d62;
     }
     
+}
+
+.planning-user_group {
+
+    &-name {
+        position: relative;
+        display: inline-block;
+        margin-top: 8px;
+        margin-right: 5px;
+        padding: 2px 23px 2px 8px;
+        background: #44495c;
+        border-radius: 4px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        img {
+            position: absolute;
+            right: 1px;
+            padding: 5px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
 }
