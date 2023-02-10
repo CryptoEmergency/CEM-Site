@@ -186,7 +186,8 @@
 		"placeEvent": "Место",
 		"dateEvent": "Дата проведения",
 		"careers": "Работа",
-		"modalAllServices": "Все сервисы"
+		"modalAllServices": "Все сервисы",
+		"modal_listCoin": "Выбрать монеты"
 	},
 	"a": {
 		"about": "О нас",

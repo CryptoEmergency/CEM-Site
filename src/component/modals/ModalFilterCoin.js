@@ -61,18 +61,21 @@ const ModalFilterCoin = function (data, ID) {
                     class="filter-coinInput"
                     placeholder={Variable.lang.h.modal_listCoin}
                     oninput={function () {
-                      console.log('=1588c3=', "Heello Crypto")
                       let searchText = this.value.toLowerCase()
                       Static.allCoin = Static.list_coins.filter((item) => {
                         if (item.name.toLowerCase().includes(searchText)) {
                           return true
                         }
                       })
+                      Static.elBtn.classList.toggle('content-hidden', !Static.elInput.value)
                       initReload("modals")
                     }}
                   />
                   <span
-                    class="close-icon"
+                    Element={($el) => {
+                      Static.elBtn = $el
+                    }}
+                    class={["close-icon", "content-hidden"]}
                     onclick={() => {
                       // Static.elForm.reset()
                       Static.allCoin = Static.list_coins
@@ -81,7 +84,7 @@ const ModalFilterCoin = function (data, ID) {
 
 
                     }}
-                  ></span>
+                  >X</span>
                 </form>
               </div>
 

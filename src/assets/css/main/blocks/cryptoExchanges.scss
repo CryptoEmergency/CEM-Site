@@ -497,10 +497,7 @@
             vertical-align: middle;
             outline: 0;
             cursor: pointer;
-        }
-
-        .close-icon::after {
-            content: "X";
+            // content: "X";
             display: block;
             width: 20px;
             height: 20px;
@@ -513,17 +510,17 @@
             padding: 2px;
             border-radius: 50%;
             text-align: center;
-            color: white;
+            color: #FFFFFF;
             font-weight: normal;
             font-size: 12px;
             box-shadow: 0 0 2px #9844b7;
             opacity: .5;
-            cursor: pointer;
         }
 
-        // .filter-coinInput:not(:valid)~.close-icon {
-        //     display: none;
-        // }
+        .content-hidden {
+            visibility: hidden;
+        }
+
     }
 }
 
