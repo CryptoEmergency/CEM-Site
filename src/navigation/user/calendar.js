@@ -19,10 +19,10 @@ const listColors = [
 ];
 
 const listNames = {
-    weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu' , 'Fri', 'Sun', 'Sat']
+    weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sun', 'Sat']
 }
 
-Helpers.moment.updateLocale("en", {week: {dow: 1}});
+Helpers.moment.updateLocale("en", { week: { dow: 1 } });
 const month = Helpers.moment().startOf("month");
 const startDay = Helpers.moment().startOf("month").startOf("week");
 const day = startDay.clone().subtract(1, "day");
@@ -74,8 +74,8 @@ const editNotes = async function (Static) {
 }
 
 const randomColor = (colors) => {
-    const randomColor = colors[Math.floor(Math.random()*colors.length)];
-    
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
     return randomColor;
 }
 
@@ -88,14 +88,14 @@ const addForm = function (Static) {
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">Заметка</h2>
                             <button
-                            type="button"
-                            class="c-modal__close"
-                            onclick={() => {
-                                Static.activeNotes = null
-                                Static.modal = false
-                                Static.isValid = false
-                                initReload()
-                            }}
+                                type="button"
+                                class="c-modal__close"
+                                onclick={() => {
+                                    Static.activeNotes = null
+                                    Static.modal = false
+                                    Static.isValid = false
+                                    initReload()
+                                }}
                             ></button>
                         </header>
                         <div class="c-modal__body">
@@ -107,10 +107,10 @@ const addForm = function (Static) {
                                     Element={($el) => {
                                         Static.elTitle = $el
                                     }}
-                                    oninput={()=> {
+                                    oninput={() => {
                                         if (Static.activeNotes) {
                                             Static.activeNotes.title = Static.elTitle.textContent
-                                            
+
                                         } else {
                                             Static.active.title = Static.elTitle.textContent
                                         }
@@ -127,10 +127,10 @@ const addForm = function (Static) {
                                     Element={($el) => {
                                         Static.elText = $el
                                     }}
-                                    oninput={()=> {
+                                    oninput={() => {
                                         if (Static.activeNotes) {
                                             Static.activeNotes.text = Static.elText.textContent
-                                            
+
                                         } else {
                                             Static.active.text = Static.elText.textContent
                                         }
@@ -142,7 +142,7 @@ const addForm = function (Static) {
                         </div>
                         <div class="calendar-color">
                             <p>Выбор цвета заметки</p>
-                            <div 
+                            <div
                                 class="calendar-color-button"
                                 onClick={() => {
                                     Static.colorNotes = true
@@ -150,63 +150,63 @@ const addForm = function (Static) {
                                 }}
                             >
                                 <span class={["calendar-color-default",
-                                        Static.colorIndex ? `calendar-color-type${Static.colorIndex}` : "calendar-color-type1" ]} 
-                                            tabindex="0">
+                                    Static.colorIndex ? `calendar-color-type${Static.colorIndex}` : "calendar-color-type1"]}
+                                    tabindex="0">
                                 </span>
                             </div>
-                                <ul
-                                    class="calendar-color-list"
-                                    style={[Static.colorNotes ? "display: flex" : null]}
-                                    Element={($el) => {
-                                        Static.elListColor = $el
-                                    }}
-                                    onClick={(e) => {
-                                        Static.colorIndex = e.target.id
-                                        Static.colorNotes = false
-                                        initReload()
-                                    }}
-                                >
-                                    <li class="calendar-color-item calendar-color-type1" id="1">
-                                    </li>
-                                    <li class="calendar-color-item calendar-color-type2" id="2">
-                                    </li>
-                                    <li class="calendar-color-item calendar-color-type3" id="3">
-                                    </li>
-                                    <li class="calendar-color-item calendar-color-type4" id="4">
-                                    </li>
-                                    <li class="calendar-color-item calendar-color-type5" id="5">
-                                    </li>
-                                    <li class="calendar-color-item calendar-color-type6" id="6">
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul
+                                class="calendar-color-list"
+                                style={[Static.colorNotes ? "display: flex" : null]}
+                                Element={($el) => {
+                                    Static.elListColor = $el
+                                }}
+                                onClick={(e) => {
+                                    Static.colorIndex = e.target.id
+                                    Static.colorNotes = false
+                                    initReload()
+                                }}
+                            >
+                                <li class="calendar-color-item calendar-color-type1" id="1">
+                                </li>
+                                <li class="calendar-color-item calendar-color-type2" id="2">
+                                </li>
+                                <li class="calendar-color-item calendar-color-type3" id="3">
+                                </li>
+                                <li class="calendar-color-item calendar-color-type4" id="4">
+                                </li>
+                                <li class="calendar-color-item calendar-color-type5" id="5">
+                                </li>
+                                <li class="calendar-color-item calendar-color-type6" id="6">
+                                </li>
+                            </ul>
+                        </div>
                         <div class="c-modal__footer">
                             <button
-                            class={[
-                                "c-button c-button--gradient2",
-                                !Static.isValid ? "c-button--inactive" : null,
-                            ]}
-                            type="button"
-                            onClick={() => {
-                                if(Static.isValid) {
-                                    if (Static.activeNotes) {
-                                    
-                                        editNotes(Static)
-                                        Static.activeNotes = null
-                                        
+                                class={[
+                                    "c-button c-button--gradient2",
+                                    !Static.isValid ? "c-button--inactive" : null,
+                                ]}
+                                type="button"
+                                onClick={() => {
+                                    if (Static.isValid) {
+                                        if (Static.activeNotes) {
+
+                                            editNotes(Static)
+                                            Static.activeNotes = null
+
+                                        } else {
+
+                                            addNew(Static)
+                                            initReload()
+                                        }
+                                        Static.modal = false
+                                        Static.isValid = false
                                     } else {
-                                        
-                                        addNew(Static)
-                                        initReload()
+                                        null
                                     }
-                                    Static.modal = false
-                                    Static.isValid = false
-                                } else {
-                                    null
-                                }
-                                
-                                
-                            }}
+
+
+                                }}
                             >
                                 <span class="c-button__text">{Variable.lang.button.send}</span>
                             </button>
@@ -227,7 +227,7 @@ const monthActive = (Static, index) => {
     if (Static.moment.format("Y") == Helpers.moment().format("Y")) {
         Static.moment = Helpers.moment()
     }
-    
+
     if (index + 1 == Static.activeMonthClone.format("M")) {
         staticRenderCalendar(Static)
     } else if (index + 1 > Static.activeMonthClone.format("M")) {
@@ -273,7 +273,7 @@ const renderMonth = (Static) => {
     if (Static.renderMonth) {
         console.log(22)
         return (
-            <div 
+            <div
                 class="calendar-month"
             >
                 {monthsName.map((item, index) => {
@@ -297,7 +297,7 @@ const renderMonth = (Static) => {
         )
     } else if (Static.renderYear) {
         return (
-            <div 
+            <div
                 class="calendar-year"
             >
                 {yearsName.map((item, index) => {
@@ -325,7 +325,7 @@ const renderMonth = (Static) => {
 
 const notesScroll = (Static) => {
     Static.notesCalendar.list_records.map((item) => {
-        if (Helpers.moment(item.showDate).format("D") ==  Helpers.moment(Static.active).format("D")) {
+        if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D")) {
             Static.elNotes.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -363,8 +363,8 @@ const start = function (data, ID) {
         ID,
         fnLoad: async () => {
 
-            
-            
+
+
             Static.notesCalendar = await fn.restApi.getUserCalendar({ filter: {} })
             console.log('=8451ba=', Static.notesCalendar)
         },
@@ -391,47 +391,47 @@ const start = function (data, ID) {
                                         monthHandler(Static)
                                         initReload()
                                     }}
-                                    style={[ Static.renderMonth || Static.renderYear ? "cursor: default; opacity: 1;" : null]}
+                                    style={[Static.renderMonth || Static.renderYear ? "cursor: default; opacity: 1;" : null]}
                                 >
-                                    <img src={svg["calendar-arrow"]}/>
+                                    <img src={svg["calendar-arrow"]} />
                                 </button>
-                                    <h3
-                                        onClick={() => {
-                                            
-                                            if (Static.renderMonth) {
-                                                Static.renderYear = true
-                                                Static.renderMonth = false
-                                            }  else if (Static.renderYear) {
-                                                null
-                                            } else {
-                                                Static.renderMonth = true
-                                            }
+                                <h3
+                                    onClick={() => {
 
-                                            Static.activeMonthClone = Static.activeMonth;
-                                            
-                                            initReload()
-                                        }}
-                                        
-                                        style={[Static.renderYear ? "cursor: default; opacity: 1;" : null]}
-                                    >
-                                        {() => {
-                                            if (Static.renderMonth) {
-                                                return `${Static.moment.format("YYYY")} year`
-                                            } else if (Static.renderYear) {
-                                                return `${yearsName[0]} - ${yearsName[yearsName.length - 1]}`
-                                            } else {
-                                                return Static.moment.format("MMMM YYYY")
-                                            }
-                                        }}
-                                    </h3>
+                                        if (Static.renderMonth) {
+                                            Static.renderYear = true
+                                            Static.renderMonth = false
+                                        } else if (Static.renderYear) {
+                                            null
+                                        } else {
+                                            Static.renderMonth = true
+                                        }
+
+                                        Static.activeMonthClone = Static.activeMonth;
+
+                                        initReload()
+                                    }}
+
+                                    style={[Static.renderYear ? "cursor: default; opacity: 1;" : null]}
+                                >
+                                    {() => {
+                                        if (Static.renderMonth) {
+                                            return `${Static.moment.format("YYYY")} year`
+                                        } else if (Static.renderYear) {
+                                            return `${yearsName[0]} - ${yearsName[yearsName.length - 1]}`
+                                        } else {
+                                            return Static.moment.format("MMMM YYYY")
+                                        }
+                                    }}
+                                </h3>
                                 <button
                                     onClick={() => {
                                         monthHandler(Static, false)
                                         initReload()
                                     }}
-                                    style={[ Static.renderMonth || Static.renderYear ? "cursor: default; opacity: 1;" : null]}
+                                    style={[Static.renderMonth || Static.renderYear ? "cursor: default; opacity: 1;" : null]}
                                 >
-                                    <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]}/>
+                                    <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]} />
                                 </button>
                             </div>
                         </div>
@@ -458,21 +458,21 @@ const start = function (data, ID) {
                                         }}
                                         style={[Static.active == item ? "opacity: 1" : null]}
                                     >
-                                        <span 
+                                        <span
                                             class="calendar-day"
                                             onDblClick={() => {
                                                 Static.modal = true
                                                 initReload()
                                             }}
                                             style={[isCurrentMonth(item) ? "color: #8995B8; opacity: 1;" : null,
-                                                    isCurrentDay(item) ? "color: red; opacity: 1" : null,
-                                                    Static.active == item ? "color: #ffffff; opacity: 1" : null
+                                            isCurrentDay(item) ? "color: red; opacity: 1" : null,
+                                            Static.active == item ? "color: #ffffff; opacity: 1" : null
                                             ]}
                                         >
                                             {item.format('D')}
                                         </span>
                                         <div>
-                                            <div class={["calendar-text", 
+                                            <div class={["calendar-text",
                                                 item && item.title != "" ? "calendar-text--show" : null
                                             ]}
                                             // style={[ Static.dateNotes ? `background: ${randomColor(listColors)}` : null]}
@@ -491,16 +491,16 @@ const start = function (data, ID) {
                                 )
                             })}
                         </div>
-                        <div 
+                        <div
                             class="calendar-notes"
                             Element={($el) => {
                                 Static.elNotes = $el
                             }}
                         >
                             {Static.notesCalendar.list_records.map((item, index) => {
-                                if (Helpers.moment(item.showDate).format("D") ==  Helpers.moment(Static.active).format("D")) {
+                                if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D")) {
                                     return (
-                                        <div 
+                                        <div
                                             class="calendar-notes_item"
                                         >
                                             <div class="calendar-notes_item-date">
@@ -521,15 +521,15 @@ const start = function (data, ID) {
                                                         text: Variable.lang.p.deleteNotesConfirm,
                                                         button: Variable.lang.button.yes
                                                     })
-                                                }} 
+                                                }}
                                             />
-                                            <img 
+                                            <img
                                                 class="calendar-notes_item-edit"
                                                 src={svg["edit_calendar-notes"]}
                                                 onClick={() => {
                                                     Static.activeNotes = item
                                                     Static.modal = true
-                                                    
+
                                                     initReload()
                                                 }}
                                             />
@@ -538,7 +538,7 @@ const start = function (data, ID) {
                                 } else {
                                     Static.elNotes = null
                                 }
-                                    
+
                             })}
                         </div>
                         <div class="modals-test">
