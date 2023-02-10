@@ -44,6 +44,7 @@ const BlockShowLenta = function ({ Static, item }) {
                     return
                   }
                   let text = Static.mainComment.el.value.trim()
+                  Static.mainComment.value = ""
                   let response = await fn.restApi.setPost.comment({ _id: item._id, text })
                   Static.submitClick = false
                   if (response.status === "ok") {
