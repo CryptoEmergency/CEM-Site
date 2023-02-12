@@ -45,6 +45,18 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                 <div class="c-allservices__subtitle">{Variable.lang.text.communion}</div>
                                 <div class="c-allservices__group">
                                     <a
+                                        href="/lenta-users/"
+                                        class="c-allservices__link"
+                                        onclick={function (e) {
+                                            fn.siteLink(e)
+                                        }}
+                                    >
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["preview_line_lenta"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.span.userNews}</p>
+                                    </a>
+                                    <a
                                         href="/question/"
                                         class="c-allservices__link"
                                         onclick={function (e) {
@@ -56,7 +68,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                         </div>
                                         <p>{Variable.lang.a.questionsAnswers}</p>
                                     </a>
-                                    <a
+                                    {/* <a
                                         href="/chats/"
                                         class="c-allservices__link"
                                         onclick={function (e) {
@@ -67,7 +79,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             <img src={svg["chats_main"]} alt="" />
                                         </div>
                                         <p>{Variable.lang.a.chatsPublic}</p>
-                                    </a>
+                                    </a> */}
                                     <a
                                         href="/content-creator/"
                                         class="c-allservices__link"
@@ -75,10 +87,10 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["contentmaker"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.contentCreater}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["contentmaker"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.contentCreater}</p>
                                     </a>
                                     <a
                                         href="/experts/"
@@ -87,10 +99,10 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["preview_line_experts"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.experts}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["preview_line_experts"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.experts}</p>
                                     </a>
                                     <a
                                         href="/rooms/"
@@ -99,10 +111,10 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["rooms"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.rooms}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["rooms"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.rooms}</p>
                                     </a>
                                 </div>
                                 <div class="c-allservices__subtitle">{Variable.lang.text.commerce}</div>
@@ -114,10 +126,10 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["stock-market"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.trade}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["stock-market"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.trade}</p>
                                     </a>
                                     <a
                                         href="/list-exchange/"
@@ -126,12 +138,12 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["shuffle"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.exchange}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["shuffle"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.exchange}</p>
                                     </a>
-                                    <a
+                                    {/* <a
                                         href="/nft-market/"
                                         class="c-allservices__link"
                                         onclick={function (e) {
@@ -142,36 +154,36 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                                 <img src={svg["nft_icon"]} alt="" />
                                             </div>
                                             <p>{Variable.lang.a.nft}</p>
-                                    </a>
+                                    </a> */}
                                 </div>
                                 <div class="c-allservices__subtitle">{Variable.lang.text.starups}</div>
                                 <div class="c-allservices__group">
                                     <a
-                                        href="#"
+                                        href="/list-icostartaps/"
                                         class="c-allservices__link"
                                     // onclick={function(e) {
                                     //     fn.siteLink(e)
                                     // }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["star1"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.icoRating}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["star1"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.icoRating}</p>
                                     </a>
                                     <a
-                                        href="#"
+                                        href="/list-startaps/"
                                         class="c-allservices__link"
                                     // onclick={function(e) {
                                     //     fn.siteLink(e)
                                     // }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["startup"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.starups}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["startup"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.starups}</p>
                                     </a>
-                                    <a
-                                        href="/university/"
+                                    {/* <a
+                                        href="/library/"
                                         class="c-allservices__link"
                                         onclick={function (e) {
                                             fn.siteLink(e)
@@ -181,7 +193,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                                 <img src={svg["meta_universes"]} alt="" />
                                             </div>
                                             <p>{Variable.lang.a.universes}</p>
-                                    </a>
+                                    </a> */}
                                 </div>
                                 <div class="c-allservices__subtitle">{Variable.lang.text.news}</div>
                                 <div class="c-allservices__group">
@@ -204,10 +216,10 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["preview_line_news"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.news}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["preview_line_news"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.news}</p>
                                     </a>
                                     <a
                                         href="/blog/"
@@ -216,10 +228,10 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["preview_line_blog"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.blog}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["preview_line_blog"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.blog}</p>
                                     </a>
                                     <a
                                         href="/media/"
@@ -228,15 +240,15 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                     //     fn.siteLink(e)
                                     // }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["careers_icon"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.mediaUs}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["careers_icon"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.mediaUs}</p>
                                     </a>
                                 </div>
                                 <div class="c-allservices__subtitle">{Variable.lang.text.work}</div>
                                 <div class="c-allservices__group">
-                                    <a
+                                    {/* <a
                                         href="#"
                                         class="c-allservices__link"
                                     // onclick={function(e) {
@@ -247,7 +259,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                                 <img src={svg["careers_icon2"]} alt="" />
                                             </div>
                                             <p>{Variable.lang.a.career}</p>
-                                    </a>
+                                    </a> */}
                                     <a
                                         href="/career-whith-us/"
                                         class="c-allservices__link"
@@ -255,29 +267,29 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["career_with_us_icon"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.careerUs}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["career_with_us_icon"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.careerUs}</p>
                                     </a>
                                 </div>
                                 <div class="c-allservices__subtitle">{Variable.lang.text.teaching}</div>
                                 <div class="c-allservices__group">
                                     <a
-                                        href="/library/"
+                                        href="/university/"
                                         class="c-allservices__link"
                                         onclick={function (e) {
                                             fn.siteLink(e)
                                         }}
                                     >
-                                            <div class="c-allservices__wrap">
-                                                <img src={svg["mortarboard"]} alt="" />
-                                            </div>
-                                            <p>{Variable.lang.a.university}</p>
+                                        <div class="c-allservices__wrap">
+                                            <img src={svg["mortarboard"]} alt="" />
+                                        </div>
+                                        <p>{Variable.lang.a.university}</p>
                                     </a>
                                 </div>
 
-                                <div class="c-allservices__subtitle">{Variable.lang.text.entertainment}</div>
+                                {/* <div class="c-allservices__subtitle">{Variable.lang.text.entertainment}</div>
                                 <div class="c-allservices__group">
                                     <a
                                         href="#"
@@ -291,7 +303,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                                             </div>
                                             <p>{Variable.lang.a.games}</p>
                                     </a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </section >
