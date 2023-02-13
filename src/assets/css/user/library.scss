@@ -1,0 +1,50 @@
+// variables colors
+$fiolet-light: #8859EC;
+.content-hidden{
+  display: none;
+}
+// buttons
+// button close X
+.b-close {
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  background-color: $fiolet-light;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: .7;
+}
+.b-close:hover {
+  box-shadow: 0 0 15px -2px #8859EC;
+  opacity: 1;
+}
+
+// accordeon
+.accordeon{
+  position: relative;
+  z-index: 5;
+}
+.accordeon-item{
+  margin-bottom: 15px;
+}
+.accordeon-header{
+  background: #313541;
+  padding: 15px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  .accordeon-header_title{
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+}
+.accordeon-content{
+  background: #8991A8;
+  padding: 15px 25px;
+  border-radius: 0 0 8px 8px;
+  margin: 0 10px;
+}

@@ -142,11 +142,11 @@ const start = function (data, ID) {
                 <p class="social-desc">{Static.item.descriptionShort}</p>
 
                 <div class="social-btns">
-                  <a href={Static.item.whitePaperLink} class={["btn-item", !Static.item.whitePaperLink ? "social-btn_passive" : null]}>
+                  <a href={Static.item.whitePaperLink} target="_blank" class={["btn-item", !Static.item.whitePaperLink ? "social-btn_passive" : null]}>
                     <div class="btn-item_text">White paper</div>
                   </a>
 
-                  <a href={Static.item.siteLink} class={["btn-item", !Static.item.siteLink ? "social-btn_passive" : null]}>
+                  <a href={Static.item.siteLink} target="_blank" class={["btn-item", !Static.item.siteLink ? "social-btn_passive" : null]}>
                     <div class="btn-item_text">Web site</div>
                   </a>
                 </div>
