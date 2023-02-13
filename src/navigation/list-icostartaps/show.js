@@ -90,7 +90,9 @@ const start = function (data, ID) {
                   </a>
 
                   <a
+                    target="_blank"
                     class={["card-btn", Static.item.whitePaperLink ? "card-btn_active" : null]}
+                    href={Static.item.whitePaperLink}
                   >
                     <span class="card-btn_text">White Paper</span>
 

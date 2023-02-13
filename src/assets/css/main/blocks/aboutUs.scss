@@ -883,3 +883,21 @@
         grid-template-columns: 100%
     }
 }
+
+// change page about us
+.title-animation{
+    margin: 0;
+    padding-bottom: 0.5rem;
+    letter-spacing: 0.5rem;
+    color: #A87FFF;
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+.title-animation:hover{
+    transform: translate3d(0, -10px, 22px);
+    color: #9844b7;
+}
+// accordeon
+.c-aboutus__accordeon{
+    
+}
