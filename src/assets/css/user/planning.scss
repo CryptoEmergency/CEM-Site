@@ -1,6 +1,6 @@
 .planning {
     width: 1240px;
-    height: calc(100vh - 200px);
+    height: 500px;
     margin: 0 auto;
     margin-top: 100px;
 
@@ -25,7 +25,7 @@
     }
 }
 
-.planning-create {
+.planning-create-container {
     position: relative;
     padding-right: 30px;
 
@@ -131,6 +131,30 @@
             &:hover {
                 opacity: 0.5;
             }
+        }
+    }
+}
+
+.planning-mine {
+    display: block;
+
+    &-container {
+        margin-bottom: 20px;
+    }
+
+    &_item {
+        margin-bottom: 10px;
+        border: 1px solid #6B738D;
+        border-radius: 15px;
+
+        &-title {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        &-text {
+            margin: 0;
+            font-size: 16px;
         }
     }
 }

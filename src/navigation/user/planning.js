@@ -9,6 +9,22 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 
+const testUser = async function (Static) {
+    // console.log('=93b4bf=', Static.dataUsers.list_records[0]._id)
+    let users = []
+    users.push("63ea23b1842580e0055a6a8c")
+    let tmpres = await fn.restApi.setUserPlanning.create({ title: Static.activePlanning.title, text: Static.activePlanning.text, users })
+    
+    if (tmpres.status === 'ok') {
+        console.log('ok')
+        Static.modal = false
+    } else {
+        console.log('false')
+        null
+    }
+}
+
+
 const filterUser = (Static, item) => {
     if (Static.filterText.length !== 0) {
         return (
@@ -103,7 +119,7 @@ const addForm = function (Static) {
                                         }}
                                     />
                                     <div class={[Static.user.length === 0 ? null : "planning-user_group"]}>
-                                        {Static.user.map((item) => {
+                                        {Static.user.map((item, index) => {
                                             return (
                                                 <div class="planning-user_group-name">
                                                     <span>
@@ -111,7 +127,8 @@ const addForm = function (Static) {
                                                     </span>
                                                     <img src={svg["close_group"]}
                                                         onClick={() => {
-                                                            console.log('close')
+                                                            Static.user.splice(index, 1)
+                                                            initReload()
                                                         }}
                                                     />
                                                 </div>
@@ -143,24 +160,24 @@ const addForm = function (Static) {
                                 ]}
                                 type="button"
                                 onClick={() => {
-                                    if (Static.isValid) {
-                                        if (Static.activeNotes) {
+                                    // if (Static.isValid) {
+                                    //     if (Static.activeNotes) {
 
-                                            editNotes(Static)
-                                            Static.activeNotes = null
+                                    //         editNotes(Static)
+                                    //         Static.activeNotes = null
 
-                                        } else {
+                                    //     } else {
 
-                                            addNew(Static)
-                                            initReload()
-                                        }
-                                        Static.modal = false
-                                        Static.isValid = false
-                                    } else {
-                                        null
-                                    }
-
-
+                                    //         addNew(Static)
+                                    //         initReload()
+                                    //     }
+                                    //     Static.modal = false
+                                    //     Static.isValid = false
+                                    // } else {
+                                    //     null
+                                    // }
+                                    testUser(Static)
+                                    initReload()
                                 }}
                             >
                                 <span class="c-button__text">{Variable.lang.button.send}</span>
@@ -191,41 +208,71 @@ const start = function (data, ID) {
     Static.timerChange = null
     Static.filterText = null
     Static.user = []
+    Static.myStorage = JSON.parse(localStorage.getItem('myInfo'))
 
     load({
         ID,
         fnLoad: async () => {
 
+            Static.tmp = await fn.restApi.getUserPlanning({ filter: {} })
+            console.log('=695963=', Static.tmp)
+
             Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter, limit: 10 })
-            let tmp = await fn.restApi.getUserPlanning({ filter: {} })
-            console.log('=695963=', tmp)
-            setTimeout(async () => {
-                // console.log('=93b4bf=', Static.dataUsers.list_records[0]._id)
-                let users = []
-                users.push(Static.dataUsers.list_records[0]._id)
-                let tmpres = await fn.restApi.setUserPlanning.create({ title: "Test2", text: "Текст", users })
-            }, 2000);
 
         },
         fn: () => {
-            console.log(Static.user)
+            console.log(Static.myStorage._id)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="planning">
                         <div class="planning_container">
-                            <div class="planning-tab planning-mine">
-                                <h3>Мои комнаты</h3>
+                            <div className="planning-mine">
+                                <div class="planning-tab planning-mine-container">
+                                    <h3>Мои комнаты</h3>
+                                </div>
+                                {Static.tmp.list_records.map((item) => {
+                                    return (
+                                        <div class="planning-mine_item">
+                                            <h3 class="planning-mine_item-title">
+                                                {item.title}
+                                            </h3>
+                                            <p class="planning-mine_item-text">
+                                                {item.text}
+                                            </p>
+                                        </div>
+                                    )
+                                })}
                             </div>
-                            <div class="planning-tab planning-invited">
-                                <h3>Комнаты группы</h3>
+                            <div class="planning-invited">
+                                <div class="planning-tab planning-invited-container">
+                                    <h3>Комнаты группы</h3>
+                                </div>
+                                {Static.tmp.list_records.map((item) => {
+                                    
+                                    if (Static.myStorage._id == item._id) {
+                                        return (
+                                        <div class="planning-mine_item">
+                                            <h3 class="planning-mine_item-title">
+                                                {item.title}
+                                            </h3>
+                                            <p class="planning-mine_item-text">
+                                                {item.text}
+                                            </p>
+                                        </div>
+                                    )
+                                    }
+                                    
+                                })}
                             </div>
-                            <div class="planning-tab planning-create"
-                                onClick={() => {
-                                    Static.modal = true
-                                    initReload()
-                                }}
-                            >
-                                <h3>Создать</h3>
+                            <div class="planning-create">
+                                <div class="planning-tab planning-create-container"
+                                    onClick={() => {
+                                        Static.modal = true
+                                        initReload()
+                                    }}
+                                >
+                                    <h3>Создать</h3>
+                                </div>
                             </div>
                         </div>
                     </div>
