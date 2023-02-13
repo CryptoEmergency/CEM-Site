@@ -187,7 +187,18 @@
 		"dateEvent": "Дата проведения",
 		"careers": "Работа",
 		"modalAllServices": "Все сервисы",
-		"modal_listCoin": "Выбрать монеты"
+		"modal_listCoin": "Выбрать монеты",
+		"requirements": "Требования",
+		"locationAndTypeOfEmployment": "Местоположение и тип занятости",
+		"descriptionVacancy": "Описание вакансии",
+		"aboutProjectVacancy": "О проекте",
+		"toolsVacancy": "Инструменты",
+		"responsibilitiesVacancy": "Обязанности",
+		"requirementsVacancy": "Требования",
+		"willBePlusVacancy": "Будет плюсом",
+		"bonusesVacancy": "Бонусы",
+		"additionalInstructionsVacancy": "Дополнительные инструкции",
+		"contactsVacancy": "Контакты"
 	},
 	"a": {
 		"about": "О нас",
