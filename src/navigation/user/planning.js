@@ -23,12 +23,12 @@ const filterUser = (Static, item) => {
                 }}
             >
                 <div class="planning-user_avatar">
-                    <img 
-                        class="planning-user_avatar-preview" 
-                        src={`/assets/upload/avatar/${item.avatar.name}`} 
+                    <img
+                        class="planning-user_avatar-preview"
+                        src={`/assets/upload/avatar/${item.avatar.name}`}
                     />
                 </div>
-                
+
                 <span class="planning-user_name"> {item.nickname} </span>
             </div>
         )
@@ -46,14 +46,14 @@ const addForm = function (Static) {
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">Заметка</h2>
                             <button
-                            type="button"
-                            class="c-modal__close"
-                            onclick={() => {
-                                Static.activeNotes = null
-                                Static.modal = false
-                                Static.isValid = false
-                                initReload()
-                            }}
+                                type="button"
+                                class="c-modal__close"
+                                onclick={() => {
+                                    Static.activeNotes = null
+                                    Static.modal = false
+                                    Static.isValid = false
+                                    initReload()
+                                }}
                             ></button>
                         </header>
                         <div class="c-modal__body">
@@ -65,13 +65,13 @@ const addForm = function (Static) {
                                     Element={($el) => {
                                         Static.elTitle = $el
                                     }}
-                                    oninput={()=> {
+                                    oninput={() => {
                                         Static.activePlanning.title = Static.elTitle.textContent
                                         Static.elTitle.textContent.length > 0 ? Static.isValid = true : Static.isValid = false
                                         initReload()
                                     }}
                                 >
-                                
+
                                 </div>
                                 <div
                                     class="create_post_calendar create_post_calendar-description"
@@ -80,11 +80,11 @@ const addForm = function (Static) {
                                     Element={($el) => {
                                         Static.elText = $el
                                     }}
-                                    oninput={()=> {
+                                    oninput={() => {
                                         Static.activePlanning.text = Static.elText.textContent
                                     }}
                                 >
-                                
+
                                 </div>
                                 <div class="planning-users">
                                     <input class="planning-users-search" type="search" placeholder={Variable.lang.placeholder.findFriends}
@@ -92,7 +92,7 @@ const addForm = function (Static) {
                                             Static.elInput = $el
                                         }}
                                         oninput={() => {
-                                            
+
                                             Static.filterText = Static.elInput.value.trim().toLowerCase()
                                             if (Static.timerChange) {
                                                 clearTimeout(Static.timerChange)
@@ -118,13 +118,13 @@ const addForm = function (Static) {
                                             )
                                         })}
                                     </div>
-                                    
+
                                     <div class="planning-user">
                                         {Static.dataUsers.list_records.map((user) => {
-                                            if(Static.filterText !== 0 && Static.filterText !== "" && user.nickname.toLowerCase().includes(Static.filterText)) {
+                                            if (Static.filterText !== 0 && Static.filterText !== "" && user.nickname.toLowerCase().includes(Static.filterText)) {
                                                 return (
                                                     <div class="planning-user_list">
-                                                        { filterUser(Static, user)}
+                                                        {filterUser(Static, user)}
                                                     </div>
                                                 )
                                             } else {
@@ -137,31 +137,31 @@ const addForm = function (Static) {
                         </div>
                         <div class="c-modal__footer">
                             <button
-                            class={[
-                                "c-button c-button--gradient2",
-                                !Static.isValid ? "c-button--inactive" : null,
-                            ]}
-                            type="button"
-                            onClick={() => {
-                                if(Static.isValid) {
-                                    if (Static.activeNotes) {
-                                    
-                                        editNotes(Static)
-                                        Static.activeNotes = null
-                                        
+                                class={[
+                                    "c-button c-button--gradient2",
+                                    !Static.isValid ? "c-button--inactive" : null,
+                                ]}
+                                type="button"
+                                onClick={() => {
+                                    if (Static.isValid) {
+                                        if (Static.activeNotes) {
+
+                                            editNotes(Static)
+                                            Static.activeNotes = null
+
+                                        } else {
+
+                                            addNew(Static)
+                                            initReload()
+                                        }
+                                        Static.modal = false
+                                        Static.isValid = false
                                     } else {
-                                        
-                                        addNew(Static)
-                                        initReload()
+                                        null
                                     }
-                                    Static.modal = false
-                                    Static.isValid = false
-                                } else {
-                                    null
-                                }
-                                
-                                
-                            }}
+
+
+                                }}
                             >
                                 <span class="c-button__text">{Variable.lang.button.send}</span>
                             </button>
@@ -196,8 +196,16 @@ const start = function (data, ID) {
         ID,
         fnLoad: async () => {
 
-            Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter})
-            
+            Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter, limit: 10 })
+            let tmp = await fn.restApi.getUserPlanning({ filter: {} })
+            console.log('=695963=', tmp)
+            setTimeout(async () => {
+                // console.log('=93b4bf=', Static.dataUsers.list_records[0]._id)
+                let users = []
+                users.push(Static.dataUsers.list_records[0]._id)
+                let tmpres = await fn.restApi.setUserPlanning.create({ title: "Test2", text: "Текст", users })
+            }, 2000);
+
         },
         fn: () => {
             console.log(Static.user)
