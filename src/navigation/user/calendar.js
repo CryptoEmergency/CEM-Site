@@ -150,22 +150,18 @@ const addForm = function (Static) {
                                 }}
                             >
                                 <span class={["calendar-color-default",
-                                    Static.colorIndex ? `calendar-color-type${Static.colorIndex}` : "calendar-color-type1",
-                                    Static.activeNotes ? `calendar-color-type${Static.activeNotes.color}` : "calendar-color-type1"]}
+                                    Static.colorIndex ? `calendar-color-type${Static.colorIndex}` : "calendar-color-type1"
+                                ]}
                                     tabindex="0">
                                 </span>
                             </div>
                             <ul
                                 class="calendar-color-list"
                                 style={[Static.colorNotes ? "display: flex" : null]}
-                                Element={($el) => {
-                                    Static.elListColor = $el
-                                }}
                                 onClick={(e) => {
+                                    Static.colorIndex = e.target.id
                                     if (Static.activeNotes) {
-                                        Static.activeNotes.color = e.target.id
-                                    } else {
-                                        Static.colorIndex = e.target.id
+                                        Static.activeNotes.color = Static.colorIndex
                                     }
                                     Static.colorNotes = false
                                     initReload()
@@ -358,7 +354,6 @@ const start = function (data, ID) {
     Static.elNotes = null
     Static.activeNotes = null
     Static.colorNotes = false
-    Static.elListColor = null
     Static.colorIndex = null
     Static.color = null
 
@@ -370,7 +365,7 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
-            // console.log(Static.elTitle)
+            // console.log(Static.activeNotes)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
@@ -409,6 +404,7 @@ const start = function (data, ID) {
                                         }
 
                                         Static.activeMonthClone = Static.activeMonth;
+                                        Static.active = null
 
                                         initReload()
                                     }}
@@ -516,7 +512,6 @@ const start = function (data, ID) {
                                                 onclick={() => {
                                                     fn.modals.ModalConfirmAction({
                                                         action: async () => {
-                                                            // Static.active = false
                                                             deleteNote(Static, { _id: item._id, index, active: false })
                                                             fn.modals.close("ModalConfirmAction")
                                                         },
@@ -540,10 +535,9 @@ const start = function (data, ID) {
                                 } else {
                                     Static.elNotes = null
                                 }
-
                             })}
                         </div>
-                        <div class="modals-test">
+                        <div class="modals-calendar">
                             {addForm(Static)}
                         </div>
                     </div>

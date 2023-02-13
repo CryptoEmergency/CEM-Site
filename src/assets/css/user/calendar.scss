@@ -67,6 +67,7 @@
     }
 
     button {
+        display: flex;
         border: 0;
         background-color: transparent;
         cursor: pointer;
@@ -272,6 +273,10 @@
     display: block;
     margin-top: 40px;
 
+    @media(max-width: 490px) {
+        margin-top: 15px;
+    }
+
     &_item {
         position: relative;
         display: flex;
@@ -289,6 +294,7 @@
 
         @media(max-width: 490px) {
             height: 48px;
+            margin-bottom: 10px;
         }
 
         &-date {
@@ -338,33 +344,42 @@
             }
         }
 
+        &-delete,
+        &-edit {
+            position: absolute;
+            top: 10px;
+            display: block;
+            opacity: 0.8;
+            cursor: pointer;
+
+            @media(max-width: 490px) {
+                top: 5px;
+            }
+
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+
         &-delete {
-            display: none;
+            right: 10px;
+            width: 14px;
+
+            @media(max-width: 490px) {
+                right: 5px;
+                width: 12px;
+            }
         }
 
         &-edit {
-            display: none;
+            right: 40px;
+            width: 16px;
+
+            @media(max-width: 490px) {
+                right: 28px;
+            }
         }
     }
-}
-
-.calendar-notes_item:hover .calendar-notes_item-delete,
-.calendar-notes_item:hover .calendar-notes_item-edit {
-    position: absolute;
-    top: 10px;
-    display: block;
-    opacity: 0.7;
-    cursor: pointer;
-}
-
-.calendar-notes_item:hover .calendar-notes_item-delete {
-    right: 10px;
-    width: 14px;
-}
-
-.calendar-notes_item:hover .calendar-notes_item-edit {
-    right: 40px;
-    width: 16px;
 }
 
 .create_post_calendar {
@@ -471,4 +486,9 @@
     &-type6 {
         background: linear-gradient(125.97deg, #9B51E0 -0.04%, #E051D2 121.46%);
     }
+}
+
+.modals-calendar {
+    position: relative;
+    z-index: 10000;
 }
