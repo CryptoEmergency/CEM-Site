@@ -16,6 +16,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
     let [Static] = fn.GetParams({ preview, uploadPreviewImage, ID })
     let close = true
     let mediaInputs
+    let elLoaderVisible = false
 
     const sendPhotoOne = async function (Static, crooper, originalImage) {
         if (!crooper) {
@@ -53,11 +54,15 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                     }
                     Static.preview = mediaInputs.value[numItem]
                     Static.isValid = true
+                    elLoaderVisible = false
+                   
                     // console.log('=debd71=Static.preview=', Static.preview)
                     // console.log('=debd71= mediaInputs.value =', mediaInputs.value)
                     initReload()
                 },
                 async function (e) {
+                    elLoaderVisible = true
+                    initReload()
                     let contentLength;
                     if (e.lengthComputable) {
                         contentLength = e.total;
@@ -69,6 +74,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                             10
                         );
                     }
+
                     if (mediaInputs.value[numItem].upload === mediaInputs.value[numItem].size && mediaInputs.value[numItem].upload !== 0) {
                         mediaInputs.value.splice(numItem, 1);
                         initReload()
@@ -183,7 +189,68 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                                                     }}
                                                 >
                                                     <figure class="c-tiles__card">
-                                                        <img class="c-tiles__image" src={`/assets/upload/posts/${imgFile.previewName ? imgFile.previewName : imgFile.name}`} width="100" height="100" />
+
+                                                        <img
+                                                            class="c-tiles__image fullsize media"
+                                                            src={
+                                                                imgFile.src !== undefined
+                                                                    ? imgFile.src
+                                                                    : `/assets/upload/posts/${imgFile.previewName ? imgFile.previewName : imgFile.name}`
+                                                            }
+                                                        />
+                                                        {
+                                                            imgFile.size !== undefined && elLoaderVisible
+                                                                ?
+                                                                <div>
+                                                                    <div class="circle-wrap">
+                                                                        <div class="circle">
+                                                                            <div
+                                                                                class="mask full"
+                                                                                style={`transform: rotate( ${(360 / 200) *
+                                                                                    Math.round((imgFile.upload / imgFile.size) * 100)
+                                                                                    }deg`}
+                                                                            >
+                                                                                <div
+                                                                                    class="fill"
+                                                                                    style={`transform: rotate( ${(360 / 200) *
+                                                                                        Math.round((imgFile.upload / imgFile.size) * 100)
+                                                                                        }deg`}
+                                                                                ></div>
+                                                                            </div>
+                                                                            <div class="mask half">
+                                                                                <div
+                                                                                    class="fill"
+                                                                                    style={`transform: rotate( ${(360 / 200) *
+                                                                                        Math.round((imgFile.upload / imgFile.size) * 100)
+                                                                                        }deg`}
+                                                                                ></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="stop_loading"
+                                                                        onclick={() => {
+                                                                            Static.mediaInputs.value[index].upload =
+                                                                                Static.mediaInputs.value[index].size;
+                                                                            Static.mediaInputs.value.splice(index, 1);
+                                                                            if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
+                                                                                Static.isValid = false;
+                                                                            }
+                                                                            initReload();
+                                                                        }}
+                                                                    ></div>
+                                                                </div>
+                                                                :
+                                                                null
+                                                        }
+                                                        {/* <img
+                                                            class="c-tiles__image fullsize media"
+                                                            src={
+                                                                `/assets/upload/posts/${imgFile.previewName ? imgFile.previewName : imgFile.name}`
+                                                            }
+                                                            width="100"
+                                                            height="100"
+                                                        />
                                                         {
                                                             imgFile.size === undefined
                                                                 ?
@@ -222,7 +289,75 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                                                                     <img class="" src={svg.settings_icon} width="32" height="32" />
                                                                 </div>
                                                                 : null
+                                                            imgFile.size !== undefined
+                                                                ?
+                                                                <div class="circle-wrap">
+                                                                    <div class="circle">
+                                                                        <div
+                                                                            class="mask full"
+                                                                            style={`transform: rotate( ${(360 / 200) *
+                                                                                Math.round((imgFile.upload / imgFile.size) * 100)
+                                                                                }deg`}
+                                                                        >
+                                                                            <div
+                                                                                class="fill"
+                                                                                style={`transform: rotate( ${(360 / 200) *
+                                                                                    Math.round((imgFile.upload / imgFile.size) * 100)
+                                                                                    }deg`}
+                                                                            ></div>
+                                                                        </div>
+                                                                        <div class="mask half">
+                                                                            <div
+                                                                                class="fill"
+                                                                                style={`transform: rotate( ${(360 / 200) *
+                                                                                    Math.round((imgFile.upload / imgFile.size) * 100)
+                                                                                    }deg`}
+                                                                            ></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                :
+                                                                null
                                                         }
+                                                        {
+                                                            imgFile.size === undefined
+                                                                ?
+                                                                <div
+                                                                    class="messages_settings"
+                                                                    title={Variable.lang.text.settings}
+                                                                    onclick={(e) => {
+                                                                        let author = Variable.myInfo
+                                                                        let items = [
+                                                                            {
+                                                                                text: Variable.lang.select.delete,
+                                                                                type: "delete",
+                                                                                color: "red",
+                                                                                onclick: function (e) {
+                                                                                    e.stopPropagation();
+                                                                                    e.preventDefault();
+                                                                                    mediaInputs.value.splice(index, 1);
+                                                                                    // Static.originalImage.splice(index, 1);
+                                                                                    if (mediaInputs.value.length == 0) {
+                                                                                        //     Static.mediaInputs.selectAspect = null;
+                                                                                        mediaInputs.show = false
+                                                                                        //     if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                                                                                        Static.isValid = false;
+                                                                                        Static.preview.name = null
+                                                                                    }
+                                                                                    // }
+                                                                                    initReload();
+                                                                                }
+                                                                            },
+                                                                        ]
+                                                                        e.stopPropagation();
+                                                                        e.preventDefault();
+                                                                        Variable.SetModals({ name: "ModalItemsMenu", data: { items, author } }, true);
+                                                                    }}
+                                                                >
+                                                                    <img class="" src={svg.settings_icon} width="32" height="32" />
+                                                                </div>
+                                                                : null
+                                                        } */}
                                                     </figure>
                                                 </div>
                                             )

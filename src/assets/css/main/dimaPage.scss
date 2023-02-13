@@ -1,4 +1,23 @@
+ul{
+  list-style: none;
+}
 .admin-inner {
   max-width: 1240px;
   margin: 0px auto;
+}
+.admin-wrap{
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: auto;
+  grid-gap: 25px;
+}
+.content-hidden{
+  display: none;
+}
+.sidebar{
+  background: #363B4B;
+}
+.list-item{
+  padding: 20px 10px;
+  border-bottom: 1px solid #000;
 }

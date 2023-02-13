@@ -9,7 +9,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 
-let dateDrop = false
+let dateDrop, showFilters = false
 let listStatus = {}
 const listCategories = [
   {
@@ -191,89 +191,79 @@ const start = function (data, ID) {
                     class="filter-search_icon"
                     src={svg.filter}
                     onclick={() => {
-                      if (Static.filterContent.dataset.active == "true") {
-                        Static.filterContent.dataset.active = false
-                        Static.filterContent.style = "height: 0px"
-                      } else {
-                        Static.filterContent.dataset.active = true
-                        Static.filterContent.style = ""
-                        let h = Static.filterContent.offsetHeight
-                        Static.filterContent.style = `height: ${h}px; margin-bottom: 20px`
-                      }
-                      console.log('=e1d085=', Static.filterContent.dataset.active)
+                      showFilters = !showFilters
+                      initReload()
                     }}></img>
                 </div>
 
+                <div hidden={showFilters ? false : true}>
+                  <div class="filter-dropdowns" >
 
-                <div class="filter-dropdowns"
-                  data-active={false}
-                  style={"height: 0px"}
-                  Element={($el) => {
-                    Static.filterContent = $el;
-                  }}>
+                    <div class="filter-dropdown_date">
 
-                  <div class="filter-dropdown_date">
+                      <span class="filter-name">{Variable.lang.span.sort}</span>
+                      {
 
-                    <span class="filter-name">{Variable.lang.span.sort}</span>
-                    {
+                        <div class="dropdown">
+                          <div
+                            class={["dropdown-title", "dropdown-title_date"]}
+                            onclick={() => {
+                              dateDrop = !dateDrop
+                              initReload()
+                            }}>
+                            {Variable.lang.select.byDate}
+                            <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
+                              <img src={svg["arrow-select"]}></img>
+                            </span>
+                          </div>
 
-                      <div class="dropdown">
-                        <div
-                          class={["dropdown-title", "dropdown-title_date"]}
-                          onclick={() => {
-                            dateDrop = !dateDrop
-                            initReload()
-                          }}>
-                          {Variable.lang.select.byDate}
-                          <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
-                            <img src={svg["arrow-select"]}></img>
-                          </span>
+                          <ul
+                            hidden={dateDrop ? false : true}
+                            class="dropdown-list"
+                            onclick={() => {
+                              dateDrop = !dateDrop
+                              initReload()
+                            }}
+                          >
+                            <li class="dropdown-list_el">{Variable.lang.select.byDate}</li>
+                          </ul>
+
+
                         </div>
-                        <ul
-                          class={["dropdown-list", dateDrop ? "dropdown-list_show" : null]}
-                          hidden={dateDrop ? false : true}
-                          onclick={() => {
-                            dateDrop = !dateDrop
-                            initReload()
-                          }}
-                        >
-                          <li class="dropdown-list_el">{Variable.lang.select.byDate}</li>
-                        </ul>
-                      </div>
-                    }
+                      }
 
 
-                    <img
-                      src={Static.filtersSearch.sortDate ? svg["filter_arrow_top"] : svg["filter_arrow_bottom"]}
-                      class={["arrow-sort"]}
-                      onclick={async () => {
-                        Static.filtersSearch.sortDate = !Static.filtersSearch.sortDate
-                        Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-                        initReload()
-                      }}
-                    ></img>
+                      <img
+                        src={Static.filtersSearch.sortDate ? svg["filter_arrow_top"] : svg["filter_arrow_bottom"]}
+                        class={["arrow-sort"]}
+                        onclick={async () => {
+                          Static.filtersSearch.sortDate = !Static.filtersSearch.sortDate
+                          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+                          initReload()
+                        }}
+                      ></img>
+
+                    </div>
+
+                    <div class="filter-check">
+                      <input
+                        type="checkbox"
+                        id="cryptoCheck"
+                        checked={Static.filtersSearch.filterCheck ? true : false}
+                        class="custom-checkbox"
+                        required="required"
+                        onChange={async () => {
+                          Static.filtersSearch.filterCheck = !Static.filtersSearch.filterCheck
+
+                          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+                          initReload()
+                        }}>
+                      </input>
+                      <label for="cryptoCheck" class="filter-item">{Variable.lang.select.verified} Crypto Emergency</label>
+                    </div>
 
                   </div>
-
-                  <div class="filter-check">
-                    <input
-                      type="checkbox"
-                      id="cryptoCheck"
-                      checked={Static.filtersSearch.filterCheck ? true : false}
-                      class="custom-checkbox"
-                      required="required"
-                      onChange={async () => {
-                        Static.filtersSearch.filterCheck = !Static.filtersSearch.filterCheck
-
-                        Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-                        initReload()
-                      }}>
-                    </input>
-                    <label for="cryptoCheck" class="filter-item">{Variable.lang.select.verified} Crypto Emergency</label>
-                  </div>
-
                 </div>
-
               </div>
 
               <div class="list-ico_wrap">

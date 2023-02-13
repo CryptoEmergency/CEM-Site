@@ -616,6 +616,10 @@
                     box-sizing: border-box;
                 }
             }
+
+            &__image {
+                width: 100%;
+            }
         }
 
         .messages_settings {

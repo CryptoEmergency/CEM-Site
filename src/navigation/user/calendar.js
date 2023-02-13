@@ -53,7 +53,7 @@ const monthHandler = (Static, prev = true) => {
 };
 
 const addNew = async function (Static) {
-    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.text, showDate: Static.active, color: "test" })
+    const response = await fn.restApi.setUserCalendar.create({ title: Static.active.title, text: Static.active.text, showDate: Static.active, color: Static.colorIndex })
     if (response && response.status == "ok") {
         if (response.list_records && response.list_records[0]) {
             Static.notesCalendar.list_records.unshift(response.list_records[0])
@@ -73,11 +73,11 @@ const editNotes = async function (Static) {
     initReload()
 }
 
-const randomColor = (colors) => {
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+// const randomColor = (colors) => {
+//     const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-    return randomColor;
-}
+//     return randomColor;
+// }
 
 const addForm = function (Static) {
     if (Static.modal == true) {
@@ -107,10 +107,11 @@ const addForm = function (Static) {
                                     Element={($el) => {
                                         Static.elTitle = $el
                                     }}
+                                    textContent={Static.activeNotes ? Static.activeNotes.title : Static.active.title}
                                     oninput={() => {
                                         if (Static.activeNotes) {
                                             Static.activeNotes.title = Static.elTitle.textContent
-
+                                            // initReload()
                                         } else {
                                             Static.active.title = Static.elTitle.textContent
                                         }
@@ -118,7 +119,6 @@ const addForm = function (Static) {
                                         initReload()
                                     }}
                                 >
-                                    {Static.activeNotes ? Static.activeNotes.title : null}
                                 </div>
                                 <div
                                     class="create_post_calendar create_post_calendar-description"
@@ -150,18 +150,19 @@ const addForm = function (Static) {
                                 }}
                             >
                                 <span class={["calendar-color-default",
-                                    Static.colorIndex ? `calendar-color-type${Static.colorIndex}` : "calendar-color-type1"]}
+                                    Static.colorIndex ? `calendar-color-type${Static.colorIndex}` : "calendar-color-type1"
+                                ]}
                                     tabindex="0">
                                 </span>
                             </div>
                             <ul
                                 class="calendar-color-list"
                                 style={[Static.colorNotes ? "display: flex" : null]}
-                                Element={($el) => {
-                                    Static.elListColor = $el
-                                }}
                                 onClick={(e) => {
                                     Static.colorIndex = e.target.id
+                                    if (Static.activeNotes) {
+                                        Static.activeNotes.color = Static.colorIndex
+                                    }
                                     Static.colorNotes = false
                                     initReload()
                                 }}
@@ -190,22 +191,19 @@ const addForm = function (Static) {
                                 onClick={() => {
                                     if (Static.isValid) {
                                         if (Static.activeNotes) {
-
                                             editNotes(Static)
                                             Static.activeNotes = null
-
                                         } else {
-
                                             addNew(Static)
                                             initReload()
                                         }
+
                                         Static.modal = false
                                         Static.isValid = false
+
                                     } else {
                                         null
                                     }
-
-
                                 }}
                             >
                                 <span class="c-button__text">{Variable.lang.button.send}</span>
@@ -356,20 +354,18 @@ const start = function (data, ID) {
     Static.elNotes = null
     Static.activeNotes = null
     Static.colorNotes = false
-    Static.elListColor = null
     Static.colorIndex = null
+    Static.color = null
 
     load({
         ID,
         fnLoad: async () => {
 
-
-
             Static.notesCalendar = await fn.restApi.getUserCalendar({ filter: {} })
             console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
-            // console.log(Static.cont)
+            // console.log(Static.activeNotes)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
@@ -408,6 +404,7 @@ const start = function (data, ID) {
                                         }
 
                                         Static.activeMonthClone = Static.activeMonth;
+                                        Static.active = null
 
                                         initReload()
                                     }}
@@ -446,11 +443,10 @@ const start = function (data, ID) {
                             })}
                         </div>
                         <div class="calendar-container">
-                            {Static.tmpTest.map((item, index) => {
+                            {Static.tmpTest.map((item) => {
                                 return (
                                     <div
                                         class="calendar-cell"
-                                        // id={index + 1}
                                         onclick={() => {
                                             Static.active = item
                                             // notesScroll(Static)
@@ -473,7 +469,7 @@ const start = function (data, ID) {
                                         </span>
                                         <div>
                                             <div class={["calendar-text",
-                                                item && item.title != "" ? "calendar-text--show" : null
+                                                item && item.title != "" ? "calendar-text--show" : null,
                                             ]}
                                             // style={[ Static.dateNotes ? `background: ${randomColor(listColors)}` : null]}
                                             >
@@ -498,10 +494,12 @@ const start = function (data, ID) {
                             }}
                         >
                             {Static.notesCalendar.list_records.map((item, index) => {
-                                if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D")) {
+                                if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D") && !Static.modal) {
                                     return (
                                         <div
-                                            class="calendar-notes_item"
+                                            class={["calendar-notes_item",
+                                                    item.color ? `calendar-color-type${item.color}` : null,
+                                            ]}
                                         >
                                             <div class="calendar-notes_item-date">
                                                 {Helpers.moment(item.showDate).format("D")}
@@ -514,7 +512,6 @@ const start = function (data, ID) {
                                                 onclick={() => {
                                                     fn.modals.ModalConfirmAction({
                                                         action: async () => {
-                                                            // Static.active = false
                                                             deleteNote(Static, { _id: item._id, index, active: false })
                                                             fn.modals.close("ModalConfirmAction")
                                                         },
@@ -529,7 +526,7 @@ const start = function (data, ID) {
                                                 onClick={() => {
                                                     Static.activeNotes = item
                                                     Static.modal = true
-
+                                                    item.title.length > 0 ? Static.isValid = true : Static.isValid = false
                                                     initReload()
                                                 }}
                                             />
@@ -538,10 +535,9 @@ const start = function (data, ID) {
                                 } else {
                                     Static.elNotes = null
                                 }
-
                             })}
                         </div>
-                        <div class="modals-test">
+                        <div class="modals-calendar">
                             {addForm(Static)}
                         </div>
                     </div>

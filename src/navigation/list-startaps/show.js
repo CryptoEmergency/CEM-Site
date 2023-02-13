@@ -160,32 +160,23 @@ const start = function (data, ID) {
             <img class="startap-img" src={svg['startaps-inner/figure']} alt={Static.item.name}></img>
 
             <div class="roadmap appearience">
-              <h2 class="startap-title">{Variable.lang.h.road_map}</h2>
+              {Static.item.roadMap.length ? <h2 class="startap-title">{Variable.lang.h.road_map}</h2> : null}
+
+
+
               <div class="roadmap-inner">
-                <div class="roadmap-item">
-                  <div class="roadmap-item_year fiolet"><span>2</span>022</div>
-                  <p class="roadmap-item_text">All cash balances are covered by FDIC insurance, up to a maximum of $250,000.</p>
-                </div>
-                <div class="roadmap-item">
-                  <div class="roadmap-item_year orange"><span>2</span>023</div>
-                  <p class="roadmap-item_text">All cash balances are covered by FDIC insurance, up to a maximum of $250,000.</p>
-                </div>
-                <div class="roadmap-item">
-                  <div class="roadmap-item_year blue"><span>2</span>024</div>
-                  <p class="roadmap-item_text">All cash balances are covered by FDIC insurance, up to a maximum of $250,000.</p>
-                </div>
-                <div class="roadmap-item">
-                  <div class="roadmap-item_year red"><span>2</span>025</div>
-                  <p class="roadmap-item_text">All cash balances are covered by FDIC insurance, up to a maximum of $250,000.</p>
-                </div>
-                <div class="roadmap-item">
-                  <div class="roadmap-item_year mint"><span>2</span>026</div>
-                  <p class="roadmap-item_text">All cash balances are covered by FDIC insurance, up to a maximum of $250,000.</p>
-                </div>
-                <div class="roadmap-item">
-                  <div class="roadmap-item_year lightBlue"><span>2</span>026</div>
-                  <p class="roadmap-item_text">All cash balances are covered by FDIC insurance, up to a maximum of $250,000.</p>
-                </div>
+                {
+                  Static.item.roadMap.length ?
+                    Static.item.roadMap.map((item) => {
+                      return (
+                        <div class="roadmap-item">
+                          <div class="roadmap-item_year fiolet">{item.year}</div>
+                          <p class="roadmap-item_text">{item.description}</p>
+                        </div>
+                      )
+                    })
+                    : null
+                }
               </div>
             </div>
 
