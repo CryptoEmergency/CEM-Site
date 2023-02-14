@@ -86,15 +86,26 @@ const start = function (data, ID = "mainBlock") {
                 }, true)
             }
             Static.careers = {
-                resume: [
+                freelance: [
                     {
-                        position: "Make a landing page on the platform alp constructor",
-                        about: "We need a written usability consultation on the design of the main and 1 typical internal pages of the site. It is important to know UX design, seo promotion, the ability to.. ",
-                        date: "12 минут назад",
-                        budget: 5000,
+                        position: "Модернизация BackEnd части сайта",
+                        about: `Необходимо улучшить BackEnd часть сайта рекламно-производственной компании Lovi. Сайт lovigifts.ru
+                            
+                            Бэк - Yii2, DB - mysql.
+                            
+                            Задачи:
+                            1. Доработать функционал поисковой строки:
+                            - поиск должен осуществляться среди всего наименования товара, а не последовательно (Например, есть товар «Флешка Hoods синяя». Сейчас поиск реализован так, что если ввести флешка синяя, результат не найден, а должен отображаться);
+                            - расширение области поиска по категориям, к которым относится товар;
+                            - ревизия функции поиска на предмет её валидности (та ли группа товаров отражается при поиске).
+                            2. Доработать функции сортировки:
+                            - сортировка группы товаров по цвету, экологичности.`,
+                        date: "13 февраля 2023, 22:30",
+                        budget: "5000 руб",
+                        views: 0,
                         urgency: true,
                         applicant: {
-                            _id: "62d7e80490edc15f690791b0",
+                            _id: "62d7e80490edc15f690791b1",
                             avatar: {
                                 name: "fb15a09b752156b6e3904bd84fdd3d6d.png"
                             },
@@ -108,7 +119,8 @@ const start = function (data, ID = "mainBlock") {
                                 level: 24,
                                 comments: 12,
                                 view: 224,
-                            }
+                            },
+                            contacts: "+79184253688, можно писать в телегу: https://t.me/AntonKh"
                         }
                     },
                     {
@@ -116,6 +128,7 @@ const start = function (data, ID = "mainBlock") {
                         about: "We need a written usability consultation on the design of the main and 1 typical internal pages of the site. It is important to know UX design, seo promotion, the ability to.. ",
                         date: "12 минут назад",
                         budget: 5000,
+                        views: 15,
                         urgency: false,
                         applicant: {
                             _id: "62d7e80490edc15f690791b0",
@@ -139,6 +152,7 @@ const start = function (data, ID = "mainBlock") {
                         about: "We need a written usability consultation on the design of the main and 1 typical internal pages of the site. It is important to know UX design, seo promotion, the ability to.. ",
                         date: "12 минут назад",
                         budget: 5000,
+                        views: 7,
                         urgency: true,
                         applicant: {
                             _id: "62d7e80490edc15f690791b0",
@@ -400,15 +414,25 @@ const start = function (data, ID = "mainBlock") {
                                     </div>
                                 </div>
 
-                                {/* Список резюме */}
+                                {/* Список заказов */}
                                 <ul class="c-careers__list">
                                     {
-                                        Static.careers.resume && Static.careers.resume.length ?
-                                            Static.careers.resume.map((item, index) => {
+                                        Static.careers.freelance && Static.careers.freelance.length ?
+                                            Static.careers.freelance.map((item, index) => {
                                                 return (
                                                     <li>
-                                                        <a href="" class="c-careers__resume">
-                                                            <h4 class="c-careers__resposition">{item.position}</h4>
+                                                        <div class="c-careers__resume">
+                                                            <a
+                                                                href={`/careers/freelance/${item.applicant._id}`}
+                                                                class="c-careers__resposition"
+                                                                onclick={function(e) {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    fn.siteLinkModal(e, { title: "Фриланс заказ", freelance: item })
+                                                                }}
+                                                            >
+                                                                <h4 class="c-careers__">{item.position}</h4>
+                                                            </a>
                                                             <p class="c-careers__resabout">{item.about}</p>
                                                             <date datetime="" class="c-careers__resdate">{item.date}</date>
                                                             <Avatar author={item.applicant} parent={'c-careers__resume'} nickName={true} speciality={item.applicant.profession} />
@@ -438,7 +462,7 @@ const start = function (data, ID = "mainBlock") {
                                                                         : null
                                                                 }
                                                             </footer>
-                                                        </a>
+                                                        </div>
                                                     </li>
                                                 )
                                             })

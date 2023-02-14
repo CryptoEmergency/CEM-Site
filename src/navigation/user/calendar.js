@@ -356,6 +356,7 @@ const start = function (data, ID) {
     Static.colorNotes = false
     Static.colorIndex = null
     Static.color = null
+    Static.currentDay = null
 
     load({
         ID,
@@ -365,7 +366,7 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
-            // console.log(Static.activeNotes)
+            // console.log()
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
@@ -378,7 +379,7 @@ const start = function (data, ID) {
                                 }}
                                 style="cursor: default"
                             >
-                                {month.format("MMMM")}
+                                {Helpers.moment().format("D MMMM")}
                                 <span> {month.format("YYYY")}</span>
                             </h2>
                             <div class="calendar-subtitle">
@@ -405,6 +406,7 @@ const start = function (data, ID) {
 
                                         Static.activeMonthClone = Static.activeMonth;
                                         Static.active = null
+                                        Static.currentDay = null
 
                                         initReload()
                                     }}
@@ -444,11 +446,15 @@ const start = function (data, ID) {
                         </div>
                         <div class="calendar-container">
                             {Static.tmpTest.map((item) => {
+                                if (isCurrentDay(item) && Static.active == null && Static.renderMonth == false && Static.renderYear == false) {
+                                    Static.currentDay = Helpers.moment(item).format("YYYY-MM-D")
+                                }
                                 return (
                                     <div
                                         class="calendar-cell"
                                         onclick={() => {
                                             Static.active = item
+                                            Static.currentDay = null
                                             // notesScroll(Static)
                                             initReload()
                                         }}
@@ -468,20 +474,19 @@ const start = function (data, ID) {
                                             {item.format('D')}
                                         </span>
                                         <div>
-                                            <div class={["calendar-text",
-                                                item && item.title != "" ? "calendar-text--show" : null,
-                                            ]}
-                                            // style={[ Static.dateNotes ? `background: ${randomColor(listColors)}` : null]}
-                                            >
-                                                <p>
-                                                    {/* {!item
-                                                    ?
-                                                    null
-                                                    :
-                                                    item.title
-                                                } */}
-                                                </p>
-                                            </div>
+                                        {Static.notesCalendar.list_records.map((dayItem) => {
+                                            if (Helpers.moment(dayItem.showDate).format("D") == Helpers.moment(item).format("D") && Static.repeat !== Helpers.moment(dayItem.showDate).format("D")) {
+                                                Static.repeat = Helpers.moment(dayItem.showDate).format("D")
+                                                return (
+                                                    <div class={["calendar-day_fond",
+                                                        item && item.title != "" ? "calendar-day_fond--show" : null,
+                                                        Helpers.moment(dayItem.showDate).format("YYYY-MM-D") == Helpers.moment(item).format("YYYY-MM-D") ? `calendar-color-type${dayItem.color}` : null,
+                                                    ]}
+                                                    >
+                                                    </div>
+                                                )
+                                            }
+                                        })}
                                         </div>
                                     </div>
                                 )
@@ -493,8 +498,26 @@ const start = function (data, ID) {
                                 Static.elNotes = $el
                             }}
                         >
+                            {
+                                () => {
+                                    if (Static.active) {
+                                        return (
+                                            <div class="calendar-notes-append"
+                                                onClick={() => {
+                                                    Static.modal = true
+                                                    initReload()
+                                                }}
+                                            >
+                                                <span>
+                                                    Добавить новую заметку
+                                                </span>
+                                            </div>
+                                        )
+                                    }
+                                }
+                            }
                             {Static.notesCalendar.list_records.map((item, index) => {
-                                if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D") && !Static.modal) {
+                                if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D") && !Static.modal || Static.currentDay == Helpers.moment(item.showDate).format("YYYY-MM-D") && !Static.modal) {
                                     return (
                                         <div
                                             class={["calendar-notes_item",
