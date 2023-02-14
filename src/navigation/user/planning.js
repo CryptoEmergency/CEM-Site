@@ -14,7 +14,7 @@ const testUser = async function (Static) {
     let users = []
     users.push("63ea23b1842580e0055a6a8c")
     let tmpres = await fn.restApi.setUserPlanning.create({ title: Static.activePlanning.title, text: Static.activePlanning.text, users })
-    
+
     if (tmpres.status === 'ok') {
         console.log('ok')
         Static.modal = false
@@ -214,7 +214,7 @@ const start = function (data, ID) {
         ID,
         fnLoad: async () => {
 
-            Static.tmp = await fn.restApi.getUserPlanning({ filter: {} })
+            Static.tmp = await fn.restApi.getUserPlanning({ filter: { users: "62baa92cf558ee4424f1f736" } })
             console.log('=695963=', Static.tmp)
 
             Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter, limit: 10 })
@@ -248,20 +248,20 @@ const start = function (data, ID) {
                                     <h3>Комнаты группы</h3>
                                 </div>
                                 {Static.tmp.list_records.map((item) => {
-                                    
+
                                     if (Static.myStorage._id == item._id) {
                                         return (
-                                        <div class="planning-mine_item">
-                                            <h3 class="planning-mine_item-title">
-                                                {item.title}
-                                            </h3>
-                                            <p class="planning-mine_item-text">
-                                                {item.text}
-                                            </p>
-                                        </div>
-                                    )
+                                            <div class="planning-mine_item">
+                                                <h3 class="planning-mine_item-title">
+                                                    {item.title}
+                                                </h3>
+                                                <p class="planning-mine_item-text">
+                                                    {item.text}
+                                                </p>
+                                            </div>
+                                        )
                                     }
-                                    
+
                                 })}
                             </div>
                             <div class="planning-create">
