@@ -130,12 +130,14 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
             : parent == "c-comments__avacomment" ? "c-comments__avacomment"
               : parent == "lenta" ? "lenta_avatar"
                 : parent == "c-message__avatar" ? "c-message__avatar"
-                  : "comment_avatar"}
+                  : parent == "c-careers__resume" ? "c-careers__avatar"
+                  : parent == "c-freelance" ? "c-freelance__avatar"
+                    : "comment_avatar"}
       `}
       // onclick={Helpers.siteLink}
       onclick={async (e) => {
 
-        //     e.preventDefault();
+        // e.preventDefault();
         // e.stopPropagation();
         // return
         if (myProfile) {
