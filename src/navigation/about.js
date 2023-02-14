@@ -9,31 +9,90 @@ import "swiper/css/bundle";
 const team = [
   {
     name: "Ян Кривоносов",
+    foto: "startaps-inner/team1",
     position: "Основатель проекта «Сrypto Emergency»",
   },
   {
     name: "Игорь Еньшин",
+    foto: "startaps-inner/team4",
     position: "Web-программист",
   },
   {
     name: "Анна Рыжкова",
+    foto: "startaps-inner/team2",
     position: "Основатель проекта «Сrypto Emergency»",
   },
   {
     name: "Дмитрий Белов",
+    foto: "startaps-inner/team3",
     position: "Основатель проекта «Сrypto Emergency»",
   },
   {
     name: "Анна Шалбузова",
+    foto: "startaps-inner/team7",
     position: "Основатель проекта «Сrypto Emergency»",
   },
   {
     name: "Дмитрий Белов",
+    foto: "startaps-inner/team3",
     position: "Основатель проекта «Сrypto Emergency»",
   },
 ];
 
+function showTeam(team) {
+  return team.map((item) => {
+    return (
+      <div class="team-item swiper-slide">
+        <div class="team-img">
+          <img src={images[item.foto]}></img>
+        </div>
+        <h5>{item.name}</h5>
+        <span>{item.position}</span>
+      </div>
+    );
+  });
+}
+
 const start = function (data, ID) {
+  const swiperGo = function (index) {
+    let swiperItem = new Swiper(".mySwiper", {
+      // grid: {
+      //   rows: 2,
+      // },
+      spaceBetween: 30,
+      autoplay: {
+        delay: 3000,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      breakpoints: {
+        100: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        620: {
+          //600
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 50,
+        },
+        910: {
+          //800
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1240: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+      },
+      spaceBetween: 20,
+    });
+  };
   init(
     null,
     () => {
@@ -67,6 +126,79 @@ const start = function (data, ID) {
           <div class="c-aboutus__content c-container">
             <div class="c-aboutus__goals c-goals">
               <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
+
+              {/* <div class="list-goals">
+                <div class="list-goals_item crypto">
+                  <div class="goal-img">
+                    <img
+                      alt={Variable.lang.p.goalOne}
+                      src={svg["icon/about_us_portfolio"]}
+                    ></img>
+                  </div>
+
+                  <div class="goal-content">
+                    <h4>{Variable.lang.p.goalOne}</h4>
+                    <div class="goal-content_desc">
+                      {Variable.lang.p.goalOneDesc}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="list-goals_item unite">
+                  <div class="goal-img">
+                    <img
+                      alt={Variable.lang.p.goalTwo}
+                      src={svg["icon/about_us_protection"]}
+                    ></img>
+                  </div>
+
+                  <div class="goal-content">
+                    <h4>{Variable.lang.p.goalTwo}</h4>
+                    <div class="goal-content_desc">
+                      {Variable.lang.p.goalTwoDesc}
+                    </div>
+                  </div>
+                </div>
+                <div class="list-goals_item access">
+                  <div class="goal-img">
+                    <img
+                      alt={Variable.lang.p.goalThree}
+                      src={svg["icon/about_us_cryptocurrencies"]}
+                    ></img>
+                  </div>
+
+                  <div class="goal-content">
+                    <h4>{Variable.lang.p.goalThree}</h4>
+                    <div class="goal-content_desc">
+                      {Variable.lang.p.goalThreeDesc}
+                    </div>
+                  </div>
+                </div>
+                <div class="list-goals_item meta">
+                  <div class="goal-img">
+                    <img
+                      alt={Variable.lang.p.goalFour}
+                      src={svg["icon/about_us_quality"]}
+                    ></img>
+                  </div>
+
+                  <div class="goal-content">
+                    <h4>{Variable.lang.p.goalFour}</h4>
+                    <div class="goal-content_desc">
+                      {Variable.lang.p.goalFourDesc}
+                    </div>
+                  </div>
+                </div>
+              </div> 
+
+              <div class="team">
+                <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
+                <div class="swiper mySwiper" After={() => swiperGo()}>
+                  <div class="swiper-wrapper">{showTeam(team)}</div>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>*/}
+
               <div class="c-goals__list">
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">
@@ -113,6 +245,7 @@ const start = function (data, ID) {
                   </div>
                 </div>
               </div>
+
               <img
                 class="c-whowe__img c-whowe__img--right"
                 src={svg["background/about_us_vector-2"]}

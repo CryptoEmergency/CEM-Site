@@ -587,60 +587,7 @@ $lightBlue: #00A5F7;
 
   // diagramm line
 
-  // our team
-  .team-wrap {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 280px);
-    grid-template-rows: auto;
-    grid-column-gap: 15px;
-    grid-row-gap: 30px;
-    justify-content: center;
-  }
 
-  .team-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-
-    @media(max-width: 464px) {
-      margin-bottom: 30px;
-    }
-
-    h5> {
-      font-weight: 600;
-      font-size: 18px;
-      line-height: 175%;
-    }
-
-    >span {
-      text-align: center;
-      color: #CAD4F3;
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 150%;
-      padding: 0 10px;
-    }
-  }
-
-  .team-img {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    background-image: linear-gradient(334.15deg, #171B27 1.13%, #272B39 101.15%);
-    border-radius: 10px;
-    height: auto;
-    max-height: 365px;
-    margin-bottom: 20px;
-  }
-
-  // swiper slider for block our team
-  .mySwiper {
-    .swiper-pagination {
-      margin-top: 15px;
-    }
-  }
 
   // gallery
   .gallery-wrap.media-wrap {
@@ -649,4 +596,59 @@ $lightBlue: #00A5F7;
     }
   }
 
+}
+
+// our team
+.team-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 280px);
+  grid-template-rows: auto;
+  grid-column-gap: 15px;
+  grid-row-gap: 30px;
+  justify-content: center;
+}
+
+.team-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+
+  @media(max-width: 464px) {
+    margin-bottom: 30px;
+  }
+
+  h5> {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 175%;
+  }
+
+  >span {
+    text-align: center;
+    color: #CAD4F3;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 150%;
+    padding: 0 10px;
+  }
+}
+
+.team-img {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-image: linear-gradient(334.15deg, #171B27 1.13%, #272B39 101.15%);
+  border-radius: 10px;
+  height: auto;
+  max-height: 365px;
+  margin-bottom: 20px;
+}
+
+// swiper slider for block our team
+.mySwiper {
+  .swiper-pagination {
+    margin-top: 15px;
+  }
 }

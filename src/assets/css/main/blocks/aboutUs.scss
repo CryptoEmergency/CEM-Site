@@ -897,7 +897,132 @@
     transform: translate3d(0, -10px, 22px);
     color: #9844b7;
 }
-// accordeon
-.c-aboutus__accordeon{
-    
+// list goals
+.list-goals{
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+
+    .list-goals_item{
+        position: relative;
+        // width: 320px;
+        height: 450px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+
+        .goal-img{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 100%;
+            height: 220px;
+            transition: 0.5s;
+
+            img{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100px;
+            }
+        }
+
+        .goal-content{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            transition: 1s;
+            z-index: 10;
+
+            h4{
+                position: relative;
+                font-weight: 600;
+                letter-spacing: 1px;
+                color: #FFFFFF;
+                margin: 0;
+                font-size: 20px;
+                padding: 0 10px;
+            }
+
+            .goal-content_desc{
+                padding: 10px 20px;
+                transition: 0.3s;
+                opacity: 0;
+                visibility: hidden;
+                font-size: 14px;
+                line-height: 18px;
+                // padding-top: ;
+                // padding-bottom: 0;
+            }
+        }
+    }
+
+    .list-goals_item::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #A87FFF;
+        clip-path: circle(300px at 80% -20%);
+        transition: 0.5s ease-in-out;
+        opacity: .5;
+    }
+
+    .list-goals_item:hover::before{
+        clip-path: circle(300px at 80% -40%);
+    }
+    .list-goals_item:hover .goal-img{
+        top: 0%;
+        transform: translateY(0%);
+    }
+    .list-goals_item:hover .goal-content{
+        height: 210px;
+    }
+
+    .list-goals_item:hover{
+        .goal-content{
+            .goal-content_desc{
+                visibility: visible;
+                opacity: 1;
+                transition-delay: 0.5s;
+            }
+        }
+    }
+
+    .list-goals_item::after{
+        // content: 'Crypto';
+        position: absolute;
+        // top: 30%;
+        bottom: 10%;
+        left: -15%;
+        font-size: 7em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255, 34, 172, 0.05);
+    }
+    .list-goals_item.crypto::after{
+        content: 'Crypto';
+    }
+    .list-goals_item.unite::after{
+        content: 'Unite';
+        left: -6%;
+    }
+    .list-goals_item.access::after{
+        content: 'Access';
+        left: -15%;
+    }
+    .list-goals_item.meta::after{
+        content: 'Meta';
+        left: -3%;
+    }
 }
