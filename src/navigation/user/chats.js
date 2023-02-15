@@ -415,7 +415,14 @@ const start = function (data, ID) {
                                                     const arrReturn = Static.messageList.list_records[0].message.map((item, index) => {
                                                         return (
                                                             <div class={item.author == Variable.myInfo._id ? "your_message_container" : "friend_message_container"}>
-                                                                <div class={[item.author == Variable.myInfo._id ? "your_message" : "friend_message", Helpers.ifHaveMedia(item.media, "video") && item.media.length < 4 ? "chat_have_video" : null, Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null]} >
+                                                                <div
+                                                                    class={[
+                                                                        item.author == Variable.myInfo._id ? "your_message" : "friend_message",
+                                                                        item.media && item.media.length ? "message--media" : null,
+                                                                        Helpers.ifHaveMedia(item.media, "video") && item.media.length < 4 ? "chat_have_video" : null,
+                                                                        Helpers.ifHaveMedia(item.media, "audio") ? "chat_have_audio" : null
+                                                                    ]}
+                                                                >
                                                                     {fn.editText(item.text, { clear: true, paragraph: true, html: true, notp: true })}
 
                                                                     {/* {() => {

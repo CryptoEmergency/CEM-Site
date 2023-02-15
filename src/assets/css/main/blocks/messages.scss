@@ -241,7 +241,7 @@
 				position: relative;
 				width: 100%;
 				padding: 10px;
-				background: #637AAF;
+				background: #383c48;
 				display: flex;
 				align-items: flex-end;
 
@@ -252,7 +252,7 @@
 					padding-bottom: 7px;
 					border-radius: 30px !important;
 					border: 0;
-					background: #333E6C;
+					background: #15161b;
 				}
 			}
 
@@ -317,7 +317,7 @@
 	}
 
 	&_container {
-		background: #12161F;
+		background: #12161F url("../images/chat_pattern.png") repeat;
 		color: white;
 		padding: 25px 0;
 		width: 100%;
@@ -490,28 +490,32 @@
 	display: flex;
 	flex-direction: column;
 	margin-top: 8px;
-	background: #293040;
+	// background: #293040;
+	background: #746cc7;
 	color: white;
 	padding: 8px 15px 8px;
-	border-radius: 10px;
+	border-radius: 18px 18px 18px 0;	//10px;
 	position: relative;
 	left: 20px;
 	word-break: break-word;
 	max-width: 80%;
 
 	&::before {
-		content: '';
+		content: url("../images/beforeYou.png");
 		position: absolute;
 		background: 0;
-		width: 0;
-		height: 0;
-		border-left: 15px solid transparent;
-		border-right: 15px solid transparent;
-		border-bottom: 20px solid #293040;
-		border-radius: 10px;
-		bottom: -4px;
-		left: -10px;
-		transform: rotate(127deg)
+		// width: 0;
+		// height: 0;
+		// border-left: 15px solid transparent;
+		// border-right: 15px solid transparent;
+		// border-bottom: 20px solid #293040;
+		// border-radius: 10px;
+		// bottom: -4px;
+		// left: -10px;
+		// transform: rotate(127deg)
+		left: 0px;
+		bottom: -5px;
+		transform: translateX(-100%);
 	}
 
 	&_date {
@@ -558,26 +562,34 @@
 	display: flex;
 	flex-direction: column;
 	margin-top: 8px;
-	background: linear-gradient(89.03deg, rgba(136, 89, 236, 0.7) 0.54%, rgba(44, 102, 184, 0.7) 97.66%);
+	// background: linear-gradient(89.03deg, rgba(136, 89, 236, 0.7) 0.54%, rgba(44, 102, 184, 0.7) 97.66%);
+	background: #532d8a;
 	color: white;
-	padding: 3px; //8px 15px 8px;
-	border-radius: 10px;
+	padding: 5px 10px; //3px; //8px 15px 8px;
+	border-radius: 18px 18px 0 18px;
 	position: relative;
 	max-width: 80%;
 
+	&.message--media {
+		padding: 3px !important;
+	}
+
 	&::before {
-		content: '';
+		content: url("../images/beforeMy.png");
 		position: absolute;
 		background: 0;
-		width: 0;
-		height: 0;
-		border-left: 15px solid transparent;
-		border-right: 15px solid transparent;
-		border-bottom: 20px solid #244F8A;
-		border-radius: 10px;
-		bottom: -4px;
-		right: -10px;
-		transform: rotate(-127deg)
+		// width: 0;
+		// height: 0;
+		// border-left: 15px solid transparent;
+		// border-right: 15px solid transparent;
+		// border-bottom: 20px solid #244F8A;
+		// border-radius: 10px;
+		// bottom: -4px;
+		// right: -10px;
+		// transform: rotate(-127deg)
+		bottom: -5px;
+		right: 1px;
+		transform: translateX(100%);
 	}
 
 	&_date {
@@ -613,7 +625,7 @@
 		&:first-child {
 			img {
 				margin-top: 0;
-				border-radius: 10px 10px 0 0;
+				border-radius: 18px 18px 0 0; //10px 10px 0 0;
 			}
 		}
 
@@ -655,6 +667,20 @@
 
 		&+p {
 			margin-top: 1rem;
+		}
+	}
+
+	.audio_container {
+		.controls {
+			border-radius: 18px;
+		}
+	}
+
+	&>.video_container {
+		&:first-child {
+			border-top-left-radius: 18px;
+			border-top-right-radius: 18px;
+			overflow: hidden;
 		}
 	}
 }
