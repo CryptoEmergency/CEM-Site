@@ -10,6 +10,7 @@
     "@betarost/cemserver": "^1.0.30",
     "@fancyapps/ui": "^4.0.31",
     "cropperjs": "^1.5.12",
+    "idb": "^7.1.1",
     "path": "^0.12.7",
     "socket.io-client": "^4.6.0",
     "swiper": "^8.4.2",
