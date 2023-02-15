@@ -59,7 +59,7 @@ const mainHeader = async function () {
                 }}
               </div>
               <nav class="c-header__menu c-menu" style="position: relative;">
-                <div class="connect disconnect"></div>
+                <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div>
                 <Link
                   class="c-logo c-menu__link"
                   href="/"
