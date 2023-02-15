@@ -9,13 +9,14 @@ const options = {
     }
 }
 
-const socket = null
+let socket = null
+// Variable.socket = socket
 Variable.socketConnect = false
 
 const initSocket = async function () {
     options.auth.uuid = Variable.uuid
     options.auth.status = Variable.auth
-    const socket = io("/", options)
+    socket = io("/", options)
 
     socket.on("connect", (socket) => {
         Variable.socketConnect = true

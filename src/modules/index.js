@@ -10,5 +10,5 @@ export { mainModal } from './blocks/mainModal.js';
 export { mainModalPage } from './blocks/mainModalPage.js';
 
 export { initSocket } from './load/initSocket.js';
-
+export { initInexedDB } from './load/initInexedDB.js'
 //15.02.2023
