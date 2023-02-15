@@ -30,12 +30,6 @@ const initSocket = async function () {
     for (let key in Variable.socketList) {
         socket.on(key, Variable.socketList[key])
     }
-
-    setTimeout(() => {
-        socket.emit("welcome", { test: "fff" }, (response) => {
-            console.log("=====", response); // "got it"
-        });
-    }, 7000);
 }
 
 export { initSocket, socket };
