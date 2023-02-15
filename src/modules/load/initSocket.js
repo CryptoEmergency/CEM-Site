@@ -27,18 +27,15 @@ const initSocket = async function () {
         initReload()
     });
 
-    console.log('=8156de=', Variable.socketList)
-
     for (let key in Variable.socketList) {
-        // socket.on(key, Variable.socketList[key])
+        socket.on(key, Variable.socketList[key])
     }
 
-
-    socket.on('welcome', (t1, t2, t3) => {
-        console.log("Client welcome", t1, t2, t3)
-        // socket.emit("welcome", {}, "ggg")
-    });
-
+    setTimeout(() => {
+        socket.emit("welcome", { test: "fff" }, (response) => {
+            console.log("=====", response); // "got it"
+        });
+    }, 7000);
 }
 
 export { initSocket, socket };
