@@ -1,4 +1,4 @@
-import { Variable } from '@betarost/cemserver/cem.js'
+import { Variable, initReload } from '@betarost/cemserver/cem.js'
 import { io } from "socket.io-client"
 
 const options = {
@@ -10,25 +10,26 @@ const options = {
 }
 
 const socket = null
+Variable.socketConnect = false
 
 const initSocket = async function () {
     options.auth.uuid = Variable.uuid
-    console.log('=c7b648=', options)
+    options.auth.status = Variable.auth
     const socket = io("/", options)
 
     socket.on("connect", (socket) => {
-        console.log("Client connect")
+        Variable.socketConnect = true
+        initReload()
     });
 
     socket.on('disconnect', () => {
-        console.log("Client disconnect")
+        Variable.socketConnect = false
+        initReload()
     });
 
-    socket.on('welcome', (t1, t2, t3) => {
-        console.log("Client welcome", t1, t2, t3)
-        // socket.emit("welcome", {}, "ggg")
-    });
-
+    for (let key in Variable.socketList) {
+        socket.on(key, Variable.socketList[key])
+    }
 }
 
 export { initSocket, socket };
