@@ -34,6 +34,7 @@ $fiolet-light: #8859EC;
   padding: 15px 25px;
   border-radius: 8px;
   cursor: pointer;
+  position: relative;
 
   .accordeon-header_title{
     font-size: 20px;
@@ -48,18 +49,22 @@ $fiolet-light: #8859EC;
   border-radius: 0 0 8px 8px;
   margin: 0 10px;
 }
+// arrow top / bottom for filters, accordeon and another elements
+.arrow.top{
+  height: 40px;
+}
 // точка коннект / дисконнект подключения
 .connect{
   position: absolute;
-  top: 10px;
-  left: 5px;
+  top: 25px;
+  left: 135px;
   color: green;
   z-index: 100000;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background: green;
+  border: 5px solid #C126CE;
 }
 .disconnect{
-  background: red;
+  border: 5px solid #284CCB;
 }
