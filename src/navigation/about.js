@@ -56,9 +56,6 @@ function showTeam(team) {
 const start = function (data, ID) {
   const swiperGo = function (index) {
     let swiperItem = new Swiper(".mySwiper", {
-      // grid: {
-      //   rows: 2,
-      // },
       spaceBetween: 30,
       autoplay: {
         delay: 3000,
@@ -72,7 +69,6 @@ const start = function (data, ID) {
           spaceBetween: 20,
         },
         620: {
-          //600
           slidesPerView: 2,
           spaceBetween: 10,
         },
@@ -81,7 +77,6 @@ const start = function (data, ID) {
           spaceBetween: 50,
         },
         910: {
-          //800
           slidesPerView: 3,
           spaceBetween: 30,
         },
@@ -98,9 +93,6 @@ const start = function (data, ID) {
     () => {
       return (
         <div class="c-aboutus about_us_container c-main__body" id="test2">
-          {/* <div>
-            <AboutAnimation></AboutAnimation>
-          </div> */}
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
               {/* <h2 class="c-whowe__title"
@@ -113,13 +105,20 @@ const start = function (data, ID) {
               />
               <h2 class="title-animation">Crypto Emergency</h2>
               <p style="font-size: 22px; font-weight: 600">
-                {Variable.lang.p.aboutObjectiveTitle}
+                {/* {Variable.lang.p.aboutObjectiveTitle} */}
+                Цель Crypto Emergency?
               </p>
-              <p>{Variable.lang.p.aboutObjective}</p>
-              <p style="font-size: 22px; font-weight: 600">
+              <p>
+                {/* {Variable.lang.p.aboutObjective} */}
+                Объединить криптоэнтузиастов со всего мира на
+                многофункциональной платформе, где собраны все необходимые
+                инструменты для общения, обучения, заработка и создания
+                собственного контента.
+              </p>
+              {/* <p style="font-size: 22px; font-weight: 600">
                 {Variable.lang.p.aboutСonceptTitle}
               </p>
-              <p>{Variable.lang.p.aboutСoncept}</p>
+              <p>{Variable.lang.p.aboutСoncept}</p> */}
             </div>
             <div class="c-whowe__bg"></div>
           </div>
@@ -127,7 +126,7 @@ const start = function (data, ID) {
             <div class="c-aboutus__goals c-goals">
               <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
 
-              {/* <div class="list-goals">
+              <div class="list-goals">
                 <div class="list-goals_item crypto">
                   <div class="goal-img">
                     <img
@@ -189,7 +188,7 @@ const start = function (data, ID) {
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
 
               <div class="team">
                 <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
@@ -197,9 +196,9 @@ const start = function (data, ID) {
                   <div class="swiper-wrapper">{showTeam(team)}</div>
                   <div class="swiper-pagination"></div>
                 </div>
-              </div>*/}
+              </div>
 
-              <div class="c-goals__list">
+              {/* <div class="c-goals__list">
                 <div class="c-goals__item">
                   <div class="c-goals__wrap">
                     <i class="c-goals__icon c-goals__icon--cryptoliteracy"></i>
@@ -244,46 +243,12 @@ const start = function (data, ID) {
                     </span>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <img
                 class="c-whowe__img c-whowe__img--right"
                 src={svg["background/about_us_vector-2"]}
               />
-            </div>
-            <div class="c-aboutus__roadmap">
-              <h2>{Variable.lang.h.road_map}</h2>
-              <div class="c-aboutus__wrapper">
-                <div class="c-aboutus__toppart">
-                  <div class="c-aboutus__dateitem c-aboutus__dateitem--1">
-                    <p>{Variable.lang.p.mapDateOne}</p>
-                    <span>{Variable.lang.span.mapDescOne}</span>
-                  </div>
-                  <div class="c-aboutus__dateitem c-aboutus__dateitem--2">
-                    <p>{Variable.lang.p.mapDateTwo}</p>
-                    <span>{Variable.lang.span.mapDescTwo}</span>
-                  </div>
-                  <div class="c-aboutus__dateitem c-aboutus__dateitem--3">
-                    <p>{Variable.lang.p.mapDateThree}</p>
-                    <span>{Variable.lang.span.mapDescFive}</span>
-                  </div>
-                </div>
-                <img class="c-aboutus__axis" src={images["road_map"]} />
-                <div class="c-aboutus__bottompart">
-                  <div class="c-aboutus__dateitem c-aboutus__dateitem--4">
-                    <p>{Variable.lang.p.mapDateFour}</p>
-                    <span>{Variable.lang.span.mapDescThree}</span>
-                  </div>
-                  <div class="c-aboutus__dateitem c-aboutus__dateitem--5">
-                    <p>{Variable.lang.p.October2022}</p>
-                    <span>{Variable.lang.span.mapDescFour}</span>
-                  </div>
-                  <div class="c-aboutus__dateitem c-aboutus__dateitem--6">
-                    <p>{Variable.lang.p.mapDateSix}</p>
-                    <span>{Variable.lang.span.mapDescSix}</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* <div class="accordeon">
@@ -295,6 +260,7 @@ const start = function (data, ID) {
                   }}
                 >
                   <h5 class="accordeon-header_title">Цель Crypto Emergency?</h5>
+                  <img src={svg["arrow-select"]} class="arrow-top"></img>
                 </div>
                 <div class="accordeon-content">
                   Объединить криптоэнтузиастов со всего мира на
@@ -364,6 +330,40 @@ const start = function (data, ID) {
                 </div>
               </div>
             </div> */}
+            <div class="c-aboutus__roadmap">
+              <h2>{Variable.lang.h.road_map}</h2>
+              <div class="c-aboutus__wrapper">
+                <div class="c-aboutus__toppart">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--1">
+                    <p>{Variable.lang.p.mapDateOne}</p>
+                    <span>{Variable.lang.span.mapDescOne}</span>
+                  </div>
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--2">
+                    <p>{Variable.lang.p.mapDateTwo}</p>
+                    <span>{Variable.lang.span.mapDescTwo}</span>
+                  </div>
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--3">
+                    <p>{Variable.lang.p.mapDateThree}</p>
+                    <span>{Variable.lang.span.mapDescFive}</span>
+                  </div>
+                </div>
+                <img class="c-aboutus__axis" src={images["road_map"]} />
+                <div class="c-aboutus__bottompart">
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--4">
+                    <p>{Variable.lang.p.mapDateFour}</p>
+                    <span>{Variable.lang.span.mapDescThree}</span>
+                  </div>
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--5">
+                    <p>{Variable.lang.p.October2022}</p>
+                    <span>{Variable.lang.span.mapDescFour}</span>
+                  </div>
+                  <div class="c-aboutus__dateitem c-aboutus__dateitem--6">
+                    <p>{Variable.lang.p.mapDateSix}</p>
+                    <span>{Variable.lang.span.mapDescSix}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="c-aboutus__projects">
               <h2>{Variable.lang.h.our_projects}</h2>
@@ -376,9 +376,9 @@ const start = function (data, ID) {
                   <span class="c-aboutus__projectcompany">
                     {Variable.lang.span.aboutProjectNameOne}
                   </span>
-                  <p class="c-aboutus__projecttitle">
+                  {/* <p class="c-aboutus__projecttitle">
                     {Variable.lang.p.aboutProjectDateOne}
-                  </p>
+                  </p> */}
                 </div>
                 <a
                   class="c-aboutus__project"
@@ -390,9 +390,9 @@ const start = function (data, ID) {
                     src={images["about_us_banner8"]}
                   />
                   <span class="c-aboutus__projectcompany">Cemblockchain</span>
-                  <p class="c-aboutus__projecttitle">
+                  {/* <p class="c-aboutus__projecttitle">
                     {Variable.lang.p.aboutProjectDate19May2022}
-                  </p>
+                  </p> */}
                 </a>
                 <a
                   class="c-aboutus__project"
@@ -401,9 +401,9 @@ const start = function (data, ID) {
                 >
                   <img class="c-aboutus__banner" src={images["CemWallet"]} />
                   <span class="c-aboutus__projectcompany">CEM Wallet</span>
-                  <p class="c-aboutus__projecttitle">
+                  {/* <p class="c-aboutus__projecttitle">
                     {Variable.lang.p.aboutProjectDateAugust2022}
-                  </p>
+                  </p> */}
                 </a>
                 {/*<div class="c-aboutus__project">
                   <img class="c-aboutus__banner" src={images["about_us_banner6"]} />
