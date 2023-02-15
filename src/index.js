@@ -4,6 +4,7 @@ import {
     loadStorage,
     loadData,
     loadListen,
+    initSocket,
     mainBlock,
     mainHeader,
     mainFooter,
@@ -18,6 +19,7 @@ const start = async function () {
     await loadStorage();
     await loadData();
     await loadListen();
+    await initSocket();
     await mainBlock();
     await mainHeader();
     await mainFooter();
