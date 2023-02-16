@@ -2,12 +2,15 @@ import { ServerInit, ServerBuild, ServerStart } from '@betarost/cemserver'
 import path from 'path'
 
 const port = 80
+const hotReload = false
 const target = "crypto-emergency.com"
 // const target = "idns.work"
 const mode = "development"
 // const mode = "production"
 
 ServerInit({
+    target,
+    hotReload,
     path: {
         src: path.resolve('src/index.js'),
         public: path.resolve('public'),
@@ -17,12 +20,6 @@ ServerInit({
     mode,
     allowedHosts: [target],
     proxy: {
-        // '/api/v2': {
-        //     target: `http://127.0.0.1:6060`,
-        //     changeOrigin: true,
-        //     secure: false,
-        //     ws: true
-        // },
         '/api': {
             target: `https://${target}`,
             changeOrigin: true,
