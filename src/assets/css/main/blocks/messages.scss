@@ -377,6 +377,36 @@
 		top: 0px;
 		right: 28px;
 	}
+
+	&_wrapper {
+		display: flex;
+		flex-direction: column-reverse;
+
+		&:last-child {
+			.messages {
+				&_date {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+
+	&_date {
+		order: 1;
+		align-self: center;
+		display: inline-block;
+		padding: 4px 10px;
+		margin-top: 30px;
+		margin-bottom: 8px;
+		font-size: 14px;
+		font-weight: 400;
+		background: #554f6e;
+		border-radius: 10px;
+
+		&:first-letter {
+			text-transform: uppercase;
+		}
+	}
 }
 
 .messages_block,
@@ -473,6 +503,9 @@
 				line-height: 24px;
 				color: #FFFFFF;
 				margin-bottom: 7px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
 			}
 
 			&:last-child {
@@ -494,7 +527,7 @@
 	background: #746cc7;
 	color: white;
 	padding: 8px 15px 8px;
-	border-radius: 18px 18px 18px 0;	//10px;
+	border-radius: 18px 18px 18px 0; //10px;
 	position: relative;
 	left: 20px;
 	word-break: break-word;
@@ -554,6 +587,24 @@
 
 		&-slide {
 			width: 100% !important;
+		}
+	}
+
+	p {
+		margin-bottom: 0;
+		padding-left: 12px;
+		padding-right: 12px;
+
+		&:first-child {
+			padding-top: 5px;
+		}
+
+		&:last-child {
+			padding-bottom: 5px;
+		}
+
+		&+p {
+			margin-top: 1rem;
 		}
 	}
 }
@@ -1071,7 +1122,7 @@ button[data-type=voiceline][data-page_type=chat] {
 
 			p {
 				&:first-child {
-					max-width: 125px;
+					max-width: 140px;
 				}
 			}
 		}
