@@ -145,9 +145,17 @@ const mainFooter = async function () {
                           </a>
 
                           {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
-                          {/* <a class="c-footer__link" href="/assets/docs/whitePaperEN.pdf">
-                                                        <span>{Variable.lang.span.whitePaper}</span>
-                                                    </a> */}
+                          <a
+                            target="_blank"
+                            class="c-footer__link"
+                            href={
+                              Variable.lang.code == "ru"
+                                ? "/assets/docs/LitePaperRu.pdf"
+                                : "/assets/docs/LitePaperEn.pdf"
+                            }
+                          >
+                            <span>{Variable.lang.span.litePaper}</span>
+                          </a>
                         </div>
                       </div>
                     </div>
