@@ -95,34 +95,19 @@ const start = function (data, ID) {
         <div class="c-aboutus about_us_container c-main__body" id="test2">
           <div class="c-aboutus__whowe c-whowe">
             <div class="c-whowe__inner">
-              {/* <h2 class="c-whowe__title"
-              >
-                {Variable.lang.h.who_are_we}
-              </h2> */}
               <img
                 class="c-whowe__img"
                 src={svg["background/about_us_vector-1"]}
               />
               <h2 class="title-animation">Crypto Emergency</h2>
-              <p style="font-size: 22px; font-weight: 600">
-                {/* {Variable.lang.p.aboutObjectiveTitle} */}
-                Цель Crypto Emergency?
-              </p>
-              <p>
-                {/* {Variable.lang.p.aboutObjective} */}
-                Объединить криптоэнтузиастов со всего мира на
-                многофункциональной платформе, где собраны все необходимые
-                инструменты для общения, обучения, заработка и создания
-                собственного контента.
-              </p>
               {/* <p style="font-size: 22px; font-weight: 600">
-                {Variable.lang.p.aboutСonceptTitle}
-              </p>
-              <p>{Variable.lang.p.aboutСoncept}</p> */}
+                {Variable.lang.p.aboutObjectiveTitle}
+              </p> */}
+              <p>{Variable.lang.p.aboutObjective}</p>
             </div>
             <div class="c-whowe__bg"></div>
           </div>
-          <div class="c-aboutus__content c-container">
+          <div class="c-aboutus__content c-container" style="p">
             <div class="c-aboutus__goals c-goals">
               <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
 
@@ -190,13 +175,13 @@ const start = function (data, ID) {
                 </div>
               </div>
 
-              <div class="team">
+              {/* <div class="team">
                 <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
                 <div class="swiper mySwiper" After={() => swiperGo()}>
                   <div class="swiper-wrapper">{showTeam(team)}</div>
                   <div class="swiper-pagination"></div>
                 </div>
-              </div>
+              </div> */}
 
               {/* <div class="c-goals__list">
                 <div class="c-goals__item">
@@ -251,85 +236,6 @@ const start = function (data, ID) {
               />
             </div>
 
-            {/* <div class="accordeon">
-              <div class="accordeon-item">
-                <div
-                  class="accordeon-header"
-                  onclick={function () {
-                    this.nextElementSibling.classList.toggle("content-hidden");
-                  }}
-                >
-                  <h5 class="accordeon-header_title">Цель Crypto Emergency?</h5>
-                  <img src={svg["arrow-select"]} class="arrow-top"></img>
-                </div>
-                <div class="accordeon-content">
-                  Объединить криптоэнтузиастов со всего мира на
-                  многофункциональной платформе, где собраны все необходимые
-                  инструменты для общения, обучения, заработка и создания
-                  собственного контента.
-                </div>
-              </div>
-
-              <div class="accordeon-item">
-                <div
-                  class="accordeon-header"
-                  onclick={function () {
-                    this.nextElementSibling.classList.toggle("content-hidden");
-                  }}
-                >
-                  <h5 class="accordeon-header_title">Вопрос 2</h5>
-                </div>
-                <div class="accordeon-content content-hidden">
-                  Это означает, что узел не может находиться в двух точках
-                  документа одновременно. Поэтому, если у узла уже есть
-                  родитель, он сначала удаляется, а затем добавляется в новую
-                  позицию. Node.cloneNode() можно использовать для создания
-                  копии узла перед добавлением его в новый родительский элемент.
-                  Обратите внимание, что копии, сделанные с помощью cloneNode ,
-                  не будут автоматически синхронизироваться.
-                </div>
-              </div>
-
-              <div class="accordeon-item">
-                <div
-                  class="accordeon-header"
-                  onclick={function () {
-                    this.nextElementSibling.classList.toggle("content-hidden");
-                  }}
-                >
-                  <h5 class="accordeon-header_title">Вопрос 3</h5>
-                </div>
-                <div class="accordeon-content content-hidden">
-                  Это означает, что узел не может находиться в двух точках
-                  документа одновременно. Поэтому, если у узла уже есть
-                  родитель, он сначала удаляется, а затем добавляется в новую
-                  позицию. Node.cloneNode() можно использовать для создания
-                  копии узла перед добавлением его в новый родительский элемент.
-                  Обратите внимание, что копии, сделанные с помощью cloneNode ,
-                  не будут автоматически синхронизироваться.
-                </div>
-              </div>
-
-              <div class="accordeon-item">
-                <div
-                  class="accordeon-header"
-                  onclick={function () {
-                    this.nextElementSibling.classList.toggle("content-hidden");
-                  }}
-                >
-                  <h5 class="accordeon-header_title">Вопрос 4</h5>
-                </div>
-                <div class="accordeon-content content-hidden">
-                  Это означает, что узел не может находиться в двух точках
-                  документа одновременно. Поэтому, если у узла уже есть
-                  родитель, он сначала удаляется, а затем добавляется в новую
-                  позицию. Node.cloneNode() можно использовать для создания
-                  копии узла перед добавлением его в новый родительский элемент.
-                  Обратите внимание, что копии, сделанные с помощью cloneNode ,
-                  не будут автоматически синхронизироваться.
-                </div>
-              </div>
-            </div> */}
             <div class="c-aboutus__roadmap">
               <h2>{Variable.lang.h.road_map}</h2>
               <div class="c-aboutus__wrapper">

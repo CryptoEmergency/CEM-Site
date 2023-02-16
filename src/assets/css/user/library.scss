@@ -1,9 +1,11 @@
-// variables colors
+// variables colors=================
 $fiolet-light: #8859EC;
 .content-hidden{
   display: none;
 }
-// buttons
+
+
+// buttons===========================
 // button close X
 .b-close {
   cursor: pointer;
@@ -21,7 +23,8 @@ $fiolet-light: #8859EC;
   opacity: 1;
 }
 
-// accordeon
+
+// accordeon=============================
 .accordeon{
   position: relative;
   z-index: 5;
@@ -42,6 +45,13 @@ $fiolet-light: #8859EC;
     margin-bottom: 0;
     font-weight: 700;
   }
+
+  .arrow{
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translate(-50%, -50%);
+  }
 }
 .accordeon-content{
   background: #8991A8;
@@ -49,11 +59,15 @@ $fiolet-light: #8859EC;
   border-radius: 0 0 8px 8px;
   margin: 0 10px;
 }
+
+
 // arrow top / bottom for filters, accordeon and another elements
 .arrow.top{
   height: 40px;
 }
-// точка коннект / дисконнект подключения
+
+
+// точка коннект / дисконнект подключения===========
 .connect{
   position: absolute;
   top: 25px;
@@ -97,4 +111,17 @@ $fiolet-light: #8859EC;
     }
   
 }
+}
+
+//roadmap========================
+.roadmap-wrap{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+
+  // .roadmap_item{
+  //   display: grid;
+  //   justify-content: flex-end;
+  // }
 }
