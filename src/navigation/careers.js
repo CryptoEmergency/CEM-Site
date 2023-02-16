@@ -307,11 +307,11 @@ const start = function (data, ID = "mainBlock") {
                     <div class="c-careers__container c-container">
                         <h1 class="c-careers__title">{Variable.lang.h.careers}</h1>
                         <div class="c-careers__tabs c-tabs">
-                            <input type="radio" name="tab-btn" id="freelancers" value="" checked />
-                            <label for="freelancers">{Variable.lang.label.freelancers}</label>
+                            <input type="radio" name="tab-btn" id="freelance" value="" checked />
+                            <label for="freelance">{Variable.lang.label.freelance}</label>
                             <input type="radio" name="tab-btn" id="сompany" value="" />
                             <label for="сompany">{Variable.lang.label.сompany}</label>
-                            <div class="c-careers__content content--freelancers">
+                            <div class="c-careers__content content--freelance">
 
                                 {/* Тэги */}
                                 <div class="tags tags--static c-careers__tags">
