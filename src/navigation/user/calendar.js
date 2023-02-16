@@ -458,8 +458,13 @@ const start = function (data, ID) {
                                             // notesScroll(Static)
                                             initReload()
                                         }}
-                                        style={[Static.active == item ? "opacity: 1" : null]}
+                                        style={[Static.active == item ? "opacity: 1;" : null]}
                                     >
+                                        <div class={[Static.active == item ? "calendar-cell--active" : null,
+                                                isCurrentDay(item) ? "calendar-cell--current" : null]}
+                                        >
+
+                                        </div>
                                         <span
                                             class="calendar-day"
                                             onDblClick={() => {
@@ -468,7 +473,7 @@ const start = function (data, ID) {
                                             }}
                                             style={[isCurrentMonth(item) ? "color: #8995B8; opacity: 1;" : null,
                                             isCurrentDay(item) ? "color: red; opacity: 1" : null,
-                                            Static.active == item ? "color: #ffffff; opacity: 1" : null
+                                            Static.active == item ? "color: #ffffff; opacity: 1;" : null
                                             ]}
                                         >
                                             {item.format('D')}
@@ -508,9 +513,14 @@ const start = function (data, ID) {
                                                     initReload()
                                                 }}
                                             >
-                                                <span>
-                                                    Добавить новую заметку
-                                                </span>
+                                                <p>
+                                                    New note
+                                                        <span>
+                                                            &nbsp;({Helpers.moment(Static.active).format("D MMMM")})
+                                                        </span>
+                                                    
+                                                </p>
+                                                
                                             </div>
                                         )
                                     }

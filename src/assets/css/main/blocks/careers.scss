@@ -105,7 +105,7 @@
     }
 
     /* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */
-    #freelancers:checked~.content--freelancers,
+    #freelance:checked~.content--freelance,
     #сompany:checked~.content--сompany {
         display: block;
     }

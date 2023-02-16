@@ -11,7 +11,7 @@ const functionsMain = function () {
         return acc
     }, {});
 
-    console.log('=beb2ff=', forExport)
+    // console.log('=beb2ff=', forExport)
     return forExport
 }
 

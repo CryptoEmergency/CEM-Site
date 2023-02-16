@@ -78,7 +78,6 @@
     },
     "h": {
         "success": "¡Exitosamente!",
-        "who_are_we": "¿Quienes somos?",
         "our_goals": "Nuestras metas",
         "our_team": "Nuestro equipo",
         "road_map": "Mapa vial",
@@ -243,7 +242,9 @@
         "youAgree": "Al utilizar la Plataforma, Usted consiente con",
         "clientCount": "Número de clientes atraídos",
         "clientMoney": "Pagos para clientes atraídos",
-        "forFriends": "Sólo para amigos"
+        "forFriends": "Sólo para amigos",
+        "------------------новые слова-----------------": "добавить новые слова",
+        "litePaper": "Lite Paper"
     },
     "p": {
         "answers": "Respuestas ",
@@ -375,9 +376,7 @@
         "lotteryQuest6": "Answer a shortest quiz.",
         "lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?",
         "aboutObjectiveTitle": "Our Mission",
-        "aboutObjective": "Our Mission is to unite the crypto enthusiasts from all over the world at a unified multifunctional platform called Crypto Emergency which will provide all necessary tools for communication, training, earning and creation of their own content.",
-        "aboutСonceptTitle": "Our Vision",
-        "aboutСoncept": "We create a robust and convenient digital ecosystem which includes our own blockchain with smart contracts, crypto wallet and all-round support of crypto industry startups, universal social media which supports all types of content, and information and educational portal which improves the crypto awareness of the planet’s population. We work 24/7 to improve and develop the Crypto Emergency ecosystem."
+        "aboutObjective": "Unite crypto-enthusiasts all over the world on one multifunctional platform Crypto Emergency, which will give them all necessary tools to communicate, learn, earn, money and create their own content."
     },
     "text": {
         "starups": "Inauguración",

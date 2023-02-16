@@ -26,7 +26,6 @@ const mainBlock = async function () {
                 Variable.Static.HeaderShow = true;
                 Variable.Static.FooterShow = true;
                 Variable.Static.FooterMenuShow = true;
-
                 let page = dataUrl.adress;
                 if (!page || page == "") {
                     await Variable.listRouter.index(data, ID, url);
@@ -70,6 +69,11 @@ const mainBlock = async function () {
                     await Variable.listRouter[page](userInfo.list_records[0], ID, url, data);
                     return;
                 }
+
+                if (dataUrl.page) {
+                    page += "/" + dataUrl.page;
+                }
+
                 if (!Variable.listRouter[page]) {
                     await list.error404(data, ID, url);
                     return;

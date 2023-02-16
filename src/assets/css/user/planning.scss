@@ -136,6 +136,7 @@
 }
 
 .planning-mine {
+    width: 261px;
     display: block;
 
     &-container {
@@ -144,17 +145,100 @@
 
     &_item {
         margin-bottom: 10px;
+        padding: 5px 0;
         border: 1px solid #6B738D;
         border-radius: 15px;
 
         &-title {
             margin: 0;
+            padding-left: 10px;
             font-size: 22px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         &-text {
             margin: 0;
+            padding-left: 10px;
             font-size: 16px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
+    }
+}
+
+.planning-invited {
+    display: block;
+
+    &-container {
+        margin-bottom: 20px;
+    }
+}
+
+
+// Show
+
+.tasking {
+    width: 1240px;
+    margin: 0 auto;
+    padding-top: 100px;
+
+    &-title {
+        font-size: 36px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    &-description {
+        margin-bottom: 60px;
+        font-size: 18px;
+        text-align: center;
+
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.tasking-user {
+    position: relative;
+    overflow: hidden;
+
+    h3 {
+        margin-bottom: 20px;
+        font-size: 36px;
+        text-align: center;
+    }
+
+    &_container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &_item {
+        width: 140px;
+    }
+
+    &_avatar {
+        position: relative;
+        width: 165px;
+        height: 165px;
+        overflow: hidden;
+        border-radius: 50%;
+
+        img {
+            position: absolute;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+            height: 100%;
+        }
+    }
+
+    &_name {
+        display: block;
+        text-align: center;
     }
 }

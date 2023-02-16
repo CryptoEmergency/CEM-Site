@@ -9,4 +9,6 @@ export { mainFooter } from './blocks/mainFooter.js';
 export { mainModal } from './blocks/mainModal.js';
 export { mainModalPage } from './blocks/mainModalPage.js';
 
-//20.01.2023
+export { initSocket } from './load/initSocket.js';
+export { initInexedDB } from './load/initInexedDB.js'
+//15.02.2023

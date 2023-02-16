@@ -4,6 +4,8 @@ import {
     loadStorage,
     loadData,
     loadListen,
+    initInexedDB,
+    initSocket,
     mainBlock,
     mainHeader,
     mainFooter,
@@ -18,6 +20,8 @@ const start = async function () {
     await loadStorage();
     await loadData();
     await loadListen();
+    await initInexedDB();
+    await initSocket();
     await mainBlock();
     await mainHeader();
     await mainFooter();
@@ -27,4 +31,4 @@ const start = async function () {
 }
 
 start();
-//20.01.2023
+//15.02.2023

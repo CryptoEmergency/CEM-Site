@@ -22,6 +22,7 @@ const loadStorage = async function () {
 
         Variable.auth = getStorage("auth")
         Variable.myInfo = getStorage("myInfo")
+        Variable.uuid = getStorage("uuid")
 
         let timeNow = Math.floor(Date.now() / 1000)
         let objView = getStorage("recordsView")
