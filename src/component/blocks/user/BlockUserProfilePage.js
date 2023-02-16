@@ -202,7 +202,8 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     <span>{Variable.lang.label.speciality}</span>
                                                     <div>
                                                         <img class="editblockinfo" src={svg['pencil']} />
-                                                        <input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} />
+                                                        {/* <input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /> */}
+                                                        <div id="speciality" class="userinfoinput">{data.userInfo.information.speciality}</div>
                                                     </div>
                                                 </div>
                                                 <div class="user_short_info_row">

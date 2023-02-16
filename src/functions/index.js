@@ -311,6 +311,28 @@ fn.getDateFormat = function (data, type) {
       };
     case "time":
       return Helpers.moment(data).format('YYYY-MM-DD hh:mm')
+    case "chatdate":
+      return Helpers.moment(data).format("dd, D MMM");
+    case "chattime":
+      let secondsBefore = Math.round(
+        (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000
+      );
+      if (secondsBefore < 86400) {
+        return Helpers.moment(data).fromNow();
+      } else {
+        return Helpers.moment(data).format("HH:mm");
+      };
+    case "chatlist":
+      let secondBefore = Math.round(
+        (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000
+      );
+      if (secondBefore < 86400) {
+        return Helpers.moment(data).format("HH:mm");
+      } else if (secondBefore < 604800) {
+        return Helpers.moment(data).format("dddd");
+      } else {
+        return Helpers.moment(data).format("DD.MM.YY");
+      };
     default:
       return Helpers.moment(data).format("YYYY-MM-DD");
   }

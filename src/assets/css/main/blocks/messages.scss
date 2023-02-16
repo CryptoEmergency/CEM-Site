@@ -213,6 +213,22 @@
 			}
 		}
 
+		&_wrapper {
+			display: flex;
+			align-items: baseline;
+			gap: 5px;
+
+			img {
+				width: 18px;
+				height: 18px;
+				flex-basis: 18px;
+			}
+
+			span {
+				color: #ffffff !important;
+			}
+		}
+
 		.comment_avatar {
 			top: 10px;
 			width: 70px;
@@ -377,6 +393,36 @@
 		top: 0px;
 		right: 28px;
 	}
+
+	&_wrapper {
+		display: flex;
+		flex-direction: column-reverse;
+
+		&:last-child {
+			.messages {
+				&_date {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+
+	&_date {
+		order: 1;
+		align-self: center;
+		display: inline-block;
+		padding: 4px 10px;
+		margin-top: 30px;
+		margin-bottom: 8px;
+		font-size: 14px;
+		font-weight: 400;
+		background: #554f6e;
+		border-radius: 10px;
+
+		&:first-letter {
+			text-transform: uppercase;
+		}
+	}
 }
 
 .messages_block,
@@ -419,22 +465,23 @@
 	span {
 		font-weight: 700 !important;
 		// color: #8846D3 !important;
-		background-image: linear-gradient(90deg, #FFA0AF, #8729DA);
-		background-size: 100%;
-		background-repeat: repeat;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+		color: #6fd0bd !important;
+		// background-image: linear-gradient(90deg, #FFA0AF, #8729DA);
+		// background-size: 100%;
+		// background-repeat: repeat;
+		// -webkit-background-clip: text;
+		// -webkit-text-fill-color: transparent;
 	}
 
 	i {
 		position: absolute;
 		bottom: 5px;
-		right: 45px;
+		right: 35px;	//45px;
 		width: 23px;
 		height: 23px;
 		border-radius: 50%;
-		border: 2px solid #8846D3;
-		background: linear-gradient(90deg, #FFA0AF, #8729DA); //#8846D3;
+		border: 2px solid #6fd0bd;	//#8846D3;
+		background: #6fd0bd;	//linear-gradient(90deg, #FFA0AF, #8729DA); //#8846D3;
 		color: black;
 		text-align: center;
 		line-height: 19px;
@@ -473,6 +520,9 @@
 				line-height: 24px;
 				color: #FFFFFF;
 				margin-bottom: 7px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
 			}
 
 			&:last-child {
@@ -494,7 +544,7 @@
 	background: #746cc7;
 	color: white;
 	padding: 8px 15px 8px;
-	border-radius: 18px 18px 18px 0;	//10px;
+	border-radius: 18px 18px 18px 0; //10px;
 	position: relative;
 	left: 20px;
 	word-break: break-word;
@@ -554,6 +604,24 @@
 
 		&-slide {
 			width: 100% !important;
+		}
+	}
+
+	p {
+		margin-bottom: 0;
+		padding-left: 12px;
+		padding-right: 12px;
+
+		&:first-child {
+			padding-top: 5px;
+		}
+
+		&:last-child {
+			padding-bottom: 5px;
+		}
+
+		&+p {
+			margin-top: 1rem;
 		}
 	}
 }
@@ -1071,7 +1139,7 @@ button[data-type=voiceline][data-page_type=chat] {
 
 			p {
 				&:first-child {
-					max-width: 125px;
+					max-width: 140px;
 				}
 			}
 		}
