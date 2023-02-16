@@ -9,6 +9,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
+import images from "@assets/images/index.js";
 import {
     Avatar,
     Swiper,
@@ -316,14 +317,21 @@ const start = function (data, ID) {
                                         .map((item, index) => {
                                             let user
                                             let lastMessage = item.message[0]
-                                            let iconStatus
+                                            let iconStatus = {
+                                                name: "",
+                                                width: 24,
+                                                height: 23
+                                            }
 
                                             if (lastMessage.status == 0) {
-                                                iconStatus = "sent_message_icon"
+                                                iconStatus.name = "sent_message_icon"
+                                                iconStatus.width = 21
+                                                iconStatus.height = 21
                                             } else if (lastMessage.status == 1) {
-                                                iconStatus = "unread_message_icon"
+                                                iconStatus.name = "unread_message_icon"
+                                                iconStatus.height = 22
                                             } else {
-                                                iconStatus = "read_message_icon"
+                                                iconStatus.name = "read_message_icon"
                                             }
                                             if (item.users.length < 2) {
                                                 user = item.users[0]
@@ -334,6 +342,7 @@ const start = function (data, ID) {
                                                     user = item.users[1]
                                                 }
                                             }
+                                            console.log('=2a84c1=',item)
 
                                             return (
                                                 <div
@@ -372,21 +381,35 @@ const start = function (data, ID) {
                                                     <div class="messages_list_item_info">
                                                         <div class="messages_list_item_info-1">
                                                             <p>{user.nickname}</p>
-                                                            {lastMessage.text ? <span>{lastMessage.text}</span> : null}
+                                                            { () => {
+                                                                if (lastMessage.text && lastMessage.author != Variable.myInfo._id) {
+                                                                    return (
+                                                                        <span>{lastMessage.text}</span>
+                                                                    )
+                                                                } else if(lastMessage.text && lastMessage.author == Variable.myInfo._id) {
+                                                                    return (
+                                                                        <div class="messages_list_wrapper">
+                                                                            {/* <img src={svg[iconStatus]} /> */}
+                                                                            <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
+                                                                            <span>{lastMessage.text}</span>
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            }}
                                                         </div>
                                                         <div class="messages_list_item_info-2">
                                                             {lastMessage.author == Variable.myInfo._id
                                                                 ?
-                                                                <p>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</p>
+                                                                <p>{lastMessage.showDate ? fn.getDateFormat(lastMessage.showDate, "chatlist") : null}</p>
                                                                 :
                                                                 <p class="message--new">
-                                                                    <span>{lastMessage.showDate ? Helpers.getDateFormat(lastMessage.showDate, "now") : null}</span>
+                                                                    <span>{lastMessage.showDate ? fn.getDateFormat(lastMessage.showDate, "chatlist") : null}</span>
                                                                     {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
 
                                                                 </p>
                                                             }
 
-                                                            {lastMessage.author == Variable.myInfo._id ? <img src={svg[iconStatus]} /> : null}
+                                                            {/* {lastMessage.author == Variable.myInfo._id ? <img src={svg[iconStatus]} /> : null} */}
                                                         </div>
                                                     </div>
                                                 </div>
