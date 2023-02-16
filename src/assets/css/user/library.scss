@@ -1,5 +1,16 @@
 // variables colors=================
 $fiolet-light: #8859EC;
+$roadmapColors: (
+  0: #00A5FB,
+  1: #FF696D,
+  2: #FF9900,
+  3: #973EFA,
+  4: #0051C0,
+  5: #279324,
+);
+
+
+
 .content-hidden{
   display: none;
 }
@@ -120,8 +131,36 @@ $fiolet-light: #8859EC;
   grid-template-rows: auto;
   grid-gap: 20px;
 
-  // .roadmap_item{
-  //   display: grid;
-  //   justify-content: flex-end;
-  // }
+  .wrap-el_left, .wrap-el_right{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 170px);
+    justify-items: flex-end;
+  }
+  .wrap-el_right{
+    justify-items: flex-start;
+  }
+  .roadmap_item{
+    padding: 20px;
+    border-radius: 8px;
+    width: 170px;
+    height: 170px;
+  }
+  .roadmap-turn{
+    height: 170px;
+    display: grid;
+    align-items: center;
+  }
 }
+
+
+
+@each $index,
+  $color in $roadmapColors {
+    .roadmap_item--#{$index} {
+      border: 1px solid $color;
+    }
+    .year--#{index}{
+      color: $color;
+    }
+  }
