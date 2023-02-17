@@ -1,9 +1,19 @@
-import { jsx, jsxFrag, init, Variable } from "@betarost/cemserver/cem.js";
+import {
+  jsx,
+  jsxFrag,
+  init,
+  Variable,
+  initReload,
+} from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Swiper from "swiper/bundle";
 
 import "swiper/css/bundle";
+
+import { Particles } from "@src/component/htmlElements/index.js";
+import { AnimatedCard } from "@src/component/htmlElements/index.js";
+import { Accordeon } from "@src/component/htmlElements/index.js";
 // import { AboutAnimation } from "@src/component/blocks/AboutAnimation";
 
 const team = [
@@ -39,6 +49,28 @@ const team = [
   },
 ];
 
+const arrAccordeon = [
+  {
+    title: "Цель Crypto Emergency?",
+    description:
+      "Объединить криптоэнтузиастов со всего мира на многофункциональной платформе, где собраны все необходимые инструменты для общения, обучения, заработка и создания собственного контента.",
+    hidden: false,
+  },
+  {
+    title: "Как заработать или купить токены CEM?",
+    description:
+      "Купить CEM на Бирже Bitmart. Вести активную деятельность на платформе и получать новый уровень за действия на платформе и с новым уровнем получать в награду CEM. Следить за новостями в телеграме, могут появляться разные конкурсы где в награду можно получить CEM",
+    hidden: true,
+  },
+  {
+    title: "Как вывести заработанные CEM с платформы?",
+    description:
+      "Вывести заработанные CEM на нашей платформе за проявленную активность Вы можете на свой счет в любое время. На данный момент CEM торгуется на бирже  Bitmart, на официальном сайте бирже, переходите в раздел торговать и в поиске пишите CEM. ",
+
+    hidden: true,
+  },
+];
+
 function showTeam(team) {
   return team.map((item) => {
     return (
@@ -54,6 +86,42 @@ function showTeam(team) {
 }
 
 const start = function (data, ID) {
+  // setTimeout(() => {
+  //   arrAccordeon[0].element.hidden = true;
+  //   // console.log("=7c6bf4=", arrAccordeon[0]);
+  // }, 5000);
+
+  const arrBlockCard = [
+    {
+      blockImg: svg["icon/about_us_portfolio"],
+      altImg: Variable.lang.p.goalOne,
+      title: Variable.lang.p.goalOne,
+      descriptions: Variable.lang.p.goalOneDesc,
+      classItem: "crypto",
+    },
+    {
+      blockImg: svg["icon/about_us_protection"],
+      altImg: Variable.lang.p.goalTwo,
+      title: Variable.lang.p.goalTwo,
+      descriptions: Variable.lang.p.goalTwoDesc,
+      classItem: "unite",
+    },
+    {
+      blockImg: svg["icon/about_us_cryptocurrencies"],
+      altImg: Variable.lang.p.goalThree,
+      title: Variable.lang.p.goalThree,
+      descriptions: Variable.lang.p.goalThreeDesc,
+      classItem: "access",
+    },
+    {
+      blockImg: svg["icon/about_us_quality"],
+      altImg: Variable.lang.p.goalFour,
+      title: Variable.lang.p.goalFour,
+      descriptions: Variable.lang.p.goalFourDesc,
+      classItem: "meta",
+    },
+  ];
+
   const swiperGo = function (index) {
     let swiperItem = new Swiper(".mySwiper", {
       spaceBetween: 30,
@@ -107,229 +175,97 @@ const start = function (data, ID) {
             </div>
             <div class="c-whowe__bg"></div>
           </div>
-          <div class="c-aboutus__content c-container" style="p">
+          <Particles></Particles>
+          <div class="c-aboutus__content c-container">
             <div class="c-aboutus__goals c-goals">
               <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
 
               <div class="list-goals">
-                <div class="list-goals_item crypto">
-                  <div class="goal-img">
-                    <img
-                      alt={Variable.lang.p.goalOne}
-                      src={svg["icon/about_us_portfolio"]}
-                    ></img>
-                  </div>
-
-                  <div class="goal-content">
-                    <h4>{Variable.lang.p.goalOne}</h4>
-                    <div class="goal-content_desc">
-                      {Variable.lang.p.goalOneDesc}
-                    </div>
-                  </div>
-                </div>
-
-                <div class="list-goals_item unite">
-                  <div class="goal-img">
-                    <img
-                      alt={Variable.lang.p.goalTwo}
-                      src={svg["icon/about_us_protection"]}
-                    ></img>
-                  </div>
-
-                  <div class="goal-content">
-                    <h4>{Variable.lang.p.goalTwo}</h4>
-                    <div class="goal-content_desc">
-                      {Variable.lang.p.goalTwoDesc}
-                    </div>
-                  </div>
-                </div>
-                <div class="list-goals_item access">
-                  <div class="goal-img">
-                    <img
-                      alt={Variable.lang.p.goalThree}
-                      src={svg["icon/about_us_cryptocurrencies"]}
-                    ></img>
-                  </div>
-
-                  <div class="goal-content">
-                    <h4>{Variable.lang.p.goalThree}</h4>
-                    <div class="goal-content_desc">
-                      {Variable.lang.p.goalThreeDesc}
-                    </div>
-                  </div>
-                </div>
-                <div class="list-goals_item meta">
-                  <div class="goal-img">
-                    <img
-                      alt={Variable.lang.p.goalFour}
-                      src={svg["icon/about_us_quality"]}
-                    ></img>
-                  </div>
-
-                  <div class="goal-content">
-                    <h4>{Variable.lang.p.goalFour}</h4>
-                    <div class="goal-content_desc">
-                      {Variable.lang.p.goalFourDesc}
-                    </div>
-                  </div>
-                </div>
+                {arrBlockCard.map((item) => {
+                  return (
+                    <AnimatedCard
+                      blockImg={item.blockImg}
+                      altImg={item.altImg}
+                      className={item.classItem}
+                      title={item.title}
+                      descriptions={item.descriptions}
+                    />
+                  );
+                })}
               </div>
 
-              {/*<div class="accordeon">
-                <div class="accordeon-item">
-                  <div
-                    class="accordeon-header"
-                    onclick={function () {
-                      this.nextElementSibling.classList.toggle(
-                        "content-hidden"
-                      );
-                    }}
-                  >
-                    <h5 class="accordeon-header_title">
-                      Цель Crypto Emergency?
-                    </h5>
-                    <img src={svg["arrow-select"]} class="arrow"></img>
-                  </div>
-                  <div class="accordeon-content">
-                    Объединить криптоэнтузиастов со всего мира на
-                    многофункциональной платформе, где собраны все необходимые
-                    инструменты для общения, обучения, заработка и создания
-                    собственного контента.
-                  </div>
-                </div>
+              <div class="accordeon">
+                {arrAccordeon.map((item, index) => {
+                  return (
+                    <Accordeon
+                      title={item.title}
+                      description={item.description}
+                      hidden={item.hidden}
+                      // Element={(el) => {
+                      //   item.element = el;
+                      // }}
+                      onclick={() => {
+                        // console.log("hidden before", item.hidden);
+                        arrAccordeon.forEach((u, index) => {
+                          // u.element.hidden = true;
+                          u.hidden = true;
+                          // console.log("item element", u.element.hiden);
+                        });
 
-                <div class="accordeon-item">
-                  <div
-                    class="accordeon-header"
-                    onclick={function () {
-                      this.nextElementSibling.classList.toggle(
-                        "content-hidden"
-                      );
-                    }}
-                  >
-                    <h5 class="accordeon-header_title">Вопрос 2</h5>
-                    <img src={svg["arrow-select"]} class="arrow"></img>
-                  </div>
-                  <div class="accordeon-content content-hidden">
-                    Это означает, что узел не может находиться в двух точках
-                    документа одновременно. Поэтому, если у узла уже есть
-                    родитель, он сначала удаляется, а затем добавляется в новую
-                    позицию. Node.cloneNode() можно использовать для создания
-                    копии узла перед добавлением его в новый родительский
-                    элемент. Обратите внимание, что копии, сделанные с помощью
-                    cloneNode , не будут автоматически синхронизироваться.
-                  </div>
-                </div>
+                        // item.element.hidden = false;
 
-                <div class="accordeon-item">
-                  <div
-                    class="accordeon-header"
-                    onclick={function () {
-                      this.nextElementSibling.classList.toggle(
-                        "content-hidden"
-                      );
-                    }}
-                  >
-                    <h5 class="accordeon-header_title">Вопрос 3</h5>
-                    <img src={svg["arrow-select"]} class="arrow"></img>
-                  </div>
-                  <div class="accordeon-content content-hidden">
-                    Это означает, что узел не может находиться в двух точках
-                    документа одновременно. Поэтому, если у узла уже есть
-                    родитель, он сначала удаляется, а затем добавляется в новую
-                    позицию. Node.cloneNode() можно использовать для создания
-                    копии узла перед добавлением его в новый родительский
-                    элемент. Обратите внимание, что копии, сделанные с помощью
-                    cloneNode , не будут автоматически синхронизироваться.
-                  </div>
-                </div>
-
-                <div class="accordeon-item">
-                  <div
-                    class="accordeon-header"
-                    onclick={function () {
-                      this.nextElementSibling.classList.toggle(
-                        "content-hidden"
-                      );
-                    }}
-                  >
-                    <h5 class="accordeon-header_title">Вопрос 4</h5>
-                    <img src={svg["arrow-select"]} class="arrow"></img>
-                  </div>
-                  <div class="accordeon-content content-hidden">
-                    Это означает, что узел не может находиться в двух точках
-                    документа одновременно. Поэтому, если у узла уже есть
-                    родитель, он сначала удаляется, а затем добавляется в новую
-                    позицию. Node.cloneNode() можно использовать для создания
-                    копии узла перед добавлением его в новый родительский
-                    элемент. Обратите внимание, что копии, сделанные с помощью
-                    cloneNode , не будут автоматически синхронизироваться.
-                  </div>
-                </div>
+                        item.hidden = false;
+                        initReload();
+                        // this.nextElementSibling.classList.add("content-hidden");
+                        // console.log("hidden after", item.hidden);
+                      }}
+                    />
+                  );
+                })}
               </div>
 
-               <div class="roadmap">
+              <div class="roadmap">
                 <h2>{Variable.lang.h.road_map}</h2>
                 <div class="roadmap-wrap">
-                  <div class="wrap-el_left">
-                    <div class="roadmap_item roadmap_item--0">
-                      <span class="year year--0">
-                        {Variable.lang.p.mapDateOne}
-                      </span>
-                      <p class="decs">{Variable.lang.span.mapDescOne}</p>
-                    </div>
-                    <div class="roadmap-turn">
-                      <img src={svg["roadmap/turn-right1"]}></img>
-                    </div>
-                    <div class="roadmap_item roadmap_item--1">
-                      <span class="year year--1">
-                        {Variable.lang.p.mapDateThree}
-                      </span>
-                      <p class="decs">{Variable.lang.span.mapDescFive}</p>
-                    </div>
-                    <div class="roadmap-turn">
-                      <img src={svg["roadmap/turn-right2"]}></img>
-                    </div>
-                    <div class="roadmap_item roadmap_item--2">
-                      <span class="year year--2">
-                        {Variable.lang.p.October2022}
-                      </span>
-                      <p class="decs">{Variable.lang.span.mapDescFour}</p>
-                    </div>
+                  <div class="roadmap_item roadmap_item--0">
+                    <span class="year year--0">
+                      {Variable.lang.p.mapDateOne}
+                    </span>
+                    <p class="desc">{Variable.lang.span.mapDescOne}</p>
                   </div>
-
-                  <div class="wrap-el_right">
-                    <div class="roadmap-turn">
-                      <img src={svg["roadmap/turn-left1"]}></img>
-                    </div>
-                    <div class="roadmap_item roadmap_item--3">
-                      <span class="year year--3">
-                        {Variable.lang.p.mapDateTwo}
-                      </span>
-                      <p class="decs">{Variable.lang.span.mapDescTwo}</p>
-                    </div>
-                    <div class="roadmap-turn">
-                      <img src={svg["roadmap/turn-left2"]}></img>
-                    </div>
-                    <div class="roadmap_item roadmap_item--4">
-                      <span class="year year--4">
-                        {Variable.lang.p.mapDateFour}
-                      </span>
-                      <p class="decs">{Variable.lang.span.mapDescThree}</p>
-                    </div>
-                    <div class="roadmap-turn">
-                      <img src={svg["roadmap/turn-left3"]}></img>
-                    </div>
-                    <div class="roadmap_item roadmap_item--5">
-                      <span class="year year--5">
-                        {Variable.lang.p.mapDateSix}
-                      </span>
-                      <p class="decs">{Variable.lang.span.mapDescSix}</p>
-                    </div>
+                  <div class="roadmap_item roadmap_item--1">
+                    <span class="year year--1">
+                      {Variable.lang.p.mapDateThree}
+                    </span>
+                    <p class="desc">{Variable.lang.span.mapDescFive}</p>
+                  </div>
+                  <div class="roadmap_item roadmap_item--2">
+                    <span class="year year--2">
+                      {Variable.lang.p.October2022}
+                    </span>
+                    <p class="desc">{Variable.lang.span.mapDescFour}</p>
+                  </div>
+                  <div class="roadmap_item roadmap_item--3">
+                    <span class="year year--3">
+                      {Variable.lang.p.mapDateTwo}
+                    </span>
+                    <p class="desc">{Variable.lang.span.mapDescTwo}</p>
+                  </div>
+                  <div class="roadmap_item roadmap_item--4">
+                    <span class="year year--4">
+                      {Variable.lang.p.mapDateFour}
+                    </span>
+                    <p class="desc">{Variable.lang.span.mapDescThree}</p>
+                  </div>
+                  <div class="roadmap_item roadmap_item--5">
+                    <span class="year year--5">
+                      {Variable.lang.p.mapDateSix}
+                    </span>
+                    <p class="desc">{Variable.lang.span.mapDescSix}</p>
                   </div>
                 </div>
               </div>
-
+              {/*
               <div class="team">
                 <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
                 <div class="swiper mySwiper" After={() => swiperGo()}>
