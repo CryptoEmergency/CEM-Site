@@ -180,6 +180,11 @@
 
 // Show
 
+.modals-test {
+    position: relative;
+    z-index: 10000;
+}
+
 .tasking {
     width: 1240px;
     margin: 0 auto;
@@ -213,13 +218,43 @@
         text-align: center;
     }
 
+    &-wrapper {
+        display: flex;
+    }
+
     &_container {
         display: flex;
-        justify-content: center;
+    }
+
+    &-append {
+        width: 135px;
+        height: 100%;
+
+        &-add {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 135px;
+            height: 135px;
+            border: 3px solid #3d4457;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:hover {
+                img {
+                    opacity: 0.8;
+                }
+            }
+
+            img {
+                height: 100px;
+                opacity: 0.5;
+            }
+        }
     }
 
     &_item {
-        width: 140px;
         cursor: pointer;
     }
 
@@ -309,14 +344,18 @@
     }
 }
 
-.user-append {
-    display: flex;
-    margin-top: 10px;
+.user-title {
+    margin-top: 20px;
+    font-size: 18px;
+}
 
-    &-title {
-        display: block;
-        margin-top: 20px;
-    }
+.user-list {
+    display: flex;
+    height: 50px;
+    margin-top: 10px;
+    padding: 5px;
+    background: #313543;
+    border-radius: 16px;
 
     &-avatar {
         position: relative;
@@ -335,4 +374,67 @@
             height: 100%;
         }
     }
+}
+
+.tasking-media {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    &-button {
+        background: linear-gradient(180.17deg, #31394B 2.73%, #262C3B 96.49%);
+        height: 54px;
+        width: 54px;
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    &_list {
+        display: flex;
+
+        &-wrapper {
+            position: relative;
+            margin-right: 15px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &-preview {
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+
+    &-delete {
+        filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(192deg) brightness(103%) contrast(103%);
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 3;
+        cursor: pointer;
+        display: none;
+
+        img {
+            width: 15px;
+
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+.tasking-media_list-wrapper:hover .tasking-media-delete {
+    display: block;
 }
