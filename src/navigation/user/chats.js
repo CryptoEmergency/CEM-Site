@@ -342,7 +342,7 @@ const start = function (data, ID) {
                                                     user = item.users[1]
                                                 }
                                             }
-                                            console.log('=2a84c1=',item)
+                                            console.log('=2a84c1=', item)
 
                                             return (
                                                 <div
@@ -381,21 +381,14 @@ const start = function (data, ID) {
                                                     <div class="messages_list_item_info">
                                                         <div class="messages_list_item_info-1">
                                                             <p>{user.nickname}</p>
-                                                            { () => {
-                                                                if (lastMessage.text && lastMessage.author != Variable.myInfo._id) {
+                                                            {() => {
+                                                                if (lastMessage.text && lastMessage.author == Variable.myInfo._id) {
                                                                     return (
-                                                                        <span>{lastMessage.text}</span>
-                                                                    )
-                                                                } else if(lastMessage.text && lastMessage.author == Variable.myInfo._id) {
-                                                                    return (
-                                                                        <div class="messages_list_wrapper">
-                                                                            {/* <img src={svg[iconStatus]} /> */}
-                                                                            <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
-                                                                            <span>{lastMessage.text}</span>
-                                                                        </div>
+                                                                        <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
                                                                     )
                                                                 }
                                                             }}
+                                                            <span>{lastMessage.text}</span>
                                                         </div>
                                                         <div class="messages_list_item_info-2">
                                                             {lastMessage.author == Variable.myInfo._id
@@ -451,8 +444,8 @@ const start = function (data, ID) {
                                                                     })
                                                                     // console.log('=82f033= messagesOfDate =', messagesOfDate)
                                                                     // console.log('=91ca45=',item._id, messagesOfDate[messagesOfDate.length - 1]._id, item._id == messagesOfDate[messagesOfDate.length - 1]._id)
-            
-                                                                    if(item._id == messagesOfDate[messagesOfDate.length - 1]._id) {
+
+                                                                    if (item._id == messagesOfDate[messagesOfDate.length - 1]._id) {
                                                                         return (
                                                                             <h3 class="messages_date">{fn.getDateFormat(date, "chatdate")}</h3>
                                                                         )
@@ -789,6 +782,25 @@ const start = function (data, ID) {
                                                                                 }
                                                                             }
                                                                         }}
+
+                                                                        {/* {() => {
+                                                                            item.author == Variable.myInfo._id ?
+                                                                                <i
+                                                                                    class={item.author == Variable.myInfo._id ? "your_message_delete" : "friend_message_delete"}
+                                                                                    title="Удалить сообщение"
+                                                                                >
+                                                                                    <img src={svg["close_group"]} width="10" height="10" />
+                                                                                </i>
+                                                                                : null
+                                                                        }} */}
+
+                                                                        <i
+                                                                            class={item.author == Variable.myInfo._id ? "your_message_delete" : "friend_message_delete"}
+                                                                            title="Удалить сообщение"
+                                                                            hidden={item.author != Variable.myInfo._id}
+                                                                        >
+                                                                            <img src={svg["close_group"]} width="10" height="10" />
+                                                                        </i>
                                                                         <div class={item.author == Variable.myInfo._id ? "your_message_date" : "friend_message_date"}>
                                                                             {/* {Helpers.getDateFormat(item.showDate, "now")} */}
                                                                             {fn.getDateFormat(item.showDate, "chattime")}

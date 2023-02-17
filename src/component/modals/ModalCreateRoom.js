@@ -13,24 +13,24 @@ const ModalCreateRoom = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   let close = true
   const loadPhoto = async function (file, type, xhr) {
-    
+
     let dataURL;
     let fileImg = file[0];
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-        // convert image file to base64 string
-        dataURL = reader.result;
+      // convert image file to base64 string
+      dataURL = reader.result;
     }, false);
-    
+
     if (fileImg) {
-        reader.readAsDataURL(fileImg);
+      reader.readAsDataURL(fileImg);
     }
 
     let previewObj = {
-        src: dataURL,
-        type: "image",
-        upload: 0,
-        size: 0
+      src: dataURL,
+      type: "image",
+      upload: 0,
+      size: 0
     };
     Static.mediaInputs.show = true;
     Static.mediaInputs.value.push(previewObj);
@@ -38,7 +38,7 @@ const ModalCreateRoom = function (data, ID) {
 
     let nameFile = "file.png"
     if (fileImg.name) {
-        nameFile = fileImg.name
+      nameFile = fileImg.name
     }
     const formData = new FormData()
     formData.append('media', fileImg, nameFile);
@@ -46,108 +46,108 @@ const ModalCreateRoom = function (data, ID) {
     xhr = new XMLHttpRequest()
     xhr.open('POST', `/upload/${type}/`)
     xhr.onload = async function () {
-        Static.mediaInputs.show = true;
-        if (!this.response) {
-            return
-        }
-        let response = JSON.parse(this.response);
-        Static.mediaInputs.value[numItem] = {
-            aspect: Static.mediaInputs.selectAspect,
-            type: response.mimetype.split("/")[0],
-            name: response.name
-        }
-        Static.isValid = true;
-        initReload();
-        // console.log('=af134a=', response)
+      Static.mediaInputs.show = true;
+      if (!this.response) {
+        return
+      }
+      let response = JSON.parse(this.response);
+      Static.mediaInputs.value[numItem] = {
+        aspect: Static.mediaInputs.selectAspect,
+        type: response.mimetype.split("/")[0],
+        name: response.name
+      }
+      Static.isValid = true;
+      initReload();
+      // console.log('=af134a=', response)
     }
     xhr.upload.onprogress = async function (e) {
-        let contentLength;
-        if (e.lengthComputable) {
-            contentLength = e.total;
-        } else {
-            contentLength = parseInt(
-                e.target.getResponseHeader(
-                    "x-decompressed-content-length"
-                ),
-                10
-            );
-        }
+      let contentLength;
+      if (e.lengthComputable) {
+        contentLength = e.total;
+      } else {
+        contentLength = parseInt(
+          e.target.getResponseHeader(
+            "x-decompressed-content-length"
+          ),
+          10
+        );
+      }
 
-        if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
-            Static.mediaInputs.value.splice(numItem, 1);
-            initReload()
-            return
-        }
-        Static.mediaInputs.value[numItem].upload = e.loaded
-        Static.mediaInputs.value[numItem].size = contentLength;
-        initReload();
+      if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+        Static.mediaInputs.value.splice(numItem, 1);
+        initReload()
+        return
+      }
+      Static.mediaInputs.value[numItem].upload = e.loaded
+      Static.mediaInputs.value[numItem].size = contentLength;
+      initReload();
     }
 
     xhr.send(formData)
-};
+  };
 
-const sendPhoto = async function (crooper, index) {
+  const sendPhoto = async function (crooper, index) {
     if (!crooper) {
-        return
+      return
     }
     let canvas;
     canvas = crooper.getCroppedCanvas({});
     let previewObj = {
-        src: canvas.toDataURL(),
-        type: "image",
-        upload: 0,
-        size: 0
+      src: canvas.toDataURL(),
+      type: "image",
+      upload: 0,
+      size: 0
     };
     Static.mediaInputs.show = true;
     Static.mediaInputs.value[index] = previewObj;
     initReload();
 
     await canvas.toBlob(function (blob) {
-        fn.uploadMedia(
-            blob,
-            "chat",
-            async function () {
-                Static.mediaInputs.show = true;
-                if (!this.response) {
-                    return
-                }
-                let response = JSON.parse(this.response);
-                Static.mediaInputs.value[index] = {
-                    aspect: Static.mediaInputs.selectAspect,
-                    type: response.mimetype.split("/")[0],
-                    name: response.name
-                }
-                Static.isValid = true;
-                initReload();
-            },
-            async function (e) {
-                let contentLength;
-                if (e.lengthComputable) {
-                    contentLength = e.total;
-                } else {
-                    contentLength = parseInt(
-                        e.target.getResponseHeader(
-                            "x-decompressed-content-length"
-                        ),
-                        10
-                    );
-                }
+      fn.uploadMedia(
+        blob,
+        "chat",
+        async function () {
+          Static.mediaInputs.show = true;
+          if (!this.response) {
+            return
+          }
+          let response = JSON.parse(this.response);
+          Static.mediaInputs.value[index] = {
+            aspect: Static.mediaInputs.selectAspect,
+            type: response.mimetype.split("/")[0],
+            name: response.name
+          }
+          Static.isValid = true;
+          initReload();
+        },
+        async function (e) {
+          let contentLength;
+          if (e.lengthComputable) {
+            contentLength = e.total;
+          } else {
+            contentLength = parseInt(
+              e.target.getResponseHeader(
+                "x-decompressed-content-length"
+              ),
+              10
+            );
+          }
 
-                if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
-                    Static.mediaInputs.value.splice(index, 1);
-                    initReload()
-                    return
-                }
-                Static.mediaInputs.value[index].upload = e.loaded
-                Static.mediaInputs.value[index].size = contentLength;
-                initReload();
-            }
-        );
-        initReload();
-        Variable.DelModals("ModalCropImage");
+          if (Static.mediaInputs.value[index].upload === Static.mediaInputs.value[index].size && Static.mediaInputs.value[index].upload !== 0) {
+            Static.mediaInputs.value.splice(index, 1);
+            initReload()
+            return
+          }
+          Static.mediaInputs.value[index].upload = e.loaded
+          Static.mediaInputs.value[index].size = contentLength;
+          initReload();
+        }
+      );
+      initReload();
+      Variable.DelModals("ModalCropImage");
     });
     return
-}
+  }
 
   //инпут название
   Static.label = {
@@ -232,7 +232,7 @@ const sendPhoto = async function (crooper, index) {
   }
 
 
-  
+
   //кодовое слово
   Static.Confirm = {
     label: "Придумайте кодовое слово",
@@ -263,26 +263,27 @@ const sendPhoto = async function (crooper, index) {
   Static.mediaInputs = {
     value: [],
     show: false,
-}
+  }
 
 
   init(async function () {
-  Static.optionsSelect = {
+    Static.optionsSelect = {
       Category: {
-        active:"NFT",
-        items:[
-          {text:"NFT",value:"NFT"},
-          {text:"Crypto вселененная",value:"Crypto"},
-          {text:"Altcoin",value:"Altcoin"},
-          {text:"Bitcoin",value:"Bitcoin"},
-          {text:"Finances",value:"Finances"},
-          {text:"Trading",value:"Trading"}
+        active: "NFT",
+        items: [
+          { text: "NFT", value: "NFT" },
+          { text: "Crypto вселененная", value: "Crypto" },
+          { text: "Altcoin", value: "Altcoin" },
+          { text: "Bitcoin", value: "Bitcoin" },
+          { text: "Finances", value: "Finances" },
+          { text: "Trading", value: "Trading" }
         ],
-      nameOptions:"Category",
-      open:false,
-      title:"Выбрать"
-      }};
-      
+        nameOptions: "Category",
+        open: false,
+        title: "Выбрать"
+      }
+    };
+
   }, () => {
 
 
@@ -313,20 +314,22 @@ const sendPhoto = async function (crooper, index) {
 
 
     return (
-      <div class="c-modal c-modal--open" id="ModalCreateRoom" onclick={function(e){ if(close){ 
-  
-        fn.modals.close(ID)
-      }}}>
-        <section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
+      <div class="c-modal c-modal--open" id="ModalCreateRoom" onclick={function (e) {
+        if (close) {
 
-         }}
-         onmouseleave={function(){
-             
-             close = true
-    
-           }}>
+          fn.modals.close(ID)
+        }
+      }}>
+        <section class="c-modal__dialog" onmouseover={function () {
+
+          close = false
+
+        }}
+          onmouseleave={function () {
+
+            close = true
+
+          }}>
           <header class="c-modal__header">
             <div class="complain_modal">
               <h4>Создать комнату</h4>
@@ -356,18 +359,18 @@ const sendPhoto = async function (crooper, index) {
               <br />
               <div class="c-comments__field">
 
-              <label>Категории</label>
-              <Select
-            options={Static.optionsSelect.Category}
-      
-            callback={
-              async (active, nameOptions) => {
-              
-                Static.Category = active
+                <label>Категории</label>
+                <Select
+                  options={Static.optionsSelect.Category}
 
-              }
-            }
-          />
+                  callback={
+                    async (active, nameOptions) => {
+
+                      Static.Category = active
+
+                    }
+                  }
+                />
               </div>
               <br />
               <div class="container-input">
@@ -447,39 +450,39 @@ const sendPhoto = async function (crooper, index) {
                 }}
               </div> */}
               <MediaButton
-                                                onclickPhoto={function () {
-                                                    if (this.files.length == 0) {
-                                                        return;
-                                                    }
+                onclickPhoto={function () {
+                  if (this.files.length == 0) {
+                    return;
+                  }
 
-                                                    loadPhoto(this.files, "chat");
+                  loadPhoto(this.files, "chat");
 
-                                                }}
-                                          
-                                                iconPhoto={"message_camera"}
-                                            />
-                                            {  Static.mediaInputs.show && Static.mediaInputs.value.length
-                                                ?
-                                                <div class="create_post_chapter createPostImage">
-                                                    {
-                                                        Static.mediaInputs.value.map((item, index) => {
-                                                            if (item.type != "audio") {
-                                                                return (
-                                                                    <MediaPreview
-                                                                        item={item}
-                                                                        index={index}
-                                                                        type="chat"
-                                                                        Static={Static}
-                                                                        sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
-                                                                    />
-                                                                );
-                                                            }
-                                                        })
-                                                    }
-                                                </div>
-                                                :
-                                                null
-                                        }
+                }}
+
+                iconPhoto={"message_camera"}
+              />
+              {Static.mediaInputs.show && Static.mediaInputs.value.length
+                ?
+                <div class="create_post_chapter createPostImage">
+                  {
+                    Static.mediaInputs.value.map((item, index) => {
+                      if (item.type != "audio") {
+                        return (
+                          <MediaPreview
+                            item={item}
+                            index={index}
+                            type="chat"
+                            Static={Static}
+                            sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
+                          />
+                        );
+                      }
+                    })
+                  }
+                </div>
+                :
+                null
+              }
 
 
               <div class={["registration-btn", active]}>
@@ -495,13 +498,13 @@ const sendPhoto = async function (crooper, index) {
                     let languages = Static.Lang.code
                     let country = Static.Country.code
                     // let system = false
-                    let request = { status, visible, confirmuser, title, description, images, languages, country,category }
-                   // console.log(Static.mediaInputs.value[0].name)
+                    let request = { status, visible, confirmuser, title, description, images, languages, country, category }
+                    // console.log(Static.mediaInputs.value[0].name)
                     let requier = await fn.restApi.setUserRoom.create(request)
 
-                   if (requier.status == "ok") {
-                    
-                     Static.callback(requier)
+                    if (requier.status == "ok") {
+
+                      Static.callback(requier)
                       fn.modals.close(ID)
                     }
                   }
