@@ -204,6 +204,7 @@
 
 .tasking-user {
     position: relative;
+    margin-bottom: 40px;
     overflow: hidden;
 
     h3 {
@@ -219,12 +220,14 @@
 
     &_item {
         width: 140px;
+        cursor: pointer;
     }
 
     &_avatar {
         position: relative;
-        width: 165px;
-        height: 165px;
+        width: 135px;
+        height: 135px;
+        margin-bottom: 15px;
         overflow: hidden;
         border-radius: 50%;
 
@@ -240,5 +243,96 @@
     &_name {
         display: block;
         text-align: center;
+    }
+}
+
+.tasking-create {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+
+    &_container {
+        display: inline-flex;
+        border: 1px solid #ffffff;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    &:hover {
+        color: #d2d2d2;
+    }
+
+    span {
+        padding: 10px 20px;
+        font-size: 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+}
+
+.tasking-list {
+    display: flex;
+    flex-direction: column;
+
+    &_tabs {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.11);
+        backdrop-filter: blur(10px);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+}
+
+.tasking-tabs {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: calc(100% / 3);
+    font-weight: 500;
+    opacity: .7;
+
+    &:nth-child(2) {
+        border-right: 2px solid #303545;
+        border-left: 2px solid #303545;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+
+    span {
+        font-size: 18px;
+    }
+}
+
+.user-append {
+    display: flex;
+    margin-top: 10px;
+
+    &-title {
+        display: block;
+        margin-top: 20px;
+    }
+
+    &-avatar {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        overflow: hidden;
+        border-radius: 50%;
+        cursor: pointer;
+
+        img {
+            position: absolute;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+            height: 100%;
+        }
     }
 }

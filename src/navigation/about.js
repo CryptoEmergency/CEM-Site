@@ -175,7 +175,162 @@ const start = function (data, ID) {
                 </div>
               </div>
 
-              {/* <div class="team">
+              {/*<div class="accordeon">
+                <div class="accordeon-item">
+                  <div
+                    class="accordeon-header"
+                    onclick={function () {
+                      this.nextElementSibling.classList.toggle(
+                        "content-hidden"
+                      );
+                    }}
+                  >
+                    <h5 class="accordeon-header_title">
+                      Цель Crypto Emergency?
+                    </h5>
+                    <img src={svg["arrow-select"]} class="arrow"></img>
+                  </div>
+                  <div class="accordeon-content">
+                    Объединить криптоэнтузиастов со всего мира на
+                    многофункциональной платформе, где собраны все необходимые
+                    инструменты для общения, обучения, заработка и создания
+                    собственного контента.
+                  </div>
+                </div>
+
+                <div class="accordeon-item">
+                  <div
+                    class="accordeon-header"
+                    onclick={function () {
+                      this.nextElementSibling.classList.toggle(
+                        "content-hidden"
+                      );
+                    }}
+                  >
+                    <h5 class="accordeon-header_title">Вопрос 2</h5>
+                    <img src={svg["arrow-select"]} class="arrow"></img>
+                  </div>
+                  <div class="accordeon-content content-hidden">
+                    Это означает, что узел не может находиться в двух точках
+                    документа одновременно. Поэтому, если у узла уже есть
+                    родитель, он сначала удаляется, а затем добавляется в новую
+                    позицию. Node.cloneNode() можно использовать для создания
+                    копии узла перед добавлением его в новый родительский
+                    элемент. Обратите внимание, что копии, сделанные с помощью
+                    cloneNode , не будут автоматически синхронизироваться.
+                  </div>
+                </div>
+
+                <div class="accordeon-item">
+                  <div
+                    class="accordeon-header"
+                    onclick={function () {
+                      this.nextElementSibling.classList.toggle(
+                        "content-hidden"
+                      );
+                    }}
+                  >
+                    <h5 class="accordeon-header_title">Вопрос 3</h5>
+                    <img src={svg["arrow-select"]} class="arrow"></img>
+                  </div>
+                  <div class="accordeon-content content-hidden">
+                    Это означает, что узел не может находиться в двух точках
+                    документа одновременно. Поэтому, если у узла уже есть
+                    родитель, он сначала удаляется, а затем добавляется в новую
+                    позицию. Node.cloneNode() можно использовать для создания
+                    копии узла перед добавлением его в новый родительский
+                    элемент. Обратите внимание, что копии, сделанные с помощью
+                    cloneNode , не будут автоматически синхронизироваться.
+                  </div>
+                </div>
+
+                <div class="accordeon-item">
+                  <div
+                    class="accordeon-header"
+                    onclick={function () {
+                      this.nextElementSibling.classList.toggle(
+                        "content-hidden"
+                      );
+                    }}
+                  >
+                    <h5 class="accordeon-header_title">Вопрос 4</h5>
+                    <img src={svg["arrow-select"]} class="arrow"></img>
+                  </div>
+                  <div class="accordeon-content content-hidden">
+                    Это означает, что узел не может находиться в двух точках
+                    документа одновременно. Поэтому, если у узла уже есть
+                    родитель, он сначала удаляется, а затем добавляется в новую
+                    позицию. Node.cloneNode() можно использовать для создания
+                    копии узла перед добавлением его в новый родительский
+                    элемент. Обратите внимание, что копии, сделанные с помощью
+                    cloneNode , не будут автоматически синхронизироваться.
+                  </div>
+                </div>
+              </div>
+
+               <div class="roadmap">
+                <h2>{Variable.lang.h.road_map}</h2>
+                <div class="roadmap-wrap">
+                  <div class="wrap-el_left">
+                    <div class="roadmap_item roadmap_item--0">
+                      <span class="year year--0">
+                        {Variable.lang.p.mapDateOne}
+                      </span>
+                      <p class="decs">{Variable.lang.span.mapDescOne}</p>
+                    </div>
+                    <div class="roadmap-turn">
+                      <img src={svg["roadmap/turn-right1"]}></img>
+                    </div>
+                    <div class="roadmap_item roadmap_item--1">
+                      <span class="year year--1">
+                        {Variable.lang.p.mapDateThree}
+                      </span>
+                      <p class="decs">{Variable.lang.span.mapDescFive}</p>
+                    </div>
+                    <div class="roadmap-turn">
+                      <img src={svg["roadmap/turn-right2"]}></img>
+                    </div>
+                    <div class="roadmap_item roadmap_item--2">
+                      <span class="year year--2">
+                        {Variable.lang.p.October2022}
+                      </span>
+                      <p class="decs">{Variable.lang.span.mapDescFour}</p>
+                    </div>
+                  </div>
+
+                  <div class="wrap-el_right">
+                    <div class="roadmap-turn">
+                      <img src={svg["roadmap/turn-left1"]}></img>
+                    </div>
+                    <div class="roadmap_item roadmap_item--3">
+                      <span class="year year--3">
+                        {Variable.lang.p.mapDateTwo}
+                      </span>
+                      <p class="decs">{Variable.lang.span.mapDescTwo}</p>
+                    </div>
+                    <div class="roadmap-turn">
+                      <img src={svg["roadmap/turn-left2"]}></img>
+                    </div>
+                    <div class="roadmap_item roadmap_item--4">
+                      <span class="year year--4">
+                        {Variable.lang.p.mapDateFour}
+                      </span>
+                      <p class="decs">{Variable.lang.span.mapDescThree}</p>
+                    </div>
+                    <div class="roadmap-turn">
+                      <img src={svg["roadmap/turn-left3"]}></img>
+                    </div>
+                    <div class="roadmap_item roadmap_item--5">
+                      <span class="year year--5">
+                        {Variable.lang.p.mapDateSix}
+                      </span>
+                      <p class="decs">{Variable.lang.span.mapDescSix}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="team">
                 <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
                 <div class="swiper mySwiper" After={() => swiperGo()}>
                   <div class="swiper-wrapper">{showTeam(team)}</div>

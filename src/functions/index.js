@@ -4,7 +4,7 @@ import { initData } from "./initData.js"
 import { restApi } from "./restApi.js"
 import { itemsMenu } from "./itemsMenu.js"
 import { web3CEM, web3Action } from "./web3.js"
-
+import socket from "./socket.js"
 import { functionsMain } from "@src/lists/files/index.js"
 
 
@@ -21,7 +21,7 @@ Object.assign(fn, functionsMain())
 //2022 =======================
 
 fn.modals = modals
-
+fn.socket = socket
 fn.restApi = restApi
 fn.itemsMenu = itemsMenu
 fn.web3CEM = web3CEM
