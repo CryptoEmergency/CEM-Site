@@ -245,7 +245,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             <img
                                 id="currentUserBackground"
                                 class="c-userpreview__bg"
-                                src={userInfo.background ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
+                                src={userInfo.background && userInfo.background.name ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
                             />
 
                             {() => {

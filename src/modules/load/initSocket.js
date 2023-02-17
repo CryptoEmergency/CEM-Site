@@ -11,21 +11,27 @@ const options = {
 
 let socket = null
 // Variable.socket = socket
-Variable.socketConnect = false
+// Variable.socketConnect = false
 
 const initSocket = async function () {
+    // return
     options.auth.uuid = Variable.uuid
     options.auth.status = Variable.auth
     socket = io("/", options)
 
     socket.on("connect", (socket) => {
         Variable.socketConnect = true
-        initReload()
+        if (Variable.load) {
+            initReload()
+        }
     });
 
     socket.on('disconnect', () => {
+        socket = null
         Variable.socketConnect = false
-        initReload()
+        if (Variable.load) {
+            initReload()
+        }
     });
 
     for (let key in Variable.socketList) {

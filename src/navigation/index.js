@@ -30,6 +30,16 @@ const start = function (data, ID) {
 
     init(
         async () => {
+            let tmp = {}
+            const callback = function (res) {
+                console.log('=9c0594 callback=', res)
+            }
+            // let tmp2 = await fn.socket.get({ method: "Course", params: { filter: {} } }, tmp, callback)
+            // tmp.test = await fn.socket.get({ method: "Course", params: { filter: {} } }, callback)
+            // tmp.test = await fn.socket.get({ params: { filter: {} } }, callback)
+            console.log('=7f467d tmp=', tmp)
+
+
             Static.dataUsers = {}
             Static.dataQuestions = {}
             fn.initData.users(Static.dataUsers)
