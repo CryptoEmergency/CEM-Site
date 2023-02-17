@@ -1,41 +1,43 @@
-import { ServerInit, ServerBuild, ServerStart } from '@betarost/cemserver'
-import path from 'path'
+import { ServerInit, ServerBuild, ServerStart } from "@betarost/cemserver";
+import path from "path";
 
-const port = 80
-const hotReload = false
-const target = "crypto-emergency.com"
+const port = 80;
+const hotReload = false;
+const target = "crypto-emergency.com";
 // const target = "idns.work"
-const mode = "development"
+const mode = "development";
 // const mode = "production"
 
 ServerInit({
-    target,
-    hotReload,
-    path: {
-        src: path.resolve('src/index.js'),
-        public: path.resolve('public'),
-        fileName: "main.js"
+  target,
+  hotReload,
+  path: {
+    src: path.resolve("src/index.js"),
+    public: path.resolve("public"),
+    fileName: "main.js",
+  },
+  port,
+  mode,
+  allowedHosts: [target],
+  proxy: {
+    "/api": {
+      target: `https://${target}`,
+      changeOrigin: true,
+      secure: false,
     },
-    port,
-    mode,
-    allowedHosts: [target],
-    proxy: {
-        '/api': {
-            target: `https://${target}`,
-            changeOrigin: true,
-            secure: false
-        },
-        '/assets/upload': {
-            target: `https://${target}`,
-            changeOrigin: true,
-            secure: false
-        },
-        '/upload': {
-            target: `https://${target}`,
-            changeOrigin: true,
-            secure: false
-        },
-    }
+    "/assets/upload": {
+      target: `https://${target}`,
+      changeOrigin: true,
+      secure: false,
+    },
+    "/upload": {
+      target: `https://${target}`,
+      changeOrigin: true,
+      secure: false,
+    },
+  },
 });
 
-ServerBuild({}).then((result) => { if (result) ServerStart(result) });
+ServerBuild({}).then((result) => {
+  if (result) ServerStart(result);
+});
