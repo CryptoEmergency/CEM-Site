@@ -342,7 +342,8 @@
 			}
 		}
 
-		button[data-type='voiceline'][data-page_type="posts"] {
+		button[data-type='voiceline'][data-page_type="posts"],
+		button[data-type='voiceline'][data-page_type="chat"] {
 			width: 38px;
 			height: 41px;
 			padding: 10px 6px;
@@ -743,6 +744,7 @@
 		line-height: 0;
 		// background: url("../svg/close_group.svg") no-repeat center / cover;
 		cursor: pointer;
+		z-index: 2001;
 
 		img {
 			margin: 0 !important;
