@@ -190,6 +190,8 @@
                     font-weight: 600;
                     font-size: 13px;
                     color: #C2C2C2;
+                    margin-bottom: 10px;
+                    display: block;
                 }
 
                 span {
@@ -201,15 +203,17 @@
                 }
             }
 
-            input {
+            .input {
                 font-weight: 500;
-                font-size: 24px;
+                font-size: 21px;
                 text-decoration-line: underline;
                 color: #FFFFFF;
                 outline: none;
                 border: 0;
                 background: none;
                 width: 60%;
+                flex-grow: 1;
+                word-break: break-all;
 
                 &::selection {
                     background: transparent;
@@ -299,6 +303,12 @@
     padding-bottom: 20px;
     border: 0;
     border-bottom: 1px solid #484C59;
+
+    @media(max-width: 970px) {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
 }
 
 /* affiliate programm banners */
@@ -587,9 +597,11 @@
             &_link {
                 flex-wrap: wrap;
 
-                input {
+                .input {
+                    flex-grow: 1;
                     width: 100%;
-                    text-align: center;
+                    font-size: 1rem;
+                    // text-align: center;
                 }
 
                 &_block {
