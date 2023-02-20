@@ -265,6 +265,48 @@ const start = function (data, ID) {
         // }
     }
 
+    // Конвертирование времени из секунд в дни : часы : минуты : секунды
+    const convertToTime = function (secs) {
+        let hh, mmt, mm, ss, dd
+
+        secs = parseInt(secs);
+        hh = secs / 3600;
+        hh = parseInt(hh);
+        mmt = secs - (hh * 3600);
+        mm = mmt / 60;
+        mm = parseInt(mm);
+        ss = mmt - (mm * 60);
+
+        if (hh > 23) {
+            dd = hh / 24;
+            dd = parseInt(dd);
+            hh = hh - (dd * 24);
+        } else {
+            dd = 0;
+        }
+
+        if (ss < 10) {
+            ss = "0" + ss;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
+        if (hh < 10) {
+            hh = "0" + hh;
+        }
+        if (dd == 0) {
+            return (hh + ":" + mm + ":" + ss);
+        }
+        else {
+            if (dd > 1) {
+                return (dd + " day " + hh + ":" + mm + ":" + ss);
+            }
+            else {
+                return (dd + " day " + hh + ":" + mm + ":" + ss);
+            }
+        }
+    }
+
     init(
         async () => {
             Static.clickVideo = false;
@@ -469,17 +511,17 @@ const start = function (data, ID) {
                                                                 }
                                                             }}
                                                             {() => {
-                                                                if(lastMessage.text) {
+                                                                if (lastMessage.text) {
                                                                     return (
                                                                         <span>{lastMessage.text}</span>
                                                                     )
-                                                                } else if(lastMessage.media.length) {
+                                                                } else if (lastMessage.media.length) {
                                                                     return (
                                                                         <div class="messages_media">
                                                                             {() => {
-                                                                                if(
-                                                                                    !lastMessage.text && lastMessage.media.length 
-                                                                                    && (lastMessage.media[0].type == "audio" || lastMessage.media[0].type == "video" || lastMessage.media[0].type == "image") 
+                                                                                if (
+                                                                                    !lastMessage.text && lastMessage.media.length
+                                                                                    && (lastMessage.media[0].type == "audio" || lastMessage.media[0].type == "video" || lastMessage.media[0].type == "image")
                                                                                     && lastMessage.author == Variable.myInfo._id
                                                                                 ) {
                                                                                     return (
@@ -492,21 +534,21 @@ const start = function (data, ID) {
                                                                                     class={iconStatus.name == "read_message_icon" ? "messages_media_content_views" : null}
                                                                                     src={svg[`icon/${lastMessage.media[0].type == "audio" ? "microphone" :
                                                                                         lastMessage.media[0].type == "video" ?
-                                                                                        "video_camera" :
-                                                                                        // lastMessage.media[0].type == "image" ?
-                                                                                        "photocamera" }`]}
+                                                                                            "video_camera" :
+                                                                                            // lastMessage.media[0].type == "image" ?
+                                                                                            "photocamera"}`]}
                                                                                     width="16"
                                                                                     height="16"
                                                                                 />
                                                                                 <span>
                                                                                     {
                                                                                         lastMessage.media[0].type == "audio" ?
-                                                                                        Variable.lang.text.lastChatAudio :
-                                                                                        lastMessage.media[0].type == "video" ?
-                                                                                        Variable.lang.text.lastChatVideo :
-                                                                                        lastMessage.media[0].type == "image" ?
-                                                                                        Variable.lang.text.lastChatImage :
-                                                                                        null
+                                                                                            Variable.lang.text.lastChatAudio :
+                                                                                            lastMessage.media[0].type == "video" ?
+                                                                                                Variable.lang.text.lastChatVideo :
+                                                                                                lastMessage.media[0].type == "image" ?
+                                                                                                    Variable.lang.text.lastChatImage :
+                                                                                                    null
                                                                                     }
                                                                                 </span>
                                                                             </span>
@@ -514,7 +556,7 @@ const start = function (data, ID) {
                                                                     )
                                                                 }
                                                             }}
-                                                            
+
                                                         </div>
                                                         <div class="messages_list_item_info-2">
                                                             {lastMessage.author == Variable.myInfo._id
@@ -1018,6 +1060,17 @@ const start = function (data, ID) {
                                                         if (!e.target.dataset.timing) {
                                                             e.target.dataset.timing = Date.now()
 
+                                                            debugger
+                                                            let timeoutID = setInterval(function () {
+                                                                let diff = Date.now() - e.target.dataset.timing
+                                                                let secs = Math.round(diff / 1000)
+                                                                let res = convertToTime(secs)
+                                                                debugger
+                                                                console.log('=b62baa=',res, e.target )
+                                                                e.target.innerHTML = `<span class="messages_timer">${res}</span>`
+                                                                initReload()
+                                                            }, 1000)
+
                                                             await navigator.mediaDevices.getUserMedia({ audio: true })
                                                                 .then(stream => {
                                                                     Static.mediaRecorder = new MediaRecorder(stream);
@@ -1106,7 +1159,11 @@ const start = function (data, ID) {
                                                                         audioChunks = [];
                                                                         var track = stream.getTracks()[0]
                                                                         track.stop()
-                                                                        e.target.hasAttribute("data-timing") ? e.target.removeAttribute("data-timing") : null
+                                                                        if(e.target.hasAttribute("data-timing")) {
+                                                                            e.target.removeAttribute("data-timing")
+                                                                            e.target.innerHTML = '';
+                                                                        }
+                                                                        clearTimeout(timeoutID);
                                                                     })
                                                                     Static.mediaRecorder.start();
                                                                     console.log("voicelineStart");
@@ -1135,78 +1192,78 @@ const start = function (data, ID) {
                                                 <ButtonSubmit
                                                     text={<img class="c-comments__icon" src={svg["message_send"]} />}
                                                     className="c-comments__send button-container-preview"
-                                                    onclick={ () => { submitMessage(); }
-                                                    //     async (tmp, el) => {
-                                                    //     if (!Static.message.el.value.trim().length && Static.mediaInputs.value.length == 0) {
-                                                    //         return
-                                                    //     }
-                                                    //     let text, media = [];
-                                                    //     if (Static.message.el.value.trim().length) {
-                                                    //         text = Static.message.el.value.trim()
-                                                    //     }
-                                                    //     // debugger
-                                                    //     if (Static.mediaInputs.value.length != 0) {
-                                                    //         Static.mediaInputs.value.forEach(async (file) => {
-                                                    //             if (file.type == 'audio') {
-                                                    //                 let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
-                                                    //             } else if (file.type == 'image' || file.type == 'video') {
-                                                    //                 media.push(file)
-                                                    //             }
-                                                    //         })
-                                                    //     }
-                                                    //     // let data = { value: { users: Static.activeUser._id, message: { text } } }
-                                                    //     // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                    //     // if (media.length > 0) {
-                                                    //     let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
-                                                    //     // console.log('=6befba=', response)
-                                                    //     // debugger
-                                                    //     if (response.status === "ok") {
-                                                    //         Static.message.el.value = ""
-                                                    //         Static.message.value = ""
-                                                    //         if (Static.message.adaptive) {
-                                                    //             Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
-                                                    //         }
-                                                    //         if (response && response.list_records && response.list_records[0]) {
-                                                    //             let newRes = response.list_records[0]
+                                                    onclick={() => { submitMessage(); }
+                                                        //     async (tmp, el) => {
+                                                        //     if (!Static.message.el.value.trim().length && Static.mediaInputs.value.length == 0) {
+                                                        //         return
+                                                        //     }
+                                                        //     let text, media = [];
+                                                        //     if (Static.message.el.value.trim().length) {
+                                                        //         text = Static.message.el.value.trim()
+                                                        //     }
+                                                        //     // debugger
+                                                        //     if (Static.mediaInputs.value.length != 0) {
+                                                        //         Static.mediaInputs.value.forEach(async (file) => {
+                                                        //             if (file.type == 'audio') {
+                                                        //                 let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
+                                                        //             } else if (file.type == 'image' || file.type == 'video') {
+                                                        //                 media.push(file)
+                                                        //             }
+                                                        //         })
+                                                        //     }
+                                                        //     // let data = { value: { users: Static.activeUser._id, message: { text } } }
+                                                        //     // let response = await api({ type: "set", action: "setUserChats", data: data })
+                                                        //     // if (media.length > 0) {
+                                                        //     let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
+                                                        //     // console.log('=6befba=', response)
+                                                        //     // debugger
+                                                        //     if (response.status === "ok") {
+                                                        //         Static.message.el.value = ""
+                                                        //         Static.message.value = ""
+                                                        //         if (Static.message.adaptive) {
+                                                        //             Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
+                                                        //         }
+                                                        //         if (response && response.list_records && response.list_records[0]) {
+                                                        //             let newRes = response.list_records[0]
 
-                                                    //             if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
-                                                    //                 Static.messageList.list_records[0].message.unshift(newRes)
-                                                    //             } else {
-                                                    //                 Static.messageList.list_records[0].message = [newRes]
-                                                    //             }
-                                                    //             // console.log('=46ae17 Static.chatsList=', Static.chatsList)
-                                                    //             // console.log('=46ae17 Static.messageList=', Static.messageList)
-                                                    //             // debugger
-                                                    //             if (Static.chatsList && Static.chatsList.list_records) {
-                                                    //                 Static.chatsList.list_records.map((item) => {
-                                                    //                     let tmp = item.users.filter(item => item._id == Static.activeUser._id)
-                                                    //                     if (tmp.length) {
-                                                    //                         item.message[0] = newRes
-                                                    //                     }
-                                                    //                 })
-                                                    //             }
-                                                    //             // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
-                                                    //             //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
-                                                    //             // })
-                                                    //             // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
+                                                        //             if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                                                        //                 Static.messageList.list_records[0].message.unshift(newRes)
+                                                        //             } else {
+                                                        //                 Static.messageList.list_records[0].message = [newRes]
+                                                        //             }
+                                                        //             // console.log('=46ae17 Static.chatsList=', Static.chatsList)
+                                                        //             // console.log('=46ae17 Static.messageList=', Static.messageList)
+                                                        //             // debugger
+                                                        //             if (Static.chatsList && Static.chatsList.list_records) {
+                                                        //                 Static.chatsList.list_records.map((item) => {
+                                                        //                     let tmp = item.users.filter(item => item._id == Static.activeUser._id)
+                                                        //                     if (tmp.length) {
+                                                        //                         item.message[0] = newRes
+                                                        //                     }
+                                                        //                 })
+                                                        //             }
+                                                        //             // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
+                                                        //             //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                                                        //             // })
+                                                        //             // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
 
-                                                    //             let i = Static.chatsList.list_records.findIndex(chat => {
-                                                    //                 return chat.message[0]._id == response.list_records[0]._id;
-                                                    //             });
-                                                    //             // console.log('=1def2b = i =', i)
+                                                        //             let i = Static.chatsList.list_records.findIndex(chat => {
+                                                        //                 return chat.message[0]._id == response.list_records[0]._id;
+                                                        //             });
+                                                        //             // console.log('=1def2b = i =', i)
 
-                                                    //             Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
+                                                        //             Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
 
-                                                    //             // console.log('=5dfe89= new = ', Static.chatsList.list_records)
-                                                    //             Static.mediaInputs.value = [];
-                                                    //             initReload()
-                                                    //         }
-                                                    //     } else {
-                                                    //         Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                                                    //     }
-                                                    //     // }
-                                                    // }
-                                                }
+                                                        //             // console.log('=5dfe89= new = ', Static.chatsList.list_records)
+                                                        //             Static.mediaInputs.value = [];
+                                                        //             initReload()
+                                                        //         }
+                                                        //     } else {
+                                                        //         Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                                                        //     }
+                                                        //     // }
+                                                        // }
+                                                    }
                                                 />
                                             }
                                         </div>

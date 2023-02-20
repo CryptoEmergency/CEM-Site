@@ -474,6 +474,15 @@
 			}
 		}
 	}
+
+	&_timer {
+		position: absolute;
+		top: 20px;
+		right: 50px;
+		// transform: translateX(-100%) translateY(-50%);
+		font-weight: 700;
+		color: red;
+	}
 }
 
 .messages_block,
