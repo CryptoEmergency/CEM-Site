@@ -515,7 +515,7 @@ const start = function (data, ID) {
                                                                     return (
                                                                         <span>{lastMessage.text}</span>
                                                                     )
-                                                                } else if (lastMessage.media.length) {
+                                                                } else if (lastMessage.media && lastMessage.media.length) {
                                                                     return (
                                                                         <div class="messages_media">
                                                                             {() => {

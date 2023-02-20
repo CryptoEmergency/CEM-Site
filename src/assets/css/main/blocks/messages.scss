@@ -43,7 +43,7 @@
 					position: absolute;
 					height: 28px;
 					// filter: invert(70%) sepia(6%) saturate(518%) hue-rotate(208deg) brightness(94%) contrast(88%);
-					top: 30px;
+					top: 22px;
 					left: 15px;
 					cursor: pointer;
 				}
@@ -320,9 +320,36 @@
 		}
 
 		.companion {
-			flex-basis: 83px;
+			flex-basis: 63px;
 			flex-grow: 0;
 			flex-shrink: 0;
+			justify-content: center;
+			align-items: baseline;
+			gap: 20px;
+
+			&_info {
+				top: 0;
+				width: calc(100% - 150px);
+
+				p {
+					max-width: calc(100%);
+
+					&:empty {
+						margin-bottom: 0;
+					}
+				}
+			}
+
+			.comment_avatar {
+				width: 50px;
+				align-self: center;
+			}
+
+			.c-avataricon {
+				margin: 0;
+				height: 50px;
+				width: 50px;
+			}
 		}
 
 		.c-mediabtn {
@@ -1236,7 +1263,8 @@ button[data-type=voiceline][data-page_type=chat] {
 
 			p {
 				&:first-child {
-					max-width: 140px;
+					max-width: 100%;
+					font-size: 16px;
 				}
 			}
 		}
