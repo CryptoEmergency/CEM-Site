@@ -182,7 +182,7 @@
 
 .modals-test {
     position: relative;
-    z-index: 10000;
+    z-index: 9999;
 }
 
 .tasking {
@@ -229,6 +229,7 @@
     &-append {
         width: 135px;
         height: 100%;
+        margin-bottom: 20px;
 
         &-add {
             position: relative;
@@ -266,7 +267,15 @@
         overflow: hidden;
         border-radius: 50%;
 
-        img {
+        &-delete {
+            position: absolute;
+            top: 23%;
+            width: 50%;
+            left: 28%;
+            opacity: 0;
+        }
+
+        &-preview {
             position: absolute;
             width: 100%;
             object-fit: cover;
@@ -278,7 +287,22 @@
     &_name {
         display: block;
         text-align: center;
+
+        &:hover {
+            opacity: 0.6;
+        }
     }
+}
+
+.tasking-user_avatar:hover .tasking-user_avatar-delete {
+    display: block;
+    opacity: 0.8;
+    transition: 1s;
+}
+
+.tasking-user_avatar:hover .tasking-user_avatar-preview {
+    opacity: 0.2;
+    transition: 1s;
 }
 
 .tasking-create {

@@ -6,7 +6,8 @@ import {
     Variable
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
-import Swiper from 'swiper/bundle';
+// import Swiper from 'swiper/bundle';
+import { Swiper } from '@component/element/index.js';
 import svg from '@assets/svg/index.js';
 import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
@@ -52,6 +53,40 @@ const filterUser = (Static, item) => {
     } else {
         null
     }
+}
+
+const swiperOptions = {
+    grabCursor: true,
+    spaceBetween: 30,
+    // autoplay: {
+    //     delay: 3000,
+    // },
+    pagination: {
+        el: '.swiper-pagination',
+    },
+    breakpoints: {
+        100: {
+            slidesPerView: 1,
+            spaceBetween: 20
+        },
+        620: {  //600
+            slidesPerView: 2,
+            spaceBetween: 10
+        },
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 50
+        },
+        910: {  //800
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+        1240: {
+            slidesPerView: 7,
+            spaceBetween: 50,
+        },
+    },
+    spaceBetween: 20
 }
 
 const addForm = function (Static) {
@@ -230,10 +265,6 @@ const addForm = function (Static) {
                                                                     onClick={() => {
                                                                         Static.activeTask.media.splice(index, 1);
                                                                         initReload()
-                                                                        // if (Static.activeTask.media.length == 0) {
-                                                                        //     Static.isValid = false;
-                                                                        // }
-                                                                        // editNotes(Static);
                                                                     }}
                                                                 >
                                                                     <img src={svg["delete_icon"]} />
@@ -418,42 +449,6 @@ const start = function (data, ID) {
         },
     ]
 
-    const swiperGo = function (index) {
-        let swiperItem = new Swiper(".tasking-user-wrapper", {
-            grabCursor: true,
-            spaceBetween: 30,
-            // autoplay: {
-            //     delay: 3000,
-            // },
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            breakpoints: {
-                100: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                },
-                620: {  //600
-                    slidesPerView: 2,
-                    spaceBetween: 10
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 50
-                },
-                910: {  //800
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                },
-                1240: {
-                    slidesPerView: 7,
-                    spaceBetween: 50,
-                },
-            },
-            spaceBetween: 20
-        })
-    }
-
     load({
         ID,
         fnLoad: async () => {
@@ -461,7 +456,7 @@ const start = function (data, ID) {
             Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter, limit: 10 })
         },
         fn: () => {
-            console.log('=2def43=', Static.user)
+            console.log('=2def43=', Static.userList)
             if (!item._id) { return (<div><BlockError404 /></div>) }
             return (
                 <div class="blog_page_container c-main__body">
@@ -481,9 +476,66 @@ const start = function (data, ID) {
                                         </div>
                                         <div class="tasking-user">
                                             <h3>Участники комнаты</h3>
-                                            <div class="tasking-user-wrapper" After={() => swiperGo()}>
-                                                <div class="tasking-user_container swiper-wrapper">
-                                                    {Static.dataUsers.list_records.map((user) => {
+                                            <div class="tasking-user-append">
+                                                    <div 
+                                                        class="tasking-user-append-add"
+                                                        onClick={() => {
+                                                            Static.modalUser = true
+                                                            Static.user = []
+                                                            initReload()
+                                                        }}
+                                                    >
+                                                        <img src={svg["message_add_file"]} />
+                                                    </div>
+                                            </div>
+                                            {/* <div class="tasking-user-wrapper"> */}
+                                                {/* <div class="tasking-user_container"> */}
+                                                    <Swiper
+                                                        options={swiperOptions}
+                                                        slide={
+                                                            Static.dataUsers.list_records.map((user) => {
+                                                                if (Static.userList.includes(user._id)) {
+                                                                    return (
+                                                                        <a class="tasking-user_item swiper-slide">
+                                                                            <div class="tasking-user_avatar">
+                                                                                <img
+                                                                                    class="tasking-user_avatar-preview"
+                                                                                    src={`/assets/upload/avatar/${user.avatar.name}`}
+                                                                                />
+                                                                                <img class="tasking-user_avatar-delete" src={svg["delete_notes"]}
+                                                                                    onclick={() => {
+                                                                                        // fn.modals.ModalConfirmAction({
+                                                                                        //     action: async () => {
+                                                                                                if (Static.userList.includes(user._id)) {
+                                                                                                    
+                                                                                                    let index = Static.userList.indexOf(user._id)
+                                                                                                    if(index >= 0) {
+                                                                                                        Static.userList.splice(index, 1);
+                                                                                                        initReload()
+                                                                                                        console.log(Static.userList)
+                                                                                                    }
+                                                                                                }
+                                                                                                
+                                                                                                // deleteNote(Static, { _id: Static.activeNotes._id, active: false })
+                                                                                                
+                                                                                        //         fn.modals.close("ModalConfirmAction")
+                                                                                        //     },
+                                                                                        //     text: Variable.lang.p.deleteNotesConfirm,
+                                                                                        //     button: Variable.lang.button.yes
+                                                                                        // })
+                                                                                    }} 
+                                                                                />
+                                                                            </div>
+                                                                            <span class="tasking-user_name"> {user.nickname} </span>
+                                                                        </a>
+                                                                    )
+                                                                } else {
+                                                                    null
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                    {/* {Static.dataUsers.list_records.map((user) => {
                                                         if (Static.userList.includes(user._id)) {
                                                             return (
                                                                 <a class="tasking-user_item swiper-slide">
@@ -499,21 +551,9 @@ const start = function (data, ID) {
                                                         } else {
                                                             null
                                                         }
-                                                    })}
-                                                </div>
-                                                <div class="tasking-user-append">
-                                                    <div 
-                                                        class="tasking-user-append-add"
-                                                        onClick={() => {
-                                                            Static.modalUser = true
-                                                            Static.user = []
-                                                            initReload()
-                                                        }}
-                                                    >
-                                                        <img src={svg["message_add_file"]} />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                    })} */}
+                                                {/* </div> */}
+                                            {/* </div> */}
                                             <div class="swiper-pagination"></div>
                                         </div>
                                     </div>
