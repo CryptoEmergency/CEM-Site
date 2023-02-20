@@ -72,7 +72,7 @@ const start = function (data, ID) {
             size: 0
         };
         console.log('=08e20a Static =', Static)
-        debugger
+        // debugger
         Static.mediaInputs.show = true;
         Static.mediaInputs.value.push(previewObj);
         let numItem = Static.mediaInputs.value.length - 1;
@@ -92,7 +92,7 @@ const start = function (data, ID) {
                 return
             }
             let response = JSON.parse(this.response);
-            debugger
+            // debugger
             Static.mediaInputs.value[numItem] = {
                 aspect: Static.mediaInputs.selectAspect,
                 type: response.mimetype.split("/")[0],
@@ -202,7 +202,7 @@ const start = function (data, ID) {
         if (Static.message.el.value.trim().length) {
             text = Static.message.el.value.trim()
         }
-        debugger
+        // debugger
         if (Static.mediaInputs.value.length != 0) {
             Static.mediaInputs.value.forEach(async (file) => {
                 if (file.type == 'audio') {
