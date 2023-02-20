@@ -380,6 +380,10 @@
 	}
 }
 
+#modalsPage {
+	position: relative;
+	z-index: 2002;
+}
 .c-backdrop {
 
 	&--show {

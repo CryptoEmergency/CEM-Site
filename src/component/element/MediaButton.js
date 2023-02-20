@@ -1,7 +1,8 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    initReload
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
@@ -10,7 +11,7 @@ let inputImg,
     inputVideo,
     inputAudio
 
-const MediaButton = function ({onclickAll, onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple, iconPhoto = false  }) {
+const MediaButton = function ({ onclickAll, onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple, iconPhoto = false, typeMic = "posts" }) {
 
     return (
         <div class="c-mediabtn create_post_control_block">
@@ -68,7 +69,7 @@ const MediaButton = function ({onclickAll, onclickText, onclickPhoto, onclickVid
             {
                 typeof onclickVideo == "function"
                     ?
-                    
+
                     <div class="c-mediabtn__action createPostVideoCreator create_post_control_item" onclick={() => {
                         inputVideo.click();
                     }}>
@@ -108,10 +109,12 @@ const MediaButton = function ({onclickAll, onclickText, onclickPhoto, onclickVid
                 typeof onclickMic == "function"
                     ?
                     <button
-                        data-page_type="posts"
+                        data-page_type={typeMic}
                         data-type="voiceline"
                         class="c-mediabtn__action createPostAudioCreator create_post_control_item"
-                        onclick={onclickMic}
+                        onclick={(e) => {
+                            onclickMic(e)
+                        }}
                     ></button>
                     :
                     null

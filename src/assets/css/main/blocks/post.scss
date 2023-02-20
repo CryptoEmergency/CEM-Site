@@ -332,7 +332,8 @@
     }
 }
 
-button[data-type='voiceline'][data-page_type="posts"] {
+button[data-type='voiceline'][data-page_type="posts"],
+button[data-type='voiceline'][data-page_type="chat"] {
     background-image: url(../svg/message_voice.svg);
     background-size: 80%;
     background-position: center;
@@ -341,6 +342,15 @@ button[data-type='voiceline'][data-page_type="posts"] {
     outline: none;
     border: 0;
 
+}
+
+button[data-type='voiceline'][data-page_type="chat"][data-timing] {
+    background-image: url(../svg/player_pause.svg);
+    background-size: 50%;
+}
+
+button[data-type='voiceline'][data-page_type="chat"] {
+    position: static;
 }
 
 .fullsize {

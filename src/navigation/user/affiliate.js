@@ -31,7 +31,8 @@ const start = function (data, ID) {
                                 <div class="partner_link">
                                     <b>{Variable.lang.p.referal}</b>
                                     <div class="affiliate_program_link">
-                                        <input type="text" value={`https://crypto-emergency.com/user/${Variable.myInfo.nickname}`} readonly />
+                                        {/* <input type="text" value={`https://crypto-emergency.com/user/${Variable.myInfo.nickname}`} readonly /> */}
+                                        <div class="input">{`https://crypto-emergency.com/user/${Variable.myInfo.nickname}`}</div>
                                         <div class="affiliate_buttons">
                                             <div class="copy_link">
                                                 <div class="copy_link_block"

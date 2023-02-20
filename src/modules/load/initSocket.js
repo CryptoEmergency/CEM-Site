@@ -14,7 +14,7 @@ let socket = null
 // Variable.socketConnect = false
 
 const initSocket = async function () {
-    return
+    // return
     options.auth.uuid = Variable.uuid
     options.auth.status = Variable.auth
     socket = io("/", options)

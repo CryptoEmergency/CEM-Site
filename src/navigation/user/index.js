@@ -254,8 +254,12 @@ const start = function (userInfo, ID = "mainBlock") {
                                         <div class="c-userpreview__buttons">
                                             <div class="c-userpreview__container">
                                                 <a
-                                                    class="c-userpreview__btn"
+                                                    class="c-userpreview__btn 89"
                                                     onclick={async () => {
+                                                        if(Variable.ModalsPage.length) {
+                                                            Variable.ModalsPage = []
+                                                            initReload("modalsPage")
+                                                        }
                                                         Variable.Static.startChatsID = userInfo
                                                         fn.siteLink("/user/chats/");
                                                     }}

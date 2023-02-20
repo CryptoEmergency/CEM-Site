@@ -849,9 +849,13 @@ $icon: #353a46;
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 150px;
 
-  @media(max-width: 992px) {
-    grid-template-rows: auto;
+  .startaps-item{
+    height: auto;
+  }
+
+  @media(max-width: 767px) {
     grid-template-columns: 1fr;
     grid-gap: 10px;
   }
