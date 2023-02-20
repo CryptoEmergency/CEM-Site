@@ -452,6 +452,28 @@
 			text-transform: uppercase;
 		}
 	}
+
+	&_media {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+
+		&_content {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+
+			img {
+				width: 16px;
+				height: 16px;
+				filter: invert(88%) sepia(10%) saturate(18%) hue-rotate(10deg) brightness(92%) contrast(91%);
+			}
+
+			&_views {
+				filter: invert(85%) sepia(36%) saturate(392%) hue-rotate(103deg) brightness(88%) contrast(86%) !important;
+			}
+		}
+	}
 }
 
 .messages_block,
@@ -697,6 +719,7 @@
 		line-height: 15px;
 		color: rgba(255, 255, 255, 0.35);
 		margin-top: 2px;
+		padding-left: 10px;
 		position: relative;
 		width: 100%;
 		display: flex;

@@ -514,7 +514,10 @@
 		"descriptionCommunity": "Описание",
 		"creatorCommunity": "Создатель",
 		"memberCommunity": "Количество участников",
-		"contactsCommunity": "Контакты"
+		"contactsCommunity": "Контакты",
+		"lastChatVideo": "Видео",
+		"lastChatAudio": "Аудио",
+		"lastChatImage": "Фото"
 	},
 	"label": {
 		"name": "Имя",
