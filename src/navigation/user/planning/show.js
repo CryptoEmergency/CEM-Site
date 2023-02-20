@@ -67,18 +67,22 @@ const swiperOptions = {
     breakpoints: {
         100: {
             slidesPerView: 1,
+            spaceBetween: 0
+        },
+        500: {
+            slidesPerView: 3,
             spaceBetween: 20
         },
         620: {  //600
-            slidesPerView: 2,
-            spaceBetween: 10
+            slidesPerView: 4,
+            spaceBetween: 20
         },
         768: {
-            slidesPerView: 2,
-            spaceBetween: 50
+            slidesPerView: 4,
+            spaceBetween: 30
         },
         910: {  //800
-            slidesPerView: 3,
+            slidesPerView: 5,
             spaceBetween: 30,
         },
         1240: {
@@ -456,7 +460,7 @@ const start = function (data, ID) {
             Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter, limit: 10 })
         },
         fn: () => {
-            console.log('=2def43=', Static.userList)
+            console.log('=2def43=', Static.tmp.list_records[0].users)
             if (!item._id) { return (<div><BlockError404 /></div>) }
             return (
                 <div class="blog_page_container c-main__body">
@@ -495,6 +499,7 @@ const start = function (data, ID) {
                                                         slide={
                                                             Static.dataUsers.list_records.map((user) => {
                                                                 if (Static.userList.includes(user._id)) {
+                                                                    console.log(user._id)
                                                                     return (
                                                                         <a class="tasking-user_item swiper-slide">
                                                                             <div class="tasking-user_avatar">
