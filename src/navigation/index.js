@@ -41,7 +41,13 @@ const start = function (data, ID) {
     //     fn: () => {
     //         return (
     //             <div class="c-main__body">
-    //                 <Elements.MainPreview />
+    //                 <Elements.MainPreview>
+    //                     <Elements.MainCourse records={Static.mainCourse} />
+    //                 </Elements.MainPreview>
+    //                 <BlockProjects />
+    //                 <div class="c-main__wrapperbg">
+    //                     <Elements.banners.MainBig />
+    //                 </div>
     //             </div>
     //         )
     //     }
@@ -51,14 +57,18 @@ const start = function (data, ID) {
     init(
         async () => {
             let tmp = {}
-            const callback = function (res) {
-                console.log('=9c0594 callback=', res)
-            }
+            // const callback = function (res) {
+            //     console.log('=9c0594 callback=', res)
+            // }
             // let tmp2 = await fn.socket.get({ method: "Course", params: { filter: {} } }, tmp, callback)
             // tmp.test = await fn.socket.get({ method: "Course", params: { filter: {} } }, callback)
             // tmp.test = await fn.socket.get({ method: "Course", params: { filter: {} } }, callback)
             // tmp.test = await fn.socket.get({ method: "Course", params: { filter: {} } })
-            Static.mainCourse = await fn.socket.get({ method: "Course", params: { filter: {} } })
+            fn.socket.get({ method: "Course", params: { filter: {} } }, function (res) {
+                console.log('=9c0594 callback=', res)
+                Static.mainCourse = res
+                initReload("mainBlock")
+            })
             // setTimeout(() => {
             //     fn.socket.get({ method: "Course", params: { filter: {} } })
             // }, 10);

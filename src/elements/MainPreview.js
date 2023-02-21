@@ -6,7 +6,8 @@ import {
 import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
 
-const forExport = function () {
+const forExport = function ({ children }) {
+    console.log('=c42f17 children=', children)
     return (
         <div class="с-preview">
             <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
@@ -21,6 +22,7 @@ const forExport = function () {
                     </div>
                 </div>
             </div>
+            {children}
         </div>
     )
 }

@@ -8,11 +8,18 @@ const makeList = function () {
     });
 
     const forExport = req.keys().reduce((acc, next) => {
-        acc[next.replace("./", "").split(".js")[0]] = req(next).default
+        let name = next.replace("./", "").split(".js")[0]
+        let dir = name.split("/")
+        if (dir.length > 1) {
+            if (!acc[dir[0]]) {
+                acc[dir[0]] = {}
+            }
+            acc[dir[0]][dir[1]] = req(next).default
+        } else {
+            acc[name] = req(next).default
+        }
         return acc
     }, {});
-
-    console.log('=beb2ff=', forExport)
     return forExport
 }
 
