@@ -1075,4 +1075,22 @@ initData.community = function (Static) {
     Static.nameRecords = "PageCommunity"
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+//====================================================================================================
+
+initData.main = function (Static) {
+    // Static.test = "ggg"
+}
+
 export { initData };
