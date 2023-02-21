@@ -13,10 +13,17 @@ import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
 import 'swiper/css/bundle';
 
-const showListTasking = function (Static) {
+const showListTabs = function (Static) {
     return Static.listStatus.map((item) => {
         return (
-            <div class="tasking-tabs">
+            <div 
+                class={["tasking-tab",
+                Static.categoryActive == item.name ? "tasking-tab_active" : null]}
+                onClick={() => {
+                    Static.categoryActive = item.name
+                    initReload()
+                }}
+            >
                 <span>
                     {item.name}
                 </span>
@@ -25,9 +32,8 @@ const showListTasking = function (Static) {
     })
 }
 
-
 const filterUser = (Static, item) => {
-    if (Static.filterText.length !== 0) {
+    if (Static.filterUser.length !== 0) {
         return (
             <div class="planning-user_item"
                 onClick={() => {
@@ -36,7 +42,7 @@ const filterUser = (Static, item) => {
                         Static.isValid = true
                     }
                     Static.elInput.value = null
-                    Static.filterText = null
+                    Static.filterUser = null
                     initReload()
                 }}
             >
@@ -310,7 +316,18 @@ const addForm = function (Static) {
                                     // } else {
                                     //     null
                                     // }
-                                    testUser(Static)
+                                    if (Static.isValid) {
+                                        Static.modal = false
+                                    }
+                                    Static.activeTask.users = Static.user
+                                    Static.arrTask.push(Static.activeTask)
+                                    Static.activeTask = {
+                                        title: "",
+                                        text: "",
+                                        users: [],
+                                        media: [],
+                                        category: "Активные"
+                                    }
                                     initReload()
                                 }}
                             >
@@ -349,7 +366,7 @@ const addForm = function (Static) {
                                         }}
                                         oninput={() => {
 
-                                            Static.filterText = Static.elInput.value.trim().toLowerCase()
+                                            Static.filterUser = Static.elInput.value.trim().toLowerCase()
                                             if (Static.timerChange) {
                                                 clearTimeout(Static.timerChange)
                                             }
@@ -378,7 +395,7 @@ const addForm = function (Static) {
 
                                     <div class="planning-user">
                                         {Static.dataUsers.list_records.map((user) => {
-                                            if (Static.filterText !== 0 && Static.filterText !== "" && user.nickname.toLowerCase().includes(Static.filterText)) {
+                                            if (Static.filterUser !== 0 && Static.filterUser !== "" && user.nickname.toLowerCase().includes(Static.filterUser)) {
                                                 return (
                                                     <div class="planning-user_list">
                                                         {filterUser(Static, user)}
@@ -433,13 +450,17 @@ const start = function (data, ID) {
     Static.elText = null
     Static.elInputImg = null
     Static.elInput = null
-    Static.filterText = null
+    Static.filterUser = null
     Static.user = []
     Static.activeTask = {
-        title: null,
-        text: null,
-        media: []
+        title: "",
+        text: "",
+        users: [],
+        media: [],
+        category: Variable.lang.select.active
     }
+    Static.arrTask = []
+    Static.categoryActive = "Активные"
 
     Static.listStatus = [
         {
@@ -460,7 +481,7 @@ const start = function (data, ID) {
             Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter, limit: 10 })
         },
         fn: () => {
-            console.log('=2def43=', Static.tmp.list_records[0].users)
+            console.log('=2def43=', Static.arrTask)
             if (!item._id) { return (<div><BlockError404 /></div>) }
             return (
                 <div class="blog_page_container c-main__body">
@@ -499,7 +520,6 @@ const start = function (data, ID) {
                                                         slide={
                                                             Static.dataUsers.list_records.map((user) => {
                                                                 if (Static.userList.includes(user._id)) {
-                                                                    console.log(user._id)
                                                                     return (
                                                                         <a class="tasking-user_item swiper-slide">
                                                                             <div class="tasking-user_avatar">
@@ -507,7 +527,7 @@ const start = function (data, ID) {
                                                                                     class="tasking-user_avatar-preview"
                                                                                     src={`/assets/upload/avatar/${user.avatar.name}`}
                                                                                 />
-                                                                                <img class="tasking-user_avatar-delete" src={svg["delete_notes"]}
+                                                                                <img class="tasking-user_avatar-delete" src={svg["question_status_delete"]}
                                                                                     onclick={() => {
                                                                                         // fn.modals.ModalConfirmAction({
                                                                                         //     action: async () => {
@@ -540,23 +560,6 @@ const start = function (data, ID) {
                                                             })
                                                         }
                                                     />
-                                                    {/* {Static.dataUsers.list_records.map((user) => {
-                                                        if (Static.userList.includes(user._id)) {
-                                                            return (
-                                                                <a class="tasking-user_item swiper-slide">
-                                                                    <div class="tasking-user_avatar">
-                                                                        <img
-                                                                            class="tasking-user_avatar-preview"
-                                                                            src={`/assets/upload/avatar/${user.avatar.name}`}
-                                                                        />
-                                                                    </div>
-                                                                    <span class="tasking-user_name"> {user.nickname} </span>
-                                                                </a>
-                                                            )
-                                                        } else {
-                                                            null
-                                                        }
-                                                    })} */}
                                                 {/* </div> */}
                                             {/* </div> */}
                                             <div class="swiper-pagination"></div>
@@ -581,8 +584,35 @@ const start = function (data, ID) {
                         </div>
                         <div class="tasking-list">
                             <div class="tasking-list_tabs">
-                                {showListTasking(Static)}
+                                {showListTabs(Static)}
                             </div>
+                            {
+                                () => {
+                                    if (Array.isArray(Static.arrTask) && Static.arrTask.length) {
+                                        return (
+                                            <div class="tasking-list_container">
+                                                {Static.arrTask.map((item) => {
+                                                    if (Static.categoryActive == item.category) {
+                                                        return (
+                                                            <a class="tasking-list_item">
+                                                                <h4 class="tasking-list_item-title">
+                                                                    {item.title}
+                                                                </h4>
+                                                                <div class="tasking-list_item-text">
+                                                                    {item.text}
+                                                                </div>
+                                                                <div class="tasking-list_item-users">
+                                                                    Количество участников: {item.users.length}
+                                                                </div>
+                                                            </a>
+                                                        )
+                                                    }
+                                                })}
+                                            </div>
+                                        )
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                     <div class="modals-test">
