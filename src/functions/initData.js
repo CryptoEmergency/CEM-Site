@@ -3,8 +3,14 @@ import { fn } from '@src/functions/index.js';
 
 const initData = {}
 
-// 2023
+// ==================================== 2023
 initData.any = function (Static) {
+
+
+
+
+
+
     Static.elMedia = {}
     Static.elToogle = {}
     Static.elShowTextFull = {}
@@ -16,11 +22,10 @@ initData.any = function (Static) {
 
     Static.elButtonSubmit = {}
     Static.commentText = []
-
     return
 }
 
-// 2022
+// ==================================== 2022
 const form = {
     language: {
         value: "",

@@ -15,7 +15,6 @@ import images from "@assets/images/index.js";
 
 import Elements from '@src/elements/export.js';
 
-console.log("Elements", Elements)
 import {
     BlockUsers,
     BlockBanners,
