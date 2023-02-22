@@ -346,12 +346,6 @@
         position: relative;
         z-index: 2;
         padding-bottom: 160px;
-        margin-top: 100px;
-
-        @media(max-width: 1199px) {
-            margin-top: 1250px;
-        }
-
         a {
             text-decoration: none;
             color: inherit;
@@ -896,11 +890,5 @@
 .title-animation:hover{
     transform: translate3d(0, -10px, 22px);
     color: #9844b7;
-}
-// ann
-@media (max-width: 1199px){
-    .c-aboutus__projects{
-        margin-top: 0;
-    }
 }
 

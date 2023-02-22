@@ -4,16 +4,13 @@ import {
   init,
   Variable,
   initReload,
-  load
+  load,
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import Swiper from "swiper/bundle";
+import Elements from "@src/elements/export.js";
 
-
-import Elements from '@src/elements/export.js';
-
-import "swiper/css/bundle";
+console.log(Elements);
 
 import { Particles } from "@src/component/htmlElements/index.js";
 
@@ -41,20 +38,6 @@ const team = [
     position: "Управляющий директор проекта",
   },
 ];
-
-function showTeam(team) {
-  return team.map((item) => {
-    return (
-      <div class="team-item swiper-slide">
-        <div class="team-img">
-          <img src={images[item.foto]}></img>
-        </div>
-        <h5>{item.name}</h5>
-        <span>{item.position}</span>
-      </div>
-    );
-  });
-}
 
 const start = function (data, ID) {
   // setTimeout(() => {
@@ -121,72 +104,86 @@ const start = function (data, ID) {
     },
   ];
 
-  const swiperGo = function (index) {
-    let swiperItem = new Swiper(".mySwiper", {
-      spaceBetween: 30,
-      autoplay: {
-        delay: 3000,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-      },
-      breakpoints: {
-        100: {
-          slidesPerView: 1,
-          spaceBetween: 20,
-        },
-        620: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 50,
-        },
-        910: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1240: {
-          slidesPerView: 4,
-          spaceBetween: 20,
-        },
-      },
-      spaceBetween: 20,
-    });
-  };
+  const projects = [
+    {
+      title: Variable.lang.span.aboutProjectNameOne,
+      link: "",
+      src: images["about_us_banner5"],
+    },
+    {
+      title: "Cemblockchain",
+      link: "https://cemblockchain.com/",
+      src: images["about_us_banner8"],
+    },
+    {
+      title: Variable.lang.span.aboutProjectNameOne,
+      link: "https://cemwallet.com/",
+      src: images["CemWallet"],
+    },
+  ];
+
+  const roadmap = [
+    {
+      date: Variable.lang.p.mapDateOne,
+      description: Variable.lang.span.mapDescOne,
+      src: svg["roadmap/turn-left1"],
+    },
+    {
+      date: Variable.lang.p.mapDateTwo,
+      description: Variable.lang.span.mapDescTwo,
+      src: svg["roadmap/turn-right2"],
+    },
+    {
+      date: Variable.lang.p.mapDateThree,
+      description: Variable.lang.span.mapDescThree,
+      src: svg["roadmap/turn-left3"],
+    },
+    {
+      date: Variable.lang.p.mapDateFour,
+      description: Variable.lang.span.mapDescFour,
+      src: svg["roadmap/turn-right4"],
+    },
+    {
+      date: Variable.lang.p.mapDateFive,
+      description: Variable.lang.span.mapDescFive,
+      src: svg["roadmap/turn-left5"],
+    },
+    {
+      date: Variable.lang.p.mapDateSix,
+      description: Variable.lang.span.mapDescSix,
+      src: svg["roadmap/turn-right6"],
+    },
+    {
+      date: Variable.lang.p.mapDateSeven,
+      description: Variable.lang.span.mapDescSeven,
+      src: svg["roadmap/turn-left7"],
+    },
+  ];
 
   load({
     ID,
     fn: () => {
       return (
         <div class="c-aboutus about_us_container c-main__body">
-
           <Elements.PageHeader
             imgBack={svg["background/about_us_vector-1"]}
             title="Crypto Emergency"
             descriptions={Variable.lang.p.aboutObjective}
-            classBack="c-whowe__bg" />
-
+            classBack="c-whowe__bg"
+          />
 
           <Particles></Particles>
-
-
 
           <div class="c-aboutus__content c-container">
             <div class="c-aboutus__goals c-goals">
               <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
-
               <Elements.cards.Animated records={arrBlockCard} />
 
               <Elements.Accordeon records={arrAccordeon} />
 
               <div class="team">
                 <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
-                <div class="swiper mySwiper" After={() => swiperGo()}>
-                  <div class="swiper-wrapper">{showTeam(team)}</div>
-                  <div class="swiper-pagination"></div>
-                </div>
+                <Elements.Team records={team} />
               </div>
 
               {/* <div class="c-goals__list">
@@ -244,7 +241,8 @@ const start = function (data, ID) {
 
             <div class="c-aboutus__roadmap">
               <h2>{Variable.lang.h.road_map}</h2>
-              <div class="roadmap-wrap">
+              <Elements.Roadmap records={roadmap} />
+              {/* <div class="roadmap-wrap">
                 <div class="roadmap_item roadmap_item--0">
                   <span class="year year--0">
                     {Variable.lang.span.mapDescOne}
@@ -342,7 +340,7 @@ const start = function (data, ID) {
                     src={svg["roadmap/turn-left7"]}
                   ></img>
                 </div>
-              </div>
+              </div> */}
               {/* <div class="c-aboutus__wrapper">
             <div class="c-aboutus__toppart">
               <div class="c-aboutus__dateitem c-aboutus__dateitem--1">
@@ -378,65 +376,43 @@ const start = function (data, ID) {
 
             <div class="c-aboutus__projects">
               <h2>{Variable.lang.h.our_projects}</h2>
-              <div class="c-aboutus__list">
+              <Elements.projects.Project
+                records={projects}
+                title={projects.title}
+                link={projects.link}
+                scr={projects.src}
+              />
+
+              {/* <div class="c-aboutus__list">
                 <div class="c-aboutus__project">
                   <img
                     class="c-aboutus__banner"
-                    src={images["about_us_banner5"]}
+                    src={images["about_us_banner6"]}
                   />
                   <span class="c-aboutus__projectcompany">
-                    {Variable.lang.span.aboutProjectNameOne}
+                    {Variable.lang.span.aboutProjectNameTwo}
                   </span>
-                  {/* <p class="c-aboutus__projecttitle">
-                {Variable.lang.p.aboutProjectDateOne}
-              </p> */}
+                  <p class="c-aboutus__projecttitle">
+                    {Variable.lang.p.aboutProjectDateTwo}
+                  </p>
                 </div>
-                <a
-                  class="c-aboutus__project"
-                  target="_blank"
-                  href="https://cemblockchain.com/"
-                >
+                <div class="c-aboutus__project">
                   <img
                     class="c-aboutus__banner"
-                    src={images["about_us_banner8"]}
+                    src={images["about_us_banner7"]}
                   />
-                  <span class="c-aboutus__projectcompany">Cemblockchain</span>
-                  {/* <p class="c-aboutus__projecttitle">
-                {Variable.lang.p.aboutProjectDate19May2022}
-              </p> */}
-                </a>
-                <a
-                  class="c-aboutus__project"
-                  target="_blank"
-                  href="https://cemwallet.com/"
-                >
-                  <img class="c-aboutus__banner" src={images["CemWallet"]} />
-                  <span class="c-aboutus__projectcompany">CEM Wallet</span>
-                  {/* <p class="c-aboutus__projecttitle">
-                {Variable.lang.p.aboutProjectDateAugust2022}
-              </p> */}
-                </a>
-                {/*<div class="c-aboutus__project">
-              <img class="c-aboutus__banner" src={images["about_us_banner6"]} />
-              <span class="c-aboutus__projectcompany">
-                {Variable.lang.span.aboutProjectNameTwo}
-              </span>
-              <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateTwo}</p>
-            </div>
-            <div class="c-aboutus__project">
-              <img class="c-aboutus__banner" src={images["about_us_banner7"]} />
-              <span class="c-aboutus__projectcompany">
-                crypto vpn
-              </span>
-              <p class="c-aboutus__projecttitle">{Variable.lang.p.aboutProjectDateTwo}</p>
-  </div>*/}
-              </div>
+                  <span class="c-aboutus__projectcompany">crypto vpn</span>
+                  <p class="c-aboutus__projecttitle">
+                    {Variable.lang.p.aboutProjectDateTwo}
+                  </p>
+                </div>
+              </div> */}
             </div>
           </div>
         </div>
       );
-    }
-  })
+    },
+  });
 };
 
 export default start;
