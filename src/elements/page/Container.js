@@ -3,10 +3,18 @@ import {
     jsxFrag
 } from '@betarost/cemserver/cem.js';
 
-const forExport = function ({ className, children }) {
+const forExport = function ({ className, children, resetClass, title, backSeat }) {
+    let classACtive = ["blog_page", className]
+    if (resetClass) {
+        classACtive = className
+    }
     return (
-        <div class={["blog_page", className]}>
+        <div class={classACtive}>
+            {title ? title : null}
+
             {children}
+
+            {backSeat ? <img class={backSeat.class} src={backSeat.src} /> : null}
         </div>
     )
 }

@@ -164,27 +164,36 @@ const start = function (data, ID) {
     ID,
     fn: () => {
       return (
-        <div class="c-aboutus about_us_container c-main__body">
-          <Elements.PageHeader
+        <Elements.page.MainContainer class="c-aboutus">
+          {/* <div class="c-aboutus about_us_container c-main__body"> */}
+          <Elements.page.Header
             imgBack={svg["background/about_us_vector-1"]}
             title="Crypto Emergency"
             descriptions={Variable.lang.p.aboutObjective}
-            classBack="c-whowe__bg"
-          />
+            classBack="c-whowe__bg" />
 
           <Particles></Particles>
 
-          <div class="c-aboutus__content c-container">
-            <div class="c-aboutus__goals c-goals">
-              <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
+          <Elements.page.Container class={["c-aboutus__content", "c-container"]} resetClass={true}>
+            <Elements.page.Container
+              class={["c-aboutus__goals", "c-goals"]}
+              resetClass={true}
+              title={<h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>}
+              backSeat={{ src: svg["background/about_us_vector-2"], class: "c-whowe__img c-whowe__img--right" }}
+            >
+
+
               <Elements.cards.Animated records={arrBlockCard} />
 
               <Elements.Accordeon records={arrAccordeon} />
 
-              <div class="team">
-                <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
+              <Elements.page.Container
+                class={["team"]}
+                resetClass={true}
+                title={<h2 class="startap-title">{Variable.lang.h.our_team}</h2>}>
                 <Elements.Team records={team} />
-              </div>
+              </Elements.page.Container>
+
 
               {/* <div class="c-goals__list">
             <div class="c-goals__item">
@@ -233,16 +242,22 @@ const start = function (data, ID) {
             </div>
           </div> */}
 
-              <img
-                class="c-whowe__img c-whowe__img--right"
-                src={svg["background/about_us_vector-2"]}
-              />
-            </div>
 
-            <div class="c-aboutus__roadmap">
-              <h2>{Variable.lang.h.road_map}</h2>
+
+            </Elements.page.Container>
+
+
+            <Elements.page.Container
+              class={"c-aboutus__roadmap"}
+              resetClass={true}
+              title={<h2>{Variable.lang.h.road_map}</h2>}
+            >
               <Elements.Roadmap records={roadmap} />
-              {/* <div class="roadmap-wrap">
+            </Elements.page.Container>
+
+
+
+            {/* <div class="roadmap-wrap">
                 <div class="roadmap_item roadmap_item--0">
                   <span class="year year--0">
                     {Variable.lang.span.mapDescOne}
@@ -341,7 +356,7 @@ const start = function (data, ID) {
                   ></img>
                 </div>
               </div> */}
-              {/* <div class="c-aboutus__wrapper">
+            {/* <div class="c-aboutus__wrapper">
             <div class="c-aboutus__toppart">
               <div class="c-aboutus__dateitem c-aboutus__dateitem--1">
                 <p>{Variable.lang.p.mapDateOne}</p>
@@ -372,18 +387,24 @@ const start = function (data, ID) {
               </div>
             </div>
           </div> */}
-            </div>
 
-            <div class="c-aboutus__projects">
-              <h2>{Variable.lang.h.our_projects}</h2>
+
+            <Elements.page.Container
+              class={"c-aboutus__projects"}
+              resetClass={true}
+              title={<h2>{Variable.lang.h.our_projects}</h2>}
+            >
               <Elements.projects.Project
                 records={projects}
                 title={projects.title}
                 link={projects.link}
                 scr={projects.src}
               />
+            </Elements.page.Container>
 
-              {/* <div class="c-aboutus__list">
+
+
+            {/* <div class="c-aboutus__list">
                 <div class="c-aboutus__project">
                   <img
                     class="c-aboutus__banner"
@@ -407,9 +428,9 @@ const start = function (data, ID) {
                   </p>
                 </div>
               </div> */}
-            </div>
-          </div>
-        </div>
+
+          </Elements.page.Container>
+        </Elements.page.MainContainer>
       );
     },
   });
