@@ -199,17 +199,13 @@ const start = function (data, ID) {
                         description={item.description}
                         hidden={item.hidden}
                         onclick={() => {
-                          // arrAccordeon.forEach((el, i) => {
-                          //   el.hidden = true;
-                          //   console.log(i, " = ", index);
-                          // });
-                          // item.hidden = false;
-                          arrAccordeon.forEach((el, i) => {
-                            el.hidden = true;
-                            console.log(i, " = ", index);
+                          arrAccordeon.map((el, i) => {
+                            if (index === i) {
+                              el.hidden = !el.hidden;
+                            } else {
+                              el.hidden = true;
+                            }
                           });
-                          item.hidden = false;
-
                           initReload();
                         }}
                       />
