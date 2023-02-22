@@ -575,6 +575,16 @@ $lightBlue: #00A5F7;
 
   }
 
+  // hover for diagramm
+  @each $index in $colors{
+    .circle-points_item--#{$index}:hover .progress-circle--#{$index}{
+      stroke-width: 3
+    }
+  }
+  .circle-points_item--0:hover .circle-desc{
+    font-size: 24px;
+  }
+  // hover for diagramm
   // diagramm line
 
 

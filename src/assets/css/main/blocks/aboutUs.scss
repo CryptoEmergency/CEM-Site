@@ -897,9 +897,10 @@
     transform: translate3d(0, -10px, 22px);
     color: #9844b7;
 }
-
-
-
-.c-goals{
-    padding-top: 150px;
+// ann
+@media (max-width: 1199px){
+    .c-aboutus__projects{
+        margin-top: 0;
+    }
 }
+
