@@ -147,6 +147,12 @@ h6,
     line-height: 22px;
     margin-bottom: 0;
     font-weight: 700;
+    @media (max-width: 992px) {
+      font-size: 18px;
+    }
+  }
+  @media (max-width: 600px) {
+    padding: 15px 15px;
   }
 }
 
@@ -178,6 +184,10 @@ h6,
   right: 25px;
   transform: translate(-50%, -50%);
   transition: .3s;
+
+  @media(max-width: 600px){
+    right: 15px;
+  }
 }
 
 .arrow-toggle {

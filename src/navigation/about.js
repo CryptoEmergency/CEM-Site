@@ -170,19 +170,26 @@ const start = function (data, ID) {
             imgBack={svg["background/about_us_vector-1"]}
             title="Crypto Emergency"
             descriptions={Variable.lang.p.aboutObjective}
-            classBack="c-whowe__bg" />
+            classBack="c-whowe__bg"
+          />
 
           <Particles></Particles>
 
-          <Elements.page.Container class={["c-aboutus__content", "c-container"]} resetClass={true}>
+          <Elements.page.Container
+            class={["c-aboutus__content", "c-container"]}
+            resetClass={true}
+          >
             <Elements.page.Container
               class={["c-aboutus__goals", "c-goals"]}
               resetClass={true}
-              title={<h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>}
-              backSeat={{ src: svg["background/about_us_vector-2"], class: "c-whowe__img c-whowe__img--right" }}
+              title={
+                <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
+              }
+              backSeat={{
+                src: svg["background/about_us_vector-2"],
+                class: "c-whowe__img c-whowe__img--right",
+              }}
             >
-
-
               <Elements.cards.Animated records={arrBlockCard} />
 
               <Elements.Accordeon records={arrAccordeon} />
@@ -190,62 +197,13 @@ const start = function (data, ID) {
               <Elements.page.Container
                 class={["team"]}
                 resetClass={true}
-                title={<h2 class="startap-title">{Variable.lang.h.our_team}</h2>}>
+                title={
+                  <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
+                }
+              >
                 <Elements.Team records={team} />
               </Elements.page.Container>
-
-
-              {/* <div class="c-goals__list">
-            <div class="c-goals__item">
-              <div class="c-goals__wrap">
-                <i class="c-goals__icon c-goals__icon--cryptoliteracy"></i>
-              </div>
-              <div>
-                <p class="c-goals__subtitle">{Variable.lang.p.goalOne}</p>
-                <span class="c-goals__text">
-                  {Variable.lang.p.goalOneDesc}
-                </span>
-              </div>
-            </div>
-            <div class="c-goals__item">
-              <div class="c-goals__wrap">
-                <i class="c-goals__icon c-goals__icon--community"></i>
-              </div>
-              <div>
-                <p class="c-goals__subtitle">{Variable.lang.p.goalTwo}</p>
-                <span class="c-goals__text">
-                  {Variable.lang.p.goalTwoDesc}
-                </span>
-              </div>
-            </div>
-            <div class="c-goals__item">
-              <div class="c-goals__wrap">
-                <i class="c-goals__icon c-goals__icon--freeaccess"></i>
-              </div>
-              <div>
-                <p class="c-goals__subtitle">{Variable.lang.p.goalThree}</p>
-                <span class="c-goals__text">
-                  {Variable.lang.p.goalThreeDesc}
-                </span>
-              </div>
-            </div>
-            <div class="c-goals__item">
-              <div class="c-goals__wrap">
-                <i class="c-goals__icon c-goals__icon--metauniverse"></i>
-              </div>
-              <div>
-                <p class="c-goals__subtitle">{Variable.lang.p.goalFour}</p>
-                <span class="c-goals__text">
-                  {Variable.lang.p.goalFourDesc}
-                </span>
-              </div>
-            </div>
-          </div> */}
-
-
-
             </Elements.page.Container>
-
 
             <Elements.page.Container
               class={"c-aboutus__roadmap"}
@@ -254,8 +212,6 @@ const start = function (data, ID) {
             >
               <Elements.Roadmap records={roadmap} />
             </Elements.page.Container>
-
-
 
             {/* <div class="roadmap-wrap">
                 <div class="roadmap_item roadmap_item--0">
@@ -356,38 +312,6 @@ const start = function (data, ID) {
                   ></img>
                 </div>
               </div> */}
-            {/* <div class="c-aboutus__wrapper">
-            <div class="c-aboutus__toppart">
-              <div class="c-aboutus__dateitem c-aboutus__dateitem--1">
-                <p>{Variable.lang.p.mapDateOne}</p>
-                <span>{Variable.lang.span.mapDescOne}</span>
-              </div>
-              <div class="c-aboutus__dateitem c-aboutus__dateitem--2">
-                <p>{Variable.lang.p.mapDateTwo}</p>
-                <span>{Variable.lang.span.mapDescTwo}</span>
-              </div>
-              <div class="c-aboutus__dateitem c-aboutus__dateitem--3">
-                <p>{Variable.lang.p.mapDateThree}</p>
-                <span>{Variable.lang.span.mapDescFive}</span>
-              </div>
-            </div>
-            <img class="c-aboutus__axis" src={images["road_map"]} />
-            <div class="c-aboutus__bottompart">
-              <div class="c-aboutus__dateitem c-aboutus__dateitem--4">
-                <p>{Variable.lang.p.mapDateFour}</p>
-                <span>{Variable.lang.span.mapDescThree}</span>
-              </div>
-              <div class="c-aboutus__dateitem c-aboutus__dateitem--5">
-                <p>{Variable.lang.p.October2022}</p>
-                <span>{Variable.lang.span.mapDescFour}</span>
-              </div>
-              <div class="c-aboutus__dateitem c-aboutus__dateitem--6">
-                <p>{Variable.lang.p.mapDateSix}</p>
-                <span>{Variable.lang.span.mapDescSix}</span>
-              </div>
-            </div>
-          </div> */}
-
 
             <Elements.page.Container
               class={"c-aboutus__projects"}
@@ -401,34 +325,6 @@ const start = function (data, ID) {
                 scr={projects.src}
               />
             </Elements.page.Container>
-
-
-
-            {/* <div class="c-aboutus__list">
-                <div class="c-aboutus__project">
-                  <img
-                    class="c-aboutus__banner"
-                    src={images["about_us_banner6"]}
-                  />
-                  <span class="c-aboutus__projectcompany">
-                    {Variable.lang.span.aboutProjectNameTwo}
-                  </span>
-                  <p class="c-aboutus__projecttitle">
-                    {Variable.lang.p.aboutProjectDateTwo}
-                  </p>
-                </div>
-                <div class="c-aboutus__project">
-                  <img
-                    class="c-aboutus__banner"
-                    src={images["about_us_banner7"]}
-                  />
-                  <span class="c-aboutus__projectcompany">crypto vpn</span>
-                  <p class="c-aboutus__projecttitle">
-                    {Variable.lang.p.aboutProjectDateTwo}
-                  </p>
-                </div>
-              </div> */}
-
           </Elements.page.Container>
         </Elements.page.MainContainer>
       );
