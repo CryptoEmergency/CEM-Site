@@ -39,37 +39,6 @@ const team = [
   },
 ];
 
-const arrAccordeon = [
-  {
-    title: "Цель Crypto Emergency?",
-    description:
-      "Объединить криптоэнтузиастов со всего мира на многофункциональной платформе, где собраны все необходимые инструменты для общения, обучения, заработка и создания собственного контента.",
-    hidden: false,
-  },
-  {
-    title: "Как заработать или купить токены CEM?",
-    description:
-      "Купить CEM можно официально на бирже Bitmart. Также можно вести активную деятельность на платформе и получать новый уровень за действия на платформе и с новым уровнем получать в награду CEM. Следите за новостями в телеграме, могут появляться разные конкурсы где в награду можно получить монету CEM.",
-    hidden: true,
-  },
-  {
-    title: "Как вывести заработанные CEM с платформы?",
-    description:
-      "Вывести заработанные CEM на нашей платформе за проявленную активность вы можете на свой счет в любое время. На данный момент вывод средств осуществляется путем подачи заявки через администратора.",
-    hidden: true,
-  },
-  {
-    title: "Проект доступен лишь в России?",
-    description:  "У нас огромная экосистема которая на данный момент полностью переведена на 16 языков по всему миру, а основными разделами платформы уже сейчас можно пользоваться на 60 языках. Платформа доступна на всех рынках включая Китай.",
-    hidden: true,
-  },
-  {
-    title: "Можно ли скачать приложение на телефон?",
-    description: "Да! Все проекты нашей экосистемы доступны как на Android так и на iPhone. Найти ссылочки для скачивания можно внизу страницы, либо просто через поиск в маркетах.",
-    hidden: false,
-  },
-];
-
 function showTeam(team) {
   return team.map((item) => {
     return (
@@ -89,6 +58,34 @@ const start = function (data, ID) {
   //   arrAccordeon[0].element.hidden = true;
   //   // console.log("=7c6bf4=", arrAccordeon[0]);
   // }, 5000);
+
+  const arrAccordeon = [
+    {
+      title: Variable.lang.p.aboutQuestionOne,
+      description: Variable.lang.p.aboutAnswerOne,
+      hidden: false,
+    },
+    {
+      title: Variable.lang.p.aboutQuestionTwo,
+      description: Variable.lang.p.aboutAnswerTwo,
+      hidden: true,
+    },
+    {
+      title: Variable.lang.p.aboutQuestionThree,
+      description: Variable.lang.p.aboutAnswerThree,
+      hidden: true,
+    },
+    {
+      title: Variable.lang.p.aboutQuestionFour,
+      description: Variable.lang.p.aboutAnswerFour,
+      hidden: true,
+    },
+    {
+      title: Variable.lang.p.aboutQuestionFive,
+      description: Variable.lang.p.aboutAnswerFive,
+      hidden: true,
+    },
+  ];
 
   const arrBlockCard = [
     {
@@ -193,27 +190,33 @@ const start = function (data, ID) {
                 })}
               </div>
 
-              <div class="accordeon">
-                {arrAccordeon.map((item, index) => {
-                  return (
-                    <Accordeon
-                      title={item.title}
-                      description={item.description}
-                      hidden={item.hidden}
-                      onclick={() => {
-                        arrAccordeon.forEach((u) => {
-                          u.hidden = true;
-                        });
-                        item.hidden = false;
-                        // if(!item.hidden){
-                        //   item.hidden = !item.hidden
-                        // }
-                        initReload();
-                      }}
-                    />
-                  );
-                })}
-              </div>
+              {Variable.lang.code == "ru" ? (
+                <div class="accordeon">
+                  {arrAccordeon.map((item, index) => {
+                    return (
+                      <Accordeon
+                        title={item.title}
+                        description={item.description}
+                        hidden={item.hidden}
+                        onclick={() => {
+                          // arrAccordeon.forEach((el, i) => {
+                          //   el.hidden = true;
+                          //   console.log(i, " = ", index);
+                          // });
+                          // item.hidden = false;
+                          arrAccordeon.forEach((el, i) => {
+                            el.hidden = true;
+                            console.log(i, " = ", index);
+                          });
+                          item.hidden = false;
+
+                          initReload();
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              ) : null}
 
               <div class="team">
                 <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
@@ -287,7 +290,10 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="turn turn-0">
-                  <img alt={Variable.lang.span.mapDescOne} src={svg['roadmap/turn-left1']}></img>
+                  <img
+                    alt={Variable.lang.span.mapDescOne}
+                    src={svg["roadmap/turn-left1"]}
+                  ></img>
                 </div>
 
                 <div class="roadmap_item roadmap_item--1">
@@ -298,7 +304,10 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="turn turn-1">
-                  <img alt={Variable.lang.span.mapDescTwo} src={svg['roadmap/turn-right2']}></img>
+                  <img
+                    alt={Variable.lang.span.mapDescTwo}
+                    src={svg["roadmap/turn-right2"]}
+                  ></img>
                 </div>
 
                 <div class="roadmap_item roadmap_item--2">
@@ -309,7 +318,10 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="turn turn-2">
-                  <img alt={Variable.lang.span.mapDescThree} src={svg['roadmap/turn-left3']}></img>
+                  <img
+                    alt={Variable.lang.span.mapDescThree}
+                    src={svg["roadmap/turn-left3"]}
+                  ></img>
                 </div>
 
                 <div class="roadmap_item roadmap_item--3">
@@ -320,7 +332,10 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="turn turn-3">
-                  <img alt={Variable.lang.span.mapDescFour} src={svg['roadmap/turn-right4']}></img>
+                  <img
+                    alt={Variable.lang.span.mapDescFour}
+                    src={svg["roadmap/turn-right4"]}
+                  ></img>
                 </div>
 
                 <div class="roadmap_item roadmap_item--4">
@@ -331,7 +346,10 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="turn turn-4">
-                  <img alt={Variable.lang.span.mapDescFive} src={svg['roadmap/turn-left5']}></img>
+                  <img
+                    alt={Variable.lang.span.mapDescFive}
+                    src={svg["roadmap/turn-left5"]}
+                  ></img>
                 </div>
 
                 <div class="roadmap_item roadmap_item--5">
@@ -342,7 +360,10 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="turn turn-5">
-                  <img alt={Variable.lang.span.mapDescSix} src={svg['roadmap/turn-right6']}></img>
+                  <img
+                    alt={Variable.lang.span.mapDescSix}
+                    src={svg["roadmap/turn-right6"]}
+                  ></img>
                 </div>
 
                 <div class="roadmap_item roadmap_item--6">
@@ -353,7 +374,10 @@ const start = function (data, ID) {
                 </div>
 
                 <div class="turn turn-6">
-                  <img alt={Variable.lang.span.mapDescSeven} src={svg['roadmap/turn-left7']}></img>
+                  <img
+                    alt={Variable.lang.span.mapDescSeven}
+                    src={svg["roadmap/turn-left7"]}
+                  ></img>
                 </div>
               </div>
               {/* <div class="c-aboutus__wrapper">
