@@ -200,7 +200,8 @@
 		"contactsVacancy": "Контакты",
 		"customerFreelance": "Заказчик",
 		"customerStatisticsFreelance": "Статистика заказчика",
-		"customerContactsFreelance": "Контакты заказчика"
+		"customerContactsFreelance": "Контакты заказчика",
+		"noName": "Без названия"
 	},
 	"a": {
 		"about": "О нас",
@@ -294,7 +295,8 @@
 		"budgetPerOrder": "Бюджет на заказ",
 		"urgently": "Срочно",
 		"------------------новые слова-----------------": "добавить новые слова",
-		"litePaper": "Lite Paper"
+		"litePaper": "Lite Paper",
+		"newNotes": "Новая заметка"
 	},
 	"p": {
 		"answers": "ответов",
