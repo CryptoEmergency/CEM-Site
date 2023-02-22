@@ -30,7 +30,7 @@ const Accordeon = function ({
       </div>
       <div
         // Element={Element}
-        class={["accordeon-content", hidden ? "content-hidden" : null]}
+        class={["accordeon-content", hidden ? null : "content-show"]}
       >
         {description}
       </div>
