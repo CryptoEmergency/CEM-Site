@@ -159,7 +159,8 @@
         "promo_video": "Promo video",
         "tokenomica": "Tokenomica",
         "------------------новые слова-----------------": "добавить новые слова",
-        "modal_listCoin": "Choose coins"
+        "modal_listCoin": "Choose coins",
+        "noName": "No name"
     },
     "a": {
         "about": "About Us",
@@ -248,7 +249,8 @@
         "clientMoney": "Payments for attracted customers",
         "forFriends": "Only for friends",
         "------------------новые слова-----------------": "добавить новые слова",
-        "litePaper": "Lite Paper"
+        "litePaper": "Lite Paper",
+        "newNotes": "New notes"
     },
     "p": {
         "answers": "answers ",
