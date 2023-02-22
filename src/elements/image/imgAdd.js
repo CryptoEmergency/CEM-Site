@@ -4,14 +4,14 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 
-const forExport = function ({ src, Static }) {
+const forExport = function ({ src, Static, onclick }) {
     return (
         <div class="notes-button__img"
-            // onclick={() => {
-            //     Static.elInputImg.click()
-            // }}
-            >
-            <img class="notes-button__icon" src={src} />
+        // onclick={() => {
+        //     Static.elInputImg.click()
+        // }}
+        >
+            <img class="notes-button__icon" src={src} onclick={onclick} />
             {/* <input
                 type="file"
                 hidden

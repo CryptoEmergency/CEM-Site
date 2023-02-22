@@ -97,19 +97,23 @@ const start = function (data, ID) {
 
                                 <Elements.BlockNotes
                                     class={[Static.activeNotes ? "active" : null]}
+                                    item={Static.activeNotes}
                                     Static={Static}
+                                    onClick_add={() => {
+                                        Static.elInputImg.click()
+                                    }}
                                 >
                                     <div class="notes-content-img">
-                                    {
-                                        (Static.activeNotes && Static.activeNotes.media || []).map(function (item, index) {
-                                            return (
-                                                <Elements.image.imgPreview 
-                                                    Static={Static} 
-                                                    item={item}
-                                                />
-                                            )
-                                        })
-                                    }
+                                        {
+                                            (Static.activeNotes && Static.activeNotes.media || []).map(function (item, index) {
+                                                return (
+                                                    <Elements.image.imgPreview
+                                                        Static={Static}
+                                                        item={item}
+                                                    />
+                                                )
+                                            })
+                                        }
                                     </div>
                                 </Elements.BlockNotes>
 
