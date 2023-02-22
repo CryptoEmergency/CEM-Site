@@ -68,6 +68,7 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesList)
         },
         fn: () => {
+            // console.log(Static.activeNotes)
 
             return (
                 <div class="blog_page_container c-main__body">
@@ -94,7 +95,25 @@ const start = function (data, ID) {
                                     })}
                                 </Elements.BlockNotesList>
 
-                                {
+                                <Elements.BlockNotes
+                                    class={[Static.activeNotes ? "active" : null]}
+                                    Static={Static}
+                                >
+                                    <div class="notes-content-img">
+                                    {
+                                        (Static.activeNotes && Static.activeNotes.media || []).map(function (item, index) {
+                                            return (
+                                                <Elements.image.imgPreview 
+                                                    Static={Static} 
+                                                    item={item}
+                                                />
+                                            )
+                                        })
+                                    }
+                                    </div>
+                                </Elements.BlockNotes>
+
+                                {/* {
                                     () => {
                                         if (!Static.activeNotes) {
                                             return (
@@ -242,7 +261,7 @@ const start = function (data, ID) {
                                             )
                                         }
                                     }
-                                }
+                                } */}
                             </div>
                         </div>
                     </div>
