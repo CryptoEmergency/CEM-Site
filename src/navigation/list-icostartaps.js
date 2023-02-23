@@ -8,6 +8,7 @@ import {
 
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
+import Elements from '@src/elements/export.js';
 
 let dateDrop, showFilters = false
 let listStatus = {}
@@ -153,11 +154,11 @@ const start = function (data, ID) {
     ID,
     fnLoad: async () => {
       Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-      console.log('=bacf0f=', Static.recordsIco)
     },
     fn: () => {
       return (
-        <div class="book_container c-main__body ico-wrap">
+        <Elements.page.MainContainer
+          class="book_container ico-wrap">
           <img src={svg["background/left"]} class={["ico-back", "ico-back-left"]} />
           <img src={svg["background/right"]} class={["ico-back", "ico-back-right"]} />
           <div class="book-inner ico-inner">
@@ -277,7 +278,7 @@ const start = function (data, ID) {
 
             </div>
           </div>
-        </div>
+        </Elements.page.MainContainer>
       )
     }
   })
