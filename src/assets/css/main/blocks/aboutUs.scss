@@ -464,12 +464,18 @@
 
 // change page about us
 .title-animation{
-    margin: 0;
+    position: relative;
+    width: 100%;
+    font-weight: bold;
+    font-size: 76px;
+    line-height: 115%;
     padding-bottom: 0.5rem;
+    margin: 0;
     letter-spacing: 0.5rem;
-    color: #A87FFF;
+    color: #FFFFFF;
     transition: all 0.3s ease;
     z-index: 3;
+    // margin-bottom: 50px;
 }
 .title-animation:hover{
     transform: translate3d(0, -10px, 22px);

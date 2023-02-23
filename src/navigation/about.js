@@ -10,7 +10,6 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Elements from "@src/elements/export.js";
 
-
 import { Particles } from "@src/component/htmlElements/index.js";
 
 // import { AboutAnimation } from "@src/component/blocks/AboutAnimation";
@@ -163,16 +162,20 @@ const start = function (data, ID) {
     ID,
     fn: () => {
       return (
-        <Elements.page.MainContainer class="c-aboutus">
+        <Elements.page.MainContainer
+          class="c-aboutus"
+          header={
+            <Elements.page.Header
+              imgBack={svg["background/about_us_vector-1"]}
+              title="Crypto Emergency"
+              descriptions={Variable.lang.p.aboutObjective}
+              classBack="c-whowe__bg"
+            />
+          }
+        >
           {/* <div class="c-aboutus about_us_container c-main__body"> */}
-          <Elements.page.Header
-            imgBack={svg["background/about_us_vector-1"]}
-            title="Crypto Emergency"
-            descriptions={Variable.lang.p.aboutObjective}
-            classBack="c-whowe__bg"
-          />
 
-          <Particles></Particles>
+          {/* <Particles></Particles> */}
 
           <Elements.page.Container
             class={["c-aboutus__content", "c-container"]}

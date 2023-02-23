@@ -21,11 +21,26 @@ const start = function (data, ID) {
             text={Variable.lang.p.dontHaveFriends}
             class="el-c el-size--20 el-color--grey"
           />
-          <Elements.page.Container>
+          <Elements.page.Container class="affiliate_program_conditions">
             <Elements.cards.Standart
               image={svg["icon/affiliate_conditions_icon-1"]}
               title={Variable.lang.p.affiliateCondition1}
               description={Variable.lang.p.affiliateConditionDescription1}
+            />
+            <Elements.cards.Standart
+              image={svg["icon/affiliate_conditions_icon-2"]}
+              title={Variable.lang.p.affiliateCondition2}
+              description={Variable.lang.p.affiliateConditionDescription2}
+            />
+            <Elements.cards.Standart
+              image={svg["icon/affiliate_conditions_icon-3"]}
+              title={Variable.lang.p.affiliateCondition3}
+              description={Variable.lang.p.affiliateConditionDescription3}
+            />
+            <Elements.cards.Standart
+              image={svg["icon/affiliate_conditions_icon-4"]}
+              title={Variable.lang.p.affiliateCondition4}
+              description={Variable.lang.p.affiliateConditionDescription4}
             />
           </Elements.page.Container>
         </Elements.page.MainContainer>
