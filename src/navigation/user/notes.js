@@ -102,7 +102,23 @@ const start = function (data, ID) {
                                     onClick_add={() => {
                                         Static.elInputImg.click()
                                     }}
+                                    onchange={() => {
+                                        editNotes(Static)
+                                    }}
+                                    oninput_addTitle={() => {
+                                        Static.activeNotes.title = Static.elTitle.innerText
+                                        editNotes(Static)
+                                    }}
+                                    oninput_addText={() => {
+                                        Static.activeNotes.text = Static.elText.innerText
+                                        editNotes(Static)
+                                    }}
                                 >
+                                    <img class="notes-content-close" src={svg["gradient_arrow"]}
+                                        onclick={() => {
+                                            Static.activeNotes = null
+                                            initReload()
+                                        }} />
                                     <div class="notes-content-img">
                                         {
                                             (Static.activeNotes && Static.activeNotes.media || []).map(function (item, index) {

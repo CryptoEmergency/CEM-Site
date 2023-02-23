@@ -531,7 +531,8 @@
 		"contactsCommunity": "Контакты",
 		"lastChatVideo": "Видео",
 		"lastChatAudio": "Аудио",
-		"lastChatImage": "Фото"
+		"lastChatImage": "Фото",
+		"selectOrCreateNew": "Выберите или создайте новую заметку"
 	},
 	"label": {
 		"name": "Имя",

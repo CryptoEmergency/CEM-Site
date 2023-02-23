@@ -1,10 +1,11 @@
 import {
     jsx,
     jsxFrag,
+    initReload,
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 
-const forExport = function ({ src, Static, onclick }) {
+const forExport = function ({ src, Static, onclick, onchange }) {
     return (
         <div class="notes-button__img"
         // onclick={() => {
@@ -12,7 +13,7 @@ const forExport = function ({ src, Static, onclick }) {
         // }}
         >
             <img class="notes-button__icon" src={src} onclick={onclick} />
-            {/* <input
+            <input
                 type="file"
                 hidden
                 multiple
@@ -36,13 +37,13 @@ const forExport = function ({ src, Static, onclick }) {
                                     name: response.name
                                 }
                                 Static.activeNotes.media.push(data)
-                                editNotes(Static)
+                                {onchange}
                             }
                         )
                     })
-                    initReload()
+                    // initReload()
                 }}
-            /> */}
+            />
         </div>
     )
 }

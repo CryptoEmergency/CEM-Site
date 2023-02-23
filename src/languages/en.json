@@ -450,7 +450,8 @@
         "deleteFromBlacklist": "Remove from the list",
         "confirmBlockUser": "Are you sure you want to add a user to the blacklist? (The blacklist of users is available in the settings)",
         "update": "Changed",
-        "deletePageComment": "Are you sure you want to delete?"
+        "deletePageComment": "Are you sure you want to delete?",
+        "selectOrCreateNew": "Select or create a new note"
     },
     "label": {
         "name": "Name",
