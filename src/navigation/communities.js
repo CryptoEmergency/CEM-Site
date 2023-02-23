@@ -1,10 +1,12 @@
 import {
     jsx,
     jsxFrag,
-    init
+    init,
+    load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { BlockShowCommunities } from '@component/blocks/index.js';
+import Elements from '@src/elements/export.js';
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
