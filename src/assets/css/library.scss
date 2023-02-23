@@ -1,7 +1,7 @@
 // variables colors=================
-:root {
-  --fiolet-light: #8859EC;
-}
+
+$fiolet-light: #8859EC;
+
 
 $roadmapColors: (
   0: #00A5FB,
@@ -13,6 +13,45 @@ $roadmapColors: (
   6: #D82B56,
 );
 
+// ===font-size
+$sizeText:(
+  10: 10px,
+  12: 12px,
+  14: 14px,
+  16: 16px,
+  18: 18px,
+  20: 20px,
+  22: 22px,
+  24: 24px,
+  26: 26px,
+  28: 28px,
+  30: 30px,
+  32: 32px,
+  34: 34px,
+  36: 36px,
+);
+
+$weightText:(
+  500: 500,
+  600: 600,
+  700: 700
+);
+
+@each $index,
+$size in $sizeText{
+  .el-size--#{$index}{
+    font-size: $size;
+  }
+}
+
+@each $index,
+$weight in $weightText{
+  .el-w--#{$index}{
+    font-weight: $weight;
+  }
+}
+
+// ===font-size
 // new check
 h6,
 .h6,
@@ -107,10 +146,10 @@ h6,
   align-items: center;
 }
 
-.el-size--20{
-  font-size: 20px;
-  font-weight: 500;
-}
+// .el-size--20{
+//   font-size: 20px;
+//   font-weight: 500;
+// }
 
 .el-color--grey{
   color: #DBEAFF;
@@ -148,7 +187,7 @@ h6,
   cursor: pointer;
   width: 28px;
   height: 28px;
-  background-color: --fiolet-light;
+  background-color: $fiolet-light;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -219,7 +258,7 @@ h6,
   max-height: 1000px;
   padding: 15px 25px;
 }
-
+// accordeon=============================
 
 // arrow top / bottom for filters, accordeon and another elements
 .arrow {
@@ -523,7 +562,7 @@ h6,
     }
   }
 }
-
+//roadmap========================
 
 
 @each $index,
