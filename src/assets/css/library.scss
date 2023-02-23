@@ -100,7 +100,39 @@ h6,
   display: none;
 }
 
+// element center
+.el-c{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.el-size--20{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.el-color--grey{
+  color: #DBEAFF;
+}
+
+// container==
+.page-container{
+  padding-top: 71px;
+  max-width: 1240px;
+  margin: 0px auto;
+
+  h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.page-inner{
+  background: #232733;
+  min-height: 500px;
+}
 
 // buttons===========================
 // button close X

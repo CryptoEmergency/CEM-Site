@@ -1,38 +1,43 @@
-import {
-  jsx,
-  jsxFrag,
-  init,
-  Variable,
-  load
-} from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, init, Variable, load } from "@betarost/cemserver/cem.js";
 
 import svg from "@assets/svg/index.js";
-import { fn } from '@src/functions/index.js';
+import { fn } from "@src/functions/index.js";
 
+import { BlockAffiliateBanners } from "@component/blocks/index.js";
 
-import { BlockAffiliateBanners } from '@component/blocks/index.js';
-
-import Elements from '@src/elements/export.js';
+import Elements from "@src/elements/export.js";
 
 const start = function (data, ID) {
-  let [Static] = fn.GetParams({ data, ID })
+  let [Static] = fn.GetParams({ data, ID });
 
   load({
     ID,
     fn: () => {
       return (
         <Elements.page.MainContainer
-          title={!Static.openModals ? <h3>{Variable.lang.h.affiliate}</h3> : null}>
+          title={!Static.openModals ? Variable.lang.h.affiliate : null}
+        >
+          <Elements.text.Main
+            text={Variable.lang.p.dontHaveFriends}
+            class="el-c el-size--20 el-color--grey"
+          />
+          <Elements.page.Container>
+            <Elements.cards.Standart
+              image={svg["icon/affiliate_conditions_icon-1"]}
+              title={Variable.lang.p.affiliateCondition1}
+              description={Variable.lang.p.affiliateConditionDescription1}
+            />
+          </Elements.page.Container>
         </Elements.page.MainContainer>
-      )
-    }
-  })
-  return
+      );
+    },
+  });
+  return;
   init(
     null,
     () => {
       return (
-        <div class='affiliate c-main__body'>
+        <div class="affiliate c-main__body">
           <img
             class="affiliate_program_blur"
             style="position: absolute; right: 0;"
@@ -84,7 +89,8 @@ const start = function (data, ID) {
           </div>
         </div>
       );
-    }, ID
+    },
+    ID
   );
 };
 export default start;

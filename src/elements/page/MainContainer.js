@@ -1,19 +1,22 @@
-import {
-    jsx,
-    jsxFrag
-} from '@betarost/cemserver/cem.js';
+import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
 
 const forExport = function ({ title, className, children, resetClass }) {
-    let classACtive = ["c-main__body", className]
-    if (resetClass) {
-        classACtive = className
-    }
-    return (
-        <div class={classACtive}>
-            {title ? <div>{title}</div> : null}
-            {children}
-        </div>
-    )
-}
+  let classACtive = ["page-container", className];
+  if (resetClass) {
+    classACtive = className;
+  }
+  return (
+    <div class="page-inner">
+      <div class={classACtive}>
+        {title ? (
+          <div>
+            <h1>{title}</h1>
+          </div>
+        ) : null}
+        {children}
+      </div>
+    </div>
+  );
+};
 
-export default forExport
+export default forExport;
