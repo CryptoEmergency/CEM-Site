@@ -157,7 +157,7 @@ const start = function (data, ID) {
                                     </div>
 
                                     <div class={["notes-input-placeholder", "notes-description"]}
-                                        contenteditable={true}
+                                        contenteditable="plaintext-only"
                                         data-text="testset"
                                         innerText={Static.testt}
                                         oninput={function () {
