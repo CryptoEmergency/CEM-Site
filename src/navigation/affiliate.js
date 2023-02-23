@@ -19,7 +19,7 @@ const start = function (data, ID) {
         >
           <Elements.text.Main
             text={Variable.lang.p.dontHaveFriends}
-            class="el-c el-size--20 el-color--grey"
+            class="el-c el-size--20 el-color--grey el-w--500"
           />
           <Elements.page.Container class="affiliate_program_conditions">
             <Elements.cards.Standart
