@@ -1,17 +1,20 @@
 import {
     jsx,
     jsxFrag,
-    Variable,
-    init
+    load,
+    Variable
 } from "@betarost/cemserver/cem.js";
+
 import { fn } from '@src/functions/index.js';
+import Elements from '@src/elements/export.js';
+
 const start = function (data, ID) {
-    init(
-        null,
-        () => {
+    load({
+        ID,
+        fn: () => {
             if (Variable.lang.lang === "Russian") {
                 return (
-                    <div class='c-main__body'>
+                    <Elements.page.MainContainer>
                         <div class="full_news_block">
                             <div class="full_news_content">
                                 <h1
@@ -126,11 +129,11 @@ const start = function (data, ID) {
                                 <p class="c-terms__text">Мы можем изменять наш Сервис и правила, и у нас может возникать необходимость внести изменения в настоящие Условия для точного отражения в них нашего Сервиса и правил. Если иное не требуется по законодательству, мы будем уведомлять вас путем размещения обновленной версии Условий на нашем сайте. Если после этого вы продолжите использовать Сервис, вы обязаны будете соблюдать обновленные Условия. Если вы не согласны с настоящими Условиями или какой-либо обновленной версией Условий, вы можете удалить свой аккаунт.</p>
                             </div>
                         </div>
-                    </div>
+                    </Elements.page.MainContainer>
                 );
             } else {
                 return (
-                    <div class='c-main__body'>
+                    <Elements.page.MainContainer>
                         <div class="full_news_block">
                             <div class="full_news_content">
                                 <h1 class="full_news_name">Welcome to Crypto Emergency!</h1>
@@ -222,10 +225,12 @@ const start = function (data, ID) {
                                 <p>We may change our Service and policies, and we may need to change these Terms and Conditions to accurately reflect our Service and policies. Unless otherwise required by law, we will notify you by posting an updated version of the Terms and Conditions on our website. If you then continue to use the Service, you will be bound by the updated Terms and Conditions. If you do not agree with these Terms and Conditions or any updated version of the Terms and Conditions, you may terminate your account.</p>
                             </div>
                         </div>
-                    </div>
+                    </Elements.page.MainContainer>
                 );
             }
-        }, ID)
+        }
+    })
+    return
 };
+
 export default start;
-// OK
