@@ -18,9 +18,11 @@ const start = function (data, ID) {
     },
     fn: () => {
       return (
-        <Elements.page.MainContainer class="blog_page_container">
+        <Elements.page.MainContainer
+          // class="blog_page_container"
+          title={!Static.openModals ? Variable.lang.h.mediaUs : null}>
           <Elements.page.Container
-            title={!Static.openModals ? <h2>{Variable.lang.h.mediaUs}</h2> : null}>
+          >
             <Elements.page.Container class="userNewsBlock" resetClass={true}>
               <Elements.page.Container class="bl_one" resetClass={true}>
                 <Elements.page.Container class="blog_news" resetClass={true}>
