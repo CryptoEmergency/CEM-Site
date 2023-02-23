@@ -28,24 +28,25 @@ const forExport = function ({ item, onClick_add, onClick_delete, children, class
             <Elements.NotesDelete
                 src={svg["delete_notes"]}
             />
-            <Elements.NotesText 
+            <Elements.NotesText
                 class="notes-input-title"
                 dataText="Название"
                 Element={($el) => {
                     Static.elTitle = $el
                 }}
                 Static={Static}
-                textContent={Static.activeNotes && Static.activeNotes.title != "" ? Static.activeNotes.title : ""}
+                innerText={Static.activeNotes && Static.activeNotes.title != "" ? Static.activeNotes.title : ""}
                 oninput={oninput_addTitle}
             />
-            <Elements.NotesText 
+            <Elements.NotesText
                 class="notes-description"
                 dataText="Текст"
                 Element={($el) => {
                     Static.elText = $el
                 }}
                 Static={Static}
-                textContent={Static.activeNotes && Static.activeNotes.text}
+                // textContent={Static.activeNotes && Static.activeNotes.text}
+                innerText={Static.activeNotes && Static.activeNotes.text}
                 oninput={oninput_addText}
             />
         </div>

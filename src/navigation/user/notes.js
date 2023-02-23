@@ -9,6 +9,30 @@ import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import Elements from '@src/elements/export.js';
 
+
+function getCursorPosition(parent) {
+    let selection = document.getSelection()
+    let range = new Range
+    range.setStart(parent, 0)
+    range.setEnd(selection.anchorNode, selection.anchorOffset)
+    return range.toString().length
+}
+
+function setCursorPosition(parent, position) {
+    let child = parent.firstChild
+    while (position > 0) {
+        let length = child.textContent.length
+        if (position > length) {
+            position -= length
+            child = child.nextSibling
+        }
+        else {
+            if (child.nodeType == 3) return document.getSelection().collapse(child, position)
+            child = child.firstChild
+        }
+    }
+}
+
 // Добавление новой заметки.
 // Подсмотрел другую интересную логику по созданию новой заметки. Ее нельзя создать, пока последняя созданная является пустой.
 // но они сразу добавляются в базу
@@ -130,6 +154,22 @@ const start = function (data, ID) {
                                                 )
                                             })
                                         }
+                                    </div>
+
+                                    <div class={["notes-input-placeholder", "notes-description"]}
+                                        contenteditable={true}
+                                        data-text="testset"
+                                        innerText={Static.testt}
+                                        oninput={function () {
+                                            console.log('=a853cf=', this.innerText)
+                                            let position = getCursorPosition(this)
+                                            console.log('=86ceed= position', position)
+                                            this.innerHTML = this.innerHTML.toUpperCase();
+                                            setCursorPosition(this, position)
+                                            // Static.testt = this.innerText
+                                            // initReload()
+                                        }}
+                                    >
                                     </div>
                                 </Elements.BlockNotes>
 
