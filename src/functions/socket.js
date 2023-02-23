@@ -21,6 +21,7 @@ forExport.get = async function (data, callback) {
     return new Promise((resolve, reject) => {
         if (!callback) {
             socket.emit("Crypto", data, function ({ method, params, result, _id = null, error = null }) {
+                // console.log('=7269ff response22=', method, params, result, _id, error);
                 if (data.cache) {
                     fn.idb.set("CachePage", data.cache, result)
                 }

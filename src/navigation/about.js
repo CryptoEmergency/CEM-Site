@@ -10,7 +10,6 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Elements from "@src/elements/export.js";
 
-console.log(Elements);
 
 import { Particles } from "@src/component/htmlElements/index.js";
 
