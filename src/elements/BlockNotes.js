@@ -6,7 +6,7 @@ import {
 import svg from '@assets/svg/index.js';
 import Elements from '@src/elements/export.js';
 
-const forExport = function ({ item, onClick_add, onClick_delete, children, className, Static, onchange, oninput_addTitle, oninput_addText }) {
+const forExport = function ({ item, onClick_add, children, className, Static, onchange, oninput_addTitle, oninput_addText }) {
     if (!item) {
         return (
             <div class={["notes-content-wrapper"]}>
@@ -30,23 +30,29 @@ const forExport = function ({ item, onClick_add, onClick_delete, children, class
             />
             <Elements.NotesText
                 class="notes-input-title"
-                dataText="Название"
+                contenteditable={true}
+                onKeyPress={function (e) {
+                    if (e.code === 'Enter') {
+                        e.preventDefault()
+                    }
+                }}
+                placeholder="Название"
                 Element={($el) => {
                     Static.elTitle = $el
                 }}
                 Static={Static}
-                innerText={Static.activeNotes && Static.activeNotes.title != "" ? Static.activeNotes.title : ""}
+                textContent={Static.activeNotes && Static.activeNotes.title != "" ? Static.activeNotes.title : ""}
                 oninput={oninput_addTitle}
             />
             <Elements.NotesText
                 class="notes-description"
-                dataText="Текст"
+                contenteditable="plaintext-only"
+                placeholder="Текст"
                 Element={($el) => {
                     Static.elText = $el
                 }}
                 Static={Static}
-                // textContent={Static.activeNotes && Static.activeNotes.text}
-                innerText={Static.activeNotes && Static.activeNotes.text}
+                textContent={Static.activeNotes && Static.activeNotes.text}
                 oninput={oninput_addText}
             />
         </div>

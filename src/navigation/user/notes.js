@@ -9,30 +9,6 @@ import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import Elements from '@src/elements/export.js';
 
-
-function getCursorPosition(parent) {
-    let selection = document.getSelection()
-    let range = new Range
-    range.setStart(parent, 0)
-    range.setEnd(selection.anchorNode, selection.anchorOffset)
-    return range.toString().length
-}
-
-function setCursorPosition(parent, position) {
-    let child = parent.firstChild
-    while (position > 0) {
-        let length = child.textContent.length
-        if (position > length) {
-            position -= length
-            child = child.nextSibling
-        }
-        else {
-            if (child.nodeType == 3) return document.getSelection().collapse(child, position)
-            child = child.firstChild
-        }
-    }
-}
-
 // Добавление новой заметки.
 // Подсмотрел другую интересную логику по созданию новой заметки. Ее нельзя создать, пока последняя созданная является пустой.
 // но они сразу добавляются в базу
@@ -129,12 +105,12 @@ const start = function (data, ID) {
                                     onchange={() => {
                                         editNotes(Static)
                                     }}
-                                    oninput_addTitle={() => {
-                                        Static.activeNotes.title = Static.elTitle.innerText
+                                    oninput_addTitle={function () {
+                                        Static.activeNotes.title = this.innerText
                                         editNotes(Static)
                                     }}
-                                    oninput_addText={() => {
-                                        Static.activeNotes.text = Static.elText.innerText
+                                    oninput_addText={function () {
+                                        Static.activeNotes.text = this.innerText
                                         editNotes(Static)
                                     }}
                                 >
@@ -156,10 +132,10 @@ const start = function (data, ID) {
                                         }
                                     </div>
 
-                                    <div class={["notes-input-placeholder", "notes-description"]}
+                                    {/* <div class={["notes-input-placeholder", "notes-description"]}
                                         contenteditable="plaintext-only"
-                                        data-text="testset"
-                                        innerText={Static.testt}
+                                        // data-text="testset"
+                                        innerText={Static.test}
                                         oninput={function () {
                                             console.log('=a853cf=', this.innerText)
                                             let position = getCursorPosition(this)
@@ -170,7 +146,7 @@ const start = function (data, ID) {
                                             // initReload()
                                         }}
                                     >
-                                    </div>
+                                    </div> */}
                                 </Elements.BlockNotes>
 
                                 {/* {
