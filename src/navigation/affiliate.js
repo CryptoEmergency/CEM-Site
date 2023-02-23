@@ -3,11 +3,31 @@ import {
   jsxFrag,
   init,
   Variable,
+  load
 } from "@betarost/cemserver/cem.js";
+
 import svg from "@assets/svg/index.js";
+import { fn } from '@src/functions/index.js';
+
+
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
 
+import Elements from '@src/elements/export.js';
+
 const start = function (data, ID) {
+  let [Static] = fn.GetParams({ data, ID })
+
+  load({
+    ID,
+    fn: () => {
+      return (
+        <Elements.page.MainContainer
+          title={!Static.openModals ? <h3>{Variable.lang.h.affiliate}</h3> : null}>
+        </Elements.page.MainContainer>
+      )
+    }
+  })
+  return
   init(
     null,
     () => {
