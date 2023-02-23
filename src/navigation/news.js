@@ -1,25 +1,29 @@
 import {
   jsx,
   jsxFrag,
-  init
+  load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { BlockNews } from '@component/blocks/index.js';
+import Elements from '@src/elements/export.js';
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
-  init(
-    async () => {
+  load({
+    ID,
+    fnLoad: async () => {
       fn.initData.news(Static)
     },
-    () => {
+    fn: () => {
       return (
-        <div class="blog_page_container c-main__body">
+        <Elements.page.MainContainer
+          class="blog_page_container">
           <BlockNews Static={Static} />
-        </div>
+        </Elements.page.MainContainer>
       )
-    }, ID
-  );
+    }
+  })
+  return
 };
+
 export default start;
-// 
