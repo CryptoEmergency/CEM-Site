@@ -2,16 +2,21 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  init
+  init,
+  load
 } from "@betarost/cemserver/cem.js";
 
+import Elements from '@src/elements/export.js';
+
 const start = function (data, ID) {
-  init(
-    null,
-    () => {
+
+
+  load({
+    ID,
+    fn: () => {
       if (Variable.lang.lang === "Russian") {
         return (
-          <div class='c-main__body'>
+          <Elements.page.MainContainer>
             <div class="c-terms">
               <div class="c-terms__container c-container">
                 <h1 class="c-terms__title">Политика Cookies</h1>
@@ -93,11 +98,11 @@ const start = function (data, ID) {
                 </div>
               </div>
             </div>
-          </div>
+          </Elements.page.MainContainer>
         );
       } else {
         return (
-          <div class='c-main__body'>
+          <Elements.page.MainContainer>
             <div class="c-terms">
               <div class="c-terms__container c-container">
 
@@ -174,10 +179,12 @@ const start = function (data, ID) {
                 </div>
               </div>
             </div>
-          </div>
+          </Elements.page.MainContainer>
         );
       }
-    }, ID)
+    }
+  })
+  return
 };
+
 export default start;
-// OK

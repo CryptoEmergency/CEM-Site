@@ -2,12 +2,14 @@ import {
   jsx,
   jsxFrag,
   Variable,
+  load,
   init,
   initReload
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { Select, NotFound } from "@component/element/index.js";
 import { BlockLentaUsers } from "@component/blocks/index.js";
+import Elements from '@src/elements/export.js';
 
 const ToogleItem = function ({ Static, name }) {
   let addClass = "news_" + name
@@ -79,15 +81,16 @@ const start = function (data, ID) {
   Variable.Static.FooterShow = false
   let [Static] = fn.GetParams({ data, ID })
 
-  init(
-    async () => {
+  load({
+    ID,
+    fnLoad: async () => {
       fn.initData.lenta_users(Static)
       Static.apiFilter = makeFilter(Static)
       await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
     },
-    () => {
+    fn: () => {
       return (
-        <div class="c-main__body">
+        <Elements.page.MainContainer>
           <div class="page-content page-content--full">
             <div class="users_news">
               <div class="users_news_left">
@@ -179,10 +182,11 @@ const start = function (data, ID) {
               </div>
             </div>
           </div>
-        </div>
+        </Elements.page.MainContainer>
       );
-    }, ID
-  );
+    }
+  })
+  return
 };
+
 export default start;
-// OK

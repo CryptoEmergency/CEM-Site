@@ -5,6 +5,7 @@ import {
     getStorage,
     setStorage,
     init,
+    load,
     Variable,
     initReload,
 } from "@betarost/cemserver/cem.js";
@@ -12,6 +13,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
+import Elements from '@src/elements/export.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
 import Swiper from 'swiper/bundle';
 
@@ -62,9 +64,9 @@ const start = function (data, ID = "mainBlock") {
     //         spaceBetween: 20
     //     });
     // }
-
-    init(
-        async () => {
+    load({
+        ID,
+        fnLoad: async () => {
             fn.initData.events(Static)
             console.log('=a1b2d7= Static Events =', Static)
 
@@ -162,16 +164,14 @@ const start = function (data, ID = "mainBlock") {
             Static.apiFilter = makeFilter(Static)
             // await fn.restApi.getEvents({ name: Static.nameRecords, filter: Static.apiFilter })
         },
-        () => {
+        fn: () => {
             // {
             // }
             console.log('=5c1a5a=', Static.events && Static.events.length)
 
             return (
-                <div
-                    class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-                        } c-events`}
-                >
+                <Elements.page.MainContainer
+                    class="c-events">
                     {/* <div class="swiper-container">
                         <div class="swiper swiper-post_university" After={() => swiperGo()}>
                             <div class="swiper-wrapper">
@@ -292,10 +292,11 @@ const start = function (data, ID = "mainBlock") {
                             }
                         </ul>
                     </div>
-                </div >
+                </Elements.page.MainContainer>
             );
-        }, ID
-    );
+        }
+    })
+    return
 };
 
 export default start;
