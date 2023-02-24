@@ -13,14 +13,12 @@ import Elements from '@src/elements/export.js';
 // };
 
 const forExport = function ({ className, link, image, title, description, statistic }) {
-  console.log('=8dc344=', className, link, image, title, description, statistic)
   if (link) {
     return (
       <Elements.Link
         class={link.class}
         href={link.href}
         link={{ type: link.type, data: link.data }}>
-
         {
           image
             ?
