@@ -1,9 +1,9 @@
 
 
 
-const Str = {}
+const forExport = {}
 
-Str.domain = function (text) {
+forExport.domain = function (text) {
     if (!text) { return null }
     let tmp = text.split("://")
     if (tmp.length > 1) {
@@ -14,4 +14,4 @@ Str.domain = function (text) {
     return tmp.split("/")[0]
 }
 
-export default Str
+export default forExport

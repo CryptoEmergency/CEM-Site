@@ -16,6 +16,9 @@ const functionsLibs = function () {
 
 const fn = {}
 fn.Static = {}
+fn.validator = Helpers.validator
+fn.sanitizeHtml = Helpers.sanitizeHtml
+fn.moment = Helpers.moment
 Object.assign(fn, functionsLibs())
 
 export { fn }

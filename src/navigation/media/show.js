@@ -39,7 +39,7 @@ const start = function (data, ID = "mainBlock") {
                 <img src={svg["question_answers"]} />
                 {Static.item.statistic.comments}
               </p>
-              {/* <p class="full_news_date">{fn.getDateFormat(Static.item.showDate)}</p> */}
+              <p class="full_news_date">{fn.Date.onlyDate(Static.item.showDate)}</p>
             </div>
             {/* <BlockShowNews Static={Static} item={item} /> */}
           </Elements.page.Container>
