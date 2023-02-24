@@ -1,4 +1,5 @@
 import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
+import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
 // const forExport = function ({ className, image, title, description }) {
 //   return (
@@ -19,6 +20,7 @@ const forExport = function ({
   title,
   description,
   statistic,
+  statisticClass,
 }) {
   if (link) {
     return (
@@ -40,16 +42,20 @@ const forExport = function ({
         ) : null}
 
         {statistic ? (
-          <div class="blog_post_stat blog_post_stat--list">
-            <span>
-              <img src={svg["question_views"]} />
-              {statistic.view}
-            </span>
-            <span>
-              <img src={svg["question_answers"]} />
-              {statistic.comments}
-            </span>
-            {/* <span>{fn.getDateFormat(statistic.showDate)}</span> */}
+          <div class={statisticClass}>
+            {Object.entries(statistic).map(([key, item]) => {
+              console.log(key, item);
+              if (key == "showDate") {
+                return <span class={item.class}>{item.value}</span>;
+              }
+
+              return (
+                <span class={item.class}>
+                  <img src={svg[key]} />
+                  {item.value}
+                </span>
+              );
+            })}
           </div>
         ) : null}
       </Elements.Link>

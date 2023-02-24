@@ -46,6 +46,20 @@ const start = function (data, ID) {
                     src: "/assets/upload/news/" + item.image,
                     class: "img-rect",
                   }}
+                  statistic={{
+                    question_views: {
+                      value: item.statistic.view,
+                      class: "statistic-icon",
+                    },
+                    question_answers: {
+                      value: item.statistic.comments,
+                      class: "statistic-icon",
+                    },
+                    showDate: {
+                      value: fn.getDateFormat(item.showDate),
+                    },
+                  }}
+                  statisticClass="card-statistic"
                 />
               );
             })}

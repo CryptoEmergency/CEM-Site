@@ -1,6 +1,6 @@
 import { ServerInit, ServerBuild, ServerStart } from "@betarost/cemserver";
 import path from "path";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
 const port = 80;
@@ -11,7 +11,7 @@ const mode = "development";
 // const mode = "production"
 
 if (process.env.DISABLERELOAD) {
-  hotReload = false
+  hotReload = false;
 }
 
 ServerInit({
@@ -26,11 +26,11 @@ ServerInit({
   mode,
   allowedHosts: [target],
   proxy: {
-    // "/api/v2": {
-    //   target: `http://127.0.0.1:6060`,
-    //   changeOrigin: true,
-    //   secure: false,
-    // },
+    "/api/v2": {
+      target: `https://${target}`,
+      changeOrigin: true,
+      secure: false,
+    },
     "/api": {
       target: `https://${target}`,
       changeOrigin: true,
