@@ -13,31 +13,55 @@ import Elements from '@src/elements/export.js';
 // };
 
 const forExport = function ({ className, link, image, title, description, statistic }) {
-
+  console.log('=8dc344=', className, link, image, title, description, statistic)
   if (link) {
     return (
       <Elements.Link
-        class={link.class ? link.class : "blog_news_item"}
+        class={link.class}
         href={link.href}
         link={{ type: link.type, data: link.data }}>
-        <img class={image ? image.class : null} src={image ? image.src : null} />
-        <p class={title ? title.class : null}>{title.text}</p>
-        <p class={description ? description.class : null}>{description.text}</p>
-        {statistic
-          ?
-          <div class="blog_post_stat blog_post_stat--list" >
-            <span>
-              <img src={svg["question_views"]} />
-              {statistic.view}
-            </span>
-            <span>
-              <img src={svg["question_answers"]} />
-              {statistic.comments}
-            </span>
-            {/* <span>{fn.getDateFormat(statistic.showDate)}</span> */}
-          </div>
-          :
-          null
+
+        {
+          image
+            ?
+            <img class={image.class} src={image.src} />
+            :
+            null
+        }
+
+        {
+          title
+            ?
+            <p class={title.class}>{title.text}</p>
+            :
+            null
+        }
+
+        {
+          description
+            ?
+            <p class={description.class}>{description.text}</p>
+            :
+            null
+        }
+
+
+        {
+          statistic
+            ?
+            <div class="blog_post_stat blog_post_stat--list" >
+              <span>
+                <img src={svg["question_views"]} />
+                {statistic.view}
+              </span>
+              <span>
+                <img src={svg["question_answers"]} />
+                {statistic.comments}
+              </span>
+              {/* <span>{fn.getDateFormat(statistic.showDate)}</span> */}
+            </div>
+            :
+            null
         }
       </Elements.Link>
     )
