@@ -1,10 +1,12 @@
 import {
   jsx,
   jsxFrag,
-  load
+  load,
+  Variable
 } from "@betarost/cemserver/cem.js";
 
 import { fn } from '@src/functions/export.js';
+import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
 
 import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
@@ -24,13 +26,23 @@ const start = function (data, ID = "mainBlock") {
       if (!Static.item._id) { return (<div><BlockError404 /></div>) }
       return (
         <Elements.page.MainContainer title={Static.item.title}>
-          <div class="full_news_container">
-            <div class="full_news_block">
-              <div class="full_news_content">
-                {/* <BlockShowNews Static={Static} item={item} /> */}
-              </div>
+          <Elements.page.Container class="p-lr">
+            {Static.item.image ? <img class="full_news_image" src={"/assets/upload/news/" + Static.item.image} /> : null}
+            {Static.item.preview ? <p class="full_news_text mrb30">{Static.item.preview}</p> : null}
+            <p class="full_news_text mr20" tohtml={true}>{Static.item.text}</p>
+            {Static.item.source ? <p class="full_news_disclaimer mr20">{Variable.lang.p.source}: <noindex><a href={Static.item.source} rel="nofollow noopener" target="_blank">{fn.Str.domain(Static.item.source)}</a></noindex></p> : null}
+            <div style="display: flex" class="blog_post_stat">
+              <p class="full_news_date">
+                <img src={svg["question_views"]} /> {Static.item.statistic.view}
+              </p>
+              <p class="full_news_date">
+                <img src={svg["question_answers"]} />
+                {Static.item.statistic.comments}
+              </p>
+              {/* <p class="full_news_date">{fn.getDateFormat(Static.item.showDate)}</p> */}
             </div>
-          </div>
+            {/* <BlockShowNews Static={Static} item={item} /> */}
+          </Elements.page.Container>
         </Elements.page.MainContainer>
       );
     }
