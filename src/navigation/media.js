@@ -36,13 +36,15 @@ const start = function (data, ID) {
                   }}
                   title={{
                     text: item.title,
+                    class: "card-subtitle el-size--18 el-w--700 pt--10",
                   }}
                   description={{
                     text: item.preview,
+                    class: "card-desc",
                   }}
                   image={{
                     src: "/assets/upload/news/" + item.image,
-                    class: "card-img_rect",
+                    class: "img-rect",
                   }}
                 />
               );

@@ -1,7 +1,5 @@
-// variables colors=================
-
+//======== variables colors =======
 $fiolet-light: #8859EC;
-
 $roadmapColors: (
   0: #00A5FB,
   1: #973EFA,
@@ -11,8 +9,9 @@ $roadmapColors: (
   5: #279324,
   6: #D82B56,
 );
+//======== variables colors ========
 
-// ===font-size
+//===== font-size, font-weight =====
 $sizeText:(
   10: 10px,
   12: 12px,
@@ -29,104 +28,95 @@ $sizeText:(
   34: 34px,
   36: 36px,
 );
-
 $weightText:(
   500: 500,
   600: 600,
   700: 700
 );
-
 @each $index,
 $size in $sizeText{
   .el-size--#{$index}{
     font-size: $size;
   }
 }
-
 @each $index,
 $weight in $weightText{
   .el-w--#{$index}{
     font-weight: $weight;
   }
 }
+// === font-size, font-weight =====
 
-// ===font-size
-// new check
-h6,.h6,h5,.h5,h4,.h4,h3,.h3,h2,.h2,h1,.h1 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--bs-heading-color, inherit);
-}
-
-h1,.h1 {
-  font-size: calc(1.375rem + 1.5vw);
-}
-
-@media (min-width: 1200px) {
-
-  h1,.h1 {
-    font-size: 2.5rem;
+// === padding, margin =====
+$indents:(
+  4: 4px,
+  5: 5px,
+  6: 6px,
+  8: 8px,
+  10: 10px,
+  12: 12px,
+  14: 14px,
+  15: 15px,
+  16: 16px,
+  18: 18px,
+  20: 20px,
+  22: 22px,
+  24: 24px,
+  25: 25px,
+  26: 26px,
+  28: 28px,
+  30: 30px,
+  32: 32px,
+  34: 34px,
+  35: 35px,
+  36: 36px,
+);
+@each $index,
+$indent in $indents{
+  .pt--#{$index}{
+    padding-top: $indent;
+  }
+  .pb--#{$index}{
+    padding-bottom: $indent;
+  }
+  .pl--#{$index}{
+    padding-left: $indent;
+  }
+  .pr--#{$index}{
+    padding-right: $indent;
+  }
+  .pX--#{$index}{
+    padding: 0 $indent;
+  }
+  .pY--#{$index}{
+    padding: $indent 0;
+  }
+  .mt--#{$index}{
+    margin-top: $indent;
+  }
+  .mb--#{$index}{
+    margin-bottom: $indent;
+  }
+  .ml--#{$index}{
+    margin-left: $indent;
+  }
+  .mr--#{$index}{
+    margin-right: $indent;
+  }
+  .mX--#{$index}{
+    margin: 0 $indent;
+  }
+  .mY--#{$index}{
+    margin: $indent 0;
   }
 }
+// === padding, margin =====
 
-h2,
-.h2 {
-  font-size: calc(1.325rem + 0.9vw);
-}
-
-@media (min-width: 1200px) {
-
-  h2,
-  .h2 {
-    font-size: 2rem;
-  }
-}
-
-h3,
-.h3 {
-  font-size: calc(1.3rem + 0.6vw);
-}
-
-@media (min-width: 1200px) {
-
-  h3,
-  .h3 {
-    font-size: 1.75rem;
-  }
-}
-
-h4,
-.h4 {
-  font-size: calc(1.275rem + 0.3vw);
-}
-
-@media (min-width: 1200px) {
-
-  h4,
-  .h4 {
-    font-size: 1.5rem;
-  }
-}
-
-h5,
-.h5 {
-  font-size: 1.25rem;
-}
-
-h6,
-.h6 {
-  font-size: 1rem;
-}
-
-// new check
 .content-hidden {
   display: none;
 }
 
-
-// section
+// section use for media, blog, news
 .section-g{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -140,7 +130,7 @@ h6,
     grid-gap: 7px;
   }
 }
-// section
+// section use for media, blog, news
 
 // element
 .el-c{
@@ -180,10 +170,13 @@ h6,
     padding: 0 30px;
   }
   @media (max-width: 750px){
-    padding: 0 10px;
+    padding: 0 15px;
   }
-
 }
+// .pt{
+
+// }
+// разноообразные внутренние отступы
 
 // card-link
 .card-link{
@@ -195,15 +188,59 @@ h6,
   text-decoration: none;
   color: #FFFFFF;
   cursor: pointer;
+  @media(max-width: 750px){
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    // height: fit-content;
+    padding: 15px;
+    height: 135px;
+  }
 }
-.card-img_rect{
-  width: 100%;
-  height: auto;
+.img-rect{
+  height: 225px;
+  overflow: hidden;
+  img{
+    width: 100%;
+    height: auto;
+  }
+  @media(max-width: 750px){
+    // width: 72px;
+    // height: 72px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+}
+.card-subtitle{
+  height: 100px;
+  @media(max-width: 750px){
+    height: auto;
+    padding-top: 0;
+    font-size: 16px;
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  @media(max-width: 750px){
+    font-size: 14px;
+  }
+}
+.card-desc{
+  font-weight: 500;
+  line-height: 24px;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  @media(max-width: 750px){
+    display: none;
+  }
 }
 // card-link
 // container==
 .page-container{
-  padding-top: 80px;
+  padding: 80px 0;
   max-width: 1240px;
   margin: 0px auto;
 
