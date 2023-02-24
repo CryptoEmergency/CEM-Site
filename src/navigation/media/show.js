@@ -25,17 +25,18 @@ const start = function (data, ID = "mainBlock") {
       if (!Static.item._id) { return (<div><BlockError404 /></div>) }
       return (
         <Elements.page.MainContainer title={Static.item.title}>
-          <Elements.page.Container>
-            <div class="full_news_container">
-              <div class="full_news_block">
-                <div class="full_news_content">
-                  {Static.item.image ? <img class="full_news_image" src={"/assets/upload/news/" + Static.item.image} /> : null}
-                  {Static.item.preview ? <p class="full_news_text mrb30">{Static.item.preview}</p> : null}
-                  <p class="full_news_text mr20">{Helpers.stringToHtml(Static.item.text)}</p>
-                  {/* <BlockShowNews Static={Static} item={item} /> */}
-                </div>
-              </div>
-            </div>
+          <Elements.page.Container class="p-lr">
+            {/* <div class="full_news_container"> */}
+            {/* <div class="full_news_block"> */}
+            {/* <div class="full_news_content"> */}
+            {Static.item.image ? <img class="full_news_image" src={"/assets/upload/news/" + Static.item.image} /> : null}
+            {Static.item.preview ? <p class="full_news_text mrb30">{Static.item.preview}</p> : null}
+            {/* <p class="full_news_text mr20" tohtml={true}>{Helpers.stringToHtml(Static.item.text)}</p> */}
+            <p class="full_news_text mr20" tohtml={true}>{Static.item.text}</p>
+            {/* <BlockShowNews Static={Static} item={item} /> */}
+            {/* </div> */}
+            {/* </div> */}
+            {/* </div> */}
           </Elements.page.Container>
         </Elements.page.MainContainer>
       );
