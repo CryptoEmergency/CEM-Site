@@ -1,35 +1,41 @@
 import {
   jsx,
   jsxFrag,
-  init
+  load
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+
+import { fn } from '@src/functions/export.js';
+import Elements from "@src/elements/export.js";
+
 import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
 const start = function (data, ID = "mainBlock") {
   let [Static, item] = fn.GetParams({ data, ID })
-  init(
-    async () => {
-      fn.initData.media_show(Static)
+  console.log('=72d8b8=', Static, item)
+  load({
+    ID,
+    fnLoad: async () => {
+      // fn.initData.media_show(Static)
       if (!Static.openModals) {
-        item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
+        Static.item = await fn.socket.get({ method: "News", _id: item._id });
       }
     },
-    () => {
-      if (!item._id) { return (<div><BlockError404 /></div>) }
+    fn: () => {
+      if (!Static.item._id) { return (<div><BlockError404 /></div>) }
       return (
-        <div class="c-main__body">
+        <Elements.page.MainContainer title={Static.item.title}>
           <div class="full_news_container">
             <div class="full_news_block">
               <div class="full_news_content">
-                <BlockShowNews Static={Static} item={item} />
+                {/* <BlockShowNews Static={Static} item={item} /> */}
               </div>
             </div>
           </div>
-        </div>
+        </Elements.page.MainContainer>
       );
-    }, ID
-  );
+    }
+  })
+  return
 };
+
 export default start;
-// OK
