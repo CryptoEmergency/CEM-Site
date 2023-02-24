@@ -13,7 +13,6 @@ import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 
 const start = function (data, ID = "mainBlock") {
   let [Static, item] = fn.GetParams({ data, ID })
-  console.log('=72d8b8=', Static, item)
   load({
     ID,
     fnLoad: async () => {
