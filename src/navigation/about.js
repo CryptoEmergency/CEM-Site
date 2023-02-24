@@ -232,33 +232,41 @@ const start = function (data, ID) {
                 </div>
               </div>
 
-              {/* <div class="roadmap_item roadmap_item--1">
-                <span class="year year--1">
-                  {Variable.lang.span.mapDescTwo}
-                </span>
-                <p class="desc">{Variable.lang.p.mapDateTwo}</p>
+              <div class="roadmap_item roadmap_item--1">
+                <div class="item-card item-card--0">
+                  <span class="year year--1">
+                    {Variable.lang.span.mapDescTwo}
+                  </span>
+                  <p class="desc">{Variable.lang.p.mapDateTwo}</p>
+                </div>
+
+                <div class="turn turn-1">
+                  <img
+                    alt={Variable.lang.span.mapDescTwo}
+                    src={svg["roadmap/turn-right2"]}
+                  ></img>
+                </div>
               </div>
 
-              <div class="turn turn-1">
-                <img
-                  alt={Variable.lang.span.mapDescTwo}
-                  src={svg["roadmap/turn-right2"]}
-                ></img>
+              <div class="roadmap_item roadmap_item--1">
+                <div class="item-card item-card--0">
+                  <span class="year year--2">
+                    {Variable.lang.span.mapDescThree}
+                  </span>
+                  <p class="desc">{Variable.lang.p.mapDateThree}</p>
+                </div>
+
+                <div class="turn turn-2">
+                  <img
+                    alt={Variable.lang.span.mapDescThree}
+                    src={svg["roadmap/turn-left3"]}
+                  ></img>
+                </div>
               </div>
 
-              <div class="roadmap_item roadmap_item--2">
-                <span class="year year--2">
-                  {Variable.lang.span.mapDescThree}
-                </span>
-                <p class="desc">{Variable.lang.p.mapDateThree}</p>
-              </div>
+              {/* 
 
-              <div class="turn turn-2">
-                <img
-                  alt={Variable.lang.span.mapDescThree}
-                  src={svg["roadmap/turn-left3"]}
-                ></img>
-              </div>
+              
 
               <div class="roadmap_item roadmap_item--3">
                 <span class="year year--3">

@@ -2,7 +2,6 @@
 
 $fiolet-light: #8859EC;
 
-
 $roadmapColors: (
   0: #00A5FB,
   1: #973EFA,
@@ -53,18 +52,7 @@ $weight in $weightText{
 
 // ===font-size
 // new check
-h6,
-.h6,
-h5,
-.h5,
-h4,
-.h4,
-h3,
-.h3,
-h2,
-.h2,
-h1,
-.h1 {
+h6,.h6,h5,.h5,h4,.h4,h3,.h3,h2,.h2,h1,.h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -72,15 +60,13 @@ h1,
   color: var(--bs-heading-color, inherit);
 }
 
-h1,
-.h1 {
+h1,.h1 {
   font-size: calc(1.375rem + 1.5vw);
 }
 
 @media (min-width: 1200px) {
 
-  h1,
-  .h1 {
+  h1,.h1 {
     font-size: 2.5rem;
   }
 }
@@ -199,6 +185,22 @@ h6,
 
 }
 
+// card-link
+.card-link{
+  padding: 20px;
+  background: #303545;
+  border-radius: 8px;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.card-img_rect{
+  width: 100%;
+  height: auto;
+}
+// card-link
 // container==
 .page-container{
   padding-top: 80px;
@@ -380,7 +382,12 @@ h6,
     'item-2 .'
     'item-2 item-3'
     '.      item-3'
-    'item-4';
+    'item-4 .'
+    'item-4 item-5'
+    '.      item-5'
+    'item-6 .'
+    'item-6 item-7'
+    '.      item-7';
 
   .roadmap_item{
     &.roadmap_item--0,
@@ -505,31 +512,30 @@ h6,
   }
 
 }
-//roadmap========================
-
 
 @each $index,
 $color in $roadmapColors {
-  .item-card--#{$index} {
-    border: 1px solid $color;
+  
+  .roadmap_item--#{$index}{
+    grid-area: item-#{$index};
 
-    .roadmap_item--#{$index}{
-      grid-area: item-#{$index};
+    .item-card--#{$index} {
+      border: 1px solid $color;
     }
-
     @media (max-width: 529px) {
       border: none;
     }
   }
-
+ 
   .year--#{$index} {
     color: $color;
   }
-
+  
   .turn-#{$index} {
     grid-area: turn-#{$index};
   }
 }
+//roadmap========================
 
 // card blocks
 // list goals
