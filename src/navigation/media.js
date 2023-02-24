@@ -19,7 +19,7 @@ const start = function (data, ID) {
         <Elements.page.MainContainer
           title={!Static.openModals ? Variable.lang.h.mediaUs : null}
         >
-          <Elements.page.Container class="section-g">
+          <Elements.page.Container class="section-g p-lr">
             {Static.records.map((item) => {
               return <Elements.cards.News item={item} nameUrl="media" />;
             })}

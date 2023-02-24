@@ -186,7 +186,18 @@ h6,
   padding: 50px 0;
 }
 
+// разноообразные внутренние отступы
+// для новостей, блога, медиа
+.p-lr{
+  padding: 0;
+  @media (max-width: 1370px){
+    padding: 0 30px;
+  }
+  @media (max-width: 750px){
+    padding: 0 10px;
+  }
 
+}
 
 // container==
 .page-container{
