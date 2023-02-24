@@ -40,6 +40,9 @@ const start = function (data, ID = "mainBlock") {
               </p>
               <p class="full_news_date">{fn.Date.onlyDate(Static.item.showDate)}</p>
             </div>
+            <Elements.page.Container>
+              <Elements.input.Div class="text1" />
+            </Elements.page.Container>
             {/* <BlockShowNews Static={Static} item={item} /> */}
           </Elements.page.Container>
         </Elements.page.MainContainer>
