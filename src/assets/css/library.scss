@@ -139,6 +139,23 @@ h6,
   display: none;
 }
 
+
+// section
+.section-g{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px;
+  @media (max-width: 1370px){
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+  @media (max-width: 750px){
+    grid-template-columns: 1fr;
+    grid-gap: 7px;
+  }
+}
+// section
+
 // element
 .el-c{
   display: flex;
@@ -146,10 +163,18 @@ h6,
   align-items: center;
 }
 
-// .el-size--20{
-//   font-size: 20px;
-//   font-weight: 500;
+// .el-grid{
+//   &-c--3{
+//     display: grid;
+//     grid-gap: 25px;
+//     grid-template-columns: repeat(3, 1fr);
+//   }
+//   &-r--3{
+//     grid-template-rows: auto;
+//   }
 // }
+
+
 
 .el-color--grey{
   color: #DBEAFF;
@@ -337,6 +362,14 @@ h6,
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 60px;
   grid-column-gap: 10px;
+  grid-template-areas: 
+    'item-0 .'
+    'item-0 item-1'
+    '.      item-1'
+    'item-2 .'
+    'item-2 item-3'
+    '.      item-3'
+    'item-4';
 
   .roadmap_item{
     &.roadmap_item--0,
@@ -468,7 +501,10 @@ h6,
 $color in $roadmapColors {
   .item-card--#{$index} {
     border: 1px solid $color;
-    grid-area: item-#{$index};
+
+    .roadmap_item--#{$index}{
+      grid-area: item-#{$index};
+    }
 
     @media (max-width: 529px) {
       border: none;

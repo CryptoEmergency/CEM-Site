@@ -1,44 +1,33 @@
-import {
-  jsx,
-  jsxFrag,
-  load,
-  Variable
-} from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, load, Variable } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
-import Elements from '@src/elements/export.js';
+import { fn } from "@src/functions/index.js";
+import Elements from "@src/elements/export.js";
 
 const start = function (data, ID) {
-  let [Static] = fn.GetParams({ data, ID, initData: "news" })
+  let [Static] = fn.GetParams({ data, ID, initData: "news" });
 
   load({
     ID,
     fnLoad: async () => {
-      Static.records = await fn.socket.get({ method: "News", params: { filter: { type: "media" } } })
+      Static.records = await fn.socket.get({
+        method: "News",
+        params: { filter: { type: "media" } },
+      });
     },
     fn: () => {
       return (
         <Elements.page.MainContainer
-          title={!Static.openModals ? Variable.lang.h.mediaUs : null}>
-          <Elements.page.Container
-            class="blog_news"
-            resetClass={true}
-          >
-            {
-              Static.records.map((item) => {
-                return (
-                  <Elements.cards.News
-                    item={item}
-                    nameUrl="media"
-                  />
-                )
-              })
-            }
+          title={!Static.openModals ? Variable.lang.h.mediaUs : null}
+        >
+          <Elements.page.Container class="section-g">
+            {Static.records.map((item) => {
+              return <Elements.cards.News item={item} nameUrl="media" />;
+            })}
           </Elements.page.Container>
         </Elements.page.MainContainer>
-      )
-    }
-  })
-}
+      );
+    },
+  });
+};
 
 export default start;
