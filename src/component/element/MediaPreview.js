@@ -10,7 +10,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
   // console.log("============on load",Static,"=======item",item)
   // console.log('=MediaPreview=', Static)
 
-  console.log('=2bf636=',item, index, type)
+  // console.log('=2bf636=',item, index, type)
   if (item.type == "audio") {
     el[index] = Variable.setRef();
   }
@@ -39,7 +39,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   ? item.src
                   : `/assets/upload/${type}/${item.name}`
               }
-              onclick={(e) => toggleActive(e)}
+              onclick={(e) => toggleActive ? toggleActive(e) : null}
             />
             {
               item.size !== undefined
@@ -231,7 +231,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
             "create_post_photo_preview 77",
             item.activePreview ? "activePreview" : null
           ]}
-            onclick={(e) => toggleActive(e)}>
+            onclick={(e) => toggleActive ? toggleActive(e) : null}>
             {
               item.src !== undefined
                 ?
@@ -389,7 +389,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 item.src == undefined ?
                   <div
                     class=""
-                    onclick={(e) => toggleActive(e)}
+                    onclick={(e) => toggleActive ? toggleActive(e) : null}
                   >
                     <img class="fullsize media" src={svg["icon/music"]} />
                   </div>
@@ -449,7 +449,6 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
-                    debugger
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0) {
                       Static.mediaInputs.selectAspect = null;
