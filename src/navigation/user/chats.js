@@ -152,31 +152,7 @@ const start = function (data, ID) {
         Static.mediaInputs.value.push(previewObj);
         let numItem = Static.mediaInputs.value.length - 1
 
-
-        // let dataURL;
         let fileAudio = file[0];
-        // const reader = new FileReader();
-        // reader.addEventListener("load", () => {
-        //     // convert image file to base64 string
-        //     dataURL = reader.result;
-        // }, false);
-        // if (fileAudio) {
-        //     reader.readAsDataURL(fileAudio);
-        // }
-
-        // let previewObj = {
-        //     src: dataURL,
-        //     type: file[0].type.split("/")[0],
-        //     upload: 0,
-        //     size: 0
-        // };
-        // console.log('=08e20a Static =', Static)
-
-        // Static.mediaInputs.show = true;
-        // Static.mediaInputs.value.push(previewObj);
-
-        // let numItem = Static.mediaInputs.value.length - 1;
-
         let nameFile = "file.mp3"
         if (fileAudio.name) {
             nameFile = fileAudio.name
@@ -219,9 +195,6 @@ const start = function (data, ID) {
                     10
                 );
             }
-            // console.log('=b1106c=', Static.mediaInputs.value.length, Static.mediaInputs.value.filter((item) => {
-            //     return item.activePreview
-            // }).length)
 
             if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
                 Static.mediaInputs.value.splice(numItem, 1);
@@ -312,9 +285,57 @@ const start = function (data, ID) {
         }
         if (Static.mediaInputs.value.length != 0) {
             Static.mediaInputs.value.forEach(async (file) => {
-                if (file.type == 'audio') {
+                if (file.type == 'audio' && Static.mediaInputs.value.length == 1) {
                     let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
-                    console.log('=012098= response audio =',response)
+                    console.log('=012098= response audio =', response)
+                    if (Static.mediaInputs.value == 1) {
+                        // debugger
+                        if (response.status === "ok") {
+                            Static.message.el.value = ""
+                            Static.message.value = ""
+                            if (Static.message.adaptive) {
+                                Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
+                            }
+                            if (response && response.list_records && response.list_records[0]) {
+                                let newRes = response.list_records[0]
+
+                                if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                                    Static.messageList.list_records[0].message.unshift(newRes)
+                                } else {
+                                    Static.messageList.list_records[0].message = [newRes]
+                                }
+                                // console.log('=46ae17 Static.chatsList=', Static.chatsList)
+                                // console.log('=46ae17 Static.messageList=', Static.messageList)
+                                // debugger
+                                if (Static.chatsList && Static.chatsList.list_records) {
+                                    Static.chatsList.list_records.map((item) => {
+                                        let tmp = item.users.filter(item => item._id == Static.activeUser._id)
+                                        if (tmp.length) {
+                                            item.message[0] = newRes
+                                        }
+                                    })
+                                }
+                                // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
+                                //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                                // })
+                                // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
+
+                                let i = Static.chatsList.list_records.findIndex(chat => {
+                                    return chat.message[0]._id == response.list_records[0]._id;
+                                });
+                                // console.log('=1def2b = i =', i)
+
+                                Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
+
+                                // console.log('=5dfe89= new = ', Static.chatsList.list_records)
+                                Static.mediaInputs.value = [];
+                                initReload()
+                            }
+                        } else {
+                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                        }
+                        return
+                    }
                 } else if (file.type == 'image' || file.type == 'video') {
                     media.push(file)
                 }
@@ -323,6 +344,7 @@ const start = function (data, ID) {
         // let data = { value: { users: Static.activeUser._id, message: { text } } }
         // let response = await api({ type: "set", action: "setUserChats", data: data })
         // if (media.length > 0) {
+        // debugger
         let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
         console.log('=6befba=', response)
         if (response.status === "ok") {
@@ -1413,78 +1435,7 @@ const start = function (data, ID) {
                                                 <ButtonSubmit
                                                     text={<img class="c-comments__icon" src={svg["message_send"]} />}
                                                     className="c-comments__send button-container-preview"
-                                                    onclick={() => { submitMessage(); }
-                                                        //     async (tmp, el) => {
-                                                        //     if (!Static.message.el.value.trim().length && Static.mediaInputs.value.length == 0) {
-                                                        //         return
-                                                        //     }
-                                                        //     let text, media = [];
-                                                        //     if (Static.message.el.value.trim().length) {
-                                                        //         text = Static.message.el.value.trim()
-                                                        //     }
-                                                        //     // debugger
-                                                        //     if (Static.mediaInputs.value.length != 0) {
-                                                        //         Static.mediaInputs.value.forEach(async (file) => {
-                                                        //             if (file.type == 'audio') {
-                                                        //                 let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
-                                                        //             } else if (file.type == 'image' || file.type == 'video') {
-                                                        //                 media.push(file)
-                                                        //             }
-                                                        //         })
-                                                        //     }
-                                                        //     // let data = { value: { users: Static.activeUser._id, message: { text } } }
-                                                        //     // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                        //     // if (media.length > 0) {
-                                                        //     let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
-                                                        //     // console.log('=6befba=', response)
-                                                        //     // debugger
-                                                        //     if (response.status === "ok") {
-                                                        //         Static.message.el.value = ""
-                                                        //         Static.message.value = ""
-                                                        //         if (Static.message.adaptive) {
-                                                        //             Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
-                                                        //         }
-                                                        //         if (response && response.list_records && response.list_records[0]) {
-                                                        //             let newRes = response.list_records[0]
-
-                                                        //             if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
-                                                        //                 Static.messageList.list_records[0].message.unshift(newRes)
-                                                        //             } else {
-                                                        //                 Static.messageList.list_records[0].message = [newRes]
-                                                        //             }
-                                                        //             // console.log('=46ae17 Static.chatsList=', Static.chatsList)
-                                                        //             // console.log('=46ae17 Static.messageList=', Static.messageList)
-                                                        //             // debugger
-                                                        //             if (Static.chatsList && Static.chatsList.list_records) {
-                                                        //                 Static.chatsList.list_records.map((item) => {
-                                                        //                     let tmp = item.users.filter(item => item._id == Static.activeUser._id)
-                                                        //                     if (tmp.length) {
-                                                        //                         item.message[0] = newRes
-                                                        //                     }
-                                                        //                 })
-                                                        //             }
-                                                        //             // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
-                                                        //             //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
-                                                        //             // })
-                                                        //             // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
-
-                                                        //             let i = Static.chatsList.list_records.findIndex(chat => {
-                                                        //                 return chat.message[0]._id == response.list_records[0]._id;
-                                                        //             });
-                                                        //             // console.log('=1def2b = i =', i)
-
-                                                        //             Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
-
-                                                        //             // console.log('=5dfe89= new = ', Static.chatsList.list_records)
-                                                        //             Static.mediaInputs.value = [];
-                                                        //             initReload()
-                                                        //         }
-                                                        //     } else {
-                                                        //         Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                                                        //     }
-                                                        //     // }
-                                                        // }
-                                                    }
+                                                    onclick={() => { submitMessage(); }}
                                                 />
                                             }
                                         </div>
