@@ -155,14 +155,18 @@
 					}
 
 					span {
+						display: -webkit-box;
 						grid-column: 2 / 3;
 						grid-row: 2 / 3;
+						max-height: 51px;
 						font-weight: 500;
 						font-size: 14px;
 						line-height: 17px;
 						color: rgba(255, 255, 255, 0.75);
 						word-break: break-word;
-						max-height: 51px;
+						-webkit-line-clamp: 1;
+						-webkit-box-orient: vertical;
+						line-height: 1.5;
 						overflow: hidden;
 					}
 				}
@@ -486,7 +490,7 @@
 		gap: 5px;
 
 		&_content {
-			display: flex;
+			display: flex !important;
 			align-items: center;
 			gap: 5px;
 
