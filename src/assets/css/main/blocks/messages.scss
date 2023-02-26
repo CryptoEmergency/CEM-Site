@@ -661,6 +661,14 @@
 
 	&.message--media {
 		padding: 3px !important;
+
+		.video_container {
+			margin-bottom: 10px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	&_date {
@@ -750,6 +758,14 @@
 
 	&.message--media {
 		padding: 3px !important;
+
+		.video_container {
+			margin-bottom: 10px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	&::before {

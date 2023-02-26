@@ -285,58 +285,59 @@ const start = function (data, ID) {
         }
         if (Static.mediaInputs.value.length != 0) {
             Static.mediaInputs.value.forEach(async (file) => {
-                if (file.type == 'audio' && Static.mediaInputs.value.length == 1) {
-                    let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
-                    console.log('=012098= response audio =', response)
-                    if (Static.mediaInputs.value == 1) {
-                        // debugger
-                        if (response.status === "ok") {
-                            Static.message.el.value = ""
-                            Static.message.value = ""
-                            if (Static.message.adaptive) {
-                                Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
-                            }
-                            if (response && response.list_records && response.list_records[0]) {
-                                let newRes = response.list_records[0]
+                // if (file.type == 'audio' && Static.mediaInputs.value.length == 1) {
+                //     let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
+                //     console.log('=012098= response audio =', response)
+                //     if (Static.mediaInputs.value == 1) {
+                //         // debugger
+                //         if (response.status === "ok") {
+                //             Static.message.el.value = ""
+                //             Static.message.value = ""
+                //             if (Static.message.adaptive) {
+                //                 Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
+                //             }
+                //             if (response && response.list_records && response.list_records[0]) {
+                //                 let newRes = response.list_records[0]
 
-                                if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
-                                    Static.messageList.list_records[0].message.unshift(newRes)
-                                } else {
-                                    Static.messageList.list_records[0].message = [newRes]
-                                }
-                                // console.log('=46ae17 Static.chatsList=', Static.chatsList)
-                                // console.log('=46ae17 Static.messageList=', Static.messageList)
-                                // debugger
-                                if (Static.chatsList && Static.chatsList.list_records) {
-                                    Static.chatsList.list_records.map((item) => {
-                                        let tmp = item.users.filter(item => item._id == Static.activeUser._id)
-                                        if (tmp.length) {
-                                            item.message[0] = newRes
-                                        }
-                                    })
-                                }
-                                // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
-                                //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
-                                // })
-                                // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
+                //                 if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                //                     Static.messageList.list_records[0].message.unshift(newRes)
+                //                 } else {
+                //                     Static.messageList.list_records[0].message = [newRes]
+                //                 }
+                //                 // console.log('=46ae17 Static.chatsList=', Static.chatsList)
+                //                 // console.log('=46ae17 Static.messageList=', Static.messageList)
+                //                 // debugger
+                //                 if (Static.chatsList && Static.chatsList.list_records) {
+                //                     Static.chatsList.list_records.map((item) => {
+                //                         let tmp = item.users.filter(item => item._id == Static.activeUser._id)
+                //                         if (tmp.length) {
+                //                             item.message[0] = newRes
+                //                         }
+                //                     })
+                //                 }
+                //                 // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
+                //                 //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                //                 // })
+                //                 // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
 
-                                let i = Static.chatsList.list_records.findIndex(chat => {
-                                    return chat.message[0]._id == response.list_records[0]._id;
-                                });
-                                // console.log('=1def2b = i =', i)
+                //                 let i = Static.chatsList.list_records.findIndex(chat => {
+                //                     return chat.message[0]._id == response.list_records[0]._id;
+                //                 });
+                //                 // console.log('=1def2b = i =', i)
 
-                                Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
+                //                 Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
 
-                                // console.log('=5dfe89= new = ', Static.chatsList.list_records)
-                                Static.mediaInputs.value = [];
-                                initReload()
-                            }
-                        } else {
-                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                        }
-                        return
-                    }
-                } else if (file.type == 'image' || file.type == 'video') {
+                //                 // console.log('=5dfe89= new = ', Static.chatsList.list_records)
+                //                 Static.mediaInputs.value = [];
+                //                 initReload()
+                //             }
+                //         } else {
+                //             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                //         }
+                //         return
+                //     }
+                // } else 
+                if (file.type == 'image' || file.type == 'video' || file.type == 'audio') {
                     media.push(file)
                 }
             })
