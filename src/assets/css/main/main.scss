@@ -278,6 +278,15 @@ textarea {
                 }
             }
         }
+
+        &.swiper-ios {
+
+            .swiper {
+                &-wrapper {
+                    // --swiper-cube-translate-z: 0 !important;
+                }
+            }
+        }
     }
 }
 
@@ -2000,6 +2009,8 @@ textarea {
 @import 'blocks/events.scss';
 /* Careers */
 @import 'blocks/careers.scss';
+/* Summer forum */
+@import 'blocks/forum.scss';
 
 /* Admin */
 @import 'blocks/admin.scss';
