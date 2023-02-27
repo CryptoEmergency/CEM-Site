@@ -13,7 +13,7 @@ initData.any = function (Static) {
     Static.elShowComment = {}
     Static.elShowAnswersComment = {}
     Static.elShowButtonComment = []
-
+Static.elInput = {}
     Static.elButtonSubmit = {}
     Static.commentText = []
 
