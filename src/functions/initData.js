@@ -10,7 +10,7 @@ initData.any = function (Static) {
 
 
 
-
+    Static.elInput = {}
     Static.elMedia = {}
     Static.elToogle = {}
     Static.elShowTextFull = {}

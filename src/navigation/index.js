@@ -113,7 +113,7 @@ const start = function (data, ID) {
                 desc: -1
             }
 
-            Static.Rooms = fn.initData.rooms(Static)
+            // Static.Rooms = fn.initData.rooms(Static)
             // await fn.restApi.getCourse({ cache: true, name: "Course", filter: {} })
             // await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
             await fn.restApi.getNews({ cache: true, name: "MainNews", filter: {} })

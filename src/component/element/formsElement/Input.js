@@ -65,6 +65,9 @@ const textElem = function (Static, className, callback, customStyle, paste) {
             placeholder={placeholder}
             readonly={readonly}
             Element={($el) => {
+                if (!Static) {
+                    Static = {}
+                }
                 Static.elInput = $el
             }}
             type={type}
