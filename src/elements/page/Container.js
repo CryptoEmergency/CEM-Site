@@ -13,7 +13,7 @@ const forExport = function ({
   }
   return (
     <section class={classACtive}>
-      {title ? title : null}
+      {title ? <h2>{title}</h2> : null}
 
       {children}
 

@@ -114,7 +114,7 @@ const start = function (data, ID) {
       src: images["about_us_banner8"],
     },
     {
-      title: Variable.lang.span.aboutProjectNameOne,
+      title: "Cem Wallet",
       link: "https://cemwallet.com/",
       src: images["CemWallet"],
     },
@@ -163,7 +163,7 @@ const start = function (data, ID) {
     fn: () => {
       return (
         <Elements.page.MainContainer
-          class="c-aboutus"
+          // class="c-aboutus"
           header={
             <Elements.page.Header
               imgBack={svg["background/about_us_vector-1"]}
@@ -184,9 +184,7 @@ const start = function (data, ID) {
             <Elements.page.Container
               class={["c-aboutus__goals", "c-goals"]}
               resetClass={true}
-              title={
-                <h2 class="c-goals__title">{Variable.lang.h.our_goals}</h2>
-              }
+              title={Variable.lang.h.our_goals}
               backSeat={{
                 src: svg["background/about_us_vector-2"],
                 class: "c-whowe__img c-whowe__img--right",
@@ -199,136 +197,23 @@ const start = function (data, ID) {
               <Elements.page.Container
                 class={["team"]}
                 resetClass={true}
-                title={
-                  <h2 class="startap-title">{Variable.lang.h.our_team}</h2>
-                }
+                title={Variable.lang.h.our_team}
               >
                 <Elements.Team records={team} />
               </Elements.page.Container>
             </Elements.page.Container>
 
             <Elements.page.Container
-              class={"c-aboutus__roadmap"}
               resetClass={true}
               title={<h2>{Variable.lang.h.road_map}</h2>}
             >
-              {/* <Elements.Roadmap records={roadmap} /> */}
+              <Elements.Roadmap records={roadmap} />
             </Elements.page.Container>
 
-            <div class="roadmap-wrap">
-              <div class="roadmap_item roadmap_item--0">
-                <div class="item-card item-card--0">
-                  <span class="year year--0">
-                    {Variable.lang.span.mapDescOne}
-                  </span>
-                  <p class="desc">{Variable.lang.p.mapDateOne}</p>
-                </div>
-
-                <div class="turn turn-0">
-                  <img
-                    alt={Variable.lang.span.mapDescOne}
-                    src={svg["roadmap/turn-left1"]}
-                  ></img>
-                </div>
-              </div>
-
-              <div class="roadmap_item roadmap_item--1">
-                <div class="item-card item-card--0">
-                  <span class="year year--1">
-                    {Variable.lang.span.mapDescTwo}
-                  </span>
-                  <p class="desc">{Variable.lang.p.mapDateTwo}</p>
-                </div>
-
-                <div class="turn turn-1">
-                  <img
-                    alt={Variable.lang.span.mapDescTwo}
-                    src={svg["roadmap/turn-right2"]}
-                  ></img>
-                </div>
-              </div>
-
-              <div class="roadmap_item roadmap_item--1">
-                <div class="item-card item-card--0">
-                  <span class="year year--2">
-                    {Variable.lang.span.mapDescThree}
-                  </span>
-                  <p class="desc">{Variable.lang.p.mapDateThree}</p>
-                </div>
-
-                <div class="turn turn-2">
-                  <img
-                    alt={Variable.lang.span.mapDescThree}
-                    src={svg["roadmap/turn-left3"]}
-                  ></img>
-                </div>
-              </div>
-
-              {/* 
-
-              
-
-              <div class="roadmap_item roadmap_item--3">
-                <span class="year year--3">
-                  {Variable.lang.span.mapDescFour}
-                </span>
-                <p class="desc">{Variable.lang.p.mapDateFour}</p>
-              </div>
-
-              <div class="turn turn-3">
-                <img
-                  alt={Variable.lang.span.mapDescFour}
-                  src={svg["roadmap/turn-right4"]}
-                ></img>
-              </div>
-
-              <div class="roadmap_item roadmap_item--4">
-                <span class="year year--4">
-                  {Variable.lang.span.mapDescFive}
-                </span>
-                <p class="desc">{Variable.lang.p.mapDateFive}</p>
-              </div>
-
-              <div class="turn turn-4">
-                <img
-                  alt={Variable.lang.span.mapDescFive}
-                  src={svg["roadmap/turn-left5"]}
-                ></img>
-              </div>
-
-              <div class="roadmap_item roadmap_item--5">
-                <span class="year year--5">
-                  {Variable.lang.span.mapDescSix}
-                </span>
-                <p class="desc">{Variable.lang.p.mapDateSix}</p>
-              </div>
-
-              <div class="turn turn-5">
-                <img
-                  alt={Variable.lang.span.mapDescSix}
-                  src={svg["roadmap/turn-right6"]}
-                ></img>
-              </div>
-
-              <div class="roadmap_item roadmap_item--6">
-                <span class="year year--6">
-                  {Variable.lang.span.mapDescSeven}
-                </span>
-                <p class="desc">{Variable.lang.p.mapDateSeven}</p>
-              </div>
-
-              <div class="turn turn-6">
-                <img
-                  alt={Variable.lang.span.mapDescSeven}
-                  src={svg["roadmap/turn-left7"]}
-                ></img>
-              </div> */}
-            </div>
-
             <Elements.page.Container
-              class={"c-aboutus__projects"}
+              class={"indexZ--2"}
               resetClass={true}
-              title={<h2>{Variable.lang.h.our_projects}</h2>}
+              title={Variable.lang.h.our_projects}
             >
               <Elements.projects.Project
                 records={projects}
