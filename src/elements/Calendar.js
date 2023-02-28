@@ -9,7 +9,6 @@ const forExport = function ({onclick, onDblClick, Static, children, item, classN
         <div
             class="calendar-cell"
             onclick={onclick}
-            // style={[Static.active == item ? "opacity: 1;" : null]}
         >
             <div class={[className,
                     Helpers.moment().isSame(item, "day") ? "calendar-cell--current" : null]}

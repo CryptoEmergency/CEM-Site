@@ -12,8 +12,7 @@ const forExport = function ({ onClick, children }) {
                 style="cursor: default"
             >
                 {Helpers.moment().format("D MMMM")}
-
-                
+                <span> {Helpers.moment().startOf("month").format("YYYY")}</span>
             </h2>
             {children}
         </div>

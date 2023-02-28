@@ -1,7 +1,6 @@
 import {
     jsx,
     jsxFrag,
-    Helpers,
     initReload
 } from '@betarost/cemserver/cem.js';
 
@@ -10,6 +9,7 @@ const forExport = function ({ onClick_monthBack, onClick_monthForward, src, Stat
         <div class="calendar-subtitle">
             <button
                 onClick={onClick_monthBack}
+                style={[Static.renderMonth || Static.renderYear ? "cursor: default; opacity: 1;" : null]}
             >
                 <img src={src} />
             </button>

@@ -2,10 +2,9 @@ import {
     jsx,
     jsxFrag,
     Helpers,
-    initReload
 } from '@betarost/cemserver/cem.js';
 
-const forExport = function ({ Static, item }) {
+const forExport = function ({ item, src_delete, src_edit, onclick_delete, onclick_edit }) {
     return (
         <div
             class={["calendar-notes_item",
@@ -19,27 +18,13 @@ const forExport = function ({ Static, item }) {
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
             </div>
-            <img class="calendar-notes_item-delete" src={svg["delete_notes"]}
-                onclick={() => {
-                    fn.modals.ModalConfirmAction({
-                        action: async () => {
-                            deleteNote(Static, { _id: item._id, index, active: false })
-                            fn.modals.close("ModalConfirmAction")
-                        },
-                        text: Variable.lang.p.deleteNotesConfirm,
-                        button: Variable.lang.button.yes
-                    })
-                }}
+            <img class="calendar-notes_item-delete" src={src_delete}
+                onclick={onclick_delete}
             />
             <img
                 class="calendar-notes_item-edit"
-                src={svg["edit_calendar-notes"]}
-                onClick={() => {
-                    Static.activeNotes = item
-                    Static.modal = true
-                    item.title.length > 0 ? Static.isValid = true : Static.isValid = false
-                    initReload()
-                }}
+                src={src_edit}
+                onclick={onclick_edit}
             />
         </div>
     )

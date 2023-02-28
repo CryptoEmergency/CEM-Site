@@ -10,9 +10,9 @@ const forExport = function ({ item, onclick, className }) {
     return (
         <div class={["notes-item", className]} onclick={onclick}>
             <div class="notes-item-section">
-                <h3>{
-                    item.title != "" ? item.title : Variable.lang.h.noName
-                }</h3>
+                <h3>
+                    {item.title != "" ? item.title : Variable.lang.h.noName}
+                </h3>
                 <div class="notes-item_block">
                     <span>{fn.getDateFormat(item.showDate)}</span>
                     <p>{item.text}</p>
@@ -24,7 +24,6 @@ const forExport = function ({ item, onclick, className }) {
                                 <Elements.image.imgSmall src={`/assets/upload/gallery/${item.name}`} />
                             )
                         }
-
                     })
                 }
             </div>

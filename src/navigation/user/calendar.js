@@ -378,7 +378,6 @@ const start = function (data, ID) {
                                 initReload()
                             }}
                         >
-                            {/* <span>{month.format("YYYY")}</span> */}
                             <Elements.CalendarSubtitle
                                 Static={Static}
                                 src={svg["calendar-arrow"]}
@@ -448,6 +447,41 @@ const start = function (data, ID) {
                             </div>
                             
                         </Elements.BlockCalendar>
+
+                        <Elements.BlockCalendarNotes 
+                            Static={Static}
+                        >
+                            {Static.notesCalendar.list_records.map((item, index) => {
+                                if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D") && !Static.modal || Static.currentDay == Helpers.moment(item.showDate).format("YYYY-MM-D") && !Static.modal) {
+                                    return (
+                                        <Elements.CalendarNotes
+                                            Static={Static}
+                                            item={item}
+                                            onclick_delete={() => {
+                                                fn.modals.ModalConfirmAction({
+                                                    action: async () => {
+                                                        deleteNote(Static, { _id: item._id, index, active: false })
+                                                        fn.modals.close("ModalConfirmAction")
+                                                    },
+                                                    text: Variable.lang.p.deleteNotesConfirm,
+                                                    button: Variable.lang.button.yes
+                                                })
+                                            }}
+                                            onclick_edit={() => {
+                                                Static.activeNotes = item
+                                                Static.modal = true
+                                                item.title.length > 0 ? Static.isValid = true : Static.isValid = false
+                                                initReload()
+                                            }}
+                                            src_delete={svg["delete_notes"]}
+                                            src_edit={svg["edit_calendar-notes"]}
+                                        />
+                                    )
+                                } else {
+                                    Static.elNotes = null
+                                }
+                            })}
+                        </Elements.BlockCalendarNotes>
                         {/* <div class="calendar-title">
                             <h2
                                 onClick={() => {
@@ -575,35 +609,6 @@ const start = function (data, ID) {
                             })}
                         </div>
                         </div> */}
-                        
-                        <Elements.BlockCalendarNotes 
-                            Static={Static}
-                            records={Static.notesCalendar.list_records}
-                        >
-                            {
-                                () => {
-                                    if (Static.active) {
-                                        return (
-                                            <div class="calendar-notes-append"
-                                                onClick={() => {
-                                                    Static.modal = true
-                                                    initReload()
-                                                }}
-                                            >
-                                                <p>
-                                                    New note
-                                                        <span>
-                                                            &nbsp;({Helpers.moment(Static.active).format("D MMMM")})
-                                                        </span>
-                                                    
-                                                </p>
-                                                
-                                            </div>
-                                        )
-                                    }
-                                }
-                            }
-                        </Elements.BlockCalendarNotes>
 
                         {/* <div
                             class="calendar-notes"
