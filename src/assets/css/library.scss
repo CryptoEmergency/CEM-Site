@@ -29,6 +29,7 @@ $Zindex:(
   }
 }
 $indents:(
+  0: 0px,
   4: 4px,
   5: 5px,
   6: 6px,
@@ -50,6 +51,10 @@ $indents:(
   34: 34px,
   35: 35px,
   36: 36px,
+  40: 40px,
+  50: 50px,
+  60: 60px,
+  70: 70px,
 );
 //======== variables colors ========
 a{
@@ -160,6 +165,18 @@ $weight in $weightText{
 // === font-size, font-weight =====
 
 // === padding, margin =====
+// разноообразные внутренние отступы
+// для новостей, блога, медиа
+.p-lr{
+  padding: 0;
+  @media (max-width: 1370px){
+    padding: 0 30px;
+  }
+  @media (max-width: 750px){
+    padding: 0 15px;
+  }
+}
+// разноообразные внутренние отступы
 
 @each $index,
 $indent in $indents{
@@ -200,20 +217,6 @@ $indent in $indents{
     margin: $indent 0;
   }
 }
-
-// разноообразные внутренние отступы
-// для новостей, блога, медиа
-.p-lr{
-  padding: 0;
-  @media (max-width: 1370px){
-    padding: 0 30px;
-  }
-  @media (max-width: 750px){
-    padding: 0 15px;
-  }
-}
-// разноообразные внутренние отступы
-
 // === padding, margin =====
 
 // ===== another style ======
@@ -307,6 +310,15 @@ $indent in $indents{
     border-radius: 4px;
   }
 }
+
+.img-rect_news{
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
 .card-subtitle{
   // height: 100px;
   -webkit-line-clamp: 3;
