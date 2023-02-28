@@ -35,48 +35,65 @@
         position: absolute;
         left: 11%;
         min-width: 150px;
-        height: 19px;
-        padding: 0 3px;
+        // height: 19px;
+        padding: 3px 3px 3px 20px;
         font-size: 12px;
         border: 1px solid transparent;
+        border-radius: 5px;
         box-shadow: 0 0 4px 2px transparent;
         transition: .2s;
         cursor: pointer;
 
-        &--general {
-            top: 36%;
-
-            &:hover {
-                border: 1px solid #00a69c;
-                box-shadow: 0 0 4px 2px #00a69c;
-
-                &~.c-eventmap {
-                    &__zone {
-                        &[data-zone="general"] {
-                            border: 1px solid #00a69c;
-                            box-shadow: 0 0 4px 2px #00a69c;
-                        }
-                    }
-                }
-            }
+        &::before {
+            position: absolute;
+            content: '';
+            top: 4px;
+            left: 5px;
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border-radius: 50%;
         }
 
-        &--scene {
-            top: 39%;
+        // &--general {
+        //     top: 36%;
+
+        //     &:hover {
+        //         border: 1px solid #00a69c;
+        //         box-shadow: 0 0 4px 2px #00a69c;
+
+        //         &~.c-eventmap {
+        //             &__zone {
+        //                 &[data-zone="general"] {
+        //                     border: 1px solid #00a69c;
+        //                     box-shadow: 0 0 4px 2px #00a69c;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        /* Вход */
+        &--entrance {
+            top: 9%;
+
+            &::before {
+                background-color: #ff1d1d;
+            }
 
             &:hover {
-                border: 1px solid #f86901;
-                box-shadow: 0 0 4px 2px #f86901;
+                border: 1px solid #ff1d1d;
+                box-shadow: 0 0 4px 2px #ff1d1d;
 
                 &~.c-eventmap {
                     &__area {
-                        &[data-zone="scene"] {
+                        &[data-zone="entrance"] {
                             background: rgba(255, 255, 238, .5);
                         }
                     }
 
                     &__areapopup {
-                        &--scene {
+                        &--entrance {
                             display: flex;
                         }
                     }
@@ -84,12 +101,45 @@
             }
         }
 
-        &--buffet {
-            top: 42%;
+        /* Регистрация */
+        &--registration {
+            top: 12%;
+
+            &::before {
+                background-color: #f86901;
+            }
 
             &:hover {
-                border: 1px solid #00723e;
-                box-shadow: 0 0 4px 2px #00723e;
+                border: 1px solid #f86901;
+                box-shadow: 0 0 4px 2px #f86901;
+
+                &~.c-eventmap {
+                    &__area {
+                        &[data-zone="registration"] {
+                            background: rgba(255, 255, 238, .5);
+                        }
+                    }
+
+                    &__areapopup {
+                        &--registration {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Буфет */
+        &--buffet {
+            top: 15%;
+
+            &::before {
+                background-color: #f5d401;
+            }
+
+            &:hover {
+                border: 1px solid #f5d401;
+                box-shadow: 0 0 4px 2px #f5d401;
 
                 &~.c-eventmap {
                     &__area {
@@ -107,12 +157,17 @@
             }
         }
 
+        /* Фотозона */
         &--photozone {
-            top: 45%;
+            top: 18%;
+
+            &::before {
+                background-color: #00723e;
+            }
 
             &:hover {
-                border: 1px solid #f5d401;
-                box-shadow: 0 0 4px 2px #f5d401;
+                border: 1px solid #00723e;
+                box-shadow: 0 0 4px 2px #00723e;
 
                 &~.c-eventmap {
                     &__area {
@@ -130,8 +185,96 @@
             }
         }
 
+        /* Зона отдыха */
+        &--restzone {
+            top: 21%;
+
+            &::before {
+                background-color: #065ad2;
+            }
+
+            &:hover {
+                border: 1px solid #065ad2;
+                box-shadow: 0 0 4px 2px #065ad2;
+
+                &~.c-eventmap {
+                    &__area {
+                        &[data-zone="restzone"] {
+                            background: rgba(255, 255, 238, .5);
+                        }
+                    }
+
+                    &__areapopup {
+                        &--restzone {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Сцена */
+        &--scene {
+            top: 24%;
+
+            &::before {
+                background-color: #290699;
+            }
+
+            &:hover {
+                border: 1px solid #290699;
+                box-shadow: 0 0 4px 2px #290699;
+
+                &~.c-eventmap {
+                    &__area {
+                        &[data-zone="scene"] {
+                            background: rgba(255, 255, 238, .5);
+                        }
+                    }
+
+                    &__areapopup {
+                        &--scene {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--ourstand {
+            top: 27%;
+
+            &::before {
+                background-color: #C126CE;
+            }
+
+            &:hover {
+                border: 1px solid #C126CE;
+                box-shadow: 0 0 4px 2px #C126CE;
+
+                &~.c-eventmap {
+                    &__area {
+                        &[data-zone="ourstand"] {
+                            background: rgba(255, 255, 238, .5);
+                        }
+                    }
+
+                    &__areapopup {
+                        &--ourstand {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Свободные стенды */
         &--freestands {
             top: 48%;
+
+            &::before {
+                background-color: #065ad2;
+            }
 
             &:hover {
                 border: 1px solid #065ad2;
@@ -148,8 +291,13 @@
             }
         }
 
+        /* Зарезервированные стенды */
         &--reservedstands {
             top: 51%;
+
+            &::before {
+                background-color: #ff1d1d;
+            }
 
             &:hover {
                 border: 1px solid #ff1d1d;
@@ -191,7 +339,7 @@
                 box-shadow: 0 0 4px 2px #065ad2;
             }
         }
-        
+
         &[data-zone="reservedstands"] {
             &:hover {
                 box-shadow: 0 0 4px 2px #ff1d1d;
@@ -328,13 +476,58 @@
             background: rgba(255, 255, 238, .5);
         }
 
-        &--conferencehall {}
+        // &--conferencehall {}
+
+        &--entrance {
+            width: 5%;
+            height: 7%;
+            top: 5%;
+            left: 57%;
+
+            &:hover {
+                &~.c-eventmap {
+                    &__areapopup--entrance {
+                        display: flex;
+                    }
+                }
+            }
+        }
+
+        &--registration {
+            width: 9%;
+            height: 12%;
+            top: 13%;
+            left: 49.3%;
+
+            &:hover {
+                &~.c-eventmap {
+                    &__areapopup--registration {
+                        display: flex;
+                    }
+                }
+            }
+        }
+
+        &--scene {
+            width: 8.5%;
+            height: 4%;
+            top: 70%;
+            left: 48.4%;
+
+            &:hover {
+                &~.c-eventmap {
+                    &__areapopup--scene {
+                        display: flex;
+                    }
+                }
+            }
+        }
 
         &--buffet {
-            width: 22%;
-            height: 32%;
-            top: 0%;
-            left: 25%;
+            width: 15.8%;
+            height: 26%;
+            top: 8.5%;
+            left: 33.5%;
 
             &:hover {
                 &~.c-eventmap {
@@ -346,10 +539,10 @@
         }
 
         &--photozone {
-            width: 11%;
+            width: 9%;
             height: 15%;
-            top: 66%;
-            left: 25%;
+            top: 42%;
+            left: 33.5%;
 
             &:hover {
                 &~.c-eventmap {
@@ -360,15 +553,30 @@
             }
         }
 
-        &--scene {
-            width: 9.5%;
-            height: 6%;
-            top: 74.5%;
-            left: 47%;
+        &--restzone {
+            width: 6.8%;
+            height: 11.5%;
+            top: 62.5%;
+            left: 27%;
 
             &:hover {
                 &~.c-eventmap {
-                    &__areapopup--scene {
+                    &__areapopup--restzone {
+                        display: flex;
+                    }
+                }
+            }
+        }
+
+        &--ourstand {
+            width: 6.8%;
+            height: 4.5%;
+            top: 32.5%;
+            left: 49%;
+
+            &:hover {
+                &~.c-eventmap {
+                    &__areapopup--ourstand {
                         display: flex;
                     }
                 }
@@ -386,6 +594,22 @@
         flex-direction: column;
         align-items: stretch;
         text-align: center;
+
+        &--buffet {
+            left: 55%;
+        }
+
+        &--photozone {
+            left: 55%;
+        }
+
+        &--scene {
+            top: 46%;
+        }
+
+        &--ourstand {
+            left: 68%;
+        }
     }
 
     &__areatitle {
