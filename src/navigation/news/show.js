@@ -1,37 +1,53 @@
-import {
-  jsx,
-  jsxFrag,
-  init
-} from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
+//       return (
+//         <Elements.page.MainContainer
+//           title={Static.item.title}
+//         ></Elements.page.MainContainer>
+//         <div class="c-main__body">
+//           <div class="full_news_container">
+//             <div class="full_news_block">
+//               <div class="full_news_content">
+//                 <BlockShowNews Static={Static} item={item} />
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       );
 
-const start = function (data, ID) {
-  let [Static, item] = fn.GetParams({ data, ID })
-  init(
-    async () => {
-      fn.initData.news_show(Static)
+import { jsx, jsxFrag, load, Variable } from "@betarost/cemserver/cem.js";
+
+import { fn } from "@src/functions/export.js";
+import svg from "@assets/svg/index.js";
+import Elements from "@src/elements/export.js";
+
+import { BlockError404 } from "@component/blocks/index.js";
+
+const start = function (data, ID = "mainBlock") {
+  let [Static, item] = fn.GetParams({ data, ID });
+  load({
+    ID,
+    fnLoad: async () => {
+      // fn.initData.media_show(Static)
       if (!Static.openModals) {
-        item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
-        Static.item = item
+        Static.item = await fn.socket.get({ method: "News", _id: item._id });
       }
     },
-    () => {
-      // console.log('=2def43=', Static)
-      if (!item._id) { return (<div><BlockError404 /></div>) }
-      return (
-        <div class="c-main__body">
-          <div class="full_news_container">
-            <div class="full_news_block">
-              <div class="full_news_content">
-                <BlockShowNews Static={Static} item={item} />
-              </div>
-            </div>
+    fn: () => {
+      if (!Static.item._id) {
+        return (
+          <div>
+            <BlockError404 />
           </div>
-        </div>
+        );
+      }
+      return (
+        <Elements.page.MainContainer
+          title={Static.item.title}
+          class="pt--20"
+        ></Elements.page.MainContainer>
       );
-    }, ID
-  );
+    },
+  });
+  return;
 };
+
 export default start;
-// OK

@@ -1,8 +1,4 @@
 import { jsx, jsxFrag, Variable } from "@betarost/cemserver/cem.js";
-import images from "@assets/images/index.js";
-import svg from "@assets/svg/index.js";
-
-const makeFilter = function () {};
 
 const forExport = function ({ className, text, onclick }) {
   return (

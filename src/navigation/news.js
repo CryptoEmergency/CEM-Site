@@ -3,11 +3,9 @@ import {
   jsxFrag,
   load,
   Variable,
-  initOne,
   initReload,
 } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
-// import { BlockNews } from "@component/blocks/index.js";
 import Elements from "@src/elements/export.js";
 
 const start = function (data, ID) {
@@ -15,11 +13,11 @@ const start = function (data, ID) {
   load({
     ID,
     fnLoad: async () => {
-      Static.categotyList = await fn.restApi.getCategories({
+      Static.categoryList = await fn.restApi.getCategories({
         filter: { type: "news" },
         limit: 20,
       });
-
+      console.log("=ef5982=", Static.categoryList.list_records);
       Static.records = await fn.socket.get({
         method: "News",
         params: {
@@ -54,7 +52,7 @@ const start = function (data, ID) {
                 initReload();
               }}
             />
-            {Static.categotyList.list_records.map((item) => {
+            {Static.categoryList.list_records.map((item) => {
               return (
                 <Elements.button.Category
                   class={
