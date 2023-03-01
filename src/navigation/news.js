@@ -4,6 +4,7 @@ import {
   load,
   Variable,
   initOne,
+  initReload,
 } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
 // import { BlockNews } from "@component/blocks/index.js";
@@ -14,9 +15,19 @@ const start = function (data, ID) {
   load({
     ID,
     fnLoad: async () => {
+      Static.categotyList = await fn.restApi.getCategories({
+        filter: { type: "news" },
+        limit: 20,
+      });
+
       Static.records = await fn.socket.get({
         method: "News",
-        params: { filter: { type: "news" } },
+        params: {
+          filter: {
+            type: "news",
+            "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
+          },
+        },
       });
     },
     fn: () => {
@@ -25,10 +36,51 @@ const start = function (data, ID) {
           {/* <BlockNews Static={Static} /> */}
 
           <Elements.page.Container class="tags pb--0 pt--10">
-            {Static.records.map((item) => {
-              return <Elements.Tags text={Variable.lang.categoryName.all} />;
+            <Elements.button.Category
+              class={Static.activeCategory == "All" ? "tag_button_active" : ""}
+              text={Variable.lang.categoryName.all}
+              onclick={async () => {
+                Static.activeCategory = "All";
+                Static.records = await fn.socket.get({
+                  method: "News",
+                  params: {
+                    filter: {
+                      type: "news",
+                      "languages.code":
+                        Variable.lang.code == "ru" ? "ru" : "en",
+                    },
+                  },
+                });
+                initReload();
+              }}
+            />
+            {Static.categotyList.list_records.map((item) => {
+              return (
+                <Elements.button.Category
+                  class={
+                    Static.activeCategory == item.name
+                      ? "tag_button_active"
+                      : ""
+                  }
+                  text={Variable.lang.categoryName[item.name]}
+                  onclick={async () => {
+                    Static.activeCategory = item.name;
+                    Static.records = await fn.socket.get({
+                      method: "News",
+                      params: {
+                        filter: {
+                          type: "news",
+                          "languages.code":
+                            Variable.lang.code == "ru" ? "ru" : "en",
+                          "category.name": item.name,
+                        },
+                      },
+                    });
+                    initReload();
+                  }}
+                />
+              );
             })}
-            {/* <Elements.Tags></Elements.Tags> */}
           </Elements.page.Container>
 
           <Elements.page.Container class="section-g p-lr pt--70">
@@ -37,12 +89,13 @@ const start = function (data, ID) {
                 <Elements.cards.Standart
                   link={{
                     type: "modal",
+                    href: "/news/show/" + item._id,
                     data: {
                       title: fn.sliceString(item.title, 85),
                       item,
-                      items: fn.itemsMenu.news({
-                        url: "/news/show/" + item._id,
-                      }),
+                      // items: fn.itemsMenu.news({
+                      //   url: "/news/show/" + item._id,
+                      // }),
                     },
                   }}
                   title={{
