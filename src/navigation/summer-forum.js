@@ -88,8 +88,8 @@ const start = function (data, ID) {
 
     init(
         async () => {
-            console.log('=bbcdd5=',images)
-            console.log('=2d871b=',svg)
+            console.log('=bbcdd5=', images)
+            console.log('=2d871b=', svg)
         },
         () => {
             return (
@@ -634,7 +634,7 @@ const start = function (data, ID) {
                                         <h5 class="c-eventmap__highlight c-eventmap__highlight--reservedstands">Зарезервированные стенды</h5>
 
                                         {/** "VIP-зоны" */}
-                                        <div data-zone="general" class="c-eventmap__zone c-eventmap__zone--23">
+                                        {/* <div data-zone="general" class="c-eventmap__zone c-eventmap__zone--23">
                                             <span class="c-eventmap__titlezone">23</span>
                                             <div class="c-eventmap__popup c-eventmap__popup--righttop">
                                                 <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
@@ -643,39 +643,269 @@ const start = function (data, ID) {
                                                 </a>
                                                 <span class="">Google — корпорация, инвестирующая в интернет-поиск, облачные вычисления и рекламные технологии.</span>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         {/** Стенды */}
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--1"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--2"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--3"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--4"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--5"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--6"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--7"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--8"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--9"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--10"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--11"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--12"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--13"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--14"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--15"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--16"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--17"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--18"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--19"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--20"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--21"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--22"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--23"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--24"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--25"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--26"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--27"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--28"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--29"></div>
-                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--30"></div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--1">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--2">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--3">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--4">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--5">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--6">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--7">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--8">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--9">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--10">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--11">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--12">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--13">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--14">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--15">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--16">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--17">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--18">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--19">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--20">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--21">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--22">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--23">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--24">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--25">
+                                            {/* <span class="c-eventmap__titlezone">25</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--26">
+                                            {/* <span class="c-eventmap__titlezone">25</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class="">google.com</span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
 
                                         {/** тематические зоны */}
                                         <div data-zone="entrance" class="c-eventmap__area c-eventmap__area--entrance"></div>
@@ -692,10 +922,10 @@ const start = function (data, ID) {
                                                 <h5>Вход</h5>
                                             </header>
                                             <figure class="c-eventmap__areaphoto">
-                                                <img src="data:image/jpeg;base64,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" />
+                                                <img src={images["summer_forum/entrance"]} />
                                             </figure>
                                             <div class="c-eventmap__areainfo">
-                                                <p>Вход - это ключевая часть помещения форума, место основного действия</p>
+                                                <p>Вход - это начальная часть помещения форума, отсюда всё начинается</p>
                                             </div>
                                         </div>
                                         <div class="c-eventmap__areapopup c-eventmap__areapopup--registration">
@@ -706,7 +936,7 @@ const start = function (data, ID) {
                                                 <img src={images["summer_forum/registration"]} />
                                             </figure>
                                             <div class="c-eventmap__areainfo">
-                                                <p>Регистрация - это ключевая часть помещения форума, место основного действия</p>
+                                                <p>Для того, чтобы получить доступ к форуму и стать его участником необходимо зарегистрироваться</p>
                                             </div>
                                         </div>
                                         <div class="c-eventmap__areapopup c-eventmap__areapopup--scene">
@@ -728,7 +958,7 @@ const start = function (data, ID) {
                                                 <img src={images["summer_forum/buffet"]} />
                                             </figure>
                                             <div class="c-eventmap__areainfo">
-                                                <p>Зона кофе-брейков с напитками, закусками и обедом для обладателей билетов Business</p>
+                                                <p>Зона кофе-брейков с напитками, закусками и обедом для участников форума</p>
                                             </div>
                                         </div>
                                         <div class="c-eventmap__areapopup c-eventmap__areapopup--photozone">
@@ -750,7 +980,7 @@ const start = function (data, ID) {
                                                 <img src={images["summer_forum/restzone"]} />
                                             </figure>
                                             <div class="c-eventmap__areainfo">
-                                                <p>Зона отдыха на мероприятиях – это ключевое место для мероприятия, так как именно она попадает на огромное множество фотографий с гостями.</p>
+                                                <p>Зона отдыха на мероприятиях – это место отдыха от насыщенного дня и устанавления неформальных связей</p>
                                             </div>
                                         </div>
                                         <div class="c-eventmap__areapopup c-eventmap__areapopup--ourstand">
@@ -761,7 +991,7 @@ const start = function (data, ID) {
                                                 <img src={images["summer_forum/our_stand"]} />
                                             </figure>
                                             <div class="c-eventmap__areainfo">
-                                                <p>Зона отдыха на мероприятиях – это ключевое место для мероприятия, так как именно она попадает на огромное множество фотографий с гостями.</p>
+                                                <p>Организатор форума. Объединяем криптоэнтузиастов всего мира на единой многофункциональной платформе Crypto Emergency.</p>
                                             </div>
                                         </div>
                                     </div>

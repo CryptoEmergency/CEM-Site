@@ -11,13 +11,17 @@
         margin-left: auto;
         margin-right: auto;
 
-        @media(max-width: 767px) {
+        @media(max-width: 1023px) {
             display: block;
         }
     }
 
     &__wrapper {
         position: relative;
+
+        @media(max-width: 1023px) {
+            display: none;
+        }
     }
 
     &__imagebg {
@@ -26,7 +30,7 @@
         margin-left: auto;
         margin-right: auto;
 
-        @media(max-width: 767px) {
+        @media(max-width: 1023px) {
             display: none;
         }
     }
@@ -105,6 +109,10 @@
         &--registration {
             top: 12%;
 
+            @media(max-width: 1239px) {
+                top: 13%;
+            }
+
             &::before {
                 background-color: #f86901;
             }
@@ -132,6 +140,10 @@
         /* Буфет */
         &--buffet {
             top: 15%;
+
+            @media(max-width: 1239px) {
+                top: 17%;
+            }
 
             &::before {
                 background-color: #f5d401;
@@ -161,6 +173,10 @@
         &--photozone {
             top: 18%;
 
+            @media(max-width: 1239px) {
+                top: 21%;
+            }
+
             &::before {
                 background-color: #00723e;
             }
@@ -188,6 +204,10 @@
         /* Зона отдыха */
         &--restzone {
             top: 21%;
+
+            @media(max-width: 1239px) {
+                top: 25%;
+            }
 
             &::before {
                 background-color: #065ad2;
@@ -217,6 +237,10 @@
         &--scene {
             top: 24%;
 
+            @media(max-width: 1239px) {
+                top: 29%;
+            }
+
             &::before {
                 background-color: #290699;
             }
@@ -243,6 +267,10 @@
 
         &--ourstand {
             top: 27%;
+
+            @media(max-width: 1239px) {
+                top: 33%;
+            }
 
             &::before {
                 background-color: #C126CE;
@@ -295,6 +323,10 @@
         &--reservedstands {
             top: 51%;
 
+            @media(max-width: 1239px) {
+                top: 52%;
+            }
+
             &::before {
                 background-color: #ff1d1d;
             }
@@ -338,6 +370,17 @@
             &:hover {
                 box-shadow: 0 0 4px 2px #065ad2;
             }
+
+            &~.c-eventmap {
+                &__zone {
+                    .c-eventmap__popup {
+                        grid-template-columns: 50px 1fr;
+                        gap: 10px;
+                        min-height: 70px;
+                        padding: 12px;
+                    }
+                }
+            }
         }
 
         &[data-zone="reservedstands"] {
@@ -346,64 +389,226 @@
             }
         }
 
+        &--1 {
+            position: absolute;
+            top: 39%;
+            left: 70%;
+            width: 2%;
+            height: 5.2%;
+        }
+
+        &--2 {
+            position: absolute;
+            top: 44%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--3 {
+            position: absolute;
+            top: 49%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--4 {
+            position: absolute;
+            top: 54%;
+            left: 70%;
+            width: 2%;
+            height: 5.5%;
+        }
+
+        &--5 {
+            position: absolute;
+            top: 61.5%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+            border-color: #7fff00;
+            color: #7fff00;
+        }
+
+        &--6 {
+            position: absolute;
+            top: 69.3%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--7 {
+            position: absolute;
+            top: 74.3%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--8 {
+            position: absolute;
+            top: 79.3%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--9 {
+            position: absolute;
+            top: 84.3%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--10 {
+            position: absolute;
+            top: 89.3%;
+            left: 70%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--11 {
+            position: absolute;
+            top: 92.3%;
+            left: 66%;
+            width: 3%;
+            height: 3%;
+        }
+
+        &--12 {
+            position: absolute;
+            top: 92.3%;
+            left: 63%;
+            width: 3%;
+            height: 3%;
+        }
+
+        &--13 {
+            position: absolute;
+            top: 92.3%;
+            left: 60%;
+            width: 3%;
+            height: 3%;
+        }
+
+        &--14 {
+            position: absolute;
+            top: 89%;
+            left: 57%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--15 {
+            position: absolute;
+            top: 84%;
+            left: 57%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--16 {
+            position: absolute;
+            top: 79%;
+            left: 57%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--17 {
+            position: absolute;
+            top: 74%;
+            left: 57%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--18 {
+            position: absolute;
+            top: 69%;
+            left: 57%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--19 {
+            position: absolute;
+            top: 84.5%;
+            left: 63.5%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--20 {
+            position: absolute;
+            top: 76%;
+            left: 63.5%;
+            width: 2%;
+            height: 5%;
+            border-color: #ff8c00;
+            color: #ff8c00;
+        }
+
+        &--21 {
+            position: absolute;
+            top: 71%;
+            left: 63.5%;
+            width: 2%;
+            height: 5%;
+            border-color: #ff8c00;
+            color: #ff8c00;
+        }
+
+        &--22 {
+            position: absolute;
+            top: 54%;
+            left: 63.5%;
+            width: 2%;
+            height: 5%;
+            border-color: #ff8c00;
+            color: #ff8c00;
+        }
+
         &--23 {
             position: absolute;
-            top: 66.5%;
-            left: 46.9%;
-            width: 3.77%;
-            height: 5.9%;
+            top: 49%;
+            left: 63.5%;
+            width: 2%;
+            height: 5%;
+            border-color: #ff8c00;
+            color: #ff8c00;
         }
 
-        &--31 {
+        &--24 {
+            position: absolute;
+            top: 41%;
+            left: 63.5%;
+            width: 2%;
+            height: 5%;
+        }
+
+        &--25 {
             position: absolute;
             top: 32%;
-            left: 25.9%;
-            width: 3.77%;
-            height: 1.9%;
-
-            &[data-zone="freestands"],
-            &[data-zone="reservedstands"] {
-                border: none;
-            }
+            left: 50%;
+            width: 5%;
+            height: 3%;
+            border-color: #8846D3;
+            color: #8846D3;
         }
 
-        &--30 {
+        &--26 {
             position: absolute;
-            top: 32%;
-            left: 31.3%;
-            width: 3.77%;
-            height: 1.9%;
-
-            &[data-zone="freestands"],
-            &[data-zone="reservedstands"] {
-                border: none;
-            }
-        }
-
-        &--29 {
-            position: absolute;
-            top: 34%;
-            left: 35.5%;
-            width: 1.77%;
-            height: 5.9%;
-
-            &[data-zone="freestands"],
-            &[data-zone="reservedstands"] {
-                border: none;
-            }
-        }
-
-        &--28 {
-            position: absolute;
-            top: 42.5%;
-            left: 35.5%;
-            width: 1.77%;
-            height: 5.9%;
-
-            &[data-zone="freestands"],
-            &[data-zone="reservedstands"] {
-                border: none;
-            }
+            top: 75.5%;
+            left: 43.5%;
+            width: 4.5%;
+            height: 3%;
+            border-color: #8846D3;
+            color: #8846D3;
         }
     }
 
@@ -411,15 +616,15 @@
         display: block;
         margin: auto;
         font-weight: 700;
-        font-size: 18px;
-        color: #00a69c;
+        font-size: 14px;
+        color: inherit;
         text-align: center;
     }
 
     &__popup {
         // display: grid;
         display: none;
-        grid-template-columns: 130px 1fr;
+        grid-template-columns: 100px 1fr;
         gap: 15px;
         align-items: center;
         min-height: 100px;
@@ -428,6 +633,7 @@
         border-radius: 5px;
         background: #fff;
         color: #000;
+        z-index: 2;
 
         &--righttop {
             position: absolute;
@@ -511,7 +717,7 @@
         &--scene {
             width: 8.5%;
             height: 4%;
-            top: 70%;
+            top: 75%;
             left: 48.4%;
 
             &:hover {
@@ -526,7 +732,7 @@
         &--buffet {
             width: 15.8%;
             height: 26%;
-            top: 8.5%;
+            top: 9.5%;
             left: 33.5%;
 
             &:hover {
@@ -541,7 +747,7 @@
         &--photozone {
             width: 9%;
             height: 15%;
-            top: 42%;
+            top: 45%;
             left: 33.5%;
 
             &:hover {
@@ -556,7 +762,7 @@
         &--restzone {
             width: 6.8%;
             height: 11.5%;
-            top: 62.5%;
+            top: 66.5%;
             left: 27%;
 
             &:hover {
@@ -571,7 +777,7 @@
         &--ourstand {
             width: 6.8%;
             height: 4.5%;
-            top: 32.5%;
+            top: 34.8%;
             left: 49%;
 
             &:hover {
@@ -594,21 +800,60 @@
         flex-direction: column;
         align-items: stretch;
         text-align: center;
+        border-radius: 5px;
+        overflow: hidden;
+
+        &--entrance {
+
+            @media(max-width: 1239px) {
+                top: 56%;
+            }
+        }
+
+        &--registration {
+
+            @media(max-width: 1239px) {
+                top: 57%;
+            }
+        }
 
         &--buffet {
             left: 55%;
+
+            @media(max-width: 1239px) {
+                top: 66%;
+            }
         }
 
         &--photozone {
             left: 55%;
+
+            @media(max-width: 1239px) {
+                left: 60%;
+            }
+        }
+
+        &--restzone {
+
+            @media(max-width: 1239px) {
+                left: 51%;
+            }
         }
 
         &--scene {
             top: 46%;
+
+            @media(max-width: 1239px) {
+                top: 43%;
+            }
         }
 
         &--ourstand {
             left: 68%;
+
+            @media(max-width: 1239px) {
+                left: 73%;
+            }
         }
     }
 
@@ -626,6 +871,8 @@
 
     &__areaphoto {
         margin: 0;
+        line-height: 1;
+        font-size: 0;
 
         img {
             width: 100%;
