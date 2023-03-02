@@ -642,7 +642,7 @@
 	max-width: 80%;
 
 	&::before {
-		content: url("../images/beforeYou.png");
+		content: url("../svg/beforeYou.svg");
 		position: absolute;
 		background: 0;
 		// width: 0;
@@ -654,8 +654,10 @@
 		// bottom: -4px;
 		// left: -10px;
 		// transform: rotate(127deg)
-		left: 0px;
-		bottom: -5px;
+		width: 10px;
+		height: max-content;
+		left: 1.5px;
+		bottom: -5.6px;
 		transform: translateX(-100%);
 	}
 
@@ -769,7 +771,7 @@
 	}
 
 	&::before {
-		content: url("../images/beforeMy.png");
+		content: url("../svg/beforeMy.svg");
 		position: absolute;
 		background: 0;
 		// width: 0;
@@ -781,7 +783,9 @@
 		// bottom: -4px;
 		// right: -10px;
 		// transform: rotate(-127deg)
-		bottom: -5px;
+		width: 10px;
+		height: max-content;
+		bottom: -5.5px;
 		right: 1px;
 		transform: translateX(100%);
 	}
