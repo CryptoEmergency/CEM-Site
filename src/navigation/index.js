@@ -140,12 +140,12 @@ const start = function (data, ID) {
             <div class="с-preview__title">
               <img class="с-preview__bg" src={images["background/cem"]} />
               <div class="с-preview__text с-preview__text--auth">
-                <span>{Variable.lang.homePreview.ask}</span>
+                {/* <span>{Variable.lang.homePreview.ask}</span>
                 <div class="с-preview__imgblock">
                   <img class="с-preview__img" src={svg.two} />
                   <img class="с-preview__img" src={svg.two5} />
                   {Variable.lang.homePreview.earn}
-                </div>
+                </div> */}
               </div>
             </div>
             <div class="с-preview__crypto">
