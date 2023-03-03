@@ -19,7 +19,7 @@ initData.any = function (Static) {
     Static.elShowComment = {}
     Static.elShowAnswersComment = {}
     Static.elShowButtonComment = []
-
+Static.elInput = {}
     Static.elButtonSubmit = {}
     Static.commentText = []
     return
@@ -1080,22 +1080,9 @@ initData.community = function (Static) {
     Static.nameRecords = "PageCommunity"
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//====================================================================================================
-
 initData.main = function (Static) {
     // Static.test = "ggg"
 }
 
 export { initData };
+
