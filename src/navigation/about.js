@@ -116,7 +116,8 @@ const start = function (data, ID) {
     {
       title: "Cem Wallet",
       link: "https://cemwallet.com/",
-      src: images["CemWallet"],
+      // src: images["CemWallet"],
+      src: images["w1"],
     },
   ];
 
