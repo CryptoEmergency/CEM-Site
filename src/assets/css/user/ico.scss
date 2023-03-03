@@ -426,6 +426,18 @@ $icon: #353a46;
     height: 170px;
   }
 
+  .item-category{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    span{
+      font-weight: 800;
+      background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
   .item-img {
     grid-area: image;
     margin-right: 15px;
@@ -504,15 +516,15 @@ $icon: #353a46;
   }
 }
 
-.ico-list_item-wrap:hover {
-  background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
-  scale: 1.01;
-  transition-duration: .5s;
+// .ico-list_item-wrap:hover {
+//   background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+//   scale: 1.01;
+//   transition-duration: .5s;
 
-  @media(max-width: 767px) {
-    scale: 1;
-  }
-}
+//   @media(max-width: 767px) {
+//     scale: 1;
+//   }
+// }
 
 // .ico-list_item:hover {
 //   // transform: rotateX(-10deg) skewX(2deg);

@@ -16,6 +16,9 @@ const forExport = function ({ records }) {
                 });
               }}
             >
+              <div class="item-category">
+                <span>{item.category}</span>
+              </div>
               <div class="item-img">
                 <img
                   class="item-img_el"
