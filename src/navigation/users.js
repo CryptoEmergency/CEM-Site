@@ -1,25 +1,29 @@
 import {
     jsx,
     jsxFrag,
-    init
+    load
 } from "@betarost/cemserver/cem.js";
+
+import Elements from '@src/elements/export.js';
 import { fn } from '@src/functions/index.js';
 import { BlockUsers } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
-    init(
-        async () => {
+    load({
+        ID,
+        fnLoad: async () => {
             fn.initData.users(Static)
         },
-        () => {
+        fn: () => {
             return (
-                <div class='c-main__body'>
+                <Elements.page.MainContainer>
                     <BlockUsers Static={Static} />
-                </div>
+                </Elements.page.MainContainer>
             )
-        }, ID
-    )
+        }
+    })
+    return
 }
+
 export default start;
-// OK

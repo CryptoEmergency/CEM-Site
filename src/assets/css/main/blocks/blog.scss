@@ -596,8 +596,11 @@
 }
 
 .tags::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
+    // width: 0px;
+    // height: 0px;
+    width: 100px;
+    height: 50px;
+    color: red;
 }
 
 .tags p {

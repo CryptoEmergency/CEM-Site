@@ -27,8 +27,10 @@ const start = async function () {
     await mainFooter();
     await mainModal();
     await mainModalPage();
-    await initGo("newPage")
+    setTimeout(async () => {
+        await initGo("newPage")
+    }, 250);
+
 }
 
 start();
-//15.02.2023

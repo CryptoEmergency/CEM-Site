@@ -1,27 +1,33 @@
 import {
   jsx,
   jsxFrag,
+  load,
   init
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { BlockExchange } from '@component/blocks/index.js';
+import Elements from '@src/elements/export.js';
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
-  init(
-    () => {
+
+  load({
+    ID,
+    fnLoad: () => {
       Static.nameRecords = "PageExchange"
       Static.apiFilter = {}
       Static.filterCoins = []
     },
-    () => {
+    fn: () => {
       return (
-        <div class="crypto_exchanges_full_page c-main__body" id="crypto_exchange">
+        <Elements.page.MainContainer
+          class="crypto_exchanges_full_page">
           <BlockExchange Static={Static} limit={12} />
-        </div>
+        </Elements.page.MainContainer>
       );
-    }, ID
-  );
+    }
+  })
+  return
 };
+
 export default start;
-// OK

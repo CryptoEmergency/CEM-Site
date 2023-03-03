@@ -8,6 +8,9 @@
             "@assets/*": [
                 "./src/assets/*"
             ],
+            "@elements/*": [
+                "./src/elements/*"
+            ],
             "@component/*": [
                 "./src/component/*"
             ],

@@ -1,20 +1,23 @@
 import {
   jsx,
   jsxFrag,
-  init
+  init,
+  load
 } from "@betarost/cemserver/cem.js";
 import { BlockError404 } from '@component/blocks/index.js';
 
-const start = function () {
-  init(
-    null,
-    () => {
+const start = function (data, ID) {
+  load({
+    ID,
+    fn: () => {
       return (
         <div>
           <BlockError404 />
         </div>
       )
-    })
+    }
+  })
+  return
 };
+
 export default start;
-// OK

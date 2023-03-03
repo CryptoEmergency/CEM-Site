@@ -6,12 +6,14 @@ import {
     init,
     initReload,
     Variable,
-    Helpers
+    Helpers,
+    load
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
 
+import Elements from '@src/elements/export.js';
 
 import {
     BlockUsers,
@@ -25,19 +27,51 @@ import {
 import { ButtonShowMore } from '@component/element/index.js';
 
 const start = function (data, ID) {
-    let [Static] = fn.GetParams({ data, ID })
-    let filtersQuestions
+    let [Static] = fn.GetParams({ data, ID, initData: "main" })
+    // test()
+    // console.log("Static", Static)
+    // load({
+    //     ID,
+    //     fnLoad: async () => {
+    //         Static.mainCourse = await fn.socket.get({ cache: "mainCourse", method: "Course", params: { filter: {} } })
+    //         let tmp = await fn.idb.get("CachePage", "dfhdhf")
+    //         console.log('=289bbe= tmp', tmp)
+    //     },
+    //     fn: () => {
+    //         return (
+    //             <div class="c-main__body">
+    //                 <Elements.MainPreview>
+    //                     <Elements.MainCourse records={Static.mainCourse} />
+    //                 </Elements.MainPreview>
+    //                 <BlockProjects />
+    //                 <div class="c-main__wrapperbg">
+    //                     <Elements.banners.MainBig />
+    //                 </div>
+    //             </div>
+    //         )
+    //     }
+    // })
 
+    // return
     init(
         async () => {
             let tmp = {}
-            const callback = function (res) {
-                console.log('=9c0594 callback=', res)
-            }
+            // const callback = function (res) {
+            //     console.log('=9c0594 callback=', res)
+            // }
             // let tmp2 = await fn.socket.get({ method: "Course", params: { filter: {} } }, tmp, callback)
             // tmp.test = await fn.socket.get({ method: "Course", params: { filter: {} } }, callback)
-            // tmp.test = await fn.socket.get({ params: { filter: {} } }, callback)
-            console.log('=7f467d tmp=', tmp)
+            // tmp.test = await fn.socket.get({ method: "Course", params: { filter: {} } }, callback)
+            // tmp.test = await fn.socket.get({ method: "Course", params: { filter: {} } })
+            fn.socket.get({ method: "Course", params: { filter: {} } }, function (res) {
+                console.log('=9c0594 callback=', res)
+                Static.mainCourse = res
+                initReload("mainBlock")
+            })
+            // setTimeout(() => {
+            //     fn.socket.get({ method: "Course", params: { filter: {} } })
+            // }, 10);
+            console.log('=7f467d tmp=', Static.mainCourse)
 
 
             Static.dataUsers = {}
@@ -79,8 +113,10 @@ const start = function (data, ID) {
                 desc: -1
             }
 
-           // Static.Rooms = fn.initData.rooms(Static)
-            await fn.restApi.getCourse({ cache: true, name: "Course", filter: {} })
+
+            // Static.Rooms = fn.initData.rooms(Static)
+            // await fn.restApi.getCourse({ cache: true, name: "Course", filter: {} })
+
             // await api({ type: "get", action: "getCourse", short: true, cache: true, name: "Course" })
             await fn.restApi.getNews({ cache: true, name: "MainNews", filter: {} })
             // await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
@@ -110,9 +146,9 @@ const start = function (data, ID) {
                         <div class="с-preview__crypto">
                             {
                                 () => {
-                                    if (Variable.Course && Variable.Course.list_records && Variable.Course.list_records.length) {
-                                        const arrReturn = Object.keys(Variable.Course.list_records[0]).filter((item) => typeof Variable.Course.list_records[0][item] == 'object').map(function (key) {
-                                            let course = Variable.Course.list_records[0][key]
+                                    if (Static.mainCourse && Object.keys(Static.mainCourse).length) {
+                                        const arrReturn = Object.keys(Static.mainCourse).filter((item) => typeof Static.mainCourse[item] == 'object').map(function (key) {
+                                            let course = Static.mainCourse[key]
                                             return (
                                                 <div class="c-currency">
                                                     <div class="c-currency__icon">
@@ -140,8 +176,8 @@ const start = function (data, ID) {
                                     }
                                 }
                             }
-                        </div>
-                    </div>
+                        </div >
+                    </div >
                     <BlockProjects />
                     <div class="c-main__wrapperbg">
                         <div>
@@ -234,7 +270,7 @@ const start = function (data, ID) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             )
         })
 };

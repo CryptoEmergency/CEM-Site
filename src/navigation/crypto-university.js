@@ -5,6 +5,7 @@ import {
     getStorage,
     setStorage,
     init,
+    load,
     Variable,
 } from "@betarost/cemserver/cem.js";
 
@@ -12,6 +13,7 @@ import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
+import Elements from '@src/elements/export.js';
 
 import 'swiper/css/bundle';
 
@@ -75,8 +77,9 @@ const start = function (data, ID = "mainBlock") {
         });
     }
 
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: () => {
             Static.activeCategory = "All"
             Static.nameRecords = "CryptoUniversity"
             Static.CryptoUniversityCategory = [
@@ -114,15 +117,11 @@ const start = function (data, ID = "mainBlock") {
                 }
             ]
         },
-        () => {
-            // {
-            // }
+        fn: () => {
 
             return (
-                <div
-                    class={`${Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-                        } c-criptouniversity`}
-                >
+                <Elements.page.MainContainer
+                    class="c-criptouniversity">
                     <div class="swiper-container">
                         <div class="swiper swiper-post_university" After={() => swiperGo()}>
                             <div class="swiper-wrapper">
@@ -255,10 +254,11 @@ const start = function (data, ID = "mainBlock") {
                             </li>
                         </ul>
                     </div>
-                </div >
+                </Elements.page.MainContainer>
             );
-        }, ID
-    );
+        }
+    })
+    return
 };
 
 export default start;

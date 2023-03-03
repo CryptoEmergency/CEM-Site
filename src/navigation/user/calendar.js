@@ -8,19 +8,20 @@ import {
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
+import Elements from '@src/elements/export.js';
 
-const listColors = [
-    "linear-gradient(89.03deg, #2C66B8 0.54%, #8859EC 97.66%)",
-    "linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%)",
-    "linear-gradient(272.66deg, #343B4F -1.2%, rgba(51, 58, 78, 0.35) 116.4%)",
-    "linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%)",
-    "linear-gradient(225deg, #284BC5 0%, #11B883 100%)",
-    "linear-gradient(125.97deg, #9B51E0 -0.04%, #E051D2 121.46%)"
-];
+// const listColors = [
+//     "linear-gradient(89.03deg, #2C66B8 0.54%, #8859EC 97.66%)",
+//     "linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%)",
+//     "linear-gradient(272.66deg, #343B4F -1.2%, rgba(51, 58, 78, 0.35) 116.4%)",
+//     "linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%)",
+//     "linear-gradient(225deg, #284BC5 0%, #11B883 100%)",
+//     "linear-gradient(125.97deg, #9B51E0 -0.04%, #E051D2 121.46%)"
+// ];
 
-const listNames = {
-    weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sun', 'Sat']
-}
+// const listNames = {
+//     weekDayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sun', 'Sat']
+// }
 
 Helpers.moment.updateLocale("en", { week: { dow: 1 } });
 const month = Helpers.moment().startOf("month");
@@ -269,7 +270,6 @@ const yearsName = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2
 
 const renderMonth = (Static) => {
     if (Static.renderMonth) {
-        console.log(22)
         return (
             <div
                 class="calendar-month"
@@ -370,7 +370,119 @@ const start = function (data, ID) {
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
-                        <div class="calendar-title">
+                        <Elements.BlockCalendarTitle
+                        Static={Static}
+                            onClick={() => {
+                                Static.tmpTest = listDate
+                                Static.moment = Helpers.moment()
+                                initReload()
+                            }}
+                        >
+                            <Elements.CalendarSubtitle
+                                Static={Static}
+                                src={svg["calendar-arrow"]}
+                                onClick_monthBack={() => {
+                                    monthHandler(Static)
+                                    initReload()
+                                }}
+                                onClick_monthForward={() => {
+                                    monthHandler(Static, false)
+                                    initReload()
+                                }}
+                            >
+                                {() => {
+                                    if (Static.renderMonth) {
+                                        return `${Static.moment.format("YYYY")} year`
+                                    } else if (Static.renderYear) {
+                                        return `${yearsName[0]} - ${yearsName[yearsName.length - 1]}`
+                                    } else {
+                                        return Static.moment.format("MMMM YYYY")
+                                    }
+                                }}
+                            </Elements.CalendarSubtitle>
+                        </Elements.BlockCalendarTitle>
+
+                        <div class="calendar-render">
+                            {renderMonth(Static)}
+                        </div>
+                        
+                        <Elements.BlockCalendar>
+                            <div class="calendar-container">
+                                {Static.tmpTest.map((item) => {
+                                    if (Helpers.moment().isSame(item, "day") && Static.active == null && Static.renderMonth == false && Static.renderYear == false) {
+                                        Static.currentDay = Helpers.moment(item).format("YYYY-MM-D")
+                                    }
+                                    return (
+                                        <Elements.Calendar
+                                            class={[Static.active == item ? "calendar-cell--active" : null]}
+                                            Static={Static}
+                                            item={item}
+                                            onclick={() => {
+                                                Static.active = item
+                                                Static.currentDay = null
+                                                // notesScroll(Static)
+                                                initReload()
+                                            }}
+                                            onDblClick={() => {
+                                                Static.modal = true
+                                                initReload()
+                                            }}
+                                        >
+                                            {Static.notesCalendar.list_records.map((dayItem) => {
+                                                if (Helpers.moment(dayItem.showDate).format("D") == Helpers.moment(item).format("D") && Static.repeat !== Helpers.moment(dayItem.showDate).format("D")) {
+                                                    Static.repeat = Helpers.moment(dayItem.showDate).format("D")
+                                                    return (
+                                                        <div class={["calendar-day_background",
+                                                            item && item.title != "" ? "calendar-day_background--show" : null,
+                                                            Helpers.moment(dayItem.showDate).format("YYYY-MM-D") == Helpers.moment(item).format("YYYY-MM-D") ? `calendar-color-type${dayItem.color}` : null,
+                                                        ]}
+                                                        >
+                                                        </div>
+                                                    )
+                                                }
+                                            })}
+                                        </Elements.Calendar>
+                                    )
+                                })}
+                            </div>
+                            
+                        </Elements.BlockCalendar>
+
+                        <Elements.BlockCalendarNotes 
+                            Static={Static}
+                        >
+                            {Static.notesCalendar.list_records.map((item, index) => {
+                                if (Helpers.moment(item.showDate).format("D") == Helpers.moment(Static.active).format("D") && !Static.modal || Static.currentDay == Helpers.moment(item.showDate).format("YYYY-MM-D") && !Static.modal) {
+                                    return (
+                                        <Elements.CalendarNotes
+                                            Static={Static}
+                                            item={item}
+                                            onclick_delete={() => {
+                                                fn.modals.ModalConfirmAction({
+                                                    action: async () => {
+                                                        deleteNote(Static, { _id: item._id, index, active: false })
+                                                        fn.modals.close("ModalConfirmAction")
+                                                    },
+                                                    text: Variable.lang.p.deleteNotesConfirm,
+                                                    button: Variable.lang.button.yes
+                                                })
+                                            }}
+                                            onclick_edit={() => {
+                                                Static.activeNotes = item
+                                                Static.modal = true
+                                                item.title.length > 0 ? Static.isValid = true : Static.isValid = false
+                                                initReload()
+                                            }}
+                                            src_delete={svg["delete_notes"]}
+                                            src_edit={svg["edit_calendar-notes"]}
+                                        />
+                                    )
+                                } else {
+                                    Static.elNotes = null
+                                }
+                            })}
+                        </Elements.BlockCalendarNotes>
+                        {/* <div class="calendar-title">
                             <h2
                                 onClick={() => {
                                     Static.tmpTest = listDate
@@ -433,18 +545,17 @@ const start = function (data, ID) {
                                     <img class="calendar-subtitle-arrow" src={svg["calendar-arrow"]} />
                                 </button>
                             </div>
-                        </div>
-                        <div class="calendar-render">
-                            {renderMonth(Static)}
-                        </div>
-                        <div class="calendar-day-name">
-                            {listNames.weekDayNames.map(function (name) {
-                                return (
-                                    <span>{name}</span>
-                                )
-                            })}
-                        </div>
-                        <div class="calendar-container">
+                        </div> */}
+                        
+                        {/* <div class="calendar-wrapper">
+                            <div class="calendar-day-name">
+                                {listNames.weekDayNames.map(function (name) {
+                                    return (
+                                        <span>{name}</span>
+                                    )
+                                })}
+                            </div>
+                            <div class="calendar-container">
                             {Static.tmpTest.map((item) => {
                                 if (isCurrentDay(item) && Static.active == null && Static.renderMonth == false && Static.renderYear == false) {
                                     Static.currentDay = Helpers.moment(item).format("YYYY-MM-D")
@@ -497,7 +608,9 @@ const start = function (data, ID) {
                                 )
                             })}
                         </div>
-                        <div
+                        </div> */}
+
+                        {/* <div
                             class="calendar-notes"
                             Element={($el) => {
                                 Static.elNotes = $el
@@ -569,7 +682,7 @@ const start = function (data, ID) {
                                     Static.elNotes = null
                                 }
                             })}
-                        </div>
+                        </div> */}
                         <div class="modals-calendar">
                             {addForm(Static)}
                         </div>

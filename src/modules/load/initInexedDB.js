@@ -8,9 +8,14 @@ let idb = null
 
 const initInexedDB = async function () {
     idb = openDB('CryptoEmergency', 1, {
-        upgrade(idb) {
+        upgrade(idb, oldVersion) {
             const MyInfo = idb.createObjectStore('MyInfo', {
                 keyPath: 'uuid',
+                autoIncrement: false,
+            });
+
+            const CachePage = idb.createObjectStore('CachePage', {
+                keyPath: 'name',
                 autoIncrement: false,
             });
             //   MyInfo.createIndex('date', 'date');

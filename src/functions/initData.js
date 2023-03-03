@@ -3,8 +3,14 @@ import { fn } from '@src/functions/index.js';
 
 const initData = {}
 
-// 2023
+// ==================================== 2023
 initData.any = function (Static) {
+
+
+
+
+
+    Static.elInput = {}
     Static.elMedia = {}
     Static.elToogle = {}
     Static.elShowTextFull = {}
@@ -16,11 +22,10 @@ initData.any = function (Static) {
 Static.elInput = {}
     Static.elButtonSubmit = {}
     Static.commentText = []
-
     return
 }
 
-// 2022
+// ==================================== 2022
 const form = {
     language: {
         value: "",
@@ -1075,4 +1080,9 @@ initData.community = function (Static) {
     Static.nameRecords = "PageCommunity"
 }
 
+initData.main = function (Static) {
+    // Static.test = "ggg"
+}
+
 export { initData };
+

@@ -4,10 +4,13 @@ import {
   Variable,
   init,
   initReload,
+  load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Input, TextArea, ButtonSubmit } from '@component/element/index.js';
+import Elements from '@src/elements/export.js';
+
 
 const sendMessage = async (Static) => {
   if (!Static.isValid) {
@@ -25,13 +28,15 @@ const sendMessage = async (Static) => {
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
-  init(
-    () => {
+  load({
+    ID,
+    fnLoad: () => {
       fn.initData.contacts(Static)
     },
-    () => {
+    fn: () => {
       return (
-        <div class='contacts_container c-main__body'>
+        <Elements.page.MainContainer
+          class="contacts_container">
           <div class="c-container">
             <div class="contacts_content">
               <div class="contacts_form_block">
@@ -98,10 +103,11 @@ const start = function (data, ID) {
               </div>
             </div>
           </div>
-        </div>
+        </Elements.page.MainContainer>
       );
-    }, ID
-  );
+    }
+  })
+  return
 };
+
 export default start;
-// OK

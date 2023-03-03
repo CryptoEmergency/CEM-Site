@@ -1,0 +1,1677 @@
+import {
+    jsx,
+    jsxFrag,
+    sendApi,
+    Variable,
+    init,
+    initReload,
+    Helpers
+} from "@betarost/cemserver/cem.js";
+
+
+import svg from "@assets/svg/index.js";
+import images from "@assets/images/index.js";
+import Swiper from 'swiper/bundle';
+
+import { fn } from "@src/functions/index.js";
+
+
+
+
+import 'swiper/css/bundle';
+
+
+const start = function (data, ID) {
+    let showAllCompanies = false
+
+    const swiperGo = function (numIndex) {
+        // if (!swiperitem) {
+        let swiperitem1 = new Swiper(".swiper-post_media", {
+            effect: "cube",
+            grabCursor: true,
+            cubeEffect: {
+                shadow: true,
+                slideShadows: true,
+                shadowOffset: 20,
+                shadowScale: 0.94,
+            },
+            loop: true,
+            autoplay: {
+                delay: 3000,
+            },
+            pagination: {
+                el: '.swiper-pagination-post_media',
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar-post_media',
+            },
+            slidesPerView: 1,
+            spaceBetween: 20
+        });
+        // }
+    }
+
+    const swiperTwo = function (numIndex) {
+        // if (!swiperitem) {
+        let swiperitem2 = new Swiper(".swiper-two", {
+            effect: "creative",
+            grabCursor: true,
+            creativeEffect: {
+                prev: {
+                    shadow: true,
+                    translate: [0, 0, -400],
+                },
+                next: {
+                    translate: ["100%", 0, 0],
+                },
+            },
+            loop: true,
+            autoplay: {
+                delay: 3000,
+            },
+            pagination: {
+                el: '.swiper-pagination-two',
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar-two',
+            },
+            slidesPerView: 1,
+            spaceBetween: 20
+        });
+        // }
+    }
+
+    const ShowAllCompany = function () {
+        showAllCompanies = true
+        initReload()
+    }
+
+    init(
+        async () => {
+            console.log('=bbcdd5=', images)
+            console.log('=2d871b=', svg)
+        },
+        () => {
+            return (
+                <div class='c-main__body'>
+                    <div class="page-content page-content--full">
+                        <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px">
+                            {/* <div>
+                                <h2 style="text-align: center; font-weight: 700; margin-bottom: 20px">Фотоотчёт Crypto ЮГ 2022</h2>
+                                <div class="forum_end_photos">
+                                    <img src={images['forum/forum_end/forum_end_1']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_1'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_2']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_2'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_3']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_3'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_4']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_4'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_5']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_5'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_6']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_6'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_7']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_7'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_8']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_8'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_9']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_9'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_10']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_10'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_11']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_11'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_12']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_12'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_13']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_13'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_14']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_14'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_15']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_15'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                    <img src={images['forum/forum_end/forum_end_16']} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        fn.modals.ModalViewPhoto({
+                                        path: images['forum/forum_end/forum_end_16'],
+                                        fullPath: true
+                                        });
+                                    }}
+                                    />
+                                </div>
+                                <a target="_blank" class="all_photo_button_container" rel="nofollow noopener" href="https://disk.yandex.ru/d/olZACsw71YjlNQ">
+                                    <div class="all_photo_button">Смотреть все фото</div>
+                                </a>
+                            </div> */}
+                            {/* <img style="border-radius: 4px; width: 100%" src={images['forum/forum_banner']} />
+                            <div class="swiper-container">
+                                <div class="swiper swiper-post_media" After={() => swiperGo()}>
+                                    <div class="swiper-wrapper">
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_1']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_2']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_3']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_4']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_5']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_6']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_7']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_8']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_9']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_10']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_11']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_12']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_13']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_14']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_15']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_16']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_17']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_18']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_19']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_20']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_21']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_22']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_23']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_24']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="height: 400px; border-radius: 4px" src={images['forum/forum_25']} />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="swiper-pagination swiper-pagination-post_media"></div>
+                                    <div class="swiper-scrollbar-post_media"></div>
+                                </div>
+                            </div>
+                            <div class="video-container-forum">
+
+                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/1wvHegEMrEU" title="Crypto ЮГ 2022 (Выступления спикеров)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+                            <div>
+                                <h2 style="text-align: center; font-weight: 700; margin-bottom: 20px">Мероприятие закончилось</h2>
+                                <h4 style="text-align: center">Краснодарский край г. Новороссийск ул. Адмирала Серебрякова 27а ТЦ «Черноморский»</h4>
+                                <h4 style="text-align: center;">Организатор – CRYPTO EMERGENCY</h4>
+                                <h4 style="text-align: center; margin-bottom: 20px">Соорганизатор – CRYPTO HOLDING</h4>
+                                <img style="width: 150px; margin: 0 auto; text-align: center; display: block;  margin-bottom: 30px" src={images['forum/eighteen']} />
+                                <h2 style="text-align: center; margin-bottom: 30px; font-weight: 800">C 10:00 до 18:00</h2>
+                                <div class="forum_timesheet">
+                                    <img src={images['forum/forum_timesheet_16']} />
+                                    <img src={images['forum/forum_timesheet_17']} />
+                                </div>
+                                <div class="video-container-forum">
+                                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/GQiMrMWivWY" title="Crypto ЮГ 2022 (Зал)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <p style="font-size: 18px;">
+                                    Первый ежегодный криптовалютный форум прошёл в центре Новороссийска прямо на берегу прекрасного черного моря.
+                                </p>
+                                <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
+                                    <div style="font-size: 18px;">
+                                        <p style="align-items: center;">
+                                            Были подняты такие темы, как:
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Новички в крипто индустрии
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Будущее криптовалюты в России
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> NFT технология и тренды ее развития
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Майнинг оборудование и способ добычи криптовалюты
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Что такое технология блокчейн и где используется
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Стартапы со всей России представят свои проекты
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Будут подведены итоги <a style="padding-left: 6px;     text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 600;" href="/lottery/" onclick={async (e) => { fn.siteLink(e) }}>  лотереи "Сарафанное радио"</a>
+                                        </p>
+                                    </div>
+                                    <div style="font-size: 18px;">
+                                        <p>
+                                            На форуме были представлены:
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 25+ проектов
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 500+ участников
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 15+ спикеров
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Большое количество конкурсов с ценными призами
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Крупные сми
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Фотозона
+                                        </p>
+                                        <p style="display: flex; align-items: center;">
+                                            <span style="height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Фуршет, шампанское
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="margin: 35px 0" class="swiper-container"> */}
+                            {/*} <div class="swiper swiper-two" After={() => swiperTwo()}>
+                                        <div class="swiper-wrapper">
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_1']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_2']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_3']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_4']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_5']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_6']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_7']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_8']} />
+                                                </div>
+                                            </a>
+                                            <a class="swiper-slide">
+                                                <div class="swiper-post_media_image_container">
+                                                    <img style="height: 400px; border-radius: 4px" src={images['forum/forum_holl_9']} />
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-pagination swiper-pagination-two"></div>
+                                        <div class="swiper-scrollbar-two"></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 18px; margin-top: 10px">
+                                    <p>
+                                        Отличная локация в центре города:
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> 800кв метров;
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> в двух шагах до черного моря и прекрасный парк;
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Новая современная набережная с большим количеством кафе, ресторанов и отелей;
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Билет для посетителей включает не только пропуск на форум, но и большой список привилегий в лучших ресторанах и отелях г. Новороссийск.
+                                    </p>
+                                </div>
+                                <div class="forum_button_container">
+                                    <div class="forum_button">
+                                        <a target="_blank" href="https://t.me/cryptoemergencychat" rel="nofollow nooopener" style="display: flex; align-items: center; color: inherit; text-decoration: none;">
+                                            <img style="margin-right: 5px" src={svg['telegram_icon']} /> <span style="font-size: 18px; font-weight: 500">Присоединиться в телеграм</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: center; margin-top: 20px">
+                                    <span style="text-decoration: none;background: linear-gradient(160deg, #C126CE 42.19%, #284CCB 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: 700; font-size: 36px">
+                                        2990 ₽
+                                    </span>
+                                </div>
+                                <a style="margin: 40px auto; margin-top: 20px" class="с-preview__part tiwo_ticketseller" data-event_id="3527" onclick={() => { return false }}>
+                                    <span>Купить билет</span>
+                                </a>
+                                <div style="font-size: 18px; max-width: 500px; margin: 0 auto;margin-top: 10px">
+                                    <p>
+                                        Билет предоставляет ряд привлекательных предложений:
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 16 - 17 декабря посещение Форума Crypto ЮГ 2022
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Шампанское и вкусные закуски
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Проживание в отелях:
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Hilton – скидка 30% на проживание
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Капитал - скидка 10% на проживание
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Гостиница Новороссийск - скидка 10% на проживание
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Кафе и рестораны:
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Абрау Дюрсо - 10% на все меню
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Вижу море - 10% на все меню
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> BARY – бесплатный кофе и вкусный комплимент.
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 Доступ к онлайн трансляции форума и записи.
+                                    </p>
+                                    <p style="display: flex; align-items: center;">
+                                        🔥 По завершении форума, 17 декабря, пройдёт After party.
+                                    </p>
+                                    <p>
+                                        <span style="min-height: 8px; min-width: 8px; height: 8px; width: 8px; border-radius: 50%; background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); display: inline-block; margin-right: 10px"></span> Билет даст Вам возможность бесплатного входа в лучший, новый клуб города Новороссийска «Философ»
+                                    </p>
+                                </div>
+                            </div> */}
+                            <div>
+                                {/* <h4 style="text-align: center; margin: 25px 0;">Стенды</h4> */}
+                                {/* <p>
+                                    Форум "Crypto ЮГ 2022" -  это отличное место для презентации своей компании и демонстрации своего проекта на берегу черного моря в отличной локации.
+                                </p>
+                                <p>
+                                    Воспользуйтесь данной возможностью, привлеките будущих клиентов и партнеров к своему проекту.
+                                </p>
+                                <p>
+                                    Как это сделать? Напишите нам и мы вам поможем!
+                                </p> */}
+
+                                <section class="c-eventmap c-container">
+                                    <h4 class="c-eventmap__title">Стенды</h4>
+                                    <div class="c-eventmap__wrapper">
+                                        {/** Фоновая карта */}
+                                        <img class="c-eventmap__imagebg" src={svg['summer_forum/map']} />
+
+                                        {/** Спецификация */}
+                                        {/* <h5 class="c-eventmap__highlight c-eventmap__highlight--general">Генеральный спонсор</h5> */}
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--entrance">Вход</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--registration">Регистрация</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--buffet">Буфет</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--photozone">Фотозона</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--restzone">Зона отдыха</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--scene">Сцена</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--ourstand">CryptoEmergency</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--freestands">Свободные стенды</h5>
+                                        <h5 class="c-eventmap__highlight c-eventmap__highlight--reservedstands">Зарезервированные стенды</h5>
+
+                                        {/** "VIP-зоны" */}
+                                        {/* <div data-zone="general" class="c-eventmap__zone c-eventmap__zone--23">
+                                            <span class="c-eventmap__titlezone">23</span>
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src="https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1" width="" height="" />
+                                                    <span class="">google.com</span>
+                                                </a>
+                                                <span class="">Google — корпорация, инвестирующая в интернет-поиск, облачные вычисления и рекламные технологии.</span>
+                                            </div>
+                                        </div> */}
+
+                                        {/** Стенды */}
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--1">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--2">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--3">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--4">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--5">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--6">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--7">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--8">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--9">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--10">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--11">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--12">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--13">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--14">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--15">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--16">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--17">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--18">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--19">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--20">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--21">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--22">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--23">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--24">
+                                            {/* <span class="c-eventmap__titlezone">5</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--25">
+                                            {/* <span class="c-eventmap__titlezone">25</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class=""></span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+                                        <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--26">
+                                            {/* <span class="c-eventmap__titlezone">25</span> */}
+                                            <div class="c-eventmap__popup c-eventmap__popup--righttop">
+                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                    <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                                    {/* <span class="">google.com</span> */}
+                                                </a>
+                                                <span class="">Это место в данный момент свободно</span>
+                                            </div>
+                                        </div>
+
+                                        {/** тематические зоны */}
+                                        <div data-zone="entrance" class="c-eventmap__area c-eventmap__area--entrance"></div>
+                                        <div data-zone="registration" class="c-eventmap__area c-eventmap__area--registration"></div>
+                                        <div data-zone="scene" class="c-eventmap__area c-eventmap__area--scene"></div>
+                                        <div data-zone="buffet" class="c-eventmap__area c-eventmap__area--buffet"></div>
+                                        <div data-zone="photozone" class="c-eventmap__area c-eventmap__area--photozone"></div>
+                                        <div data-zone="restzone" class="c-eventmap__area c-eventmap__area--restzone"></div>
+                                        <div data-zone="ourstand" class="c-eventmap__area c-eventmap__area--ourstand"></div>
+
+                                        {/** попапы тематических зон */}
+                                        <div class="c-eventmap__areapopup c-eventmap__areapopup--entrance">
+                                            <header class="c-eventmap__areatitle">
+                                                <h5>Вход</h5>
+                                            </header>
+                                            <figure class="c-eventmap__areaphoto">
+                                                <img src={images["summer_forum/entrance"]} />
+                                            </figure>
+                                            <div class="c-eventmap__areainfo">
+                                                <p>Вход - это начальная часть помещения форума, отсюда всё начинается</p>
+                                            </div>
+                                        </div>
+                                        <div class="c-eventmap__areapopup c-eventmap__areapopup--registration">
+                                            <header class="c-eventmap__areatitle">
+                                                <h5>Регистрация</h5>
+                                            </header>
+                                            <figure class="c-eventmap__areaphoto">
+                                                <img src={images["summer_forum/registration"]} />
+                                            </figure>
+                                            <div class="c-eventmap__areainfo">
+                                                <p>Для того, чтобы получить доступ к форуму и стать его участником необходимо зарегистрироваться</p>
+                                            </div>
+                                        </div>
+                                        <div class="c-eventmap__areapopup c-eventmap__areapopup--scene">
+                                            <header class="c-eventmap__areatitle">
+                                                <h5>Сцена</h5>
+                                            </header>
+                                            <figure class="c-eventmap__areaphoto">
+                                                <img src={images["summer_forum/scene"]} />
+                                            </figure>
+                                            <div class="c-eventmap__areainfo">
+                                                <p>Сцена - это ключевая часть помещения форума, место основного действия</p>
+                                            </div>
+                                        </div>
+                                        <div class="c-eventmap__areapopup c-eventmap__areapopup--buffet">
+                                            <header class="c-eventmap__areatitle">
+                                                <h5>Буфет</h5>
+                                            </header>
+                                            <figure class="c-eventmap__areaphoto">
+                                                <img src={images["summer_forum/buffet"]} />
+                                            </figure>
+                                            <div class="c-eventmap__areainfo">
+                                                <p>Зона кофе-брейков с напитками, закусками и обедом для участников форума</p>
+                                            </div>
+                                        </div>
+                                        <div class="c-eventmap__areapopup c-eventmap__areapopup--photozone">
+                                            <header class="c-eventmap__areatitle">
+                                                <h5>Фотозона</h5>
+                                            </header>
+                                            <figure class="c-eventmap__areaphoto">
+                                                <img src={images["summer_forum/photozone"]} />
+                                            </figure>
+                                            <div class="c-eventmap__areainfo">
+                                                <p>Фотозона на мероприятиях – это ключевое место для мероприятия, так как именно она попадает на огромное множество фотографий с гостями.</p>
+                                            </div>
+                                        </div>
+                                        <div class="c-eventmap__areapopup c-eventmap__areapopup--restzone">
+                                            <header class="c-eventmap__areatitle">
+                                                <h5>Зона отдыха</h5>
+                                            </header>
+                                            <figure class="c-eventmap__areaphoto">
+                                                <img src={images["summer_forum/restzone"]} />
+                                            </figure>
+                                            <div class="c-eventmap__areainfo">
+                                                <p>Зона отдыха на мероприятиях – это место отдыха от насыщенного дня и устанавления неформальных связей</p>
+                                            </div>
+                                        </div>
+                                        <div class="c-eventmap__areapopup c-eventmap__areapopup--ourstand">
+                                            <header class="c-eventmap__areatitle">
+                                                <h5>CryptoEmergency</h5>
+                                            </header>
+                                            <figure class="c-eventmap__areaphoto">
+                                                <img src={images["summer_forum/our_stand"]} />
+                                            </figure>
+                                            <div class="c-eventmap__areainfo">
+                                                <p>Организатор форума. Объединяем криптоэнтузиастов всего мира на единой многофункциональной платформе Crypto Emergency.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <img class="c-eventmap__image" src={svg['summer_forum/map']} />
+                                {/* <a
+                                    style="margin: 50px auto"
+                                    class="с-preview__part"
+                                    onclick={(e) => {
+                                        Variable.SetModals({ name: "ModalForumMessage", data: {} })
+                                        e.stopPropagation();
+                                    }}
+                                >
+                                    <span>Купить стенд</span>
+                                </a> */}
+                            </div>
+                            {/* <div style="margin-bottom: 40px">
+                                <h4 style="text-align: center; margin-bottom: 40px">Генеральный спонсор</h4>
+                                <a target="_blank" rel="nofollow nooopener" href="https://blockchain24.pro" class="general_sponsor_banner">
+                                    <div style="background: #232733; border-radius: 6px; padding: 20px 40px">
+                                        <img style="width: 100%" src={images['forum/blockchain24']} />
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <h4 style="text-align: center; margin-bottom: 40px">Компании</h4>
+                                <div class="company_block">
+                                    <a target="_blank" rel="nofollow nooopener" href="https://metis.io" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_1']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Metis – это Ethereum Layer 2 – платформа, подходящая любому пользователю.</p>
+                                            <p>Самый дешевый и быстрый Layer 2-блокчейн в мире с уникальными продуктами в собственной экосистеме.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cryptoholding.ru" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_2']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Crypto Holding - многопрофильный холдинг, работающий в сфере блокчейн-технологий и криптовалют. Компания создана в 2022 году после объеднения ряда игроков рынка под единым брендом.</p>
+                                            <p>Главная миссия компании - выполнять функции точки входа в крипторынок новых предпринимателей и бизнесменов.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://bonus-group.ru" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_3']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Специалисты Группы компаний «БОНУС» представляют права и защищают интересы клиентов на всей территории Российской Федерации, а в случае необходимости, и за ее пределами.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://ttmboard.com" class="company_item">
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_4']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Настольная игра TTM Board Game - это инновационный офлайн-тренажер для того, чтобы развивать навыки в работе с криптовалютой, потренироваться в реализации собственных инвестстратегий и овладеть навыками финансовой грамотности без ненужного риска и финансовых потерь.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://ttm.academy" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_5']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">TTM Academy – одна из крупнейших Edtech-платформ с тренингами и вебинарами по трейдингу и инвестициям, цифровым активам и технологии блокчейн, DeFi и торговым стратегиям.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://crypto.ru" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_6']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Crypto.ru — крупнейший информационный ресурс в Рунете о криптовалютах и блокчейне. Сайт предоставляет актуальный курсы монет, мониторинг обменников, рейтинг бирж и кошельков.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://carding.pro" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_7']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Канал «Люди PRO» показывает жизнь и работу людей, являющихся профессионалами в своей сфере. Неважно, кто ты: хакер, маркетолог, писатель, владелец небольшого кафе или нескольких заводов – если вы специалист в своем деле, мы идём к вам! Здесь нет случайных гостей, строгий отбор гарантирует получение качественной и интересной информации.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://blockchain24.pro" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_8']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Blockchain24.pro - Ведущий русскоязычный портал о криптовалютах и технологии blockchain. В основе нашей концепции - информационный портал, плюс тематические сервисы. Мы стремимся предоставить участникам отрасли максимально объективную информацию, проверенную и адаптированную для широкого круга читателей.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://ti.turovinvest.ru/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_9']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">«Туров Инвест» — команда криптоэнтузиастов. Объединив самых успешных участников крипторынка, мы помогаем людям повышать финансовую грамотность в области криптовалюты и инвестиций.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cryptonews.net/ru/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_10']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Crypto News — это сервис для криптоэнтузиастов, сделанный криптоэнтузиастами. Мы постарались сделать максимально полезную цифровую платформу для всех, кто хочет быть в курсе событий на крипторынке и стремится на этом зарабатывать.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://digitalfutureclub.ru" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_11']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Академия криптовалют «Digital Future” Обучают людей базовым знаниям для работы с криптовалютой</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="http://www.onestopmining.com" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_12']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Onestopmining – международная компания, которая специализируется на комплексных решениях для майнинга.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cripta.games" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_13']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Настольная игра "КРИПТА. Начало" - битва криптотрейдеров, стань лучшим за игровым столом! Два в одном - азартная настолка и обучающий тренажёр, поможет разобраться в мире криптовалют и трейдинга.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://voltep.online" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_14']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Современная ИТ-компания, специализирующаяся на создании инновационных решений. В настоящий момент продвигает собственную платформу для создания виртуальных миров - voltep.online</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://cryptometa.media" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_15']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Это закрытый клуб венчурных инвесторов в веб3 стартапы. С нами можно инвестировать на ранних стадиях в отборные проекты, которые мы отсеяли от множества других.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://t.me/unionclub_invest" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_16']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Клуб инвесторов «UnionClub» - это сообщество экологичных инвесторов, которые всегда готовы помочь друг другу в вопросе инвестиций.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://racib.com" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_17']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">РОССИЙСКАЯ АССОЦИАЦИЯ КРИПТОЭКОНОМИКИ, ИСКУССТВЕННОГО ИНТЕЛЛЕКТА И БЛОКЧЕЙНА.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://www.artemotiochain.ru/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_18']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Образовательная платформа, где участники могут изучать NFT, современное искусство, живопись, технологию токенизации своих навыков и услуг с целью создавать и получать за своё творчество вознаграждение.</p>
+                                        </div>
+                                    </a>
+
+                                    <a target="_blank" rel="nofollow nooopener" href="https://zerogravity.foundation/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_19']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Децентрализованный венчурный фонд. Международный агрегатор по цифровым, инновационным и блокчейн технологиям.</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://zh.cash/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_20']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">ZHCHAIN - Блокчейн платформа 5-го поколения!</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://t.me/zhcashcrypto/1036" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_21']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Видеосервис на блокчейне с уникальной реферальной программой!</p>
+                                        </div>
+                                    </a>
+                                    <a target="_blank" rel="nofollow nooopener" href="https://garantex.io/" class="company_item" style={showAllCompanies ? '' : 'display: none'}>
+                                        <img style="height: 150px; width: 150px;" src={images['forum/forum_company_23']} />
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Криптовалютная биржа Garantex работает с 2019 года и с тех пор зарекомендовала себя как надежный партнер и один из самых удобных хабов для работы с криптой в России.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a
+                                    style={showAllCompanies ? 'margin: 40px auto; display: none' : 'margin: 40px auto;'}
+                                    class="с-preview__part"
+                                    onclick={ShowAllCompany}>
+                                    <span>Показать всех</span>
+                                </a>
+                            </div>
+                            <div>
+                                <h4 style="text-align: center; margin-bottom: 40px">Спикеры форума</h4>
+                                <div class="speakers_block">
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_1']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Ян Кривоносов</p>
+                                            <p>CEO проекта Crypto Emergency</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_2']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Дмитрий Белов</p>
+                                            <p>Управляющий директор проекта Crypto Emergency</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_14']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Игорь Еньшин</p>
+                                            <p>Руководитель IT-направления компании Crypto Emergency</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_7']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Алексей Зюзин</p>
+                                            <p>CEO Crypto Holding, IT-эксперт, инвестор</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_28']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Евгения Бурова</p>
+                                            <p>PR-директор биржи Garantex</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_23']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Владимир Туров</p>
+                                            <p>Учредитель TUROV •INVEST</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_12']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Сергей Павлович</p>
+                                            <p>Автор и ведущий канала Люди PRO, владелец бизнесов в IT, e-commerce и медиа, инвестор</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_24']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Овчинников Артём</p>
+                                            <p>Идеолог акселератора для web 3 проектов Фрактал</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_15']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Кожухов Ярослав</p>
+                                            <p>Community Manager и Ambassador Lead в Metis</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_16']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Владимир Бочаров</p>
+                                            <p>Tech Community and Integration Associate в Metis</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_21']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Андрей Тугарин</p>
+                                            <p>Управляющий партнер GMT Legal</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_3']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Валерий Осипов</p>
+                                            <p>Основатель ArtEmotioChain (Проект learn2earn в сфере NFT)</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_4']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Ренат Калинченко</p>
+                                            <p>Криптоэнтузиаст, руководитель компании TUROV •INVEST</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_6']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Лев Пониманский</p>
+                                            <p>Профессионал в области криптовалюты и майнинга</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_25']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Никита Балашов</p>
+                                            <p>Директор по маркетингу, крипто менеджер.</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_8']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Mr. Sailer</p>
+                                            <p>Автор канала Мистер Сайлер</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_5']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Руслан Захаркин</p>
+                                            <p>крипто блогер</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_9']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Василий Подзоров</p>
+                                            <p>Руководитель TTM Board Game</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_10']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Игорь Ильин</p>
+                                            <p>CEO CryptoMetaDao</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_11']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Вероника Близнец</p>
+                                            <p>Адвокат, юрист-международник</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_13']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Евгений Царицанский</p>
+                                            <p>Криптоэксперт, основатель академии криптовалют.</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_17']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Cici Shu</p>
+                                            <p>Региональный директор Onestopmining</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_18']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Иван Теплов</p>
+                                            <p>CEO / Founder проекта voltep.online</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_19']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Александр Изюрьев</p>
+                                            <p>Сооснователь клуба инвесторов «UnionClub». Криптоинвестор. Игропрактик.</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_20']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Козлов Денис</p>
+                                            <p>Трейдер и эксперт по личным финансам. Сооснователь Клуба инвесторов «UnionClub». Криптоинвестор.</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_22']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Виктор Пуляев</p>
+                                            <p>Директор по развитию blockchain24.pro</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_26']} />
+                                        </div>
+                                        <div>
+                                            <p style="margin-top: 10px; margin-bottom: 5px">Евгений Мусиенко</p>
+                                            <p>Специалист по инвестициям</p>
+                                        </div>
+                                    </div>
+                                    <div class="speaker_item speaker_item_example" style="text-align: center">
+                                        <div style="background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);border-radius: 50%;padding: 4px; display: flex; width: 158px; margin: 0 auto">
+                                            <img style="height: 150px; width: 150px;border-radius: 50%" src={images['forum/forum_speaker_soon']} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <a
+                                    style="margin: 40px auto"
+                                    class="с-preview__part"
+                                    onclick={(e) => {
+                                        Variable.SetModals({ name: "ModalForumMessage", data: {} })
+                                        e.stopPropagation();
+                                    }}
+                                >
+                                    <span>Стать спикером</span>
+                                </a>
+                            </div>
+                            <div>
+                                <h4 style="text-align: center; margin-bottom: 40px">Партнеры</h4>
+                                <div data-mainpage="true" class="c-infopartners__list partners_container">
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cryptoholding.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_1"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://тц-черноморский.рф"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_7"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://crypto.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_8"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://carding.pro"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_9"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://blockchain24.pro"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_10"]} />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.instagram.com/abrau1870/"
+                                        class="c-infopartners__item"
+                                        style="background: #383637"
+                                    >
+                                        <img src={images["forum/partner_2"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.instagram.com/barycoffee.nvr/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_3"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://hotel-capital.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_4"]} />
+                                    </a>
+                                    <a style="display: block!important; background: #FFFFFF"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://seeyour.info/vizhu.more.rest"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_5"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://hginov.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_6"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://ti.turovinvest.ru/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_11"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cryptonews.net/ru/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_12"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://digitalfutureclub.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_13"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://www.onestopmining.com"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_14"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cripta.games"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_15"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://voltep.online"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_16"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://cryptometa.media"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_17"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://t.me/unionclub_invest"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_18"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://hotel-novoros.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_19"]} />
+                                    </a>
+                                    <a style="display: block!important; background: #FFFFFF"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_20"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://racib.com"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_21"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.artemotiochain.ru/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_22"]} />
+                                    </a>
+                                    <a style="display: block!important; background: #1C1A27"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://zerogravity.foundation/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_23"]} />
+                                    </a>
+                                    <a style="display: block!important; background: #EDEDED"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="http://www.zhcashcrypto.site"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_24"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://t.me/zhcashcrypto/1036"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_26"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://bloknot-novorossiysk.ru"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_25"]} />
+                                    </a>
+                                    <a style="display: block!important; background: #C4CFE3"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://t.me/zhcashcrypto/1040"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_27"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://www.cls.global"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_28"]} />
+                                    </a>
+                                    <a style="display: block!important;"
+                                        target="_blank"
+                                        rel="nofollow nooopener"
+                                        href="https://garantex.io/"
+                                        class="c-infopartners__item"
+                                    >
+                                        <img src={images["forum/partner_30"]} />
+                                    </a>
+                                </div>
+
+                            </div> */}
+                        </div>
+                    </div>
+                    <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
+                    {/* <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script> */}
+                </div>
+            )
+        }, ID
+    )
+}
+
+export default start;

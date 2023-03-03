@@ -159,7 +159,8 @@
         "promo_video": "Promo video",
         "tokenomica": "Tokenomica",
         "------------------новые слова-----------------": "добавить новые слова",
-        "modal_listCoin": "Choose coins"
+        "modal_listCoin": "Choose coins",
+        "noName": "No name"
     },
     "a": {
         "about": "About Us",
@@ -226,11 +227,12 @@
         "branch": "Branch in Russia",
         "branchAdress": "City of Novorossiysk, Admiral Serebryakova Street 27a",
         "mapDescOne": "Project start",
-        "mapDescTwo": "Wallet",
-        "mapDescThree": "Own blockchain",
-        "mapDescFour": "University ",
-        "mapDescFive": "Light exchange",
-        "mapDescSix": "News neural net",
+        "mapDescTwo": "Own blockchain CEM",
+        "mapDescThree": "Cem Wallet",
+        "mapDescFour": "DAO Communities",
+        "mapDescFive": "Crypto University",
+        "mapDescSix": "Own Exchange",
+        "mapDescSeven": "News neural net",
         "aboutProjectNameOne": "Crypto emergency",
         "aboutProjectNameTwo": "Ref money",
         "aboutProjectNameThree": "Announcement expected",
@@ -247,7 +249,8 @@
         "clientMoney": "Payments for attracted customers",
         "forFriends": "Only for friends",
         "------------------новые слова-----------------": "добавить новые слова",
-        "litePaper": "Lite Paper"
+        "litePaper": "Lite Paper",
+        "newNotes": "New notes"
     },
     "p": {
         "answers": "answers ",
@@ -305,12 +308,13 @@
         "goalThreeDesc": "The functionality on the site does not require any investment from you!",
         "goalFour": "Creation of meta universe",
         "goalFourDesc": "Combining all the companys products in one meta universe.",
-        "mapDateOne": "January 31, 2022",
-        "mapDateTwo": "July 2022",
-        "mapDateThree": "Beginning of 2023",
-        "mapDateFour": "April 2022",
-        "mapDateFive": "September 2022",
-        "mapDateSix": "Mid of 2023",
+        "mapDateOne": "June 15, 2021",
+        "mapDateTwo": "May 19, 2022",
+        "mapDateThree": "September 2022",
+        "mapDateFour": "Summer 2023",
+        "mapDateFive": "Autumn 2023",
+        "mapDateSix": "Beginning of 2024",
+        "mapDateSeven": "End of 2024",
         "aboutProjectDateOne": "Release of January 31, 2022",
         "aboutProjectDateTwo": "Release of 2022",
         "aboutProjectDateThree": "2022",
@@ -359,7 +363,6 @@
         "transactionOther": "Other",
         "transactionAwards": "For the achievement received",
         "transactionLevel": "For the received level",
-        "October2022": "October 2022",
         "aboutProjectDate19May2022": "Released May 19, 2022",
         "aboutProjectDateAugust2022": "Release August 2022",
         "--------------------------новые слова--------------": "--добавить перевод--",
@@ -447,7 +450,8 @@
         "deleteFromBlacklist": "Remove from the list",
         "confirmBlockUser": "Are you sure you want to add a user to the blacklist? (The blacklist of users is available in the settings)",
         "update": "Changed",
-        "deletePageComment": "Are you sure you want to delete?"
+        "deletePageComment": "Are you sure you want to delete?",
+        "selectOrCreateNew": "Select or create a new note"
     },
     "label": {
         "name": "Name",

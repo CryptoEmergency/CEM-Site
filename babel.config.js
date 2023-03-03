@@ -16,6 +16,7 @@ export default {
                     "@fn": "./src/functions",
                     "@assets": "./src/assets",
                     "@component": "./src/component",
+                    "@elements": "./src/elements",
                     "@htmlBlocks": "./src/component/htmlBlocks",
                     "@htmlElements": "./src/component/htmlElements",
                     "@navigation": "./src/navigation",

@@ -6,7 +6,7 @@ import { itemsMenu } from "./itemsMenu.js"
 import { web3CEM, web3Action } from "./web3.js"
 import socket from "./socket.js"
 import { functionsMain } from "@src/lists/files/index.js"
-
+import { idb } from "@src/modules/load/initInexedDB.js";
 
 const fn = {}
 fn.Static = {}
@@ -16,7 +16,21 @@ fn.initData = initData
 Object.assign(fn, functionsMain())
 
 // 2023 ================
+fn.idb = {}
 
+fn.idb.get = async function (table, key) {
+  let record = await (await idb).get(table, key)
+  if (!record) {
+    return []
+  }
+  return record
+}
+
+fn.idb.set = async function (table, key, value) {
+  (await idb).put("CachePage", { test: "dfh", name: "dfhdhf" })
+  return
+  return await (await idb).put(table, value, key)
+}
 
 //2022 =======================
 

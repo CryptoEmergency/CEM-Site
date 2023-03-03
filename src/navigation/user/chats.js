@@ -15,6 +15,7 @@ import {
     Swiper,
     GroupImage,
     AudioPlayer,
+    AudioPlayerCopy,
     LazyImage,
     VideoPlayer,
     TextArea,
@@ -42,6 +43,8 @@ const swiperOptions = {
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
 
+    let el = [];
+
 
     Variable.Static.HeaderShow = false
     Variable.Static.FooterShow = false
@@ -67,14 +70,15 @@ const start = function (data, ID) {
 
         let previewObj = {
             src: dataURL,
-            type: "image",
+            type: file[0].type.split("/")[0],
             upload: 0,
             size: 0
         };
-        console.log('=08e20a Static =', Static)
-        // debugger
+        // console.log('=08e20a Static =', Static)
+
         Static.mediaInputs.show = true;
         Static.mediaInputs.value.push(previewObj);
+
         let numItem = Static.mediaInputs.value.length - 1;
 
         let nameFile = "file.png"
@@ -91,15 +95,91 @@ const start = function (data, ID) {
             if (!this.response) {
                 return
             }
+
             let response = JSON.parse(this.response);
-            // debugger
+
             Static.mediaInputs.value[numItem] = {
                 aspect: Static.mediaInputs.selectAspect,
                 type: response.mimetype.split("/")[0],
                 name: response.name
             }
+            if (Static.mediaInputs.value.length == 1) {
+                Static.mediaInputs.value[0].activePreview = true
+            }
             Static.isValid = true;
-            console.log('=af134a=', response)
+            // console.log('=af134a=', Static, response)
+
+            initReload();
+        }
+        xhr.upload.onprogress = async function (e) {
+            let contentLength;
+            if (e.lengthComputable) {
+                contentLength = e.total;
+            } else {
+                contentLength = parseInt(
+                    e.target.getResponseHeader(
+                        "x-decompressed-content-length"
+                    ),
+                    10
+                );
+            }
+            // console.log('=b1106c=', Static.mediaInputs.value.length, Static.mediaInputs.value.filter((item) => {
+            //     return item.activePreview
+            // }).length)
+
+            if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
+                Static.mediaInputs.value.splice(numItem, 1);
+                initReload()
+                return
+            }
+            Static.mediaInputs.value[numItem].upload = e.loaded
+            Static.mediaInputs.value[numItem].size = contentLength;
+            initReload();
+        }
+
+        xhr.send(formData)
+    };
+
+    const loadAudio = async function (file, type, xhr) {
+        let blob = new Blob([file], { type: 'audio/ogg' });
+        let previewObj = {
+            src: URL.createObjectURL(blob),
+            type: "audio",
+            upload: 0,
+            size: 0
+        }
+        Static.mediaInputs.show = true;
+        Static.mediaInputs.value.push(previewObj);
+        let numItem = Static.mediaInputs.value.length - 1
+
+        let fileAudio = file[0];
+        let nameFile = "file.mp3"
+        if (fileAudio.name) {
+            nameFile = fileAudio.name
+        }
+        const formData = new FormData()
+        formData.append('media', fileAudio, nameFile);
+
+        xhr = new XMLHttpRequest()
+        xhr.open('POST', `/upload/${type}/`)
+        xhr.onload = async function () {
+            Static.mediaInputs.show = true;
+            if (!this.response) {
+                return
+            }
+
+            let response = JSON.parse(this.response);
+
+            Static.mediaInputs.value[numItem] = {
+                aspect: Static.mediaInputs.selectAspect,
+                type: response.mimetype.split("/")[0],
+                name: response.name
+            }
+            if (Static.mediaInputs.value.length == 1) {
+                Static.mediaInputs.value[0].activePreview = true
+            }
+            Static.isValid = true;
+            // console.log('=af134a=', Static, response)
 
             initReload();
         }
@@ -130,6 +210,7 @@ const start = function (data, ID) {
     };
 
     const sendPhoto = async function (e, crooper, index) {
+        e.preventDefault();
         e.stopPropagation();
 
         if (!crooper) {
@@ -202,12 +283,61 @@ const start = function (data, ID) {
         if (Static.message.el.value.trim().length) {
             text = Static.message.el.value.trim()
         }
-        // debugger
         if (Static.mediaInputs.value.length != 0) {
             Static.mediaInputs.value.forEach(async (file) => {
-                if (file.type == 'audio') {
-                    let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
-                } else if (file.type == 'image' || file.type == 'video') {
+                // if (file.type == 'audio' && Static.mediaInputs.value.length == 1) {
+                //     let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
+                //     console.log('=012098= response audio =', response)
+                //     if (Static.mediaInputs.value == 1) {
+                //         // debugger
+                //         if (response.status === "ok") {
+                //             Static.message.el.value = ""
+                //             Static.message.value = ""
+                //             if (Static.message.adaptive) {
+                //                 Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
+                //             }
+                //             if (response && response.list_records && response.list_records[0]) {
+                //                 let newRes = response.list_records[0]
+
+                //                 if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
+                //                     Static.messageList.list_records[0].message.unshift(newRes)
+                //                 } else {
+                //                     Static.messageList.list_records[0].message = [newRes]
+                //                 }
+                //                 // console.log('=46ae17 Static.chatsList=', Static.chatsList)
+                //                 // console.log('=46ae17 Static.messageList=', Static.messageList)
+                //                 // debugger
+                //                 if (Static.chatsList && Static.chatsList.list_records) {
+                //                     Static.chatsList.list_records.map((item) => {
+                //                         let tmp = item.users.filter(item => item._id == Static.activeUser._id)
+                //                         if (tmp.length) {
+                //                             item.message[0] = newRes
+                //                         }
+                //                     })
+                //                 }
+                //                 // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
+                //                 //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                //                 // })
+                //                 // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
+
+                //                 let i = Static.chatsList.list_records.findIndex(chat => {
+                //                     return chat.message[0]._id == response.list_records[0]._id;
+                //                 });
+                //                 // console.log('=1def2b = i =', i)
+
+                //                 Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
+
+                //                 // console.log('=5dfe89= new = ', Static.chatsList.list_records)
+                //                 Static.mediaInputs.value = [];
+                //                 initReload()
+                //             }
+                //         } else {
+                //             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
+                //         }
+                //         return
+                //     }
+                // } else 
+                if (file.type == 'image' || file.type == 'video' || file.type == 'audio') {
                     media.push(file)
                 }
             })
@@ -215,9 +345,9 @@ const start = function (data, ID) {
         // let data = { value: { users: Static.activeUser._id, message: { text } } }
         // let response = await api({ type: "set", action: "setUserChats", data: data })
         // if (media.length > 0) {
-        let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
-        // console.log('=6befba=', response)
         // debugger
+        let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
+        console.log('=6befba=', response)
         if (response.status === "ok") {
             Static.message.el.value = ""
             Static.message.value = ""
@@ -263,6 +393,48 @@ const start = function (data, ID) {
             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
         }
         // }
+    }
+
+    // Конвертирование времени из секунд в дни : часы : минуты : секунды
+    const convertToTime = function (secs) {
+        let hh, mmt, mm, ss, dd
+
+        secs = parseInt(secs);
+        hh = secs / 3600;
+        hh = parseInt(hh);
+        mmt = secs - (hh * 3600);
+        mm = mmt / 60;
+        mm = parseInt(mm);
+        ss = mmt - (mm * 60);
+
+        if (hh > 23) {
+            dd = hh / 24;
+            dd = parseInt(dd);
+            hh = hh - (dd * 24);
+        } else {
+            dd = 0;
+        }
+
+        if (ss < 10) {
+            ss = "0" + ss;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
+        if (hh < 10) {
+            hh = "0" + hh;
+        }
+        if (dd == 0) {
+            return (hh + ":" + mm + ":" + ss);
+        }
+        else {
+            if (dd > 1) {
+                return (dd + " day " + hh + ":" + mm + ":" + ss);
+            }
+            else {
+                return (dd + " day " + hh + ":" + mm + ":" + ss);
+            }
+        }
     }
 
     init(
@@ -469,17 +641,17 @@ const start = function (data, ID) {
                                                                 }
                                                             }}
                                                             {() => {
-                                                                if(lastMessage.text) {
+                                                                if (lastMessage.text) {
                                                                     return (
                                                                         <span>{lastMessage.text}</span>
                                                                     )
-                                                                } else if(lastMessage.media.length) {
+                                                                } else if (lastMessage.media && lastMessage.media.length) {
                                                                     return (
                                                                         <div class="messages_media">
                                                                             {() => {
-                                                                                if(
-                                                                                    !lastMessage.text && lastMessage.media.length 
-                                                                                    && (lastMessage.media[0].type == "audio" || lastMessage.media[0].type == "video" || lastMessage.media[0].type == "image") 
+                                                                                if (
+                                                                                    !lastMessage.text && lastMessage.media.length
+                                                                                    && (lastMessage.media[0].type == "audio" || lastMessage.media[0].type == "video" || lastMessage.media[0].type == "image")
                                                                                     && lastMessage.author == Variable.myInfo._id
                                                                                 ) {
                                                                                     return (
@@ -492,21 +664,21 @@ const start = function (data, ID) {
                                                                                     class={iconStatus.name == "read_message_icon" ? "messages_media_content_views" : null}
                                                                                     src={svg[`icon/${lastMessage.media[0].type == "audio" ? "microphone" :
                                                                                         lastMessage.media[0].type == "video" ?
-                                                                                        "video_camera" :
-                                                                                        // lastMessage.media[0].type == "image" ?
-                                                                                        "photocamera" }`]}
+                                                                                            "video_camera" :
+                                                                                            // lastMessage.media[0].type == "image" ?
+                                                                                            "photocamera"}`]}
                                                                                     width="16"
                                                                                     height="16"
                                                                                 />
                                                                                 <span>
                                                                                     {
                                                                                         lastMessage.media[0].type == "audio" ?
-                                                                                        Variable.lang.text.lastChatAudio :
-                                                                                        lastMessage.media[0].type == "video" ?
-                                                                                        Variable.lang.text.lastChatVideo :
-                                                                                        lastMessage.media[0].type == "image" ?
-                                                                                        Variable.lang.text.lastChatImage :
-                                                                                        null
+                                                                                            Variable.lang.text.lastChatAudio :
+                                                                                            lastMessage.media[0].type == "video" ?
+                                                                                                Variable.lang.text.lastChatVideo :
+                                                                                                lastMessage.media[0].type == "image" ?
+                                                                                                    Variable.lang.text.lastChatImage :
+                                                                                                    null
                                                                                     }
                                                                                 </span>
                                                                             </span>
@@ -514,7 +686,7 @@ const start = function (data, ID) {
                                                                     )
                                                                 }
                                                             }}
-                                                            
+
                                                         </div>
                                                         <div class="messages_list_item_info-2">
                                                             {lastMessage.author == Variable.myInfo._id
@@ -952,22 +1124,131 @@ const start = function (data, ID) {
                                         {
                                             Static.mediaInputs.show && Static.mediaInputs.value.length
                                                 ?
-                                                <div class="create_post_chapter createPostImage">
-                                                    {
-                                                        Static.mediaInputs.value.map((item, index) => {
-                                                            if (item.type != "audio") {
+                                                <div class="create_post_chapter createPostImage c-loadpicture">
+                                                    <div
+                                                        class="c-loadpicture__delete"
+                                                        title="Удалить все медиа"
+                                                        onclick={(e) => {
+                                                            console.log('=6f2b56= Static = ', Static)
+                                                            Static.mediaInputs.show = false;
+                                                            Static.mediaInputs.value = [];
+                                                            Static.message.el.value = ""
+                                                            Static.message.value = ""
+                                                            Static.isValid = false
+                                                            initReload();
+                                                        }}
+                                                    >
+                                                        <img src={svg["delete_icon"]} />
+                                                    </div>
+                                                    {() => {
+                                                        let index;
+                                                        let activePrev = Static.mediaInputs.value.filter((item, i) => {
+                                                            index = i
+                                                            return item.activePreview
+                                                        });
+
+                                                        console.log('=0cffd5= activePreview.length = ', activePrev.length)
+
+                                                        if (activePrev.length) {
+                                                            console.log('=83d5a7= activePrev[0] =', activePrev[0])
+                                                            if (activePrev[0].type == "image") {
                                                                 return (
-                                                                    <MediaPreview
-                                                                        item={item}
-                                                                        index={index}
-                                                                        type="chat"
+                                                                    <div class="c-loadpicture__preview">
+                                                                        <img
+                                                                            class="c-loadpicture__img"
+                                                                            src={
+                                                                                activePrev.length ?
+                                                                                    `/assets/upload/chat/${activePrev[0].name}`
+                                                                                    : null
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                )
+                                                            } else if (activePrev[0].type == "video") {
+                                                                return (
+                                                                    <VideoPlayer
+                                                                        className="c-loadpicture__preview"
                                                                         Static={Static}
-                                                                        sendPhotoChat={(cropper) => sendPhoto(e, cropper, index)}
+                                                                        item={activePrev[0]}
+                                                                        path={`/assets/upload/chat/`}
                                                                     />
-                                                                );
+                                                                )
+                                                            } else if (activePrev[0].type == "audio") {
+                                                                return (
+                                                                    <div class="c-loadpicture__preview">
+                                                                        <div class="c-loadpicture__img">
+                                                                            <img src={svg["icon/file"]} />
+                                                                            <h5 class="c-loadpicture__text">{Variable.lang.h.previewNotAvailable}</h5>
+                                                                            <span class="c-loadpicture__format">({activePrev[0].name.split(".")[1]})</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    // <div class="c-loadpicture__preview">
+                                                                    //     <AudioPlayerCopy
+                                                                    //         item={activePrev[0]}
+                                                                    //         index={index}
+                                                                    //         path={`/assets/upload/chat/`}
+                                                                    //         el={el[index] = Variable.setRef()}
+                                                                    //     />
+                                                                    // </div>
+                                                                )
                                                             }
-                                                        })
-                                                    }
+                                                        } else {
+                                                            return (
+                                                                <div class="c-loadpicture__preview">
+                                                                    <img class="c-loadpicture__img" src={svg["loader_line"]} width="30" height="30" />
+                                                                </div>
+                                                            )
+                                                        }
+
+                                                    }}
+                                                    <div class="c-loadpicture__miniatures">
+                                                        {
+                                                            Static.mediaInputs.value.map((item, index) => {
+                                                                console.log('=abffb6= item = ', item)
+                                                                if (item.type != "audio") {
+                                                                    return (
+                                                                        <MediaPreview
+                                                                            item={item}
+                                                                            index={index}
+                                                                            type="chat"
+                                                                            Static={Static}
+                                                                            // sendPhotoChat={(cropper) => sendPhoto(e, cropper, index)}
+                                                                            toggleActive={(e) => {
+                                                                                e.preventDefault()
+                                                                                e.stopPropagation()
+                                                                                Static.mediaInputs.value.map((item) => {
+                                                                                    item.activePreview = false;
+                                                                                })
+                                                                                item.activePreview = true;
+                                                                                console.log('=df8f54= Static.mediaInputs.value = ', Static.mediaInputs.value)
+                                                                                initReload()
+                                                                            }}
+                                                                        />
+                                                                    );
+                                                                } else {
+                                                                    return (
+                                                                        <MediaPreview
+                                                                            item={item}
+                                                                            index={index}
+                                                                            type="chat"
+                                                                            Static={Static}
+                                                                            el={el}
+                                                                            toggleActive={(e) => {
+                                                                                e.preventDefault()
+                                                                                e.stopPropagation()
+                                                                                Static.mediaInputs.value.map((item) => {
+                                                                                    item.activePreview = false;
+                                                                                })
+                                                                                item.activePreview = true;
+                                                                                console.log('=df8f54= Static.mediaInputs.value = ', Static.mediaInputs.value)
+                                                                                initReload()
+                                                                            }}
+                                                                        />
+                                                                    )
+                                                                }
+                                                            })
+                                                        }
+                                                    </div>
                                                 </div>
                                                 :
                                                 null
@@ -979,7 +1260,12 @@ const start = function (data, ID) {
                                                         return;
                                                     }
                                                     console.log('=ca274b=', this.files)
-                                                    loadPhoto(this.files, "chat");
+                                                    if (this.files[0].type.split("/")[0] == "image" || this.files[0].type.split("/")[0] == "video") {
+                                                        loadPhoto(this.files, "chat");
+                                                    } else if (this.files[0].type.split("/")[0] == "audio") {
+                                                        loadAudio(this.files, "chat")
+                                                    }
+
 
                                                     // fn.modals.ModalCropImage({
                                                     //     file: this.files[0],
@@ -1017,6 +1303,17 @@ const start = function (data, ID) {
 
                                                         if (!e.target.dataset.timing) {
                                                             e.target.dataset.timing = Date.now()
+
+                                                            // debugger
+                                                            let timeoutID = setInterval(function () {
+                                                                let diff = Date.now() - e.target.dataset.timing
+                                                                let secs = Math.round(diff / 1000)
+                                                                let res = convertToTime(secs)
+                                                                // debugger
+                                                                // console.log('=b62baa=', res, e.target)
+                                                                e.target.innerHTML = `<span class="messages_timer">${res}</span>`
+                                                                initReload()
+                                                            }, 1000)
 
                                                             await navigator.mediaDevices.getUserMedia({ audio: true })
                                                                 .then(stream => {
@@ -1106,7 +1403,11 @@ const start = function (data, ID) {
                                                                         audioChunks = [];
                                                                         var track = stream.getTracks()[0]
                                                                         track.stop()
-                                                                        e.target.hasAttribute("data-timing") ? e.target.removeAttribute("data-timing") : null
+                                                                        if (e.target.hasAttribute("data-timing")) {
+                                                                            e.target.removeAttribute("data-timing")
+                                                                            e.target.innerHTML = '';
+                                                                        }
+                                                                        clearTimeout(timeoutID);
                                                                     })
                                                                     Static.mediaRecorder.start();
                                                                     console.log("voicelineStart");
@@ -1135,78 +1436,7 @@ const start = function (data, ID) {
                                                 <ButtonSubmit
                                                     text={<img class="c-comments__icon" src={svg["message_send"]} />}
                                                     className="c-comments__send button-container-preview"
-                                                    onclick={ () => { submitMessage(); }
-                                                    //     async (tmp, el) => {
-                                                    //     if (!Static.message.el.value.trim().length && Static.mediaInputs.value.length == 0) {
-                                                    //         return
-                                                    //     }
-                                                    //     let text, media = [];
-                                                    //     if (Static.message.el.value.trim().length) {
-                                                    //         text = Static.message.el.value.trim()
-                                                    //     }
-                                                    //     // debugger
-                                                    //     if (Static.mediaInputs.value.length != 0) {
-                                                    //         Static.mediaInputs.value.forEach(async (file) => {
-                                                    //             if (file.type == 'audio') {
-                                                    //                 let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media: file })
-                                                    //             } else if (file.type == 'image' || file.type == 'video') {
-                                                    //                 media.push(file)
-                                                    //             }
-                                                    //         })
-                                                    //     }
-                                                    //     // let data = { value: { users: Static.activeUser._id, message: { text } } }
-                                                    //     // let response = await api({ type: "set", action: "setUserChats", data: data })
-                                                    //     // if (media.length > 0) {
-                                                    //     let response = await fn.restApi.setUserChats.sendMessage({ users: Static.activeUser._id, text, media })
-                                                    //     // console.log('=6befba=', response)
-                                                    //     // debugger
-                                                    //     if (response.status === "ok") {
-                                                    //         Static.message.el.value = ""
-                                                    //         Static.message.value = ""
-                                                    //         if (Static.message.adaptive) {
-                                                    //             Static.message.el.style.height = (Static.message.el.dataset.maxHeight / Static.message.adaptive) + 'px';
-                                                    //         }
-                                                    //         if (response && response.list_records && response.list_records[0]) {
-                                                    //             let newRes = response.list_records[0]
-
-                                                    //             if (Static.messageList && Static.messageList.list_records[0] && Static.messageList.list_records[0].message) {
-                                                    //                 Static.messageList.list_records[0].message.unshift(newRes)
-                                                    //             } else {
-                                                    //                 Static.messageList.list_records[0].message = [newRes]
-                                                    //             }
-                                                    //             // console.log('=46ae17 Static.chatsList=', Static.chatsList)
-                                                    //             // console.log('=46ae17 Static.messageList=', Static.messageList)
-                                                    //             // debugger
-                                                    //             if (Static.chatsList && Static.chatsList.list_records) {
-                                                    //                 Static.chatsList.list_records.map((item) => {
-                                                    //                     let tmp = item.users.filter(item => item._id == Static.activeUser._id)
-                                                    //                     if (tmp.length) {
-                                                    //                         item.message[0] = newRes
-                                                    //                     }
-                                                    //                 })
-                                                    //             }
-                                                    //             // Static.chatsList.list_records = [...Static.chatsList.list_records].sort((a, b) => {
-                                                    //             //     new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
-                                                    //             // })
-                                                    //             // console.log('=46ae172 Static.chatsList=', Static.chatsList.list_records)
-
-                                                    //             let i = Static.chatsList.list_records.findIndex(chat => {
-                                                    //                 return chat.message[0]._id == response.list_records[0]._id;
-                                                    //             });
-                                                    //             // console.log('=1def2b = i =', i)
-
-                                                    //             Static.chatsList.list_records.splice(0, 0, Static.chatsList.list_records.splice(i, 1)[0]);
-
-                                                    //             // console.log('=5dfe89= new = ', Static.chatsList.list_records)
-                                                    //             Static.mediaInputs.value = [];
-                                                    //             initReload()
-                                                    //         }
-                                                    //     } else {
-                                                    //         Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
-                                                    //     }
-                                                    //     // }
-                                                    // }
-                                                }
+                                                    onclick={() => { submitMessage(); }}
                                                 />
                                             }
                                         </div>

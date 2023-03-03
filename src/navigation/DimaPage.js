@@ -18,10 +18,12 @@ const listItem = [
   {
     tab: "tab-1",
     name: "Статистика",
+    hidden: false,
   },
   {
     tab: "tab-2",
     name: "Редактирование страниц",
+    hidden: true,
   },
 ];
 

@@ -79,7 +79,14 @@ const BlockExchange = async function ({ Static, limit = 21 }) {
                   return;
                 }
               });
-              return <img src={`/assets/icons/coins/${iconName}.svg`}></img>;
+              return (
+                <div class="crypto_coin_container">
+                  <img
+                    src={`/assets/icons/coins/${iconName}.svg`}
+                    class="crypto_coin_icons"
+                  ></img>
+                </div>
+              );
             })}
           </div>
         ) : null}

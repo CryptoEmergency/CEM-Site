@@ -7,7 +7,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from '@assets/svg/index.js';
-
+import Elements from '@src/elements/export.js';
 
 // Добавление новой заметки.
 // Подсмотрел другую интересную логику по созданию новой заметки. Ее нельзя создать, пока последняя созданная является пустой.
@@ -68,72 +68,88 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesList)
         },
         fn: () => {
+            // console.log(Static.activeNotes)
+
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="notes">
                         <div class="notes_container">
                             <div class="notes-content">
-                                <div class={["notes-list", Static.activeNotes ? "dead" : null]}>
-                                    <button class="notes-button"
-                                        onclick={() => {
-                                            addNew(Static)
-                                        }}>
-                                        <span>Новая заметка</span>
-                                    </button>
+                                <Elements.BlockNotesList
+                                    class={Static.activeNotes ? "dead" : null}
+                                    onClick_add={() => {
+                                        addNew(Static)
+                                    }}
+                                    text_add={Variable.lang.span.newNotes}>
                                     {Static.notesList.list_records.map(function (item) {
                                         return (
-                                            <div
-                                                class={["notes-item",
-                                                    Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null,
-                                                    item.media.length > 0 ? "notes-item_preview-img" : null
-                                                ]}
+                                            <Elements.NotesList
+                                                class={[Static.activeNotes && Static.activeNotes._id == item._id ? "notes-item_active" : null, item.media && item.media.length ? "notes-item_preview-img" : null]}
                                                 onclick={() => {
                                                     Static.activeNotes = item
                                                     initReload()
-                                                }}>
-                                                <div class="notes-item-section">
-                                                    <h3>{
-                                                        Static.activeNotes && Static.activeNotes._id == item._id
-                                                            ?
-                                                            Static.activeNotes.title != "" ? Static.activeNotes.title : "Без названия"
-                                                            :
-                                                            item.title != "" ? item.title : "Без названия"
-                                                    }</h3>
-                                                    <div class="notes-item_block">
-                                                        <span>{fn.getDateFormat(item.showDate)}</span>
-                                                        <p>{item.text}</p>
-                                                    </div>
-                                                </div>
-                                                {
-                                                    () => {
-                                                        if (!item.media[0]) {
-                                                            null
-                                                        } else {
-                                                            return (
-                                                                item.media.map(function (item, index) {
-                                                                    if (index == 0) {
-                                                                        return (
-                                                                            <div class="notes-item_img">
-                                                                                <img
-                                                                                    src={`/assets/upload/gallery/${item.name}`}
-                                                                                    width="50"
-                                                                                    height="50"
-                                                                                />
-                                                                            </div>
-                                                                        )
-                                                                    }
-
-                                                                })
-                                                            )
-
-                                                        }
-                                                    }
-                                                }
-                                            </div>
+                                                }}
+                                                item={item}
+                                            />
                                         )
                                     })}
-                                </div>
-                                {
+                                </Elements.BlockNotesList>
+
+                                <Elements.BlockNotes
+                                    class={[Static.activeNotes ? "active" : null]}
+                                    item={Static.activeNotes}
+                                    Static={Static}
+                                    onClick_add={() => {
+                                        Static.elInputImg.click()
+                                    }}
+                                    onchange={() => {
+                                        editNotes(Static)
+                                    }}
+                                    oninput_addTitle={function () {
+                                        Static.activeNotes.title = this.innerText
+                                        editNotes(Static)
+                                    }}
+                                    oninput_addText={function () {
+                                        Static.activeNotes.text = this.innerText
+                                        editNotes(Static)
+                                    }}
+                                >
+                                    <img class="notes-content-close" src={svg["gradient_arrow"]}
+                                        onclick={() => {
+                                            Static.activeNotes = null
+                                            initReload()
+                                        }} />
+                                    <div class="notes-content-img">
+                                        {
+                                            (Static.activeNotes && Static.activeNotes.media || []).map(function (item, index) {
+                                                return (
+                                                    <Elements.image.imgPreview
+                                                        Static={Static}
+                                                        item={item}
+                                                    />
+                                                )
+                                            })
+                                        }
+                                    </div>
+
+                                    {/* <div class={["notes-input-placeholder", "notes-description"]}
+                                        contenteditable="plaintext-only"
+                                        // data-text="testset"
+                                        innerText={Static.test}
+                                        oninput={function () {
+                                            console.log('=a853cf=', this.innerText)
+                                            let position = getCursorPosition(this)
+                                            console.log('=86ceed= position', position)
+                                            this.innerHTML = this.innerHTML.toUpperCase();
+                                            setCursorPosition(this, position)
+                                            // Static.testt = this.innerText
+                                            // initReload()
+                                        }}
+                                    >
+                                    </div> */}
+                                </Elements.BlockNotes>
+
+                                {/* {
                                     () => {
                                         if (!Static.activeNotes) {
                                             return (
@@ -281,7 +297,7 @@ const start = function (data, ID) {
                                             )
                                         }
                                     }
-                                }
+                                } */}
                             </div>
                         </div>
                     </div>

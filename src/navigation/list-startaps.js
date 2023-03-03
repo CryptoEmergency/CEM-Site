@@ -8,6 +8,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
+import Elements from '@src/elements/export.js';
 
 const showListStartaps = function (listStartaps) {
     return listStartaps.map((item) => {
@@ -39,21 +40,21 @@ const start = function (data, ID) {
         ID,
         fnLoad: async () => {
             Static.recordsStartap = await fn.restApi.getStartaps({ filter: {} })
-            console.log('=fbfa89=', Static.recordsStartap)
         },
 
         fn: () => {
             return (
-                <div class="c-main_body">
+                <Elements.page.MainContainer>
                     <div class="startap-inner">
                         <div class="list-startaps">
                             {showListStartaps(Static.recordsStartap.list_records)}
                         </div>
                     </div>
-                </div>
+                </Elements.page.MainContainer>
             )
         }
     })
+    return
 }
 
 export default start;

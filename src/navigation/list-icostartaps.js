@@ -3,130 +3,117 @@ import {
   jsxFrag,
   load,
   initReload,
-  Variable
+  Variable,
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
+import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
+import Elements from "@src/elements/export.js";
 
-let dateDrop, showFilters = false
-let listStatus = {}
-const listCategories = [
-  {
-    name: "ICO",
-  },
-  {
-    name: "IDO",
-  },
-  {
-    name: "IEO",
-  },
-  {
-    name: "IGO",
-  },
-];
+let dateDrop,
+  showFilters = false;
+let listStatus = {};
+let listCategories;
 
 const showBtn = function (Static) {
   return listCategories.map((item) => {
     return (
       <div
-        class={["tag_button", "tag_button-ico", Static.filtersSearch.categoryActive == item.name ? "tag_button_active" : null]}
+        class={[
+          "tag_button",
+          "tag_button-ico",
+          Static.filtersSearch.categoryActive == item.name
+            ? "tag_button_active"
+            : null,
+        ]}
         onclick={async () => {
-          Static.filtersSearch.categoryActive = item.name
-          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-          initReload()
-        }}>
+          Static.filtersSearch.categoryActive = item.name;
+          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static));
+          initReload();
+        }}
+      >
         <span>{item.name}</span>
       </div>
-    )
-  })
-}
-
-const showListIco = function (listIcoStartaps) {
-  return listIcoStartaps.map((item) => {
-    return (
-      <div class="ico-list_item-wrap">
-        <div class="ico-list_item"
-          onclick={() => {
-            fn.siteLinkModal("/list-icostartaps/show/" + item._id, { title: item.title, item })
-          }}>
-
-          <div class="item-img">
-            <img class="item-img_el" src={`/assets/upload/worldPress/${item.icon}`} alt="Startap icon" />
-          </div>
-          <div class="item-info">
-            <h5 class="item-title">{item.title}</h5>
-            <div class="item-desc_wrap">
-              <p class="item-desc">{item.description}</p>
-            </div>
-            <div class="item-sum_wrap">
-              <p class="item-sum">
-                <span class="item-sum_obj">${item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0}</span> / ${item.targetMoney} <span class="item-sum_procent">{Math.round(((item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0) * 100) / item.targetMoney)}%</span>
-              </p>
-            </div>
-          </div>
-          <span class="item-date item-date_start">{fn.getDateFormat(item.startDate, "time")}</span>
-          <span class="item-date item-date_end">{fn.getDateFormat(item.endDate, "time")}</span>
-
-        </div>
-      </div>
-    )
-  })
-}
+    );
+  });
+};
 
 const showListCalendar = function (Static) {
   return listStatus.map((item) => {
     return (
       <div
-        class={["ico-tabs", Static.filtersSearch.textCalendar == item.name ? "ico_tabs-active" : null]}
+        class={[
+          "ico-tabs",
+          Static.filtersSearch.textCalendar == item.name
+            ? "ico_tabs-active"
+            : null,
+        ]}
         onclick={async () => {
-          Static.filtersSearch.textCalendar = item.name
-          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-          initReload()
+          Static.filtersSearch.textCalendar = item.name;
+          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static));
+          initReload();
         }}
       >
         <span>{item.name}</span>
       </div>
-    )
-  })
-}
+    );
+  });
+};
 
 const makeFiltersApi = function (Static, onlySearch = false) {
-  let filter = {}
-  let sort = { _id: -1 }
+  let filter = {};
+  let sort = { _id: -1 };
 
   if (onlySearch) {
-    filter = { $text: { $search: Static.filtersSearch.textSearch } }
-    return { filter, sort }
+    filter = { $text: { $search: Static.filtersSearch.textSearch } };
+    return { filter, sort };
   }
-  Static.filtersSearch.textSearch = ""
+  Static.filtersSearch.textSearch = "";
   if (Static.filtersSearch.sortDate) {
-    sort._id = 1
+    sort._id = 1;
   }
-
-  filter.category = Static.filtersSearch.categoryActive
+  if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
+    filter.category = Static.filtersSearch.categoryActive;
+  }
   if (Static.filtersSearch.textCalendar == Variable.lang.select.active) {
-    filter["$and"] = []
-    filter["$and"].push({ startDate: { $lte: new Date() } })
-    filter["$and"].push({ endDate: { $gte: new Date() } })
-  } else if (Static.filtersSearch.textCalendar == Variable.lang.select.upcoming) {
-    filter["$and"] = []
-    filter["$and"].push({ startDate: { $gte: new Date() } })
+    filter["$and"] = [];
+    filter["$and"].push({ startDate: { $lte: new Date() } });
+    filter["$and"].push({ endDate: { $gte: new Date() } });
+  } else if (
+    Static.filtersSearch.textCalendar == Variable.lang.select.upcoming
+  ) {
+    filter["$and"] = [];
+    filter["$and"].push({ startDate: { $gte: new Date() } });
   } else if (Static.filtersSearch.textCalendar == Variable.lang.select.ended) {
-    filter["$and"] = []
-    filter["$and"].push({ endDate: { $lt: new Date() } })
+    filter["$and"] = [];
+    filter["$and"].push({ endDate: { $lt: new Date() } });
   }
 
   if (Static.filtersSearch.filterCheck) {
-    filter.checked = true
+    filter.checked = true;
   }
 
-  return { filter, sort, limit: 10 }
-}
-
+  return { filter, sort, limit: 10 };
+};
 
 const start = function (data, ID) {
-
+  listCategories = [
+    {
+      name: Variable.lang.categoryName.all,
+    },
+    {
+      name: "ICO",
+    },
+    {
+      name: "IDO",
+    },
+    {
+      name: "IEO",
+    },
+    {
+      name: "IGO",
+    },
+  ];
   listStatus = [
     {
       name: Variable.lang.select.active,
@@ -137,82 +124,104 @@ const start = function (data, ID) {
     {
       name: Variable.lang.select.ended,
     },
-  ]
+  ];
 
-  let [Static] = fn.GetParams({ data, ID })
-  Static.timerChange = null
+  let [Static] = fn.GetParams({ data, ID });
+  Static.timerChange = null;
   Static.filtersSearch = {
     textSearch: null,
-    categoryActive: "ICO",
+    categoryActive: Variable.lang.categoryName.all,
     textCalendar: Variable.lang.select.active,
     sortDate: false,
-    filterCheck: false
-  }
+    filterCheck: false,
+  };
 
   load({
     ID,
     fnLoad: async () => {
-      Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-      console.log('=bacf0f=', Static.recordsIco)
+      Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static));
+      console.log("=2a5a4f=", Static.recordsIco);
     },
     fn: () => {
       return (
-        <div class="book_container c-main__body ico-wrap">
-          <img src={svg["background/left"]} class={["ico-back", "ico-back-left"]} />
-          <img src={svg["background/right"]} class={["ico-back", "ico-back-right"]} />
-          <div class="book-inner ico-inner">
-            <div class="tags tags-ico">
-              {showBtn(Static)}
+        <Elements.page.MainContainer>
+          {/* <img src={svg["background/left"]} class={["ico-back", "ico-back-left"]} /> */}
+          {/* <img src={svg["background/right"]} class={["ico-back", "ico-back-right"]} /> */}
+
+          <div class="tags tags-ico">{showBtn(Static)}</div>
+          <Elements.page.Container class="pt--70">
+            <div class="list-ico_wrap">
+              <div class="list-ico_tabs">{showListCalendar(Static)}</div>
+              <Elements.cards.Horizon
+                records={Static.recordsIco.list_records}
+              />
             </div>
+          </Elements.page.Container>
+
+          {/*<div class="ico-inner">
+            <div class="tags tags-ico">{showBtn(Static)}</div>
             <div class="ico-list">
-              <div class="ico-filtes">
+               <div class="ico-filtes">
                 <div class="search-wrap">
                   <div class="ico-search">
                     <img src={svg.search_icon} class="ico-search_icon"></img>
-                    <input type="search" class="search" placeholder={Variable.lang.button.search}
+                    <input
+                      type="search"
+                      class="search"
+                      placeholder={Variable.lang.button.search}
                       value={Static.filtersSearch.textSearch}
                       oninput={function () {
-                        Static.filtersSearch.textSearch = this.value.trim()
+                        Static.filtersSearch.textSearch = this.value.trim();
                         if (Static.timerChange) {
                           clearTimeout(Static.timerChange);
                         }
                         Static.timerChange = setTimeout(async () => {
                           if (Static.filtersSearch.textSearch.length > 2) {
-                            Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static, true))
-                          } else if (Static.filtersSearch.textSearch.length == 0) {
-                            Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
+                            Static.recordsIco = await fn.restApi.getIco(
+                              makeFiltersApi(Static, true)
+                            );
+                          } else if (
+                            Static.filtersSearch.textSearch.length == 0
+                          ) {
+                            Static.recordsIco = await fn.restApi.getIco(
+                              makeFiltersApi(Static)
+                            );
                           }
-                          initReload()
+                          initReload();
                         }, 300);
-                      }}>
-                    </input>
+                      }}
+                    ></input>
                   </div>
                   <img
                     class="filter-search_icon"
                     src={svg.filter}
                     onclick={() => {
-                      showFilters = !showFilters
-                      initReload()
-                    }}></img>
+                      showFilters = !showFilters;
+                      initReload();
+                    }}
+                  ></img>
                 </div>
 
                 <div hidden={showFilters ? false : true}>
-                  <div class="filter-dropdowns" >
-
+                  <div class="filter-dropdowns">
                     <div class="filter-dropdown_date">
-
                       <span class="filter-name">{Variable.lang.span.sort}</span>
                       {
-
                         <div class="dropdown">
                           <div
                             class={["dropdown-title", "dropdown-title_date"]}
                             onclick={() => {
-                              dateDrop = !dateDrop
-                              initReload()
-                            }}>
+                              dateDrop = !dateDrop;
+                              initReload();
+                            }}
+                          >
                             {Variable.lang.select.byDate}
-                            <span class={["dropdown-arrow", dateDrop ? "dropdown-checked" : null]}>
+                            <span
+                              class={[
+                                "dropdown-arrow",
+                                dateDrop ? "dropdown-checked" : null,
+                              ]}
+                            >
                               <img src={svg["arrow-select"]}></img>
                             </span>
                           </div>
@@ -221,66 +230,68 @@ const start = function (data, ID) {
                             hidden={dateDrop ? false : true}
                             class="dropdown-list"
                             onclick={() => {
-                              dateDrop = !dateDrop
-                              initReload()
+                              dateDrop = !dateDrop;
+                              initReload();
                             }}
                           >
-                            <li class="dropdown-list_el">{Variable.lang.select.byDate}</li>
+                            <li class="dropdown-list_el">
+                              {Variable.lang.select.byDate}
+                            </li>
                           </ul>
-
-
                         </div>
                       }
 
-
                       <img
-                        src={Static.filtersSearch.sortDate ? svg["filter_arrow_top"] : svg["filter_arrow_bottom"]}
+                        src={
+                          Static.filtersSearch.sortDate
+                            ? svg["filter_arrow_top"]
+                            : svg["filter_arrow_bottom"]
+                        }
                         class={["arrow-sort"]}
                         onclick={async () => {
-                          Static.filtersSearch.sortDate = !Static.filtersSearch.sortDate
-                          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-                          initReload()
+                          Static.filtersSearch.sortDate =
+                            !Static.filtersSearch.sortDate;
+                          Static.recordsIco = await fn.restApi.getIco(
+                            makeFiltersApi(Static)
+                          );
+                          initReload();
                         }}
                       ></img>
-
                     </div>
 
                     <div class="filter-check">
                       <input
                         type="checkbox"
                         id="cryptoCheck"
-                        checked={Static.filtersSearch.filterCheck ? true : false}
+                        checked={
+                          Static.filtersSearch.filterCheck ? true : false
+                        }
                         class="custom-checkbox"
                         required="required"
                         onChange={async () => {
-                          Static.filtersSearch.filterCheck = !Static.filtersSearch.filterCheck
+                          Static.filtersSearch.filterCheck =
+                            !Static.filtersSearch.filterCheck;
 
-                          Static.recordsIco = await fn.restApi.getIco(makeFiltersApi(Static))
-                          initReload()
-                        }}>
-                      </input>
-                      <label for="cryptoCheck" class="filter-item">{Variable.lang.select.verified} Crypto Emergency</label>
+                          Static.recordsIco = await fn.restApi.getIco(
+                            makeFiltersApi(Static)
+                          );
+                          initReload();
+                        }}
+                      ></input>
+                      <label for="cryptoCheck" class="filter-item">
+                        {Variable.lang.select.verified} Crypto Emergency
+                      </label>
                     </div>
-
                   </div>
                 </div>
-              </div>
-
-              <div class="list-ico_wrap">
-                <div class="list-ico_tabs">
-                  {showListCalendar(Static)}
-                </div>
-                <div class="list-ico">
-                  {showListIco(Static.recordsIco.list_records)}
-                </div>
-              </div>
+              </div> 
 
             </div>
-          </div>
-        </div>
-      )
-    }
-  })
-}
+          </div>*/}
+        </Elements.page.MainContainer>
+      );
+    },
+  });
+};
 
 export default start;

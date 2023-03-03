@@ -5,7 +5,7 @@ import images from "@assets/images/index.js";
 import { AudioPlayerCopy } from "@component/element/index.js";
 import { fn } from '@src/functions/index.js';
 
-const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false }) {
+const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false, toggleActive = false }) {
   // console.log('=2f8e9a=', item, type)item.size
   // console.log("============on load",Static,"=======item",item)
   // console.log('=MediaPreview=', Static)
@@ -20,21 +20,41 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
       {
         item.type == "image"
           ?
-          <div class="create_post_photo_preview">
+          <div
+            class={[
+              "create_post_photo_preview",
+              item.activePreview ? "activePreview" : null
+            ]}
+          >
 
             <img
               class={"fullsize media"}
               src={
+                // type == "chat" ?
+                //   item.src !== undefined
+                //     ? "/assets/image/loader_line.gif"
+                //     : `/assets/upload/${type}/${item.name}`
+                // : item.src !== undefined
                 item.src !== undefined
                   ? item.src
                   : `/assets/upload/${type}/${item.name}`
               }
+              onclick={(e) => toggleActive ? toggleActive(e) : null}
             />
             {
               item.size !== undefined
                 ?
-                <div class="circle-wrap">
-                  <div class="circle">
+                <div class="circle-wrap" style={type == "chat" ? "width: 100%; height: 100%" : null}>
+                  {/* {
+                    type == "chat" ?
+                      <img src={svg["loader_line"]} width="30" height="30" />
+                      : null
+                  } */}
+
+                  <div
+                    class="circle"
+                    style={type == "chat" ? "display: none" : null}
+                  >
                     <div
                       class="mask full"
                       style={`transform: rotate( ${(360 / 200) *
@@ -89,7 +109,10 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                               if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
                                 Static.isValid = false;
                               }
+                            } else {
+                              Static.mediaInputs.value[0].activePreview = true
                             }
+                            console.log('=34795d= Static.mediaInputs.value = ', Static.mediaInputs.value)
                             initReload();
                           }
                         },
@@ -158,8 +181,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   ? <div
                     class="delete_post_media"
                     style="display: block;"
-                    onClick={() => {
-
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
                       Static.mediaInputs.value.splice(index, 1);
                       if (Static.mediaInputs.value.length == 0) {
                         Static.mediaInputs.selectAspect = null;
@@ -167,6 +191,8 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                         if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
                           Static.isValid = false;
                         }
+                      } else if (!Static.mediaInputs.value.filter((item) => { return item.activePreview })[0]) {
+                        Static.mediaInputs.value[0].activePreview = true;
                       }
                       initReload();
                     }}
@@ -177,6 +203,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 :
                 <div
                   class="stop_loading"
+                  style={type == "chat" ? "display: none" : null}
                   onclick={() => {
                     //    console.log(2)
                     Static.mediaInputs.value[index].upload =
@@ -200,7 +227,11 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
       {
         item.type == "video"
           ?
-          <div class="create_post_photo_preview 77">
+          <div class={[
+            "create_post_photo_preview 77",
+            item.activePreview ? "activePreview" : null
+          ]}
+            onclick={(e) => toggleActive ? toggleActive(e) : null}>
             {
               item.src !== undefined
                 ?
@@ -215,7 +246,10 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
               item.size !== undefined
                 ?
                 <div class="circle-wrap">
-                  <div class="circle">
+                  <div
+                    class="circle"
+                    style={type == "chat" ? "display: none" : null}
+                  >
                     <div
                       class="mask full"
                       style={`transform: rotate( ${(360 / 200) *
@@ -284,13 +318,17 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           e.stopPropagation();
                           e.preventDefault();
                           Static.mediaInputs.value.splice(index, 1);
-                          Static.originalImage.splice(index, 1);
+                          if (Static.originalImage) {
+                            Static.originalImage.splice(index, 1);
+                          }
                           if (Static.mediaInputs.value.length == 0) {
                             Static.mediaInputs.selectAspect = null;
                             Static.mediaInputs.show = false
                             if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
                               Static.isValid = false;
                             }
+                          } else if (!Static.mediaInputs.value.filter((item) => { return item.activePreview })[0]) {
+                            Static.mediaInputs.value[0].activePreview = true;
                           }
                           initReload();
                         }
@@ -321,6 +359,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 :
                 <div
                   class="stop_loading"
+                  style={type == "chat" ? "display: none" : null}
                   onclick={() => {
                     Static.mediaInputs.value[index].upload =
                       Static.mediaInputs.value[index].size;
@@ -339,24 +378,42 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
       {
         item.type == "audio"
           ?
-          <div class="create_post_photo_preview">
+          <div
+            class={[
+              "create_post_photo_preview",
+              item.activePreview ? "activePreview" : null
+            ]}
+          >
             {
-              item.src !== undefined
-                ?
-                <audio src={item.src}></audio>
+              type == "chat" ?
+                item.src == undefined ?
+                  <div
+                    class=""
+                    onclick={(e) => toggleActive ? toggleActive(e) : null}
+                  >
+                    <img class="fullsize media" src={svg["icon/music"]} />
+                  </div>
+                  : null
                 :
-                <AudioPlayerCopy
-                  item={item}
-                  index={index}
-                  path={`/assets/upload/${type}/`}
-                  el={el}
-                />
+                item.src !== undefined
+                  ?
+                  <audio src={item.src}></audio>
+                  :
+                  <AudioPlayerCopy
+                    item={item}
+                    index={index}
+                    path={`/assets/upload/${type}/`}
+                    el={el}
+                  />
             }
             {
               item.size !== undefined
                 ?
                 <div class="circle-wrap">
-                  <div class="circle">
+                  <div
+                    class="circle"
+                    style={type == "chat" ? "display: none" : null}
+                  >
                     <div
                       class="mask full"
                       style={`transform: rotate( ${(360 / 200) *
@@ -389,11 +446,19 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 <div
                   class="delete_post_media"
                   style="display: block;"
-                  onClick={() => {
-                    //  console.log(4)
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
                     Static.mediaInputs.value.splice(index, 1);
-                    if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
-                      Static.isValid = false;
+                    if (Static.mediaInputs.value.length == 0) {
+                      Static.mediaInputs.selectAspect = null;
+                      Static.mediaInputs.show = false
+                      // if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
+                      if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
+                        Static.isValid = false;
+                      }
+                    } else if (!Static.mediaInputs.value.filter((item) => { return item.activePreview })[0]) {
+                      Static.mediaInputs.value[0].activePreview = true;
                     }
                     initReload();
                   }}
@@ -403,6 +468,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 :
                 <div
                   class="stop_loading"
+                  style={type == "chat" ? "display: none" : null}
                   onclick={() => {
                     Static.mediaInputs.value[index].upload =
                       Static.mediaInputs.value[index].size;

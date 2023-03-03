@@ -1,7 +1,5 @@
 import { Variable, Data } from "@betarost/cemserver/cem.js";
 
-// const Static = {}
-
 const forExport = function ({ data, reload, ID = "mainBlock", actual = false, initData }) {
     let item = { _id: Variable.dataUrl.params }
 

@@ -1,22 +1,24 @@
 import {
   jsx,
   jsxFrag,
-  init
+  load
 } from "@betarost/cemserver/cem.js";
-// check
+
+import Elements from '@src/elements/export.js';
 import { BlockInfoPartners } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
-  init(
-    null,
-    () => {
+  load({
+    ID,
+    fn: () => {
       return (
-        <div class="c-main__body">
+        <Elements.page.MainContainer>
           <BlockInfoPartners />
-        </div>
+        </Elements.page.MainContainer>
       )
-    }, ID
-  )
+    }
+  })
+  return
 }
+
 export default start;
-// OK

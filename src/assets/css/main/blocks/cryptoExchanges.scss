@@ -9,6 +9,15 @@
         height: 30px;
         top: 30px;
         cursor: pointer;
+        @media (max-width: 750px){
+            height: 25px;
+        }
+    }
+
+    @media (max-width: 750px){
+        h4{
+            font-size: 18px;
+        }
     }
 }
 
@@ -112,7 +121,8 @@
 .list_trade_page {
 
     .crypto_exchanges-row {
-        grid-template-columns: 40px 297px 237px 237px 242px 110px;
+        // grid-template-columns: 40px 297px 237px 237px 242px 110px;
+        grid-template-columns: 40px 1fr 1fr 1fr 110px;
     }
 
     .crypto_exchanges-cell {
@@ -123,14 +133,14 @@
             margin-right: 20px;
         }
 
-        &:nth-child(5) {
+        &:nth-child(4) {
             img {
                 transform: translateX(-30%);
                 filter: hue-rotate(226deg) saturate(210%) brightness(0.7) contrast(170%);
             }
         }
 
-        &:nth-child(4) {
+        &:nth-child(3) {
             span {
                 color: $white;
             }
@@ -266,12 +276,12 @@
         font-size: 14px;
     }
 
-    .crypto_exchanges-row .crypto_exchanges-cell:nth-child(5) {
+    .crypto_exchanges-row .crypto_exchanges-cell:nth-child(4) {
         display: none;
     }
 
     .list_trade_page .crypto_exchanges-row {
-        grid-template-columns: 4.3% 32.2% 25.7% 25.7% 11.9%;
+        grid-template-columns: 40px 1fr 1fr 110px;
     }
 
     .crypto_exchanges {
@@ -325,30 +335,18 @@
 @media(max-width: 970px) {}
 
 @media(max-width: 750px) {
+    .statistics-preview{
+        padding: 0 20px;
+    }
+
+    .crypto_exchanges-row.tradeListLoad {
+        grid-template-columns: 40px 1fr 1fr 110px;
+    }
+
     .crypto_exchanges-row {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .crypto_exchanges-cell:nth-child(1) {
-        grid-row-start: 1;
-        grid-row-end: 2;
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
-
-    .crypto_exchanges-cell:nth-child(2) {
-        grid-row-start: 2;
-        grid-row-end: 3;
-        grid-column-start: 1;
-        grid-column-end: 2;
-    }
-
-    .crypto_exchanges-cell:nth-child(3) {
-        grid-row-start: 2;
-        grid-row-end: 3;
-        grid-column-start: 2;
-        grid-column-end: 3;
+        grid-template-columns: 4fr 1fr;
+        grid-template-rows: repeat(2, 1fr);
     }
 
     .crypto_exchanges-row:nth-child(1) {
@@ -356,11 +354,26 @@
     }
 
     .crypto_exchanges-row {
-        padding: 64px 0;
+        padding: 50px 0;
     }
 
     .statistics-preview {
         padding-top: 0;
+    }
+    .crypto_exchanges-cell div{
+        line-height: 45px;
+    }
+
+    .btn-wrap{
+        grid-row: 1/ span 2;
+        grid-column: 2 / span 2;
+    }
+
+    .btn-news-preview{
+        height: 40px;
+        &::after{
+            height: 40px;
+        }
     }
 }
 
@@ -377,6 +390,42 @@
         max-width: calc(100% - 40px);
         margin-left: 20px;
         margin-right: 20px;
+    }
+}
+
+
+
+@media(max-width: 595px){
+    .crypto_exchanges-row.tradeListLoad{
+        grid-template-columns: 40px 1fr 0.5fr;
+        grid-template-rows: repeat(2, 1fr);
+
+        .crypto_exchanges-cell:nth-child(3){
+            grid-column: 2;
+            grid-row: 2;
+        }
+        .crypto_exchanges_cell_button{
+            grid-row: 1 / span 2;
+            grid-column: 3 / span 3;
+        }
+    }
+    
+    .crypto_exchanges_percent_green{
+        padding-left: 0;
+        margin-right: 0;
+    }
+
+    .crypto_exchanges-row{
+        grid-template-columns: 3fr 1fr;
+    }
+    .crypto_coin_icons{
+        width: 28px;
+        height: 28px;
+    }
+    .btn-news-preview{
+        span{
+            font-size: 12px;
+        }
     }
 }
 
@@ -404,6 +453,12 @@
 @media(max-width: 464px) {
     .statistics-preview {
         padding: 0px 15px 0;
+    }
+}
+
+@media(max-width: 400px){
+    .crypto_exchanges-row{
+        grid-template-columns: 3fr 1.5fr;
     }
 }
 
@@ -590,12 +645,34 @@
     background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
 }
 
+// list checked coins
+
+
+
 // checked coins
 .checked-coins {
+    
     padding: 15px 40px;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
     // background: #313543;
     border-radius: 4px;
+
+    div{
+     display: flex;
+     flex-wrap: wrap;
+     align-items: center;   
+    }
+
+    .b-close{
+        margin-left: 25px;
+    }
+
+    @media (max-width: 1199px){
+        padding: 15px 30px;
+    }
+    @media (max-width: 750px){
+        padding: 10px 20px;
+    }
 }
