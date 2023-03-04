@@ -8,7 +8,7 @@ const mainHeader = async function () {
   load({
     ID: "mainHeader",
     fn: async () => {
-      if(Variable.Static.forumHeaderShow) {
+      if (Variable.Static.forumHeaderShow) {
         document.getElementById('mainHeader').classList.add("c-header--summerforum");
       } else {
         document.getElementById('mainHeader').classList.remove("c-header--summerforum");
@@ -88,19 +88,37 @@ const mainHeader = async function () {
                         </Link>
                         <Link
                           class="c-menu__link"
-                          href="#about"
+                          // href="#about"
+                          onclick={(e) => {
+                            window.scrollTo({
+                              top: document.querySelector("#about").offsetTop - 75,
+                              behavior: "smooth",
+                            });
+                          }}
                         >
                           {Variable.lang.a.aboutForum}
                         </Link>
                         <Link
                           class="c-menu__link"
-                          href="#stands"
+                          // href="#stands"
+                          onclick={(e) => {
+                            window.scrollTo({
+                              top: document.querySelector("#stands").offsetTop - 75,
+                              behavior: "smooth",
+                            });
+                          }}
                         >
                           {Variable.lang.a.stands}
                         </Link>
                         <Link
                           class="c-menu__link"
-                          href="#speakers"
+                          // href="#speakers"
+                          onclick={(e) => {
+                            window.scrollTo({
+                              top: document.querySelector("#speakers").offsetTop - 75,
+                              behavior: "smooth",
+                            });
+                          }}
                         >
                           {Variable.lang.a.speakers}
                         </Link>

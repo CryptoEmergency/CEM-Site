@@ -88,7 +88,10 @@
 		"createRoom": "Создать комнату",
 		"joinEvent": "Присоединиться к мероприятию",
 		"backPage": "Вернуться назад",
-		"forwardPage": "Листать далее"
+		"forwardPage": "Листать далее",
+		"buyTicket": "Купить билет",
+		"becomeSpeaker": "Стать спикером",
+		"buyStand": "Купить стенд"
 	},
 	"h": {
 		"success": "Успешно!",
@@ -202,7 +205,9 @@
 		"customerStatisticsFreelance": "Статистика заказчика",
 		"customerContactsFreelance": "Контакты заказчика",
 		"noName": "Без названия",
-		"previewNotAvailable": "Предварительный просмотр недоступен"
+		"previewNotAvailable": "Предварительный просмотр недоступен",
+		"speakersForum": "Спикеры",
+		"standsForum": "Стенды"
 	},
 	"a": {
 		"about": "О нас",

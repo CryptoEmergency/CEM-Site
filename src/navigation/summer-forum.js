@@ -44,21 +44,15 @@ const start = function (data, ID) {
             breakpoints: {
                 100: {
                     slidesPerView: 1,
-                    spaceBetween: 20,
+                    spaceBetween: 0,
                 },
-                620: {
-                    //600
+                768: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+                980: {
                     slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                // 768: {
-                //   slidesPerView: 2,
-                //   spaceBetween: 50
-                // },
-                910: {
-                    //800
-                    slidesPerView: 3,
-                    spaceBetween: 46,
+                    spaceBetween: 40,
                 },
                 1240: {
                     slidesPerView: 3,
@@ -127,7 +121,7 @@ const start = function (data, ID) {
                                         г. Новороссийск
                                     </span>
                                     <a href="#" class="c-button c-button--gradient2">
-                                        <span class="c-button__text">Купить билет</span>
+                                        <span class="c-button__text">{Variable.lang.button.buyTicket}</span>
                                     </a>
                                 </div>
                             </div>
@@ -180,7 +174,7 @@ const start = function (data, ID) {
                         </section>
 
                         <section class="c-speakers c-container" id="speakers">
-                            <h4 class="с-summerforum__title c-speakers__title">Спикеры</h4>
+                            <h4 class="с-summerforum__title c-speakers__title">{Variable.lang.h.speakersForum}</h4>
                             <ul class="c-speakers__list">
                                 <li>
                                     <figure class="c-speakers__item">
@@ -250,12 +244,12 @@ const start = function (data, ID) {
                                 </li>
                             </ul>
                             <a href="#" class="c-button c-button--gradient2">
-                                <span class="c-button__text">Стать спикером</span>
+                                <span class="c-button__text">{Variable.lang.button.becomeSpeaker}</span>
                             </a>
                         </section>
 
                         <section class="c-eventmap c-container" id="stands">
-                            <h4 class="с-summerforum__title c-eventmap__title">Стенды</h4>
+                            <h4 class="с-summerforum__title c-eventmap__title">{Variable.lang.h.standsForum}</h4>
                             <div class="c-eventmap__wrapper">
                                 {/** Фоновая карта */}
                                 <img class="c-eventmap__imagebg" src={svg['summer_forum/map']} />
@@ -635,6 +629,10 @@ const start = function (data, ID) {
                                 </div>
                             </div>
                             <img class="c-eventmap__image" src={svg['summer_forum/map']} />
+
+                            <a href="#" class="c-button c-button--gradient2">
+                                <span class="c-button__text">{Variable.lang.button.buyStand}</span>
+                            </a>
                         </section>
 
                         {/* </div> */}

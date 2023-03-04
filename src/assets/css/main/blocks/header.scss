@@ -192,6 +192,10 @@
     &--forum {
         gap: 12%;
 
+        @media(max-width: 1279px) {
+            gap: 7%;
+        }
+
         .c-menu {
             &__link:not(.c-logo) {
                 margin-right: 0;
