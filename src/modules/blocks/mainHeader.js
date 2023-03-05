@@ -124,15 +124,27 @@ const mainHeader = async function () {
                         </Link>
                         <Link
                           class="c-menu__link"
-                          href="#"
+                          // href="#partners"
+                          onclick={(e) => {
+                            window.scrollTo({
+                              top: document.querySelector("#partners").offsetTop - 75,
+                              behavior: "smooth",
+                            });
+                          }}
                         >
-                          {/* {Variable.lang.a.stands} */}
+                          {Variable.lang.a.partnersForum}
                         </Link>
                         <Link
                           class="c-menu__link"
-                          href="#"
+                          // href="#localmap"
+                          onclick={(e) => {
+                            window.scrollTo({
+                              top: document.querySelector("#localmap").offsetTop - 75,
+                              behavior: "smooth",
+                            });
+                          }}
                         >
-                          {/* {Variable.lang.a.speakers} */}
+                          {Variable.lang.a.localmap}
                         </Link>
                       </nav>
                     )

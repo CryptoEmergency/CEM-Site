@@ -106,7 +106,6 @@ const start = function (data, ID) {
             return (
                 <div class='c-main__body с-summerforum'>
                     <div class="page-content page-content--full">
-                        {/* <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; margin-top: 30px"> */}
                         <section class="c-aboutforum" id="about">
                             {/* <h4 class="с-summerforum__title c-aboutforum__title">О форуме</h4> */}
                             <div class="c-aboutforum__cover c-container">
@@ -635,8 +634,13 @@ const start = function (data, ID) {
                             </a>
                         </section>
 
-                        {/* </div> */}
+                        <section class="c-partnersforum c-container" id="partners">
+                            <h4 class="с-summerforum__title c-partnersforum__title">{Variable.lang.h.partnersForum}</h4>
+                        </section>
 
+                        <section class="c-localmap c-container" id="localmap">
+                            <h4 class="с-summerforum__title c-localmap__title">{Variable.lang.h.localmap}</h4>
+                        </section>
                     </div>
                     <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
                     {/* <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script> */}

@@ -1,5 +1,8 @@
 .с-summerforum {
-    background: #171717;
+    background: url("../images/summer_forum/left.png") no-repeat top 3100px left calc(50% - 506px)/506px auto,
+                url("../images/summer_forum/right.png") no-repeat top 2450px left calc(50% + 188px)/1140px auto,
+                url("../images/summer_forum/bottom.png") no-repeat bottom 0 center/1521px auto;
+    background-color: #171717;
 
     &__title {
         margin: 25px 0;
@@ -1208,4 +1211,13 @@
         background: rgb(100, 70, 210);
         background: linear-gradient(360deg, rgba(100, 70, 210, 1) 0%, rgba(103, 74, 211, 1) 16%, rgba(113, 85, 214, 1) 30%, rgba(129, 104, 218, 1) 45%, rgba(152, 131, 225, 1) 59%, rgba(181, 166, 233, 1) 73%, rgba(216, 208, 244, 1) 87%, rgba(255, 255, 255, 1) 100%);
     }
+}
+
+.c-partnersforum {
+    min-height: 1000px;
+
+}
+
+.c-localmap {
+    min-height: 900px;
 }
