@@ -91,7 +91,8 @@
 		"forwardPage": "Листать далее",
 		"buyTicket": "Купить билет",
 		"becomeSpeaker": "Стать спикером",
-		"buyStand": "Купить стенд"
+		"buyStand": "Купить стенд",
+		"becomePartner": "Стать партнером"
 	},
 	"h": {
 		"success": "Успешно!",
