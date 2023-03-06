@@ -283,6 +283,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 <div
                   class="messages_settings"
                   title={Variable.lang.text.settings}
+                  style="width: auto; display: flex; gap: 10px; align-items: center;"
                   onclick={(e) => {
                     let author = Variable.myInfo
                     let items = [
@@ -341,7 +342,15 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   }
                   }
                 >
-                  <img class="" src={svg.settings_icon} width="32" height="32" />
+                  <span class="messages_hint">
+                    <span>Превью</span>
+                    <div class="messages_arrow_right">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </span>
+                  <img class="" src={svg.settings_icon} width="32" height="32" title="!!!" />
                 </div>
                 // <div
                 //   class="delete_post_media"
