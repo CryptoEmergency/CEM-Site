@@ -239,6 +239,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 :
                 <video
                   class="fullsize media"
+                  preload="metadata"
                   src={`/assets/upload/${type}/${item.name}`}
                 />
             }
