@@ -142,7 +142,7 @@ const sendPhoto = async function (Static, crooper) {
   return
 }
 
-const sendVideo = async function (files) {
+const sendVideo = async function (Static, files) {
   fn.uploadMedia(
     files[0],
     "question",
@@ -442,7 +442,7 @@ const ModalAskQuestion = function (data, ID) {
                     if (this.files.length == 0) {
                       return;
                     }
-                    sendVideo(this.files)
+                    sendVideo(Static, this.files)
                     this.value = '';
                     return;
                   }}
