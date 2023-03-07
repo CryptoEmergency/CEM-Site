@@ -3,7 +3,9 @@ import {
     jsxFrag,
     load,
     init,
-    Variable
+    Variable,
+    initReload,
+    Helpers,
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { BlockExchange } from '@component/blocks/index.js';
@@ -17,10 +19,24 @@ const start = function (data, ID) {
 
     load({
         ID,
-        fnLoad: () => {
+        fnLoad: async () => {
             Static.nameRecords = "PageExchangeRates"
             Static.apiFilter = {}
             Static.filterCoins = []
+            Static.list_coins = await fn.restApi.getCoins({
+                filter: {},
+                limit: 20,
+                select: { name: 1, icon: 1 },
+            });
+            fn.socket.get(
+                { method: "Course", params: { filter: {} } },
+                function (res) {
+                    console.log("=9c0591 callback=", res);
+                    Static.mainCourse = res;
+                    initReload("mainBlock");
+                }
+            );
+            console.log('=0ca0d9= Static =', Static)
         },
         fn: () => {
             return (
@@ -39,206 +55,70 @@ const start = function (data, ID) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>1</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/btc"]} />
-                                                <span>Bitcoin</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">22.389,6</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--rise">+0.09%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>2</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/eth1"]} />
-                                                <span>Ethereum</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">1.561,11</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--rise">-0.47%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>3</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/usdt"]} />
-                                                <span>Tether</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">1,0001</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--rise">0.00%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>4</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/bnb"]} />
-                                                <span>Binance Coin</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">284,30</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--recession">-2.10%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>5</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/btc"]} />
-                                                <span>Bitcoin</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">22.389,6</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--rise">+0.09%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>6</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/eth1"]} />
-                                                <span>Ethereum</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">1.561,11</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--rise">-0.47%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>7</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/usdt"]} />
-                                                <span>Tether</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">1,0001</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--rise">0.00%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <b>8</b>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <div class="c-exchangerates__currency">
-                                                <img src={svg["icon/bnb"]} />
-                                                <span>Binance Coin</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__price">284,30</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="c-exchangerates__cellwrap">
-                                            <span class="c-exchangerates__percent c-exchangerates__percent--recession">-2.10%</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {() => {
+                                    if (
+                                        Static.mainCourse &&
+                                        Object.keys(Static.mainCourse).length
+                                    ) {
+                                        const arrReturn = Object.keys(Static.mainCourse)
+                                            .filter(
+                                                (item) => typeof Static.mainCourse[item] == "object"
+
+                                            )
+                                            .map(function (key, i) {
+                                                let course = Static.mainCourse[key];
+                                                // console.log('=0aa611= course =', course)
+                                                return (
+                                                    <tr>
+                                                        <td>
+                                                            <div class="c-exchangerates__cellwrap">
+                                                                <b>{i + 1}</b>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="c-exchangerates__cellwrap">
+                                                                <div class="c-exchangerates__currency">
+                                                                    <img src={`/assets/icons/coins/${key}.svg`} />
+                                                                    <span>{key.toLocaleUpperCase()}</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="c-exchangerates__cellwrap">
+                                                                <span class="c-exchangerates__price">
+                                                                    {Helpers.numberFixWithSpaces(
+                                                                        course.usdt,
+                                                                        key === "cem" ? 4 : 2
+                                                                    )}
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="c-exchangerates__cellwrap">
+                                                                <span
+                                                                    class={[
+                                                                        "c-exchangerates__percent",
+                                                                        course.change >= 0
+                                                                            ? "c-exchangerates__percent--rise"
+                                                                            : "c-exchangerates__percent--recession"
+                                                                        
+                                                                    ]}
+                                                                >
+                                                                    {course.change >= 0 ? '+' : null}
+                                                                    {Helpers.numberFixWithSpaces(
+                                                                        course.change,
+                                                                        2
+                                                                    )}%
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            });
+                                        return arrReturn;
+                                    }
+                                }}
                             </tbody>
                         </table>
                     </div>
