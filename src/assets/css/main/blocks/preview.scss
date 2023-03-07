@@ -1,9 +1,9 @@
 /* Preview styles */
 .с-preview {
-    max-width: 100%;
     position: relative;
+    max-width: 100%;
     font-family: "Roboto", sans-serif;
-    overflow: hidden;
+    // overflow: hidden;
 
     &__lines {
         background-position: repeat;
@@ -278,6 +278,21 @@
             color: inherit;
         }
     }
+
+    &>.c-currency {
+        position: absolute;
+        bottom: -3px;
+        left: -30px;
+        z-index: 2;
+        transform: scale(0.6);
+        background: transparent;
+
+        .c-currency {
+            &__percent {
+                display: none;
+            }
+        }
+    }
 }
 
 .c-currency {
@@ -440,6 +455,15 @@
         color: $white;
         opacity: 0.5;
         line-height: 24px;
+    }
+
+    &__all {
+        position: absolute;
+        right: 10px;
+        bottom: 18px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #ffffff;
     }
 }
 

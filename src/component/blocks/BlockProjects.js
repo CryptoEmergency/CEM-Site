@@ -212,14 +212,14 @@ const BlockProjects = async function () {
                     </div>
                 }
             />
-            <div
+            {/* <div
                 class="c-projects__more"
                 onclick={() => {
                     fn.modals.ModalMainPageIconsMenu()
                   }}
             >
                 {Variable.lang.button.see_all}
-            </div>
+            </div> */}
         </div>
     )
 }
