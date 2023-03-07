@@ -670,7 +670,9 @@
 		"answers": "Ответов",
 		"views": "Просмотров",
 		"bestanswer": "Лучший ответ",
-		"answer": "Ответ"
+		"answer": "Ответ",
+		"price": "Цена (USD)",
+		"percent": "Изм.(24ч)"
 	},
 	"error_div": {
 		"not_empty_input": "Пожалуйста заполните информацию",

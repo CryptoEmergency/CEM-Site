@@ -33,9 +33,9 @@ const start = function (data, ID) {
                             <thead>
                                 <tr style="border-radius: 4px;">
                                     <th>#</th>
-                                    <th>Название</th>
-                                    <th>Цена (USD)</th>
-                                    <th>Изм.(24ч)</th>
+                                    <th>{Variable.lang.tableTitle.appellation}</th>
+                                    <th>{Variable.lang.tableTitle.price}</th>
+                                    <th>{Variable.lang.tableTitle.percent}</th>
                                 </tr>
                             </thead>
                             <tbody>
