@@ -96,13 +96,15 @@ const BlockProjects = async function () {
         title: Variable.lang.a.icoRating,
         icon: "star1",
         link: "list-icostartaps", //"ico-rating"
+        items: fn.itemsMenu.onlyPage({ url: "/list-icostartapss/" }),
+        modal: true,
       },
       {
         title: Variable.lang.a.starups,
         icon: "list-startups",
         link: "list-startaps",
-        // "items": fn.itemsMenu.onlyPage({ url: '/list-startaps/' }),
-        // modal: true
+        items: fn.itemsMenu.onlyPage({ url: "/list-startaps/" }),
+        modal: true,
       },
       // {
       //     "title": Variable.lang.a.trade,
@@ -118,10 +120,10 @@ const BlockProjects = async function () {
         modal: true,
       },
       {
-        title: Variable.lang.a.news,
-        icon: "preview_line_news",
-        link: "news",
-        items: fn.itemsMenu.onlyPage({ url: "/news/" }),
+        title: Variable.lang.h.exchange,
+        icon: "exchanges",
+        link: "list-exchange",
+        items: fn.itemsMenu.onlyPage({ url: "/list-exchange/" }),
         modal: true,
       },
       {
