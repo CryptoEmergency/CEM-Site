@@ -19,8 +19,8 @@
   },
   "postcss": {
     "plugins": {
-      "postcss-flex-value": {},
-      "autoprefixer": {}
+      "autoprefixer": {},
+      "postcss-flex-value": {}
     }
   },
   "browserslist": [
