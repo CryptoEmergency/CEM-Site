@@ -305,7 +305,7 @@ let close = true
 
                                 </div>
                             </form>
-                            <div class="bottom_log-in">
+                            {/* <div class="bottom_log-in">
                                 <div class="checkbox">
                                     <input
                                         checked="checked"
@@ -315,7 +315,7 @@ let close = true
                                     <label class="checkbox__label-2" for="auth_remember">{Variable.lang.placeholder.rememberMe}</label>
                                 </div>
 
-                            </div>
+                            </div> */}
                             <div class="authAgree">
                                 <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
                             </div>
@@ -499,7 +499,7 @@ let close = true
 
                         </div>
                     </form>
-                    <div class="bottom_log-in">
+                    {/* <div class="bottom_log-in">
                         <div class="checkbox">
                             <input
                                 checked="checked"
@@ -509,7 +509,7 @@ let close = true
                             <label class="checkbox__label-2" for="auth_remember">{Variable.lang.placeholder.rememberMe}</label>
                         </div>
 
-                    </div>
+                    </div> */}
                     <div class="authAgree">
                         <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
                     </div>

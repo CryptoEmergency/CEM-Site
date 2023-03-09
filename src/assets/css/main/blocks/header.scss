@@ -17,6 +17,10 @@
         font-size: 0;
     }
 
+    &--summerforum {
+        background: #171717;
+    }
+
     &__container {}
 
     &__inner {
@@ -182,6 +186,33 @@
 
         &:last-child {
             margin-right: 0px;
+        }
+    }
+
+    &--forum {
+        gap: 12%;
+
+        @media(max-width: 1279px) {
+            gap: 7%;
+        }
+
+        .c-menu {
+            &__link:not(.c-logo) {
+                margin-right: 0;
+                padding: 10px 25px;
+                min-width: 83px;
+                min-height: 39px;
+                font-size: 12px;
+                color: #ffffff;
+                background: rgb(1, 200, 171);
+                background: linear-gradient(90deg, rgba(1, 200, 171, 1) 0%, rgba(3, 188, 161, 1) 12%, rgba(6, 156, 134, 1) 33%, rgba(13, 104, 90, 1) 62%, rgba(22, 32, 31, 1) 96%, rgba(23, 23, 23, 1) 100%);
+                border-radius: 14px;
+                white-space: nowrap;
+
+                &:hover {
+                    -webkit-text-fill-color: #ffffff;
+                }
+            }
         }
     }
 }

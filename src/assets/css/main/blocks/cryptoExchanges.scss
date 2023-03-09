@@ -9,13 +9,14 @@
         height: 30px;
         top: 30px;
         cursor: pointer;
-        @media (max-width: 750px){
+
+        @media (max-width: 750px) {
             height: 25px;
         }
     }
 
-    @media (max-width: 750px){
-        h4{
+    @media (max-width: 750px) {
+        h4 {
             font-size: 18px;
         }
     }
@@ -335,7 +336,7 @@
 @media(max-width: 970px) {}
 
 @media(max-width: 750px) {
-    .statistics-preview{
+    .statistics-preview {
         padding: 0 20px;
     }
 
@@ -360,18 +361,20 @@
     .statistics-preview {
         padding-top: 0;
     }
-    .crypto_exchanges-cell div{
+
+    .crypto_exchanges-cell div {
         line-height: 45px;
     }
 
-    .btn-wrap{
+    .btn-wrap {
         grid-row: 1/ span 2;
         grid-column: 2 / span 2;
     }
 
-    .btn-news-preview{
+    .btn-news-preview {
         height: 40px;
-        &::after{
+
+        &::after {
             height: 40px;
         }
     }
@@ -395,35 +398,38 @@
 
 
 
-@media(max-width: 595px){
-    .crypto_exchanges-row.tradeListLoad{
+@media(max-width: 595px) {
+    .crypto_exchanges-row.tradeListLoad {
         grid-template-columns: 40px 1fr 0.5fr;
         grid-template-rows: repeat(2, 1fr);
 
-        .crypto_exchanges-cell:nth-child(3){
+        .crypto_exchanges-cell:nth-child(3) {
             grid-column: 2;
             grid-row: 2;
         }
-        .crypto_exchanges_cell_button{
+
+        .crypto_exchanges_cell_button {
             grid-row: 1 / span 2;
             grid-column: 3 / span 3;
         }
     }
-    
-    .crypto_exchanges_percent_green{
+
+    .crypto_exchanges_percent_green {
         padding-left: 0;
         margin-right: 0;
     }
 
-    .crypto_exchanges-row{
+    .crypto_exchanges-row {
         grid-template-columns: 3fr 1fr;
     }
-    .crypto_coin_icons{
+
+    .crypto_coin_icons {
         width: 28px;
         height: 28px;
     }
-    .btn-news-preview{
-        span{
+
+    .btn-news-preview {
+        span {
             font-size: 12px;
         }
     }
@@ -456,8 +462,8 @@
     }
 }
 
-@media(max-width: 400px){
-    .crypto_exchanges-row{
+@media(max-width: 400px) {
+    .crypto_exchanges-row {
         grid-template-columns: 3fr 1.5fr;
     }
 }
@@ -651,7 +657,7 @@
 
 // checked coins
 .checked-coins {
-    
+
     padding: 15px 40px;
     display: flex;
     // justify-content: space-between;
@@ -659,20 +665,95 @@
     // background: #313543;
     border-radius: 4px;
 
-    div{
-     display: flex;
-     flex-wrap: wrap;
-     align-items: center;   
+    div {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
     }
 
-    .b-close{
+    .b-close {
         margin-left: 25px;
     }
 
-    @media (max-width: 1199px){
+    @media (max-width: 1199px) {
         padding: 15px 30px;
     }
-    @media (max-width: 750px){
+
+    @media (max-width: 750px) {
         padding: 10px 20px;
+    }
+}
+
+.c-exchangerates {
+    padding-top: 20px;
+
+    &__container {}
+
+    &__table {
+        width: 100%;
+        background: #313541;
+        box-shadow: 15px 15px 25px #212531;
+        border-radius: 4px;
+
+        tr {
+            position: relative;
+
+            &::after {
+                position: absolute;
+                content: '';
+                left: 10px;
+                right: 10px;
+                bottom: 0;
+                height: 1px;
+                background: #474E61;
+            }
+        }
+
+        th {
+            padding: 25px 0;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 16px;
+            color: #8991A8;
+        }
+    }
+
+    &__cellwrap {
+        display: flex;
+        padding: 15px 0;
+
+        &>* {
+            margin: auto;
+        }
+    }
+
+    &__currency {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 0;
+
+        img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        span {}
+    }
+
+    &__price {}
+
+    &__percent {
+        font-weight: 600;
+
+        &--rise {
+            color: #2DCA73;
+        }
+
+        &--recession {
+            color: #E84142;
+        }
     }
 }

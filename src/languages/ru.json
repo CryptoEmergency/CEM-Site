@@ -88,7 +88,11 @@
 		"createRoom": "Создать комнату",
 		"joinEvent": "Присоединиться к мероприятию",
 		"backPage": "Вернуться назад",
-		"forwardPage": "Листать далее"
+		"forwardPage": "Листать далее",
+		"buyTicket": "Купить билет",
+		"becomeSpeaker": "Стать спикером",
+		"buyStand": "Купить стенд",
+		"becomePartner": "Стать партнером"
 	},
 	"h": {
 		"success": "Успешно!",
@@ -202,7 +206,11 @@
 		"customerStatisticsFreelance": "Статистика заказчика",
 		"customerContactsFreelance": "Контакты заказчика",
 		"noName": "Без названия",
-		"previewNotAvailable": "Предварительный просмотр недоступен"
+		"previewNotAvailable": "Предварительный просмотр недоступен",
+		"speakersForum": "Спикеры",
+		"standsForum": "Стенды",
+		"partnersForum": "Партнеры",
+		"localmap": "Как добраться?"
 	},
 	"a": {
 		"about": "О нас",
@@ -244,7 +252,14 @@
 		"affiliate": "Партнерская программа",
 		"addChats": "Добавить чат",
 		"notes": "Мои заметки",
-		"rooms": "Комнаты"
+		"rooms": "Комнаты",
+		"--------------------------новые слова--------------": "--добавить перевод--",
+		"aboutForum": "О форуме",
+		"stands": "Стенды",
+		"speakers": "Спикеры",
+		"partnersForum": "Партнеры",
+		"localmap": "Как добраться?"
+
 	},
 	"span": {
 		"company": "Компания",
@@ -655,7 +670,9 @@
 		"answers": "Ответов",
 		"views": "Просмотров",
 		"bestanswer": "Лучший ответ",
-		"answer": "Ответ"
+		"answer": "Ответ",
+		"price": "Цена (USD)",
+		"percent": "Изм.(24ч)"
 	},
 	"error_div": {
 		"not_empty_input": "Пожалуйста заполните информацию",

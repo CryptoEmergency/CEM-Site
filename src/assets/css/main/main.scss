@@ -38,6 +38,7 @@ html {
 }
 
 body {
+    height: 100%;
     margin: 0px;
     font-family: $base_font, sans-serif;
     background: $noble_black;
@@ -70,7 +71,9 @@ body {
     width: 100%;
     // padding-top: 80px;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
     /* mobile viewport bug fix */
     min-height: -webkit-fill-available;
 
@@ -81,7 +84,9 @@ body {
         }
     }
 }
-
+main{
+    flex: 1 1 auto;
+}
 .h1,
 .h2,
 .h3,

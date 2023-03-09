@@ -514,6 +514,58 @@
 		font-weight: 700;
 		color: red;
 	}
+
+	&_hint {
+		display: flex;
+		align-items: center;
+
+		:first-child {
+			font-size: 12px;
+		}
+
+	}
+
+	&_arrow_right {
+		display: flex;
+		align-items: center;
+		transform: rotate(180deg);
+
+		span {
+			display: block;
+			width: 10px;
+			height: 10px;
+			border-bottom: 3px solid #ff3140;
+			border-left: 3px solid #ff3140;
+
+			margin: -2px;
+			animation: arrow-left 1s infinite;
+			float: left;
+
+			&:nth-child(2) {
+				animation-delay: -0.1s;
+			}
+
+			&:nth-child(3) {
+				animation-delay: -0.2s;
+			}
+		}
+	}
+}
+
+@keyframes arrow-left {
+	0% {
+		opacity: 0;
+		transform: rotate(45deg) translate(-0px, -0px);
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		transform: rotate(45deg) translate(0px, 0px);
+	}
 }
 
 .messages_block,
@@ -846,6 +898,7 @@
 		// background: url("../svg/close_group.svg") no-repeat center / cover;
 		cursor: pointer;
 		z-index: 2001;
+		display: none;
 
 		img {
 			margin: 0 !important;

@@ -179,7 +179,7 @@ const addForm = function (Static) {
                                         () => {
                                             if (Array.isArray(Static.user) && Static.user.length) {
                                                     return Static.user.map((item) => {
-                                                        console.log(item)
+                                                        
                                                         return (
                                                             <div class="user-list-avatar"
                                                                 onClick={() => {
@@ -481,7 +481,7 @@ const start = function (data, ID) {
             Static.dataUsers = await fn.restApi.getUsers({ name: Static.nameRecords, filter: Static.apiFilter, limit: 10 })
         },
         fn: () => {
-            console.log('=2def43=', Static.arrTask)
+            // console.log('=2def43=', Static.arrTask)
             if (!item._id) { return (<div><BlockError404 /></div>) }
             return (
                 <div class="blog_page_container c-main__body">
@@ -647,12 +647,8 @@ const start = function (data, ID) {
                         </div> */}
 
                         <Elements.TaskList 
-                            class={[Static.categoryActive == item ? "tasking-tab_active" : null]}
-                            onclick={() => {
-                                        Static.categoryActive = item
-                                        initReload()
-                                        console.log(item)
-                                    }}
+                            Static={Static}
+                            records={Static.arrTask}
                         />
 
                         {/* <div class="tasking-list">
