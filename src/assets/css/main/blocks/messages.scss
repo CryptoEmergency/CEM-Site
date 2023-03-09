@@ -898,6 +898,7 @@
 		// background: url("../svg/close_group.svg") no-repeat center / cover;
 		cursor: pointer;
 		z-index: 2001;
+		display: none;
 
 		img {
 			margin: 0 !important;
