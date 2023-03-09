@@ -61,20 +61,21 @@ a{
   text-decoration: none;
 }
 h2{
-  font-size: 76px;
+  font-size: 50px;
   line-height: 115%;
   color: #FFFFFF;
   text-align: center;
   font-weight: 700;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   @media(max-width: 992px){
-    font-size: 60px;
+    font-size: 44px;
   }
   @media(max-width: 767px){
-    font-size: 45px;
+    font-size: 40px;
   }
   @media(max-width: 464px){
-    font-size: 34px;
+    font-size: 30px;
+    margin-bottom: 20px;
   }
 }
 // ========== container =======

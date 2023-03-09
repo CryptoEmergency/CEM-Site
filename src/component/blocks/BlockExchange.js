@@ -9,11 +9,11 @@ import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
 import { ButtonShowMore, NotFound } from "@component/element/index.js";
 
-const BlockExchange = async function ({ Static, limit = 21 }) {
+const BlockExchange = async function ({ Static, limit = 12 }) {
   await initOne(async () => {
     Static.list_coins = await fn.restApi.getCoins({
       filter: {},
-      limit: 20,
+      limit: 12,
       select: { name: 1, icon: 1 },
     });
     await fn.restApi.getExchange({

@@ -28,7 +28,7 @@ import {
 import { ButtonShowMore } from "@component/element/index.js";
 
 const makeFilter = function (Static) {
-  let objReturn = {}
+  let objReturn = {};
   switch (Static.lentaPage) {
     case "text":
       objReturn["media.type"] = { $nin: ["video", "audio", "image"] };
@@ -56,19 +56,19 @@ const makeFilter = function (Static) {
       break;
   }
   if (Static.lentaFilters && Static.lentaFilters.lang) {
-    objReturn["languages.code"] = Static.lentaFilters.lang
+    objReturn["languages.code"] = Static.lentaFilters.lang;
   }
   if (Static.lentaFilters && Static.lentaFilters.author) {
-    objReturn.author = Static.lentaFilters.author
+    objReturn.author = Static.lentaFilters.author;
   }
-  return objReturn
-}
+  return objReturn;
+};
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID, initData: "main" });
 
-  Variable.Static.HeaderShow = true
-  Variable.Static.FooterShow = false
+  Variable.Static.HeaderShow = true;
+  Variable.Static.FooterShow = false;
   // test()
   // console.log("Static", Static)
   // load({
@@ -162,9 +162,14 @@ const start = function (data, ID) {
       // await fn.restApi.getNews({ cache: true, name: "MainNews", filter: {} });
       // await api({ type: "get", action: "getNews", short: true, cache: true, name: "MainNews", })
       // timersStart("Course", async () => { fn.restApi.getCourse({ name: "Course", filter: {} }) }, 10000)
-      fn.initData.lenta_users(Static)
-      Static.apiFilter = makeFilter(Static)
-      await fn.restApi.getPost({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, limit: 15 })
+      fn.initData.lenta_users(Static);
+      Static.apiFilter = makeFilter(Static);
+      await fn.restApi.getPost({
+        cache: true,
+        name: Static.nameRecords,
+        filter: Static.apiFilter,
+        limit: 15,
+      });
 
       timersStart({
         name: "Course",
@@ -192,14 +197,12 @@ const start = function (data, ID) {
             {/* </div>
             </div> */}
             {() => {
-              if (
-                Static.mainCourse &&
-                Object.keys(Static.mainCourse).length
-              ) {
+              if (Static.mainCourse && Object.keys(Static.mainCourse).length) {
                 const arrReturn = Object.keys(Static.mainCourse)
                   .filter(
-                    (item) => typeof Static.mainCourse[item] == "object" && item == "cem"
-
+                    (item) =>
+                      typeof Static.mainCourse[item] == "object" &&
+                      item == "cem"
                   )
                   .map(function (key) {
                     let course = Static.mainCourse[key];
@@ -225,21 +228,22 @@ const start = function (data, ID) {
                             </div>
                           </div>
                           <div class="c-currency__right">
-                            <div class={`c-currency__percent ${course.change >= 0
-                              ? " c-currency__percent--up"
-                              : " c-currency__percent--down"
+                            <div
+                              class={`c-currency__percent ${
+                                course.change >= 0
+                                  ? " c-currency__percent--up"
+                                  : " c-currency__percent--down"
                               }`}
                             >
-                              <img src={course.change >= 0
-                                ? svg.up_arrow
-                                : svg.down_arrow
-                              }
+                              <img
+                                src={
+                                  course.change >= 0
+                                    ? svg.up_arrow
+                                    : svg.down_arrow
+                                }
                               />
                               <span class="btcusdt_change">
-                                {Helpers.numberFixWithSpaces(
-                                  course.change,
-                                  2
-                                )}
+                                {Helpers.numberFixWithSpaces(course.change, 2)}
                               </span>
                             </div>
                             {/* <div class="c-currency__update">24h.</div> */}
@@ -251,19 +255,25 @@ const start = function (data, ID) {
                 return arrReturn;
               }
             }}
-            <a href="/exchange-rates" class="c-currency__all" onclick={fn.siteLink}>{Variable.lang.button.show_all}</a>
+            <a
+              href="/exchange-rates"
+              class="c-currency__all"
+              onclick={fn.siteLink}
+            >
+              {Variable.lang.button.show_all}
+            </a>
           </div>
           <BlockBanners />
           <div class="c-lenta">
-            {
-              !Variable[Static.nameRecords] || !Variable[Static.nameRecords].list_records.length
-                ?
-                <NotFound />
-                :
-                () => {
-                  let changeToogle = Static.changeToogle
-                  Static.changeToogle = false
-                  return Variable[Static.nameRecords].list_records.map((item, index) => {
+            {!Variable[Static.nameRecords] ||
+            !Variable[Static.nameRecords].list_records.length ? (
+              <NotFound />
+            ) : (
+              () => {
+                let changeToogle = Static.changeToogle;
+                Static.changeToogle = false;
+                return Variable[Static.nameRecords].list_records.map(
+                  (item, index) => {
                     return (
                       <BlockLentaUsers
                         Static={Static}
@@ -271,25 +281,37 @@ const start = function (data, ID) {
                         item={item}
                         showItemsMenu={true}
                         changeToogle={changeToogle}
-                        ElemVisible={Variable[Static.nameRecords].list_records.length < Variable[Static.nameRecords].totalFound && index == (Variable[Static.nameRecords].list_records.length - 5) ?
-                          async () => {
-                            //      console.log('=0c6881=', "Load more")
-                            fn.recordsView(item._id, "setPost")
-                            Static.apiFilter = makeFilter(Static)
-                            let response = await await fn.restApi.getPost({ filter: Static.apiFilter, limit: 15, offset: Variable[Static.nameRecords].list_records.length })
-                            Variable[Static.nameRecords].list_records.push(...response.list_records)
-                            initReload()
-                          }
-                          :
-                          () => {
-                            fn.recordsView(item._id, "setPost")
-                          }
+                        ElemVisible={
+                          Variable[Static.nameRecords].list_records.length <
+                            Variable[Static.nameRecords].totalFound &&
+                          index ==
+                            Variable[Static.nameRecords].list_records.length - 5
+                            ? async () => {
+                                //      console.log('=0c6881=', "Load more")
+                                fn.recordsView(item._id, "setPost");
+                                Static.apiFilter = makeFilter(Static);
+                                let response = await await fn.restApi.getPost({
+                                  filter: Static.apiFilter,
+                                  limit: 15,
+                                  offset:
+                                    Variable[Static.nameRecords].list_records
+                                      .length,
+                                });
+                                Variable[Static.nameRecords].list_records.push(
+                                  ...response.list_records
+                                );
+                                initReload();
+                              }
+                            : () => {
+                                fn.recordsView(item._id, "setPost");
+                              }
                         }
                       />
                     );
-                  })
-                }
-            }
+                  }
+                );
+              }
+            )}
           </div>
         </div>
       );
