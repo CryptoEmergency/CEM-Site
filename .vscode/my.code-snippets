@@ -1,5 +1,5 @@
 {
-	"svg иконка": {
+	"svg import": {
 		"scope": "javascript,typescript",
 		"prefix": "_svg",
 		"body": [
@@ -7,7 +7,7 @@
 		],
 		"description": ""
 	},
-	"images картинки": {
+	"images import": {
 		"scope": "javascript,typescript",
 		"prefix": "_img",
 		"body": [
@@ -15,55 +15,19 @@
 		],
 		"description": ""
 	},
-	"Import функция": {
+	"Import functions": {
 		"scope": "javascript,typescript",
-		"prefix": "_func",
+		"prefix": "_fn",
 		"body": [
-			"import { fn } from '@src/functions/index.js';"
+			"import { fn } from '@src/functions/export.js';"
 		],
 		"description": ""
 	},
-	"Имопрт страницы сайта": {
-		"scope": "javascript,typescript",
-		"prefix": "_iPage",
-		"body": [
-			"import ${1:Name} from '@src/navigation/${2:Name}.js';"
-		],
-		"description": ""
-	},
-	"Имопрт вспомогательного Элемента": {
-		"scope": "javascript,typescript",
-		"prefix": "_iElem",
-		"body": [
-			"import {${1:Name}} from '@component/element/index.js';"
-		],
-		"description": "Имопрт вспомогательного Элемента"
-	},
-	"Имопрт вспомогательного блока": {
-		"scope": "javascript,typescript",
-		"prefix": "_iBlock",
-		"body": [
-			"import {${1:Name}} from '@component/blocks/index.js';"
-		],
-		"description": ""
-	},
-	"Консоль лог": {
+	"Consolelog": {
 		"scope": "javascript,typescript",
 		"prefix": "_log",
 		"body": [
 			"console.log('=$RANDOM_HEX=',${1:Переменная})"
-		],
-		"description": ""
-	},
-	"Загрузка страницы": {
-		"scope": "javascript,typescript",
-		"prefix": "_initNew",
-		"body": [
-			"load({",
-			"ID,",
-			"fnLoad:()=>{},",
-			"fn:()=>{},",
-			"})"
 		],
 		"description": ""
 	}
