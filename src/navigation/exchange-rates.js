@@ -6,6 +6,7 @@ import {
     Variable,
     initReload,
     Helpers,
+    timersStart,
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { BlockExchange } from '@component/blocks/index.js';
@@ -37,6 +38,13 @@ const start = function (data, ID) {
                 }
             );
             console.log('=0ca0d9= Static =', Static)
+            timersStart({
+                name: "Course",
+                fn: async () => {
+                    fn.restApi.getCourse({ name: "Course", filter: {} });
+                },
+                msecond: 10000,
+            });
         },
         fn: () => {
             return (
@@ -102,7 +110,7 @@ const start = function (data, ID) {
                                                                         course.change >= 0
                                                                             ? "c-exchangerates__percent--rise"
                                                                             : "c-exchangerates__percent--recession"
-                                                                        
+
                                                                     ]}
                                                                 >
                                                                     {course.change >= 0 ? '+' : null}
