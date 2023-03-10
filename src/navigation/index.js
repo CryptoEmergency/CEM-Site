@@ -256,9 +256,11 @@ const start = function (data, ID) {
               }
             }}
             <a
-              href="/exchange-rates"
+              href=""
               class="c-currency__all"
-              onclick={fn.siteLink}
+              onclick={() => {
+                fn.modals.ModalMainPageIconsMenu()
+              }}
             >
               {Variable.lang.button.show_all}
             </a>

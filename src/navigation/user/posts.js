@@ -679,6 +679,8 @@ const start = function (data, ID) {
   Static.edittext = ""
   Static.checked = true
 
+  Static.activeView = "tile";
+
   init(
     async () => {
 
@@ -1205,34 +1207,112 @@ const start = function (data, ID) {
               </button>
             </div>
 
-            <div class="c-userpostcreate__myposts my_posts">
-              {Variable.lang.h.posts_my}
+            {/* <div class="c-userpostcreate__myposts my_posts">
+              {Variable.lang.h.posts_my} */}
               {/* {{> userPost}} */}
               {
                 !Static.posts || !Static.posts.list_records.length
                   ?
-                  <div class="user_news_block">
+                  <div
+                    class={[
+                      "user_news_block",
+                      Static.activeView == "tile" ? "user_news_block--tiles" : null
+                    ]}
+                  >
                     <NotFound />
                   </div>
                   :
-                  <div class="user_news_block">
-                    {
-                      Static.posts.list_records.map((item, index) => {
-                        return (
-                          <BlockLentaUsers
-                            Static={Static}
-                            item={item}
-                            index={index}
-                            ElemVisible={() => {
-                              fn.recordsView(item._id, "setPost")
-                            }}
-                          />
-                        )
-                      })
-                    }
+                  <div
+                    class={[
+                      "user_news_block",
+                      Static.activeView == "tile" ? "user_news_block--tiles" : null
+                    ]}
+                    style="margin-bottom: 70px"
+                  >
+                    <div class="user_news_header">
+                      <h2 style="align-self: flex-start; font-size: 20px; margin-bottom: 0;">{Variable.lang.h.posts_my}</h2>
+                      <ul class="user_news_togglersview">
+                        <li
+                          onclick={function (e) {
+                            e.stopPropagation();
+                            Static.activeView = "list"
+                            initReload();
+                          }}
+                        >
+                          <a
+                            href=""
+                            class={[
+                              "user_news_toggler",
+                              "user_news_toggler--list",
+                              Static.activeView == "list" ? "user_news_toggler--active" : null
+                            ]}
+                          >Список</a>
+                        </li>
+                        <li
+                          onclick={function (e) {
+                            e.stopPropagation();
+                            Static.activeView = "tile"
+                            initReload();
+                          }}
+                        >
+                          <a
+                            href=""
+                            class={[
+                              "user_news_toggler",
+                              "user_news_toggler--tile",
+                              Static.activeView == "tile" ? "user_news_toggler--active" : null
+                            ]}
+                          >Плитка</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      style="width: 100%"
+                      class={[
+                        Static.activeView == "tile" ? "c-tiles" : null
+                      ]}
+                    >
+                      {
+                        Static.posts.list_records.map((item, index) => {
+                          return (
+                            // <BlockLentaUsers
+                            //   Static={Static}
+                            //   item={item}
+                            //   index={index}
+                            //   ElemVisible={() => {
+                            //     fn.recordsView(item._id, "setPost")
+                            //   }}
+                            // />
+                            <BlockLentaUsers
+                              Static={Static}
+                              item={item}
+                              ElemVisible={
+                                // () => {
+                                //     fn.recordsView(item._id, "setPost")
+                                // }
+                                Static.posts.list_records.length < Static.posts.totalFound && index == (Static.posts.list_records.length - 5) ?
+                                  async () => {
+
+                                    console.log('=0c6882=', "Load more")
+                                    fn.recordsView(item._id, "setPost")
+                                    Static.apiFilter = makeFilter(Static)
+                                    let response = await await fn.restApi.getPost({ filter: Static.apiFilter, limit: 15, offset: Static.activeItems.list_records.length })
+                                    Static.posts.list_records.push(...response.list_records)
+                                    initReload()
+                                  }
+                                  :
+                                  () => {
+                                    fn.recordsView(item._id, "setPost")
+                                  }
+                              }
+                            />
+                          )
+                        })
+                      }
+                    </div>
                   </div>
               }
-            </div>
+              {/* </div> */}
           </form>
         </div>
       );

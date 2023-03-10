@@ -256,7 +256,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                                 <a
                                                     class="c-userpreview__btn 89"
                                                     onclick={async () => {
-                                                        if(Variable.ModalsPage.length) {
+                                                        if (Variable.ModalsPage.length) {
                                                             Variable.ModalsPage = []
                                                             initReload("modalsPage")
                                                         }
@@ -373,9 +373,47 @@ const start = function (userInfo, ID = "mainBlock") {
                                     {Helpers.numberFixWithSpaces(userInfo.statistic.rating, 2)}
                                 </a>
                                 <p></p>
-                                <div class="c-usershortinfo__status" id="userstatus">
-                                    {userInfo.information && userInfo.information.status ? userInfo.information.status : Variable.lang.span.status}
-                                </div>
+                                {
+                                    Variable.myInfo._id == userInfo._id ?
+                                        <div
+                                            class="c-usershortinfo__status"
+                                            id="userstatus"
+                                            contenteditable="true"
+                                            onblur={async function (e) {
+                                                if(!e.target.innerText.trim()) {
+                                                    return
+                                                }
+                                                console.log('=6569c1=', `статус: ${e.target.innerText}`)
+                                                let data = {
+                                                    value: {
+                                                        "information.status": e.target.innerText.trim()
+                                                    }
+                                                }
+                                                // console.log('=11bc62=data=', data)
+                                                const response = await fn.restApi.setUsers.update({
+                                                    data: data
+                                                })
+
+                                                // console.log('=87542b=response=', response)
+                                                if (response.status === 'ok') {
+                                                    
+                                                } else {
+                                                    Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true);
+                                                }
+                                                initReload()
+                                            }}
+                                        >
+                                            {userInfo.information && userInfo.information.status ? userInfo.information.status : Variable.lang.span.status}
+                                        </div>
+                                        :
+
+                                        <div
+                                            class="c-usershortinfo__status"
+                                            id="userstatus"
+                                        >
+                                            {userInfo.information && userInfo.information.status ? userInfo.information.status : Variable.lang.span.status}
+                                        </div>
+                                }
                             </div>
 
                             {/* IF (myInfo._id=userInfo._id) */}

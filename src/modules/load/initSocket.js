@@ -3,6 +3,8 @@ import { io } from "socket.io-client"
 
 const options = {
     reconnectionDelayMax: 10000,
+    pingTimeout: 3000,
+    pingInterval: 3000,
     path: '/api/v2/',
     auth: {
         uuid: Variable.uuid
