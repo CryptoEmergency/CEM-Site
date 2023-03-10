@@ -239,8 +239,9 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                 :
                 <video
                   class="fullsize media"
+                  poster={item.previewName ? `/assets/upload/${type}/${item.previewName}` : images["video_background"]}
                   preload="metadata"
-                  src={`/assets/upload/${type}/${item.name}`}
+                  src={`/assets/upload/${type}/${item.name}#t=0.001`}
                 />
             }
             {
