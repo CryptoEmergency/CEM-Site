@@ -154,7 +154,7 @@ const start = function (data, ID) {
 
               <div class="info">
                 <h2>{Static.item.title}</h2>
-                <p class="info-desc">{Static.item.description}</p>
+                <p class="info-desc">{fn.editText(Static.item.description, { clear: true, paragraph: true, html: true })}</p>
               </div>
             </div>
             <img class="startap-img" src={svg['startaps-inner/figure']} alt={Static.item.name}></img>
