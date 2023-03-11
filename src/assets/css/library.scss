@@ -230,7 +230,7 @@ $indent in $indents{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 550px;
+  max-height: 550px;
   overflow: hidden;
   img{
     max-width: 100%;
@@ -290,8 +290,9 @@ $indent in $indents{
   @media(max-width: 750px){
     display: grid;
     grid-template-columns: 100px 1fr;
+    gap: 10px;
     padding: 15px;
-    height: 135px;
+    height: 150px;
   }
 }
 .img-rect{

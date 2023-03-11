@@ -569,7 +569,9 @@
 
 .tags {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     position: fixed;
     z-index: 2;
     top: 70px;
@@ -587,6 +589,10 @@
         flex-wrap: nowrap;
         overflow-x: auto;
         white-space: nowrap;
+    }
+
+    @media(max-width: 750px) {
+        padding: 10px 0 0 !important;
     }
 
     &--static {

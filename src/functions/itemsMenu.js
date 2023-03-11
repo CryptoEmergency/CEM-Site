@@ -281,16 +281,16 @@ itemsMenu.news = function ({ url, downloadurl }) {
                 modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
             }
         },
-        {
-            text: Variable.lang.h.modal_comment,
-            type: "copyurl",
-            onlyAuth: true,
-            onclick: async () => {
-                const [tmp] = fn.GetParams({ ID: Variable.ModalsPage.length - 1, actual: true })
-                tmp.mainComment.el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-                tmp.mainComment.el.focus()
-            }
-        }
+        // {
+        //     text: Variable.lang.h.modal_comment,
+        //     type: "copyurl",
+        //     onlyAuth: true,
+        //     onclick: async () => {
+        //         const [tmp] = fn.GetParams({ ID: Variable.ModalsPage.length - 1, actual: true })
+        //         tmp.mainComment.el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        //         tmp.mainComment.el.focus()
+        //     }
+        // }
     ]
     return items
 }

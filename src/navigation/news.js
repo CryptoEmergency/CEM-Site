@@ -91,9 +91,9 @@ const start = function (data, ID) {
                     data: {
                       title: fn.sliceString(item.title, 85),
                       item,
-                      // items: fn.itemsMenu.news({
-                      //   url: "/news/show/" + item._id,
-                      // }),
+                      items: fn.itemsMenu.news({
+                        url: "/news/show/" + item._id,
+                      }),
                     },
                   }}
                   title={{
