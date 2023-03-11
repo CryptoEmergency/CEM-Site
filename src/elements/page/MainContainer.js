@@ -18,7 +18,7 @@ const forExport = function ({
     classACtive = className;
   }
   return (
-    <div class="page-inner">
+    <div class="c-main__body page-inner">
       {header ? header : null}
       <div class={classACtive}>
         {title ? (
