@@ -206,7 +206,7 @@ const start = function (data, ID) {
 
             <Elements.page.Container
               resetClass={true}
-              title={<h2>{Variable.lang.h.road_map}</h2>}
+              title={<h2 class="mb--50">{Variable.lang.h.road_map}</h2>}
             >
               <Elements.Roadmap records={roadmap} />
             </Elements.page.Container>
