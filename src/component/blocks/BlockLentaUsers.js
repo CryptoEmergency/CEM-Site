@@ -97,7 +97,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                 <div
                   class="c-lentaitem__link"
                   data-href={"/lenta-users/show/" + item._id}
-                  onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, items: fn.itemsMenu.lenta_users(Static, item) }) }}
+                  onclick={(e) => { fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, author: item.author, items: fn.itemsMenu.lenta_users(Static, item) }) }}
                 ></div>
                 :
                 null
