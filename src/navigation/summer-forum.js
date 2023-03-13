@@ -42,19 +42,27 @@ const start = function (data, ID) {
             //     el: '.swiper-scrollbar',
             // },
             breakpoints: {
-                100: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
+                // 100: {
+                //     slidesPerView: 1,
+                //     spaceBetween: 0,
+                // },
+                // 768: {
+                //     slidesPerView: 1,
+                //     spaceBetween: 0,
+                // },
+                // 980: {
+                //     slidesPerView: 2,
+                //     spaceBetween: 40,
+                // },
+                // 1240: {
+                //     slidesPerView: 3,
+                //     spaceBetween: 30,
+                // },
+                320: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
                 },
                 768: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                },
-                980: {
-                    slidesPerView: 2,
-                    spaceBetween: 40,
-                },
-                1240: {
                     slidesPerView: 3,
                     spaceBetween: 30,
                 },
@@ -110,7 +118,15 @@ const start = function (data, ID) {
                 DG.then(function () {
                     map = DG.map('map', {
                         center: [44.712398, 37.784382],
-                        zoom: 16
+                        zoom: 16,
+                        // dragging: false,
+                        touchZoom: false,
+                        scrollWheelZoom: false,
+                        doubleClickZoom: false,
+                        boxZoom: false,
+                        geoclicker: false,
+                        zoomControl: false,
+                        fullscreenControl: false
                     });
 
                     DG.marker([44.712398, 37.784382]).addTo(map).bindPopup(`
@@ -125,20 +141,22 @@ const start = function (data, ID) {
                     <div class="page-content page-content--full">
                         <section class="c-aboutforum" id="about">
                             {/* <h4 class="с-summerforum__title c-aboutforum__title">О форуме</h4> */}
-                            <div class="c-aboutforum__cover c-container">
-                                <figure class="c-aboutforum__logo">
-                                    <img src={images["summer_forum/logo"]} />
-                                </figure>
-                                <div class="c-aboutforum__caption">
-                                    <h2 class="">Ежегодный криптовалютный форум</h2>
-                                    <span class="">
-                                        3-4 июня
-                                        <br />
-                                        г. Новороссийск
-                                    </span>
-                                    <a href="#" class="c-button c-button--gradient2">
-                                        <span class="c-button__text">{Variable.lang.button.buyTicket}</span>
-                                    </a>
+                            <div class="c-container">
+                                <div class="c-aboutforum__cover">
+                                    <figure class="c-aboutforum__logo">
+                                        <img src={images["summer_forum/logo"]} />
+                                    </figure>
+                                    <div class="c-aboutforum__caption">
+                                        <h2 class="">Ежегодный криптовалютный форум</h2>
+                                        <span class="">
+                                            3-4 июня
+                                            <br />
+                                            г. Новороссийск
+                                        </span>
+                                        <a href="#" class="c-button c-button--gradient2">
+                                            <span class="c-button__text">{Variable.lang.button.buyTicket}</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -162,17 +180,17 @@ const start = function (data, ID) {
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide">
                                                 <div class="swiper-post_media_image_container">
-                                                    <img style="height: 218px; border-radius: 13px" src={images['summer_forum/slide_about']} />
+                                                    <img style="/*height: 218px;*/ border-radius: 13px" src={images['summer_forum/slide_about']} />
                                                 </div>
                                             </a>
                                             <a class="swiper-slide">
                                                 <div class="swiper-post_media_image_container">
-                                                    <img style="height: 218px; border-radius: 13px" src={images['summer_forum/slide_about']} />
+                                                    <img style="/*height: 218px;*/ border-radius: 13px" src={images['summer_forum/slide_about']} />
                                                 </div>
                                             </a>
                                             <a class="swiper-slide">
                                                 <div class="swiper-post_media_image_container">
-                                                    <img style="height: 218px; border-radius: 13px" src={images['summer_forum/slide_about']} />
+                                                    <img style="/*height: 218px;*/ border-radius: 13px" src={images['summer_forum/slide_about']} />
                                                 </div>
                                             </a>
                                         </div>
