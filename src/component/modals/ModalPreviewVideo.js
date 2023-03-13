@@ -378,6 +378,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                                         onClick={(e) => {
                                             uploadPreviewImage(Static.preview)
                                             fn.modals.close(ID)
+                                            initReload()
                                         }}
                                     >
                                         <span class="c-button__text">{Variable.lang.button.attach}</span>
