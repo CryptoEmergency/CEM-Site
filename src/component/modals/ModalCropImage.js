@@ -21,6 +21,7 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
     let elemRatio1 = Variable.setRef()
     let elemRatio2 = Variable.setRef()
     let elemRatio3 = Variable.setRef()
+    let elemRatio4 = Variable.setRef()
 
     const URL = window.URL || window.webkitURL;
     let cropper, aspectActive;
@@ -39,52 +40,76 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                     ? "two"
                     : aspectActive == 1.7777777777777777
                         ? "three"
-                        : null
+                        : aspectActive == 333
+                            ? "four"
+                            : null
 
-            cropper = new Cropper(el, {
-                //**1 */
-                // aspectRatio: aspectActive,
-                // viewMode: 2,
-                // cropBoxResizable: true,
-                // autoCropArea: 1,
-                // strict: false,
-                // guides: false,
-                // highlight: true,
-                // dragCrop: false,
+            if (aspectActive == 333) {
+                cropper = new Cropper(el, {
+                    // aspectRatio: aspectActive,
+                    viewMode: 3,
+                    dragMode: 'move',
+                    autoCropArea: 1,
+                    restore: false,
+                    modal: false,
+                    guides: false,
+                    highlight: true,
+                    cropBoxMovable: false,
+                    cropBoxResizable: false,
+                    toggleDragModeOnDblclick: false,
+                    center: false,
+                    responsive: true,
 
-                //**2 */
-                // aspectRatio: aspectActive,
-                // autoCropArea: 1,
-                // viewMode: 3,
-                // strict: false,
-                // guides: false,
-                // highlight: false,
-                // dragMode: 'move',
-                // restore: false,
-                // modal: false,
-                // cropBoxMovable: false,
-                // cropBoxResizable: false,
-                // toggleDragModeOnDblclick: false,
+                    crop: function (e) {
+                        var data = e.detail;
+                    }
+                });
+            } else {
+                cropper = new Cropper(el, {
+                    //**1 */
+                    // aspectRatio: aspectActive,
+                    // viewMode: 2,
+                    // cropBoxResizable: true,
+                    // autoCropArea: 1,
+                    // strict: false,
+                    // guides: false,
+                    // highlight: true,
+                    // dragCrop: false,
 
-                /**3 */
-                aspectRatio: aspectActive,
-                viewMode: 3,
-                dragMode: 'move',
-                autoCropArea: 1,
-                restore: false,
-                modal: false,
-                guides: false,
-                highlight: true,
-                cropBoxMovable: false,
-                cropBoxResizable: false,
-                toggleDragModeOnDblclick: false,
-                center: false,
-                responsive: true,
+                    //**2 */
+                    // aspectRatio: aspectActive,
+                    // autoCropArea: 1,
+                    // viewMode: 3,
+                    // strict: false,
+                    // guides: false,
+                    // highlight: false,
+                    // dragMode: 'move',
+                    // restore: false,
+                    // modal: false,
+                    // cropBoxMovable: false,
+                    // cropBoxResizable: false,
+                    // toggleDragModeOnDblclick: false,
 
-                crop: function (e) {
-                    var data = e.detail;
-                }
-            });
+                    /**3 */
+                    aspectRatio: aspectActive,
+                    viewMode: 3,
+                    dragMode: 'move',
+                    autoCropArea: 1,
+                    restore: false,
+                    modal: false,
+                    guides: false,
+                    highlight: true,
+                    cropBoxMovable: false,
+                    cropBoxResizable: false,
+                    toggleDragModeOnDblclick: false,
+                    center: false,
+                    responsive: true,
+
+                    crop: function (e) {
+                        var data = e.detail;
+                    }
+                });
+            }
         } else {
             cropper = new Cropper(el, {
                 viewMode: 3,
@@ -111,7 +136,9 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                 ? Static.elCropBox.classList.remove("two")
                 : Static.elCropBox.classList.contains("three")
                     ? Static.elCropBox.classList.remove("three")
-                    : null
+                    : Static.elCropBox.classList.contains("four")
+                        ? Static.elCropBox.classList.remove("four")
+                        : null
         Static.elCropBox.style = "";
         Static.elCropBox.classList.add(Static.classAspectContainer)
         let widthImg = Static.elCropBox.offsetWidth;
@@ -121,8 +148,13 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                 ? 1.25
                 : aspectActive == 1.7777777777777777
                     ? 0.5625
-                    : 1
-        Static.elCropBox.style = `width: ${widthImg}px; height: calc(${widthImg}px * ${heightImg})`
+                    : aspectActive == 333
+                        ? 'auto'
+                        : 1
+        heightImg == "auto"
+        ? Static.elCropBox.style = `width: ${widthImg}px; height: auto;}`
+        : Static.elCropBox.style = `width: ${widthImg}px; height: calc(${widthImg}px * ${heightImg})`
+        console.log('=e85dd2= widthImg =',widthImg,', heightImg =',heightImg)
     }
 
 
@@ -146,7 +178,9 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                     ? "two"
                     : aspectActive == 1.7777777777777777
                         ? "three"
-                        : null
+                        : aspectActive == NaN
+                            ? "four"
+                            : null
             // console.log('=c98352=', Static.classAspectContainer, aspectActive)
         }
     },
@@ -277,6 +311,28 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                                                             cropperGo(elemImg())
                                                         }}
                                                     >1:1</label>
+
+                                                    <input
+                                                        type="radio"
+                                                        hidden={true}
+                                                        id="aspectRatio4"
+                                                        checked={aspectActive == 333}
+                                                        disabled={((arrMedia.length > 1 && Static.editable) || (arrMedia.length > 0 && !Static.editable)) && aspectSelect != 333}
+                                                        ref={elemRatio4}
+                                                    />
+                                                    <label class="c-button c-button--outline"
+                                                        onclick={function () {
+                                                            if (aspectActive == 333 || elemRatio4().disabled) {
+                                                                return
+                                                            }
+                                                            aspectActive = 333
+                                                            elemRatio1().checked = false
+                                                            elemRatio2().checked = false
+                                                            elemRatio3().checked = false
+                                                            elemRatio4().checked = true
+                                                            cropperGo(elemImg())
+                                                        }}
+                                                    >auto</label>
                                                 </div>
                                             </div>
                                         )
