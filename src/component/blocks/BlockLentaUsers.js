@@ -37,7 +37,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
         onclick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, items: fn.itemsMenu.lenta_users(Static, item) })
+          fn.siteLinkModal(e, { title: Variable.lang.h.posts_user, item, author: item.author, items: fn.itemsMenu.lenta_users(Static, item) })
         }
         }
       >
