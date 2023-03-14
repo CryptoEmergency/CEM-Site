@@ -241,7 +241,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   class="fullsize media"
                   poster={item.previewName ? `/assets/upload/${type}/${item.previewName}` : images["video_background"]}
                   preload="metadata"
-                  src={`/assets/upload/${type}/${item.name}#t=0.001`}
+                  src={item.previewName ? `/assets/upload/${type}/${item.name}` : `/assets/upload/${type}/${item.name}#t=0.001`}
                 />
             }
             {
@@ -333,6 +333,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           } else if (!Static.mediaInputs.value.filter((item) => { return item.activePreview })[0]) {
                             Static.mediaInputs.value[0].activePreview = true;
                           }
+                          debugger
                           initReload();
                         }
                       },

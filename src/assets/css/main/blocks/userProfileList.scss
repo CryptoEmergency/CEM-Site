@@ -581,6 +581,7 @@
 
     .video_sign {
         z-index: 2;
+        display: none;
 
         &+img {
             z-index: 2;

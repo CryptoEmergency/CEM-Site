@@ -4,15 +4,36 @@
         url("../images/summer_forum/bottom.png") no-repeat bottom 883px center/1521px auto;
     background-color: #171717;
 
+    @media(max-width: 1279px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 3100px left calc(50% - 506px)/506px auto,
+            url("../images/summer_forum/right.png") no-repeat top 2450px left calc(50% + 188px)/1140px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 825px center/1521px auto;
+    }
+
+    @media(max-width: 767px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1350px left/auto 30%,
+            url("../images/summer_forum/right.png") no-repeat top 1000px left calc(50%)/contain,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 800px center/contain;
+        // background-color: red;
+    }
+
     &__title {
         margin: 25px 0;
-        font-size: 90px;
+        font-size: 4.7vw; //90px;
         font-weight: 700;
         text-align: center;
 
         @media(max-width: 1279px) {
-            font-size: 50px;
+            // font-size: 50px;
         }
+
+        @media(min-width: 1280px) {
+            font-size: 90px;
+        }
+    }
+
+    .c-container {
+        // max-width: 1920px;
     }
 
     .page-content {
@@ -24,7 +45,7 @@
         width: auto;
         height: auto;
         text-transform: none;
-        border-radius: 34px;
+        border-radius: 1.77vw; //34px;
 
         &::after {
             content: none;
@@ -40,8 +61,13 @@
                 font-size: 23px;
             }
 
+
             @media(max-width: 767px) {
-                font-size: 21px;
+                font-size: 15px;
+            }
+
+            @media(max-width: 599px) {
+                font-size: 11px;
             }
         }
     }
@@ -50,14 +76,21 @@
 .c-aboutforum {
     position: relative;
     padding-top: 133px;
+    // padding-bottom: 80px;
     background: url("../images/summer_forum/circles.png") no-repeat top 926px left calc(50% + 570px)/1200px;
 
     @media(max-width: 1279px) {
         padding-top: 50px;
+        background-position: top 750px left calc(50% + 570px);
     }
 
     @media(max-width: 767px) {
-        padding-top: 0;
+        padding-top: 10px;
+    }
+
+    @media(max-width: 499px) {
+        background: url("../images/summer_forum/circles.png") no-repeat top 330px right -490px/700px;
+
     }
 
     &::before {
@@ -94,7 +127,11 @@
         }
 
         @media(max-width: 599px) {
-            height: 850px;
+            height: 334px; //850px;
+        }
+
+        @media(max-width: 400px) {
+            height: 262px;
         }
     }
 
@@ -103,27 +140,31 @@
     &__cover {
         display: flex;
         align-items: center;
-        gap: 50px;
-        padding: 0 30px;
+        gap: 5%;
+        padding: 0 2.5%;
         margin-bottom: 120px;
         background: rgb(1, 200, 171);
         background: linear-gradient(90deg, rgba(1, 200, 171, 1) 0%, rgba(2, 195, 167, 1) 13%, rgba(4, 180, 154, 1) 28%, rgba(7, 155, 133, 1) 45%, rgba(11, 121, 105, 1) 62%, rgba(16, 76, 67, 1) 81%, rgba(23, 23, 23, 1) 100%);
-        border-radius: 65px;
+        border-radius: 6vw; //65px;
 
         @media(max-width: 979px) {
             padding-top: 20px;
             padding-bottom: 20px;
             margin-bottom: 50px;
-            border-radius: 30px;
+            // border-radius: 30px;
         }
 
         @media(max-width: 767px) {
-            border-radius: 0;
+            // border-radius: 0;
         }
 
         @media(max-width: 599px) {
-            flex-direction: column;
-            gap: 18px;
+            // flex-direction: column;
+            // gap: 18px;
+        }
+
+        @media(min-width: 1280px) {
+            border-radius: 65px;
         }
     }
 
@@ -156,11 +197,12 @@
         z-index: 2;
 
         @media(max-width: 599px) {
-            align-items: center;
-            text-align: center;
+            // align-items: center;
+            // text-align: center;
         }
 
         h2 {
+            margin-top: 0;
             font-size: 45px;
             line-height: 62.1px;
             text-align: left;
@@ -175,9 +217,15 @@
                 font-size: 32px;
             }
 
+
             @media(max-width: 767px) {
-                font-size: 26px;
-                text-align: center;
+                font-size: 24px;
+                margin-bottom: 1.5rem;
+            }
+
+            @media(max-width: 599px) {
+                font-size: 17px;
+                margin-bottom: 1rem;
             }
         }
 
@@ -195,8 +243,15 @@
                 font-size: 30px;
             }
 
+
             @media(max-width: 767px) {
-                font-size: 25px;
+                font-size: 20px;
+                margin-bottom: 1.5rem;
+            }
+
+            @media(max-width: 599px) {
+                font-size: 15px;
+                margin-bottom: 1rem;
             }
         }
     }
@@ -211,6 +266,7 @@
         }
 
         p {
+            width: 70%;
             max-width: 850px;
             margin-left: auto;
             margin-right: auto;
@@ -226,6 +282,10 @@
             @media(max-width: 979px) {
                 margin-bottom: 30px;
                 font-size: 26px;
+            }
+
+            @media(max-width: 767px) {
+                font-size: 3.6vw;
             }
 
             &:last-of-type {
@@ -245,6 +305,14 @@
         }
     }
 
+    .c-container {
+
+        @media(min-width: 768px) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
     .c-button {
         display: inline-flex;
         width: auto;
@@ -252,7 +320,7 @@
         text-transform: none;
         background: rgb(100, 70, 210);
         background: linear-gradient(90deg, rgba(100, 70, 210, 1) 0%, rgba(100, 82, 208, 1) 13%, rgba(98, 114, 203, 1) 38%, rgba(96, 166, 195, 1) 70%, rgba(94, 221, 187, 1) 100%);
-        border-radius: 34px;
+        border-radius: 1.77vw; //34px;
 
         &::after {
             content: none;
@@ -287,7 +355,7 @@
                 box-shadow: none;
 
                 @media(max-width: 1279px) {
-                    width: 50px !important;
+                    width: 5vw !important; //50px !important;
                     height: auto !important;
                 }
 
@@ -336,7 +404,7 @@
         padding: 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 100px;
+        gap: 8vw;
         justify-content: space-between;
         align-items: baseline;
 
@@ -346,13 +414,35 @@
         }
 
         @media(max-width: 767px) {
-            grid-template-columns: 1fr;
+            // grid-template-columns: 1fr;
+        }
+
+        @media(min-width: 1280px) {
+            gap: 100px;
         }
 
         li {
             flex-shrink: 1;
             justify-self: center;
-            width: 318px;
+            width: 100%;
+            max-width: 318px;
+
+            &:nth-child(odd) {
+                @media(max-width: 1279px) {
+                    justify-self: flex-end;
+                }
+
+            }
+
+            &:nth-child(even) {
+                @media(max-width: 1279px) {
+                    justify-self: flex-start;
+                }
+            }
+
+            @media(max-width: 1023px) {
+                width: 94%;
+            }
 
             @media(max-width: 767px) {
                 width: calc(100% - 40px);
@@ -377,11 +467,12 @@
 
         &::before {
             position: absolute;
-            right: -55px;
-            top: -18px;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-40%);
             content: '';
-            width: calc(100% + 36px);
-            height: calc(100% + 36px);
+            width: 108.97%;
+            height: 108.97%;
             border-radius: 50%;
             background: #ffffff;
         }
@@ -1366,7 +1457,7 @@
 .c-localmap {
 
     &__map {
-        width:100%;
-        height:700px
+        width: 100%;
+        height: 700px
     }
 }

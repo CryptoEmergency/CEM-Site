@@ -8,6 +8,7 @@ const forExport = function ({
   title,
   header,
   className,
+  classTitle,
   children,
   resetClass,
   disableBack,
@@ -17,12 +18,12 @@ const forExport = function ({
     classACtive = className;
   }
   return (
-    <div class="page-inner">
+    <div class="c-main__body page-inner">
       {header ? header : null}
       <div class={classACtive}>
         {title ? (
           <div>
-            <h1>{title}</h1>
+            <h1 class={classTitle}>{title}</h1>
           </div>
         ) : null}
         {children}

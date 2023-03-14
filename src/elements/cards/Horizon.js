@@ -9,10 +9,14 @@ const forExport = function ({ records }) {
           <div class="ico-list_item-wrap">
             <div
               class="ico-list_item"
-              onclick={() => {
-                fn.siteLinkModal("/list-icostartaps/show/" + item._id, {
+              data-href={"/list-icostartaps/show/" + item._id}
+              onclick={(e) => {
+                fn.siteLinkModal(e, {
                   title: item.title,
                   item,
+                  items: fn.itemsMenu.ico({
+                    url: "/list-icostartaps/show/" + item._id,
+                  })
                 });
               }}
             >

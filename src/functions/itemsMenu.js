@@ -255,6 +255,46 @@ itemsMenu.onlyPage = function ({ url, downloadurl }) {
     return items
 }
 
+itemsMenu.ico = function ({ url, downloadurl }) {
+    const items = [
+        {
+            text: Variable.lang.select.share,
+            type: "share",
+            onclick: async () => {
+                try {
+                    if (navigator.share) {
+                        await navigator.share({
+                            url: window.location.origin + url,
+                        });
+                    }
+                } catch (err) {
+                    // Вывести ошибку
+                    console.error("Share", err)
+                }
+            }
+        },
+        {
+            text: Variable.lang.p.copy + " URL",
+            type: "copyurl",
+            onclick: async () => {
+                navigator.clipboard.writeText(window.location.origin + url);
+                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+            }
+        },
+        // {
+        //     text: Variable.lang.h.modal_comment,
+        //     type: "copyurl",
+        //     onlyAuth: true,
+        //     onclick: async () => {
+        //         const [tmp] = fn.GetParams({ ID: Variable.ModalsPage.length - 1, actual: true })
+        //         tmp.mainComment.el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        //         tmp.mainComment.el.focus()
+        //     }
+        // }
+    ]
+    return items
+}
+
 itemsMenu.news = function ({ url, downloadurl }) {
     const items = [
         {
@@ -281,16 +321,16 @@ itemsMenu.news = function ({ url, downloadurl }) {
                 modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
             }
         },
-        {
-            text: Variable.lang.h.modal_comment,
-            type: "copyurl",
-            onlyAuth: true,
-            onclick: async () => {
-                const [tmp] = fn.GetParams({ ID: Variable.ModalsPage.length - 1, actual: true })
-                tmp.mainComment.el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-                tmp.mainComment.el.focus()
-            }
-        }
+        // {
+        //     text: Variable.lang.h.modal_comment,
+        //     type: "copyurl",
+        //     onlyAuth: true,
+        //     onclick: async () => {
+        //         const [tmp] = fn.GetParams({ ID: Variable.ModalsPage.length - 1, actual: true })
+        //         tmp.mainComment.el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        //         tmp.mainComment.el.focus()
+        //     }
+        // }
     ]
     return items
 }
