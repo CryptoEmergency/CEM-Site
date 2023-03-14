@@ -74,10 +74,20 @@ const banners = [
     image: "metis_banner",
     lang: "ru",
   },
+  // {
+  //   href: "https://blockchain-life.com/asia/en/#tickets-row",
+  //   image: "BlockchainLife",
+  //   lang: "ru",
+  // },
   {
-    href: "https://blockchain-life.com/asia/en/#tickets-row",
-    image: "BlockchainLife",
-    lang: "ru",
+    href: "https://cryptosummit.ru/",
+    image: "crypto-summit",
+    lang: "ru"
+  },
+  {
+    href: "",
+    image: "crypto-ug",
+    lang: "ru"
   },
   {
     href: "https://blockchain24.pro/",
