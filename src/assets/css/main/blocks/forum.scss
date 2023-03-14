@@ -1,7 +1,7 @@
 .с-summerforum {
-    background: url("../images/summer_forum/left.png") no-repeat top 3100px left calc(50% - 506px)/506px auto,
-        url("../images/summer_forum/right.png") no-repeat top 2450px left calc(50% + 188px)/1140px auto,
-        url("../images/summer_forum/bottom.png") no-repeat bottom 883px center/1521px auto;
+    background: url("../images/summer_forum/left.png") no-repeat top 3100px left calc(50% - 600px)/300px auto,
+        url("../images/summer_forum/right.png") no-repeat top 2450px right calc(50% - 315px)/860px auto,
+        url("../images/summer_forum/bottom.png") no-repeat bottom 883px center/1500px auto;
     background-color: #171717;
 
     @media(max-width: 1279px) {
@@ -10,11 +10,58 @@
             url("../images/summer_forum/bottom.png") no-repeat bottom 825px center/1521px auto;
     }
 
+    @media(max-width: 1099px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1865px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1670px right/500px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
+    }
+
+    @media(max-width: 1023px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1865px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1670px right/500px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
+    }
+
+    @media(max-width: 979px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1666px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1408px right/380px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
+    }
+
+    @media(max-width: 899px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1666px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1408px right/380px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
+    }
+
+    @media(max-width: 799px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1666px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1408px right/380px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
+    }
+
     @media(max-width: 767px) {
-        background: url("../images/summer_forum/left.png") no-repeat top 990px left/20% auto /*top 1350px left/auto 30%*/,
-            url("../images/summer_forum/right.png") no-repeat top 820px left calc(100%)/50% auto/*top 1000px left calc(50%)/contain*/,
+        background: url("../images/summer_forum/left.png") no-repeat top 1666px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1408px right/380px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 520px center/contain;
+    }
+
+    @media(max-width: 699px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1441px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1350px right/380px auto,
             url("../images/summer_forum/bottom.png") no-repeat bottom 500px center/contain;
-        // background-color: red;
+    }
+
+    @media(max-width: 599px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 1132px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 1000px right/300px auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 500px center/contain;
+    }
+
+    @media(max-width: 499px) {
+        background: url("../images/summer_forum/left.png") no-repeat top 990px left/20% auto,
+            url("../images/summer_forum/right.png") no-repeat top 820px left calc(100%)/50% auto,
+            url("../images/summer_forum/bottom.png") no-repeat bottom 500px center/contain;
     }
 
     &__title {
@@ -59,17 +106,14 @@
 
             @media(max-width: 1279px) {
                 // padding: 20px 40px;
-                font-size: 23px;
+                // font-size: 23px;
+                font-size: 1.5vw;
             }
 
 
             @media(max-width: 767px) {
                 // font-size: 15px;
                 font-size: 1.5vw;
-            }
-
-            @media(max-width: 599px) {
-                // font-size: 11px;
             }
 
             @media(min-width: 1280px) {
@@ -88,14 +132,20 @@
     @media(max-width: 1279px) {
         padding-top: 50px;
         background-position: top 750px left calc(50% + 570px);
+        background-position: top 544px left calc(50% + 330px);
+        background-size: 841px;
     }
 
     @media(max-width: 767px) {
         padding-top: 10px;
+        background-position: top 544px left calc(50% + 330px);
+        background-size: 841px;
     }
 
     @media(max-width: 499px) {
-        background: url("../images/summer_forum/circles.png") no-repeat top 325px left calc(50% + 200px)/480px/*top 330px right -490px/700px*/;
+        background: url("../images/summer_forum/circles.png") no-repeat top 325px left calc(50% + 200px)/480px
+            /*top 330px right -490px/700px*/
+        ;
 
     }
 
@@ -286,7 +336,7 @@
             margin-right: auto;
             margin-bottom: 50px;
             font-size: 43px;
-            text-indent: 50px;
+            // text-indent: 50px;
             text-align: center;
 
             @media(max-width: 1279px) {
@@ -352,6 +402,7 @@
 
     .swiper {
         &-container {
+            width: 80%;
 
             @media(max-width: 1479px) {
                 max-width: calc(100% - 230px);
@@ -431,26 +482,26 @@
 
     &__list {
         list-style-type: none;
-        margin: 0 0 100px;
+        margin: 0 auto 100px;
         padding: 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 8vw;
         justify-content: space-between;
         align-items: baseline;
+        width: 80%;
 
         @media(max-width: 1279px) {
             // grid-template-columns: repeat(2, 1fr);
-            margin-bottom: 60px;
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-            gap: 3vw;
+            // margin-bottom: 60px;
+            margin-bottom: 5vw;
+            gap: 7vw;
         }
 
         @media(max-width: 767px) {
             // grid-template-columns: 1fr;
             margin-bottom: 5vw;
+            gap: 3vw;
         }
 
         @media(min-width: 1280px) {
@@ -483,6 +534,16 @@
             @media(max-width: 767px) {
                 width: calc(100% - 40px);
                 max-width: 318px;
+                margin-bottom: 0.6rem;
+            }
+
+            &:nth-last-of-type(1),
+            &:nth-last-of-type(2),
+            &:nth-last-of-type(3) {
+
+                @media(max-width: 767px) {
+                    margin-bottom: 0;
+                }
             }
         }
     }
@@ -520,16 +581,24 @@
         text-align: center;
 
         h3 {
+            @media(max-width: 1279px) {
+                font-size: 1.5vw;
+                margin-bottom: 0.3rem;
+            }
 
             @media(max-width: 767px) {
                 font-size: 1.5vw;
-                margin-bottom: 0.3rem;
+                margin-bottom: 0.2rem;
             }
         }
 
         p {
             font-size: 1.1rem;
             margin-bottom: 0;
+
+            @media(max-width: 1279px) {
+                font-size: 1.1vw;
+            }
 
             @media(max-width: 767px) {
                 font-size: 0.9vw;
@@ -540,10 +609,10 @@
     .c-button {
         background: #6760cf;
         margin-left: auto;
+        margin-right: 10%;
 
-        @media(max-width: 767px) {
+        @media(max-width: 1279px) {
             // margin-right: auto;
-            margin-right: 10%;
         }
     }
 }
@@ -575,6 +644,7 @@
         @media(max-width: 1023px) {
             display: block;
             margin-bottom: 100px;
+            width: 80%;
         }
 
         @media(max-width: 767px) {
@@ -1465,10 +1535,11 @@
 
     .c-button {
         margin-left: auto;
+        margin-right: 10%;
         background: rgb(100, 70, 210);
         background: linear-gradient(360deg, rgba(100, 70, 210, 1) 0%, rgba(103, 74, 211, 1) 16%, rgba(113, 85, 214, 1) 30%, rgba(129, 104, 218, 1) 45%, rgba(152, 131, 225, 1) 59%, rgba(181, 166, 233, 1) 73%, rgba(216, 208, 244, 1) 87%, rgba(255, 255, 255, 1) 100%);
 
-        @media(max-width: 767px) {
+        @media(max-width: 1279px) {
             // margin-right: auto;
             margin-right: 10%;
         }
@@ -1480,9 +1551,9 @@
     flex-direction: column;
     padding-bottom: 180px;
 
-    @media(max-width: 1279px) {
-        padding-bottom: 80px;
-    }
+    // @media(max-width: 1279px) {
+    //     padding-bottom: 80px;
+    // }
 
     @media(max-width: 1279px) {
         padding-bottom: 8vw;
@@ -1493,20 +1564,20 @@
         grid-gap: 10px;
         grid-template-columns: calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px);
         margin-bottom: 100px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
 
         @media(max-width: 1279px) {
             margin-bottom: 60px;
         }
 
-        @media(max-width: 1024px) {
-            grid-template-columns: calc(50% - 5px) calc(50% - 5px);
-        }
+        // @media(max-width: 1024px) {
+        //     grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+        // }
 
         @media(max-width: 767px) {
             grid-template-columns: calc(33% - 5px) calc(33% - 5px) calc(33% - 5px);
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
             margin-bottom: 5vw;
         }
     }
@@ -1528,11 +1599,12 @@
         background: rgb(0, 222, 186);
         background: linear-gradient(360deg, rgba(0, 222, 186, 1) 0%, rgba(4, 222, 187, 1) 13%, rgba(15, 224, 190, 1) 26%, rgba(34, 226, 195, 1) 38%, rgba(61, 230, 203, 1) 51%, rgba(96, 234, 212, 1) 63%, rgba(139, 240, 224, 1) 75%, rgba(190, 247, 237, 1) 87%, rgba(247, 254, 253, 1) 98%, rgba(255, 255, 255, 1) 100%);
         margin-left: auto;
+        margin-right: 10%;
 
-        @media(max-width: 767px) {
-            // margin-right: auto;
-            margin-right: 10%;
-        }
+        // @media(max-width: 1279px) {
+        //     // margin-right: auto;
+        //     margin-right: 10%;
+        // }
     }
 }
 
@@ -1540,7 +1612,10 @@
 
     &__map {
         width: 100%;
+        max-width: 1500px;
         height: 700px;
+        margin-left: auto;
+        margin-right: auto;
 
         @media(max-width: 767px) {
             height: 400px;
