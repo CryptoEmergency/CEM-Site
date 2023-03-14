@@ -795,16 +795,15 @@ const start = function (data, ID) {
               <div
                 class="blog_filter_language"
                 onclick={() => {
-                  Variable.SetModals({
-                    name: "ModalChangeLanguage",
-                    data: {
-                      onclick: async (langCode, langName, langOrig) => {
-                        Static.lang.name = langOrig;
-                        Static.lang.code = langCode;
-                        initReload()
-                      },
-                    },
-                  });
+                  fn.modals.ModalChangeLanguage({
+                    onclick: async (langCode, langName, langOrig) => {
+                      Static.lang.name = langOrig;
+                      Static.lang.code = langCode;
+                      Static.posts = await fn.restApi.getPost({ short: true, cache: false, name: "PageUserProfileMyLenta", filter: { author: Static.userInfo._id, "languages.code": Static.lang.code }, select: { author: 1, forFriends: 1, languages: 1, media: 1, showDate: 1, statistic: 1, status: 1, text: 1, title: 1, updateTime: 1 }, limit: 12 })
+                      // console.log('=5e37b8= ModalChangeLanguage',Static.posts)
+                      initReload()
+                    }
+                  })
                 }}
               >{Static.lang.name}</div>
             </div>
