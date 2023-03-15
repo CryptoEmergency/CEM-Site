@@ -132,6 +132,31 @@
     @media(max-width: 1279px) {
         padding-top: 50px;
         background-position: top 750px left calc(50% + 570px);
+        // background-position: top 544px left calc(50% + 330px);
+        background-size: 841px;
+    }
+
+    @media(max-width: 1199px) {
+        background-position: top 671px left calc(50% + 330px);
+        background-size: 900px;
+    }
+
+    @media(max-width: 1099px) {
+        background-position: top 693px left calc(50% + 330px);
+        background-size: 890px;
+    }
+
+    @media(max-width: 1023px) {
+        background-position: top 693px left calc(50% + 330px);
+        background-size: 890px;
+    }
+
+    @media(max-width: 979px) {
+        background-position: top 613px left calc(50% + 330px);
+        background-size: 700px;
+    }
+
+    @media(max-width: 799px) {
         background-position: top 544px left calc(50% + 330px);
         background-size: 841px;
     }
@@ -142,8 +167,24 @@
         background-size: 841px;
     }
 
+    @media(max-width: 699px) {
+        background-position: top 454px left calc(50% + 340px);
+        background-size: 770px;
+    }
+
+    @media(max-width: 600px) {
+        background-position: top 427px left calc(50% + 238px);
+        background-size: 680px;
+    }
+
     @media(max-width: 499px) {
-        background: url("../images/summer_forum/circles.png") no-repeat top 325px left calc(50% + 200px)/480px
+        background-position: top 374px left calc(50% + 238px);
+        background-size: 576px;
+    }
+
+    @media(max-width: 479px) {
+        background-position: top 325px left calc(50% + 200px);
+        background-size: 480px
             /*top 330px right -490px/700px*/
         ;
 
@@ -532,7 +573,7 @@
             }
 
             @media(max-width: 767px) {
-                width: calc(100% - 40px);
+                width: calc(100% - 30px);
                 max-width: 318px;
                 margin-bottom: 0.6rem;
             }
@@ -567,12 +608,21 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translateY(-50%) translateX(-40%);
+            transform: translateY(-50%) translateX(-45%);
             content: '';
-            width: 108.97%;
-            height: 108.97%;
+            width: 104%;
+            height: 104%;
             border-radius: 50%;
-            background: #ffffff;
+            background: rgb(187, 248, 191);
+            background: linear-gradient(90deg, rgba(187, 248, 191, 1) 56%, rgba(0, 161, 159, 1) 100%);
+
+            @media(max-width: 767px) {
+                left: 50%;
+                top: 50%;
+                transform: translateY(-52.5%) translateX(-40%);
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 
