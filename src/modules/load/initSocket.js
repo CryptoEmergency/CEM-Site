@@ -66,7 +66,7 @@ const initSocket = async function () {
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
-                initReload()
+                // initReload()
             } else {
                 resolve()
             }
@@ -78,7 +78,7 @@ const initSocket = async function () {
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
-                initReload()
+                // initReload()
             } else {
                 resolve()
             }
@@ -90,7 +90,7 @@ const initSocket = async function () {
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
-                initReload()
+                // initReload()
             } else {
                 resolve()
             }
@@ -102,7 +102,7 @@ const initSocket = async function () {
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
-                initReload()
+                // initReload()
             } else {
                 resolve()
             }
@@ -114,7 +114,7 @@ const initSocket = async function () {
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
-                initReload()
+                // initReload()
             } else {
                 resolve()
             }
@@ -126,7 +126,7 @@ const initSocket = async function () {
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
-                initReload()
+                // initReload()
             } else {
                 resolve()
             }
