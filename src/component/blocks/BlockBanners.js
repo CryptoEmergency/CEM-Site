@@ -44,36 +44,36 @@ const banners = [
   //     "id": "631eed7583bf605a831e4a42",
   //     "image": "banner2022-09-09"
   // },
-  {
-    href: "https://blockchain-life.com/asia/en/#tickets-row",
-    image: "BlockchainLife",
-    lang: "en",
-  },
-  {
-    href: "https://blockchain-life.com/asia/en/#tickets-row",
-    image: "BlockchainLife",
-    lang: "en",
-  },
-  {
-    href: "https://metis.io/",
-    image: "metis_banner",
-    lang: "en",
-  },
-  {
-    href: "https://blockchain-life.com/asia/en/#tickets-row",
-    image: "BlockchainLife",
-    lang: "en",
-  },
-  {
-    href: "https://blockchain-life.com/asia/en/#tickets-row",
-    image: "BlockchainLife",
-    lang: "en",
-  },
+  // {
+  //   href: "https://blockchain-life.com/asia/en/#tickets-row",
+  //   image: "BlockchainLife",
+  //   lang: "en",
+  // },
+  // {
+  //   href: "https://blockchain-life.com/asia/en/#tickets-row",
+  //   image: "BlockchainLife",
+  //   lang: "en",
+  // },
   {
     href: "https://metis.io/",
     image: "metis_banner",
-    lang: "ru",
+    lang: "en",
   },
+  // {
+  //   href: "https://blockchain-life.com/asia/en/#tickets-row",
+  //   image: "BlockchainLife",
+  //   lang: "en",
+  // },
+  // {
+  //   href: "https://blockchain-life.com/asia/en/#tickets-row",
+  //   image: "BlockchainLife",
+  //   lang: "en",
+  // },
+  // {
+  //   href: "https://metis.io/",
+  //   image: "metis_banner",
+  //   lang: "ru",
+  // },
   // {
   //   href: "https://blockchain-life.com/asia/en/#tickets-row",
   //   image: "BlockchainLife",
@@ -89,21 +89,21 @@ const banners = [
     image: "crypto-ug",
     lang: "ru"
   },
-  {
-    href: "https://blockchain24.pro/",
-    image: "blockchain_banner",
-    lang: "ru",
-  },
-  {
-    href: "https://crypto.ru/",
-    image: "crypto_banner",
-    lang: "ru",
-  },
-  {
-    href: "https://carding.pro",
-    image: "pro_banner",
-    lang: "ru",
-  },
+  // {
+  //   href: "https://blockchain24.pro/",
+  //   image: "blockchain_banner",
+  //   lang: "ru",
+  // },
+  // {
+  //   href: "https://crypto.ru/",
+  //   image: "crypto_banner",
+  //   lang: "ru",
+  // },
+  // {
+  //   href: "https://carding.pro",
+  //   image: "pro_banner",
+  //   lang: "ru",
+  // },
   {
     href: "https://ti.turovinvest.ru/moscow?utm_source=crypto+emergency+site",
     image: "crypto_future",
