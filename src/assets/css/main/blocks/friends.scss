@@ -217,6 +217,12 @@
         justify-content: space-between;
         align-items: center;
         padding-top: 25px;
+        margin-bottom: 5px;
+
+        @media(max-width: 970px) {
+            padding-top: 10px;
+            padding-bottom: 15px;
+        }
 
         h2 {
             margin: 0;
