@@ -494,7 +494,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
         <div class="bl_one c-container 88" id="UserInfoFollowers">
             <div class="friends_header">
                 <h2>{Variable.lang.toggle.subscribers}</h2>
-                <a
+                {/* <a
                     href=""
                     class="friends_all"
                     onclick={async function (e) {
@@ -514,7 +514,7 @@ BlockUserProfilePage.subscribers = function (Static, data) {
                             initReload()
                         }
                     }}
-                >{Variable.lang.a.showAllFriends}</a>
+                >{Variable.lang.a.showAllFriends}</a> */}
             </div>
 
             <div class="friends_block">
