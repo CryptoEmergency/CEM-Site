@@ -1635,15 +1635,17 @@
     }
 
     &__item {
-        display: block;
+        display: flex;
         width: 100%;
         text-align: center;
         background: #ffffff;
-        border: 2px solid white;
+        border: 1px solid white;
         border-radius: 10px;
+        overflow: hidden;
 
         img {
             max-width: 100%;
+            margin: auto;
         }
     }
 

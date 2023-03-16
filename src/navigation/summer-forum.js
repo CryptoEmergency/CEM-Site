@@ -213,33 +213,33 @@ const start = function (data, ID) {
                                 <li>
                                     <figure class="c-speakers__item">
                                         <div class="c-speakers__wrappper">
-                                            <img src={images["summer_forum/speaker1"]} />
-                                        </div>
-                                        <figcaption class="c-speakers__caption">
-                                            <h3>Ян Кривоносов</h3>
-                                            <p>CEO Crypto Emergency</p>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <li>
-                                    <figure class="c-speakers__item">
-                                        <div class="c-speakers__wrappper">
-                                            <img src={images["summer_forum/speaker2"]} />
-                                        </div>
-                                        <figcaption class="c-speakers__caption">
-                                            <h3>Андрей Тугарин</h3>
-                                            <p>CEO компании GMT Legal</p>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <li>
-                                    <figure class="c-speakers__item">
-                                        <div class="c-speakers__wrappper">
                                             <img src={images["summer_forum/speaker3"]} />
                                         </div>
                                         <figcaption class="c-speakers__caption">
                                             <h3>Александр Бражников</h3>
                                             <p>Исполнительный директор РАКИБ</p>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                                <li>
+                                    <figure class="c-speakers__item">
+                                        <div class="c-speakers__wrappper">
+                                            <img src={images["summer_forum/speaker"]} />
+                                        </div>
+                                        <figcaption class="c-speakers__caption">
+                                            <h3>Андрей Ховалюк</h3>
+                                            <p>Генеральный директор международной компании</p>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                                <li>
+                                    <figure class="c-speakers__item">
+                                        <div class="c-speakers__wrappper">
+                                            <img src={images["summer_forum/speaker1"]} />
+                                        </div>
+                                        <figcaption class="c-speakers__caption">
+                                            <h3>Ян Кривоносов</h3>
+                                            <p>CEO Crypto Emergency</p>
                                         </figcaption>
                                     </figure>
                                 </li>
@@ -257,11 +257,11 @@ const start = function (data, ID) {
                                 <li>
                                     <figure class="c-speakers__item">
                                         <div class="c-speakers__wrappper">
-                                            <img src={images["summer_forum/speaker"]} />
+                                            <img src={images["summer_forum/speaker2"]} />
                                         </div>
                                         <figcaption class="c-speakers__caption">
-                                            <h3>Андрей Ховалюк</h3>
-                                            <p>Генеральный директор международной компании</p>
+                                            <h3>Андрей Тугарин</h3>
+                                            <p>CEO компании GMT Legal</p>
                                         </figcaption>
                                     </figure>
                                 </li>
