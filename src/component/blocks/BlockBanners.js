@@ -86,7 +86,7 @@ const banners = [
   },
   {
     href: "",
-    image: "crypto-ug",
+    image: "crypto_ug",
     lang: "ru"
   },
   // {
