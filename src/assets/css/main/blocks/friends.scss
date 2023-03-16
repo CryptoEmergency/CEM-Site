@@ -211,6 +211,21 @@
 .friends {
     margin: auto;
     margin-top: 40px;
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 25px;
+
+        h2 {
+            margin: 0;
+        }
+    }
+
+    &_all {
+        cursor: pointer;
+    }
 }
 
 .friends .micro_user_avatar {
