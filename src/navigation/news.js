@@ -24,6 +24,7 @@ const start = function (data, ID) {
           filter: {
             type: "news",
             "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
+            moderation: true
           },
         },
       });
@@ -46,7 +47,9 @@ const start = function (data, ID) {
                       type: "news",
                       "languages.code":
                         Variable.lang.code == "ru" ? "ru" : "en",
+                        moderation: true
                     },
+
                   },
                 });
                 initReload();
@@ -71,6 +74,7 @@ const start = function (data, ID) {
                           "languages.code":
                             Variable.lang.code == "ru" ? "ru" : "en",
                           "category.name": item.name,
+                          moderation: true
                         },
                       },
                     });

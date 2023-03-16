@@ -100,8 +100,6 @@ const start = function (data, ID) {
                 Static.forms.showDate = null
                 Static.forms.languages = {}
 
-
-
             } else {
                 Static.forms = Object.assign({}, Static.item)
             }

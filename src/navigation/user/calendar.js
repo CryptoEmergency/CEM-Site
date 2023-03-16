@@ -357,6 +357,7 @@ const start = function (data, ID) {
     Static.colorIndex = null
     Static.color = null
     Static.currentDay = null
+    Static.date = new Date()
 
     load({
         ID,
@@ -366,7 +367,7 @@ const start = function (data, ID) {
             console.log('=8451ba=', Static.notesCalendar)
         },
         fn: () => {
-            // console.log()
+            console.log(Static.date.getMonth() + 1)
             return (
                 <div class="blog_page_container c-main__body">
                     <div class="calendar">
