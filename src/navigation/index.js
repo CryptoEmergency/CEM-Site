@@ -65,10 +65,11 @@ const makeFilter = function (Static) {
 };
 
 const start = function (data, ID) {
+  Variable.Static.HeaderShow = true;
+  Variable.Static.FooterShow = false
   let [Static] = fn.GetParams({ data, ID, initData: "main" });
 
-  Variable.Static.HeaderShow = true;
-  Variable.Static.FooterShow = false;
+  // Variable.Static.FooterMenuShow = true;
   // test()
   // console.log("Static", Static)
   // load({

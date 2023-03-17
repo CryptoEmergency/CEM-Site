@@ -18,39 +18,39 @@ let visibleEditWork = false;
 const makeFilter = function (Static) {
     let objReturn = {}
     switch (Static.lentaPage) {
-      case "text":
-        objReturn["media.type"] = { $nin: ["video", "audio", "image"] };
-        break;
-  
-      case "audio":
-        objReturn.$and = [
-          { "media.type": "audio" },
-          { "media.type": { $nin: ["video", "image"] } },
-        ];
-        break;
-  
-      case "video":
-        objReturn.$and = [
-          { "media.type": "video" },
-          { "media.type": { $nin: ["audio", "image"] } },
-        ];
-        break;
-  
-      case "photo":
-        objReturn.$and = [
-          { "media.type": "image" },
-          { "media.type": { $nin: ["audio", "video"] } },
-        ];
-        break;
+        case "text":
+            objReturn["media.type"] = { $nin: ["video", "audio", "image"] };
+            break;
+
+        case "audio":
+            objReturn.$and = [
+                { "media.type": "audio" },
+                { "media.type": { $nin: ["video", "image"] } },
+            ];
+            break;
+
+        case "video":
+            objReturn.$and = [
+                { "media.type": "video" },
+                { "media.type": { $nin: ["audio", "image"] } },
+            ];
+            break;
+
+        case "photo":
+            objReturn.$and = [
+                { "media.type": "image" },
+                { "media.type": { $nin: ["audio", "video"] } },
+            ];
+            break;
     }
     if (Static.lentaFilters && Static.lentaFilters.lang) {
-      objReturn["languages.code"] = Static.lentaFilters.lang
+        objReturn["languages.code"] = Static.lentaFilters.lang
     }
     if (Static.lentaFilters && Static.lentaFilters.author) {
-      objReturn.author = Static.lentaFilters.author
+        objReturn.author = Static.lentaFilters.author
     }
     return objReturn
-  }
+}
 
 const BlockUserProfilePage = {}
 
@@ -488,11 +488,35 @@ BlockUserProfilePage.subscribers = function (Static, data) {
         return (<></>)
     }
 
-    console.log('=6916b1= data =', data)
+    console.log('=6916b1= Static, data =', Static, data)
 
     return (
-        <div class="bl_one c-container" id="UserInfoFollowers">
-            <h2>{Variable.lang.toggle.subscribers}</h2>
+        <div class="bl_one c-container 88" id="UserInfoFollowers">
+            <div class="friends_header">
+                <h2>{Variable.lang.toggle.subscribers}</h2>
+                {/* <a
+                    href=""
+                    class="friends_all"
+                    onclick={async function (e) {
+                        e.preventDefault();
+                        if (Static.activeItems.list_records.length < Static.activeItems.totalFound) {
+                            let tmpResponse = await fn.restApi.getUsers({
+                                name: "PageUserProfileSubscribers", filter: {
+                                    subscribed: data.userInfo._id,
+                                },
+                                limit: "all",
+                                offset: Static.activeItems.list_records.length
+                            })
+                            if (tmpResponse && tmpResponse.list_records) {
+                                Static.activeItems.list_records.push(...tmpResponse.list_records)
+                            }
+                            console.log('=98e2a7=', Static.activeItems.list_records)
+                            initReload()
+                        }
+                    }}
+                >{Variable.lang.a.showAllFriends}</a> */}
+            </div>
+
             <div class="friends_block">
                 {
                     Static.activeItems.list_records.map((item, index) => {

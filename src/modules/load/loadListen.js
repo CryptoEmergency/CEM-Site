@@ -22,7 +22,7 @@ const loadListen = async function () {
 
         window.addEventListener("scroll", function () {
             // console.log('=6f1984=', window.pageYOffset, window.pageXOffset)
-            if (Variable.dataUrl.adress == "lenta-users" && (!Variable.dataUrl.category || !Variable.dataUrl.category.length)) {
+            if ((Variable.dataUrl.adress == "lenta-users" || Variable.dataUrl.adress == "index") && (!Variable.dataUrl.category || !Variable.dataUrl.category.length)) {
                 if (window.pageYOffset > 500 && !Variable.Static.elArrowTopLink && Variable.Static.lastScrollPosition > window.pageYOffset) {
                     Variable.Static.elArrowTop.style.display = "block"
                     Variable.Static.elArrowTopLink = setTimeout(() => {

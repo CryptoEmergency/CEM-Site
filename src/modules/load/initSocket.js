@@ -22,7 +22,7 @@ const initSocket = async function () {
         let linkTimer = setTimeout(() => {
             Variable.socketConnect = false
             resolve()
-        }, 2000);
+        }, 3000);
         options.auth.uuid = Variable.uuid
         options.auth.status = Variable.auth
         socket = io("/", options)

@@ -502,7 +502,7 @@ const mainFooter = async function () {
                           <div>
                             <a
                               target="_blank"
-                              href="https://vm.tiktok.com/ZSefEMs2c/"
+                              href="https://www.tiktok.com/@cryptoemergencyrussia"
                               rel="nofollow noopener"
                               data-type="social"
                               data-count="tiktokRu"
@@ -513,7 +513,7 @@ const mainFooter = async function () {
                           <div>
                             <a
                               target="_blank"
-                              href="https://vm.tiktok.com/ZSefExJrr/"
+                              href="https://www.tiktok.com/@cryptoemergency"
                               rel="nofollow noopener"
                               data-type="social"
                               data-count="tiktokEn"

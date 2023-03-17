@@ -9,6 +9,11 @@
         @media(max-width: 768px) {
             padding-bottom: 30px;
         }
+
+        h2 {
+            font-size: calc(1.325rem + .9vw);
+            margin-top: 0;
+        }
     }
 
     &__block {}
@@ -211,6 +216,27 @@
 .friends {
     margin: auto;
     margin-top: 40px;
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 25px;
+        margin-bottom: 5px;
+
+        @media(max-width: 970px) {
+            padding-top: 10px;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            margin: 0;
+        }
+    }
+
+    &_all {
+        cursor: pointer;
+    }
 }
 
 .friends .micro_user_avatar {
