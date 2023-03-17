@@ -243,7 +243,7 @@ restApi.getLottery = async function ({ cache, name, limit = 6, offset = 0, filte
     }
 }
 
-restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: -1 }, firstRecord, defaultReset }) {
+restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter = {}, select, sort = { showDate: -1 }, firstRecord, defaultReset }) {
 
     let defaultFilter = {
         type: "news",

@@ -15,7 +15,7 @@
 
 import { jsx, jsxFrag, load, Variable } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/export.js";
+import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
 
@@ -29,11 +29,11 @@ const start = function (data, ID = "mainBlock") {
       // fn.initData.media_show(Static)
       if (!Static.openModals) {
         // Static.item = await fn.socket.get({ method: "News", _id: item._id });
-        Static.item = await fn.restApi.getNews({ _id: item._id })
+        Static.item = await fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
       }
       if (!Static.item._id) {
         // Static.item = await fn.socket.get({ method: "News", action:"findOne", _id: Variable.DataUrl.params });
-        Static.item = await fn.restApi.getNews({ _id: Variable.DataUrl.params })
+        Static.item = await fn.restApi.getNews({ filter: { _id: Variable.DataUrl.params }, firstRecord: true, defaultReset: true })
       }
     },
     fn: () => {
