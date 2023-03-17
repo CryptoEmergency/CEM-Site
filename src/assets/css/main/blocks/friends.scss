@@ -9,6 +9,11 @@
         @media(max-width: 768px) {
             padding-bottom: 30px;
         }
+
+        h2 {
+            font-size: calc(1.325rem + .9vw);
+            margin-top: 0;
+        }
     }
 
     &__block {}

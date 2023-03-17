@@ -463,12 +463,12 @@ const ModalMobileMainSettings = function (data, ID) {
                                         <div class="footer-icon-block">
                                             <div ref={elem.tiktok} hidden={true} class="footer-media-full footer-media-full-right">
                                                 <div>
-                                                    <a target="_blank" href="https://vm.tiktok.com/ZSefEMs2c/" rel="nofollow noopener" data-type="social" data-count="tiktokRu">
+                                                    <a target="_blank" href="https://www.tiktok.com/@cryptoemergencyrussia" rel="nofollow noopener" data-type="social" data-count="tiktokRu">
                                                         <img src={svg["tiktok-icon"]} /> Русский
                                                     </a>
                                                 </div>
                                                 <div>
-                                                    <a target="_blank" href="https://vm.tiktok.com/ZSefExJrr/" rel="nofollow noopener" data-type="social" data-count="tiktokEn">
+                                                    <a target="_blank" href="https://www.tiktok.com/@cryptoemergency" rel="nofollow noopener" data-type="social" data-count="tiktokEn">
                                                         <img src={svg["tiktok-icon"]} /> English
                                                     </a>
                                                 </div>

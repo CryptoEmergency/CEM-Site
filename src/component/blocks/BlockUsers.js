@@ -112,7 +112,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
         <div class="c-friends">
             <div class="c-friends__container c-container">
                 <h2>
-                    {!Static.openModals ? Static.type == "creator" ? <h2>{Variable.lang.a.contentCreater}</h2> : Static.type == "experts" ? <h2>{Variable.lang.a.experts}</h2> : <h2>{Variable.lang.h.top_users}</h2> : null}
+                    {!Static.openModals ? Static.type == "creator" ? Variable.lang.a.contentCreater : Static.type == "experts" ? Variable.lang.a.experts : Variable.lang.h.top_users : null}
                 </h2>
                 <div class="c-friends__block">
                     <div class="c-friends__search">
@@ -249,6 +249,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                             <NotFound />
                             :
                             Variable[Static.nameRecords].list_records.map(function (user, i) {
+                                console.log('=7b2cad=',user)
                                 return (
                                     <div class="new_professional_card userLoad" data-id={user._id}>
                                         <div class="new_professional_card_top">
@@ -295,7 +296,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                                             <div class="badge_container">
                                                                 <div class="badge_description">
                                                                     <p>{Variable.lang.awards[badge.name]}</p>
-                                                                    <span>{Variable.lang.awards[badge.description]}</span>
+                                                                    <span>{badge.action.split("-")[1]} {Variable.lang.awards[badge.description]}</span>
                                                                 </div>
                                                                 <img src={svg[`badge/${badge.icon.split(".")[0]}`]} />
                                                             </div>

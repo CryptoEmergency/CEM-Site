@@ -11459,6 +11459,12 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 @media(max-width: 522px) {
+
+  .success_copy {
+    right: -10px;
+    bottom: -5px;
+  }
+
   .partners_container img {
     width: 80%;
   }
