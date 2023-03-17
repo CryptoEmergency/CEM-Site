@@ -29,11 +29,11 @@ const start = function (data, ID = "mainBlock") {
       // fn.initData.media_show(Static)
       if (!Static.openModals) {
         // Static.item = await fn.socket.get({ method: "News", _id: item._id });
-        Static.item = await fn.restApi.getNews({ _id: item._id})
+        Static.item = await fn.restApi.getNews({ _id: item._id })
       }
-      if(!Static.item._id) {
+      if (!Static.item._id) {
         // Static.item = await fn.socket.get({ method: "News", action:"findOne", _id: Variable.DataUrl.params });
-        Static.item = await fn.restApi.getNews({ _id: Variable.DataUrl.params})
+        Static.item = await fn.restApi.getNews({ _id: Variable.DataUrl.params })
       }
     },
     fn: () => {

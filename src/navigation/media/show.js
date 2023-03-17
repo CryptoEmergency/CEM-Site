@@ -13,7 +13,8 @@ const start = function (data, ID = "mainBlock") {
     fnLoad: async () => {
       // fn.initData.media_show(Static)
       if (!Static.openModals) {
-        Static.item = await fn.socket.get({ method: "News", _id: item._id });
+        // Static.item = await fn.socket.get({ method: "News", _id: item._id });
+        Static.item = fn.restApi.getNews({ filter: { _id: item._id }, firstRecord: true, defaultReset: true })
       }
     },
     fn: () => {
