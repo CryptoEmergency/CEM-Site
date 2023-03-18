@@ -81,7 +81,7 @@ const banners = [
   // },
   {
     href: "https://cryptosummit.ru/",
-    image: "crypto-summit",
+    image: "crypto-summit2",
     lang: "ru"
   },
   {
