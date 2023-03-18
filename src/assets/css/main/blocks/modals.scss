@@ -4006,6 +4006,22 @@
 		min-width: 86px;
 		max-width: 140px;
 	}
+
+	.country-phone2 {
+		&+div {
+			position: relative;
+
+			.error-div-variant {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				transform: translateY(-100%);
+				
+				&:empty {}
+			}
+		}
+	}
 }
 
 .reset-btn {
