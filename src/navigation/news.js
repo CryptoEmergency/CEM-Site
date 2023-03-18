@@ -85,7 +85,7 @@ const start = function (data, ID) {
             })}
           </Elements.page.Container>
 
-          <Elements.page.Container class="section-g p-lr pt--70">
+          <Elements.page.Container class="c-news section-g p-lr pt--70">
             {Static.records.map((item) => {
               return (
                 <Elements.cards.Standart

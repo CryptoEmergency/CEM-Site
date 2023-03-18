@@ -290,6 +290,7 @@ $indent in $indents{
   @media(max-width: 750px){
     display: grid;
     grid-template-columns: 100px 1fr;
+    grid-template-rows: 72px auto;
     gap: 10px;
     padding: 15px;
     height: 122px;
@@ -329,7 +330,7 @@ $indent in $indents{
   img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 

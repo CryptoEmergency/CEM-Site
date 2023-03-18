@@ -4821,6 +4821,20 @@ s
 				}
 			}
 		}
+
+		.blog_page_container {
+			background: #2B3040;
+
+			@media(max-width: 1023px) {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+			}
+		}
+
+		.tags {
+			background-color: #2B3040;
+			box-shadow: -6px 0px 0px 0px #2B3040;
+		}
 	}
 }
 
