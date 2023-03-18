@@ -109,8 +109,6 @@ const start = function (data, ID) {
     init(
         async () => {
             // console.log('=bbcdd5=', Variable)
-        },
-        () => {
 
             var map;
 
@@ -118,7 +116,7 @@ const start = function (data, ID) {
                 DG.then(function () {
                     map = DG.map('map', {
                         center: [44.712398, 37.784382],
-                        zoom: 16,
+                        zoom: 17,
                         // dragging: false,
                         touchZoom: false,
                         scrollWheelZoom: false,
@@ -135,6 +133,8 @@ const start = function (data, ID) {
                     `);
                 });
             }, 2000)
+        },
+        () => {
 
             return (
                 <div class='c-main__body с-summerforum'>
@@ -667,6 +667,15 @@ const start = function (data, ID) {
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.buyStand}</span>
                             </a>
+                        </section>
+
+                        <section class="с-guests" id="guests">
+                            <h4 class="с-summerforum__title с-guests__title">{Variable.lang.h.guestsForum}</h4>
+                            <ul class="с-guests__list">
+                                <li><a href="" target="_blank" class=""></a></li>
+                                <li><a href="" target="_blank" class=""></a></li>
+                                <li><a href="" target="_blank" class=""></a></li>
+                            </ul>
                         </section>
 
                         <section class="c-partnersforum c-container" id="partners">
