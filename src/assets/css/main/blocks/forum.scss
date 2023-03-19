@@ -1632,13 +1632,23 @@
         }
 
         a {
-            display: block;
+            display: flex;
             max-width: 300px;
             width: 100%;
             aspect-ratio: 1.77;
             background: #01c8ab;
             border-radius: 10px;
             cursor: pointer;
+        }
+
+        h5 {
+            margin: auto;
+            text-align: center;
+            color: #ffffff;
+
+            @media(max-width: 1279px) {
+                font-size: 1.6vw;
+            }
         }
     }
 }
