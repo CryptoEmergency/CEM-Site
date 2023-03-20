@@ -85,6 +85,7 @@ const textElem = function (Static, className, index) {
                     return
                 }
                 Static.valid = Static.condition(this.value.trim())
+                Static.isValid = Static.condition(this.value.trim())
                 Static.error = !Static.valid
                 if (Static.error) {
                     this.style = "border-color: rgb(200, 23, 38);";
