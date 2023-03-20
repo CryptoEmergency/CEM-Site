@@ -29,8 +29,10 @@ ServerInit({
   proxy: {
     "/api/v2": {
       target: `https://${target}`,
-      changeOrigin: true,
       secure: false,
+      ws: true,
+      changeOrigin: true,
+      // secure: false,
     },
     "/api": {
       target: `https://${target}`,
