@@ -7,7 +7,7 @@
     "start": "node index"
   },
   "dependencies": {
-    "@betarost/cemserver": "^1.0.40",
+    "@betarost/cemserver": "^1.0.47",
     "@fancyapps/ui": "^4.0.31",
     "cropperjs": "^1.5.12",
     "dotenv": "^16.0.3",
@@ -16,16 +16,5 @@
     "socket.io-client": "^4.6.0",
     "swiper": "^8.4.2",
     "web3": "^1.8.1"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {},
-      "postcss-flex-value": {}
-    }
-  },
-  "browserslist": [
-    "last 4 version",
-    "not dead",
-    "iOS >= 9"
-  ]
+  }
 }
