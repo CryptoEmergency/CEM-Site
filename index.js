@@ -18,9 +18,10 @@ ServerInit({
   target,
   hotReload,
   path: {
-    src: path.resolve("src/index.js"),
+    src: path.resolve("app.js"),
     public: path.resolve("public"),
-    fileName: "main.js",
+    fileName: "main.[fullhash].js",
+    template: path.resolve("src/template/index.html"),
   },
   port,
   mode,
