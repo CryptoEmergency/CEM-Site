@@ -583,6 +583,7 @@ const start = function (data, ID) {
                                     Static={Static.mainComment}
                                     index={index}
                                     className="text1 create_post_chapter"
+                                    noBacklight={true}
                                   />
                                 </div>
                                 <ButtonSubmit

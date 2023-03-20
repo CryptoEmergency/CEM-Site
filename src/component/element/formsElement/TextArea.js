@@ -4,20 +4,20 @@ import {
     jsxFrag,
 } from "@betarost/cemserver/cem.js";
 
-const textConstuctor = function (Static, className, classDiv, index) {
+const textConstuctor = function (Static, className, classDiv, index, noBacklight) {
     if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined")) {
         return (
             <div>
                 {Static.label ? <label>{Static.label}</label> : null}
                 {typeof Static.error != "undefined" ? <div class="error-div">{Static.error ? <div class="error-div-variant">{Static.errorText}</div> : null}</div> : null}
-                {textElem(Static, className)}
+                {textElem(Static, className, noBacklight)}
             </div>
         )
     } else {
-        return (textElem(Static, className, index))
+        return (textElem(Static, className, index, noBacklight))
     }
 }
-const textElem = function (Static, className, index) {
+const textElem = function (Static, className, index, noBacklight) {
     let rows = null
     let adaptive = null
     let placeholder = null
@@ -87,10 +87,13 @@ const textElem = function (Static, className, index) {
                 Static.valid = Static.condition(this.value.trim())
                 Static.isValid = Static.condition(this.value.trim())
                 Static.error = !Static.valid
-                if (Static.error) {
-                    this.style = "border-color: rgb(200, 23, 38);";
-                } else {
-                    this.style = "border-color: rgb(37, 249, 48);"
+                if(!noBacklight) {
+                    if (Static.error) {
+                        this.style = "border-color: rgb(200, 23, 38);";
+                    } else {
+                        this.style = "border-color: rgb(37, 249, 48);"
+                    }
+
                 }
                 if (Static.afterValid) {
                     Static.afterValid();
@@ -101,8 +104,8 @@ const textElem = function (Static, className, index) {
     )
 }
 
-const TextArea = function ({ Static, className, classDiv, index }) {
-    return (textConstuctor(Static, className, classDiv, index))
+const TextArea = function ({ Static, className, classDiv, index, noBacklight = false }) {
+    return (textConstuctor(Static, className, classDiv, index, noBacklight))
 };
 export { TextArea };
 // OK
