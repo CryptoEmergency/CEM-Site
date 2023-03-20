@@ -124,6 +124,18 @@ const mainHeader = async function () {
                         </Link>
                         <Link
                           class="c-menu__link"
+                          // href="#guests"
+                          onclick={(e) => {
+                            window.scrollTo({
+                              top: document.querySelector("#guests").offsetTop - 75,
+                              behavior: "smooth",
+                            });
+                          }}
+                        >
+                          {Variable.lang.a.guests}
+                        </Link>
+                        <Link
+                          class="c-menu__link"
                           // href="#partners"
                           onclick={(e) => {
                             window.scrollTo({

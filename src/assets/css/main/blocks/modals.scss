@@ -4006,6 +4006,22 @@
 		min-width: 86px;
 		max-width: 140px;
 	}
+
+	.country-phone2 {
+		&+div {
+			position: relative;
+
+			.error-div-variant {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				transform: translateY(-100%);
+				
+				&:empty {}
+			}
+		}
+	}
 }
 
 .reset-btn {
@@ -4804,6 +4820,20 @@ s
 					margin-bottom: 15px;
 				}
 			}
+		}
+
+		.blog_page_container {
+			background: #2B3040;
+
+			@media(max-width: 1023px) {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+			}
+		}
+
+		.tags {
+			background-color: #2B3040;
+			box-shadow: -6px 0px 0px 0px #2B3040;
 		}
 	}
 }

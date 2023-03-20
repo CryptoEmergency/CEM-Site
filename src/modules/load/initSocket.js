@@ -2,9 +2,13 @@ import { Variable, initReload } from '@betarost/cemserver/cem.js'
 import { io } from "socket.io-client"
 
 const options = {
-    reconnectionDelayMax: 10000,
+    // reconnectionDelayMax: 10000,
     pingTimeout: 3000,
     pingInterval: 3000,
+    "force new connection": true,
+    "reconnectionAttempts": "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
+    "timeout": 10000, //before connect_error and connect_timeout are emitted.
+    "transports": ["websocket"],
     path: '/api/v2/',
     auth: {
         uuid: Variable.uuid

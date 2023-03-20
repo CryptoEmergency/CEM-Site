@@ -209,6 +209,7 @@
 		"previewNotAvailable": "Предварительный просмотр недоступен",
 		"speakersForum": "Спикеры",
 		"standsForum": "Стенды",
+		"guestsForum": "Гости Crypto Emergency",
 		"partnersForum": "Партнеры",
 		"localmap": "Как добраться?"
 	},
@@ -258,6 +259,7 @@
 		"aboutForum": "О форуме",
 		"stands": "Стенды",
 		"speakers": "Спикеры",
+		"guests": "Гости",
 		"partnersForum": "Партнеры",
 		"localmap": "Как добраться?",
 		"showAllFriends": "Показать всех"

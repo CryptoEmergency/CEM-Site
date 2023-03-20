@@ -211,7 +211,7 @@ const start = function (data, ID) {
         show: false,
         selectAspect: null,
       }
-      Static.isValid = false
+      // Static.isValid = false
 
     },
 
@@ -228,7 +228,12 @@ const start = function (data, ID) {
         rows: 1,
         adaptive: 4,
         elShowInput: {},
-        el: {}
+        el: {},
+        condition: (value) => {
+          if (value && value.length > 0) {
+            return true
+          }
+        },
       }
 
       Static.elNumberSwiper = {}
@@ -479,7 +484,7 @@ const start = function (data, ID) {
                         Static.isValid = false
 
                         elText.innerText = '';
-                        
+
                         setTimeout(async function () {
 
                           Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id }, limit: 6, sort: { showDate: -1 } })
@@ -569,7 +574,7 @@ const start = function (data, ID) {
                                 <Evaluation Static={Static} item={item} index={index} action="Answers" />
                                 <ItemsMenu author={item.author} items={fn.itemsMenu.answer(Static, item, index)} />
                               </div>
-                              <div class="c-comments__form"
+                              <div class="c-comments__form 66"
                                 style="display:none;"
                                 Element={($el) => { Static.mainComment.elShowInput[index] = $el; }}
                               >
@@ -578,6 +583,7 @@ const start = function (data, ID) {
                                     Static={Static.mainComment}
                                     index={index}
                                     className="text1 create_post_chapter"
+                                    noBacklight={true}
                                   />
                                 </div>
                                 <ButtonSubmit
@@ -585,11 +591,11 @@ const start = function (data, ID) {
                                   text={<img class="c-comments__icon" src={svg["send_message"]} />}
                                   className="c-comments__send button-container-preview"
                                   onclick={async function (e) {
-
                                     if (!Variable.auth) {
                                       fn.modals.ModalNeedAuth()
                                       return
                                     }
+                                    console.log('=686d16= item =',item)
                                     if (!Static.mainComment.el[index].value.trim().length) { return }
                                     let text = Static.mainComment.el[index].value.trim()
                                     let response = await fn.restApi.setAnswers.comment({ _id: item._id, text })

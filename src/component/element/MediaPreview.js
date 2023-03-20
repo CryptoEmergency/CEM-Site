@@ -333,7 +333,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                           } else if (!Static.mediaInputs.value.filter((item) => { return item.activePreview })[0]) {
                             Static.mediaInputs.value[0].activePreview = true;
                           }
-                          debugger
+                          // debugger
                           initReload();
                         }
                       },
