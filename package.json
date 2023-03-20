@@ -9,6 +9,7 @@
   "dependencies": {
     "@betarost/cemserver": "^1.0.48",
     "@fancyapps/ui": "^4.0.31",
+    "animejs": "^3.2.1",
     "cropperjs": "^1.5.12",
     "dotenv": "^16.0.3",
     "idb": "^7.1.1",
