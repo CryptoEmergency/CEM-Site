@@ -46,6 +46,9 @@ const textElem = function (Static, className, index, noBacklight) {
             Element={($el) => {
                 if (Static) {
                     if (typeof index != "undefined") {
+                        if (!Static.el) {
+                            Static.el = []
+                        }
                         Static.el[index] = $el
                     } else {
                         Static.el = $el
@@ -77,7 +80,7 @@ const textElem = function (Static, className, index, noBacklight) {
                     }
                     this.dataset.scrollLast = this.scrollHeight
                 }
-                if(typeof Static.value == 'undefined' || Static.value == '' || this.value.trim() == ''){
+                if (typeof Static.value == 'undefined' || Static.value == '' || this.value.trim() == '') {
                     initReload()
                 }
                 Static.value = this.value.trim()
@@ -87,7 +90,7 @@ const textElem = function (Static, className, index, noBacklight) {
                 Static.valid = Static.condition(this.value.trim())
                 Static.isValid = Static.condition(this.value.trim())
                 Static.error = !Static.valid
-                if(!noBacklight) {
+                if (!noBacklight) {
                     if (Static.error) {
                         this.style = "border-color: rgb(200, 23, 38);";
                     } else {
@@ -99,7 +102,7 @@ const textElem = function (Static, className, index, noBacklight) {
                     Static.afterValid();
                 }
             }}>
-            { text }
+            {text}
         </textarea>
     )
 }
