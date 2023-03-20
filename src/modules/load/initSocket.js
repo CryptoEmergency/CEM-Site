@@ -43,7 +43,7 @@ const initSocket = async function () {
 
         socket.on('disconnect', () => {
             console.log('=c937ad=', "Connect socket!")
-            socket = null
+            // socket = null
             Variable.socketConnect = false
             if (Variable.load) {
                 initReload()
@@ -66,7 +66,7 @@ const initSocket = async function () {
 
         socket.on('connect_error', () => {
             console.log('=3cd7cf=', "socket connect_error")
-            socket = null
+            // socket = null
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
@@ -78,7 +78,7 @@ const initSocket = async function () {
 
         socket.on('reconnect', () => {
             console.log('=3cd7cf=', "socket reconnect")
-            socket = null
+            // socket = null
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
@@ -90,7 +90,7 @@ const initSocket = async function () {
 
         socket.on('reconnect_attempt', () => {
             console.log('=3cd7cf=', "socket reconnect_attempt")
-            socket = null
+            // socket = null
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
@@ -102,7 +102,7 @@ const initSocket = async function () {
 
         socket.on('reconnect_error', () => {
             console.log('=3cd7cf=', "socket reconnect_error")
-            socket = null
+            // socket = null
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
@@ -114,7 +114,7 @@ const initSocket = async function () {
 
         socket.on('reconnect_failed', () => {
             console.log('=3cd7cf=', "socket reconnect_failed")
-            socket = null
+            // socket = null
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
@@ -126,7 +126,7 @@ const initSocket = async function () {
 
         socket.on('error', (error) => {
             console.log('=3cd7cf=', "socket error", error)
-            socket = null
+            // socket = null
             Variable.socketConnect = false
             clearTimeout(linkTimer)
             if (Variable.load) {
