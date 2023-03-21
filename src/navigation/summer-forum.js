@@ -821,14 +821,14 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_6"]} />
                                 </a>
-                                {/* <a style="display: block!important;"
+                                <a style="display: block!important;"
                                     target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://ti.turovinvest.ru/"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["forum/partner_11"]} />
-                                </a> */}
+                                </a>
                                 <a style="background:  transparent;"
                                     target="_blank"
                                     rel="nofollow nooopener"
@@ -852,7 +852,7 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["forum/partner_14"]} />
-                                </a>
+                            </a>*/}
                                 <a style="display: block!important;"
                                     target="_blank"
                                     rel="nofollow nooopener"
@@ -861,7 +861,7 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_15"]} />
                                 </a>
-                                <a style="display: block!important;"
+                               {/* <a style="display: block!important;"
                                     target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://voltep.online"
@@ -899,14 +899,14 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_20"]} />
                                 </a> */}
-                                {/* <a target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://www.artemotiochain.ru/"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["forum/partner_22"]} />
                                 </a>
-                                <a style="background: #1C1A27"
+                                {/* <a style="background: #1C1A27"
                                     target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://zerogravity.foundation/"
