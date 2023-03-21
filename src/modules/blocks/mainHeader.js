@@ -4,6 +4,7 @@ import svg from "@assets/svg/index.js";
 import { fn } from "@src/functions/index.js";
 import { Avatar } from "@component/element/index.js";
 import { TextInSpan, Row, Link, Button, Img } from "@htmlElements/index.js";
+let Burger
 const mainHeader = async function () {
   load({
     ID: "mainHeader",
@@ -158,6 +159,17 @@ const mainHeader = async function () {
                         >
                           {Variable.lang.a.localmap}
                         </Link>
+                        <a
+                          class={[
+                            "c-userpanel__icon",
+                            "c-userpanel__icon--burger",
+                            "c-userpanel__icon--mobile_visible",
+                          ]}
+                          Element={($el) => {
+                            Burger = $el
+                          }}
+                          onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileForum({ Burger }); Burger.classList.add("c-userpanel__icon--active") }}>
+                        </a>
                       </nav>
                     )
                   } else {
