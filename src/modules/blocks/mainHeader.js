@@ -159,7 +159,7 @@ const mainHeader = async function () {
                         >
                           {Variable.lang.a.localmap}
                         </Link>
-                        <a
+                        {/* <a
                           class={[
                             "c-userpanel__icon",
                             "c-userpanel__icon--burger",
@@ -169,7 +169,7 @@ const mainHeader = async function () {
                             Burger = $el
                           }}
                           onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileForum({ Burger }); Burger.classList.add("c-userpanel__icon--active") }}>
-                        </a>
+                        </a> */}
                       </nav>
                     )
                   } else {
