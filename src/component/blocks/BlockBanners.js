@@ -85,7 +85,7 @@ const banners = [
     lang: "ru"
   },
   {
-    href: "",
+    href: "/summer-forum",
     image: "crypto_ug",
     lang: "ru"
   },

@@ -52,8 +52,6 @@ const isMobile = {
 const start = function (data, ID) {
     
     Variable.Static.forumHeaderShow = isMobile.any() ? false : true
-
-    console.log('=07ff77= Variable.Static.forumHeaderShow =',Variable.Static.forumHeaderShow)
     
     const swiperGo = function (numIndex) {
         // if (!swiperitem) {
@@ -153,31 +151,28 @@ init(
                                 Команда <b>Crypto Emergency</b> рада пригласить тебя на второй ежегодный криптофорум <b>Crypto Юг 2023</b>, который состоится  3 и 4 июня в г. Новороссийске.
                             </p>
                             <p>
-                                Crypto Юг 2023 - прекрасная возможность провести время приятно и с пользой, открыть для себя новые возможности, повысить экспертность и увеличить доход.
+                                <b>Crypto Юг 2023</b> - прекрасная возможность провести время приятно и с пользой, открыть для себя новые возможности, повысить экспертность и увеличить доход.
                             </p>
                             <p>
-                                Так же:
+                                <b>Образование</b> - форум предоставляет доступ к содержательным беседам, семинарам и панельным дискуссиям о последних тенденциях и разработках в индустрии криптовалют.
                             </p>
                             <p>
-                                Образование - форум предоставляет доступ к содержательным беседам, семинарам и панельным дискуссиям о последних тенденциях и разработках в индустрии криптовалют.
+                                <b>Живое общение</b> – возможность в живую пообщаться с любимым экспертом или с другими участниками и профессионалами крипторынка.
                             </p>
                             <p>
-                                Живое общение – возможность в живую пообщаться с любимым экспертом или с другими участниками и профессионалами крипторынка.
+                                <b>Нетворкинг</b> – если вы ищите перспективные проекты для поддержки или участия, наш форум предоставляет отличную возможность встретиться и пообщаться с нужными людьми.
                             </p>
                             <p>
-                                Нетворкинг – если вы ищите перспективные проекты для поддержки или участия, наш форум предоставляет отличную возможность встретиться и пообщаться с нужными людьми.
+                                <b>Инновации</b> – ты можешь ознакомиться с передовыми технологиями и инновационными решениями, которые формируют будущее индустрии криптовалют.
                             </p>
                             <p>
-                                Инновации – ты можешь ознакомиться с передовыми технологиями и инновационными решениями, которые формируют будущее индустрии криптовалют.
+                                <b>Вдохновение</b> - на форуме выступают дальновидные спикеры, которые могут вдохновить тебя вывести собственные идеи и проекты на новый уровень.
                             </p>
                             <p>
-                                Вдохновение - на форуме выступают дальновидные спикеры, которые могут вдохновить тебя вывести собственные идеи и проекты на новый уровень.
+                                <b>Заявить о себе</b> - форум предоставляет сцену для демонстрации твоих экспертных знаний в области криптовалют, повышая твою репутацию лидера мысли и эксперта.
                             </p>
                             <p>
-                                Заявить о себе - форум предоставляет сцену для демонстрации твоих экспертных знаний в области криптовалют, повышая твою репутацию лидера мысли и эксперта.
-                            </p>
-                            <p>
-                                Сотрудничество – такие мероприятия является центром сотрудничества и формирования сообщества, предоставляя возможности для совместной работы над проектами и инициативами, которые могут оказать значительное влияние на индустрию.
+                                <b>Сотрудничество</b> – такие мероприятия является центром сотрудничества и формирования сообщества, предоставляя возможности для совместной работы над проектами и инициативами, которые могут оказать значительное влияние на индустрию.
                             </p>
                             <p>
                                 Мы уверены, что наш криптофорум предоставит тебе всю ценную информацию, связи и возможности, которых больше нигде не найдёшь.
@@ -192,17 +187,62 @@ init(
                                     <div class="swiper-wrapper">
                                         <a class="swiper-slide">
                                             <div class="swiper-post_media_image_container">
-                                                <img style="/*height: 218px;*/ border-radius: 13px" src={images['summer_forum/slide_about']} />
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider1']} />
                                             </div>
                                         </a>
                                         <a class="swiper-slide">
                                             <div class="swiper-post_media_image_container">
-                                                <img style="/*height: 218px;*/ border-radius: 13px" src={images['summer_forum/slide_about']} />
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider2']} />
                                             </div>
                                         </a>
                                         <a class="swiper-slide">
                                             <div class="swiper-post_media_image_container">
-                                                <img style="/*height: 218px;*/ border-radius: 13px" src={images['summer_forum/slide_about']} />
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider3']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider4']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider5']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider6']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider7']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider8']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider9']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider10']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider11']} />
+                                            </div>
+                                        </a>
+                                        <a class="swiper-slide">
+                                            <div class="swiper-post_media_image_container">
+                                                <img style="border-radius: 13px" src={images['summer_forum/slider12']} />
                                             </div>
                                         </a>
                                     </div>
