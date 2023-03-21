@@ -21,7 +21,7 @@ const start = async function () {
     await loadData();
     await loadListen();
     await initInexedDB();
-    initSocket();
+    await initSocket();
     await mainBlock();
     await mainHeader();
     await mainFooter();

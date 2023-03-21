@@ -386,8 +386,12 @@
             // text-indent: 50px;
             text-align: left;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 10px;
+
+            b {
+                color: #02C6A9;
+            }
 
             @media(max-width: 1279px) {
                 font-size: 30px;
@@ -416,7 +420,7 @@
                 @media(max-width: 1279px) {
                     font-size: 32px;
                 }
-    
+
                 @media(max-width: 979px) {
                     font-size: 28px;
                 }

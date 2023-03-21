@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Variable } from "@betarost/cemserver/cem.js";
 import images from "@assets/images/index.js";
 import { Swiper } from "@component/element/index.js";
-
+import { fn } from "@src/functions/index.js";
 // Сделать запрос через Базу
 const banners = [
   // {
@@ -87,7 +87,8 @@ const banners = [
   {
     href: "/summer-forum",
     image: "crypto_ug",
-    lang: "ru"
+    lang: "ru",
+    fn: true
   },
   // {
   //   href: "https://blockchain24.pro/",
@@ -165,6 +166,11 @@ const BlockBanners = function () {
           target="_blank"
           href={item.href}
           class="swiper-slide"
+          onclick={(e) => {
+            if (item.fn) {
+              fn.siteLink(e)
+            }
+          }}
         >
           <div>
             <img src={images[`banners/${item.image}`]} />
@@ -180,16 +186,16 @@ const BlockBanners = function () {
         slide={bannersRecords}
         options={swiperOptions}
         className="swiper-startups"
-        // navigation={
-        //     <div>
-        //         <div class="swiper-button-prev">
-        //             <img src={svg.swiper_arrow_left} style="height: 40%;" />
-        //         </div>
-        //         <div class="swiper-button-next">
-        //             <img src={svg.swiper_arrow_right} style="height: 40%;" />
-        //         </div>
-        //     </div>
-        // }
+      // navigation={
+      //     <div>
+      //         <div class="swiper-button-prev">
+      //             <img src={svg.swiper_arrow_left} style="height: 40%;" />
+      //         </div>
+      //         <div class="swiper-button-next">
+      //             <img src={svg.swiper_arrow_right} style="height: 40%;" />
+      //         </div>
+      //     </div>
+      // }
       />
     </div>
   );
