@@ -70,8 +70,8 @@
         font-weight: 700;
         text-align: center;
 
-        @media(max-width: 1279px) {
-            // font-size: 50px;
+        @media(max-width: 767px) {
+            font-size: 5.7vw;
         }
 
         @media(min-width: 1280px) {
@@ -112,8 +112,8 @@
 
 
             @media(max-width: 767px) {
-                // font-size: 15px;
-                font-size: 2vw;
+                padding: 2.9vw 4.6vw;
+                font-size: 3vw;
             }
 
             @media(min-width: 1280px) {
@@ -540,6 +540,7 @@
         padding: 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: min-content;
         gap: 8vw;
         justify-content: space-between;
         align-items: baseline;
@@ -651,7 +652,7 @@
             }
 
             @media(max-width: 767px) {
-                font-size: 2.5vw;
+                font-size: 3vw;
                 margin-bottom: 0.2rem;
             }
         }
@@ -665,7 +666,7 @@
             }
 
             @media(max-width: 767px) {
-                font-size: 1.55vw;
+                font-size: 2vw;
             }
         }
     }
