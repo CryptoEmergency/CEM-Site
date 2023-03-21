@@ -80,7 +80,7 @@ const banners = [
   //   lang: "ru",
   // },
   {
-    href: "https://cryptosummit.ru/",
+    href: "http://cryptosummit.ru/?event_id=2&ref_id=21",
     image: "crypto-summit2",
     lang: "ru"
   },
