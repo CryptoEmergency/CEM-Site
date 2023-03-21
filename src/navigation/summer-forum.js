@@ -51,7 +51,7 @@ const isMobile = {
 
 const start = function (data, ID) {
     
-    Variable.Static.forumHeaderShow = isMobile.any() ? true : false
+    Variable.Static.forumHeaderShow = isMobile.any() ? false : true
 
     console.log('=07ff77= Variable.Static.forumHeaderShow =',Variable.Static.forumHeaderShow)
     

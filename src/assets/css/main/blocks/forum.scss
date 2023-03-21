@@ -328,6 +328,10 @@
                 font-size: 17px;
                 margin-bottom: 1rem;
             }
+
+            @media(max-width: 389px) {
+                font-size: 14px;
+            }
         }
 
         span {
