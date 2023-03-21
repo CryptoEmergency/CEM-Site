@@ -239,7 +239,7 @@
         align-items: center;
         gap: 5%;
         padding: 0 2.5%;
-        margin-bottom: 120px;
+        margin-bottom: 100px;
         background: rgb(1, 200, 171);
         background: linear-gradient(90deg, rgba(1, 200, 171, 1) 0%, rgba(2, 195, 167, 1) 13%, rgba(4, 180, 154, 1) 28%, rgba(7, 155, 133, 1) 45%, rgba(11, 121, 105, 1) 62%, rgba(16, 76, 67, 1) 81%, rgba(23, 23, 23, 1) 100%);
         border-radius: 6vw; //65px;
@@ -247,7 +247,7 @@
         @media(max-width: 979px) {
             padding-top: 20px;
             padding-bottom: 20px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             // border-radius: 30px;
         }
 
@@ -371,14 +371,14 @@
         }
 
         p {
-            width: 70%;
-            max-width: 850px;
+            width: 100%;
+            // max-width: 850px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 50px;
             font-size: 43px;
             // text-indent: 50px;
-            text-align: center;
+            text-align: left;
 
             @media(max-width: 1279px) {
                 font-size: 30px;
@@ -392,6 +392,25 @@
             @media(max-width: 767px) {
                 font-size: 3.6vw;
                 margin-bottom: 5vw;
+            }
+
+            &:first-child {
+                width: 70%;
+                max-width: 850px;
+                font-size: 45px;
+                text-align: center;
+
+                @media(max-width: 1279px) {
+                    font-size: 32px;
+                }
+    
+                @media(max-width: 979px) {
+                    font-size: 28px;
+                }
+
+                @media(max-width: 767px) {
+                    font-size: 4vw;
+                }
             }
 
             &:last-of-type {
@@ -652,7 +671,7 @@
             }
 
             @media(max-width: 767px) {
-                font-size: 3vw;
+                font-size: 3.3vw;
                 margin-bottom: 0.2rem;
             }
         }
@@ -666,7 +685,7 @@
             }
 
             @media(max-width: 767px) {
-                font-size: 2vw;
+                font-size: 2.5vw;
             }
         }
     }
