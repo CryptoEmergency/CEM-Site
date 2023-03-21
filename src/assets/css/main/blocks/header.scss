@@ -232,6 +232,10 @@
                         font-size: 1.2vw;
                     }
 
+                    @media(max-width: 767px) {
+                        display: none;
+                    }
+
                     &:hover {
                         -webkit-text-fill-color: #ffffff;
                     }
@@ -263,7 +267,7 @@
 
             @media(max-width: 767px) {
                 left: 95px;
-                top: 15px;
+                top: 18px;
                 width: 10px;
                 height: 10px;
                 border-width: 4px;
@@ -271,10 +275,30 @@
 
             @media(max-width: 599px) {
                 left: 50px;
-                top: 8px;
+                top: 20px;
                 width: 8px;
                 height: 8px;
                 border-width: 3px;
+            }
+        }
+
+        .c-userpanel {
+            &__icon {
+                &--burger {
+                    display: block;
+                    margin-bottom: 0;
+                    background: no-repeat url("../svg/burger_white.svg") center / 68%;
+
+                    @media(min-width: 768px) {
+                        display: none;
+                    }
+
+                    &.c-userpanel__icon {
+                        &--active {
+                            background: no-repeat url("../svg/burger.svg") center / 68%;
+                        }
+                    }
+                }
             }
         }
     }

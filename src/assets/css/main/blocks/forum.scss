@@ -113,7 +113,7 @@
 
             @media(max-width: 767px) {
                 // font-size: 15px;
-                font-size: 1.5vw;
+                font-size: 2vw;
             }
 
             @media(min-width: 1280px) {
@@ -443,7 +443,7 @@
 
     .swiper {
         &-container {
-            width: 80%;
+            width: 100%;
 
             @media(max-width: 1479px) {
                 max-width: calc(100% - 230px);
@@ -451,6 +451,10 @@
 
             @media(max-width: 1279px) {
                 max-width: calc(100% - 110px);
+            }
+
+            @media(max-width: 767px) {
+                max-width: calc(100% - 40px);
             }
         }
 
@@ -487,6 +491,10 @@
                 @media(max-width: 1279px) {
                     transform: translateX(-55px) translateY(-50%);
                 }
+
+                @media(max-width: 767px) {
+                    transform: translateX(-25px) translateY(-50%);
+                }
             }
 
             &-next {
@@ -495,6 +503,10 @@
 
                 @media(max-width: 1279px) {
                     transform: translateX(55px) translateY(-50%) rotate(180deg);
+                }
+
+                @media(max-width: 767px) {
+                    transform: translateX(25px) translateY(-50%) rotate(180deg);
                 }
             }
         }
@@ -531,7 +543,7 @@
         gap: 8vw;
         justify-content: space-between;
         align-items: baseline;
-        width: 80%;
+        width: 100%;
         height: auto;
 
         @media(max-width: 1279px) {
@@ -542,7 +554,7 @@
         }
 
         @media(max-width: 767px) {
-            // grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
             margin-bottom: 5vw;
             gap: 3vw;
         }
@@ -564,11 +576,11 @@
 
             // }
 
-            // &:nth-child(even) {
-            //     @media(max-width: 1279px) {
-            //         justify-self: flex-start;
-            //     }
-            // }
+            &:nth-child(even) {
+                @media(max-width: 767px) {
+                    justify-self: flex-start;
+                }
+            }
 
             @media(max-width: 1023px) {
                 width: 94%;
@@ -639,7 +651,7 @@
             }
 
             @media(max-width: 767px) {
-                font-size: 1.5vw;
+                font-size: 2.5vw;
                 margin-bottom: 0.2rem;
             }
         }
@@ -653,7 +665,7 @@
             }
 
             @media(max-width: 767px) {
-                font-size: 0.9vw;
+                font-size: 1.55vw;
             }
         }
     }
@@ -696,7 +708,7 @@
         @media(max-width: 1023px) {
             display: block;
             margin-bottom: 100px;
-            width: 80%;
+            width: 100%;
         }
 
         @media(max-width: 767px) {
@@ -1625,21 +1637,31 @@
         justify-content: space-between;
         align-items: stretch;
         gap: 3vw;
-        width: 80%;
+        width: 100%;
         max-width: 1240px;
         margin-left: auto;
         margin-right: auto;
+
+        @media(max-width: 767px) {
+            flex-wrap: wrap;
+        }
 
         li {
             flex-basis: calc(25% - 2.25vw);
             flex-shrink: 0;
             flex-grow: 0;
+
+            @media(max-width: 767px) {
+                flex-basis: calc(50% - 1.5vw);
+            }
         }
 
         a {
             display: flex;
             max-width: 300px;
             width: 100%;
+            margin-left: auto;
+            margin-right: auto;
             aspect-ratio: 1.77;
             // background: #01c8ab;
             border: 1px solid #6747CD;
@@ -1648,6 +1670,11 @@
 
             @media(max-width: 1279px) {
                 padding: 1vw 3vw;
+            }
+
+            @media(max-width: 767px) {
+                max-width: 100%;
+                aspect-ratio: 2.5;
             }
         }
 
@@ -1659,6 +1686,10 @@
 
             @media(max-width: 1279px) {
                 font-size: 1.6vw;
+            }
+
+            @media(max-width: 767px) {
+                font-size: 3vw;
             }
         }
     }
@@ -1682,7 +1713,7 @@
         grid-gap: 10px;
         grid-template-columns: calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px);
         margin-bottom: 100px;
-        width: 80%;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
 
@@ -1695,7 +1726,7 @@
         // }
 
         @media(max-width: 767px) {
-            grid-template-columns: calc(33% - 5px) calc(33% - 5px) calc(33% - 5px);
+            grid-template-columns: calc(50% - 5px) calc(50% - 5px);
             margin-bottom: 5vw;
         }
     }
