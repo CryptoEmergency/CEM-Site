@@ -460,13 +460,13 @@ const start = function (data, ID) {
                                     <span class="c-button__text">Купить билет</span>
                                 </a>
 
-                                <div class="swiper-container">
+                                <div class="swiper-container" replace={true}>
                                     <div id="summer_forum" class="swiper swiper-post_media" After={() => swiperGo()}>
                                         <div class="swiper-wrapper">
                                             {
                                                 slides.map((item) => {
                                                     return (
-                                                        <a class="swiper-slide" onClick={(e) => {
+                                                        <a class="swiper-slide" onclick={(e) => {
                                                             e.stopPropagation();
                                                             e.preventDefault();
                                                             fn.modals.ModalViewPhoto({
