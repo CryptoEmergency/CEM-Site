@@ -45,7 +45,7 @@ const forExport = function ({
         {statistic ? (
           <div class={statisticClass} ElemVisible={ElemVisible}>
             {Object.entries(statistic).map(([key, item]) => {
-              console.log(key, item);
+              // console.log(key, item);
               if (key == "showDate") {
                 return <span class={item.class}>{item.value}</span>;
               }
