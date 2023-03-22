@@ -8,10 +8,11 @@ import { fn } from '@src/functions/index.js';
 import {
     VideoPlayer,
 } from '@component/element/index.js';
+import images from "@assets/images/index.js";
 
 
 
-const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, video = false }, ID) {
+const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, video = false, folderImages = false }, ID) {
     let [Static] = fn.GetParams({ data: { path } })
     let [mainStatic] = fn.GetParams({ actual: true })
     let close = true
@@ -95,6 +96,11 @@ const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, vide
                                             //     } : null
                                             // }
                                             />
+                                        )
+                                    } else if(folderImages) {
+                                        // console.log('=596e38=',`${folder}/${path}`)
+                                        return (
+                                            <img src={images[`${folderImages}/${path}`]} width="100%" height="" />
                                         )
                                     } else {
                                         return (

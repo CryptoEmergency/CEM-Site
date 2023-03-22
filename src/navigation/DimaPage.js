@@ -98,7 +98,7 @@ const start = function (data, ID) {
                     </span>
                   </div>
 
-                  <div class="button-container-preview mb--10">
+                  {/* <div class="button-container-preview mb--10">
                     <span
                       class="btn-news-preview"
                       onclick={() => {
@@ -107,21 +107,21 @@ const start = function (data, ID) {
                     >
                       <span>Новости</span>
                     </span>
-                  </div>
-                  <ButtonGradient
+                  </div> */}
+                  {/* <ButtonGradient
                     class="mb--10"
                     text="Крипто Университет"
                     onclick={() => {
                       fn.siteLink("/DimaPage/records-university/");
                     }}
-                  />
-                  <ButtonGradient
+                  /> */}
+                  {/* <ButtonGradient
                     class="mb--10"
                     text="Новости новый формат"
                     onclick={() => {
                       fn.siteLink("/DimaPage/records-newsNew/");
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
 
