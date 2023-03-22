@@ -987,7 +987,7 @@ const start = function (data, ID) {
                                 doubleClickZoom: false,
                                 boxZoom: false,
                                 geoclicker: false,
-                                zoomControl: false,
+                                zoomControl: true,
                                 fullscreenControl: false
                             });
 
