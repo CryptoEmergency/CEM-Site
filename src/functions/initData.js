@@ -7,7 +7,29 @@ const initData = {}
 initData.any = function (Static) {
 
 
+    Static.isValid = true
+    Static.submitClick = false
+    Static.messageSent = false
+    Static.commentText = []
 
+    Static.editComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
+
+    Static.mainComment = {
+        rows: 1,
+        adaptive: 4
+    }
+
+    Static.secondComment = {
+        rows: 1,
+        adaptive: 4,
+        elShowInput: {},
+        el: {}
+    }
 
 
     Static.elInput = {}
@@ -19,7 +41,7 @@ initData.any = function (Static) {
     Static.elShowComment = {}
     Static.elShowAnswersComment = {}
     Static.elShowButtonComment = []
-Static.elInput = {}
+    Static.elInput = {}
     Static.elButtonSubmit = {}
     Static.commentText = []
     return

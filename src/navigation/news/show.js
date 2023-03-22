@@ -13,11 +13,12 @@
 //         </div>
 //       );
 
-import { jsx, jsxFrag, load, Variable } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, load, Variable, initReload } from "@betarost/cemserver/cem.js";
 
 import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
+import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/index.js";
 
 import { BlockError404 } from "@component/blocks/index.js";
 
@@ -46,7 +47,9 @@ const start = function (data, ID = "mainBlock") {
       }
       return (
         <Elements.page.MainContainer title={Static.item.title} classTitle="p-lr" class="pt--20">
-          <Elements.page.Container class="p-lr pt--20">
+          <Elements.page.Container class="p-lr pt--20" ElemVisible={() => {
+            fn.recordsView(Static.item._id, "setNews")
+          }}>
             {Static.item.image ? (
               <Elements.image.imgFull
                 src={"/assets/upload/news/" + Static.item.image}
@@ -62,7 +65,7 @@ const start = function (data, ID = "mainBlock") {
             {/* <p class="text mr20" tohtml={true}>
               {Static.item.text}
             </p> */}
-            <Elements.text.Main text={Static.item.text} class="text mb--20" />
+            <Elements.text.Main text={fn.editText(Static.item.text, { clear: true, paragraph: true, html: true })} class="text mb--20" />
 
             {Static.item.source ? (
               <p class="source mr20">
@@ -103,6 +106,66 @@ const start = function (data, ID = "mainBlock") {
               <Elements.input.Div class="text1" />
             </Elements.page.Container> */}
             {/* <BlockShowNews Static={Static} item={item} /> */}
+
+            <div class="news_page_comments" style="padding-bottom:40px;">
+              <h2>{Variable.lang.h.modal_comment}</h2>
+              <div class="c-comments__form">
+                <div class="c-comments__field">
+                  <TextArea
+                    Static={Static.mainComment}
+                    className="text1 create_post_chapter"
+                  />
+                </div>
+                <ButtonSubmit
+                  text={<img class="c-comments__icon" src={svg["send_message"]} />}
+                  className="c-comments__send"
+                  onclick={async (tmp, el) => {
+                    if (!Variable.auth) {
+                      fn.modals.ModalNeedAuth()
+                      return
+                    }
+                    if (!Static.mainComment.el.value.trim().length) { return }
+                    let text = Static.mainComment.el.value.trim()
+                    let response = await fn.restApi.setNews.comment({ _id: Static.item._id, text })
+                    // let response = await api({ type: "set", action: "setNews", data: { _id: item._id, value: { comments: { text: text } } } })
+                    if (response.status === "ok") {
+                      Static.mainComment.el.value = ""
+                      if (Static.mainComment.adaptive) {
+                        Static.mainComment.el.style.height = (Static.mainComment.el.dataset.maxHeight / Static.mainComment.adaptive) + 'px';
+                      }
+                      if (response.list_records[0]) {
+                        let newRes = response.list_records[0]
+                        Static.item.comments.unshift(newRes)
+                        initReload();
+                      }
+                    }
+                  }}
+                />
+              </div>
+              {
+                !Static.item.comments || !Static.item.comments.length
+                  ?
+                  null
+                  // <NotFound />
+                  :
+                  <div class="post_comments">
+                    <div class="user_news_item">
+                      {Static.item.comments.map(function (itemComments, index) {
+                        return (
+                          <Comment
+                            Static={Static}
+                            item={itemComments}
+                            index={index}
+                            mainId={Static.item._id}
+                            action="News"
+                          />
+                        )
+                      })}
+                    </div>
+                  </div>
+              }
+            </div>
+
           </Elements.page.Container>
         </Elements.page.MainContainer>
       );

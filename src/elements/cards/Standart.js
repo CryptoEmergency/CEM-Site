@@ -21,6 +21,7 @@ const forExport = function ({
   description,
   statistic,
   statisticClass,
+  ElemVisible = () => { }
 }) {
   if (link) {
     return (
@@ -42,9 +43,9 @@ const forExport = function ({
         ) : null}
 
         {statistic ? (
-          <div class={statisticClass}>
+          <div class={statisticClass} ElemVisible={ElemVisible}>
             {Object.entries(statistic).map(([key, item]) => {
-              console.log(key, item);
+              // console.log(key, item);
               if (key == "showDate") {
                 return <span class={item.class}>{item.value}</span>;
               }
@@ -63,7 +64,7 @@ const forExport = function ({
   }
 
   return (
-    <div class="affiliate_program_condition">
+    <div class="affiliate_program_condition" ElemVisible={ElemVisible}>
       <div class="affiliate_program_condition_icon">
         <img src={image} />
       </div>

@@ -26,6 +26,7 @@ const mainBlock = async function () {
                 Variable.Static.HeaderShow = true;
                 Variable.Static.FooterShow = true;
                 Variable.Static.FooterMenuShow = true;
+                Variable.Static.forumHeaderShow = false
                 let page = dataUrl.adress;
                 if (!page || page == "") {
                     await Variable.listRouter.index(data, ID, url);

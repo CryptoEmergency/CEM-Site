@@ -14,7 +14,7 @@ forExport.get = async function (data, callback) {
         return []
     }
     data.method = "get" + data.method
-    console.log('=6284c7=', socket.connected, Variable.socketConnect)
+    // console.log('=6284c7=', socket.connected, Variable.socketConnect)
     // if (data.cache) {
     //     delete data.cache
     // }

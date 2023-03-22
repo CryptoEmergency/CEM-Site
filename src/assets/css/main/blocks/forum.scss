@@ -1,86 +1,56 @@
 .с-summerforum {
     background: url("../images/summer_forum/left.png") no-repeat top 4500px left calc(50% - 600px)/300px auto,
         url("../images/summer_forum/right.png") no-repeat top 4000px right calc(50% - 315px)/860px auto,
-        url("../images/summer_forum/bottom.png") no-repeat bottom 883px center/1500px auto;
+        url("../images/summer_forum/bottom.png") no-repeat bottom 729px center/1500px auto;
     background-color: #171717;
 
     @media(max-width: 1279px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 3100px left calc(50% - 506px)/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2450px left calc(50% + 188px)/1140px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 825px center/1521px auto;
-        background-position: top 3100px left calc(50% - 506px), top 2450px left calc(50% + 188px), bottom 825px center;
+        background-position: top 3100px left calc(50% - 506px), top 2450px left calc(50% + 188px), bottom 729px center;
         background-size: 20% auto, 1140px auto, 1521px auto;
     }
 
     @media(max-width: 1099px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 3200px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 3000px right/500px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
-        background-position: top 3200px left, top 3000px right, bottom 815px center;
+        background-position: top 3200px left, top 3000px right, bottom 729px center;
         background-size: 20% auto, 500px auto, contain;
     }
 
     @media(max-width: 1023px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 3200px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2900px right/500px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
-        background-position: top 3200px left, top 2900px right, bottom 815px center;
+        background-position: top 3200px left, top 2900px right, bottom 729px center;
         background-size: 20% auto, 500px auto, contain;
     }
 
     @media(max-width: 979px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 2650px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2400px right/380px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
-        background-position: top 2650px left, top 2400px right, bottom 815px center;
+        background-position: top 2650px left, top 2400px right, bottom 729px center;
         background-size: 20% auto, 380px auto, contain;
     }
 
     @media(max-width: 899px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 2750px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2500px right/380px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
-        background-position: top 2750px left, top 2500px right, bottom 815px center;
+        background-position: top 2750px left, top 2500px right, bottom 729px center;
         background-size: 20% auto, 380px auto, contain;
     }
 
     @media(max-width: 799px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 2750px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2500px right/380px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 815px center/contain;
-        background-position: top 2750px left, top 2500px right, bottom 815px center;
+        background-position: top 2750px left, top 2500px right, bottom 729px center;
         background-size: 20% auto, 380px auto, contain;
     }
 
     @media(max-width: 767px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 3500px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2800px right/380px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 520px center/contain;
-        background-position: top 3500px left, top 2800px right, bottom 520px center;
+        background-position: top 3500px left, top 2800px right, bottom 429px center;
         background-size: 20% auto, 380px auto, contain;
     }
 
     @media(max-width: 699px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 3270px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2500px right/380px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 500px center/contain;
-        background-position: top 3270px left, top 2500px right, bottom 500px center;
+        background-position: top 3270px left, top 2500px right, bottom 429px center;
         background-size: 20% auto, 380px auto, contain;
     }
 
     @media(max-width: 599px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 2832px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 2200px right/300px auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 500px center/contain;
-        background-position: top 2832px left, top 2200px right, bottom 500px center;
+        background-position: top 2832px left, top 2200px right, bottom 429px center;
         background-size: 20% auto, 300px auto, contain;
     }
 
     @media(max-width: 499px) {
-        // background: url("../images/summer_forum/left.png") no-repeat top 1740px left/20% auto,
-        //     url("../images/summer_forum/right.png") no-repeat top 1570px left calc(100%)/50% auto,
-        //     url("../images/summer_forum/bottom.png") no-repeat bottom 500px center/contain;
-        background-position: top 1740px left, top 1570px left calc(100%), bottom 500px center;
+        background-position: top 1740px left, top 1570px left calc(100%), bottom 429px center;
         background-size: 20% auto, 50% auto, contain;
     }
 
@@ -91,7 +61,7 @@
         text-align: center;
 
         @media(max-width: 767px) {
-            font-size: 5.7vw;
+            font-size: 7.7vw;
         }
 
         @media(min-width: 1280px) {
@@ -113,6 +83,7 @@
         height: auto;
         text-transform: none;
         border-radius: 1.77vw; //34px;
+        min-width: 200px;
 
         &::after {
             content: none;
@@ -133,7 +104,7 @@
 
             @media(max-width: 767px) {
                 padding: 2.9vw 4.6vw;
-                font-size: 3vw;
+                font-size: 4vw;
             }
 
             @media(min-width: 1280px) {
@@ -286,6 +257,14 @@
 
         .c-button {
             margin-bottom: 0 !important;
+            min-width: auto;
+
+            &__text {
+
+                @media(max-width: 767px) {
+                    font-size: 3vw;
+                }
+            }
         }
     }
 
@@ -670,41 +649,44 @@
             position: relative;
             width: 100%;
             border-radius: 50%;
+            border: 2px solid #00D5BE;
             z-index: 2;
         }
     }
 
     &__wrappper {
-        position: relative;
+        // position: relative;
         margin-bottom: 11%;
 
-        &::before {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translateY(-50%) translateX(-45%);
-            content: '';
-            width: 104%;
-            height: 104%;
-            border-radius: 50%;
-            background: rgb(187, 248, 191);
-            background: linear-gradient(90deg, rgba(187, 248, 191, 1) 56%, rgba(0, 161, 159, 1) 100%);
+        // &::before {
+        //     position: absolute;
+        //     left: 50%;
+        //     top: 50%;
+        //     transform: translateY(-50%) translateX(-45%);
+        //     content: '';
+        //     width: 104%;
+        //     height: 104%;
+        //     border-radius: 50%;
+        //     background: rgb(187, 248, 191);
+        //     background: linear-gradient(90deg, rgba(187, 248, 191, 1) 56%, rgba(0, 161, 159, 1) 100%);
 
-            @media(max-width: 767px) {
-                left: 50%;
-                top: 50%;
-                transform: translateY(-52.5%) translateX(-40%);
-                width: 100%;
-                height: 100%;
-            }
-        }
+        //     @media(max-width: 767px) {
+        //         left: 50%;
+        //         top: 50%;
+        //         transform: translateY(-52.5%) translateX(-40%);
+        //         width: 100%;
+        //         height: 100%;
+        //     }
+        // }
     }
 
     &__caption {
-        margin-right: -10%;
+        // margin-right: -10%;
         text-align: center;
 
         h3 {
+            white-space: nowrap;
+
             @media(max-width: 1279px) {
                 font-size: 1.5vw;
                 margin-bottom: 0.3rem;
@@ -731,9 +713,10 @@
     }
 
     .c-button {
-        background: #6760cf;
+        background: rgb(100, 70, 210);
+        background: linear-gradient(90deg, rgba(100, 70, 210, 1) 0%, rgba(11, 218, 252, 1) 100%);
         margin-left: auto;
-        margin-right: 10%;
+        margin-right: auto;
 
         @media(max-width: 1279px) {
             // margin-right: auto;
@@ -1659,13 +1642,13 @@
 
     .c-button {
         margin-left: auto;
-        margin-right: 10%;
+        margin-right: auto;
         background: rgb(100, 70, 210);
         background: linear-gradient(360deg, rgba(100, 70, 210, 1) 0%, rgba(103, 74, 211, 1) 16%, rgba(113, 85, 214, 1) 30%, rgba(129, 104, 218, 1) 45%, rgba(152, 131, 225, 1) 59%, rgba(181, 166, 233, 1) 73%, rgba(216, 208, 244, 1) 87%, rgba(255, 255, 255, 1) 100%);
 
         @media(max-width: 1279px) {
             // margin-right: auto;
-            margin-right: 10%;
+            // margin-right: 10%;
         }
     }
 }
@@ -1682,10 +1665,32 @@
     }
 
     &__title {
-        margin: 25px 0;
+        margin: 25px auto;
+        max-width: 890px;
+
+        @media(max-width: 1279px) {
+            max-width: 600px;
+        }
+
+        @media(max-width: 1023px) {
+            max-width: 480px;
+        }
+
+        @media(max-width: 991px) {
+            max-width: 460px;
+        }
 
         @media(max-width: 767px) {
             margin-bottom: 8vw;
+            max-width: 590px;
+        }
+
+        @media(max-width: 600px) {
+            max-width: 100%;
+        }
+
+        @media(max-width: 499px) {
+            // max-width: 283px;
         }
     }
 
@@ -1696,7 +1701,7 @@
         display: flex;
         justify-content: space-between;
         align-items: stretch;
-        gap: 3vw;
+        // gap: 3vw;
         width: 100%;
         max-width: 1240px;
         margin-left: auto;
@@ -1704,6 +1709,7 @@
 
         @media(max-width: 767px) {
             flex-wrap: wrap;
+            gap: 6vw;
         }
 
         li {
@@ -1712,45 +1718,74 @@
             flex-grow: 0;
 
             @media(max-width: 767px) {
-                flex-basis: calc(50% - 1.5vw);
+                flex-basis: calc(50% - 3vw);
             }
         }
+    }
 
-        a {
-            display: flex;
-            max-width: 300px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            aspect-ratio: 1.77;
-            // background: #01c8ab;
-            border: 1px solid #6747CD;
-            border-radius: 10px;
-            cursor: pointer;
+    &__item {
+        display: flex;
+        max-width: 300px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        color: inherit;
+        cursor: pointer;
 
-            @media(max-width: 1279px) {
-                padding: 1vw 3vw;
-            }
+        @media(max-width: 1279px) {
+            // padding: 1vw 3vw;
+        }
 
-            @media(max-width: 767px) {
-                max-width: 100%;
-                aspect-ratio: 2.5;
+        @media(max-width: 767px) {
+            max-width: 100%;
+            // aspect-ratio: 2.5;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        figcaption {
+            text-align: center;
+
+            p {
+                max-width: 78%;
+                margin: 0 auto;
+
+                @media(max-width: 767px) {
+                    font-size: 2.7vw;
+                }
             }
         }
 
         h5 {
             margin: auto;
-            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
             text-align: center;
             color: #ffffff;
+            white-space: nowrap;
 
             @media(max-width: 1279px) {
                 font-size: 1.6vw;
             }
 
             @media(max-width: 767px) {
-                font-size: 3vw;
+                font-size: 3.5vw;
             }
+        }
+    }
+
+    &__wrap {
+        margin-bottom: 1rem;
+        aspect-ratio: 1.77;
+        // border: 1px solid #6747CD;
+        border-radius: 10px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: auto
         }
     }
 }
@@ -1795,22 +1830,22 @@
         display: flex;
         width: 100%;
         text-align: center;
-        background: #ffffff;
+        // background: #ffffff;
         border: 1px solid #01c8ab;
         border-radius: 10px;
         overflow: hidden;
 
         img {
-            max-width: 100%;
+            max-width: 82%;
             margin: auto;
         }
     }
 
     .c-button {
-        background: rgb(0, 222, 186);
-        background: linear-gradient(360deg, rgba(0, 222, 186, 1) 0%, rgba(4, 222, 187, 1) 13%, rgba(15, 224, 190, 1) 26%, rgba(34, 226, 195, 1) 38%, rgba(61, 230, 203, 1) 51%, rgba(96, 234, 212, 1) 63%, rgba(139, 240, 224, 1) 75%, rgba(190, 247, 237, 1) 87%, rgba(247, 254, 253, 1) 98%, rgba(255, 255, 255, 1) 100%);
+        background: rgb(100, 70, 210);
+        background: linear-gradient(270deg, rgba(100, 70, 210, 1) 0%, rgba(11, 218, 252, 1) 100%);
         margin-left: auto;
-        margin-right: 10%;
+        margin-right: auto;
 
         // @media(max-width: 1279px) {
         //     // margin-right: auto;
@@ -1839,4 +1874,8 @@
     left: auto !important;
     right: 10px !important;
     bottom: 47px !important;
+
+    .button_beaa {
+        background: #01c8ab !important;
+    }
 }

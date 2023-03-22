@@ -10,6 +10,7 @@ import Elements from "@src/elements/export.js";
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID, initData: "news" });
+  Static.showMore = true
   load({
     ID,
     fnLoad: async () => {
@@ -17,7 +18,7 @@ const start = function (data, ID) {
         filter: { type: "news" },
         limit: 20,
       });
-      console.log("=ef5982=", Static.categoryList.list_records);
+      // console.log("=ef5982=", Static.categoryList.list_records);
       Static.records = await fn.socket.get({
         method: "News",
         params: {
@@ -26,8 +27,12 @@ const start = function (data, ID) {
             "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
             moderation: true
           },
+          limit: 20,
+          select: { comments: 1 }
         },
       });
+
+      // console.log('=c0ec43=', Static.records)
     },
     fn: () => {
       return (
@@ -47,7 +52,7 @@ const start = function (data, ID) {
                       type: "news",
                       "languages.code":
                         Variable.lang.code == "ru" ? "ru" : "en",
-                        moderation: true
+                      moderation: true
                     },
 
                   },
@@ -126,10 +131,60 @@ const start = function (data, ID) {
                     },
                   }}
                   statisticClass="card-statistic"
+                  ElemVisible={() => {
+                    // console.log('=b0902a=',Переменная)
+                    fn.recordsView(item._id, "setNews")
+                  }}
                 />
               );
             })}
           </Elements.page.Container>
+          <div
+            replace={Static.showMore}
+            ElemVisible={async () => {
+
+              let tmp = await fn.socket.get({
+                method: "News",
+                params: {
+                  filter: {
+                    type: "news",
+                    "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
+                    moderation: true
+                  },
+                  limit: 20,
+                  offset: Static.records.length
+                },
+              });
+
+              if (!tmp || !tmp.length) {
+                Static.showMore = false
+              } else {
+                Static.records.push(...tmp)
+              }
+
+              initReload()
+
+              // console.log('=2b6dcf=', "dfhdfh", tmp)
+              // let tmp = await fn.socket.get({
+              //     method: "News",
+              //     params: {
+              //         filter: {},
+              //         sort: { showDate: -1 },
+              //         limit: 20,
+              //         offset: Static.records.length
+              //     }
+              // })
+
+
+              // if (!tmp || !tmp.length) {
+              //     Static.showMore = false
+              // } else {
+              //     Static.records.push(...tmp)
+              // }
+
+              // initReload()
+            }}>
+          </div>
         </Elements.page.MainContainer>
       );
     },

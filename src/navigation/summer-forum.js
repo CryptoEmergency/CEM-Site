@@ -111,22 +111,22 @@ const start = function (data, ID) {
     // };
 
     const slides = [
-        {
-            path: 'DSC_0в399',
-            folder: 'summer_forum'
-        },
+        // {
+        //     path: 'DSC_0в399',
+        //     folder: 'summer_forum'
+        // },
         {
             path: 'DSC_0вв394',
             folder: 'summer_forum'
         },
-        {
-            path: 'DSC_0027',
-            folder: 'summer_forum'
-        },
-        {
-            path: 'DSC_0042',
-            folder: 'summer_forum'
-        },
+        // {
+        //     path: 'DSC_0027',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0042',
+        //     folder: 'summer_forum'
+        // },
         {
             path: 'DSC_0112',
             folder: 'summer_forum'
@@ -135,18 +135,18 @@ const start = function (data, ID) {
             path: 'DSC_0189',
             folder: 'summer_forum'
         },
-        {
-            path: 'DSC_0213',
-            folder: 'summer_forum'
-        },
-        {
-            path: 'DSC_0234',
-            folder: 'summer_forum'
-        },
-        {
-            path: 'DSC_0275',
-            folder: 'summer_forum'
-        },
+        // {
+        //     path: 'DSC_0213',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0234',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0275',
+        //     folder: 'summer_forum'
+        // },
         // {
         //     path: 'DSC_0300',
         //     folder: 'summer_forum'
@@ -163,10 +163,10 @@ const start = function (data, ID) {
         //     path: 'DSC_0363',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'DSC_0373',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'DSC_0373',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'DSC_0402',
         //     folder: 'summer_forum'
@@ -179,10 +179,10 @@ const start = function (data, ID) {
         //     path: 'DSC_0410',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'I98B3417',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'I98B3417',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'I98B3451',
         //     folder: 'summer_forum'
@@ -191,10 +191,10 @@ const start = function (data, ID) {
         //     path: 'I98B3502-(1)',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'I98B3506',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'I98B3506',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'I98B3529',
         //     folder: 'summer_forum'
@@ -227,10 +227,10 @@ const start = function (data, ID) {
         //     path: 'I98B3711',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'I98B3727',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'I98B3727',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'I98B3823',
         //     folder: 'summer_forum'
@@ -247,22 +247,22 @@ const start = function (data, ID) {
         //     path: 'I98B3889',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'I98B3905',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'I98B3905',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'I98B3948',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'I98B3968',
-        //     folder: 'summer_forum'
-        // },
-        // {
-        //     path: 'I98B3978',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'I98B3968',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'I98B3978',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'I98B4092',
         //     folder: 'summer_forum'
@@ -283,10 +283,10 @@ const start = function (data, ID) {
         //     path: 'КРИПТО-ЮГ-6',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'КРИПТО-ЮГ-12',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'КРИПТО-ЮГ-12',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'КРИПТО-ЮГ-23',
         //     folder: 'summer_forum'
@@ -299,14 +299,14 @@ const start = function (data, ID) {
         //     path: 'КРИПТО-ЮГ-46',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'КРИПТО-ЮГ-48',
-        //     folder: 'summer_forum'
-        // },
-        // {
-        //     path: 'КРИПТО-ЮГ-52',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'КРИПТО-ЮГ-48',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'КРИПТО-ЮГ-52',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'КРИПТО-ЮГ-53',
         //     folder: 'summer_forum'
@@ -327,44 +327,70 @@ const start = function (data, ID) {
         //     path: 'КРИПТО-ЮГ-65',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'КРИПТО-ЮГ-72',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'КРИПТО-ЮГ-72',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'КРИПТО-ЮГ-74',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'КРИПТО-ЮГ-88',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'КРИПТО-ЮГ-88',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'КРИПТО-ЮГ-104',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'КРИПТО-ЮГ-129',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'КРИПТО-ЮГ-129',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'КРИПТО-ЮГ-147',
         //     folder: 'summer_forum'
         // },
-        // {
-        //     path: 'КРИПТО-ЮГ-158',
-        //     folder: 'summer_forum'
-        // },
+        {
+            path: 'КРИПТО-ЮГ-158',
+            folder: 'summer_forum'
+        },
         // {
         //     path: 'КРИПТО-ЮГ-163',
         //     folder: 'summer_forum'
         // },
     ];
 
+    const guests = [
+        {
+            link: "https://youtu.be/J0U0ZpEKxlU",
+            photo: "guest1",
+            name: "Владислав Мартынов",
+            spec: "Автор курса \"КриптоИнвестор\""
+        },
+        {
+            link: "https://youtu.be/Wzo9Cv5xDFw",
+            photo: "guest2",
+            name: "Наталия Амелин",
+            spec: "Директор фонда Genesi в Metis"
+        },
+        {
+            link: "https://youtu.be/iqTQ7zYR5DM",
+            photo: "guest3",
+            name: "Алексей Зюзин",
+            spec: "Организатор Crypto Summit"
+        },
+        {
+            link: "https://youtu.be/aeZfsdraVGo",
+            photo: "guest4",
+            name: "Сергей Павлович",
+            spec: "Канал ЛЮДИ PRO"
+        }
+    ]
+
     init(
         async () => {
-            console.log('=bbcdd5=', slides)
-            console.log('=bbcdd5=', images)
+            // console.log('=bbcdd5=', slides)
         },
         () => {
             // anime.timeline({ loop: true })
@@ -434,13 +460,13 @@ const start = function (data, ID) {
                                     <span class="c-button__text">Купить билет</span>
                                 </a>
 
-                                <div class="swiper-container">
+                                <div class="swiper-container" replace={true}>
                                     <div id="summer_forum" class="swiper swiper-post_media" After={() => swiperGo()}>
                                         <div class="swiper-wrapper">
                                             {
                                                 slides.map((item) => {
                                                     return (
-                                                        <a class="swiper-slide" onClick={(e) => {
+                                                        <a class="swiper-slide" onclick={(e) => {
                                                             e.stopPropagation();
                                                             e.preventDefault();
                                                             fn.modals.ModalViewPhoto({
@@ -934,10 +960,25 @@ const start = function (data, ID) {
                         <section class="с-guests c-container" id="guests">
                             <h4 class="с-summerforum__title с-guests__title">{Variable.lang.h.guestsForum}</h4>
                             <ul class="с-guests__list">
-                                <li><a href="https://youtu.be/J0U0ZpEKxlU" target="_blank" class=""><h5>Владислав Мартынов</h5></a></li>
-                                <li><a href="https://youtu.be/Wzo9Cv5xDFw" target="_blank" class=""><h5>Наталия Амелин</h5></a></li>
-                                <li><a href="https://youtu.be/iqTQ7zYR5DM" target="_blank" class=""><h5>Алексей Зюзин</h5></a></li>
-                                <li><a href="https://youtu.be/aeZfsdraVGo" target="_blank" class=""><h5>Люди PRO</h5></a></li>
+                                {
+                                    guests.map((item) => {
+                                        return (
+                                            <li>
+                                                <a href={item.link} target="_blank" class="с-guests__item">
+                                                    <figure>
+                                                        <div class="с-guests__wrap">
+                                                            <img src={images[`summer_forum/${item.photo}`]} />
+                                                        </div>
+                                                        <figcaption>
+                                                            <h5>{item.name}</h5>
+                                                            <p>{item.spec}</p>
+                                                        </figcaption>
+                                                    </figure>
+                                                </a>
+                                            </li>
+                                        )
+                                    })
+                                }
                             </ul>
                         </section>
 
@@ -950,10 +991,9 @@ const start = function (data, ID) {
                                     href="http://тц-черноморский.рф"
                                     class="c-partnersforum__item"
                                 >
-                                    <img src={images["forum/partner_7"]} />
+                                    <img src={svg["summer_forum/partner_7"]} />
                                 </a>
-                                <a style="background:  transparent;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://cryptoholding.ru"
                                     class="c-partnersforum__item"
@@ -965,7 +1005,7 @@ const start = function (data, ID) {
                                     href="https://racib.com"
                                     class="c-partnersforum__item"
                                 >
-                                    <img src={images["forum/partner_21"]} />
+                                    <img src={images["summer_forum/partner_21"]} />
                                 </a>
                                 {/* <a style="background:  transparent;"
                                     target="_blank"
@@ -975,16 +1015,14 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_8"]} />
                                 </a> */}
-                                <a style="background:  transparent;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://carding.pro"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["forum/partner_9"]} />
                                 </a>
-                                <a style="background:  transparent;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://blockchain24.pro"
                                     class="c-partnersforum__item"
@@ -996,12 +1034,10 @@ const start = function (data, ID) {
                                     rel="nofollow nooopener"
                                     href="https://www.instagram.com/abrau1870/"
                                     class="c-partnersforum__item"
-                                    style="background: #383637"
                                 >
-                                    <img src={images["forum/partner_2"]} />
+                                    <img src={images["summer_forum/partner_2"]} height="90" />
                                 </a>
-                                <a style="background:  transparent;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://www.instagram.com/barycoffee.nvr/"
                                     class="c-partnersforum__item"
@@ -1023,24 +1059,21 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_5"]} />
                                 </a> */}
-                                <a style="display: block!important;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://hginov.ru"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["forum/partner_6"]} />
                                 </a>
-                                <a style="display: block!important;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://ti.turovinvest.ru/"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["forum/partner_11"]} />
                                 </a>
-                                <a style="background:  transparent;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://cryptonews.net/ru/"
                                     class="c-partnersforum__item"
@@ -1063,8 +1096,7 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_14"]} />
                             </a>*/}
-                                <a style="display: block!important;"
-                                    target="_blank"
+                                <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://cripta.games"
                                     class="c-partnersforum__item"
@@ -1114,7 +1146,7 @@ const start = function (data, ID) {
                                     href="https://www.artemotiochain.ru/"
                                     class="c-partnersforum__item"
                                 >
-                                    <img src={images["forum/partner_22"]} />
+                                    <img src={images["summer_forum/partner_22"]} height="90" />
                                 </a>
                                 {/* <a style="background: #1C1A27"
                                     target="_blank"
