@@ -6,13 +6,14 @@ const forExport = function ({
   resetClass,
   title,
   backSeat,
+  ElemVisible = () => { }
 }) {
   let classACtive = ["section", className];
   if (resetClass) {
     classACtive = className;
   }
   return (
-    <section class={classACtive}>
+    <section class={classACtive} ElemVisible={ElemVisible}>
       {title ? <h2>{title}</h2> : null}
 
       {children}

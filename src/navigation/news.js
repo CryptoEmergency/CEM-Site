@@ -47,7 +47,7 @@ const start = function (data, ID) {
                       type: "news",
                       "languages.code":
                         Variable.lang.code == "ru" ? "ru" : "en",
-                        moderation: true
+                      moderation: true
                     },
 
                   },
@@ -126,6 +126,10 @@ const start = function (data, ID) {
                     },
                   }}
                   statisticClass="card-statistic"
+                  ElemVisible={() => {
+                    // console.log('=b0902a=',Переменная)
+                    fn.recordsView(item._id, "setNews")
+                  }}
                 />
               );
             })}

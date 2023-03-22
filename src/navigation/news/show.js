@@ -46,7 +46,9 @@ const start = function (data, ID = "mainBlock") {
       }
       return (
         <Elements.page.MainContainer title={Static.item.title} classTitle="p-lr" class="pt--20">
-          <Elements.page.Container class="p-lr pt--20">
+          <Elements.page.Container class="p-lr pt--20" ElemVisible={() => {
+            fn.recordsView(Static.item._id, "setNews")
+          }}>
             {Static.item.image ? (
               <Elements.image.imgFull
                 src={"/assets/upload/news/" + Static.item.image}
