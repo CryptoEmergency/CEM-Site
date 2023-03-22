@@ -110,9 +110,261 @@ const start = function (data, ID) {
     //     translateY: -100,
     // };
 
+    const slides = [
+        {
+            path: 'DSC_0в399',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0вв394',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0027',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0042',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0112',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0189',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0213',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0234',
+            folder: 'summer_forum'
+        },
+        {
+            path: 'DSC_0275',
+            folder: 'summer_forum'
+        },
+        // {
+        //     path: 'DSC_0300',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0303',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0362',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0363',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0373',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0402',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0405',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'DSC_0410',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3417',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3451',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3502-(1)',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3506',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3529',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3536',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3549',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3657',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3660',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3673',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3691',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3711',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3727',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3823',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3843',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3873',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3889',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3905',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3948',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3968',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B3978',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B4092',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'I98B4097',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-2',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-6',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-12',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-23',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-32',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-46',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-48',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-52',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-53',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-55',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-56',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-57',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-65',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-72',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-74',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-88',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-104',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-129',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-147',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-158',
+        //     folder: 'summer_forum'
+        // },
+        // {
+        //     path: 'КРИПТО-ЮГ-163',
+        //     folder: 'summer_forum'
+        // },
+    ];
+
     init(
         async () => {
-            // console.log('=bbcdd5=', Variable)
+            console.log('=bbcdd5=', slides)
+            console.log('=bbcdd5=', images)
         },
         () => {
             // anime.timeline({ loop: true })
@@ -185,66 +437,24 @@ const start = function (data, ID) {
                                 <div class="swiper-container">
                                     <div id="summer_forum" class="swiper swiper-post_media" After={() => swiperGo()}>
                                         <div class="swiper-wrapper">
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider1']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider2']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider3']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider4']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider5']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider6']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider7']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider8']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider9']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider10']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider11']} />
-                                                </div>
-                                            </a>
-                                            <a class="swiper-slide">
-                                                <div class="swiper-post_media_image_container">
-                                                    <img style="border-radius: 13px" src={images['summer_forum/slider12']} />
-                                                </div>
-                                            </a>
+                                            {
+                                                slides.map((item) => {
+                                                    return (
+                                                        <a class="swiper-slide" onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            e.preventDefault();
+                                                            fn.modals.ModalViewPhoto({
+                                                                path: item.path,
+                                                                folderImages: item.folder,
+                                                            });
+                                                        }}>
+                                                            <div class="swiper-post_media_image_container">
+                                                                <img style="border-radius: 13px" src={images[`${item.folder}/${item.path}`]} />
+                                                            </div>
+                                                        </a>
+                                                    )
+                                                })
+                                            }
                                         </div>
                                     </div>
                                     <div>
@@ -861,7 +1071,7 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_15"]} />
                                 </a>
-                               {/* <a style="display: block!important;"
+                                {/* <a style="display: block!important;"
                                     target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://voltep.online"
