@@ -10,7 +10,6 @@ initData.any = function (Static) {
     Static.isValid = true
     Static.submitClick = false
     Static.messageSent = false
-    Static.showPage = true
     Static.commentText = []
 
     Static.editComment = {

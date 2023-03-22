@@ -121,6 +121,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                   }
                 }}>
                 {() => {
+                  // console.log('=6128e3=', text, Static.showPage, Static.openModals)
                   if (Static.showPage) {
                     return fn.editText(text, { clear: true, paragraph: true, html: true })
                   }
