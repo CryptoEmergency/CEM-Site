@@ -1415,7 +1415,7 @@ restApi.getUserPlanning = async function ({ cache, name, limit = 6, offset = 0, 
 restApi.getStartaps = async function ({ cache, name, limit = 60, offset = 0, filter, select, sort = { _id: -1 }, firstRecord }) {
 
 
-    let defaultFilter = {}
+    let defaultFilter = { moderation: true }
 
     if (filter._id) {
         defaultFilter = {}
