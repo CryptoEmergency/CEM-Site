@@ -181,6 +181,17 @@ const start = function (data, ID) {
       });
     },
     () => {
+      if (!document.querySelector("script[src=\"https://widget.tiwo.ru/loader/loader.js.php\"]")) {
+        let firstEl = document.getElementById("jivo-iframe-container");
+        let secondEl = document.querySelector("jdiv");
+        if (firstEl) {
+          firstEl.parentNode.removeChild(firstEl)
+        }
+        if (secondEl) {
+          secondEl.parentNode.removeChild(secondEl)
+        }
+      }
+
       return (
         <div class="c-main__body">
           <BlockProjects />
@@ -230,11 +241,10 @@ const start = function (data, ID) {
                           </div>
                           <div class="c-currency__right">
                             <div
-                              class={`c-currency__percent ${
-                                course.change >= 0
-                                  ? " c-currency__percent--up"
-                                  : " c-currency__percent--down"
-                              }`}
+                              class={`c-currency__percent ${course.change >= 0
+                                ? " c-currency__percent--up"
+                                : " c-currency__percent--down"
+                                }`}
                             >
                               <img
                                 src={
@@ -269,7 +279,7 @@ const start = function (data, ID) {
           <BlockBanners />
           <div class="c-lenta">
             {!Variable[Static.nameRecords] ||
-            !Variable[Static.nameRecords].list_records.length ? (
+              !Variable[Static.nameRecords].list_records.length ? (
               <NotFound />
             ) : (
               () => {
@@ -287,27 +297,27 @@ const start = function (data, ID) {
                         ElemVisible={
                           Variable[Static.nameRecords].list_records.length <
                             Variable[Static.nameRecords].totalFound &&
-                          index ==
+                            index ==
                             Variable[Static.nameRecords].list_records.length - 5
                             ? async () => {
-                                //      console.log('=0c6881=', "Load more")
-                                fn.recordsView(item._id, "setPost");
-                                Static.apiFilter = makeFilter(Static);
-                                let response = await await fn.restApi.getPost({
-                                  filter: Static.apiFilter,
-                                  limit: 15,
-                                  offset:
-                                    Variable[Static.nameRecords].list_records
-                                      .length,
-                                });
-                                Variable[Static.nameRecords].list_records.push(
-                                  ...response.list_records
-                                );
-                                initReload();
-                              }
+                              //      console.log('=0c6881=', "Load more")
+                              fn.recordsView(item._id, "setPost");
+                              Static.apiFilter = makeFilter(Static);
+                              let response = await await fn.restApi.getPost({
+                                filter: Static.apiFilter,
+                                limit: 15,
+                                offset:
+                                  Variable[Static.nameRecords].list_records
+                                    .length,
+                              });
+                              Variable[Static.nameRecords].list_records.push(
+                                ...response.list_records
+                              );
+                              initReload();
+                            }
                             : () => {
-                                fn.recordsView(item._id, "setPost");
-                              }
+                              fn.recordsView(item._id, "setPost");
+                            }
                         }
                       />
                     );
