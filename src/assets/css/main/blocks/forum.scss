@@ -385,7 +385,8 @@
             // text-indent: 50px;
             text-align: left;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            // border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid #01c8ab;
             border-radius: 10px;
 
             b {
@@ -1866,6 +1867,17 @@
         @media(max-width: 767px) {
             height: 400px;
         }
+    }
+
+    &__marker {
+        min-width: 192px;
+        width: 100%;
+        height: 134px;
+        background: url("../images/summer_forum/logo_marker.jpg") no-repeat center / contain;
+    }
+
+    .leaflet-popup-content {
+        margin: 0 !important;
     }
 }
 
