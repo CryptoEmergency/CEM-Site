@@ -18,15 +18,43 @@ const formatTime = function (time) {
   return lead0(h, 2) + ":" + lead0(m, 2) + ":" + lead0(s, 2)
 }
 
+const isMobile = {
+  Android: function () {
+      return navigator.userAgent.match(/Android/i);
+  },
+  BlackBerry: function () {
+      return navigator.userAgent.match(/BlackBerry/i);
+  },
+  IOS: function () {
+      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  },
+  Opera: function () {
+      return navigator.userAgent.match(/Opera Mini/i);
+  },
+  Windows: function () {
+      return navigator.userAgent.match(/IEMobile/i);
+  },
+  any: function () {
+      return (
+          isMobile.Android() ||
+          isMobile.BlackBerry() ||
+          isMobile.IOS() ||
+          isMobile.Opera() ||
+          isMobile.Windows()
+      )
+  }
+};
 const AudioPlayer = function ({ Static, item, path }) {
   // console.log(Static, item, path)
   if (!Static.elMedia[item._id]) {
     Static.elMedia[item._id] = {}
   }
   let elMedia = Static.elMedia[item._id]
+  // console.log('=083943= audio codecs =',`audio/${item.name.split(".")[1] == "mp3" ? "mpeg" : item.name.split(".")[1]}`)
   return (
     <div class="audio_container">
       <audio
+        type={isMobile.IOS() ? `audio/${item.name.split(".")[1] == "mp3" ? "mpeg" : item.name.split(".")[1]}` : null}
         preload="metadata"
         Element={($el) => { elMedia.el = $el; }}
         src={path + item.name}
