@@ -584,7 +584,7 @@
     padding-top: 12px;
     background: #232733;
     box-shadow: -6px 0px 0px 0px rgba(35, 39, 51, 1);
-    
+
     &::-webkit-scrollbar {
         height: 6px;
     }
@@ -619,7 +619,8 @@
         position: static;
         transform: none;
     }
-    @media(max-width: 600px){
+
+    @media(max-width: 600px) {
         overflow-x: hidden;
     }
 }
@@ -731,4 +732,22 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
+}
+
+.c-newsshow {
+
+    .img-full {
+        @media(min-width: 768px) {
+            float: left;
+            margin-right: 20px;
+            width: 50%;
+        }
+
+        & + .text.mY--30 {
+            @media(min-width: 768px) {
+                margin-top: 0;
+            }
+        }
+    }
+
 }

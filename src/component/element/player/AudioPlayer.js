@@ -5,7 +5,7 @@ import svg from "@assets/svg/index.js";
 const lead0 = function (val, n) {
   var nz = "" + val
   while (nz.length < n) {
-      nz = "0" + nz
+    nz = "0" + nz
   }
   return nz
 }
@@ -18,21 +18,49 @@ const formatTime = function (time) {
   return lead0(h, 2) + ":" + lead0(m, 2) + ":" + lead0(s, 2)
 }
 
+const isMobile = {
+  Android: function () {
+    return navigator.userAgent.match(/Android/i);
+  },
+  BlackBerry: function () {
+    return navigator.userAgent.match(/BlackBerry/i);
+  },
+  IOS: function () {
+    return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  },
+  Opera: function () {
+    return navigator.userAgent.match(/Opera Mini/i);
+  },
+  Windows: function () {
+    return navigator.userAgent.match(/IEMobile/i);
+  },
+  any: function () {
+    return (
+      isMobile.Android() ||
+      isMobile.BlackBerry() ||
+      isMobile.IOS() ||
+      isMobile.Opera() ||
+      isMobile.Windows()
+    )
+  }
+};
 const AudioPlayer = function ({ Static, item, path }) {
   // console.log(Static, item, path)
   if (!Static.elMedia[item._id]) {
     Static.elMedia[item._id] = {}
   }
   let elMedia = Static.elMedia[item._id]
+  // console.log('=083943= audio codecs =',`audio/${item.name.split(".")[1] == "mp3" ? "mpeg" : item.name.split(".")[1]}`, isMobile.IOS())
   return (
     <div class="audio_container">
       <audio
+        // type={isMobile.IOS() ? `audio/${item.name.split(".")[1] == "mp3" ? "mpeg" : item.name.split(".")[1]}` : null}
         preload="metadata"
         Element={($el) => { elMedia.el = $el; }}
         src={path + item.name}
         onplay={function (e) {
-          Object.values(Static.elMedia).forEach((audio)=>{
-            if(audio.play && audio != elMedia){
+          Object.values(Static.elMedia).forEach((audio) => {
+            if (audio.play && audio != elMedia) {
               audio.el.pause()
             }
           })
@@ -41,9 +69,9 @@ const AudioPlayer = function ({ Static, item, path }) {
           elMedia.controlsPause.classList.remove("paused");
         }}
         onpause={function (e) {
-            elMedia.play = false
-            elMedia.controlsPause.src = svg["player_play"]
-            elMedia.controlsPause.classList.add("paused");
+          elMedia.play = false
+          elMedia.controlsPause.src = svg["player_play"]
+          elMedia.controlsPause.classList.add("paused");
         }}
         onended={function (e) {
           elMedia.play = false
@@ -51,14 +79,15 @@ const AudioPlayer = function ({ Static, item, path }) {
           elMedia.controlsPause.classList.add("paused");
         }}
         oncanplay={function (e) {
-          if (this.duration === Infinity){
+          if (this.duration === Infinity) {
             this.currentTime = 1e101;
-            this.ontimeupdate = function() {
-                 this.ontimeupdate = () => {
-                   return;
-                 }
-                 this.currentTime = 0;
-          }}else{
+            this.ontimeupdate = function () {
+              this.ontimeupdate = () => {
+                return;
+              }
+              this.currentTime = 0;
+            }
+          } else {
             elMedia.controlsDuration.innerText = formatTime(this.duration)
           }
         }}
@@ -67,7 +96,9 @@ const AudioPlayer = function ({ Static, item, path }) {
           let progress = Math.floor(this.currentTime) / Math.floor(this.duration);
           elMedia.controlsProgressLine.style.width = progress * 100 + '%'
         }}
-      ></audio>
+      >
+        <source src={path + item.name} type={isMobile.IOS() ? `audio/${item.name.split(".")[1] == "mp3" ? "mpeg" : item.name.split(".")[1]}` : null}></source>
+      </audio>
       <div class="controls">
         <img
           src={svg["player_play"]}
@@ -85,9 +116,9 @@ const AudioPlayer = function ({ Static, item, path }) {
               e.stopPropagation()
               let elem
               if (e.target.className === "current") {
-                  elem = e.target.parentElement
+                elem = e.target.parentElement
               } else {
-                  elem = e.target
+                elem = e.target
               }
               let progress = Math.floor(e.offsetX) / Math.floor(elem.clientWidth);
               elMedia.controlsProgressLine.style.width = progress * 100 + '%'
@@ -95,7 +126,7 @@ const AudioPlayer = function ({ Static, item, path }) {
             }}
           >
             <span Element={($el) => { elMedia.controlsProgressLine = $el; }} class="current">
-              ​
+
             </span>
           </span>
         </span>
@@ -116,11 +147,11 @@ const AudioPlayer = function ({ Static, item, path }) {
               e.stopPropagation();
               elMedia.el.muted = !elMedia.el.muted
               if (elMedia.el.muted) {
-                  this.src = svg["player_dynamic_off"];
-                  this.classList.add("off");
+                this.src = svg["player_dynamic_off"];
+                this.classList.add("off");
               } else {
-                  this.src = svg["player_dynamic_on"];
-                  this.classList.remove("off");
+                this.src = svg["player_dynamic_on"];
+                this.classList.remove("off");
               }
             }}
           />

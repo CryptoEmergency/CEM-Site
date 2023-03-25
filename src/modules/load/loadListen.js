@@ -28,13 +28,13 @@ const loadListen = async function () {
                     Variable.Static.elArrowTopLink = setTimeout(() => {
                         Variable.Static.elArrowTop.style.display = "none"
                         Variable.Static.elArrowTopLink = null
-                    }, 1100);
+                    }, 3000);
                 } else if (window.pageYOffset > 500 && Variable.Static.lastScrollPosition > window.pageYOffset) {
                     clearTimeout(Variable.Static.elArrowTopLink);
                     Variable.Static.elArrowTopLink = setTimeout(() => {
                         Variable.Static.elArrowTop.style.display = "none"
                         Variable.Static.elArrowTopLink = null
-                    }, 1100);
+                    }, 3000);
                 } else {
                     Variable.Static.elArrowTop.style.display = "none"
                     clearTimeout(Variable.Static.elArrowTopLink);

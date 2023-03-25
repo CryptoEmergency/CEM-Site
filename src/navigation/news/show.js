@@ -46,7 +46,7 @@ const start = function (data, ID = "mainBlock") {
         );
       }
       return (
-        <Elements.page.MainContainer title={Static.item.title} classTitle="p-lr" class="pt--20">
+        <Elements.page.MainContainer title={Static.item.title} classTitle="p-lr" class="c-newsshow pt--20">
           <Elements.page.Container class="p-lr pt--20" ElemVisible={() => {
             fn.recordsView(Static.item._id, "setNews")
           }}>
