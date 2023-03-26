@@ -571,6 +571,10 @@
         @media(max-width: 767px) {
             margin-bottom: 8vw;
         }
+
+        & + .c-button {
+            margin-bottom: 40px;
+        }
     }
 
     &__list {
@@ -721,6 +725,34 @@
 
         @media(max-width: 1279px) {
             // margin-right: auto;
+        }
+
+        &--transparent {
+            margin: 0 0 40px auto;
+            min-width: 0;
+            background: transparent;
+
+            @media(max-width: 1023px) {
+                margin: 0 auto 20px;
+            }
+
+            &::before {
+                background: transparent;
+            }
+
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
+
+            .c-button {
+                &__text {
+                    padding: 0;
+
+                    @media(min-width: 1280px) {
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
     }
 }
@@ -1882,12 +1914,12 @@
 }
 
 //TIWO
-.wrap_e9e7 {
+jdiv[class^="wrap_"] {
     left: auto !important;
     right: 10px !important;
     bottom: 47px !important;
 
-    .button_beaa {
+    & > jdiv[class^="button_"] {
         background: #01c8ab !important;
     }
 }
