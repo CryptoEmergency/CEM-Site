@@ -63,7 +63,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                     }}
                   >
                     <div class="c-allservices__wrap">
-                      <img src={svg["quest_and_answers_main"]} alt="" />
+                      <img src={svg["preview_line_questions"]} alt="" />
                     </div>
                     <p>{Variable.lang.a.questionsAnswers}</p>
                   </a>
@@ -104,6 +104,18 @@ const ModalMainPageIconsMenu = function (data, ID) {
                     <p>{Variable.lang.a.experts}</p>
                   </a>
                   <a
+                    href="/users/"
+                    class="c-allservices__link"
+                    onclick={function (e) {
+                      fn.siteLink(e);
+                    }}
+                  >
+                    <div class="c-allservices__wrap">
+                      <img src={svg["preview_line_users"]} alt="" />
+                    </div>
+                    <p>{Variable.lang.h.top_users}</p>
+                  </a>
+                  <a
                     href="/rooms/"
                     class="c-allservices__link"
                     onclick={function (e) {
@@ -128,7 +140,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                     }}
                   >
                     <div class="c-allservices__wrap">
-                      <img src={svg["stock-market"]} alt="" />
+                      <img src={svg["preview_line_exchange"]} alt="" />
                     </div>
                     <p>{Variable.lang.a.trade}</p>
                   </a>
@@ -140,7 +152,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                     }}
                   >
                     <div class="c-allservices__wrap">
-                      <img src={svg["shuffle"]} alt="" />
+                      <img src={svg["exchanges"]} alt="" />
                     </div>
                     <p>{Variable.lang.a.exchange}</p>
                   </a>
@@ -259,7 +271,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                     // }}
                   >
                     <div class="c-allservices__wrap">
-                      <img src={svg["careers_icon"]} alt="" />
+                      <img src={svg["media"]} alt="" />
                     </div>
                     <p>{Variable.lang.a.mediaUs}</p>
                   </a>

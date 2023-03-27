@@ -596,7 +596,7 @@ const start = function (data, ID) {
                                 style={showAllCompanies ? 'display: none' : null}
                                 class="c-button c-button--transparent"
                                 onclick={ShowAllCompany}>
-                                    <span class="c-button__text">Показать всех</span>
+                                <span class="c-button__text">Показать всех</span>
                             </a>
                         </section>
 
@@ -622,7 +622,7 @@ const start = function (data, ID) {
                                 {/* <div data-zone="general" class="c-eventmap__zone c-eventmap__zone--23">
                                             <span class="c-eventmap__titlezone">23</span>
                                             <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                                <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                                <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                                     <img class="" src="https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1" width="" height="" />
                                                     <span class="">google.com</span>
                                                 </a>
@@ -631,20 +631,20 @@ const start = function (data, ID) {
                                         </div> */}
 
                                 {/** Стенды */}
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--1">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--1">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место уже зарезервировано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--2">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -654,7 +654,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--3">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -664,7 +664,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--4">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -674,7 +674,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--5">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -684,7 +684,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--6">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -694,7 +694,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--7">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -704,7 +704,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--8">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -714,7 +714,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--9">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -724,47 +724,47 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--10">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
                                         <span class="">Это место в данный момент свободно</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--11">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--11">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место уже зарезервировано</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--12">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--12">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место уже зарезервировано</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--13">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--13">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место уже зарезервировано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--14">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -774,7 +774,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--15">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -784,37 +784,37 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--16">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
                                         <span class="">Это место в данный момент свободно</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--17">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--17">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место уже зарезервировано</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--18">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--18">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место уже зарезервировано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--19">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -824,7 +824,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--20">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -834,7 +834,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--21">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -844,7 +844,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--22">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -854,7 +854,7 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--23">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
@@ -864,27 +864,27 @@ const start = function (data, ID) {
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--24">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
                                         <span class="">Это место в данный момент свободно</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--25">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--25">
                                     {/* <span class="c-eventmap__titlezone">25</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место уже зарезервировано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--26">
                                     {/* <span class="c-eventmap__titlezone">25</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
-                                        <a class="c-eventmap__linkzone" href="https://www.google.ru/" target="_blank" rel="nofollow">
+                                        <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
                                             <img class="" src={svg["summer_forum/free"]} width="" height="" />
                                             {/* <span class="">google.com</span> */}
                                         </a>
@@ -1009,6 +1009,30 @@ const start = function (data, ID) {
                                         )
                                     })
                                 }
+                            </ul>
+                        </section>
+
+                        <section class="с-forumtopics c-container" id="forumtopics">
+                            <p class="с-forumtopics__beforetext">Второй ежегодный криптовалютный форум пройдет в центре города Новороссийска на берегу Черного моря.</p>
+                            <h4 class="с-summerforum__title с-forumtopics__title">{Variable.lang.h.forumtopics}:</h4>
+                                <ul class="с-forumtopics__themes">
+                                    <li>Децентрализованные социальные сети</li>
+                                    <li>Как начать свой путь в крипто индустрии</li>
+                                    <li>Регуляция и её влияние на рынок</li>
+                                    <li>Трейдинг и как на нем заработать</li>
+                                    <li>NFT, как прикоснуться к искусству</li>
+                                    <li>Майнинг в 2023 году</li>
+                                    <li>GameFi получай удовольствие и зарабатывай</li>
+                                </ul>
+                            
+                            <p class="с-forumtopics__subtitle">На форуме Вас будут ждать:</p>
+                            <ul class="с-forumtopics__buns">
+                                <li>30+ проектов</li>
+                                <li>600+ участников</li>
+                                <li>30+ спикеров</li>
+                                <li>Крупные СМИ</li>
+                                <li>Фуршет</li>
+                                <li>Большое количество конкурсов с ценными призами</li>
                             </ul>
                         </section>
 

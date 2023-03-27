@@ -572,7 +572,7 @@
             margin-bottom: 8vw;
         }
 
-        & + .c-button {
+        &+.c-button {
             margin-bottom: 40px;
         }
     }
@@ -1687,15 +1687,15 @@
 }
 
 .с-guests {
-    padding-bottom: 180px;
+    // padding-bottom: 180px;
 
-    @media(max-width: 1279px) {
-        padding-bottom: 80px;
-    }
+    // @media(max-width: 1279px) {
+    //     padding-bottom: 80px;
+    // }
 
-    @media(max-width: 767px) {
-        padding-bottom: 8vw;
-    }
+    // @media(max-width: 767px) {
+    //     padding-bottom: 11vw;
+    // }
 
     &__title {
         margin: 25px auto;
@@ -1823,6 +1823,175 @@
     }
 }
 
+.с-forumtopics {
+    background: url("../images/summer_forum/cloud.png") no-repeat top -150px center/700px auto;
+    padding-top: 180px;
+
+    @media(max-width: 1279px) {
+        padding-top: 80px;
+        background-size: 500px;
+        background-position-y: -125px;
+    }
+
+    @media(min-width: 1024px) and (max-width: 1179px) {
+        background-position-y: -150px;
+    }
+
+    @media(min-width: 768px) and (max-width: 1023px) {
+        background-position-y: -100px;
+        background-size: 380px;
+    }
+
+    @media(max-width: 767px) {
+        padding-top: 11vw;
+        background-size: 500px;
+        background-position-y: -125px;
+    }
+
+    @media(min-width: 600px) and (max-width: 699px) {
+        background-position-y: -150px;
+    }
+    
+
+    @media(max-width: 599px) {
+        background-position-y: -170px;
+    }
+
+    @media(min-width: 480px) and (max-width: 549px) {
+        background-size: 400px;
+        background-position-y: -131px;
+    }
+
+    @media(max-width: 479px) {
+        background-size: 380px;
+        background-position-y: -134px;
+    }
+
+    &__beforetext {
+        position: relative;
+        max-width: 465px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: 1.5rem;
+
+        @media(max-width: 1279px) {
+            max-width: 320px;
+            font-size: 1.6vw;
+        }
+
+        @media(max-width: 767px) {
+            font-size: 3vw;
+        }
+
+        // &::before {
+        //     position: absolute;
+        //     content: '';
+        //     top: 0;
+        //     left: 0;
+        //     background: url("../images/summer_forum/cloud.png") no-repeat top center / 100% auto;
+        // }
+    }
+
+    &__title {}
+
+    &__subtitle {
+        color: #6E44D7;
+        font-weight: 600;
+        text-indent: 30px;
+        font-size: 1.7rem;
+
+        @media(max-width: 1279px) {
+            font-size: 1.8vw;
+        }
+
+        @media(max-width: 767px) {
+            font-size: 3.7vw;
+        }
+    }
+
+    &__themes {
+        list-style-type: none;
+        margin: 0 0 40px;
+        padding: 0;
+
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+
+            @media(max-width: 1279px) {
+                font-size: 1.6vw;
+            }
+
+            @media(max-width: 767px) {
+                font-size: 3.5vw;
+            }
+
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 20px;
+                height: 20px;
+                content: '';
+                background: url("../images/summer_forum/point.png") no-repeat center / contain;
+
+                @media(min-width: 1280px) {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                @media(min-width: 768px) and (max-width: 979px) {
+                    top: -3px;
+                }
+
+                @media(min-width: 600px) and (max-width: 767px) {
+                    width: 25px;
+                    height: 25px;
+                }
+
+                @media(max-width: 399px) {
+                    top: -3px;
+                }
+            }
+        }
+    }
+
+    &__buns {
+        list-style-type: none;
+        margin: 0 0 40px;
+        padding: 0;
+
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+
+            @media(max-width: 1279px) {
+                font-size: 1.6vw;
+            }
+
+            @media(max-width: 767px) {
+                font-size: 3.5vw;
+            }
+
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 20px;
+                height: 20px;
+                content: '';
+                background: url("../images/summer_forum/point.png") no-repeat center / contain;
+
+            }
+        }
+    }
+}
+
 .c-partnersforum {
     display: flex;
     flex-direction: column;
@@ -1919,7 +2088,7 @@ jdiv[class^="wrap_"] {
     right: 10px !important;
     bottom: 47px !important;
 
-    & > jdiv[class^="button_"] {
+    &>jdiv[class^="button_"] {
         background: #01c8ab !important;
     }
 }
