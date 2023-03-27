@@ -137,6 +137,18 @@ const mainHeader = async function () {
                         </Link>
                         <Link
                           class="c-menu__link"
+                          // href="#forumtopics"
+                          onclick={(e) => {
+                            window.scrollTo({
+                              top: document.querySelector("#forumtopics").offsetTop - 75,
+                              behavior: "smooth",
+                            });
+                          }}
+                        >
+                          {Variable.lang.a.topics}
+                        </Link>
+                        <Link
+                          class="c-menu__link"
                           // href="#partners"
                           onclick={(e) => {
                             window.scrollTo({

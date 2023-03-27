@@ -211,7 +211,8 @@
 		"standsForum": "Стенды",
 		"guestsForum": "Гости Crypto&nbsp;Emergency",
 		"partnersForum": "Партнеры",
-		"localmap": "Как добраться?"
+		"localmap": "Как добраться?",
+		"forumtopics": "Темы форума"
 	},
 	"a": {
 		"about": "О нас",
@@ -260,6 +261,7 @@
 		"stands": "Стенды",
 		"speakers": "Спикеры",
 		"guests": "Гости",
+		"topics": "Темы",
 		"partnersForum": "Партнеры",
 		"localmap": "Как добраться?",
 		"showAllFriends": "Показать всех"

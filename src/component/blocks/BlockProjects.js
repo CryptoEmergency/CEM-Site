@@ -120,7 +120,7 @@ const BlockProjects = async function () {
         modal: true,
       },
       {
-        title: Variable.lang.h.exchange,
+        title: Variable.lang.a.exchange,
         icon: "exchanges",
         link: "list-exchange",
         items: fn.itemsMenu.onlyPage({ url: "/list-exchange/" }),

@@ -393,6 +393,7 @@ const start = function (data, ID) {
             Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error], }, }, true);
         }
         // }
+        Static.message.el.focus()
     }
 
     // Конвертирование времени из секунд в дни : часы : минуты : секунды
