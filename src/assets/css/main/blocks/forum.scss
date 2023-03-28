@@ -2083,6 +2083,11 @@
 }
 
 //TIWO
+body > jdiv {
+    z-index: 0 !important;
+    position: relative;
+}
+
 jdiv[class^="wrap_"] {
     left: auto !important;
     right: 10px !important;
