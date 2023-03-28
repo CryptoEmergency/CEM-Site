@@ -1,26 +1,95 @@
-.title-page {
+.titul_page {
     text-align: center;
-    padding-top: 10px;
-    font-size: 25px;
-    color: rgb(72, 79, 206);
+    padding-top: 30px;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
-.content-page {
-    padding-top: 20px;
+.testIcon {
+    // background-image: url(../svg/testTelega.svg);
 }
 
-.socials-button {
-    display: inline-block;
+.Button_1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
     color: white;
     text-decoration: none;
-    margin-left: 20px;
-    margin-right: 20px;
     padding: .5em 2em;
     outline: none;
-    border-width: 2px 0;
+
+    background: linear-gradient(#af0ff3, #86306c) #E38916;
     border-style: solid none;
-    border-color: #FDBE33 #000 #D77206;
-    border-radius: 6px;
-    background: linear-gradient(#F3AE0F, #E38916) #E38916;
+    border-color: #700461 #000 #6f1f8f;
+    background-image: url('../svg/testTelega.svg');
+    width: 50%;
+    height: 50%;
+    padding-left: 32px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-repeat: no-repeat;
+
+    border-width: 2px 0;
+    // border-style: solid none;
+    //border-color: #700461 #000 #6f1f8f;
+    border-radius: 25%;
+
     transition: 0.2s;
+    transition-duration: 0.2s;
+    width: 350px;
+    height: 130px;
+    font-size: 22px;
+    line-height: 22px;
+
+
+}
+
+/*.Buttton_1:hover {
+    background-color: #4CAF50;
+    Green 
+    color: white;
+}*/
+
+.Button_2 {
+    display: inline-block;
+    color: white;
+    font-size: 125%;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .25em .5em;
+    outline: none;
+    border: 1px solid rgb(180, 35, 205);
+    border-radius: 7px;
+    background: rgb(164, 9, 164) linear-gradient(rgb(170, 24, 170), rgb(119, 11, 92));
+    box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0), inset 0 1px 2px rgba(0, 0, 0, 0), inset 0 0 0 60px rgba(255, 255, 0, 0);
+    transition: box-shadow .2s, border-color .2s;
+
+    margin-top: 20px;
+}
+
+
+.Button_3 {
+    position: relative;
+    display: inline-block;
+    font-size: 100%;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: #053852 -1px 1px, #053852 1px 1px, #053852 1px -1px, #053852 -1px -1px;
+    text-decoration: none;
+    user-select: none;
+    padding: .3em .7em;
+    outline: none;
+    border-radius: 7px;
+    background: #053852 repeating-linear-gradient(135deg, #053852, #053852 10px, #1679ad 10px, #1679ad 20px, #053852 20px);
+    box-shadow:
+        inset -2px -2px rgba(0, 0, 0, .3),
+        inset 2px 2px rgba(255, 255, 255, .3);
+    transition: background-position 999999s, color 999999s, text-shadow 999999s;
+    margin-top: 20px;
 }
