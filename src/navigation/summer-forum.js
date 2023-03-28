@@ -91,7 +91,7 @@ const start = function (data, ID) {
                 },
             },
         });
-        
+
         swiperitem1.on('slideChange', function (e) {
             console.log('slide changed', this.activeIndex);
             Static.elNumberSwiper[this.activeIndex].children[0].children[0].style = "border-radius: 13px"
@@ -412,7 +412,7 @@ const start = function (data, ID) {
         },
         {
             name: "Александр Изюрьев",
-            position: "UnionClub",
+            position: "Основатель клуба инвесторов UnionClub",
             photo: "summer_forum/speaker9",
             show: false,
         },
@@ -426,6 +426,12 @@ const start = function (data, ID) {
             name: "Ренат Каличенко",
             position: "Turov Invest",
             photo: "summer_forum/speaker11",
+            show: false,
+        },
+        {
+            name: "Вячеслав Носков",
+            position: "PRO BLOCKCHAIN MEDIA",
+            photo: "summer_forum/speaker12",
             show: false,
         }
     ]
@@ -549,8 +555,8 @@ const start = function (data, ID) {
                                                             <div class="swiper-post_media_image_container">
                                                                 <img
                                                                     style={!(Static.elNumberSwiper[index] && (Static.elNumberSwiper[index].classList.contains("swiper-slide-active")
-                                                                            || Static.elNumberSwiper[index].classList.contains("swiper-slide-next")
-                                                                            || Static.elNumberSwiper[index].classList.contains("swiper-slide-prev"))) ? "display: none; border-radius: 13px" : "border-radius: 13px"}
+                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-next")
+                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-prev"))) ? "display: none; border-radius: 13px" : "border-radius: 13px"}
                                                                     src={images[`${item.folder}/${item.path}`]}
                                                                     loading="lazy"
                                                                 />
@@ -1019,28 +1025,30 @@ const start = function (data, ID) {
                             </ul>
                         </section>
 
-                        <section class="с-forumtopics c-container" id="forumtopics">
-                            <p class="с-forumtopics__beforetext">Второй ежегодный криптовалютный форум пройдет в центре города Новороссийска на берегу Черного моря.</p>
-                            <h4 class="с-summerforum__title с-forumtopics__title">{Variable.lang.h.forumtopics}:</h4>
-                            <ul class="с-forumtopics__themes">
-                                <li>Децентрализованные социальные сети</li>
-                                <li>Как начать свой путь в крипто индустрии</li>
-                                <li>Регуляция и её влияние на рынок</li>
-                                <li>Трейдинг и как на нем заработать</li>
-                                <li>NFT, как прикоснуться к искусству</li>
-                                <li>Майнинг в 2023 году</li>
-                                <li>GameFi получай удовольствие и зарабатывай</li>
-                            </ul>
+                        <section class="с-forumtopics" id="forumtopics">
+                            <div class="c-container">
+                                <p class="с-forumtopics__beforetext">Второй ежегодный криптовалютный форум пройдет в центре города Новороссийска на берегу Черного моря.</p>
+                                <h4 class="с-summerforum__title с-forumtopics__title">{Variable.lang.h.forumtopics}:</h4>
+                                <ul class="с-forumtopics__themes">
+                                    <li>Децентрализованные социальные сети</li>
+                                    <li>Как начать свой путь в крипто индустрии</li>
+                                    <li>Регуляция и её влияние на рынок</li>
+                                    <li>Трейдинг и как на нем заработать</li>
+                                    <li>NFT, как прикоснуться к искусству</li>
+                                    <li>Майнинг в 2023 году</li>
+                                    <li>GameFi получай удовольствие и зарабатывай</li>
+                                </ul>
 
-                            <p class="с-forumtopics__subtitle">На форуме Вас будут ждать:</p>
-                            <ul class="с-forumtopics__buns">
-                                <li>30+ проектов</li>
-                                <li>600+ участников</li>
-                                <li>30+ спикеров</li>
-                                <li>Крупные СМИ</li>
-                                <li>Фуршет</li>
-                                <li>Большое количество конкурсов с ценными призами</li>
-                            </ul>
+                                <p class="с-forumtopics__subtitle">На форуме Вас будут ждать:</p>
+                                <ul class="с-forumtopics__buns">
+                                    <li>30+ проектов</li>
+                                    <li>600+ участников</li>
+                                    <li>30+ спикеров</li>
+                                    <li>Крупные СМИ</li>
+                                    <li>Фуршет</li>
+                                    <li>Большое количество конкурсов с ценными призами</li>
+                                </ul>
+                            </div>
                         </section>
 
                         <section class="c-partnersforum c-container" id="partners">
