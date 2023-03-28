@@ -1,57 +1,58 @@
 .с-summerforum {
     background: url("../images/summer_forum/left.png") no-repeat top 4500px left calc(50% - 600px)/300px auto,
         url("../images/summer_forum/right.png") no-repeat top 4000px right calc(50% - 315px)/860px auto,
+        url("../images/summer_forum/violet.png") no-repeat top 7900px right calc(50% - 593px)/300px auto,
         url("../images/summer_forum/bottom.png") no-repeat bottom 729px center/1500px auto;
     background-color: #171717;
 
     @media(max-width: 1279px) {
-        background-position: top 3100px left calc(50% - 506px), top 2450px left calc(50% + 188px), bottom 729px center;
-        background-size: 20% auto, 1140px auto, 1521px auto;
+        background-position: top 3100px left calc(50% - 506px), top 2450px left calc(50% + 188px), bottom 1700px left calc(100% + 50px), bottom 729px center;
+        background-size: 20% auto, 1140px auto, 300px auto, 1521px auto;
     }
 
     @media(max-width: 1099px) {
-        background-position: top 3200px left, top 3000px right, bottom 729px center;
-        background-size: 20% auto, 500px auto, contain;
+        background-position: top 3200px left, top 3000px right, bottom 1600px left calc(100% + 50px), bottom 729px center;
+        background-size: 20% auto, 500px auto, 300px auto, contain;
     }
 
     @media(max-width: 1023px) {
-        background-position: top 3200px left, top 2900px right, bottom 729px center;
-        background-size: 20% auto, 500px auto, contain;
+        background-position: top 3200px left, top 2900px right, bottom 1550px left calc(100% + 50px), bottom 729px center;
+        background-size: 20% auto, 500px auto, 300px auto, contain;
     }
 
     @media(max-width: 979px) {
-        background-position: top 2650px left, top 2400px right, bottom 729px center;
-        background-size: 20% auto, 380px auto, contain;
+        background-position: top 2650px left, top 2400px right, bottom 1550px left calc(100% + 50px), bottom 729px center;
+        background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 899px) {
-        background-position: top 2750px left, top 2500px right, bottom 729px center;
-        background-size: 20% auto, 380px auto, contain;
+        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
+        background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 799px) {
-        background-position: top 2750px left, top 2500px right, bottom 729px center;
-        background-size: 20% auto, 380px auto, contain;
+        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
+        background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 767px) {
-        background-position: top 3500px left, top 2800px right, bottom 429px center;
-        background-size: 20% auto, 380px auto, contain;
+        background-position: top 3500px left, top 2800px right, bottom 1500px left calc(100% + 50px), bottom 429px center;
+        background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 699px) {
-        background-position: top 3270px left, top 2500px right, bottom 429px center;
-        background-size: 20% auto, 380px auto, contain;
+        background-position: top 3270px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 429px center;
+        background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 599px) {
-        background-position: top 2832px left, top 2200px right, bottom 429px center;
-        background-size: 20% auto, 300px auto, contain;
+        background-position: top 2832px left, top 2200px right, bottom 1500px left calc(100% + 50px), bottom 429px center;
+        background-size: 20% auto, 300px auto, 300px auto, contain;
     }
 
     @media(max-width: 499px) {
-        background-position: top 1740px left, top 1570px left calc(100%), bottom 429px center;
-        background-size: 20% auto, 50% auto, contain;
+        background-position: top 1740px left, top 1570px left calc(100%), bottom 1300px left calc(100% + 100px), bottom 429px center;
+        background-size: 20% auto, 50% auto, 300px auto, contain;
     }
 
     &__title {
@@ -481,6 +482,8 @@
     }
 
     .swiper {
+        z-index: 0 !important;
+
         &-container {
             width: 100%;
 
@@ -499,6 +502,16 @@
 
         &-wrapper {
             margin-bottom: 0 !important;
+        }
+
+        &-slide {
+            &-next {
+                &+.swiper-slide img {
+                    @media(min-width: 768px) {
+                        display: block !important;
+                    }
+                }
+            }
         }
 
         &-button {
@@ -589,6 +602,7 @@
         // align-items: baseline;
         width: 100%;
         height: auto;
+        z-index: 0;
 
         @media(max-width: 1279px) {
             // grid-template-columns: repeat(2, 1fr);
@@ -1785,6 +1799,10 @@
                 max-width: 78%;
                 margin: 0 auto;
 
+                @media(max-width: 1279px) {
+                    font-size: 1.6vw;
+                }
+
                 @media(max-width: 767px) {
                     font-size: 2.7vw;
                 }
@@ -1828,43 +1846,43 @@
     padding-top: 180px;
 
     @media(max-width: 1279px) {
-        padding-top: 80px;
+        padding-top: 100px;
         background-size: 500px;
-        background-position-y: -125px;
+        background-position: top -125px center;
     }
 
     @media(min-width: 1024px) and (max-width: 1179px) {
-        background-position-y: -150px;
+        background-position: top -125px center;
     }
 
     @media(min-width: 768px) and (max-width: 1023px) {
-        background-position-y: -100px;
+        background-position-y: -78px;
         background-size: 380px;
     }
 
     @media(max-width: 767px) {
-        padding-top: 11vw;
+        padding-top: 23vw;
         background-size: 500px;
-        background-position-y: -125px;
+        background-position-y: -60px;
     }
 
     @media(min-width: 600px) and (max-width: 699px) {
-        background-position-y: -150px;
+        background-position-y: -95px;
     }
-    
+
 
     @media(max-width: 599px) {
-        background-position-y: -170px;
+        background-position-y: -105px;
     }
 
     @media(min-width: 480px) and (max-width: 549px) {
         background-size: 400px;
-        background-position-y: -131px;
+        background-position-y: -65px;
     }
 
     @media(max-width: 479px) {
         background-size: 380px;
-        background-position-y: -134px;
+        background-position-y: -90px;
     }
 
     &__beforetext {
@@ -1872,16 +1890,19 @@
         max-width: 465px;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 3rem;
         text-align: center;
         font-size: 1.5rem;
+        font-weight: 600;
 
         @media(max-width: 1279px) {
-            max-width: 320px;
-            font-size: 1.6vw;
+            max-width: 48%;
+            font-size: 1.7vw;
         }
 
         @media(max-width: 767px) {
-            font-size: 3vw;
+            max-width: 80%;
+            font-size: 3.5vw;
         }
 
         // &::before {
@@ -2083,6 +2104,11 @@
 }
 
 //TIWO
+body>jdiv {
+    z-index: 0 !important;
+    position: relative;
+}
+
 jdiv[class^="wrap_"] {
     left: auto !important;
     right: 10px !important;

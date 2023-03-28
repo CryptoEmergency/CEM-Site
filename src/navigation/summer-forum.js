@@ -50,7 +50,10 @@ const isMobile = {
     }
 };
 
+let elSlider = []
+
 const start = function (data, ID) {
+    let [Static] = fn.GetParams({ data, ID })
 
     Variable.Static.forumHeaderShow = isMobile.any() ? false : true
 
@@ -89,16 +92,11 @@ const start = function (data, ID) {
             },
         });
 
-        swiperitem1.on = {
-            slideChange: function () {
-                console.log('swiper slide change ***');
-                console.log('=8d7c32=', index, Static.elNumberSwiper[index])
-                //   Static.elNumberSwiper[index].innerText = this.activeIndex + 1
-            }
-        }
-        // swiperitem1.on('slideChange', function () {
-        //     console.log('slide changed');
-        // });
+        swiperitem1.on('slideChange', function (e) {
+            console.log('slide changed', this.activeIndex);
+            Static.elNumberSwiper[this.activeIndex].children[0].children[0].style = "border-radius: 13px"
+            Static.elNumberSwiper[this.activeIndex + 1].children[0].children[0].style = "border-radius: 13px"
+        });
     }
 
     // let options = {
@@ -414,7 +412,7 @@ const start = function (data, ID) {
         },
         {
             name: "Александр Изюрьев",
-            position: "UnionClub",
+            position: "Основатель клуба инвесторов UnionClub",
             photo: "summer_forum/speaker9",
             show: false,
         },
@@ -428,6 +426,12 @@ const start = function (data, ID) {
             name: "Ренат Каличенко",
             position: "Turov Invest",
             photo: "summer_forum/speaker11",
+            show: false,
+        },
+        {
+            name: "Вячеслав Носков",
+            position: "PRO BLOCKCHAIN MEDIA",
+            photo: "summer_forum/speaker12",
             show: false,
         }
     ]
@@ -461,6 +465,7 @@ const start = function (data, ID) {
 
     init(
         async () => {
+            Static.elNumberSwiper = []
             // console.log('=bbcdd5=', slides)
         },
         () => {
@@ -535,19 +540,27 @@ const start = function (data, ID) {
                                     <div id="summer_forum" class="swiper swiper-post_media" After={() => swiperGo()}>
                                         <div class="swiper-wrapper">
                                             {
-                                                slides.map((item) => {
+                                                slides.map((item, index) => {
                                                     return (
-                                                        <a class="swiper-slide" onclick={(e) => {
-                                                            e.stopPropagation();
-                                                            e.preventDefault();
-                                                            fn.modals.ModalViewPhoto({
-                                                                path: item.path,
-                                                                folderImages: item.folder,
-                                                            });
-                                                        }}>
+                                                        <a class="swiper-slide"
+                                                            Element={($el) => { Static.elNumberSwiper[index] = $el }}
+                                                            onclick={(e) => {
+                                                                e.stopPropagation();
+                                                                e.preventDefault();
+                                                                fn.modals.ModalViewPhoto({
+                                                                    path: item.path,
+                                                                    folderImages: item.folder,
+                                                                });
+                                                            }}>
                                                             <div class="swiper-post_media_image_container">
-                                                                <img style="border-radius: 13px" src={images[`${item.folder}/${item.path}`]} loading="lazy" />
-                                                                <div class="swiper-lazy-preloader-white"></div>
+                                                                <img
+                                                                    style={!(Static.elNumberSwiper[index] && (Static.elNumberSwiper[index].classList.contains("swiper-slide-active")
+                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-next")
+                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-prev"))) ? "display: none; border-radius: 13px" : "border-radius: 13px"}
+                                                                    src={images[`${item.folder}/${item.path}`]}
+                                                                    loading="lazy"
+                                                                />
+                                                                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                                             </div>
                                                         </a>
                                                     )
@@ -1012,9 +1025,10 @@ const start = function (data, ID) {
                             </ul>
                         </section>
 
-                        <section class="с-forumtopics c-container" id="forumtopics">
-                            <p class="с-forumtopics__beforetext">Второй ежегодный криптовалютный форум пройдет в центре города Новороссийска на берегу Черного моря.</p>
-                            <h4 class="с-summerforum__title с-forumtopics__title">{Variable.lang.h.forumtopics}:</h4>
+                        <section class="с-forumtopics" id="forumtopics">
+                            <div class="c-container">
+                                <p class="с-forumtopics__beforetext">Второй ежегодный криптовалютный форум пройдет в центре города Новороссийска на берегу Черного моря.</p>
+                                <h4 class="с-summerforum__title с-forumtopics__title">{Variable.lang.h.forumtopics}:</h4>
                                 <ul class="с-forumtopics__themes">
                                     <li>Децентрализованные социальные сети</li>
                                     <li>Как начать свой путь в крипто индустрии</li>
@@ -1024,16 +1038,17 @@ const start = function (data, ID) {
                                     <li>Майнинг в 2023 году</li>
                                     <li>GameFi получай удовольствие и зарабатывай</li>
                                 </ul>
-                            
-                            <p class="с-forumtopics__subtitle">На форуме Вас будут ждать:</p>
-                            <ul class="с-forumtopics__buns">
-                                <li>30+ проектов</li>
-                                <li>600+ участников</li>
-                                <li>30+ спикеров</li>
-                                <li>Крупные СМИ</li>
-                                <li>Фуршет</li>
-                                <li>Большое количество конкурсов с ценными призами</li>
-                            </ul>
+
+                                <p class="с-forumtopics__subtitle">На форуме Вас будут ждать:</p>
+                                <ul class="с-forumtopics__buns">
+                                    <li>30+ проектов</li>
+                                    <li>600+ участников</li>
+                                    <li>30+ спикеров</li>
+                                    <li>Крупные СМИ</li>
+                                    <li>Фуршет</li>
+                                    <li>Большое количество конкурсов с ценными призами</li>
+                                </ul>
+                            </div>
                         </section>
 
                         <section class="c-partnersforum c-container" id="partners">
@@ -1267,8 +1282,6 @@ const start = function (data, ID) {
                             ></div>
                         </section>
                     </div >
-                    <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
-                    {/* <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script> */}
                     <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full" onload={function () {
                         console.log('=d6ff1f=', DG)
                         var map;

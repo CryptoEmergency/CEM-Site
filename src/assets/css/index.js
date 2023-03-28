@@ -6,3 +6,4 @@ import "@assets/css/lottery_style.css";
 
 
 import "@assets/css/library.scss";
+import "@assets/css/danil.scss";

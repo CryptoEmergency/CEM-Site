@@ -181,16 +181,16 @@ const start = function (data, ID) {
       });
     },
     () => {
-      if (!document.querySelector("script[src=\"https://widget.tiwo.ru/loader/loader.js.php\"]")) {
-        let firstEl = document.getElementById("jivo-iframe-container");
-        let secondEl = document.querySelector("jdiv");
-        if (firstEl) {
-          firstEl.parentNode.removeChild(firstEl)
-        }
-        if (secondEl) {
-          secondEl.parentNode.removeChild(secondEl)
-        }
-      }
+      // if (Variable.dataUrl.adress != "summer-forum") {
+      //   let firstEl = document.getElementById("jivo-iframe-container");
+      //   let secondEl = document.querySelector("jdiv");
+      //   if (firstEl) {
+      //     firstEl.parentNode.removeChild(firstEl)
+      //   }
+      //   if (secondEl) {
+      //     secondEl.parentNode.removeChild(secondEl)
+      //   }
+      // }
 
       return (
         <div class="c-main__body">

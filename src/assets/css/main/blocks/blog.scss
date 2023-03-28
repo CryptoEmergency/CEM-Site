@@ -741,6 +741,7 @@
             float: left;
             margin-right: 20px;
             width: 50%;
+            max-height: max-content;
         }
 
         & + .text.mY--30 {

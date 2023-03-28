@@ -59,6 +59,11 @@ const banners = [
     image: "metis_banner",
     lang: "en",
   },
+  {
+    href: "https://www.bitmart.com/trade/en-US?layout=basic&theme=dark&symbol=CEM_USDT",
+    image: "bitmart_en",
+    lang: "en",
+  },
   // {
   //   href: "https://blockchain-life.com/asia/en/#tickets-row",
   //   image: "BlockchainLife",
@@ -89,6 +94,11 @@ const banners = [
     image: "crypto_ug",
     lang: "ru",
     fn: true
+  },
+  {
+    href: "https://www.bitmart.com/trade/ru-RU?layout=basic&theme=dark&symbol=CEM_USDT",
+    image: "bitmart",
+    lang: "ru",
   },
   // {
   //   href: "https://blockchain24.pro/",
