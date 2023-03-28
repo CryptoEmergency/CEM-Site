@@ -12,7 +12,7 @@ import images from '@assets/images/index.js';
 import { fn } from '@src/functions/index.js';
 import { Input, VideoPlayer } from '@component/element/index.js';
 
-const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = false }, ID) {
+const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = false, type = "posts" }, ID) {
     let [Static] = fn.GetParams({ preview, uploadPreviewImage, ID })
     let close = true
     let mediaInputs
@@ -40,7 +40,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
         await canvas.toBlob(function (blob) {
             fn.uploadMedia(
                 blob,
-                "posts",
+                type,
                 async function () {
                     mediaInputs.show = true;
                     if (!this.response) {
@@ -195,7 +195,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                                                             src={
                                                                 imgFile.src !== undefined
                                                                     ? imgFile.src
-                                                                    : `/assets/upload/posts/${imgFile.previewName ? imgFile.previewName : imgFile.name}`
+                                                                    : `/assets/upload/${type}/${imgFile.previewName ? imgFile.previewName : imgFile.name}`
                                                             }
                                                         />
                                                         {
