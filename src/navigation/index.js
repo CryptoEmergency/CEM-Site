@@ -4,7 +4,6 @@ import {
   timersStart,
   sendApi,
   init,
-  initAfter,
   initReload,
   Variable,
   Helpers,
@@ -182,7 +181,7 @@ const start = function (data, ID) {
       });
     },
     () => {
-      // if (!document.querySelector("script[src=\"https://widget.tiwo.ru/loader/loader.js.php\"]")) {
+      // if (Variable.dataUrl.adress != "summer-forum") {
       //   let firstEl = document.getElementById("jivo-iframe-container");
       //   let secondEl = document.querySelector("jdiv");
       //   if (firstEl) {

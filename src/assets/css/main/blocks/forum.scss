@@ -481,6 +481,8 @@
     }
 
     .swiper {
+        z-index: 0 !important;
+
         &-container {
             width: 100%;
 
@@ -589,6 +591,7 @@
         // align-items: baseline;
         width: 100%;
         height: auto;
+        z-index: 0;
 
         @media(max-width: 1279px) {
             // grid-template-columns: repeat(2, 1fr);
