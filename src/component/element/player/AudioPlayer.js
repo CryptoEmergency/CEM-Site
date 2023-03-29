@@ -97,7 +97,7 @@ const AudioPlayer = function ({ Static, item, path }) {
           elMedia.controlsProgressLine.style.width = progress * 100 + '%'
         }}
       >
-        <source src={path + item.name} type={isMobile.IOS() ? `audio/${item.name.split(".")[1] == "mp3" ? "mpeg" : item.name.split(".")[1]}` : null}></source>
+        <source src={path + item.name} type={item.name ? isMobile.IOS() ? `audio/${item.name.split(".")[1] == "mp3" ? "mpeg" : item.name.split(".")[1]}` : null : null}></source>
       </audio>
       <div class="controls">
         <img
