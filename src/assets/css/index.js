@@ -4,6 +4,6 @@ import "@assets/css/test.css";
 import "@assets/css/forum_style.css";
 import "@assets/css/lottery_style.css";
 
-
 import "@assets/css/library.scss";
 import "@assets/css/danil.scss";
+import "@assets/css/voting.scss";

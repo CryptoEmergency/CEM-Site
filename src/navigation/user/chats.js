@@ -141,7 +141,7 @@ const start = function (data, ID) {
     };
 
     const loadAudio = async function (file, type, xhr) {
-        let blob = new Blob([file], { type: 'audio/ogg' });
+        let blob = new Blob([file], { type: 'audio/mpeg' });
         let previewObj = {
             src: URL.createObjectURL(blob),
             type: "audio",
@@ -153,7 +153,7 @@ const start = function (data, ID) {
         let numItem = Static.mediaInputs.value.length - 1
 
         let fileAudio = file[0];
-        let nameFile = "file.mp3"
+        let nameFile = "file.webm"
         if (fileAudio.name) {
             nameFile = fileAudio.name
         }
@@ -1318,7 +1318,26 @@ const start = function (data, ID) {
 
                                                             await navigator.mediaDevices.getUserMedia({ audio: true })
                                                                 .then(stream => {
-                                                                    Static.mediaRecorder = new MediaRecorder(stream);
+                                                                    let options = "audio/webm"
+                                                                    if (MediaRecorder.isTypeSupported('audio/webm; codecs=vp9')) {
+                                                                        options = { mimeType: 'audio/webm; codecs=vp9' };
+                                                                    } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+                                                                        options = { mimeType: 'audio/webm' };
+                                                                    } else if (MediaRecorder.isTypeSupported('audio/mpeg')) {
+                                                                        options = { mimeType: 'audio/mpeg' };
+                                                                    } else if (MediaRecorder.isTypeSupported('audio/ogg')) {
+                                                                        options = { mimeType: 'audio/ogg' };
+                                                                    } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
+                                                                        options = { mimeType: 'video/webm; codecs=vp9' };
+                                                                    } else if (MediaRecorder.isTypeSupported('video/webm')) {
+                                                                        options = { mimeType: 'video/webm' };
+                                                                    } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+                                                                        options = { mimeType: 'video/mp4', videoBitsPerSecond: 100000 };
+                                                                    } else {
+                                                                        console.error("no suitable mimetype found for this device");
+                                                                    }
+                                                                    console.log('=5b811c=', options)
+                                                                    Static.mediaRecorder = new MediaRecorder(stream, options);
 
                                                                     var audioChunks = [];
                                                                     Static.mediaRecorder.addEventListener("dataavailable", function (event) {
@@ -1326,8 +1345,8 @@ const start = function (data, ID) {
                                                                     })
 
                                                                     Static.mediaRecorder.addEventListener("stop", async function () {
-                                                                        var audioBlob = new File(audioChunks, "audio.mp3", {
-                                                                            type: 'audio/mp3'
+                                                                        var audioBlob = new File(audioChunks, "audio.webm", {
+                                                                            type: 'audio/mpeg'
                                                                         })
 
                                                                         fn.uploadMedia(

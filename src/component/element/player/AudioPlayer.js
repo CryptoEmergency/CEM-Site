@@ -45,7 +45,7 @@ const isMobile = {
   }
 };
 const AudioPlayer = function ({ Static, item, path }) {
-  // console.log(Static, item, path)
+  // console.log(item, path)
   if (!Static.elMedia[item._id]) {
     Static.elMedia[item._id] = {}
   }
