@@ -3,8 +3,8 @@ import {
     jsxFrag,
 } from "@betarost/cemserver/cem.js";
 //check
-import { Panzoom as PanzoomJs } from '@fancyapps/ui/dist/panzoom.esm.js';
-import '@fancyapps/ui/dist/panzoom.css';
+import { Panzoom as PanzoomJs } from '@fancyapps/ui/dist/panzoom/panzoom.esm.js';
+import '@fancyapps/ui/dist/panzoom/panzoom.css';
 
 const panzoomInit = function ($el, panzoomElem, index) {
     let panzoomElem2 = new PanzoomJs($el, {
