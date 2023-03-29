@@ -19,10 +19,21 @@ const start = function (data, ID) {
     fn: () => {
       return (
         <div class='c-main__body'>
-          <div class="title-page">Наши соц. сети</div>
-          <div class="content-page">
-            <div class="socials-button">Будет кнопка</div>
-            <div class="socials-button">Будет кнопка2</div>
+          <div class="titul_page">
+            <div> Наши соц.сети </div>
+
+            <a href="https://t.me/emergencycrypto" target="_blank" class="Button_1">
+
+              Моя супер желтая кнопк
+            </a>
+            <a href="https://www.tiktok.com/@cryptoemergencyrussia" target="_blank" class="Button_2">
+              Тики токи :
+            </a>
+            <a href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg" target="_blank" class="Button_3">
+              Ютубчик *ХЪ
+
+            </a>
+            {/* <img src={svg["testTelega"]} > */}
           </div>
         </div>
       );
