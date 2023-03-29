@@ -20,7 +20,7 @@ const LazyImage = function ({ path, ratio, className, classImg = '', counter = n
                     src={path}
                     class={classImg}
                     onload={(e) => {
-                        className && className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
+                        e.path ? className && className.includes('c-groupimage__item') ? calcWidthHeight(e) : null : null
                     }}
                 />
                 <span class="c-groupimage__counter">+ {counter}</span>
@@ -33,7 +33,7 @@ const LazyImage = function ({ path, ratio, className, classImg = '', counter = n
                     src={path}
                     class={classImg}
                     onload={(e) => {
-                        className && className.includes('c-groupimage__item') ? calcWidthHeight(e) : null
+                        e.path ? className && className.includes('c-groupimage__item') ? calcWidthHeight(e) : null : null
                     }}
                 />
             </div>
