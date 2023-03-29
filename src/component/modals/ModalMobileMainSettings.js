@@ -506,6 +506,12 @@ const ModalMobileMainSettings = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="user_mobile_menu_part">
+                                <div class="user_mobile_menu_content">
+                                    CryptoEmergency
+                                </div>
+                            </div>
                             <div
                                 class={`c-footer__container1 c-container ${Variable.auth ? "c-footer__container--panel" : ""
                                     }`}
