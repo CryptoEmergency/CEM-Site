@@ -52,18 +52,6 @@ const initSocket = async function () {
             }
         });
 
-        socket.on('disconnect', () => {
-            console.log('=3cd7cf=', "socket disconnect")
-            socket = null
-            Variable.socketConnect = false
-            clearTimeout(linkTimer)
-            if (Variable.load) {
-                initReload()
-            } else {
-                resolve()
-            }
-        });
-
         socket.on('connect_error', () => {
             console.log('=3cd7cf=', "socket connect_error")
             // socket = null
