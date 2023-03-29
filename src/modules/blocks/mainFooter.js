@@ -53,7 +53,7 @@ const mainFooter = async function () {
               return <BottomMenu />;
             }
           }}
-          {() => {
+          {/* {() => {
             if (Variable.Static.FooterShow) {
               return (
                 <div
@@ -145,7 +145,7 @@ const mainFooter = async function () {
                           </a>
 
                           {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
-                          <a
+              {/*}            <a
                             target="_blank"
                             class="c-footer__link"
                             href={
@@ -347,7 +347,7 @@ const mainFooter = async function () {
                       {/* <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" class="c-button__app">
                                             <img src={svg['googleplay']} />
                                         </a> */}
-                    </div>
+       {/*             </div>
                   </div>
                   <div class="c-footer__bottom">
                     <div class="c-footer__copyright">
@@ -564,7 +564,7 @@ const mainFooter = async function () {
                 </div>
               );
             }
-          }}
+          }} */}
         </div>
       );
     },
