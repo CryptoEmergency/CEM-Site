@@ -2,36 +2,36 @@
     background: url("../images/summer_forum/left.png") no-repeat top 4500px left calc(50% - 600px)/300px auto,
         url("../images/summer_forum/right.png") no-repeat top 4000px right calc(50% - 315px)/860px auto,
         url("../images/summer_forum/violet.png") no-repeat top 7900px right calc(50% - 593px)/300px auto,
-        url("../images/summer_forum/bottom.png") no-repeat bottom 699px center/1500px auto;
+        url("../images/summer_forum/bottom.png") no-repeat bottom 729px center/1500px auto;
     background-color: #171717;
 
     @media(max-width: 1279px) {
-        background-position: top 3100px left calc(50% - 506px), top 2450px left calc(50% + 188px), bottom 1700px left calc(100% + 50px), bottom 699px center;
+        background-position: top 3100px left calc(50% - 506px), top 2450px left calc(50% + 188px), bottom 1700px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 1140px auto, 300px auto, 1521px auto;
     }
 
     @media(max-width: 1099px) {
-        background-position: top 3200px left, top 3000px right, bottom 1600px left calc(100% + 50px), bottom 699px center;
+        background-position: top 3200px left, top 3000px right, bottom 1600px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 500px auto, 300px auto, contain;
     }
 
     @media(max-width: 1023px) {
-        background-position: top 3200px left, top 2900px right, bottom 1550px left calc(100% + 50px), bottom 699px center;
+        background-position: top 3200px left, top 2900px right, bottom 1550px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 500px auto, 300px auto, contain;
     }
 
     @media(max-width: 979px) {
-        background-position: top 2650px left, top 2400px right, bottom 1550px left calc(100% + 50px), bottom 699px center;
+        background-position: top 2650px left, top 2400px right, bottom 1550px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 899px) {
-        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 699px center;
+        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 799px) {
-        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 699px center;
+        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
