@@ -1748,6 +1748,7 @@
         display: flex;
         justify-content: space-between;
         align-items: stretch;
+        flex-wrap: wrap;
         // gap: 3vw;
         width: 100%;
         max-width: 1240px;
@@ -1755,7 +1756,6 @@
         margin-right: auto;
 
         @media(max-width: 767px) {
-            flex-wrap: wrap;
             gap: 6vw;
         }
 
@@ -1763,9 +1763,11 @@
             flex-basis: calc(25% - 2.25vw);
             flex-shrink: 0;
             flex-grow: 0;
+            margin-bottom: 20px;
 
             @media(max-width: 767px) {
                 flex-basis: calc(50% - 3vw);
+                margin-bottom: 0;
             }
         }
     }
@@ -1789,6 +1791,7 @@
         }
 
         figure {
+            width: 100%;
             margin: 0;
         }
 
@@ -2052,6 +2055,8 @@
     &__item {
         display: flex;
         width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
         text-align: center;
         // background: #ffffff;
         border: 1px solid #01c8ab;

@@ -433,15 +433,33 @@ const start = function (data, ID) {
             position: "PRO BLOCKCHAIN MEDIA",
             photo: "summer_forum/speaker12",
             show: false,
+        },
+        {
+            name: "Денис Магданов",
+            position: "DUMA NETWORK",
+            photo: "summer_forum/speaker13",
+            show: false,
         }
     ]
 
     const guests = [
         {
+            link: "https://youtu.be/Ga7Ykwoi9WU",
+            photo: "guest5",
+            name: "Александр Бражников",
+            spec: "РАКИБ"
+        },
+        {
             link: "https://youtu.be/J0U0ZpEKxlU",
             photo: "guest1",
             name: "Владислав Мартынов",
             spec: "Автор курса \"КриптоИнвестор\""
+        },
+        {
+            link: "https://youtu.be/Lz1_UPfV070",
+            photo: "speaker1",
+            name: "Ян Кривоносов",
+            spec: "CEO Crypto Emergency"
         },
         {
             link: "https://youtu.be/Wzo9Cv5xDFw",
@@ -454,6 +472,18 @@ const start = function (data, ID) {
             photo: "guest3",
             name: "Алексей Зюзин",
             spec: "Организатор Crypto Summit"
+        },
+        {
+            link: "https://youtu.be/EQ-nViuTyTw",
+            photo: "guest6",
+            name: "Денис Магданов",
+            spec: "DUMA NETWORK"
+        },
+        {
+            link: "https://youtu.be/F57YEI2IfSs",
+            photo: "speaker2",
+            name: "Андрей Тугарин",
+            spec: "Управляющий партнер GMT Legal"
         },
         {
             link: "https://youtu.be/aeZfsdraVGo",
@@ -1269,6 +1299,20 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_30"]} />
                                 </a> */}
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://duma.network/"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_24"]} style="max-height: 90px" />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://pro-blockchain.com/crypto-news"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_23"]} />
+                                </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.becomePartner}</span>
