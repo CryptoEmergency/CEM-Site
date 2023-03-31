@@ -320,7 +320,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                             </div>
                                             <div class="new_professional_buttons">
                                                 <div class="button-container-preview">
-                                                    <a class="btn-news-preview " href="#"
+                                                    <a class="btn-news-preview "
                                                         onclick={async () => {
                                                             Variable.Static.startChatsID = user
                                                             fn.siteLink("/user/chats/");
