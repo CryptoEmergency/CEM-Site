@@ -614,8 +614,9 @@ BlockUserProfilePage.friends = async function (Static, data) {
 
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
-            <h2>{Variable.lang.toggle.friends}</h2>
-
+            <div class="friends_header">
+                <h2>{Variable.lang.toggle.friends}</h2>
+            </div>
             {/* <div class="c-questions__searchblock c-search">
                 <div class="c-search__container">
                     <div class="c-search__wrapper">
