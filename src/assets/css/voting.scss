@@ -1,48 +1,65 @@
-.voting {
-    margin-top: 100px;
-    background: rgb(189, 183, 183)   ; 
-}
+$fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 
-.text {
-    display:flex;
-    justify-content: center;
-    
+.container-voice{
+    padding-top: 80px;
+    max-width: 1240px;
+    margin: 0px auto;
 }
+.voice-title{
+    font-size: 36px;
+    color: #FFFFFF;
+    text-align: center;
+}
+.voice-inner{
+    background: rgba(255, 255, 255, 0.11);
+    padding: 15px;
+    border-radius: 15px;
 
-.text {
-    color:deeppink;
-}
+    .list-voice{
+        list-style-type: decimal!important;
+    }
 
-.Opis{
-    text-align: end;
-    font-size: 20px;
-    color: #000000;
-    padding: 17px 20px;
-    font-size: 25px;
-}
+    .list-el{
+        display: flex;
+        align-items: center;
+        list-style-type: decimal;
+    }
+    .list-el::marker{
+        list-style-type: decimal;
+    }
+    .checkbox-train{
+        width: 20px;
+        height: 20px;
+        margin-left: 15px;
+    }
+    .wrap-btn{
+        width: 100%;
+        display: flex;
+        justify-content: center;
 
-.city {
-    display: block;
-    font-size: 20px;
-    color: #ffffff;
-}
+    }
+    .btn{
+        background: $fiolet;
+        outline: none;
+        border-radius: 10px;
+        padding: 15px;
+        border: 5px solid #FFFFFF;
+        opacity: 0.5;
+    }
+    .btn:focus{
+        background: red;
+    }
+    .btn:hover, .btn-checked{
+        opacity: 1  ;
+    }
+    .name{
+        text-align: center;
+    }
+    .description{
+        text-align: center;
 
-.list {
-    font-size: 20px;
-    color:blue;
-}
-
-.list-city {
-    font-size: 20px;
-    color:blue;
-}
-.voice{
-    color: #ffffff;
-    text-decoration: none;
-    user-select: none;
-    background: rgb(201, 33, 11);
-    padding: 10px 15px;
-    display:flex;
-    justify-content: center;
-    font-size: 22px;
+    }
+    input:checked + .btn{
+        opacity: 1;
+    }
 }
