@@ -1,48 +1,86 @@
-.voting {
-    margin-top: 100px;
-    background: rgb(189, 183, 183)   ; 
-}
+$fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 
-.text {
-    display:flex;
-    justify-content: center;
+.container-voice{
+    padding-top: 80px;
+    max-width: 1240px;
+    margin: 0px auto;
+
+}
+.voice-title{
+    font-size: 36px;
+    color: #FFFFFF;
+    text-align: center;
+    
     
 }
-
-.text {
-    color:deeppink;
+.btns-wrap{
+    display: grid;
+grid-template-columns: 1fr 1fr 3fr;
+grid-gap: 8px;
+grid-area: auto;
+display: flex;
+justify-content: space-between;
 }
+.voice-inner{
+    background: rgba(255, 255, 255, 0.11);
+    padding: 15px;
+    border-radius: 15px;
 
-.Opis{
-    text-align: end;
-    font-size: 20px;
-    color: #000000;
-    padding: 17px 20px;
-    font-size: 25px;
-}
+    .list-voice{
+        list-style-type: decimal!important;
+    }
 
-.city {
-    display: block;
-    font-size: 20px;
-    color: #ffffff;
-}
+    .list-el{
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+        list-style-type: decimal;
 
-.list {
-    font-size: 20px;
-    color:blue;
-}
+        span {
+            width: 200px;
+        }
+    }
+    .list-el::marker{
+        list-style-type: decimal;
+    }
+    .checkbox-train{
+        width: 20px;
+        height: 20px;
+        margin-left: 15px;
+    }
+    .wrap-btn{
+        width: 100%;
+        display: flex;
+        justify-content: center;
 
-.list-city {
-    font-size: 20px;
-    color:blue;
-}
-.voice{
-    color: #ffffff;
-    text-decoration: none;
-    user-select: none;
-    background: rgb(201, 33, 11);
-    padding: 10px 15px;
-    display:flex;
-    justify-content: center;
-    font-size: 22px;
+    }
+    .btn{
+        background: $fiolet;
+        border-radius: 10px;
+        outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 4px #5a01a7;
+        padding: 15px;
+        border: 5px solid #FFFFFF;
+        opacity: 0.5;
+        color: #FFFFFF;
+        background-color:#002ead;
+      transition: 0.7s;
+    }
+    .btn:focus{
+        background: rgb(159, 201, 226);
+    }
+    .btn:hover, .btn-checked{
+        opacity: 1  ;
+    }
+    .name{
+        text-align: center;
+    }
+    .description{
+        text-align: center;
+
+    }
+    input:checked + .btn{
+        opacity: 1;
+    }
 }
