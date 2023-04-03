@@ -4,11 +4,22 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     padding-top: 80px;
     max-width: 1240px;
     margin: 0px auto;
+
 }
 .voice-title{
     font-size: 36px;
     color: #FFFFFF;
     text-align: center;
+    
+    
+}
+.btns-wrap{
+    display: grid;
+grid-template-columns: 1fr 1fr 3fr;
+grid-gap: 8px;
+grid-area: auto;
+display: flex;
+justify-content: space-between;
 }
 .voice-inner{
     background: rgba(255, 255, 255, 0.11);
@@ -22,7 +33,12 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     .list-el{
         display: flex;
         align-items: center;
+        margin-bottom: 6px;
         list-style-type: decimal;
+
+        span {
+            width: 200px;
+        }
     }
     .list-el::marker{
         list-style-type: decimal;
@@ -40,14 +56,19 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     }
     .btn{
         background: $fiolet;
-        outline: none;
         border-radius: 10px;
+        outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 4px #5a01a7;
         padding: 15px;
         border: 5px solid #FFFFFF;
         opacity: 0.5;
+        color: #FFFFFF;
+        background-color:#002ead;
+      transition: 0.7s;
     }
     .btn:focus{
-        background: red;
+        background: rgb(159, 201, 226);
     }
     .btn:hover, .btn-checked{
         opacity: 1  ;
