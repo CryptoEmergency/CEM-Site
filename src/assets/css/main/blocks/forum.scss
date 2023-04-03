@@ -409,7 +409,8 @@
                 padding: 8px;
             }
 
-            &:first-child {
+            &:first-child,
+            &:nth-child(2) {
                 width: 70%;
                 max-width: 850px;
                 padding: 0;
@@ -429,6 +430,11 @@
                 @media(max-width: 767px) {
                     font-size: 4vw;
                 }
+            }
+
+            &:nth-child(2) {
+                width: 100%;
+                max-width: 100%;
             }
 
             &:last-of-type {
@@ -667,6 +673,7 @@
         img {
             position: relative;
             width: 100%;
+            height: auto;
             border-radius: 50%;
             border: 2px solid #00D5BE;
             z-index: 2;
