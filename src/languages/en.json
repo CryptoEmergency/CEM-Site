@@ -160,7 +160,8 @@
         "lottery": "«Word of Mouth» lottery",
         "lotterySubtitle": "WIN the 1000CEM!",
         "promo_video": "Promo video",
-        "tokenomica": "Tokenomica","modal_listCoin": "Choose coins",
+        "tokenomica": "Tokenomica",
+        "modal_listCoin": "Choose coins",
         "noName": "No name",
         "------------------новые слова-----------------": "добавить новые слова",
 		"modal_previewVideo": "Video preview"
@@ -205,7 +206,8 @@
         "home": "Home",
         "affiliate": "Partner program",
         "addChats": "Add a chat",
-        "notes": "My notes"
+        "notes": "My notes",
+		"--------------------------новые слова--------------": "--добавить перевод--"
     },
     "span": {
         "company": "Company",
@@ -252,10 +254,10 @@
         "clientCount": "Number of attracted customers",
         "clientMoney": "Payments for attracted customers",
         "forFriends": "Only for friends",
-        "------------------новые слова-----------------": "добавить новые слова",
         "litePaper": "Lite Paper",
         "newNotes": "New notes",
-		"preview": "Preview"
+		"preview": "Preview",
+        "------------------новые слова-----------------": "добавить новые слова"
     },
     "p": {
         "answers": "answers ",
@@ -370,7 +372,6 @@
         "transactionLevel": "For the received level",
         "aboutProjectDate19May2022": "Released May 19, 2022",
         "aboutProjectDateAugust2022": "Release August 2022",
-        "--------------------------новые слова--------------": "--добавить перевод--",
         "lotteryActions": "Do the simplest actions to get a lucky lottery ticket!",
         "lotteryAction1": "Invite your friends to increase Prize Pool.",
         "lotteryAction2": "Every registered user = 1 CEM additionally to 1000 CEM Prize Pool",
@@ -388,7 +389,8 @@
         "lotteryQuest6": "Answer a shortest quiz.",
         "lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?",
         "aboutObjectiveTitle": "Our Mission",
-        "aboutObjective": "Unite crypto-enthusiasts all over the world on one multifunctional platform Crypto Emergency, which will give them all necessary tools to communicate, learn, earn, money and create their own content."
+        "aboutObjective": "Unite crypto-enthusiasts all over the world on one multifunctional platform Crypto Emergency, which will give them all necessary tools to communicate, learn, earn, money and create their own content.",
+        "--------------------------новые слова--------------": "--добавить перевод--"
     },
     "text": {
         "starups": "Startups",
@@ -456,7 +458,8 @@
         "confirmBlockUser": "Are you sure you want to add a user to the blacklist? (The blacklist of users is available in the settings)",
         "update": "Changed",
         "deletePageComment": "Are you sure you want to delete?",
-        "selectOrCreateNew": "Select or create a new note"
+        "selectOrCreateNew": "Select or create a new note",
+		"--------------------------новые слова--------------": "--добавить перевод--"
     },
     "label": {
         "name": "Name",
@@ -481,7 +484,8 @@
         "speciality": "Specialization",
         "birthDate": "Date of birth",
         "oldPassword": "Old password",
-        "newPassword": "New password"
+        "newPassword": "New password",
+		"--------------------------новые слова--------------": "--добавить перевод--"
     },
     "placeholder": {
         "name": "Enter your name",
@@ -500,7 +504,8 @@
         "oldPassword": "Enter the old password",
         "newPassword": "Enter a new password",
         "blackList": "Blacklist Search",
-        "titleAsk": "Question title"
+        "titleAsk": "Question title",
+		"--------------------------новые слова--------------": "--добавить перевод--"
     },
     "select": {
         "closeQuestion": "Close question",
@@ -530,11 +535,11 @@
         "complainAnswer": "Complain about the response",
         "complainUser": "Report a user",
         "blackList": "To the blacklist",
-        "--------------------------новые слова--------------": "--добавить перевод--",
         "active": "Active",
         "upcoming": "Upcoming",
         "ended": "Ended",
-        "verified": "Verified"
+        "verified": "Verified",
+        "--------------------------новые слова--------------": "--добавить перевод--"
     },
     "toggle": {
         "friends": "Friends",
