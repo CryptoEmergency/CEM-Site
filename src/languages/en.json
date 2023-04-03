@@ -74,7 +74,11 @@
         "pre_view": "Preview",
         "allPartners": "All partners",
         "resetCrop": "Cancel",
-        "reset": "Cancel"
+        "reset": "Cancel",
+		"--------------------------новые слова--------------": "--добавить перевод--",
+		"preview": "Preview",
+		"attach": "Attach",
+        "close": "Close"
     },
     "h": {
         "success": "Successfully!",
@@ -153,14 +157,13 @@
         "chats": "Chats",
         "partners": "Information partners",
         "modal_cropImage": "Adding a photo",
-        "--------------------------новые слова--------------": "--добавить перевод--",
         "lottery": "«Word of Mouth» lottery",
         "lotterySubtitle": "WIN the 1000CEM!",
         "promo_video": "Promo video",
-        "tokenomica": "Tokenomica",
+        "tokenomica": "Tokenomica","modal_listCoin": "Choose coins",
+        "noName": "No name",
         "------------------новые слова-----------------": "добавить новые слова",
-        "modal_listCoin": "Choose coins",
-        "noName": "No name"
+		"modal_previewVideo": "Video preview"
     },
     "a": {
         "about": "About Us",
@@ -251,7 +254,8 @@
         "forFriends": "Only for friends",
         "------------------новые слова-----------------": "добавить новые слова",
         "litePaper": "Lite Paper",
-        "newNotes": "New notes"
+        "newNotes": "New notes",
+		"preview": "Preview"
     },
     "p": {
         "answers": "answers ",
