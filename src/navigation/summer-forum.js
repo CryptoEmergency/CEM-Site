@@ -375,6 +375,12 @@ const start = function (data, ID) {
             show: true,
         },
         {
+            name: "Владимир Туров",
+            position: "Turov Invest",
+            photo: "summer_forum/speaker15",
+            show: true,
+        },
+        {
             name: "Ян Кривоносов",
             position: "CEO Crypto Emergency",
             photo: "summer_forum/speaker1",
@@ -387,16 +393,22 @@ const start = function (data, ID) {
             show: true,
         },
         {
+            name: "Сергей Павлович",
+            position: "Люди PRO",
+            photo: "summer_forum/speaker14",
+            show: true,
+        },
+        {
             name: "Андрей Тугарин",
             position: "CEO компании GMT Legal",
             photo: "summer_forum/speaker2",
-            show: true,
+            show: false,
         },
         {
             name: "Вероника Близнец",
             position: "Адвокат, юрист-международник",
             photo: "summer_forum/speaker6",
-            show: true,
+            show: false,
         },
         {
             name: "Mr. Sailer YouTube",
@@ -433,15 +445,33 @@ const start = function (data, ID) {
             position: "PRO BLOCKCHAIN MEDIA",
             photo: "summer_forum/speaker12",
             show: false,
+        },
+        {
+            name: "Денис Магданов",
+            position: "DUMA NETWORK",
+            photo: "summer_forum/speaker13",
+            show: false,
         }
     ]
 
     const guests = [
         {
+            link: "https://youtu.be/Ga7Ykwoi9WU",
+            photo: "guest5",
+            name: "Александр Бражников",
+            spec: "РАКИБ"
+        },
+        {
             link: "https://youtu.be/J0U0ZpEKxlU",
             photo: "guest1",
             name: "Владислав Мартынов",
             spec: "Автор курса \"КриптоИнвестор\""
+        },
+        {
+            link: "https://youtu.be/qahwkOAB0pg",
+            photo: "guest7",
+            name: "Владимир Туров",
+            spec: "Turov Invest"
         },
         {
             link: "https://youtu.be/Wzo9Cv5xDFw",
@@ -450,10 +480,28 @@ const start = function (data, ID) {
             spec: "Директор фонда Genesi в Metis"
         },
         {
+            link: "https://youtu.be/Lz1_UPfV070",
+            photo: "speaker1",
+            name: "Ян Кривоносов",
+            spec: "CEO Crypto Emergency"
+        },
+        {
             link: "https://youtu.be/iqTQ7zYR5DM",
             photo: "guest3",
             name: "Алексей Зюзин",
             spec: "Организатор Crypto Summit"
+        },
+        {
+            link: "https://youtu.be/EQ-nViuTyTw",
+            photo: "guest6",
+            name: "Денис Магданов",
+            spec: "DUMA NETWORK"
+        },
+        {
+            link: "https://youtu.be/F57YEI2IfSs",
+            photo: "speaker2",
+            name: "Андрей Тугарин",
+            spec: "Управляющий партнер GMT Legal"
         },
         {
             link: "https://youtu.be/aeZfsdraVGo",
@@ -503,6 +551,9 @@ const start = function (data, ID) {
                             <div class="c-aboutforum__text c-container">
                                 <p>
                                     Команда <b>Crypto Emergency</b> рада пригласить тебя на второй ежегодный криптофорум <b>Crypto Юг 2023</b>, который состоится  3 и 4 июня в г. Новороссийске.
+                                </p>
+                                <p>
+                                Организатор <b>CryptoEmergency</b>, соорганизатор <b>Crypto Holding</b> и <b>Turov Invest</b> при поддержке <b>РАКИБ</b>.
                                 </p>
                                 <p>
                                     <b>Crypto Юг 2023</b> - прекрасная возможность провести время приятно и с пользой, открыть для себя новые возможности, повысить экспертность и увеличить доход.
@@ -593,7 +644,7 @@ const start = function (data, ID) {
                                             <li style={!item.show ? showAllCompanies ? '' : 'display: none' : null}>
                                                 <figure class="c-speakers__item">
                                                     <div class="c-speakers__wrappper">
-                                                        <img src={images[item.photo]} />
+                                                        <img src={images[item.photo]} width="318" height="318" />
                                                     </div>
                                                     <figcaption class="c-speakers__caption">
                                                         <h3>{item.name}</h3>
@@ -651,7 +702,7 @@ const start = function (data, ID) {
                                             <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место уже зарезервировано</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--2">
@@ -684,14 +735,14 @@ const start = function (data, ID) {
                                         <span class="">Это место в данный момент свободно</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--5">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--5">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
                                         <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--6">
@@ -714,14 +765,14 @@ const start = function (data, ID) {
                                         <span class="">Это место в данный момент свободно</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--8">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--8">
                                     {/* <span class="c-eventmap__titlezone">5</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
                                         <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--9">
@@ -751,7 +802,7 @@ const start = function (data, ID) {
                                             <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место уже зарезервировано</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--12">
@@ -761,7 +812,7 @@ const start = function (data, ID) {
                                             <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место уже зарезервировано</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--13">
@@ -771,7 +822,7 @@ const start = function (data, ID) {
                                             <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место уже зарезервировано</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--14">
@@ -811,7 +862,7 @@ const start = function (data, ID) {
                                             <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место уже зарезервировано</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--18">
@@ -821,7 +872,7 @@ const start = function (data, ID) {
                                             <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место уже зарезервировано</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
                                 <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--19">
@@ -891,17 +942,17 @@ const start = function (data, ID) {
                                             <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class=""></span> */}
                                         </a>
-                                        <span class="">Это место уже зарезервировано</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
-                                <div data-zone="freestands" class="c-eventmap__zone c-eventmap__zone--26">
+                                <div data-zone="reservedstands" class="c-eventmap__zone c-eventmap__zone--26">
                                     {/* <span class="c-eventmap__titlezone">25</span> */}
                                     <div class="c-eventmap__popup c-eventmap__popup--righttop">
                                         <a class="c-eventmap__linkzone" href="#" target="_blank" rel="nofollow">
-                                            <img class="" src={svg["summer_forum/free"]} width="" height="" />
+                                            <img class="" src={svg["summer_forum/reserved"]} width="" height="" />
                                             {/* <span class="">google.com</span> */}
                                         </a>
-                                        <span class="">Это место в данный момент свободно</span>
+                                        <span class="">Это место продано</span>
                                     </div>
                                 </div>
 
@@ -1269,6 +1320,20 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_30"]} />
                                 </a> */}
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://duma.network/"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_24"]} style="max-height: 90px" />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://pro-blockchain.com/crypto-news"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_23"]} />
+                                </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.becomePartner}</span>

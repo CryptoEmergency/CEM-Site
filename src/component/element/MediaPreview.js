@@ -345,14 +345,14 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   }
                 >
                   <span class="messages_hint">
-                    <span>Превью</span>
+                    <span>{Variable.lang.span.preview}</span>
                     <div class="messages_arrow_right">
                       <span></span>
                       <span></span>
                       <span></span>
                     </div>
                   </span>
-                  <img class="" src={svg.settings_icon} width="32" height="32" title="!!!" />
+                  <img class="" src={svg.settings_icon} width="32" height="32" title={Variable.lang.text.menu} />
                 </div>
                 // <div
                 //   class="delete_post_media"
