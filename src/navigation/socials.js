@@ -60,6 +60,44 @@ const arrSocials = [
   //   images: true
   // }
 ]
+const sait = [{
+  link: "https://duma.network/",
+  icon: "logo-preload",
+  name: "Duma",
+  opis: "CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet",
+  images: true
+},
+{
+  link: "https://sberunity.ru/profile/879d88aa-4729-4788-a541-20cc8cc3cb14",
+  icon: "telegram",
+  name: "Сбер Unity",
+  opis: "CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet"
+},
+{
+  link: "https://cemblockchain.com",
+  icon: "cem_logo",
+  name: "Blockchain",
+  opis: "Crypto Emergency — общедоступная блокчейн-платформа с открытым исходным кодом, низкими комиссиями и отличной поддержкой продуктов."
+},
+{
+  link: "https://chainlist.org/chain/193",
+  icon: "cem_logo",
+  name: "ChainList",
+  opis: "Chainlist — это список сетей EVM. Пользователи могут использовать эту информацию для подключения своих кошельков и поставщиков промежуточного программного обеспечения Web3 к соответствующему идентификатору цепочки и идентификатору сети для подключения к правильной цепочке."
+},
+{
+  link: "https://cemscan.com",
+  icon: "cem_logo",
+  name: "Block Explorer",
+  opis: "Портал блоков"
+},
+{
+  link: "https://github.com/CryptoEmergency",
+  icon: "cem_logo",
+  name: "Github",
+  opis: "Ссылка на наш github"
+}
+]
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });
@@ -105,109 +143,30 @@ const start = function (data, ID) {
                   })
                 }
 
-                {/*Пример по думе 
-                      <a href={item.link} class="btn-item" target="_blank">
-                        <img class="btn-item_img" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
-                        <span>{item.name}</span>
-                        <img class="btn-item_img-flag" src={svg['train/' + item.lang]} alt="Flag" />
-                      </a> */}
 
-                {/* <a href="https://t.me/cryptoemergencychat" class="btn-item" target="_blank">
-                  <img class="btn-item_img" src={images['logo-preload']} alt="Telegram" />
-                  <span>Telegram!!!!!</span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a> */}
-                {/* <a href="https://t.me/emergencycrypto" class="btn-item" target="_blank">
-                  <img class="btn-item_img" src={svg['train/telegram']} alt="Telegram" />
-                  <span class>Telegram</span>
-                  <img class="btn-item_img-flag" src={svg['train/european_union']} alt="Flag" />
-                </a>
-
-
-                <a href="https://instagram.com/cryptoemergency" class="btn-item" target="_blank">
-                  <img class="btn-item_img" src={svg['train/instagram']} alt="Telegram" />
-                  <span>Instagram</span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
-                <a href="https://instagram.com/cryptoemergency" class="btn-item" target="_blank">
-                  <img class="btn-item_img" src={svg['train/instagram']} alt="Telegram" />
-                  <span>Instagram</span>
-                  <img class="btn-item_img-flag" src={svg['train/us']} alt="Flag" />
-                </a>
-
-
-                <a href="https://www.tiktok.com/@cryptoemergencyrussia" class="btn-item" target="_blank">
-                  <img class="btn-item_img" src={svg['train/tiktok_icon']} alt="Telegram" />
-                  <span>Tiktok</span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
-                <a href="https://vm.tiktok.com/ZSefExJrr" class="btn-item" target="_blank">
-                  <img class="btn-item_img" src={svg['train/tiktok_icon']} alt="Telegram" />
-                  <span>Tiktok</span>
-                  <img class="btn-item_img-flag" src={svg['train/us']} alt="Flag" />
-                </a> */}
               </div>
             </div>
             <div class="block-section-2">
 
               <h4 class="H3">Наши сайты/партнеры</h4>
               <div class="btns-wrap-2">
-                <a href="https://duma.network/" class="btn-item-2" target="_blank">
-                  <img class="btn-item_img" src={images['logo-preload']} alt="Telegram" />
-                  <span class="SP2">Duma
-                    <p class="P1">
-                      CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
-                    </p>
-                  </span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
-                <a href="https://sberunity.ru/profile/879d88aa-4729-4788-a541-20cc8cc3cb14" class="btn-item-2" target="_blank">
-                  <img class="btn-item_img" src={svg['train/telegram']} alt="Telegram" />
-                  <span class="SP2">Сбер Unity
-                    <p class="P1">
-                      CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
-                    </p>
-                  </span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
+                {
+                  sait.map((item, index) => {
+                    console.log('=c559f5=', item.link)
+                    return (
+                      <a href={item.link} class="btn-item-2" target="_blank">
+                        <img class="btn-item_img" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
+                        <span class="SP2">{item.name}
+                          <p class="p1">
+                            {item.opis}
+                          </p>
+                        </span>
+                      </a>
+                    )
+                  })
+                }
 
-                <a href="https://cemblockchain.com" class="btn-item-2" target="_blank">
-                  <img class="btn-item_img" src={svg['train/cem_logo']} alt="Telegram" />
-                  <span class="SP2">Blockchain
-                    <p class="P1">
-                      CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
-                    </p>
-                  </span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
-                <a href="https://chainlist.org/chain/193" class="btn-item-2" target="_blank">
-                  <img class="btn-item_img" src={svg['train/cem_logo']} alt="Telegram" />
-                  <span class="SP2">ChainList
-                    <p class="P1">
-                      CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
-                    </p>
-                  </span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
 
-                <a href="https://cemscan.com" class="btn-item-2" target="_blank">
-                  <img class="btn-item_img" src={svg['train/cem_logo']} alt="Telegram" />
-                  <span class="SP2">Block Explorer
-                    <p class="P1">
-                      CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
-                    </p>
-                  </span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
-                <a href="https://github.com/CryptoEmergency" class="btn-item-2" target="_blank">
-                  <img class="btn-item_img" src={svg['train/cem_logo']} alt="Telegram" />
-                  <span class="SP2">GitHub
-                    <p class="P1">
-                      CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
-                    </p>
-                  </span>
-                  <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" />
-                </a>
 
               </div>
 
@@ -243,7 +202,7 @@ const start = function (data, ID) {
                 <a href="https://play.google.com/store/apps/details?id=com.cemwallet&hl=en&gl=US" class="btn-item-2" target="_blank">
                   <img class="btn-item_img" src={svg['cem_logo']} alt="Telegram" />
                   <h5 class="H5">CEM Wallet
-                    <p class="P1">
+                    <p class="P2">
                       CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
                     </p>
                   </h5>
@@ -258,45 +217,7 @@ const start = function (data, ID) {
               </div>
             </div>
           </div>
-          {/* <div class="titul_page style_titul">
-            <div> Наши соц.сети </div>
 
-            <div class=" group_batton_1">
-              <a href="https://t.me/emergencycrypto" target="_blank" class="Button_1 style_titul">
-                Telegram
-              </a>
-              <a class=" Batton_1-2">
-                Telegram
-              </a>
-            </div>
-
-
-            <div class=" group_batton_2">
-              <a href="https://www.tiktok.com/@cryptoemergencyrussia" target="_blank" class="Button_2-1">
-                Тik tok
-              </a>
-              <a href="https://www.tiktok.com/@cryptoemergencyrussia" target="_blank" class="Button_2-2">
-                Тik tok
-              </a>
-            </div>
-
-
-            <div class=" group_batton_3">
-              <a href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg" target="_blank" class="Button_3">
-                Youtube
-
-              </a>
-              <a href="https://www.youtube.com/channel/UCb9Fx-fNikzs-OZwnTXepLg" target="_blank" class="Button_3-2">
-                Youtube
-
-              </a>
-            </div>
-            <div>
-
-
-
-            </div>
-          </div> */}
         </div>
       );
     },
