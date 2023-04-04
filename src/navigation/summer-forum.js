@@ -553,7 +553,15 @@ const start = function (data, ID) {
                                     Команда <b>Crypto Emergency</b> рада пригласить тебя на второй ежегодный криптофорум <b>Crypto Юг 2023</b>, который состоится  3 и 4 июня в г. Новороссийске.
                                 </p>
                                 <p>
-                                Организатор <b>CryptoEmergency</b>, соорганизатор <b>Crypto Holding</b> и <b>Turov Invest</b> при поддержке <b>РАКИБ</b>.
+                                    Организатор 
+                                    <img src={svg.logoStandart} />
+                                     соорганизаторы
+                                     <div class="el-c">
+                                        <img src={images["forum/partner_1"]} class="" />
+                                        <img src={images["forum/partner_11"]} class="" />
+                                    </div>
+                                      при поддержке 
+                                    <img src={images["summer_forum/partner_21"]} />
                                 </p>
                                 <p>
                                     <b>Crypto Юг 2023</b> - прекрасная возможность провести время приятно и с пользой, открыть для себя новые возможности, повысить экспертность и увеличить доход.
