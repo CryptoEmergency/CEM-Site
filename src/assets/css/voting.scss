@@ -7,7 +7,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 
 }
 .voice-title{
-    font-size: 36px;
+    font-size: 25px;
     color: #FFFFFF;
     text-align: center;
     
@@ -15,16 +15,16 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 }
 .btns-wrap{
     display: grid;
-grid-template-columns: 1fr 1fr 3fr;
-grid-gap: 8px;
-grid-area: auto;
-display: flex;
-justify-content: space-between;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 20px;
 }
-.voice-inner{
+    .voice-inner{
     background: rgba(255, 255, 255, 0.11);
-    padding: 15px;
+    padding: 15px 15px 70px 15px;
     border-radius: 15px;
+    position: relative;
+    font-size: 13px;
+
 
     .list-voice{
         list-style-type: decimal!important;
@@ -35,10 +35,8 @@ justify-content: space-between;
         align-items: center;
         margin-bottom: 6px;
         list-style-type: decimal;
-
-        span {
-            width: 200px;
-        }
+        justify-content: space-between;
+        font-size: 13px;
     }
     .list-el::marker{
         list-style-type: decimal;
@@ -46,7 +44,8 @@ justify-content: space-between;
     .checkbox-train{
         width: 20px;
         height: 20px;
-        margin-left: 15px;
+        margin-left: 15px;  
+
     }
     .wrap-btn{
         width: 100%;
@@ -58,15 +57,17 @@ justify-content: space-between;
         background: $fiolet;
         border-radius: 10px;
         outline-color: transparent;
-    outline-style:solid;
-    box-shadow: 0 0 0 4px #5a01a7;
-        padding: 15px;
+        outline-style:solid;
+        box-shadow: 0 0 0 4px #5a01a7;
+        padding: 5px;
         border: 5px solid #FFFFFF;
         opacity: 0.5;
         color: #FFFFFF;
         background-color:#002ead;
       transition: 0.7s;
-    }
+      bottom: 15px;
+      position: absolute;
+    }   
     .btn:focus{
         background: rgb(159, 201, 226);
     }
@@ -82,5 +83,21 @@ justify-content: space-between;
     }
     input:checked + .btn{
         opacity: 1;
+    }
+}
+
+@media (max-width: 992px){
+    .btns-wrap{
+        margin: 0 15px;
+    }
+}
+@media (max-width: 767px){
+    .btns-wrap{
+        grid-template-columns: 2fr 2fr;
+    }
+}
+@media (max-width: 464px){
+    .btns-wrap{
+        grid-template-columns: 1fr;
     }
 }
