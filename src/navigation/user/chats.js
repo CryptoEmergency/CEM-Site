@@ -534,7 +534,7 @@ const start = function (data, ID) {
             Static.filteredChats = Static.chatsList.list_records;
         },
         () => {
-            console.log('=da21b3=', Static.chatsList, Variable.Static.startChatsID)
+            // console.log('=da21b3=', Static.chatsList, Variable.Static.startChatsID)
 
             if (Static.messageList) {
                 if (Variable.myInfo._id != Static.messageList.list_records[0].users[0]._id) {
@@ -669,25 +669,25 @@ const start = function (data, ID) {
                                                             <div class="messages_list_item_info-1">
                                                                 <p>{user.nickname}</p>
                                                                 {() => {
-                                                                    if (lastMessage.text && lastMessage.author == Variable.myInfo._id) {
+                                                                    if (lastMessage?.text && lastMessage?.author == Variable.myInfo._id) {
                                                                         return (
                                                                             <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
                                                                         )
                                                                     }
                                                                 }}
                                                                 {() => {
-                                                                    if (lastMessage.text) {
+                                                                    if (lastMessage?.text) {
                                                                         return (
-                                                                            <span>{lastMessage.text}</span>
+                                                                            <span>{lastMessage?.text}</span>
                                                                         )
-                                                                    } else if (lastMessage.media && lastMessage.media.length) {
+                                                                    } else if (lastMessage?.media && lastMessage?.media.length) {
                                                                         return (
                                                                             <div class="messages_media">
                                                                                 {() => {
                                                                                     if (
-                                                                                        !lastMessage.text && lastMessage.media.length
-                                                                                        && (lastMessage.media[0].type == "audio" || lastMessage.media[0].type == "video" || lastMessage.media[0].type == "image")
-                                                                                        && lastMessage.author == Variable.myInfo._id
+                                                                                        !lastMessage?.text && lastMessage?.media?.length
+                                                                                        && (lastMessage?.media[0]?.type == "audio" || lastMessage?.media[0]?.type == "video" || lastMessage?.media[0]?.type == "image")
+                                                                                        && lastMessage?.author == Variable.myInfo._id
                                                                                     ) {
                                                                                         return (
                                                                                             <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
@@ -697,8 +697,8 @@ const start = function (data, ID) {
                                                                                 <span class="messages_media_content">
                                                                                     <img
                                                                                         class={iconStatus.name == "read_message_icon" ? "messages_media_content_views" : null}
-                                                                                        src={svg[`icon/${lastMessage.media[0].type == "audio" ? "microphone" :
-                                                                                            lastMessage.media[0].type == "video" ?
+                                                                                        src={svg[`icon/${lastMessage?.media[0]?.type == "audio" ? "microphone" :
+                                                                                            lastMessage?.media[0]?.type == "video" ?
                                                                                                 "video_camera" :
                                                                                                 // lastMessage.media[0].type == "image" ?
                                                                                                 "photocamera"}`]}
@@ -707,11 +707,11 @@ const start = function (data, ID) {
                                                                                     />
                                                                                     <span>
                                                                                         {
-                                                                                            lastMessage.media[0].type == "audio" ?
+                                                                                            lastMessage?.media[0]?.type == "audio" ?
                                                                                                 Variable.lang.text.lastChatAudio :
-                                                                                                lastMessage.media[0].type == "video" ?
+                                                                                                lastMessage?.media[0]?.type == "video" ?
                                                                                                     Variable.lang.text.lastChatVideo :
-                                                                                                    lastMessage.media[0].type == "image" ?
+                                                                                                    lastMessage?.media[0]?.type == "image" ?
                                                                                                         Variable.lang.text.lastChatImage :
                                                                                                         null
                                                                                         }
@@ -724,12 +724,12 @@ const start = function (data, ID) {
 
                                                             </div>
                                                             <div class="messages_list_item_info-2">
-                                                                {lastMessage.author == Variable.myInfo._id
+                                                                {lastMessage?.author == Variable.myInfo._id
                                                                     ?
-                                                                    <p>{lastMessage.showDate ? fn.getDateFormat(lastMessage.showDate, "chatlist") : null}</p>
+                                                                    <p>{lastMessage?.showDate ? fn.getDateFormat(lastMessage?.showDate, "chatlist") : null}</p>
                                                                     :
                                                                     <p class="message--new">
-                                                                        <span>{lastMessage.showDate ? fn.getDateFormat(lastMessage.showDate, "chatlist") : null}</span>
+                                                                        <span>{lastMessage?.showDate ? fn.getDateFormat(lastMessage?.showDate, "chatlist") : null}</span>
                                                                         {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
 
                                                                     </p>
