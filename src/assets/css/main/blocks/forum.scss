@@ -2089,9 +2089,19 @@
         border: 1px solid #01c8ab;
         border-radius: 10px;
         overflow: hidden;
+        height: 120px;
+
+        @media(max-width: 1023px) {
+            height: 116px;
+        }
+
+        @media(max-width: 499px) {
+            height: 90px;
+        }
 
         img {
             max-width: 82%;
+            max-height: 100% !important;
             margin: auto;
         }
     }

@@ -1580,6 +1580,19 @@ textarea {
             color: #fff;
         }
     }
+
+    &--icon {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: inherit;
+
+        .c-button {
+            &__image {}
+
+            &__text {}
+        }
+    }
 }
 
 @keyframes animatedButton1 {
