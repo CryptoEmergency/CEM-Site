@@ -515,7 +515,7 @@ const start = function (data, ID) {
                     // console.log(Static.chatsList)
                     Static.chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
                     Static.chatsList.list_records.sort((a, b) => {
-                        new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                        new Date(a?.message[0]?.showDate) > new Date(b?.message[0]?.showDate) ? 1 : -1
                     })
                     Static.activeChat = 1
                     Static.messageList = {
@@ -570,8 +570,8 @@ const start = function (data, ID) {
                                                 return item;
                                             }
                                         })
-                                        if(this.value.length) {
-                                            if(arr.length) {
+                                        if (this.value.length) {
+                                            if (arr.length) {
                                                 Static.filteredChats = arr
                                             } else {
                                                 Static.filteredChats = []
@@ -598,7 +598,7 @@ const start = function (data, ID) {
                                         }
                                     })
                                     : */Static.filteredChats.sort((a, b) => {
-                                        new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                                        new Date(a?.message[0]?.showDate) > new Date(b?.message[0]?.showDate) ? 1 : -1
                                     })
                                             .map((item, index) => {
                                                 let user
