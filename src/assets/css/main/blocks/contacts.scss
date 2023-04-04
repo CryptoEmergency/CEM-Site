@@ -43,13 +43,14 @@
 
 .contacts_content {
     max-width: 1240px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
     display: flex;
     flex-direction: column;
 
     @media(min-width: 993px) {
         flex-direction: row;
         justify-content: space-between;
+        margin-bottom: 50px;
     }
 }
 
@@ -261,4 +262,15 @@
     display: block;
     margin-bottom: 60px;
     max-width: 530px;
+}
+
+.contacts_donats {
+    display: flex;
+    justify-content: center;
+
+    .c-button--icon {
+        &:hover {
+            color: #f57707;
+        }
+    }
 }

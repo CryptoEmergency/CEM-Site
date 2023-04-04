@@ -102,6 +102,12 @@ const start = function (data, ID) {
                 </a>
               </div>
             </div>
+            <div class="contacts_donats">
+              <a href="https://www.donationalerts.com/r/crypto_emergency" rel="nofollow nooopener" target="_blank" class="c-button c-button--icon">
+                <img class="c-button__image" src={svg.donationalerts} width="37" height="43" />
+                <span class="c-button__text">{Variable.lang.span.supportProject}</span>
+              </a>
+            </div>
           </div>
         </Elements.page.MainContainer>
       );
