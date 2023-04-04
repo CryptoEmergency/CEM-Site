@@ -591,6 +591,19 @@
                 -webkit-text-fill-color: transparent;
             }
         }
+
+        &--row {
+            flex-direction: column;
+            align-items: flex-start;
+            height: 68px;
+
+            span:nth-child(2) {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
     }
 
     &__statistic {
