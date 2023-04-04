@@ -10435,14 +10435,14 @@ input[type=date]::-webkit-calendar-picker-indicator {
     display: flex;
   }
 
-  .contacts_content {
+  /* .contacts_content {
     max-width: 1240px;
     margin: 0 auto;
     display: flex;
     flex-direction: column-reverse;
     padding: 0 30px;
 
-  }
+  } */
 
   .contacts_form_block {
     width: 100%;
@@ -11730,9 +11730,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 100%;
   }
 
-  .contacts_content {
+  /* .contacts_content {
     padding: 0 20px;
-  }
+  } */
 
   .professional_card_three_text_block {
     font-size: 11px;

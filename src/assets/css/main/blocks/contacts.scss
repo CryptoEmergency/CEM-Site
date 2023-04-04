@@ -41,11 +41,27 @@
     top: 70px;
 }
 
+.contacts_title {
+    margin-top: -30px;
+}
+
 .contacts_content {
     max-width: 1240px;
     margin: 0 auto 30px;
     display: flex;
     flex-direction: column;
+
+    @media(max-width: 1024px) {
+        max-width: 1240px;
+        margin: 0 auto 30px;
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 0 30px;
+    }
+
+    @media(max-width: 464px) {
+        padding: 0 20px;
+    }
 
     @media(min-width: 993px) {
         flex-direction: row;
@@ -110,6 +126,10 @@
     box-sizing: border-box;
     padding: 25px;
     color: #FFF;
+}
+
+.contacts_form .c-button {
+    width: 100%;
 }
 
 .btn-contacts {
