@@ -610,11 +610,11 @@ const start = function (data, ID) {
                                                     height: 23
                                                 }
 
-                                                if (lastMessage.status == 0) {
+                                                if (lastMessage?.status == 0) {
                                                     iconStatus.name = "sent_message_icon"
                                                     iconStatus.width = 21
                                                     iconStatus.height = 21
-                                                } else if (lastMessage.status == 1) {
+                                                } else if (lastMessage?.status == 1) {
                                                     iconStatus.name = "unread_message_icon"
                                                     iconStatus.height = 22
                                                 } else {
