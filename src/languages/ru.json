@@ -263,8 +263,8 @@
 		"topics": "Темы",
 		"partnersForum": "Партнеры",
 		"localmap": "Как добраться?",
-		"showAllFriends": "Показать всех"
-
+		"showAllFriends": "Показать всех",
+		"resetFilter": "Сброс фильтра"
 	},
 	"span": {
 		"company": "Компания",
