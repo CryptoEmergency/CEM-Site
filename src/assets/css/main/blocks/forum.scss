@@ -1,57 +1,57 @@
 .с-summerforum {
-    background: url("../images/summer_forum/left.png") no-repeat top 4500px left calc(50% - 600px)/300px auto,
-        url("../images/summer_forum/right.png") no-repeat top 4000px right calc(50% - 315px)/860px auto,
-        url("../images/summer_forum/violet.png") no-repeat top 7900px right calc(50% - 593px)/300px auto,
+    background: url("../images/summer_forum/left.png") no-repeat top 5319px left calc(50% - 600px)/300px auto,
+        url("../images/summer_forum/right.png") no-repeat top 4819px right calc(50% - 315px)/860px auto,
+        url("../images/summer_forum/violet.png") no-repeat top 9392px right calc(50% - 593px)/300px auto,
         url("../images/summer_forum/bottom.png") no-repeat bottom 729px center/1500px auto;
     background-color: #171717;
 
     @media(max-width: 1279px) {
-        background-position: top 3100px left calc(50% - 506px), top 2450px left calc(50% + 188px), bottom 1700px left calc(100% + 50px), bottom 729px center;
+        background-position: top 3893px left calc(50% - 506px), top 3243px left calc(50% + 188px), bottom 1700px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 1140px auto, 300px auto, 1521px auto;
     }
 
     @media(max-width: 1099px) {
-        background-position: top 3200px left, top 3000px right, bottom 1600px left calc(100% + 50px), bottom 729px center;
+        background-position: top 3981px left, top 3781px right, bottom 1600px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 500px auto, 300px auto, contain;
     }
 
     @media(max-width: 1023px) {
-        background-position: top 3200px left, top 2900px right, bottom 1550px left calc(100% + 50px), bottom 729px center;
+        background-position: top 3774px left, top 3474px right, bottom 2124px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 500px auto, 300px auto, contain;
     }
 
     @media(max-width: 979px) {
-        background-position: top 2650px left, top 2400px right, bottom 1550px left calc(100% + 50px), bottom 729px center;
+        background-position: top 3212px left, top 2962px right, bottom 1550px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 899px) {
-        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
+        background-position: top 3297px left, top 3047px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 799px) {
-        background-position: top 2750px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
+        background-position: top 3297px left, top 3047px right, bottom 1500px left calc(100% + 50px), bottom 729px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 767px) {
-        background-position: top 3500px left, top 2800px right, bottom 1500px left calc(100% + 50px), bottom 429px center;
+        background-position: top 4056px left, top 5356px right, bottom 1500px left calc(100% + 50px), bottom 429px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 699px) {
-        background-position: top 3270px left, top 2500px right, bottom 1500px left calc(100% + 50px), bottom 429px center;
+        background-position: top 3802px left, top 3032px right, bottom 1800px left calc(100% + 50px), bottom 429px center;
         background-size: 20% auto, 380px auto, 300px auto, contain;
     }
 
     @media(max-width: 599px) {
-        background-position: top 2832px left, top 2200px right, bottom 1500px left calc(100% + 50px), bottom 429px center;
+        background-position: top 3343px left, top 2711px right, bottom 1800px left calc(100% + 50px), bottom 429px center;
         background-size: 20% auto, 300px auto, 300px auto, contain;
     }
 
     @media(max-width: 499px) {
-        background-position: top 1740px left, top 1570px left calc(100%), bottom 1300px left calc(100% + 100px), bottom 429px center;
+        background-position: top 2227px left, top 2057px left calc(100%), bottom 1500px left calc(100% + 100px), bottom 429px center;
         background-size: 20% auto, 50% auto, 300px auto, contain;
     }
 
@@ -409,6 +409,14 @@
                 padding: 8px;
             }
 
+            &:first-child {
+                margin-bottom: 100px;
+
+                @media(max-width: 767px) {
+                    margin-bottom: 70px;
+                }
+            }
+
             &:first-child,
             &:nth-child(2) {
                 width: 70%;
@@ -435,6 +443,18 @@
             &:nth-child(2) {
                 width: 100%;
                 max-width: 100%;
+                margin-bottom: 70px;
+                font-weight: 700;
+                font-size: 4vw;
+
+                @media(max-width: 767px) {
+                    margin-bottom: 40px;
+                    font-size: 6vw;
+                }
+
+                @media(min-width: 1280px) {
+                    font-size: 70px;
+                }
             }
 
             &:last-of-type {
@@ -450,7 +470,7 @@
 
             img {
                 display: block;
-                margin: 10px auto;
+                margin: 30px auto;
                 max-width: 300px;
                 width: 100%;
                 height: auto;
@@ -464,7 +484,7 @@
 
             &>img {
                 &:last-child {
-                    margin-top: 20px;
+                    margin-top: 40px;
                 }
             }
         }

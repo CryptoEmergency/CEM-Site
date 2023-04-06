@@ -555,12 +555,12 @@ const start = function (data, ID) {
                                 <p>
                                     Организатор 
                                     <img src={svg.logoStandart} />
-                                     соорганизаторы
+                                     Соорганизаторы
                                      <div class="el-c">
                                         <img src={images["forum/partner_1"]} class="" />
                                         <img src={images["forum/partner_11"]} class="" />
                                     </div>
-                                      при поддержке 
+                                      При поддержке 
                                     <img src={images["summer_forum/partner_21"]} />
                                 </p>
                                 <p>

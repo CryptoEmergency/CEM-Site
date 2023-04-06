@@ -7,16 +7,18 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 
 }
 .voice-title{
-    font-size: 25px;
-    color: #FFFFFF;
+    font-size: 44px;
+    color: hsl(0, 0%, 100%);    
     text-align: center;
     
     
+    
 }
-.btns-wrap{
+.wrap-voices{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-gap: 20px;
+  
 }
     .voice-inner{
     background: rgba(255, 255, 255, 0.11);
@@ -24,10 +26,14 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     border-radius: 15px;
     position: relative;
     font-size: 13px;
+    white-space:  nowrap;
 
+
+    
 
     .list-voice{
         list-style-type: decimal!important;
+        padding-left: 0;
     }
 
     .list-el{
@@ -37,14 +43,25 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
         list-style-type: decimal;
         justify-content: space-between;
         font-size: 13px;
+        max-width: 400px;
+        .img_done{
+            width: 20px;
+            cursor: pointer;
+        }
+        .img_done-active{
+            filter: invert(8%) sepia(100%) saturate(5517%) hue-rotate(269deg) brightness(97%) contrast(98%);
+        }
     }
+
+        
     .list-el::marker{
         list-style-type: decimal;
+        
     }
     .checkbox-train{
         width: 20px;
         height: 20px;
-        margin-left: 15px;  
+        margin-left: 15px; 
 
     }
     .wrap-btn{
@@ -77,6 +94,9 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     .name{
         text-align: center;
     }
+
+        
+    
     .description{
         text-align: center;
 
@@ -87,17 +107,33 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 }
 
 @media (max-width: 992px){
-    .btns-wrap{
+    .wrap-voices{
         margin: 0 15px;
+        grid-template-columns: 2fr 2fr;
+        .voice-inner:nth-child(3) {
+            grid-column: 1 / span 2;
+            
+        }
     }
 }
 @media (max-width: 767px){
-    .btns-wrap{
+    .wrap-voices{
         grid-template-columns: 2fr 2fr;
+        .voice-inner:nth-child(3) {
+            grid-column: 1 / span 2;
+            
+        }
+        .voice-inner:nth-child(4){
+            grid-row: 3 / span 4;
+        }
     }
 }
-@media (max-width: 464px){
-    .btns-wrap{
+@media (max-width: 593px){
+    .wrap-voices{
         grid-template-columns: 1fr;
+        .voice-inner:nth-child(3){
+            grid-column: auto;
+        }
+          
     }
 }

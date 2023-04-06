@@ -53,6 +53,11 @@ const start = function (data, ID) {
                         } c-exchangerates`}
                 >
                     <div class="c-exchangerates__container c-container">
+                        {
+                            !Variable.ModalsPage.length
+                                ? <h2 class="c-exchangerates__title">{Variable.lang.h.exchangeRates}</h2>
+                                : null
+                        }
                         <table class="c-exchangerates__table" cellspacing="0" cellpadding="10" align="center">
                             <thead>
                                 <tr style="border-radius: 4px;">
