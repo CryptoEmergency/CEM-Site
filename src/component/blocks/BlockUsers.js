@@ -285,7 +285,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                 <div class="new_professional_card userLoad" data-id={user._id}>
                                     <div class="new_professional_card_top">
                                         <div class="new_professional_card_avatar">
-                                            <Avatar author={user} nickName={true} speciality={[user.information && user.information.speciality ? user.information.speciality : false]} />
+                                            <Avatar author={user} nickName={true} speciality={[user.information?.speciality ? user.information.speciality : `(${Variable.lang.p.notSpec})`]} />
                                         </div>
                                         {
                                             user.rank.creator
@@ -318,7 +318,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                                             style="width: 50%; margin: 0 auto;"
                                             class="new_professional_spec "
                                         >
-                                            {user.information ? user.information.speciality : ''}
+                                            {user.information ? user.information.speciality ? user.information.speciality : `(${Variable.lang.p.notSpec})` : null}
                                         </p>
                                         <div class="new_professional_badges">
                                             {
