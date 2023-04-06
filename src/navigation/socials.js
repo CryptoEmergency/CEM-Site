@@ -126,7 +126,7 @@ const start = function (data, ID) {
             <h1 class="H1">{Static.title}</h1>
             <div class="block-section social">
               <h3 class="H3">Социальные сети</h3>
-              <div class="btns-wrap">
+              <div class="btns-wrap-1">
                 {
                   arrSocials.map((item, index) => {
                     console.log('=c559f5=', item.images)
@@ -155,9 +155,10 @@ const start = function (data, ID) {
                     console.log('=c559f5=', item.link)
                     return (
                       <a href={item.link} class="btn-item-2" target="_blank">
-                        <img class="btn-item_img" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
+                        {/* <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} /> */}
                         <span class="SP2">{item.name}
                           <p class="p1">
+                            <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
                             {item.opis}
                           </p>
                         </span>
@@ -177,19 +178,28 @@ const start = function (data, ID) {
               <h5 class="H3">Мобильные приложения</h5>
               <div class="btns-wrap-3">
 
-                <div class="#" >
-                  <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency&hl=en&gl=US" class="btn-item-2" target="_blank">
-                    <img class="btn-item_img" src={svg['cem_logo']} alt="Telegram" />
-                    <h5 class="H5">Crypto Emergency
-                      <p class="P2">
-                        Here you can find crypto experts from any country, in any language and learn crypto skills from them: what is blockchain, what is cryptocurrency, how does it work, how to make money on it, how to create your own crypto startup and get other tips.
-                        Communicating on the platform, you get up-to-date knowledge and coins that can be exchanged for real money. Our slogan: “Create2Earn” - create and earn. Every person on the platform earns CEM coins for every action.
-                        Our project is international and available in 60 languages.
-                      </p>
-                    </h5>
-                    {/* <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" /> */}
-                  </a>
+
+                <div class="btn-item-3">
+                  {/* <img class="btn-item_img" src={svg['cem_logo']} alt="Telegram" /> */}
+                  <h5 class="H5">Crypto Emergency
+                    <p class="P2">
+                      <img class="btn-item_img-3" src={svg['cem_logo']} alt="Telegram" />
+                      Here you can find crypto experts from any country, in any language and learn crypto skills from them: what is blockchain, what is cryptocurrency, how does it work, how to make money on it, how to create your own crypto startup and get other tips.
+                      Communicating on the platform, you get up-to-date knowledge and coins that can be exchanged for real money. Our slogan: “Create2Earn” - create and earn. Every person on the platform earns CEM coins for every action.
+                      Our project is international and available in 60 languages.
+                    </p>
+                  </h5>
+                  <div class="apps-wrap">
+                    <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency&hl=en&gl=US" class="go-apps" target="_blank">
+                      <img src={svg['googleplay']}></img>
+                    </a>
+                    <a href="https://apps.apple.com/ru/app/crypto-emergency/id1635628021" class="go-apps" target="_blank">
+                      <img src={svg['appstore']}></img>
+                    </a>
+                  </div>
+
                 </div>
+
 
                 {/* <div class="#">
                   <a href="https://apps.apple.com/ru/app/crypto-emergency/id1635628021" class="btn-item-2" target="_blank">
@@ -199,10 +209,11 @@ const start = function (data, ID) {
                   </a>
                 </div> */}
 
-                <a href="https://play.google.com/store/apps/details?id=com.cemwallet&hl=en&gl=US" class="btn-item-2" target="_blank">
-                  <img class="btn-item_img" src={svg['cem_logo']} alt="Telegram" />
+                <a href="https://play.google.com/store/apps/details?id=com.cemwallet&hl=en&gl=US" class="btn-item-3" target="_blank">
+                  {/* <img class="btn-item_img-3" src={svg['cem_logo']} alt="Telegram" /> */}
                   <h5 class="H5">CEM Wallet
                     <p class="P2">
+                      <img class="btn-item_img-3" src={svg['cem_logo']} alt="Telegram" />
                       CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
                     </p>
                   </h5>
