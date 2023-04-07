@@ -644,6 +644,11 @@ $lightBlue: #00A5F7;
   height: auto;
   max-height: 365px;
   margin-bottom: 20px;
+  img{
+    // width: 150px;
+    height: 220px;
+    background-size: cover;
+  }
 }
 
 // swiper slider for block our team
