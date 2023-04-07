@@ -545,6 +545,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     class="c-footer__link"
                                                     href="/about/"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.about,
                                                             items: fn.itemsMenu.onlyPage({
@@ -558,6 +562,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.blog,
                                                             items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
@@ -570,6 +578,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.career,
                                                             items: fn.itemsMenu.onlyPage({
@@ -584,6 +596,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.h.mediaUs,
                                                             items: fn.itemsMenu.onlyPage({
@@ -638,6 +654,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.contacts,
                                                             items: fn.itemsMenu.onlyPage({
@@ -652,6 +672,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.h.affiliate,
                                                             items: fn.itemsMenu.onlyPage({
@@ -693,6 +717,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.userTerms,
                                                             items: fn.itemsMenu.onlyPage({
@@ -707,6 +735,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.dataPolicy,
                                                             items: fn.itemsMenu.onlyPage({
@@ -725,6 +757,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                 <a
                                                     class="c-footer__link"
                                                     onclick={(e) => {
+                                                        fn.modals.close(ID);
+                                                        if (data.Burger) {
+                                                            data.Burger.classList.remove("c-userpanel__icon--active")
+                                                        }
                                                         fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.cookies,
                                                             items: fn.itemsMenu.onlyPage({
