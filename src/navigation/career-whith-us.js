@@ -6,6 +6,590 @@ import {
     load
 } from "@betarost/cemserver/cem.js";
 import Elements from "@src/elements/export.js";
+
+const vacancies = [
+    {
+        icon: "product",
+        title: "HTML-верстальщик",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Верстка шаблонов веб-страниц «с нуля»"
+            },
+            {
+                text: "Изменение существующих шаблонов сайта"
+            },
+            {
+                text: "Взаимодействие с дизайнером, программистом"
+            },
+            {
+                text: "Тестирование функционала готовых проектов"
+            },
+        ],
+        requirements: [
+            {
+                text: "Умение уверенно верстать флексами и гридами, понимать чем одно отличается от другого"
+            },
+            {
+                text: "JS-программирование простейшей логики форм будет большим плюсом (валидация, модалки)"
+            },
+            {
+                text: "Аккуратность, внимательность, педантичность к своему и чужому коду"
+            },
+            {
+                text: "Опыт работы верстальщиком или Front-end разработчиком от 1 года"
+            },
+            {
+                text: "Кроссбраузерная pixel-perfect верстка и оптимизация под мобильные девайсы"
+            },
+            {
+                text: "Отличные знания HTML5, CSS3, SCSS, Figma"
+            },
+            {
+                text: "Знания JavaScript и библиотек (jQuery), DOM"
+            },
+            {
+                text: "Навыки редактирования изображений, фотографий, минимальные знания Adobe Photoshop"
+            }
+        ],
+        skills: [
+            {
+                tag: "JavaScript"
+            },
+            {
+                tag: "CSS3"
+            },
+            {
+                tag: "HTML5"
+            },
+            {
+                tag: "jQuery"
+            },
+            {
+                tag: "Git"
+            },
+            {
+                tag: "Figma"
+            },
+            {
+                tag: "Adobe Photoshop"
+            },
+            {
+                tag: "Web-дизайн"
+            },
+            {
+                tag: "Чувство стиля"
+            },
+            {
+                tag: "Креативность"
+            },
+        ]
+    },
+    {
+        icon: "product",
+        title: "Frontend developer",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Поддержка и улучшение существующего продукта"
+            },
+            {
+                text: "Разработка и развитие клиентской части проекта на JavaScript"
+            },
+            {
+                text: "Постоянное улучшение своих знаний в области веб-технологий"
+            },
+        ],
+        requirements: [
+            {
+                text: "Отличное знание языка JavaScript"
+            },
+            {
+                text: "Навыки работы с GIT"
+            },
+            {
+                text: "Уверенное знание HTML5, CSS3"
+            },
+            {
+                text: "Умение предлагать рациональные решения поставленных задач"
+            },
+            {
+                text: "Стремление к профессиональному росту‚ обязательность‚ ответственность"
+            },
+            {
+                text: "Умение разбираться в чужом коде"
+            },
+            {
+                text: "Опыт работы с js-фреймворками (Backbone, AngularJS, Vue.js и др.)"
+            },
+        ],
+        skills: [
+            {
+                tag: "JavaScript"
+            },
+            {
+                tag: "Node.js"
+            },
+            {
+                tag: "Git"
+            },
+            {
+                tag: "CSS"
+            },
+            {
+                tag: "HTML"
+            },
+            {
+                tag: "MongoDB"
+            },
+            {
+                tag: "JSX"
+            },
+        ]
+    },
+    {
+        icon: "product",
+        title: "Frontend React developer",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Разработка UI"
+            },
+            {
+                text: "Фронтенд разработка нового функционала"
+            },
+            {
+                text: "Сопровождение имеющегося кода, его доработка и оптимизация"
+            },
+            {
+                text: "Постоянное улучшение своих знаний в области веб-технологий"
+            },
+            {
+                text: "Умение работать самостоятельно, стремление к саморазвитию, высокая обучаемость, внимательность"
+            },
+        ],
+        requirements: [
+            {
+                text: "Отличное знание языка JavaScript"
+            },
+            {
+                text: "Знание и умение работать с фреймворками Vue/React"
+            },
+            {
+                text: "Навыки работы с GIT"
+            },
+            {
+                text: "Уверенное знание HTML5, CSS3"
+            },
+            {
+                text: "Умение предлагать рациональные решения поставленных задач"
+            },
+            {
+                text: "Стремление к профессиональному росту‚ обязательность‚ ответственность"
+            },
+            {
+                text: "Умение разбираться в чужом коде"
+            },
+        ],
+        skills: [
+            {
+                tag: "JavaScript"
+            },
+            {
+                tag: "Node.js"
+            },
+            {
+                tag: "Git"
+            },
+            {
+                tag: "CSS"
+            },
+            {
+                tag: "HTML"
+            },
+            {
+                tag: "MongoDB"
+            },
+            {
+                tag: "React"
+            },
+            {
+                tag: "Vue"
+            },
+            {
+                tag: "JSX"
+            },
+        ]
+    },
+    {
+        icon: "security",
+        title: "Backend developer",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Разработка кода backend части web проекта"
+            },
+            {
+                text: "Поддержка существующей кодовой базы"
+            },
+            {
+                text: "Разрабатывать новые компоненты системы"
+            },
+            {
+                text: "Участвовать в проработке архитектурных решений"
+            },
+        ],
+        requirements: [
+            {
+                text: "Глубокие знания Javascript и Node.js"
+            },
+            {
+                text: "Опыт работы с NodeJS в baсkend приложениях"
+            },
+            {
+                text: "Опыт работы с MongoDB"
+            },
+            {
+                text: "Опыт работы с Git"
+            },
+            {
+                text: "Опыт использования Redis"
+            },
+            {
+                text: "Понимание REST-архитектуры, опыт разработки серверной части REST(REST API)"
+            },
+            {
+                text: "Умение писать чистый, валидный код"
+            },
+        ],
+        skills: [
+            {
+                tag: "JavaScript"
+            },
+            {
+                tag: "Git"
+            },
+            {
+                tag: "Node.js"
+            },
+            {
+                tag: "MongoDB"
+            },
+            {
+                tag: "REST"
+            },
+        ]
+    },
+    {
+        icon: "security",
+        title: "DevOps",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Обеспечение бесперебойного функционирования IT–инфраструктуры"
+            },
+            {
+                text: "Устранение инцидентов и неисправностей в работе IT-инфраструктуры"
+            },
+            {
+                text: "Поддерживать и развивать базовую инфраструктуру (мониторинг, логирование, etc)"
+            },
+            {
+                text: "Поддерживать и развивать инфраструктуру проектов (CDN, защита от DDoS, etc)"
+            },
+            {
+                text: "Администрирование удаленных серверов на Linux"
+            },
+        ],
+        requirements: [
+            {
+                text: "Опыт работы с *nix системами, уверенное знание Linux"
+            },
+            {
+                text: "Понимание механизма работы сетей (протоколы (в том числе видео), cdn, облака и т.д.)"
+            },
+            {
+                text: "Опыт работы с Nginx"
+            },
+            {
+                text: "Опыт работы с Docker Swarm"
+            },
+            {
+                text: "Навыки программирования на скриптовых языках (bash/Python)"
+            },
+        ],
+        skills: [
+            {
+                tag: "CDN"
+            },
+            {
+                tag: "DDoS"
+            },
+            {
+                tag: "Linux"
+            },
+            {
+                tag: "Nginx"
+            },
+            {
+                tag: "Docker Swarm"
+            },
+            {
+                tag: "bash"
+            },
+        ]
+    },
+    {
+        icon: "product",
+        title: "React native developer",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Разработка кросс платформенных приложений на React Native с нуля"
+            },
+            {
+                text: "Поддержка и доработка существующий приложений"
+            },
+            {
+                text: "Участие в оценке и планировании"
+            },
+        ],
+        requirements: [
+            {
+                text: "Отличное знание React Native, его использование на коммерческих проектах"
+            },
+            {
+                text: "Понимание концепции работы React Native и встраиваемых модулей"
+            },
+            {
+                text: "Понимание концепции работы React Hooks"
+            },
+            {
+                text: "Хорошие знания TypeScript"
+            },
+            {
+                text: "Опыт работы Firebase"
+            },
+            {
+                text: "Знание работы Xcode, Android Studio"
+            },
+            {
+                text: "Наличие практического опыта работы с Google Play и App Store (включая подписи приложений, заливку и публикацию в сторы)"
+            },
+        ],
+        skills: [
+            {
+                tag: "React"
+            },
+            {
+                tag: "React Native"
+            },
+            {
+                tag: "TypeScript"
+            },
+            {
+                tag: "Firebase"
+            },
+            {
+                tag: "Xcode"
+            },
+            {
+                tag: "Android Studio"
+            },
+            {
+                tag: "Google Play"
+            },
+            {
+                tag: "App Store"
+            },
+        ]
+    },
+    {
+        icon: "security",
+        title: "Blockchain developer",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Участвовать в проектировании, разработке и внедрении блокчейн-проектов"
+            },
+            {
+                text: "Разрабатывать, тестировать, анализировать смарт-контракты"
+            },
+        ],
+        requirements: [
+            {
+                text: "Базовое понимание технологии blockchain"
+            },
+            {
+                text: "Базовые знания blockchain-инфраструктуры (NFT-marketplace, DAO, DeFI, DEX, и пр)"
+            },
+            {
+                text: "Понимание Blockchain. Знание Solidity, hardhat, web3"
+            },
+            {
+                text: "Умение читать и разрабатывать smart-контракты"
+            },
+            {
+                text: "Опыт выпуска собственных токенов на Ethereum"
+            },
+            {
+                text: "Будет плюсом опыт создания собственных монет"
+            },
+            {
+                text: "Широкий технический кругозор (знание других языков программирования, инфраструктурных решений, бэкграунд в системном администрировании и DevOps)"
+            },
+            {
+                text: "Опыт разворачивания собственных нод и оракулов"
+            },
+        ],
+        skills: [
+            {
+                tag: "blockchain"
+            },
+            {
+                tag: "NFT"
+            },
+            {
+                tag: "DAO"
+            },
+            {
+                tag: "DeFI"
+            },
+            {
+                tag: "Xcode"
+            },
+            {
+                tag: "DEX"
+            },
+            {
+                tag: "Solidity"
+            },
+            {
+                tag: "web3"
+            },
+        ]
+    },
+    {
+        icon: "marketing",
+        title: "SEO-специалист",
+        status: "active",
+        experience: "1–3 года",
+        fulltime: true,
+        fullday: true,
+        responsibilities: [
+            {
+                text: "Работа с информационными статьями репутационного характера"
+            },
+            {
+                text: "SEO-оптимизация сайтов"
+            },
+            {
+                text: "Проработка поисковых подсказок"
+            },
+            {
+                text: "Фиксация результатов поиска Яндекс и Google"
+            },
+            {
+                text: "Анализ результатов поиска в системах Яндекс и Google по запросам"
+            },
+            {
+                text: "Регулярный анализ динамики приоритетных запросов"
+            },
+            {
+                text: "Подбор и анализ целевых запросов, составление семантического ядра"
+            },
+            {
+                text: "Поиск новых способов продвижения сайта"
+            },
+            {
+                text: "Создавать и публиковать уникальный и интересный контент в Instagram, Telegram, YouTube, ВКонтакте"
+            },
+            {
+                text: "Оформление аккаунтов, ежедневный постинг, копирайтинг / рерайтинг. Посевы в пабликах"
+            },
+            {
+                text: "Разработка и реализация стратегии SMM для привлечения аудитории, составление контент-плана"
+            },
+        ],
+        requirements: [
+            {
+                text: "Хорошее знание принципов и факторов ранжирования в Яндекс и Google"
+            },
+            {
+                text: "Умение работать с сервисами: ahrefs, topvisor, checktrust, Google Analytics, Яндекс Метрика и т. д."
+            },
+            {
+                text: "Умение работать в команде, работать с большими объемами информации, быстро принимать решения, воплощать их в жизнь и нести ответственность за результат"
+            },
+            {
+                text: "Знаете что такое информационный стиль и пишите соответствующие тексты, без орфографических и пунктуационных ошибок"
+            },
+            {
+                text: "Постоянно развиваетесь и готовы бесконечно совершенствовать аккаунты и контент"
+            },
+        ],
+        skills: [
+            {
+                tag: "SEO"
+            },
+            {
+                tag: "Яндекс Метрика"
+            },
+            {
+                tag: "Google Analytics"
+            },
+            {
+                tag: "checktrust"
+            },
+            {
+                tag: "topvisor"
+            },
+            {
+                tag: "ahrefs"
+            },
+            {
+                tag: "Instagram"
+            },
+            {
+                tag: "Telegram"
+            },
+            {
+                tag: "YouTube"
+            },
+            {
+                tag: "ВКонтакте"
+            },
+            {
+                tag: "Яндекс"
+            },
+            {
+                tag: "Google"
+            },
+        ]
+    }
+];
+
 const start = function (data, ID) {
 
     load({
@@ -47,6 +631,28 @@ const start = function (data, ID) {
                                     <div class="c-jobs__iconadvantages c-jobs__iconadvantages--contract"></div>
                                     <h5>{Variable.lang.p.employmentStandart}</h5>
                                     <p>{Variable.lang.p.employmentStandartDesc}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="c-jobs__how">
+                            <h2 class="c-jobs__subtitle">{Variable.lang.h.how_get_job}</h2>
+                            <div class="c-jobs__listhow">
+                                <div class="c-jobs__itemhow">
+                                    <span>01</span>
+                                    <p>{Variable.lang.p.stepGetJobOne}</p>
+                                </div>
+                                <div class="c-jobs__itemhow">
+                                    <span>02</span>
+                                    <p>{Variable.lang.p.stepGetJobTwo}</p>
+                                </div>
+                                <div class="c-jobs__itemhow">
+                                    <span>03</span>
+                                    <p>{Variable.lang.p.stepGetJobThree}</p>
+                                </div>
+                                <div class="c-jobs__itemhow">
+                                    <span>04</span>
+                                    <p>{Variable.lang.p.stepGetJobFour}</p>
                                 </div>
                             </div>
                         </div>
@@ -110,562 +716,86 @@ const start = function (data, ID) {
                                 </a>
                             </div>
                         </div>
+                        
+                        <div class="c-jobs__vacancies">
+                            {
+                                vacancies.map(function (vacancy, i) {
+                                    // console.log('=7b5cad= vacancy =', vacancy)
+                                    return (
+                                        <div class="c-jobs__vacancy">
+                                            <div class="c-jobs__headervacancy">
+                                                <i
+                                                    class={[
+                                                        "c-jobs__iconprofession",
+                                                        `c-jobs__iconprofession--${vacancy.icon}`
+                                                    ]}
+                                                ></i>
+                                                <div class="c-jobs__titlevacancy">{vacancy.title}</div>
+                                                <div class="c-jobs__statusvacancy">
+                                                    {vacancy.status == "active" ? "Активно" : "Не активно"}
+                                                </div>
+                                            </div>
+                                            <div class="c-jobs__mainvacancy">
+                                                <p class="c-jobs__experience">Требуемый опыт работы: {vacancy.experience}</p>
+                                                <p class="c-jobs__fullday">{vacancy.fullday ? "Полная" : "Неполная"} занятость, {vacancy.fulltime ? " полный" : " неполный"} день</p>
 
-                        <div class="c-jobs__how">
-                            <h2 class="c-jobs__subtitle">{Variable.lang.h.how_get_job}</h2>
-                            <div class="c-jobs__listhow">
-                                <div class="c-jobs__itemhow">
-                                    <span>01</span>
-                                    <p>{Variable.lang.p.stepGetJobOne}</p>
-                                </div>
-                                <div class="c-jobs__itemhow">
-                                    <span>02</span>
-                                    <p>{Variable.lang.p.stepGetJobTwo}</p>
-                                </div>
-                                <div class="c-jobs__itemhow">
-                                    <span>03</span>
-                                    <p>{Variable.lang.p.stepGetJobThree}</p>
-                                </div>
-                                <div class="c-jobs__itemhow">
-                                    <span>04</span>
-                                    <p>{Variable.lang.p.stepGetJobFour}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        HTML-верстальщик
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
+                                                <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
+                                                <p>В данный момент ведется разработка нескольких крупных проектов.</p>
 
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+                                                    <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
+                                                        <p class="c-jobs__subsubtitle">Обязанности:</p>
+                                                        {
+                                                            vacancy.responsibilities.map(function (item, ind) {
+                                                                return (
+                                                                    <p style="font-size: 14px; margin-bottom: 7px; color: #CACACA">{item.text}{ind == vacancy.responsibilities.length - 1 ? "." : ";"}</p>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                    <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
+                                                        <p class="c-jobs__subsubtitle">Требования:</p>
+                                                        {
+                                                            vacancy.requirements.map(function (item, ind) {
+                                                                return (
+                                                                    <p style="font-size: 14px; margin-bottom: 7px; color: #CACACA">{item.text}{ind == vacancy.requirements.length - 1 ? "." : ";"}</p>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
 
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Верстка шаблонов веб-страниц «с нуля»</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Изменение существующих шаблонов сайта</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Взаимодействие с дизайнером, программистом</p>
-                                            <p style="font-size: 14px; color: #CACACA">Тестирование функционала готовых проектов</p>
+                                                <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
+                                                <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
+
+                                                <p class="c-jobs__subsubtitle">Ключевые навыки</p>
+                                                <ul class="c-jobs__skills">
+                                                    {
+                                                        vacancy.skills.map(function (item, ind) {
+                                                            return (
+                                                                <li>{item.tag}</li>
+                                                            )
+                                                        })
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div class="c-jobs__actionvacancy">
+                                                <div
+                                                    class="c-button"
+                                                    onclick={(e) => {
+                                                        Variable.SetModals({ name: "ModalWorkMessage", data: {} })
+                                                        e.stopPropagation();
+                                                    }}
+                                                >
+                                                    <div class="c-button__text">
+                                                        Откликнуться
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение уверенно верстать флексами и гридами, понимать чем одно отличается от другого</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">JS-программирование простейшей логики форм будет большим плюсом (валидация, модалки)</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Аккуратность, внимательность, педантичность к своему и чужому коду</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы верстальщиком или Front-end разработчиком от 1 года</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Крос-браузерная pixel-perfect верстка и оптимизация под мобильные девайсы</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Отличные знания HTML5, CSS3, SCSS, Figma;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Знания JavaScript и библиотек (jQuery), DOM;</p>
-                                            <p style="font-size: 14px; color: #CACACA">Навыки редактирования изображений, фотографий, минимальные знания Adobe Photoshop;</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">JavaScript</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">CSS3</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">HTML5</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">jQuery</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Git</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Figma</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Adobe Photoshop</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Web-дизайн</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Чувство стиля</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Креативность</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        Frontend developer
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
-
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
-
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поддержка и улучшение существующего продукта</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Разработка и развитие клиентской части проекта на JavaScript;</p>
-                                            <p style="font-size: 14px; color: #CACACA">Постоянное улучшение своих знаний в области веб-технологий;</p>
-                                        </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Отличное знание языка JavaScript;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Навыки работы с GIT.</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Уверенное знание HTML5, CSS3</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение предлагать рациональные решения поставленных задач;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Стремление к профессиональному росту‚ обязательность‚ ответственность;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение разбираться в чужом коде;</p>
-                                            <p style="font-size: 14px; color: #CACACA">Опыт работы с js-фреймворками (Backbone, AngularJS, Vue.js и др.)</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">JavaScript</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Node.js</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Git</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">CSS</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">HTML</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">MongoDB</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">JSX</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        Frontend React developer
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
-
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
-
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Разработка UI</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Фронтенд разработка нового функционала;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Сопровождение имеющегося кода, его доработка и оптимизация;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Постоянное улучшение своих знаний в области веб-технологий;</p>
-                                            <p style="font-size: 14px; color: #CACACA">Умение работать самостоятельно, стремление к саморазвитию, высокая обучаемость, внимательность;</p>
-                                        </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Отличное знание языка JavaScript;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Знание и умение работать с фреймворками Vue/React</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Навыки работы с GIT.</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Уверенное знание HTML5, CSS3</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение предлагать рациональные решения поставленных задач;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Стремление к профессиональному росту‚ обязательность‚ ответственность;</p>
-                                            <p style="font-size: 14px; color: #CACACA">Умение разбираться в чужом коде;</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">JavaScript</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Node.js</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Git</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">CSS</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">HTML</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">MongoDB</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">React</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Vue</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">JSX</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        Backend developer
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
-
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
-
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Разработка кода backend части web проекта</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поддержка существующей кодовой базы</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Разрабатывать новые компоненты системы;</p>
-                                            <p style="font-size: 14px; color: #CACACA">Участвовать в проработке архитектурных решений</p>
-                                        </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Глубокие знания Javascript и Node.js;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы с NodeJS в baсkend приложениях</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы с MongoDB</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы с Git</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт использования Redis</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание REST-архитектуры, опыт разработки серверной части REST(REST API);</p>
-                                            <p style="font-size: 14px; color: #CACACA">Умение писать чистый, валидный код</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">JavaScript</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Git</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Node.js</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">MongoDB</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">REST</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        DevOps
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
-
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
-
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Обеспечение бесперебойного функционирования IT–инфраструктуры;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Устранение инцидентов и неисправностей в работе IT-инфраструктуры;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поддерживать и развивать базовую инфраструктуру (мониторинг, логирование, etc);</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поддерживать и развивать инфраструктуру проектов (CDN, защита от DDoS, etc);</p>
-                                            <p style="font-size: 14px; color: #CACACA">Администрирование удаленных серверов на Linux;</p>
-                                        </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы с *nix системами, уверенное знание Linux;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание механизма работы сетей (протоколы (в том числе видео), cdn, облака и т.д.);</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы с Nginx;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы с Docker Swarm</p>
-                                            <p style="font-size: 14px; color: #CACACA">Навыки программирования на скриптовых языках (bash/Python);</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">CDN</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">DDoS</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Linux</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Nginx</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Docker Swarm</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">bash</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i style="display: block; margin-right: 10px" class="c-jobs__iconprofession c-jobs__iconprofession--product"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        React native developer
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
-
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
-
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Разработка кросс платформенных приложений на React Native с нуля;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поддержка и доработка существующий приложений;</p>
-                                            <p style="font-size: 14px; color: #CACACA">Участие в оценке и планировании;</p>
-                                        </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Отличное знание React Native, его использование на коммерческих проектах</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание концепции работы React Native и встраиваемых модулей;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание концепции работы React Hooks;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Хорошие знания TypeScript</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт работы Firebase</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Знание работы Xcode, Android Studio</p>
-                                            <p style="font-size: 14px; color: #CACACA">Наличие практического опыта работы с Google Play и App Store (включая подписи приложений, заливку и публикацию в сторы)</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">React</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">React Native</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">TypeScript</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Firebase</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Xcode</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Android Studio</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Google Play</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">App Store</div>
-
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--security"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        Blockchain developer
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
-
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
-
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Участвовать в проектировании, разработке и внедрении блокчейн-проектов</p>
-                                            <p style="font-size: 14px; color: #CACACA">Разрабатывать, тестировать, анализировать смарт-контракты</p>
-                                        </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Базовое понимание технологии blockchain</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Базовые знания blockchain-инфраструктуры (NFT-marketplace, DAO, DeFI, DEX, и пр).</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Понимание Blockchain. Знание Solidity, hardhat, web3</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение читать и разрабатывать smart-контракты;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Опыт выпуска собственных токенов на Ethereum;</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Будет плюсом опыт создания собственных монет.</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Широкий технический кругозор (знание других языков программирования, инфраструктурных решений, бэкграунд в системном администрировании и DevOps).</p>
-                                            <p style="font-size: 14px; color: #CACACA">Опыт разворачивания собственных нод и оракулов</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">blockchain</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">NFT</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">DAO</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">DeFI</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Xcode</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">DEX</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Solidity</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">web3</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: #2B3040; border: 1px solid #353C50; padding: 20px; border-radius: 5px; margin-bottom: 10px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-                                    <i class="c-jobs__iconprofession c-jobs__iconprofession--marketing"></i>
-                                    <div style="font-size: 26px; font-weight: 600">
-                                        SEO-специалист
-                                    </div>
-                                    <div style="text-transform: uppercase; color: #0FB500; font-weight: 800; text-decoration: none; background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                        Активно
-                                    </div>
-                                </div>
-                                <div>
-                                    <p style="margin-bottom: 0; color: #CACACA">Требуемый опыт работы: 1–3 года</p>
-                                    <p style="color: #CACACA">Полная занятость, полный день</p>
-
-                                    <p style="margin-bottom: 0;">Работа исключительно в офисе.</p>
-                                    <p>В данный момент ведется разработка нескольких крупных проектов.</p>
-
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px; margin-right: 10px">
-                                            <p style="font-weight: 600; font-size: 17px">Обязанности:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Работа с информационными статьями репутационного характера</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">SEO-оптимизация сайтов</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Проработка поисковых подсказок</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Фиксация результатов поиска Яндекс и Google</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Анализ результатов поиска в системах Яндекс и Google по запросам</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Регулярный анализ динамики приоритетных запросов</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Подбор и анализ целевых запросов, составление семантического ядра.</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Поиск новых способов продвижения сайта.</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Создавать и публиковать уникальный и интересный контент в Instagram, Telegram, YouTube, ВКонтакте.</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Оформление аккаунтов, ежедневный постинг, копирайтинг / рерайтинг. Посевы в пабликах.</p>
-                                            <p style="font-size: 14px; color: #CACACA">Разработка и реализация стратегии SMM для привлечения аудитории, составление контент-плана.</p>
-                                        </div>
-                                        <div style="background: #32384B; border: 1px solid #353C50; padding: 10px; border-radius: 5px">
-                                            <p style="font-weight: 600; font-size: 17px">Требования:</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Хорошее знание принципов и факторов ранжирования в Яндекс и Google</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение работать с сервисами: ahrefs, topvisor, checktrust, Google Analytics, Яндекс Метрика и т. д.</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Умение работать в команде, работать с большими объемами информации, быстро принимать решения, воплощать их в жизнь и нести ответственность за результат</p>
-                                            <p style="font-size: 14px; margin-bottom: 5px; color: #CACACA">Знаете что такое информационный стиль и пишите соответствующие тексты, без орфографических и пунктуационных ошибок.</p>
-                                            <p style="font-size: 14px; color: #CACACA">Постоянно развиваетесь и готовы бесконечно совершенствовать аккаунты и контент.</p>
-                                        </div>
-                                    </div>
-
-                                    <p style="margin-bottom: 0">Рабочая неделя 5/2 c началом рабочего дня (10:00 - 18:00 Мск)</p>
-                                    <p>Мы находимся в Новороссийске, можем организовать встречу в офисе.</p>
-
-                                    <p style="font-weight: 600; font-size: 17px">Ключевые навыки</p>
-                                    <div style="display: flex; flex-wrap: wrap">
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">SEO</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Яндекс Метрика</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Google Analytics</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">checktrust</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">topvisor</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">ahrefs</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Instagram</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Telegram</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">YouTube</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">ВКонтакте</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Яндекс</div>
-                                        <div style="background: #32384B; padding: 5px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #353C50; border-radius: 5px">Google</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        style="padding: 1px; background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%); border-radius: 5px; cursor: pointer; text-align: center; width: 200px; margin: 0 auto; margin-top: 20px"
-                                        onclick={(e) => {
-                                            Variable.SetModals({ name: "ModalWorkMessage", data: {} })
-                                            e.stopPropagation();
-                                        }}
-                                    >
-                                        <div style="background: #2B3040; border-radius: 5px; line-height: 42px; font-weight: 600">
-                                            Откликнуться
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    )
+                                })
+                            }
                         </div>
                         <div class="c-job__withus">
                             <h2 class="c-jobs__subtitle">{Variable.lang.p.waitYouTeam}</h2>
