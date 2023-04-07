@@ -130,7 +130,7 @@ const start = function (data, ID) {
                               <div class="icons-img">
                                 <img src={svg[`${item.channel}-icon`]}></img>
                               </div>
-                              <span class="icons-text">{item.channel}</span>
+                              {/* <span class="icons-text">{item.channel}</span> */}
                             </a>
                           )
                         })
@@ -143,11 +143,11 @@ const start = function (data, ID) {
 
                 <div class="social-btns">
                   <a href={Static.item.whitePaperLink} target="_blank" class={["btn-item", !Static.item.whitePaperLink ? "social-btn_passive" : null]}>
-                    <div class="btn-item_text">White paper</div>
+                    <div class="btn-item_text">WhitePaper</div>
                   </a>
 
                   <a href={Static.item.siteLink} target="_blank" class={["btn-item", !Static.item.siteLink ? "social-btn_passive" : null]}>
-                    <div class="btn-item_text">Web site</div>
+                    <div class="btn-item_text">WebSite</div>
                   </a>
                 </div>
               </div>

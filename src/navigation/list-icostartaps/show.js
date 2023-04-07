@@ -95,7 +95,7 @@ const start = function (data, ID) {
                     <span class="info-summ_done">of</span>
                     <span class="info-summ_done">
                       $
-                      {`${Static.item.targetMoney} (${Math.round(
+                      {`${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (${Math.round(
                         ((Static.item.nowMoney && Static.item.nowMoney > 0
                           ? Static.item.nowMoney
                           : 0) *
