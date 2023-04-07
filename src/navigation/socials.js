@@ -50,6 +50,31 @@ const arrSocials = [
     name: "Tiktok",
     lang: "us"
   },
+  {
+    link: "https://youtube.com/channel/UCb9Fx-fN",
+    icon: "youtube_icon",
+    name: "Youtube",
+    lang: "ru"
+  },
+  {
+    link: "https://vk.com/club209389938",
+    icon: "vk_icon",
+    name: "Vk",
+    lang: "ru"
+  },
+  {
+    link: "https://www.facebook.com/groups/crypt",
+    icon: "facebook_icon",
+    name: "Facebook",
+    lang: "us"
+  },
+  {
+    link: "https://twitter.com/cryptoemergency",
+    icon: "twitter",
+    name: "Twitter",
+    lang: "us"
+  }
+
 
 
   // {
@@ -69,7 +94,7 @@ const sait = [{
 },
 {
   link: "https://sberunity.ru/profile/879d88aa-4729-4788-a541-20cc8cc3cb14",
-  icon: "telegram",
+  icon: "sber",
   name: "Сбер Unity",
   opis: "CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet"
 },
@@ -85,19 +110,37 @@ const sait = [{
   name: "ChainList",
   opis: "Chainlist — это список сетей EVM. Пользователи могут использовать эту информацию для подключения своих кошельков и поставщиков промежуточного программного обеспечения Web3 к соответствующему идентификатору цепочки и идентификатору сети для подключения к правильной цепочке."
 },
-{
+  // {
+  //   link: "https://cemscan.com",
+  //   icon: "cem_logo",
+  //   name: "Block Explorer",
+  //   opis: "Портал блоков",
+  //   small: true
+  // },
+  // {
+  //   link: "https://github.com/CryptoEmergency",
+  //   icon: "github_icon",
+  //   name: "Github",
+  //   opis: "Ссылка на наш github",
+  //   small: true
+  // }
+]
+const sait_small = [{
+
   link: "https://cemscan.com",
   icon: "cem_logo",
   name: "Block Explorer",
-  opis: "Портал блоков"
+  opis: "Портал блоков",
+  //small: true
 },
 {
   link: "https://github.com/CryptoEmergency",
-  icon: "cem_logo",
+  icon: "github_icon",
   name: "Github",
-  opis: "Ссылка на наш github"
-}
-]
+  opis: "Ссылка на наш github",
+  //small: true
+
+}]
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });
@@ -151,10 +194,14 @@ const start = function (data, ID) {
               <h4 class="H3">Наши сайты/партнеры</h4>
               <div class="btns-wrap-2">
                 {
-                  sait.map((item, index) => {
+                  sait.map((item) => {
                     console.log('=c559f5=', item.link)
                     return (
-                      <a href={item.link} class="btn-item-2" target="_blank">
+                      <a
+                        href={item.link}
+                        class="btn-item-2"
+                        target="_blank"
+                      >
                         {/* <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} /> */}
                         <span class="SP2">{item.name}
                           <p class="p1">
@@ -162,15 +209,37 @@ const start = function (data, ID) {
                             {item.opis}
                           </p>
                         </span>
+
                       </a>
                     )
                   })
                 }
 
-
-
               </div>
+              <div class="btns-wrap-2 btns-wrap-small">
+                {sait_small.map((item) => {
+                  console.log('=c559f5=', item.link)
+                  return (
+                    <a class="btn-small btn-item-2">
+                      <img class="btn-item_img-2" src={!item.imeges ? svg[`train/${item.icon}`] : images[item.icon]}></img>
+                      <div class="decs">
+                        <h5 class="H5">{item.name}</h5>
+                        <p class="p1">
 
+                          {item.opis}</p>
+                      </div>
+                    </a>
+                  )
+                })
+                }
+                <a class="btn-small">
+                  <img></img>
+                  <div class="decs">
+                    <h5></h5>
+                    <p></p>
+                  </div>
+                </a>
+              </div>
 
             </div>
             <div class="block-section-3">
@@ -217,7 +286,14 @@ const start = function (data, ID) {
                       CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
                     </p>
                   </h5>
-                  {/* <img class="btn-item_img-flag" src={svg['train/ru']} alt="Flag" /> */}
+                  <div class="apps-wrap">
+                    <a href="https://play.google.com/store/apps/details?id=com.cemwallet&hl=en&gl=US" class="go-apps" target="_blank">
+                      <img src={svg['googleplay']}></img>
+                    </a>
+                    <a href="https://apps.apple.com/ru/app/cem-wallet/id1637300554" class="go-apps" target="_blank">
+                      <img src={svg['appstore']}></img>
+                    </a>
+                  </div>
                 </a>
                 {/* <a href="https://apps.apple.com/ru/app/cem-wallet/id1637300554" class="btn-item-2" target="_blank">
                   <img class="btn-item_img" src={svg['train/telegram']} alt="Telegram" />
