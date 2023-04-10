@@ -19,13 +19,6 @@ const options = {
     template: path.resolve("src/template/index.html"),
   },
   proxy: {
-    // "/api/v2": {
-    //   target: `http://127.0.0.1:6060`,
-    //   secure: false,
-    //   ws: true,
-    //   changeOrigin: true,
-    //   // secure: false,
-    // },
     "/api/v2": {
       target: `https://${target}`,
       secure: false,
