@@ -1593,6 +1593,18 @@ textarea {
             &__text {}
         }
     }
+
+    &--onlyicon {
+        width: auto !important;
+        gap: 0 !important;
+
+        .c-button {
+            &__wrapper {
+                font-size: 0;
+                text-indent: -9999px;
+            }
+        }
+    }
 }
 
 @keyframes animatedButton1 {
@@ -1988,6 +2000,7 @@ textarea {
 @import 'blocks/groupImage.scss';
 @import 'blocks/panzoom.scss';
 @import 'blocks/answers.scss';
+@import 'blocks/texteditor.scss';
 /* User */
 @import 'blocks/userMain.scss';
 @import 'blocks/userProfileList.scss';

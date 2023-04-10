@@ -92,7 +92,14 @@
 		"buyTicket": "Купить билет",
 		"becomeSpeaker": "Стать спикером",
 		"buyStand": "Купить стенд",
-		"becomePartner": "Стать партнером"
+		"becomePartner": "Стать партнером",
+		"alignLeft": "Выравнивание по левому краю",
+		"alignCenter": "Выравнивание по центру",
+		"alignRight": "Выравнивание по правому краю",
+		"textItalic": "Курсив",
+		"textBold": "Жирный",
+		"textUnderline": "Подчеркнутый",
+		"insertLink": "Вставка ссылки"
 	},
 	"h": {
 		"success": "Успешно!",
@@ -264,7 +271,9 @@
 		"partnersForum": "Партнеры",
 		"localmap": "Как добраться?",
 		"showAllFriends": "Показать всех",
-		"resetFilter": "Сброс фильтра"
+		"resetFilter": "Сброс фильтра",
+		"clearEditable": "Очистить",
+		"saveEditable": "Сохранить"
 	},
 	"span": {
 		"company": "Компания",

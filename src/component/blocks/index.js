@@ -44,3 +44,5 @@ export { BlockUserRoomsChat } from "./BlockUserRoomsChat.js";
 export { BlockShowCommunities } from "./BlockShowCommunities.js";
 // Анимация на странице "О нас"
 export { AboutAnimation } from "./AboutAnimation.js";
+// Текстовый редактор
+export { BlockTextEditor } from "./BlockTextEditor.js";

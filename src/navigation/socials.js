@@ -106,7 +106,7 @@ const sait = [{
 },
 {
   link: "https://chainlist.org/chain/193",
-  icon: "cem_logo",
+  icon: "chainList",
   name: "ChainList",
   opis: "Chainlist — это список сетей EVM. Пользователи могут использовать эту информацию для подключения своих кошельков и поставщиков промежуточного программного обеспечения Web3 к соответствующему идентификатору цепочки и идентификатору сети для подключения к правильной цепочке."
 },
@@ -220,7 +220,7 @@ const start = function (data, ID) {
                 {sait_small.map((item) => {
                   console.log('=c559f5=', item.link)
                   return (
-                    <a class="btn-small btn-item-2">
+                    <a class="btn-small btn-item-2" href={item.link} target="_blank">
                       <img class="btn-item_img-2" src={!item.imeges ? svg[`train/${item.icon}`] : images[item.icon]}></img>
                       <div class="decs">
                         <h5 class="H5">{item.name}</h5>
@@ -232,13 +232,7 @@ const start = function (data, ID) {
                   )
                 })
                 }
-                <a class="btn-small">
-                  <img></img>
-                  <div class="decs">
-                    <h5></h5>
-                    <p></p>
-                  </div>
-                </a>
+
               </div>
 
             </div>

@@ -96,9 +96,15 @@ const start = function (data, ID) {
     ID,
     fnLoad: async () => {
       if (!Static.item) {
-        Static.item = await fn.restApi.getStartaps({ filter: { _id: Variable.dataUrl.params }, firstRecord: true })
+        Static.item = await fn.socket.get({
+          method: "Startups",
+          params: {
+            filter: { _id: Variable.dataUrl.params },
+            firstRecord: true
+          }
+        })
       }
-      console.log("Static.item", Static.item)
+      // console.log("Static.item", Static.item)
     },
     fn: () => {
       return (

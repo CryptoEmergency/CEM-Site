@@ -32,12 +32,12 @@ const start = function (data, ID) {
             fn.socket.get(
                 { method: "Course", params: { filter: {} } },
                 function (res) {
-                    console.log("=9c0591 callback=", res);
+                    // console.log("=9c0591 callback=", res);
                     Static.mainCourse = res;
                     initReload("mainBlock");
                 }
             );
-            console.log('=0ca0d9= Static =', Static)
+            // console.log('=0ca0d9= Static =', Static)
             timersStart({
                 name: "Course",
                 fn: async () => {
