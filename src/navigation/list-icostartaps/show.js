@@ -36,9 +36,16 @@ const start = function (data, ID) {
     ID,
     fnLoad: async () => {
       if (!Static.item) {
-        Static.item = await fn.restApi.getIco({
-          filter: { _id: Variable.dataUrl.params },
-          firstRecord: true,
+        // Static.item = await fn.restApi.getIco({
+        //   filter: { _id: Variable.dataUrl.params },
+        //   firstRecord: true,
+        // });
+        Static.item = await fn.socket.get({
+          method: "Ico",
+          params: {
+            filter: { _id: Variable.dataUrl.params },
+            firstRecord: true,
+          }
         });
       }
       console.log("Static.item", Static.item);
@@ -71,7 +78,7 @@ const start = function (data, ID) {
                       id="startupVideoPlayer"
                       width="100%"
                       height="585px"
-                      src={Static.item.coverVideo}
+                        src={Static.item.coverVideo}
                       title="YouTube video player"
                       frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -162,7 +169,7 @@ const start = function (data, ID) {
                   <span class="details_bold">{Static.item.type}</span>
                 </p>
                 <p>
-                  ICO Token Price:{" "}
+                  {Static.item.category} Token Price:{" "}
                   <span class="details_bold">
                     1 {Static.item.name} = {Static.item.price} USD
                   </span>
