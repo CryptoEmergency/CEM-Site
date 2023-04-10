@@ -38,7 +38,7 @@ const forExport = function ({ records }) {
                 <div class="item-sum_wrap">
                   <p class="item-sum">
                     <span class="item-sum_obj">
-                      ${item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0}
+                      ${item.nowMoney && item.nowMoney > 0 ? new Intl.NumberFormat('de-DE').format(item.nowMoney) : 0}
                     </span>{" "}
                     / ${new Intl.NumberFormat('de-DE').format(item.targetMoney)}{" "}
                     <span class="item-sum_procent">

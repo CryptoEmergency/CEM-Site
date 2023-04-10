@@ -89,7 +89,7 @@ const start = function (data, ID) {
                     <span class="info-summ_obj">
                       $
                       {Static.item.nowMoney && Static.item.nowMoney > 0
-                        ? Static.item.nowMoney
+                        ? new Intl.NumberFormat('de-DE').format(Static.item.nowMoney)
                         : 0}
                     </span>
                     <span class="info-summ_done">of</span>
@@ -100,7 +100,7 @@ const start = function (data, ID) {
                           ? Static.item.nowMoney
                           : 0) *
                           100) /
-                          Static.item.targetMoney
+                        Static.item.targetMoney
                       )})%`}
                     </span>
                   </div>
@@ -182,8 +182,10 @@ const start = function (data, ID) {
                 <p>
                   Available for Token Sale:{" "}
                   <span class="details_bold">
-                    {Math.round(
-                      (Static.item.forSell * 100) / Static.item.totalSupply
+                    {new Intl.NumberFormat('de-DE').format(
+                      Math.round(
+                        (Static.item.forSell * 100) / Static.item.totalSupply
+                      )
                     )}
                     %
                   </span>
