@@ -18,7 +18,6 @@ const start = function (data, ID) {
   load({
     ID,
     fnLoad: async () => {
-      Static.nameRecords = "PageExchange"
       Static.apiFilter = {}
       Static.filterCoins = []
       Static.list_coins = await fn.socket.get({
@@ -33,7 +32,7 @@ const start = function (data, ID) {
       });
     },
     fn: () => {
-
+      // console.log('=2fbf3c=', Static.records)
       return (
         <Elements.page.MainContainer
           class="crypto_exchanges_full_page">
@@ -53,20 +52,21 @@ const start = function (data, ID) {
                       if (!filterCoins.length) {
                         return;
                       }
-                      let filter = { $or: [] };
+                      let filter = { $and: [] };
                       for (let item of filterCoins) {
-                        filter["$or"].push({ "list_coins.name": item });
+                        filter["$and"].push({ "list_coins.name": item });
                       }
 
                       console.log("=1e34f2=", filterCoins, filter);
-                      await fn.restApi.getExchange({
-                        cache: true,
-                        name: Static.nameRecords,
-                        filter,
-                        limit,
-                        select: { name: 1 },
+                      Static.records = await fn.socket.get({
+                        method: "Exchangers",
+                        params: {
+                          filter: filter,
+                          sort: { score: -1 },
+                          limit: 12,
+                        }
                       });
-                      return;
+                      initReload()
                     },
                   });
                 }}
@@ -98,6 +98,13 @@ const start = function (data, ID) {
               {Static.filterCoins.length ? (
                 <span
                   onclick={async () => {
+                    Static.records = await fn.socket.get({
+                      method: "Exchangers",
+                      params: {
+                        filter: Static.apiFilter,
+                        sort: { score: -1 },
+                      }
+                    });
                     Static.filterCoins = [];
 
                     initReload();
