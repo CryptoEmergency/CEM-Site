@@ -40,7 +40,6 @@ const showListStartaps = function (listStartaps) {
 };
 
 let listCategories;
-let filterStartups;
 
 const showBtn = function (Static) {
   return listCategories.map((item) => {
@@ -55,14 +54,8 @@ const showBtn = function (Static) {
         ]}
         onclick={async () => {
           Static.filtersSearch.categoryActive = item.name;
-          filterStartups = makeFiltersApi(Static)
-          Static.records = await fn.socket.get({
-            method: "Startups",
-            params: {
-              filter: filterStartups.filter,
-              sort: filterStartups.sort,
-            }
-          });
+          Static.recordsStartap = await fn.restApi.getStartaps(makeFiltersApi(Static));
+          console.log('=0788e8= Static.recordsStartap = ',Static.recordsStartap)
           initReload();
         }}
       >
@@ -141,15 +134,11 @@ const start = function (data, ID) {
   load({
     ID,
     fnLoad: async () => {
-      // Static.records = await fn.restApi.getStartaps({ filter: {} });
-      filterStartups = makeFiltersApi(Static)
-      Static.records = await fn.socket.get({
-        method: "Startups",
-        params: {
-          filter: filterStartups.filter,
-          sort: filterStartups.sort
-        }
-      });
+      Static.recordsStartap = await fn.restApi.getStartaps({ filter: {} });
+      // console.log('=98b2d4= Static.recordsStartap =', Static.recordsStartap)
+      
+      // let unique = Static.recordsStartap.list_records.reduce((acc, elem) => acc.add(elem.category), new Set())
+      // console.log('=90bc8a= unique =',unique)
     },
 
     fn: () => {
@@ -159,32 +148,8 @@ const start = function (data, ID) {
           <div class="startap-inner">
             <h2>{Variable.lang.a.starups}</h2>
             <div class="list-startaps">
-              {showListStartaps(Static.records)}
+              {showListStartaps(Static.recordsStartap.list_records)}
             </div>
-          </div>
-          <div
-            replace={Static.showMore}
-            ElemVisible={async () => {
-
-              let tmp = await fn.socket.get({
-                method: "Startups",
-                params: {
-                  filter: {},
-                  sort: { _id: -1 },
-                  limit: 20,
-                  offset: Static.records.length
-                }
-              })
-
-
-              if (!tmp || !tmp.length) {
-                Static.showMore = false
-              } else {
-                Static.records.push(...tmp)
-              }
-
-              initReload()
-            }}>
           </div>
         </Elements.page.MainContainer>
       );
