@@ -687,6 +687,10 @@
 .c-exchangerates {
     padding-top: 20px;
 
+    &__title {
+        margin-top: 0;
+    }
+
     &__container {}
 
     &__table {

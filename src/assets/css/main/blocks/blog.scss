@@ -737,10 +737,13 @@
 .c-newsshow {
 
     .img-full {
+        border-radius: 10px;
+
         @media(min-width: 768px) {
             float: left;
             margin-right: 20px;
             width: 50%;
+            max-height: max-content;
         }
 
         & + .text.mY--30 {
@@ -750,4 +753,7 @@
         }
     }
 
+    .text {
+        color: inherit;
+    }
 }

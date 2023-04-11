@@ -40,6 +40,8 @@ const swiperOptions = {
     spaceBetween: 20
 };
 
+let Search;
+
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
 
@@ -141,7 +143,7 @@ const start = function (data, ID) {
     };
 
     const loadAudio = async function (file, type, xhr) {
-        let blob = new Blob([file], { type: 'audio/ogg' });
+        let blob = new Blob([file], { type: 'audio/mpeg' });
         let previewObj = {
             src: URL.createObjectURL(blob),
             type: "audio",
@@ -153,7 +155,7 @@ const start = function (data, ID) {
         let numItem = Static.mediaInputs.value.length - 1
 
         let fileAudio = file[0];
-        let nameFile = "file.mp3"
+        let nameFile = "file.webm"
         if (fileAudio.name) {
             nameFile = fileAudio.name
         }
@@ -513,7 +515,7 @@ const start = function (data, ID) {
                     // console.log(Static.chatsList)
                     Static.chatsList.list_records.unshift({ _id: 1, message: [{}], users: [Variable.Static.startChatsID, Variable.myInfo] })
                     Static.chatsList.list_records.sort((a, b) => {
-                        new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                        new Date(a?.message[0]?.showDate) > new Date(b?.message[0]?.showDate) ? 1 : -1
                     })
                     Static.activeChat = 1
                     Static.messageList = {
@@ -528,6 +530,8 @@ const start = function (data, ID) {
                 }
             }
             Variable.Static.startChatsID = null
+
+            Static.filteredChats = Static.chatsList.list_records;
         },
         () => {
             // console.log('=da21b3=', Static.chatsList, Variable.Static.startChatsID)
@@ -555,7 +559,30 @@ const start = function (data, ID) {
                                 <a class="goBackFromChatLink" href="/" onclick={(e) => fn.siteLink(e)}>
                                     <img class="goBackFromChat" src={svg.chats_back2} />
                                 </a>
-                                <input type="text" disabled />
+                                <input
+                                    Element={($el) => {
+                                        Search = $el
+                                    }}
+                                    type="text"
+                                    oninput={function (e) {
+                                        let arr = Static.chatsList.list_records.filter((item) => {
+                                            if (item.users[0].nickname.toLowerCase().includes(this.value.toLowerCase()) || item.users[1].nickname.toLowerCase().includes(this.value.toLowerCase())) {
+                                                return item;
+                                            }
+                                        })
+                                        if (this.value.length) {
+                                            if (arr.length) {
+                                                Static.filteredChats = arr
+                                            } else {
+                                                Static.filteredChats = []
+                                            }
+                                        } else {
+                                            Static.filteredChats = Static.chatsList.list_records
+                                        }
+                                        console.log('=e0a96f= users =', Static)
+                                        initReload()
+                                    }}
+                                />
                                 <img src={svg.chats_search_icon} />
                             </form>
                         </div>
@@ -563,150 +590,157 @@ const start = function (data, ID) {
 
                             {() => {
                                 if (Static.chatsList && Static.chatsList.list_records && Static.chatsList.list_records.length) {
-                                    const arrReturn = Static.chatsList.list_records.sort((a, b) => {
-                                        new Date(a.message[0].showDate) > new Date(b.message[0].showDate) ? 1 : -1
+                                    const arrReturn = /*Search && Search.value.length
+                                    ? Static.chatsList.list_records.filter((item) => {
+                                        console.log('=9ce8e7=',Search.value)
+                                        if(item.users[0].nickname.toLowerCase().includes(Search.value.toLowerCase()) || item.users[1].nickname.toLowerCase().includes(Search.value.toLowerCase())) {
+                                            return item
+                                        }
                                     })
-                                        .map((item, index) => {
-                                            let user
-                                            let lastMessage = item.message[0]
-                                            // console.log('=afa4ec= lastMessage =',lastMessage)
-                                            let iconStatus = {
-                                                name: "",
-                                                width: 24,
-                                                height: 23
-                                            }
+                                    : */Static.filteredChats.sort((a, b) => {
+                                        new Date(a?.message[0]?.showDate) > new Date(b?.message[0]?.showDate) ? 1 : -1
+                                    })
+                                            .map((item, index) => {
+                                                let user
+                                                let lastMessage = item.message[0]
+                                                // console.log('=afa4ec= lastMessage =',lastMessage)
+                                                let iconStatus = {
+                                                    name: "",
+                                                    width: 24,
+                                                    height: 23
+                                                }
 
-                                            if (lastMessage.status == 0) {
-                                                iconStatus.name = "sent_message_icon"
-                                                iconStatus.width = 21
-                                                iconStatus.height = 21
-                                            } else if (lastMessage.status == 1) {
-                                                iconStatus.name = "unread_message_icon"
-                                                iconStatus.height = 22
-                                            } else {
-                                                iconStatus.name = "read_message_icon"
-                                            }
-                                            if (item.users.length < 2) {
-                                                user = item.users[0]
-                                            } else {
-                                                if (Variable.myInfo._id != item.users[0]._id) {
+                                                if (lastMessage?.status == 0) {
+                                                    iconStatus.name = "sent_message_icon"
+                                                    iconStatus.width = 21
+                                                    iconStatus.height = 21
+                                                } else if (lastMessage?.status == 1) {
+                                                    iconStatus.name = "unread_message_icon"
+                                                    iconStatus.height = 22
+                                                } else {
+                                                    iconStatus.name = "read_message_icon"
+                                                }
+                                                if (item.users.length < 2) {
                                                     user = item.users[0]
                                                 } else {
-                                                    user = item.users[1]
+                                                    if (Variable.myInfo._id != item.users[0]._id) {
+                                                        user = item.users[0]
+                                                    } else {
+                                                        user = item.users[1]
+                                                    }
                                                 }
-                                            }
-                                            // console.log('=2a84c1=', item)
+                                                // console.log('=2a84c1=', item)
 
-                                            return (
-                                                <div
-                                                    class={["messages_list_item", item._id == Static.activeChat ? "active" : null]}
-                                                    onclick={async () => {
-                                                        Static.activeChat = item._id
-                                                        if (item._id == 1) {
-                                                            initReload()
-                                                            return
-                                                        }
-                                                        Static.messageList = await sendApi.send({
-                                                            action: "getUserChats", short: true,
-                                                            filter: {
-                                                                "$and": [
-                                                                    {
-                                                                        "users": user._id
-                                                                    }
-                                                                ]
-                                                            },
-                                                            select: {
-                                                                "message": {
-                                                                    "$slice": [
-                                                                        0,
-                                                                        120
+                                                return (
+                                                    <div
+                                                        class={["messages_list_item", item._id == Static.activeChat ? "active" : null]}
+                                                        onclick={async () => {
+                                                            Static.activeChat = item._id
+                                                            if (item._id == 1) {
+                                                                initReload()
+                                                                return
+                                                            }
+                                                            Static.messageList = await sendApi.send({
+                                                                action: "getUserChats", short: true,
+                                                                filter: {
+                                                                    "$and": [
+                                                                        {
+                                                                            "users": user._id
+                                                                        }
                                                                     ]
                                                                 },
-                                                                "users": 1
-                                                            }
-                                                        });
-                                                        item.unreadMessage = 0
-                                                        // console.log('=b604cf=', Static.messageList)
-                                                        initReload()
-                                                    }}
-                                                >
-                                                    <Avatar author={user} />
-                                                    <div class="messages_list_item_info">
-                                                        <div class="messages_list_item_info-1">
-                                                            <p>{user.nickname}</p>
-                                                            {() => {
-                                                                if (lastMessage.text && lastMessage.author == Variable.myInfo._id) {
-                                                                    return (
-                                                                        <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
-                                                                    )
+                                                                select: {
+                                                                    "message": {
+                                                                        "$slice": [
+                                                                            0,
+                                                                            120
+                                                                        ]
+                                                                    },
+                                                                    "users": 1
                                                                 }
-                                                            }}
-                                                            {() => {
-                                                                if (lastMessage.text) {
-                                                                    return (
-                                                                        <span>{lastMessage.text}</span>
-                                                                    )
-                                                                } else if (lastMessage.media && lastMessage.media.length) {
-                                                                    return (
-                                                                        <div class="messages_media">
-                                                                            {() => {
-                                                                                if (
-                                                                                    !lastMessage.text && lastMessage.media.length
-                                                                                    && (lastMessage.media[0].type == "audio" || lastMessage.media[0].type == "video" || lastMessage.media[0].type == "image")
-                                                                                    && lastMessage.author == Variable.myInfo._id
-                                                                                ) {
-                                                                                    return (
-                                                                                        <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
-                                                                                    )
-                                                                                }
-                                                                            }}
-                                                                            <span class="messages_media_content">
-                                                                                <img
-                                                                                    class={iconStatus.name == "read_message_icon" ? "messages_media_content_views" : null}
-                                                                                    src={svg[`icon/${lastMessage.media[0].type == "audio" ? "microphone" :
-                                                                                        lastMessage.media[0].type == "video" ?
-                                                                                            "video_camera" :
-                                                                                            // lastMessage.media[0].type == "image" ?
-                                                                                            "photocamera"}`]}
-                                                                                    width="16"
-                                                                                    height="16"
-                                                                                />
-                                                                                <span>
-                                                                                    {
-                                                                                        lastMessage.media[0].type == "audio" ?
-                                                                                            Variable.lang.text.lastChatAudio :
-                                                                                            lastMessage.media[0].type == "video" ?
-                                                                                                Variable.lang.text.lastChatVideo :
-                                                                                                lastMessage.media[0].type == "image" ?
-                                                                                                    Variable.lang.text.lastChatImage :
-                                                                                                    null
+                                                            });
+                                                            item.unreadMessage = 0
+                                                            // console.log('=b604cf=', Static.messageList)
+                                                            initReload()
+                                                        }}
+                                                    >
+                                                        <Avatar author={user} />
+                                                        <div class="messages_list_item_info">
+                                                            <div class="messages_list_item_info-1">
+                                                                <p>{user.nickname}</p>
+                                                                {() => {
+                                                                    if (lastMessage?.text && lastMessage?.author == Variable.myInfo._id) {
+                                                                        return (
+                                                                            <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
+                                                                        )
+                                                                    }
+                                                                }}
+                                                                {() => {
+                                                                    if (lastMessage?.text) {
+                                                                        return (
+                                                                            <span>{lastMessage?.text}</span>
+                                                                        )
+                                                                    } else if (lastMessage?.media && lastMessage?.media.length) {
+                                                                        return (
+                                                                            <div class="messages_media">
+                                                                                {() => {
+                                                                                    if (
+                                                                                        !lastMessage?.text && lastMessage?.media?.length
+                                                                                        && (lastMessage?.media[0]?.type == "audio" || lastMessage?.media[0]?.type == "video" || lastMessage?.media[0]?.type == "image")
+                                                                                        && lastMessage?.author == Variable.myInfo._id
+                                                                                    ) {
+                                                                                        return (
+                                                                                            <img src={images[iconStatus.name]} width={iconStatus.width} height={iconStatus.height} />
+                                                                                        )
                                                                                     }
+                                                                                }}
+                                                                                <span class="messages_media_content">
+                                                                                    <img
+                                                                                        class={iconStatus.name == "read_message_icon" ? "messages_media_content_views" : null}
+                                                                                        src={svg[`icon/${lastMessage?.media[0]?.type == "audio" ? "microphone" :
+                                                                                            lastMessage?.media[0]?.type == "video" ?
+                                                                                                "video_camera" :
+                                                                                                // lastMessage.media[0].type == "image" ?
+                                                                                                "photocamera"}`]}
+                                                                                        width="16"
+                                                                                        height="16"
+                                                                                    />
+                                                                                    <span>
+                                                                                        {
+                                                                                            lastMessage?.media[0]?.type == "audio" ?
+                                                                                                Variable.lang.text.lastChatAudio :
+                                                                                                lastMessage?.media[0]?.type == "video" ?
+                                                                                                    Variable.lang.text.lastChatVideo :
+                                                                                                    lastMessage?.media[0]?.type == "image" ?
+                                                                                                        Variable.lang.text.lastChatImage :
+                                                                                                        null
+                                                                                        }
+                                                                                    </span>
                                                                                 </span>
-                                                                            </span>
-                                                                        </div>
-                                                                    )
+                                                                            </div>
+                                                                        )
+                                                                    }
+                                                                }}
+
+                                                            </div>
+                                                            <div class="messages_list_item_info-2">
+                                                                {lastMessage?.author == Variable.myInfo._id
+                                                                    ?
+                                                                    <p>{lastMessage?.showDate ? fn.getDateFormat(lastMessage?.showDate, "chatlist") : null}</p>
+                                                                    :
+                                                                    <p class="message--new">
+                                                                        <span>{lastMessage?.showDate ? fn.getDateFormat(lastMessage?.showDate, "chatlist") : null}</span>
+                                                                        {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
+
+                                                                    </p>
                                                                 }
-                                                            }}
 
-                                                        </div>
-                                                        <div class="messages_list_item_info-2">
-                                                            {lastMessage.author == Variable.myInfo._id
-                                                                ?
-                                                                <p>{lastMessage.showDate ? fn.getDateFormat(lastMessage.showDate, "chatlist") : null}</p>
-                                                                :
-                                                                <p class="message--new">
-                                                                    <span>{lastMessage.showDate ? fn.getDateFormat(lastMessage.showDate, "chatlist") : null}</span>
-                                                                    {item.unreadMessage ? <i>{item.unreadMessage}</i> : null}
-
-                                                                </p>
-                                                            }
-
-                                                            {/* {lastMessage.author == Variable.myInfo._id ? <img src={svg[iconStatus]} /> : null} */}
+                                                                {/* {lastMessage.author == Variable.myInfo._id ? <img src={svg[iconStatus]} /> : null} */}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })
+                                                )
+                                            })
                                     return (arrReturn)
                                 }
                             }}
@@ -1318,7 +1352,26 @@ const start = function (data, ID) {
 
                                                             await navigator.mediaDevices.getUserMedia({ audio: true })
                                                                 .then(stream => {
-                                                                    Static.mediaRecorder = new MediaRecorder(stream);
+                                                                    let options = "audio/webm"
+                                                                    if (MediaRecorder.isTypeSupported('audio/webm; codecs=vp9')) {
+                                                                        options = { mimeType: 'audio/webm; codecs=vp9' };
+                                                                    } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+                                                                        options = { mimeType: 'audio/webm' };
+                                                                    } else if (MediaRecorder.isTypeSupported('audio/mpeg')) {
+                                                                        options = { mimeType: 'audio/mpeg' };
+                                                                    } else if (MediaRecorder.isTypeSupported('audio/ogg')) {
+                                                                        options = { mimeType: 'audio/ogg' };
+                                                                    } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
+                                                                        options = { mimeType: 'video/webm; codecs=vp9' };
+                                                                    } else if (MediaRecorder.isTypeSupported('video/webm')) {
+                                                                        options = { mimeType: 'video/webm' };
+                                                                    } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+                                                                        options = { mimeType: 'video/mp4', videoBitsPerSecond: 100000 };
+                                                                    } else {
+                                                                        console.error("no suitable mimetype found for this device");
+                                                                    }
+                                                                    console.log('=5b811c=', options)
+                                                                    Static.mediaRecorder = new MediaRecorder(stream, options);
 
                                                                     var audioChunks = [];
                                                                     Static.mediaRecorder.addEventListener("dataavailable", function (event) {
@@ -1326,8 +1379,8 @@ const start = function (data, ID) {
                                                                     })
 
                                                                     Static.mediaRecorder.addEventListener("stop", async function () {
-                                                                        var audioBlob = new File(audioChunks, "audio.mp3", {
-                                                                            type: 'audio/mp3'
+                                                                        var audioBlob = new File(audioChunks, "audio.webm", {
+                                                                            type: 'audio/mpeg'
                                                                         })
 
                                                                         fn.uploadMedia(

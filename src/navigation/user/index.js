@@ -225,8 +225,6 @@ const start = function (userInfo, ID = "mainBlock") {
                 Static.activeItems = Variable.PageUserProfileMyLenta
             }
 
-
-
         },
         () => {
             if (userInfo && userInfo.nickname == Variable.myInfo.nickname) { userInfo = Variable.myInfo }
@@ -441,6 +439,11 @@ const start = function (userInfo, ID = "mainBlock") {
                                 data-profilePage="lentaFriends"
                                 onclick={changeType}
                             ></i>
+                            <div class="user_category_gradient_frame">
+                                <div class="user_category_gray_background">
+                                    <span class="user_category_gradient_text">{userInfo.statistic.post}</span>
+                                </div>
+                            </div>
                         </div>
 
 

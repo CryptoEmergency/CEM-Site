@@ -67,6 +67,10 @@
         }
     }
 
+    .swiper-pagination {
+        display: none;
+    }
+
     &__item {
         p {
             @media(max-width: 464px) {

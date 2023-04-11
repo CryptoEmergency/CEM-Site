@@ -32,7 +32,6 @@ const start = function (data, ID) {
         },
       });
 
-      console.log('=c0ec43=', Static.records)
     },
     fn: () => {
       return (

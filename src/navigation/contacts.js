@@ -38,6 +38,11 @@ const start = function (data, ID) {
         <Elements.page.MainContainer
           class="contacts_container">
           <div class="c-container">
+            {
+              !Variable.ModalsPage.length
+              ? <h2 class="contacts_title">{Variable.lang.a.contacts}</h2>
+              : null
+            }
             <div class="contacts_content">
               <div class="contacts_form_block">
                 {
@@ -83,16 +88,16 @@ const start = function (data, ID) {
               </div>
               <div class="contacts_info" style={[Static.messageSent ? "margin-top: 20px" : null]}>
                 <span class="contact_info_label">
-                  {Variable.lang.span.adress}:
-                </span>
-                <span class="contact_info_text">
-                  {Variable.lang.span.addressFull}
-                </span>
-                <span class="contact_info_label">
                   {Variable.lang.span.branch}:
                 </span>
                 <span class="contact_info_text">
                   {Variable.lang.span.branchAdress}
+                </span>
+                <span class="contact_info_label">
+                  {Variable.lang.span.adress}:
+                </span>
+                <span class="contact_info_text">
+                  {Variable.lang.span.addressFull}
                 </span>
                 <span class="contact_info_label">E-mail:</span>
                 <a href="mailto:support@crypto-emergency.com">
@@ -101,6 +106,12 @@ const start = function (data, ID) {
                   </span>
                 </a>
               </div>
+            </div>
+            <div class="contacts_donats">
+              <a href="https://www.donationalerts.com/r/crypto_emergency" rel="nofollow nooopener" target="_blank" class="c-button c-button--icon">
+                <img class="c-button__image" src={svg.donationalerts} width="37" height="43" />
+                <span class="c-button__text">{Variable.lang.span.supportProject}</span>
+              </a>
             </div>
           </div>
         </Elements.page.MainContainer>

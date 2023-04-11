@@ -54,11 +54,11 @@ const banners = [
   //   image: "BlockchainLife",
   //   lang: "en",
   // },
-  {
-    href: "https://metis.io/",
-    image: "metis_banner",
-    lang: "en",
-  },
+  // {
+  //   href: "https://metis.io/",
+  //   image: "metis_banner",
+  //   lang: "en",
+  // },
   {
     href: "https://www.bitmart.com/trade/en-US?layout=basic&theme=dark&symbol=CEM_USDT",
     image: "bitmart_en",

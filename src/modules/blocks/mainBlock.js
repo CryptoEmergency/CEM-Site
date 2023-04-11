@@ -77,7 +77,7 @@ const mainBlock = async function () {
                 }
 
                 if (!Variable.listRouter[page]) {
-                    await list.error404(data, ID, url);
+                    await Variable.listRouter.error404(data, ID, url);
                     return;
                 }
 
