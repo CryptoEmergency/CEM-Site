@@ -481,7 +481,7 @@ const start = function (data, ID) {
         },
         {
             link: "https://youtu.be/Lz1_UPfV070",
-            photo: "speaker1",
+            photo: "guest8",
             name: "Ян Кривоносов",
             spec: "CEO Crypto Emergency"
         },
