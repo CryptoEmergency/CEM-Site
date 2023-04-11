@@ -88,7 +88,6 @@ const arrVoting = [
   //   ],
   //   active: null,
   // },
-  
 ];
 
 const start = function (data, ID) {
@@ -98,7 +97,20 @@ const start = function (data, ID) {
     fn: () => {
       return (
         <div class="container-voice">
-          <h1 class="voice-title">Голосование</h1>
+          <div>
+            <h1 class="voice-title">Голосование</h1>
+            <div class="btn-block">
+              <button
+                class={["btn", Static.checked ? "btn-checked" : null]}
+                onclick={() => {
+                  fn.modals.ModalAddVoting({});
+                }}
+              >
+                Добавить опрос
+              </button>
+            </div>
+          </div>
+
           <div class="wrap-voices">
             {arrVoting.map((item, index) => {
               console.log(item, index);
@@ -108,20 +120,28 @@ const start = function (data, ID) {
                   <p class="description">{item.discription}</p>
                   <ol class="list-voice">
                     {item.voting.map((item2, index2) => {
-                      console.log(index2);
+                      {
+                        /* console.log("====", item.active); */
+                      }
                       return (
                         <li class="list-el">
                           <span>
                             {index2 + 1}. {item2}
                           </span>
-                          <img 
-                            class={["img_done", item.active ? "img_done-active" : null]}
+                          <img
+                            class={[
+                              "img_done",
+                              item.activeVoting == item2
+                                ? "img_done-active"
+                                : null,
+                            ]}
                             src={svg.done}
-                            onclick={()=>{
-                              item.active = !item.active;
-                              initReload()
+                            onclick={() => {
+                              // item.active = !item.active;
+                              item.activeVoting = item2;
+                              initReload();
                             }}
-                            />
+                          />
                           {/* <input type="checkbox" class="checkbox-train"></input> */}
                         </li>
                       );
@@ -130,6 +150,9 @@ const start = function (data, ID) {
                   <div class="wrap-btn">
                     <button
                       class={["btn", Static.checked ? "btn-checked" : null]}
+                      onclick={() => {
+                        fn.modals.ModalAddVoting({});
+                      }}
                     >
                       {" "}
                       Проголосовать{" "}
