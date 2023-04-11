@@ -36,9 +36,16 @@ const start = function (data, ID) {
     ID,
     fnLoad: async () => {
       if (!Static.item) {
-        Static.item = await fn.restApi.getIco({
-          filter: { _id: Variable.dataUrl.params },
-          firstRecord: true,
+        // Static.item = await fn.restApi.getIco({
+        //   filter: { _id: Variable.dataUrl.params },
+        //   firstRecord: true,
+        // });
+        Static.item = await fn.socket.get({
+          method: "Ico",
+          params: {
+            filter: { _id: Variable.dataUrl.params },
+            firstRecord: true,
+          }
         });
       }
       console.log("Static.item", Static.item);
@@ -71,7 +78,7 @@ const start = function (data, ID) {
                       id="startupVideoPlayer"
                       width="100%"
                       height="585px"
-                      src={Static.item.coverVideo}
+                        src={Static.item.coverVideo}
                       title="YouTube video player"
                       frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -89,18 +96,18 @@ const start = function (data, ID) {
                     <span class="info-summ_obj">
                       $
                       {Static.item.nowMoney && Static.item.nowMoney > 0
-                        ? Static.item.nowMoney
+                        ? new Intl.NumberFormat('de-DE').format(Static.item.nowMoney)
                         : 0}
                     </span>
                     <span class="info-summ_done">of</span>
                     <span class="info-summ_done">
                       $
-                      {`${Static.item.targetMoney} (${Math.round(
+                      {`${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (${Math.round(
                         ((Static.item.nowMoney && Static.item.nowMoney > 0
                           ? Static.item.nowMoney
                           : 0) *
                           100) /
-                          Static.item.targetMoney
+                        Static.item.targetMoney
                       )})%`}
                     </span>
                   </div>
@@ -162,7 +169,7 @@ const start = function (data, ID) {
                   <span class="details_bold">{Static.item.type}</span>
                 </p>
                 <p>
-                  ICO Token Price:{" "}
+                  {Static.item.category} Token Price:{" "}
                   <span class="details_bold">
                     1 {Static.item.name} = {Static.item.price} USD
                   </span>
@@ -182,8 +189,10 @@ const start = function (data, ID) {
                 <p>
                   Available for Token Sale:{" "}
                   <span class="details_bold">
-                    {Math.round(
-                      (Static.item.forSell * 100) / Static.item.totalSupply
+                    {new Intl.NumberFormat('de-DE').format(
+                      Math.round(
+                        (Static.item.forSell * 100) / Static.item.totalSupply
+                      )
                     )}
                     %
                   </span>

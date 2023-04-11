@@ -1,31 +1,23 @@
-import { ServerInit, ServerBuild, ServerStart } from "@betarost/cemserver";
+import { CEM } from "@betarost/cemserver";
 import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 
 const port = 80;
-let hotReload = true;
 const target = "crypto-emergency.com";
-// const target = "idns.work"
-const mode = "development";
-// const mode = "production"
 
-if (process.env.DISABLERELOAD) {
-  hotReload = false;
-}
 
-ServerInit({
-  target,
-  hotReload,
+
+const options = {
+  port,
+  hotReload: true,
+  allowedHosts: [target],
   path: {
     src: path.resolve("app.js"),
     public: path.resolve("public"),
     fileName: "main.[fullhash].js",
     template: path.resolve("src/template/index.html"),
   },
-  port,
-  mode,
-  allowedHosts: [target],
   proxy: {
     "/api/v2": {
       target: `https://${target}`,
@@ -50,8 +42,10 @@ ServerInit({
       secure: false,
     },
   },
-});
+}
 
-ServerBuild({}).then((result) => {
-  if (result) ServerStart(result);
-});
+if (process.env.DISABLERELOAD) {
+  options.hotReload = false;
+}
+
+CEM.start(options)

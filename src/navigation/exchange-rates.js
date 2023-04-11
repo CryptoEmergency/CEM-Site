@@ -32,12 +32,12 @@ const start = function (data, ID) {
             fn.socket.get(
                 { method: "Course", params: { filter: {} } },
                 function (res) {
-                    console.log("=9c0591 callback=", res);
+                    // console.log("=9c0591 callback=", res);
                     Static.mainCourse = res;
                     initReload("mainBlock");
                 }
             );
-            console.log('=0ca0d9= Static =', Static)
+            // console.log('=0ca0d9= Static =', Static)
             timersStart({
                 name: "Course",
                 fn: async () => {
@@ -53,6 +53,11 @@ const start = function (data, ID) {
                         } c-exchangerates`}
                 >
                     <div class="c-exchangerates__container c-container">
+                        {
+                            !Variable.ModalsPage.length
+                                ? <h2 class="c-exchangerates__title">{Variable.lang.h.exchangeRates}</h2>
+                                : null
+                        }
                         <table class="c-exchangerates__table" cellspacing="0" cellpadding="10" align="center">
                             <thead>
                                 <tr style="border-radius: 4px;">

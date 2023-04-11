@@ -9,6 +9,7 @@ const swiperOptions = {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+  pagination: false,
   breakpoints: {
     20: {
       slidesPerView: 3,

@@ -12,7 +12,7 @@ import {
 import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-
+import { Select, NotFound } from "@component/element/index.js";
 import Elements from "@src/elements/export.js";
 
 import {
@@ -108,7 +108,7 @@ const start = function (data, ID) {
       fn.socket.get(
         { method: "Course", params: { filter: {} } },
         function (res) {
-          console.log("=9c0594 callback=", res);
+          // console.log("=9c0594 callback=", res);
           Static.mainCourse = res;
           initReload("mainBlock");
         }
@@ -116,7 +116,7 @@ const start = function (data, ID) {
       // setTimeout(() => {
       //     fn.socket.get({ method: "Course", params: { filter: {} } })
       // }, 10);
-      console.log("=7f467d tmp=", Static.mainCourse);
+      // console.log("=7f467d tmp=", Static.mainCourse);
 
       Static.dataUsers = {};
       Static.dataQuestions = {};

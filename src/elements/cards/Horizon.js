@@ -38,9 +38,9 @@ const forExport = function ({ records }) {
                 <div class="item-sum_wrap">
                   <p class="item-sum">
                     <span class="item-sum_obj">
-                      ${item.nowMoney && item.nowMoney > 0 ? item.nowMoney : 0}
+                      ${item.nowMoney && item.nowMoney > 0 ? new Intl.NumberFormat('de-DE').format(item.nowMoney) : 0}
                     </span>{" "}
-                    / ${item.targetMoney}{" "}
+                    / ${new Intl.NumberFormat('de-DE').format(item.targetMoney)}{" "}
                     <span class="item-sum_procent">
                       {Math.round(
                         ((item.nowMoney && item.nowMoney > 0
@@ -55,10 +55,10 @@ const forExport = function ({ records }) {
                 </div>
               </div>
               <span class="item-date item-date_start">
-                {fn.getDateFormat(item.startDate, "time")}
+                {fn.getDateFormat(item.startDate)}
               </span>
               <span class="item-date item-date_end">
-                {fn.getDateFormat(item.endDate, "time")}
+                {fn.getDateFormat(item.endDate)}
               </span>
             </div>
           </div>

@@ -40,7 +40,7 @@ forExport.get = async function (data, callback) {
             });
         }
         setTimeout(() => {
-            console.log('=b8e375= setTimeout Socket', data)
+            // console.log('=b8e375= setTimeout Socket', data)
             resolve("result setTimeout");
         }, 2000);
     });

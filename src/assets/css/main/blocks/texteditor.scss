@@ -1,0 +1,41 @@
+.c-texteditor {
+
+    &__panel {
+        margin-bottom: 15px;
+    }
+
+    &__wrappanel {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    &__field {
+        height: 200px;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #9844b7;
+        border-radius: 5px;
+        overflow-y: auto;
+
+        @extend .customscroll--vertical;
+    }
+    
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: stretch;
+        gap: 10px;
+
+        .c-button {
+            max-width: 120px;
+            height: auto;
+            margin: 0;
+            font-size: 14px;
+            text-transform: capitalize;
+            border-radius: 5px;
+        }
+    }
+}

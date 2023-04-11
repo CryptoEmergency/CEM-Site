@@ -29,7 +29,7 @@ forExport.get = async function (data, callback) {
             });
         } else {
             socket.emit("Crypto", data, function ({ method, params, result, _id = null, error = null }) {
-                console.log('=7269ff response=', method, params, result, _id, error);
+                // console.log('=7269ff response=', method, params, result, _id, error);
                 if (callback) {
                     callback(result)
                 }
@@ -40,7 +40,7 @@ forExport.get = async function (data, callback) {
             });
         }
         setTimeout(() => {
-            console.log('=b8e375= setTimeout Socket', data)
+            // console.log('=b8e375= setTimeout Socket', data)
             resolve("result setTimeout");
         }, 2000);
     });

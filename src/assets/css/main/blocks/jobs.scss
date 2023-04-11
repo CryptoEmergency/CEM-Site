@@ -21,9 +21,10 @@
         }
 
         @media(max-width: 600px) {
-            top: 87px;
-            left: 50%;
-            transform: translateX(-50%) scale(0.4);
+            // top: 87px;
+            // left: 50%;
+            // transform: translateX(-50%) scale(0.4);
+            content: none;
         }
     }
 
@@ -62,6 +63,10 @@
 
         @media(max-width: 767px) {
             font-size: 35px;
+        }
+
+        @media(max-width: 600px) {
+            margin-bottom: 30px;
         }
 
         @media(max-width: 599px) {
@@ -118,7 +123,9 @@
             width: 100%;
             text-align: center;
             padding-top: 0;
-            padding-bottom: 300px;
+            // padding-bottom: 300px;
+            padding-bottom: 0;
+            margin-bottom: 60px;
         }
 
         p {
@@ -322,6 +329,8 @@
     }
 
     &__iconprofession {
+        display: block;
+        margin-right: 10px;
         width: 66px;
         height: 66px;
         flex-basis: 66px;
@@ -368,6 +377,10 @@
 
     &__how {
         margin-bottom: 160px;
+
+        @media(max-width: 1024px) {
+            margin-bottom: 60px;
+        }
 
         .c-jobs__subtitle {
             @media(max-width: 1024px) {
@@ -454,6 +467,92 @@
 
     &__withus {
         padding-bottom: 180px;
+    }
+
+    &__vacancies {}
+
+    &__vacancy {
+        margin-bottom: 10px;
+        padding: 20px;
+        background: #2B3040;
+        border: 1px solid #353C50;
+        border-radius: 5px;
+    }
+
+    &__headervacancy {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    &__titlevacancy {
+        font-size: 26px;
+        font-weight: 600;
+    }
+
+    &__statusvacancy {
+        text-transform: uppercase;
+        color: #0FB500;
+        font-weight: 800;
+        text-decoration: none;
+        background: linear-gradient(225deg, #72FFB6 0%, #10D194 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &__experience {
+        margin-bottom: 0;
+        color: #CACACA;
+    }
+    
+    &__fullday {
+        color: #CACACA;
+    }
+
+    &__mainvacancy {}
+
+    &__subsubtitle {
+        font-weight: 600;
+        font-size: 17px;
+    }
+
+    &__skills {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-right: 5px;
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #32384B;
+            border: 1px solid #353C50;
+            border-radius: 5px;
+        }
+    }
+
+    &__actionvacancy {
+
+        .c-button {
+            width: 200px;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 1px;
+            text-align: center;
+            background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+            border-radius: 5px;
+            cursor: pointer;
+
+            &__text {
+                background: #2B3040;
+                border-radius: 5px;
+                line-height: 42px;
+                font-weight: 600;
+            }
+        }
     }
 }
 

@@ -25,7 +25,7 @@ const findUnread = function (arr, title = false) {
 const BottomMenu = function () {
     let firstEl = document.getElementById("jivo-iframe-container");
     let secondEl = document.querySelector("jdiv");
-    console.log('=c19e59 BottomMenu =', firstEl)
+    // console.log('=c19e59 BottomMenu =', firstEl)
     if (Variable.dataUrl.adress != "summer-forum") {
         if (firstEl) {
             firstEl.parentNode.removeChild(firstEl)
