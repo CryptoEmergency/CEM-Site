@@ -451,6 +451,18 @@ const start = function (data, ID) {
             position: "DUMA NETWORK",
             photo: "summer_forum/speaker13",
             show: false,
+        },
+        {
+            name: "Евгений Азизов",
+            position: "Управляющий делами администрации города Новороссийска",
+            photo: "summer_forum/speaker16",
+            show: false,
+        },
+        {
+            name: "Сергей Грабский",
+            position: "Руководитель Ассоциации цифрового развития Краснодарского края",
+            photo: "summer_forum/speaker17",
+            show: false,
         }
     ]
 
@@ -481,7 +493,7 @@ const start = function (data, ID) {
         },
         {
             link: "https://youtu.be/Lz1_UPfV070",
-            photo: "speaker1",
+            photo: "guest8",
             name: "Ян Кривоносов",
             spec: "CEO Crypto Emergency"
         },

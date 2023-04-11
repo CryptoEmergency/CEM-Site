@@ -18,9 +18,9 @@ const start = function (data, ID) {
         fn: () => {
             return (
                 <Elements.page.MainContainer>
-                    <Elements.page.Container class="c-container pt--70">
+                    <div class="c-container pt--70">
                         <BlockTextEditor Static={Static} />
-                    </Elements.page.Container>
+                    </div>
                 </Elements.page.MainContainer>
             )
         }

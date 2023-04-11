@@ -6,7 +6,8 @@ import {
   initOne,
   sendApi,
   Helpers,
-  init
+  init,
+  load
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import { Input, TextArea } from '@component/element/index.js';
@@ -32,8 +33,9 @@ const ModalWorkMessage = function (data, ID) {
     return
   }
 
-  init(
-    ()=>{
+  load({
+    ID,
+    fnLoad: async ()=>{
       Static = {
         isValid: false,
         messageSent: false
@@ -73,7 +75,6 @@ const ModalWorkMessage = function (data, ID) {
         afterValid: () => {
 
           fn.checkValid(Static, ["name", "email", "text"])
-
         }
       }
 
@@ -105,22 +106,18 @@ const ModalWorkMessage = function (data, ID) {
         Static.email.readonly = true
       }
     },
-    ()=>{
+    fn: ()=>{
       return (
         <div class="c-modal c-modal--open" id="ModalWorkMessage" onclick={function(e){ if(close){ 
-  
           fn.modals.close(ID)
           }}}>
-          <section class="c-modal__dialog" ref={elem} onmouseover={function(){
-           
-           close = false
-    
-         }}
-           onmouseleave={function(){
-           
-           close = true
-      
-           }}>
+          <section class="c-modal__dialog" ref={elem} 
+            onmouseover={function(){
+              close = false
+            }}
+            onmouseleave={function(){
+              close = true
+            }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title"></h2>
               <button
@@ -164,8 +161,8 @@ const ModalWorkMessage = function (data, ID) {
           </section>
         </div>
       )
-    }, ID
-  )
+    }
+  })
 };
 
 export default ModalWorkMessage;

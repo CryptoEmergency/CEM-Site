@@ -4,7 +4,8 @@ import {
   Variable,
   init,
   timersStart,
-  timersStop
+  timersStop,
+  load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 const ModalNeedAuth = function (data, ID) {
@@ -22,8 +23,9 @@ const ModalNeedAuth = function (data, ID) {
     g2 = "Давайте вести счёт!"
   }
 
-  init(
-    () => {
+  load({
+    ID,
+    fnLoad: async () => {
       if (isEmpty) {
         timersStart({
           name: "needAuth",
@@ -55,7 +57,7 @@ const ModalNeedAuth = function (data, ID) {
         // }, 2500, "timeout")
       }
     },
-    () => {
+    fn: () => {
       return (
         <div class="c-modal c-modal--open" id="ModalNeedAuth">
           <section class="c-modal__dialog">
@@ -68,8 +70,8 @@ const ModalNeedAuth = function (data, ID) {
           </section>
         </div>
       );
-    }, ID
-  )
+    }
+  })
 };
 export default ModalNeedAuth;
 // OK

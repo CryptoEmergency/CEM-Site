@@ -196,16 +196,7 @@ const start = function (data, ID = "mainBlock") {
                         </div>
                     </div> */}
                     <div class="c-events__container c-container">
-                        <h2 class="c-events__title"
-
-                        >Мероприятия
-                            <button class="Modal-1" onclick={() => {
-                                fn.modals.ModalAddEvents({})
-                                // fn.modals.ModalAfterRegisterForm({})
-                            }}>
-
-                            </button>
-                        </h2>
+                        <h2 class="c-events__title">{Variable.lang.h.events}</h2>
 
                         <figure class="c-events__cover">
                             <img style="border-radius: 4px; width: 100%" src={images['banners/BlockchainLifeBig']} />

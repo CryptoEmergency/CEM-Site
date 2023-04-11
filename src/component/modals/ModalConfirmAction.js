@@ -2,15 +2,16 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  init
+  init,
+  load
 } from "@betarost/cemserver/cem.js";
 import { Avatar } from "@component/element/Avatar.js";
 import { fn } from '@src/functions/index.js';
 const ModalConfirmAction = function ({ action, text, button }, ID) {
   let close = true
-  init(
-    null,
-    () => {
+  load({
+    ID,
+    fn: () => {
       return (
         <div class="c-modal c-modal--open" id="ModalWhoLike" onclick={function(e){ if(close){ 
   
@@ -48,8 +49,8 @@ const ModalConfirmAction = function ({ action, text, button }, ID) {
           </section>
         </div>
       );
-    }, ID
-  )
+    }
+  })
 };
 export default ModalConfirmAction;
 // OK

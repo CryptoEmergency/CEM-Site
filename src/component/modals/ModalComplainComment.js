@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, initGo, init, load } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 
 const changeComplaint = function (Static,checkdata) {
@@ -40,7 +40,9 @@ const ModalComplainComment = function ( data , ID) {
 
   let [Static] = fn.GetParams({ data, ID })
 let close =true
-  init(function(){ 
+  load({
+    ID,
+    fnLoad: async () => { 
     Static.modal = {
     abusive: { check: false, complain: Variable.lang.select.complainOne },
     poison: { check: false, complain: Variable.lang.select.complainTwo  },
@@ -49,7 +51,8 @@ let close =true
     other: { check: false, complain: Variable.lang.select.other, value:true },
     activeData:[]
   }
-},() => {
+},
+fn: () => {
   let active
   let text
 if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) || Static.modal.activeData.length > 0)
@@ -219,7 +222,7 @@ if((Static.modal.other.value.length > 2 && Static.modal.activeData.length == 0) 
     </div>
  
   );
-}, ID
-)};
+}
+})};
 
 export default ModalComplainComment;

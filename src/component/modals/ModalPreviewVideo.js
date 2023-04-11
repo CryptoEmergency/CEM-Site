@@ -5,7 +5,8 @@ import {
     initReload,
     initOne,
     sendApi,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
@@ -90,9 +91,9 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
         return
     }
 
-
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
             if (preview) {
                 mediaInputs = {
                     value: [
@@ -116,7 +117,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
             // console.log('=0bd58b= Static modal', Static, uploadPreviewImage)
             // console.log('=cd84a1= mediaInputs ', mediaInputs)
         },
-        () => {
+        fn: () => {
             return (
                 <div class="c-modal c-modal--open" id="ModalPreviewVideo">
                     <section class="c-modal__dialog c-modal__dialog--lg1">
@@ -402,8 +403,8 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                     </section>
                 </div>
             )
-        }, ID
-    )
+        }
+    })
 }
 
 export default ModalPreviewVideo;

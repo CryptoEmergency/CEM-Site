@@ -3,7 +3,8 @@ import {
     jsxFrag,
     Variable,
     init,
-    initReload
+    initReload,
+    load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 
@@ -158,7 +159,9 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
     }
 
 
-    init(() => {
+    load({
+        ID,
+        fnLoad: async () => {
         if (aspectSelect) {
             aspectActive = Static.aspectSelect
         } else {
@@ -184,7 +187,7 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
             // console.log('=c98352=', Static.classAspectContainer, aspectActive)
         }
     },
-        () => {
+        fn: () => {
             cropper = null
 
             // console.log('=272ba4=', Static.aspectSelect)
@@ -372,8 +375,8 @@ const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMe
                     </section >
                 </div >
             );
-        }, ID
-    )
+        }
+    })
 
 
 };

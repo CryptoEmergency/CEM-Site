@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi, load } from "@betarost/cemserver/cem.js";
 import { Input, CheckBox, Select, TextArea, MediaButton, MediaPreview } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';
 import {
@@ -282,9 +282,9 @@ const ModalEditRoom = function (data, ID) {
   }
 
   let close = true
-  init(async function () {
-
-
+  load({ 
+    ID,
+    fnLoad: async () => {
     Static.optionsSelect = {
       Category: {
         active: data.userrooms.settingsroom.category,
@@ -302,13 +302,8 @@ const ModalEditRoom = function (data, ID) {
       }
     };
 
-
-  }, () => {
-
-
-
-
-
+  }, 
+  fn: () => {
     let active
     if (Static.label.valid) {
 
@@ -331,9 +326,6 @@ const ModalEditRoom = function (data, ID) {
     else {
       active = "inactive_form_button"
     }
-
-
-
 
     return (
       <div class="c-modal c-modal--open" id="ModalComplainComment" onclick={function (e) {
@@ -394,7 +386,6 @@ const ModalEditRoom = function (data, ID) {
                   }
                 />
 
-
               </div>
               <br />
               <div class="container-input">
@@ -406,7 +397,6 @@ const ModalEditRoom = function (data, ID) {
                 />
               </div>
               <div class="container-input">
-
 
                 <Input
                   classDiv="input-div"
@@ -443,7 +433,6 @@ const ModalEditRoom = function (data, ID) {
                     : "display: none"
                 }>
                 <div class="container-input">
-
 
                   <Input
                     classDiv="input-div"
@@ -547,8 +536,8 @@ const ModalEditRoom = function (data, ID) {
       </div>
 
     );
-  }, ID
-  )
+  }
+  })
 };
 
 export default ModalEditRoom;

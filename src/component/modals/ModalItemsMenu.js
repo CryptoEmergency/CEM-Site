@@ -2,7 +2,8 @@ import {
 	jsx,
 	jsxFrag,
 	Variable,
-	init
+	init,
+	load
 } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
 
@@ -12,9 +13,9 @@ const arrRoleAction = ["deleteRole"]
 
 const ModalItemsMenu = function ({ items, author }, ID) {
 	let close = true
-	init(
-		null,
-		() => {
+	load({
+		ID,
+		fn: () => {
 			return (
 				<div class="c-modal c-modal--open" id="ModalContextMenu" onclick={function (e) {
 					if (close) {
@@ -107,7 +108,7 @@ const ModalItemsMenu = function ({ items, author }, ID) {
 					</section>
 				</div>
 			);
-		}, ID
-	)
+		}
+	})
 };
 export default ModalItemsMenu;

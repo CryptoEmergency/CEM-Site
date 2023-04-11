@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, init } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, init, load } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
@@ -29,9 +29,9 @@ const ModalChangeLanguage = function (data, ID) {
     }
   }
   let close = true
-  init(
-    null,
-    () => {
+  load({
+    ID,
+    fn: () => {
       return (
         <div class="c-modal c-modal--open" id="changeLanguage" onclick={function (e) {
           if (close) {
@@ -80,8 +80,8 @@ const ModalChangeLanguage = function (data, ID) {
           </section>
         </div>
       );
-    }, ID
-  )
+    }
+  })
 
 
 };

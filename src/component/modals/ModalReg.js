@@ -6,7 +6,8 @@ import {
     initReload,
     initGo,
     initOne,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
@@ -64,8 +65,9 @@ const ModalReg = function (data, ID) {
 
     let [Static] = fn.GetParams({ data, ID })
     let close = true
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
         //    console.log("=========INIT========", Static, "=====ONE======")
             // let [Static] = fn.GetParams({ data, ID, actual: false, reload })
 
@@ -173,7 +175,7 @@ const ModalReg = function (data, ID) {
             listCodes = Variable.phoneCodes
 
         },
-        () => {
+        fn: () => {
           //  console.log("=========INIT========", Static, "=====SECOND======")
             return (
                 <div class="c-modal c-modal--open" id="ModalReg"   onclick={function(e){ if(close){ 
@@ -413,7 +415,7 @@ const ModalReg = function (data, ID) {
                 </div >
             )
         }, ID
-    )
+    })
     return
 
 

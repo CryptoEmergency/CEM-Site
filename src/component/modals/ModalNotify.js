@@ -6,7 +6,8 @@ import {
 	initOne,
 	sendApi,
 	Helpers,
-	init
+	init,
+	load
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import { NotifyItem } from '@component/element/NotifyItem.js';
@@ -69,8 +70,9 @@ const ModalNotify = async function (data, ID) {
 
 	let close = true
 
-	init(
-		() => {
+	load({
+		ID,
+		fnLoad: async () => {
 			notify = Variable.myInfo.notifyQuestions;
 
 			currentNotify = {
@@ -80,7 +82,7 @@ const ModalNotify = async function (data, ID) {
 			};
 
 		},
-		() => {
+		fn: () => {
 
 			return (
 				<div class="c-modal c-modal--open" id="ModalNotify" onclick={function (e) {
@@ -164,10 +166,8 @@ const ModalNotify = async function (data, ID) {
 					</section>
 				</div>
 			);
-		}, ID
-	)
-
-
+		}
+	})
 };
 
 export default ModalNotify;

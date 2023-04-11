@@ -5,7 +5,8 @@ import {
     Variable,
     initReload,
     sendApi,
-    init
+    init,
+    load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
@@ -132,12 +133,13 @@ const ModalConfirmCode = function (data, ID) {
     }
     wayType = data.way
 
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
             time = 60
             timerFunc()
         },
-        () => {
+        fn: () => {
             return (
                 <div class="c-modal c-modal--open" id="ModalReset">
                     <section class="c-modal__dialog">
@@ -195,6 +197,6 @@ const ModalConfirmCode = function (data, ID) {
                 </div>
             );
         }, ID
-    )
+    })
 };
 export default ModalConfirmCode;

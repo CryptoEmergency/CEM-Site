@@ -6,7 +6,8 @@ import {
     sendApi,
     initGo,
     Helpers,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
 import { fn } from '@src/functions/index.js';
@@ -45,8 +46,9 @@ const ModalMobileMainSettings = function (data, ID) {
         initGo(null, true);
     };
 
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
             elem.telegram = Variable.setRef()
             elem.tiktok = Variable.setRef()
             elem.youtube = Variable.setRef()
@@ -64,7 +66,7 @@ const ModalMobileMainSettings = function (data, ID) {
                 four: false,
             };
         },
-        () => {
+        fn: () => {
             return (
                 <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings"
                     onclick={
@@ -1071,14 +1073,8 @@ const ModalMobileMainSettings = function (data, ID) {
                     </section>
                 </div>
             )
-        }, ID
-    )
-
-
-
-
-
-
+        }
+    })
 };
 
 
