@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi, load } from "@betarost/cemserver/cem.js";
 import { Input, CheckBox, Select, TextArea, MediaButton, MediaPreview } from '@component/element/index.js';
 import { fn } from '@src/functions/index.js';
 import {
@@ -266,7 +266,9 @@ const ModalCreateRoom = function (data, ID) {
   }
 
 
-  init(async function () {
+  load({
+    ID,
+    fnLoad: async () => {
     Static.optionsSelect = {
       Category: {
         active: "NFT",
@@ -284,7 +286,8 @@ const ModalCreateRoom = function (data, ID) {
       }
     };
 
-  }, () => {
+  }, 
+  fn: () => {
 
 
     Static.Category = Static.optionsSelect.Category.active
@@ -519,8 +522,8 @@ const ModalCreateRoom = function (data, ID) {
       </div>
 
     );
-  }, ID
-  )
+  }
+  })
 };
 
 export default ModalCreateRoom;

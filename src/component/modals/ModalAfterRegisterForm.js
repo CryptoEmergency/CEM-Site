@@ -5,7 +5,8 @@ import {
   initReload,
   initOne,
   sendApi, 
-  init
+  init,
+  load
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
@@ -15,8 +16,9 @@ import { fn } from '@src/functions/index.js';
 
 const ModalAfterRegisterForm = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
-  init(
-    () => {
+  load({
+    ID,
+    fnLoad: async () => {
 
       Static = {
         isValid: false
@@ -140,7 +142,7 @@ const ModalAfterRegisterForm = function (data, ID) {
       }
 
     },
-    () => {
+    fn: () => {
       return (
         <div class="c-modal c-modal--open" id="ModalAfterRegisterForm">
           <section class="c-modal__dialog">
@@ -219,8 +221,8 @@ const ModalAfterRegisterForm = function (data, ID) {
           </section>
         </div>
       );
-    }, ID
-  )
+    }
+  })
 
 
   const sendRegistrationForm = async function (e) {

@@ -3,16 +3,12 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  init
+  init,
+  load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
 import svg from "@assets/svg/index.js";
-
-
-
-
-
 
 const MiniChat = function (data, ID) {
 
@@ -47,13 +43,11 @@ const MiniChat = function (data, ID) {
     isHidden(el) ? show(el) : hide(el)
   }
 
-
   function show(el) {
     el[0].style.display = ""
     let a = document.getElementById("showhide" + Static.Rooms.author._id)
     a.innerText = "Свернуть"
   }
-
 
   let checker = function (e) {
 
@@ -63,14 +57,12 @@ const MiniChat = function (data, ID) {
     }
   }
 
-
-
-  init(
-    () => {
+  load({
+    ID,
+    fnLoad: async () => {
       document.getElementById('backdrop').classList.remove("c-backdrop--show");
-
     },
-    () => {
+    fn: () => {
       return (
         <div class="c-modal c-modal--open" id="MiniChat">
           <div name={Static.Rooms.author._id} class='c-modal__dialog block1' onmousedown={function (e) { document.addEventListener('mousemove', checker); }} onmouseup={function (e) { document.removeEventListener('mousemove', checker); }}>
@@ -129,7 +121,7 @@ const MiniChat = function (data, ID) {
               </div>
             </section>
           </div></div>)
-    }, ID)
-
+    }
+  })
 }
 export default MiniChat;

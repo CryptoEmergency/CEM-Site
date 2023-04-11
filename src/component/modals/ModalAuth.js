@@ -5,7 +5,8 @@ import {
     initReload,
     initOne,
     sendApi,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
@@ -154,8 +155,9 @@ const ModalAuth = function (data, ID) {
 let close = true
 
 
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
 
             Static = {
                 isValid: false
@@ -234,7 +236,7 @@ let close = true
             wayAuth = "email"
             listCodes = Variable.phoneCodes
         },
-        () => {
+        fn: () => {
            // console.log("=========INIT========", Static, "=====SECOND======")
             return (
                 <div class="c-modal c-modal--open" id="ModalAuth" onclick={function(e){ if(close){ 
@@ -359,8 +361,8 @@ let close = true
                 </div>
             )
 
-        }, ID
-    )
+        }
+    })
     return
 
 

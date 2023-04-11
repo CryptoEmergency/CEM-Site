@@ -1,7 +1,8 @@
 import {
     jsx,
     jsxFrag,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
@@ -10,9 +11,11 @@ const ModalAlarm = function ({ icon, text }, ID) {
     setTimeout(() => {
         fn.modals.close(ID)
     }, 1500);
-    init(
-        null,
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
+        },
+        fn: () => {
             return (
                 <div id="alarm" class="error_alarm_container">
                     <div class="error_alarm">
@@ -21,8 +24,8 @@ const ModalAlarm = function ({ icon, text }, ID) {
                     </div>
                 </div>
             )
-        }, ID
-    )
+        }
+    })
 };
 export default ModalAlarm;
 // OK

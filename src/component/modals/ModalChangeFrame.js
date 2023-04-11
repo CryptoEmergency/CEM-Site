@@ -4,7 +4,8 @@ import {
     Variable,
     init,
     initReload,
-    sendApi
+    sendApi,
+    load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { Avatar } from '@component/element/index.js';
@@ -41,8 +42,9 @@ const ModalChangeFrame = function ({ author }, ID) {
 
     let frames = [];
 
-    init(
-        async () => {
+    load({
+        ID,
+        fnLoad: async () => {
             Static.frames = []
             let data = await fn.restApi.getFrames({ cache: true, name: "getFrames", filter: {} })
             data.list_records.forEach((frame) => {
@@ -50,7 +52,7 @@ const ModalChangeFrame = function ({ author }, ID) {
             })
             Static.activeFrame = Variable.myInfo.frame.name;
         },
-        () => {
+        fn: () => {
             return (
                 <div class="c-modal c-modal--open" id="addFrame" onclick={function (e) {
                     if (close) {
@@ -116,8 +118,8 @@ const ModalChangeFrame = function ({ author }, ID) {
                     </section>
                 </div>
             );
-        }, ID
-    )
+        }
+    })
 
 
 };

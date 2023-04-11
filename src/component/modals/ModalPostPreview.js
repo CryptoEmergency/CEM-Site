@@ -5,7 +5,8 @@ import {
     initReload,
     initOne,
     sendApi,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
@@ -19,15 +20,16 @@ import { BlockLentaUsers } from '@component/blocks/index.js';
 const ModalPostPreview = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
     let close = true
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
             Static.elShowTextFull = {}
             Static.elShowTextShort = {}
             Static.elMedia = {}
             Static.elNumberSwiper = {}
             // console.log('=828ffb=', Static)
         },
-        () => {
+        fn: () => {
             return (
                 <div
                     class="c-modal c-modal--open c-modal--fullscreen c-modal--menu"
@@ -80,8 +82,8 @@ const ModalPostPreview = function (data, ID) {
                     </section>
                 </div >
             )
-        }, ID
-    )
+        }
+    })
 }
 
 export default ModalPostPreview;

@@ -6,7 +6,8 @@ import {
   initOne,
   sendApi,
   Helpers,
-  init
+  init,
+  load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import { MediaButton, MediaPreview, Input } from '@component/element/index.js';
@@ -201,8 +202,9 @@ const ModalAskQuestion = function (data, ID) {
     };
   */
 
-  init(
-    () => {
+  load({
+    ID,
+    fnLoad: async () => {
       fn.initData.ModalAskQuestion(Static)
 
 
@@ -237,7 +239,7 @@ const ModalAskQuestion = function (data, ID) {
 
 
     },
-    () => {
+    fn: () => {
 
 
       return (
@@ -469,7 +471,7 @@ const ModalAskQuestion = function (data, ID) {
         </div>
       );
     }, ID
-  )
+  })
 
 
 

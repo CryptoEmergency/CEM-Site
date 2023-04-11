@@ -2,7 +2,8 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
@@ -22,8 +23,9 @@ const ModalUserInfoEdit = function (userInfo, ID) {
    console.log('pdf', userInfo, Static)
     //fn.initData.generate(["lang", "country", "group", "online"])
     let close = true
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
             Static = {
                 isValid: false
             }
@@ -86,7 +88,7 @@ const ModalUserInfoEdit = function (userInfo, ID) {
                 }
             }
         },
-        () => {
+        fn: () => {
             return (
                 <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
   
@@ -189,11 +191,8 @@ const ModalUserInfoEdit = function (userInfo, ID) {
                     </section>
                 </div>
             )
-        }, ID
-    )
-
-
-
+        }
+    })
 };
 
 export default ModalUserInfoEdit

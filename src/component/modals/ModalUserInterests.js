@@ -4,7 +4,8 @@ import {
     initOne,
     initReload,
     Variable,
-    init
+    init,
+    load
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
@@ -23,8 +24,9 @@ const ModalUserInterests = function ({ userInfo, type }, ID) {
     fn.initData.ModalUserInterests(Static, userInfo, type, {})
 
     let close = true
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: () => {
             Static = {
                 isValid: false
             }
@@ -47,7 +49,7 @@ const ModalUserInterests = function ({ userInfo, type }, ID) {
 
             userInfo._id ? Static._id = userInfo._id : null
         },
-        () => {
+        fn: () => {
             return (
                 <div class="c-modal c-modal--open" onclick={function (e) {
                     if (close) {
@@ -127,10 +129,8 @@ const ModalUserInterests = function ({ userInfo, type }, ID) {
                     </section>
                 </div>
             )
-        }, ID
-    )
-
-
+        }
+    })
 };
 
 export default ModalUserInterests

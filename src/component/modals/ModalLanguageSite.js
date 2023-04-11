@@ -4,7 +4,8 @@ import {
   Variable,
   initReload,
   parsingUrl,
-  init
+  init,
+  load
 } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
 
@@ -12,11 +13,12 @@ import { fn } from "@src/functions/index.js";
 
 const ModalLanguageSite = function (data, ID) {
   let close
-  init(
-    () => {
+  load({
+    ID,
+    fnLoad: async () => {
 
     },
-    () => {
+    fn: () => {
       return (
         <div class="c-modal c-modal--open" onclick={function (e) {
           if (close) {
@@ -69,8 +71,8 @@ const ModalLanguageSite = function (data, ID) {
           </section>
         </div>
       );
-    }, ID)
-
+    }, 
+  })
 };
 
 export default ModalLanguageSite;

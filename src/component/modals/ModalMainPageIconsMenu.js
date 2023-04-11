@@ -7,14 +7,16 @@ import {
   initGo,
   Helpers,
   init,
+  load
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import { fn } from "@src/functions/index.js";
 
 const ModalMainPageIconsMenu = function (data, ID) {
-  init(
-    () => {},
-    () => {
+  load({
+    ID,
+    fnLoad: async () => {},
+    fn: () => {
       return (
         <div
           class="c-modal c-modal--open c-modal--fullscreen"
@@ -344,8 +346,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
         </div>
       );
     },
-    ID
-  );
+  });
 };
 
 export default ModalMainPageIconsMenu;

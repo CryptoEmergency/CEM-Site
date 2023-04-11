@@ -2,7 +2,8 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    init
+    init,
+    load
 } from "@betarost/cemserver/cem.js";
 import { fn } from '@src/functions/index.js';
 import {
@@ -16,12 +17,13 @@ const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, vide
     let [Static] = fn.GetParams({ data: { path } })
     let [mainStatic] = fn.GetParams({ actual: true })
     let close = true
-    init(
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
             // console.log('=3e2bc4=', arrMedia)
             Static.elMedia = {}
         },
-        () => {
+        fn: () => {
             return (
                 <div
                     class="c-modal c-modal--open" id="test2"
@@ -162,8 +164,8 @@ const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, vide
                     </section >
                 </div >
             );
-        }, ID
-    )
+        }
+    })
 
 
 };

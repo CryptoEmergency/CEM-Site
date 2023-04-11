@@ -1,10 +1,10 @@
-import { jsx, jsxFrag, Variable, initReload, timersStop, init } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, timersStop, init, load } from "@betarost/cemserver/cem.js";
 
 const ModalContextMenu = function (data, ID) {
 	let close = true
-	init(
-		null,
-		() => {
+	load({
+		ID,
+		fn: () => {
 			return (
 				<div class="c-modal c-modal--open" id="ModalContextMenu" onclick={function (e) {
 					if (close) {
@@ -54,8 +54,8 @@ const ModalContextMenu = function (data, ID) {
 					</section>
 				</div>
 			);
-		}, ID
-	)
+		}
+	})
 };
 
 export default ModalContextMenu;
