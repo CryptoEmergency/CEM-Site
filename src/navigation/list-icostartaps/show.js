@@ -196,13 +196,13 @@ const start = function (data, ID) {
                 <p>
                   Fundraising Goal:{" "}
                   <span class="details_bold">
-                  {`${new Intl.NumberFormat('de-DE').format(Static.item.targetSell)}`} Token{" "}
+                  {Static.item.targetSell.toLocaleString()} Token{" "}
                   </span>
                 </p>
                 <p>
                   Total Tokens:{" "}
                   <span class="details_bold">
-                  {`${new Intl.NumberFormat('de-DE').format(Static.item.totalSupply)}`} token
+                  {Static.item.totalSupply.toLocaleString()} token
                   </span>
                 </p>
                 <p>
