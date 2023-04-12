@@ -4,6 +4,7 @@ import {
   load,
   initReload,
   Variable,
+  Helpers
 } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
@@ -164,10 +165,8 @@ const start = function (data, ID) {
                     return (
                       <span>
                         {
-                          `${fn.getDateFormat(
-                            Static.item.startDate,
-                            "time"
-                          )} - ${fn.getDateFormat(Static.item.endDate, "time")}`
+                          `${Helpers.moment(Static.item.startDate).format("YYYY-MM-DD")}
+                            - ${Helpers.moment(Static.item.endDate).format("YYYY-MM-DD")}`
                         }
                       </span>
                     )
