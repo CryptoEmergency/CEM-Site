@@ -26,8 +26,7 @@ const start = function (data, ID) {
       Static.records = await fn.socket.get({
         method: "Exchangers",
         params: {
-          filter: Static.apiFilter,
-          sort: { score: -1 },
+          // filter: Static.apiFilter,
         }
       });
     },
@@ -56,12 +55,11 @@ const start = function (data, ID) {
                         filter["$and"].push({ "list_coins.name": item });
                       }
 
-                      console.log("=1e34f2=", filterCoins, filter);
+                      // console.log("=1e34f2=", filterCoins, filter);
                       Static.records = await fn.socket.get({
                         method: "Exchangers",
                         params: {
                           filter: filter,
-                          sort: { score: -1 },
                           limit: 12,
                         }
                       });
@@ -100,11 +98,11 @@ const start = function (data, ID) {
                     Static.records = await fn.socket.get({
                       method: "Exchangers",
                       params: {
-                        filter: Static.apiFilter,
-                        sort: { score: -1 },
+                        // filter: Static.apiFilter,
                       }
                     });
                     Static.filterCoins = [];
+                    Static.showMore = true
 
                     initReload();
                   }}
@@ -180,12 +178,10 @@ const start = function (data, ID) {
                 let tmp = await fn.socket.get({
                   method: "Exchangers",
                   params: {
-                    filter: Static.apiFilter,
-                    limit: 12,
+                    // filter: Static.apiFilter,
                     offset: Static.records.length
                   }
                 })
-
 
                 if (!tmp || !tmp.length) {
                   Static.showMore = false
