@@ -474,6 +474,20 @@ $icon: #353a46;
     }
   }
 
+  .item-tba {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    display: flex;
+    font-weight: 500;
+    color: $text;
+
+    img {
+      width: 15px;
+      margin-right: 5px;
+    }
+  }
+
   .item-title {
     width: calc(100% - 30px);
     font-weight: 700;
