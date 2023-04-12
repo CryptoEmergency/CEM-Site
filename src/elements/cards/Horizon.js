@@ -1,7 +1,9 @@
 import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
+import svg from "@assets/svg/index.js";
 
 const forExport = function ({ records }) {
+  console.log(records)
   return (
     <div class="list-ico">
       {records.map((item) => {
@@ -54,12 +56,26 @@ const forExport = function ({ records }) {
                   </p>
                 </div>
               </div>
-              <span class="item-date item-date_start">
-                {fn.getDateFormat(item.startDate)}
-              </span>
-              <span class="item-date item-date_end">
-                {fn.getDateFormat(item.endDate)}
-              </span>
+              {() => {
+                if (item.dateIsKnow) {
+                  return (
+                    <span class="item-tba">
+                      <img src={svg["calendar_ico"]} />
+                      TBA</span>
+                  )
+                } else {
+                  return (
+                    <div>
+                      <span class="item-date item-date_start">
+                        {fn.getDateFormat(item.startDate)}
+                      </span>
+                      <span class="item-date item-date_end">
+                        {fn.getDateFormat(item.endDate)}
+                      </span>
+                    </div>
+                  )
+                }
+              }}
             </div>
           </div>
         );

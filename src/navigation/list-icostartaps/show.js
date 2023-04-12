@@ -155,10 +155,28 @@ const start = function (data, ID) {
             <div class="ico-details">
               <h4>
                 Token Sale:{" "}
-                {`${fn.getDateFormat(
+                {() => {
+                  if (Static.item.dateIsKnow) {
+                    return (
+                      <span>TBA</span>
+                    )
+                  } else {
+                    return (
+                      <span>
+                        {
+                          `${fn.getDateFormat(
+                            Static.item.startDate,
+                            "time"
+                          )} - ${fn.getDateFormat(Static.item.endDate, "time")}`
+                        }
+                      </span>
+                    )
+                  }
+                }}
+                {/* {`${fn.getDateFormat(
                   Static.item.startDate,
                   "time"
-                )} - ${fn.getDateFormat(Static.item.endDate, "time")}`}
+                )} - ${fn.getDateFormat(Static.item.endDate, "time")}`} */}
               </h4>
               <div class="ico-details_items">
                 <p>
