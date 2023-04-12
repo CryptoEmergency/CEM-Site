@@ -32,6 +32,7 @@ export { Panzoom } from "./Panzoom.js"
 //===formsElement===
 // Формы ввода: Инпуты, чекбоксы
 export { Input } from "./formsElement/Input.js";
+export { InputDiv } from "./InputDiv.js";
 export { TextArea } from "./formsElement/TextArea.js";
 export { ButtonSubmit } from "./formsElement/ButtonSubmit.js"
 export { ButtonShowMore } from "./formsElement/ButtonShowMore.js"

@@ -27,7 +27,11 @@ const forExport = function ({ data, reload, ID = "mainBlock", actual = false, in
     if (initData && this.initData[initData]) {
         this.initData[initData](this.Static[ID])
     }
-    Data.Static = this.Static[ID]
+    if (ID == "mainBlock") {
+        Data.Static = this.Static[ID]
+    } else {
+        Data.MStatic = this.Static[ID]
+    }
     Data.Item = item
     return [this.Static[ID], item]
 }

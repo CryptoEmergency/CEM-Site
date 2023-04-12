@@ -19,6 +19,7 @@ const changeInput = (e) => {
 
 
 const ModalChangeLanguage = function (data, ID) {
+  console.log('=7a3ec7=', 123)
   let Static = fn.GetParams({ data, ID })
   allLang = Variable.listsLang;
 
