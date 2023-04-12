@@ -97,8 +97,8 @@ const makeFiltersApi = function (Static, onlySearch = false) {
   } else if (
     Static.filtersSearch.textCalendar == Variable.lang.select.upcoming
   ) {
-    filter["$and"] = [];
-    filter["$and"].push({ startDate: { $gte: new Date() } });
+    filter["$or"] = [];
+    filter["$or"].push({ dateIsKnow: true }, { startDate: { $gte: new Date() } });
   } else if (Static.filtersSearch.textCalendar == Variable.lang.select.ended) {
     filter["$and"] = [];
     filter["$and"].push({ endDate: { $lt: new Date() } });
