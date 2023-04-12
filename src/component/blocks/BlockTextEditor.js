@@ -14,7 +14,13 @@ const textItalicHandler = function () {
     var selectionContents = range.extractContents();
     console.log('=f2742b= selectionContents =', selectionContents?.children[0]?.nodeName == "I")
     if (selectionContents?.children[0]?.nodeName == "I") {
-        range.insertNode(selectionContents);
+        if (selectionContents.children[0].innerHTML == selectionContents.children[0].innerText) {
+            debugger
+            const textEl = document.createTextNode(selectionContents.children[0].innerText);
+            range.insertNode(textEl);
+        }
+        debugger
+        // range.insertNode(selectionContents.children[0].innerHTML);
     } else {
         var iElement = document.createElement("i");
         iElement.appendChild(selectionContents);
@@ -75,62 +81,38 @@ const addLinkHandler = function () {
     clearEmptyTag()
 };
 
-const textAlignLeftHandler = function () {
-    if (window.getSelection() == '') {
-        return false;
-    }
-    let range = window.getSelection().getRangeAt(0);
-    let selectionContents = range.extractContents();
-    let pElement = document.createElement("p");
-    pElement.setAttribute("style", "text-align: left");
-    if (selectionContents?.children[0]?.nodeName == "P") {
-        Array.from(selectionContents.children).forEach((item) => {
-            console.log('=44ccf6= nodeName =', item.nodeName)
-            console.log('=44ccf6= item.innerHTML =', item.innerHTML)
-            pElement.innerHTML = item.innerHTML
-        })
+const textAlignHandler = function (alignValue) {
+    if (window.getSelection() != '') {
+        let range = window.getSelection().getRangeAt(0);
+        let selectionContents = range.extractContents();
+        let pElement = document.createElement("p");
+        pElement.setAttribute("style", `text-align: ${alignValue}`);
+        if (selectionContents?.children[0]?.nodeName == "P") {
+            Array.from(selectionContents.children).forEach((item) => {
+                // console.log('=44ccf6= nodeName =', item.nodeName)
+                // console.log('=44ccf6= item.innerHTML =', item.innerHTML)
+                pElement.innerHTML = item.innerHTML
+            })
+        } else {
+            pElement.appendChild(selectionContents);
+        }
+        range.insertNode(pElement);
     } else {
-        pElement.appendChild(selectionContents);
+        const editorElement = document.getElementById("editor");
+        const content = editorElement.innerHTML;
+        let pElement;
+        if (editorElement.children[0]?.nodeName == "P") {
+            pElement = editorElement.children[0];
+            pElement.setAttribute("style", `text-align: ${alignValue}`);
+        } else {
+            pElement = document.createElement("p");
+            pElement.setAttribute("style", `text-align: ${alignValue}`);
+            pElement.innerHTML = content;
+            editorElement.innerHTML = '';
+            editorElement.append(pElement);
+        }
     }
-    range.insertNode(pElement);
-    clearEmptyTag()
-};
 
-const textAlignCenterHandler = function () {
-    if (window.getSelection() == '') {
-        return false;
-    }
-    let range = window.getSelection().getRangeAt(0);
-    let selectionContents = range.extractContents();
-    let pElement = document.createElement("p");
-    pElement.setAttribute("style", "text-align: center");
-    if (selectionContents?.children[0]?.nodeName == "P") {
-        Array.from(selectionContents.children).forEach((item) => {
-            pElement.innerHTML = item.innerHTML
-        })
-    } else {
-        pElement.appendChild(selectionContents);
-    }
-    range.insertNode(pElement);
-    clearEmptyTag()
-};
-
-const textAlignRightHandler = function () {
-    if (window.getSelection() == '') {
-        return false;
-    }
-    let range = window.getSelection().getRangeAt(0);
-    let selectionContents = range.extractContents();
-    let pElement = document.createElement("p");
-    pElement.setAttribute("style", "text-align: right");
-    if (selectionContents?.children[0]?.nodeName == "P") {
-        Array.from(selectionContents.children).forEach((item) => {
-            pElement.innerHTML = item.innerHTML
-        })
-    } else {
-        pElement.appendChild(selectionContents);
-    }
-    range.insertNode(pElement);
     clearEmptyTag()
 };
 
@@ -170,15 +152,15 @@ const BlockTextEditor = async function ({ Static }) {
                         <img class="c-button__image" src={svg["icon/text_underline"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.textUnderline}</span>
                     </button>
-                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignLeft} onclick={textAlignLeftHandler}>
+                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignLeft} onclick={function() {textAlignHandler('left')}}>
                         <img class="c-button__image" src={svg["icon/left_align"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.alignLeft}</span>
                     </button>
-                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignCenter} onclick={textAlignCenterHandler}>
+                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignCenter} onclick={function() {textAlignHandler('center')}}>
                         <img class="c-button__image" src={svg["icon/center_align"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.alignCenter}</span>
                     </button>
-                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignRight} onclick={textAlignRightHandler}>
+                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignRight} onclick={function() {textAlignHandler('right')}}>
                         <img class="c-button__image" src={svg["icon/right_align"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.alignRight}</span>
                     </button>
