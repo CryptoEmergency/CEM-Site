@@ -183,7 +183,9 @@ const start = function (data, ID) {
                 </p>
                 <p>
                   Token type:{" "}
-                  <span class="details_bold">{Static.item.type}</span>
+                  <span class="details_bold">
+                    {Static.item.type}
+                  </span>
                 </p>
                 <p>
                   {Static.item.category} Token Price:{" "}
@@ -194,13 +196,13 @@ const start = function (data, ID) {
                 <p>
                   Fundraising Goal:{" "}
                   <span class="details_bold">
-                    {Static.item.targetSell} Token{" "}
+                  {`${new Intl.NumberFormat('de-DE').format(Static.item.targetSell)}`} Token{" "}
                   </span>
                 </p>
                 <p>
                   Total Tokens:{" "}
                   <span class="details_bold">
-                    {Static.item.totalSupply} token
+                  {`${new Intl.NumberFormat('de-DE').format(Static.item.totalSupply)}`} token
                   </span>
                 </p>
                 <p>
