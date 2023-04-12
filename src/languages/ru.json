@@ -99,7 +99,8 @@
 		"textItalic": "Курсив",
 		"textBold": "Жирный",
 		"textUnderline": "Подчеркнутый",
-		"insertLink": "Вставка ссылки"
+		"insertLink": "Вставка ссылки",
+		"insertImage": "Вставить картинку"
 	},
 	"h": {
 		"success": "Успешно!",

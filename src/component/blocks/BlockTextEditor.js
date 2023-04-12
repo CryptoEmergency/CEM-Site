@@ -1,9 +1,8 @@
 import { jsx, jsxFrag, Variable, initOne, initReload } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
-import { ButtonShowMore, NotFound } from "@component/element/index.js";
 
-let editorField;
+let editorField, localeImg;
 
 const textItalicHandler = function () {
     // console.log('=fcf2ba= editorField =', editorField, window.getSelection(), window.getSelection().focusNode.outerHTML/*, window.getSelection().toString()*/)
@@ -119,7 +118,7 @@ const textAlignHandler = function (alignValue) {
 const clearEmptyTag = function () {
     let inds = []
     let emptyEl = Array.from(editorField.children).filter((item, index) => {
-        if (item.innerHTML == "") {
+        if (item.innerHTML == "" && item.tagName != "IMG") {
             inds.push(index)
             return item;
         }
@@ -131,6 +130,22 @@ const clearEmptyTag = function () {
     }
     // console.log('=1bfa1f= emptyElements =',emptyEl)
 };
+
+const insertImage = function (urlImg) {
+    let image = document.createElement('img');
+    image.src = urlImg;
+    let selection = window.getSelection();
+    if (selection.rangeCount === 0 || !editorField.contains(selection.getRangeAt(0).commonAncestorContainer)) {
+        editorField.appendChild(image);
+    } else {
+        let range = selection.getRangeAt(0);
+        range.collapse(false);
+        range.insertNode(image);
+        selection.removeAllRanges();
+        range.setStartAfter(image);
+        selection.addRange(range);
+    }
+}
 
 const BlockTextEditor = async function ({ Static }) {
     await initOne(async () => {
@@ -152,15 +167,15 @@ const BlockTextEditor = async function ({ Static }) {
                         <img class="c-button__image" src={svg["icon/text_underline"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.textUnderline}</span>
                     </button>
-                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignLeft} onclick={function() {textAlignHandler('left')}}>
+                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignLeft} onclick={function () { textAlignHandler('left') }}>
                         <img class="c-button__image" src={svg["icon/left_align"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.alignLeft}</span>
                     </button>
-                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignCenter} onclick={function() {textAlignHandler('center')}}>
+                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignCenter} onclick={function () { textAlignHandler('center') }}>
                         <img class="c-button__image" src={svg["icon/center_align"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.alignCenter}</span>
                     </button>
-                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignRight} onclick={function() {textAlignHandler('right')}}>
+                    <button class="c-button c-button--primary c-button--icon c-button--onlyicon" title={Variable.lang.button.alignRight} onclick={function () { textAlignHandler('right') }}>
                         <img class="c-button__image" src={svg["icon/right_align"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.alignRight}</span>
                     </button>
@@ -168,6 +183,52 @@ const BlockTextEditor = async function ({ Static }) {
                         <img class="c-button__image" src={svg["icon/link"]} width="20" height="20" />
                         <span class="c-button__wrapper">{Variable.lang.button.insertLink}</span>
                     </button>
+                    <button
+                        class="c-button c-button--primary c-button--icon c-button--onlyicon"
+                        title={Variable.lang.button.insertImage}
+                        onclick={function () {
+                            if (confirm("Хотите загрузить с устройства?", "")) {
+                                localeImg.click()
+                            } else {
+                                insertImage(prompt('Введите адрес изображения', ''));
+                            }
+                        }}
+                    >
+                        <img class="c-button__image" src={svg["icon/insert_image"]} width="25" height="25" />
+                        <span class="c-button__wrapper">{Variable.lang.button.insertImage}</span>
+                    </button>
+                    <input
+                        type="file"
+                        value=""
+                        accept="image"
+                        hidden
+                        Element={($el) => { localeImg = $el }}
+                        onchange={async function (e) {
+                            e.stopPropagation();
+                            Array.from(this.files).forEach((item) => {
+                                fn.uploadMedia(
+                                    item,
+                                    "worldPress",
+                                    async function () {
+                                        if (!this.response) {
+                                            alert("Произошла ошибка Попробуйте еще раз")
+                                            return
+                                        }
+                                        let response = JSON.parse(this.response);
+                                        console.log('= response =', response)
+                                        if (!response.error) {
+                                            let data = {
+                                                type: response.mimetype,
+                                                name: response.name
+                                            }
+                                            console.log('=data=', data)
+                                            insertImage(`/assets/upload/worldPress/${data.name}`)
+                                        }
+                                    }
+                                )
+                            })
+                        }}
+                    />
                 </div>
             </header>
             <div
@@ -194,7 +255,7 @@ const BlockTextEditor = async function ({ Static }) {
                     class="c-button c-button--gradient2"
                     onclick={function () {
                         clearEmptyTag()
-                        console.log('=e17986= editorField.innerHTML =', editorField.innerHTML)
+                        console.log('= Содержимое редактора =', editorField.innerHTML)
                     }}
                 >
                     <span class="c-button__text">{Variable.lang.a.saveEditable}</span>

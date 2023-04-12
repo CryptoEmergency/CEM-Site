@@ -13,7 +13,9 @@
     }
 
     &__field {
-        height: 200px;
+        height: auto;
+        min-height: 200px;
+        max-height: 500px;
         margin-bottom: 15px;
         padding: 10px;
         border: 1px solid #9844b7;
