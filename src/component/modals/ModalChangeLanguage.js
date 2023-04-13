@@ -1,5 +1,5 @@
 import { jsx, jsxFrag, Variable, initReload, init, load } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+import { fn } from '@src/functions/export.js';
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
 //"alarm_icon" : "confirm_icon"
@@ -71,7 +71,7 @@ const ModalChangeLanguage = function (data, ID) {
                 {allLang.map((item) => {
                   let str = `${item.eng_name} (${item.orig_name})`
 
-                  return <div class="changeLanguageItem" onclick={() => { data.onclick(item.code, item.eng_name, item.orig_name); Variable.DelModals("ModalChangeLanguage"); }}>{str}</div>
+                  return <div class="changeLanguageItem" onclick={() => { data.onclick(item.code, item.eng_name, item.orig_name); fn.modals.close(ID); }}>{str}</div>
                 })}
               </div>
               <div class="changeLanguageEmpty">

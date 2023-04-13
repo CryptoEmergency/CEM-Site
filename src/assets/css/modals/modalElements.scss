@@ -51,5 +51,10 @@
                 color: #ffffff;
             }
         }
+
+        &__question {
+            height: 200px;
+            white-space: pre-wrap;
+        }
     }
 }

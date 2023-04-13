@@ -1,16 +1,21 @@
 import {
     jsx,
     jsxFrag,
-    init,
+    timerStopStart,
     load
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
+import { fn } from '@src/functions/export.js';
 import svg from "@assets/svg/index.js";
-//"alarm_icon" : "confirm_icon"
-const ModalAlarm = function ({ icon, text }, ID) {
-    setTimeout(() => {
-        fn.modals.close(ID)
-    }, 1500);
+
+const ModalAlarm = function ({ icon = "alarm_icon", text }, ID) {
+    timerStopStart({
+        name: "Alarm-" + ID,
+        fn: () => {
+            fn.modals.close(ID)
+        },
+        msecond: 1500,
+        type: "Timeout"
+    })
     load({
         ID,
         fnLoad: async () => {
@@ -28,4 +33,5 @@ const ModalAlarm = function ({ icon, text }, ID) {
     })
 };
 export default ModalAlarm;
-// OK
+
+// 13.04.2023

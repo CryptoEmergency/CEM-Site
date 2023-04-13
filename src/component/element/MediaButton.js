@@ -4,17 +4,17 @@ import {
     Variable,
     initReload
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
+import { fn } from '@src/functions/export.js';
 import svg from "@assets/svg/index.js";
 
 let inputImg,
     inputVideo,
     inputAudio
 
-const MediaButton = function ({ onclickAll, onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple, iconPhoto = false, typeMic = "posts" }) {
+const MediaButton = function ({ className, onclickAll, onclickText, onclickPhoto, onclickVideo, onclickAudio, onclickMic, multiple, iconPhoto = false, typeMic = "posts" }) {
 
     return (
-        <div class="c-mediabtn create_post_control_block">
+        <div class={["c-mediabtn create_post_control_block", className]}>
             {
                 typeof onclickText == "function"
                     ?

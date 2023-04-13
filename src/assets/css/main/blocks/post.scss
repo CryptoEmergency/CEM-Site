@@ -594,6 +594,12 @@ button[data-type='voiceline'][data-page_type="chat"] {
         justify-content: center;
         align-items: center;
         cursor: pointer;
+
+        &--lang {
+            font-size: 22px;
+            font-weight: 600;
+            color: #c96bff;
+        }
     }
 
     &__icon {
@@ -603,6 +609,12 @@ button[data-type='voiceline'][data-page_type="chat"] {
     &__hidefield {
         display: none;
     }
+}
+
+.c-mediabutton {
+    display: flex;
+    grid-gap: 10px;
+    margin-top: 0;
 }
 
 .c-loadpicture {
