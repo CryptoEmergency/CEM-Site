@@ -208,11 +208,9 @@ const start = function (data, ID) {
                 <p>
                   Available for Token Sale:{" "}
                   <span class="details_bold">
-                    {new Intl.NumberFormat('de-DE').format(
-                      Math.round(
-                        (Static.item.forSell * 100) / Static.item.totalSupply
-                      )
-                    )}
+                    {
+                      ((Static.item.forSell / Static.item.totalSupply) * 100).toFixed(1)
+                    }
                     %
                   </span>
                 </p>
