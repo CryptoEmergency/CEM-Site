@@ -322,16 +322,16 @@ let close = true
                                 <span>{Variable.lang.span.youAgree} <a target="_blank" class="a-link" href="/terms-of-service/">{Variable.lang.a.agree}</a></span>
                             </div>
                             <div class="authAgree">
-                                <span>Забыли пароль? <a
-                                class="a-link"
-                                href=""
-                                onclick={() => {
-                                  
-                                    Variable.DelModals("ModalAuth")
+                                <a
+                                    class="a-link"
+                                    href=""
+                                    onclick={() => {
+                                    
+                                        Variable.DelModals("ModalAuth")
 
-                                    Variable.SetModals({ name: "ModalRecoverPass", data: {} })
-                                }}
-                            >Ссылка для восстановления</a></span>
+                                        Variable.SetModals({ name: "ModalRecoverPass", data: {} })
+                                    }}
+                                >Забыли пароль?</a>
                             </div>
                         </div>
                         <footer class="c-modal__footer">

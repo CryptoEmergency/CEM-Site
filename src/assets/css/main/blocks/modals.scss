@@ -3540,6 +3540,13 @@
 			display: block;
 		}
 	}
+
+	.input-div {
+		height: auto;
+		border: none;
+		padding: 0;
+		border-radius: 8px;
+	}
 }
 
 .animated_button {
@@ -3660,6 +3667,32 @@
 
 		&-variant {
 			display: block;
+		}
+	}
+
+	.input-div {
+		height: auto;
+		border: none;
+		padding: 0;
+		border-radius: 8px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* modal #ModalRecoverPass (Восстановление пароля) */
+#ModalRecoverPass {
+	
+	.input-div {
+		height: auto;
+		border: none;
+		padding: 0;
+		border-radius: 8px;
+
+		&:last-child {
+			margin-bottom: 0;
 		}
 	}
 }
@@ -5432,7 +5465,7 @@ s
 
 		&__container--panel {
 			padding-top: 20px;
-			
+
 			@media(min-width: 1200px) {
 				width: calc(100% - 20px);
 			}
