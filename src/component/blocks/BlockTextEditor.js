@@ -2,10 +2,9 @@ import { jsx, jsxFrag, Variable, initOne, initReload } from "@betarost/cemserver
 import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
 
-let editorField, localeImg;
+let editorField, localeImg, listFontSize;
 
 const textItalicHandler = function () {
-    // console.log('=fcf2ba= editorField =', editorField, window.getSelection(), window.getSelection().focusNode.outerHTML/*, window.getSelection().toString()*/)
     if (window.getSelection() == '') {
         return false;
     }
@@ -14,16 +13,12 @@ const textItalicHandler = function () {
     console.log('=f2742b= selectionContents =', selectionContents?.children[0]?.nodeName == "I")
     if (selectionContents?.children[0]?.nodeName == "I") {
         if (selectionContents.children[0].innerHTML == selectionContents.children[0].innerText) {
-            debugger
             const textEl = document.createTextNode(selectionContents.children[0].innerText);
             range.insertNode(textEl);
         }
-        debugger
-        // range.insertNode(selectionContents.children[0].innerHTML);
     } else {
         var iElement = document.createElement("i");
         iElement.appendChild(selectionContents);
-        // iElement.setAttribute("style", "font-style: italic");
         range.insertNode(iElement);
     }
     clearEmptyTag()
@@ -88,8 +83,6 @@ const textAlignHandler = function (alignValue) {
         pElement.setAttribute("style", `text-align: ${alignValue}`);
         if (selectionContents?.children[0]?.nodeName == "P") {
             Array.from(selectionContents.children).forEach((item) => {
-                // console.log('=44ccf6= nodeName =', item.nodeName)
-                // console.log('=44ccf6= item.innerHTML =', item.innerHTML)
                 pElement.innerHTML = item.innerHTML
             })
         } else {
@@ -147,6 +140,26 @@ const insertImage = function (urlImg) {
     }
 }
 
+const changeFontSize = function (fontSize) {
+    listFontSize.classList.remove("c-texteditor__checklist--open")
+    if (window.getSelection() == '') {
+        return false;
+    }
+    var range = window.getSelection().getRangeAt(0);
+    var selectionContents = range.extractContents();
+    let spanElement;
+    if (selectionContents.childNodes.length == 1 && selectionContents.childNodes[0].nodeName == "#text") {
+        spanElement = document.createElement("span");
+        spanElement.setAttribute("style", `font-size: ${fontSize}px`);
+        spanElement.appendChild(selectionContents);
+        range.insertNode(spanElement);
+    } else {
+        spanElement = selectionContents.firstElementChild.style.fontSize = `${fontSize}px`
+        range.insertNode(selectionContents);
+    }
+    clearEmptyTag()
+};
+
 const BlockTextEditor = async function ({ Static }) {
     await initOne(async () => {
 
@@ -197,6 +210,46 @@ const BlockTextEditor = async function ({ Static }) {
                         <img class="c-button__image" src={svg["icon/insert_image"]} width="25" height="25" />
                         <span class="c-button__wrapper">{Variable.lang.button.insertImage}</span>
                     </button>
+                    <div class="c-texteditor__check">
+                        <button
+                            class="c-button c-button--primary c-button--icon c-button--onlyicon"
+                            title={Variable.lang.button.fontSize}
+                            onclick={function () {
+                                listFontSize.classList.contains("c-texteditor__checklist--open")
+                                    ? listFontSize.classList.remove("c-texteditor__checklist--open")
+                                    : listFontSize.classList.add("c-texteditor__checklist--open")
+                            }}
+                        >
+                            <img class="c-button__image" src={svg["icon/text_size"]} width="20" height="20" />
+                            <span class="c-button__wrapper">{Variable.lang.button.fontSize}</span>
+                        </button>
+                        <ul
+                            class="c-texteditor__checklist"
+                            Element={($el) => { listFontSize = $el }}
+                        >
+                            <li
+                                onclick={function () {
+                                    changeFontSize(12)
+                                }}
+                            >
+                                <span>{Variable.lang.span.smallFont}</span>
+                            </li>
+                            <li
+                                onclick={function () {
+                                    changeFontSize(14)
+                                }}
+                            >
+                                <span>{Variable.lang.span.mediumFont}</span>
+                            </li>
+                            <li
+                                onclick={function () {
+                                    changeFontSize(18)
+                                }}
+                            >
+                                <span>{Variable.lang.span.largeFont}</span>
+                            </li>
+                        </ul>
+                    </div>
                     <input
                         type="file"
                         value=""
@@ -255,6 +308,8 @@ const BlockTextEditor = async function ({ Static }) {
                     class="c-button c-button--gradient2"
                     onclick={function () {
                         clearEmptyTag()
+                        editorField.contentEditable = false
+                        initReload()
                         console.log('= Содержимое редактора =', editorField.innerHTML)
                     }}
                 >
