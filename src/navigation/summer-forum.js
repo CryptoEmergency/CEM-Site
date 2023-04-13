@@ -463,6 +463,12 @@ const start = function (data, ID) {
             position: "Руководитель Ассоциации цифрового развития Краснодарского края",
             photo: "summer_forum/speaker17",
             show: false,
+        },
+        {
+            name: "Евгений Сапожников",
+            position: "Основатель обменника криптовалют Keine-exchange",
+            photo: "summer_forum/speaker18",
+            show: false,
         }
     ]
 
