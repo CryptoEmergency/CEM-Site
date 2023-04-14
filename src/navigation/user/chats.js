@@ -603,7 +603,7 @@ const start = function (data, ID) {
                                             .map((item, index) => {
                                                 let user
                                                 let lastMessage = item.message[0]
-                                                console.log('=afa4ec= lastMessage =',lastMessage)
+                                                // console.log('=afa4ec= lastMessage =',lastMessage)
                                                 let iconStatus = {
                                                     name: "",
                                                     width: 24,
