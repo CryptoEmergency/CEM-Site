@@ -4,6 +4,7 @@ import {
   load,
   initReload,
   Variable,
+  Helpers
 } from "@betarost/cemserver/cem.js";
 import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
@@ -164,10 +165,8 @@ const start = function (data, ID) {
                     return (
                       <span>
                         {
-                          `${fn.getDateFormat(
-                            Static.item.startDate,
-                            "time"
-                          )} - ${fn.getDateFormat(Static.item.endDate, "time")}`
+                          `${Helpers.moment(Static.item.startDate).format("YYYY-MM-DD")}
+                            - ${Helpers.moment(Static.item.endDate).format("YYYY-MM-DD")}`
                         }
                       </span>
                     )
@@ -184,7 +183,9 @@ const start = function (data, ID) {
                 </p>
                 <p>
                   Token type:{" "}
-                  <span class="details_bold">{Static.item.type}</span>
+                  <span class="details_bold">
+                    {Static.item.type}
+                  </span>
                 </p>
                 <p>
                   {Static.item.category} Token Price:{" "}
@@ -195,23 +196,21 @@ const start = function (data, ID) {
                 <p>
                   Fundraising Goal:{" "}
                   <span class="details_bold">
-                    {Static.item.targetSell} Token{" "}
+                  {Static.item.targetSell.toLocaleString()} Token{" "}
                   </span>
                 </p>
                 <p>
                   Total Tokens:{" "}
                   <span class="details_bold">
-                    {Static.item.totalSupply} token
+                  {Static.item.totalSupply.toLocaleString()} token
                   </span>
                 </p>
                 <p>
                   Available for Token Sale:{" "}
                   <span class="details_bold">
-                    {new Intl.NumberFormat('de-DE').format(
-                      Math.round(
-                        (Static.item.forSell * 100) / Static.item.totalSupply
-                      )
-                    )}
+                    {
+                      ((Static.item.forSell / Static.item.totalSupply) * 100).toFixed(1)
+                    }
                     %
                   </span>
                 </p>

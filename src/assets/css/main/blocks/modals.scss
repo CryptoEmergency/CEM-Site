@@ -313,8 +313,8 @@
 	}
 
 	&__title {
-		font-size: 1.8rem;
-		padding-right: 45px;
+		font-size: 1.5rem;
+		// padding-right: 45px;
 
 		@media(max-width: 389px) {
 			font-size: 1.6rem;
@@ -332,6 +332,20 @@
 		background: transparent url("../svg/close3.svg") center/1em auto no-repeat;
 		z-index: 100;
 		cursor: pointer;
+
+		&--new {
+			background-size: 1.2em;
+			right: 0;
+			top: 0;
+			width: 36px;
+			height: 36px;
+			border-radius: 20px;
+			background-color: rgba(135, 137, 146, 0.3);
+
+			&:hover {
+				background-color: rgba(135, 137, 146, 0.6);
+			}
+		}
 
 		img {
 			max-width: 100%;
@@ -1594,6 +1608,11 @@
 
 .c-askquestion {
 	// padding: 50px;
+
+	&-new {
+		display: flex;
+		grid-gap: 10px;
+	}
 
 	&__lang {
 		position: relative;
@@ -3540,6 +3559,13 @@
 			display: block;
 		}
 	}
+
+	.input-div {
+		height: auto;
+		border: none;
+		padding: 0;
+		border-radius: 8px;
+	}
 }
 
 .animated_button {
@@ -3660,6 +3686,32 @@
 
 		&-variant {
 			display: block;
+		}
+	}
+
+	.input-div {
+		height: auto;
+		border: none;
+		padding: 0;
+		border-radius: 8px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* modal #ModalRecoverPass (Восстановление пароля) */
+#ModalRecoverPass {
+	
+	.input-div {
+		height: auto;
+		border: none;
+		padding: 0;
+		border-radius: 8px;
+
+		&:last-child {
+			margin-bottom: 0;
 		}
 	}
 }
@@ -5432,7 +5484,7 @@ s
 
 		&__container--panel {
 			padding-top: 20px;
-			
+
 			@media(min-width: 1200px) {
 				width: calc(100% - 20px);
 			}

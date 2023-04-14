@@ -1878,11 +1878,22 @@
     }
 
     &__wrap {
+        position: relative;
         margin-bottom: 1rem;
         aspect-ratio: 1.77;
         // border: 1px solid #6747CD;
         border-radius: 10px;
         overflow: hidden;
+
+        &::after {
+            position: absolute;
+            content: '';
+            top: 10px;
+            right: 10px;
+            width: 27px;
+            height: 18px;
+            background: url("../svg/summer_forum/youtube.svg") no-repeat center / 100%;
+        }
 
         img {
             width: 100%;

@@ -18,6 +18,7 @@
         max-height: 500px;
         margin-bottom: 15px;
         padding: 10px;
+        font-size: 15px;
         border: 1px solid #9844b7;
         border-radius: 5px;
         overflow-y: auto;
@@ -47,6 +48,55 @@
             font-size: 14px;
             text-transform: capitalize;
             border-radius: 5px;
+        }
+    }
+
+    &__check {
+        position: relative;
+    }
+
+    &__checklist {
+        display: none;
+        position: absolute;
+        top: calc(100% + 5px);
+        right: 0;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background: #9844b7;
+        border-radius: 8px;
+
+        &--open {
+            display: block;
+        }
+
+        li {
+            padding: 6px 10px;
+            user-select: none;
+            cursor: pointer;
+
+            &:hover {
+                background: #6466DD;
+            }
+
+            &:nth-child(1) {
+                font-size: 12px;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+
+            &:nth-child(2) {
+                font-size: 14px;
+            }
+
+            &:nth-child(3) {
+                font-size: 16px;
+            }
+
+            &:nth-last-child(1) {
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }
         }
     }
 }

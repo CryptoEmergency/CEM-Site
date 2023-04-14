@@ -100,7 +100,8 @@
 		"textBold": "Жирный",
 		"textUnderline": "Подчеркнутый",
 		"insertLink": "Вставка ссылки",
-		"insertImage": "Вставить картинку"
+		"insertImage": "Вставить картинку",
+		"fontSize": "Размер шрифта"
 	},
 	"h": {
 		"success": "Успешно!",
@@ -328,7 +329,10 @@
 		"chooseSpecialization": "Выберите специализацию",
 		"budgetPerOrder": "Бюджет на заказ",
 		"urgently": "Срочно",
-		"supportProject": "Поддержать проект"
+		"supportProject": "Поддержать проект",
+		"smallFont": "мелкий",
+		"mediumFont": "средний",
+		"largeFont": "крупный"
 	},
 	"p": {
 		"answers": "ответов",

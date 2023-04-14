@@ -129,9 +129,6 @@ const start = function (data, ID) {
       name: "IGO",
     },
     {
-      name: "TBA",
-    },
-    {
       name: "IFO",
     },
   ];

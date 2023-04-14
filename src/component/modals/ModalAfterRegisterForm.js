@@ -10,7 +10,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
-import { fn } from '@src/functions/index.js';
+import { fn } from '@src/functions/export.js';
 
 // let Static = {}
 

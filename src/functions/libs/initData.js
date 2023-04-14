@@ -1,3 +1,4 @@
+import { Variable } from "@betarost/cemserver/cem.js";
 
 const initData = {}
 initData.any = function (Static) {
@@ -16,6 +17,16 @@ initData.ModalAfterRegisterForm = function (Static) {
     Static.forms.country = {
         valid: false
     }
+    return
+}
+
+initData.ModalAskQuestion = function (Static) {
+    Static.forms = {}
+    Static.forms.language = {
+        code: Variable.myInfo.mainLanguage.code
+    }
+    Static.forms.media = []
+    Static.forms.textQuestion = ""
     return
 }
 
