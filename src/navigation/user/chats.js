@@ -603,7 +603,7 @@ const start = function (data, ID) {
                                             .map((item, index) => {
                                                 let user
                                                 let lastMessage = item.message[0]
-                                                // console.log('=afa4ec= lastMessage =',lastMessage)
+                                                console.log('=afa4ec= lastMessage =',lastMessage)
                                                 let iconStatus = {
                                                     name: "",
                                                     width: 24,
@@ -724,7 +724,7 @@ const start = function (data, ID) {
 
                                                             </div>
                                                             <div class="messages_list_item_info-2">
-                                                                {lastMessage?.author == Variable.myInfo._id
+                                                                {lastMessage?.author == Variable.myInfo._id || (lastMessage?.author != Variable.myInfo._id && lastMessage.status != 1)
                                                                     ?
                                                                     <p>{lastMessage?.showDate ? fn.getDateFormat(lastMessage?.showDate, "chatlist") : null}</p>
                                                                     :

@@ -331,11 +331,11 @@ fn.getDateFormat = function (data, type) {
       let secondsBefore = Math.round(
         (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000
       );
-      if (secondsBefore < 86400) {
-        return Helpers.moment(data).fromNow();
-      } else {
+      // if (secondsBefore < 86400) {
+      //   return Helpers.moment(data).fromNow();
+      // } else {
         return Helpers.moment(data).format("HH:mm");
-      };
+      // };
     case "chatlist":
       let secondBefore = Math.round(
         (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000

@@ -80,6 +80,7 @@ const BottomMenu = function () {
                     href="/user/posts/"
                     class={["c-userpanel__icon c-userpanel__icon--posts c-userpanel__icon--mobile_visible", (Variable.dataUrl.category == "posts") ? "c-userpanel__icon--active" : null]}
                     onclick={(e) => {
+                        e.preventDefault();
                         if (Variable.auth) {
                             fn.siteLink(e)
                         } else {
