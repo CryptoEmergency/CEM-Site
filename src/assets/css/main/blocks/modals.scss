@@ -3703,7 +3703,7 @@
 
 /* modal #ModalRecoverPass (Восстановление пароля) */
 #ModalRecoverPass {
-	
+
 	.input-div {
 		height: auto;
 		border: none;
@@ -4483,6 +4483,12 @@ s
 		&__send {
 			@media(max-width: 1023px) {
 				width: 35px;
+			}
+		}
+
+		&__textcomment {
+			a {
+				color: #9191f1;
 			}
 		}
 	}
