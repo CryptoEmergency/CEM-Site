@@ -5,17 +5,17 @@ import {
   initReload,
   initOne,
   sendApi, 
-  init,
   load
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
-import { fn } from '@src/functions/export.js';
+import { fn } from '@src/functions/index.js';
 
 // let Static = {}
 
 const ModalAfterRegisterForm = function (data, ID) {
   let Static = fn.GetParams({ data, ID })
+
   load({
     ID,
     fnLoad: async () => {
@@ -23,7 +23,6 @@ const ModalAfterRegisterForm = function (data, ID) {
       Static = {
         isValid: false
       }
-
 
       const checkBefore = async function (Static, value) {
         // регулярки для никнеймов
