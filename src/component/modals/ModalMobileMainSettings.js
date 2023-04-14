@@ -100,7 +100,7 @@ const ModalMobileMainSettings = function (data, ID) {
                             <div
                                 class="language language_visible"
                                 onclick={() => {
-                                    fn.modals.ModalLanguageSite()
+                                    fn.modals.ModalLanguageSite({}, true)
                                 }}
                             >
                                 <div class="selectlink">
@@ -508,7 +508,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="user_mobile_menu_part">
                                 <div class="user_mobile_menu_content">
                                     CryptoEmergency
