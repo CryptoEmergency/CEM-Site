@@ -113,7 +113,9 @@ const start = function (data, ID) {
 
           <div class="wrap-voices">
             {arrVoting.map((item, index) => {
-              console.log(item, index);
+              {
+                /* console.log(item, index); */
+              }
               return (
                 <div class="voice-inner">
                   <h3 class="name">{item.title}</h3>
