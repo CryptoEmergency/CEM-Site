@@ -194,7 +194,7 @@ const start = function (data, ID) {
                   </span>
                 </p>
                 <p>
-                  Fundraising Goal:{" "}
+                  Tokens for sale:{" "}
                   <span class="details_bold">
                   {Static.item.targetSell.toLocaleString()} Token{" "}
                   </span>
