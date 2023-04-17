@@ -2,6 +2,7 @@ import {
     jsx,
     jsxFrag,
     Variable,
+    initReload
 } from "@betarost/cemserver/cem.js";
 // check
 import svg from "@assets/svg/index.js";
@@ -70,9 +71,11 @@ const VideoPlayer = function ({ Static, item, path, className = false, customCli
                         customClick()
                     } else {
                         Object.values(Static.elMedia).forEach((audio) => {
+                            Static.controls = true
                             if (audio.play && audio != elMedia) {
                                 audio.el.pause()
                             }
+                            initReload()
                         })
                         elMedia.play = true
                         playButton.style.display = 'none'
@@ -132,7 +135,9 @@ const VideoPlayer = function ({ Static, item, path, className = false, customCli
                     }
                 }}
             ></video>
-            <div class="controls">
+            <div class="controls"
+                style={Static.controls ? "display: flex" : "display: none"}
+            >
                 <img
                     src={svg["player_play"]}
                     class="playpause paused"

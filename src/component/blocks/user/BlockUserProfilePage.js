@@ -268,7 +268,10 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                         return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.speciality}</span>
-                                                                <div><input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /></div>
+                                                                <div>
+                                                                    {data.userInfo.information.speciality}
+                                                                    {/* <input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /> */}
+                                                                </div>
                                                             </div>
                                                         )
                                                     }

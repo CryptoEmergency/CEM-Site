@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Variable } from "@betarost/cemserver/cem.js";
 import images from "@assets/images/index.js";
 import { Swiper } from "@component/element/index.js";
-import { fn } from "@src/functions/index.js";
+import { fn } from "@src/functions/export.js";
 // Сделать запрос через Базу
 const banners = [
   // {
@@ -115,11 +115,11 @@ const banners = [
   //   image: "pro_banner",
   //   lang: "ru",
   // },
-  {
-    href: "https://ti.turovinvest.ru/moscow?utm_source=crypto+emergency+site",
-    image: "crypto_future",
-    lang: "ru",
-  },
+  // {
+  //   href: "https://ti.turovinvest.ru/moscow?utm_source=crypto+emergency+site",
+  //   image: "crypto_future",
+  //   lang: "ru",
+  // },
 ];
 
 const swiperOptions = {
@@ -166,24 +166,27 @@ const swiperOptions = {
   },
 };
 
-const BlockBanners = function () {
-  const bannersRecords = banners.map(function (item) {
+const BlockBanners = async function () {
+  const records = await fn.socket.get({ method: "Banners", params: { filter: {  } } })
+  console.log('=84a49b=', records)
+  const bannersRecords = records.map(function (item) {
+    
     let lang = Variable.lang.code == "ru" ? "ru" : "en";
-    if (item.lang == lang) {
+    if (item.languages.code == lang) {
       return (
         <a
           rel="nofollow noopener"
           target="_blank"
-          href={item.href}
+          href={item.link}
           class="swiper-slide"
           onclick={(e) => {
-            if (item.fn) {
+            if (item.modal) {
               fn.siteLink(e)
             }
           }}
         >
           <div>
-            <img src={images[`banners/${item.image}`]} />
+            <img src={`/assets/upload/worldPress/${item.name}`} />
           </div>
         </a>
       );
