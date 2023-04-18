@@ -6,6 +6,7 @@ import {
   load
 } from "@betarost/cemserver/cem.js";
 import { Avatar } from "@component/element/Avatar.js";
+import { fn } from '@src/functions/export.js';
 
 const ModalWhoLike = function ({ whoLike, type }, ID) {
   let close = true
