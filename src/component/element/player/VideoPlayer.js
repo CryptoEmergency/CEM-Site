@@ -41,7 +41,7 @@ const VideoPlayer = function ({ Static, item, path, className = false, customCli
             <div class="video_sign"></div>
             <img
                 Element={($el) => { playButton = $el; }}
-                style="width: 10%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)"
+                style="width: 10%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10;"
                 src={svg['play_button']} onclick={function (e) {
                     if (customClick) {
                         customClick()
