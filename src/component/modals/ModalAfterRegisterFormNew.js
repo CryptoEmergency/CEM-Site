@@ -154,12 +154,10 @@ const ModalAfterRegisterForm = function (data, ID) {
   })
 
   const sendRegistrationForm = async function (e) {
-    console.log('=282d5a=', "Переменная")
     e.preventDefault();
     if (!Data.MStatic.forms.isValid) {
       return false
     }
-    console.log('=282d5a=', "Переменная")
 
     // let insert = {
     //   nickname: Static.forms.nickName.val,
