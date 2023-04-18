@@ -57,4 +57,22 @@ ValidateForms.nickName = async function (val) {
     return [null, true]
 }
 
+ValidateForms.textQuestion = async (text) => {
+    if (text.length == 0) {
+        return [Variable.lang.error_div.not_empty_input, false]
+    } else if (text.length < 5) {
+        return [Variable.lang.error_div.minSymbol, false]
+    } else if (text.length > 500) {
+        return [Variable.lang.error_div.maxSymbol, false]
+    } else if (text.length >= 5 && text.length <= 500 && text.length !== 0) {
+
+        if (text.trim().length > 4 && text.trim() !== "") {
+            return [null, true]
+        }
+        else {
+            return [Variable.lang.error_div.not_empty_input, false]
+        }
+    }
+}
+
 export default ValidateForms

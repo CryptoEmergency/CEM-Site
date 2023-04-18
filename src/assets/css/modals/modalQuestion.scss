@@ -1,0 +1,72 @@
+.modal-question {
+
+    &__field {
+        background: #313543;
+        border: 1px solid #44495c;
+        border-bottom: 0;
+        min-height: 50px;
+        outline: none;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        font-weight: 500;
+        color: #ffffff;
+        position: relative;
+        display: flex;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    &__preview {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: calc(20% - 8px) calc(20% - 8px) calc(20% - 8px) calc(20% - 8px) calc(20% - 8px);
+    
+        &-item {
+            position: relative;
+            width: 100%;
+            hyphenate-character: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+
+            & > img {
+                width: 100%;
+            }
+
+            & > video {
+                width: 100%;
+            }
+        }
+
+        &-delete {
+            position: absolute;
+            top: -6px;
+            right: 0;
+            width: 20px;
+        }
+    }
+
+    &__size {
+        position: relative;
+
+        &-list {
+            position: absolute;
+            top: 40px;
+            font-size: 14px;
+            left: 0;
+            background: #5a5a5a;
+            z-index: 1;
+            border-radius: 10px;
+            padding: 2px 6px;
+
+            li {
+                cursor: pointer;
+
+                &:hover {
+                    color: #cccccc;
+                }
+            }
+        }
+    }
+}

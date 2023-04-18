@@ -22,11 +22,16 @@ initData.ModalAfterRegisterForm = function (Static) {
 
 initData.ModalAskQuestion = function (Static) {
     Static.forms = {}
+    Static.forms.isValid = false
     Static.forms.language = {
-        code: Variable.myInfo.mainLanguage.code
+        code: Variable.myInfo.mainLanguage.code,
+        orig: Variable.myInfo.mainLanguage.orig_name,
+        name: Variable.myInfo.mainLanguage.eng_name
     }
     Static.forms.media = []
-    Static.forms.textQuestion = ""
+    Static.forms.textQuestion = {
+        valid: false
+    }
     return
 }
 
