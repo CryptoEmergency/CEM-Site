@@ -4,29 +4,12 @@ import "@assets/css/index.js"
 import allCountries from '@src/modules/lists/allCountries.json'
 import phoneCodes from '@src/modules/lists/phoneCodes.json'
 import listsLang from '@src/modules/lists/languages.json'
-import { storage } from '@src/modules/storage.js'
-import { listen } from '@src/modules/listen.js'
+import { storage } from '@src/modules/load/storage.js'
+import { listen } from '@src/modules/load/listen.js'
+import { indexedDB } from '@src/modules/load/idb.js'
 import { Header } from '@src/navigation/header.js'
 import { Footer } from '@src/navigation/footer.js'
-import { indexedDB } from '@src/modules/load/idb.js'
 
-import {
-    // loadLists,
-    // loadStorage,
-    // loadData,
-    // loadListen,
-    // initInexedDB,
-    initSocket,
-    // mainBlock,
-    // mainHeader,
-    // mainFooter,
-    mainModal,
-    mainModalPage
-} from "@modules/index.js"
-
-
-await mainModal();
-await mainModalPage();
 CEM.initOptions({
     storage,
     listen,
@@ -64,30 +47,15 @@ CEM.initOptions({
     functions: import.meta.webpackContext('./src/modules/functions', {
         recursive: true,
         regExp: /\.js$/
+    }),
+    svg: import.meta.webpackContext('./src/assets/svg', {
+        recursive: true,
+        regExp: /\.(svg)$/
+    }),
+    images: import.meta.webpackContext('./src/assets/images', {
+        recursive: true,
+        regExp: /\.(png|jpg|jpeg|gif)$/
     })
 
 })
-setTimeout(() => {
-    initSocket();
-}, 1500);
-
-
-// const start = async function () {
-//     await loadLists();
-//     await loadStorage();
-//     await loadData();
-//     await loadListen();
-//     await initInexedDB();
-//     await initSocket();
-//     await mainBlock();
-//     await mainHeader();
-//     await mainFooter();
-//     await mainModal();
-//     await mainModalPage();
-//     setTimeout(async () => {
-//         await initGo("newPage")
-//     }, 250);
-
-// }
-
-// start();
+//19.04.2023
