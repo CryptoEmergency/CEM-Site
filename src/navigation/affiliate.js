@@ -19,10 +19,8 @@ const start = function (data, ID) {
         <Elements.page.MainContainer
           title={!Static.openModals ? Variable.lang.h.affiliate : null}
         >
-          <Elements.text.Main
-            text={Variable.lang.p.dontHaveFriends}
-            class="el-c el-size--20 el-color--grey el-w--500"
-          />
+          <p class="el-c el-size--20 el-color--grey el-w--500">{Variable.lang.p.dontHaveFriends}</p>
+
           <Elements.page.Container class="affiliate_program_conditions">
             <Elements.cards.Standart
               image={svg["icon/affiliate_conditions_icon-1"]}
