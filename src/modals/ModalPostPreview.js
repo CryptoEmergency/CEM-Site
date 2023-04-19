@@ -6,16 +6,18 @@ import {
     initOne,
     sendApi,
     init,
-    load
+    load,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
-import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
+// import images from '@assets/images/index.js';
+// import { fn } from '@src/functions/index.js';
 import { Input } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
 
-// let Static = {}
+const { images, svg, fn } = CEM
 
+// let Static = {}
 
 const ModalPostPreview = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
