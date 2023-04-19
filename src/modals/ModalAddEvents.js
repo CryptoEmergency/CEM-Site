@@ -1,10 +1,13 @@
 import {
     jsx,
     jsxFrag,
-    init
+    init,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+
+const fn = CEM.fn
+
 const ModalAddEvents = function ({ icon, text }, ID) {
 
     init(

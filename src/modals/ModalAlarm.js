@@ -2,10 +2,13 @@ import {
     jsx,
     jsxFrag,
     timerStopStart,
-    load
+    load,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/export.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/export.js';
+// import svg from "@assets/svg/index.js";
+
+const { svg, fn } = CEM
 
 const ModalAlarm = function ({ icon = "alarm_icon", text }, ID) {
     timerStopStart({

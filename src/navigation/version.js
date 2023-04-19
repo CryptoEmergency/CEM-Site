@@ -3,7 +3,6 @@ import {
   jsxFrag,
   CEM,
   load,
-  fn,
   Variable
 } from "@betarost/cemserver/cem.js";
 
@@ -20,7 +19,7 @@ const start = function (data, ID) {
         <div class="startap c-main__body">
           <button
             onclick={() => {
-              CEM.fn.modals.ModalAfterRegisterFormNew({})
+              CEM.fn.modals.ModalChangeFrame({})
             }}
           >
             ggggggggggggggggggggggggg

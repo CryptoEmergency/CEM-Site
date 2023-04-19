@@ -6,16 +6,17 @@ import {
     initOne,
     sendApi,
     init,
-    load
+    load,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
-import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
+// import images from '@assets/images/index.js';
+// import { fn } from '@src/functions/index.js';
 import { Input } from '@component/element/index.js';
 
+const { images, svg, fn } = CEM
+
 // let Static = {}
-
-
 const ModalAuth = function (data, ID) {
   //   console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
 

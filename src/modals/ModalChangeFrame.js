@@ -50,7 +50,8 @@ const ModalChangeFrame = function ({ author }, ID) {
             data.list_records.forEach((frame) => {
                 Static.frames.push(frame);
             })
-            Static.activeFrame = Variable.myInfo.frame.name;
+            console.log('=78978d=', Variable)
+            Static.activeFrame = Variable.myInfo?.frame?.name;
         },
         fn: () => {
             return (

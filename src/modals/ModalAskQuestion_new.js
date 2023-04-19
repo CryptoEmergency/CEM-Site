@@ -6,11 +6,14 @@ import {
   sendApi,
   Helpers,
   Data,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/export.js';
+// import { fn } from '@src/functions/export.js';
 import { MediaButton, MediaPreview, InputDiv } from '@component/element/index.js';
-import svg from '@assets/svg/index.js';
+// import svg from '@assets/svg/index.js';
+
+const { svg, fn } = CEM
 
 const checForm = async function (Static) {
   // console.log('=c35305= checForm', Data.MStatic)
@@ -96,15 +99,17 @@ const clearEmptyTag = function (Static) {
 };
 
 const ModalAskQuestion = function (data, ID) {
-  let [Static] = fn.GetParams({ data, ID, initData: "ModalAskQuestion" })
+  let [Static] = fn.GetParams({ data, ID, initData: "ModalAskQuestionNew" })
 
   Static.listSize = false
 
+  
   load({
     ID,
     fnLoad: async () => {
       Static.activeFiletype = null
 
+      // console.log('=e3e693=', Variable.myInfo)
     },
     fn: () => {
       console.log('=42e332=', Static)
@@ -182,7 +187,6 @@ const ModalAskQuestion = function (data, ID) {
                               name: response.name
                             }
                             Static.forms.media.push(data)
-                            // updateRecords({ media: Static.item.media })
                             initReload()
                           },
                         )

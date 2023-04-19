@@ -1,6 +1,8 @@
-import { jsx, jsxFrag, init, initReload } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, init, initReload, CEM } from "@betarost/cemserver/cem.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
+
+const { svg, fn } = CEM
 
 const ModalAddVoting = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });

@@ -6,7 +6,7 @@ initData.any = function (Static) {
     return
 }
 
-initData.ModalAfterRegisterForm = function (Static) {
+initData.ModalAfterRegisterFormNew = function (Static) {
     Static.forms = {}
     Static.forms.isValid = false
     Static.forms.nickName = {
@@ -21,7 +21,7 @@ initData.ModalAfterRegisterForm = function (Static) {
     return
 }
 
-initData.ModalAskQuestion = function (Static) {
+initData.ModalAskQuestionNew = function (Static) {
     Static.forms = {}
     Static.forms.isValid = false
     Static.forms.language = {

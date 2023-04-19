@@ -97,7 +97,7 @@ const sendPhoto = async function (crooper, path) {
 const Avatar = function ({ author, parent = null, nickName = false, speciality = false, dateShow = false, settings = false, frame = false, activeFrame = false, toggleActiveFrame = false }) {
 
   let myProfile = false
-  if (Variable.myInfo && Variable.myInfo._id == author._id) {
+  if (Variable.myInfo && Variable.myInfo._id == author?._id) {
     myProfile = true
   }
 

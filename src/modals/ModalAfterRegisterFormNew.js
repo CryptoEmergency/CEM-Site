@@ -35,7 +35,7 @@ const checForm = async function () {
 }
 
 const ModalAfterRegisterForm = function (data, ID) {
-  let [Static] = fn.GetParams({ data, ID, initData: "ModalAfterRegisterForm" })
+  let [Static] = fn.GetParams({ data, ID, initData: "ModalAfterRegisterFormNew" })
 
   console.log('=99823e=', Static)
   load({

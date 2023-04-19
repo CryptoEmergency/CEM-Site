@@ -4,15 +4,16 @@ import {
   jsxFrag,
   Variable,
   init,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
+
+const { svg, fn } = CEM
 
 const MiniChat = function (data, ID) {
-
-
 
   let [Static] = fn.GetParams({ data, ID })
 
