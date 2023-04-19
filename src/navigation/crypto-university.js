@@ -11,14 +11,14 @@ import {
 } from "@betarost/cemserver/cem.js";
 
 // import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
 import Elements from '@src/elements/export.js';
 
 import 'swiper/css/bundle';
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const Tags = function ({ Static, classActive, text, type }) {
     return (

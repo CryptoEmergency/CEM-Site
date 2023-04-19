@@ -6,10 +6,10 @@ import {
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
 import { BlockNews } from '@elements/blocks/index.js';
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
 import { NotFound, ButtonShowMore, LazyImage } from "@elements/element/index.js";
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })

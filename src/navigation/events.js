@@ -12,15 +12,15 @@ import {
 } from "@betarost/cemserver/cem.js";
 
 // import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
 import Elements from '@src/elements/export.js';
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@elements/element/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const makeFilter = function (Static) {
     let objReturn = {}

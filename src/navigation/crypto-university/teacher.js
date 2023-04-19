@@ -6,13 +6,13 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 // import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import images from "@assets/images/index.js";
 // import { fn } from '@src/functions/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
 
-const { svg, fn } = CEM
+const { images, svg, fn } = CEM
 
 const start = function (data, ID) {
 

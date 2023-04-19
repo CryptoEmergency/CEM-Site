@@ -7,10 +7,10 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from "@src/functions/index.js";
-import images from "@assets/images/index.js";
+// import images from "@assets/images/index.js";
 import Elements from "@src/elements/export.js";
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const showListStartaps = function (listStartaps) {
   return listStartaps.map((item) => {

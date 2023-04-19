@@ -1,12 +1,15 @@
 import {
   jsx,
   jsxFrag,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
 import Elements from '@src/elements/export.js';
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { BlockTrade } from '@elements/blocks/index.js';
+
+const { fn } = CEM
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })

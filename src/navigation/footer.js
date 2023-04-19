@@ -8,10 +8,10 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
 import { BottomMenu } from "@elements/element/BottomMenu.js";
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const Footer = async function () {
     let socialIcon, collapseBodyShow;

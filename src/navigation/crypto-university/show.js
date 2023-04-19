@@ -11,14 +11,14 @@ import {
 
 // import { fn } from '@src/functions/index.js';
 // import svg from '@assets/svg/index.js';
-import images from "@assets/images/index.js";
+// import images from "@assets/images/index.js";
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment } from "@elements/element/index.js";
 import { BlockError404 } from '@elements/blocks/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
 
-const { svg, fn } = CEM
+const { images, svg, fn } = CEM
 
 const Tags = function ({ Static, classActive, text, type }) {
     return (

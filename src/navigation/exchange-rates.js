@@ -12,9 +12,9 @@ import {
 // import { fn } from '@src/functions/index.js';
 import { BlockExchange } from '@elements/blocks/index.js';
 import Elements from '@src/elements/export.js';
-import svg from '@assets/svg/index.js';
+// import svg from '@assets/svg/index.js';
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })

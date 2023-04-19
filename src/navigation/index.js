@@ -11,8 +11,8 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
 import { Select, NotFound } from "@elements/element/index.js";
 import Elements from "@src/elements/export.js";
 
@@ -28,7 +28,7 @@ import {
 } from "@elements/blocks/index.js";
 import { ButtonShowMore } from "@elements/element/index.js";
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const makeFilter = function (Static) {
   let objReturn = {};
