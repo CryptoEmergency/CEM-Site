@@ -15,7 +15,7 @@ import { Particles } from "@src/elements/htmlElements/index.js";
 
 // import { AboutAnimation } from "@src/elements/blocks/AboutAnimation";
 
-const { images, svg } = CEM
+const { images, svg, elements } = CEM
 
 const team = [
   {
@@ -309,14 +309,14 @@ const start = function (data, ID) {
             >
               <Elements.cards.Animated records={arrBlockCard} />
 
-              <Elements.Accordeon records={arrAccordeon} />
+              <elements.Accordeon records={arrAccordeon} />
 
               <Elements.page.Container
                 class={["team"]}
                 resetClass={true}
                 title={Variable.lang.h.our_team}
               >
-                <Elements.Team records={team} />
+                <elements.sliderTeam records={team} />
               </Elements.page.Container>
             </Elements.page.Container>
 
@@ -324,7 +324,7 @@ const start = function (data, ID) {
               resetClass={true}
               title={<h2 class="mb--50">{Variable.lang.h.road_map}</h2>}
             >
-              <Elements.Roadmap records={roadmap} />
+              <elements.Roadmap records={roadmap} />
             </Elements.page.Container>
 
             <Elements.page.Container
