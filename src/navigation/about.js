@@ -11,7 +11,6 @@ import {
 // import images from "@assets/images/index.js";
 import Elements from "@src/elements/export.js";
 
-import { Particles } from "@src/elements/htmlElements/index.js";
 
 // import { AboutAnimation } from "@src/elements/blocks/AboutAnimation";
 
@@ -291,8 +290,6 @@ const start = function (data, ID) {
           }
         >
           {/* <div class="c-aboutus about_us_container c-main__body"> */}
-
-          {/* <Particles></Particles> */}
 
           <Elements.page.Container
             class={["c-aboutus__content", "c-container"]}

@@ -42,9 +42,8 @@ const start = function (data, ID) {
           {/* <BlockNews Static={Static} /> */}
 
           <Elements.page.Container class="tags pb--0 pt--10">
-            <Elements.button.Category
-              class={Static.activeCategory == "All" ? "tag_button_active" : ""}
-              text={Variable.lang.categoryName.all}
+            <div
+              class={["tag_button", Static.activeCategory == "All" ? "tag_button_active" : ""]}
               onclick={async () => {
                 Static.activeCategory = "All";
                 Static.records = await fn.socket.get({
@@ -60,17 +59,15 @@ const start = function (data, ID) {
                   },
                 });
                 initReload();
-              }}
-            />
+              }}>
+              <span>{Variable.lang.categoryName.all}</span>
+            </div>
             {Static.categoryList.list_records.map((item) => {
               return (
-                <Elements.button.Category
-                  class={
-                    Static.activeCategory == item.name
-                      ? "tag_button_active"
-                      : ""
-                  }
-                  text={Variable.lang.categoryName[item.name]}
+                <div
+                  class={["tag_button", Static.activeCategory == item.name
+                    ? "tag_button_active"
+                    : ""]}
                   onclick={async () => {
                     Static.activeCategory = item.name;
                     Static.records = await fn.socket.get({
@@ -86,8 +83,9 @@ const start = function (data, ID) {
                       },
                     });
                     initReload();
-                  }}
-                />
+                  }}>
+                  <span>{Variable.lang.categoryName[item.name]}</span>
+                </div>
               );
             })}
           </Elements.page.Container>

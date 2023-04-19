@@ -3,7 +3,6 @@ import { jsx, jsxFrag, Variable, load, CEM } from "@betarost/cemserver/cem.js";
 // import svg from "@assets/svg/index.js";
 // import { fn } from "@src/functions/index.js";
 import { Avatar } from "@elements/element/index.js";
-import { TextInSpan, Row, Link, Button, Img } from "@elements/htmlElements/index.js";
 
 const { images, svg, fn } = CEM
 
@@ -26,7 +25,22 @@ const Header = async function () {
                                     if (!Variable.Static.forumHeaderShow) {
                                         return (
                                             <div class="c-header__auth">
-                                                <Row
+                                                <div
+                                                    class="language"
+                                                    onclick={() => {
+                                                        fn.modals.ModalLanguageSite({});
+                                                    }}>
+                                                    <div
+                                                        class={["selectlink", "selectlink-control"]}>
+                                                        <span>
+                                                            {Variable.lang.lang_orig}
+                                                        </span>
+                                                    </div>
+                                                    {/* <TextInSpan mClass={["selectlink", "selectlink-control"]}>
+                                                        {Variable.lang.lang_orig}
+                                                    </TextInSpan> */}
+                                                </div>
+                                                {/* <Row
                                                     class="language"
                                                     onclick={() => {
                                                         fn.modals.ModalLanguageSite({});
@@ -35,7 +49,7 @@ const Header = async function () {
                                                     <TextInSpan mClass={["selectlink", "selectlink-control"]}>
                                                         {Variable.lang.lang_orig}
                                                     </TextInSpan>
-                                                </Row>
+                                                </Row> */}
                                                 {() => {
                                                     if (Variable.auth && Variable.myInfo) {
                                                         return (
@@ -47,17 +61,28 @@ const Header = async function () {
                                                         );
                                                     } else {
                                                         return (
-                                                            <Row style="display: flex; align-items: center">
-                                                                <Link
+                                                            <div
+                                                                style="display: flex; align-items: center">
+                                                                <a
                                                                     class="log-in"
                                                                     onclick={(e) => {
                                                                         e.stopPropagation();
                                                                         fn.modals.ModalAuth({});
-                                                                    }}
-                                                                >
+                                                                    }}>
                                                                     {Variable.lang.button.login}
-                                                                </Link>
-                                                                <Button
+                                                                </a>
+
+                                                                <button
+                                                                    type="button"
+                                                                    class="c-button c-button--gradient"
+                                                                    onclick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        fn.modals.ModalReg({});
+                                                                    }}>
+                                                                    <span class="c-button__text">{Variable.lang.button.registration}</span>
+                                                                </button>
+
+                                                                {/* <Button
                                                                     class="c-button c-button--gradient"
                                                                     text={Variable.lang.button.registration}
                                                                     textClass="c-button__text"
@@ -65,8 +90,8 @@ const Header = async function () {
                                                                         e.stopPropagation();
                                                                         fn.modals.ModalReg({});
                                                                     }}
-                                                                ></Button>
-                                                            </Row>
+                                                                ></Button> */}
+                                                            </div>
                                                         );
                                                     }
                                                 }}
@@ -83,97 +108,87 @@ const Header = async function () {
                                         return (
                                             <nav class="c-header__menu c-menu c-menu--forum" style="position: relative;">
                                                 <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div>
-                                                <Link
+                                                <a
                                                     class="c-logo c-menu__link"
                                                     href="/"
-                                                    onclick={fn.siteLink}
-                                                >
-                                                    <Img eClass="c-logo__image" src={svg.logo}></Img>
-                                                </Link>
-                                                <Link
+                                                    onclick={fn.siteLink}>
+                                                    <img
+                                                        src={svg.logo}
+                                                        class="c-logo__image">
+                                                    </img>
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
-                                                    // href="#about"
                                                     onclick={(e) => {
                                                         window.scrollTo({
                                                             top: document.querySelector("#about").offsetTop - 75,
                                                             behavior: "smooth",
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.aboutForum}
-                                                </Link>
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
-                                                    // href="#stands"
                                                     onclick={(e) => {
                                                         window.scrollTo({
                                                             top: document.querySelector("#stands").offsetTop - 75,
                                                             behavior: "smooth",
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.stands}
-                                                </Link>
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
-                                                    // href="#speakers"
                                                     onclick={(e) => {
                                                         window.scrollTo({
                                                             top: document.querySelector("#speakers").offsetTop - 75,
                                                             behavior: "smooth",
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.speakers}
-                                                </Link>
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
-                                                    // href="#guests"
                                                     onclick={(e) => {
                                                         window.scrollTo({
                                                             top: document.querySelector("#guests").offsetTop - 75,
                                                             behavior: "smooth",
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.guests}
-                                                </Link>
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
-                                                    // href="#forumtopics"
                                                     onclick={(e) => {
                                                         window.scrollTo({
                                                             top: document.querySelector("#forumtopics").offsetTop - 75,
                                                             behavior: "smooth",
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.topics}
-                                                </Link>
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
-                                                    // href="#partners"
                                                     onclick={(e) => {
                                                         window.scrollTo({
                                                             top: document.querySelector("#partners").offsetTop - 75,
                                                             behavior: "smooth",
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.partnersForum}
-                                                </Link>
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
-                                                    // href="#localmap"
                                                     onclick={(e) => {
                                                         window.scrollTo({
                                                             top: document.querySelector("#localmap").offsetTop - 75,
                                                             behavior: "smooth",
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.localmap}
-                                                </Link>
+                                                </a>
+
+
                                                 {/* <a
                           class={[
                             "c-userpanel__icon",
@@ -191,14 +206,17 @@ const Header = async function () {
                                         return (
                                             <nav class="c-header__menu c-menu" style="position: relative;">
                                                 <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div>
-                                                <Link
+
+                                                <a
                                                     class="c-logo c-menu__link"
                                                     href="/"
-                                                    onclick={fn.siteLink}
-                                                >
-                                                    <Img eClass="c-logo__image" src={svg.logo}></Img>
-                                                </Link>
-                                                <Link
+                                                    onclick={fn.siteLink}>
+                                                    <img
+                                                        src={svg.logo}
+                                                        class="c-logo__image">
+                                                    </img>
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
                                                     href="/contacts/"
                                                     onclick={(e) => {
@@ -206,12 +224,10 @@ const Header = async function () {
                                                             title: Variable.lang.a.contacts,
                                                             items: fn.itemsMenu.onlyPage({ url: "/contacts/" }),
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.contacts}
-                                                </Link>
-
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
                                                     href="/about/"
                                                     onclick={(e) => {
@@ -219,12 +235,10 @@ const Header = async function () {
                                                             title: Variable.lang.a.about,
                                                             items: fn.itemsMenu.onlyPage({ url: "/about/" }),
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.about}
-                                                </Link>
-
-                                                <Link
+                                                </a>
+                                                <a
                                                     class="c-menu__link"
                                                     href="/blog/"
                                                     onclick={(e) => {
@@ -232,10 +246,11 @@ const Header = async function () {
                                                             title: Variable.lang.a.blog,
                                                             items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
                                                         });
-                                                    }}
-                                                >
+                                                    }}>
                                                     {Variable.lang.a.blog}
-                                                </Link>
+                                                </a>
+
+
                                             </nav>
                                         )
                                     }
