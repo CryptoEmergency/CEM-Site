@@ -3,18 +3,19 @@ import {
     jsxFrag,
     Variable,
     init,
-    load
+    load,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 import { Input, ButtonSubmit, TextArea } from '@elements/element/index.js';
+
+const { images, svg, fn } = CEM
 
 const showModalUserAddWork = function (e) {
     e.stopPropagation()
     Variable.DelModals("ModalUserAddWork");
 }
-
-
 
 const ModalUserAddWork = function ({ userInfo, type }, ID) {
     // console.log('=756c32=', userInfo, type)

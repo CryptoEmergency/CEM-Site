@@ -3,18 +3,19 @@ import {
     jsxFrag,
     Variable,
     init,
-    load
+    load,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 import { Input, ButtonSubmit, TextArea } from '@elements/element/index.js';
+
+const { images, svg, fn } = CEM
 
 const showModalUserInfoEdit = function (e) {
     e.stopPropagation()
     Variable.DelModals("ModalUserInfoEdit");
 }
-
-
 
 const ModalUserInfoEdit = function (userInfo, ID) {
     let Static = fn.GetParams({ ID })
