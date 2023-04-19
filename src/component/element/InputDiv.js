@@ -10,7 +10,7 @@ const InputDiv = function ({ error, className, placeholder, Element, textContent
             <div style="color:red;">{error ? error : null}</div>
             <div
                 class={className}
-                // Element={Element}
+                Element={Element}
                 contenteditable={contenteditable}
                 placeholder={placeholder}
                 // textContent={textContent}

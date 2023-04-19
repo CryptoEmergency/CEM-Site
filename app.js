@@ -55,7 +55,11 @@ CEM.initOptions({
     images: import.meta.webpackContext('./src/assets/images', {
         recursive: true,
         regExp: /\.(png|jpg|jpeg|gif)$/
-    })
+    }),
+    elements: import.meta.webpackContext('./src/elements', {
+        recursive: true,
+        regExp: /\.js$/
+    }),
 
 })
 //19.04.2023
