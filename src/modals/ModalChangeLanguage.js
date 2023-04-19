@@ -1,9 +1,10 @@
-import { jsx, jsxFrag, Variable, initReload, init, load } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/export.js';
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, Variable, initReload, init, load, CEM } from "@betarost/cemserver/cem.js";
+// import { fn } from '@src/functions/export.js';
+// import svg from "@assets/svg/index.js";
 import { Input } from '@component/element/index.js';
 //"alarm_icon" : "confirm_icon"
 
+const { svg, fn } = CEM
 
 let inputValue, allLang;
 // let Static = {}
@@ -14,9 +15,6 @@ const changeInput = (e) => {
   allLang = Variable.listsLang.filter((item) => `${item.eng_name} (${item.orig_name})`.toLowerCase().includes(inputValue) == true)
   initReload("modals");
 }
-
-
-
 
 const ModalChangeLanguage = function (data, ID) {
   console.log('=7a3ec7=', 123)

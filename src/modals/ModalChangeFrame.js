@@ -5,10 +5,13 @@ import {
     init,
     initReload,
     sendApi,
-    load
+    load,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { Avatar } from '@component/element/index.js';
+
+const fn = CEM.fn
 
 let newFrame = null;
 
@@ -50,7 +53,7 @@ const ModalChangeFrame = function ({ author }, ID) {
             data.list_records.forEach((frame) => {
                 Static.frames.push(frame);
             })
-            console.log('=78978d=', Variable)
+            // console.log('=78978d=', Variable.myInfo)
             Static.activeFrame = Variable.myInfo?.frame?.name;
         },
         fn: () => {

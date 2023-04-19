@@ -18,7 +18,7 @@ const start = function (data, ID) {
         <div class="startap c-main__body">
           <button
             onclick={() => {
-              CEM.fn.modals.ModalChangeFrame({})
+              fn.modals.ModalAskQuestion_new({})
             }}
           >
             ggggggggggggggggggggggggg
