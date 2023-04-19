@@ -32,7 +32,6 @@ const storage = async function () {
             }
         }
         setStorage("recordsView", objView)
-        console.log('=e0a179=', Variable.myInfo)
     } catch (error) {
         console.error(error, "loadStorage")
     }
