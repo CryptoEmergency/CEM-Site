@@ -1,4 +1,4 @@
-import { Variable } from '@betarost/cemserver/cem.js'
+import { Variable, fn } from '@betarost/cemserver/cem.js'
 
 const listen = []
 
@@ -56,9 +56,8 @@ listen.push({
 listen.push({
     type: "document",
     name: "click",
-    fn: function () {
-        console.log('=6f1984=', window.pageYOffset, window.pageXOffset)
-        // fn.clickHide(e)
+    fn: function (e) {
+        fn.clickHide(e)
     }
 })
 

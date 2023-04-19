@@ -3,7 +3,6 @@ import { jsx, jsxFrag, CEM } from "@betarost/cemserver/cem.js";
 const { images, svg, fn } = CEM
 
 const forExport = function ({ records }) {
-  console.log(records)
   return (
     <div class="list-ico">
       {records.map((item) => {

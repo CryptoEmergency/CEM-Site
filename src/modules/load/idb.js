@@ -22,5 +22,19 @@ const indexedDB = async function () {
         },
     });
 }
+// fn.idb = {}
 
+// fn.idb.get = async function (table, key) {
+//   let record = await (await idb).get(table, key)
+//   if (!record) {
+//     return []
+//   }
+//   return record
+// }
+
+// fn.idb.set = async function (table, key, value) {
+//   (await idb).put("CachePage", { test: "dfh", name: "dfhdhf" })
+//   return
+//   return await (await idb).put(table, value, key)
+// }
 export { indexedDB, idb };
