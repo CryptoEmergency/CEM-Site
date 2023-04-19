@@ -1,11 +1,9 @@
-import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendApi, initGo, initReload, Data, CEM } from "@betarost/cemserver/cem.js";
-// import { modals } from "./modals.js"
-// import { initData } from "./initData.js"
-// import { restApi } from "./restApi.js"
-// import { itemsMenu } from "./itemsMenu.js"
+import { CEM } from "@betarost/cemserver/cem.js";
+
+
 // import { web3CEM, web3Action } from "./web3.js"
-// import socket from "./socket.js"
-// import { functionsMain } from "@src/lists/files/index.js"
+
+
 // import { idb } from "@src/modules/load/initInexedDB.js";
 // console.log('=d57934=', CEM.fn)
 const fn = CEM.fn
@@ -84,20 +82,7 @@ const fn = CEM.fn
 //   }
 // };
 
-// fn.uploadMedia = function (file, type, onload, onprogress, xhr) {
-//   let nameFile = "file.png"
-//   if (file.name) {
-//     nameFile = file.name
-//   }
-//   const formData = new FormData()
-//   formData.append('media', file, nameFile);
 
-//   xhr = new XMLHttpRequest()
-//   xhr.open('POST', `/upload/${type}/`)
-//   xhr.onload = onload
-//   xhr.upload.onprogress = onprogress
-//   xhr.send(formData)
-// }
 
 // fn.timerTik = async function () {
 //   // console.log("timerTik", "tt",Variable.dataUrl)
@@ -203,32 +188,7 @@ const fn = CEM.fn
 
 // };
 
-// fn.percent = function (num1, num2) {
-//   return ((Number(num1) / Number(num2)) * 100)
-// };
 
-// fn.transactionTypeToLang = function (type) {
-//   let returnType = ""
-//   switch (type) {
-//     case 'registration':
-//       returnType = Variable.lang.p.transactionRegistration
-//       break
-//     case 'referral_registration':
-//       returnType = Variable.lang.p.transactionReferralRegistration
-//       break
-//     case 'other':
-//       returnType = Variable.lang.p.transactionOther
-//       break
-//     case 'awards':
-//       returnType = Variable.lang.p.transactionAwards
-//       break
-//     case 'level':
-//       returnType = Variable.lang.p.transactionLevel
-//       break
-//   }
-//   return returnType;
-
-// }
 
 // fn.CreateMenuItems = function (data) {
 
@@ -283,110 +243,5 @@ const fn = CEM.fn
 
 
 
-
-// fn.sliceString = function (str, number = 66) {
-//   let sliceStr = '';
-//   if (str.length >= number) {
-//     sliceStr = `${str.slice(0, number)} ...`;
-//   } else {
-//     sliceStr = str;
-//   }
-//   return sliceStr;
-// };
-
-// fn.NumFormat = function (num) {
-//   if (num === null || num === undefined) {
-//     return 0;
-//   }
-//   return num.toLocaleString('en-US')
-// };
-
-// fn.getDateFormat = function (data, type) {
-//   if (!data) {
-//     return null
-//   }
-//   Helpers.moment.locale(Variable.lang.code);
-//   data = data.replace(' ', 'T')
-//   switch (type) {
-//     case "now":
-//       let secondsBefor = Math.round(
-//         (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000
-//       );
-//       if (secondsBefor < 86400) {
-//         return Helpers.moment(data).fromNow();
-//       } else {
-//         return Helpers.moment(data).format("DD MMMM YYYY");
-//       };
-//     case "time":
-//       return Helpers.moment(data).format('YYYY-MM-DD hh:mm')
-//     case "chatdate":
-//       return Helpers.moment(data).format("dd, D MMM");
-//     case "chattime":
-//       let secondsBefore = Math.round(
-//         (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000
-//       );
-//       // if (secondsBefore < 86400) {
-//       //   return Helpers.moment(data).fromNow();
-//       // } else {
-//         return Helpers.moment(data).format("HH:mm");
-//       // };
-//     case "chatlist":
-//       let secondBefore = Math.round(
-//         (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000
-//       );
-//       if (secondBefore < 86400) {
-//         return Helpers.moment(data).format("HH:mm");
-//       } else if (secondBefore < 604800) {
-//         return Helpers.moment(data).format("dddd");
-//       } else {
-//         return Helpers.moment(data).format("DD.MM.YY");
-//       };
-//     default:
-//       return Helpers.moment(data).format("YYYY-MM-DD");
-//   }
-// };
-
-// fn.siteLink = async function (e) {
-//   let link
-
-//   if (typeof e == "string") {
-//     link = e
-
-//   } else {
-//     // console.log(e)
-//     e.preventDefault();
-//     if (!e.currentTarget || !e.currentTarget.href) {
-//       console.error("Not have href")
-//       return
-//     }
-//     link = e.currentTarget.href;
-//   }
-//   // console.log('=fc61e3=', link, window.location.href, Variable.dataUrl)
-//   if (link == window.location.href || link == Variable.dataUrl.href) {
-//     history.pushState(null, null, link);
-//     initGo("newPage")
-//     // window.scrollTo({
-//     //   top: 0,
-//     //   behavior: "instant",
-//     // });
-//   } else {
-
-//     history.pushState(null, null, link);
-//     await parsingUrl()
-//   }
-//   return
-// }
-
-
-// fn.checkValid = function (Static, Array) {
-//   Static.isValid = true
-//   Array.forEach(function (elem) {
-//     if (!Static[elem] || !Static[elem].valid) {
-//       Static.isValid = false
-//     }
-//   })
-//   initReload()
-//   return;
-// }
 
 export { fn }
