@@ -54,7 +54,8 @@ listen.push({
 })
 
 listen.push({
-    type: "document",
+    // type: "document",
+    type: "window",
     name: "click",
     fn: function (e) {
         fn.clickHide(e)

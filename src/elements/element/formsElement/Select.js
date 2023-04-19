@@ -41,7 +41,7 @@ const Select = function ({ options, callback, toggler, icon = false }) {
             options.open = !options.open;
             if (options.elem.hidden === true) {
               options.elem.hidden = false;
-              Variable.OutHideWindows.push([options.elemActive, options.elem]);
+              // Variable.OutHideWindows.push([options.elemActive, options.elem]);
             } else {
               options.elem.hidden = true;
             }
@@ -64,6 +64,11 @@ const Select = function ({ options, callback, toggler, icon = false }) {
             options.elem = $el
           }}
           class="justselect-list"
+          // HiddenOut={function () {
+          //   console.log('=9131fd=', 5555, this)
+          //   this.el.hidden = true
+          // }}
+          // HiddenOut={true}
           hidden={true}>
           {() => {
             return options.items.map((item, index) => {
