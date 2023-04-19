@@ -7,11 +7,14 @@ import {
     initReload,
     Helpers,
     timersStart,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { BlockExchange } from '@component/blocks/index.js';
 import Elements from '@src/elements/export.js';
 import svg from '@assets/svg/index.js';
+
+const fn = CEM.fn
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })

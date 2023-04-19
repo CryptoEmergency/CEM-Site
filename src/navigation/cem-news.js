@@ -1,12 +1,16 @@
 import {
   jsx,
   jsxFrag,
-  init
+  init,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { BlockNews } from '@component/blocks/index.js';
 import svg from "@assets/svg/index.js";
 import { NotFound, ButtonShowMore, LazyImage } from "@component/element/index.js";
+
+const fn = CEM.fn
+
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   init(

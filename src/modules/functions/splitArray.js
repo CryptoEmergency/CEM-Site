@@ -1,4 +1,3 @@
-
 const forExport = function (arr, size) {
     let arrReturn = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -8,5 +7,3 @@ const forExport = function (arr, size) {
 }
 
 export default forExport
-
-

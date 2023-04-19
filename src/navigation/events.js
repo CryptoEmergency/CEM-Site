@@ -8,9 +8,10 @@ import {
     load,
     Variable,
     initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Elements from '@src/elements/export.js';
@@ -18,6 +19,8 @@ import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@comp
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
+
+const fn = CEM.fn
 
 const makeFilter = function (Static) {
     let objReturn = {}

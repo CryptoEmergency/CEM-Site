@@ -5,10 +5,13 @@ import {
     initGo,
     Variable,
     load,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
+// import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
 import { BottomMenu } from "@component/element/BottomMenu.js";
+
+const fn = CEM.fn
 
 const Footer = async function () {
     let socialIcon, collapseBodyShow;
