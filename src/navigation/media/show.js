@@ -4,7 +4,7 @@ import { jsx, jsxFrag, load, Variable, CEM } from "@betarost/cemserver/cem.js";
 // import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
 
-import { BlockShowNews, BlockError404 } from "@component/blocks/index.js";
+import { BlockShowNews, BlockError404 } from "@elements/blocks/index.js";
 
 const { svg, fn } = CEM
 

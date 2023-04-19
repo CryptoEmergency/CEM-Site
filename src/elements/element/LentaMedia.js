@@ -4,7 +4,7 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 
-import { AudioPlayer, Swiper, VideoPlayer, LazyImage, Panzoom } from "@component/element/index.js";
+import { AudioPlayer, Swiper, VideoPlayer, LazyImage, Panzoom } from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 

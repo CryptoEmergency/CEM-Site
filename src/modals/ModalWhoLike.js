@@ -5,7 +5,7 @@ import {
   init,
   load
 } from "@betarost/cemserver/cem.js";
-import { Avatar } from "@component/element/Avatar.js";
+import { Avatar } from "@elements/element/Avatar.js";
 import { fn } from '@src/functions/export.js';
 
 const ModalWhoLike = function ({ whoLike, type }, ID) {
@@ -14,15 +14,17 @@ const ModalWhoLike = function ({ whoLike, type }, ID) {
     ID,
     fn: () => {
       return (
-        <div class="c-modal c-modal--open" id="ModalWhoLike" onclick={function(e){ if(close){ 
-  
-          fn.modals.close(ID)
-          }}}>
-          <section class="c-modal__dialog" 
-            onmouseover={function(){
+        <div class="c-modal c-modal--open" id="ModalWhoLike" onclick={function (e) {
+          if (close) {
+
+            fn.modals.close(ID)
+          }
+        }}>
+          <section class="c-modal__dialog"
+            onmouseover={function () {
               close = false
             }}
-            onmouseleave={function(){
+            onmouseleave={function () {
               close = true
             }}>
             <header class="c-modal__header">

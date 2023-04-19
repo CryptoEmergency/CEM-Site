@@ -10,7 +10,7 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { BlockExchange } from '@component/blocks/index.js';
+import { BlockExchange } from '@elements/blocks/index.js';
 import Elements from '@src/elements/export.js';
 import svg from '@assets/svg/index.js';
 

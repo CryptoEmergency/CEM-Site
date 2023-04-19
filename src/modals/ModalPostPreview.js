@@ -11,8 +11,8 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { fn } from '@src/functions/index.js';
-import { Input } from '@component/element/index.js';
-import { BlockLentaUsers } from '@component/blocks/index.js';
+import { Input } from '@elements/element/index.js';
+import { BlockLentaUsers } from '@elements/blocks/index.js';
 
 // let Static = {}
 

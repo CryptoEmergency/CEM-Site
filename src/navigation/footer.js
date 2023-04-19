@@ -9,7 +9,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 // import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
-import { BottomMenu } from "@component/element/BottomMenu.js";
+import { BottomMenu } from "@elements/element/BottomMenu.js";
 
 const fn = CEM.fn
 
@@ -68,8 +68,8 @@ const Footer = async function () {
                                             <span class="c-accordion__header" id="headingOne">
                                                 <button
                                                     class={`c-accordion__btn ${collapseBodyShow.one
-                                                            ? ""
-                                                            : "c-accordion__btn--collapsed"
+                                                        ? ""
+                                                        : "c-accordion__btn--collapsed"
                                                         }`}
                                                     type="button"
                                                     onclick={showCollapseBody}
@@ -81,8 +81,8 @@ const Footer = async function () {
                                             <div
                                                 id="collapseOne"
                                                 class={`c-accordion__collapse c-accordion__collapse--collapse ${!collapseBodyShow.one
-                                                        ? ""
-                                                        : "c-accordion__collapse--show"
+                                                    ? ""
+                                                    : "c-accordion__collapse--show"
                                                     }`}
                                                 style={`${!collapseBodyShow.one ? "" : "max-height: 200px"
                                                     }`}
@@ -162,8 +162,8 @@ const Footer = async function () {
                                             <span class="c-accordion__header" id="headingTwo">
                                                 <button
                                                     class={`c-accordion__btn ${collapseBodyShow.two
-                                                            ? ""
-                                                            : "c-accordion__btn--collapsed"
+                                                        ? ""
+                                                        : "c-accordion__btn--collapsed"
                                                         }`}
                                                     type="button"
                                                     onclick={showCollapseBody}
@@ -175,8 +175,8 @@ const Footer = async function () {
                                             <div
                                                 id="collapseTwo"
                                                 class={`c-accordion__collapse c-accordion__collapse--collapse ${!collapseBodyShow.two
-                                                        ? ""
-                                                        : "c-accordion__collapse--show"
+                                                    ? ""
+                                                    : "c-accordion__collapse--show"
                                                     }`}
                                                 style={`${!collapseBodyShow.two ? "" : "max-height: 200px"
                                                     }`}
@@ -217,8 +217,8 @@ const Footer = async function () {
                                             <span class="c-accordion__header" id="headingThree">
                                                 <button
                                                     class={`c-accordion__btn ${collapseBodyShow.three
-                                                            ? ""
-                                                            : "c-accordion__btn--collapsed"
+                                                        ? ""
+                                                        : "c-accordion__btn--collapsed"
                                                         }`}
                                                     type="button"
                                                     onclick={showCollapseBody}
@@ -230,8 +230,8 @@ const Footer = async function () {
                                             <div
                                                 id="collapseThree"
                                                 class={`c-accordion__collapse c-accordion__collapse--collapse ${!collapseBodyShow.three
-                                                        ? ""
-                                                        : "c-accordion__collapse--show"
+                                                    ? ""
+                                                    : "c-accordion__collapse--show"
                                                     }`}
                                                 style={`${!collapseBodyShow.three ? "" : "max-height: 200px"
                                                     }`}
@@ -290,8 +290,8 @@ const Footer = async function () {
                                             <span class="c-accordion__header" id="headingFour">
                                                 <button
                                                     class={`c-accordion__btn ${collapseBodyShow.four
-                                                            ? ""
-                                                            : "c-accordion__btn--collapsed"
+                                                        ? ""
+                                                        : "c-accordion__btn--collapsed"
                                                         }`}
                                                     type="button"
                                                     onclick={showCollapseBody}
@@ -303,8 +303,8 @@ const Footer = async function () {
                                             <div
                                                 id="collapseFour"
                                                 class={`c-accordion__collapse c-accordion__collapse--collapse ${!collapseBodyShow.four
-                                                        ? ""
-                                                        : "c-accordion__collapse--show"
+                                                    ? ""
+                                                    : "c-accordion__collapse--show"
                                                     }`}
                                                 style={`${!collapseBodyShow.four ? "" : "max-height: 200px"
                                                     }`}

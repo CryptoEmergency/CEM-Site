@@ -6,8 +6,8 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 
-import { Input } from '@component/element/index.js';
-import { BlockError404 } from '@component/blocks/index.js';
+import { Input } from '@elements/element/index.js';
+import { BlockError404 } from '@elements/blocks/index.js';
 // import { fn } from '@src/functions/index.js';
 
 const fn = CEM.fn

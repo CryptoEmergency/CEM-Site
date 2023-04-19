@@ -11,7 +11,7 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { MediaButton, MediaPreview, Input } from '@component/element/index.js';
+import { MediaButton, MediaPreview, Input } from '@elements/element/index.js';
 // import svg from '@assets/svg/index.js';
 
 const { svg, fn } = CEM

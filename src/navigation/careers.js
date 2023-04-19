@@ -12,7 +12,7 @@ import {
 // import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { Avatar, Input, Select } from '@component/element/index.js';
+import { Avatar, Input, Select } from '@elements/element/index.js';
 
 const fn = CEM.fn
 
@@ -428,7 +428,7 @@ const start = function (data, ID = "mainBlock") {
                                                             <a
                                                                 href={`/careers/freelance/${item.applicant._id}`}
                                                                 class="c-careers__resposition"
-                                                                onclick={function(e) {
+                                                                onclick={function (e) {
                                                                     e.preventDefault();
                                                                     e.stopPropagation();
                                                                     fn.siteLinkModal(e, { title: "Фриланс заказ", freelance: item })

@@ -8,7 +8,7 @@ import {
 import { fn } from '@src/functions/index.js';
 import {
     VideoPlayer,
-} from '@component/element/index.js';
+} from '@elements/element/index.js';
 import images from "@assets/images/index.js";
 
 
@@ -99,7 +99,7 @@ const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, vide
                                             // }
                                             />
                                         )
-                                    } else if(folderImages) {
+                                    } else if (folderImages) {
                                         // console.log('=596e38=',`${folder}/${path}`)
                                         return (
                                             <img src={images[`${folderImages}/${path}`]} width="100%" height="" />

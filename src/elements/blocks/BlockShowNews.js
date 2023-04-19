@@ -6,7 +6,7 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 
-import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/index.js";
+import { Comment, TextArea, ButtonSubmit, NotFound } from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 const BlockShowNews = function ({ Static }) {

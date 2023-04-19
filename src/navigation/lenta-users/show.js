@@ -6,7 +6,7 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { BlockShowLenta, BlockError404 } from "@component/blocks/index.js";
+import { BlockShowLenta, BlockError404 } from "@elements/blocks/index.js";
 
 const { svg, fn } = CEM
 

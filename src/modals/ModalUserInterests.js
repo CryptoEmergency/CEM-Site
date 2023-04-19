@@ -9,7 +9,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { Input, ButtonSubmit, TextArea } from '@component/element/index.js';
+import { Input, ButtonSubmit, TextArea } from '@elements/element/index.js';
 
 const showModalUserInterests = function (e) {
     e.stopPropagation()

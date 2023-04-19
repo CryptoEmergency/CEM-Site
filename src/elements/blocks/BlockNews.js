@@ -4,7 +4,7 @@ import {
   NotFound,
   ButtonShowMore,
   LazyImage,
-} from "@component/element/index.js";
+} from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 

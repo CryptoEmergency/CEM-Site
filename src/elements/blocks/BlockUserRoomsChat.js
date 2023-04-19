@@ -9,7 +9,7 @@ import {
     CEM
 } from '@betarost/cemserver/cem.js';
 
-import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
+import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@elements/element/index.js';
 
 const { images, svg, fn } = CEM
 

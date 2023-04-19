@@ -6,7 +6,7 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { BlockQuestions } from '@component/blocks/index.js';
+import { BlockQuestions } from '@elements/blocks/index.js';
 
 const start = function (data, ID) {
     let [Static] = CEM.fn.GetParams({ data, ID })

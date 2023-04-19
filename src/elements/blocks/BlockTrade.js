@@ -1,6 +1,6 @@
 import { jsx, jsxFrag, Variable, initOne, CEM } from "@betarost/cemserver/cem.js";
 
-import { ButtonShowMore, NotFound } from "@component/element/index.js";
+import { ButtonShowMore, NotFound } from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 const BlockTrade = async function ({ Static, limit = 55 }) {

@@ -11,7 +11,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
 import { fn } from '@src/functions/index.js';
-import { Input, VideoPlayer } from '@component/element/index.js';
+import { Input, VideoPlayer } from '@elements/element/index.js';
 
 const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = false, type = "posts" }, ID) {
     let [Static] = fn.GetParams({ preview, uploadPreviewImage, ID })
@@ -56,7 +56,7 @@ const ModalPreviewVideo = function ({ preview = false, uploadPreviewImage = fals
                     Static.preview = mediaInputs.value[numItem]
                     Static.isValid = true
                     elLoaderVisible = false
-                   
+
                     // console.log('=debd71=Static.preview=', Static.preview)
                     // console.log('=debd71= mediaInputs.value =', mediaInputs.value)
                     initReload()

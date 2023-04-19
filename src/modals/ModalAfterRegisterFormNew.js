@@ -11,7 +11,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 
 // import svg from "@assets/svg/index.js";
-import { Input, InputDiv } from '@component/element/index.js';
+import { Input, InputDiv } from '@elements/element/index.js';
 // import { fn } from '@src/functions/export.js';
 
 const { svg, fn } = CEM
@@ -115,9 +115,9 @@ const ModalAfterRegisterForm = function (data, ID) {
                   <div class="input-div__country">
                     <img src={!Static.forms.country.code ? svg["country_icon"] : `/assets/icons/flagsnew/${Static.forms.country.code}.svg`} />
 
-                    {Static.forms.country.name ? 
-                      <div>{Static.forms.country.name}</div> 
-                      : 
+                    {Static.forms.country.name ?
+                      <div>{Static.forms.country.name}</div>
+                      :
                       <span style="color: rgba(255, 255, 255, 0.5);">{Variable.lang.error_div.selectFromList}</span>
                     }
                     {/* {() => {
@@ -188,7 +188,10 @@ const ModalAfterRegisterForm = function (data, ID) {
           country: {
             code: Static.forms.country.code,
             eng_name: Static.forms.country.name,
-          } } } })
+          }
+        }
+      }
+    })
     // let tmpRes = await sendApi.create("setUsers", data);
     console.log('=b0bcbb=', response)
 

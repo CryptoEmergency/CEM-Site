@@ -6,7 +6,7 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { BlockShowCommunities } from '@component/blocks/index.js';
+import { BlockShowCommunities } from '@elements/blocks/index.js';
 import Elements from '@src/elements/export.js';
 
 const fn = CEM.fn

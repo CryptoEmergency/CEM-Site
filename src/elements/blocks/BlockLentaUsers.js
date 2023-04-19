@@ -5,7 +5,7 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 
-import { LentaMedia, Evaluation, Avatar, ItemsMenu, VideoPlayer, AudioPlayer } from "@component/element/index.js";
+import { LentaMedia, Evaluation, Avatar, ItemsMenu, VideoPlayer, AudioPlayer } from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {

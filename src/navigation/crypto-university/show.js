@@ -12,8 +12,8 @@ import {
 // import { fn } from '@src/functions/index.js';
 // import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
-import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
-import { BlockError404 } from '@component/blocks/index.js';
+import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment } from "@elements/element/index.js";
+import { BlockError404 } from '@elements/blocks/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
@@ -149,12 +149,14 @@ const start = function (data, ID) {
                                 <a
                                     class="swiper-slide"
                                     href="/crypto-university/teacher/1/"
-                                    onclick={function(e){
+                                    onclick={function (e) {
                                         e.preventDefault();
                                         e.stopPropagation();
-                                        fn.siteLinkModal(e, { title: "Преподаватель: Иванов Иван Иванович", teacher: {
-                                            name: "Иванов Иван Иванович"
-                                        }})
+                                        fn.siteLinkModal(e, {
+                                            title: "Преподаватель: Иванов Иван Иванович", teacher: {
+                                                name: "Иванов Иван Иванович"
+                                            }
+                                        })
                                     }}
                                 >
                                     <div class="swiper-post_media_image_container">
@@ -167,12 +169,14 @@ const start = function (data, ID) {
                                 <a
                                     class="swiper-slide"
                                     href="/crypto-university/teacher/2/"
-                                    onclick={function(e){
+                                    onclick={function (e) {
                                         e.preventDefault();
                                         e.stopPropagation();
-                                        fn.siteLinkModal(e, { title: "Преподаватель: Алексеева Ксения Александровна", teacher: {
-                                            name: "Алексеева Ксения Александровна"
-                                        }})
+                                        fn.siteLinkModal(e, {
+                                            title: "Преподаватель: Алексеева Ксения Александровна", teacher: {
+                                                name: "Алексеева Ксения Александровна"
+                                            }
+                                        })
                                     }}
                                 >
                                     <div class="swiper-post_media_image_container">
@@ -185,12 +189,14 @@ const start = function (data, ID) {
                                 <a
                                     class="swiper-slide"
                                     href="/crypto-university/teacher/3/"
-                                    onclick={function(e){
+                                    onclick={function (e) {
                                         e.preventDefault();
                                         e.stopPropagation();
-                                        fn.siteLinkModal(e, { title: "Преподаватель: Крылов Петр Ильич", teacher: {
-                                            name: "Крылов Петр Ильич"
-                                        }})
+                                        fn.siteLinkModal(e, {
+                                            title: "Преподаватель: Крылов Петр Ильич", teacher: {
+                                                name: "Крылов Петр Ильич"
+                                            }
+                                        })
                                     }}
                                 >
                                     <div class="swiper-post_media_image_container">
@@ -203,12 +209,14 @@ const start = function (data, ID) {
                                 <a
                                     class="swiper-slide"
                                     href="/crypto-university/teacher/4/"
-                                    onclick={function(e){
+                                    onclick={function (e) {
                                         e.preventDefault();
                                         e.stopPropagation();
-                                        fn.siteLinkModal(e, { title: "Преподаватель: Мальцева Надежда Николаевна", teacher: {
-                                            name: "Мальцева Надежда Николаевна"
-                                        }})
+                                        fn.siteLinkModal(e, {
+                                            title: "Преподаватель: Мальцева Надежда Николаевна", teacher: {
+                                                name: "Мальцева Надежда Николаевна"
+                                            }
+                                        })
                                     }}
                                 >
                                     <div class="swiper-post_media_image_container">
@@ -261,7 +269,7 @@ const start = function (data, ID) {
                                     href="/crypto-university/course/1/"
                                     onclick={(e) => {
                                         e.preventDefault();
-                                        fn.siteLinkModal(e, { title: "Курс по NFT-технологии. Вводный"})
+                                        fn.siteLinkModal(e, { title: "Курс по NFT-технологии. Вводный" })
                                     }}
                                 >
                                     <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>

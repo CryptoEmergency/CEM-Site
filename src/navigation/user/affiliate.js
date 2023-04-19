@@ -8,8 +8,8 @@ import {
 // import { fn } from '@src/functions/index.js';
 // import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
-import { Avatar, ButtonShowMore } from '@component/element/index.js';
-import { BlockAffiliateBanners } from '@component/blocks/index.js';
+import { Avatar, ButtonShowMore } from '@elements/element/index.js';
+import { BlockAffiliateBanners } from '@elements/blocks/index.js';
 
 const { svg, fn } = CEM
 

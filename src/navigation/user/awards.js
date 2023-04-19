@@ -8,7 +8,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 
 // import svg from '@assets/svg/index.js';
-import { Swiper } from '@component/element/index.js';
+import { Swiper } from '@elements/element/index.js';
 
 const { svg, fn } = CEM
 
@@ -18,7 +18,7 @@ let swiperOptions = {
     hashNavigation: true,
 }
 
-const isInteger = function(num) {
+const isInteger = function (num) {
     return (num ^ 0) === num;
 }
 
@@ -33,12 +33,12 @@ const start = function () {
     init(
         async () => {
             awards = await sendApi.send({ action: "getAwards", short: true, filter: { kindGroup: true } });
-    
+
         },
         () => {
             // console.log('=76f689=', awards.kindGroup.group, Object.values(awards.kindGroup.group))
             let tmp = Object.values(awards.kindGroup.group)
-          
+
             // awards.kindGroup.one.push(...awards.kindGroup.one)
             return (
                 <div
@@ -52,7 +52,7 @@ const start = function () {
                         <div class="awards_body">
                             {() => {
                                 let awardsItems = awards.kindGroup.one[0]
-                         
+
                                 return (
                                     <div class="award swiper-slide">
                                         <img src={svg["badge/" + awardsItems.icon.split(".")[0]]} class="awards_small_badge" />
@@ -92,7 +92,7 @@ const start = function () {
                                                         <div>
                                                             <div class="progress_bar green"></div>
                                                             <p class="progress_bar_label green-grad">{Variable.lang.p.receive}</p>
-                                                      
+
                                                         </div>
                                                     )
                                                 } else {

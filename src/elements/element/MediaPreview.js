@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Variable, initReload, CEM } from "@betarost/cemserver/cem.js";
 
 
-import { AudioPlayerCopy } from "@component/element/index.js";
+import { AudioPlayerCopy } from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 

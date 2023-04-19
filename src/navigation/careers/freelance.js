@@ -8,7 +8,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 // import { fn } from '@src/functions/index.js';
-import { Avatar } from '@component/element/index.js';
+import { Avatar } from '@elements/element/index.js';
 
 const fn = CEM.fn
 

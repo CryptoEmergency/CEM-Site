@@ -6,8 +6,8 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 
-import { TextArea, ButtonSubmit, Comment, NotFound } from "@component/element/index.js";
-import { BlockLentaUsers } from '@component/blocks/index.js';
+import { TextArea, ButtonSubmit, Comment, NotFound } from "@elements/element/index.js";
+import { BlockLentaUsers } from '@elements/blocks/index.js';
 const { images, svg, fn } = CEM
 
 const BlockShowLenta = function ({ Static, item }) {

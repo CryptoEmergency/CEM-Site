@@ -8,7 +8,7 @@ import {
 // import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 // import { fn } from '@src/functions/index.js';
-import { Swiper } from '@component/element/index.js';
+import { Swiper } from '@elements/element/index.js';
 
 const { svg, fn } = CEM
 

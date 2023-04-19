@@ -10,7 +10,7 @@ import {
   load
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
-import { Input, TextArea } from '@component/element/index.js';
+import { Input, TextArea } from '@elements/element/index.js';
 
 const ModalWorkMessage = function (data, ID) {
   let close = true
@@ -35,7 +35,7 @@ const ModalWorkMessage = function (data, ID) {
 
   load({
     ID,
-    fnLoad: async ()=>{
+    fnLoad: async () => {
       Static = {
         isValid: false,
         messageSent: false
@@ -106,16 +106,18 @@ const ModalWorkMessage = function (data, ID) {
         Static.email.readonly = true
       }
     },
-    fn: ()=>{
+    fn: () => {
       return (
-        <div class="c-modal c-modal--open" id="ModalWorkMessage" onclick={function(e){ if(close){ 
-          fn.modals.close(ID)
-          }}}>
-          <section class="c-modal__dialog" ref={elem} 
-            onmouseover={function(){
+        <div class="c-modal c-modal--open" id="ModalWorkMessage" onclick={function (e) {
+          if (close) {
+            fn.modals.close(ID)
+          }
+        }}>
+          <section class="c-modal__dialog" ref={elem}
+            onmouseover={function () {
               close = false
             }}
-            onmouseleave={function(){
+            onmouseleave={function () {
               close = true
             }}>
             <header class="c-modal__header">
@@ -135,8 +137,8 @@ const ModalWorkMessage = function (data, ID) {
                 <form onsubmit={sendMessage}>
                   <input style="display: none;" type="submit" />
                   <Input classDiv="contacts_form_name_icon" Static={Static.name} />
-    
-    
+
+
                   <Input
                     classDiv="contacts_form_email_icon"
                     Static={Static.email}

@@ -2,8 +2,8 @@ import { jsx, jsxFrag, Variable, load, CEM } from "@betarost/cemserver/cem.js";
 
 import svg from "@assets/svg/index.js";
 // import { fn } from "@src/functions/index.js";
-import { Avatar } from "@component/element/index.js";
-import { TextInSpan, Row, Link, Button, Img } from "@htmlElements/index.js";
+import { Avatar } from "@elements/element/index.js";
+import { TextInSpan, Row, Link, Button, Img } from "@elements/htmlElements/index.js";
 
 const fn = CEM.fn
 let Burger

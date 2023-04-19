@@ -9,7 +9,7 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { Avatar } from '@component/element/index.js';
+import { Avatar } from '@elements/element/index.js';
 
 const fn = CEM.fn
 

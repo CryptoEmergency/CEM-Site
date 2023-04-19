@@ -9,7 +9,7 @@ import {
     CEM
 } from '@betarost/cemserver/cem.js';
 
-import { MediaButton, Input } from '@component/element/index.js';
+import { MediaButton, Input } from '@elements/element/index.js';
 
 const { images, svg, fn } = CEM
 

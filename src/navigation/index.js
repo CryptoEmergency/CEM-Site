@@ -13,7 +13,7 @@ import {
 // import { fn } from "@src/functions/index.js";
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
-import { Select, NotFound } from "@component/element/index.js";
+import { Select, NotFound } from "@elements/element/index.js";
 import Elements from "@src/elements/export.js";
 
 import {
@@ -25,8 +25,8 @@ import {
   BlockTrade,
   BlockQuestions,
   BlockLentaUsers,
-} from "@component/blocks/index.js";
-import { ButtonShowMore } from "@component/element/index.js";
+} from "@elements/blocks/index.js";
+import { ButtonShowMore } from "@elements/element/index.js";
 
 const fn = CEM.fn
 

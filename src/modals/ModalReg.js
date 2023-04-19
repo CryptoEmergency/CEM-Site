@@ -11,7 +11,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import svg from "@assets/svg/index.js";
 import images from '@assets/images/index.js';
-import { Input, CheckBox } from '@component/element/index.js';
+import { Input, CheckBox } from '@elements/element/index.js';
 import { fn } from '@src/functions/index.js';
 let listCodes
 
@@ -42,7 +42,7 @@ const sendRegistration = async function (Static, e) {
         data.phone = `+${Static['phone'].code}${Static['phone'].value}`
         data.co = Static['phone'].abbr
     }
-    if(localStorage.getItem('refId')){
+    if (localStorage.getItem('refId')) {
         data.refId = localStorage.getItem('refId')
     }
     let tmpRes = await sendApi.create("registration", { value: data });
@@ -68,7 +68,7 @@ const ModalReg = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-        //    console.log("=========INIT========", Static, "=====ONE======")
+            //    console.log("=========INIT========", Static, "=====ONE======")
             // let [Static] = fn.GetParams({ data, ID, actual: false, reload })
 
             wayReg = "email"
@@ -134,7 +134,7 @@ const ModalReg = function (data, ID) {
                 },
                 afterValid: () => {
 
-                    fn.checkValid(Static, [wayReg, "pass","confirmpass", "agreement"])
+                    fn.checkValid(Static, [wayReg, "pass", "confirmpass", "agreement"])
 
                 }
             }
@@ -148,18 +148,17 @@ const ModalReg = function (data, ID) {
                 errorText: "Пароли не сопадают",
                 type: "password",
                 condition: (value) => {
-                    if(Static.pass.value!==value)
-                    {
-                     return false
-                    }else{
+                    if (Static.pass.value !== value) {
+                        return false
+                    } else {
                         return true
                     }
-                  
-                   
+
+
                 },
                 afterValid: () => {
 
-                    fn.checkValid(Static, [wayReg, "pass","confirmpass", "agreement"])
+                    fn.checkValid(Static, [wayReg, "pass", "confirmpass", "agreement"])
 
                 }
             }
@@ -176,33 +175,35 @@ const ModalReg = function (data, ID) {
 
         },
         fn: () => {
-          //  console.log("=========INIT========", Static, "=====SECOND======")
+            //  console.log("=========INIT========", Static, "=====SECOND======")
             return (
-                <div class="c-modal c-modal--open" id="ModalReg"   onclick={function(e){ if(close){ 
-  
-                    fn.modals.close(ID)
-                    }}}>
-                    <section class="c-modal__dialog" ref={elem} onmouseover={function(){
-           
-           close = false
-    
-         }}
-         onmouseleave={function(){
-           
-          close = true
-      
-           }}>
+                <div class="c-modal c-modal--open" id="ModalReg" onclick={function (e) {
+                    if (close) {
+
+                        fn.modals.close(ID)
+                    }
+                }}>
+                    <section class="c-modal__dialog" ref={elem} onmouseover={function () {
+
+                        close = false
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_register}</h2>
                             <button
                                 type="button"
                                 class="c-modal__close"
                                 onclick={() => {
-                                //    if(Variable.dataUrl.adress!== "rooms")
-                               //     {
-                                        Variable.DelModals(ID)
-                                 //   } 
-                                 
+                                    //    if(Variable.dataUrl.adress!== "rooms")
+                                    //     {
+                                    Variable.DelModals(ID)
+                                    //   } 
+
                                 }}
                             ></button>
                         </header>
@@ -369,7 +370,7 @@ const ModalReg = function (data, ID) {
                                                 onchange={() => {
                                                     Static.agreement.value = !Static.agreement.value
                                                     Static.agreement.valid = Static.agreement.value
-                                                    fn.checkValid(Static, [wayReg, "pass","confirmpass", "agreement"])
+                                                    fn.checkValid(Static, [wayReg, "pass", "confirmpass", "agreement"])
                                                 }}
                                             />
                                             <label class="checkbox__label" for="fast_agree">

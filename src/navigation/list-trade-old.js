@@ -6,7 +6,7 @@ import {
 
 import Elements from '@src/elements/export.js';
 import { fn } from '@src/functions/index.js';
-import { BlockTrade } from '@component/blocks/index.js';
+import { BlockTrade } from '@elements/blocks/index.js';
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })

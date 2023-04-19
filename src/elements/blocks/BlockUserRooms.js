@@ -9,8 +9,8 @@ import {
   CEM
 } from '@betarost/cemserver/cem.js';
 
-import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
-import { BlockUserRoomsChat } from '@component/blocks/index.js';;
+import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@elements/element/index.js';
+import { BlockUserRoomsChat } from '@elements/blocks/index.js';;
 
 
 const { images, svg, fn } = CEM

@@ -1,7 +1,7 @@
 import { Variable, initReload, sendApi } from '@betarost/cemserver/cem.js'
 import { modals } from './modals.js';
 import { fn } from '@src/functions/index.js';
-import { TextArea } from "@component/element/index.js";
+import { TextArea } from "@elements/element/index.js";
 const itemsMenu = {}
 
 //нижнее меню
@@ -1175,7 +1175,7 @@ itemsMenu.subscribers = function (Static, item) {
                 onlyAuth: true,
                 onclick: async () => {
                     const response = await fn.restApi.setUsers.subscribe({ _id: item._id })
-                      console.log(response)
+                    console.log(response)
                     console.log('=b959ac=', response)
                     if (response.status === "ok") {
                         item.subscribe = !item.subscribe

@@ -10,9 +10,9 @@ import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Elements from "@src/elements/export.js";
 
-import { Particles } from "@src/component/htmlElements/index.js";
+import { Particles } from "@src/elements/htmlElements/index.js";
 
-// import { AboutAnimation } from "@src/component/blocks/AboutAnimation";
+// import { AboutAnimation } from "@src/elements/blocks/AboutAnimation";
 
 const team = [
   {

@@ -7,7 +7,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { Input, ButtonSubmit, TextArea } from '@component/element/index.js';
+import { Input, ButtonSubmit, TextArea } from '@elements/element/index.js';
 
 const showModalUserAddWork = function (e) {
     e.stopPropagation()
@@ -129,7 +129,7 @@ const ModalUserAddWork = function ({ userInfo, type }, ID) {
                             <ButtonSubmit
                                 text={type == 'add' ? Variable.lang.button.add : Variable.lang.button.edit}
                                 onclick={async () => {
-                                    if(!!Static.company.value && !!Static.workTime.value) {
+                                    if (!!Static.company.value && !!Static.workTime.value) {
                                         let response;
                                         let data = {
                                             value: {

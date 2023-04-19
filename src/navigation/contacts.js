@@ -9,7 +9,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { Input, TextArea, ButtonSubmit } from '@component/element/index.js';
+import { Input, TextArea, ButtonSubmit } from '@elements/element/index.js';
 import Elements from '@src/elements/export.js';
 
 const fn = CEM.fn
@@ -42,8 +42,8 @@ const start = function (data, ID) {
           <div class="c-container">
             {
               !Variable.ModalsPage.length
-              ? <h2 class="contacts_title">{Variable.lang.a.contacts}</h2>
-              : null
+                ? <h2 class="contacts_title">{Variable.lang.a.contacts}</h2>
+                : null
             }
             <div class="contacts_content">
               <div class="contacts_form_block">

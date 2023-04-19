@@ -15,7 +15,7 @@ import {
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Elements from '@src/elements/export.js';
-import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
+import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@elements/element/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';

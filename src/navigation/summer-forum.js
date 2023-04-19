@@ -12,7 +12,7 @@ import {
 // import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
-import { LazyImage } from "@component/element/index.js";
+import { LazyImage } from "@elements/element/index.js";
 
 // import anime from 'animejs/lib/anime.es.js';
 // import { fn } from "@src/functions/index.js";
@@ -569,14 +569,14 @@ const start = function (data, ID) {
                                     Команда <b>Crypto Emergency</b> рада пригласить тебя на второй ежегодный криптофорум <b>Crypto Юг 2023</b>, который состоится  3 и 4 июня в г. Новороссийске.
                                 </p>
                                 <p>
-                                    Организатор 
+                                    Организатор
                                     <img src={svg.logoStandart} />
-                                     Соорганизаторы
-                                     <div class="el-c">
+                                    Соорганизаторы
+                                    <div class="el-c">
                                         <img src={images["forum/partner_1"]} class="" />
                                         <img src={images["forum/partner_11"]} class="" />
                                     </div>
-                                      При поддержке 
+                                    При поддержке
                                     <img src={images["summer_forum/partner_21"]} />
                                 </p>
                                 <p>

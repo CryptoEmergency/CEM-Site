@@ -10,7 +10,7 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/export.js';
-import { MediaButton, MediaPreview, InputDiv } from '@component/element/index.js';
+import { MediaButton, MediaPreview, InputDiv } from '@elements/element/index.js';
 // import svg from '@assets/svg/index.js';
 
 const { svg, fn } = CEM
@@ -95,7 +95,7 @@ const clearEmptyTag = function (Static) {
       item.parentElement.removeChild(item.parentElement.children[inds[i]])
     })
   }
-  console.log('=1bfa1f= emptyElements =',emptyEl)
+  console.log('=1bfa1f= emptyElements =', emptyEl)
 };
 
 const ModalAskQuestion = function (data, ID) {
@@ -103,7 +103,7 @@ const ModalAskQuestion = function (data, ID) {
 
   Static.listSize = false
 
-  
+
   load({
     ID,
     fnLoad: async () => {
@@ -248,7 +248,7 @@ const ModalAskQuestion = function (data, ID) {
                       return (
                         <ul
                           class="modal-question__size-list"
-                          // Element={($el) => { Static.listFontSize = $el }}
+                        // Element={($el) => { Static.listFontSize = $el }}
                         >
                           <li
                             onclick={function () {
@@ -278,14 +278,14 @@ const ModalAskQuestion = function (data, ID) {
                       )
                     }
                   }}
-                  
+
                 </div>
               </div>
               <InputDiv
                 class={["input-div input-div__question",
                   Static.forms.textQuestion.error ? "input-div--error" : null,
                   Static.forms.textQuestion.valid ? "input-div--correctly" : null
-              ]}
+                ]}
                 contenteditable="plaintext-only"
                 Element={($el) => {
                   Static.elEditor = $el
@@ -300,35 +300,35 @@ const ModalAskQuestion = function (data, ID) {
                 }}
               />
 
-                {() => {
-                  if (Static.forms?.media?.length > 0) {
-                    return (
-                      <div class="modal-question__preview modal-question__field">
-                        {Static.forms.media.map((item, index) => {
-                          return (
-                            <div class="modal-question__preview-item">
-                              {item?.type == "image" ? 
-                                <img src={`/assets/upload/question/${item.name}`}/> 
-                                : 
-                                <video src={`/assets/upload/question/${item.name}`}></video>
-                              }
-                              
-                              <div
-                                class="modal-question__preview-delete"
-                                onClick={() => {
-                                  Static.forms.media.splice(index, 1);
-                                  initReload()
-                                }}
-                              >
-                                <img src={svg["close_question"]} />
-                              </div>
+              {() => {
+                if (Static.forms?.media?.length > 0) {
+                  return (
+                    <div class="modal-question__preview modal-question__field">
+                      {Static.forms.media.map((item, index) => {
+                        return (
+                          <div class="modal-question__preview-item">
+                            {item?.type == "image" ?
+                              <img src={`/assets/upload/question/${item.name}`} />
+                              :
+                              <video src={`/assets/upload/question/${item.name}`}></video>
+                            }
+
+                            <div
+                              class="modal-question__preview-delete"
+                              onClick={() => {
+                                Static.forms.media.splice(index, 1);
+                                initReload()
+                              }}
+                            >
+                              <img src={svg["close_question"]} />
                             </div>
-                          )
-                        })}
-                      </div>
-                    )
-                  }
-                }}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )
+                }
+              }}
             </div>
             <div class="c-modal__footer">
               <button

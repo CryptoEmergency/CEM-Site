@@ -15,10 +15,10 @@ import {
   MediaButton,
   Avatar,
   MediaPreview
-} from "@component/element/index.js";
+} from "@elements/element/index.js";
 
-import { BlockLentaUsers } from '@component/blocks/index.js';
-import { NotFound } from "@component/element/index.js";
+import { BlockLentaUsers } from '@elements/blocks/index.js';
+import { NotFound } from "@elements/element/index.js";
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
@@ -177,7 +177,7 @@ const start = function (data, ID) {
             return
           }
           let response = JSON.parse(this.response);
-        
+
           Static.mediaInputs.value[index] = {
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
@@ -373,42 +373,41 @@ const start = function (data, ID) {
     }
   };
   let setT
-   async function textLengthCheck(str,e) {
+  async function textLengthCheck(str, e) {
 
     clearTimeout(setT);
-if(str.trim().length>0)
-{  
-     setT = setTimeout(async function(){
-      if (str.trim().length>0 || Static.mediaInputs.value.length > 0) {
-        Static.isValid = true;
-      } 
-  
-   
-  
-      Static.textInputs.value = str.trim()
+    if (str.trim().length > 0) {
+      setT = setTimeout(async function () {
+        if (str.trim().length > 0 || Static.mediaInputs.value.length > 0) {
+          Static.isValid = true;
+        }
 
-      Static.edittext = Static.textInputs.value
+
+
+        Static.textInputs.value = str.trim()
+
+        Static.edittext = Static.textInputs.value
+        initReload()
+
+      }, 500)
+    } else {
+
+      Static.isValid = false;
+      Static.textInputs.value = ""
+      // e.target.innerText = Static.textInputs.value
       initReload()
-     
-    },500)
-  }else{
- 
-    Static.isValid = false;
-    Static.textInputs.value = ""
-   // e.target.innerText = Static.textInputs.value
-    initReload()
-  }
+    }
 
   };
 
-   
+
   const loadPhoto = async function (file, type, xhr, selectAspect = false) {
 
     // console.log('=ebf8e1=', selectAspect)
     let dataURL;
 
     let imageUrl
-   
+
 
     const newImg = new Image();
 
@@ -513,17 +512,17 @@ if(str.trim().length>0)
             dh = width
           }
 
-            //ровный квадрат
-            if (height == width) {
-              sx = 1
-              sy = 1
-              sw = width
-              sh = width
-              dx = 0
-              dy = 0
-              dw = width
-              dh = width
-            }
+          //ровный квадрат
+          if (height == width) {
+            sx = 1
+            sy = 1
+            sw = width
+            sh = width
+            dx = 0
+            dy = 0
+            dw = width
+            dh = width
+          }
 
         }
 
@@ -575,7 +574,7 @@ if(str.trim().length>0)
         }
 
         const formData = new FormData()
-   
+
         formData.append('media', fileImg, nameFile);
 
         xhr = new XMLHttpRequest()
@@ -585,22 +584,22 @@ if(str.trim().length>0)
           if (!this.response) {
             return
           }
-          
+
           let response = JSON.parse(this.response);
-    
+
           Static.mediaInputs.value[numItem] = {
             aspect: Static.mediaInputs.selectAspect,
             type: response.mimetype.split("/")[0],
             name: response.name
           }
-       
-   
+
+
           initReload();
 
         }
-     
+
         xhr.upload.onprogress = function (e) {
-         
+
           let contentLength;
           if (e.lengthComputable) {
             contentLength = e.total;
@@ -616,35 +615,34 @@ if(str.trim().length>0)
           if (Static.mediaInputs.value[numItem].upload === Static.mediaInputs.value[numItem].size && Static.mediaInputs.value[numItem].upload !== 0) {
             Static.mediaInputs.value.splice(numItem, 1);
             initReload()
-          //  return
+            //  return
           }
-    
+
           Static.mediaInputs.value[numItem].upload = e.loaded
           Static.mediaInputs.value[numItem].size = contentLength;
-  
+
           initReload();
-     
+
         }
-       
-   
+
+
         await xhr.send(formData)
-      
+
       });
 
 
 
 
     }
-    
+
     imageUrl = URL.createObjectURL(file);
 
 
-   if(cropImage(imageUrl, type, xhr))
-   {
-    Static.isValid = true
-   }
-   
- 
+    if (cropImage(imageUrl, type, xhr)) {
+      Static.isValid = true
+    }
+
+
 
 
 
@@ -731,7 +729,7 @@ if(str.trim().length>0)
         }
       }
       else {
-      //  Static.edittext = Static.textInputs.value
+        //  Static.edittext = Static.textInputs.value
       }
 
       // console.log('=cb696d=', Static)
@@ -800,7 +798,7 @@ if(str.trim().length>0)
                       Static.mediaInputs.value.map((item, index) => {
                         if (item.type != "audio") {
 
-                         
+
                           return (
                             <MediaPreview
                               item={item}
@@ -849,16 +847,16 @@ if(str.trim().length>0)
                     class="create_post_chapter create_post_main_text"
                     contenteditable="true"
                     oninput={function (e) {
-                      
-                      textLengthCheck(this.textContent.trim(),this)
+
+                      textLengthCheck(this.textContent.trim(), this)
                       Static.edittext = this.textContent.trim()
-                    /*  Static.textInputs.value = this.textContent.trim()
-                      if (this.textContent.trim() || Static.mediaInputs.value.length > 0) {
-                        Static.isValid = true;
-                      } else {
-                        Static.isValid = false;
-                      }*/
-                // initReload()
+                      /*  Static.textInputs.value = this.textContent.trim()
+                        if (this.textContent.trim() || Static.mediaInputs.value.length > 0) {
+                          Static.isValid = true;
+                        } else {
+                          Static.isValid = false;
+                        }*/
+                      // initReload()
                     }
                     }
                   >{Static.edittext}
@@ -910,13 +908,13 @@ if(str.trim().length>0)
                   }, ID)
                 }
                 else {
-                 Static.files = this.files.length
+                  Static.files = this.files.length
                   for (let i = 0; i < this.files.length; i++) {
                     document.getElementById("spinner").hidden = false
-                   Static.mediaInputs.selectAspect ? await loadPhoto(this.files[i], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(this.files[i], "posts")
-  
+                    Static.mediaInputs.selectAspect ? await loadPhoto(this.files[i], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(this.files[i], "posts")
+
                   }
-             
+
                 }
                 this.value = '';
               }

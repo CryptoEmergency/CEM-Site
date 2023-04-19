@@ -18,9 +18,9 @@ import { jsx, jsxFrag, load, Variable, initReload, CEM } from "@betarost/cemserv
 // import { fn } from "@src/functions/index.js";
 // import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
-import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/index.js";
+import { Comment, TextArea, ButtonSubmit, NotFound } from "@elements/element/index.js";
 
-import { BlockError404 } from "@component/blocks/index.js";
+import { BlockError404 } from "@elements/blocks/index.js";
 
 const { svg, fn } = CEM
 

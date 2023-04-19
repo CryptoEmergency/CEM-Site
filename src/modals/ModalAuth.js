@@ -12,13 +12,13 @@ import {
 // import svg from "@assets/svg/index.js";
 // import images from '@assets/images/index.js';
 // import { fn } from '@src/functions/index.js';
-import { Input } from '@component/element/index.js';
+import { Input } from '@elements/element/index.js';
 
 const { images, svg, fn } = CEM
 
 // let Static = {}
 const ModalAuth = function (data, ID) {
-  //   console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
+    //   console.log('=eb4754=', "dgdfg", Variable.Modals, data, ID)
 
 
     let wayAuth,
@@ -153,7 +153,7 @@ const ModalAuth = function (data, ID) {
 
 
 
-let close = true
+    let close = true
 
 
     load({
@@ -238,33 +238,35 @@ let close = true
             listCodes = Variable.phoneCodes
         },
         fn: () => {
-           // console.log("=========INIT========", Static, "=====SECOND======")
+            // console.log("=========INIT========", Static, "=====SECOND======")
             return (
-                <div class="c-modal c-modal--open" id="ModalAuth" onclick={function(e){ if(close){ 
-  
-                    fn.modals.close(ID)
-                    }}}>
-                    <section class="c-modal__dialog" ref={elem}  onmouseover={function(){
-        
-        close = false
- 
+                <div class="c-modal c-modal--open" id="ModalAuth" onclick={function (e) {
+                    if (close) {
 
-      }}
-        onmouseleave={function(){
-         
-         close = true
+                        fn.modals.close(ID)
+                    }
+                }}>
+                    <section class="c-modal__dialog" ref={elem} onmouseover={function () {
 
-        }}>
+                        close = false
+
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_login}</h2>
                             <button
                                 type="button"
                                 class="c-modal__close"
                                 onclick={() => {
-                                  //  if(Variable.dataUrl.adress!== "rooms")
-                                //    {
-                                        Variable.DelModals(ID)
-                                  //  } 
+                                    //  if(Variable.dataUrl.adress!== "rooms")
+                                    //    {
+                                    Variable.DelModals(ID)
+                                    //  } 
                                 }}
                             ></button>
                         </header>
@@ -327,7 +329,7 @@ let close = true
                                     class="a-link"
                                     href=""
                                     onclick={() => {
-                                    
+
                                         Variable.DelModals("ModalAuth")
 
                                         Variable.SetModals({ name: "ModalRecoverPass", data: {} })

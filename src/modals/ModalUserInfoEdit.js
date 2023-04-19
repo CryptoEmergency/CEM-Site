@@ -7,7 +7,7 @@ import {
 } from '@betarost/cemserver/cem.js';
 import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
-import { Input, ButtonSubmit, TextArea } from '@component/element/index.js';
+import { Input, ButtonSubmit, TextArea } from '@elements/element/index.js';
 
 const showModalUserInfoEdit = function (e) {
     e.stopPropagation()
@@ -20,7 +20,7 @@ const ModalUserInfoEdit = function (userInfo, ID) {
     let Static = fn.GetParams({ ID })
 
     fn.initData.ModalUserInfoEdit(Static, userInfo, {})
-   console.log('pdf', userInfo, Static)
+    console.log('pdf', userInfo, Static)
     //fn.initData.generate(["lang", "country", "group", "online"])
     let close = true
     load({
@@ -90,20 +90,22 @@ const ModalUserInfoEdit = function (userInfo, ID) {
         },
         fn: () => {
             return (
-                <div class="c-modal c-modal--open" onclick={function(e){ if(close){ 
-  
-                    fn.modals.close(ID)
-                    }}}>
-                    <section class="c-modal__dialog" onmouseover={function(){
-           
-           close = false
-    
-         }}
-         onmouseleave={function(){
-           
-          close = true
-      
-           }}>
+                <div class="c-modal c-modal--open" onclick={function (e) {
+                    if (close) {
+
+                        fn.modals.close(ID)
+                    }
+                }}>
+                    <section class="c-modal__dialog" onmouseover={function () {
+
+                        close = false
+
+                    }}
+                        onmouseleave={function () {
+
+                            close = true
+
+                        }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.button.edit}</h2>
                             <button
@@ -149,7 +151,7 @@ const ModalUserInfoEdit = function (userInfo, ID) {
                             <ButtonSubmit
                                 text={Variable.lang.button.edit}
                                 onclick={async () => {
-                                  //  console.log(Static)
+                                    //  console.log(Static)
                                     let value = {
                                         information: {}
                                     }
@@ -183,8 +185,8 @@ const ModalUserInfoEdit = function (userInfo, ID) {
                                     let response = await fn.restApi.setUsers.any({ data })
                                     // api({ type: "set", action: "setUsers", data })
                                     Variable.DelModals("ModalUserInfoEdit");
-                                //    console.log('data', data)
-                                //    console.log(response)
+                                    //    console.log('data', data)
+                                    //    console.log(response)
                                 }}
                             />
                         </footer>

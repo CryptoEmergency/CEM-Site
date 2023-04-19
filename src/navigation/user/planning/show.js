@@ -7,9 +7,9 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { Swiper } from '@component/element/index.js';
+import { Swiper } from '@elements/element/index.js';
 // import svg from '@assets/svg/index.js';
-import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
+import { BlockShowNews, BlockError404 } from '@elements/blocks/index.js';
 import Elements from '@src/elements/export.js';
 
 import 'swiper/css/bundle';
@@ -160,7 +160,7 @@ const addForm = function (Static) {
                                                         if (!Static.user.includes(user)) {
                                                             Static.user.push(user)
                                                             let index = Static.userListDuplicate.indexOf(user._id)
-                                                            if(index >= 0) {
+                                                            if (index >= 0) {
                                                                 Static.userListDuplicate.splice(index, 1);
                                                             }
                                                         }
@@ -181,25 +181,25 @@ const addForm = function (Static) {
                                     {
                                         () => {
                                             if (Array.isArray(Static.user) && Static.user.length) {
-                                                    return Static.user.map((item) => {
-                                                        
-                                                        return (
-                                                            <div class="user-list-avatar"
-                                                                onClick={() => {
-                                                                    if (!Static.userListDuplicate.includes(item._id)) {
-                                                                        Static.userListDuplicate.push(item._id)
-                                                                        let index = Static.user.indexOf(item)
-                                                                        if(index >= 0) {
-                                                                            Static.user.splice(index, 1);
-                                                                        }
+                                                return Static.user.map((item) => {
+
+                                                    return (
+                                                        <div class="user-list-avatar"
+                                                            onClick={() => {
+                                                                if (!Static.userListDuplicate.includes(item._id)) {
+                                                                    Static.userListDuplicate.push(item._id)
+                                                                    let index = Static.user.indexOf(item)
+                                                                    if (index >= 0) {
+                                                                        Static.user.splice(index, 1);
                                                                     }
-                                                                    initReload()
-                                                                }}
-                                                            >
-                                                                <img src={`/assets/upload/avatar/${item.avatar.name}`} />
-                                                            </div>
-                                                        )
-                                                    })
+                                                                }
+                                                                initReload()
+                                                            }}
+                                                        >
+                                                            <img src={`/assets/upload/avatar/${item.avatar.name}`} />
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         }
                                     }
@@ -212,7 +212,7 @@ const addForm = function (Static) {
                                         }}
                                     >
                                         <img src={svg["post_photo"]} />
-                                        <input 
+                                        <input
                                             type="file"
                                             hidden
                                             multiple
@@ -221,7 +221,7 @@ const addForm = function (Static) {
                                                 e.stopPropagation();
                                                 Array.from(this.files).forEach((item) => {
 
-                                                    fn.uploadMedia (
+                                                    fn.uploadMedia(
                                                         item,
                                                         "gallery",
                                                         async function () {
@@ -260,8 +260,8 @@ const addForm = function (Static) {
                                                     {Static.activeTask.media.map((item, index) => {
                                                         return (
                                                             <div class="tasking-media_list-wrapper">
-                                                                <img 
-                                                                    class="tasking-media_list-preview" 
+                                                                <img
+                                                                    class="tasking-media_list-preview"
                                                                     src={`/assets/upload/gallery/${item.name}`}
                                                                     width="60"
                                                                     height="60"
@@ -413,25 +413,25 @@ const addForm = function (Static) {
                             </div>
                         </div>
                         <div class="c-modal__footer">
-                                <button
-                                    class={[
-                                        "c-button c-button--gradient2",
-                                        !Static.isValid ? "c-button--inactive" : null,
-                                    ]}
-                                    type="button"
-                                    onClick={() => {
-                                        if (Static.user) {
-                                            Static.user.map((item) => {
-                                                Static.tmp.list_records[0].users.push(item._id)
-                                            })
-                                        }
-                                        Static.modalUser = false
-                                        initReload()
-                                    }}
-                                >
-                                    <span class="c-button__text">Добавить</span>
-                                </button>
-                            </div>
+                            <button
+                                class={[
+                                    "c-button c-button--gradient2",
+                                    !Static.isValid ? "c-button--inactive" : null,
+                                ]}
+                                type="button"
+                                onClick={() => {
+                                    if (Static.user) {
+                                        Static.user.map((item) => {
+                                            Static.tmp.list_records[0].users.push(item._id)
+                                        })
+                                    }
+                                    Static.modalUser = false
+                                    initReload()
+                                }}
+                            >
+                                <span class="c-button__text">Добавить</span>
+                            </button>
+                        </div>
                     </section>
                 </div>
                 <div class="c-backdrop c-backdrop--show"></div>
@@ -518,24 +518,24 @@ const start = function (data, ID) {
                                                                         onclick={() => {
                                                                             // fn.modals.ModalConfirmAction({
                                                                             //     action: async () => {
-                                                                                    if (Static.userList.includes(user._id)) {
+                                                                            if (Static.userList.includes(user._id)) {
 
-                                                                                        let index = Static.userList.indexOf(user._id)
-                                                                                        if(index >= 0) {
-                                                                                            Static.userList.splice(index, 1);
-                                                                                            initReload()
-                                                                                            console.log(Static.userList)
-                                                                                        }
-                                                                                    }
+                                                                                let index = Static.userList.indexOf(user._id)
+                                                                                if (index >= 0) {
+                                                                                    Static.userList.splice(index, 1);
+                                                                                    initReload()
+                                                                                    console.log(Static.userList)
+                                                                                }
+                                                                            }
 
-                                                                                    // deleteNote(Static, { _id: Static.activeNotes._id, active: false })
+                                                                            // deleteNote(Static, { _id: Static.activeNotes._id, active: false })
 
                                                                             //         fn.modals.close("ModalConfirmAction")
                                                                             //     },
                                                                             //     text: Variable.lang.p.deleteNotesConfirm,
                                                                             //     button: Variable.lang.button.yes
                                                                             // })
-                                                                        }} 
+                                                                        }}
                                                                     />
                                                                 </div>
                                                                 <span class="tasking-user_name"> {user.nickname} </span>
@@ -590,7 +590,7 @@ const start = function (data, ID) {
                                     //                                                     // fn.modals.ModalConfirmAction({
                                     //                                                     //     action: async () => {
                                     //                                                             if (Static.userList.includes(user._id)) {
-                                                                                                    
+
                                     //                                                                 let index = Static.userList.indexOf(user._id)
                                     //                                                                 if(index >= 0) {
                                     //                                                                     Static.userList.splice(index, 1);
@@ -598,9 +598,9 @@ const start = function (data, ID) {
                                     //                                                                     console.log(Static.userList)
                                     //                                                                 }
                                     //                                                             }
-                                                                                                
+
                                     //                                                             // deleteNote(Static, { _id: Static.activeNotes._id, active: false })
-                                                                                                
+
                                     //                                                     //         fn.modals.close("ModalConfirmAction")
                                     //                                                     //     },
                                     //                                                     //     text: Variable.lang.p.deleteNotesConfirm,
@@ -626,7 +626,7 @@ const start = function (data, ID) {
                                 )
                             })}
                         </div>
-                        <Elements.TaskCreate 
+                        <Elements.TaskCreate
                             onclick={() => {
                                 Static.modal = true
                                 Static.userListDuplicate = Array.from(Static.userList)
@@ -649,7 +649,7 @@ const start = function (data, ID) {
                             </div>
                         </div> */}
 
-                        <Elements.TaskList 
+                        <Elements.TaskList
                             Static={Static}
                             records={Static.arrTask}
                         />

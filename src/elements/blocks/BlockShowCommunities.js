@@ -9,7 +9,7 @@ import {
   CEM
 } from '@betarost/cemserver/cem.js';
 
-import { Input, Select, ItemsMenu } from '@component/element/index.js';
+import { Input, Select, ItemsMenu } from '@elements/element/index.js';
 
 const { images, svg, fn } = CEM
 const Tags = function ({ Static, classActive, text, type }) {

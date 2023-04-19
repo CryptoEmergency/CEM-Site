@@ -4,12 +4,12 @@ import {
   Variable,
   initReload,
   initOne,
-  sendApi, 
+  sendApi,
   load,
   CEM
 } from "@betarost/cemserver/cem.js";
 // import svg from "@assets/svg/index.js";
-import { Input } from '@component/element/index.js';
+import { Input } from '@elements/element/index.js';
 // import { fn } from '@src/functions/index.js';
 
 const { svg, fn } = CEM

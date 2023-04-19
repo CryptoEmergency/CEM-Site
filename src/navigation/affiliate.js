@@ -3,7 +3,7 @@ import { jsx, jsxFrag, init, Variable, load, CEM } from "@betarost/cemserver/cem
 import svg from "@assets/svg/index.js";
 // import { fn } from "@src/functions/index.js";
 
-import { BlockAffiliateBanners } from "@component/blocks/index.js";
+import { BlockAffiliateBanners } from "@elements/blocks/index.js";
 
 import Elements from "@src/elements/export.js";
 

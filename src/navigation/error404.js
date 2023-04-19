@@ -4,7 +4,7 @@ import {
   init,
   load
 } from "@betarost/cemserver/cem.js";
-import { BlockError404 } from '@component/blocks/index.js';
+import { BlockError404 } from '@elements/blocks/index.js';
 
 const start = function (data, ID) {
   load({

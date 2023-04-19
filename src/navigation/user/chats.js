@@ -23,7 +23,7 @@ import {
     ButtonSubmit,
     MediaButton,
     MediaPreview
-} from '@component/element/index.js';
+} from '@elements/element/index.js';
 
 // import EmojiPicker from "rm-emoji-picker";
 // import 'rm-emoji-picker/dist/emojipicker.css';

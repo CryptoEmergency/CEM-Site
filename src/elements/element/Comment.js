@@ -6,7 +6,7 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";
 
-import { Avatar, Evaluation, TextArea, ButtonSubmit, ItemsMenu } from "@component/element/index.js";
+import { Avatar, Evaluation, TextArea, ButtonSubmit, ItemsMenu } from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 

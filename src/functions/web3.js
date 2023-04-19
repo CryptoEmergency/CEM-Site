@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 // import fs from 'fs';
-import abiTest from '@src/component/abi/test.json'
+import abiTest from '@src/modules/abi/test.json'
 const web3CEM = new Web3('https://cemchain.com');
 
 const web3Action = {}

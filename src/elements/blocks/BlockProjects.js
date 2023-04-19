@@ -1,6 +1,6 @@
 import { jsx, jsxFrag, Variable, initOne, CEM } from "@betarost/cemserver/cem.js";
 
-import { Swiper } from "@component/element/index.js";
+import { Swiper } from "@elements/element/index.js";
 
 const { images, svg, fn } = CEM
 

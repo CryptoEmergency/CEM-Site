@@ -1,9 +1,9 @@
 import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi, load, CEM } from "@betarost/cemserver/cem.js";
-import { Input, CheckBox, Select, TextArea, MediaButton, MediaPreview } from '@component/element/index.js';
+import { Input, CheckBox, Select, TextArea, MediaButton, MediaPreview } from '@elements/element/index.js';
 // import { fn } from '@src/functions/index.js';
 import {
 
-} from '@component/blocks/index.js';
+} from '@elements/blocks/index.js';
 
 const fn = CEM.fn
 
@@ -277,261 +277,261 @@ const ModalEditRoom = function (data, ID) {
   }
 
   let close = true
-  load({ 
+  load({
     ID,
     fnLoad: async () => {
-    Static.optionsSelect = {
-      Category: {
-        active: data.userrooms.settingsroom.category,
-        items: [
-          { text: "NFT", value: "NFT" },
-          { text: "Crypto вселененная", value: "Crypto" },
-          { text: "Altcoin", value: "Altcoin" },
-          { text: "Bitcoin", value: "Bitcoin" },
-          { text: "Finances", value: "Finances" },
-          { text: "Trading", value: "Trading" }
-        ],
-        nameOptions: "Category",
-        open: false,
-        title: "Выбрать"
-      }
-    };
+      Static.optionsSelect = {
+        Category: {
+          active: data.userrooms.settingsroom.category,
+          items: [
+            { text: "NFT", value: "NFT" },
+            { text: "Crypto вселененная", value: "Crypto" },
+            { text: "Altcoin", value: "Altcoin" },
+            { text: "Bitcoin", value: "Bitcoin" },
+            { text: "Finances", value: "Finances" },
+            { text: "Trading", value: "Trading" }
+          ],
+          nameOptions: "Category",
+          open: false,
+          title: "Выбрать"
+        }
+      };
 
-  }, 
-  fn: () => {
-    let active
-    if (Static.label.valid) {
+    },
+    fn: () => {
+      let active
+      if (Static.label.valid) {
 
-      active = null
-      if (Static.Private.checked) {
-        active = "inactive_form_button"
+        active = null
+        if (Static.Private.checked) {
+          active = "inactive_form_button"
 
-        if (Static.Confirm.valid) {
-          active = null
+          if (Static.Confirm.valid) {
+            active = null
+          }
+          else {
+            active = "inactive_form_button"
+          }
         }
         else {
-          active = "inactive_form_button"
+          active = null
         }
       }
+
       else {
-        active = null
+        active = "inactive_form_button"
       }
-    }
 
-    else {
-      active = "inactive_form_button"
-    }
+      return (
+        <div class="c-modal c-modal--open" id="ModalComplainComment" onclick={function (e) {
+          if (close) {
 
-    return (
-      <div class="c-modal c-modal--open" id="ModalComplainComment" onclick={function (e) {
-        if (close) {
+            fn.modals.close(ID)
+          }
+        }}>
+          <section class="c-modal__dialog" onmouseover={function () {
 
-          fn.modals.close(ID)
-        }
-      }}>
-        <section class="c-modal__dialog" onmouseover={function () {
+            close = false
 
-          close = false
+          }}
+            onmouseleave={function () {
 
-        }}
-          onmouseleave={function () {
+              close = true
 
-            close = true
-
-          }}>
-          <header class="c-modal__header">
-            <div class="complain_modal">
-              <h4>Редактировать комнату</h4>
-              <button
-                class="c-modal__close"
-                onclick={() => {
-                  fn.modals.close(ID)
-                }}
-              ></button>
-              <div class="complain_error">{Variable.lang.error_div.complain}</div>
-              <div class="container-input">
+            }}>
+            <header class="c-modal__header">
+              <div class="complain_modal">
+                <h4>Редактировать комнату</h4>
+                <button
+                  class="c-modal__close"
+                  onclick={() => {
+                    fn.modals.close(ID)
+                  }}
+                ></button>
+                <div class="complain_error">{Variable.lang.error_div.complain}</div>
+                <div class="container-input">
 
 
-                <Input
-                  classDiv="input-div"
-                  Static={Static.label}
-
-                />
-              </div>
-              <div class="c-comments__field">
-
-                <TextArea
-                  className="text1 create_post_chapter"
-                  Static={Static.Title}
-
-                />
-              </div>
-              <br />
-              <div class="c-comments__field">
-                <label>Категории</label>
-                <Select
-                  options={Static.optionsSelect.Category}
-
-                  callback={
-                    async (active, nameOptions) => {
-
-                      Static.Category = active
-
-                    }
-                  }
-                />
-
-              </div>
-              <br />
-              <div class="container-input">
-
-
-                <Input
-                  classDiv="input-div"
-                  Static={Static.Lang}
-                />
-              </div>
-              <div class="container-input">
-
-                <Input
-                  classDiv="input-div"
-                  Static={Static.Country}
-                />
-              </div>
-
-              <div class="container-checkbox">
-                <div class="checkbox">
-                  <input
-
-                    class="checkbox__input complain_checkbox"
-
-                    onChange={function (e) {
-                      Static.Private.checked = this.checked
-
-                      initReload()
-                    }}
-                    type="checkbox"
-                    checked={Static.Private.checked ? true : false}
+                  <Input
+                    classDiv="input-div"
+                    Static={Static.label}
 
                   />
-                  <label class="checkbox__label">
-                    Приватная комната
-                    <span class="cont_a-link"></span>
-                  </label>
                 </div>
-              </div>
-              <div
-                style={
+                <div class="c-comments__field">
 
-                  Static.Private.checked ?
-                    "display: block"
-                    : "display: none"
-                }>
+                  <TextArea
+                    className="text1 create_post_chapter"
+                    Static={Static.Title}
+
+                  />
+                </div>
+                <br />
+                <div class="c-comments__field">
+                  <label>Категории</label>
+                  <Select
+                    options={Static.optionsSelect.Category}
+
+                    callback={
+                      async (active, nameOptions) => {
+
+                        Static.Category = active
+
+                      }
+                    }
+                  />
+
+                </div>
+                <br />
+                <div class="container-input">
+
+
+                  <Input
+                    classDiv="input-div"
+                    Static={Static.Lang}
+                  />
+                </div>
                 <div class="container-input">
 
                   <Input
                     classDiv="input-div"
-                    Static={Static.Confirm}
+                    Static={Static.Country}
                   />
                 </div>
-              </div>
-              <div class="container-checkbox">
-                <div class="checkbox">
-                  <input
-                    class="checkbox__input complain_checkbox"
-                    onChange={function (e) {
-                      Static.Visible.checked = this.checked
-                      initReload()
-                    }}
-                    type="checkbox"
-                    checked={Static.Visible.checked ? true : false}
 
-                  />
-                  <label class="checkbox__label">
-                    Только для друзей
-                    <span class="cont_a-link"></span>
-                  </label>
+                <div class="container-checkbox">
+                  <div class="checkbox">
+                    <input
+
+                      class="checkbox__input complain_checkbox"
+
+                      onChange={function (e) {
+                        Static.Private.checked = this.checked
+
+                        initReload()
+                      }}
+                      type="checkbox"
+                      checked={Static.Private.checked ? true : false}
+
+                    />
+                    <label class="checkbox__label">
+                      Приватная комната
+                      <span class="cont_a-link"></span>
+                    </label>
+                  </div>
                 </div>
-              </div>
+                <div
+                  style={
 
-              <div class="userMainBlock">
-                {() => {
-                  //return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
-                }}
-              </div>
-              <MediaButton
-                onclickPhoto={function () {
-                  if (this.files.length == 0) {
-                    return;
-                  }
+                    Static.Private.checked ?
+                      "display: block"
+                      : "display: none"
+                  }>
+                  <div class="container-input">
 
-                  loadPhoto(this.files, "chat");
+                    <Input
+                      classDiv="input-div"
+                      Static={Static.Confirm}
+                    />
+                  </div>
+                </div>
+                <div class="container-checkbox">
+                  <div class="checkbox">
+                    <input
+                      class="checkbox__input complain_checkbox"
+                      onChange={function (e) {
+                        Static.Visible.checked = this.checked
+                        initReload()
+                      }}
+                      type="checkbox"
+                      checked={Static.Visible.checked ? true : false}
 
-                }}
+                    />
+                    <label class="checkbox__label">
+                      Только для друзей
+                      <span class="cont_a-link"></span>
+                    </label>
+                  </div>
+                </div>
 
-                iconPhoto={"message_camera"}
-              />
-              {Static.mediaInputs.show && Static.mediaInputs.value.length
-                ?
-                <div class="create_post_chapter createPostImage">
-                  {
-                    Static.mediaInputs.value.map((item, index) => {
-                      if (item.type != "audio") {
-                        return (
-                          <MediaPreview
-                            item={item}
-                            index={index}
-                            type="chat"
-                            Static={Static}
-                            sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
-                          />
-                        );
+                <div class="userMainBlock">
+                  {() => {
+                    //return BlockUserProfilePage[profilePage](Static, { profilePage, items: activeItems, userInfo })
+                  }}
+                </div>
+                <MediaButton
+                  onclickPhoto={function () {
+                    if (this.files.length == 0) {
+                      return;
+                    }
+
+                    loadPhoto(this.files, "chat");
+
+                  }}
+
+                  iconPhoto={"message_camera"}
+                />
+                {Static.mediaInputs.show && Static.mediaInputs.value.length
+                  ?
+                  <div class="create_post_chapter createPostImage">
+                    {
+                      Static.mediaInputs.value.map((item, index) => {
+                        if (item.type != "audio") {
+                          return (
+                            <MediaPreview
+                              item={item}
+                              index={index}
+                              type="chat"
+                              Static={Static}
+                              sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
+                            />
+                          );
+                        }
+                      })
+                    }
+                  </div>
+                  :
+                  null
+                }
+
+
+                <div class={["registration-btn", active]}>
+                  <a class="btn-gr-reg" onclick={
+                    async () => {
+                      let status = Static.Private.checked
+                      let visible = Static.Visible.checked
+                      let confirmuser = Static.Confirm.value
+                      let title = Static.label.value
+                      let description = Static.Title.value
+                      let category = Static.Category
+                      let images = Static.mediaInputs.value[0].name
+                      let languages = Static.Lang.code
+                      let country = Static.Country.code
+                      let _id = data.userrooms._id
+
+                      // let system = false
+                      let request = { _id, status, visible, confirmuser, title, description, images, languages, country, category }
+
+                      let requier = await fn.restApi.setUserRoom.edit(request)
+
+                      if (requier.status == "ok") {
+                        Static.callback(requier)
+                        fn.modals.close(ID)
+
                       }
-                    })
-                  }
-                </div>
-                :
-                null
-              }
-
-
-              <div class={["registration-btn", active]}>
-                <a class="btn-gr-reg" onclick={
-                  async () => {
-                    let status = Static.Private.checked
-                    let visible = Static.Visible.checked
-                    let confirmuser = Static.Confirm.value
-                    let title = Static.label.value
-                    let description = Static.Title.value
-                    let category = Static.Category
-                    let images = Static.mediaInputs.value[0].name
-                    let languages = Static.Lang.code
-                    let country = Static.Country.code
-                    let _id = data.userrooms._id
-
-                    // let system = false
-                    let request = { _id, status, visible, confirmuser, title, description, images, languages, country, category }
-
-                    let requier = await fn.restApi.setUserRoom.edit(request)
-
-                    if (requier.status == "ok") {
-                      Static.callback(requier)
-                      fn.modals.close(ID)
-
                     }
                   }
-                }
-                >
-                  <span>Отправить</span>
-                </a>
+                  >
+                    <span>Отправить</span>
+                  </a>
+                </div>
               </div>
-            </div>
-          </header>
-        </section>
-      </div>
+            </header>
+          </section>
+        </div>
 
-    );
-  }
+      );
+    }
   })
 };
 

@@ -1,7 +1,7 @@
 import { jsx, jsxFrag, Variable, initReload, init, load, CEM } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/export.js';
 // import svg from "@assets/svg/index.js";
-import { Input } from '@component/element/index.js';
+import { Input } from '@elements/element/index.js';
 //"alarm_icon" : "confirm_icon"
 
 const { svg, fn } = CEM

@@ -5,7 +5,7 @@ import {
 } from "@betarost/cemserver/cem.js";
 
 import Elements from '@src/elements/export.js';
-import { BlockInfoPartners } from '@component/blocks/index.js';
+import { BlockInfoPartners } from '@elements/blocks/index.js';
 
 const start = function (data, ID) {
   load({

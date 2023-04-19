@@ -6,7 +6,7 @@ import {
   load,
   CEM
 } from "@betarost/cemserver/cem.js";
-import { Avatar } from "@component/element/Avatar.js";
+import { Avatar } from "@elements/element/Avatar.js";
 // import { fn } from '@src/functions/index.js';
 
 const fn = CEM.fn

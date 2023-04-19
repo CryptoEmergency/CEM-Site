@@ -13,8 +13,8 @@ import {
 import svg from "@assets/svg/index.js";
 
 
-import { BottomMenu } from '@component/element/BottomMenu.js';
-import { ItemsMenu } from '@component/element/index.js'
+import { BottomMenu } from '@elements/element/BottomMenu.js';
+import { ItemsMenu } from '@elements/element/index.js'
 let news;
 
 const ModalPage = async function (ID, reload) {

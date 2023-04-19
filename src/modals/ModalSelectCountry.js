@@ -1,11 +1,11 @@
 import { jsx, jsxFrag, Variable, initReload, init, load, CEM } from "@betarost/cemserver/cem.js";
 // import svg from "@assets/svg/index.js";
-import { Avatar } from "@component/element/Avatar.js";
+import { Avatar } from "@elements/element/Avatar.js";
 // import images from '@assets/images/index.js';
-import { Input } from '@component/element/index.js';
+import { Input } from '@elements/element/index.js';
 // import { fn } from '@src/functions/index.js';
 
-const {images, svg, fn } = CEM
+const { images, svg, fn } = CEM
 
 let inputValue, allCountries;
 
@@ -41,17 +41,19 @@ const ModalSelectCountry = function (data, ID) {
     fn: () => {
       return (
         <div class="c-modal c-modal--open" id="ModalSelectCountry"
-        onclick={function(e){ if(close){ 
+          onclick={function (e) {
+            if (close) {
 
-          fn.modals.close(ID)
-        }}}>
-          <section class="c-modal__dialog" onmouseover={function(){
-        close = false
+              fn.modals.close(ID)
+            }
+          }}>
+          <section class="c-modal__dialog" onmouseover={function () {
+            close = false
 
           }}
-          onmouseleave={function(){
-              
-            close = true
+            onmouseleave={function () {
+
+              close = true
             }}>
             <header class="c-modal__header">
               <h2 class="c-modal__title">{Variable.lang.h.modal_changeCountry}</h2>
