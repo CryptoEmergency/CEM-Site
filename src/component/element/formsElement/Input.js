@@ -1,8 +1,10 @@
 import {
     jsx,
-    jsxFrag
+    jsxFrag,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import svg from '@assets/svg/index.js';
+
+const { images, svg, fn } = CEM
 
 const textConstuctor = function (Static, classDiv, className, before, after, callback, customStyle = false, paste = false) {
     if (Static && (typeof Static.label != "undefined" || typeof Static.error != "undefined" || typeof classDiv != "undefined" || typeof before != "undefined" || typeof after != "undefined")) {
@@ -66,8 +68,8 @@ const textElem = function (Static, className, callback, customStyle, paste) {
             readonly={readonly}
             Element={($el) => {
 
-                if(!Static){
-                    Static={}
+                if (!Static) {
+                    Static = {}
                 }
                 Static.elInput = $el
             }}

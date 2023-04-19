@@ -1,12 +1,14 @@
 import {
     jsx,
-    jsxFrag
+    jsxFrag,
+    CEM
 } from '@betarost/cemserver/cem.js';
 
-import { fn } from '@src/functions/index.js';
+
 import Elements from '@src/elements/export.js';
-import svg from '@assets/svg/index.js';
-import images from "@assets/images/index.js";
+
+const { images, svg, fn } = CEM
+
 const forExport = function ({ item, nameUrl }) {
     return (
         <Elements.Link

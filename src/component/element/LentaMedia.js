@@ -3,10 +3,10 @@ import {
   jsxFrag,
   CEM
 } from "@betarost/cemserver/cem.js";
-// import { fn } from '@src/functions/index.js';
+
 import { AudioPlayer, Swiper, VideoPlayer, LazyImage, Panzoom } from "@component/element/index.js";
 
-const fn = CEM.fn
+const { images, svg, fn } = CEM
 
 const makeSwiperOptions = function (Static, index) {
 

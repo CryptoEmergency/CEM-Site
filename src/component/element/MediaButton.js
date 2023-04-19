@@ -2,10 +2,11 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initReload
+    initReload,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/export.js';
-import svg from "@assets/svg/index.js";
+
+const { images, svg, fn } = CEM
 
 let inputImg,
     inputVideo,

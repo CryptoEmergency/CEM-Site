@@ -4,10 +4,12 @@ import {
   Variable,
   initOne,
   initReload,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+
 import { ButtonShowMore, NotFound } from "@component/element/index.js";
+
+const { images, svg, fn } = CEM
 
 const BlockExchange = async function ({ Static, limit = 12 }) {
   await initOne(async () => {
@@ -119,7 +121,7 @@ const BlockExchange = async function ({ Static, limit = 12 }) {
           </div>
         </div>
         {!Variable[Static.nameRecords] ||
-        !Variable[Static.nameRecords].list_records.length ? (
+          !Variable[Static.nameRecords].list_records.length ? (
           <NotFound />
         ) : (
           Variable[Static.nameRecords].list_records.map(function (item, i) {

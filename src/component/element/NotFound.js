@@ -2,8 +2,10 @@ import {
     jsx,
     jsxFrag,
     Variable,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
+
+const { images, svg, fn } = CEM
 
 const NotFound = function (data) {
     return (

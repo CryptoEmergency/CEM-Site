@@ -5,14 +5,13 @@ import {
     initOne,
     initReload,
     Static,
-    init
+    init,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
+
 import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
 
-
+const { images, svg, fn } = CEM
 
 
 const Mini = function (Static) {

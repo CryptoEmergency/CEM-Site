@@ -2,9 +2,10 @@ import {
   jsx,
   jsxFrag,
   Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+
+const { images, svg, fn } = CEM
 
 const ItemsMenu = function (data) {
 
@@ -13,13 +14,13 @@ const ItemsMenu = function (data) {
   if (data) {
     if (data.items) {
       items = data.items
-    } 
+    }
 
     if (data.author) {
       author = data.author
     }
- 
- 
+
+
   }
 
   return (

@@ -3,10 +3,12 @@ import {
     jsxFrag,
     Variable,
     sendApi,
-    initReload
+    initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from '@assets/svg/index.js';
+
+const { images, svg, fn } = CEM
+
 const findUnread = function (arr, title = false) {
     let unread = false
     if (!arr || !arr.length) { return false }

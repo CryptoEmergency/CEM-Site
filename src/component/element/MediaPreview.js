@@ -1,9 +1,9 @@
-import { jsx, jsxFrag, Variable, initReload } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, CEM } from "@betarost/cemserver/cem.js";
 
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+
 import { AudioPlayerCopy } from "@component/element/index.js";
-import { fn } from '@src/functions/index.js';
+
+const { images, svg, fn } = CEM
 
 const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = false, toggleActive = false }) {
   // console.log('=2f8e9a=', item, type)item.size

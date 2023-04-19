@@ -1,5 +1,6 @@
-import { jsx, jsxFrag, Helpers, Variable, initReload } from "@betarost/cemserver/cem.js";
-import svg from '@assets/svg/index.js';
+import { jsx, jsxFrag, Helpers, Variable, initReload, CEM } from "@betarost/cemserver/cem.js";
+
+const { images, svg, fn } = CEM
 
 
 const CheckBox = function ({ id, label, error, Static, afterValid, className }) {

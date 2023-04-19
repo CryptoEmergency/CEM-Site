@@ -2,11 +2,13 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initReload
+    initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
+
 import { Avatar, Evaluation, TextArea, ButtonSubmit, ItemsMenu } from "@component/element/index.js";
+
+const { images, svg, fn } = CEM
 
 const Comment = function ({ Static, index, item, include, mainId, action, quoteId, mainItem }) {
     // console.log('=ca7d22=', item)

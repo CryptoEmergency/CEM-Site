@@ -3,10 +3,10 @@ import {
   jsxFrag,
   Variable,
   initReload,
-  initOne
+  initOne,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+const { images, svg, fn } = CEM
 
 let activeBanner,
   userLang,

@@ -1,9 +1,10 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
+const { images, svg, fn } = CEM
 
 const forExport = function ({ src }) {
     return (

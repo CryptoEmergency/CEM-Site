@@ -2,11 +2,11 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initReload
+    initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
 // check
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
+const { images, svg, fn } = CEM
 
 const lead0 = function (val, n) {
     var nz = "" + val

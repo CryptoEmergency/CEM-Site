@@ -1,6 +1,5 @@
-import { jsx, jsxFrag, Variable } from "@betarost/cemserver/cem.js";
-
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, Variable, CEM } from "@betarost/cemserver/cem.js";
+const { images, svg, fn } = CEM
 
 const lead0 = function (val, n) {
   var nz = "" + val

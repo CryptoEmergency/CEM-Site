@@ -1,10 +1,10 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import images from "@assets/images/index.js";
+const { images, svg, fn } = CEM
 
 // Сделать запрос через Базу
 const partners = [

@@ -1,6 +1,6 @@
-import { jsx, jsxFrag, Variable } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, CEM } from "@betarost/cemserver/cem.js";
 
-import svg from "@assets/svg/index.js";
+const { images, svg, fn } = CEM
 
 let controlPlaypause = function (e, mainElement) {
   e.stopPropagation();

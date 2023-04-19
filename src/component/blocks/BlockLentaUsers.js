@@ -1,13 +1,13 @@
 import {
   jsx,
   jsxFrag,
-  Variable
+  Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+
 import { LentaMedia, Evaluation, Avatar, ItemsMenu, VideoPlayer, AudioPlayer } from "@component/element/index.js";
 
+const { images, svg, fn } = CEM
 const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, index }) {
   let mediaFiles
 

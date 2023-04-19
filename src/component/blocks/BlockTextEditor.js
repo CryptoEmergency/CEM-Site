@@ -1,6 +1,6 @@
-import { jsx, jsxFrag, Variable, initOne, initReload } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, Variable, initOne, initReload, CEM } from "@betarost/cemserver/cem.js";
+
+const { images, svg, fn } = CEM
 
 let editorField, localeImg, listFontSize;
 

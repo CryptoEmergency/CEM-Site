@@ -1,11 +1,12 @@
-import { jsx, jsxFrag, Variable, initOne } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, Variable, initOne, CEM } from "@betarost/cemserver/cem.js";
+
 import {
   NotFound,
   ButtonShowMore,
   LazyImage,
 } from "@component/element/index.js";
+
+const { images, svg, fn } = CEM
 
 const Tags = function ({ Static, classActive, text, type }) {
   return (
@@ -128,7 +129,7 @@ const BlockNews = async function ({ Static }) {
         <div class="bl_one bl_active">
           <div class="blog_news">
             {!Variable[Static.nameRecords] ||
-            !Variable[Static.nameRecords].list_records.length ? (
+              !Variable[Static.nameRecords].list_records.length ? (
               <NotFound />
             ) : (
               Variable[Static.nameRecords].list_records.map((item) => {

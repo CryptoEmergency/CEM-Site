@@ -2,11 +2,11 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initReload
+    initReload,
+    CEM
 } from '@betarost/cemserver/cem.js';
 
-import images from '@assets/images/index.js';
-
+const { images, svg, fn } = CEM
 
 let abbr = "ru" //j
 let codeTitle = "7"

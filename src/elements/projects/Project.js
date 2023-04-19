@@ -1,6 +1,5 @@
-import { jsx, jsxFrag, initReload } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+import { jsx, jsxFrag, initReload, CEM } from "@betarost/cemserver/cem.js";
+const { images, svg, fn } = CEM
 
 const forExport = function ({ records }) {
   return (

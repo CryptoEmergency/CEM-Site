@@ -3,10 +3,12 @@ import {
   jsxFrag,
   Variable,
   initOne,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js'
-import svg from "@assets/svg/index.js";
+
 import { Select, ButtonShowMore, NotFound, Avatar, Input } from '@component/element/index.js';
+
+const { images, svg, fn } = CEM
 
 const makeFilter = function (Static) {
   let objReturn = {}

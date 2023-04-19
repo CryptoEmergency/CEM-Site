@@ -1,7 +1,7 @@
-import { jsx, jsxFrag, Variable } from "@betarost/cemserver/cem.js";
-import images from "@assets/images/index.js";
+import { jsx, jsxFrag, Variable, CEM } from "@betarost/cemserver/cem.js";
+
 import { Swiper } from "@component/element/index.js";
-import { fn } from "@src/functions/export.js";
+const { images, svg, fn } = CEM
 // Сделать запрос через Базу
 const banners = [
   // {
@@ -167,10 +167,10 @@ const swiperOptions = {
 };
 
 const BlockBanners = async function () {
-  const records = await fn.socket.get({ method: "Banners", params: { filter: {  } } })
+  const records = await fn.socket.get({ method: "Banners", params: { filter: {} } })
   // console.log('=84a49b=', records)
   const bannersRecords = records.map(function (item) {
-    
+
     let lang = Variable.lang.code == "ru" ? "ru" : "en";
     if (item.languages.code == lang) {
       return (

@@ -2,10 +2,10 @@ import {
   jsx,
   jsxFrag,
   Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
-//import svg from "@assets/svg/index.js";
 
-import svg from '@assets/svg/index.js';
+const { images, svg, fn } = CEM
 
 const changeSelect = function (selectIndex, options, callback) {
   let optionsActive

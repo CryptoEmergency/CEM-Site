@@ -5,12 +5,14 @@ import {
     initReload,
     initOne,
     sendApi,
-    Helpers
+    Helpers,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
+
 import { Avatar, ItemsMenu, NotFound, VideoPlayer, Input } from '@component/element/index.js';
 import { BlockLentaUsers } from '@component/blocks/index.js';
+
+const { images, svg, fn } = CEM
 
 let visibleEditInterest = false;
 let visibleEditWork = false;

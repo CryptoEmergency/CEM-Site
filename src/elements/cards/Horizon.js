@@ -1,6 +1,6 @@
-import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, CEM } from "@betarost/cemserver/cem.js";
+
+const { images, svg, fn } = CEM
 
 const forExport = function ({ records }) {
   console.log(records)
@@ -49,7 +49,7 @@ const forExport = function ({ records }) {
                           ? item.nowMoney
                           : 0) *
                           100) /
-                          item.targetMoney
+                        item.targetMoney
                       )}
                       %
                     </span>

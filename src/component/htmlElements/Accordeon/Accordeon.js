@@ -1,5 +1,5 @@
-import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, CEM } from "@betarost/cemserver/cem.js";
+const { svg } = CEM
 
 // const showContent = function () {
 //   this.lastChild.classList.toggle("arrow-toggle");

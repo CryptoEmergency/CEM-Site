@@ -1,7 +1,8 @@
-import { jsx, jsxFrag, Variable, initOne } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, Variable, initOne, CEM } from "@betarost/cemserver/cem.js";
+
 import { Swiper } from "@component/element/index.js";
+
+const { images, svg, fn } = CEM
 
 const swiperOptions = {
   direction: "horizontal",

@@ -1,7 +1,6 @@
-import { jsx, jsxFrag, Variable, initReload, initOne, sendApi, Helpers } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import images from "@assets/images/index.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, Variable, initReload, initOne, sendApi, Helpers, CEM } from "@betarost/cemserver/cem.js";
+
+const { images, svg, fn } = CEM
 
 let visibleSettings, formInputs;
 let inputAvatar = Variable.setRef();
@@ -131,8 +130,8 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
               : parent == "lenta" ? "lenta_avatar"
                 : parent == "c-message__avatar" ? "c-message__avatar"
                   : parent == "c-careers__resume" ? "c-careers__avatar"
-                  : parent == "c-freelance" ? "c-freelance__avatar"
-                    : "comment_avatar"}
+                    : parent == "c-freelance" ? "c-freelance__avatar"
+                      : "comment_avatar"}
       `}
       // onclick={Helpers.siteLink}
       onclick={async (e) => {

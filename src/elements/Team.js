@@ -1,8 +1,9 @@
-import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
-import images from "@assets/images/index.js";
+import { jsx, jsxFrag, CEM } from "@betarost/cemserver/cem.js";
+
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 
+const { images, svg, fn } = CEM
 const swiperGo = function (index) {
   let swiperItem = new Swiper(".mySwiper", {
     spaceBetween: 30,

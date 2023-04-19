@@ -2,9 +2,11 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    initReload
+    initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+
+const { images, svg, fn } = CEM
 
 const ButtonShowMore = function ({ Static, action, onclick, limit = 6, sort = false }) {
     if ((!Static || !Static.nameRecords) || Variable[Static.nameRecords] && Variable[Static.nameRecords].list_records.length < Variable[Static.nameRecords].totalFound) {

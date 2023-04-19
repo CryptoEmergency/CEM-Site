@@ -1,11 +1,12 @@
 import {
     jsx,
     jsxFrag,
-    Variable
+    Variable,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import svg from '@assets/svg/index.js';
-import Elements from '@src/elements/export.js';
 
+import Elements from '@src/elements/export.js';
+const { images, svg, fn } = CEM
 const forExport = function ({ item, onClick_add, children, className, Static, onchange, oninput_addTitle, oninput_addText }) {
     if (!item) {
         return (

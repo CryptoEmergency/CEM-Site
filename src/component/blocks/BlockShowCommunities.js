@@ -5,13 +5,13 @@ import {
   initOne,
   initReload,
   Static,
-  init
+  init,
+  CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from '@assets/images/index.js';
+
 import { Input, Select, ItemsMenu } from '@component/element/index.js';
 
+const { images, svg, fn } = CEM
 const Tags = function ({ Static, classActive, text, type }) {
   return (
     <div class={["tag_button", classActive]}

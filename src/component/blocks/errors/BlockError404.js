@@ -2,12 +2,11 @@ import {
     jsx,
     jsxFrag,
     Variable,
-    Data
+    Data,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
 
-
+const { images, svg, fn } = CEM
 const BlockError404 = function () {
     return (
         <div class="c-error">

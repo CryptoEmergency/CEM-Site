@@ -2,9 +2,10 @@ import {
     jsx,
     jsxFrag,
     Variable,
+    CEM
 } from "@betarost/cemserver/cem.js";
 // check
-import images from "@assets/images/index.js";
+const { images, svg, fn } = CEM
 
 const calcWidthHeight = function (e) {
     let ratio = e.path[0].naturalWidth / e.path[0].naturalHeight;
@@ -13,7 +14,7 @@ const calcWidthHeight = function (e) {
 
 const LazyImage = function ({ path, ratio, className, classImg = '', counter = null, onClick = null }) {
     if (className && className.includes('c-groupimage__item--more')) {
-        
+
         return (
             <div class={className} onClick={onClick}>
                 <img

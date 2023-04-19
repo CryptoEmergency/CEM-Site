@@ -4,11 +4,10 @@ import {
     Variable,
     initReload,
     initOne,
-    sendApi
+    sendApi,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
-
+const { images, svg, fn } = CEM
 
 
 const dateDelete = function (str) {
@@ -95,7 +94,7 @@ const securityChangeInput = function () {
 }
 
 BlockUserSettingsPage.security = function (data) {
-  
+
     if (!data || data.settingsPage != "security") {
         return (<></>)
     }

@@ -2,13 +2,13 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  initReload
+  initReload,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+
 import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/index.js";
 
-
+const { images, svg, fn } = CEM
 const BlockShowNews = function ({ Static }) {
   // console.log('=c68f22=', Static)
   return (
