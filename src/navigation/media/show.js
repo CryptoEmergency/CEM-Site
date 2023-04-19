@@ -1,10 +1,12 @@
-import { jsx, jsxFrag, load, Variable } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, load, Variable, CEM } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/export.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/export.js";
+// import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
 
 import { BlockShowNews, BlockError404 } from "@component/blocks/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID = "mainBlock") {
   let [Static, item] = fn.GetParams({ data, ID });

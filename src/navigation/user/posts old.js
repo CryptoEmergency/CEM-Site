@@ -7,8 +7,9 @@ import {
   Helpers,
   initGo,
   sendApi,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 
 import {
   MediaButton,
@@ -23,7 +24,7 @@ import 'cropperjs/dist/cropper.css';
 
 let Static, selectAspect;
 
-
+const { fn } = CEM
 
 const sendPost = async (e, Static) => {
   e.preventDefault();

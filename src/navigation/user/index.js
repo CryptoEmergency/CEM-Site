@@ -5,17 +5,20 @@ import {
     Variable,
     initReload,
     sendApi,
-    Helpers
+    Helpers,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
-import images from '@assets/images/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
+// import images from '@assets/images/index.js';
 import { Avatar } from '@component/element/Avatar.js';
 
 import {
     BlockUserProfilePage,
 } from '@component/blocks/index.js';
 // import { fn } from "moment";
+
+const { images, svg, fn } = CEM
 
 const makeFilter = function (Static) {
     let objReturn = {}

@@ -3,15 +3,18 @@ import {
     jsxFrag,
     load,
     initReload,
-    Variable
+    Variable,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { Swiper } from '@component/element/index.js';
-import svg from '@assets/svg/index.js';
+// import svg from '@assets/svg/index.js';
 import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
 import Elements from '@src/elements/export.js';
 
 import 'swiper/css/bundle';
+
+const { svg, fn } = CEM
 
 // const showListTabs = function (Static) {
 //     return Static.listStatus.map((item) => {

@@ -3,11 +3,14 @@ import {
     jsxFrag,
     Variable,
     init,
-    sendApi
+    sendApi,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
-import svg from '@assets/svg/index.js';
+// import svg from '@assets/svg/index.js';
 import { Swiper } from '@component/element/index.js';
+
+const { svg, fn } = CEM
 
 let swiperOptions = {
     effect: "cards",

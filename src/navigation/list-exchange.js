@@ -5,11 +5,14 @@ import {
   init,
   Variable,
   initReload,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 import Elements from '@src/elements/export.js';
 import { NotFound } from "@component/element/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })

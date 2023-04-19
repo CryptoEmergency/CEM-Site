@@ -8,12 +8,15 @@ import {
   Data,
   sendApi,
   Helpers,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment, MediaButton, MediaPreview } from "@component/element/index.js";
 import { BlockError404 } from '@component/blocks/index.js';
+
+const { svg, fn } = CEM
 
 let elAnswerForm, elAnswerToggle, elText
 

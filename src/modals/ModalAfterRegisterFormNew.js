@@ -6,12 +6,15 @@ import {
   initOne,
   sendApi,
   Data,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
 import { Input, InputDiv } from '@component/element/index.js';
-import { fn } from '@src/functions/export.js';
+// import { fn } from '@src/functions/export.js';
+
+const { svg, fn } = CEM
 
 const checForm = async function () {
   // console.log('=c35305= checForm', Data.MStatic)

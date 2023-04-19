@@ -5,21 +5,19 @@ import {
     Variable,
     init,
     initReload,
-    Helpers
+    Helpers,
+    CEM
 } from "@betarost/cemserver/cem.js";
-
 
 import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
 
-import { fn } from "@src/functions/index.js";
-
-
-
+// import { fn } from "@src/functions/index.js";
 
 import 'swiper/css/bundle';
 
+const fn = CEM.fn
 
 const start = function (data, ID) {
     let showAllCompanies = false

@@ -5,11 +5,12 @@ import {
     init,
     sendApi,
     Helpers,
-    initReload
+    initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
-import images from "@assets/images/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
+// import images from "@assets/images/index.js";
 import {
     Avatar,
     Swiper,
@@ -26,7 +27,9 @@ import {
 
 // import EmojiPicker from "rm-emoji-picker";
 // import 'rm-emoji-picker/dist/emojipicker.css';
-// 
+
+const { images, svg, fn } = CEM
+
 const swiperOptions = {
     loop: false,
     // autoHeight: true, 

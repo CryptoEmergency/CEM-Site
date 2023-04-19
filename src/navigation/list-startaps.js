@@ -4,11 +4,13 @@ import {
   load,
   initReload,
   Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/index.js";
 import images from "@assets/images/index.js";
 import Elements from "@src/elements/export.js";
+
+const fn = CEM.fn
 
 const showListStartaps = function (listStartaps) {
   return listStartaps.map((item) => {

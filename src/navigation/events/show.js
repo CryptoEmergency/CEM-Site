@@ -5,17 +5,20 @@ import {
     init,
     initReload,
     load,
-    Data
+    Data,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
 import images from "@assets/images/index.js";
 import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment } from "@component/element/index.js";
 import { BlockError404 } from '@component/blocks/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
+
+const { svg, fn } = CEM
 
 const start = function (data, ID) {
     let [Static, item] = fn.GetParams({ data, ID, initData: "event_show" })

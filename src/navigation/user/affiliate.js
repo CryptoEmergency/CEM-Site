@@ -2,13 +2,16 @@ import {
     jsx,
     jsxFrag,
     init,
-    Variable
+    Variable,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
 import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore } from '@component/element/index.js';
 import { BlockAffiliateBanners } from '@component/blocks/index.js';
+
+const { svg, fn } = CEM
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })

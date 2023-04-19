@@ -3,13 +3,16 @@ import {
   jsxFrag,
   load, 
   Variable,
-  initReload
+  initReload,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
 import Elements from '@src/elements/export.js';
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 import { ButtonShowMore, NotFound } from "@component/element/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
@@ -84,7 +87,7 @@ const start = function (data, ID) {
                       <span class="crypto_exchanges_percent_green_mobile">
                         <img src={svg.exange_money} />
                       </span>
-                      {fn.NumFormat(item.spotVolumeUsd)}
+                      {fn.numFormat(item.spotVolumeUsd)}
                     </span>
                   </div>
                 </div> */}
@@ -98,7 +101,7 @@ const start = function (data, ID) {
                             <span class="crypto_exchanges_percent_green_mobile">
                               <img src={svg.exange_visitors} />
                             </span>
-                            {fn.NumFormat(item.weeklyVisits)}
+                            {fn.numFormat(item.weeklyVisits)}
                           </span>
                         </div>
                       </div>

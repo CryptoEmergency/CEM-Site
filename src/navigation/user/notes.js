@@ -3,11 +3,14 @@ import {
     jsxFrag,
     load,
     initReload,
-    Variable
+    Variable,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
 import Elements from '@src/elements/export.js';
+
+const { svg, fn } = CEM
 
 // Добавление новой заметки.
 // Подсмотрел другую интересную логику по созданию новой заметки. Ее нельзя создать, пока последняя созданная является пустой.

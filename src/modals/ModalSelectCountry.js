@@ -1,9 +1,11 @@
-import { jsx, jsxFrag, Variable, initReload, init, load } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, Variable, initReload, init, load, CEM } from "@betarost/cemserver/cem.js";
+// import svg from "@assets/svg/index.js";
 import { Avatar } from "@component/element/Avatar.js";
-import images from '@assets/images/index.js';
+// import images from '@assets/images/index.js';
 import { Input } from '@component/element/index.js';
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
+
+const {images, svg, fn } = CEM
 
 let inputValue, allCountries;
 

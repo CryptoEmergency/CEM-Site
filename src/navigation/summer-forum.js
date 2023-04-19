@@ -5,23 +5,21 @@ import {
     Variable,
     init,
     initReload,
-    Helpers
+    Helpers,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
-
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
 import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
 import { LazyImage } from "@component/element/index.js";
 
 // import anime from 'animejs/lib/anime.es.js';
-
-import { fn } from "@src/functions/index.js";
-
-
-
+// import { fn } from "@src/functions/index.js";
 
 import 'swiper/css/bundle';
+
+const { svg, fn } = CEM
 
 const isMobile = {
     Android: function () {

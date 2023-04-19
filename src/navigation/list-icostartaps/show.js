@@ -4,10 +4,13 @@ import {
   load,
   initReload,
   Variable,
-  Helpers
+  Helpers,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
+
+const { svg, fn } = CEM
 
 const showDate = function (start, end) {
   let currentDate = Math.round(new Date() / 1000);

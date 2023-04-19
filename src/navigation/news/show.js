@@ -13,14 +13,16 @@
 //         </div>
 //       );
 
-import { jsx, jsxFrag, load, Variable, initReload } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, load, Variable, initReload, CEM } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
 import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/index.js";
 
 import { BlockError404 } from "@component/blocks/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID = "mainBlock") {
   let [Static, item] = fn.GetParams({ data, ID });

@@ -1,16 +1,17 @@
 import {
     jsx,
     jsxFrag,
-    init
+    init,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { BlockUserRooms } from '@component/blocks/index.js';
 
 const start = function (data, ID) {
-    let [Static] = fn.GetParams({ data, ID })
+    let [Static] = CEM.fn.GetParams({ data, ID })
 
     init(()=>{
-        fn.initData.rooms(Static)
+        CEM.fn.initData.rooms(Static)
     },
         () => {
            
