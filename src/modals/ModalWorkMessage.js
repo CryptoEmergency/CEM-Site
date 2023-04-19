@@ -7,10 +7,13 @@ import {
   sendApi,
   Helpers,
   init,
-  load
+  load,
+  CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import { Input, TextArea } from '@elements/element/index.js';
+
+const { fn } = CEM
 
 const ModalWorkMessage = function (data, ID) {
   let close = true

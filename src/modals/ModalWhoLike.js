@@ -3,10 +3,13 @@ import {
   jsxFrag,
   Variable,
   init,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
 import { Avatar } from "@elements/element/Avatar.js";
-import { fn } from '@src/functions/export.js';
+// import { fn } from '@src/functions/export.js';
+
+const { fn } = CEM
 
 const ModalWhoLike = function ({ whoLike, type }, ID) {
   let close = true

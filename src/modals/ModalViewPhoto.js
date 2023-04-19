@@ -3,15 +3,16 @@ import {
     jsxFrag,
     Variable,
     init,
-    load
+    load,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import {
     VideoPlayer,
 } from '@elements/element/index.js';
-import images from "@assets/images/index.js";
+// import images from "@assets/images/index.js";
 
-
+const { images, fn } = CEM
 
 const ModalViewPhoto = function ({ fullPath = false, path, arrMedia = null, video = false, folderImages = false }, ID) {
     let [Static] = fn.GetParams({ data: { path } })
