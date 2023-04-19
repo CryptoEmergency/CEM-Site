@@ -7,15 +7,16 @@ import {
 	sendApi,
 	Helpers,
 	init,
-	load
+	load,
+	CEM
 } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
 import { NotifyItem } from '@component/element/NotifyItem.js';
-import { fn } from "@src/functions/index.js";
+// import { fn } from "@src/functions/index.js";
+
+const { svg, fn } = CEM
 
 let notify, currentNotify;
-
-
 
 const ModalNotify = async function (data, ID) {
 

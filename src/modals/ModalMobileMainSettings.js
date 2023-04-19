@@ -7,10 +7,11 @@ import {
     initGo,
     Helpers,
     init,
-    load
+    load,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import svg from "@assets/svg/index.js";
-import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
 import youtube from '@assets/svg/youtube_icon.svg'
 // const showAllLangMedia = function (e, target) {
 //     e.preventDefault()
@@ -20,6 +21,9 @@ import youtube from '@assets/svg/youtube_icon.svg'
 //         target.parentNode.children[0].style = "display: none;";
 //     }
 // }
+
+const { svg, fn } = CEM
+
 let elem = {}
 
 const ModalMobileMainSettings = function (data, ID) {

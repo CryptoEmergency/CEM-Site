@@ -10,10 +10,10 @@ import {
   load,
   CEM
 } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
 // import { fn } from "@src/functions/index.js";
 
-const {  fn } = CEM.fn
+const { svg, fn } = CEM
 
 const ModalMainPageIconsMenu = function (data, ID) {
   load({

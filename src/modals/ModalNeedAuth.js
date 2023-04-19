@@ -5,9 +5,13 @@ import {
   init,
   timersStart,
   timersStop,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
+
+const fn = CEM.fn
+
 const ModalNeedAuth = function (data, ID) {
 
   let isEmpty = Object.entries(data).length === 0;
