@@ -14,7 +14,6 @@ const start = function (data, ID) {
   CEM.load({
     ID,
     fn: () => {
-      console.log('=d8df1e=', Variable.lang)
       return (
         <div class="startap c-main__body">
           <button

@@ -7,7 +7,7 @@ import { Variable, parsingUrl, initPage, Helpers, getStorage, setStorage, sendAp
 // import socket from "./socket.js"
 // import { functionsMain } from "@src/lists/files/index.js"
 // import { idb } from "@src/modules/load/initInexedDB.js";
-console.log('=d57934=', CEM.fn)
+// console.log('=d57934=', CEM.fn)
 const fn = CEM.fn
 // fn.Static = {}
 // fn.initData = initData
