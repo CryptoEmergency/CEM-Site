@@ -1,4 +1,4 @@
-import { getStorage } from "@betarost/cemserver/cem.js";
+import { getStorage, setStorage, CEM } from "@betarost/cemserver/cem.js";
 
 const forExport = function (_id, action) {
     // console.log('=e0fd8f= recordsView', _id, action)
@@ -7,12 +7,12 @@ const forExport = function (_id, action) {
     if (!objView) (objView = {})
     if (!objView[_id]) {
         objView[_id] = timeNow
-        fn.restApi[action].view({ _id })
+        CEM.fn.restApi[action].view({ _id })
         setStorage("recordsView", objView)
     } else {
         if (timeNow - objView[_id] >= 86400) {
             objView[_id] = timeNow
-            fn.restApi[action].view({ _id })
+            CEM.fn.restApi[action].view({ _id })
             setStorage("recordsView", objView)
         }
     }
