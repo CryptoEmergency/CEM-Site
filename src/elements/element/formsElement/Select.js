@@ -38,6 +38,7 @@ const Select = function ({ options, callback, toggler, icon = false }) {
             options.elemActive = $el
           }}
           onClick={(e) => {
+            // fn.clickHide()
             options.open = !options.open;
             if (options.elem.hidden === true) {
               options.elem.hidden = false;
@@ -45,7 +46,7 @@ const Select = function ({ options, callback, toggler, icon = false }) {
             } else {
               options.elem.hidden = true;
             }
-            // e.stopPropagation();
+            e.stopPropagation();
           }}
         >
           {() => {
@@ -68,7 +69,7 @@ const Select = function ({ options, callback, toggler, icon = false }) {
           //   console.log('=9131fd=', 5555, this)
           //   this.el.hidden = true
           // }}
-          // HiddenOut={true}
+          HiddenOut={true}
           hidden={true}>
           {() => {
             return options.items.map((item, index) => {
