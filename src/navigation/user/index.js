@@ -80,7 +80,7 @@ const makeFilter = function (Static) {
 
 const start = function (userInfo, ID = "mainBlock") {
     let [Static] = fn.GetParams({ userInfo, ID })
-    console.log('=07dba5=', userInfo)
+    // console.log('=07dba5=', userInfo)
     Variable.Static.FooterShow = false
     let profilePage
     Static.activeItems = {}

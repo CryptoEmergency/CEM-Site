@@ -613,7 +613,7 @@ BlockUserProfilePage.friends = async function (Static, data) {
         return (<></>)
     }
 
-    console.log('=f1fc83=', Static)
+    // console.log('=f1fc83=', Static)
 
     return (
         <div class="bl_one c-container" id="UserInfoFollowers">
