@@ -395,46 +395,4 @@ const fn = CEM.fn
 //   return;
 // }
 
-// fn.siteLinkModal = async function (e, data) {
-//   let link
-
-//   if (typeof e == "string") {
-//     link = e
-//   } else {
-//     e.preventDefault();
-//     e.stopPropagation();
-
-//     if (!e.currentTarget || (!e.currentTarget.href && !e.currentTarget.dataset.href)) {
-//       console.error("Not have href")
-//       return
-//     }
-//     link = e.currentTarget.href ? e.currentTarget.href : e.currentTarget.dataset.href
-//   }
-//   history.pushState(null, null, link);
-//   Variable.Modals = []
-//   // let dataUrl = parsingUrl(link)
-//   let dataUrl = await parsingUrl(link)
-//   // console.log('=cab10c=', link, dataUrl)
-//   await initPage(dataUrl, data);
-//   return
-// }
-
-// fn.recordsView = function (_id, action) {
-//   // console.log('=e0fd8f= recordsView', _id, action)
-//   let timeNow = Math.floor(Date.now() / 1000)
-//   let objView = getStorage("recordsView")
-//   if (!objView) (objView = {})
-//   if (!objView[_id]) {
-//     objView[_id] = timeNow
-//     fn.restApi[action].view({ _id })
-//     setStorage("recordsView", objView)
-//   } else {
-//     if (timeNow - objView[_id] >= 86400) {
-//       objView[_id] = timeNow
-//       fn.restApi[action].view({ _id })
-//       setStorage("recordsView", objView)
-//     }
-//   }
-// }
-
 export { fn }

@@ -3,11 +3,13 @@ import {
   jsxFrag,
   initReload,
   Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { TextArea, ButtonSubmit, Comment, NotFound } from "@component/element/index.js";
 import { BlockLentaUsers } from '@component/blocks/index.js';
+const fn = CEM.fn
 
 const BlockShowLenta = function ({ Static, item }) {
 

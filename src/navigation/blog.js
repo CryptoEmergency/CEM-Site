@@ -2,11 +2,13 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
 import Elements from "@src/elements/export.js";
-import { fn } from '@src/functions/export.js';
+// import { fn } from '@src/functions/export.js';
+const fn = CEM.fn
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })

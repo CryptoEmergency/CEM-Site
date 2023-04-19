@@ -4,13 +4,15 @@ import {
   Variable,
   init,
   initReload,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import svg from "@assets/svg/index.js";
 import { Input, TextArea, ButtonSubmit } from '@component/element/index.js';
 import Elements from '@src/elements/export.js';
 
+const fn = CEM.fn
 
 const sendMessage = async (Static) => {
   if (!Static.isValid) {
