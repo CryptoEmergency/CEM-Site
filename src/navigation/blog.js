@@ -10,11 +10,12 @@ import { fn } from '@src/functions/export.js';
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
-  // console.log('=c200a1=', Static)
+  console.log('=c200a1=', Static)
   load({
     ID,
     fnLoad: async () => {
       Static.records = await fn.socket.get({ method: "News", params: { filter: { type: "blog" } } })
+      console.log('=c36b1b=', Static.records)
     },
     fn: () => {
       return (

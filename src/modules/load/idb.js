@@ -6,7 +6,7 @@ import { openDB, deleteDB, wrap, unwrap } from 'idb';
 let idb = null
 // Variable.idb = idb
 
-const initInexedDB = async function () {
+const indexedDB = async function () {
     idb = openDB('CryptoEmergency', 1, {
         upgrade(idb, oldVersion) {
             const MyInfo = idb.createObjectStore('MyInfo', {
@@ -23,4 +23,4 @@ const initInexedDB = async function () {
     });
 }
 
-export { initInexedDB, idb };
+export { indexedDB, idb };

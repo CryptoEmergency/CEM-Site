@@ -4,7 +4,7 @@ import {
     Variable
 } from '@betarost/cemserver/cem.js'
 
-const loadStorage = async function () {
+const storage = async function () {
     try {
         if (!localStorage.getItem('lang')) {
             let language = window.navigator ? (window.navigator.language || window.navigator.systemLanguage || window.navigator.userLanguage) : "en";
@@ -32,11 +32,11 @@ const loadStorage = async function () {
             }
         }
         setStorage("recordsView", objView)
-
+        console.log('=e0a179=', Variable.myInfo)
     } catch (error) {
         console.error(error, "loadStorage")
     }
 }
 
 // loadStorage()
-export { loadStorage };
+export { storage };
