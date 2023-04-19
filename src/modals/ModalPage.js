@@ -8,10 +8,12 @@ import {
   initOne,
   stringToHtml,
   initAfter,
-  getInitList
+  getInitList,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
+// import svg from "@assets/svg/index.js";
 
+const { images, svg, fn } = CEM
 
 import { BottomMenu } from '@elements/element/BottomMenu.js';
 import { ItemsMenu } from '@elements/element/index.js'

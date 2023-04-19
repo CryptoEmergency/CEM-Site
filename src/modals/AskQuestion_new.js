@@ -3,9 +3,6 @@ import {
   jsxFrag,
   Variable,
   initReload,
-  sendApi,
-  Helpers,
-  Data,
   load,
   CEM
 } from "@betarost/cemserver/cem.js";
@@ -237,7 +234,8 @@ const ModalAskQuestion = function (data, ID) {
                 <div class="modal-question__size">
                   <div class="c-mediabtn__action c-mediabtn__action--small"
                     onclick={() => {
-                      Static.listSize ? Static.listSize = false : Static.listSize = true
+                      // Static.listSize ? Static.listSize = false : Static.listSize = true
+                      Static.elEditor.execCommand('bold');
                       initReload()
                     }}
                   >
@@ -253,8 +251,8 @@ const ModalAskQuestion = function (data, ID) {
                           <li
                             onclick={function () {
                               console.log('=da343e=', Static.elEditor)
-                              Static.elEditor.execCommand('bold');
-                              initReload()
+                              // document.execCommand('bold');
+                              // initReload()
                               // changeFontSize(14, Static)
                             }}
                           >
@@ -292,6 +290,15 @@ const ModalAskQuestion = function (data, ID) {
                 }}
                 error={Static.forms.textQuestion.error}
                 placeholder="Ваш вопрос"
+                onkeyup={(e) => {
+                  console.log('Key: ', event.key);
+                  console.log('keyCode: ', event.keyCode);
+                  if (e.keyCode == 16) {
+                    console.log('=623a45=', "Переменная")
+                    initReload()
+                  }
+                  
+                }}
                 oninput={async function () {
                   Static.forms.textQuestion.val = this.innerText.trim();
                   [Static.forms.textQuestion.error, Static.forms.textQuestion.valid] = await fn.ValidateForms.textQuestion(Static.forms.textQuestion.val)
