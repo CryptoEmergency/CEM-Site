@@ -3,9 +3,12 @@ import {
 	jsxFrag,
 	Variable,
 	init,
-	load
+	load,
+	CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
+// import { fn } from "@src/functions/index.js";
+
+const fn = CEM.fn
 
 const arrMyAction = ["share", "copyurl", "edit", "delete", "closequestion", "bestquestion"]
 const arrVisitorAction = ["addanswer", "share", "copyurl", "subscription", "complainItem", "complainUser", "blackList"]

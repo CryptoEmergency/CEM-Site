@@ -1,12 +1,11 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi, load } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, initReload, initGo, init, sendApi, load, CEM } from "@betarost/cemserver/cem.js";
 import { Input, CheckBox, Select, TextArea, MediaButton, MediaPreview } from '@component/element/index.js';
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 import {
 
 } from '@component/blocks/index.js';
 
-
-
+const fn = CEM.fn
 
 const ModalCreateRoom = function (data, ID) {
 

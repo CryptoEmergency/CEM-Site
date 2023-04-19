@@ -7,10 +7,13 @@ import {
   initGo,
   Helpers,
   init,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
 import svg from "@assets/svg/index.js";
-import { fn } from "@src/functions/index.js";
+// import { fn } from "@src/functions/index.js";
+
+const {  fn } = CEM.fn
 
 const ModalMainPageIconsMenu = function (data, ID) {
   load({

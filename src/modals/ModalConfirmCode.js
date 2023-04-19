@@ -6,11 +6,13 @@ import {
     initReload,
     sendApi,
     init,
-    load
+    load,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 
+const { svg, fn } = CEM
 
 const ModalConfirmCode = function (data, ID) {
     let time, wayType

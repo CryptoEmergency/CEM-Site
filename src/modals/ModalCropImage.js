@@ -4,14 +4,15 @@ import {
     Variable,
     init,
     initReload,
-    load
+    load,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+// import { fn } from '@src/functions/index.js';
 
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-
+const fn = CEM.fn
 
 const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMedia, aspectSelect, uploadCropImage, editable = false }, ID) {
 

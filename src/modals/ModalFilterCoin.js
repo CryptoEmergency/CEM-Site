@@ -5,9 +5,12 @@ import {
   initReload,
   load,
   init,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/index.js";
+// import { fn } from "@src/functions/index.js";
+
+const fn = CEM.fn
 
 const ModalFilterCoin = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });

@@ -1,5 +1,7 @@
-import { jsx, jsxFrag, Variable, initReload, initGo, init, load } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
+import { jsx, jsxFrag, Variable, initReload, initGo, init, load, CEM } from "@betarost/cemserver/cem.js";
+// import { fn } from '@src/functions/index.js';
+
+const fn = CEM.fn
 
 const changeComplaint = function (Static, checkdata) {
   Static.modal[checkdata.name].check = checkdata.check

@@ -4,11 +4,12 @@ import {
   Variable,
   initReload,
   parsingUrl,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/export.js";
+// import { fn } from "@src/functions/export.js";
 
-
+const fn = CEM.fn
 
 const ModalLanguageSite = function (data, ID) {
   // let close
