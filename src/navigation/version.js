@@ -19,7 +19,7 @@ const start = function (data, ID) {
         <div class="startap c-main__body">
           <button
             onclick={() => {
-              CEM.fn.modals.ModalChangeFrame({})
+              CEM.fn.modals.ModalComplainComment({})
             }}
           >
             ggggggggggggggggggggggggg
