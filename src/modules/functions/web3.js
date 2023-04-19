@@ -13,4 +13,5 @@ web3Action.getNews = async function () {
     return tmp
 }
 
-export { web3CEM, web3Action }
+export default web3Action
+// export { web3CEM, web3Action }
