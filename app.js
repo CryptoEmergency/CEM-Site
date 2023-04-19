@@ -56,7 +56,7 @@ CEM.initOptions({
         recursive: true,
         regExp: /\.(png|jpg|jpeg|gif)$/
     }),
-    elements: import.meta.webpackContext('./src/elements', {
+    elements: import.meta.webpackContext('./src/element', {
         recursive: true,
         regExp: /\.js$/
     }),

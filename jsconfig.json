@@ -16,9 +16,6 @@
             ],
             "@modules/*": [
                 "./src/modules/*"
-            ],
-            "@fn/*": [
-                "./src/functions/*"
             ]
         }
     }
