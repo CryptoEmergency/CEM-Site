@@ -39,7 +39,6 @@ const start = function (data, ID) {
     fn: () => {
       return (
         <Elements.page.MainContainer class="blog_page_container">
-          {/* <BlockNews Static={Static} /> */}
 
           <Elements.page.Container class="tags pb--0 pt--10">
             <div

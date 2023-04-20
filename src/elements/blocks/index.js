@@ -12,16 +12,9 @@ export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js";
 export { BlockUserStartupPage } from "./user/BlockUserStartupPage.js";
 //===Users===
 
-// Карусель баннеров на главной
-export { BlockBanners } from "./BlockBanners.js";
-// Обменные пункты
-export { BlockExchange } from "./BlockExchange.js";
-// Инфорпартнеры
-export { BlockInfoPartners } from "./BlockInfoPartners.js";
 // Лента пользователя
 export { BlockLentaUsers } from "./BlockLentaUsers.js";
-//Блок для новостей, блога, медиа о нас
-export { BlockNews } from "./BlockNews.js";
+
 // Меню иконок на главной
 export { BlockProjects } from "./BlockProjects.js";
 // Отображение блоков вопросов

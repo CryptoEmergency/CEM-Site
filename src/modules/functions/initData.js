@@ -36,6 +36,35 @@ initData.ModalAskQuestionNew = function (Static) {
     return
 }
 
+//==================================================
+initData.users = function (Static) {
+    Static.nameRecords = "PageUsers"
+    Static.type = "all"
+
+    Static.filters = {
+        language: Object.create(filters.language),
+        country: Object.create(filters.country),
+        group: {
+            common: true,
+            content: true,
+            expert: true
+        },
+        online: false
+    }
+
+    Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.language.value = Variable.lang.text.language
+
+    Static.filters.country.placeholder = Variable.lang.error_div.selectFromList
+    Static.filters.country.value = Variable.lang.text.country
+
+    Static.search = generate("input")
+    Static.search.placeholder = Variable.lang.placeholder.findFriends
+
+    return
+}
+//==================================================
+
 
 // Пересмотреть, старое
 
@@ -447,32 +476,7 @@ initData.experts = function (Static) {
     return
 }
 
-initData.users = function (Static) {
-    Static.nameRecords = "PageUsers"
-    Static.type = "all"
 
-    Static.filters = {
-        language: Object.create(filters.language),
-        country: Object.create(filters.country),
-        group: {
-            common: true,
-            content: true,
-            expert: true
-        },
-        online: false
-    }
-
-    Static.filters.language.placeholder = Variable.lang.error_div.selectFromList
-    Static.filters.language.value = Variable.lang.text.language
-
-    Static.filters.country.placeholder = Variable.lang.error_div.selectFromList
-    Static.filters.country.value = Variable.lang.text.country
-
-    Static.search = generate("input")
-    Static.search.placeholder = Variable.lang.placeholder.findFriends
-
-    return
-}
 
 initData.question = function (Static) {
     Static.nameRecords = "PageQuestions"

@@ -18,8 +18,6 @@ import Elements from "@src/elements/export.js";
 
 import {
   BlockUsers,
-  BlockExchange,
-  BlockInfoPartners,
   BlockProjects,
   BlockTrade,
   BlockQuestions,

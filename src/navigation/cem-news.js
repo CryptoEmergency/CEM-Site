@@ -5,7 +5,6 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { BlockNews } from '@elements/blocks/index.js';
 // import svg from "@assets/svg/index.js";
 import { NotFound, ButtonShowMore, LazyImage } from "@elements/element/index.js";
 
