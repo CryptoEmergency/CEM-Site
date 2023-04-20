@@ -7,13 +7,10 @@ import {
   load,
   CEM
 } from "@betarost/cemserver/cem.js";
-// import svg from "@assets/svg/index.js";
-// import images from "@assets/images/index.js";
+
 import Elements from "@src/elements/export.js";
 
-
-
-const { images, svg, elements } = CEM
+const { images, svg, fn, elements } = CEM
 
 const team = [
   {
