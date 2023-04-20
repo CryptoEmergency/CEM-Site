@@ -18,7 +18,6 @@ import Elements from "@src/elements/export.js";
 
 import {
   BlockUsers,
-  BlockBanners,
   BlockExchange,
   BlockInfoPartners,
   BlockProjects,
@@ -28,7 +27,7 @@ import {
 } from "@elements/blocks/index.js";
 import { ButtonShowMore } from "@elements/element/index.js";
 
-const { images, svg, fn } = CEM
+const { images, svg, fn, elements } = CEM
 
 const makeFilter = function (Static) {
   let objReturn = {};
@@ -283,7 +282,7 @@ const start = function (data, ID) {
               {Variable.lang.button.show_all}
             </a>
           </div>
-          <BlockBanners />
+          <elements.sliderBanners />
           <div class="c-lenta">
             {!Variable[Static.nameRecords] ||
               !Variable[Static.nameRecords].list_records.length ? (

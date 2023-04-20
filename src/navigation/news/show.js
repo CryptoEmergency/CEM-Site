@@ -59,15 +59,12 @@ const start = function (data, ID = "mainBlock") {
             ) : null}
 
             {Static.item.preview ? (
-              <Elements.text.Main
-                text={Static.item.preview}
-                class="text mY--30"
-              />
+              <p class="text mY--30">{Static.item.preview}</p>
             ) : null}
             {/* <p class="text mr20" tohtml={true}>
               {Static.item.text}
             </p> */}
-            <Elements.text.Main text={fn.editText(Static.item.text, { clear: true, paragraph: true, html: true })} class="text mb--20" />
+            <p class="text mb--20">{fn.editText(Static.item.text, { clear: true, paragraph: true, html: true })}</p>
 
             {Static.item.source ? (
               <p class="source mr20">

@@ -12,8 +12,6 @@ export { BlockUserSettingsPage } from "./user/BlockUserSettingsPage.js";
 export { BlockUserStartupPage } from "./user/BlockUserStartupPage.js";
 //===Users===
 
-// Партнерские баннеры
-export { BlockAffiliateBanners } from "./BlockAffiliateBanners.js";
 // Карусель баннеров на главной
 export { BlockBanners } from "./BlockBanners.js";
 // Обменные пункты
@@ -42,7 +40,6 @@ export { BlockUserRooms } from "./BlockUserRooms.js";
 export { BlockUserRoomsChat } from "./BlockUserRoomsChat.js";
 // Сообщества/Community
 export { BlockShowCommunities } from "./BlockShowCommunities.js";
-// Анимация на странице "О нас"
-export { AboutAnimation } from "./AboutAnimation.js";
+
 // Текстовый редактор
 export { BlockTextEditor } from "./BlockTextEditor.js";

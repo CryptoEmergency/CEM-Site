@@ -37,15 +37,13 @@ const start = function (data, ID = "mainBlock") {
             ) : null}
 
             {Static.item.preview ? (
-              <Elements.text.Main
-                text={Static.item.preview}
-                class="text mY--30"
-              />
+              <p class="text mY--30">{Static.item.preview}</p>
+
             ) : null}
             {/* <p class="text mr20" tohtml={true}>
               {Static.item.text}
             </p> */}
-            <Elements.text.Main text={Static.item.text} class="text mb--20" />
+            <p class="text mb--20">{Static.item.text}</p>
 
             {Static.item.source ? (
               <p class="source mr20">

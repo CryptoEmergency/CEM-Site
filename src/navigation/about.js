@@ -12,7 +12,6 @@ import {
 import Elements from "@src/elements/export.js";
 
 
-// import { AboutAnimation } from "@src/elements/blocks/AboutAnimation";
 
 const { images, svg, elements } = CEM
 
@@ -281,29 +280,24 @@ const start = function (data, ID) {
         <Elements.page.MainContainer
           // class="c-aboutus"
           header={
-            <Elements.page.Header
-              imgBack={svg["background/about_us_vector-1"]}
-              title="Crypto Emergency"
-              descriptions={Variable.lang.p.aboutObjective}
-              classBack="c-whowe__bg"
-            />
+            <div class="c-aboutus__whowe c-whowe">
+              <div class="c-whowe__inner pt--36 ">
+                <img class="c-whowe__img" src={svg["background/about_us_vector-1"]} />
+                <h2 class="indexZ--3 mb--24">Crypto Emergency</h2>
+                <p>{Variable.lang.p.aboutObjective}</p>
+              </div>
+              <div class="c-whowe__bg"></div>
+            </div>
           }
         >
           {/* <div class="c-aboutus about_us_container c-main__body"> */}
+          <section class={["c-aboutus__content", "c-container"]}>
+            <section class={["c-aboutus__goals", "c-goals"]}>
+              <h2>{Variable.lang.h.our_goals}</h2>
 
-          <Elements.page.Container
-            class={["c-aboutus__content", "c-container"]}
-            resetClass={true}
-          >
-            <Elements.page.Container
-              class={["c-aboutus__goals", "c-goals"]}
-              resetClass={true}
-              title={Variable.lang.h.our_goals}
-              backSeat={{
-                src: svg["background/about_us_vector-2"],
-                class: "c-whowe__img c-whowe__img--right",
-              }}
-            >
+
+
+
               <Elements.cards.Animated records={arrBlockCard} />
 
               <elements.Accordeon records={arrAccordeon} />
@@ -315,7 +309,8 @@ const start = function (data, ID) {
               >
                 <elements.sliderTeam records={team} />
               </Elements.page.Container>
-            </Elements.page.Container>
+              <img class="c-whowe__img c-whowe__img--right" src={svg["background/about_us_vector-2"]} />
+            </section>
 
             <Elements.page.Container
               resetClass={true}
@@ -465,7 +460,7 @@ const start = function (data, ID) {
                 <span class="c-button__text">{Variable.lang.span.supportProject}</span>
               </a>
             </Elements.page.Container>
-          </Elements.page.Container>
+          </section>
         </Elements.page.MainContainer>
       );
     },

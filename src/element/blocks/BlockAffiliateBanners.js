@@ -81,7 +81,7 @@ let banners = {
   ],
 };
 
-const BlockAffiliateBanners = function () {
+const forExport = function () {
   initOne(() => {
     userLang = Variable.lang.code === "ru" ? "ru" : "en";
     activeBanner = banners[userLang][0];
@@ -207,5 +207,5 @@ const BlockAffiliateBanners = function () {
     </div>
   );
 };
-export { BlockAffiliateBanners };
-// OK
+
+export default forExport;

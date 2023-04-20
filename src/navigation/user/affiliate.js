@@ -9,9 +9,8 @@ import {
 // import svg from '@assets/svg/index.js';
 // import images from '@assets/images/index.js';
 import { Avatar, ButtonShowMore } from '@elements/element/index.js';
-import { BlockAffiliateBanners } from '@elements/blocks/index.js';
 
-const { images, svg, fn } = CEM
+const { images, svg, fn, elements } = CEM
 
 const start = function (data, ID) {
     let [Static] = fn.GetParams({ data, ID })
@@ -116,7 +115,7 @@ const start = function (data, ID) {
                             </div>
                             <ButtonShowMore Static={Static} action="getUsers" />
                         </div>
-                        <BlockAffiliateBanners />
+                        {/* <elements.BlockAffiliateBanners /> */}
                     </div>
                 </div>
             )

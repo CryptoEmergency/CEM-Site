@@ -213,5 +213,4 @@ const BlockBanners = async function () {
     </div>
   );
 };
-export { BlockBanners };
-// OK
+export default BlockBanners
