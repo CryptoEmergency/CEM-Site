@@ -467,7 +467,19 @@ const start = function (data, ID) {
             position: "Основатель обменника криптовалют Keine-exchange",
             photo: "summer_forum/speaker18",
             show: false,
-        }
+        },
+        {
+            name: "Денис Стригун",
+            position: "CEO WEB3Space",
+            photo: "summer_forum/speaker19",
+            show: false,
+        },
+        {
+            name: "Иван Деркач",
+            position: "CTO WEB3Space",
+            photo: "summer_forum/speaker20",
+            show: false,
+        },
     ]
 
     const guests = [
@@ -1371,6 +1383,20 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_26"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://getblock.net/how-it-works"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_27"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://web3space.io/bot"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_28"]} />
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
