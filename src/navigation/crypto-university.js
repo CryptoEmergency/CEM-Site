@@ -5,9 +5,11 @@ import {
     getStorage,
     setStorage,
     init,
+    Data,
     load,
     Variable,
-    CEM
+    CEM,
+    initReload
 } from "@betarost/cemserver/cem.js";
 
 // import { fn } from '@src/functions/index.js';
@@ -28,24 +30,24 @@ const Tags = function ({ Static, classActive, text, type }) {
                     return;
                 }
                 Static.activeCategory = type;
-                Static.apiFilter = makeFilter(Static)
-                await fn.restApi.getNews({ name: Static.nameRecords, filter: Static.apiFilter })
+                // await fn.restApi.getNews({ name: Static.nameRecords, filter: Static.apiFilter })
+                Static.records = await fn.socket.get({ method: "CryptoUniversities", params: { filter: makeFilter(Static) } })
+                initReload()
             }}>
             <span>{text}</span>
         </div>
     )
 }
 
-const makeFilter = function (Static) {
-    let objReturn = { type: Static.type }
-    if (Static.type == "university") {
-        objReturn["languages.code"] = Static.activeCategory
-    } else {
-        if (Static.activeCategory != "All") {
-            objReturn["category.name"] = Static.activeCategory
-        }
+const makeFilter = (Static) => {
+    let ret = {}
+    // ret["type"] = "news"
+    if (Static.activeCategory !== "All") {
+        ret["category"] = Static.activeCategory
+        // Data.Static.showMore = true
     }
-    return objReturn
+
+    return ret
 }
 
 const start = function (data, ID = "mainBlock") {
@@ -54,6 +56,9 @@ const start = function (data, ID = "mainBlock") {
 
     Variable.HeaderShow = true;
     Variable.FooterShow = true;
+    Static.filters = {
+        category: ""
+    }
 
     const swiperGo = function (numIndex) {
         let swiperitem = new Swiper(".swiper-post_university", {
@@ -82,7 +87,7 @@ const start = function (data, ID = "mainBlock") {
 
     load({
         ID,
-        fnLoad: () => {
+        fnLoad: async () => {
             Static.activeCategory = "All"
             Static.nameRecords = "CryptoUniversity"
             Static.CryptoUniversityCategory = [
@@ -119,9 +124,10 @@ const start = function (data, ID = "mainBlock") {
 
                 }
             ]
+            Static.records = await fn.socket.get({ method: "CryptoUniversities", params: { filter: {} } })
         },
         fn: () => {
-
+            // console.log('=38ddb1=', Static.records)
             return (
                 <Elements.page.MainContainer
                     class="c-criptouniversity">
@@ -177,6 +183,62 @@ const start = function (data, ID = "mainBlock") {
                         </div>
 
                         <ul class="c-criptouniversity__cards">
+                            {Static.records.map((item) => {
+                                return (
+                                    <li class="c-criptouniversity__card">
+                                        <a
+                                            href={`/crypto-university/show/${item._id}`}
+                                            class="c-criptouniversity__link"
+                                            onclick={function (e) {
+                                                fn.siteLink(e, { title: "", item: {}, items: {} })
+                                            }}
+                                        >
+                                            <figure class="c-criptouniversity__wrapperimg">
+                                                {/* <img 
+                                                    class="c-criptouniversity__logo" 
+                                                    src={`/assets/upload/worldPress/${item.icon}`}
+                                                    width="100" 
+                                                    height="100" 
+                                                /> */}
+                                                {item.icon
+                                                    ?
+                                                    <img
+                                                        class="c-criptouniversity__logo"
+                                                        src={`/assets/upload/worldPress/${item.icon}`}
+                                                        width="100"
+                                                        height="100"
+                                                    />
+                                                    :
+                                                    <img
+                                                        class="c-criptouniversity__logo"
+                                                        src={images["crypto-university"]}
+                                                        width="100"
+                                                        height="100"
+                                                    />
+                                                }
+                                            </figure>
+                                            <a class="c-criptouniversity__btn c-button c-button--gradient2" href="">
+                                                <span class="c-button__text">Кнопка</span>
+                                            </a>
+                                            <h3 class="c-criptouniversity__companyname">{item.nameCompany}</h3>
+                                            <p class="c-criptouniversity__slogan">{item.tagline}</p>
+                                            <p class="c-criptouniversity__shortdescription">
+                                                {item.aboutCompany}
+                                                {/* Краткое описание компании на несколько строк
+                                                <br />
+                                                Возможно строки разделены переносами. */}
+                                            </p>
+                                            <div class="c-criptouniversity__info">
+                                                {item.description}
+                                                {/* Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. */}
+                                            </div>
+                                        </a>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+
+                        {/* <ul class="c-criptouniversity__cards">
                             <li class="c-criptouniversity__card">
                                 <a
                                     href={`/crypto-university/show/1`}
@@ -255,7 +317,7 @@ const start = function (data, ID = "mainBlock") {
                                     </div>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> */}
                     </div>
                 </Elements.page.MainContainer>
             );

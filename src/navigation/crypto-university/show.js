@@ -104,6 +104,10 @@ const start = function (data, ID) {
         ID,
         fnLoad: async () => {
             Static.activeCategory = "All"
+            if (Variable.dataUrl.params) {
+                Static.item = await fn.socket.get({ method: "CryptoUniversities", _id: Variable.dataUrl.params })
+                console.log('=9ebbf7=', Static.item)
+            }
         },
 
         fn: async () => {
@@ -111,241 +115,376 @@ const start = function (data, ID) {
             if (!item._id) { return (<div><BlockError404 /></div>) }
 
             return (
-                <div
-                    class={[
-                        "c-criptocompany",
-                        "c-container",
-                        Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-                    ]}
-                >
-                    <h2 class="c-criptocompany__title">Название компании</h2>
-                    <figure class="c-criptocompany__wrapperimg">
-                        <img class="c-criptocompany__logo" src="https://yt3.googleusercontent.com/8HmH6WuhicmT878ZRlUUW6QUJbudwtVAAbmABTmiQGLp58ebjHmf4tIeXTQ4XC_W1K4kAzx8pNw=s900-c-k-c0x00ffffff-no-rj" width="300" height="300" />
-                    </figure>
-                    <a class="c-criptocompany__btn c-button c-button--gradient2" href="">
-                        <span class="c-button__text">Сайт</span>
-                    </a>
-                    <blockquote class="c-criptocompany__slogan">&#8220;Слоган компании в пару строк или больше&#8221;</blockquote>
-                    <p class="c-criptocompany__shortdesc">
-                        Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
-                        Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
-                    </p>
-                    <figure class="c-criptocompany__cover">
-                        <img class="" src="https://thumbs.dreamstime.com/b/%D0%BC%D0%BE%D0%B4%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B9-%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%BE%D0%B9-%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82-%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82%D0%B0-%D1%81-%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%BE%D0%BC-%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9-231031876.jpg" width="100%" height="150" />
-                    </figure>
-
-                    <section class="c-criptocompany__about">
-                        <h5>О компании</h5>
-                        <p>
-                            Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum" ("О пределах добра и зла"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
-                            <br />
-                            Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
-                        </p>
-                    </section>
-
-                    <div class="c-criptocompany__authors swiper-container">
-                        <div class="swiper swiper-post_authors" After={() => swiperGo()}>
-                            <div class="swiper-wrapper">
-                                <a
-                                    class="swiper-slide"
-                                    href="/crypto-university/teacher/1/"
-                                    onclick={function (e) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        fn.siteLinkModal(e, {
-                                            title: "Преподаватель: Иванов Иван Иванович", teacher: {
-                                                name: "Иванов Иван Иванович"
-                                            }
-                                        })
-                                    }}
+                <div>
+                    {
+                        Static.item.map((item) => {
+                            return (
+                                <div
+                                    class={[
+                                        "c-criptocompany",
+                                        "c-container",
+                                        Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+                                    ]}
                                 >
-                                    <div class="swiper-post_media_image_container">
-                                        <figure class="c-criptocompany__sliderwrap">
-                                            <img src={images["university/teacher1"]} />
-                                            <figcaption class="c-criptocompany__slidertitle">Иванов Иван Иванович</figcaption>
-                                        </figure>
-                                    </div>
-                                </a>
-                                <a
-                                    class="swiper-slide"
-                                    href="/crypto-university/teacher/2/"
-                                    onclick={function (e) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        fn.siteLinkModal(e, {
-                                            title: "Преподаватель: Алексеева Ксения Александровна", teacher: {
-                                                name: "Алексеева Ксения Александровна"
-                                            }
-                                        })
-                                    }}
-                                >
-                                    <div class="swiper-post_media_image_container">
-                                        <figure class="c-criptocompany__sliderwrap">
-                                            <img src={images["university/teacher2"]} />
-                                            <figcaption class="c-criptocompany__slidertitle">Алексеева Ксения Александровна</figcaption>
-                                        </figure>
-                                    </div>
-                                </a>
-                                <a
-                                    class="swiper-slide"
-                                    href="/crypto-university/teacher/3/"
-                                    onclick={function (e) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        fn.siteLinkModal(e, {
-                                            title: "Преподаватель: Крылов Петр Ильич", teacher: {
-                                                name: "Крылов Петр Ильич"
-                                            }
-                                        })
-                                    }}
-                                >
-                                    <div class="swiper-post_media_image_container">
-                                        <figure class="c-criptocompany__sliderwrap">
-                                            <img src={images["university/teacher3"]} />
-                                            <figcaption class="c-criptocompany__slidertitle">Крылов Петр Ильич</figcaption>
-                                        </figure>
-                                    </div>
-                                </a>
-                                <a
-                                    class="swiper-slide"
-                                    href="/crypto-university/teacher/4/"
-                                    onclick={function (e) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        fn.siteLinkModal(e, {
-                                            title: "Преподаватель: Мальцева Надежда Николаевна", teacher: {
-                                                name: "Мальцева Надежда Николаевна"
-                                            }
-                                        })
-                                    }}
-                                >
-                                    <div class="swiper-post_media_image_container">
-                                        <figure class="c-criptocompany__sliderwrap">
-                                            <img src={images["university/teacher4"]} />
-                                            <figcaption class="c-criptocompany__slidertitle">Мальцева Надежда Николаевна</figcaption>
-                                        </figure>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-pagination swiper-pagination-post_media"></div>
-                            <div class="swiper-scrollbar-post_media"></div>
-                        </div>
-                    </div>
-
-                    <section class="c-criptocompany__courses">
-                        <h5>Курсы</h5>
-
-                        <div class="tags tags--static c-criptocompany__tags">
-                            <Tags
-                                Static={Static}
-                                text={Variable.lang.categoryName.all}
-                                classActive={Static.activeCategory == "All" ? "tag_button_active" : ""}
-                                type="All"
-                            />
-                            {/* {() => {
-                                // if (Variable[Static.nameRecords + "Category"]) {
-                                let arrReturn =
-                                    // Variable[Static.nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
-                                    Static.CryptoUniversityCategory.filter((item) => item.name !== null).map((item) => {
-
-                                        return (
-                                            <Tags
-                                                Static={Static}
-                                                text={Variable.lang.categoryName[item.name]}
-                                                classActive={Static.activeCategory == item.name ? "tag_button_active" : ""}
-                                                type={item.name}
+                                    <h2 class="c-criptocompany__title">{item.nameCompany}</h2>
+                                    <figure class="c-criptocompany__wrapperimg">
+                                        {item.icon
+                                            ?
+                                            <img
+                                                class="c-criptouniversity__logo"
+                                                src={`/assets/upload/worldPress/${item.icon}`}
+                                                width="100"
+                                                height="100"
                                             />
-                                        )
-                                    })
-                                return arrReturn
-                                // }
-                            }} */}
-                        </div>
+                                            :
+                                            <img
+                                                class="c-criptouniversity__logo"
+                                                src={images["crypto-university"]}
+                                                width="100"
+                                                height="100"
+                                            />
+                                        }
+                                    </figure>
+                                    <a class="c-criptocompany__btn c-button c-button--gradient2"
+                                        href={item.siteLink}
+                                        onclick={() => {
+                                            fn.siteLink({ title: "", item: {}, items: {} })
+                                        }}
+                                    >
+                                        <span class="c-button__text">Сайт</span>
+                                    </a>
+                                    <blockquote class="c-criptocompany__slogan">&#8220;{item.tagline}&#8221;</blockquote>
+                                    <p class="c-criptocompany__shortdesc">
+                                        {item.description}
+                                    </p>
+                                    {item.cover
+                                        ?
+                                        <figure class="c-criptocompany__cover">
+                                            <img class=""
+                                                src={`/assets/upload/worldPress/${item.cover}`}
+                                            />
+                                        </figure>
+                                        :
+                                        null
+                                    }
+                                    <section class="c-criptocompany__about">
+                                        <h5>О компании</h5>
+                                        <p>{item.aboutCompany}</p>
+                                    </section>
+                                    <div class="c-criptocompany__authors swiper-container">
+                                        <div class="swiper swiper-post_authors" After={() => swiperGo()}>
+                                            <div class="swiper-wrapper">
+                                                {item.teachers.map((teacher) => {
+                                                    return (
+                                                        <a
+                                                            class="swiper-slide"
+                                                        // href="/crypto-university/teacher/1/"
+                                                        // onclick={function (e) {
+                                                        //     e.preventDefault();
+                                                        //     e.stopPropagation();
+                                                        //     fn.siteLinkModal(e, {
+                                                        //         title: "Преподаватель: Иванов Иван Иванович", teacher: {
+                                                        //             name: "Иванов Иван Иванович"
+                                                        //         }
+                                                        //     })
+                                                        // }}
+                                                        >
+                                                            <div class="swiper-post_media_image_container">
+                                                                <figure class="c-criptocompany__sliderwrap">
+                                                                    <img src={`/assets/upload/worldPress/${teacher.image}`} />
+                                                                    {/* <figcaption class="c-criptocompany__slidertitle">{teacher.title}</figcaption> */}
+                                                                    <figcaption class="c-criptocompany__slidertitle">{teacher.name}</figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </a>
+                                                    )
+                                                })}
+                                            </div>
+                                            <div class="swiper-pagination swiper-pagination-post_media"></div>
+                                            <div class="swiper-scrollbar-post_media"></div>
+                                        </div>
+                                    </div>
+                                    <section class="c-criptocompany__courses">
+                                        <h5>Курсы</h5>
+                                        <ul class="c-criptocompany__list">
+                                            {item.courses.map((course) => {
+                                                return (
+                                                    <li class="">
+                                                        <a
+                                                            class="c-criptocompany__course"
+                                                            href={course.link}
+                                                            onclick={(e) => {
+                                                                // e.preventDefault();
+                                                                fn.siteLink()
+                                                            }}
+                                                        >
+                                                            <span class="c-criptocompany__coursedesc">{course.name}</span>
+                                                            <footer class="c-criptocompany__footer">
+                                                                <time class="c-criptocompany__time" datetime="">{fn.moment(course.dateStart).format('YYYY-MM-DD')}</time>
+                                                                <span class="c-criptocompany__hourse">{`${course.duration} ч`}</span>
+                                                            </footer>
+                                                            {course.promotion
+                                                                ?
+                                                                <div class="c-criptocompany__stiker">
+                                                                    <img src={images["university/promotion"]} />
+                                                                </div>
+                                                                :
+                                                                null
+                                                            }
 
-                        <ul class="c-criptocompany__list">
-                            <li class="">
-                                <a
-                                    class="c-criptocompany__course"
-                                    href="/crypto-university/course/1/"
-                                    onclick={(e) => {
-                                        e.preventDefault();
-                                        fn.siteLinkModal(e, { title: "Курс по NFT-технологии. Вводный" })
-                                    }}
-                                >
-                                    <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                    <footer class="c-criptocompany__footer">
-                                        <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                        <span class="c-criptocompany__hourse">22 ч</span>
-                                    </footer>
-                                    {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="c-criptocompany__course">
-                                    <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                    <footer class="c-criptocompany__footer">
-                                        <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                        <span class="c-criptocompany__hourse">22 ч</span>
-                                    </footer>
-                                    {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="c-criptocompany__course">
-                                    <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                    <footer class="c-criptocompany__footer">
-                                        <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                        <span class="c-criptocompany__hourse">22 ч</span>
-                                    </footer>
-                                    <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="c-criptocompany__course">
-                                    <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                    <footer class="c-criptocompany__footer">
-                                        <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                        <span class="c-criptocompany__hourse">22 ч</span>
-                                    </footer>
-                                    <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="c-criptocompany__course">
-                                    <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                    <footer class="c-criptocompany__footer">
-                                        <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                        <span class="c-criptocompany__hourse">22 ч</span>
-                                    </footer>
-                                    {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="c-criptocompany__course">
-                                    <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                    <footer class="c-criptocompany__footer">
-                                        <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                        <span class="c-criptocompany__hourse">22 ч</span>
-                                    </footer>
-                                    {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
+                                                        </a>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+
+                                    </section>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
+
             )
+
+
+            // return (
+            //     <div
+            //         class={[
+            //             "c-criptocompany",
+            //             "c-container",
+            //             Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
+            //         ]}
+            //     >
+            //         <h2 class="c-criptocompany__title">Название компании</h2>
+            //         <figure class="c-criptocompany__wrapperimg">
+            //             <img class="c-criptocompany__logo" src="https://yt3.googleusercontent.com/8HmH6WuhicmT878ZRlUUW6QUJbudwtVAAbmABTmiQGLp58ebjHmf4tIeXTQ4XC_W1K4kAzx8pNw=s900-c-k-c0x00ffffff-no-rj" width="300" height="300" />
+            //         </figure>
+            //         <a class="c-criptocompany__btn c-button c-button--gradient2" href="">
+            //             <span class="c-button__text">Сайт</span>
+            //         </a>
+            //         <blockquote class="c-criptocompany__slogan">&#8220;Слоган компании в пару строк или больше&#8221;</blockquote>
+            //         <p class="c-criptocompany__shortdesc">
+            //             Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
+            //             Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
+            //         </p>
+            //         <figure class="c-criptocompany__cover">
+            //             <img class="" src="https://thumbs.dreamstime.com/b/%D0%BC%D0%BE%D0%B4%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B9-%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%BE%D0%B9-%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82-%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82%D0%B0-%D1%81-%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%BE%D0%BC-%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9-231031876.jpg" width="100%" height="150" />
+            //         </figure>
+
+            //         <section class="c-criptocompany__about">
+            //             <h5>О компании</h5>
+            //             <p>
+            //                 Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum" ("О пределах добра и зла"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
+            //                 <br />
+            //                 Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
+            //             </p>
+            //         </section>
+
+            //         <div class="c-criptocompany__authors swiper-container">
+            //             <div class="swiper swiper-post_authors" After={() => swiperGo()}>
+            //                 <div class="swiper-wrapper">
+            //                     <a
+            //                         class="swiper-slide"
+            //                         href="/crypto-university/teacher/1/"
+            //                         onclick={function (e) {
+            //                             e.preventDefault();
+            //                             e.stopPropagation();
+            //                             fn.siteLinkModal(e, {
+            //                                 title: "Преподаватель: Иванов Иван Иванович", teacher: {
+            //                                     name: "Иванов Иван Иванович"
+            //                                 }
+            //                             })
+            //                         }}
+            //                     >
+            //                         <div class="swiper-post_media_image_container">
+            //                             <figure class="c-criptocompany__sliderwrap">
+            //                                 <img src={images["university/teacher1"]} />
+            //                                 <figcaption class="c-criptocompany__slidertitle">Иванов Иван Иванович</figcaption>
+            //                             </figure>
+            //                         </div>
+            //                     </a>
+            //                     <a
+            //                         class="swiper-slide"
+            //                         href="/crypto-university/teacher/2/"
+            //                         onclick={function (e) {
+            //                             e.preventDefault();
+            //                             e.stopPropagation();
+            //                             fn.siteLinkModal(e, {
+            //                                 title: "Преподаватель: Алексеева Ксения Александровна", teacher: {
+            //                                     name: "Алексеева Ксения Александровна"
+            //                                 }
+            //                             })
+            //                         }}
+            //                     >
+            //                         <div class="swiper-post_media_image_container">
+            //                             <figure class="c-criptocompany__sliderwrap">
+            //                                 <img src={images["university/teacher2"]} />
+            //                                 <figcaption class="c-criptocompany__slidertitle">Алексеева Ксения Александровна</figcaption>
+            //                             </figure>
+            //                         </div>
+            //                     </a>
+            //                     <a
+            //                         class="swiper-slide"
+            //                         href="/crypto-university/teacher/3/"
+            //                         onclick={function (e) {
+            //                             e.preventDefault();
+            //                             e.stopPropagation();
+            //                             fn.siteLinkModal(e, {
+            //                                 title: "Преподаватель: Крылов Петр Ильич", teacher: {
+            //                                     name: "Крылов Петр Ильич"
+            //                                 }
+            //                             })
+            //                         }}
+            //                     >
+            //                         <div class="swiper-post_media_image_container">
+            //                             <figure class="c-criptocompany__sliderwrap">
+            //                                 <img src={images["university/teacher3"]} />
+            //                                 <figcaption class="c-criptocompany__slidertitle">Крылов Петр Ильич</figcaption>
+            //                             </figure>
+            //                         </div>
+            //                     </a>
+            //                     <a
+            //                         class="swiper-slide"
+            //                         href="/crypto-university/teacher/4/"
+            //                         onclick={function (e) {
+            //                             e.preventDefault();
+            //                             e.stopPropagation();
+            //                             fn.siteLinkModal(e, {
+            //                                 title: "Преподаватель: Мальцева Надежда Николаевна", teacher: {
+            //                                     name: "Мальцева Надежда Николаевна"
+            //                                 }
+            //                             })
+            //                         }}
+            //                     >
+            //                         <div class="swiper-post_media_image_container">
+            //                             <figure class="c-criptocompany__sliderwrap">
+            //                                 <img src={images["university/teacher4"]} />
+            //                                 <figcaption class="c-criptocompany__slidertitle">Мальцева Надежда Николаевна</figcaption>
+            //                             </figure>
+            //                         </div>
+            //                     </a>
+            //                 </div>
+            //                 <div class="swiper-pagination swiper-pagination-post_media"></div>
+            //                 <div class="swiper-scrollbar-post_media"></div>
+            //             </div>
+            //         </div>
+
+            //         <section class="c-criptocompany__courses">
+            //             <h5>Курсы</h5>
+
+            //             <div class="tags tags--static c-criptocompany__tags">
+            //                 <Tags
+            //                     Static={Static}
+            //                     text={Variable.lang.categoryName.all}
+
+            //                     classActive={Static.activeCategory == "All" ? "tag_button_active" : ""}
+            //                     type="All"
+            //                 />
+            //                 {/* {() => {
+            //                     // if (Variable[Static.nameRecords + "Category"]) {
+            //                     let arrReturn =
+            //                         // Variable[Static.nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
+            //                         Static.CryptoUniversityCategory.filter((item) => item.name !== null).map((item) => {
+
+            //                             return (
+            //                                 <Tags
+            //                                     Static={Static}
+            //                                     text={Variable.lang.categoryName[item.name]}
+            //                                     classActive={Static.activeCategory == item.name ? "tag_button_active" : ""}
+            //                                     type={item.name}
+            //                                 />
+            //                             )
+            //                         })
+            //                     return arrReturn
+            //                     // }
+            //                 }} */}
+            //             </div>
+
+            //             <ul class="c-criptocompany__list">
+            //                 <li class="">
+            //                     <a
+            //                         class="c-criptocompany__course"
+            //                         href="/crypto-university/course/1/"
+            //                         onclick={(e) => {
+            //                             e.preventDefault();
+            //                             fn.siteLinkModal(e, { title: "Курс по NFT-технологии. Вводный" })
+            //                         }}
+            //                     >
+            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+            //                         <footer class="c-criptocompany__footer">
+            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
+            //                             <span class="c-criptocompany__hourse">22 ч</span>
+            //                         </footer>
+            //                         {/* <div class="c-criptocompany__stiker">
+            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
+            //                         </div> */}
+            //                     </a>
+            //                 </li>
+            //                 <li class="">
+            //                     <a href="#" class="c-criptocompany__course">
+            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+            //                         <footer class="c-criptocompany__footer">
+            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
+            //                             <span class="c-criptocompany__hourse">22 ч</span>
+            //                         </footer>
+            //                         {/* <div class="c-criptocompany__stiker">
+            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
+            //                         </div> */}
+            //                     </a>
+            //                 </li>
+            //                 <li class="">
+            //                     <a href="#" class="c-criptocompany__course">
+            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+            //                         <footer class="c-criptocompany__footer">
+            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
+            //                             <span class="c-criptocompany__hourse">22 ч</span>
+            //                         </footer>
+            //                         <div class="c-criptocompany__stiker">
+            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
+            //                         </div>
+            //                     </a>
+            //                 </li>
+            //                 <li class="">
+            //                     <a href="#" class="c-criptocompany__course">
+            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+            //                         <footer class="c-criptocompany__footer">
+            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
+            //                             <span class="c-criptocompany__hourse">22 ч</span>
+            //                         </footer>
+            //                         <div class="c-criptocompany__stiker">
+            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
+            //                         </div>
+            //                     </a>
+            //                 </li>
+            //                 <li class="">
+            //                     <a href="#" class="c-criptocompany__course">
+            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+            //                         <footer class="c-criptocompany__footer">
+            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
+            //                             <span class="c-criptocompany__hourse">22 ч</span>
+            //                         </footer>
+            //                         {/* <div class="c-criptocompany__stiker">
+            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
+            //                         </div> */}
+            //                     </a>
+            //                 </li>
+            //                 <li class="">
+            //                     <a href="#" class="c-criptocompany__course">
+            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
+            //                         <footer class="c-criptocompany__footer">
+            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
+            //                             <span class="c-criptocompany__hourse">22 ч</span>
+            //                         </footer>
+            //                         {/* <div class="c-criptocompany__stiker">
+            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
+            //                         </div> */}
+            //                     </a>
+            //                 </li>
+            //             </ul>
+            //         </section>
+            //     </div>
+            // )
         },
     })
     return
