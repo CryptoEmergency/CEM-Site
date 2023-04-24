@@ -58,6 +58,11 @@ const start = function (data, ID) {
                                         </div>
                                     </div>
                                     <div class="filters__advanced">
+                                        <div class="filters__select">
+                                            {Variable.lang.text.language}
+                                            <img style="display: none;" class="refresh_language" src={svg.refresh_filter} />
+                                        </div>
+
                                         <div class="c-friends__wrapper">
                                             <Input classDiv="language_select_wrapper" className="c-friends__lang" Static={Static.filters.language} />
                                             <img style="display: none;" class="refresh_language" src={svg.refresh_filter} />

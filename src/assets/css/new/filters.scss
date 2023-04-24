@@ -54,6 +54,31 @@
         }
     }
 
+    &__select {
+        width: 250px;
+        background-color: #313643;
+        background-image: url('../svg/select_arrow.svg');
+        background-repeat: no-repeat;
+        background-position: bottom calc(50% - 0px) right 15px;
+        color: #FFFFFF;
+        border: 1px solid #474c5a;
+        display: flex;
+        align-items: center;
+        padding: 0 70px 0px 30px;
+        border-radius: 10px;
+        height: 57px;
+        cursor: pointer;
+        font-weight: 600;
+
+        @media(max-width: 799px) {
+            margin-left: 0;
+            width: 100%;
+            background-position: bottom calc(50% - 4px) right 25px;
+            padding-left: 20px;
+        }
+
+    }
+
     &__advanced {
         margin-top: 20px;
         display: flex;
