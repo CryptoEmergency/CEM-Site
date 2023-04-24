@@ -1,0 +1,82 @@
+.filters {
+
+    &__container {
+        margin-top: 5px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: #E3EAFF;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__search {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+
+        &_icon_loupe {
+            &::before {
+                content: '';
+                height: 30px;
+                width: 30px;
+                background: url('../svg/friends_search.svg');
+                background-repeat: no-repeat;
+                position: absolute;
+                margin-left: 20px;
+            }
+        }
+    }
+
+    &__input {
+        height: 57px;
+        width: 90%;
+        background: #2B3040;
+        border-radius: 10px;
+        border: 1px solid #32384B;
+        padding-left: 69px;
+        box-sizing: border-box;
+        color: #DEE3F3;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 28px;
+
+        @media(max-width: 1240px) {
+            flex-wrap: wrap;
+            grid-gap: 10px;
+        }
+
+        @media(max-width: 767px) {
+            flex-direction: column;
+            align-items: stretch;
+            flex-wrap: nowrap;
+        }
+    }
+
+    &__advanced {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        transition: all 0.2s;
+    }
+
+
+    &__toggle {
+        cursor: pointer;
+
+        img {
+            height: 18px;
+        }
+
+        span {
+            @media(max-width: 1199px) {
+                display: none;
+            }
+        }
+    }
+
+}

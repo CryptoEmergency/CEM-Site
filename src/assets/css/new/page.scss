@@ -1,0 +1,38 @@
+.page-main {
+
+    &__container {
+        margin-top: 70px;
+        background: #232733;
+        min-height: 1000px;
+
+
+        @media(max-height: 1000px) {
+            min-height: 600px;
+        }
+    }
+
+    &__title {
+        max-width: 1260px;
+        margin: 0px auto;
+        padding: 0 10px;
+        padding-top: 30px;
+        padding-bottom: 20px;
+
+        @media(max-width: 768px) {
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            font-size: calc(1.325rem + .9vw);
+            color: #FFFFFF;
+            text-align: center;
+            font-weight: 700;
+        }
+    }
+
+    &__content {
+        max-width: 1260px;
+        margin: 0px auto;
+        padding: 0 10px
+    }
+}
