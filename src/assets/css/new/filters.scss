@@ -1,3 +1,5 @@
+@import '../main/utils/variables.scss';
+
 .filters {
 
     &__container {
@@ -70,6 +72,19 @@
         cursor: pointer;
         font-weight: 600;
 
+        &_direction_left {
+            margin-left: 25px;
+        }
+
+        &_direction_right {
+            margin-right: 25px;
+        }
+
+        &_direction_horizont {
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+
         @media(max-width: 799px) {
             margin-left: 0;
             width: 100%;
@@ -77,6 +92,148 @@
             padding-left: 20px;
         }
 
+    }
+
+    &__checkboxes {
+        display: flex;
+        align-items: center;
+        // position: relative;
+
+        @media (max-width: 1240px) {
+            // width: 100%;
+        }
+
+        @media (max-width: 799px) {
+            flex-wrap: wrap;
+        }
+
+
+        input {
+            -webkit-appearance: none;
+            appearance: none;
+            position: absolute;
+
+            &:checked {
+                &+label {
+                    &::before {
+                        /* background-color: #49d120; */
+                        background: linear-gradient(56.57deg,
+                                $hailey_blue 0%,
+                                $thick_purple 51.56%,
+                                $spicy_pink 105.28%);
+
+                        border-color: $kingly_cloud;
+                    }
+
+                    &::after {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        label {
+            padding-left: 42px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 32px;
+            user-select: none;
+
+            &::before {
+                content: "";
+                display: block;
+                width: 24px;
+                height: 24px;
+                border-radius: 4px;
+                border: 2px solid $kingly_cloud;
+                background-color: $white;
+
+                position: absolute;
+                top: 5px;
+                left: 0;
+                z-index: 1;
+
+                transition: background 0.1s linear, border 0.1s linear;
+            }
+
+            &::after {
+                content: "";
+                display: block;
+                width: 24px;
+                height: 24px;
+
+                background: url("../svg/check.svg") no-repeat;
+                background-size: 18px 16px;
+                opacity: 0;
+
+                position: absolute;
+                top: 9px;
+                left: 3px;
+                z-index: 2;
+
+                transition: opacity 0.1s linear;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__checkbox {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    &__button {
+        border: none;
+        cursor: pointer;
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // width: 270px;
+        height: 50px;
+        // margin-right: 10px;
+        padding: 0 20px;
+        font-family: 'Montserrat';
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 110%;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 6px;
+        overflow: hidden;
+        z-index: 1;
+
+        &::after {
+            position: absolute;
+            content: "";
+            display: inline-block;
+            background: #3bade3;
+            background: linear-gradient(45deg, #3bade3 0%, #576fe6 45%, #9844b7 57%, #ff357f 70%);
+            height: 50px;
+            width: 1500px;
+            z-index: -1;
+            -webkit-transform: translateX(-80px);
+            transform: translateX(-80px);
+            transition: -webkit-transform 400ms ease-in;
+            transition: transform 400ms ease-in;
+            transition: transform 400ms ease-in, -webkit-transform 400ms ease-in;
+            top: 0;
+        }
+
+        &:hover {
+            &::after {
+                -webkit-transform: translateX(5px);
+                transform: translateX(5px);
+            }
+        }
     }
 
     &__advanced {
