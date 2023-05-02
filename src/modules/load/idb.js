@@ -21,6 +21,7 @@ const indexedDB = async function () {
             //   MyInfo.createIndex('date', 'date');
         },
     });
+    return idb
 }
 // fn.idb = {}
 
