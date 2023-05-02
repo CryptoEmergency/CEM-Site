@@ -5,14 +5,12 @@ import {
   Variable,
   initReload,
   load,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+
 import Elements from "@src/elements/export.js";
 
-import { Particles } from "@src/component/htmlElements/index.js";
-
-// import { AboutAnimation } from "@src/component/blocks/AboutAnimation";
+const { images, svg, fn, elements } = CEM
 
 const team = [
   {
@@ -279,49 +277,43 @@ const start = function (data, ID) {
         <Elements.page.MainContainer
           // class="c-aboutus"
           header={
-            <Elements.page.Header
-              imgBack={svg["background/about_us_vector-1"]}
-              title="Crypto Emergency"
-              descriptions={Variable.lang.p.aboutObjective}
-              classBack="c-whowe__bg"
-            />
+            <div class="c-aboutus__whowe c-whowe">
+              <div class="c-whowe__inner pt--36 ">
+                <img class="c-whowe__img" src={svg["background/about_us_vector-1"]} />
+                <h2 class="indexZ--3 mb--24">Crypto Emergency</h2>
+                <p>{Variable.lang.p.aboutObjective}</p>
+              </div>
+              <div class="c-whowe__bg"></div>
+            </div>
           }
         >
           {/* <div class="c-aboutus about_us_container c-main__body"> */}
+          <section class={["c-aboutus__content", "c-container"]}>
+            <section class={["c-aboutus__goals", "c-goals"]}>
+              <h2>{Variable.lang.h.our_goals}</h2>
 
-          {/* <Particles></Particles> */}
 
-          <Elements.page.Container
-            class={["c-aboutus__content", "c-container"]}
-            resetClass={true}
-          >
-            <Elements.page.Container
-              class={["c-aboutus__goals", "c-goals"]}
-              resetClass={true}
-              title={Variable.lang.h.our_goals}
-              backSeat={{
-                src: svg["background/about_us_vector-2"],
-                class: "c-whowe__img c-whowe__img--right",
-              }}
-            >
+
+
               <Elements.cards.Animated records={arrBlockCard} />
 
-              <Elements.Accordeon records={arrAccordeon} />
+              <elements.Accordeon records={arrAccordeon} />
 
               <Elements.page.Container
                 class={["team"]}
                 resetClass={true}
                 title={Variable.lang.h.our_team}
               >
-                <Elements.Team records={team} />
+                <elements.sliderTeam records={team} />
               </Elements.page.Container>
-            </Elements.page.Container>
+              <img class="c-whowe__img c-whowe__img--right" src={svg["background/about_us_vector-2"]} />
+            </section>
 
             <Elements.page.Container
               resetClass={true}
               title={<h2 class="mb--50">{Variable.lang.h.road_map}</h2>}
             >
-              <Elements.Roadmap records={roadmap} />
+              <elements.Roadmap records={roadmap} />
             </Elements.page.Container>
 
             <Elements.page.Container
@@ -330,7 +322,7 @@ const start = function (data, ID) {
             //title={Variable.lang.h.our_projects}
             >
 
-              <div class="block-section social">
+              {/* <div class="block-section social">
                 <h3 class="H3">Социальные сети</h3>
                 <div class="btns-wrap-1">
                   {
@@ -340,7 +332,6 @@ const start = function (data, ID) {
                         <a href={item.link} class="btn-item" target="_blank">
                           <img class="btn-item_img" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
                           <span>{item.name}</span>
-                          {/* <img class="btn-item_img-flag" src={svg['train/' + item.lang]} alt="Flag" /> */}
                           <img class="btn-item_img-flag" src={`/assets/icons/flagsnew/${item.lang}.svg`} alt="Flag" />
                         </a>
 
@@ -350,8 +341,8 @@ const start = function (data, ID) {
                     })
                   }
                 </div>
-              </div>
-              <div class="block-section-2">
+              </div> */}
+              {/* <div class="block-section-2">
 
                 <h4 class="H3">Наши проекты</h4>
                 <div class="btns-wrap-2">
@@ -364,7 +355,6 @@ const start = function (data, ID) {
                           class="btn-item-2"
                           target="_blank"
                         >
-                          {/* <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} /> */}
                           <span class="SP2">{item.name}
 
                             <p class="p1">
@@ -382,8 +372,8 @@ const start = function (data, ID) {
 
 
 
-              </div>
-              <div class="block-section-2">
+              </div> */}
+              {/* <div class="block-section-2">
                 <h4 class="H3">Ссылки</h4>
                 <div class="btns-wrap-2 btns-wrap-small">
                   {sait_small.map((item) => {
@@ -403,8 +393,8 @@ const start = function (data, ID) {
                   }
 
                 </div>
-              </div>
-              <div class="block-section-3">
+              </div> */}
+              {/* <div class="block-section-3">
 
                 <h5 class="H3">Мобильные приложения</h5>
                 <div class="btns-wrap-3">
@@ -447,7 +437,7 @@ const start = function (data, ID) {
 
 
                 </div>
-              </div>
+              </div> */}
               {/* <Elements.projects.Project
                 records={projects}
                 title={projects.title}
@@ -465,7 +455,7 @@ const start = function (data, ID) {
                 <span class="c-button__text">{Variable.lang.span.supportProject}</span>
               </a>
             </Elements.page.Container>
-          </Elements.page.Container>
+          </section>
         </Elements.page.MainContainer>
       );
     },
