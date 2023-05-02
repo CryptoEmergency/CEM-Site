@@ -132,7 +132,7 @@ const start = function (data, ID = "mainBlock") {
                 <div class="page-main">
                     <div class="page-main__container">
                         <div class="page-main__content">
-                            <div class="swiper-container">
+                            {/* <div class="swiper-container">
                                 <div class="swiper swiper-post_university" After={() => swiperGo()}>
                                     <div class="swiper-wrapper">
                                         <a class="swiper-slide">
@@ -154,7 +154,7 @@ const start = function (data, ID = "mainBlock") {
                                     <div class="swiper-pagination swiper-pagination-post_media"></div>
                                     <div class="swiper-scrollbar-post_media"></div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div class="tags tags--static">
                                 <Tags
                                     Static={Static}

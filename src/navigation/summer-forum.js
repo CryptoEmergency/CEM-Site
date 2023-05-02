@@ -498,6 +498,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker23",
             show: false,
         },
+        {
+            name: "Лев Пониманский",
+            position: "Криптоэнтузиаст",
+            photo: "summer_forum/speaker24",
+            show: false,
+        },
     ]
 
     const guests = [
