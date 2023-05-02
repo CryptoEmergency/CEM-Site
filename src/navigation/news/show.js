@@ -13,14 +13,16 @@
 //         </div>
 //       );
 
-import { jsx, jsxFrag, load, Variable, initReload } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, load, Variable, initReload, CEM } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
-import { Comment, TextArea, ButtonSubmit, NotFound } from "@component/element/index.js";
+import { Comment, TextArea, ButtonSubmit, NotFound } from "@elements/element/index.js";
 
-import { BlockError404 } from "@component/blocks/index.js";
+import { BlockError404 } from "@elements/blocks/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID = "mainBlock") {
   let [Static, item] = fn.GetParams({ data, ID });
@@ -57,15 +59,12 @@ const start = function (data, ID = "mainBlock") {
             ) : null}
 
             {Static.item.preview ? (
-              <Elements.text.Main
-                text={Static.item.preview}
-                class="text mY--30"
-              />
+              <p class="text mY--30">{Static.item.preview}</p>
             ) : null}
             {/* <p class="text mr20" tohtml={true}>
               {Static.item.text}
             </p> */}
-            <Elements.text.Main text={fn.editText(Static.item.text, { clear: true, paragraph: true, html: true })} class="text mb--20" />
+            <p class="text mb--20">{fn.editText(Static.item.text, { clear: true, paragraph: true, html: true })}</p>
 
             {Static.item.source ? (
               <p class="source mr20">

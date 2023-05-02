@@ -1,10 +1,13 @@
 import {
   jsx,
   jsxFrag,
-  init
+  init,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import { BlockShowNews, BlockError404 } from '@component/blocks/index.js';
+// import { fn } from '@src/functions/index.js';
+import { BlockShowNews, BlockError404 } from '@elements/blocks/index.js';
+
+const fn = CEM.fn
 
 const start = function (data, ID) {
   let [Static, item] = fn.GetParams({ data, ID })

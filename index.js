@@ -6,8 +6,6 @@ dotenv.config();
 const port = 80;
 const target = "crypto-emergency.com";
 
-
-
 const options = {
   port,
   hotReload: true,
@@ -16,7 +14,7 @@ const options = {
     src: path.resolve("app.js"),
     public: path.resolve("public"),
     fileName: "main.[fullhash].js",
-    template: path.resolve("src/template/index.html"),
+    template: path.resolve("src/modules/template/index.html"),
   },
   proxy: {
     "/api/v2": {
@@ -49,3 +47,4 @@ if (process.env.DISABLERELOAD) {
 }
 
 CEM.start(options)
+//19.04.2023

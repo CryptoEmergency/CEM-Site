@@ -600,6 +600,12 @@ button[data-type='voiceline'][data-page_type="chat"] {
             font-weight: 600;
             color: #c96bff;
         }
+
+        &--small {
+            width: 40px;
+            height: 40px;
+            padding: 7px;
+        }
     }
 
     &__icon {

@@ -6,12 +6,15 @@ import {
     setStorage,
     init,
     Variable,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
-import { Avatar, Input, Select } from '@component/element/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
+import { Avatar, Input, Select } from '@elements/element/index.js';
+
+const { images, svg, fn } = CEM
 
 const Tags = function ({ Static, classActive, text, type }) {
     return (
@@ -425,7 +428,7 @@ const start = function (data, ID = "mainBlock") {
                                                             <a
                                                                 href={`/careers/freelance/${item.applicant._id}`}
                                                                 class="c-careers__resposition"
-                                                                onclick={function(e) {
+                                                                onclick={function (e) {
                                                                     e.preventDefault();
                                                                     e.stopPropagation();
                                                                     fn.siteLinkModal(e, { title: "Фриланс заказ", freelance: item })

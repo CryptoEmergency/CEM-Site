@@ -1,28 +1,4 @@
 {
-	"svg import": {
-		"scope": "javascript,typescript",
-		"prefix": "_svg",
-		"body": [
-			"import svg from '@assets/svg/index.js';"
-		],
-		"description": ""
-	},
-	"images import": {
-		"scope": "javascript,typescript",
-		"prefix": "_img",
-		"body": [
-			"import images from '@assets/images/index.js';"
-		],
-		"description": ""
-	},
-	"Import functions": {
-		"scope": "javascript,typescript",
-		"prefix": "_fn",
-		"body": [
-			"import { fn } from '@src/functions/export.js';"
-		],
-		"description": ""
-	},
 	"Consolelog": {
 		"scope": "javascript,typescript",
 		"prefix": "_log",

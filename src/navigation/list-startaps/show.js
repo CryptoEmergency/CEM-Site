@@ -3,16 +3,18 @@ import {
   jsxFrag,
   load,
   initReload,
-  Variable
+  Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
 
+const { images, svg, fn } = CEM
 
 const showLines = function (listLines) {
   return listLines.map((item, index) => {
@@ -98,10 +100,8 @@ const start = function (data, ID) {
       if (!Static.item) {
         Static.item = await fn.socket.get({
           method: "Startups",
-          params: {
-            filter: { _id: Variable.dataUrl.params },
-            firstRecord: true
-          }
+          _id: Variable.dataUrl.params,
+          params: {}
         })
       }
       // console.log("Static.item", Static.item)

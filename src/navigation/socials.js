@@ -5,12 +5,14 @@ import {
   Variable,
   initReload,
   load,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
-import { fn } from '@src/functions/export.js';
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
+// import { fn } from '@src/functions/export.js';
 
+const { images, svg, fn } = CEM
 
 const arrSocials = [
   {

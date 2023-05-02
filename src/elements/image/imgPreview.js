@@ -1,9 +1,9 @@
 import {
     jsx,
     jsxFrag,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import svg from '@assets/svg/index.js';
-import { fn } from '@src/functions/index.js';
+const { images, svg, fn } = CEM
 
 const forExport = function ({ Static, item }) {
     return (

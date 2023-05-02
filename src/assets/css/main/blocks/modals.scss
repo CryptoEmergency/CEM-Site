@@ -5731,6 +5731,10 @@ s
 		width: 100%;
 		overflow-x: auto;
 
+		&:last-child {
+			padding-bottom: 70px;
+		}
+
 		@extend .customscroll--gorizontal;
 	}
 

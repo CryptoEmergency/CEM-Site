@@ -5,11 +5,14 @@ import {
   init,
   Variable,
   initReload,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 import Elements from '@src/elements/export.js';
-import { NotFound } from "@component/element/index.js";
+import { NotFound } from "@elements/element/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
@@ -127,7 +130,7 @@ const start = function (data, ID) {
                   </div>
                 </div>
               </div>
-              { !Static.records?.length ? (
+              {!Static.records?.length ? (
                 <NotFound />
               ) : (
                 Static.records.map(function (item, i) {

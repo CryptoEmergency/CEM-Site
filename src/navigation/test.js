@@ -1,15 +1,16 @@
 import {
     jsx,
     jsxFrag,
-    load
+    load,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
 import Elements from '@src/elements/export.js';
-import { fn } from '@src/functions/index.js';
-import { BlockTextEditor } from '@component/blocks/index.js';
+// import { fn } from '@src/functions/index.js';
+import { BlockTextEditor } from '@elements/blocks/index.js';
 
 const start = function (data, ID) {
-    let [Static] = fn.GetParams({ data, ID })
+    let [Static] = CEM.fn.GetParams({ data, ID })
     load({
         ID,
         fnLoad: async () => {
