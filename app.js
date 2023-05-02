@@ -1,4 +1,4 @@
-import { CEM } from '@betarost/cemserver/cem.js'
+import { CEM, Variable } from '@betarost/cemserver/cem.js'
 
 import "@assets/css/index.js"
 import allCountries from '@src/modules/lists/allCountries.json'
@@ -60,6 +60,12 @@ CEM.initOptions({
         recursive: true,
         regExp: /\.js$/
     }),
+    hooks: {
+        routers: function (dataUrl) {
+            console.log('=d56fcd=', dataUrl)
+            return false
+        }
+    }
 
 })
-//19.04.2023
+//02.05.2023
