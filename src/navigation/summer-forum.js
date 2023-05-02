@@ -367,7 +367,7 @@ const start = function (data, ID) {
             show: true,
         },
         {
-            name: "Зюзин Алексей",
+            name: "Алексей Зюзин",
             position: "Организатор Crypto Summit",
             photo: "summer_forum/speaker5",
             show: true,
@@ -385,7 +385,7 @@ const start = function (data, ID) {
             show: true,
         },
         {
-            name: "Балахонцев Александр",
+            name: "Александр Балахонцев",
             position: "Директор Blockchain 24",
             photo: "summer_forum/speaker4",
             show: true,
@@ -427,7 +427,7 @@ const start = function (data, ID) {
             show: false,
         },
         {
-            name: "Кожухов Ярослав",
+            name: "Ярослав Кожухов",
             position: "Metis",
             photo: "summer_forum/speaker10",
             show: false,
@@ -583,10 +583,10 @@ const start = function (data, ID) {
                                 <p>
                                     Организатор
                                     <img src={svg.logoStandart} />
-                                    Соорганизаторы
+                                    Спонсор Afterparty
                                     <div class="el-c">
-                                        <img src={images["forum/partner_1"]} class="" />
-                                        <img src={images["forum/partner_11"]} class="" />
+                                        <img src={images["summer_forum/partner_26"]} class="" />
+                                        {/* <img src={images["forum/partner_11"]} class="" /> */}
                                     </div>
                                     При поддержке
                                     <img src={images["summer_forum/partner_21"]} />
@@ -613,10 +613,10 @@ const start = function (data, ID) {
                                     <b>Заявить о себе</b> - форум предоставляет сцену для демонстрации твоих экспертных знаний в области криптовалют, повышая твою репутацию лидера мысли и эксперта.
                                 </p>
                                 <p>
-                                    <b>Сотрудничество</b> – такие мероприятия является центром сотрудничества и формирования сообщества, предоставляя возможности для совместной работы над проектами и инициативами, которые могут оказать значительное влияние на индустрию.
+                                    <b>Сотрудничество</b> – такие мероприятия являются центром сотрудничества и формирования сообщества, предоставляя возможности для совместной работы над проектами и инициативами, которые могут оказать значительное влияние на индустрию.
                                 </p>
                                 <p>
-                                    Мы уверены, что наш криптофорум предоставит тебе всю ценную информацию, связи и возможности, которых больше нигде не найдёшь.
+                                    Мы уверены, что наш криптофорум предоставит тебе всю ценную информацию, деловые возможности и возможности, которых больше нигде не встретишь.
                                 </p>
 
                                 <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
@@ -643,7 +643,7 @@ const start = function (data, ID) {
                                                                 <img
                                                                     style={!(Static.elNumberSwiper[index] && (Static.elNumberSwiper[index].classList.contains("swiper-slide-active")
                                                                         || Static.elNumberSwiper[index].classList.contains("swiper-slide-next")
-                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-prev"))) ? "display: none; border-radius: 13px" : "border-radius: 13px"}
+                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-prev"))) ? "border-radius: 13px" : "border-radius: 13px"}
                                                                     src={images[`${item.folder}/${item.path}`]}
                                                                     loading="lazy"
                                                                 />
