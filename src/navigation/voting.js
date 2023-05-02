@@ -40,6 +40,7 @@ const arrVoting = [
     ],
     active: false,
   },
+  
   // {
   //   title: "Самые сложные предметы",
   //   discription: "Выбери свой любимый предмет",

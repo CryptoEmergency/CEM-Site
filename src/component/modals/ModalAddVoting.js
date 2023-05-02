@@ -8,9 +8,21 @@ const ModalAddVoting = function (data, ID) {
   Static.forms = {
     title: "",
     descriptoin: "",
-    responseOptions: [],
+    responseOptions: [],  
   };
   // Static.test1 = 123;
+  
+  // const [massive] = function({data, ID})
+  // let [den] = fn.GetParams({ data, ID });
+  // // console.log("=990b74=", Static);
+  // den.forms = {
+  //   ridingBook:[]
+  //  }
+
+  // let as = ["a","b", "c", "d", "h", "i" ,"j"] 
+  // let del = mas.splice (2)
+  // console.log(del)
+
   init(
     null,
     () => {
@@ -46,6 +58,19 @@ const ModalAddVoting = function (data, ID) {
                 ></input>
                 <label> Варианты ответа</label> 
                 <div class="btn-block">
+
+                <button>
+                <button
+                  class="bot-btne btn" 
+                  onclick={() => {
+                    Static.forms.responseOptions.splice (1, 1);
+                    initReload();
+                  }}
+                >
+                  -
+                </button>
+
+                </button>
                 <button
                   class="bot-btne btn" 
                   onclick={() => {
@@ -56,8 +81,6 @@ const ModalAddVoting = function (data, ID) {
                   +
                 </button>
                 </div>
-                
-
                 {Static.forms.responseOptions.map((item, index) => {                 
                   return (
                     <input
@@ -65,6 +88,7 @@ const ModalAddVoting = function (data, ID) {
                       oninput={function () {
                         Static.forms.responseOptions[index].name = this.value;
                       }}
+                      
                     ></input>
                   );
                 })}
