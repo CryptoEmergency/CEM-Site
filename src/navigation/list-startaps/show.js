@@ -100,10 +100,8 @@ const start = function (data, ID) {
       if (!Static.item) {
         Static.item = await fn.socket.get({
           method: "Startups",
-          params: {
-            filter: { _id: Variable.dataUrl.params },
-            firstRecord: true
-          }
+          _id: Variable.dataUrl.params,
+          params: {}
         })
       }
       // console.log("Static.item", Static.item)
