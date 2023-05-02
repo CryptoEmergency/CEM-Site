@@ -211,13 +211,65 @@
 }
 
 
-.Modal-1 {
 
 
-    position: absolute;
-    width: 24px;
-    height: 22px;
-    right: 30px;
+
+.G-tfn {
+    margin: 10px;
+    display: flex;
+    //grid-template-columns: auto;
+    //justify-content: space-between;
+    //text-align: center;
+    justify-content: center;
+}
+
+.c-events__title_1 {
+    //display: grid;
+    //grid-template-columns: 14fr 1fr;
+    //justify-content: space-between;
+    margin: 0;
+    margin-bottom: 1rem;
+    font-size: 44px;
+    line-height: 115%;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: 700;
+    margin: 25px 0;
+
+    // .Modal-10 {
+    //     display: flex;
+    //     align-self: center;
+    //     float: right;
+    //     //display: block;
+    //     //left: auto !important;
+    //     //right: 12px;
+    //     //cursor: pointer;
+    //     //position: relative;
+
+    //     width: 24px;
+    //     //height: 22px;
+    //     //right: 30px;
+    //     //top: 25px;
+    //     color: #4f5362;
+    //     border: none;
+    //     //Добавитьо какую то иконку 
+    //     //z-index: 100;
+    //     //cursor: pointer;
+
+    // }
+}
+
+.Modal-10 {
+
+    display: block;
+    left: auto !important;
+    right: -150px;
+    cursor: pointer;
+    position: relative;
+    margin-top: 10px;
+    width: 30px;
+    //height: 22px;
+    //right: 30px;
     //top: 25px;
     color: #4f5362;
     border: none;
@@ -226,6 +278,9 @@
     //cursor: pointer;
 
 }
+
+
+
 
 .conteiner_moda-2 {
     display: flex;
@@ -275,7 +330,7 @@
     margin-bottom: 24px;
     box-sizing: border-box;
     padding: 25px;
-    padding-left: 61px;
+    padding-left: 30px;
     color: #FFF;
     position: relative;
 

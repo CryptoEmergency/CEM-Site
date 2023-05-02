@@ -206,15 +206,15 @@ const start = function (data, ID) {
             <Elements.page.Container
               class={"indexZ--2"}
               resetClass={true}
-              title={Variable.lang.h.our_projects}
+            // title={Variable.lang.h.our_projects}
             >
-              <Elements.projects.Project
+              {/* <Elements.projects.Project
 
                 records={projects}
                 title={projects.title}
                 link={projects.link}
                 scr={projects.src}
-              />
+              /> */}
             </Elements.page.Container>
           </section>
         </Elements.page.MainContainer>

@@ -43,13 +43,17 @@ const forExport = function ({ records }) {
                     </span>{" "}
                     / ${new Intl.NumberFormat('de-DE').format(item.targetMoney)}{" "}
                     <span class="item-sum_procent">
-                      {Math.round(
-                        ((item.nowMoney && item.nowMoney > 0
-                          ? item.nowMoney
-                          : 0) *
-                          100) /
-                        item.targetMoney
-                      )}
+                      {item.targetMoney <= 0
+                        ?
+                        '0'
+                        :
+                        Math.round(
+                          ((item.nowMoney && item.nowMoney > 0
+                            ? item.nowMoney
+                            : 0) *
+                            100) /
+                          item.targetMoney
+                        )}
                       %
                     </span>
                   </p>

@@ -104,13 +104,17 @@ const start = function (data, ID) {
                     <span class="info-summ_done">of</span>
                     <span class="info-summ_done">
                       $
-                      {`${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (${Math.round(
-                        ((Static.item.nowMoney && Static.item.nowMoney > 0
-                          ? Static.item.nowMoney
-                          : 0) *
-                          100) /
-                        Static.item.targetMoney
-                      )})%`}
+                      {Static.item.targetMoney <= 0
+                        ?
+                        `${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (0)%`
+                        :
+                        `${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (${Math.round(
+                          ((Static.item.nowMoney && Static.item.nowMoney > 0
+                            ? Static.item.nowMoney
+                            : 0) *
+                            100) /
+                          Static.item.targetMoney
+                        )})%`}
                     </span>
                   </div>
 
