@@ -322,7 +322,7 @@ const start = function (data, ID) {
             //title={Variable.lang.h.our_projects}
             >
 
-              <div class="block-section social">
+              {/* <div class="block-section social">
                 <h3 class="H3">Социальные сети</h3>
                 <div class="btns-wrap-1">
                   {
@@ -332,7 +332,6 @@ const start = function (data, ID) {
                         <a href={item.link} class="btn-item" target="_blank">
                           <img class="btn-item_img" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
                           <span>{item.name}</span>
-                          {/* <img class="btn-item_img-flag" src={svg['train/' + item.lang]} alt="Flag" /> */}
                           <img class="btn-item_img-flag" src={`/assets/icons/flagsnew/${item.lang}.svg`} alt="Flag" />
                         </a>
 
@@ -342,8 +341,8 @@ const start = function (data, ID) {
                     })
                   }
                 </div>
-              </div>
-              <div class="block-section-2">
+              </div> */}
+              {/* <div class="block-section-2">
 
                 <h4 class="H3">Наши проекты</h4>
                 <div class="btns-wrap-2">
@@ -356,7 +355,6 @@ const start = function (data, ID) {
                           class="btn-item-2"
                           target="_blank"
                         >
-                          {/* <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} /> */}
                           <span class="SP2">{item.name}
 
                             <p class="p1">
@@ -374,8 +372,8 @@ const start = function (data, ID) {
 
 
 
-              </div>
-              <div class="block-section-2">
+              </div> */}
+              {/* <div class="block-section-2">
                 <h4 class="H3">Ссылки</h4>
                 <div class="btns-wrap-2 btns-wrap-small">
                   {sait_small.map((item) => {
@@ -395,8 +393,8 @@ const start = function (data, ID) {
                   }
 
                 </div>
-              </div>
-              <div class="block-section-3">
+              </div> */}
+              {/* <div class="block-section-3">
 
                 <h5 class="H3">Мобильные приложения</h5>
                 <div class="btns-wrap-3">
@@ -439,7 +437,7 @@ const start = function (data, ID) {
 
 
                 </div>
-              </div>
+              </div> */}
               {/* <Elements.projects.Project
                 records={projects}
                 title={projects.title}
