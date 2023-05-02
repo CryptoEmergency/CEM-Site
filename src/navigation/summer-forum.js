@@ -492,6 +492,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker22",
             show: false,
         },
+        {
+            name: "Тимофей Григоренко",
+            position: "Майнинг, владелец 1GHS",
+            photo: "summer_forum/speaker23",
+            show: false,
+        },
     ]
 
     const guests = [
