@@ -486,6 +486,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker21",
             show: false,
         },
+        {
+            name: "Илья Ткаченко",
+            position: "Криптоэксперт",
+            photo: "summer_forum/speaker22",
+            show: false,
+        },
     ]
 
     const guests = [
