@@ -178,45 +178,38 @@ const start = function (data, ID = "mainBlock") {
                                     // }
                                 }}
                             </div>
-                            <div class="cards-university">
+                            <div class="cards">
                                 {Static.records.map((item) => {
                                     return (
-                                        <li class="card-university">
+                                        <li class="card">
                                             <a
                                                 href={`/crypto-university/show/${item._id}`}
-                                                class="card-university__link"
+                                                class="card__link"
                                                 onclick={function (e) {
                                                     fn.siteLink(e, { title: "", item: {}, items: {} })
                                                 }}
                                             >
-                                                <figure class="card-university__figure">
+                                                <figure class="card__figure">
                                                     {item.icon
                                                         ?
                                                         <img
-                                                            class="card-university__logo"
+                                                            class="card__logo"
                                                             src={`/assets/upload/worldPress/${item.icon}`}
                                                             width="100"
                                                             height="100"
                                                         />
                                                         :
                                                         <img
-                                                            class="card-university__logo"
+                                                            class="card__logo"
                                                             src={images["crypto-university"]}
                                                             width="100"
                                                             height="100"
                                                         />
                                                     }
                                                 </figure>
-                                                <a class="card-university__btn c-button c-button--gradient2" href="">
-                                                    <span class="c-button__text">Кнопка</span>
-                                                </a>
-                                                <h3 class="card-university__companyname">{item.nameCompany}</h3>
-                                                <p class="card-university__slogan">{item.tagline}</p>
-                                                <p class="card-university__shortdescription">
-                                                    {item.aboutCompany}
-                                                </p>
-                                                <div class="card-university__info">
-                                                    {item.description}
+                                                <div class="card__description">
+                                                    <h3 class="card__companyname">{item.nameCompany}</h3>
+                                                    <div class="card__info">{item.description}</div>
                                                 </div>
                                             </a>
                                         </li>
