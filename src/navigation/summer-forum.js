@@ -480,6 +480,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker20",
             show: false,
         },
+        {
+            name: "Дмитрий Романов",
+            position: "Консультант блокчейн-проектов",
+            photo: "summer_forum/speaker21",
+            show: false,
+        },
     ]
 
     const guests = [
@@ -583,7 +589,7 @@ const start = function (data, ID) {
                                 <p>
                                     Организатор
                                     <img src={svg.logoStandart} />
-                                    Спонсор Afterparty
+                                    Спонсор After party
                                     <div class="el-c">
                                         <img src={images["summer_forum/partner_26"]} class="" />
                                         {/* <img src={images["forum/partner_11"]} class="" /> */}
