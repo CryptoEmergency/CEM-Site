@@ -196,17 +196,18 @@ const start = function (data, ID = "mainBlock") {
                         </div>
                     </div> */}
                     <div class="c-events__container c-container">
-                        <h2 class="c-events__title"
+                        <div class="G-tfn">
+                            <h8 class="c-events__title_1">
+                                Мероприятия
+                                <img class="Modal-10" src={svg[`filter`]} onclick={() => {
+                                    fn.modals.ModalAddEvents({})
+                                    // fn.modals.ModalAfterRegisterForm({})
+                                }}>
+                                    {/* <img src={`train.filter`}></img> */}
+                                </img>
+                            </h8>
 
-                        >Мероприятия
-                            <button class="Modal-1" onclick={() => {
-                                fn.modals.ModalAddEvents({})
-                                // fn.modals.ModalAfterRegisterForm({})
-                            }}>
-
-                            </button>
-                        </h2>
-
+                        </div>
                         <figure class="c-events__cover">
                             <img style="border-radius: 4px; width: 100%" src={images['banners/BlockchainLifeBig']} />
                         </figure>
