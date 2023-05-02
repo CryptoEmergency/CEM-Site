@@ -46,10 +46,8 @@ const start = function (data, ID) {
         // });
         Static.item = await fn.socket.get({
           method: "Ico",
-          params: {
-            filter: { _id: Variable.dataUrl.params },
-            firstRecord: true,
-          }
+          _id: Variable.dataUrl.params,
+          params: {}
         });
       }
       console.log("Static.item", Static.item);
@@ -82,7 +80,7 @@ const start = function (data, ID) {
                       id="startupVideoPlayer"
                       width="100%"
                       height="585px"
-                        src={Static.item.coverVideo}
+                      src={Static.item.coverVideo}
                       title="YouTube video player"
                       frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -199,13 +197,13 @@ const start = function (data, ID) {
                 <p>
                   Tokens for sale:{" "}
                   <span class="details_bold">
-                  {Static.item.targetSell.toLocaleString()} Token{" "}
+                    {Static.item.targetSell.toLocaleString()} Token{" "}
                   </span>
                 </p>
                 <p>
                   Total Tokens:{" "}
                   <span class="details_bold">
-                  {Static.item.totalSupply.toLocaleString()} token
+                    {Static.item.totalSupply.toLocaleString()} token
                   </span>
                 </p>
                 <p>
