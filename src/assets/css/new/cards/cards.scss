@@ -1,0 +1,13 @@
+.cards {
+
+    &-university {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(355px, 400px));
+        grid-template-rows: auto;
+        justify-content: center;
+        gap: 10px;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+}

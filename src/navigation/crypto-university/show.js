@@ -119,6 +119,132 @@ const start = function (data, ID) {
                     {
                         Static.item.map((item) => {
                             return (
+                                <div class="page-main__content">
+                                    <div class="university c-main__body">
+                                        <h2 class="university__title">{item.nameCompany}</h2>
+                                        <figure class="university__figure">
+                                            {item.icon
+                                                ?
+                                                <img
+                                                    class="university__logo"
+                                                    src={`/assets/upload/worldPress/${item.icon}`}
+                                                    width="100"
+                                                    height="100"
+                                                />
+                                                :
+                                                <img
+                                                    class="university__logo"
+                                                    src={images["crypto-university"]}
+                                                    width="100"
+                                                    height="100"
+                                                />
+                                            }
+                                        </figure>
+                                        <a class="university__btn c-button c-button--gradient2"
+                                            href={item.siteLink}
+                                            onclick={() => {
+                                                fn.siteLink({ title: "", item: {}, items: {} })
+                                            }}
+                                        >
+                                            <span class="c-button__text">Сайт</span>
+                                        </a>
+                                        <blockquote class="university__slogan">&#8220;{item.tagline}&#8221;</blockquote>
+                                        <p class="university__shortdesc">
+                                            {item.description}
+                                        </p>
+                                        {item.cover
+                                            ?
+                                            <figure class="university__cover">
+                                                <img class=""
+                                                    src={`/assets/upload/worldPress/${item.cover}`}
+                                                />
+                                            </figure>
+                                            :
+                                            null
+                                        }
+                                        <section class="university__about">
+                                            <h5>О компании</h5>
+                                            <p>{item.aboutCompany}</p>
+                                        </section>
+                                        <div class="university__authors swiper-container">
+                                            <div class="swiper swiper-post_authors" After={() => swiperGo()}>
+                                                <div class="swiper-wrapper">
+                                                    {item.teachers.map((teacher) => {
+                                                        return (
+                                                            <a
+                                                                class="swiper-slide"
+                                                            // href="/crypto-university/teacher/1/"
+                                                            // onclick={function (e) {
+                                                            //     e.preventDefault();
+                                                            //     e.stopPropagation();
+                                                            //     fn.siteLinkModal(e, {
+                                                            //         title: "Преподаватель: Иванов Иван Иванович", teacher: {
+                                                            //             name: "Иванов Иван Иванович"
+                                                            //         }
+                                                            //     })
+                                                            // }}
+                                                            >
+                                                                <div class="swiper-post_media_image_container">
+                                                                    <figure class="university__sliderwrap">
+                                                                        <img src={`/assets/upload/worldPress/${teacher.image}`} />
+                                                                        {/* <figcaption class="c-criptocompany__slidertitle">{teacher.title}</figcaption> */}
+                                                                        <figcaption class="university__slidertitle">{teacher.name}</figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                            </a>
+                                                        )
+                                                    })}
+                                                </div>
+                                                <div class="swiper-pagination swiper-pagination-post_media"></div>
+                                                <div class="swiper-scrollbar-post_media"></div>
+                                            </div>
+                                        </div>
+                                        <section class="university__courses">
+                                            <h5>Курсы</h5>
+                                            <ul class="university__courses-list">
+                                                {item.courses.map((course) => {
+                                                    return (
+                                                        <li class="">
+                                                            <a
+                                                                class="university__course"
+                                                                href={course.link}
+                                                                onclick={(e) => {
+                                                                    // e.preventDefault();
+                                                                    fn.siteLink()
+                                                                }}
+                                                            >
+                                                                <span class="university__course-description">{course.name}</span>
+                                                                <footer class="university__course-footer">
+                                                                    <time class="university__course-time" datetime="">{fn.moment(course.dateStart).format('YYYY-MM-DD')}</time>
+                                                                    <span class="university__course-hourse">{`${course.duration} ч`}</span>
+                                                                </footer>
+                                                                {course.promotion
+                                                                    ?
+                                                                    <div class="university__course-stiker">
+                                                                        <img src={images["university/promotion"]} />
+                                                                    </div>
+                                                                    :
+                                                                    null
+                                                                }
+                                                            </a>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            )
+
+            return (
+                <div>
+                    {
+                        Static.item.map((item) => {
+                            return (
                                 <div
                                     class={[
                                         "c-criptocompany",
