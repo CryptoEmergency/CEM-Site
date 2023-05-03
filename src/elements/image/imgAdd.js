@@ -2,8 +2,9 @@ import {
     jsx,
     jsxFrag,
     initReload,
+    CEM
 } from '@betarost/cemserver/cem.js';
-import { fn } from '@src/functions/index.js';
+const { images, svg, fn } = CEM
 
 const forExport = function ({ src, Static, onclick, onchange }) {
     return (
@@ -37,7 +38,7 @@ const forExport = function ({ src, Static, onclick, onchange }) {
                                     name: response.name
                                 }
                                 Static.activeNotes.media.push(data)
-                                {onchange}
+                                { onchange }
                             }
                         )
                     })

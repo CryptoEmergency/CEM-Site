@@ -2,10 +2,13 @@ import {
   jsx,
   jsxFrag,
   init,
-  Variable
+  Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import { BlockShowLenta, BlockError404 } from "@component/blocks/index.js";
+// import { fn } from '@src/functions/index.js';
+import { BlockShowLenta, BlockError404 } from "@elements/blocks/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID) {
   Variable.Static.FooterShow = false

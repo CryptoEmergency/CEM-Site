@@ -1,7 +1,9 @@
-import { jsx, jsxFrag, init, Variable } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
-import { ButtonShowMore, NotFound } from "@component/element/index.js";
+import { jsx, jsxFrag, init, Variable, CEM } from "@betarost/cemserver/cem.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
+import { ButtonShowMore, NotFound } from "@elements/element/index.js";
+
+const { svg, fn } = CEM
 
 const UserWalletCard = function ({ balance, coin, course, logo }) {
   return (
@@ -74,7 +76,7 @@ const start = function (data, ID) {
                 <div> {Variable.lang.p.status} </div>
               </div>
               {!Variable[Static.nameRecords] ||
-              !Variable[Static.nameRecords].list_records.length ? (
+                !Variable[Static.nameRecords].list_records.length ? (
                 <NotFound />
               ) : (
                 Variable[Static.nameRecords].list_records.map(function (

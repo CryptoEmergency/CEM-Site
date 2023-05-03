@@ -5,11 +5,12 @@ import {
     init,
     sendApi,
     Helpers,
-    initReload
+    initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
-import images from "@assets/images/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
+// import images from "@assets/images/index.js";
 import {
     Avatar,
     Swiper,
@@ -22,11 +23,13 @@ import {
     ButtonSubmit,
     MediaButton,
     MediaPreview
-} from '@component/element/index.js';
+} from '@elements/element/index.js';
 
 // import EmojiPicker from "rm-emoji-picker";
 // import 'rm-emoji-picker/dist/emojipicker.css';
-// 
+
+const { images, svg, fn } = CEM
+
 const swiperOptions = {
     loop: false,
     // autoHeight: true, 
@@ -724,7 +727,7 @@ const start = function (data, ID) {
 
                                                             </div>
                                                             <div class="messages_list_item_info-2">
-                                                                {lastMessage?.author == Variable.myInfo._id
+                                                                {lastMessage?.author == Variable.myInfo._id || (lastMessage?.author != Variable.myInfo._id && lastMessage.status != 1)
                                                                     ?
                                                                     <p>{lastMessage?.showDate ? fn.getDateFormat(lastMessage?.showDate, "chatlist") : null}</p>
                                                                     :

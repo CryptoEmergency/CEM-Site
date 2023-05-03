@@ -1,0 +1,63 @@
+.input {
+    &-div {
+        display: block;
+        width: 100%;
+        height: 60px;
+        border-radius: 10px;
+        border: 1px solid #44495C;
+        background-color: #313543;
+        padding: 22px;
+        color: #ffffff;
+        outline: none;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &[placeholder]:empty:before {
+            content: attr(placeholder);
+            color: #ffffff;
+            opacity: 0.5;
+        }
+        
+        &[placeholder]:empty:focus:before {
+            content: '';
+        }
+
+        &__container {
+            margin-top: 20px;
+        }
+
+        &--error {
+            border-color: #ff0000;
+        }
+
+        &--correctly {
+            border-color: #008000;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 115%;
+            color: #9CA2B5;
+        }
+
+        &__country {
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 19px;
+                margin-right: 8px;
+            }
+
+            div {
+                color: #ffffff;
+            }
+        }
+
+        &__question {
+            height: 170px;
+            white-space: pre-wrap;
+        }
+    }
+}

@@ -5,23 +5,21 @@ import {
     Variable,
     init,
     initReload,
-    Helpers
+    Helpers,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
-
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
 import Swiper from 'swiper/bundle';
-import { LazyImage } from "@component/element/index.js";
+import { LazyImage } from "@elements/element/index.js";
 
 // import anime from 'animejs/lib/anime.es.js';
-
-import { fn } from "@src/functions/index.js";
-
-
-
+// import { fn } from "@src/functions/index.js";
 
 import 'swiper/css/bundle';
+
+const { images, svg, fn } = CEM
 
 const isMobile = {
     Android: function () {
@@ -369,7 +367,7 @@ const start = function (data, ID) {
             show: true,
         },
         {
-            name: "Зюзин Алексей",
+            name: "Алексей Зюзин",
             position: "Организатор Crypto Summit",
             photo: "summer_forum/speaker5",
             show: true,
@@ -387,7 +385,7 @@ const start = function (data, ID) {
             show: true,
         },
         {
-            name: "Балахонцев Александр",
+            name: "Александр Балахонцев",
             position: "Директор Blockchain 24",
             photo: "summer_forum/speaker4",
             show: true,
@@ -429,7 +427,7 @@ const start = function (data, ID) {
             show: false,
         },
         {
-            name: "Кожухов Ярослав",
+            name: "Ярослав Кожухов",
             position: "Metis",
             photo: "summer_forum/speaker10",
             show: false,
@@ -451,7 +449,61 @@ const start = function (data, ID) {
             position: "DUMA NETWORK",
             photo: "summer_forum/speaker13",
             show: false,
-        }
+        },
+        {
+            name: "Евгений Азизов",
+            position: "Управляющий делами администрации города Новороссийска",
+            photo: "summer_forum/speaker16",
+            show: false,
+        },
+        {
+            name: "Сергей Грабский",
+            position: "Руководитель Ассоциации цифрового развития Краснодарского края",
+            photo: "summer_forum/speaker17",
+            show: false,
+        },
+        {
+            name: "Евгений Сапожников",
+            position: "Основатель обменника криптовалют Keine-exchange",
+            photo: "summer_forum/speaker18",
+            show: false,
+        },
+        {
+            name: "Денис Стригун",
+            position: "CEO WEB3Space",
+            photo: "summer_forum/speaker19",
+            show: false,
+        },
+        {
+            name: "Иван Деркач",
+            position: "CTO WEB3Space",
+            photo: "summer_forum/speaker20",
+            show: false,
+        },
+        {
+            name: "Дмитрий Романов",
+            position: "Консультант блокчейн-проектов",
+            photo: "summer_forum/speaker21",
+            show: false,
+        },
+        {
+            name: "Илья Ткаченко",
+            position: "Криптоэксперт",
+            photo: "summer_forum/speaker22",
+            show: false,
+        },
+        {
+            name: "Тимофей Григоренко",
+            position: "Майнинг, владелец 1GHS",
+            photo: "summer_forum/speaker23",
+            show: false,
+        },
+        {
+            name: "Лев Пониманский",
+            position: "Криптоэнтузиаст",
+            photo: "summer_forum/speaker24",
+            show: false,
+        },
     ]
 
     const guests = [
@@ -553,14 +605,14 @@ const start = function (data, ID) {
                                     Команда <b>Crypto Emergency</b> рада пригласить тебя на второй ежегодный криптофорум <b>Crypto Юг 2023</b>, который состоится  3 и 4 июня в г. Новороссийске.
                                 </p>
                                 <p>
-                                    Организатор 
+                                    Организатор
                                     <img src={svg.logoStandart} />
-                                     Соорганизаторы
-                                     <div class="el-c">
-                                        <img src={images["forum/partner_1"]} class="" />
-                                        <img src={images["forum/partner_11"]} class="" />
+                                    Спонсор After party
+                                    <div class="el-c">
+                                        <img src={images["summer_forum/partner_26"]} class="" />
+                                        {/* <img src={images["forum/partner_11"]} class="" /> */}
                                     </div>
-                                      При поддержке 
+                                    При поддержке
                                     <img src={images["summer_forum/partner_21"]} />
                                 </p>
                                 <p>
@@ -585,10 +637,10 @@ const start = function (data, ID) {
                                     <b>Заявить о себе</b> - форум предоставляет сцену для демонстрации твоих экспертных знаний в области криптовалют, повышая твою репутацию лидера мысли и эксперта.
                                 </p>
                                 <p>
-                                    <b>Сотрудничество</b> – такие мероприятия является центром сотрудничества и формирования сообщества, предоставляя возможности для совместной работы над проектами и инициативами, которые могут оказать значительное влияние на индустрию.
+                                    <b>Сотрудничество</b> – такие мероприятия являются центром сотрудничества и формирования сообщества, предоставляя возможности для совместной работы над проектами и инициативами, которые могут оказать значительное влияние на индустрию.
                                 </p>
                                 <p>
-                                    Мы уверены, что наш криптофорум предоставит тебе всю ценную информацию, связи и возможности, которых больше нигде не найдёшь.
+                                    Мы уверены, что наш криптофорум предоставит тебе всю ценную информацию, деловые возможности и возможности, которых больше нигде не встретишь.
                                 </p>
 
                                 <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
@@ -615,7 +667,7 @@ const start = function (data, ID) {
                                                                 <img
                                                                     style={!(Static.elNumberSwiper[index] && (Static.elNumberSwiper[index].classList.contains("swiper-slide-active")
                                                                         || Static.elNumberSwiper[index].classList.contains("swiper-slide-next")
-                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-prev"))) ? "display: none; border-radius: 13px" : "border-radius: 13px"}
+                                                                        || Static.elNumberSwiper[index].classList.contains("swiper-slide-prev"))) ? "border-radius: 13px" : "border-radius: 13px"}
                                                                     src={images[`${item.folder}/${item.path}`]}
                                                                     loading="lazy"
                                                                 />
@@ -1348,6 +1400,27 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_25"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://t.me/MetisDAO_ru"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_26"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://getblock.net/how-it-works"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_27"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://web3space.io/bot"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_28"]} />
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">

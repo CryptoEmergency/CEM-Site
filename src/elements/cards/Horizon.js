@@ -1,5 +1,6 @@
-import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
+import { jsx, jsxFrag, CEM } from "@betarost/cemserver/cem.js";
+
+const { images, svg, fn } = CEM
 
 const forExport = function ({ records }) {
   return (
@@ -42,24 +43,42 @@ const forExport = function ({ records }) {
                     </span>{" "}
                     / ${new Intl.NumberFormat('de-DE').format(item.targetMoney)}{" "}
                     <span class="item-sum_procent">
-                      {Math.round(
-                        ((item.nowMoney && item.nowMoney > 0
-                          ? item.nowMoney
-                          : 0) *
-                          100) /
+                      {item.targetMoney <= 0
+                        ?
+                        '0'
+                        :
+                        Math.round(
+                          ((item.nowMoney && item.nowMoney > 0
+                            ? item.nowMoney
+                            : 0) *
+                            100) /
                           item.targetMoney
-                      )}
+                        )}
                       %
                     </span>
                   </p>
                 </div>
               </div>
-              <span class="item-date item-date_start">
-                {fn.getDateFormat(item.startDate)}
-              </span>
-              <span class="item-date item-date_end">
-                {fn.getDateFormat(item.endDate)}
-              </span>
+              {() => {
+                if (item.dateIsKnow) {
+                  return (
+                    <span class="item-tba">
+                      <img src={svg["calendar_ico"]} />
+                      TBA</span>
+                  )
+                } else {
+                  return (
+                    <div>
+                      <span class="item-date item-date_start">
+                        {fn.getDateFormat(item.startDate)}
+                      </span>
+                      <span class="item-date item-date_end">
+                        {fn.getDateFormat(item.endDate)}
+                      </span>
+                    </div>
+                  )
+                }
+              }}
             </div>
           </div>
         );

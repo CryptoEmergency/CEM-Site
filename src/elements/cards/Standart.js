@@ -1,6 +1,7 @@
-import { jsx, jsxFrag } from "@betarost/cemserver/cem.js";
-import svg from "@assets/svg/index.js";
+import { jsx, jsxFrag, CEM } from "@betarost/cemserver/cem.js";
+
 import Elements from "@src/elements/export.js";
+const { images, svg, fn } = CEM
 // const forExport = function ({ className, image, title, description }) {
 //   return (
 //     <div class="affiliate_program_condition">

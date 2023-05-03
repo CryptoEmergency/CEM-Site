@@ -2,19 +2,22 @@ import {
   jsx,
   jsxFrag,
   Variable,
-  load
+  load,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
 import Elements from "@src/elements/export.js";
-import { fn } from '@src/functions/export.js';
+// import { fn } from '@src/functions/export.js';
+const fn = CEM.fn
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
-  // console.log('=c200a1=', Static)
+  console.log('=c200a1=', Static)
   load({
     ID,
     fnLoad: async () => {
       Static.records = await fn.socket.get({ method: "News", params: { filter: { type: "blog" } } })
+      console.log('=c36b1b=', Static.records)
     },
     fn: () => {
       return (

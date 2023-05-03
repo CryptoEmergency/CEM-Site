@@ -5,17 +5,20 @@ import {
     Variable,
     initReload,
     sendApi,
-    Helpers
+    Helpers,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
-import images from '@assets/images/index.js';
-import { Avatar } from '@component/element/Avatar.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
+// import images from '@assets/images/index.js';
+import { Avatar } from '@elements/element/Avatar.js';
 
 import {
     BlockUserProfilePage,
-} from '@component/blocks/index.js';
+} from '@elements/blocks/index.js';
 // import { fn } from "moment";
+
+const { images, svg, fn } = CEM
 
 const makeFilter = function (Static) {
     let objReturn = {}
@@ -80,7 +83,7 @@ const makeFilter = function (Static) {
 
 const start = function (userInfo, ID = "mainBlock") {
     let [Static] = fn.GetParams({ userInfo, ID })
-    console.log('=07dba5=', userInfo)
+    // console.log('=07dba5=', userInfo)
     Variable.Static.FooterShow = false
     let profilePage
     Static.activeItems = {}
@@ -378,7 +381,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                             id="userstatus"
                                             contenteditable="true"
                                             onblur={async function (e) {
-                                                if(!e.target.innerText.trim()) {
+                                                if (!e.target.innerText.trim()) {
                                                     return
                                                 }
                                                 console.log('=6569c1=', `статус: ${e.target.innerText}`)
@@ -394,7 +397,7 @@ const start = function (userInfo, ID = "mainBlock") {
 
                                                 // console.log('=87542b=response=', response)
                                                 if (response.status === 'ok') {
-                                                    
+
                                                 } else {
                                                     Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[response.error] } }, true);
                                                 }

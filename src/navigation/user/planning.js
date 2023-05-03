@@ -3,10 +3,13 @@ import {
     jsxFrag,
     load,
     initReload,
-    Variable
+    Variable,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
+
+const { svg, fn } = CEM
 
 const testUser = async function (Static) {
     // console.log('=93b4bf=', Static.dataUsers.list_records[0]._id)

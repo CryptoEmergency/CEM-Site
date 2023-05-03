@@ -5,11 +5,14 @@ import {
   init,
   Variable,
   initReload,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 import Elements from '@src/elements/export.js';
-import { NotFound } from "@component/element/index.js";
+import { NotFound } from "@elements/element/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
@@ -26,8 +29,7 @@ const start = function (data, ID) {
       Static.records = await fn.socket.get({
         method: "Exchangers",
         params: {
-          filter: Static.apiFilter,
-          sort: { score: -1 },
+          // filter: Static.apiFilter,
         }
       });
     },
@@ -56,12 +58,11 @@ const start = function (data, ID) {
                         filter["$and"].push({ "list_coins.name": item });
                       }
 
-                      console.log("=1e34f2=", filterCoins, filter);
+                      // console.log("=1e34f2=", filterCoins, filter);
                       Static.records = await fn.socket.get({
                         method: "Exchangers",
                         params: {
                           filter: filter,
-                          sort: { score: -1 },
                           limit: 12,
                         }
                       });
@@ -100,11 +101,11 @@ const start = function (data, ID) {
                     Static.records = await fn.socket.get({
                       method: "Exchangers",
                       params: {
-                        filter: Static.apiFilter,
-                        sort: { score: -1 },
+                        // filter: Static.apiFilter,
                       }
                     });
                     Static.filterCoins = [];
+                    Static.showMore = true
 
                     initReload();
                   }}
@@ -129,7 +130,7 @@ const start = function (data, ID) {
                   </div>
                 </div>
               </div>
-              { !Static.records?.length ? (
+              {!Static.records?.length ? (
                 <NotFound />
               ) : (
                 Static.records.map(function (item, i) {
@@ -180,12 +181,10 @@ const start = function (data, ID) {
                 let tmp = await fn.socket.get({
                   method: "Exchangers",
                   params: {
-                    filter: Static.apiFilter,
-                    limit: 12,
+                    // filter: Static.apiFilter,
                     offset: Static.records.length
                   }
                 })
-
 
                 if (!tmp || !tmp.length) {
                   Static.showMore = false

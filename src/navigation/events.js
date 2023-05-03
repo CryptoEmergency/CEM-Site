@@ -8,16 +8,19 @@ import {
     load,
     Variable,
     initReload,
+    CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
 import Elements from '@src/elements/export.js';
-import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@component/element/index.js';
+import { Avatar, ButtonShowMore, Input, NotFound, TextArea, Select } from '@elements/element/index.js';
 import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
+
+const { images, svg, fn } = CEM
 
 const makeFilter = function (Static) {
     let objReturn = {}
@@ -196,8 +199,18 @@ const start = function (data, ID = "mainBlock") {
                         </div>
                     </div> */}
                     <div class="c-events__container c-container">
-                        <h2 class="c-events__title">{Variable.lang.h.events}</h2>
+                        <div class="G-tfn">
+                            <h8 class="c-events__title_1">
+                                Мероприятия
+                                <img class="Modal-10" src={svg[`filter`]} onclick={() => {
+                                    fn.modals.ModalAddEvents({})
+                                    // fn.modals.ModalAfterRegisterForm({})
+                                }}>
+                                    {/* <img src={`train.filter`}></img> */}
+                                </img>
+                            </h8>
 
+                        </div>
                         <figure class="c-events__cover">
                             <img style="border-radius: 4px; width: 100%" src={images['banners/BlockchainLifeBig']} />
                         </figure>

@@ -1,10 +1,12 @@
-import { jsx, jsxFrag, load, Variable } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, load, Variable, CEM } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/export.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/export.js";
+// import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
 
-import { BlockShowNews, BlockError404 } from "@component/blocks/index.js";
+import { BlockShowNews, BlockError404 } from "@elements/blocks/index.js";
+
+const { svg, fn } = CEM
 
 const start = function (data, ID = "mainBlock") {
   let [Static, item] = fn.GetParams({ data, ID });
@@ -35,15 +37,13 @@ const start = function (data, ID = "mainBlock") {
             ) : null}
 
             {Static.item.preview ? (
-              <Elements.text.Main
-                text={Static.item.preview}
-                class="text mY--30"
-              />
+              <p class="text mY--30">{Static.item.preview}</p>
+
             ) : null}
             {/* <p class="text mr20" tohtml={true}>
               {Static.item.text}
             </p> */}
-            <Elements.text.Main text={Static.item.text} class="text mb--20" />
+            <p class="text mb--20">{Static.item.text}</p>
 
             {Static.item.source ? (
               <p class="source mr20">

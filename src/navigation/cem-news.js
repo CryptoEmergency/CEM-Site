@@ -1,12 +1,15 @@
 import {
   jsx,
   jsxFrag,
-  init
+  init,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import { BlockNews } from '@component/blocks/index.js';
-import svg from "@assets/svg/index.js";
-import { NotFound, ButtonShowMore, LazyImage } from "@component/element/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
+import { NotFound, ButtonShowMore, LazyImage } from "@elements/element/index.js";
+
+const { images, svg, fn } = CEM
+
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   init(
@@ -14,7 +17,7 @@ const start = function (data, ID) {
       fn.initData.news(Static)
       const tmp = await fn.web3Action.getNews()
       Static.list_records = tmp
-    //  console.log("Static.list_records", Static.list_records)
+      //  console.log("Static.list_records", Static.list_records)
     },
     () => {
       return (
@@ -33,7 +36,7 @@ const start = function (data, ID) {
                       :
                       Static.list_records.map(
                         (item) => {
-                       //   console.log("item", item, item[0], item[1])
+                          //   console.log("item", item, item[0], item[1])
                           return (
                             <a
                               class="blog_news_item">

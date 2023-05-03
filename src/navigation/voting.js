@@ -1,8 +1,10 @@
-import { initReload, jsx, jsxFrag, load } from "@betarost/cemserver/cem.js";
+import { initReload, jsx, jsxFrag, load, CEM } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
+
+const { images, svg, fn } = CEM
 
 const arrVoting = [
   {

@@ -4,17 +4,18 @@ import {
     init,
     Variable,
     initReload,
-    sendApi
+    sendApi,
+    CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from '@src/functions/index.js';
-import svg from "@assets/svg/index.js";
+// import { fn } from '@src/functions/index.js';
+// import svg from "@assets/svg/index.js";
 
+import { BlockUserSettingsPage, BlockUserStartupPage } from '@elements/blocks/index.js';
+import { NotFound } from "@elements/element/index.js";
 
-import { BlockUserSettingsPage, BlockUserStartupPage } from '@component/blocks/index.js';
-import { NotFound } from "@component/element/index.js";
+import { Avatar } from '@elements/element/Avatar.js';
 
-import { Avatar } from '@component/element/Avatar.js';
-
+const { svg, fn } = CEM
 
 const deleteUserFromBlacklist = async (user) => {
     let response = await fn.restApi.setUsers.blackList({ _id: user })

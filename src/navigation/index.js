@@ -8,24 +8,24 @@ import {
   Variable,
   Helpers,
   load,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
-import images from "@assets/images/index.js";
-import { Select, NotFound } from "@component/element/index.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
+// import images from "@assets/images/index.js";
+import { Select, NotFound } from "@elements/element/index.js";
 import Elements from "@src/elements/export.js";
 
 import {
   BlockUsers,
-  BlockBanners,
-  BlockExchange,
-  BlockInfoPartners,
   BlockProjects,
   BlockTrade,
   BlockQuestions,
   BlockLentaUsers,
-} from "@component/blocks/index.js";
-import { ButtonShowMore } from "@component/element/index.js";
+} from "@elements/blocks/index.js";
+import { ButtonShowMore } from "@elements/element/index.js";
+
+const { images, svg, fn, elements } = CEM
 
 const makeFilter = function (Static) {
   let objReturn = {};
@@ -87,7 +87,11 @@ const start = function (data, ID) {
   //                 </Elements.MainPreview>
   //                 <BlockProjects />
   //                 <div class="c-main__wrapperbg">
-  //                     <Elements.banners.MainBig />
+  //                    <div>
+  //         <a target="_blank" rel="nofollow nooopener" href="https://blockchain-life.com/asia/en/#tickets-row" style="max-width: 1240px; margin: 10px auto;display: block">
+  //         <img style="border-radius: 4px; width: 100%" src={images['banners/BlockchainLifeBig']} />
+  //     </a>
+  // </div>
   //                 </div>
   //             </div>
   //         )
@@ -276,7 +280,7 @@ const start = function (data, ID) {
               {Variable.lang.button.show_all}
             </a>
           </div>
-          <BlockBanners />
+          <elements.sliderBanners />
           <div class="c-lenta">
             {!Variable[Static.nameRecords] ||
               !Variable[Static.nameRecords].list_records.length ? (

@@ -8,12 +8,15 @@ import {
   Data,
   sendApi,
   Helpers,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from '@src/functions/index.js';
-import svg from '@assets/svg/index.js';
-import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment, MediaButton, MediaPreview } from "@component/element/index.js";
-import { BlockError404 } from '@component/blocks/index.js';
+// import { fn } from '@src/functions/index.js';
+// import svg from '@assets/svg/index.js';
+import { Avatar, LentaMedia, Evaluation, ItemsMenu, ButtonShowMore, ButtonSubmit, TextArea, NotFound, Comment, MediaButton, MediaPreview } from "@elements/element/index.js";
+import { BlockError404 } from '@elements/blocks/index.js';
+
+const { svg, fn } = CEM
 
 let elAnswerForm, elAnswerToggle, elText
 
@@ -595,7 +598,7 @@ const start = function (data, ID) {
                                       fn.modals.ModalNeedAuth()
                                       return
                                     }
-                                    console.log('=686d16= item =',item)
+                                    console.log('=686d16= item =', item)
                                     if (!Static.mainComment.el[index].value.trim().length) { return }
                                     let text = Static.mainComment.el[index].value.trim()
                                     let response = await fn.restApi.setAnswers.comment({ _id: item._id, text })

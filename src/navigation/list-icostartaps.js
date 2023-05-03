@@ -4,11 +4,14 @@ import {
   load,
   initReload,
   Variable,
+  CEM
 } from "@betarost/cemserver/cem.js";
 
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
 import Elements from "@src/elements/export.js";
+
+const { svg, fn } = CEM
 
 let dateDrop,
   showFilters = false;
@@ -97,8 +100,8 @@ const makeFiltersApi = function (Static, onlySearch = false) {
   } else if (
     Static.filtersSearch.textCalendar == Variable.lang.select.upcoming
   ) {
-    filter["$and"] = [];
-    filter["$and"].push({ startDate: { $gte: new Date() } });
+    filter["$or"] = [];
+    filter["$or"].push({ dateIsKnow: true }, { startDate: { $gte: new Date() } });
   } else if (Static.filtersSearch.textCalendar == Variable.lang.select.ended) {
     filter["$and"] = [];
     filter["$and"].push({ endDate: { $lt: new Date() } });
@@ -127,9 +130,6 @@ const start = function (data, ID) {
     },
     {
       name: "IGO",
-    },
-    {
-      name: "TBA",
     },
     {
       name: "IFO",

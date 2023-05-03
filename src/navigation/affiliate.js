@@ -1,11 +1,9 @@
-import { jsx, jsxFrag, init, Variable, load } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, init, Variable, load, CEM } from "@betarost/cemserver/cem.js";
 
-import svg from "@assets/svg/index.js";
-import { fn } from "@src/functions/index.js";
-
-import { BlockAffiliateBanners } from "@component/blocks/index.js";
 
 import Elements from "@src/elements/export.js";
+
+const { images, svg, fn, elements } = CEM
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });
@@ -17,10 +15,8 @@ const start = function (data, ID) {
         <Elements.page.MainContainer
           title={!Static.openModals ? Variable.lang.h.affiliate : null}
         >
-          <Elements.text.Main
-            text={Variable.lang.p.dontHaveFriends}
-            class="el-c el-size--20 el-color--grey el-w--500"
-          />
+          <p class="el-c el-size--20 el-color--grey el-w--500">{Variable.lang.p.dontHaveFriends}</p>
+
           <Elements.page.Container class="affiliate_program_conditions">
             <Elements.cards.Standart
               image={svg["icon/affiliate_conditions_icon-1"]}
@@ -42,7 +38,9 @@ const start = function (data, ID) {
               title={Variable.lang.p.affiliateCondition4}
               description={Variable.lang.p.affiliateConditionDescription4}
             />
+
           </Elements.page.Container>
+          {/* <elements.BlockAffiliateBanners /> */}
         </Elements.page.MainContainer>
       );
     },
@@ -100,7 +98,7 @@ const start = function (data, ID) {
                 </div>
               </div>
             </div>
-            <BlockAffiliateBanners />
+            {/* <BlockAffiliateBanners /> */}
           </div>
         </div>
       );

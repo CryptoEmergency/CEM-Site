@@ -4,9 +4,13 @@ import {
   load,
   initReload,
   Variable,
+  Helpers,
+  CEM
 } from "@betarost/cemserver/cem.js";
-import { fn } from "@src/functions/index.js";
-import svg from "@assets/svg/index.js";
+// import { fn } from "@src/functions/index.js";
+// import svg from "@assets/svg/index.js";
+
+const { svg, fn } = CEM
 
 const showDate = function (start, end) {
   let currentDate = Math.round(new Date() / 1000);
@@ -42,10 +46,8 @@ const start = function (data, ID) {
         // });
         Static.item = await fn.socket.get({
           method: "Ico",
-          params: {
-            filter: { _id: Variable.dataUrl.params },
-            firstRecord: true,
-          }
+          _id: Variable.dataUrl.params,
+          params: {}
         });
       }
       console.log("Static.item", Static.item);
@@ -78,7 +80,7 @@ const start = function (data, ID) {
                       id="startupVideoPlayer"
                       width="100%"
                       height="585px"
-                        src={Static.item.coverVideo}
+                      src={Static.item.coverVideo}
                       title="YouTube video player"
                       frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -102,13 +104,17 @@ const start = function (data, ID) {
                     <span class="info-summ_done">of</span>
                     <span class="info-summ_done">
                       $
-                      {`${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (${Math.round(
-                        ((Static.item.nowMoney && Static.item.nowMoney > 0
-                          ? Static.item.nowMoney
-                          : 0) *
-                          100) /
-                        Static.item.targetMoney
-                      )})%`}
+                      {Static.item.targetMoney <= 0
+                        ?
+                        `${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (0)%`
+                        :
+                        `${new Intl.NumberFormat('de-DE').format(Static.item.targetMoney)} (${Math.round(
+                          ((Static.item.nowMoney && Static.item.nowMoney > 0
+                            ? Static.item.nowMoney
+                            : 0) *
+                            100) /
+                          Static.item.targetMoney
+                        )})%`}
                     </span>
                   </div>
 
@@ -155,10 +161,26 @@ const start = function (data, ID) {
             <div class="ico-details">
               <h4>
                 Token Sale:{" "}
-                {`${fn.getDateFormat(
+                {() => {
+                  if (Static.item.dateIsKnow) {
+                    return (
+                      <span>TBA</span>
+                    )
+                  } else {
+                    return (
+                      <span>
+                        {
+                          `${Helpers.moment(Static.item.startDate).format("YYYY-MM-DD")}
+                            - ${Helpers.moment(Static.item.endDate).format("YYYY-MM-DD")}`
+                        }
+                      </span>
+                    )
+                  }
+                }}
+                {/* {`${fn.getDateFormat(
                   Static.item.startDate,
                   "time"
-                )} - ${fn.getDateFormat(Static.item.endDate, "time")}`}
+                )} - ${fn.getDateFormat(Static.item.endDate, "time")}`} */}
               </h4>
               <div class="ico-details_items">
                 <p>
@@ -166,7 +188,9 @@ const start = function (data, ID) {
                 </p>
                 <p>
                   Token type:{" "}
-                  <span class="details_bold">{Static.item.type}</span>
+                  <span class="details_bold">
+                    {Static.item.type}
+                  </span>
                 </p>
                 <p>
                   {Static.item.category} Token Price:{" "}
@@ -175,25 +199,23 @@ const start = function (data, ID) {
                   </span>
                 </p>
                 <p>
-                  Fundraising Goal:{" "}
+                  Tokens for sale:{" "}
                   <span class="details_bold">
-                    {Static.item.targetSell} Token{" "}
+                    {Static.item.targetSell.toLocaleString()} Token{" "}
                   </span>
                 </p>
                 <p>
                   Total Tokens:{" "}
                   <span class="details_bold">
-                    {Static.item.totalSupply} token
+                    {Static.item.totalSupply.toLocaleString()} token
                   </span>
                 </p>
                 <p>
                   Available for Token Sale:{" "}
                   <span class="details_bold">
-                    {new Intl.NumberFormat('de-DE').format(
-                      Math.round(
-                        (Static.item.forSell * 100) / Static.item.totalSupply
-                      )
-                    )}
+                    {
+                      ((Static.item.forSell / Static.item.totalSupply) * 100).toFixed(1)
+                    }
                     %
                   </span>
                 </p>
