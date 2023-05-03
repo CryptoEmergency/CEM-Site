@@ -179,42 +179,47 @@ const start = function (data, ID = "mainBlock") {
                                 }}
                             </div>
                             <div class="cards">
-                                {Static.records.map((item) => {
-                                    return (
-                                        <li class="card">
-                                            <a
-                                                href={`/crypto-university/show/${item._id}`}
-                                                class="card__link"
-                                                onclick={function (e) {
-                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
-                                                }}
-                                            >
-                                                <figure class="card__figure">
-                                                    {item.icon
-                                                        ?
-                                                        <img
-                                                            class="card__logo"
-                                                            src={`/assets/upload/worldPress/${item.icon}`}
-                                                            width="100"
-                                                            height="100"
-                                                        />
-                                                        :
-                                                        <img
-                                                            class="card__logo"
-                                                            src={images["crypto-university"]}
-                                                            width="100"
-                                                            height="100"
-                                                        />
-                                                    }
-                                                </figure>
-                                                <div class="card__description">
-                                                    <h3 class="card__companyname">{item.nameCompany}</h3>
-                                                    <div class="card__info">{item.description}</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    )
-                                })}
+                                <div class="cards__container">
+
+
+
+                                    {Static.records.map((item) => {
+                                        return (
+                                            <li class="card">
+                                                <a
+                                                    href={`/crypto-university/show/${item._id}`}
+                                                    class="card__link"
+                                                    onclick={function (e) {
+                                                        fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                    }}
+                                                >
+                                                    <figure class="card__figure">
+                                                        {item.icon
+                                                            ?
+                                                            <img
+                                                                class="card__logo"
+                                                                src={`/assets/upload/worldPress/${item.icon}`}
+                                                                width="100"
+                                                                height="100"
+                                                            />
+                                                            :
+                                                            <img
+                                                                class="card__logo"
+                                                                src={images["crypto-university"]}
+                                                                width="100"
+                                                                height="100"
+                                                            />
+                                                        }
+                                                    </figure>
+                                                    <div class="card__description">
+                                                        <h3 class="card__companyname">{item.nameCompany}</h3>
+                                                        <div class="card__info">{item.description}</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>
