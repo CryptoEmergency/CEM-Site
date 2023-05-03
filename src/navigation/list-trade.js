@@ -14,8 +14,68 @@ import { ButtonShowMore, NotFound } from "@elements/element/index.js";
 
 const { svg, fn } = CEM
 
+const showBtn = function (Static) {
+  return listCategories.map((item) => {
+    return (
+      <div
+        class={[
+          "tag_button",
+          "tag_button-startap",
+          Static.filtersSearch.categoryActive == item
+            ? "tag_button_active"
+            : null,
+        ]}
+        onclick={async () => {
+          Static.filtersSearch.categoryActive = item;
+          filterExchange = makeFiltersApi(Static)
+          Static.records = await fn.socket.get({
+            method: "Exchanges",
+            params: {
+              filter: filterExchange.filter,
+              sort: filterExchange.sort,
+            }
+          });
+          initReload();
+        }}
+      >
+        <span>{item}</span>
+      </div>
+    );
+  });
+};
+
+const makeFiltersApi = function (Static) {
+  let filter = {};
+  let sort = { _id: -1 };
+
+  if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
+    filter.category = Static.filtersSearch.categoryActive;
+  }
+
+  if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
+    filter.category = Static.filtersSearch.categoryActive;
+  }
+
+  if (Static.filtersSearch.filterCheck) {
+    filter.checked = true;
+  }
+
+  return { filter, sort };
+};
+
+let filterExchange;
+let listCategories;
+
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
+  listCategories = [
+    Variable.lang.categoryName.all,
+    "DEX",
+    "CEX"
+  ]
+  Static.filtersSearch = {
+    categoryActive: Variable.lang.categoryName.all,
+  };
   Static.showMore = true
 
   load({
@@ -37,6 +97,7 @@ const start = function (data, ID) {
           class="crypto_exchanges_full_page">
           <div id="crypto_exchanges" class="crypto_exchanges">
             <h4>{Variable.lang.h.trade}</h4>
+            <div class="tags tags--static">{showBtn(Static)}</div>
             <div class="statistics-preview list_trade_page">
               <div class="crypto_exchanges-row">
                 <div class="crypto_exchanges-cell">#</div>
@@ -54,6 +115,7 @@ const start = function (data, ID) {
                 </div>
                 <div></div>
               </div>
+
               {!Static.records?.length ?
                 <NotFound />
                 : (
@@ -71,7 +133,7 @@ const start = function (data, ID) {
                           <div>
                             <span>
                               <span class="list_exanges_image_container ">
-                                <img class="crypto_coin_icon" src={item.logo} />
+                                <img class="crypto_coin_icon" src={`/assets/upload/worldPress/${item.logo}`} />
                               </span>
                               {item.name}
                             </span>
@@ -95,7 +157,7 @@ const start = function (data, ID) {
                         <div class="crypto_exchanges-cell">
                           <div>
                             <span
-                              class="crypto_exchanges_percent_green "
+                              class="crypto_exchanges_percent_green"
                               style="margin-right: 50px;"
                             >
                               <span class="crypto_exchanges_percent_green_mobile">
