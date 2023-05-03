@@ -23,6 +23,17 @@ const start = function (data, ID) {
           >
             ggggggggggggggggggggggggg
           </button>
+
+          <input
+            placeholder="Введите название мероприятий"
+            type="date"
+            style="border-radius: 10px;"
+          // value="0000-00-00" 
+          // min="2023-01-01"
+          //  max="2026-12-31"
+          >
+
+          </input>
         </div>
       )
     }

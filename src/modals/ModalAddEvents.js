@@ -51,11 +51,20 @@ const ModalAddEvents = function ({ icon, text }, ID) {
                                     <label>Название мероприятия</label>
                                     <input placeholder="Введите название мероприятий" type="text" style="border-radius: 10px;">
                                     </input>
-                                    <label> Дата проведения
-                                        <input placeholder="Введите название мероприятий" type="date" id="start" style="border-radius: 10px;"
-                                            value="2023-04-15" min="2023-01-01" max="2024-12-31">
+                                    <label for="start"> Дата проведения
+                                        <input
+                                            placeholder="Введите название мероприятий"
+                                            type="date"
+                                            style="border-radius: 10px;"
+                                            value="0000-00-00"
+                                            min="2023-01-01"
+                                            max="2026-12-31"
+                                        >
 
                                         </input>
+
+
+
                                     </label>
 
                                     <button type="submit" class="fa-fa-search">
