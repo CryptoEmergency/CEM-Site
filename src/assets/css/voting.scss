@@ -55,6 +55,8 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     }
 
         
+ 
+
     .list-el::marker{
         list-style-type: decimal;
         
@@ -112,6 +114,24 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 //     margin-top: 15px;
 //     cursor: pointer;
 // }
+.bot-btne{
+    background: $fiolet;
+    border-radius: 10px;
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 4px #5a01a7;
+    padding: 5px;
+    border: 5px solid #FFFFFF;
+    color: #FFFFFF;
+    background-color:#002ead;
+    // transition: 0.7s;
+    cursor: pointer;
+}
+
+.more-deciveee{
+    margin-right: 150px;
+}
+
 .btn{
     background: $fiolet;
     border-radius: 10px;
