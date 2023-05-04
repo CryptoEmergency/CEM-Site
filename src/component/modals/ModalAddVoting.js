@@ -1,8 +1,6 @@
-import { jsx, jsxFrag, init, initReload, CEM } from "@betarost/cemserver/cem.js";
-// import { fn } from "@src/functions/index.js";
-// import svg from "@assets/svg/index.js";
-
-const { svg, fn } = CEM
+import { jsx, jsxFrag, init, initReload } from "@betarost/cemserver/cem.js";
+import { fn } from "@src/functions/index.js";
+import svg from "@assets/svg/index.js";
 
 const ModalAddVoting = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });
@@ -58,16 +56,24 @@ const ModalAddVoting = function (data, ID) {
                     Static.forms.descriptoin = this.value;
                   }}
                 ></input>
+                <label> Варианты ответа</label> 
                 <div class="btn-block">
-                
-              <label class="more-deciveee">
-              <intput> Варианты ответа</intput>
-              
-                {/* <label> Варианты ответа</label>  */}
-                
+
+                <button>
                 <button
                   class="bot-btne btn" 
-                  style="margin-left:6px;"
+                  onclick={() => {
+                    Static.forms.responseOptions.splice (1, 1);
+                    initReload();
+                  }}
+                >
+                  -
+                  
+                </button>
+
+                </button>
+                <button
+                  class="bot-btne btn" 
                   onclick={() => {
                     Static.forms.responseOptions.push({});
                     initReload();
@@ -75,31 +81,14 @@ const ModalAddVoting = function (data, ID) {
                 >
                   +
                 </button>
-                
-                
-
-                
-                <button
-                  class="bot-btne btn" 
-                  style="margin-left:10px"
-                  onclick={() => {
-                    Static.forms.responseOptions.splice (0, 1);
-                    initReload();
-                  }}
-                >
-                  -
-                </button>
-                </label>
                 </div>
                 {Static.forms.responseOptions.map((item, index) => {                 
                   return (
                     <input
                       placeholder="Введите ваше сообщение"
-                      
                       oninput={function () {
                         Static.forms.responseOptions[index].name = this.value;
                       }}
-                      
                       
                     ></input>
                   );
