@@ -46,7 +46,7 @@ const showBtn = function (Static) {
 
 const makeFiltersApi = function (Static) {
   let filter = {};
-  let sort = { _id: -1 };
+  let sort = { score: 1 };
 
   if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
     filter.category = Static.filtersSearch.categoryActive;
@@ -82,12 +82,12 @@ const start = function (data, ID) {
     ID,
     fnLoad: async () => {
       Static.nameRecords = "PageTrades"
-      Static.apiFilter = {}
+      // Static.apiFilter = {}
       Static.records = await fn.socket.get({
         method: "Exchanges",
         params: {
-          filter: Static.apiFilter,
-          sort: { score: -1 }
+          filter: makeFiltersApi(Static),
+          sort: { score: 1 }
         }
       })
     },
@@ -193,8 +193,8 @@ const start = function (data, ID) {
               let tmp = await fn.socket.get({
                 method: "Exchanges",
                 params: {
-                  filter: Static.apiFilter,
-                  sort: { score: -1 },
+                  filter: makeFiltersApi(Static),
+                  sort: { score: 1 },
                   limit: 50,
                   offset: Static.records.length
                 }
