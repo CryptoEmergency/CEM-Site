@@ -46,7 +46,7 @@ const showBtn = function (Static) {
 
 const makeFiltersApi = function (Static) {
   let filter = {};
-  let sort = { score: 1 };
+  let sort = { score: -1 };
 
   if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
     filter.category = Static.filtersSearch.categoryActive;
@@ -87,7 +87,7 @@ const start = function (data, ID) {
         method: "Exchanges",
         params: {
           filter: makeFiltersApi(Static),
-          sort: { score: 1 }
+          sort: { score: -1 }
         }
       })
     },
@@ -194,12 +194,11 @@ const start = function (data, ID) {
                 method: "Exchanges",
                 params: {
                   filter: makeFiltersApi(Static),
-                  sort: { score: 1 },
+                  sort: { score: -1 },
                   limit: 50,
                   offset: Static.records.length
                 }
               })
-
 
               if (!tmp || !tmp.length) {
                 Static.showMore = false
