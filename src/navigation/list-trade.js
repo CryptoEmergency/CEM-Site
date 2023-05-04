@@ -108,7 +108,7 @@ const start = function (data, ID) {
             {Variable.lang.tableTitle.volume}
           </div> */}
                 <div class="crypto_exchanges-cell">
-                  {Variable.lang.tableTitle.countVisitors}
+                  {Variable.lang.tableTitle.rank}
                 </div>
                 <div class="crypto_exchanges-cell">
                   {Variable.lang.tableTitle.chart}
@@ -163,7 +163,7 @@ const start = function (data, ID) {
                               <span class="crypto_exchanges_percent_green_mobile">
                                 <img src={svg.exange_visitors} />
                               </span>
-                              {fn.numFormat(item.weeklyVisits)}
+                              {fn.numFormat(item.score)}
                             </span>
                           </div>
                         </div>
