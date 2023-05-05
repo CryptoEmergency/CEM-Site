@@ -31,7 +31,7 @@ const Tags = function ({ Static, classActive, text, type }) {
                 }
                 Static.activeCategory = type;
                 // await fn.restApi.getNews({ name: Static.nameRecords, filter: Static.apiFilter })
-                Static.records = await fn.socket.get({ method: "CryptoUniversities", params: { filter: makeFilter(Static) } })
+                Static.records = await fn.socket.get({ method: "Courses", params: { filter: makeFilter(Static) } })
                 initReload()
             }}>
             <span>{text}</span>
@@ -124,10 +124,10 @@ const start = function (data, ID = "mainBlock") {
 
                 }
             ]
-            Static.records = await fn.socket.get({ method: "CryptoUniversities", params: { filter: {} } })
+            Static.records = await fn.socket.get({ method: "Courses", params: { filter: {} } })
         },
         fn: () => {
-            // console.log('=38ddb1=', Static.records)
+            console.log('=38ddb1=', Static.records)
             return (
                 <div class="page-main">
                     <div class="page-main__container">
@@ -179,246 +179,52 @@ const start = function (data, ID = "mainBlock") {
                                 }}
                             </div>
                             <div class="cards">
-                                <div class="cards__container">
+                                <div class="cards__container cards__container_type_courses">
 
-
-
-                                    {Static.records.map((item) => {
-                                        return (
-                                            <li class="card">
-                                                <a
-                                                    href={`/crypto-university/show/${item._id}`}
-                                                    class="card__link"
-                                                    onclick={function (e) {
-                                                        fn.siteLink(e, { title: "", item: {}, items: {} })
-                                                    }}
-                                                >
-                                                    <figure class="card__figure">
-                                                        {item.icon
-                                                            ?
-                                                            <img
-                                                                class="card__logo"
-                                                                src={`/assets/upload/worldPress/${item.icon}`}
-                                                                width="100"
-                                                                height="100"
-                                                            />
-                                                            :
-                                                            <img
-                                                                class="card__logo"
-                                                                src={images["crypto-university"]}
-                                                                width="100"
-                                                                height="100"
-                                                            />
-                                                        }
-                                                    </figure>
-                                                    <div class="card__description">
-                                                        <h3 class="card__companyname">{item.nameCompany}</h3>
-                                                        <div class="card__info">{item.description}</div>
+                                {Static.records.map((item) => {
+                                    return (
+                                        <li class="card card_courses">
+                                            <a 
+                                                class="card__link card__link_background"
+                                                href={`/crypto-university/course/${item._id}`}
+                                                onclick={function (e) {
+                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                }}
+                                            >
+                                                <div class="card__title card__title_courses">
+                                                    {item.name}
+                                                </div>
+                                                <div class="card__description card__description_courses">
+                                                    {item.description}
+                                                </div>
+                                                <div class="card__container card__container_row card__container_indent_course">
+                                                    <div class="card__cost">
+                                                        <span>{item.cost} ₽/мес.</span>
                                                     </div>
-                                                </a>
-                                            </li>
-                                        )
-                                    })}
+                                                    <div class="card__container card__container_row">
+                                                        <div class="card__duration">
+                                                            <span>{item.duration}</span>
+                                                        </div>
+                                                        <div class="card__duration-text">
+                                                            <span class="card__duration-text_size">Месяца</span>
+                                                            <span class="card__duration-text_color">Срок обучения</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card__more card__more_indent_course">
+                                                    <span>Больше информации</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    )
+                                })}
+                                
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             )
-
-            return (
-                <Elements.page.MainContainer
-                    class="c-criptouniversity">
-                    <div class="swiper-container">
-                        <div class="swiper swiper-post_university" After={() => swiperGo()}>
-                            <div class="swiper-wrapper">
-                                <a class="swiper-slide">
-                                    <div class="swiper-post_media_image_container">
-                                        <img style="height: 400px; border-radius: 4px" src="https://www.block-chain24.com/sites/default/files/styles/full_bg/public/img/kembridzhskii_universitet_zapuskaet_kripto-issledovatelskii_proekt_s_mvf_i_bis.jpeg?itok=8gdkoX1L" />
-                                    </div>
-                                </a>
-                                <a class="swiper-slide">
-                                    <div class="swiper-post_media_image_container">
-                                        <img style="height: 400px; border-radius: 4px" src="https://tatcenter.ru/images/art/95566.jpg" />
-                                    </div>
-                                </a>
-                                <a class="swiper-slide">
-                                    <div class="swiper-post_media_image_container">
-                                        <img style="height: 400px; border-radius: 4px" src="https://bits.media/upload/resize_cache/webp/upload/iblock/23a/rumynskiy_universitet_nachnet_prinimat_kriptoaktiv_elrond_dlya_oplaty_obucheniya.webp" />
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-pagination swiper-pagination-post_media"></div>
-                            <div class="swiper-scrollbar-post_media"></div>
-                        </div>
-                    </div>
-                    <div class="c-criptouniversity__container c-container">
-                        <div class="tags tags--static c-criptouniversity__tags">
-                            <Tags
-                                Static={Static}
-                                text={Variable.lang.categoryName.all}
-                                classActive={Static.activeCategory == "All" ? "tag_button_active" : ""}
-                                type="All"
-                            />
-                            {() => {
-                                // if (Variable[Static.nameRecords + "Category"]) {
-                                let arrReturn =
-                                    // Variable[Static.nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
-                                    Static.CryptoUniversityCategory.filter((item) => item.name !== null).map((item) => {
-
-                                        return (
-                                            <Tags
-                                                Static={Static}
-                                                text={Variable.lang.categoryName[item.name]}
-                                                classActive={Static.activeCategory == item.name ? "tag_button_active" : ""}
-                                                type={item.name}
-                                            />
-                                        )
-                                    })
-                                return arrReturn
-                                // }
-                            }}
-                        </div>
-
-                        <ul class="c-criptouniversity__cards">
-                            {Static.records.map((item) => {
-                                return (
-                                    <li class="c-criptouniversity__card">
-                                        <a
-                                            href={`/crypto-university/show/${item._id}`}
-                                            class="c-criptouniversity__link"
-                                            onclick={function (e) {
-                                                fn.siteLink(e, { title: "", item: {}, items: {} })
-                                            }}
-                                        >
-                                            <figure class="c-criptouniversity__wrapperimg">
-                                                {/* <img 
-                                                    class="c-criptouniversity__logo" 
-                                                    src={`/assets/upload/worldPress/${item.icon}`}
-                                                    width="100" 
-                                                    height="100" 
-                                                /> */}
-                                                {item.icon
-                                                    ?
-                                                    <img
-                                                        class="c-criptouniversity__logo"
-                                                        src={`/assets/upload/worldPress/${item.icon}`}
-                                                        width="100"
-                                                        height="100"
-                                                    />
-                                                    :
-                                                    <img
-                                                        class="c-criptouniversity__logo"
-                                                        src={images["crypto-university"]}
-                                                        width="100"
-                                                        height="100"
-                                                    />
-                                                }
-                                            </figure>
-                                            <a class="c-criptouniversity__btn c-button c-button--gradient2" href="">
-                                                <span class="c-button__text">Кнопка</span>
-                                            </a>
-                                            <h3 class="c-criptouniversity__companyname">{item.nameCompany}</h3>
-                                            <p class="c-criptouniversity__slogan">{item.tagline}</p>
-                                            <p class="c-criptouniversity__shortdescription">
-                                                {item.aboutCompany}
-                                                {/* Краткое описание компании на несколько строк
-                                                <br />
-                                                Возможно строки разделены переносами. */}
-                                            </p>
-                                            <div class="c-criptouniversity__info">
-                                                {item.description}
-                                                {/* Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. */}
-                                            </div>
-                                        </a>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-
-                        {/* <ul class="c-criptouniversity__cards">
-                            <li class="c-criptouniversity__card">
-                                <a
-                                    href={`/crypto-university/show/1`}
-                                    class="c-criptouniversity__link"
-                                    onclick={function (e) {
-                                        fn.siteLink(e, { title: "", item: {}, items: {} })
-                                    }}
-                                >
-                                    <figure class="c-criptouniversity__wrapperimg">
-                                        <img class="c-criptouniversity__logo" src="https://www.block-chain24.com/sites/default/files/styles/full_bg/public/img/kembridzhskii_universitet_zapuskaet_kripto-issledovatelskii_proekt_s_mvf_i_bis.jpeg?itok=8gdkoX1L" width="100" height="100" />
-                                    </figure>
-                                    <a class="c-criptouniversity__btn c-button c-button--gradient2" href="">
-                                        <span class="c-button__text">Кнопка</span>
-                                    </a>
-                                    <h3 class="c-criptouniversity__companyname">"Название компании очень-преочень длинное"</h3>
-                                    <p class="c-criptouniversity__slogan">Какой-то короткий слоган компании</p>
-                                    <p class="c-criptouniversity__shortdescription">
-                                        Краткое описание компании на несколько строк
-                                        <br />
-                                        Возможно строки разделены переносами.
-                                    </p>
-                                    <div class="c-criptouniversity__info">
-                                        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="c-criptouniversity__card">
-                                <a
-                                    href={`/crypto-university/show/2`}
-                                    class="c-criptouniversity__link"
-                                    onclick={function (e) {
-                                        fn.siteLink(e, { title: "", item: {}, items: {} })
-                                    }}
-                                >
-                                    <figure class="c-criptouniversity__wrapperimg">
-                                        <img class="c-criptouniversity__logo" src="https://www.block-chain24.com/sites/default/files/styles/full_bg/public/img/kembridzhskii_universitet_zapuskaet_kripto-issledovatelskii_proekt_s_mvf_i_bis.jpeg?itok=8gdkoX1L" width="100" height="100" />
-                                    </figure>
-                                    <a class="c-criptouniversity__btn c-button c-button--gradient2" href="">
-                                        <span class="c-button__text">Кнопка</span>
-                                    </a>
-                                    <h3 class="c-criptouniversity__companyname">"Название компании очень-преочень длинное"</h3>
-                                    <p class="c-criptouniversity__slogan">Какой-то короткий слоган компании</p>
-                                    <p class="c-criptouniversity__shortdescription">
-                                        Краткое описание компании на несколько строк
-                                        <br />
-                                        Возможно строки разделены переносами.
-                                    </p>
-                                    <div class="c-criptouniversity__info">
-                                        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="c-criptouniversity__card">
-                                <a
-                                    href={`/crypto-university/show/3`}
-                                    class="c-criptouniversity__link"
-                                    onclick={function (e) {
-                                        fn.siteLink(e, { title: "", item: {}, items: {} })
-                                    }}
-                                >
-                                    <figure class="c-criptouniversity__wrapperimg">
-                                        <img class="c-criptouniversity__logo" src="https://www.block-chain24.com/sites/default/files/styles/full_bg/public/img/kembridzhskii_universitet_zapuskaet_kripto-issledovatelskii_proekt_s_mvf_i_bis.jpeg?itok=8gdkoX1L" width="100" height="100" />
-                                    </figure>
-                                    <a class="c-criptouniversity__btn c-button c-button--gradient2" href="">
-                                        <span class="c-button__text">Кнопка</span>
-                                    </a>
-                                    <h3 class="c-criptouniversity__companyname">"Название компании очень-преочень длинное"</h3>
-                                    <p class="c-criptouniversity__slogan">Какой-то короткий слоган компании</p>
-                                    <p class="c-criptouniversity__shortdescription">
-                                        Краткое описание компании на несколько строк
-                                        <br />
-                                        Возможно строки разделены переносами.
-                                    </p>
-                                    <div class="c-criptouniversity__info">
-                                        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
-                                    </div>
-                                </a>
-                            </li>
-                        </ul> */}
-                    </div>
-                </Elements.page.MainContainer>
-            );
         }
     })
     return

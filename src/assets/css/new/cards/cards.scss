@@ -16,6 +16,14 @@
             position: relative;
             min-height: 200px;
         }
+
+        &_type_courses {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 12px;
+            position: relative;
+            // min-height: 334px;
+        }
     }
 
     &__card-users {

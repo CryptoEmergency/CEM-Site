@@ -1,0 +1,109 @@
+.course {
+
+    &__container {
+        padding-bottom: 40px;
+    }
+
+    &__header {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        padding: 20px;
+        color: inherit;
+        text-decoration: none;
+        border-radius: 3px;
+        border: 1px solid #63697A;
+        background: #363B4B;
+    
+        @media(max-width: 979px) {
+            margin-bottom: 90px;
+        }
+    }
+
+    &__title {
+        display: block;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &__description {
+        text-indent: 30px;
+        line-height: 20px;
+    }
+
+    &__teachers {
+        margin-bottom: 30px;
+
+        h3 {
+            text-align: center;
+        }
+    }
+
+    &__tariff {
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        &-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .tariff {
+                max-width: 400px;
+                min-width: 300px;
+                margin-right: 10px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #363B4B;
+                border-radius: 8px;
+                border: 1px solid #4c546a;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &__title {
+                    background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    text-align: center;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid #767e94;
+                }
+
+                &__list {
+                    // padding-left: 16px;
+                    margin-bottom: 20px;
+
+                    li {
+                        padding-bottom: 10px;
+                        text-align: center;
+                    }
+                }
+
+                &__cost {
+                    padding-top: 10px;
+                    font-size: 20px;
+                    font-style: italic;
+                }
+
+                &__buy {
+                    margin-right: 0;
+                }
+            }
+    }
+}
