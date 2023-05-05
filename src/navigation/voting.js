@@ -1,10 +1,16 @@
-import { initReload, jsx, jsxFrag, load, CEM } from "@betarost/cemserver/cem.js";
+import {
+  initReload,
+  jsx,
+  jsxFrag,
+  load,
+  CEM,
+} from "@betarost/cemserver/cem.js";
 
 // import { fn } from "@src/functions/index.js";
 // import svg from "@assets/svg/index.js";
 // import images from "@assets/images/index.js";
 
-const { images, svg, fn } = CEM
+const { images, svg, fn } = CEM;
 
 const arrVoting = [
   {
@@ -42,7 +48,7 @@ const arrVoting = [
     ],
     active: false,
   },
-  
+
   // {
   //   title: "Самые сложные предметы",
   //   discription: "Выбери свой любимый предмет",
@@ -97,7 +103,16 @@ const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });
   load({
     ID,
+    fnLoad: async () => {
+      console.log("=d405cb=", 123);
+      Static.arrVoting = await fn.socket.get({
+        method: "Votings",
+        params: { filter: {} },
+      });
+    },
     fn: () => {
+      console.log("Static.arrVoting =", Static.arrVoting);
+
       return (
         <div class="container-voice">
           <div>
@@ -115,23 +130,22 @@ const start = function (data, ID) {
           </div>
 
           <div class="wrap-voices">
-            {arrVoting.map((item, index) => {
-              {
-                /* console.log(item, index); */
-              }
+            {Static.arrVoting.map((item, index) => {
               return (
                 <div class="voice-inner">
                   <h3 class="name">{item.title}</h3>
-                  <p class="description">{item.discription}</p>
+                  <p class="description">{item.description}</p>
+
                   <ol class="list-voice">
-                    {item.voting.map((item2, index2) => {
+                    {item.responseOptions.map((item2, index2) => {
                       {
                         /* console.log("====", item.active); */
                       }
+                      console.log(item2)
                       return (
                         <li class="list-el">
                           <span>
-                            {index2 + 1}. {item2}
+                            {index2 + 1}. {item2.name}
                           </span>
                           <img
                             class={[
@@ -152,6 +166,7 @@ const start = function (data, ID) {
                       );
                     })}
                   </ol>
+
                   <div class="wrap-btn">
                     <button
                       class={["btn", Static.checked ? "btn-checked" : null]}
