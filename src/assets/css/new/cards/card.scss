@@ -1,16 +1,118 @@
 .card {
-    padding: 15px;
     border-radius: 3px;
     border: 1px solid #63697A;
     background: #363B4B;
     list-style-type: none;
 
+    &__container {
+        &_row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &_indent_course {
+            padding-top: 40px;
+        }
+    }
+
+    &_courses {
+        border: 4px dashed #593F62;
+        border-radius: 20px;
+        background: #1D222E;
+    }
+
     &__link {
-        display: grid;
-        grid-template-columns: 20% 80%;
-        grid-template-rows: auto;
-        color: inherit;
-        text-decoration: none;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        color: #ffffff;
+
+        &_background {
+                background-image: url("../images/background/course-background.png");
+            }
+    }
+
+    &__title {
+        &_courses {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 29px;
+        }
+    }
+
+    &__description {
+        font-size: 16px;
+        line-height: 24px;
+
+        &_courses {
+            padding-top: 20px;
+            -webkit-line-clamp: 3;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+
+    &__cost {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 24px;
+    }
+
+    &__duration {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        padding: 7px 22px;
+        background: linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%);
+        border-radius: 20px;
+
+        span {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 24px;
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+
+            &_size {
+                font-size: 16px;
+                line-height: 24px;
+            }
+
+            &_color {
+                font-size: 14px;
+                color: #8EA2D3;
+            }
+        }
+    }
+
+    &__more {
+
+        &_indent_course {
+            padding-top: 30px;
+        }
+        
+        span {
+            display: inline-flex;
+            cursor: pointer;
+            // transition: color .2s;
+            padding: 16px 31px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 115%;
+            border-radius: 20px;
+            background: 
+                    linear-gradient(#1D222E, #1D222E) padding-box,
+                    linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%)border-box;
+            border-radius: 50em;
+            border: 2px solid transparent;
+        }
     }
 
     &__figure {
