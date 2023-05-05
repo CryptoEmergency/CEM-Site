@@ -221,7 +221,7 @@ const start = function (data, ID = "mainBlock") {
                             <img style="border-radius: 4px; width: 100%" src={images['banners/BlockchainLifeBig']} />
                         </figure>
 
-                        <div class="c-events__searchblock c-search">
+                        {/* <div class="c-events__searchblock c-search">
                             <div class="c-search__container">
                                 <div class="c-search__wrapper">
                                     <img class="c-search__icon" src={svg.search_icon} />
@@ -250,7 +250,7 @@ const start = function (data, ID = "mainBlock") {
                                     <div style="display: none;" class="question_search_help"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div
                             class="c-events__filter c-friends__additional"
