@@ -214,6 +214,9 @@
 
 
 
+
+
+//
 .G-tfn {
     display: flex;
 
@@ -239,28 +242,6 @@
     text-align: center;
     font-weight: 700;
     //margin: 25px 0;
-
-    // .Modal-10 {
-    //     display: flex;
-    //     align-self: center;
-    //     float: right;
-    //     //display: block;
-    //     //left: auto !important;
-    //     //right: 12px;
-    //     //cursor: pointer;
-    //     //position: relative;
-
-    //     width: 24px;
-    //     //height: 22px;
-    //     //right: 30px;
-    //     //top: 25px;
-    //     color: #4f5362;
-    //     border: none;
-    //     //Добавитьо какую то иконку 
-    //     //z-index: 100;
-    //     //cursor: pointer;
-
-    // }
 }
 
 .Modal-10 {
@@ -379,24 +360,34 @@
     cursor: pointer;
 }
 
-.fa-fa-search {
-    display: grid;
-    //justify-self: center;
-    //float: left;
-    width: 20%;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
-    padding: 10px;
-    border-radius: 8px;
-    height: 45 px;
-    text-decoration: none;
-    color: white;
-    //display: flex;
-    text-align: center;
-    //justify-content: space-between;
-    font-size: 20px;
+.fa-fa {
+    display: flex;
+    justify-content: center;
+
+    .fa-fa-search {
+        display: grid;
+        //justify-self: center;
+        //float: left;
+        width: 20%;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
+        padding: 10px;
+        border-radius: 8px;
+        height: 45 px;
+        text-decoration: none;
+        color: white;
+        //display: flex;
+        text-align: center;
+        //justify-content: space-between;
+        font-size: 20px;
+    }
+}
+
+
+.calendar__1 {
+    display: block;
 }
 
 .polya-1 {}
