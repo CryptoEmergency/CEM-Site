@@ -199,16 +199,22 @@ const start = function (data, ID = "mainBlock") {
                         </div>
                     </div> */}
                     <div class="c-events__container c-container">
+
                         <div class="G-tfn">
-                            <h8 class="c-events__title_1">
+                            <h8
+                                class="c-events__title_1"
+                                id="con1">
                                 Мероприятия
+
+                            </h8>
+                            <div id="con2">
                                 <img class="Modal-10" src={svg[`filter`]} onclick={() => {
                                     fn.modals.ModalAddEvents({})
                                     // fn.modals.ModalAfterRegisterForm({})
                                 }}>
                                     {/* <img src={`train.filter`}></img> */}
                                 </img>
-                            </h8>
+                            </div>
 
                         </div>
                         <figure class="c-events__cover">

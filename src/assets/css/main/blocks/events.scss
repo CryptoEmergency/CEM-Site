@@ -215,26 +215,30 @@
 
 
 .G-tfn {
-    margin: 10px;
     display: flex;
-    //grid-template-columns: auto;
-    //justify-content: space-between;
-    //text-align: center;
-    justify-content: center;
+
+    flex-direction: row;
+
+    justify-content: flex-start;
+
+    border: 5px solid black;
+
+    padding: 20px;
 }
+
 
 .c-events__title_1 {
     //display: grid;
     //grid-template-columns: 14fr 1fr;
     //justify-content: space-between;
-    margin: 0;
-    margin-bottom: 1rem;
+    //margin: 0;
+    //margin-bottom: 1rem;
     font-size: 44px;
     line-height: 115%;
     color: #FFFFFF;
     text-align: center;
     font-weight: 700;
-    margin: 25px 0;
+    //margin: 25px 0;
 
     // .Modal-10 {
     //     display: flex;
@@ -261,18 +265,18 @@
 
 .Modal-10 {
 
-    display: block;
-    left: auto !important;
-    right: -150px;
-    cursor: pointer;
-    position: relative;
-    margin-top: 10px;
+    //display: block;
+    //left: auto !important;
+    //right: -150px;
+    //cursor: pointer;
+    //position: relative;
+    //margin-top: 10px;
     width: 30px;
-    //height: 22px;
+    height: 22px;
     //right: 30px;
     //top: 25px;
     color: #4f5362;
-    border: none;
+    //border: none;
     //Добавитьо какую то иконку 
     //z-index: 100;
     //cursor: pointer;
@@ -281,6 +285,32 @@
 
 
 
+#con1 {
+
+    width: 95%;
+    // border: 2px solid black;
+    //background-color: green;
+    // height: 150px;
+    // border-right: 0px;
+    text-align: center;
+}
+
+#con2 {
+    width: 5%;
+    // border: 2px solid black;
+    //background-color: yellow;
+    // height: 300px;
+    // text-align: left;
+
+    img {
+        width: 50px;
+        height: 40px;
+    }
+}
+
+// input[type=date]::-webkit-calendar-picker-indicator {
+//     list-style-type: none;
+// }
 
 .conteiner_moda-2 {
     display: flex;

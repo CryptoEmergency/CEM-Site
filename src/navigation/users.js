@@ -119,6 +119,45 @@ const start = function (data, ID) {
             //                     </div>
             //                 </div>
 
+            //                 <div class="cards">
+            //                     <div class="cards__container cards__container_type_users">
+            //                         <div class="cards__card-users">
+            //                             <div class="cards__card-users_background_light">
+            //                                 <div class="cards__rank">
+            //                                     <img src={images.content_creator} />
+            //                                 </div>
+            //                             </div>
+            //                             <div class="cards__avatar">
+            //                                 <a href={`/user/${Variable.myInfo.nickname}`} >
+            //                                     {/* <div class="c-avataricon"> */}
+            //                                     <img
+            //                                         class={[
+            //                                             // "c-avataricon__frame",
+            //                                         ]}
+            //                                         src={svg["profile/frame/default"]}
+            //                                     />
+            //                                     <img
+            //                                         // class="c-avataricon__photo"
+            //                                         // style="position: absolute; top: 50%;left: 50%;z-index: 1; height: 78%; width: 78%; border-radius: 50%; transform: translateX(-50%) translateY(-50%);"
+            //                                         src={
+            //                                             typeof Variable.myInfo.avatar != "undefined" && Variable.myInfo.avatar.name
+            //                                                 ? `/assets/upload/avatar/${Variable.myInfo.avatar.name}`
+            //                                                 : images["profile/avatar/default"]
+            //                                         }
+            //                                     />
+            //                                     <img class="c-avataricon__team" src={svg.mini_logo} width="25" height="25" />
+            //                                     {/* </div> */}
+            //                                 </a>
+            //                             </div>
+            //                             {/* <div class="new_professional_card_avatar">
+            //                                 <Avatar author={Variable.myInfo} nickName={true} speciality={[Variable.myInfo.information?.speciality ? Variable.myInfo.information.speciality : `(${Variable.lang.p.notSpec})`]} />
+            //                             </div> */}
+
+            //                         </div>
+
+
+            //                     </div>
+            //                 </div>
 
             //             </div>
             //         </div>
