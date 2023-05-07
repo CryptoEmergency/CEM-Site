@@ -104,4 +104,33 @@
         }
     }
 
+    &__text {
+        display: flex;
+        align-items: center;
+        text-align: justify;
+        color: #E4EAFC;
+        font-size: 18px;
+        line-height: 30px;
+        font-weight: 500;
+
+        // &_size_middle {
+
+        // }
+
+        @media(max-width: 767px) {
+            font-size: 16px;
+            line-height: 28px;
+            // padding-left: 10px;
+            // padding-right: 10px;
+        }
+
+        &_background_light {
+            background: #2D3241;
+            border: 1px solid #444B5F;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0px 10px 0px;
+        }
+    }
+
 }

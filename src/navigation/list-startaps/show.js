@@ -108,10 +108,10 @@ const start = function (data, ID) {
     },
     fn: () => {
       return (
-        <div class="startap c-main__body">
+        <div class="startap c-main__body page-main">
           <div class="startap-inner">
             <div class="crypto appearience">
-              <div class="social">
+              <div class="social cards">
                 <div class="social-img">
                   {
                     Static.item.cover
@@ -145,7 +145,9 @@ const start = function (data, ID) {
                     :
                     null
                 }
-                <p class="social-desc">{Static.item.descriptionShort}</p>
+                <div class="cards__text cards__text_background_light">
+                  {Static.item.descriptionShort}
+                </div>
 
                 <div class="social-btns">
                   <a href={Static.item.whitePaperLink} target="_blank" class={["btn-item", !Static.item.whitePaperLink ? "social-btn_passive" : null]}>

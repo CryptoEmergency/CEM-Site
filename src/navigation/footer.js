@@ -331,12 +331,13 @@ const Footer = async function () {
                                             <a
                                                 href="https://apps.apple.com/ru/app/crypto-emergency/id1635628021"
                                                 class="c-button__app"
+                                                target="_blank"
                                             >
                                                 <img src={svg["appstore"]} />
                                             </a>
-                                            {/* <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" class="c-button__app">
-                                              <img src={svg['googleplay']} />
-                                          </a> */}
+                                            <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" target="_blank" class="c-button__app">
+                                                <img src={svg['googleplay']} />
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="c-footer__bottom">
