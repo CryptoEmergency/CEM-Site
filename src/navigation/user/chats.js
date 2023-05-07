@@ -1323,6 +1323,10 @@ const start = function (data, ID) {
                                             <TextArea
                                                 Static={Static.message}
                                                 className="text1 create_post_chapter"
+                                                sendByEnter={() => {
+                                                    // console.log(123, "sendByEnter")
+                                                    submitMessage();
+                                                }}
                                             />
 
                                             {/* <div id="emoji">@</div> */}

@@ -17,7 +17,7 @@ const forExport = function (data, type) {
                 return Helpers.moment(data).format("DD MMMM YYYY");
             };
         case "time":
-            return Helpers.moment(data).format('YYYY-MM-DD hh:mm')
+            return Helpers.moment(data).format('YYYY-MM-DD HH:mm')
         case "chatdate":
             return Helpers.moment(data).format("dd, D MMM");
         case "chattime":
