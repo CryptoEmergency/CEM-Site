@@ -757,7 +757,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                                             }}
                                         >
                                             <div class="user_question_title">
-                                                77-{item.questionId.title}
+                                                {item.questionId.title}
                                             </div>
                                         </a>
                                         <div>
@@ -779,7 +779,8 @@ BlockUserProfilePage.answers = function (Static, data) {
                             </div>
                             <div class={item.best ? 'your_answers_avatar your_answer_text_best' : 'your_answers_avatar'}>
                                 <div class="your_answer_text">
-                                    {Helpers.clearText(item.text)}
+                                    {/* {Helpers.clearText(item.text)} */}
+                                    {fn.editText(item.text, { paragraph: true, clear: true, html: true })}
                                 </div>
                             </div>
                             {() => {
@@ -805,7 +806,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                         <div class="crypto_exchanges_footer">
                             <a class="btn-view-all-a"
                                 onclick={async () => {
-
+                                    console.log('=1882bf=', 123)
                                     let tmp = await sendApi.send({
                                         action: "getAnswers", short: true, filter: {
                                             author: data.userInfo._id,
@@ -815,7 +816,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                                         offset: Static.activeItems.list_records.length
                                     });
 
-                                    Variable.PageUserProfileAnswers.list_records.push(...tmp.list_records)
+                                    Static.activeItems.list_records.push(...tmp.list_records)
                                     initReload()
                                 }
                                 }

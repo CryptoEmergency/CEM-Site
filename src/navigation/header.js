@@ -107,7 +107,7 @@ const Header = async function () {
                                     if (Variable.Static.forumHeaderShow) {
                                         return (
                                             <nav class="c-header__menu c-menu c-menu--forum" style="position: relative;">
-                                                <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div>
+                                                {/* <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div> */}
                                                 <a
                                                     class="c-logo c-menu__link"
                                                     href="/"
@@ -205,7 +205,7 @@ const Header = async function () {
                                     } else {
                                         return (
                                             <nav class="c-header__menu c-menu" style="position: relative;">
-                                                <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div>
+                                                {/* <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div> */}
 
                                                 <a
                                                     class="c-logo c-menu__link"

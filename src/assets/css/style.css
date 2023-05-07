@@ -12190,6 +12190,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
   margin-top: 20px;
 }
 
+.your_answer_text a {
+  color: #20e0f6;
+  text-decoration: none;
+}
+
 .your_answer_text_best:after {
   content: '';
   width: 38px;
