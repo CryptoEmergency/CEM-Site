@@ -11,7 +11,7 @@ const forExport = function (str) {
             if (link.length > 35) {
                 shortLink = link.slice(0, 35) + '...'
             }
-            str = str.replace(link, `<a href="${link}" rel="nofollow noopener" target="_blank">${shortLink}</a>`)
+            str = str.replace(link, `<a href="${link}" class="global-link" rel="nofollow noopener" target="_blank">${shortLink}</a>`)
         })
     }
     return str
