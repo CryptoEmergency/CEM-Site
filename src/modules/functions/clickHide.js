@@ -1,7 +1,7 @@
 import { Variable, fn, HiddenOut } from "@betarost/cemserver/cem.js";
 
 const forExport = function (e) {
-  console.log('=2d6cb1=', HiddenOut, e.target)
+  // console.log('=2d6cb1=', HiddenOut, e.target)
   try {
 
     HiddenOut.forEach((item, index) => {
