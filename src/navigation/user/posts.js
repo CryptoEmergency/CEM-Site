@@ -48,6 +48,9 @@ const sendPost = async (e, Static) => {
     }
 
     fn.initData.posts(Static)
+
+    Static.edittext = ""
+    Static.elEditText.innerText = ""
     initReload()
   } else {
     Variable.SetModals(
@@ -777,7 +780,7 @@ const start = function (data, ID) {
         Static.originalImage = [];
       }
 
-      // console.log(Static.mediaInputs.value)
+      // console.log("Static.edittext", Static.edittext)
       return (
 
         <div class={[
@@ -856,10 +859,14 @@ const start = function (data, ID) {
                 }}
               </div>
               <div
-
+                Element={($el) => {
+                  Static.elEditText = $el
+                }}
 
                 class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
-                contenteditable="true"
+                // contenteditable="true" 
+                contenteditable="plaintext-only"
+
                 oninput={function (e) {
 
                   textLengthCheck(this.innerText.trim(), this)
@@ -1081,6 +1088,7 @@ const start = function (data, ID) {
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
                     Static.forFriends = e.target.checked;
+                    // Static.elEditText.innerText = ""
                     initReload()
                   }}
                   type="checkbox"

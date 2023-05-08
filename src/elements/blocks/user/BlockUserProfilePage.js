@@ -1324,6 +1324,14 @@ BlockUserProfilePage.social = function (Static, data) {
                                         }}
                                         data-id={index}
                                         class="about_user_section_points_menu"
+                                        HiddenOut={function ($el) {
+                                            if ($el.style.display == "block") {
+                                                $el.style = ""
+                                            }
+                                            // console.log('=d474fb=', $el)
+                                            // console.log('=bd914d=', $el.style.display)
+                                            // console.log('=dbf66a=', Static.elShowMenu[index].style.display)
+                                        }}
                                     >
                                         <div
                                             data-id={socialItem._id}

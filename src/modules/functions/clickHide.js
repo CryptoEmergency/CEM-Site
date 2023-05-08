@@ -19,7 +19,7 @@ const forExport = function (e) {
           HiddenOut.splice(index, 1);
           fn.modals.close(item.value)
         } else if (typeof item.value == "function") {
-          if (item.value()) {
+          if (item.value(item.el)) {
             HiddenOut.splice(index, 1);
           }
         } else {
