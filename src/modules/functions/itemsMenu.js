@@ -1,8 +1,10 @@
 import { Variable, initReload, sendApi, CEM } from '@betarost/cemserver/cem.js'
-// import { modals } from './modals.js';
+// import { modals } from './fn.modals.js';
 const fn = CEM.fn
 const itemsMenu = {}
-const modals = Variable.modals
+// const modals = Variable.modals
+const modals = Variable.listModals
+
 //нижнее меню
 //  let bottomMenuitems = fn.CreateMenuItems({
 //     text: [Variable.lang.select.complainAnswer,
@@ -233,7 +235,7 @@ itemsMenu.onlyPage = function ({ url, downloadurl }) {
             type: "copyurl",
             onclick: async () => {
                 navigator.clipboard.writeText(window.location.origin + url);
-                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+                fn.modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
             }
         }
     ]
@@ -277,7 +279,7 @@ itemsMenu.ico = function ({ url, downloadurl }) {
             type: "copyurl",
             onclick: async () => {
                 navigator.clipboard.writeText(window.location.origin + url);
-                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+                fn.modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
             }
         },
         // {
@@ -317,7 +319,7 @@ itemsMenu.news = function ({ url, downloadurl }) {
             type: "copyurl",
             onclick: async () => {
                 navigator.clipboard.writeText(window.location.origin + url);
-                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+                fn.modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
             }
         },
         // {
@@ -369,7 +371,7 @@ itemsMenu.userProfile = function (item) {
             color: "red",
             onclick: async () => {
                 // Переработать модалку
-                modals.ModalComplainComment({
+                fn.modals.ModalComplainComment({
                     id: item._id,
                     action: "setUsers"
                 })
@@ -381,7 +383,7 @@ itemsMenu.userProfile = function (item) {
             onlyAuth: true,
             color: "red",
             onclick: async () => {
-                modals.ModalConfirmAction({
+                fn.modals.ModalConfirmAction({
                     action: async () => {
                         let response = await fn.restApi.setUsers.blackList({ _id: item._id })
                         Variable.DelModals("ModalConfirmAction")
@@ -419,7 +421,7 @@ itemsMenu.blog = function (Static, item) {
             type: "copyurl",
             onclick: async () => {
                 navigator.clipboard.writeText(window.location.origin + "/blog/");
-                modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+                fn.modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
             }
         }
     ]
@@ -453,7 +455,7 @@ itemsMenu.question = function (Static, item) {
 
                 color: "red",
                 onclick: async () => {
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item._id,
                         action: "setQuestions"
                     })
@@ -467,7 +469,7 @@ itemsMenu.question = function (Static, item) {
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item.author._id,
                         action: "setUsers"
                     })
@@ -482,7 +484,7 @@ itemsMenu.question = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         //        console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -501,7 +503,7 @@ itemsMenu.question = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         //  console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setQuestions.delete({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -522,7 +524,7 @@ itemsMenu.question = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         //  console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.doRole.deleteQuestion({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -542,7 +544,7 @@ itemsMenu.question = function (Static, item) {
                 if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                     console.log('Post in modal, close this')
                 }
-                modals.ModalConfirmAction({
+                fn.modals.ModalConfirmAction({
                     action: async () => {
                         let response = await fn.restApi.setQuestions.close({ _id: item._id })
                         Variable.DelModals("ModalConfirmAction")
@@ -583,7 +585,7 @@ itemsMenu.answer = function (Static, item, active) {
 
                 color: "red",
                 onclick: async () => {
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item._id,
                         action: "setAnswers"
                     })
@@ -597,7 +599,7 @@ itemsMenu.answer = function (Static, item, active) {
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item.author._id,
                         action: "setUsers"
                     })
@@ -612,7 +614,7 @@ itemsMenu.answer = function (Static, item, active) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -631,7 +633,7 @@ itemsMenu.answer = function (Static, item, active) {
                         console.log('Post in modal, close this')
                     }
 
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setAnswers.delete({ _id: item._id })
 
@@ -662,7 +664,7 @@ itemsMenu.answer = function (Static, item, active) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.doRole.deleteAnswer({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -770,7 +772,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                             (item) => item.type === "plus"
                         );
                     }
-                    fn.modals.ModalWhoLike({ whoLike }, true)
+                    fn.fn.modals.ModalWhoLike({ whoLike }, true)
                 }
             },
             {
@@ -780,7 +782,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
 
                 color: "red",
                 onclick: async () => {
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item._id,
                         action: "setComments"
                     })
@@ -794,7 +796,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item.author._id,
                         action: "setUsers"
                     })
@@ -806,7 +808,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                 onlyAuth: true,
                 color: "red",
                 onclick: async () => {
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -845,7 +847,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                 type: "delete",
                 color: "red",
                 onclick: async () => {
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setComments.delete({ _id: item._id, action, mainId })
                             Variable.DelModals("ModalConfirmAction")
@@ -865,8 +867,12 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                 type: "deleteRole",
                 color: "red",
                 onclick: async () => {
-                    modals.ModalConfirmAction({
+                    console.log('=e48f51=', modals)
+
+
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
+                            console.log('=8d17e5=', 123)
                             let response = await fn.restApi.doRole.deleteComment({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
                             //  console.log('get' + action)
@@ -930,7 +936,7 @@ itemsMenu.lenta_users = function (Static, item) {
 
                 color: "red",
                 onclick: async () => {
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item._id,
                         action: "setPost"
                     })
@@ -957,7 +963,7 @@ itemsMenu.lenta_users = function (Static, item) {
                 color: "red",
                 onclick: async () => {
                     // Переработать модалку
-                    modals.ModalComplainComment({
+                    fn.modals.ModalComplainComment({
                         id: item.author._id,
                         action: "setUsers"
                     })
@@ -972,7 +978,7 @@ itemsMenu.lenta_users = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item.author._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -1005,6 +1011,9 @@ itemsMenu.lenta_users = function (Static, item) {
                     let data = response.list_records.filter((post) => {
                         return post._id == item._id
                     })
+                    if (!data[0].media) {
+                        data[0].media = []
+                    }
                     let audio = data[0].media.filter(item => item.type == 'audio');
                     console.log('=00b984= EditPost = data =', data)
                     // fn.siteLink("/user/posts/");
@@ -1049,7 +1058,7 @@ itemsMenu.lenta_users = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setPost.delete({ _id: item._id })
                             if (response.status == 'ok') {
@@ -1083,7 +1092,7 @@ itemsMenu.lenta_users = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.doRole.deletePost({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -1146,7 +1155,7 @@ itemsMenu.community = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.doRole.deletePost({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")
@@ -1193,7 +1202,7 @@ itemsMenu.subscribers = function (Static, item) {
                     if (Variable.ModalsPage.length != 0 && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item && Variable.ModalsPage[Variable.ModalsPage.length - 1].data.item._id == item._id) {
                         console.log('Post in modal, close this')
                     }
-                    modals.ModalConfirmAction({
+                    fn.modals.ModalConfirmAction({
                         action: async () => {
                             let response = await fn.restApi.setUsers.blackList({ _id: item._id })
                             Variable.DelModals("ModalConfirmAction")

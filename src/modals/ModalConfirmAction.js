@@ -12,6 +12,7 @@ import { Avatar } from "@elements/element/Avatar.js";
 const fn = CEM.fn
 
 const ModalConfirmAction = function ({ action, text, button }, ID) {
+  // console.log('=e3075d ModalConfirmAction =', action, text, button, ID)
   let close = true
   load({
     ID,

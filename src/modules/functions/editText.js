@@ -25,7 +25,9 @@ const forExport = function (str, filter = {}) {
     }
 
     if (filter.html) {
-        out = this.findLink(out)
+        if (!filter.noLink) {
+            out = this.findLink(out)
+        }
         out = Helpers.stringToHtml(out)
     }
     // console.log(out)

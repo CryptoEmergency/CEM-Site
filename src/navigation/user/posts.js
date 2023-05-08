@@ -869,7 +869,10 @@ const start = function (data, ID) {
 
                 }
                 }
-              >{Static.edittext}</div>
+              >
+                {/* {Static.edittext} */}
+                {fn.editText(Static.edittext, { paragraph: true, clear: true, html: true, noLink: true })}
+              </div>
 
             </div>
 
