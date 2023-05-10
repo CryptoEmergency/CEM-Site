@@ -6,19 +6,21 @@
     .H1 {
         display: flex;
         justify-content: center;
-        font-size: 30px;
+        font-size: 40px;
         padding-top: 10px;
     }
 }
 
 .block-section {
-    background: rgba(255, 255, 255, 0.11);
+    //background: rgba(255, 255, 255, 0.11);
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 25px;
     margin: 0 15px;
 
     .H3 {
+        padding-bottom: 40px;
+        padding-top: 25px;
         display: flex;
         justify-content: center;
         font-size: 30px;
@@ -35,6 +37,7 @@
 
 
     .btn-item_img {
+
         // justify-self: start-left;
         width: 25px;
         height: auto;
@@ -90,20 +93,22 @@
     margin-top: 15px;
     max-width: 1240px;
     position: relative;
-    outline-style: solid;
+    //outline-style: solid;
     border-color: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 
     .H3 {
         display: flex;
         justify-content: center;
         font-size: 30px;
+        padding-bottom: 30px;
     }
 
     .p1 {
         //max-width: 500px;
-        height: 120px;
+        height: 118px;
         margin-top: 10px;
-
+        font-size: 15px;
+        text-align: left;
         -webkit-line-clamp: 5;
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -124,9 +129,9 @@
 
             .btn-item_img-2 {
                 display: flex;
-                align-self: center;
+                //align-self: center;
                 //width: 90px;
-                height: 90px;
+                height: 70px;
                 float: left;
                 margin: 7px 7px 7px 0px;
 
@@ -136,12 +141,13 @@
 
             .btn-small {
                 display: grid;
-                grid-template-columns: 1fr 3fr;
+                grid-template-columns: 1fr 6fr;
                 margin-top: 15px;
             }
         }
 
         .SP2 {
+            font-size: 25px;
             //display: grid;
             //grid-template-columns: 1fr;
             //justify-content: center;
@@ -167,6 +173,14 @@
 
     }
 
+}
+
+#con1___1 {
+    width: 5%
+}
+
+#con2___2 {
+    width: 95%
 }
 
 .btn-item-3 {
