@@ -1,0 +1,55 @@
+.university {
+    &__title {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    &__about {
+        display: flex;
+    }
+
+    &__social {
+        display: flex;
+        padding-bottom: 10px;
+
+        &-item {
+            margin-right: 10px;
+        }
+
+        &-icons {
+            width: 32px;
+            height: 32px;
+            background: #393C47;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                max-height: 16px;
+            }
+        }
+    }
+
+    &__description {
+        font-size: 18px;
+    }
+
+    &__teachers {
+        &-title {
+            font-size: 32px;
+            text-align: center;
+
+            &_indent {
+                padding: 20px 0;
+            }
+        }
+
+        &-slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}

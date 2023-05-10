@@ -4,7 +4,41 @@
         padding-bottom: 40px;
     }
 
-    &__header {
+    &__company {
+
+        &_indent {
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        &-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            grid-gap: 30px;
+        }
+
+        &-about {
+            background: #2D3241;
+            border: 1px solid #444B5F;
+            border-radius: 10px;
+            padding: 35px;
+        }
+
+        &-icon {
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        &-name {
+            font-size: 38px;
+            text-align: center;
+        }
+    }
+
+    &__name {
         position: relative;
         display: block;
         width: 100%;
@@ -15,8 +49,8 @@
         color: inherit;
         text-decoration: none;
         border-radius: 3px;
-        border: 1px solid #63697A;
-        background: #363B4B;
+        border: 1px solid #444B5F;
+        background: #2D3241;
     
         @media(max-width: 979px) {
             margin-bottom: 90px;

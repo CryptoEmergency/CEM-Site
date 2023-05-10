@@ -1,6 +1,13 @@
 .cards {
 
+    &__title {
+        font-size: 32px;
+        text-align: center;
 
+        &_indent_university {
+            padding: 20px 0;
+        }
+    }
 
     &__container {
         // display: grid;

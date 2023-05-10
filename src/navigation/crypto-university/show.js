@@ -103,43 +103,69 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            Static.activeCategory = "All"
             if (Variable.dataUrl.params) {
-                Static.item = await fn.socket.get({ method: "CryptoUniversities", _id: Variable.dataUrl.params })
+                Static.item = await fn.socket.get({
+                    method: "CryptoUniversities",
+                    _id: Variable.dataUrl.params,
+                    params: {
+                        populate: {
+                            path: "teachers courses",
+                            select: {
+                                name: 1,
+                                image: 1,
+                                description: 1,
+                                cost: 1,
+                                duration: 1,
+
+                            }
+                        }
+                    }
+                })
                 console.log('=9ebbf7=', Static.item)
             }
         },
 
         fn: async () => {
-
+            console.log('=9ebbf7=', Static.item)
             if (!item._id) { return (<div><BlockError404 /></div>) }
 
             return (
-                <div>
-                    {
-                        Static.item.map((item) => {
-                            return (
-                                <div class="page-main__content">
-                                    <div class="university c-main__body">
-                                        <h2 class="university__title">{item.nameCompany}</h2>
+                <div class="page-main">
+                    <div class="page-main__container">
+                        <div class="page-main__content">
+                            <div class="university">
+                                <h2 class="university__title">{Static.item.name}</h2>
+                                <div class="university__about">
+                                    <div class="university__icon">
                                         <figure class="university__figure">
                                             {item.icon
                                                 ?
                                                 <img
                                                     class="university__logo"
-                                                    src={`/assets/upload/worldPress/${item.icon}`}
-                                                    width="100"
-                                                    height="100"
+                                                    src={`/assets/upload/worldPress/${Static.item.icon}`}
+                                                    width="200"
+                                                    height="200"
                                                 />
                                                 :
                                                 <img
                                                     class="university__logo"
                                                     src={images["crypto-university"]}
-                                                    width="100"
-                                                    height="100"
+                                                    width="200"
+                                                    height="200"
                                                 />
                                             }
                                         </figure>
+                                        <div class="university__social">
+                                            {Static.item.social.map((item) => {
+                                                return (
+                                                    <a href={item.url} class="university__social-item">
+                                                        <div class="university__social-icons">
+                                                            <img src={svg[`${item.channel}-icon`]}></img>
+                                                        </div>
+                                                    </a>
+                                                )
+                                            })}
+                                        </div>
                                         <a class="university__btn c-button c-button--gradient2"
                                             href={item.siteLink}
                                             onclick={() => {
@@ -148,96 +174,129 @@ const start = function (data, ID) {
                                         >
                                             <span class="c-button__text">Сайт</span>
                                         </a>
-                                        <blockquote class="university__slogan">&#8220;{item.tagline}&#8221;</blockquote>
-                                        <p class="university__shortdesc">
-                                            {item.description}
-                                        </p>
-                                        {item.cover
-                                            ?
-                                            <figure class="university__cover">
-                                                <img class=""
-                                                    src={`/assets/upload/worldPress/${item.cover}`}
-                                                />
-                                            </figure>
-                                            :
-                                            null
-                                        }
-                                        <section class="university__about">
-                                            <h5>О компании</h5>
-                                            <p>{item.aboutCompany}</p>
-                                        </section>
-                                        <div class="university__authors swiper-container">
-                                            <div class="swiper swiper-post_authors" After={() => swiperGo()}>
-                                                <div class="swiper-wrapper">
-                                                    {item.teachers.map((teacher) => {
-                                                        return (
-                                                            <a
-                                                                class="swiper-slide"
-                                                            // href="/crypto-university/teacher/1/"
-                                                            // onclick={function (e) {
-                                                            //     e.preventDefault();
-                                                            //     e.stopPropagation();
-                                                            //     fn.siteLinkModal(e, {
-                                                            //         title: "Преподаватель: Иванов Иван Иванович", teacher: {
-                                                            //             name: "Иванов Иван Иванович"
-                                                            //         }
-                                                            //     })
-                                                            // }}
-                                                            >
-                                                                <div class="swiper-post_media_image_container">
-                                                                    <figure class="university__sliderwrap">
-                                                                        <img src={`/assets/upload/worldPress/${teacher.image}`} />
-                                                                        {/* <figcaption class="c-criptocompany__slidertitle">{teacher.title}</figcaption> */}
-                                                                        <figcaption class="university__slidertitle">{teacher.name}</figcaption>
-                                                                    </figure>
-                                                                </div>
-                                                            </a>
-                                                        )
-                                                    })}
-                                                </div>
-                                                <div class="swiper-pagination swiper-pagination-post_media"></div>
-                                                <div class="swiper-scrollbar-post_media"></div>
-                                            </div>
-                                        </div>
-                                        <section class="university__courses">
-                                            <h5>Курсы</h5>
-                                            <ul class="university__courses-list">
-                                                {item.courses.map((course) => {
+                                    </div>
+                                    <p class="university__description">
+                                        {Static.item.description}
+                                    </p>
+                                </div>
+                                {/* <section class="university__about">
+                                    <h5>О компании</h5>
+                                    <p>{item.aboutCompany}</p>
+                                </section> */}
+                                <div class="university__teachers">
+                                    <h3 class="university__teachers-title university__teachers-title_indent">Преподаватели</h3>
+                                    <div class="university__authors swiper-container">
+                                        <div class="swiper swiper-post_authors" After={() => swiperGo()}>
+                                            <div class="swiper-wrapper">
+                                                {Static.item.teachers.map((item) => {
                                                     return (
-                                                        <li class="">
-                                                            <a
-                                                                class="university__course"
-                                                                href={course.link}
-                                                                onclick={(e) => {
-                                                                    // e.preventDefault();
-                                                                    fn.siteLink()
-                                                                }}
-                                                            >
-                                                                <span class="university__course-description">{course.name}</span>
-                                                                <footer class="university__course-footer">
-                                                                    <time class="university__course-time" datetime="">{fn.moment(course.dateStart).format('YYYY-MM-DD')}</time>
-                                                                    <span class="university__course-hourse">{`${course.duration} ч`}</span>
-                                                                </footer>
-                                                                {course.promotion
-                                                                    ?
-                                                                    <div class="university__course-stiker">
-                                                                        <img src={images["university/promotion"]} />
-                                                                    </div>
-                                                                    :
-                                                                    null
-                                                                }
-                                                            </a>
-                                                        </li>
+                                                        <a
+                                                            class="swiper-slide"
+                                                            href={`/crypto-university/teacher/${item._id}`}
+                                                            onclick={function (e) {
+                                                                fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                            }}
+                                                        >
+                                                            <div class="swiper-post_media_image_container">
+                                                                <figure class="university__teachers-slide">
+                                                                    <img src={`/assets/upload/worldPress/${item.image}`} />
+                                                                    <figcaption class="university__slidertitle">{item.name}</figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </a>
                                                     )
                                                 })}
-                                            </ul>
-                                        </section>
+                                            </div>
+                                            <div class="swiper-pagination swiper-pagination-post_media"></div>
+                                            <div class="swiper-scrollbar-post_media"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            )
-                        })
-                    }
+
+                                <div class="cards">
+                                    <h3 class="cards__title cards__title_indent_university">Курсы</h3>
+                                    <div class="cards__container cards__container_type_courses">
+
+                                        {Static.item.courses.map((item) => {
+                                            return (
+                                                <li class="card card_courses">
+                                                    <a
+                                                        class="card__link card__link_background"
+                                                        href={`/crypto-university/course/${item._id}`}
+                                                        onclick={function (e) {
+                                                            fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                        }}
+                                                    >
+                                                        <div class="card__title card__title_courses">
+                                                            {item.name}
+                                                        </div>
+                                                        <div class="card__description card__description_courses">
+                                                            {item.description}
+                                                        </div>
+                                                        <div class="card__container card__container_row card__container_indent_course">
+                                                            <div class="card__cost">
+                                                                <span>{item.cost} ₽/мес.</span>
+                                                            </div>
+                                                            <div class="card__container card__container_row">
+                                                                <div class="card__duration">
+                                                                    <span>{item.duration}</span>
+                                                                </div>
+                                                                <div class="card__duration-text">
+                                                                    <span class="card__duration-text_size">Месяца</span>
+                                                                    <span class="card__duration-text_color">Срок обучения</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card__more card__more_indent_course">
+                                                            <span>Больше информации</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            )
+                                        })}
+
+                                    </div>
+                                </div>
+
+                                {/* <section class="university__courses">
+                                    <h5>Курсы</h5>
+                                    <ul class="university__courses-list">
+                                        {item.courses.map((course) => {
+                                            return (
+                                                <li class="">
+                                                    <a
+                                                        class="university__course"
+                                                        href={course.link}
+                                                        onclick={(e) => {
+                                                            // e.preventDefault();
+                                                            fn.siteLink()
+                                                        }}
+                                                    >
+                                                        <span class="university__course-description">{course.name}</span>
+                                                        <footer class="university__course-footer">
+                                                            <time class="university__course-time" datetime="">{fn.moment(course.dateStart).format('YYYY-MM-DD')}</time>
+                                                            <span class="university__course-hourse">{`${course.duration} ч`}</span>
+                                                        </footer>
+                                                        {course.promotion
+                                                            ?
+                                                            <div class="university__course-stiker">
+                                                                <img src={images["university/promotion"]} />
+                                                            </div>
+                                                            :
+                                                            null
+                                                        }
+                                                    </a>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </section> */}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
             )
 
             return (

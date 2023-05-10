@@ -132,6 +132,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     margin-right: 150px;
 }
 
+
 .btn{
     background: $fiolet;
     border-radius: 10px;
@@ -223,7 +224,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
         margin: 0 15px;
         grid-template-columns: 2fr 2fr;
         .voice-inner:nth-child(3) {
-            grid-column: 1 / span 2;
+            grid-column: 1 / span 1;
             
         }
     }
@@ -232,12 +233,12 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     .wrap-voices{
         grid-template-columns: 2fr 2fr;
         .voice-inner:nth-child(3) {
-            grid-column: 1 / span 2;
+            grid-column: 1 / span 1;
             
         }
-        .voice-inner:nth-child(4){
-            grid-row: 3 / span 4;
-        }
+        // .voice-inner:nth-child(4){
+        //     grid-row: 3 / span 4;
+        // }
     }
 }
 @media (max-width: 593px){
