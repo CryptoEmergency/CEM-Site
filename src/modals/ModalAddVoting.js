@@ -80,27 +80,35 @@ const ModalAddVoting = function (data, ID) {
                     >
                       +
                     </button>
-
-                    <button
-                      class="bot-btne btn"
-                      style="margin-left:10px"
-                      onclick={() => {
-                        Static.forms.responseOptions.splice(0, 1);
-                        initReload();
-                      }}
-                    >
-                      -
-                    </button>
                   </label>
                 </div>
+
                 {Static.forms.responseOptions.map((item, index) => {
                   return (
-                    <input
-                      placeholder="Введите ваше сообщение"
-                      oninput={function () {
-                        Static.forms.responseOptions[index].name = this.value;
-                      }}
-                    ></input>
+                    <div class="voting__answer">
+
+                      <input
+                      style="position:relative "
+                        placeholder="Введите ваше сообщение"
+                        value={Static.forms.responseOptions[index].name}
+                        oninput={function () {
+                          Static.forms.responseOptions[index].name = this.value;
+                        }}
+                      ></input>
+                      <button
+                        
+                        style=" position: absolute; margin-left: -90%; margin-top: 9px"
+                        class="bot-btne btn"
+                        stype="position"
+                        // style="margin-left:10px"
+                        onclick={() => {
+                          Static.forms.responseOptions.splice(index, 1);
+                          initReload();
+                        }}
+                      >
+                        -
+                      </button>
+                    </div>
                   );
                 })}
 
@@ -122,15 +130,17 @@ const ModalAddVoting = function (data, ID) {
 
                     if (!insert.description || insert.description.length <= 9) {
                       console.log("Укажите описание вопроса!");
-                      alert("Укажите описание вопроса!")
+                      alert("Укажите описание вопроса!");
                       return;
                     }
-                    if (!insert.responseOptions || insert.responseOptions.length <= 4) {
+                    if (
+                      !insert.responseOptions ||
+                      insert.responseOptions.length <= 4
+                    ) {
                       console.log("Укажите варианты ответа!");
-                      alert("Укажите варианты ответа!")
+                      alert("Укажите варианты ответа!");
                       return;
                     }
-      
 
                     let tmp2 = await fn.socket.set({
                       method: "Votings",
