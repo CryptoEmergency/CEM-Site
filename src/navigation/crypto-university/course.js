@@ -136,7 +136,7 @@ const start = function (data, ID) {
                             <div class="course">
                                 <div class="course__container">
                                     <div class="course__company course__company_indent">
-                                        {Static.item.company.map((item) => {
+                                        {Static.item.company?.map((item) => {
                                             return (
                                                 <div class="course__company-container">
                                                     <div class="course__company-icon">
@@ -173,9 +173,15 @@ const start = function (data, ID) {
                                         <div class="swiper-container">
                                             <div class="swiper swiper-post_teachers" After={() => swiperGo()}>
                                                 <div class="swiper-wrapper">
-                                                    {Static.item.teachers.map((item) => {
+                                                    {Static.item.teachers?.map((item) => {
                                                         return (
-                                                            <a class="swiper-slide">
+                                                            <a 
+                                                                class="swiper-slide"
+                                                                href={`/crypto-university/teacher/${item._id}`}
+                                                                onclick={function (e) {
+                                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                                }}
+                                                            >
                                                                 <div class="swiper-post_media_image_container">
                                                                     <figure class="c-cryptocourse__sliderwrap">
                                                                         <img src={`/assets/upload/worldPress/${item.image}`} />
@@ -193,7 +199,7 @@ const start = function (data, ID) {
                                     <div class="course__tariff">
                                         <h3>Тарифы</h3>
                                         <div class="course__tariff-container">
-                                            {Static.item.tariff.map((item) => {
+                                            {Static.item.tariff?.map((item) => {
                                                 return (
                                                     <div class="tariff">
                                                         <h4 class="tariff__title">

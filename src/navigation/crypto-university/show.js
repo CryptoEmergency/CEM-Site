@@ -192,6 +192,10 @@ const start = function (data, ID) {
                                                     return (
                                                         <a
                                                             class="swiper-slide"
+                                                            href={`/crypto-university/teacher/${item._id}`}
+                                                            onclick={function (e) {
+                                                                fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                            }}
                                                         >
                                                             <div class="swiper-post_media_image_container">
                                                                 <figure class="university__teachers-slide">
