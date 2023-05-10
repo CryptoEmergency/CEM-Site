@@ -110,10 +110,24 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            Static.item = await fn.socket.get({ method: "Courses", _id: Variable.dataUrl.params, params: { filter: {} } })
+            Static.item = await fn.socket.get({ 
+                method: "Courses", 
+                _id: Variable.dataUrl.params,
+                params: { 
+                    // filter: {},
+                    populate: {
+                        path: 'teachers company',
+                        select: {
+                            name: 1,
+                            image: 1,
+                            description: 1,
+                        },
+                    }
+                }
+            })
         },
         fn: () => {
-            console.log('=022f2b=', Static.records)
+            console.log('=022f2b=', Static.item)
             return (
                 <div class="page-main">
                     <div class="page-main__container">
@@ -121,7 +135,33 @@ const start = function (data, ID) {
 
                             <div class="course">
                                 <div class="course__container">
-                                    <div class="course__header">
+                                    <div class="course__company course__company_indent">
+                                        {Static.item.company.map((item) => {
+                                            return (
+                                                <div class="course__company-container">
+                                                    <div class="course__company-icon">
+                                                        <img src={`/assets/upload/worldPress/${item.image}`} />
+                                                    </div>
+                                                    <div class="course__company-about">
+                                                        <a 
+                                                            href={`/crypto-university/show/${item._id}`}
+                                                            onclick={function (e) {
+                                                                fn.siteLink(e, { title: "", items: {} })
+                                                            }}
+                                                        >
+                                                            <h3 class="course__company-name">
+                                                                {item.name}
+                                                            </h3>
+                                                        </a>
+                                                        <div class="course__company-description">
+                                                            {item.description}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                    <div class="course__name">
                                         <h2 class="course__title">{Static.item.name}</h2>
                                         <div class="course__description">
                                             {Static.item.description}
@@ -138,8 +178,8 @@ const start = function (data, ID) {
                                                             <a class="swiper-slide">
                                                                 <div class="swiper-post_media_image_container">
                                                                     <figure class="c-cryptocourse__sliderwrap">
-                                                                        <img src={images["university/teacher1"]} />
-                                                                        <figcaption class="c-cryptocourse__slidertitle">{item}</figcaption>
+                                                                        <img src={`/assets/upload/worldPress/${item.image}`} />
+                                                                        <figcaption class="c-cryptocourse__slidertitle">{item.name}</figcaption>
                                                                     </figure>
                                                                 </div>
                                                             </a>
