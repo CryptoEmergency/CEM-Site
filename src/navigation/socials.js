@@ -17,65 +17,75 @@ const { images, svg, fn } = CEM
 const arrSocials = [
   {
     link: "https://t.me/cryptoemergencychat",
-    icon: "telegram",
+    icon: "telegram1",
     name: "Telegram",
-    lang: "ru"
+    lang: "ru",
+    lan: "ru"
   },
   {
     link: "https://t.me/emergencycrypto",
-    icon: "telegram",
+    icon: "telegram1",
     name: "Telegram",
-    lang: "gb"
+    lang: "gb",
+    lan: "eng"
   },
   {
     link: "https://instagram.com/cryptoemergency",
-    icon: "instagram",
+    icon: "iconizer-instagram",
     name: "Instagram",
-    lang: "ru"
+    lang: "ru",
+    lan: "ru"
 
   },
   {
     link: "https://instagram.com/cryptoemergency",
-    icon: "instagram",
+    icon: "iconizer-instagram",
     name: "Instagram",
-    lang: "gb"
+    lang: "gb",
+    lan: "eng"
   },
   {
     link: "https://www.tiktok.com/@cryptoemergencyrussia",
     icon: "tiktok_icon",
     name: "Tiktok",
-    lang: "ru"
+    lang: "ru",
+    lan: "ru"
   },
   {
     link: "https://vm.tiktok.com/ZSefExJrr",
     icon: "tiktok_icon",
     name: "Tiktok",
-    lang: "gb"
+    lang: "gb",
+    lan: "eng"
   },
   {
     link: "https://youtube.com/channel/UCb9Fx-fN",
     icon: "youtube_icon",
     name: "Youtube",
-    lang: "ru"
+    lang: "ru",
+    lan: "ru"
   },
   {
     link: "https://www.facebook.com/groups/crypt",
     icon: "facebook_icon",
     name: "Facebook",
-    lang: "gb"
+    lang: "gb",
+    lan: "eng"
   },
   {
     link: "https://vk.com/club209389938",
     icon: "vk_icon",
     name: "Vk",
-    lang: "ru"
+    lang: "ru",
+    lan: "ru"
   },
 
   {
     link: "https://twitter.com/cryptoemergency",
-    icon: "twitter",
+    icon: "twitter1",
     name: "Twitter",
-    lang: "gb"
+    lang: "gb",
+    lan: "eng"
   }
 
 
@@ -110,9 +120,10 @@ const projectS = [{
 },
 {
   link: "https://cemwallet.com/",
-  icon: "wallet_icon",
+  icon: "azpvs-eu044",
   name: "Cem Wallet",
-  opis: "CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet"
+  opis: "CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet",
+  imeges: true
 }
 ]
 
@@ -157,7 +168,7 @@ const sait_small = [{
   link: "https://github.com/CryptoEmergency",
   icon: "github_icon",
   name: "Github",
-  opis: "крупнейший веб-сервис для хостинга IT-проектов и их совместной разработки.",
+  opis: "Крупнейший веб-сервис для хостинга IT-проектов и их совместной разработки.",
   //small: true
 
 }]
@@ -195,10 +206,12 @@ const start = function (data, ID) {
                     console.log('=c559f5=', item.images)
                     return (
                       <a href={item.link} class="btn-item" target="_blank">
+
                         <img class="btn-item_img" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
                         <span>{item.name}</span>
                         {/* <img class="btn-item_img-flag" src={svg['train/' + item.lang]} alt="Flag" /> */}
-                        <img class="btn-item_img-flag" src={`/assets/icons/flagsnew/${item.lang}.svg`} alt="Flag" />
+                        <div> {item.lan} </div>
+                        {/* <img class="btn-item_img-flag" src={`/assets/icons/flagsnew/${item.lang}.svg`} alt="Flag" /> */}
                       </a>
 
 
@@ -227,8 +240,10 @@ const start = function (data, ID) {
                         <span class="SP2">{item.name}
 
                           <p class="p1">
+
                             <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
                             {item.opis}
+
                           </p>
                         </span>
 
@@ -249,7 +264,9 @@ const start = function (data, ID) {
                   console.log('=c559f5=', item.link)
                   return (
                     <a class="btn-small btn-item-2" href={item.link} target="_blank">
+
                       <img class="btn-item_img-2" src={!item.imeges ? svg[`train/${item.icon}`] : images[item.icon]}></img>
+
                       <div class="decs">
                         <h5 class="H5">{item.name}</h5>
                         <p class="p1">
