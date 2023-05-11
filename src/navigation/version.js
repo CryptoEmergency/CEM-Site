@@ -6,6 +6,10 @@ import {
   Variable
 } from "@betarost/cemserver/cem.js";
 
+
+const { svg, fn } = CEM
+
+
 // import { fn } from '@src/functions/index.js';
 // console.log('=f0ba6d=', CEM.fn)
 const start = function (data, ID) {
@@ -13,6 +17,11 @@ const start = function (data, ID) {
   let [Static] = CEM.fn.GetParams({ data, ID });
   CEM.load({
     ID,
+    fnLoad: async () => {
+      Static.records = await fn.socket.get({ method: "News", params: { filter: {} } });
+      console.log('=88f6e6=', Static.records)
+
+    },
     fn: () => {
       return (
         <div class="startap c-main__body">
@@ -35,6 +44,10 @@ const start = function (data, ID) {
 
           </input>
         </div>
+        fn ={async{} =>
+        let insert = {
+          records 
+        };
       )
     }
   })
