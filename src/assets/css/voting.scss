@@ -96,8 +96,10 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     justify-content: flex-end;
     padding: 25px;
     opacity: 1;
+    // white-space: nowrap;
 
 }
+
 
 // .bot(
 
@@ -174,6 +176,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     padding-left: 61px;
     color: #FFF;
     position: relative;
+    font-size: 16px;
 }
 .vot-quection{
     // margin-bottom: 10px;
@@ -247,6 +250,8 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
         .voice-inner:nth-child(3){
             grid-column: auto;
         }
+        
           
     }
 }
+

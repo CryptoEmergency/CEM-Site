@@ -133,6 +133,7 @@ const start = function (data, ID) {
             {Static.arrVoting.map((item, index) => {
               return (
                 <div class="voice-inner">
+                
                   <h3 class="name">{item.title}</h3>
                   <p class="description">{item.description}</p>
 
