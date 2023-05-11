@@ -31,7 +31,8 @@
         "Other": "Other",
         "tech_blog": "Technical",
         "inf_blog": "Informational",
-        "experts": "Experts"
+        "experts": "Experts",
+        "Crypto": "Crypto"
     },
     "button": {
         "login": "Log in",

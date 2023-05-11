@@ -88,37 +88,9 @@ const start = function (data, ID = "mainBlock") {
     load({
         ID,
         fnLoad: async () => {
+            Static.CryptoUniversityCategory = await fn.socket.get({ method: "ListCat", params: { filter: { type: "courses" } } })
             Static.activeCategory = "All"
-            Static.nameRecords = "CryptoUniversity"
-            Static.CryptoUniversityCategory = [
-                {
-                    count: {
-                        ru: 13,
-                        en: 9
-                    },
-                    _id: "1",
-                    name: "NFT",
-                    type: "university"
-                },
-                {
-                    count: {
-                        ru: 1,
-                        en: 0
-                    },
-                    _id: "2",
-                    name: "Crypto",
-                    type: "university"
-                },
-                {
-                    count: {
-                        ru: 7,
-                        en: 9
-                    },
-                    _id: "3",
-                    name: "Finance",
-                    type: "university"
-                }
-            ]
+            Static.nameRecords = "Courses"
             Static.company = [
                 {
 
@@ -127,7 +99,7 @@ const start = function (data, ID = "mainBlock") {
             Static.records = await fn.socket.get({ method: "Courses", params: { filter: {} } })
         },
         fn: () => {
-            console.log('=38ddb1=', Static.records)
+            // console.log('=38ddb1=', Static.CryptoUniversityCategory)
             return (
                 <div class="page-main">
                     <div class="page-main__container">
@@ -213,6 +185,9 @@ const start = function (data, ID = "mainBlock") {
                                                 </div>
                                                 <div class="card__more card__more_indent_course">
                                                     <span>Больше информации</span>
+                                                </div>
+                                                <div class="card__category">
+                                                    <span>{item.category}</span>
                                                 </div>
                                             </a>
                                         </li>

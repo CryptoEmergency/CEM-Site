@@ -151,7 +151,7 @@ const start = function (data, ID) {
                         </section> */}
 
                         <section class="c-cryptoteacher__courses">
-                            <h5 class="c-cryptoteacher__subtitle">Список курсов</h5>
+                            <h5 class="c-cryptoteacher__subtitle">Список курсов преподавателя</h5>
                             <div class="cards__container cards__container_type_courses">
 
                                 {Static.item.courses.map((item) => {
