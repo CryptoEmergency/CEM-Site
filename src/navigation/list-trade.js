@@ -66,11 +66,11 @@ const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   listCategories = [
     // Variable.lang.categoryName.all,
+    "CEX",
     "DEX",
-    "CEX"
   ]
   Static.filtersSearch = {
-    categoryActive: "DEX",
+    categoryActive: "CEX",
   };
   Static.showMore = true
 
