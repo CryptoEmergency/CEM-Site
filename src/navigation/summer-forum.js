@@ -1278,6 +1278,16 @@ const start = function (data, ID) {
                             </a>*/}
                                 <a target="_blank"
                                     rel="nofollow nooopener"
+                                    href="https://ru.beincrypto.com"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img
+                                        style="width: 80px"
+                                        src={images["forum/partner_31"]} 
+                                    />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
                                     href="https://cripta.games"
                                     class="c-partnersforum__item"
                                 >
