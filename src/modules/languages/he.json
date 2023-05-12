@@ -31,7 +31,10 @@
         "Other": "אחר",
         "tech_blog": "טכני",
         "inf_blog": "אינפורמטיבי",
-        "experts": "מומחים"
+        "experts": "מומחים",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "כניבה",

@@ -31,7 +31,10 @@
         "Other": "այլ",
         "tech_blog": "Տեխնիկական",
         "inf_blog": "Տեղեկատվական",
-        "experts": "Փորձագետներ"
+        "experts": "Փորձագետներ",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "Մուտք",
