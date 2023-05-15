@@ -3,17 +3,43 @@ import {
   jsxFrag,
   CEM,
   load,
-  Variable
+  Variable,
+  initReload
 } from "@betarost/cemserver/cem.js";
+import Elements from "@src/elements/export.js";
+import { Comment, TextArea, ButtonSubmit, NotFound } from "@elements/element/index.js";
 
+import { BlockError404 } from "@elements/blocks/index.js";
 
 const { svg, fn } = CEM
+let new2 = [5]
+let new1 = [
+  {
+    count: 0,
+    t2: 2,
 
+  },
+  {
+    t1: 3,
+    t2: 4,
+
+  }
+]
 
 // import { fn } from '@src/functions/index.js';
 // console.log('=f0ba6d=', CEM.fn)
 const start = function (data, ID) {
-  // console.log('=43d73f=', 'gdfgdf')
+  new2[2] = 155
+  new1[0].t1 = 555
+
+  new1[0].t3 = 999
+  // cosole.log('=43d73f=', 'gdfgdf')
+  console.log('gjhgjhgjh======11', new1[0].t1)
+
+  console.log('gjhgjhgjh======', new2[2])
+
+
+
   let [Static] = CEM.fn.GetParams({ data, ID });
   CEM.load({
     ID,
@@ -21,19 +47,56 @@ const start = function (data, ID) {
       Static.records = await fn.socket.get({ method: "News", params: { filter: {} } });
       console.log('=88f6e6=', Static.records)
 
+
     },
     fn: () => {
+      
+  
       return (
+        
+        
         <div class="startap c-main__body">
-          <button
-            onclick={() => {
-              CEM.fn.modals.ModalUserAddWork({})
-            }}
+          <button class="bbt"
+            
+            // onclick={() => {
+            //   if(
+            //     count>1
+            //   )
+            //   let.new2.initReload[index,item]
+            //   else (
+            //     count == 0
+            //   )
+            //   alert("Низя")
+              
+              
+            // }}
           >
-            ggggggggggggggggggggggggg
+            Ведите 5 раз
+            
+
+            
+            </button>
+
+          <img src="train/avatar.gif" > </img>
+            <button>
+
+            gggggggggggggggggggggggg={new1[0].t3}
+            <div>123</div>
+          
+            
+            
+            {
+              Static.records.map((item, index) => {
+                // console.log('=289091=', item, index)
+                return (
+                  <img src={item.image}></img>
+                )
+              })
+            }
+          
           </button>
 
-          <input
+          {/* <input
             placeholder="Введите название мероприятий"
             type="date"
             style="border-radius: 10px;"
@@ -42,14 +105,12 @@ const start = function (data, ID) {
           //  max="2026-12-31"
           >
 
-          </input>
+          </input> */}
         </div>
-        fn ={async{} =>
-        let insert = {
-          records 
-        };
+
       )
     }
+
   })
 };
 
