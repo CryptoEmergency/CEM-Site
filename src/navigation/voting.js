@@ -112,7 +112,15 @@ const start = function (data, ID) {
     },
     fn: () => {
       console.log("Static.arrVoting =", Static.arrVoting);
-
+      let new1 = [
+        {
+        t1:1,
+        t2:2,
+        t3:3,
+        t4:4,
+        t5:5,
+        }
+        ]
       return (
         <div class="container-voice">
           <div>
@@ -133,9 +141,11 @@ const start = function (data, ID) {
             {Static.arrVoting.map((item, index) => {
               return (
                 <div class="voice-inner">
+
                 
                   <h3 class="name">{item.title}</h3>
                   <p class="description">{item.description}</p>
+                  
 
                   <ol class="list-voice">
                     {item.responseOptions.map((item2, index2) => {
@@ -182,6 +192,16 @@ const start = function (data, ID) {
                 </div>
               );
             })}
+
+           
+
+
+            {
+
+            
+            }
+
+
           </div>
         </div>
       );
