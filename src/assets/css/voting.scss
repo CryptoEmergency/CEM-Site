@@ -10,10 +10,22 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     font-size: 44px;
     color: hsl(0, 0%, 100%);    
     text-align: center;
-    
-    
-    
 }
+    
+.container-marc {
+    padding-top: 80px;
+    max-width: 1240px;
+    margin: 0px auto;
+ 
+}
+
+
+
+.prt{ 
+font-size: 25px;
+justify-content: center;
+display: flex;
+}  
 .wrap-voices{
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -206,6 +218,10 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 .bot-btne{
     padding: 0 6px;
 }
+
+
+
+
 
 
 .bot-btn{
