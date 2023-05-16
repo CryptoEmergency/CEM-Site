@@ -38,7 +38,7 @@ const start = function (data, ID) {
 
   console.log('gjhgjhgjh======', new2[2])
 
-
+  let [count] = [5]
 
   let [Static] = CEM.fn.GetParams({ data, ID });
   CEM.load({
@@ -50,41 +50,105 @@ const start = function (data, ID) {
 
     },
     fn: () => {
-      
-  
+
+
       return (
-        
-        
+
+
         <div class="startap c-main__body">
           <button class="bbt"
-            
-            // onclick={() => {
-            //   if(
-            //     count>1
-            //   )
-            //   let.new2.initReload[index,item]
-            //   else (
-            //     count == 0
-            //   )
-            //   alert("Низя")
-              
-              
-            // }}
-          >
-            Ведите 5 раз
-            
 
-            
-            </button>
+            onclick={() => {
+              // console.log('=d41053=', 123)
+
+              if (count >= 1) {
+                count--
+                initReload()
+                console.log('count = 1')
+              } else {
+                console.log('count = 5!!!!!!!')
+                alert("Низя")
+
+              }
+
+              // if (count >= 1) {
+              //   initReload()
+              // }
+              // else (count == 0)
+              // alert("Низя")
+
+            }}
+          >
+            Ведите : {count}
+
+
+
+          </button>
+          <button class="bbt"
+
+            onclick={() => {
+              // console.log('=d41053=', 123)
+
+              if (count >= 1) {
+                count--
+                initReload()
+                console.log('count = 1')
+              } else {
+                console.log('count = 5!!!!!!!')
+                alert("Низя")
+
+              }
+
+              // if (count >= 1) {
+              //   initReload()
+              // }
+              // else (count == 0)
+              // alert("Низя")
+
+            }}
+          >
+            Ведите : {count}
+
+
+
+          </button>
+          <button class="bbtt"
+
+            onclick={() => {
+              // console.log('=d41053=', 123)
+
+              if (count >= 1) {
+                count--
+                initReload()
+                console.log('count = 1')
+              } else {
+                console.log('count = 5!!!!!!!')
+                alert("Низя")
+
+              }
+
+              // if (count >= 1) {
+              //   initReload()
+              // }
+              // else (count == 0)
+              // alert("Низя")
+
+            }}
+          >
+            Ведите : {count}
+
+
+
+          </button>
 
           <img src="train/avatar.gif" > </img>
-            <button>
+          <button>
 
-            gggggggggggggggggggggggg={new1[0].t3}
+            gggggggg={new1[0].t3}
             <div>123</div>
-          
-            
-            
+
+
+
             {
               Static.records.map((item, index) => {
                 // console.log('=289091=', item, index)
@@ -93,7 +157,7 @@ const start = function (data, ID) {
                 )
               })
             }
-          
+
           </button>
 
           {/* <input

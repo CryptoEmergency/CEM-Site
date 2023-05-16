@@ -601,3 +601,27 @@
         }
     }
 }
+
+
+
+.conteiner-game{
+    max-width: 1240px;
+    margin: 0px auto;
+}
+.start__pr {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color:#8859ec;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.start__game {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color:#8859ec;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
