@@ -30,6 +30,10 @@
             grid-gap: 12px;
             position: relative;
             // min-height: 334px;
+
+            @media(max-width: 992px) {
+                grid-template-columns: 1fr;
+            }
         }
     }
 

@@ -171,7 +171,7 @@ const start = function (data, ID = "mainBlock") {
                                                 </div>
                                                 <div class="card__container card__container_row card__container_indent_course">
                                                     <div class="card__cost">
-                                                        <span>{item.cost} ₽/мес.</span>
+                                                        <span>{item.cost} <span class="card__cost_size">₽/мес.</span></span>
                                                     </div>
                                                     <div class="card__container card__container_row">
                                                         <div class="card__duration">

@@ -1,8 +1,16 @@
 .university {
+
+    &_indent {
+        padding: 20px 0;
+    }
+
     &__title {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto 20px auto;
         text-align: center;
+
+        @media(max-width: 992px) {
+            flex-wrap: wrap;
+        }
     }
 
     &__about {
