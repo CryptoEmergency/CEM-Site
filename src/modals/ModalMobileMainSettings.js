@@ -281,19 +281,6 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <img src={svg.news_menu_icon1} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.news}</span>
                                 </a>
-                                <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.blog, items: fn.itemsMenu.onlyPage({ url: '/blog/' })
-                                        })
-                                    }}
-                                    class="user_icon_mobile_visible user_icon"
-                                    href={`${Variable.lang.url}blog/`}
-                                >
-                                    <img src={svg.blog_menu_icon1} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.blog}</span>
-                                </a>
                                 {/* <a
                                     data-updating="true"
                                     onclick={Helpers.siteLink}
@@ -573,22 +560,6 @@ const ModalMobileMainSettings = function (data, ID) {
                                                             data.Burger.classList.remove("c-userpanel__icon--active")
                                                         }
                                                         fn.siteLinkModal(e, {
-                                                            title: Variable.lang.a.blog,
-                                                            items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
-                                                        });
-                                                    }}
-                                                    href="/blog/"
-                                                >
-                                                    <span>{Variable.lang.a.blog}</span>
-                                                </a>
-                                                <a
-                                                    class="c-footer__link"
-                                                    onclick={(e) => {
-                                                        fn.modals.close(ID);
-                                                        if (data.Burger) {
-                                                            data.Burger.classList.remove("c-userpanel__icon--active")
-                                                        }
-                                                        fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.career,
                                                             items: fn.itemsMenu.onlyPage({
                                                                 url: "/career-whith-us/",
@@ -598,24 +569,6 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     href="/career-whith-us/"
                                                 >
                                                     <span>{Variable.lang.a.career}</span>
-                                                </a>
-                                                <a
-                                                    class="c-footer__link"
-                                                    onclick={(e) => {
-                                                        fn.modals.close(ID);
-                                                        if (data.Burger) {
-                                                            data.Burger.classList.remove("c-userpanel__icon--active")
-                                                        }
-                                                        fn.siteLinkModal(e, {
-                                                            title: Variable.lang.h.mediaUs,
-                                                            items: fn.itemsMenu.onlyPage({
-                                                                url: "/media/",
-                                                            }),
-                                                        });
-                                                    }}
-                                                    href="/media/"
-                                                >
-                                                    <span>{Variable.lang.h.mediaUs}</span>
                                                 </a>
 
                                                 {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}

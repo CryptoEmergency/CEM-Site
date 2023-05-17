@@ -256,30 +256,6 @@ const ModalMainPageIconsMenu = function (data, ID) {
                     </div>
                     <p>{Variable.lang.a.news}</p>
                   </a>
-                  <a
-                    href="/blog/"
-                    class="c-allservices__link"
-                    onclick={function (e) {
-                      fn.siteLink(e);
-                    }}
-                  >
-                    <div class="c-allservices__wrap">
-                      <img src={svg["preview_line_blog"]} alt="" />
-                    </div>
-                    <p>{Variable.lang.a.blog}</p>
-                  </a>
-                  <a
-                    href="/media/"
-                    class="c-allservices__link"
-                    // onclick={function(e) {
-                    //     fn.siteLink(e)
-                    // }}
-                  >
-                    <div class="c-allservices__wrap">
-                      <img src={svg["media"]} alt="" />
-                    </div>
-                    <p>{Variable.lang.a.mediaUs}</p>
-                  </a>
                 </div>
                 <div class="c-allservices__subtitle">
                   {Variable.lang.text.work}

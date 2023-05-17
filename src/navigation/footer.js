@@ -128,20 +128,6 @@ const Footer = async function () {
                                                     >
                                                         <span>{Variable.lang.a.career}</span>
                                                     </a>
-                                                    <a
-                                                        class="c-footer__link"
-                                                        onclick={(e) => {
-                                                            fn.siteLinkModal(e, {
-                                                                title: Variable.lang.h.mediaUs,
-                                                                items: fn.itemsMenu.onlyPage({
-                                                                    url: "/media/",
-                                                                }),
-                                                            });
-                                                        }}
-                                                        href="/media/"
-                                                    >
-                                                        <span>{Variable.lang.h.mediaUs}</span>
-                                                    </a>
 
                                                     {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
                                                     <a
