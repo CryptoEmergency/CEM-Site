@@ -514,7 +514,7 @@ const start = function (data, ID) {
             spec: "РАКИБ"
         },
         {
-            link: "https://youtu.be/J0U0ZpEKxlU",
+            link: "https://www.youtube.com/watch?v=VgiBuv63vE8",
             photo: "guest1",
             name: "Владислав Мартынов",
             spec: "Автор курса \"КриптоИнвестор\""
@@ -560,6 +560,12 @@ const start = function (data, ID) {
             photo: "guest4",
             name: "Сергей Павлович",
             spec: "Канал ЛЮДИ PRO"
+        },
+        {
+            link: "https://www.youtube.com/watch?v=2DwcE2PalSQ",
+            photo: "guest9",
+            name: "Владимир Смеркис",
+            spec: "Директор Binance в России"
         }
     ]
 
@@ -1168,6 +1174,14 @@ const start = function (data, ID) {
                                 <a
                                     target="_blank"
                                     rel="nofollow nooopener"
+                                    href="https://keine-exchange.com/?rid=29633"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_36"]} />
+                                </a>
+                                <a
+                                    target="_blank"
+                                    rel="nofollow nooopener"
                                     href="http://тц-черноморский.рф"
                                     class="c-partnersforum__item"
                                 >
@@ -1431,6 +1445,55 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_28"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://7winds.mobi"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_29"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://www.dixxi.net"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_30"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://t.me/channel_SoulMate"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_31"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://kollegiya-sokolov.ru"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_32"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://trader-income.live"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_33"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://daogogreen.com"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_34"]} style="height: 60px" />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://cryptonews.net/ru/?utm_campaign=Cryptonewssite&utm_medium=search&utm_source=Yandex"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_35"]} />
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
