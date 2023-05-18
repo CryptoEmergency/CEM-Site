@@ -6,6 +6,10 @@
         flex-direction: column;
     }
 
+    &_indent {
+        padding-top: 20px;
+    }
+
     &__photo {
         display: flex;
         flex-direction: column;
