@@ -102,7 +102,7 @@ const Footer = async function () {
                                                     >
                                                         <span>{Variable.lang.a.about}</span>
                                                     </a>
-                                                    <a
+                                                    {/* <a
                                                         class="c-footer__link"
                                                         onclick={(e) => {
                                                             fn.siteLinkModal(e, {
@@ -113,7 +113,7 @@ const Footer = async function () {
                                                         href="/blog/"
                                                     >
                                                         <span>{Variable.lang.a.blog}</span>
-                                                    </a>
+                                                    </a> */}
                                                     <a
                                                         class="c-footer__link"
                                                         onclick={(e) => {

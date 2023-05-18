@@ -1140,15 +1140,15 @@
                     }
                 }
 
-                &--blog {
-                    background: no-repeat url("../svg/blog_menu_icon1_white.svg") center / 70%;
+                &--users {
+                    background: no-repeat url("../svg/preview_line_users.svg") center / 70%;
 
-                    &.c-userpanel__icon {
-                        &--active {
-                            background: no-repeat url("../svg/blog_menu_icon1_color.svg") center / 70%;
-                            filter: none;
-                        }
-                    }
+                    // &.c-userpanel__icon {
+                    //     &--active {
+                    //         background: no-repeat url("../svg/blog_menu_icon1_color.svg") center / 70%;
+                    //         filter: none;
+                    //     }
+                    // }
                 }
 
                 &--chats {
