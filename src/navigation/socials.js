@@ -233,19 +233,22 @@ const start = function (data, ID) {
                     return (
                       <a
                         href={item.link}
-                        class="btn-item-2"
+                        class="btn-item-2 btn-small"
                         target="_blank"
                       >
                         {/* <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} /> */}
-                        <span class="SP2">{item.name}
 
+                        <img class="btn-item_img-2"
+                          src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]}
+                          alt={item.name} />
+                        <div class="decs">
+                          <h5 class="SP2">
+                            {item.name}
+                          </h5>
                           <p class="p1">
-
-                            <img class="btn-item_img-2" src={!item.images ? svg[`train/${item.icon}`] : images[item.icon]} alt={item.name} />
                             {item.opis}
-
                           </p>
-                        </span>
+                        </div>
 
                       </a>
                     )
@@ -292,7 +295,7 @@ const start = function (data, ID) {
                   <h5 class="H5">Crypto Emergency
                     <p class="P2">
                       <img class="btn-item_img-3" src={svg['cem_logo']} alt="Telegram" />
-                      Crypto Emergency – крипто социальная сеть, основанная на собственном блокчейне, имеющая огромную экосистему из разнообразных продуктов.Здесь можно найти криптоэкспертов из любой страны, на любом языке и обучиться у них криптомастерству: что такое блокчейн, что такое криптовалюта, как это работает, как на этом зарабатывать, как создать свой криптостартап и получить другие советы.
+                      Crypto Emergency – крипто социальная сеть, основанная на собственном блокчейне, имеющая огромную экосистему из разнообразных продуктов.Здесь можно найти криптоэкспертов из любой страны, на любом языке и обучиться у них криптомастерству.
                     </p>
                   </h5>
                   <div class="apps-wrap">
@@ -309,7 +312,7 @@ const start = function (data, ID) {
                 <a href="https://play.google.com/store/apps/details?id=com.cemwallet&hl=en&gl=US" class="btn-item-3" target="_blank">
                   <h5 class="H5">CEM Wallet
                     <p class="P2">
-                      <img class="btn-item_img-3" src={svg['cem_logo']} alt="Telegram" />
+                      <img class="btn-item_img-3" src={svg['train/azpvs-eu044']} alt="Telegram" />
                       CEM Wallet - официальный криптовалютный кошелек Crypto Emergency. Отправляйте и получайте CEM и многие другие криптовалюты с помощью мобильного приложения CEM Wallet
                     </p>
                   </h5>
