@@ -49,54 +49,7 @@ const arrVoting = [
     active: false,
   },
 
-  // {
-  //   title: "Самые сложные предметы",
-  //   discription: "Выбери свой любимый предмет",
-  //   voting: [
-  //     "История",
-  //     "Математика",
-  //     "Элементы высшей математики",
-  //     "Русский язык",
-  //     "Философия",
-  //     "ИС",
-  //     "БД",
-  //     "Метрология",
-  //     "ОС",
-  //   ],
-  //   active: null,
-  // },
-  // {
-  //   title: "Самые сложные предметы",
-  //   discription: "Выбери свой любимый предмет",
-  //   voting: [
-  //     "История",
-  //     "Математика",
-  //     "Элементы высшей математики",
-  //     "Русский язык",
-  //     "Философия",
-  //     "ИС",
-  //     "БД",
-  //     "Метрология",
-  //     "ОС",
-  //   ],
-  //   active: null,
-  // },
-  // {
-  //   title: "Самые сложные предметы",
-  //   discription: "Выбери свой любимый предмет",
-  //   voting: [
-  //     "История",
-  //     "Математика",
-  //     "Элементы высшей математики",
-  //     "Русский язык",
-  //     "Философия",
-  //     "ИС",
-  //     "БД",
-  //     "Метрология",
-  //     "ОС",
-  //   ],
-  //   active: null,
-  // },
+
 ];
 
 const start = function (data, ID) {
@@ -113,6 +66,21 @@ const start = function (data, ID) {
     fn: () => {
       console.log("Static.arrVoting =", Static.arrVoting);
 
+
+
+
+
+      // let now = new Date();
+      // alert( now );
+      // let date = new Date(24 * 3600 * 1000);
+      // alert(  );
+  
+
+
+
+
+
+      
       return (
         <div class="container-voice">
           <div>
@@ -128,13 +96,19 @@ const start = function (data, ID) {
               </button>
             </div>
           </div>
+          
 
           <div class="wrap-voices">
             {Static.arrVoting.map((item, index) => {
               return (
+                
                 <div class="voice-inner">
+                
+
+                
                   <h3 class="name">{item.title}</h3>
                   <p class="description">{item.description}</p>
+                  
 
                   <ol class="list-voice">
                     {item.responseOptions.map((item2, index2) => {
@@ -181,6 +155,16 @@ const start = function (data, ID) {
                 </div>
               );
             })}
+
+           
+
+
+            {
+
+            
+            }
+
+
           </div>
         </div>
       );
