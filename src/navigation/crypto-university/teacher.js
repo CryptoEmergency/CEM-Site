@@ -131,7 +131,7 @@ const start = function (data, ID) {
                     <div class="page-main__container">
                         <div class="page-main__content">
 
-                            <div class="teacher">
+                            <div class="teacher teacher_indent">
                                 <figure class="teacher__photo">
                                     <img src={`/assets/upload/worldPress/${Static.item.image}`} />
                                     <figcaption class="teacher__jobtitle">Ведущий курса, {Static.item.profession}</figcaption>

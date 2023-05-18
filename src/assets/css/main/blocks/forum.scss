@@ -1793,8 +1793,8 @@
         margin: 0 auto;
         padding: 0;
         display: flex;
-        gap: 20px;
-        justify-content: center;
+        // gap: 20px;
+        justify-content: space-between;
         align-items: stretch;
         flex-wrap: wrap;
         // gap: 3vw;
@@ -1822,7 +1822,8 @@
 
     &__item {
         display: flex;
-        width: 290px;
+        max-width: 300px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         color: inherit;
