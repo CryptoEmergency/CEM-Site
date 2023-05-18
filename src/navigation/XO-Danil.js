@@ -9,32 +9,71 @@ import {
 } from "@betarost/cemserver/cem.js";
 let rows = 3;
 let cols = 3;
+let count = 0
 let arrGame = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+let combs = [
+	[0, 1, 2],
+	[3, 4, 5],
+	[6, 7, 8],
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8],
+	[0, 4, 8],
+	[2, 4, 6],
+];
 let whoWay = 1
 const { images, svg, fn } = CEM
 const start = function (data, ID) {
+    function isVictory(cells) {
+        let combs = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+        for (let comb of combs) {
+            if (
+                cells[comb[0]].textContent == cells[comb[1]].textContent &&
+                cells[comb[1]].textContent == cells[comb[2]].textContent &&
+                cells[comb[0]].textContent != ''
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
-      }
+    }
     function autoWay() {
-        if(whoWay == 1)
-        {
+        if (count >=9){
+            alert('игра стоп')
+            return;
+        }
+        if (whoWay == 1) {
             alert('Не твой ход')
             return;
         }
         // console.log(getRandomInt(9))
-        
+
         let rn = getRandomInt(9)
-        if(arrGame[rn] == -1 ){
-        arrGame[rn] = 0
-        whoWay = 1
-        initReload()
+        if (arrGame[rn] == -1) {
+             arrGame[rn] = 0
+            whoWay = 1
+            count++
+            initReload()
         }
-        else{
-            autoWay()
+        else {
+             autoWay()
         }
         
-      }
+        
+
+    }
     let [Static] = fn.GetParams({ data, ID });
     load({
         ID,
@@ -53,7 +92,7 @@ const start = function (data, ID) {
                             <div class="stats_1">
                                 Статистика:
                                 <div class="stats_2">
-                                    <div>пор: </div>
+                                    <div>пор:{ } </div>
                                     <div>поб:{ } </div>
                                     <div>ничья:{ } </div>
 
@@ -65,7 +104,7 @@ const start = function (data, ID) {
                                     <div class="stats_view"> число </div>
                                 </div>
                             </div>
-                            <button class=""> Показать ряд </button>
+                            <button class="st-gm"> Показать ряд </button>
                         </div>
                         <div class="one_game ">
 
@@ -77,9 +116,8 @@ const start = function (data, ID) {
                                         <div
                                             class="block__size__1"
                                             onclick={() => {
-                                                
-                                                if(whoWay != 1)
-                                                {
+
+                                                if (whoWay != 1) {
                                                     alert('Не твой ход')
                                                     return;
                                                 }
@@ -88,11 +126,12 @@ const start = function (data, ID) {
                                                     arrGame[index] = 1;
                                                     initReload()
                                                     whoWay = 0
+                                                    count++
                                                     autoWay()
                                                 }
-                                                        else {
-                                                        alert('поле занято')
-                                                    }
+                                                else {
+                                                    alert('поле занято')
+                                                }
                                             }}>
                                             {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
                                             <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : null}>  </img>
