@@ -88,37 +88,9 @@ const start = function (data, ID = "mainBlock") {
     load({
         ID,
         fnLoad: async () => {
+            Static.CryptoUniversityCategory = await fn.socket.get({ method: "ListCat", params: { filter: { type: "courses" } } })
             Static.activeCategory = "All"
-            Static.nameRecords = "CryptoUniversity"
-            Static.CryptoUniversityCategory = [
-                {
-                    count: {
-                        ru: 13,
-                        en: 9
-                    },
-                    _id: "1",
-                    name: "NFT",
-                    type: "university"
-                },
-                {
-                    count: {
-                        ru: 1,
-                        en: 0
-                    },
-                    _id: "2",
-                    name: "Crypto",
-                    type: "university"
-                },
-                {
-                    count: {
-                        ru: 7,
-                        en: 9
-                    },
-                    _id: "3",
-                    name: "Finance",
-                    type: "university"
-                }
-            ]
+            Static.nameRecords = "Courses"
             Static.company = [
                 {
 
@@ -127,7 +99,7 @@ const start = function (data, ID = "mainBlock") {
             Static.records = await fn.socket.get({ method: "Courses", params: { filter: {} } })
         },
         fn: () => {
-            console.log('=38ddb1=', Static.records)
+            // console.log('=38ddb1=', Static.CryptoUniversityCategory)
             return (
                 <div class="page-main">
                     <div class="page-main__container">
@@ -181,44 +153,47 @@ const start = function (data, ID = "mainBlock") {
                             <div class="cards">
                                 <div class="cards__container cards__container_type_courses">
 
-                                {Static.records.map((item) => {
-                                    return (
-                                        <li class="card card_courses">
-                                            <a 
-                                                class="card__link card__link_background"
-                                                href={`/crypto-university/course/${item._id}`}
-                                                onclick={function (e) {
-                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
-                                                }}
-                                            >
-                                                <div class="card__title card__title_courses">
-                                                    {item.name}
-                                                </div>
-                                                <div class="card__description card__description_courses">
-                                                    {item.description}
-                                                </div>
-                                                <div class="card__container card__container_row card__container_indent_course">
-                                                    <div class="card__cost">
-                                                        <span>{item.cost} ₽/мес.</span>
+                                    {Static.records.map((item) => {
+                                        return (
+                                            <li class="card card_courses">
+                                                <a
+                                                    class="card__link card__link_background"
+                                                    href={`/crypto-university/course/${item._id}`}
+                                                    onclick={function (e) {
+                                                        fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                    }}
+                                                >
+                                                    <div class="card__title card__title_courses">
+                                                        {item.name}
                                                     </div>
-                                                    <div class="card__container card__container_row">
-                                                        <div class="card__duration">
-                                                            <span>{item.duration}</span>
+                                                    <div class="card__description card__description_courses">
+                                                        {item.description}
+                                                    </div>
+                                                    <div class="card__container card__container_row card__container_indent_course">
+                                                        <div class="card__cost">
+                                                            <span>{item.cost} <span class="card__cost_size">₽/мес.</span></span>
                                                         </div>
-                                                        <div class="card__duration-text">
-                                                            <span class="card__duration-text_size">Месяца</span>
-                                                            <span class="card__duration-text_color">Срок обучения</span>
+                                                        <div class="card__container card__container_row">
+                                                            <div class="card__duration">
+                                                                <span>{item.duration}</span>
+                                                            </div>
+                                                            <div class="card__duration-text">
+                                                                <span class="card__duration-text_size">Месяца</span>
+                                                                <span class="card__duration-text_color">Срок обучения</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="card__more card__more_indent_course">
-                                                    <span>Больше информации</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    )
-                                })}
-                                
+                                                    <div class="card__more card__more_indent_course">
+                                                        <span>Больше информации</span>
+                                                    </div>
+                                                    <div class="card__category">
+                                                        <span>{item.category}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        )
+                                    })}
+
                                 </div>
                             </div>
                         </div>

@@ -72,8 +72,8 @@ const BottomMenu = function () {
                         </a>
                         :
                         <a
-                            href="/blog/"
-                            class={["c-userpanel__icon c-userpanel__icon--blog c-userpanel__icon--mobile_visible", (Variable.dataUrl.adress == "blog" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : null]}
+                            href="/users/"
+                            class={["c-userpanel__icon c-userpanel__icon--users c-userpanel__icon--mobile_visible", (Variable.dataUrl.adress == "users" && !Variable.dataUrl.category) ? "c-userpanel__icon--active" : null]}
                             onclick={fn.siteLink}>
 
                         </a>

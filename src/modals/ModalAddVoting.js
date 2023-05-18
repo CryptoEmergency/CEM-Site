@@ -17,6 +17,7 @@ const ModalAddVoting = function (data, ID) {
     title: "",
     descriptoin: "",
     responseOptions: [],
+
   };
   // Static.test1 = 123;
 
@@ -66,6 +67,7 @@ const ModalAddVoting = function (data, ID) {
                 ></input>
                 <div class="btn-block">
                   <label class="more-deciveee">
+                  
                     <intput> Варианты ответа</intput>
 
                     {/* <label> Варианты ответа</label>  */}
@@ -88,8 +90,9 @@ const ModalAddVoting = function (data, ID) {
                     <div class="voting__answer">
 
                       <input
-                      style="position:relative "
+                      style="position:relative,"
                         placeholder="Введите ваше сообщение"
+                        
                         value={Static.forms.responseOptions[index].name}
                         oninput={function () {
                           Static.forms.responseOptions[index].name = this.value;

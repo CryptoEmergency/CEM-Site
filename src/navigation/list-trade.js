@@ -48,13 +48,9 @@ const makeFiltersApi = function (Static) {
   let filter = {};
   let sort = { score: -1 };
 
-  if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
+  // if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
     filter.category = Static.filtersSearch.categoryActive;
-  }
-
-  if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
-    filter.category = Static.filtersSearch.categoryActive;
-  }
+  // }
 
   if (Static.filtersSearch.filterCheck) {
     filter.checked = true;
@@ -69,12 +65,12 @@ let listCategories;
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   listCategories = [
-    Variable.lang.categoryName.all,
+    // Variable.lang.categoryName.all,
+    "CEX",
     "DEX",
-    "CEX"
   ]
   Static.filtersSearch = {
-    categoryActive: Variable.lang.categoryName.all,
+    categoryActive: "CEX",
   };
   Static.showMore = true
 
@@ -83,11 +79,12 @@ const start = function (data, ID) {
     fnLoad: async () => {
       Static.nameRecords = "PageTrades"
       // Static.apiFilter = {}
+      filterExchange = makeFiltersApi(Static)
       Static.records = await fn.socket.get({
         method: "Exchanges",
         params: {
-          filter: makeFiltersApi(Static),
-          sort: { score: -1 }
+          filter: filterExchange.filter,
+          sort: filterExchange.sort,
         }
       })
     },
@@ -193,8 +190,8 @@ const start = function (data, ID) {
               let tmp = await fn.socket.get({
                 method: "Exchanges",
                 params: {
-                  filter: makeFiltersApi(Static),
-                  sort: { score: -1 },
+                  filter: filterExchange.filter,
+                  sort: filterExchange.sort,
                   limit: 50,
                   offset: Static.records.length
                 }

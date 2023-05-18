@@ -9,12 +9,18 @@
         &_indent {
             padding-top: 20px;
             padding-bottom: 40px;
+
+            @media(max-width: 992px) {
+                padding-bottom: 30px;
+            }
+
+            @media(max-width: 522px) {
+                padding-bottom: 20px;
+            }
         }
 
         &-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr;
+            display: flex;
             grid-gap: 30px;
         }
 
@@ -22,19 +28,45 @@
             background: #2D3241;
             border: 1px solid #444B5F;
             border-radius: 10px;
-            padding: 35px;
+            padding: 20px;
+
+            a {
+                color: #ffffff;
+            }
+
+            @media(max-width: 992px) {
+                padding: 16px;
+            }
+        }
+
+        &-description {
+            font-size: 16px;
+            text-indent: 2rem;
+
+            @media(max-width: 992px) {
+                font-size: 15px;
+            }
         }
 
         &-icon {
+
+            @media(max-width: 522px) {
+                display: none;
+            }
+
             img {
-                width: 100%;
+                max-width: 200px;
                 height: auto;
             }
         }
 
         &-name {
-            font-size: 38px;
+            font-size: 30px;
             text-align: center;
+
+            @media(max-width: 992px) {
+                font-size: 24px;
+            }
         }
     }
 
@@ -52,13 +84,15 @@
         border: 1px solid #444B5F;
         background: #2D3241;
     
-        @media(max-width: 979px) {
-            margin-bottom: 90px;
+        @media(max-width: 992px) {
+            margin-bottom: 40px;
+            padding: 16px;
         }
     }
 
     &__title {
         display: block;
+        margin: 0;
         margin-bottom: 20px;
         text-align: center;
         font-size: 30px;
@@ -66,11 +100,19 @@
         background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+
+        @media(max-width: 992px) {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
     }
 
     &__description {
-        text-indent: 30px;
-        line-height: 20px;
+        text-indent: 2rem;
+
+        @media(max-width: 992px) {
+            font-size: 15px;
+        }
     }
 
     &__teachers {
@@ -91,12 +133,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 20px;
+
+            @media(max-width: 992px) {
+                flex-wrap: wrap;
+            }
         }
 
             .tariff {
                 max-width: 400px;
                 min-width: 300px;
-                margin-right: 10px;
                 padding: 20px;
                 display: flex;
                 flex-direction: column;
@@ -105,10 +151,6 @@
                 background: #363B4B;
                 border-radius: 8px;
                 border: 1px solid #4c546a;
-
-                &:last-child {
-                    margin-right: 0;
-                }
 
                 &__title {
                     background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);

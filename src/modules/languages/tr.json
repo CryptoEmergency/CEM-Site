@@ -31,7 +31,10 @@
         "Other": "Diğer",
         "tech_blog": "Teknik",
         "inf_blog": "Bilgilendirici",
-        "experts": "Uzmanlar"
+        "experts": "Uzmanlar",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "Giriş",

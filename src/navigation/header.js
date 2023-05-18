@@ -240,14 +240,14 @@ const Header = async function () {
                                                 </a>
                                                 <a
                                                     class="c-menu__link"
-                                                    href="/blog/"
+                                                    href="/news/"
                                                     onclick={(e) => {
                                                         fn.siteLinkModal(e, {
-                                                            title: Variable.lang.a.blog,
-                                                            items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
+                                                            title: Variable.lang.a.news,
+                                                            items: fn.itemsMenu.onlyPage({ url: "/news/" }),
                                                         });
                                                     }}>
-                                                    {Variable.lang.a.blog}
+                                                    {Variable.lang.a.news}
                                                 </a>
 
 

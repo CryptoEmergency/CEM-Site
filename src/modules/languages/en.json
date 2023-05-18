@@ -31,7 +31,10 @@
         "Other": "Other",
         "tech_blog": "Technical",
         "inf_blog": "Informational",
-        "experts": "Experts"
+        "experts": "Experts",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "Log in",
@@ -75,9 +78,9 @@
         "allPartners": "All partners",
         "resetCrop": "Cancel",
         "reset": "Cancel",
-		"--------------------------новые слова--------------": "--добавить перевод--",
-		"preview": "Preview",
-		"attach": "Attach",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "preview": "Preview",
+        "attach": "Attach",
         "close": "Close"
     },
     "h": {
@@ -164,7 +167,7 @@
         "modal_listCoin": "Choose coins",
         "noName": "No name",
         "------------------новые слова-----------------": "добавить новые слова",
-		"modal_previewVideo": "Video preview"
+        "modal_previewVideo": "Video preview"
     },
     "a": {
         "about": "About Us",
@@ -207,7 +210,7 @@
         "affiliate": "Partner program",
         "addChats": "Add a chat",
         "notes": "My notes",
-		"--------------------------новые слова--------------": "--добавить перевод--",
+        "--------------------------новые слова--------------": "--добавить перевод--",
         "resetFilter": "Filter reset"
     },
     "span": {
@@ -257,7 +260,7 @@
         "forFriends": "Only for friends",
         "litePaper": "Lite Paper",
         "newNotes": "New notes",
-		"preview": "Preview",
+        "preview": "Preview",
         "------------------новые слова-----------------": "добавить новые слова"
     },
     "p": {
@@ -461,7 +464,7 @@
         "update": "Changed",
         "deletePageComment": "Are you sure you want to delete?",
         "selectOrCreateNew": "Select or create a new note",
-		"--------------------------новые слова--------------": "--добавить перевод--"
+        "--------------------------новые слова--------------": "--добавить перевод--"
     },
     "label": {
         "name": "Name",
@@ -487,7 +490,7 @@
         "birthDate": "Date of birth",
         "oldPassword": "Old password",
         "newPassword": "New password",
-		"--------------------------новые слова--------------": "--добавить перевод--"
+        "--------------------------новые слова--------------": "--добавить перевод--"
     },
     "placeholder": {
         "name": "Enter your name",
@@ -507,7 +510,7 @@
         "newPassword": "Enter a new password",
         "blackList": "Blacklist Search",
         "titleAsk": "Question title",
-		"--------------------------новые слова--------------": "--добавить перевод--"
+        "--------------------------новые слова--------------": "--добавить перевод--"
     },
     "select": {
         "closeQuestion": "Close question",

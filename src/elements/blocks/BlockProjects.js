@@ -128,13 +128,13 @@ const BlockProjects = async function () {
         items: fn.itemsMenu.onlyPage({ url: "/list-exchange/" }),
         modal: true,
       },
-      {
-        title: Variable.lang.a.blog,
-        icon: "preview_line_blog",
-        link: "blog",
-        items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
-        modal: true,
-      },
+      // {
+      //   title: Variable.lang.a.blog,
+      //   icon: "preview_line_blog",
+      //   link: "blog",
+      //   items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
+      //   modal: true,
+      // },
       {
         title: Variable.lang.h.top_users,
         icon: "preview_line_users",

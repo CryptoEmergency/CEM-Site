@@ -398,35 +398,35 @@ itemsMenu.userProfile = function (item) {
     return items
 }
 
-itemsMenu.blog = function (Static, item) {
-    const items = [
-        {
-            text: Variable.lang.select.share,
-            type: "share",
-            onclick: async () => {
-                try {
-                    if (navigator.share) {
-                        await navigator.share({
-                            url: window.location.origin + "/blog/",
-                        });
-                    }
-                } catch (err) {
-                    // Вывести ошибку
-                    console.error("Share", err)
-                }
-            }
-        },
-        {
-            text: Variable.lang.p.copy + " URL",
-            type: "copyurl",
-            onclick: async () => {
-                navigator.clipboard.writeText(window.location.origin + "/blog/");
-                fn.modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
-            }
-        }
-    ]
-    return items
-}
+// itemsMenu.blog = function (Static, item) {
+//     const items = [
+//         {
+//             text: Variable.lang.select.share,
+//             type: "share",
+//             onclick: async () => {
+//                 try {
+//                     if (navigator.share) {
+//                         await navigator.share({
+//                             url: window.location.origin + "/blog/",
+//                         });
+//                     }
+//                 } catch (err) {
+//                     // Вывести ошибку
+//                     console.error("Share", err)
+//                 }
+//             }
+//         },
+//         {
+//             text: Variable.lang.p.copy + " URL",
+//             type: "copyurl",
+//             onclick: async () => {
+//                 navigator.clipboard.writeText(window.location.origin + "/blog/");
+//                 fn.modals.ModalAlarm({ icon: "confirm_icon", text: Variable.lang.text.coppied })
+//             }
+//         }
+//     ]
+//     return items
+// }
 
 itemsMenu.question = function (Static, item) {
     // console.log(item)

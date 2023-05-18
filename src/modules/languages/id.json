@@ -31,7 +31,10 @@
 		"Other": "Lainnya",
 		"tech_blog": "Teknis",
 		"inf_blog": "Informasi",
-		"experts": "Ahli"
+		"experts": "Ahli",
+		"Crypto": "Crypto",
+		"CryptoEmergency": "Crypto Emergency",
+		"Media": "Media about us"
 	},
 	"button": {
 		"login": "Masuk",

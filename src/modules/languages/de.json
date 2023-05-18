@@ -31,7 +31,10 @@
         "Other": "Anderes",
         "tech_blog": "Technische",
         "inf_blog": "Informative",
-        "experts": "Die Experten"
+        "experts": "Die Experten",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "Login",
