@@ -153,47 +153,47 @@ const start = function (data, ID = "mainBlock") {
                             <div class="cards">
                                 <div class="cards__container cards__container_type_courses">
 
-                                {Static.records.map((item) => {
-                                    return (
-                                        <li class="card card_courses">
-                                            <a 
-                                                class="card__link card__link_background"
-                                                href={`/crypto-university/course/${item._id}`}
-                                                onclick={function (e) {
-                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
-                                                }}
-                                            >
-                                                <div class="card__title card__title_courses">
-                                                    {item.name}
-                                                </div>
-                                                <div class="card__description card__description_courses">
-                                                    {item.description}
-                                                </div>
-                                                <div class="card__container card__container_row card__container_indent_course">
-                                                    <div class="card__cost">
-                                                        <span>{item.cost} <span class="card__cost_size">₽/мес.</span></span>
+                                    {Static.records.map((item) => {
+                                        return (
+                                            <li class="card card_courses">
+                                                <a
+                                                    class="card__link card__link_background"
+                                                    href={`/crypto-university/course/${item._id}`}
+                                                    onclick={function (e) {
+                                                        fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                    }}
+                                                >
+                                                    <div class="card__title card__title_courses">
+                                                        {item.name}
                                                     </div>
-                                                    <div class="card__container card__container_row">
-                                                        <div class="card__duration">
-                                                            <span>{item.duration}</span>
+                                                    <div class="card__description card__description_courses">
+                                                        {item.description}
+                                                    </div>
+                                                    <div class="card__container card__container_row card__container_indent_course">
+                                                        <div class="card__cost">
+                                                            <span>{item.cost} <span class="card__cost_size">₽/мес.</span></span>
                                                         </div>
-                                                        <div class="card__duration-text">
-                                                            <span class="card__duration-text_size">Месяца</span>
-                                                            <span class="card__duration-text_color">Срок обучения</span>
+                                                        <div class="card__container card__container_row">
+                                                            <div class="card__duration">
+                                                                <span>{item.duration}</span>
+                                                            </div>
+                                                            <div class="card__duration-text">
+                                                                <span class="card__duration-text_size">Месяца</span>
+                                                                <span class="card__duration-text_color">Срок обучения</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="card__more card__more_indent_course">
-                                                    <span>Больше информации</span>
-                                                </div>
-                                                <div class="card__category">
-                                                    <span>{item.category}</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    )
-                                })}
-                                
+                                                    <div class="card__more card__more_indent_course">
+                                                        <span>Больше информации</span>
+                                                    </div>
+                                                    <div class="card__category">
+                                                        <span>{item.category}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        )
+                                    })}
+
                                 </div>
                             </div>
                         </div>

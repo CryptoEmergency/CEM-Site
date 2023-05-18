@@ -83,16 +83,16 @@ const start = function (data, ID) {
                     slidesPerView: 2,
                     spaceBetween: 10
                 },
-                // 768: {
-                //   slidesPerView: 2,
-                //   spaceBetween: 50
-                // },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 50
+                },
                 910: {  //800
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                     spaceBetween: 46,
                 },
                 1240: {
-                    slidesPerView: 6,
+                    slidesPerView: 4,
                     spaceBetween: 30,
                 },
             },
@@ -191,18 +191,19 @@ const start = function (data, ID) {
                                                 {Static.item.teachers.map((item) => {
                                                     return (
                                                         <a
-                                                            class="swiper-slide"
+                                                            class="university__teachers-slide swiper-slide"
+                                                            style="display: flex"
                                                             href={`/crypto-university/teacher/${item._id}`}
                                                             onclick={function (e) {
                                                                 fn.siteLink(e, { title: "", item: {}, items: {} })
                                                             }}
                                                         >
-                                                            <div class="swiper-post_media_image_container">
-                                                                <figure class="university__teachers-slide">
+                                                            {/* <div class="swiper-post_media_image_container"> */}
+                                                                <div class="university__teachers-block">
                                                                     <img src={`/assets/upload/worldPress/${item.image}`} />
-                                                                    <figcaption class="university__slidertitle">{item.name}</figcaption>
-                                                                </figure>
-                                                            </div>
+                                                                </div>
+                                                                <figcaption class="university__slidertitle">{item.name}</figcaption>
+                                                            {/* </div> */}
                                                         </a>
                                                     )
                                                 })}
@@ -249,6 +250,9 @@ const start = function (data, ID) {
                                                         </div>
                                                         <div class="card__more card__more_indent_course">
                                                             <span>Больше информации</span>
+                                                        </div>
+                                                        <div class="card__category">
+                                                            <span>{item.category}</span>
                                                         </div>
                                                     </a>
                                                 </li>

@@ -33,11 +33,15 @@
     &__biography {
         
         .teacher__subtitle {
-            font-size: 20px;
+            font-size: 22px;
         }
 
         p {
             text-indent: 2rem;
+
+            @media(max-width: 767px) {
+                padding: 0 10px;
+            }
         }
     }
 
@@ -52,12 +56,24 @@
             font-size: 32px;
             margin: 12px 0;
         }
+
+        @media(max-width: 767px) {
+            font-size: 28px;
+        }
+
+        @media(max-width: 522px) {
+            font-size: 26px;
+        }
     }
 
     &__subtitle {
         margin-bottom: 20px;
         font-size: 24px;
         text-align: center;
+
+        @media(max-width: 767px) {
+            font-size: 22px;
+        }
     }
 
     &__courses_indent {

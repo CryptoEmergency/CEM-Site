@@ -192,6 +192,9 @@ const start = function (data, ID) {
                                                     <div class="card__more card__more_indent_course">
                                                         <span>Больше информации</span>
                                                     </div>
+                                                    <div class="card__category">
+                                                        <span>{item.category}</span>
+                                                    </div>
                                                 </a>
                                             </li>
                                         )

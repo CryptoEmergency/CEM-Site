@@ -9,12 +9,19 @@
         text-align: center;
 
         @media(max-width: 992px) {
-            flex-wrap: wrap;
+            font-size: 34px;
         }
     }
 
     &__about {
         display: flex;
+        gap: 10px;
+
+        @media(max-width: 767px) {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
     }
 
     &__social {
@@ -42,6 +49,7 @@
 
     &__description {
         font-size: 18px;
+        text-indent: 2rem;
     }
 
     &__teachers {
@@ -55,9 +63,30 @@
         }
 
         &-slide {
-            display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
         }
+
+        &-block {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: auto;
+            max-height: 365px;
+            margin-bottom: 20px;
+
+            img {
+                height: 220px;
+                background-size: cover;
+            }
+        }
+    }
+
+    &__slidertitle {
+        color: #ffffff;
+        font-size: 20px;
+        text-align: center;
     }
 }
