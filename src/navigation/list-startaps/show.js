@@ -42,7 +42,9 @@ const showPoints = function (listPoints) {
 const showTeam = function (listTeam) {
   return listTeam.map((item) => {
     return (
-      <div class="team-item swiper-slide">
+      <div class="team-item swiper-slide"
+        style="display: flex"
+      >
         <div class="team-img">
           <img src={`/assets/upload/worldPress/${item.foto}`}></img>
         </div>

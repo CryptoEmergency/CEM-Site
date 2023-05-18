@@ -120,7 +120,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                     </div>
                     <p>{Variable.lang.h.top_users}</p>
                   </a>
-                  <a
+                  {/* <a
                     href="/rooms/"
                     class="c-allservices__link"
                     onclick={function (e) {
@@ -131,7 +131,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                       <img src={svg["rooms"]} alt="" />
                     </div>
                     <p>{Variable.lang.a.rooms}</p>
-                  </a>
+                  </a> */}
                 </div>
                 <div class="c-allservices__subtitle">
                   {Variable.lang.text.commerce}
