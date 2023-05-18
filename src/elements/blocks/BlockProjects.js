@@ -166,13 +166,13 @@ const BlockProjects = async function () {
         items: fn.itemsMenu.onlyPage({ url: "/career-whith-us/" }),
         modal: true,
       },
-      {
-        title: "Комнаты",
-        icon: "rooms",
-        link: "rooms",
-        items: fn.itemsMenu.onlyPage({ url: "/rooms/" }),
-        modal: false,
-      },
+      // {
+      //   title: "Комнаты",
+      //   icon: "rooms",
+      //   link: "rooms",
+      //   items: fn.itemsMenu.onlyPage({ url: "/rooms/" }),
+      //   modal: false,
+      // },
     ];
 
     projectRecords = projects.map(function (item) {

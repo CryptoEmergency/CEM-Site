@@ -88,7 +88,9 @@ const LentaMedia = function ({ Static, items, path, changeToogle, index }) {
           (item, index) => {
             if (Array.isArray(item)) {
               return (
-                <div class="swiper-slide user_post_text_background">
+                <div class="swiper-slide user_post_text_background"
+                  style="display: flex"
+                >
                   {
                     item.map((itemAudio) => {
                       return (

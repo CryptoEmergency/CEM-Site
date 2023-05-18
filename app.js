@@ -62,7 +62,7 @@ CEM.initOptions({
     }),
     hooks: {
         routers: function (dataUrl) {
-            console.log('=d56fcd=', dataUrl)
+            // console.log('=d56fcd=', dataUrl)
             return false
         }
     }
