@@ -612,13 +612,16 @@ $lightBlue: #00A5F7;
     margin-bottom: 30px;
   }
 
-  h5> {
+  h5 {
     font-weight: 600;
     font-size: 18px;
     line-height: 175%;
+    text-align: center;
   }
 
   >span {
+    display: flex;
+    justify-content: center;
     text-align: center;
     color: #CAD4F3;
     font-size: 15px;

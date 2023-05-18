@@ -59,7 +59,7 @@ const makeFilter = () => {
 
 const BlockBanners = async function () {
   const records = await fn.socket.get({ method: "Banners", params: { filter: makeFilter() } })
-  console.log('=84a49b=', records)
+  // console.log('=84a49b=', records)
   const bannersRecords = records.map(function (item) {
 
     let lang = Variable.lang.code == "ru" ? "ru" : "en";
