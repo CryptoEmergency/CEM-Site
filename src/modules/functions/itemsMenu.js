@@ -863,6 +863,7 @@ itemsMenu.comment = function (Static, item, action, index, mainId) {
                 }
             },
             {
+                
                 text: Variable.lang.select.delete,
                 type: "deleteRole",
                 color: "red",
