@@ -12,34 +12,34 @@ import Elements from "@src/elements/export.js";
 
 const { images, svg, fn, elements } = CEM
 
-const team = [
-  {
-    name: "Ян Кривоносов",
-    foto: "startaps-inner/team1",
-    position: "CEO проекта Crypto Emergency",
-  },
-  {
-    name: "Игорь Еньшин",
-    foto: "startaps-inner/team4",
-    position: "Руководитель IT направления",
-  },
-  {
-    name: "Анна Рыжкова",
-    foto: "startaps-inner/team2",
-    position: "Руководитель отдела по работе с дизайнерами",
-  },
-  {
-    name: "Дмитрий Белов",
-    foto: "startaps-inner/team3",
-    position: "Управляющий директор проекта",
-  },
-];
-
 const start = function (data, ID) {
   // setTimeout(() => {
   //   arrAccordeon[0].element.hidden = true;
   //   // console.log("=7c6bf4=", arrAccordeon[0]);
   // }, 5000);
+
+  const team = [
+    {
+      name: Variable.lang.h.nameCeo,
+      foto: "startaps-inner/team1",
+      position: Variable.lang.p.descriptionCeo,
+    },
+    {
+      name: Variable.lang.h.nameIt,
+      foto: "startaps-inner/team4",
+      position: Variable.lang.p.descriptionIt,
+    },
+    {
+      name: Variable.lang.h.nameDesigner,
+      foto: "startaps-inner/team2",
+      position: Variable.lang.p.descriptionDesigner,
+    },
+    {
+      name: Variable.lang.h.nameManager,
+      foto: "startaps-inner/team3",
+      position: Variable.lang.p.descriptionManager,
+    },
+  ];
 
   const arrAccordeon = [
     {
