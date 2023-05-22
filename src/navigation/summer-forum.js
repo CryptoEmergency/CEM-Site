@@ -1296,7 +1296,7 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img
-                                        style="width: 80px"
+                                        // style="width: 80px"
                                         src={images["forum/partner_31"]} 
                                     />
                                 </a>
@@ -1487,13 +1487,6 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_34"]} style="height: 60px" />
-                                </a>
-                                <a target="_blank"
-                                    rel="nofollow nooopener"
-                                    href="https://cryptonews.net/ru/?utm_campaign=Cryptonewssite&utm_medium=search&utm_source=Yandex"
-                                    class="c-partnersforum__item"
-                                >
-                                    <img src={images["summer_forum/partner_35"]} />
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">

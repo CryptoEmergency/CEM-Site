@@ -899,6 +899,7 @@ const start = function (data, ID) {
               multiple={true}
               onclickPhoto={async function (e) {
                 if (this.files.length == 0) {
+                  // console.log(this.files.type)
                   return;
                 }
 
@@ -937,33 +938,36 @@ const start = function (data, ID) {
                 // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
                 if (Object.keys(Static.files).length == 1) {
                   // alert("Один выбираю")
-                  fn.modals.ModalCropImage({
-                    originalImage: null,
-                    file: Static.files[0],
-                    typeUpload: 'posts',
-                    arrMedia: Static.mediaInputs.value,
-                    aspectSelect: Static.mediaInputs.selectAspect,
-                    uploadCropImage: async function (cropper, aspectActive) {
-                      Static.mediaInputs.selectAspect = aspectActive
+                  if (Static.files[0].type.match("image.*")) {
+                    fn.modals.ModalCropImage({
+                      originalImage: null,
+                      file: Static.files[0],
+                      typeUpload: 'posts',
+                      arrMedia: Static.mediaInputs.value,
+                      aspectSelect: Static.mediaInputs.selectAspect,
+                      uploadCropImage: async function (cropper, aspectActive) {
+                        Static.mediaInputs.selectAspect = aspectActive
 
-                      let imageUrl = URL.createObjectURL(Static.files[0]);
-                      const originalImage = new Image();
-                      originalImage.src = imageUrl;
+                        let imageUrl = URL.createObjectURL(Static.files[0]);
+                        const originalImage = new Image();
+                        originalImage.src = imageUrl;
 
-                      sendPhotoOne(Static, cropper, originalImage)
+                        sendPhotoOne(Static, cropper, originalImage)
 
-                      // console.log('=2e552a=',cropper,aspectActive,Static.files)
+                        // console.log('=2e552a=',cropper,aspectActive,Static.files)
 
-                      //                        document.getElementById("spinner").hidden = false
-                      // for (let key in Static.files){
-                      // if (Static.files[key]){
-                      // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-                      // } 
+                        //                        document.getElementById("spinner").hidden = false
+                        // for (let key in Static.files){
+                        // if (Static.files[key]){
+                        // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                        // } 
 
-                      // }
-                      return;
-                    }
-                  }, ID)
+                        // }
+                        return;
+                      }
+                    }, ID)
+                  }
+                  
                 } else {
                   // alert("Много выбираю")
                   fn.modals.ModalCropImage({

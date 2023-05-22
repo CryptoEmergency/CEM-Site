@@ -17,7 +17,7 @@ const fn = CEM.fn
 const ModalCropImage = function ({ originalImage = null, file, typeUpload, arrMedia, aspectSelect, uploadCropImage, editable = false }, ID) {
 
     let [Static] = fn.GetParams({ data: { originalImage, file, typeUpload, arrMedia, aspectSelect, uploadCropImage, editable }, ID })
-    console.log('=ModalCropImage=2', Static)
+    console.log('=ModalCropImage=2', file.type.match("image.*"))
 
     let elemImg = Variable.setRef()
     let elemRatio1 = Variable.setRef()
