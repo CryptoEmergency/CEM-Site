@@ -1476,13 +1476,6 @@ const start = function (data, ID) {
                                 </a>
                                 <a target="_blank"
                                     rel="nofollow nooopener"
-                                    href="https://trader-income.live"
-                                    class="c-partnersforum__item"
-                                >
-                                    <img src={images["summer_forum/partner_33"]} />
-                                </a>
-                                <a target="_blank"
-                                    rel="nofollow nooopener"
                                     href="https://daogogreen.com"
                                     class="c-partnersforum__item"
                                 >
