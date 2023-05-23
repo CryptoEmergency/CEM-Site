@@ -1453,13 +1453,13 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["summer_forum/partner_29"]} />
                                 </a>
-                                <a target="_blank"
+                                {/* <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://www.dixxi.net"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_30"]} />
-                                </a>
+                                </a> */}
                                 <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://t.me/channel_SoulMate"

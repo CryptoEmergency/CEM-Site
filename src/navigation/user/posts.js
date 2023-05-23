@@ -811,8 +811,6 @@ const start = function (data, ID) {
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
 
-
-
               <div
                 class={[Static.mediaInputs.show ? "create_post_chapter createPostImage" : "c-hidden"]}>
                 {
@@ -863,8 +861,9 @@ const start = function (data, ID) {
                   Static.elEditText = $el
                 }}
 
-                class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
+                // class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
                 // contenteditable="true" 
+                class="create_post_chapter create_post_main_text"
                 contenteditable="plaintext-only"
 
                 oninput={function (e) {
@@ -886,15 +885,15 @@ const start = function (data, ID) {
             <MediaButton
 
 
-              onclickText={async function () {
-                if (Static.textInputs.show === true) {
-                  return;
-                } else {
-                  Static.textInputs.show = true;
-                  Static.textInputs.value = ""
-                  initReload();
-                }
-              }}
+              // onclickText={async function () {
+              //   if (Static.textInputs.show === true) {
+              //     return;
+              //   } else {
+              //     Static.textInputs.show = true;
+              //     Static.textInputs.value = ""
+              //     initReload();
+              //   }
+              // }}
 
               multiple={true}
               onclickPhoto={async function (e) {
