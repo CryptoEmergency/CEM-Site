@@ -10,7 +10,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
   // console.log("============on load",Static,"=======item",item)
   // console.log('=MediaPreview=', Static)
 
-  // console.log('=2bf636=',item, index, type)
+  // console.log('=2bf636=', item)
   if (item.type == "audio") {
     el[index] = Variable.setRef();
   }
@@ -184,6 +184,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
+                      console.log('=f7c5f1=', Static.mediaInputs.value)
                       Static.mediaInputs.value.splice(index, 1);
                       if (Static.mediaInputs.value.length == 0) {
                         Static.mediaInputs.selectAspect = null;
@@ -461,6 +462,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
+                    console.log('=AUDIO=', item, index)
                     Static.mediaInputs.value.splice(index, 1);
                     if (Static.mediaInputs.value.length == 0) {
                       Static.mediaInputs.selectAspect = null;

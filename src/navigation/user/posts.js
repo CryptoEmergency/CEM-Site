@@ -839,10 +839,11 @@ const start = function (data, ID) {
               <div
 
                 class={[Static.audioInputs.show ? "create_post_chapter createPostAudio" : "c-hidden"]}>
-                {() => {
-                  if (Static.audioInputs.value.length > 0) {
+                {
+                  Static.audioInputs.value.length > 0 ?
                     Static.audioInputs.value.map((item, index) => {
                       // console.log('=82305a= el = ',el)
+
                       return (
                         <MediaPreview
                           item={item}
@@ -853,8 +854,9 @@ const start = function (data, ID) {
                         />
                       );
                     })
-                  }
-                }}
+                    :
+                    null
+                }
               </div>
               <div
                 Element={($el) => {
@@ -966,7 +968,7 @@ const start = function (data, ID) {
                       }
                     }, ID)
                   }
-                  
+
                 } else {
                   // alert("Много выбираю")
                   fn.modals.ModalCropImage({
