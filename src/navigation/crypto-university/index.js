@@ -154,6 +154,7 @@ const start = function (data, ID = "mainBlock") {
                                 <div class="cards__container cards__container_type_courses">
 
                                     {Static.records.map((item) => {
+                                        console.log('=fc015e=',item)
                                         return (
                                             <li class="card card_courses">
                                                 <a
@@ -178,7 +179,15 @@ const start = function (data, ID = "mainBlock") {
                                                                 <span>{item.duration}</span>
                                                             </div>
                                                             <div class="card__duration-text">
-                                                                <span class="card__duration-text_size">Месяца</span>
+                                                                <span class="card__duration-text_size">
+                                                                    {
+                                                                        item.timeCount == "month"
+                                                                        ?
+                                                                        "Месяца"
+                                                                        :
+                                                                        "Дней"
+                                                                    }
+                                                                </span>
                                                                 <span class="card__duration-text_color">Срок обучения</span>
                                                             </div>
                                                         </div>
@@ -188,6 +197,9 @@ const start = function (data, ID = "mainBlock") {
                                                     </div>
                                                     <div class="card__category">
                                                         <span>{item.category}</span>
+                                                    </div>
+                                                    <div class="card__icon">
+                                                        <img src={`/assets/upload/worldPress/${item.icon}`} />
                                                     </div>
                                                 </a>
                                             </li>
